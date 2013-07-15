@@ -38,9 +38,6 @@ class LanguageWithConversion {
 	protected $sourceLanguageCode;
 	protected $parentLanguage;
 
-	protected $translateCache = array();
-	protected $translatePool = array();
-
 	/**
 	 * Constructor.
 	 *
@@ -206,6 +203,20 @@ class LanguageWithConversion {
 	}
 
 	/**
+	 * Try to work out the original data (in source language) from a given translation output.
+	 *
+	 * @param $text String
+	 * @return String
+	 */
+	public function reverseTranslate( $text ) {
+		if ( $this->parentLanguage ) {
+			return $this->parentLanguage->getConverter()->translate( $text, $this->getSourceLanguageCode() );
+		} else {
+			return $text;
+		}
+	}
+
+	/**
 	 * Translate data after fetching them.
 	 *
 	 * @param $text String: Data to transform
@@ -213,49 +224,10 @@ class LanguageWithConversion {
 	 */
 	public function translate( $text ) {
 		if ( $this->parentLanguage ) {
-			if ( isset( $this->translateCache[$text] ) ) {
-				return $this->translateCache[$text];
-			} else {
-				$this->prepareForTranslate( $text );
-				$this->executeTranslate();
-				return $this->translateCache[$text];
-			}
+			return $this->parentLanguage->getConverter()->translate( $text, $this->getLanguageCode() );
 		} else {
 			return $text;
 		}
 	}
 
-	/**
-	 * Insert a text snippet which will be translated later.
-	 *
-	 * Due to the implementation of language converter, massive
-	 * calls with short text snippets may introduce big overhead.
-	 * If it's foreseeable that some text will be translated
-	 * later, add it here for batched translation.
-	 *
-	 * Does nothing if this is not a converted language.
-	 *
-	 * @param $text String
-	 */
-	public function prepareForTranslate( $text ) {
-		if ( $this->parentLanguage ) {
-			$this->translatePool[$text] = true;
-		}
-	}
-
-	/**
-	 * Really execute translation.
-	 */
-	protected function executeTranslate() {
-		if ( $this->parentLanguage && count( $this->translatePool ) ) {
-			$pieces = array_keys( $this->translatePool );
-			$block = implode( "\0", $pieces );
-			$translatedBlock = $this->parentLanguage->getConverter()->translate(
-				$block, $this->language->getCode()
-			);
-			$translatedPieces = explode( "\0", $translatedBlock );
-			$this->translateCache += array_combine( $pieces, $translatedPieces );
-			$this->translatePool = array();
-		}
-	}
 }
