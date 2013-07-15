@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c305cb_4a7ca51c",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-15T10:19:51Z",
+      "side": 1,
+      "message": "cut \u0026 paste error?  should be the weight column? and to be consistent with the other fields in the table and the sql files, it should be term_weight instead of wb_weight",
+      "revId": "2d09352dd6bdbb865d70826f3017e10d6d584730",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
