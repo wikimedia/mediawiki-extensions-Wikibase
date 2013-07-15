@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Diff\Diff;
+use Diff\DiffOp;
 
 /**
  * Represents a diff between two Wikibase\Item instances.
@@ -31,6 +32,17 @@ use Diff\Diff;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemDiff extends EntityDiff {
+
+	/**
+	 * Constructor.
+	 *
+	 * @param \Diff\DiffOp[] $operations
+	 */
+	public function __construct( array $operations = array() ) {
+		$this->fixSubstructureDiff( $operations, 'links' );
+
+		parent::__construct( $operations, true );
+	}
 
 	/**
 	 * Returns a Diff object with the sitelink differences.

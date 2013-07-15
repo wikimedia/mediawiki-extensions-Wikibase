@@ -2,9 +2,14 @@
 
 namespace Wikibase\Test;
 
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
+use Wikibase\EntityDiff;
 use Wikibase\Item;
+use Wikibase\ItemDiff;
 
 /**
  * @covers Wikibase\ItemDiff
@@ -39,8 +44,10 @@ use Wikibase\Item;
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ItemDiffTest extends EntityDiffOldTest {
+	//TODO: make the new EntityDiffTest also run for Items.
 
 	public static function provideApplyData() {
 		$originalTests = parent::generateApplyData( \Wikibase\Item::ENTITY_TYPE );
@@ -99,6 +106,66 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
 		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
 		$this->assertEquals( $a->getSimpleSiteLinks(), $b->getSimpleSiteLinks() );
+	}
+
+	public function isEmptyProvider() {
+		$argLists = array();
+
+		$argLists['no ops'] = array( array(), true );
+
+		$argLists['label changed'] = array( array( 'label' => new Diff( array( 'x' => new DiffOpAdd( 'foo' ) ) ) ), false );
+
+		$argLists['empty links diff'] = array( array( 'links' => new Diff( array(), true ) ), true );
+
+		$argLists['non-empty links diff'] = array( array( 'links' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ) ), false );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider isEmptyProvider
+	 *
+	 * @param array $diffOps
+	 * @param boolean $isEmpty
+	 */
+	public function testIsEmpty( array $diffOps, $isEmpty ) {
+		$diff = new ItemDiff( $diffOps );
+		$this->assertEquals( $isEmpty, $diff->isEmpty() );
+	}
+
+	/**
+	 * Checks that ItemDiff can handle atomic diffs for substructures.
+	 * This is needed for backwards compatibility with old versions of
+	 * MapDiffer: As of commit ff65735a125e, MapDiffer may generate atomic
+	 * diffs for substructures even in recursive mode (bug 51363).
+	 */
+	public function testAtomicSubstructureWorkaround() {
+		$oldErrorLevel = error_reporting( E_ERROR );
+
+		try {
+			$atomicListDiff = new DiffOpChange(
+				array( 'a' => 'A', 'b' => 'B' ),
+				array( 'b' => 'B', 'a' => 'A' )
+			);
+
+			$diff = new ItemDiff( array(
+				'aliases' => $atomicListDiff,
+				'label' => $atomicListDiff,
+				'description' => $atomicListDiff,
+				'claim' => $atomicListDiff,
+				'links' => $atomicListDiff,
+			) );
+
+			$this->assertInstanceOf( '\Diff\Diff', $diff->getAliasesDiff() );
+			$this->assertInstanceOf( '\Diff\Diff', $diff->getLabelsDiff() );
+			$this->assertInstanceOf( '\Diff\Diff', $diff->getDescriptionsDiff() );
+			$this->assertInstanceOf( '\Diff\Diff', $diff->getClaimsDiff() );
+			$this->assertInstanceOf( '\Diff\Diff', $diff->getSiteLinkDiff() );
+		} catch ( \Exception $ex ) { // PHP 5.3 doesn't have `finally`
+			// make sure we always restore the warning level
+			error_reporting( $oldErrorLevel );
+			throw $ex;
+		}
 	}
 
 }

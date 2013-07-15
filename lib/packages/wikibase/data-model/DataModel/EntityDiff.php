@@ -55,7 +55,45 @@ class EntityDiff extends Diff {
 	 * @param \Diff\DiffOp[] $operations
 	 */
 	public function __construct( array $operations = array() ) {
+		$this->fixSubstructureDiff( $operations, 'aliases' );
+		$this->fixSubstructureDiff( $operations, 'label' );
+		$this->fixSubstructureDiff( $operations, 'description' );
+		$this->fixSubstructureDiff( $operations, 'claim' );
+
 		parent::__construct( $operations, true );
+	}
+
+	/**
+	 * Checks the type of a substructure diff, and replaces it if needed.
+	 * This is needed for backwards compatibility with old versions of
+	 * MapDiffer: As of commit ff65735a125e, MapDiffer may generate atomic diffs for
+	 * substructures even in recursive mode (bug 51363).
+	 *
+	 * @param array &$operations All change ops; This is a reference, so the
+	 *        substructure diff can be replaced if need be.
+	 * @param string $key The key of the substructure
+	 */
+	protected function fixSubstructureDiff( array &$operations, $key ) {
+		if ( !isset( $operations[$key] ) ) {
+			return;
+		}
+
+		if ( !$operations[$key] instanceof Diff ) {
+			$warning = "Invalid substructure diff for key $key: " . get_class( $operations[$key] );
+
+			if ( function_exists( 'wfLogWarning' ) ) {
+				wfLogWarning( $warning );
+			} else {
+				trigger_error( $warning, E_USER_WARNING );
+			}
+
+			// We could look into the atomic diff, see if it uses arrays as values,
+			// and construct a new Diff according to these values. But since the
+			// actual old behavior of MapDiffer didn't cause that to happen, let's
+			// just use an empty diff, which is what MapDiffer should have returned
+			// in the actual broken case mentioned in bug 51363.
+			$operations[$key] = new Diff( array(), true );
+		}
 	}
 
 	/**
