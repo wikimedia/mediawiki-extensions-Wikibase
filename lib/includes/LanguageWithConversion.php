@@ -226,6 +226,22 @@ class LanguageWithConversion {
 	}
 
 	/**
+	 * Try to work out the original data (in source language) from a given translation output.
+	 *
+	 * @param $text String
+	 * @return String
+	 */
+	public function reverseTranslate( $text ) {
+		if ( $this->parentLanguage ) {
+			return $this->parentLanguage->getConverter()->translate(
+				$text, $this->sourceLanguageCode
+			);
+		} else {
+			return $text;
+		}
+	}
+
+	/**
 	 * Insert a text snippet which will be translated later.
 	 *
 	 * Due to the implementation of language converter, massive
