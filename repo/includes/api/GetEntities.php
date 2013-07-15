@@ -47,11 +47,7 @@ class GetEntities extends ApiWikibase {
 		wfProfileIn( __METHOD__ );
 
 		$params = $this->extractRequestParams();
-
-		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages', 'param-missing' );
-		}
+		$this->validateParameters($params);
 
 		$missing = 0;
 
@@ -115,6 +111,16 @@ class GetEntities extends ApiWikibase {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
+	 */
+	protected function validateParameters( array $params ) {
+		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages', 'param-missing' );
+		}
 	}
 
 	/**
