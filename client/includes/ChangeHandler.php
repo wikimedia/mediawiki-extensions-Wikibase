@@ -744,12 +744,12 @@ class ChangeHandler {
 			}
 
 			if ( $this->dataTransclusionAllowed ) {
-				if ( $diff instanceof EntityDiff && !$diff->getClaimDiff()->isEmpty() ) {
+				if ( $diff instanceof EntityDiff && !$diff->getClaimsDiff()->isEmpty() ) {
 					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
 						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
 				}
 
-				if ( $diff instanceof EntityDiff && !$diff->getLabelDiff()->isEmpty() ) {
+				if ( $diff instanceof EntityDiff && !$diff->getLabelsDiff()->isEmpty() ) {
 					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
 						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
 				}
