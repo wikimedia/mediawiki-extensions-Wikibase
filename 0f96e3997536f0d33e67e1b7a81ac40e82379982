@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c305cb_6a3c012e",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-15T11:10:53Z",
+      "side": 1,
+      "message": "i find this confusing... $siteId is a Site?",
+      "revId": "0f96e3997536f0d33e67e1b7a81ac40e82379982",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c305cb_aa1f19b3",
+        "filename": "client/tests/phpunit/includes/store/sql/DirectSqlStoreTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-15T11:10:53Z",
+      "side": 1,
+      "message": "ick!    since this is a database test, maybe it could just be inserted into the test database and then the siteGlobalID can be the identifier?",
+      "revId": "0f96e3997536f0d33e67e1b7a81ac40e82379982",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
