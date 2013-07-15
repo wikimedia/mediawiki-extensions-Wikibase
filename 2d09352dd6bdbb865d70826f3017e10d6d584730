@@ -16,6 +16,24 @@
       "revId": "2d09352dd6bdbb865d70826f3017e10d6d584730",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c305cb_6ad881ee",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-15T12:04:50Z",
+      "side": 1,
+      "message": "uhm, i must have blanked out. you are completely right.",
+      "parentUuid": "49c305cb_4a7ca51c",
+      "revId": "2d09352dd6bdbb865d70826f3017e10d6d584730",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
