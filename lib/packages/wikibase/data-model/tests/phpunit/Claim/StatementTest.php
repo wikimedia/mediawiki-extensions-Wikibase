@@ -106,8 +106,8 @@ class StatementTest extends ClaimTest {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetRank( Statement $statement ) {
-		$rank = $statement->getRank();
+	public function testGetRank( Claim $claim ) {
+		$rank = $claim->getRank();
 		$this->assertInternalType( 'integer', $rank );
 
 		$ranks = array( Claim::RANK_DEPRECATED, Claim::RANK_NORMAL, Claim::RANK_PREFERRED );
