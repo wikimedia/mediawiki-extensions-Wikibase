@@ -108,6 +108,19 @@ final class TestChanges {
 			$old = $new->copy();
 
 			// -----
+			$new->removeSiteLink( 'enwiki' );
+			$new->removeSiteLink( 'dewiki' );
+
+			$link = new SimpleSiteLink( 'enwiki', "Emmy" );
+			$new->addSimpleSiteLink( $link, 'add' );
+
+			$link = new SimpleSiteLink( 'dewiki', "Dummy" );
+			$new->addSimpleSiteLink( $link, 'add' );
+
+			$changes['change-sitelink-order'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
 			$link = new SimpleSiteLink( 'dewiki', "Dummy2" );
 			$new->addSimpleSiteLink( $link, 'set' );
 			$changes['change-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
