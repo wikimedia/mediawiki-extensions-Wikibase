@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c305cb_a552aadb",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-15T15:24:42Z",
+      "side": 1,
+      "message": "$valueFormatterOptions is not defined",
+      "revId": "c3fbebd6cdc3eed62b8e95d28d2be4b391a402ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c305cb_854fae34",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-15T15:24:42Z",
+      "side": 1,
+      "message": "should this be $this-\u003eentitiesPrefixMap\n\nalso, we could put a use statement at the top for EntityIdFormatter",
+      "revId": "c3fbebd6cdc3eed62b8e95d28d2be4b391a402ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c305cb_e55ca2ef",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-15T15:24:42Z",
+      "side": 1,
+      "message": "Call to undefined function Wikibase\\\\getFormattedValue()",
+      "revId": "c3fbebd6cdc3eed62b8e95d28d2be4b391a402ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
