@@ -34,6 +34,24 @@
       "revId": "8697a004ebef55e7881904a98392e71d49e0be3b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_c688a4eb",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:38:52Z",
+      "side": 1,
+      "message": "Ok, we can leave it here for now. I just think it\u0027s usually better to actually perform composition in the constructor, instead of having object creation logic sprinkeld though the business logic.\n\nAs to the design of Content: I agree, much of what ended up in Content should be in ContentHandler or a separate service. I actually had it like that once, but let myself be convinced to change it. Silly me.",
+      "parentUuid": "69c609db_bff8f447",
+      "revId": "8697a004ebef55e7881904a98392e71d49e0be3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
