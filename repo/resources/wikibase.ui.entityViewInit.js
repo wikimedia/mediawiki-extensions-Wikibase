@@ -160,9 +160,10 @@
 					? 'wikibase-blockeduser-tooltip-message'
 					: 'wikibase-restrictionedit-tooltip-message';
 
-				toolbarButton.setTooltip( mw.message( messageId ).escaped() );
-
-				toolbarButton._tooltip.setGravity( 'nw' );
+				toolbarButton.element.wbtooltip( {
+					content: mw.message( messageId ).escaped(),
+					gravity: 'nw'
+				} );
 			} );
 		} );
 
@@ -252,37 +253,31 @@
 					? options.wbCopyrightWarningGravity
 					: 'nw';
 
-				var tooltip = new wb.ui.Tooltip(
-					toolbar.$btnSave.data( 'toolbarbutton' ).getTooltipParent(), // adjust tooltip to save button
-					{},
-					$message,
-					// assuming the toolbar is used on the right side of some edit UI, we want to
-					// point the tooltip away from that so it won't overlap with it:
-					{ gravity: gravity }
-				);
-
 				// Tooltip gets its own anchor since other elements might have their own tooltip.
 				// we don't even have to add this new toolbar element to the toolbar, we only use it
 				// to manage the tooltip which will have the 'save' button as element to point to.
 				// The 'save' button can still have its own tooltip though.
-				var messageAnchor = $( '<span/>' ).toolbarlabel();
-				messageAnchor.data( 'toolbarlabel' ).setTooltip( tooltip );
+				var $messageAnchor = $( '<span/>' )
+					.appendTo( 'body' )
+					.toolbarlabel()
+					.wbtooltip( {
+						content: $message,
+						permanent: true,
+						gravity: gravity,
+						$anchor: toolbar.$btnSave
+					} );
 
 				$hideMessage.on( 'click', function( event ) {
 					event.preventDefault();
-					messageAnchor.data( 'toolbarlabel' ).removeTooltip();
+					$messageAnchor.data( 'wbtooltip' ).degrade( true );
 					$.cookie( cookieKey, messageText, { 'expires': null, 'path': '/' } );
 				} );
 
-				tooltip.show( true ); // show permanently, not just on hover!
+				$messageAnchor.data( 'wbtooltip' ).show();
 
 				// destroy tooltip after edit mode gets closed again:
 				$( wb ).one( 'stopItemPageEditMode', function( event ) {
-					tooltip.destroy();
-					// FIXME: messageAnchor is never added to the toolbar, so there is no need
-					//  trying to remove it. However, probably the messageAnchor itself should be
-					//  destroyed.
-					toolbar.removeElement( messageAnchor );
+					$messageAnchor.data( 'wbtooltip' ).degrade( true );
 				} );
 			}
 		} );
