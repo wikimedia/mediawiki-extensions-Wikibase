@@ -34,6 +34,24 @@
       "revId": "9fa0ac79c3d63be4d14eafe330fbe8921035320f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_66aa9074",
+        "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-16T16:45:34Z",
+      "side": 1,
+      "message": "TODO would be a lot clearer yes. And having an actual verb in there is as well. \"global fixture cruft\" is perhaps also not the most clear way to describe what you are talking about.",
+      "parentUuid": "29c091be_461af414",
+      "revId": "9fa0ac79c3d63be4d14eafe330fbe8921035320f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
