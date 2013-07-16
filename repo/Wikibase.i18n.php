@@ -4899,10 +4899,12 @@ $messages['eu'] = array(
 
 /** Persian (فارسی)
  * @author A.R.Rostamzade
+ * @author Alireza
  * @author Calak
  * @author Dalba
  * @author Ladsgroup
  * @author Mahan
+ * @author Mahdiz
  * @author Mjbmr
  * @author Nojan Madinehi
  * @author Pouyana
@@ -4925,7 +4927,6 @@ $messages['fa'] = array(
 	'wikibase-label-empty' => 'هنوز نامی تعریف نشده‌است.',
 	'wikibase-label-edit-placeholder' => 'وارد کردن نام',
 	'wikibase-description-empty' => 'هنوز توضیحاتی تعریف نشده‌است.',
-	'wikibase-deletedentity' => 'حذف شده$1',
 	'wikibase-description-edit-placeholder' => 'وارد کردن توضیحات',
 	'wikibase-sitelink-site-edit-placeholder' => 'وب‌گاه',
 	'wikibase-sitelink-page-edit-placeholder' => 'مقاله',
@@ -5094,7 +5095,9 @@ $messages['fa'] = array(
 	'wikibase-entitydata-unsupported-format' => 'این رابط از قالب دادهٔ $1 پشتیبانی نمی‌کند.',
 	'wikibase-entitydata-title' => 'داده‌های موضوع',
 	'wikibase-entitydata-text' => 'این صفحه رابطی از داده‌های پیوندداده‌شده به مقدارهای موضوع ارائه می‌کند. لطفاً شناسهٔ موضوع (ID) موجود در نشانی اینترنتی را با استفاده از نحو زیرصفحه ارائه کنید.',
-	'wikibase-api-patch-incomplete' => 'پچ تولیدشده ناقص بود.',
+	'special-mylanguagefallbackchain' => 'زنجیره مجدد زبان من',
+	'wikibase-mylanguagefallbackchain-babel' => 'با قرار دادن <nowiki>{{#babel: }}</nowiki> در [[ویژه:صفحه من|صفحه کاربریتان]] می‌توان این را ویرایش کنید.', # Fuzzy
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1- $2 ، تبدیل شده از  $3 - $4',
 	'wikibase-self-conflict-patched' => 'ویرایش شما د آخرین نسخه پچ شد و تعدادی از تغییرات میانیتان را باطل کرد.',
 	'wikibase-conflict-patched' => 'ویرایشتان در آخرین نسخه پچ شد.',
 	'wikibase-restoreold' => 'بازیابی',
@@ -5132,10 +5135,11 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbremoveclaims-remove' => 'پاک کردن {{PLURAL:$3|مطالبه|مطالبه ها}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'تغییر دادن {{PLURAL:$3|ادعا|ادعاها}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'ساختن {{PLURAL:$3|ادعا|ادعاها}}',
+	'wikibase-item-summary-clientsitelink-update' => 'صفحه  از [$3] به [$4] منتقل شد',
 	'wikibase-property-summary-wbcreate-new' => 'ایجاد یک ویژگی جدید',
 	'wikibase-property-summary-wbeditentity-create' => 'ایجاد یک ویژگی جدید',
 	'wikibase-property-summary-wbeditentity-update' => 'به‌روز رسانی یک ویژگی',
-	'wikibase-property-summary-wbeditentity-override' => 'پریدن از روی یک ویژگی',
+	'wikibase-property-summary-wbeditentity-override' => 'واضح کردن یک خصوصیت',
 	'wikibase-property-summary-wbsetlabel-set' => 'تغییر برچسب [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'حذف برچسب [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'تغییر توضیحات [$2]',
@@ -8309,6 +8313,7 @@ Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'wikibase-entitydata-unsupported-format' => "Il formato dati $1 non è supportato dall'interfaccia.",
 	'wikibase-entitydata-title' => "Dati dell'entità",
 	'wikibase-entitydata-text' => "Questa pagina fornisce un'interfaccia di dati collegati ai valori dell'entità. Si prega di fornire l'ID dell'entità nell'URL, utilizzando la sintassi sottopagina.",
+	'wikibase-mylanguagefallbackchain-babel' => 'Puoi modificarla inserendo <nowiki>{{#babel: }}</nowiki> nella tua [[Special:MyPage|pagina utente]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, convertito da $3 - $4',
 	'wikibase-self-conflict-patched' => "La tua modifica è stata inserita nell'ultima versione, escludendo alcune delle tue modifiche intermedie.",
 	'wikibase-conflict-patched' => "La tua modifica è stata inserita nell'ultima versione.",
@@ -8355,7 +8360,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbcreate-new' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-create' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-update' => 'Aggiornata una proprietà',
-	'wikibase-property-summary-wbeditentity-override' => 'Sovrascritto una proprietà', # Fuzzy
+	'wikibase-property-summary-wbeditentity-override' => 'Cancellata una proprietà',
 	'wikibase-property-summary-wbsetlabel-set' => 'Cambiata etichetta [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Rimossa etichetta [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Cambiata descrizione [$2]',
@@ -11480,7 +11485,7 @@ IP-adressa di vert lagra i endringshistorikken til dette objektet av type $1.",
 	'wikibase-newentity-submit' => 'Opprett',
 	'special-setlabel' => 'Set ein merkelapp',
 	'wikibase-setlabel-introfull' => 'Du set merkelappen for $2 på [[$1]].',
-	'wikibase-setlabel-intro' => 'Dette skjemaet tillèt deg å setja merkelappen til ei eining. Du lyt oppgje ID-en til eininga (t.d. Q23), ein språkkode og merkelappen som skal setjast.',
+	'wikibase-setlabel-intro' => 'Dette skjemaet lèt deg setja merkelappen til ei eining. Du lyt oppgje ID-en til eininga (t.d. Q23), ein språkkode (t.d. «nn») og merkelappen som skal setjast.',
 	'wikibase-setlabel-label' => 'Merkelapp:',
 	'wikibase-setlabel-submit' => 'Set merkelappen',
 	'wikibase-setlabel-warning-remove' => 'Er du viss på at du ynskjer å fjerna merkelappen til [[$1]]?',
@@ -11494,6 +11499,9 @@ IP-adressa di vert lagra i endringshistorikken til dette objektet av type $1.",
 	'wikibase-setaliases-label' => 'Tilleggsnamn:',
 	'wikibase-setaliases-submit' => 'Set tilleggsnamna',
 	'wikibase-setaliases-warning-remove' => 'Er du viss på at du ynskjer å fjerna alle tilleggsnamna til [[$1]]?',
+	'special-setsitelink' => 'Set ei nettstadlenkje',
+	'wikibase-setsitelink-introfull' => 'Du set nettstadlenkja til $2 på [[$1]].',
+	'wikibase-setsitelink-intro' => 'Dette skjemaet lèt deg setja nettstadlenkja til ei eining. Du lyt oppgje ID-en til eininga (t.d. Q23), ein nettstad-ID (t.d. «nnwiki») og nettstadlenkja som skal setjast.',
 	'wikibase-setsitelink-site' => 'Nettstad-ID:',
 	'wikibase-setsitelink-label' => 'Nettstadlenkje:',
 	'wikibase-setsitelink-submit' => 'Set nettstadlenkja',
@@ -11547,7 +11555,6 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 	'wikibase-entitydata-unsupported-format' => 'Dataformatet $1 er ikkje stødd av dette grensesnittet.',
 	'wikibase-entitydata-title' => 'Einingsdata',
 	'wikibase-entitydata-text' => 'Sida gjev eit grensesnitt med lenkja data for einingsverdiar. Oppgje einings-ID-en i URL-en ved hjelp av undersidesyntaks.',
-	'wikibase-api-patch-incomplete' => 'Den genererte bota vart ikkje heil.',
 	'wikibase-self-conflict-patched' => 'Endringa di vart bøtt inn i den nyaste versjonen, og overstyrte nokre av dine eigne mellomliggjande endringar.',
 	'wikibase-conflict-patched' => 'Endringa di vart bøtt inn i den nyaste versjonen.',
 	'wikibase-restoreold' => 'attopprett',
@@ -11835,6 +11842,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zm
 	'wikibase-entitydata-bad-revision' => 'Nie można pokazać wersji $2 encji $1.',
 	'wikibase-entitydata-bad-id' => 'Nieprawidłowy identyfikator: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Ten interfejs nie obsługuje formatu danych $1.',
+	'wikibase-conflict-patched' => 'Do Twojej edycji została zastosowana poprawka do najnowszej wersji.',
 	'wikibase-restoreold' => 'przywróć',
 	'wikibase-restore-summary' => 'Przywrócono wersję $1 zrobioną przez [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Bezpośrednia edycja jest wyłączona w przestrzeni nazw $1',
@@ -14003,6 +14011,16 @@ $messages['tl'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => 'Tinanggal ang [$2] {{PLURAL:$1|bansag|mga bansag}}',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Idinagdag ang kawing [$2] na pangtiyak na pook', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Tinanggal ang kawing [$2] sa tiyak na pook', # Fuzzy
+);
+
+/** Turkish (Türkçe)
+ * @author Rapsar
+ */
+$messages['tr'] = array(
+	'wikibase-edit' => 'değiştir',
+	'wikibase-save' => 'kaydet',
+	'wikibase-add' => 'ekle',
+	'wikibase-remove' => 'kaldır',
 );
 
 /** Central Atlas Tamazight (ⵜⴰⵎⴰⵣⵉⵖⵜ)

@@ -1019,6 +1019,9 @@ $messages['dsb'] = array(
  * @author Nikosguard
  */
 $messages['el'] = array(
+	'wikibase-client-desc' => 'Πελάτης για την επέκταση Wikibase',
+	'specialpages-group-wikibaseclient' => 'Πελάτης Wikidata',
+	'tooltip-t-wikibase' => 'Σύνδεσμος προς το συνδεδεμένο αντικείμενο δεδομένων',
 	'wikibase-after-page-move' => 'Μπορείτε επίσης να [$1 ενημερώσετε] το σχετικό αντικείμενο Wikidata ώστε να διατηρηθούν οι διαγλωσσικές συνδέσεις στη μετακινούμενη σελίδα.',
 	'wikibase-after-page-move-queued' => 'Το [$1  αντικείμενο των Wikidata] που σχετίζεται με αυτή τη σελίδα θα ενημερωθεί αυτόματα σύντομα.',
 	'wikibase-comment-remove' => 'Το σχετιζόμενο αντικείμενο των Wikidata διαγράφτηκε. Ο γλωσσικός σύνδεσμος αφαιρέθηκε.',
@@ -1030,6 +1033,7 @@ $messages['el'] = array(
 	'wikibase-comment-sitelink-change' => 'Γλωσσικός σύνδεσμος άλλαξε από $1 σε $2',
 	'wikibase-comment-sitelink-remove' => 'Γλωσσικός σύνδεσμος αφαιρέθηκε: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|αλλαγή|αλλαγές}}',
+	'wikibase-dataitem' => 'Στοιχείο δεδομένων',
 	'wikibase-editlinks' => 'Επεξεργασία συνδέσμων',
 	'wikibase-editlinkstitle' => 'Επεξεργασία διαγλωσσικών συνδέσεων',
 	'wikibase-linkitem-addlinks' => 'Προσθήκη συνδέσεων',
@@ -1065,6 +1069,7 @@ $messages['el'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|διαγλωσσικός σύνδεσμος|διαγλωσσικοί σύνδεσμοι}} για τη σελίδα)',
 	'wikibase-pageinfo-entity-id' => 'Κωδικός αντικειμένου των Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Κανένα',
+	'wikibase-property-render-error' => 'Αποτυχία απόδοσης της ιδιότητας $1: $2',
 );
 
 /** British English (British English)
@@ -1233,6 +1238,7 @@ $messages['et'] = array(
 );
 
 /** Persian (فارسی)
+ * @author Alireza
  * @author Calak
  * @author Ladsgroup
  * @author Mehran
@@ -1244,7 +1250,9 @@ $messages['et'] = array(
 $messages['fa'] = array(
 	'wikibase-client-desc' => 'کارخواه برای افزونهٔ ویکی‌بیس',
 	'specialpages-group-wikibaseclient' => 'مشتری ویکی‌داده',
+	'tooltip-t-wikibase' => 'پیوند به آیتم متصل به مخزن داده',
 	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.',
+	'wikibase-after-page-move-queued' => '[ $1 آیتم ویکی‌داده] مرتبط با این صفحه به زودی به طور خودکار به‌روز رسانی می‌شود.',
 	'wikibase-comment-remove' => 'پیوند آیتم ویکی‌داده حذف گردید. پیوند زبان حذف شد.',
 	'wikibase-comment-linked' => 'یک آیتم ویکی‌داده به این صفحه پیوند دارد.',
 	'wikibase-comment-unlink' => 'این صفحه به ویکی‌داده پیوند ندارد. پیوند زبان حذف شد.',
@@ -1254,6 +1262,7 @@ $messages['fa'] = array(
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
 	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر|تغییرها}}',
+	'wikibase-dataitem' => 'مورد داده',
 	'wikibase-editlinks' => 'ویرایش پیوندها',
 	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
 	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
@@ -1266,7 +1275,7 @@ $messages['fa'] = array(
 	'wikibase-linkitem-input-site' => 'زبان:',
 	'wikibase-linkitem-input-page' => 'صفحه:',
 	'wikibase-linkitem-invalidsite' => 'سایت‌های ناشناخته و یا غیر معتبر انتخاب شده است.',
-	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] متصل است. لطفا تایید کنید که صفحه‌های زیر همان‌هایی هستند که شما خواهان پیوند دادن به آن‌ها بودید.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] مرتبط است. لطفا تایید کنید که {{PLURAL:$2|صفحهٔ|صفحه‌های}} زیر همان‌هایی {{PLURAL:$2|هست|هستند}} که شما خواهان پیوند دادن به {{PLURAL:$2|آن|آن‌ها}} بودید.',
 	'wikibase-linkitem-confirmitem-button' => 'تأیید',
 	'wikibase-linkitem-not-loggedin-title' => 'باید وارد سیستم شوید.',
 	'wikibase-linkitem-not-loggedin' => 'شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.',
@@ -1277,6 +1286,7 @@ $messages['fa'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 ویکی‌داده',
 	'wikibase-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
 	'wikibase-watchlist-show-changes-pref' => 'نمایش ویرایش‌های ویکی‌داده در فهرست پیگیری‌ها',
+	'wikibase-error-serialize-error' => 'مرتب کردن داده انجام نشد.',
 	'wikibase-error-invalid-entity-id' => 'شناسهٔ واردشده برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
 	'special-unconnectedpages' => 'صفحه‌های متصل‌نشده به آیتم‌ها',
 	'wikibase-unconnectedpages-legend' => 'گزینه‌های صفحات غیرمرتبط',
@@ -1285,9 +1295,10 @@ $messages['fa'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» یک کد زبان نامعتبر است.',
 	'wikibase-unconnectedpages-page-warning' => 'عنوان صفحه برای کوئری استفاده نمی‌شود و نادیده گرفته شده‌است.',
 	'wikibase-unconnectedpages-iwdata-label' => 'فقط صفحات با پیوند میان‌ویکی',
-	'wikibase-unconnectedpages-format-row' => '( $1  پیوند زبان بر روی صفحه)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '( $1  {{PLURAL:$1| پیوند میان‌ویکی|پیوند میان‌ویکی}} در صفحه)',
 	'wikibase-pageinfo-entity-id' => 'شناسه آیتم ویکی‌داده',
 	'wikibase-pageinfo-entity-id-none' => 'هیچ‌کدام',
+	'wikibase-property-render-error' => 'خطا در ارائهٔ خصوصیت  $1: $2',
 );
 
 /** Finnish (suomi)

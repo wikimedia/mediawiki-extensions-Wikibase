@@ -1016,6 +1016,8 @@ $messages['eu'] = array(
 );
 
 /** Persian (فارسی)
+ * @author Alireza
+ * @author Calak
  * @author Dalba
  * @author Ladsgroup
  * @author Reza1615
@@ -1026,6 +1028,9 @@ $messages['fa'] = array(
 	'wikibase-entity-item' => 'آیتم',
 	'wikibase-entity-property' => 'ویژگی',
 	'wikibase-entity-query' => 'کوئری',
+	'wikibase-deletedentity-item' => 'آیتم حذف‌شده',
+	'wikibase-deletedentity-property' => 'خصوصیات حذف شده',
+	'wikibase-deletedentity-query' => 'جستار حذف‌شده',
 	'wikibase-diffview-reference' => 'منبع',
 	'wikibase-diffview-rank' => 'رتبه',
 	'wikibase-diffview-qualifier' => 'ارزش‌یاب',
@@ -1040,7 +1045,7 @@ $messages['fa'] = array(
 	'wikibase-error-remove-connection' => 'هنگام حذف‌کردن خطایی رخ داد و به این دلیل امکان تکمیل تغییراتتان نبود. خواهشمندیم اتصال اینترنتی خود را بررسی کنید.',
 	'wikibase-error-save-timeout' => 'در حال حاضر با مشکلات فنی‌ای روبه‌رو شده‌ایم و به همین خاطر «ذخیره‌سازی» شما کامل نشد.',
 	'wikibase-error-remove-timeout' => 'در حال حاضر با مشکلات فنیی‌ای روبه‌رو شده‌ایم و به همین خاطر عمل «حذف‌کردن» کامل نشد.',
-	'wikibase-error-autocomplete-connection' => 'امکان پرسمان از واسط برنامه‌نویسی کاربردی وجود نداشت. لطفاً بعداً امتحان کنید.',
+	'wikibase-error-autocomplete-connection' => 'امکان پرسمان از واسط برنامه‌نویسی کاربردی  وب‌گاه وجود نداشت. لطفاً بعداً امتحان کنید.',
 	'wikibase-error-autocomplete-response' => 'پاسخ سرور: $1',
 	'wikibase-error-ui-client-error' => 'اتصال به صفحهٔ کارخواه ناموفق بود. لطفاً بعداً امتحان کنید.',
 	'wikibase-error-ui-no-external-page' => 'مقالهٔ یادشده در وب‌گاه مربوطه پیدا نشد.',
@@ -1050,11 +1055,18 @@ $messages['fa'] = array(
 	'wikibase-error-ui-session-failure' => 'نشست شما منقضی شده‌است. لطفاً دوباره به سامانه وارد شوید.',
 	'wikibase-error-ui-edit-conflict' => 'تعارض ویرایشی رخ داده است. خواهشمندیم از نو بارگذاری و ذخیره کنید.',
 	'wikibase-replicationnote' => 'لطفا توجه کنید چند دقیقه زمان لازم است تا تغییرات در همهٔ ویکی‌ها قابل مشاهده باشد.',
-	'wikibase-sitelinks' => 'فهرست صفحه‌هایی که به این آیتم پیوند دارند',
+	'wikibase-sitelinks-wikipedia' => 'صفحه‌های ویکی‌پدیا که به این آیتم پیوند دارند',
 	'wikibase-sitelinks-sitename-columnheading' => 'زبان',
 	'wikibase-sitelinks-siteid-columnheading' => 'کد',
 	'wikibase-sitelinks-link-columnheading' => 'مقالهٔ پیوندداده‌شده',
 	'wikibase-tooltip-error-details' => 'جزئیات',
+	'wikibase-validator-bad-type' => '$2 به جای $1',
+	'wikibase-validator-too-long' => 'نباید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد',
+	'wikibase-validator-too-short' => 'باید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد',
+	'wikibase-validator-malformed-value' => 'ورودی ناقص:$1',
+	'wikibase-validator-bad-entity-id' => 'شناسه ناقص:$1',
+	'wikibase-validator-bad-entity-type' => 'نوع ورودی غیرمنتظره  $1',
+	'wikibase-validator-no-such-entity' => '$1 یافت نشد',
 	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
 	'version-wikibase' => 'ویکی‌بیس',
@@ -2618,6 +2630,13 @@ $messages['tl'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Kodigo',
 	'wikibase-sitelinks-link-columnheading' => 'Artikulong nakakawing',
 	'wikibase-tooltip-error-details' => 'Mga detalye',
+);
+
+/** Turkish (Türkçe)
+ * @author Rapsar
+ */
+$messages['tr'] = array(
+	'wikibase-sitelinks-wikipedia' => 'Bu ögeye bağlı Vikipedi sayfaları',
 );
 
 /** Uyghur (Arabic script) (ئۇيغۇرچە)
