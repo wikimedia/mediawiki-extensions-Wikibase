@@ -227,7 +227,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = array_unique( call_user_func_array( 'array_merge', $aliasesList ) );
+			$expected = array_values( array_unique( call_user_func_array( 'array_merge', $aliasesList ) ) );
 			asort( $expected );
 
 			$actual = $entity->getAliases( $langCode );
@@ -250,7 +250,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = array_unique( array_pop( $aliasesList ) );
+			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
 			asort( $aliasesList );
 
 			$actual = $entity->getAliases( $langCode );
@@ -313,7 +313,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 			$entity->setAliases( $langCode, $aliases );
 			$entity->removeAliases( $langCode, $removedAliases );
 
-			$expected = array_diff( $aliases, $removedAliases );
+			$expected = array_values( array_diff( $aliases, $removedAliases ) );
 			$actual = $entity->getAliases( $langCode );
 
 			asort( $expected );
