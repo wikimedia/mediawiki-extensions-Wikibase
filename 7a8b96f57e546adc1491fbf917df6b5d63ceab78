@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_c340965c",
+        "filename": "client/includes/store/ClientStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-16T14:44:27Z",
+      "side": 1,
+      "message": "You cannot have static methods in interfaces",
+      "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
