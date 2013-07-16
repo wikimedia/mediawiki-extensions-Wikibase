@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_c95c3525",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T18:15:11Z",
+      "side": 1,
+      "message": "Code style: spaces before and after \"(\" and \")\", line breaks after resp. before \"{\" and \"}\".",
+      "revId": "f4bd9d28412ad2eeef2b845ea160d6c8a7d5c279",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_093f6db2",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T18:15:11Z",
+      "side": 1,
+      "message": "Please use a local variable for the unserialized rank. Makes debugging a lot easier.",
+      "revId": "f4bd9d28412ad2eeef2b845ea160d6c8a7d5c279",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_29422942",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T18:15:11Z",
+      "side": 1,
+      "message": "Please use a local variable for the parsed property. Makes debugging a lot easier.",
+      "revId": "f4bd9d28412ad2eeef2b845ea160d6c8a7d5c279",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
