@@ -102,6 +102,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 	 * @return \Wikibase\EntityContent
 	 */
 	protected function getEntityContent() {
+		wfProfileIn( __METHOD__ );
 		$params = $this->extractRequestParams();
 
 		// @todo generalize handling of settings in api modules
@@ -110,6 +111,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -117,11 +119,13 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'No such entity' , 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 
+		wfProfileOut( __METHOD__ );
 		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
@@ -139,9 +143,11 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 	 * @return \Wikibase\Claim
 	 */
 	protected function updateClaim( Entity $entity, $guid, $snakType, $value = null ) {
+		wfProfileIn( __METHOD__ );
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $guid ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'No such claim' , 'no-such-claim' );
 		}
 
@@ -156,6 +162,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			$content = EntityContentFactory::singleton()->getFromId( $claim->getMainSnak()->getPropertyId() );
 
 			if ( $content === null ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined', 'no-such-property' );
 			}
 
@@ -172,8 +179,10 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			$claim->setMainSnak( $snak );
 			$entity->setClaims( $claims );
 
+			wfProfileOut( __METHOD__ );
 			return $claim;
 		} catch ( IllegalValueException $ex ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 	}

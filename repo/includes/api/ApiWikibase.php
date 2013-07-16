@@ -334,6 +334,7 @@ abstract class ApiWikibase extends \ApiBase {
 		$audience = \Revision::FOR_PUBLIC,
 		\User $user = null
 	) {
+		wfProfileIn( __METHOD__ );
 		if ( $revId === null || $revId === false || $revId === 0 ) {
 			$page = \WikiPage::factory( $title );
 			$content = $page->getContent( $audience, $user );
@@ -341,10 +342,12 @@ abstract class ApiWikibase extends \ApiBase {
 			$revision = \Revision::newFromId( $revId );
 
 			if ( !$revision ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "Revision not found: $revId", 'nosuchrevid' );
 			}
 
 			if ( $revision->getPage() != $title->getArticleID() ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "Revision $revId does not belong to " .
 					$title->getPrefixedDBkey(), 'nosuchrevid' );
 			}
@@ -353,11 +356,13 @@ abstract class ApiWikibase extends \ApiBase {
 		}
 
 		if ( is_null( $content ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Can't access item content of " .
 				$title->getPrefixedDBkey() .
 				", revision may have been deleted.", 'cant-load-entity-content' );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $content;
 	}
 
@@ -458,9 +463,9 @@ abstract class ApiWikibase extends \ApiBase {
 			$res->disableSizeCheck();
 			$res->addValue( array( 'warnings' ), 'messages', $messages, true );
 			$res->enableSizeCheck();
-
-			wfProfileOut( __METHOD__ );
 		}
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
