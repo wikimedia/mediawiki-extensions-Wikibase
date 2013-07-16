@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_49be85fc",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-16T18:42:13Z",
+      "side": 1,
+      "message": "$3 can be a hard coded \"wb-sitelinks-heading\" since the template is dedicated to sitelinks anyhow.",
+      "revId": "3da66dcedbbb7fff0269865271db37e237db8249",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_29dea96a",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-16T18:42:13Z",
+      "side": 1,
+      "message": "Should be an object, not array if you want to use it like a hash map.",
+      "revId": "3da66dcedbbb7fff0269865271db37e237db8249",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_69e8a112",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-16T18:42:13Z",
+      "side": 1,
+      "message": "Why not just cache the whole DOM node? You would not have to use the more expensive template mechanism then.",
+      "revId": "3da66dcedbbb7fff0269865271db37e237db8249",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_e93db18c",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-16T18:42:13Z",
+      "side": 1,
+      "message": "Should be\n\n\u0027sitelinks-\u0027 + group\n\nor you end up with duplicate IDs",
+      "revId": "3da66dcedbbb7fff0269865271db37e237db8249",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
