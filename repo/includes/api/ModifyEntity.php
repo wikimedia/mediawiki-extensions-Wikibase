@@ -86,7 +86,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$entityTitle = $entityId ? $entityContentFactory->getTitleForId( $entityId, \Revision::FOR_THIS_USER ) : null;
 
 			if ( is_null( $entityTitle ) ) {
-				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
+				$this->dieUsage( "No entity found matching ID $id", 'nosuchentityid' );
 			}
 		}
 		// Otherwise check if we have a link and try that.
@@ -100,7 +100,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			);
 
 			if ( is_null( $entityTitle ) ) {
-				$this->dieUsage( 'No entity found matching site link ' . $params['site'] . ':' . $params['title'] , 'no-such-entity-link' );
+				$this->dieUsage( 'No entity found matching site link ' . $params['site'] . ':' . $params['title'] , 'nosuchentitylink' );
 			}
 		} else {
 			return null;
@@ -110,7 +110,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( is_null( $entityContent ) ) {
-			$this->dieUsage( "Can't access item content of " . $entityTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-entity' );
+			$this->dieUsage( "Can't access item content of " . $entityTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'nosuchentity' );
 		}
 
 		return $entityContent;
@@ -127,7 +127,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return \Wikibase\EntityContent Newly created entity
 	 */
 	protected function createEntity( array $params ) {
-		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
+		$this->dieUsage( 'Could not find an existing entity' , 'nosuchentity' );
 	}
 
 	/**
@@ -165,7 +165,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page' , 'param-illegal' );
+			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page' , 'invalidparam' );
 		}
 	}
 
@@ -203,7 +203,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			//XXX: This could rather be used for "silent" failure, i.e. in cases where
 			//     there was simply nothing to do.
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Attempted modification of the item failed' , 'failed-modify' );
+			$this->dieUsage( 'Attempted modification of the item failed' , 'failedmodify' );
 		}
 
 		if ( $summary === true ) { // B/C, for implementations of modifyEntity that return true on success.
@@ -285,12 +285,12 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
-			array( 'code' => 'no-such-entity-link', 'info' => $this->msg( 'wikibase-api-no-such-entity-link' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
+			array( 'code' => 'nosuchentityid', 'info' => $this->msg( 'wikibase-api-nosuchentityid' )->text() ),
+			array( 'code' => 'nosuchentitylink', 'info' => $this->msg( 'wikibase-api-nosuchentitylink' )->text() ),
+			array( 'code' => 'nosuchentity', 'info' => $this->msg( 'wikibase-api-nosuchentity' )->text() ),
+			array( 'code' => 'invalidparam', 'info' => $this->msg( 'wikibase-api-invalidparam' )->text() ),
 			array( 'code' => 'permissiondenied', 'info' => $this->msg( 'wikibase-api-permissiondenied' )->text() ),
-			array( 'code' => 'failed-modify', 'info' => $this->msg( 'wikibase-api-failed-modify' )->text() ),
+			array( 'code' => 'failedmodify', 'info' => $this->msg( 'wikibase-api-failedmodify' )->text() ),
 		) );
 	}
 

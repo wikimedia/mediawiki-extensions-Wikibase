@@ -67,7 +67,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function createEntity( array $params ) {
 		if ( !isset( $params['new'] ) ) {
-			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
+			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'nosuchentity' );
 		}
 
 		$type = $params['new'];
@@ -76,7 +76,7 @@ class EditEntity extends ModifyEntity {
 		try {
 			return $entityContentFactory->newFromType( $type );
 		} catch ( InvalidArgumentException $e ) {
-			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
+			$this->dieUsage( "No such entity type: '$type'", 'nosuchentitytype' );
 		}
 	}
 
@@ -86,13 +86,13 @@ class EditEntity extends ModifyEntity {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['data'] ) OR  isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item', 'param-missing' );
+			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item', 'missingparam' );
 		}
 		if ( isset( $params['id'] ) && isset( $params['new'] ) ) {
-			$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request", 'param-illegal' );
+			$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request", 'invalidparam' );
 		}
 		if ( !isset( $params['id'] ) && !isset( $params['new'] ) ) {
-			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
+			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'nosuchentity' );
 		}
 	}
 
@@ -118,7 +118,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !isset( $params['data'] ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'No data to operate upon', 'no-data' );
+			$this->dieUsage( 'No data to operate upon', 'nodata' );
 		}
 
 		$data = json_decode( $params['data'], true );
@@ -131,7 +131,7 @@ class EditEntity extends ModifyEntity {
 		// if we create a new property, make sure we set the datatype
 		if ( $entityContent->isNew() && $entity->getType() === Property::ENTITY_TYPE ) {
 			if ( !isset( $data['datatype'] ) ) {
-				$this->dieUsage( 'No datatype given', 'param-illegal' );
+				$this->dieUsage( 'No datatype given', 'invalidparam' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
 			}
@@ -152,7 +152,7 @@ class EditEntity extends ModifyEntity {
 		if ( array_key_exists( 'sitelinks', $data ) ) {
 			if ( $entity->getType() !== Item::ENTITY_TYPE ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "key can't be handled: sitelinks", 'not-recognized' );
+				$this->dieUsage( "key can't be handled: sitelinks", 'notrecognized' );
 			}
 
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $status ) );
@@ -160,12 +160,12 @@ class EditEntity extends ModifyEntity {
 
 		if ( !$status->isOk() ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Edit failed: $1", 'failed-save' );
+			$this->dieUsage( "Edit failed: $1", 'failedsave' );
 		}
 
 		if ( $changeOps->apply( $entity ) === false ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Change could not be applied to entity', 'failed-save' );
+			$this->dieUsage( 'Change could not be applied to entity', 'failedsave' );
 		}
 
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
@@ -195,7 +195,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !is_array( $labels ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "List of labels must be an array", 'not-recognized-array' );
+			$this->dieUsage( "List of labels must be an array", 'notrecognizedarray' );
 		}
 
 		foreach ( $labels as $langCode => $arg ) {
@@ -228,7 +228,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !is_array( $descriptions ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "List of descriptions must be an array", 'not-recognized-array' );
+			$this->dieUsage( "List of descriptions must be an array", 'notrecognizedarray' );
 		}
 
 		foreach ( $descriptions as $langCode => $arg ) {
@@ -261,7 +261,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !is_array( $aliases ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "List of aliases must be an array", 'not-recognized-array' );
+			$this->dieUsage( "List of aliases must be an array", 'notrecognizedarray' );
 		}
 
 		$indexedAliases = array();
@@ -320,7 +320,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !is_array( $siteLinks ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "List of sitelinks must be an array", 'not-recognized-array' );
+			$this->dieUsage( "List of sitelinks must be an array", 'notrecognizedarray' );
 		}
 
 		$sites = $this->getSiteLinkTargetSites();
@@ -333,7 +333,7 @@ class EditEntity extends ModifyEntity {
 				$linkSite = $sites->getSite( $globalSiteId );
 			} else {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
+				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'nosuchsite' );
 			}
 
 			if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
@@ -343,7 +343,7 @@ class EditEntity extends ModifyEntity {
 
 				if ( $linkPage === false ) {
 					wfProfileOut( __METHOD__ );
-					$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+					$this->dieUsage( 'The external client site did not provide page information' , 'noexternalpage' );
 				}
 
 				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
@@ -387,41 +387,41 @@ class EditEntity extends ModifyEntity {
 
 		if ( is_null( $data ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid json: The supplied JSON structure could not be parsed or recreated as a valid structure' , 'invalid-json' );
+			$this->dieUsage( 'Invalid json: The supplied JSON structure could not be parsed or recreated as a valid structure' , 'invalidjson' );
 		}
 
 		if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
+			$this->dieUsage( 'Top level structure must be a JSON object', 'notrecognizedarray' );
 		}
 
 		foreach ( $data as $prop => $args ) {
 			if ( !is_string( $prop ) ) { // NOTE: catch json_decode returning an indexed array (list)
-				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
+				$this->dieUsage( 'Top level structure must be a JSON object', 'notrecognizedstring' );
 			}
 
 			if ( !in_array( $prop, $allowedProps ) ) {
-				$this->dieUsage( "unknown key: $prop", 'not-recognized' );
+				$this->dieUsage( "unknown key: $prop", 'notrecognized' );
 			}
 		}
 
 		// conditional processing
 		if ( isset( $data['pageid'] ) && ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Illegal field used in call: pageid', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: pageid', 'invalidparam' );
 		}
 		// not completely convinced that we can use title to get the namespace in this case
 		if ( isset( $data['ns'] ) && ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Illegal field used in call: namespace', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: namespace', 'invalidparam' );
 		}
 		if ( isset( $data['title'] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Illegal field used in call: title', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: title', 'invalidparam' );
 		}
 		if ( isset( $data['lastrevid'] ) && ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Illegal field used in call: lastrevid', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: lastrevid', 'invalidparam' );
 		}
 
 		return $status;
@@ -432,23 +432,23 @@ class EditEntity extends ModifyEntity {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-entity-type', 'info' => $this->msg( 'wikibase-api-no-such-entity-type' )->text() ),
-			array( 'code' => 'no-data', 'info' => $this->msg( 'wikibase-api-no-data' )->text() ),
-			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
-			array( 'code' => 'not-recognized-array', 'info' => $this->msg( 'wikibase-api-not-recognized-array' )->text() ),
-			array( 'code' => 'no-such-site', 'info' => $this->msg( 'wikibase-api-no-such-site' )->text() ),
-			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
-			array( 'code' => 'invalid-json', 'info' => $this->msg( 'wikibase-api-invalid-json' )->text() ),
-			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
-			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'inconsistent-language', 'info' => $this->msg( 'wikibase-api-inconsistent-language' )->text() ),
-			array( 'code' => 'not-recognised-language', 'info' => $this->msg( 'wikibase-not-recognised-language' )->text() ),
-			array( 'code' => 'inconsistent-site', 'info' => $this->msg( 'wikibase-api-inconsistent-site' )->text() ),
-			array( 'code' => 'not-recognized-site', 'info' => $this->msg( 'wikibase-api-not-recognized-site' )->text() ),
-			array( 'code' => 'failed-save', 'info' => $this->msg( 'wikibase-api-failed-save' )->text() ),
+			array( 'code' => 'nosuchentity', 'info' => $this->msg( 'wikibase-api-nosuchentity' )->text() ),
+			array( 'code' => 'nosuchentitytype', 'info' => $this->msg( 'wikibase-api-nosuchentitytype' )->text() ),
+			array( 'code' => 'nodata', 'info' => $this->msg( 'wikibase-api-nodata' )->text() ),
+			array( 'code' => 'notrecognized', 'info' => $this->msg( 'wikibase-api-notrecognized' )->text() ),
+			array( 'code' => 'notrecognizedarray', 'info' => $this->msg( 'wikibase-api-notrecognizedarray' )->text() ),
+			array( 'code' => 'nosuchsite', 'info' => $this->msg( 'wikibase-api-nosuchsite' )->text() ),
+			array( 'code' => 'noexternalpage', 'info' => $this->msg( 'wikibase-api-noexternalpage' )->text() ),
+			array( 'code' => 'invalidjson', 'info' => $this->msg( 'wikibase-api-invalidjson' )->text() ),
+			array( 'code' => 'notrecognizedstring', 'info' => $this->msg( 'wikibase-api-notrecognizedstring' )->text() ),
+			array( 'code' => 'notrecognized', 'info' => $this->msg( 'wikibase-api-notrecognized' )->text() ),
+			array( 'code' => 'invalidparam', 'info' => $this->msg( 'wikibase-api-invalidparam' )->text() ),
+			array( 'code' => 'missingparam', 'info' => $this->msg( 'wikibase-api-missingparam' )->text() ),
+			array( 'code' => 'inconsistentlanguage', 'info' => $this->msg( 'wikibase-api-inconsistentlanguage' )->text() ),
+			array( 'code' => 'notrecognisedlanguage', 'info' => $this->msg( 'wikibase-notrecognisedlanguage' )->text() ),
+			array( 'code' => 'inconsistentsite', 'info' => $this->msg( 'wikibase-api-inconsistentsite' )->text() ),
+			array( 'code' => 'notrecognizedsite', 'info' => $this->msg( 'wikibase-api-notrecognizedsite' )->text() ),
+			array( 'code' => 'failedsave', 'info' => $this->msg( 'wikibase-api-failedsave' )->text() ),
 		) );
 	}
 
@@ -538,21 +538,21 @@ class EditEntity extends ModifyEntity {
 	public function checkMultilangArgs( $arg, $langCode ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
-			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
+			$this->dieUsage( 'An array was expected, but not found' , 'notrecognizedarray' );
 		}
 		if ( !is_string( $arg['language'] ) ) {
-			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'notrecognizedstring' );
 		}
 		if ( !is_numeric( $langCode ) ) {
 			if ( $langCode !== $arg['language'] ) {
-				$this->dieUsage( "inconsistent language: {$langCode} is not equal to {$arg['language']}", 'inconsistent-language' );
+				$this->dieUsage( "inconsistent language: {$langCode} is not equal to {$arg['language']}", 'inconsistentlanguage' );
 			}
 		}
 		if ( isset( $this->validLanguageCodes ) && !array_key_exists( $arg['language'], $this->validLanguageCodes ) ) {
-			$this->dieUsage( "unknown language: {$arg['language']}", 'not-recognized-language' );
+			$this->dieUsage( "unknown language: {$arg['language']}", 'notrecognizedlanguage' );
 		}
 		if ( !is_string( $arg['value'] ) ) {
-			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'notrecognizedstring' );
 		}
 		return $status;
 	}
@@ -569,21 +569,21 @@ class EditEntity extends ModifyEntity {
 	public function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
-			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
+			$this->dieUsage( 'An array was expected, but not found' , 'notrecognizedarray' );
 		}
 		if ( !is_string( $arg['site'] ) ) {
-			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'notrecognizedstring' );
 		}
 		if ( !is_numeric( $siteCode ) ) {
 			if ( $siteCode !== $arg['site'] ) {
-				$this->dieUsage( "inconsistent site: {$siteCode} is not equal to {$arg['site']}", 'inconsistent-site' );
+				$this->dieUsage( "inconsistent site: {$siteCode} is not equal to {$arg['site']}", 'inconsistentsite' );
 			}
 		}
 		if ( isset( $sites ) && !$sites->hasSite( $arg['site'] ) ) {
-			$this->dieUsage( "unknown site: {$arg['site']}", 'not-recognized-site' );
+			$this->dieUsage( "unknown site: {$arg['site']}", 'notrecognizedsite' );
 		}
 		if ( !is_string( $arg['title'] ) ) {
-			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'notrecognizedstring' );
 		}
 		return $status;
 	}

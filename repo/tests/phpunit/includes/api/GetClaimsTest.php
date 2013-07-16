@@ -185,7 +185,7 @@ class GetClaimsTest extends \ApiTestCase {
 		try {
 			$this->doApiRequest( $params );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(), 'Invalid claim guid raised correct error' );
+			$this->assertEquals( 'invalidguid', $e->getCodeString(), 'Invalid claim guid raised correct error' );
 			$caughtException = true;
 		}
 

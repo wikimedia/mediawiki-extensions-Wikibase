@@ -139,7 +139,7 @@ class SetClaim extends ApiWikibase {
 			assert( $claim instanceof Claim );
 			return $claim;
 		} catch ( IllegalValueException $illegalValueException ) {
-			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
+			$this->dieUsage( $illegalValueException->getMessage(), 'invalidclaim' );
 		}
 	}
 
@@ -186,7 +186,7 @@ class SetClaim extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-claim', 'info' => $this->msg( 'wikibase-api-invalid-claim' )->text() ),
+			array( 'code' => 'invalidclaim', 'info' => $this->msg( 'wikibase-api-invalidclaim' )->text() ),
 		) );
 	}
 

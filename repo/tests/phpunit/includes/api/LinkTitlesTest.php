@@ -88,25 +88,25 @@ class LinkTitlesTest extends ModifyItemBase {
 				'nnwiki', // already set
 				'Oslo',
 			),
-			// Try to add two existing ones, should fail with a 'common-item'
+			// Try to add two existing ones, should fail with a 'commonitem'
 			array( 'Oslo', // handle
 				array(), // by id
 				'nnwiki', // already set
 				'Oslo',
 				'nowiki', // already set
 				'Oslo',
-				'common-item'
+				'commonitem'
 			),
-			// Try to add an existing one from another item, should fail with a 'no-common-item'
+			// Try to add an existing one from another item, should fail with a 'nocommonitem'
 			array( 'Oslo', // handle
 				array(), // by id
 				'nnwiki', // already set
 				'Oslo',
 				'nnwiki', // already set, from another item
 				'Berlin',
-				'no-common-item'
+				'nocommonitem'
 			),
-			// Try to add an existing one from another item, should fail with a 'no-common-item'
+			// Try to add an existing one from another item, should fail with a 'nocommonitem'
 			array( null, // handle
 				array(), // by id
 				'nnwiki', // already set
@@ -115,7 +115,7 @@ class LinkTitlesTest extends ModifyItemBase {
 				'Hammerfest',
 				'fromsite-eq-tosite'
 			),
-			// Try to add an existing one from another item, should fail with a 'no-common-item'
+			// Try to add an existing one from another item, should fail with a 'nocommonitem'
 			array( null, // handle
 				array(), // by id
 				'nnwiki', // already set

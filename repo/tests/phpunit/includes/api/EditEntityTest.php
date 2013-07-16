@@ -208,7 +208,7 @@ class EditEntityTest extends ModifyItemBase {
 			$this->fail( "Adding another entity with the same sitelinks should have failed" );
 		}
 		catch ( \UsageException $e ) {
-			$this->assertTrue( ($e->getCodeString() == 'failed-save'), "Expected failed-save, got unexpected exception: $e" );
+			$this->assertTrue( ($e->getCodeString() == 'failedsave'), "Expected failedsave, got unexpected exception: $e" );
 		}
 	}
 
@@ -250,7 +250,7 @@ class EditEntityTest extends ModifyItemBase {
 		$failingData = array( //@todo: check each of these separately, so we know that each one fails!
 			array( 'pageid' => 999999 ),
 			array( 'ns' => 200 ),
-			array( 'title' => 'does-not-exist' ),
+			array( 'title' => 'does-notexist' ),
 			array( 'lastrevid' => 99999999 ),
 		);
 		foreach ( $failingData as $data ) {
@@ -270,7 +270,7 @@ class EditEntityTest extends ModifyItemBase {
 				$this->fail( "Updating the entity with wrong data should have failed" );
 			}
 			catch ( \UsageException $e ) {
-				$this->assertTrue( ($e->getCodeString() == 'param-illegal'), "Expected param-illegal, got unexpected exception: $e" );
+				$this->assertTrue( ($e->getCodeString() == 'invalidparam'), "Expected invalidparam, got unexpected exception: $e" );
 			}
 		}
 	}
@@ -361,7 +361,7 @@ class EditEntityTest extends ModifyItemBase {
 				array(
 					"id" => 1234567
 				),
-				"not-recognized"
+				"notrecognized"
 			),
 
 			// random stuff is invalid
@@ -369,7 +369,7 @@ class EditEntityTest extends ModifyItemBase {
 				array(
 					"foo" => "xyz"
 				),
-				"not-recognized"
+				"notrecognized"
 			),
 
 			// aliases have to use valid language codes
@@ -379,7 +379,7 @@ class EditEntityTest extends ModifyItemBase {
 						array( "language" => "*", "value" => "foo" ),
 					)
 				),
-				"not-recognized-language"
+				"notrecognizedlanguage"
 			),
 
 			// labels have to use valid language codes
@@ -389,7 +389,7 @@ class EditEntityTest extends ModifyItemBase {
 						array( "language" => "*", "value" => "foo" ),
 					)
 				),
-				"not-recognized-language"
+				"notrecognizedlanguage"
 			),
 
 			// descriptions have to use valid language codes
@@ -399,7 +399,7 @@ class EditEntityTest extends ModifyItemBase {
 						array( "language" => "*", "value" => "foo" ),
 					)
 				),
-				"not-recognized-language"
+				"notrecognizedlanguage"
 			),
 
 			//-----------------------------------------------
@@ -409,7 +409,7 @@ class EditEntityTest extends ModifyItemBase {
 				array(
 					"aliases" => 15
 				),
-				"not-recognized-array"
+				"notrecognizedarray"
 			),
 
 			// labels have to be an array
@@ -417,7 +417,7 @@ class EditEntityTest extends ModifyItemBase {
 				array(
 					"labels" => 15
 				),
-				"not-recognized-array"
+				"notrecognizedarray"
 			),
 
 			// descriptions be an array
@@ -425,7 +425,7 @@ class EditEntityTest extends ModifyItemBase {
 				array(
 					"descriptions" => 15
 				),
-				"not-recognized-array"
+				"notrecognizedarray"
 			),
 
 			//-----------------------------------------------
@@ -433,25 +433,25 @@ class EditEntityTest extends ModifyItemBase {
 			// json must be valid
 			array(
 				'',
-				"invalid-json"
+				"invalidjson"
 			),
 
 			// json must be an object
 			array(
 				'123', // json_decode *will* decode this as an int!
-				"not-recognized-array"
+				"notrecognizedarray"
 			),
 
 			// json must be an object
 			array(
 				'"foo"', // json_decode *will* decode this as a string!
-				"not-recognized-array"
+				"notrecognizedarray"
 			),
 
 			// json must be an object
 			array(
 				'[ "xyz" ]', // json_decode *will* decode this as an indexed array.
-				"not-recognized-string"
+				"notrecognizedstring"
 			),
 		);
 	}

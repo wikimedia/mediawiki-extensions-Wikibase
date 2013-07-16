@@ -58,11 +58,11 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	public function getPossibleErrors() {
 		return array(
-			array( 'code' => 'failed-save', 'info' => $this->msg( 'wikibase-api-failed-save' )->text()  ),
+			array( 'code' => 'failedsave', 'info' => $this->msg( 'wikibase-api-failedsave' )->text()  ),
 			array( 'code' => 'editconflict', 'info' => $this->msg( 'wikibase-api-editconflict' )->text()  ),
 			array( 'code' => 'badtoken', 'info' => $this->msg( 'wikibase-api-badtoken' )->text()  ),
 			array( 'code' => 'nosuchrevid', 'info' => $this->msg( 'wikibase-api-nosuchrevid' )->text()  ),
-			array( 'code' => 'cant-load-entity-content', 'info' => $this->msg( 'wikibase-api-cant-load-entity-content' )->text()  ),
+			array( 'code' => 'cantloadentitycontent', 'info' => $this->msg( 'wikibase-api-cantloadentitycontent' )->text()  ),
 		);
 	}
 
@@ -416,7 +416,7 @@ abstract class ApiWikibase extends \ApiBase {
 		if ( is_null( $content ) ) {
 			$this->dieUsage( "Can't access item content of " .
 				$title->getPrefixedDBkey() .
-				", revision may have been deleted.", 'cant-load-entity-content' );
+				", revision may have been deleted.", 'cantloadentitycontent' );
 		}
 
 		return $content;
@@ -453,7 +453,7 @@ abstract class ApiWikibase extends \ApiBase {
 			} elseif ( ( $editError & EditEntity::EDIT_CONFLICT_ERROR ) > 0 ) {
 				$errorCode = 'editconflict';
 			} elseif ( ( $editError & EditEntity::ANY_ERROR ) > 0 ) {
-				$errorCode = 'failed-save';
+				$errorCode = 'failedsave';
 			}
 		}
 

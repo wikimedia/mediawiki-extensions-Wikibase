@@ -137,10 +137,10 @@ class SnakValidationHelper {
 
 		if ( $this->apiModule instanceof ApiWikibase ) {
 			//TODO: factor this out into a separate helper
-			$this->apiModule->handleStatus( $status, 'invalid-snak-value' );
+			$this->apiModule->handleStatus( $status, 'invalidsnak-value' );
 		} else {
 			$errorText = $status->getWikiText();
-			$this->apiModule->dieUsage( $errorText, 'invalid-snak-value' );
+			$this->apiModule->dieUsage( $errorText, 'invalidsnak-value' );
 		}
 	}
 }

@@ -47,7 +47,7 @@ class SetSiteLink extends ModifyEntity {
 
 		// If we found anything then check if it is of the correct base class
 		if ( !is_null( $entityContent ) && !( $entityContent instanceof ItemContent ) ) {
-			$this->dieUsage( 'The content on the found page is not of correct type', 'wrong-class' );
+			$this->dieUsage( 'The content on the found page is not of correct type', 'wrongclass' );
 		}
 
 		return $entityContent;
@@ -77,7 +77,7 @@ class SetSiteLink extends ModifyEntity {
 
 		if ( !( $entityContent instanceof ItemContent ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "The given entity is not an item", "not-item" );
+			$this->dieUsage( "The given entity is not an item", "notitem" );
 		}
 
 		/* @var Item $item */
@@ -105,14 +105,14 @@ class SetSiteLink extends ModifyEntity {
 
 			if ( $site === false ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( 'The supplied site identifier was not recognized' , 'not-recognized-siteid' );
+				$this->dieUsage( 'The supplied site identifier was not recognized' , 'notrecognizedsiteid' );
 			}
 
 			$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
 
 			if ( $page === false ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+				$this->dieUsage( 'The external client site did not provide page information' , 'noexternalpage' );
 			}
 
 			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
@@ -135,10 +135,10 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
-			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
-			array( 'code' => 'not-recognized-siteid', 'info' => $this->msg( 'wikibase-api-not-recognized-siteid' )->text() ),
-			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
+			array( 'code' => 'wrongclass', 'info' => $this->msg( 'wikibase-api-wrongclass' )->text() ),
+			array( 'code' => 'notitem', 'info' => $this->msg( 'wikibase-api-notitem' )->text() ),
+			array( 'code' => 'notrecognizedsiteid', 'info' => $this->msg( 'wikibase-api-notrecognizedsiteid' )->text() ),
+			array( 'code' => 'noexternalpage', 'info' => $this->msg( 'wikibase-api-noexternalpage' )->text() ),
 		) );
 	}
 

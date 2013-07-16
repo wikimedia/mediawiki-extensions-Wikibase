@@ -114,7 +114,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '"Foo.png"',
 		);
 
-		$argLists[] = array( 'cant-load-entity-content', $params );
+		$argLists[] = array( 'cantloadentitycontent', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -124,7 +124,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '"Foo.png"',
 		);
 
-		$argLists[] = array( 'invalid-snak', $params );
+		$argLists[] = array( 'invalidsnak', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -157,7 +157,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '"Foo.png"',
 		);
 
-		$argLists[] = array( 'param-missing', $params );
+		$argLists[] = array( 'missingparam', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -166,7 +166,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'property' => '-',
 		);
 
-		$argLists[] = array( 'param-missing', $params );
+		$argLists[] = array( 'missingparam', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -176,7 +176,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '{"x":"foo", "y":"bar"}',
 		);
 
-		$argLists[] = array( 'invalid-snak', $params );
+		$argLists[] = array( 'invalidsnak', $params );
 
 		return $argLists;
 	}

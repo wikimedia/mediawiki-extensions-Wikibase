@@ -108,7 +108,7 @@ class RemoveReferencesTest extends \ApiTestCase {
 				$this->makeInvalidRequest(
 					$statement->getGuid(),
 					array( '~=[,,_,,]:3' ),
-					'no-such-reference'
+					'nosuchreference'
 				);
 			}
 			else {
@@ -133,7 +133,7 @@ class RemoveReferencesTest extends \ApiTestCase {
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 
-		$this->makeInvalidRequest( $statementGuid, $hashes, 'no-such-reference' );
+		$this->makeInvalidRequest( $statementGuid, $hashes, 'nosuchreference' );
 	}
 
 	protected function makeInvalidRequest( $statementGuid, array $hashes, $expectedError = null ) {
@@ -174,7 +174,7 @@ class RemoveReferencesTest extends \ApiTestCase {
 		try {
 			$this->doApiRequest( $params );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
+			$this->assertEquals( 'invalidguid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
 			$caughtException = true;
 		}
 

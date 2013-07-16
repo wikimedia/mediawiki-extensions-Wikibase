@@ -95,16 +95,16 @@ class CreateClaim extends ApiWikibase {
 		}
 		catch ( IllegalValueException $ex ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid snak: IllegalValueException', 'invalid-snak' );
+			$this->dieUsage( 'Invalid snak: IllegalValueException', 'invalidsnak' );
 		}
 		catch ( InvalidArgumentException $ex ) {
 			// shouldn't happen, but might.
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
+			$this->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalidsnak' );
 		}
 		catch ( ParseException $parseException ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid guid: ParseException', 'invalid-guid' );
+			$this->dieUsage( 'Invalid guid: ParseException', 'invalidguid' );
 		}
 
 		$this->snakValidation->validateSnak( $snak );
@@ -198,15 +198,15 @@ class CreateClaim extends ApiWikibase {
 	protected function validateParameters( array $params ) {
 		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
 			if ( $params['snaktype'] == 'value' ) {
-				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
+				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'missingparam' );
 			}
 			else {
-				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'param-illegal' );
+				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'invalidparam' );
 			}
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
+			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'missingparam' );
 		}
 	}
 
@@ -225,7 +225,7 @@ class CreateClaim extends ApiWikibase {
 		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity not found, snak not created', 'no-such-entity' );
+			$this->dieUsage( 'Entity not found, snak not created', 'nosuchentity' );
 		}
 
 		return $entityContent;
@@ -251,7 +251,7 @@ class CreateClaim extends ApiWikibase {
 		$entityId = $entityIdParser->parse( $params['property'] );
 
 		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->dieUsage( 'Property expected, got ' . $entityId->getEntityType(), 'invalid-snak' );
+			$this->dieUsage( 'Property expected, got ' . $entityId->getEntityType(), 'invalidsnak' );
 		}
 
 		return $factory->newSnak(
@@ -284,11 +284,11 @@ class CreateClaim extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-snak', 'info' => $this->msg( 'wikibase-api-invalid-snak' )->text() ),
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'invalidsnak', 'info' => $this->msg( 'wikibase-api-invalidsnak' )->text() ),
+			array( 'code' => 'invalidguid', 'info' => $this->msg( 'wikibase-api-invalidguid' )->text() ),
+			array( 'code' => 'missingparam', 'info' => $this->msg( 'wikibase-api-missingparam' )->text() ),
+			array( 'code' => 'invalidparam', 'info' => $this->msg( 'wikibase-api-invalidparam' )->text() ),
+			array( 'code' => 'nosuchentity', 'info' => $this->msg( 'wikibase-api-nosuchentity' )->text() ),
 		) );
 	}
 
