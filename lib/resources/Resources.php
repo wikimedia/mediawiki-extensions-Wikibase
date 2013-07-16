@@ -307,24 +307,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.ui.Tooltip' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.ui.Tooltip.js',
-				'wikibase.ui.Tooltip.Extension.js',
-			),
-			'dependencies' => array(
-				'jquery.nativeEventHandler',
-				'jquery.tipsy',
-				'wikibase',
-				'wikibase.RepoApiError',
-				'wikibase.ui.Base',
-				'jquery.ui.toggler',
-			),
-			'messages' => array(
-				'wikibase-tooltip-error-details'
-			)
-		),
-
 		'wikibase.ui.PropertyEditTool' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.PropertyEditTool.js',
@@ -361,6 +343,7 @@ return call_user_func( function() {
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase',
+				'wikibase.RepoApiError',
 				'wikibase.ui.Base',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
@@ -707,7 +690,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
-				'wikibase.ui.Tooltip',
 				'wikibase.utilities',
 			),
 		),
@@ -741,7 +723,27 @@ return call_user_func( function() {
 				'jquery.wikibase/toolbar/toolbareditgroup.js',
 			),
 			'dependencies' => array(
+				'jquery.ui.widget',
 				'jquery.wikibase.toolbar',
+				'jquery.wikibase.wbtooltip',
+			),
+		),
+
+		'jquery.wikibase.wbtooltip' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.wbtooltip.js',
+			),
+			'styles' => array(
+				'jquery.wikibase/themes/default/jquery.wikibase.wbtooltip.css'
+			),
+			'dependencies' => array(
+				'jquery.tipsy',
+				'jquery.ui.toggler',
+				'jquery.ui.widget',
+				'wikibase.RepoApiError',
+			),
+			'messages' => array(
+				'wikibase-tooltip-error-details',
 			),
 		),
 

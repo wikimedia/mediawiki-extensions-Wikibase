@@ -57,9 +57,9 @@ class EntityPage < RubySelenium
 
   # tooltips & error tooltips
   div(:wbTooltip, :class => "tipsy-inner")
-  div(:wbErrorDiv, :class => "wb-tooltip-error-top-message")
-  div(:wbErrorDetailsDiv, :class => "wb-tooltip-error-details")
-  link(:wbErrorDetailsLink, :class => "wb-tooltip-error-details-link")
+  div(:wbErrorDiv, :class => "wikibase-wbtooltip-error-top-message")
+  div(:wbErrorDetailsDiv, :class => "wikibase-wbtooltip-error-details")
+  link(:wbErrorDetailsLink, :class => "wikibase-wbtooltip-error-details-link")
 
   # mw notifications
   div(:mwNotificationContent, :xpath => "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
