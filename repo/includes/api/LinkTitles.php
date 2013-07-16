@@ -70,7 +70,7 @@ class LinkTitles extends ApiWikibase {
 
 		if ( $fromPage === false ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+			$this->dieUsage( 'The external client site did not provide page information for the from page' , 'no-external-page' );
 		}
 
 		// This is used for testing purposes later
@@ -84,7 +84,7 @@ class LinkTitles extends ApiWikibase {
 
 		if ( $toPage === false ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+			$this->dieUsage( 'The external client site did not provide page information for the to page' , 'no-external-page' );
 		}
 		// This is used for testing purposes later
 		$toId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['tosite'], $toPage );
@@ -133,12 +133,12 @@ class LinkTitles extends ApiWikibase {
 		elseif ( $fromId === $toId ) {
 			// no-op
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Common item detected', 'common-item' );
+			$this->dieUsage( 'Common item detected, sitelinks are both on the same item', 'common-item' );
 		}
 		else {
 			// dissimilar items
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'No common item detected' , 'no-common-item' );
+			$this->dieUsage( 'No common item detected, unable to link titles' , 'no-common-item' );
 		}
 
 		$this->addSiteLinksToResult( $return, 'entity' );
