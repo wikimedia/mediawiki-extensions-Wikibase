@@ -32,7 +32,7 @@ use WikiPage, Title, WikitextContent;
  *
  * @group Wikibase
  * @group WikibaseItem
- * @group ItemMoveTest
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -61,6 +61,14 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		}
 
 		parent::setUp();
+
+		//TODO: remove global TestSites DB setup once we can inject sites sanely.
+		static $hasSites = false;
+
+		if ( !$hasSites ) {
+			\TestSites::insertIntoDb();
+			$hasSites = true;
+		}
 
 		$this->itemContent = ItemContent::newEmpty();
 		$this->itemContent->save( '', null, EDIT_NEW );
