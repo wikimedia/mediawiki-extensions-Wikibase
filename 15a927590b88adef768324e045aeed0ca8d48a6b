@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_669450e1",
+        "filename": "repo/includes/store/sql/AddTermsWeight.sqlite.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:57:53Z",
+      "side": 1,
+      "message": "Oh dear, these indexes are a mess. Can\u0027t do much about that in this change, but see bug 45529",
+      "revId": "15a927590b88adef768324e045aeed0ca8d48a6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_268a58c1",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:57:53Z",
+      "side": 1,
+      "message": "I suggest you take the example of PropertyInfo table and move the updater code there. The file extension stuff is also saner there.",
+      "revId": "15a927590b88adef768324e045aeed0ca8d48a6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_a6be4860",
+        "filename": "repo/includes/store/sql/Wikibase.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:57:53Z",
+      "side": 1,
+      "message": "do we really not need any index over the weight?",
+      "revId": "15a927590b88adef768324e045aeed0ca8d48a6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
