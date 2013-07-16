@@ -51,6 +51,7 @@ return call_user_func( function() {
 				'jquery.ui.dialog',
 				'jquery.ui.suggester',
 				'jquery.wikibase.siteselector',
+				'jquery.wikibase.wbtooltip',
 				'mediawiki.api',
 				'mediawiki.util',
 				'mediawiki.jqueryMsg',
@@ -58,7 +59,6 @@ return call_user_func( function() {
 				'wikibase.sites',
 				'wikibase.RepoApi',
 				'wikibase.RepoApiError',
-				'wikibase.ui.Tooltip'
 			),
 			'messages' => array(
 				'wikibase-linkitem-alreadylinked',
