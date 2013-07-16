@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_ac5f4749",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-16T20:55:38Z",
+      "side": 1,
+      "message": "StringValue? We have IriValue for this.",
+      "revId": "8e160376a85a02d47352b30747dd6e1fd443f21a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
