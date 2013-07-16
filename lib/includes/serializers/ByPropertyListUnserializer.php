@@ -64,6 +64,10 @@ class ByPropertyListUnserializer implements Unserializer {
 		$elements = array();
 
 		foreach ( $serialization as $propertyId => $byPropId ) {
+			if ( !is_array( $byPropId ) ) {
+				throw new MWException( "Element with key '$propertyId' should be an array, found " . gettype( $byPropId ) );
+			}
+
 			foreach ( $byPropId as $serializedElement ) {
 				$element = $this->elementUnserializer->newFromSerialization( $serializedElement );
 				// FIXME: usage of deprecated method getPrefixedId
