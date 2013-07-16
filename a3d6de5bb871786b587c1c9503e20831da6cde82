@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_a6c3e808",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:52:41Z",
+      "side": 1,
+      "message": "Well, at *least* put it into a separate function. It\u0027s similar to the search key construction, so I suppose it\u0027s OK to have it in this class for now, though it\u0027s better to move it elsewhere later.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_6651f060",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:52:41Z",
+      "side": 1,
+      "message": "$entityWeight should not be an array.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_464e74c2",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:52:41Z",
+      "side": 1,
+      "message": "instead of making $entityWeight an array, use array( \u0027term_weight\u0027 \u003d\u003e $entityWeight ) here.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_86c86c24",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:52:41Z",
+      "side": 1,
+      "message": "We generally use a setting for enabling the usage of new database columns. Not sure how expensive fieldExists is... I suppose it\u0027s an additional query/round-trip. At the very least, put this into a member variable that is lazy-initialized and re-used. Ideally, require this to be set in the constructor and take this info from the XyzStore (which will get it from the settings somehow).",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_c6eb8478",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:52:41Z",
+      "side": 1,
+      "message": "Since $entityType is fixed, there\u0027s no need to construct 5000 EntityId objects here. Just use the ints. I\u0027d even use a single array, mapping (int)$id -\u003e weight, and then use ksort to sort it. That\u0027s easier to read, and a lot faster.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_2601b83d",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:52:41Z",
+      "side": 1,
+      "message": "It would be nice if we could supply a minimum weight as an alternative to a fixed limit.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_06fe3c35",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T17:52:41Z",
+      "side": 1,
+      "message": "Turning numeric IDs into EntityID objects could happen here. That will generally be a lot less objects.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
