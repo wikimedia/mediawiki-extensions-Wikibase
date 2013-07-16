@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_c9d1d555",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-16T18:40:46Z",
+      "side": 1,
+      "message": "Drop current registration system (which is bad and not really used anyway), have getStore behave similar to other methods in this class by having it look at the settings and then do all the construction.\n\nThat keeps all evil code in the getStore method, gets rid of evilness in the config, and does not introduce new evilness in the store implementations.",
+      "parentUuid": "29c091be_460154b1",
+      "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_c340965c",
         "filename": "client/includes/store/ClientStore.php",
         "patchSetId": 3
