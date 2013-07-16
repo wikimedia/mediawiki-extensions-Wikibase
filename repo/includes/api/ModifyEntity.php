@@ -73,6 +73,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return \Wikibase\EntityContent Found existing entity
 	 */
 	protected function getEntityContent( array $params ) {
+		wfProfileIn( __METHOD__ );
 		$entityContent = null;
 
 		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
@@ -86,6 +87,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$entityTitle = $entityId ? $entityContentFactory->getTitleForId( $entityId, \Revision::FOR_THIS_USER ) : null;
 
 			if ( is_null( $entityTitle ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
 			}
 		}
@@ -100,6 +102,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			);
 
 			if ( is_null( $entityTitle ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'No entity found matching site link ' . $params['site'] . ':' . $params['title'] , 'no-such-entity-link' );
 			}
 		} else {
@@ -110,9 +113,11 @@ abstract class ModifyEntity extends ApiWikibase {
 		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( is_null( $entityContent ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Can't access item content of " . $entityTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-entity' );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $entityContent;
 	}
 

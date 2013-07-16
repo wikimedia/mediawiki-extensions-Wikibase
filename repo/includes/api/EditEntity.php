@@ -66,7 +66,9 @@ class EditEntity extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
+		wfProfileIn( __METHOD__ );
 		if ( !isset( $params['new'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
 		}
 
@@ -74,8 +76,10 @@ class EditEntity extends ModifyEntity {
 		$this->flags |= EDIT_NEW;
 		$entityContentFactory = EntityContentFactory::singleton();
 		try {
+			wfProfileOut( __METHOD__ );
 			return $entityContentFactory->newFromType( $type );
 		} catch ( InvalidArgumentException $e ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
 	}
@@ -131,6 +135,7 @@ class EditEntity extends ModifyEntity {
 		// if we create a new property, make sure we set the datatype
 		if ( $entityContent->isNew() && $entity->getType() === Property::ENTITY_TYPE ) {
 			if ( !isset( $data['datatype'] ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'No datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
@@ -191,6 +196,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOpLabel[]
 	 */
 	protected function getLabelChangeOps( $labels, Status $status ) {
+		wfProfileIn( __METHOD__ );
 		$labelChangeOps = array();
 
 		if ( !is_array( $labels ) ) {
@@ -212,6 +218,7 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $labelChangeOps;
 	}
 
@@ -224,6 +231,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOpdescription[]
 	 */
 	protected function getDescriptionChangeOps( $descriptions, Status $status ) {
+		wfProfileIn( __METHOD__ );
 		$descriptionChangeOps = array();
 
 		if ( !is_array( $descriptions ) ) {
@@ -245,6 +253,7 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $descriptionChangeOps;
 	}
 
@@ -257,6 +266,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOpAliases[]
 	 */
 	protected function getAliasesChangeOps( $aliases, Status $status ) {
+		wfProfileIn( __METHOD__ );
 		$aliasesChangeOps = array();
 
 		if ( !is_array( $aliases ) ) {
@@ -304,6 +314,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $aliasesChangeOps;
 	}
 
@@ -316,6 +327,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOpSiteLink[]
 	 */
 	protected function getSitelinksChangeOps( $siteLinks, Status $status ) {
+		wfProfileIn( __METHOD__ );
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
@@ -350,6 +362,7 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $siteLinksChangeOps;
 	}
 
@@ -362,6 +375,7 @@ class EditEntity extends ModifyEntity {
 	 * @return Status
 	 */
 	protected function checkDataProperties( $data, $page ) {
+		wfProfileIn( __METHOD__ );
 		$status = Status::newGood();
 
 		$title = null;
@@ -397,10 +411,12 @@ class EditEntity extends ModifyEntity {
 
 		foreach ( $data as $prop => $args ) {
 			if ( !is_string( $prop ) ) { // NOTE: catch json_decode returning an indexed array (list)
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
 			}
 
 			if ( !in_array( $prop, $allowedProps ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "unknown key: $prop", 'not-recognized' );
 			}
 		}
@@ -424,6 +440,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( 'Illegal field used in call: lastrevid', 'param-illegal' );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $status;
 	}
 

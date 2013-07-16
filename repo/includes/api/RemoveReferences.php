@@ -81,6 +81,7 @@ class RemoveReferences extends ApiWikibase {
 	 * @return EntityContent
 	 */
 	protected function getEntityContent() {
+		wfProfileIn( __METHOD__ );
 		$params = $this->extractRequestParams();
 
 		// @todo generalize handling of settings in api modules
@@ -89,6 +90,7 @@ class RemoveReferences extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validateFormat( $params['statement'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -96,11 +98,13 @@ class RemoveReferences extends ApiWikibase {
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 
+		wfProfileOut( __METHOD__ );
 		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
@@ -112,15 +116,18 @@ class RemoveReferences extends ApiWikibase {
 	 * @param string[] $refHashes
 	 */
 	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
+		wfProfileIn( __METHOD__ );
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
 		}
 
@@ -136,11 +143,13 @@ class RemoveReferences extends ApiWikibase {
 			}
 			else {
 				// TODO: does $refHash need to be escaped somehow?
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'The statement does not have any associated reference with the provided reference hash "' . $refHash . '"', 'no-such-reference' );
 			}
 		}
 
 		$entity->setClaims( $claims );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**

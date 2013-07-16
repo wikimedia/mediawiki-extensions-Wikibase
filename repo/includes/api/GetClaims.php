@@ -67,6 +67,7 @@ class GetClaims extends ApiWikibase {
 		$entity = $entityId ? $this->getEntity( $entityId ) : null;
 
 		if ( !$entity ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity' );
 		}
 
@@ -117,12 +118,15 @@ class GetClaims extends ApiWikibase {
 	 * @return Entity
 	 */
 	protected function getEntity( EntityId $id ) {
+		wfProfileIn( __METHOD__ );
 		$content = EntityContentFactory::singleton()->getFromId( $id );
 
 		if ( $content === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'The specified entity does not exist, so it\'s claims cannot be obtained', 'no-such-entity' );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $content->getEntity();
 	}
 
@@ -135,6 +139,7 @@ class GetClaims extends ApiWikibase {
 	 * @return Claim[]
 	 */
 	protected function getClaims( Entity $entity, $claimGuid ) {
+		wfProfileIn( __METHOD__ );
 		$claimsList = new Claims( $entity->getClaims() );
 
 		if ( $claimGuid !== null ) {
@@ -162,6 +167,7 @@ class GetClaims extends ApiWikibase {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $claims;
 	}
 
@@ -176,9 +182,11 @@ class GetClaims extends ApiWikibase {
 	 * Second element is either null or a claim GUID
 	 */
 	protected function getIdentifiers() {
+		wfProfileIn( __METHOD__ );
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Either the entity parameter or the key parameter need to be set', 'param-missing' );
 		}
 
@@ -190,6 +198,7 @@ class GetClaims extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( isset( $params['claim'] ) && $claimGuidValidator->validateFormat( $params['claim'] ) === false ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -197,6 +206,7 @@ class GetClaims extends ApiWikibase {
 			$entityId = Entity::getIdFromClaimGuid( $params['claim'] );
 
 			if ( $entityId !== $params['entity'] ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
 			}
 		}
@@ -208,6 +218,7 @@ class GetClaims extends ApiWikibase {
 			$claimGuid = $params['claim'];
 		}
 
+		wfProfileOut( __METHOD__ );
 		return array( $entityId, $claimGuid );
 	}
 
