@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_09364de6",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T18:11:34Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this call parent::validateParameters() ?\nIf it should not, please put a comment here explaining why.",
+      "revId": "a59e4350f98fbbb16858d66e4140f3a55331a7f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
