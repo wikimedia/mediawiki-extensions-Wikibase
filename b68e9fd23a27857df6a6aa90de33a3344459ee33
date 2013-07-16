@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "29c091be_890a3dd2",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-16T18:51:39Z",
+      "side": 1,
+      "message": "s p a c e s",
+      "revId": "b68e9fd23a27857df6a6aa90de33a3344459ee33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_897b5d89",
         "filename": "repo/includes/api/GetEntities.php",
         "patchSetId": 1
@@ -13,6 +30,23 @@
       "writtenOn": "2013-07-16T18:16:01Z",
       "side": 1,
       "message": "shouldn\u0027t this call parent::validateParameters()? If not, please put a comment here explaining why not.",
+      "revId": "b68e9fd23a27857df6a6aa90de33a3344459ee33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_690421c3",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-16T18:51:39Z",
+      "side": 1,
+      "message": "Please use !empty (like I do in https://gerrit.wikimedia.org/r/71543)",
       "revId": "b68e9fd23a27857df6a6aa90de33a3344459ee33",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
