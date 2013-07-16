@@ -48,7 +48,7 @@ use Wikibase\Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class PermissionsTest extends ModifyItemBase {
+class PermissionsTest extends ModifyEntityTestBase {
 
 	protected $permissions;
 	protected $old_user;
@@ -170,7 +170,7 @@ class PermissionsTest extends ModifyItemBase {
 	 */
 	function testGetEntities( $permissions, $expectedError ) {
 		$params = array(
-			'ids' => $this->getItemId( "Oslo" ),
+			'ids' => $this->getEntityId( "Oslo" ),
 		);
 
 		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
@@ -241,7 +241,7 @@ class PermissionsTest extends ModifyItemBase {
 		$dbw->delete( 'wb_items_per_site', '*', __METHOD__ );
 
 		$params = array(
-			'id' => $this->getItemId( "Oslo" ),
+			'id' => $this->getEntityId( "Oslo" ),
 			'linksite' => 'enwiki',
 			'linktitle' => 'Oslo',
 		);
@@ -268,7 +268,7 @@ class PermissionsTest extends ModifyItemBase {
 	 */
 	function testSetLabel( $permissions, $expectedError ) {
 		$params = array(
-			'id' => $this->getItemId( "Oslo" ),
+			'id' => $this->getEntityId( "Oslo" ),
 			'language' => 'de',
 			'value' => 'Oslo',
 		);
@@ -295,7 +295,7 @@ class PermissionsTest extends ModifyItemBase {
 	 */
 	function testSetDescription( $permissions, $expectedError ) {
 		$params = array(
-			'id' => $this->getItemId( "Oslo" ),
+			'id' => $this->getEntityId( "Oslo" ),
 			'language' => 'en',
 			'value' => 'Capitol of Norway',
 		);

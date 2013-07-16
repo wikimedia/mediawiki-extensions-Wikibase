@@ -46,7 +46,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class SetSiteLinkTest extends ModifyItemBase {
+class SetSiteLinkTest extends ModifyEntityTestBase {
 
 	public function setup() {
 		parent::setup();
@@ -60,7 +60,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 	}
 
 	public function testSetLiteLinkWithNoId( ) {
-		$token = $this->getItemToken();
+		$token = $this->getEditToken();
 
 		$req = array(
 			'action' => 'wbsetsitelink',
@@ -79,7 +79,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 	}
 
 	public function testSetLiteLinkWithBadId( ) {
-		$token = $this->getItemToken();
+		$token = $this->getEditToken();
 
 		$req = array(
 			'action' => 'wbsetsitelink',
@@ -99,7 +99,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 	}
 
 	public function testSetLiteLinkWithBadSite( ) {
-		$token = $this->getItemToken();
+		$token = $this->getEditToken();
 
 		$req = array(
 			'action' => 'wbsetsitelink',
@@ -120,7 +120,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 	}
 
 	public function testSetLiteLinkWithBadTitle( ) {
-		$token = $this->getItemToken();
+		$token = $this->getEditToken();
 
 		$req = array(
 			'action' => 'wbsetsitelink',
@@ -148,7 +148,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 
 		$req = array(
 			'action' => 'wbsetsitelink',
-			'id' => $this->getItemId( "Berlin" ),
+			'id' => $this->getEntityId( "Berlin" ),
 			'linksite' => "enwiki",
 			'linktitle' => "testSetLiteLinkWithNoToken",
 		);
@@ -195,10 +195,10 @@ class SetSiteLinkTest extends ModifyItemBase {
 	 * @dataProvider provideSetLiteLink
 	 */
 	public function testSetLiteLink( $handle, $item_spec, $linksite, $linktitle, $expectedTitle = null, $expectedFailure = null ) {
-		$token = $this->getItemToken();
-		$id = $this->getItemId( $handle );
+		$token = $this->getEditToken();
+		$id = $this->getEntityId( $handle );
 
-		$this->resetItem( $handle ); //nasty. we shouldn't need to do this. But apparently some other test spills bad state.
+		$this->resetEntity( $handle ); //nasty. we shouldn't need to do this. But apparently some other test spills bad state.
 
 		if ( array_key_exists( 'id', $item_spec ) && empty( $item_spec['id'] ) ) {
 			//NOTE: data provider is called before setUp and thus can't determine IDs.
@@ -261,7 +261,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 		}
 
 		// check the item in the database -------------------------------
-		$item = $this->loadItem( $id );
+		$item = $this->loadEntity( $id );
 		$links = self::flattenArray( $item['sitelinks'], 'site', 'title' );
 
 		if ( $linktitle === '' ) {
@@ -275,11 +275,11 @@ class SetSiteLinkTest extends ModifyItemBase {
 		}
 
 		// clean up -------------------------------
-		$this->resetItem( $handle );
+		$this->resetEntity( $handle );
 	}
 
 	public function testSetLiteLinkWithBadTargetSite( ) {
-		$token = $this->getItemToken();
+		$token = $this->getEditToken();
 
 		$req = array(
 			'action' => 'wbsetsitelink',
