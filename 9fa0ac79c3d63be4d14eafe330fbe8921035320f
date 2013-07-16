@@ -52,6 +52,24 @@
       "revId": "9fa0ac79c3d63be4d14eafe330fbe8921035320f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_a6b488d3",
+        "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T16:46:33Z",
+      "side": 1,
+      "message": "I think the description is accurate :)",
+      "parentUuid": "29c091be_66aa9074",
+      "revId": "9fa0ac79c3d63be4d14eafe330fbe8921035320f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
