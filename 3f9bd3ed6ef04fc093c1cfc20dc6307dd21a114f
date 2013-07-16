@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_89299d8d",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T18:10:23Z",
+      "side": 1,
+      "message": "please change \"key parameter\" to \"claim parameter\"",
+      "revId": "3f9bd3ed6ef04fc093c1cfc20dc6307dd21a114f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
