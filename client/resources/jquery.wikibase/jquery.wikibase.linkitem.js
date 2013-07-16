@@ -59,44 +59,43 @@ $.widget( 'wikibase.linkitem', {
 	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
-		var $dialogSpinner = $.createSpinner(),
-			$linkItemLink = this.element;
+		var self = this,
+			$dialogSpinner = $.createSpinner();
 
-		$linkItemLink
-			.hide()
-			.after( $dialogSpinner );
+		this.element
+		.hide()
+		.after( $dialogSpinner );
 
 		this.repoApi.get( {
 			action: 'query',
 			meta: 'userinfo'
 		} )
-		.done(
-			$.proxy( function( data ) {
-				$dialogSpinner.remove();
+		.done( function( data ) {
+			$dialogSpinner.remove();
 
-				if ( data.query.userinfo.anon !== undefined ) {
-					// User isn't logged into the repo
-					this._notLoggedin();
-					return;
-				}
+			if ( data.query.userinfo.anon !== undefined ) {
+				// User isn't logged into the repo
+				self._notLoggedin();
+				return;
+			}
 
-				this._createDialog();
-			}, this )
-		)
-		.fail(
-			$.proxy( function() {
-				$dialogSpinner.remove();
-				$linkItemLink.show();
+			self._createDialog();
+		} )
+		.fail( function() {
+			$dialogSpinner.remove();
+			self.element.show();
 
-				var tooltip = new wb.ui.Tooltip( $linkItemLink, {}, mw.msg( 'wikibase-error-unexpected' ), { gravity: 'w' } );
+			self.element.wbtooltip( {
+				content: mw.msg( 'wikibase-error-unexpected' ),
+				gravity: 'w'
+			} );
 
-				tooltip.show();
-				$linkItemLink.one( 'click', function() {
-					// Remove the tooltip by the time the user tries it again
-					tooltip.destroy();
-				} );
-			}, this )
-		);
+			self.element.data( 'wbtooltip' ).show();
+			self.element.one( 'click.' + self.widgetName, function() {
+				// Remove the tooltip by the time the user clicks the link again.
+				self.element.data( 'wbtooltip' ).destroy();
+			} );
+		} );
 	},
 
 	/**
@@ -402,8 +401,6 @@ $.widget( 'wikibase.linkitem', {
 
 	/**
 	 * Get the entity for the current page in case there is one
-	 *
-	 * @param {jQuery.promise}
 	 */
 	getEntityForCurrentPage: function() {
 		return this.repoApi.getEntitiesByPage(
@@ -598,15 +595,12 @@ $.widget( 'wikibase.linkitem', {
 					} else {
 						// The current page already is linked with an item which is linked with other pages... this probably some kind of edit conflict.
 						// Show an error and let the user purge the page
-						var tooltip = new wb.ui.Tooltip(
-							this.$goButton,
-							{},
-							mw.msg( 'wikibase-linkitem-failure' ),
-							{ gravity: 'nw' }
-						);
+						this.$goButton.wbtooltip( {
+							content: mw.msg( 'wikibase-linkitem-failure' )
+						} );
 
 						this._removeSpinner();
-						tooltip.show();
+						this.$goButton.data( 'wbtooltip' ).show();
 
 						// Replace the button with one asking to close the dialog and reload the current page
 						this.$goButton
@@ -694,43 +688,40 @@ $.widget( 'wikibase.linkitem', {
 	 * @param {object} errorInfo
 	 */
 	_onError: function( errorCode, errorInfo ) {
-		var $elem, tooltip, error;
-		if ( $( '#wbclient-linkItem-page' ).length ) {
-			$elem = $( '#wbclient-linkItem-page' );
-		} else {
+		var error = ( errorInfo )
+			? wb.RepoApiError.newFromApiResponse( errorCode, errorInfo )
+			: errorCode;
+
+		var $elem = $( '#wbclient-linkItem-page' );
+
+		if ( $elem.length === 0 ) {
 			$elem = $( '#wbclient-linkItem-siteLinks' );
 		}
 
-		if ( errorInfo ) {
-			error = wb.RepoApiError.newFromApiResponse( errorCode, errorInfo );
-		} else {
-			error = errorCode;
-		}
-
-		tooltip = new wb.ui.Tooltip( $elem, {}, error, { gravity: 'nw' } );
+		$elem.wbtooltip( { content: error } );
 
 		this._removeSpinner();
-		tooltip.show();
+		$elem.data( 'wbtooltip' ).show();
 
 		// Remove the tooltip if the user clicks onto the dialog trying to correct the input
 		// Also remove the tooltip in case the dialog is getting closed
 		this.$dialog.on( 'dialogclose click', function() {
-			tooltip.destroy();
+			$elem.data( 'wbtooltip' ).destroy();
 		} );
 	},
 
 	/**
 	 * Let the user know that the site given is invalid
-	 *
 	 */
 	_invalidSiteGiven: function() {
-		var $linkItemSite = $( '#wbclient-linkItem-Site' ),
-			tooltip = new wb.ui.Tooltip( $linkItemSite, {}, mw.msg( 'wikibase-linkitem-invalidsite' ) );
+		var $linkItemSite = $( '#wbclient-linkItem-Site' );
 
-		tooltip.show();
+		$linkItemSite.wbtooltip( { content: mw.msg( 'wikibase-linkitem-invalidsite' ) } );
+
+		$linkItemSite.data( 'wbtooltip' ).show();
 		$linkItemSite.one( 'focus', function() {
 			// Remove the tooltip by the time the user tries to correct the input
-			tooltip.destroy();
+			$linkItemSite.data( 'wbtooltip' ).destroy();
 		} );
 	},
 
