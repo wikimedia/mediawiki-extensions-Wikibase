@@ -59,44 +59,43 @@ $.widget( 'wikibase.linkitem', {
 	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
-		var $dialogSpinner = $.createSpinner(),
-			$linkItemLink = this.element;
+		var self = this,
+			$dialogSpinner = $.createSpinner();
 
-		$linkItemLink
-			.hide()
-			.after( $dialogSpinner );
+		this.element
+		.hide()
+		.after( $dialogSpinner );
 
 		this.repoApi.get( {
 			action: 'query',
 			meta: 'userinfo'
 		} )
-		.done(
-			$.proxy( function( data ) {
-				$dialogSpinner.remove();
+		.done( function( data ) {
+			$dialogSpinner.remove();
 
-				if ( data.query.userinfo.anon !== undefined ) {
-					// User isn't logged into the repo
-					this._notLoggedin();
-					return;
-				}
+			if ( data.query.userinfo.anon !== undefined ) {
+				// User isn't logged into the repo
+				self._notLoggedin();
+				return;
+			}
 
-				this._createDialog();
-			}, this )
-		)
-		.fail(
-			$.proxy( function() {
-				$dialogSpinner.remove();
-				$linkItemLink.show();
+			self._createDialog();
+		} )
+		.fail( function() {
+			$dialogSpinner.remove();
+			self.element.show();
 
-				var tooltip = new wb.ui.Tooltip( $linkItemLink, {}, mw.msg( 'wikibase-error-unexpected' ), { gravity: 'w' } );
+			self.element.wbtooltip( {
+				content: mw.msg( 'wikibase-error-unexpected' ),
+				gravity: 'w'
+			} );
 
-				tooltip.show();
-				$linkItemLink.one( 'click', function() {
-					// Remove the tooltip by the time the user tries it again
-					tooltip.destroy();
-				} );
-			}, this )
-		);
+			self.element.data( 'wbtooltip' ).show();
+			self.element.one( 'click.' + self.widgetName, function() {
+				// Remove the tooltip by the time the user clicks the link again.
+				self.element.data( 'wbtooltip' ).destroy();
+			} );
+		} );
 	},
 
 	/**
@@ -577,15 +576,12 @@ $.widget( 'wikibase.linkitem', {
 					} else {
 						// The current page already is linked with an item which is linked with other pages... this probably some kind of edit conflict.
 						// Show an error and let the user purge the page
-						var tooltip = new wb.ui.Tooltip(
-							this.$goButton,
-							{},
-							mw.msg( 'wikibase-linkitem-failure' ),
-							{ gravity: 'nw' }
-						);
+						this.$goButton.wbtooltip( {
+							content: mw.msg( 'wikibase-linkitem-failure' )
+						} );
 
 						this._removeSpinner();
-						tooltip.show();
+						this.$goButton.data( 'wbtooltip' ).show();
 
 						// Replace the button with one asking to close the dialog and reload the current page
 						this.$goButton
