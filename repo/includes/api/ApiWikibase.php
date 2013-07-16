@@ -130,7 +130,7 @@ abstract class ApiWikibase extends \ApiBase {
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
 		$options = new MultiLangSerializationOptions();
 		$options->setUseKeys( $this->getUsekeys() );
-		$aliasSerializer = new AliasSerializer();
+		$aliasSerializer = new AliasSerializer( $options );
 		$value = $aliasSerializer->getSerialized( $aliases );
 
 		if ( $value !== array() ) {
@@ -266,7 +266,7 @@ abstract class ApiWikibase extends \ApiBase {
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
 		$options = new MultiLangSerializationOptions();
 		$options->setUseKeys( $this->getUsekeys() );
-		$descriptionSerializer = new DescriptionSerializer();
+		$descriptionSerializer = new DescriptionSerializer( $options );
 
 		$value = $descriptionSerializer->getSerialized( $descriptions );
 
