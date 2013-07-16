@@ -77,6 +77,7 @@ class SetClaim extends ApiWikibase {
 	 * @since 0.4
 	 */
 	public function execute() {
+		wfProfileIn( __METHOD__ );
 		$claim = $this->getClaimFromRequest();
 
 		$this->snakValidation->validateClaimSnaks( $claim );
@@ -120,6 +121,7 @@ class SetClaim extends ApiWikibase {
 		}
 
 		$this->outputClaim( $claim );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -128,6 +130,7 @@ class SetClaim extends ApiWikibase {
 	 * @return Claim
 	 */
 	protected function getClaimFromRequest() {
+		wfProfileIn( __METHOD__ );
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 
@@ -137,8 +140,10 @@ class SetClaim extends ApiWikibase {
 			$claim = $unserializer->newFromSerialization( \FormatJson::decode( $params['claim'], true ) );
 
 			assert( $claim instanceof Claim );
+			wfProfileOut( __METHOD__ );
 			return $claim;
 		} catch ( IllegalValueException $illegalValueException ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
 		}
 	}

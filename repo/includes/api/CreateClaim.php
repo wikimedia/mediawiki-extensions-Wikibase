@@ -216,6 +216,7 @@ class CreateClaim extends ApiWikibase {
 	 * @return EntityContent
 	 */
 	protected function getEntityContent() {
+		wfProfileIn( __METHOD__ );
 		$params = $this->extractRequestParams();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -225,9 +226,11 @@ class CreateClaim extends ApiWikibase {
 		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( $entityContent === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Entity not found, snak not created', 'no-such-entity' );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $entityContent;
 	}
 
@@ -251,6 +254,7 @@ class CreateClaim extends ApiWikibase {
 		$entityId = $entityIdParser->parse( $params['property'] );
 
 		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Property expected, got ' . $entityId->getEntityType(), 'invalid-snak' );
 		}
 

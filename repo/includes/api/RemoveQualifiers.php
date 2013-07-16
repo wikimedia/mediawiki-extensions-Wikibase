@@ -71,6 +71,7 @@ class RemoveQualifiers extends ApiWikibase {
 	 * @return \Wikibase\EntityContent
 	 */
 	protected function getEntityContent() {
+		wfProfileIn( __METHOD__ );
 		$params = $this->extractRequestParams();
 
 		// @todo generalize handling of settings in api modules
@@ -79,6 +80,7 @@ class RemoveQualifiers extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validateFormat( $params['claim'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -86,11 +88,13 @@ class RemoveQualifiers extends ApiWikibase {
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 
+		wfProfileOut( __METHOD__ );
 		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
@@ -100,6 +104,7 @@ class RemoveQualifiers extends ApiWikibase {
 	 * @param \Wikibase\Entity $entity
 	 */
 	protected function doRemoveQualifiers( Entity $entity ) {
+		wfProfileIn( __METHOD__ );
 		$params = $this->extractRequestParams();
 
 		$claim = $this->getClaim( $entity, $params['claim'] );
@@ -109,11 +114,13 @@ class RemoveQualifiers extends ApiWikibase {
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
 				// TODO: does $qualifierHash need to be escaped?
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'no-such-qualifier' );
 			}
 
 			$qualifiers->removeSnakHash( $qualifierHash );
 		}
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -125,9 +132,11 @@ class RemoveQualifiers extends ApiWikibase {
 	 * @return Claim
 	 */
 	protected function getClaim( Entity $entity, $claimGuid ) {
+		wfProfileIn( __METHOD__ );
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find a claim with that guid', 'no-such-claim' );
 		}
 
@@ -135,6 +144,7 @@ class RemoveQualifiers extends ApiWikibase {
 
 		assert( $claim instanceof Claim );
 
+		wfProfileOut( __METHOD__ );
 		return $claim;
 	}
 
