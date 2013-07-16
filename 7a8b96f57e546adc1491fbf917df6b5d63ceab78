@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "29c091be_060d9c36",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-16T14:51:06Z",
+      "side": 1,
+      "message": "The issue here is that this API does not provide control over the object lifecycle and thus does not allow injecting the dependencies the objects might need. I\u0027d like to see that tackled rather then going with an approach like this which solves one particular effect of this shortcoming for some class we have now. It however introduces stuff that might well not be sensible for other implementations. And it certainly will fall short for others.",
+      "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_c340965c",
         "filename": "client/includes/store/ClientStore.php",
         "patchSetId": 3
@@ -13,6 +30,23 @@
       "writtenOn": "2013-07-16T14:44:27Z",
       "side": 1,
       "message": "You cannot have static methods in interfaces",
+      "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_c319b684",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-16T14:51:06Z",
+      "side": 1,
+      "message": "??",
       "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
