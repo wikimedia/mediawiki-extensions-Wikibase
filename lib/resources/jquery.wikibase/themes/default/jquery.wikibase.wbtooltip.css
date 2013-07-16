@@ -1,0 +1,60 @@
+/**
+ * @since 0.4
+ * @file
+ * @ingroup WikibaseLib
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-wbtooltip-tip.tipsy-ne,
+.wikibase-wbtooltip-tip.tipsy-nw {
+	padding-top: 12px;
+}
+.wikibase-wbtooltip-tip .tipsy-arrow {
+	/* @embed */ background-image: url(./images/tipsy.png);
+}
+.wikibase-wbtooltip-tip.tipsy-ne .tipsy-arrow,
+.wikibase-wbtooltip-tip.tipsy-nw .tipsy-arrow {
+	background-position: -13px -1px;
+}
+.wikibase-wbtooltip-tip.tipsy-se .tipsy-arrow,
+.wikibase-wbtooltip-tip.tipsy-sw .tipsy-arrow {
+	background-position: -14px -26px;
+}
+
+.wikibase-wbtooltip-tip .tipsy-inner {
+	overflow-y: auto;
+}
+
+/***** ERROR TOOLTIP *****/
+
+.wikibase-wbtooltip-tip.wb-error .tipsy-arrow {
+	/* @embed */ background-image: url(./images/tipsy-error.png)
+}
+
+.wikibase-wbtooltip-tip.wb-error .tipsy-inner {
+	background-color: #FFDFC9;
+	/* on some host-client combinations the background image is propagated to the inner tooltip
+	container creating a background pattern; this broken behavior is suppressed by explicitly
+	setting the background image to none; this, however, has to be done in a separate definition
+	after setting the background colour */
+	background-image: none;
+	border-color: #B27631;
+}
+
+.wikibase-wbtooltip-tip .wikibase-wbtooltip-error-top-message {
+	border-bottom:1px dotted #B27631;
+	padding-bottom:1em;
+}
+
+.wikibase-wbtooltip-tip .wikibase-wbtooltip-error-details {
+	margin-top: .2em;
+	margin-bottom: .5em;
+	font-family: 'Courier New', Courier, 'Andale Mono', serif;
+	background-color: #FFF2E4;
+	padding: .2em;
+	border-radius: 5px;
+	font-size: .9em;
+}
+
+/***** /ERROR TOOLTIP *****/

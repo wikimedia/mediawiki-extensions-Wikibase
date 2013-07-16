@@ -96,7 +96,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
-				'tests/qunit/wikibase.ui.Tooltip.tests.js',
 
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.GuidGenerator.tests.js',
@@ -136,6 +135,17 @@ final class LibHooks {
 				'jquery.nativeEventHandler',
 				'jquery.client',
 				'jquery.eachchange',
+			),
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/lib',
+		);
+
+		$testModules['qunit']['jquery.wikibase.wbtooltip.tests'] = array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.wbtooltip.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.wbtooltip',
 			),
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'Wikibase/lib',
