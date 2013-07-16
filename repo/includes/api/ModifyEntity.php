@@ -86,6 +86,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$entityTitle = $entityId ? $entityContentFactory->getTitleForId( $entityId, \Revision::FOR_THIS_USER ) : null;
 
 			if ( is_null( $entityTitle ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
 			}
 		}
@@ -100,6 +101,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			);
 
 			if ( is_null( $entityTitle ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'No entity found matching site link ' . $params['site'] . ':' . $params['title'] , 'no-such-entity-link' );
 			}
 		} else {
@@ -110,6 +112,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( is_null( $entityContent ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Can't access item content of " . $entityTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-entity' );
 		}
 
@@ -127,6 +130,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return \Wikibase\EntityContent Newly created entity
 	 */
 	protected function createEntity( array $params ) {
+		wfProfileOut( __METHOD__ );
 		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 	}
 
@@ -165,6 +169,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page' , 'param-illegal' );
 		}
 	}

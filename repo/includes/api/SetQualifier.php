@@ -117,15 +117,18 @@ class SetQualifier extends ApiWikibase {
 		//@todo addshore all of these errors should be more general
 		if ( !isset( $params['snakhash'] ) ) {
 			if ( !isset( $params['snaktype'] ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'When creating a new qualifier (ie when not providing a snakhash) a snaktype should be specified', 'param-missing' );
 			}
 
 			if ( !isset( $params['property'] ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'When creating a new qualifier (ie when not providing a snakhash) a property should be specified', 'param-missing' );
 			}
 		}
 
 		if ( isset( $params['snaktype'] ) && $params['snaktype'] === 'value' && !isset( $params['value'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'When setting a qualifier that is a PropertyValueSnak, the value needs to be provided', 'param-missing' );
 		}
 	}
@@ -144,6 +147,7 @@ class SetQualifier extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -151,6 +155,7 @@ class SetQualifier extends ApiWikibase {
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find the entity' , 'no-such-entity' );
 		}
 
@@ -174,6 +179,7 @@ class SetQualifier extends ApiWikibase {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
 		}
 
@@ -214,6 +220,7 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function updateQualifier( Snaks $qualifiers, $snakHash ) {
 		if ( !$qualifiers->hasSnakHash( $snakHash ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find the qualifier' , 'no-such-qualifier' );
 		}
 
@@ -248,6 +255,7 @@ class SetQualifier extends ApiWikibase {
 		} catch ( IllegalValueException $illegalValueException ) {
 			//Note: This handles failures during snak instantiation, not validation.
 			//      Validation errors are handled by the validation helper.
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-snak' );
 		}
 
@@ -261,11 +269,13 @@ class SetQualifier extends ApiWikibase {
 			$entityId = $entityIdParser->parse( $prefixedId );
 
 			if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'Not a property: ' . $prefixedId, $errorCode );
 				return null;
 			}
 		}
 		catch ( ParseException $parseException ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $parseException->getMessage(), $errorCode );
 			return null;
 		}
@@ -280,6 +290,7 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function newSnak( EntityId $propertyId, $snakType, $valueData ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Property expected, got " . $propertyId->getEntityType(), 'invalid-snak' );
 		}
 
@@ -317,6 +328,7 @@ class SetQualifier extends ApiWikibase {
 
 			return $qualifiers->addSnak( $newQualifier );
 		} catch ( IllegalValueException $illegalValueException ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-snak' );
 		}
 

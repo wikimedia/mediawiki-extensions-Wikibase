@@ -49,6 +49,7 @@ class SetAliases extends ModifyEntity {
 		parent::validateParameters( $params );
 
 		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) ) xor isset( $params['set'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid-list' , 'invalid-list' );
 		}
 	}
@@ -57,6 +58,7 @@ class SetAliases extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
+		wfProfileOut( __METHOD__ );
 		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 	}
 

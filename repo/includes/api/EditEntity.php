@@ -67,6 +67,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function createEntity( array $params ) {
 		if ( !isset( $params['new'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
 		}
 
@@ -76,6 +77,7 @@ class EditEntity extends ModifyEntity {
 		try {
 			return $entityContentFactory->newFromType( $type );
 		} catch ( InvalidArgumentException $e ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
 	}
@@ -86,12 +88,15 @@ class EditEntity extends ModifyEntity {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['data'] ) OR  isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item', 'param-missing' );
 		}
 		if ( isset( $params['id'] ) && isset( $params['new'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request", 'param-illegal' );
 		}
 		if ( !isset( $params['id'] ) && !isset( $params['new'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
 		}
 	}
@@ -131,6 +136,7 @@ class EditEntity extends ModifyEntity {
 		// if we create a new property, make sure we set the datatype
 		if ( $entityContent->isNew() && $entity->getType() === Property::ENTITY_TYPE ) {
 			if ( !isset( $data['datatype'] ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'No datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
@@ -397,10 +403,12 @@ class EditEntity extends ModifyEntity {
 
 		foreach ( $data as $prop => $args ) {
 			if ( !is_string( $prop ) ) { // NOTE: catch json_decode returning an indexed array (list)
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
 			}
 
 			if ( !in_array( $prop, $allowedProps ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "unknown key: $prop", 'not-recognized' );
 			}
 		}
@@ -538,20 +546,25 @@ class EditEntity extends ModifyEntity {
 	public function checkMultilangArgs( $arg, $langCode ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
 		}
 		if ( !is_string( $arg['language'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		if ( !is_numeric( $langCode ) ) {
 			if ( $langCode !== $arg['language'] ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "inconsistent language: {$langCode} is not equal to {$arg['language']}", 'inconsistent-language' );
 			}
 		}
 		if ( isset( $this->validLanguageCodes ) && !array_key_exists( $arg['language'], $this->validLanguageCodes ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "unknown language: {$arg['language']}", 'not-recognized-language' );
 		}
 		if ( !is_string( $arg['value'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		return $status;
@@ -569,20 +582,25 @@ class EditEntity extends ModifyEntity {
 	public function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
 		}
 		if ( !is_string( $arg['site'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		if ( !is_numeric( $siteCode ) ) {
 			if ( $siteCode !== $arg['site'] ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "inconsistent site: {$siteCode} is not equal to {$arg['site']}", 'inconsistent-site' );
 			}
 		}
 		if ( isset( $sites ) && !$sites->hasSite( $arg['site'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "unknown site: {$arg['site']}", 'not-recognized-site' );
 		}
 		if ( !is_string( $arg['title'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		return $status;

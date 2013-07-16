@@ -47,6 +47,7 @@ class SetSiteLink extends ModifyEntity {
 
 		// If we found anything then check if it is of the correct base class
 		if ( !is_null( $entityContent ) && !( $entityContent instanceof ItemContent ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'The content on the found page is not of correct type', 'wrong-class' );
 		}
 

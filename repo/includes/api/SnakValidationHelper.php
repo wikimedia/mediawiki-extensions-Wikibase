@@ -140,6 +140,7 @@ class SnakValidationHelper {
 			$this->apiModule->handleStatus( $status, 'invalid-snak-value' );
 		} else {
 			$errorText = $status->getWikiText();
+			wfProfileOut( __METHOD__ );
 			$this->apiModule->dieUsage( $errorText, 'invalid-snak-value' );
 		}
 	}

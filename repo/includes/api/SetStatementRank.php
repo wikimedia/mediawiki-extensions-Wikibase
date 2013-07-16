@@ -92,6 +92,7 @@ class SetStatementRank extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -99,6 +100,7 @@ class SetStatementRank extends ApiWikibase {
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 		}
 
@@ -120,12 +122,14 @@ class SetStatementRank extends ApiWikibase {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find the statement' , 'no-such-statement' );
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'The referenced claim is not a statement and thus does not have a rank' , 'not-statement' );
 		}
 

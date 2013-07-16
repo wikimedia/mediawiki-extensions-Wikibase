@@ -402,10 +402,12 @@ abstract class ApiWikibase extends \ApiBase {
 			$revision = \Revision::newFromId( $revId );
 
 			if ( !$revision ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "Revision not found: $revId", 'nosuchrevid' );
 			}
 
 			if ( $revision->getPage() != $title->getArticleID() ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "Revision $revId does not belong to " .
 					$title->getPrefixedDBkey(), 'nosuchrevid' );
 			}
@@ -414,6 +416,7 @@ abstract class ApiWikibase extends \ApiBase {
 		}
 
 		if ( is_null( $content ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Can't access item content of " .
 				$title->getPrefixedDBkey() .
 				", revision may have been deleted.", 'cant-load-entity-content' );

@@ -159,6 +159,7 @@ class RemoveClaims extends ApiWikibase {
 
 				$guids[$entityId][] = $guid;
 			} else {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 			}
 		}
@@ -218,6 +219,7 @@ class RemoveClaims extends ApiWikibase {
 			$entityId = EntityId::newFromPrefixedId( $id );
 
 			if ( $entityId === null ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'Invalid entity id provided', 'no-such-entity' );
 			}
 
@@ -226,6 +228,7 @@ class RemoveClaims extends ApiWikibase {
 			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 			if ( $content === null ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'no-such-entity' );
 			}
 

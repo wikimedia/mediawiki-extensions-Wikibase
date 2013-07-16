@@ -110,6 +110,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -117,6 +118,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'No such entity' , 'no-such-entity' );
 		}
 
@@ -142,6 +144,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $guid ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'No such claim' , 'no-such-claim' );
 		}
 
@@ -156,6 +159,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			$content = EntityContentFactory::singleton()->getFromId( $claim->getMainSnak()->getPropertyId() );
 
 			if ( $content === null ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined', 'no-such-property' );
 			}
 
@@ -174,6 +178,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 
 			return $claim;
 		} catch ( IllegalValueException $ex ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 	}

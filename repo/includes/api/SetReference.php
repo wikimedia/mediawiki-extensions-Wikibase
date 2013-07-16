@@ -113,18 +113,21 @@ class SetReference extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 
 		if ( $entityId === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 		}
 
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 		}
 
@@ -144,6 +147,7 @@ class SetReference extends ApiWikibase {
 		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
 
 		if ( !is_array( $rawSnaks ) || !count( $rawSnaks ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'No snaks or invalid JSON given', 'invalid-json' );
 		}
 
@@ -155,6 +159,7 @@ class SetReference extends ApiWikibase {
 		try {
 			foreach ( $rawSnaks as $byPropertySnaks ) {
 				if ( !is_array( $byPropertySnaks ) ) {
+					wfProfileOut( __METHOD__ );
 					$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
 				}
 				foreach ( $byPropertySnaks as $rawSnak ) {
@@ -165,6 +170,7 @@ class SetReference extends ApiWikibase {
 			}
 		} catch ( IllegalValueException $ex ) {
 			// Handle Snak instantiation failures
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid snak JSON given. IllegalValueException', 'invalid-json' );
 		}
 
@@ -185,12 +191,14 @@ class SetReference extends ApiWikibase {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Could not find the statement' , 'no-such-statement' );
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
 		}
 
@@ -206,6 +214,7 @@ class SetReference extends ApiWikibase {
 				$references->removeReferenceHash( $refHash );
 			}
 			else {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'The statement does not have any associated reference with the provided reference hash', 'no-such-reference' );
 			}
 		}

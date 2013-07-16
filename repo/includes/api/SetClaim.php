@@ -139,6 +139,7 @@ class SetClaim extends ApiWikibase {
 			assert( $claim instanceof Claim );
 			return $claim;
 		} catch ( IllegalValueException $illegalValueException ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
 		}
 	}

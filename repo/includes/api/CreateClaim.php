@@ -198,14 +198,17 @@ class CreateClaim extends ApiWikibase {
 	protected function validateParameters( array $params ) {
 		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
 			if ( $params['snaktype'] == 'value' ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
 			}
 			else {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'param-illegal' );
 			}
 		}
 
 		if ( !isset( $params['property'] ) ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
 		}
 	}
@@ -225,6 +228,7 @@ class CreateClaim extends ApiWikibase {
 		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( $entityContent === null ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Entity not found, snak not created', 'no-such-entity' );
 		}
 
@@ -251,6 +255,7 @@ class CreateClaim extends ApiWikibase {
 		$entityId = $entityIdParser->parse( $params['property'] );
 
 		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Property expected, got ' . $entityId->getEntityType(), 'invalid-snak' );
 		}
 
