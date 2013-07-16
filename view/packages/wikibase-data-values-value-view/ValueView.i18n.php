@@ -278,15 +278,26 @@ $messages['en-gb'] = array(
 /** Spanish (español)
  * @author Fitoschido
  * @author Invadinado
+ * @author Luis Felipe Schenone
  */
 $messages['es'] = array(
+	'valueview-desc' => 'Componentes de la interfaz de usuario para mostrar y editar los datos',
 	'valueview-expert-advancedadjustments' => 'ajustes avanzados',
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La manipulación de valores para el tipo de datos "$1" aún no está soportada.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Todavía no se admite la manipulación de valores "$1"',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Todavía no se admite la manipulación de valores para el tipo de datos "$1"',
 	'valueview-expert-emptyvalue-empty' => 'vacío',
 	'valueview-expert-globecoordinateinput-precision' => 'Precisión:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregoriano',
+	'valueview-expert-timevalue-calendar-julian' => 'Juliano',
 	'valueview-expert-timeinput-precision' => 'Precisión:',
 	'valueview-expert-timeinput-calendar' => 'Calendario:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendario Gregoriano)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendario Juliano)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; cambiar a Gregoriano',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; cambiar a Juliano',
 	'valueview-preview-label' => 'se mostrará como:',
+	'valueview-preview-novalue' => 'no se reconoce ningún valor válido',
+	'valueview-listrotator-auto' => 'automático',
 );
 
 /** Estonian (eesti)
