@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_460154b1",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T15:50:55Z",
+      "side": 1,
+      "message": "Please make a suggestion that is feasible in the scope of this change. I can\u0027t think of anything that doesn\u0027t need a medium-scale refactoring - which we can do, but shouldn\u0027t block on for getting the cache key stuff live (see follow-up).",
+      "parentUuid": "29c091be_060d9c36",
+      "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_c340965c",
         "filename": "client/includes/store/ClientStore.php",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2013-07-16T14:51:06Z",
       "side": 1,
       "message": "??",
+      "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_06f75cd3",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-16T15:50:55Z",
+      "side": 1,
+      "message": "See follow-up. I could remove it, but it\u0027ll be back with the next patch.",
+      "parentUuid": "29c091be_c319b684",
       "revId": "7a8b96f57e546adc1491fbf917df6b5d63ceab78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
