@@ -161,7 +161,9 @@ call_user_func( function() {
 		}
 
 		$template = new \Wikibase\Template( \Wikibase\TemplateRegistry::singleton(), $key, $params );
-		return $template->text();
+
+		// Use plain() to prevent replacing {{...}}:
+		return $template->plain();
 	}
 
 	// Resource Loader Modules:
