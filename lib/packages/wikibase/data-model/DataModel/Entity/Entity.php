@@ -524,8 +524,9 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param array[] $aliasLists
 	 */
 	public function setAllAliases( array $aliasLists ) {
+		$this->data['aliases'] = array();
 		foreach( $aliasLists as $languageCode => $aliasList ){
-			$this->setAliases($languageCode, $aliasList);
+			$this->setAliases( $languageCode, $aliasList );
 		}
 	}
 
