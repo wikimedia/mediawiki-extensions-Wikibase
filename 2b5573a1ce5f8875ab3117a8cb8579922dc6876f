@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_8315fe9b",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-16T13:26:50Z",
+      "side": 1,
+      "message": "I guess at least the first FIXME can go away.",
+      "revId": "2b5573a1ce5f8875ab3117a8cb8579922dc6876f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
