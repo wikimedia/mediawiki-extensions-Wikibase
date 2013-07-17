@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+1: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Code-Review+2: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-by: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-at: Wed, 17 Jul 2013 21:41:28 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/74066
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
