@@ -232,7 +232,7 @@ class SetClaim extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=setclaim&claim={"id":"q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"p1","datavalue":{"value":"City","type":"string"}}}'
+			'api.php?action=wbsetclaim&claim={"id":"q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"p1","datavalue":{"value":"City","type":"string"}}}'
 			=> 'Set the claim with the given id to property p1 with a string value of "City',
 		);
 	}
