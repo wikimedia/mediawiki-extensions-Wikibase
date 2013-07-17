@@ -64,7 +64,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wbErrorDetailsLink?.should be_true
         page.wbErrorDetailsLink
         page.wbErrorDetailsDiv?.should be_true
-        page.wbErrorDetailsDiv_element.text.should == "The external client site did not provide page information."
+        page.wbErrorDetailsDiv_element.text.should == "The external client site did not provide page information"
       end
     end
 
