@@ -46,7 +46,8 @@ return call_user_func( function() {
 				'jquery.valueview.experts.stringvalue',
 				'jquery.valueview.experts.globecoordinatevalue',
 				'jquery.valueview.experts.timevalue',
-				'jquery.valueview.experts.commonsmediatype'
+				'jquery.valueview.experts.commonsmediatype',
+				'jquery.valueview.experts.urltype',
 			),
 		),
 

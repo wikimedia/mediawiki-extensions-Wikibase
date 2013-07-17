@@ -288,6 +288,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.urltype' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.UrlType.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.staticdom',
+				'jquery.valueview.BifidExpert',
+				'jquery.valueview.experts.stringvalue'
+			),
+		),
+
 		'jquery.valueview.preview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview/valueview.preview.js',

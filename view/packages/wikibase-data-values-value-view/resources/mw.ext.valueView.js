@@ -35,6 +35,11 @@
 		vv.experts.CommonsMediaType
 	);
 
+	expertProvider.registerExpert(
+		dt.getDataType( 'url' ),
+		vv.experts.UrlType
+	);
+
 	/**
 	 * Object representing the MeidaWiki "ValueView" extension.
 	 *
