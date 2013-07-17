@@ -103,83 +103,9 @@
 			'Detected scrollbar width.'
 		);
 
-		// Firefox will throw an error when the input element is not part of the DOM while trying to
-		// set the selection range which is part of the following assertion
-		$( 'body' ).append( $input );
-		assert.equal(
-			suggester.autocompleteString( $input.val(), 'ab' ),
-			1,
-			'Auto-completed text.'
-		);
-
 		suggester.destroy();
 		$input.remove();
 
-	} );
-
-	QUnit.test( 'Adapt letter case', function( assert ) {
-		var $input = newTestSuggester();
-		var suggester = $input.data( 'suggester' );
-
-		assert.equal(
-			suggester._adaptLetterCase( 'abc', 'AbC' ),
-			'abc',
-			"adaptLetterCase: Did not adapt any letter case."
-		);
-
-		$input.val( 'ef' );
-		suggester.search( 'EF' ); // simulate case-insensitive search
-
-		assert.equal(
-			$input.val(),
-			'ef',
-			"Did not adjusted input value's letter case according to suggestion list's first result set."
-		);
-
-		suggester.destroy();
-		$input.remove();
-
-		$input = newTestSuggester( { adaptLetterCase: 'all' } );
-		suggester = $input.data( 'suggester' );
-
-		assert.equal(
-			suggester._adaptLetterCase( 'abc', 'AbC' ),
-			'AbC',
-			"adjustLetterCase: Adapted the case of all letters."
-		);
-
-		$input.val( 'ef' );
-		suggester.search( 'EF' );
-
-		assert.equal(
-			$input.val(),
-			'EF',
-			"Adjusted input value's letter case according to suggestion list's first result set."
-		);
-
-		suggester.destroy();
-		$input.remove();
-
-		$input = newTestSuggester( { adaptLetterCase: 'first' } );
-		suggester = $input.data( 'suggester' );
-
-		assert.equal(
-			suggester._adaptLetterCase( 'abc', 'AbC' ),
-			'Abc',
-			"adaptLetterCase: Adapted the case of the first letter."
-		);
-
-		$input.val( 'ef' );
-		suggester.search( 'EF' );
-
-		assert.equal(
-			$input.val(),
-			'Ef',
-			"Capitalized input value's letters according to suggestion list's first result set."
-		);
-
-		suggester.destroy();
-		$input.remove();
 	} );
 
 	QUnit.test( 'automatic height adjustment', function( assert ) {

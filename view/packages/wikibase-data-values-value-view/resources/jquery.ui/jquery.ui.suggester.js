@@ -78,7 +78,10 @@
  *        (2) {String} Error text status.
  *        (3) {Object} Detailed error information.
  *
+ * @dependency jquery.autocompletestring
+ * @dependency jquery.eachchange
  * @dependency jquery.ui.autocomplete
+ * @dependency jquery.util.adaptlettercase
  */
 ( function( $ ) {
 	'use strict';
@@ -230,7 +233,10 @@
 			var resultSet = $.ui.autocomplete.filter( this.options.source, request.term );
 
 			if ( resultSet.length && this.options.adaptLetterCase ) {
-				this.term = this._adaptLetterCase( this.term, resultSet[0] );
+				this.term = $.util.adaptLetterCase( this.term,
+					resultSet[0],
+					this.options.adaptLetterCase
+				);
 				this.element.val( this.term );
 			}
 
@@ -289,10 +295,18 @@
 				// auto-complete input box text (because of the API call lag, this is
 				// avoided when hitting backspace, since the value would be reset too slow)
 				if ( this._lastKeyDown !== 8 && response[1].length > 0 ) {
-					this.autocompleteString(
-						response[0],
-						response[1][0]
-					);
+					var incomplete = response[0],
+						complete = response[1][0];
+
+					if ( this.options.adaptLetterCase ) {
+						this.term = incomplete = $.util.adaptLetterCase(
+							incomplete,
+							complete,
+							this.options.adaptLetterCase
+						);
+					}
+
+					this.element.autocompletestring( incomplete, complete );
 				}
 
 				suggest( response[1] ); // pass array of returned values to callback
@@ -519,24 +533,6 @@
 		},
 
 		/**
-		 * Adjusts the letter case of a source string to the letter case in a destination string
-		 * according to the adaptLetterCase option.
-		 *
-		 * @param {String} source
-		 * @param {String} destination
-		 * @return {String} Altered source string
-		 */
-		_adaptLetterCase: function( source, destination ) {
-			if ( this.options.adaptLetterCase === 'all' ) {
-				return destination.substr( 0, source.length );
-			} else if ( this.options.adaptLetterCase === 'first' ) {
-				return destination.substr( 0, 1 ) + source.substr( 1 );
-			} else {
-				return source;
-			}
-		},
-
-		/**
 		 * Sets/gets the plain input box value.
 		 *
 		 * @param {String} [value] Value to be set
@@ -556,65 +552,6 @@
 			this.menu.element.position( $.extend( {
 				of: this.element
 			}, this.options.position ) );
-		},
-
-		/**
-		 * Completes the input box with the remaining characters of a given string. The characters
-		 * of the remaining part are text-highlighted, so the will be overwritten if typing
-		 * characters is continue. Tabbing or clicking outside of the input box will leave the
-		 * completed string in the input box.
-		 *
-		 * @param incomplete {String}
-		 * @param complete {String}
-		 * @return {Number} number of characters added (and highlighted) at the end of the
-		 *         incomplete string
-		 */
-		autocompleteString: function( incomplete, complete ) {
-			if(
-				// if nothing to complete, just return and don't move the cursor
-				// (can be annoying in this situation)
-				incomplete === complete
-				// The following statement is a work-around for a technically unexpected search
-				// behaviour: e.g. in English Wikipedia opensearch for "Allegro [...]" returns
-				// "Allegro" as first result instead of "Allegro (music)", so auto-completion should
-				// probably be prevented here since it would always reset the input box's value to
-				// "Allegro"
-				|| complete.toLowerCase().indexOf( this.element.val().toLowerCase() ) === -1
-			) {
-				return 0;
-			}
-
-			// set value to complete value...
-			if ( this.options.adaptLetterCase ) {
-				this.term = this._adaptLetterCase( incomplete, complete );
-				if ( complete.indexOf( this.term ) === 0 ) {
-					this.element.val( complete );
-				}
-			} else if ( incomplete === complete.substr( 0, incomplete.length ) ) {
-				this.element.val( incomplete + complete.substr( incomplete.length ) );
-			}
-
-			// ... and select the suggested, not manually typed part of the value
-			var start = incomplete.length,
-				end = complete.length,
-				node = this.element[0];
-
-			// highlighting takes some browser specific implementation
-			if( node.createTextRange ) { // opera < 10.5 and IE
-				var selRange = node.createTextRange();
-				selRange.collapse( true );
-				selRange.moveStart( 'character', start);
-				selRange.moveEnd( 'character', end);
-				selRange.select();
-			} else if( node.setSelectionRange ) { // major modern browsers
-				// make a 'backward' selection so pressing arrow left won't put the cursor near the
-				// selections end but rather at the typing position
-				node.setSelectionRange( start, end, 'backward' );
-			} else if( node.selectionStart ) {
-				node.selectionStart = start;
-				node.selectionEnd = end;
-			}
-			return ( end - start );
 		}
 
 	} );

@@ -183,6 +183,25 @@ return call_user_func( function() {
 				'jquery.valueview.experts.timeinput',
 			),
 		),
+
+		'jquery.autocompletestring.tests' => array(
+			'scripts' => array(
+				"$bp/jquery/jquery.autocompletestring.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.autocompletestring',
+			),
+		),
+
+		'jquery.util.adaptlettercase.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.util/jquery.util.adaptlettercase.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.util.adaptlettercase',
+			),
+		),
+
 	);
 
 } );

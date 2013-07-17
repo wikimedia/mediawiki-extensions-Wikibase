@@ -87,7 +87,10 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.suggester.css'
 			),
 			'dependencies' => array(
-				'jquery.ui.autocomplete'
+				'jquery.autocompletestring',
+				'jquery.ui.autocomplete',
+				'jquery.ui.widget',
+				'jquery.util.adaptlettercase',
 			)
 		),
 
@@ -128,7 +131,6 @@ return call_user_func( function() {
 			),
 		),
 
-
 		'jquery.ui.listrotator' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.listrotator.js',
@@ -145,6 +147,22 @@ return call_user_func( function() {
 				'valueview-listrotator-auto',
 			),
 		),
+
+		'jquery.autocompletestring' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.autocompletestring.js',
+			),
+			'dependencies' => array(
+				'jquery.util.adaptlettercase',
+			),
+		),
+
+		'jquery.util.adaptlettercase' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.util/jquery.util.adaptlettercase.js',
+			),
+		),
+
 	);
 
 	// return jQuery.valueview's native resources plus those required by the MW extension:
