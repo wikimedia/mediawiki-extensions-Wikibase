@@ -7,6 +7,7 @@ use ApiBase;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
+use Wikibase\ChangeOpDescription;
 
 /**
  * API module for the language attributes for a Wikibase entity.
@@ -21,6 +22,7 @@ use Wikibase\Utils;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetDescription extends ModifyLangAttribute {
 
@@ -42,29 +44,39 @@ class SetDescription extends ModifyLangAttribute {
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
 		$summary = $this->createSummary( $params );
+		$entity = $entityContent->getEntity();
+		$language = $params['language'];
 
-		if ( isset( $params['value'] ) ) {
-
-			$description = $this->stringNormalizer->trimToNFC( $params['value'] );
-			$language = $params['language'];
-
-			if ( 0 < strlen( $description ) ) {
-				$summary->addAutoSummaryArgs( $description );
-				$descriptions = array( $language => $entityContent->getEntity()->setDescription( $language, $description ) );
-			}
-			else {
-				$old = $entityContent->getEntity()->getDescription( $language );
-				$summary->addAutoSummaryArgs( $old );
-
-				$entityContent->getEntity()->removeDescription( $language );
-				$descriptions = array( $language => '' );
-			}
-
-			$this->addDescriptionsToResult( $descriptions, 'entity' );
-		}
+		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$descriptions = array( $language => $entity->getDescription( $language ) ? $entity->getDescription( $language ) : "" );
+		$this->addDescriptionsToResult( $descriptions, 'entity' );
 
 		wfProfileOut( __METHOD__ );
 		return $summary;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 * @return ChangeOpDescription
+	 */
+	protected function getChangeOp( array $params ) {
+		wfProfileIn( __METHOD__ );
+		$description = "";
+		$language = $params['language'];
+
+		if ( isset( $params['value'] ) ) {
+			$description = $this->stringNormalizer->trimToNFC( $params['value'] );
+		}
+
+		if ( $description === "" ) {
+			wfProfileOut( __METHOD__ );
+			return new ChangeOpDescription( $language, null );
+		} else {
+			wfProfileOut( __METHOD__ );
+			return new ChangeOpDescription( $language, $description );
+		}
 	}
 
 	/**

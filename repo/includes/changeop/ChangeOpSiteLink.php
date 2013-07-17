@@ -31,7 +31,7 @@ use Wikibase\DataModel\SimpleSiteLink;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpSiteLink implements ChangeOp {
+class ChangeOpSiteLink extends ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -74,20 +74,25 @@ class ChangeOpSiteLink implements ChangeOp {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function apply( Entity $entity ) {
+	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}
 
 		if ( $this->pageName === null ) {
-			$entity->removeSiteLink( $this->siteId );
-		}
-		else {
+			if ( $entity->hasLinkToSite( $this->siteId ) ) {
+				$this->updateSummary( $summary, 'remove', $this->siteId, $entity->getSimpleSiteLink( $this->siteId )->getPageName() );
+				$entity->removeSiteLink( $this->siteId );
+			}
+		} else {
+			$this->updateSummary( $summary, 'set', $this->siteId, $this->pageName );
 			$entity->addSimpleSiteLink( new SimpleSiteLink( $this->siteId, $this->pageName ) );
 		}
-	}
 
+		return true;
+	}
 }

@@ -3,10 +3,10 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
+use Wikibase\ChangeOpLabel;
 
 /**
  * API module to set the label for a Wikibase entity.
@@ -21,6 +21,7 @@ use Wikibase\Utils;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetLabel extends ModifyLangAttribute {
 
@@ -30,7 +31,7 @@ class SetLabel extends ModifyLangAttribute {
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
 
-		$permissions[] = ( isset( $params['value'] ) && 0<strlen( $params['value'] ) )
+		$permissions[] = ( isset( $params['value'] ) && 0 < strlen( $params['value'] ) )
 			? 'label-update'
 			: 'label-remove';
 		return $permissions;
@@ -42,28 +43,40 @@ class SetLabel extends ModifyLangAttribute {
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
 		$summary = $this->createSummary( $params );
+		$entity = $entityContent->getEntity();
+		$language = $params['language'];
 
-		if ( isset( $params['value'] ) ) {
-
-			$label = $this->stringNormalizer->trimToNFC( $params['value'] );
-			$language = $params['language'];
-			if ( 0 < strlen( $label ) ) {
-				$summary->addAutoSummaryArgs( $label );
-				$labels = array( $language => $entityContent->getEntity()->setLabel( $language, $label ) );
-			}
-			else {
-				$old = $entityContent->getEntity()->getLabel( $language );
-				$summary->addAutoSummaryArgs( $old );
-
-				$entityContent->getEntity()->removeLabel( $language );
-				$labels = array( $language => '' );
-			}
-
-			$this->addLabelsToResult( $labels, 'entity' );
-		}
+		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$labels = array( $language => $entity->getLabel( $language ) ? $entity->getLabel( $language ) : "" );
+		$this->addLabelsToResult( $labels, 'entity' );
 
 		wfProfileOut( __METHOD__ );
 		return $summary;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 * @return ChangeOpLabel
+	 */
+	protected function getChangeOp( array $params ) {
+		wfProfileIn( __METHOD__ );
+		$changeOps = array();
+		$label = "";
+		$language = $params['language'];
+
+		if ( isset( $params['value'] ) ) {
+			$label = $this->stringNormalizer->trimToNFC( $params['value'] );
+		}
+
+		if ( $label === "" ) {
+			wfProfileOut( __METHOD__ );
+			return new ChangeOpLabel( $language, null );
+		} else {
+			wfProfileOut( __METHOD__ );
+			return new ChangeOpLabel( $language, $label );
+		}
 	}
 
 	/**
