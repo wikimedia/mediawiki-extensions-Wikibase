@@ -158,6 +158,10 @@ class SetReference extends ApiWikibase {
 					$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
 				}
 				foreach ( $byPropertySnaks as $rawSnak ) {
+					if ( !is_array( $rawSnak ) ) {
+						$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
+					}
+
 					$snak = $snakUnserializer->newFromSerialization( $rawSnak );
 					$this->snakValidation->validateSnak( $snak );
 					$snaks[] = $snak;
