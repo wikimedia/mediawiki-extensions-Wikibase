@@ -48,18 +48,9 @@ class LinkTitles extends ApiWikibase {
 		wfProfileIn( __METHOD__ );
 
 		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
+
 		$user = $this->getUser();
-
-		if ( $params['fromsite'] === $params['tosite'] ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'The from site can not match the to site' , 'param-illegal' );
-		}
-
-		if ( !( strlen( $params['fromtitle'] ) > 0 && strlen( $params['totitle'] ) > 0 ) ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'The from title can not match the to title' , 'param-illegal' );
-		}
-
 		$sites = $this->getSiteLinkTargetSites();
 
 		// Get all parts for the from-link
@@ -174,6 +165,21 @@ class LinkTitles extends ApiWikibase {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
+	 */
+	protected function validateParameters( array $params ) {
+		if ( $params['fromsite'] === $params['tosite'] ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( 'The from site can not match the to site' , 'param-illegal' );
+		}
+
+		if( !( strlen( $params['fromtitle'] ) > 0) || !( strlen( $params['totitle'] ) > 0) ){
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( 'The from title and to title must have a value' , 'param-illegal' );
+		}
 	}
 
 	/**
