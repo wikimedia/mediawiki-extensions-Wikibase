@@ -157,37 +157,45 @@ final class TestChanges {
 			$new->removeSiteLink( 'enwiki', false );
 			$changes['remove-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
+
+			// apply all the defaults ----------
+			$defaults = array(
+				'user_id' => 0,
+				'time' => '20130101000000',
+				'type' => 'test',
+			);
+
+			$rev = 1000;
+
+			/* @var EntityChange $change */
+			foreach ( $changes as $key => $change ) {
+				$change->setComment( "$key:1|" );
+
+				$meta = array(
+					'comment' => '',
+					'page_id' => 23,
+					'bot' => false,
+					'rev_id' => $rev,
+					'parent_id' => $rev -1,
+					'user_text' => 'Some User',
+					'time' => wfTimestamp( TS_MW ),
+				);
+
+				$change->setMetadata( $meta );
+				self::applyDefaults( $change, $defaults );
+
+				$rev += 1;
+			}
 		}
 
-		$defaults = array(
-			'user_id' => 0,
-			'time' => '20130101000000',
-			'type' => 'test',
-		);
-
-		$rev = 1000;
+		$clones = array();
 
 		/* @var EntityChange $change */
 		foreach ( $changes as $key => $change ) {
-			$change->setComment( "$key:1|" );
-
-			$meta = array(
-				'comment' => '',
-				'page_id' => 23,
-				'bot' => false,
-				'rev_id' => $rev,
-				'parent_id' => $rev -1,
-				'user_text' => 'Some User',
-				'time' => wfTimestamp( TS_MW ),
-			);
-
-			$change->setMetadata( $meta );
-			self::applyDefaults( $change, $defaults );
-
-			$rev += 1;
+			$clones[$key] = clone $change;
 		}
 
-		return $changes;
+		return $clones;
 	}
 
 	/**
@@ -211,6 +219,7 @@ final class TestChanges {
 		// filter info field by key
 		if ( $infoFilter !== null ) {
 			$infoFilter = array_flip( $infoFilter );
+			$filteredChanges = array();
 
 			/* @var \Wikibase\ChangeRow $change */
 			foreach ( $changes as $change ) {
@@ -221,7 +230,11 @@ final class TestChanges {
 
 					$change->setField( 'info', $info );
 				}
+
+				$filteredChanges[] = $change;
 			}
+
+			$changes = $filteredChanges;
 		}
 
 		return $changes;
