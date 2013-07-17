@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_ddb34be7",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-17T11:13:43Z",
+      "side": 1,
+      "message": "Much more elegant doing it the way you suggest! :)",
+      "parentUuid": "29c091be_fd1e075b",
+      "revId": "773b766e0f344b0ece26032f2ac44afb02941a80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_7d3337f6",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-17T09:56:21Z",
       "side": 1,
       "message": "Regarding the comment above, just do something like $( this ).prev().append( $sitesCounterContainer ); instead of re-inserting the node. Might want to add some more sophisticated logic to stay as flexible as when re-inserting the node.",
+      "revId": "773b766e0f344b0ece26032f2ac44afb02941a80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_fdae0781",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-17T11:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c091be_7d3337f6",
       "revId": "773b766e0f344b0ece26032f2ac44afb02941a80",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
