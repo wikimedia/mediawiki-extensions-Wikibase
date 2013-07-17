@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_7d65f7e1",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-17T09:57:00Z",
+      "side": 1,
+      "message": "Spaces inside the () please.",
+      "revId": "dd286fd569913bddc2b1124aee951dc42d274d69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
