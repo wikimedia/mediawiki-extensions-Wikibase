@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_bd276f20",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-17T11:28:20Z",
+      "side": 1,
+      "message": "Just changed it to\n\n$( \u0027.wb-section-heading\u0027 ).not( \u0027.wb-sitelinks-heading\u0027 ).remove();\n\nfor better performance.",
+      "parentUuid": "29c091be_ddb34be7",
+      "revId": "773b766e0f344b0ece26032f2ac44afb02941a80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_7d3337f6",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 4
