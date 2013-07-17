@@ -55,13 +55,14 @@ describe "Check entityselector search" do
   context "Check suggestions" do
     it "should check for empty suggestions" do
       visit_page(RepoMainPage) do |page|
-        page.entitySelectorSearchInput = "foo" # non existent item
+        non_existent_item_label = generate_random_string(10)
+        page.entitySelectorSearchInput = non_existent_item_label
         ajax_wait
         page.wait_for_suggestions_list
         page.entitySelectorSearch?.should be_true
         page.count_search_results.should == 1 # just the "containing" element
         page.get_search_results[0].text.include?("containing...").should be_true
-        page.get_search_results[0].text.include?("foo").should be_true
+        page.get_search_results[0].text.include?(non_existent_item_label).should be_true
       end
     end
     it "should check for suggestion based on label" do
@@ -121,7 +122,7 @@ describe "Check entityselector search" do
     end
     it "should trigger regular search for nonexistent item" do
       visit_page(RepoMainPage) do |page|
-        page.entitySelectorSearchInput = "foo" # non existent item
+        page.entitySelectorSearchInput = generate_random_string(10) # non-existent item
         ajax_wait
         page.wait_for_suggestions_list
         page.get_search_results[0].click

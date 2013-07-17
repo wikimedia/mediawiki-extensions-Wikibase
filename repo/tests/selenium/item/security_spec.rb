@@ -9,7 +9,7 @@
 require 'spec_helper'
 
 dangerous_text = "<script>$('body').empty();</script>"
-template_text = "{{Template:Foo}}"
+template_text = "{{Template:" + generate_random_string(10)  + "}}"
 
 describe "Check for security issues" do
   before :all do
