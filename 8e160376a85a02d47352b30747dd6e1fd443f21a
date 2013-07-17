@@ -16,6 +16,23 @@
       "revId": "8e160376a85a02d47352b30747dd6e1fd443f21a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_bd5c8fee",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-07-17T10:31:50Z",
+      "side": 1,
+      "message": "qqqs missing",
+      "revId": "8e160376a85a02d47352b30747dd6e1fd443f21a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
