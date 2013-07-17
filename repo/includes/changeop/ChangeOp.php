@@ -28,15 +28,32 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-interface ChangeOp {
+abstract class ChangeOp {
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 * @param Summary|null $summary
 	 *
 	 * @return bool 
 	 */
-	public function apply( Entity $entity );
+	abstract public function apply( Entity $entity, Summary $summary = null );
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Summary $summary
+	 * @param string $action
+	 * @param string $language
+	 * @param string|array $args
+	 */
+	protected function updateSummary( $summary, $action, $language, $args ) {
+		if ( $summary !== null ) {
+			$summary->setAction( $action );
+			$summary->setLanguage( $language );
+			$summary->addAutoSummaryArgs( $args );
+		}
+	}
 
 }
