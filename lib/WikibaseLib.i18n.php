@@ -2566,18 +2566,28 @@ $messages['sr-el'] = array(
 );
 
 /** Swedish (svenska)
+ * @author Jopparn
  * @author Lokal Profil
  * @author WikiPhoenix
  */
 $messages['sv'] = array(
+	'wikibase-entity-item' => 'objekt',
+	'wikibase-entity-property' => 'egenskap',
+	'wikibase-deletedentity-item' => 'Borttagna objekt',
+	'wikibase-diffview-reference' => 'referens',
+	'wikibase-diffview-label' => 'etikett',
+	'wikibase-diffview-alias' => 'alias',
 	'wikibase-diffview-description' => 'beskrivning',
 	'wikibase-diffview-link' => 'länkar',
+	'wikibase-error-unexpected' => 'Ett oväntat fel uppstod.',
+	'wikibase-error-autocomplete-response' => 'Servern svarade: $1',
 	'wikibase-error-ui-session-failure' => 'Din session har upphört. Var god logga in igen.',
-	'wikibase-sitelinks' => 'Sidor som är länkade till det här objektet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Länkad artikel',
 	'wikibase-tooltip-error-details' => 'Detaljer',
+	'wikibase-validator-bad-type' => '$2 istället för $1',
+	'datatypes-type-commonsMedia' => 'Commons mediafil',
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -2806,17 +2816,26 @@ $messages['yi'] = array(
 	'wikibase-entity-item' => 'דאטנאביעקט',
 	'wikibase-entity-property' => 'אייגנשאפֿט',
 	'wikibase-entity-query' => 'פֿראגע',
+	'wikibase-deletedentity-item' => 'אויסגעמעקטער דאטנאביעקט',
+	'wikibase-deletedentity-property' => 'אויסגעמעקטע אייגנשאפט',
+	'wikibase-deletedentity-query' => 'אויסגעמעקטע פראגע',
 	'wikibase-diffview-reference' => 'רעפערענץ',
 	'wikibase-diffview-rank' => 'ראנג',
+	'wikibase-diffview-qualifier' => 'באדינגונג',
 	'wikibase-diffview-label' => 'באצייכענונג',
 	'wikibase-diffview-alias' => 'אליאסן',
 	'wikibase-diffview-description' => 'באַשרײַבונג',
 	'wikibase-diffview-link' => 'לינקען',
+	'wikibase-error-ui-session-failure' => 'אייער סעסיע האט אויפגעהערט. זייט אזוי גוט אריינלאגירן נאכאמאל.',
+	'wikibase-error-ui-edit-conflict' => "ס'האט פאסירט א רעדאקטירונג קאנפליקט. זייט אזוי גוט אנלאדן דעם בלאט און אויפהיטן נאכאמאל.",
+	'wikibase-replicationnote' => 'גיט אכט אז עס קען דויערן עטלעכע מינוטן ביז די ענדערונגען ווערן זעבאר ביי אלע וויקיס.',
 	'wikibase-sitelinks-wikipedia' => 'וויקיפעדיע בלעטער פארבונדן מיט דעם דאטנאביעקט',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
 	'wikibase-sitelinks-siteid-columnheading' => 'קאד',
 	'wikibase-sitelinks-link-columnheading' => 'פארלינקטער ארטיקל',
 	'wikibase-tooltip-error-details' => 'פרטים',
+	'wikibase-validator-bad-type' => '$2 אַנשטאָט $1',
+	'wikibase-validator-no-such-entity' => '$1 נישט געטראפן',
 	'datatypes-type-wikibase-item' => 'איינהייט',
 	'datatypes-type-commonsMedia' => 'קאמאנס מעדיע טעקע',
 	'version-wikibase' => 'Wikibase',

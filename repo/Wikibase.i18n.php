@@ -2595,6 +2595,8 @@ $messages['ce'] = array(
 	'wikibase-edit' => 'тадар',
 	'wikibase-save' => 'Ӏалашдан',
 	'wikibase-addreference' => 'тӏетоха хьост',
+	'wikibase-label-empty' => 'Билгало (цӀе) яц.',
+	'wikibase-description-edit-placeholder' => 'ДӀаязде цунах лаьцна',
 	'wikibase-sitelinks-add' => 'Сайтан агӀона тӀе тӀетоха хьажориг',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|хьост|хьосташ}}',
 	'wikibase-error-sitelink-already-used' => 'Хьажориг оцу [$1 $2] сайтан тӏе хӏинцале лелош ю хӏокху [[$3]] элементо.',
@@ -5057,6 +5059,15 @@ $messages['fa'] = array(
 	'wikibase-setentity-invalid-langcode' => 'شناسهٔ زبان «$1» ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است (مثل «en») استفاده کنید.',
 	'wikibase-setentity-invalid-id' => 'شناسهٔ «$1» برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
 	'special-dispatchstats' => 'آمار تغییرات فرستادن‌ها',
+	'wikibase-dispatchstats-intro' => 'این صفحه آمار در مورد ارسال تغییرات به مشتری را فراهم می کند.
+هنگامی که تغییرات ارسال شد کاربران ویکی، از تغییرات در {{SITENAME}}  مطلع شود و صف کار بر روی آن ویکی اطلاع‌رسانی را پردازش می‌کند.
+ * [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]]   شماره و تاریخ برای قدیمی‌ترین و تازه‌ترین موارد در حال حاضر در صف را نشان می دهد.
+ *  [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] اطلاعات در مورد بیشترین تاخیرها و آخرین تاخیرها ویکی مشتری و یک میانه یکی در میان نشان می‌دهد. برای هر ویکی اطلاعات زیر ارائه شده است:
+ ** "{{int:wikibase-dispatchstats-site-id}}" شناسهٔ داخلی ویکی مشتری است.
+ ** "{{int:wikibase-dispatchstats-pos}}" شناسهٔ تغییر آخرین ارسال به آن ویکی است.
+ ** "{{int:wikibase-dispatchstats-lag-num}}" تعداد تغییرات ارسال‌نشده به آن ویکی است.
+ ** "{{int:wikibase-dispatchstats-lag-time}}" زمان تغییر آخرین ارسال به ویکی و آخرین تغییرات انجام شده در {{SITENAME}} است.
+ ** "{{int:wikibase-dispatchstats-touched}}" زمانی است که آخرین دستهٔ تغییرات به ویکی ارسال شده‌اند.',
 	'wikibase-dispatchstats-no-stats' => 'هم‌اکنون هیچ آماری در دسترس نیست.',
 	'wikibase-dispatchstats-changes' => 'آمار تغییرات ورود به سامانه',
 	'wikibase-dispatchstats-stats' => 'آمارهای ارسال شده',
@@ -5096,7 +5107,8 @@ $messages['fa'] = array(
 	'wikibase-entitydata-title' => 'داده‌های موضوع',
 	'wikibase-entitydata-text' => 'این صفحه رابطی از داده‌های پیوندداده‌شده به مقدارهای موضوع ارائه می‌کند. لطفاً شناسهٔ موضوع (ID) موجود در نشانی اینترنتی را با استفاده از نحو زیرصفحه ارائه کنید.',
 	'special-mylanguagefallbackchain' => 'زنجیره مجدد زبان من',
-	'wikibase-mylanguagefallbackchain-babel' => 'با قرار دادن <nowiki>{{#babel: }}</nowiki> در [[ویژه:صفحه من|صفحه کاربریتان]] می‌توان این را ویرایش کنید.', # Fuzzy
+	'wikibase-mylanguagefallbackchain-text' => 'اندوختهٔ زنجیرهٔ زبان برای نمایش برچسب‌های ورودی استفاده می‌شود که برای شما در پائین نمایش داده‌شده است.',
+	'wikibase-mylanguagefallbackchain-babel' => 'با قرار دادن <nowiki>{{#babel: }}</nowiki> در [[Special:MyPage|صفحه کاربریتان]] می‌توان این را ویرایش کنید.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1- $2 ، تبدیل شده از  $3 - $4',
 	'wikibase-self-conflict-patched' => 'ویرایش شما د آخرین نسخه پچ شد و تعدادی از تغییرات میانیتان را باطل کرد.',
 	'wikibase-conflict-patched' => 'ویرایشتان در آخرین نسخه پچ شد.',
@@ -5135,6 +5147,9 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbremoveclaims-remove' => 'پاک کردن {{PLURAL:$3|مطالبه|مطالبه ها}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'تغییر دادن {{PLURAL:$3|ادعا|ادعاها}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'ساختن {{PLURAL:$3|ادعا|ادعاها}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|یک صفت|$4 صفت}}  از  {{PLURAL:$3|اظهار|اظهار}} تغییرکرده‌است',
+	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|یک منبع|$4 منبع}}  از  {{PLURAL:$3|اظهار|اظهار}} تغییرکرده‌است',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'رتبهٔ {{PLURAL:$3|اظهار|اظهار}} تغییر یافت',
 	'wikibase-item-summary-clientsitelink-update' => 'صفحه  از [$3] به [$4] منتقل شد',
 	'wikibase-property-summary-wbcreate-new' => 'ایجاد یک ویژگی جدید',
 	'wikibase-property-summary-wbeditentity-create' => 'ایجاد یک ویژگی جدید',
@@ -14019,7 +14034,11 @@ $messages['tl'] = array(
 $messages['tr'] = array(
 	'wikibase-edit' => 'değiştir',
 	'wikibase-save' => 'kaydet',
+	'wikibase-cancel' => 'iptal',
 	'wikibase-add' => 'ekle',
+	'wikibase-label-edit-placeholder' => 'etiket girin',
+	'wikibase-description-edit-placeholder' => 'açıklama girin',
+	'wikibase-sitelink-page-edit-placeholder' => 'madde',
 	'wikibase-remove' => 'kaldır',
 );
 

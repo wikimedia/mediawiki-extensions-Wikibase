@@ -1262,7 +1262,7 @@ $messages['fa'] = array(
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
 	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر|تغییرها}}',
-	'wikibase-dataitem' => 'مورد داده',
+	'wikibase-dataitem' => 'آیتم این صفحه',
 	'wikibase-editlinks' => 'ویرایش پیوندها',
 	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
 	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
@@ -2146,7 +2146,9 @@ $messages['kk-cyrl'] = array(
 $messages['ko'] = array(
 	'wikibase-client-desc' => '위키베이스 확장 기능을 위한 클라이언트',
 	'specialpages-group-wikibaseclient' => '위키데이터 클라이언트',
+	'tooltip-t-wikibase' => '데이터 저장소에 연결된 항목을 가리키는 링크',
 	'wikibase-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
+	'wikibase-after-page-move-queued' => '이 문서와 연결된 [$1 위키데이터 항목]은 곧 자동적으로 업데이트될 것입니다.',
 	'wikibase-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
 	'wikibase-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
 	'wikibase-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
@@ -2156,6 +2158,7 @@ $messages['ko'] = array(
 	'wikibase-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
 	'wikibase-comment-sitelink-remove' => '언어 링크를 제거함: $1',
 	'wikibase-comment-multi' => '$1개 {{PLURAL:$1|바뀜}}',
+	'wikibase-dataitem' => '데이터 항목',
 	'wikibase-editlinks' => '링크 편집',
 	'wikibase-editlinkstitle' => '인터언어 링크 편집',
 	'wikibase-linkitem-addlinks' => '링크 추가',
@@ -2168,8 +2171,8 @@ $messages['ko'] = array(
 	'wikibase-linkitem-input-site' => '언어:',
 	'wikibase-linkitem-input-page' => '문서:',
 	'wikibase-linkitem-invalidsite' => '알 수 없거나 잘못된 사이트를 선택했습니다',
-	'wikibase-linkitem-confirmitem-text' => '선택한 문서는 이미 [$1 중앙 데이터 저장소에 항목]에 링크되어 있습니다.
-이 문서와 아래에 나타난 문서를 링크해야 할지 확인하세요.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => '선택한 문서는 이미 [$1 중앙 데이터 저장소에 항목]에 연결되어 있습니다.
+아래에 나타난 {{PLURAL:$2|문서가|문서들이}} 이 문서와 연결시키고자 하는 것인지 확인해주세요.',
 	'wikibase-linkitem-confirmitem-button' => '확인',
 	'wikibase-linkitem-not-loggedin-title' => '로그인 필요',
 	'wikibase-linkitem-not-loggedin' => '이 기능을 사용하려면 이 위키와 [$1 중앙 데이터 저장소]에 로그인해야 합니다.',
@@ -2191,6 +2194,7 @@ $messages['ko'] = array(
 	'wikibase-unconnectedpages-format-row' => '(문서에 있는 {{PLURAL:$1|언어 인터위키 링크}} $1개)',
 	'wikibase-pageinfo-entity-id' => '위키데이터 항목 ID',
 	'wikibase-pageinfo-entity-id-none' => '없음',
+	'wikibase-property-render-error' => '$1 속성 표시 실패: $2',
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -3298,6 +3302,7 @@ $messages['sr-el'] = array(
 
 /** Swedish (svenska)
  * @author Ainali
+ * @author Jopparn
  * @author Lokal Profil
  * @author Stryn
  * @author WikiPhoenix
@@ -3327,7 +3332,7 @@ $messages['sv'] = array(
 	'wikibase-linkitem-input-site' => 'Språk:',
 	'wikibase-linkitem-input-page' => 'Sida:',
 	'wikibase-linkitem-invalidsite' => 'Okänd eller ogiltig webbplats har valts',
-	'wikibase-linkitem-confirmitem-text' => 'Sidan du valde är redan kopplad till ett [$1 objekt på vår centrala databas]. Var god bekräfta att sidorna nedan är dem du vill länka med denna sida.',
+	'wikibase-linkitem-confirmitem-text' => 'Sidan du valde är redan kopplad till ett [$1 objekt på vår centrala databas]. Var god bekräfta att sidorna nedan är dem du vill länka med denna sida.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Bekräfta',
 	'wikibase-linkitem-not-loggedin-title' => 'Du måste vara inloggad',
 	'wikibase-linkitem-not-loggedin' => 'Du måste vara inloggad på denna wiki och i [$1 den centrala databasen] att använda denna funktion.',
@@ -3346,7 +3351,8 @@ $messages['sv'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" är inte en giltig språkkod.',
 	'wikibase-unconnectedpages-page-warning' => 'Sidtiteln kunde inte användas till förfrågan och ignoreras.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Endast sidor med interspråklänkar',
-	'wikibase-unconnectedpages-format-row' => '($1 interspråklänkar på sidan)',
+	'wikibase-unconnectedpages-format-row' => '($1 interspråklänkar på sidan)', # Fuzzy
+	'wikibase-pageinfo-entity-id-none' => 'Ingen',
 );
 
 /** Tamil (தமிழ்)
