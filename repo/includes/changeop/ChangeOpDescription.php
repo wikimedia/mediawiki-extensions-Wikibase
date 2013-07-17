@@ -29,7 +29,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpDescription implements ChangeOp {
+class ChangeOpDescription extends ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -68,16 +68,19 @@ class ChangeOpDescription implements ChangeOp {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 * @param Summary|null $summary
 	 *
 	 * @return bool
 	 */
-	public function apply( Entity $entity ) {
+	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->description === null ) {
+			$this->updateSummary( $summary, 'remove', $this->language, $entity->getDescription( $this->language ) );
 			$entity->removeDescription( $this->language );
 		} else {
+			$entity->getDescription( $this->language ) === false ? $action = 'add' : $action = 'set';
+			$this->updateSummary( $summary, $action, $this->language, $this->description );
 			$entity->setDescription( $this->language, $this->description );
 		}
 		return true;
 	}
-
 }

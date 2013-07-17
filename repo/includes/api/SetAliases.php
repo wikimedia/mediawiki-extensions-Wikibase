@@ -2,12 +2,14 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, User, Language;
+use Wikibase\ChangeOps;
 
+use ApiBase, User, Language;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Autocomment;
 use Wikibase\Utils;
+use Wikibase\ChangeOpAliases;
 
 /**
  * API module to set the aliases for a Wikibase entity.
@@ -23,6 +25,7 @@ use Wikibase\Utils;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetAliases extends ModifyEntity {
 
@@ -49,7 +52,7 @@ class SetAliases extends ModifyEntity {
 		parent::validateParameters( $params );
 
 		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) ) xor isset( $params['set'] ) ) ) {
-			$this->dieUsage( 'Invalid-list' , 'invalid-list' );
+			$this->dieUsage( "Parameters 'add' and 'remove' are not allowed to be set when parameter 'set' is provided" , 'invalid-list' );
 		}
 	}
 
@@ -64,71 +67,102 @@ class SetAliases extends ModifyEntity {
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
-		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
-
 		wfProfileIn( __METHOD__ );
 
 		$summary = $this->createSummary( $params );
-		$summary->setLanguage( $params['language'] );
+		$entity = $entityContent->getEntity();
+		$language = $params['language'];
 
-		// Set the list of aliases to a user given one OR add/ remove certain entries
-		if ( isset( $params['set'] ) ) {
-			$summary->setAction( 'set' );
-			$summary->addAutoSummaryArgs( $params['set'] );
-			$entityContent->getEntity()->setAliases(
-				$params['language'],
-				array_map(
-					function( $str ) use ( $stringNormalizer ) { return $stringNormalizer->trimToNFC( $str ); },
-					$params['set']
-				)
-			);
+		$aliasesChangeOps = $this->getChangeOps( $params );
 
+		if ( count( $aliasesChangeOps ) == 1 ) {
+			$aliasesChangeOps[0]->apply( $entity, $summary );
 		} else {
+			$changeOps = new ChangeOps();
+			$changeOps->add( $aliasesChangeOps );
+			$changeOps->apply( $entity );
 
-			if ( !empty( $params['add'] ) ) {
-				$entityContent->getEntity()->addAliases(
-					$params['language'],
-					array_map(
-						function( $str ) use ( $stringNormalizer ) { return $stringNormalizer->trimToNFC( $str ); },
-						$params['add']
-					)
-				);
-			}
+			// Set the action to 'set' in case we add and remove aliases in a single edit
+			$summary->setAction( 'set' );
+			$summary->setLanguage( $language );
 
-			if ( !empty( $params['remove'] ) ) {
-				$entityContent->getEntity()->removeAliases(
-					$params['language'],
-					array_map(
-						function( $str ) use ( $stringNormalizer ) { return $stringNormalizer->trimToNFC( $str ); },
-						$params['remove']
-					)
-				);
-			}
-
-			// Set the action to set in case we add and remove entries in a single edit.
-			if ( !empty( $params['add'] ) && !empty( $params['remove'] ) ) {
-				$summary->setAction( 'set' );
-				// Get the full list of current aliases
-				$summary->addAutoSummaryArgs(
-					$entityContent->getEntity()->getAliases( $params['language'] )
-				);
-			} elseif ( !empty( $params['add'] ) ) {
-				$summary->setAction( 'add' );
-				$summary->addAutoSummaryArgs( $params['add'] );
-			} elseif ( !empty( $params['remove'] ) ) {
-				$summary->setAction( 'remove' );
-				$summary->addAutoSummaryArgs( $params['remove'] );
-			}
-
+			// Get the full list of current aliases
+			$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
 		}
 
-		$aliases = $entityContent->getEntity()->getAliases( $params['language'] );
+		$aliases = $entity->getAliases( $language );
 		if ( count( $aliases ) ) {
-			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'entity' );
+			$this->addAliasesToResult( array( $language => $aliases ), 'entity' );
 		}
 
 		wfProfileOut( __METHOD__ );
 		return $summary;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 * @return ChangeOpAliases
+	 */
+	protected function getChangeOps( array $params ) {
+		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
+
+		wfProfileIn( __METHOD__ );
+		$changeOps = array();
+		$language = $params['language'];
+
+		// Set the list of aliases to a user given one OR add/ remove certain entries
+		if ( isset( $params['set'] ) ) {
+			$changeOps[] =
+				new ChangeOpAliases(
+					$language,
+					array_map(
+						function( $str ) use ( $stringNormalizer ) {
+							return $stringNormalizer->trimToNFC( $str );
+						},
+						$params['set']
+					),
+					'set',
+					$this->createSummary( $params )
+				);
+		} else {
+			// FIXME: if we have ADD and REMOVE operations in the same call,
+			// we will also have two ChangeOps updating the same edit summary.
+			// This will cause the edit summary to be overwritten by the last ChangeOp beeing applied.
+			if ( !empty( $params['add'] ) ) {
+				$changeOps[] =
+					new ChangeOpAliases(
+						$language,
+						array_map(
+							function( $str ) use ( $stringNormalizer ) {
+								return $stringNormalizer->trimToNFC( $str );
+							},
+							$params['add']
+						),
+						'add',
+						$this->createSummary( $params )
+					);
+			}
+
+			if ( !empty( $params['remove'] ) ) {
+				$changeOps[] =
+					new ChangeOpAliases(
+						$language,
+						array_map(
+							function( $str ) use ( $stringNormalizer ) {
+								return $stringNormalizer->trimToNFC( $str );
+							},
+							$params['remove']
+						),
+						'remove',
+						$this->createSummary( $params )
+					);
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $changeOps;
 	}
 
 	/**
