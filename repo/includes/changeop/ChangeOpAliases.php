@@ -30,7 +30,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpAliases implements ChangeOp {
+class ChangeOpAliases extends ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -58,7 +58,7 @@ class ChangeOpAliases implements ChangeOp {
 	 *
 	 * @param string $language
 	 * @param string[] $aliases
-	 * @param string $action
+	 * @param string $action should be set|add|remove
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -82,22 +82,25 @@ class ChangeOpAliases implements ChangeOp {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 * @param Summary|null $summary
 	 *
 	 * @return bool
 	 *
 	 * @throws MWException
 	 */
-	public function apply( Entity $entity ) {
+	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->action === "" || $this->action === "set" ) {
+			$this->updateSummary( $summary, 'set', $this->language, $this->aliases );
 			$entity->setAliases( $this->language, $this->aliases );
 		} elseif ( $this->action === "add" ) {
+			$this->updateSummary( $summary, 'add', $this->language, $this->aliases );
 			$entity->addAliases( $this->language, $this->aliases );
 		} elseif ( $this->action === "remove" ) {
+			$this->updateSummary( $summary, 'remove', $this->language, $this->aliases );
 			$entity->removeAliases( $this->language, $this->aliases );
 		} else {
 			throw new \MWException( "Unknown action: $this->action" );
 		}
 		return true;
 	}
-
 }

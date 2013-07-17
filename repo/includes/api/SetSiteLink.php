@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\ChangeOpSiteLink;
+
 use ApiBase, User;
 
 use Wikibase\DataModel\SimpleSiteLink;
@@ -26,6 +28,7 @@ use Wikibase\Utils;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetSiteLink extends ModifyEntity {
 
@@ -72,36 +75,48 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
-		$summary = $this->createSummary( $params );
-		$summary->setLanguage( $params['linksite'] ); //XXX: not really a language!
 
 		if ( !( $entityContent instanceof ItemContent ) ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "The given entity is not an item", "not-item" );
 		}
 
-		/* @var Item $item */
+		$summary = $this->createSummary( $params );
 		$item = $entityContent->getItem();
+		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
+		if ( isset( $params['linksite'] ) && $params['linktitle'] === '' ) {
+			if ( $item->hasLinkToSite( $linksite ) ) {
+				$link = $item->getSimpleSiteLink( $linksite );
+				$this->getChangeOp( $params )->apply( $item, $summary );
+				$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
+			}
+		} else {
+			$this->getChangeOp( $params )->apply( $item, $summary );
+			$link = $item->getSimpleSiteLink( $linksite );
+			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $summary;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 * @return ChangeOpSiteLink
+	 */
+	protected function getChangeOp( array $params ) {
+		wfProfileIn( __METHOD__ );
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
-
-			try {
-				$link = $item->getSimpleSiteLink( $linksite );
-				$item->removeSiteLink( $params['linksite'] );
-				$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
-
-				$summary->setAction( 'remove' );
-			} catch ( \OutOfBoundsException $exception ) {
-				// never mind then
-			}
-
 			wfProfileOut( __METHOD__ );
-			return $summary; // would be nice to signal "nothing to do" somehow
-		}
-		else {
+			return new ChangeOpSiteLink( $linksite, null );
+		} else {
+			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			$sites = $this->getSiteLinkTargetSites();
-			$site = $sites->getSite( $params['linksite'] );
+			$site = $sites->getSite( $linksite );
 
 			if ( $site === false ) {
 				wfProfileOut( __METHOD__ );
@@ -115,17 +130,8 @@ class SetSiteLink extends ModifyEntity {
 				$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
 			}
 
-			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
-
-			$item->addSimpleSiteLink( $link );
-
-			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
-
-			$summary->setAction( 'set' );
-			$summary->addAutoSummaryArgs( $page );
-
 			wfProfileOut( __METHOD__ );
-			return $summary;
+			return new ChangeOpSiteLink( $linksite, $page );
 		}
 	}
 

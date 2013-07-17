@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Summary;
+
 use Wikibase\ChangeOpLabel;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
@@ -61,12 +63,36 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( $changeOpLabel, $expectedLabel ) {
 		$item = ItemContent::newEmpty();
+
 		$entity = $item->getEntity();
 		$entity->setLabel( 'en', 'test' );
 
 		$changeOpLabel->apply( $entity );
 
 		$this->assertEquals( $expectedLabel, $entity->getLabel( 'en' ) );
+	}
+
+	public function changeOpSummaryProvider() {
+		$args = array();
+		$args[] = array ( new ChangeOpLabel( 'de', 'Zusammenfassung' ), 'set', 'de' );
+		$args[] = array ( new ChangeOpLabel( 'de', null ), 'remove', 'de' );
+
+		return $args;
+	}
+
+	/**
+	 * @dataProvider changeOpSummaryProvider
+	 */
+	public function testUpdateSummary( $changeOp, $summaryExpectedAction, $summaryExpectedLanguage ) {
+		$summary = new Summary();
+		$item = ItemContent::newEmpty();
+		$entity = $item->getEntity();
+		$entity->setLabel( 'de', 'Test' );
+
+		$changeOp->apply( $entity, $summary );
+
+		$this->assertEquals( $summaryExpectedAction, $summary->getActionName() );
+		$this->assertEquals( $summaryExpectedLanguage, $summary->getLanguageCode() );
 	}
 
 }
