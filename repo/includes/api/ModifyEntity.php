@@ -6,7 +6,6 @@ use Status;
 use User;
 use Title;
 use ApiBase;
-
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
