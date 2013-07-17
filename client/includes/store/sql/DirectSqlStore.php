@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Language;
 use Site;
+use ObjectCache;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -83,12 +84,37 @@ class DirectSqlStore implements ClientStore {
 	private $site = null;
 
 	/**
+	 * @var string
+	 */
+	private $cachePrefix;
+
+	/**
+	 * @var int
+	 */
+	private $cacheType;
+
+	/**
+	 * @var int
+	 */
+	private $cacheDuration;
+
+	/**
 	 * @param Language $wikiLanguage
 	 * @param string    $repoWiki the symbolic database name of the repo wiki
 	 */
 	public function __construct( Language $wikiLanguage, $repoWiki ) {
 		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
+
+		//NOTE: once I59e8423c is in, we no longer need the singleton.
+		$settings = Settings::singleton();
+		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$cacheType = $settings->getSetting( 'sharedCacheType' );
+
+		$this->cachePrefix = $cachePrefix;
+		$this->cacheDuration = $cacheDuration;
+		$this->cacheType = $cacheType;
 	}
 
 	/**
@@ -187,8 +213,11 @@ class DirectSqlStore implements ClientStore {
 	 * @return CachingEntityLoader
 	 */
 	protected function newEntityLookup() {
-		//TODO: get config for persistent cache from config
-		$lookup = new WikiPageEntityLookup( $this->repoWiki ); // entities are stored in wiki pages
+		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
+		//      transient local cache in CachingEntityLoader.
+		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
+		$key = $this->cachePrefix . ':WikiPageEntityLookup';
+		$lookup = new WikiPageEntityLookup( $this->repoWiki, $this->cacheType, $this->cacheDuration, $key );
 		return new CachingEntityLoader( $lookup );
 	}
 
@@ -237,10 +266,13 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	protected function newPropertyLabelResolver() {
+		$key = $this->cachePrefix . ':TermPropertyLabelResolver';
 		return new TermPropertyLabelResolver(
 			$this->language->getCode(),
 			$this->getTermIndex(),
-			wfGetMainCache()
+			ObjectCache::getInstance( $this->cacheType ),
+			$this->cacheDuration,
+			$key
 		);
 	}
 

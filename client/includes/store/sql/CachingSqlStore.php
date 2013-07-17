@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Language;
 use LogicException;
+use ObjectCache;
 
 /**
  * Implementation of the client store interface using an SQL backend via MediaWiki's
@@ -53,10 +54,35 @@ class CachingSqlStore implements ClientStore {
 	protected $language;
 
 	/**
+	 * @var string
+	 */
+	private $cachePrefix;
+
+	/**
+	 * @var string
+	 */
+	private $cacheType;
+
+	/**
+	 * @var int
+	 */
+	private $cacheDuration;
+
+	/**
 	 * @param Language $wikiLanguage
 	 */
 	public function __construct( Language $wikiLanguage ) {
 		$this->language = $wikiLanguage;
+
+		//NOTE: once I59e8423c is in, we no longer need the singleton.
+		$settings = Settings::singleton();
+		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$cacheType = $settings->getSetting( 'sharedCacheType' );
+
+		$this->cachePrefix = $cachePrefix;
+		$this->cacheDuration = $cacheDuration;
+		$this->cacheType = $cacheType;
 	}
 
 	/**
@@ -206,10 +232,13 @@ class CachingSqlStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	protected function newPropertyLabelResolver() {
+		$key = $this->cachePrefix . ':TermPropertyLabelResolver';
 		return new TermPropertyLabelResolver(
 			$this->language->getCode(),
 			$this->getTermIndex(),
-			wfGetMainCache()
+			ObjectCache::getInstance( $this->cacheType ),
+			$this->cacheDuration,
+			$key
 		);
 	}
 
