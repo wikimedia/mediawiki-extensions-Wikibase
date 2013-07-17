@@ -250,7 +250,7 @@ class GetClaims extends ApiWikibase {
 	 */
 	public function getParamDescription() {
 		return array(
-			'entity' => 'Id of the entity from which to obtain claims. Required unless key is provided.',
+			'entity' => 'Id of the entity from which to obtain claims. Required unless claim GUID is provided.',
 			'property' => 'Optional filter to only return claims with a main snak that has the specified property.',
 			'claim' => 'A GUID identifying the claim. Required unless entity is provided.',
 			'rank' => 'Optional filter to return only the claims that have the specified rank',
