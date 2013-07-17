@@ -6,7 +6,6 @@ use Status;
 use User;
 use Title;
 use ApiBase;
-
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
@@ -16,6 +15,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 use Wikibase\Utils;
+use Wikibase\ChangeOps;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -37,10 +37,16 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $stringNormalizer;
 
+	/**
+	 * @var ChangeOps
+	 */
+	protected $changeOps;
+
 	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		$this->changeOps = new ChangeOps();
 	}
 
 	/**
@@ -156,6 +162,17 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected abstract function modifyEntity( EntityContent &$entity, array $params );
 
 	/**
+	 * Generates the necessary ChangeOps according to the request
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 *
+	 * @return ChangeOps[] array containing the necessary ChangeOps
+	 */
+	protected abstract function getChangeOps( array $params );
+
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
 	 * @since 0.1
@@ -197,6 +214,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$this->dieUsage( 'You do not have sufficient permissions' , 'permissiondenied' );
 		}
 
+		$this->changeOps->add( $this->getChangeOps( $params ) );
 		$summary = $this->modifyEntity( $entityContent, $params );
 
 		if ( !$summary ) {
