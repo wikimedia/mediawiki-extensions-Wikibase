@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c091be_dd234ba9",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-17T09:47:27Z",
+      "side": 1,
+      "message": "can this be spacey, per mediawiki code style?  otherwise the patch is good.",
+      "revId": "ac6e44d208d86d23e6e459b117a0f8f6c89b68d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
