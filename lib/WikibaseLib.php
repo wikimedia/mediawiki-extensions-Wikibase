@@ -64,10 +64,38 @@ if ( !defined( 'DataValues_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../DataValues/DataValues.php' );
 }
 
+// Include the ValueParsers extension if that hasn't been done yet.
+if ( !defined( 'ValueParsers_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../ValueParsers/ValueParsers.php' );
+}
+
+// Include the ValueFormatters extension if that hasn't been done yet.
+if ( !defined( 'ValueFormatters_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../ValueFormatters/ValueFormatters.php' );
+}
+
+// Include the ValueValidators extension if that hasn't been done yet.
+if ( !defined( 'ValueValidators_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../ValueValidators/ValueValidators.php' );
+}
+
+// Include the ValueView extension if that hasn't been done yet.
+if ( !defined( 'ValueView_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../ValueView/ValueView.php' );
+}
+
+// Include the DataTypes extension if that hasn't been done yet.
+if ( !defined( 'DataTypes_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../DataTypes/DataTypes.php' );
+}
+
 $dependencies = array(
+	'WIKIBASE_DATAMODEL_VERSION' => 'Wikibase DataModel',
 	'Diff_VERSION' => 'Diff',
 	'DataValues_VERSION' => 'DataValues',
 	'ValueParsers_VERSION' => 'ValueParsers',
+	'ValueFormatters_VERSION' => 'ValueFormatters',
+	'ValueValidators_VERSION' => 'ValueValidators',
 	'DataTypes_VERSION' => 'DataTypes',
 	'ValueView_VERSION' => 'ValueView',
 );
