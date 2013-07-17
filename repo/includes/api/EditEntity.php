@@ -100,7 +100,7 @@ class EditEntity extends ModifyEntity {
 		wfProfileIn( __METHOD__ );
 		$summary = $this->createSummary( $params );
 		$entity = $entityContent->getEntity();
-		$changeOps = new ChangeOps();
+		//$changeOps = new ChangeOps();
 		$status = Status::newGood();
 
 		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
@@ -135,15 +135,15 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( array_key_exists( 'labels', $data ) ) {
-			$changeOps->add( $this->getLabelChangeOps( $data['labels'], $status ) );
+			$this->changeOps->add( $this->getLabelChangeOps( $data['labels'], $status ) );
 		}
 
 		if ( array_key_exists( 'descriptions', $data ) ) {
-			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'], $status ) );
+			$this->changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'], $status ) );
 		}
 
 		if ( array_key_exists( 'aliases', $data ) ) {
-			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'], $status ) );
+			$this->changeOps->add( $this->getAliasesChangeOps( $data['aliases'], $status ) );
 		}
 
 		if ( array_key_exists( 'sitelinks', $data ) ) {
@@ -152,7 +152,7 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "key can't be handled: sitelinks", 'not-recognized' );
 			}
 
-			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $status ) );
+			$this->changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $status ) );
 		}
 
 		if ( !$status->isOk() ) {
@@ -160,7 +160,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "Edit failed: $1", 'failed-save' );
 		}
 
-		if ( $changeOps->apply( $entity ) === false ) {
+		if ( $this->changeOps->apply( $entity ) === false ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Change could not be applied to entity', 'failed-save' );
 		}
@@ -174,6 +174,10 @@ class EditEntity extends ModifyEntity {
 
 		wfProfileOut( __METHOD__ );
 		return $summary;
+	}
+	
+	protected function getChangeOps( array $params ) {
+		return array();
 	}
 
 	/**
