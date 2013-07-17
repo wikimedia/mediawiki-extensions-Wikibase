@@ -86,15 +86,17 @@ class ChangeOps {
 
 	/**
 	 * Applies all changes to the given entity
+	 *
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 * @param Summary|null $summary
 	 *
 	 * @return bool
 	 */
-	public function apply( Entity $entity ) {
+	public function apply( Entity $entity, Summary $summary = null ) {
 		foreach ( $this->ops as $op ) {
-			if ( $op->apply( $entity ) === false ) {
+			if ( $op->apply( $entity, $summary ) === false ) {
 				return false;
 			}
 		}
