@@ -68,14 +68,21 @@ class ChangeOpLabel implements ChangeOp {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 * @param Summary $summary
 	 *
 	 * @return bool
 	 */
-	public function apply( Entity $entity ) {
+	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->label === null ) {
 			$entity->removeLabel( $this->language );
+			if ( $summary !== null ) {
+				$summary->addAutoSummaryArgs( $entity->getLabel( $this->language ) );
+			}
 		} else {
 			$entity->setLabel( $this->language, $this->label );
+			if ( $summary !== null ) {
+				$summary->addAutoSummaryArgs( $this->label );
+			}
 		}
 		return true;
 	}

@@ -68,6 +68,30 @@ class SetDescription extends ModifyLangAttribute {
 	}
 
 	/**
+	 * @see \Wikibase\Api\ModifyEntity::getChangeOps()
+	 */
+	protected function getChangeOps( array $params ) {
+		wfProfileIn( __METHOD__ );
+		$changeOps = array();
+		$description = "";
+	
+		if ( isset( $params['value'] ) ) {
+			$description = $this->stringNormalizer->trimToNFC( $params['value'] );
+		}
+	
+		$language = $params['language'];
+	
+		if ( $description === "" ) {
+			$changeOps[] = new ChangeOpDescription( $language, null );
+		} else {
+			$changeOps[] = new ChangeOpDescription( $language, $description );
+		}
+	
+		wfProfileOut( __METHOD__ );
+		return $changeOps;
+	}
+
+	/**
 	 * @see \ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
