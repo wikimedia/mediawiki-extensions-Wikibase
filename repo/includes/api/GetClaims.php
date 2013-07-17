@@ -280,7 +280,7 @@ class GetClaims extends ApiWikibase {
 		return array(
 			'entity' => 'Id of the entity from which to obtain claims. Required unless key is provided.',
 			'property' => 'Optional filter to only return claims with a main snak that has the specified property.',
-			'claim' => 'A GUID identifying the claim. Required unless entity is provided.',
+			'claim' => 'A GUID identifying the claim. Required unless entity is provided. The GUID is the globally unique identifier for a claim, e.g. "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F".',
 			'rank' => 'Optional filter to return only the claims that have the specified rank',
 			'props' => 'Some parts of the claim are returned optionally. This parameter controls which ones are returned.',
 		);
@@ -311,7 +311,7 @@ class GetClaims extends ApiWikibase {
 			"api.php?action=wbgetclaims&entity=q42" => "Get claims for item with ID q42",
 			"api.php?action=wbgetclaims&entity=q42&property=p2" => "Get claims for item with ID q42 and property with ID p2",
 			"api.php?action=wbgetclaims&entity=q42&rank=normal" => "Get claims for item with ID q42 that are ranked as normal",
-			'api.php?action=wbgetclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => "Get claim with GUID of q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
+			'api.php?action=wbgetclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => 'Get claim with GUID of q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F',
 		);
 	}
 
