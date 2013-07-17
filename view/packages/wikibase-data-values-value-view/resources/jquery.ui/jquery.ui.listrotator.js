@@ -216,7 +216,7 @@
 			// Attach event to html node to detect click outside of the menu closing the menu:
 			$( 'html' )
 			.off( '.' + this.widgetName )
-			.on( 'click.' + this.widgetBaseClass, function( event ) {
+			.on( 'click.' + this.widgetName, function( event ) {
 				$( ':' + self.widgetBaseClass ).each( function( i, node ) {
 					var $target = $( event.target ),
 						listrotator = $( node ).data( 'listrotator' );
