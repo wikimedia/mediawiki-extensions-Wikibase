@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_dd0a2b21",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-17T10:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c091be_a6c3e808",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_6651f060",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_3d109f4e",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-17T10:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c091be_6651f060",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_464e74c2",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2013-07-16T17:52:41Z",
       "side": 1,
       "message": "instead of making $entityWeight an array, use array( \u0027term_weight\u0027 \u003d\u003e $entityWeight ) here.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_1d0de336",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-17T10:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c091be_464e74c2",
       "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_9dd7134a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-17T10:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c091be_c6eb8478",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_2601b83d",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 5
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "29c091be_5d175b44",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-17T10:25:54Z",
+      "side": 1,
+      "message": "disagree, this wouldn\u0027t work. This puts an arbitrary cut on the items, and since the default for the weight is actually 0.0, this would mean we wouldn\u0027t see most of the items in many cases.",
+      "parentUuid": "29c091be_2601b83d",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c091be_06fe3c35",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 5
@@ -115,6 +205,24 @@
       "writtenOn": "2013-07-16T17:52:41Z",
       "side": 1,
       "message": "Turning numeric IDs into EntityID objects could happen here. That will generally be a lot less objects.",
+      "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29c091be_fdcc47bf",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-17T10:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c091be_06fe3c35",
       "revId": "a3d6de5bb871786b587c1c9503e20831da6cde82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
