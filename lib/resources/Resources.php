@@ -578,6 +578,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.stringvalue',
 				'jquery.valueview.experts.commonsmediatype',
 				'jquery.valueview.experts.wikibase.entityidvalue',
+				'jquery.valueview.experts.urltype',
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
