@@ -679,9 +679,12 @@ return call_user_func( function() {
 				'jquery.wikibase/themes/default/jquery.wikibase.entityselector.css'
 			),
 			'dependencies' => array(
+				'jquery.autocompletestring',
+				'jquery.eachchange',
 				'jquery.ui.suggester',
 				'jquery.ui.resizable',
-				'jquery.eachchange'
+				'jquery.ui.widget',
+				'jquery.util.adaptlettercase',
 			),
 			'messages' => array(
 				'wikibase-aliases-label',
