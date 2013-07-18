@@ -51,12 +51,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	public function setup() {
 		parent::setup();
 
-		static $hasSites;
-
-		if ( !$hasSites ) {
-			\TestSites::insertIntoDb();
-			$hasSites = true;
-		}
+		// Nasty... we shouldn't need to do this. But apparently some other test spills bad state.
+		$this->resetEntities();
 	}
 
 	public function testSetLiteLinkWithNoId( ) {
@@ -197,8 +193,6 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	public function testSetLiteLink( $handle, $item_spec, $linksite, $linktitle, $expectedTitle = null, $expectedFailure = null ) {
 		$token = $this->getEditToken();
 		$id = $this->getEntityId( $handle );
-
-		$this->resetEntity( $handle ); //nasty. we shouldn't need to do this. But apparently some other test spills bad state.
 
 		if ( array_key_exists( 'id', $item_spec ) && empty( $item_spec['id'] ) ) {
 			//NOTE: data provider is called before setUp and thus can't determine IDs.
