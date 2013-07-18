@@ -32,6 +32,28 @@ namespace Wikibase\Test;
  */
 abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
+	protected $obLevel;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->obLevel = ob_get_level();
+	}
+
+	public function tearDown() {
+		$obLevel = ob_get_level();
+
+		while ( ob_get_level() > $this->obLevel ) {
+			ob_end_clean();
+		}
+
+		if ( $obLevel !== $this->obLevel ) {
+			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test.");
+		}
+
+		parent::tearDown();
+	}
+
 	//public function testConstructor() {
 		//$this->assertInstanceOf( 'SpecialPage', new \SpecialItemDisambiguation() );
 	//}
@@ -69,18 +91,31 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 		$out->setTitle( $page->getTitle() );
 
 		ob_start();
-		$page->execute( $sub );
 
-		if ( $out->getRedirect() !== '' ) {
-			$out->output();
-			$text = ob_get_contents();
-		} elseif ( $out->isDisabled() ) {
-			$text = ob_get_contents();
-		} else {
-			$text = $out->getHTML();
+		$exception = null;
+		try {
+			$page->execute( $sub );
+
+			if ( $out->getRedirect() !== '' ) {
+				$out->output();
+				$text = ob_get_contents();
+			} elseif ( $out->isDisabled() ) {
+				$text = ob_get_contents();
+			} else {
+				$text = $out->getHTML();
+			}
+		} catch ( \Exception $ex ) {
+			// PHP 5.3 doesn't have `finally`
+			$exception = $ex;
 		}
 
+		// poor man's `finally` block
 		ob_end_clean();
+
+		// re-throw any errors after `finally` handling.
+		if ( $exception ) {
+			throw $exception;
+		}
 
 		$code = $response->getStatusCode();
 

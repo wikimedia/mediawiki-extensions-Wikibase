@@ -56,6 +56,30 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected $interfaceTitle;
 
+	protected $obLevel;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->interfaceTitle = Title::newFromText( "Special:EntityDataRequestHandlerTest" );
+
+		$this->obLevel = ob_get_level();
+	}
+
+	public function tearDown() {
+		$obLevel = ob_get_level();
+
+		while ( ob_get_level() > $this->obLevel ) {
+			ob_end_clean();
+		}
+
+		if ( $obLevel !== $this->obLevel ) {
+			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test.");
+		}
+
+		parent::tearDown();
+	}
+
 	protected function saveItem( Item $item ) {
 		$content = ItemContent::newFromItem( $item );
 		$content->save( "testing", null, EDIT_NEW );
@@ -71,12 +95,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 
 		return $item;
-	}
-
-	public function setUp() {
-		parent::setUp();
-
-		$this->interfaceTitle = Title::newFromText( "Special:EntityDataRequestHandlerTest" );
 	}
 
 	/**
