@@ -24,9 +24,12 @@ matrix:
   allow_failures:
     - env: DBTYPE=postgres EXTENSION=repo
 
-before_script: bash .travis.sh $EXTENSION
+before_script:
+  - bash .travis.sh $EXTENSION
 
-script: cd ../phase3/tests/phpunit ; ./phpunit.php --group Wikibase
+script:
+  - cd ../phase3/tests/phpunit
+  - ./phpunit.php --group Wikibase --exclude-group ChangeHandlerTest
 
 notifications:
   email:
