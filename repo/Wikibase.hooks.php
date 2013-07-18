@@ -3,8 +3,10 @@
 namespace Wikibase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RequestContext;
 use SplFileInfo;
 use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException;
+use Wikibase\Repo\WikibaseRepo;
 
 
 /**
@@ -349,7 +351,7 @@ final class RepoHooks {
 	 *
 	 * @since ?
 	 *
-	 * @param $rc RecentChange
+	 * @param $rc \RecentChange
 	 * @return bool
 	 */
 	public static function onRecentChangeSave( $rc ) {
@@ -359,6 +361,7 @@ final class RepoHooks {
 			$slave = $changesTable->getReadDb();
 			$changesTable->setReadDb( DB_MASTER );
 
+			/* @var EntityChange $change */
 			$change = $changesTable->selectRow(
 				null,
 				array( 'revision_id' => $rc->getAttribute( 'rc_this_oldid' ) )
@@ -633,6 +636,8 @@ final class RepoHooks {
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
 
+			/* @var EntityContent $entityContent */
+
 			if( $entityContent !== null ) {
 				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
 				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getEntity()->getType() );
@@ -731,6 +736,7 @@ final class RepoHooks {
 			return true;
 		}
 
+		/* @var EntityContent $content */
 		$entity = $content->getEntity();
 		if ( is_null( $entity ) ) {
 			// Failed, can't continue. This could happen because there is an illegal structure that could
@@ -846,8 +852,8 @@ final class RepoHooks {
 	 *
 	 * @since 0.3
 	 *
-	 * @param SpecialSearch $searchPage
-	 * @param SearchResult $result
+	 * @param \SpecialSearch $searchPage
+	 * @param \SearchResult $result
 	 * @param $terms
 	 * @param &$link
 	 * @param &$redirect
