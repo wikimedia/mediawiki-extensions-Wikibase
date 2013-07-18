@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "097bcd60_761df80a",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-18T12:02:58Z",
+      "side": 1,
+      "message": "Why are you introducing another local variable?",
+      "revId": "791392ccf41ad139970013b21f0116c2e79ef0d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
