@@ -51,6 +51,7 @@ class GetClaimsTest extends \ApiTestCase {
 	 * @return Entity
 	 */
 	protected function addClaimsAndSave( Entity $entity ) {
+		wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
 		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
 		$content->save( '', null, EDIT_NEW );
 
@@ -60,6 +61,7 @@ class GetClaimsTest extends \ApiTestCase {
 		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'o_O' ) ) ) );
 
 		$content->save( '' );
+		wfRestoreWarnings();
 
 		return $content->getEntity();
 	}

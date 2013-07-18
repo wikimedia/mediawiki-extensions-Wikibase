@@ -264,14 +264,21 @@ abstract class EntityView extends \ContextSource {
 			$pout->addLink( $contentFactory->getTitleForId( $entityId ) );
 		}
 
-		//@todo put externallinks (from URL values) into ParserOutput as externallinks.
-		//@todo would be nice to also put imagelinks (from CommonsMedia values)...
-		//@todo:...as well as iwlinks (from sitelinks) into the ParserOutput.
+		// treat URL values as external links ------
+		$urlFinder = new ReferencedUrlFinder( $this->dataTypeLookup );
+		$usedUrls = $urlFinder->findSnakLinks( $allSnaks );
+
+		foreach ( $usedUrls as $url ) {
+			$pout->addExternalLink( $url );
+		}
 
 		if ( $generateHtml ) {
 			$html = $this->getHtml( $entity, $langCode, $editable );
 			$pout->setText( $html );
 		}
+
+		//@todo: record sitelinks as iwlinks
+		//@todo: record CommnsMedia values as imagelinks
 
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array( 'wikibase.common' ) );
