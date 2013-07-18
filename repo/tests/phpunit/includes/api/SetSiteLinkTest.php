@@ -221,6 +221,9 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		try {
 			list( $res,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 
+			// Clean up immediately to not leave anything in an inconsistent state
+			$this->resetEntity( $handle );
+
 			if ( $expectedFailure ) {
 				$this->fail( $expectedFailure );
 			}
@@ -273,9 +276,6 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 				$this->assertEquals( $expectedTitle, $links[$linksite], 'wrong link target' );
 			}
 		}
-
-		// clean up -------------------------------
-		$this->resetEntity( $handle );
 	}
 
 	public function testSetLiteLinkWithBadTargetSite( ) {
