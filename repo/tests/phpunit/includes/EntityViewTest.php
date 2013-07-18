@@ -167,7 +167,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 		$argLists = array();
 
 		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
-		$p27 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new EntityId( Property::ENTITY_TYPE, 42 );
 		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
 
 		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
@@ -177,31 +177,82 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 			array(),
 			array() );
 
-		$argLists["Property"] = array(
-			array( new Claim( new PropertyNoValueSnak( $p27 ) ) ),
-			array( $p27 ) );
+		$argLists["PropertyNoValueSnak"] = array(
+			array( new Claim( new PropertyNoValueSnak( $p44 ) ) ),
+			array( $p44 ) );
 
 		$argLists["PropertySomeValueSnak"] = array(
-			array( new Claim( new PropertySomeValueSnak( $p27 ) ) ),
-			array( $p27 ) );
+			array( new Claim( new PropertySomeValueSnak( $p44 ) ) ),
+			array( $p44 ) );
 
 		$argLists["PropertyValueSnak with string value"] = array(
-			array( new Claim( new PropertyValueSnak( $p27, new StringValue( 'onoez' ) ) ) ),
-			array( $p27 ) );
+			array( new Claim( new PropertyValueSnak( $p23, new StringValue( 'onoez' ) ) ) ),
+			array( $p23 ) );
 
 		$argLists["PropertyValueSnak with EntityId"] = array(
-			array( new Claim( new PropertyValueSnak( $p27, $q23 ) ) ),
-			array( $p27, $q23 ) );
+			array( new Claim( new PropertyValueSnak( $p44, $q23 ) ) ),
+			array( $p44, $q23 ) );
 
 		$argLists["Mixed Snaks"] = array(
 			array(
 				new Claim( new PropertyValueSnak( $p11, $q23 ) ),
-				new Claim( new PropertyNoValueSnak( $p27 ) ),
+				new Claim( new PropertyNoValueSnak( $p44 ) ),
 				new Claim( new PropertySomeValueSnak( $p44 ) ),
 				new Claim( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
 				new Claim( new PropertyValueSnak( $p44, $q24 ) ),
 			),
-			array( $p11, $q23, $p27, $p44, $q24 ) );
+			array( $p11, $q23, $p44, $q24 ) );
+
+		return $argLists;
+	}
+	
+	/**
+	 * @dataProvider getParserOutputExternalLinksProvider
+	 *
+	 * @param Claim[] $claims
+	 * @param string[] $expectedLinks
+	 */
+	public function testParserOutputExternalLinks( array $claims, $expectedLinks ) {
+		$entityContent = $this->newEntityContentForClaims( $claims );
+		$entityView = $this->newEntityView( $entityContent );
+
+		$out = $entityView->getParserOutput( $entityContent, null, false );
+		$links = $out->getExternalLinks();
+
+		$expectedLinks = array_values( $expectedLinks );
+		sort( $expectedLinks );
+
+		$links = array_keys( $links );
+		sort( $links );
+
+		$this->assertEquals( $expectedLinks, $links );
+	}
+
+	public function getParserOutputExternalLinksProvider() {
+		$argLists = array();
+
+		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
+		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+
+		$argLists["empty"] = array(
+			array(),
+			array() );
+
+		$argLists["PropertyNoValueSnak"] = array(
+			array( new Claim( new PropertyNoValueSnak( $p42 ) ) ),
+			array());
+
+		$argLists["PropertySomeValueSnak"] = array(
+			array( new Claim( new PropertySomeValueSnak( $p42 ) ) ),
+			array() );
+
+		$argLists["PropertyValueSnak with string value"] = array(
+			array( new Claim( new PropertyValueSnak( $p23, new StringValue( 'http://not/a/url' )  ) ) ),
+			array() );
+
+		$argLists["PropertyValueSnak with URL"] = array(
+			array( new Claim( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ) ),
+			array( 'http://acme.com/test' ) );
 
 		return $argLists;
 	}
