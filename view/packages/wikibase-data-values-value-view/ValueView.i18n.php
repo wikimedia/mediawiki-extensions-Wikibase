@@ -312,10 +312,19 @@ $messages['et'] = array(
 );
 
 /** Persian (فارسی)
+ * @author Alireza
  */
 $messages['fa'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'دستکاری داده "$1" فعلا امکان پذیر نیست', # Fuzzy
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => 'خالی',
+	'valueview-expert-timevalue-calendar-gregorian' => 'میلادی',
+	'valueview-expert-timevalue-calendar-julian' => 'ژولینی',
+	'valueview-expert-timeinput-precision' => 'دقت:',
+	'valueview-expert-timeinput-calendar' => 'تقویم:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(گاه‌شماری میلادی)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(گاه‌شماری ژولینی)',
+	'valueview-listrotator-auto' => 'خودکار',
 );
 
 /** Finnish (suomi)
