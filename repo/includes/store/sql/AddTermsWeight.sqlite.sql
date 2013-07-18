@@ -8,7 +8,7 @@ CREATE TABLE /*_*/wb_terms_tmp (
   term_type                  VARBINARY(32)       NOT NULL, -- Term type
   term_text                  VARCHAR(255) binary NOT NULL, -- The term text
   term_search_key            VARCHAR(255) binary NOT NULL, -- The term text, lowercase for case-insensitive lookups
-  term_weight                DOUBLE UNSIGNED     NOT NULL DEFAULT 0.0 -- weight for ranking
+  term_weight                FLOAT UNSIGNED     NOT NULL DEFAULT 0.0 -- weight for ranking
 ) /*$wgDBTableOptions*/;
 
 INSERT INTO /*_*/wb_terms_tmp( term_entity_id, term_entity_type, term_language, term_type, term_text, term_search_key, term_weight )
