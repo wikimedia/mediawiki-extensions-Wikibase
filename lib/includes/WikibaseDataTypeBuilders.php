@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use DataTypes\DataType;
+use Parser;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
@@ -73,13 +74,26 @@ class WikibaseDataTypeBuilders {
 		//     the dataTypes setting. On the other hand, perhaps that setting should only
 		//     be used for the UI, and the factory should simply know all data types always.
 
-		return array(
+		$types = array(
 			'wikibase-item' => array( $this, 'buildItemType' ),
 			'commonsMedia' => array( $this, 'buildMediaType' ),
 			'string' => array( $this, 'buildStringType' ),
 			'time' => array( $this, 'buildTimeType' ),
 			'globe-coordinate' => array( $this, 'buildCoordinateType' ),
 		);
+
+		$experimental = array(
+			'url' => array( $this, 'buildUrlType' ),
+			// 'quantity'=> array( $this, 'buildQuantityType' ),
+			// 'monolingual-text' => array( $this, 'buildMonolingualTextType' ),
+			// 'multilingual-text' => array( $this, 'buildMultilingualTextType' ),
+		);
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$types = array_merge( $types, $experimental );
+		}
+
+		return $types;
 	}
 
 	public function buildItemType( $id ) {
@@ -182,6 +196,26 @@ class WikibaseDataTypeBuilders {
 		);
 
 		return new DataType( $id, 'globecoordinate', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+	}
+
+	public function buildUrlType( $id ) {
+		$validators = array();
+
+		$validators[] = new TypeValidator( 'string' );
+		$validators[] = new StringLengthValidator( 1, 500 );
+		//TODO: validate UTF8 (here and elsewhere)
+
+		$protocols = wfUrlProtocolsWithoutProtRel();
+		$urlPattern = '#^' . $protocols .':(' . Parser::EXT_LINK_URL_CLASS . ')+#';
+
+		//TODO: custom messages would be nice for RegexValidator
+		$validators[] = new RegexValidator( $urlPattern );
+
+		$topValidator = new DataValueValidator( //Note: validate the DataValue's native value.
+			new CompositeValidator( $validators, true ) //Note: each validator is fatal
+		);
+
+		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 }
