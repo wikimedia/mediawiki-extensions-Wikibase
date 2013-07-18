@@ -666,7 +666,7 @@ $messages['ce'] = array(
 	'wikibase-editlinkstitle' => 'Меттанашан юкъара хьажоригаш нисяр',
 	'wikibase-linkitem-addlinks' => 'ТӀетоха хьажоригаш',
 	'wikibase-linkitem-alreadylinked' => 'Ахьа кхечу Википедешкара агӀонашах тосуш йолу агӀо [$1 кхузахь] йолуш ю, хӀокхуна $2 тӀе хьажийна. Элементан чохь хӀора Википеди чура ца агӀо бе хуьлийла дац. Дехар до кхин агӀо къастае кхечу Википедеш чура агӀонашах таса.',
-	'wikibase-linkitem-close' => 'ДӀачӀагӀа къамел агӀо керла йоккхуш',
+	'wikibase-linkitem-close' => 'ДӀачӀагӀа къамел агӀо карла йоккхуш',
 	'wikibase-linkitem-title' => 'АгӀонаш вовшахтасар',
 	'wikibase-linkitem-linkpage' => 'АгӀонаш вовшахтаса',
 	'wikibase-linkitem-selectlink' => 'Дехар до, кхузара хьажориг тӀехӀотто харжа сайт а агӀо а.',
@@ -2148,7 +2148,7 @@ $messages['ko'] = array(
 	'specialpages-group-wikibaseclient' => '위키데이터 클라이언트',
 	'tooltip-t-wikibase' => '데이터 저장소에 연결된 항목을 가리키는 링크',
 	'wikibase-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
-	'wikibase-after-page-move-queued' => '이 문서와 연결된 [$1 위키데이터 항목]은 곧 자동적으로 업데이트될 것입니다.',
+	'wikibase-after-page-move-queued' => '이 문서와 연결된 [$1 위키데이터 항목]은 곧 자동적으로 업데이트됩니다.',
 	'wikibase-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
 	'wikibase-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
 	'wikibase-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
@@ -2171,8 +2171,8 @@ $messages['ko'] = array(
 	'wikibase-linkitem-input-site' => '언어:',
 	'wikibase-linkitem-input-page' => '문서:',
 	'wikibase-linkitem-invalidsite' => '알 수 없거나 잘못된 사이트를 선택했습니다',
-	'wikibase-linkitem-confirmitem-text' => '선택한 문서는 이미 [$1 중앙 데이터 저장소에 항목]에 연결되어 있습니다.
-아래에 나타난 {{PLURAL:$2|문서가|문서들이}} 이 문서와 연결시키고자 하는 것인지 확인해주세요.',
+	'wikibase-linkitem-confirmitem-text' => '선택한 {{PLURAL:$2|문서}}는 이미 [$1 중앙 데이터 저장소에 항목]에 연결되어 있습니다.
+아래에 나타난 {{PLURAL:$2|문서가}} 이 문서와 연결시키고자 하는 것인지 확인해주세요.',
 	'wikibase-linkitem-confirmitem-button' => '확인',
 	'wikibase-linkitem-not-loggedin-title' => '로그인 필요',
 	'wikibase-linkitem-not-loggedin' => '이 기능을 사용하려면 이 위키와 [$1 중앙 데이터 저장소]에 로그인해야 합니다.',
@@ -2186,7 +2186,7 @@ $messages['ko'] = array(
 	'wikibase-error-invalid-entity-id' => '입력한 ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.',
 	'special-unconnectedpages' => '항목에 연결되지 않은 문서',
 	'wikibase-unconnectedpages-legend' => '연결되지 않은 문서 옵션',
-	'wikibase-unconnectedpages-page' => '시작 문서:', # Fuzzy
+	'wikibase-unconnectedpages-page' => '결과 목록의 앞에 있는 문서:',
 	'wikibase-unconnectedpages-submit' => '보기',
 	'wikibase-unconnectedpages-invalid-language' => '"$1"(은)는 올바른 언어 코드가 아닙니다.',
 	'wikibase-unconnectedpages-page-warning' => '문서 제목은 쿼리에 사용할 수 없고 무시됩니다.',
@@ -2655,7 +2655,7 @@ $messages['mt'] = array(
 	'wikibase-editlinkstitle' => 'Immodifika l-ħoloq interlingwi',
 	'wikibase-linkitem-addlinks' => 'Żid ħoloq',
 	'wikibase-linkitem-not-loggedin-title' => 'Trid tkun dħalt fil-kont tiegħek',
-	'wikibase-linkitem-not-loggedin' => "Sabiex tuża' din il-funzjoni trid tkun dħalt fil-kont tiegħek u fir-[$1repożitorju tad-data ċentralizzata].",
+	'wikibase-linkitem-not-loggedin' => "Sabiex tuża' din il-funzjoni trid tkun dħalt fil-kont tiegħek u fir-[$1 repożitorju tad-data ċentralizzata].",
 	'special-unconnectedpages' => "Paġni mhux imwaħħda ma' elementi",
 );
 
@@ -3098,12 +3098,15 @@ $messages['roa-tara'] = array(
  * @author Kaganer
  * @author Ole Yves
  * @author Putnik
+ * @author Soul Train
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
 	'wikibase-client-desc' => 'Клиент для расширения Wikibase',
 	'specialpages-group-wikibaseclient' => 'Клиент Викиданных',
+	'tooltip-t-wikibase' => 'Ссылка на связанный элемент репозитория данных',
 	'wikibase-after-page-move' => 'Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент Викиданных.',
+	'wikibase-after-page-move-queued' => 'Связанный с этой страницей [$1 элемент Викиданных] вскоре будет автоматически обновлён.',
 	'wikibase-comment-remove' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
 	'wikibase-comment-linked' => 'Элемент Викиданных был связан с данной страницей.',
 	'wikibase-comment-unlink' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены.',
@@ -3113,6 +3116,7 @@ $messages['ru'] = array(
 	'wikibase-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|изменение|изменения|изменений}}',
+	'wikibase-dataitem' => 'Элемент данных',
 	'wikibase-editlinks' => 'Править ссылки',
 	'wikibase-editlinkstitle' => 'Править межъязыковые ссылки',
 	'wikibase-linkitem-addlinks' => 'Добавить ссылки',
@@ -3125,7 +3129,7 @@ $messages['ru'] = array(
 	'wikibase-linkitem-input-site' => 'Язык:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-invalidsite' => 'Выбран неизвестный или некорректный сайт',
-	'wikibase-linkitem-confirmitem-text' => 'Выбранная вами страница уже связана с [$1 элементом нашего центрального репозитория данных]. Пожалуйста, подтвердите, что среди показанных ниже страниц есть та, на которую вы хотели поставить ссылку отсюда.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Выбранная вами страница уже сопоставлена с [$1 элементом нашего центрального репозитория данных]. Пожалуйста, подтвердите, что {{PLURAL:$2|на нижеуказанной странице|среди перечисленных ниже страниц}} есть {{PLURAL:$2|та|те}}, на {{PLURAL:$2|которую|которые}} вы хотели поставить ссылку отсюда.',
 	'wikibase-linkitem-confirmitem-button' => 'Подтвердить',
 	'wikibase-linkitem-not-loggedin-title' => 'Вы должны авторизоваться',
 	'wikibase-linkitem-not-loggedin' => 'Чтобы воспользоваться этой функцией, вы должны быть авторизованы в этой вики и в [$1 центральном репозитории данных].',
@@ -3136,6 +3140,7 @@ $messages['ru'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Викиданные',
 	'wikibase-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
 	'wikibase-watchlist-show-changes-pref' => 'Показать изменения на Викиданных в вашем списке наблюдения',
+	'wikibase-error-serialize-error' => 'Не удалось сериализовать данные.',
 	'wikibase-error-invalid-entity-id' => 'Введённый идентификатор не известен системе. Используйте один из действующих идентификаторов сущностей.',
 	'special-unconnectedpages' => 'Страницы, не связанные с элементами',
 	'wikibase-unconnectedpages-legend' => 'Параметры несвязанных страниц',
@@ -3144,9 +3149,10 @@ $messages['ru'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — неправильный код языка.',
 	'wikibase-unconnectedpages-page-warning' => 'Это название страницы не может быть использовано в данном запросе и игнорируется.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Только страницы с межъязыковыми ссылками:',
-	'wikibase-unconnectedpages-format-row' => '($1 межъязыков{{PLURAL:$1|ая ссылка|ые ссылки|ых ссылок}} на странице)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|межъязыковая ссылка|межъязыковые ссылки|межъязыковых ссылок}} на странице)',
 	'wikibase-pageinfo-entity-id' => 'Идентификатор элемента в Викиданных',
 	'wikibase-pageinfo-entity-id-none' => 'Нет',
+	'wikibase-property-render-error' => 'Ошибка раскрытия свойства «$1»: $2',
 );
 
 /** Sicilian (sicilianu)
