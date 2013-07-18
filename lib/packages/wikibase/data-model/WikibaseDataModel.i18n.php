@@ -127,11 +127,25 @@ $messages['roa-tara'] = array(
 	'wikibasedatamodel-desc' => "Combonende ca definisce 'u modelle de date Uicchibase",
 );
 
+/** Russian (русский)
+ * @author Kaganer
+ */
+$messages['ru'] = array(
+	'wikibasedatamodel-desc' => 'Компонент, определяющий модель данных Wikibase',
+);
+
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
 	'wikibasedatamodel-desc' => 'Компонента која дефинише модел података Викибазе',
+);
+
+/** Ukrainian (українська)
+ * @author Ата
+ */
+$messages['uk'] = array(
+	'wikibasedatamodel-desc' => 'Компонент, що визначає модель даних Wikibase',
 );
 
 /** Vietnamese (Tiếng Việt)
