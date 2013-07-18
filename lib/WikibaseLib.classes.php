@@ -33,7 +33,6 @@ return call_user_func( function() {
 		'Wikibase\LibHooks' => 'WikibaseLib.hooks.php',
 
 		// includes
-		'Wikibase\Arrayalizer' => 'includes/Arrayalizer.php',
 		'Wikibase\ChangeNotifier' => 'includes/ChangeNotifier.php',
 		'Wikibase\ChangeNotificationJob' => 'includes/ChangeNotificationJob.php',
 		'Wikibase\UpdateRepoOnMoveJob' => 'includes/UpdateRepoOnMoveJob.php',
@@ -174,7 +173,6 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityChangeTest' => 'tests/phpunit/changes/EntityChangeTest.php',
 		'Wikibase\Test\TestChanges' => 'tests/phpunit/changes/TestChanges.php',
 
-		'Wikibase\Test\EntityRefreshTest' => 'tests/phpunit/changes/EntityRefreshTest.php',
 		'Wikibase\Test\SerializerBaseTest' => 'tests/phpunit/serializers/SerializerBaseTest.php',
 		'Wikibase\Test\EntitySerializerBaseTest' => 'tests/phpunit/serializers/EntitySerializerBaseTest.php',
 		'Wikibase\Test\EntityTestCase' => 'tests/phpunit/entity/EntityTestCase.php',
