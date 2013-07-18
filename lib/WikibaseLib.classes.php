@@ -53,6 +53,7 @@ return call_user_func( function() {
 		'Wikibase\Template' => 'includes/TemplateRegistry.php',
 		'Wikibase\TemplateRegistry' => 'includes/TemplateRegistry.php',
 		'Wikibase\ReferencedEntitiesFinder' => 'includes/ReferencedEntitiesFinder.php',
+		'Wikibase\ReferencedUrlFinder' => 'includes/ReferencedUrlFinder.php',
 		'Wikibase\Lib\PropertyDataTypeLookup' => 'includes/PropertyDataTypeLookup.php',
 		'Wikibase\Lib\PropertyNotFoundException' => 'includes/PropertyNotFoundException.php',
 		'Wikibase\Settings' => 'includes/Settings.php',

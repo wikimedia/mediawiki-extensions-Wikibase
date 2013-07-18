@@ -84,6 +84,8 @@ class RemoveReferencesTest extends \ApiTestCase {
 	public function testRequests() {
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = \Wikibase\Item::newEmpty();
+
+			wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
 			$content = new \Wikibase\ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
 
@@ -92,6 +94,7 @@ class RemoveReferencesTest extends \ApiTestCase {
 			$item->addClaim( $statement );
 
 			$content->save( '' );
+			wfRestoreWarnings();
 
 			$references = $statement->getReferences();
 
