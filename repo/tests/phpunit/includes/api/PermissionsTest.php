@@ -88,7 +88,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 		return $re[0];
 	}
 
-	function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null, array $restore = array() ) {
+	function doPermissionsTest( $action, $params, $permissions, $expectedError ) {
 		global $wgUser;
 
 		self::applyPermissions( $permissions );
@@ -100,12 +100,6 @@ class PermissionsTest extends ModifyEntityTestBase {
 
 			$params[ 'action' ] = $action;
 			list( $re, , ) = $this->doApiRequest( $params, null, false, $wgUser );
-
-			// Restore any items we may have modified.
-			// This should always be done, regardless of validation.
-			foreach ( $restore as $restoreHandle ) {
-				$this->resetEntity( $restoreHandle );
-			}
 
 			if ( $expectedError == null ) {
 				$this->assertArrayHasKey( 'success', $re, 'API call must report success.' );
@@ -179,7 +173,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 			'ids' => $this->getEntityId( "Oslo" ),
 		);
 
-		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError, array() );
+		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
 	function provideAddItemPermissions() {
@@ -218,7 +212,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 			'new' => 'item',
 		);
 
-		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError, array() );
+		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
 	function provideSetSiteLinkPermissions() {
@@ -239,13 +233,20 @@ class PermissionsTest extends ModifyEntityTestBase {
 	 * @dataProvider provideSetSiteLinkPermissions
 	 */
 	function testSetSiteLink( $permissions, $expectedError ) {
+		#XXX: hack: clear tables first. This may create database inconsistencies.
+		#TODO: Use $this->tables_used *everywhere*, so each test cleans up after itself.
+
+		// TODO: use store
+		$dbw = wfGetDB( DB_MASTER );
+		$dbw->delete( 'wb_items_per_site', '*', __METHOD__ );
+
 		$params = array(
 			'id' => $this->getEntityId( "Oslo" ),
 			'linksite' => 'enwiki',
 			'linktitle' => 'Oslo',
 		);
 
-		$this->doPermissionsTest( 'wbsetsitelink', $params, $permissions, $expectedError, array( "Oslo" ) );
+		$this->doPermissionsTest( 'wbsetsitelink', $params, $permissions, $expectedError );
 	}
 
 	function provideSetLabelPermissions() {
@@ -272,7 +273,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 			'value' => 'Oslo',
 		);
 
-		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError, array( "Oslo" ) );
+		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError );
 	}
 
 	function provideSetDescriptionPermissions() {
@@ -299,7 +300,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 			'value' => 'Capitol of Norway',
 		);
 
-		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError, array( "Oslo" ) );
+		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
 	}
 
 }
