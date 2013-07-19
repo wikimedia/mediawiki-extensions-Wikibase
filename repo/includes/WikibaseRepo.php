@@ -247,6 +247,19 @@ final class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
+	 * @return EntityIdFormatter
+	 */
+	public function getEntityIdFormatter() {
+		$options = new ParserOptions( array(
+			EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
+		) );
+
+		return new EntityIdFormatter( $options );
+	}
+
+	/**
+	 * @since 0.4
+	 *
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
