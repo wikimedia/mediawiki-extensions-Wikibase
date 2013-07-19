@@ -107,17 +107,36 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider badgesProvider
 	 */
-	public function testGetBadges( $badges ) {
+	public function testGetBadges( $badges, $expected ) {
 		$siteLink = new SimpleSiteLink( 'enwiki', 'Wikidata', $badges );
-		$this->assertEquals( $badges, $siteLink->getBadges() );
+		$this->assertEquals( $expected, $siteLink->getBadges() );
 	}
 
 	public function badgesProvider() {
 		$argLists = array();
 
-		$argLists[] = array( array() );
-		$argLists[] = array( array( "Nyan Certified" ) );
-		$argLists[] = array( array( "FA", "stub" ) );
+		$badges = array();
+		$expected = array_values( $badges );
+
+		$argLists[] = array( $badges, $expected );
+
+
+		$badges = array( 'Nyan Certified' );
+		$expected = array_values( $badges );
+
+		$argLists[] = array( $badges, $expected );
+
+
+		// removing from the middle of array
+		$badges = array( 'FA', 'Nyan Certified', 'stub' );
+
+		$key = array_search( 'Nyan Certified', $badges );
+		unset( $badges[$key] );
+
+		$expected = array_values( $badges );
+
+		$argLists[] = array( $badges, $expected );
+
 
 		return $argLists;
 	}
