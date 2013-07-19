@@ -240,14 +240,13 @@ abstract class ViewEntityAction extends \ViewAction {
 		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
 			$out->setPageTitle(
 				$this->msg(
-					'difference-title',
+					'difference-title'
 					// This should be something like the following,
 					// $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
 					// or should set the attribute of the h1 to correct direction.
 					// Still note that the direction is "auto" so guessing should
 					// give the right direction in most cases.
-					$labelText
-				)
+				)->rawParams( $labelText )
 			);
 		} else {
 			// Prevent replacing {{...}} by using rawParams() instead of params():

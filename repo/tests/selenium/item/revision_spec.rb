@@ -10,6 +10,7 @@ require 'spec_helper'
 
 num_items = 1
 num_props_string = 1
+template_text = "{{Template:" + generate_random_string(10) + "}}"
 
 # items
 count = 0
@@ -47,6 +48,7 @@ describe "Check revisions view" do
     on_page(ItemPage) do |page|
       page.navigate_to items[0]["url"]
       page.wait_for_entity_to_load
+      page.change_label(template_text)
       page.change_description(generate_random_string(20))
       page.add_statement(properties_string[0]["label"], string_values[0]["value"])
     end
@@ -56,6 +58,7 @@ describe "Check revisions view" do
     it "should check there are no editbuttons" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
+        page.mwFirstHeading.include?(template_text).should === true
         page.oldrevision2
       end
       on_page(ItemPage) do |page|

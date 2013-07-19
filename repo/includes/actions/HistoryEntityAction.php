@@ -90,10 +90,12 @@ class HistoryEntityAction extends \HistoryAction {
 		$prefixedId = ucfirst( $idPrefixer->format( $entity->getId() ) );
 
 		if ( isset( $labelText ) ) {
-			return $this->msg( 'wikibase-history-title-with-label', $prefixedId, $labelText )->text();
+			return $this->msg( 'wikibase-history-title-with-label' )
+				->rawParams( $prefixedId, $labelText )->text();
 		}
 		else {
-			return $this->msg( 'wikibase-history-title-without-label', $prefixedId )->text();
+			return $this->msg( 'wikibase-history-title-without-label' )
+				->rawParams( $prefixedId )->text();
 		}
 	}
 }
