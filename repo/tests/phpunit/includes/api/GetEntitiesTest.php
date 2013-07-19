@@ -49,6 +49,13 @@ use ApiTestCase;
  */
 class GetEntitiesTest extends ModifyEntityTestBase {
 
+	public function setup() {
+		parent::setup();
+
+		// Nasty... we shouldn't need to do this. But apparently some other test spills bad state.
+		$this->resetEntities();
+	}
+
 	/**
 	 * @dataProvider provideEntityHandles
 	 */
