@@ -551,6 +551,21 @@ $messages['lb'] = array(
 	'valueview-listrotator-auto' => 'auto',
 );
 
+/** Lithuanian (lietuvių)
+ * @author Eitvys200
+ */
+$messages['lt'] = array(
+	'valueview-expert-emptyvalue-empty' => 'tuščia',
+	'valueview-expert-globecoordinateinput-precision' => 'Tikslumas:',
+	'valueview-expert-timeinput-calendar' => 'Kalendorius:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Grigališkasis kalendorius)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Julijaus kalendorius)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; keisti į Grigaliaus',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; keisti į Julijaus',
+	'valueview-preview-label' => 'bus rodoma kaip:',
+	'valueview-listrotator-auto' => 'automatinis',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
