@@ -1065,8 +1065,9 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 {{Identical|Time}}',
 	'wikibase-listdatatypes-time-body' => '{{Wikibase-datatype-body|Time}}',
 	'wikibase-listdatatypes-url-head' => '{{Wikibase-datatype-head|Url}}
-{{Identical|Url}}',
+{{Identical|URL}}',
 	'wikibase-listdatatypes-url-body' => '{{Wikibase-datatype-body|Url}}',
+	'datatypes-type-url' => '{{Identical|URL}}',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-property' => 'The name for Wikibase property content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-query' => 'The name for Wikibase query content model, used when describing what type of content a page contains.',
@@ -1532,6 +1533,10 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-entitydata-unsupported-format' => "El formatu de datos $1 nun tien sofitu d'esta interfaz.",
 	'wikibase-entitydata-title' => 'Datos de la entidá',
 	'wikibase-entitydata-text' => 'Esta páxina ufre una interfaz de datos enllazaos a los valores de la entidá. Por favor proporcione la ID de la entidá na URL, usando la sintaxis de subpáxina.',
+	'special-mylanguagefallbackchain' => 'Cadena predeterminada na mio llingua',
+	'wikibase-mylanguagefallbackchain-text' => "La cadena predeterminada de llingua que s'usa p'amosa-y les etiquetes apaez abaxo.",
+	'wikibase-mylanguagefallbackchain-babel' => "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na so [[Special:MyPage|páxina d'usuariu]].",
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, convertíu del $3 - $4',
 	'wikibase-self-conflict-patched' => 'La so edición parcheóse na última versión, sobreescribiendo dalgún de los sos cambios intermedios.',
 	'wikibase-conflict-patched' => 'La so edición parcheóse na última versión.',
 	'wikibase-restoreold' => 'restaurar',
@@ -1576,7 +1581,7 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-property-summary-wbcreate-new' => 'Creada una propiedá nueva',
 	'wikibase-property-summary-wbeditentity-create' => 'Creada una propiedá nueva',
 	'wikibase-property-summary-wbeditentity-update' => 'Actualizada una propiedá nueva',
-	'wikibase-property-summary-wbeditentity-override' => 'Sobreescrita una propiedá nueva', # Fuzzy
+	'wikibase-property-summary-wbeditentity-override' => 'Llimpiada una propiedá',
 	'wikibase-property-summary-wbsetlabel-set' => 'Camudada la etiqueta en [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Desaniciada la etiqueta en [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Camudada la descripción en [$2]',
@@ -1628,6 +1633,9 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 * after – valor enteru esplícitu pal númberu d'unidaes posibles antes del tiempu dau. La unidá vien dada pola precisión.
 * precision – valor esplícitu codificáu nun enteru curtiu. Los númberos tienen el siguiente significáu: 0 - mil millones d'años, 1 - cien millones d'años, ..., 6 - mileniu, 7 - sieglu, 8 - década, 9 - añu, 10 - mes, 11 - día, 12 - hora, 13 - minutu, 14 - segundu.
 * calendarmodel – valor esplícitu dau como URI. Identificará'l modelu de calendariu que tien d'usase p'amosar esti valor de tiempu.",
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Campu de datos lliteral pa una URL. Les URL tan restrinxíes a los protocolos que tamién se sofiten pa los enllaces esternos del testu wiki.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Elementu de Wikibase',
 	'content-model-wikibase-property' => 'Propiedá de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
@@ -5509,6 +5517,8 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-listdatatypes-multilingual-text-head' => 'Monikielinen teksti',
 	'wikibase-listdatatypes-string-head' => 'Merkkijono',
 	'wikibase-listdatatypes-time-head' => 'Aika',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Wikibase-kohde',
 	'content-model-wikibase-property' => 'Wikibase-ominaisuus',
 	'content-model-wikibase-query' => 'Wikibase-kysely',
@@ -5857,6 +5867,9 @@ ffirmation ajoutée}}',
 * after — valeur entière explicite pour le nombre d’unités possible avant l’horodatage fourni. L’unité est indiquée par la précision.
 * precision — valeur explicite encodée en entier court. Les nombres ont la signification suivante: 0 — milliard d’années, 1 — centaine de million d’années, …, 6 — millénaire, 7 — siècle, 8 — décennie, 9 — année, 10 — mois, 11 — jour, 12 — heure, 13 — minute, 14 — seconde.
 * calendarmodel — valeur explicite fournie sous forme d’URI. Elle identifie le modèle de calendrier qui doit être utilisé pour afficher cette valeur d’horodatage.',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Champ de données littéral pour une URL. Les URLs sont limitées aux protocoles supportés aussi pour les liens externes en wikitexte.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Élément Wikibase',
 	'content-model-wikibase-property' => 'Propriété de Wikibase',
 	'content-model-wikibase-query' => 'Requête de Wikibase',
@@ -8433,6 +8446,8 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 * dopo – valore intero espresso per quanti unità, prima che il tempo specificato, potrebbe essere. L'unità è data dalla precisione.
 * precisione – valore espresso codificato in un intero breve. I numeri hanno il seguente significato: 0 - miliardi di anni, 100 milioni anni,..., 6 - millenio, 7 - secolo, 8 - decade, 9 - anno, 10 - mese, 11 - giorno, 12 - ora, 13 - minuto, 14 - secondo.
 * calendario – valore espresso fornito come un URI. Identificherà il modello di calendario che dovrebbe essere utilizzato per visualizzare il valore del tempo.",
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Elemento Wikibase',
 	'content-model-wikibase-property' => 'Proprietà Wikibase',
 	'content-model-wikibase-query' => 'Interrogazione Wikibase',
@@ -8758,6 +8773,8 @@ $messages['ja'] = array(
 * after – 指定された時刻になるまで現在から単位時間で何個分かかるのか表す明示の整数値。単位は precision で与えられます。
 * precision – shortint 型の明示の値。数には以下の意味があります: 0 - 10億年、1 - 1億年、...、6 - 千年、7 - 1世紀、8 - 10年、9 - 1年、10 - 月、11 - 日、12 - 時間、13 - 分、14 - 秒。
 * calendarmodel – URI として指定される明示の値。時刻を表示するのに使うべき暦法を示します。',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'ウィキベース項目',
 	'content-model-wikibase-property' => 'ウィキベース プロパティ',
 	'content-model-wikibase-query' => 'ウィキベース クエリ',
@@ -10347,6 +10364,9 @@ $messages['mk'] = array(
 *по (''after'') – искажана целобројна вредност за тоа колку единици пред даденото време би можело да биде. Единицата е дадена во точноста.
 *точност (''precision'') – искажана вредност изразена како скратен цел број (shortint). Бројките ги имаат следниве значења: 0 - милијарда години, 1 - сто милиони години, ..., 6 - милениуми, 7 - век, 8 - деценија, 9 - година, 10 - месец, 11 - ден, 12 - час, 13 - минута, 14 - секунда.
 *календарски модел (''calendarmodel'') – искажана вредност дадена како URI. Укажува кој календарски модел да се корсти за прикажување на таа временска вредност.",
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Азбучнобројчени податоци за URL. URL-адресите се ограничени на протоколите и поддржани за викитекст за надворешни врски.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Ставка во Викибазата',
 	'content-model-wikibase-property' => 'Својство од Викибазата',
 	'content-model-wikibase-query' => 'Барање за Викибазата',

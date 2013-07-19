@@ -1334,7 +1334,7 @@ $messages['fi'] = array(
 	'wikibase-linkitem-input-site' => 'Kieli',
 	'wikibase-linkitem-input-page' => 'Sivu',
 	'wikibase-linkitem-invalidsite' => 'Tuntematon tai virheellinen sivusto valittu',
-	'wikibase-linkitem-confirmitem-text' => 'Valitsemasi sivu on jo liitetty [$1 keskustietovaraston kohteeseen]. Vahvista, että haluat linkittää tämän sivun alla näkyviin sivuihin.',
+	'wikibase-linkitem-confirmitem-text' => 'Valitsemasi sivu on jo liitetty [$1 keskustietovaraston kohteeseen]. Vahvista, että haluat linkittää tämän sivun alla näkyviin sivuihin.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Vahvista',
 	'wikibase-linkitem-not-loggedin-title' => 'Sinun täytyy olla sisäänkirjautuneena',
 	'wikibase-linkitem-not-loggedin' => 'Sinun täytyy olla kirjautuneena tässä wikissä ja [$1 keskustietovarastossa] käyttääksesi tätä toimintoa.',
@@ -1351,7 +1351,10 @@ $messages['fi'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '”$1” ei ole kelvollinen kielikoodi.',
 	'wikibase-unconnectedpages-page-warning' => 'Sivun otsikkoa ei voitu käyttää kyselyssä ja se jätettiin huomiotta.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Sivut, joilla on kieltenvälisiä linkkejä',
-	'wikibase-unconnectedpages-format-row' => '($1 kieltenvälistä linkkiä sivulla)',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|kieltenvälinen linkki|kieltenvälistä linkkiä}} sivulla)',
+	'wikibase-pageinfo-entity-id' => 'Wikidatan kohteen tunniste',
+	'wikibase-pageinfo-entity-id-none' => 'Ei mitään',
+	'wikibase-property-render-error' => 'Ominaisuuden $1 näyttäminen epäonnistui: $2',
 );
 
 /** French (français)
@@ -2327,7 +2330,7 @@ $messages['lb'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
 	'wikibase-error-invalid-entity-id' => "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
-	'special-unconnectedpages' => 'Säiten déi net mat Elementer verbonn sinn',
+	'special-unconnectedpages' => 'Säiten déi net mat Elementer verbonne sinn',
 	'wikibase-unconnectedpages-legend' => 'Optioune fir net verbonne Säiten',
 	'wikibase-unconnectedpages-page' => 'Lëscht vun de Resultater fänkt u mat der Säit:',
 	'wikibase-unconnectedpages-submit' => 'Lass',
