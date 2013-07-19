@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9845590_1ab84de2",
+        "filename": "lib/tests/phpunit/specials/SpecialPageTestBase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-19T01:53:07Z",
+      "side": 1,
+      "message": "In core\u0027s includes/resourceloader/ResourceLoader.php (around line 600) it is stated that this might never turn 0 in some configurations, we might want to make sure that we don\u0027t infinite-loop over here (see also https://gerrit.wikimedia.org/r/74570)",
+      "revId": "26284af6d1a7b4ed8408abe94311f12d742d3f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
