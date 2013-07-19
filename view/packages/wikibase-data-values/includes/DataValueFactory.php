@@ -41,10 +41,11 @@ class DataValueFactory {
 	 *
 	 * @var string[]
 	 */
-	protected $values;
+	protected $values = array();
 
 	/**
 	 * Singleton.
+	 * @deprecated Create your own instance rather then relying on global state
 	 *
 	 * @since 0.1
 	 *
