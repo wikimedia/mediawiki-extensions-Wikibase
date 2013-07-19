@@ -378,7 +378,9 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		foreach ( self::$entityInput as $handle => $entity ) {
 			$entity['id'] = $this->getEntityId( $handle );
 
-			$this->setEntity( $entity, $token );
+			$data = $this->setEntity( $entity, $token );
+
+			self::$entityOutput[ $handle ] = $data;
 		}
 	}
 
