@@ -401,6 +401,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	function setEntity( $data, $token ) {
 		$params = array(
 			'action' => 'wbeditentity',
+			'clear' => true,
 			'format' => 'json', // make sure IDs are used as keys.
 			'token' => $token,
 		);

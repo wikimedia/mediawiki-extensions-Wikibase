@@ -122,6 +122,8 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 				'Bergen',
 				'nowiki', // already set, from another item
 				'Bergen',
+				null,
+				true
 			),
 		);
 	}
@@ -129,11 +131,10 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 	/**
 	 * @dataProvider provideLinkTitles
 	 */
-	public function testLinkTitles( $handle, $item_spec, $fromsite, $fromtitle, $tosite, $totitle, $expectedFailure = null ) {
+	public function testLinkTitles( $handle, $item_spec, $fromsite, $fromtitle, $tosite, $totitle, $expectedFailure = null, $cleanUp = false ) {
 		$token = $this->getEditToken();
 		if ( $handle ) {
 			$id = $this->getEntityId( $handle );
-			$this->resetEntity( $handle ); //nasty. we shouldn't need to do this. But apparently some other test spills bad state.
 		}
 
 		// set the sitelink -------------------------------
@@ -183,9 +184,14 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 			}
 		}
 
-		// clean up, but note that we can't clean up newly created items -------------------------------
-		if ( $handle ) {
-			$this->resetEntity( $handle );
+		if ( $cleanUp ) {
+			// This sucks really bad, but it's the only way we can do this
+			// for several reasons:
+			// This tests assume the entities to not being reseted during
+			// run time (so we can't use the setUp/ tearDown functions for
+			// this) but it changes them so they have to be cleared out at
+			// some point.
+			$this->resetEntities();
 		}
 
 		$this->assertTrue( true );
