@@ -83,13 +83,13 @@ describe "Check item type statements UI" do
         page.statement1ClaimValue1.include?(items[1]["id"]).should be_true
         page.statement1ClaimValue1_element.click
         page.wait_for_entity_to_load
-        @browser.title.include?(ITEM_ID_PREFIX + items[1]["id"]).should be_true
+        @browser.title.include?( items[1]["label"]).should be_true
         @browser.back
         @browser.refresh
         page.wait_for_entity_to_load
         page.statement1Name_element.click
         page.wait_for_entity_to_load
-        @browser.title.include?(PROPERTY_ID_PREFIX + properties_item[0]["id"]).should be_true
+        @browser.title.include?( properties_item[0]["label"]).should be_true
       end
     end
   end
