@@ -392,10 +392,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		$entity['id'] = $this->getEntityId( $handle );
 
 		$token = $this->getEditToken();
-		$data = $this->setEntity( $entity, $token );
-
-		self::$entityOutput[ $handle ] = $data;
-		return $data;
+		return $this->setEntity( $entity, $token );
 	}
 
 	/**
@@ -601,13 +598,13 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 */
 	public function assertEntityEquals( $expected, $actual ) {
 		if ( isset( $expected['id'] ) ) {
-			$this->assertEquals( $expected['id'], $actual['id'], 'id' );
+			$this->assertEquals( $expected['id'], $actual['id'] );
 		}
 		if ( isset( $expected['lastrevid'] ) ) {
-			$this->assertEquals( $expected['lastrevid'], $actual['lastrevid'], 'lastrevid' );
+			$this->assertEquals( $expected['lastrevid'], $actual['lastrevid'] );
 		}
 		if ( isset( $expected['type'] ) ) {
-			$this->assertEquals( $expected['type'], $actual['type'], 'type' );
+			$this->assertEquals( $expected['type'], $actual['type'] );
 		}
 
 		if ( isset( $expected['labels'] ) ) {
