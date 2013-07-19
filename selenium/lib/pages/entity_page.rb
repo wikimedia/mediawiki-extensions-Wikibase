@@ -115,6 +115,7 @@ class EntityPage < RubySelenium
 
   def wait_for_error_details
     wait_until do
+      sleep 0.5
       wbErrorDetailsDiv? == true
     end
   end
