@@ -1,10 +1,13 @@
 <?php
 
 namespace Wikibase;
-
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use RequestContext;
+use SplFileInfo;
 use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException;
 use Wikibase\Repo\WikibaseRepo;
+
 
 /**
  * File defining the hook handlers for the Wikibase extension.
@@ -150,102 +153,19 @@ final class RepoHooks {
 	 */
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
-		$testFiles = array(
-			'Autocomment',
-			'ClaimSummaryBuilder',
-			'EditEntity',
-			'EntityView',
-			'ItemMove',
-			'ItemContentDiffView',
-			'ItemMove',
-			'ItemView',
-			'LabelDescriptionDuplicateDetector',
-			'MultiLangConstraintDetector',
-			'NamespaceUtils',
-			'Summary',
-			'WikibaseRepo',
+		$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-			'actions/EditEntityAction',
-			'actions/ViewEntityAction',
-
-			'api/BotEdit',
-			'api/EditPage',
-			'api/GetEntities',
-			'api/SetLabel',
-			'api/SetDescription',
-			'api/LinkTitles',
-			'api/Permissions',
-			'api/SetAliases',
-			'api/EditEntity',
-			'api/SetSiteLink',
-			'api/CreateClaim',
-			'api/GetClaims',
-			'api/RemoveClaims',
-			'api/SetClaimValue',
-			'api/SetReference',
-			'api/RemoveReferences',
-			'api/SetClaim',
-			'api/RemoveQualifiers',
-			'api/SetQualifier',
-			'api/SnakValidationHelper',
-			'api/ItemByTitleHelper',
-
-			'changeop/ChangeOps',
-			'changeop/ChangeOpLabel',
-			'changeop/ChangeOpDescription',
-			'changeop/ChangeOpAliases',
-			'changeop/ChangeOpSiteLink',
-
-			'content/EntityContentFactory',
-			'content/EntityHandler',
-			'content/ItemContent',
-			'content/ItemHandler',
-			'content/PropertyContent',
-			'content/PropertyHandler',
-
-			'LinkedData/EntityDataSerializationService',
-			'LinkedData/EntityDataRequestHandler',
-			'LinkedData/EntityDataUriManager',
-
-			'rdf/RdfBuilder',
-			'rdf/RdfSerializer',
-
-			'specials/SpecialEntityData',
-			'specials/SpecialMyLanguageFallbackChain',
-			'specials/SpecialNewItem',
-			'specials/SpecialNewProperty',
-			'specials/SpecialItemDisambiguation',
-			'specials/SpecialItemByTitle',
-			'specials/SpecialSetDescription',
-			'specials/SpecialSetLabel',
-			'specials/SpecialSetAliases',
-
-			'store/IdGenerator',
-			'store/StoreFactory',
-			'store/Store',
-
-			'store/sql/DispatchStats',
-			'store/sql/EntityPerPageBuilder',
-			'store/sql/SqlIdGenerator',
-			'store/sql/TermSqlIndex',
-			'store/sql/TermSearchKeyBuilder',
-
-			'updates/ItemDeletionUpdate',
-			'updates/ItemModificationUpdate',
-
-			'Validators/SnakValidator',
-		);
-
-		foreach ( $testFiles as $file ) {
-			$file = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
-
-			if ( !file_exists( $file ) ) {
-				throw new MWException( "Test file not found: $file" );
+		/**
+		 * @var SplFileInfo $fileInfo
+		 */
+		$ourFiles = array();
+		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+			if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+				$ourFiles[] = $fileInfo->getPathname();
 			}
-
-			$files[] = $file;
 		}
 
+		$files = array_merge( $files, $ourFiles );
 		return true;
 		// @codeCoverageIgnoreEnd
 	}
