@@ -47,6 +47,19 @@ use ApiTestCase;
  */
 class LinkTitlesTest extends ModifyEntityTestBase {
 
+	public function setup() {
+		parent::setup();
+
+		// Nasty... we shouldn't need to do this. But apparently some other test spills bad state.
+		$this->resetEntities();
+	}
+
+	public function tearDown() {
+		parent::tearDown();
+
+		$this->resetEntities( $handle );
+	}
+
 	public function testLinkTitlesWithNoToken( ) {
 		if ( !self::$usetoken ) {
 			$this->markTestSkipped( "tokens disabled" );
@@ -133,7 +146,6 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 		$token = $this->getEditToken();
 		if ( $handle ) {
 			$id = $this->getEntityId( $handle );
-			$this->resetEntity( $handle ); //nasty. we shouldn't need to do this. But apparently some other test spills bad state.
 		}
 
 		// set the sitelink -------------------------------
