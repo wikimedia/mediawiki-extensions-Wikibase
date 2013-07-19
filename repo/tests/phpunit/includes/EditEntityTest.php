@@ -65,14 +65,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	protected static function getTestRevisions() {
-		$user = self::getUser( "EditEntityTestUser2" );
+		global $wgUser;
 
 		if ( self::$testRevisions === null ) {
 			$otherUser = self::getUser( "EditEntityTestUser2" );
 
 			$itemContent = ItemContent::newEmpty();
 			$itemContent->getEntity()->setLabel('en', "foo");
-			$itemContent->save( "rev 0", $user, EDIT_NEW );
+			$itemContent->save( "rev 0", $wgUser, EDIT_NEW );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent = $itemContent->copy();
@@ -82,13 +82,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('de', "bar");
-			$itemContent->save( "rev 2", $user, EDIT_UPDATE );
+			$itemContent->save( "rev 2", $wgUser, EDIT_UPDATE );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('en', "test");
 			$itemContent->getEntity()->setDescription('en', "more testing");
-			$itemContent->save( "rev 3", $user, EDIT_UPDATE );
+			$itemContent->save( "rev 3", $wgUser, EDIT_UPDATE );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 		}
 
@@ -99,13 +99,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 	protected $userGroups;
 
 	function setUp() {
-		global $wgGroupPermissions;
+		global $wgGroupPermissions, $wgUser;
 		global $wgOut, $wgTitle;
 
 		parent::setUp();
 
  		$this->permissions = $wgGroupPermissions;
-		$this->userGroups = array( 'user' );
+		$this->userGroups = $wgUser->getGroups();
 
 		if ( $wgTitle === null ) {
 			$wgTitle = \Title::newFromText( "Test" );
@@ -122,9 +122,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	function tearDown() {
-		global $wgGroupPermissions;
+		global $wgGroupPermissions, $wgUser;
 
 		$wgGroupPermissions = $this->permissions;
+
+		$userGroups = $wgUser->getGroups();
+
+		foreach ( array_diff( $this->userGroups, $userGroups ) as $group ) {
+			$wgUser->addGroup( $group );
+		}
+
+		foreach ( array_diff( $userGroups, $this->userGroups ) as $group ) {
+			$wgUser->removeGroup( $group );
+		}
+
+		$wgUser->getEffectiveGroups( true ); // recache
 
 		parent::tearDown();
 	}
@@ -199,10 +211,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideHasEditConflict
 	 */
 	public function testHasEditConflict( $inputData, $baseRevisionIdx, $expectedConflict, $expectedFix, array $expectedData = null ) {
+		global $wgUser;
+
 		/* @var $content \Wikibase\EntityContent */
 		/* @var $revision \Revision */
 
-		$user = self::getUser( 'EntityEditEntityTestHasEditConflictUser' );
+		static $user = null;
+		if ( !$user ) {
+			$user = \User::newFromId( 0 );
+			$user->setName( '127.0.0.1' );
+		}
+		$this->setMwGlobals( 'wgUser', $user );
 
 		$revisions = self::getTestRevisions();
 
@@ -235,7 +254,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		// save entity ----------------------------------
-		$editEntity = new EditEntity( $content, $user, $baseRevisionId );
+		$editEntity = new EditEntity( $content, $wgUser, $baseRevisionId );
 
 		$conflict = $editEntity->hasEditConflict();
 		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
@@ -275,54 +294,44 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAttemptSaveWithLateConflict
 	 */
 	public function testAttemptSaveWithLateConflict( $baseRevId, $expectedConflict ) {
-		$user = self::getUser( "EditEntityTestUser" );
+		global $wgUser;
 
 		// create item
 		$content = ItemContent::newEmpty();
 		$content->getEntity()->setLabel( 'en', 'Test' );
-		$content->save( "rev 0", $user, EDIT_NEW );
+		$content->save( "rev 0", $wgUser, EDIT_NEW );
+
 
 		// begin editing the entity
 		$content->getEntity()->setLabel( 'en', 'Trust' );
 
-		$editEntity = new EditEntity( $content, $user, $baseRevId );
+		$editEntity = new EditEntity( $content, $wgUser, $baseRevId );
 		$editEntity->getCurrentRevision(); // make sure EditEntity has page and revision
 
 		$this->assertEquals( $baseRevId, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
 
 		// create independent EntityContent instance for the same entity, and modify and save it
 		$page = \WikiPage::factory( $content->getTitle() );
-
-		$user2 = self::getUser( "EditEntityTestUser2" );
-
-		/* @var EntityContent $content2 */
 		$content2 = $page->getContent();
 		$content2->getEntity()->setLabel( 'en', 'Toast' );
-		$content2->save( 'Trolololo!', $user2, EDIT_UPDATE );
+		$content2->save( 'Trolololo!', null, EDIT_UPDATE );
 
 		// now try to save the original edit. The conflict should still be detected
-		$token = $user->getEditToken();
+		$token = $wgUser->getEditToken();
 		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE, $token );
 
-		$id = $content->getEntity()->getId()->__toString();
-
-		if ( $status->isOK() ) {
-			$statusMessage = "Status ($id): OK";
-		} else {
-			$statusMessage = "Status ($id): " . $status->getWikiText();
-		}
-
 		$this->assertNotEquals( $expectedConflict, $status->isOK(),
-			"Saving should have failed late if and only if a base rev was provided.\n$statusMessage" );
+			'saving should have failed late if and only if a base rev was provided' );
 
 		$this->assertEquals( $expectedConflict, $editEntity->hasError(),
-			"Saving should have failed late if and only if a base rev was provided.\n$statusMessage" );
+			'saving should have failed late if and only if a base rev was provided' );
 
 		$this->assertEquals( $expectedConflict, $status->hasMessage( 'edit-conflict' ),
-			"Saving should have failed late if and only if a base rev was provided.\n$statusMessage" );
+			'saving should have failed late if and only if a base rev was provided' );
 
 		$this->assertEquals( $expectedConflict, $editEntity->showErrorPage(),
-			"If and only if there was an error, an error page should be shown.\n$statusMessage" );
+			'if and only if there was an error, an error page should be show' );
+
 	}
 
 	public function testUserWasLastToEdit() {
@@ -416,7 +425,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	protected function prepareItemForPermissionCheck( $group, $permissions, $create ) {
-		$user = self::getUser( "EditEntityTestUser" );
+		global $wgUser;
 
 		$content = ItemContent::newEmpty();
 
@@ -425,8 +434,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$content->save( "testing", null, EDIT_NEW );
 		}
 
-		if ( !in_array( $group, $user->getEffectiveGroups() ) ) {
-			$user->addGroup( $group );
+		if ( !in_array( $group, $wgUser->getEffectiveGroups() ) ) {
+			$wgUser->addGroup( $group );
 		}
 
 		if ( $permissions !== null ) {
@@ -447,8 +456,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
 		$content->getItem()->setLabel( 'xx', 'Foo' );
 
-		$user = self::getUser( "EditEntityTestUser" );
-		$edit = new EditEntity( $content, $user );
+		$edit = new EditEntity( $content );
 
 		$edit->checkEditPermissions();
 
@@ -460,13 +468,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testAttemptSavePermissions( $group, $permissions, $create, $expectedOK ) {
-		$user = self::getUser( "EditEntityTestUser" );
+		global $wgUser;
 
 		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
 		$content->getItem()->setLabel( 'xx', 'Foo' );
 
-		$token = $user->getEditToken();
-		$edit = new EditEntity( $content, $user );
+		$token = $wgUser->getEditToken();
+
+		$edit = new EditEntity( $content );
 
 		$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : 0 ), $token );
 
@@ -667,14 +676,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideIsTokenOk
 	 */
 	public function testIsTokenOk( $token, $shouldWork ) {
-		$user = self::getUser( "EditEntityTestUser" );
+		global $wgUser;
 
 		$content = ItemContent::newEmpty();
-		$edit = new EditEntity( $content, $user );
+		$edit = new EditEntity( $content );
 
 		// check valid token --------------------
 		if ( $token === true ) {
-			$token = $user->getEditToken();
+			$token = $wgUser->getEditToken();
 		}
 
 		$this->assertEquals( $shouldWork, $edit->isTokenOK( $token ) );
