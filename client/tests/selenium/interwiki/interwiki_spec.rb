@@ -54,6 +54,17 @@ describe "Check client interwiki links" do
         page.entityDescriptionSpan.should == item_description
       end
     end
+    it "should check data item link in client toolbox" do
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title)
+        page.clientDataItemLink?.should be_true
+        page.clientDataItemLink
+      end
+      on_page(ItemPage) do |page|
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == article_title
+      end
+    end
   end
 
   context "Check noexternallanglinks magic word behavior" do
