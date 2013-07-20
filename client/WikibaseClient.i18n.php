@@ -804,6 +804,7 @@ $messages['cs'] = array(
  */
 $messages['cu'] = array(
 	'wikibase-editlinks' => 'исправи съвѧꙁи',
+	'wikibase-linkitem-input-site' => 'ѩꙁꙑкъ :',
 	'wikibase-rc-hide-wikidata' => '$1 Викисводъ',
 );
 
@@ -1669,6 +1670,7 @@ $messages['hi'] = array(
  * @author SpeedyGonsales
  */
 $messages['hr'] = array(
+	'wikibase-dataitem' => 'Međuwiki',
 	'wikibase-editlinks' => 'Uredi međuwikije',
 	'wikibase-linkitem-addlinks' => 'Dodaj međuwikije',
 	'wikibase-linkitem-alreadylinked' => 'Stranica koju ste željeli povezati već je povezana na [$1 međuwiki] na wikidati koja vodi na $2 na ovom projektu. Može postojati samo jedan međuwiki. Molimo izaberite drugu stranicu.',
@@ -3665,6 +3667,20 @@ $messages['yi'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|אינטערשפראך לינק|אינטערשפראך לינקען}} אויפן בלאט)',
 	'wikibase-pageinfo-entity-id' => 'וויקידאטן אביעקט ID',
 	'wikibase-pageinfo-entity-id-none' => 'קיין',
+);
+
+/** Yoruba (Yorùbá)
+ * @author Demmy
+ */
+$messages['yo'] = array(
+	'specialpages-group-wikibaseclient' => 'Àlejò wikidata',
+	'wikibase-editlinks' => 'Àtúnṣe àjápọ̀',
+	'wikibase-editlinkstitle' => 'Àtúnṣe àwọn àjápọ̀ èdè míràn',
+	'wikibase-linkitem-addlinks' => 'Àfikún àjápọ̀',
+	'wikibase-linkitem-input-site' => 'Èdè:',
+	'wikibase-linkitem-input-page' => 'Ojúewé:',
+	'wikibase-linkitem-confirmitem-button' => 'Ìfidájú',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 );
 
 /** Cantonese (粵語)

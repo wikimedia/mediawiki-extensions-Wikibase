@@ -638,6 +638,13 @@ $messages['cs'] = array(
 	'version-wikibase' => 'Wikibase',
 );
 
+/** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
+ * @author ОйЛ
+ */
+$messages['cu'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'ѩꙁꙑкъ',
+);
+
 /** Welsh (Cymraeg)
  * @author Lloffiwr
  * @author Robin Owain
@@ -1706,7 +1713,7 @@ $messages['kk-cyrl'] = array(
  * @author 아라
  */
 $messages['ko'] = array(
-	'wikibase-lib-desc' => '위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 함수를 얻습니다',
+	'wikibase-lib-desc' => '위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다',
 	'wikibase-entity-item' => '항목',
 	'wikibase-entity-property' => '속성',
 	'wikibase-entity-query' => '쿼리',
@@ -1714,17 +1721,17 @@ $messages['ko'] = array(
 	'wikibase-deletedentity-property' => '삭제된 속성',
 	'wikibase-deletedentity-query' => '삭제된 쿼리',
 	'wikibase-diffview-reference' => '참고',
-	'wikibase-diffview-rank' => '순위',
+	'wikibase-diffview-rank' => '등급',
 	'wikibase-diffview-qualifier' => '한정어',
 	'wikibase-diffview-label' => '레이블',
 	'wikibase-diffview-alias' => '별명',
 	'wikibase-diffview-description' => '설명',
 	'wikibase-diffview-link' => '링크',
 	'wikibase-error-unexpected' => '예기치 않은 오류가 발생했습니다.',
-	'wikibase-error-save-generic' => '저장을 수행하는 동안 오류가 발생했고 이 때문에 바뀜을 완료할 수 없습니다.',
-	'wikibase-error-remove-generic' => '삭제를 수행하는 동안 오류가 발생했고 이 때문에 바뀜을 완료할 수 없습니다.',
-	'wikibase-error-save-connection' => '저장을 수행하는 동안 연결 오류가 발생했으며 이 때문에 바뀜을 완료할 수 없습니다. 인터넷 연결을 확인하세요.',
-	'wikibase-error-remove-connection' => '삭제를 수행하는 동안 연결 오류가 발생했으며 이 때문에 바뀜을 완료할 수 없습니다. 인터넷 연결을 확인하세요.',
+	'wikibase-error-save-generic' => '저장을 수행하는 동안 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다.',
+	'wikibase-error-remove-generic' => '삭제를 수행하는 동안 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다.',
+	'wikibase-error-save-connection' => '저장을 수행하는 동안 연결 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다. 인터넷 연결을 확인하세요.',
+	'wikibase-error-remove-connection' => '삭제를 수행하는 동안 연결 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다. 인터넷 연결을 확인하세요.',
 	'wikibase-error-save-timeout' => '기술적인 문제가 있기 때문에 이 "저장"이 완료되지 않았습니다.',
 	'wikibase-error-remove-timeout' => '기술적인 문제가 있기 때문에 이 "제거"가 완료되지 않았습니다.',
 	'wikibase-error-autocomplete-connection' => '사이트 API를 쿼리할 수 없습니다. 나중에 다시 시도하세요.',
@@ -1735,8 +1742,8 @@ $messages['ko'] = array(
 	'wikibase-error-ui-no-permissions' => '이 작업을 수행할 수 있는 충분한 권한이 없습니다.',
 	'wikibase-error-ui-link-exists' => '다른 항목을 이미 링크했기 때문에 이 문서에 링크할 수 없습니다.',
 	'wikibase-error-ui-session-failure' => '세션이 만료되었습니다. 다시 로그인하세요.',
-	'wikibase-error-ui-edit-conflict' => '편집 충돌했습니다. 다시 불러오고 나서 다시 저장하세요.',
-	'wikibase-replicationnote' => '바뀜을 모든 위키에 보이는 시간이 걸릴 수 있음에 주의하세요',
+	'wikibase-error-ui-edit-conflict' => '편집 충돌입니다. 다시 불러오고 나서 다시 저장하세요.',
+	'wikibase-replicationnote' => '바뀜을 모든 위키에 보이는 시간이 걸릴 수 있음에 주의하세요.',
 	'wikibase-sitelinks-wikipedia' => '이 항목으로 링크한 위키백과 문서',
 	'wikibase-sitelinks-sitename-columnheading' => '언어',
 	'wikibase-sitelinks-siteid-columnheading' => '코드',
@@ -2294,6 +2301,7 @@ $messages['ps'] = array(
 /** Portuguese (português)
  * @author Hamilton Abreu
  * @author Helder.wiki
+ * @author Luckas
  * @author Malafaya
  * @author Waldir
  */
@@ -2302,8 +2310,8 @@ $messages['pt'] = array(
 	'wikibase-entity-item' => 'elemento',
 	'wikibase-entity-property' => 'propriedade',
 	'wikibase-entity-query' => 'consulta',
-	'wikibase-error-save-generic' => 'Ocorreu um erro na gravação. Não foi possível efectuar as alterações.',
-	'wikibase-error-remove-generic' => 'Ocorreu um erro na remoção. Não foi possível efectuar as alterações.',
+	'wikibase-error-save-generic' => 'Ocorreu um erro na gravação. Não foi possível efetuar as alterações.',
+	'wikibase-error-remove-generic' => 'Ocorreu um erro na remoção. Não foi possível efetuar as alterações.',
 	'wikibase-error-save-connection' => 'Ocorreu um erro de ligação ao tentar gravar e as alterações não foram efectuadas. Verifique a sua ligação à internet, por favor.',
 	'wikibase-error-remove-connection' => 'Ocorreu um erro de ligação ao tentar remover e as alterações não foram efectuadas. Verifique a sua ligação à internet, por favor.',
 	'wikibase-error-save-timeout' => 'Estamos a ter dificuldades técnicas e não foi possível concluir a gravação.',

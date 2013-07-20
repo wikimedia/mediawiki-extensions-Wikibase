@@ -3024,6 +3024,35 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'action-description-update' => 'aktualizovat popisy',
 );
 
+/** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
+ * @author ОйЛ
+ */
+$messages['cu'] = array(
+	'wikibase-edit' => 'исправи',
+	'wikibase-save' => 'съхранѥниѥ',
+	'wikibase-save-inprogress' => 'съхранѥниѥ···',
+	'wikibase-remove-inprogress' => 'поничьжєниѥ···',
+	'wikibase-description-empty' => 'опьсаниꙗ ѥщє нѣстъ',
+	'wikibase-sitelink-site-edit-placeholder' => 'мѣсто',
+	'wikibase-sitelink-page-edit-placeholder' => 'члѣнъ',
+	'wikibase-terms' => 'дроугꙑ ѩꙁꙑкꙑ',
+	'wikibase-remove' => 'поничьжєниѥ',
+	'wikibase-aliases-label' => 'вѣдомъ ѥстъ такождє ꙗко :',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|кладѧꙃь|кладѧꙃꙗ|кладаꙃь}}',
+	'wikibase-entityselector-more' => 'вѧщє',
+	'wikibase-itembytitle-lookup-site' => 'мѣсто :',
+	'wikibase-itembytitle-lookup-page' => 'страница :',
+	'wikibase-itembytitle-submit' => 'ищи',
+	'wikibase-itemdisambiguation-lookup-language' => 'ѩꙁꙑкъ :',
+	'wikibase-itemdisambiguation-submit' => 'ищи',
+	'wikibase-newentity-submit' => 'сътворѥниѥ',
+	'wikibase-setentity-language' => 'ѩꙁꙑкъ :',
+	'wikibase-entitieswithoutlabel-label-language' => 'ѩꙁꙑкъ :',
+	'wikibase-entitieswithoutlabel-label-type' => 'тѷпъ :',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'вьсꙗ',
+	'wikibase-listdatatypes-time-head' => 'врѣмѧ',
+);
+
 /** Welsh (Cymraeg)
  * @author Lloffiwr
  */
@@ -5231,6 +5260,9 @@ $messages['fa'] = array(
 * پس از - مقدار عددی صحیح که نشان می دهد که چند واحد پیش از زمان بیان شده، رخ داده است. واحد باید به دقت بیان شود
 * دقت - مقداری معین(مشخص) که به صورت مخفف عددی است. عددها به صورت زیر معنی می شوند: 0-میلیارد سال، 1-صد میلیون سال،...،6-هزاره، 7-قرن، 8-دهه، 9-سال، 10-ماه، 11-روز، 12-ساعت، 13-دقیقه، 14-ثانیه.
 * شیوه گاهشماری - مقداری معلوم(مشخص) که به صورت یوآرآی بیان می شود و نوع گاهشماری را که برای بیان مقدار زمان مورد استفاده قرار گرفته است، به ما می شناساند',
+	'wikibase-listdatatypes-url-head' => 'نشانی',
+	'wikibase-listdatatypes-url-body' => 'دادهٔ دقیق برای نشانی. نشانی‌ها محدود به پروتکل‌ها است که برای پیوندهای بیرونی در ویکی‌متن پشتیبانی می‌شوند.',
+	'datatypes-type-url' => 'نشانی',
 	'content-model-wikibase-item' => 'آیتم ویکی‌بیس',
 	'content-model-wikibase-property' => 'ویژگی ویکی‌بیس',
 	'content-model-wikibase-query' => 'کوئری ویکی‌بیس',
@@ -6364,6 +6396,9 @@ O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1
 * after – valor enteiro explícito para o número de unidades posibles antes da data e hora dadas. A unidade indícase coa precisión.
 * precision – valor explícito codificado nun enteiro curto. Os números teñen o seguinte significado: 0 - millar de millóns de anos, 1 - centena de millóns de anos, ..., 6 - milenio, 7 - século, 8 - década, 9 - ano, 10 - mes, 11 - día, 12 - hora, 13 - minuto, 14 - segundo.
 * calendarmodel – valor explícito dado como URI. Ha identificar o modelo de calendario que se debería usar para mostrar este valor de data e hora.',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Campo de datos literal para un enderezo URL. Os enderezos URL están restrinxidos aos protocolos tamén soportados polas ligazóns externas en texto wiki.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedade de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
@@ -6675,7 +6710,7 @@ $messages['he'] = array(
 	'wikibase-property-summary-wbcreate-new' => 'נוצר מאפיין חדש',
 	'wikibase-property-summary-wbeditentity-create' => 'נוצר מאפיין חדש',
 	'wikibase-property-summary-wbeditentity-update' => 'עודכן מאפיין',
-	'wikibase-property-summary-wbeditentity-override' => 'נדרס מאפיין', # Fuzzy
+	'wikibase-property-summary-wbeditentity-override' => 'נוקה מאפיין',
 	'wikibase-property-summary-wbsetlabel-set' => 'שונתה תווית [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'הוסרה תווית [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'שוּנה תיאור [$2]',
@@ -6727,6 +6762,9 @@ $messages['he'] = array(
 * after – ערך שלם מפורש שאומר כמה יחידות של זמן יכלו לעבור אחרי הזמן המצוין. זהו מרכיב של דיוק.
 * precision – ערך מפורש שלם קצר (shortint). המספרים מביעים את הערכים הבאים: 0 – מיליארד שנים, 1 – מאה מיליון שנים, ..., 6 – אלפי שנים, 7 – מאה, 8 – עשור, 9 – שנה, 10 – חודש, 11 – יום, 12 – שעה, 13 – דקה, 14 – שנייה.
 * calendarmodel – ערך מפורש שניתן בתור כתובת URL. מזהה את דגם לוח השנה שישמש לתצוגת ערך הזמן הזה.',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'שדה נתונים מפורש עבור כתובת URL. כתובות URL מוגבלים לפרוטוקולים שאפשר להשתמש בהם בקוד ויקי.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'פריט Wikibase',
 	'content-model-wikibase-property' => 'מאפיין Wikibase',
 	'content-model-wikibase-query' => 'שאילתת Wikibase',
@@ -9361,6 +9399,7 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|주장}}을 만듦',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$3|주장}}의 {{PLURAL:$4|한정어 한 개|한정어 $4개}}를 바꿈',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$3|주장}}의 {{PLURAL:$4|참고 한 개|참고 $4개}}을 바꿈',
+	'wikibase-item-summary-wbsetclaim-update-rank' => '{{PLURAL:$3|주장}}의 등급을 바꿈',
 	'wikibase-item-summary-clientsitelink-update' => '페이지를 [$3]에서 [$4](으)로 옮김',
 	'wikibase-property-summary-wbcreate-new' => '새 속성을 바꿈',
 	'wikibase-property-summary-wbeditentity-create' => '새 속성을 만듦',
@@ -9386,6 +9425,8 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-listdatatypes-multilingual-text-head' => '다언어 텍스트',
 	'wikibase-listdatatypes-string-head' => '문자열',
 	'wikibase-listdatatypes-time-head' => '시간',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => '위키베이스 항목',
 	'content-model-wikibase-property' => '위키베이스 속성',
 	'content-model-wikibase-query' => '위키베이스 쿼리',
@@ -10887,6 +10928,9 @@ untuk mencari di mana set data itu.',
 * after (selepas) – nilai integer tersurat untuk bilangan unit yang berkemungkinan sebelum waktu yang diberikan. Unitnya diberikan mengikut kepersisan.
 * precision (kepersisan) – nilai tersurat yang dikodkan dalam shortint. Angka-angka membawa erti-erti yang berikut: 0 - bilion tahun, 1 - ratus juta tahun, ..., 6 - alaf, 7 - abad, 8 - dekad, 9 - tahun, 10 - bulan, 11 - hari, 12 - jam, 13 - minit, 14 - saat.
 * calendarmodel (model kalendar) – nilai tersurat yang dinyatakan dalam bentuk URI untuk mengenal pasti model kalendar yang wajar digunakan untuk memaparkan nilai waktu ini.',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Medan data sebenar untuk URL. URL terhad kepada protokol yang juga disokong untuk pautan luar dalam wikiteks.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Perkara Wikibase',
 	'content-model-wikibase-property' => 'Sifat Wikibase',
 	'content-model-wikibase-query' => 'Pertanyaan Wikibase',
@@ -15069,6 +15113,9 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 * after – giá trị hiện của độ dung sai trước, tức bao nhiêu đơn vị trước thời điểm được chỉ định, cùng đơn vị với precision
 * precision – giá trị hiện được lưu trong shortint. Các số có ý nghĩa sau: 0 là tỷ năm, 1 trăm triệu năm, …, 6 thiên niên kỷ, 7 thế kỷ, 8 thập kỷ, 9 năm, 10 tháng, 11 ngày, 12 giờ, 13 phút, 14 giây
 * calendarmodel – giá trị hiện dưới dạng URI định rõ mô hình lịch được sử dụng để hiển thị giá trị lịch này',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Trường dữ liệu chứa URL. Các URL chỉ được sử dụng các giao thức liên kết ngoài được hỗ trợ trong văn bản wiki.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'khoản mục Wikibase',
 	'content-model-wikibase-property' => 'thuộc tính Wikibase',
 	'content-model-wikibase-query' => 'truy vấn Wikibase',
