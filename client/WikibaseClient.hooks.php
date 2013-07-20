@@ -353,6 +353,8 @@ final class ClientHooks {
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
 		wfProfileIn( __METHOD__ );
 
+		// @todo split up the multiple responsibilities here and in lang link handler
+
 		$parserOutput = $parser->getOutput();
 
 		// only run this once, for the article content and not interface stuff
@@ -371,12 +373,16 @@ final class ClientHooks {
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
 
-		if ( $useRepoLinks ) {
-			// add links
-			$langLinkHandler->addLinksFromRepository( $parser->getTitle(), $parser->getOutput() );
-		}
+		try {
+			if ( $useRepoLinks ) {
+				// add links
+				$langLinkHandler->addLinksFromRepository( $parser->getTitle(), $parser->getOutput() );
+			}
 
-		$langLinkHandler->updateItemIdProperty( $parser->getTitle(), $parser->getOutput() );
+			$langLinkHandler->updateItemIdProperty( $parser->getTitle(), $parser->getOutput() );
+		} catch ( \Exception $e ) {
+			wfWarn( 'Failed to add repo links: ' . $e->getMessage() );
+		}
 
 		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
 			// sort links
