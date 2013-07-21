@@ -28,6 +28,9 @@
 		"diff/diff": "dev-master",
 		"data-values/data-values": "dev-master"
 	},
+	"require-dev": {
+		"satooshi/php-coveralls": "dev-master"
+	},
 	"autoload": {
 		"files" : [
 			"WikibaseDataModel.php"
