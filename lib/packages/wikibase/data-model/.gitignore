@@ -9,6 +9,7 @@ composer.lock
 !.gitreview
 
 !.travis.yml
+!.coveralls.yml
 
 vendor/
 build/
