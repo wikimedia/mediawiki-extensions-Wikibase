@@ -58,7 +58,7 @@ class SimpleSiteLink {
 
 		$this->siteId = $siteId;
 		$this->pageName = $pageName;
-		$this->badges = $badges;
+		$this->badges = array_values( $badges );
 	}
 
 	/**
