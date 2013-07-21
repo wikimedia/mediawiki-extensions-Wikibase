@@ -35,18 +35,37 @@ use Wikibase\Test\Api\ModifyEntityTestBase;
  */
 abstract class EntityContentTest extends \MediaWikiTestCase {
 
+	protected $permissions;
+	protected $old_user;
+
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
 
 		parent::setUp();
-		$this->setMwGlobals(
-			array(
-				'wgGroupPermissions' => $wgGroupPermissions,
-				'wgUser' => $wgUser
-			)
-		);
+
+		$this->permissions = $wgGroupPermissions;
+		$this->old_user = $wgUser;
 
 		\TestSites::insertIntoDb();
+	}
+
+	function tearDown() {
+		global $wgGroupPermissions;
+		global $wgUser;
+
+		$wgGroupPermissions = $this->permissions;
+
+		if ( $this->old_user ) { // should not be null, but sometimes, it is
+			$wgUser = $this->old_user;
+		}
+
+		if ( $wgUser ) { // should not be null, but sometimes, it is
+			// reset rights cache
+			$wgUser->addGroup( "dummy" );
+			$wgUser->removeGroup( "dummy" );
+		}
+
+		parent::tearDown();
 	}
 
 	public function dataGetTextForSearchIndex() {
