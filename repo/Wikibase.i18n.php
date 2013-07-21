@@ -7662,7 +7662,6 @@ $messages['ilo'] = array(
 	'wikibase-label-empty' => 'Awan pay ti etiketa a naipalawag',
 	'wikibase-label-edit-placeholder' => 'ikabil ti etiketa',
 	'wikibase-description-empty' => 'Awan pay ti deskripsion a naipalawag',
-	'wikibase-deletedentity' => 'Inikkat ti $1',
 	'wikibase-description-edit-placeholder' => 'ikabil ti deskripsion',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikulo',
@@ -7778,6 +7777,16 @@ Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a $1.',
 	'wikibase-setaliases-label' => 'Sabali a nagnagan:',
 	'wikibase-setaliases-submit' => 'Agidisso ti sabali a nagnagan',
 	'wikibase-setaliases-warning-remove' => 'Agpayso kadi a kayatmo nga ikkaten ti sabali a nagnagan ti [[$1]]?',
+	'special-setsitelink' => 'Mangidisso ti silpo ti sitio',
+	'wikibase-setsitelink-introfull' => 'Saanka nga agidisdisso ti silpo ti sitio iti $2 para iti [[$1]].',
+	'wikibase-setsitelink-intro' => 'Daytoy a porma ket mangpalubos kaniama agidisso ti silpo ti sitio iti maysa nga entidad. Nasken a mangitedka ti ID ti entidad ti (a kas iti Q23), id ti sitio (a kas iti "enwiki") ken ti silpo ti sitio a pangidissuam.',
+	'wikibase-setsitelink-site' => 'Id ti sitio:',
+	'wikibase-setsitelink-label' => 'Silpo ti sitio:',
+	'wikibase-setsitelink-submit' => 'Idisso ti silpo ti sitio',
+	'wikibase-setsitelink-warning-remove' => 'Agpayso kadi a kayatmo nga ikkaten ti silpo ti sitio ti [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'Ti id ti sitio ti "$1" ket di ammo. Pangngaasi nga agusar ti maysa nga adda nga id ti sitio, a kas iti "enwiki".',
+	'wikibase-setsitelink-add-failed' => 'Ti silpo ti sitio ket saan a maidulin.',
+	'wikibase-setsitelink-remove-failed' => 'Ti silpo ti sitio ket saan a maikkat.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Pagsasao:',
 	'wikibase-setentity-invalid-langcode' => 'Ti panagilasin ti pagsasao ti "$1" ket di ammo. Pangngaasi nga agusar ti panagilasin ti pagsasao nga ammo ti sistema, a kas ti "en".',
@@ -7816,11 +7825,16 @@ Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a $1.',
 	'special-itemswithoutsitelinks' => 'Dagiti banag nga awan dagiti silpona ti sitio',
 	'special-entitydata' => 'Datos ti entidad',
 	'wikibase-entitydata-not-found' => 'Awan ti nabirukan nga entidad nga adda ti ID ti $1.',
+	'wikibase-entitydata-not-acceptable' => 'AWan ti kapada a pormat ti nabirukan. Dagiti masuportaran a kita ti MIME: $1',
 	'wikibase-entitydata-bad-revision' => 'Saam a mabalin nga ipakita ti panagbalbaliw ti $2 iti entidad ti $1.',
+	'wikibase-entitydata-bad-id' => 'Imbalido nga ID: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Ti pormat ti datos ti $1 ket saan a masuportaran babaen ti daytoy nga interface.',
 	'wikibase-entitydata-title' => 'Datos ti entidad',
 	'wikibase-entitydata-text' => 'Daytoy a panid ket mangited ti naisilpo a datos ti interface kadagidiay pateg ti entidad. Pangngaasi a mangited ti ID ti entidad idiay URL, a mangusar ti apo ti panid a gramatika.',
-	'wikibase-api-patch-incomplete' => 'Ti naaramid a takop ket saan a kompleto.',
+	'special-mylanguagefallbackchain' => 'Andingay a kawar ti pagsasaok',
+	'wikibase-mylanguagefallbackchain-text' => 'Ti andingay a kawar ti pagsasao a mangidaya kadagiti etiketa ti entidad para kenka ket naipakita dita baba.',
+	'wikibase-mylanguagefallbackchain-babel' => 'Mabalinmo ti agurnos babaen ti panagikabil ti <nowiki>{{#babel: }}</nowiki> idiay bukodmo a [[Special:MyPage|panid ti agar-aramat]].',
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, a pagbaliwen manipud ti $3 - $4',
 	'wikibase-self-conflict-patched' => 'Ti inurnosmo  ket natakupan idiay kinaudi a bersion, a nangbalbaliw kadagiti bukodmo a naipakatengngaan a panagbalbaliw.',
 	'wikibase-conflict-patched' => 'Ti inurnosmo ket natakupan idiay kinaudi a bersion.',
 	'wikibase-restoreold' => 'isubli',
@@ -7863,10 +7877,11 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Binaliwan ti {{PLURAL:$4|maysa a kababalin|$4 kadagiti kababalin}} iti {{PLURAL:$3|a panagtunton|kadagiti panagtunton}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Binaliwan ti {{PLURAL:$4|maysa a reperensia|$4 kadagiti reperensia}} iti {{PLURAL:$3|a panagtunton|kadagiti panagtunton}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Nagbaliw ti ranggo ti {{PLURAL:$3|a panagtunton|kadagiti panagtunton}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Ti panid ket naiyalis manipud idiay [$3] idiay [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Nagpartuat ti baro a tagikua',
 	'wikibase-property-summary-wbeditentity-create' => 'Nagpartuat ti baro a tagikua',
 	'wikibase-property-summary-wbeditentity-update' => 'Nagpabaro ti maysa a tagikua',
-	'wikibase-property-summary-wbeditentity-override' => 'Winaswas ti maysa a tagikua',
+	'wikibase-property-summary-wbeditentity-override' => 'Dinalusan ti maysa a tagikua',
 	'wikibase-property-summary-wbsetlabel-set' => 'Sinukatan ti [$2] nga etiketa',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Inikkat ti [$2] nga etiketa',
 	'wikibase-property-summary-wbsetdescription-set' => 'Sinukatan ti [$2] a deskripsion',
@@ -7888,12 +7903,12 @@ tapno birukem ti napananda.',
 * panagsasaruno a paset – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * panagsukisok – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Heograpiko a nagsasabtan', # Fuzzy
-	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal a datos para iti heograpiko apuesto a naited a kas maysa a paris ti latitud-longitud iti gms wenno dagiti desimal a degrado para iti naited a nainlangitan a bagi. Kasisigud iti "Daga" ken kalpasanna iti "WGS84". Agnayo ti maysa a resolusion ken sakup.
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Nagsasabtan ti globo',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal a datos para iti heograpiko a puesto a naited a kas maysa a paris ti latitud-longitud iti gms wenno dagiti desimal a degrado para iti naited a nainlangitan a bagi. Kasisigud iti "Daga" ken kalpasanna iti "WGS84". Agnayon ti maysa a resolusion ken sakup.
 * latitud – naipaltiing a nalawag nga umuna a paset (tumpaw, dms, dm, dd) iti kuerdas ti nagsasabtan, ti turong ket mabalin a maited babaen ti senial wenno babaen ti kalpasan a nasimpa a N/S
 * longitud – naipaltiing a nalawag a maikadua a paset (tumpaw, dms, dm, dd) iti kuerdas ti nagsasabtan, ti turong ket mabalin a maited babaen ti senial wenno babaen ti kalpasan a nasimpa a E/W
 * kangato (saan a nasken a pilien) – nalawag (?) pateg para iti kangato ti maysa a naituon a katimbengan , para iti globo a "Daga" nga isunto ti "WGS84" a reperensi a globo
-* globo (saan a nasken a pilien) – nalawag (?) pateg ti datos, maited a kas nainlangitan a bagi a kasisigud iti "Daga" ken kalpasanna iti "WGS84"', # Fuzzy
+* globo (saan a nasken a pilien) – nalawag (?) pateg ti datos, maited a kas nainlangitan a bagi a kasisigud iti "Daga" ken kalpasanna iti "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Kaadu',
 	'wikibase-listdatatypes-quantity-body' => 'Literal a pagikabilan ti datos para iti maysa a kaadu a maikabagian ti sumagmamano a kitat iti nasayaat a nailawlawagan a paset. Ti pudno a paset ket mapan kadagiti pateg ti datos a naikabil.
 * pateg – naipaltiing a nalawag apaset iti kuerdas (panagimapa iti paset a pasaruno ket saan a nalawag)
@@ -7902,15 +7917,15 @@ tapno birukem ti napananda.',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo ti maymaysa pagsasao',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas a saan a naipatarus kadagiti sabali a pagsasao. Daytoy a kita ti kuerdas ket naminsan a naipalpalawag ken mausar manen kadagiti ballasiw ti amin a pagsasao. Ti kadawyan a panag-usar ket dagiti heograpiko a nagnagan a naisurat iti lokal a pagsasao, ti kasla maysa a pananginagan a kita, ti maysa a pormula ti kimiko wenno maysa a sientipiko a nagan iti Latin.
 * pagsasao – nalawag a pateg para iti pananginagan ti pagsasao para iti testo a paset
-* testo – nalawag a pateg para iti kuerdas ti naisangsangayn a kita ti pagsasao', # Fuzzy
+* pateg – nalawag a pateg para iti kuerdas ti naisangsangayn a kita ti pagsasao',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Testo ti adu a pagsasao',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Literal a pagikabilan ti datos para iti maysa a  a nasken a maipatarus kadagiti sabali a pagsasao. Ti kadawyan a panag-usar ket ti maysa nga entidad iti sangalubongan nga interesado nga adda kadagiti saan a lokal a naisursurat a porma. Dagitoy ket mabalin nga aggiddiat kadagiti pagsasao ken dagiti sistema ti sinuratan.
 * pagsasao – nalawag a pateg para iti pananginagan ti pagsasao para iti testo a paset
-* testo – nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti pagsasao', # Fuzzy
+* pateg – nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti pagsasao',
 	'wikibase-listdatatypes-string-head' => 'Kuerdas',
-	'wikibase-listdatatypes-string-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas dagiti karakter. Ti kadawyan a panag-usar ket dagiti pananginagan nga adda dagiti naisurat a porma a saan nga agtaltalek iti pagsasao. Dagiti kastoy a kuerdas ket mabalin kadagiti sumagmamano a kaso a mai-transliterado kadagiti sabali a sistema ti panagsurat.
-* pagsasao – nalawag a pateg para iti pananginagan ti pagsasao para iti testo a paset
-* testo – nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti pagsasao', # Fuzzy
+	'wikibase-listdatatypes-string-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas dagiti karakter. Ti kadawyan a panag-usar ket dagiti pananginagan nga adda dagiti naisurat a porma a saan nga agtaltalek iti pagsasao iti agbasbasa. 
+
+* pateg– nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti kuerdas',
 	'wikibase-listdatatypes-time-head' => 'Oras',
 	'wikibase-listdatatypes-time-body' => 'Literal a pagikabilan ti datos para iti naited a pateg ti oras. Nait-ited a kas maysa nga oras nga adda iti kinaapag-isu ken dagiti pagbeddengan. Ti oras ket kankanayonda a maidulin iti kaunegan iti proleptiko a Gregoriano, ngem mabalin a mangusar kadagiti sabali a porma iti las-ud ti panangusig ken panagporma.(?)
 * oras – nalawag a pateg para iti puntos iti oras, nairepresenta babaen ti ISO8601, ti tawen ket kankanayon nga adda dagiti 11 a numero, ti petsa ket kat kankanayon a mapirmaan, iti porma iti +00000002013-01-01T00:00:00Z
@@ -7919,6 +7934,9 @@ tapno birukem ti napananda.',
 * kalpasan – nalawag a kabuklan a pateg no mano dagiti paset sakbay ti mabalin a naited nga oras. Ti paset ket maited babaen ti kinaapag-isu.
 * kinaapag-isu – nalawag a pateg a naikodigo iti maysa a shortint. Dagitibilang ket adda kadagiti sumaganad a kabuksilan: 0 - bilion a tawtawen, 1 - sangagasut a riwriw a tawtawen, ..., 6 - milenio, 7 - siglo, 8 - dekada, 9 - tawen, 10 - bulan, 11 - aldaw, 12 - oras, 13 - minuto, 14 - segundo.
 * modelo ti kalendario – nalawag a pateg a naited a kas maysa nga URI. Daytoy ket mangilasin ti modelo ti kalendario a nasken a mausar a mangiparang iti daytoy a pateg ti oras.',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Literal a pagikabilan ti datos para iti URL. Dagiti URL ket mabalin laeng kadagiti protokol a nasuportaran pay para kadagiti akinruar a silpo iti wikitext.',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Wikibase a banag',
 	'content-model-wikibase-property' => 'Wikibase a tagikua',
 	'content-model-wikibase-query' => 'Wikibase a panagbiruk',
@@ -9299,7 +9317,7 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-setdescription-warning-remove' => '[[$1]]의 설명을 제거하겠습니까?',
 	'special-setaliases' => '별명 설정',
 	'wikibase-setaliases-introfull' => '[[$1]]에 대한 $2에 별명을 설정합니다. 여러 별명은 파이프(<code>|</code>) 문자로 구분합니다.',
-	'wikibase-setaliases-intro' => '이 양식은 개체의 별명을 설정할 수 있습니다. 개체(예를 들어 Q23), 언어 코드(예를 들어 "ko")와 설정하는 별명의 ID를 제공해야 합니다. 여러 별명은 <code>|</code>로 구분합니다.',
+	'wikibase-setaliases-intro' => '이 양식은 개체의 별명을 설정할 수 있습니다. 개체(예를 들어 Q23), 언어 코드(예를 들어 "ko")와 설정하는 별명의 ID를 제공해야 합니다. 여러 별명은 파이프(<code>|</code>) 문자로 구분합니다.',
 	'wikibase-setaliases-label' => '별명:',
 	'wikibase-setaliases-submit' => '별명 설정',
 	'wikibase-setaliases-warning-remove' => '[[$1]]의 별명을 제거하겠습니까?',
@@ -9357,6 +9375,8 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-entitydata-unsupported-format' => '$1 데이터 형식은 이 인터페이스에서 지원되지 않습니다.',
 	'wikibase-entitydata-title' => '개체 데이터',
 	'wikibase-entitydata-text' => '이 문서는 개체 값에 연결된 데이터 인터페이스를 제공합니다. 하위 문서 구문을 사용하여 URL에 있는 개체 ID를 입력하세요.',
+	'special-mylanguagefallbackchain' => '내 언어 폴백 체인',
+	'wikibase-mylanguagefallbackchain-text' => '개체의 레이블을 보여주는 데 사용되는 언어 폴백 체인을 아래에 보여줍니다.',
 	'wikibase-mylanguagefallbackchain-babel' => '자신의 [[Special:MyPage|사용자 문서]]에 <nowiki>{{#babel: }}</nowiki>을 넣어 편집할 수 있습니다.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, $3 - $4에서 변환됨',
 	'wikibase-self-conflict-patched' => '편집을 최신 버전으로 고쳤으며 중간 바뀜이 무시됩니다.',
@@ -9415,17 +9435,49 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-property-summary-wbsetaliases-remove' => '[$2] {{PLURAL:$1|별명}}을 제거함',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1|값}}으로 [$2] 속성을 만듦',
 	'wikibase-listdatatypes-wikibase-item-head' => '항목',
+	'wikibase-listdatatypes-wikibase-item-body' => '프로젝트에서 다른 항목의 링크입니다. 입력할 때 위키데이터의 "항목" 이름공간과 일치하는 항목을 찾습니다. 하나의 텍스트 입력 상자로 구성됩니다.
+* scheme – IRI 문자열의 명시적이지 않은 부분
+* hierarchicalpart – IRI 문자열의 명시적이지 않은 부분
+* query – IRI 문자열의 명시적이지 않은 부분
+* fragment – IRI 문자열의 명시적이지 않은 부분',
 	'wikibase-listdatatypes-commonsmedia-head' => '공용 미디어',
+	'wikibase-listdatatypes-commonsmedia-body' => '위키미디어 공용에서 저장된 파일의 링크입니다. 입력할 때 공용의 "파일" 이름공간과 일치하는 항목을 찾습니다.
+* scheme – IRI 문자열의 명시적이지 않은 부분
+* hierarchicalpart – IRI 문자열의 명시적이지 않은 부분
+* query – IRI 문자열의 명시적이지 않은 부분
+* fragment – IRI 문자열의 명시적이지 않은 부분',
 	'wikibase-listdatatypes-globe-coordinate-head' => '지리 좌표',
+	'wikibase-listdatatypes-globe-coordinate-body' => '주어진 별의 지리 좌표를 위도 경도 쌍으로 도분초 또는 소수 형식으로 지정된 리터럴 데이터입니다. "지구"와 "WGS84"이 기본값이 되고, 해상도와 범위가 추가됩니다.
+* latitude – 좌표 문자열의 첫 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 N/S로 주어집니다
+* longitude – 좌표 문자열의 두 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 E/W로 주어집니다
+* altitude (선택 사항) – 주어진 참조면에서의 높이를 나타낸 명시적인(?) 값으로, "지구" 타원체에 대해서는 "WGS84" 참조 타원체가 사용됩니다
+* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다',
 	'wikibase-listdatatypes-quantity-head' => '수량',
+	'wikibase-listdatatypes-quantity-body' => '어떤 명확하게 정의된 단위에 결합된 양을 나타내는 리터럴 데이터 필드입니다. 실제 단위는 입력된 데이터 값에 포함되어 있습니다.
+* value – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
+* unit – 문자열의 명시적이지 않은 부분 (표준화 단체로의 매핑은 명확하지 않습니다)
+* accuracy (선택 사항) – value와 같은 단위를 가진 명시적인 데이터 값',
 	'wikibase-listdatatypes-monolingual-text-head' => '단일 언어 텍스트',
-	'wikibase-listdatatypes-monolingual-text-body' => '다른 언어로 번역되지 않는 문자열 데이터 필드입니다. 이런 종류의 문자열은 한 번 정의되어 모든 언어에 걸쳐 사용됩니다. 일반적으로 원어로 된 지명이나 특정한 항목의 식별자, 화학식, 라틴어 학명에 주로 사용됩니다.
-* 언어 – 텍스트 부분에 대해 언어를 구별하는 명시적인 값
-* 값 – 특정 언어에 대한 문자열 값',
+	'wikibase-listdatatypes-monolingual-text-body' => '다른 언어로 번역되지 않는 문자열의 리터럴 데이터 필드입니다. 이런 종류의 문자열은 한 번 정의되어 모든 언어에 걸쳐 사용됩니다. 일반적으로 원어로 된 지명이나 특정한 항목의 식별자, 화학식, 라틴어 학명에 주로 사용됩니다.
+* language – 텍스트 부분에 대해 언어를 구별하는 명시적인 값
+* value – 특정 언어 문자열의 명시적인 값',
 	'wikibase-listdatatypes-multilingual-text-head' => '다언어 텍스트',
+	'wikibase-listdatatypes-multilingual-text-body' => '다른 언어로 번역되어야 하는 문자열의 리터럴 데이터 필드입니다. 전형적인 용도는 현지 표기와 같은 표기가 없는, 세계적으로 관련된 개체 이름입니다. 그들은 언어와 문자 체제에 따라 다를 수 있습니다.
+* language – 텍스트 부분에 대해 언어를 구별하는 명시적인 값
+* value – 특정 언어 문자열의 명시적인 값',
 	'wikibase-listdatatypes-string-head' => '문자열',
+	'wikibase-listdatatypes-string-body' => '문자열의 리터럴 데이터 필드입니다. 전형적인 용도는 독자의 언어에 의존하지 않는 표기법을 가진 식별자가 있습니다.
+* value – 특정 언어 문자열의 명시적인 값',
 	'wikibase-listdatatypes-time-head' => '시간',
+	'wikibase-listdatatypes-time-body' => '시간 값에 대한 리터럴 데이터 필드입니다. 약간의 정밀도와 경계로 된 시간으로 주어집니다. 내부에서는 시간이 항상 선발 그레고리력 형식으로 저장되어 있지만 다른 형식도 입력 및 출력 시에 사용할 수 있습니다.(?)
+* time – 어느 시점을 나타내는 명시적인 값으로 ISO8601에 따라 표현되고 년은 항상 11 자리에서 날짜는 항상 부호가 붙으며, +00000002013-01-01T00:00:00Z 형식입니다
+* timezone – 부호가 있는 정수로 명시적인 값입니다. UTC로부터의 오프셋을 분에 지정된 시간대 정보입니다.
+* before – 지정된 시간부터 현재까지 단위 시간에 얼마나 많은 분이 걸리는지 나타내는 명시적인 정수 값입니다. 단위는 precision으로 주어집니다.
+* after – 지정된 시간까지 현재에서 단위 시간에 얼마나 많은 분이 걸리는지 나타내는 명시적인 정수 값입니다. 단위는 precision으로 주어집니다.
+* precision – shortint 형식의 명시적인 값입니다. 수는 다음과 같은 의미가 있습니다: 0 - 10억 년, 1 - 1억 년, ..., 6 - 천 년, 7 - 1세기, 8 - 10년, 9 - 1년, 10 - 월, 11 - 일, 12 - 시, 13 - 분, 14 - 초.
+* calendarmodel – URI로 지정된 명시적인 값입니다. 시간을 표시하는데 사용되어야 하는 역법을 식별합니다.',
 	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'URL에 대한 리터럴 데이터 필드입니다. URL은 또한 위키텍스트의 바깥 링크에 대해 지원되는 프로토콜로 제한됩니다.',
 	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => '위키베이스 항목',
 	'content-model-wikibase-property' => '위키베이스 속성',

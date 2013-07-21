@@ -1770,6 +1770,7 @@ $messages['ia'] = array(
 /** Indonesian (Bahasa Indonesia)
  * @author Iwan Novirion
  * @author Kenrick95
+ * @author Snidata
  */
 $messages['id'] = array(
 	'wikibase-client-desc' => 'Klien untuk ekstensi Wikibase',
@@ -1786,7 +1787,7 @@ $messages['id'] = array(
 	'wikibase-comment-sitelink-change' => 'Interwiki berubah dari $1 ke $2',
 	'wikibase-comment-sitelink-remove' => 'Pengurangan interwiki: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|perubahan}}',
-	'wikibase-dataitem' => 'Data item',
+	'wikibase-dataitem' => 'Tietoalkio',
 	'wikibase-editlinks' => 'Sunting interwiki',
 	'wikibase-editlinkstitle' => 'Sunting pranala interwiki',
 	'wikibase-linkitem-addlinks' => 'Tambah interwiki',
@@ -1831,7 +1832,9 @@ $messages['id'] = array(
 $messages['ilo'] = array(
 	'wikibase-client-desc' => 'Kliente para iti Wikibase a pagpaatiddog',
 	'specialpages-group-wikibaseclient' => 'Kliente ti Wikidata',
+	'tooltip-t-wikibase' => 'Isilpo iti naikapet a datos ti repositorio ti banag',
 	'wikibase-after-page-move' => 'Mabalinmo pay a [$1 pabaruen] ti mainaig a banag ti Wikidata tapno mataripatu dagiti silpo ti pagsasao ti naiyalis a panid.',
+	'wikibase-after-page-move-queued' => 'Ti [$1 Wikidata a banag] amainaig iti daytoy a panid ket automatikonton a mapabaro.',
 	'wikibase-comment-remove' => 'Ti mainaig a banag ti Wikidata ket naikkaten. Dagiti silpo ti pagsasao ket naikkaten.',
 	'wikibase-comment-linked' => 'Ti Wikidata a banag ket naisilpon iti daytoy a panid.',
 	'wikibase-comment-unlink' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Dagiti silpo ti pagsasao ket naikkaten.',
@@ -1841,6 +1844,7 @@ $messages['ilo'] = array(
 	'wikibase-comment-sitelink-change' => 'Ti silpo ti pagsasao ket nasukatan manipud ti $1 iti $2',
 	'wikibase-comment-sitelink-remove' => 'Naikkat ti silpo ti pagsasao: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|a sinukatan|a sinuksukatan}}',
+	'wikibase-dataitem' => 'Datos a banag',
 	'wikibase-editlinks' => 'Urnosen dagiti silpo',
 	'wikibase-editlinkstitle' => 'Urnosen dagiti sangkapagsasaoan a silpo',
 	'wikibase-linkitem-addlinks' => 'Agnayon kadagiti silpo',
@@ -1853,7 +1857,7 @@ $messages['ilo'] = array(
 	'wikibase-linkitem-input-site' => 'Pagsasao:',
 	'wikibase-linkitem-input-page' => 'Panid:',
 	'wikibase-linkitem-invalidsite' => 'Di ammo wenno saan nga umiso a sitio ti napili',
-	'wikibase-linkitem-confirmitem-text' => 'Ti panid a napilim ket naisilpon iti [$1 a banag idiay sentro a pagipenpan ti datosmi]. Pangngaasi a pasingkedan a dagiti panid a naipakita dita baba ket dagiti kayatmo nga isilpo iti daytoy a panid.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Ti panid a napilim ket naisilpon iti [$1 a banag idiay sentro a pagipenpan ti datosmi]. Pangngaasi a pasingkedan a {{PLURAL:$2|ti panid|dagiti panid}} a naipakita dita baba ket {{PLURAL:$2|isu ti|isu dagiti}} kayatmo nga isilpo iti daytoy a panid.',
 	'wikibase-linkitem-confirmitem-button' => 'Pasingkedan',
 	'wikibase-linkitem-not-loggedin-title' => 'Masapul a nakastrekka',
 	'wikibase-linkitem-not-loggedin' => 'Masapul a nakastrekka iti daytoy a wiki ken idiay [$1 sentro a resipotorio ti datos] tapno makausar ti daytoy a pagpilian.',
@@ -1864,6 +1868,7 @@ $messages['ilo'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 ti Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Ipakita dagiti Wikidata nga inurnos idiay kinaudi a binalbaliwan',
 	'wikibase-watchlist-show-changes-pref' => 'Ipakita dagiti Wikidata a panagurnos iti bukodmo a bambantayan',
+	'wikibase-error-serialize-error' => 'Napaay a naserialisado ti datos.',
 	'wikibase-error-invalid-entity-id' => 'Ti ID a naikabil ket di ammo ti sistema. Pangngaasi nga agusar ti umiso nga entidad ti ID.',
 	'special-unconnectedpages' => 'Dagiti panid a saan a naikapet kadagiti banag',
 	'wikibase-unconnectedpages-legend' => 'Dagiti pagpilian kadagiti saan a naikapet a panid',
@@ -1872,9 +1877,10 @@ $messages['ilo'] = array(
 	'wikibase-unconnectedpages-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
 	'wikibase-unconnectedpages-page-warning' => 'Ti titulo ti panid ket saan a mabalin a mausar iti panangbiruk ken saan a naikaskaso.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Dagiti laeng panid nga adda dagiti silpo ti pagsasao',
-	'wikibase-unconnectedpages-format-row' => '($1 a silsilpo ti pagsasao iti daytoy a panid)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|a silpo ti pagsasao|a silsilpo ti pagsasao}} iti daytoy a panid)',
 	'wikibase-pageinfo-entity-id' => 'ID ti Banag ti Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Awan',
+	'wikibase-property-render-error' => 'Napaay a nangipaay ti tagikua ti $1:$2',
 );
 
 /** Icelandic (íslenska)
@@ -2188,6 +2194,7 @@ $messages['ko'] = array(
 	'wikibase-rc-hide-wikidata' => '위키데이터를 $1',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
 	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기',
+	'wikibase-error-serialize-error' => '데이터를 직렬화할 수 없습니다.',
 	'wikibase-error-invalid-entity-id' => '입력한 ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.',
 	'special-unconnectedpages' => '항목에 연결되지 않은 문서',
 	'wikibase-unconnectedpages-legend' => '연결되지 않은 문서 옵션',
@@ -2754,6 +2761,7 @@ $messages['nds-nl'] = array(
 );
 
 /** Dutch (Nederlands)
+ * @author JurgenNL
  * @author Konovalov
  * @author Siebrand
  */
@@ -2796,7 +2804,7 @@ $messages['nl'] = array(
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata bewerkingen weergeven in uw volglijst',
 	'wikibase-error-serialize-error' => 'De gegevens konden niet geserialiseerd worden',
 	'wikibase-error-invalid-entity-id' => 'Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
-	'special-unconnectedpages' => "Pagina's niet niet gekoppeld zijn aan items",
+	'special-unconnectedpages' => "Pagina's die niet gekoppeld zijn aan items",
 	'wikibase-unconnectedpages-legend' => "Instellingen voor ongekoppelde pagina's",
 	'wikibase-unconnectedpages-page' => 'Lijst beginnen met pagina:',
 	'wikibase-unconnectedpages-submit' => 'OK',
@@ -3418,6 +3426,7 @@ $messages['tr'] = array(
  * @author Base
  * @author Lystopad
  * @author Microcell
+ * @author NickK
  * @author RLuts
  * @author Ата
  */
@@ -3434,6 +3443,7 @@ $messages['uk'] = array(
 	'wikibase-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|зміна|зміни|змін}}',
+	'wikibase-dataitem' => 'Елемент даних',
 	'wikibase-editlinks' => 'Редагувати посилання',
 	'wikibase-editlinkstitle' => 'Редагувати міжмовні посилання',
 	'wikibase-linkitem-addlinks' => 'Додати посилання',

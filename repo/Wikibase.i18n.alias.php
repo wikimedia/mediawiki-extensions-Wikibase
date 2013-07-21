@@ -170,7 +170,7 @@ $specialPageAliases['ko'] = array(
 	'SetSiteLink' => array( '사이트링크설정' ),
 	'EntitiesWithoutLabel' => array( '레이블없는항목' ),
 	'ItemsWithoutSitelinks' => array( '사이트링크없는항목' ),
-	'MyLanguageFallbackChain' => array( '내언어대체사슬' ),
+	'MyLanguageFallbackChain' => array( '내언어폴백체인' ),
 );
 
 /** Luxembourgish (Lëtzebuergesch) */
