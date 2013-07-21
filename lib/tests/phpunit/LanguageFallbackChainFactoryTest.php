@@ -190,6 +190,30 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseLib
+	 */
+	public function testNewFromContextAndLanguage() {
+		$factory = new LanguageFallbackChainFactory();
+		$languageFallbackChain = $factory->newFromContext( \RequestContext::getMain(), \Language::factory( 'en' ) );
+		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
+	}
+
+	/**
+	 * @group WikibaseLib
+	 * @dataProvider providerNewFromLanguage
+	 */
+	public function testNewFromUserAndLanguage( $lang, $mode, $expected ) {
+		if ( $mode !== LanguageFallbackChainFactory::FALLBACK_ALL ) {
+			$this->assertTrue( true );
+			return;
+		}
+		$factory = new LanguageFallbackChainFactory();
+		$anon = new \User();
+		$chain = $factory->newFromUserAndLanguage( $anon, \Language::factory( $lang ) )->getFallbackChain();
+		$this->assertChainEquals( $expected, $chain );
+	}
+
+	/**
+	 * @group WikibaseLib
 	 * @dataProvider provideTestFromBabel
 	 */
 	public function testBuildFromBabel( $babel, $expected ) {
