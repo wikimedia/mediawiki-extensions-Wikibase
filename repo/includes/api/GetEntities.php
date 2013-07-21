@@ -15,6 +15,7 @@ use Wikibase\Item;
 use Wikibase\Settings;
 use Wikibase\LibRegistry;
 use Wikibase\EntityContentFactory;
+use Wikibase\LanguageFallbackChainFactory;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -42,11 +43,17 @@ class GetEntities extends ApiWikibase {
 	 */
 	protected $entityIdParser;
 
+	/**
+	 * @var \Wikibase\LanguageFallbackChainFactory
+	 */
+	protected $languageFallbackChainFactory;
+
 	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 		$this->entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
 	}
 
 	/**
@@ -199,7 +206,17 @@ class GetEntities extends ApiWikibase {
 
 				// TODO: inject id formatter
 				$options = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-				$options->setLanguages( $params['languages'] );
+				if ( $params['languagefallback'] ) {
+					$languages = array();
+					foreach ( $params['languages'] as $languageCode ) {
+						// $languageCode is already filtered as valid ones
+						$languages[$languageCode] = $this->languageFallbackChainFactory
+							->newFromContextAndLanguageCode( $this->getContext(), $languageCode );
+					}
+				} else {
+					$languages = $params['languages'];
+				}
+				$options->setLanguages( $languages );
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
@@ -268,6 +285,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'languagefallback' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
+			),
 			'normalize' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
@@ -300,6 +321,9 @@ class GetEntities extends ApiWikibase {
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
+			),
+			'languagefallback' => array( 'Apply language fallback for languages defined in the "languages" parameter,',
+				'with the current context of API call.'
 			),
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
@@ -343,6 +367,8 @@ class GetEntities extends ApiWikibase {
 			=> "Get entities with IDs q42 and p2 with all available attributes in all available languages",
 			"api.php?action=wbgetentities&ids=q42&languages=en"
 			=> "Get entity with ID q42 with all available attributes in English language",
+			"api.php?action=wbgetentities&ids=q42&languages=ii&languagefallback="
+			=> "Get entity with ID q42 with all available attributes in any possible fallback language for the ii language",
 			"api.php?action=wbgetentities&ids=q42&props=labels"
 			=> "Get entity with ID q42 showing all labels in all available languages",
 			"api.php?action=wbgetentities&ids=p2|p3&props=datatype"

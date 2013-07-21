@@ -50,7 +50,7 @@ use ApiTestCase;
 class GetEntitiesTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
-	private static $usedHandles = array( 'Berlin', 'London', 'Oslo', 'Leipzig', 'Empty' );
+	private static $usedHandles = array( 'Berlin', 'London', 'Oslo', 'Leipzig', 'Guangzhou', 'Empty' );
 
 	public function setup() {
 		parent::setup();
@@ -496,6 +496,82 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			$this->assertEmpty( array_diff( array_keys( $values ), $languages ),
 								"found unexpected language in property $prop: " . var_export( $values, true ) );
 		}
+	}
+
+	function provideLanguageFallback() {
+		return array(
+			array(
+				'Guangzhou',
+				array( 'de-formal', 'en', 'fr', 'yue', 'zh-cn', 'zh-hk' ),
+				array(
+					'de-formal' => array(
+						'language' => 'de',
+						'value' => 'Guangzhou',
+					),
+					'yue' => array(
+						'language' => 'yue',
+						'value' => '廣州',
+					),
+					'zh-cn' => array(
+						'language' => 'zh-cn',
+						'value' => '广州市',
+					),
+					'zh-hk' => array(
+						'language' => 'zh-hk',
+						'source-language' => 'zh-cn',
+						'value' => '廣州市',
+					),
+				),
+				array(
+					'de-formal' => array(
+						'language' => 'en',
+						'value' => 'Capital of Guangdong.',
+					),
+					'en' => array(
+						'language' => 'en',
+						'value' => 'Capital of Guangdong.',
+					),
+					'fr' => array(
+						'language' => 'en',
+						'value' => 'Capital of Guangdong.',
+					),
+					'yue' => array(
+						'language' => 'en',
+						'value' => 'Capital of Guangdong.',
+					),
+					'zh-cn' => array(
+						'language' => 'zh-cn',
+						'source-language' => 'zh-hk',
+						'value' => '广东的省会。',
+					),
+					'zh-hk' => array(
+						'language' => 'zh-hk',
+						'value' => '廣東的省會。',
+					),
+
+				),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideLanguageFallback
+	 */
+	function testLanguageFallback( $handle, $languages, $expectedLabels, $expectedDescriptions ) {
+		$id = EntityTestHelper::getId( $handle );
+
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetentities',
+				'languages' => join( '|', $languages ),
+				'languagefallback' => '',
+				'format' => 'json', // make sure IDs are used as keys
+				'ids' => $id,
+			)
+		);
+
+		$this->assertEquals( $expectedLabels, $res['entities'][$id]['labels'] );
+		$this->assertEquals( $expectedDescriptions, $res['entities'][$id]['descriptions'] );
 	}
 
 	function provideProps() {
