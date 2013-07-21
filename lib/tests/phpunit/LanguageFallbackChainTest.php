@@ -46,23 +46,23 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => 'foo',
 				'language' => 'en',
-				'source' => 'en',
+				'source' => null,
 			) ),
 			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => '試',
 				'language' => 'lzh',
-				'source' => 'lzh',
+				'source' => null,
 			) ),
 			array( 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => 'bar',
 				'language' => 'nl',
-				'source' => 'nl',
+				'source' => null,
 			) ),
 			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, null ),
 			array( 'de', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => 'foo',
 				'language' => 'en',
-				'source' => 'en',
+				'source' => null,
 			) ),
 			array( 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => '测试',
@@ -96,7 +96,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 				// value ('foo') is taken from the English label.
 				'value' => 'foo',
 				'language' => 'en',
-				'source' => 'en',
+				'source' => null,
 			) ),
 			array(
 				'gan-hant',
@@ -136,24 +136,24 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => 'foo',
 				'language' => 'en',
-				'source' => 'en',
+				'source' => null,
 			) ),
 			array( 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => 'bar',
 				'language' => 'nl',
-				'source' => 'nl',
+				'source' => null,
 			) ),
 			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, array(
 				'value' => 'foo',
 				'language' => 'en',
-				'source' => 'en',
+				'source' => null,
 			) ),
 			array( 'fr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
 				'kk' => 'baz',
 			), array(
 				'value' => 'baz',
 				'language' => 'kk',
-				'source' => 'kk',
+				'source' => null,
 			) ),
 			array( 'it', LanguageFallbackChainFactory::FALLBACK_SELF, array(
 				':' => 'qux',
@@ -161,7 +161,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			), array(
 				'value' => 'baz',
 				'language' => 'kk',
-				'source' => 'kk',
+				'source' => null,
 			) ),
 			array( 'sr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
 				':' => 'qux',
