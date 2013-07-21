@@ -184,6 +184,20 @@ class EntityTestHelper {
 				),
 			)
 		),
+		'Guangzhou' => array(
+			"new" => "item",
+			"data" => array(
+				"labels" => array(
+					array( "language" => "de", "value" => "Guangzhou" ),
+					array( "language" => "yue", "value" => "廣州" ),
+					array( "language" => "zh-cn", "value" => "广州市" ),
+				),
+				"descriptions" => array(
+					array( "language" => "en", "value" => "Capital of Guangdong." ),
+					array( "language" => "zh-hk", "value" => "廣東的省會。" ),
+				),
+			)
+		),
 
 	);
 
