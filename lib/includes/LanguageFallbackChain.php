@@ -61,20 +61,21 @@ class LanguageFallbackChain {
 	 * @return null|array of three items: array(
 	 * 	'value' => finally fetched and translated value
 	 * 	'language' => language code of the language which final value is in
-	 * 	'source' => language code of the language where the value is fetched
+	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no "acceptable" data can be found.
 	 */
 	public function extractPreferredValue( $data ) {
 
 		foreach ( $this->chain as $languageWithConversion ) {
 			$fetchCode = $languageWithConversion->getFetchLanguageCode();
+			$sourceCode = $languageWithConversion->getSourceLanguageCode();
 			$languageCode = $languageWithConversion->getLanguageCode();
 
 			if ( isset( $data[$fetchCode] ) ) {
 				return array(
 					'value' => $languageWithConversion->translate( $data[$fetchCode] ),
 					'language' => $languageCode,
-					'source' => $fetchCode,
+					'source' => $sourceCode,
 				);
 			}
 		}
@@ -91,7 +92,7 @@ class LanguageFallbackChain {
 	 * @return null|array of three items: array(
 	 * 	'value' => finally fetched and translated value
 	 * 	'language' => language code of the language which final value is in
-	 * 	'source' => language code of the language where the value is fetched
+	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no data with a valid language code can be found.
 	 */
 	public function extractPreferredValueOrAny( $data ) {
@@ -106,7 +107,7 @@ class LanguageFallbackChain {
 				return array(
 					'value' => $value,
 					'language' => $code,
-					'source' => $code,
+					'source' => null,
 				);
 			}
 		}
