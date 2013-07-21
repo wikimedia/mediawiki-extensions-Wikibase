@@ -231,6 +231,7 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'languagefallback' => false,
 			'normalize' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
@@ -263,6 +264,9 @@ class GetEntities extends ApiWikibase {
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
+			),
+			'languagefallback' => array( 'Apply language fallback for languages defined in the "languages" parameter,',
+				'with the current context of API call. This parameter does nothing when "languages" is not set.'
 			),
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
