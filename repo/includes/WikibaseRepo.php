@@ -48,7 +48,7 @@ use Wikibase\StringNormalizer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-final class WikibaseRepo {
+class WikibaseRepo {
 
 	/**
 	 * @var SettingsArray
