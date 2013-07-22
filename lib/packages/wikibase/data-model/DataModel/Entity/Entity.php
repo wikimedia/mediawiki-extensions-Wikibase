@@ -46,8 +46,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	protected $data;
 
 	/**
-	 * Id of the item (the 42 in q42 used as page name and in exports).
-	 * Integer when set. False when not initialized. Null when the item is new and unsaved.
+	 * Id of the entity.
+	 *
+	 * This field can have several types:
+	 *
+	 * * EntityId: This means the entity has this id.
+	 * * Null: This means the entity does not have an associated id.
+	 * * False: This means the entity has an id, but it is stubbed in the $data field. Call getId to get an unstubbed version.
 	 *
 	 * @since 0.1
 	 * @var EntityId|bool|null
@@ -62,6 +67,15 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	protected $claims;
 
 	/**
+	 * Returns a type identifier for the entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public abstract function getType();
+
+	/**
 	 * Constructor.
 	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
 	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
@@ -74,16 +88,14 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	public function __construct( array $data ) {
 		$this->data = $data;
 		$this->cleanStructure();
+		$this->initializeIdField();
 	}
 
-	/**
-	 * Returns a type identifier for the entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public abstract function getType();
+	protected function initializeIdField() {
+		if ( !array_key_exists( 'entity', $this->data ) ) {
+			$this->id = null;
+		}
+	}
 
 	/**
 	 * Get an array representing the Entity.

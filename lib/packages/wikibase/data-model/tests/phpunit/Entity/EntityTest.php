@@ -849,4 +849,21 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertGreaterThanOrEqual( count( $claims ), count( $snaks ), "At least one snak per Claim" );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testArraySerlialzationRoundtrip( Entity $entity ) {
+		$class = get_class( $entity );
+
+		/**
+		 * @var Entity $newEntity
+		 */
+		$newEntity = new $class( $entity->toArray() );
+
+		$entity->stub();
+		$newEntity->stub();
+
+		$this->assertEquals( $entity, $newEntity );
+	}
+
 }
