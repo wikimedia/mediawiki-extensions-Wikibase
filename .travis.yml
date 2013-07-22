@@ -33,6 +33,8 @@ script:
 
 after_script:
   - cd ../../extensions/Wikibase
+  - pwd
+  - ls -lap vendor/bin/
   - du -hs vendor/bin/coveralls
   - php vendor/bin/coveralls -v
 
