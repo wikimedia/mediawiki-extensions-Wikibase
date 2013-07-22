@@ -9,6 +9,8 @@
 class HistoryPage
   include PageObject
 
+  h1(:mwFirstHeading, :id => "firstHeading")
+
   link(:historyLink, :xpath => "//li[@id='ca-history']/span/a")
   link(:rollbackLink, :css => "span.mw-rollback-link > a")
   link(:returnToItemLink, :css => "p#mw-returnto > a")
