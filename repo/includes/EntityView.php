@@ -607,27 +607,21 @@ abstract class EntityView extends \ContextSource {
 		if ( $claim->getMainSnak()->getType() === 'value' ) {
 			$value = $claim->getMainSnak()->getDataValue();
 
-			// TODO: Bad to have a switch for different data types here, implement a formatter!
-			if( $value instanceof \DataValues\TimeValue ) {
-				$value = $value->getTime() . ' (' . $value->getCalendarModel() . ')';
+			$valueFormatter = $this->valueFormatters->newFormatter(
+				$value->getType(), $valueFormatterOptions
+			);
+
+			if( $valueFormatter !== null ) {
+				$value = $valueFormatter->format( $value );
 			} else {
-				// Proper way, use value formatter:
-				$valueFormatter = $this->valueFormatters->newFormatter(
-					$value->getType(), $valueFormatterOptions
-				);
+				// If value representation is a string, just display that one as a
+				// fallback for values not having a formatter implemented yet.
+				$value = $value->getValue();
 
-				if( $valueFormatter !== null ) {
-					$value = $valueFormatter->format( $value );
-				} else {
-					// If value representation is a string, just display that one as a
-					// fallback for values not having a formatter implemented yet.
-					$value = $value->getValue();
-
-					if( !is_string( $value ) ) {
-						// TODO: don't fail here, display a message in the UI instead
-						throw new MWException( 'Displaying of values of type "'
-							. $value->getType() . '" not supported yet' );
-					}
+				if( !is_string( $value ) ) {
+					// TODO: don't fail here, display a message in the UI instead
+					throw new MWException( 'Displaying of values of type "'
+						. $value->getType() . '" not supported yet' );
 				}
 			}
 		}
