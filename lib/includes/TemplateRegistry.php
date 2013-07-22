@@ -50,7 +50,7 @@ class TemplateRegistry {
 	 * @param array $templates
 	 */
 	public function addTemplates( $templates ) {
-		foreach ( $templates AS $key => $snippet ) {
+		foreach ( $templates as $key => $snippet ) {
 			$this->addTemplate( $key, $snippet );
 		}
 	}
@@ -93,7 +93,8 @@ class Template extends \Message {
 	 * Constructor.
 	 *
 	 * @param TemplateRegistry $templateRegistry
-	 * @param $key: message key, or array of message keys to try and use the first non-empty message for
+	 * @param $key: message key, or array of message keys to try
+	 *          and use the first non-empty message for
 	 * @param $params Array message parameters
 	 */
 	public function __construct( TemplateRegistry $templateRegistry, $key, $params = array() ) {
@@ -107,11 +108,19 @@ class Template extends \Message {
 	 *
 	 * @return string template
 	 */
-	function fetchMessage() {
+	protected function fetchMessage() {
 		if ( !isset( $this->message ) ) {
 			$this->message = $this->templateRegistry->getTemplate( $this->key );
 		}
 		return $this->message;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function render() {
+		// Use plain() to prevent replacing {{...}}:
+		return $this->plain();
 	}
 
 }
