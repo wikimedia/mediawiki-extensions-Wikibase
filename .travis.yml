@@ -32,8 +32,8 @@ script:
   - ./phpunit.php --group Wikibase --exclude-group ChangeHandlerTest
 
 after_script:
-  - pwd
-  - php ../../extensions/Wikibase/vendor/bin/coveralls -v
+  - cd ../../extensions/Wikibase
+  - php vendor/bin/coveralls -v
 
 notifications:
   email:
