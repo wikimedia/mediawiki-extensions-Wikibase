@@ -532,10 +532,10 @@ class EditEntity extends ModifyEntity {
 	public function checkMultilangArgs( $arg, $langCode ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
-			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
+			$this->dieUsage( "An array was expected, but not found in the json for the langCode {$langCode}" , 'not-recognized-array' );
 		}
 		if ( !is_string( $arg['language'] ) ) {
-			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieUsage( "A string was expected, but not found in the json for the langCode {$langCode} and argument 'language'" , 'not-recognized-string' );
 		}
 		if ( !is_numeric( $langCode ) ) {
 			if ( $langCode !== $arg['language'] ) {
@@ -546,7 +546,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "unknown language: {$arg['language']}", 'not-recognized-language' );
 		}
 		if ( !is_string( $arg['value'] ) ) {
-			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
+			$this->dieUsage( "A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'" , 'not-recognized-string' );
 		}
 		return $status;
 	}
