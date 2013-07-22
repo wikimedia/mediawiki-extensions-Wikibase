@@ -836,19 +836,16 @@ class ChangeHandler {
 			} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
 				$params['message'] = 'wikibase-comment-sitelink-change';
 
-				// fall back to global id... not great, but we have to do *something*
 				// FIXME: this code appears to be doing something incorrect as "best effort"
 				// rather than allowing for proper error handling
-				$navIds = $this->site->getNavigationIds();
-				$iwPrefix = isset( $navIds[0] ) ? $navIds[0] : $this->site->getGlobalId();
 
 				$params['sitelink'] = array(
 					'oldlink' => array(
-						'lang' => $iwPrefix,
+						'site' => $siteGlobalId,
 						'page' => $diffOp->getOldValue()
 					),
 					'newlink' => array(
-						'lang' => $iwPrefix,
+						'site' => $siteGlobalId,
 						'page' => $diffOp->getNewValue()
 					)
 				);
@@ -862,18 +859,17 @@ class ChangeHandler {
 
 			foreach( $siteLinkDiff as $siteKey => $diffOp ) {
 				$site = $this->sites->getSite( $siteKey );
+
 				if( !$site ) {
 					trigger_error( "Could not get site with globalId $siteKey.", E_USER_WARNING );
 					continue;
 				}
-				// assumes interwiki prefix is same as lang code
-				// true for wikipedia but need todo more robustly
-				$iwPrefix = $site->getLanguageCode();
+
 				if ( $diffOp instanceof \Diff\DiffOpAdd ) {
 					$params['message'] = $messagePrefix . 'add';
 					$params['sitelink'] = array(
 						'newlink' =>  array(
-							'lang' => $iwPrefix,
+							'site' => $siteKey,
 							'page' => $diffOp->getNewValue()
 						)
 					);
@@ -881,18 +877,18 @@ class ChangeHandler {
 					$params['message'] = $messagePrefix . 'remove';
 					$params['sitelink'] = array(
 						'oldlink' => array(
-							'lang' => $iwPrefix,
+							'site' => $siteKey,
 							'page' => $diffOp->getOldValue()
 						)
 					);
 				} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
 					$params['sitelink'] = array(
 						'oldlink' => array(
-							'lang' => $iwPrefix,
+							'site' => $siteKey,
 							'page' => $diffOp->getOldValue()
 						),
 						'newlink' => array(
-							'lang' => $iwPrefix,
+							'site' => $siteKey,
 							'page' => $diffOp->getNewValue()
 						)
 					);

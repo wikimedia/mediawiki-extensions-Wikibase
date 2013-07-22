@@ -892,7 +892,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 //				array( 'q100' => array( 'Emmy' ) ),
 //				array(
 //					'sitelink' => array(
-//						'newlink' => array( 'lang' => 'de', 'page' => 'Dummy' ),
+//						'newlink' => array( 'site' => 'dewiki', 'page' => 'Dummy' ),
 //					),
 //					'message' => 'wikibase-comment-sitelink-add'
 //				)
@@ -903,8 +903,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 //				array( 'q100' => array( 'Emmy' ) ),
 //				array(
 //					'sitelink' => array(
-//						'oldlink' => array( 'lang' => 'de', 'page' => 'Dummy' ),
-//						'newlink' => array( 'lang' => 'de', 'page' => 'Dummy2' ),
+//						'oldlink' => array( 'site' => 'dewiki', 'page' => 'Dummy' ),
+//						'newlink' => array( 'site' => 'dewiki', 'page' => 'Dummy2' ),
 //					),
 //					'message' => 'wikibase-comment-sitelink-change'
 //				)
@@ -915,8 +915,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				array( 'q100' => array( 'Emmy' ) ),
 				array(
 					'sitelink' => array(
-						'oldlink' => array( 'lang' => 'en', 'page' => 'Emmy' ),
-						'newlink' => array( 'lang' => 'en', 'page' => 'Emmy2' ),
+						'oldlink' => array( 'site' => 'enwiki', 'page' => 'Emmy' ),
+						'newlink' => array( 'site' => 'enwiki', 'page' => 'Emmy2' ),
 					),
 					'message' => 'wikibase-comment-sitelink-change'
 				)
@@ -927,7 +927,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				array( 'q100' => array( 'Emmy2' ) ),
 				array(
 					'sitelink' => array(
-						'oldlink' => array( 'lang' => 'de', 'page' => 'Dummy2' ),
+						'oldlink' => array( 'site' => 'dewiki', 'page' => 'Dummy2' ),
 					),
 					'message' => 'wikibase-comment-sitelink-remove'
 				)
