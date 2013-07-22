@@ -33,12 +33,7 @@ script:
 
 after_script:
   - cd ../../extensions/Wikibase
-  - pwd
-  - ls -lap vendor/bin/
-  - du -hs vendor/bin/coveralls
-  - ls -lap vendor/satooshi/php-coveralls/composer/bin/
-  - du -hs vendor/satooshi/php-coveralls/composer/bin/coveralls
-  - php vendor/bin/coveralls -v
+  - php vendor/satooshi/php-coveralls/composer/bin/coveralls -v
 
 notifications:
   email:
