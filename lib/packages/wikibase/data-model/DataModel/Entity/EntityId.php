@@ -188,16 +188,17 @@ class EntityId extends \DataValues\DataValueObject {
 
 	/**
 	 * Return a string representation of this entity id.
+	 * This is a human readable representation for use in logging and reporting only.
 	 *
-	 * Note: this was previously documented to be equal to the now deprecated getPrefixedId
-	 * This will stop being the case when getPrefixedId gets removed, so should not be relied upon.
+	 * Note: This was previously documented to be equal to the now deprecated getPrefixedId.
+	 * This is no longer the case.
 	 *
 	 * @since 0.3
 	 *
 	 * @return String
 	 */
 	public function __toString() {
-		return $this->getPrefixedId();
+		return $this->entityType . ':' . $this->numericId;
 	}
 
 	/**
