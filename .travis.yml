@@ -36,6 +36,8 @@ after_script:
   - pwd
   - ls -lap vendor/bin/
   - du -hs vendor/bin/coveralls
+  - ls -lap vendor/satooshi/php-coveralls/composer/bin/
+  - du -hs vendor/satooshi/php-coveralls/composer/bin/coveralls
   - php vendor/bin/coveralls -v
 
 notifications:
