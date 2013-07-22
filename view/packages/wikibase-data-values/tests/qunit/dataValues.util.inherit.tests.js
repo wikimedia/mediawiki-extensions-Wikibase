@@ -153,6 +153,7 @@ var // the following are a couple of var definitions used by the tests beyond
 			[ 'function()xxx(){};', 'functionxxx' ],
 			[ 'xyz;${]123', 'xyz$123' ],
 			[ ';a;1;$;b;_;', 'a1$b_' ],
+			[ 'a1$b2c3d4;', 'a1$b2c3d4' ],
 			[ '();', false ],
 			[ '42', false ], // can't start function name with number
 			[ 'class', false ], // reserved word

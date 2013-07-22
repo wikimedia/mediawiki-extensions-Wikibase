@@ -4,10 +4,37 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( $, dataValues ) {
+( function( $, util ) {
 	'use strict';
 
-	var dv = dataValues;
+	/**
+	 * Helper to create a named function which will execute a given function.
+	 *
+	 * @param {string} name Name of the new function. All characters not matching [\w$] will be
+	 *        removed.
+	 * @param {Function} [originalFn] Function which will be executed by new function. If not given,
+	 *        an empty function will be used instead.
+	 * @return Function
+	 *
+	 * @throws {Error} If the given name has no characters matching [\w$].
+	 */
+	function createNamedFunction( name, originalFn ) {
+		/* jshint evil: true */
+		/* jshint unused: false */
+		var namedFn,
+			evilsSeed = originalFn || $.noop,
+			fnName = name.replace( /(?:(^\d+)|[^\w$])/ig, '' );
+
+		if( !fnName ) {
+			// only bad characters were in the name!
+			throw new Error( 'Bad function name given. At least one word character or $ required.' );
+		}
+
+		eval( 'namedFn = function ' + fnName +
+			'(){ evilsSeed.apply( this, arguments ); }' );
+
+		return namedFn; // value got assigned in eval
+	}
 
 	/**
 	 * Helper for prototypical inheritance.
@@ -23,7 +50,7 @@
 	 *
 	 * @throws {Error} In case a malicious function name is given or a reserved word is used
 	 */
-	dv.util.inherit = function( name, base, constructor, members ) {
+	util.inherit = function( name, base, constructor, members ) {
 		// the name is optional
 		if( typeof name !== 'string' ) {
 			members = constructor; constructor = base; base = name; name = false;
@@ -39,38 +66,23 @@
 				constructor = false;
 			}
 		}
-		// if no name is given, find suitable constructor's name
-		name = name || constructor.name || ( base.name ? base.name + '_SubProto' : 'SomeInherited' );
-		// make sure name is just a function name and not some executable JavaScript
-		name = name.replace( /(?:(^\d+)|[^\w$])/ig, '' );
+		// If no name is given, find suitable constructor name. We want proper names here, so
+		// instances can easily be identified during debugging.
+		var constructorName = name || constructor.name || ( base.name ? base.name + '_SubProto' : 'SomeInherited' ),
+			prototypeName = base.name || 'SomeProto';
 
-		if( !name ) { // only bad characters were in the name!
-			throw new Error( 'Bad constructor name given. Only word characters and $ are allowed.' );
-		}
+		// function we execute in our real constructor
+		var NewConstructor = createNamedFunction( constructorName, constructor || base );
 
-		// function we execute in our real constructor created by evil eval:
-		var evilsSeed,
-			NewConstructor;
-
-		evilsSeed = constructor || base;
-
-		// for creating a named function with a variable name, there is just no other way...
-		/* jshint evil: true */
-		eval( 'NewConstructor = function ' + name +
-			'(){ evilsSeed.apply( this, arguments ); }' );
-
-		var NewPrototype = function(){}; // new constructor for avoiding base constructor and with it any side-effects
+		// new constructor for avoiding direct use of base constructor and its potential side-effects
+		var NewPrototype = createNamedFunction( prototypeName );
 		NewPrototype.prototype = base.prototype;
 
 		NewConstructor.prototype = $.extend(
 			new NewPrototype(),
-			members
+			{ constructor: NewConstructor }, // make sure "constructor" property is set properly...
+			members // ... but allow members to overwrite "constructor"
 		);
-
-		// Make sure constructor property is set properly. The constructor has to be assigned
-		// explicitly since doing it along the $.extend() above will be ignored in IE8.
-		NewConstructor.prototype.constructor = NewConstructor;
-
 		return NewConstructor;
 	};
 
@@ -86,8 +98,8 @@
 	 *     someAbstractFunc: wb.utilities.abstractFunction
 	 * };
 	 */
-	dv.util.abstractMember = function() {
+	util.abstractMember = function() {
 		throw new Error( 'Call to undefined abstract function' );
 	};
 
-}( jQuery, dataValues ) );
+}( jQuery, dataValues.util ) );
