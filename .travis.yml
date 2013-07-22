@@ -31,10 +31,6 @@ script:
   - cd ../phase3/tests/phpunit
   - ./phpunit.php --group Wikibase --exclude-group ChangeHandlerTest
 
-after_script:
-  - cd ../../extensions/Wikibase
-  - php vendor/satooshi/php-coveralls/composer/bin/coveralls -v
-
 notifications:
   email:
     recipients:
