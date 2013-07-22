@@ -742,18 +742,11 @@ class EditEntity {
 		 */
 		$entity = $this->newContent->getEntity();
 
-		// TODO: the below logic is Item specific, so would be good if this got handled
-		// using composition or polymorphism.
-
-		if ( $entity->getType() !== Item::ENTITY_TYPE ) {
-			return $this->status;
-		}
-
-		$itemDiff = null;
+		$entityDiff = null;
 
 		if ( $this->getBaseContent() instanceof EntityContent ) {
 			//XXX: havn't we calculated this diff already?
-			$itemDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
+			$entityDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
 		}
 		//XXX: ...else diff against an empty item?...
 
@@ -761,10 +754,18 @@ class EditEntity {
 		$multilangViolationDetector->addConstraintChecks(
 			$entity,
 			$this->status,
-			$itemDiff
+			$entityDiff
 		);
 
 		if ( !$this->status->isOk() ) {
+			return $this->status;
+		}
+
+		
+		// TODO: the below logic is Item specific, so would be good if this got handled
+		// using composition or polymorphism.
+
+		if ( $entity->getType() !== Item::ENTITY_TYPE ) {
 			return $this->status;
 		}
 
@@ -785,8 +786,8 @@ class EditEntity {
 				$entity,
 				$this->status,
 				StoreFactory::getStore()->getTermIndex(),
-				$itemDiff === null ? null : $itemDiff->getLabelsDiff(),
-				$itemDiff === null ? null : $itemDiff->getDescriptionsDiff()
+				$entityDiff === null ? null : $entityDiff->getLabelsDiff(),
+				$entityDiff === null ? null : $entityDiff->getDescriptionsDiff()
 			);
 		}
 
