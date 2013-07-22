@@ -33,6 +33,7 @@ script:
 
 after_script:
   - cd ../../extensions/Wikibase
+  - du -hs vendor/bin/coveralls
   - php vendor/bin/coveralls -v
 
 notifications:
