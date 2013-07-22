@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9845590_9bfe1534",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-22T15:58:56Z",
+      "side": 1,
+      "message": "what is the second parameter for? expand the documentation a bit.",
+      "revId": "b9ef88da21532a8e5b1deadd4b3f0e45cb44956c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
