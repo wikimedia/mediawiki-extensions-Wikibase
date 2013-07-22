@@ -148,27 +148,9 @@ class ExternalChangesLine {
 				// @todo: provide a link to the entity
 				$message = wfMessage( 'wikibase-comment-linked' )->text();
 			} else if ( array_key_exists( 'sitelink', $comment ) ) {
-				$sitelinks = $comment['sitelink'];
-				if ( array_key_exists( 'oldlink', $sitelinks ) && array_key_exists( 'newlink', $sitelinks ) ) {
-					$oldLink = self::wikiLink( $sitelinks['oldlink']['page'], $sitelinks['oldlink']['lang'] );
-					$newLink = self::wikiLink( $sitelinks['newlink']['page'], $sitelinks['newlink']['lang'] );
-					$param = array( $oldLink, $newLink );
-				} else if ( array_key_exists( 'oldlink', $sitelinks ) ) {
-					$param = self::wikiLink( $sitelinks['oldlink']['page'], $sitelinks['oldlink']['lang'] );
-				} else if ( array_key_exists( 'newlink', $sitelinks ) ) {
-					$param = self::wikiLink( $sitelinks['newlink']['page'], $sitelinks['newlink']['lang'] );
-				}
-
-				if ( $param !== null ) {
-					if ( is_array( $param ) ) {
-						$message = wfMessage( $comment['message'] )->rawParams( $param[0], $param[1] )->parse();
-					} else {
-						$message = wfMessage( $comment['message'] )->rawParams( $param )->parse();
-					}
-				}
-			}
-
-			if ( $message === null ) {
+				// @fixme site link change message
+				$message = wfMessage( 'wikibase-comment-update' )->text();
+			} else {
 				$message = wfMessage( $comment['message'] )->text();
 			}
 		} else {
