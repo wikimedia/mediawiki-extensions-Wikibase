@@ -32,7 +32,6 @@ echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
 
 cd extensions/Wikibase
 composer require satooshi/php-coveralls:dev-master
-composer install
 
 cd ../..
 
