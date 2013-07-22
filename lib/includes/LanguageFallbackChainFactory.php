@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Language, IContextSource, MWException;
+use User, Language, IContextSource, MWException;
 
 /**
  * Object creating LanguageFallbackChain objects in Wikibase.
@@ -180,32 +180,56 @@ class LanguageFallbackChainFactory {
 	}
 
 	/**
-	 * Construct the fallback chain based a context, currently from on data provided by Extension:Babel.
+	 * Construct the fallback chain based on a context. Currently it just uses user and language info in it.
 	 *
 	 * @param IContextSource $context
 	 *
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromContext( IContextSource $context ) {
+		return $this->newFromUserAndLanguageCode( $context->getUser(), $context->getLanguage()->getCode() );
+	}
+
+	/**
+	 * Construct the fallback chain based on a context, but ignore the language info in it and use a specified one instead.
+	 *
+	 * @param IContextSource $context
+	 * @param string $languageCode
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function newFromContextAndLanguageCode( IContextSource $context, $languageCode ) {
+		return $this->newFromUserAndLanguageCode( $context->getUser(), $languageCode );
+	}
+
+	/**
+	 * Construct the fallback chain based on a user and a language, currently from data provided by Extension:Babel.
+	 *
+	 * @param User $user
+	 * @param string $languageCode
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
 		global $wgBabelCategoryNames;
 		wfProfileIn( __METHOD__ );
 
-		$user = $context->getUser();
-
 		if ( !class_exists( 'Babel' ) || $user->isAnon() ) {
-			$cached =  $this->newFromLanguage( $context->getLanguage(), self::FALLBACK_ALL );
+			$cached =  $this->newFromLanguageCode( $languageCode, self::FALLBACK_ALL );
 			wfProfileOut( __METHOD__ );
 			return $cached;
 		}
 
-		if ( isset( $this->userLanguageCache[$user->getName()][$context->getLanguage()->getCode()] ) ) {
-			$cached = $this->userLanguageCache[$user->getName()][$context->getLanguage()->getCode()];
+		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
+
+		if ( isset( $this->userLanguageCache[$user->getName()][$languageCode] ) ) {
+			$cached = $this->userLanguageCache[$user->getName()][$languageCode];
 			wfProfileOut( __METHOD__ );
 			return $cached;
 		}
 
 		$babel = array();
-		$contextLanguage = array( $context->getLanguage()->getCode() );
+		$contextLanguage = array( $languageCode );
 
 		if ( count( $wgBabelCategoryNames ) ) {
 			// A little redundant but it's the only way to get required information with current Babel API.
@@ -226,7 +250,7 @@ class LanguageFallbackChainFactory {
 		$chain = $this->buildFromBabel( $babel );
 		$languageFallbackChain = new LanguageFallbackChain( $chain );
 
-		$this->userLanguageCache[$user->getName()][$context->getLanguage()->getCode()] = $languageFallbackChain;
+		$this->userLanguageCache[$user->getName()][$languageCode] = $languageFallbackChain;
 
 		wfProfileOut( __METHOD__ );
 		return $languageFallbackChain;
