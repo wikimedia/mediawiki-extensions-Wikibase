@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9845590_f8d2c75a",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-22T10:28:45Z",
+      "side": 1,
+      "message": "Should this handle escaping of parameters? The way we use this, parameters may contain template text that needs to be expanded, but can also be raw values from the user which must be escaped, right?\n\nI\u0027m some still confused/worried about how exactly this is supposed to work.",
+      "revId": "ce124fc63c2a6f2a554c9a0201ed4bd0ab544115",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9845590_18d84b78",
+        "filename": "lib/includes/TemplateRegistry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-22T10:28:45Z",
+      "side": 1,
+      "message": "\"render\" tells me that it takes any unsafe raw value, makes it save, and gives me safe html.\n\n\"plain\" however does not make anything safe. Plain may contain unescaped parameter values from the user (or am i missing something)? Using the plain value as raw HTML is always dangerous, we need to be very cautious about parameter escaping if we do this.",
+      "revId": "ce124fc63c2a6f2a554c9a0201ed4bd0ab544115",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
