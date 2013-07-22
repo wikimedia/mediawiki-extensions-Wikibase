@@ -31,6 +31,9 @@ script:
   - cd ../phase3/tests/phpunit
   - ./phpunit.php --group Wikibase --exclude-group ChangeHandlerTest
 
+after_script:
+  - php vendor/bin/coveralls -v
+
 notifications:
   email:
     recipients:

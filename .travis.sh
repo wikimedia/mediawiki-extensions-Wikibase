@@ -31,6 +31,7 @@ echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' 
 echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
 
 cd extensions/Wikibase
+composer require satooshi/php-coveralls:dev-master
 composer install
 
 cd ../..
