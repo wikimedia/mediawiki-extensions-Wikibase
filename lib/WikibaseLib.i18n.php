@@ -2706,7 +2706,9 @@ $messages['ug-arab'] = array(
 /** Ukrainian (українська)
  * @author AS
  * @author Base
+ * @author RLuts
  * @author Steve.rusyn
+ * @author SteveR
  * @author Ата
  */
 $messages['uk'] = array(
@@ -2723,7 +2725,7 @@ $messages['uk'] = array(
 	'wikibase-error-save-connection' => "Під час спроби здійснити виконати збереження сталась помилка з'єднання, через це Ваші зміни не можуть бути здійснені. Будь ласка, перевірте Ваше з'єднання з Інтернетом.",
 	'wikibase-error-remove-connection' => 'При спробі здійснити вилучення сталась помилка підключення, тому Ваші зміни не можуть бути завершені. Будь ласка, перевірте Ваше підключення до Інтернету.',
 	'wikibase-error-autocomplete-response' => 'Сервер відповів: $1',
-	'wikibase-sitelinks' => 'Список сторінок, що посилаються на цей елемент',
+	'wikibase-sitelinks-wikipedia' => 'Список сторінок Вікіпедії, що посилаються на цей елемент',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 	'wikibase-sitelinks-link-columnheading' => "Пов'язані статті",

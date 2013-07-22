@@ -683,8 +683,13 @@ $messages['ce'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
 	'wikibase-rc-show-wikidata-pref' => 'Керла нисдаршан могӀамехь гайта Викихаамаш чохь хила хийцамаш',
 	'wikibase-watchlist-show-changes-pref' => 'Викихаамаш чохь хийла хийцамаш гайта тергаме могӀам чохь',
+	'special-unconnectedpages' => 'Викихаамаш чохь вовшахтесна йоцу агӀонаш',
+	'wikibase-unconnectedpages-legend' => 'Вовшахтесна йоцу агӀонашан параметраш',
+	'wikibase-unconnectedpages-page' => 'Дуьххьара хилийта агӀо:',
 	'wikibase-unconnectedpages-submit' => 'Кхочушдé',
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — меттан код нийса яц.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Гуче яха вовшахтесна йолу агӀонаш',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|хьажориг|хьажоригаш}} ю)',
 	'wikibase-pageinfo-entity-id-none' => 'Хlумма цаоьшу',
 );
 

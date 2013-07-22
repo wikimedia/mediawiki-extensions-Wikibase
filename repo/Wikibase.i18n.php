@@ -2622,15 +2622,23 @@ $messages['ce'] = array(
 	'wikibase-error-sitelink-already-used' => 'Хьажориг оцу [$1 $2] сайтан тӏе хӏинцале лелош ю хӏокху [[$3]] элементо.',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
 	'wikibase-itembytitle-lookup-page' => 'АгӀо:',
+	'wikibase-itembytitle-submit' => 'Лаха',
 	'wikibase-itemdisambiguation-lookup-language' => 'Мотт:',
 	'wikibase-itemdisambiguation-lookup-label' => 'ЦӀе:',
+	'wikibase-itemdisambiguation-submit' => 'Лаха',
 	'special-newitem' => 'Керла элемент кхоллар',
+	'wikibase-newentity-label' => 'ЦӀе (билгало):',
 	'wikibase-newentity-description' => 'Цуьнах лаьцна:',
+	'special-setlabel' => 'Язъе цӀе',
+	'wikibase-setlabel-label' => 'ЦӀе (билгало):',
+	'wikibase-setlabel-submit' => 'Язъе цӀе',
 	'wikibase-setdescription-label' => 'Цуьнах лаьцна:',
 	'wikibase-setentity-language' => 'Мотт:',
 	'wikibase-dispatchstats-change-timestamp' => 'Терахь/хан',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мотт:',
 	'wikibase-entitieswithoutlabel-submit' => 'Лаха',
+	'wikibase-property-summary-wbsetlabel-set' => 'Хийцина [$2] цӀе',
+	'wikibase-listdatatypes-time-head' => 'Хан',
 );
 
 /** Sorani Kurdish (کوردی)
@@ -14189,6 +14197,7 @@ $messages['tl'] = array(
 );
 
 /** Turkish (Türkçe)
+ * @author Emperyan
  * @author Rapsar
  */
 $messages['tr'] = array(
@@ -14200,7 +14209,9 @@ $messages['tr'] = array(
 	'wikibase-label-edit-placeholder' => 'etiket girin',
 	'wikibase-description-edit-placeholder' => 'açıklama girin',
 	'wikibase-sitelink-page-edit-placeholder' => 'madde',
+	'wikibase-description-input-help-message' => '$1 dilinde kısa bir açıklama girin',
 	'wikibase-remove' => 'kaldır',
+	'wikibase-aliases-label' => 'Şu şekilde de bilinir:',
 	'wikibase-itemdisambiguation-lookup-language' => 'Dil:',
 );
 
