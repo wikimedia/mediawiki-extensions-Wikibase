@@ -16,10 +16,8 @@
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.tests.js
 ./lib/tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js
-./lib/tests/qunit/wikibase.ui.Toolbar.Button.tests.js
 ./lib/tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js
 ./lib/tests/qunit/wikibase.ui.Toolbar.Group.tests.js
-./lib/tests/qunit/wikibase.ui.Toolbar.Label.tests.js
 ./lib/tests/qunit/wikibase.ui.Toolbar.tests.js
 ./lib/tests/qunit/wikibase.ui.Tooltip.tests.js
 ./lib/tests/qunit/data/testrunner.js

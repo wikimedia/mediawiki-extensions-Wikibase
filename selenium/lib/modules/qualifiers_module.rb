@@ -10,9 +10,10 @@ module QualifierPage
   include PageObject
   # qualifiers UI elements
   div(:qualifiersContainer, :class => "wb-claim-qualifiers")
-  link(:addQualifier, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[text()='add qualifier']")
-  link(:removeQualifierLine1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
-  link(:removeQualifierLine2, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
+  link(:addQualifier,			:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add qualifier']")
+  link(:addQualifierDisabled,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[contains(@class, 'wikibase-toolbarbutton-disabled')][text()='add qualifier']")
+  link(:removeQualifierLine1,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
+  link(:removeQualifierLine2,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
   text_area(:qualifierValueInput1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", :index => 0)
   text_area(:qualifierValueInput2, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", :index => 1)
 

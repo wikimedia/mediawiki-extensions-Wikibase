@@ -173,7 +173,7 @@ describe "Check edit-conflicts" do
         ajax_wait
         page.wait_for_statement_request_finished
         first_claim_guid = @browser.execute_script("return $('.wb-claimview').first().data('statementview').value().getGuid()");
-        old_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        old_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid.to_s() + "');")
         old_revid.should > 0
       end
     end
@@ -190,7 +190,7 @@ describe "Check edit-conflicts" do
         page.saveStatement
         ajax_wait
         page.wait_for_statement_request_finished
-        revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid.to_s() + "');")
         revid.should > old_revid
       end
     end
@@ -203,7 +203,7 @@ describe "Check edit-conflicts" do
         page.wait_for_entity_to_load
         inject_old_revid = "wb.getRevisionStore().setClaimRevision(parseInt(" + old_revid.to_s() + "), '" + first_claim_guid.to_s() + "');"
         @browser.execute_script(inject_old_revid)
-        injected_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        injected_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid.to_s() + "');")
         injected_revid.should == old_revid
         page.editFirstStatement
         page.statementValueInput_element.clear

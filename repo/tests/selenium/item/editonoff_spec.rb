@@ -17,7 +17,7 @@ describe "Check functionality of disabling/enabling edit actions" do
   end
 
   context "disabling/enabling of edit actions while editing label" do
-    it "should check if edit actions are disbled/enabled correctly when editing label" do
+    it "should check if edit actions are disabled/enabled correctly when editing label" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
