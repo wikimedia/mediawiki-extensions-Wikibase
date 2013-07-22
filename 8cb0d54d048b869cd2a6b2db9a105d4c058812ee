@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9845590_1853eb17",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-22T09:41:25Z",
+      "side": 1,
+      "message": "need the license etc here",
+      "revId": "8cb0d54d048b869cd2a6b2db9a105d4c058812ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9845590_d830a3ea",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-22T09:41:25Z",
+      "side": 1,
+      "message": "$entity is unused here",
+      "revId": "8cb0d54d048b869cd2a6b2db9a105d4c058812ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9845590_f84d6774",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-22T09:41:25Z",
+      "side": 1,
+      "message": "$editable is unused",
+      "revId": "8cb0d54d048b869cd2a6b2db9a105d4c058812ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
