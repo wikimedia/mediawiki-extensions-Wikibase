@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( mw, dv, dt, vp, $, vv ) {
+( function( dv, dt, vp, $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -19,6 +19,19 @@
 	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.UnsupportedValue = vv.expert( 'unsupportedvalue', {
+		/**
+		 * Options.
+		 * @type {Object}
+		 */
+		_options: {
+			messages: {
+				'valueview-expert-unsupportedvalue-unsupporteddatatype':
+					'Handling of this value is not yet supported.',
+				'valueview-expert-unsupportedvalue-unsupporteddatavalue':
+					'Handling of values for this data type is not yet supported.'
+			}
+		},
+
 		/**
 		 * The current value.
 		 * @type dv.DataValue|null
@@ -60,7 +73,7 @@
 
 			if( unsupportedIndicator instanceof dt.DataType ) {
 				// no expert for values of that data type or the data type's data value type
-				unsupportedMsg = mw.msg(
+				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatatype',
 					unsupportedIndicator.getLabel()
 				);
@@ -69,7 +82,7 @@
 			}
 			else if( unsupportedIndicator instanceof dv.DataValue ) {
 				// no expert for the value's value type
-				unsupportedMsg = mw.msg(
+				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatavalue',
 					unsupportedIndicator.getType()
 				);
@@ -84,4 +97,4 @@
 		}
 	} );
 
-}( mediaWiki, dataValues, dataTypes, valueParsers, jQuery, jQuery.valueview ) );
+}( dataValues, dataTypes, valueParsers, jQuery, jQuery.valueview ) );

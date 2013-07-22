@@ -99,6 +99,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
+				'jquery.valueview.MessageProvider',
 				'jquery.valueview.base',
 				'jquery.valueview.ViewState',
 				'jquery.valueview.experts', // because vv deals with ExpertFactory
@@ -123,6 +124,15 @@ return call_user_func( function() {
 				'dataValues.values',
 				'dataTypes',
 				'valueParsers.parsers',
+			),
+		),
+
+		'jquery.valueview.MessageProvider' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.MessageProvider.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.base',
 			),
 		),
 

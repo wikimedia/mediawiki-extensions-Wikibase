@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( mw, dv, vp, $, vv ) {
+( function( dv, vp, $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -19,6 +19,15 @@
 	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.EmptyValue = vv.expert( 'emptyvalue', {
+		/**
+		 * Options.
+		 * @type {Object}
+		 */
+		_options: {
+			messages: {
+				'valueview-expert-emptyvalue-empty': 'empty'
+			}
+		},
 
 		/**
 		 * @see jQuery.valueview.Expert.destroy
@@ -47,8 +56,9 @@
 		 */
 		draw: function() {
 			this.$viewPort.text(
-				mw.msg( 'valueview-expert-emptyvalue-empty' ) );
+				this._messageProvider.getMessage( 'valueview-expert-emptyvalue-empty' )
+			);
 		}
 	} );
 
-}( mediaWiki, dataValues, valueParsers, jQuery, jQuery.valueview ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview ) );

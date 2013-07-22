@@ -103,6 +103,10 @@
 
 		this._options = $.extend( ( !this._options ) ? {} : this._options, options || {} );
 
+		var defaultMessages = this._options.messages || {},
+			mediaWiki = this._options.mediaWiki || null;
+		this._messageProvider = new vv.MessageProvider( defaultMessages, mediaWiki );
+
 		this._init();
 	};
 
@@ -139,6 +143,12 @@
 		 * @type Object
 		 */
 		_options: null,
+
+		/**
+		 * Message provider used to fetch messages from mediaWiki if available.
+		 * @type {jQuery.valueview.MessageProvider}
+		 */
+		_messageProvider: null,
 
 		/**
 		 * Will be called initially for new expert instances.
@@ -334,30 +344,6 @@
 		 * @abstract
 		 */
 		draw: dv.util.abstractMember,
-
-		/**
-		 * Tries to get a message via mediaWiki (if set in the options) or from the default options.
-		 * @since 0.1
-		 *
-		 * @param {string} key
-		 * @param {string[]} [params] Message parameters (forwarded to mediaWiki messages only).
-		 * @return {string|null}
-		 *
-		 * @todo Implement a MessageFetcher composited into this object instead of this method.
-		 */
-		_getMessage: function( key, params ) {
-			params = params || [];
-
-			if( this._options.mediaWiki ) {
-				return this._options.mediaWiki.msg( key, params );
-			}
-
-			if( this._options && this._options.messages && this._options.messages[key] ) {
-				return this._options.messages[key];
-			}
-
-			return null;
-		},
 
 		/**
 		 * Will set the focus if there is some focusable input elements.

@@ -148,6 +148,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.MessageProvider.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.MessageProvider.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.MessageProvider',
+			),
+		),
+
 		'jquery.valueview.experts.stringvalue.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.valueview/valueview.experts/experts.StringValue.tests.js",

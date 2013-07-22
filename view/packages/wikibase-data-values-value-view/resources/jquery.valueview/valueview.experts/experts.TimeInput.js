@@ -99,7 +99,9 @@
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
 			.append(
-				$( '<div/>' ).text( this._getMessage( 'valueview-expert-timeinput-precision' ) )
+				$( '<div/>' ).text(
+					this._messageProvider.getMessage( 'valueview-expert-timeinput-precision' )
+				)
 			);
 
 			var precisionValues = [];
@@ -142,12 +144,14 @@
 			this.$calendarContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarcontainer' )
 			.append(
-				$( '<div/>' ).text( this._getMessage( 'valueview-expert-timeinput-calendar' ) )
+				$( '<div/>' ).text(
+					this._messageProvider.getMessage( 'valueview-expert-timeinput-calendar' )
+				)
 			);
 
 			var calendarValues = [];
 			$.each( timeSettings.calendarnames, function( calendarKey, calendarTerms ) {
-				var label = self._getMessage(
+				var label = self._messageProvider.getMessage(
 					'valueview-expert-timevalue-calendar-' + calendarTerms[0].toLowerCase()
 				);
 				calendarValues.push( { value: calendarTerms[0], label: label } );
@@ -182,7 +186,7 @@
 
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
-			.text( this._getMessage( 'valueview-expert-advancedadjustments' ) );
+			.text( this._messageProvider.getMessage( 'valueview-expert-advancedadjustments' ) );
 
 			this.$calendarhint = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarhint' )
@@ -324,7 +328,7 @@
 			var msg = null;
 
 			if( value ) {
-				msg = this._getMessage(
+				msg = this._messageProvider.getMessage(
 					'valueview-expert-timeinput-calendarhint-' + value.calendar().toLowerCase()
 				);
 			}
@@ -343,7 +347,7 @@
 				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-message' )
 				.text( msg );
 
-				msg = this._getMessage(
+				msg = this._messageProvider.getMessage(
 					'valueview-expert-timeinput-calendarhint-switch-' + otherCalendar.toLowerCase()
 				);
 				if( msg ) {
