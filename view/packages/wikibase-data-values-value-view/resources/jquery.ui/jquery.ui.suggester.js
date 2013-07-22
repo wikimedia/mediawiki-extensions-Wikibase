@@ -186,9 +186,9 @@
 			$( window )
 			.off( '.' + this.widgetName )
 			.on( 'resize.' + this.widgetName, function( event ) {
-				if ( event.originalEvent === undefined && $( '.ui-suggester-input' ).length > 0 ) {
-					$( '.ui-suggester-input' ).data( self.widgetName ).close( {} );
-				}
+				$( ':' + self.widgetBaseClass ).each( function( i, node ) {
+					$( node ).data( self.widgetName ).close( {} );
+				} );
 			} );
 		},
 
@@ -197,7 +197,7 @@
 		 */
 		destroy: function() {
 			// about to remove the last suggester instance on the page
-			if ( $( '.ui-suggester-input' ).length === 1 ) {
+			if ( $( ':' + this.widgetBaseClass ).length === 1 ) {
 				$( window ).off( '.' + this.widgetName );
 			}
 			this.element.off( '.' + this.widgetName );
