@@ -41,9 +41,17 @@ class ChangeOps {
 	/**
 	 * @since 0.4
 	 *
+	 * @var Summary[]
+	 */
+	protected $summaries;
+
+	/**
+	 * @since 0.4
+	 *
 	 */
 	public function __construct() {
 		$this->ops = array();
+		$this->summaries = array();
 	}
 
 	/**
@@ -90,18 +98,21 @@ class ChangeOps {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param Summary|null $summary
+	 * @param string $moduleName
 	 *
-	 * @return bool
+	 * @return Summary[]|bool
 	 */
-	public function apply( Entity $entity, Summary $summary = null ) {
+	public function apply( Entity $entity, $moduleName = '' ) {
 		foreach ( $this->ops as $op ) {
+			$summary = new Summary();
+			$summary->setModuleName( $moduleName );
 			if ( $op->apply( $entity, $summary ) === false ) {
 				return false;
 			}
+			$this->summaries[] = $summary;
 		}
 
-		return true;
+		return $this->summaries;
 	}
 
 }
