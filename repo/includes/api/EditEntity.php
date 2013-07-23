@@ -104,14 +104,11 @@ class EditEntity extends ModifyEntity {
 		$status = Status::newGood();
 
 		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
-			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
+			$summary->setAction( $params['clear'] === false ? 'apply' : 'override' );
 		}
 		else {
 			$summary->setAction( 'create' );
 		}
-
-		//TODO: Construct a nice and meaningful summary from the changes that get applied!
-		//      Perhaps that could be based on the resulting diff?
 
 		if ( !isset( $params['data'] ) ) {
 			wfProfileOut( __METHOD__ );
@@ -164,6 +161,8 @@ class EditEntity extends ModifyEntity {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Change could not be applied to entity', 'failed-save' );
 		}
+
+		$summary->addAutoCommentArgs( count( $changeOps->getChangeOps() ) );
 
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );

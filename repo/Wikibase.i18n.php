@@ -289,6 +289,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbcreate-new' => 'Created a new item', // legacy, backwards compatibility
 	'wikibase-item-summary-wbeditentity' => 'Created a new item', // legacy
+	'wikibase-item-summary-wbeditentity-apply' => 'Applied $3 {{PLURAL:$3|change|changes}}',
 	'wikibase-item-summary-wbeditentity-create' => 'Created a new item',
 	'wikibase-item-summary-wbeditentity-update' => 'Updated an item',
 	'wikibase-item-summary-wbeditentity-override' => 'Cleared an item',
@@ -958,6 +959,8 @@ Parameters:
 	'wikibase-item-summary-wbsetitem' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
 	'wikibase-item-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
+	'wikibase-item-summary-wbeditentity-apply' => 'Automatic edit summary generated when applying multiple changes to an entity with the wbeditentity API module. Parameters:
+* $3 number of atomic changes applied',
 	'wikibase-item-summary-wbeditentity-create' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item.}}',
 	'wikibase-item-summary-wbeditentity-update' => '{{wikibase summary messages|item|Automatic edit summary generated when updating an existing item.}}',
 	'wikibase-item-summary-wbeditentity-override' => '{{wikibase summary messages|item|Automatic edit summary generated when overriding an existing item.}}',
