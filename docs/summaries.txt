@@ -18,6 +18,7 @@ message when needed. The second argument, if present, is a language code.
 /* wbsetdescription-remove:1|lang */ value
 
 /* wbeditentity-update: */
+/* wbeditentity-apply: */ p12 ignored|p3 number of changes applied
 /* wbeditentity-override: */
 /* wbeditentity-create: */
 
