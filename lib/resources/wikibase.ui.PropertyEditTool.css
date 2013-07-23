@@ -12,11 +12,6 @@
 
 /********** BASIC LAYOUT **********/
 
-.wb-ui-propertyedittool-toolbar {
-	width: 18em;
-	float: right;
-}
-
 /* set AJAX spinner to left of the autocomplete input box in rtl */
 .mw-content-rtl .ui-autocomplete-loading {
 	background-position: left center;
@@ -62,13 +57,6 @@ table.wb-ui-propertyedittool-ineditmode {
 /********** /BASIC LAYOUT **********/
 
 
-/********** LABEL & DESCRIPTION **********/
-
-.wb-ui-descriptionedittool .wb-ui-propertyedittool-toolbar,
-.wb-ui-labeledittool .wb-ui-propertyedittool-toolbar {
-	display: none;
-}
-
 /***** LABEL *****/
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
@@ -105,6 +93,7 @@ sizes and line heights within the heading */
 
 /***** /LABEL *****/
 
+
 /***** DESCRIPTION *****/
 
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
@@ -123,8 +112,6 @@ sizes and line heights within the heading */
 }
 
 /***** /DESCRIPTION *****/
-
-/********** /LABEL & DESCRIPTION **********/
 
 
 /********** ALIASES **********/
@@ -208,7 +195,7 @@ table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td.wb-site
 	background-color: #D0EBF7;
 }
 
-table.wb-sitelinks .wb-ui-toolbar {
+table.wb-sitelinks .wikibase-toolbar {
 	float: none; /* prevent white space jittering for PropertyEditTool toolbar */
 }
 

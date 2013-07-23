@@ -137,6 +137,11 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 	font-style: italic;
 }
 
+.wb-editsection > .wikibase-toolbar {
+	/* Needed to position label toolbar vertically. Applying to other toolbars for consistency. */
+	display: inline-block;
+}
+
 
 /********** /BASIC LAYOUT **********/
 
@@ -189,17 +194,17 @@ label and its toolbar */
 	line-height: 188%;
 	top: .3em; /* even out margin of label container in view mode */
 }
-.wb-firstHeading .wb-ui-toolbar {
+.wb-firstHeading .wikibase-toolbar {
 	font-size: 188%;
 	line-height: 1.2; /* adjust to height of value */
 	padding-top: 1px; /* even out border of input box */
 }
-.wb-firstHeading .wb-ui-toolbar-group {
+.wb-firstHeading .wikibase-toolbar .wikibase-toolbareditgroup {
 	font-size: 53%;
 	margin-bottom: 2px;
 }
-.wb-firstHeading .wb-ui-toolbar-group .wb-ui-toolbar-group, /* inner group (buttons) */
-.wb-firstHeading .wb-ui-toolbar-group .wb-ui-toolbar-label /* tooltip */ {
+.wb-firstHeading .wikibase-toolbar .wikibase-toolbar, /* inner group (buttons) */
+.wb-firstHeading .wikibase-toolbar .wikibase-toolbarlabel /* tooltip */ {
 	font-size: 100%;
 	margin-bottom: 0; /* even out border of label container in view mode */
 }
@@ -305,6 +310,11 @@ EditableValue's "edit" button when aliases exist) */
 	width: 18em;
 }
 
+.wb-aliases > .wikibase-toolbar {
+	width: 18em;
+	float: right;
+}
+
 /********** /ALIASES **********/
 
 
@@ -374,15 +384,15 @@ table.wb-terms .wb-editsection {
 	                applying margin to the edit section cell should not have any effect at all */
 }
 
-table.wb-terms .wb-editsection .wb-ui-toolbar {
+table.wb-terms .wb-editsection .wikibase-toolbar {
     width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
 }
 
-table.wb-terms .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group {
+table.wb-terms .wb-editsection .wikibase-toolbar .wikibase-toolbar {
     margin-left: 1px; /* even out table cell's right border */
 }
 
-table.wb-terms .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group .wb-ui-toolbar-group {
+table.wb-terms .wb-editsection .wikibase-toolbar .wikibase-toolbar {
     margin-left: 0; /* do not apply margin to nested toolbar groups */
 }
 
@@ -683,7 +693,7 @@ div.wb-claim-new .wb-snak-value {
 	padding-bottom: 1em;
 }
 
-div.wb-statement .wb-statement-claim > .wb-ui-toolbar {
+div.wb-statement .wb-statement-claim > .wikibase-toolbar {
 	display: block;
 }
 
@@ -801,7 +811,7 @@ div.wb-statement-references .wb-error {
 }
 
 /* "add source" link */
-.wb-statement-references > .wb-ui-toolbar {
+.wb-statement-references > .wikibase-toolbar {
 	float: right;
 }
 
@@ -894,15 +904,16 @@ table.wb-sitelinks .wb-editsection {
 	                applying margin to the edit section cell should not have any effect at all */
 }
 
-table.wb-sitelinks .wb-editsection .wb-ui-toolbar {
+table.wb-sitelinks .wb-editsection > .wikibase-toolbar {
 	width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
+	display: inline-block;
 }
 
-table.wb-sitelinks .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group {
+table.wb-sitelinks .wb-editsection .wikibase-toolbar .wikibase-toolbar {
 	margin-left: 1px; /* even out table cell's right border */
 }
 
-table.wb-sitelinks .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group .wb-ui-toolbar-group {
+table.wb-sitelinks .wb-editsection .wikibase-toolbar .wikibase-toolbar {
 	margin-left: 0; /* do not apply margin to nested toolbar groups */
 }
 
