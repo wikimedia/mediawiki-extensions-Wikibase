@@ -11,11 +11,9 @@ message when needed. The second argument, if present, is a language code.
 /* wbsetsitelink-set:1|site */ linktitle
 /* wbsetsitelink-remove:1|site */
 
-/* wbsetlabel-add:1|lang */ value
 /* wbsetlabel-set:1|lang */ value
 /* wbsetlabel-remove:1|lang */ value
 
-/* wbsetdescription-add:1|lang */ value
 /* wbsetdescription-set:1|lang */ value
 /* wbsetdescription-remove:1|lang */ value
 
