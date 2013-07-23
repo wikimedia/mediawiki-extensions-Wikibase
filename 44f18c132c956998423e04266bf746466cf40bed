@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9845590_5ca2c000",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbarbutton.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-23T13:39:16Z",
+      "side": 1,
+      "message": "This should be done more performant. Instead of checking this each time you create a button, just register the event once outside of the actual widget code. This will also keep the _create slim.\n\nBest would be to move this logic entirely out of here though. This is because this component should not have to know about the concept of restricted entity page actions. This is a bad concept of global event usage from the old UI which we should get rid of.",
+      "revId": "44f18c132c956998423e04266bf746466cf40bed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
