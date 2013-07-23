@@ -156,11 +156,12 @@ class LangLinkHandler {
 	 *
 	 * @param ParserOutput $out
 	 * @param array $repoLinks An array that uses global site IDs as keys.
+	 * @param string $group Site group of the current site
 	 *
 	 * @return array A filtered copy of $repoLinks, with any inappropriate
 	 *         entries removed.
 	 */
-	public function suppressRepoLinks( ParserOutput $out, $repoLinks ) {
+	public function suppressRepoLinks( ParserOutput $out, $repoLinks, $group ) {
 		wfProfileIn( __METHOD__ );
 
 		$nel = $this->getNoExternalLangLinks( $out );
@@ -171,7 +172,7 @@ class LangLinkHandler {
 				return array();
 			}
 
-			$site = $this->getSiteByNavigationId( $code );
+			$site = $this->getSiteByNavigationId( $code, $group );
 
 			if ( $site === false ) {
 				continue;
@@ -278,10 +279,11 @@ class LangLinkHandler {
 	 * @todo: move this functionality into Sites/SiteList/SiteArray!
 	 *
 	 * @param string $id The navigation ID to find a site for.
+	 * @param string $group The site group to look into.
 	 *
 	 * @return bool|Site The site with the given navigational ID, or false if not found.
 	 */
-	protected function getSiteByNavigationId( $id ) {
+	protected function getSiteByNavigationId( $id, $group ) {
 		wfProfileIn( __METHOD__ );
 
 		//FIXME: this needs to be moved into core, into SiteList resp. SiteArray!
@@ -292,14 +294,18 @@ class LangLinkHandler {
 			foreach ( $this->sites->getSites() as $site ) {
 				$ids = $site->getNavigationIds();
 
+				if ( !isset( $this->sitesByNavigationId[$site->getGroup()] ) ) {
+					$this->sitesByNavigationId[$site->getGroup()] = array();
+				}
+
 				foreach ( $ids as $navId ) {
-					$this->sitesByNavigationId[$navId] = $site;
+					$this->sitesByNavigationId[$site->getGroup()][$navId] = $site;
 				}
 			}
 		}
 
 		wfProfileOut( __METHOD__ );
-		return isset( $this->sitesByNavigationId[$id] ) ? $this->sitesByNavigationId[$id] : false;
+		return isset( $this->sitesByNavigationId[$group][$id] ) ? $this->sitesByNavigationId[$group][$id] : false;
 	}
 
 	/**
@@ -309,11 +315,12 @@ class LangLinkHandler {
 	 * @since 0.4
 	 *
 	 * @param array $flatLinks
+	 * @param string $group Site group of the current site
 	 *
 	 * @return array An associative array, using site IDs for keys
 	 *           and the target pages on the respective wiki as the associated value.
 	 */
-	protected function localLinksToArray( array $flatLinks ) {
+	protected function localLinksToArray( array $flatLinks, $group ) {
 		wfProfileIn( __METHOD__ );
 
 		$links = array();
@@ -325,7 +332,7 @@ class LangLinkHandler {
 				$lang = $parts[0];
 				$page = $parts[1];
 
-				$site = $this->getSiteByNavigationId( $lang );
+				$site = $this->getSiteByNavigationId( $lang, $group );
 
 				if ( $site ) {
 					$wiki = $site->getGlobalId();
@@ -396,13 +403,13 @@ class LangLinkHandler {
 		$allowedGroups = array( $this->getSiteGroup() );
 
 		$onPageLinks = $out->getLanguageLinks();
-		$onPageLinks = $this->localLinksToArray( $onPageLinks );
+		$onPageLinks = $this->localLinksToArray( $onPageLinks, $this->getSiteGroup() );
 
 		$repoLinks = $this->getEntityLinks( $title );
 		$repoLinks = $this->repoLinksToArray( $repoLinks );
 
 		$repoLinks = $this->filterRepoLinksByGroup( $repoLinks, $allowedGroups );
-		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
+		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks, $this->getSiteGroup() );
 
 		$repoLinks = array_diff_key( $repoLinks, $onPageLinks ); // remove local links
 
