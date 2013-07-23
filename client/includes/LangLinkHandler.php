@@ -427,23 +427,27 @@ class LangLinkHandler {
 
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
-		foreach ( $repoLinks as $wiki => $page ) {
-			$targetSite = $this->sites->getSite( $wiki );
+		foreach ( $repoLinks as $siteId => $page ) {
+			$targetSite = $this->sites->getSite( $siteId );
 			if ( !$targetSite ) {
-				wfLogWarning( "Unknown wiki '$wiki' used as sitelink target" );
+				wfLogWarning( "Unknown wiki '$siteId' used as sitelink target" );
 				continue;
 			}
 
-			$nav = $targetSite->getNavigationIds();
-			$nav = array_values( $nav );
+			$siteGroup = $targetSite->getGroup();
 
-			if ( isset( $nav[0] ) ) {
-				$lang = $nav[0];
+			// extract interwiki code
+			// @fixme once 51876 is fixed
+			$siteGroup = $siteGroup === 'wikipedia' ? 'wiki' : $siteGroup;
+			preg_match( '/([\w]*)' . $siteGroup . '$/', $siteId, $navIds );
+
+			if ( isset( $navIds[1] ) ) {
+				$lang = str_replace( '_', '-', $navIds[1] );
 
 				$link = "$lang:$page";
 				$out->addLanguageLink( $link );
 			} else {
-				wfWarn( "No interlanguage prefix found for $wiki." );
+				wfWarn( "No interlanguage prefix found for $siteId." );
 			}
 		}
 
