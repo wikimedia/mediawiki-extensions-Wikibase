@@ -171,14 +171,22 @@ $.widget( 'wikibase.linkitem', {
 	 * @return {object}
 	 */
 	_getLinkableSites: function() {
-		var sites = wb.getSites(),
+		var sites,
 			linkableSites = {},
-			site;
+			site,
+			currentSiteId,
+			siteGroup;
+
+		currentSiteId = mw.config.get( 'wbCurrentSite' ).globalSiteId;
+		siteGroup = wb.getSite( currentSiteId ).getGroup();
+		sites = wb.getSitesOfGroup( siteGroup );
+
 		for( site in sites ) {
 			if ( sites[ site ].getGlobalSiteId() !== mw.config.get( 'wbCurrentSite' ).globalSiteId ) {
 				linkableSites[ site ] = sites[ site ];
 			}
 		}
+
 		return linkableSites;
 	},
 
