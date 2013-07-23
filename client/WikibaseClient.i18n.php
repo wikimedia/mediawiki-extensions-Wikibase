@@ -657,16 +657,22 @@ $messages['ca'] = array(
  * @author Умар
  */
 $messages['ce'] = array(
+	'wikibase-client-desc' => 'Wikibase шорян клиент',
+	'specialpages-group-wikibaseclient' => 'Викихаамашан клиент',
 	'wikibase-after-page-move' => 'Викихаамашчохь [$1 карлаякха] хьой цӀе хийцина агӀона хьажориг.',
+	'wikibase-comment-linked' => 'Викихаамашан элемент хӀокху агӀонах тесна.',
+	'wikibase-comment-update' => 'Викихаамашан элемент хийцина',
 	'wikibase-comment-sitelink-add' => 'Юкъарвики-хьажориг тӀетоьхна: $1',
 	'wikibase-comment-sitelink-change' => 'Юкъарвики-хьажориг хийцина $1 оцу $2',
 	'wikibase-comment-sitelink-remove' => 'Юкъарвики-хьажориг дӀаяккхина: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|хийцам|хийцамаш}}',
+	'wikibase-dataitem' => 'Хаамашан элемент',
 	'wikibase-editlinks' => 'Хьажоригаш нисяр',
 	'wikibase-editlinkstitle' => 'Меттанашан юкъара хьажоригаш нисяр',
 	'wikibase-linkitem-addlinks' => 'ТӀетоха хьажоригаш',
 	'wikibase-linkitem-alreadylinked' => 'Ахьа кхечу Википедешкара агӀонашах тосуш йолу агӀо [$1 кхузахь] йолуш ю, хӀокхуна $2 тӀе хьажийна. Элементан чохь хӀора Википеди чура ца агӀо бе хуьлийла дац. Дехар до кхин агӀо къастае кхечу Википедеш чура агӀонашах таса.',
 	'wikibase-linkitem-close' => 'ДӀачӀагӀа къамел агӀо карла йоккхуш',
+	'wikibase-linkitem-failure' => 'ХӀара агӀо Викихаамаш чура элементахь тосуш девзаш доцу гӀалат даьлла.',
 	'wikibase-linkitem-title' => 'АгӀонаш вовшахтасар',
 	'wikibase-linkitem-linkpage' => 'АгӀонаш вовшахтаса',
 	'wikibase-linkitem-selectlink' => 'Дехар до, кхузара хьажориг тӀехӀотто харжа сайт а агӀо а.',
@@ -683,14 +689,18 @@ $messages['ce'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
 	'wikibase-rc-show-wikidata-pref' => 'Керла нисдаршан могӀамехь гайта Викихаамаш чохь хила хийцамаш',
 	'wikibase-watchlist-show-changes-pref' => 'Викихаамаш чохь хийла хийцамаш гайта тергаме могӀам чохь',
+	'wikibase-error-serialize-error' => 'Хаамаш кхочушъ бан тар цаделира.',
 	'special-unconnectedpages' => 'Викихаамаш чохь вовшахтесна йоцу агӀонаш',
 	'wikibase-unconnectedpages-legend' => 'Вовшахтесна йоцу агӀонашан параметраш',
 	'wikibase-unconnectedpages-page' => 'Дуьххьара хилийта агӀо:',
 	'wikibase-unconnectedpages-submit' => 'Кхочушдé',
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — меттан код нийса яц.',
+	'wikibase-unconnectedpages-page-warning' => 'И агӀона цӀе хӀокху дехарца лело йиш яц цундела тӀецалоцу.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Гуче яха вовшахтесна йолу агӀонаш',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|хьажориг|хьажоригаш}} ю)',
-	'wikibase-pageinfo-entity-id-none' => 'Хlумма цаоьшу',
+	'wikibase-pageinfo-entity-id' => 'Викихаамаш чур элиментан ID',
+	'wikibase-pageinfo-entity-id-none' => 'ХӀумма цаоьшу',
+	'wikibase-property-render-error' => 'свойства «$1»: $2 гучуйоккхуш гӀалат ду',
 );
 
 /** Sorani Kurdish (کوردی)

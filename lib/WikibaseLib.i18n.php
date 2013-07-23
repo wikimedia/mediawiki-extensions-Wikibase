@@ -550,6 +550,7 @@ $messages['ce'] = array(
 	'wikibase-error-autocomplete-response' => 'Серверо жоп делла: $1',
 	'wikibase-error-ui-session-failure' => 'Хьан сессин хан чекх ела. Дехар до, юха чувала/яла.',
 	'wikibase-replicationnote' => 'Дехар до, тидам бар бина хийцам гучу ца болуш маситта минут яла там бу массо вики-проекташкахь.',
+	'wikibase-sitelinks-wikipedia' => 'ХӀокху элементах тесна йолу агӀонаш',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мотт',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 	'wikibase-sitelinks-link-columnheading' => 'Вовшахтесна йолу агӀонаш',
