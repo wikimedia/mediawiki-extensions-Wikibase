@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9845590_1cd3d860",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbareditgroup.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-23T13:49:40Z",
+      "side": 1,
+      "message": "Just see my comment on https://gerrit.wikimedia.org/r/#/c/72529/6/lib/resources/jquery.wikibase/toolbar/toolbarbutton.js\n\nsame here.",
+      "revId": "73a7679a072c16b12cdec26430ffcc005b9dae1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
