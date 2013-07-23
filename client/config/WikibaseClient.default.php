@@ -59,8 +59,6 @@ return call_user_func( function() {
 		'enableSiteLinkWidget' => true,
 		'propagateChangesToRepo' => true,
 
-		'siteGroup' => 'wikipedia', //TODO: require this to be set, default doesn't make sense.
-
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
 		 * such as mediawiki-config, mediawiki messages for custom orders, or somewhere.
