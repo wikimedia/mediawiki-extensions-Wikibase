@@ -106,23 +106,34 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	}
 
 	/**
+	 * Verify that we only get one item if we ask for the same item several
+	 * times in different forms.
+	 *
 	 * @dataProvider provideEntityHandles
 	 */
-	function testGetItemByPrefixedId( $handle ) {
+	function testGetItemByIdUnique( $handle ) {
 		$this->createEntities();
 
 		$item = $this->getEntityOutput( $handle );
 		$id = $item['id'];
 
+		$ids = array(
+			strtoupper( $id ),
+			strtolower( $id ),
+			$id, $id
+		);
+		$ids = join( '|', $ids );
+
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
 				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
+				'ids' => $ids )
 		);
 
 		$this->assertSuccess( $res, 'entities', $id );
 		$this->assertEntityEquals( $item,  $res['entities'][$id] );
+		$this->assertEquals( 1, count( $res['entities'] ) );
 	}
 
 	public static function provideGetItemByTitle() {
