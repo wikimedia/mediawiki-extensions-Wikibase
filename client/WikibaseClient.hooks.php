@@ -5,6 +5,7 @@ use IContextSource;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+use SiteSQLStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -591,12 +592,20 @@ final class ClientHooks {
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 		$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
+		$siteId = Settings::get( 'siteGlobalID' );
+		$site = SiteSQLStore::newInstance()->getSite( $siteId );
+
+		if ( !$site ) {
+			wfWarn( 'Cannot find site ' . $siteId . ' in sites table' );
+			return true;
+		}
+
 		$editLinkInjector = new RepoItemLinkGenerator(
 			$namespaceChecker,
 			$repoLinker,
 			$entityIdParser,
 			Settings::get( 'enableSiteLinkWidget' ),
-			Settings::get( 'siteGroup' )
+			$site->getGroup()
 		);
 
 		$action = \Action::getActionName( $skin->getContext() );
