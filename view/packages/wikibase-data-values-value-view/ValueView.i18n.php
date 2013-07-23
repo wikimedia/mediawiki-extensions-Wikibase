@@ -767,9 +767,11 @@ $messages['vi'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Li3939108
  * @author Linforest
+ * @author Qiyue2001
  * @author Stevenliuyi
  */
 $messages['zh-hans'] = array(
+	'valueview-desc' => '显示和编辑数据值的用户界面',
 	'valueview-expert-advancedadjustments' => '高级调整',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '尚不支持对“$1”取值的操作。',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '尚不支持对“$1”数据类型取值的操作。',
