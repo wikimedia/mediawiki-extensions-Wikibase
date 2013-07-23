@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9845590_9c71a879",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.wbtooltip.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-23T13:55:50Z",
+      "side": 1,
+      "message": "An instanceof jQuery.wikibase.wbtooltip assertion would express more meaning here.",
+      "revId": "47445951dea99c4a10e8216e051109dbe2f5d629",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
