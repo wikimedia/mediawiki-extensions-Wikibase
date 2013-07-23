@@ -381,23 +381,20 @@ class LangLinkHandler {
 
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
-		foreach ( $repoLinks as $wiki => $page ) {
-			$targetSite = $this->sites->getSite( $wiki );
+		foreach ( $repoLinks as $siteId => $page ) {
+			$targetSite = $this->sites->getSite( $siteId );
 			if ( !$targetSite ) {
 				trigger_error( "Unknown wiki '$wiki' used as sitelink target", E_USER_WARNING );
 				continue;
 			}
 
-			$nav = $targetSite->getNavigationIds();
-			$nav = array_values( $nav );
+			$interwikiCode = $this->getInterwikiCodeFromSite( $targetSite );
 
-			if ( isset( $nav[0] ) ) {
-				$lang = $nav[0];
-
-				$link = "$lang:$page";
+			if ( $interwikiCode ) {
+				$link = "$interwikiCode:$page";
 				$out->addLanguageLink( $link );
 			} else {
-				wfWarn( "No interlanguage prefix found for $wiki." );
+				wfWarn( "No interlanguage prefix found for $siteId." );
 			}
 		}
 
@@ -405,6 +402,39 @@ class LangLinkHandler {
 	}
 
 	/**
+	 * Extracts the local interwiki code, which in case of the
+	 * wikimedia site groups, is always set to the language code.
+	 *
+	 * @fixme put somewhere more sane and use site identifiers data,
+	 * so that this works in non-wikimedia cases where the assumption
+	 * is not true.
+	 *
+	 * @param Site $site
+	 *
+	 * @return string
+	 */
+	public function getInterwikiCodeFromSite( Site $site ) {
+		return $site->getLanguageCode();
+	}
+
+	/**
+	 * Returns the local wiki's site group.
+	 * This is based on the siteId provided to the constructor.
+	 *
+	 * @return string
+	 * @throws \MWException
+	 */
+	public function getSiteGroup() {
+		$thisSite = $this->sites->getSite( $this->siteId );
+		if ( !$thisSite ) {
+			throw new MWException( "Unable to resolve site ID '{$this->siteId}'!" );
+		}
+
+		return $thisSite->getGroup();
+	}
+
+	/**
+>>>>>>> d01dcf0... (bug 51876, hotfix) ensure interwiki links render correctly in sidebar
 	 * Add wikibase_item parser output property
 	 *
 	 * @since 0.4

@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\LangLinkHandler;
-use \Wikibase\SiteLink;
+use Wikibase\LangLinkHandler;
+use MediaWikiSite;
 
 /**
  * Tests for the LangLinkHandler class.
@@ -30,8 +30,7 @@ use \Wikibase\SiteLink;
  *
  * @group WikibaseClient
  * @group Database
- *        ^--- uses DB indirectly; may be removed if Sites is mocked out
- *             and Title is made not to use the database.
+ *        ^--- uses DB indirectly; removed when Title is made not to use the database.
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -45,16 +44,18 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	protected $langLinkHandler;
 
 	static $itemData = array(
-		array( // matching item
+		1 => array( // matching item
 			'id' => 1,
 			'label' => array( 'en' => 'Foo' ),
 			'links' => array(
 				'dewiki' => 'Foo de',
 				'enwiki' => 'Foo en',
 				'srwiki' => 'Foo sr',
+				'dewiktionary' => 'Foo de word',
+				'enwiktionary' => 'Foo en word',
 			)
 		),
-		array( // matches, but not in a namespace with external langlinks enabled
+		2 => array( // matches, but not in a namespace with external langlinks enabled
 			'id' => 2,
 			'label' => array( 'en' => 'Talk:Foo' ),
 			'links' => array(
@@ -72,8 +73,6 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		if ( !$hasSites ) {
 			$hasSites = true;
-			//TODO: use mock SiteList instead!
-			\TestSites::insertIntoDb();
 		}
 
 		$this->mockRepo = new MockRepository();
@@ -83,12 +82,14 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$this->mockRepo->putEntity( $item );
 		}
 
-		$this->langLinkHandler = new \Wikibase\LangLinkHandler(
+		$sites = MockSiteStore::newFromTestSites();
+
+		$this->langLinkHandler = new LangLinkHandler(
 			'srwiki',
 			array(),
 			array( NS_TALK ),
 			$this->mockRepo,
-			\SiteSQLStore::newInstance()
+			$sites
 		);
 	}
 
@@ -104,6 +105,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 					'dewiki' => 'Foo de',
 					'enwiki' => 'Foo en',
 					'srwiki' => 'Foo sr',
+					'dewiktionary' => 'Foo de word',
+					'enwiktionary' => 'Foo en word',
 				)
 			),
 		);
@@ -369,5 +372,150 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		}
 
 		return $links;
+	}
+
+	public static function provideGetSiteGroup() {
+		return array(
+			array( 'dewiki', 'wikipedia' ),
+			array( 'enwiktionary', 'wiktionary' ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetSiteGroup
+	 */
+	public function testGetSiteGroup( $siteId, $group ) {
+		$handler = new LangLinkHandler(
+			$siteId,
+			array(),
+			array( NS_TALK ),
+			$this->mockRepo,
+			MockSiteStore::newFromTestSites()
+		);
+
+		$this->assertEquals( $group, $handler->getSiteGroup() );
+	}
+
+	public static function provideFilterRepoLinksByGroup() {
+		return array(
+			array( // #0: nothing
+				array(), array(), array()
+			),
+			array( // #1: nothing allowed
+				array(
+					'dewiki' => 'Foo de',
+					'enwiki' => 'Foo en',
+					'srwiki' => 'Foo sr',
+					'dewiktionary' => 'Foo de word',
+					'enwiktionary' => 'Foo en word',
+				),
+				array(),
+				array()
+			),
+			array( // #2: nothing there
+				array(),
+				array( 'wikipedia' ),
+				array()
+			),
+			array( // #3: wikipedia only
+				array(
+					'dewiki' => 'Foo de',
+					'enwiki' => 'Foo en',
+					'srwiki' => 'Foo sr',
+					'dewiktionary' => 'Foo de word',
+					'enwiktionary' => 'Foo en word',
+				),
+				array( 'wikipedia' ),
+				array(
+					'dewiki' => 'Foo de',
+					'enwiki' => 'Foo en',
+					'srwiki' => 'Foo sr',
+				),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideFilterRepoLinksByGroup
+	 */
+	public function testFilterRepoLinksByGroup( $repoLinks, $allowedGroups, $expectedLinks ) {
+		$actualLinks = $this->langLinkHandler->filterRepoLinksByGroup( $repoLinks, $allowedGroups );
+
+		$this->assertEquals( $expectedLinks, $actualLinks );
+	}
+
+	public static function provideSuppressRepoLinks() {
+		return array(
+			array( // #0: nothing
+				array(), array(), array()
+			),
+			array( // #1: nothing allowed
+				array(
+					'dewiki' => 'Foo de',
+					'enwiki' => 'Foo en',
+					'srwiki' => 'Foo sr',
+					'dewiktionary' => 'Foo de word',
+					'enwiktionary' => 'Foo en word',
+				),
+				array( '*' ),
+				array()
+			),
+			array( // #2: nothing there
+				array(),
+				array( 'de' ),
+				array()
+			),
+			array( // #3: no de
+				array(
+					'dewiki' => 'Foo de',
+					'enwiki' => 'Foo en',
+					'srwiki' => 'Foo sr',
+					'enwiktionary' => 'Foo en word',
+				),
+				array( 'de' ),
+				array(
+					'enwiki' => 'Foo en',
+					//NOTE: srwiki is removed because that's a self-link
+					'enwiktionary' => 'Foo en word',
+				),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideSuppressRepoLinks
+	 */
+	public function testSuppressRepoLinks( $repoLinks, $nel, $expectedLinks ) {
+		$out = new \ParserOutput();
+		$out->setProperty( 'noexternallanglinks', serialize( $nel ) );
+
+		$actualLinks = $this->langLinkHandler->suppressRepoLinks( $out, $repoLinks );
+
+		$this->assertEquals( $expectedLinks, $actualLinks );
+	}
+
+	/**
+	 * @dataProvider getInterwikiCodeFromSiteProvider
+	 */
+	public function testGetInterwikiCodeFromSite( $site, $expected ) {
+		$interwikiCode = $this->langLinkHandler->getInterwikiCodeFromSite( $site );
+		$this->assertEquals( $expected, $interwikiCode, 'interwiki code matches' );
+	}
+
+	public function getInterwikiCodeFromSiteProvider() {
+		$enwiki = MediaWikiSite::newFromGlobalId( 'enwiki' );
+		$enwiki->setLanguageCode( 'en' );
+
+		$bexold = MediaWikiSite::newFromGlobalId( 'be_x_oldwiki' );
+		$bexold->setLanguageCode( 'be-x-old' );
+
+		$dewikivoyage = MediaWikiSite::newFromGlobalId( 'dewikivoyage' );
+		$dewikivoyage->setLanguageCode( 'de' );
+
+		return array(
+			array( $enwiki, 'en' ),
+			array( $bexold, 'be-x-old' ),
+			array( $dewikivoyage, 'de' )
+		);
 	}
 }
