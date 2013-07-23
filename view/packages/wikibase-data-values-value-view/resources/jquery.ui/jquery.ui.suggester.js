@@ -299,9 +299,9 @@
 						complete = response[1][0];
 
 					if ( this.options.adaptLetterCase ) {
-						this.term = incomplete = $.util.adaptLetterCase(
-							incomplete,
+						this.term = incomplete = $.util.adaptlettercase(
 							complete,
+							incomplete,
 							this.options.adaptLetterCase
 						);
 					}
