@@ -265,6 +265,31 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider aliasesProvider
 	 */
+	public function testSetEmptyAlias( array $aliasesLists ) {
+		$entity = $this->getNewEmpty();
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			foreach ( $aliasesList as $aliases ) {
+				$entity->setAliases( $langCode, $aliases );
+			}
+		}
+		$entity->setAliases( 'zh', array( 'wind', 'air', '', 'fire') );
+		$entity->setAliases( 'zu', array( '', '') );
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
+			asort( $aliasesList );
+
+			$actual = $entity->getAliases( $langCode );
+			asort( $actual );
+
+			$this->assertEquals( $expected, $actual );
+		}
+	}
+
+	/**
+	 * @dataProvider aliasesProvider
+	 */
 	public function testSetAllAliases( array $aliasesLists ) {
 
 		$entity = $this->getNewEmpty();
