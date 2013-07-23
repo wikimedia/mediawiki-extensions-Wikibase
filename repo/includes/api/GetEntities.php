@@ -12,6 +12,8 @@ use Wikibase\Utils;
 use Wikibase\StoreFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\Settings;
+use Wikibase\LibRegistry;
 use Wikibase\EntityContentFactory;
 
 /**
@@ -61,7 +63,8 @@ class GetEntities extends ApiWikibase {
 			$params['ids'] = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
 		}
 
-		$params['ids'] = array_unique( $params['ids'] );
+		$libRegistry = new LibRegistry( Settings::singleton() );
+		$params['ids'] = $this->uniqueEntities( $params['ids'], $libRegistry );
 
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$props = array_flip( array_values( $params['props'] ) );
@@ -88,6 +91,28 @@ class GetEntities extends ApiWikibase {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Makes an arry of entity ids unique after applaying normalization.
+	 *
+	 * @param array $entityIds
+	 * @param Wikibase\LibRegistry $libRegistry
+	 *
+	 * @return array
+	 */
+	protected function uniqueEntities( $entityIds, $libRegistry ) {
+		foreach ( $entityIds as $entityId ) {
+			try {
+				$id = $libRegistry->getEntityIdParser()->parse( $entityId );
+				$ids[] = $id->getPrefixedId();
+			}
+			catch ( ParseException $parseException ) {
+				// This will error below
+				$ids[] = null;
+			}
+		}
+		return array_unique( $ids );
 	}
 
 	/**
