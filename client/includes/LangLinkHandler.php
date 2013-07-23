@@ -427,27 +427,40 @@ class LangLinkHandler {
 
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
-		foreach ( $repoLinks as $wiki => $page ) {
-			$targetSite = $this->sites->getSite( $wiki );
+		foreach ( $repoLinks as $siteId => $page ) {
+			$targetSite = $this->sites->getSite( $siteId );
 			if ( !$targetSite ) {
-				wfLogWarning( "Unknown wiki '$wiki' used as sitelink target" );
+				wfLogWarning( "Unknown wiki '$siteId' used as sitelink target" );
 				continue;
 			}
 
-			$nav = $targetSite->getNavigationIds();
-			$nav = array_values( $nav );
+			$interwikiCode = $this->getInterwikiCodeFromSite( $targetSite );
 
-			if ( isset( $nav[0] ) ) {
-				$lang = $nav[0];
-
-				$link = "$lang:$page";
+			if ( $interwikiCode ) {
+				$link = "$interwikiCode:$page";
 				$out->addLanguageLink( $link );
 			} else {
-				wfWarn( "No interlanguage prefix found for $wiki." );
+				wfWarn( "No interlanguage prefix found for $siteId." );
 			}
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Extracts the local interwiki code, which in case of the
+	 * wikimedia site groups, is always set to the language code.
+	 *
+	 * @fixme put somewhere more sane and use site identifiers data,
+	 * so that this works in non-wikimedia cases where the assumption
+	 * is not true.
+	 *
+	 * @param Site $site
+	 *
+	 * @return string
+	 */
+	public function getInterwikiCodeFromSite( Site $site ) {
+		return $site->getLanguageCode();
 	}
 
 	/**

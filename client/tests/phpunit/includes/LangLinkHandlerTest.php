@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\LangLinkHandler;
+use MediaWikiSite;
 
 /**
  * Tests for the LangLinkHandler class.
@@ -491,5 +492,30 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$actualLinks = $this->langLinkHandler->suppressRepoLinks( $out, $repoLinks );
 
 		$this->assertEquals( $expectedLinks, $actualLinks );
+	}
+
+	/**
+	 * @dataProvider getInterwikiCodeFromSiteProvider
+	 */
+	public function testGetInterwikiCodeFromSite( $site, $expected ) {
+		$interwikiCode = $this->langLinkHandler->getInterwikiCodeFromSite( $site );
+		$this->assertEquals( $expected, $interwikiCode, 'interwiki code matches' );
+	}
+
+	public function getInterwikiCodeFromSiteProvider() {
+		$enwiki = MediaWikiSite::newFromGlobalId( 'enwiki' );
+		$enwiki->setLanguageCode( 'en' );
+
+		$bexold = MediaWikiSite::newFromGlobalId( 'be_x_oldwiki' );
+		$bexold->setLanguageCode( 'be-x-old' );
+
+		$dewikivoyage = MediaWikiSite::newFromGlobalId( 'dewikivoyage' );
+		$dewikivoyage->setLanguageCode( 'de' );
+
+		return array(
+			array( $enwiki, 'en' ),
+			array( $bexold, 'be-x-old' ),
+			array( $dewikivoyage, 'de' )
+		);
 	}
 }
