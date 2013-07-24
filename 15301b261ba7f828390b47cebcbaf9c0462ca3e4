@@ -16,6 +16,24 @@
       "revId": "15301b261ba7f828390b47cebcbaf9c0462ca3e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9845590_3ea24c00",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-24T06:16:24Z",
+      "side": 1,
+      "message": "agree.\n\ni also think it\u0027s might be time to move this to core (either SiteSQLStore or SiteList).  It should be possible to select a site based on group and local/interwiki id. (the site_identifiers table is flawed at the moment, but shall be fixed)",
+      "parentUuid": "c9845590_ad2398bf",
+      "revId": "15301b261ba7f828390b47cebcbaf9c0462ca3e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
