@@ -33,8 +33,12 @@ class PropertyNotFoundException extends \RuntimeException {
 
 	protected $propertyId;
 
-	public function __construct( EntityId $propertyId, $message = '', \Exception $previous = null ) {
+	public function __construct( EntityId $propertyId, $message = null, \Exception $previous = null ) {
 		$this->propertyId = $propertyId;
+
+		if ( $message === null ) {
+			$message = "Property not found: " . $propertyId;
+		}
 
 		parent::__construct( $message, 0, $previous );
 	}

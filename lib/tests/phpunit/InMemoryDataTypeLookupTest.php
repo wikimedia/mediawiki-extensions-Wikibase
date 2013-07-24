@@ -43,7 +43,7 @@ class InMemoryDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 	public function testGetDataTypeForPropertyThatIsNotSet() {
 		$lookup = new InMemoryDataTypeLookup();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( '\Wikibase\Lib\PropertyNotFoundException' );
 
 		$lookup->getDataTypeIdForProperty( new EntityId( Property::ENTITY_TYPE, 7201010 ) );
 	}
