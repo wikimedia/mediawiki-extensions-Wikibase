@@ -142,7 +142,8 @@ Header messages for pages on different Wikipedias linked to this item. Similar m
 See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
 {{Identical|Language}}',
-	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
+	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.
+{{Identical|Code}}',
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (wiki) page.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).
 {{Identical|Details}}',
@@ -441,7 +442,7 @@ $messages['bn'] = array(
 	'wikibase-error-ui-session-failure' => 'আপনার সেশনের মেয়াদ শেষ হয়ে গেছে। দয়া করে আবার প্রবেশ করুন।',
 	'wikibase-error-ui-edit-conflict' => 'এখানে একটি সম্পাদনা দ্বন্দ্ব হয়েছে। দয়া করে পুনঃলোড করুন এবং আবার সংরক্ষণ করুন।',
 	'wikibase-replicationnote' => 'দয়া করে লক্ষ্য করুন যে এই পরিবর্তনগুলি সকল উইকিতে দৃশ্যমান হতে কয়েক মিনিট পর্যন্ত সময় লাগতে পারে।',
-	'wikibase-sitelinks-wikipedia' => 'উইকিপিডিয়ার পাতা এই আইটেমটির সাথে সংযুক্ত আছে',
+	'wikibase-sitelinks-wikipedia' => 'এই আইটেমটির সাথে সংযুক্ত উইকিপিডিয়ার পাতা',
 	'wikibase-sitelinks-sitename-columnheading' => 'ভাষা',
 	'wikibase-sitelinks-siteid-columnheading' => 'কোড',
 	'wikibase-sitelinks-link-columnheading' => 'সংযুক্ত নিবন্ধ',
@@ -613,7 +614,7 @@ $messages['cs'] = array(
 	'wikibase-error-save-timeout' => 'Kvůli současným technickým problémům se vaše „uložit“ nepodařilo dokončit.',
 	'wikibase-error-remove-timeout' => 'Kvůli současným technickým problémům se vaše „odstranit“ nepodařilo dokončit.',
 	'wikibase-error-autocomplete-connection' => 'Dotaz na API serveru se nezdařil. Zkuste to prosím později.',
-	'wikibase-error-autocomplete-response' => 'Odpověď serveru:$1',
+	'wikibase-error-autocomplete-response' => 'Odpověď serveru: $1',
 	'wikibase-error-ui-client-error' => 'Připojení ke klientské stránce se nezdařilo. Zkuste to prosím později.',
 	'wikibase-error-ui-no-external-page' => 'Takový článek nebyl na příslušném webu nalezen.',
 	'wikibase-error-ui-cant-edit' => 'Nemáte oprávnění k provedení této akce.',
@@ -622,7 +623,7 @@ $messages['cs'] = array(
 	'wikibase-error-ui-session-failure' => 'Platnost vaší relace skončila. Prosíme, přihlaste se znovu.',
 	'wikibase-error-ui-edit-conflict' => 'Nastal editační konflikt. Prosím obnovte stránku a uložte ji znovu.',
 	'wikibase-replicationnote' => 'Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to pár minut trvat.',
-	'wikibase-sitelinks-wikipedia' => 'Stránky na Wikipedii odkazující na tuto položku',
+	'wikibase-sitelinks-wikipedia' => 'Stránky Wikipedie provázané s touto položkou',
 	'wikibase-sitelinks-sitename-columnheading' => 'Jazyk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kód',
 	'wikibase-sitelinks-link-columnheading' => 'Propojený článek',

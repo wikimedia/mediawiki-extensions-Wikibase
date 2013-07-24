@@ -2622,7 +2622,10 @@ $messages['ce'] = array(
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|дӀаяздар|дӀаяздарш}}',
 	'wikibase-aliases-label' => 'Кхин:',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|хьост|хьосташ}}',
+	'wikibase-snakview-variations-somevalue-label' => 'хууш доцу маьӀна',
 	'wikibase-snakview-variations-novalue-label' => 'маьӀна цакарийна',
+	'wikibase-snakview-snaktypeselector-value' => 'шийн маьӀна',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'Хууш доцу маьӀна',
 	'wikibase-snakview-snaktypeselector-novalue' => 'маьӀна цакарийна',
 	'wikibase-error-sitelink-already-used' => 'Хьажориг оцу [$1 $2] сайтан тӏе хӏинцале лелош ю хӏокху [[$3]] элементо.',
 	'special-itembytitle' => 'Элементаш коьртамогӀомца',
@@ -2903,6 +2906,8 @@ Vaše IP adresa bude zveřejněna v historii této {{grammar:2sg|$1}}.',
 	'wikibase-setaliases-label' => 'Aliasy:',
 	'wikibase-setaliases-submit' => 'Nastavit aliasy',
 	'wikibase-setaliases-warning-remove' => 'Opravdu chcete odstranit všechny aliasy pro [[$1]]?',
+	'wikibase-setsitelink-add-failed' => 'Odkaz na článek se nepodařilo uložit.',
+	'wikibase-setsitelink-remove-failed' => 'Odkaz na článek se nepodařilo odstranit.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Jazyk:',
 	'wikibase-setentity-invalid-langcode' => 'Neznámý identifikátor jazyka „$1“. Použijte identifikátor jazyka, který systém zná, například „en“.',
@@ -2942,7 +2947,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'vše',
 	'wikibase-entitieswithoutlabel-submit' => 'Najít',
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ není platný kód jazyka.',
-	'special-itemswithoutsitelinks' => 'Položky bez odkazů na weby',
+	'special-itemswithoutsitelinks' => 'Položky bez odkazů na články',
 	'special-entitydata' => 'Data entity',
 	'wikibase-entitydata-not-found' => 'Žádná entita s ID $1 nebyla nalezena.',
 	'wikibase-entitydata-bad-revision' => 'Nelze zobrazit revizi $2 entity $1.',
@@ -3019,6 +3024,8 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'right-alias-set' => 'Nastavování aliasů',
 	'right-alias-remove' => 'Odstraňování aliasů',
 	'right-sitelink-remove' => 'Odstraňování odkazů',
+	'right-sitelink-update' => 'Aktualizace odkazů na články',
+	'right-linktitles-update' => 'Aktualizace odkazů na články',
 	'right-label-remove' => 'Odstraňování štítků',
 	'right-label-update' => 'Aktualizovat štítky',
 	'right-description-remove' => 'Odstraňování popisů',
@@ -13803,6 +13810,7 @@ $messages['sr-ec'] = array(
 
 /** Swedish (svenska)
  * @author Ainali
+ * @author Littledogboy
  * @author Lokal Profil
  * @author Vivaelcelta
  * @author WikiPhoenix
@@ -13842,7 +13850,7 @@ $messages['sv'] = array(
 	'wikibase-undo-badpage' => 'Ogiltig version: Versionen $2 hör inte till [[$1]].',
 	'wikibase-undo-firstrev' => 'Kan inte ångra sidans skapelse',
 	'wikibase-undo-nocontent' => 'Kan inte läsa in innehållet i versionen $2 av sidan $1',
-	'wikibase-propertyedittool-full' => 'Lista över värden är färdig.',
+	'wikibase-propertyedittool-full' => 'Listan över värden är komplett.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ett värde|$1 värden}} har ännu inte sparats',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|uppslag}}',
 	'wikibase-sitelinksedittool-full' => 'Länkar till sidor är redan inställda för alla kända webbplatser.',

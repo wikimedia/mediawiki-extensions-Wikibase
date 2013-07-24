@@ -288,6 +288,7 @@ $messages['ar'] = array(
  */
 $messages['arc'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ܫܘܚܠܦܐ|ܫܘܚܠܦ̈ܐ}}',
+	'wikibase-dataitem' => 'ܡܠܘܐܐ ܕܝܕ̈ܥܬܐ',
 	'wikibase-editlinks' => 'ܫܚܠܦ ܐܣܘܪ̈ܐ',
 	'wikibase-linkitem-addlinks' => 'ܐܘܣܦ ܐܣܘܪ̈ܐ',
 	'wikibase-linkitem-input-site' => 'ܠܫܢܐ:',
@@ -487,6 +488,7 @@ $messages['bn'] = array(
 	'specialpages-group-wikibaseclient' => 'উইকিউপাত্ত গ্রাহক',
 	'tooltip-t-wikibase' => 'আইটেম উপাত্ত ভান্ডারে সংযুক্ত করা লিঙ্ক',
 	'wikibase-after-page-move' => "এছাড়া আপনি স্থানান্তর করা পাতাতে ভাষার লিংক বজায় রাখার জন্য সংশ্লিষ্ট উইকিউপাত্তের আইটেমটি '''[$1 হালনাগাদ]''' করতে পারেন।",
+	'wikibase-after-page-move-queued' => 'এই পাতার সাথে যুক্ত [$1 উইকিউপাত্তের আইটেম] স্বয়ংক্রিয়ভাবে শীঘ্রই হালনাগাদ করা হবে।',
 	'wikibase-comment-remove' => 'সংশ্লিষ্ট উইকিউপাত্ত আইটেম অপসারিত হয়েছে। ভাষার সংযোগ অপসারিত হয়েছে।',
 	'wikibase-comment-linked' => 'একটি উইকিউপাত্ত আইটেম এই পাতার সাথে সংযুক্ত হয়েছে।',
 	'wikibase-comment-unlink' => 'এই পাতাটি উইকিউপাত্তের আইটেম থেকে সংযোগ বিহীন হয়েছে। ভাষার সংযোগ অপসারিত হয়েছে।',
@@ -2239,6 +2241,7 @@ $messages['krc'] = array(
 	'wikibase-comment-sitelink-change' => '$1 интервики-джибериу $2 бла ауушулду',
 	'wikibase-comment-sitelink-remove' => 'Интервики-джибериу кетерилди: $1.',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|тюрлениу|тюрлениу}}', # Fuzzy
+	'wikibase-dataitem' => 'Билги элемент',
 	'wikibase-editlinks' => 'Джибериулени тюрлендир',
 	'wikibase-editlinkstitle' => 'Тилле арасы джибериулени тюрлендириу',
 	'wikibase-linkitem-addlinks' => 'Джибериулени къош',
@@ -2250,7 +2253,7 @@ $messages['krc'] = array(
 	'wikibase-linkitem-input-site' => 'Тил:',
 	'wikibase-linkitem-input-page' => 'Бет:',
 	'wikibase-linkitem-invalidsite' => 'Тюз неда белгили болмагъан сайт сайланнганды',
-	'wikibase-linkitem-confirmitem-text' => 'Сиз сайлагъан бет [$1 билгилени ара репозиторийини элементи] бла алгъадан байламлыды. Тюбюнде кёргюзюлген бетлени ичинде сиз аннга джибериу салыргъа излеген болгъанын бегитигиз.',
+	'wikibase-linkitem-confirmitem-text' => 'Сиз сайлагъан бет [$1 билгилени ара репозиторийини элементи] бла алгъадан байламлыды. Тюбюнде кёргюзюлген бетлени ичинде сиз аннга джибериу салыргъа излеген болгъанын бегитигиз.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Къабыл эт',
 	'wikibase-linkitem-not-loggedin-title' => 'Авторизацияны ётерге керексиз',
 	'wikibase-linkitem-not-loggedin' => 'Бу функцияны хайырландырыр ючюн бу викиде эм [$1 билгилени ара репозиторийинде] авторизация ётерге керексиз.',
@@ -2761,11 +2764,15 @@ $messages['nds-nl'] = array(
 	'wikibase-linkitem-close' => 'Vienster sluten en de zied opniej laojen',
 	'wikibase-linkitem-title' => 'Koppelen mit zied',
 	'wikibase-linkitem-linkpage' => 'Koppelen mit zied',
+	'wikibase-linkitem-selectlink' => 'Kies n webstee en n zied waor je disse zied mee koppelen willen.',
 	'wikibase-linkitem-input-site' => 'Taal:',
 	'wikibase-linkitem-input-page' => 'Zied:',
 	'wikibase-linkitem-invalidsite' => 'Je hebben n onbekende of ongeldige webstee ekeuzen',
+	'wikibase-linkitem-confirmitem-text' => "De zied die'j ekeuzen hebben is al ekoppeld an n onderwarp in onze sentrale gegevensdatabanke. Bevestig dat de {{PLURAL:$2|zied|ziejen}} die hieronder vermeld {{PLURAL:$2|steet|staon}} inderdaod de {{PLURAL:$2|zied|ziejen}} bin die'j mit disse zied koppelen willen.", # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Bevestigen',
 	'wikibase-linkitem-not-loggedin-title' => 'Je mutten an-emeld ween',
+	'wikibase-linkitem-not-loggedin' => 'Je mutten an-emeld ween bie disse wiki en de [$1 sentrale gegevensdatabanke] um disse funksie te kunnen gebruken.',
+	'wikibase-linkitem-success-create' => "De ziejen bin ekoppeld. t Niej an-emaakten onderwarp mit de koppelingen  ku'j in de [$1 sentrale gegevensdatabanke] vienen.",
 	'wikibase-rc-hide-wikidata' => '$1 wikidata',
 	'special-unconnectedpages' => 'Ziejen die niet ekoppeld bin an n onderwarp',
 	'wikibase-unconnectedpages-legend' => 'Instellingen veur ongekoppelde ziejen',
@@ -2778,6 +2785,7 @@ $messages['nds-nl'] = array(
 /** Dutch (Nederlands)
  * @author JurgenNL
  * @author Konovalov
+ * @author Servien
  * @author Siebrand
  */
 $messages['nl'] = array(
@@ -2802,7 +2810,7 @@ $messages['nl'] = array(
 	'wikibase-linkitem-failure' => 'Er is een onbekende fout opgetreden tijdens het maken van een koppeling naar de opgegeven pagina.',
 	'wikibase-linkitem-title' => 'Koppelen met pagina',
 	'wikibase-linkitem-linkpage' => 'Koppelen met pagina',
-	'wikibase-linkitem-selectlink' => 'Selecteer en site en een pagina waar u deze pagina mee wilt koppelen.',
+	'wikibase-linkitem-selectlink' => 'Selecteer een site en een pagina waar u deze pagina mee wilt koppelen.',
 	'wikibase-linkitem-input-site' => 'Taal:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
 	'wikibase-linkitem-invalidsite' => 'Er is een onbekende of ongeldige site geselecteerd',
