@@ -51,7 +51,11 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 		$this->verifyIdIsOfAProperty( $propertyId );
 		$this->verifyDataTypeIsSet( $propertyId );
 
-		return $this->dataTypeIds[$propertyId->getNumericId()];
+		try {
+			return $this->dataTypeIds[$propertyId->getNumericId()];
+		} catch ( OutOfBoundsException $ex ) {
+			throw new PropertyNotFoundException( $propertyId );
+		}
 	}
 
 	/**
