@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a989e1a9_191a1b78",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-25T15:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_8e7b43bb",
+      "revId": "b11804db76b51be077f821b337ce4540315ec3d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a989e1a9_4e713bdd",
         "filename": "repo/includes/api/GetEntities.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-25T11:24:11Z",
       "side": 1,
       "message": "Never pass around a registry object, obey the Law of Demeter!  \n\nThis function needs an EntityIdParser, so it should ask for an EntityIdParser. Actually, no: since the function works *with* the ID parser, not *on* the ID parser, the parser should be an instance member, initialized in the constructor (via injection, or, if that fails, from the LibRegistry).",
+      "revId": "b11804db76b51be077f821b337ce4540315ec3d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_390fdf39",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-25T15:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_4e713bdd",
       "revId": "b11804db76b51be077f821b337ce4540315ec3d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
