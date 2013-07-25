@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
+use DataValues\DataValueFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\EntityContentFactory;
@@ -121,6 +122,21 @@ class WikibaseRepo {
 		}
 
 		return $this->dataTypeFactory;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return DataValueFactory
+	 */
+	public function getDataValueFactory() {
+		$dataValueFactory = new DataValueFactory();
+
+		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
+			$dataValueFactory->registerDataValue( $type, $class );
+		}
+
+		return $dataValueFactory;
 	}
 
 	/**
