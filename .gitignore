@@ -20,3 +20,5 @@ vendor/
 
 selenium/configuration.yml
 selenium/Gemfile.lock
+
+easyrdf/
