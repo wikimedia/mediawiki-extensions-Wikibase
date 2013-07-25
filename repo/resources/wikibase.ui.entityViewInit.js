@@ -213,7 +213,7 @@
 			} );
 
 			// Display anonymous user edit warning:
-			if ( mw.user && mw.user.isAnon() ) {
+			if ( mw.user && mw.user.isAnon() && $.find( '.mw-notification-content' ).length === 0 ) {
 				mw.notify(
 					mw.msg( 'wikibase-anonymouseditwarning',
 						mw.msg( 'wikibase-entity-' + wb.entity.getType() )
