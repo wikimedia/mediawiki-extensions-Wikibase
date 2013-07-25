@@ -51,10 +51,16 @@ class Summary {
 	protected $summaryType;
 
 	/**
+	 * @var string
+	 */
+	protected $userSummary;
+
+	/**
 	 * indicates a specific type of formatting
 	 */
 	const USE_COMMENT = 2;
 	const USE_SUMMARY = 4;
+	const USE_USERSUMMARY = 5;
 	const USE_ALL = 6;
 
 	/**
@@ -74,6 +80,17 @@ class Summary {
 		$this->language = $language === null ? null : (string)$language;
 		$this->commentArgs = $commentArgs;
 		$this->summaryArgs = $summaryArgs;
+	}
+
+	/**
+	 * Set the language code to use as the second autocomment argument
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $summary edit summary coming from the user
+	 */
+	public function setUserSummary( $summary = null ) {
+		$this->userSummary = $summary === null ? null : (string)$summary;
 	}
 
 	/**
@@ -129,6 +146,17 @@ class Summary {
 	 */
 	public function getActionName() {
 		return $this->actionName;
+	}
+
+	/**
+	 * Get the user-provided edit summary
+	 *
+	 * @since 0.4
+	 *
+	 * @return string|null
+	 */
+	public function getUserSummary() {
+		return $this->userSummary;
 	}
 
 	/**
@@ -369,22 +397,27 @@ class Summary {
 	 *
 	 * @param string $comment autocomment part, will be placed in a block comment
 	 * @param string $summary human readable string to be appended after the autocomment part
+	 * @param string $userSummary optional, individual summary provided by the user
 	 * @param int $length max length of the string
 	 *
 	 * @return string to be used for the summary
 	 */
-	public static function formatTotalSummary( $comment, $summary, $length = SUMMARY_MAX_LENGTH ) {
+	public static function formatTotalSummary( $comment, $summary, $userSummary = '', $length = SUMMARY_MAX_LENGTH ) {
 		global $wgContLang;
 		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 
 		$comment = $normalizer->trimToNFC( $comment );
 		$summary = $normalizer->trimToNFC( $summary );
+		$userSummary = $normalizer->trimToNFC( $userSummary );
 		$mergedString = '';
 		if ( $comment !== '' ) {
 			$mergedString .=  "/* $comment */";
 		}
 		if ( $summary !== "" ) {
 			$mergedString .= ($mergedString === "" ? "" : " ") . $wgContLang->truncate( $summary, $length - strlen( $mergedString ) );
+		}
+		if ( $userSummary !== '' ) {
+			$mergedString .= ($mergedString === "" ? "" : " | ") . $wgContLang->truncate( $userSummary, $length - strlen( $mergedString ) );
 		}
 
 		// leftover entities should be removed, but its not clear how this shall be done
@@ -413,12 +446,15 @@ class Summary {
 			)
 		);
 
+		$userSummary = $this->userSummary;
+
 		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 
-		$comment = ( $format & self::USE_COMMENT) ? $normalizer->trimToNFC( $comment ) : '';
-		$summary = ( $format & self::USE_SUMMARY) ? $normalizer->trimToNFC( $summary ) : '';
+		$comment = ( $format & self::USE_COMMENT ) ? $normalizer->trimToNFC( $comment ) : '';
+		$summary = ( $format & self::USE_SUMMARY ) ? $normalizer->trimToNFC( $summary ) : '';
+		$userSummary = ( $format & self::USE_USERSUMMARY ) ? $normalizer->trimToNFC( $userSummary ) : '';
 
-		$totalSummary = self::formatTotalSummary( $comment, $summary, $length );
+		$totalSummary = self::formatTotalSummary( $comment, $summary, $userSummary, $length );
 
 		return $totalSummary;
 	}
