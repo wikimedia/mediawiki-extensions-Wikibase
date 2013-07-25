@@ -89,7 +89,8 @@ class ChangeOpSiteLink extends ChangeOp {
 				$entity->removeSiteLink( $this->siteId );
 			}
 		} else {
-			$this->updateSummary( $summary, 'set', $this->siteId, $this->pageName );
+			$entity->hasLinkToSite( $this->siteId ) ? $action = 'set' : $action = 'add';
+			$this->updateSummary( $summary, $action, $this->siteId, $this->pageName );
 			$entity->addSimpleSiteLink( new SimpleSiteLink( $this->siteId, $this->pageName ) );
 		}
 
