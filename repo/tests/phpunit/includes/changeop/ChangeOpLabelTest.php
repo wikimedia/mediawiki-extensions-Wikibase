@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Summary;
 use Wikibase\ChangeOpLabel;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
@@ -60,13 +61,47 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expectedLabel
 	 */
 	public function testApply( $changeOpLabel, $expectedLabel ) {
-		$item = ItemContent::newEmpty();
-		$entity = $item->getEntity();
+		$entity = $this->provideNewEntity();
 		$entity->setLabel( 'en', 'test' );
 
 		$changeOpLabel->apply( $entity );
 
 		$this->assertEquals( $expectedLabel, $entity->getLabel( 'en' ) );
+	}
+
+	protected function provideNewEntity() {
+		$item = ItemContent::newEmpty();
+		return $item->getEntity();
+	}
+
+	public function changeOpSummaryProvider() {
+		$args = array();
+
+		$entity = $this->provideNewEntity();
+		$entity->setLabel( 'de', 'Test' );
+		$args[] = array ( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung' ), 'set', 'de' );
+
+		$entity = $this->provideNewEntity();
+		$entity->setLabel( 'de', 'Test' );
+		$args[] = array ( $entity, new ChangeOpLabel( 'de', null ), 'remove', 'de' );
+
+		$entity = $this->provideNewEntity();
+		$entity->removeLabel( 'de' );
+		$args[] = array ( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung' ), 'add', 'de' );
+
+		return $args;
+	}
+
+	/**
+	 * @dataProvider changeOpSummaryProvider
+	 */
+	public function testUpdateSummary( $entity, $changeOp, $summaryExpectedAction, $summaryExpectedLanguage ) {
+		$summary = new Summary();
+
+		$changeOp->apply( $entity, $summary );
+
+		$this->assertEquals( $summaryExpectedAction, $summary->getActionName() );
+		$this->assertEquals( $summaryExpectedLanguage, $summary->getLanguageCode() );
 	}
 
 }

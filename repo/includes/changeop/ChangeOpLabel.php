@@ -29,7 +29,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpLabel implements ChangeOp {
+class ChangeOpLabel extends ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -68,16 +68,19 @@ class ChangeOpLabel implements ChangeOp {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 * @param Summary|null $summary
 	 *
 	 * @return bool
 	 */
-	public function apply( Entity $entity ) {
+	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->label === null ) {
+			$this->updateSummary( $summary, 'remove', $this->language, $entity->getLabel( $this->language ) );
 			$entity->removeLabel( $this->language );
 		} else {
+			$entity->getLabel( $this->language ) === false ? $action = 'add' : $action = 'set';
+			$this->updateSummary( $summary, $action, $this->language, $this->label );
 			$entity->setLabel( $this->language, $this->label );
 		}
 		return true;
 	}
-
 }

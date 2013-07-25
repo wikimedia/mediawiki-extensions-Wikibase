@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\ChangeOpDescription;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
+use Wikibase\Summary;
 
 /**
  * @covers Wikibase\ChangeOpDescription
@@ -60,13 +61,47 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expectedDescription
 	 */
 	public function testApply( $changeOpDescription, $expectedDescription ) {
-		$item = ItemContent::newEmpty();
-		$entity = $item->getEntity();
+		$entity = $this->provideNewEntity();
 		$entity->setDescription( 'en', 'test' );
 
 		$changeOpDescription->apply( $entity );
 
 		$this->assertEquals( $expectedDescription, $entity->getDescription( 'en' ) );
+	}
+
+	protected function provideNewEntity() {
+		$item = ItemContent::newEmpty();
+		return $item->getEntity();
+	}
+
+	public function changeOpSummaryProvider() {
+		$args = array();
+
+		$entity = $this->provideNewEntity();
+		$entity->setDescription( 'de', 'Test' );
+		$args[] = array ( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung' ), 'set', 'de' );
+
+		$entity = $this->provideNewEntity();
+		$entity->setDescription( 'de', 'Test' );
+		$args[] = array ( $entity, new ChangeOpDescription( 'de', null ), 'remove', 'de' );
+
+		$entity = $this->provideNewEntity();
+		$entity->removeDescription( 'de' );
+		$args[] = array ( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung' ), 'add', 'de' );
+
+		return $args;
+	}
+
+	/**
+	 * @dataProvider changeOpSummaryProvider
+	 */
+	public function testUpdateSummary( $entity, $changeOp, $summaryExpectedAction, $summaryExpectedLanguage ) {
+		$summary = new Summary();
+
+		$changeOp->apply( $entity, $summary );
+
+		$this->assertEquals( $summaryExpectedAction, $summary->getActionName() );
+		$this->assertEquals( $summaryExpectedLanguage, $summary->getLanguageCode() );
 	}
 
 }
