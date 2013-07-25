@@ -122,7 +122,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			//time['time']
 			//NOTE: The below will fail with a IllevalValueExcpetion once the TimeValue constructor enforces the time format.
 			//      Once that is done, this test and the respective validator can and should both be removed.
-			array( 'string', new TimeValue( '2013-06-06 11:22:33', 0, 0, 0, 0, 'http://acme.com/calendar' ), false, 'time: not ISO 8601' ),
+			//array( 'string', new TimeValue( '2013-06-06 11:22:33', 0, 0, 0, 0, 'http://acme.com/calendar' ), false, 'time: not ISO 8601' ),
 
 			//TODO: must be an item reference
 			//TODO: must be from a list of configured values
