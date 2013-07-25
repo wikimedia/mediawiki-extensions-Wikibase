@@ -49,7 +49,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.common',
 				'wikibase.sites',
-				'wikibase.templates'
+				'wikibase.templates',
+				'GenericSet',
 			),
 			'messages' => array(
 				'special-createitem',

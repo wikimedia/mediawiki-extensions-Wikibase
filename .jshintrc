@@ -30,6 +30,7 @@
 	"predef": [
 		"jQuery",
 		"QUnit",
+		"GlobalSet",
 		"mediaWiki",
 		"wikibase",
 		"dataValues",
