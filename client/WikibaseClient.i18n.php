@@ -2231,6 +2231,7 @@ $messages['ko'] = array(
  */
 $messages['krc'] = array(
 	'wikibase-client-desc' => "Wikibase'ни кенгертирге клиент",
+	'tooltip-t-wikibase' => 'Билгилени репозиторийини байламлы элементине джибериу',
 	'wikibase-after-page-move' => 'Аты тюрленнген бетдеги тил джибериулени тюзетир ючюн Викибилгилени байламлы элементин [$1 джангыртыргъа] да боллукъсуз.',
 	'wikibase-comment-remove' => 'Викибилгилени байламлы элементин кетерилди. Тил джибериуле къоратылдыла.',
 	'wikibase-comment-linked' => 'Викибилгилени элементи бу бет бла байламлы эди',
@@ -2773,6 +2774,9 @@ $messages['nds-nl'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Je mutten an-emeld ween',
 	'wikibase-linkitem-not-loggedin' => 'Je mutten an-emeld ween bie disse wiki en de [$1 sentrale gegevensdatabanke] um disse funksie te kunnen gebruken.',
 	'wikibase-linkitem-success-create' => "De ziejen bin ekoppeld. t Niej an-emaakten onderwarp mit de koppelingen  ku'j in de [$1 sentrale gegevensdatabanke] vienen.",
+	'wikibase-linkitem-success-link' => "De ziejen bin ekoppeld. t Onderwarp mit de koppelingen ku'j in de [$1 sentrale gegevensdatabanke] vienen.",
+	'wikibase-property-notfound' => 'Eigenschap $1 niet evunnen.',
+	'wikibase-property-notsupportedyet' => 'Wikibase ondersteunt t eigenschapstype veur de eigenschap $1 nog niet.',
 	'wikibase-rc-hide-wikidata' => '$1 wikidata',
 	'special-unconnectedpages' => 'Ziejen die niet ekoppeld bin an n onderwarp',
 	'wikibase-unconnectedpages-legend' => 'Instellingen veur ongekoppelde ziejen',

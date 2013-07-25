@@ -2114,6 +2114,17 @@ $messages['nb'] = array(
 	'version-wikibase' => 'Wikibase',
 );
 
+/** Low Saxon (Netherlands) (Nedersaksies)
+ * @author Servien
+ */
+$messages['nds-nl'] = array(
+	'wikibase-replicationnote' => "t Kan n paor minuten duren veurdat de wiezigingen op alle wiki's zichtbaor bin.",
+	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
+	'wikibase-tooltip-error-details' => 'Details',
+	'version-wikibase' => 'Wikibase',
+);
+
 /** Dutch (Nederlands)
  * @author Saruman
  * @author Siebrand
@@ -2324,8 +2335,8 @@ $messages['pt'] = array(
 	'wikibase-entity-query' => 'consulta',
 	'wikibase-error-save-generic' => 'Ocorreu um erro na gravação. Não foi possível efetuar as alterações.',
 	'wikibase-error-remove-generic' => 'Ocorreu um erro na remoção. Não foi possível efetuar as alterações.',
-	'wikibase-error-save-connection' => 'Ocorreu um erro de ligação ao tentar gravar e as alterações não foram efectuadas. Verifique a sua ligação à internet, por favor.',
-	'wikibase-error-remove-connection' => 'Ocorreu um erro de ligação ao tentar remover e as alterações não foram efectuadas. Verifique a sua ligação à internet, por favor.',
+	'wikibase-error-save-connection' => 'Ocorreu um erro de ligação ao tentar gravar e as alterações não foram efetuadas. Verifique a sua ligação à internet, por favor.',
+	'wikibase-error-remove-connection' => 'Ocorreu um erro de ligação ao tentar remover e as alterações não foram efetuadas. Verifique a sua ligação à internet, por favor.',
 	'wikibase-error-save-timeout' => 'Estamos a ter dificuldades técnicas e não foi possível concluir a gravação.',
 	'wikibase-error-remove-timeout' => 'Estamos a ter dificuldades técnicas e não foi possível concluir a remoção.',
 	'wikibase-error-autocomplete-connection' => 'Não foi possível consultar a API do sítio. Por favor, tente novamente mais tarde.',
@@ -2623,12 +2634,24 @@ $messages['sv'] = array(
 	'wikibase-diffview-link' => 'länkar',
 	'wikibase-error-unexpected' => 'Ett oväntat fel uppstod.',
 	'wikibase-error-autocomplete-response' => 'Servern svarade: $1',
+	'wikibase-error-ui-cant-edit' => 'Du har inte behörighet att utföra denna åtgärd.',
+	'wikibase-error-ui-no-permissions' => 'Du har inte tillräcklig behörighet för att utföra denna åtgärd.',
+	'wikibase-error-ui-link-exists' => 'Du kan inte länka till den här sidan eftersom ett annat objekt redan länkar till det.',
 	'wikibase-error-ui-session-failure' => 'Din session har upphört. Var god logga in igen.',
+	'wikibase-error-ui-edit-conflict' => 'Det var en redigeringskonflikt. Vänligen ladda om och spara igen.',
+	'wikibase-replicationnote' => 'Observera att det kan ta flera minuter tills förändringarna är synliga på alla wikier.',
+	'wikibase-sitelinks-wikipedia' => 'Wikipedia-sidor som är länkade till det här objektet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Länkad artikel',
 	'wikibase-tooltip-error-details' => 'Detaljer',
 	'wikibase-validator-bad-type' => '$2 istället för $1',
+	'wikibase-validator-too-long' => 'Får inte vara mer än {{PLURAL:$1|ett tecken|$1 tecken}} lång',
+	'wikibase-validator-too-short' => 'Måste vara minst {{PLURAL:$1|ett tecken|$1 tecken}} lång',
+	'wikibase-validator-malformed-value' => 'Felformaterad indata: $1',
+	'wikibase-validator-bad-entity-id' => 'Felformaterad ID: $1',
+	'wikibase-validator-no-such-entity' => '$1 hittades inte',
+	'datatypes-type-wikibase-item' => 'Objekt',
 	'datatypes-type-commonsMedia' => 'Commons mediafil',
 	'version-wikibase' => 'Wikibase',
 );
