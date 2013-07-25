@@ -83,7 +83,10 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entityContent->getItem();
 		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
-		if ( isset( $params['linksite'] ) && $params['linktitle'] === '' ) {
+		if (
+			isset( $params['linksite'] ) &&
+			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
+		{
 			if ( $item->hasLinkToSite( $linksite ) ) {
 				$link = $item->getSimpleSiteLink( $linksite );
 				$this->getChangeOp( $params )->apply( $item, $summary );
@@ -107,7 +110,10 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	protected function getChangeOp( array $params ) {
 		wfProfileIn( __METHOD__ );
-		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
+		if (
+			isset( $params['linksite'] ) &&
+			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
+		{
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			wfProfileOut( __METHOD__ );
 			return new ChangeOpSiteLink( $linksite, null );
