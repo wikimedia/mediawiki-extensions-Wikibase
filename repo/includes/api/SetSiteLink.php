@@ -83,7 +83,10 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entityContent->getItem();
 		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
-		if ( isset( $params['linksite'] ) && $params['linktitle'] === '' ) {
+		if (
+			isset( $params['linksite'] ) &&
+			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
+		{
 			if ( $item->hasLinkToSite( $linksite ) ) {
 				$link = $item->getSimpleSiteLink( $linksite );
 				$this->getChangeOp( $params )->apply( $item, $summary );
@@ -107,7 +110,10 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	protected function getChangeOp( array $params ) {
 		wfProfileIn( __METHOD__ );
-		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
+		if (
+			isset( $params['linksite'] ) &&
+			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
+		{
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			wfProfileOut( __METHOD__ );
 			return new ChangeOpSiteLink( $linksite, null );
@@ -185,7 +191,7 @@ class SetSiteLink extends ModifyEntity {
 			parent::getParamDescriptionForEntity(),
 			array(
 				'linksite' => 'The identifier of the site on which the article to link resides',
-				'linktitle' => 'The title of the article to link',
+				'linktitle' => 'The title of the article to link. If this parameter is not set or an empty string, the link will be removed',
 			)
 		);
 	}
@@ -209,8 +215,10 @@ class SetSiteLink extends ModifyEntity {
 			=> 'Add a sitelink "Hydrogen" for English page with id "Q42", if the site link does not exist',
 			'api.php?action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Add a sitelink "Hydrogen" for English page with id "Q42", if the site link does not exist with an edit summary of "World domination will be mine soon!"',
-			'api.php?action=wbsetsitelink&site=enwiki&title=Hydrogen&tosite=dewiki&totitle=Wasserstoff'
+			'api.php?action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki&linktitle=Wasserstoff'
 			=> 'Add a sitelink "Wasserstoff" for the German page on item with the link from the English page to "Hydrogen", if the site link does not exist',
+			'api.php?action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki'
+			=> 'Removes the German sitelink from the item',
 		);
 	}
 
