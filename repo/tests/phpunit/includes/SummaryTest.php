@@ -130,7 +130,7 @@ class SummaryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideToString
 	 */
-	public function testToString( $module, $action, $language, $commentArgs, $summaryArgs, $expected ) {
+	public function testToString( $module, $action, $language, $commentArgs, $summaryArgs, $userSummary, $expected ) {
 		$summary = new Summary( $module );
 
 		if ( $action !== null ) {
@@ -149,6 +149,10 @@ class SummaryTest extends \MediaWikiTestCase {
 			$summary->addAutoSummaryArgs( $summaryArgs );
 		}
 
+		if ( $userSummary !== null ) {
+			$summary->setUserSummary( $userSummary );
+		}
+
 		$this->assertEquals( $expected, $summary->toString() );
 	}
 
@@ -156,6 +160,7 @@ class SummaryTest extends \MediaWikiTestCase {
 		return array(
 			array( // #0
 				'summarytest',
+				null,
 				null,
 				null,
 				null,
@@ -168,6 +173,7 @@ class SummaryTest extends \MediaWikiTestCase {
 				'nl',
 				null,
 				null,
+				null,
 				'/* summarytest-testing:0|nl */'
 			),
 			array( // #2
@@ -175,6 +181,7 @@ class SummaryTest extends \MediaWikiTestCase {
 				null,
 				null,
 				array( 'x' ),
+				null,
 				null,
 				'/* summarytest:0||x */'
 			),
@@ -184,6 +191,7 @@ class SummaryTest extends \MediaWikiTestCase {
 				'nl',
 				array( 'x', 'y' ),
 				array( 'A', 'B'),
+				null,
 				'/* summarytest-testing:2|nl|x|y */ A, B'
 			),
 			array( // #4
@@ -192,8 +200,27 @@ class SummaryTest extends \MediaWikiTestCase {
 				null,
 				null,
 				array( 'A', 'B' ),
+				null,
 				'/* summarytest:2| */ A, B'
 			),
+			array( // #5
+				'summarytest',
+				'testing',
+				'nl',
+				array( 'x', 'y' ),
+				array( 'A', 'B'),
+				'can I haz world domination?',
+				'/* summarytest-testing:2|nl|x|y */ can I haz world domination?'
+				),
+			array( // #6
+				'summarytest',
+				null,
+				null,
+				null,
+				null,
+				'can I haz world domination?',
+				'/* summarytest:0| */ can I haz world domination?'
+				),
 		);
 	}
 }
