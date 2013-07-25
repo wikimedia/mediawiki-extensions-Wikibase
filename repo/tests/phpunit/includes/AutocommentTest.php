@@ -230,13 +230,13 @@ class AutocommentTest extends \MediaWikiTestCase {
 		$lang = \Language::factory( 'en' );
 		return array(
 			array( '', '', $lang, '' ),
-			array( 'foobar', 'This is a test…', $lang, '/* foobar */ This is a test…' ),
-			array( 'foobar:one', 'This is a test…', $lang, '/* foobar:one */ This is a test…' ),
-			array( 'foobar:one|two', 'This is a test…', $lang, '/* foobar:one|two */ This is a test…' ),
-			array( 'foobar:one|two|three', 'This is a test…', $lang, '/* foobar:one|two|three */ This is a test…' ),
-			array( 'foobar:one|two|three|…', 'This is a test…', $lang, '/* foobar:one|two|three|… */ This is a test…' ),
-			array( 'foobar:one|two|three|<>', 'This is a test…', $lang, '/* foobar:one|two|three|<> */ This is a test…' ),
-			array( 'foobar:one|two|three|&lt;&gt;', 'This is a test…', $lang, '/* foobar:one|two|three|&lt;&gt; */ This is a test…' ),
+			array( 'foobar', 'This is a test…', $lang, '/* foobar */This is a test…' ),
+			array( 'foobar:one', 'This is a test…', $lang, '/* foobar:one */This is a test…' ),
+			array( 'foobar:one|two', 'This is a test…', $lang, '/* foobar:one|two */This is a test…' ),
+			array( 'foobar:one|two|three', 'This is a test…', $lang, '/* foobar:one|two|three */This is a test…' ),
+			array( 'foobar:one|two|three|…', 'This is a test…', $lang, '/* foobar:one|two|three|… */This is a test…' ),
+			array( 'foobar:one|two|three|<>', 'This is a test…', $lang, '/* foobar:one|two|three|<> */This is a test…' ),
+			array( 'foobar:one|two|three|&lt;&gt;', 'This is a test…', $lang, '/* foobar:one|two|three|&lt;&gt; */This is a test…' ),
 			array(  '', str_repeat( 'a', 2*SUMMARY_MAX_LENGTH ), $lang, str_repeat( 'a', SUMMARY_MAX_LENGTH-3 ) . '...' ),
 		);
 	}

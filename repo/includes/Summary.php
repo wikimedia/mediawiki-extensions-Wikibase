@@ -384,7 +384,7 @@ class Summary {
 			$mergedString .=  "/* $comment */";
 		}
 		if ( $summary !== "" ) {
-			$mergedString .= ($mergedString === "" ? "" : " ") . $wgContLang->truncate( $summary, $length - strlen( $mergedString ) );
+			$mergedString .= $wgContLang->truncate( $summary, $length - strlen( $mergedString ) );
 		}
 
 		// leftover entities should be removed, but its not clear how this shall be done
