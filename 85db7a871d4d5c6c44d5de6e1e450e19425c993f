@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_ee9f6ffe",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-25T10:56:07Z",
+      "side": 1,
+      "message": "It would be great if you could also add an example use (as above)",
+      "revId": "85db7a871d4d5c6c44d5de6e1e450e19425c993f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
