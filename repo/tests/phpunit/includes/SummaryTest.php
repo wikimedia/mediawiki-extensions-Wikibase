@@ -68,13 +68,13 @@ class SummaryTest extends \MediaWikiTestCase {
 	public static function providerFormatTotalSummary() {
 		return array(
 			array( '', '', '' ),
-			array( 'foobar', 'This is a test…', '/* foobar */ This is a test…' ),
-			array( 'foobar:one', 'This is a test…', '/* foobar:one */ This is a test…' ),
-			array( 'foobar:one|two', 'This is a test…', '/* foobar:one|two */ This is a test…' ),
-			array( 'foobar:one|two|three', 'This is a test…', '/* foobar:one|two|three */ This is a test…' ),
-			array( 'foobar:one|two|three|…', 'This is a test…', '/* foobar:one|two|three|… */ This is a test…' ),
-			array( 'foobar:one|two|three|<>', 'This is a test…', '/* foobar:one|two|three|<> */ This is a test…' ),
-			array( 'foobar:one|two|three|&lt;&gt;', 'This is a test…', '/* foobar:one|two|three|&lt;&gt; */ This is a test…' ),
+			array( 'foobar', 'This is a test…', '/* foobar */This is a test…' ),
+			array( 'foobar:one', 'This is a test…', '/* foobar:one */This is a test…' ),
+			array( 'foobar:one|two', 'This is a test…', '/* foobar:one|two */This is a test…' ),
+			array( 'foobar:one|two|three', 'This is a test…', '/* foobar:one|two|three */This is a test…' ),
+			array( 'foobar:one|two|three|…', 'This is a test…', '/* foobar:one|two|three|… */This is a test…' ),
+			array( 'foobar:one|two|three|<>', 'This is a test…', '/* foobar:one|two|three|<> */This is a test…' ),
+			array( 'foobar:one|two|three|&lt;&gt;', 'This is a test…', '/* foobar:one|two|three|&lt;&gt; */This is a test…' ),
 			array(  '', str_repeat( 'a', 2*SUMMARY_MAX_LENGTH ), str_repeat( 'a', SUMMARY_MAX_LENGTH-3 ) . '...' ),
 		);
 	}
@@ -104,7 +104,7 @@ class SummaryTest extends \MediaWikiTestCase {
 		$summary->addAutoSummaryArgs( array( "four", "five" ) );
 
 		$this->assertEquals( 'one, two, three, four, five', $summary->getAutoSummary() );
-		$this->assertEquals( "/* summarytest:5| */ one, two, three, four, five", $summary->toString() );
+		$this->assertEquals( "/* summarytest:5| */one, two, three, four, five", $summary->toString() );
 	}
 
 	public function testSetAction() {
@@ -184,7 +184,7 @@ class SummaryTest extends \MediaWikiTestCase {
 				'nl',
 				array( 'x', 'y' ),
 				array( 'A', 'B'),
-				'/* summarytest-testing:2|nl|x|y */ A, B'
+				'/* summarytest-testing:2|nl|x|y */A, B'
 			),
 			array( // #4
 				'summarytest',
@@ -192,7 +192,7 @@ class SummaryTest extends \MediaWikiTestCase {
 				null,
 				null,
 				array( 'A', 'B' ),
-				'/* summarytest:2| */ A, B'
+				'/* summarytest:2| */A, B'
 			),
 		);
 	}
