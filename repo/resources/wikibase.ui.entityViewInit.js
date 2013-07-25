@@ -197,11 +197,13 @@
 
 			// Display anonymous user edit warning:
 			if ( mw.user && mw.user.isAnon() ) {
-				mw.notify(
-					mw.msg( 'wikibase-anonymouseditwarning',
-						mw.msg( 'wikibase-entity-' + wb.entity.getType() )
-					)
-				);
+				if ( $.find( '.mw-notification-content' ).length === 0 ) {
+					mw.notify(
+						mw.msg( 'wikibase-anonymouseditwarning',
+							mw.msg( 'wikibase-entity-' + wb.entity.getType() )
+						)
+					);
+				}
 			}
 
 			// add copyright warning to 'save' button if there is one:
