@@ -8,6 +8,7 @@ message and the parameters for that message (the "comment arguments"). By conven
 the first comment argument is a count, used to trigger the plural version of the
 message when needed. The second argument, if present, is a language code.
 
+/* wbsetsitelink-add:1|site */ linktitle
 /* wbsetsitelink-set:1|site */ linktitle
 /* wbsetsitelink-remove:1|site */
 
