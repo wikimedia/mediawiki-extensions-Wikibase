@@ -128,6 +128,7 @@ return call_user_func( function() {
 		'Wikibase\EntityLookup' => 'includes/store/EntityLookup.php',
 		'Wikibase\EntityRevision' => 'includes/store/EntityRevision.php',
 		'Wikibase\EntityRevisionLookup' => 'includes/store/EntityRevisionLookup.php',
+		'Wikibase\EntityTitleLookup' => 'includes/store/EntityTitleLookup.php',
 		'Wikibase\PropertyLabelResolver' => 'includes/store/PropertyLabelResolver.php',
 		'Wikibase\EntityUsageIndex' => 'includes/store/EntityUsageIndex.php',
 		'Wikibase\SiteLinkCache' => 'includes/store/SiteLinkCache.php',

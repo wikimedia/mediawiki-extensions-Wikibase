@@ -36,7 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityContentFactory {
+class EntityContentFactory implements EntityTitleLookup {
 
 	/**
 	 * @since 0.2
