@@ -49,7 +49,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.common',
 				'wikibase.sites',
-				'wikibase.templates'
+				'wikibase.templates',
+				'GenericSet',
 			),
 			'messages' => array(
 				'special-createitem',
@@ -389,6 +390,7 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.tagadata',
 				'wikibase.AbstractedRepoApi',
+				'GenericSet',
 			),
 			'messages' => array(
 				'wikibase-cancel',
@@ -520,7 +522,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.suggester',
-				'wikibase'
+				'wikibase',
+				'GenericSet',
 			)
 		),
 

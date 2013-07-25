@@ -1,5 +1,5 @@
 /**
- * JavaScript for 'wikibase' extension special page 'ItemByTitle'
+* JavaScript for 'wikibase' extension special page 'ItemByTitle'.
  *
  * @since 0.1
  * @file
@@ -18,13 +18,13 @@
 
 		// this will build a drop-down for the language selection:
 		var siteList = [];
-		for ( var siteId in wb.getSites() ) {
-			var site = wb.getSite( siteId );
+		wb.getSites().each( function( site ) {
 			siteList.push( {
 				'label': site.getName() + ' (' + site.getId() + ')',
 				'value': site.getName() + ' (' + site.getId() + ')'
 			} );
-		}
+		} );
+
 		$( '#wb-itembytitle-sitename' ).suggester( { 'source': siteList } );
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")

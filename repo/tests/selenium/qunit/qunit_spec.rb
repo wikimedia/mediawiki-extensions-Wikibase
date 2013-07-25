@@ -16,6 +16,7 @@ test_filters = [
   "valueview",
   "time",
   "coordinate"
+  "GenericSet"
 ]
 
 describe "Running repo QUnit tests" do
