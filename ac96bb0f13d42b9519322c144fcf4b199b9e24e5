@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_791a476e",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-25T11:38:27Z",
+      "side": 1,
+      "message": "Add an example of removing a site link? :D",
+      "revId": "ac96bb0f13d42b9519322c144fcf4b199b9e24e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
