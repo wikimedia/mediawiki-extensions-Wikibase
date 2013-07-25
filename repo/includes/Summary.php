@@ -17,6 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author John Erling Blad
  * @author Daniel Kinzler
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class Summary {
 
@@ -51,6 +52,11 @@ class Summary {
 	protected $summaryType;
 
 	/**
+	 * @var string
+	 */
+	protected $userSummary;
+
+	/**
 	 * indicates a specific type of formatting
 	 */
 	const USE_COMMENT = 2;
@@ -74,6 +80,17 @@ class Summary {
 		$this->language = $language === null ? null : (string)$language;
 		$this->commentArgs = $commentArgs;
 		$this->summaryArgs = $summaryArgs;
+	}
+
+	/**
+	 * Set the user provided edit summary
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $summary edit summary provided by the user
+	 */
+	public function setUserSummary( $summary = null ) {
+		$this->userSummary = $summary === null ? null : (string)$summary;
 	}
 
 	/**
@@ -129,6 +146,17 @@ class Summary {
 	 */
 	public function getActionName() {
 		return $this->actionName;
+	}
+
+	/**
+	 * Get the user-provided edit summary
+	 *
+	 * @since 0.4
+	 *
+	 * @return string|null
+	 */
+	public function getUserSummary() {
+		return $this->userSummary;
 	}
 
 	/**
@@ -369,6 +397,7 @@ class Summary {
 	 *
 	 * @param string $comment autocomment part, will be placed in a block comment
 	 * @param string $summary human readable string to be appended after the autocomment part
+	 * @param string $userSummary optional, individual summary provided by the user
 	 * @param int $length max length of the string
 	 *
 	 * @return string to be used for the summary
@@ -403,7 +432,12 @@ class Summary {
 	 */
 	public function toString( $length = SUMMARY_MAX_LENGTH, $format = self::USE_ALL ) {
 		$count = $this->summaryArgs ? count( $this->summaryArgs ) : 0;
-		$summary = self::formatAutoSummary( $this->summaryArgs );
+
+		if ( !is_null( $this->userSummary ) ) {
+			$summary = $this->userSummary;
+		} else {
+			$summary = self::formatAutoSummary( $this->summaryArgs );
+		}
 
 		$comment = Summary::formatAutoComment(
 			$this->getMessageKey(),
@@ -415,8 +449,8 @@ class Summary {
 
 		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 
-		$comment = ( $format & self::USE_COMMENT) ? $normalizer->trimToNFC( $comment ) : '';
-		$summary = ( $format & self::USE_SUMMARY) ? $normalizer->trimToNFC( $summary ) : '';
+		$comment = ( $format & self::USE_COMMENT ) ? $normalizer->trimToNFC( $comment ) : '';
+		$summary = ( $format & self::USE_SUMMARY ) ? $normalizer->trimToNFC( $summary ) : '';
 
 		$totalSummary = self::formatTotalSummary( $comment, $summary, $length );
 
