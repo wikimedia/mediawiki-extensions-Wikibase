@@ -171,21 +171,15 @@ $.widget( 'wikibase.linkitem', {
 	 * @return {object}
 	 */
 	_getLinkableSites: function() {
-		var sites,
-			linkableSites = {},
-			site,
-			currentSiteId,
-			siteGroup;
+		var linkableSites = {},
+			currentSiteId = mw.config.get( 'wbCurrentSite' ).globalSiteId,
+			siteGroup = wb.getSite( currentSiteId ).getGroup();
 
-		currentSiteId = mw.config.get( 'wbCurrentSite' ).globalSiteId;
-		siteGroup = wb.getSite( currentSiteId ).getGroup();
-		sites = wb.getSitesOfGroup( siteGroup );
-
-		for( site in sites ) {
-			if ( sites[ site ].getGlobalSiteId() !== currentSiteId ) {
-				linkableSites[ site ] = sites[ site ];
+		wb.getSitesOfGroup( siteGroup ).each( function( site ) {
+			if( site.getId() !== currentSiteId ) {
+				linkableSites[ site.getId() ] = site;
 			}
-		}
+		} );
 
 		return linkableSites;
 	},
