@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_ce38eb9f",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-25T08:58:01Z",
+      "side": 1,
+      "message": "Totally unrelated to anything you have done but it would be great if this error could be improved :)",
+      "revId": "9ba82fefc8fc86a0899787f728f2d1f59a0e3a8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_ee3daf8c",
+        "filename": "repo/includes/changeop/ChangeOpDescription.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-25T08:58:01Z",
+      "side": 1,
+      "message": "Would it be possible to detect a new description (adding a description when one was not previously there?)\n\nCurrently this will just show as Changed not added :(",
+      "revId": "9ba82fefc8fc86a0899787f728f2d1f59a0e3a8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_ae5c87ee",
+        "filename": "repo/includes/changeop/ChangeOpLabel.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-25T08:58:01Z",
+      "side": 1,
+      "message": "As with descriptions if there is no current description set it would be great to try and detect this ass an add rather than a set :!",
+      "revId": "9ba82fefc8fc86a0899787f728f2d1f59a0e3a8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
