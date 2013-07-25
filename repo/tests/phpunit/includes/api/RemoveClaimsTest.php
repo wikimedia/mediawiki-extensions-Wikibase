@@ -39,8 +39,33 @@ use Wikibase\Claim;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class RemoveClaimsTest extends \ApiTestCase {
+
+	public function propertyProvider() {
+		static $properties = null;
+
+		if ( $properties !== null ) {
+			return $properties;
+		}
+
+		$properties = array();
+
+		for ( $i = 0; $i < 5; $i++ ) {
+			$prop = \Wikibase\Property::newEmpty();
+			$prop->setDataTypeId( 'string' );
+
+			$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $prop );
+			$status = $content->save( '', null, EDIT_NEW );
+
+			$this->assertTrue( $status->isOK(), 'save property ' . "\n" . $status->getWikiText() );
+
+			$properties[] = $prop;
+		}
+
+		return $properties;
+	}
 
 	/**
 	 * @param Entity $entity
@@ -51,10 +76,12 @@ class RemoveClaimsTest extends \ApiTestCase {
 		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
 		$content->save( '', null, EDIT_NEW );
 
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 1 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertySomeValueSnak( 42 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'o_O' ) ) ) );
+		list( $p1, $p2, $p3, $p4 ) = $this->propertyProvider();
+
+		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( $p1->getId() ) ) );
+		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( $p2->getId() ) ) );
+		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertySomeValueSnak( $p3->getId() ) ) );
+		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( $p4->getId(), new \DataValues\StringValue( 'o_O' ) ) ) );
 
 		$content->save( '' );
 
@@ -62,13 +89,21 @@ class RemoveClaimsTest extends \ApiTestCase {
 	}
 
 	public function entityProvider() {
+		static $entities = null;
+
+		if ( $entities !== null ) {
+			return $entities;
+		}
+
 		$property = \Wikibase\Property::newEmpty();
 		$property->setDataTypeId( 'string' );
 
-		return array(
+		$entities = array(
 			$this->addClaimsAndSave( \Wikibase\Item::newEmpty() ),
 			$this->addClaimsAndSave( $property ),
 		);
+
+		return $entities;
 	}
 
 	public function testValidRequests() {
