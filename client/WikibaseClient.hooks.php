@@ -679,10 +679,25 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::handle', SFH_NO_HASH );
+		try {
+			$parser->setFunctionHook(
+				'noexternallanglinks',
+				'\Wikibase\NoLangLinkHandler::handle',
+				SFH_NO_HASH
+			);
+		} catch( \Exception $e ) {
+			wfWarn( 'Wikibase noexternallanglinks magic word found.' );
+		}
 
-		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
-			$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParserFunction', 'render' ) );
+		try {
+			if ( Settings::get( 'allowDataTransclusion' ) === true ) {
+				$parser->setFunctionHook(
+					'property',
+					array( '\Wikibase\PropertyParserFunction', 'render' )
+				);
+			}
+		} catch ( \Exception $e ) {
+			wfWarn( 'Wikibase property parser function not found.' );
 		}
 
 		return true;
