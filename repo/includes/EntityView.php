@@ -51,6 +51,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  * @author Daniel Werner
+ * @author Daniel Kinzler
  */
 abstract class EntityView extends \ContextSource {
 
@@ -65,6 +66,16 @@ abstract class EntityView extends \ContextSource {
 	 * @var EntityIdFormatter
 	 */
 	protected $idFormatter;
+
+	/**
+	 * @var EntityLookup
+	 */
+	protected $entityLookup;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $entityTitleLookup;
 
 	/**
 	 * Maps entity types to the corresponding entity view.
@@ -83,26 +94,27 @@ abstract class EntityView extends \ContextSource {
 	);
 
 	/**
-	 * Constructor.
-	 *
-	 * @todo think about using IContextSource here. Parser for example uses parser options (which also can be generated
-	 *       from an IContextSource) but this seems sufficient for now.
-	 *
 	 * @since 0.1
 	 *
+	 * @param IContextSource|null   $context
 	 * @param ValueFormatterFactory $valueFormatters
-	 * @param IContextSource|null $context
+	 * @param Lib\EntityIdFormatter $idFormatter
+	 * @param EntityLookup          $entityLookup
+	 * @param EntityTitleLookup     $entityTitleLookup
 	 */
-	public function __construct( ValueFormatterFactory $valueFormatters, IContextSource $context = null ) {
+	public function __construct(
+		IContextSource $context,
+		ValueFormatterFactory $valueFormatters,
+		EntityIdFormatter $idFormatter,
+		EntityLookup $entityLookup,
+		EntityTitleLookup $entityTitleLookup
+	) {
 		$this->valueFormatters = $valueFormatters;
-
-		if ( !$context ) {
-			$context = \RequestContext::getMain();
-		}
 		$this->setContext( $context );
 
-		// TODO: this need to be properly injected
-		$this->idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+		$this->idFormatter = $idFormatter;
+		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
@@ -245,12 +257,11 @@ abstract class EntityView extends \ContextSource {
 		$entityLoader = StoreFactory::getStore()->getEntityLookup();
 
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
-		$contentFactory = EntityContentFactory::singleton();
 
 		$usedEntityIds = $refFinder->findClaimLinks( $entity->getEntity()->getClaims() );
 
 		foreach ( $usedEntityIds as $entityId ) {
-			$pout->addLink( $contentFactory->getTitleForId( $entityId ) );
+			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
 		}
 
 		if ( $generateHtml ) {
@@ -534,12 +545,12 @@ abstract class EntityView extends \ContextSource {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-			$property = EntityContentFactory::singleton()->getFromId( $propertyId );
+			$property = $this->entityLookup->getEntity( $propertyId );
 			$propertyLink = '';
-			if ( isset( $property ) ) {
+			if ( $property ) {
 				$propertyLink = \Linker::link(
-					$property->getTitle(),
-					htmlspecialchars( $property->getEntity()->getLabel( $languageCode ) )
+					$this->entityTitleLookup->getTitleForId( $property->getId() ),
+					htmlspecialchars( $property->getLabel( $languageCode ) )
 				);
 			}
 
@@ -838,11 +849,10 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		// make information about other entities used in this entity available in JavaScript view:
-		$entityLoader = StoreFactory::getStore()->getEntityLookup();
-		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
+		$refFinder = new ReferencedEntitiesFinder( $this->entityLookup );
 
 		$usedEntityIds = $refFinder->findClaimLinks( $entity->getClaims() );
-		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode );
+		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode );
 
 		$out->addJsConfigVars(
 			'wbUsedEntities',
@@ -862,20 +872,19 @@ abstract class EntityView extends \ContextSource {
 	 * @param string $langCode For the entity labels which will be included in one language only.
 	 * @return array
 	 */
-	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
+	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = EntityContentFactory::singleton();
-		$entities = $entityLoader->getEntities( $entityIds );
+		$entities = $this->entityLookup->getEntities( $entityIds );
 		$entityInfo = array();
 
 		$serializerFactory = new SerializerFactory();
-		// TODO: use injected id formatter
-		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$serializationOptions = new EntitySerializationOptions( $this->idFormatter );
 		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
 
 		$serializationOptions->setLanguages( array( $langCode ) );
 
+		/* @var Entity $entity */
 		foreach( $entities as $prefixedId => $entity ) {
 			if( $entity === null ) {
 				continue;
@@ -883,12 +892,12 @@ abstract class EntityView extends \ContextSource {
 			$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 			$entityInfo[ $prefixedId ] = $serializer->getSerialized( $entity );
 
-			$entityContent = $entityContentFactory->getFromId( $entity->getId() );
+			$title = $this->entityTitleLookup->getTitleForId( $entity->getId() );
 
 			// TODO: should perhaps implement and use a EntityContentSerializer since this is mixed,
 			//  serialized Entity and EntityContent data because of adding the URL:
-			$entityInfo[ $prefixedId ]['title'] = $entityContent->getTitle()->getPrefixedText();
-			$entityInfo[ $prefixedId ]['lastrevid'] = $entityContent->getWikiPage()->getRevision()->getId();
+			$entityInfo[ $prefixedId ]['title'] = $title->getPrefixedText();
+			$entityInfo[ $prefixedId ]['lastrevid'] = $title->getLatestRevID();
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -918,7 +927,15 @@ abstract class EntityView extends \ContextSource {
 			throw new MWException( "No entity view known for handling entities of type '$type'" );
 		}
 
-		$instance = new self::$typeMap[ $type ]( $valueFormatters, $context );
+		if ( !$context ) {
+			$context = \RequestContext::getMain();
+		}
+
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+		$entityTitleLookup = EntityContentFactory::singleton();
+		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+
+		$instance = new self::$typeMap[ $type ]( $context, $valueFormatters, $idFormatter, $entityLookup, $entityTitleLookup );
 		return $instance;
 	}
 }
