@@ -6,7 +6,6 @@ use Status;
 use User;
 use Title;
 use ApiBase;
-
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
@@ -139,6 +138,9 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected function createSummary( array $params ) {
 		$summary = new Summary( $this->getModuleName() );
+		if ( !is_null( $params['summary'] ) ) {
+			$summary->setUserSummary( $params['summary'] );
+		}
 		return $summary;
 	}
 
