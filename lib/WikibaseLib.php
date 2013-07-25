@@ -173,6 +173,9 @@ call_user_func( function() {
 	/**
 	 * Shorthand function to retrieve a template filled with the specified parameters.
 	 *
+	 * important! note that the Template class does not escape anything.
+	 * be sure to escape your params before using this function!
+	 *
 	 * @since 0.2
 	 *
 	 * @param $key string template key
@@ -190,8 +193,7 @@ call_user_func( function() {
 
 		$template = new \Wikibase\Template( \Wikibase\TemplateRegistry::singleton(), $key, $params );
 
-		// Use plain() to prevent replacing {{...}}:
-		return $template->plain();
+		return $template->render();
 	}
 
 	// Resource Loader Modules:

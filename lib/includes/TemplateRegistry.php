@@ -50,7 +50,7 @@ class TemplateRegistry {
 	 * @param array $templates
 	 */
 	public function addTemplates( $templates ) {
-		foreach ( $templates AS $key => $snippet ) {
+		foreach ( $templates as $key => $snippet ) {
 			$this->addTemplate( $key, $snippet );
 		}
 	}
@@ -83,17 +83,19 @@ class TemplateRegistry {
 }
 
 /**
- * Represents a template that can contain placeholders just like MediWiki messages.
+ * Represents a template that can contain placeholders just like MediaWiki messages.
  */
 class Template extends \Message {
 
 	protected $templateRegistry;
 
 	/**
-	 * Constructor.
+	 * important! note that the Template class does not escape anything.
+	 * be sure to escape your params before using this class!
 	 *
 	 * @param TemplateRegistry $templateRegistry
-	 * @param $key: message key, or array of message keys to try and use the first non-empty message for
+	 * @param $key: message key, or array of message keys to try
+	 *          and use the first non-empty message for
 	 * @param $params Array message parameters
 	 */
 	public function __construct( TemplateRegistry $templateRegistry, $key, $params = array() ) {
@@ -107,11 +109,19 @@ class Template extends \Message {
 	 *
 	 * @return string template
 	 */
-	function fetchMessage() {
+	protected function fetchMessage() {
 		if ( !isset( $this->message ) ) {
 			$this->message = $this->templateRegistry->getTemplate( $this->key );
 		}
 		return $this->message;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function render() {
+		// Use plain() to prevent replacing {{...}}:
+		return $this->plain();
 	}
 
 }
