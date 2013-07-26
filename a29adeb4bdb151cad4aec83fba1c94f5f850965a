@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a989e1a9_77208b4c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 278
+      },
+      "writtenOn": "2013-07-26T16:08:34Z",
+      "side": 1,
+      "message": "Could we have an explanation here of why the magic word would not be found. What would cause this to happen?",
+      "revId": "a29adeb4bdb151cad4aec83fba1c94f5f850965a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a989e1a9_c148b98e",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 2
