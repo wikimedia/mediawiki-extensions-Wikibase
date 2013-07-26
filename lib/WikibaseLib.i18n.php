@@ -197,7 +197,6 @@ This kind of error is unlekely to occur during normal operation, since the user 
 Parameters:
 * $1 is the actual value type
 * $2 is the expected value type',
-
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',

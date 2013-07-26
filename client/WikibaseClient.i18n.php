@@ -246,12 +246,14 @@ $messages['af'] = array(
 /** Arabic (العربية)
  * @author Abanima
  * @author Ali1
+ * @author OsamaK
  * @author Peadara
  * @author Tarawneh
  */
 $messages['ar'] = array(
 	'wikibase-client-desc' => 'عميل امتداد ويكيبيس',
 	'wikibase-after-page-move' => 'يمكنك أيضا [$1 تحديث] بند ويكي بيانات المرتبط بها للحفاظ على روابط اللغة ضمن الصفحة المنقولة.',
+	'wikibase-after-page-move-queued' => '[$1 عنصر ويكي بيانات] المرتبط بهذه الصفحة سيُحدّث قريبًا تلقائيًا.',
 	'wikibase-comment-remove' => 'تم حذف بند ويكيبيانات المرتبطة. و تم إزالة ارتباطات اللغة.',
 	'wikibase-comment-linked' => 'تم ربط عنصر ويكيبيانات مع هذه الصفحة.',
 	'wikibase-comment-unlink' => 'تم فصل ارتباط هذه الصفحة من البند ويكيبيانات. تم إزالة روابط اللغة.',
@@ -261,10 +263,11 @@ $messages['ar'] = array(
 	'wikibase-comment-sitelink-change' => 'تم تعديل وصلة اللغة من $1 إلى $2',
 	'wikibase-comment-sitelink-remove' => 'وصلة اللغة المُلغاة:$1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تعديل|تعديلات}}',
-	'wikibase-editlinks' => 'تعديل الارتباطات',
-	'wikibase-editlinkstitle' => 'تحرير ارتباطات اللغات البينية',
-	'wikibase-linkitem-addlinks' => 'إضافة روابط',
-	'wikibase-linkitem-alreadylinked' => 'هذه الصفحة التي تريد ربطها مرتبطة بالفعل إلى [ $1 عنصر] في المستودع المركزي للبيانات والذي يرتبط ب $2 على هذا الموقع. بإمكان العناصر إلحاق صفحة واحدة فقط لكل موقع. الرجاء اختيار صفحة مختلفة للربط.',
+	'wikibase-dataitem' => 'عنصر بيانات',
+	'wikibase-editlinks' => 'عدّل الروابط',
+	'wikibase-editlinkstitle' => 'تحرير الروابط ما بين اللغات',
+	'wikibase-linkitem-addlinks' => 'أضف روابطا',
+	'wikibase-linkitem-alreadylinked' => 'هذه الصفحة التي تريد ربطها مرتبطة بالفعل ب [$1 عنصر] في المستودع المركزي للبيانات والذي يرتبط ب$2 على هذا الموقع. بإمكان العناصر إلحاق صفحة واحدة فقط لكل موقع. الرجاء اختيار صفحة مختلفة للربط.',
 	'wikibase-linkitem-close' => 'أغلق مربع الحوار وأعد تحميل الصفحة',
 	'wikibase-linkitem-failure' => 'حدث خطأ غير معروف أثناء محاولة الارتباط بالصفحة المعينة.',
 	'wikibase-linkitem-title' => 'اربط مع الصفحة',
@@ -273,7 +276,7 @@ $messages['ar'] = array(
 	'wikibase-linkitem-input-site' => 'اللغة:',
 	'wikibase-linkitem-input-page' => 'صفحة:',
 	'wikibase-linkitem-invalidsite' => 'تم اختيار موقع غير معروف أو غير صحيح',
-	'wikibase-linkitem-confirmitem-text' => 'الصفحة التي قمت باختيارها مرتبط بالفعل إلى [ $1  عنصر في المستودع المركزي للبيانات لدينا]. الرجاء التأكد من أن الصفحات المبينة أدناه هي تلك التي تريد ربطها مع هذه الصفحة.',
+	'wikibase-linkitem-confirmitem-text' => 'الصفحة التي قمت باختيارها مرتبط بالفعل إلى [ $1  عنصر في المستودع المركزي للبيانات لدينا]. الرجاء التأكد من أن الصفحات المبينة أدناه هي تلك التي تريد ربطها مع هذه الصفحة.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'أكّد',
 	'wikibase-linkitem-not-loggedin-title' => 'يتوجب عليك تسجيل الدخول',
 	'wikibase-linkitem-not-loggedin' => 'لاستخدام هذه الميزة انت بحاجة إلى تسجيل الدخول على هذه الويكي وعلى [ $1   مستودع البيانات المركزي].',
@@ -1270,7 +1273,7 @@ $messages['fa'] = array(
 	'specialpages-group-wikibaseclient' => 'مشتری ویکی‌داده',
 	'tooltip-t-wikibase' => 'پیوند به آیتم متصل به مخزن داده',
 	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.',
-	'wikibase-after-page-move-queued' => '[ $1 آیتم ویکی‌داده] مرتبط با این صفحه به زودی به طور خودکار به‌روز رسانی می‌شود.',
+	'wikibase-after-page-move-queued' => '[$1 آیتم ویکی‌داده] مرتبط با این صفحه به زودی به طور خودکار به‌روز رسانی می‌شود.',
 	'wikibase-comment-remove' => 'پیوند آیتم ویکی‌داده حذف گردید. پیوند زبان حذف شد.',
 	'wikibase-comment-linked' => 'یک آیتم ویکی‌داده به این صفحه پیوند دارد.',
 	'wikibase-comment-unlink' => 'این صفحه به ویکی‌داده پیوند ندارد. پیوند زبان حذف شد.',
@@ -2681,6 +2684,7 @@ $messages['ms'] = array(
 $messages['mt'] = array(
 	'wikibase-client-desc' => 'Klijent għall-estensjoni Wikibase',
 	'specialpages-group-wikibaseclient' => 'Klijent tal-Wikidata',
+	'wikibase-after-page-move-queued' => "L-[$1 element ta' Wikidata] assoċjat ma' din il-paġna se jiġi aġġornat awtomatikament dalwaqt.",
 	'wikibase-comment-update' => 'Ħoloq għal-lingwi aġġornati.', # Fuzzy
 	'wikibase-editlinks' => 'Immodifika l-ħoloq',
 	'wikibase-editlinkstitle' => 'Immodifika l-ħoloq interlingwi',
@@ -2778,6 +2782,10 @@ $messages['nds-nl'] = array(
 	'wikibase-property-notfound' => 'Eigenschap $1 niet evunnen.',
 	'wikibase-property-notsupportedyet' => 'Wikibase ondersteunt t eigenschapstype veur de eigenschap $1 nog niet.',
 	'wikibase-rc-hide-wikidata' => '$1 wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewarkingen laoten zien in "Leste wiezigingen"',
+	'wikibase-watchlist-show-changes-pref' => 'Wikidatabewarkingen laoten zien in joew volglieste',
+	'wikibase-error-serialize-error' => 'De gegevens konnen niet eserialiseerd wörden',
+	'wikibase-error-invalid-entity-id' => 't Op-egeven nummer is niet bekend in t systeem. Gebruuk n geldig nummer.',
 	'special-unconnectedpages' => 'Ziejen die niet ekoppeld bin an n onderwarp',
 	'wikibase-unconnectedpages-legend' => 'Instellingen veur ongekoppelde ziejen',
 	'wikibase-unconnectedpages-page' => 'Lieste beginnen mit zied:',
@@ -3111,9 +3119,13 @@ $messages['ro'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Trebuie să fiți autentificat',
 	'wikibase-property-notfound' => 'Proprietatea $1 nu a fost găsită.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Arată modificările de la Wikidata în lista cu schimbări recente',
+	'wikibase-watchlist-show-changes-pref' => 'Arată modificările de la Wikidata în lista dumneavoastră de pagini urmărite',
 	'wikibase-unconnectedpages-submit' => 'Du-te',
 	'wikibase-unconnectedpages-invalid-language' => '„$1” nu este un cod de limbă valid.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Doar pagini cu legături interlinguale',
+	'wikibase-pageinfo-entity-id-none' => 'Nimic',
+	'wikibase-property-render-error' => 'Nu s-a putut reda proprietatea $1: $2',
 );
 
 /** tarandíne (tarandíne)
