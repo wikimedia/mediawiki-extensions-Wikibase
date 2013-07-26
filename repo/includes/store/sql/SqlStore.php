@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use DBQueryError;
 
 /**
  * Implementation of the store interface using an SQL backend via MediaWiki's
@@ -132,7 +133,14 @@ class SqlStore implements Store {
 		foreach ( $pages as $pageRow ) {
 			$page = \WikiPage::newFromID( $pageRow->page_id );
 			$revision = \Revision::newFromId( $pageRow->page_latest );
-			$page->doEditUpdates( $revision, $GLOBALS['wgUser'] );
+			try {
+				$page->doEditUpdates( $revision, $GLOBALS['wgUser'] );
+			} catch ( DBQueryError $e ) {
+				wfLogWarning(
+					'editUpdateFailed for ' . $page->getId() . ' on revision ' .
+					$revision->getId() . ': ' . $e->getMessage()
+				);
+			}
 		}
 	}
 
