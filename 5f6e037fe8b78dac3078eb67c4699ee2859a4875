@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_d7cf978a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-26T16:21:21Z",
+      "side": 1,
+      "message": "added with",
+      "revId": "5f6e037fe8b78dac3078eb67c4699ee2859a4875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_f7d49b1f",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-26T16:21:21Z",
+      "side": 1,
+      "message": "new lines aren\u0027t expensive ;)",
+      "revId": "5f6e037fe8b78dac3078eb67c4699ee2859a4875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
