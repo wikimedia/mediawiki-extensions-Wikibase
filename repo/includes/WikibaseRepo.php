@@ -127,6 +127,21 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
+	 * @return DataValueFactory
+	 */
+	public function getDataValueFactory() {
+		$dataValueFactory = new DataValueFactory();
+
+		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
+			$dataValueFactory->registerDataValue( $type, $class );
+		}
+
+		return $dataValueFactory;
+	}
+
+	/**
+	 * @since 0.4
+	 *
 	 * @return EntityContentFactory
 	 */
 	public function getEntityContentFactory() {
