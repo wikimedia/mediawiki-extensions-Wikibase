@@ -2,10 +2,15 @@
 
 namespace Wikibase;
 
+use Closure;
 use OutOfBoundsException;
 
 /**
  * Class representing a collection of settings.
+ *
+ * @note: settings can be dynamic: if a setting is given as a closure, the closure will be
+ *        called to get the actual setting value the first time this setting is retrieved
+ *        using getSetting(). The closure is called with the SettingsArray as the only argument.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +33,7 @@ use OutOfBoundsException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SettingsArray extends \ArrayObject {
 
@@ -46,7 +52,26 @@ class SettingsArray extends \ArrayObject {
 			throw new OutOfBoundsException( 'Attempt to get non-existing setting "' . $settingName . '"' );
 		}
 
-		return $this[$settingName];
+		$value = $this[$settingName];
+
+		// Allow closures to be used for deferred evaluation
+		// of "magic" (dynamic) defaults.
+		if ( $value instanceof Closure ) {
+			$value = $value( $this );
+
+			if ( is_object( $value ) ) {
+				$logValue = 'instance of ' . get_class( $value );
+			} else {
+				$logValue = var_export( $value, true );
+			}
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': setting ' . $settingName . 'was given as a closure, resolve it to ' . $logValue );
+
+			// only eval once, then remember the value
+			$this->setSetting( $settingName, $value );
+		}
+
+		return $value;
 	}
 
 	/**
@@ -55,7 +80,9 @@ class SettingsArray extends \ArrayObject {
 	 * @since 0.1
 	 *
 	 * @param string $settingName
-	 * @param mixed $settingValue
+	 * @param mixed $settingValue The desired value. If this is a closure, the closure will be
+	 *        called to get the actual setting value the first time this setting is retrieved
+	 *        using getSetting(). The closure is called with this SettingsArray as the only argument.
 	 */
 	public function setSetting( $settingName, $settingValue ) {
 		$this[$settingName] = $settingValue;

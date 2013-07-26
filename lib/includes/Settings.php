@@ -89,7 +89,7 @@ class Settings extends SettingsArray {
 	 * @return mixed
 	 */
 	public static function get( $settingName ) {
-		return static::singleton()->offsetGet( $settingName );
+		return static::singleton()->getSetting( $settingName );
 	}
 
 }

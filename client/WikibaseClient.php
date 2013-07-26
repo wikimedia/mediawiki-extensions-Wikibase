@@ -35,6 +35,8 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.21c', '<' ) ) { // Needs to be 1
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.21 alpha or above.\n" );
 }
 
+define( 'WBC_DIR', __DIR__ );
+
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
 if ( !defined( 'WBL_VERSION' ) ) {
 	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
@@ -147,7 +149,6 @@ call_user_func( function() {
 	// extension hooks
 	$wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 	$wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
-	$wgHooks['SetupAfterCache'][]			                = '\Wikibase\ClientHooks::onSetupAfterCache';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';

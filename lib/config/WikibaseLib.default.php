@@ -68,7 +68,8 @@ return call_user_func( function() {
 		// In order to share caches between clients (and the repo),
 		// set a prefix based on the repo's name and WBL_VERSION
 		// or a similar version ID.
-		// @todo: generate the default programmatically, so it can automatically use the right repo ID.
+		// NOTE: WikibaseClient.default.php overrides this to depend
+		// on repoDatabase dynamically.
 		'sharedCacheKeyPrefix' => $GLOBALS['wgDBname'] . ':WBL/' . WBL_VERSION,
 
 		// The duration of the object cache, in seconds.

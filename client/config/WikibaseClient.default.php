@@ -30,26 +30,23 @@
  */
 
 
+use Wikibase\SettingsArray;
+
 return call_user_func( function() {
 	global $wgLanguageCode, $wgDBname;
 
 	$defaults = array(
 		'namespaces' => array(), // by default, include all namespaces; deprecated as of 0.4
 		'excludeNamespaces' => array(),
-		'repoUrl' => '//www.wikidata.org',
-		'repoScriptPath' => '/w',
-		'repoArticlePath' => '/wiki/$1',
 		'sort' => 'code',
 		'sortPrepend' => array(),
 		'alwaysSort' => false,
-		'siteGlobalID' => $wgDBname,
 		// @todo would be great to just get this from the sites stuff
 		// but we will need to make sure the caching works good enough
 		'siteLocalID' => $wgLanguageCode,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
 		'defaultClientStore' => null,
-		'repoDatabase' => null, // note: "false" means "local"!
 		// default for repo items in main namespace
 		'repoNamespaces' => array(
 			'wikibase-item' => '',
@@ -181,16 +178,82 @@ return call_user_func( function() {
 		),
 	);
 
-	// Repository is active on the local wiki, change defaults accordingly
-	if ( defined( 'WB_VERSION' ) ) {
-		$defaults['repoUrl'] = null; // initialized later
-		$defaults['repoArticlePath'] = null; // initialized later
-		$defaults['repoScriptPath'] = null; // initialized later
+	// Some defaults depend on information not available at this time.
+	// Especially, if the repository may be active on the local wiki, and
+	// we need to adjust some defaults accordingly.
+	// We use Closures to calculate such settings on the fly, the first time they
+	// are used. See SettingsArray::setSetting() for details.
 
-		// use the local database for direct repo access
-		$defaults['repoDatabase'] = false;
-		$defaults['changesDatabase'] = false;
-	}
+	//NOTE: when this is executed, WB_VERSION may not yet be defined, because
+	//      the repo extension has not yet been initialized. We need to defer the
+	//      check and do it inside the closures.
+	//      We use the pseudo-setting thisWikiIsTheRepo to store this information.
+	//      thisWikiIsTheRepo should really never be overwritten, except for testing.
+
+	$defaults['thisWikiIsTheRepo'] = function ( SettingsArray $settings ) {
+		// determine whether the repo extension is present
+		return defined( 'WB_VERSION' );
+	};
+
+	$defaults['repoUrl'] = function ( SettingsArray $settings ) {
+		// use $wgServer if this wiki is the repo, otherwise default to wikidata.org
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgServer'] : '//www.wikidata.org';
+	};
+
+	$defaults['repoArticlePath'] = function ( SettingsArray $settings ) {
+		// use $wgArticlePath if this wiki is the repo, otherwise default to /wiki/$1
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgArticlePath'] : '/wiki/$1';
+	};
+
+	$defaults['repoScriptPath'] = function ( SettingsArray $settings ) {
+		// use $wgScriptPath if this wiki is the repo, otherwise default to /w
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgScriptPath'] : '/w';
+	};
+
+	$defaults['repoDatabase'] = function ( SettingsArray $settings ) {
+		// Use false (meaning the local wiki's database) if this wiki is the repo,
+		// otherwise default to null (meaning we can't access the repo's DB directly).
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? false : null;
+	};
+
+	$defaults['changesDatabase'] = function ( SettingsArray $settings ) {
+		// Per default, the database for tracking changes is the repo's database.
+		// Note that the value for the repoDatabase setting may be calculated dynamically,
+		// see above.
+		return $settings->getSetting( 'repoDatabase' );
+	};
+
+	$defaults['siteGlobalID'] = function ( SettingsArray $settings ) {
+		// The database name is a sane default for the site ID.
+		// On Wikimedia sites, this is always correct.
+		return $GLOBALS['wgDBname'];
+	};
+
+	// Prefix to use for cache keys that should be shared among
+	// a wikibase repo and all its clients.
+	// In order to share caches between clients (and the repo)
+	// the default includes WBL_VERSION and the repo's DB name.
+	$defaults['sharedCacheKeyPrefix'] = function ( SettingsArray $settings ) {
+		// Per default, the database for tracking changes is the repo's database.
+		// Note that the value for the repoDatabase setting may be calculated dynamically,
+		// see above.
+
+		//NOTE: keep in sync with the default value for sharedCacheKeyPrefix defined
+		//      in WikibaseLib.default.php, since that's the key the repo is using per
+		//      default.
+
+		$repoId = $settings->getSetting( 'repoDatabase' );
+
+		if ( $repoId === false ) {
+			// false means the local wiki's DB (this is the case when the local wiki is the repo)
+			$repoId = $GLOBALS['wgDBname'];
+		} elseif ( $repoId === null ) {
+			// null means no direct access to the repo's DB, so use the repo's URL instead
+			$repoId = 'repoUrl:' . $settings->getSetting( 'repoUrl' );
+		}
+
+		return $repoId . ':WBL/' . WBL_VERSION;
+	};
 
 	return $defaults;
 } );
