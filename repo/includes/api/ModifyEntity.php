@@ -406,7 +406,9 @@ abstract class ModifyEntity extends ApiWikibase {
 				"This is used for detecting conflicts during save."
 			),
 			'summary' => array( 'Summary for the edit.',
-				"Will be prepended by an automatically generated comment."
+				"Will be prepended by an automatically generated comment. The length limit of the
+				autocomment together with the summary is 260 characters. Be aware that everything above that
+				limit will be cut off."
 			),
 			'type' => array( 'A specific type of entity.',
 				"Will default to 'item' as this will be the most common type."
