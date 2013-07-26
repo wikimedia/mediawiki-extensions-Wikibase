@@ -58,6 +58,8 @@ $messages['en'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase does not yet support property type for $1 property.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata edit',
 	'wikibase-watchlist-show-changes-pref' => 'Show Wikidata edits in your watchlist',
 	'wikibase-error-serialize-error' => 'Failed to serialize data.',
 	'wikibase-error-invalid-entity-id' => 'The ID entered is unknown to the system. Please use a valid entity ID.',
@@ -166,6 +168,8 @@ Parameters:
 Parameters:
 * $1 - a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 	'wikibase-rc-show-wikidata-pref' => 'Option in the recent changes section of preferences to show wikibase changes by default in recent changes.',
+	'wikibase-rc-wikibase-edit-letter' => "Very short form of \"'''wikidata edit'''\". Used in [[Special:RecentChanges]] and [[Special:Watchlist]].",
+	'wikibase-rc-wikibase-edit-title' => 'Tooltip for {{msg-mw|wikibase-rc-wikibase-edit-letter}}',
 	'wikibase-watchlist-show-changes-pref' => 'Option in the watchlist section of preferences to always show wikibase edits by default in the watchlist.',
 	'wikibase-error-serialize-error' => 'Generic error for when entity data failed to serialize or cannot be handled.',
 	'wikibase-error-invalid-entity-id' => 'Generic error message when an invalid entity ID was entered.',

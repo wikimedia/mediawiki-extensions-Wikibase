@@ -18,6 +18,7 @@ class WatchlistPage
   link(:wlFirstResultLabelLink, :xpath => "//ul[@class='special']/li/a[3]")
   link(:wlFirstResultIDLink, :xpath => "//ul[@class='special']/li/a[4]")
   link(:wlFirstResultUserLink, :xpath => "//ul[@class='special']/li/a[5]")
+  element(:wlFirstResultWDFlag, :abbr, :xpath => "//ul[@class='special']/li/abbr")
   span(:clientFirstResultComment, :xpath => "//ul[@class='special']/li/span[contains(@class,'comment')]")
 
   def hide_wikibase

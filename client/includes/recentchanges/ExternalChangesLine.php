@@ -100,6 +100,7 @@ class ExternalChangesLine {
 		}
 
 		$line .= self::changeSeparator();
+		$line .= $cl->recentChangesFlags( array( 'wikibase-edit' => true ), '' ) . ' ';
 
 		$title = $rc->getTitle();
 		$line .= \Linker::link( $title );
