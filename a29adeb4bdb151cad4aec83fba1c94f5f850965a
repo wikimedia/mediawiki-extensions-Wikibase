@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_c148b98e",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-26T11:19:32Z",
+      "side": 1,
+      "message": "Use wfLogWarning, so it shows up in production logs. Also, use $e-\u003egetMessage() instead of guessing what the exception means.",
+      "revId": "a29adeb4bdb151cad4aec83fba1c94f5f850965a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_01438170",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-26T11:19:32Z",
+      "side": 1,
+      "message": "see above",
+      "revId": "a29adeb4bdb151cad4aec83fba1c94f5f850965a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
