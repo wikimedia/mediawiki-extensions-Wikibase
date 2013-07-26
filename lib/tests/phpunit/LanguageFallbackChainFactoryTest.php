@@ -34,13 +34,31 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		}
 	}
 
+	private function setupDisabledVariants( $disabledVariants ) {
+		global $wgDisabledVariants, $wgLangObjCacheSize;
+		$originalDisabledVariants = $wgDisabledVariants;
+		$originalLangObjCacheSize = $wgLangObjCacheSize;
+		if ( $disabledVariants ) {
+			$wgDisabledVariants = $disabledVariants;
+		}
+		$wgLangObjCacheSize = 0;
+		return array( $originalDisabledVariants, $originalLangObjCacheSize );
+	}
+
+	private function clearDisabledVariants( $state ) {
+		global $wgDisabledVariants, $wgLangObjCacheSize;
+		list( $wgDisabledVariants, $wgLangObjCacheSize ) = $state;
+	}
+
 	/**
 	 * @group WikibaseLib
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguage( $lang, $mode, $expected ) {
+	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = null ) {
+		$state = $this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode )->getFallbackChain();
+		$this->clearDisabledVariants( $state );
 		$this->assertChainEquals( $expected, $chain );
 	}
 
@@ -48,9 +66,11 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	 * @group WikibaseLib
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguageCode( $lang, $mode, $expected ) {
+	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = null ) {
+		$state = $this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguageCode( $lang, $mode )->getFallbackChain();
+		$this->clearDisabledVariants( $state );
 		$this->assertChainEquals( $expected, $chain );
 	}
 
@@ -80,6 +100,16 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 				array( 'zh', 'zh-my' ),
 				'en',
 			) ),
+			array( 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, array(
+				'zh',
+				array( 'zh', 'zh-hans' ),
+				array( 'zh', 'zh-hant' ),
+				array( 'zh', 'zh-cn' ),
+				array( 'zh', 'zh-tw' ),
+				array( 'zh', 'zh-hk' ),
+				array( 'zh', 'zh-sg' ),
+				'en',
+			), array( 'zh-mo', 'zh-my' ) ),
 			array( 'zh', LanguageFallbackChainFactory::FALLBACK_SELF, array( 'zh' ) ),
 			array( 'zh', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array(
 				array( 'zh', 'zh-hans' ),
@@ -109,6 +139,16 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 				array( 'zh-cn', 'zh-tw' ),
 				'en',
 			) ),
+			array( 'zh-cn', LanguageFallbackChainFactory::FALLBACK_ALL, array(
+				'zh-cn',
+				array( 'zh-cn', 'zh-sg' ),
+				array( 'zh-cn', 'zh' ),
+				array( 'zh-cn', 'zh-hant' ),
+				array( 'zh-cn', 'zh-hk' ),
+				array( 'zh-cn', 'zh-tw' ),
+				'zh-hans',
+				'en',
+			), array( 'zh-mo', 'zh-my', 'zh-hans' ) ),
 			array( 'zh-cn', ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				array( 'zh-cn', 'zh-hans', 'en' )
 			),
@@ -201,14 +241,16 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	 * @group WikibaseLib
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected ) {
+	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected, $disabledVariants = null ) {
 		if ( $mode !== LanguageFallbackChainFactory::FALLBACK_ALL ) {
 			$this->assertTrue( true );
 			return;
 		}
+		$state = $this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$anon = new \User();
 		$chain = $factory->newFromUserAndLanguageCode( $anon, $lang )->getFallbackChain();
+		$this->clearDisabledVariants( $state );
 		$this->assertChainEquals( $expected, $chain );
 	}
 

@@ -157,7 +157,7 @@ class LanguageFallbackChainFactory {
 				}
 
 				foreach ( $variants as $variant ) {
-					if ( isset( $fetched[$variant] ) ) {
+					if ( isset( $fetched[$variant] ) || !$parentLanguage->hasVariant( $variant ) ) {
 						continue;
 					}
 
