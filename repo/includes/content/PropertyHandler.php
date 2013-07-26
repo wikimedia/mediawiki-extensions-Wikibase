@@ -104,5 +104,14 @@ class PropertyHandler extends EntityHandler {
 	public function getSpecialPageForCreation() {
 		return 'NewProperty';
 	}
+
+	/**
+	 * Returns Property::ENTITY_TYPE
+	 *
+	 * @return string
+	 */
+	public function getEntityType() {
+		return Property::ENTITY_TYPE;
+	}
 }
 
