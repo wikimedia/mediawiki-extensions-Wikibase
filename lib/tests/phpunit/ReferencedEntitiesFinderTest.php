@@ -55,11 +55,11 @@ use Wikibase\Reference;
  */
 class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 
-	public function claimsProvider() {
+	public function snaksProvider() {
 		$argLists = array();
 
 		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p27 = new EntityId( Property::ENTITY_TYPE, 27 );
 		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
 
 		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
@@ -71,41 +71,41 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 			"empty" );
 
 		$argLists[] = array(
-			array( new PropertyNoValueSnak( $p42 ) ),
-			array( $p42 ),
+			array( new PropertyNoValueSnak( $p27 ) ),
+			array( $p27 ),
 			"Property" );
 
 		$argLists[] = array(
-			array( new PropertySomeValueSnak( $p42 ) ),
-			array( $p42 ),
+			array( new PropertySomeValueSnak( $p27 ) ),
+			array( $p27 ),
 			"PropertySomeValueSnak" );
 
 		$argLists[] = array(
-			array( new PropertyValueSnak( $p42, new StringValue( 'onoez' )  ) ),
-			array( $p42 ),
+			array( new PropertyValueSnak( $p27, new StringValue( 'onoez' )  ) ),
+			array( $p27 ),
 			"PropertyValueSnak with string value" );
 
 		$argLists[] = array(
-			array( new PropertyValueSnak( $p42, $q23 ) ),
-			array( $p42, $q23 ),
+			array( new PropertyValueSnak( $p27, $q23 ) ),
+			array( $p27, $q23 ),
 			"PropertyValueSnak with EntityId" );
 
 		$argLists[] = array(
 			array(
 				new PropertyValueSnak( $p11, $q23 ),
-				new PropertyNoValueSnak( $p42 ),
+				new PropertyNoValueSnak( $p27 ),
 				new PropertySomeValueSnak( $p44 ),
 				new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ),
 				new PropertyValueSnak( $p44, $q24 ),
 			),
-			array( $p11, $q23, $p42, $p44, $q24 ),
+			array( $p11, $q23, $p27, $p44, $q24 ),
 			"PropertyValueSnak with EntityId" );
 
 		return $argLists;
 	}
 
 	/**
-	 * @dataProvider claimsProvider
+	 * @dataProvider snaksProvider
 	 *
 	 * @param Snak[]     $snaks
 	 * @param EntityId[] $expected
