@@ -171,7 +171,7 @@ abstract class ApiWikibase extends \ApiBase {
 			}
 
 			if ( in_array( 'url', $options ) ) {
-				$serializerOptions->addProp( 'sitelinks/url' );
+				$serializerOptions->addProp( 'sitelinks/urls' );
 			}
 
 			if ( in_array( 'removed', $options ) ) {

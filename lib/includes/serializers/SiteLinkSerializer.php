@@ -83,7 +83,7 @@ class SiteLinkSerializer extends SerializerObject {
 
 		$serialization = array();
 
-		$includeUrls = in_array( 'sitelinks/url', $this->options->getProps() );
+		$includeUrls = in_array( 'sitelinks/urls', $this->options->getProps() );
 
 		foreach ( $this->sortSiteLinks( $siteLinks ) as $link ) {
 			$response = array(
