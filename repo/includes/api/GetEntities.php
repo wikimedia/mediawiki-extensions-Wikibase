@@ -165,6 +165,8 @@ class GetEntities extends ApiWikibase {
 				$options->setLanguages( $params['languages'] );
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );
+				#print_r($options->getProps());
+				#die();
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
 
 				$serializerFactory = new SerializerFactory();
