@@ -16,6 +16,40 @@
       "revId": "eb26ba8497668b9daa04100d215ee74f307324d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_9cc1b485",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-26T12:14:18Z",
+      "side": 1,
+      "message": "spaces :)",
+      "revId": "eb26ba8497668b9daa04100d215ee74f307324d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_7cc4f093",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-26T12:14:18Z",
+      "side": 1,
+      "message": "you could use instead of this message or in addition:\n\n$e-\u003egetMessage() \n\nthis gets the exception message",
+      "revId": "eb26ba8497668b9daa04100d215ee74f307324d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
