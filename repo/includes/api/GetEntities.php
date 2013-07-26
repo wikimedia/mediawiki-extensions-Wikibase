@@ -12,6 +12,8 @@ use Wikibase\Utils;
 use Wikibase\StoreFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\Settings;
+use Wikibase\LibRegistry;
 use Wikibase\EntityContentFactory;
 
 /**
@@ -35,10 +37,16 @@ class GetEntities extends ApiWikibase {
 	 */
 	protected $stringNormalizer;
 
+	/**
+	 * @var \Wikibase\EntityIdParser
+	 */
+	protected $entityIdParser;
+
 	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		$this->entityIdParser = LibRegistry::getDefaultInstance()->getEntityIdParser();
 	}
 
 	/**
@@ -61,7 +69,7 @@ class GetEntities extends ApiWikibase {
 			$params['ids'] = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
 		}
 
-		$params['ids'] = array_unique( $params['ids'] );
+		$params['ids'] = $this->uniqueEntities( $params['ids'] );
 
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$props = array_flip( array_values( $params['props'] ) );
@@ -88,6 +96,28 @@ class GetEntities extends ApiWikibase {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Makes an arry of entity ids unique after applaying normalization.
+	 *
+	 * @param array $entityIds
+	 *
+	 * @return array
+	 */
+	protected function uniqueEntities( $entityIds ) {
+		$ids = array();
+		foreach ( $entityIds as $entityId ) {
+			try {
+				$id = $this->entityIdParser->parse( $entityId );
+				$ids[] = $id->getPrefixedId();
+			}
+			catch ( \ValueParsers\ParseException $parseException ) {
+				// This will error below
+				$ids[] = null;
+			}
+		}
+		return array_unique( $ids );
 	}
 
 	/**
