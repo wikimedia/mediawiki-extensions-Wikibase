@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
+use DataValues\DataValueFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\EntityContentFactory;
@@ -207,11 +208,13 @@ class WikibaseRepo {
 			$snakFactory = new SnakFactory();
 			$dataTypeLookup = $this->getPropertyDataTypeLookup();
 			$dataTypeFactory = $this->getDataTypeFactory();
+			$dataValueFactory = DataValueFactory::singleton();
 
 			$this->snakConstructionService = new SnakConstructionService(
 				$snakFactory,
 				$dataTypeLookup,
-				$dataTypeFactory );
+				$dataTypeFactory,
+				$dataValueFactory );
 		}
 
 		return $this->snakConstructionService;
