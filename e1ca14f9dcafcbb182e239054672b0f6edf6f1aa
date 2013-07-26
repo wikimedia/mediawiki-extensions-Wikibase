@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_5c71ec75",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-26T12:17:41Z",
+      "side": 1,
+      "message": "Missing a line between the namespace and use!",
+      "revId": "e1ca14f9dcafcbb182e239054672b0f6edf6f1aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
