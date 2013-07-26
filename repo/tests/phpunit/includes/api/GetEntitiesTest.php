@@ -546,10 +546,10 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 
 		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
 
-		// TODO: assert the URL attributes are present
-
-		// FIXME: the url attirbutes are not present as the urls are not
-		// known due to this test not inserting sites first as it should
+		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
+			$this->assertArrayHasKey( 'url', $link, "SiteLinks in the result must have the 'url' key set!" );
+			$this->assertNotEmpty( $link['url'], "The value of the 'url' key is not allowed to be empty!" );
+		}
 	}
 
 	function provideSitelinkSorting() {
