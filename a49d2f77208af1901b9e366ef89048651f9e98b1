@@ -16,6 +16,24 @@
       "revId": "a49d2f77208af1901b9e366ef89048651f9e98b1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_bc067820",
+        "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-26T15:01:57Z",
+      "side": 1,
+      "message": "This tests the B/C mode of GetSiteLinkDiff, that is, it tests the handling of deprecated data formats. This code path triggers a warning, so we notice if we use the deprecated form in tests or on test systems. However, we don\u0027t want *this* test to fail because it hits the B/C path, so we disable the warnings.",
+      "parentUuid": "49c305cb_8baa1f18",
+      "revId": "a49d2f77208af1901b9e366ef89048651f9e98b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
