@@ -30,15 +30,23 @@
 		vv.experts.TimeValue
 	);
 
-	expertProvider.registerExpert(
-		dt.getDataType( 'commonsMedia' ),
-		vv.experts.CommonsMediaType
-	);
+	// Experts for values for certain data types:
+	// Those data types might not be defined, so check for them first.
+	var commonsMediaType = dt.getDataType( 'commonsMedia' );
+	if( commonsMediaType ) {
+		expertProvider.registerExpert(
+			commonsMediaType,
+			vv.experts.CommonsMediaType
+		);
+	}
 
-	expertProvider.registerExpert(
-		dt.getDataType( 'url' ),
-		vv.experts.UrlType
-	);
+	var urlType = dt.getDataType( 'url' );
+	if( urlType ) {
+		expertProvider.registerExpert(
+			urlType,
+			vv.experts.UrlType
+		);
+	}
 
 	/**
 	 * Object representing the MeidaWiki "ValueView" extension.
