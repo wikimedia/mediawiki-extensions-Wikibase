@@ -665,6 +665,7 @@ $messages['ce'] = array(
 	'wikibase-client-desc' => 'Wikibase шорян клиент',
 	'specialpages-group-wikibaseclient' => 'Викихаамашан клиент',
 	'wikibase-after-page-move' => 'Викихаамашчохь [$1 карлаякха] хьой цӀе хийцина агӀона хьажориг.',
+	'wikibase-after-page-move-queued' => 'ХӀара агӀо чохь йолу [$1 Викихаамаш чур элемент] ша карлаяьккина хила мега.',
 	'wikibase-comment-linked' => 'Викихаамашан элемент хӀокху агӀонах тесна.',
 	'wikibase-comment-update' => 'Викихаамашан элемент хийцина',
 	'wikibase-comment-sitelink-add' => 'Юкъарвики-хьажориг тӀетоьхна: $1',
@@ -714,6 +715,7 @@ $messages['ce'] = array(
 $messages['ckb'] = array(
 	'tooltip-t-wikibase' => 'بەستەر بۆ بەندی خەزێنەی دراوەی پەیوەندیدار',
 	'wikibase-after-page-move' => 'باشترە ھەروەھا بەندی ویکیدراوەی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
+	'wikibase-after-page-move-queued' => '[$1 بەندی ویکیدراوە]ی پەیوەندیدار بەم پەڕەیەوە بەم زووانە بە شێوەی خۆگەڕ نوێ دەکرێتەوە.',
 	'wikibase-comment-remove' => 'بەندی ویکیدراوەی پەیوەندیدار سڕایەوە. بەستەرەکانی زمان لابران.',
 	'wikibase-comment-linked' => 'بەندێکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
 	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بەندی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
@@ -1211,7 +1213,9 @@ $messages['es'] = array(
 $messages['et'] = array(
 	'wikibase-client-desc' => 'Lisa Vikibaas klient',
 	'specialpages-group-wikibaseclient' => 'Vikiandmete klient',
+	'tooltip-t-wikibase' => 'Lingi andmehoidla seonduva üksusega',
 	'wikibase-after-page-move' => 'Võid [$1 värskendada] ka vastavat Vikiandmete üksust, et teisaldatud lehekülje keelelingid jääksid töökorda.',
+	'wikibase-after-page-move-queued' => 'Selle leheküljega seotud [$1 Vikiandmete üksus] uuendatakse peagi automaatselt.',
 	'wikibase-comment-remove' => 'Vastav Vikiandmete üksus on kustutatud. Keelelingid eemaldatud.',
 	'wikibase-comment-linked' => 'Vikiandmete üksus viitab nüüd sellele leheküljele.',
 	'wikibase-comment-unlink' => 'Vikiandmete üksus ei viita enam sellele leheküljele. Keelelingid eemaldatud.',
@@ -1273,7 +1277,7 @@ $messages['fa'] = array(
 	'specialpages-group-wikibaseclient' => 'مشتری ویکی‌داده',
 	'tooltip-t-wikibase' => 'پیوند به آیتم متصل به مخزن داده',
 	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.',
-	'wikibase-after-page-move-queued' => '[$1 آیتم ویکی‌داده] مرتبط با این صفحه به زودی به طور خودکار به‌روز رسانی می‌شود.',
+	'wikibase-after-page-move-queued' => '[$1 آیتم ویکی‌داده] مرتبط با این صفحه به زودی به طور خودکار به‌روزرسانی می‌شود.',
 	'wikibase-comment-remove' => 'پیوند آیتم ویکی‌داده حذف گردید. پیوند زبان حذف شد.',
 	'wikibase-comment-linked' => 'یک آیتم ویکی‌داده به این صفحه پیوند دارد.',
 	'wikibase-comment-unlink' => 'این صفحه به ویکی‌داده پیوند ندارد. پیوند زبان حذف شد.',
@@ -1334,6 +1338,7 @@ $messages['fi'] = array(
 	'wikibase-client-desc' => 'Wikibase-laajennuksen asiakasohjelma',
 	'specialpages-group-wikibaseclient' => 'Wikidata-asiakasohjelma',
 	'wikibase-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
+	'wikibase-after-page-move-queued' => 'Tähän sivuun liitetty [$1 Wikidata-kohde] päivitetään pian automaattisesti.',
 	'wikibase-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
 	'wikibase-comment-linked' => 'Wikidata-kohde liitettiin tähän sivuun.',
 	'wikibase-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',
@@ -2126,17 +2131,17 @@ $messages['ka'] = array(
  */
 $messages['kk-cyrl'] = array(
 	'specialpages-group-wikibaseclient' => 'Уикидерек тұтынушы',
-	'tooltip-t-wikibase' => 'Сілтеме дерек қойма элементімен байланысты',
+	'tooltip-t-wikibase' => 'Сілтеме дерек қойма данасымен байланысты',
 	'wikibase-comment-remove' => 'Байланысқан Уикидерек элементі жойылды. Тіл сілтемелері алынып тасталды.',
 	'wikibase-comment-linked' => 'Уикидерек элементі бұл бетке сілтенді.',
 	'wikibase-comment-unlink' => 'Бұл бет Уикидерек элементінен сілтенілмеді. Тіл сілтемелері алынып тасталды.',
 	'wikibase-comment-restore' => 'Байланысқан Уикидерек элементі жойылмады. Тіл сілтемелері қалпына келтірілді.',
-	'wikibase-comment-update' => 'Уикидерек элементі өзгертілді',
+	'wikibase-comment-update' => 'Уикидерек данасын өзгертті',
 	'wikibase-comment-sitelink-add' => 'Тіл сілтемесі қосылды: $1',
-	'wikibase-comment-sitelink-change' => 'Тіл сілтемесі $1 дегеннен $2 дегенге өзгертілді',
-	'wikibase-comment-sitelink-remove' => 'Тіл сілтемесі алынып тасталды: $1',
-	'wikibase-comment-multi' => '$1 {{PLURAL:$1|өзгеріс|өзгерістер}}',
-	'wikibase-dataitem' => 'Дерек элементі',
+	'wikibase-comment-sitelink-change' => 'Тіл сілтемесі $1 дегеннен $2 дегенге өзгертті',
+	'wikibase-comment-sitelink-remove' => 'Тіл сілтемесін алып тастады: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|өзгеріс|өзгеріс}}',
+	'wikibase-dataitem' => 'Дерек данасы',
 	'wikibase-editlinks' => 'Сілтемелерді өңдеу',
 	'wikibase-editlinkstitle' => 'Тіларалық сілтемелерді өңдеу',
 	'wikibase-linkitem-addlinks' => 'Сілтемелер қосу',
@@ -2151,21 +2156,21 @@ $messages['kk-cyrl'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Құптау',
 	'wikibase-linkitem-not-loggedin-title' => 'Сіз кіруіңіз керек',
 	'wikibase-linkitem-not-loggedin' => 'Сіз бұл уикиге кіруіңіз керек және  [$1 орталық дерек қоймасында] бұл мүмкіндікті қолдану',
-	'wikibase-linkitem-success-create' => 'Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған элементердегі қамтылған сілтемелерді таба аласыз.',
+	'wikibase-linkitem-success-create' => 'Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған даналардағы қамтылған сілтемелерді таба аласыз.',
 	'wikibase-linkitem-success-link' => 'Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған элементердегі қамтылған сілтемелерді таба аласыз.',
 	'wikibase-property-notfound' => '$1 сипаты табылмады.',
 	'wikibase-property-notsupportedyet' => 'Уикиқор $1 түріндегі сипаттарды қолдамайды.',
 	'wikibase-rc-hide-wikidata' => '$1 Уикидерек',
 	'wikibase-rc-show-wikidata-pref' => 'Уикидерек өңдемелерін жуықтағы өзгерістерден көрсету',
 	'wikibase-watchlist-show-changes-pref' => 'Уикидерек өңдемелерін бақылау тізіміңізден көрсету',
-	'special-unconnectedpages' => 'Беттер элементтерге байланыспады',
+	'special-unconnectedpages' => 'Беттер даналарға байланыспады',
 	'wikibase-unconnectedpages-legend' => 'Байланыспаған беттер параметрлері',
 	'wikibase-unconnectedpages-page' => 'Беттегі тізім нәтижелерін бастау:',
 	'wikibase-unconnectedpages-submit' => 'Өту',
-	'wikibase-unconnectedpages-invalid-language' => '"$1" жарамсыз тіл коды емес.',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" жарамды тіл коды емес.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Тек тіларалық сілтемелер беттері',
-	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|тіларалықсілтеме|тіларалықсілтемелер}} бетінде)',
-	'wikibase-pageinfo-entity-id' => 'Уикидерек элемент ID',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|тіларалықсілтеме|тіларалықсілтеме}} бетінде)',
+	'wikibase-pageinfo-entity-id' => 'Уикидерек данасы ID',
 	'wikibase-pageinfo-entity-id-none' => 'Ешқандай',
 );
 
@@ -2525,7 +2530,7 @@ $messages['mk'] = array(
 	'wikibase-linkitem-close' => 'Затвори го дијалогот и превчитај ја страницата',
 	'wikibase-linkitem-failure' => 'Се појави непозната грешка при обидот да ја сврзам дадената страница.',
 	'wikibase-linkitem-title' => 'Сврзување со страница',
-	'wikibase-linkitem-linkpage' => 'Сврзи со страница',
+	'wikibase-linkitem-linkpage' => 'Сврзи со страницата',
 	'wikibase-linkitem-selectlink' => 'Одберете вики и страница што сакате да ја сврзете.',
 	'wikibase-linkitem-input-site' => 'Јазици:',
 	'wikibase-linkitem-input-page' => 'Страница:',
@@ -3295,6 +3300,7 @@ $messages['sk'] = array(
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Milicevic01
  * @author Nikola Smolenski
  * @author Rancher
  * @author Милан Јелисавчић
@@ -3313,6 +3319,7 @@ $messages['sr-ec'] = array(
 	'wikibase-comment-sitelink-change' => 'Веза на језику промењена са $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Уклоњена веза за језик: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|измена}}',
+	'wikibase-dataitem' => 'Ставка на Википодацима',
 	'wikibase-editlinks' => 'Уреди везе',
 	'wikibase-editlinkstitle' => 'Уређивање међујезичких веза',
 	'wikibase-linkitem-addlinks' => 'Додај везе',
@@ -3467,12 +3474,14 @@ $messages['tr'] = array(
  * @author Microcell
  * @author NickK
  * @author RLuts
+ * @author Sergento
  * @author Ата
  */
 $messages['uk'] = array(
 	'wikibase-client-desc' => 'Клієнт для розширення Wikibase',
 	'specialpages-group-wikibaseclient' => 'Клієнт Вікіданих',
 	'wikibase-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
+	'wikibase-after-page-move-queued' => "Пов'язаний з цією сторінкою [$1 елемент Вікіданих] буде невдовзі автоматично оновлено.",
 	'wikibase-comment-remove' => "Пов'язаний елемент Вікіданих видалений. Мовні посилання видалені.",
 	'wikibase-comment-linked' => 'Елемент Вікіданих посилався на цю сторінку.',
 	'wikibase-comment-unlink' => "Ця сторінка була від'єднана від елемента Вікіданих. Мовні посилання видалені.",
@@ -3752,21 +3761,25 @@ $messages['yue'] = array(
  * @author Li3939108
  * @author Liangent
  * @author Linforest
+ * @author Liuxinyu970226
  * @author Shizhao
  * @author Stevenliuyi
+ * @author Xiaomingyan
  * @author Yfdyh000
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
 	'wikibase-client-desc' => 'Wikibase扩展客户端',
 	'specialpages-group-wikibaseclient' => '维基数据客户端',
+	'tooltip-t-wikibase' => '链接到已连接的数据存储库项',
 	'wikibase-after-page-move' => '您还可以[$1 更新]关联的维基数据项，使其链接至移动后的页面。',
+	'wikibase-after-page-move-queued' => '[$1 维基数据项]及其相关页面将很快自动更新。',
 	'wikibase-comment-remove' => '关联的维基数据项已删除。跨语言链接已移除。',
 	'wikibase-comment-linked' => '一个维基数据项已链接至此页面。',
 	'wikibase-comment-unlink' => '本页已解除至维基数据项的链接。跨语言链接已移除。',
 	'wikibase-comment-restore' => '关联的维基数据项已还原。跨语言链接已恢复。',
 	'wikibase-comment-update' => '维基数据项已变更',
-	'wikibase-comment-sitelink-add' => '语言链接已添加：$1',
+	'wikibase-comment-sitelink-add' => '语言链接添加：$1',
 	'wikibase-comment-sitelink-change' => '语言链接从$1更改为$2',
 	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
 	'wikibase-comment-multi' => '$1个更改',
@@ -3783,7 +3796,7 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-input-site' => '语言：',
 	'wikibase-linkitem-input-page' => '页面：',
 	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
-	'wikibase-linkitem-confirmitem-text' => '您所选的页面已与[$1 中央数据库中的其他项]链接。请确认如下所示的都是您想要与此页面相链接的页面。', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => '您所选的页面已与[$1 中央数据库中的其他项]链接。请确认如下所示的{{PLURAL:$2|page|页面}}{{PLURAL:$2|is|均为}}您想要与此页{{PLURAL:$2|one|相连接的}}。',
 	'wikibase-linkitem-confirmitem-button' => '确认',
 	'wikibase-linkitem-not-loggedin-title' => '您必须登录',
 	'wikibase-linkitem-not-loggedin' => '您必须在此维基和[$1 中央数据存储库]上登录才能使用此功能。',
@@ -3794,6 +3807,7 @@ $messages['zh-hans'] = array(
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示维基数据的编辑',
+	'wikibase-error-serialize-error' => '无法序列化数据。',
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
 	'special-unconnectedpages' => '未连接到项的页面',
 	'wikibase-unconnectedpages-legend' => '未连接页面的选项',
@@ -3802,9 +3816,10 @@ $messages['zh-hans'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
 	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',
 	'wikibase-unconnectedpages-iwdata-label' => '仅含有跨语言链接的页面',
-	'wikibase-unconnectedpages-format-row' => '（该页面有$1个跨语言链接）', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '(该页面有$1个{{PLURAL:$1|interlanguage link|跨语言连接}})',
 	'wikibase-pageinfo-entity-id' => '维基数据项ID',
 	'wikibase-pageinfo-entity-id-none' => '无',
+	'wikibase-property-render-error' => '无法呈现属性$1：$2',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
