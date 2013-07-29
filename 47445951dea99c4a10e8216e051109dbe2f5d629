@@ -16,6 +16,24 @@
       "revId": "47445951dea99c4a10e8216e051109dbe2f5d629",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_865a3a4c",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.wbtooltip.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-29T12:00:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9845590_9c71a879",
+      "revId": "47445951dea99c4a10e8216e051109dbe2f5d629",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
