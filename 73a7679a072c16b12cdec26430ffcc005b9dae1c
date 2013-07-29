@@ -16,6 +16,24 @@
       "revId": "73a7679a072c16b12cdec26430ffcc005b9dae1c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_66fa96bc",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbareditgroup.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-29T08:46:03Z",
+      "side": 1,
+      "message": "Not sure if we really need to overwrite the tooltip message. An \"editing is restricted\" tooltip is already assigned to the buttons. Simply removed the section for now. If overwriting the tooltip is regarded necessary, the section may be put into entityViewInit.",
+      "parentUuid": "c9845590_1cd3d860",
+      "revId": "73a7679a072c16b12cdec26430ffcc005b9dae1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
