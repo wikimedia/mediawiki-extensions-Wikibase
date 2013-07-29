@@ -46,15 +46,6 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
 }
 
-if ( defined( 'WBC_VERSION' ) ) {
-	// TODO: needed because WikibaseClient.defaults.php depends on WB_VERSION to know whether the
-	// repo is configured. Should be removed as soon as we change Settings to apply defaults
-	// "late", that is, when merging settings, after setup is complete.
-
-	throw new Exception( "Bad initialization order: When running the Wikibase repository extension and the "
-		. "WikibaseClient extension on the same wiki, WikibaseClient has to be included AFTER the repository." );
-}
-
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
 	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
