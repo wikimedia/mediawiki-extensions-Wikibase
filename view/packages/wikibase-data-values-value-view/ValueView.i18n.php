@@ -191,6 +191,29 @@ $messages['ca'] = array(
 	'valueview-expert-emptyvalue-empty' => 'buit',
 );
 
+/** Czech (česky)
+ * @author Mormegil
+ */
+$messages['cs'] = array(
+	'valueview-desc' => 'Komponenty uživatelského rozhraní pro zobrazování a editaci datových hodnot',
+	'valueview-expert-advancedadjustments' => 'pokročilé úpravy',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Zpracování hodnot „$1“ není dosud podporováno.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Zpracování hodnot datového typu „$1“ není dosud podporováno.',
+	'valueview-expert-emptyvalue-empty' => 'prázdná',
+	'valueview-expert-globecoordinateinput-precision' => 'Přesnost:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'gregoriánský',
+	'valueview-expert-timevalue-calendar-julian' => 'juliánský',
+	'valueview-expert-timeinput-precision' => 'Přesnost:',
+	'valueview-expert-timeinput-calendar' => 'Kalendář:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(gregoriánský kalendář)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(juliánský kalendář)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; změnit na gregoriánský',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; změnit na juliánský',
+	'valueview-preview-label' => 'bude zobrazeno jako:',
+	'valueview-preview-novalue' => 'nebyla rozpoznána platná hodnota',
+	'valueview-listrotator-auto' => 'automaticky',
+);
+
 /** Welsh (Cymraeg)
  * @author Lloffiwr
  */
@@ -437,6 +460,25 @@ $messages['hsb'] = array(
  */
 $messages['hu'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'A(z) „$1” típusú adatokat még nem támogatjuk.', # Fuzzy
+);
+
+/** Interlingua (interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'valueview-desc' => 'Componentes de interfacie de usator pro monstrar e modificar valores de datos',
+	'valueview-expert-advancedadjustments' => 'adjustamentos avantiate',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Le manipulation de valores "$1" non es ancora supportate.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Le manipulation de valores pro le typo de datos "$1" non es ancora supportate.',
+	'valueview-expert-emptyvalue-empty' => 'vacue',
+	'valueview-expert-timeinput-calendar' => 'Calendario:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendario gregorian)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendario julian)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; cambiar a gregorian',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; cambiar a julian',
+	'valueview-preview-label' => 'essera monstrate como:',
+	'valueview-preview-novalue' => 'nulle valor valide recognoscite',
+	'valueview-listrotator-auto' => 'automatic',
 );
 
 /** Indonesian (Bahasa Indonesia)
