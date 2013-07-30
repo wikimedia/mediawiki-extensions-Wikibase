@@ -46,67 +46,78 @@ function testExpert( testDefinition ) {
 	}
 	validRawValues.push( null );
 
-	// Used as source for expertProvider().
-	var expertDefinitions = [
-		{
-			title: 'instance without notifier',
-			args: [
-				$( '<span/>' ),
-				new valueview.MockViewState()
-			]
-		}, {
-			title: 'instance with notifier',
-			args: [
-				$( '<div/>' ),
-				new valueview.MockViewState(),
-				new Notifier()
-			]
-		}, {
-			title: 'instance with ViewState of disabled view',
-			args: [
-				$( '<div/>' ),
-				new valueview.MockViewState( { isDisabled: true } ),
-				new Notifier()
-			]
-		}
-	];
+	// Used as source for expertProviders.
+	function createExpertDefinitions() {
+		return [
+			{
+				title: 'instance without notifier',
+				args: [
+					$( '<span/>' ),
+					new valueview.MockViewState()
+				]
+			}, {
+				title: 'instance with notifier',
+				args: [
+					$( '<div/>' ),
+					new valueview.MockViewState(),
+					new Notifier()
+				]
+			}, {
+				title: 'instance with ViewState of disabled view',
+				args: [
+					$( '<div/>' ),
+					new valueview.MockViewState( { isDisabled: true } ),
+					new Notifier()
+				]
+			}
+		];
+	}
 
 	/**
-	 * Returns an array of Objects holding the following fields:
-	 * - title: Description of the set.
+	 * Returns an array of Functions. Each function returns an object with the following fields
+	 * when executed:
 	 * - expert: A valueview Expert instance.
 	 * - constructorArgs: Arguments used to construct the expert given in the "expert" field.
 	 *
-	 * @returns {Array}
+	 * Each function has a "title" field which describes the expert instance mentioned above.
+	 *
+	 * @return {Function[]}
 	 */
-	function expertProvider() {
-		var experts = [];
+	function createExpertsProvider() {
+		return $.map( createExpertDefinitions(), function( definition ) {
+			// Provide a setup function for test case parameter creation instead of creating a case
+			// definition object directly. If that would be done later, the expert would already
+			// be created and, in some cases, create conflicts with other tests since some experts
+			// immediately instantiate certain widgets (e.g. inputextender).
+			var caseSetup = function() {
+				var $viewPort = definition.args[0],
+					viewState = definition.args[1],
+					notifier = definition.args[2];
 
-		$.each( expertDefinitions, function( i, definition ) {
-			var $viewPort = definition.args[0],
-				viewState = definition.args[1],
-				notifier = definition.args[2];
+				var expert = new Expert( $viewPort, viewState, notifier );
 
-			var expert = new Expert( $viewPort, viewState, notifier );
-
-			experts.push( {
-				title: definition.title,
-				expert: expert,
-				constructorArgs: definition.args
-			} );
+				return {
+					expert: expert,
+					constructorArgs: definition.args
+				};
+			};
+			caseSetup.title = definition.title;
+			return caseSetup;
 		} );
-
-		return experts;
 	}
 
-	var expertCases = QUnit.cases(
-		// provide fresh instances for each test
-		function() {
-			return expertProvider();
-		}
-	);
+	var expertCases = QUnit.cases( createExpertsProvider );
 
-	expertCases.test( 'constructor', function( args, assert ) {
+	// We always have to destroy experts so all widgets used by them get destroyed as well in case
+	// they add something to the body.
+	function expertCasesTestAndCleanup( description, testFn ) {
+		expertCases.test( description, function( args, assert ) {
+			testFn( args, assert );
+			args.expert.destroy();
+		} );
+	}
+
+	expertCasesTestAndCleanup( 'constructor', function( args, assert ) {
 		assert.ok(
 			args.expert instanceof Expert,
 			'expert successfully constructed'
@@ -130,7 +141,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCases.test( 'valueCharacteristics', function( args, assert ) {
+	expertCasesTestAndCleanup( 'valueCharacteristics', function( args, assert ) {
 		var valueCharacteristics = args.expert.valueCharacteristics();
 
 		assert.ok(
@@ -139,7 +150,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCases.test( 'viewState', function( args, assert ) {
+	expertCasesTestAndCleanup( 'viewState', function( args, assert ) {
 		var viewState = args.expert.viewState();
 		assert.ok(
 			viewState instanceof valueview.ViewState,
@@ -147,7 +158,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCases.test( 'rawValueCompare: Test of different raw values', function( args, assert ) {
+	expertCasesTestAndCleanup( 'rawValueCompare: Test of different raw values', function( args, assert ) {
 		$.each( validRawValues, function( i, testValue ) {
 			$.each( validRawValues, function( j, otherValue ) {
 				var successExpected = i === j;
@@ -162,7 +173,7 @@ function testExpert( testDefinition ) {
 		} );
 	} );
 
-	expertCases.test( 'rawValueCompare: Works with 2nd parameter omitted', function( args, assert ) {
+	expertCasesTestAndCleanup( 'rawValueCompare: Works with 2nd parameter omitted', function( args, assert ) {
 		var expert = args.expert;
 
 		assert.ok(
@@ -178,7 +189,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCases.test( 'rawValue: initial value', function( args, assert ) {
+	expertCasesTestAndCleanup( 'rawValue: initial value', function( args, assert ) {
 		assert.equal(
 			args.expert.rawValue(),
 			null,
@@ -186,7 +197,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCases.test( 'rawValue: setting and getting raw value', function( args, assert ) {
+	expertCasesTestAndCleanup( 'rawValue: setting and getting raw value', function( args, assert ) {
 		var expert = args.expert;
 
 		$.each( validRawValues, function( i, testValue ) {
@@ -203,8 +214,7 @@ function testExpert( testDefinition ) {
 		} );
 	} );
 
-	expertCases.test( 'rawValue: setting value to unknown value', function( args, assert ) {
-
+	expertCasesTestAndCleanup( 'rawValue: setting value to unknown value', function( args, assert ) {
 		$.each( unknownRawValues, function( i, testValue ) {
 			QUnit.stop();
 
@@ -360,7 +370,7 @@ testExpert.basicTestDefinition = {
 		]
 	},
 	/**
-	 * Defines what kind of value parser the Expert's parse() function is exptected to return.
+	 * Defines what kind of value parser the Expert's parse() function is expected to return.
 	 * @type Function Constructor implementation of valueParsers.ValueParser.
 	 */
 	relatedValueParser: null
