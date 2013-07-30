@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_7fa05095",
+        "filename": "repo/includes/changeop/ChangeOpClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-30T14:01:07Z",
+      "side": 1,
+      "message": "This is really a ClaimMainSnakOp, right?",
+      "revId": "2d2d8121b65c6e32a10b3231a06aab9d25daff6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_5f9b8c63",
+        "filename": "repo/includes/changeop/ChangeOpClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-30T14:01:07Z",
+      "side": 1,
+      "message": "No type hint for $snak?",
+      "revId": "2d2d8121b65c6e32a10b3231a06aab9d25daff6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
