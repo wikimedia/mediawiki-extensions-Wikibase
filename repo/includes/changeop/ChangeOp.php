@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 /**
  * Base class for change operations.
  *
