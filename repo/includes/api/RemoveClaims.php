@@ -6,8 +6,6 @@ use Wikibase\Claims;
 
 use ApiBase, ApiMain;
 use MWException;
-
-use Wikibase\Autocomment;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
