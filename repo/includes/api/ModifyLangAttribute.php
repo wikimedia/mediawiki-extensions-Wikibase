@@ -3,8 +3,6 @@
 namespace Wikibase\Api;
 
 use ApiBase, Language;
-
-use Wikibase\Autocomment;
 use Wikibase\Utils;
 
 /**

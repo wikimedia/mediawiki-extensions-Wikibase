@@ -16,7 +16,6 @@ use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\QueryContent;
-use Wikibase\Autocomment;
 use Wikibase\Utils;
 
 /**
