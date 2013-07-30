@@ -97,6 +97,7 @@ return call_user_func( function() {
 		'Wikibase\Api\RemoveQualifiers' => 'includes/api/RemoveQualifiers.php',
 		'Wikibase\Api\SetQualifier' => 'includes/api/SetQualifier.php',
 		'Wikibase\Api\SnakValidationHelper' => 'includes/api/SnakValidationHelper.php',
+		'Wikibase\Api\ModifyClaim' => 'includes/api/ModifyClaim.php',
 
 		// includes/content
 		'Wikibase\EntityContent' => 'includes/content/EntityContent.php',
