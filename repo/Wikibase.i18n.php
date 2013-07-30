@@ -1295,9 +1295,10 @@ $messages['af'] = array(
  * @author Meno25
  * @author OsamaK
  * @author Tarawneh
+ * @author زكريا
  */
 $messages['ar'] = array(
-	'wikibase-edit' => 'تعديل',
+	'wikibase-edit' => 'عدل',
 	'wikibase-save' => 'حفظ',
 	'wikibase-cancel' => 'إلغاء',
 	'wikibase-add' => 'أضف',
@@ -11539,7 +11540,7 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd',
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] verwijderd',
-	'wikibase-item-summary-wbsetsitelink-add' => 'Koppeling toegevoegd voor [$2]', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-add' => 'Koppeling toegevoegd voor [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Koppeling verwijderd voor [$2]',
 	'wikibase-item-summary-wblinktitles-create' => "Item aangemaakt om pagina's te koppelen [$2↔$3]",
 	'wikibase-item-summary-wblinktitles-connect' => "Taalkoppeling naar gekoppelde pagina's toegevoegd [$2↔$3]",
@@ -11588,6 +11589,8 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-listdatatypes-multilingual-text-head' => 'Meertalige tekst',
 	'wikibase-listdatatypes-string-head' => 'Tekenreeks',
 	'wikibase-listdatatypes-time-head' => 'Tijd',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Wikibaseitem',
 	'content-model-wikibase-property' => 'Wikibase-eigenschap',
 	'content-model-wikibase-query' => 'Wikibasezoekopdracht',

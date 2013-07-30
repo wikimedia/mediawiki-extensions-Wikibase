@@ -827,7 +827,7 @@ $messages['cs'] = array(
 $messages['cu'] = array(
 	'wikibase-editlinks' => 'исправи съвѧꙁи',
 	'wikibase-linkitem-input-site' => 'ѩꙁꙑкъ :',
-	'wikibase-rc-hide-wikidata' => '$1 Викисводъ',
+	'wikibase-rc-hide-wikidata' => '$1 Викисъводъ',
 );
 
 /** Welsh (Cymraeg)
@@ -2832,7 +2832,7 @@ $messages['nl'] = array(
 	'wikibase-linkitem-input-site' => 'Taal:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
 	'wikibase-linkitem-invalidsite' => 'Er is een onbekende of ongeldige site geselecteerd',
-	'wikibase-linkitem-confirmitem-text' => "De pagina die u hebt gekozen is al gekoppeld aan een [$1 item in onze centrale gegevensrepository]. Bevestig dat de onderstaande pagina's inderdaad de pagina's zijn die u met deze pagina wilt koppelen.", # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => "De pagina die u hebt gekozen is al gekoppeld aan een [$1 item in onze centrale gegevensrepository]. Bevestig dat de onderstaande {{PLURAL:$2|pagina|pagina's}} inderdaad de {{PLURAL:$2|pagina is|pagina's zijn}} die u met deze pagina wilt koppelen.",
 	'wikibase-linkitem-confirmitem-button' => 'Bevestigen',
 	'wikibase-linkitem-not-loggedin-title' => 'U moet aangemeld zijn',
 	'wikibase-linkitem-not-loggedin' => 'U moet aangemeld zijn bij deze wiki en de [$1 centrale gegevensrepository] om deze functie te kunnen gebruiken.',
@@ -2852,7 +2852,7 @@ $messages['nl'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is geen geldige taalcode.',
 	'wikibase-unconnectedpages-page-warning' => 'De paginanaam kan niet worden gebruikt voor de zoekopdracht en wordt genegeerd.',
 	'wikibase-unconnectedpages-iwdata-label' => "Alleen pagina's met intertaalkoppelingen",
-	'wikibase-unconnectedpages-format-row' => '($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item-ID',
 	'wikibase-pageinfo-entity-id-none' => 'Geen',
 );
@@ -3138,6 +3138,7 @@ $messages['ro'] = array(
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
+	'specialpages-group-wikibaseclient' => 'cliende de Uicchidata',
 	'wikibase-comment-update' => 'Vôsce de Uicchidata cangiate',
 	'wikibase-comment-sitelink-add' => "Collegamende d'a lènghe aggiunde: $1",
 	'wikibase-comment-sitelink-remove' => "Collegamende d'a lènghe luate: $1",
@@ -3147,6 +3148,8 @@ $messages['roa-tara'] = array(
 	'wikibase-linkitem-linkpage' => "Collegate cu 'a pàgene",
 	'wikibase-linkitem-input-site' => 'Lènghe:',
 	'wikibase-linkitem-input-page' => 'Pàgene:',
+	'wikibase-linkitem-confirmitem-button' => 'Conferme',
+	'wikibase-linkitem-not-loggedin-title' => 'Tu è abbesògne de trasè',
 	'wikibase-unconnectedpages-submit' => 'Véje',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" non g\'è \'nu codece de lènghe valide.',
 );
