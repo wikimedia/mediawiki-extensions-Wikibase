@@ -9,7 +9,6 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\SiteLink;
-use Wikibase\Autocomment;
 use Wikibase\Utils;
 
 /**
