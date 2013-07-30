@@ -174,6 +174,13 @@ $messages['hu'] = array(
 	'version-datavalues' => 'Adatértékek',
 );
 
+/** Interlingua (interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'datavalues-desc' => 'Collection de objectos representante varie typos de valores',
+);
+
 /** Indonesian (Bahasa Indonesia)
  * @author Farras
  */
