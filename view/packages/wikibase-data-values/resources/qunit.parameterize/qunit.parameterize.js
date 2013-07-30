@@ -1,16 +1,20 @@
 /**
- * Parameterize v 0.2
  * A QUnit Addon For Running Parameterized Tests
  *
+ * This is a fork of Parameterize v 0.2 from:
  * @see https://github.com/AStepaniuk/qunit-parameterize
  * @licence MIT licence
+ *
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
  * @example <code>
  * QUnit
  * .cases( [
  *     { a : 2, b : 2, expectedSum : 4 },
  *     { a : 5, b : 5, expectedSum : 10 },
- *     { a : 40, b : 2, expectedSum : 42 }
+ *     function() {
+ *         return { a : 40, b : 2, expectedSum : 42 }
+ *     }
  * ] )
  * .test( 'Sum test', function( params, assert ) {
  *     var actualSum = sum( params.a, params.b );
@@ -23,24 +27,35 @@ QUnit.cases = ( function( QUnit ) {
 
 	/**
 	 * @param {[]|Function} testCases An Array (or a callback returning such an object) which
-	 *        has to hold different Objects where each defines what will be passed to tests which
-	 *        will be registered to the Object returned by the function. By providing a callback,
+	 *        has to hold different Objects and/or Functions returning an Object. Each of the
+	 *        Objects results in a test case variation and defines what will be passed to test
+	 *        cases registered to the Object returned by the function. By providing a callback,
 	 *        the parameters provided to the tests will be created separately for each test. This
 	 *        allows to provide instances which involve state without running into problems when
 	 *        manipulating state in one test case but expecting initial state in another one.
 	 * @return {Object}
 	 */
 	return function(testCases) {
-		var createTest = function(methodName, title, expected, callback, parameters) {
+		var createTest = function( methodName, title, expected, callback, paramsOrProvider ) {
+			var finalCallback = function( assert ) {
+				var parameters =  QUnit.is( 'function', paramsOrProvider )
+					? paramsOrProvider()
+					: paramsOrProvider;
+
+				return callback.call( this, parameters, assert );
+			};
+
 			QUnit[methodName](
 				title,
 				expected,
-				function(assert) { return callback.call(this, parameters, assert); }
+				finalCallback
 			);
 		};
 
 		var iterateTestCases = function(methodName, title, expected, callback) {
-			if (!testCases) return;
+			if ( !testCases ) {
+				return;
+			}
 
 			if (!callback) {
 				callback = expected;
@@ -52,16 +67,16 @@ QUnit.cases = ( function( QUnit ) {
 				: testCases;
 
 			for (var i = 0; i < testTestCases.length; ++i) {
-				var parameters = testTestCases[i];
+				var testTestCase = testTestCases[i];
 
 				var testCaseTitle = title;
-				if (parameters.title) {
-					testCaseTitle += "[" + parameters.title + "]";
+				if( testTestCase.title ) {
+					testCaseTitle += "[" + testTestCase.title + "]";
 				}
 
-				createTest(methodName, testCaseTitle, expected, callback, parameters);
+				createTest( methodName, testCaseTitle, expected, callback, testTestCase );
 			}
-		}
+		};
 
 		return {
 			test : function(title, expected, callback) {
@@ -73,7 +88,7 @@ QUnit.cases = ( function( QUnit ) {
 				iterateTestCases("asyncTest", title, expected, callback);
 				return this;
 			}
-		}
-	}
+		};
+	};
 
 }( QUnit ) );
