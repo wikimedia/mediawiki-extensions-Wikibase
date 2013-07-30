@@ -91,6 +91,7 @@
 			this.element
 			.addClass( this.widgetBaseClass + '-input' );
 
+			// TODO: Extension should only be built on demand.
 			this.$extension = $( '<div/>' )
 			.addClass( this.widgetBaseClass + '-extension ui-widget-content' )
 			.on( 'click.' + this.widgetName, function( event ) {

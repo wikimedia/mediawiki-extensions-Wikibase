@@ -245,25 +245,36 @@
 		 * @see jQuery.valueview.Expert.destroy
 		 */
 		destroy: function() {
-			this.$precision.data( 'listrotator' ).destroy();
-			this.$precision.remove();
-			this.$precisionContainer.remove();
+			if( !this.$input ) {
+				return; // destroyed already
+			}
 
-			this.$calendar.data( 'listrotator' ).destroy();
-			this.$calendar.remove();
-			this.$calendarContainer.remove();
+			if( this.preview ) {
+				this.preview.destroy();
+				this.preview.element.remove();
+			}
 
-			this.$calendarhint.remove();
+			var timeInput = this.$input.data( 'timeinput' );
+			if( timeInput ) {
+				timeInput.destroy();
+			}
 
-			var previewElement = this.preview.element;
-			this.preview.destroy();
-			previewElement.remove();
+			var inputExtender = this.$input.data( 'inputextender' );
+			if( inputExtender ) {
+				// Explicitly destroy calendar and precision list rotators:
+				inputExtender.$extension.find( ':ui-listrotator' ).listrotator( 'destroy' );
+				inputExtender.$extension.find( this.uiBaseClass + '-advancedtoggler' )
+					.toggler( 'destroy' );
+				inputExtender.destroy();
+			}
 
-			this.$input.data( 'inputextender' ).destroy();
-			this.$input.data( 'timeinput' ).destroy();
-			this.$input.remove();
+			this.$input = null;
+			this.$precision = null;
+			this.$precisionContainer = null;
+			this.$calendar = null;
+			this.$calendarContainer = null;
 
-			PARENT.prototype.destroy.call( this );
+			PARENT.prototype.destroy.call( this ); // empties viewport
 		},
 
 		/**

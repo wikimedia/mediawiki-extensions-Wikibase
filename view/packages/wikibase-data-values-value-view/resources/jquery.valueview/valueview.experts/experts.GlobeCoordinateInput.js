@@ -148,18 +148,32 @@
 		 * @see jQuery.valueview.Expert.destroy
 		 */
 		destroy: function() {
-			this.$precision.data( 'listrotator' ).destroy();
-			this.$precision.remove();
-			this.$precisionContainer.remove();
+			if( !this.$input ) {
+				return; // destroyed already
+			}
 
-			var previewElement = this.preview.element;
-			this.preview.destroy();
-			previewElement.remove();
+			if( this.preview ) {
+				this.preview.destroy();
+				this.preview.element.remove();
+			}
 
-			this.$input.data( 'inputextender' ).destroy();
-			this.$input.remove();
+			var listRotator = this.$precision.data( 'listrotator' );
+			if( listRotator ) {
+				listRotator.destroy();
+			}
 
-			PARENT.prototype.destroy.call( this );
+			var inputExtender = this.$input.data( 'inputextender' );
+			if( inputExtender ) {
+				inputExtender.$extension.find( this.uiBaseClass + '-advancedtoggler' )
+					.toggler( 'destroy' );
+				inputExtender.destroy();
+			}
+
+			this.$input = null;
+			this.$precision = null;
+			this.$precisionContainer = null;
+
+			PARENT.prototype.destroy.call( this ); // empties viewport
 		},
 
 		/**
