@@ -4,8 +4,6 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use MWException;
-
-use Wikibase\Autocomment;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
