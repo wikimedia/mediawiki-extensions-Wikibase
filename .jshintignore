@@ -15,10 +15,7 @@
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.tests.js
-./lib/tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js
 ./lib/tests/qunit/data/testrunner.js
-./lib/tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js
-./lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js
 ./lib/tests/qunit/parsers/EntityIdParser.tests.js
 ./lib/tests/qunit/wikibase.datamodel/datamodel.Entity.tests.js
 ./lib/tests/qunit/wikibase.datamodel/datamodel.Item.tests.js
