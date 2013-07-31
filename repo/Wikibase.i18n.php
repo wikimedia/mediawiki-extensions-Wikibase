@@ -317,7 +317,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbremoveclaims' => 'Removed {{PLURAL:$1|a claim|claims}}',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Created claim',
-	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$1|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'Changed {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'Created {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Changed {{PLURAL:$4|one qualifier|$4 qualifiers}} of {{PLURAL:$3|claim|claims}}',
@@ -1002,7 +1002,8 @@ Parameters:
 	'wikibase-item-summary-wbremoveclaims' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more claim is removed.}}',
 	'wikibase-item-summary-special-create-item' => '{{wikibase summary messages|item|Automatic edit summary when creating an item, and supplying one or more values. This page can take an additional sitelink, but this does not reflect in the autocomment.}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Automatic edit summary generated when creating a new claim.',
-	'wikibase-item-summary-wbremoveclaims-remove' => 'Automatic edit summary generated when removing claims.',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'Automatic edit summary generated when removing claims. Parameters:
+* $1 - number of claims that got removed',
 	'wikibase-item-summary-wbsetclaim-update' => 'Automatic edit summary generated when modifying a claim using setclaim. Parameters:
 * $3 - number of claims changed',
 	'wikibase-item-summary-wbsetclaim-create' => 'Automatic edit summary generated when creating a new claim using setclaim. Parameters:
