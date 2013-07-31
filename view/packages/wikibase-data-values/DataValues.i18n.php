@@ -179,6 +179,7 @@ $messages['hu'] = array(
  */
 $messages['ia'] = array(
 	'datavalues-desc' => 'Collection de objectos representante varie typos de valores',
+	'version-datavalues' => 'Valores de datos',
 );
 
 /** Indonesian (Bahasa Indonesia)
