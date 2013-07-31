@@ -300,8 +300,8 @@
 
 					if ( this.options.adaptLetterCase ) {
 						this.term = incomplete = $.util.adaptlettercase(
-							complete,
 							incomplete,
+							complete,
 							this.options.adaptLetterCase
 						);
 					}
