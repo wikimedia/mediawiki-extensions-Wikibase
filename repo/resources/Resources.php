@@ -59,6 +59,8 @@ return call_user_func( function() {
 				'wikibase-anonymouseditwarning',
 				'wikibase-entity-item',
 				'wikibase-entity-property',
+				'wikibase-restrictionedit-tooltip-message',
+				'wikibase-blockeduser-tooltip-message',
 			)
 		),
 

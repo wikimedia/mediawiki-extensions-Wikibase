@@ -66,11 +66,12 @@
 						? 'EditableLabel'
 						: 'EditableDescription'
 				],
-				toolbar = new wb.ui.Toolbar(),
-				editGroup = new wb.ui.Toolbar.EditGroup();
+				$toolbar = mw.template( 'wikibase-toolbar', '', '' ).toolbar(),
+				toolbar = $toolbar.data( 'toolbar' ),
+				$editGroup = mw.template( 'wikibase-toolbareditgroup', '', '' ).toolbareditgroup();
 
-			toolbar.addElement( editGroup );
-			toolbar.editGroup = editGroup; // TODO: EditableLabel should not assume that this is set
+			toolbar.addElement( $editGroup );
+			toolbar.$editGroup = $editGroup; // TODO: EditableLabel should not assume that this is set
 
 			termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
 		} );
@@ -148,10 +149,24 @@
 			.claimgrouplabelscroll();
 		}
 
-		// handle edit restrictions
-		// TODO/FIXME: most about this system sucks, especially the part where the Button constructor is hacked to disable
-		//             all buttons when this is fired. it also doesn't effect any edit tools added after this point and
-		//             edit tool initialized above do not even know that they are disabled.
+		// Handle edit restrictions:
+		$( wb )
+		.on( 'restrictEntityPageActions blockEntityPageActions', function( event ) {
+			$( '.wikibase-toolbarbutton' ).each( function( i, node ) {
+				var toolbarButton = $( node ).data( 'toolbarbutton' );
+
+				toolbarButton.disable();
+
+				var messageId = ( event.type === 'blockEntityPageActions' )
+					? 'wikibase-blockeduser-tooltip-message'
+					: 'wikibase-restrictionedit-tooltip-message';
+
+				toolbarButton.setTooltip( mw.message( messageId ).escaped() );
+
+				toolbarButton._tooltip.setGravity( 'nw' );
+			} );
+		} );
+
 		if (
 			mw.config.get( 'wgRestrictionEdit' ) !== null &&
 			mw.config.get( 'wgRestrictionEdit' ).length === 1
@@ -176,7 +191,7 @@
 		if( !mw.config.get( 'wbIsEditView' ) ) {
 			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars directly like this is
 			// not really worse than hacking the Toolbar prototype to achieve this:
-			$( '.wb-ui-toolbar' ).hide();
+			$( '.wikibase-toolbar' ).hide();
 			$( 'body' ).addClass( 'wb-editing-disabled' );
 			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
 			// firebug to show hidden nodes again to click on them:
@@ -221,14 +236,16 @@
 					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
 					// on PropertyEditTool only appended when really being edited by the user though
 					.not( '.wb-ui-propertyedittool-editablevalue-ineditmode' )
-					.find( '.wb-ui-toolbar-editgroup-ineditmode' );
+					.find( '.wikibase-toolbareditgroup-ineditmode' );
 
 				if( !$activeToolbar.length ) {
 					return; // no toolbar for some reason, just stop
 				}
 
-				var toolbar = $activeToolbar.data( 'wb-toolbar' ),
-					$hideMessage = $( '<a/>', {
+				var toolbar = $activeToolbar.data( 'toolbareditgroup' )
+					|| $activeToolbar.data( 'toolbar' );
+
+				var $hideMessage = $( '<a/>', {
 						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
 					} ).appendTo( $message );
 
@@ -237,7 +254,7 @@
 					: 'nw';
 
 				var tooltip = new wb.ui.Tooltip(
-					toolbar.btnSave.data( 'toolbarbutton' ).getTooltipParent(), // adjust tooltip to save button
+					toolbar.$btnSave.data( 'toolbarbutton' ).getTooltipParent(), // adjust tooltip to save button
 					{},
 					$message,
 					// assuming the toolbar is used on the right side of some edit UI, we want to
