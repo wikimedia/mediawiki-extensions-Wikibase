@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_90841ed8",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-31T16:33:56Z",
+      "side": 1,
+      "message": "If get EntityId returns null, getEntityContent will cause a fatal error.",
+      "revId": "83f371065eedc838fdbab32b4b0006849f857b77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_707f9add",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-31T16:33:56Z",
+      "side": 1,
+      "message": "This may return null when the client submitted malformed claim IDs. Use an EntityIdParser and handle the excpetion...\n\nPerhaps Entity::getIdFromClaimGuid shoud return an EntityId, not a string? And throw an exception for malformed ids?",
+      "revId": "83f371065eedc838fdbab32b4b0006849f857b77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
