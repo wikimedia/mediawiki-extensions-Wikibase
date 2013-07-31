@@ -77,6 +77,7 @@ $messages['en'] = array(
  * @author Nnemo
  * @author Raymond
  * @author Shirayuki
+ * @author Siebrand
  * @author Waldir
  */
 $messages['qqq'] = array(
@@ -192,8 +193,7 @@ This kind of error is unlekely to occur during normal operation, since the user 
 Parameters:
 * $1 is the technical error message describing the problem',
 	'wikibase-validator-bad-value-type' => 'Input validation error shown when the value has the wrong type for the property it is applied to.
-This kind of error is unlekely to occur during normal operation, since the user interface should prevent illegal values from being entered.
-
+This kind of error is unlikely to occur during normal operation, since the user interface should prevent illegal values from being entered.
 Parameters:
 * $1 is the actual value type
 * $2 is the expected value type',
@@ -396,6 +396,9 @@ $messages['be-tarask'] = array(
 	'wikibase-validator-bad-entity-id' => 'Няслушны ідэнтыфікатар: $1',
 	'wikibase-validator-bad-entity-type' => 'Нечаканы тып элемэнта $1',
 	'wikibase-validator-no-such-entity' => '$1 ня знойдзены',
+	'wikibase-validator-no-such-property' => 'Уласьцівасьць $1 ня знойдзеная',
+	'wikibase-validator-bad-value' => 'Недапушчальнае значэньне: $1',
+	'wikibase-validator-bad-value-type' => 'Благі тып значэньня $1, чакаецца $2',
 	'datatypes-type-wikibase-item' => 'Аб’ект',
 	'datatypes-type-commonsMedia' => 'Мэдыяфайл зь Вікісховішча',
 	'version-wikibase' => 'Wikibase',
@@ -1361,6 +1364,9 @@ $messages['he'] = array(
 	'wikibase-validator-bad-entity-id' => 'מזהה בלתי־תקין: $1',
 	'wikibase-validator-bad-entity-type' => 'סוג ישות בלתי־צפוי $1',
 	'wikibase-validator-no-such-entity' => '$1 לא נמצא',
+	'wikibase-validator-no-such-property' => 'המאפיין $1 לא נמצא',
+	'wikibase-validator-bad-value' => 'ערך בלתי־תקין: $1',
+	'wikibase-validator-bad-value-type' => 'סוג הערך $1 אינו נכון, זה היה אמור להיות $2',
 	'datatypes-type-wikibase-item' => 'פריט',
 	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
 	'version-wikibase' => 'Wikibase',
@@ -2223,6 +2229,9 @@ $messages['nl'] = array(
 	'wikibase-validator-bad-entity-id' => 'Ongeldig ID: $1',
 	'wikibase-validator-bad-entity-type' => 'Onverwacht entiteitstype $1',
 	'wikibase-validator-no-such-entity' => '$1 is niet gevonden',
+	'wikibase-validator-no-such-property' => 'Eigenschap $1 niet gevonden',
+	'wikibase-validator-bad-value' => 'Ongeldige waarde: $1',
+	'wikibase-validator-bad-value-type' => 'Onjuist waardetype $1, verwacht was $2',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Mediabestand van Commons',
 	'version-wikibase' => 'Wikibase',
@@ -2923,6 +2932,9 @@ $messages['vi'] = array(
 	'wikibase-validator-bad-entity-id' => 'ID hỏng: $1',
 	'wikibase-validator-bad-entity-type' => 'Kiểu thực thể bất ngờ $1',
 	'wikibase-validator-no-such-entity' => 'Không tìm thấy $1',
+	'wikibase-validator-no-such-property' => 'Không tìm thấy thuộc tính $1',
+	'wikibase-validator-bad-value' => 'Giá trị không hợp lệ: $1',
+	'wikibase-validator-bad-value-type' => 'Kiểu giá trị không hợp lệ $1; đáng lẽ phải là $2',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
 	'version-wikibase' => 'Wikibase',

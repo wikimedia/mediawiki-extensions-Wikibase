@@ -69,6 +69,12 @@ $magicWords['lb'] = array(
 	'property' => array( 0, 'Eegeschaft' ),
 );
 
+/** Minangkabau (Baso Minangkabau) */
+$magicWords['min'] = array(
+	'noexternallanglinks' => array( 0, 'tanpainterwiki' ),
+	'property' => array( 0, 'properti' ),
+);
+
 /** Macedonian (македонски) */
 $magicWords['mk'] = array(
 	'noexternallanglinks' => array( 0, 'безнадворјазврски' ),
