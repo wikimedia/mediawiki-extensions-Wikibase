@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_f5547c53",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-31T14:17:04Z",
+      "side": 1,
+      "message": "omg whitespace!!",
+      "revId": "45d7f92fa5a8581243ea776e3d2b638f704b2924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_354fc4be",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-31T14:17:04Z",
+      "side": 1,
+      "message": "Again, please consider making this a ClaimModificationHelper that can be used via composition and tested separately.",
+      "revId": "45d7f92fa5a8581243ea776e3d2b638f704b2924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
