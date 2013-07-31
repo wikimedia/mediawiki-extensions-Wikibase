@@ -33,6 +33,7 @@ message when needed. The second argument, if present, is a language code.
 
 /* wbsetclaimvalue:1 */ p123
 /* wbremoveclaims:n */ props...
+/* wbremoveclaims-remove:1 */ props...
 
 /* wbcreateclaim-value: */ p123
 /* wbcreateclaim-novalue: */ p123

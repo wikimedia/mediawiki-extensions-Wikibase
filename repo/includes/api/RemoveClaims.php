@@ -2,19 +2,17 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\Claims;
+
 use ApiBase;
 use MWException;
 
 use Wikibase\Autocomment;
 use Wikibase\EntityId;
 use Wikibase\Entity;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\Claims;
-use Wikibase\Summary;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\ChangeOps;
+use Wikibase\ChangeOpClaim;
 
 /**
  * API module for removing claims.
@@ -41,8 +39,9 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class RemoveClaims extends ApiWikibase {
+class RemoveClaims extends ModifyClaim {
 
 	/**
 	 * @see \ApiBase::execute
@@ -52,208 +51,85 @@ class RemoveClaims extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$guids = $this->getGuidsByEntity();
+		$params = $this->extractRequestParams();
+		$entityId = $this->getEntityId( $params );
+		$entityContent = $this->getEntityContent( $entityId );
+		$this->checkClaims( $entityContent->getEntity(), $params['claim'] );
+		$summary = $this->createSummary( $params );
 
-		$removedClaimKeys = $this->removeClaims(
-			$this->getEntityContents( array_keys( $guids ) ),
-			$guids
-		);
+		$changeOps = new ChangeOps();
+		$changeOps->add( $this->getChangeOps( $params ) );
+		$changeOps->apply( $entityContent->getEntity(), $summary );
 
-		$this->outputResult( $removedClaimKeys );
+		$this->saveChanges( $entityContent, $summary );
+
+		$this->outputResult( $params['claim'] );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * Create a summary
+	 * Validates the parameters and returns the EntityId to act upon on success
 	 *
 	 * @since 0.4
 	 *
-	 * @param Claims $claims
-	 * @param string[] $guids
-	 * @param string $action
+	 * @param array $params
 	 *
-	 * @return Summary
+	 * @return EntityId
 	 */
-	protected function createSummary( Claims $claims, array $guids, $action ) {
-		if ( !is_string( $action ) ) {
-			throw new \MWException( 'action is invalid or unknown type.' );
-		}
-
-		$summary = new Summary( $this->getModuleName() );
-		$summary->setAction( $action );
-
-		$count = count( $guids );
-
-		$summary->addAutoCommentArgs( $count );
-
-		$summaryArgs = $this->buildSummaryArgs( $claims, $guids );
-
-		if ( $summaryArgs !== array() ) {
-			$summary->addAutoSummaryArgs( $summaryArgs );
-		}
-
-		return $summary;
-	}
-
-	/**
-	 * Build key (property) => value pairs for summary arguments
-	 *
-	 * @todo see if this can be more generic and put elsewhere...
-	 *
-	 * @param Claims $claims
-	 * @param string[] $guids
-	 *
-	 * @return mixed[] // propertyId (prefixed) => array of values
-	 */
-	protected function buildSummaryArgs( Claims $claims, array $guids ) {
-		$pairs = array();
-
-		foreach( $guids as $guid ) {
-			if ( $claims->hasClaimWithGuid( $guid ) ) {
-				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
-				$key = $snak->getPropertyId()->getPrefixedId();
-
-				if ( !array_key_exists( $key, $pairs ) ) {
-					$pairs[$key] = array();
-				}
-
-				if ( $snak instanceof PropertyValueSnak ) {
-					$value = $snak->getDataValue();
-				} else {
-					$value = '-'; // todo handle no values in general way (needed elsewhere)
-				}
-
-				$pairs[$key][] = $value;
-			}
-		}
-
-		return array( $pairs );
-	}
-
-	/**
-	 * Parses the key parameter and returns it as an array with as keys
-	 * prefixed entity ids and as values arrays with the claim GUIDs for
-	 * the specific entity.
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	protected function getGuidsByEntity() {
-		$params = $this->extractRequestParams();
-
-		$guids = array();
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+	protected function getEntityId( array $params ) {
+		$entityId = null;
 
 		foreach ( $params['claim'] as $guid ) {
-			if ( $claimGuidValidator->validateFormat( $guid ) ) {
-				$entityId = Entity::getIdFromClaimGuid( $guid );
+			if ( !$this->claimGuidValidator->validateFormat( $guid ) ) {
+				$this->dieUsage( "Invalid claim guid $guid" , 'invalid-guid' );
+			}
 
-				if ( !array_key_exists( $entityId, $guids ) ) {
-					$guids[$entityId] = array();
+			if ( !is_null( $entityId ) ) {
+				if ( Entity::getIdFromClaimGuid( $guid ) !== $entityId ) {
+					$this->dieUsage( 'All claims must belong to the same entity' , 'invalid-guid' );
 				}
-
-				$guids[$entityId][] = $guid;
 			} else {
-				$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+				$entityId = Entity::getIdFromClaimGuid( $guid );
 			}
 		}
 
-		return $guids;
+		return EntityId::newFromPrefixedId( $entityId );
 	}
 
 	/**
-	 * Does the claim removal and returns a list of claim keys for
-	 * the claims that actually got removed.
+	 * Checks whether the claims can be found
 	 *
-	 * @since 0.3
-	 i*
-	 * @param \Wikibase\EntityContent[] $entityContents
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
 	 * @param array $guids
-	 *
-	 * @return string[]
 	 */
-	protected function removeClaims( $entityContents, array $guids ) {
-		$removedClaims = new Claims();
+	protected function checkClaims( Entity $entity, array $guids ) {
+		$claims = new Claims( $entity->getClaims() );
 
-		foreach ( $entityContents as $entityContent ) {
-			$entity = $entityContent->getEntity();
-
-			$claims = new Claims( $entity->getClaims() );
-
-			$removedBatch = $this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] );
-			foreach( $removedBatch as $claim ) {
-				$removedClaims->addClaim( $claim );
+		foreach ( $guids as $guid) {
+			if ( !$claims->hasClaimWithGuid( $guid ) ) {
+				$this->dieUsage( "Claim with guid $guid not found" , 'invalid-guid' );
 			}
-
-			$entity->setClaims( $claims );
-
-			$summary = $this->createSummary( $removedClaims, $guids[$entity->getPrefixedId()], 'remove' );
-
-			$this->saveChanges( $entityContent, $summary );
 		}
-
-		return $removedClaims->getGuids();
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param string[] $ids
+	 * @param array $params
 	 *
-	 * @return EntityContent[]
+	 * @return ChangeOp[]
 	 */
-	protected function getEntityContents( array $ids ) {
-		$params = $this->extractRequestParams();
-		$contents = array();
+	protected function getChangeOps( array $params ) {
+		$changeOps = array();
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		// TODO: use proper batch select
-		foreach ( $ids as $id ) {
-			$entityId = EntityId::newFromPrefixedId( $id );
-
-			if ( $entityId === null ) {
-				$this->dieUsage( 'Invalid entity id provided', 'no-such-entity' );
-			}
-
-			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
-
-			if ( $content === null ) {
-				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'no-such-entity' );
-			}
-
-			$contents[] = $content;
+		foreach ( $params['claim'] as $guid ) {
+			$changeOps[] = new ChangeOpClaim( $guid, null, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		}
 
-		return $contents;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param Claims $claims
-	 * @param string[] $guids
-	 *
-	 * @return Claims
-	 */
-	protected function removeClaimsFromList( Claims &$claims, array $guids ) {
-		$removedClaims = new Claims();
-
-		foreach ( $guids as $guid ) {
-			if ( $claims->hasClaimWithGuid( $guid ) ) {
-				$removedClaims->addClaim( $claims->getClaimWithGuid( $guid ) );
-				$claims->removeClaimWithGuid( $guid );
-			}
-		}
-
-		return $removedClaims;
+		return $changeOps;
 	}
 
 	/**
@@ -278,28 +154,10 @@ class RemoveClaims extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
-	 */
-	protected function saveChanges( EntityContent $content, Summary $summary ) {
-		$status = $this->attemptSaveEntity(
-			$content,
-			$summary->toString(),
-			EDIT_UPDATE
-		);
-
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
-	}
-
-	/**
 	 * @see \ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-		) );
+		return array_merge( parent::getPossibleErrors(), array() );
 	}
 
 	/**
@@ -310,17 +168,20 @@ class RemoveClaims extends ApiWikibase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'claim' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+		return array_merge(
+			parent::getAllowedParams(),
+			array(
+				'claim' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_ISMULTI => true,
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
+			)
 		);
 	}
 
@@ -332,15 +193,20 @@ class RemoveClaims extends ApiWikibase {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'claim' => 'A GUID identifying the claim',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'claim' => array( 'One GUID or several (pipe-separated) GUIDs identifying the claims to be removed.',
+					'All claims must belong to the same entity.'
+				),
+				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+				'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
+					"This is used for detecting conflicts during save."
+				),
+				'bot' => array( 'Mark this edit as bot',
+					'This URL flag will only be respected if the user belongs to the group "bot".'
+				),
+			)
 		);
 	}
 
@@ -368,13 +234,6 @@ class RemoveClaims extends ApiWikibase {
 		return array(
 			'api.php?action=wbremoveclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N&token=foobar&baserevid=7201010' => 'Remove claim with GUID of "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N"',
 		);
-	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
 	}
 
 }
