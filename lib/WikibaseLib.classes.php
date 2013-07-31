@@ -87,6 +87,7 @@ return call_user_func( function() {
 		// includes/formatters
 		'Wikibase\Lib\EntityIdFormatter' => 'includes/formatters/EntityIdFormatter.php',
 		'Wikibase\Lib\EntityIdLabelFormatter' => 'includes/formatters/EntityIdLabelFormatter.php',
+		'Wikibase\Lib\MwTimeIsoFormatter' => 'includes/formatters/MwTimeIsoFormatter.php',
 
 		// includes/modules
 		'Wikibase\RepoAccessModule' => 'includes/modules/RepoAccessModule.php',
