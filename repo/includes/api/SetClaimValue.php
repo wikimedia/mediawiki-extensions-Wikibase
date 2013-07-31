@@ -8,7 +8,6 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\ChangeOpClaim;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -111,12 +110,7 @@ class SetClaimValue extends ModifyClaim {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
-
-		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
+		if ( !( $this->claimGuidValidator->validate( $params['claim'] ) ) ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
