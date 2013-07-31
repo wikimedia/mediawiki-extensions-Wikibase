@@ -47,7 +47,7 @@ class SetLabel extends ModifyLangAttribute {
 		$language = $params['language'];
 
 		$this->getChangeOp( $params )->apply( $entity, $summary );
-		$labels = array( $language => $entity->getLabel( $language ) ? $entity->getLabel( $language ) : "" );
+		$labels = array( $language => ( $entity->getLabel( $language ) !== false ) ? $entity->getLabel( $language ) : "" );
 		$this->addLabelsToResult( $labels, 'entity' );
 
 		wfProfileOut( __METHOD__ );
