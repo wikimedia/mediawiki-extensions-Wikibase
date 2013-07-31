@@ -15,6 +15,7 @@ use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\EntityContentFactory;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * Helper class for modifying claims
@@ -76,6 +77,13 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
+	 * @var ClaimGuidValidator
+	 */
+	protected $claimGuidValidator;
+
+	/**
+	 * @since 0.4
+	 *
 	 * @param \ApiMain $apiMain
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param SnakConstructionService $snakConstructionService
@@ -85,12 +93,14 @@ class ClaimModificationHelper {
 		\ApiMain $apiMain,
 		EntityContentFactory $entityContentFactory,
 		SnakConstructionService $snakConstructionService,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		ClaimGuidValidator $claimGuidValidator
 	) {
 		$this->apiMain = $apiMain;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->snakConstructionService = $snakConstructionService;
 		$this->entityIdParser = $entityIdParser;
+		$this->claimGuidValidator = $claimGuidValidator;
 	}
 
 	/**
@@ -116,6 +126,7 @@ class ClaimModificationHelper {
 	 * @param EntityId $entityId
 	 *
 	 * @return \Title
+	 *
 	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
 	 */
 	public function getEntityTitle( EntityId $entityId ) {
@@ -126,6 +137,17 @@ class ClaimModificationHelper {
 		}
 
 		return $entityTitle;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return bool
+	 */
+	public function validateClaimGuid( $claimGuid ) {
+		return $this->claimGuidValidator->validate( $claimGuid );
 	}
 
 	/**

@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase\Api;
 
+use ApiMain;
 use ApiBase, MWException;
 use Wikibase\EntityContent;
 use Wikibase\Claim;

@@ -8,8 +8,8 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\ChangeOpClaim;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
@@ -57,11 +57,16 @@ class SetClaimValue extends ModifyClaim {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		// @todo generalize handling of settings in api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+
 		$this->claimModificationHelper = new ClaimModificationHelper(
 			$mainModule,
 			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
+			new ClaimGuidValidator( $entityPrefixes )
 		);
 	}
 
@@ -111,12 +116,7 @@ class SetClaimValue extends ModifyClaim {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
-
-		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
+		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['claim'] ) ) ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
