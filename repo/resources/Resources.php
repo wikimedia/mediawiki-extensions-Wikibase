@@ -46,6 +46,7 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.toolbarcontroller',
+				'jquery.wikibase.wbtooltip',
 				'wikibase.datamodel',
 				'jquery.json',
 				'jquery.cookie',
