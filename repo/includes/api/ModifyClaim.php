@@ -3,6 +3,7 @@ namespace Wikibase\Api;
 
 use ApiMain;
 use ApiBase, MWException;
+use ApiMain;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\Summary;
