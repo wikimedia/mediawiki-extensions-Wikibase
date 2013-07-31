@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_040293b6",
+        "filename": "repo/includes/changeop/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-31T19:02:22Z",
+      "side": 1,
+      "message": "This comment talks about \"When applying the ChangeOp\". That is something not handled by this class. Please describe the class itself.",
+      "revId": "8cf0c5c0f7869e46fd966de6b46ec18f1065461e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_041b7318",
+        "filename": "repo/includes/changeop/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-31T19:02:22Z",
+      "side": 1,
+      "message": "Probably want to turn this into 3 or 4 methods",
+      "revId": "8cf0c5c0f7869e46fd966de6b46ec18f1065461e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
