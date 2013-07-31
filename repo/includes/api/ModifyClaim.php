@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase\Api;
 
+use ApiMain;
 use ApiBase, MWException;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
@@ -11,6 +12,7 @@ use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\EntityContentFactory;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * Base class for modifying claims, with common functionality
@@ -43,6 +45,29 @@ use Wikibase\EntityContentFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class ModifyClaim extends ApiWikibase {
+
+	/**
+	 * @since 0.4
+	 *
+	 * @var ClaimGuidValidator
+	*/
+	protected $claimGuidValidator;
+
+	/**
+	 * see ApiBase::__construct()
+	 *
+	 * @param ApiMain $mainModule
+	 * @param string  $moduleName
+	 * @param string  $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		// @todo generalize handling of settings in api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+		$this->claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+	}
 
 	/**
 	 * @since 0.4
