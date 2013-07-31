@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_d53cd82f",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-31T14:08:52Z",
+      "side": 1,
+      "message": "This will return null if the id is malformed.  When $entityId is used in the next line, that will cause a fatal error.\n\nPlease add a test case for that :)\n\nA few lines below, we use an EntityIdParser and do a try/catch - this should also be done here. Perhaps we should have convenience functions for this...",
+      "revId": "56a83e32ee91a8fcdf3c934d256e44ea4da8d813",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_154720c0",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-31T14:08:52Z",
+      "side": 1,
+      "message": "I don\u0027t see the point in wfProfileOut before throwing an exception: even though we keep the calls balanced here, the calling code won\u0027t - that would require all functions that use wfProfile to wrap all code in a try/finally block (which php doesn\u0027t even really support).",
+      "revId": "56a83e32ee91a8fcdf3c934d256e44ea4da8d813",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_b51034a9",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-31T14:08:52Z",
+      "side": 1,
+      "message": "Last time I did that I got bashed for abusing inheritance for code re-use :)\nConsider using composition: instead of ModifyClaim, make a ClaimModificationHelper class or some such. It would take an ApiMain object in the constructor for error reporting, etc.\n\nThe advantage is that it could be re-used independently of inheritance, and we could individually test all the functions that are now protected.",
+      "revId": "56a83e32ee91a8fcdf3c934d256e44ea4da8d813",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
