@@ -50,7 +50,7 @@ use Wikibase\Validators\SnakValidator;
  *
  * @group Wikibase
  * @group WikibaseValidators
- * @group WikibaseApi
+ * @group WikibaseAPI
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
