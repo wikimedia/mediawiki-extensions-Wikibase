@@ -3,9 +3,7 @@
 namespace Wikibase\Api;
 
 use Wikibase\Lib\EntityIdParser;
-
 use Wikibase\Lib\SnakConstructionService;
-
 use ApiBase, MWException;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
@@ -16,6 +14,7 @@ use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\ClaimGuidValidator;
+use ValueParsers\ParseException;
 
 /**
  * Helper class for modifying claims
@@ -202,7 +201,7 @@ class ClaimModificationHelper {
 		try {
 			$entityId = $this->entityIdParser->parse( $entityIdParam );
 		} catch ( ParseException $parseException ) {
-			$this->dieUsage( 'Invalid entity ID: ParseException', 'invalid-entity-id' );
+			$this->apiMain->dieUsage( 'Invalid entity ID: ParseException', 'invalid-entity-id' );
 		}
 
 		return $entityId;
