@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a989e1a9_388b3422",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_18b4b032",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a989e1a9_38817451",
         "filename": "repo/includes/api/ClaimModificationHelper.php",
         "patchSetId": 5
@@ -205,6 +223,24 @@
       "writtenOn": "2013-08-01T10:54:25Z",
       "side": 1,
       "message": "Do all the injection stuff here.",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_189e705f",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_787bfc78",
       "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
