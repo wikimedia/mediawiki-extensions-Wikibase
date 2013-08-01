@@ -18,6 +18,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :* NOTE: The default may change in order to use the repo's database name automatically.
 ;sharedCacheDuration: The default duration of entries in the shared object cache, in seconds. Default is 3600 seconds = 1 hour.
 ;sharedCacheType: The type of cache to use for the shared object cache. Defaults to $wgMainCacheType. Use CACHE_XXX constants.
+;urlSchemes: Which URL schemes should be allowed in URL data values. The default is array( 'http', 'https' ). Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding 'mailto' will work, while adding 'gopher' will do nothing.
+:* NOTE: This setting is only really meaningful for the repository, it's shared with the client extension for technical reasons.
 ;entityPrefixes: ID prefixes to use for the different entity types, as an associative array mapping prefixes to entity type constants. Default:
 <poem>
           array(

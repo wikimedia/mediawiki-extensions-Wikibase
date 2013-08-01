@@ -50,13 +50,20 @@ class RegexValidator implements ValueValidator {
 	protected $inverse;
 
 	/**
+	 * @var string
+	 */
+	protected $errorCode;
+
+	/**
 	 * @param string  $expression
 	 * @param bool    $inverse
+	 * @param string  $errorCode code to use when this validator fails.
 	 */
-	public function __construct( $expression, $inverse = false ) {
+	public function __construct( $expression, $inverse = false, $errorCode = 'malformed-value' ) {
 		//TODO: check type
 		$this->expression = $expression;
 		$this->inverse = $inverse;
+		$this->errorCode = $errorCode;
 	}
 
 	/**
@@ -73,14 +80,14 @@ class RegexValidator implements ValueValidator {
 		if ( $match === 0 && !$this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				Error::newError( 'Pattern match failed: ' . $this->expression, null, 'malformed-value', array( $value ) )
+				Error::newError( 'Pattern match failed: ' . $this->expression, null, $this->errorCode, array( $value ) )
 			) );
 		}
 
 		if ( $match === 1 && $this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				Error::newError( 'Negative pattern matched: ' . $this->expression, null, 'malformed-value', array( $value ) )
+				Error::newError( 'Negative pattern matched: ' . $this->expression, null, $this->errorCode, array( $value ) )
 			) );
 		}
 
