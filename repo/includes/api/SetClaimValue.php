@@ -9,7 +9,6 @@ use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\ChangeOpClaim;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
@@ -39,36 +38,6 @@ use Wikibase\Lib\ClaimGuidValidator;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetClaimValue extends ModifyClaim {
-
-	/**
-	 * @since 0.4
-	 *
-	 * @var ClaimModificationHelper
-	 */
-	protected $claimModificationHelper;
-
-	/**
-	 * see ApiBase::__construct()
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string  $moduleName
-	 * @param string  $modulePrefix
-	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-
-		$this->claimModificationHelper = new ClaimModificationHelper(
-			$mainModule,
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
-			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			new ClaimGuidValidator( $entityPrefixes )
-		);
-	}
 
 	/**
 	 * @see \ApiBase::execute

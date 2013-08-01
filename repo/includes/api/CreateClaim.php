@@ -10,7 +10,6 @@ use Wikibase\Claims;
 use Wikibase\ChangeOpClaim;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 use ValueParsers\ParseException;
-use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * API module for creating claims.
@@ -50,18 +49,7 @@ class CreateClaim extends ModifyClaim {
 	protected $snakValidation;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var ClaimModificationHelper
-	 */
-	protected $claimModificationHelper;
-
-	/**
 	 * see ApiBase::__construct()
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string  $moduleName
-	 * @param string  $modulePrefix
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -71,18 +59,6 @@ class CreateClaim extends ModifyClaim {
 			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
 			new ValidatorErrorLocalizer()
-		);
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-
-		$this->claimModificationHelper = new ClaimModificationHelper(
-			$mainModule,
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
-			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			new ClaimGuidValidator( $entityPrefixes )
 		);
 	}
 

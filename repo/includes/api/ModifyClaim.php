@@ -12,6 +12,7 @@ use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\EntityContentFactory;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * Base class for modifying claims.
@@ -41,6 +42,32 @@ use Wikibase\EntityContentFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class ModifyClaim extends ApiWikibase {
+
+	/**
+	 * @since 0.4
+	 *
+	 * @var ClaimModificationHelper
+	 */
+	protected $claimModificationHelper;
+
+	/**
+	 * see ApiBase::__construct()
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		// @todo generalize handling of settings in api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+
+		$this->claimModificationHelper = new ClaimModificationHelper(
+				$mainModule,
+				WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
+				WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
+				WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
+				new ClaimGuidValidator( $entityPrefixes )
+		);
+	}
 
 	/**
 	 * @since 0.4
