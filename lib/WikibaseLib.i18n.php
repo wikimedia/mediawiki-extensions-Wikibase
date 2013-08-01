@@ -713,6 +713,7 @@ $messages['cy'] = array(
 
 /** Danish (dansk)
  * @author Byrial
+ * @author Christian List
  * @author Hede2000
  * @author HenrikKbh
  * @author Poul G
@@ -761,6 +762,9 @@ $messages['da'] = array(
 	'wikibase-validator-bad-entity-id' => 'Fejlformateret ID: $1',
 	'wikibase-validator-bad-entity-type' => 'Uventet entitetstype $1',
 	'wikibase-validator-no-such-entity' => '$1 ikke fundet',
+	'wikibase-validator-no-such-property' => 'Egenskaben $1 blev ikke fundet',
+	'wikibase-validator-bad-value' => 'Ugyldig værdi: $1',
+	'wikibase-validator-bad-value-type' => 'Forkert værditype $1, forventede $2',
 	'datatypes-type-wikibase-item' => 'Emne',
 	'datatypes-type-commonsMedia' => 'Commons media-fil',
 	'version-wikibase' => 'Wikibase',
@@ -1066,6 +1070,7 @@ $messages['eu'] = array(
  * @author Dalba
  * @author Ladsgroup
  * @author Reza1615
+ * @author Rtemis
  * @author ZxxZxxZ
  */
 $messages['fa'] = array(
@@ -1112,6 +1117,9 @@ $messages['fa'] = array(
 	'wikibase-validator-bad-entity-id' => 'شناسه ناقص:$1',
 	'wikibase-validator-bad-entity-type' => 'نوع ورودی غیرمنتظره  $1',
 	'wikibase-validator-no-such-entity' => '$1 یافت نشد',
+	'wikibase-validator-no-such-property' => 'خصوصیت $1 یافت نشد',
+	'wikibase-validator-bad-value' => 'مقدار غیرمجاز: $1',
+	'wikibase-validator-bad-value-type' => 'نوع دادۀ غلط $1 برای $2',
 	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
 	'version-wikibase' => 'ویکی‌بیس',
@@ -1698,6 +1706,7 @@ $messages['ja'] = array(
 	'wikibase-validator-no-such-entity' => '$1 が見つかりません',
 	'wikibase-validator-no-such-property' => 'プロパティ $1 が見つかりません',
 	'wikibase-validator-bad-value' => '値の誤り: $1',
+	'wikibase-validator-bad-value-type' => '値の型 $1 は間違いです。$2 が正しい型です。',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => 'コモンズのメディアファイル',
 	'version-wikibase' => 'ウィキベース',
