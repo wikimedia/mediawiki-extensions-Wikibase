@@ -1,11 +1,11 @@
 <?php
 
 namespace Wikibase;
-use Diff\IDiff;
+
 use Diff\Diff;
 
 /**
- * Class for changes that can be represented as a IDiff.
+ * Class for changes that can be represented as a Diff.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ class DiffChange extends ChangeRow {
 	 *
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
-	 * @return IDiff
+	 * @return Diff
 	 */
 	public function getDiff( $cache = 'no' ) {
 		$info = $this->getInfo( $cache );
@@ -66,9 +66,9 @@ class DiffChange extends ChangeRow {
 	/**
 	 * @since 0.1
 	 *
-	 * @param IDiff $diff
+	 * @param Diff $diff
 	 */
-	public function setDiff( IDiff $diff ) {
+	public function setDiff( Diff $diff ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$info['diff'] = $diff;
 		$this->setField( 'info', $info );
@@ -77,12 +77,12 @@ class DiffChange extends ChangeRow {
 	/**
 	 * @since 0.1
 	 *
-	 * @param IDiff $diff
+	 * @param Diff $diff
 	 * @param array|null $fields
 	 *
 	 * @return DiffChange
 	 */
-	public static function newFromDiff( IDiff $diff, array $fields = null ) {
+	public static function newFromDiff( Diff $diff, array $fields = null ) {
 		$instance = new static(
 			ChangesTable::singleton(),
 			$fields,
