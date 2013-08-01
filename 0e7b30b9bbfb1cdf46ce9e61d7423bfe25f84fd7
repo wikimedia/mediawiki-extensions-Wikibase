@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_53effb1e",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T14:02:38Z",
+      "side": 1,
+      "message": "Avoid accessing settings directly, leave that to registries like WikibaseRepo. Better, create WikibaseReport::getClaimGuidValidator().",
+      "revId": "0e7b30b9bbfb1cdf46ce9e61d7423bfe25f84fd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
