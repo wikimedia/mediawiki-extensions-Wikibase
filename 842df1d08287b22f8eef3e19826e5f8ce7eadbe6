@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_53f29b6f",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-08-01T16:13:21Z",
+      "side": 1,
+      "message": "Should the corresponding qqq also be updated? Current documentation text is the following:\n\n Automatic edit summary generated when removing claims.\n\nAt least the parameter documentation appears to be missing.",
+      "revId": "842df1d08287b22f8eef3e19826e5f8ce7eadbe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
