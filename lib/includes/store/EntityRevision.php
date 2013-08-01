@@ -2,12 +2,7 @@
 
 namespace Wikibase;
 
-use Diff\Comparer\CallbackComparer;
-use Diff\Differ;
-use Diff\MapPatcher;
-use Diff\Patcher;
 use MWException;
-use Wikibase\Lib\GuidGenerator;
 
 /**
  * Represents a revision of a Wikibase entity.
