@@ -41,36 +41,6 @@ use Wikibase\Lib\ClaimGuidValidator;
 class SetClaimValue extends ModifyClaim {
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var ClaimModificationHelper
-	 */
-	protected $claimModificationHelper;
-
-	/**
-	 * see ApiBase::__construct()
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string  $moduleName
-	 * @param string  $modulePrefix
-	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-
-		$this->claimModificationHelper = new ClaimModificationHelper(
-			$mainModule,
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
-			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			new ClaimGuidValidator( $entityPrefixes )
-		);
-	}
-
-	/**
 	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
