@@ -45,6 +45,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 === Basic Settings ===
 
 ;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
+;urlSchemes: Which URL schemes should be allowed in URL data values. The default is array( 'http', 'https' ). Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding 'mailto' will work, while adding 'gopher' will do nothing.
 
 === Expert Settings ===
 ;apiInDebug: Put Wikibase API into debug mode. Boolean, default is false. '''Deprecated'''.
