@@ -13,7 +13,6 @@ use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOps;
 use Wikibase\ChangeOpClaim;
-use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * API module for removing claims.
@@ -43,32 +42,6 @@ use Wikibase\Lib\ClaimGuidValidator;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class RemoveClaims extends ModifyClaim {
-
-	/**
-	 * @since 0.4
-	 *
-	 * @var ClaimModificationHelper
-	 */
-	protected $claimModificationHelper;
-
-	/**
-	 * see ApiBase::__construct()
-	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-
-		$this->claimModificationHelper = new ClaimModificationHelper(
-			$mainModule,
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
-			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			new ClaimGuidValidator( $entityPrefixes )
-		);
-	}
 
 	/**
 	 * @see \ApiBase::execute
