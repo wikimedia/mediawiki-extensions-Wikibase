@@ -46,7 +46,9 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $q8 );
 
-		$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser );
+		$urlSchemes = array( 'http', 'https', 'mailto' );
+
+		$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes );
 		$dataTypeFactory = new DataTypeFactory( $builders->getDataTypeBuilders() );
 
 		return $dataTypeFactory;
@@ -93,14 +95,15 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, 'http://' . str_repeat('x', 256) ), false, 'calendar: too long' ),
 			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, 'http://acme.com/calendar' ), true, 'calendar: URL' ),
 			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, ' http://acme.com/calendar ' ), false, 'calendar: untrimmed' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, ' javascript:alert(1)' ), false, 'calendar: bad URL' ),
 
 			//time['time']
 			//NOTE: The below will fail with a IllevalValueExcpetion once the TimeValue constructor enforces the time format.
 			//      Once that is done, this test and the respective validator can and should both be removed.
 			//array( 'string', new TimeValue( '2013-06-06 11:22:33', 0, 0, 0, 0, 'http://acme.com/calendar' ), false, 'time: not ISO 8601' ),
 
-			//TODO: must be an item reference
-			//TODO: must be from a list of configured values
+			//TODO: calendar must be an item reference
+			//TODO: calendar must be from a list of configured values
 
 			//globe-coordinate
 			array( 'globe-coordinate', 'Foo', false, 'GlobeCoordinateValue expected, string supplied' ),
@@ -112,8 +115,9 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, 'http://' . str_repeat('x', 256) ), false, 'globe: too long' ),
 			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, 'http://acme.com/globe' ), true, 'globe: URL' ),
 			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, ' http://acme.com/globe ' ), false, 'globe: untrimmed' ),
-			//TODO: must be an item reference
-			//TODO: must be from a list of configured values
+			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, ' javascript:alert(1) ' ), false, 'globe: bad URL scheme' ),
+			//TODO: globe must be an item reference
+			//TODO: globe must be from a list of configured values
 		);
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
@@ -124,6 +128,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 				array( 'url', new NumberValue( 7 ), false, 'StringValue expected' ),
 
 				array( 'url', new StringValue( 'http://acme.com' ), true, 'Simple HTTP URL' ),
+				array( 'url', new StringValue( 'https://acme.com/' ), true, 'Simple HTTPS URL' ),
 				array( 'url', new StringValue( 'http://acme.com/foo/bar?some=stuff#fragment' ), true, 'Complex HTTP URL' ),
 
 				// evil url
@@ -131,6 +136,8 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 				array( 'url', new StringValue( '/bla/bla' ), false, 'relative path' ),
 				array( 'url', new StringValue( 'just stuff' ), false, 'just words' ),
 				array( 'url', new StringValue( 'javascript:alert("evil")' ), false, 'JavaScript URL' ),
+				array( 'url', new StringValue( 'http://' ), false, 'bad http URL' ),
+				array( 'url', new StringValue( 'http://' . str_repeat('x', 505) ), false, 'URL too long' ),
 			) );
 		}
 

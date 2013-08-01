@@ -96,7 +96,8 @@ final class WikibaseClient {
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
 
-			$builders = new WikibaseDataTypeBuilders( $this->getEntityLookup(), $this->getEntityIdParser() );
+			$urlSchemes = $this->getSettings()->getSetting( 'urlSchemes' );
+			$builders = new WikibaseDataTypeBuilders( $this->getEntityLookup(), $this->getEntityIdParser(), $urlSchemes );
 
 			$typeBuilderSpecs = array_intersect_key(
 				$builders->getDataTypeBuilders(),
