@@ -88,7 +88,8 @@ final class LibRegistry {
 				throw new \RuntimeException( "Neither repo nor client found!" );
 			}
 
-			$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser );
+			$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
+			$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes );
 
 			$typeBuilderSpecs = array_intersect_key(
 				$builders->getDataTypeBuilders(),

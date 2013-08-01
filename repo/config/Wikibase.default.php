@@ -98,6 +98,10 @@ return call_user_func( function() {
 			// hardcoded internal handling
 			'html',
 		),
+
+		// URL schemes allowed for values of the URL type.
+		// Supported types include 'http', 'https', and 'mailto'.
+		'urlSchemes' => array( 'http', 'https' ),
 	);
 
 	return $defaults;
