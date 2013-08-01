@@ -310,25 +310,20 @@ final class Utils {
 	}
 
 	/**
-	 * Return the appropriate copyright message.
+	 * Returns an appropriate copyright message containing a link to the wiki's copyright policy.
 	 *
-	 * Note that if this is a wiki using the WikimediaMessages extension (i.e. Wikidata)
-	 * it will use the shortcopyrightwarning message from that extension instead.
+	 * @since 0.4
 	 *
 	 * @return \Message
 	 */
 	public static function getCopyrightMessage() {
 		global $wgRightsUrl, $wgRightsText;
 
-		if ( wfMessage( 'wikidata-shortcopyrightwarning' )->exists() ) {
-			$rightsWarningMessage = wfMessage( 'wikidata-shortcopyrightwarning' );
-		} else {
-			$rightsWarningMessage = wfMessage( 'wikibase-shortcopyrightwarning',
-				wfMessage( 'wikibase-save' )->inContentLanguage()->text(),
-				wfMessage( 'copyrightpage' )->inContentLanguage()->text(),
-				"[$wgRightsUrl $wgRightsText]"
-			);
-		}
+		$rightsWarningMessage = wfMessage( 'wikibase-shortcopyrightwarning',
+			wfMessage( 'wikibase-save' )->inContentLanguage()->text(),
+			wfMessage( 'copyrightpage' )->inContentLanguage()->text(),
+			"[$wgRightsUrl $wgRightsText]"
+		);
 
 		return $rightsWarningMessage;
 	}
