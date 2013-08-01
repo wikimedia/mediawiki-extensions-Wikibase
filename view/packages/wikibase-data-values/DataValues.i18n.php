@@ -118,6 +118,13 @@ $messages['dsb'] = array(
 	'version-datavalues' => 'Datowe gódnoty',
 );
 
+/** Greek (Ελληνικά)
+ * @author Protnet
+ */
+$messages['el'] = array(
+	'datavalues-desc' => 'Συλλογή αντικειμένων που αντιπροσωπεύουν διάφορα είδη τιμών',
+);
+
 /** Spanish (español)
  * @author Armando-Martin
  */
