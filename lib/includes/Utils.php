@@ -333,4 +333,16 @@ final class Utils {
 		return $rightsWarningMessage;
 	}
 
+	/**
+	 * Returns a string for indicating which version of the copyright message is being used when
+	 * calling getRightsWarningMessage.
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public static function getRightsWarningVersion() {
+		return wfMessage( 'wikibase-shortcopyrightwarning-version' )->text();
+	}
+
 }

@@ -222,17 +222,18 @@
 			}
 
 			// add copyright warning to 'save' button if there is one:
-			if( mw.config.exists( 'wbCopyrightWarning' ) ) {
+			if( mw.config.exists( 'wbCopyright' ) ) {
 
-				var userLang = mw.config.get( 'wgUserLanguage' ),
-					cookieKey = 'wikibase.acknowledgedentitycopyright.' + userLang,
-					$message = $( '<span><p>' + mw.config.get( 'wbCopyrightWarning' ) + '</p></span>' ),
-					messageText = $.trim( $message.text() ); // get this before adding $hideMessage link!
+				var copyRight = mw.config.get( 'wbCopyright' ),
+					copyRightVersion = copyRight.version,
+					copyRightMessageHtml = copyRight.messageHtml,
+					cookieKey = 'wikibase.acknowledgedcopyrightversion';
 
-				if( messageText === $.cookie( cookieKey ) ) {
+				if( copyRightVersion === $.cookie( cookieKey ) ) {
 					return;
 				}
 
+				var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' );
 				var $activeToolbar = $( '.wb-edit' )
 					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
 					// on PropertyEditTool only appended when really being edited by the user though
@@ -271,7 +272,7 @@
 				$hideMessage.on( 'click', function( event ) {
 					event.preventDefault();
 					$messageAnchor.data( 'wbtooltip' ).degrade( true );
-					$.cookie( cookieKey, messageText, { 'expires': 365*3, 'path': '/' } );
+					$.cookie( cookieKey, copyRightVersion, { 'expires': 365*3, 'path': '/' } );
 				} );
 
 				$messageAnchor.data( 'wbtooltip' ).show();
