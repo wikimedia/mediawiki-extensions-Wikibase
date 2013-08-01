@@ -17,6 +17,8 @@ use Wikibase\Validators\EntityIdValidator;
 use Wikibase\Validators\RegexValidator;
 use Wikibase\Validators\StringLengthValidator;
 use Wikibase\Validators\TypeValidator;
+use Wikibase\Validators\UrlSchemeValidators;
+use Wikibase\Validators\UrlValidator;
 
 /**
  * Defines the data types supported by Wikibase.
@@ -56,12 +58,24 @@ class WikibaseDataTypeBuilders {
 	 */
 	protected $entityIdParser;
 
+	/**
+	 * @var array
+	 */
+	protected $urlSchemes;
+
+	/**
+	 * @param EntityLookup   $lookup
+	 * @param EntityIdParser $idParser
+	 * @param array          $urlSchemes
+	 */
 	public function __construct(
 		EntityLookup $lookup,
-		EntityIdParser $idParser
+		EntityIdParser $idParser,
+		array $urlSchemes
 	) {
 		$this->entityIdParser = $idParser;
 		$this->entityLookup = $lookup;
+		$this->urlSchemes = $urlSchemes;
 	}
 
 	/**
@@ -129,6 +143,7 @@ class WikibaseDataTypeBuilders {
 		$validators = array();
 
 		$validators[] = new TypeValidator( 'string' );
+		//TODO: validate UTF8 (here and elsewhere)
 		$validators[] = new StringLengthValidator( 1, 400, 'mb_strlen' );
 		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
 
@@ -145,10 +160,7 @@ class WikibaseDataTypeBuilders {
 
 		// calendar model field
 		$calendarIdValidators = array();
-		$calendarIdValidators[] = new TypeValidator( 'string' );
-		$calendarIdValidators[] = new StringLengthValidator( 1, 255 );
-		$calendarIdValidators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
-		//TODO: enforce IRI/URI syntax / item URIs
+		$calendarIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
 		//TODO: enforce well known calendar models from config
 
 		$validators[] = new DataFieldValidator( 'calendarmodel', // Note: validate the 'calendarmodel' field
@@ -180,11 +192,8 @@ class WikibaseDataTypeBuilders {
 
 		// calendar model field
 		$globeIdValidators = array();
-		$globeIdValidators[] = new TypeValidator( 'string' );
-		$globeIdValidators[] = new StringLengthValidator( 1, 255 );
-		$globeIdValidators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
-		//TODO: enforce IRI/URI syntax / item URIs
-		//TODO: enforce well known calendar models from config
+		$globeIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
+		//TODO: enforce well known reference globes from config
 
 		$validators[] = new DataFieldValidator( 'globe', // Note: validate the 'calendarmodel' field
 			new CompositeValidator( $globeIdValidators, true ) //Note: each validator is fatal
@@ -198,21 +207,22 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'globecoordinate', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
-	public function buildUrlType( $id ) {
-		$validators = array();
-
+	public function buildUrlValidator( $urlSchemes, $maxLength = 500 ) {
 		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new StringLengthValidator( 1, 500 );
-		//TODO: validate UTF8 (here and elsewhere)
+		$validators[] = new StringLengthValidator( 2, $maxLength );
 
-		$protocols = wfUrlProtocolsWithoutProtRel();
-		$urlPattern = '#^' . $protocols .':(' . Parser::EXT_LINK_URL_CLASS . ')+#';
+		$urlValidators = new UrlSchemeValidators();
+		$urlSchemeValidators = $urlValidators->getValidators( $urlSchemes );
+		$validators[] = new UrlValidator( $urlSchemeValidators );
 
-		//TODO: custom messages would be nice for RegexValidator
-		$validators[] = new RegexValidator( $urlPattern );
+		return new CompositeValidator( $validators, true ); //Note: each validator is fatal
+	}
+
+	public function buildUrlType( $id ) {
+		$urlValidator = $this->buildUrlValidator( $this->urlSchemes, 500 );
 
 		$topValidator = new DataValueValidator( //Note: validate the DataValue's native value.
-			new CompositeValidator( $validators, true ) //Note: each validator is fatal
+			$urlValidator
 		);
 
 		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );

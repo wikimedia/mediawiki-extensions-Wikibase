@@ -166,6 +166,8 @@ return call_user_func( function() {
 		'Wikibase\Validators\StringLengthValidator' => 'includes/Validators/StringLengthValidator.php',
 		'Wikibase\Validators\TypeValidator' => 'includes/Validators/TypeValidator.php',
 		'Wikibase\Validators\ValidatorErrorLocalizer' => 'includes/Validators/ValidatorErrorLocalizer.php',
+		'Wikibase\Validators\UrlValidator' => 'includes/Validators/UrlValidator.php',
+		'Wikibase\Validators\UrlSchemeValidators' => 'includes/Validators/UrlSchemeValidators.php',
 
 		// tests
 		'Wikibase\Test\SpecialPageTestBase' => 'tests/phpunit/specials/SpecialPageTestBase.php',

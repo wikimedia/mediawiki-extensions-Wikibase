@@ -116,6 +116,10 @@ return call_user_func( function() {
 			'time',
 			'globe-coordinate',
 		),
+
+		// URL schemes allowed for values of the URL type.
+		// Supported types include 'http', 'https', and 'mailto'.
+		'urlSchemes' => array( 'http', 'https' ),
 	);
 
 	// experimental stuff

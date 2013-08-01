@@ -63,6 +63,10 @@ $messages['en'] = array(
 	'wikibase-validator-no-such-property' => 'Property $1 not found',
 	'wikibase-validator-bad-value' => 'Illegal value: $1',
 	'wikibase-validator-bad-value-type' => 'Bad value type $1, expected $2',
+	'wikibase-validator-bad-url' => 'Malformed URL: $1', //FIXME: make sure $1 is excaped!
+	'wikibase-validator-bad-url-scheme' => 'Unsupported URL scheme: $1',
+	'wikibase-validator-bad-http-url' => 'Malformed HTTP URL: $1',
+	'wikibase-validator-bad-mailto-url' => 'Malformed mailto URL: $1',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
 	'version-wikibase' => 'Wikibase',
@@ -197,6 +201,22 @@ This kind of error is unlikely to occur during normal operation, since the user 
 Parameters:
 * $1 is the actual value type
 * $2 is the expected value type',
+	'wikibase-validator-bad-url' => 'Input validation error shown when the value is an invalid URL.
+
+Parameters:
+* $1 is the malformed URL',
+	'wikibase-validator-bad-url-scheme' => 'Input validation error shown when the value is a URL using an unsupported protocol (scheme).
+
+Parameters:
+* $1 is the scheme name',
+	'wikibase-validator-bad-http-url' => 'Input validation error shown when the value is an HTTP or HTTPS URL.
+
+Parameters:
+* $1 is the malformed URL',
+	'wikibase-validator-bad-mailto-url'  => 'Input validation error shown when the value is an invalid "mailto" URL.
+
+Parameters:
+* $1 is the malformed URL',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
