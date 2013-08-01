@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_539d3bb7",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:57:31Z",
+      "side": 1,
+      "message": "Please use: EntityTitleLookup $entityTitleLookup",
+      "revId": "003b900f954c88f5b9412201a885c77c01bd08a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_73a23f01",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:57:31Z",
+      "side": 1,
+      "message": "use $this-\u003eentityContentFactory resp. $this-\u003eentityTitleLookup",
+      "revId": "003b900f954c88f5b9412201a885c77c01bd08a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_9380a34b",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:57:31Z",
+      "side": 1,
+      "message": "IllegalValueException is unknown in this package, please import! As it is, no exception would be caught here.",
+      "revId": "003b900f954c88f5b9412201a885c77c01bd08a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_b395a788",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:57:31Z",
+      "side": 1,
+      "message": "IllegalValueException is unknown in this package, please import! And please do the same in ChangeOp, it\u0027s also missing the import.",
+      "revId": "003b900f954c88f5b9412201a885c77c01bd08a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_f3b64f3c",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:57:31Z",
+      "side": 1,
+      "message": "I think this means that the save will fail if the entity doesn\u0027t yet exist.",
+      "revId": "003b900f954c88f5b9412201a885c77c01bd08a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_13b49332",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:57:31Z",
+      "side": 1,
+      "message": "Perhaps just move this into attemptSaveEntity and get rid of saveChanges?",
+      "revId": "003b900f954c88f5b9412201a885c77c01bd08a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_33819751",
+        "filename": "repo/includes/api/SetClaimValue.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:57:31Z",
+      "side": 1,
+      "message": "Snak needs to be validated!",
+      "revId": "003b900f954c88f5b9412201a885c77c01bd08a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
