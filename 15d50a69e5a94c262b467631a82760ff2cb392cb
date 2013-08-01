@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_53537b16",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpClaimTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:42:04Z",
+      "side": 1,
+      "message": "better to make our own instance....",
+      "revId": "15d50a69e5a94c262b467631a82760ff2cb392cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_73587f30",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpClaimTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:42:04Z",
+      "side": 1,
+      "message": "better to make our own instance....",
+      "revId": "15d50a69e5a94c262b467631a82760ff2cb392cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_935d0321",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpClaimTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T13:42:04Z",
+      "side": 1,
+      "message": "No tests for the autosummary?",
+      "revId": "15d50a69e5a94c262b467631a82760ff2cb392cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
