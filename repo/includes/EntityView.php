@@ -841,7 +841,10 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
 		// copyright warning message
-		$out->addJsConfigVars( 'wbCopyrightWarning', Utils::getRightsWarningMessage()->parse() );
+		$out->addJsConfigVars( 'wbCopyright', array(
+			'version' => Utils::getRightsWarningVersion(),
+			'messageHtml' => Utils::getRightsWarningMessage()->parse(),
+		) );
 
 		// TODO: use injected id formatter
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
