@@ -50,6 +50,13 @@ $messages['ast'] = array(
 	'wikibasedatamodel-desc' => "Componente que define'l modelu de datos de Wikibase",
 );
 
+/** Danish (dansk)
+ * @author Christian List
+ */
+$messages['da'] = array(
+	'wikibasedatamodel-desc' => 'Komponent, der definerer datamodellen for Wikibase',
+);
+
 /** German (Deutsch)
  * @author Metalhead64
  */
