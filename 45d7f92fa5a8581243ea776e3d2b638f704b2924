@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a989e1a9_388c142f",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:55:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_f5547c53",
+      "revId": "45d7f92fa5a8581243ea776e3d2b638f704b2924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a989e1a9_354fc4be",
         "filename": "repo/includes/api/ModifyClaim.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-31T14:17:04Z",
       "side": 1,
       "message": "Again, please consider making this a ClaimModificationHelper that can be used via composition and tested separately.",
+      "revId": "45d7f92fa5a8581243ea776e3d2b638f704b2924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_5891d844",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:55:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_354fc4be",
       "revId": "45d7f92fa5a8581243ea776e3d2b638f704b2924",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
