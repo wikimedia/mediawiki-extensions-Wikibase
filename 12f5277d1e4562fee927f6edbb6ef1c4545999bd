@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a989e1a9_13e65346",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-01T14:07:10Z",
+      "side": 1,
+      "message": "THis kind of thing really belongs into WikibaseRepo. It could have getEntityPrefixes() and/or getClaimGuidValidator().",
+      "revId": "12f5277d1e4562fee927f6edbb6ef1c4545999bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
