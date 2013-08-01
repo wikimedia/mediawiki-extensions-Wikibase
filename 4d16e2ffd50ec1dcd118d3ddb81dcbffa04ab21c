@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a989e1a9_18e67046",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_f8b62c3c",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a989e1a9_9880c04b",
         "filename": "repo/includes/api/ClaimModificationHelper.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-01T10:54:25Z",
       "side": 1,
       "message": "This isn\u0027t specific to modifying claims, and should this probably be in a different helper class. Not urgent, just saying...",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_d8db2878",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:06Z",
+      "side": 1,
+      "message": "added a TODO",
+      "parentUuid": "a989e1a9_9880c04b",
       "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "a989e1a9_78105c01",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_38817451",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a989e1a9_b8958488",
         "filename": "repo/includes/api/ClaimModificationHelper.php",
         "patchSetId": 5
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "a989e1a9_f8e8ec13",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:06Z",
+      "side": 1,
+      "message": "already added a TODO for that",
+      "parentUuid": "a989e1a9_b8958488",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a989e1a9_58863869",
         "filename": "repo/includes/api/ClaimModificationHelper.php",
         "patchSetId": 5
@@ -98,6 +170,24 @@
       "writtenOn": "2013-08-01T10:54:25Z",
       "side": 1,
       "message": "Inject! The global instance depends on settings, so we can\u0027t predict what prefixes we\u0027ll get. Not good for testing.",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_b8fae4b8",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a989e1a9_58863869",
       "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +222,24 @@
       "writtenOn": "2013-08-01T10:54:25Z",
       "side": 1,
       "message": "loadEntityContent() is highly generic and usable throughout our API modules. Should be in a helper class so it can be re-used everywhere. \n\nProbabaly shouldn\u0027t be changed in this patch, but it\u0027s something to keep in mind.",
+      "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a989e1a9_b8de6468",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-01T11:53:06Z",
+      "side": 1,
+      "message": "added a TODO",
+      "parentUuid": "a989e1a9_f88f0c74",
       "revId": "4d16e2ffd50ec1dcd118d3ddb81dcbffa04ab21c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
