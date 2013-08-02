@@ -8,7 +8,6 @@ use Wikibase\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 use ValueParsers\ParseException;
 
 /**
@@ -42,27 +41,6 @@ use ValueParsers\ParseException;
 class CreateClaim extends ModifyClaim {
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var SnakValidationHelper
-	 */
-	protected $snakValidation;
-
-	/**
-	 * see ApiBase::__construct()
-	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$this->snakValidation = new SnakValidationHelper(
-			$this,
-			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
-			new ValidatorErrorLocalizer()
-		);
-	}
-
-	/**
 	 * @see \ApiBase::execute
 	 *
 	 * @since 0.2
@@ -83,7 +61,6 @@ class CreateClaim extends ModifyClaim {
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
-		$this->snakValidation->validateSnak( $snak );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 		$changeOp = new ChangeOpMainSnak( '', $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
