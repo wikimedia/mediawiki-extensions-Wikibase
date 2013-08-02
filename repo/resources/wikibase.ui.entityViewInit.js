@@ -271,7 +271,7 @@
 				$hideMessage.on( 'click', function( event ) {
 					event.preventDefault();
 					$messageAnchor.data( 'wbtooltip' ).degrade( true );
-					$.cookie( cookieKey, messageText, { 'expires': null, 'path': '/' } );
+					$.cookie( cookieKey, messageText, { 'expires': 365*3, 'path': '/' } );
 				} );
 
 				$messageAnchor.data( 'wbtooltip' ).show();
