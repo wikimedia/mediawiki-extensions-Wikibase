@@ -5,7 +5,7 @@ use Wikibase\Entity;
 use Wikibase\Claim;
 
 /**
- * Unit tests for the Wikibase\ApiRemoveClaims class.
+ * @covers Wikibase\Api\RemoveClaims
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -147,30 +147,31 @@ class RemoveClaimsTest extends \ApiTestCase {
 	}
 
 	/**
+	 * @expectedException \UsageException
+	 *
 	 * @dataProvider invalidClaimProvider
 	 */
-	public function testRemoveInvalidClaims( $claimGuid ) {
-		$caughtException = false;
-
+	public function testRemoveInvalidClaims( $claimGuids ) {
 		$params = array(
 			'action' => 'wbremoveclaims',
-			'claim' => $claimGuid
+			'claim' => is_array( $claimGuids ) ? implode( '|', $claimGuids ) : $claimGuids,
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		try {
-			$this->doApiRequest( $params );
-		} catch ( \UsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
-			$caughtException = true;
-		}
-
-		$this->assertTrue( $caughtException, 'Exception was caught' );
+		$this->doApiRequest( $params );
 	}
 
 	public function invalidClaimProvider() {
+		$entities = $this->entityProvider();
+		$claimsOfEntity1 = $entities[0]->getClaims();
+		$claimsOfEntity2 = $entities[1]->getClaims();
+		$claim1OfEntity1 = $claimsOfEntity1[0];
+		$claim1OfEntity2 = $claimsOfEntity2[0];
+
 		return array(
-			array( 'xyz' ),
-			array( 'x$y$z' )
+			array( 'xyz' ), //wrong guid
+			array( 'x$y$z' ), //wrong guid
+			array( array( $claim1OfEntity1->getGuid(), $claim1OfEntity2->getGuid() ) ), //claims of different entities
 		);
 	}
 

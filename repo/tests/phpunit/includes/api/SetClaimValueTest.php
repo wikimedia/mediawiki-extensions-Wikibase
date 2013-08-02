@@ -6,7 +6,7 @@ use Wikibase\Claim;
 use Wikibase\EntityId;
 
 /**
- * Unit tests for the Wikibase\class ApiSetClaimValue class.
+ * @covers Wikibase\Api\SetClaimValue
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -159,7 +159,8 @@ class SetClaimValueTest extends \ApiTestCase {
 	public function invalidClaimProvider() {
 		return array(
 			array( 'xyz' ),
-			array( 'x$y$z' )
+			array( 'x$y$z' ),
+			array( 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f' )
 		);
 	}
 

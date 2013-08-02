@@ -3,24 +3,13 @@
 namespace Wikibase\Api;
 
 use ApiBase, MWException;
-
 use ApiMain;
-use DataValues\IllegalValueException;
-use InvalidArgumentException;
-use ValueParsers\ParseException;
 use Wikibase\EntityId;
-use Wikibase\Entity;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\LibRegistry;
-use Wikibase\Claim;
-use Wikibase\Autocomment;
-use Wikibase\Summary;
-use Wikibase\Snak;
+use Wikibase\Claims;
+use Wikibase\ChangeOpClaim;
 use Wikibase\Validators\ValidatorErrorLocalizer;
+use ValueParsers\ParseException;
 
 /**
  * API module for creating claims.
@@ -48,21 +37,19 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class CreateClaim extends ApiWikibase {
-
+class CreateClaim extends ModifyClaim {
 
 	/**
+	 * @since 0.4
+	 *
 	 * @var SnakValidationHelper
 	 */
 	protected $snakValidation;
 
 	/**
 	 * see ApiBase::__construct()
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string  $moduleName
-	 * @param string  $modulePrefix
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -86,105 +73,29 @@ class CreateClaim extends ApiWikibase {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$entityContent = $this->getEntityContent();
+		$entityId = $this->claimModificationHelper->getEntityIdFromString( $params['entity'] );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		// TODO: put loadEntityContent into a separate helper class for great reuse!
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entity = $entityContent->getEntity();
 
-		// It is possible we get an exception from this method because of specifying
-		// a non existing-property, specifying an entity id for an entity with wrong
-		// entity type or providing an invalid DataValue.
-		try {
-			$snak = $this->getSnakInstance();
+		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 
-			$this->snakValidation->validateSnak( $snak );
+		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
+		$this->snakValidation->validateSnak( $snak );
 
-			$claim = $this->addClaim( $entityContent->getEntity(), $snak );
-			$summary = $this->createSummary( $snak, 'create' );
+		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+		$changeOp = new ChangeOpClaim( '', $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$changeOp->apply( $entity, $summary );
+		$claims = new Claims( $entity->getClaims() );
+		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
 
-			$this->saveChanges( $entityContent, $summary );
+		$this->saveChanges( $entityContent, $summary );
 
-			$this->outputClaim( $claim );
-
-		}
-		catch ( IllegalValueException $ex ) {
-			$this->dieUsage( 'Invalid snak: IllegalValueException', 'invalid-snak' );
-		}
-		catch ( PropertyNotFoundException $ex ) {
-			$this->dieUsage( 'Invalid snak: PropertyNotFoundException', 'invalid-snak' );
-		}
-		catch ( ParseException $parseException ) {
-			$this->dieUsage( 'Invalid guid: ParseException', 'invalid-guid' );
-		}
+		$this->claimModificationHelper->addClaimToApiResult( $claim );
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Constructs a new Claim based on the arguments provided to the API,
-	 * adds it to the Entity and saves it.
-	 *
-	 * On success, the added Claim is returned as part of the Status object.
-	 *
-	 * @since 0.2
-	 *
-	 * @param \Wikibase\Entity $entity
-	 * @param \Wikibase\Snak $snak
-	 *
-	 * @return Claim
-	 */
-	protected function addClaim( Entity $entity, Snak $snak ) {
-		wfProfileIn( __METHOD__ );
-		$claim = $entity->newClaim( $snak );
-
-		$entity->addClaim( $claim );
-
-		wfProfileOut( __METHOD__ );
-		return $claim;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param \Wikibase\EntityContent $content
-	 * @param \Wikibase\Summary $summary
-	 */
-	protected function saveChanges( EntityContent $content, Summary $summary ) {
-		$status = $this->attemptSaveEntity(
-			$content,
-			$summary->toString(),
-			EDIT_UPDATE
-		);
-
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
-	}
-
-	/**
-	 * Create a summary
-	 *
-	 * @since 0.4
-	 *
-	 * @param Snak $snak
-	 * @param string $action
-	 *
-	 * @return Summary
-	 * @throws \MWException
-	 */
-	protected function createSummary( Snak $snak, $action ) {
-		if ( !is_string( $action ) ) {
-			throw new \MWException( 'action is invalid or unknown type.' );
-		}
-
-		$summary = new Summary( $this->getModuleName() );
-		$summary->setAction( $action );
-		$summary->addAutoSummaryArgs( $snak->getPropertyId(), $snak->getDataValue() );
-
-		return $summary;
-	}
-
-	/**
-	 * @see ApiBase::isWriteMode
-	 * @return bool true
-	 */
-	public function isWriteMode() {
-		return true;
 	}
 
 	/**
@@ -192,6 +103,8 @@ class CreateClaim extends ApiWikibase {
 	 * snaktype value are not set.
 	 *
 	 * @since 0.2
+	 *
+	 * @params array $params
 	 */
 	protected function validateParameters( array $params ) {
 		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
@@ -206,152 +119,82 @@ class CreateClaim extends ApiWikibase {
 		if ( !isset( $params['property'] ) ) {
 			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
 		}
-	}
 
-	/**
-	 * @since 0.2
-	 *
-	 * @return EntityContent
-	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		$entityId = EntityId::newFromPrefixedId( $params['entity'] );
-		$entityTitle = $entityId ? EntityContentFactory::singleton()->getTitleForId( $entityId ) : null;
-		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
-
-		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity not found, snak not created', 'no-such-entity' );
+		if ( isset( $params['value'] ) && \FormatJson::decode( $params['value'], true ) == null ) {
+			$this->dieUsage( 'Could not decode snak value', 'invalid-snak' );
 		}
-
-		return $entityContent;
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @return Snak
-	 * @throws ParseException
-	 * @throws IllegalValueException
-	 */
-	protected function getSnakInstance() {
-		$params = $this->extractRequestParams();
-
-		$snakType = $params['snaktype'];
-		$valueData = isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null;
-
-		//TODO: Inject all this, or at least initialize it in a central location.
-		$factory = WikibaseRepo::getDefaultInstance()->getSnakConstructionService();
-		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-
-		$entityId = $entityIdParser->parse( $params['property'] );
-
-		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->dieUsage( 'Property expected, got ' . $entityId->getEntityType(), 'invalid-snak' );
-		}
-
-		return $factory->newSnak(
-			$entityId,
-			$snakType,
-			$valueData
-		);
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param Claim $claim
-	 */
-	protected function outputClaim( Claim $claim ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializer->getSerialized( $claim )
-		);
 	}
 
 	/**
 	 * @see \ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-snak', 'info' => $this->msg( 'wikibase-api-invalid-snak' )->text() ),
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-		) );
+		return array_merge(
+			parent::getPossibleErrors(),
+			$this->claimModificationHelper->getPossibleErrors(),
+			array(
+				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
+				array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
+			)
+		);
 	}
 
 	/**
 	 * @see \ApiBase::getAllowedParams
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'entity' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'snaktype' => array(
-				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'property' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'value' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+		return array_merge(
+			parent::getAllowedParams(),
+			array(
+				'entity' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'snaktype' => array(
+					ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'property' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'value' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
+			)
 		);
 	}
 
 	/**
 	 * @see \ApiBase::getParamDescription
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'entity' => 'Id of the entity you are adding the claim to',
-			'property' => 'Id of the snaks property',
-			'value' => 'Value of the snak when creating a claim with a snak that has a value',
-			'snaktype' => 'The type of the snak',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'entity' => 'Id of the entity you are adding the claim to',
+				'property' => 'Id of the snaks property',
+				'value' => 'Value of the snak when creating a claim with a snak that has a value',
+				'snaktype' => 'The type of the snak',
+				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+				'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
+					"This is used for detecting conflicts during save."
+				),
+				'bot' => array( 'Mark this edit as bot',
+					'This URL flag will only be respected if the user belongs to the group "bot".'
+				),
+			)
 		);
 	}
 
 	/**
 	 * @see \ApiBase::getDescription
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
 	 */
 	public function getDescription() {
 		return array(
@@ -361,15 +204,12 @@ class CreateClaim extends ApiWikibase {
 
 	/**
 	 * @see \ApiBase::getExamples
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=novalue&token=foobar&baserevid=7201010',
-			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010' => 'Creates a claim for q42 of p101 with a value of q1',
+			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=novalue' => 'Creates a claim for item q42 of property p9001 with a novalue snak.',
+			'api.php?action=wbcreateclaim&entity=q42&property=p9002&snaktype=value&value="itsastring"' => ' Creates a claim for item q42 of property p9002 with string value "itsastring"',
+			'api.php?action=wbcreateclaim&entity=q42&property=p9003&snaktype=value&value={"entity-type":"item","numeric-id":1}' => 'Creates a claim for item q42 of property p9003 with a value of item q1',
 		);
 	}
 }

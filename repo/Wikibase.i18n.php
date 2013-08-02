@@ -249,6 +249,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-invalid-snak' => 'Invalid snak', # Do not translate
 	'wikibase-api-invalid-list' => 'Invalid list', # Do not translate
 	'wikibase-api-invalid-property-id' => 'Invalid propertyid', # Do not translate
+	'wikibase-api-invalid-entity-id' => 'Invalid entityid', # Do not translate
 	'wikibase-api-invalid-snak' => 'Invalid snak', # Do not translate
 	'wikibase-api-no-common-iten' => 'There is no common item', # Do not translate
 	'wikibase-api-no-data' => 'No data to operate on', # Do not translate
@@ -316,7 +317,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbremoveclaims' => 'Removed {{PLURAL:$1|a claim|claims}}',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Created claim',
-	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$1|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'Changed {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'Created {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Changed {{PLURAL:$4|one qualifier|$4 qualifiers}} of {{PLURAL:$3|claim|claims}}',
@@ -920,6 +921,7 @@ See also:
 	'wikibase-api-invalid-snak' => '!!DO NOT TRANSLATE!! Invalid snak has been provided, This is similar to invalid-json',
 	'wikibase-api-invalid-list' => '!!DO NOT TRANSLATE!! Invalid list or data has been provided. This can occour when a list conflicts with itself (the list contains something to modify, but also to remove this item)',
 	'wikibase-api-invalid-property-id' => '!!DO NOT TRANSLATE!! Invalid propertyid has been supplied',
+	'wikibase-api-invalid-entity-id' => '!!DO NOT TRANSLATE!! Invalid entityid has been supplied',
 	'wikibase-api-no-common-iten' => '!!DO NOT TRANSLATE!! There is no common item between to passed parameters when there should be',
 	'wikibase-api-no-data' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are some exceptional error condition. This message should probably not exist in the final version.',
 	'wikibase-api-no-external-page' => '!!DO NOT TRANSLATE!! This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.',
@@ -1000,7 +1002,8 @@ Parameters:
 	'wikibase-item-summary-wbremoveclaims' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more claim is removed.}}',
 	'wikibase-item-summary-special-create-item' => '{{wikibase summary messages|item|Automatic edit summary when creating an item, and supplying one or more values. This page can take an additional sitelink, but this does not reflect in the autocomment.}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Automatic edit summary generated when creating a new claim.',
-	'wikibase-item-summary-wbremoveclaims-remove' => 'Automatic edit summary generated when removing claims.',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'Automatic edit summary generated when removing claims. Parameters:
+* $1 - number of claims that got removed',
 	'wikibase-item-summary-wbsetclaim-update' => 'Automatic edit summary generated when modifying a claim using setclaim. Parameters:
 * $3 - number of claims changed',
 	'wikibase-item-summary-wbsetclaim-create' => 'Automatic edit summary generated when creating a new claim using setclaim. Parameters:

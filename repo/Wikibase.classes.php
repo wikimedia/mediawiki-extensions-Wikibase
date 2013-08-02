@@ -57,6 +57,7 @@ return call_user_func( function() {
 		'Wikibase\ChangeOpDescription' => 'includes/changeop/ChangeOpDescription.php',
 		'Wikibase\ChangeOpAliases' => 'includes/changeop/ChangeOpAliases.php',
 		'Wikibase\ChangeOpSiteLink' => 'includes/changeop/ChangeOpSiteLink.php',
+		'Wikibase\ChangeOpClaim' => 'includes/changeop/ChangeOpClaim.php',
 
 		// includes/actions
 		'Wikibase\HistoryEntityAction' => 'includes/actions/HistoryEntityAction.php',
@@ -96,6 +97,8 @@ return call_user_func( function() {
 		'Wikibase\Api\RemoveQualifiers' => 'includes/api/RemoveQualifiers.php',
 		'Wikibase\Api\SetQualifier' => 'includes/api/SetQualifier.php',
 		'Wikibase\Api\SnakValidationHelper' => 'includes/api/SnakValidationHelper.php',
+		'Wikibase\Api\ModifyClaim' => 'includes/api/ModifyClaim.php',
+		'Wikibase\Api\ClaimModificationHelper' => 'includes/api/ClaimModificationHelper.php',
 
 		// includes/content
 		'Wikibase\EntityContent' => 'includes/content/EntityContent.php',
