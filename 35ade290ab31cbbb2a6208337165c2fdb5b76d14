@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "898eddaf_674620c5",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-02T14:40:40Z",
+      "side": 1,
+      "message": "you could put the new clause into the first if. no need to make the structure deeper..",
+      "revId": "35ade290ab31cbbb2a6208337165c2fdb5b76d14",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
