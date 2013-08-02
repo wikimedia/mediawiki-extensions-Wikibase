@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use Site;
 use Wikibase\ChangeHandler;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityUsageIndex;
 use Wikibase\Item;
@@ -437,12 +438,14 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 		$offset = 100 * $entityId + 1000 * $userId;
 
+		$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+
 		// create with a label and site link set
 		$create = self::makeChange( array(
 			'id' => $offset + 1,
 			'type' => 'wikibase-item~add',
 			'time' => '20130101010101',
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $idFormatter->format( $entity->getId() ),
 			'revision_id' => $offset + 11,
 			'user_id' => $userId,
 		), self::makeDiff( Item::ENTITY_TYPE,
@@ -458,7 +461,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'id' => $offset + 23,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020202',
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $idFormatter->format( $entity->getId() ),
 			'revision_id' => $offset + 12,
 			'user_id' => $userId,
 		), self::makeDiff( Item::ENTITY_TYPE,
@@ -495,7 +498,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'id' => $offset + 14,
 			'type' => 'wikibase-item~update',
 			'time' => '20130101020304',
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $idFormatter->format( $entity->getId() ),
 			'revision_id' => $offset + 13,
 			'user_id' => $userId,
 		), self::makeDiff( Item::ENTITY_TYPE,
@@ -532,7 +535,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'id' => $offset + 12,
 			'type' => 'wikibase-item~update',
 			'time' => '20130103030303',
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $idFormatter->format( $entity->getId() ),
 			'revision_id' => $offset + 14,
 			'user_id' => $userId + 17,
 		), self::makeDiff( Item::ENTITY_TYPE,
@@ -547,7 +550,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'id' => $offset + 13,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102030405',
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $idFormatter->format( $entity->getId() ),
 			'revision_id' => $offset + 17,
 			'user_id' => $userId,
 		), self::makeDiff( Item::ENTITY_TYPE,
@@ -564,7 +567,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'id' => $offset + 35,
 			'type' => 'wikibase-item~remove',
 			'time' => '20130105050505',
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $idFormatter->format( $entity->getId() ),
 			'revision_id' => 0,
 			'user_id' => $userId,
 		), self::makeDiff( Item::ENTITY_TYPE,
