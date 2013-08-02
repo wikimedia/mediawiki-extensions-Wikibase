@@ -50,6 +50,13 @@ $messages['ast'] = array(
 	'wikibasedatamodel-desc' => "Componente que define'l modelu de datos de Wikibase",
 );
 
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
+ * @author Wizardist
+ */
+$messages['be-tarask'] = array(
+	'wikibasedatamodel-desc' => 'Кампанэнт, які вызначае мадэль зьвестак Wikibase',
+);
+
 /** Danish (dansk)
  * @author Christian List
  */
