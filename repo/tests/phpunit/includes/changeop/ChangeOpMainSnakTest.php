@@ -3,14 +3,14 @@
 namespace Wikibase\Test;
 
 use Wikibase\Claims;
-use Wikibase\ChangeOpClaim;
+use Wikibase\ChangeOpMainSnak;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\ChangeOpClaim
+ * @covers Wikibase\ChangeOpMainSnak
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
@@ -64,7 +64,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $claimGuid, $snak, $idFormatter ) {
-		$changeOpClaim = new ChangeOpClaim( $claimGuid, $snak, $idFormatter );
+		$ChangeOpMainSnak = new ChangeOpMainSnak( $claimGuid, $snak, $idFormatter );
 	}
 
 	public function changeOpProvider() {
@@ -75,7 +75,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newSnak' ) );
 		$claimGuid = '';
-		$changeOp = new ChangeOpClaim( $claimGuid, $newSnak, $idFormatter );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter );
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -83,14 +83,14 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedSnak' ) );
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
-		$changeOp = new ChangeOpClaim( $claimGuid, $newSnak, $idFormatter );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter );
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
 		$item = $this->provideNewItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
-		$changeOp = new ChangeOpClaim( $claimGuid, null, $idFormatter );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, null, $idFormatter );
 		$expected = null;
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -101,7 +101,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider changeOpProvider
 	 *
 	 * @param Entity $item
-	 * @param ChangeOpClaim $changeOp
+	 * @param ChangeOpMainSnak $changeOp
 	 * @param DataValue|null $expected
 	 */
 	public function testApplyAddNewClaim( $item, $changeOp, $expected ) {

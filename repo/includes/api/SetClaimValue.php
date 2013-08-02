@@ -7,7 +7,7 @@ use ApiMain;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Claims;
-use Wikibase\ChangeOpClaim;
+use Wikibase\ChangeOpMainSnak;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -69,7 +69,7 @@ class SetClaimValue extends ModifyClaim {
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $claim->getMainSnak()->getPropertyId() );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
-		$changeOp = new ChangeOpClaim( $claimGuid, $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$changeOp->apply( $entity, $summary );
 
 		$this->saveChanges( $entityContent, $summary );

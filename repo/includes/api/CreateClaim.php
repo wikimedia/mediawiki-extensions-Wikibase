@@ -7,7 +7,7 @@ use ApiMain;
 use Wikibase\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Claims;
-use Wikibase\ChangeOpClaim;
+use Wikibase\ChangeOpMainSnak;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 use ValueParsers\ParseException;
 
@@ -86,7 +86,7 @@ class CreateClaim extends ModifyClaim {
 		$this->snakValidation->validateSnak( $snak );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
-		$changeOp = new ChangeOpClaim( '', $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$changeOp = new ChangeOpMainSnak( '', $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$changeOp->apply( $entity, $summary );
 		$claims = new Claims( $entity->getClaims() );
 		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
