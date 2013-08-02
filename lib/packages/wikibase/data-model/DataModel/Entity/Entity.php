@@ -247,7 +247,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @return string
 	 */
 	public function setLabel( $langCode, $value ) {
-		// TODO: normalize value
 		$this->data['label'][$langCode] = $value;
 		return $value;
 	}
@@ -262,7 +261,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @return string
 	 */
 	public function setDescription( $langCode, $value ) {
-		// TODO: normalize value
 		$this->data['description'][$langCode] = $value;
 		return $value;
 	}
