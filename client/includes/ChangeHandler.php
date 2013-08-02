@@ -343,7 +343,7 @@ class ChangeHandler {
 				$action = $change->getAction();
 				$meta = $change->getMetadata();
 				$user = $meta['user_text'];
-				$entityId = $change->getEntityId()->getPrefixedId();
+				$entityId = $change->getEntityId()->__toString();
 
 				$break = $breakNext
 					|| $currentAction !== $action
