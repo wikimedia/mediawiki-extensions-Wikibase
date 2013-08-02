@@ -6,13 +6,13 @@ use ApiBase;
 use DataValues\IllegalValueException;
 use ApiMain;
 use MWException;
-
 use ValueParsers\ParseException;
 use Wikibase\EntityContent;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
@@ -24,7 +24,8 @@ use Wikibase\LibRegistry;
 use Wikibase\Settings;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
-use Wikibase\validators\SnakValidator;
+use Wikibase\Validators\SnakValidator;
+use Wikibase\ChangeOpQualifier;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -52,37 +53,14 @@ use Wikibase\validators\SnakValidator;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetQualifier extends ApiWikibase {
+class SetQualifier extends ModifyClaim {
 
-	// TODO: auto comment
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?
 	// TODO: claim uniqueness
-
-	/**
-	 * @var SnakValidationHelper
-	 */
-	protected $snakValidation;
-
-	/**
-	 * see ApiBase::__construct()
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string  $moduleName
-	 * @param string  $modulePrefix
-	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$this->snakValidation = new SnakValidationHelper(
-			$this,
-			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
-			new ValidatorErrorLocalizer()
-		);
-	}
 
 	/**
 	 * @see ApiBase::execute
@@ -95,15 +73,31 @@ class SetQualifier extends ApiWikibase {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$content = $this->getEntityContent();
-
-		$claim = $this->doSetQualifier(
-			$content->getEntity()
+		$entityId = $this->claimModificationHelper->getEntityIdFromString(
+			Entity::getIdFromClaimGuid( $params['claim'] )
 		);
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		// TODO: put loadEntityContent into a separate helper class for great reuse!
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entity = $entityContent->getEntity();
+		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$this->saveChanges( $content );
+		$claimGuid = $params['claim'];
+		$claims = new Claims( $entity->getClaims() );
 
-		$this->outputClaim( $claim );
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+		}
+
+		$claim = $claims->getClaimWithGuid( $claimGuid );
+
+		$changeOp = $this->getChangeOp();
+		$changeOp->apply( $entity, $summary );
+
+		$this->saveChanges( $entityContent, $summary );
+
+		$this->claimModificationHelper->addClaimToApiResult( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -132,59 +126,27 @@ class SetQualifier extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @return EntityContent
+	 * @return ChangeOpQualifier
 	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
-
-		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
-		}
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'Could not find the entity' , 'no-such-entity' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return Claim
-	 */
-	protected function doSetQualifier( Entity $entity ) {
+	protected function getChangeOp() {
 		$params = $this->extractRequestParams();
 
 		$claimGuid = $params['claim'];
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
-
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+		if ( isset( $params['snakhash'] ) ) {
+			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
+			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, $params['snakhash'], $idFormatter );
+		} else {
+			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
+			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '', $idFormatter );
 		}
 
-		$claim = $claims->getClaimWithGuid( $claimGuid );
-
-		$this->updateQualifiers( $claim->getQualifiers() );
-
-		$entity->setClaims( $claims );
-
-		return $claim;
+		return $changeOp;
 	}
 
 	/**
@@ -197,8 +159,7 @@ class SetQualifier extends ApiWikibase {
 
 		if ( isset( $params['snakhash'] ) ) {
 			$this->updateQualifier( $qualifiers, $params['snakhash'] );
-		}
-		else {
+		} else {
 			$this->addQualifier( $qualifiers );
 		}
 	}
@@ -226,7 +187,7 @@ class SetQualifier extends ApiWikibase {
 		$propertyId = isset( $params['property'] ) ? $params['property'] : $snak->getPropertyId();
 
 		if ( is_string( $propertyId ) ) {
-			$propertyId = $this->getParsedPropertyId( $propertyId, 'invalid-property-id' );
+			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $propertyId );
 		}
 
 		$snakType = isset( $params['snaktype'] ) ? $params['snaktype'] : $snak->getType();
@@ -255,25 +216,6 @@ class SetQualifier extends ApiWikibase {
 		}
 
 		return false; // we should never get here.
-	}
-
-	protected function getParsedPropertyId( $prefixedId, $errorCode ) {
-		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-
-		try {
-			$entityId = $entityIdParser->parse( $prefixedId );
-
-			if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
-				$this->dieUsage( 'Not a property: ' . $prefixedId, $errorCode );
-				return null;
-			}
-		}
-		catch ( ParseException $parseException ) {
-			$this->dieUsage( $parseException->getMessage(), $errorCode );
-			return null;
-		}
-
-		return $entityId;
 	}
 
 	/**
@@ -307,55 +249,11 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function addQualifier( Snaks $qualifiers ) {
 		$params = $this->extractRequestParams();
-		$propertyId = $this->getParsedPropertyId( $params['property'], 'invalid-property-id' );
+		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 
-		try {
-			$newQualifier = $this->newSnak(
-				$propertyId,
-				$params['snaktype'],
-				isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
-			);
+		$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
-		$this->snakValidation->validateSnak( $newQualifier );
-
-			return $qualifiers->addSnak( $newQualifier );
-		} catch ( IllegalValueException $illegalValueException ) {
-			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-snak' );
-		}
-
-		return false; // we should never get here.
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
-	 */
-	protected function saveChanges( EntityContent $content ) {
-		// collect information and create an EditEntity
-		$summary = '/* wbsetqualifier */'; // TODO: automcomment
-		$status = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
-
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param Claim $claim
-	 */
-	protected function outputClaim( Claim $claim ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializer->getSerialized( $claim )
-		);
+		return $qualifiers->addSnak( $newQualifier );
 	}
 
 	/**
@@ -366,32 +264,35 @@ class SetQualifier extends ApiWikibase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'claim' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'property' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'value' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'snaktype' => array(
-				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'snakhash' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+		return array_merge(
+			parent::getAllowedParams(),
+			array(
+				'claim' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'property' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'value' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'snaktype' => array(
+					ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'snakhash' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
+			)
 		);
 	}
 
@@ -403,32 +304,35 @@ class SetQualifier extends ApiWikibase {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'claim' => 'A GUID identifying the claim for which a qualifier is being set',
-			'property' => array(
-				'Id of the snaks property.',
-				'Should only be provided when creating a new qualifier or changing the property of an existing one'
-			),
-			'snaktype' => array(
-				'The type of the snak.',
-				'Should only be provided when creating a new qualifier or changing the type of an existing one'
-			),
-			'value' => array(
-				'The new value of the qualifier. ',
-				'Should only be provdied for PropertyValueSnak qualifiers'
-			),
-			'snakhash' => array(
-				'The hash of the snak to modify.',
-				'Should only be provided for existing qualifiers'
-			),
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array(
-				'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'claim' => 'A GUID identifying the claim for which a qualifier is being set',
+				'property' => array(
+					'Id of the snaks property.',
+					'Should only be provided when creating a new qualifier or changing the property of an existing one'
+				),
+				'snaktype' => array(
+					'The type of the snak.',
+					'Should only be provided when creating a new qualifier or changing the type of an existing one'
+				),
+				'value' => array(
+					'The new value of the qualifier. ',
+					'Should only be provdied for PropertyValueSnak qualifiers'
+				),
+				'snakhash' => array(
+					'The hash of the snak to modify.',
+					'Should only be provided for existing qualifiers'
+				),
+				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+				'baserevid' => array(
+					'The numeric identifier for the revision to base the modification on.',
+					"This is used for detecting conflicts during save."
+				),
+				'bot' => array( 'Mark this edit as bot',
+					'This URL flag will only be respected if the user belongs to the group "bot".'
+				),
+			)
 		);
 	}
 
@@ -436,14 +340,14 @@ class SetQualifier extends ApiWikibase {
 	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
-			array( 'code' => 'no-such-qualifer', 'info' => $this->msg( 'wikibase-api-no-such-qualifier' )->text() ),
-			array( 'code' => 'invalid-property-id', 'info' => $this->msg( 'wikibase-api-invalid-property-id' )->text() ),
-		) );
+		return array_merge(
+			parent::getPossibleErrors(),
+			$this->claimModificationHelper->getPossibleErrors(),
+			array(
+				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
+				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
+			)
+		);
 	}
 
 	/**
@@ -471,12 +375,4 @@ class SetQualifier extends ApiWikibase {
 			'api.php?action=wbsetqualifier&claim=q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=q1&value=GdyjxP8I6XB3&snaktype=value&token=foobar' => 'Set the qualifier for the given claim to string value GdyjxP8I6XB3',
 		);
 	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
-	}
-
 }
