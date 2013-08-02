@@ -14,9 +14,6 @@
 
 .ui-inputextender-extension > * {
 	font-size: 84%;
-}
-
-.ui-inputextender-extension .ui-inputextender-contentnode {
 	float: left;
 	clear: both;
 	margin-top: 0.5em;
@@ -26,6 +23,7 @@
 	position: absolute;
 	top: 0;
 	right: 0;
+	margin-top: 0;
 	border: none !important;
 	background: none !important;
 	cursor: pointer;

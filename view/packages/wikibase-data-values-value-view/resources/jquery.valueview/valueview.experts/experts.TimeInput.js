@@ -96,6 +96,58 @@
 		_init: function() {
 			var self = this;
 
+			this.$input = $( '<input/>', {
+				type: 'text',
+				'class': this.uiBaseClass + '-input valueview-input'
+			} )
+			.appendTo( this.$viewPort )
+			.inputextender( {
+				initCallback: function( $extension ) {
+					self._initInputExtender( $extension );
+					// $extension not yet in DOM, so draw() would not update rotators. Call draw
+					// as soon as toggle has been done, from this point on the inputextender's
+					// extension() is available in draw().
+					self.$input.one( 'inputextenderaftertoggle', function( event ) {
+						self.draw();
+						var value = self.rawValue();
+						if( value !== null ) {
+							self.$precision.data( 'listrotator' ).rotate( value.precision() );
+							self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
+						}
+					} );
+				}
+			} )
+			.eachchange( function( event, oldValue ) {
+				var value = self.$input.data( 'timeinput' ).value();
+				if( oldValue === '' && value === null || self.$input.val() === '' ) {
+					self._updatePreview();
+					self._updateCalendarHint();
+				}
+			} )
+			.timeinput( { mediaWiki: this._options.mediaWiki } )
+			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
+				self._updateCalendarHint( value );
+				if( value ) {
+					self.$precision.data( 'listrotator' ).rotate( value.precision() );
+					self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
+				}
+				self._newValue = false; // value, not yet handled by draw(), is outdated now
+				self._viewNotifier.notify( 'change' );
+				self._updatePreview();
+			} );
+
+		},
+
+		/**
+		 * Initializes the input extender with the required content into the given DOM element.
+		 *
+		 * TODO: Split this up. Share code with similar experts (GlobeCoordinate).
+		 *
+		 * @param {jQuery} $extension
+		 */
+		_initInputExtender: function( $extension ) {
+			var self = this;
+
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
 			.append(
@@ -198,47 +250,24 @@
 			)
 			.hide();
 
-			this.$input = $( '<input/>', {
-				type: 'text',
-				'class': this.uiBaseClass + '-input valueview-input'
-			} )
-			.appendTo( this.$viewPort );
-
 			var $preview = $( '<div/>' ).preview( { $input: this.$input } );
 			this.preview = $preview.data( 'preview' );
 
-			this.$input.eachchange( function( event, oldValue ) {
-				var value = self.$input.data( 'timeinput' ).value();
-				if( oldValue === '' && value === null || self.$input.val() === '' ) {
-					self._updatePreview();
-					self._updateCalendarHint();
-				}
-			} )
-			.timeinput( { mediaWiki: this._options.mediaWiki } )
-			// TODO: Move input extender out of here to a more generic place since it is not
-			// TimeInput specific.
-			.inputextender( {
-				content: [ $preview, this.$calendarhint, $toggler, this.$precisionContainer, this.$calendarContainer ],
-				initCallback: function() {
-					self.$precision.data( 'listrotator' ).initWidths();
-					self.$calendar.data( 'listrotator' ).initWidths();
+			// Append everything since the following actions require the fully initialized DOM.
+			$extension.append( [
+				$preview,
+				this.$calendarhint,
+				$toggler,
+				this.$precisionContainer,
+				this.$calendarContainer
+			] );
 
-					var $subjects = self.$precisionContainer.add( self.$calendarContainer );
-					$subjects.css( 'display', 'none' );
-					$toggler.toggler( { $subject: $subjects } );
-				}
-			} )
-			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
-				self._updateCalendarHint( value );
-				if( value ) {
-					self.$precision.data( 'listrotator' ).rotate( value.precision() );
-					self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
-				}
-				self._newValue = false; // value, not yet handled by draw(), is outdated now
-				self._viewNotifier.notify( 'change' );
-				self._updatePreview();
-			} );
+			this.$precision.data( 'listrotator' ).initWidths();
+			this.$calendar.data( 'listrotator' ).initWidths();
 
+			var $subjects = this.$precisionContainer.add( this.$calendarContainer );
+			$subjects.css( 'display', 'none' );
+			$toggler.toggler( { $subject: $subjects } );
 		},
 
 		/**
@@ -261,10 +290,14 @@
 
 			var inputExtender = this.$input.data( 'inputextender' );
 			if( inputExtender ) {
-				// Explicitly destroy calendar and precision list rotators:
-				inputExtender.$extension.find( ':ui-listrotator' ).listrotator( 'destroy' );
-				inputExtender.$extension.find( this.uiBaseClass + '-advancedtoggler' )
-					.toggler( 'destroy' );
+				// TODO: implement a init/destroy callback for input extender's extension instead,
+				//  only called when necessary.
+				if( inputExtender.$extension ) {
+					// Explicitly destroy calendar and precision list rotators:
+					inputExtender.$extension.find( ':ui-listrotator' ).listrotator( 'destroy' );
+					inputExtender.$extension.find( this.uiBaseClass + '-advancedtoggler' )
+						.toggler( 'destroy' );
+				}
 				inputExtender.destroy();
 			}
 
@@ -442,17 +475,24 @@
 				this.$input.data( 'timeinput' ).enable();
 			}
 
+			var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
+
 			if( this._newValue !== false ) {
 				this.$input.data( 'timeinput' ).value( this._newValue );
-				this._updateCalendarHint( this._newValue );
-				if( this._newValue !== null ) {
-					this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
-					this.$calendar.data( 'listrotator' ).value( this._newValue.calendar() );
+
+				if( considerInputExtender ) {
+					this._updateCalendarHint( this._newValue );
+					if( this._newValue !== null ) {
+						this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
+						this.$calendar.data( 'listrotator' ).value( this._newValue.calendar() );
+					}
 				}
 				this._newValue = false;
 			}
 
-			this._updatePreview();
+			if( considerInputExtender ) {
+				this._updatePreview();
+			}
 		},
 
 		/**

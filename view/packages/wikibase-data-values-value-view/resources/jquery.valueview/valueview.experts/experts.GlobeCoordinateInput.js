@@ -74,8 +74,38 @@
 		 * @see jQuery.valueview.Expert._init
 		 */
 		_init: function() {
+			var self = this;
+
+			this.$input = $( '<input/>', {
+				type: 'text',
+				'class': this.uiBaseClass + '-input valueview-input'
+			} )
+			.appendTo( this.$viewPort )
+			.inputextender( {
+				initCallback: function( $extension ) {
+					self._initInputExtender( $extension );
+					// $extension not yet in DOM, so draw() would not update rotators. Call draw
+					// as soon as toggle has been done, from this point on the inputextender's
+					// extension() is available in draw().
+					self.$input.one( 'inputextenderaftertoggle', function( event ) {
+						self.draw();
+					} );
+				}
+			} )
+			.eachchange( function( event, oldValue ) {
+				self._viewNotifier.notify( 'change' );
+			} );
+		},
+
+		/**
+		 * Initializes the input extender with the required content into the given DOM element.
+		 *
+		 * TODO: Split this up. Share code with similar experts (Time).
+		 *
+		 * @param {jQuery} $extension
+		 */
+		_initInputExtender: function( $extension ) {
 			var self = this,
-				notifier = this._viewNotifier,
 				precisionMsgKey = 'valueview-expert-globecoordinateinput-precision',
 				precisionValues = [],
 				listrotatorEvents = 'listrotatorauto listrotatorselected'
@@ -94,56 +124,48 @@
 			} );
 
 			this.$precision = $( '<div/>' )
-				.addClass( this.uiBaseClass + '-precision' )
-				.listrotator( {
-					values: precisionValues.reverse(),
-					deferInit: true
-				} )
-				.on( listrotatorEvents, function( event, newPrecisionLevel ) {
-					var currentValue = self.viewState().value();
+			.addClass( this.uiBaseClass + '-precision' )
+			.listrotator( {
+				values: precisionValues.reverse(),
+				deferInit: true
+			} )
+			.on( listrotatorEvents, function( event, newPrecisionLevel ) {
+				var currentValue = self.viewState().value();
 
-					if( currentValue === null ) {
-						// current rawValue must be invalid anyhow
-						return;
-					}
+				if( currentValue === null ) {
+					// current rawValue must be invalid anyhow
+					return;
+				}
 
-					var currentPrecision = roundPrecision(
-							currentValue.getValue().getPrecision() );
+				var currentPrecision = roundPrecision(
+						currentValue.getValue().getPrecision() );
 
-					if( newPrecisionLevel === currentPrecision ) {
-						// Listrotator has been rotated automatically or the value covering the new
-						// precision has already been generated.
-						return;
-					}
+				if( newPrecisionLevel === currentPrecision ) {
+					// Listrotator has been rotated automatically or the value covering the new
+					// precision has already been generated.
+					return;
+				}
 
-					notifier.notify( 'change' );
-				} )
-				.appendTo( this.$precisionContainer );
+				self._viewNotifier.notify( 'change' );
+			} )
+			.appendTo( this.$precisionContainer );
 
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
 			.text( this._messageProvider.getMessage( 'valueview-expert-advancedadjustments' ) );
 
-			this.$input = $( '<input/>', {
-				type: 'text',
-				'class': this.uiBaseClass + '-input valueview-input'
-			} )
-			.appendTo( this.$viewPort );
-
 			var $preview = $( '<div/>' ).preview( { $input: this.$input } );
 			this.preview = $preview.data( 'preview' );
 
-			this.$input.eachchange( function( event, oldValue ) {
-				notifier.notify( 'change' );
-			} )
-			.inputextender( {
-				content: [ $preview, $toggler, this.$precisionContainer ],
-				initCallback: function() {
-					self.$precision.data( 'listrotator' ).initWidths();
-					self.$precisionContainer.css( 'display', 'none' );
-					$toggler.toggler( { $subject: self.$precisionContainer } );
-				}
-			} );
+			// Append everything since the following actions require the fully initialized DOM.
+			$extension.append( [
+				$preview,
+				$toggler,
+				this.$precisionContainer
+			] );
+			this.$precision.data( 'listrotator' ).initWidths();
+			this.$precisionContainer.css( 'display', 'none' );
+			$toggler.toggler( { $subject: this.$precisionContainer } );
 		},
 
 		/**
@@ -159,15 +181,17 @@
 				this.preview.element.remove();
 			}
 
-			var listRotator = this.$precision.data( 'listrotator' );
+			var listRotator = this.$precision && this.$precision.data( 'listrotator' );
 			if( listRotator ) {
 				listRotator.destroy();
 			}
 
 			var inputExtender = this.$input.data( 'inputextender' );
 			if( inputExtender ) {
-				inputExtender.$extension.find( this.uiBaseClass + '-advancedtoggler' )
-					.toggler( 'destroy' );
+				if( inputExtender.$extension ) {
+					inputExtender.$extension.find( this.uiBaseClass + '-advancedtoggler' )
+						.toggler( 'destroy' );
+				}
 				inputExtender.destroy();
 			}
 
@@ -278,8 +302,13 @@
 				}
 			}
 
-			if( this._newValue
-				|| this.$precision.data( 'listrotator' ).autoActive()
+			var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
+
+			if( considerInputExtender
+				&& (
+					this._newValue
+					|| this.$precision.data( 'listrotator' ).autoActive()
+				)
 			) {
 				// hacky update of precision, just assume the raw value is the value we have in
 				// the valueview right now.
@@ -292,7 +321,9 @@
 			this._newValue = false;
 
 			// Update preview:
-			this.preview.update( geoValue && formatter.format( geoValue.getValue() ) );
+			if( considerInputExtender ) {
+				this.preview.update( geoValue && formatter.format( geoValue.getValue() ) );
+			}
 		},
 
 		/**
