@@ -259,7 +259,6 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-no-such-entity' => 'Could not find such an entity', # Do not translate
 	'wikibase-api-no-such-entity-id' => 'Could not find such an entity id', # Do not translate
 	'wikibase-api-no-such-entity-link' => 'Could not find such an entity link', # Do not translate
-	'wikibase-api-no-such-qualifier' => 'Could not find such a qualifier', # Do not translate
 	'wikibase-api-no-such-reference' => 'Could not find such a reference', # Do not translate
 	'wikibase-api-no-such-site' => 'Could not find such a site', # Do not translate
 	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
@@ -324,6 +323,9 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Changed {{PLURAL:$4|one reference|$4 references}} of {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Changed rank of {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Page moved from [$3] to [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => 'Added {{PLURAL:$1|qualifier|qualifiers}}',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Changed {{PLURAL:$1|qualifier|qualifiers}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -930,7 +932,6 @@ See also:
 	'wikibase-api-no-such-entity' => '!!DO NOT TRANSLATE!! Could not find such an entity, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-entity-id' => '!!DO NOT TRANSLATE!! Could not find such an entity id, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-entity-link' => '!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-qualifier' => '!!DO NOT TRANSLATE!! Could not find such a qualifier, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-reference' => '!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-site' => '!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-statement' => '!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data',
@@ -1046,6 +1047,12 @@ Parameters:
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-wbsetqualifier-add' => 'Automatic edit summary when adding qualifiers. Parameters:
+* $1 is the number of qualifiers added.',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Automatic edit summary when setting qualifiers. Parameters:
+* $1 is the number of qualifiers updated.',
+	'wikibase-item-summary-wbremovequalifiers-remove' => 'Automatic edit summary when removing qualifiers. Parameters:
+* $1 is the number of qualifiers removed.',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}
