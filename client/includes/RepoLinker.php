@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\Client\WikibaseClient;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -100,7 +102,8 @@ class RepoLinker {
 	 * @return string
 	 */
 	public function repoItemUrl( EntityId $entityId ) {
-		$prefixedId = $entityId->getPrefixedId();
+		$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+		$prefixedId = $idFormatter->format( $entityId );
 
 		$itemNamespace = $this->getNamespace( Item::ENTITY_TYPE );
 
