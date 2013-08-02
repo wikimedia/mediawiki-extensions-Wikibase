@@ -20,17 +20,9 @@ use Wikibase\ChangeNotificationJob;
  */
 class ChangeNotificationJobTest extends \MediaWikiTestCase {
 
-	public function testNewFromChanges() {
-		$this->markTestIncomplete( "not yet implemented" );
-	}
-
-	public function testGetChanges() {
-		$this->markTestIncomplete( "not yet implemented" );
-	}
-
-	public function testRun() {
-		$this->markTestIncomplete( "not yet implemented" );
-	}
+	// TODO: testNewFromChanges
+	// TODO: testGetChanges
+	// TODO: testRun
 
 	public static function provideToString() {
 		$change1 = \Wikibase\ChangesTable::singleton()->newRow( array(
