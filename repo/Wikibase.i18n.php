@@ -259,7 +259,6 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-no-such-entity' => 'Could not find such an entity', # Do not translate
 	'wikibase-api-no-such-entity-id' => 'Could not find such an entity id', # Do not translate
 	'wikibase-api-no-such-entity-link' => 'Could not find such an entity link', # Do not translate
-	'wikibase-api-no-such-qualifier' => 'Could not find such a qualifier', # Do not translate
 	'wikibase-api-no-such-reference' => 'Could not find such a reference', # Do not translate
 	'wikibase-api-no-such-site' => 'Could not find such a site', # Do not translate
 	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
@@ -930,7 +929,6 @@ See also:
 	'wikibase-api-no-such-entity' => '!!DO NOT TRANSLATE!! Could not find such an entity, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-entity-id' => '!!DO NOT TRANSLATE!! Could not find such an entity id, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-entity-link' => '!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-qualifier' => '!!DO NOT TRANSLATE!! Could not find such a qualifier, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-reference' => '!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-site' => '!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-statement' => '!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data',
