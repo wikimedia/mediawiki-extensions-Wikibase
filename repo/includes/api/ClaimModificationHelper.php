@@ -146,7 +146,11 @@ class ClaimModificationHelper {
 	 * @return bool
 	 */
 	public function validateClaimGuid( $claimGuid ) {
-		return $this->claimGuidValidator->validate( $claimGuid );
+		try {
+			return $this->claimGuidValidator->validate( $claimGuid );
+		} catch ( ParseException $e ) {
+			$this->apiMain->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+		}
 	}
 
 	/**

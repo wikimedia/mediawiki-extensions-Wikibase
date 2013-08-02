@@ -5,7 +5,7 @@ use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Unit tests for the Wikibase\ApiCreateClaim class.
+ * @covers Wikibase\Api\CreateClaim
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -104,6 +104,8 @@ class CreateClaimTest extends \ApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
+		list( $entity, $property ) = self::getNewEntityAndProperty();
+
 		$argLists = array();
 
 		$params = array(
@@ -115,6 +117,26 @@ class CreateClaimTest extends \ApiTestCase {
 		);
 
 		$argLists[] = array( 'cant-load-entity-content', $params );
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => 'i123',
+			'snaktype' => 'value',
+			'property' => '-',
+			'value' => '"Foo.png"',
+		);
+
+		$argLists[] = array( 'invalid-entity-id', $params );
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => '-',
+			'snaktype' => 'value',
+			'property' => 'i123',
+			'value' => '"Foo.png"',
+		);
+
+		$argLists[] = array( 'invalid-entity-id', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
