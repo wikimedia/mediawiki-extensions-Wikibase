@@ -17,6 +17,7 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Store;
@@ -48,6 +49,7 @@ use Wikibase\StringNormalizer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class WikibaseRepo {
 
@@ -85,6 +87,11 @@ class WikibaseRepo {
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
+
+	/**
+	 * @var ClaimGuidValidator
+	 */
+	private $claimGuidValidator = null;
 
 	/**
 	 * @var StringNormalizer
@@ -292,6 +299,21 @@ class WikibaseRepo {
 		}
 
 		return $this->languageFallbackChainFactory;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return ClaimGuidValidator
+	 */
+	public function getClaimGuidValidator() {
+		if ( $this->claimGuidValidator === null ) {
+			$this->claimGuidValidator = new ClaimGuidValidator(
+				$this->settings->getSetting( 'entityPrefixes' )
+			);
+		}
+
+		return $this->claimGuidValidator;
 	}
 
 	/**

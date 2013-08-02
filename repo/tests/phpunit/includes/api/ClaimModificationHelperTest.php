@@ -111,16 +111,12 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getNewInstance( $apiMain = null ) {
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-
 		$claimModificationHelper = new ClaimModificationHelper(
 			$apiMain ? $apiMain : new ApiMain(),
 			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			new ClaimGuidValidator( $entityPrefixes )
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator()
 		);
 
 		return $claimModificationHelper;
