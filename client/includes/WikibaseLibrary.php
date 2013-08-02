@@ -113,7 +113,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return array( null );
 		}
 
-		return array( $id->getPrefixedId() );
+		$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+
+		return array( $idFormatter->format( $id ) );
 	}
     /**
      * Get global site ID (e.g. "enwiki")
