@@ -134,6 +134,13 @@ $messages['mk'] = array(
 	'wikibasedatamodel-desc' => 'Компонента што го определува податочниот модел на Викибазата',
 );
 
+/** Malay (Bahasa Melayu)
+ * @author Anakmalaysia
+ */
+$messages['ms'] = array(
+	'wikibasedatamodel-desc' => 'Komponen yang menakrifkan model data Wikibase',
+);
+
 /** tarandíne (tarandíne)
  * @author Joetaras
  */
