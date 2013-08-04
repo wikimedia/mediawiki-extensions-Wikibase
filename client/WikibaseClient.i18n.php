@@ -1812,7 +1812,7 @@ $messages['id'] = array(
 	'wikibase-comment-sitelink-change' => 'Interwiki berubah dari $1 ke $2',
 	'wikibase-comment-sitelink-remove' => 'Pengurangan interwiki: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|perubahan}}',
-	'wikibase-dataitem' => 'Tietoalkio',
+	'wikibase-dataitem' => 'Item di Wikidata',
 	'wikibase-editlinks' => 'Sunting interwiki',
 	'wikibase-editlinkstitle' => 'Sunting pranala interwiki',
 	'wikibase-linkitem-addlinks' => 'Tambah interwiki',
@@ -2207,8 +2207,7 @@ $messages['ko'] = array(
 	'wikibase-linkitem-input-site' => '언어:',
 	'wikibase-linkitem-input-page' => '문서:',
 	'wikibase-linkitem-invalidsite' => '알 수 없거나 잘못된 사이트를 선택했습니다',
-	'wikibase-linkitem-confirmitem-text' => '선택한 {{PLURAL:$2|문서}}는 이미 [$1 중앙 데이터 저장소에 항목]에 연결되어 있습니다.
-아래에 나타난 {{PLURAL:$2|문서가}} 이 문서와 연결시키고자 하는 것인지 확인해주세요.',
+	'wikibase-linkitem-confirmitem-text' => '선택한 문서는 이미 [$1 중앙 데이터 저장소에 항목]에 연결되어 있습니다. 아래에 나타난 {{PLURAL:$2|문서}}가 이 문서와 연결시키고자 하는 {{PLURAL:$2|것}}{{PLURAL:$2|인지}} 확인해주세요.',
 	'wikibase-linkitem-confirmitem-button' => '확인',
 	'wikibase-linkitem-not-loggedin-title' => '로그인 필요',
 	'wikibase-linkitem-not-loggedin' => '이 기능을 사용하려면 이 위키와 [$1 중앙 데이터 저장소]에 로그인해야 합니다.',
@@ -3330,6 +3329,8 @@ $messages['sk'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Názov stránky nie je možné pre dopyt použiť, takže sa ignoruje.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Len stránky s medzijazykovými odkazmi',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|medzijazykový odkaz|medzijazykové odkazy|medzijazykových odkazov}})',
+	'wikibase-pageinfo-entity-id' => 'ID položky Wikiúdajov',
+	'wikibase-pageinfo-entity-id-none' => 'Žiadne',
 );
 
 /** Slovenian (slovenščina)
