@@ -184,6 +184,15 @@ $messages['bn'] = array(
 	'valueview-preview-label' => 'যা হিসাবে প্রদর্শন করা হবে:',
 );
 
+/** Breton (brezhoneg)
+ * @author Y-M D
+ */
+$messages['br'] = array(
+	'valueview-expert-emptyvalue-empty' => 'goullo',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Deiziadur gregorian)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Deiziadur julian)',
+);
+
 /** Catalan (català)
  * @author Pitort
  */
