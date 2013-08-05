@@ -61,13 +61,9 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 			'totitle' => "testLinkTitlesWithEvenLessToken",
 		);
 
-		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 
-			$this->fail( "request should have failed" );
-		} catch ( \UsageException $e ) {
-			$this->assertTrue( true ); // ok
-		}
 	}
 
 	public static function provideLinkTitles() {
@@ -145,41 +141,38 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 			'totitle' => $totitle,
 		) );
 
-		try {
-			list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		if( $expectedFailure ){
+			$this->setExpectedException( 'UsageException' );
+		}
 
-			if ( $expectedFailure ) {
-				$this->fail( "Expected failure: $expectedFailure" );
-			}
+		list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
-			// check the response -------------------------------
-			$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
-			if ( $handle ) {
-				$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
-			}
-			else {
-				$this->assertEquals( 2, count( $res['entity']['sitelinks'] ), "expected exactly two sitelinks structure" );
-			}
+		if ( $expectedFailure ) {
+			$this->fail( "Expected failure: $expectedFailure" );
+		}
 
-			$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
+		// check the response -------------------------------
+		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
+		if ( $handle ) {
+			$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
+		}
+		else {
+			$this->assertEquals( 2, count( $res['entity']['sitelinks'] ), "expected exactly two sitelinks structure" );
+		}
 
-			foreach ( $res['entity']['sitelinks'] as $link ) {
-				$this->assertTrue( $fromsite === $link['site'] || $tosite === $link['site'] );
-				$this->assertTrue( $fromtitle === $link['title'] || $totitle === $link['title'] );
-			}
+		$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
 
-			// check the item in the database -------------------------------
-			if ( isset( $id ) ) {
-				$item = $this->loadEntity( $id );
-				$links = self::flattenArray( $item['sitelinks'], 'site', 'title' );
-				$this->assertEquals( $fromtitle, $links[$fromsite], 'wrong link target' );
-				$this->assertEquals( $totitle, $links[$tosite], 'wrong link target' );
-			}
+		foreach ( $res['entity']['sitelinks'] as $link ) {
+			$this->assertTrue( $fromsite === $link['site'] || $tosite === $link['site'] );
+			$this->assertTrue( $fromtitle === $link['title'] || $totitle === $link['title'] );
+		}
 
-		} catch ( \UsageException $e ) {
-			if ( !$expectedFailure ) {
-				$this->fail( "unexpected exception: $e" );
-			}
+		// check the item in the database -------------------------------
+		if ( isset( $id ) ) {
+			$item = $this->loadEntity( $id );
+			$links = self::flattenArray( $item['sitelinks'], 'site', 'title' );
+			$this->assertEquals( $fromtitle, $links[$fromsite], 'wrong link target' );
+			$this->assertEquals( $totitle, $links[$tosite], 'wrong link target' );
 		}
 
 		if ( $cleanUp ) {
