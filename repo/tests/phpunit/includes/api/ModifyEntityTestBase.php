@@ -57,16 +57,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	protected static $entityInput = null; // entities in input format, using handles as keys
 	protected static $entityOutput = array(); // entities in output format, using handles as keys
 
-	protected static $loginSession = null;
-	protected static $loginUser = null;
-	protected static $token = null;
-
-	protected $setUpComplete = false;
-
-	protected function isSetUp() {
-		return $this->setUpComplete;
-	}
-
 	public function setUp() {
 		global $wgUser;
 		parent::setUp();
@@ -91,12 +81,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 		$wgUser = self::$users['wbeditor']->user;
 
-		//TODO: preserve session and token between calls?!
-		self::$loginSession = false;
-		self::$token = false;
-
 		self::initEntities();
-		$this->setUpComplete = true;
 	}
 
 	/**
@@ -266,17 +251,16 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	/**
 	 * Performs a login, if necessary, and returns the resulting session.
 	 */
-	function login( $user = 'wbeditor' ) {
-		self::doLogin( $user );
-		self::$loginUser = self::$users[ $user ];
-		return self::$loginSession;
+	function doLogin( $user = 'wbeditor' ) {
+		parent::doLogin( $user );
 	}
 
 	/**
 	 *  Appends an edit token to a request
 	 */
 	function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
-		$params['token'] = self::getToken( 'edittoken', self::$loginUser );
+		global $wgUser;
+		$params['token'] = self::getToken( 'edittoken', $wgUser );
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
@@ -285,6 +269,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * entities in the database.
 	 */
 	function createEntities() {
+		global $wgUser;
 		if ( self::$entityOutput ) {
 			return;
 		}
@@ -293,7 +278,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 		foreach ( self::$entityInput as $entity ) {
 			$handle = $entity['handle'];
-			$createdEntity = $this->setEntity( $entity, self::getToken( 'edittoken', self::$loginUser ) );
+			$createdEntity = $this->setEntity( $entity, self::getToken( 'edittoken', $wgUser ) );
 
 			self::$entityOutput[ $handle ] = $createdEntity;
 		}
@@ -303,12 +288,13 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * Restores all well known entities test in the database to their original state.
 	 */
 	function resetEntities() {
+		global $wgUser;
 		$this->createEntities();
 
 		foreach ( self::$entityInput as $handle => $entity ) {
 			$entity['id'] = $this->getEntityId( $handle );
 
-			$data = $this->setEntity( $entity, self::getToken( 'edittoken', self::$loginUser ) );
+			$data = $this->setEntity( $entity, self::getToken( 'edittoken', $wgUser ) );
 
 			self::$entityOutput[ $handle ] = $data;
 		}
@@ -318,10 +304,11 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * Restores the entity with the given handle to its original state
 	 */
 	function resetEntity( $handle ) {
+		global $wgUser;
 		$entity = $this->getEntityInput( $handle );
 		$entity['id'] = $this->getEntityId( $handle );
 
-		$token = self::getToken( 'edittoken', self::$loginUser );
+		$token = self::getToken( 'edittoken', $wgUser );
 		$data = $this->setEntity( $entity, $token );
 
 		self::$entityOutput[ $handle ] = $data;

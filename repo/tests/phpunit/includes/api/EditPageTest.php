@@ -57,7 +57,7 @@ class EditPageTest extends ModifyEntityTestBase {
 
 		$this->assertTrue( $status->isOK(), $status->getMessage() ); // sanity check
 
-		$this->login();
+		$this->doLogin();
 
 		$content->getItem()->setLabel( "de", "Test" );
 		$data = $content->getItem()->toArray();
@@ -84,7 +84,7 @@ class EditPageTest extends ModifyEntityTestBase {
 		$id = new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 1234567 );
 		$page = \Wikibase\EntityContentFactory::singleton()->getWikiPageForId( $id );
 
-		$this->login();
+		$this->doLogin();
 
 		$text = "hallo welt";
 
