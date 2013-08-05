@@ -273,29 +273,11 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	}
 
 	/**
-	 * Gets an entity edit token. Returns a cached token if available.
+	 * Gets an entity edit token.
 	 */
 	function getEditToken() {
-		if ( !self::$usetoken ) {
-			return "";
-		}
-
-		$this->login();
-
-		if ( self::$token ) {
-			return self::$token;
-		}
-
-		list($re,,) = $this->doApiRequest(
-			array(
-				'action' => 'tokens',
-				'type' => 'edit' ),
-			null,
-			false,
-			self::$loginUser->user
-		);
-
-		return $re['tokens']['edittoken'];
+		$tokens = self::getTokenList( self::$loginUser );
+		return $tokens['edittoken'];
 	}
 
 	/**
