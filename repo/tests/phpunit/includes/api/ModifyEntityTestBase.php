@@ -638,15 +638,41 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 	/**
 	 * Asserts that the given API response represents a successful call.
-	 * Optionally, also asserts the existence of some path in the result, represented by any additional parameters.
 	 *
 	 * @param array $response
-	 * @param string $path1 first path element (optional)
-	 * @param string $path2 second path element (optional)
-	 * @param ...
 	 */
-	public function assertSuccess( $response ) {
+	public function assertResultSuccess( $response ) {
 		$this->assertArrayHasKey( 'success', $response, "Missing 'success' marker in response." );
+		$this->assertResultHasEntityType( $response );
+	}
+
+	/**
+	 * Asserts the existence of some path in the result, represented by any additional parameters.
+	 * @param array $response
+	 * @param param string $path1 first path element (optional)
+	 * @param param string $path2 second path element (optional)
+	 * @param param $ ...
+	 */
+	public function assertResultHasKeyInPath( $response ){
+		$path = func_get_args();
+		array_shift( $path );
+
+		$obj = $response;
+		$p = '/';
+
+		foreach ( $path as $key ) {
+			$this->assertArrayHasKey( $key, $obj, "Expected key $key under path $p in the response." );
+
+			$obj = $obj[ $key ];
+			$p .= "/$key";
+		}
+	}
+
+	/**
+	 * Asserts that the given API response has a valid entity type if the result contains an entity
+	 * @param array $response
+	 */
+	public function assertResultHasEntityType( $response ){
 
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {
@@ -661,18 +687,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 			}
 		}
 
-		$path = func_get_args();
-		array_shift( $path );
-
-		$obj = $response;
-		$p = '/';
-
-		foreach ( $path as $key ) {
-			$this->assertArrayHasKey( $key, $obj, "Expected key $key under path $p in the response." );
-
-			$obj = $obj[ $key ];
-			$p .= "/$key";
-		}
 	}
 
 	/**
