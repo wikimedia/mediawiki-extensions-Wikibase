@@ -41,7 +41,7 @@ use Wikibase\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RemoveReferencesTest extends \ApiTestCase {
+class RemoveReferencesTest extends ModifyEntityTestBase {
 
 	/**
 	 * @return Snak[]
@@ -128,10 +128,9 @@ class RemoveReferencesTest extends \ApiTestCase {
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => implode( '|', $hashes ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
@@ -144,11 +143,10 @@ class RemoveReferencesTest extends \ApiTestCase {
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => implode( '|', $hashes ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
 		}
 		catch ( \UsageException $e ) {
@@ -171,11 +169,10 @@ class RemoveReferencesTest extends \ApiTestCase {
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => $hash,
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
 			$caughtException = true;
