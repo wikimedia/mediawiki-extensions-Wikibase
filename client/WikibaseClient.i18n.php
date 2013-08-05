@@ -3569,6 +3569,7 @@ $messages['tr'] = array(
 $messages['uk'] = array(
 	'wikibase-client-desc' => 'Клієнт для розширення Wikibase',
 	'specialpages-group-wikibaseclient' => 'Клієнт Вікіданих',
+	'tooltip-t-wikibase' => 'Посилання на пов’язаний елемент сховища даних.',
 	'wikibase-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
 	'wikibase-after-page-move-queued' => "Пов'язаний з цією сторінкою [$1 елемент Вікіданих] буде невдовзі автоматично оновлено.",
 	'wikibase-comment-remove' => "Пов'язаний елемент Вікіданих видалений. Мовні посилання видалені.",
@@ -3593,7 +3594,7 @@ $messages['uk'] = array(
 	'wikibase-linkitem-input-site' => 'Мова:',
 	'wikibase-linkitem-input-page' => 'Сторінка:',
 	'wikibase-linkitem-invalidsite' => 'Вибрано невідомий або недопустимий сайт',
-	'wikibase-linkitem-confirmitem-text' => "Сторінка, до якої Ви хотіли прив'язатись, уже прикріплена до [$1 елемента у центральному сховищі даних]. Підтвердіть, що наведений нижче список сторінок до прив'язання складено правильно.", # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Обрана сторінка вже пов’язана з [$1 елементом центрального сховища даних]. Підтвердіть, що {{PLURAL:$2|наведена далі сторінка|наведені далі сторінки}} треба прив’язати до цієї сторінки.',
 	'wikibase-linkitem-confirmitem-button' => 'Підтвердити',
 	'wikibase-linkitem-not-loggedin-title' => 'Вам необхідно увійти в систему',
 	'wikibase-linkitem-not-loggedin' => 'Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.',
@@ -3604,6 +3605,7 @@ $messages['uk'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Вікідані',
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
 	'wikibase-watchlist-show-changes-pref' => 'Показувати редагування Вікіданих у Вашому списку спостереження',
+	'wikibase-error-serialize-error' => 'Не вдалося серіалізувати дані.',
 	'wikibase-error-invalid-entity-id' => 'Введений ідентифікатор не відомий системі. Будь ласка, введіть коректний ідентифікатор сутності.',
 	'special-unconnectedpages' => "Сторінки, не пов'язані з елементами",
 	'wikibase-unconnectedpages-legend' => "Параметри непов'язаних сторінок",
@@ -3612,8 +3614,10 @@ $messages['uk'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — неправильний код мови.',
 	'wikibase-unconnectedpages-page-warning' => 'Ця назва сторінки не може бути використаною у запиті й ігнорована.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Лише сторінки із міжмовними інтервікі-посиланнями',
-	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|міжмовне інтервікі-посилання|міжмовні інтервікі-посилання|міжмовних інтервікі-посилань}} на сторінці)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|міжмовне посилання|міжмовні посилання|міжмовних посилань}} на сторінці)',
 	'wikibase-pageinfo-entity-id' => 'Ідентифікатор елемента у Вікіданих',
+	'wikibase-pageinfo-entity-id-none' => 'Нема',
+	'wikibase-property-render-error' => 'Не вдалося відобразити властивість $1: $2',
 );
 
 /** Urdu (اردو)

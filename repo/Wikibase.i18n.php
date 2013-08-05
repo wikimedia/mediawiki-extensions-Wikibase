@@ -15559,6 +15559,7 @@ $messages['yi'] = array(
  * @author Hydra
  * @author Li3939108
  * @author Linforest
+ * @author Qiyue2001
  * @author Shirayuki
  * @author Shizhao
  * @author Stevenliuyi
@@ -15842,9 +15843,8 @@ $messages['zh-hans'] = array(
 *语言——标定文本部分语言的明确的值
 *值——特定语言变体字符串的明确的值',
 	'wikibase-listdatatypes-string-head' => '字符串',
-	'wikibase-listdatatypes-string-body' => '字符串的原始数据字段。典型的用途是语言无关的书写形式的标识符。这样的串在某些情况下可以直接移入其他文字系统。
-*语言——标定文本部分语言的明确的值
-*文本——特定语言变体字符串的明确的值', # Fuzzy
+	'wikibase-listdatatypes-string-body' => '符号的原始数据字段。典型的用途是与读者语言无关之书写方式的标识符。
+*文字——特定语言变体字串的明确的数值',
 	'wikibase-listdatatypes-time-head' => '时间',
 	'wikibase-listdatatypes-time-body' => '时间值的字面数据字段。含精度和边界给定一个的时间。时间在内部总是保存为外推格里高利历的格式，但在解析和排版时可用其他格式。(?)
 *时刻（time） – 时间点的明确值，根据ISO8601，年都表示为11位数字且日期均是有符号的，格式为+00000002013-01-01T00:00:00Z
