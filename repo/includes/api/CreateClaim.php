@@ -2,13 +2,13 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
+use ApiBase;
 use ApiMain;
 use Wikibase\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
-use ValueParsers\ParseException;
+use Wikibase\ChangeOpException;
 
 /**
  * API module for creating claims.
@@ -64,7 +64,13 @@ class CreateClaim extends ModifyClaim {
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 		$changeOp = new ChangeOpMainSnak( '', $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-		$changeOp->apply( $entity, $summary );
+
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
+
 		$claims = new Claims( $entity->getClaims() );
 		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
 

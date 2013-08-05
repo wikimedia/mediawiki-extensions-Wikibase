@@ -93,12 +93,16 @@ class ChangeOps {
 	 * @param Summary|null $summary
 	 *
 	 * @return bool
+	 *
+	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		foreach ( $this->ops as $op ) {
-			if ( $op->apply( $entity, $summary ) === false ) {
-				return false;
+		try {
+			foreach ( $this->ops as $op ) {
+				$op->apply( $entity, $summary );
 			}
+		} catch ( ChangeOpException $e ) {
+			throw new ChangeOpException( 'Batch of ChangeOps not applied due to exception in one of the ChangeOps', 'changeops-batch-failed', $e );
 		}
 
 		return true;

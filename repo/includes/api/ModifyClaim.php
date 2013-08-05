@@ -2,7 +2,7 @@
 namespace Wikibase\Api;
 
 use ApiMain;
-use ApiBase, MWException;
+use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\Summary;
@@ -96,6 +96,18 @@ abstract class ModifyClaim extends ApiWikibase {
 	 */
 	public function isWriteMode() {
 		return true;
+	}
+
+	/**
+	 * @see ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge(
+			parent::getPossibleErrors(),
+			array(
+				array( 'code' => 'failed-save', 'info' => $this->msg( 'wikibase-api-failed-save' )->text() ),
+			)
+		);
 	}
 
 	/**
