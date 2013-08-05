@@ -273,18 +273,10 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	}
 
 	/**
-	 * Gets an entity edit token.
-	 */
-	function getEditToken() {
-		$tokens = self::getTokenList( self::$loginUser );
-		return $tokens['edittoken'];
-	}
-
-	/**
 	 *  Appends an edit token to a request
 	 */
 	function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
-		$params['token'] = $this->getEditToken();
+		$params['token'] = self::getToken( 'edittoken', self::$loginUser );
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
@@ -298,11 +290,10 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		}
 
 		self::initEntities();
-		$token = $this->getEditToken();
 
 		foreach ( self::$entityInput as $entity ) {
 			$handle = $entity['handle'];
-			$createdEntity = $this->setEntity( $entity, $token );
+			$createdEntity = $this->setEntity( $entity, self::getToken( 'edittoken', self::$loginUser ) );
 
 			self::$entityOutput[ $handle ] = $createdEntity;
 		}
@@ -313,12 +304,11 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 */
 	function resetEntities() {
 		$this->createEntities();
-		$token = $this->getEditToken();
 
 		foreach ( self::$entityInput as $handle => $entity ) {
 			$entity['id'] = $this->getEntityId( $handle );
 
-			$data = $this->setEntity( $entity, $token );
+			$data = $this->setEntity( $entity, self::getToken( 'edittoken', self::$loginUser ) );
 
 			self::$entityOutput[ $handle ] = $data;
 		}
@@ -331,7 +321,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		$entity = $this->getEntityInput( $handle );
 		$entity['id'] = $this->getEntityId( $handle );
 
-		$token = $this->getEditToken();
+		$token = self::getToken( 'edittoken', self::$loginUser );
 		$data = $this->setEntity( $entity, $token );
 
 		self::$entityOutput[ $handle ] = $data;
