@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 
 use ApiTestCase;
 use TestUser;
+use User;
 use Wikibase\Settings;
 
 /**
@@ -346,6 +347,14 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		);
 
 		return $re['tokens']['edittoken'];
+	}
+
+	/**
+	 *  Appends an edit token to a request
+	 */
+	function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
+		$params['token'] = $this->getEditToken();
+		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
 	/**

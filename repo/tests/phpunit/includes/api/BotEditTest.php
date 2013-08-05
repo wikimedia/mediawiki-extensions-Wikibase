@@ -112,17 +112,14 @@ class BotEditTest extends ModifyEntityTestBase {
 	 * @depends testTokensAndRights
 	 */
 	function testSetItemTop() {
-		$token = $this->getEditToken();
-
 		$req = array(
 			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => '{}',
-			'token' => $token,
 			'new' => 'item',
 		);
 
-		$second = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
+		$second = $this->doApiRequestWithToken( $req, null, self::$users['wbbot']->user );
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
@@ -139,14 +136,12 @@ class BotEditTest extends ModifyEntityTestBase {
 	 * @dataProvider providerCreateItem
 	 */
 	function testCreateItem( $handle, $bot, $new, $data ) {
-		$token = $this->getEditToken();
 		$myid = null;
 
 		$req = array(
 			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => $data,
-			'token' => $token,
 		);
 
 		if ( !$new ) {
@@ -159,7 +154,7 @@ class BotEditTest extends ModifyEntityTestBase {
 			$req['bot'] = true;
 		}
 
-		$second = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
+		$second = $this->doApiRequestWithToken( $req, null ,self::$users['wbbot']->user );
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );

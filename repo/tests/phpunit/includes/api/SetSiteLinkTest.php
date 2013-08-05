@@ -56,17 +56,14 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	}
 
 	public function testSetLiteLinkWithNoId( ) {
-		$token = $this->getEditToken();
-
 		$req = array(
 			'action' => 'wbsetsitelink',
-			'token' => $token,
 			'linksite' => "enwiki",
 			'linktitle' => "testSetLiteLinkWithNoId",
 		);
 
 		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			$this->fail( "request should have failed" );
 		} catch ( \UsageException $e ) {
@@ -75,18 +72,15 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	}
 
 	public function testSetLiteLinkWithBadId( ) {
-		$token = $this->getEditToken();
-
 		$req = array(
 			'action' => 'wbsetsitelink',
-			'token' => $token,
 			'id' => 123456789,
 			'linksite' => "enwiki",
 			'linktitle' => "testSetLiteLinkWithNoId",
 		);
 
 		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			$this->fail( "request should have failed" );
 		} catch ( \UsageException $e ) {
@@ -95,11 +89,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	}
 
 	public function testSetLiteLinkWithBadSite( ) {
-		$token = $this->getEditToken();
-
 		$req = array(
 			'action' => 'wbsetsitelink',
-			'token' => $token,
 			'site' => "dewiktionary",
 			'title' => "Berlin",
 			'linksite' => "enwiki",
@@ -107,7 +98,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			$this->fail( "request should have failed" );
 		} catch ( \UsageException $e ) {
@@ -116,11 +107,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	}
 
 	public function testSetLiteLinkWithBadTitle( ) {
-		$token = $this->getEditToken();
-
 		$req = array(
 			'action' => 'wbsetsitelink',
-			'token' => $token,
 			'site' => "dewiki",
 			'title' => "testSetLiteLinkWithBadTitle_de",
 			'linksite' => "enwiki",
@@ -128,7 +116,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			$this->fail( "request should have failed" );
 		} catch ( \UsageException $e ) {
@@ -191,7 +179,6 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	 * @dataProvider provideSetLiteLink
 	 */
 	public function testSetLiteLink( $handle, $item_spec, $linksite, $linktitle, $expectedTitle = null, $expectedFailure = null ) {
-		$token = $this->getEditToken();
 		$id = $this->getEntityId( $handle );
 
 		if ( array_key_exists( 'id', $item_spec ) && empty( $item_spec['id'] ) ) {
@@ -207,13 +194,12 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		// set the sitelink -------------------------------
 		$req = array_merge( $item_spec, array(
 			'action' => 'wbsetsitelink',
-			'token' => $token,
 			'linksite' => $linksite,
 			'linktitle' => $linktitle,
 		) );
 
 		try {
-			list( $res,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			if ( $expectedFailure ) {
 				$this->fail( $expectedFailure );
@@ -273,11 +259,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	}
 
 	public function testSetLiteLinkWithBadTargetSite( ) {
-		$token = $this->getEditToken();
-
 		$req = array(
 			'action' => 'wbsetsitelink',
-			'token' => $token,
 			'site' => "dewiki",
 			'title' => "Berlin",
 			'linksite' => "enwiktionary",
@@ -285,7 +268,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			$this->fail( "request should have failed" );
 		} catch ( \UsageException $e ) {
