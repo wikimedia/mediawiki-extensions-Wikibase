@@ -42,7 +42,7 @@ use Wikibase\PropertyContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SetClaimTest extends \ApiTestCase {
+class SetClaimTest extends ModifyEntityTestBase {
 
 	/**
 	 * @return \Wikibase\Snak[]
@@ -150,7 +150,6 @@ class SetClaimTest extends \ApiTestCase {
 		$params = array(
 			'action' => 'wbsetclaim',
 			'claim' => \FormatJson::encode( $serializer->getSerialized( $claim ) ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		$this->makeValidRequest( $params );
@@ -167,7 +166,7 @@ class SetClaimTest extends \ApiTestCase {
 	}
 
 	protected function makeValidRequest( array $params ) {
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
