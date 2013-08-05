@@ -40,7 +40,7 @@ use Wikibase\Claim;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RemoveClaimsTest extends \ApiTestCase {
+class RemoveClaimsTest extends ModifyEntityTestBase {
 
 	/**
 	 * @param Entity $entity
@@ -131,10 +131,9 @@ class RemoveClaimsTest extends \ApiTestCase {
 		$params = array(
 			'action' => 'wbremoveclaims',
 			'claim' => implode( '|', $claimGuids ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );
@@ -155,10 +154,9 @@ class RemoveClaimsTest extends \ApiTestCase {
 		$params = array(
 			'action' => 'wbremoveclaims',
 			'claim' => is_array( $claimGuids ) ? implode( '|', $claimGuids ) : $claimGuids,
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		$this->doApiRequest( $params );
+		$this->doApiRequestWithToken( $params );
 	}
 
 	public function invalidClaimProvider() {

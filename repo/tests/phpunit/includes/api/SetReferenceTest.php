@@ -41,7 +41,7 @@ use Wikibase\Reference;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class SetReferenceTest extends \ApiTestCase {
+class SetReferenceTest extends ModifyEntityTestBase {
 
 	public function setUp() {
 		static $hasProperties = false;
@@ -110,10 +110,9 @@ class SetReferenceTest extends \ApiTestCase {
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
 			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'reference', $resultArray, 'top level element has a reference key' );
@@ -134,11 +133,10 @@ class SetReferenceTest extends \ApiTestCase {
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
 			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
 		}
 		catch ( \UsageException $e ) {
@@ -157,11 +155,10 @@ class SetReferenceTest extends \ApiTestCase {
 			'statement' => $claimGuid,
 			'snaks' => $snakHash,
 			'reference' => $refHash,
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 			$this->fail( "Exception with code $expectedError expected" );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( $expectedError, $e->getCodeString(), 'Error code' );

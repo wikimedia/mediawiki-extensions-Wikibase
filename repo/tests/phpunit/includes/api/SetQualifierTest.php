@@ -172,14 +172,11 @@ class SetQualifierTest extends ModifyEntityTestBase {
 	}
 
 	protected function makeAddRequest( $statementGuid, Snak $qualifier, EntityId $entityId ) {
-		$token = $this->getEditToken();
-
 		$params = array(
 			'action' => 'wbsetqualifier',
 			'claim' => $statementGuid,
 			'snaktype' => $qualifier->getType(),
 			'property' => $qualifier->getPropertyId()->getPrefixedId(),
-			'token' => $token
 		);
 
 		if ( $qualifier instanceof \Wikibase\PropertyValueSnak ) {
@@ -206,7 +203,7 @@ class SetQualifierTest extends ModifyEntityTestBase {
 	}
 
 	protected function makeValidRequest( array $params ) {
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
@@ -230,11 +227,10 @@ class SetQualifierTest extends ModifyEntityTestBase {
 			'property' => 7,
 			'snaktype' => 'value',
 			'value' => 'abc',
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
 			$caughtException = true;
