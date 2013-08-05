@@ -64,20 +64,14 @@ class EditPageTest extends ModifyEntityTestBase {
 		$text = json_encode( $data );
 
 		// try to update the item with valid data via the edit action
-		try {
-			$this->doApiRequestWithToken(
-				array(
-					'action' => 'edit',
-					'pageid' => $content->getTitle()->getArticleID(),
-					'text' => $text,
-				)
-			);
-
-			$this->fail( "Updating an items should not be possible via action=edit" );
-		} catch ( \UsageException $ex ) {
-			//ok, pass
-			//print "\n$ex\n";
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequestWithToken(
+			array(
+				'action' => 'edit',
+				'pageid' => $content->getTitle()->getArticleID(),
+				'text' => $text,
+			)
+		);
 
 	}
 

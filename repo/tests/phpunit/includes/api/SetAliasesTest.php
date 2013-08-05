@@ -166,13 +166,8 @@ class SetAliasesTest extends ModifyEntityTestBase {
 			'set' => 'foo'
 		);
 
-		try {
-			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-			$this->fail( "Expected a usage exception when providing a malformed id" );
-		} catch ( \UsageException $ex ) {
-			$this->assertTrue( true, "make phpunit happy" );
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 	}
 
 	/**

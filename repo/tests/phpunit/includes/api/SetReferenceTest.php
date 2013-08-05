@@ -150,8 +150,6 @@ class SetReferenceTest extends \ApiTestCase {
 	 * @dataProvider invalidClaimProvider
 	 */
 	public function testInvalidClaimGuid( $claimGuid, $snakHash, $refHash, $expectedError ) {
-		$caughtException = false;
-
 		$params = array(
 			'action' => 'wbsetreference',
 			'statement' => $claimGuid,

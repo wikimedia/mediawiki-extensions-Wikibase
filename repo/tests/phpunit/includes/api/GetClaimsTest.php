@@ -177,8 +177,6 @@ class GetClaimsTest extends \ApiTestCase {
 	 * @dataProvider invalidClaimProvider
 	 */
 	public function testGetInvalidClaims( $claimGuid ) {
-		$caughtException = false;
-
 		$params = array(
 			'action' => 'wbgetclaims',
 			'claim' => $claimGuid
@@ -186,12 +184,10 @@ class GetClaimsTest extends \ApiTestCase {
 
 		try {
 			$this->doApiRequest( $params );
+			$this->fail( 'Invalid claim guid did not throw an error' );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( 'invalid-guid', $e->getCodeString(), 'Invalid claim guid raised correct error' );
-			$caughtException = true;
 		}
-
-		$this->assertTrue( $caughtException, 'Exception was caught' );
 	}
 
 	public function invalidClaimProvider() {

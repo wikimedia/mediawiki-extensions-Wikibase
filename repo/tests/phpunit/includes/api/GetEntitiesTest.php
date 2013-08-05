@@ -296,17 +296,12 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @group API
 	 */
 	public function testGetEntitiesByMalformedId( ) {
-		try {
-			$badid = 'xyz123+++';
-			$this->doApiRequest( array(
-				'action' => 'wbgetentities',
-				'ids' => $badid,
-			) );
-
-			$this->fail( "Expected a usage exception when providing a malformed id" );
-		} catch ( \UsageException $ex ) {
-			$this->assertTrue( true, "make phpunit happy" );
-		}
+		$this->setExpectedException( 'UsageException' );
+		$badid = 'xyz123+++';
+		$this->doApiRequest( array(
+			'action' => 'wbgetentities',
+			'ids' => $badid,
+		) );
 	}
 
 	/**
@@ -316,18 +311,12 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @group API
 	 */
 	public function testGetEntitiesByBadSite( ) {
-		try {
-			$this->doApiRequest( array(
-				'action' => 'wbgetentities',
-				'sites' => 'enwiktionary',
-				'titles' => 'Berlin',
-			) );
-
-			$this->fail( "expected request to fail" );
-		} catch ( \UsageException $ex ) {
-			// ok
-			$this->assertTrue( true );
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequest( array(
+			'action' => 'wbgetentities',
+			'sites' => 'enwiktionary',
+			'titles' => 'Berlin',
+		) );
 	}
 
 	/**

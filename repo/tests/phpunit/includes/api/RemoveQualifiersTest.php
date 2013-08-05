@@ -148,7 +148,7 @@ class RemoveQualifiersTest extends \ApiTestCase {
 
 		try {
 			$this->doApiRequest( $params );
-			$this->assertFalse( true, 'Invalid request should raise an exception' );
+			$this->fail( 'Invalid request should raise an exception' );
 		}
 		catch ( \UsageException $e ) {
 			if ( $expectedError === null ) {
@@ -164,8 +164,6 @@ class RemoveQualifiersTest extends \ApiTestCase {
 	 * @dataProvider invalidGuidProvider
 	 */
 	public function testInvalidClaimGuid( $claimGuid, $hash ) {
-		$caughtException = false;
-
 		$params = array(
 			'action' => 'wbremovequalifiers',
 			'claim' => $claimGuid,
@@ -175,12 +173,10 @@ class RemoveQualifiersTest extends \ApiTestCase {
 
 		try {
 			$this->doApiRequest( $params );
+			$this->fail( 'Invalid claim guid did not throw an error' );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( $e->getCodeString(), 'invalid-guid', 'Invalid claim guid raised correct error' );
-			$caughtException = true;
 		}
-
-		$this->assertTrue( $caughtException );
 	}
 
 	public function invalidGuidProvider() {
