@@ -54,7 +54,7 @@ class RemoveClaimsTest extends \ApiTestCase {
 		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
 		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 1 ) ) );
 		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertySomeValueSnak( 42 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'o_O' ) ) ) );
+		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'o_O' ) ) ) );
 
 		$content->save( '' );
 
