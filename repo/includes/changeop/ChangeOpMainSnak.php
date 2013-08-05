@@ -7,7 +7,7 @@ use Wikibase\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 
 /**
- * Class for claim change operation
+ * Class for mainsnak change operation
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ use Wikibase\Lib\EntityIdFormatter;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpClaim extends ChangeOp {
+class ChangeOpMainSnak extends ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -55,7 +55,7 @@ class ChangeOpClaim extends ChangeOp {
 	protected $idFormatter;
 
 	/**
-	 * Constructs a new claim change operation
+	 * Constructs a new mainsnak change operation
 	 *
 	 * @since 0.4
 	 *
@@ -91,8 +91,8 @@ class ChangeOpClaim extends ChangeOp {
 	 * Applies the change to the given entity
 	 *
 	 * - the claim gets removed when $claimGuid is set and $snak is not set
-	 * - a new claim with $snak gets added when $claimGuid is empty and $snak is set
-	 * - the claim's main snak gets set to $snak when $claimGuid and $snak are set
+	 * - a new claim with $snak as mainsnak gets added when $claimGuid is empty and $snak is set
+	 * - the claim's mainsnak gets set to $snak when $claimGuid and $snak are set
 	 *
 	 * @since 0.4
 	 *

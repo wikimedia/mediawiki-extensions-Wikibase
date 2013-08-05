@@ -6,10 +6,12 @@ use Wikibase\Api\CreateClaim;
 use Wikibase\EntityId;
 use ApiMain;
 use Wikibase\Api\ClaimModificationHelper;
+use Wikibase\Api\SnakValidationHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * @covers Wikibase\Api\ClaimModificationHelper
@@ -111,16 +113,24 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getNewInstance( $apiMain = null ) {
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+		if ($apiMain === null) {
+			$apiMain = new ApiMain();
+		}
+
+		$snakValidation = new SnakValidationHelper(
+			$apiMain,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
+			new ValidatorErrorLocalizer()
+		);
 
 		$claimModificationHelper = new ClaimModificationHelper(
-			$apiMain ? $apiMain : new ApiMain(),
+			$apiMain,
 			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			new ClaimGuidValidator( $entityPrefixes )
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
+			$snakValidation
 		);
 
 		return $claimModificationHelper;

@@ -83,6 +83,13 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
+	 * @since 0.4
+	 *
 	 * @param \ApiMain $apiMain
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param SnakConstructionService $snakConstructionService
@@ -93,13 +100,15 @@ class ClaimModificationHelper {
 		EntityContentFactory $entityContentFactory,
 		SnakConstructionService $snakConstructionService,
 		EntityIdParser $entityIdParser,
-		ClaimGuidValidator $claimGuidValidator
+		ClaimGuidValidator $claimGuidValidator,
+		SnakValidationHelper $snakValidation
 	) {
 		$this->apiMain = $apiMain;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->snakConstructionService = $snakConstructionService;
 		$this->entityIdParser = $entityIdParser;
 		$this->claimGuidValidator = $claimGuidValidator;
+		$this->snakValidation = $snakValidation;
 	}
 
 	/**
@@ -187,6 +196,8 @@ class ClaimModificationHelper {
 			// shouldn't happen, but might.
 			$this->apiMain->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
 		}
+
+		$this->snakValidation->validateSnak( $snak );
 
 		return $snak;
 	}

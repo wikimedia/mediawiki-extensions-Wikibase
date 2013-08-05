@@ -65,6 +65,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdFormatter', $returnValue );
 	}
 
+	public function testGetClaimGuidValidator() {
+		$returnValue = $this->getDefaultInstance()->getClaimGuidValidator();
+		$this->assertInstanceOf( 'Wikibase\Lib\ClaimGuidValidator', $returnValue );
+	}
+
 	public static function provideGetRdfBaseURI() {
 		return array(
 			array ( 'http://acme.test', 'http://acme.test/entity/' ),

@@ -10,7 +10,7 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOps;
-use Wikibase\ChangeOpClaim;
+use Wikibase\ChangeOpMainSnak;
 
 /**
  * API module for removing claims.
@@ -127,7 +127,7 @@ class RemoveClaims extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $params['claim'] as $guid ) {
-			$changeOps[] = new ChangeOpClaim( $guid, null, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+			$changeOps[] = new ChangeOpMainSnak( $guid, null, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		}
 
 		return $changeOps;
