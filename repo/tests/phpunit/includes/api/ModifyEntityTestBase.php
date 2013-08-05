@@ -267,42 +267,8 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * Performs a login, if necessary, and returns the resulting session.
 	 */
 	function login( $user = 'wbeditor' ) {
-		if ( !$this->isSetUp() ) {
-			throw new \MWException( "can't log in before setUp() was run." );
-		}
-
-		if ( is_string( $user ) ) {
-			$user = self::$users['wbeditor'];
-		}
-
-		if ( self::$loginSession && $user->username == self::$loginUser->username ) {
-			return self::$loginSession;
-		}
-
-		// we are becoming someone else, need fresh tokens.
-		\ApiQueryInfo::resetTokenCache();
-
-		list($res,,) = $this->doApiRequest( array(
-			'action' => 'login',
-			'lgname' => $user->username,
-			'lgpassword' => $user->password
-		) );
-
-		$token = $res['login']['token'];
-
-		list(,,$session) = $this->doApiRequest(
-			array(
-				'action' => 'login',
-				'lgtoken' => $token,
-				'lgname' => $user->username,
-				'lgpassword' => $user->password
-			),
-			null
-		);
-
-		self::$token = null;
-		self::$loginUser = $user;
-		self::$loginSession = $session;
+		self::doLogin( $user );
+		self::$loginUser = self::$users[ $user ];
 		return self::$loginSession;
 	}
 
