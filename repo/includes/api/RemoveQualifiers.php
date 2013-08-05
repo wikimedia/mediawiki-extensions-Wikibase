@@ -9,6 +9,7 @@ use Wikibase\Claims;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpQualifier;
 use Wikibase\ChangeOps;
+use Wikibase\ChangeOpException;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -38,8 +39,6 @@ use Wikibase\ChangeOps;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class RemoveQualifiers extends ModifyClaim {
-
-	// TODO: claim uniqueness
 
 	/**
 	 * @see \ApiBase::execute
@@ -74,7 +73,12 @@ class RemoveQualifiers extends ModifyClaim {
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $claimGuid, $qualifierHashes ) );
-		$changeOps->apply( $entity, $summary );
+
+		try {
+			$changeOps->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
 
 		$this->saveChanges( $entityContent, $summary );
 

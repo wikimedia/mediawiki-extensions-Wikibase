@@ -77,6 +77,7 @@ class ChangeOpSiteLink extends ChangeOp {
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {
@@ -87,6 +88,8 @@ class ChangeOpSiteLink extends ChangeOp {
 			if ( $entity->hasLinkToSite( $this->siteId ) ) {
 				$this->updateSummary( $summary, 'remove', $this->siteId, $entity->getSimpleSiteLink( $this->siteId )->getPageName() );
 				$entity->removeSiteLink( $this->siteId );
+			} else {
+				//TODO: throw error, or ignore silently?
 			}
 		} else {
 			$entity->hasLinkToSite( $this->siteId ) ? $action = 'set' : $action = 'add';

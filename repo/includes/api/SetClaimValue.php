@@ -2,12 +2,12 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
-use ApiMain;
+use ApiBase;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
+use Wikibase\ChangeOpException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -70,7 +70,12 @@ class SetClaimValue extends ModifyClaim {
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 		$changeOp = new ChangeOpMainSnak( $claimGuid, $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-		$changeOp->apply( $entity, $summary );
+
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
 
 		$this->saveChanges( $entityContent, $summary );
 

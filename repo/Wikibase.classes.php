@@ -59,6 +59,7 @@ return call_user_func( function() {
 		'Wikibase\ChangeOpSiteLink' => 'includes/changeop/ChangeOpSiteLink.php',
 		'Wikibase\ChangeOpMainSnak' => 'includes/changeop/ChangeOpMainSnak.php',
 		'Wikibase\ChangeOpQualifier' => 'includes/changeop/ChangeOpQualifier.php',
+		'Wikibase\ChangeOpException' => 'includes/changeop/ChangeOpException.php',
 
 		// includes/actions
 		'Wikibase\HistoryEntityAction' => 'includes/actions/HistoryEntityAction.php',

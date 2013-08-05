@@ -115,6 +115,29 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
+	public function provideChangeOps() {
+		$snak = new \Wikibase\PropertyValueSnak( 67573284, new \DataValues\StringValue( 'test' ) );
+		$newSnak = new \Wikibase\PropertyValueSnak( 12651236, new \DataValues\StringValue( 'newww' ) );
+		$item = $this->provideNewItemWithClaim( 'q777', $snak );
+		$claims = $item->getClaims();
+		$claimGuid = $claims[0]->getGuid();
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+
+		$args[] = array ( new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter ) );
+		$args[] = array ( new ChangeOpMainSnak( $claimGuid, null, $idFormatter ) );
+
+		return $args;
+	}
+
+	/**
+	 * @dataProvider provideChangeOps
+	 * @expectedException Wikibase\ChangeOpException
+	 */
+	public function testInvalidApply( $changeOp ) {
+		$wrongItem = ItemContent::newEmpty();
+		$changeOp->apply( $wrongItem->getEntity() );
+	}
+
 	protected function provideNewItemWithClaim( $itemId, $snak ) {
 		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
 		$claim = $entity->newClaim( $snak );

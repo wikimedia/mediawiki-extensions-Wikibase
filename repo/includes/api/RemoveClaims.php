@@ -2,15 +2,14 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use Wikibase\Claims;
-
-use ApiBase, ApiMain;
-use MWException;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOps;
 use Wikibase\ChangeOpMainSnak;
+use Wikibase\ChangeOpException;
 
 /**
  * API module for removing claims.
@@ -60,7 +59,12 @@ class RemoveClaims extends ModifyClaim {
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $params ) );
-		$changeOps->apply( $entityContent->getEntity(), $summary );
+
+		try {
+			$changeOps->apply( $entityContent->getEntity(), $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
 
 		$this->saveChanges( $entityContent, $summary );
 
