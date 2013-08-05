@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use MWException;
 
 /**
  * Class for aliases change operation
@@ -86,7 +85,7 @@ class ChangeOpAliases extends ChangeOp {
 	 *
 	 * @return bool
 	 *
-	 * @throws MWException
+	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->action === "" || $this->action === "set" ) {
@@ -99,7 +98,7 @@ class ChangeOpAliases extends ChangeOp {
 			$this->updateSummary( $summary, 'remove', $this->language, $this->aliases );
 			$entity->removeAliases( $this->language, $this->aliases );
 		} else {
-			throw new \MWException( "Unknown action: $this->action" );
+			throw new ChangeOpException( "Unknown action for change op: $this->action" );
 		}
 		return true;
 	}
