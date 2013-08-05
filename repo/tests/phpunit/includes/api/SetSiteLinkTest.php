@@ -62,13 +62,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			'linktitle' => "testSetLiteLinkWithNoId",
 		);
 
-		try {
-			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-			$this->fail( "request should have failed" );
-		} catch ( \UsageException $e ) {
-			$this->assertTrue( true ); // ok
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 	}
 
 	public function testSetLiteLinkWithBadId( ) {
@@ -79,13 +74,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			'linktitle' => "testSetLiteLinkWithNoId",
 		);
 
-		try {
-			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-			$this->fail( "request should have failed" );
-		} catch ( \UsageException $e ) {
-			$this->assertTrue( true ); // ok
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 	}
 
 	public function testSetLiteLinkWithBadSite( ) {
@@ -97,13 +87,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			'linktitle' => "Berlin",
 		);
 
-		try {
-			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-			$this->fail( "request should have failed" );
-		} catch ( \UsageException $e ) {
-			$this->assertTrue( true ); // ok
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 	}
 
 	public function testSetLiteLinkWithBadTitle( ) {
@@ -115,13 +100,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			'linktitle' => "testSetLiteLinkWithBadTitle_en",
 		);
 
-		try {
-			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-			$this->fail( "request should have failed" );
-		} catch ( \UsageException $e ) {
-			$this->assertTrue( true ); // ok
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 	}
 
 	public function testSetLiteLinkWithNoToken( ) {
@@ -137,13 +117,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			'linktitle' => "testSetLiteLinkWithNoToken",
 		);
 
-		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-
-			$this->fail( "request should have failed" );
-		} catch ( \UsageException $e ) {
-			$this->assertTrue( true ); // ok
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 	}
 
 	public static function provideSetLiteLink() {
@@ -198,46 +173,44 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			'linktitle' => $linktitle,
 		) );
 
-		try {
-			list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		if( $expectedFailure ){
+			$this->setExpectedException($expectedFailure );
+		}
 
-			if ( $expectedFailure ) {
-				$this->fail( $expectedFailure );
-			}
+		list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
-			// check the response -------------------------------
-			//$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
-			if ( $expectedTitle !== false ) {
-				$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
-			}
+		if ( $expectedFailure ) {
+			$this->fail( $expectedFailure );
+		}
 
-			$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
+		// check the response -------------------------------
+		//$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
+		if ( $expectedTitle !== false ) {
+			$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
+		}
 
-			if ( $expectedTitle !== false ) {
-				$link = array_shift( $res['entity']['sitelinks'] );
-				$this->assertEquals( $linksite, $link['site'] );
-			} else {
-				$link = null;
-			}
+		$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
 
-			if ( $linktitle === '' && $link !== null ) {
-				$this->assertArrayHasKey( 'removed', $link );
-			}
+		if ( $expectedTitle !== false ) {
+			$link = array_shift( $res['entity']['sitelinks'] );
+			$this->assertEquals( $linksite, $link['site'] );
+		} else {
+			$link = null;
+		}
 
-			if ( $expectedTitle !== false ) {
-				$this->assertEquals( $expectedTitle, $link['title'] );
-			}
+		if ( $linktitle === '' && $link !== null ) {
+			$this->assertArrayHasKey( 'removed', $link );
+		}
 
-			if ( $expectedTitle !== false && $linktitle !== '' ) {
-				$this->assertArrayHasKey( 'url', $link );
-			}
-			elseif ( $link !== null ) {
-				$this->assertArrayNotHasKey( 'url', $link );
-			}
-		} catch ( \UsageException $e ) {
-			if ( !$expectedFailure ) {
-				$this->fail( "unexpected exception: $e" );
-			}
+		if ( $expectedTitle !== false ) {
+			$this->assertEquals( $expectedTitle, $link['title'] );
+		}
+
+		if ( $expectedTitle !== false && $linktitle !== '' ) {
+			$this->assertArrayHasKey( 'url', $link );
+		}
+		elseif ( $link !== null ) {
+			$this->assertArrayNotHasKey( 'url', $link );
 		}
 
 		// check the item in the database -------------------------------
@@ -267,13 +240,8 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			'linktitle' => "Berlin",
 		);
 
-		try {
-			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-			$this->fail( "request should have failed" );
-		} catch ( \UsageException $e ) {
-			$this->assertTrue( true ); // ok
-		}
+		$this->setExpectedException( 'UsageException' );
+		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 	}
 }
 

@@ -149,7 +149,7 @@ class RemoveReferencesTest extends \ApiTestCase {
 
 		try {
 			$this->doApiRequest( $params );
-			$this->assertFalse( true, 'Invalid request should raise an exception' );
+			$this->fail( 'Invalid request should raise an exception' );
 		}
 		catch ( \UsageException $e ) {
 			if ( $expectedError === null ) {
@@ -165,8 +165,6 @@ class RemoveReferencesTest extends \ApiTestCase {
 	 * @dataProvider invalidGuidProvider
 	 */
 	public function testInvalidStatementGuid( $statementGuid, $hash ) {
-		$caughtException = false;
-
 		$params = array(
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
@@ -176,12 +174,10 @@ class RemoveReferencesTest extends \ApiTestCase {
 
 		try {
 			$this->doApiRequest( $params );
+			$this->fail( 'Invalid claim guid did not throw an error' );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
-			$caughtException = true;
 		}
-
-		$this->assertTrue( $caughtException );
 	}
 
 	public function invalidGuidProvider() {
