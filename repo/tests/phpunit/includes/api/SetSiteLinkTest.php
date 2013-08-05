@@ -184,7 +184,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		}
 
 		// check the response -------------------------------
-		//$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
+		//$this->assertResultSuccess( $res, 'entity', 'sitelinks', 0 );
 		if ( $expectedTitle !== false ) {
 			$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
 		}
