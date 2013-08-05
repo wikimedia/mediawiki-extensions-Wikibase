@@ -99,11 +99,12 @@ class SetAliasesTest extends ModifyEntityTestBase {
 
 		list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
-		$this->assertSuccess( $apiResponse );
+		$this->assertResultSuccess( $apiResponse );
 
 		// check return value --------------------------------------------------
 		if ( $expected ) {
-			$this->assertSuccess( $apiResponse, 'entity', 'aliases' );
+			$this->assertResultSuccess( $apiResponse );
+			$this->assertResultHasKeyInPath( $apiResponse, 'entity', 'aliases' );
 
 			$aliases = self::flattenArray( $apiResponse['entity']['aliases'], 'language', 'value', true );
 			$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();

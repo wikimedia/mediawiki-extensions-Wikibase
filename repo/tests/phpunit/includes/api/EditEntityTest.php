@@ -141,7 +141,8 @@ class EditEntityTest extends ModifyEntityTestBase {
 			self::$users['wbeditor']->user
 		);
 
-		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertResultSuccess( $res  );
+		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
 		$this->assertRegExp( '/^p\d+$/',
 			$res['entity']['id'],
 			'Expected a qualfied property ID with prefix' );
@@ -163,7 +164,8 @@ class EditEntityTest extends ModifyEntityTestBase {
 			self::$users['wbeditor']->user
 		);
 
-		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
 		$this->assertEntityEquals( self::$expect, $res['entity'] );
 		$this->assertRegExp( '/^q\d+$/',
 				$res['entity']['id'],
@@ -216,11 +218,13 @@ class EditEntityTest extends ModifyEntityTestBase {
 			self::$users['wbeditor']->user
 		);
 
-		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
 
 		//NOTE: lastrevid should be here even though the edit didn't create a new revision,
 		//      because the content stayed the same.
-		$this->assertSuccess( $res, 'entity', 'lastrevid' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entity', 'lastrevid' );
 
 		$this->assertEntityEquals( self::$expect, $res['entity'] );
 	}
@@ -271,7 +275,8 @@ class EditEntityTest extends ModifyEntityTestBase {
 			null,
 			self::$users['wbeditor']->user
 		);
-		$this->assertSuccess( $query, 'entities', self::$id, 'id' );
+		$this->assertResultSuccess( $query );
+		$this->assertResultHasKeyInPath( $query, 'entities', self::$id, 'id' );
 
 		// these sets of failing data must be merged with an existing entity
 		$goodData = array(
@@ -293,7 +298,8 @@ class EditEntityTest extends ModifyEntityTestBase {
 					null,
 					self::$users['wbeditor']->user
 				);
-				$this->assertSuccess( $res, 'entity', 'id' );
+				$this->assertResultSuccess( $res );
+				$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
 				$this->assertEntityEquals( self::$expect, $res['entity'] );
 			}
 			catch ( \UsageException $e ) {
@@ -318,7 +324,8 @@ class EditEntityTest extends ModifyEntityTestBase {
 				null,
 				self::$users['wbeditor']->user
 			);
-			$this->assertSuccess( $res, 'entity', 'id' );
+			$this->assertResultSuccess( $res );
+			$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
 			$this->assertEntityEquals( array( 'id' => self::$id ), $res['entity'] );
 		}
 		catch ( \UsageException $e ) {
@@ -555,10 +562,11 @@ class EditEntityTest extends ModifyEntityTestBase {
 		);
 
 		// check returned keys -------------------------------------------
-		$this->assertSuccess( $res, 'entity' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entity' );
 		$entity = $res['entity'];
-		$this->assertSuccess( $res, 'entity', 'id' );
-		$this->assertSuccess( $res, 'entity', 'lastrevid' );
+		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
+		$this->assertResultHasKeyInPath( $res, 'entity', 'lastrevid' );
 
 		// check return value -------------------------------------------
 		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );

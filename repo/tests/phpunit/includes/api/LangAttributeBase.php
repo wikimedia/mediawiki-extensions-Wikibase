@@ -103,7 +103,7 @@ abstract class LangAttributeBase extends ModifyEntityTestBase {
 			}
 		}
 
-		$this->assertSuccess( $apiResponse );
+		$this->assertResultSuccess( $apiResponse );
 
 		$item = $apiResponse['entity'];
 		$section = "{$attr}s";
