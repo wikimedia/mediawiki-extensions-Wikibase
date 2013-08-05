@@ -61,41 +61,15 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	protected static $loginUser = null;
 	protected static $token = null;
 
-	protected $user = null;
 	protected $setUpComplete = false;
 
 	protected function isSetUp() {
 		return $this->setUpComplete;
 	}
 
-	protected function init() {
-		global $wgUser;
-
-		if ( !$this->user ) {
-			self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-			self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-			self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
-
-			$this->user =  new TestUser(
-				'Apitesteditor',
-				'Api Test Editor',
-				'api_test_editor@example.com',
-				array( 'wbeditor' )
-			);
-
-			ApiTestCase::$users['wbeditor'] = $this->user;
-		}
-
-		$wgUser = $this->user->user;
-	}
-
 	public function setUp() {
 		global $wgUser;
 		parent::setUp();
-
-		$this->setMwGlobals( array( 'wgUser' => $wgUser ) );
-
-		$this->init();
 
 		static $hasSites = false;
 
@@ -103,6 +77,19 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 			\TestSites::insertIntoDb();
 			$hasSites = true;
 		}
+
+		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
+		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
+		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
+
+		ApiTestCase::$users['wbeditor'] = new TestUser(
+			'Apitesteditor',
+			'Api Test Editor',
+			'api_test_editor@example.com',
+			array( 'wbeditor' )
+		);
+
+		$wgUser = self::$users['wbeditor']->user;
 
 		//TODO: preserve session and token between calls?!
 		self::$loginSession = false;
@@ -288,8 +275,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 			$user = self::$users['wbeditor'];
 		}
 
-		$this->init();
-
 		if ( self::$loginSession && $user->username == self::$loginUser->username ) {
 			return self::$loginSession;
 		}
@@ -325,8 +310,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * Gets an entity edit token. Returns a cached token if available.
 	 */
 	function getEditToken() {
-		$this->init();
-
 		if ( !self::$usetoken ) {
 			return "";
 		}
