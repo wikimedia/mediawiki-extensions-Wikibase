@@ -39,7 +39,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CreateClaimTest extends \ApiTestCase {
+class CreateClaimTest extends ModifyEntityTestBase {
 
 	protected static function getNewEntityAndProperty() {
 		$entity = \Wikibase\Item::newEmpty();
@@ -77,10 +77,9 @@ class CreateClaimTest extends \ApiTestCase {
 			'snaktype' => 'value',
 			'property' => $this->getFormattedIdForEntity( $property ),
 			'value' => '"Foo.png"',
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertRequestValidity( $resultArray );
 
@@ -226,8 +225,6 @@ class CreateClaimTest extends \ApiTestCase {
 		 */
 		list( $entity, $property ) = self::getEntityAndPropertyForInvalid();
 
-		$params['token'] = $GLOBALS['wgUser']->getEditToken();
-
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
 			$params['entity'] = $this->getFormattedIdForEntity( $entity );
 		}
@@ -237,8 +234,8 @@ class CreateClaimTest extends \ApiTestCase {
 		}
 
 		try {
-			$this->doApiRequest( $params );
-			$this->assertFalse( true, 'Invalid request should raise an exception' );
+			$this->doApiRequestWithToken( $params );
+			$this->fail( 'Invalid request should raise an exception' );
 		}
 		catch ( \UsageException $e ) {
 			$this->assertEquals( $errorCode, $e->getCodeString(), 'Invalid request raised correct error' );
@@ -267,10 +264,9 @@ class CreateClaimTest extends \ApiTestCase {
 			'snaktype' => 'value',
 			'property' => $this->getFormattedIdForEntity( $property ),
 			'value' => '"Foo.png"',
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertRequestValidity( $resultArray );
 
@@ -284,11 +280,10 @@ class CreateClaimTest extends \ApiTestCase {
 			'snaktype' => 'value',
 			'property' => $this->getFormattedIdForEntity( $property ),
 			'value' => '"Bar.jpg"',
-			'token' => $GLOBALS['wgUser']->getEditToken(),
 			'baserevid' => $revId
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertRequestValidity( $resultArray );
 
