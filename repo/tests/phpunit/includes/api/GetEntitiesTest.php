@@ -77,26 +77,32 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id );
 		$this->assertEntityEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 		// This should be correct for all items we are testing
 		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entities'][$id]['type'] );
 		// The following comes from the props=info which is included by default
 		// Only check if they are there and seems valid, can't do much more for the moment (or could for title but then we are testing assumptions)
-		$this->assertSuccess( $res, 'entities', $id, 'pageid' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'pageid' );
 		$this->assertTrue( is_integer( $res['entities'][$id]['pageid'] ) );
 		$this->assertTrue( 0 < $res['entities'][$id]['pageid'] );
-		$this->assertSuccess( $res, 'entities', $id, 'ns' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'ns' );
 		$this->assertTrue( is_integer( $res['entities'][$id]['ns'] ) );
 		$this->assertTrue( 0 <= $res['entities'][$id]['ns'] );
-		$this->assertSuccess( $res, 'entities', $id, 'title' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'title' );
 		$this->assertTrue( is_string( $res['entities'][$id]['title'] ) );
 		$this->assertTrue( 0 < strlen( $res['entities'][$id]['title'] ) );
-		$this->assertSuccess( $res, 'entities', $id, 'lastrevid' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'lastrevid' );
 		$this->assertTrue( is_integer( $res['entities'][$id]['lastrevid'] ) );
 		$this->assertTrue( 0 < $res['entities'][$id]['lastrevid'] );
-		$this->assertSuccess( $res, 'entities', $id, 'modified' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'modified' );
 		$this->assertTrue( is_string( $res['entities'][$id]['modified'] ) );
 		$this->assertTrue( 0 < strlen( $res['entities'][$id]['modified'] ) );
 		$this->assertRegExp( '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/',
@@ -131,7 +137,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $ids )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id );
 		$this->assertEntityEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ) );
 	}
@@ -172,7 +179,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 		$item = $this->getEntityOutput( $handle );
 		$id = $item['id'];
 
-		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id );
 		$this->assertEntityEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 	}
@@ -196,7 +204,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 		$item = $this->getEntityOutput( $handle );
 		$id = $item['id'];
 
-		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id );
 		$this->assertEntityEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 
@@ -286,7 +295,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			'ids' => $badid,
 		) );
 
-		$this->assertSuccess( $res, 'entities', $badid, 'missing' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $badid, 'missing' );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 	}
 
@@ -332,12 +342,14 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			'titles' => 'klaijehrnqowienxcqopweiu',
 		) );
 
-		$this->assertSuccess( $res, 'entities' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities' );
 
 		$keys = array_keys( $res['entities'] );
 		$this->assertEquals( 1, count( $keys ), "requesting a single item should return exactly one item entry" );
 
-		$this->assertSuccess( $res, 'entities', $keys[0], 'missing' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $keys[0], 'missing' );
 	}
 
 	/**
@@ -357,12 +369,14 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			'normalize' => true
 		) );
 
-		$this->assertSuccess( $res, 'entities' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities' );
 
 		$keys = array_keys( $res['entities'] );
 		$this->assertEquals( 1, count( $keys ), "requesting a single item should return exactly one item entry" );
 
-		$this->assertSuccess( $res, 'entities', $keys[0], 'missing' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $keys[0], 'missing' );
 
 		// The normalization that has been applied should be noted
 		$this->assertEquals(
@@ -392,7 +406,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			'ids' => join( '|', $ids ),
 		) );
 
-		$this->assertSuccess( $res, 'entities' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities' );
 		$this->assertEquals( count( $ids ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
 
 		foreach ( $ids as $id ) {
@@ -418,7 +433,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			'titles' => join( '|', $titles )
 		) );
 
-		$this->assertSuccess( $res, 'entities' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities' );
 		$this->assertEquals( count( $titles ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
 
 		foreach ( $handles as $handle ) {
@@ -455,7 +471,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id );
 
 		$item = $res['entities'][$id];
 
@@ -509,7 +526,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id );
 
 		if ( $expectedProps === false ) {
 			$this->assertArrayHasKey( 'warnings', $res );
@@ -541,7 +559,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
 
 		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayNotHasKey( 'url', $link );
@@ -556,7 +575,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
 
 		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'url', $link, "SiteLinks in the result must have the 'url' key set!" );
@@ -588,7 +608,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
 		$last = '';
 		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'site', $link );
@@ -607,7 +628,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
+		$this->assertResultSuccess( $res );
+		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
 		$last = 'zzzzzzzz';
 		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'site', $link );
@@ -633,7 +655,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 		);
 
 		if ( $usekeys ) {
-			$this->assertSuccess( $res, 'entities', $id );
+			$this->assertResultSuccess( $res );
+			$this->assertResultHasKeyInPath( $res, 'entities', $id );
 			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
 				if ( array_key_exists( $prop, $res['entities'][$id] ) ) {
 					foreach ( $res['entities'][$id][$prop] as $key => $value ) {
@@ -648,7 +671,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			}
 		}
 		else {
-			$this->assertSuccess( $res, 'entities' );
+			$this->assertResultSuccess( $res );
+			$this->assertResultHasKeyInPath( $res, 'entities' );
 
 			$keys = array_keys( $res['entities'] );
 			$n = $keys[0];
