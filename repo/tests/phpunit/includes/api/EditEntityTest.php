@@ -100,7 +100,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * Check if an entity can not be created whithout a token
 	 */
 	function testEditEntityNoToken() {
-		$this->login();
+		$this->doLogin();
 
 		if ( self::$usetoken ) {
 			try {
