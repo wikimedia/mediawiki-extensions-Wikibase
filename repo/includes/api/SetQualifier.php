@@ -7,6 +7,7 @@ use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpQualifier;
+use Wikibase\ChangeOpException;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -37,9 +38,6 @@ use Wikibase\ChangeOpQualifier;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetQualifier extends ModifyClaim {
-
-	// TODO: more explicit support for snak merging?
-	// TODO: claim uniqueness
 
 	/**
 	 * @see ApiBase::execute
@@ -72,7 +70,12 @@ class SetQualifier extends ModifyClaim {
 		$claim = $claims->getClaimWithGuid( $claimGuid );
 
 		$changeOp = $this->getChangeOp();
-		$changeOp->apply( $entity, $summary );
+
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
 
 		$this->saveChanges( $entityContent, $summary );
 

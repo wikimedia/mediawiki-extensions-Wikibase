@@ -9,6 +9,7 @@ use Wikibase\ChangeOpLabel;
 use Wikibase\ChangeOpDescription;
 use Wikibase\ChangeOpAliases;
 use Wikibase\ChangeOpSiteLink;
+use Wikibase\ChangeOpException;
 use ApiBase, User, Status, SiteList;
 use Wikibase\SiteLink;
 use Wikibase\Entity;
@@ -159,9 +160,11 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "Edit failed: $1", 'failed-save' );
 		}
 
-		if ( $changeOps->apply( $entity ) === false ) {
+		try {
+			$changeOps->apply( $entity );
+		} catch ( ChangeOpException $e ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Change could not be applied to entity', 'failed-save' );
+			$this->dieUsage( 'Change could not be applied to entity: ' . $e->getMessage(), 'failed-save' );
 		}
 
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );

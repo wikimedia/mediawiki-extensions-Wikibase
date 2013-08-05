@@ -110,13 +110,14 @@ class ChangeOpQualifier extends ChangeOp {
 	 * @param Summary|null $summary
 	 *
 	 * @return bool
+	 *
+	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );
 
 		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
-			//TODO: throwing an error would probably be the better solution
-			return false;
+			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
 		}
 
 		$claim = $claims->getClaimWithGuid( $this->claimGuid );
@@ -125,10 +126,6 @@ class ChangeOpQualifier extends ChangeOp {
 		if ( $this->snakHash === '' ) {
 			$this->addQualifier( $qualifiers, $summary );
 		} else {
-			if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
-				//TODO: throw an error
-				return false;
-			}
 			if ( $this->snak != null ) {
 				$this->setQualifier( $qualifiers, $summary );
 			} else {
@@ -147,9 +144,13 @@ class ChangeOpQualifier extends ChangeOp {
 	 *
 	 * @param Snaks $qualifiers
 	 * @param Summary $summary
+	 *
+	 * @throws ChangeOpException
 	 */
 	protected function addQualifier( Snaks $qualifiers, Summary $summary = null ) {
-		//TODO: claimUniqueness: check if snak with same hash already exists and throw error in that case
+		if ( $qualifiers->hasSnak( $this->snak ) ) {
+			throw new ChangeOpException( "Claim has already a qualifier with hash $this->snak->getHash()" );
+		}
 		$qualifiers->addSnak( $this->snak );
 		//TODO: add the mainsnak as autocomment-arg & change messages
 		$this->updateSummary( $summary, 'add', '', $this->getSnakSummaryArgs( $this->snak ) );
@@ -160,9 +161,16 @@ class ChangeOpQualifier extends ChangeOp {
 	 *
 	 * @param Snaks $qualifiers
 	 * @param Summary $summary
+	 *
+	 * @throws ChangeOpException
 	 */
 	protected function setQualifier( Snaks $qualifiers, Summary $summary = null ) {
-		//TODO: claimUniqueness: check if snak with same hash already exists and throw error in that case
+		if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
+			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
+		}
+		if ( $qualifiers->hasSnak( $this->snak ) ) {
+			throw new ChangeOpException( "Claim has already a qualifier with hash $this->snak->getHash()" );
+		}
 		$qualifiers->removeSnakHash( $this->snakHash );
 		$qualifiers->addSnak( $this->snak );
 		$this->updateSummary( $summary, 'update', '', $this->getSnakSummaryArgs( $this->snak ) );
@@ -173,8 +181,13 @@ class ChangeOpQualifier extends ChangeOp {
 	 *
 	 * @param Snaks $qualifiers
 	 * @param Summary $summary
+	 *
+	 * @throws ChangeOpException
 	 */
 	protected function removeQualifiers( Snaks $qualifiers, Summary $summary = null ) {
+		if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
+			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
+		}
 		$removedQualifier = $qualifiers->getSnak( $this->snakHash );
 		$qualifiers->removeSnakHash( $this->snakHash );
 		$this->updateSummary( $summary, 'remove', '', $this->getSnakSummaryArgs( $removedQualifier ) );
