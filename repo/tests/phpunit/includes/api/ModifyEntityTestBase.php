@@ -371,19 +371,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	}
 
 	/**
-	 * data provider for passing each entity handle to the test function.
-	 */
-	function provideEntityHandles() {
-		$handles = array();
-
-		foreach ( self::getEntityInput() as $handle => $entity ) {
-			$handles[] = array( $handle );
-		}
-
-		return $handles;
-	}
-
-	/**
 	 * returns the list handles for the well known test entities.
 	 */
 	static function getEntityHandles() {
