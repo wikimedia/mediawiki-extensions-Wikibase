@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\Entity;
 use Wikibase\Claims;
+use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpQualifier;
 use Wikibase\ChangeOpException;
@@ -69,6 +70,10 @@ class SetQualifier extends ModifyClaim {
 
 		$claim = $claims->getClaimWithGuid( $claimGuid );
 
+		if ( isset( $params['snakhash'] ) ) {
+			$this->validateReferenceHash( $claim, $params['snakhash'] );
+		}
+
 		$changeOp = $this->getChangeOp();
 
 		try {
@@ -107,6 +112,18 @@ class SetQualifier extends ModifyClaim {
 
 		if ( isset( $params['snaktype'] ) && $params['snaktype'] === 'value' && !isset( $params['value'] ) ) {
 			$this->dieUsage( 'When setting a qualifier that is a PropertyValueSnak, the value needs to be provided', 'param-missing' );
+		}
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Claim $claim
+	 * @param string $qualifierHash
+	 */
+	protected function validateQualifierHash( Claim $claim, $qualifierHash ) {
+		if ( !$claim->getReferences()->hasReferenceHash( $qualifierHash ) ) {
+			$this->dieUsage( "Claim does not have a qualifier with the given hash" , 'no-such-reference' );
 		}
 	}
 

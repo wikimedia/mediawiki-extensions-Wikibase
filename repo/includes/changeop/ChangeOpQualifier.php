@@ -76,7 +76,7 @@ class ChangeOpQualifier extends ChangeOp {
 	 */
 	public function __construct( $claimGuid, $snak, $snakHash, EntityIdFormatter $idFormatter ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
-			throw new InvalidArgumentException( '$snakHash needs to be a string and must not be empty' );
+			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
 
 		if ( !is_string( $snakHash ) ) {
@@ -129,7 +129,7 @@ class ChangeOpQualifier extends ChangeOp {
 			if ( $this->snak != null ) {
 				$this->setQualifier( $qualifiers, $summary );
 			} else {
-				$this->removeQualifiers( $qualifiers, $summary );
+				$this->removeQualifier( $qualifiers, $summary );
 			}
 		}
 
@@ -184,7 +184,7 @@ class ChangeOpQualifier extends ChangeOp {
 	 *
 	 * @throws ChangeOpException
 	 */
-	protected function removeQualifiers( Snaks $qualifiers, Summary $summary = null ) {
+	protected function removeQualifier( Snaks $qualifiers, Summary $summary = null ) {
 		if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
 			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
 		}
