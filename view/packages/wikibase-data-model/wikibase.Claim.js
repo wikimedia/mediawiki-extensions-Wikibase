@@ -139,6 +139,7 @@ $.extend( SELF.prototype, {
 
 		if ( this._qualifiers ) {
 			json.qualifiers = this._qualifiers.toJSON();
+			json['qualifiers-order'] = this._qualifiers.getPropertyOrder();
 		}
 
 		return json;
@@ -162,7 +163,7 @@ SELF.newFromJSON = function( json ) {
 		isStatement = json.type === 'statement';
 
 	if ( json.qualifiers !== undefined ) {
-		qualifiers = wb.SnakList.newFromJSON( json.qualifiers );
+		qualifiers = wb.SnakList.newFromJSON( json.qualifiers, json['qualifiers-order'] );
 	}
 
 	if ( isStatement && json.references !== undefined ) {
