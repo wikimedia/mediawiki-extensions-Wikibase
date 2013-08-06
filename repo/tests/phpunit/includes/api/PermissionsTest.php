@@ -83,11 +83,6 @@ class PermissionsTest extends ModifyEntityTestBase {
 		parent::tearDown();
 	}
 
-	function getTokens() {
-		$re = $this->getTokenList( self::$users['sysop'] );
-		return $re[0];
-	}
-
 	function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null, array $restore = array() ) {
 		global $wgUser;
 
