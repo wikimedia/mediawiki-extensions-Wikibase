@@ -56,28 +56,191 @@ namespace Wikibase\Test\Api;
  * @group BreakingTheSlownessBarrier
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class SetLabelTest extends LangAttributeBase {
 
-	public static function paramProvider() {
+	private static $testAction = 'wbsetlabel';
+	private static $testId;
+
+	public function setUp() {
+		parent::setUp();
+		if( !isset( self::$testId ) ){
+			self::$testId = $this->getTestEntityId();
+		}
+	}
+
+	public static function provideData() {
 		return array(
-			// $handle, $langCode, $value, $exception
-			array( 'Oslo', 'en', 'Osloooo', null ),
-			//array( 'Oslo', 'en', 'Oslo', 'UsageException' ),
-			//array( 'Oslo', 'en', 'Bergen', null ),
-			array( 'Oslo', 'en', '', null ),
-			array( 'Oslo', 'en', self::makeOverlyLongString( 'Oslo' ), 'UsageException' ),
+			// p => params, e => expected
+
+			// -- Test valid sequence -----------------------------
+			array( //0
+				'p' => array( 'language' => 'en', 'value' => '' ),
+				'e' => array( 'warning' => 'edit-no-change' ) ),
+			array( //1
+				'p' => array( 'language' => 'en', 'value' => 'Label' ),
+				'e' => array( 'value' => array( 'en' => 'Label' ) ) ),
+			array( //2
+				'p' => array( 'language' => 'en', 'value' => 'Label' ),
+				'e' => array( 'value' => array( 'en' => 'Label' ), 'warning' => 'edit-no-change' ) ),
+			array( //3
+				'p' => array( 'language' => 'en', 'value' => 'Different Label' ),
+				'e' => array( 'value' => array( 'en' => 'Different Label' ) ) ),
+			array( //4
+				'p' => array( 'language' => 'bat-smg', 'value' => 'Vėsata' ),
+				'e' => array( 'value' => array( 'bat-smg' => 'Vėsata','en' => 'Different Label' ) ) ),
+			array( //5
+				'p' => array( 'language' => 'en', 'value' => '' ),
+				'e' => array( 'value' => array( 'bat-smg' => 'Vėsata' ) ) ),
+			array( //6
+				'p' => array( 'language' => 'bat-smg', 'value' => '' ),
+				'e' => array( ) ),
 		);
 	}
 
 	/**
-	 * @dataProvider paramProvider
+	 * @dataProvider provideData
 	 */
-	public function testLanguageAttribute( $handle, $langCode, $value, $exception = null ) {
-		$this->doLanguageAttribute( $handle, 'wbsetlabel', 'label', $langCode, $value, $exception );
-		$id = $this->getEntityId( $handle );
+	public function testSetLabel( $params, $expected ){
+
+		// -- set any defaults ------------------------------------
+		$params['action'] = self::$testAction;
+		if( !array_key_exists( 'id', $params ) ){
+			$params['id'] = self::$testId;
+		}
+		if( !array_key_exists( 'value', $expected ) ){
+			$expected['value'] = array();
+		}
+
+		if( !array_key_exists( 'exception', $expected ) ){
+
+			// -- do the request --------------------------------------------------
+			list( $result,, ) = $this->doApiRequestWithToken( $params );
+
+			// -- check the result ------------------------------------------------
+			$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+			$this->assertResultHasEntityType( $result );
+			$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
+
+			// -- check the result only has our changed data (if any)  ------------
+			$this->assertEquals( 1, count( $result['entity']['labels'] ), "Entity return contained more than a single language" );
+			$this->assertArrayHasKey( $params['language'], $result['entity']['labels'], "Entity doesn't return expected language");
+			$this->assertEquals( $params['language'], $result['entity']['labels'][ $params['language'] ]['language'], "Returned incorrect language" );
+			if( array_key_exists( $params['language'], $expected['value'] ) ){
+				$this->assertEquals( $expected['value'][ $params['language'] ], $result['entity']['labels'][$params['language']]['value'] , "Returned incorrect label" );
+			} else if( empty( $value ) ){
+				$this->assertArrayHasKey( 'removed', $result['entity']['labels'][ $params['language'] ], "Entity doesn't return expected 'removed' marker");
+			}
+
+			// -- check any warnings ----------------------------------------------
+			if( array_key_exists( 'warning', $expected ) ){
+				$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
+				$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
+				$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
+			}
+
+			// -- check item in database -------------------------------------------
+			$dbEntity = $this->loadEntity( self::$testId );
+			if( count( $expected['value'] ) ){
+				$this->assertArrayHasKey( 'labels', $dbEntity );
+				$dbLabels = self::flattenArray( $dbEntity['labels'], 'language', 'value', true );
+				foreach( $expected['value'] as $valueLanguage => $value ){
+					$this->assertArrayHasKey( $valueLanguage, $dbLabels );
+					$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
+				}
+			} else {
+				$this->assertArrayNotHasKey( 'labels', $dbEntity );
+			}
+
+			// -- check the edit summary --------------------------------------------
+			if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
+				$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
+			}
+
+		} else {
+
+			// -- catch and check expected exceptions ---------------------
+			try{
+				if( $expected['exception']['code'] == 'badtoken' ){
+					$this->doApiRequest( $params );
+				} else {
+					$this->doApiRequestWithToken( $params );
+				}
+				$this->fail( 'Failed to throw exception' );
+
+			} catch( \Exception $exception ){
+
+				/** @var $exception \UsageException */ // trick ides into not showing errors
+				if( array_key_exists( 'type', $expected['exception'] ) ){
+					$this->assertInstanceOf( $expected['exception']['type'], $exception );
+				}
+
+				if( array_key_exists( 'code', $expected['exception'] ) ){
+					$this->assertEquals( $expected['exception']['code'], $exception->getCodeString() );
+				}
+
+				if( array_key_exists( 'message', $expected['exception'] ) ){
+					$this->assertContains( 'loss of session data', $exception->getMessage() );
+				}
+			}
+		}
 	}
 
+	public static function provideExceptionData() {
+		return array(
+			// p => params, e => expected
+
+			// -- Test Exceptions -----------------------------
+			array( //0
+				'p' => array( 'language' => '', 'value' => '' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
+			array( //1
+				'p' => array( 'language' => 'nl', 'value' => self::makeOverlyLongString() ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
+			array( //2
+				'p' => array( 'language' => 'pt', 'value' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' )  ) ),
+			array( //3
+				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'value' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id', 'message' => 'No entity found' )  ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideExceptionData
+	 */
+	public function testSetLabelExceptions( $params, $expected ){
+
+		// -- set any defaults ------------------------------------
+		$params['action'] = self::$testAction;
+		if( !array_key_exists( 'id', $params ) ){
+			$params['id'] = self::$testId;
+		}
+
+		// -- catch and check expected exceptions ---------------------
+		try{
+			if( $expected['exception']['code'] == 'badtoken' ){
+				$this->doApiRequest( $params );
+			} else {
+				$this->doApiRequestWithToken( $params );
+			}
+			$this->fail( "Failed to throw exception, {$expected['exception']['type']} " );
+
+		} catch( \Exception $exception ){
+
+			/** @var $exception \UsageException */ // trick IDEs into not showing errors
+			if( array_key_exists( 'type', $expected['exception'] ) ){
+				$this->assertInstanceOf( $expected['exception']['type'], $exception );
+			}
+
+			if( array_key_exists( 'code', $expected['exception'] ) ){
+				$this->assertEquals( $expected['exception']['code'], $exception->getCodeString() );
+			}
+
+			if( array_key_exists( 'message', $expected['exception'] ) ){
+				$this->assertContains( 'loss of session data', $exception->getMessage() );
+			}
+		}
+	}
 }
