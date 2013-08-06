@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "898eddaf_ef975b99",
+        "filename": "repo/tests/phpunit/includes/api/SetSiteLinkTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-06T10:15:27Z",
+      "side": 1,
+      "message": "please uncomment and change to $this-\u003eassertResultSuccess( $res );",
+      "revId": "189b446cf7d1304f78d56fab15fea5ccdc08808f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
