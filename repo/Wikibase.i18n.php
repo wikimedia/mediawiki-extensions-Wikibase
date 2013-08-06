@@ -92,7 +92,7 @@ $messages['en'] = array(
 	'wikibase-entityselector-more' => 'more',
 
 	'wikibase-anonymouseditwarning' => "Warning: You are not logged in.
-Your IP address will be recorded in the edit history of this $1.",
+Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
 	'wikibase-blockeduser-tooltip-message' => 'You do not have permission to edit because your username or IP address has been blocked.',
 
