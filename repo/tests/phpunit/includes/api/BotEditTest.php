@@ -59,24 +59,10 @@ use Wikibase\NamespaceUtils;
 class BotEditTest extends ModifyEntityTestBase {
 
 	protected static $baseOfItemIds = 1;
-	protected static $usepost;
-	protected static $usetoken;
-	protected static $userights;
 
 	public function setUp() {
 		global $wgUser;
 		parent::setUp();
-
-		static $hasSites = false;
-
-		if ( !$hasSites ) {
-			\TestSites::insertIntoDb();
-			$hasSites = true;
-		}
-
-		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 
 		ApiTestCase::$users['wbbot'] = new TestUser(
 			'Apitestbot',
@@ -96,7 +82,7 @@ class BotEditTest extends ModifyEntityTestBase {
 	 */
 	function testTokensAndRights() {
 		// check if there is a production-like environment available
-		if ( !self::$usetoken || !self::$userights ) {
+		if ( !parent::$usetoken || !parent::$userights ) {
 			$this->markTestSkipped(
 				"The current setup does not include use of tokens or user rights"
 			);
