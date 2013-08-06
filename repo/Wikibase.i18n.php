@@ -326,6 +326,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetqualifier-add' => 'Added {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Changed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
+	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$1|reference|references}}',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -1053,6 +1054,8 @@ Parameters:
 * $1 is the number of qualifiers updated.',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Automatic edit summary when removing qualifiers. Parameters:
 * $1 is the number of qualifiers removed.',
+	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
+* $1 is the number of references removed.',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}

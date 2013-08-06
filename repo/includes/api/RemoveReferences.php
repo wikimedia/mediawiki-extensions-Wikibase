@@ -2,18 +2,14 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
-
-use Wikibase\EntityContent;
-use Wikibase\EntityId;
+use ApiBase;
 use Wikibase\Entity;
-use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
-use Wikibase\References;
-use Wikibase\Settings;
 use Wikibase\Claims;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\ChangeOpReference;
+use Wikibase\ChangeOps;
+use Wikibase\ChangeOpException;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -40,18 +36,9 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class RemoveReferences extends ApiWikibase {
-
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//removeReferences() function as the constructor.
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
-
-	// TODO: autocomment
-	// TODO: rights
-	// TODO: conflict detection
+class RemoveReferences extends ModifyClaim {
 
 	/**
 	 * @see ApiBase::execute
@@ -61,101 +48,98 @@ class RemoveReferences extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
 
-		$this->removeReferences(
-			$content->getEntity(),
-			$params['statement'],
-			array_unique( $params['references'] )
+		$claimGuid = $params['statement'];
+		$entityId = $this->claimModificationHelper->getEntityIdFromString(
+			Entity::getIdFromClaimGuid( $claimGuid )
 		);
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		// TODO: put loadEntityContent into a separate helper class for great reuse!
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entity = $entityContent->getEntity();
+		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$this->saveChanges( $content );
+		$claims = new Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+		}
+
+		$claim = $claims->getClaimWithGuid( $claimGuid );
+
+		if ( ! ( $claim instanceof Statement ) ) {
+			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
+		}
+
+		$referenceHashes = $this->getReferenceHashesFromParams( $params, $claim );
+
+		$changeOps = new ChangeOps();
+		$changeOps->add( $this->getChangeOps( $claimGuid, $referenceHashes ) );
+
+		try {
+			$changeOps->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
+
+		$this->saveChanges( $entityContent, $summary );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * @since 0.3
+	 * Check the provided parameters
 	 *
-	 * @return EntityContent
+	 * @since 0.4
 	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
-
-		if ( !( $claimGuidValidator->validateFormat( $params['statement'] ) ) ) {
+	protected function validateParameters( array $params ) {
+		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param Entity $entity
-	 * @param string $statementGuid
-	 * @param string[] $refHashes
+	 * @param string $claimGuid
+	 * @param array $referenceHashes
+	 *
+	 * @return ChangeOp[] $changeOps
 	 */
-	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
-		$claims = new Claims( $entity->getClaims() );
+	protected function getChangeOps( $claimGuid, array $referenceHashes ) {
+		$changeOps = array();
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
-		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+		foreach ( $referenceHashes as $referenceHash ) {
+			$changeOps[] = new ChangeOpReference( $claimGuid, null, $referenceHash, $idFormatter );
 		}
 
-		$statement = $claims->getClaimWithGuid( $statementGuid );
+		return $changeOps;
+	}
 
-		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
-		}
-
-		/**
-		 * @var References $references
-		 */
+	/**
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 * @param Statement $statement
+	 *
+	 * @return string[]
+	 */
+	protected function getReferenceHashesFromParams( array $params, Statement $statement ) {
 		$references = $statement->getReferences();
-
-		foreach ( $refHashes as $refHash ) {
-			// TODO: perhaps we do not want to fail like this, as client cannot easily find which ref is not there
-			if ( $references->hasReferenceHash( $refHash ) ) {
-				$references->removeReferenceHash( $refHash );
+		$hashes = array();
+	
+		foreach ( array_unique( $params['references'] ) as $referenceHash ) {
+			if ( !$references->hasReferenceHash( $referenceHash ) ) {
+				$this->dieUsage( 'Invalid reference hash', 'no-such-reference' );
 			}
-			else {
-				// TODO: does $refHash need to be escaped somehow?
-				$this->dieUsage( 'The statement does not have any associated reference with the provided reference hash "' . $refHash . '"', 'no-such-reference' );
-			}
+			$hashes[] = $referenceHash;
 		}
-
-		$entity->setClaims( $claims );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
-	 */
-	protected function saveChanges( EntityContent $content ) {
-		// collect information and create an EditEntity
-		$summary = '/* wbremovereferences */'; //TODO: autosummary
-		$status = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
-
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
+	
+		return $hashes;
 	}
 
 	/**
@@ -166,21 +150,19 @@ class RemoveReferences extends ApiWikibase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'statement' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'references' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+		return array_merge(
+			parent::getAllowedParams(),
+			array(
+				'statement' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'references' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+					ApiBase::PARAM_ISMULTI => true,
+				),
+			)
 		);
 	}
 
@@ -192,16 +174,12 @@ class RemoveReferences extends ApiWikibase {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'statement' => 'A GUID identifying the statement for which a reference is being set',
-			'references' => 'The hashes of the references that should be removed',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'statement' => 'A GUID identifying the statement for which a reference is being set',
+				'references' => 'The hashes of the references that should be removed',
+			)
 		);
 	}
 
@@ -209,12 +187,15 @@ class RemoveReferences extends ApiWikibase {
 	 * @see \ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
-			array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
-		) );
+		return array_merge(
+			parent::getPossibleErrors(),
+			$this->claimModificationHelper->getPossibleErrors(),
+			array(
+				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
+				array( 'code' => 'no-such-reference', 'info' => $this->msg( 'wikibase-api-no-such-reference' )->text() ),
+				array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
+			)
+		);
 	}
 
 	/**
@@ -242,12 +223,4 @@ class RemoveReferences extends ApiWikibase {
 			'api.php?action=wbremovereferences&statement=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar&baserevid=7201010' => 'Remove reference with hash "455481eeac76e6a8af71a6b493c073d54788e7e9" from claim with GUID of "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F"',
 		);
 	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
-	}
-
 }
