@@ -2,12 +2,12 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
-use ApiMain;
+use ApiBase;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
+use Wikibase\ChangeOpException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -70,7 +70,12 @@ class SetClaimValue extends ModifyClaim {
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 		$changeOp = new ChangeOpMainSnak( $claimGuid, $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-		$changeOp->apply( $entity, $summary );
+
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
 
 		$this->saveChanges( $entityContent, $summary );
 
@@ -113,11 +118,6 @@ class SetClaimValue extends ModifyClaim {
 					ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 					ApiBase::PARAM_REQUIRED => true,
 				),
-				'token' => null,
-				'baserevid' => array(
-					ApiBase::PARAM_TYPE => 'integer',
-				),
-				'bot' => false,
 			)
 		);
 	}
@@ -145,13 +145,6 @@ class SetClaimValue extends ModifyClaim {
 				'claim' => 'A GUID identifying the claim',
 				'snaktype' => 'The type of the snak',
 				'value' => 'The value to set the datavalue of the the main snak of the claim to',
-				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-				'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-					"This is used for detecting conflicts during save."
-				),
-				'bot' => array( 'Mark this edit as bot',
-					'This URL flag will only be respected if the user belongs to the group "bot".'
-				),
 			)
 		);
 	}

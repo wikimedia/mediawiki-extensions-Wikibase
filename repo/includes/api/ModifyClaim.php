@@ -2,7 +2,7 @@
 namespace Wikibase\Api;
 
 use ApiMain;
-use ApiBase, MWException;
+use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\Summary;
@@ -84,7 +84,7 @@ abstract class ModifyClaim extends ApiWikibase {
 		$status = $this->attemptSaveEntity(
 			$content,
 			$summary->toString(),
-			EDIT_UPDATE
+			$this->getFlags()
 		);
 
 		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
@@ -99,6 +99,18 @@ abstract class ModifyClaim extends ApiWikibase {
 	}
 
 	/**
+	 * @see ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge(
+			parent::getPossibleErrors(),
+			array(
+				array( 'code' => 'failed-save', 'info' => $this->msg( 'wikibase-api-failed-save' )->text() ),
+			)
+		);
+	}
+
+	/**
 	 * @see  \Api::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
@@ -109,12 +121,33 @@ abstract class ModifyClaim extends ApiWikibase {
 	}
 
 	/**
+	 * @since 0.4
+	 *
+	 * @return integer
+	 */
+	protected function getFlags() {
+		$flags = EDIT_UPDATE;
+
+		$params = $this->extractRequestParams();
+		$flags |= ( $this->getUser()->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+
+		return $flags;
+	}
+
+	/**
 	 * @see \ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
-			array( 'summary' => array( ApiBase::PARAM_TYPE => 'string' ) )
+			array(
+				'summary' => array( ApiBase::PARAM_TYPE => 'string' ),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
+			)
 		);
 	}
 
@@ -124,10 +157,22 @@ abstract class ModifyClaim extends ApiWikibase {
 	public function getParamDescription() {
 		return array_merge(
 			parent::getParamDescription(),
-			array( 'summary' => array( 'Summary for the edit.',
-				"Will be prepended by an automatically generated comment. The length limit of the
-				autocomment together with the summary is 260 characters. Be aware that everything above that
-				limit will be cut off." )
+			array(
+				'summary' => array(
+					'Summary for the edit.',
+					"Will be prepended by an automatically generated comment. The length limit of the
+					autocomment together with the summary is 260 characters. Be aware that everything above that
+					limit will be cut off."
+				),
+				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+				'baserevid' => array(
+					'The numeric identifier for the revision to base the modification on.',
+					"This is used for detecting conflicts during save."
+				),
+				'bot' => array(
+					'Mark this edit as bot',
+					'This URL flag will only be respected if the user belongs to the group "bot".'
+				),
 			)
 		);
 	}

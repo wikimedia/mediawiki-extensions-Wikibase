@@ -2,15 +2,14 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use Wikibase\Claims;
-
-use ApiBase, ApiMain;
-use MWException;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOps;
 use Wikibase\ChangeOpMainSnak;
+use Wikibase\ChangeOpException;
 
 /**
  * API module for removing claims.
@@ -60,7 +59,12 @@ class RemoveClaims extends ModifyClaim {
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $params ) );
-		$changeOps->apply( $entityContent->getEntity(), $summary );
+
+		try {
+			$changeOps->apply( $entityContent->getEntity(), $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
 
 		$this->saveChanges( $entityContent, $summary );
 
@@ -180,11 +184,6 @@ class RemoveClaims extends ModifyClaim {
 					ApiBase::PARAM_ISMULTI => true,
 					ApiBase::PARAM_REQUIRED => true,
 				),
-				'token' => null,
-				'baserevid' => array(
-					ApiBase::PARAM_TYPE => 'integer',
-				),
-				'bot' => false,
 			)
 		);
 	}
@@ -202,13 +201,6 @@ class RemoveClaims extends ModifyClaim {
 			array(
 				'claim' => array( 'One GUID or several (pipe-separated) GUIDs identifying the claims to be removed.',
 					'All claims must belong to the same entity.'
-				),
-				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-				'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-					"This is used for detecting conflicts during save."
-				),
-				'bot' => array( 'Mark this edit as bot',
-					'This URL flag will only be respected if the user belongs to the group "bot".'
 				),
 			)
 		);

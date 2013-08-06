@@ -100,35 +100,73 @@ class ChangeOpMainSnak extends ChangeOp {
 	 * @param Summary|null $summary
 	 *
 	 * @return bool
+	 *
+	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( $this->claimGuid === '' ) {
-			//create claim
-			$claim = $entity->newClaim( $this->snak );
-			$claims->addClaim( $claim );
-			$this->updateSummary( $summary, 'create', '', $this->getClaimSummaryArgs( $this->snak ) );
-			$this->claimGuid = $claim->getGuid();
+			$this->addClaim( $entity, $claims, $summary );
 		} else {
-			if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
-				return false;
-			}
 			if ( $this->snak !== null ) {
-				//set claim
-				$claims->getClaimWithGuid( $this->claimGuid )->setMainSnak( $this->snak );
-				$this->updateSummary( $summary, null, '', $this->getClaimSummaryArgs( $this->snak ) );
+				$this->setClaim( $claims, $summary );
 			} else {
-				//remove claim
-				$removedSnak = $claims->getClaimWithGuid( $this->claimGuid )->getMainSnak();
-				$claims->removeClaimWithGuid( $this->claimGuid );
-				$this->updateSummary( $summary, 'remove', '', $this->getClaimSummaryArgs( $removedSnak ) );
+				$this->removeClaim( $claims, $summary );
 			}
 		}
 
 		$entity->setClaims( $claims );
 
 		return true;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 * @param Claims $claims
+	 * @param Summary $summary
+	 */
+	protected function addClaim( Entity $entity, Claims $claims, Summary $summary = null ) {
+		//TODO: check for claim uniqueness?
+		$claim = $entity->newClaim( $this->snak );
+		$claims->addClaim( $claim );
+		$this->updateSummary( $summary, 'create', '', $this->getClaimSummaryArgs( $this->snak ) );
+		$this->claimGuid = $claim->getGuid();
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Claims $claims
+	 * @param Summary $summary
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function setClaim( Claims $claims, Summary $summary = null ) {
+		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
+			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
+		}
+		$claims->getClaimWithGuid( $this->claimGuid )->setMainSnak( $this->snak );
+		$this->updateSummary( $summary, null, '', $this->getClaimSummaryArgs( $this->snak ) );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Claims $claims
+	 * @param Summary $summary
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function removeClaim( Claims $claims, Summary $summary = null ) {
+		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
+			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
+		}
+		$removedSnak = $claims->getClaimWithGuid( $this->claimGuid )->getMainSnak();
+		$claims->removeClaimWithGuid( $this->claimGuid );
+		$this->updateSummary( $summary, 'remove', '', $this->getClaimSummaryArgs( $removedSnak ) );
 	}
 
 	/**

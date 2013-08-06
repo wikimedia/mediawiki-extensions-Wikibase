@@ -9,6 +9,7 @@ use Wikibase\Claims;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpQualifier;
 use Wikibase\ChangeOps;
+use Wikibase\ChangeOpException;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -38,8 +39,6 @@ use Wikibase\ChangeOps;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class RemoveQualifiers extends ModifyClaim {
-
-	// TODO: claim uniqueness
 
 	/**
 	 * @see \ApiBase::execute
@@ -74,7 +73,12 @@ class RemoveQualifiers extends ModifyClaim {
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $claimGuid, $qualifierHashes ) );
-		$changeOps->apply( $entity, $summary );
+
+		try {
+			$changeOps->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
 
 		$this->saveChanges( $entityContent, $summary );
 
@@ -153,11 +157,6 @@ class RemoveQualifiers extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => true,
 					ApiBase::PARAM_ISMULTI => true,
 				),
-				'token' => null,
-				'baserevid' => array(
-					ApiBase::PARAM_TYPE => 'integer',
-				),
-				'bot' => false,
 			)
 		);
 	}
@@ -189,14 +188,6 @@ class RemoveQualifiers extends ModifyClaim {
 			array(
 				'claim' => 'A GUID identifying the claim from which to remove qualifiers',
 				'qualifiers' => 'Snak hashes of the qualifiers to remove',
-				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-				'baserevid' => array(
-					'The numeric identifier for the revision to base the modification on.',
-					"This is used for detecting conflicts during save."
-				),
-				'bot' => array( 'Mark this edit as bot',
-					'This URL flag will only be respected if the user belongs to the group "bot".'
-				),
 			)
 		);
 	}

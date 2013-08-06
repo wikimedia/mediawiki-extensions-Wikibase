@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOpLabel;
 use Wikibase\ChangeOpDescription;
+use Wikibase\ChangeOpAliases;
 use Wikibase\ChangeOps;
 use Wikibase\ItemContent;
 
@@ -137,6 +138,19 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$changeOps->apply( $entity );
 		$this->assertEquals( $expectedLabel, $entity->getLabel( $language ) );
 		$this->assertEquals( $expectedDescription, $entity->getDescription( $language ) );
+	}
+
+	/**
+	 * @expectedException Wikibase\ChangeOpException
+	 */
+	public function testInvalidApply() {
+		$item = ItemContent::newEmpty();
+
+		$changeOps = new ChangeOps();
+		$changeOps->add( new ChangeOpLabel( 'en', 'newLabel' ) );
+		$changeOps->add( new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction' ) );
+
+		$changeOps->apply( $item->getEntity() );
 	}
 
 }
