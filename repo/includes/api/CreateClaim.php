@@ -144,11 +144,6 @@ class CreateClaim extends ModifyClaim {
 					ApiBase::PARAM_TYPE => 'string',
 					ApiBase::PARAM_REQUIRED => false,
 				),
-				'token' => null,
-				'baserevid' => array(
-					ApiBase::PARAM_TYPE => 'integer',
-				),
-				'bot' => false,
 			)
 		);
 	}
@@ -164,13 +159,6 @@ class CreateClaim extends ModifyClaim {
 				'property' => 'Id of the snaks property',
 				'value' => 'Value of the snak when creating a claim with a snak that has a value',
 				'snaktype' => 'The type of the snak',
-				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-				'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-					"This is used for detecting conflicts during save."
-				),
-				'bot' => array( 'Mark this edit as bot',
-					'This URL flag will only be respected if the user belongs to the group "bot".'
-				),
 			)
 		);
 	}
