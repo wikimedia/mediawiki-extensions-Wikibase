@@ -44,7 +44,7 @@ class SerializerTest extends \MediaWikiTestCase {
 		$serializers[] = new \Wikibase\Lib\Serializers\ClaimSerializer();
 
 		$snakSetailizer = new \Wikibase\Lib\Serializers\SnakSerializer();
-		$serializers[] = new \Wikibase\Lib\Serializers\ByPropertyListSerializer( 'test', $snakSetailizer );
+		$serializers[] = new \Wikibase\Lib\Serializers\ByPropertyListSerializer( 'snaks', 'test', $snakSetailizer );
 
 		return $this->arrayWrap( $serializers );
 	}

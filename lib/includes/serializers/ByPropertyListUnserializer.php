@@ -61,20 +61,43 @@ class ByPropertyListUnserializer implements Unserializer {
 	 * @throws MWException
 	 */
 	public function newFromSerialization( array $serialization ) {
+
+		if( count( $serialization ) !== 2 || !isset( $serialization['order'] ) ) {
+			throw new MWException( 'Invalid structure: "order" parameter and corresponding array '
+				. 'containing the objects to unserialize need to be specified' );
+		}
+
+		$objectsKey = array_shift( array_diff( array_keys( $serialization ), array( 'order' ) ) );
+
+		$notRepresentedProperties = array_diff(
+			array_keys( $serialization[$objectsKey] ),
+			$serialization['order']
+		);
+
+		if( count( $notRepresentedProperties ) > 0 ) {
+			throw new MWException( 'Property ids specified for ordering ('
+				. implode( ', ', $serialization['order'] ) . ') do not match the properties '
+				. 'featured in ' . $objectsKey . ' ('
+				. implode( array_keys( $serialization[$objectsKey] ) ) . ')' );
+		}
+
 		$elements = array();
 
-		foreach ( $serialization as $propertyId => $byPropId ) {
-			if ( !is_array( $byPropId ) ) {
-				throw new MWException( "Element with key '$propertyId' should be an array, found " . gettype( $byPropId ) );
+		foreach ( $serialization['order'] as $propertyId ) {
+			if ( !is_array( $serialization[$objectsKey][$propertyId] ) ) {
+				throw new MWException( "Element with key '$propertyId' should be an array, found "
+					. gettype( $serialization[$objectsKey][$propertyId] ) );
 			}
 
-			foreach ( $byPropId as $serializedElement ) {
+			foreach ( $serialization[$objectsKey][$propertyId] as $serializedElement ) {
+
 				$element = $this->elementUnserializer->newFromSerialization( $serializedElement );
 				// FIXME: usage of deprecated method getPrefixedId
 				$elementPropertyId = $element->getPropertyId()->getPrefixedId();
 
 				if ( $elementPropertyId !== $propertyId ) {
-					throw new MWException( "Element with id '$elementPropertyId' found in list with id '$propertyId'" );
+					throw new MWException( "Element with id '$elementPropertyId' found in list '
+						. 'with id '$propertyId'" );
 				}
 
 				$elements[] = $element;

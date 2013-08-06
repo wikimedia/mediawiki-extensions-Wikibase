@@ -73,18 +73,21 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 			$reference,
 			array(
 				'hash' => $reference->getHash(),
-				'snaks' => array(
-					'p42' => array(
-						$snakSerializer->getSerialized( $snaks[0] ),
-						$snakSerializer->getSerialized( $snaks[2] ),
+				'snaklist' => array(
+					'snaks' => array(
+						'p42' => array(
+							$snakSerializer->getSerialized( $snaks[0] ),
+							$snakSerializer->getSerialized( $snaks[2] ),
+						),
+						'p1' => array(
+							$snakSerializer->getSerialized( $snaks[1] ),
+							$snakSerializer->getSerialized( $snaks[3] ),
+						),
+						'p9001' => array(
+							$snakSerializer->getSerialized( $snaks[4] ),
+						),
 					),
-					'p1' => array(
-						$snakSerializer->getSerialized( $snaks[1] ),
-						$snakSerializer->getSerialized( $snaks[3] ),
-					),
-					'p9001' => array(
-						$snakSerializer->getSerialized( $snaks[4] ),
-					),
+					'order' => array( 'p42', 'p1', 'p9001' ),
 				),
 			),
 		);

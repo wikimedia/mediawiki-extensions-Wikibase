@@ -104,7 +104,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$snakSerializer = new SnakSerializer( $this->options );
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
+		$snaksSerializer = new ByPropertyListSerializer( 'snaks', 'qualifiers', $snakSerializer, $this->options );
 		$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
 
 		if ( $qualifiers !== array() ) {

@@ -33,6 +33,13 @@ use Traversable, ApiResult, MWException;
 class ByPropertyListSerializer extends SerializerObject {
 
 	/**
+	 * @since 0.4
+	 *
+	 * @var string
+	 */
+	protected $keyName;
+
+	/**
 	 * @since 0.2
 	 *
 	 * @var string
@@ -51,13 +58,15 @@ class ByPropertyListSerializer extends SerializerObject {
 	 *
 	 * @since 0.2
 	 *
+	 * @param string $keyName
 	 * @param string $elementName
 	 * @param Serializer $elementSerializer
 	 * @param SerializationOptions|null $options
 	 */
-	public function __construct( $elementName, Serializer $elementSerializer, SerializationOptions $options = null ) {
+	public function __construct( $keyName, $elementName, Serializer $elementSerializer, SerializationOptions $options = null ) {
 		parent::__construct( $options );
 
+		$this->keyName = $keyName;
 		$this->elementName = $elementName;
 		$this->elementSerializer = $elementSerializer;
 	}
@@ -83,6 +92,11 @@ class ByPropertyListSerializer extends SerializerObject {
 		$objects = new \Wikibase\ByPropertyIdArray( iterator_to_array( $objects ) );
 		$objects->buildIndex();
 
+		if( count( $objects ) > 0 ) {
+			$serialization[$this->keyName] = array();
+			$serialization['order'] = array();
+		}
+
 		foreach ( $objects->getPropertyIds() as $propertyId ) {
 			$serializedObjects = array();
 
@@ -96,13 +110,18 @@ class ByPropertyListSerializer extends SerializerObject {
 
 			if ( $this->options->shouldIndexTags() ) {
 				$serializedObjects['id'] = $propertyId->getPrefixedId();
-				$serialization[] = $serializedObjects;
+				$serialization[$this->keyName] = $serializedObjects;
 			}
 			else {
-				$serialization[$propertyId->getPrefixedId()] = $serializedObjects;
+				$serialization[$this->keyName][$propertyId->getPrefixedId()] = $serializedObjects;
 			}
+
+			$serialization['order'][] = $propertyId->getPrefixedId();
 		}
 
+		if( isset( $serialization['order'] ) ) {
+			$this->setIndexedTagName( $serialization['order'], 'order' );
+		}
 		$this->setIndexedTagName( $serialization, 'property' );
 
 		return $serialization;

@@ -75,13 +75,16 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			new \Wikibase\Claims( $claims ),
 			array(
-				'p42' => array(
-					$claimSerializer->getSerialized( $claims[0] ),
-					$claimSerializer->getSerialized( $claims[2] ),
+				'claims' => array(
+					'p42' => array(
+						$claimSerializer->getSerialized( $claims[0] ),
+						$claimSerializer->getSerialized( $claims[2] ),
+					),
+					'p1' => array(
+						$claimSerializer->getSerialized( $claims[1] ),
+					),
 				),
-				'p1' => array(
-					$claimSerializer->getSerialized( $claims[1] ),
-				),
+				'order' => array( 'p42', 'p1' ),
 			),
 		);
 
