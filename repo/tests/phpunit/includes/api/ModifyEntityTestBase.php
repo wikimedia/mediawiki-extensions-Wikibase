@@ -91,6 +91,8 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 		$wgUser = self::$users['wbeditor']->user;
 
+		$this->login();
+
 		//TODO: preserve session and token between calls?!
 		self::$loginSession = false;
 		self::$token = false;
