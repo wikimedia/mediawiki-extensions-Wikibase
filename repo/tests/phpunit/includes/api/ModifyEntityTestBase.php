@@ -54,6 +54,8 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	protected static $usetoken;
 	protected static $userights;
 
+	protected static $testEntityIds = array();
+
 	protected static $entityInput = null; // entities in input format, using handles as keys
 	protected static $entityOutput = array(); // entities in output format, using handles as keys
 
@@ -99,6 +101,47 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 		self::initEntities();
 		$this->setUpComplete = true;
+	}
+
+	/**
+	 * Provides the id of a test entity for use in tests
+	 * @param string $type of entity to set item/property (default item)
+	 * @param string $data for the entity to start with (default empty)
+	 * @throws \MWException
+	 * @return string entity id
+	 */
+	protected function getTestEntityId( $type = 'item', $data = '{}'){
+		if( $type != 'item' && $type != 'property' ){
+			throw new \MWException( "Can not create test entity of type $type" );
+		}
+
+		// If we already have an id we can use, provide that instead of making a new one
+		if( $type == 'item' && array_key_exists( $type, self::$testEntityIds ) ){
+			$id = self::$testEntityIds[ $type ];
+		}
+
+		$params = array(
+			'action' => 'wbeditentity',
+			'clear' => true,
+			'format' => 'json',
+			'data' => $data,
+		);
+
+		if( isset( $id ) ){
+			$params['id'] = $id;
+		} else {
+			$params['new'] = $type;
+		}
+
+		list( $res,, ) = $this->doApiRequestWithToken( $params );
+
+		if ( !array_key_exists( 'success', $res ) || !array_key_exists( 'entity', $res ) ) {
+			throw new \MWException( "Failed to create test entity $type" );
+		}
+
+		self::$testEntityIds[ $type ] = $res['entity']['id'];
+		return self::$testEntityIds[ $type ];
+
 	}
 
 	/**
