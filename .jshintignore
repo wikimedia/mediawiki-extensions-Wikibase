@@ -22,7 +22,6 @@
 ./lib/tests/qunit/wikibase.datamodel/datamodel.Property.tests.js
 ./lib/tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js
 ./lib/tests/qunit/wikibase.datamodel/Wikibase.reference.tests.js
-./lib/tests/qunit/wikibase.datamodel/Wikibase.SnakList.tests.js
 ./lib/tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js
 ./lib/tests/qunit/wikibase.datamodel/wikibase.Statement.tests.js
 ./lib/tests/qunit/wikibase.RepoApi/wikibase.RepoApiError.tests.js
