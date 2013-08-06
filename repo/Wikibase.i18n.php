@@ -293,6 +293,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbeditentity-update' => 'Updated an item',
 	'wikibase-item-summary-wbeditentity-override' => 'Cleared an item',
 	'wikibase-item-summary-wbsetreference' => 'Set a reference',
+	'wikibase-item-summary-wbsetreference-add' => 'Added reference to claim',
+	'wikibase-item-summary-wbsetreference-set' => 'Changed reference of claim',
 	'wikibase-item-summary-wbsetlabel-add' => 'Added [$2] label',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
@@ -326,6 +328,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetqualifier-add' => 'Added {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Changed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
+	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$3|reference|references}} from claim',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -966,6 +969,8 @@ Parameters:
 	'wikibase-item-summary-wbeditentity-update' => '{{wikibase summary messages|item|Automatic edit summary generated when updating an existing item.}}',
 	'wikibase-item-summary-wbeditentity-override' => '{{wikibase summary messages|item|Automatic edit summary generated when overriding an existing item.}}',
 	'wikibase-item-summary-wbsetreference' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a reference or setting the value of an existing one.}}',
+	'wikibase-item-summary-wbsetreference-add' => '{{wikibase summary messages|item|Automatic edit summary generated when adding a reference.}}',
+	'wikibase-item-summary-wbsetreference-set' => '{{wikibase summary messages|item|Automatic edit summary generated when editing a reference.}}',
 	'wikibase-item-summary-wbsetlabel-add' => "{{wikibase summary messages|item|Automatic edit summary generated when creating an item label, which appears in the ''h1'' heading at top of the item-page. Example of a full edit summary is \"Added [en] label:  Egypt\".}}",
 	'wikibase-item-summary-wbsetlabel-set' => "{{wikibase summary messages|item|Automatic edit summary generated when editing an item label, which appears in the ''h1'' heading at top of the item-page. Example of a full edit summary is \"Updated [en] label:  Egypt\".}}",
 	'wikibase-item-summary-wbsetlabel-remove' => '{{wikibase summary messages|item|Automatic edit summary generated when removing an item label. Example edit summary is "Removed [en] label".}}',
@@ -1053,6 +1058,14 @@ Parameters:
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-wbsetqualifier-add' => 'Automatic edit summary when adding qualifiers. Parameters:
+* $1 is the number of qualifiers added.',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Automatic edit summary when setting qualifiers. Parameters:
+* $1 is the number of qualifiers updated.',
+	'wikibase-item-summary-wbremovequalifiers-remove' => 'Automatic edit summary when removing qualifiers. Parameters:
+* $1 is the number of qualifiers removed.',
+	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
+* $3 is the number of references removed.',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}
