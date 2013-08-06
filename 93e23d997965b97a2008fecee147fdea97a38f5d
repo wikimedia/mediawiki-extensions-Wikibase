@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "898eddaf_6c26f9d2",
+        "filename": "lib/includes/serializers/ClaimSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-06T08:33:19Z",
+      "side": 1,
+      "message": "http://php.net/manual/en/function.array-diff-key.php",
+      "revId": "93e23d997965b97a2008fecee147fdea97a38f5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "898eddaf_8c2345c0",
+        "filename": "lib/includes/serializers/ClaimSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-06T08:33:19Z",
+      "side": 1,
+      "message": "Please put this whole thing in its own method, ie getQualifiers. The if part here can go into a second new method getSortedQualifiers",
+      "revId": "93e23d997965b97a2008fecee147fdea97a38f5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
