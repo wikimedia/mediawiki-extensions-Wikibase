@@ -145,7 +145,7 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 			$this->setExpectedException( 'UsageException' );
 		}
 
-		list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		list( $res,, ) = $this->doApiRequestWithToken( $req );
 
 		if ( $expectedFailure ) {
 			$this->fail( "Expected failure: $expectedFailure" );
