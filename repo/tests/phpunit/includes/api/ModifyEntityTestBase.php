@@ -61,12 +61,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	protected static $loginUser = null;
 	protected static $token = null;
 
-	protected $setUpComplete = false;
-
-	protected function isSetUp() {
-		return $this->setUpComplete;
-	}
-
 	public function setUp() {
 		global $wgUser;
 		parent::setUp();
@@ -98,7 +92,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		self::$token = false;
 
 		self::initEntities();
-		$this->setUpComplete = true;
 	}
 
 	/**
