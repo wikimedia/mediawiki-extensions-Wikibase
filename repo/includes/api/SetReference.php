@@ -143,7 +143,7 @@ class SetReference extends ModifyClaim {
 		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
 
 		try {
-			foreach ( $rawSnaks as $byPropertySnaks ) {
+			foreach ( $rawSnaks['snaks'] as $byPropertySnaks ) {
 				if ( !is_array( $byPropertySnaks ) ) {
 					$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
 				}

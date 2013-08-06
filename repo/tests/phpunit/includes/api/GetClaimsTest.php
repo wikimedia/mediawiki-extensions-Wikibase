@@ -148,7 +148,7 @@ class GetClaimsTest extends \ApiTestCase {
 		list( $resultArray, ) = $this->doApiRequest( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
-		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );
+		$this->assertArrayHasKey( 'claimlist', $resultArray, 'top level element has a claimlist key' );
 
 		if ( is_array( $claims ) ) {
 			$claims = new \Wikibase\Claims( $claims );
@@ -164,12 +164,14 @@ class GetClaimsTest extends \ApiTestCase {
 		// TODO: this is a rather simplistic test.
 		// Would be nicer if we could deserialize the list and then use the equals method
 		// or to serialize the expected value and have a recursive array compare on that
-		foreach ( $expected as $propertyId => $claimsForProperty ) {
-			$id = \Wikibase\EntityId::newFromPrefixedId( $propertyId );
-			$this->assertEquals(
-				count( $claimsForProperty ),
-				count( $byPropClaims->getByPropertyId( $id->getNumericId() ) )
-			);
+		if( count( $expected ) > 0 ) {
+			foreach ( $expected['snaks'] as $propertyId => $claimsForProperty ) {
+				$id = \Wikibase\EntityId::newFromPrefixedId( $propertyId );
+				$this->assertEquals(
+					count( $claimsForProperty ),
+					count( $byPropClaims->getByPropertyId( $id->getNumericId() ) )
+				);
+			}
 		}
 	}
 
