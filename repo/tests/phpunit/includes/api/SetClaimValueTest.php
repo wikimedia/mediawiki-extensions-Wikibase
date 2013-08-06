@@ -41,7 +41,7 @@ use Wikibase\EntityId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SetClaimValueTest extends \ApiTestCase {
+class SetClaimValueTest extends ModifyEntityTestBase {
 
 	/**
 	 * @param Entity $entity
@@ -106,10 +106,9 @@ class SetClaimValueTest extends \ApiTestCase {
 			'claim' => $claimGuid,
 			'value' => \FormatJson::encode( $value ),
 			'snaktype' => 'value',
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a claim key' );
@@ -141,11 +140,10 @@ class SetClaimValueTest extends \ApiTestCase {
 			'claim' => $claimGuid,
 			'snaktype' => 'value',
 			'value' => 'abc',
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid claim guid did not raise an error' );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );

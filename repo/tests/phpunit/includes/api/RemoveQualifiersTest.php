@@ -40,7 +40,7 @@ use Wikibase\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RemoveQualifiersTest extends \ApiTestCase {
+class RemoveQualifiersTest extends ModifyEntityTestBase {
 
 	/**
 	 * @return Snak[]
@@ -127,10 +127,9 @@ class RemoveQualifiersTest extends \ApiTestCase {
 			'action' => 'wbremovequalifiers',
 			'claim' => $statementGuid,
 			'qualifiers' => implode( '|', $hashes ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
-		list( $resultArray, ) = $this->doApiRequest( $params );
+		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
@@ -143,11 +142,10 @@ class RemoveQualifiersTest extends \ApiTestCase {
 			'action' => 'wbremovequalifiers',
 			'claim' => $statementGuid,
 			'qualifiers' => implode( '|', $hashes ),
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request should raise an exception' );
 		}
 		catch ( \UsageException $e ) {
@@ -168,11 +166,10 @@ class RemoveQualifiersTest extends \ApiTestCase {
 			'action' => 'wbremovequalifiers',
 			'claim' => $claimGuid,
 			'qualifiers' => $hash,
-			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
-			$this->doApiRequest( $params );
+			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid claim guid did not throw an error' );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( $e->getCodeString(), 'invalid-guid', 'Invalid claim guid raised correct error' );
