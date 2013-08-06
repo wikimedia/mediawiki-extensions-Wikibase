@@ -109,6 +109,12 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 		if ( $qualifiers !== array() ) {
 			$serialization['qualifiers'] = $qualifiers;
+
+			$serialization['qualifiers-order'] = array();
+			foreach( $qualifiers as $propertyId => $snaks ) {
+				$serialization['qualifiers-order'][] = $propertyId;
+			}
+			$this->setIndexedTagName( $serialization['qualifiers-order'], 'qualifiers-order' );
 		}
 
 		$serialization['type'] = $claim instanceof Statement ? 'statement' : 'claim';
@@ -181,8 +187,35 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$claim->setGuid( $serialization['id'] );
 
 		if ( array_key_exists( 'qualifiers', $serialization ) ) {
+			$sortedQualifiers = array();
+
+			if( !array_key_exists( 'qualifiers-order', $serialization ) ) {
+				$sortedQualifiers = $serialization['qualifiers'];
+
+			} else {
+				foreach( $serialization['qualifiers-order'] as $propertyId ) {
+					if( !isset( $serialization['qualifiers'][$propertyId] ) ) {
+						throw new MWException( 'No snaks with property id "' . $propertyId . '" '
+							. 'found in "qualifiers" parameter although specified in '
+							. '"qualifiers-order"' );
+					}
+
+					$sortedQualifiers[$propertyId] = $serialization['qualifiers'][$propertyId];
+				}
+
+				$missingProperties = array_diff(
+					array_keys( $sortedQualifiers ),
+					array_keys( $serialization['qualifiers'] )
+				);
+
+				if( count( $missingProperties ) > 0 ) {
+					throw new MWException( 'Property ids ' . implode( ', ', $missingProperties )
+						. ' have not been specified in "qualifiers-order"' );
+				}
+			}
+
 			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
-			$snaks = $snaksUnserializer->newFromSerialization( $serialization['qualifiers'] );
+			$snaks = $snaksUnserializer->newFromSerialization( $sortedQualifiers );
 			$claim->setQualifiers( new \Wikibase\SnakList( $snaks ) );
 		}
 
