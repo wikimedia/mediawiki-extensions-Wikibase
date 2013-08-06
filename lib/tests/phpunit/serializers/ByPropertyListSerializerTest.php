@@ -55,7 +55,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	 */
 	protected function getInstance() {
 		$snakSetailizer = new SnakSerializer();
-		return new ByPropertyListSerializer( 'test', $snakSetailizer );
+		return new ByPropertyListSerializer( 'snaks', 'test', $snakSetailizer );
 	}
 
 	/**
@@ -89,23 +89,26 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),
 			array(
-				'p42' => array(
-					0 => array(
-						'snaktype' => 'novalue',
-						'property' => 'p42',
+				'snaks' => array(
+					'p42' => array(
+						0 => array(
+							'snaktype' => 'novalue',
+							'property' => 'p42',
+						),
+					),
+					'p2' => array(
+						0 => array(
+							'snaktype' => 'somevalue',
+							'property' => 'p2',
+						),
+						1 => array(
+							'snaktype' => 'value',
+							'property' => 'p2',
+							'datavalue' => $dataValue0->toArray(),
+						),
 					),
 				),
-				'p2' => array(
-					0 => array(
-						'snaktype' => 'somevalue',
-						'property' => 'p2',
-					),
-					1 => array(
-						'snaktype' => 'value',
-						'property' => 'p2',
-						'datavalue' => $dataValue0->toArray(),
-					),
-				),
+				'order' => array( 'p42', 'p2' ),
 			),
 		);
 

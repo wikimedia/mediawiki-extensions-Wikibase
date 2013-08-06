@@ -56,8 +56,8 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 	 * @return ByPropertyListUnserializer
 	 */
 	protected function getInstance() {
-		$snakSetailizer = new SnakSerializer();
-		return new ByPropertyListUnserializer( $snakSetailizer );
+		$snakSerializer = new SnakSerializer();
+		return new ByPropertyListUnserializer( $snakSerializer );
 	}
 
 	/**
