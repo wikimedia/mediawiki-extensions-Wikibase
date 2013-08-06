@@ -2,22 +2,15 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
-
-use DataValues\IllegalValueException;
-use ApiMain;
-use Wikibase\EntityId;
+use ApiBase;
 use Wikibase\Entity;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
+use Wikibase\Claims;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\ChangeOpReference;
+use Wikibase\ChangeOpException;
+use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Reference;
-use Wikibase\Snaks;
-use Wikibase\SnakList;
-use Wikibase\Claims;
-use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -44,35 +37,9 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetReference extends ApiWikibase {
-
-	// TODO: auto comment
-	// TODO: rights
-	// TODO: conflict detection
-
-	/**
-	 * @var SnakValidationHelper
-	 */
-	protected $snakValidation;
-
-	/**
-	 * see ApiBase::__construct()
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string  $moduleName
-	 * @param string  $modulePrefix
-	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$this->snakValidation = new SnakValidationHelper(
-			$this,
-			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
-			new ValidatorErrorLocalizer()
-		);
-	}
+class SetReference extends ModifyClaim {
 
 	/**
 	 * @see ApiBase::execute
@@ -82,71 +49,103 @@ class SetReference extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
 
-		$reference = $this->updateReference(
-			$content->getEntity(),
-			$params['statement'],
-			$this->getSnaks( $params['snaks'] ),
-			$params['reference']
+		$entityId = $this->claimModificationHelper->getEntityIdFromString(
+			Entity::getIdFromClaimGuid( $params['statement'] )
 		);
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		// TODO: put loadEntityContent into a separate helper class for great reuse!
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entity = $entityContent->getEntity();
+		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$this->saveChanges( $content );
+		$claimGuid = $params['statement'];
+		$claims = new Claims( $entity->getClaims() );
 
-		$this->outputReference( $reference );
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+		}
+
+		$claim = $claims->getClaimWithGuid( $claimGuid );
+
+		if ( ! ( $claim instanceof Statement ) ) {
+			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
+		}
+
+		if ( isset( $params['reference'] ) ) {
+			$this->validateReferenceHash( $claim, $params['reference'] );
+		}
+
+		$rawSnaks = $this->getRawSnaksFromParam( $params['snaks'] );
+		$snaks = $this->getSnaks( $rawSnaks );
+		$newReference = new Reference( $snaks );
+
+		$changeOp = $this->getChangeOp( $newReference );
+
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
+
+		$this->saveChanges( $entityContent, $summary );
+
+		$this->outputReference( $newReference );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * @since 0.3
+	 * Check the provided parameters
 	 *
-	 * @return \Wikibase\EntityContent
+	 * @since 0.4
 	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
-
-		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
+	protected function validateParameters( array $params ) {
+		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
-
-		if ( $entityId === null ) {
-			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
-		}
-
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param string $rawSnaks
-	 *
-	 * @return \Wikibase\Snaks
+	 * @param Statement $claim
+	 * @param string $referenceHash
 	 */
-	protected function getSnaks( $rawSnaks ) {
-		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
+	protected function validateReferenceHash( Statement $claim, $referenceHash ) {
+		if ( !$claim->getReferences()->hasReferenceHash( $referenceHash ) ) {
+			$this->dieUsage( "Claim does not have a reference with the given hash" , 'no-such-reference' );
+		}
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $snaksParam
+	 *
+	 * @return array
+	 */
+	protected function getRawSnaksFromParam( $snaksParam ) {
+		$rawSnaks = \FormatJson::decode( $snaksParam, true );
 
 		if ( !is_array( $rawSnaks ) || !count( $rawSnaks ) ) {
 			$this->dieUsage( 'No snaks or invalid JSON given', 'invalid-json' );
 		}
 
+		return $rawSnaks;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param array $rawSnaks
+	 *
+	 * @return SnakList
+	 */
+	protected function getSnaks( array $rawSnaks ) {
 		$snaks = new SnakList();
 
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
@@ -163,7 +162,7 @@ class SetReference extends ApiWikibase {
 					}
 
 					$snak = $snakUnserializer->newFromSerialization( $rawSnak );
-					$this->snakValidation->validateSnak( $snak );
+					$this->claimModificationHelper->validateSnak( $snak );
 					$snaks[] = $snak;
 				}
 			}
@@ -176,67 +175,25 @@ class SetReference extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param \Wikibase\Entity $entity
-	 * @param string $statementGuid
-	 * @param \Wikibase\Snaks $snaks
-	 * @param string|null $refHash
+	 * @param Reference $reference
 	 *
-	 * @return \Wikibase\Reference
+	 * @return ChangeOpReference
 	 */
-	protected function updateReference( Entity $entity, $statementGuid, Snaks $snaks, $refHash = null ) {
-		$claims = new Claims( $entity->getClaims() );
+	protected function getChangeOp( Reference $reference ) {
+		$params = $this->extractRequestParams();
 
-		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'Could not find the statement' , 'no-such-statement' );
+		$claimGuid = $params['statement'];
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+
+		if ( isset( $params['reference'] ) ) {
+			$changeOp = new ChangeOpReference( $claimGuid, $reference, $params['reference'], $idFormatter );
+		} else {
+			$changeOp = new ChangeOpReference( $claimGuid, $reference, '', $idFormatter );
 		}
 
-		$statement = $claims->getClaimWithGuid( $statementGuid );
-
-		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
-		}
-
-		$reference = new Reference( $snaks );
-
-		/**
-		 * @var \Wikibase\References $references
-		 */
-		$references = $statement->getReferences();
-
-		if ( $refHash !== null ) {
-			if ( $references->hasReferenceHash( $refHash ) ) {
-				$references->removeReferenceHash( $refHash );
-			}
-			else {
-				$this->dieUsage( 'The statement does not have any associated reference with the provided reference hash', 'no-such-reference' );
-			}
-		}
-
-		// Only adding the reference if there is none with the same hash yet.
-		// TODO: verify this is what we want to do
-		if ( !$references->hasReference( $reference ) ) {
-			$references->addReference( $reference );
-		}
-
-		$entity->setClaims( $claims );
-
-		return $reference;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param \Wikibase\EntityContent $content
-	 */
-	protected function saveChanges( EntityContent $content ) {
-		$summary = '/* wbsetreference */'; // TODO: automcomment
-		$status = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
-
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
+		return $changeOp;
 	}
 
 	/**
@@ -264,23 +221,21 @@ class SetReference extends ApiWikibase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'statement' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'snaks' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'reference' => array(
-				ApiBase::PARAM_TYPE => 'string',
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+		return array_merge(
+			parent::getAllowedParams(),
+			array(
+				'statement' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'snaks' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'reference' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+			)
 		);
 	}
 
@@ -288,14 +243,15 @@ class SetReference extends ApiWikibase {
 	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'invalid-json', 'info' => $this->msg( 'wikibase-api-invalid-json' )->text() ),
-			array( 'code' => 'no-such-statement', 'info' => $this->msg( 'wikibase-api-no-such-statement' )->text() ),
-			array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
-			array( 'code' => 'no-such-reference', 'info' => $this->msg( 'wikibase-api-no-such-reference' )->text() ),
-		) );
+		return array_merge(
+			parent::getPossibleErrors(),
+			$this->claimModificationHelper->getPossibleErrors(),
+			array(
+				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
+				array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
+				array( 'code' => 'no-such-reference', 'info' => $this->msg( 'wikibase-api-no-such-reference' )->text() ),
+			)
+		);
 	}
 
 	/**
@@ -306,17 +262,13 @@ class SetReference extends ApiWikibase {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'statement' => 'A GUID identifying the statement for which a reference is being set',
-			'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
-			'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'statement' => 'A GUID identifying the statement for which a reference is being set',
+				'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
+				'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
+			)
 		);
 	}
 
@@ -342,12 +294,4 @@ class SetReference extends ApiWikibase {
 			'api.php?action=wbsetreference&statement=q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&reference=1eb8793c002b1d9820c833d234a1b54c8e94187e&snaks={"p39":[{"snaktype":"value","property":"p14","datavalue":{"type":"string","value":"wikipedia"}}}&baserevid=7201010&token=foobar' => 'Set reference for claim with GUID q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF which has hash of 1eb8793c002b1d9820c833d234a1b54c8e94187e',
 		);
 	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
-	}
-
 }
