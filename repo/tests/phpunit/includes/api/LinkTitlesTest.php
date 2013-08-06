@@ -175,16 +175,6 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 			$this->assertEquals( $totitle, $links[$tosite], 'wrong link target' );
 		}
 
-		if ( $cleanUp ) {
-			// This sucks really bad, but it's the only way we can do this
-			// for several reasons:
-			// This tests assume the entities to not being reseted during
-			// run time (so we can't use the setUp/ tearDown functions for
-			// this) but it changes them so they have to be cleared out at
-			// some point.
-			$this->resetEntities();
-		}
-
 		$this->assertTrue( true );
 	}
 
