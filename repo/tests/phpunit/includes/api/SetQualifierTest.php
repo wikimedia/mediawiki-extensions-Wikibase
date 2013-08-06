@@ -222,8 +222,6 @@ class SetQualifierTest extends ModifyEntityTestBase {
 	 * @dataProvider invalidClaimProvider
 	 */
 	public function testInvalidClaimGuid( $claimGuid ) {
-		$caughtException = false;
-
 		$params = array(
 			'action' => 'wbsetqualifier',
 			'claim' => $claimGuid,
@@ -235,12 +233,10 @@ class SetQualifierTest extends ModifyEntityTestBase {
 
 		try {
 			$this->doApiRequest( $params );
+			$this->fail( 'Invalid claim guid did not throw an error' );
 		} catch ( \UsageException $e ) {
 			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
-			$caughtException = true;
 		}
-
-		$this->assertTrue( $caughtException, 'Exception was caught' );
 	}
 
 	public function invalidClaimProvider() {
