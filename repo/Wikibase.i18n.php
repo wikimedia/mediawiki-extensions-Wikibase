@@ -1021,6 +1021,12 @@ Parameters:
 * $3 - siteid and name of the old page name (like enwiki:Foo)
 * $4 - siteid and name of the new page name (like enwiki:Bar)
 {{wikibase summary messages|sitelinks}}',
+	'wikibase-item-summary-wbsetqualifier-add' => 'Automatic edit summary when adding qualifiers. Parameters:
+* $1 is the number of qualifiers added.',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Automatic edit summary when setting qualifiers. Parameters:
+* $1 is the number of qualifiers updated.',
+	'wikibase-item-summary-wbremovequalifiers-remove' => 'Automatic edit summary when removing qualifiers. Parameters:
+* $1 is the number of qualifiers removed.',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
@@ -1047,12 +1053,6 @@ Parameters:
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
-	'wikibase-item-summary-wbsetqualifier-add' => 'Automatic edit summary when adding qualifiers. Parameters:
-* $1 is the number of qualifiers added.',
-	'wikibase-item-summary-wbsetqualifier-update' => 'Automatic edit summary when setting qualifiers. Parameters:
-* $1 is the number of qualifiers updated.',
-	'wikibase-item-summary-wbremovequalifiers-remove' => 'Automatic edit summary when removing qualifiers. Parameters:
-* $1 is the number of qualifiers removed.',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}
@@ -1426,7 +1426,7 @@ $messages['ast'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Aceuto estes condiciones pa les mios futures ediciones. Nun volver a amosar esti mensaxe.',
 	'wikibase-entityselector-more' => 'más',
 	'wikibase-anonymouseditwarning' => "Avisu: Nun anició sesión.
-La direición IP quedará rexistrada nel historial d'ediciones de $1.",
+La direición IP quedará rexistrada nel historial d'ediciones de $1.", # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina ta protexida. Nun se permite la edición.',
 	'wikibase-blockeduser-tooltip-message' => "Nun tien permisu pa editar porque'l so nome d'usuariu o direición IP tan bloquiaos.",
 	'wikibase-move-error' => 'Nun pue treslladar les páxines que tan nel espaciu de nomes de datos, y nun pue treslladar páxines al mesmu.',
@@ -1953,7 +1953,7 @@ $messages['be-tarask'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Я згодны зьдзяйсьняць наступныя праўкі паводле гэтых умоваў. Не паказвайце больш гэтае паведамленьне.',
 	'wikibase-entityselector-more' => 'болей',
 	'wikibase-anonymouseditwarning' => 'Папярэджаньне: вы не ўвайшлі ў сыстэму.
-Ваш IP-адрас будзе запісаны ў гісторыі $1.',
+Ваш IP-адрас будзе запісаны ў гісторыі $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Гэтая старонка абароненая. Рэдагаваньне не дазволенае.',
 	'wikibase-blockeduser-tooltip-message' => 'Вы ня маеце дазволу на рэдагаваньне, бо вашае імя або IP-адрас былі заблякаваныя.',
 	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
@@ -2889,7 +2889,7 @@ $messages['cs'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.',
 	'wikibase-entityselector-more' => 'více',
 	'wikibase-anonymouseditwarning' => 'Varování: Nejste přihlášen(a).
-Vaše IP adresa bude zveřejněna v historii této {{grammar:2sg|$1}}.',
+Vaše IP adresa bude zveřejněna v historii této {{grammar:2sg|$1}}.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Tato stránka je zamčena. Úprava není dovolena.',
 	'wikibase-blockeduser-tooltip-message' => 'Nemáte oprávnění editovat, protože byla zablokována vaše IP adresa či uživatelské jméno.',
 	'wikibase-move-error' => 'Nemůžete přesouvat stránky v datovém jmenném prostoru, ani nemůžete stránky přesouvat do něj.',
@@ -3257,7 +3257,7 @@ $messages['da'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Jeg accepterer disse vilkår for mine fremtidige redigeringer. Vis ikke denne meddelelse igen.',
 	'wikibase-entityselector-more' => 'mere',
 	'wikibase-anonymouseditwarning' => 'Advarsel: Du er ikke logget på.
-Din IP-adresse vil blive registreret i redigeringshistorikken for dette/denne $1.',
+Din IP-adresse vil blive registreret i redigeringshistorikken for dette/denne $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Denne side er beskyttet. Redigering er ikke tilladt.',
 	'wikibase-blockeduser-tooltip-message' => 'Du har ikke tilladelse til at redigere fordi dit brugernavn eller din IP-adresse er blevet blokeret.',
 	'wikibase-move-error' => 'Du kan ikke flytte sider, der er i data-navnerummet, og du kan ikke flytte sider ind i det.',
@@ -3581,7 +3581,7 @@ $messages['de'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht mehr anzeigen.',
 	'wikibase-entityselector-more' => 'mehr',
 	'wikibase-anonymouseditwarning' => 'Warnung: Du bist nicht angemeldet.
-Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespeichert.',
+Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespeichert.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Diese Seite wurde geschützt, so dass Bearbeitungen nicht möglich sind.',
 	'wikibase-blockeduser-tooltip-message' => 'Dein Benutzername oder deine IP-Adresse wurde gesperrt, sodass du keine Berechtigung zum Bearbeiten hast.',
 	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
@@ -4530,7 +4530,7 @@ $messages['es'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.',
 	'wikibase-entityselector-more' => 'más',
 	'wikibase-anonymouseditwarning' => 'Aviso: No has iniciado sesión.
-Tu dirección IP quedará registrada en el historial de revisiones de $1.',
+Tu dirección IP quedará registrada en el historial de revisiones de $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, no se permite editar.',
 	'wikibase-blockeduser-tooltip-message' => 'No tienes permiso para editar porque tu nombre de usuario ha sido bloqueado.',
 	'wikibase-move-error' => 'No puedes trasladar las páginas que se encuentran en el espacio de nombres de datos, y no puedes trasladar páginas hacia allí.',
@@ -4799,7 +4799,7 @@ $messages['et'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Nõustun tegema edasisi muudatusi kooskõlas nende tingimustega. Ära seda sõnumit enam näita.',
 	'wikibase-entityselector-more' => 'veel',
 	'wikibase-anonymouseditwarning' => 'Hoiatus: Sa pole sisse loginud.
-Sinu IP-aadress talletatakse üksuse $1 ajaloos.',
+Sinu IP-aadress talletatakse üksuse $1 ajaloos.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'See lehekülg on kaitstud. Redigeerimine pole lubatud.',
 	'wikibase-blockeduser-tooltip-message' => 'Sul pole redigeerimisluba, sest su kasutajanimi või IP-aadress on blokeeritud.',
 	'wikibase-move-error' => 'Andmete nimeruumis olevaid lehekülgi ei saa teisaldada. Samuti ei saa sinna mujalt lehekülgi teisaldada.',
@@ -5095,7 +5095,7 @@ $messages['fa'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'این شرایط را برای ویرایش‌های بعدی‌ام قبول می‌کنم. این پیام را دوباره نشان ندهید.',
 	'wikibase-entityselector-more' => 'بیشتر',
 	'wikibase-anonymouseditwarning' => 'هشدار: شما با نام کاربری وارد نشده‌اید.
-نشانی آی‌پی شما در تاریخچهٔ ویرایش‌های این $1 ثبت خواهد شد.',
+نشانی آی‌پی شما در تاریخچهٔ ویرایش‌های این $1 ثبت خواهد شد.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'این صفحه محافظت شده‌است. ویرایش مجاز نیست.',
 	'wikibase-blockeduser-tooltip-message' => 'شما اجازه ویرایش ندارید برای اینکه حساب کاربری یا آی‌پی شما بسته شده‌است.',
 	'wikibase-move-error' => 'نمی‌توانید صفحه‌هایی را که در فضای نام داده هستند منتقل کنید، همچنین نمی‌توانید صفحه‌ها را به این فضای نام منتقل کنید.',
@@ -5439,7 +5439,7 @@ $messages['fi'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.',
 	'wikibase-entityselector-more' => 'lisää',
 	'wikibase-anonymouseditwarning' => 'Varoitus: Et ole kirjautunut sisään.
-IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
+IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.',
 	'wikibase-blockeduser-tooltip-message' => 'Sinulla ei ole lupaa muokata, koska käyttäjänimesi tai IP-osoitteesi on estetty.',
 	'wikibase-move-error' => 'Et voi siirtää sivuja, jotka ovat data-nimiavaruudessa, etkä voi siirtää sivuja siihen.',
@@ -5745,7 +5745,7 @@ $messages['fr'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.',
 	'wikibase-entityselector-more' => 'plus',
 	'wikibase-anonymouseditwarning' => 'Attention: Vous n’êtes pas connecté.
-Votre adresse IP sera enregistrée dans l’historique des modifications de ce $1.',
+Votre adresse IP sera enregistrée dans l’historique des modifications de ce $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée. L'édition n'est pas autorisée.",
 	'wikibase-blockeduser-tooltip-message' => "Vous n'êtes pas autorisé à modifier, car votre nom d'utilisateur ou adresse IP a été bloqué.",
 	'wikibase-move-error' => "Vous ne pouvez pas déplacer des pages situées dans l'espace des données, ni déplacer des pages vers cet espace.",
@@ -6247,7 +6247,7 @@ $messages['gl'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Acepto estes termos para as miñas futuras edicións. Non quero ver a mensaxe de novo.',
 	'wikibase-entityselector-more' => 'máis',
 	'wikibase-anonymouseditwarning' => 'Aviso: Non accedeu ao sistema.
-O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1".',
+O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1".', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina está protexida. Non se permite a edición.',
 	'wikibase-blockeduser-tooltip-message' => 'Non ten os permisos necesarios para editar porque o seu nome de usuario ou enderezo IP está bloqueado.',
 	'wikibase-move-error' => 'Non pode trasladar as páxinas que se atopan no espazo de nomes de datos, e tampouco pode mover páxinas a este espazo de nomes.',
@@ -6631,7 +6631,7 @@ $messages['he'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.',
 	'wikibase-entityselector-more' => 'עוד',
 	'wikibase-anonymouseditwarning' => 'אזהרה: לא נכנסת לחשבון.
-כתובת ה־IP שלך תירשם בהיסטוריית העריכות של ה{{GRAMMAR:תחילית|$1}}.',
+כתובת ה־IP שלך תירשם בהיסטוריית העריכות של ה{{GRAMMAR:תחילית|$1}}.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'הדף הזה מוגן. לא ניתן לערוך.',
 	'wikibase-blockeduser-tooltip-message' => 'אין לך הרשאה לערוך בשל חסימה של שם המשתמש או של כתובת ה־IP שלך.',
 	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.',
@@ -7511,7 +7511,7 @@ $messages['id'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Saya menerima syarat ini untuk selanjutnya. Jangan tampilkan lagi pesan ini.',
 	'wikibase-entityselector-more' => 'kembangkan',
 	'wikibase-anonymouseditwarning' => 'Peringatan: Anda belum masuk log.
-Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.',
+Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Halaman ini dilindungi. Tidak dapat disunting.',
 	'wikibase-blockeduser-tooltip-message' => 'Anda diblokir dari penyuntingan.', # Fuzzy
 	'wikibase-move-error' => 'Anda tidak dapat memindahkan halaman pada ruang nama data, dan Anda tidak dapat memindahkan halaman ke dalamnya.',
@@ -7800,7 +7800,7 @@ $messages['ilo'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Awatek dagitoy a termino para kadagiti amin a masakbayan nga urnosek. Saanton nga iparang daytoy a mensahe.',
 	'wikibase-entityselector-more' => 'adu pay',
 	'wikibase-anonymouseditwarning' => 'Ballaag: Saanka a nakastrek.
-Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a $1.',
+Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Daytoy a panid ket nasalakniban. Saan a maipalubos ti agurnos.',
 	'wikibase-blockeduser-tooltip-message' => 'Awan ti pammalubosmo nga agurnos gaputa ti nagan nga agar-aramat wenno IP a pagtaengam ket naserraanen.',
 	'wikibase-move-error' => 'Saanmo a mabalin nga iyalis dagiti panid nga adda datos a nagan ti lugar, ken saanmo a mabalin ti agiyalis kadagiti panid iti daytoy.',
@@ -8125,7 +8125,7 @@ $messages['is'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Ég samþykki þessa skilmála fyrir allar breytingar mínar í framtíðinni. Ekki sýna þessi skilaboð aftur.',
 	'wikibase-entityselector-more' => 'meira',
 	'wikibase-anonymouseditwarning' => 'Viðvörun: Þú ert ekki innskráð(ur).
-Vistfang þitt skráist í breytingaskrá $1.',
+Vistfang þitt skráist í breytingaskrá $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Þessi síða er vernduð, breytingar eru óheimilar.',
 	'wikibase-blockeduser-tooltip-message' => 'Þú hefur ekki leyfi til að breyta því notendanafn þitt eða vistfang hefur verið bannað.',
 	'wikibase-move-error' => 'Ekki er mögulegt að færa síður í data nafnrýminu, né færa síður þangað.',
@@ -8380,7 +8380,7 @@ $messages['it'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.',
 	'wikibase-entityselector-more' => 'altro',
 	'wikibase-anonymouseditwarning' => 'Attenzione: Accesso non effettuato.
-Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
+Nella cronologia di $1 verrà registrato il tuo indirizzo IP.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Questa pagina è protetta, la modifica non è consentita.',
 	'wikibase-blockeduser-tooltip-message' => "Non hai il permesso di modifica, perché il tuo nome utente o l'indirizzo IP è stato bloccato.",
 	'wikibase-move-error' => 'Non è possibile spostare le pagine che sono nel namespace dei dati e non è possibile spostare le pagine in esso.',
@@ -8700,7 +8700,7 @@ $messages['ja'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => '今後の編集についてこれらの規約に同意します。次回からこのメッセージを表示しないでください。',
 	'wikibase-entityselector-more' => '続き',
 	'wikibase-anonymouseditwarning' => '警告: ログインしていません。
-編集すると、IPアドレスがこの$1の編集履歴に記録されます。',
+編集すると、IPアドレスがこの$1の編集履歴に記録されます。', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'このページは保護されています。編集は許可されていません。',
 	'wikibase-blockeduser-tooltip-message' => '利用者名または IP アドレスがブロックされているため、あなたには編集する権限がありません。',
 	'wikibase-move-error' => 'データ名前空間内のページは移動できず、データ名前空間内にページを移動させることもできません。',
@@ -9021,7 +9021,7 @@ $messages['ka'] = array(
 	'wikibase-shortcopyrightwarning' => 'ღილაკზე „$1“ დაწკაპუნებით, თქვენ ეთანხმებით [[$2|გამოყენების პირობებს]] და თქვენ შეუქცევადად ეთანხმებით თქვენი წვლილის გამოქვეყნებას შემდეგი პირობით $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'მე ვეთანხმები ამ პირობებს ჩემი მომავალი რედაქტირებებისათვის. აღარ მაჩვენოთ ეს შეტყობინება.',
 	'wikibase-entityselector-more' => 'მეტი',
-	'wikibase-anonymouseditwarning' => 'გაფრთხილება: თქვენ არ ხართ შესული სისტემაში. თქვენი IP მისამართი ჩაიწერება ამ გვერდის რედაქტირების ისტორიაში $1.',
+	'wikibase-anonymouseditwarning' => 'გაფრთხილება: თქვენ არ ხართ შესული სისტემაში. თქვენი IP მისამართი ჩაიწერება ამ გვერდის რედაქტირების ისტორიაში $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'ეს გვერდი დაცულია. მისი რედაქტირება დაუშვებელია.',
 	'wikibase-blockeduser-tooltip-message' => 'თქვენთვის რედაქტირება დაბლოკილია.', # Fuzzy
 	'wikibase-move-error' => 'თქვენ არ შეგიძლიათ გვერდების გადატანა, რომლებიც მდებარეობს მონაცემების სახელთა სივრცეში და თქვენ არ შეგიძლიათ გვერდების მასში გადატანა.',
@@ -9350,7 +9350,7 @@ $messages['ko'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => '이후 편집에 이 약관에 동의합니다. 이 메시지를 다시 보이지 마세요.',
 	'wikibase-entityselector-more' => '더 보기',
 	'wikibase-anonymouseditwarning' => '경고: 로그인하고 있지 않습니다.
-IP 주소가 $1의 편집 역사에 남게 됩니다.',
+IP 주소가 $1의 편집 역사에 남게 됩니다.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => '이 문서는 보호되어 있어, 편집을 허용하지 않습니다.',
 	'wikibase-blockeduser-tooltip-message' => '당신의 사용자 이름이나 IP 주소가 차단되어 있기 때문에 편집할 권한이 없습니다.',
 	'wikibase-move-error' => '데이터 이름공간에 있는 문서를 이동할 수 없으며 그것으로 문서를 이동할 수 없습니다.',
@@ -10331,7 +10331,7 @@ $messages['mk'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Ги прифаќам овие услови што ќе важат за идните уредувања. Повеќе не ја прикажувај поракава.',
 	'wikibase-entityselector-more' => 'уште',
 	'wikibase-anonymouseditwarning' => 'Предупредување: Не сте најавени.
-Вашата IP-адреса ќе биде заведена во историјата на оваа $1.',
+Вашата IP-адреса ќе биде заведена во историјата на оваа $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Страницава е заштитена. Уредувањето не е дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Немате дозвола за уредување бидејќи вашето корисничко име или IP-адреса е блокирано.',
 	'wikibase-move-error' => 'Не можете да преместувате страници што се наоѓаат во податочниот именски простор. Исто така не можете да преместувате други страници во него.',
@@ -10847,7 +10847,7 @@ $messages['ms'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Saya menerima syarat-syarat ini untuk suntingan saya yang akan datang. Jangan paparkan pesanan ini lagi.',
 	'wikibase-entityselector-more' => 'lagi',
 	'wikibase-anonymouseditwarning' => 'Amnaran: Anda belum log masuk.
-Alamat IP anda akan dicatatkan dalam sejarah suntingan $1 ini.',
+Alamat IP anda akan dicatatkan dalam sejarah suntingan $1 ini.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Halaman ini dilindungi. Dilarang menyunting.',
 	'wikibase-blockeduser-tooltip-message' => 'Anda tidak dibenarkan untuk menyunting kerana nama pengguna atau alamat IP anda telah disekat.',
 	'wikibase-move-error' => 'Anda tidak boleh memindahkan halaman-halaman yang terdapat dalam ruang nama data, dan anda tidak boleh memindahkan halaman-halaman ke dalamnya.',
@@ -11423,7 +11423,7 @@ $messages['nl'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'I accepteer deze voorwaarden voor mijn toekomstige bewerken. Geef dit bericht niet opnieuw weer.',
 	'wikibase-entityselector-more' => 'meer',
 	'wikibase-anonymouseditwarning' => 'Waarschuwing: u bent niet aangemeld.
-Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.',
+Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Deze pagina is beveiligd, bewerken is niet toegestaan.',
 	'wikibase-blockeduser-tooltip-message' => 'U kunt geen bewerkingen uitvoeren omdat uw gebruikersnaam of IP-adres geblokkeerd is.',
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
@@ -11715,7 +11715,7 @@ $messages['nn'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Eg godtek desse vilkåra for endringar eg gjer i framtida. Ikkje vis denne meldinga meir.',
 	'wikibase-entityselector-more' => 'meir',
 	'wikibase-anonymouseditwarning' => "'''Åtvaring:''' Du er ikkje innlogga.
-IP-adressa di vert lagra i endringshistorikken til dette objektet av type $1.",
+IP-adressa di vert lagra i endringshistorikken til dette objektet av type $1.", # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Denne sida er verna. Endring er ikkje tillate.',
 	'wikibase-blockeduser-tooltip-message' => 'Du har ikkje løyve til å endra av di brukarnamnet ditt eller IP-adressa di er blokkert',
 	'wikibase-move-error' => 'Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.',
@@ -12008,7 +12008,7 @@ $messages['pl'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Przyjmuję te warunki dla moich przyszłych edycji. Nie pokazuj więcej tego komunikatu.',
 	'wikibase-entityselector-more' => 'więcej',
 	'wikibase-anonymouseditwarning' => 'Ostrzeżenie: Nie jesteś zalogowany.
-W historii edycji {{grammar:D.lp|$1}} zostanie zapisany Twój adres IP.',
+W historii edycji {{grammar:D.lp|$1}} zostanie zapisany Twój adres IP.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Ta strona jest zabezpieczona. Edytowanie nie jest dozwolone.',
 	'wikibase-blockeduser-tooltip-message' => 'Nie masz uprawnienia do edycji, ponieważ twój login lub adres IP został zablokowany.',
 	'wikibase-move-error' => '',
@@ -13013,7 +13013,7 @@ $messages['ru'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Я принимаю эти условия для моих будущих правок. Не показывать больше это сообщение.',
 	'wikibase-entityselector-more' => 'ещё',
 	'wikibase-anonymouseditwarning' => 'Предупреждение: Вы не вошли в систему.
-Ваш IP-адрес будет записан в истории редактирования записи «$1».',
+Ваш IP-адрес будет записан в истории редактирования записи «$1».', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Эта страница защищена. Её редактирование не допускается.',
 	'wikibase-blockeduser-tooltip-message' => 'У вас нет прав на редактирование, так как ваша учётная запись или IP-адрес были заблокированы.',
 	'wikibase-move-error' => 'Вы не можете переименовывать страницы, находящиеся в пространстве имён данных, или перемещать страницы в это пространство имён.',
@@ -13701,7 +13701,7 @@ $messages['sr-ec'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Прихватам ове услове за све моје будуће измене. Не приказуј више ову поруку.',
 	'wikibase-entityselector-more' => 'још',
 	'wikibase-anonymouseditwarning' => 'Напомена: Нисте пријављени.
-Ваша ИП адреса ће бити забележена у историји измена за $1.',
+Ваша ИП адреса ће бити забележена у историји измена за $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Ова страна је заштићена. Уређивање није дозвољено.',
 	'wikibase-blockeduser-tooltip-message' => 'Немате дозволу да уређујете јер је ваше корисничко име или ИП адреса блокирана.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Друго својство ($3) већ има назив „$1“ повезан са језичким кодом $2',
@@ -13964,7 +13964,7 @@ $messages['sv'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Jag accepterar dessa villkor för mina framtida redigeringar. Visa inte detta meddelande igen.',
 	'wikibase-entityselector-more' => 'mer',
 	'wikibase-anonymouseditwarning' => 'Varning: Du är inte inloggad.
-Din IP-adress kommer att sparas i historiken för $1.',
+Din IP-adress kommer att sparas i historiken för $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Denna sida är skyddad. Redigering är inte tillåtet.',
 	'wikibase-blockeduser-tooltip-message' => 'Du har inte behörighet att redigera eftersom ditt användarnamn eller IP-adress har blockerats.',
 	'wikibase-move-error' => 'Du kan inte flytta sidor som finns i datanamnområdet, och du kan inte flytta sidor in i den.',
@@ -14743,7 +14743,7 @@ $messages['vec'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Aceto sti termini par le me future modifiche. No sta mostrarme da novo sto mesajo.',
 	'wikibase-entityselector-more' => 'piassè',
 	'wikibase-anonymouseditwarning' => 'Ocio: no te ghè mia fato el login.
-In te la cronologia de $1 vegnarà registrà el to indiriso IP.',
+In te la cronologia de $1 vegnarà registrà el to indiriso IP.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Sta pagina la xe proteta. No se pol mia modificarla.',
 	'wikibase-blockeduser-tooltip-message' => "No te ghè el parmesso de modifica, parché el to nome utente o l'indiriso IP el xe stà blocà.",
 	'wikibase-move-error' => 'No te pol mia spostar pagine che xe nel namespace dei dati, e no te pol mia spostar pagine su de elo.',
@@ -15050,11 +15050,11 @@ $messages['vi'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'giá trị tùy biến',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'giá trị không xác định',
 	'wikibase-snakview-snaktypeselector-novalue' => 'vô giá trị',
-	'wikibase-shortcopyrightwarning' => 'Với việc bấm nút “$1”, bạn chấp nhận [[$2|các điều khoản sử dụng]], và bạn đồng ý phát hành, không thể hủy bỏ, đóng góp của mình theo $3.',
+	'wikibase-shortcopyrightwarning' => 'Với việc bấm nút “$1”, bạn chấp nhận [[$2|các điều khoản sử dụng]], và bạn đồng ý phát hành, một cách không thể hủy bỏ, đóng góp của mình theo $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Tôi chấp nhận các điều khoản này đối với các sửa đổi của tôi trong tương lai. Từ nay bỏ qua thông báo này.',
 	'wikibase-entityselector-more' => 'thêm',
 	'wikibase-anonymouseditwarning' => 'Cảnh báo: Bạn chưa đăng nhập.
-Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của $1 này.',
+Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của $1 này.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Trang này bị khóa không cho phép sửa đổi.',
 	'wikibase-blockeduser-tooltip-message' => 'Bạn không có quyền sửa đổi do tài khoản hoặc địa chỉ IP của bạn đã bị cấm.',
 	'wikibase-move-error' => 'Không thể di chuyển các trang trong không gian tên dữ liệu và không thể di chuyển trang khác vào không gian tên này.',
@@ -15402,7 +15402,7 @@ $messages['yi'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'איך נעם אָן די באדינגונגען פֿאר מײַנע קומעדיקע רעדאקטירונגען. ווײַזט נישט מער די מעלדונג.',
 	'wikibase-entityselector-more' => 'נאך',
 	'wikibase-anonymouseditwarning' => 'ווארענונג: איר זענט נישט אריינלאגירט. 
-אייער IP־אדרעס וועט ווערן דאקומענטירט אין דעם רעדאקטירן היסטאריע פון דעם $1.',
+אייער IP־אדרעס וועט ווערן דאקומענטירט אין דעם רעדאקטירן היסטאריע פון דעם $1.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'דער בלאט איז געשיצט. מען טאר נישט רעדאקטירן.',
 	'wikibase-blockeduser-tooltip-message' => 'איר האט נישט קיין דערלויבניש צו רעדאקטירן ווייל אייער באניצער־נאמען אדער IP אדרעס איז געווארן בלאקירט.',
 	'wikibase-error-sitelink-already-used' => 'וועבזײַטל לינק [$1 $2] שוין געניצט דורך דאטנאביעקט [[$3]].',
@@ -15638,7 +15638,7 @@ $messages['zh-hans'] = array(
 	'wikibase-shortcopyrightwarning' => '点击“$1”，即表示你认同我们的[[$2|使用条款]]，并义无反顾地同意采用$3发表你的贡献。',
 	'wikibase-copyrighttooltip-acknowledge' => '我接受对我未来的编辑采用这些条款。不再显示该信息。',
 	'wikibase-entityselector-more' => '更多',
-	'wikibase-anonymouseditwarning' => '警告：你没有登录。你的IP地址将被记录在$1的编辑历史中。',
+	'wikibase-anonymouseditwarning' => '警告：你没有登录。你的IP地址将被记录在$1的编辑历史中。', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => '本页面受到保护。不能编辑。',
 	'wikibase-blockeduser-tooltip-message' => '你没有权限编辑，因为你的用户名或IP地址已经被封禁。',
 	'wikibase-move-error' => '你不能移动数据（data）名字空间的页面，你也不能移动页面至该名字空间。',
@@ -15970,7 +15970,7 @@ $messages['zh-hant'] = array(
 	'wikibase-shortcopyrightwarning' => '點擊「$1」表示閣下接受[[$2|使用條款]]，並不可撤銷地接受以$3發布您的貢獻。',
 	'wikibase-copyrighttooltip-acknowledge' => '我接受這些條款包括我以後的編輯。不要再顯示此訊息。',
 	'wikibase-entityselector-more' => '更多',
-	'wikibase-anonymouseditwarning' => '警告：您沒有登錄。您的IP地址將會被記錄在$1的編輯歷史中。',
+	'wikibase-anonymouseditwarning' => '警告：您沒有登錄。您的IP地址將會被記錄在$1的編輯歷史中。', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => '此頁面已被保護。不容許編輯。',
 	'wikibase-blockeduser-tooltip-message' => '因您的用戶名或IP已被封禁，閣下沒有權限去編輯。',
 	'wikibase-move-error' => '您不能移動數據（data）名字空間中的頁面，您也不能移動頁面到這裡。',
