@@ -136,10 +136,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 				'reason' => 'Some reason',
 				'data' => $data,
 				'new' => 'property',
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
+			) );
 
 		$this->assertResultSuccess( $res  );
 		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
@@ -159,10 +156,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 				'reason' => 'Some reason',
 				'data' => json_encode( self::$entity ),
 				'new' => 'item',
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
+			) );
 
 		$this->assertResultSuccess( $res );
 		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
@@ -191,10 +185,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 					'reason' => 'Some reason',
 					'data' => json_encode( array_merge( self::$entity, $data ) ),
 					'new' => 'item',
-				),
-				null,
-				self::$users['wbeditor']->user
-			);
+				) );
 
 			$this->fail( "Adding another entity with the same sitelinks should have failed" );
 		}
@@ -213,10 +204,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 				'reason' => 'Some reason',
 				'data' => json_encode( self::$entity ),
 				'id' => self::$id,
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
+			) );
 
 		$this->assertResultSuccess( $res );
 		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
@@ -248,10 +236,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 						'reason' => 'Some reason',
 						'data' => json_encode( array_merge( self::$entity, $data ) ),
 						'id' => self::$id,
-					),
-					null,
-					self::$users['wbeditor']->user
-				);
+					) );
 				$this->fail( "Updating the entity with wrong data should have failed" );
 			}
 			catch ( \UsageException $e ) {
@@ -294,10 +279,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 						'reason' => 'Some reason',
 						'data' => json_encode( array_merge( $data, self::$entity ) ),
 						'id' => self::$id,
-					),
-					null,
-					self::$users['wbeditor']->user
-				);
+					) );
 				$this->assertResultSuccess( $res );
 				$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
 				$this->assertEntityEquals( self::$expect, $res['entity'] );
@@ -320,10 +302,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 					'data' => json_encode( array() ),
 					'id' => self::$id,
 					'clear' => true,
-				),
-				null,
-				self::$users['wbeditor']->user
-			);
+				) );
 			$this->assertResultSuccess( $res );
 			$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
 			$this->assertEntityEquals( array( 'id' => self::$id ), $res['entity'] );
@@ -446,10 +425,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 					'reason' => 'Some reason',
 					'data' => is_string( $data ) ? $data : json_encode( $data ),
 					'new' => 'item',
-				),
-				null,
-				self::$users['wbeditor']->user
-			);
+				) );
 
 			$this->fail( "Adding entity should have failed: " . ( is_string( $data ) ? $data : json_encode( $data ) ) );
 		}
@@ -556,10 +532,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 				'reason' => 'Some reason',
 				'data' => json_encode( $data ),
 				'id' => $id,
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
+			) );
 
 		// check returned keys -------------------------------------------
 		$this->assertResultSuccess( $res );

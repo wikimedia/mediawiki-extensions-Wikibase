@@ -79,7 +79,7 @@ abstract class LangAttributeBase extends ModifyEntityTestBase {
 		$id = $this->getEntityId( $handle );
 
 		// update the item ----------------------------------------------------------------
-		$req = array(
+		$request = array(
 			'id' => $id,
 			'action' => $action,
 			'language' => $langCode,
@@ -87,7 +87,7 @@ abstract class LangAttributeBase extends ModifyEntityTestBase {
 		);
 
 		try {
-			list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+			list( $apiResponse,, ) = $this->doApiRequestWithToken( $request );
 
 			if ( $exception ) {
 				$this->fail( "expected exception $exception" );
