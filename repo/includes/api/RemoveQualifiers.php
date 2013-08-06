@@ -3,17 +3,12 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use MWException;
-
-use Wikibase\EntityId;
 use Wikibase\Entity;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
 use Wikibase\Claims;
-use Wikibase\Settings;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\ChangeOpQualifier;
+use Wikibase\ChangeOps;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -40,12 +35,10 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class RemoveQualifiers extends ApiWikibase {
+class RemoveQualifiers extends ModifyClaim {
 
-	// TODO: autocomment
-	// TODO: rights
-	// TODO: conflict detection
 	// TODO: claim uniqueness
 
 	/**
@@ -56,101 +49,88 @@ class RemoveQualifiers extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
+		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
 
-		$this->doRemoveQualifiers( $content->getEntity() );
+		$claimGuid = $params['claim'];
+		$entityId = $this->claimModificationHelper->getEntityIdFromString(
+			Entity::getIdFromClaimGuid( $claimGuid )
+		);
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		// TODO: put loadEntityContent into a separate helper class for great reuse!
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entity = $entityContent->getEntity();
+		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$this->saveChanges( $content );
+		$claims = new Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+		}
+
+		$claim = $claims->getClaimWithGuid( $claimGuid );
+		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $claim );
+
+		$changeOps = new ChangeOps();
+		$changeOps->add( $this->getChangeOps( $claimGuid, $qualifierHashes ) );
+		$changeOps->apply( $entity, $summary );
+
+		$this->saveChanges( $entityContent, $summary );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * @since 0.3
+	 * Check the provided parameters
 	 *
-	 * @return \Wikibase\EntityContent
+	 * @since 0.4
 	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
-
-		if ( !( $claimGuidValidator->validateFormat( $params['claim'] ) ) ) {
+	protected function validateParameters( array $params ) {
+		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['claim'] ) ) ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param string $claimGuid
+	 * @param array $qualifierHashes
+	 *
+	 * @return ChangeOp[] $changeOps
 	 */
-	protected function doRemoveQualifiers( Entity $entity ) {
-		$params = $this->extractRequestParams();
+	protected function getChangeOps( $claimGuid, array $qualifierHashes ) {
+		$changeOps = array();
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
-		$claim = $this->getClaim( $entity, $params['claim'] );
+		foreach ( $qualifierHashes as $qualifierHash ) {
+			$changeOps[] = new ChangeOpQualifier( $claimGuid, null, $qualifierHash, $idFormatter );
+		}
 
+		return $changeOps;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 * @param Claim $claim
+	 *
+	 * @return string[]
+	 */
+	protected function getQualifierHashesFromParams( array $params, Claim $claim ) {
 		$qualifiers = $claim->getQualifiers();
+		$hashes = array();
 
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
-				// TODO: does $qualifierHash need to be escaped?
-				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'no-such-qualifier' );
+				$this->dieUsage( 'Invalid snak hash', 'no-such-qualifier' );
 			}
-
-			$qualifiers->removeSnakHash( $qualifierHash );
-		}
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param Entity $entity
-	 * @param string $claimGuid
-	 *
-	 * @return Claim
-	 */
-	protected function getClaim( Entity $entity, $claimGuid ) {
-		$claims = new Claims( $entity->getClaims() );
-
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find a claim with that guid', 'no-such-claim' );
+			$hashes[] = $qualifierHash;
 		}
 
-		$claim = $claims->getClaimWithGuid( $claimGuid );
-
-		assert( $claim instanceof Claim );
-
-		return $claim;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
-	 */
-	protected function saveChanges( EntityContent $content ) {
-		// collect information and create an EditEntity
-		$summary = '/* wbremovequalifiers */'; //TODO: autosummary!
-		$status = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
-
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
+		return $hashes;
 	}
 
 	/**
@@ -161,21 +141,24 @@ class RemoveQualifiers extends ApiWikibase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'claim' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'qualifiers' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+		return array_merge(
+			parent::getAllowedParams(),
+			array(
+				'claim' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'qualifiers' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+					ApiBase::PARAM_ISMULTI => true,
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
+			)
 		);
 	}
 
@@ -183,12 +166,14 @@ class RemoveQualifiers extends ApiWikibase {
 	 * @see \ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-qualifer', 'info' => $this->msg( 'wikibase-api-no-such-qualifer' )->text() ),
-			array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
-		) );
+		return array_merge(
+			parent::getPossibleErrors(),
+			$this->claimModificationHelper->getPossibleErrors(),
+			array(
+				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
+				array( 'code' => 'no-such-qualifier', 'info' => $this->msg( 'wikibase-api-no-such-qualifer' )->text() ),
+			)
+		);
 	}
 
 	/**
@@ -199,17 +184,20 @@ class RemoveQualifiers extends ApiWikibase {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'claim' => 'A GUID identifying the claim from which to remove qualifiers',
-			'qualifiers' => 'Snak hashes of the qualifiers to remove',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array(
-				'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'claim' => 'A GUID identifying the claim from which to remove qualifiers',
+				'qualifiers' => 'Snak hashes of the qualifiers to remove',
+				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+				'baserevid' => array(
+					'The numeric identifier for the revision to base the modification on.',
+					"This is used for detecting conflicts during save."
+				),
+				'bot' => array( 'Mark this edit as bot',
+					'This URL flag will only be respected if the user belongs to the group "bot".'
+				),
+			)
 		);
 	}
 
@@ -238,12 +226,4 @@ class RemoveQualifiers extends ApiWikibase {
 			'api.php?action=wbremovequalifiers&statement=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=1eb8793c002b1d9820c833d234a1b54c8e94187e&token=foobar&baserevid=7201010' => 'Remove qualifier with hash "1eb8793c002b1d9820c833d234a1b54c8e94187e" from claim with GUID of "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F"',
 		);
 	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
-	}
-
 }
