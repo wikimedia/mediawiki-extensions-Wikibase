@@ -14,6 +14,7 @@ use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Snak;
 use ValueParsers\ParseException;
 
 /**
@@ -197,9 +198,18 @@ class ClaimModificationHelper {
 			$this->apiMain->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
 		}
 
-		$this->snakValidation->validateSnak( $snak );
+		$this->validateSnak( $snak );
 
 		return $snak;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 */
+	public function validateSnak( Snak $snak ) {
+		$this->snakValidation->validateSnak( $snak );
 	}
 
 	/**
