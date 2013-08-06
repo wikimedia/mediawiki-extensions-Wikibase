@@ -94,7 +94,7 @@ class EntitySerializer extends SerializerObject {
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
-					$serialization['claims'] = $claimsSerializer->getSerialized( new \Wikibase\Claims( $entity->getClaims() ) );
+					$serialization['claimlist'] = $claimsSerializer->getSerialized( new \Wikibase\Claims( $entity->getClaims() ) );
 					break;
 			}
 		}

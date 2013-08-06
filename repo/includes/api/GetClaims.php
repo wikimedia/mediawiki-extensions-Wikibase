@@ -115,7 +115,7 @@ class GetClaims extends ApiWikibase {
 
 		$this->getResult()->addValue(
 			null,
-			'claims',
+			'claimlist',
 			$serializedClaims
 		);
 	}

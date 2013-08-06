@@ -109,7 +109,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
-			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
+			'snaks' => \FormatJson::encode( $serializedReference['snaklist'] ),
 		);
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
@@ -132,7 +132,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
-			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
+			'snaks' => \FormatJson::encode( $serializedReference['snaklist'] ),
 		);
 
 		try {

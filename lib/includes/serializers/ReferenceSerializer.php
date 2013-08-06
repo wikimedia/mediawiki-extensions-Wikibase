@@ -52,9 +52,9 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 		$serialization['hash'] = $reference->getHash();
 
 		$snakSerializer = new SnakSerializer( $this->options );
-		$snaksSerializer = new ByPropertyListSerializer( 'snak', $snakSerializer, $this->options );
+		$snaksSerializer = new ByPropertyListSerializer( 'snaks', 'snak', $snakSerializer, $this->options );
 
-		$serialization['snaks'] = $snaksSerializer->getSerialized( $reference->getSnaks() );
+		$serialization['snaklist'] = $snaksSerializer->getSerialized( $reference->getSnaks() );
 
 		return $serialization;
 	}
@@ -70,14 +70,14 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 	 * @throws MWException
 	 */
 	public function newFromSerialization( array $serialization ) {
-		if ( !array_key_exists( 'snaks', $serialization ) || !is_array( $serialization['snaks'] ) ) {
+		if ( !array_key_exists( 'snaklist', $serialization ) || !is_array( $serialization['snaklist'] ) ) {
 			throw new MWException( 'A reference serialization needs to have a list of snaks' );
 		}
 
 		$snakUnserializer = new SnakSerializer( $this->options );
 		$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
 
-		$snaks = $snaksUnserializer->newFromSerialization( $serialization['snaks'] );
+		$snaks = $snaksUnserializer->newFromSerialization( $serialization['snaklist'] );
 
 		$reference = new Reference( new \Wikibase\SnakList( $snaks ) );
 
