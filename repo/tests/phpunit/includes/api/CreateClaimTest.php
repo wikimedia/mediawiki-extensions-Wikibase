@@ -103,8 +103,6 @@ class CreateClaimTest extends ModifyEntityTestBase {
 	}
 
 	public function invalidRequestProvider() {
-		list( $entity, $property ) = self::getNewEntityAndProperty();
-
 		$argLists = array();
 
 		$params = array(

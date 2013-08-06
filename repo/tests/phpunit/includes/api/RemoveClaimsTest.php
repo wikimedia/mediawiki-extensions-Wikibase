@@ -160,16 +160,9 @@ class RemoveClaimsTest extends ModifyEntityTestBase {
 	}
 
 	public function invalidClaimProvider() {
-		$entities = $this->entityProvider();
-		$claimsOfEntity1 = $entities[0]->getClaims();
-		$claimsOfEntity2 = $entities[1]->getClaims();
-		$claim1OfEntity1 = $claimsOfEntity1[0];
-		$claim1OfEntity2 = $claimsOfEntity2[0];
-
 		return array(
 			array( 'xyz' ), //wrong guid
 			array( 'x$y$z' ), //wrong guid
-			array( array( $claim1OfEntity1->getGuid(), $claim1OfEntity2->getGuid() ) ), //claims of different entities
 		);
 	}
 
