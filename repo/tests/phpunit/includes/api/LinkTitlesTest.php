@@ -132,7 +132,6 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 	 * @dataProvider provideLinkTitles
 	 */
 	public function testLinkTitles( $handle, $item_spec, $fromsite, $fromtitle, $tosite, $totitle, $expectedFailure = null, $cleanUp = false ) {
-		$token = $this->getEditToken();
 		if ( $handle ) {
 			$id = $this->getEntityId( $handle );
 		}
@@ -140,7 +139,6 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 		// set the sitelink -------------------------------
 		$req = array_merge( $item_spec, array(
 			'action' => 'wblinktitles',
-			'token' => $token,
 			'fromsite' => $fromsite,
 			'fromtitle' => $fromtitle,
 			'tosite' => $tosite,
@@ -148,7 +146,7 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 		) );
 
 		try {
-			list( $res,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			if ( $expectedFailure ) {
 				$this->fail( "Expected failure: $expectedFailure" );

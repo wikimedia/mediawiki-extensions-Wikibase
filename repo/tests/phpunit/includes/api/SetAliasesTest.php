@@ -91,14 +91,13 @@ class SetAliasesTest extends ModifyEntityTestBase {
 
 		// update the item ----------------------------------------------------------------
 		$req = array(
-			'token' => $this->getEditToken(),
 			'id' => $id,
 			'action' => 'wbsetaliases',
 			'language' => $langCode,
 			$op => $value
 		);
 
-		list( $apiResponse,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+		list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 		$this->assertSuccess( $apiResponse );
 
@@ -138,7 +137,6 @@ class SetAliasesTest extends ModifyEntityTestBase {
 
 		// update the item ----------------------------------------------------------------
 		$req = array(
-			'token' => $this->getEditToken(),
 			'id' => $id,
 			'action' => 'wbsetaliases',
 			'language' => $langCode,
@@ -146,7 +144,7 @@ class SetAliasesTest extends ModifyEntityTestBase {
 		);
 
 		try {
-			list( $apiResponse,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 		} catch ( \Exception $e ) {
 			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
 				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
@@ -162,7 +160,6 @@ class SetAliasesTest extends ModifyEntityTestBase {
 		$badId = 'xyz123+++';
 
 		$req = array(
-			'token' => $this->getEditToken(),
 			'id' => $badId,
 			'action' => 'wbsetaliases',
 			'language' => 'en',
@@ -170,7 +167,7 @@ class SetAliasesTest extends ModifyEntityTestBase {
 		);
 
 		try {
-			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 
 			$this->fail( "Expected a usage exception when providing a malformed id" );
 		} catch ( \UsageException $ex ) {

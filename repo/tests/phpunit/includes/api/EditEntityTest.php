@@ -128,19 +128,16 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * Checks the creation of a property via the editEntity API module
 	 */
 	function testEditEntityCreateProperty() {
-		$token = $this->getEditToken();
 		$data = '{"datatype":"string","labels":{"en":{"language":"en","value":"its a test!"}}}';
 
-		list($res,,) = $this->doApiRequest(
+		list($res,,) = $this->doApiRequestWithToken(
 			array(
 				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
 				'data' => $data,
-				'token' => $token,
 				'new' => 'property',
 			),
 			null,
-			false,
 			self::$users['wbeditor']->user
 		);
 
@@ -155,18 +152,14 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * note that upon completion the id will be stored for later reuse
 	 */
 	function testEditEntityWithToken() {
-		$token = $this->getEditToken();
-
-		list($res,,) = $this->doApiRequest(
+		list($res,,) = $this->doApiRequestWithToken(
 			array(
 				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
 				'data' => json_encode( self::$entity ),
-				'token' => $token,
 				'new' => 'item',
 			),
 			null,
-			false,
 			self::$users['wbeditor']->user
 		);
 
@@ -184,24 +177,20 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * Check failure to set the same entity again, without id
 	 */
 	function testEditEntityNoId() {
-		$token = $this->getEditToken();
-
 		$data = array( 'labels' => array(
 				"de" => array( "language" => "de", "value" => "Foo X" ),
 				"en" => array( "language" => "en", "value" => "Bar Y" ),
 			) );
 
 		try {
-			$this->doApiRequest(
+			$this->doApiRequestWithToken(
 				array(
 					'action' => 'wbeditentity',
 					'reason' => 'Some reason',
 					'data' => json_encode( array_merge( self::$entity, $data ) ),
-					'token' => $token,
 					'new' => 'item',
 				),
 				null,
-				false,
 				self::$users['wbeditor']->user
 			);
 
@@ -216,18 +205,14 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * Check success of entity update with a valid id
 	 */
 	function testEditEntityWithId() {
-		$token = $this->getEditToken();
-
-		list($res,,) = $this->doApiRequest(
+		list($res,,) = $this->doApiRequestWithToken(
 			array(
 				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
 				'data' => json_encode( self::$entity ),
-				'token' => $token,
 				'id' => self::$id,
 			),
 			null,
-			false,
 			self::$users['wbeditor']->user
 		);
 
@@ -244,8 +229,6 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * Check failure to set the same entity again, with illegal field values in the json
 	 */
 	function testEditEntityWithIllegalData() {
-		$token = $this->getEditToken();
-
 		// these sets of failing data must be merged with an existing entity
 		$failingData = array( //@todo: check each of these separately, so we know that each one fails!
 			array( 'pageid' => 999999 ),
@@ -255,16 +238,14 @@ class EditEntityTest extends ModifyEntityTestBase {
 		);
 		foreach ( $failingData as $data ) {
 			try {
-				$this->doApiRequest(
+				$this->doApiRequestWithToken(
 					array(
 						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
 						'data' => json_encode( array_merge( self::$entity, $data ) ),
-						'token' => $token,
 						'id' => self::$id,
 					),
 					null,
-					false,
 					self::$users['wbeditor']->user
 				);
 				$this->fail( "Updating the entity with wrong data should have failed" );
@@ -279,8 +260,6 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * Check success to set the same entity again, with legal field values in the json
 	 */
 	function testEditEntityWithLegalData() {
-		$token = $this->getEditToken();
-
 		// request the test data from the entity itself
 		list($query,,) = $this->doApiRequest(
 			array(
@@ -290,7 +269,6 @@ class EditEntityTest extends ModifyEntityTestBase {
 				'ids' => self::$id
 			),
 			null,
-			false,
 			self::$users['wbeditor']->user
 		);
 		$this->assertSuccess( $query, 'entities', self::$id, 'id' );
@@ -305,16 +283,14 @@ class EditEntityTest extends ModifyEntityTestBase {
 
 		foreach ( $goodData as $data ) {
 			try {
-				list($res,,) = $this->doApiRequest(
+				list($res,,) = $this->doApiRequestWithToken(
 					array(
 						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
 						'data' => json_encode( array_merge( $data, self::$entity ) ),
-						'token' => $token,
 						'id' => self::$id,
 					),
 					null,
-					false,
 					self::$users['wbeditor']->user
 				);
 				$this->assertSuccess( $res, 'entity', 'id' );
@@ -330,20 +306,16 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * Check if it possible to clear out the content of the object
 	 */
 	function testEditEntityEmptyData() {
-		$token = $this->getEditToken();
-
 		try {
-			list($res,,) = $this->doApiRequest(
+			list($res,,) = $this->doApiRequestWithToken(
 				array(
 					'action' => 'wbeditentity',
 					'reason' => 'Some reason',
 					'data' => json_encode( array() ),
-					'token' => $token,
 					'id' => self::$id,
 					'clear' => true,
 				),
 				null,
-				false,
 				self::$users['wbeditor']->user
 			);
 			$this->assertSuccess( $res, 'entity', 'id' );
@@ -460,19 +432,15 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * @dataProvider provideBadData
 	 */
 	function testEditEntityBadData( $data, $expectedErrorCode ) {
-		$token = $this->getEditToken();
-
 		try {
-			$this->doApiRequest(
+			$this->doApiRequestWithToken(
 				array(
 					'action' => 'wbeditentity',
 					'reason' => 'Some reason',
 					'data' => is_string( $data ) ? $data : json_encode( $data ),
-					'token' => $token,
 					'new' => 'item',
 				),
 				null,
-				false,
 				self::$users['wbeditor']->user
 			);
 
@@ -573,19 +541,16 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 */
 	function testEditEntityData( $handle, $data, $expected = null ) {
 		$id = $this->getEntityId( $handle );
-		$token = $this->getEditToken();
 
 		// wbsetentity ------------------------------------------------------
-		list($res,,) = $this->doApiRequest(
+		list($res,,) = $this->doApiRequestWithToken(
 			array(
 				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
 				'data' => json_encode( $data ),
-				'token' => $token,
 				'id' => $id,
 			),
 			null,
-			false,
 			self::$users['wbeditor']->user
 		);
 

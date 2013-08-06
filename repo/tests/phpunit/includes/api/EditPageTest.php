@@ -58,7 +58,6 @@ class EditPageTest extends ModifyEntityTestBase {
 		$this->assertTrue( $status->isOK(), $status->getMessage() ); // sanity check
 
 		$this->login();
-		$token = $this->getEditToken();
 
 		$content->getItem()->setLabel( "de", "Test" );
 		$data = $content->getItem()->toArray();
@@ -66,12 +65,11 @@ class EditPageTest extends ModifyEntityTestBase {
 
 		// try to update the item with valid data via the edit action
 		try {
-			$this->doApiRequest(
+			$this->doApiRequestWithToken(
 				array(
 					'action' => 'edit',
 					'pageid' => $content->getTitle()->getArticleID(),
 					'text' => $text,
-					'token' => $token,
 				)
 			);
 
@@ -93,19 +91,17 @@ class EditPageTest extends ModifyEntityTestBase {
 		$page = \Wikibase\EntityContentFactory::singleton()->getWikiPageForId( $id );
 
 		$this->login();
-		$token = $this->getEditToken();
 
 		$text = "hallo welt";
 
 		// try to update the item with valid data via the edit action
 		try {
-			$this->doApiRequest(
+			$this->doApiRequestWithToken(
 				array(
 					'action' => 'edit',
 					'title' => $page->getTitle()->getPrefixedText(),
 					'contentmodel' => CONTENT_MODEL_WIKITEXT,
 					'text' => $text,
-					'token' => $token,
 				)
 			);
 
