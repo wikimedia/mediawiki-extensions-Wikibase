@@ -98,14 +98,14 @@ class BotEditTest extends ModifyEntityTestBase {
 	 * @depends testTokensAndRights
 	 */
 	function testSetItemTop() {
-		$req = array(
+		$request = array(
 			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => '{}',
 			'new' => 'item',
 		);
 
-		$second = $this->doApiRequestWithToken( $req, null, self::$users['wbbot']->user );
+		$second = $this->doApiRequestWithToken( $request );
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
@@ -124,7 +124,7 @@ class BotEditTest extends ModifyEntityTestBase {
 	function testCreateItem( $handle, $bot, $new, $data ) {
 		$myid = null;
 
-		$req = array(
+		$request = array(
 			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => $data,
@@ -132,15 +132,15 @@ class BotEditTest extends ModifyEntityTestBase {
 
 		if ( !$new ) {
 			$myid = $this->getEntityId( $handle );
-			$req['id'] = $myid;
+			$request['id'] = $myid;
 		} else {
-			$req['new'] = 'item';
+			$request['new'] = 'item';
 		}
 		if ( $bot ) {
-			$req['bot'] = true;
+			$request['bot'] = true;
 		}
 
-		$second = $this->doApiRequestWithToken( $req, null ,self::$users['wbbot']->user );
+		$second = $this->doApiRequestWithToken( $request );
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
@@ -161,14 +161,14 @@ class BotEditTest extends ModifyEntityTestBase {
 			$myid = $second[0]['entity']['id'];
 		}
 
-		$req = array(
+		$request = array(
 				'action' => 'query',
 				'list' => 'recentchanges',
 				'rcprop' => 'title|flags',
 				'rctoponly' => '1',
 				'rclimit' => 50, // hope that no more than 50 edits where made in the last second
 		);
-		$third = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
+		$third = $this->doApiRequest( $request, null, false, self::$users['wbbot']->user );
 
 		$this->assertArrayHasKey( 'query', $third[0],
 			"Must have a 'query' key in the result from the API" );

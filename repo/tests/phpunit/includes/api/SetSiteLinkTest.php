@@ -48,26 +48,19 @@ use ApiTestCase;
  */
 class SetSiteLinkTest extends ModifyEntityTestBase {
 
-	public function setup() {
-		parent::setup();
-
-		// Nasty... we shouldn't need to do this. But apparently some other test spills bad state.
-		$this->resetEntities();
-	}
-
 	public function testSetLiteLinkWithNoId( ) {
-		$req = array(
+		$request = array(
 			'action' => 'wbsetsitelink',
 			'linksite' => "enwiki",
 			'linktitle' => "testSetLiteLinkWithNoId",
 		);
 
 		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		$this->doApiRequestWithToken( $request );
 	}
 
 	public function testSetLiteLinkWithBadId( ) {
-		$req = array(
+		$request = array(
 			'action' => 'wbsetsitelink',
 			'id' => 123456789,
 			'linksite' => "enwiki",
@@ -75,11 +68,11 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		$this->doApiRequestWithToken( $request );
 	}
 
 	public function testSetLiteLinkWithBadSite( ) {
-		$req = array(
+		$request = array(
 			'action' => 'wbsetsitelink',
 			'site' => "dewiktionary",
 			'title' => "Berlin",
@@ -88,11 +81,11 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		$this->doApiRequestWithToken( $request );
 	}
 
 	public function testSetLiteLinkWithBadTitle( ) {
-		$req = array(
+		$request = array(
 			'action' => 'wbsetsitelink',
 			'site' => "dewiki",
 			'title' => "testSetLiteLinkWithBadTitle_de",
@@ -101,7 +94,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		$this->doApiRequestWithToken( $request );
 	}
 
 	public function testSetLiteLinkWithNoToken( ) {
@@ -110,7 +103,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			return;
 		}
 
-		$req = array(
+		$request = array(
 			'action' => 'wbsetsitelink',
 			'id' => $this->getEntityId( "Berlin" ),
 			'linksite' => "enwiki",
@@ -118,7 +111,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+		$this->doApiRequest( $request, null, false, self::$users['wbeditor']->user );
 	}
 
 	public static function provideSetLiteLink() {
@@ -167,7 +160,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		}
 
 		// set the sitelink -------------------------------
-		$req = array_merge( $item_spec, array(
+		$request = array_merge( $item_spec, array(
 			'action' => 'wbsetsitelink',
 			'linksite' => $linksite,
 			'linktitle' => $linktitle,
@@ -177,7 +170,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 			$this->setExpectedException($expectedFailure );
 		}
 
-		list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		list( $res,, ) = $this->doApiRequestWithToken( $request );
 
 		if ( $expectedFailure ) {
 			$this->fail( $expectedFailure );
@@ -232,7 +225,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	}
 
 	public function testSetLiteLinkWithBadTargetSite( ) {
-		$req = array(
+		$request = array(
 			'action' => 'wbsetsitelink',
 			'site' => "dewiki",
 			'title' => "Berlin",
@@ -241,7 +234,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 		);
 
 		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		$this->doApiRequestWithToken( $request );
 	}
 }
 

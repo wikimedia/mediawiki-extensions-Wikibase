@@ -283,14 +283,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	}
 
 	/**
-	 *  Appends an edit token to a request
-	 */
-	function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
-		$params['token'] = $this->getToken();
-		return $this->doApiRequest( $params, $session, false, $user );
-	}
-
-	/**
 	 * Initializes the test environment with the entities defined by makeEntityData() by creating these
 	 * entities in the database.
 	 */
