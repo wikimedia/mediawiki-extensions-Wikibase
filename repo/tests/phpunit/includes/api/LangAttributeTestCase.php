@@ -114,13 +114,22 @@ class LangAttributeTestCase extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 
 		// -- check the result only has our changed data (if any)  ------------
-		$this->assertEquals( 1, count( $result['entity'][$attribute] ), "Entity return contained more than a single language" );
-		$this->assertArrayHasKey( $params['language'], $result['entity'][$attribute], "Entity doesn't return expected language");
-		$this->assertEquals( $params['language'], $result['entity'][$attribute][ $params['language'] ]['language'], "Returned incorrect language" );
+		if( $attribute !== 'aliases' ){
+			$this->assertEquals( 1, count( $result['entity'][$attribute] ), "Entity return contained more than a single language" );
+			$this->assertArrayHasKey( $params['language'], $result['entity'][$attribute], "Entity doesn't return expected language");
+			$this->assertEquals( $params['language'], $result['entity'][$attribute][ $params['language'] ]['language'], "Returned incorrect language" );
+		}
+
 		if( array_key_exists( $params['language'], $expected['value'] ) ){
-			$this->assertEquals( $expected['value'][ $params['language'] ], $result['entity'][$attribute][$params['language']]['value'] , "Returned incorrect label" );
+			if( is_array( $expected['value'][ $params['language'] ] ) ){
+				//todo check alias array is equal here
+			} else {
+				$this->assertEquals( $expected['value'][ $params['language'] ], $result['entity'][$attribute][$params['language']]['value'] , "Returned incorrect label" );
+			}
 		} else if( empty( $value ) ){
-			$this->assertArrayHasKey( 'removed', $result['entity'][$attribute][ $params['language'] ], "Entity doesn't return expected 'removed' marker");
+			if( $attribute !== 'aliases' ){
+				$this->assertArrayHasKey( 'removed', $result['entity'][$attribute][ $params['language'] ], "Entity doesn't return expected 'removed' marker");
+			}
 		}
 
 		// -- check any warnings ----------------------------------------------
@@ -136,8 +145,12 @@ class LangAttributeTestCase extends WikibaseApiTestCase {
 			$this->assertArrayHasKey( $attribute, $dbEntity );
 			$dbLabels = self::flattenArray( $dbEntity[$attribute], 'language', 'value', true );
 			foreach( $expected['value'] as $valueLanguage => $value ){
-				$this->assertArrayHasKey( $valueLanguage, $dbLabels );
-				$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
+				if( is_array( $value ) ){
+					//todo check aliases are the same here
+				} else {
+					$this->assertArrayHasKey( $valueLanguage, $dbLabels );
+					$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
+				}
 			}
 		} else {
 			$this->assertArrayNotHasKey( $attribute, $dbEntity );

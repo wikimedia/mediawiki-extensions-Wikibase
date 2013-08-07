@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
-//use Wikibase\Test\WikibaseApiTestCase;
 
 /**
  * Tests for the ApiSetAliases API module.
@@ -13,12 +12,6 @@ use ApiTestCase;
  * The tests are using "medium" so they are able to run alittle longer before they are killed.
  * Without this they will be killed after 1 second, but the setup of the tables takes so long
  * time that the first few tests get killed.
- *
- * The tests are doing some assumptions on the id numbers. If the database isn't empty when
- * when its filled with test items the ids will most likely get out of sync and the tests will
- * fail. It seems impossible to store the item ids back somehow and at the same time not being
- * dependant on some magically correct solution. That is we could use GetItemId but then we
- * would imply that this module in fact is correct.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,127 +50,105 @@ use ApiTestCase;
  * @group BreakingTheSlownessBarrier
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
-class SetAliasesTest extends WikibaseApiTestCase {
+class SetAliasesTest extends LangAttributeTestCase {
 
-	public function paramProvider() {
+	public function setUp() {
+		self::$testAction = 'wbsetaliases';
+		parent::setUp();
+	}
+
+	public static function provideData() {
 		return array(
-			// lang code, list name, list values, expected result
-			array( 'Oslo', 'en', 'set', 'Foo', 'Foo' ),
-			array( 'Oslo', 'en', 'add', 'Foo|bax', 'Foo|bax' ),
-			array( 'Oslo', 'en', 'set', 'Foo|bar|baz', 'Foo|bar|baz' ),
-			array( 'Oslo', 'en', 'add', 'Foo|spam', 'Foo|bar|baz|spam' ),
-			array( 'Oslo', 'en', 'add', 'ohi', 'Foo|bar|baz|spam|ohi' ),
+			// p => params, e => expected
 
-			array( 'Oslo', 'de', 'set', '', '' ),
-			array( 'Oslo', 'de', 'add', 'ohi', 'ohi' ),
-
-			array( 'Oslo', 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
-			array( 'Oslo', 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
-			array( 'Oslo', 'en', 'remove', 'Foo|bar|baz|o_O', 'spam' ),
-			array( 'Oslo', 'en', 'add', 'o_O', 'spam|o_O' ),
-			array( 'Oslo', 'en', 'set', 'o_O', 'o_O' ),
-			array( 'Oslo', 'en', 'remove', 'o_O', '' ),
+			// -- Test valid sequence -----------------------------
+			array( //0
+				'p' => array( 'language' => 'en', 'set' => '' ),
+				'e' => array( 'warning' => 'edit-no-change' ) ),
+			array( //1
+				'p' => array( 'language' => 'en', 'set' => 'Foo' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo' ) ) ) ),
+			array( //2
+				'p' => array( 'language' => 'en', 'add' => 'Foo|Bax' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bax' ) ) ) ),
+			array( //3
+				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ) ) ),
+			array( //4
+				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ), 'warning' => 'edit-no-change' ) ),
+			array( //5
+				'p' => array( 'language' => 'en', 'add' => 'Foo|Spam' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam' ) ) ) ),
+			array( //6
+				'p' => array( 'language' => 'en', 'add' => 'ohi' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam', 'ohi' ) ) ) ),
+			array( //7
+				'p' => array( 'language' => 'en', 'set' => 'ohi' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
+			array( //8
+				'p' => array( 'language' => 'de', 'set' => '' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ), 'warning' => 'edit-no-change' ) ),
+			array( //9
+				'p' => array( 'language' => 'de', 'set' => 'hiya' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya' ) ) ) ),
+			array( //10
+				'p' => array( 'language' => 'de', 'add' => 'opps' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya', 'opps' ) ) ) ),
+			array( //11
+				'p' => array( 'language' => 'de', 'remove' => 'opps|hiya' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
+			array( //12
+				'p' => array( 'language' => 'en', 'remove' => 'ohi' ),
+				'e' => array(  ) ),
 		);
 	}
 
 	/**
-	 * @dataProvider paramProvider
+	 * @dataProvider provideData
 	 */
-	public function testSetAliases( $handle, $langCode, $op, $value, $expected ) {
-		$id = $this->getEntityId( $handle );
-		$expected = $expected === '' ? array() : explode( '|', $expected );
-
-		// update the item ----------------------------------------------------------------
-		$req = array(
-			'id' => $id,
-			'action' => 'wbsetaliases',
-			'language' => $langCode,
-			$op => $value
-		);
-
-		list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-		$this->assertResultSuccess( $apiResponse );
-
-		// check return value --------------------------------------------------
-		if ( $expected ) {
-			$this->assertResultSuccess( $apiResponse );
-			$this->assertResultHasKeyInPath( $apiResponse, 'entity', 'aliases' );
-
-			$aliases = self::flattenArray( $apiResponse['entity']['aliases'], 'language', 'value', true );
-			$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
-
-			$this->assertArrayEquals( $expected, $actual );
-		} else {
-			$this->assertFalse( !empty( $apiResponse['entity']['aliases'] ), "found aliases when there should be none" );
-		}
-
-		// check item in database --------------------------------------------------
-		$item = $this->loadEntity( $id );
-
-		$aliases = self::flattenArray( $item['aliases'], 'language', 'value', true );
-		$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
-
-		$this->assertArrayEquals( $expected, $actual );
-
-		//TODO: we should have such checks for all API modules!
-		$this->assertRevisionSummary(
-			array_merge( array( "wbsetaliases-$op", $langCode ), explode( '|', $value ) ),
-			$apiResponse['entity']['lastrevid'] );
+	public function testSetLabel( $params, $expected ){
+		self::doTestSetLangAttribute( 'aliases' ,$params, $expected );
 	}
 
-	public function testSetAliases_length( ) {
-		$handle = 'Oslo';
-		$id = $this->getEntityId( $handle );
-		$langCode = 'en';
-		$op = 'add';
-		$value = LangAttributeTestHelper::makeOverlyLongString();
-		$exception = 'UsageException';
+	public static function provideExceptionData() {
+		return array(
+			// p => params, e => expected
 
-		// update the item ----------------------------------------------------------------
-		$req = array(
-			'id' => $id,
-			'action' => 'wbsetaliases',
-			'language' => $langCode,
-			$op => $value
+			// -- Test Exceptions -----------------------------
+			array( //0
+				'p' => array( 'language' => '', 'add' => '' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
+			array( //1
+				'p' => array( 'language' => 'nl', 'set' => LangAttributeTestHelper::makeOverlyLongString() ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
+			array( //2
+				'p' => array( 'language' => 'pt', 'remove' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
+			array( //3
+				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id', 'message' => 'No entity found' ) ) ),
+			array( //4
+				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site', 'message' => "Unrecognized value for parameter 'site'" ) ) ),
+			array( //5
+				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'remove' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-link', 'message' => 'No entity found matching site link' ) ) ),
+			array( //6
+				'p' => array( 'title' => 'Blub', 'language' => 'en', 'add' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
+			array( //7
+				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
 		);
-
-		try {
-			list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-		} catch ( \Exception $e ) {
-			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
-				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
-				return;
-			}
-			else {
-				throw $e;
-			}
-		}
-	}
-
-	public function testSetAliases_invalidId() {
-		$badId = 'xyz123+++';
-
-		$req = array(
-			'id' => $badId,
-			'action' => 'wbsetaliases',
-			'language' => 'en',
-			'set' => 'foo'
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
 	}
 
 	/**
-	 * Pseudo-Test that just resets the items we messed with
-	 *
-	 * @dataProvider paramProvider
+	 * @dataProvider provideExceptionData
 	 */
-	public function testReset( $handle ) {
-		$this->resetEntity( $handle );
-		$this->assertTrue( true );
+	public function testSetLabelExceptions( $params, $expected ){
+		self::doTestSetLangAttributeExceptions( $params, $expected );
 	}
 }
