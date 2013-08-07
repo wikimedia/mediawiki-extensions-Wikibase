@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\ChangeOpDescription;
+
 /**
  * Special page for setting the description of a Wikibase entity.
  *
@@ -70,20 +72,15 @@ class SpecialSetDescription extends SpecialSetEntity {
 	 * @param \Wikibase\EntityContent $entityContent
 	 * @param string $language
 	 * @param string $value
-	 * @param string &$summary The summary for this edit will be saved here.
 	 *
-	 * @return Status
+	 * @return Summary
 	 */
-	protected function setValue( $entityContent, $language, $value, &$summary ) {
-		if( $value === '' ) {
-			$entityContent->getEntity()->removeDescription( $language );
-			$i18n = 'wbsetdescription-remove';
-		}
-		else {
-			$entityContent->getEntity()->setDescription( $language, $value );
-			$i18n = 'wbsetdescription-set';
-		}
-		$summary = $this->getSummary( $language, $value, $i18n );
-		return \Status::newGood();
+	protected function setValue( $entityContent, $language, $value ) {
+		$value = $value === '' ? null : $value;
+		$summary = $this->getSummary( 'wbsetdescription' );
+		$changeOp = new ChangeOpDescription( $language, $value );
+		$changeOp->apply( $entityContent->getEntity(), $summary );
+
+		return $summary;
 	}
 }
