@@ -131,16 +131,6 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 		$this->assertEquals( 1, count( $res['entities'] ) );
 	}
 
-	function provideEntityHandles() {
-		$handles = array();
-
-		foreach ( self::getEntityInput() as $handle => $entity ) {
-			$handles[] = array( $handle );
-		}
-
-		return $handles;
-	}
-
 	public static function provideGetItemByTitle() {
 		$calls = array();
 		$handles = static::getEntityHandles();
