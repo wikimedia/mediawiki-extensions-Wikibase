@@ -45,7 +45,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class LinkTitlesTest extends ModifyEntityTestBase {
+class LinkTitlesTest extends WikibaseApiTestCase {
 
 	public function testLinkTitlesWithNoToken( ) {
 		if ( !self::$usetoken ) {

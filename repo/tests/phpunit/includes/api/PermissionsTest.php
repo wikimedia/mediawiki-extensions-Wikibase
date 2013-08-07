@@ -48,7 +48,7 @@ use Wikibase\Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class PermissionsTest extends ModifyEntityTestBase {
+class PermissionsTest extends WikibaseApiTestCase {
 
 	protected $permissions;
 	protected $old_user;

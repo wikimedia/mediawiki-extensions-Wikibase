@@ -47,7 +47,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class GetEntitiesTest extends ModifyEntityTestBase {
+class GetEntitiesTest extends WikibaseApiTestCase {
 
 	/**
 	 * @dataProvider provideEntityHandles

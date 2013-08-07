@@ -42,7 +42,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SetStatementRankTest extends ModifyEntityTestBase {
+class SetStatementRankTest extends WikibaseApiTestCase {
 
 	/**
 	 * @return Snak[]
