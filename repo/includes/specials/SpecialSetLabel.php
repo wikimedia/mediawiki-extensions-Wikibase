@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\ChangeOpLabel;
+
 /**
  * Special page for setting the label of a Wikibase entity.
  *
@@ -26,6 +28,7 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
+
 class SpecialSetLabel extends SpecialSetEntity {
 
 	/**
@@ -70,20 +73,15 @@ class SpecialSetLabel extends SpecialSetEntity {
 	 * @param \Wikibase\EntityContent $entityContent
 	 * @param string $language
 	 * @param string $value
-	 * @param string &$summary The summary for this edit will be saved here.
 	 *
-	 * @return Status
+	 * @return Summary
 	 */
-	protected function setValue( $entityContent, $language, $value, &$summary ) {
-		if( $value === '' ) {
-			$entityContent->getEntity()->removeLabel( $language );
-			$i18n = 'wbsetlabel-remove';
-		}
-		else {
-			$entityContent->getEntity()->setLabel( $language, $value );
-			$i18n = 'wbsetlabel-set';
-		}
-		$summary = $this->getSummary( $language, $value, $i18n );
-		return \Status::newGood();
+	protected function setValue( $entityContent, $language, $value ) {
+		$value = $value === '' ? null : $value;
+		$summary = $this->getSummary( 'wbsetlabel' );
+		$changeOp = new ChangeOpLabel( $language, $value );
+		$changeOp->apply( $entityContent->getEntity(), $summary );
+
+		return $summary;
 	}
 }
