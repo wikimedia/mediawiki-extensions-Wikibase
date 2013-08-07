@@ -1426,7 +1426,7 @@ $messages['ast'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Aceuto estes condiciones pa les mios futures ediciones. Nun volver a amosar esti mensaxe.',
 	'wikibase-entityselector-more' => 'más',
 	'wikibase-anonymouseditwarning' => "Avisu: Nun anició sesión.
-La direición IP quedará rexistrada nel historial d'ediciones de $1.", # Fuzzy
+La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina ta protexida. Nun se permite la edición.',
 	'wikibase-blockeduser-tooltip-message' => "Nun tien permisu pa editar porque'l so nome d'usuariu o direición IP tan bloquiaos.",
 	'wikibase-move-error' => 'Nun pue treslladar les páxines que tan nel espaciu de nomes de datos, y nun pue treslladar páxines al mesmu.',
@@ -1600,6 +1600,9 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-item-summary-wbsetclaim-update-references' => "{{PLURAL:$4|Camudó una referencia|Camudaron $4 referencies}} {{PLURAL:$3|d'una afirmación|d'afirmaciones}}",
 	'wikibase-item-summary-wbsetclaim-update-rank' => "Camudó'l rangu {{PLURAL:$3|d'una afirmación|d'afirmaciones}}",
 	'wikibase-item-summary-clientsitelink-update' => 'Páxina treslladada de [$3] a [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Calificador amestáu|Calificadores amestaos}}',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Calificador camudáu|Calificadores camudaos}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Calificador desaniciáu|Calificadores desaniciaos}}',
 	'wikibase-property-summary-wbcreate-new' => 'Creada una propiedá nueva',
 	'wikibase-property-summary-wbeditentity-create' => 'Creada una propiedá nueva',
 	'wikibase-property-summary-wbeditentity-update' => 'Actualizada una propiedá nueva',
@@ -3581,7 +3584,7 @@ $messages['de'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht mehr anzeigen.',
 	'wikibase-entityselector-more' => 'mehr',
 	'wikibase-anonymouseditwarning' => 'Warnung: Du bist nicht angemeldet.
-Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespeichert.', # Fuzzy
+Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes gespeichert.',
 	'wikibase-restrictionedit-tooltip-message' => 'Diese Seite wurde geschützt, so dass Bearbeitungen nicht möglich sind.',
 	'wikibase-blockeduser-tooltip-message' => 'Dein Benutzername oder deine IP-Adresse wurde gesperrt, sodass du keine Berechtigung zum Bearbeiten hast.',
 	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
@@ -3747,6 +3750,9 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Eine Referenz|$4 Referenzen}} {{PLURAL:$3|einer Aussage|von Aussagen}} geändert',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Den Rang der {{PLURAL:$3|Aussage|Aussagen}} geändert',
 	'wikibase-item-summary-clientsitelink-update' => 'Seite verschoben von [$3] nach [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Bedingung|Bedingungen}} hinzugefügt',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Bedingung|Bedingungen}} geändert',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Bedingung|Bedingungen}} entfernt',
 	'wikibase-property-summary-wbcreate-new' => 'Eine neue Eigenschaft erstellt',
 	'wikibase-property-summary-wbeditentity-create' => 'Eine neue Eigenschaft erstellt',
 	'wikibase-property-summary-wbeditentity-update' => 'Eine Eigenschaft aktualisiert',
@@ -4799,7 +4805,7 @@ $messages['et'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Nõustun tegema edasisi muudatusi kooskõlas nende tingimustega. Ära seda sõnumit enam näita.',
 	'wikibase-entityselector-more' => 'veel',
 	'wikibase-anonymouseditwarning' => 'Hoiatus: Sa pole sisse loginud.
-Sinu IP-aadress talletatakse üksuse $1 ajaloos.', # Fuzzy
+Sinu IP-aadress talletatakse olemi ajaloos.',
 	'wikibase-restrictionedit-tooltip-message' => 'See lehekülg on kaitstud. Redigeerimine pole lubatud.',
 	'wikibase-blockeduser-tooltip-message' => 'Sul pole redigeerimisluba, sest su kasutajanimi või IP-aadress on blokeeritud.',
 	'wikibase-move-error' => 'Andmete nimeruumis olevaid lehekülgi ei saa teisaldada. Samuti ei saa sinna mujalt lehekülgi teisaldada.',
@@ -5439,7 +5445,7 @@ $messages['fi'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.',
 	'wikibase-entityselector-more' => 'lisää',
 	'wikibase-anonymouseditwarning' => 'Varoitus: Et ole kirjautunut sisään.
-IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.', # Fuzzy
+IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'wikibase-restrictionedit-tooltip-message' => 'Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.',
 	'wikibase-blockeduser-tooltip-message' => 'Sinulla ei ole lupaa muokata, koska käyttäjänimesi tai IP-osoitteesi on estetty.',
 	'wikibase-move-error' => 'Et voi siirtää sivuja, jotka ovat data-nimiavaruudessa, etkä voi siirtää sivuja siihen.',
@@ -5745,7 +5751,7 @@ $messages['fr'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.',
 	'wikibase-entityselector-more' => 'plus',
 	'wikibase-anonymouseditwarning' => 'Attention: Vous n’êtes pas connecté.
-Votre adresse IP sera enregistrée dans l’historique des modifications de ce $1.', # Fuzzy
+Votre adresse IP sera enregistrée dans l’historique des modifications de cette entité.',
 	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée. L'édition n'est pas autorisée.",
 	'wikibase-blockeduser-tooltip-message' => "Vous n'êtes pas autorisé à modifier, car votre nom d'utilisateur ou adresse IP a été bloqué.",
 	'wikibase-move-error' => "Vous ne pouvez pas déplacer des pages situées dans l'espace des données, ni déplacer des pages vers cet espace.",
@@ -5914,6 +5920,9 @@ ffirmation ajoutée}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Une référence|$4 références}} d’{{PLURAL:$3|affirmation|affirmations}} {{PLURAL:$4|modifiée|modifiées}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Rang {{PLURAL:$3|de l’affirmation|des affirmations}} modifié',
 	'wikibase-item-summary-clientsitelink-update' => 'Page déplacée de [$3] à [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|qualifieur ajouté|qualifieurs ajoutés}}',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|qualifieur modifié|qualifieurs modifiés}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|qualifieur supprimé|qualifieurs supprimés}}',
 	'wikibase-property-summary-wbcreate-new' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-create' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-update' => 'Mise à jour d’une propriété',
@@ -8700,7 +8709,7 @@ $messages['ja'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => '今後の編集についてこれらの規約に同意します。次回からこのメッセージを表示しないでください。',
 	'wikibase-entityselector-more' => '続き',
 	'wikibase-anonymouseditwarning' => '警告: ログインしていません。
-編集すると、IPアドレスがこの$1の編集履歴に記録されます。', # Fuzzy
+編集すると、IP アドレスがこのエンティティの編集履歴に記録されます。',
 	'wikibase-restrictionedit-tooltip-message' => 'このページは保護されています。編集は許可されていません。',
 	'wikibase-blockeduser-tooltip-message' => '利用者名または IP アドレスがブロックされているため、あなたには編集する権限がありません。',
 	'wikibase-move-error' => 'データ名前空間内のページは移動できず、データ名前空間内にページを移動させることもできません。',
@@ -8867,6 +8876,9 @@ $messages['ja'] = array(
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$3|主張}}に関する{{PLURAL:$4|$4個の情報源}}を変更',
 	'wikibase-item-summary-wbsetclaim-update-rank' => '{{PLURAL:$3|主張}}の等級を変更',
 	'wikibase-item-summary-clientsitelink-update' => 'ページ [$3] を [$4] に移動',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|修飾子}}を追加',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|修飾子}}を変更',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|修飾子}}を除去',
 	'wikibase-property-summary-wbcreate-new' => 'プロパティを新規作成',
 	'wikibase-property-summary-wbeditentity-create' => 'プロパティを新規作成',
 	'wikibase-property-summary-wbeditentity-update' => 'プロパティを更新',
@@ -8900,8 +8912,8 @@ $messages['ja'] = array(
 * globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
-* value – 文字列の非明示部分（単位接頭辞の対応付けは不明瞭です）
-* unit – 文字列の非明示部分（標準化団体への対応付けは不明瞭です）
+* value – 文字列の非明示部分 (単位接頭辞の対応付けは不明瞭です)
+* unit – 文字列の非明示部分 (標準化団体への対応付けは不明瞭です)
 * accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値',
 	'wikibase-listdatatypes-monolingual-text-head' => '単一言語のテキスト',
 	'wikibase-listdatatypes-monolingual-text-body' => '他の言語に翻訳されない文字列のリテラルデータ。この種の文字列は一度定義されると、すべての言語にわたって再利用されます。典型的な用途としては、地元の言語で表記した地名、何らかの識別子、化学式、ラテン語の学名などがあります。
@@ -9350,7 +9362,7 @@ $messages['ko'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => '이후 편집에 이 약관에 동의합니다. 이 메시지를 다시 보이지 마세요.',
 	'wikibase-entityselector-more' => '더 보기',
 	'wikibase-anonymouseditwarning' => '경고: 로그인하고 있지 않습니다.
-IP 주소가 $1의 편집 역사에 남게 됩니다.', # Fuzzy
+IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-restrictionedit-tooltip-message' => '이 문서는 보호되어 있어, 편집을 허용하지 않습니다.',
 	'wikibase-blockeduser-tooltip-message' => '당신의 사용자 이름이나 IP 주소가 차단되어 있기 때문에 편집할 권한이 없습니다.',
 	'wikibase-move-error' => '데이터 이름공간에 있는 문서를 이동할 수 없으며 그것으로 문서를 이동할 수 없습니다.',
@@ -9517,6 +9529,9 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.', # Fuzzy
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$3|주장}}의 {{PLURAL:$4|참고 한 개|참고 $4개}}을 바꿈',
 	'wikibase-item-summary-wbsetclaim-update-rank' => '{{PLURAL:$3|주장}}의 등급을 바꿈',
 	'wikibase-item-summary-clientsitelink-update' => '페이지를 [$3]에서 [$4](으)로 옮김',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|한정어}}를 추가함',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|한정어}}를 바꿈',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|한정어}}를 제거함',
 	'wikibase-property-summary-wbcreate-new' => '새 속성을 바꿈',
 	'wikibase-property-summary-wbeditentity-create' => '새 속성을 만듦',
 	'wikibase-property-summary-wbeditentity-update' => '속성을 업데이트함',
@@ -10331,7 +10346,7 @@ $messages['mk'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Ги прифаќам овие услови што ќе важат за идните уредувања. Повеќе не ја прикажувај поракава.',
 	'wikibase-entityselector-more' => 'уште',
 	'wikibase-anonymouseditwarning' => 'Предупредување: Не сте најавени.
-Вашата IP-адреса ќе биде заведена во историјата на оваа $1.', # Fuzzy
+Вашата IP-адреса ќе биде заведена во историјата на оваа единица.',
 	'wikibase-restrictionedit-tooltip-message' => 'Страницава е заштитена. Уредувањето не е дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Немате дозвола за уредување бидејќи вашето корисничко име или IP-адреса е блокирано.',
 	'wikibase-move-error' => 'Не можете да преместувате страници што се наоѓаат во податочниот именски простор. Исто така не можете да преместувате други страници во него.',
@@ -10499,6 +10514,9 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Изменет еден|Изменети $4}} {{PLURAL:$4|навод|наводи}} за {{PLURAL:$3|тврдење|тврдења}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Сменет рангот на {{PLURAL:$3|тврдење|тврдења}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Страницата е преместена од [$3] на [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Додадена определница|Додадени определници}}',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Изменета определница|Изменети определници}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Отстранета определница|Отстранети определници}}',
 	'wikibase-property-summary-wbcreate-new' => 'Создадено ново својство',
 	'wikibase-property-summary-wbeditentity-create' => 'Создадено ново својство',
 	'wikibase-property-summary-wbeditentity-update' => 'Изменето својство',
@@ -10744,6 +10762,7 @@ $messages['ml'] = array(
 );
 
 /** Marathi (मराठी)
+ * @author V.narsikar
  * @author Ydyashad
  * @author संतोष दहिवळ
  */
@@ -10752,6 +10771,7 @@ $messages['mr'] = array(
 	'wikibase-terms' => 'इतर भाषांत',
 	'wikibase-aliases-label' => 'या नावानेही ओळखले जाते:',
 	'wikibase-entityselector-more' => 'आणखी',
+	'wikibase-anonymouseditwarning' => 'ईशारा:आपण सनोंद-प्रवेशित नाहीत.आपला अंकपत्ता याच्या संपादनाच्या इतिहासात नोंदला जाईल.',
 	'special-itembytitle' => 'शीर्षकानुसार कलम',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'भाषा आणि लेबलनुसार कलम शोध',
 	'wikibase-itemdisambiguation-lookup-language' => 'भाषा:',
@@ -10773,6 +10793,8 @@ $messages['mr'] = array(
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2] चे वर्णन काढले',
 	'wikibase-item-summary-wbsetsitelink-add' => '[$2] ला दुवा जोडला', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] चा दुवा काढला',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|क्वालिफायर|क्वालिफायर्स}} बदलविले',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|क्वालिफायर|क्वालिफायर्स}} हटविले',
 	'wikibase-listdatatypes-wikibase-item-head' => 'कलम',
 	'right-alias-add' => 'टोपण नाव घाला',
 	'right-alias-remove' => 'टोपण नाव काढा',

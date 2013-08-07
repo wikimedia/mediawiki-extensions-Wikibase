@@ -2064,6 +2064,7 @@ $messages['ml'] = array(
 );
 
 /** Marathi (मराठी)
+ * @author V.narsikar
  * @author संतोष दहिवळ
  */
 $messages['mr'] = array(
@@ -2072,6 +2073,7 @@ $messages['mr'] = array(
 	'wikibase-diffview-description' => 'वर्णन',
 	'wikibase-diffview-link' => 'दुवे',
 	'wikibase-sitelinks-sitename-columnheading' => 'भाषा',
+	'wikibase-validator-bad-value' => 'अवैध किंमत:$1',
 	'datatypes-type-wikibase-item' => 'कलम',
 );
 
