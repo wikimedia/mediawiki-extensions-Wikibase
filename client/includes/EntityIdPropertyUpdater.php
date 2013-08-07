@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use ParserOutput;
 use Title;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
@@ -69,8 +70,8 @@ class EntityIdPropertyUpdater {
 		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
 
 		if ( $itemId instanceof EntityId ) {
-			// @todo get prefixed id in nicer way, or maybe we want it to be numeric id
-			$out->setProperty( 'wikibase_item', $itemId->getPrefixedId() );
+			$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+			$out->setProperty( 'wikibase_item', $idFormatter->format( $itemId ) );
 		} else {
 			// unset property, if it was set
 			$this->unsetProperty( $out, 'wikibase_item' );
