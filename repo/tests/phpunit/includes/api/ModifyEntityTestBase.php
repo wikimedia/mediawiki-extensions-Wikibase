@@ -55,7 +55,6 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	protected static $userights;
 
 	protected static $testEntityIds = array();
-	protected static $hasSites;
 
 	protected static $entityInput = null; // entities in input format, using handles as keys
 	protected static $entityOutput = array(); // entities in output format, using handles as keys
@@ -63,10 +62,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		if( !self::$hasSites ){
-			\TestSites::insertIntoDb();
-			self::$hasSites = true;
-		}
+		\TestSites::insertIntoDb();
 
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
