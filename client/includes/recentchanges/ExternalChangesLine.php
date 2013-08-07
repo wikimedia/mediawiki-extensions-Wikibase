@@ -394,10 +394,12 @@ class ExternalChangesLine {
 				$entityId = new EntityId( $entityType, (int)$id );
 			}
 			else {
-				$entityId = EntityId::newFromPrefixedId( $id );
+				$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+				$entityId = $idParser->parse( $id );
 			}
 
-			$titleText = strtoupper( $entityId->getPrefixedId() );
+			$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+			$titleText = strtoupper( $idFormatter->format( $entityId ) );
 
 			if ( $includeNamespace ) {
 				$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
