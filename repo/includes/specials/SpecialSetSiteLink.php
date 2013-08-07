@@ -4,6 +4,8 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
 use Wikibase\SiteLink;
 use Wikibase\Utils;
+use Wikibase\ChangeOpSiteLink;
+use Wikibase\ChangeOpException;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -117,7 +119,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return false;
 		}
 
-		$status = $this->setSiteLink( $this->entityContent, $this->site, $this->page, $summary );
+		try {
+			$status = $this->setSiteLink( $this->entityContent, $this->site, $this->page, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->showErrorHTML( $e->getMessage() );
+			return false;
+		}
 
 		if ( !$status->isGood() ) {
 			$this->showErrorHTML( $status->getHTML() );
@@ -248,11 +255,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param EntityContent $entityContent
 	 * @param string $siteId
 	 * @param string $pageName
-	 * @param string &$summary The summary for this edit will be saved here.
 	 *
-	 * @return Status
+	 * @return Summary
 	 */
-	protected function setSiteLink( $entityContent, $siteId, $pageName, &$summary ) {
+	protected function setSiteLink( EntityContent $entityContent, $siteId, $pageName, &$summary ) {
 		$status = \Status::newGood();
 		$site = \Sites::singleton()->getSite( $siteId );
 
@@ -261,37 +267,28 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return $status;
 		}
 
-		/**
-		 * @var Item $item
-		 */
 		$item = $entityContent->getItem();
+		$summary = $this->getSummary( 'wbsetsitelink' );
 
-		// Empty page means remove site link
 		if ( $pageName === '' ) {
-			try {
-				$item->getSimpleSiteLink( $siteId );
-			}
-			catch( \OutOfBoundsException $ex ) {
+			$pageName = null;
+
+			if ( !$item->hasLinkToSite( $siteId ) ) {
 				$status->fatal( 'wikibase-setsitelink-remove-failed' );
 				return $status;
 			}
-			$item->removeSiteLink( $siteId );
-			$i18n = 'wbsetsitelink-remove';
-		}
-		else {
-			// Try to normalize the page name
+		} else {
 			$pageName = $site->normalizePageName( $pageName );
+
 			if ( $pageName === false ) {
 				$status->fatal( 'wikibase-error-ui-no-external-page' );
 				return $status;
 			}
-			$siteLink = new SimpleSiteLink( $siteId, $pageName );
-			$item->addSimpleSiteLink( $siteLink );
-			$i18n = 'wbsetsitelink-set';
 		}
 
-		// $summary is passed by reference ( &$summary )
-		$summary = $this->getSummary( $siteId, $pageName, $i18n );
+		$changeOp = new ChangeOpSiteLink( $siteId, $pageName );
+
+		$changeOp->apply( $item, $summary );
 
 		return $status;
 	}

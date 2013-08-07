@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Autocomment;
+use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
@@ -84,7 +85,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			// TODO: need conflict detection??
 			$editEntity = new \Wikibase\EditEntity( $this->entityContent, $this->getUser(), false, $this->getContext() );
 			$editEntity->attemptSave(
-				$summary,
+				$summary->toString(),
 				EDIT_UPDATE,
 				$this->getRequest()->getVal( 'wpEditToken' )
 			);
@@ -248,33 +249,12 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string|boolean The summary or false
+	 * @return Summary|boolean The summary or false
 	 */
 	abstract protected function modifyEntity();
 
-	/**
-	 * Returning the summary for editing.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $key
-	 * @param string $value
-	 * @param string $i18n The i18n key of the summary
-	 *
-	 * @return string The summary
-	 */
-	protected function getSummary( $key, $value, $i18n ) {
-		list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
-			array( $value ),
-			$this->getLanguage()
-		);
-
-		$comment = Autocomment::formatAutoComment(
-			$i18n,
-			array( $counts, $key )
-		);
-
-		return AutoComment::formatTotalSummary( $comment, $summary, $lang );
+	protected function getSummary( $module = null ) {
+		return new Summary( $module );
 	}
 
 	/**

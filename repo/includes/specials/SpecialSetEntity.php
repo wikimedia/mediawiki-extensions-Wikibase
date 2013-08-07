@@ -1,6 +1,8 @@
 <?php
 
 use Wikibase\Autocomment;
+use Wikibase\Summary;
+use Wikibase\ChangeOpException;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.
@@ -96,7 +98,7 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string|boolean The summary or false
+	 * @return Summary|bool
 	 */
 	protected function modifyEntity() {
 		$request = $this->getRequest();
@@ -119,13 +121,18 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 			return false;
 		}
 
-		$status = $this->setValue( $this->entityContent, $this->language, $this->value, $summary );
-
+		try {
+			$summary = $this->setValue( $this->entityContent, $this->language, $this->value );
+		} catch ( ChangeOpException $e ) {
+			$this->showErrorHTML( $e->getMessage() );
+			return false;
+		}
+/*
 		if ( !$status->isGood() ) {
 			$this->showErrorHTML( $status->getHTML() );
 			return false;
 		}
-
+*/
 		return $summary;
 	}
 
@@ -249,10 +256,9 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 	 * @param \Wikibase\EntityContent $entityContent
 	 * @param string $language
 	 * @param string $value
-	 * @param string &$summary The summary for this edit will be saved here.
 	 *
-	 * @return Status
+	 * @return Summary
 	 */
-	abstract protected function setValue( $entityContent, $language, $value, &$summary );
+	abstract protected function setValue( $entityContent, $language, $value );
 
 }
