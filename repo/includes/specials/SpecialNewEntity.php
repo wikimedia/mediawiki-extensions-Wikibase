@@ -1,7 +1,7 @@
 <?php
 
 use Wikibase\EntityContent;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
@@ -95,17 +95,12 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 				$status = $this->modifyEntity( $entityContent );
 
 				if ( $status->isGood() ) {
-					list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
-						array( $this->label, $this->description ),
-						$this->getLanguage()
-					);
-					$comment = Autocomment::formatAutoComment(
-						'wbeditentity-create',
-						array( $counts, $this->getLanguage()->getCode() )
-					);
+					$summary = new Summary( 'wbeditentity', 'create' );
+					$summary->setLanguage( $this->getLanguage()->getCode() );
+					$summary->addAutoSummaryArgs( array( $this->label, $this->description ) );
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
 					$editEntity->attemptSave(
-						AutoComment::formatTotalSummary( $comment, $summary, $lang ),
+						$summary->toString(),
 						EDIT_AUTOSUMMARY|EDIT_NEW,
 						$this->getRequest()->getVal( 'token' )
 					);
