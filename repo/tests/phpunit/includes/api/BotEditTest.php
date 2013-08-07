@@ -100,14 +100,14 @@ class BotEditTest extends ModifyEntityTestBase {
 	 * @depends testTokensAndRights
 	 */
 	function testSetItemTop() {
-		$request = array(
+		$req = array(
 			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => '{}',
 			'new' => 'item',
 		);
 
-		$second = $this->doApiRequestWithToken( $request );
+		$second = $this->doApiRequestWithToken( $req, null, self::$users['wbbot']->user );
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
@@ -126,7 +126,7 @@ class BotEditTest extends ModifyEntityTestBase {
 	function testCreateItem( $handle, $bot, $new, $data ) {
 		$myid = null;
 
-		$request = array(
+		$req = array(
 			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => $data,
@@ -134,15 +134,15 @@ class BotEditTest extends ModifyEntityTestBase {
 
 		if ( !$new ) {
 			$myid = $this->getEntityId( $handle );
-			$request['id'] = $myid;
+			$req['id'] = $myid;
 		} else {
-			$request['new'] = 'item';
+			$req['new'] = 'item';
 		}
 		if ( $bot ) {
-			$request['bot'] = true;
+			$req['bot'] = true;
 		}
 
-		$second = $this->doApiRequestWithToken( $request );
+		$second = $this->doApiRequestWithToken( $req, null ,self::$users['wbbot']->user );
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
@@ -163,14 +163,14 @@ class BotEditTest extends ModifyEntityTestBase {
 			$myid = $second[0]['entity']['id'];
 		}
 
-		$request = array(
+		$req = array(
 				'action' => 'query',
 				'list' => 'recentchanges',
 				'rcprop' => 'title|flags',
 				'rctoponly' => '1',
 				'rclimit' => 50, // hope that no more than 50 edits where made in the last second
 		);
-		$third = $this->doApiRequest( $request, null, false, self::$users['wbbot']->user );
+		$third = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
 
 		$this->assertArrayHasKey( 'query', $third[0],
 			"Must have a 'query' key in the result from the API" );
