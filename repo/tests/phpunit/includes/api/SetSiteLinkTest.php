@@ -46,7 +46,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class SetSiteLinkTest extends ModifyEntityTestBase {
+class SetSiteLinkTest extends WikibaseApiTestCase {
 
 	public function testSetLiteLinkWithNoId( ) {
 		$request = array(

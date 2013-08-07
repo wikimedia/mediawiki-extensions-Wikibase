@@ -53,7 +53,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group large
  */
-class EditEntityTest extends ModifyEntityTestBase {
+class EditEntityTest extends WikibaseApiTestCase {
 
 	static public $id = null;
 

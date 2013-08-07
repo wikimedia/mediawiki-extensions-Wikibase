@@ -45,7 +45,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class EditPageTest extends ModifyEntityTestBase {
+class EditPageTest extends WikibaseApiTestCase {
 
 	/**
 	 * @group API

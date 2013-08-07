@@ -52,177 +52,24 @@ namespace Wikibase\Test\Api;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class SetDescriptionTest extends LangAttributeBase {
-
-	private static $testAction = 'wbsetdescription';
-	private static $testId;
+class SetDescriptionTest extends LangAttributeTestCase {
 
 	public function setUp() {
+		self::$testAction = 'wbsetdescription';
 		parent::setUp();
-		if( !isset( self::$testId ) ){
-			self::$testId = $this->getTestEntityId();
-		}
-	}
-
-	public static function provideData() {
-		return array(
-			// p => params, e => expected
-
-			// -- Test valid sequence -----------------------------
-			array( //0
-				'p' => array( 'language' => 'en', 'value' => '' ),
-				'e' => array( 'warning' => 'edit-no-change' ) ),
-			array( //1
-				'p' => array( 'language' => 'en', 'value' => 'Description' ),
-				'e' => array( 'value' => array( 'en' => 'Description' ) ) ),
-			array( //2
-				'p' => array( 'language' => 'en', 'value' => 'Description' ),
-				'e' => array( 'value' => array( 'en' => 'Description' ), 'warning' => 'edit-no-change' ) ),
-			array( //3
-				'p' => array( 'language' => 'en', 'value' => 'Another Description', 'summary' => 'Test summary!' ),
-				'e' => array( 'value' => array( 'en' => 'Another Description' ) ) ),
-			array( //4
-				'p' => array( 'language' => 'en', 'value' => 'Different Description' ),
-				'e' => array( 'value' => array( 'en' => 'Different Description' ) ) ),
-			array( //5
-				'p' => array( 'language' => 'bat-smg', 'value' => 'Vėsata Description' ),
-				'e' => array( 'value' => array( 'bat-smg' => 'Vėsata Description','en' => 'Different Description' ) ) ),
-			array( //6
-				'p' => array( 'language' => 'en', 'value' => '' ),
-				'e' => array( 'value' => array( 'bat-smg' => 'Vėsata Description' ) ) ),
-			array( //7
-				'p' => array( 'language' => 'bat-smg', 'value' => '' ),
-				'e' => array( ) ),
-		);
 	}
 
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetDescription( $params, $expected ){
-
-		// -- set any defaults ------------------------------------
-		$params['action'] = self::$testAction;
-		if( !array_key_exists( 'id', $params ) ){
-			$params['id'] = self::$testId;
-		}
-		if( !array_key_exists( 'value', $expected ) ){
-			$expected['value'] = array();
-		}
-
-		// -- do the request --------------------------------------------------
-		list( $result,, ) = $this->doApiRequestWithToken( $params );
-
-		// -- check the result ------------------------------------------------
-		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
-		$this->assertResultHasEntityType( $result );
-		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
-
-		// -- check the result only has our changed data (if any)  ------------
-		$this->assertEquals( 1, count( $result['entity']['descriptions'] ), "Entity return contained more than a single language" );
-		$this->assertArrayHasKey( $params['language'], $result['entity']['descriptions'], "Entity doesn't return expected language");
-		$this->assertEquals( $params['language'], $result['entity']['descriptions'][ $params['language'] ]['language'], "Returned incorrect language" );
-		if( array_key_exists( $params['language'], $expected['value'] ) ){
-			$this->assertEquals( $expected['value'][ $params['language'] ], $result['entity']['descriptions'][$params['language']]['value'] , "Returned incorrect description" );
-		} else if( empty( $value ) ){
-			$this->assertArrayHasKey( 'removed', $result['entity']['descriptions'][ $params['language'] ], "Entity doesn't return expected 'removed' marker");
-		}
-
-		// -- check any warnings ----------------------------------------------
-		if( array_key_exists( 'warning', $expected ) ){
-			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
-			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
-			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
-		}
-
-		// -- check item in database -------------------------------------------
-		$dbEntity = $this->loadEntity( self::$testId );
-		if( count( $expected['value'] ) ){
-			$this->assertArrayHasKey( 'descriptions', $dbEntity );
-			$dbDescriptions = self::flattenArray( $dbEntity['descriptions'], 'language', 'value', true );
-			foreach( $expected['value'] as $valueLanguage => $value ){
-				$this->assertArrayHasKey( $valueLanguage, $dbDescriptions );
-				$this->assertEquals( $value, $dbDescriptions[$valueLanguage][0] );
-			}
-		} else {
-			$this->assertArrayNotHasKey( 'descriptions', $dbEntity );
-		}
-
-		// -- check the edit summary --------------------------------------------
-		if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
-			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
-			if( array_key_exists( 'summary', $params) ){
-				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
-			}
-		}
-	}
-
-	public static function provideExceptionData() {
-		return array(
-			// p => params, e => expected
-
-			// -- Test Exceptions -----------------------------
-			array( //0
-				'p' => array( 'language' => '', 'value' => '' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
-			array( //1
-				'p' => array( 'language' => 'nl', 'value' => self::makeOverlyLongString() ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
-			array( //2
-				'p' => array( 'language' => 'pt', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
-			array( //3
-				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id', 'message' => 'No entity found' ) ) ),
-			array( //4
-				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site', 'message' => "Unrecognized value for parameter 'site'" ) ) ),
-			array( //5
-				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-link', 'message' => 'No entity found matching site link' ) ) ),
-			array( //6
-				'p' => array( 'title' => 'Blub', 'language' => 'en', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
-			array( //7
-				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
-		);
+	public function testSetLabel( $params, $expected ){
+		self::doTestSetLangAttribute( 'descriptions' ,$params, $expected );
 	}
 
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetDescriptionExceptions( $params, $expected ){
-
-		// -- set any defaults ------------------------------------
-		$params['action'] = self::$testAction;
-		if( !array_key_exists( 'id', $params )  && !array_key_exists( 'site', $params ) && !array_key_exists( 'title', $params ) ){
-			$params['id'] = self::$testId;
-		}
-
-		// -- catch and check expected exceptions ---------------------
-		try{
-			if( $expected['exception']['code'] == 'badtoken' ){
-				$this->doApiRequest( $params );
-			} else {
-				$this->doApiRequestWithToken( $params );
-			}
-			$this->fail( "Failed to throw exception, {$expected['exception']['type']} " );
-
-		} catch( \Exception $exception ){
-
-			/** @var $exception \UsageException */ // trick IDEs into not showing errors
-			if( array_key_exists( 'type', $expected['exception'] ) ){
-				$this->assertInstanceOf( $expected['exception']['type'], $exception );
-			}
-
-			if( array_key_exists( 'code', $expected['exception'] ) ){
-				$this->assertEquals( $expected['exception']['code'], $exception->getCodeString() );
-			}
-
-			if( array_key_exists( 'message', $expected['exception'] ) ){
-				$this->assertContains( $expected['exception']['message'], $exception->getMessage() );
-			}
-		}
+	public function testSetLabelExceptions( $params, $expected ){
+		self::doTestSetLangAttributeExceptions( $params, $expected );
 	}
 }

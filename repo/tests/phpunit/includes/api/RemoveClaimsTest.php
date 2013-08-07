@@ -40,7 +40,7 @@ use Wikibase\Claim;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RemoveClaimsTest extends ModifyEntityTestBase {
+class RemoveClaimsTest extends WikibaseApiTestCase {
 
 	/**
 	 * @param Entity $entity

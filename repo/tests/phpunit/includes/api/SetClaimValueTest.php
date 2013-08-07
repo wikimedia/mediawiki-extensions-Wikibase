@@ -41,7 +41,7 @@ use Wikibase\EntityId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SetClaimValueTest extends ModifyEntityTestBase {
+class SetClaimValueTest extends WikibaseApiTestCase {
 
 	/**
 	 * @param Entity $entity
