@@ -60,6 +60,8 @@ class PermissionsTest extends ModifyEntityTestBase {
 
 		$this->permissions = $wgGroupPermissions;
 		$this->old_user = $wgUser;
+
+		\TestSites::insertIntoDb();
 	}
 
 	function tearDown() {
