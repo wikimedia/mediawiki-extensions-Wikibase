@@ -35,6 +35,7 @@ notifications:
   email:
     recipients:
       - jeroendedauw@gmail.com
+      - abraham.taherivand@wikimedia.de
     on_success: change
     on_failure: always
   irc:
