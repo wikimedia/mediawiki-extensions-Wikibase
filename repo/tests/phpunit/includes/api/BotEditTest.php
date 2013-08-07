@@ -61,18 +61,16 @@ class BotEditTest extends ModifyEntityTestBase {
 	protected static $baseOfItemIds = 1;
 
 	public function setUp() {
+		global $wgUser;
 		parent::setUp();
 
-		self::$users['wbbot'] = new TestUser(
+		ApiTestCase::$users['wbbot'] = new TestUser(
 			'Apitestbot',
 			'Api Test Bot',
 			'api_test_bot@example.com',
 			array( 'bot' )
 		);
-
-		$this->setMwGlobals( array(
-			'wgUser' => self::$users['wbbot']->user,
-		) );
+		$wgUser = self::$users['wbbot']->user;
 
 		$this->login( 'wbbot' );
 	}
