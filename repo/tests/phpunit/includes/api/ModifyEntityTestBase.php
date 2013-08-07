@@ -59,6 +59,12 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 	protected static $loginUser = null;
 
+	protected $setUpComplete = false;
+
+	protected function isSetUp() {
+		return $this->setUpComplete;
+	}
+
 	public function setUp() {
 		parent::setUp();
 
@@ -82,6 +88,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		$this->login();
 
 		self::initEntities();
+		$this->setUpComplete = true;
 	}
 
 	/**
