@@ -57,29 +57,39 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	protected static $entityInput = null; // entities in input format, using handles as keys
 	protected static $entityOutput = array(); // entities in output format, using handles as keys
 
+	protected static $loginSession = null;
 	protected static $loginUser = null;
+	protected static $token = null;
 
 	public function setUp() {
+		global $wgUser;
 		parent::setUp();
 
-		\TestSites::insertIntoDb();
+		static $hasSites = false;
+
+		if ( !$hasSites ) {
+			\TestSites::insertIntoDb();
+			$hasSites = true;
+		}
 
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 
-		self::$users['wbeditor'] = new TestUser(
+		ApiTestCase::$users['wbeditor'] = new TestUser(
 			'Apitesteditor',
 			'Api Test Editor',
 			'api_test_editor@example.com',
 			array( 'wbeditor' )
 		);
 
-		$this->setMwGlobals( array(
-			'wgUser' => self::$users['wbeditor']->user,
-		) );
+		$wgUser = self::$users['wbeditor']->user;
 
 		$this->login();
+
+		//TODO: preserve session and token between calls?!
+		self::$loginSession = false;
+		self::$token = false;
 
 		self::initEntities();
 	}
@@ -94,8 +104,9 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		}
 
 		self::$entityInput = array();
+		$data = self::makeEntityData();
 
-		foreach ( self::makeEntityData() as $entity ) {
+		foreach ( $data as $entity ) {
 			self::$entityInput[ $entity['handle'] ] = $entity;
 		}
 	}
@@ -105,7 +116,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * This data is used in particular by createEntities().
 	 * Note that test Entities are identified by "handles".
 	 */
-	protected static function makeEntityData() {
+	static function makeEntityData() {
 		return array(
 			array(
 				"handle" => "Empty",
@@ -251,9 +262,9 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * Performs a login, if necessary, and returns the resulting session.
 	 */
 	function login( $user = 'wbeditor' ) {
-		$data = self::doLogin( $user );
+		self::doLogin( $user );
 		self::$loginUser = self::$users[ $user ];
-		return $data;
+		return self::$loginSession;
 	}
 
 	/**
@@ -273,24 +284,42 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 			return;
 		}
 
-		foreach ( self::getEntityInput() as $entity ) {
+		self::initEntities();
+		$token = $this->getToken();
+
+		foreach ( self::$entityInput as $entity ) {
 			$handle = $entity['handle'];
-			$createdEntity = $this->setEntity( $entity );
+			$createdEntity = $this->setEntity( $entity, $token );
 
 			self::$entityOutput[ $handle ] = $createdEntity;
 		}
 	}
 
 	/**
+	 * Restores all well known entities test in the database to their original state.
+	 */
+	function resetEntities() {
+		$this->createEntities();
+		$token = $this->getToken();
+
+		foreach ( self::$entityInput as $handle => $entity ) {
+			$entity['id'] = $this->getEntityId( $handle );
+
+			$data = $this->setEntity( $entity, $token );
+
+			self::$entityOutput[ $handle ] = $data;
+		}
+	}
+
+	/**
 	 * Restores the entity with the given handle to its original state
-	 * @param $handle of entity to reset
-	 * @return mixed
 	 */
 	function resetEntity( $handle ) {
 		$entity = $this->getEntityInput( $handle );
 		$entity['id'] = $this->getEntityId( $handle );
 
-		$data = $this->setEntity( $entity );
+		$token = $this->getToken();
+		$data = $this->setEntity( $entity, $token );
 
 		self::$entityOutput[ $handle ] = $data;
 		return $data;
@@ -298,15 +327,13 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 	/**
 	 * Creates or updates a single entity in the database
-	 * @param $data array|string data to set as array of json string
-	 * @return mixed
-	 * @throws \MWException
 	 */
-	function setEntity( $data ) {
+	function setEntity( $data, $token ) {
 		$params = array(
 			'action' => 'wbeditentity',
 			'clear' => true,
 			'format' => 'json', // make sure IDs are used as keys.
+			'token' => $token,
 		);
 
 		if ( !is_string($data) ) {
@@ -326,7 +353,12 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 		$params['data'] = $data;
 
-		list( $res,, ) = $this->doApiRequestWithToken( $params );
+		list( $res,, ) = $this->doApiRequest(
+			$params,
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
 
 		if ( !isset( $res['success'] ) || !isset( $res['entity'] ) ) {
 			throw new \MWException( "failed to create entity" );
@@ -338,17 +370,12 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	/**
 	 * Returns the entity for the given handle, in input format.
 	 */
-	static function getEntityInput( $handle = null ) {
-		self::initEntities();
-
-		if( $handle === null ){
-			return self::$entityInput;
-		}
-
+	static function getEntityInput( $handle ) {
 		if ( !is_string( $handle ) ) {
 			trigger_error( "bad handle: $handle", E_USER_ERROR );
 		}
 
+		self::initEntities();
 		return self::$entityInput[ $handle ];
 	}
 
@@ -374,9 +401,11 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * data provider for passing each entity handle to the test function.
 	 */
 	function provideEntityHandles() {
+		self::initEntities();
+
 		$handles = array();
 
-		foreach ( self::getEntityInput() as $handle => $entity ) {
+		foreach ( self::$entityInput as $handle => $entity ) {
 			$handles[] = array( $handle );
 		}
 
@@ -387,7 +416,9 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * returns the list handles for the well known test entities.
 	 */
 	static function getEntityHandles() {
-		return array_keys( self::getEntityInput() );
+		self::initEntities();
+
+		return array_keys( self::$entityInput );
 	}
 
 	/**
