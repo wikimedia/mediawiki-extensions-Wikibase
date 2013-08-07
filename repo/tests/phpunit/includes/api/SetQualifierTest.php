@@ -46,7 +46,7 @@ use Wikibase\EntityId;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class SetQualifierTest extends ModifyEntityTestBase {
+class SetQualifierTest extends WikibaseApiTestCase {
 
 	/**
 	 * @return Snak[]

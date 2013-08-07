@@ -56,7 +56,7 @@ use Wikibase\NamespaceUtils;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class BotEditTest extends ModifyEntityTestBase {
+class BotEditTest extends WikibaseApiTestCase {
 
 	protected static $baseOfItemIds = 1;
 

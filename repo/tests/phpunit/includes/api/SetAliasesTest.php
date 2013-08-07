@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
-//use Wikibase\Test\ModifyEntityTestBase;
+//use Wikibase\Test\WikibaseApiTestCase;
 
 /**
  * Tests for the ApiSetAliases API module.
@@ -59,7 +59,7 @@ use ApiTestCase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetAliasesTest extends ModifyEntityTestBase {
+class SetAliasesTest extends WikibaseApiTestCase {
 
 	public function paramProvider() {
 		return array(
@@ -133,7 +133,7 @@ class SetAliasesTest extends ModifyEntityTestBase {
 		$id = $this->getEntityId( $handle );
 		$langCode = 'en';
 		$op = 'add';
-		$value = LangAttributeBase::makeOverlyLongString();
+		$value = LangAttributeTestHelper::makeOverlyLongString();
 		$exception = 'UsageException';
 
 		// update the item ----------------------------------------------------------------

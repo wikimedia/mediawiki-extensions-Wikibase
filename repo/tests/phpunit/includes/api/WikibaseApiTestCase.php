@@ -48,7 +48,7 @@ use Wikibase\Settings;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class ModifyEntityTestBase extends ApiTestCase {
+abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	protected static $usepost;
 	protected static $usetoken;
@@ -147,6 +147,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	/**
 	 * Initializes the static list of entity input structures, using data from makeEntityData().
 	 * Note that test entities are identified by "handles".
+	 * @deprecated
 	 */
 	protected static function initEntities() {
 		if ( self::$entityInput ) {
@@ -165,6 +166,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	 * Provides the entity data that is to be used as input for creating the test environment.
 	 * This data is used in particular by createEntities().
 	 * Note that test Entities are identified by "handles".
+	 * @deprecated
 	 */
 	static function makeEntityData() {
 		return array(
@@ -336,6 +338,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	/**
 	 * Initializes the test environment with the entities defined by makeEntityData() by creating these
 	 * entities in the database.
+	 * @deprecated
 	 */
 	function createEntities() {
 		if ( self::$entityOutput ) {
@@ -371,6 +374,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 	/**
 	 * Restores the entity with the given handle to its original state
+	 * @deprecated
 	 */
 	function resetEntity( $handle ) {
 		$entity = $this->getEntityInput( $handle );
@@ -385,6 +389,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 	/**
 	 * Creates or updates a single entity in the database
+	 * @deprecated
 	 */
 	function setEntity( $data, $token ) {
 		$params = array(
@@ -427,6 +432,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 	/**
 	 * Returns the entity for the given handle, in input format.
+	 * @deprecated
 	 */
 	static function getEntityInput( $handle ) {
 		if ( !is_string( $handle ) ) {
@@ -440,6 +446,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	/**
 	 * Returns the entity for the given handle, in output format.
 	 * Will initialize the database with test entities if necessary.
+	 * @deprecated
 	 */
 	function getEntityOutput( $handle ) {
 		$this->createEntities();
@@ -449,6 +456,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	/**
 	 * Returns the database id for the given entity handle.
 	 * Will initialize the database with test entities if necessary.
+	 * @deprecated
 	 */
 	function getEntityId( $handle ) {
 		$entity = $this->getEntityOutput( $handle );
@@ -472,6 +480,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 
 	/**
 	 * returns the list handles for the well known test entities.
+	 * @deprecated
 	 */
 	static function getEntityHandles() {
 		self::initEntities();

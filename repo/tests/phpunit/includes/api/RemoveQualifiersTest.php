@@ -40,7 +40,7 @@ use Wikibase\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RemoveQualifiersTest extends ModifyEntityTestBase {
+class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 	/**
 	 * @return Snak[]
