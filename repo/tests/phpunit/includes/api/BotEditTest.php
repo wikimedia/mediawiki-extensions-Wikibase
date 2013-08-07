@@ -74,7 +74,7 @@ class BotEditTest extends ModifyEntityTestBase {
 			'wgUser' => self::$users['wbbot']->user,
 		) );
 
-		$this->doLogin( 'wbbot' );
+		$this->login( 'wbbot' );
 	}
 
 	/**

@@ -57,6 +57,8 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 	protected static $entityInput = null; // entities in input format, using handles as keys
 	protected static $entityOutput = array(); // entities in output format, using handles as keys
 
+	protected static $loginUser = null;
+
 	public function setUp() {
 		parent::setUp();
 
@@ -77,7 +79,7 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 			'wgUser' => self::$users['wbeditor']->user,
 		) );
 
-		$this->doLogin();
+		$this->login();
 
 		self::initEntities();
 	}
@@ -245,12 +247,20 @@ abstract class ModifyEntityTestBase extends ApiTestCase {
 		);
 	}
 
-	function doLogin( $user = 'wbeditor' ) {
-		return parent::doLogin( $user );
+	/**
+	 * Performs a login, if necessary, and returns the resulting session.
+	 */
+	function login( $user = 'wbeditor' ) {
+		$data = self::doLogin( $user );
+		self::$loginUser = self::$users[ $user ];
+		return $data;
 	}
 
+	/**
+	 * Gets an entity edit token.
+	 */
 	function getToken( $type = 'edittoken' ) {
-		$tokens = self::getTokenList( null );
+		$tokens = self::getTokenList( self::$loginUser );
 		return $tokens[$type];
 	}
 
