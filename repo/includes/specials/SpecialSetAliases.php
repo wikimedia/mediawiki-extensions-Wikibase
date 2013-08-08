@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\ChangeOpAliases;
+
 /**
  * Special page for setting the aliases of a Wikibase entity.
  *
@@ -26,6 +28,7 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
+
 class SpecialSetAliases extends SpecialSetEntity {
 
 	/**
@@ -70,13 +73,19 @@ class SpecialSetAliases extends SpecialSetEntity {
 	 * @param \Wikibase\EntityContent $entityContent
 	 * @param string $language
 	 * @param string $value
-	 * @param string &$summary The summary for this edit will be saved here.
 	 *
-	 * @return Status
+	 * @return Summary
 	 */
-	protected function setValue( $entityContent, $language, $value, &$summary ) {
-		$entityContent->getEntity()->setAliases( $language, explode( '|', $value ) );
-		$summary = $this->getSummary( $language, $value, 'wbsetaliases-set' );
-		return \Status::newGood();
+	protected function setValue( $entityContent, $language, $value ) {
+		$summary = $this->getSummary( 'wbsetaliases' );
+		$entity = $entityContent->getEntity();
+		if ( $value === '' ) {
+			$changeOp = new ChangeOpAliases( $language, $entity->getAliases( $language ), 'remove' );
+		} else {
+			$changeOp = new ChangeOpAliases( $language, explode( '|', $value ), 'set' );
+		}
+		$changeOp->apply( $entity, $summary );
+
+		return $summary;
 	}
 }
