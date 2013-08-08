@@ -87,19 +87,20 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$status = parent::modifyEntity( $propertyContent );
 
 		if ( $this->dataType !== '' ) {
-			$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
-
-			$dataType = $dataTypeFactory->getType( $this->dataType );
-
-			if ( $dataType === null ) {
-				$status->fatal( 'wikibase-newproperty-invalid-datatype' );
+			if ( $this->dataTypeExists() ) {
+				$propertyContent->getProperty()->setDataTypeId( $this->dataType );
 			}
 			else {
-				$propertyContent->getProperty()->setDataType( $dataType );
+				$status->fatal( 'wikibase-newproperty-invalid-datatype' );
 			}
 		}
 
 		return $status;
+	}
+
+	protected function dataTypeExists() {
+		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
+		return $dataTypeFactory->getType( $this->dataType ) !== null;
 	}
 
 	/**
