@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
+
 use MWException;
 use Wikibase\Entity;
 use Wikibase\Property;
@@ -51,7 +52,7 @@ class PropertySerializer extends EntitySerializer {
 		$serialization = array();
 
 		if ( in_array( 'datatype', $this->options->getProps() ) ) {
-			$serialization['datatype'] = $property->getDataType()->getId();
+			$serialization['datatype'] = $property->getDataTypeId();
 		}
 
 		return $serialization;
