@@ -60,6 +60,7 @@ return call_user_func( function() {
 		'Wikibase\ChangeOpMainSnak' => 'includes/changeop/ChangeOpMainSnak.php',
 		'Wikibase\ChangeOpQualifier' => 'includes/changeop/ChangeOpQualifier.php',
 		'Wikibase\ChangeOpReference' => 'includes/changeop/ChangeOpReference.php',
+		'Wikibase\ChangeOpStatementRank' => 'includes/changeop/ChangeOpStatementRank.php',
 		'Wikibase\ChangeOpException' => 'includes/changeop/ChangeOpException.php',
 
 		// includes/actions
