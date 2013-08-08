@@ -3,17 +3,14 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use MWException;
-
-use Wikibase\EntityId;
 use Wikibase\Entity;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\Statement;
-use Wikibase\Settings;
-use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Claims;
+use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\ChangeOpStatementRank;
+use Wikibase\ChangeOpException;
+use Wikibase\Statement;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
  * API module for setting the rank of a statement
@@ -40,19 +37,9 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetStatementRank extends ApiWikibase {
-
-	// TODO: automcomment
-	// TODO: example
-	// TODO: rights
-	// TODO: conflict detection
-
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//setStatementRank() function as the constructor.
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
+class SetStatementRank extends ModifyClaim {
 
 	/**
 	 * @see \ApiBase::execute
@@ -62,111 +49,71 @@ class SetStatementRank extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
 
-		$statement = $this->setStatementRank(
-			$content->getEntity(),
-			$params['statement'],
-			$params['rank']
+		$entityId = $this->claimModificationHelper->getEntityIdFromString(
+			Entity::getIdFromClaimGuid( $params['statement'] )
 		);
+		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		$entityContent = $this->getEntityContent( $entityTitle );
+		$entity = $entityContent->getEntity();
+		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$this->saveChanges( $content );
+		$claimGuid = $params['statement'];
+		$claims = new Claims( $entity->getClaims() );
 
-		$this->outputStatement( $statement );
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'Could not find the statement' , 'no-such-statement' );
+		}
+
+		$claim = $claims->getClaimWithGuid( $claimGuid );
+
+		if ( ! ( $claim instanceof Statement ) ) {
+			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have a rank', 'not-statement' );
+		}
+
+		$changeOp = $this->getChangeOp();
+
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
+		}
+
+		$this->saveChanges( $entityContent, $summary );
+
+		$this->claimModificationHelper->addClaimToApiResult( $claim, 'statement' );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * @since 0.3
+	 * Check the provided parameters
 	 *
-	 * @return \Wikibase\EntityContent
+	 * @since 0.4
 	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		// @todo generalize handling of settings in api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
-
-		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
+	protected function validateParameters( array $params ) {
+		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param Entity $entity
-	 * @param string $statementGuid
-	 * @param string $rank
-	 *
-	 * @return \Wikibase\Statement
+	 * @return ChangeOpStatementRank
 	 */
-	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+	protected function getChangeOp() {
+		$params = $this->extractRequestParams();
 
-		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'Could not find the statement' , 'no-such-statement' );
-		}
+		$claimGuid = $params['statement'];
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
-		$statement = $claims->getClaimWithGuid( $statementGuid );
+		$rank = ClaimSerializer::unserializeRank( $params['rank'] );
+		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank, $idFormatter );
 
-		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage( 'The referenced claim is not a statement and thus does not have a rank' , 'not-statement' );
-		}
-
-		$statement->setRank( ClaimSerializer::unserializeRank( $rank ) );
-
-		$entity->setClaims( $claims );
-
-		return $statement;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param \Wikibase\EntityContent $content
-	 */
-	protected function saveChanges( EntityContent $content ) {
-		// collect information and create an EditEntity
-		$summary = '/* wbsetstatementrank */'; // TODO: automcomment
-		$status = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
-
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param \Wikibase\Statement $statement
-	 */
-	protected function outputStatement( Statement $statement ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $statement );
-
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'statement',
-			$serializer->getSerialized( $statement )
-		);
+		return $changeOp;
 	}
 
 	/**
@@ -177,20 +124,18 @@ class SetStatementRank extends ApiWikibase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'statement' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'rank' => array(
-				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+		return array_merge(
+			parent::getAllowedParams(),
+			array(
+				'statement' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'rank' => array(
+					ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
+					ApiBase::PARAM_REQUIRED => true,
+				),
+			)
 		);
 	}
 
@@ -198,12 +143,14 @@ class SetStatementRank extends ApiWikibase {
 	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-statement', 'info' => $this->msg( 'wikibase-api-no-such-statement' )->text() ),
-			array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
-		) );
+		return array_merge(
+			parent::getPossibleErrors(),
+			$this->claimModificationHelper->getPossibleErrors(),
+			array(
+				array( 'code' => 'no-such-statement', 'info' => $this->msg( 'wikibase-api-no-such-statement' )->text() ),
+				array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
+			)
+		);
 	}
 
 	/**
@@ -214,16 +161,12 @@ class SetStatementRank extends ApiWikibase {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'statement' => 'A GUID identifying the statement for which to set the rank',
-			'rank' => 'The new value to set for the rank',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'statement' => 'A GUID identifying the statement for which to set the rank',
+				'rank' => 'The new value to set for the rank',
+			)
 		);
 	}
 
@@ -249,16 +192,7 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?action=wbsetstatementrank&format=json&statement=q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&rank=normal&token=foobar' => 'Set the rank for the given statement to normal',
 		);
 	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
-	}
-
 }
