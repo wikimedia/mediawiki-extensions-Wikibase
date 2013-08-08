@@ -84,8 +84,20 @@ $.extend( SELF.prototype, {
 	 *
 	 * @return wb.SnakList
 	 */
-	getQualifiers: function() {
-		return this._qualifiers;
+	getQualifiers: function( propertyId ) {
+		if( !propertyId ) {
+			return this._qualifiers;
+		}
+
+		var filteredQualifiers = new wb.SnakList();
+
+		this._qualifiers.each( function( i, snak ) {
+			if( snak.getPropertyId() === propertyId ) {
+				filteredQualifiers.addSnak( snak );
+			}
+		} );
+
+		return filteredQualifiers;
 	},
 
 	/**
