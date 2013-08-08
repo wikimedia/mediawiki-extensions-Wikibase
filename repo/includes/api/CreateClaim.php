@@ -51,10 +51,8 @@ class CreateClaim extends ModifyClaim {
 		$this->validateParameters( $params );
 
 		$entityId = $this->claimModificationHelper->getEntityIdFromString( $params['entity'] );
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
-		// TODO: put loadEntityContent into a separate helper class for great reuse!
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entityContent = $this->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
