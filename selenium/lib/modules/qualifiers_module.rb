@@ -10,21 +10,21 @@ module QualifierPage
   include PageObject
   # qualifiers UI elements
   div(:qualifiersContainer, :class => "wb-claim-qualifiers")
-  link(:addQualifier,			:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add qualifier']")
-  link(:addQualifierDisabled,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[contains(@class, 'wikibase-toolbarbutton-disabled')][text()='add qualifier']")
-  link(:removeQualifierLine1,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
-  link(:removeQualifierLine2,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
+  link(:addQualifier,			:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]//span[contains(@class, 'wb-addtoolbar')]//a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add qualifier']")
+  link(:addQualifierDisabled,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]//span[contains(@class, 'wb-addtoolbar')]//a[contains(@class, 'wikibase-toolbarbutton-disabled')][text()='add qualifier']")
+  link(:removeQualifierLine1,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][1]//span[contains(@class, 'wb-removetoolbar')]//a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
+  link(:removeQualifierLine2,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][2]//span[contains(@class, 'wb-removetoolbar')]//a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
   text_area(:qualifierValueInput1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", :index => 0)
   text_area(:qualifierValueInput2, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", :index => 1)
 
-  link(:qualifierPropertyLink1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-property-container')]/div/a")
-  link(:qualifierPropertyLink2, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-property-container')]/div/a")
-  div(:qualifierProperty1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-property-container')]/div")
-  div(:qualifierProperty2, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-property-container')]/div")
-  link(:qualifierValueLink1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  link(:qualifierValueLink2, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  div(:qualifierValue1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div")
-  div(:qualifierValue2, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div")
+  div(:qualifierProperty1,		:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][1]//div[contains(@class, 'wb-snak-property-container')]/div")
+  div(:qualifierProperty2,		:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][2]//div[contains(@class, 'wb-snak-property-container')]/div")
+  link(:qualifierPropertyLink1,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][1]//div[contains(@class, 'wb-snak-property-container')]//a")
+  link(:qualifierPropertyLink2,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][2]//div[contains(@class, 'wb-snak-property-container')]//a")
+  link(:qualifierValueLink1,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][1]//div[contains(@class, 'wb-snak-value')]//a")
+  link(:qualifierValueLink2,	:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][2]//div[contains(@class, 'wb-snak-value')]//a")
+  div(:qualifierValue1,			:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][1]//div[contains(@class, 'wb-snak-value')]/div/div")
+  div(:qualifierValue2,			:xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div/div[contains(@class, 'wb-snaklistview')][2]//div[contains(@class, 'wb-snak-value')]/div/div")
 
   def wait_for_qualifier_value_box
     wait_until do
