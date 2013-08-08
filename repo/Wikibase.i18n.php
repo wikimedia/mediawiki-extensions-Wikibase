@@ -1032,6 +1032,8 @@ Parameters:
 * $1 is the number of qualifiers updated.',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Automatic edit summary when removing qualifiers. Parameters:
 * $1 is the number of qualifiers removed.',
+	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
+* $3 is the number of references removed.',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
@@ -1058,14 +1060,6 @@ Parameters:
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
-	'wikibase-item-summary-wbsetqualifier-add' => 'Automatic edit summary when adding qualifiers. Parameters:
-* $1 is the number of qualifiers added.',
-	'wikibase-item-summary-wbsetqualifier-update' => 'Automatic edit summary when setting qualifiers. Parameters:
-* $1 is the number of qualifiers updated.',
-	'wikibase-item-summary-wbremovequalifiers-remove' => 'Automatic edit summary when removing qualifiers. Parameters:
-* $1 is the number of qualifiers removed.',
-	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
-* $3 is the number of references removed.',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}
@@ -2832,6 +2826,7 @@ $messages['ckb'] = array(
  * @author Danny B.
  * @author DobyvatelCZ
  * @author JAn Dudík
+ * @author Jkjk
  * @author Littledogboy
  * @author Mormegil
  * @author Vks
@@ -2905,7 +2900,7 @@ $messages['cs'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.',
 	'wikibase-entityselector-more' => 'více',
 	'wikibase-anonymouseditwarning' => 'Varování: Nejste přihlášen(a).
-Vaše IP adresa bude zveřejněna v historii této {{grammar:2sg|$1}}.', # Fuzzy
+Vaše IP adresa bude zobrazena v historii této {{grammar:2sg|$1}}.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Tato stránka je zamčena. Úprava není dovolena.',
 	'wikibase-blockeduser-tooltip-message' => 'Nemáte oprávnění editovat, protože byla zablokována vaše IP adresa či uživatelské jméno.',
 	'wikibase-move-error' => 'Nemůžete přesouvat stránky v datovém jmenném prostoru, ani nemůžete stránky přesouvat do něj.',
@@ -3065,6 +3060,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-listdatatypes-multilingual-text-head' => 'Vícejazyčný text',
 	'wikibase-listdatatypes-string-head' => 'Řetězec',
 	'wikibase-listdatatypes-time-head' => 'Čas',
+	'wikibase-listdatatypes-url-head' => 'URL',
 	'content-model-wikibase-item' => 'Položka Wikibase',
 	'content-model-wikibase-property' => 'Položka Wikibase',
 	'content-model-wikibase-query' => 'Dotaz Wikibase',
@@ -3733,6 +3729,8 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-item-summary-wbeditentity-update' => 'Datenobjekt aktualisiert',
 	'wikibase-item-summary-wbeditentity-override' => 'Ein Datenobjekt geleert',
 	'wikibase-item-summary-wbsetreference' => 'Referenz festgelegt',
+	'wikibase-item-summary-wbsetreference-add' => 'Einzelnachweis der Aussage hinzugefügt',
+	'wikibase-item-summary-wbsetreference-set' => 'Einzelnachweis der Aussage geändert',
 	'wikibase-item-summary-wbsetlabel-add' => 'Bezeichnung für [$2] hinzugefügt',
 	'wikibase-item-summary-wbsetlabel-set' => 'Bezeichnung für [$2] geändert',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Bezeichnung für [$2] entfernt',
@@ -3766,6 +3764,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Bedingung|Bedingungen}} hinzugefügt',
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Bedingung|Bedingungen}} geändert',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Bedingung|Bedingungen}} entfernt',
+	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Einzelnachweis|Einzelnachweise}} von der Aussage entfernt',
 	'wikibase-property-summary-wbcreate-new' => 'Eine neue Eigenschaft erstellt',
 	'wikibase-property-summary-wbeditentity-create' => 'Eine neue Eigenschaft erstellt',
 	'wikibase-property-summary-wbeditentity-update' => 'Eine Eigenschaft aktualisiert',
@@ -9844,7 +9843,7 @@ $messages['lb'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Ech akzeptéieren dës Bedingunge fir meng zukünfteg Ännerungen. Dëse Message net nach eng Kéier weisen.',
 	'wikibase-entityselector-more' => 'méi',
 	'wikibase-anonymouseditwarning' => 'Opgepasst: Dir sidd net ageloggt.
-Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
+Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-restrictionedit-tooltip-message' => 'Dës Säit ass gespaart. Änneren ass net erlaabt.',
 	'wikibase-blockeduser-tooltip-message' => "Dir hutt net d'Recht fir Ännerungen ze maachen, well Äre Benotzernumm oder Är IP-Adress gespaart gouf.",
 	'wikibase-move-error' => 'Dir kënnt keng Säiten déi am Data-Nummraum si réckelen an Dir kënnt och keng Säiten dohi réckelen.',
@@ -9957,7 +9956,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-item-summary-wbsetlabel-remove' => "Huet d'Etiquette fir [$2] ewechgeholl",
 	'wikibase-item-summary-wbsetdescription-set' => '[$2]-Beschreiwung geännert',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2]-Beschreiwung ewechgeholl',
-	'wikibase-item-summary-wbsetsitelink-add' => 'Huet e Link op [$2] derbäigesat', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-add' => 'Huet e Link op [$2] derbäigesat',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Huet e Link op [$2] ewechgeholl',
 	'wikibase-item-summary-wblinktitles-connect' => "Huet ee Sproochlink derbäigesat fir d'Säiten [$2↔$3] ze verbannen",
 	'wikibase-item-summary-special-create-item' => 'Huet en Element op [$2] ugeluecht mat {{PLURAL:$1|dem Wäert|de Wäerter}}',
@@ -10625,6 +10624,7 @@ $messages['mk'] = array(
 );
 
 /** Malayalam (മലയാളം)
+ * @author Kavya Manohar
  * @author Manuspanicker
  * @author Praveenp
  * @author Santhosh.thottingal
@@ -10689,7 +10689,7 @@ $messages['ml'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'എന്റെ ഭാവി തിരുത്തലുകൾക്കും ഈ നിബന്ധനകൾ ഞാൻ അംഗീകരിക്കുന്നു. ഈ സന്ദേശം ഇനി കാണിക്കേണ്ടതില്ല.',
 	'wikibase-entityselector-more' => 'കൂടുതൽ',
 	'wikibase-anonymouseditwarning' => 'മുന്നറിയിപ്പ്: താങ്കൾ ലോഗിൻ ചെയ്തിട്ടില്ല.
-താങ്കളുടെ ഐ.പി. വിലാസം ഈ $1 എന്നതിന്റെ തിരുത്തൽ നാൾവഴിയിൽ ചേർത്ത് വെയ്ക്കുന്നതാണ്.',
+താങ്കളുടെ ഐ.പി. വിലാസം ഈ തിരുത്തിന്റെ നാൾവഴിയിൽ ചേർക്കുന്നതാണ്',
 	'wikibase-restrictionedit-tooltip-message' => 'ഈ താൾ സംരക്ഷിക്കപ്പെട്ടിരിക്കുന്നു. തിരുത്തൽ അനുവദനീയമല്ല.',
 	'wikibase-blockeduser-tooltip-message' => 'താങ്കളുടെ ഉപയോക്തൃനാമം അല്ലെങ്കിൽ ഐ.പി. വിലാസം തടയപ്പെട്ടതായതിനാൽ താങ്കൾക്ക് തിരുത്താനുള്ള അനുവാദമില്ല.',
 	'wikibase-move-error' => 'ഡേറ്റാ നാമമേഖലയിലുള്ള താളുകൾ മാറ്റാനോ, താളുകൾ അതിലേയ്ക്ക് മാറ്റാനോ കഴിയില്ല.',
@@ -10802,9 +10802,11 @@ $messages['mr'] = array(
 	'wikibase-item-summary-wbsetreference' => 'संदर्भ नोंदवा',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] चे लेबल बदलले',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] चे लेबल काढले',
+	'wikibase-item-summary-wbsetdescription-add' => ' वर्णन [$2] जोडले',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] चे वर्णन बदलले',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2] चे वर्णन काढले',
 	'wikibase-item-summary-wbsetsitelink-add' => '[$2] ला दुवा जोडला', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-set' => '[$2]स दुवा नेला',
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] चा दुवा काढला',
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|क्वालिफायर|क्वालिफायर्स}} बदलविले',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|क्वालिफायर|क्वालिफायर्स}} हटविले',
@@ -15673,7 +15675,7 @@ $messages['zh-hans'] = array(
 	'wikibase-shortcopyrightwarning' => '点击“$1”，即表示你认同我们的[[$2|使用条款]]，并义无反顾地同意采用$3发表你的贡献。',
 	'wikibase-copyrighttooltip-acknowledge' => '我接受对我未来的编辑采用这些条款。不再显示该信息。',
 	'wikibase-entityselector-more' => '更多',
-	'wikibase-anonymouseditwarning' => '警告：你没有登录。你的IP地址将被记录在$1的编辑历史中。', # Fuzzy
+	'wikibase-anonymouseditwarning' => '警告：你没有登录。你的IP地址将被记录在该实体的编辑历史中。',
 	'wikibase-restrictionedit-tooltip-message' => '本页面受到保护。不能编辑。',
 	'wikibase-blockeduser-tooltip-message' => '你没有权限编辑，因为你的用户名或IP地址已经被封禁。',
 	'wikibase-move-error' => '你不能移动数据（data）名字空间的页面，你也不能移动页面至该名字空间。',
@@ -15849,6 +15851,9 @@ $messages['zh-hans'] = array(
 	'wikibase-item-summary-wbsetclaim-update-references' => '更改{{PLURAL:$3|声称}}的$4个参考',
 	'wikibase-item-summary-wbsetclaim-update-rank' => '更改{{PLURAL:$3|声称}}的等级',
 	'wikibase-item-summary-clientsitelink-update' => '页面移动自[$3]至[$4]。',
+	'wikibase-item-summary-wbsetqualifier-add' => '添加{{PLURAL:$1|限定符}}',
+	'wikibase-item-summary-wbsetqualifier-update' => '更改{{PLURAL:$1|限定符}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '删除{{PLURAL:$1|限定符}}',
 	'wikibase-property-summary-wbcreate-new' => '创建新属性',
 	'wikibase-property-summary-wbeditentity-create' => '创建新属性',
 	'wikibase-property-summary-wbeditentity-update' => '更新属性',

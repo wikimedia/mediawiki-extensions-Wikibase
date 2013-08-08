@@ -2058,6 +2058,7 @@ $messages['ml'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'കോഡ്',
 	'wikibase-sitelinks-link-columnheading' => 'കണ്ണിചേർത്തിട്ടുള്ള ലേഖനം',
 	'wikibase-tooltip-error-details' => 'വിശദാംശങ്ങൾ',
+	'wikibase-validator-bad-value' => 'അസാധുവായ വില: $1',
 	'datatypes-type-wikibase-item' => 'ഇനം',
 	'datatypes-type-commonsMedia' => 'കോമൺസിൽ നിന്നുള്ള മീഡിയ പ്രമാണം',
 	'version-wikibase' => 'വിക്കിബേസ്',
