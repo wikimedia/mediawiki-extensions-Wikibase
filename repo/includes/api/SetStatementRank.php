@@ -60,14 +60,7 @@ class SetStatementRank extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$claimGuid = $params['statement'];
-		$claims = new Claims( $entity->getClaims() );
-
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find the statement' , 'no-such-statement' );
-		}
-
-		$claim = $claims->getClaimWithGuid( $claimGuid );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['statement'], $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
 			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have a rank', 'not-statement' );
@@ -147,7 +140,6 @@ class SetStatementRank extends ModifyClaim {
 			parent::getPossibleErrors(),
 			$this->claimModificationHelper->getPossibleErrors(),
 			array(
-				array( 'code' => 'no-such-statement', 'info' => $this->msg( 'wikibase-api-no-such-statement' )->text() ),
 				array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
 			)
 		);

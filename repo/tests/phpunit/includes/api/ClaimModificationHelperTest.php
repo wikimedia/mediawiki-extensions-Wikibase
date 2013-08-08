@@ -9,6 +9,7 @@ use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\SnakValidationHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ItemContent;
+use Wikibase\Claims;
 use Wikibase\PropertyContent;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -110,6 +111,21 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPossibleErrors() {
 		$claimModificationHelper = $this->getNewInstance();
 		$this->assertInternalType( 'array', $claimModificationHelper->getPossibleErrors() );
+	}
+
+	public function testGetClaimFromEntity() {
+		$claimModificationHelper = $this->getNewInstance();
+		$entity = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
+		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$claim = $entity->newClaim( $snak );
+		$claims = new Claims();
+		$claims->addClaim( $claim );
+		$entity->setClaims( $claims );
+		$claimGuid = $claim->getGuid();
+
+		$this->assertEquals( $claim, $claimModificationHelper->getClaimFromEntity( $claimGuid, $entity ) );
+		$this->setExpectedException( '\UsageException' );
+		$claimModificationHelper->getClaimFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $entity );
 	}
 
 	private function getNewInstance( $apiMain = null ) {

@@ -60,13 +60,7 @@ class RemoveReferences extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$claims = new Claims( $entity->getClaims() );
-
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
-		}
-
-		$claim = $claims->getClaimWithGuid( $claimGuid );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
 			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
@@ -189,7 +183,6 @@ class RemoveReferences extends ModifyClaim {
 			parent::getPossibleErrors(),
 			$this->claimModificationHelper->getPossibleErrors(),
 			array(
-				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
 				array( 'code' => 'no-such-reference', 'info' => $this->msg( 'wikibase-api-no-such-reference' )->text() ),
 				array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
 			)
