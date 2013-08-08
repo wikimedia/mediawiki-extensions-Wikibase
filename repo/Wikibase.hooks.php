@@ -1003,11 +1003,11 @@ final class RepoHooks {
 				$auto = $msg->params( $args )->parse();
 
 				// add pre and post fragments
-				if ( $pre ) {
+				if ( $pre !== '' ) {
 					// written summary $presep autocomment (summary /* section */)
 					$pre .= wfMessage( 'autocomment-prefix' )->escaped();
 				}
-				if ( $post ) {
+				if ( $post !== '' ) {
 					// autocomment $postsep written summary (/* section */ summary)
 					$auto .= wfMessage( 'colon-separator' )->escaped();
 				}
