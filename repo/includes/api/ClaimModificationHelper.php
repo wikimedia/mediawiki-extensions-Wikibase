@@ -116,15 +116,16 @@ class ClaimModificationHelper {
 	 * @since 0.4
 	 *
 	 * @param Claim $claim
+	 * @param string $key
 	 */
-	public function addClaimToApiResult( Claim $claim ) {
+	public function addClaimToApiResult( Claim $claim, $key = 'claim' ) {
 		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $claim );
 		$serializer->getOptions()->setIndexTags( $this->apiMain->getResult()->getIsRawMode() );
 
 		$this->apiMain->getResult()->addValue(
 			null,
-			'claim',
+			$key,
 			$serializer->getSerialized( $claim )
 		);
 	}
