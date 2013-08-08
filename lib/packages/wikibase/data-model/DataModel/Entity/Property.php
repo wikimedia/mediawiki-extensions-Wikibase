@@ -46,47 +46,6 @@ class Property extends Entity {
 	protected $dataType = null;
 
 	/**
-	 * Returns the DataType of the property.
-	 *
-	 * @since 0.2
-	 * @deprecated since 0.4
-	 *
-	 * @return DataType
-	 * @throws InvalidArgumentException
-	 */
-	public function getDataType() {
-		if ( $this->dataType === null ) {
-			if ( array_key_exists( 'datatype', $this->data ) ) {
-				$registry = new LibRegistry( Settings::singleton() );
-
-				$this->dataType = $registry->getDataTypeFactory()->getType( $this->data['datatype'] );
-
-				if ( $this->dataType === null ) {
-					throw new InvalidArgumentException( 'The DataType of the property is not valid' );
-				}
-			}
-			else {
-				throw new InvalidArgumentException( 'The DataType of the property is not known' );
-			}
-		}
-
-		return $this->dataType;
-	}
-
-	/**
-	 * Sets the DataType of the property.
-	 *
-	 * @since 0.2
-	 * @deprecated since 0.4
-	 *
-	 * @param DataType $dataType
-	 */
-	public function setDataType( DataType $dataType ) {
-		$this->dataType = $dataType;
-		$this->setDataTypeId( $dataType->getId() );
-	}
-
-	/**
 	 * @since 0.4
 	 *
 	 * @param string $dataTypeId
