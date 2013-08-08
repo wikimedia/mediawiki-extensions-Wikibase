@@ -56,13 +56,9 @@ class SetClaimValue extends ModifyClaim {
 		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
 		$entityContent = $this->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
-		$claims = new Claims( $entity->getClaims() );
 		$claimGuid = $params['claim'];
-		$claim = $claims->getClaimWithGuid( $claimGuid );
 
-		if ( $claim === null ) {
-			$this->dieUsage( "No claim for GUID: $claimGuid" , 'no-such-claim' );
-		}
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $claim->getMainSnak()->getPropertyId() );
 
@@ -127,9 +123,7 @@ class SetClaimValue extends ModifyClaim {
 		return array_merge(
 			parent::getPossibleErrors(),
 			$this->claimModificationHelper->getPossibleErrors(),
-			array(
-				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
-			)
+			array()
 		);
 	}
 

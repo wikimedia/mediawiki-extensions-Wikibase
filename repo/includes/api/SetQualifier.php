@@ -59,14 +59,7 @@ class SetQualifier extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$claimGuid = $params['claim'];
-		$claims = new Claims( $entity->getClaims() );
-
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
-		}
-
-		$claim = $claims->getClaimWithGuid( $claimGuid );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['claim'], $entity );
 
 		if ( isset( $params['snakhash'] ) ) {
 			$this->validateReferenceHash( $claim, $params['snakhash'] );
@@ -225,7 +218,6 @@ class SetQualifier extends ModifyClaim {
 			$this->claimModificationHelper->getPossibleErrors(),
 			array(
 				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
 			)
 		);
 	}
