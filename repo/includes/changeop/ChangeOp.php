@@ -52,7 +52,7 @@ abstract class ChangeOp {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function updateSummary( $summary, $action, $language, $args ) {
+	protected function updateSummary( $summary, $action, $language = '', $args = '' ) {
 		if ( $summary !== null && !$summary instanceof Summary ) {
 			throw new InvalidArgumentException( '$summary needs to be an instance of Summary or null' );
 		}
