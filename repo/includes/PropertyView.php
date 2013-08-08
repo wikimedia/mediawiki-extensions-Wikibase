@@ -1,7 +1,10 @@
 <?php
 
 namespace Wikibase;
+
+use DataTypes\DataType;
 use Html, ParserOutput, Title, Language, OutputPage, MediaWikiSite;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class for creating views for Wikibase\Property instances.
@@ -36,28 +39,46 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 *
-	 * @param EntityContent $property
+	 * @param EntityContent $propertyContent
 	 * @param \Language|null $lang
 	 * @param bool $editable
 	 * @return string
 	 */
-	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityContent $propertyContent, Language $lang = null, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$html = parent::getInnerHtml( $property, $lang, $editable );
+		$html = parent::getInnerHtml( $propertyContent, $lang, $editable );
 
-		// add data value to default entity stuff
-		/** @var PropertyContent $property */
-		$html .= $this->getHtmlForDataType( $property->getProperty()->getDataType(), $lang, $editable );
-		// TODO: figure out where to display type information more nicely
-		# Customizable footer
+		/**
+		 * @var PropertyContent $propertyContent
+		 */
+		$html .= $this->getHtmlForDataType(
+			$this->getDataType( $propertyContent ),
+			$lang,
+			$editable
+		);
+
+		$html .= $this->getFooterHtml();
+
+		wfProfileOut( __METHOD__ );
+		return $html;
+	}
+
+	protected function getFooterHtml() {
+		$html = '';
+
 		$footer = $this->msg( 'wikibase-property-footer' );
+
 		if ( !$footer->isBlank() ) {
 			$html .= "\n" . $footer->parse();
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $html;
+	}
+
+	protected function getDataType( PropertyContent $content ) {
+		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+			->getType( $content->getProperty()->getDataTypeId() );
 	}
 
 	/**
@@ -65,18 +86,21 @@ class PropertyView extends EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \DataTypes\DataType $dataType the data type to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param DataType $dataType the data type to render
+	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	public function getHtmlForDataType( \DataTypes\DataType $dataType, Language $lang = null, $editable = true ) {
+	protected function getHtmlForDataType( DataType $dataType, Language $lang = null, $editable = true ) {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
+
 		return wfTemplate( 'wb-property-datatype',
 			wfMessage( 'wikibase-datatype-label' )->text(),
 			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) )
 		);
 	}
+
 }
