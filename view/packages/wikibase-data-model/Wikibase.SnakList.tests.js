@@ -12,16 +12,29 @@
 
 	QUnit.module( 'wikibase.datamodel.SnakList.js', QUnit.newMwEnvironment() );
 
-	var snaks = [
-		new wb.PropertyNoValueSnak( 'p9001' ),
-		new wb.PropertySomeValueSnak( 'p42' ),
-		new wb.PropertySomeValueSnak( 'p42' ), // two times 42!
-		new wb.PropertyValueSnak( 'p42', new dv.StringValue( '~=[,,_,,]:3' ) )
+	var snakSets = [
+		[
+			new wb.PropertyNoValueSnak( 'p9001' ),
+			new wb.PropertySomeValueSnak( 'p42' ),
+			new wb.PropertySomeValueSnak( 'p42' ), // two times 42!
+			new wb.PropertyValueSnak( 'p42', new dv.StringValue( '~=[,,_,,]:3' ) )
+		],
+		[
+			new wb.PropertyValueSnak( 'p1', new dv.StringValue( 'a' ) ),
+			new wb.PropertyValueSnak( 'p1', new dv.StringValue( 'b' ) ),
+			new wb.PropertyValueSnak( 'p2', new dv.StringValue( 'a' ) ),
+			new wb.PropertyValueSnak( 'p2', new dv.StringValue( 'b' ) ),
+			new wb.PropertyValueSnak( 'p2', new dv.StringValue( 'c' ) ),
+			new wb.PropertyValueSnak( 'p3', new dv.StringValue( 'a' ) ),
+			new wb.PropertyValueSnak( 'p4', new dv.StringValue( 'a' ) )
+		]
 	];
 	var anotherSnak = new wb.PropertySomeValueSnak( 'p1' ),
 		anotherSnak2 = new wb.PropertySomeValueSnak( 'p2' );
 
 	QUnit.test( 'SnakList constructor', function( assert ) {
+		var snaks = snakSets[0];
+
 		var constructorArgs = [
 			[ snaks[0], 1, 'single wb.Snak' ],
 			[ snaks, 3, 'array of wb.Snak' ],
@@ -71,7 +84,8 @@
 	} );
 
 	QUnit.test( 'newFromJSON()', function( assert ) {
-		var snakList = new wb.SnakList( snaks ),
+		var snaks = snakSets[0],
+			snakList = new wb.SnakList( snaks ),
 			initialOrder = snakList.getPropertyOrder(),
 			clonedSnakList = wb.SnakList.newFromJSON( snakList.toJSON() );
 
@@ -96,7 +110,8 @@
 	} );
 
 	QUnit.test( 'SnakList list operations', function( assert ) {
-		var newSnakList = new wb.SnakList( snaks ),
+		var snaks = snakSets[0],
+			newSnakList = new wb.SnakList( snaks ),
 			initialLength = newSnakList.length;
 
 		assert.ok(
@@ -197,6 +212,98 @@
 				newSnakList.addSnak( 'foo' );
 			},
 			'Can not add some strange thing to the Snak list'
+		);
+	} );
+
+	QUnit.test( 'getFilteredSnakList()', function( assert ) {
+		var snaks = snakSets[1],
+			snakList = new wb.SnakList();
+
+		assert.ok(
+			snakList.getFilteredSnakList() instanceof wb.SnakList,
+			'Returned SnakList object when issuing getFilteredSnakList without parameter.'
+		);
+
+		assert.equal(
+			snakList.getFilteredSnakList( 'p42' ).length,
+			0,
+			'No filtered snak list returned for an empty snak list.'
+		);
+
+		snakList = new wb.SnakList( snaks );
+
+		assert.ok(
+			snakList.getFilteredSnakList().equals( snakList ),
+			'Returning SnakList clone when issuing getFilteredSnakList without parameter.'
+		);
+
+		/**
+		 * Indexed by property id, this object references the index of snaks belonging to the
+		 * property group as to the array used as source for this test's SnakList object.
+		 * @type {Object}
+		 */
+		var snakListGroups = {
+			p1: [0, 1],
+			p2: [2, 3, 4],
+			p3: [5],
+			p4: [6]
+		};
+
+		/**
+		 * SnakList object containing the snaks grouped by property as to the snakListGroups
+		 * variable specified above.
+		 * @type {wikibase.SnakList}
+		 */
+		var groupedSnakList;
+
+		for( var propertyId in snakListGroups ) {
+			groupedSnakList = new wb.SnakList();
+
+			for( var i = 0; i < snakListGroups[propertyId].length; i++ ) {
+				groupedSnakList.addSnak( snaks[snakListGroups[propertyId][i]] );
+			}
+
+			assert.ok(
+				snakList.getFilteredSnakList( propertyId ).equals( groupedSnakList ),
+				'Verified result of getFilteredSnakList() (property id: ' + propertyId + ').'
+			);
+		}
+	} );
+
+	QUnit.test( 'add()', function( assert ) {
+		var snaks = snakSets[1],
+			snakList = new wb.SnakList();
+
+		snakList.add( new wb.SnakList() );
+
+		assert.equal(
+			snakList.length,
+			0,
+			'Nothing changed when adding an empty snak list to an empty snak list.'
+		);
+
+		snakList.add( new wb.SnakList( snaks ) );
+
+		assert.ok(
+			snakList.equals( new wb.SnakList( snaks ) ),
+			'Added snak list to existing snak list.'
+		);
+
+		snakList.add( new wb.SnakList() );
+
+		assert.ok(
+			snakList.equals( new wb.SnakList( snaks ) ),
+			'Nothing changed when adding an empty snak list.'
+		);
+
+		snakList.add( new wb.SnakList( [ anotherSnak ] ) );
+
+		var extendedSnakList = new wb.SnakList( snaks );
+		extendedSnakList.addSnak( anotherSnak );
+
+		assert.ok(
+			snakList.equals( extendedSnakList ),
+			'Added another snak list.'
 		);
 	} );
 
