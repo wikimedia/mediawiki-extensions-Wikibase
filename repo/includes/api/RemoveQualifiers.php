@@ -60,13 +60,8 @@ class RemoveQualifiers extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$claims = new Claims( $entity->getClaims() );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
-		}
-
-		$claim = $claims->getClaimWithGuid( $claimGuid );
 		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $claim );
 
 		$changeOps = new ChangeOps();
@@ -167,7 +162,6 @@ class RemoveQualifiers extends ModifyClaim {
 			parent::getPossibleErrors(),
 			$this->claimModificationHelper->getPossibleErrors(),
 			array(
-				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
 				array( 'code' => 'no-such-qualifier', 'info' => $this->msg( 'wikibase-api-no-such-qualifer' )->text() ),
 			)
 		);

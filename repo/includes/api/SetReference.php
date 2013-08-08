@@ -60,14 +60,7 @@ class SetReference extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$claimGuid = $params['statement'];
-		$claims = new Claims( $entity->getClaims() );
-
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
-		}
-
-		$claim = $claims->getClaimWithGuid( $claimGuid );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['statement'], $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
 			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );

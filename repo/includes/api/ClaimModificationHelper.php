@@ -7,6 +7,7 @@ use Wikibase\Lib\SnakConstructionService;
 use ApiBase, MWException;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\Summary;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Entity;
@@ -167,6 +168,24 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
+	 * @param string $claimGuid
+	 * @param Entity $entity
+	 *
+	 * @return Claim
+	 */
+	public function getClaimFromEntity( $claimGuid, Entity $entity ) {
+		$claims = new Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+		}
+
+		return $claims->getClaimWithGuid( $claimGuid );
+	}
+
+	/**
+	 * @since 0.4
+	 *
 	 * @param array $params
 	 * @param EntityId $propertyId
 	 *
@@ -257,6 +276,7 @@ class ClaimModificationHelper {
 		return array(
 			array( 'code' => 'invalid-guid', 'info' => $this->apiMain->msg( 'wikibase-api-invalid-guid' )->text() ),
 			array( 'code' => 'no-such-entity', 'info' => $this->apiMain->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'no-such-claim', 'info' => $this->apiMain->msg( 'wikibase-api-no-such-claim' )->text() ),
 			array( 'code' => 'invalid-snak', 'info' => $this->apiMain->msg( 'wikibase-api-invalid-snak' )->text() ),
 			array( 'code' => 'invalid-entity-id', 'info' => $this->apiMain->msg( 'wikibase-api-invalid-entity-id' )->text() ),
 		);
