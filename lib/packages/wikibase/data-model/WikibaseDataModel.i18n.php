@@ -134,6 +134,13 @@ $messages['mk'] = array(
 	'wikibasedatamodel-desc' => 'Компонента што го определува податочниот модел на Викибазата',
 );
 
+/** Malayalam (മലയാളം)
+ * @author Praveenp
+ */
+$messages['ml'] = array(
+	'wikibasedatamodel-desc' => 'വിക്കിബേസിന്റെ ഡേറ്റാ രൂപം നിർവചിക്കുന്ന ഘടകം',
+);
+
 /** Malay (Bahasa Melayu)
  * @author Anakmalaysia
  */
