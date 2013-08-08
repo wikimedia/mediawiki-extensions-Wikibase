@@ -66,17 +66,9 @@ abstract class EntityLookupTest extends EntityTestCase {
 
 			$entities[2] = $item;
 
-			$dataTypes = array(
-				'string' => array(
-					'datavalue' => 'string'
-				)
-			);
-
-			$dtf = new DataTypeFactory( $dataTypes );
-
 			$prop = Property::newEmpty();
 			$prop->setId( 753 );
-			$prop->setDataType( $dtf->getType( "string" ) );
+			$prop->setDataTypeId( "string" );
 
 			$entities[3] = $prop;
 		}
