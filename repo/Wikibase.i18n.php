@@ -3525,6 +3525,7 @@ for at finde ud af, hvad der er sket med det.',
  * @author Purodha
  * @author Se4598
  * @author Tomabrafix
+ * @author Umherirrender
  * @author Vogone
  */
 $messages['de'] = array(
@@ -3534,7 +3535,7 @@ $messages['de'] = array(
 	'wikibase-save' => 'speichern',
 	'wikibase-cancel' => 'abbrechen',
 	'wikibase-add' => 'hinzufügen',
-	'wikibase-addqualifier' => 'Bedingung hinzufügen',
+	'wikibase-addqualifier' => 'Qualifikator hinzufügen',
 	'wikibase-addreference' => 'Quelle hinzufügen',
 	'wikibase-save-inprogress' => 'Speichere …',
 	'wikibase-remove-inprogress' => 'Entferne …',
@@ -5900,6 +5901,8 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-item-summary-wbeditentity-update' => 'Mise à jour d’un élément',
 	'wikibase-item-summary-wbeditentity-override' => 'Outrepasser un élément',
 	'wikibase-item-summary-wbsetreference' => 'Référence modifiée',
+	'wikibase-item-summary-wbsetreference-add' => 'Référence ajoutée pour réclamation',
+	'wikibase-item-summary-wbsetreference-set' => 'Référence modifiée pour réclamation',
 	'wikibase-item-summary-wbsetlabel-add' => 'Libellé [$2] ajouté',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changement du libellé [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Retrait du libellé [$2]',
@@ -5935,6 +5938,7 @@ ffirmation ajoutée}}',
 	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|qualifieur ajouté|qualifieurs ajoutés}}',
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|qualifieur modifié|qualifieurs modifiés}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|qualifieur supprimé|qualifieurs supprimés}}',
+	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Référence supprimée|Références supprimées}} pour réclamation',
 	'wikibase-property-summary-wbcreate-new' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-create' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-update' => 'Mise à jour d’une propriété',
@@ -9511,6 +9515,8 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-item-summary-wbeditentity-update' => '항목을 업데이트함',
 	'wikibase-item-summary-wbeditentity-override' => '항목을 덮어씀',
 	'wikibase-item-summary-wbsetreference' => '참고를 설정함',
+	'wikibase-item-summary-wbsetreference-add' => '주장에 참고를 추가함',
+	'wikibase-item-summary-wbsetreference-set' => '주장의 참고를 바꿈',
 	'wikibase-item-summary-wbsetlabel-add' => '[$2] 레이블을 추가함',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] 레이블을 바꿈',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] 레이블을 제거함',
@@ -9544,6 +9550,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|한정어}}를 추가함',
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|한정어}}를 바꿈',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|한정어}}를 제거함',
+	'wikibase-item-summary-wbremovereferences-remove' => '주장에서 {{PLURAL:$3|참고}}를 제거함',
 	'wikibase-property-summary-wbcreate-new' => '새 속성을 바꿈',
 	'wikibase-property-summary-wbeditentity-create' => '새 속성을 만듦',
 	'wikibase-property-summary-wbeditentity-update' => '속성을 업데이트함',
@@ -10496,6 +10503,8 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbeditentity-update' => 'Подновен предмет',
 	'wikibase-item-summary-wbeditentity-override' => 'Презапишување врз предмет',
 	'wikibase-item-summary-wbsetreference' => 'Задај навод',
+	'wikibase-item-summary-wbsetreference-add' => 'Додаден навод во тврдењето',
+	'wikibase-item-summary-wbsetreference-set' => 'Изменет навод во тврдењето',
 	'wikibase-item-summary-wbsetlabel-add' => 'Додадена етикетата на [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Сменета етикетата на [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Отстранета етикетата на [$2]',
@@ -10529,6 +10538,7 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Додадена определница|Додадени определници}}',
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Изменета определница|Изменети определници}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Отстранета определница|Отстранети определници}}',
+	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Отстранет навод|Отстранети наводи}} од тврдењето',
 	'wikibase-property-summary-wbcreate-new' => 'Создадено ново својство',
 	'wikibase-property-summary-wbeditentity-create' => 'Создадено ново својство',
 	'wikibase-property-summary-wbeditentity-update' => 'Изменето својство',
@@ -13680,6 +13690,7 @@ $messages['sk'] = array(
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Milicevic01
  * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
@@ -13776,7 +13787,7 @@ $messages['sr-ec'] = array(
 	'wikibase-setlabel-label' => 'Назив:',
 	'wikibase-setlabel-submit' => 'Постави назив',
 	'wikibase-setlabel-warning-remove' => 'Да ли заиста желите да уклоните назив за [[$1]]?',
-	'special-setdescription' => 'Постављање описа',
+	'special-setdescription' => 'Додај опис',
 	'wikibase-setdescription-introfull' => 'Постављате опис у $2 за [[$1]].',
 	'wikibase-setdescription-label' => 'Опис:',
 	'wikibase-setdescription-submit' => 'Постављање описа',
@@ -15820,7 +15831,9 @@ $messages['zh-hans'] = array(
 	'wikibase-item-summary-wbeditentity-create' => '创建新项',
 	'wikibase-item-summary-wbeditentity-update' => '更新项',
 	'wikibase-item-summary-wbeditentity-override' => '覆盖项',
-	'wikibase-item-summary-wbsetreference' => '设置来源',
+	'wikibase-item-summary-wbsetreference' => '设置参考',
+	'wikibase-item-summary-wbsetreference-add' => '添加参考至声称',
+	'wikibase-item-summary-wbsetreference-set' => '更改声称的参考',
 	'wikibase-item-summary-wbsetlabel-add' => '添加[$2]标签',
 	'wikibase-item-summary-wbsetlabel-set' => '更改[$2]标签',
 	'wikibase-item-summary-wbsetlabel-remove' => '删除[$2]标签',
@@ -15854,6 +15867,7 @@ $messages['zh-hans'] = array(
 	'wikibase-item-summary-wbsetqualifier-add' => '添加{{PLURAL:$1|限定符}}',
 	'wikibase-item-summary-wbsetqualifier-update' => '更改{{PLURAL:$1|限定符}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '删除{{PLURAL:$1|限定符}}',
+	'wikibase-item-summary-wbremovereferences-remove' => '删除声称的{{PLURAL:$3|参考}}',
 	'wikibase-property-summary-wbcreate-new' => '创建新属性',
 	'wikibase-property-summary-wbeditentity-create' => '创建新属性',
 	'wikibase-property-summary-wbeditentity-update' => '更新属性',
