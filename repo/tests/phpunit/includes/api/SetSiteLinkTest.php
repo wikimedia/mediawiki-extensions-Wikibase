@@ -46,13 +46,17 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class SetSiteLinkTest extends ModifyEntityTestBase {
+class SetSiteLinkTest extends WikibaseApiTestCase {
+
+	private static $hasSetup;
 
 	public function setup() {
 		parent::setup();
 
-		// Nasty... we shouldn't need to do this. But apparently some other test spills bad state.
-		$this->resetEntities();
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Leipzig', 'Berlin', 'London' ) );
+		}
+		self::$hasSetup = true;
 	}
 
 	public function testSetLiteLinkWithNoId( ) {
@@ -112,7 +116,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 
 		$req = array(
 			'action' => 'wbsetsitelink',
-			'id' => $this->getEntityId( "Berlin" ),
+			'id' => EntityTestHelper::getId( 'Berlin' ),
 			'linksite' => "enwiki",
 			'linktitle' => "testSetLiteLinkWithNoToken",
 		);
@@ -154,7 +158,7 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 	 * @dataProvider provideSetLiteLink
 	 */
 	public function testSetLiteLink( $handle, $item_spec, $linksite, $linktitle, $expectedTitle = null, $expectedFailure = null ) {
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 
 		if ( array_key_exists( 'id', $item_spec ) && empty( $item_spec['id'] ) ) {
 			//NOTE: data provider is called before setUp and thus can't determine IDs.
@@ -226,9 +230,6 @@ class SetSiteLinkTest extends ModifyEntityTestBase {
 				$this->assertEquals( $expectedTitle, $links[$linksite], 'wrong link target' );
 			}
 		}
-
-		// clean up -------------------------------
-		$this->resetEntity( $handle );
 	}
 
 	public function testSetLiteLinkWithBadTargetSite( ) {

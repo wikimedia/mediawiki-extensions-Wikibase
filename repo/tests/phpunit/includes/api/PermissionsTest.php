@@ -48,20 +48,25 @@ use Wikibase\Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class PermissionsTest extends ModifyEntityTestBase {
+class PermissionsTest extends WikibaseApiTestCase {
 
 	protected $permissions;
 	protected $old_user;
+
+	private static $hasSetup;
 
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
 
 		parent::setUp();
 
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Oslo' ) );
+		}
+		self::$hasSetup = true;
+
 		$this->permissions = $wgGroupPermissions;
 		$this->old_user = $wgUser;
-
-		\TestSites::insertIntoDb();
 	}
 
 	function tearDown() {
@@ -83,6 +88,34 @@ class PermissionsTest extends ModifyEntityTestBase {
 		parent::tearDown();
 	}
 
+	/**
+	 * Utility function for applying a set of permissions to $wgGroupPermissions.
+	 * Automatically resets the rights cache for $wgUser.
+	 * No measures are taken to restore the original permissions later, this is up to the caller.
+	 *
+	 * @param $permissions
+	 */
+	public static function applyPermissions( $permissions ) {
+		global $wgGroupPermissions;
+		global $wgUser;
+
+		if ( !$permissions ) {
+			return;
+		}
+
+		foreach ( $permissions as $group => $rights ) {
+			if ( !empty( $wgGroupPermissions[ $group ] ) ) {
+				$wgGroupPermissions[ $group ] = array_merge( $wgGroupPermissions[ $group ], $rights );
+			} else {
+				$wgGroupPermissions[ $group ] = $rights;
+			}
+		}
+
+		// reset rights cache
+		$wgUser->addGroup( "dummy" );
+		$wgUser->removeGroup( "dummy" );
+	}
+
 	function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null, array $restore = array() ) {
 		global $wgUser;
 
@@ -95,12 +128,6 @@ class PermissionsTest extends ModifyEntityTestBase {
 
 			$params[ 'action' ] = $action;
 			list( $re, , ) = $this->doApiRequest( $params, null, false, $wgUser );
-
-			// Restore any items we may have modified.
-			// This should always be done, regardless of validation.
-			foreach ( $restore as $restoreHandle ) {
-				$this->resetEntity( $restoreHandle );
-			}
 
 			if ( $expectedError == null ) {
 				$this->assertArrayHasKey( 'success', $re, 'API call must report success.' );
@@ -171,7 +198,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 	 */
 	function testGetEntities( $permissions, $expectedError ) {
 		$params = array(
-			'ids' => $this->getEntityId( "Oslo" ),
+			'ids' => EntityTestHelper::getId( 'Oslo' ),
 		);
 
 		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError, array() );
@@ -235,7 +262,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 	 */
 	function testSetSiteLink( $permissions, $expectedError ) {
 		$params = array(
-			'id' => $this->getEntityId( "Oslo" ),
+			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'linksite' => 'enwiki',
 			'linktitle' => 'Oslo',
 		);
@@ -262,7 +289,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 	 */
 	function testSetLabel( $permissions, $expectedError ) {
 		$params = array(
-			'id' => $this->getEntityId( "Oslo" ),
+			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'de',
 			'value' => 'Oslo',
 		);
@@ -289,7 +316,7 @@ class PermissionsTest extends ModifyEntityTestBase {
 	 */
 	function testSetDescription( $permissions, $expectedError ) {
 		$params = array(
-			'id' => $this->getEntityId( "Oslo" ),
+			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'en',
 			'value' => 'Capitol of Norway',
 		);

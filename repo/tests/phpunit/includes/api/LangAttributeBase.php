@@ -12,12 +12,6 @@ namespace Wikibase\Test\Api;
  * Without this they will be killed after 1 second, but the setup of the tables takes so long
  * time that the first few tests get killed.
  *
- * The tests are doing some assumptions on the id numbers. If the database isn't empty when
- * when its filled with test items the ids will most likely get out of sync and the tests will
- * fail. It seems impossible to store the item ids back somehow and at the same time not being
- * dependant on some magically correct solution. That is we could use GetItemId but then we
- * would imply that this module in fact is correct.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -58,7 +52,7 @@ namespace Wikibase\Test\Api;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class LangAttributeBase extends ModifyEntityTestBase {
+abstract class LangAttributeBase extends WikibaseApiTestCase {
 
 	public static function makeOverlyLongString( $text = "Test", $length = null ) {
 		if ( $length === null ) {
@@ -76,7 +70,7 @@ abstract class LangAttributeBase extends ModifyEntityTestBase {
 	 * @dataProvider paramProvider
 	 */
 	public function doLanguageAttribute( $handle, $action, $attr, $langCode, $value, $exception = null ) {
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 
 		// update the item ----------------------------------------------------------------
 		$req = array(
@@ -138,9 +132,6 @@ abstract class LangAttributeBase extends ModifyEntityTestBase {
 		$this->assertRevisionSummary(
 			array( $action, "1", $langCode, "*/", $value ),
 			$apiResponse['entity']['lastrevid'] );
-
-		// cleanup ----------------------------------------------------------------
-		$this->resetEntity( $handle );
 	}
 
 }
