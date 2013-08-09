@@ -32,6 +32,7 @@ namespace Wikibase\Test;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Adam Shorland
  */
 class SpecialNewPropertyTest extends SpecialPageTestBase {
 
@@ -40,16 +41,37 @@ class SpecialNewPropertyTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
-		//TODO: Actually verify that the output is correct.
-		//      Currently this just tests that there is no fatal error,
-		//      and that the restriction handling is working and doesn't
-		//      block. That is, the default should let the user execute
-		//      the page.
-
+		//TODO: Verify that more of the output is correct.
 		//TODO: Verify that item creation works via a faux post request
 
+		$expectedInputs = array(
+			'label' => array(
+				'id' => 'wb-newentity-label',
+				'class' => 'wb-input',
+				'name' => 'label' ),
+			'description' => array(
+				'id' => 'wb-newentity-description',
+				'class' => 'wb-input',
+				'name' => 'description' ),
+			'submit' => array(
+				'id' => 'wb-newentity-submit',
+				'class' => 'wb-button',
+				'type' => 'submit',
+				'name' => 'submit' ),
+		);
+
 		list( $output, ) = $this->executeSpecialPage( '' );
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
+		// -- Make sure the special page loads with expected input fields ----
+		foreach( $expectedInputs as $expected ){
+			$this->assertHasHtmlTagWithElements( $output, 'input', $expected );
+		}
+
+		list( $output, ) = $this->executeSpecialPage( 'LabelText/DescriptionText' );
+		// -- Make sure the subpage values have been passed to the correct input fields ----
+		$this->assertHasHtmlTagWithElements( $output, 'input',
+			array_merge( $expectedInputs['label'], array( 'value' => 'LabelText' ) ) );
+		$this->assertHasHtmlTagWithElements( $output, 'input',
+			array_merge( $expectedInputs['description'], array( 'value' => 'DescriptionText' ) ) );
 	}
 
 }
