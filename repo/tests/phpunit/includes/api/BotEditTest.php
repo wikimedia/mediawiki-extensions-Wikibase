@@ -56,9 +56,9 @@ use Wikibase\NamespaceUtils;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class BotEditTest extends ModifyEntityTestBase {
+class BotEditTest extends WikibaseApiTestCase {
 
-	protected static $baseOfItemIds = 1;
+	protected static $baseOfItemIds;
 
 	public function setUp() {
 		global $wgUser;
@@ -107,13 +107,14 @@ class BotEditTest extends ModifyEntityTestBase {
 
 		$second = $this->doApiRequestWithToken( $req, null, self::$users['wbbot']->user );
 
+		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
+
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
 		$this->assertArrayHasKey( 'entity', $second[0],
 			"Must have an 'entity' key in the second result from the API" );
 		$this->assertArrayHasKey( 'id', $second[0]['entity'],
 			"Must have an 'id' key in the 'entity' from the second result from the API" );
-		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
 	}
 
 	/**
@@ -122,8 +123,6 @@ class BotEditTest extends ModifyEntityTestBase {
 	 * @dataProvider providerCreateItem
 	 */
 	function testCreateItem( $handle, $bot, $new, $data ) {
-		$myid = null;
-
 		$req = array(
 			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
@@ -131,8 +130,7 @@ class BotEditTest extends ModifyEntityTestBase {
 		);
 
 		if ( !$new ) {
-			$myid = $this->getEntityId( $handle );
-			$req['id'] = $myid;
+			$req['id'] = 'q'.self::$baseOfItemIds;
 		} else {
 			$req['new'] = 'item';
 		}
@@ -142,24 +140,17 @@ class BotEditTest extends ModifyEntityTestBase {
 
 		$second = $this->doApiRequestWithToken( $req, null ,self::$users['wbbot']->user );
 
+		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
+		$myid = 'q'.self::$baseOfItemIds;
+
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
 		$this->assertArrayHasKey( 'entity', $second[0],
 			"Must have an 'entity' key in the second result from the API" );
 		$this->assertArrayHasKey( 'id', $second[0]['entity'],
 			"Must have an 'id' key in the 'entity' from the second result from the API" );
-
-		if ( $myid ) {
-			$this->assertEquals( $myid, $second[0]['entity']['id'],
+		$this->assertEquals( $myid, $second[0]['entity']['id'],
 				"Must have the value '{$myid}' for the 'id' in the result from the API" );
-		}
-
-		if ( $new ) {
-			// register new object for use by subsequent test cases
-			$this->createEntities(); // make sure self::$entityOutput is initialized first.
-			self::$entityOutput[$handle] = $second[0]['entity'];
-			$myid = $second[0]['entity']['id'];
-		}
 
 		$req = array(
 				'action' => 'query',

@@ -170,7 +170,9 @@ return call_user_func( function() {
 		// tests
 		'Wikibase\Test\TestItemContents' => 'tests/phpunit/TestItemContents.php',
 		'Wikibase\Test\ActionTestCase' => 'tests/phpunit/includes/actions/ActionTestCase.php',
+		'Wikibase\Test\Api\WikibaseApiTestCase' => 'tests/phpunit/includes/api/WikibaseApiTestCase.php',
 		'Wikibase\Test\Api\ModifyEntityTestBase' => 'tests/phpunit/includes/api/ModifyEntityTestBase.php',
+		'Wikibase\Test\Api\EntityTestHelper' => 'tests/phpunit/includes/api/EntityTestHelper.php',
 		'Wikibase\Test\Api\LangAttributeBase' => 'tests/phpunit/includes/api/LangAttributeBase.php',
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',

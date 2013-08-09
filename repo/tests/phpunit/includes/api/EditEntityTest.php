@@ -53,9 +53,19 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group large
  */
-class EditEntityTest extends ModifyEntityTestBase {
+class EditEntityTest extends WikibaseApiTestCase {
 
+	private static $hasSetup;
 	static public $id = null;
+
+	public function setup() {
+		parent::setup();
+
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Berlin' ) );
+		}
+		self::$hasSetup = true;
+	}
 
 	static public $entity = array(
 		"sitelinks" => array(
@@ -545,7 +555,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 	 * @dataProvider provideEditEntityData
 	 */
 	function testEditEntityData( $handle, $data, $expected = null ) {
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 
 		// wbsetentity ------------------------------------------------------
 		list($res,,) = $this->doApiRequestWithToken(
@@ -584,9 +594,7 @@ class EditEntityTest extends ModifyEntityTestBase {
 			$this->assertArrayEquals( static::flattenValues( $key, $exp ),
 										static::flattenValues( $key, $entity[$key] ) );
 		}
-
-		// cleanup ------------------------------------------------------
-		$this->resetEntity( $handle );
+		
 	}
 
 	static function flattenValues( $prop, $values ) {
