@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 use ApiTestCase;
 
 /**
- * Tests for setting sitelinks throug from-to -pairs.
+ * Tests for setting sitelinks throug from-to-pairs.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ use ApiTestCase;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Adam Shorland
  *
  * @group API
  * @group Wikibase
@@ -58,132 +59,121 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	public function testLinkTitlesWithNoToken( ) {
-		if ( !self::$usetoken ) {
-			$this->markTestSkipped( "tokens disabled" );
-			return;
-		}
-
-		$req = array(
-			'action' => 'wblinktitles',
-			'fromsite' => "enwiki",
-			'fromtitle' => "testLinkTitlesWithNoToken",
-			'tosite' => "enwiki",
-			'totitle' => "testLinkTitlesWithEvenLessToken",
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-
-	}
-
 	public static function provideLinkTitles() {
 		return array(
-			// Oslo should already exist, add nowiki
-			array( 'Oslo', // handle
-				array(), // by id
-				'nnwiki', // already set
-				'Oslo',
-				'nowiki', // adding this one
-				'Oslo',
-			),
-			// Oslo should already exist, add svwiki
-			array( 'Oslo', // handle
-				array(), // by id
-				'svwiki', // adding this one
-				'Oslo',
-				'nnwiki', // already set
-				'Oslo',
-			),
-			// Try to add two existing ones, should fail with a 'common-item'
-			array( 'Oslo', // handle
-				array(), // by id
-				'nnwiki', // already set
-				'Oslo',
-				'nowiki', // already set
-				'Oslo',
-				'common-item'
-			),
-			// Try to add an existing one from another item, should fail with a 'no-common-item'
-			array( 'Oslo', // handle
-				array(), // by id
-				'nnwiki', // already set
-				'Oslo',
-				'nnwiki', // already set, from another item
-				'Berlin',
-				'no-common-item'
-			),
-			// Try to add an existing one from another item, should fail with a 'no-common-item'
-			array( null, // handle
-				array(), // by id
-				'nnwiki', // already set
-				'Hammerfest',
-				'nnwiki', // already set, from another item
-				'Hammerfest',
-				'fromsite-eq-tosite'
-			),
-			// Try to add an existing one from another item, should fail with a 'no-common-item'
-			array( null, // handle
-				array(), // by id
-				'nnwiki', // already set
-				'Bergen',
-				'nowiki', // already set, from another item
-				'Bergen',
-				null,
-				true
-			),
+			array( //0 add nowiki as fromsite
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo'),
+				'e' => array( 'inresult' => 1 ) ),
+			array( //1 add svwiki as tosite
+				'p' => array( 'tosite' => 'svwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ),
+				'e' => array( 'inresult' => 1 ) ),
+			array( //2 Create a link between 2 new pages
+				'p' => array( 'tosite' => 'svwiki', 'totitle' => 'NewTitle', 'fromsite' => 'nowiki', 'fromtitle' => 'NewTitle' ),
+				'e' => array( 'inresult' => 2 ) ),
+			array( //4 Create a link between 2 new pages
+				'p' => array( 'tosite' => 'svwiki', 'totitle' => 'ATitle', 'fromsite' => 'nowiki', 'fromtitle' => 'ATitle' ),
+				'e' => array( 'inresult' => 2 ) ),
 		);
 	}
 
 	/**
 	 * @dataProvider provideLinkTitles
 	 */
-	public function testLinkTitles( $handle, $item_spec, $fromsite, $fromtitle, $tosite, $totitle, $expectedFailure = null, $cleanUp = false ) {
-		if ( $handle ) {
-			$id = EntityTestHelper::getId( $handle );
-		}
+	public function testLinkTitles( $params, $expected ) {
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wblinktitles';
 
-		// set the sitelink -------------------------------
-		$req = array_merge( $item_spec, array(
-			'action' => 'wblinktitles',
-			'fromsite' => $fromsite,
-			'fromtitle' => $fromtitle,
-			'tosite' => $tosite,
-			'totitle' => $totitle,
-		) );
+		// -- do the request --------------------------------------------------
+		list( $result,, ) = $this->doApiRequestWithToken( $params );
 
-		if( $expectedFailure ){
-			$this->setExpectedException( 'UsageException' );
-		}
+		// -- check the result ------------------------------------------------
+		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+		$this->assertResultHasEntityType( $result );
+		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
+		$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
 
-		list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-		if ( $expectedFailure ) {
-			$this->fail( "Expected failure: $expectedFailure" );
-		}
-
-		// check the response -------------------------------
-		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
-		if ( $handle ) {
-			$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
-		}
-		else {
-			$this->assertEquals( 2, count( $res['entity']['sitelinks'] ), "expected exactly two sitelinks structure" );
-		}
-
-		$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
-
-		foreach ( $res['entity']['sitelinks'] as $link ) {
-			$this->assertTrue( $fromsite === $link['site'] || $tosite === $link['site'] );
-			$this->assertTrue( $fromtitle === $link['title'] || $totitle === $link['title'] );
+		$this->assertEquals( $expected['inresult'] , count( $result['entity']['sitelinks'] ), "Result has wrong number of sitelinks" );
+		foreach ( $result['entity']['sitelinks'] as $link ) {
+			$this->assertTrue( $params['fromsite'] === $link['site'] || $params['tosite'] === $link['site'] );
+			$this->assertTrue( $params['fromtitle'] === $link['title'] || $params['totitle'] === $link['title'] );
 		}
 
 		// check the item in the database -------------------------------
-		if ( isset( $id ) ) {
-			$item = $this->loadEntity( $id );
+		if ( array_key_exists( 'id', $result['entity'] )  ) {
+			$item = $this->loadEntity( 'q'.$result['entity']['id'] );
 			$links = self::flattenArray( $item['sitelinks'], 'site', 'title' );
-			$this->assertEquals( $fromtitle, $links[$fromsite], 'wrong link target' );
-			$this->assertEquals( $totitle, $links[$tosite], 'wrong link target' );
+			$this->assertEquals( $params['fromtitle'], $links[ $params['fromsite'] ], 'wrong link target' );
+			$this->assertEquals( $params['totitle'], $links[ $params['tosite'] ], 'wrong link target' );
+		}
+
+		// -- check the edit summary --------------------------------------------
+		if( array_key_exists( 'summary', $params) ){
+			$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
+		}
+	}
+
+	public static function provideLinkTitleExceptions(){
+		return array(
+			array( //0 badtoken
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'AnotherPage' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
+			array( //1 add two links already exist together
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'common-item') ) ),
+			array( //2 add two links already exist together
+				'p' => array( 'tosite' => 'dewiki', 'totitle' => 'Berlin', 'fromsite' => 'nlwiki', 'fromtitle' => 'Oslo' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-common-item') ) ),
+			array( //3 add two links from the same site
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Hammerfest', 'fromsite' => 'nnwiki', 'fromtitle' => 'Hammerfest' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal') ) ),
+			array( //4 missing title
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => '', 'fromsite' => 'dewiki', 'fromtitle' => 'Hammerfest' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal') ) ),
+			array( //5 bad tosite
+				'p' => array( 'tosite' => 'qwerty', 'totitle' => 'Hammerfest', 'fromsite' => 'nnwiki', 'fromtitle' => 'Hammerfest' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_tosite') ) ),
+			array( //6 bad fromsite
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Hammerfest', 'fromsite' => 'qwerty', 'fromtitle' => 'Hammerfest' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_fromsite') ) ),
+			array( //7 missing site
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'APage', 'fromsite' => '', 'fromtitle' => 'Hammerfest' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_fromsite') ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideLinkTitleExceptions
+	 */
+	public function testLinkTitlesExceptions( $params, $expected ){
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wblinktitles';
+
+		// -- catch and check expected exceptions ---------------------
+		try{
+			if( $expected['exception']['code'] == 'badtoken' ){
+				if ( !self::$usetoken ) {
+					$this->markTestSkipped( "tokens disabled" );
+				}
+				$this->doApiRequest( $params );
+			} else {
+				$this->doApiRequestWithToken( $params );
+			}
+			$this->fail( "Failed to throw exception, {$expected['exception']['type']} " );
+
+		} catch( \Exception $exception ){
+
+			/** @var $exception \UsageException */ // trick IDEs into not showing errors
+			if( array_key_exists( 'type', $expected['exception'] ) ){
+				$this->assertInstanceOf( $expected['exception']['type'], $exception );
+			}
+
+			if( array_key_exists( 'code', $expected['exception'] ) ){
+				$this->assertEquals( $expected['exception']['code'], $exception->getCodeString() );
+			}
+
+			if( array_key_exists( 'message', $expected['exception'] ) ){
+				$this->assertContains( $expected['exception']['message'], $exception->getMessage() );
+			}
 		}
 	}
 
