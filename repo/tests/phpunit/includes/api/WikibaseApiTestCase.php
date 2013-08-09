@@ -145,6 +145,37 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
+	 * Do the test for exceptions from Api queries.
+	 * @param $params array of params for the api query
+	 * @param $exception array details of the exception to expect (type,code,message)
+	 */
+	public function doTestQueryExceptions( $params, $exception ){
+		try{
+			if( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ){
+				if ( !self::$usetoken ) {
+					$this->markTestSkipped( "tokens disabled" );
+				}
+				$this->doApiRequest( $params );
+			} else {
+				$this->doApiRequestWithToken( $params );
+			}
+			$this->fail( "Failed to throw exception, {$exception['type']} " );
+
+		} catch( \Exception $e ){
+			/** @var $e \UsageException */ // trick IDEs into not showing errors
+			if( array_key_exists( 'type', $exception ) ){
+				$this->assertInstanceOf( $exception['type'], $e );
+			}
+			if( array_key_exists( 'code', $exception ) ){
+				$this->assertEquals( $exception['code'], $e->getCodeString() );
+			}
+			if( array_key_exists( 'message', $exception ) ){
+				$this->assertContains( $exception['message'], $e->getMessage() );
+			}
+		}
+	}
+
+	/**
 	 * Utility function for converting an array from "deep" (indexed) to "flat" (keyed) structure.
 	 * Arrays that already use a flat structure are left unchanged.
 	 *

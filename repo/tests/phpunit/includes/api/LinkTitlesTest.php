@@ -147,34 +147,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	public function testLinkTitlesExceptions( $params, $expected ){
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wblinktitles';
-
-		// -- catch and check expected exceptions ---------------------
-		try{
-			if( $expected['exception']['code'] == 'badtoken' ){
-				if ( !self::$usetoken ) {
-					$this->markTestSkipped( "tokens disabled" );
-				}
-				$this->doApiRequest( $params );
-			} else {
-				$this->doApiRequestWithToken( $params );
-			}
-			$this->fail( "Failed to throw exception, {$expected['exception']['type']} " );
-
-		} catch( \Exception $exception ){
-
-			/** @var $exception \UsageException */ // trick IDEs into not showing errors
-			if( array_key_exists( 'type', $expected['exception'] ) ){
-				$this->assertInstanceOf( $expected['exception']['type'], $exception );
-			}
-
-			if( array_key_exists( 'code', $expected['exception'] ) ){
-				$this->assertEquals( $expected['exception']['code'], $exception->getCodeString() );
-			}
-
-			if( array_key_exists( 'message', $expected['exception'] ) ){
-				$this->assertContains( $expected['exception']['message'], $exception->getMessage() );
-			}
-		}
+		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
 }
