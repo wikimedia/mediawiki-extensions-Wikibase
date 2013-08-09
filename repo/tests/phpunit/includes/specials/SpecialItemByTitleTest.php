@@ -33,6 +33,7 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class SpecialItemByTitleTest extends SpecialPageTestBase {
 
@@ -41,14 +42,35 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
-		//TODO: Actually verify that the output is correct.
-		//      Currently this just tests that there is no fatal error.
+		//TODO: Verify that more of the output is correct.
+
+		$expectedInputs = array(
+			'site' => array(
+				'id' => 'wb-itembytitle-sitename',
+				'name' => 'site' ),
+			'pagename' => array(
+				'id' => 'pagename',
+				'class' => 'wb-input-text',
+				'name' => 'page' ),
+			'submit' => array(
+				'id' => 'wb-itembytitle-submit',
+				'class' => 'wb-input-button',
+				'type' => 'submit',
+				'name' => 'submit' ),
+		);
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
+		// -- Make sure the special page loads with expected input fields ----
+		foreach( $expectedInputs as $expected ){
+			$this->assertHasHtmlTagWithElements( $output, 'input', $expected );
+		}
 
-		list( $output, ) = $this->executeSpecialPage( 'en/oHai' );
-		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
+		list( $output, ) = $this->executeSpecialPage( 'SiteText/PageText' );
+		// -- Make sure the subpage values have been passed to the correct input fields ----
+		$this->assertHasHtmlTagWithElements( $output, 'input',
+			array_merge( $expectedInputs['site'], array( 'value' => 'SiteText' ) ) );
+		$this->assertHasHtmlTagWithElements( $output, 'input',
+			array_merge( $expectedInputs['pagename'], array( 'value' => 'PageText' ) ) );
 	}
 
 }
