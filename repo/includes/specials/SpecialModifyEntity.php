@@ -91,7 +91,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 
 			if ( !$editEntity->isSuccess() && $editEntity->getStatus()->getErrorsArray() ) {
 				$errors = $editEntity->getStatus()->getErrorsArray();
-				$this->showErrorHTML( $errors[0]->parse() );
+				$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
 				$this->setForm();
 			}
 			else {
