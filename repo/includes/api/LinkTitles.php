@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase, User, Status;
 
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SiteLink;
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -148,9 +149,12 @@ class LinkTitles extends ApiWikibase {
 		}
 
 		if ( $itemContent !== null ) {
+			$formatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
+
 			$this->getResult()->addValue(
 				'entity',
-				'id', $itemContent->getItem()->getId()->getNumericId()
+				'id',
+				$formatter->format( $itemContent->getItem()->getId() )
 			);
 			$this->getResult()->addValue(
 				'entity',
