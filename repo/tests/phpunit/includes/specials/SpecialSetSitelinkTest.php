@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
+use SpecialSetSiteLink;
 
 /**
- * Tests for the SpecialSetAliases class.
+ * Tests for the SpecialSetSitelink class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +22,7 @@ namespace Wikibase\Test;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.1
+ * @since 0.4
  *
  * @ingroup WikibaseRepoTest
  * @ingroup Test
@@ -31,12 +32,12 @@ namespace Wikibase\Test;
  * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
+ * @author Adam Shorland
  */
-class SpecialSetAliasesTest extends SpecialPageTestBase {
+class SpecialSetSitelinkTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \SpecialSetAliases();
+		return new SpecialSetSitelink();
 	}
 
 	public function testExecute() {
@@ -53,20 +54,20 @@ class SpecialSetAliasesTest extends SpecialPageTestBase {
 				'id' => 'wb-setentity-id',
 				'class' => 'wb-input',
 				'name' => 'id' ),
-			'language' => array(
-				'id' => 'wb-setentity-language',
+			'site' => array(
+				'id' => 'wb-setsitelink-site',
 				'class' => 'wb-input',
-				'name' => 'language' ),
-			'value' => array(
-				'id' => 'wb-setentity-value',
+				'name' => 'site' ),
+			'page' => array(
+				'id' => 'wb-setsitelink-page',
 				//@todo the below class does not look correct
 				'class' => 'wb-input wb-input-text',
-				'name' => 'value' ),
+				'name' => 'page' ),
 			'submit' => array(
-				'id' => 'wb-setaliases-submit',
+				'id' => 'wb-setsitelink-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
-				'name' => 'wikibase-setaliases-submit' ),
+				'name' => 'wikibase-setsitelink-submit' ),
 		);
 
 		list( $output, ) = $this->executeSpecialPage( '' );

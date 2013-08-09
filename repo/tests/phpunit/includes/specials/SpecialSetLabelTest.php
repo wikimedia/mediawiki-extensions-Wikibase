@@ -48,8 +48,32 @@ class SpecialSetLabelTest extends SpecialPageTestBase {
 
 		//TODO: Verify that item creation works via a faux post request
 
+		$expectedInputs = array(
+			'id' => array(
+				'id' => 'wb-setentity-id',
+				'class' => 'wb-input',
+				'name' => 'id' ),
+			'language' => array(
+				'id' => 'wb-setentity-language',
+				'class' => 'wb-input',
+				'name' => 'language' ),
+			'value' => array(
+				'id' => 'wb-setentity-value',
+				//@todo the below class does not look correct
+				'class' => 'wb-input wb-input-text',
+				'name' => 'value' ),
+			'submit' => array(
+				'id' => 'wb-setlabel-submit',
+				'class' => 'wb-button',
+				'type' => 'submit',
+				'name' => 'wikibase-setlabel-submit' ),
+		);
+
 		list( $output, ) = $this->executeSpecialPage( '' );
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
+
+		foreach( $expectedInputs as $input ){
+			$this->assertHasHtmlTagWithElements( $output, 'input', $input );
+		}
 	}
 
 }
