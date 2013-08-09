@@ -67,7 +67,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 		$this->type = null;
 		if ( $subPage !== null ) {
 			$parts = explode( '/', $subPage );
-			if ( count( $parts >= 2 ) ) {
+			if ( array_key_exists( 1, $parts ) ) {
 				$this->type = $parts[1];
 			}
 			$this->language = $parts[0];
