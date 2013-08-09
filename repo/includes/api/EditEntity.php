@@ -190,7 +190,6 @@ class EditEntity extends ModifyEntity {
 		$labelChangeOps = array();
 
 		if ( !is_array( $labels ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "List of labels must be an array", 'not-recognized-array' );
 		}
 
@@ -223,7 +222,6 @@ class EditEntity extends ModifyEntity {
 		$descriptionChangeOps = array();
 
 		if ( !is_array( $descriptions ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "List of descriptions must be an array", 'not-recognized-array' );
 		}
 
@@ -256,7 +254,6 @@ class EditEntity extends ModifyEntity {
 		$aliasesChangeOps = array();
 
 		if ( !is_array( $aliases ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "List of aliases must be an array", 'not-recognized-array' );
 		}
 
@@ -296,7 +293,6 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( !$status->isOk() ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 		}
 
@@ -315,7 +311,6 @@ class EditEntity extends ModifyEntity {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "List of sitelinks must be an array", 'not-recognized-array' );
 		}
 
@@ -328,7 +323,6 @@ class EditEntity extends ModifyEntity {
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
 			} else {
-				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
 
@@ -338,7 +332,6 @@ class EditEntity extends ModifyEntity {
 				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $arg['title'] ) );
 
 				if ( $linkPage === false ) {
-					wfProfileOut( __METHOD__ );
 					$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
 				}
 
@@ -382,12 +375,10 @@ class EditEntity extends ModifyEntity {
 			'datatype' );
 
 		if ( is_null( $data ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid json: The supplied JSON structure could not be parsed or recreated as a valid structure' , 'invalid-json' );
 		}
 
 		if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
 		}
 
@@ -403,20 +394,16 @@ class EditEntity extends ModifyEntity {
 
 		// conditional processing
 		if ( isset( $data['pageid'] ) && ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Illegal field used in call: pageid', 'param-illegal' );
 		}
 		// not completely convinced that we can use title to get the namespace in this case
 		if ( isset( $data['ns'] ) && ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Illegal field used in call: namespace', 'param-illegal' );
 		}
 		if ( isset( $data['title'] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Illegal field used in call: title', 'param-illegal' );
 		}
 		if ( isset( $data['lastrevid'] ) && ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Illegal field used in call: lastrevid', 'param-illegal' );
 		}
 
