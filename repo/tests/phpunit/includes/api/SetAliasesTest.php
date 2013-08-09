@@ -95,7 +95,7 @@ class SetAliasesTest extends LangAttributeTestCase {
 				'p' => array( 'language' => 'de', 'set' => 'hiya' ),
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya' ) ) ) ),
 			array( //10
-				'p' => array( 'language' => 'de', 'add' => 'opps' ),
+				'p' => array( 'language' => 'de', 'add' => '||||||opps||||opps||||' ),
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya', 'opps' ) ) ) ),
 			array( //11
 				'p' => array( 'language' => 'de', 'remove' => 'opps|hiya' ),
