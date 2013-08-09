@@ -137,7 +137,7 @@ class SetAliasesTest extends WikibaseApiTestCase {
 		$id = EntityTestHelper::getId( $handle );
 		$langCode = 'en';
 		$op = 'add';
-		$value = LangAttributeBase::makeOverlyLongString();
+		$value = LangAttributeTestHelper::makeOverlyLongString();
 		$exception = 'UsageException';
 
 		// update the item ----------------------------------------------------------------
