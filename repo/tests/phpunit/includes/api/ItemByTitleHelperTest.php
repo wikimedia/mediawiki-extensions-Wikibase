@@ -126,7 +126,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	 */
 	public function testGetEntityIdNormalized() {
 		$itemByTitleHelper = new ItemByTitleHelper(
-			// Two values should be added: The normalization and the failure to find an entity
+		// Two values should be added: The normalization and the failure to find an entity
 			$this->getApiBaseMock( 2 ),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),
@@ -148,7 +148,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	 */
 	public function testGetEntityIdsNotFound() {
 		$itemByTitleHelper = new ItemByTitleHelper(
-			// Two result values should be added (for both titles which wont be found)
+		// Two result values should be added (for both titles which wont be found)
 			$this->getApiBaseMock( 2 ),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),

@@ -50,39 +50,26 @@ namespace Wikibase\Test\Api;
  * @group BreakingTheSlownessBarrier
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler
+ * @author Adam Shorland
  */
-class SetLabelTest extends LangAttributeBase {
-
-	private static $hasSetup;
+class SetLabelTest extends LangAttributeTestCase {
 
 	public function setUp() {
+		self::$testAction = 'wbsetlabel';
 		parent::setUp();
-
-		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Oslo' ) );
-		}
-		self::$hasSetup = true;
-	}
-
-	public static function paramProvider() {
-		return array(
-			// $handle, $langCode, $value, $exception
-			array( 'Oslo', 'en', 'Osloooo', null ),
-			//array( 'Oslo', 'en', 'Oslo', 'UsageException' ),
-			//array( 'Oslo', 'en', 'Bergen', null ),
-			array( 'Oslo', 'en', '', null ),
-			array( 'Oslo', 'en', self::makeOverlyLongString( 'Oslo' ), 'UsageException' ),
-		);
 	}
 
 	/**
-	 * @dataProvider paramProvider
+	 * @dataProvider provideData
 	 */
-	public function testLanguageAttribute( $handle, $langCode, $value, $exception = null ) {
-		$this->doLanguageAttribute( $handle, 'wbsetlabel', 'label', $langCode, $value, $exception );
-		$id = EntityTestHelper::getId( $handle );
+	public function testSetLabel( $params, $expected ){
+		self::doTestSetLangAttribute( 'labels' ,$params, $expected );
 	}
 
+	/**
+	 * @dataProvider provideExceptionData
+	 */
+	public function testSetLabelExceptions( $params, $expected ){
+		self::doTestSetLangAttributeExceptions( $params, $expected );
+	}
 }

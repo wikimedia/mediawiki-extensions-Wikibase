@@ -339,5 +339,5 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$comment = $rev->getComment();
 		$this->assertRegExp( $regex, $comment );
 	}
-	
+
 }
