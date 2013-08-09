@@ -160,7 +160,7 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 			$this->value,
 			'text',
 			array(
-				'class' => 'wb-input wb-input-text',
+				'class' => 'wb-input',
 				'id' => 'wb-setentity-value',
 				'size' => 50
 			)
