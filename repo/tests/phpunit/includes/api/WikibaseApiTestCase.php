@@ -53,22 +53,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected static $loginUser = null;
 	protected static $token = null;
 
-	protected $setUpComplete = false;
-
-	protected function isSetUp() {
-		return $this->setUpComplete;
-	}
-
 	public function setUp() {
 		global $wgUser;
 		parent::setUp();
 
-		static $hasSites = false;
-
-		if ( !$hasSites ) {
-			\TestSites::insertIntoDb();
-			$hasSites = true;
-		}
+		static $isSetup = false;
 
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
@@ -83,13 +72,17 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		$wgUser = self::$users['wbeditor']->user;
 
-		$this->login();
+		if ( !$isSetup ) {
+			\TestSites::insertIntoDb();
+
+			$this->login();
+
+			$isSetup = true;
+		}
 
 		//TODO: preserve session and token between calls?!
 		self::$loginSession = false;
 		self::$token = false;
-
-		$this->setUpComplete = true;
 	}
 
 	/**
