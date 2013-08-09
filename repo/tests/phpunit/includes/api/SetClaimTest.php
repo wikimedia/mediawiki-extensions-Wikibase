@@ -42,7 +42,7 @@ use Wikibase\PropertyContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SetClaimTest extends ModifyEntityTestBase {
+class SetClaimTest extends WikibaseApiTestCase {
 
 	/**
 	 * @return \Wikibase\Snak[]

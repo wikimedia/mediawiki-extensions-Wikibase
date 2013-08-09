@@ -7,7 +7,7 @@ use \Wikibase\EditEntity;
 use \Wikibase\ItemContent;
 use \Wikibase\Item;
 use \Status;
-use Wikibase\Test\Api\ModifyEntityTestBase;
+use Wikibase\Test\Api\PermissionsTest;
 
 /**
  * Test EditEntity.
@@ -430,7 +430,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		if ( $permissions !== null ) {
-			ModifyEntityTestBase::applyPermissions( array(
+			PermissionsTest::applyPermissions( array(
 				'*' => $permissions,
 				'user' => $permissions,
 				$group => $permissions,

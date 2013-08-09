@@ -47,28 +47,26 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class GetEntitiesTest extends ModifyEntityTestBase {
+class GetEntitiesTest extends WikibaseApiTestCase {
+
+	private static $hasSetup;
+	private static $usedHandles = array( 'Berlin', 'London', 'Oslo', 'Leipzig', 'Empty' );
 
 	public function setup() {
 		parent::setup();
 
-		static $resetedEntities = false;
-		if ( !$resetedEntities ) {
-			// Nasty... we shouldn't need to do this. But apparently some other test spills bad state.
-			// Only do this once as the tests in here really shouldn't alter any entities
-			$this->resetEntities();
-			$resetedEntities = true;
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( self::$usedHandles );
 		}
+		self::$hasSetup = true;
 	}
 
 	/**
 	 * @dataProvider provideEntityHandles
 	 */
 	function testGetItemById( $handle ) {
-		$this->createEntities();
-
-		$item = $this->getEntityOutput( $handle );
-		$id = $item['id'];
+		$id = EntityTestHelper::getId( $handle );
+		$item = EntityTestHelper::getEntityOutput( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -118,10 +116,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @dataProvider provideEntityHandles
 	 */
 	function testGetItemByIdUnique( $handle ) {
-		$this->createEntities();
-
-		$item = $this->getEntityOutput( $handle );
-		$id = $item['id'];
+		$id = EntityTestHelper::getId( $handle );
+		$item = EntityTestHelper::getEntityOutput( $handle );
 
 		$ids = array(
 			strtoupper( $id ),
@@ -143,12 +139,22 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 		$this->assertEquals( 1, count( $res['entities'] ) );
 	}
 
+	/**
+	 * data provider for passing each entity handle to the test function.
+	 */
+	public static function provideEntityHandles() {
+		$handles = array();
+		foreach( self::$usedHandles as $handle ){
+			$handles[] = array( $handle );
+		}
+		return $handles;
+	}
+
 	public static function provideGetItemByTitle() {
 		$calls = array();
-		$handles = static::getEntityHandles();
 
-		foreach ( $handles as $handle ) {
-			$item = static::getEntityInput( $handle );
+		foreach ( self::$usedHandles as $handle ) {
+			$item = EntityTestHelper::getEntityData( $handle );
 
 			if ( !isset( $item['sitelinks'] ) ) {
 				continue;
@@ -176,8 +182,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			'format' => 'json', // make sure IDs are used as keys
 		) );
 
-		$item = $this->getEntityOutput( $handle );
-		$id = $item['id'];
+		$id = EntityTestHelper::getId( $handle );
+		$item = EntityTestHelper::getEntityOutput( $handle );
 
 		$this->assertResultSuccess( $res );
 		$this->assertResultHasKeyInPath( $res, 'entities', $id );
@@ -201,8 +207,8 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 			'format' => 'json', // make sure IDs are used as keys
 		) );
 
-		$item = $this->getEntityOutput( $handle );
-		$id = $item['id'];
+		$id = EntityTestHelper::getId( $handle );
+		$item = EntityTestHelper::getEntityOutput( $handle );
 
 		$this->assertResultSuccess( $res );
 		$this->assertResultHasKeyInPath( $res, 'entities', $id );
@@ -397,8 +403,10 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @group API
 	 */
 	public function testGetEntitiesMultipleIds() {
-		$handles = $this->getEntityHandles();
-		$ids = array_map( array( $this, 'getEntityId' ), $handles );
+		$ids = array();
+		foreach( self::$usedHandles as $handle ){
+			$ids[] = EntityTestHelper::getId( $handle );
+		}
 
 		list( $res,, ) = $this->doApiRequest( array(
 			'action' => 'wbgetentities',
@@ -438,7 +446,7 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 		$this->assertEquals( count( $titles ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
 
 		foreach ( $handles as $handle ) {
-			$id = $this->getEntityId( $handle );
+			$id = EntityTestHelper::getId( $handle );
 
 			$this->assertArrayHasKey( $id, $res['entities'], "missing item" );
 			$this->assertEquals( $id, $res['entities'][$id]['id'], "bad ID" );
@@ -459,9 +467,7 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @dataProvider provideLanguages
 	 */
 	function testLanguages( $handle, $languages ) {
-		$this->createEntities();
-
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -514,9 +520,7 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @dataProvider provideProps
 	 */
 	function testProps( $handle, $props, $expectedProps ) {
-		$this->createEntities();
-
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -548,8 +552,7 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @dataProvider provideSitelinkUrls
 	 */
 	function testSitelinkUrls( $handle ) {
-		$this->createEntities();
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -595,8 +598,7 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @dataProvider provideSitelinkSorting
 	 */
 	function testSitelinkSorting( $handle ) {
-		$this->createEntities();
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -642,10 +644,7 @@ class GetEntitiesTest extends ModifyEntityTestBase {
 	 * @dataProvider providerGetItemFormat
 	 */
 	function testGetItemFormat( $format, $usekeys ) {
-		$this->createEntities();
-
-		$item = $this->getEntityOutput( 'Berlin' );
-		$id = $item['id'];
+		$id = EntityTestHelper::getId( 'Berlin' );
 
 		list($res,,) = $this->doApiRequest(
 			array(

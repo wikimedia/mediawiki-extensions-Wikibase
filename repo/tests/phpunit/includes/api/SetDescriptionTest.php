@@ -12,12 +12,6 @@ namespace Wikibase\Test\Api;
  * Without this they will be killed after 1 second, but the setup of the tables takes so long
  * time that the first few tests get killed.
  *
- * The tests are doing some assumptions on the id numbers. If the database isn't empty when
- * when its filled with test items the ids will most likely get out of sync and the tests will
- * fail. It seems impossible to store the item ids back somehow and at the same time not being
- * dependant on some magically correct solution. That is we could use GetItemId but then we
- * would imply that this module in fact is correct.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -61,6 +55,17 @@ namespace Wikibase\Test\Api;
  */
 class SetDescriptionTest extends LangAttributeBase {
 
+	private static $hasSetup;
+
+	public function setUp() {
+		parent::setUp();
+
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Oslo' ) );
+		}
+		self::$hasSetup = true;
+	}
+
 	public function paramProvider() {
 		return array(
 			// $handle, $langCode, $value, $exception
@@ -77,7 +82,7 @@ class SetDescriptionTest extends LangAttributeBase {
 	 */
 	public function testLanguageAttribute( $handle, $langCode, $value, $exception = null ) {
 		$this->doLanguageAttribute( $handle, 'wbsetdescription', 'description', $langCode, $value, $exception );
-		$this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 	}
 
 }
