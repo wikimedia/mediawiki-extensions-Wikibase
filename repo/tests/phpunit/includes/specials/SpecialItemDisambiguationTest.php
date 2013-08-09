@@ -33,6 +33,7 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
@@ -41,14 +42,36 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
-		//TODO: Actually verify that the output is correct.
-		//      Currently this just tests that there is no fatal error.
+		//TODO: Verify that more of the output is correct.
+
+		$expectedInputs = array(
+			'language' => array(
+				'id' => 'wb-itemdisambiguation-languagename',
+				'class' => 'wb-input-text',
+				'name' => 'language' ),
+			'label' => array(
+				'id' => 'labelname',
+				'class' => 'wb-input-text',
+				'name' => 'label' ),
+			'submit' => array(
+				'id' => 'wb-itembytitle-submit',
+				'class' => 'wb-input-button',
+				'type' => 'submit',
+				'name' => 'submit' ),
+		);
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
+		// -- Make sure the special page loads with expected input fields ----
+		foreach( $expectedInputs as $expected ){
+			$this->assertHasHtmlTagWithElements( $output, 'input', $expected );
+		}
 
-		list( $output, ) = $this->executeSpecialPage( 'en/oHai' );
-		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
+		list( $output, ) = $this->executeSpecialPage( 'LangText/LabelText' );
+		// -- Make sure the subpage values have been passed to the correct input fields ----
+		$this->assertHasHtmlTagWithElements( $output, 'input',
+			array_merge( $expectedInputs['language'], array( 'value' => 'LangText' ) ) );
+		$this->assertHasHtmlTagWithElements( $output, 'input',
+			array_merge( $expectedInputs['label'], array( 'value' => 'LabelText' ) ) );
 	}
 
 }

@@ -29,6 +29,7 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
@@ -53,10 +54,6 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
 		parent::tearDown();
 	}
-
-	//public function testConstructor() {
-		//$this->assertInstanceOf( 'SpecialPage', new \SpecialItemDisambiguation() );
-	//}
 
 	/**
 	 * Returns a new instance of the special page under test.
@@ -124,6 +121,21 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 		}
 
 		return array( $text, $response );
+	}
+
+	/**
+	 * Uses regex to assert that the given tag exists in a string
+	 * @param $text string to check
+	 * @param $tag string name of tag
+	 * @param $attributes array list of html attributes
+	 */
+	protected function assertHasHtmlTagWithElements( $text, $tag, $attributes ){
+		$parts = array();
+		foreach( $attributes as $parm => $value ){
+			$parts[] = preg_quote( "{$parm}=\"{$value}\"", '/' );
+		}
+		$this->assertRegExp( '/<' . $tag . '(\s[^<]*?(' . implode( '|', $parts ) . ')[^>]*?){' . count( $parts ) . '}>/' ,
+			$text, "Missing {$tag} tag in text" );
 	}
 
 }
