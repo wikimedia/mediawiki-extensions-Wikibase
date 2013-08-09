@@ -50,128 +50,153 @@ use ApiTestCase;
  * @group BreakingTheSlownessBarrier
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
-class SetAliasesTest extends WikibaseApiTestCase {
+class SetAliasesTest extends LangAttributeTestCase {
 
-	private static $hasSetup;
-
-	public function setup() {
-		parent::setup();
-
-		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Oslo' ) );
-		}
-		self::$hasSetup = true;
+	public function setUp() {
+		self::$testAction = 'wbsetaliases';
+		parent::setUp();
 	}
 
-	public function paramProvider() {
+	public static function provideData() {
 		return array(
-			// lang code, list name, list values, expected result
-			array( 'Oslo', 'en', 'set', 'Foo', 'Foo' ),
-			array( 'Oslo', 'en', 'add', 'Foo|bax', 'Foo|bax' ),
-			array( 'Oslo', 'en', 'set', 'Foo|bar|baz', 'Foo|bar|baz' ),
-			array( 'Oslo', 'en', 'add', 'Foo|spam', 'Foo|bar|baz|spam' ),
-			array( 'Oslo', 'en', 'add', 'ohi', 'Foo|bar|baz|spam|ohi' ),
+			// p => params, e => expected
 
-			array( 'Oslo', 'de', 'set', '', '' ),
-			array( 'Oslo', 'de', 'add', 'ohi', 'ohi' ),
-
-			array( 'Oslo', 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
-			array( 'Oslo', 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
-			array( 'Oslo', 'en', 'remove', 'Foo|bar|baz|o_O', 'spam' ),
-			array( 'Oslo', 'en', 'add', 'o_O', 'spam|o_O' ),
-			array( 'Oslo', 'en', 'set', 'o_O', 'o_O' ),
-			array( 'Oslo', 'en', 'remove', 'o_O', '' ),
+			// -- Test valid sequence -----------------------------
+			array( //0
+				'p' => array( 'language' => 'en', 'set' => '' ),
+				'e' => array( 'warning' => 'edit-no-change' ) ),
+			array( //1
+				'p' => array( 'language' => 'en', 'set' => 'Foo' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo' ) ) ) ),
+			array( //2
+				'p' => array( 'language' => 'en', 'add' => 'Foo|Bax' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bax' ) ) ) ),
+			array( //3
+				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ) ) ),
+			array( //4
+				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ), 'warning' => 'edit-no-change' ) ),
+			array( //5
+				'p' => array( 'language' => 'en', 'add' => 'Foo|Spam' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam' ) ) ) ),
+			array( //6
+				'p' => array( 'language' => 'en', 'add' => 'ohi' ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam', 'ohi' ) ) ) ),
+			array( //7
+				'p' => array( 'language' => 'en', 'set' => 'ohi' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
+			array( //8
+				'p' => array( 'language' => 'de', 'set' => '' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ), 'warning' => 'edit-no-change' ) ),
+			array( //9
+				'p' => array( 'language' => 'de', 'set' => 'hiya' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya' ) ) ) ),
+			array( //10
+				'p' => array( 'language' => 'de', 'add' => 'opps' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya', 'opps' ) ) ) ),
+			array( //11
+				'p' => array( 'language' => 'de', 'remove' => 'opps|hiya' ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
+			array( //12
+				'p' => array( 'language' => 'en', 'remove' => 'ohi' ),
+				'e' => array(  ) ),
 		);
 	}
 
 	/**
-	 * @dataProvider paramProvider
+	 * @dataProvider provideData
 	 */
-	public function testSetAliases( $handle, $langCode, $op, $value, $expected ) {
-		$id = EntityTestHelper::getId( $handle );
-		$expected = $expected === '' ? array() : explode( '|', $expected );
+	public function testSetAliases( $params, $expected ){
+		// -- set any defaults ------------------------------------
+		$params['action'] = self::$testAction;
+		if( !array_key_exists( 'id', $params ) ){
+			$params['id'] = EntityTestHelper::getId( 'Empty' );
+		}
+		if( !array_key_exists( 'value', $expected ) ){
+			$expected['value'] = array();
+		}
 
-		// update the item ----------------------------------------------------------------
-		$req = array(
-			'id' => $id,
-			'action' => 'wbsetaliases',
-			'language' => $langCode,
-			$op => $value
-		);
+		// -- do the request --------------------------------------------------
+		list( $result,, ) = $this->doApiRequestWithToken( $params );
 
-		list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+		// -- check the result ------------------------------------------------
+		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+		$this->assertResultHasEntityType( $result );
+		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 
-		$this->assertResultSuccess( $apiResponse );
+		if( array_key_exists( $params['language'], $expected['value'] ) ){
+			$resAliases = self::flattenArray( $result['entity']['aliases'], 'language', 'value', true );
+			$this->assertArrayHasKey( $params['language'], $resAliases );
+			$this->assertArrayEquals( $expected['value'][$params['language']], $resAliases[ $params['language'] ] );
+		}
 
-		// check return value --------------------------------------------------
-		if ( $expected ) {
-			$this->assertResultSuccess( $apiResponse );
-			$this->assertResultHasKeyInPath( $apiResponse, 'entity', 'aliases' );
+		// -- check any warnings ----------------------------------------------
+		if( array_key_exists( 'warning', $expected ) ){
+			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
+			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
+			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
+		}
 
-			$aliases = self::flattenArray( $apiResponse['entity']['aliases'], 'language', 'value', true );
-			$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
-
-			$this->assertArrayEquals( $expected, $actual );
+		// -- check item in database -------------------------------------------
+		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
+		if( count( $expected['value'] ) ){
+			$this->assertArrayHasKey( 'aliases', $dbEntity );
+			$dbAliases = self::flattenArray( $dbEntity['aliases'], 'language', 'value', true );
+			foreach( $expected['value'] as $valueLanguage => $value ){
+				$this->assertArrayEquals( $value, $dbAliases[ $valueLanguage ] );
+			}
 		} else {
-			$this->assertFalse( !empty( $apiResponse['entity']['aliases'] ), "found aliases when there should be none" );
+			$this->assertArrayNotHasKey( 'aliases', $dbEntity );
 		}
 
-		// check item in database --------------------------------------------------
-		$item = $this->loadEntity( $id );
-
-		$aliases = self::flattenArray( $item['aliases'], 'language', 'value', true );
-		$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
-
-		$this->assertArrayEquals( $expected, $actual );
-
-		//TODO: we should have such checks for all API modules!
-		$this->assertRevisionSummary(
-			array_merge( array( "wbsetaliases-$op", $langCode ), explode( '|', $value ) ),
-			$apiResponse['entity']['lastrevid'] );
-	}
-
-	public function testSetAliases_length( ) {
-		$handle = 'Oslo';
-		$id = EntityTestHelper::getId( $handle );
-		$langCode = 'en';
-		$op = 'add';
-		$value = LangAttributeTestHelper::makeOverlyLongString();
-		$exception = 'UsageException';
-
-		// update the item ----------------------------------------------------------------
-		$req = array(
-			'id' => $id,
-			'action' => 'wbsetaliases',
-			'language' => $langCode,
-			$op => $value
-		);
-
-		try {
-			list( $apiResponse,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-		} catch ( \Exception $e ) {
-			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
-				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
-				return;
-			}
-			else {
-				throw $e;
+		// -- check the edit summary --------------------------------------------
+		if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
+			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
+			if( array_key_exists( 'summary', $params) ){
+				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
 			}
 		}
 	}
 
-	public function testSetAliases_invalidId() {
-		$badId = 'xyz123+++';
+	public static function provideExceptionData() {
+		return array(
+			// p => params, e => expected
 
-		$req = array(
-			'id' => $badId,
-			'action' => 'wbsetaliases',
-			'language' => 'en',
-			'set' => 'foo'
+			// -- Test Exceptions -----------------------------
+			array( //0
+				'p' => array( 'language' => '', 'add' => '' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
+			array( //1
+				'p' => array( 'language' => 'nl', 'set' => LangAttributeTestHelper::makeOverlyLongString() ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
+			array( //2
+				'p' => array( 'language' => 'pt', 'remove' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
+			array( //3
+				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id', 'message' => 'No entity found' ) ) ),
+			array( //4
+				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site', 'message' => "Unrecognized value for parameter 'site'" ) ) ),
+			array( //5
+				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'remove' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-link', 'message' => 'No entity found matching site link' ) ) ),
+			array( //6
+				'p' => array( 'title' => 'Blub', 'language' => 'en', 'add' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
+			array( //7
+				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
 		);
+	}
 
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+	/**
+	 * @dataProvider provideExceptionData
+	 */
+	public function testSetLabelExceptions( $params, $expected ){
+		self::doTestSetLangAttributeExceptions( $params, $expected );
 	}
 }
