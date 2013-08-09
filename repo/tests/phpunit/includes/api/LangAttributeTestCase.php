@@ -55,15 +55,9 @@ class LangAttributeTestCase extends WikibaseApiTestCase {
 
 	protected static $testAction;
 	protected static $testId;
-	private static $hasSetup;
 
 	public function setUp() {
 		parent::setUp();
-
-		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Empty') );
-		}
-		self::$hasSetup = true;
 	}
 
 	public static function provideData() {
