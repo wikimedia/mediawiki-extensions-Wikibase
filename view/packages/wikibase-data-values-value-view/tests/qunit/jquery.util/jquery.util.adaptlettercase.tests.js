@@ -41,11 +41,10 @@
 			'No replacement taking place when not passing letters.'
 		);
 
-		assert.throws(
-			function() {
-				$.util.adaptlettercase( 'abc', '123', 'all' );
-			},
-			'Error thrown when destination does not match source.'
+		assert.equal(
+			$.util.adaptlettercase( 'abc', '123', 'all' ),
+			'abc',
+			'Not performing any replacement if strings do not match.'
 		);
 
 	} );
