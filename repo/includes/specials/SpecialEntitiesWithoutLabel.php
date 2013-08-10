@@ -90,7 +90,8 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 		}
 		$typeSelect = new XmlSelect( 'type', 'wb-entitieswithoutlabel-type', $this->type );
 		$typeSelect->addOption( $this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text(), '' );
-		//item, property and query
+		// Give grep a chance to find the usages:
+		// wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
 		foreach( $possibleTypes as $possibleType ) {
 			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $possibleType )->text(), $possibleType );
 		}
