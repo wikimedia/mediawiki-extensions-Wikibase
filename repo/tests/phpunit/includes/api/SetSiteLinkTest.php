@@ -30,6 +30,7 @@ use ApiTestCase;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  *
  * @group API
  * @group Wikibase
@@ -50,199 +51,138 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
+	public static function provideData() {
+		return array(
+			array( //0 set new link using id
+				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'leipzig' ),
+				'e' => array( 'value' => array( 'dewiki' => 'Leipzig' ) ) ),
+			array( //1 set new link using sitelink
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => 'berlin' ),
+				'e' => array( 'value' => array( 'nowiki' => 'Berlin' ), 'indb' => 5 ) ),
+			array( //2 modify link using id
+				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'Leipzig_Two' ),
+				'e' => array( 'value' => array( 'dewiki' => 'Leipzig Two' ) ) ),
+			array( //3 modify link using sitelink
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => 'Berlin_Two' ),
+				'e' => array( 'value' => array( 'nowiki' => 'Berlin Two' ), 'indb' => 5 ) ),
+			array( //4 remove link using id (with a summary)
+				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => '', 'summary' => 'WooSummary' ),
+				'e' => array( 'value' => array() ) ),
+			array( //5 remove link using sitelink
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => '' ),
+				'e' => array( 'value' => array(), 'indb' => 4 ) ),
+			array( //6 no change
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin' ),
+				'e' => array( 'value' => array( 'dewiki' => 'Berlin' ), 'warning' => 'edit-no-change', 'indb' => 4 ) ),
+		);
+	}
+
+	public static function provideExceptionData() {
+		return array(
+			array( //0 badtoken
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'linktitle' => 'testSetLiteLinkWithNoToken' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
+			array( //1 testSetLiteLinkWithNoId
+				'p' => array( 'linksite' => 'enwiki', 'linktitle' => 'testSetLiteLinkWithNoId' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
+			array( //2 testSetLiteLinkWithBadId
+				'p' => array( 'id' => 123456789, 'linksite' => 'enwiki', 'linktitle' => 'testSetLiteLinkWithNoId' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
+			array( //3 testSetLiteLinkWithBadSite
+				'p' => array( 'site' => 'dewiktionary', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
+			array( //4 testSetLiteLinkWithBadTitle
+				'p' => array( 'site' => 'dewiki', 'title' => 'BadTitle_de', 'linksite' => 'enwiki', 'linktitle' => 'BadTitle_en' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
+			array( //4 testSetLiteLinkWithBadTargetSite
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'enwiktionary', 'linktitle' => 'Berlin' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ), );
+	}
+
 	public function setup() {
 		parent::setup();
 
-		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Leipzig', 'Berlin', 'London' ) );
+		if ( ! isset( self::$hasSetup ) ) {
+			$this->initTestEntities( array( 'Leipzig', 'Berlin' ) );
 		}
 		self::$hasSetup = true;
 	}
 
-	public function testSetLiteLinkWithNoId( ) {
-		$req = array(
-			'action' => 'wbsetsitelink',
-			'linksite' => "enwiki",
-			'linktitle' => "testSetLiteLinkWithNoId",
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-	}
-
-	public function testSetLiteLinkWithBadId( ) {
-		$req = array(
-			'action' => 'wbsetsitelink',
-			'id' => 123456789,
-			'linksite' => "enwiki",
-			'linktitle' => "testSetLiteLinkWithNoId",
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-	}
-
-	public function testSetLiteLinkWithBadSite( ) {
-		$req = array(
-			'action' => 'wbsetsitelink',
-			'site' => "dewiktionary",
-			'title' => "Berlin",
-			'linksite' => "enwiki",
-			'linktitle' => "Berlin",
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-	}
-
-	public function testSetLiteLinkWithBadTitle( ) {
-		$req = array(
-			'action' => 'wbsetsitelink',
-			'site' => "dewiki",
-			'title' => "testSetLiteLinkWithBadTitle_de",
-			'linksite' => "enwiki",
-			'linktitle' => "testSetLiteLinkWithBadTitle_en",
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-	}
-
-	public function testSetLiteLinkWithNoToken( ) {
-		if ( !self::$usetoken ) {
-			$this->markTestSkipped( "tokens disabled" );
-			return;
-		}
-
-		$req = array(
-			'action' => 'wbsetsitelink',
-			'id' => EntityTestHelper::getId( 'Berlin' ),
-			'linksite' => "enwiki",
-			'linktitle' => "testSetLiteLinkWithNoToken",
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-	}
-
-	public static function provideSetLiteLink() {
-		return array(
-			array( 'Leipzig', // handle
-				array( 'id' => null ), // by id
-				'dewiki', // not yet set
-				'leipzig', // will be normalized
-				'Leipzig'
-			),
-			array( 'Berlin', // handle
-				array( 'id' => null ), // by id
-				'enwiki', // already set
-				'Potsdam', // replaces value
-				'Potsdam'
-			),
-			array( 'London', // handle
-				array( 'site' => 'enwiki', 'title' => 'London' ), // by sitelink
-				'enwiki', // already set
-				'', // remove the entry
-				'London'
-			),
-			array( 'London', // handle
-				array( 'site' => 'dewiki', 'title' => 'London' ), // by sitelink
-				'svwiki', // not set
-				'', // remove the entry
-				false, // expect nothing
-			),
-		);
-	}
-
 	/**
-	 * @dataProvider provideSetLiteLink
+	 * @dataProvider provideData
 	 */
-	public function testSetLiteLink( $handle, $item_spec, $linksite, $linktitle, $expectedTitle = null, $expectedFailure = null ) {
-		$id = EntityTestHelper::getId( $handle );
+	public function testSetLiteLink( $params, $expected ) {
+		// -- set any defaults ------------------------------------
+		if ( array_key_exists( 'handle', $params ) ) {
+			$params['id'] = EntityTestHelper::getId( $params['handle'] );
+			unset( $params['handle'] );
+		}
+		$params['action'] = 'wbsetsitelink';
 
-		if ( array_key_exists( 'id', $item_spec ) && empty( $item_spec['id'] ) ) {
-			//NOTE: data provider is called before setUp and thus can't determine IDs.
-			//      So fill in the missing IDs here.
-			$item_spec['id'] = $id;
+		// -- do the request --------------------------------------------------
+		list( $result, , ) = $this->doApiRequestWithToken( $params );
+
+		//@todo all of the below is very similar to the code in LangAttributeTestCase
+		//This might be able to go in the same place
+
+		// -- check the result ------------------------------------------------
+		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+		$this->assertResultHasEntityType( $result );
+		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
+		$this->assertArrayHasKey( 'lastrevid', $result['entity'], 'entity should contain lastrevid key' );
+
+		// -- check the result only has our changed data (if any)  ------------
+		$this->assertEquals( 1, count( $result['entity']['sitelinks'] ), "Entity return contained more than a single site" );
+		$this->assertArrayHasKey( $params['linksite'], $result['entity']['sitelinks'], "Entity doesn't return expected site" );
+		$this->assertEquals( $params['linksite'], $result['entity']['sitelinks'][$params['linksite']]['site'], "Returned incorrect site" );
+		if ( array_key_exists( $params['linksite'], $expected['value'] ) ) {
+			$this->assertArrayHasKey( 'url', $result['entity']['sitelinks'][$params['linksite']] );
+			$this->assertEquals( $expected['value'][$params['linksite']], $result['entity']['sitelinks'][$params['linksite']]['title'], "Returned incorrect sitelink" );
+		} else if ( empty( $value ) ) {
+			$this->assertArrayHasKey( 'removed', $result['entity']['sitelinks'][$params['linksite']], "Entity doesn't return expected 'removed' marker" );
 		}
 
-		if ( $expectedTitle === null ) {
-			$expectedTitle = $linktitle;
+		// -- check any warnings ----------------------------------------------
+		if ( array_key_exists( 'warning', $expected ) ) {
+			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
+			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name'] );
+			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
 		}
 
-		// set the sitelink -------------------------------
-		$req = array_merge( $item_spec, array(
-			'action' => 'wbsetsitelink',
-			'linksite' => $linksite,
-			'linktitle' => $linktitle,
-		) );
-
-		if( $expectedFailure ){
-			$this->setExpectedException($expectedFailure );
+		// -- check item in database -------------------------------------------
+		$dbEntity = $this->loadEntity( $result['entity']['id'] );
+		$expectedInDb = count( $expected['value'] );
+		if ( array_key_exists( 'indb', $expected ) ) {
+			$expectedInDb = $expected['indb'];
 		}
-
-		list( $res,, ) = $this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-
-		if ( $expectedFailure ) {
-			$this->fail( $expectedFailure );
-		}
-
-		// check the response -------------------------------
-		$this->assertResultSuccess( $res );
-		if ( $expectedTitle !== false ) {
-			$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
-		}
-
-		$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
-
-		if ( $expectedTitle !== false ) {
-			$link = array_shift( $res['entity']['sitelinks'] );
-			$this->assertEquals( $linksite, $link['site'] );
+		if ( $expectedInDb ) {
+			$this->assertArrayHasKey( 'sitelinks', $dbEntity );
+			$dbSitelinks = self::flattenArray( $dbEntity['sitelinks'], 'site', 'title', true );
+			$this->assertEquals( $expectedInDb, count( $dbSitelinks ) );
+			foreach ( $expected['value'] as $valueSite => $value ) {
+				$this->assertArrayHasKey( $valueSite, $dbSitelinks );
+				$this->assertEquals( $value, $dbSitelinks[$valueSite][0] );
+			}
 		} else {
-			$link = null;
+			$this->assertArrayNotHasKey( 'sitelinks', $dbEntity );
 		}
 
-		if ( $linktitle === '' && $link !== null ) {
-			$this->assertArrayHasKey( 'removed', $link );
-		}
-
-		if ( $expectedTitle !== false ) {
-			$this->assertEquals( $expectedTitle, $link['title'] );
-		}
-
-		if ( $expectedTitle !== false && $linktitle !== '' ) {
-			$this->assertArrayHasKey( 'url', $link );
-		}
-		elseif ( $link !== null ) {
-			$this->assertArrayNotHasKey( 'url', $link );
-		}
-
-		// check the item in the database -------------------------------
-		$item = $this->loadEntity( $id );
-		$links = self::flattenArray( $item['sitelinks'], 'site', 'title' );
-
-		if ( $linktitle === '' ) {
-			$this->assertArrayNotHasKey( $linksite, $links, 'link should have been removed' );
-		} else {
-			$this->assertArrayHasKey( $linksite, $links, 'link went missing' );
-
-			if ( $expectedTitle !== false ) {
-				$this->assertEquals( $expectedTitle, $links[$linksite], 'wrong link target' );
+		// -- check the edit summary --------------------------------------------
+		if ( ! array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
+			$this->assertRevisionSummary( array( 'wbsetsitelink', $params['linksite'] ), $result['entity']['lastrevid'] );
+			if ( array_key_exists( 'summary', $params ) ) {
+				$this->assertRevisionSummary( "/{$params['summary']}/", $result['entity']['lastrevid'] );
 			}
 		}
 	}
 
-	public function testSetLiteLinkWithBadTargetSite( ) {
-		$req = array(
-			'action' => 'wbsetsitelink',
-			'site' => "dewiki",
-			'title' => "Berlin",
-			'linksite' => "enwiktionary",
-			'linktitle' => "Berlin",
-		);
-
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
+	/**
+	 * @dataProvider provideExceptionData
+	 */
+	public function testSetSiteLinkExceptions( $params, $expected ) {
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wbsetsitelink';
+		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 }
 
