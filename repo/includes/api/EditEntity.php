@@ -81,15 +81,19 @@ class EditEntity extends ModifyEntity {
 	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
 	 */
 	protected function validateParameters( array $params ) {
-		// note that this is changed back and could fail
-		if ( !( isset( $params['data'] ) OR  isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item', 'param-missing' );
+		$hasId = isset( $params['id'] );
+		$hasNew = isset( $params['new'] );
+		$hasSitelink = ( isset( $params['site'] ) && isset( $params['title'] ) );
+		$hasSitelinkPart = ( isset( $params['site'] ) || isset( $params['title'] ) );
+
+		if ( !( $hasId XOR $hasSitelink XOR $hasNew ) ) {
+			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" or a "new" type for an entity' , 'param-missing' );
 		}
-		if ( isset( $params['id'] ) && isset( $params['new'] ) ) {
-			$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request", 'param-illegal' );
+		if( $hasId && $hasSitelink ){
+			$this->dieUsage( "Parameter 'id' and 'site', 'title' combination are not allowed to be both set in the same request", 'param-illegal' );
 		}
-		if ( !isset( $params['id'] ) && !isset( $params['new'] ) ) {
-			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
+		if( ( $hasId || $hasSitelinkPart ) && $hasNew ){
+			$this->dieUsage( "Parameters 'id', 'site', 'title' and 'new' are not allowed to be both set in the same request", 'param-illegal' );
 		}
 	}
 
