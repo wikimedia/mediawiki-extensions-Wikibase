@@ -3548,7 +3548,17 @@ $messages['tl'] = array(
  */
 $messages['tr'] = array(
 	'specialpages-group-wikibaseclient' => 'Vikiveri istemcisi',
+	'wikibase-after-page-move-queued' => 'Bu sayfa ile ilişkili [$1 Vikiveri öğesi] kısa bir süre içinde otomatik olarak güncellenecektir.',
+	'wikibase-dataitem' => 'Veri öğesi',
+	'wikibase-editlinks' => 'Bağlantıları düzenle',
 	'wikibase-editlinkstitle' => 'Diğer dillerdeki bağlantıları düzenle',
+	'wikibase-linkitem-addlinks' => 'Bağlantı ekle',
+	'wikibase-linkitem-title' => 'Sayfaya bağlantı',
+	'wikibase-linkitem-linkpage' => 'Sayfaya bağlantı',
+	'wikibase-linkitem-input-site' => 'Dil:',
+	'wikibase-linkitem-input-page' => 'Sayfa:',
+	'wikibase-linkitem-not-loggedin-title' => 'Oturum açmış olmanız gerekiyor',
+	'wikibase-property-notfound' => '$1 özellik bulunamadı.',
 	'wikibase-rc-hide-wikidata' => 'Vikiveri değişikliklerini $1',
 	'wikibase-rc-show-wikidata-pref' => 'Vikiveri düzenlemelerini son değişikliklerde göster',
 	'wikibase-watchlist-show-changes-pref' => 'İzleme listemde Vikiveri değişikliklerini göster',
@@ -3560,6 +3570,7 @@ $messages['tr'] = array(
 
 /** Ukrainian (українська)
  * @author AS
+ * @author Aced
  * @author Ahonc
  * @author Base
  * @author Lystopad
@@ -3572,7 +3583,7 @@ $messages['tr'] = array(
 $messages['uk'] = array(
 	'wikibase-client-desc' => 'Клієнт для розширення Wikibase',
 	'specialpages-group-wikibaseclient' => 'Клієнт Вікіданих',
-	'tooltip-t-wikibase' => 'Посилання на пов’язаний елемент сховища даних.',
+	'tooltip-t-wikibase' => 'Посилання на пов’язаний елемент сховища даних',
 	'wikibase-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
 	'wikibase-after-page-move-queued' => "Пов'язаний з цією сторінкою [$1 елемент Вікіданих] буде невдовзі автоматично оновлено.",
 	'wikibase-comment-remove' => "Пов'язаний елемент Вікіданих видалений. Мовні посилання видалені.",

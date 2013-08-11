@@ -52,6 +52,24 @@ $specialPageAliases['bxr'] = array(
 	'ItemDisambiguation' => array( 'Дэлгэрэнгы_нэрэ' ),
 );
 
+/** Min Dong Chinese (Mìng-dĕ̤ng-ngṳ̄) */
+$specialPageAliases['cdo'] = array(
+	'DispatchStats' => array( '特派統計' ),
+	'EntityData' => array( '條目數據' ),
+	'NewItem' => array( '新其單單', '創建單單' ),
+	'NewProperty' => array( '新其屬性', '創建屬性' ),
+	'ItemByTitle' => array( '標題其單單' ),
+	'ItemDisambiguation' => array( '消除歧義其單單' ),
+	'ListDatatypes' => array( '數據類型其單單' ),
+	'SetLabel' => array( '設置標籤' ),
+	'SetDescription' => array( '設置描述' ),
+	'SetAliases' => array( '設置同義詞' ),
+	'SetSiteLink' => array( '設置站點鏈接' ),
+	'EntitiesWithoutLabel' => array( '無標籤其條目' ),
+	'ItemsWithoutSitelinks' => array( '無站點鏈接其條目' ),
+	'MyLanguageFallbackChain' => array( '我其語言鏈' ),
+);
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'DispatchStats' => array( 'Abfertigungsstatistiken' ),
