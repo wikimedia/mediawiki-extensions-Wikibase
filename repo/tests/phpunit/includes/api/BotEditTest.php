@@ -11,10 +11,6 @@ use Wikibase\NamespaceUtils;
  * This testset only checks the validity of the calls and correct handling of tokens and users.
  * Note that we creates an empty database and then starts manipulating testusers.
  *
- * BE WARNED: the tests depend on execution order of the methods and the methods are interdependent,
- * so stuff will fail if you move methods around or make changes to them without matching changes in
- * all methods depending on them.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -40,6 +36,7 @@ use Wikibase\NamespaceUtils;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
+ * @author Adam Shorland
  *
  * @group API
  * @group Wikibase
@@ -58,11 +55,15 @@ use Wikibase\NamespaceUtils;
  */
 class BotEditTest extends WikibaseApiTestCase {
 
-	protected static $baseOfItemIds;
+	private static $hasSetup;
 
 	public function setUp() {
 		global $wgUser;
 		parent::setUp();
+
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Empty' ) );
+		}
 
 		ApiTestCase::$users['wbbot'] = new TestUser(
 			'Apitestbot',
@@ -78,6 +79,9 @@ class BotEditTest extends WikibaseApiTestCase {
 	/**
 	 * This initiates a cascade that fails if there are no
 	 * production-like environment
+	 *
+	 * WARNING: This should always be run before any other tests that depend on it...
+	 *
 	 * @group API
 	 */
 	function testTokensAndRights() {
@@ -93,84 +97,93 @@ class BotEditTest extends WikibaseApiTestCase {
 		}
 	}
 
-	/**
-	 * @group API
-	 * @depends testTokensAndRights
-	 */
-	function testSetItemTop() {
-		$req = array(
-			'action' => 'wbeditentity',
-			'summary' => 'Some reason',
-			'data' => '{}',
-			'new' => 'item',
+	public static function provideData() {
+		return array(
+			array(//0
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetlabel', 'language' => 'en', 'value' => 'ALabel' ),
+				'e' => array( 'bot' => true ) ),
+			array(//1
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetlabel', 'language' => 'en', 'value' => 'ALabel2' ),
+				'e' => array( 'bot' => false ) ),
+			array(//2
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetdescription', 'language' => 'de', 'value' => 'ADesc' ),
+				'e' => array( 'bot' => true ) ),
+			array(//3
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetdescription', 'language' => 'de', 'value' => 'ADesc2' ),
+				'e' => array( 'bot' => false ) ),
+			array(//4
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetaliases', 'language' => 'de', 'set' => 'ali1' ),
+				'e' => array( 'bot' => true ) ),
+			array(//5
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetaliases', 'language' => 'de', 'set' => 'ali2' ),
+				'e' => array( 'bot' => false ) ),
+			array(//6
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetsitelink', 'linksite' => 'enwiki', 'linktitle' => 'PageEn' ),
+				'e' => array( 'bot' => true ) ),
+			array(//7
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetsitelink', 'linksite' => 'dewiki', 'linktitle' => 'PageDe' ),
+				'e' => array( 'bot' => false ) ),
+			array(//8
+				'p' => array( 'bot' => '', 'action' => 'wblinktitles', 'tosite' => 'enwiki', 'totitle' => 'PageEn', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ),
+				'e' => array( 'bot' => true ) ),
+			array(//9
+				'p' => array( 'action' => 'wblinktitles', 'tosite' => 'dewiki', 'totitle' => 'PageDe', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ),
+				'e' => array( 'bot' => false ) ),
+			array(//10
+				'p' => array( 'bot' => '', 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ),
+				'e' => array( 'bot' => true, 'new' => true ) ),
+			array(//11
+				'p' => array( 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ),
+				'e' => array( 'bot' => false, 'new' => true ) ),
+			//todo claims, references, qualifiers
 		);
-
-		$second = $this->doApiRequestWithToken( $req, null, self::$users['wbbot']->user );
-
-		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
-
-		$this->assertArrayHasKey( 'success', $second[0],
-			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'entity', $second[0],
-			"Must have an 'entity' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['entity'],
-			"Must have an 'id' key in the 'entity' from the second result from the API" );
 	}
 
 	/**
-	 * @group API
+	 * @dataProvider provideData
 	 * @depends testTokensAndRights
-	 * @dataProvider providerCreateItem
 	 */
-	function testCreateItem( $handle, $bot, $new, $data ) {
-		$req = array(
-			'action' => 'wbeditentity',
-			'summary' => 'Some reason',
-			'data' => $data,
-		);
-
-		if ( !$new ) {
-			$req['id'] = 'q'.self::$baseOfItemIds;
-		} else {
-			$req['new'] = 'item';
+	public function testBotEdits( $params, $expected ) {
+		// -- do the request --------------------------------------------------
+		if( array_key_exists( 'handle', $params ) ){
+			$params['id'] = EntityTestHelper::getId( $params['handle'] );
+			unset( $params['handle'] );
 		}
-		if ( $bot ) {
-			$req['bot'] = true;
+		list( $result,, ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->user );
+
+		// -- check the result ------------------------------------------------
+		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+		$this->assertResultHasEntityType( $result );
+		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
+		$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
+		$myid = $result['entity']['id'];
+		//@todo remove crappy hack the below while fixing bug:52732 (linktitles currently doesn't return an id with a q...)
+		if( $params['action'] == 'wblinktitles' ){
+			$myid = 'q'.$myid;
 		}
 
-		$second = $this->doApiRequestWithToken( $req, null ,self::$users['wbbot']->user );
-
-		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
-		$myid = 'q'.self::$baseOfItemIds;
-
-		$this->assertArrayHasKey( 'success', $second[0],
-			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'entity', $second[0],
-			"Must have an 'entity' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['entity'],
-			"Must have an 'id' key in the 'entity' from the second result from the API" );
-		$this->assertEquals( $myid, $second[0]['entity']['id'],
-				"Must have the value '{$myid}' for the 'id' in the result from the API" );
-
-		$req = array(
-				'action' => 'query',
-				'list' => 'recentchanges',
-				'rcprop' => 'title|flags',
-				'rctoponly' => '1',
-				'rclimit' => 50, // hope that no more than 50 edits where made in the last second
+		// -- get the recentchanges -------------------------------------------
+		$rcRequest = array(
+			'action' => 'query',
+			'list' => 'recentchanges',
+			'rcprop' => 'title|flags',
+			'rctoponly' => '1',
+			'rclimit' => 5, // hope that no more than 50 edits where made in the last second
 		);
-		$third = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
+		
+		//@todo this really makes this test slow, is there a better way?
+		$rcResult = $this->doApiRequest( $rcRequest, null, false, self::$users['wbbot']->user );
 
-		$this->assertArrayHasKey( 'query', $third[0],
-			"Must have a 'query' key in the result from the API" );
-		$this->assertArrayHasKey( 'recentchanges', $third[0]['query'],
+		// -- check the recent changes result ---------------------------------
+		$this->assertArrayHasKey( 'query', $rcResult[0], "Must have a 'query' key in the result from the API" );
+		$this->assertArrayHasKey( 'recentchanges', $rcResult[0]['query'],
 			"Must have a 'recentchanges' key in 'query' subset of the result from the API" );
 
 		//NOTE: the order of the entries in recentchanges is undefined if multiple
 		//      edits were done in the same second.
 		$change = null;
 		$itemNs = NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
-		foreach ( $third[0]['query']['recentchanges'] as $rc ) {
+		foreach ( $rcResult[0]['query']['recentchanges'] as $rc ) {
 			$title = Title::newFromText( $rc['title'] );
 			// XXX: strtoupper is a bit arcane, would ne nice to have a utility function for prefixed id -> title.
 			if ( ( $title->getNamespace() == $itemNs ) && ( $title->getText() === strtoupper( $myid ) ) ) {
@@ -181,21 +194,14 @@ class BotEditTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $change, 'no change matching ID ' . $myid . ' found in recentchanges feed!' );
 
-		$this->assertTrue( $new == array_key_exists( 'new', $change ),
-			"Must" . ( $new ? '' : ' not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
-		$this->assertTrue( $bot == array_key_exists( 'bot', $change ),
-			"Must" . ( $bot ? '' : ' not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
-	}
-
-	function providerCreateItem() {
-		return array(
-			array( 'One', false, true, "{}" ),
-			array( 'One', true, false, '{ "labels": { "nn": { "language": "nn", "value": "Karasjok" } } }' ),
-			array( 'One', false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
-			array( 'Two', true, true, "{}" ),
-			array( 'Two', true, false, '{ "labels": { "nn": { "language": "nn", "value": "Kautokeino" } } }' ),
-			array( 'Two', false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
-		);
+		if( array_key_exists( 'new', $expected ) ){
+			$this->assertTrue( $expected['new'] == array_key_exists( 'new', $change ),
+				"Must" . ( $expected['new'] ? '' : ' not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
+		}
+		if( array_key_exists( 'bot', $expected ) ){
+			$this->assertTrue( $expected['bot'] == array_key_exists( 'bot', $change ),
+				"Must" . ( $expected['bot'] ? '' : ' not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
+		}
 	}
 
 }
