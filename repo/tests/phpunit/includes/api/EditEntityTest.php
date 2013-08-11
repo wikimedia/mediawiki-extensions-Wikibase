@@ -9,10 +9,6 @@ use ApiTestCase;
  * This testset only checks the validity of the calls and correct handling of tokens and users.
  * Note that we creates an empty database and then starts manipulating testusers.
  *
- * BE WARNED: the tests depend on execution order of the methods and the methods are interdependent,
- * so stuff will fail if you move methods around or make changes to them without matching changes in
- * all methods depending on them.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -35,8 +31,7 @@ use ApiTestCase;
  * @ingroup Test
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler
+ * @author Adam Shorland
  *
  * @group API
  * @group Wikibase
@@ -55,6 +50,7 @@ use ApiTestCase;
  */
 class EditEntityTest extends WikibaseApiTestCase {
 
+	private static $testEntityId;
 	private static $hasSetup;
 	static public $id = null;
 
@@ -67,545 +63,162 @@ class EditEntityTest extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	static public $entity = array(
-		"sitelinks" => array(
-			"enwiki" => array( "site" => "enwiki", "title" => "Bar" ),
-			"dewiki" => array( "site" => "dewiki", "title" => "Foo" ),
-		),
-		"labels" => array(
-			"de" => array( "language" => "de", "value" => "Foo" ),
-			"en" => array( "language" => "en", "value" => "Bar" ),
-		),
-		"aliases" => array(
-			"de"  => array( "language" => "de", "value" => "Fuh" ),
-			"en"  => array( "language" => "en", "value" => "Baar" ),
-		),
-		"descriptions" => array(
-			"de"  => array( "language" => "de", "value" => "Metasyntaktische Veriable" ),
-			"en"  => array( "language" => "en", "value" => "Metasyntactic variable" ),
-		)
-	);
-
-	static public $expect = array(
-		"sitelinks" => array(
-			"enwiki" => "Bar",
-			"dewiki" => "Foo",
-		),
-		"labels" => array(
-			"de" => "Foo",
-			"en" => "Bar",
-		),
-		"aliases" => array(
-			"de"  => array( "Fuh" ),
-			"en"  => array( "Baar" ),
-		),
-		"descriptions" => array(
-			"de"  => "Metasyntaktische Veriable",
-			"en"  => "Metasyntactic variable",
-		)
-	);
-
-
-	/**
-	 * Check if an entity can not be created whithout a token
-	 */
-	function testEditEntityNoToken() {
-		if ( self::$usetoken ) {
-			try {
-				$this->doApiRequest(
-					array(
-						'action' => 'wbeditentity',
-						'reason' => 'Some reason',
-						'data' => json_encode( self::$entity ),
-						'new' => 'item',
-					),
-					null,
-					false,
-					self::$users['wbeditor']->user
-				);
-
-				$this->fail( "Adding an entity without a token should have failed" );
-			}
-			catch ( \UsageException $e ) {
-				$this->assertTrue( ($e->getCodeString() == 'badtoken'), "Expected session-failure, got unexpected exception: $e" );
-			}
-		}
-	}
-
-	/**
-	 * Checks the creation of a property via the editEntity API module
-	 */
-	function testEditEntityCreateProperty() {
-		$data = '{"datatype":"string","labels":{"en":{"language":"en","value":"its a test!"}}}';
-
-		list($res,,) = $this->doApiRequestWithToken(
-			array(
-				'action' => 'wbeditentity',
-				'reason' => 'Some reason',
-				'data' => $data,
-				'new' => 'property',
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
-
-		$this->assertResultSuccess( $res  );
-		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
-		$this->assertRegExp( '/^p\d+$/',
-			$res['entity']['id'],
-			'Expected a qualfied property ID with prefix' );
-	}
-
-	/**
-	 * Check if an entity can be created when a token is supplied
-	 * note that upon completion the id will be stored for later reuse
-	 */
-	function testEditEntityWithToken() {
-		list($res,,) = $this->doApiRequestWithToken(
-			array(
-				'action' => 'wbeditentity',
-				'reason' => 'Some reason',
-				'data' => json_encode( self::$entity ),
-				'new' => 'item',
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
-		$this->assertEntityEquals( self::$expect, $res['entity'] );
-		$this->assertRegExp( '/^q\d+$/',
-				$res['entity']['id'],
-				'Expected a qualfied ID with prefix' );
-
-		// Oh my God, its an ugly secondary effect!
-		self::$id = $res['entity']['id'];
-	}
-
-	/**
-	 * Check failure to set the same entity again, without id
-	 */
-	function testEditEntityNoId() {
-		$data = array( 'labels' => array(
-				"de" => array( "language" => "de", "value" => "Foo X" ),
-				"en" => array( "language" => "en", "value" => "Bar Y" ),
-			) );
-
-		try {
-			$this->doApiRequestWithToken(
-				array(
-					'action' => 'wbeditentity',
-					'reason' => 'Some reason',
-					'data' => json_encode( array_merge( self::$entity, $data ) ),
-					'new' => 'item',
-				),
-				null,
-				self::$users['wbeditor']->user
-			);
-
-			$this->fail( "Adding another entity with the same sitelinks should have failed" );
-		}
-		catch ( \UsageException $e ) {
-			$this->assertTrue( ($e->getCodeString() == 'failed-save'), "Expected failed-save, got unexpected exception: $e" );
-		}
-	}
-
-	/**
-	 * Check success of entity update with a valid id
-	 */
-	function testEditEntityWithId() {
-		list($res,,) = $this->doApiRequestWithToken(
-			array(
-				'action' => 'wbeditentity',
-				'reason' => 'Some reason',
-				'data' => json_encode( self::$entity ),
-				'id' => self::$id,
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
-
-		//NOTE: lastrevid should be here even though the edit didn't create a new revision,
-		//      because the content stayed the same.
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entity', 'lastrevid' );
-
-		$this->assertEntityEquals( self::$expect, $res['entity'] );
-	}
-
-	/**
-	 * Check failure to set the same entity again, with illegal field values in the json
-	 */
-	function testEditEntityWithIllegalData() {
-		// these sets of failing data must be merged with an existing entity
-		$failingData = array( //@todo: check each of these separately, so we know that each one fails!
-			array( 'pageid' => 999999 ),
-			array( 'ns' => 200 ),
-			array( 'title' => 'does-not-exist' ),
-			array( 'lastrevid' => 99999999 ),
-		);
-		foreach ( $failingData as $data ) {
-			try {
-				$this->doApiRequestWithToken(
-					array(
-						'action' => 'wbeditentity',
-						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( self::$entity, $data ) ),
-						'id' => self::$id,
-					),
-					null,
-					self::$users['wbeditor']->user
-				);
-				$this->fail( "Updating the entity with wrong data should have failed" );
-			}
-			catch ( \UsageException $e ) {
-				$this->assertTrue( ($e->getCodeString() == 'param-illegal'), "Expected param-illegal, got unexpected exception: $e" );
-			}
-		}
-	}
-
-	/**
-	 * Check success to set the same entity again, with legal field values in the json
-	 */
-	function testEditEntityWithLegalData() {
-		// request the test data from the entity itself
-		list($query,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'props' => 'info',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => self::$id
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
-		$this->assertResultSuccess( $query );
-		$this->assertResultHasKeyInPath( $query, 'entities', self::$id, 'id' );
-
-		// these sets of failing data must be merged with an existing entity
-		$goodData = array(
-			array( 'pageid' => $query['entities'][self::$id]['pageid'] ),
-			array( 'ns' => $query['entities'][self::$id]['ns'] ),
-			array( 'title' => $query['entities'][self::$id]['title'] ),
-			array( 'lastrevid' => $query['entities'][self::$id]['lastrevid'] ),
-		);
-
-		foreach ( $goodData as $data ) {
-			try {
-				list($res,,) = $this->doApiRequestWithToken(
-					array(
-						'action' => 'wbeditentity',
-						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( $data, self::$entity ) ),
-						'id' => self::$id,
-					),
-					null,
-					self::$users['wbeditor']->user
-				);
-				$this->assertResultSuccess( $res );
-				$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
-				$this->assertEntityEquals( self::$expect, $res['entity'] );
-			}
-			catch ( \UsageException $e ) {
-				$this->fail( "Got unexpected exception: $e" );
-			}
-		}
-	}
-
-	/**
-	 * Check if it possible to clear out the content of the object
-	 */
-	function testEditEntityEmptyData() {
-		try {
-			list($res,,) = $this->doApiRequestWithToken(
-				array(
-					'action' => 'wbeditentity',
-					'reason' => 'Some reason',
-					'data' => json_encode( array() ),
-					'id' => self::$id,
-					'clear' => true,
-				),
-				null,
-				self::$users['wbeditor']->user
-			);
-			$this->assertResultSuccess( $res );
-			$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
-			$this->assertEntityEquals( array( 'id' => self::$id ), $res['entity'] );
-		}
-		catch ( \UsageException $e ) {
-			$this->fail( "Got unexpected exception: $e" );
-		}
-	}
-
-	function provideBadData() {
+		public static function provideData() {
 		return array(
-			// explicit ID is invalid
-			array(
-				array(
-					"id" => 1234567
-				),
-				"not-recognized"
-			),
-
-			// random stuff is invalid
-			array(
-				array(
-					"foo" => "xyz"
-				),
-				"not-recognized"
-			),
-
-			// aliases have to use valid language codes
-			array(
-				array(
-					"aliases" => array(
-						array( "language" => "*", "value" => "foo" ),
-					)
-				),
-				"not-recognized-language"
-			),
-
-			// labels have to use valid language codes
-			array(
-				array(
-					"labels" => array(
-						array( "language" => "*", "value" => "foo" ),
-					)
-				),
-				"not-recognized-language"
-			),
-
-			// descriptions have to use valid language codes
-			array(
-				array(
-					"descriptions" => array(
-						array( "language" => "*", "value" => "foo" ),
-					)
-				),
-				"not-recognized-language"
-			),
-
-			//-----------------------------------------------
-
-			// aliases have to be an array
-			array(
-				array(
-					"aliases" => 15
-				),
-				"not-recognized-array"
-			),
-
-			// labels have to be an array
-			array(
-				array(
-					"labels" => 15
-				),
-				"not-recognized-array"
-			),
-
-			// descriptions be an array
-			array(
-				array(
-					"descriptions" => 15
-				),
-				"not-recognized-array"
-			),
-
-			//-----------------------------------------------
-
-			// json must be valid
-			array(
-				'',
-				"invalid-json"
-			),
-
-			// json must be an object
-			array(
-				'123', // json_decode *will* decode this as an int!
-				"not-recognized-array"
-			),
-
-			// json must be an object
-			array(
-				'"foo"', // json_decode *will* decode this as a string!
-				"not-recognized-array"
-			),
-
-			// json must be an object
-			array(
-				'[ "xyz" ]', // json_decode *will* decode this as an indexed array.
-				"not-recognized-string"
-			),
+			array( //0 new item
+				'p' => array( 'new' => 'item', 'data' => '{}' ),
+				'e' => array( 'type' => 'item' ) ),
+			array( //1 new property
+				'p' => array( 'new' => 'property', 'data' => '{"datatype":"string"}' ),
+				'e' => array( 'type' => 'property' ) ),
+			array( //2 new property (this is our current example in the api doc)
+				'p' => array( 'new' => 'property', 'data' => '{"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'.
+				'"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}' ),
+				'e' => array( 'type' => 'property' ) ),
+			array( //3 add a sitelink..
+				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!"}}}' ),
+				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ) ) ),
+			array( //4 add a label..
+				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"}}}' ),
+				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ), 'labels' => array( 'en' => 'A Label' ) ) ),
+			array( //5 add a description..
+				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC"}}}' ),
+				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ), 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
+			array( //6 remove a sitelink..
+				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
+				'e' => array( 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
+			array( //7 remove a label..
+				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ),
+				'e' => array( 'descriptions' => array( 'en' => 'DESC' ) ) ),
+			array( //8 remove a description..
+				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":""}}}' ),
+				'e' => array( 'type' => 'item' ) ),
+			array( //9 clear an item with some new value
+				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}', 'clear' => '' ),
+				'e' => array( 'type' => 'item', 'sitelinks' => array( 'dewiki' => 'Page' ) ) ),
+			array( //10 clear an item with no value
+				'p' => array( 'data' => '{}', 'clear' => '' ),
+				'e' => array( 'type' => 'item' ) ),
+			array( //11 add 2 labels
+				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"},"sv":{"language":"sv","value":"SVLabel"}}}' ),
+				'e' => array( 'labels' => array( 'en' => 'A Label', 'sv' => 'SVLabel' ) ) ),
+			array( //12 override and add 2 descriptions
+				'p' => array( 'clear' => '', 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC1"},"de":{"language":"de","value":"DESC2"}}}' ),
+				'e' => array( 'descriptions' => array( 'en' => 'DESC1', 'de' => 'DESC2' ) ) ),
+			array( //13 override and add a 2 sitelinks..
+				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"BAA"},"svwiki":{"site":"svwiki","title":"FOO"}}}' ),
+				'e' => array( 'sitelinks' => array( 'dewiki' => 'BAA', 'svwiki' => 'FOO' ) ) ),
+			array( //14 unset a sitelink using the other sitelink
+				'p' => array( 'site' => 'svwiki', 'title' => 'FOO', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
+				'e' => array( 'sitelinks' => array( 'svwiki' => 'FOO' ) ) ),
 		);
 	}
 
 	/**
-	 * @dataProvider provideBadData
+	 * @dataProvider provideData
 	 */
-	function testEditEntityBadData( $data, $expectedErrorCode ) {
-		try {
-			$this->doApiRequestWithToken(
-				array(
-					'action' => 'wbeditentity',
-					'reason' => 'Some reason',
-					'data' => is_string( $data ) ? $data : json_encode( $data ),
-					'new' => 'item',
-				),
-				null,
-				self::$users['wbeditor']->user
-			);
-
-			$this->fail( "Adding entity should have failed: " . ( is_string( $data ) ? $data : json_encode( $data ) ) );
+	function testEditEntity( $params, $expected ) {
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wbeditentity';
+		if( !array_key_exists( 'id', $params )
+			&& !array_key_exists( 'new', $params )
+			&& !array_key_exists( 'site', $params )
+			&& !array_key_exists( 'title', $params) ){
+			$params['id'] = self::$testEntityId;
 		}
-		catch ( \UsageException $e ) {
-			$this->assertTrue( ($e->getCodeString() == $expectedErrorCode), "Expected $expectedErrorCode, got unexpected exception: $e" );
+
+		// -- do the request --------------------------------------------------
+		list($result,,) = $this->doApiRequestWithToken( $params );
+
+		// -- steal stuff for later tests -------------------------------------
+		if( array_key_exists( 'new', $params ) && stristr( $params['new'], 'item' ) ){
+			self::$testEntityId = $result['entity']['id'];
+		}
+
+		// -- check the result ------------------------------------------------
+		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+		$this->assertResultHasEntityType( $result );
+		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
+		$this->assertArrayHasKey( 'id', $result['entity'], "Missing 'id' section in entity in response." );
+		$this->assertEntityEquals( $expected, $result['entity'] );
+
+		// -- check the item in the database -------------------------------
+		$dbEntity = $this->loadEntity( $result['entity']['id'] );
+		$this->assertEntityEquals( $expected, $dbEntity );
+
+		// -- check the edit summary --------------------------------------------
+		if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
+			$this->assertRevisionSummary( array( 'wbeditentity' ), $result['entity']['lastrevid'] );
+			if( array_key_exists( 'summary', $params) ){
+				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
+			}
 		}
 	}
 
-	function provideEditEntityData() {
+	public static function provideExceptionData() {
 		return array(
-			array( //0: labels
-				'Berlin', // handle
-				array(    // input
-					'labels' => array(
-						array( "language" => 'de', "value" => '' ), // remove existing
-						array( "language" => 'ru', "value" => '' ), // remove non-existing
-						array( "language" => 'en', "value" => 'Stuff' ),  // change existing
-						array( "language" => 'fr', "value" => 'Berlin' ), // add new
-					)
-				),
-				array(    // expected
-					'labels' => array(
-						"en" => "Stuff",
-						"no" => "Berlin",
-						"nn" => "Berlin",
-						"fr" => "Berlin",
-					)
-				),
-			),
-
-			array( //1: descriptions
-				'Berlin', // handle
-				array(    // input
-					'descriptions' => array(
-						array( "language" => 'de', "value" => '' ), // remove existing
-						array( "language" => 'ru', "value" => '' ), // remove non-existing
-						array( "language" => 'en', "value" => 'Stuff' ),   // change existing
-						array( "language" => 'fr', "value" => 'Bla bla' ), // add new
-					)
-				),
-				array(    // expected
-					'descriptions' => array(
-						"en"  => "Stuff",
-						"no"  => "Hovedsted og delstat og i Forbundsrepublikken Tyskland.",
-						"nn"  => "Hovudstad og delstat i Forbundsrepublikken Tyskland.",
-						"fr"  => "Bla bla",
-					)
-				),
-			),
-
-			array( //2: aliases
-				'Berlin', // handle
-				array(    // input
-					'aliases' => array(
-						// TODO: It should be possible to unconditionally clear the list
-						//"de" => array(), // remove existing
-						//"ru" => array(), // remove non-existing
-						array( "language" => "de", "value" => "Dickes B", "remove" => "" ), // remove existing
-						array( "language" => "en", "value" => "Bla bla" ), // change existing
-						array( "language" => "fr", "value" => "Bla bla" ), // add new
-					)
-				),
-				array(    // expected
-					'aliases' => array(
-						"en"  => array( "Bla bla" ),
-						"nl"  => array( "Dickes B" ),
-						"fr"  => array( "Bla bla" ),
-					)
-				),
-			),
-
-			array( //3: sitelinks
-				'Berlin', // handle
-				array(    // input
-					'sitelinks' => array(
-						array( 'site' => 'dewiki', 'title' => '' ), // remove existing
-						array( 'site' => 'srwiki', 'title' => '' ), // remove non-existing
-						array( 'site' => "nnwiki", 'title' => "Berlin X" ), // change existing
-						array( 'site' => "svwiki", 'title' => "Berlin X" ), // add new
-					)
-				),
-				array(    // expected
-					'sitelinks' => array(
-						"enwiki" => "Berlin",
-						"nlwiki" => "Berlin",
-						"nnwiki" => "Berlin X",
-						"svwiki" => "Berlin X",
-					)
-				),
-			),
+			array( //0 no entity id given
+				'p' => array( 'id' => '', 'data' => '{}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+			array( //1 invalid id
+				'p' => array( 'id' => 'abcde', 'data' => '{}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+			array( //2 invalid explicit id
+				'p' => array( 'id' => '1234', 'data' => '{}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+			array( //3 non existent sitelink
+				'p' => array( 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-link' ) ) ),
+			array( //4 missing site (also bad title)
+				'p' => array( 'title' => 'abcde', 'data' => '{}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+			array( //5 cant have id and new
+				'p' => array( 'id' => 'q666', 'new' => 'item' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+			array( //6 when clearing must also have data!
+				'p' => array( 'site' => 'enwiki', 'new' => 'Berlin', 'clear' => '' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal' ) ) ),
+			array( //7 bad site
+				'p' => array( 'site' => 'abcde', 'data' => '{}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site' ) ) ),
+			array( //8 no data provided
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-data' ) ) ),
+			array( //9 malformed json
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{{{}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-json' ) ) ),
+			array( //10 must be a json object (json_decode s this an an int)
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '1234'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-array' ) ) ),
+			array( //11 must be a json object (json_decode s this an an indexed array)
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '[ "xyz" ]'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-string' ) ) ),
+			array( //12 must be a json object (json_decode s this an a string)
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '"string"'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-array' ) ) ),
+			array( //13 inconsistent site in json
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"sitelinks":{"ptwiki":{"site":"svwiki","title":"TestPage!"}}}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'inconsistent-site' ) ) ),
+			array( //14 inconsistent lang in json
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"labels":{"de":{"language":"pt","value":"TestPage!"}}}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'inconsistent-language' ) ) ),
+			array( //15 inconsistent unknown site in json
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"sitelinks":{"BLUB":{"site":"BLUB","title":"TestPage!"}}}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-site' ) ) ),
+			array( //16 inconsistent unknown languages
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"lables":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized' ) ) ),
+			//@todo add check for Bug:52731 once fixed
 		);
 	}
 
 	/**
-	 * @dataProvider provideEditEntityData
+	 * @dataProvider provideExceptionData
 	 */
-	function testEditEntityData( $handle, $data, $expected = null ) {
-		$id = EntityTestHelper::getId( $handle );
-
-		// wbsetentity ------------------------------------------------------
-		list($res,,) = $this->doApiRequestWithToken(
-			array(
-				'action' => 'wbeditentity',
-				'reason' => 'Some reason',
-				'data' => json_encode( $data ),
-				'id' => $id,
-			),
-			null,
-			self::$users['wbeditor']->user
-		);
-
-		// check returned keys -------------------------------------------
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entity' );
-		$entity = $res['entity'];
-		$this->assertResultHasKeyInPath( $res, 'entity', 'id' );
-		$this->assertResultHasKeyInPath( $res, 'entity', 'lastrevid' );
-
-		// check return value -------------------------------------------
-		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
-
-		// check relevant entries
-		foreach ( $expected as $key => $exp ) {
-			$this->assertArrayHasKey( $key, $entity );
-			$this->assertArrayEquals( $exp, static::flattenValues( $key, $entity[$key] ) );
-		}
-
-		// check entity in database -------------------------------------------
-		$entity = $this->loadEntity( $id );
-
-		// check relevant entries
-		foreach ( $expected as $key => $exp ) {
-			$this->assertArrayHasKey( $key, $entity );
-			$this->assertArrayEquals( static::flattenValues( $key, $exp ),
-										static::flattenValues( $key, $entity[$key] ) );
-		}
-	}
-
-	static function flattenValues( $prop, $values ) {
-		if ( !is_array( $values ) ) {
-			return $values;
-		} elseif ( $prop == 'sitelinks' ) {
-			return self::flattenArray( $values, 'site', 'title' );
-		} elseif ( $prop == 'aliases' ) {
-			return self::flattenArray( $values, 'language', 'value', true );
-		} else {
-			return self::flattenArray( $values, 'language', 'value' );
-		}
+	public function testEditEntityExceptions( $params, $expected ){
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wbeditentity';
+		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
 }
