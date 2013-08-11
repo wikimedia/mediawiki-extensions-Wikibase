@@ -103,7 +103,7 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-error-constraint-violation-description' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|description|descriptions}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|alias|aliases}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
 
-	'wikibase-error-sitelink-already-used' => 'Site link [$1 $2] already used by item [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Site link [$1 $2] is already included in another item, [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Another query ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-item' => 'Another item ($3) already has label "$1" and description "$4" associated with language code $2',
