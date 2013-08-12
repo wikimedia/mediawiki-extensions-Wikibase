@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Summary;
+use Wikibase\RepoHooks;
 
 /**
  * Test Summary.
@@ -221,6 +222,91 @@ class SummaryTest extends \MediaWikiTestCase {
 				'can I haz world domination?',
 				'/* summarytest:0| */can I haz world domination?'
 				),
+		);
+	}
+
+	/**
+	 * @dataProvider providerOnFormat
+	 */
+	public function testOnFormat( $model, $root, $pre, $auto, $post, $title, $local, $expected ) {
+		$itemTitle = $this->getMock( $title );
+		$itemTitle->expects( $this->once() )->method( 'getContentModel' )->will( $this->returnValue( $model ) );
+		$comment = null;
+		RepoHooks::onFormat( array($model, $root), $comment, $pre, $auto, $post, $itemTitle, $local );
+		if ( is_null( $expected ) ) {
+			$this->assertEquals( $expected, $comment, "Didn't find the expected null" );
+		}
+		else {
+			$this->assertRegExp( $expected, $comment, "Didn't find the expected final comment" );
+		}
+	}
+
+	public static function providerOnFormat() {
+		return array( //@todo: test other types of entities too!
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'', '', '',
+				'Title',
+				false,
+				null
+			),
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'foo', '', 'bar',
+				'Title',
+				false,
+				null
+			),
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'foo', 'wbeditentity', 'bar',
+				'Title',
+				false,
+				'!foo‎<span dir="auto"><span class="autocomment">.*?</span>bar</span>!'
+			),
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'foo', 'wbsetlabel-set:1|en', 'bar',
+				'Title',
+				false,
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[en\].*?</span>bar</span>!'
+			),
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'foo', 'wbsetlabel-set:1|<>', 'bar',
+				'Title',
+				false,
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
+			),
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'foo', 'wbsetlabel-set:1|&lt;&gt;', 'bar',
+				'Title',
+				false,
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
+			),
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'foo', 'wbsetlabel-set:1|&', 'bar',
+				'Title',
+				false,
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span>bar</span>!'
+			),
+			array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				"wikibase-item",
+				'foo', 'wbsetlabel-set:1|…', 'bar',
+				'Title',
+				false,
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[…\].*?</span>bar</span>!'
+			)
 		);
 	}
 }
