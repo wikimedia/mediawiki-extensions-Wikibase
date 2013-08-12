@@ -2,10 +2,8 @@
 
 namespace Wikibase;
 
-use ParserOutput;
 use WikiPage, Title, User, Status, ParserOptions;
 use \ValueFormatters\ValueFormatterFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Abstract content object for articles representing Wikibase entities.
@@ -141,10 +139,8 @@ abstract class EntityContent extends \AbstractContent {
 	 */
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
 		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
-		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
-		$entityView = EntityView::newForEntityContent( $this, $valueFormatters, $dataTypeLookup, $entityLoader );
+		$entityView = EntityView::newForEntityContent( $this, $valueFormatters );;
 		return $entityView->getParserOutput( $this, $options, $generateHtml );
 	}
 

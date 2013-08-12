@@ -1,21 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use DataValues\StringValue;
-use Wikibase\Claim;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\EntityId;
-use Wikibase\EntityView;
-use Wikibase\Item;
 use Wikibase\ItemContent;
 use \ValueFormatters\ValueFormatterFactory;
-use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\Property;
-use Wikibase\PropertyContent;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\EntityView
@@ -46,46 +33,8 @@ use Wikibase\PropertyValueSnak;
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Kinzler
  */
 class EntityViewTest extends \PHPUnit_Framework_TestCase {
-
-	protected function newEntityView( EntityContent $entityContent ) {
-		$valueFormatters = new ValueFormatterFactory( array() );
-		$entityLoader = new MockRepository();
-
-		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
-		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
-
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( $p23, 'string' );
-		$dataTypeLookup->setDataTypeForProperty( $p42, 'url' );
-
-		$dataTypeLookup->setDataTypeForProperty( $p11, 'wikibase-item' );
-		$dataTypeLookup->setDataTypeForProperty( $p44, 'wikibase-item' );
-
-		$entityView = EntityView::newForEntityContent(
-			$entityContent,
-			$valueFormatters,
-			$dataTypeLookup,
-			$entityLoader
-		);
-
-		return $entityView;
-	}
-
-	protected function newEntityContentForClaims( $claims ) {
-		$entity = Item::newEmpty();
-
-		foreach ( $claims as $claim ) {
-			$entity->addClaim( $claim );
-		}
-
-		$content = EntityContentFactory::singleton()->newFromEntity( $entity );
-		return $content;
-	}
 
 	/**
 	 * @return array
@@ -95,9 +44,9 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 		$itemContent = ItemContent::newEmpty();
 		$itemContent->getEntity()->addClaim(
-			new Claim(
-				new PropertyNoValueSnak(
-					new EntityId( Property::ENTITY_TYPE, 24 )
+			new \Wikibase\Claim(
+				new \Wikibase\PropertyNoValueSnak(
+					new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 24 )
 				)
 			)
 		);
@@ -110,10 +59,14 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getHtmlForClaimsProvider
 	 *
-	 * @param EntityContent $entityContent
+	 * @param \Wikibase\EntityContent $entityContent
 	 */
-	public function testGetHtmlForClaims( EntityContent $entityContent ) {
-		$entityView = $this->newEntityView( $entityContent );
+	public function testGetHtmlForClaims( \Wikibase\EntityContent $entityContent ) {
+
+		$entityView = \Wikibase\EntityView::newForEntityContent(
+			$entityContent,
+			new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] )
+		);
 
 		// Using a DOM document to parse HTML output:
 		$doc = new \DOMDocument();
@@ -137,95 +90,4 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 		libxml_use_internal_errors();
 	}
 
-	/**
-	 * @dataProvider getParserOutputLinksProvider
-	 *
-	 * @param Claim[] $claims
-	 * @param EntityId[] $expectedLinks
-	 */
-	public function testParserOutputLinks( array $claims, $expectedLinks ) {
-		$entityContent = $this->newEntityContentForClaims( $claims );
-		$entityView = $this->newEntityView( $entityContent );
-
-		$out = $entityView->getParserOutput( $entityContent, null, false );
-		$links = $out->getLinks();
-
-		// convert expected links to link structure
-		$contentFactory = EntityContentFactory::singleton();
-
-		foreach ( $expectedLinks as $entityId ) {
-			$title = $contentFactory->getTitleForId( $entityId );
-			$ns = $title->getNamespace();
-			$dbk = $title->getDBkey();
-
-			$this->assertArrayHasKey( $ns, $links, "sub-array for namespace" );
-			$this->assertArrayHasKey( $dbk, $links[$ns], "entry for database key" );
-		}
-	}
-
-	public function getParserOutputLinksProvider() {
-		$argLists = array();
-
-		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
-		$p27 = new EntityId( Property::ENTITY_TYPE, 42 );
-		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
-
-		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
-		$q24 = new EntityId( Item::ENTITY_TYPE, 24 );
-
-		$argLists["empty"] = array(
-			array(),
-			array() );
-
-		$argLists["Property"] = array(
-			array( new Claim( new PropertyNoValueSnak( $p27 ) ) ),
-			array( $p27 ) );
-
-		$argLists["PropertySomeValueSnak"] = array(
-			array( new Claim( new PropertySomeValueSnak( $p27 ) ) ),
-			array( $p27 ) );
-
-		$argLists["PropertyValueSnak with string value"] = array(
-			array( new Claim( new PropertyValueSnak( $p27, new StringValue( 'onoez' ) ) ) ),
-			array( $p27 ) );
-
-		$argLists["PropertyValueSnak with EntityId"] = array(
-			array( new Claim( new PropertyValueSnak( $p27, $q23 ) ) ),
-			array( $p27, $q23 ) );
-
-		$argLists["Mixed Snaks"] = array(
-			array(
-				new Claim( new PropertyValueSnak( $p11, $q23 ) ),
-				new Claim( new PropertyNoValueSnak( $p27 ) ),
-				new Claim( new PropertySomeValueSnak( $p44 ) ),
-				new Claim( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
-				new Claim( new PropertyValueSnak( $p44, $q24 ) ),
-			),
-			array( $p11, $q23, $p27, $p44, $q24 ) );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider providerNewForEntityContent
-	 */
-	public function testNewForEntityContent( EntityContent $entityContent ) {
-		$valueFormatters = new ValueFormatterFactory( array() );
-		$dataTypeLookup = new InMemoryDataTypeLookup( array() );
-		$entityLoader = new MockRepository();
-
-		// test whether we get the right EntityView from an EntityContent
-		$view = EntityView::newForEntityContent( $entityContent, $valueFormatters, $dataTypeLookup, $entityLoader );
-		$this->assertInstanceOf(
-			EntityView::$typeMap[ $entityContent->getEntity()->getType() ],
-			$view
-		);
-	}
-
-	public static function providerNewForEntityContent() {
-		return array(
-			array( ItemContent::newEmpty() ),
-			array( PropertyContent::newEmpty() )
-		);
-	}
 }

@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\ItemContent;
 use Wikibase\Item;
-use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Utils;
 use Wikibase\ItemView;
 use ValueFormatters\ValueFormatterFactory;
@@ -54,13 +53,10 @@ class ItemViewTest extends \MediaWikiTestCase {
 	 * @dataProvider providerNewForEntityContent
 	 */
 	public function testNewForEntityContent( $entityContent ) {
-		$valueFormatters = new ValueFormatterFactory( array() );
-		$entityLoader = new MockRepository();
-		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 
 		// test whether we get the right EntityView from an EntityContent
-		$view = ItemView::newForEntityContent( $entityContent, $valueFormatters, $dataTypeLookup, $entityLoader );
-
+		$view = ItemView::newForEntityContent( $entityContent, $valueFormatters );
 		$this->assertType(
 			ItemView::$typeMap[ $entityContent->getEntity()->getType() ],
 			$view

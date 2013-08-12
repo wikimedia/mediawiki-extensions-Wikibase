@@ -13,7 +13,6 @@ use MediaWikiSite;
 use MWException;
 use FormatJson;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use ValueFormatters\ValueFormatterFactory;
@@ -86,25 +85,16 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Constructor.
 	 *
-	 * @todo  think about using IContextSource here. Parser for example uses parser options (which also can be generated
-	 *        from an IContextSource) but this seems sufficient for now.
+	 * @todo think about using IContextSource here. Parser for example uses parser options (which also can be generated
+	 *       from an IContextSource) but this seems sufficient for now.
 	 *
 	 * @since 0.1
 	 *
-	 * @param ValueFormatterFactory      $valueFormatters
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityLookup               $entityLoader
-	 * @param IContextSource|null        $context
+	 * @param ValueFormatterFactory $valueFormatters
+	 * @param IContextSource|null $context
 	 */
-	public function __construct(
-		ValueFormatterFactory $valueFormatters,
-		PropertyDataTypeLookup $dataTypeLookup,
-		EntityLookup $entityLoader,
-		IContextSource $context = null ) {
-
+	public function __construct( ValueFormatterFactory $valueFormatters, IContextSource $context = null ) {
 		$this->valueFormatters = $valueFormatters;
-		$this->dataTypeLookup = $dataTypeLookup;
-		$this->entityLoader = $entityLoader;
 
 		if ( !$context ) {
 			$context = \RequestContext::getMain();
@@ -252,26 +242,24 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
-		$allSnaks = $entity->getEntity()->getAllSnaks();
+		$entityLoader = StoreFactory::getStore()->getEntityLookup();
 
-		// treat referenced entities as page links ------
-		$refFinder = new ReferencedEntitiesFinder();
-		$usedEntityIds = $refFinder->findSnakLinks( $allSnaks );
-
+		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 		$contentFactory = EntityContentFactory::singleton();
+
+		$usedEntityIds = $refFinder->findSnakLinks( $entity->getEntity()->getAllSnaks() );
 
 		foreach ( $usedEntityIds as $entityId ) {
 			$pout->addLink( $contentFactory->getTitleForId( $entityId ) );
 		}
 
-		//@todo put externallinks (from URL values) into ParserOutput as externallinks.
-		//@todo would be nice to also put imagelinks (from CommonsMedia values)...
-		//@todo:...as well as iwlinks (from sitelinks) into the ParserOutput.
-
 		if ( $generateHtml ) {
 			$html = $this->getHtml( $entity, $langCode, $editable );
 			$pout->setText( $html );
 		}
+
+		//@todo (phase 2) would be nice to put pagelinks (entity references) and categorylinks (from special properties)...
+		//@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
 
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array(
@@ -850,10 +838,11 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		// make information about other entities used in this entity available in JavaScript view:
-		$refFinder = new ReferencedEntitiesFinder();
+		$entityLoader = StoreFactory::getStore()->getEntityLookup();
+		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 
 		$usedEntityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
-		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode );
+		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode );
 
 		$out->addJsConfigVars(
 			'wbUsedEntities',
@@ -868,15 +857,16 @@ abstract class EntityView extends \ContextSource {
 	 * set of entity IDs.
 	 * @since 0.4
 	 *
+	 * @param EntityLookup $entityLoader
 	 * @param EntityId[] $entityIds
 	 * @param string $langCode For the entity labels which will be included in one language only.
 	 * @return array
 	 */
-	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
+	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = EntityContentFactory::singleton();
-		$entities = $this->entityLoader->getEntities( $entityIds );
+		$entities = $entityLoader->getEntities( $entityIds );
 		$entityInfo = array();
 
 		$serializerFactory = new SerializerFactory();
@@ -910,20 +900,16 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntityContent              $entity
-	 * @param ValueFormatterFactory      $valueFormatters
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityLookup               $entityLoader
-	 * @param IContextSource|null        $context
+	 * @param EntityContent $entity
+	 * @param ValueFormatterFactory $valueFormatters
+	 * @param IContextSource|null $context
 	 *
-	 * @throws \MWException
 	 * @return EntityView
+	 * @throws MWException
 	 */
 	public static function newForEntityContent(
 		EntityContent $entity,
 		ValueFormatterFactory $valueFormatters,
-		PropertyDataTypeLookup $dataTypeLookup,
-		EntityLookup $entityLoader,
 		IContextSource $context = null
 	) {
 		$type = $entity->getEntity()->getType();
@@ -932,11 +918,7 @@ abstract class EntityView extends \ContextSource {
 			throw new MWException( "No entity view known for handling entities of type '$type'" );
 		}
 
-		$instance = new self::$typeMap[ $type ](
-			$valueFormatters,
-			$dataTypeLookup,
-			$entityLoader,
-			$context );
+		$instance = new self::$typeMap[ $type ]( $valueFormatters, $context );
 		return $instance;
 	}
 }
