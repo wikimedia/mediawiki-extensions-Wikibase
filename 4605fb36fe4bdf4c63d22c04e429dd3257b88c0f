@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "898eddaf_a948da30",
+        "filename": "lib/tests/phpunit/specials/SpecialPageTestBase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-12T12:29:58Z",
+      "side": 1,
+      "message": "use\n\npreg_quote(\"{$parm}\u003d\\\"{$value}\\\"\", \u0027/\u0027 );",
+      "revId": "4605fb36fe4bdf4c63d22c04e429dd3257b88c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
