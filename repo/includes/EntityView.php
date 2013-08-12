@@ -744,10 +744,6 @@ abstract class EntityView extends \ContextSource {
 			return ''; //XXX: this should throw an exception?!
 		}
 
-		if( !$lang ) {
-			$lang = $this->getLanguage();
-		}
-
 		if ( $entity->getId() ) {
 			$id = $this->getFormattedIdForEntity( $entity );
 		} else {

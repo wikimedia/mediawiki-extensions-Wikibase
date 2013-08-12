@@ -123,7 +123,7 @@ class ItemView extends EntityView {
 		}
 
 		// Link to SpecialPage
-		$editLink = $this->getEditUrl( 'SetSiteLink', $itemContent->getEntity(), null );
+		$editLink = $this->getEditUrl( 'SetSiteLink', $itemContent->getEntity() );
 
 		foreach( $siteLinks as $link ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
