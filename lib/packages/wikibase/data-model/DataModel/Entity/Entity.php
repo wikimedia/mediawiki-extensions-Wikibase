@@ -185,18 +185,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	}
 
 	/**
-	 * Returns a prefixed version of the entity's id or null if it is not in the datastore yet.
-	 *
-	 * @since 0.2
-	 * @deprecated since 0.4
-	 *
-	 * @return string|null
-	 */
-	public function getPrefixedId() {
-		return $this->getId() === null ? null : $this->getId()->getPrefixedId();
-	}
-
-	/**
 	 * Sets the ID.
 	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
 	 *
