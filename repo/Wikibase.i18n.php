@@ -555,7 +555,14 @@ The pending quantity of a counter and a leading '+'. The pending quantity of a c
 This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantitycounter-pending}}.",
 	'wikibase-propertyedittool-counter-pending-tooltip' => 'Parameters:
 * $1 is the number of elements not saved yet.',
-	'wikibase-propertyedittool-counter-entrieslabel' => "Used in the counter on top of the site-links table. The counter is giving information about how many site-links exist in the following table. This is just the label for the counter's subject, the site-links. The number of site-links is not part of the message but they are given as parameter $1 for plural usage in the label.
+	'wikibase-propertyedittool-counter-entrieslabel' => "Used in the counter on top of the site-links table.
+
+The counter is giving information about how many site-links exist in the following table.
+
+This is just the label for the counter's subject, the site-links.
+
+Parameters:
+* $1 - the number of site-links (for PLURAL), not part of the message
 
 See also:
 * {{msg-mw|Wikibase-ui-pendingquantitycounter-nonpending}}",
@@ -962,7 +969,12 @@ See also:
 Parameters:
 * $1 - the name of the namespace for which direct editing was denied',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
-	'wikibase-noentity-createone' => 'Put immediately after {{msg-mw|wikibase-noentity}} if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
+	'wikibase-noentity-createone' => 'Put immediately after {{msg-mw|wikibase-noentity}} if the user has the right to create an entity of the given type.
+
+This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.
+
+Parameters:
+* $1 - link to the special page which is used to create',
 	'wikibase-item-summary-wbsetitem' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
 	'wikibase-item-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
@@ -1035,6 +1047,9 @@ Parameters:
 * $1 is the number of qualifiers removed.',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
 * $3 is the number of references removed.',
+	'wikibase-item-summary-wbsetstatementrank' => 'Automatic edit summary when changing the rank of a statement. Parameters:
+* $3 is the old rank
+* $4 is the new rank',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
@@ -1061,9 +1076,6 @@ Parameters:
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
-	'wikibase-item-summary-wbsetstatementrank' => 'Automatic edit summary when changing the rank of a statement. Parameters:
-* $3 is the old rank
-* $4 is the new rank',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}
@@ -1094,7 +1106,8 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 	'wikibase-listdatatypes-url-head' => '{{Wikibase-datatype-head|Url}}
 {{Identical|URL}}',
 	'wikibase-listdatatypes-url-body' => '{{Wikibase-datatype-body|Url}}',
-	'datatypes-type-url' => '{{Identical|URL}}',
+	'datatypes-type-url' => 'Unused at this time.
+{{Identical|URL}}',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-property' => 'The name for Wikibase property content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-query' => 'The name for Wikibase query content model, used when describing what type of content a page contains.',
@@ -1445,7 +1458,7 @@ La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-error-constraint-violation-label' => 'Hai {{PLURAL:$1|una violación de restricción|violaciones de restricción}} pa {{PLURAL:$1|la etiqueta|les etiquetes}} "$3" {{PLURAL:$1|nel códigu|nos códigos}} de llingua "$2".',
 	'wikibase-error-constraint-violation-description' => 'Hai {{PLURAL:$1|una violación de restricción|violaciones de restricción}} pa {{PLURAL:$1|la descripción|les descripciones}} "$3" {{PLURAL:$1|nel códigu|nos códigos}} de llingua "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'Hai {{PLURAL:$1|una violación de restricción|violaciones de restricción}} pa {{PLURAL:$1|un alcuñu|los alcuños}} "$3" {{PLURAL:$1|nel códigu|nos códigos}} de llingua "$2".',
-	'wikibase-error-sitelink-already-used' => 'L\'enllaz del sitiu "[$1 $2]" yá ta usándolu l\'elementu [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'L\'enllaz del sitiu "[$1 $2]" yá ta usándolu l\'elementu [[$3]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedá ($3) yá tien la etiqueta "$1" asociada col códigu de llingua $2', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) yá tien la etiqueta "$1" asociada col códigu de llingua $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Otru elementu ($3) yá tien la etiqueta "$1" y la descripción "$4" asociaes col códigu de llingua $2', # Fuzzy
@@ -2909,7 +2922,7 @@ Vaše IP adresa bude zobrazena v historii této {{grammar:2sg|$1}}.', # Fuzzy
 	'wikibase-blockeduser-tooltip-message' => 'Nemáte oprávnění editovat, protože byla zablokována vaše IP adresa či uživatelské jméno.',
 	'wikibase-move-error' => 'Nemůžete přesouvat stránky v datovém jmenném prostoru, ani nemůžete stránky přesouvat do něj.',
 	'wikibase-warning-constraint-violation-length' => 'Pro kód jazyka „$1“ se spustilo omezení na délku.',
-	'wikibase-error-sitelink-already-used' => 'Odkaz [$1 $2] je již použit položkou [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Odkaz [$1 $2] je již použit položkou [[$3]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'Štítek „$1“ pro jazykový kód $2 již má jiná vlastnost ($3)', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Štítek „$1“ pro jazykový kód $2 již má jiný dotaz ($3)', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Štítek „$1“ a popis „$4“ pro jazykový kód $2 již má jiná položka ($3)', # Fuzzy
@@ -3606,10 +3619,10 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-error-constraint-violation-label' => 'Es gibt {{PLURAL:$1|eine Beschränkungsverletzung|Beschränkungsverletzungen}} für die {{PLURAL:$1|Bezeichnung|Bezeichnungen}} „$3“ für {{PLURAL:$1|den Sprachcode|die Sprachcodes}} „$2“.',
 	'wikibase-error-constraint-violation-description' => 'Es gibt {{PLURAL:$1|eine Beschränkungsverletzung|Beschränkungsverletzungen}} für die {{PLURAL:$1|Beschreibung|Beschreibungen}} „$3“ für {{PLURAL:$1|den Sprachcode|die Sprachcodes}} „$2“.',
 	'wikibase-error-constraint-violation-aliases' => 'Es gibt {{PLURAL:$1|eine Beschränkungsverletzung|Beschränkungsverletzungen}} für {{PLURAL:$1|den Alias|die Aliasse}} „$3“ für {{PLURAL:$1|den Sprachcode|die Sprachcodes}} „$2“.',
-	'wikibase-error-sitelink-already-used' => 'Der Websitelink [$1 $2] wird bereits vom Datenobjekt [[$3]] verwendet.',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Eine andere Eigenschaft ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Eine andere Abfrage ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Ein anderes Datenobjekt ($3) hat bereits die Bezeichnung „$1“ und die Beschreibung „$4“, die dem Sprachcode $2 zugeordnet ist.', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Der Websitelink [$1 $2] ist bereits im Datenobjekt [[$3]] eingeschlossen.',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Eine andere Eigenschaft ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Eine andere Abfrage ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
+	'wikibase-error-label-not-unique-item' => 'Ein anderes Datenobjekt ($3) hat bereits die Bezeichnung „$1“ und die Beschreibung „$4“, die dem Sprachcode $2 zugeordnet ist.',
 	'special-itembytitle' => 'Datenobjekte nach Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Suche Datenobjekte nach Website und Titel',
 	'wikibase-itembytitle-lookup-site' => 'Website:',
@@ -3632,7 +3645,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-newproperty-summary' => 'Überprüfe, [[Special:PropertyDisambiguation|ob die Eigenschaft bereits vorhanden ist]]!<br />Du solltest eine [[Help:Label|Bezeichnung]] und eine [[Help:Description|Beschreibung]] für alle neuen Eigenschaften erstellen und zusätzlich einen gültigen Eigenschaftstyp.',
 	'wikibase-newproperty-fieldset' => 'Ein neues Attribut erstellen',
 	'wikibase-newproperty-datatype' => 'Datentyp:',
-	'wikibase-newproperty-invalid-datatype' => 'Es wurde ein ungültiger Datentyp angegeben', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Es wurde ein ungültiger Datentyp angegeben.',
 	'special-newitem' => 'Ein neues Datenobjekt erstellen',
 	'wikibase-newitem-summary' => 'Überprüfe, [[Special:ItemByTitle|ob das Objekt bereits vorhanden ist]]!<br />Du solltest eine [[Help:Label|Bezeichnung]] und eine [[Help:Description|Beschreibung]] für alle neuen Objekte erstellen.',
 	'wikibase-newitem-fieldset' => 'Ein neues Datenobjekt erstellen',
@@ -3770,6 +3783,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Qualifikator|Qualifikatoren}} geändert',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Qualifikator|Qualifikatoren}} entfernt',
 	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Einzelnachweis|Einzelnachweise}} von der Aussage entfernt',
+	'wikibase-item-summary-wbsetstatementrank' => 'Rang der Aussage von „$3“ nach „$4“ geändert',
 	'wikibase-property-summary-wbcreate-new' => 'Eine neue Eigenschaft erstellt',
 	'wikibase-property-summary-wbeditentity-create' => 'Eine neue Eigenschaft erstellt',
 	'wikibase-property-summary-wbeditentity-update' => 'Eine Eigenschaft aktualisiert',
@@ -4826,10 +4840,10 @@ Sinu IP-aadress talletatakse olemi ajaloos.',
 	'wikibase-restrictionedit-tooltip-message' => 'See lehekülg on kaitstud. Redigeerimine pole lubatud.',
 	'wikibase-blockeduser-tooltip-message' => 'Sul pole redigeerimisluba, sest su kasutajanimi või IP-aadress on blokeeritud.',
 	'wikibase-move-error' => 'Andmete nimeruumis olevaid lehekülgi ei saa teisaldada. Samuti ei saa sinna mujalt lehekülgi teisaldada.',
-	'wikibase-error-sitelink-already-used' => 'Võrgukohalinki [$1 $2] kasutab juba üksus [[$3]].',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Teisel omadusel ($3) on juba silt "$1", mis on seotud keelekoodiga $2.', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Teisel päringul ($3) on juba silt "$1", mis on seotud keelekoodiga $2.', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Teisel üksusel ($3) on juba silt "$1" ja kirjeldus "$4", mis on seotud keelekoodiga $2.', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Võrgukohalink [$1 $2] kuulub juba üksuse [[$3]] juurde.',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Teisel omadusel ($3) on juba silt "$1", mis on seotud keelekoodiga $2.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Teisel päringul ($3) on juba silt "$1", mis on seotud keelekoodiga $2.',
+	'wikibase-error-label-not-unique-item' => 'Teisel üksusel ($3) on juba silt "$1" ja kirjeldus "$4", mis on seotud keelekoodiga $2.',
 	'special-itembytitle' => 'Üksus pealkirja järgi',
 	'wikibase-itembytitle-lookup-fieldset' => 'Üksuste otsimine võrgukoha ja pealkirja järgi',
 	'wikibase-itembytitle-lookup-site' => 'Võrgukoht:',
@@ -4850,7 +4864,7 @@ Sinu IP-aadress talletatakse olemi ajaloos.',
 	'wikibase-newproperty-summary' => 'Kontrolli kindlasti, ega omadus juba olemas pole!<br />Kõigi uute omaduste juurde tuleks lisada [[Help:Label|silt]] ja [[Help:Description|kirjeldus]] ning lisaks ka sobiv omaduse tüüp.',
 	'wikibase-newproperty-fieldset' => 'Uue omaduse loomine',
 	'wikibase-newproperty-datatype' => 'Andmetüüp:',
-	'wikibase-newproperty-invalid-datatype' => 'Määratud vigane andmetüüp', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Määratud vigane andmetüüp.',
 	'special-newitem' => 'Uue üksuse loomine',
 	'wikibase-newitem-summary' => 'Kontrolli kindlasti, ega [[Special:ItemByTitle|üksus juba olemas pole]]!<br />Kõigi uute üksuste juurde tuleks lisada [[Help:Label|silt]] ja [[Help:Description|kirjeldus]].',
 	'wikibase-newitem-fieldset' => 'Uue üksuse loomine',
@@ -5470,7 +5484,7 @@ IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|Nimi|Nimet}} ”$3” {{PLURAL:$1|kielikoodilla|kielikoodeilla}} $2 {{PLURAL:$1|ei|eivät}} noudata rajoituksia.',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|Kuvaus|Kuvaukset}} ”$3” {{PLURAL:$1|kielikoodilla|kielikoodeilla}} $2 {{PLURAL:$1|ei|eivät}} noudata rajoituksia.',
 	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|Alias|Aliakset}} ”$3” {{PLURAL:$1|kielikoodilla|kielikoodeilla}} $2 {{PLURAL:$1|ei|eivät}} noudata rajoituksia.',
-	'wikibase-error-sitelink-already-used' => 'Sivustolinkki [$1 $2] on jo käytössä kohteessa [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Sivustolinkki [$1 $2] on jo käytössä kohteessa [[$3]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'Toinen ominaisuus ($3) käyttää jo nimeä "$1" kielikoodilla $2.', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Toinen kysely ($3) käyttää jo nimeä "$1" kielikoodilla $2.', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Toinen kohde ($3) käyttää jo nimeä "$1" ja kuvausta "$4" kielikoodilla $2.', # Fuzzy
@@ -5776,10 +5790,10 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-error-constraint-violation-label' => 'Il y a violation {{PLURAL:$1|d’une contrainte|de contraintes}} pour {{PLURAL:$1|le libellé|les libellés}} « $3 » pour {{PLURAL:$1|le code de langue|les codes de langue}} « $2 ».',
 	'wikibase-error-constraint-violation-description' => 'Il y a violation {{PLURAL:$1|d’une contrainte|de contraintes}} pour {{PLURAL:$1|la description|les descriptions}} « $3 » pour {{PLURAL:$1|le code de langue|les codes de langue}} « $2 ».',
 	'wikibase-error-constraint-violation-aliases' => 'Il y a violation {{PLURAL:$1|d’une contrainte|de contraintes}} pour {{PLURAL:$1|l’alias|les alias}} « $3 » pour {{PLURAL:$1|le code de langue|les codes de langue}} « $2 ».',
-	'wikibase-error-sitelink-already-used' => "Le lien du site [$1 $2] est déjà utilisé par l'objet [[$3]].",
-	'wikibase-error-label-not-unique-wikibase-property' => 'Une autre propriété ($3) a déjà un libellé «&nbsp;$1&nbsp;» associé au code de langue $2', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Une autre requête ($3) a déjà le libellé « $1 » associé au code de langue $2', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Un autre élément ($3) a déjà le libellé «&nbsp;$1&nbsp;» et la description «&nbsp;$4&nbsp;» associés au code de langue $2', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Le lien du site [$1 $2] est déjà inclus dans un autre objet, [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Une autre propriété ($3) a déjà un libellé « $1 » associé au code de langue $2.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Une autre requête ($3) a déjà le libellé « $1 » associé au code de langue $2.',
+	'wikibase-error-label-not-unique-item' => 'Un autre élément ($3) a déjà le libellé « $1 » et la description « $4 » associés au code de langue $2.',
 	'special-itembytitle' => 'Élément par titre',
 	'wikibase-itembytitle-lookup-fieldset' => 'Rechercher des éléments par site et par titre',
 	'wikibase-itembytitle-lookup-site' => 'Site&nbsp;:&nbsp;',
@@ -5802,7 +5816,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-newproperty-summary' => 'Assurez-vous que [[Special:PropertyDisambiguation|la propriété n’existe pas déjà]] !<br />Vous devriez créer un [[Help:Label|libellé]] et une [[Help:Description|description]] pour toutes les nouvelles propriétés, ainsi qu’un type de propriété valide.',
 	'wikibase-newproperty-fieldset' => 'Créer une nouvelle propriété',
 	'wikibase-newproperty-datatype' => 'Type de données&nbsp;:',
-	'wikibase-newproperty-invalid-datatype' => 'Type de données spécifié non valide', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Type de données spécifié non valide.',
 	'special-newitem' => 'Créer un nouvel élément',
 	'wikibase-newitem-summary' => 'Assurez-vous que [[Special:ItemByTitle|l’élément n’existe pas déjà]] !<br />Vous devriez créer un [[Help:Label/fr|libellé]] et une [[Help:Description/fr|description]] pour tous les nouveaux éléments.',
 	'wikibase-newitem-fieldset' => 'Créer un nouvel élément',
@@ -5943,6 +5957,7 @@ ffirmation ajoutée}}',
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|qualifieur modifié|qualifieurs modifiés}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|qualifieur supprimé|qualifieurs supprimés}}',
 	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Référence supprimée|Références supprimées}} pour réclamation',
+	'wikibase-item-summary-wbsetstatementrank' => "Rang de la déclaration modifié de '$3' à '$4'",
 	'wikibase-property-summary-wbcreate-new' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-create' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-update' => 'Mise à jour d’une propriété',
@@ -8737,10 +8752,10 @@ $messages['ja'] = array(
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|言語コード}}「$2」にて{{PLURAL:$1|ラベル}}「$3」が{{PLURAL:$1|制限}}に違反しています。',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|言語コード}}「$2」にて{{PLURAL:$1|説明}}「$3」が{{PLURAL:$1|制限}}に違反しています。',
 	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|言語コード}}「$2」にて{{PLURAL:$1|別名}}「$3」が{{PLURAL:$1|制限}}に違反しています。',
-	'wikibase-error-sitelink-already-used' => 'サイトリンク [$1 $2] は項目 [[$3]] が既に使用しています。',
-	'wikibase-error-label-not-unique-wikibase-property' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のプロパティ ($3) が既に存在します', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のクエリ ($3) が既に存在します', # Fuzzy
-	'wikibase-error-label-not-unique-item' => '言語コード $2 には、ラベル「$1」および説明「$4」の項目 ($3) が既にあります', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'サイトリンク [$1 $2] は項目 [[$3]] に既に含まれています。',
+	'wikibase-error-label-not-unique-wikibase-property' => '言語コード $2 に関連付けられたラベル「$1」を持つ別のプロパティ ($3) が既にあります。',
+	'wikibase-error-label-not-unique-wikibase-query' => '言語コード $2 に関連付けられたラベル「$1」を持つ別のクエリ ($3) が既にあります。',
+	'wikibase-error-label-not-unique-item' => '言語コード $2 に関連付けられたラベル「$1」および説明「$4」を持つ別の項目 ($3) が既にあります。',
 	'special-itembytitle' => 'ページ名から項目を探す',
 	'wikibase-itembytitle-lookup-fieldset' => 'サイト名やページ名で項目を探す',
 	'wikibase-itembytitle-lookup-site' => 'サイト:',
@@ -8763,7 +8778,7 @@ $messages['ja'] = array(
 	'wikibase-newproperty-summary' => 'プロパティが既に存在することを確認してください!<br />すべての新規プロパティについて[[Help:Label|ラベル]]および[[Help:Description|説明]]を作成する必要があり、さらにプロパティの型が有効である必要があります。',
 	'wikibase-newproperty-fieldset' => 'プロパティの新規作成',
 	'wikibase-newproperty-datatype' => 'データの型:',
-	'wikibase-newproperty-invalid-datatype' => '指定したデータの型は無効です', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => '指定したデータの型は無効です。',
 	'special-newitem' => '項目の新規作成',
 	'wikibase-newitem-summary' => '[[Special:ItemByTitle|項目が既に存在するかどうか確認]]してください!<br />新しく項目をつくるときはいつも、[[Help:Label|ラベル]]および[[Help:Description|説明]]を作成する必要があります。',
 	'wikibase-newitem-fieldset' => '項目の新規作成',
@@ -9390,7 +9405,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-error-constraint-violation-label' => '"$2" {{PLURAL:$1|언어 코드}}에 "$3" {{PLURAL:$1|레이블}}에 대해 {{PLURAL:$1|제약}} 위반입니다.',
 	'wikibase-error-constraint-violation-description' => '"$2" {{PLURAL:$1|언어 코드}}에 "$3" {{PLURAL:$1|설명}}에 대해 {{PLURAL:$1|제약}} 위반입니다.',
 	'wikibase-error-constraint-violation-aliases' => '"$2" {{PLURAL:$1|언어 코드}}에 "$3" {{PLURAL:$1|별명}}에 대해 {{PLURAL:$1|제약}} 위반입니다.',
-	'wikibase-error-sitelink-already-used' => '[$1 $2] 사이트 링크가 이미 [[$3]] 항목에 의해 사용되고 있습니다.',
+	'wikibase-error-sitelink-already-used' => '[$1 $2] 사이트 링크가 이미 [[$3]] 항목에 의해 사용되고 있습니다.', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => '다른 속성($3)은 이미 $2 언어 코드와 관련된 "$1" 레이블이 있습니다.', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => '다른 쿼리($3)은 이미 $2 언어 코드와 관련된 "$1" 레이블이 있습니다.', # Fuzzy
 	'wikibase-error-label-not-unique-item' => '다른 항목($3)은 이미 $2 언어 코드와 관련된 "$1" 레이블과 "$4" 설명이 있습니다', # Fuzzy
@@ -9859,10 +9874,10 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-blockeduser-tooltip-message' => "Dir hutt net d'Recht fir Ännerungen ze maachen, well Äre Benotzernumm oder Är IP-Adress gespaart gouf.",
 	'wikibase-move-error' => 'Dir kënnt keng Säiten déi am Data-Nummraum si réckelen an Dir kënnt och keng Säiten dohi réckelen.',
 	'wikibase-warning-constraint-violation-length' => 'Eng Limitatioun vun der Längt vum Sproochcode "$1" gëtt markéiert.',
-	'wikibase-error-sitelink-already-used' => 'Link op de Site [$1 $2] gëtt scho vum Element [[$3]] benotzt.',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Eng aner Eegeschaft ($3) huet schonns d\'Etiquette "$1" associéiert mam Sproochcode $2', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Eng aner Ufro ($3) huet schonns d\'Etiquette "$1" associéiert mam Sproochcode $2', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'En anert Element ($3) huet schonn d\'Etiquette "$1" an d\'Beschreiwung "$4" associéiert mam Sproochecode $2', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Link op de Site [$1 $2] ass schonn an engem aneren Element dran, [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Eng aner Eegeschaft ($3) huet schonns d\'Etiquette "$1" associéiert mam Sproochcode $2.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Eng aner Ufro ($3) huet schonns d\'Etiquette "$1" associéiert mam Sproochcode $2.',
+	'wikibase-error-label-not-unique-item' => 'En anert Element ($3) huet schonn d\'Etiquette "$1" an d\'Beschreiwung "$4" associéiert mam Sproochecode $2.',
 	'special-itembytitle' => 'Element no Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Sicht no Elementer mam Site a mam Titel',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -9882,7 +9897,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'special-newproperty' => 'Eng nei Eegeschaft uleeën',
 	'wikibase-newproperty-fieldset' => 'Eng nei Eegeschaft uleeën',
 	'wikibase-newproperty-datatype' => 'Datentyp:',
-	'wikibase-newproperty-invalid-datatype' => 'Net valabelen Datentyp uginn', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Net valabelen Datentyp uginn.',
 	'special-newitem' => 'En neit Element uleeën',
 	'wikibase-newitem-fieldset' => 'En neit Element uleeën',
 	'wikibase-newitem-site' => 'Site vun der éischter verlinkter Säit',
@@ -9963,8 +9978,10 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-item-summary-wbeditentity-update' => 'Huet en Element aktualiséiert',
 	'wikibase-item-summary-wbeditentity-override' => 'En Element gouf iwwerschriwwen',
 	'wikibase-item-summary-wbsetreference' => 'Huet eng Referenz festgeluecht',
+	'wikibase-item-summary-wbsetlabel-add' => '[$2]-Etiquette derbäigesat',
 	'wikibase-item-summary-wbsetlabel-set' => "Huet d'Etiquette fir [$2] geännert",
 	'wikibase-item-summary-wbsetlabel-remove' => "Huet d'Etiquette fir [$2] ewechgeholl",
+	'wikibase-item-summary-wbsetdescription-add' => '[$2]-Beschreiwung derbäigesat',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2]-Beschreiwung geännert',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2]-Beschreiwung ewechgeholl',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Huet e Link op [$2] derbäigesat',
@@ -10377,10 +10394,10 @@ $messages['mk'] = array(
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|Надминато е ограничување|Надминати се ограничувања}} на {{PLURAL:$1|етикетата|етикетите}} „$3“ за {{PLURAL:$1|јазичниот код|јазичните кодови}} „$2“.',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|Надминато е ограничување|Надминати се ограничувања}} на {{PLURAL:$1|описот|описите}} „$3“ за {{PLURAL:$1|јазичниот код|јазичните кодови}} „$2“.',
 	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|Надминато е ограничување|Надминати се ограничувања}} на {{PLURAL:$1|алијасот|алијасите}} „$3“ за {{PLURAL:$1|јазичниот код|јазичните кодови}} „$2“.',
-	'wikibase-error-sitelink-already-used' => 'Надворешната врска [$1 $2] веќе се користи од предметот [[$3]].',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго својство ($3)', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго барање ($3)', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Друг предмет ($3) веќе ги има етикетата „$1“ и описот „$4“ поврзано со јазичниот код $2', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Надворешната врска [$1 $2] веќе се користи од предметот [[$3]].', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-property' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго својство ($3).',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго барање ($3).',
+	'wikibase-error-label-not-unique-item' => 'Друг предмет ($3) веќе ги има етикетата „$1“ и описот „$4“ поврзано со јазичниот код $2.',
 	'special-itembytitle' => 'Предмет по наслов',
 	'wikibase-itembytitle-lookup-fieldset' => 'Пребарување на предмети по вики или наслов',
 	'wikibase-itembytitle-lookup-site' => 'Вики:',
@@ -10403,7 +10420,7 @@ $messages['mk'] = array(
 	'wikibase-newproperty-summary' => 'Не заборавајте да [[Special:PropertyDisambiguation|проверите дали својството веќе постои]]!<br />Треба да создадете [[Help:Label|етикета]] и [[Help:Description|опис]] за сите нови својства, покрај важечки тип на својство.',
 	'wikibase-newproperty-fieldset' => 'Создај ново својство',
 	'wikibase-newproperty-datatype' => 'Податочен тип:',
-	'wikibase-newproperty-invalid-datatype' => 'Укажан е неважечки податочен тип', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Укажан е неважечки податочен тип.',
 	'special-newitem' => 'Создај нов предмет',
 	'wikibase-newitem-summary' => 'Не заборавајте да [[Special:ItemByTitle|проверите дали можеби веќе постои ваков предмет]]!<br />Треба да создадете [[Help:Label|етикета]] и [[Help:Description|опис]] за сите нови единици.',
 	'wikibase-newitem-fieldset' => 'Создај нов предмет',
@@ -10906,7 +10923,7 @@ Alamat IP anda akan dicatatkan dalam sejarah suntingan perkara ini.',
 	'wikibase-error-constraint-violation-label' => 'Terdapat pencabulan {{PLURAL:$1|batas}} untuk {{PLURAL:$1|label|label-label}} "$3" untuk {{PLURAL:$1|kod|kod-kod}} bahasa "$2".',
 	'wikibase-error-constraint-violation-description' => 'Terdapat pencabulan {{PLURAL:$1|batas}} untuk {{PLURAL:$1|keterangan|keterangan-keterangan}} "$3" untuk {{PLURAL:$1|kod|kod-kod}} bahasa "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'Terdapat pencabulan {{PLURAL:$1|batas}} untuk {{PLURAL:$1|alias|alias-alias}} "$3" untuk {{PLURAL:$1|kod|kod-kod}} bahasa "$2".',
-	'wikibase-error-sitelink-already-used' => 'Pautan tapak [$1 $2] sudah digunakan oleh perkara [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Pautan tapak [$1 $2] sudah digunakan oleh perkara [[$3]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'Satu lagi sifat ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Satu lagi pertanyaan ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Satu lagi perkara ($3) sudah ada label "$1" dan keterangan "$4" yang berkaitan dengan kod bahasa $2', # Fuzzy
@@ -12070,7 +12087,7 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-blockeduser-tooltip-message' => 'Nie masz uprawnienia do edycji, ponieważ twój login lub adres IP został zablokowany.',
 	'wikibase-move-error' => '',
 	'wikibase-warning-constraint-violation-length' => 'Dla języka o kodzie „$1” nastąpiło ograniczenie długości.',
-	'wikibase-error-sitelink-already-used' => 'Link [$1 $2] jest już wykorzystywany przez element [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Link [$1 $2] jest już wykorzystywany przez element [[$3]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'Inna właściwość ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Inne zapytanie ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Inny element ($3) ma już etykietę "$1" i opis "$4" powiązaną z językiem o kodzie $2', # Fuzzy
@@ -12132,14 +12149,14 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-setentity-invalid-id' => 'Identyfikator „$1” jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.',
 	'special-dispatchstats' => 'Statystyki wysyłki zmian',
 	'wikibase-dispatchstats-intro' => 'Ta strona zawiera statystyki dotyczące wysyłki zmian do klientów.
-Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zmiana została wysłane do tej wiki, a kolejka zadań na tej wiki przetworzyła to powiadomienie.
- * [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]] pokazuje liczbę i datę najstarszych i najnowszych pozycji, które obecnie oczekują w kolejce.
+Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy zmiana została wysłane do tej wiki, a kolejka zadań na tej wiki przetworzyła to powiadomienie.
+* [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]] pokazuje liczbę oraz datę najstarszych i najnowszych pozycji, które obecnie oczekują w kolejce.
 * [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] zawiera informacje o najbardziej opóźnionej i najmniej opóźnionej wiki klienta oraz wartości mediany pomiędzy nimi. Dla każdej wiki podano następujące informacje:
 ** "{{int:wikibase-dispatchstats-site-id}}" jest to wewnętrzny identyfikator wiki klienta.
 ** "{{int:wikibase-dispatchstats-pos}}" jest to identyfikator ostatniej zmiany wysłanej do tej wiki.
 ** "{{int:wikibase-dispatchstats-lag-num}}" jest to liczba zmian, które nie zostały jeszcze wysłane do tej wiki.
 ** "{{int:wikibase-dispatchstats-lag-time}}" jest to czas pomiędzy zmianą ostatnio wysłaną do tej wiki a ostatnią zmianą wykonaną w {{grammar:MS.lp|{{SITENAME}}}}.
-** "{{int:wikibase-dispatchstats-touched}}" jest to czas, kiedy ostatnia partia zmian została wysłana do tej wiki.',
+** "{{int:wikibase-dispatchstats-touched}}" jest to czas, gdy ostatnia partia zmian została wysłana do tej wiki.',
 	'wikibase-dispatchstats-no-stats' => 'Obecnie nie są dostępne żadne statystyki.',
 	'wikibase-dispatchstats-changes' => 'Statystyki rejestru zmian',
 	'wikibase-dispatchstats-stats' => 'Statystyki wysyłki',
@@ -12231,13 +12248,13 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zm
 	'wikibase-property-summary-wbsetaliases-remove' => 'Usunięto [$2] {{PLURAL:$1|alias|aliasy}}',
 	'wikibase-property-summary-special-create-property' => 'Utworzono właściwość [$2] o {{PLURAL:$1|wartości|wartościach}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Odwołuje się do innych elementów w projekcie. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „element” w Wikidanych aby odnaleźć pasujące wpisy. Składa się z jednego pola.
+	'wikibase-listdatatypes-wikibase-item-body' => 'Odwołuje się do innych elementów w projekcie. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „element” w Wikidanych, aby odnaleźć pasujące wpisy. Składa się z jednego pola.
 * schemat – niejawna część łańcucha IRI
 * część hierarchiczna – niejawna część łańcucha IRI
 * zapytanie – niejawna część łańcucha IRI
 * fragment – niejawna część łańcucha IRI',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Plik multimedialny z Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Odwołuje się do plików przechowywanych na Wikimedia Commons. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „File” na Commons aby odnaleźć pasujące wpisy.
+	'wikibase-listdatatypes-commonsmedia-body' => 'Odwołuje się do plików przechowywanych na Wikimedia Commons. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „File” na Commons, aby odnaleźć pasujące wpisy.
 * schemat – niejawna część łańcucha IRI
 * część hierarchiczna – niejawna część łańcucha IRI
 * zapytanie – niejawna część łańcucha IRI
@@ -13078,7 +13095,7 @@ $messages['ru'] = array(
 	'wikibase-error-constraint-violation-label' => 'У {{PLURAL:$1|метки (названии)|меток (названиях)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
 	'wikibase-error-constraint-violation-description' => 'У {{PLURAL:$1|описания|описаний}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
 	'wikibase-error-constraint-violation-aliases' => 'У {{PLURAL:$1|альтернативного названия (синонима)|альтернативных названий (синонимов)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
-	'wikibase-error-sitelink-already-used' => 'Ссылка на сайт [$1 $2] уже используется элементом [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Ссылка на сайт [$1 $2] уже используется элементом [[$3]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому свойству ($3)', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому запросу ($3)', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Название «$1» и описание «$4», связанные с кодом языка «$2», уже присвоены другому элементу ($3)', # Fuzzy
@@ -15132,7 +15149,7 @@ $messages['vi'] = array(
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|Nhãn|Các nhãn}} “$3” cho {{PLURAL:$1|mã ngôn ngữ|các mã ngôn ngữ}} $2 đã vi phạm hạn chế.',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|Miêu tả|Các miêu tả}} “$3” cho {{PLURAL:$1|mã ngôn ngữ|các mã ngôn ngữ}} $2 đã vi phạm hạn chế.',
 	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|Tên khác|Các tên khác}} “$3” cho {{PLURAL:$1|mã ngôn ngữ|các mã ngôn ngữ}} $2 đã vi phạm hạn chế.',
-	'wikibase-error-sitelink-already-used' => 'Liên kết dịch vụ [$1 $2] đã được sử dụng bởi khoản mục [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Liên kết dịch vụ [$1 $2] đã được sử dụng bởi khoản mục [[$3]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'Một thuộc tính khác ($3) đã có nhãn “$1” ứng với mã ngôn ngữ $2', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Một truy vấn khác ($3) đã có nhãn “$1” ứng với mã ngôn ngữ $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Một khoản mục khác ($3) đã có nhãn “$1” và lời miêu tả “$4” ứng với mã ngôn ngữ $2', # Fuzzy
@@ -15720,7 +15737,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|标签}}“$3”{{PLURAL:$1|违反限制}}。',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|说明}}“$3”违反{{PLURAL:$1|限制}}。',
 	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|别名}}“$3”违反{{PLURAL:$1|限制}}。',
-	'wikibase-error-sitelink-already-used' => '网站链接[$1 $2]已经被项[[$3]]使用。',
+	'wikibase-error-sitelink-already-used' => '网站链接[$1 $2]已经被项[[$3]]使用。', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => '另一个属性（$3）已经使用语言代码$2的标签“$1”', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => '另一个查询（$3）已经使用语言代码$2的标签“$1”', # Fuzzy
 	'wikibase-error-label-not-unique-item' => '另一个项（$3）已经使用语言代码$2的标签“$1”和说明“$4”', # Fuzzy
