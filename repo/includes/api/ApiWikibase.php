@@ -328,7 +328,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *                          Revision::getContent().
 	 * @param \User    $user    : the user to consider if $audience == Revision::FOR_THIS_USER
 	 *
-	 * @return \Wikibase\EntityContent|null the revision's content, or null if not available.
+	 * @return \Wikibase\EntityContent the revision's content.
 	 */
 	protected function loadEntityContent( \Title $title, $revId = false,
 		$audience = \Revision::FOR_PUBLIC,

@@ -54,10 +54,8 @@ class SetQualifier extends ModifyClaim {
 		$entityId = $this->claimModificationHelper->getEntityIdFromString(
 			Entity::getIdFromClaimGuid( $params['claim'] )
 		);
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
-		// TODO: put loadEntityContent into a separate helper class for great reuse!
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entityContent = $this->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
