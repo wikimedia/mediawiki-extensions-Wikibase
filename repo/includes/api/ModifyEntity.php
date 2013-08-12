@@ -240,9 +240,12 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	protected function addToOutput( EntityContent $entityContent, Status $status ) {
+		$formatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
+
 		$this->getResult()->addValue(
 			'entity',
-			'id', $entityContent->getEntity()->getPrefixedId()
+			'id',
+			$formatter->format( $entityContent->getEntity()->getId() )
 		);
 
 		$this->getResult()->addValue(

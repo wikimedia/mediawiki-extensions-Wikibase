@@ -138,13 +138,13 @@ abstract class EntityLookupTest extends EntityTestCase {
 		$entity = $lookup->getEntity( $id, $revision );
 
 		if ( $shouldExist == true ) {
-			$this->assertNotNull( $entity, "ID " . $id->getPrefixedId() );
-			$this->assertEquals( $id->getPrefixedId(), $entity->getPrefixedId() );
+			$this->assertNotNull( $entity, "ID " . $id->__toString() );
+			$this->assertEquals( $id->__toString(), $entity->getId()->__toString() );
 
 			$has = $lookup->hasEntity( $id );
 			$this->assertTrue( $has, 'hasEntity' );
 		} else {
-			$this->assertNull( $entity, "ID " . $id->getPrefixedId() );
+			$this->assertNull( $entity, "ID " . $id->__toString() );
 
 			if ( $revision == 0 ) {
 				$has = $lookup->hasEntity( $id );
