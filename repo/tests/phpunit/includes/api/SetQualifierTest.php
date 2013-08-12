@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\Claim;
@@ -172,11 +173,13 @@ class SetQualifierTest extends ModifyEntityTestBase {
 	}
 
 	protected function makeAddRequest( $statementGuid, Snak $qualifier, EntityId $entityId ) {
+		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
+
 		$params = array(
 			'action' => 'wbsetqualifier',
 			'claim' => $statementGuid,
 			'snaktype' => $qualifier->getType(),
-			'property' => $qualifier->getPropertyId()->getPrefixedId(),
+			'property' => $entityIdFormatter->format( $qualifier->getPropertyId() ),
 		);
 
 		if ( $qualifier instanceof \Wikibase\PropertyValueSnak ) {
