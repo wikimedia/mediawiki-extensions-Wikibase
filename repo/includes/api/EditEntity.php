@@ -319,6 +319,7 @@ class EditEntity extends ModifyEntity {
 		foreach ( $siteLinks as $siteId => $arg ) {
 			$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
 			$globalSiteId = $arg['site'];
+			$pageTitle = $arg['title'];
 
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
@@ -326,13 +327,15 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
 
-			if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
+			if ( array_key_exists( 'remove', $arg ) || $pageTitle === "" ) {
 				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, null );
 			} else {
-				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $arg['title'] ) );
+				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $pageTitle ) );
 
 				if ( $linkPage === false ) {
-					$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+					$this->dieUsage(
+						"The external client site did not provide page information for site '{$globalSiteId}' and title '{$pageTitle}'",
+						'no-external-page' );
 				}
 
 				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
