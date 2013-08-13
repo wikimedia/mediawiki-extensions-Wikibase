@@ -41,7 +41,7 @@ use Wikibase\Reference;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class SetReferenceTest extends ModifyEntityTestBase {
+class SetReferenceTest extends WikibaseApiTestCase {
 
 	public function setUp() {
 		static $hasProperties = false;

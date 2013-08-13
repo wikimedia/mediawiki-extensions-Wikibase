@@ -45,7 +45,18 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class LinkTitlesTest extends ModifyEntityTestBase {
+class LinkTitlesTest extends WikibaseApiTestCase {
+
+	private static $hasSetup;
+
+	public function setUp() {
+		parent::setUp();
+
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Oslo', 'Berlin' ) );
+		}
+		self::$hasSetup = true;
+	}
 
 	public function testLinkTitlesWithNoToken( ) {
 		if ( !self::$usetoken ) {
@@ -129,7 +140,7 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 	 */
 	public function testLinkTitles( $handle, $item_spec, $fromsite, $fromtitle, $tosite, $totitle, $expectedFailure = null, $cleanUp = false ) {
 		if ( $handle ) {
-			$id = $this->getEntityId( $handle );
+			$id = EntityTestHelper::getId( $handle );
 		}
 
 		// set the sitelink -------------------------------
@@ -174,18 +185,6 @@ class LinkTitlesTest extends ModifyEntityTestBase {
 			$this->assertEquals( $fromtitle, $links[$fromsite], 'wrong link target' );
 			$this->assertEquals( $totitle, $links[$tosite], 'wrong link target' );
 		}
-
-		if ( $cleanUp ) {
-			// This sucks really bad, but it's the only way we can do this
-			// for several reasons:
-			// This tests assume the entities to not being reseted during
-			// run time (so we can't use the setUp/ tearDown functions for
-			// this) but it changes them so they have to be cleared out at
-			// some point.
-			$this->resetEntities();
-		}
-
-		$this->assertTrue( true );
 	}
 
 }

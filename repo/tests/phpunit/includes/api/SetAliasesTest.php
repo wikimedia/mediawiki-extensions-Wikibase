@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
-//use Wikibase\Test\ModifyEntityTestBase;
 
 /**
  * Tests for the ApiSetAliases API module.
@@ -13,12 +12,6 @@ use ApiTestCase;
  * The tests are using "medium" so they are able to run alittle longer before they are killed.
  * Without this they will be killed after 1 second, but the setup of the tables takes so long
  * time that the first few tests get killed.
- *
- * The tests are doing some assumptions on the id numbers. If the database isn't empty when
- * when its filled with test items the ids will most likely get out of sync and the tests will
- * fail. It seems impossible to store the item ids back somehow and at the same time not being
- * dependant on some magically correct solution. That is we could use GetItemId but then we
- * would imply that this module in fact is correct.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,7 +52,18 @@ use ApiTestCase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetAliasesTest extends ModifyEntityTestBase {
+class SetAliasesTest extends WikibaseApiTestCase {
+
+	private static $hasSetup;
+
+	public function setup() {
+		parent::setup();
+
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Oslo' ) );
+		}
+		self::$hasSetup = true;
+	}
 
 	public function paramProvider() {
 		return array(
@@ -86,7 +90,7 @@ class SetAliasesTest extends ModifyEntityTestBase {
 	 * @dataProvider paramProvider
 	 */
 	public function testSetAliases( $handle, $langCode, $op, $value, $expected ) {
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 		$expected = $expected === '' ? array() : explode( '|', $expected );
 
 		// update the item ----------------------------------------------------------------
@@ -130,7 +134,7 @@ class SetAliasesTest extends ModifyEntityTestBase {
 
 	public function testSetAliases_length( ) {
 		$handle = 'Oslo';
-		$id = $this->getEntityId( $handle );
+		$id = EntityTestHelper::getId( $handle );
 		$langCode = 'en';
 		$op = 'add';
 		$value = LangAttributeBase::makeOverlyLongString();
@@ -169,15 +173,5 @@ class SetAliasesTest extends ModifyEntityTestBase {
 
 		$this->setExpectedException( 'UsageException' );
 		$this->doApiRequestWithToken( $req, null, self::$users['wbeditor']->user );
-	}
-
-	/**
-	 * Pseudo-Test that just resets the items we messed with
-	 *
-	 * @dataProvider paramProvider
-	 */
-	public function testReset( $handle ) {
-		$this->resetEntity( $handle );
-		$this->assertTrue( true );
 	}
 }

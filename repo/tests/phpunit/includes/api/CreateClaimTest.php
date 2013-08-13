@@ -39,7 +39,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CreateClaimTest extends ModifyEntityTestBase {
+class CreateClaimTest extends WikibaseApiTestCase {
 
 	protected static function getNewEntityAndProperty() {
 		$entity = \Wikibase\Item::newEmpty();

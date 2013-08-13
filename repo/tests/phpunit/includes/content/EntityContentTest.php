@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\EntityContent;
-use Wikibase\Test\Api\ModifyEntityTestBase;
+use Wikibase\Test\Api\PermissionsTest;
 
 /**
  * @covers Wikibase\EntityContent
@@ -275,7 +275,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		}
 
 		if ( $permissions !== null ) {
-			ModifyEntityTestBase::applyPermissions( array(
+			PermissionsTest::applyPermissions( array(
 				'*' => $permissions,
 				'user' => $permissions,
 				$group => $permissions,
