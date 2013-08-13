@@ -156,7 +156,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		foreach ( self::$usedHandles as $handle ) {
 			$item = EntityTestHelper::getEntityData( $handle );
 
-			if ( !isset( $item['sitelinks'] ) ) {
+			if ( !array_key_exists( 'sitelinks', $item ) ) {
 				continue;
 			}
 
