@@ -44,7 +44,7 @@ class EntityTestHelper {
 	private static $entityData = array(
 		'Empty' => array(
 			"new" => "item",
-			"data" => "{}",
+			"data" => array(),
 		),
 		'Berlin' => array(
 			"new" => "item",
