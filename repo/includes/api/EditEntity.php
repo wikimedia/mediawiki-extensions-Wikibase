@@ -505,8 +505,8 @@ class EditEntity extends ModifyEntity {
 			=> 'Create a new item and set labels for de and en',
 			'api.php?action=wbeditentity&new=property&data={"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}'
 			=> 'Create a new property containing the json data, returns extended with the item structure',
-			'api.php?action=wbeditentity&id=q42&data={"sitelinks":{"nowiki":"København","svwiki":"Köpenhamn"}}'
-			=> 'Sets sitelinks for nowiki and svwiki, overwriting them if they already exist',
+			'api.php?action=wbeditentity&id=q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
+			=> 'Sets sitelink for nowiki, overwriting it if it already exists',
 		);
 	}
 
