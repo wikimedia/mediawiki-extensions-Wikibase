@@ -94,10 +94,10 @@ class LangAttributeTestCase extends WikibaseApiTestCase {
 				'e' => array( 'value' => array( 'bat-smg' => 'V?sata' ) ) ),
 			array( //7
 				'p' => array( 'language' => 'bat-smg', 'value' => '' ),
-				'e' => array( ) ),
+				'e' => array() ),
 		);
 	}
-	
+
 	public function doTestSetLangAttribute( $attribute ,$params, $expected ){
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
@@ -118,18 +118,18 @@ class LangAttributeTestCase extends WikibaseApiTestCase {
 
 		// -- check the result only has our changed data (if any)  ------------
 		$this->assertEquals( 1, count( $result['entity'][$attribute] ), "Entity return contained more than a single language" );
-		$this->assertArrayHasKey( $params['language'], $result['entity'][$attribute], "Entity doesn't return expected language");
+		$this->assertArrayHasKey( $params['language'], $result['entity'][$attribute], "Entity doesn't return expected language" );
 		$this->assertEquals( $params['language'], $result['entity'][$attribute][ $params['language'] ]['language'], "Returned incorrect language" );
 		if( array_key_exists( $params['language'], $expected['value'] ) ){
 			$this->assertEquals( $expected['value'][ $params['language'] ], $result['entity'][$attribute][$params['language']]['value'] , "Returned incorrect label" );
 		} else if( empty( $value ) ){
-			$this->assertArrayHasKey( 'removed', $result['entity'][$attribute][ $params['language'] ], "Entity doesn't return expected 'removed' marker");
+			$this->assertArrayHasKey( 'removed', $result['entity'][$attribute][ $params['language'] ], "Entity doesn't return expected 'removed' marker" );
 		}
 
 		// -- check any warnings ----------------------------------------------
 		if( array_key_exists( 'warning', $expected ) ){
 			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
-			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
+			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name'] );
 			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
 		}
 
@@ -149,7 +149,7 @@ class LangAttributeTestCase extends WikibaseApiTestCase {
 		// -- check the edit summary --------------------------------------------
 		if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
-			if( array_key_exists( 'summary', $params) ){
+			if( array_key_exists( 'summary', $params ) ){
 				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
 			}
 		}
@@ -205,7 +205,7 @@ class LangAttributeTestCase extends WikibaseApiTestCase {
 			} else {
 				$this->doApiRequestWithToken( $params );
 			}
-			$this->fail( "Failed to throw exception, {$expected['exception']['type']} " );
+			$this->fail( "Failed to throw exception, {$expected['exception']['type']}" );
 
 		} catch( \Exception $exception ){
 
