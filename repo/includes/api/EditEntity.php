@@ -332,7 +332,9 @@ class EditEntity extends ModifyEntity {
 				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $arg['title'] ) );
 
 				if ( $linkPage === false ) {
-					$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+					$this->dieUsage(
+						"The external client site did not provide page information for site '{$globalSiteId}' and title '{$arg['title']}'",
+						'no-external-page' );
 				}
 
 				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
