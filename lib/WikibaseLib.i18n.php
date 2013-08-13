@@ -536,6 +536,7 @@ $messages['bs'] = array(
 /** Catalan (català)
  * @author Arnaugir
  * @author Grondin
+ * @author Qllach
  * @author Toniher
  * @author පසිඳු කාවින්ද
  */
@@ -547,9 +548,8 @@ $messages['ca'] = array(
 	'wikibase-error-autocomplete-response' => 'El servidor ha respost: $1',
 	'wikibase-error-ui-cant-edit' => 'No teniu permís per dur a terme aquesta acció.',
 	'wikibase-error-ui-no-permissions' => 'No teniu els drets necessaris per a dur a terme aquesta acció.',
-	'wikibase-error-ui-link-exists' => 'No pots enllaçar a aquesta pàgina perquè ja hi ha un altre element que hi enllaça.',
-	'wikibase-error-ui-edit-conflict' => "Hi ha hagut un conflicte d'edició. Si us plau, recarrega la pàgina i desa de nou.",
-	'wikibase-sitelinks' => 'Llista de les pàgines vinculades a aquest element',
+	'wikibase-error-ui-link-exists' => 'No podeu enllaçar a aquesta pàgina perquè ja hi ha un altre element que hi enllaça.',
+	'wikibase-error-ui-edit-conflict' => "S'ha produït un conflicte d'edició. Si us plau, recarregueu la pàgina i torneu-la a desar.",
 	'wikibase-sitelinks-sitename-columnheading' => 'Llengua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codi',
 	'wikibase-sitelinks-link-columnheading' => 'Article enllaçat',
@@ -1908,6 +1908,7 @@ $messages['lb'] = array(
 	'wikibase-tooltip-error-details' => 'Detailer',
 	'wikibase-validator-bad-type' => '$2 amplaz vu(n) $1',
 	'wikibase-validator-no-such-entity' => '$1 net fonnt',
+	'wikibase-validator-no-such-property' => 'Eegeschaft $1 net fonnt',
 	'wikibase-validator-bad-value' => 'net valabele wäert: $1',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
