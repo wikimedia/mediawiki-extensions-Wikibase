@@ -54,9 +54,18 @@ namespace Wikibase\Test\Api;
  */
 class SetLabelTest extends LangAttributeTestCase {
 
+	private static $hasSetup;
+
 	public function setUp() {
 		self::$testAction = 'wbsetlabel';
+
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Empty' ) );
+		}
+		self::$hasSetup = true;
+
 		parent::setUp();
+
 	}
 
 	/**

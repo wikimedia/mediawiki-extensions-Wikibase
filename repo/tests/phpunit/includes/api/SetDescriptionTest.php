@@ -54,22 +54,30 @@ namespace Wikibase\Test\Api;
  */
 class SetDescriptionTest extends LangAttributeTestCase {
 
+	private static $hasSetup;
+
 	public function setUp() {
 		self::$testAction = 'wbsetdescription';
+
+		if( !isset( self::$hasSetup ) ){
+			$this->initTestEntities( array( 'Empty' ) );
+		}
+		self::$hasSetup = true;
+
 		parent::setUp();
 	}
 
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetLabel( $params, $expected ){
+	public function testSetDescription( $params, $expected ){
 		self::doTestSetLangAttribute( 'descriptions' ,$params, $expected );
 	}
 
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetLabelExceptions( $params, $expected ){
+	public function testSetDescriptionExceptions( $params, $expected ){
 		self::doTestSetLangAttributeExceptions( $params, $expected );
 	}
 }
