@@ -1971,6 +1971,7 @@ $messages['lt'] = array(
 $messages['lv'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Valoda',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kods',
+	'wikibase-sitelinks-link-columnheading' => 'Saistītais raksts',
 );
 
 /** Macedonian (македонски)
@@ -3021,7 +3022,7 @@ $messages['zh-hans'] = array(
 	'wikibase-deletedentity-item' => '删除项',
 	'wikibase-deletedentity-property' => '删除属性',
 	'wikibase-deletedentity-query' => '删除查询',
-	'wikibase-diffview-reference' => '参考',
+	'wikibase-diffview-reference' => '参考文献',
 	'wikibase-diffview-rank' => '等级',
 	'wikibase-diffview-qualifier' => '限定符',
 	'wikibase-diffview-label' => '标签',

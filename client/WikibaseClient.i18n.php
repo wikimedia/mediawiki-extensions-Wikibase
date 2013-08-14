@@ -3140,7 +3140,9 @@ $messages['ro'] = array(
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
+	'wikibase-client-desc' => "Cliende pe l'estenzione Uicchibase",
 	'specialpages-group-wikibaseclient' => 'cliende de Uicchidata',
+	'tooltip-t-wikibase' => "Appuende a 'a vôsce de l'archivije date collegate",
 	'wikibase-comment-update' => 'Vôsce de Uicchidata cangiate',
 	'wikibase-comment-sitelink-add' => "Collegamende d'a lènghe aggiunde: $1",
 	'wikibase-comment-sitelink-remove' => "Collegamende d'a lènghe luate: $1",
@@ -3154,6 +3156,7 @@ $messages['roa-tara'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Tu è abbesògne de trasè',
 	'wikibase-unconnectedpages-submit' => 'Véje',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" non g\'è \'nu codece de lènghe valide.',
+	'wikibase-pageinfo-entity-id-none' => 'Ninde',
 );
 
 /** Russian (русский)
