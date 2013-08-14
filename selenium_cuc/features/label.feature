@@ -32,3 +32,10 @@ Feature: Edit label
     Then Original label should be displayed
       And Label edit button should be there
       And Label cancel button should not be there
+  Scenario: Label save
+    When I click the label edit button
+      And I modify the label
+      And I click the label save button
+    Then Modified label should be displayed
+    When I reload the page
+    Then Modified label should be displayed

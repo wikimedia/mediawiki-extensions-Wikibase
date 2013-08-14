@@ -21,6 +21,18 @@ When /^I click the label cancel button$/ do
   on(ItemPage).cancelLabelLink
 end
 
+When /^I reload the page$/ do
+  @browser.refresh
+end
+
+When /^I click the label save button$/ do
+  on(ItemPage) do |page|
+    page.saveLabelLink
+    page.ajax_wait
+    page.wait_for_api_callback
+  end
+end
+
 When /^I modify the label$/ do
   on(ItemPage) do |page|
     page.labelInputField_element.clear
@@ -66,5 +78,14 @@ Then /^Original label should be displayed$/ do
     page.entityLabelSpan.should be_true
     @browser.title.include?(label).should be_true
     page.entityLabelSpan.should == label
+  end
+end
+
+Then /^Modified label should be displayed$/ do
+  on(ItemPage) do |page|
+    page.firstHeading.should be_true
+    page.entityLabelSpan.should be_true
+    @browser.title.include?(label_changed).should be_true
+    page.entityLabelSpan.should == label_changed
   end
 end
