@@ -46,6 +46,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.animateWithEvent' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.AnimationEvent.js',
+				'jquery/jquery.animateWithEvent.js',
+			),
+			'dependencies' => array(
+				'jquery.PurposedCallbacks',
+			),
+		),
+
 		'jquery.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.eachchange.js'

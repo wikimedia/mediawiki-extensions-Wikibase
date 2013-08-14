@@ -29,6 +29,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.animateWithEvent.tests' => array(
+			'scripts' => array(
+				"$bp/jquery/jquery.AnimationEvent.tests.js",
+				"$bp/jquery/jquery.animateWithEvent.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.animateWithEvent',
+			),
+		),
+
 		'jquery.eachchange.tests' => array(
 			'scripts' => array(
 				"$bp/jquery/jquery.eachchange.tests.js",
