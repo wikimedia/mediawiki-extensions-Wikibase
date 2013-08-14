@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Api;
 use ApiTestCase;
 use Wikibase\Settings;
+use Wikibase\Test\PermissionsHelper;
 
 /**
  * Tests for permission handling in the Wikibase API.
@@ -88,38 +89,10 @@ class PermissionsTest extends WikibaseApiTestCase {
 		parent::tearDown();
 	}
 
-	/**
-	 * Utility function for applying a set of permissions to $wgGroupPermissions.
-	 * Automatically resets the rights cache for $wgUser.
-	 * No measures are taken to restore the original permissions later, this is up to the caller.
-	 *
-	 * @param $permissions
-	 */
-	public static function applyPermissions( $permissions ) {
-		global $wgGroupPermissions;
-		global $wgUser;
-
-		if ( !$permissions ) {
-			return;
-		}
-
-		foreach ( $permissions as $group => $rights ) {
-			if ( !empty( $wgGroupPermissions[ $group ] ) ) {
-				$wgGroupPermissions[ $group ] = array_merge( $wgGroupPermissions[ $group ], $rights );
-			} else {
-				$wgGroupPermissions[ $group ] = $rights;
-			}
-		}
-
-		// reset rights cache
-		$wgUser->addGroup( "dummy" );
-		$wgUser->removeGroup( "dummy" );
-	}
-
 	function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null, array $restore = array() ) {
 		global $wgUser;
 
-		self::applyPermissions( $permissions );
+		PermissionsHelper::applyPermissions( $permissions );
 
 		try {
 			if ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens', false ) ) {
