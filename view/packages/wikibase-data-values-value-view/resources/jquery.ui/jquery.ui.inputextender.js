@@ -20,21 +20,30 @@
  *         hidden when the associated input element is empty.
  *         Default value: true
  *
- * @event animationstep: While the input extender's extension is being animated, this event is
- *        triggered on each animation step. The event forwards the parameters received from the
- *        animation's "step" callback. However, when the animation is finished, the event is
- *        triggered without the second and third parameter.
- *        (1) {jQuery.Event}
- *        (2) {number|undefined} [now]
- *        (3) {jQuery.Tween|undefined} [tween]
+ * @option {string} [contentAnimationEvents] One or more events (separated with spaces) which imply
+ *         that the input extenders extension's content is about to be animated. Those events should
+ *         give a jQuery.AnimationEvent object as their event object. If this is the case and the
+ *         event bubbles up to the input extender's extension node, then this will trigger the
+ *         "contentanimation" event on the widget node.
+ *
+ * @event animation: Triggered at the beginning of an animation of the input's extension.
+ *        (1) {jQuery.AnimationEvent} animationEvent
+ *
+ * @event contentanimation: Triggered at the beginning of an animation of the extender's
+ *        extension content. Depends on the "contentAnimationEvents" option.
+ *        (1) {jQuery.AnimationEvent} animationEvent The animation event gets passed on from the
+ *            event within the input extender's extension causing the "contentanimation" event.
  *
  * @event aftertoggle: Triggered after showExtension or hideExtension has been called. At this point
  *        extension() will already return the extension's node but the extension might still not
  *        be visible for the user since the animation has just been started.
  *        (1) {jQuery.Event}
  *
+ * @dependency jQuery
  * @dependency jQuery.Widget
  * @dependency jQuery.eachchange
+ * @dependency jQuery.animateWithEvent
+ * @dependency jQuery.ui.position
  */
 ( function( $ ) {
 	'use strict';
@@ -82,6 +91,7 @@
 		 */
 		options: {
 			content: [],
+			contentAnimationEvents: '',
 			initCallback: null,
 			hideWhenInputEmpty: true,
 			position: {
@@ -223,7 +233,7 @@
 		/**
 		 * Shows the extension.
 		 *
-		 * @param {Function} [callback] Invoked as soon as the contents are visible.
+		 * @param {Function} [callback] Invoked as soon as the extension's show animation is done.
 		 */
 		showExtension: function( callback ) {
 			if( !this._isExtended ) {
@@ -236,7 +246,7 @@
 		/**
 		 * Hides the extension.
 		 *
-		 * @param {Function} [callback] Invoked as soon as the contents are hidden.
+		 * @param {Function} [callback] Invoked as soon as the extension's hide animation is done.
 		 */
 		hideExtension: function( callback ) {
 			if( this._isExtended ) {
@@ -280,12 +290,6 @@
 
 		/**
 		 * Draws the widget.
-		 *
-		 * @param {Function} [callback] For private usage only.
-		 * TODO: Get rid of "callback", introduce some sort of "animationstart" event instead,
-		 *  offering an object allowing to register callback that will be given into the animation's
-		 *  options. show/hideExtension can then do a .one() event registration for that one and
-		 *  register their callback there.
 		 */
 		draw: function( /* private: */ callback ) {
 			this.element[ this._isExtended ? 'addClass' : 'removeClass' ](
@@ -343,37 +347,43 @@
 				this.$extension.css( 'opacity', '1' );
 			}
 
-			this.$extension.stop( true ).fadeIn( {
-				duration: 150,
-				step: function( now, tween ) {
-					self._trigger( 'animationstep', null, [ now, tween ] );
-				},
-				complete: function() {
-					if( $.isFunction( callback ) ) {
-						callback();
+			this.$extension.stop( true ).animateWithEvent(
+				'extensionexpansion',
+				'fadeIn',
+				{
+					duration: 150,
+					complete: function() {
+						if( $.isFunction( callback ) ) {
+							callback();
+						}
 					}
-					self._trigger( 'animationstep' );
+				},
+				function( animationEvent ) {
+					self._trigger( 'animation', animationEvent );
 				}
-			} );
+			);
 			inputExtendersWithVisibleExtension.add( this );
 		},
 
 		_drawExtensionRemoval: function( callback ) {
 			var self = this;
 
-			this.$extension.stop( true ).fadeOut( {
-				duration: 150,
-				step: function( now, tween ) {
-					self._trigger( 'animationstep', null, [ now, tween ] );
-				},
-				complete: function() {
-					inputExtendersWithVisibleExtension.remove( this );
-					if( $.isFunction( callback ) ) {
-						callback();
+			this.$extension.stop( true ).animateWithEvent(
+				'extensionremoval',
+				'fadeOut',
+				{
+					duration: 150,
+					complete: function() {
+						inputExtendersWithVisibleExtension.remove( self );
+						if( $.isFunction( callback ) ) {
+							callback();
+						}
 					}
-					self._trigger( 'animationstep' );
+				},
+				function( animationEvent ) {
+					self._trigger( 'animation', animationEvent );
 				}
-			} );
+			);
 		},
 
 		/**
@@ -416,10 +426,8 @@
 					self.showExtension();
 				}
 			} )
-			// TODO: move this out of here, toggler is not even used/known to this widget:
-			.on( 'toggleranimationstep.' + this.widgetName, function( event, now, tween ) {
-				self._reposition();
-				self._trigger( 'animationstep', null, [ now, tween ] );
+			.on( this.options.contentAnimationEvents, function( animationEvent ) {
+				self._trigger( 'contentanimation', animationEvent );
 			} )
 			.on( 'keydown.' + this.widgetName, function( event ) {
 				// Take care of tabbing out of the extension again:

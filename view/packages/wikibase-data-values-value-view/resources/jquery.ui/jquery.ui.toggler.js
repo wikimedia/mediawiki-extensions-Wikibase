@@ -11,14 +11,12 @@
  *
  * @option {jQuery} $subject (REQUIRED) The node whose visibility shall be toggled.
  *
- * @event animationstep: While the toggler is being animated, this event is triggered on each
- *        animation step. The event forwards the parameters received from the animation's "step"
- *        callback.
- *        (1) {jQuery.Event}
- *        (2) {number} now
- *        (3) {jQuery.Tween} tween
+ * @event animation Triggered at the beginning of toggler animations.
+ *        (1) {jQuery.AnimationEvent} event
  *
+ * @dependency jQuery
  * @dependency jQuery.Widget
+ * @dependency jQuery.animateWithEvent
  */
 ( function( $ ) {
 	'use strict';
@@ -96,7 +94,8 @@
 
 			this.element
 			.text( '' )
-			.addClass( this.widgetBaseClass +  ' ' + this.widgetBaseClass + '-toggle ' + 'ui-state-default' );
+			.addClass( this.widgetBaseClass + ' ' + this.widgetBaseClass + '-toggle '
+				+ 'ui-state-default' );
 
 			if( this.element[0].nodeName === 'A' ) {
 				this.element.attr( 'href', 'javascript:void(0);' );
@@ -110,11 +109,14 @@
 				if( !self.element.hasClass( 'ui-state-disabled' ) ) {
 					// Change toggle icon to reflect current state of toggle subject visibility:
 					self._reflectVisibilityOnToggleIcon( true );
-					self.options.$subject.slideToggle( {
-						step: function( now, tween ) {
-							self._trigger( 'animationstep', null, [ now, tween ] );
+
+					self.options.$subject.stop().animateWithEvent(
+						'togglerstatetransition',
+						'slideToggle',
+						function( animationEvent ) {
+							self._trigger( 'animation', animationEvent );
 						}
-					} );
+					);
 				}
 			} )
 			.on( 'mouseover.' + this.widgetName, function( event ) {
@@ -151,13 +153,17 @@
 				makeVisible = !makeVisible;
 			}
 			// Add classes displaying rotated icon. If CSS3 transform is available, use it:
-			this.$toggleIcon.removeClass( CLS_TOGGLE_HIDDEN + ' ' + this.widgetBaseClass + '-icon3dtrans ' + CLS_TOGGLE_VISIBLE );
+			this.$toggleIcon.removeClass( CLS_TOGGLE_HIDDEN + ' ' + CLS_TOGGLE_VISIBLE + ' '
+				+ this.widgetBaseClass + '-icon3dtrans' );
+
 			if( !browserSupportsTransform ) {
 				this.$toggleIcon.addClass( makeVisible ? CLS_TOGGLE_VISIBLE : CLS_TOGGLE_HIDDEN );
 			} else {
-				this.$toggleIcon.addClass( this.widgetBaseClass + '-icon3dtrans ' + CLS_TOGGLE_VISIBLE );
+				this.$toggleIcon.addClass(
+					this.widgetBaseClass + '-icon3dtrans ' + CLS_TOGGLE_VISIBLE );
 			}
-			this.element[ makeVisible ? 'removeClass' : 'addClass' ]( this.widgetBaseClass + '-toggle-collapsed' );
+			this.element[ makeVisible ? 'removeClass' : 'addClass' ](
+				this.widgetBaseClass + '-toggle-collapsed' );
 		},
 
 		/**

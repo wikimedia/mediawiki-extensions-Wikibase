@@ -57,7 +57,8 @@
 	 *        after the promise got resolved. If the promise gets rejected, then the hide action
 	 *        will never be performed.
 	 * @param {Object} callbacks
-	 * @return {jQuery.Promise} resolved after final hiding is done.
+	 * @return {jQuery.Promise} Resolved after final hiding is done. Can be rejected in case a
+	 *         hideControl has been injected and gets rejected.
 	 */
 	function showAndHideExtensionAgain( instance, hideControl, callbacks ) {
 		var deferred = $.Deferred();
@@ -81,6 +82,9 @@
 
 				QUnit.stop(); // wait for hideExtension() callback *2*
 			} )
+			.fail( function() {
+				deferred.reject();
+			} )
 			.always( function() {
 				QUnit.start(); // *1*
 			} );
@@ -95,8 +99,9 @@
 	QUnit.module( 'jquery.ui.inputextender', {
 		teardown: function() {
 			$( '.test_inputextender' ).each( function( i, node ) {
-				if( $( node ).data( 'inputextender' ) ) {
-					$( node ).data( 'inputextender' ).destroy();
+				var inputextender = $( node ).data( 'inputextender' );
+				if( inputextender ) {
+					inputextender.destroy();
 				}
 				$( node ).remove();
 			} );
@@ -106,9 +111,8 @@
 	QUnit.test( 'Initialization', 2, function( assert ) {
 		var extender = newTestInputextender();
 
-		assert.equal(
-			$( '.test_inputextender' ).data( 'inputextender' ),
-			extender,
+		assert.ok(
+			extender instanceof $.ui.inputextender,
 			'Initialized widget.'
 		);
 
@@ -132,6 +136,7 @@
 		var extender = newTestInputextender(),
 			widgetBaseClass = extender.widgetBaseClass;
 
+		extender.showExtension(); // Make sure extension is being constructed.
 		extender.destroy();
 
 		assert.ok(

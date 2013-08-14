@@ -90,7 +90,8 @@
 					self.$input.one( 'inputextenderaftertoggle', function( event ) {
 						self.draw();
 					} );
-				}
+				},
+				contentAnimationEvents: 'toggleranimation'
 			} )
 			.eachchange( function( event, oldValue ) {
 				self._viewNotifier.notify( 'change' );
@@ -194,6 +195,8 @@
 				}
 				inputExtender.destroy();
 			}
+
+			this.$input.off( 'eachchange' );
 
 			this.$input = null;
 			this.$precision = null;

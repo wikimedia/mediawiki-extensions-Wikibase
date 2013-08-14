@@ -120,6 +120,7 @@ return call_user_func( function() {
 				'jquery.eachchange',
 				'jquery.ui.position',
 				'jquery.ui.widget',
+				'jquery.animateWithEvent',
 			),
 		),
 
@@ -132,6 +133,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
+				'jquery.animateWithEvent',
 			),
 		),
 

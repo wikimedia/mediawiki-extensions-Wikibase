@@ -125,6 +125,12 @@
 				}
 			} )
 			.timeinput( { mediaWiki: this._options.mediaWiki } )
+			.inputextender( {
+				initCallback: function( $extension ) {
+					self._initInputExtender( $extension );
+				},
+				contentAnimationEvents: 'toggleranimation'
+			} )
 			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
 				self._updateCalendarHint( value );
 				if( value ) {
