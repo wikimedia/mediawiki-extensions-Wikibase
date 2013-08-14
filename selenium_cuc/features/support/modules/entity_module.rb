@@ -111,7 +111,7 @@ module EntityPage
 
   def ajax_wait
     sleep 1
-    while (script = @browser.execute_script("return jQuery.active")) == 1 do
+    while (script = @browser.execute_script("return jQuery.active")) != 0 do
       sleep(1.0/3)
     end
     return true
