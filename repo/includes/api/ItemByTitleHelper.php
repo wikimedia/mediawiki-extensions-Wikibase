@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Helper class for api modules to resolve page+title pairs into items.
@@ -107,8 +108,10 @@ class ItemByTitleHelper {
 					array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
 				);
 			} else {
+				$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
+
 				$id = new EntityId( Item::ENTITY_TYPE, $id );
-				$ids[] = $id->getPrefixedId();
+				$ids[] = $entityIdFormatter->format( $id );
 			}
 		}
 

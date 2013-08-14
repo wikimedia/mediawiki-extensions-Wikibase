@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\Api\ItemByTitleHelper;
 use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 
@@ -101,8 +102,10 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetEntityIdsSuccess() {
+		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
+
 		$expectedEntityId = new EntityId( Item::ENTITY_TYPE, 123 );
-		$expectedEntityId = $expectedEntityId->getPrefixedId();
+		$expectedEntityId = $entityIdFormatter->format( $expectedEntityId );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getApiBaseMock( 0 ),
