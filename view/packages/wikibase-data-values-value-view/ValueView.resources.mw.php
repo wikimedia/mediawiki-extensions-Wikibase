@@ -37,6 +37,15 @@ return call_user_func( function() {
 		),
 
 		// Dependencies required by jQuery.valueview library:
+		'jquery.PurposedCallbacks' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.PurposedCallbacks.js',
+			),
+			'dependencies' => array(
+				'jquery',
+			),
+		),
+
 		'jquery.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.eachchange.js'
