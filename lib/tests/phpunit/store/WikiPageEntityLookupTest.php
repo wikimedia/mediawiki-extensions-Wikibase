@@ -7,6 +7,7 @@ use Wikibase\EntityId;
 use \Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
 use \Wikibase\WikiPageEntityLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Tests for the Wikibase\WikiPageEntityLookup class.
@@ -114,10 +115,14 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 
 		$lookup = $this->getLookup();
 		$entityRev = $lookup->getEntityRevision( $id, $revision );
+		$formatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
 		if ( $shouldExist ) {
 			$this->assertNotNull( $entityRev, "ID " . $id->getPrefixedId() );
-			$this->assertEquals( $id->getPrefixedId(), $entityRev->getEntity()->getPrefixedId() );
+			$this->assertEquals(
+				$id->getPrefixedId(),
+				$formatter->format( $entityRev->getEntity()->getId() )
+			);
 
 			if ( $revision > 0 ) {
 				$this->assertEquals( $revision, $entityRev->getRevision() );
