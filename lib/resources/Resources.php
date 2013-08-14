@@ -467,12 +467,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.nativeEventHandler' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.nativeEventHandler.js'
-			)
-		),
-
 		'jquery.wikibase.siteselector' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.siteselector.js'
