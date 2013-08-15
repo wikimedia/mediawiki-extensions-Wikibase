@@ -10,7 +10,9 @@ label = generate_random_string(10)
 label_changed = label + " Adding something."
 
 Given /^I am on an entity page$/ do
-  visit(CreateItemPage).create_new_item(label, generate_random_string(20))
+  item_data = '{"labels":{"en":{"language":"en","value":"' + label + '"}}}'
+  item = create_new_entity(item_data, 'item')
+  on(ItemPage).navigate_to_item item["url"]
 end
 
 When /^I click the label edit button$/ do
