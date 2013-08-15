@@ -123,19 +123,4 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 		return array( $text, $response );
 	}
 
-	/**
-	 * Uses regex to assert that the given tag exists in a string
-	 * @param $text string to check
-	 * @param $tag string name of tag
-	 * @param $attributes array list of html attributes
-	 */
-	protected function assertHasHtmlTagWithElements( $text, $tag, $attributes ){
-		$parts = array();
-		foreach( $attributes as $parm => $value ){
-			$parts[] = preg_quote( "{$parm}=\"{$value}\"", '/' );
-		}
-		$this->assertRegExp( '/<' . $tag . '(\s[^<]*?(' . implode( '|', $parts ) . ')[^>]*?){' . count( $parts ) . '}>/' ,
-			$text, "Missing {$tag} tag in text" );
-	}
-
 }

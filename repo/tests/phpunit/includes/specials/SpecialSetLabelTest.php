@@ -48,31 +48,39 @@ class SpecialSetLabelTest extends SpecialPageTestBase {
 
 		//TODO: Verify that item creation works via a faux post request
 
-		$expectedInputs = array(
-			'id' => array(
+		$matchers['id'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setentity-id',
 				'class' => 'wb-input',
-				'name' => 'id' ),
-			'language' => array(
+				'name' => 'id',
+			) );
+		$matchers['language'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setentity-language',
 				'class' => 'wb-input',
-				'name' => 'language' ),
-			'value' => array(
+				'name' => 'language',
+			) );
+		$matchers['value'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setentity-value',
-				//@todo the below class does not look correct
 				'class' => 'wb-input',
-				'name' => 'value' ),
-			'submit' => array(
+				'name' => 'value',
+			) );
+		$matchers['submit'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setlabel-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
-				'name' => 'wikibase-setlabel-submit' ),
-		);
+				'name' => 'wikibase-setlabel-submit',
+			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-
-		foreach( $expectedInputs as $input ){
-			$this->assertHasHtmlTagWithElements( $output, 'input', $input );
+		foreach( $matchers as $key => $matcher ){
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 	}
 

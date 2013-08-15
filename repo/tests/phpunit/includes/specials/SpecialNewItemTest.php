@@ -45,34 +45,44 @@ class SpecialNewItemTest extends SpecialPageTestBase {
 		//TODO: Verify that more of the output is correct.
 		//TODO: Verify that item creation works via a faux post request
 
-		$expectedInputs = array(
-			'label' => array(
+		$matchers['label'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-newentity-label',
 				'class' => 'wb-input',
-				'name' => 'label' ),
-			'description' => array(
+				'name' => 'label',
+			) );
+		$matchers['description'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-newentity-description',
 				'class' => 'wb-input',
-				'name' => 'description' ),
-			'submit' => array(
+				'name' => 'description',
+			) );
+		$matchers['submit'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-newentity-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
-				'name' => 'submit' ),
-		);
+				'name' => 'submit',
+			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		// -- Make sure the special page loads with expected input fields ----
-		foreach( $expectedInputs as $expected ){
-			$this->assertHasHtmlTagWithElements( $output, 'input', $expected );
+		foreach( $matchers as $key => $matcher ){
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
 		list( $output, ) = $this->executeSpecialPage( 'LabelText/DescriptionText' );
-		// -- Make sure the subpage values have been passed to the correct input fields ----
-		$this->assertHasHtmlTagWithElements( $output, 'input',
-			array_merge( $expectedInputs['label'], array( 'value' => 'LabelText' ) ) );
-		$this->assertHasHtmlTagWithElements( $output, 'input',
-			array_merge( $expectedInputs['description'], array( 'value' => 'DescriptionText' ) ) );
+		foreach( $matchers as $key => $matcher ){
+			if( $key === 'label' ){
+				$matcher['attributes']['value'] = 'LabelText';
+			}
+			if( $key === 'description' ){
+				$matcher['attributes']['value'] = 'DescriptionText';
+			}
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
+		}
 
 	}
 
