@@ -179,7 +179,7 @@ class ItemContent extends EntityContent {
 		// $pageUrl shouldn't be a raw param (it's causing the link not to be parsed)
 		return new \Message(
 			'wikibase-error-sitelink-already-used',
-			array( $pageUrl, $conflict['sitePage'], $conflictingPage->getTitle()->getFullText() )
+			array( $pageUrl, $conflict['sitePage'], $conflictingPage->getTitle()->getFullText(), $conflict['siteId'] )
 		);
 	}
 
