@@ -41,14 +41,26 @@ class SpecialEntitiesWithoutLabelTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
-		//TODO: Actually verify that the output is correct.
-		//      Currently this just tests that there is no fatal error,
-		//      and that the restriction handling is working and doesn't
-		//      block. That is, the default should let the user execute
-		//      the page.
+
+		$matchers['language'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wb-entitieswithoutpage-language',
+				'name' => 'language',
+			) );
+		$matchers['submit'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wikibase-entitieswithoutpage-submit',
+				'class' => 'wb-input-button',
+				'type' => 'submit',
+				'name' => 'submit',
+			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
+		foreach( $matchers as $key => $matcher ){
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
+		}
 	}
 
 }
