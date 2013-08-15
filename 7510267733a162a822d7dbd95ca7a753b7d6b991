@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "698b69a3_7caa3074",
+        "filename": "selenium_cuc/Gemfile.lock",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-15T10:10:15Z",
+      "side": 1,
+      "message": "see comment on https://gerrit.wikimedia.org/r/#/c/62598/2/selenium_cuc/Gemfile",
+      "parentUuid": "698b69a3_dca6e4c3",
+      "revId": "7510267733a162a822d7dbd95ca7a753b7d6b991",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "698b69a3_7ca070a3",
         "filename": "selenium_cuc/features/support/modules/qualifiers_module.rb",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-15T10:00:53Z",
       "side": 1,
       "message": "this is scary",
+      "revId": "7510267733a162a822d7dbd95ca7a753b7d6b991",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "698b69a3_9ca7fca9",
+        "filename": "selenium_cuc/features/support/modules/qualifiers_module.rb",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-08-15T10:10:15Z",
+      "side": 1,
+      "message": "it does not scare me anymore.. but we should probably see how we could make the selectors shorter.. but it\u0027s not so easy as the DOM structure is rather complex and we do not use ids.",
+      "parentUuid": "698b69a3_7ca070a3",
       "revId": "7510267733a162a822d7dbd95ca7a753b7d6b991",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
