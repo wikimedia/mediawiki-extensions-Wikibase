@@ -44,34 +44,45 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	public function testExecute() {
 		//TODO: Verify that more of the output is correct.
 
-		$expectedInputs = array(
-			'language' => array(
+		$matchers['language'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-itemdisambiguation-languagename',
 				'class' => 'wb-input-text',
-				'name' => 'language' ),
-			'label' => array(
+				'name' => 'language',
+			) );
+		$matchers['label'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'labelname',
 				'class' => 'wb-input-text',
-				'name' => 'label' ),
-			'submit' => array(
+				'name' => 'label',
+			) );
+		$matchers['submit'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-itembytitle-submit',
 				'class' => 'wb-input-button',
 				'type' => 'submit',
-				'name' => 'submit' ),
-		);
+				'name' => 'submit',
+			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		// -- Make sure the special page loads with expected input fields ----
-		foreach( $expectedInputs as $expected ){
-			$this->assertHasHtmlTagWithElements( $output, 'input', $expected );
+		foreach( $matchers as $key => $matcher ){
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
 		list( $output, ) = $this->executeSpecialPage( 'LangText/LabelText' );
-		// -- Make sure the subpage values have been passed to the correct input fields ----
-		$this->assertHasHtmlTagWithElements( $output, 'input',
-			array_merge( $expectedInputs['language'], array( 'value' => 'LangText' ) ) );
-		$this->assertHasHtmlTagWithElements( $output, 'input',
-			array_merge( $expectedInputs['label'], array( 'value' => 'LabelText' ) ) );
+		foreach( $matchers as $key => $matcher ){
+			if( $key === 'language' ){
+				$matcher['attributes']['value'] = 'LangText';
+			}
+			if( $key === 'label' ){
+				$matcher['attributes']['value'] = 'LabelText';
+			}
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
+		}
+
 	}
 
 }

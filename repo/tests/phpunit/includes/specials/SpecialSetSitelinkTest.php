@@ -49,31 +49,39 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 
 		//TODO: Verify that item creation works via a faux post request
 
-		$expectedInputs = array(
-			'id' => array(
+		$matchers['id'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setentity-id',
 				'class' => 'wb-input',
-				'name' => 'id' ),
-			'site' => array(
+				'name' => 'id',
+			) );
+		$matchers['site'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setsitelink-site',
 				'class' => 'wb-input',
-				'name' => 'site' ),
-			'page' => array(
+				'name' => 'site',
+			) );
+		$matchers['page'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setsitelink-page',
-				//@todo the below class does not look correct
-				'class' => 'wb-input wb-input-text',
-				'name' => 'page' ),
-			'submit' => array(
+				'class' => 'wb-input',
+				'name' => 'page',
+			) );
+		$matchers['submit'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'id' => 'wb-setsitelink-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
-				'name' => 'wikibase-setsitelink-submit' ),
-		);
+				'name' => 'wikibase-setsitelink-submit',
+			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-
-		foreach( $expectedInputs as $input ){
-			$this->assertHasHtmlTagWithElements( $output, 'input', $input );
+		foreach( $matchers as $key => $matcher ){
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 	}
 
