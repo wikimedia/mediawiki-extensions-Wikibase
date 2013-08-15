@@ -239,7 +239,11 @@ class LanguageFallbackChainFactory {
 		if ( count( $wgBabelCategoryNames ) ) {
 			// A little redundant but it's the only way to get required information with current Babel API.
 			$previousLevelBabel = array();
-			foreach ( $wgBabelCategoryNames as $level => $_ ) {
+			$babelCategoryNames = array_filter( $wgBabelCategoryNames, function( $category ) {
+				return $category !== false;
+			} );
+			krsort( $babelCategoryNames );
+			foreach ( $babelCategoryNames as $level => $_ ) {
 				// Make the current language at the top of the chain.
 				$levelBabel = array_unique( array_merge(
 					$contextLanguage, \Babel::getUserLanguages( $user, $level )
