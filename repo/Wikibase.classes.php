@@ -176,6 +176,7 @@ return call_user_func( function() {
 		'Wikibase\Test\Api\LangAttributeTestCase' => 'tests/phpunit/includes/api/LangAttributeTestCase.php',
 		'Wikibase\Test\Api\LangAttributeTestHelper' => 'tests/phpunit/includes/api/LangAttributeTestHelper.php',
 		'Wikibase\Test\Api\EntityTestHelper' => 'tests/phpunit/includes/api/EntityTestHelper.php',
+		'Wikibase\Test\PermissionsHelper' => 'tests/phpunit/includes/PermissionsHelper.php',
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',
 		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/rdf/RdfBuilderTest.php',
