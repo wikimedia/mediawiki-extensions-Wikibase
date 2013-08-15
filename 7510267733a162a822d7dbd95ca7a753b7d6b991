@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "698b69a3_dca6e4c3",
+        "filename": "selenium_cuc/Gemfile.lock",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-15T10:00:53Z",
+      "side": 1,
+      "message": "why are you committing the lock file?",
+      "revId": "7510267733a162a822d7dbd95ca7a753b7d6b991",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "698b69a3_7ca070a3",
+        "filename": "selenium_cuc/features/support/modules/qualifiers_module.rb",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-15T10:00:53Z",
+      "side": 1,
+      "message": "this is scary",
+      "revId": "7510267733a162a822d7dbd95ca7a753b7d6b991",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
