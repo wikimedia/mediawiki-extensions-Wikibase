@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "698b69a3_fc00006d",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-15T10:36:47Z",
+      "side": 1,
+      "message": "arguments each on their own line improves readability a lot and prevents mistakes",
+      "revId": "7f3906efe1d3573430688e8662f59c8036ea7c4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
