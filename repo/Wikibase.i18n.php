@@ -336,8 +336,10 @@ to find out where it went.',
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
 	'wikibase-property-summary-wbeditentity-update' => 'Updated a property',
 	'wikibase-property-summary-wbeditentity-override' => 'Cleared a property',
+	'wikibase-property-summary-wbsetlabel-add' => 'Added [$2] label',
 	'wikibase-property-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Removed [$2] label',
+	'wikibase-property-summary-wbsetdescription-add' => 'Added [$2] description',
 	'wikibase-property-summary-wbsetdescription-set' => 'Changed [$2] description',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Removed [$2] description',
 	'wikibase-property-summary-wbsetaliases-set' => 'Setting [$2] {{PLURAL:$1|alias|aliases}}',
@@ -1054,11 +1056,15 @@ Parameters:
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
 	'wikibase-property-summary-wbeditentity-override' => 'Automatic edit summary generated when overriding an existing property.',
+	'wikibase-property-summary-wbsetlabel-add' => 'Automatic edit summary generated when adding a property label, which appears in the h1 heading at top of the page. Example edit summary is "Added [en] label:  Egypt". Parameters:
+* $2 is the language code for the item page.',
 	'wikibase-property-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing a property label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing a property label. Example edit summary is "Removed [en] label". Parameters:
 * $2 is the language code for the item page.',
-	'wikibase-property-summary-wbsetdescription-set' => 'Automatic edit summary when creating or editing a property description. Example edit summary is "Updated [en] description:  a country in Africa". Parameters:
+	'wikibase-property-summary-wbsetdescription-add' => 'Automatic edit summary when adding a property description. Example edit summary is "Added [en] description:  a country in Africa". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetdescription-set' => 'Automatic edit summary when editing a property description. Example edit summary is "Updated [en] description:  a country in Africa". Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Automatic edit summary when removing a property description. Example edit summary is "Removed [en] description". Parameters:
 * $2 is the language code for the item page.',
