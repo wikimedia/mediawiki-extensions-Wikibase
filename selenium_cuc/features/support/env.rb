@@ -14,6 +14,8 @@ require 'page-object'
 require 'page-object/page_factory'
 require 'watir-webdriver'
 require 'yaml'
+require 'net/http'
+require 'active_support/all'
 require 'require_all'
 
 config = YAML.load_file('config/config.yml')
