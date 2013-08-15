@@ -178,18 +178,19 @@ $specialPageAliases['ja'] = array(
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
 	'DispatchStats' => array( '전송통계' ),
-	'EntityData' => array( '항목데이터' ),
-	'NewItem' => array( '항목만들기', '아이템만들기' ),
-	'NewProperty' => array( '새속성' ),
-	'ItemByTitle' => array( '제목별항목', '제목별아이템' ),
-	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목', '레이블별아이템', '라벨별아이템' ),
+	'EntityData' => array( '개체데이터' ),
+	'NewItem' => array( '새항목', '항목만들기' ),
+	'NewProperty' => array( '새속성', '속성만들기' ),
+	'ItemByTitle' => array( '제목별항목' ),
+	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목' ),
 	'ListDatatypes' => array( '데이터유형목록' ),
 	'SetLabel' => array( '레이블설정' ),
 	'SetDescription' => array( '설명설정' ),
-	'SetAliases' => array( '별명설정' ),
+	'SetAliases' => array( '별칭설정' ),
 	'SetSiteLink' => array( '사이트링크설정' ),
-	'EntitiesWithoutLabel' => array( '레이블없는항목' ),
-	'ItemsWithoutSitelinks' => array( '사이트링크없는항목' ),
+	'EntitiesWithoutLabel' => array( '레이블없는개체' ),
+	'EntitiesWithoutDescription' => array( '설명없는개체' ),
+	'ItemsWithoutSitelinks' => array( '사이트링크없는개체' ),
 	'MyLanguageFallbackChain' => array( '내언어폴백체인' ),
 );
 

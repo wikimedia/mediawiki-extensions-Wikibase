@@ -2192,13 +2192,13 @@ $messages['ko'] = array(
 	'wikibase-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
 	'wikibase-comment-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다.',
 	'wikibase-comment-update' => '위키데이터 항목을 바꿈',
-	'wikibase-comment-sitelink-add' => '언어 링크를 추가함: $1',
+	'wikibase-comment-sitelink-add' => '언어 링크가 추가됨: $1',
 	'wikibase-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
-	'wikibase-comment-sitelink-remove' => '언어 링크를 제거함: $1',
+	'wikibase-comment-sitelink-remove' => '언어 링크가 제거됨: $1',
 	'wikibase-comment-multi' => '$1개 {{PLURAL:$1|바뀜}}',
 	'wikibase-dataitem' => '데이터 항목',
 	'wikibase-editlinks' => '링크 편집',
-	'wikibase-editlinkstitle' => '인터언어 링크 편집',
+	'wikibase-editlinkstitle' => '언어 인터위키 링크 편집',
 	'wikibase-linkitem-addlinks' => '링크 추가',
 	'wikibase-linkitem-alreadylinked' => '링크하고자 하는 문서는 이미 이 사이트에 $2(으)로 링크한 중앙 데이터 저장소의 [$1항목]에 연결되어 있습니다. 항목은 사이트마다 문서 하나만 연결할 수 있습니다. 링크할 다른 문서를 선택하세요.',
 	'wikibase-linkitem-close' => '대화 상자를 닫고 문서를 다시 불러오기',
@@ -3339,6 +3339,7 @@ $messages['sk'] = array(
 );
 
 /** Slovenian (slovenščina)
+ * @author Eleassar
  * @author Yerpo
  */
 $messages['sl'] = array(
@@ -3368,8 +3369,8 @@ $messages['sl'] = array(
 	'wikibase-linkitem-invalidsite' => 'Izbrano je bilo neznano ali neveljavno spletišče',
 	'wikibase-linkitem-confirmitem-text' => 'Stram, ki ste jo izbrali, je že povezana z [$1 objektom v naši centralni zbirki podatkov]. Prosimo, potrdite, da {{PLURAL:$2|je stran|sta strani|so strani}}, {{PLURAL:$2|prikazana|prikazani|prikazane}} spodaj, {{PLURAL:$2|tista|tisti|tiste}}, ki jih želite povezati s to stranjo.',
 	'wikibase-linkitem-confirmitem-button' => 'Potrdi',
-	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
-	'wikibase-linkitem-not-loggedin' => 'Za uporabo te funkcije morate biti prijavljeni tako na tem wikiju kot na [$1 centralni zbirki podatkov].',
+	'wikibase-linkitem-not-loggedin-title' => 'Biti morate prijavljeni',
+	'wikibase-linkitem-not-loggedin' => 'Za uporabo te funkcije morate biti prijavljeni tako v tem wikiju kot v [$1 osrednji zbirki podatkov].',
 	'wikibase-property-notfound' => 'Lastnosti $1 ni mogoče najti.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikipodatki',
 	'wikibase-rc-show-wikidata-pref' => 'Pokaži urejanja v Wikipodatkih v zadnjih spremembah',
