@@ -216,7 +216,6 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
-		global $wgBabelCategoryNames;
 		wfProfileIn( __METHOD__ );
 
 		if ( !class_exists( 'Babel' ) || $user->isAnon() ) {
@@ -233,28 +232,7 @@ class LanguageFallbackChainFactory {
 			return $cached;
 		}
 
-		$babel = array();
-		$contextLanguage = array( $languageCode );
-
-		if ( count( $wgBabelCategoryNames ) ) {
-			// A little redundant but it's the only way to get required information with current Babel API.
-			$previousLevelBabel = array();
-			$babelCategoryNames = array_filter( $wgBabelCategoryNames, function( $category ) {
-				return $category !== false;
-			} );
-			krsort( $babelCategoryNames );
-			foreach ( $babelCategoryNames as $level => $_ ) {
-				// Make the current language at the top of the chain.
-				$levelBabel = array_unique( array_merge(
-					$contextLanguage, \Babel::getUserLanguages( $user, $level )
-				) );
-				$babel[$level] = array_diff( $levelBabel, $previousLevelBabel );
-				$previousLevelBabel = $levelBabel;
-			}
-		} else {
-			// Just in case
-			$babel['N'] = $contextLanguage;
-		}
+		$babel = $this->getBabel( $languageCode, $user );
 
 		$chain = $this->buildFromBabel( $babel );
 		$languageFallbackChain = new LanguageFallbackChain( $chain );
@@ -263,6 +241,48 @@ class LanguageFallbackChainFactory {
 
 		wfProfileOut( __METHOD__ );
 		return $languageFallbackChain;
+	}
+
+	protected function getBabel( $languageCode, $user ) {
+		$babel = array();
+		$contextLanguage = array( $languageCode );
+
+		$babelCategoryNames = $this->getBabelCategoryNames();
+
+		if ( count( $babelCategoryNames ) ) {
+			// A little redundant but it's the only way to get required information with current Babel API.
+			$previousLevelBabel = array();
+
+			foreach ( $babelCategoryNames as $level => $_ ) {
+				// Make the current language at the top of the chain.
+				$levelBabel = array_unique( array_merge(
+					$contextLanguage, \Babel::getUserLanguages( $user, $level )
+				) );
+
+				$babel[$level] = array_diff( $levelBabel, $previousLevelBabel );
+				$previousLevelBabel = $levelBabel;
+			}
+		} else {
+			// Just in case
+			$babel['N'] = $contextLanguage;
+		}
+
+		return $babel;
+	}
+
+	protected function getBabelCategoryNames() {
+		global $wgBabelCategoryNames;
+
+		$babelCategoryNames = array_filter(
+			$wgBabelCategoryNames,
+			function( $category ) {
+				return $category !== false;
+			}
+		);
+
+		krsort( $babelCategoryNames );
+
+		return $babelCategoryNames;
 	}
 
 	/**
