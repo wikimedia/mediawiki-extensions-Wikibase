@@ -116,14 +116,17 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 		$entityRev = $lookup->getEntityRevision( $id, $revision );
 
 		if ( $shouldExist ) {
-			$this->assertNotNull( $entityRev, "ID " . $id->getPrefixedId() );
-			$this->assertEquals( $id->getPrefixedId(), $entityRev->getEntity()->getPrefixedId() );
+			$this->assertNotNull( $entityRev, "ID " . $id->__toString() );
+			$this->assertEquals(
+				$id,
+				$entityRev->getEntity()->getId()
+			);
 
 			if ( $revision > 0 ) {
 				$this->assertEquals( $revision, $entityRev->getRevision() );
 			}
 		} else {
-			$this->assertNull( $entityRev, "ID " . $id->getPrefixedId() );
+			$this->assertNull( $entityRev, "ID " . $id->__toString() );
 		}
 	}
 
