@@ -1,21 +1,8 @@
 <?php
+
+namespace Wikibase\Test\Api;
+
 /**
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
  *
  * @licence GNU GPL v2+
@@ -23,16 +10,16 @@
  * @author Daniel Kinzler
  * @author Adam Shorland
  */
-
-namespace Wikibase\Test\Api;
-
-
 class EntityTestHelper {
 
 	/**
 	 * @var array of currently active handles and their current ids
 	 */
 	private static $activeHandles = array();
+	/**
+	 * @var array of currently active ids and their current handles
+	 */
+	private static $activeIds;
 	/**
 	 * @var array handles and any registered default output data
 	 */
@@ -225,21 +212,54 @@ class EntityTestHelper {
 		return self::$entityData[ $handle ]['data'];
 	}
 
-	public static function getEntityOutput( $handle ){
+	public static function getEntityOutput( $handle, $props = null, $langs = null ){
 		if( !array_key_exists( $handle, self::$entityOutput ) ){
 			throw new \MWException( "No entity output defined with handle {$handle}" );
 		}
-		return self::$entityOutput[ $handle ];
+		if( !is_array( $props ) ){
+			return self::$entityOutput[ $handle ];
+		} else {
+			return self::stripUnwantedOutputValues( self::$entityOutput[ $handle ], $props, $langs );
+		}
+	}
+
+	protected static function stripUnwantedOutputValues( $entityOutput, $props = null, $langs = null  ){
+		$entityProps = array();
+		foreach( $props as $prop ){
+			if( array_key_exists( $prop, $entityOutput ) ){
+				$entityProps[ $prop ] = array( $entityOutput[ $prop ] );
+			}
+		}
+		foreach( $entityProps as $prop => $value ){
+			$value = $value[0];
+			if( ( $prop == 'aliases' || $prop == 'labels' || $prop == 'descriptions' ) && $langs != null && is_array( $langs ) ){
+				$langValues = array();
+				foreach( $langs as $langCode ){
+					if( array_key_exists( $langCode, $value ) ){
+						$langValues[ $langCode ] = $value[ $langCode ];
+					}
+				}
+				if( $langValues === array() ){
+					unset( $entityProps[ $prop ] );
+				} else {
+					$entityProps[ $prop ] = $langValues;
+				}
+
+			}
+		}
+		return $entityProps;
 	}
 
 	public static function registerEntity( $handle, $id, $entity = null) {
 		self::$activeHandles[ $handle ] = $id;
+		self::$activeIds[ $id ] = $handle;
 		if( $entity ){
 			self::$entityOutput[ $handle ] = $entity;
 		}
 	}
 
 	private static function unRegisterEntity( $handle ) {
+		unset( self::$activeIds[ self::$activeHandles[ $handle ] ] );
 		unset( self::$activeHandles[ $handle ] );
 	}
 
@@ -258,6 +278,17 @@ class EntityTestHelper {
 	public static function getId( $handle ){
 		if( array_key_exists( $handle, self::$activeHandles ) ){
 			return self::$activeHandles[ $handle ];
+		}
+		return null;
+	}
+
+	/**
+	 * @param $id string of entityid
+	 * @return null|string id of current handle (if active)
+	 */
+	public static function getHandle( $id ){
+		if( array_key_exists( $id, self::$activeIds ) ){
+			return self::$activeIds[ $id ];
 		}
 		return null;
 	}
