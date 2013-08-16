@@ -971,6 +971,8 @@ $messages['de'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase unterstützt den Eigenschaftstyp der Eigenschaft „$1“ noch nicht.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-Bearbeitung',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Bearbeitungen in der Beobachtungsliste anzeigen',
 	'wikibase-error-serialize-error' => 'Die Daten konnten nicht serialisiert werden',
 	'wikibase-error-invalid-entity-id' => 'Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.',
@@ -1162,6 +1164,7 @@ $messages['eo'] = array(
  * @author Gustronico
  * @author Hazard-SJ
  * @author Hereñu
+ * @author Invadinado
  * @author Pegna
  * @author Vivaelcelta
  */
@@ -1178,6 +1181,7 @@ $messages['es'] = array(
 	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|cambio|cambios}}',
+	'wikibase-dataitem' => 'Ítem en Wikidata',
 	'wikibase-editlinks' => 'Editar los enlaces',
 	'wikibase-editlinkstitle' => 'Editar enlaces de interlengua',
 	'wikibase-linkitem-addlinks' => 'Añadir enlace',
@@ -2089,6 +2093,7 @@ $messages['ka'] = array(
 	'wikibase-client-desc' => 'ვიკიბაზის გაფართოების კლიენტი',
 	'specialpages-group-wikibaseclient' => 'ვიკიმონაცემების კლიენტი',
 	'wikibase-after-page-move' => 'გადარქმეულ გვერდზე ენის ბმულების გასასწორებლად, თქვენ აგრეთვე შეგიძლიათ [$1 განაახლოთ] ვიკიმონაცემების დაკავშირებული ელემენტი.',
+	'wikibase-after-page-move-queued' => 'ამ გვერდთან დაკავშირებული [$1 ვიკიმონაცემების ელემენტი] მალე ავტომატურად განახლდება.',
 	'wikibase-comment-remove' => 'ვიკიმონაცემების დაკავშირებული ელემენტი წაშლილია. ენის ბმულები წაშლია.',
 	'wikibase-comment-linked' => 'ვიკიმონაცემების ელემენტი დაკავშირებული იყო ამ გვერდთან.',
 	'wikibase-comment-unlink' => 'ამ გვერდის კავშირი ვიკიმონაცემების ელემენტთან გაწყვეტილია. ენის ბმულები წაშლილია.',
@@ -2369,6 +2374,8 @@ $messages['lb'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt sinn fir dës Fonctioun ze benotzen.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-Ännerung',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
 	'wikibase-error-invalid-entity-id' => "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
 	'special-unconnectedpages' => 'Säiten déi net mat Elementer verbonne sinn',
