@@ -70,14 +70,13 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	 * @see SpecialPage::getDescription
 	 *
 	 * @since 0.1
-	 * @return String
 	 */
 	public function getDescription() {
 		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
 	}
 
 	/**
-	 * Sets headers - this should be called from the execute() method of all derived classes!
+	 * @see SpecialPage::setHeaders
 	 *
 	 * @since 0.1
 	 */
@@ -88,13 +87,9 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	}
 
 	/**
-	 * Main method.
+	 * @see SpecialPage::execute
 	 *
 	 * @since 0.1
-	 *
-	 * @param string|null $subPage
-	 *
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		$subPage = is_null( $subPage ) ? '' : $subPage;

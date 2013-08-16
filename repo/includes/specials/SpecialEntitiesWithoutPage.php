@@ -60,10 +60,6 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.4
-	 *
-	 * @param string $subPage
-	 *
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		if ( !parent::execute( $subPage ) ) {
@@ -206,33 +202,9 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	}
 
 	/**
-	 * @see SpecialWikibaseQueryPage::formatRow
-	 *
-	 * @since 0.3
-	 *
-	 * @param $entry The entry is for this call an EntityId
-	 *
-	 * @return string|null
-	 */
-	protected function formatRow( $entry ) {
-		try {
-			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entry );
-			return Linker::linkKnown( $title );
-		} catch ( MWException $e ) {
-			wfWarn( "Error formatting result row: " . $e->getMessage() );
-			return false;
-		}
-	}
-
-	/**
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
 	 * @since 0.4
-	 *
-	 * @param integer $offset
-	 * @param integer $limit
-	 *
-	 * @return EntityId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
@@ -244,8 +216,6 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
 	 *
 	 * @since 0.4
-	 *
-	 * @return Title
 	 */
 	protected function getTitleForNavigation() {
 		return $this->getTitle( $this->language . '/' . $this->type );
@@ -255,8 +225,6 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * Get the term type (member of Term::TYPE_ enum)
 	 *
 	 * @since 0.4
-	 *
-	 * @return string
 	 */
 	protected abstract function getTermType();
 
@@ -264,8 +232,6 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * Get the legend in HTML format
 	 *
 	 * @since 0.4
-	 *
-	 * @return string
 	 */
 	protected abstract function getLegend();
 
