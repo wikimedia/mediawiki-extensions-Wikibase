@@ -62,23 +62,31 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * Formats a row for display.
 	 * If the function returns false, the line output will be skipped.
 	 *
-	 * @since 0.3
+	 * @since 0.4 (as abstract function with same interface in 0.3)
 	 *
 	 * @param $entry
 	 *
-	 * @return string|null
+	 * @return string|false
 	 */
-	protected abstract function formatRow( $entry );
+	protected function formatRow( $entry ) {
+		try {
+			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entry );
+			return Linker::linkKnown( $title );
+		} catch ( MWException $e ) {
+			wfWarn( "Error formatting result row: " . $e->getMessage() );
+			return false;
+		}
+	}
 
 	/**
 	 * Return the result of the query
 	 *
 	 * @since 0.3
 	 *
-	 * @param integer $offset
-	 * @param integer $limit
+	 * @param integer $offset Start to include at number of entries from the start title
+	 * @param integer $limit Stop at number of entries after start of inclusion
 	 *
-	 * @return array
+	 * @return Array[]
 	 */
 	protected abstract function getResult( $offset = 0, $limit = 0 );
 

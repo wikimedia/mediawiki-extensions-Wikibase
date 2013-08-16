@@ -38,17 +38,17 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 * @since 0.1
 	 *
 	 * @param string $name
+	 * @param string $restriction
+	 * @param boolean $listed
 	 */
 	public function __construct( $name = '', $restriction = '', $listed = true ) {
 		parent::__construct( $name, $restriction, $listed );
 	}
 
 	/**
-	 * The subpage, ie the part after Special:PageName/
-	 * Empty string if none is provided.
+	 * @see SpecialWikibasePagePage::$subPage
 	 *
 	 * @since 0.1
-	 * @var string
 	 */
 	public $subPage;
 
@@ -56,14 +56,13 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 * @see SpecialPage::getDescription
 	 *
 	 * @since 0.1
-	 * @return String
 	 */
 	public function getDescription() {
 		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
 	}
 
 	/**
-	 * Sets headers - this should be called from the execute() method of all derived classes!
+	 * @see SpecialPage::setHeaders
 	 *
 	 * @since 0.1
 	 */
@@ -74,13 +73,9 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Main method.
+	 * @see SpecialPage::execute
 	 *
 	 * @since 0.1
-	 *
-	 * @param string|null $subPage
-	 *
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		$subPage = is_null( $subPage ) ? '' : $subPage;
