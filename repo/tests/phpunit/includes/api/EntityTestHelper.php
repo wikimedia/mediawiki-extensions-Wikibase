@@ -34,6 +34,10 @@ class EntityTestHelper {
 	 */
 	private static $activeHandles = array();
 	/**
+	 * @var array of currently active ids and their current handles
+	 */
+	private static $activeIds;
+	/**
 	 * @var array handles and any registered default output data
 	 */
 	private static $entityOutput = array();
@@ -225,21 +229,51 @@ class EntityTestHelper {
 		return self::$entityData[ $handle ]['data'];
 	}
 
-	public static function getEntityOutput( $handle ){
+	public static function getEntityOutput( $handle, $props = null, $langs = null ){
 		if( !array_key_exists( $handle, self::$entityOutput ) ){
 			throw new \MWException( "No entity output defined with handle {$handle}" );
 		}
-		return self::$entityOutput[ $handle ];
+		if( !is_array( $props ) ){
+			return self::$entityOutput[ $handle ];
+		} else {
+			$entityProps = array();
+			foreach( $props as $prop ){
+				if( array_key_exists( $prop, self::$entityOutput[ $handle ] ) ){
+					$entityProps[ $prop ] = array( self::$entityOutput[ $handle ][ $prop ] );
+				}
+			}
+			foreach( $entityProps as $prop => $value ){
+				$value = $value[0];
+				if( ( $prop == 'aliases' || $prop == 'labels' || $prop == 'descriptions' ) && $langs != null && is_array( $langs ) ){
+					$langValues = array();
+					foreach( $langs as $langCode ){
+						if( array_key_exists( $langCode, $value ) ){
+							$langValues[ $langCode ] = $value[ $langCode ];
+						}
+					}
+					if( $langValues === array() ){
+						unset( $entityProps[ $prop ] );
+					} else {
+						$entityProps[ $prop ] = $langValues;
+					}
+
+				}
+			}
+			return $entityProps;
+		}
+
 	}
 
 	public static function registerEntity( $handle, $id, $entity = null) {
 		self::$activeHandles[ $handle ] = $id;
+		self::$activeIds[ $id ] = $handle;
 		if( $entity ){
 			self::$entityOutput[ $handle ] = $entity;
 		}
 	}
 
 	private static function unRegisterEntity( $handle ) {
+		unset( self::$activeIds[ self::$activeHandles[ $handle ] ] );
 		unset( self::$activeHandles[ $handle ] );
 	}
 
@@ -258,6 +292,17 @@ class EntityTestHelper {
 	public static function getId( $handle ){
 		if( array_key_exists( $handle, self::$activeHandles ) ){
 			return self::$activeHandles[ $handle ];
+		}
+		return null;
+	}
+
+	/**
+	 * @param $id string of entityid
+	 * @return null|string id of current handle (if active)
+	 */
+	public static function getHandle( $id ){
+		if( array_key_exists( $id, self::$activeIds ) ){
+			return self::$activeIds[ $id ];
 		}
 		return null;
 	}
