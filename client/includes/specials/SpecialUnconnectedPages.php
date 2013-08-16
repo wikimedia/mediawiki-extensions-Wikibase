@@ -75,9 +75,6 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.4
-	 *
-	 * @param string $subPage
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		if ( !parent::execute( $subPage ) ) {
@@ -216,11 +213,6 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
 	 * @since 0.4
-	 *
-	 * @param integer $offset Start to include at number of entries from the start title
-	 * @param integer $limit Stop at number of entries after start of inclusion
-	 *
-	 * @return Array[]
 	 */
 	public function getResult( $offset = 0, $limit = 0 ) {
 
@@ -275,10 +267,6 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibaseQueryPage::formatRow
 	 *
 	 * @since 0.4
-	 *
-	 * @param $entry The entry is for this call a row from the select in getResult
-	 *
-	 * @return string|null
 	 */
 	protected function formatRow( $entry ) {
 		try {
@@ -297,8 +285,6 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
 	 *
 	 * @since 0.4
-	 *
-	 * @return Title
 	 */
 	protected function getTitleForNavigation() {
 		return $this->getTitle( $this->startPage );
