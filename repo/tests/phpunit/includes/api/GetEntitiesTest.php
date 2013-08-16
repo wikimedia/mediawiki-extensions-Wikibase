@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 use ApiTestCase;
 
 /**
- * Tests for the ApiWikibase class.
+ * Tests for the ApiWikibase Getentities class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,9 +28,7 @@ use ApiTestCase;
  * @ingroup Test
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler
- * @author Marius Hoch < hoo@online.de >
+ * @author Adam Shorland
  *
  * @group API
  * @group Wikibase
@@ -50,7 +48,8 @@ use ApiTestCase;
 class GetEntitiesTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
-	private static $usedHandles = array( 'Berlin', 'London', 'Oslo', 'Leipzig', 'Empty' );
+	//todo remove unused handles from this list
+	private static $usedHandles = array( 'Berlin', 'London', 'Oslo' );
 
 	public function setup() {
 		parent::setup();
@@ -61,664 +60,234 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
-	/**
-	 * @dataProvider provideEntityHandles
-	 */
-	function testGetItemById( $handle ) {
-		$id = EntityTestHelper::getId( $handle );
-		$item = EntityTestHelper::getEntityOutput( $handle );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id );
-		$this->assertEntityEquals( $item,  $res['entities'][$id] );
-		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
-		// This should be correct for all items we are testing
-		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entities'][$id]['type'] );
-		// The following comes from the props=info which is included by default
-		// Only check if they are there and seems valid, can't do much more for the moment (or could for title but then we are testing assumptions)
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'pageid' );
-		$this->assertTrue( is_integer( $res['entities'][$id]['pageid'] ) );
-		$this->assertTrue( 0 < $res['entities'][$id]['pageid'] );
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'ns' );
-		$this->assertTrue( is_integer( $res['entities'][$id]['ns'] ) );
-		$this->assertTrue( 0 <= $res['entities'][$id]['ns'] );
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'title' );
-		$this->assertTrue( is_string( $res['entities'][$id]['title'] ) );
-		$this->assertTrue( 0 < strlen( $res['entities'][$id]['title'] ) );
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'lastrevid' );
-		$this->assertTrue( is_integer( $res['entities'][$id]['lastrevid'] ) );
-		$this->assertTrue( 0 < $res['entities'][$id]['lastrevid'] );
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'modified' );
-		$this->assertTrue( is_string( $res['entities'][$id]['modified'] ) );
-		$this->assertTrue( 0 < strlen( $res['entities'][$id]['modified'] ) );
-		$this->assertRegExp( '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/',
-			$res['entities'][$id]['modified'], "should be in ISO 8601 format" );
-
-		//@todo: check non-item
-	}
-
-	/**
-	 * Verify that we only get one item if we ask for the same item several
-	 * times in different forms.
-	 *
-	 * @dataProvider provideEntityHandles
-	 */
-	function testGetItemByIdUnique( $handle ) {
-		$id = EntityTestHelper::getId( $handle );
-		$item = EntityTestHelper::getEntityOutput( $handle );
-
-		$ids = array(
-			strtoupper( $id ),
-			strtolower( $id ),
-			$id, $id
-		);
-		$ids = join( '|', $ids );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $ids )
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id );
-		$this->assertEntityEquals( $item,  $res['entities'][$id] );
-		$this->assertEquals( 1, count( $res['entities'] ) );
-	}
-
-	/**
-	 * data provider for passing each entity handle to the test function.
-	 */
-	public static function provideEntityHandles() {
-		$handles = array();
-		foreach( self::$usedHandles as $handle ){
-			$handles[] = array( $handle );
-		}
-		return $handles;
-	}
-
-	public static function provideGetItemByTitle() {
-		$calls = array();
-
-		foreach ( self::$usedHandles as $handle ) {
-			$item = EntityTestHelper::getEntityData( $handle );
-
-			if ( !array_key_exists( 'sitelinks', $item ) ) {
-				continue;
-			}
-
-			foreach ( $item['sitelinks'] as $sitelink ) {
-				$calls[] = array( $handle, $sitelink['site'], $sitelink['title'] );
-			}
-		}
-
-		return $calls;
-	}
-
-	/**
-	 * Test basic lookup of items to get the id.
-	 * This is really a fast lookup without reparsing the stringified item.
-	 *
-	 * @dataProvider provideGetItemByTitle
-	 */
-	public function testGetItemByTitle( $handle, $site, $title ) {
-		list($res,,) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'sites' => $site,
-			'titles' => $title,
-			'format' => 'json', // make sure IDs are used as keys
-		) );
-
-		$id = EntityTestHelper::getId( $handle );
-		$item = EntityTestHelper::getEntityOutput( $handle );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id );
-		$this->assertEntityEquals( $item,  $res['entities'][$id] );
-		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
-	}
-
-	/**
-	 * Test basic lookup of items to get the id.
-	 * This is really a fast lookup without reparsing the stringified item.
-	 *
-	 * @dataProvider provideGetItemByTitle
-	 */
-	public function testGetItemByTitleNormalized( $handle, $site, $title ) {
-		$title = lcfirst( $title );
-		list($res,,) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'sites' => $site,
-			'titles' => $title,
-			'normalize' => true,
-			'format' => 'json', // make sure IDs are used as keys
-		) );
-
-		$id = EntityTestHelper::getId( $handle );
-		$item = EntityTestHelper::getEntityOutput( $handle );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id );
-		$this->assertEntityEquals( $item,  $res['entities'][$id] );
-		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
-
-		// The normalization that has been applied should be noted
-		$this->assertEquals(
-			$title,
-			$res['normalized']['n']['from']
-		);
-
-		$this->assertEquals(
-			// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
-			\Title::newFromText( $title )->getPrefixedText(),
-			$res['normalized']['n']['to']
-		);
-	}
-
-	/**
-	 * @return array
-	 */
-	public static function provideGetEntitiesNormalizationNotAllowed() {
+	public static function provideData() {
 		return array(
-			array(
-				// Two sites one page
-				array( 'enwiki', 'dewiki' ),
-				array( 'Foo' )
-			),
-			array(
-				// Two pages one site
-				array( 'enwiki' ),
-				array( 'Foo', 'Bar' )
-			),
-			array(
-				// Two sites two pages
-				array( 'enwiki', 'dewiki' ),
-				array( 'Foo', 'Bar' )
-			)
+			// p => params, e => expected
+			array( //0 single id
+				'p' => array( 'handles' => array( 'Berlin' ) ),
+				'e' => array( 'count' => 1 ) ),
+			array( //1 multiple ids
+				'p' => array( 'handles' => array( 'London', 'Oslo' ) ),
+				'e' => array( 'count' => 2 ) ),
+			array( //2 multiple ids (that are the same)
+				'p' => array( 'handles' => array( 'London', 'London' ) ),
+				'e' => array( 'count' => 1 ) ),
+			array( //3 single sitelink
+				'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //4 multiple sitelink titles
+				'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin|London' ),
+				'e' => array( 'count' => 2 ) ),
+			array( //5 multiple sitelink sites
+				'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //6 multiple sitelink sites
+				'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|London' ),
+				'e' => array( 'count' => 2 ) ),
+
+			array( //7
+				'p' => array( 'sites' => 'dewiki', 'titles' => 'berlin', 'normalize' => '' ),
+				'e' => array( 'count' => 1, 'normalized' => true ) ),
+			array( //8
+				'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin', 'normalize' => '' ),
+				'e' => array( 'count' => 1  ) ),
+
+			array( //9 prop info
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'info' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //10 prop sitelinks
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'sitelinks' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //11 prop aliases
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'aliases' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //12 prop labels
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'labels' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //13 prop descriptions
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'descriptions' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //14 prop claims
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'claims' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //15 prop datatype
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'datatype' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //16 prop combination
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'labels|sitelinks' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //17 prop combination
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'claims|datatype|aliases' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //18 prop combination
+				'p' => array( 'handles' => array( 'Berlin' ), 'props' => 'info|aliases|labels|claims' ),
+				'e' => array( 'count' => 1 ) ),
+
+			array( //19 language which is present
+				'p' => array( 'handles' => array( 'Berlin' ), 'languages' => 'de' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //20 language that is not present
+				'p' => array( 'handles' => array( 'Berlin' ), 'languages' => 'zh' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //21 languages that are not present
+				'p' => array( 'handles' => array( 'Berlin' ), 'languages' => 'it|es|zh|ar' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //22 languages that are present
+				'p' => array( 'handles' => array( 'Berlin' ), 'languages' => 'de|nn|no|en|en-gb' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //23 languages that are both present and not present
+				'p' => array( 'handles' => array( 'Berlin' ), 'languages' => 'de|nn|no|en|en-gb|it|es|zh|ar' ),
+				'e' => array( 'count' => 1 ) ),
+
+			array( //24
+				'p' => array( 'handles' => array( 'Berlin' ), 'sort' => 'sitelinks', 'dir' => 'descending' ),
+				'e' => array( 'count' => 1 ) ),
+			array( //25
+				'p' => array( 'handles' => array( 'Berlin' ), 'sort' => 'sitelinks', 'dir' => 'ascending' ),
+				'e' => array( 'count' => 1 ) ),
+
 		);
 	}
 
 	/**
-	 * Test that the API is throwing an error if the users wants to
-	 * normalize with multiple sites/ pages.
-	 *
-	 * @group API
-	 * @dataProvider provideGetEntitiesNormalizationNotAllowed
-	 *
-	 * @param array $sites
-	 * @param array $titles
+	 * @dataProvider provideData
 	 */
-	public function testGetEntitiesNormalizationNotAllowed( $sites, $titles ) {
-		$this->setExpectedException( 'UsageException' );
-
-		list($res,,) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'sites' => join( '|', $sites ),
-			'titles' => join( '|', $titles ),
-			'normalize' => true
-		) );
-	}
-
-	/**
-	 * Test that the API isn't showing the normalization note in case nothing changed.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesNoNormalizationApplied( ) {
-		list($res,,) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'sites' => 'enwiki',
-			'titles' => 'HasNoItemAndIsNormalized',
-			'normalize' => true
-		) );
-
-		$this->assertFalse( isset( $res['normalized'] ) );
-	}
-
-	/**
-	 * Testing if we can get missing items if we do lookup with single fake ids.
-	 * Note that this makes assumptions about which ids have been assigned.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesByBadId( ) {
-		$badid = 'q123456789';
-		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'ids' => $badid,
-		) );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $badid, 'missing' );
-		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
-	}
-
-	/**
-	 * Testing behavior for malformed entity ids.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesByMalformedId( ) {
-		$this->setExpectedException( 'UsageException' );
-		$badid = 'xyz123+++';
-		$this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'ids' => $badid,
-		) );
-	}
-
-	/**
-	 * Testing if we can get an item using a site that is not part of the group supported for sitelinks.
-	 * Note that this makes assumptions about which sitelinks exist in the test items.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesByBadSite( ) {
-		$this->setExpectedException( 'UsageException' );
-		$this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'sites' => 'enwiktionary',
-			'titles' => 'Berlin',
-		) );
-	}
-
-	/**
-	 * Testing if we can get missing items if we do lookup with failing titles.
-	 * Note that this makes assumptions about which sitelinks they have been assigned.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesByBadTitle( ) {
-		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'sites' => 'enwiki',
-			'titles' => 'klaijehrnqowienxcqopweiu',
-		) );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities' );
-
-		$keys = array_keys( $res['entities'] );
-		$this->assertEquals( 1, count( $keys ), "requesting a single item should return exactly one item entry" );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $keys[0], 'missing' );
-	}
-
-	/**
-	 * Testing if we can get missing items if we do lookup with failing titles and
-	 * that the normalization that has been applied is being noted correctly.
-	 *
-	 * Note that this makes assumptions about which sitelinks they have been assigned.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesByBadTitleNormalized( ) {
-		$pageTitle = 'klaijehr qowienx_qopweiu';
-		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'sites' => 'enwiki',
-			'titles' => $pageTitle,
-			'normalize' => true
-		) );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities' );
-
-		$keys = array_keys( $res['entities'] );
-		$this->assertEquals( 1, count( $keys ), "requesting a single item should return exactly one item entry" );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $keys[0], 'missing' );
-
-		// The normalization that has been applied should be noted
-		$this->assertEquals(
-			$pageTitle,
-			$res['normalized']['n']['from']
-		);
-
-		$this->assertEquals(
-			// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
-			\Title::newFromText( $pageTitle )->getPrefixedText(),
-			$res['normalized']['n']['to']
-		);
-	}
-
-	/**
-	 * Testing if we can get all the complete stringified items if we do lookup with multiple ids.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesMultipleIds() {
+	function testGetEntities( $params, $expected ){
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wbgetentities';
 		$ids = array();
-		foreach( self::$usedHandles as $handle ){
-			$ids[] = EntityTestHelper::getId( $handle );
-		}
-
-		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'format' => 'json', // make sure IDs are used as keys
-			'ids' => join( '|', $ids ),
-		) );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities' );
-		$this->assertEquals( count( $ids ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
-
-		foreach ( $ids as $id ) {
-			$this->assertArrayHasKey( $id, $res['entities'], "missing item" );
-			$this->assertEquals( $id, $res['entities'][$id]['id'], "bad ID" );
-		}
-	}
-
-	/**
-	 * Testing if we can get all the complete stringified items if we do lookup with multiple site-title pairs.
-	 *
-	 * @group API
-	 */
-	public function testGetEntitiesMultipleSiteLinks() {
-		$handles = array( 'Berlin', 'London', 'Oslo' );
-		$sites = array( 'dewiki', 'enwiki', 'nlwiki' );
-		$titles = array( 'Berlin', 'London', 'Oslo' );
-
-		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetentities',
-			'format' => 'json', // make sure IDs are used as keys
-			'sites' => join( '|', $sites ),
-			'titles' => join( '|', $titles )
-		) );
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities' );
-		$this->assertEquals( count( $titles ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
-
-		foreach ( $handles as $handle ) {
-			$id = EntityTestHelper::getId( $handle );
-
-			$this->assertArrayHasKey( $id, $res['entities'], "missing item" );
-			$this->assertEquals( $id, $res['entities'][$id]['id'], "bad ID" );
-		}
-	}
-
-	function provideLanguages() {
-		return array(
-			array( 'Berlin', array( 'en', 'de' ) ),
-			array( 'Leipzig', array( 'en', 'de' ) ),
-			array( 'Leipzig', array( 'fr', 'nl' ) ),
-			array( 'London', array( 'nl' ) ),
-			array( 'Empty', array( 'nl' ) ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideLanguages
-	 */
-	function testLanguages( $handle, $languages ) {
-		$id = EntityTestHelper::getId( $handle );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'languages' => join( '|', $languages ),
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id );
-
-		$item = $res['entities'][$id];
-
-		foreach ( $item as $prop => $values ) {
-			if ( !is_array( $values ) ) {
-				continue;
+		if( array_key_exists( 'handles', $params ) ){
+			foreach( $params['handles'] as $handle ){
+				$ids[ $handle ] = EntityTestHelper::getId( $handle );
 			}
-
-			if ( $prop === 'sitelinks' ) {
-				continue;
-			}
-
-			$values = static::flattenArray( $values, 'language', 'value' );
-
-			$this->assertEmpty( array_diff( array_keys( $values ), $languages ),
-								"found unexpected language in property $prop: " . var_export( $values, true ) );
+			$params['ids'] = implode( '|', $ids );
+			unset( $params['handles'] );
 		}
-	}
-
-	function provideProps() {
-		return array(
-			array( 'Berlin', '', array( 'id', 'type' ) ),
-			array( 'Berlin', 'labels', array( 'id', 'type', 'labels' ) ),
-			array( 'Berlin', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
-			array( 'Berlin', 'aliases|sitelinks', array( 'id', 'type', 'aliases', 'sitelinks' ) ),
-
-			array( 'Leipzig', '', array( 'id', 'type' ) ),
-			array( 'Leipzig', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
-			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels' ) ), // aliases are omitted because empty
-			array( 'Leipzig', 'sitelinks|descriptions', array( 'id', 'type', 'descriptions' ) ), // sitelinks are omitted because empty
-
-			// TODO: test this for property entities props, e.g. 'datatype'
-
-			array( 'Berlin', 'xyz', false ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideProps
-	 */
-	function testProps( $handle, $props, $expectedProps ) {
-		$id = EntityTestHelper::getId( $handle );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'props' => $props,
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id );
-
-		if ( $expectedProps === false ) {
-			$this->assertArrayHasKey( 'warnings', $res );
-			$this->assertArrayHasKey( 'wbgetentities', $res['warnings'] );
+		if( array_key_exists( 'props', $params ) ){
+			$expected['props'] = explode( '|', $params['props'] );
 		} else {
-			$this->assertArrayEquals( $expectedProps, array_keys( $res['entities'][$id] ) );
+			$expected['props'] = array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype' );
 		}
-	}
-
-	function provideSitelinkUrls() {
-		return array(
-			array( 'Berlin' ),
-			array( 'London' ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideSitelinkUrls
-	 */
-	function testSitelinkUrls( $handle ) {
-		$id = EntityTestHelper::getId( $handle );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'props' => 'sitelinks',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
-
-		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
-			$this->assertArrayNotHasKey( 'url', $link );
+		if( array_key_exists( 'languages', $params ) ){
+			$expected['languages'] = explode( '|', $params['languages'] );
+		} else {
+			$expected['languages'] = null;
+		}
+		if( array_key_exists( 'dir', $params ) ){
+			$expected['dir'] = $params['dir'];
+		} else {
+			$expected['dir'] = 'ascending';
 		}
 
-		// -------------------------------------------
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'props' => 'sitelinks|sitelinks/urls',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
-		);
+		// -- do the request --------------------------------------------------
+		list( $result,, ) = $this->doApiRequest( $params );
 
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
+		// -- check the result ------------------------------------------------
+		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+		$this->assertArrayHasKey( 'entities', $result, "Missing 'entities' section in response." );
+		$this->assertEquals( $expected['count'], count( $result['entities'] ), "Request returned incorrect number of entities" );
 
-		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
-			$this->assertArrayHasKey( 'url', $link, "SiteLinks in the result must have the 'url' key set!" );
-			$this->assertNotEmpty( $link['url'], "The value of the 'url' key is not allowed to be empty!" );
-		}
-	}
-
-	function provideSitelinkSorting() {
-		return array(
-			array( 'Berlin' ),
-			array( 'London' ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideSitelinkSorting
-	 */
-	function testSitelinkSorting( $handle ) {
-		$id = EntityTestHelper::getId( $handle );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'props' => 'sitelinks',
-				'sort' => 'sitelinks',
-				'dir' => 'ascending',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
-		$last = '';
-		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
-			$this->assertArrayHasKey( 'site', $link );
-			$this->assertTrue(strcmp( $last, $link['site'] ) <= 0 );
-			$last = $link['site'];
-		}
-
-		// -------------------------------------------
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'props' => 'sitelinks',
-				'sort' => 'sitelinks',
-				'dir' => 'descending',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $id )
-		);
-
-		$this->assertResultSuccess( $res );
-		$this->assertResultHasKeyInPath( $res, 'entities', $id, 'sitelinks' );
-		$last = 'zzzzzzzz';
-		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
-			$this->assertArrayHasKey( 'site', $link );
-			$this->assertTrue(strcmp( $last, $link['site'] ) >= 0 );
-			$last = $link['site'];
-		}
-	}
-
-	/**
-	 * @dataProvider providerGetItemFormat
-	 */
-	function testGetItemFormat( $format, $usekeys ) {
-		$id = EntityTestHelper::getId( 'Berlin' );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'format' => $format,
-				'ids' => $id )
-		);
-
-		if ( $usekeys ) {
-			$this->assertResultSuccess( $res );
-			$this->assertResultHasKeyInPath( $res, 'entities', $id );
-			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
-				if ( array_key_exists( $prop, $res['entities'][$id] ) ) {
-					foreach ( $res['entities'][$id][$prop] as $key => $value ) {
-						$this->assertTrue( is_string( $key ) );
-						if ( $field !== false ) {
-							$this->assertArrayHasKey( $field, $value );
-							$this->assertTrue( is_string( $value[$field] ) );
-							$this->assertEquals( $key, $value[$field] );
-						}
-					}
-				}
+		foreach( $result['entities'] as $entity ){
+			if( in_array( 'info', $expected['props'] ) ){
+				$this->assertArrayHasKey( 'pageid', $entity, 'An entity is missing the pageid value' );
+				$this->assertArrayHasKey( 'ns', $entity, 'An entity is missing the ns value' );
+				$this->assertArrayHasKey( 'title', $entity, 'An entity is missing the title value' );
+				$this->assertArrayHasKey( 'lastrevid', $entity, 'An entity is missing the lastrevid value' );
+				$this->assertArrayHasKey( 'modified', $entity, 'An entity is missing the modified value' );
+				$this->assertArrayHasKey( 'id', $entity, 'An entity is missing the id value' );
+				$this->assertArrayHasKey( 'type', $entity, 'An entity is missing the type value' );
 			}
-		}
-		else {
-			$this->assertResultSuccess( $res );
-			$this->assertResultHasKeyInPath( $res, 'entities' );
-
-			$keys = array_keys( $res['entities'] );
-			$n = $keys[0];
-
-			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
-				if ( array_key_exists( $prop, $res['entities'][$n] ) ) {
-					foreach ( $res['entities'][$n][$prop] as $key => $value ) {
-						$this->assertTrue( is_string( $key ) );
-						if ( $field !== false ) {
-							$this->assertArrayHasKey( $field, $value );
-							$this->assertTrue( is_string( $value[$field] ) );
-						}
-					}
-				}
+			if( in_array( 'datatype', $expected['props'] ) ){
+				$this->assertArrayHasKey( 'type', $entity, 'An entity is missing the type value' );
 			}
-		}
-	}
 
-	function providerGetItemFormat() {
-		$formats = array( 'json', 'jsonfm', 'php', 'phpfm', 'wddx', 'wddxfm', 'xml',
-			'xmlfm', 'yaml', 'yamlfm', 'rawfm', 'txt', 'txtfm', 'dbg', 'dbgfm',
-			'dump', 'dumpfm', 'none', );
-		$calls = array();
-
-		foreach ( $formats as $format ) {
-			$calls[] = array( $format, self::usekeys( $format ) );
-		}
-
-		return $calls;
-	}
-
-	protected static function usekeys( $format ) {
-		static $withKeys = false;
-
-		if ( $withKeys === false ) {
-			// Which formats to inject keys into, undefined entries are interpreted as true
-			// TODO: This array must be patched if awailable formats that does NOT support
-			// usekeys are added, changed or removed.
-			$withKeys = array(
-				'wddx' => false,
-				'wddxfm' => false,
-				'xml' => false,
-				'xmlfm' => false,
+			$this->assertEntityEquals(
+				EntityTestHelper::getEntityOutput(
+					EntityTestHelper::getHandle( $entity['id'] ),
+					$expected['props'],
+					$expected['languages']
+				),
+				$entity
 			);
+
+			if( array_key_exists( 'dir', $expected ) &&
+				array_key_exists( 'sitelinks', $entity ) ){
+
+				$last = '';
+				if( $expected['dir'] == 'descending' ){
+					$last = 'zzzzzzzz';
+				}
+
+				foreach( $entity['sitelinks'] as $link ){
+					$site = $link['site'];
+					if( $expected['dir'] == 'ascending' ){
+						$this->assertTrue( strcmp( $last, $site ) <= 0 , "Failed to assert order of sitelinks, ('{$last}' vs '{$site}') <=0");
+					} else {
+						$this->assertTrue( strcmp( $last, $site ) >= 0 , "Failed to assert order of sitelinks, ('{$last}' vs '{$site}') >=0");
+					}
+					$last = $site;
+				}
+			}
 		}
 
-		return isset( $withKeys[$format] ) ? $withKeys[$format] : true;
+		if( array_key_exists( 'normalized', $expected ) ){
+			$this->assertArrayHasKey( 'normalized', $result );
+			$this->assertEquals(
+				$params['titles'],
+				$result['normalized']['n']['from']
+			);
+			$this->assertEquals(
+			// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
+				\Title::newFromText( $params['titles'] )->getPrefixedText(),
+				$result['normalized']['n']['to']
+			);
+		} else {
+			$this->assertArrayNotHasKey( 'normalized', $result );
+		}
+	}
+
+	public static function provideExceptionData() {
+		//todo more exception checks should be added once Bug:53038 is resolved
+		return array(
+			array( //0 no params
+				'p' => array( ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+			array( //1 bad id
+				'p' => array( 'ids' => 'ABCD' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
+			array( //2 bad and good id
+				'p' => array( 'ids' => 'q1|aaaa' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
+			array( //3 site and no title
+				'p' => array( 'sites' => 'enwiki' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+			array( //4 title and no site
+				'p' => array( 'titles' => 'Berlin' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+			array( //5
+				'p' => array( 'ids' => 'q1', 'sites' => 'enwiki', 'titles' => 'Berlin' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+			array( //6
+				'p' => array( 'ids' => 'q1|q2', 'normalize' => '' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideExceptionData
+	 */
+	public function testGetEntitiesExceptions( $params, $expected ){
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wbgetentities';
+		if( array_key_exists( 'handles', $params ) ){
+			$ids = array();
+			foreach( $params['handles'] as $handle ){
+				$ids[ $handle ] = EntityTestHelper::getId( $handle );
+			}
+			$params['ids'] = implode( '|', $ids );
+			unset( $params['handles'] );
+		}
+		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
 }
