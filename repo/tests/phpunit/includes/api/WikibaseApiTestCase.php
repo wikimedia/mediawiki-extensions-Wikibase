@@ -9,35 +9,7 @@ use Wikibase\Settings;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
- *
- * The tests are using "Database" to get its own set of temporal tables.
- * This is nice so we avoid poisoning an existing database.
- *
- * The tests are using "medium" so they are able to run a little longer before they are killed.
- * Without this they will be killed after 1 second, but the setup of the tables takes so long
- * time that the first few tests get killed.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
@@ -159,10 +131,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			} else {
 				$this->doApiRequestWithToken( $params );
 			}
-			$this->fail( "Failed to throw exception, {$exception['type']} " );
+			$this->fail( "Failed to throw UsageException" );
 
-		} catch( \Exception $e ){
-			/** @var $e \UsageException */ // trick IDEs into not showing errors
+		} catch( \UsageException $e ){
 			if( array_key_exists( 'type', $exception ) ){
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
