@@ -159,10 +159,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			} else {
 				$this->doApiRequestWithToken( $params );
 			}
-			$this->fail( "Failed to throw exception, {$exception['type']} " );
+			$this->fail( "Failed to throw UsageException" );
 
-		} catch( \Exception $e ){
-			/** @var $e \UsageException */ // trick IDEs into not showing errors
+		} catch( \UsageException $e ){
 			if( array_key_exists( 'type', $exception ) ){
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
