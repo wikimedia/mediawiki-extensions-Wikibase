@@ -49,7 +49,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
-	global $wgWBClientStores, $wgWBClientSettings;
+	global $wgWBClientStores, $wgWBClientSettings, $wgRecentChangesFlags;
 
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -174,6 +174,11 @@ call_user_func( function() {
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 		include_once( $dir . 'config/WikibaseClient.experimental.php' );
 	}
+
+	$wgRecentChangesFlags['wikibase-edit'] = array(
+		'letter' => 'wikibase-rc-wikibase-edit-letter',
+		'title' => 'wikibase-rc-wikibase-edit-title'
+	);
 } );
 
 $wgWBSettings =& $wgWBClientSettings; // B/C alias

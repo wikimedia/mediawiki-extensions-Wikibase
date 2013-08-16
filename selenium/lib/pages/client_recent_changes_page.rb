@@ -19,6 +19,7 @@ class ClientRecentChangesPage < RecentChangesPage
   span(:rcFirstResultComment, :xpath => "//ul[@class='special']/li/span[@class='comment']")
   link(:rcFirstResultCommentSitelink, :xpath => "//ul[@class='special']/li/span[@class='comment']/a")
   link(:rcFilterHideWikidata, :xpath => "//fieldset[@class='rcoptions']/a[15]")
+  element(:rcFirstResultWDFlag, :abbr, :xpath => "//ul[@class='special']/li/abbr")
 
   def hide_wikidata
     navigate_to WIKI_CLIENT_URL + "Special:RecentChanges" + "?hidewikidata=1"

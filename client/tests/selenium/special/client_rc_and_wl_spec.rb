@@ -41,7 +41,6 @@ describe "Check client RC & WL" do
         page.watch_article(article_title)
       end
       visit_page(WatchlistPage) do |page|
-        page.wlFirstResultUserLinkNoWikidata_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_false
         page.show_wikibase
         page.wlFirstResultDiffLink?.should be_true
         page.wlFirstResultUserLink?.should be_true
@@ -51,6 +50,7 @@ describe "Check client RC & WL" do
         page.wlFirstResultLabelLink_element.text.should == article_title
         page.wlFirstResultIDLink?.should be_true
         page.wlFirstResultIDLink_element.text.include?(item_id).should be_true
+        page.wlFirstResultWDFlag?.should be_true
       end
       visit_page(WatchlistPage) do |page|
         page.show_wikibase
@@ -128,7 +128,8 @@ describe "Check client RC & WL" do
         page.wait_until do
           page.clientFirstResultComment?
         end
-        page.clientFirstResultComment.include?("Language link changed from").should == true
+        page.clientFirstResultComment.include?("Wikidata item changed").should == true
+        page.wlFirstResultWDFlag?.should be_true
       end
     end
   end
@@ -136,12 +137,16 @@ describe "Check client RC & WL" do
   context "Check recent changes" do
     it "should try filter wikidata entries by flag" do
       visit_page(ClientRecentChangesPage) do |page|
-        sleep 1 #wikidata entries not hidden immediately
-        page.rcFirstResult_element.text.include?(item_id).should be_false
+        if page.rcFirstResult?
+          page.rcFirstResult_element.text.include?(item_id).should be_false
+        end
         page.show_wikidata
         page.rcFirstResult_element.text.include?(item_id).should be_true
+        page.rcFirstResultWDFlag?.should be_true
         page.hide_wikidata
-        page.rcFirstResult_element.text.include?(item_id).should be_false
+        if page.rcFirstResult?
+          page.rcFirstResult_element.text.include?(item_id).should be_false
+        end
       end
     end
     it "should try filter wikidata entries by pref" do
@@ -155,10 +160,12 @@ describe "Check client RC & WL" do
       visit_page(ClientRecentChangesPage) do |page|
         page.rcFirstResult_element.text.include?(item_id).should be_true
         page.hide_wikidata
-        sleep 1 #wikidata entries not hidden immediately
-        page.rcFirstResult_element.text.include?(item_id).should be_false
+        if page.rcFirstResult?
+          page.rcFirstResult_element.text.include?(item_id).should be_false
+        end
         page.show_wikidata
         page.rcFirstResult_element.text.include?(item_id).should be_true
+        page.rcFirstResultWDFlag?.should be_true
       end
       visit_page(ClientUserPrefsPage) do |page|
         page.wait_for_prefs_to_load
@@ -181,6 +188,7 @@ describe "Check client RC & WL" do
         page.rcFirstResultIDLink?.should be_true
         page.rcFirstResultIDLink_element.text.include?(item_id).should be_true
         page.rcFirstResultComment?.should be_true
+        page.rcFirstResultWDFlag?.should be_true
 
         visit_page(ClientRecentChangesPage) do |page|
           page.show_wikidata
