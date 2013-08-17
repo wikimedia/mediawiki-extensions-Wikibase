@@ -168,8 +168,20 @@ Parameters:
 Parameters:
 * $1 - a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 	'wikibase-rc-show-wikidata-pref' => 'Option in the recent changes section of preferences to show wikibase changes by default in recent changes.',
-	'wikibase-rc-wikibase-edit-letter' => "Very short form of \"'''wikidata edit'''\". Used in [[Special:RecentChanges]] and [[Special:Watchlist]].",
-	'wikibase-rc-wikibase-edit-title' => 'Tooltip for {{msg-mw|wikibase-rc-wikibase-edit-letter}}',
+	'wikibase-rc-wikibase-edit-letter' => "Very short form of \"'''wikidata edit'''\". Used in [[Special:RecentChanges]] and [[Special:Watchlist]].
+
+See also:
+* {{msg-mw|Newpageletter}}
+* {{msg-mw|Minoreditletter}}
+* {{msg-mw|Boteditletter}}
+* {{msg-mw|Unpatrolledletter}}",
+	'wikibase-rc-wikibase-edit-title' => 'Tooltip for {{msg-mw|wikibase-rc-wikibase-edit-letter}}.
+
+See also:
+* {{msg-mw|Recentchanges-label-newpage}}
+* {{msg-mw|Recentchanges-label-minor}}
+* {{msg-mw|Recentchanges-label-bot}}
+* {{msg-mw|Recentchanges-label-unpatrolled}}',
 	'wikibase-watchlist-show-changes-pref' => 'Option in the watchlist section of preferences to always show wikibase edits by default in the watchlist.',
 	'wikibase-error-serialize-error' => 'Generic error for when entity data failed to serialize or cannot be handled.',
 	'wikibase-error-invalid-entity-id' => 'Generic error message when an invalid entity ID was entered.',
@@ -611,6 +623,7 @@ $messages['bs'] = array(
 /** Catalan (català)
  * @author Arnaugir
  * @author Grondin
+ * @author Qllach
  * @author Toniher
  * @author Vriullop
  * @author Àlex
@@ -640,7 +653,7 @@ $messages['ca'] = array(
 	'wikibase-linkitem-input-site' => 'Llengua:',
 	'wikibase-linkitem-input-page' => 'Pàgina:',
 	'wikibase-linkitem-invalidsite' => 'Lloc seleccionat no conegut o no vàlid',
-	'wikibase-linkitem-confirmitem-text' => 'La pàgina que heu indicat ja està enllaçada a un [$1 element del repositori central de dades]. Confirmeu que les pàgines que es mostren a continuació són les que voleu enllaçar amb aquesta pàgina.',
+	'wikibase-linkitem-confirmitem-text' => 'La pàgina que heu seleccionat ja està associada a un [$1 element del repositori central de dades]. Confirmeu que  {{PLURAL:$2|la pàgina indicada|les pàgines indicades}} més avall {{PLURAL:$2|és|són}} {{PLURAL:$2|la que|les que}} voleu enllaçar a aquesta pàgina.',
 	'wikibase-linkitem-confirmitem-button' => 'Confirmat',
 	'wikibase-linkitem-not-loggedin-title' => 'Cal iniciar una sessió',
 	'wikibase-linkitem-not-loggedin' => 'Cal que inicieu una sessió en aquest wiki i en el [$1 repositori central de dades] per utilitzar aquesta funcionalitat.',
@@ -650,6 +663,7 @@ $messages['ca'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase encara no pot fer servir el tipus de propietat $1 per a la propietat.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra les modificacions de Wikidata en els canvis recents',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra les modificacions a Wikidata en la llista de seguiment',
 	'wikibase-error-invalid-entity-id' => "L'ID introduït és desconegut al sistema. Utilitzeu un ID d'entitat vàlid.",
 	'special-unconnectedpages' => 'Pàgines no connectats a elements',
@@ -659,7 +673,7 @@ $messages['ca'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» no és un codi de llengua vàlid.',
 	'wikibase-unconnectedpages-page-warning' => "El títol de pàgina no s'ha pogut utilitzar per a la consulta i s'ha ignorat.",
 	'wikibase-unconnectedpages-iwdata-label' => 'Només pàgines amb enllaços entre llengües',
-	'wikibase-unconnectedpages-format-row' => '($1 enllaços entre llengües a la pàgina)',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|enllaç entre llengües|enllaços entre llengües}} a la pàgina)',
 );
 
 /** Chechen (нохчийн)
@@ -1647,6 +1661,8 @@ $messages['he'] = array(
 	'wikibase-property-notsupportedyet' => 'ההרחבה ויקיביסס עדיין לא תומכת בסוג המאפיין של המאפיין $1.',
 	'wikibase-rc-hide-wikidata' => '$1 ויקינתונים',
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
+	'wikibase-rc-wikibase-edit-letter' => 'נ',
+	'wikibase-rc-wikibase-edit-title' => 'עריכת ויקינתונים',
 	'wikibase-watchlist-show-changes-pref' => 'להציג עריכות בוויקינתונים ברשימת המעקב שלך',
 	'wikibase-error-serialize-error' => 'כשל בהכנת נתונים לשמירה',
 	'wikibase-error-invalid-entity-id' => 'המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
@@ -2070,6 +2086,8 @@ $messages['ja'] = array(
 	'wikibase-property-notsupportedyet' => 'ウィキベースはプロパティ「$1」のプロパティ種別にまだ対応していません。',
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
+	'wikibase-rc-wikibase-edit-letter' => 'デ',
+	'wikibase-rc-wikibase-edit-title' => 'ウィキデータの編集です',
 	'wikibase-watchlist-show-changes-pref' => 'ウィキデータの編集をウォッチリストに表示',
 	'wikibase-error-serialize-error' => 'データをシリアライズできませんでした。',
 	'wikibase-error-invalid-entity-id' => '入力した ID はシステムに登録されていません。有効なエンティティ ID を使用してください。',
@@ -2228,6 +2246,8 @@ $messages['ko'] = array(
 	'wikibase-property-notsupportedyet' => '위키베이스에서 $1 속성에 대한 유형을 지원하지 않습니다.',
 	'wikibase-rc-hide-wikidata' => '위키데이터를 $1',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
+	'wikibase-rc-wikibase-edit-letter' => '데',
+	'wikibase-rc-wikibase-edit-title' => '위키데이터 편집',
 	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기',
 	'wikibase-error-serialize-error' => '데이터를 직렬화할 수 없습니다.',
 	'wikibase-error-invalid-entity-id' => '입력한 ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.',
@@ -2558,6 +2578,8 @@ $messages['mk'] = array(
 	'wikibase-property-notsupportedyet' => 'Викибазата сè уште не поддржува својства од типот „$1“.',
 	'wikibase-rc-hide-wikidata' => '$1 Википодатоци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
+	'wikibase-rc-wikibase-edit-letter' => 'ВП',
+	'wikibase-rc-wikibase-edit-title' => 'Уредување на Википодатоците',
 	'wikibase-watchlist-show-changes-pref' => 'Нема уредувања на Википодатоци во набљудувањата',
 	'wikibase-error-serialize-error' => 'Не успеав да ги серијализирам податоците',
 	'wikibase-error-invalid-entity-id' => 'Назнаката не му е позната на системот. Внесете важечка назнака.',
