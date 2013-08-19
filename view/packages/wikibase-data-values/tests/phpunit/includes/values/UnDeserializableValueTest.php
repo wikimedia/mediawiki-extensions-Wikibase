@@ -2,9 +2,9 @@
 
 namespace DataValues\Test;
 
-use DataValues\UnDeserializableValue;
 use DataValues\DataValue;
 use DataValues\StringValue;
+use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 
 /**
