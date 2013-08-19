@@ -46,6 +46,10 @@ class EntityTestHelper {
 			"new" => "item",
 			"data" => array(),
 		),
+		'Empty2' => array(
+			"new" => "item",
+			"data" => array(),
+		),
 		'Berlin' => array(
 			"new" => "item",
 			"data" => array(
