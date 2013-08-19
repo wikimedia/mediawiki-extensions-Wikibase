@@ -113,7 +113,7 @@ class GeoCoordinateValue extends DataValueObject {
 		$this->longitude = $longitude;
 		$this->altitude = $altitude;
 		$this->precision = $precision;
-		$this->globe = ( is_null( $globe ) ) ? 'http://www.wikidata.org/entity/Q2' : $globe;
+		$this->globe = is_null( $globe ) ? 'http://www.wikidata.org/entity/Q2' : $globe;
 	}
 
 	/**
