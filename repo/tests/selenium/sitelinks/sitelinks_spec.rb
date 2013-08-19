@@ -55,7 +55,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.siteIdAutocompleteList_element.visible?.should be_true
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="xyz_thisarticleshouldneverexist_xyz"
-        page.siteIdInputField.should == "English (en)"
+        page.siteIdInputField.should == "English (enwiki)"
         ajax_wait
         page.saveSitelinkLink
         ajax_wait
@@ -76,7 +76,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
         page.pageInputField_element.enabled?.should be_false
-        page.siteIdInputField="English (en)"
+        page.siteIdInputField="en"
         ajax_wait
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
@@ -119,7 +119,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.siteIdAutocompleteList_element.visible?.should be_true
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="Ber"
-        page.siteIdInputField.should == "English (en)"
+        page.siteIdInputField.should == "English (enwiki)"
         ajax_wait
         page.wait_until do
           page.pageAutocompleteList_element.visible?
@@ -150,7 +150,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
     it "should check if adding multiple sitelinks works" do
       count = 1
-      sitelinks = [["de", "Ber", "Deutsch (de)"], ["ja", "Ber", "日本語 (ja)"], ["he", "BER", "עברית (he)"]]
+      sitelinks = [["de", "Ber", "Deutsch (dewiki)"], ["ja", "Ber", "日本語 (jawiki)"], ["he", "BER", "עברית (hewiki)"]]
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
