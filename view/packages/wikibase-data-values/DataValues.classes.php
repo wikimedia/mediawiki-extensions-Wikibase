@@ -15,6 +15,7 @@ return array(
 	'DataValues\BooleanValue' => 'includes/values/BooleanValue.php',
 	'DataValues\GeoCoordinateValue' => 'includes/values/GeoCoordinateValue.php',
 	'DataValues\IriValue' => 'includes/values/IriValue.php',
+	'DataValues\LatLongValue' => 'includes/values/LatLongValue.php',
 	'DataValues\MonolingualTextValue' => 'includes/values/MonolingualTextValue.php',
 	'DataValues\MultilingualTextValue' => 'includes/values/MultilingualTextValue.php',
 	'DataValues\NumberValue' => 'includes/values/NumberValue.php',
