@@ -2585,8 +2585,8 @@ $messages['ca'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'lloc',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
 	'wikibase-alias-edit-placeholder' => 'introduïu un àlies',
-	'wikibase-label-input-help-message' => "Introduïu el títol d'aquest conjunt de dades a $1.",
-	'wikibase-description-input-help-message' => 'Introduïu una breu descripció a $1.',
+	'wikibase-label-input-help-message' => "Introduïu el títol d'aquest conjunt de dades en $1.",
+	'wikibase-description-input-help-message' => 'Introduïu una breu descripció en $1.',
 	'wikibase-statements' => 'Declaracions',
 	'wikibase-terms' => 'En altres llengües',
 	'wikibase-sitelinks-add' => "afegir un enllaç a un lloc web d'enllaç",
@@ -2607,7 +2607,7 @@ $messages['ca'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Un valor|$1 valors}} encara no han estat desats',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|entrada|entrades}}',
 	'wikibase-disambiguation-title' => 'Desambiguació de "$1"',
-	'wb-special-newitem-new-item-notification' => "S'ha creat el nou element $1 i s'ha redirigit a la seva pàgina. Torna a $2.",
+	'wb-special-newitem-new-item-notification' => "S'ha creat el nou element $1 i s'ha redirigit a la seva pàgina. Torneu a $2.",
 	'wikibase-aliases-label' => 'També conegut com:',
 	'wikibase-aliases-input-help-message' => "Si aquest conjunt de dades es coneix amb més d'un nom concret, podeu introduir àlies i sinònims, i així es podran trobar pels seus noms alternatius.",
 	'wikibase-aliases-empty' => "No se n'ha definit cap àlies.",
@@ -2653,6 +2653,7 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'wikibase-itemdisambiguation-nothing-found' => "No s'ha trobat cap element amb l'etiqueta indicada.",
 	'wikibase-itemdisambiguation-create' => "Podeu [{{fullurl:Special:NewItem|label=$1}} crear l'element].",
 	'special-newproperty' => 'Crea una propietat nova',
+	'wikibase-newproperty-summary' => "Assegureu-vos de comprovar si la propietat ja existeix!<br />Per a tota propietat nova cal crear una [[Help:Label|etiqueta]] i una [[Help:Description|descripció]], a més d'un tipus de propietat vàlid.",
 	'wikibase-newproperty-fieldset' => 'Crea una propietat nova',
 	'wikibase-newproperty-datatype' => 'Tipus de dades:',
 	'special-newitem' => 'Crea un element nou',
@@ -2665,6 +2666,7 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'wikibase-newentity-submit' => 'Crea',
 	'special-setlabel' => 'Defineix una etiqueta',
 	'wikibase-setlabel-introfull' => "Esteu definint l'etiqueta en $2 per a [[$1]]",
+	'wikibase-setlabel-intro' => "Amb aquest formulari podeu assignar una etiqueta a una entitat. Heu d'indicar l'identificador de l'entitat (p.ex. Q23), el codi d'idioma (p.ex. \"ca\") i l'etiqueta que voleu definir.",
 	'wikibase-setlabel-label' => 'Etiqueta:',
 	'wikibase-setlabel-submit' => "Desa l'etiqueta",
 	'wikibase-setlabel-warning-remove' => "Segur que voleu eliminar l'etiqueta de [[$1]]?",
@@ -2684,17 +2686,31 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'wikibase-item-summary-wbcreate-new' => 'Nou element creat',
 	'wikibase-item-summary-wbeditentity' => 'Nou element creat',
 	'wikibase-item-summary-wbeditentity-create' => 'Nou element creat',
+	'wikibase-item-summary-wbeditentity-update' => "S'ha actualitzat l'element",
 	'wikibase-item-summary-wbeditentity-override' => 'Element sobreescrit',
-	'wikibase-item-summary-wbsetlabel-set' => "Canvia l'etiqueta [$2]",
+	'wikibase-item-summary-wbsetreference-add' => "S'ha afegit una referència a l'afirmació",
+	'wikibase-item-summary-wbsetlabel-add' => "S'ha afegit una etiqueta en [$2]",
+	'wikibase-item-summary-wbsetlabel-set' => "S'ha canviat l'etiqueta en [$2]",
 	'wikibase-item-summary-wbsetlabel-remove' => "Esborra l'etiqueta [$2]",
-	'wikibase-item-summary-wbsetdescription-set' => 'Canvia la descripció [$2]',
+	'wikibase-item-summary-wbsetdescription-add' => "S'ha afegit una descripció en [$2]",
+	'wikibase-item-summary-wbsetdescription-set' => "S'ha canviat l'etiqueta en [$2]",
 	'wikibase-item-summary-wbsetdescription-remove' => 'Esborra la descripció [$2]',
 	'wikibase-item-summary-wbsetaliases-set' => 'Definint [$2] {{PLURAL:$1|àlies}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => "S'han afegit i eliminat [$2] {{PLURAL:$1|àlies}}",
+	'wikibase-item-summary-wbsetaliases-add-remove' => "S'han afegit i eliminat {{PLURAL:$1|àlies}} en [$2]",
 	'wikibase-item-summary-wbsetaliases-add' => "S'han afegit [$2] {{PLURAL:$1|àlies}}",
 	'wikibase-item-summary-wbsetaliases-remove' => "S'han eliminat [$2] {{PLURAL:$1|àlies}}",
 	'wikibase-item-summary-wbsetsitelink-add' => "S'ha afegit un enllaç a [$2]",
+	'wikibase-item-summary-wbsetsitelink-set' => "S'ha canviat l'enllaç a [$2]",
 	'wikibase-item-summary-wbsetsitelink-remove' => "S'ha eliminat l'enllaç a [$2]",
+	'wikibase-item-summary-wbcreateclaim-value' => "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
+	'wikibase-item-summary-wbcreateclaim-novalue' => "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
+	'wikibase-item-summary-wbcreateclaim' => "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
+	'wikibase-property-summary-wbeditentity-update' => "S'ha actualizat la propietat",
+	'wikibase-property-summary-wbsetlabel-add' => "S'ha afegit una etiqueta en [$2]",
+	'wikibase-property-summary-wbsetlabel-set' => "S'ha canviat l'etiqueta en [$2]",
+	'wikibase-property-summary-wbsetdescription-add' => "S'ha afegit una descripció en [$2]",
+	'wikibase-property-summary-wbsetdescription-set' => "S'ha canviat la descripció en [$2]",
+	'wikibase-property-summary-wbsetaliases-add-remove' => "S'han afegit i eliminat {{PLURAL:$1|àlies}} en [$2]",
 	'content-model-wikibase-item' => 'Element de Viquibase',
 	'right-item-override' => 'Sobreescriure elements',
 	'right-item-create' => 'Crear elements',
@@ -10313,6 +10329,7 @@ $messages['lv'] = array(
 
 /** Minangkabau (Baso Minangkabau)
  * @author Iwan Novirion
+ * @author Shirayuki
  */
 $messages['min'] = array(
 	'wikibase-edit' => 'suntiang',
@@ -10364,7 +10381,7 @@ $messages['min'] = array(
 	'special-newproperty' => 'Buek properti baru',
 	'wikibase-newproperty-fieldset' => 'Buek properti baru',
 	'wikibase-newproperty-datatype' => 'Jenis data:',
-	'wikibase-newproperty-invalid-datatype' => 'Jenis data nan dimasuakan salah',
+	'wikibase-newproperty-invalid-datatype' => 'Jenis data nan dimasuakan salah', # Fuzzy
 	'special-newitem' => 'Buek item baru',
 	'wikibase-newitem-summary' => 'Pastikan Sanak [[Special:ItemByTitle|mamariso item tarsabuik koq alah ado]]!<br />Bueklah [[Help:Label|label]] jo [[Help:Description|deskripsi]] untuak kasado item baru.',
 	'wikibase-newitem-fieldset' => 'Buek item baru',
@@ -10419,8 +10436,6 @@ $messages['min'] = array(
 	'right-property-override' => 'Timpo item',
 	'right-property-create' => 'Buek properti',
 	'right-property-remove' => 'Hapuih properti',
-	'right-alias-add' => 'Tambah namo lain',
-	'right-alias-set' => 'Buek namo lain',
 	'right-alias-remove' => 'Hapuih namo lain',
 	'right-sitelink-remove' => 'Hapuih interwiki',
 	'right-sitelink-update' => 'Pabarui interwiki',
@@ -11558,6 +11573,7 @@ for å finne ut hva som har skjedd.',
  * @author Romaine
  * @author SPQRobin
  * @author Saruman
+ * @author Shirayuki
  * @author Siebrand
  * @author User555
  * @author Wiki13
@@ -11635,10 +11651,10 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.', # F
 	'wikibase-error-constraint-violation-label' => 'Er {{PLURAL:$1|is een overschrijding van een beperking voor het label|zijn overschrijdingen van beperkingen voor de labels}} "$3" voor {{PLURAL:$1|taalcode|taalcodes}} "$2".',
 	'wikibase-error-constraint-violation-description' => 'Er {{PLURAL:$1|is een overschrijding van een beperking voor de beschrijving|zijn overschrijdingen van beperkingen voor de beschrijvingen}} "$3" voor {{PLURAL:$1|taalcode|taalcodes}} "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'Er {{PLURAL:$1|is een overschrijding van een beperking voor het alias|zijn overschrijdingen van beperkingen voor de aliassen}} "$3" voor {{PLURAL:$1|taalcode|taalcodes}} "$2".',
-	'wikibase-error-sitelink-already-used' => 'De sitekoppeling [$1 $2] wordt al gebruikt door het item [[$3]].',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere eigenschap ($3)',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere zoekopdracht ($3)',
-	'wikibase-error-label-not-unique-item' => 'Een ander item ($3) is al gekoppeld met het label "$1" en de beschrijving "$4" voor de taalcode $2',
+	'wikibase-error-sitelink-already-used' => 'De sitekoppeling [$1 $2] wordt al gebruikt door het item [[$3]].', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-property' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere eigenschap ($3)', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-query' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere zoekopdracht ($3)', # Fuzzy
+	'wikibase-error-label-not-unique-item' => 'Een ander item ($3) is al gekoppeld met het label "$1" en de beschrijving "$4" voor de taalcode $2', # Fuzzy
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'wikibase-itembytitle-lookup-fieldset' => 'Items zoeken op site en paginanaam',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -11661,7 +11677,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.', # F
 	'wikibase-newproperty-summary' => 'Zorg ervoor dat u [[Special:PropertyDisambiguation|controleert of de eigenschap al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe eigenschappen, als ook een geldig eigenschapstype.',
 	'wikibase-newproperty-fieldset' => 'Nieuwe eigenschap aanmaken',
 	'wikibase-newproperty-datatype' => 'Gegevenstype:',
-	'wikibase-newproperty-invalid-datatype' => 'Er is een ongeldig gegevenstype opgegeven',
+	'wikibase-newproperty-invalid-datatype' => 'Er is een ongeldig gegevenstype opgegeven', # Fuzzy
 	'special-newitem' => 'Nieuw item aanmaken',
 	'wikibase-newitem-summary' => 'Zorg ervoor dat u [[Special:ItemByTitle|controleert of de eigenschap al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe items.',
 	'wikibase-newitem-fieldset' => 'Nieuw item aanmaken',
@@ -11830,8 +11846,6 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'right-property-override' => 'Eigenschappen overschrijven',
 	'right-property-create' => 'Eigenschappen aanmaken',
 	'right-property-remove' => 'Eigenschappen verwijderen',
-	'right-alias-add' => 'Aliassen toevoegen',
-	'right-alias-set' => 'Aliassen aanmaken',
 	'right-alias-remove' => 'Aliassen verwijderen',
 	'right-sitelink-remove' => 'Sitekoppelingen verwijderen',
 	'right-sitelink-update' => 'Sitekoppelingen bijwerken',
@@ -14580,6 +14594,7 @@ $messages['ug-arab'] = array(
  * @author AS
  * @author Aced
  * @author Ahonc
+ * @author Andriykopanytsia
  * @author Base
  * @author Sodmy
  * @author Steve.rusyn
@@ -14651,7 +14666,7 @@ $messages['uk'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Я згідний редагувати дальше на цих умовах. Більше не показувати це повідомлення.',
 	'wikibase-entityselector-more' => 'більше',
 	'wikibase-anonymouseditwarning' => 'Увага: Ви не увійшли до системи.
-Вашу IP-адресу буде записано у історії редагування $1.',
+Вашу IP-адресу буде записано у історії редагування цього запису.',
 	'wikibase-restrictionedit-tooltip-message' => 'Цю сторінку захищено. Редагування не дозволено.',
 	'wikibase-blockeduser-tooltip-message' => "Вам не дозволено редагувати, бо Ваше ім'я користувача, або IP-адресу заблоковано.",
 	'wikibase-move-error' => 'Ви не можете заносити сторінки у простір даних, ані виносити сторінки з нього.',
@@ -14659,10 +14674,10 @@ $messages['uk'] = array(
 	'wikibase-error-constraint-violation-label' => 'Виявлено назви («$3») із {{PLURAL:$1|мовним кодом|мовними кодами}} «$2», що порушують обмеження.',
 	'wikibase-error-constraint-violation-description' => 'Виявлено описи («$3») із {{PLURAL:$1|мовним кодом|мовними кодами}} «$2», що порушують обмеження.',
 	'wikibase-error-constraint-violation-aliases' => 'Виявлено додаткові назви («$3») із {{PLURAL:$1|мовним кодом|мовними кодами}} «$2», що порушують обмеження.',
-	'wikibase-error-sitelink-already-used' => '[$1 $2] вже пов’язано з іншим елементом: [[$3]].', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-property' => 'Назву «$1» для мовного коду $2 вже має інша властивість: $3',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Назву «$1» для мовного коду $2 вже має інший запит: $3',
-	'wikibase-error-label-not-unique-item' => 'Назву «$1» і опис «$4» для мовного коду $2 вже має інший елемент: $3',
+	'wikibase-error-sitelink-already-used' => 'Посилання сайту [$1 $2] вже включено в інший елемент, [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Назву „$1“ для мовного коду $2 вже має інша властивість: $3',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Назву „$1“ для мовного коду $2 вже має інший запит: $3',
+	'wikibase-error-label-not-unique-item' => 'Назву „$1“ і опис „$4“ для мовного коду $2 вже має інший елемент: $3',
 	'special-itembytitle' => 'Елементи за назвою',
 	'wikibase-itembytitle-lookup-fieldset' => 'Шукати елементи за сайтом і назвою',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
@@ -14685,7 +14700,7 @@ $messages['uk'] = array(
 	'wikibase-newproperty-summary' => 'Переконайтеся, що такої властивості ще нема!<br />Для нової властивості слід вказати [[Help:Label|назву]] та [[Help:Description|опис]], а також правильний тип даних.',
 	'wikibase-newproperty-fieldset' => 'Створити нову властивість',
 	'wikibase-newproperty-datatype' => 'Тип даних:',
-	'wikibase-newproperty-invalid-datatype' => 'Задано недопустимий тип даних',
+	'wikibase-newproperty-invalid-datatype' => 'Задано недопустимий тип даних.',
 	'special-newitem' => 'Створити новий елемент',
 	'wikibase-newitem-summary' => 'Переконайтеся, що [[Special:ItemByTitle|такого елемента ще нема]]!<br />Для нового елемента слід вказати [[Help:Label|назву]] та [[Help:Description|опис]].',
 	'wikibase-newitem-fieldset' => 'Створити новий елемент',
@@ -14710,13 +14725,25 @@ $messages['uk'] = array(
 	'wikibase-setdescription-submit' => 'Задати опис:',
 	'wikibase-setdescription-warning-remove' => 'Справді вилучити опис [[$1]]?',
 	'special-setaliases' => 'Задавання додаткових назв',
-	'wikibase-setaliases-introfull' => 'Ви задаєте додаткові $2 назви для [[$1]]. Кілька назв треба розділяти символом <code>|</code>.', # Fuzzy
+	'wikibase-setaliases-introfull' => 'Ви задаєте додаткові $2 назви для [[$1]]. Кілька назв треба розділяти вертикальною рискою <code>|</code>.',
 	'wikibase-setaliases-intro' => 'Ця форма дозволяє задати додаткові назви сутності. Потрібно вказати ІД сутності (наприклад, Q23), мовний код (наприклад, "uk") і додаткові назви. Додаткові назви треба розділяти символом <code>|</code>.',
 	'wikibase-setaliases-label' => 'Додаткові назви:',
 	'wikibase-setaliases-submit' => 'Задати додаткові назви:',
 	'wikibase-setaliases-warning-remove' => 'Ви справді хочете вилучити всі додаткові назви [[$1]]?',
+	'special-setsitelink' => 'Задати посилання на сайт',
+	'wikibase-setsitelink-introfull' => 'Ви встановлюєте посилання на сайт $2 для [[$1]].',
+	'wikibase-setsitelink-intro' => 'Ця форма дозволяє встановити посилання на сайт якоїсь структури. Вам необхідно надати ідентифікатор об\'єкта (напр. Q23), ідентифікатор вузла (напр., "enwiki") і посилання на сайт, щоб встановити значення.',
+	'wikibase-setsitelink-site' => 'Ідентифікатор сайту:',
+	'wikibase-setsitelink-label' => 'Посилання на сайт:',
+	'wikibase-setsitelink-submit' => 'Задати посилання на сайт',
+	'wikibase-setsitelink-warning-remove' => 'Ви дійсно бажаєте видалити посилання на сайт з [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'Невідомий ідентифікатор сайту «$1». Будь ласка, використовуйте один з існуючих ідентифікаторів сайту, наприклад „enwiki“.',
+	'wikibase-setsitelink-add-failed' => 'Не вдалося зберегти посилання на сайт.',
+	'wikibase-setsitelink-remove-failed' => 'Не вдалося видалити посилання на сайт.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Мова:',
+	'wikibase-setentity-invalid-langcode' => 'Ідентифікатор мови "$1" невідомий. Будь ласка, використовуйте ідентифікатор мови, відомий системи, наприклад, "uk".',
+	'wikibase-setentity-invalid-id' => 'Ідентифікатор "$1" невідомий системі. Будь ласка, використовуйте дійсний ідентифікатор об\'єкту.',
 	'special-dispatchstats' => 'Статистика розсилки змін',
 	'wikibase-dispatchstats-no-stats' => 'Наразі немає статистики.',
 	'wikibase-dispatchstats-changes' => 'Статистика журналу змін',
@@ -14807,8 +14834,6 @@ $messages['uk'] = array(
 	'right-property-override' => 'Перевизначення властивостей',
 	'right-property-create' => 'Створення властивостей',
 	'right-property-remove' => 'Вилучення властивостей',
-	'right-alias-add' => 'Додавання додаткових назв',
-	'right-alias-set' => 'Задавання додаткових назв',
 	'right-alias-remove' => 'Вилучати додаткові назви',
 	'right-sitelink-remove' => 'Вилучення зв’язків із сайтами',
 	'right-sitelink-update' => 'Оновлення зв’язків із сайтами',

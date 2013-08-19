@@ -634,6 +634,7 @@ $messages['ca'] = array(
 	'wikibase-client-desc' => "Client per l'extensió Wikibase",
 	'specialpages-group-wikibaseclient' => 'Client de Wikidata',
 	'wikibase-after-page-move' => "Podeu també [$1 actualitzar] l'element associat de Wikidata per a mantenir els enllaços d'idioma a la pàgina moguda.",
+	'wikibase-after-page-move-queued' => "L'[element $1 de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
 	'wikibase-comment-remove' => 'Element associat de Wikidata eliminat. Enllaços de llengua suprimits.',
 	'wikibase-comment-linked' => 'Un element de Wikidata ha estat enllaçat a aquesta pàgina.',
 	'wikibase-comment-unlink' => "Aquesta pàgina ha estat deslligada de l'element Wikidata. Enllaços de llengua suprimits.",
@@ -1456,6 +1457,8 @@ $messages['fr'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase ne supporte pas encore de type de propriété pour la propriété $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Modification de wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Voir les modifications de Wikidata dans votre liste de suivi',
 	'wikibase-error-serialize-error' => 'Échec à la sérialisation des données',
 	'wikibase-error-invalid-entity-id' => 'L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.',
@@ -1527,6 +1530,8 @@ $messages['frr'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase koon mä di typ faan det eegenskap „$1“ noch ei am.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Wise Wikidata-feranrangen uun a „leetst feranrangen“',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Bewerket faan wikidata',
 	'wikibase-watchlist-show-changes-pref' => "Wise Wikidata-feranrangen bi jo sidjen, diar dü uun't uug behual wel.",
 	'wikibase-error-serialize-error' => 'A dooten küd ei serialisiaret wurd',
 	'wikibase-error-invalid-entity-id' => 'Detdiar käännumer (ID) as ei bekäänd. Brük en ööder ID.',
@@ -2393,7 +2398,7 @@ $messages['lb'] = array(
 	'wikibase-linkitem-invalidsite' => 'Onbekannten oder net valabele Site erausgesicht',
 	'wikibase-linkitem-confirmitem-button' => 'Confirméieren',
 	'wikibase-linkitem-not-loggedin-title' => 'Dir musst ageloggt sinn',
-	'wikibase-linkitem-not-loggedin' => 'Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt sinn fir dës Fonctioun ze benotzen.',
+	'wikibase-linkitem-not-loggedin' => 'Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt si fir dës Fonctioun ze benotzen.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
@@ -3611,6 +3616,7 @@ $messages['tr'] = array(
  * @author AS
  * @author Aced
  * @author Ahonc
+ * @author Andriykopanytsia
  * @author Base
  * @author Lystopad
  * @author Microcell
@@ -3657,6 +3663,8 @@ $messages['uk'] = array(
 	'wikibase-property-notsupportedyet' => 'Вікідані поки що не підтримують тип властивості для властивості $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Вікідані',
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
+	'wikibase-rc-wikibase-edit-letter' => 'Р',
+	'wikibase-rc-wikibase-edit-title' => 'Редагування Вікіданих',
 	'wikibase-watchlist-show-changes-pref' => 'Показувати редагування Вікіданих у Вашому списку спостереження',
 	'wikibase-error-serialize-error' => 'Не вдалося серіалізувати дані.',
 	'wikibase-error-invalid-entity-id' => 'Введений ідентифікатор не відомий системі. Будь ласка, введіть коректний ідентифікатор сутності.',

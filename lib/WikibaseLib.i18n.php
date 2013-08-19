@@ -2086,6 +2086,7 @@ $messages['mr'] = array(
 
 /** Malay (Bahasa Melayu)
  * @author Anakmalaysia
+ * @author Shirayuki
  */
 $messages['ms'] = array(
 	'wikibase-lib-desc' => 'Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client',
@@ -2825,6 +2826,7 @@ $messages['ug-arab'] = array(
 
 /** Ukrainian (українська)
  * @author AS
+ * @author Andriykopanytsia
  * @author Base
  * @author RLuts
  * @author Steve.rusyn
@@ -2836,22 +2838,51 @@ $messages['uk'] = array(
 	'wikibase-entity-item' => 'елемент',
 	'wikibase-entity-property' => 'властивість',
 	'wikibase-entity-query' => 'запит',
+	'wikibase-deletedentity-item' => 'Видалений елемент',
+	'wikibase-deletedentity-property' => 'Вилучена властивість',
+	'wikibase-deletedentity-query' => 'Вилучений запит',
 	'wikibase-diffview-reference' => 'джерело',
 	'wikibase-diffview-rank' => 'ранг',
 	'wikibase-diffview-qualifier' => 'кваліфікатор',
+	'wikibase-diffview-label' => 'позначка',
+	'wikibase-diffview-alias' => 'псевдоніми',
+	'wikibase-diffview-description' => 'опис',
+	'wikibase-diffview-link' => 'посилання',
 	'wikibase-error-unexpected' => 'Сталася невідома помилка',
 	'wikibase-error-save-generic' => 'Сталася помилка під час спроби виконати збереження, через це Ваші зміни не можуть бути здійснені.',
 	'wikibase-error-remove-generic' => 'Сталась помилка під час спроби виконати вилучення, через це Ваші зміни не можуть бути здійснені.',
 	'wikibase-error-save-connection' => "Під час спроби здійснити виконати збереження сталась помилка з'єднання, через це Ваші зміни не можуть бути здійснені. Будь ласка, перевірте Ваше з'єднання з Інтернетом.",
 	'wikibase-error-remove-connection' => 'При спробі здійснити вилучення сталась помилка підключення, тому Ваші зміни не можуть бути завершені. Будь ласка, перевірте Ваше підключення до Інтернету.',
+	'wikibase-error-save-timeout' => 'Ми переживаємо технічні труднощі, і через це "Зберегти" не вдалося завершити.',
+	'wikibase-error-remove-timeout' => 'Ми переживаємо технічні труднощі, і через це "видалити" не вдалося завершити.',
+	'wikibase-error-autocomplete-connection' => 'Не вдалося запитати API сайту. Будь ласка, спробуйте ще раз пізніше.',
 	'wikibase-error-autocomplete-response' => 'Сервер відповів: $1',
+	'wikibase-error-ui-client-error' => 'Підключення до сторінки клієнта не вдалося. Будь ласка, спробуйте ще раз пізніше.',
+	'wikibase-error-ui-no-external-page' => 'Не вдалося знайти вказану статтю на відповідному сайті.',
+	'wikibase-error-ui-cant-edit' => 'Вам не дозволено виконати цю дію.',
+	'wikibase-error-ui-no-permissions' => 'У вас не вистачає прав для виконання цієї дії.',
+	'wikibase-error-ui-link-exists' => "Не вдається зв'язати цю сторінку, бо інший елемент вже містить посилання на неї.",
+	'wikibase-error-ui-session-failure' => 'Ваша сесія закінчилася. Будь ласка, увійдіть в систему знову.',
+	'wikibase-error-ui-edit-conflict' => 'Існує конфлікт редагування. Будь ласка, перезавантажтеся і ще раз збережіть.',
+	'wikibase-replicationnote' => 'Будь ласка, зверніть увагу, що це може зайняти декілька хвилин, поки зміни будуть помітні на всіх вікі.',
 	'wikibase-sitelinks-wikipedia' => 'Список сторінок Вікіпедії, що посилаються на цей елемент',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 	'wikibase-sitelinks-link-columnheading' => "Пов'язані статті",
 	'wikibase-tooltip-error-details' => 'Деталі',
+	'wikibase-validator-bad-type' => '$2 замість $1',
+	'wikibase-validator-too-long' => 'Довжина має бути не більша, ніж {{PLURAL:$1|один символ| $1 символи|$1 символів}}',
+	'wikibase-validator-too-short' => 'Довжина повинна бути не менша, ніж $1 {{PLURAL:$1|символ|символи|символів}}',
+	'wikibase-validator-malformed-value' => 'Неправильний формат вводу:$1',
+	'wikibase-validator-bad-entity-id' => 'Неправильний ідентифікатор:$1',
+	'wikibase-validator-bad-entity-type' => 'Неочікуваний тип сутності $1',
+	'wikibase-validator-no-such-entity' => '$1не знайдено',
+	'wikibase-validator-no-such-property' => 'Властивість  $1  не знайдено',
+	'wikibase-validator-bad-value' => 'Незаконне значення: $1',
+	'wikibase-validator-bad-value-type' => 'Поганий тип значення $1, очікується $2',
 	'datatypes-type-wikibase-item' => 'Елемент',
 	'datatypes-type-commonsMedia' => 'Медіафайл з Вікісховища',
+	'version-wikibase' => 'Вікібаза',
 );
 
 /** Urdu (اردو)
