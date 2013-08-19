@@ -51,6 +51,7 @@ return call_user_func( function() {
 
 		// includes/changeop
 		'Wikibase\ChangeOps' => 'includes/changeop/ChangeOps.php',
+		'Wikibase\ChangeOpsMerge' => 'includes/changeop/ChangeOpsMerge.php',
 		'Wikibase\ChangeOp' => 'includes/changeop/ChangeOp.php',
 		'Wikibase\ChangeOpLabel' => 'includes/changeop/ChangeOpLabel.php',
 		'Wikibase\ChangeOpDescription' => 'includes/changeop/ChangeOpDescription.php',
@@ -90,6 +91,7 @@ return call_user_func( function() {
 		'Wikibase\Api\SetDescription' => 'includes/api/SetDescription.php',
 		'Wikibase\Api\SetLabel' => 'includes/api/SetLabel.php',
 		'Wikibase\Api\SetSiteLink' => 'includes/api/SetSiteLink.php',
+		'Wikibase\Api\MergeItems' => 'includes/api/MergeItems.php',
 		'Wikibase\Api\CreateClaim' => 'includes/api/CreateClaim.php',
 		'Wikibase\Api\GetClaims' => 'includes/api/GetClaims.php',
 		'Wikibase\Api\RemoveClaims' => 'includes/api/RemoveClaims.php',
