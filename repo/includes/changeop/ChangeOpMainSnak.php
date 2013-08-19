@@ -81,13 +81,13 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );
 
-		if ( $this->claimGuid === '' ) {
+		if ( is_null( $this->claimGuid ) || empty( $this->claimGuid ) ) {
 			$this->addClaim( $entity, $claims, $summary );
 		} else {
-			if ( $this->snak !== null ) {
-				$this->setClaim( $claims, $summary );
-			} else {
+			if ( $this->snak === null ) {
 				$this->removeClaim( $claims, $summary );
+			} else {
+				$this->setClaim( $claims, $summary );
 			}
 		}
 
