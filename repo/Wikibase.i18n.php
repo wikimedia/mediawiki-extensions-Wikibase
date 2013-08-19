@@ -332,6 +332,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$3|reference|references}} from claim',
 	'wikibase-item-summary-wbsetstatementrank' => 'Changed rank of statement from \'$3\' to \'$4\'',
+	'wikibase-item-summary-wbmergeitems-to' => 'Merged Item from \'$3\'',
+	'wikibase-item-summary-wbmergeitems-from' => 'Merged Item to \'$3\'',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
