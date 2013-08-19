@@ -95,9 +95,17 @@ end
 Before do |scenario|
   @config = config
   @browser = browser(environment, test_name(scenario), 'default')
+  $session_id = @browser.driver.instance_variable_get(:@bridge).session_id
+end
+
+def sauce_api(json)
+  %x{curl -H 'Content-Type:text/json' -s -X PUT -d '#{json}' http://#{ENV['SAUCE_ONDEMAND_USERNAME']}:#{ENV['SAUCE_ONDEMAND_ACCESS_KEY']}@saucelabs.com/rest/v1/#{ENV['SAUCE_ONDEMAND_USERNAME']}/jobs/#{$session_id}}
 end
 
 After do |scenario|
-  $session_id = @browser.driver.instance_variable_get(:@bridge).session_id
+  if environment == :cloudbees && !ENV["windir"]
+    sauce_api(%Q{{"passed": #{scenario.passed?}}})
+    sauce_api(%Q{{"public": true}})
+  end
   @browser.close
 end
