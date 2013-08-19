@@ -385,7 +385,7 @@ class EditEntity extends ModifyEntity {
 		$changeOps = array();
 
 		//check if the array is associative or in arrays by property
-		if( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ){
+		if( array_keys( $claims ) === range( 0, count( $claims ) - 1 ) ){
 			foreach( $claims as $subClaims ){
 				$changeOps = array_merge( $changeOps,
 					$this->getRemoveClaimsChangeOps( $subClaims, $guidGenerator ),
