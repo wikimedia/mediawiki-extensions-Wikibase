@@ -19,7 +19,7 @@ require 'active_support/all'
 require 'require_all'
 
 config = YAML.load_file('config/config.yml')
-config.each do |k,v|
+config.each do |k, v|
   eval("#{k} = '#{v}'")
 end
 
@@ -30,12 +30,37 @@ require_all 'features/support/utils'
 World(PageObject::PageFactory)
 
 def browser(environment, test_name, language)
-  local_browser(language)
+  if environment == :cloudbees
+    sauce_browser(test_name)
+  else
+    local_browser(language)
+  end
 end
 
 def environment
-  :local
+  if ENV['SAUCE_ONDEMAND_ACCESS_KEY'] && ENV['SAUCE_ONDEMAND_USERNAME']
+    :cloudbees
+  else
+    :local
+  end
 end
+
+def sauce_browser(test_name)
+  caps = Selenium::WebDriver::Remote::Capabilities.firefox
+  caps.version = "23"
+  caps.platform = "Windows 7"
+  caps[:name] = "#{test_name} #{ENV['JOB_NAME']}##{ENV['BUILD_NUMBER']}"
+
+  require 'selenium/webdriver/remote/http/persistent' # http_client
+  browser = Watir::Browser.new(
+      :remote,
+      :http_client => Selenium::WebDriver::Remote::Http::Persistent.new,
+      :url => "http://#{ENV['SAUCE_ONDEMAND_USERNAME']}:#{ENV['SAUCE_ONDEMAND_ACCESS_KEY']}@ondemand.saucelabs.com:80/wd/hub",
+      :desired_capabilities => caps)
+
+  browser
+end
+
 
 def local_browser(language)
   if ENV['BROWSER_LABEL']
