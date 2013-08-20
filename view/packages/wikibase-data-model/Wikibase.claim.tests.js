@@ -18,13 +18,13 @@
 	QUnit.test( 'constructor', function( assert ) {
 		var argumentLists = [
 			{
-				mainSnak: new wb.PropertyNoValueSnak( 42 ),
+				mainSnak: new wb.PropertyNoValueSnak( 'p42' ),
 				qualifiers: new wb.SnakList()
 			}, {
-				mainSnak: new wb.PropertySomeValueSnak( 9001 ),
+				mainSnak: new wb.PropertySomeValueSnak( 'p9001' ),
 				qualifiers: new wb.SnakList()
 			}, {
-				mainSnak: new wb.PropertyValueSnak( 23, new dv.StringValue( '~=[,,_,,]:3' ) ),
+				mainSnak: new wb.PropertyValueSnak( 'p23', new dv.StringValue( '~=[,,_,,]:3' ) ),
 				qualifiers: new wb.SnakList()
 			}
 		];
@@ -53,13 +53,13 @@
 
 	QUnit.test( 'setMainSnak and getMainSnak', function( assert ) {
 		var claim = new wb.Claim(
-				new wb.PropertyNoValueSnak( 42 ),
+				new wb.PropertyNoValueSnak( 'p42' ),
 				new wb.SnakList()
 			),
 			snaks = [
-				new wb.PropertyNoValueSnak( 9001 ),
-				new wb.PropertySomeValueSnak( 42 ),
-				new wb.PropertyValueSnak( 23, new dv.StringValue( '~=[,,_,,]:3' ) )
+				new wb.PropertyNoValueSnak( 'p9001' ),
+				new wb.PropertySomeValueSnak( 'p42' ),
+				new wb.PropertyValueSnak( 'p23', new dv.StringValue( '~=[,,_,,]:3' ) )
 			];
 
 		$.each( snaks, function( i, snak ) {
@@ -79,7 +79,7 @@
 	} );
 
 	QUnit.test( 'toJSON()', function( assert ) {
-		var claim = new wb.Claim( new wb.PropertyValueSnak( 42, new dv.StringValue( '~=[,,_,,]:3' ) ) );
+		var claim = new wb.Claim( new wb.PropertyValueSnak( 'p42', new dv.StringValue( '~=[,,_,,]:3' ) ) );
 
 		assert.ok(
 			claim.equals( wb.Claim.newFromJSON( claim.toJSON() ) ),
@@ -87,12 +87,12 @@
 		);
 
 		claim = new wb.Claim(
-			new wb.PropertyNoValueSnak( 42 ),
+			new wb.PropertyNoValueSnak( 'p42' ),
 			new wb.SnakList(
 				[
-					new wb.PropertyNoValueSnak( 9001 ),
-					new wb.PropertySomeValueSnak( 42 ),
-					new wb.PropertyValueSnak( 23, new dv.StringValue( '~=[,,_,,]:3' ) )
+					new wb.PropertyNoValueSnak( 'p9001' ),
+					new wb.PropertySomeValueSnak( 'p42' ),
+					new wb.PropertyValueSnak( 'p23', new dv.StringValue( '~=[,,_,,]:3' ) )
 				]
 			)
 		);
@@ -105,24 +105,24 @@
 
 	QUnit.test( 'equals()', function( assert ) {
 		var claims = [
-			new wb.Claim( new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ) ),
+			new wb.Claim( new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
 			new wb.Claim(
-				new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ),
+				new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ),
 				new wb.SnakList(
 					[
-						new wb.PropertyValueSnak( 2, new dv.StringValue( 'some string' ) ),
-						new wb.PropertySomeValueSnak( 9001 )
+						new wb.PropertyValueSnak( 'p2', new dv.StringValue( 'some string' ) ),
+						new wb.PropertySomeValueSnak( 'p9001' )
 					]
 				)
 			),
-			new wb.Claim( new wb.PropertyValueSnak( 42, new dv.StringValue( 'other string' ) ) ),
-			new wb.Claim( new wb.PropertySomeValueSnak( 9001 ) ),
+			new wb.Claim( new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'other string' ) ) ),
+			new wb.Claim( new wb.PropertySomeValueSnak( 'p9001' ) ),
 			new wb.Claim(
-				new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ),
+				new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ),
 				new wb.SnakList(
 					[
-						new wb.PropertyValueSnak( 43, new dv.StringValue( 'some string' ) ),
-						new wb.PropertySomeValueSnak( 9001 )
+						new wb.PropertyValueSnak( 'p43', new dv.StringValue( 'some string' ) ),
+						new wb.PropertySomeValueSnak( 'p9001' )
 					]
 				)
 			)
@@ -151,9 +151,9 @@
 		} );
 
 		// Compare claim to statement:
-		var claim = new wb.Claim( new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ) ),
+		var claim = new wb.Claim( new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
 			statement = new wb.Statement(
-				new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) )
+				new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) )
 			);
 
 		assert.ok(
