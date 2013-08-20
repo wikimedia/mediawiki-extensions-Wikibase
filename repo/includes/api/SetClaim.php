@@ -94,8 +94,12 @@ class SetClaim extends ApiWikibase {
 		$claimSaver = new ClaimSaver();
 
 		$params = $this->extractRequestParams();
+
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$token = isset( $params['token'] ) ? $params['token'] : '';
+
+		$user = $this->getUser();
+		$flags = ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 
 		$newRevisionId = null;
 
@@ -103,8 +107,9 @@ class SetClaim extends ApiWikibase {
 			$claim,
 			$baseRevisionId,
 			$token,
-			$this->getUser(),
-			$claimSummaryBuilder
+			$user,
+			$claimSummaryBuilder,
+			$flags
 		);
 		$this->handleSaveStatus( $status ); // die on error, report warnings, etc
 
