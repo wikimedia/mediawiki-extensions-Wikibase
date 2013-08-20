@@ -36,8 +36,8 @@ class SimpleSiteLink {
 		}
 
 		foreach( $badges as $badge ) {
-			if ( !is_string( $badge ) ) {
-				throw new InvalidArgumentException( 'Each value of $badges needs to be a string' );
+			if ( !( $badge instanceof Entity\ItemId ) ) {
+				throw new InvalidArgumentException( 'Each value of $badges needs to be a ItemId' );
 			}
 		}
 
@@ -66,6 +66,8 @@ class SimpleSiteLink {
 
 	/**
 	 * @since 0.5
+	 *
+	 * Returns an array of ItemIds
 	 *
 	 * @return array
 	 */

@@ -3,6 +3,8 @@
 namespace Wikibase\DataModel\Test;
 
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Wikibase\DataModel\SimpleSiteLink
@@ -106,16 +108,25 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( $badges, $expected );
 
 
-		$badges = array( 'Nyan Certified' );
+		$badges = array(
+			new ItemId( "q149" )
+		);
 		$expected = array_values( $badges );
 
 		$argLists[] = array( $badges, $expected );
 
 
 		// removing from the middle of array
-		$badges = array( 'FA', 'Nyan Certified', 'stub' );
+		$badges = array(
+			new ItemId( "q36" ),
+			new ItemId( "q149" ),
+			new ItemId( "q7" )
+		);
 
-		$key = array_search( 'Nyan Certified', $badges );
+		$key = array_search(
+			new ItemId( "q149" ),
+			$badges
+		);
 		unset( $badges[$key] );
 
 		$expected = array_values( $badges );
@@ -146,20 +157,32 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider stuffThatIsNotArrayOfStringsProvider
+	 * @dataProvider stuffThatIsNotArrayOfItemIdsProvider
 	 */
-	public function testCannotConstructWithNonArrayOfStringsBadges( $invalidBadges ) {
+	public function testCannotConstructWithNonArrayOfItemIdsBadges( $invalidBadges ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new SimpleSiteLink( 'enwiki', 'Wikidata', $invalidBadges );
 	}
 
-	public function stuffThatIsNotArrayOfStringsProvider() {
+	public function stuffThatIsNotArrayOfItemIdsProvider() {
 		$argLists = array();
 
-		$argLists[] = array( array( 'nyan', 42 ) );
-		$argLists[] = array( array( 'nyan', true ) );
-		$argLists[] = array( array( 'nyan', array() ) );
-		$argLists[] = array( array( 'nyan', null ) );
+		$argLists[] = array( array(
+			'nyan',
+			42
+		) );
+		$argLists[] = array( array(
+			'nyan',
+			array()
+		) );
+		$argLists[] = array( array(
+			new PropertyId( "p2" ),
+			new ItemId( "q149" )
+		) );
+		$argLists[] = array( array(
+			new PropertyId( "p2" ),
+			new PropertyId( "p3" )
+		) );
 
 		return $argLists;
 	}
