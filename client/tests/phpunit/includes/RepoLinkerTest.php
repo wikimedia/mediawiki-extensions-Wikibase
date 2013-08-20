@@ -105,10 +105,13 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array( '//www.example.com/wiki/Cat', $settings[0], 'Cat' ),
-			array( 'http://www.example.com/wiki/Frog', $settings[2], 'Frog' )
+			array( 'http://www.example.com/wiki/Frog', $settings[2], 'Frog' ),
+			array( '//www.example.com/wiki/Kategorie:Drei%C3%9Figj%C3%A4hriger_Krieg', $settings[0],
+				'Kategorie:Dreißigjähriger_Krieg' ),
+			array( '//www.example.com/wiki/Why%3F_(American_band)', $settings[0],
+				'Why? (American band)' )
 		);
 	}
-
 	/**
 	 * @dataProvider formatLinkProvider
 	 */
@@ -131,9 +134,9 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				'<a class="plainlinks" tabindex="1" href="http://www.example.com/w/index.php'
-					. '?title=Q730&amp;diff=prev&amp;oldid=778">diff</a>',
+					. '?title=Item%3AQ60&amp;diff=prev&amp;oldid=778">diff</a>',
 				$settings[2],
-				'http://www.example.com/w/index.php?title=Q730&diff=prev&oldid=778',
+				'http://www.example.com/w/index.php?title=Item%3AQ60&diff=prev&oldid=778',
 				'diff',
 				array(
 					'class' => 'plainlinks',
@@ -280,6 +283,16 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 		$settings = $this->getRepoSettings();
 
 		return array(
+			array(
+				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Item%3AQ60',
+				$settings[2],
+				'http://www.example.com/w/api.php',
+				array(
+					'action' => 'query',
+					'prop' => 'revisions',
+					'titles' => 'Item:Q60'
+				)
+			),
 			array(
 				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Q60',
 				$settings[2],
