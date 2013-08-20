@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EntityId;
 use Wikibase\RepoLinker;
 
 /**
@@ -92,6 +94,27 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @dataProvider getEntityTitleProvider
+	 */
+	public function testGetEntityTitle( $expected, $settings, EntityId $entityId ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->getEntityTitle( $entityId ) );
+	}
+
+	public function getEntityTitleProvider() {
+		$itemId = ItemId::newFromNumber( 388 );
+		$propertyId = PropertyId::newFromNumber( 472 );
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array( 'Q388', $settings[0], $itemId ),
+			array( 'Item:Q388', $settings[2], $itemId ),
+			array( 'Property:P472', $settings[0], $propertyId )
+		);
+	}
+
+	/**
 	 * @dataProvider getPageUrlProvider
 	 */
 	public function testGetPageUrl( $expected, $settings, $page ) {
@@ -105,10 +128,13 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array( '//www.example.com/wiki/Cat', $settings[0], 'Cat' ),
-			array( 'http://www.example.com/wiki/Frog', $settings[2], 'Frog' )
+			array( 'http://www.example.com/wiki/Frog', $settings[2], 'Frog' ),
+			array( '//www.example.com/wiki/Kategorie:Drei%C3%9Figj%C3%A4hriger_Krieg', $settings[0],
+				'Kategorie:Dreißigjähriger_Krieg' ),
+			array( '//www.example.com/wiki/Why%3F_(American_band)', $settings[0],
+				'Why? (American band)' )
 		);
 	}
-
 	/**
 	 * @dataProvider formatLinkProvider
 	 */
@@ -131,9 +157,9 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				'<a class="plainlinks" tabindex="1" href="http://www.example.com/w/index.php'
-					. '?title=Q730&amp;diff=prev&amp;oldid=778">diff</a>',
+					. '?title=Item%3AQ60&amp;diff=prev&amp;oldid=778">diff</a>',
 				$settings[2],
-				'http://www.example.com/w/index.php?title=Q730&diff=prev&oldid=778',
+				'http://www.example.com/w/index.php?title=Item%3AQ60&diff=prev&oldid=778',
 				'diff',
 				array(
 					'class' => 'plainlinks',
@@ -280,6 +306,16 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 		$settings = $this->getRepoSettings();
 
 		return array(
+			array(
+				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Item%3AQ60',
+				$settings[2],
+				'http://www.example.com/w/api.php',
+				array(
+					'action' => 'query',
+					'prop' => 'revisions',
+					'titles' => 'Item:Q60'
+				)
+			),
 			array(
 				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Q60',
 				$settings[2],
