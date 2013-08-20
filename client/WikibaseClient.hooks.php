@@ -23,6 +23,7 @@ use Skin;
 use SpecialRecentChanges;
 use StripState;
 use Title;
+use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
@@ -238,29 +239,33 @@ final class ClientHooks {
 
 		wfProfileIn( __METHOD__ );
 
-		$rcType = $rc->getAttribute( 'rc_type' );
-		if ( $rcType == RC_EXTERNAL ) {
-			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
+		if ( $rc->getAttribute( 'rc_type' ) == RC_EXTERNAL ) {
+			$changeGenerator = new ExternalChangeGenerator( Settings::get( 'repoSiteId' ) );
 
-			if ( !is_array( $params ) ) {
-				$varType = is_object( $params ) ? get_class( $params ) : gettype( $params );
-				trigger_error( __CLASS__ . ' : $rc_params is not unserialized correctly.  It has '
-					. 'been returned as ' . $varType, E_USER_WARNING );
+			try {
+				$externalChange = $changeGenerator->newFromRecentChange( $rc );
+			} catch ( UnexpectedValueException $ex ) {
+				// @fixme use rc_source column to better distinguish
+				// Wikibase changes vs. non-wikibase, and unexpected
+				// stuff in Wikibase changes.
+				wfWarn( 'Invalid or not a Wikibase change.' );
 				return false;
 			}
 
-			if ( array_key_exists( 'wikibase-repo-change', $params ) ) {
-				$line = ExternalChangesLine::changesLine( $changesList, $rc );
-				if ( $line == false ) {
-					return false;
-				}
+			$formatter = new ChangeLineFormatter(
+				$changesList->getUser(),
+				$changesList->getLanguage(),
+				WikibaseClient::getDefaultInstance()->newRepoLinker(),
+				$changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' )
+			);
 
-				$classes[] = 'wikibase-edit';
-				$s = $line;
-			}
+			$line = $formatter->format( $externalChange, $rc->getTitle(), $rc->counter );
+
+			$classes[] = 'wikibase-edit';
+			$s = $line;
 		}
 
-		// OutputPage will ignore multiply calls
+		// OutputPage will ignore multiple calls
 		$changesList->getOutput()->addModuleStyles( 'wikibase.client.changeslist.css' );
 
 		wfProfileOut( __METHOD__ );
