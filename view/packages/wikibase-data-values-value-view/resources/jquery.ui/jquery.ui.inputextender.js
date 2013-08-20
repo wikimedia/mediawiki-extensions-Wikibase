@@ -213,10 +213,6 @@
 				this.options.initCallback();
 			}
 
-			$.each( this.options.content, function( i, node ) {
-				$( node ).addClass( self.widgetBaseClass + '-contentnode' );
-			} );
-
 			this.$extension.hide();
 		},
 
@@ -224,10 +220,28 @@
 		 * @see jQuery.Widget.destroy
 		 */
 		destroy: function() {
-			this.$extension.remove();
+			if( !this.$extension ) {
+				return; // already destroyed
+			}
+
+			clearTimeout( this._animationTimeout );
+			this._animationTimeout = null;
+
+			this.element.removeClass( this.widgetBaseClass + '-input' );
+
+			this.$extension.stop( true );
+			this.$extension.detach();
+			// There might be references to extension's content nodes on the outside, so make sure
+			// those content nodes get cleaned up as well:
+			this.$extension.children().removeClass( this.widgetBaseClass + '-contentnode' );
+			this.$extension = null;
+
+			this.$closeIcon.remove();
+			this.$closeIcon = null;
 
 			$.Widget.prototype.destroy.call( this );
 
+			// TODO: Improve performance by maintaining array with widget references instead.
 			if( $( ':' + this.widgetBaseClass ).length === 0 ) {
 				$( 'html' ).off( '.' + this.widgetName );
 			}
@@ -242,6 +256,7 @@
 			this.$extension.empty().append( this.$closeIcon );
 
 			$.each( this.options.content, function( i, $node ) {
+				$node.addClass( self.widgetBaseClass + '-contentnode' );
 				self.$extension.append( $node );
 			} );
 		},

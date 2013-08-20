@@ -243,9 +243,12 @@
 		 * @see $.Widget.destroy
 		 */
 		destroy: function() {
-			this.$menu.data( 'menu' ).destroy();
-			this.$menu.remove();
+			var menu = this.$menu.data( 'menu' );
+			if( menu ) {
+				menu.destroy();
+			}
 
+			this.$menu.remove();
 			this.$auto.remove();
 			this.$curr.remove();
 			this.$prev.remove();
