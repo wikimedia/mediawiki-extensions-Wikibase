@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "499865f5_c268b48b",
+        "filename": "lib/includes/serializers/DescriptionSerializer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-20T12:26:54Z",
+      "side": 1,
+      "message": "MultilingualSerializer",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_02345c90",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-20T12:26:54Z",
+      "side": 1,
+      "message": "getLanguageFallbackChains is only available in MultilingualSerializationOptions\n\nthis class accepts EntitySerializationOptions.\n\nperhaps this method belongs in the MultilingualSerializer or some place else?",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "499865f5_62ac40f0",
         "filename": "lib/includes/serializers/EntitySerializer.php",
         "patchSetId": 15
@@ -37,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "499865f5_82f78cd1",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-20T12:26:54Z",
+      "side": 1,
+      "message": "MultilingualSerializer",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "499865f5_a2b6483b",
         "filename": "lib/includes/serializers/MultilingualSerializer.php",
         "patchSetId": 15
@@ -48,6 +99,57 @@
       "writtenOn": "2013-08-20T11:00:56Z",
       "side": 1,
       "message": "big method. Would be nice if it could be split up a bit.",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_c230b4ea",
+        "filename": "lib/tests/phpunit/serializers/MultilingualSerializerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-20T12:26:54Z",
+      "side": 1,
+      "message": "why is this initialised again?",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_a233a8f4",
+        "filename": "lib/tests/phpunit/serializers/MultilingualSerializerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-20T12:26:54Z",
+      "side": 1,
+      "message": "why is this initialised again?",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_8236ace4",
+        "filename": "lib/tests/phpunit/serializers/MultilingualSerializerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-20T12:26:54Z",
+      "side": 1,
+      "message": "why is this initialised again?",
       "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
