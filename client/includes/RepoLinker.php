@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Html;
+use InvalidArgumentException;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -42,25 +43,47 @@ class RepoLinker {
 	/**
 	 * Get namespace of an entity in string format
 	 *
-	 * @since 0.2
+	 * @since 0.5
 	 *
 	 * @param string $entityType
 	 *
 	 * @return string
+	 * @throws InvalidArgumentException
 	 */
 	public function getNamespace( $entityType ) {
-		$nsList = $this->namespaces;
-		$ns = null;
-
 		$contentType = 'wikibase-' . $entityType;
-		if ( is_array( $nsList ) && array_key_exists( $contentType, $nsList ) ) {
-			$ns = $nsList[$contentType];
-		} else {
-			// todo: support queries and better error handling here
-			return false;
+
+		if ( !array_key_exists( $contentType, $this->namespaces ) ) {
+			throw new InvalidArgumentException( 'Unknown entity namespace' );
 		}
 
-		return $ns;
+		return $this->namespaces[$contentType];
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	public function getEntityNamespace( EntityId $entityId ) {
+		$entityType = $entityId->getEntityType();
+		return $this->getNamespace( $entityType );
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	public function getEntityTitle( EntityId $entityId ) {
+		$ns = $this->getEntityNamespace( $entityId );
+		$title = $entityId->getSerialization();
+
+		if ( strlen( $ns ) > 0 ) {
+			$title = "$ns:$title";
+		}
+
+		return $title;
 	}
 
 	/**
@@ -93,7 +116,9 @@ class RepoLinker {
 	}
 
 	/**
-	 * @since 0.3
+	 * Format a link, with url encoding
+	 *
+	 * @since 0.5
 	 *
 	 * @param string $url
 	 * @param string $text
@@ -111,6 +136,8 @@ class RepoLinker {
 	}
 
 	/**
+	 * Constructs an html link to an entity
+	 *
 	 * @since 0.4
 	 *
 	 * @param ExternalChange $externalChange
@@ -119,7 +146,7 @@ class RepoLinker {
 	 * @return string
 	 */
 	public function buildEntityLink( EntityId $entityId, array $classes = array() ) {
-		$prefixedId = $entityId->getSerialization();
+		$title = $this->getEntityTitle( $entityId );
 
 		$class = 'wb-entity-link';
 
@@ -129,20 +156,22 @@ class RepoLinker {
 
 		return $this->formatLink(
 			$this->getEntityUrl( $entityId ),
-			$prefixedId,
+			$title,
 			array( 'class' => $class )
 		);
 	}
 
 	/**
+	 * Constructs a link to an entity
+	 *
 	 * @param EntityId
 	 *
 	 * @return string
 	 */
 	public function getEntityUrl( EntityId $entityId ) {
-		$prefixedId = $entityId->getPrefixedId();
+		$title = $this->getEntityTitle( $entityId );
 
-		return $this->getPageUrl( $prefixedId );
+		return $this->getPageUrl( $title );
 	}
 
 	/**
