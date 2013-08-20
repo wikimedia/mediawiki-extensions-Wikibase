@@ -104,7 +104,10 @@ call_user_func( function() {
 	$wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserhooks/PropertyParserFunction.php';
 
 	// includes/recentchanges
-	$wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
+	$wgAutoloadClasses['Wikibase\ChangeLineFormatter'] = $dir . 'includes/recentchanges/ChangeLineFormatter.php';
+	$wgAutoloadClasses['Wikibase\ExternalChange'] = $dir . 'includes/recentchanges/ExternalChange.php';
+	$wgAutoloadClasses['Wikibase\ExternalChangeSerializer'] = $dir . 'includes/recentchanges/ExternalChangeSerializer.php';
+	$wgAutoloadClasses['Wikibase\ExternalChangeUnserializer'] = $dir . 'includes/recentchanges/ExternalChangeUnserializer.php';
 	$wgAutoloadClasses['Wikibase\ExternalRecentChange'] = $dir . 'includes/recentchanges/ExternalRecentChange.php';
 	$wgAutoloadClasses['Wikibase\RecentChangesFilterOptions'] 	= $dir . 'includes/recentchanges/RecentChangesFilterOptions.php';
 
