@@ -1,11 +1,11 @@
 <?php
 
-namespace DataValues\Test;
+namespace DataValues\Tests;
 
-use DataValues\BooleanValue;
+use DataValues\StringValue;
 
 /**
- * @covers DataValues\BooleanValue
+ * @covers DataValues\StringValue
  *
  * @file
  * @since 0.1
@@ -18,7 +18,7 @@ use DataValues\BooleanValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class BooleanValueTest extends DataValueTest {
+class StringValueTest extends DataValueTest {
 
 	/**
 	 * @see DataValueTest::getClass
@@ -28,7 +28,7 @@ class BooleanValueTest extends DataValueTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return 'DataValues\BooleanValue';
+		return 'DataValues\StringValue';
 	}
 
 	/**
@@ -44,25 +44,23 @@ class BooleanValueTest extends DataValueTest {
 		$argLists[] = array( false );
 		$argLists[] = array( false, 42 );
 		$argLists[] = array( false, array() );
-		$argLists[] = array( false, '1' );
-		$argLists[] = array( false, '' );
-		$argLists[] = array( false, 0 );
-		$argLists[] = array( false, 1 );
-		$argLists[] = array( false, 'foo' );
+		$argLists[] = array( false, false );
+		$argLists[] = array( false, true );
 		$argLists[] = array( false, null );
-		$argLists[] = array( true, false );
-		$argLists[] = array( true, true );
+		$argLists[] = array( true, 'foo' );
+		$argLists[] = array( true, '' );
+		$argLists[] = array( true, ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
 
 		return $argLists;
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\BooleanValue $boolean
+	 * @param StringValue $string
 	 * @param array $arguments
 	 */
-	public function testGetValue( BooleanValue $boolean, array $arguments ) {
-		$this->assertEquals( $arguments[0], $boolean->getValue() );
+	public function testGetValue( StringValue $string, array $arguments ) {
+		$this->assertEquals( $arguments[0], $string->getValue() );
 	}
 
 }

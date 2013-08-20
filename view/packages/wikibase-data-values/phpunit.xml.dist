@@ -14,7 +14,7 @@
          verbose="true">
     <testsuites>
         <testsuite name="DataValues">
-            <directory>tests</directory>
+            <directory>tests/phpunit</directory>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -1,6 +1,6 @@
 <?php
 
-namespace DataValues\Test;
+namespace DataValues\Tests;
 
 use DataValues\DataValueFactory;
 

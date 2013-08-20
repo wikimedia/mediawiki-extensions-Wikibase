@@ -37,17 +37,30 @@ if ( defined( 'DataValues_VERSION' ) ) {
 define( 'DataValues_VERSION', '0.1 alpha' );
 
 spl_autoload_register( function ( $className ) {
-	// @codeCoverageIgnoreStart
-	static $classes = false;
-
-	if ( $classes === false ) {
-		$classes = include( __DIR__ . '/' . 'DataValues.classes.php' );
+	if ( in_array( $className, array( 'Comparable', 'Copyable', 'Hashable', 'Immutable' ) ) ) {
+		require_once __DIR__ . '/interfaces/' . $className . '.php';
+		return;
 	}
 
-	if ( array_key_exists( $className, $classes ) ) {
-		include_once __DIR__ . '/' . $classes[$className];
+	$className = ltrim( $className, '\\' );
+	$fileName = '';
+	$namespace = '';
+
+	if ( $lastNsPos = strripos( $className, '\\') ) {
+		$namespace = substr( $className, 0, $lastNsPos );
+		$className = substr( $className, $lastNsPos + 1 );
+		$fileName  = str_replace( '\\', '/', $namespace ) . '/';
 	}
-	// @codeCoverageIgnoreEnd
+
+	$fileName .= str_replace( '_', '/', $className ) . '.php';
+
+	$namespaceSegments = explode( '\\', $namespace );
+
+	if ( $namespaceSegments[0] === 'DataValues' ) {
+		if ( count( $namespaceSegments ) === 1 || $namespaceSegments[1] !== 'Tests' ) {
+			require_once __DIR__ . '/src/' . substr( $fileName, 11 );
+		}
+	}
 } );
 
 if ( defined( 'MEDIAWIKI' ) ) {
