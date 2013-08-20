@@ -64,8 +64,6 @@ module EntityPage
   # ***** METHODS *****
   def wait_for_api_callback
     #TODO: workaround for weird error randomly claiming that apiCallWaitingMessage-element is not attached to the DOM anymore
-    sleep 1
-    return
     wait_until do
       apiCallWaitingMessage? == false
     end
