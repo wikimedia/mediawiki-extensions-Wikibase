@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_62ac40f0",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-20T11:00:56Z",
+      "side": 1,
+      "message": "Why is this method in this class? It is not using any of the fields in this class or calling other methods in it. Seems misplaced",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_a2b6483b",
+        "filename": "lib/includes/serializers/MultilingualSerializer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-20T11:00:56Z",
+      "side": 1,
+      "message": "big method. Would be nice if it could be split up a bit.",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
