@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\TimeValue;
 
 /**
- * Tests for the DataValues\TimeValue class.
+ * @covers DataValues\TimeValue
  *
  * @file
  * @since 0.1
@@ -256,7 +256,7 @@ class TimeValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\TimeValue $time
+	 * @param TimeValue $time
 	 * @param array $arguments
 	 */
 	public function testGetTime( TimeValue $time, array $arguments ) {
@@ -265,7 +265,7 @@ class TimeValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\TimeValue $time
+	 * @param TimeValue $time
 	 * @param array $arguments
 	 */
 	public function testGetTimezone( TimeValue $time, array $arguments ) {
@@ -274,7 +274,7 @@ class TimeValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\TimeValue $time
+	 * @param TimeValue $time
 	 * @param array $arguments
 	 */
 	public function testGetBefore( TimeValue $time, array $arguments ) {
@@ -283,7 +283,7 @@ class TimeValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\TimeValue $time
+	 * @param TimeValue $time
 	 * @param array $arguments
 	 */
 	public function testGetAfter( TimeValue $time, array $arguments ) {
@@ -292,7 +292,7 @@ class TimeValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\TimeValue $time
+	 * @param TimeValue $time
 	 * @param array $arguments
 	 */
 	public function testGetPrecision( TimeValue $time, array $arguments ) {
@@ -301,7 +301,7 @@ class TimeValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\TimeValue $time
+	 * @param TimeValue $time
 	 * @param array $arguments
 	 */
 	public function testGetCalendarModel( TimeValue $time, array $arguments ) {
@@ -310,7 +310,7 @@ class TimeValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\TimeValue $time
+	 * @param TimeValue $time
 	 * @param array $arguments
 	 */
 	public function testGetValue( TimeValue $time, array $arguments ) {

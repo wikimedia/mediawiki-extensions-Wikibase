@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\BooleanValue;
 
 /**
- * Tests for the DataValues\BooleanValue class.
+ * @covers DataValues\BooleanValue
  *
  * @file
  * @since 0.1

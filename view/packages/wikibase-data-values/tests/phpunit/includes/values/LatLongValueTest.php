@@ -2,7 +2,7 @@
 
 namespace DataValues\Test;
 
-use DataValues\GeoCoordinateValue;
+use DataValues\GlobeCoordinateValue;
 use DataValues\LatLongValue;
 
 /**

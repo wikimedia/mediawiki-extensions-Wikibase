@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\NumberValue;
 
 /**
- * Tests for the DataValues\NumberValue class.
+ * @covers DataValues\NumberValue
  *
  * @file
  * @since 0.1
@@ -64,7 +64,7 @@ class NumberValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\NumberValue $number
+	 * @param NumberValue $number
 	 * @param array $arguments
 	 */
 	public function testGetValue( NumberValue $number, array $arguments ) {

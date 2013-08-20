@@ -13,7 +13,7 @@
  */
 return array(
 	'DataValues\BooleanValue' => 'includes/values/BooleanValue.php',
-	'DataValues\GeoCoordinateValue' => 'includes/values/GeoCoordinateValue.php',
+	'DataValues\GlobeCoordinateValue' => 'includes/values/GlobeCoordinateValue.php',
 	'DataValues\IriValue' => 'includes/values/IriValue.php',
 	'DataValues\LatLongValue' => 'includes/values/LatLongValue.php',
 	'DataValues\MonolingualTextValue' => 'includes/values/MonolingualTextValue.php',

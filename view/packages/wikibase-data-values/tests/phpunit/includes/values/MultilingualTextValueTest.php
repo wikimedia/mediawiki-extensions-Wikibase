@@ -6,7 +6,7 @@ use DataValues\MonolingualTextValue;
 use DataValues\MultilingualTextValue;
 
 /**
- * Tests for the DataValues\MultilingualTextValue class.
+ * @covers DataValues\MultilingualTextValue
  *
  * @file
  * @since 0.1
@@ -84,7 +84,7 @@ class MultilingualTextTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\MultilingualTextValue $texts
+	 * @param MultilingualTextValue $texts
 	 * @param array $arguments
 	 */
 	public function testGetTexts( MultilingualTextValue $texts, array $arguments ) {
@@ -104,7 +104,7 @@ class MultilingualTextTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\MultilingualTextValue $texts
+	 * @param MultilingualTextValue $texts
 	 * @param array $arguments
 	 */
 	public function testGetValue( MultilingualTextValue $texts, array $arguments ) {

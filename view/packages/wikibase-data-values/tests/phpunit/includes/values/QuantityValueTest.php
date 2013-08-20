@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\QuantityValue;
 
 /**
- * Tests for the DataValues\QuantityValue class.
+ * @covers DataValues\QuantityValue
  *
  * @file
  * @since 0.1
@@ -94,7 +94,7 @@ class QuantityValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\QuantityValue $quantity
+	 * @param QuantityValue $quantity
 	 * @param array $arguments
 	 */
 	public function testGetValue( QuantityValue $quantity, array $arguments ) {
@@ -103,7 +103,7 @@ class QuantityValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\QuantityValue $quantity
+	 * @param QuantityValue $quantity
 	 * @param array $arguments
 	 */
 	public function testGetAmount( QuantityValue $quantity, array $arguments ) {
@@ -112,7 +112,7 @@ class QuantityValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\QuantityValue $quantity
+	 * @param QuantityValue $quantity
 	 * @param array $arguments
 	 */
 	public function testGetUnit( QuantityValue $quantity, array $arguments ) {
@@ -122,7 +122,7 @@ class QuantityValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\QuantityValue $quantity
+	 * @param QuantityValue $quantity
 	 * @param array $arguments
 	 */
 	public function testGetAccuracy( QuantityValue $quantity, array $arguments ) {

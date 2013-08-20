@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\MonolingualTextValue;
 
 /**
- * Tests for the DataValues\MonolingualTextValue class.
+ * @covers DataValues\MonolingualTextValue
  *
  * @file
  * @since 0.1
@@ -62,7 +62,7 @@ class MonolingualTextTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\MonolingualTextValue $text
+	 * @param MonolingualTextValue $text
 	 * @param array $arguments
 	 */
 	public function testGetText( MonolingualTextValue $text, array $arguments ) {
@@ -71,7 +71,7 @@ class MonolingualTextTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\MonolingualTextValue $text
+	 * @param MonolingualTextValue $text
 	 * @param array $arguments
 	 */
 	public function testGetLanguageCode( MonolingualTextValue $text, array $arguments ) {

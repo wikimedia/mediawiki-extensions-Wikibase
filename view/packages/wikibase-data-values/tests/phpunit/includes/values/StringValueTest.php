@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\StringValue;
 
 /**
- * Tests for the DataValues\StringValue class.
+ * @covers DataValues\StringValue
  *
  * @file
  * @since 0.1
@@ -56,7 +56,7 @@ class StringValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\StringValue $string
+	 * @param StringValue $string
 	 * @param array $arguments
 	 */
 	public function testGetValue( StringValue $string, array $arguments ) {

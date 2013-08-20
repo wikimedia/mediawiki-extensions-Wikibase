@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\UnknownValue;
 
 /**
- * Tests for the DataValues\UnknownValue class.
+ * @covers DataValues\UnknownValue
  *
  * @file
  * @since 0.1
@@ -57,7 +57,7 @@ class UnknownValueTest extends DataValueTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\UnknownValue $value
+	 * @param UnknownValue $value
 	 * @param array $arguments
 	 */
 	public function testGetValue( UnknownValue $value, array $arguments ) {

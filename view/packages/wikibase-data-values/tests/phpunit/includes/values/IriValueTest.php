@@ -5,7 +5,7 @@ namespace DataValues\Test;
 use DataValues\IriValue;
 
 /**
- * Tests for the DataValues\IriValue class.
+ * @covers DataValues\IriValue
  *
  * @file
  * @since 0.1

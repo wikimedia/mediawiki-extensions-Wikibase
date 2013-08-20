@@ -8,7 +8,7 @@ use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 
 /**
- * Tests for the DataValues\UnDeserializableValue class.
+ * @covers DataValues\UnDeserializableValue
  *
  * @file
  * @since 0.1
@@ -54,8 +54,8 @@ class UnDeserializableValueTest extends DataValueTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \DataValues\UnDeserializableValue $value
-	 * @param array                $arguments
+	 * @param UnDeserializableValue $value
+	 * @param array $arguments
 	 */
 	public function testGetValue( UnDeserializableValue $value, array $arguments ) {
 		$this->assertEquals( $arguments[0], $value->getValue() );
@@ -64,8 +64,8 @@ class UnDeserializableValueTest extends DataValueTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \DataValues\UnDeserializableValue $value
-	 * @param array                $arguments
+	 * @param UnDeserializableValue $value
+	 * @param array $arguments
 	 */
 	public function testGetArrayValue( UnDeserializableValue $value, array $arguments ) {
 		$this->assertEquals( $arguments[0], $value->getArrayValue() );
@@ -74,8 +74,8 @@ class UnDeserializableValueTest extends DataValueTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \DataValues\UnDeserializableValue $value
-	 * @param array                $arguments
+	 * @param UnDeserializableValue $value
+	 * @param array $arguments
 	 */
 	public function testGetTargetType( UnDeserializableValue $value, array $arguments ) {
 		$this->assertEquals( $arguments[1], $value->getTargetType() );
