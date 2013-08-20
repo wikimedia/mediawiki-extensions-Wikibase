@@ -251,7 +251,7 @@ class LanguageWithConversion {
 			$pieces = array_keys( $this->translatePool );
 			$block = implode( "\0", $pieces );
 			$translatedBlock = $this->parentLanguage->getConverter()->translate(
-				$block, $this->language->getCode()
+				$block, $this->languageCode
 			);
 			$translatedPieces = explode( "\0", $translatedBlock );
 			$this->translateCache += array_combine( $pieces, $translatedPieces );
