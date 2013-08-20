@@ -62,6 +62,11 @@ module EntityPage
   div(:mwNotificationContent, :xpath => "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
 
   # ***** METHODS *****
+  def navigate_to_entity url
+    navigate_to url
+    wait_for_entity_to_load
+  end
+
   def wait_for_api_callback
     #TODO: workaround for weird error randomly claiming that apiCallWaitingMessage-element is not attached to the DOM anymore
     sleep 1

@@ -14,11 +14,6 @@ class ItemPage
 
   # ***** METHODS *****
   # item url navigation
-  def navigate_to_item url
-    navigate_to url
-    wait_for_entity_to_load
-  end
-
   def navigate_to_item_en
     navigate_to @@item_url + "?uselang=en"
   end
