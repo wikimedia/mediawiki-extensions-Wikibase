@@ -19,7 +19,8 @@ namespace Wikibase\Test;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
-use DataValues\GeoCoordinateValue;
+use DataValues\GlobeCoordinateValue;
+use DataValues\LatLongValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
@@ -110,14 +111,15 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			//TODO: must be from a list of configured values
 
 			//globe-coordinate
-			array( 'globe-coordinate', 'Foo', false, 'GeoCoordinateValue expected, string supplied' ),
-			array( 'globe-coordinate', new NumberValue( 7 ), false, 'GeoCoordinateValue expected' ),
+			array( 'globe-coordinate', 'Foo', false, 'GlobeCoordinateValue expected, string supplied' ),
+			array( 'globe-coordinate', new NumberValue( 7 ), false, 'GlobeCoordinateValue expected' ),
 
 			//globe-coordinate[globe]
-			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, '' ), false, 'globe: empty string should be invalid' ),
-			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, 'http://' . str_repeat('x', 256) ), false, 'globe: too long' ),
-			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, 'http://acme.com/globe' ), true, 'globe: URL' ),
-			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, ' http://acme.com/globe ' ), false, 'globe: untrimmed' ),
+			// FIXME: this is testing unimplemented behaviour? Probably broken...
+			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, '' ), false, 'globe: empty string should be invalid' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, 'http://' . str_repeat('x', 256) ), false, 'globe: too long' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, 'http://acme.com/globe' ), true, 'globe: URL' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, ' http://acme.com/globe ' ), false, 'globe: untrimmed' ),
 			//TODO: must be an item reference
 			//TODO: must be from a list of configured values
 		);
