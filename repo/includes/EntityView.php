@@ -19,7 +19,9 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use ValueFormatters\ValueFormatterFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use ValueFormatters\TimeFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\MwTimeIsoFormatter;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -621,7 +623,8 @@ abstract class EntityView extends \ContextSource {
 		}
 		$valueFormatterOptions = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $languageCode,
-			Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap
+			Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap,
+			TimeFormatter::OPT_TIME_ISO_FORMATTER => new MwTimeIsoFormatter( \Language::factory( $languageCode ) ),
 		) );
 
 		// TODO: display a "placeholder" message for novalue/somevalue snak
@@ -629,29 +632,23 @@ abstract class EntityView extends \ContextSource {
 		if ( $claim->getMainSnak()->getType() === 'value' ) {
 			$value = $claim->getMainSnak()->getDataValue();
 
-			// TODO: Bad to have a switch for different data types here, implement a formatter!
-			if( $value instanceof \DataValues\TimeValue ) {
-				$value = $value->getTime() . ' (' . $value->getCalendarModel() . ')';
-			} elseif( $value instanceof \DataValues\UnDeserializableValue ) {
-					$value = $value->getReason();
+			$valueFormatter = $this->valueFormatters->newFormatter(
+				$value->getType(), $valueFormatterOptions
+			);
+
+			if ( $valueFormatter !== null ) {
+				$value = $valueFormatter->format( $value );
 			} else {
-				// Proper way, use value formatter:
-				$valueFormatter = $this->valueFormatters->newFormatter(
-					$value->getType(), $valueFormatterOptions
-				);
-
-				if( $valueFormatter !== null ) {
-					$value = $valueFormatter->format( $value );
-				} else {
-					// If value representation is a string, just display that one as a
-					// fallback for values not having a formatter implemented yet.
+				// If value representation is a string, just display that one as a
+				// fallback for values not having a formatter implemented yet.
+				if ( is_string( $value->getValue() ) ) {
 					$value = $value->getValue();
-
-					if( !is_string( $value ) ) {
-						// TODO: don't fail here, display a message in the UI instead
-						throw new MWException( 'Displaying of values of type "'
-							. $value->getType() . '" not supported yet' );
-					}
+				} elseif ( $value instanceof \DataValues\UnDeserializableValue ) {
+					$value = $value->getReason();
+				} else {
+					// TODO: don't fail here, display a message in the UI instead
+					throw new MWException( 'Displaying of values of type "'
+						. $value->getType() . '" not supported yet' );
 				}
 			}
 		}
