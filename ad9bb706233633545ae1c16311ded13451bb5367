@@ -122,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "499865f5_e28a101c",
+        "filename": "lib/tests/phpunit/serializers/MultilingualSerializerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-08-20T13:46:43Z",
+      "side": 1,
+      "message": "That\u0027s to follow LabelSerializerTest ... anyway I guess it would be better to use a new environment in every test.",
+      "parentUuid": "499865f5_c230b4ea",
+      "revId": "ad9bb706233633545ae1c16311ded13451bb5367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "499865f5_a233a8f4",
         "filename": "lib/tests/phpunit/serializers/MultilingualSerializerTest.php",
         "patchSetId": 15
