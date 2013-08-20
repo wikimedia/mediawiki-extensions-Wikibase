@@ -23,6 +23,7 @@ use Skin;
 use SpecialRecentChanges;
 use StripState;
 use Title;
+use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
@@ -238,29 +239,34 @@ final class ClientHooks {
 
 		wfProfileIn( __METHOD__ );
 
-		$rcType = $rc->getAttribute( 'rc_type' );
-		if ( $rcType == RC_EXTERNAL ) {
-			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
+		if ( $rc->getAttribute( 'rc_type' ) == RC_EXTERNAL ) {
+			$changeFactory = new ExternalChangeFactory( Settings::get( 'repoSiteId' ) );
 
-			if ( !is_array( $params ) ) {
-				$varType = is_object( $params ) ? get_class( $params ) : gettype( $params );
-				trigger_error( __CLASS__ . ' : $rc_params is not unserialized correctly.  It has '
-					. 'been returned as ' . $varType, E_USER_WARNING );
+			try {
+				$externalChange = $changeFactory->newFromRecentChange( $rc );
+			} catch ( UnexpectedValueException $ex ) {
+				// @fixme use rc_source column to better distinguish
+				// Wikibase changes vs. non-wikibase, and unexpected
+				// stuff in Wikibase changes.
+				wfWarn( 'Invalid or not a Wikibase change.' );
 				return false;
 			}
 
-			if ( array_key_exists( 'wikibase-repo-change', $params ) ) {
-				$line = ExternalChangesLine::changesLine( $changesList, $rc );
-				if ( $line == false ) {
-					return false;
-				}
+			// fixme: inject formatter and flags into a changes list formatter
+			$formatter = new ChangeLineFormatter(
+				$changesList->getUser(),
+				$changesList->getLanguage(),
+				WikibaseClient::getDefaultInstance()->newRepoLinker()
+			);
 
-				$classes[] = 'wikibase-edit';
-				$s = $line;
-			}
+			$flag = $changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' );
+			$line = $formatter->format( $externalChange, $rc->getTitle(), $rc->counter, $flag );
+
+			$classes[] = 'wikibase-edit';
+			$s = $line;
 		}
 
-		// OutputPage will ignore multiply calls
+		// OutputPage will ignore multiple calls
 		$changesList->getOutput()->addModuleStyles( 'wikibase.client.changeslist.css' );
 
 		wfProfileOut( __METHOD__ );
