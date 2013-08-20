@@ -1223,7 +1223,7 @@ $messages['es'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar las modificaciones de Wikidata en los cambios recientes',
 	'wikibase-watchlist-show-changes-pref' => 'Mostrar las modificaciones de Wikidata en tu lista de seguimiento',
 	'wikibase-error-invalid-entity-id' => 'El ID ingresado es desconocido para el sistema. Utilice un identificador de entidad válido.',
-	'special-unconnectedpages' => 'Páginas no conectados con elementos',
+	'special-unconnectedpages' => 'Páginas no conectadas a elementos',
 	'wikibase-unconnectedpages-legend' => 'Opciones para las páginas no conectadas',
 	'wikibase-unconnectedpages-submit' => 'Continuar',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" no es un código de idioma válido.',
@@ -1411,6 +1411,7 @@ $messages['fi'] = array(
 );
 
 /** French (français)
+ * @author Ayack
  * @author Crochet.david
  * @author Gomoko
  * @author Linedwell
@@ -1434,7 +1435,7 @@ $messages['fr'] = array(
 	'wikibase-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
 	'wikibase-comment-sitelink-remove' => 'Lien de langue supprimé : $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modification|modifications}}',
-	'wikibase-dataitem' => 'Élément de donnée',
+	'wikibase-dataitem' => 'Élément sur Wikidata',
 	'wikibase-editlinks' => 'Modifier les liens',
 	'wikibase-editlinkstitle' => 'Modifier les liens interlangue',
 	'wikibase-linkitem-addlinks' => 'Ajouter des liens',
@@ -2035,6 +2036,8 @@ $messages['it'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase non supporta ancora il tipo di proprietà per la proprietà $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Questa è una modifica su Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche su Wikidata nella tua lista degli osservati speciali',
 	'wikibase-error-serialize-error' => 'Impossibile serializzare i dati',
 	'wikibase-error-invalid-entity-id' => "L'ID specificato è sconosciuto al sistema. Utilizza un ID di entità valido.",
@@ -2655,6 +2658,7 @@ $messages['ml'] = array(
 );
 
 /** Marathi (मराठी)
+ * @author V.narsikar
  * @author Ydyashad
  * @author संतोष दहिवळ
  */
@@ -2666,6 +2670,7 @@ $messages['mr'] = array(
 	'wikibase-comment-sitelink-remove' => 'भाषा दुवा काढला: $1',
 	'wikibase-rc-hide-wikidata' => 'विकिडाटा $1',
 	'wikibase-rc-show-wikidata-pref' => 'विकिडाटा संपादने अलीकडील बदल मध्ये दाखवा',
+	'wikibase-rc-wikibase-edit-title' => 'विकिडाटाचे संपादन',
 );
 
 /** Malay (Bahasa Melayu)
