@@ -5,6 +5,8 @@ use IContextSource;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+use ChangesList;
+use RecentChange;
 use SiteSQLStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\MovePageNotice;
@@ -254,31 +256,22 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s,
-		\RecentChange $rc, &$classes = array() ) {
+	public static function onOldChangesListRecentChangesLine( ChangesList &$changesList, &$s,
+		RecentChange $rc, &$classes = array() ) {
 
 		wfProfileIn( __METHOD__ );
 
-		$rcType = $rc->getAttribute( 'rc_type' );
-		if ( $rcType == RC_EXTERNAL ) {
-			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
+		if ( $rc->getAttribute( 'rc_type' ) == RC_EXTERNAL ) {
+			$localId = Settings::get( 'siteLocalID' );
+			$changeLineFormatter = new ChangeLineFormatter( $changesList, $localId );
+			$line = $changeLineFormatter->format( $rc );
 
-			if ( !is_array( $params ) ) {
-				$varType = is_object( $params ) ? get_class( $params ) : gettype( $params );
-				trigger_error( __CLASS__ . ' : $rc_params is not unserialized correctly.  It has '
-					. 'been returned as ' . $varType, E_USER_WARNING );
+			if ( $line == false ) {
 				return false;
 			}
 
-			if ( array_key_exists( 'wikibase-repo-change', $params ) ) {
-				$line = ExternalChangesLine::changesLine( $changesList, $rc );
-				if ( $line == false ) {
-					return false;
-				}
-
-				$classes[] = 'wikibase-edit';
-				$s = $line;
-			}
+			$classes[] = 'wikibase-edit';
+			$s = $line;
 		}
 
 		wfProfileOut( __METHOD__ );
