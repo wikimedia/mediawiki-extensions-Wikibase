@@ -44,9 +44,12 @@ return call_user_func( function() {
 		'Wikibase\PropertyParserFunctionRenderer' => 'includes/parserhooks/PropertyParserFunctionRenderer.php',
 
 		// includes/recentchanges
-		'Wikibase\ExternalChangesLine' => 'includes/recentchanges/ExternalChangesLine.php',
+		'Wikibase\ChangeLineFormatter' => 'includes/recentchanges/ChangeLineFormatter.php',
+		'Wikibase\ExternalChange' => 'includes/recentchanges/ExternalChange.php',
+		'Wikibase\ExternalChangeGenerator' => 'includes/recentchanges/ExternalChangeGenerator.php',
 		'Wikibase\ExternalRecentChange' => 'includes/recentchanges/ExternalRecentChange.php',
 		'Wikibase\RecentChangesFilterOptions' => 'includes/recentchanges/RecentChangesFilterOptions.php',
+		'Wikibase\RevisionObject' => 'includes/recentchanges/RevisionObject.php',
 
 		// includes/specials
 		'Wikibase\Client\Specials\SpecialUnconnectedPages' => 'includes/specials/SpecialUnconnectedPages.php',

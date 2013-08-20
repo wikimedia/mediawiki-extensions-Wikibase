@@ -213,6 +213,11 @@ return call_user_func( function() {
 		return $GLOBALS['wgDBname'];
 	};
 
+	$defaults['repoSiteId'] = function( SettingsArray $settings ) {
+		// Default is same as siteGlobalID, assuming client adn wiki are the same.
+		return $settings->getSetting( 'siteGlobalID' );
+	};
+
 	$defaults['siteGroup'] = function ( SettingsArray $settings ) {
 		// by default lookup from SiteSQLStore, can override with setting for performance reasons
 		return null;
