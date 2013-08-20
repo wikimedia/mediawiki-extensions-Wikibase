@@ -168,6 +168,10 @@ $.widget( 'valueview.valueview', PARENT, {
 			this._expert = null;
 		}
 
+		// TODO: destroying the expert will leave no plain text of the last value. Once we
+		//  implemented formatters, think about leaving a formatted text here. On the other hand,
+		//  formatting will be assynchronous which would be a problem in this situation.
+
 		return PARENT.prototype.destroy.call( this );
 	},
 

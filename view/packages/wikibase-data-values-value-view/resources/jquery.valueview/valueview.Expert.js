@@ -88,7 +88,7 @@
 		if( viewPortNode instanceof $
 			&& viewPortNode.length === 1
 		) {
-			viewPortNode = viewPortNode[0];
+			viewPortNode = viewPortNode.get( 0 );
 		}
 
 		if( !( viewPortNode.nodeType ) ) { // IE8 can't check for instanceof HTMLELement
@@ -158,18 +158,27 @@
 		_init: function() {},
 
 		/**
-		 * Gets called when the valueview's destroy function is called.
+		 * Destroys the expert. All generated viewport output is being deleted and all resources
+		 * (private members, events handlers) will be released.
 		 *
-		 * TODO: think about and document definition of this destroy. What is the destroy supposed
-		 *  to do exactly? E.g. when having an expert responsible for displaying an input, should
-		 *  the destroy leave the input or load an expert for displaying the value statically first?
+		 * This will not preserve the plain text of the last represented value as one might expect
+		 * when thinking about the common jQuery.Widget's behavior. This is mostly because it is
+		 * not the Expert's responsibility to be able to serve a plain text representation of the
+		 * value. If the value should be represented as plain text after the expert's construction,
+		 * let the responsible controller use a value formatter for that.
 		 *
 		 * @since 0.1
 		 */
 		destroy: function() {
-			this.$viewPort.removeClass( this.uiBaseClass );
+			if( !this.$viewPort ) {
+				return; // destroyed already
+			}
+			this.$viewPort.removeClass( this.uiBaseClass ).empty();
 			this.$viewPort = null;
 			this._viewState = null;
+			this._viewNotifier = null;
+			this._messageProvider = null;
+			this._options = null;
 		},
 
 		/**

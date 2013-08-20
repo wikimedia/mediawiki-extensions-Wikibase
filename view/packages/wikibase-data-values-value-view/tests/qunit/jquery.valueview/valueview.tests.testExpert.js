@@ -58,7 +58,7 @@ function testExpert( testDefinition ) {
 			}, {
 				title: 'instance with notifier',
 				args: [
-					$( '<div/>' ),
+					document.createElement( 'div' ),
 					new valueview.MockViewState(),
 					new Notifier()
 				]
@@ -126,9 +126,32 @@ function testExpert( testDefinition ) {
 			args.expert instanceof valueview.Expert,
 			'expert instance of jQuery.valueview.Expert'
 		);
+
+		var viewPortArg = args.constructorArgs[0],
+			viewPortElement = viewPortArg instanceof $ ? viewPortArg.get( 0 ) : viewPortArg;
+
+		assert.ok(
+			args.expert.$viewPort.get( 0 ) === viewPortElement,
+			'View port node given to constructor is used as the actual view port of the expert'
+		);
 	} );
 
-	expertCases.test( 'parser', function( args, assert ) {
+	expertCasesTestAndCleanup( 'destroy', function( args, assert ) {
+		var $viewPort = $( args.constructorArgs[0] );
+
+		args.expert.destroy();
+
+		assert.ok(
+			$viewPort.children().length === 0 && $viewPort.text() === '',
+			'Viewport is empty after expert\'s destruction'
+		);
+
+		args.expert.destroy();
+		assert.ok( true, 'Calling destroy() again will not lead to unexpected error.' );
+
+	} );
+
+	expertCasesTestAndCleanup( 'parser', function( args, assert ) {
 		var valueParser = args.expert.parser();
 
 		assert.ok(
@@ -253,16 +276,26 @@ function testExpert( testDefinition ) {
 		} );
 	} );
 
-	var expertCasesMemberCallTest = function( memberName ) {
-		expertCases.test( memberName, function( args, assert ) {
+	var expertCasesMemberCallTest = function( memberName, additionalAssertionsFn ) {
+		expertCasesTestAndCleanup( memberName, function( args, assert ) {
 			args.expert[ memberName ]();
 			assert.ok(
 				true,
 				memberName + '() has been called'
 			);
+			if( additionalAssertionsFn ) {
+				additionalAssertionsFn( args, assert );
+			}
 		} );
 	};
-	expertCasesMemberCallTest( 'draw' );
+	expertCasesMemberCallTest( 'draw', function( args, assert ) {
+		var $viewPort = $( args.constructorArgs[0] );
+
+		assert.ok(
+			$viewPort.text() !== '' || $viewPort.children.length > 0,
+			'Viewport node is not empty after draw()'
+		);
+	} );
 	expertCasesMemberCallTest( 'focus' );
 	expertCasesMemberCallTest( 'blur' );
 

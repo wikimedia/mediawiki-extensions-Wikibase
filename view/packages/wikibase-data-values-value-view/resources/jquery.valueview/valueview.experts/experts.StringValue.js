@@ -52,9 +52,17 @@
 		 * @see jQuery.valueview.Expert.destroy
 		 */
 		destroy: function() {
-			PARENT.prototype.destroy.call( this );
-			// TODO: destroy input. Should unbind "eachchange" event and remove "inputAutoExpand"
-			//  functionality. Also see valueview.Expert's destroy TODO.
+			if( !this.$input ) {
+				return; // destroyed already
+			}
+
+			var inputExtender = this.$input.data( 'inputextender' );
+			if( inputExtender ) {
+				inputExtender.destroy();
+			}
+			this.$input = null;
+
+			PARENT.prototype.destroy.call( this );  // empties viewport
 		},
 
 		/**
