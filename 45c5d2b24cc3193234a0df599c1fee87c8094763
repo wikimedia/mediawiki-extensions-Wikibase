@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_e28bf016",
+        "filename": "lib/includes/LanguageWithConversion.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-20T12:51:36Z",
+      "side": 1,
+      "message": "it\u0027s possible to create a new LanguageWithConversion instance without using the factory, with a parent language that does not have a converter (or has FakeConverter).\n\nWhat happens then when we call translate()? I don\u0027t see a translate() function in FakeConverter.",
+      "revId": "45c5d2b24cc3193234a0df599c1fee87c8094763",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
