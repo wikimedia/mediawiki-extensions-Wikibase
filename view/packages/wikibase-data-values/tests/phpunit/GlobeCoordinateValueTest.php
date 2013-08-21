@@ -126,4 +126,31 @@ class GlobeCoordinateValueTest extends DataValueTest {
 		$this->assertEquals( $expected, $actual );
 	}
 
+	public function testArrayValueCompatibility() {
+		// These serializations where generated using revision f91f65f989cc3ffacbe924012d8f5b574e0b710c
+		// getArrayValue + serialize
+
+		$simpleSerialization = 'a:5:{s:8:"latitude";d:-4.2000000000000002;s:9:"longitude";d:42;s:8:"altitude";N;s:9:"precision";d:0.01;s:5:"globe";s:4:"mars";}';
+
+		$arrayForm = unserialize( $simpleSerialization );
+		$geoCoordinate = GlobeCoordinateValue::newFromArray( $arrayForm );
+
+		$this->assertEquals( -4.2, $geoCoordinate->getLatitude() );
+		$this->assertEquals( 42, $geoCoordinate->getLongitude() );
+		$this->assertEquals( 0.01, $geoCoordinate->getPrecision() );
+		$this->assertEquals( 'mars', $geoCoordinate->getGlobe() );
+
+		$simpleSerialization = 'a:5:{s:8:"latitude";d:-4.2000000000000002;s:9:"longitude";d:-42;s:8:"altitude";d:9001;s:9:"precision";d:1;s:5:"globe";s:33:"http://www.wikidata.org/entity/Q2";}';
+
+		$arrayForm = unserialize( $simpleSerialization );
+		$geoCoordinate = GlobeCoordinateValue::newFromArray( $arrayForm );
+
+		$this->assertEquals( -4.2, $geoCoordinate->getLatitude() );
+		$this->assertEquals( -42, $geoCoordinate->getLongitude() );
+		$this->assertEquals( 1, $geoCoordinate->getPrecision() );
+		$this->assertEquals( 'http://www.wikidata.org/entity/Q2', $geoCoordinate->getGlobe() );
+	}
+
+	// TODO: add compatibility test for using serialize directly
+
 }
