@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use DataValues\StringValue;
-use OutOfBoundsException;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 
@@ -17,6 +16,7 @@ use Wikibase\Lib\PropertyNotFoundException;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ReferencedUrlFinder {
 
@@ -26,6 +26,11 @@ class ReferencedUrlFinder {
 	 * @var PropertyDataTypeLookup
 	 */
 	protected $propertyDataTypeLookup;
+
+	/**
+	 * @var string[]
+	 */
+	protected $foundURLs;
 
 	/**
 	 * @since 0.4
@@ -42,41 +47,40 @@ class ReferencedUrlFinder {
 	 * @return string[]
 	 */
 	public function findSnakLinks( array $snaks ) {
-		$foundURLs = array();
+		$this->foundURLs = array();
 
 		foreach ( $snaks as $snak ) {
-			// PropertyValueSnaks might have a value referencing a URL, find those:
 			if( $snak instanceof PropertyValueSnak ) {
-				try {
-					$type = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-				} catch ( OutOfBoundsException $ex ) {
-					wfLogWarning( 'No data type known for property ' . $snak->getPropertyId() );
-					continue;
-				} catch ( PropertyNotFoundException $ex ) {
-					wfLogWarning( 'No data type known for unknown property ' . $snak->getPropertyId() );
-					continue;
-				}
-				
-				if ( $type !== 'url' ) {
-					continue;
-				}
-
-				$snakValue = $snak->getDataValue();
-
-				if( $snakValue === null ) {
-					// shouldn't ever run into this, but make sure!
-					continue;
-				}
-
-				if ( $snakValue instanceof StringValue ) {
-					$foundURLs[] = $snakValue->getValue();
-				} else {
-					wfLogWarning( 'Unexpected value type for url: ' . $snakValue->getType() );
+				if ( $this->isUrlProperty( $snak->getPropertyId() ) ) {
+					$this->findPropertyValueSnakLinks( $snak );
 				}
 			}
 		}
 
-		return array_unique( $foundURLs );
+		return array_unique( $this->foundURLs );
+	}
+
+	protected function findPropertyValueSnakLinks( PropertyValueSnak $snak ) {
+		$snakValue = $snak->getDataValue();
+
+		if ( $snakValue instanceof StringValue ) {
+			$this->foundURLs[] = $snakValue->getValue();
+		} else {
+			wfLogWarning( 'Unexpected value type for url: ' . $snakValue->getType() );
+		}
+	}
+
+	protected function isUrlProperty( EntityId $propertyId ) {
+		try {
+			$type = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		} catch ( PropertyNotFoundException $ex ) {
+			// FIXME: wrong place to stop exception propagation.
+			// Either do not catch this here or throw a new exception instead.
+			wfLogWarning( 'No data type known for unknown property ' . $propertyId );
+			return false;
+		}
+
+		return $type === 'url';
 	}
 
 }
