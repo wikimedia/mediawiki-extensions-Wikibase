@@ -128,11 +128,11 @@ class GlobeCoordinateValueTest extends DataValueTest {
 
 	public function testArrayValueCompatibility() {
 		// These serializations where generated using revision f91f65f989cc3ffacbe924012d8f5b574e0b710c
-		// getArrayValue + serialize
+		// The strings are the result of calling getArrayValue on the objects and then feeding this to serialize.
 
-		$simpleSerialization = 'a:5:{s:8:"latitude";d:-4.2000000000000002;s:9:"longitude";d:42;s:8:"altitude";N;s:9:"precision";d:0.01;s:5:"globe";s:4:"mars";}';
+		$serialization = 'a:5:{s:8:"latitude";d:-4.2000000000000002;s:9:"longitude";d:42;s:8:"altitude";N;s:9:"precision";d:0.01;s:5:"globe";s:4:"mars";}';
 
-		$arrayForm = unserialize( $simpleSerialization );
+		$arrayForm = unserialize( $serialization );
 		$geoCoordinate = GlobeCoordinateValue::newFromArray( $arrayForm );
 
 		$this->assertEquals( -4.2, $geoCoordinate->getLatitude() );
@@ -140,9 +140,9 @@ class GlobeCoordinateValueTest extends DataValueTest {
 		$this->assertEquals( 0.01, $geoCoordinate->getPrecision() );
 		$this->assertEquals( 'mars', $geoCoordinate->getGlobe() );
 
-		$simpleSerialization = 'a:5:{s:8:"latitude";d:-4.2000000000000002;s:9:"longitude";d:-42;s:8:"altitude";d:9001;s:9:"precision";d:1;s:5:"globe";s:33:"http://www.wikidata.org/entity/Q2";}';
+		$serialization = 'a:5:{s:8:"latitude";d:-4.2000000000000002;s:9:"longitude";d:-42;s:8:"altitude";d:9001;s:9:"precision";d:1;s:5:"globe";s:33:"http://www.wikidata.org/entity/Q2";}';
 
-		$arrayForm = unserialize( $simpleSerialization );
+		$arrayForm = unserialize( $serialization );
 		$geoCoordinate = GlobeCoordinateValue::newFromArray( $arrayForm );
 
 		$this->assertEquals( -4.2, $geoCoordinate->getLatitude() );
@@ -151,6 +151,20 @@ class GlobeCoordinateValueTest extends DataValueTest {
 		$this->assertEquals( 'http://www.wikidata.org/entity/Q2', $geoCoordinate->getGlobe() );
 	}
 
-	// TODO: add compatibility test for using serialize directly
+	public function testSerializeCompatibility() {
+		// These serializations where generated using revision f91f65f989cc3ffacbe924012d8f5b574e0b710c
+		// The strings are the result of feeding the objects directly into PHPs serialize method.
+
+		$geoCoordinate = unserialize( 'C:29:"DataValues\GeoCoordinateValue":27:{[-4.2,-42,null,0.01,"mars"]}' );
+		$this->assertInstanceOf( $this->getClass(), $geoCoordinate );
+
+		$this->assertEquals( -4.2, $geoCoordinate->getLatitude() );
+		$this->assertEquals( -42, $geoCoordinate->getLongitude() );
+		$this->assertEquals( 0.01, $geoCoordinate->getPrecision() );
+		$this->assertEquals( 'mars', $geoCoordinate->getGlobe() );
+
+		$geoCoordinate = unserialize( 'C:29:"DataValues\GeoCoordinateValue":27:{[-4.2,-42,9001,0.01,"mars"]}' );
+		$this->assertInstanceOf( $this->getClass(), $geoCoordinate );
+	}
 
 }
