@@ -32,25 +32,26 @@ class UnknownValueTest extends DataValueTest {
 		return 'DataValues\UnknownValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
+		$argLists[] = array( 42 );
+		$argLists[] = array( array() );
 		$argLists[] = array( false );
-		$argLists[] = array( true, 42 );
-		$argLists[] = array( true, array() );
-		$argLists[] = array( true, false );
-		$argLists[] = array( true, true );
-		$argLists[] = array( true, null );
-		$argLists[] = array( true, 'foo' );
-		$argLists[] = array( true, '' );
-		$argLists[] = array( true, ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+		$argLists[] = array( true );
+		$argLists[] = array( null );
+		$argLists[] = array( 'foo' );
+		$argLists[] = array( '' );
+		$argLists[] = array( ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+
+
+		return $argLists;
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array();
 
 		return $argLists;
 	}

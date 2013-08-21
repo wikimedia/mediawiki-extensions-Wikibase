@@ -32,52 +32,50 @@ class MultilingualTextTest extends DataValueTest {
 		return 'DataValues\MultilingualTextValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
-		$argLists[] = array( false );
-		$argLists[] = array( false, 42 );
-		$argLists[] = array( false, false );
-		$argLists[] = array( false, true );
-		$argLists[] = array( false, null );
-		$argLists[] = array( false, 'foo' );
-		$argLists[] = array( false, 'en' );
-		$argLists[] = array( false, 'en', 42 );
-		$argLists[] = array( false, 'en', false );
-		$argLists[] = array( false, 'en', array() );
-		$argLists[] = array( false, 'en', null );
-		$argLists[] = array( false, '', 'foo' );
-		$argLists[] = array( false, 'en', 'foo' );
-		$argLists[] = array( false, 'en', ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
-		$argLists[] = array( false, new MonolingualTextValue( 'en', 'foo' ) );
-
-		$argLists[] = array( true, array() );
-		$argLists[] = array( true, array( new MonolingualTextValue( 'en', 'foo' ) ) );
-		$argLists[] = array( true, array( new MonolingualTextValue( 'en', 'foo' ), new MonolingualTextValue( 'de', 'foo' ) ) );
-		$argLists[] = array( true, array( new MonolingualTextValue( 'en', 'foo' ), new MonolingualTextValue( 'de', 'bar' ) ) );
-		$argLists[] = array( true, array(
+		$argLists[] = array( array() );
+		$argLists[] = array( array( new MonolingualTextValue( 'en', 'foo' ) ) );
+		$argLists[] = array( array( new MonolingualTextValue( 'en', 'foo' ), new MonolingualTextValue( 'de', 'foo' ) ) );
+		$argLists[] = array( array( new MonolingualTextValue( 'en', 'foo' ), new MonolingualTextValue( 'de', 'bar' ) ) );
+		$argLists[] = array( array(
 			new MonolingualTextValue( 'en', 'foo' ),
 			new MonolingualTextValue( 'de', ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' )
 		) );
 
-		$argLists[] = array( false, array( 'foo' ) );
-		$argLists[] = array( false, array( 42 => 'foo' ) );
-		$argLists[] = array( false, array( '' => 'foo' ) );
-		$argLists[] = array( false, array( 'en' => 42 ) );
-		$argLists[] = array( false, array( 'en' => null ) );
-		$argLists[] = array( false, array( 'en' => true ) );
-		$argLists[] = array( false, array( 'en' => array() ) );
-		$argLists[] = array( false, array( 'en' => 4.2 ) );
+		return $argLists;
+	}
 
-		$argLists[] = array( false, array( new MonolingualTextValue( 'en', 'foo' ), false ) );
-		$argLists[] = array( false, array( new MonolingualTextValue( 'en', 'foo' ), 'foobar' ) );
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 42 );
+		$argLists[] = array( false );
+		$argLists[] = array( true );
+		$argLists[] = array( null );
+		$argLists[] = array( 'foo' );
+		$argLists[] = array( 'en' );
+		$argLists[] = array( 'en', 42 );
+		$argLists[] = array( 'en', false );
+		$argLists[] = array( 'en', array() );
+		$argLists[] = array( 'en', null );
+		$argLists[] = array( '', 'foo' );
+		$argLists[] = array( 'en', 'foo' );
+		$argLists[] = array( 'en', ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+		$argLists[] = array( new MonolingualTextValue( 'en', 'foo' ) );
+
+		$argLists[] = array( array( 'foo' ) );
+		$argLists[] = array( array( 42 => 'foo' ) );
+		$argLists[] = array( array( '' => 'foo' ) );
+		$argLists[] = array( array( 'en' => 42 ) );
+		$argLists[] = array( array( 'en' => null ) );
+		$argLists[] = array( array( 'en' => true ) );
+		$argLists[] = array( array( 'en' => array() ) );
+		$argLists[] = array( array( 'en' => 4.2 ) );
+
+		$argLists[] = array( array( new MonolingualTextValue( 'en', 'foo' ), false ) );
+		$argLists[] = array( array( new MonolingualTextValue( 'en', 'foo' ), 'foobar' ) );
 
 		return $argLists;
 	}

@@ -32,41 +32,40 @@ class GlobeCoordinateValueTest extends DataValueTest {
 		return 'DataValues\GlobeCoordinateValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
-		$argLists[] = array( true, new LatLongValue( 4.2, 4.2 ), 1 );
-		$argLists[] = array( true, new LatLongValue( 4.2, 42 ), 1 );
-		$argLists[] = array( true, new LatLongValue( 42, 4.2 ), 0.1 );
-		$argLists[] = array( true, new LatLongValue( 42, 42 ), 0.1 );
-		$argLists[] = array( true, new LatLongValue( -4.2, -4.2 ), 0.1 );
-		$argLists[] = array( true, new LatLongValue( 4.2, -42 ), 0.1 );
-		$argLists[] = array( true, new LatLongValue( -42, 4.2 ), 10 );
-		$argLists[] = array( true, new LatLongValue( 0, 0 ), 0.001 );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1 );
+		$argLists[] = array( new LatLongValue( 4.2, 42 ), 1 );
+		$argLists[] = array( new LatLongValue( 42, 4.2 ), 0.1 );
+		$argLists[] = array( new LatLongValue( 42, 42 ), 0.1 );
+		$argLists[] = array( new LatLongValue( -4.2, -4.2 ), 0.1 );
+		$argLists[] = array( new LatLongValue( 4.2, -42 ), 0.1 );
+		$argLists[] = array( new LatLongValue( -42, 4.2 ), 10 );
+		$argLists[] = array( new LatLongValue( 0, 0 ), 0.001 );
+
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1, GlobeCoordinateValue::GLOBE_EARTH );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1, 'terminus' );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1, "Schar's World" );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1, 'coruscant' );
+
+		return $argLists;
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), null );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 'foo' );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), true );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), array( 1 ) );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), '1' );
+
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1, null );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1, array( 1 ) );
+		$argLists[] = array( new LatLongValue( 4.2, 4.2 ), 1, 1 );
 
 		// TODO: test precisions that are out of the valid range
-
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), null );
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), 'foo' );
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), true );
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), array( 1 ) );
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), '1' );
-
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), 1, null );
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), 1, array( 1 ) );
-		$argLists[] = array( false, new LatLongValue( 4.2, 4.2 ), 1, 1 );
-
-		$argLists[] = array( true, new LatLongValue( 4.2, 4.2 ), 1, GlobeCoordinateValue::GLOBE_EARTH );
-		$argLists[] = array( true, new LatLongValue( 4.2, 4.2 ), 1, 'terminus' );
-		$argLists[] = array( true, new LatLongValue( 4.2, 4.2 ), 1, "Schar's World" );
-		$argLists[] = array( true, new LatLongValue( 4.2, 4.2 ), 1, 'coruscant' );
 
 		return $argLists;
 	}

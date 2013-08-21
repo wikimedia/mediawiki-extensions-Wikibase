@@ -31,31 +31,30 @@ class MonolingualTextTest extends DataValueTest {
 		return 'DataValues\MonolingualTextValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
+		$argLists[] = array( 'en', 'foo' );
+		$argLists[] = array( 'en', ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+
+		return $argLists;
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 42 );
+		$argLists[] = array( array() );
 		$argLists[] = array( false );
-		$argLists[] = array( false, 42 );
-		$argLists[] = array( false, array() );
-		$argLists[] = array( false, false );
-		$argLists[] = array( false, true );
-		$argLists[] = array( false, null );
-		$argLists[] = array( false, 'foo' );
-		$argLists[] = array( false, 'en' );
-		$argLists[] = array( false, 'en', 42 );
-		$argLists[] = array( false, 'en', false );
-		$argLists[] = array( false, 'en', array() );
-		$argLists[] = array( false, 'en', null );
-		$argLists[] = array( false, '', 'foo' );
-		$argLists[] = array( true, 'en', 'foo' );
-		$argLists[] = array( true, 'en', ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+		$argLists[] = array( true );
+		$argLists[] = array( null );
+		$argLists[] = array( 'foo' );
+		$argLists[] = array( 'en' );
+		$argLists[] = array( 'en', 42 );
+		$argLists[] = array( 'en', false );
+		$argLists[] = array( 'en', array() );
+		$argLists[] = array( 'en', null );
+		$argLists[] = array( '', 'foo' );
 
 		return $argLists;
 	}

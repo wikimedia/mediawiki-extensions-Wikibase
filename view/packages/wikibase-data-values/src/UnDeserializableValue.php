@@ -2,6 +2,8 @@
 
 namespace DataValues;
 
+use InvalidArgumentException;
+
 /**
  * Class representing a value that could not be unserialized for some reason.
  * It contains the raw native data structure representing the value,
@@ -35,24 +37,24 @@ class UnDeserializableValue extends DataValueObject {
 	/**
 	 * @since 0.1
 	 *
-	 * @param string $type  The originally intended type
-	 * @param mixed  $data  The raw data structure
+	 * @param string $type The originally intended type
+	 * @param mixed $data The raw data structure
 	 * @param string $error The error that occurred when processing the original data structure.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @internal param mixed $value
 	 */
 	public function __construct( $data, $type, $error ) {
 		if ( !is_null( $type ) && !is_string( $type ) ) {
-			throw new \InvalidArgumentException( '$type must be string or null' );
+			throw new InvalidArgumentException( '$type must be string or null' );
 		}
 
 		if ( is_object( $data ) ) {
-			throw new \InvalidArgumentException( '$data must not be an object' );
+			throw new InvalidArgumentException( '$data must not be an object' );
 		}
 
 		if ( !is_string( $error ) ) {
-			throw new \InvalidArgumentException( '$error must be a string' );
+			throw new InvalidArgumentException( '$error must be a string' );
 		}
 
 		$this->data = $data;

@@ -26,15 +26,13 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public abstract function getClass();
 
-	/**
-	 * First element can be a boolean indication if the successive values are valid,
-	 * or a string indicating the type of exception that should be thrown (ie not valid either).
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public abstract function constructorProvider();
+	public function validConstructorArgumentsProvider() {
+		return array();
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		return array();
+	}
 
 	/**
 	 * Creates and returns a new instance of the concrete class.
@@ -56,44 +54,45 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 	 * @return array [instance, constructor args]
 	 */
 	public function instanceProvider() {
-		$phpFails = array( $this, 'newInstance' );
+		$instanceBuilder = array( $this, 'newInstance' );
 
-		return array_filter( array_map(
-			function( array $args ) use ( $phpFails ) {
-				$isValid = array_shift( $args ) === true;
-
-				if ( $isValid ) {
-					return array( call_user_func_array( $phpFails, $args ), $args );
-				}
-				else {
-					return false;
-				}
+		return array_map(
+			function( array $args ) use ( $instanceBuilder ) {
+				return array(
+					call_user_func_array( $instanceBuilder, $args ),
+					$args
+				);
 			},
-			$this->constructorProvider()
-		), 'is_array' );
+			$this->validConstructorArgumentsProvider()
+		);
 	}
 
 	/**
-	 * @dataProvider constructorProvider
+	 * @dataProvider validConstructorArgumentsProvider
 	 *
 	 * @since 0.1
 	 */
-	public function testConstructor() {
-		$args = func_get_args();
+	public function testConstructorWithValidArguments() {
+		$dataItem = call_user_func_array(
+			array( $this, 'newInstance' ),
+			func_get_args()
+		);
 
-		$valid = array_shift( $args );
-		$pokemons = null;
-
-		if ( $valid === false ) {
-			$valid = 'Exception';
-		}
-
-		if ( is_string( $valid ) ) {
-			$this->setExpectedException( $valid );
-		}
-
-		$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
 		$this->assertInstanceOf( $this->getClass(), $dataItem );
+	}
+
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 *
+	 * @since 0.1
+	 */
+	public function testConstructorWithInvalidArguments() {
+		$this->setExpectedException( 'Exception' );
+
+		call_user_func_array(
+			array( $this, 'newInstance' ),
+			func_get_args()
+		);
 	}
 
 	/**

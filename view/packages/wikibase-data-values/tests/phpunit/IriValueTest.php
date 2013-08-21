@@ -31,45 +31,45 @@ class IriValueTest extends DataValueTest {
 		return 'DataValues\IriValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
+		$argLists[] = array( 'ohi', 'foo', 'bar', 'baz' );
+		$argLists[] = array( 'http', '//www.wikidata.org/w/index.php', 'title=Special:Version', 'sv-credits-datavalues' );
+		$argLists[] = array( 'ohi', 'foo', '', 'baz' );
+		$argLists[] = array( 'ohi', 'foo', 'bar', '' );
+		$argLists[] = array( 'ohi', 'foo', '', '' );
+		$argLists[] = array( 'ohi', 'foo' );
+
+		return $argLists;
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array();
+
+		$argLists[] = array( 42 );
+		$argLists[] = array( array() );
 		$argLists[] = array( false );
-		$argLists[] = array( false, 42 );
-		$argLists[] = array( false, array() );
-		$argLists[] = array( false, false );
-		$argLists[] = array( false, true );
-		$argLists[] = array( false, null );
-		$argLists[] = array( false, 'foo' );
-		$argLists[] = array( false, '' );
-		$argLists[] = array( false, ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+		$argLists[] = array( true );
+		$argLists[] = array( null );
+		$argLists[] = array( 'foo' );
+		$argLists[] = array( '' );
+		$argLists[] = array( ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
 
-		$argLists[] = array( false, '', '', '', '' );
-		$argLists[] = array( false, 'foo', '', '', '' );
-		$argLists[] = array( false, '', 'bar', '', '' );
-		$argLists[] = array( false, '', 'foo', 'bar', 'baz' );
-		$argLists[] = array( false, 'foo', '', 'bar', 'baz' );
-		$argLists[] = array( false, '***', 'foo', 'bar', 'baz' );
-		$argLists[] = array( false, 'abc42', 'foo', 'bar', 'baz' );
+		$argLists[] = array( '', '', '', '' );
+		$argLists[] = array( 'foo', '', '', '' );
+		$argLists[] = array( '', 'bar', '', '' );
+		$argLists[] = array( '', 'foo', 'bar', 'baz' );
+		$argLists[] = array( 'foo', '', 'bar', 'baz' );
+		$argLists[] = array( '***', 'foo', 'bar', 'baz' );
+		$argLists[] = array( 'abc42', 'foo', 'bar', 'baz' );
 
-		$argLists[] = array( true, 'ohi', 'foo', 'bar', 'baz' );
-		$argLists[] = array( true, 'http', '//www.wikidata.org/w/index.php', 'title=Special:Version', 'sv-credits-datavalues' );
-		$argLists[] = array( true, 'ohi', 'foo', '', 'baz' );
-		$argLists[] = array( true, 'ohi', 'foo', 'bar', '' );
-		$argLists[] = array( true, 'ohi', 'foo', '', '' );
-		$argLists[] = array( true, 'ohi', 'foo' );
-
-		$argLists[] = array( false, 'ohi', 'foo', 1 );
-		$argLists[] = array( false, 'ohi', 'foo', true );
-		$argLists[] = array( false, 'ohi', 'foo', 'baz', null );
-		$argLists[] = array( false, 'ohi', 'foo', 'baz', array() );
+		$argLists[] = array( 'ohi', 'foo', 1 );
+		$argLists[] = array( 'ohi', 'foo', true );
+		$argLists[] = array( 'ohi', 'foo', 'baz', null );
+		$argLists[] = array( 'ohi', 'foo', 'baz', array() );
 
 		return $argLists;
 	}

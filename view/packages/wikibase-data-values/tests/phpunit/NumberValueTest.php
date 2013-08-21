@@ -31,33 +31,32 @@ class NumberValueTest extends DataValueTest {
 		return 'DataValues\NumberValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
+		$argLists[] = array( 42 );
+		$argLists[] = array( -42 );
+		$argLists[] = array( 4.2 );
+		$argLists[] = array( -4.2 );
+		$argLists[] = array( 0 );
+
+		return $argLists;
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 'foo' );
+		$argLists[] = array( '' );
+		$argLists[] = array( '0' );
+		$argLists[] = array( '42' );
+		$argLists[] = array( '-42' );
+		$argLists[] = array( '4.2' );
+		$argLists[] = array( '-4.2' );
 		$argLists[] = array( false );
-		$argLists[] = array( true, 42 );
-		$argLists[] = array( true, -42 );
-		$argLists[] = array( true, 4.2 );
-		$argLists[] = array( true, -4.2 );
-		$argLists[] = array( true, 0 );
-		$argLists[] = array( false, 'foo' );
-		$argLists[] = array( false, '' );
-		$argLists[] = array( false, '0' );
-		$argLists[] = array( false, '42' );
-		$argLists[] = array( false, '-42' );
-		$argLists[] = array( false, '4.2' );
-		$argLists[] = array( false, '-4.2' );
-		$argLists[] = array( false, false );
-		$argLists[] = array( false, true );
-		$argLists[] = array( false, null );
-		$argLists[] = array( false, '0x20' );
+		$argLists[] = array( true );
+		$argLists[] = array( null );
+		$argLists[] = array( '0x20' );
 
 		return $argLists;
 	}

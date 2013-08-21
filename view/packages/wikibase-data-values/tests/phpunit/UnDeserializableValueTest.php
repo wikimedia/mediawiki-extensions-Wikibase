@@ -34,22 +34,30 @@ class UnDeserializableValueTest extends DataValueTest {
 		return 'DataValues\UnDeserializableValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
-		$argLists[] = array( true, null, null, 'No type and no data' );
-		$argLists[] = array( true, null, 'string', 'A type but no data' );
-		$argLists[] = array( true, array( 'stuff' ), 'string', 'A type and bad data' );
+		$argLists[] = array( null, null, 'No type and no data' );
+		$argLists[] = array( null, 'string', 'A type but no data' );
+		$argLists[] = array( array( 'stuff' ), 'string', 'A type and bad data' );
 
 		return $argLists;
 	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( new \stdClass(), null, 'No type and no data' );
+		$argLists[] = array( null, 42, 'No type and no data' );
+		$argLists[] = array( null, false, 'No type and no data' );
+		$argLists[] = array( null, array(), 'No type and no data' );
+		$argLists[] = array( null, null, null );
+		$argLists[] = array( null, null, true );
+		$argLists[] = array( null, null, array() );
+
+		return $argLists;
+	}
+
 
 	/**
 	 * @dataProvider instanceProvider

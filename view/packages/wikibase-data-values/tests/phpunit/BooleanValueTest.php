@@ -31,34 +31,34 @@ class BooleanValueTest extends DataValueTest {
 		return 'DataValues\BooleanValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
 		$argLists[] = array( false );
-		$argLists[] = array( false, 42 );
-		$argLists[] = array( false, array() );
-		$argLists[] = array( false, '1' );
-		$argLists[] = array( false, '' );
-		$argLists[] = array( false, 0 );
-		$argLists[] = array( false, 1 );
-		$argLists[] = array( false, 'foo' );
-		$argLists[] = array( false, null );
-		$argLists[] = array( true, false );
-		$argLists[] = array( true, true );
+		$argLists[] = array( true );
+
+		return $argLists;
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( );
+		$argLists[] = array( 42 );
+		$argLists[] = array( array() );
+		$argLists[] = array( '1' );
+		$argLists[] = array( '' );
+		$argLists[] = array( 0 );
+		$argLists[] = array( 1 );
+		$argLists[] = array( 'foo' );
+		$argLists[] = array( null );
 
 		return $argLists;
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \DataValues\BooleanValue $boolean
+	 * @param BooleanValue $boolean
 	 * @param array $arguments
 	 */
 	public function testGetValue( BooleanValue $boolean, array $arguments ) {

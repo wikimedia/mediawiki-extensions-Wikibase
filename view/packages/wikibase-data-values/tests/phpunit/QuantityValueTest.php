@@ -31,63 +31,65 @@ class QuantityValueTest extends DataValueTest {
 		return 'DataValues\QuantityValue';
 	}
 
-	/**
-	 * @see DataValueTest::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
+	public function validConstructorArgumentsProvider() {
 		$argLists = array();
 
-		// #0
+		$argLists[] = array( 42 );
+		$argLists[] = array( -42 );
+		$argLists[] = array( 4.2 );
+		$argLists[] = array( -4.2 );
+		$argLists[] = array( 0 );
+
+		$argLists[] = array( 42, 'm' );
+		$argLists[] = array( -42, 'm' );
+		$argLists[] = array( 4.2, 'm' );
+		$argLists[] = array( -4.2, 'm' );
+		$argLists[] = array( 0, 'm' );
+
+		$argLists[] = array( 4.2, null );
+
+		$argLists[] = array( 42, 'm', 4.2 );
+		$argLists[] = array( -42, 'm', -4.2 );
+		$argLists[] = array( 4.2, 'm', -42 );
+		$argLists[] = array( -4.2, 'm', 42 );
+		$argLists[] = array( -42, 'm', null );
+
+		return $argLists;
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$argLists = array();
+
+		$argLists[] = array();
+
+
+		$argLists[] = array( 'foo' );
+		$argLists[] = array( '' );
+		$argLists[] = array( '0' );
+		$argLists[] = array( '42' );
+		$argLists[] = array( '-42' );
+		$argLists[] = array( '4.2' );
+		$argLists[] = array( '-4.2' );
 		$argLists[] = array( false );
+		$argLists[] = array( true );
+		$argLists[] = array( null );
+		$argLists[] = array( '0x20' );
 
-		$argLists[] = array( true, 42 );
-		$argLists[] = array( true, -42 );
-		$argLists[] = array( true, 4.2 );
-		$argLists[] = array( true, -4.2 );
-		$argLists[] = array( true, 0 );
-		$argLists[] = array( false, 'foo' );
-		$argLists[] = array( false, '' );
-		$argLists[] = array( false, '0' );
-		$argLists[] = array( false, '42' );
-		$argLists[] = array( false, '-42' );
-		$argLists[] = array( false, '4.2' );
-		$argLists[] = array( false, '-4.2' );
-		$argLists[] = array( false, false );
-		$argLists[] = array( false, true );
-		$argLists[] = array( false, null );
-		$argLists[] = array( false, '0x20' );
+		$argLists[] = array( 'foo', 'm' );
+		$argLists[] = array( '', 'm' );
+		$argLists[] = array( '0', 'm' );
+		$argLists[] = array( 42, 0 );
+		$argLists[] = array( -42, 0 );
 
-		// #17
-		$argLists[] = array( true, 42, 'm' );
-		$argLists[] = array( true, -42, 'm' );
-		$argLists[] = array( true, 4.2, 'm' );
-		$argLists[] = array( true, -4.2, 'm' );
-		$argLists[] = array( true, 0, 'm' );
-		$argLists[] = array( false, 'foo', 'm' );
-		$argLists[] = array( false, '', 'm' );
-		$argLists[] = array( false, '0', 'm' );
-		$argLists[] = array( false, 42, 0 );
-		$argLists[] = array( false, -42, 0 );
-		$argLists[] = array( true, 4.2, null );
-		$argLists[] = array( false, -4.2, false );
-		$argLists[] = array( false, 0, true );
-		$argLists[] = array( false, 'foo', array() );
-		$argLists[] = array( false, '', 4.2 );
-		$argLists[] = array( false, '0', -1 );
+		$argLists[] = array( -4.2, false );
+		$argLists[] = array( 0, true );
+		$argLists[] = array( 'foo', array() );
+		$argLists[] = array( '', 4.2 );
+		$argLists[] = array( '0', -1 );
 
-		// #33
-		$argLists[] = array( true, 42, 'm', 4.2 );
-		$argLists[] = array( true, -42, 'm', -4.2 );
-		$argLists[] = array( true, 4.2, 'm', -42 );
-		$argLists[] = array( true, -4.2, 'm', 42 );
-		$argLists[] = array( false, 42, 'm', false );
-		$argLists[] = array( true, -42, 'm', null );
-		$argLists[] = array( false, 4.2, 'm', '0' );
-		$argLists[] = array( false, -4.2, 'm', '-4.2' );
+		$argLists[] = array( 42, 'm', false );
+		$argLists[] = array( 4.2, 'm', '0' );
+		$argLists[] = array( -4.2, 'm', '-4.2' );
 
 		return $argLists;
 	}
