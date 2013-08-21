@@ -207,15 +207,16 @@ class EntityTestHelper {
 
 	/**
 	 * @param $handle string of entity to get data for
+	 * @throws \MWException
 	 * @return array|null
 	 */
 	public static function getEntityClear( $handle ){
-		if( array_key_exists( $handle, self::$activeHandles ) ){
-			$id = self::$activeHandles[ $handle ];
-			self::unRegisterEntity( $handle );
-			return array( 'id' => $id, 'data' => '{}', 'clear' => '' );
+		if( !array_key_exists( $handle, self::$activeHandles ) ){
+			throw new \MWException( "No entity clear data defined with handle {$handle}" );
 		}
-		return null;
+		$id = self::$activeHandles[ $handle ];
+		self::unRegisterEntity( $handle );
+		return array( 'id' => $id, 'data' => '{}', 'clear' => '' );
 	}
 
 	public static function getEntityData( $handle ){
@@ -240,6 +241,9 @@ class EntityTestHelper {
 	}
 
 	private static function unRegisterEntity( $handle ) {
+		if( !array_key_exists( $handle, self::$activeHandles ) ){
+			throw new \MWException( "No active entity defined with handle {$handle}" );
+		}
 		unset( self::$activeHandles[ $handle ] );
 	}
 
@@ -253,13 +257,14 @@ class EntityTestHelper {
 
 	/**
 	 * @param $handle string of handles
+	 * @throws \MWException
 	 * @return null|string id of current handle (if active)
 	 */
 	public static function getId( $handle ){
-		if( array_key_exists( $handle, self::$activeHandles ) ){
-			return self::$activeHandles[ $handle ];
+		if( !array_key_exists( $handle, self::$activeHandles ) ){
+			throw new \MWException( "No entity id defined with handle {$handle}" );
 		}
-		return null;
+		return self::$activeHandles[ $handle ];
 	}
 
 }
