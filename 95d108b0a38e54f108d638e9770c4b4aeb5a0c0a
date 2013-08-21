@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_4b0bdc7e",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbarcontroller.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-21T12:25:26Z",
+      "side": 1,
+      "message": "I would prefer not increasing the complexity of \"initToolbars\" again.\nPerhaps \"_attachToolbarEventListener\" was not the best function, instead the whole block here could go into a \"_perToolbarTypeEventRegistration\" or so.\n\nIf four parameters for that function is too much for you, you could add the toolbar type into the toolbar definition. Seems like a good idea anyhow.\n\n $.wikibase.toolbarcontroller.definition( type, id ).type\n\nwould then work out of the box, the \"type\" field would simply be defined by the registry when first registering the toolbar definition. Similar to how jQuery.widget is adding some fields.",
+      "revId": "95d108b0a38e54f108d638e9770c4b4aeb5a0c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_4b32fc5e",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbarcontroller.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-21T12:25:26Z",
+      "side": 1,
+      "message": "This is a rather specialized function, not as basic as one would expect from name and description. Both lack to indicate what the event namespaces added to the event names are.\n\nPerhaps \"_eventNamespacesForToolbarType\" would be more appropriate.\n\nThough, I would very much prefer moving this helper function out of the widget into the outer scope and nameing it \"eventNamespaces\". Use age would be much nicer and clearer:\n\n eventNamespaces( \"event1 event2\", [ this.widgetName, toolbarTypeNamespace ] );",
+      "revId": "95d108b0a38e54f108d638e9770c4b4aeb5a0c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
