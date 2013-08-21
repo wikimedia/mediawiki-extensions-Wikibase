@@ -34,7 +34,7 @@ use Wikibase\PropertyContent;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group ApSetClaimTest
+ * @group SetClaimTest
  *
  * @group medium
  *
