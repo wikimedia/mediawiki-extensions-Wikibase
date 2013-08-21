@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_c96534e4",
+        "filename": "lib/includes/ReferencedUrlFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-21T18:06:38Z",
+      "side": 1,
+      "message": "gone in follow up",
+      "revId": "e8c66c79ce7f6ca01bf1ff1806dbf0db0988e61f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
