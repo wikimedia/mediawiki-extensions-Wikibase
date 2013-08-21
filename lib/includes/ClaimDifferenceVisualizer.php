@@ -2,29 +2,16 @@
 namespace Wikibase;
 
 use DataValues\TimeValue;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
 use Html;
 use Diff\Diff;
+use RuntimeException;
 use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * Class for generating HTML for Claim Diffs.
- *
- * @todo we might want a SnakFormatter class and others that handle specific stuff
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.4
  *
@@ -160,11 +147,11 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $mainSnakChange
+	 * @param DiffOpChange $mainSnakChange
 	 *
 	 * @return string
 	 */
-	protected function visualizeMainSnakChange( $mainSnakChange ) {
+	protected function visualizeMainSnakChange( DiffOpChange $mainSnakChange ) {
 		$valueFormatter = new DiffOpValueFormatter(
 			// todo: should show specific headers for both columns
 			$this->getSnakHeader( $mainSnakChange->getNewValue() ),
@@ -180,11 +167,11 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $rankChange
+	 * @param DiffOpChange $rankChange
 	 *
 	 * @return string
 	 */
-	protected function visualizeRankChange( $rankChange ) {
+	protected function visualizeRankChange( DiffOpChange $rankChange ) {
 		$valueFormatter = new DiffOpValueFormatter(
 			wfMessage( 'wikibase-diffview-rank' ),
 			$rankChange->getOldValue(),
@@ -244,7 +231,7 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string[]
 	 */
-	 protected function getSnakListValues( $snakList ) {
+	 protected function getSnakListValues( SnakList $snakList ) {
 		$values = array();
 
 		foreach ( $snakList as $snak ) {
@@ -338,31 +325,34 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @param Diff[] $changes
 	 * @param Claim $claim
+	 * @param string $breadCrumb
 	 *
 	 * @return string
+	 * @throws RuntimeException
 	 */
-	protected function visualizeSnakListChanges( Diff $changes, Claim $claim, $breadcrumb ) {
+	protected function visualizeSnakListChanges( Diff $changes, Claim $claim, $breadCrumb ) {
 		$html = '';
 
 		$claimMainSnak = $claim->getMainSnak();
 		$claimHeader = $this->getSnakHeader( $claimMainSnak );
-		$newVal = $oldVal = null;
+
+		$newVal = null;
+		$oldVal = null;
 
 		foreach( $changes as $change ) {
-			if ( $change instanceof \Diff\DiffOpAdd ) {
+			if ( $change instanceof DiffOpAdd ) {
 				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
-			} else if ( $change instanceof \Diff\DiffOpRemove ) {
+			} else if ( $change instanceof DiffOpRemove ) {
 				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
-			} else if ( $change instanceof \Diff\DiffOpChange ) {
+			} else if ( $change instanceof DiffOpChange ) {
 				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
 				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
 			} else {
-				// something went wrong, never should happen
-				throw new \MWException( 'Unknown change operation.' );
+				throw new RuntimeException( 'Diff operation of unknown type.' );
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-				$claimHeader . ' / ' . $breadcrumb,
+				$claimHeader . ' / ' . $breadCrumb,
 				$oldVal,
 				$newVal
 			);
@@ -379,10 +369,11 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Diff[] $changes
+	 * @param Diff $changes
 	 * @param Claim $claim
 	 *
 	 * @return string
+	 * @throws RuntimeException
 	 */
 	protected function visualizeQualifierChanges( Diff $changes, Claim $claim ) {
 		$html = '';
@@ -394,17 +385,17 @@ class ClaimDifferenceVisualizer {
 		foreach( $changes as $change ) {
 			// TODO: change hardcoded ": " so something like wfMessage( 'colon-separator' ),
 			// but this will require further refactoring as it would add HTML which gets escaped
-			if ( $change instanceof \Diff\DiffOpAdd ) {
+			if ( $change instanceof DiffOpAdd ) {
 				$newVal =
 					$this->getEntityLabel( $change->getNewValue()->getPropertyId() ) .
 					': ' .
 					$this->getSnakValue( $change->getNewValue() );
-			} else if ( $change instanceof \Diff\DiffOpRemove ) {
+			} else if ( $change instanceof DiffOpRemove ) {
 				$oldVal =
 					$this->getEntityLabel( $change->getOldValue()->getPropertyId() ) .
 					': ' .
 					$this->getSnakValue( $change->getOldValue() );
-			} else if ( $change instanceof \Diff\DiffOpChange ) {
+			} else if ( $change instanceof DiffOpChange ) {
 				$oldVal =
 					$this->getEntityLabel( $change->getOldValue()->getPropertyId() ) .
 					': ' .
@@ -414,8 +405,7 @@ class ClaimDifferenceVisualizer {
 					': ' .
 					$this->getSnakValue( $change->getNewValue() );
 			} else {
-				// something went wrong, never should happen
-				throw new \MWException( 'Unknown change operation.' );
+				throw new RuntimeException( 'Diff operation of unknown type.' );
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
