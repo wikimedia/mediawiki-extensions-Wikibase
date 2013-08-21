@@ -155,6 +155,17 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['jquery.wikibase.listview.tests'] = array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.listview',
+			),
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/lib',
+		);
+
 		$testModules['qunit']['jquery.wikibase.wbtooltip.tests'] = array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.wbtooltip.tests.js',
