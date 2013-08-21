@@ -633,7 +633,7 @@ $messages['bs'] = array(
 $messages['ca'] = array(
 	'wikibase-client-desc' => "Client per l'extensió Wikibase",
 	'specialpages-group-wikibaseclient' => 'Client de Wikidata',
-	'wikibase-after-page-move' => "Podeu també [$1 actualitzar] l'element associat de Wikidata per a mantenir els enllaços d'idioma a la pàgina moguda.",
+	'wikibase-after-page-move' => "També podeu [$1 actualitzar] l'element associat de Wikidata per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
 	'wikibase-after-page-move-queued' => "L'[element $1 de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
 	'wikibase-comment-remove' => 'Element associat de Wikidata eliminat. Enllaços de llengua suprimits.',
 	'wikibase-comment-linked' => 'Un element de Wikidata ha estat enllaçat a aquesta pàgina.',
@@ -3008,6 +3008,8 @@ $messages['pl'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase nie obsługuje jeszcze typu właściwość dla właściwości $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidane',
 	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje w Wikidanych w ostatnich zmianach',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Edycja w Wikidanych',
 	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje w Wikidanych w obserwowanych',
 	'wikibase-error-invalid-entity-id' => 'Wprowadzony identyfikator jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.',
 	'special-unconnectedpages' => 'Niepowiązane strony',
@@ -3917,6 +3919,7 @@ $messages['yue'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Hydra
+ * @author Hzy980512
  * @author Li3939108
  * @author Liangent
  * @author Linforest
@@ -3965,6 +3968,7 @@ $messages['zh-hans'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase对$1属性不支持属性类型。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
+	'wikibase-rc-wikibase-edit-letter' => '编',
 	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示维基数据的编辑',
 	'wikibase-error-serialize-error' => '无法序列化数据。',
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',

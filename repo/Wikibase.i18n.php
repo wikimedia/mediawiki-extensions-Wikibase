@@ -617,7 +617,6 @@ Parameters:
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
 	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
 	'wikibase-snakview-snaktypeselector-novalue' => "A short descriptive title of a no-value snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
-	'wikibase-shortcopyrightwarning-version' => 'Indicator for what version of the copyright warning is prevailing. This message is used for configuration purposes and should therefore not be translated or duplicated in any other languages. Should most likely be changed via the [[Mediawiki:wikibase-shortcopyrightwarning-version]] page if the wiki\'s license for contents gets changed or if "wikibase-shortcopyrightwarning" is overwritten on the [[Mediawiki:wikibase-shortcopyrightwarning]] page. Changing this message will result into all users seeing copyright warnings again even if they have dismissed them previously.',
 	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button.
 
 Parameters:
@@ -627,6 +626,7 @@ Parameters:
 
 See also:
 * {{msg-mw|Wikidata-shortcopyrightwarning}}',
+	'wikibase-shortcopyrightwarning-version' => 'Indicator for what version of the copyright warning is prevailing. This message is used for configuration purposes and should therefore not be translated or duplicated in any other languages. Should most likely be changed via the [[Mediawiki:wikibase-shortcopyrightwarning-version]] page if the wiki\'s license for contents gets changed or if "wikibase-shortcopyrightwarning" is overwritten on the [[Mediawiki:wikibase-shortcopyrightwarning]] page. Changing this message will result into all users seeing copyright warnings again even if they have dismissed them previously.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
 	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata:Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
@@ -2707,6 +2707,7 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'wikibase-item-summary-wbcreateclaim-value' => "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
 	'wikibase-item-summary-wbcreateclaim-novalue' => "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
 	'wikibase-item-summary-wbcreateclaim' => "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
+	'wikibase-item-summary-clientsitelink-update' => "S'ha desplaçat la pàgina de [$3] a [$4]",
 	'wikibase-property-summary-wbeditentity-update' => "S'ha actualizat la propietat",
 	'wikibase-property-summary-wbsetlabel-add' => "S'ha afegit una etiqueta en [$2]",
 	'wikibase-property-summary-wbsetlabel-set' => "S'ha canviat l'etiqueta en [$2]",
@@ -3036,6 +3037,7 @@ Vaše IP adresa bude zobrazena v historii této entity.',
 	'wikibase-newentity-description' => 'Popis:',
 	'wikibase-newentity-submit' => 'Vytvořit',
 	'special-setlabel' => 'Nastavit štítek',
+	'wikibase-setlabel-introfull' => 'Nastavujete štítek v jazyce $2 pro [[$1]].',
 	'wikibase-setlabel-intro' => 'Tento formulář umožňuje nastavení štítku entity. Budete potřebovat ID entity, (např. „Q23“), kód jazyka (např. „cs“) a štítek, který chcete přidat.',
 	'wikibase-setlabel-label' => 'Štítek:',
 	'wikibase-setlabel-submit' => 'Nastavit štítek',
@@ -3051,6 +3053,7 @@ Vaše IP adresa bude zobrazena v historii této entity.',
 	'wikibase-setaliases-label' => 'Aliasy:',
 	'wikibase-setaliases-submit' => 'Nastavit aliasy',
 	'wikibase-setaliases-warning-remove' => 'Opravdu chcete odstranit všechny aliasy pro [[$1]]?',
+	'special-setsitelink' => 'Nastavení odkazu na článek',
 	'wikibase-setsitelink-add-failed' => 'Odkaz na článek se nepodařilo uložit.',
 	'wikibase-setsitelink-remove-failed' => 'Odkaz na článek se nepodařilo odstranit.',
 	'wikibase-setentity-id' => 'ID:',
@@ -3098,6 +3101,9 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-entitydata-bad-revision' => 'Nelze zobrazit revizi $2 entity $1.',
 	'wikibase-entitydata-bad-id' => 'Chybné ID: $1',
 	'wikibase-entitydata-unsupported-format' => 'Toto rozhraní nepodporuje datový formát $1.',
+	'special-mylanguagefallbackchain' => 'Můj řetězec záložních jazyků',
+	'wikibase-mylanguagefallbackchain-text' => 'Řetězec záložních jazyků, který se použije při zobrazování štítků entit, je zobrazen níže.',
+	'wikibase-mylanguagefallbackchain-babel' => 'Můžete jej upravit vložením <nowiki>{{#babel: }}</nowiki> na vaší [[Special:MyPage|uživatelské stránce]].',
 	'wikibase-conflict-patched' => 'Vaše úprava byla začleněna do nejnovější verze.',
 	'wikibase-restoreold' => 'obnovit',
 	'wikibase-restore-summary' => 'Obnovena revize $1 od {{GENDER:$2|uživatele|uživatelky}} [[Special:Contributions/$2|$2]]',
@@ -3110,8 +3116,12 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-item-summary-wbeditentity-update' => 'Položka byla aktualizována',
 	'wikibase-item-summary-wbeditentity-override' => 'Položka byla přepsána',
 	'wikibase-item-summary-wbsetreference' => 'Nastavena reference',
+	'wikibase-item-summary-wbsetreference-add' => 'K tvrzení byla přidána reference',
+	'wikibase-item-summary-wbsetreference-set' => 'Reference tvrzení byla změněna',
+	'wikibase-item-summary-wbsetlabel-add' => 'Přidán štítek pro [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Změněn štítek pro [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Odstraněn štítek pro [$2]',
+	'wikibase-item-summary-wbsetdescription-add' => 'Přidán popis pro [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Změněn popis pro [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Odstraněn popis pro [$2]',
 	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|Nastaven alias|Nastaveny aliasy}} pro [$2]',
@@ -3138,12 +3148,19 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Změněna jedna reference|Změněny $4 reference|Změněno $4 referencí}} u {{PLURAL:$3|tvrzení}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Postavení {{PLURAL:$3|tvrzení}} bylo změněno',
 	'wikibase-item-summary-clientsitelink-update' => 'Stránka přesunuta z [$3] na [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Bylo přidáno|Byla přidána}} vymezení',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Bylo změněno|Byla změněna}} vymezení',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Bylo odstraněno|Byla odstraněna}} vymezení',
+	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Odstraněna reference|Odstraněny reference}} z výroku',
+	'wikibase-item-summary-wbsetstatementrank' => "Postavení výroku změněno z '$3' na '$4'",
 	'wikibase-property-summary-wbcreate-new' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-create' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-update' => 'Aktualizována vlastnost',
 	'wikibase-property-summary-wbeditentity-override' => 'Vymazána vlastnost',
+	'wikibase-property-summary-wbsetlabel-add' => 'Přidán štítek pro [$2]',
 	'wikibase-property-summary-wbsetlabel-set' => 'Změněn štítek pro [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Odstraněn štítek pro [$2]',
+	'wikibase-property-summary-wbsetdescription-add' => 'Přidán popis pro [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Změněn popis pro [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Odstraněn popis pro [$2]',
 	'wikibase-property-summary-wbsetaliases-set' => '{{PLURAL:$1|Nastaven alias|Nastaveny aliasy}} pro [$2]',
@@ -3185,7 +3202,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'action-alias-update' => 'aktualizovat aliasy',
 	'action-alias-remove' => 'odstranit aliasy',
 	'action-sitelink-remove' => 'odstranit odkazy',
-	'action-sitelink-update' => 'aktualizovat odkazy na weby',
+	'action-sitelink-update' => 'aktualizovat odkazy na články',
 	'action-label-remove' => 'odstranit štítky',
 	'action-label-update' => 'aktualizovat štítky',
 	'action-description-remove' => 'odstranit popisy',
@@ -4594,6 +4611,7 @@ por trovi de kie ĝi venis.',
  * @author Hazard-SJ
  * @author Hereñu
  * @author Jewbask
+ * @author Littledogboy
  * @author Maor X
  * @author McDutchie
  * @author Mr.Ajedrez
@@ -4669,9 +4687,9 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.', # Fu
 	'wikibase-move-error' => 'No puedes trasladar las páginas que se encuentran en el espacio de nombres de datos, y no puedes trasladar páginas hacia allí.',
 	'wikibase-warning-constraint-violation-length' => 'Se activó una restricción de longitud para el código de idioma «$1».',
 	'wikibase-error-sitelink-already-used' => 'El enlace del sitio [$1 $2] ya es usado por el elemento [[$3]].', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedad ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
-	'wikibase-error-label-not-unique-item' => 'Otro elemento ($3) ya tiene la etiqueta "$1" y la descripción "$4" asociada con el código de idioma $2',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedad ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2', # Fuzzy
+	'wikibase-error-label-not-unique-item' => 'Otro elemento ($3) ya tiene la etiqueta "$1" y la descripción "$4" asociada con el código de idioma $2', # Fuzzy
 	'special-itembytitle' => 'Elemento por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Búsqueda de artículos por sitio y título',
 	'wikibase-itembytitle-lookup-site' => 'Sitio:',
@@ -4694,7 +4712,7 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.', # Fu
 	'wikibase-newproperty-summary' => 'Asegúrate de comprobar si la propiedad existe!<br />Debes crear una [[Help:Label|etiqueta]] y una [[Help:Description|descripción]] para las nuevas propiedades, y añadir un tipo de propiedad válido.',
 	'wikibase-newproperty-fieldset' => 'Crear una nueva propiedad',
 	'wikibase-newproperty-datatype' => 'Tipo de dato:',
-	'wikibase-newproperty-invalid-datatype' => 'El tipo de datos no es válido',
+	'wikibase-newproperty-invalid-datatype' => 'El tipo de datos no es válido', # Fuzzy
 	'special-newitem' => 'Crear un nuevo elemento',
 	'wikibase-newitem-summary' => 'Asegúrate de [[Special:ItemByTitle|comprobar si el elemento ya existe]]!<br />Debes crear una [[Help:Label|etiqueta]] y una [[Help:Description|descripción]] para todos los elementos nuevos.',
 	'wikibase-newitem-fieldset' => 'Crear un nuevo elemento',
@@ -4792,7 +4810,7 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.', # Fu
 	'wikibase-item-summary-wbsetdescription-remove' => 'La descripción [$2] ha sido eliminada',
 	'wikibase-item-summary-wbsetaliases-set' => 'Definiendo {{PLURAL:$1|el alias|los alias}} de [$2]',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Se {{PLURAL:$1|añadió y eliminó un|añadieron y eliminaron}} alias de [$2]',
-	'wikibase-item-summary-wbsetaliases-add' => 'Añadiendo {{PLURAL:$1|el alias|los alias}} de [$2]',
+	'wikibase-item-summary-wbsetaliases-add' => 'Se añadió {{PLURAL:$1|el alias|los alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Eliminando {{PLURAL:$1|el alias|los alias}} de [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Se añadió un enlace a [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Se eliminó el enlace a [$2]',
@@ -4847,8 +4865,6 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.', # Fu
 	'right-property-override' => 'Reemplazar propiedades',
 	'right-property-create' => 'Crear propiedades',
 	'right-property-remove' => 'Borrar propiedades',
-	'right-alias-add' => 'Añadir alias',
-	'right-alias-set' => 'Establecer alias o seudónimos',
 	'right-alias-remove' => 'Quitar alias',
 	'right-sitelink-remove' => 'Quitar enlaces de sitios',
 	'right-sitelink-update' => 'Actualizar enlaces de sitios',
@@ -8697,6 +8713,7 @@ Nella cronologia dell'entità verrà registrato il tuo indirizzo IP.",
 	'wikibase-history-title-with-label' => 'Cronologia di "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Cronologia di ($1)',
 	'special-entitieswithoutdescription' => 'Entità senza descrizione',
+	'wikibase-entitieswithoutdescription-legend' => "Permette di ottenere l'elenco delle entità senza descrizione",
 	'special-entitieswithoutlabel' => 'Entità senza etichetta',
 	'wikibase-entitieswithoutlabel-legend' => "Permette di ottenere l'elenco delle entità senza etichetta",
 	'wikibase-entitieswithoutlabel-label-language' => 'Lingua:',
@@ -8732,7 +8749,9 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbeditentity-create' => 'Creato un nuovo elemento',
 	'wikibase-item-summary-wbeditentity-update' => 'Aggiornato un elemento',
 	'wikibase-item-summary-wbeditentity-override' => 'Sovrascritto un elemento',
-	'wikibase-item-summary-wbsetreference' => 'Aggiunta una fonte',
+	'wikibase-item-summary-wbsetreference' => 'Impostato un riferimento',
+	'wikibase-item-summary-wbsetreference-add' => "Aggiunto riferimento ad un'assezione",
+	'wikibase-item-summary-wbsetreference-set' => "Modificato riferimento di un'assezione",
 	'wikibase-item-summary-wbsetlabel-add' => 'Aggiunta etichetta [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Cambiata etichetta [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Rimossa etichetta [$2]',
@@ -8763,6 +8782,11 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetclaim-update-references' => "{{PLURAL:$4|Modificato un riferimento|Modificati $4 riferimenti}} di {{PLURAL:$3|un'asserzione|asserzioni}}",
 	'wikibase-item-summary-wbsetclaim-update-rank' => "Modificata classificazione di {{PLURAL:$3|un'asserzione|asserzioni}}",
 	'wikibase-item-summary-clientsitelink-update' => 'Pagina spostata da [$3] a [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Aggiunto qualificatore|Aggiunti qualificatori}}',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Modificato qualificatore|Modificati qualificatori}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Rimosso qualificatore|Rimossi qualificatori}}',
+	'wikibase-item-summary-wbremovereferences-remove' => "{{PLURAL:$3|Rimosso riferimento|Rimossi riferimenti}} da un'asserzione",
+	'wikibase-item-summary-wbsetstatementrank' => "Modificata classificazione di un'asserzione da '$3' a '$4'",
 	'wikibase-property-summary-wbcreate-new' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-create' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-update' => 'Aggiornata una proprietà',
@@ -12272,9 +12296,9 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-move-error' => '',
 	'wikibase-warning-constraint-violation-length' => 'Dla języka o kodzie „$1” nastąpiło ograniczenie długości.',
 	'wikibase-error-sitelink-already-used' => 'Link [$1 $2] jest już wykorzystywany przez element [[$3]]. Być może elementy trzeba [[Help:Merge/pl|połączyć]], a jeden z nich [[Wikidata:Deletion_policy/pl|usunąć]]? Jeśli nie jesteś pewien, śmiało zadaj pytanie w [[Wikidata:Kafejka|Kafejce]].', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-property' => 'Inna właściwość ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Inne zapytanie ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Inny element ($3) ma już etykietę "$1" i opis "$4" powiązaną z językiem o kodzie $2', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-property' => 'Inna właściwość ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Inne zapytanie ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2.',
+	'wikibase-error-label-not-unique-item' => 'Inny element ($3) ma już etykietę "$1" i opis "$4" powiązaną z językiem o kodzie $2.',
 	'special-itembytitle' => 'Element według tytułu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Wyszukiwanie elementów według witryny i tytułu',
 	'wikibase-itembytitle-lookup-site' => 'Witryna:',
@@ -12297,7 +12321,7 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-newproperty-summary' => 'Upewnij się czy dana właściwość już istnieje!<br />Dla wszystkich nowych właściwości powinno się utworzyć [[Help:Label|etykietę]] oraz [[Help:Description|opis]], a dodatkowo także określić typ danych.',
 	'wikibase-newproperty-fieldset' => 'Utwórz nową właściwość',
 	'wikibase-newproperty-datatype' => 'Typ danych:',
-	'wikibase-newproperty-invalid-datatype' => 'Podano nieprawidłowy typ danych', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Podano nieprawidłowy typ danych.',
 	'special-newitem' => 'Utwórz nowy element',
 	'wikibase-newitem-summary' => 'Upewnij się czy [[Special:ItemByTitle|dany element już istnieje]]!<br />Dla wszystkich nowych elementów powinno się utworzyć [[Help:Label|etykietę]] oraz [[Help:Description|opis]].',
 	'wikibase-newitem-fieldset' => 'Utwórz nowy element',
@@ -15927,6 +15951,7 @@ $messages['yi'] = array(
  * @author Byfserag
  * @author Dimension
  * @author Hydra
+ * @author Hzy980512
  * @author Li3939108
  * @author Linforest
  * @author Qiyue2001
@@ -16038,7 +16063,7 @@ $messages['zh-hans'] = array(
 	'wikibase-newproperty-summary' => '请务必检查该属性是否已经存在！<br />你应该为所有新属性创建一个[[Help:Label|标签]]和一个[[Help:Description|说明]]并指定一个有效的属性类型。',
 	'wikibase-newproperty-fieldset' => '创建新属性',
 	'wikibase-newproperty-datatype' => '数据类型：',
-	'wikibase-newproperty-invalid-datatype' => '指定的数据类型无效', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => '指定的数据类型无效。',
 	'special-newitem' => '创建新项',
 	'wikibase-newitem-summary' => '请务必[[Special:ItemByTitle|检查该项是否已经存在]]！<br />你应该为所有新项创建一个[[Help:Label|标签]]和一个[[Help:Description|说明]]。',
 	'wikibase-newitem-fieldset' => '创建新项',
@@ -16112,6 +16137,8 @@ $messages['zh-hans'] = array(
 	'wikibase-listdatatypes-intro' => '这是该设施目前使用的所有数据类型的列表：',
 	'wikibase-history-title-with-label' => '“$2”（$1）的版本历史',
 	'wikibase-history-title-without-label' => '（$1）的版本历史',
+	'special-entitieswithoutdescription' => '无描述的实体',
+	'wikibase-entitieswithoutdescription-legend' => '获取无描述实体的列表',
 	'special-entitieswithoutlabel' => '无标签实体',
 	'wikibase-entitieswithoutlabel-legend' => '获取无标签实体的列表',
 	'wikibase-entitieswithoutlabel-label-language' => '语言：',
@@ -16187,6 +16214,7 @@ $messages['zh-hans'] = array(
 	'wikibase-property-summary-wbeditentity-create' => '创建新属性',
 	'wikibase-property-summary-wbeditentity-update' => '更新属性',
 	'wikibase-property-summary-wbeditentity-override' => '覆盖属性',
+	'wikibase-property-summary-wbsetlabel-add' => '[$2]标签已添加',
 	'wikibase-property-summary-wbsetlabel-set' => '更改[$2]标签',
 	'wikibase-property-summary-wbsetlabel-remove' => '删除[$2]标签',
 	'wikibase-property-summary-wbsetdescription-set' => '更改[$2]说明',
@@ -16241,6 +16269,7 @@ $messages['zh-hans'] = array(
 	'right-property-create' => '创建属性',
 	'right-property-remove' => '删除属性',
 	'right-alias-remove' => '删除别名',
+	'right-alias-update' => '更新别名',
 	'right-sitelink-remove' => '删除网站链接',
 	'right-sitelink-update' => '更新网站链接',
 	'right-linktitles-update' => '更新链接标题',
