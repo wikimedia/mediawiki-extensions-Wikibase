@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_0ed3a260",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-21T15:29:34Z",
+      "side": 1,
+      "message": "Would be nice to have this implemented via nativeEventHandler, triggering \"itemmove\". \"itemmoved\" is fine but wouldn\u0027t \"afteritemmove\" be more in line with the event names we usually use?\n\nIn this widget we already have an \"itemremoved\" though so I guess we didn\u0027t stick to the usual naming before.",
+      "revId": "b9f07ab36e8f6ca4ce93e3b133979ff7e2ca4919",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_6e5c26eb",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-21T15:29:34Z",
+      "side": 1,
+      "message": "This is two separate tests, so would be nice if you would move this into its own test.\n\nAlso, this test should probably be registered first (above the other one) since it is testing more basic functionality.",
+      "revId": "b9f07ab36e8f6ca4ce93e3b133979ff7e2ca4919",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_aef70ed1",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-21T15:29:34Z",
+      "side": 1,
+      "message": "Should also test for the \"itemmoved\" event to be triggered. I know we have not been doing this in the past but it would definitely be a good habit.",
+      "revId": "b9f07ab36e8f6ca4ce93e3b133979ff7e2ca4919",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
