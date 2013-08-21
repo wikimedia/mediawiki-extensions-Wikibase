@@ -50,6 +50,7 @@ class ClaimSaver {
 	 * @param string $token
 	 * @param User $user
 	 * @param ClaimSummaryBuilder|null $claimSummaryBuilder
+	 * @param int $flags
 	 *
 	 * @return Status The status. The status value is an array which may contain
 	 *         the following fields:
@@ -60,7 +61,9 @@ class ClaimSaver {
 	 *
 	 *         This status object can be used with ApiWikibase::handleSaveStatus().
 	 */
-	public function saveClaim( Claim $claim, $baseRevId, $token, User $user, ClaimSummaryBuilder $claimSummaryBuilder = null ) {
+	public function saveClaim( Claim $claim, $baseRevId, $token, User $user,
+		ClaimSummaryBuilder $claimSummaryBuilder = null, $flags = 0 ) {
+
 		try {
 			$entityId = $this->getEntityIdForClaim( $claim );
 
@@ -77,7 +80,7 @@ class ClaimSaver {
 
 			$this->updateClaim( $content->getEntity(), $claim );
 
-			$status = $this->saveChanges( $content, $baseRevId, $token, $user, $summary );
+			$status = $this->saveChanges( $content, $baseRevId, $token, $user, $summary, $flags );
 		} catch ( ExceptionWithCode $ex ) {
 			// put the error code into the status
 			$value = array( 'errorCode' => $ex->getErrorCode() );
@@ -179,16 +182,21 @@ class ClaimSaver {
 	 * @param string $token
 	 * @param User $user
 	 * @param Summary|null $summary
+	 * @param int $flags
 	 *
 	 * @return Status
 	 */
-	protected function saveChanges( EntityContent $content, $baseRevisionId, $token, User $user, Summary $summary ) {
+	protected function saveChanges( EntityContent $content, $baseRevisionId, $token, User $user,
+		Summary $summary, $flags ) {
+
 		$baseRevisionId = is_int( $baseRevisionId ) && $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $user, $baseRevisionId );
 
+		$flags = $flags !== 0 ? $flags | EDIT_UPDATE : EDIT_UPDATE;
+
 		$status = $editEntity->attemptSave(
 			$summary !== null ? $summary->toString() : '',
-			EDIT_UPDATE,
+			$flags,
 			$token
 		);
 
