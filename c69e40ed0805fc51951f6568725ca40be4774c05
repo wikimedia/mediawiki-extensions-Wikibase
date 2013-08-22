@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_1a4e7897",
+        "filename": "lib/includes/ReferencedUrlFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-08-22T10:40:37Z",
+      "side": 1,
+      "message": "Why would that be the wrong place to catch the exception? I actually think this should catch the exception and do nothing about it, i.e. also not log a warning. A missing property can always occur in Wikibase, but in this case the values of any snak with that property should simply be ignored and we proceed otherwise. In this case it is OK: this service class wants to gather all referenced URLs. If a property happens to have been deleted, it should not interfere with the working of this service class otherwise. If we do not catch it here or throw another exception, we would not be able to get the URLs of a Snaklist because one Snak uses a property that does not exist. Am I misunderstanding something?",
+      "revId": "c69e40ed0805fc51951f6568725ca40be4774c05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
