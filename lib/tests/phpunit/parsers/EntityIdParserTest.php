@@ -3,26 +3,13 @@
 namespace Wikibase\Lib\Test;
 
 use ValueParsers\ParserOptions;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdParser;
 
 /**
- * Unit test Wikibase\Lib\EntityIdParser class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\EntityIdParser
  *
  * @file
  * @since 0.4
@@ -47,17 +34,7 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 	 * @return ParserOptions
 	 */
 	protected function newParserOptions() {
-		return new ParserOptions( array(
-			EntityIdParser::OPT_PREFIX_MAP => array(
-				'a' => 'entity-type-a',
-				'b' => 'entity-type-b',
-				'X' => 'entity-type-a',
-				'DD' => 'entity-type-d',
-				'' => 'entity-type-e',
-				'-' => 'entity-type-f',
-				'|' => 'entity-type-f',
-			) )
-		);
+		return new ParserOptions();
 	}
 
 	/**
@@ -73,23 +50,12 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 		$parser = new EntityIdParser( $this->newParserOptions() );
 
 		$valid = array(
-			'a1' => array( 'entity-type-a', 1 ),
-			'a2'=> array( 'entity-type-a', 2 ),
-			'A3'=> array( 'entity-type-a', 3 ),
-			'b4'=> array( 'entity-type-b', 4 ),
-			'b9001'=> array( 'entity-type-b', 9001 ),
-			'b7201010'=> array( 'entity-type-b', 7201010 ),
-			'x1'=> array( 'entity-type-a', 1 ),
-			'x42'=> array( 'entity-type-a', 42 ),
-			'dd42'=> array( 'entity-type-d', 42 ),
-			'42'=> array( 'entity-type-e', 42 ),
-			'-42'=> array( 'entity-type-f', 42 ),
-			'|42'=> array( 'entity-type-f', 42 ),
+			'q1' => new ItemId( 'q1' ),
+			'p1' => new PropertyId( 'p1' ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
-			$expected = new EntityId( $expected[0], $expected[1] );
-			$argLists[] = array( (string)$value, $expected, $parser );
+			$argLists[] = array( $value, $expected, $parser );
 		}
 
 		return array_merge( $argLists );
@@ -126,17 +92,6 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 	 */
 	protected function getParserClass() {
 		return 'Wikibase\Lib\EntityIdParser';
-	}
-
-	/**
-	 * @see ValueParserTestBase::requireDataValue
-	 *
-	 * @since 0.4
-	 *
-	 * @return boolean
-	 */
-	protected function requireDataValue() {
-		return false;
 	}
 
 }
