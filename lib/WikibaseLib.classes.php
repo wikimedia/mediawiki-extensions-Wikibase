@@ -60,6 +60,7 @@ return call_user_func( function() {
 		'Wikibase\SettingsArray' => 'includes/SettingsArray.php',
 		'Wikibase\SiteLink' => 'includes/SiteLink.php',
 		'Wikibase\Lib\SnakConstructionService' => 'includes/SnakConstructionService.php',
+		'Wikibase\SnakFactory' => 'includes/SnakFactory.php',
 		'Wikibase\Lib\SnakFormatter' => 'includes/SnakFormatter.php',
 		'Wikibase\Term' => 'includes/Term.php',
 		'Wikibase\Lib\TermsToClaimsTranslator' => 'includes/TermsToClaimsTranslator.php',
