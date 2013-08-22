@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_a0ed56c6",
+        "filename": "lib/tests/qunit/wikibase.datamodel/Wikibase.SnakList.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T14:49:45Z",
+      "side": 1,
+      "message": "Better have two or three separate tests, one for \"move()\", one for \"moveUp\" and/or \"moveDown\".",
+      "revId": "c6618496179718b5f71fa2ff8088468c9b881be0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
