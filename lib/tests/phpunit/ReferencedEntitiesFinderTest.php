@@ -1,43 +1,26 @@
 <?php
 
 namespace Wikibase\Lib\Test;
+
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
-use Wikibase\Claims;
-use Wikibase\ReferencedEntitiesFinder;
+use DataValues\StringValue;
 use Wikibase\Claim;
-use Wikibase\Statement;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EntityId;
+use Wikibase\Item;
+use Wikibase\LibRegistry;
+use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\EntityId;
-use Wikibase\Property;
-use Wikibase\Item;
-use Wikibase\SnakList;
+use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Snak;
-use DataValues\StringValue;
-use Wikibase\LibRegistry;
-use Wikibase\Settings;
-use Wikibase\ReferenceList;
-use Wikibase\Reference;
 
 /**
- * Tests for the Wikibase\ReferencedEntitiesFinder class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\ReferencedEntitiesFinder
  *
  * @file
  * @since 0.4
@@ -58,12 +41,12 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 	public function snaksProvider() {
 		$argLists = array();
 
-		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
-		$p27 = new EntityId( Property::ENTITY_TYPE, 27 );
-		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
+		$p11 = new EntityIdValue( new PropertyId( 'p11' ) );
+		$p27 = new EntityIdValue( new PropertyId( 'p27' ) );
+		$p44 = new EntityIdValue( new PropertyId( 'p44' ) );
 
-		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
-		$q24 = new EntityId( Item::ENTITY_TYPE, 24 );
+		$q23 = new EntityIdValue( new ItemId( 'q23' ) );
+		$q24 = new EntityIdValue( new ItemId( 'q24' ) );
 
 		$argLists[] = array(
 			array(),
