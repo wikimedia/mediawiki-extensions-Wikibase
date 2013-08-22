@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "499865f5_80577ac8",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T14:03:45Z",
+      "side": 1,
+      "message": "Please consider using multiple var statements. As you can clearly see here, this is less readable due to jenkins visualizing a tab as eight spaces.\n\nI have also changed the coding conventions recently, see:\n\nhttp://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript#Declarations\n\nand\n\nhttp://www.mediawiki.org/wiki/Manual_talk:Coding_conventions/JavaScript#Discouraging_from_using_a_single_.22var.22_for_multiple_variable_declarations._31938",
+      "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_006c4a9c",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T14:03:45Z",
+      "side": 1,
+      "message": "Would be nice to not introduce such long functions anymore, especially if there is a lot of logic involved.",
+      "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "499865f5_205066d3",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.listview.js",
         "patchSetId": 10
@@ -13,6 +47,23 @@
       "writtenOn": "2013-08-22T13:26:15Z",
       "side": 1,
       "message": "If used as a setter, this should better return a self reference/undefined since this is the usual jQuery widget behavior which allows chaining. This is also what we have implemented in most other places I am aware of (e.g. snakview.value or snakview.snak) whith the exception of snaklist (perhaps this should be changed there to be consistent).",
+      "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_80293a3c",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T14:03:45Z",
+      "side": 1,
+      "message": "This seems like a useful functionality for SnakList in general. Implementing it there would also allow for a dedicated test.\n\nSnakList.prototype.getGroupedSnaks\n\nor so.",
       "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
