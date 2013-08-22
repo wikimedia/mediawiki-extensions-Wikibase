@@ -16,6 +16,24 @@
       "revId": "7aadaa45c65129c5d832768f70f87c2679a15504",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_c0950288",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-08-22T12:33:40Z",
+      "side": 1,
+      "message": "MultilingualSerializer needs to know $options to make decision on some things. It may be possible to give it a $this, which looks worse however.",
+      "parentUuid": "499865f5_e0a91ee0",
+      "revId": "7aadaa45c65129c5d832768f70f87c2679a15504",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
