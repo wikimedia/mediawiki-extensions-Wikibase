@@ -1,15 +1,19 @@
 <?php
 
 namespace Wikibase\Test;
+
 use DataValues\StringValue;
+use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityId;
 use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\ItemContent;
-use \ValueFormatters\ValueFormatterFactory;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
@@ -19,20 +23,6 @@ use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\EntityView
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
  *
  * @file
  * @since 0.4
@@ -54,10 +44,10 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 		$valueFormatters = new ValueFormatterFactory( array() );
 		$entityLoader = new MockRepository();
 
-		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
-		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
+		$p11 = new PropertyId( 'p11' );
+		$p23 = new PropertyId( 'p23' );
+		$p42 = new PropertyId( 'p42' );
+		$p44 = new PropertyId( 'p44' );
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeLookup->setDataTypeForProperty( $p23, 'string' );
@@ -97,7 +87,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 		$itemContent->getEntity()->addClaim(
 			new Claim(
 				new PropertyNoValueSnak(
-					new EntityId( Property::ENTITY_TYPE, 24 )
+					new PropertyId( 'p24' )
 				)
 			)
 		);
@@ -166,12 +156,12 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 	public function getParserOutputLinksProvider() {
 		$argLists = array();
 
-		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
-		$p23 = new EntityId( Property::ENTITY_TYPE, 42 );
-		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
+		$p11 = new PropertyId( 'p11' );
+		$p23 = new PropertyId( 'p42' );
+		$p44 = new PropertyId( 'p44' );
 
-		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
-		$q24 = new EntityId( Item::ENTITY_TYPE, 24 );
+		$q23 = new ItemId( 'Q23' );
+		$q24 = new ItemId( 'Q24' );
 
 		$argLists["empty"] = array(
 			array(),
@@ -190,16 +180,16 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 			array( $p23 ) );
 
 		$argLists["PropertyValueSnak with EntityId"] = array(
-			array( new Claim( new PropertyValueSnak( $p44, $q23 ) ) ),
+			array( new Claim( new PropertyValueSnak( $p44, new EntityIdValue( $q23 ) ) ) ),
 			array( $p44, $q23 ) );
 
 		$argLists["Mixed Snaks"] = array(
 			array(
-				new Claim( new PropertyValueSnak( $p11, $q23 ) ),
+				new Claim( new PropertyValueSnak( $p11, new EntityIdValue( $q23 ) ) ),
 				new Claim( new PropertyNoValueSnak( $p44 ) ),
 				new Claim( new PropertySomeValueSnak( $p44 ) ),
 				new Claim( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
-				new Claim( new PropertyValueSnak( $p44, $q24 ) ),
+				new Claim( new PropertyValueSnak( $p44, new EntityIdValue( $q24 ) ) ),
 			),
 			array( $p11, $q23, $p44, $q24 ) );
 
@@ -231,8 +221,8 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 	public function getParserOutputExternalLinksProvider() {
 		$argLists = array();
 
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'P23' );
+		$p42 = new PropertyId( 'P42' );
 
 		$argLists["empty"] = array(
 			array(),
