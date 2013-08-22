@@ -76,7 +76,6 @@ class ReferencedUrlFinder {
 		} catch ( PropertyNotFoundException $ex ) {
 			// FIXME: wrong place to stop exception propagation.
 			// Either do not catch this here or throw a new exception instead.
-			wfLogWarning( 'No data type known for unknown property ' . $propertyId );
 			return false;
 		}
 
