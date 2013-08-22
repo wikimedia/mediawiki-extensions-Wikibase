@@ -223,6 +223,7 @@ $specialPageAliases['mk'] = array(
 	'SetAliases' => array( 'ЗадајАлијаси' ),
 	'SetSiteLink' => array( 'ЗадајВикиврска' ),
 	'EntitiesWithoutLabel' => array( 'ЕдинициБезЕтикета' ),
+	'EntitiesWithoutDescription' => array( 'ЕдинициБезОпис' ),
 	'ItemsWithoutSitelinks' => array( 'ПредметиБезВикиврски' ),
 	'MyLanguageFallbackChain' => array( 'МојЛанецНаРезервниЈазици' ),
 );
