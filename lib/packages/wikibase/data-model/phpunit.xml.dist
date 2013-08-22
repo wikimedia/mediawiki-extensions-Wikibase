@@ -22,4 +22,9 @@
             <directory>tests/phpunit</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">DataModel</directory>
+        </whitelist>
+    </filter>
 </phpunit>
