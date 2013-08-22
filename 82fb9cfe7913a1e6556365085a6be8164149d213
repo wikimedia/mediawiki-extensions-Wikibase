@@ -67,6 +67,40 @@
       "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_c0234258",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.Claim.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T14:19:03Z",
+      "side": 1,
+      "message": "Just another reason why you want the generic set reviewed fast and implemented for SnakList, would save you four lines of code here (plus two empty ones) by using .filter(). Same true for quite a few other places I guess.",
+      "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_201b0619",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.SnakList.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T14:19:03Z",
+      "side": 1,
+      "message": "Not sure but I think you should check for equal snaks. Makes me wonder, why are we not using a SnakList for the _snaks field anyhow? using SnakList.add would just do that check for you naturally.",
+      "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
