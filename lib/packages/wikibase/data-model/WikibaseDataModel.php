@@ -47,6 +47,25 @@ spl_autoload_register( function ( $className ) {
 	if ( array_key_exists( $className, $classes ) ) {
 		include_once __DIR__ . '/' . $classes[$className];
 	}
+	else {
+		$className = ltrim( $className, '\\' );
+		$fileName = '';
+		$namespace = '';
+
+		if ( $lastNsPos = strripos( $className, '\\') ) {
+			$namespace = substr( $className, 0, $lastNsPos );
+			$className = substr( $className, $lastNsPos + 1 );
+			$fileName  = str_replace( '\\', '/', $namespace ) . '/';
+		}
+
+		$fileName .= str_replace( '_', '/', $className ) . '.php';
+
+		$nsSegments = explode( '\\', $namespace );
+
+		if ( count( $nsSegments ) > 1 && $nsSegments[0] === 'Wikibase' && $nsSegments[1] === 'DataModel' ) {
+			require_once __DIR__ . '/' . substr( $fileName, 9 );
+		}
+	}
 } );
 
 if ( defined( 'MEDIAWIKI' ) ) {

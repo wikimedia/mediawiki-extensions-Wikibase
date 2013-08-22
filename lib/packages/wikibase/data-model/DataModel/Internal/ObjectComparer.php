@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Internal;
 
 /**
  * Compares two objects and returns if they are equal.

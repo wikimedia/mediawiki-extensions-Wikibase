@@ -8,6 +8,7 @@ use Diff\MapPatcher;
 use Diff\Patcher;
 use InvalidArgumentException;
 use RuntimeException;
+use Wikibase\DataModel\Internal\ObjectComparer;
 use Wikibase\Lib\GuidGenerator;
 
 /**

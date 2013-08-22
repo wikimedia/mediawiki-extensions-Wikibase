@@ -49,9 +49,6 @@ return call_user_func( function() {
 		'Wikibase\ReferenceObject' => 'DataModel/Reference.php', // Deprecated
 		'Wikibase\ReferenceList' => 'DataModel/ReferenceList.php',
 		'Wikibase\References' => 'DataModel/References.php',
-
-		'Wikibase\DataModel\SimpleSiteLink' => 'DataModel/SimpleSiteLink.php',
-		'Wikibase\ObjectComparer' => 'DataModel/ObjectComparer.php',
 	);
 
 	return $classes;
