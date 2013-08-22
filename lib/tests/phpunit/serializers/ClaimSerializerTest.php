@@ -3,27 +3,13 @@
 namespace Wikibase\Test;
 
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
- * Tests for the Wikibase\ClaimSerializer class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\Serializers\ClaimSerializer
  *
  * @file
  * @since 0.2
@@ -62,7 +48,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$id = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id = new PropertyId( 'P42' );
 
 		$validArgs[] = new Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
 
@@ -78,7 +64,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'id' => $claim->getGuid(),
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
-					'property' => 'p42',
+					'property' => 'P42',
 				),
 				'type' => 'claim',
 			),
@@ -92,7 +78,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'id' => $statement->getGuid(),
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
-					'property' => 'p42',
+					'property' => 'P42',
 				),
 				'rank' => 'normal',
 				'type' => 'statement',
@@ -105,7 +91,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				new \Wikibase\PropertyNoValueSnak( $id ),
 				new \Wikibase\PropertySomeValueSnak( $id ),
 				new \Wikibase\PropertyNoValueSnak(
-					new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 )
+					new PropertyId( 'P1' )
 				),
 			) )
 		);
@@ -120,19 +106,19 @@ class ClaimSerializerTest extends SerializerBaseTest {
 					new \Wikibase\PropertyNoValueSnak( $id )
 				),
 				'qualifiers' => array(
-					'p42' => array(
+					'P42' => array(
 						$snakSerializer->getSerialized( new \Wikibase\PropertyNoValueSnak( $id ) ),
 						$snakSerializer->getSerialized(
 							new \Wikibase\PropertySomeValueSnak( $id )
 						),
 					),
-					'p1' => array(
+					'P1' => array(
 						$snakSerializer->getSerialized( new \Wikibase\PropertyNoValueSnak(
-							new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 )
+							new PropertyId( 'P1' )
 						) ),
 					),
 				),
-				'qualifiers-order' => array( 'p42', 'p1' ),
+				'qualifiers-order' => array( 'P42', 'P1' ),
 				'type' => 'claim',
 			),
 		);
@@ -154,7 +140,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	 * @dataProvider rankProvider
 	 */
 	public function testRankSerialization( $rank ) {
-		$id = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id = new PropertyId( 'P42' );
 		$statement = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( $id ) );
 
 		$statement->setRank( $rank );

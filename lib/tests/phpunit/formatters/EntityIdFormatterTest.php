@@ -3,29 +3,16 @@
 namespace Wikibase\Test;
 
 use ValueFormatters\FormatterOptions;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Item;
 use Wikibase\Property;
 
 /**
- * Unit tests for the Wikibase\Lib\EntityIdFormatter class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\EntityIdFormatter
  *
  * @file
  * @since 0.4
@@ -44,14 +31,6 @@ class EntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newEntityIdFormatter() {
 		$options = new FormatterOptions();
-		$options->setOption(
-			EntityIdFormatter::OPT_PREFIX_MAP,
-			array(
-				 Item::ENTITY_TYPE => 'I',
-				 Property::ENTITY_TYPE => 'PropERTY',
-			)
-		);
-
 		return new EntityIdFormatter( $options );
 	}
 
@@ -63,13 +42,13 @@ class EntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function validProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'I42' );
-		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 9001 ), 'I9001' );
-		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 1 ), 'I1' );
+		$argLists[] = array( new ItemId( 'q42' ), 'Q42' );
+		$argLists[] = array( new ItemId( 'q9001' ), 'Q9001' );
+		$argLists[] = array( new ItemId( 'q1' ), 'Q1' );
 
-		$argLists[] = array( new EntityId( Property::ENTITY_TYPE, 42 ), 'PropERTY42' );
-		$argLists[] = array( new EntityId( Property::ENTITY_TYPE, 9001 ), 'PropERTY9001' );
-		$argLists[] = array( new EntityId( Property::ENTITY_TYPE, 1 ), 'PropERTY1' );
+		$argLists[] = array( new PropertyId( 'p42' ), 'P42' );
+		$argLists[] = array( new PropertyId( 'p9001' ), 'P9001' );
+		$argLists[] = array( new PropertyId( 'p1' ), 'P1' );
 
 		return $argLists;
 	}
