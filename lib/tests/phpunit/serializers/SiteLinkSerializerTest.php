@@ -121,15 +121,11 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$options = new EntitySerializationOptions( $this->getIdFormatter() );
 		$siteStore = \SiteSQLStore::newInstance();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
-		$serializedSiteLinks = $siteLinkSerializer->getSerialized( $sitelinks );
+		$siteLinkSerializer->getSerialized( $sitelinks );
 	}
 
 	protected function getIdFormatter() {
-		$formatterOptions = new FormatterOptions( array( EntityIdFormatter::OPT_PREFIX_MAP => array(
-			'item' => 'i',
-			'property' => 'p',
-		) ) );
-
+		$formatterOptions = new FormatterOptions();
 		return new EntityIdFormatter( $formatterOptions );
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Iterator, DatabaseBase;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * Term lookup cache.
@@ -577,7 +578,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			return array();
 		}
 
-		// this is the maximum limit of search results TODO this should not be hardcoded
+		// this is the maximum limit of search results
+		// TODO this should not be hardcoded
 		$internalLimit = 5000;
 
 		$conditions = $this->termsToConditions( $terms, null, $entityType, false, $options );
@@ -641,8 +643,13 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 
 		// turn numbers into entity ids
 		$result = array();
+		$idParser = new BasicEntityIdParser();
+
 		foreach ( $ids as $id ) {
-			$result[] = new EntityId( $entityType, $id );
+			// FIXME: this is using the deprecated EntityId constructor and a hack to get the
+			// correct EntityId type that will not work for entity types other then item and property.
+			$id = new EntityId( $entityType, $id );
+			$result[] = $idParser->parse( $id->getSerialization() );
 		}
 
 		return $result;

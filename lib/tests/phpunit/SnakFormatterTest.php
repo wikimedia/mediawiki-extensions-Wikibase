@@ -7,7 +7,9 @@ use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
@@ -18,22 +20,7 @@ use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
 
 /**
- * Tests for the Wikibase\Lib\SnakFormatter class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\SnakFormatter
  *
  * @since 0.4
  *
@@ -49,20 +36,20 @@ use Wikibase\PropertyValueSnak;
  */
 class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
-	private $stringPropertyId = 572106;
+	private $stringPropertyId = 'P572106';
 
-	private $itemPropertyId = 1730;
+	private $itemPropertyId = 'P1730';
 
 	private function newPropertyDataTypeLookup() {
 		$lookup = new InMemoryDataTypeLookup();
 
 		$lookup->setDataTypeForProperty(
-			new EntityId( Property::ENTITY_TYPE, $this->stringPropertyId ),
+			new PropertyId( $this->stringPropertyId ),
 			'string-datatype'
 		);
 
 		$lookup->setDataTypeForProperty(
-			new EntityId( Property::ENTITY_TYPE, $this->itemPropertyId ),
+			new PropertyId( $this->itemPropertyId ),
 			'wikibase-item-datatype'
 		);
 
@@ -91,17 +78,8 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newItemDataType() {
-		$formatterOptions = new FormatterOptions( array(
-			EntityIdParser::OPT_PREFIX_MAP => array(
-				Item::ENTITY_TYPE => 'q'
-			)
-		) );
-
-		$parserOptions = new ParserOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => array(
-				'q' => Item::ENTITY_TYPE
-			)
-		) );
+		$formatterOptions = new FormatterOptions();
+		$parserOptions = new ParserOptions();
 
 		return new DataType(
 			'wikibase-item-datatype',
@@ -142,7 +120,7 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testFormatOnePropertyValueSnakWithString( $expected ) {
 		$propertyValueSnak = new PropertyValueSnak(
-			$this->stringPropertyId,
+			new PropertyId( $this->stringPropertyId ),
 			new StringValue( $expected )
 		);
 
@@ -164,14 +142,14 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		foreach ( $this->getStrings() as $string ) {
 			$propertyValueSnaks[] = new PropertyValueSnak(
-				$this->stringPropertyId,
+				new PropertyId( $this->stringPropertyId ),
 				new StringValue( $string )
 			);
 		}
 
 		$propertyValueSnaks[] = new PropertyValueSnak(
-			$this->itemPropertyId,
-			new EntityId( Item::ENTITY_TYPE, 1337 )
+			new PropertyId( $this->itemPropertyId ),
+			new EntityIdValue( new ItemId( 'Q1337' ) )
 		);
 
 		$formatted = $this->newFormatter()->formatSnaks( $propertyValueSnaks, 'en' );
@@ -179,7 +157,7 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$expected = array_merge(
 			$this->getStrings(),
-			array( 'q1337' )
+			array( 'Q1337' )
 		);
 
 		$this->assertSameSize( $expected, $formatted );
