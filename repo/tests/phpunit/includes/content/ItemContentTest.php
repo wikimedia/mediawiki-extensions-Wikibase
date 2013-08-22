@@ -6,22 +6,7 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\ItemContent;
 
 /**
- * Tests for the Wikibase\ItemContent class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\ItemContent
  *
  * @file
  * @since 0.1
@@ -136,6 +121,75 @@ class ItemContentTest extends EntityContentTest {
 				'Site link [https://es.wikipedia.org/wiki/Pelecanus Pelecanus] already used by item [[$1]].'
 			)
 		);
+	}
+
+	public function provideEquals() {
+		return array(
+			array( #0
+				array(),
+				array(),
+				true
+			),
+			array( #1
+				array( 'labels' => array() ),
+				array( 'descriptions' => null ),
+				true
+			),
+			array( #2
+				array( 'entity' => 'q23' ),
+				array(),
+				true
+			),
+			array( #3
+				array( 'entity' => 'q23' ),
+				array( 'entity' => 'q24' ),
+				false
+			),
+			array( #4
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'en' => 'foo',
+				) ),
+				false
+			),
+			array( #5
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'de' => 'bar',
+					'en' => 'foo',
+				) ),
+				true
+			),
+			array( #6
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO' ),
+				) ),
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO', 'xyz' ),
+				) ),
+				false
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideEquals
+	 */
+	public function testEquals( array $a, array $b, $equals ) {
+		$itemA = $this->newFromArray( $a );
+		$itemB = $this->newFromArray( $b );
+
+		$actual = $itemA->equals( $itemB );
+		$this->assertEquals( $equals, $actual );
+
+		$actual = $itemB->equals( $itemA );
+		$this->assertEquals( $equals, $actual );
 	}
 
 }

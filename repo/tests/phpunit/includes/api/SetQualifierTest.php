@@ -1,32 +1,27 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
+use DataValues\StringValue;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
+use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Claim;
-use Wikibase\EntityId;
 
 /**
- * Unit tests for the Wikibase\Repo\Api\SetQualifier class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Api\SetQualifier
  *
  * @file
  * @since 0.3
@@ -55,9 +50,9 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	protected function snakProvider() {
 		static $hasProperties = false;
 
-		$prop42 = new EntityId( Property::ENTITY_TYPE, 42 );
-		$prop9001 = new EntityId( Property::ENTITY_TYPE, 9001 );
-		$prop7201010 = new EntityId( Property::ENTITY_TYPE, 7201010 );
+		$prop42 = new PropertyId( 'p42' );
+		$prop9001 = new PropertyId( 'p9001' );
+		$prop7201010 = new PropertyId( 'p7201010' );
 
 		if ( !$hasProperties ) {
 			$prop = PropertyContent::newEmpty();
@@ -80,9 +75,9 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( $prop42 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( $prop9001 );
-		$snaks[] = new \Wikibase\PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyNoValueSnak( $prop42 );
+		$snaks[] = new PropertySomeValueSnak( $prop9001 );
+		$snaks[] = new PropertyValueSnak( $prop7201010, new StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
@@ -93,20 +88,20 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	protected function claimProvider() {
 		$statements = array();
 
-		$mainSnak = new \Wikibase\PropertyNoValueSnak( 42 );
-		$statement = new \Wikibase\Statement( $mainSnak );
+		$mainSnak = new PropertyNoValueSnak( 42 );
+		$statement = new Statement( $mainSnak );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
-			$snaks = new \Wikibase\SnakList( array( $snak ) );
-			$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+			$snaks = new SnakList( array( $snak ) );
+			$statement->getReferences()->addReference( new Reference( $snaks ) );
 			$statements[] = $statement;
 		}
 
 		$statement = clone $statement;
-		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
-		$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+		$snaks = new SnakList( $this->snakProvider() );
+		$statement->getReferences()->addReference( new Reference( $snaks ) );
 		$statements[] = $statement;
 
 		$ranks = array(
@@ -131,10 +126,10 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	protected function newQualifierProvider() {
 		$properties = array();
 
-		$property1 = \Wikibase\Property::newFromType( 'commonsMedia' );
+		$property1 = Property::newFromType( 'commonsMedia' );
 		$properties[] = $property1;
 
-		$property2 = \Wikibase\Property::newFromType( 'wikibase-item' );
+		$property2 = Property::newFromType( 'wikibase-item' );
 		$properties[] = $property2;
 
 		foreach( $properties as $property ) {
@@ -145,17 +140,17 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		}
 
 		return array(
-			new \Wikibase\PropertySomeValueSnak( 9001 ),
-			new \Wikibase\PropertyNoValueSnak( 9001 ),
-			new \Wikibase\PropertyValueSnak( $property1->getId(), new \DataValues\StringValue( 'Dummy.jpg' ) ),
-			new \Wikibase\PropertyValueSnak( $property2->getId(), new EntityId( Item::ENTITY_TYPE, 802 ) ),
+			new PropertySomeValueSnak( 9001 ),
+			new PropertyNoValueSnak( 9001 ),
+			new PropertyValueSnak( $property1->getId(), new StringValue( 'Dummy.jpg' ) ),
+			new PropertyValueSnak( $property2->getId(), new EntityIdValue( new ItemId( 'q802' ) ) ),
 		);
 	}
 
 	public function testRequests() {
 		foreach( $this->claimProvider() as $claim ) {
 			$item = \Wikibase\Item::newEmpty();
-			$item->setId( new EntityId( Item::ENTITY_TYPE, 802 ) );
+			$item->setId( new ItemId( 'q802' ) );
 			$content = new \Wikibase\ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
 
@@ -182,7 +177,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			'property' => $entityIdFormatter->format( $qualifier->getPropertyId() ),
 		);
 
-		if ( $qualifier instanceof \Wikibase\PropertyValueSnak ) {
+		if ( $qualifier instanceof PropertyValueSnak ) {
 			$dataValue = $qualifier->getDataValue();
 			$params['value'] = \FormatJson::encode( $dataValue->getArrayValue() );
 		}
