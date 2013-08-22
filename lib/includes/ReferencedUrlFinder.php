@@ -7,7 +7,11 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 
 /**
- * Finds URLs given a list of entities or a list of claims.
+ * Finds URLs given a list of snaks.
+ *
+ * If a snaks property is not found or the type of DataValue
+ * does not match the expected one for URLs, the snak is ignored
+ * silently.
  *
  * @since 0.4
  *
@@ -65,8 +69,6 @@ class ReferencedUrlFinder {
 
 		if ( $snakValue instanceof StringValue ) {
 			$this->foundURLs[] = $snakValue->getValue();
-		} else {
-			wfLogWarning( 'Unexpected value type for url: ' . $snakValue->getType() );
 		}
 	}
 
@@ -74,9 +76,6 @@ class ReferencedUrlFinder {
 		try {
 			$type = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		} catch ( PropertyNotFoundException $ex ) {
-			// FIXME: wrong place to stop exception propagation.
-			// Either do not catch this here or throw a new exception instead.
-			wfLogWarning( 'No data type known for unknown property ' . $propertyId );
 			return false;
 		}
 
