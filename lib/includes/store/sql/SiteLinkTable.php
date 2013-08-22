@@ -1,27 +1,14 @@
 <?php
 
 namespace Wikibase;
+
 use MWException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Represents a lookup database table for sitelinks.
  * It should have these fields: ips_item_id, ips_site_id, ips_site_page.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.1
  *
@@ -138,13 +125,13 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityId $itemId
+	 * @param ItemId $itemId
 	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
 	 * @throws MWException
 	 */
-	public function deleteLinksOfItem( EntityId $itemId, $function = null ) {
+	public function deleteLinksOfItem( ItemId $itemId, $function = null ) {
 		if ( $this->readonly ) {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
@@ -199,7 +186,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 *
 	 * @param SimpleSiteLink $siteLink
 	 *
-	 * return EntityId|null
+	 * return ItemId|null
 	 */
 	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink ) {
 		$siteId = $siteLink->getSiteId();
@@ -207,7 +194,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 
 		$numericItemId = $this->getItemIdForLink( $siteId, $pageName );
 
-		return is_int( $numericItemId ) ? new EntityId( Item::ENTITY_TYPE, $numericItemId ) : null;
+		return is_int( $numericItemId ) ? new ItemId( 'Q' . $numericItemId ) : null;
 	}
 
 	/**
@@ -404,18 +391,12 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId $id
-	 *
-	 * @throws \MWException
+	 * @param ItemId $itemId
 	 *
 	 * @return SimpleSiteLink[]
 	 */
-	public function getSiteLinksForItem( EntityId $entityId ) {
-		if ( $entityId->getEntityType() !== Item::ENTITY_TYPE ) {
-			throw new \MWException( "$entityId is not an item id" );
-		}
-
-		$numericId = $entityId->getNumericId();
+	public function getSiteLinksForItem( ItemId $itemId ) {
+		$numericId = $itemId->getNumericId();
 
 		$dbr = $this->getConnection( DB_SLAVE );
 
