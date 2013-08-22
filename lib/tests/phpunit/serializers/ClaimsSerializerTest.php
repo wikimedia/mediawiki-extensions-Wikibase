@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\EntityId;
+
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\Claim;
@@ -9,22 +10,7 @@ use Wikibase\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
- * Tests for the Wikibase\ClaimsSerializer class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\Serializers\ClaimsSerializer
  *
  * @file
  * @since 0.3
@@ -62,11 +48,11 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$propertyId = new EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$propertyId = new PropertyId( 'P42' );
 
 		$claims = array(
 			new Claim( new PropertyNoValueSnak( $propertyId ) ),
-			new Claim( new PropertySomeValueSnak( new EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ) ) ),
+			new Claim( new PropertySomeValueSnak( new PropertyId( 'P1' ) ) ),
 			new Statement( new PropertyNoValueSnak( $propertyId ) ),
 		);
 
@@ -75,11 +61,11 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			new \Wikibase\Claims( $claims ),
 			array(
-				'p42' => array(
+				'P42' => array(
 					$claimSerializer->getSerialized( $claims[0] ),
 					$claimSerializer->getSerialized( $claims[2] ),
 				),
-				'p1' => array(
+				'P1' => array(
 					$claimSerializer->getSerialized( $claims[1] ),
 				),
 			),

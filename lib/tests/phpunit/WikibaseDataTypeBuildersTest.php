@@ -2,7 +2,24 @@
 
 namespace Wikibase\Test;
 
+use DataTypes\DataType;
+use DataTypes\DataTypeFactory;
+use DataValues\GlobeCoordinateValue;
+use DataValues\LatLongValue;
+use DataValues\NumberValue;
+use DataValues\StringValue;
+use DataValues\TimeValue;
+use ValueParsers\ParserOptions;
+use ValueValidators\Result;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Item;
+use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\WikibaseDataTypeBuilders;
+use Wikibase\Property;
+
 /**
+ * @covers Wikibase\Lib\WikibaseDataTypeBuilders
  *
  * @license GPL 2+
  * @file
@@ -15,38 +32,13 @@ namespace Wikibase\Test;
  * @group WikibaseValidators
  *
  * @author Daniel Kinzler
- */
-
-use DataTypes\DataType;
-use DataTypes\DataTypeFactory;
-use DataValues\GlobeCoordinateValue;
-use DataValues\LatLongValue;
-use DataValues\NumberValue;
-use DataValues\StringValue;
-use DataValues\TimeValue;
-use ValueParsers\ParserOptions;
-use ValueValidators\Result;
-use Wikibase\EntityId;
-use Wikibase\Item;
-use Wikibase\Lib\EntityIdParser;
-use Wikibase\Lib\WikibaseDataTypeBuilders;
-use Wikibase\Property;
-
-/**
- * Class WikibaseDataTypeBuildersTest
+ *
  * @package Wikibase\Test
  */
 class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newTypeFactory() {
-		$entityIdParser = new EntityIdParser(
-			new ParserOptions( array(
-				EntityIdParser::OPT_PREFIX_MAP => array(
-					'p' => Property::ENTITY_TYPE,
-					'q' => Item::ENTITY_TYPE,
-				)
-			) )
-		);
+		$entityIdParser = new EntityIdParser( new ParserOptions() );
 
 		$q8 = Item::newEmpty();
 		$q8->setId( 8 );
@@ -65,8 +57,8 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			//wikibase-item
 			array( 'wikibase-item', 'q8', false, 'Expected EntityId, string supplied' ),
 			array( 'wikibase-item', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
-			array( 'wikibase-item', new EntityId( Item::ENTITY_TYPE, 8 ), true, 'existing entity' ),
-			array( 'wikibase-item', new EntityId( Item::ENTITY_TYPE, 3 ), false, 'missing entity' ),
+			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
+			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
 
 			//commonsMedia
 			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
