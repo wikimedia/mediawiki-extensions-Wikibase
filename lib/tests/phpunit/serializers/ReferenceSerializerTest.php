@@ -1,25 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
- * Tests for the Wikibase\ReferenceSerializer class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\Serializers\ReferenceSerializer
  *
  * @file
  * @since 0.3
@@ -74,15 +60,15 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 			array(
 				'hash' => $reference->getHash(),
 				'snaks' => array(
-					'p42' => array(
+					'P42' => array(
 						$snakSerializer->getSerialized( $snaks[0] ),
 						$snakSerializer->getSerialized( $snaks[2] ),
 					),
-					'p1' => array(
+					'P1' => array(
 						$snakSerializer->getSerialized( $snaks[1] ),
 						$snakSerializer->getSerialized( $snaks[3] ),
 					),
-					'p9001' => array(
+					'P9001' => array(
 						$snakSerializer->getSerialized( $snaks[4] ),
 					),
 				),
