@@ -3,10 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\Claim;
-use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\Property

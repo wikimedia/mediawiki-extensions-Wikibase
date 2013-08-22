@@ -570,7 +570,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	public function baseIdProvider() {
 		$ids = array();
 
-		$ids[] = 0;
+		$ids[] = 1;
 		$ids[] = 42;
 		$ids[] = 9001;
 

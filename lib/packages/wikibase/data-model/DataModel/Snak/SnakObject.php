@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Base class for snaks.
@@ -21,28 +22,35 @@ abstract class SnakObject implements Snak {
 	/**
 	 * @since 0.1
 	 *
-	 * @var EntityId
+	 * @var PropertyId
 	 */
 	protected $propertyId;
 
 	/**
+	 * Support for passing in an EntityId instance that is not a PropertyId instance has
+	 * been deprecated since 0.5.
+	 *
 	 * @since 0.1
 	 *
-	 * @param EntityId|integer $propertyId
+	 * @param PropertyId|EntityId|integer $propertyId
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $propertyId ) {
 		if ( is_integer( $propertyId ) ) {
-			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+			$propertyId = PropertyId::newFromNumber( $propertyId );
 		}
 
 		if ( !$propertyId instanceof EntityId ) {
-			throw new InvalidArgumentException( '$propertyId should be a EntityId' );
+			throw new InvalidArgumentException( '$propertyId should be a PropertyId' );
 		}
 
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( 'The $propertyId of a property snak can only be an ID of a Property object' );
+		}
+
+		if ( !( $propertyId instanceof PropertyId ) ) {
+			$propertyId = new PropertyId( $propertyId->getSerialization() );
 		}
 
 		$this->propertyId = $propertyId;
@@ -53,7 +61,7 @@ abstract class SnakObject implements Snak {
 	 *
 	 * @since 0.1
 	 *
-	 * @return EntityId
+	 * @return PropertyId
 	 */
 	public function getPropertyId() {
 		return $this->propertyId;
@@ -108,7 +116,7 @@ abstract class SnakObject implements Snak {
 	 * @return Snak
 	 */
 	public function unserialize( $serialized ) {
-		$this->propertyId = new EntityId( Property::ENTITY_TYPE, (int)unserialize( $serialized ) );
+		$this->propertyId = PropertyId::newFromNumber( unserialize( $serialized ) );
 	}
 
 	/**
@@ -153,7 +161,7 @@ abstract class SnakObject implements Snak {
 	public static function newFromArray( array $data ) {
 		$snakType = array_shift( $data );
 
-		$data[0] = new EntityId( Property::ENTITY_TYPE, $data[0] );
+		$data[0] = PropertyId::newFromNumber( $data[0] );
 
 		if ( $snakType === 'value' ) {
 			$data[1] = \DataValues\DataValueFactory::singleton()->tryNewDataValue( $data[1], $data[2] );

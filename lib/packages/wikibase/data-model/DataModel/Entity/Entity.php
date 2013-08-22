@@ -8,8 +8,11 @@ use Diff\MapPatcher;
 use Diff\Patcher;
 use InvalidArgumentException;
 use RuntimeException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use Wikibase\DataModel\Internal\ObjectComparer;
 use Wikibase\Lib\GuidGenerator;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Represents a single Wikibase entity.
@@ -143,7 +146,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	public function __wakeup() {
 		// Compatibility with 0.1 and 0.2 serializations.
 		if ( is_int( $this->id ) ) {
-			$this->id = new EntityId( $this->getType(), $this->id );
+			$this->id = LegacyIdInterpreter::newIdFromTypeAndNumber( $this->getType(), $this->id );
 		}
 
 		// Compatibility with 0.2 and 0.3 ItemObjects.
@@ -163,35 +166,48 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 */
 	public function getId() {
 		if ( $this->id === false ) {
-			$this->id = $this->getUnstubbedId();
+			$this->unstubId();
 		}
 
 		return $this->id;
 	}
 
-	private function getUnstubbedId() {
+	private function unstubId() {
 		if ( array_key_exists( 'entity', $this->data ) ) {
-			if ( is_array( $this->data['entity'] ) ) {
-				// This is unstubbing of the current stubbing format
-				return new EntityId( $this->data['entity'][0], $this->data['entity'][1] );
-			}
-			else {
-				// This is unstubbing of the legacy stubbing format
-				return EntityId::newFromPrefixedId( $this->data['entity'] );
-			}
+			$this->id = $this->getUnstubbedId( $this->data['entity'] );
 		}
 		else {
-			return null;
+			$this->id = null;
+		}
+	}
+
+	private function getUnstubbedId( $stubbedId ) {
+		if ( is_string( $stubbedId ) ) {
+			// This is unstubbing of the current stubbing format
+			return $this->idFromSerialization( $stubbedId );
+		}
+		else {
+			// This is unstubbing of the legacy stubbing format
+			return LegacyIdInterpreter::newIdFromTypeAndNumber( $stubbedId[0], $stubbedId[1] );
 		}
 	}
 
 	/**
-	 * Sets the ID.
-	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
+	 * @since 0.5
+	 *
+	 * @param string $idSerialization
+	 *
+	 * @return EntityId
+	 */
+	protected abstract function idFromSerialization( $idSerialization );
+
+	/**
+	 * Can be EntityId since 0.3.
+	 * The support for setting an integer here is deprecated since 0.5.
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityId|integer $id Can be EntityId since 0.3
+	 * @param EntityId $id
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -204,11 +220,15 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			$this->id = $id;
 		}
 		else if ( is_integer( $id ) ) {
-			$this->id = new EntityId( $this->getType(), $id );
+			$this->id = LegacyIdInterpreter::newIdFromTypeAndNumber( $this->getType(), $id );
 		}
 		else {
 			throw new InvalidArgumentException( __METHOD__ . ' only accepts EntityId and integer' );
 		}
+
+		// This ensures the id is an instance of the correct derivative of EntityId.
+		// EntityId (non-derivative) instances are thus converted.
+		$this->id = $this->idFromSerialization( $this->id->getSerialization() );
 	}
 
 	/**

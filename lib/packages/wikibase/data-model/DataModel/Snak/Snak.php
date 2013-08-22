@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\Entity\PropertyId;
+
 /**
  * Interface for objects that represent a single Wikibase snak.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Snaks
@@ -21,7 +23,7 @@ interface Snak extends \Serializable, \Hashable, \Immutable, \Comparable {
 	 *
 	 * @since 0.2
 	 *
-	 * @return EntityId
+	 * @return PropertyId
 	 */
 	public function getPropertyId();
 

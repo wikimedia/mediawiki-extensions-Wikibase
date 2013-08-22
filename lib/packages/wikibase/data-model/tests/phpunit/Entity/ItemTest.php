@@ -8,8 +8,11 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\EntityId;
+use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\ItemDiff;
 use Wikibase\Property;
@@ -50,8 +53,8 @@ class ItemTest extends EntityTest {
 	 * @return array
 	 */
 	public function makeClaims() {
-		$id9001 = new EntityId( Item::ENTITY_TYPE, 9001 );
-		$id1 = new EntityId( Item::ENTITY_TYPE, 1 );
+		$id9001 = new EntityIdValue( new ItemId( 'q9001' ) );
+		$id1 = new EntityIdValue( new ItemId( 'q1' ) );
 
 		$claims = array();
 
@@ -62,11 +65,11 @@ class ItemTest extends EntityTest {
 			null,
 			new ReferenceList( array(
 				new Reference( new SnakList( array(
-						new PropertyNoValueSnak( 24 ),
-						new PropertyValueSnak( 1, new StringValue( 'onoez' ) ) ) )
+					new PropertyNoValueSnak( 24 ),
+					new PropertyValueSnak( 1, new StringValue( 'onoez' ) ) ) )
 				),
 				new Reference( new SnakList( array(
-						new PropertyValueSnak( 1, $id9001 ) ) )
+					new PropertyValueSnak( 1, $id9001 ) ) )
 				)
 			) )
 		);
@@ -100,7 +103,7 @@ class ItemTest extends EntityTest {
 	 *
 	 * @since 0.1
 	 *
-	 * @return \Wikibase\Item
+	 * @return Item
 	 */
 	protected function getNewEmpty() {
 		return Item::newEmpty();
@@ -113,7 +116,7 @@ class ItemTest extends EntityTest {
 	 *
 	 * @param array $data
 	 *
-	 * @return \Wikibase\Entity
+	 * @return Entity
 	 */
 	protected function getNewFromArray( array $data ) {
 		return Item::newFromArray( $data );
@@ -127,7 +130,7 @@ class ItemTest extends EntityTest {
 
 	public function testToArray() {
 		/**
-		 * @var \Wikibase\Item $item
+		 * @var Item $item
 		 */
 		foreach ( TestItems::getItems() as $item ) {
 			$this->assertInternalType( 'array', $item->toArray() );
@@ -136,21 +139,17 @@ class ItemTest extends EntityTest {
 
 	public function testGetId() {
 		/**
-		 * @var \Wikibase\Item $item
+		 * @var Item $item
 		 */
 		foreach ( TestItems::getItems() as $item ) {
-			// getId()
-			$this->assertTrue( is_null( $item->getId() ) || $item->getId() instanceof EntityId );
+			$this->assertTrue( is_null( $item->getId() ) || $item->getId() instanceof ItemId );
 		}
 	}
 
-	public function testSetId() {
-		/**
-		 * @var \Wikibase\Item $item
-		 */
+	public function testSetIdUsingNumber() {
 		foreach ( TestItems::getItems() as $item ) {
 			$item->setId( 42 );
-			$this->assertEquals( 42, $item->getId()->getNumericId() );
+			$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
 		}
 	}
 
@@ -197,7 +196,7 @@ class ItemTest extends EntityTest {
 		 */
 		$item = $item->copy();
 		$item->addClaim( new Statement(
-			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) )
+			new PropertyNoValueSnak( new PropertyId( 'P42' ) )
 		) );
 		$items[] = $item;
 

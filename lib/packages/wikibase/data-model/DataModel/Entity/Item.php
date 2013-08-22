@@ -5,6 +5,7 @@ namespace Wikibase;
 use Diff\Patcher;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
@@ -226,7 +227,15 @@ class Item extends Entity {
 		}
 	}
 
-}
+	/**
+	 * @since 0.5
+	 *
+	 * @param string $idSerialization
+	 *
+	 * @return EntityId
+	 */
+	protected function idFromSerialization( $idSerialization ) {
+		return new ItemId( $idSerialization );
+	}
 
-// Compatibility with 0.3 and earlier.
-class ItemObject extends Item {}
+}

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Snak;
 
 /**
@@ -25,7 +26,7 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 	public function snakProvider() {
 		$snaks = array();
 
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id42 = new PropertyId( 'p42' );
 
 		$snaks[] = new \Wikibase\PropertyNoValueSnak( $id42 );
 
@@ -102,7 +103,7 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testEqualsMoar() {
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id42 = new PropertyId( 'p42' );
 
 		$snak = new \Wikibase\PropertyNoValueSnak( $id42 );
 
@@ -113,7 +114,7 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 			new \DataValues\StringValue( 'Ohi there!' )
 		) ) );
 
-		$id43 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 43 );
+		$id43 = new PropertyId( 'p43' );
 
 		$this->assertFalse( $snak->equals( new \Wikibase\PropertyNoValueSnak( $id43 ) ) );
 	}

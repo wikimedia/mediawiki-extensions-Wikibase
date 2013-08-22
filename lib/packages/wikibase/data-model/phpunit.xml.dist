@@ -13,12 +13,7 @@
          strict="true"
          verbose="true">
     <testsuites>
-        <testsuite name="WikibaseDataModelWithoutMW">
-            <directory>tests/phpunit</directory>
-
-
-        </testsuite>
-        <testsuite name="WikibaseDataModelAll">
+        <testsuite name="WikibaseDataModel">
             <directory>tests/phpunit</directory>
         </testsuite>
     </testsuites>

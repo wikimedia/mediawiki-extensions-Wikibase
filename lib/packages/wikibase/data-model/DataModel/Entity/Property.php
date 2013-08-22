@@ -6,6 +6,7 @@ use DataTypes\DataType;
 use DataValues\DataValue;
 use InvalidArgumentException;
 use RuntimeException;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Represents a single Wikibase property.
@@ -102,6 +103,17 @@ class Property extends Entity {
 	 */
 	public static function newFromType( $dataTypeId ) {
 		return self::newFromArray( array( 'datatype' => $dataTypeId ) );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param string $idSerialization
+	 *
+	 * @return EntityId
+	 */
+	protected function idFromSerialization( $idSerialization ) {
+		return new PropertyId( $idSerialization );
 	}
 
 }

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
@@ -16,6 +17,7 @@ use Wikibase\Property;
  *
  * @group Wikibase
  * @group WikibaseDataModel
+ * @group EntityIdTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -109,24 +111,30 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 		$v04serialization = 'C:17:"Wikibase\EntityId":12:{["item",123]}';
 
 		$this->assertEquals(
-			new EntityId(
-				'item',
-				123
-			),
+			new EntityId( 'item', 'q123' ),
 			unserialize( $v04serialization )
+		);
+
+		$v05serialization = 'C:32:"Wikibase\DataModel\Entity\ItemId":15:{["item","Q123"]}';
+
+		$this->assertEquals(
+			new ItemId( 'q123' ),
+			unserialize( $v05serialization )
 		);
 	}
 
+	/**
+	 * This test will change when the serialization format changes.
+	 * If it is being changed intentionally, the test should be updated.
+	 * It is just here to catch unintentional changes.
+	 */
 	public function testSerializationStability() {
-		$v04serialization = 'C:17:"Wikibase\EntityId":12:{["item",123]}';
-		$id = new EntityId(
-			'item',
-			123
-		);
+		$v05serialization = 'C:32:"Wikibase\DataModel\Entity\ItemId":15:{["item","Q123"]}';
+		$id = new ItemId( 'q123' );
 
 		$this->assertEquals(
 			serialize( $id ),
-			$v04serialization
+			$v05serialization
 		);
 	}
 
