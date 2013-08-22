@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
-use ValueFormatters\Result;
 use Wikibase\EntityId;
 
 /**

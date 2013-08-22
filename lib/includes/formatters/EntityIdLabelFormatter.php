@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
-use ValueFormatters\Result;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
@@ -97,7 +96,7 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 	 *
 	 * @param mixed $value The value to format
 	 *
-	 * @return Result
+	 * @return string
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
 	 */
