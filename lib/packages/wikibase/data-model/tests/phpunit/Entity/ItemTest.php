@@ -23,6 +23,7 @@ use Wikibase\Statement;
 
 /**
  * @covers Wikibase\Item
+ *
  * Some tests for this class are located in ItemMultilangTextsTest,
  * ItemNewEmptyTest and ItemNewFromArrayTest.
  *

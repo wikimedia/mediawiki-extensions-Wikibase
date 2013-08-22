@@ -8,7 +8,7 @@ use Wikibase\Reference;
 use Wikibase\Statement;
 
 /**
- * Tests for the Wikibase\Statement class.
+ * @covers Wikibase\Statement
  *
  * @file
  * @since 0.1

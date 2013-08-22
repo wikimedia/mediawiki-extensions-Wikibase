@@ -11,7 +11,7 @@ use Wikibase\Snak;
 use Wikibase\SnakList;
 
 /**
- * Tests for the Wikibase\SnakList class.
+ * @covers Wikibase\SnakList
  *
  * @file
  * @since 0.1

@@ -9,7 +9,7 @@ use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 
 /**
- * Tests for the Wikibase\Property class.
+ * @covers Wikibase\Property
  *
  * @file
  * @since 0.1

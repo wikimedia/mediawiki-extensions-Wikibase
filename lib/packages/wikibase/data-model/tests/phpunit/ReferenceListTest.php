@@ -7,7 +7,7 @@ use Wikibase\Reference;
 use Wikibase\ReferenceList;
 
 /**
- * Tests for the Wikibase\ReferenceList class.
+ * @covers Wikibase\ReferenceList
  *
  * @file
  * @since 0.1

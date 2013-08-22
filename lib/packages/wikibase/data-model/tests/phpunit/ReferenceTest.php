@@ -9,7 +9,7 @@ use Wikibase\SnakList;
 use Wikibase\Snaks;
 
 /**
- * Tests for the Wikibase\Reference class.
+ * @covers Wikibase\Reference
  *
  * @file
  * @since 0.1

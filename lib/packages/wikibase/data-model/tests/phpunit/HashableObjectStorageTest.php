@@ -1,11 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\HashableObjectStorage;
 use Wikibase\Hashable;
 
 /**
- * Tests for the Wikibase\HashableObjectStorage class.
+ * @covers Wikibase\HashableObjectStorage
  *
  * @file
  * @since 0.1

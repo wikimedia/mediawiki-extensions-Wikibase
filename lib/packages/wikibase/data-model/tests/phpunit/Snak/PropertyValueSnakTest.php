@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use Wikibase\PropertyValueSnak;
 
 /**
- * Tests for the Wikibase\PropertyValueSnak class.
+ * @covers Wikibase\PropertyValueSnak
  *
  * @file
  * @since 0.1

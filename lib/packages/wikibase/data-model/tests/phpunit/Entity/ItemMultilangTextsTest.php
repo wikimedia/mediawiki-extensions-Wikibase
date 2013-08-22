@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\Item;
 
 /**
- * Tests for the Wikibase\Item class.
+ * @covers Wikibase\Item
  *
  * @file
  * @since 0.1

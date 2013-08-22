@@ -1,11 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\HashArray;
 use Hashable;
 
 /**
- * Tests for the Wikibase\HashArray class.
+ * @covers Wikibase\HashArray
  *
  * @file
  * @since 0.1
