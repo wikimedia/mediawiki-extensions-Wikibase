@@ -1,31 +1,19 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Query;
 use Wikibase\EntityLookup;
-use Wikibase\EntityId;
 use Wikibase\Property;
 
 use DataTypes\DataTypeFactory;
 
 /**
  * Base class for testing EntityLookup implementations
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.4
  *
@@ -199,56 +187,46 @@ abstract class EntityLookupTest extends EntityTestCase {
 			array( // #0
 				array(),
 				array(),
-				array( 'q42' ),
-				array( 'q42' => 'q42' ),
+				array( new ItemId( 'Q42' ) ),
+				array( 'Q42' => new ItemId( 'Q42' ) ),
 			),
 			array( // #1
-				array( 'q42', 'q33' ),
-				array( 'q42' => 'q42', 'q33' => null ),
-				array( 'q42', 'p753', 'p777' ),
-				array( 'q42' => 'q42', 'p753' => 'p753', 'p777' => null ),
+				array( new ItemId( 'Q42' ), new ItemId( 'Q33' ) ),
+				array( 'Q42' => new ItemId( 'Q42' ), 'Q33' => null ),
+				array( new ItemId( 'Q42' ), new PropertyId( 'P753' ), new PropertyId( 'P777' ) ),
+				array( 'Q42' => new ItemId( 'Q42' ), 'P753' => new PropertyId( 'P753' ), 'P777' => null ),
 			),
 		);
 	}
 
 	/**
-	 * @dataProvider provideGetEntities()
+	 * @dataProvider provideGetEntities
 	 *
 	 * @note check two batches to make sure overlapping batches don't confuse caching.
-	 *
 	 */
 	public function testGetEntities( $batch1, $expected1, $batch2, $expected2 ) {
 		$lookup = $this->getLookup();
 
 		// check first batch
-		$batch1 = self::makeEntityIds( $batch1 );
 		$entities1 = $lookup->getEntities( $batch1 );
-		$ids1 = self::getEntityIds( $entities1 );
+		$ids1 = $this->getIdsOfEntities( $entities1 );
 
-		$this->assertArrayEquals( self::makeEntityIds( $expected1 ), $ids1, false, true );
+		$this->assertArrayEquals( $expected1, $ids1, false, true );
 
 		// check second batch
-		$batch2 = self::makeEntityIds( $batch2 );
 		$entities2 = $lookup->getEntities( $batch2 );
-		$ids2 = self::getEntityIds( $entities2 );
+		$ids2 = $this->getIdsOfEntities( $entities2 );
 
-		$this->assertArrayEquals( self::makeEntityIds( $expected2 ), $ids2, false, true );
+		$this->assertArrayEquals( $expected2, $ids2, false, true );
 	}
 
-	protected static function getEntityIds( $entities ) {
-		return array_map( function( $entity ) use ( $entities ) {
-			return $entity == null ? null : $entity->getId();
-		}, $entities );
-	}
-
-	protected static function makeEntityIds( $ids ) {
-		return array_map( function( $id ) use ( $ids ) {
-			if ( is_string( $id ) ) {
-				$id = EntityId::newFromPrefixedId( $id );
-			}
-
-			return $id;
-		}, $ids );
+	protected function getIdsOfEntities( array $entities ) {
+		return array_map(
+			function( $entity ) {
+				return $entity == null ? null : $entity->getId();
+			},
+			$entities
+		);
 	}
 
 }
