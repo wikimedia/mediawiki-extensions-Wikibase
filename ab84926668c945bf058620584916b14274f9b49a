@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_60beeed2",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-22T14:24:53Z",
+      "side": 1,
+      "message": "Switches on this constant should not occur in the middle of production code.",
+      "revId": "ab84926668c945bf058620584916b14274f9b49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
