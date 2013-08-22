@@ -191,8 +191,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideGroupChangesByEntity() {
-		$entity1 = 'q1';
-		$entity2 = 'q2';
+		$entity1 = 'Q1';
+		$entity2 = 'Q2';
 
 		$changes = array( // $changes
 
