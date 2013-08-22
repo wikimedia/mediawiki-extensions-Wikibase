@@ -489,8 +489,9 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.listview.ListItemAdapter.js'
 			),
 			'dependencies' => array(
+				'jquery.nativeEventHandler',
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.toolbarcontroller',
+				'jquery.ui.widget',
 			)
 		),
 
@@ -499,14 +500,15 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.snaklistview.js',
 			),
 			'dependencies' => array(
+				'jquery.nativeEventHandler',
+				'jquery.ui.TemplatedWidget',
+				'jquery.ui.widget',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.snakview',
-				'jquery.wikibase.toolbarcontroller',
-				'wikibase.utilities',
+				'wikibase.datamodel',
 			),
 			'messages' => array(
 				'wikibase-claimview-snak-tooltip',
-				'wikibase-claimview-snak-new-tooltip',
 			)
 		),
 
@@ -562,6 +564,7 @@ return call_user_func( function() {
 				'jquery.wikibase.snakview',
 				'jquery.wikibase.snaklistview',
 				'wikibase.AbstractedRepoApi',
+				'jquery.wikibase.toolbarcontroller',
 			),
 			'messages' => array(
 				'wikibase-addqualifier',
