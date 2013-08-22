@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_205066d3",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T13:26:15Z",
+      "side": 1,
+      "message": "If used as a setter, this should better return a self reference/undefined since this is the usual jQuery widget behavior which allows chaining. This is also what we have implemented in most other places I am aware of (e.g. snakview.value or snakview.snak) whith the exception of snaklist (perhaps this should be changed there to be consistent).",
+      "revId": "82fb9cfe7913a1e6556365085a6be8164149d213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
