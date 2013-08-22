@@ -155,26 +155,31 @@ final class LibHooks {
 			),
 		);
 
-		$testModules['qunit']['jquery.wikibase.listview.tests'] = array(
+		$testModules['qunit']['jquery.wikibase.listview.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.listview',
 			),
-			'localBasePath' => __DIR__,
-			'remoteExtPath' => 'Wikibase/lib',
 		);
 
-		$testModules['qunit']['jquery.wikibase.wbtooltip.tests'] = array(
+		$testModules['qunit']['jquery.wikibase.snaklistview.tests'] = $moduleBase +  array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.snaklistview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.snaklistview',
+			),
+		);
+
+		$testModules['qunit']['jquery.wikibase.wbtooltip.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.wbtooltip.tests.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.wbtooltip',
 			),
-			'localBasePath' => __DIR__,
-			'remoteExtPath' => 'Wikibase/lib',
 		);
 
 		return true;
