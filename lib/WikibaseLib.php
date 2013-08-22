@@ -133,7 +133,7 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
 	$wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
-	$wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
+	$wgDataValues['wikibase-entityid'] = 'Wikibase\DataModel\Entity\EntityIdValue';
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
 
@@ -199,7 +199,7 @@ call_user_func( function() {
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
 
-	$wgValueFormatters[ \Wikibase\EntityId::getType() ] = 'Wikibase\Lib\EntityIdFormatter';
+	$wgValueFormatters['wikibase-entityid'] = 'Wikibase\Lib\EntityIdFormatter';
 
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 		include_once( __DIR__ . '/config/WikibaseLib.experimental.php' );
