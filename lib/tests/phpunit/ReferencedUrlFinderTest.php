@@ -92,14 +92,7 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
 		$snaks = array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' )  ) );
 
-		wfSuppressWarnings(); // suppress warnings about unknown property
-		try {
-			$actual = $linkFinder->findSnakLinks( $snaks );
-			$this->assertEmpty( $actual ); // since $p42 isn't know, this should return nothing
-
-			wfRestoreWarnings();
-		} catch ( Exception $exception ) {
-			wfRestoreWarnings();
-		}
+		$actual = $linkFinder->findSnakLinks( $snaks );
+		$this->assertEmpty( $actual ); // since $p42 isn't know, this should return nothing
 	}
 }
