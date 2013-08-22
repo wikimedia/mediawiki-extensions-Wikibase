@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_e0a91ee0",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-22T12:23:56Z",
+      "side": 1,
+      "message": "Should the later argument not contain the former?",
+      "revId": "7aadaa45c65129c5d832768f70f87c2679a15504",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
