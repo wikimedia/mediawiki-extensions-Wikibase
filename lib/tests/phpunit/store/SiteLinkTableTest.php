@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\EntityId;
 use Wikibase\SiteLinkTable;
 use Wikibase\Item;
 
@@ -47,7 +47,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		$items = array();
 
 		$item = Item::newEmpty();
-		$item->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
+		$item->setId( new ItemId( 'q1' ) );
 		$item->setLabel( 'en', 'Beer' );
 
 		$sitelinks = array(
@@ -125,4 +125,5 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
 		);
 	}
+
 }
