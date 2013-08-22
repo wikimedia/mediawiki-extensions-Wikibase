@@ -295,7 +295,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * @group API
 	 */
 	public function testGetEntitiesByBadId( ) {
-		$badid = 'q123456789';
+		$badid = 'Q123456789';
 		list( $res,, ) = $this->doApiRequest( array(
 			'action' => 'wbgetentities',
 			'ids' => $badid,

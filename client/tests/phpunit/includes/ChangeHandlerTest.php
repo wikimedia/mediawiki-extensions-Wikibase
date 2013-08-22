@@ -1,17 +1,19 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Site;
+use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\EntityChange;
+use Wikibase\EntityDiff;
 use Wikibase\EntityUsageIndex;
 use Wikibase\Item;
 use Wikibase\Property;
-use Wikibase\EntityChange;
-use Wikibase\EntityId;
-use Wikibase\EntityDiff;
-use Wikibase\Change;
 
 /**
  * @covers Wikibase\ChangeHandler
@@ -90,7 +92,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 		// entity 1, revision 11
 		$entity1 = Item::newEmpty();
-		$entity1->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
+		$entity1->setId( new ItemId( 'q1' ) );
 		$entity1->setLabel( 'en', 'one' );
 		self::$repo->putEntity( $entity1, 11 );
 
@@ -108,7 +110,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 		// entity 2, revision 21
 		$entity1 = Item::newEmpty();
-		$entity1->setId( new EntityId( Item::ENTITY_TYPE, 2 ) );
+		$entity1->setId( new ItemId( 'q2' ) );
 		$entity1->setLabel( 'en', 'two' );
 		self::$repo->putEntity( $entity1, 21 );
 
@@ -191,8 +193,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideGroupChangesByEntity() {
-		$entity1 = 'q1';
-		$entity2 = 'q2';
+		$entity1 = 'Q1';
+		$entity2 = 'Q2';
 
 		$changes = array( // $changes
 
@@ -434,7 +436,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 */
 	public static function makeTestChanges( $userId, $entityId ) {
 		$entity = Item::newEmpty();
-		$entity->setId( new EntityId( Item::ENTITY_TYPE, $entityId ) );
+		$entity->setId( new ItemId( 'q' . $entityId ) );
 
 		$offset = 100 * $entityId + 1000 * $userId;
 
@@ -716,7 +718,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 	public static function provideHandleChanges() {
 		$empty = Item::newEmpty();
-		$empty->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 0 ) );
+		$empty->setId( new ItemId( 'q55668877' ) );
 
 		$itemCreation = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
 		$itemDeletion = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
@@ -998,8 +1000,6 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 	public static function provideGetPagesToUpdate() {
 		$changes = TestChanges::getChanges();
-
-		$id = new \Wikibase\EntityId( Item::ENTITY_TYPE, 100 );
 
 		return array(
 			array( // #0
