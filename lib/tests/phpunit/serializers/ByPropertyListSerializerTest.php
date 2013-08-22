@@ -1,26 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListSerializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
- * Tests for the Wikibase\ByPropertyListSerializer class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\Serializers\ByPropertyListSerializer
  *
  * @file
  * @since 0.2
@@ -70,8 +57,8 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 
 		$dataValue0 = new \DataValues\StringValue( 'ohi' );
 
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
-		$id2 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 );
+		$id42 = new PropertyId( 'p42' );
+		$id2 = new PropertyId( 'p2' );
 
 		$snak0 = new \Wikibase\PropertyNoValueSnak( $id42 );
 		$snak1 = new \Wikibase\PropertySomeValueSnak( $id2 );
@@ -89,20 +76,20 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),
 			array(
-				'p42' => array(
+				'P42' => array(
 					0 => array(
 						'snaktype' => 'novalue',
-						'property' => 'p42',
+						'property' => 'P42',
 					),
 				),
-				'p2' => array(
+				'P2' => array(
 					0 => array(
 						'snaktype' => 'somevalue',
-						'property' => 'p2',
+						'property' => 'P2',
 					),
 					1 => array(
 						'snaktype' => 'value',
-						'property' => 'p2',
+						'property' => 'P2',
 						'datavalue' => $dataValue0->toArray(),
 					),
 				),
