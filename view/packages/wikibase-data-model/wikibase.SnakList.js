@@ -292,12 +292,13 @@ $.extend( SELF.prototype, {
 	 *
 	 * @param {wikibase.Snak} snak Snak to move within the list.
 	 * @param {number} toIndex
+	 * @return {wikibase.SnakList} This SnakList object.
 	 *
 	 * @throws {Error} if snak is not allowed to be moved to toIndex.
 	 */
 	move: function( snak, toIndex ) {
 		if( this.indexOf( snak ) === toIndex ) {
-			return;
+			return this;
 		}
 
 		var validIndices = this.getValidMoveIndices( snak );
@@ -343,6 +344,7 @@ $.extend( SELF.prototype, {
 			}
 		}
 
+		return this;
 	},
 
 	/**
@@ -350,7 +352,7 @@ $.extend( SELF.prototype, {
 	 * @since 0.4
 	 *
 	 * @param {wikibase.Snak} snak
-	 * @return {number} The snaks new index.
+	 * @return {wikibase.SnakList} This SnakList object.
 	 */
 	moveUp: function( snak ) {
 		var index = this.indexOf( snak ),
@@ -363,7 +365,7 @@ $.extend( SELF.prototype, {
 			}
 		}
 
-		return this.indexOf( snak );
+		return this;
 	},
 
 	/**
@@ -371,7 +373,7 @@ $.extend( SELF.prototype, {
 	 * @since 0.4
 	 *
 	 * @param {wikibase.Snak} snak
-	 * @return {number} The snak's new index.
+	 * @return {wikibase.SnakList} This SnakList object.
 	 */
 	moveDown: function( snak ) {
 		var index = this.indexOf( snak ),
@@ -384,7 +386,7 @@ $.extend( SELF.prototype, {
 			}
 		}
 
-		return this.indexOf( snak );
+		return this;
 	},
 
 	/**
