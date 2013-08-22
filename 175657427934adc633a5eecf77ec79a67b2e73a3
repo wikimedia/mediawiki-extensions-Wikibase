@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499865f5_6b6fb8fd",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T13:14:38Z",
+      "side": 1,
+      "message": "Why not use $moduleBase + array( ... ), would spare you the last two rows you have to define for each module",
+      "revId": "175657427934adc633a5eecf77ec79a67b2e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_cb1fecb2",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T13:14:38Z",
+      "side": 1,
+      "message": "It sucks that jQuery only offers a global registry for widgets, so we have to register test instances globally.\n\nAn alternative approach would be not using the widget factory, simply inheriting from jQuery.Widget and leaving that new constructor in the local scope.\nOtherwise, you should at least do\n\n delete( $.wikibasetest.valuewidget );\n\nthough, I would prefer if we could create mock widgets without using the widget factory.",
+      "revId": "175657427934adc633a5eecf77ec79a67b2e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_eb9108f1",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T13:14:38Z",
+      "side": 1,
+      "message": "This test has a few too many assertions for my taste. This part could simply go into its own test.\n\nAlso, the assertions here are basically the same as above, so why not make something like\n\n function testListviewInitializationAndDestruction( assert, listview, values ) {...}\n\nOr even more generic in case you would test different initialization options or conditions than just initial values. This would already save quite a few lines of very similar assertions and would allow to provide even more test cases with only little refactoring effort later. Refactoring this sort of thing later is a pain since you had to think again (and in addition to what you actually want to do) where to draw boundaries while those boundaries would be useful already.",
+      "revId": "175657427934adc633a5eecf77ec79a67b2e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499865f5_cee8da14",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-22T13:14:38Z",
+      "side": 1,
+      "message": "why not simply call the test \"enterNewItem()\". Always doing this will end in more structure and allows you to easy search or filter for a test of a certain member. Same for above tests of member functions.",
+      "revId": "175657427934adc633a5eecf77ec79a67b2e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
