@@ -2,29 +2,16 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
-use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
 
 /**
- * Tests for the MockRepository class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Test\MockRepository
  *
  * @file
  * @since 0.4
@@ -50,11 +37,11 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testHasEntity() {
-		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
-		$q42 = new EntityId( Item::ENTITY_TYPE, 42 );
+		$q23 = new ItemId( 'q23' );
+		$q42 = new ItemId( 'q42' );
 
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'p23' );
+		$p42 = new PropertyId( 'p42' );
 
 		$item = Item::newEmpty();
 		$item->setId( $q23 );
@@ -346,28 +333,28 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 			array( // #1: some entities
 				array( // ids
-					'q1',
-					'q2',
+					'Q1',
+					'Q2',
 				),
 				array( // expected
-					'q1' => array(
+					'Q1' => array(
 						'de' => 'eins',
 						'en' => 'one',
 					),
-					'q2' => array(
+					'Q2' => array(
 						'en' => 'two',
 					),
 				),
 			),
 
 			array( // #2: bad ID
-				array( 'q1', 'q22' ), // ids
+				array( 'Q1', 'Q22' ), // ids
 				array( // expected
-					'q1' => array(
+					'Q1' => array(
 						'en' => 'one',
 						'de' => 'eins',
 					),
-					'q22' => null,
+					'Q22' => null,
 				),
 			)
 		);
