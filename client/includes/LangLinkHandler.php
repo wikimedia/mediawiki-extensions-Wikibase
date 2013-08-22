@@ -286,7 +286,9 @@ class LangLinkHandler {
 
 		//FIXME: this needs to be moved into core, into SiteList resp. SiteArray!
 		$allSites = $this->sites->getSites();
-		$groupSites = $allSites->getGroup( Settings::get( 'siteGroup' ) );
+		$siteGroup = $this->getSiteGroup();
+
+		$groupSites = $allSites->getGroup( $siteGroup );
 
 		/* @var Site $site */
 		foreach ( $groupSites as $site ) {
