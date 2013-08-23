@@ -164,6 +164,16 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['jquery.wikibase.movetoolbar.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/toolbar/movetoolbar.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.movetoolbar',
+				'jquery.wikibase.listview',
+			),
+		);
+
 		$testModules['qunit']['jquery.wikibase.snaklistview.tests'] = $moduleBase +  array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.snaklistview.tests.js',
