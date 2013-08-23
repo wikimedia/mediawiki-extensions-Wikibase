@@ -485,7 +485,8 @@ This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript 
 {{Identical|Cancel}}',
 	'wikibase-add' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
-This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.',
+This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.
+{{Identical|Add}}',
 	'wikibase-addqualifier' => 'Label of the link to add a qualifier (see [[d:Wikidata:Glossary]]) to a claim or statement.',
 	'wikibase-addreference' => 'Label of the link to add a reference (see [[d:Wikidata:Glossary]]) to a statement.',
 	'wikibase-save-inprogress' => '[[File:Screenshot WikidataRepo 2012-05-25 L.png|right|350px]]
@@ -1570,6 +1571,8 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-listdatatypes-intro' => "Esta ye la llista de tolos tipos de datos que s'usen actualmente nesta instalación:",
 	'wikibase-history-title-with-label' => 'Historial de revisiones de «$2» ($1)',
 	'wikibase-history-title-without-label' => 'Historial de revisiones de ($1)',
+	'special-entitieswithoutdescription' => 'Entidaes ensin descripción',
+	'wikibase-entitieswithoutdescription-legend' => "Ver la llista d'entidaes ensin descripción",
 	'special-entitieswithoutlabel' => 'Entidaes ensin etiqueta',
 	'wikibase-entitieswithoutlabel-legend' => "Ver la llista d'entidaes ensin etiqueta",
 	'wikibase-entitieswithoutlabel-label-language' => 'Llingua:',
@@ -1646,8 +1649,10 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-property-summary-wbeditentity-create' => 'Creada una propiedá nueva',
 	'wikibase-property-summary-wbeditentity-update' => 'Actualizada una propiedá nueva',
 	'wikibase-property-summary-wbeditentity-override' => 'Llimpiada una propiedá',
+	'wikibase-property-summary-wbsetlabel-add' => 'Amestada la etiqueta en [$2]',
 	'wikibase-property-summary-wbsetlabel-set' => 'Camudada la etiqueta en [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Desaniciada la etiqueta en [$2]',
+	'wikibase-property-summary-wbsetdescription-add' => 'Amestada la descripción en [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Camudada la descripción en [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Desaniciada la descripción en [$2]',
 	'wikibase-property-summary-wbsetaliases-set' => "Definiendo {{PLURAL:$1|l'alcuñu|los alcuños}} en [$2]",
@@ -1710,6 +1715,7 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'right-property-create' => 'Crear propiedaes',
 	'right-property-remove' => 'Desaniciar propiedaes',
 	'right-alias-remove' => 'Desaniciar alcuños',
+	'right-alias-update' => 'Anovar alcuños',
 	'right-sitelink-remove' => 'Desaniciar enllaces de sitios',
 	'right-sitelink-update' => 'Anovar enllaces de sitios',
 	'right-linktitles-update' => "Anovar los títulos d'enllaces",
@@ -4733,8 +4739,8 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.', # Fu
 	'wikibase-blockeduser-tooltip-message' => 'No tienes permiso para editar porque tu nombre de usuario ha sido bloqueado.',
 	'wikibase-move-error' => 'No puedes trasladar las páginas que se encuentran en el espacio de nombres de datos, y no puedes trasladar páginas hacia allí.',
 	'wikibase-warning-constraint-violation-length' => 'Se activó una restricción de longitud para el código de idioma «$1».',
-	'wikibase-error-sitelink-already-used' => 'El enlace del sitio [$1 $2] ya es usado por el elemento [[$3]].', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedad ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'El enlace del sitio [$1 $2] ya es usado por el elemento [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedad ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Otro elemento ($3) ya tiene la etiqueta "$1" y la descripción "$4" asociada con el código de idioma $2', # Fuzzy
 	'special-itembytitle' => 'Elemento por título',
@@ -15597,6 +15603,8 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'wikibase-listdatatypes-intro' => 'Danh sách này có các kiểu dữ liệu đang được sử dụng trên máy này:',
 	'wikibase-history-title-with-label' => 'Lịch sử sửa đổi của “$2” ($1)',
 	'wikibase-history-title-without-label' => 'Lịch sử sửa đổi của ($1)',
+	'special-entitieswithoutdescription' => 'Thực thể không có miêu tả',
+	'wikibase-entitieswithoutdescription-legend' => 'Lấy danh sách các thực thể không có miêu tả',
 	'special-entitieswithoutlabel' => 'Thực thể không có nhãn',
 	'wikibase-entitieswithoutlabel-legend' => 'Lấy danh sách thực thể không có nhãn',
 	'wikibase-entitieswithoutlabel-label-language' => 'Ngôn ngữ:',
@@ -15675,8 +15683,10 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'wikibase-property-summary-wbeditentity-create' => 'Đã tạo thuộc tính mới',
 	'wikibase-property-summary-wbeditentity-update' => 'Đã cập nhật thuộc tính',
 	'wikibase-property-summary-wbeditentity-override' => 'Đã ghi đè thuộc tính',
+	'wikibase-property-summary-wbsetlabel-add' => 'Đã thêm nhãn [$2]',
 	'wikibase-property-summary-wbsetlabel-set' => 'Đã thay đổi nhãn [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Đã loại bỏ nhãn [$2]',
+	'wikibase-property-summary-wbsetdescription-add' => 'Đã thêm miêu tả [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Đã thay đổi lời miêu tả [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Đã loại bỏ lời miêu tả [$2]',
 	'wikibase-property-summary-wbsetaliases-set' => '{{PLURAL:$1}}Đã đặt tên khác [$2]',
@@ -15739,6 +15749,7 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'right-property-create' => 'Tạo thuộc tính',
 	'right-property-remove' => 'Loại bỏ thuộc tính',
 	'right-alias-remove' => 'Loại bỏ tên khác',
+	'right-alias-update' => 'Cập nhật tên khác',
 	'right-sitelink-remove' => 'Loại bỏ liên kết dịch vụ',
 	'right-sitelink-update' => 'Cập nhật liên kết dịch vụ',
 	'right-linktitles-update' => 'Cập nhật tên liên kết',
