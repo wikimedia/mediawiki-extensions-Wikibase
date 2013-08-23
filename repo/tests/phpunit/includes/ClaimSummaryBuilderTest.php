@@ -8,7 +8,11 @@ use Wikibase\ClaimDiffer;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ClaimSummaryBuilder;
+use Wikibase\EntityId;
+use Wikibase\Property;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -42,6 +46,30 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	protected $dataTypeLookup;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->dataTypeLookup = new InMemoryDataTypeLookup();
+		$this->setDataTypes();
+	}
+
+	protected function setDataTypes() {
+		$this->dataTypeLookup->setDataTypeForProperty(
+			new EntityId( Property::ENTITY_TYPE, 7201010 ),
+			'string'
+		);
+
+		$this->dataTypeLookup->setDataTypeForProperty(
+			new EntityId( Property::ENTITY_TYPE, 112358 ),
+			'string'
+		);
+	}
 
 	/**
 	 * @return \Wikibase\Snak[]
@@ -88,7 +116,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 		return $statements;
 	}
 
-	public function buildUpdateClaimSummaryPovider() {
+	public function buildUpdateClaimSummaryProvider() {
 		$arguments = array();
 
 		foreach ( $this->claimProvider() as $claim ) {
@@ -142,14 +170,15 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 			return $old->equals( $new );
 		};
 
+		$claims = new Claims();
+		$newClaims = $this->claimProvider();
+
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
 			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
-			$idFormatter
+			$idFormatter,
+			$this->dataTypeLookup
 		);
-
-		$claims = new Claims();
-		$newClaims = $this->claimProvider();
 
 		foreach ( $newClaims as $newClaim ) {
 			$summary = $claimSummaryBuilder->buildClaimSummary( $claims, $newClaim );
@@ -160,7 +189,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider buildUpdateClaimSummaryPovider
+	 * @dataProvider buildUpdateClaimSummaryProvider
 	 *
 	 * @param Claim $originalClaim
 	 * @param Claim $modifiedClaim
@@ -180,7 +209,8 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
 			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
-			$idFormatter
+			$idFormatter,
+			$this->dataTypeLookup
 		);
 
 		$claims = new Claims();

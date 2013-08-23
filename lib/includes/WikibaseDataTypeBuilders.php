@@ -1,14 +1,19 @@
 <?php
 
+
 namespace Wikibase\Lib;
 
 use DataTypes\DataType;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\GlobeCoordinateFormatter;
+use ValueFormatters\StringFormatter;
+use ValueFormatters\TimeFormatter;
 use Parser;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SettingsArray;
+use Wikibase\Settings;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
@@ -103,7 +108,9 @@ class WikibaseDataTypeBuilders {
 		$validators[] = new TypeValidator( 'Wikibase\EntityId' );
 		$validators[] = new EntityExistsValidator( $this->entityLookup );
 
-		return new DataType( $id, 'wikibase-entityid', array(), array(), $validators );
+		$formatters = $this->getItemFormatters();
+
+		return new DataType( $id, 'wikibase-entityid', array(), $formatters, $validators );
 	}
 
 	public function buildMediaType( $id ) {
@@ -122,7 +129,11 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		$formatters = array(
+			'default' => new StringFormatter( new FormatterOptions() )
+		);
+
+		return new DataType( $id, 'string', array(), $formatters, array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildStringType( $id ) {
@@ -136,7 +147,11 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		$formatters = array(
+			'default' => new StringFormatter( new FormatterOptions() )
+		);
+
+		return new DataType( $id, 'string', array(), $formatters, array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildTimeType( $id ) {
@@ -171,7 +186,12 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'time', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		$formatters = array(
+			'default' => new TimeFormatter( new FormatterOptions() )
+		);
+
+		return new DataType( $id, 'time', array(), $formatters,
+			array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildCoordinateType( $id ) {
@@ -195,7 +215,17 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'globecoordinate', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		$formatters = array(
+			'default' => new GlobeCoordinateFormatter( new FormatterOptions() )
+		);
+
+		return new DataType(
+			$id,
+			'globecoordinate',
+			array(),
+			$formatters,
+			array( new TypeValidator( 'DataValues\DataValue' ), $topValidator )
+		);
 	}
 
 	public function buildUrlType( $id ) {
@@ -215,7 +245,54 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		$formatters = array(
+			'default' => new StringFormatter( new FormatterOptions() )
+		);
+
+		return new DataType( $id, 'string', array(), $formatters,
+			array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return ValueFormatter[]
+	 */
+	protected function getItemFormatters() {
+		$idFormatter = $this->getEntityIdFormatter();
+
+		$labelFormatter = new EntityIdLabelFormatter(
+			new FormatterOptions(),
+			$this->entityLookup
+		);
+		$labelFormatter->setIdFormatter( $idFormatter );
+
+		$formatters = array(
+			'default' => $idFormatter,
+			'label' => $labelFormatter
+		);
+
+		return $formatters;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return EntityIdFormatter
+	 */
+	protected function getEntityIdFormatter() {
+		$prefixMap = array();
+
+		// @todo inject setting
+		foreach ( Settings::singleton()->getSetting( 'entityPrefixes' ) as $prefix => $entityType ) {
+			$prefixMap[$entityType] = $prefix;
+		}
+
+		$options = new FormatterOptions( array(
+			EntityIdFormatter::OPT_PREFIX_MAP => $prefixMap
+		) );
+
+		return new EntityIdFormatter( $options );
 	}
 
 }

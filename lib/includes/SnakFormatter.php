@@ -81,7 +81,17 @@ class SnakFormatter {
 		return $formattedValues;
 	}
 
-	private function formatSnak( Snak $snak, $language ) {
+	/**
+	 * Formats a snak for given language
+	 *
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 * Language $langage
+	 *
+	 * @return string
+	 */
+	public function formatSnak( Snak $snak, $language ) {
 		if ( $snak instanceof PropertyValueSnak ) {
 			return $this->formatPropertyValueSnak( $snak, $language );
 		}

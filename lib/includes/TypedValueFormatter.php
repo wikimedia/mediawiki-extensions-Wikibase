@@ -55,6 +55,7 @@ class TypedValueFormatter {
 		}
 
 		$valueFormatters = $dataType->getFormatters();
+
 		$valueFormatter = reset( $valueFormatters );
 
 		// FIXME: before we can properly use the DataType system some issues to its implementation need
