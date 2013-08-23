@@ -5,6 +5,8 @@ namespace Wikibase;
 use DataValues\TimeValue;
 use InvalidArgumentException;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * EditSummary-Builder for claim operations
@@ -16,6 +18,7 @@ use Wikibase\Lib\EntityIdFormatter;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ClaimSummaryBuilder {
 
@@ -35,6 +38,11 @@ class ClaimSummaryBuilder {
 	private $idFormatter;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	/**
 	 * Constructs a new ClaimSummaryBuilder
 	 *
 	 * @since 0.4
@@ -42,10 +50,12 @@ class ClaimSummaryBuilder {
 	 * @param string $apiModuleName
 	 * @param ClaimDiffer $claimDiffer
 	 * @param EntityIdFormatter $idFormatter
+	 * @param DataTypeLookup $dataTypeLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer, EntityIdFormatter $idFormatter ) {
+	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer,
+		EntityIdFormatter $idFormatter, PropertyDataTypeLookup $dataTypeLookup = null ) {
 		if ( !is_string( $apiModuleName ) ) {
 			throw new InvalidArgumentException( '$apiModuleName needs to be a string' );
 		}
@@ -53,6 +63,11 @@ class ClaimSummaryBuilder {
 		$this->apiModuleName = $apiModuleName;
 		$this->claimDiffer = $claimDiffer;
 		$this->idFormatter = $idFormatter;
+
+		// todo: inject
+		$this->dataTypeLookup = ( $dataTypeLookup === null ) ?
+			$this->dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup() :
+			$dataTypeLookup;
 	}
 
 	/**
@@ -128,20 +143,53 @@ class ClaimSummaryBuilder {
 					$pairs[$key] = array();
 				}
 
-				if ( $snak instanceof PropertyValueSnak ) {
-					$value = $snak->getDataValue();
-					// TODO: we should use value formatters here!
-					if ( $value instanceof TimeValue ) {
-						$value = $value->getTime();
-					}
-				} else {
-					$value = '-'; // todo handle no values in general way (needed elsewhere)
-				}
-
-				$pairs[$key][] = $value;
+				$pairs[$key][] = $this->getFormattedSnakValue( $snak );
 			}
 		}
 
 		return ( array( $pairs ) );
+	}
+
+	/**
+	 * Format a snak for the summary
+	 *
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 *
+	 * @return string
+	 */
+	protected function getFormattedSnakValue( Snak $snak ) {
+		if ( $snak instanceof PropertyValueSnak ) {
+			$formatter = $this->getValueFormatterForSnak( $snak );
+			$value = $snak->getDataValue();
+			$formattedValue = $formatter->format( $value );
+		} else {
+			$formattedValue = '-'; // todo handle no values in general way (needed elsewhere)
+		}
+
+		return $formattedValue;
+	}
+
+	/**
+	 * Get value formatter for a snak
+	 *
+	 * @todo put this in SnakFormatter and use snak formatter here
+	 *
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 *
+	 * @return ValueFormatter
+	 */
+	protected function getValueFormatterForSnak( Snak $snak ) {
+		$propertyId = $snak->getPropertyId();
+
+		$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		$dataType = WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getType( $dataTypeId );
+
+		$valueFormatters = $dataType->getFormatters();
+
+		return $valueFormatters['default'];
 	}
 }
