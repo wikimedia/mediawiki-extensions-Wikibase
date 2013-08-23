@@ -47,6 +47,8 @@ $messages['en'] = array(
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
+	'wikibase-move-up' => 'move up',
+	'wikibase-move-down' => 'move down',
 	'wikibase-undo-title' => 'Undoing edit to "$1"',
 	'wikibase-restore-title' => 'Restoring old revision of "$1"',
 	'wikibase-partial-undo' => 'The edit can partially be undone.',
@@ -535,6 +537,8 @@ Parameters:
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
 	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
 * $1 is the item label.',
+	'wikibase-move-up' => 'Label of a link to move a list item one step up within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.',
+	'wikibase-move-down' => 'Label of a link to move a list item one step down within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.',
 	'wikibase-restore-title' => 'Title shown on the form for restoring old revisions. Example is Restoring Old Revision of "Spain". Parameters:
 * $1 is the item label.',
 	'wikibase-partial-undo' => 'Message indicating that an edit can only partially be undone. This happens when the respective value has been changed again after the edit that is being undone.',
