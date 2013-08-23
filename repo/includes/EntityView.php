@@ -851,6 +851,9 @@ abstract class EntityView extends \ContextSource {
 			'messageHtml' => Utils::getCopyrightMessage()->parse(),
 		) );
 
+		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
+
 		// TODO: use injected id formatter
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 

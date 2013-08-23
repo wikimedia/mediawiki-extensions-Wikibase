@@ -142,6 +142,16 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 	display: inline-block;
 }
 
+.wb-movetoolbar {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+
+.wb-movetoolbar > .wb-editsection {
+	width: auto;
+}
+
 
 /********** /BASIC LAYOUT **********/
 
