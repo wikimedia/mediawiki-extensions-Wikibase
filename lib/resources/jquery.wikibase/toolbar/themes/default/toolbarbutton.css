@@ -17,3 +17,7 @@
 	color: grey;
 	text-decoration: none;
 }
+
+.wikibase-toolbarbutton-disabled .ui-icon {
+	background-image: url(../../../../../../../../resources/jquery.ui/themes/default/images/ui-icons_888888_256x240.png);
+}
