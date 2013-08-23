@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2995f1bc_9b1aab79",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbarcontroller.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-08-23T10:57:36Z",
+      "side": 1,
+      "message": "I disagree. This method has not crossed the line of being excessively complex and I do not like the proposed ideas of reducing complexity so far. However, I would like to get rid of the \"createDefaultEventHandlers\" mechanism anyway since it increases the toolbarcontroller\u0027s complexity on its own. Having get rid of that (which I plan to do in some following change set) would allow shoveling out some lines of here in a meaningful way.",
+      "parentUuid": "499865f5_4b0bdc7e",
+      "revId": "95d108b0a38e54f108d638e9770c4b4aeb5a0c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "499865f5_4b32fc5e",
         "filename": "lib/resources/jquery.wikibase/toolbar/toolbarcontroller.js",
         "patchSetId": 2
