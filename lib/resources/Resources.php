@@ -403,6 +403,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.movetoolbar',
 				'jquery.wikibase.removetoolbar',
 			)
 		),
@@ -438,6 +439,22 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarbase',
 				'jquery.wikibase.toolbareditgroup',
 			)
+		),
+
+		'jquery.wikibase.movetoolbar' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/toolbar/movetoolbar.js',
+			),
+			'styles' => array(
+				'jquery.wikibase/toolbar/themes/default/movetoolbar.css',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbarbase',
+			),
+			'messages' => array(
+				'wikibase-move-up',
+				'wikibase-move-down',
+			),
 		),
 
 		'jquery.wikibase.removetoolbar' => $moduleTemplate + array(
