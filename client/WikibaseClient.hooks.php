@@ -205,7 +205,7 @@ final class ClientHooks {
 	 * @param array $extraLibraries
 	 * @return bool
 	 */
-	public static function onScribuntoExternalLibraries ( $engine, array &$extraLibraries ) {
+	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
 		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
 			$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
 		}
@@ -397,6 +397,7 @@ final class ClientHooks {
 
 	/**
 	 * Add Wikibase item link in toolbox
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BaseTemplateToolbox
 	 *
 	 * @since 0.4
 	 *
@@ -427,11 +428,12 @@ final class ClientHooks {
 
 	/**
 	 * Add the connected item prefixed id as a JS config variable, for gadgets etc.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
+	 *
+	 * @since 0.4
 	 *
 	 * @param \OutputPage &$out
 	 * @param \Skin &$skin
-	 *
-	 * @since 0.4
 	 *
 	 * @return bool
 	 */
@@ -448,11 +450,12 @@ final class ClientHooks {
 	/**
 	 * Adds css for the edit links sidebar link or JS to create a new item
 	 * or to link with an existing one.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
+	 *
+	 * @since 0.1
 	 *
 	 * @param \OutputPage &$out
 	 * @param \Skin &$skin
-	 *
-	 * @since 0.1
 	 *
 	 * @return bool
 	 */
@@ -489,6 +492,7 @@ final class ClientHooks {
 
 	/**
 	 * Add output page property if repo links are suppressed, and property for item id
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OutputPageParserOutput
 	 *
 	 * @since 0.4
 	 *
@@ -532,6 +536,7 @@ final class ClientHooks {
 
 	/**
 	 * Displays a list of links to pages on the central wiki at the end of the language box.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateOutputPageBeforeExec
 	 *
 	 * @since 0.1
 	 *
@@ -586,6 +591,9 @@ final class ClientHooks {
 
 	/**
 	 * Adds a toggle for showing/hiding Wikidata entries in recent changes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesFilters
+	 *
+	 * @since 0.3
 	 *
 	 * @param \SpecialRecentChanges $special
 	 * @param array &$filters
@@ -608,6 +616,9 @@ final class ClientHooks {
 
 	/**
 	 * Adds a preference for showing or hiding Wikidata entries in recent changes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetPreferences
+	 *
+	 * @since 0.3
 	 *
 	 * @param \User $user
 	 * @param &$prefs[]
@@ -632,8 +643,11 @@ final class ClientHooks {
 
 	/**
 	 * Register the parser functions.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserFirstCallInit
 	 *
-	 * @param $parser \Parser
+	 * @since 0.4
+	 *
+	 * @param \Parser $parser
 	 *
 	 * @return bool
 	 */
@@ -649,6 +663,13 @@ final class ClientHooks {
 
 	/**
 	 * Register the magic word.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/MagicWordwgVariableIDs
+	 *
+	 * @since 0.4
+	 *
+	 * @param &$aCustomVariableIds[]
+	 *
+	 * @return bool
 	 */
 	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
 		$aCustomVariableIds[] = 'noexternallanglinks';
@@ -657,6 +678,16 @@ final class ClientHooks {
 
 	/**
 	 * Apply the magic word.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserGetVariableValueSwitch
+	 *
+	 * @since 0.4
+	 *
+	 * @param \Parser &$parser
+	 * @param &$cache[]
+	 * @param string &$magicWordId
+	 * @param bool|\PPFrame &$ret
+	 *
+	 * @return bool
 	 */
 	public static function onParserGetVariableValueSwitch( &$parser, &$cache, &$magicWordId, &$ret ) {
 		if( $magicWordId == 'noexternallanglinks' ) {
@@ -692,6 +723,9 @@ final class ClientHooks {
 
 	/**
 	 * Adds the Entity ID of the corresponding Wikidata item in action=info
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/InfoAction
+	 *
+	 * @since 0.4
 	 *
 	 * @param IContextSource $context
 	 * @param array $pageInfo
@@ -738,21 +772,28 @@ final class ClientHooks {
 	/**
 	 * After a page has been moved also update the item on the repo
 	 * This only works with CentralAuth
-	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleMoveComplete
+	 *
+	 * @since 0.4
 	 *
 	 * @param Title $oldTitle
 	 * @param Title $newTitle
 	 * @param User $user
-	 * @param integer $pageid database ID of the page that's been moved
-	 * @param integer $redirid database ID of the created redirect
+	 * @param int $pageid database ID of the page that's been moved
+	 * @param int $redirid database ID of the created redirect
 	 *
 	 * @return bool
 	 */
 	public static function onTitleMoveComplete( $oldTitle, $newTitle, $user, $pageId, $redirectId ) {
+		global $wgRequest;
 		wfProfileIn( __METHOD__ );
 
 		if ( Settings::get( 'propagateChangesToRepo' ) !== true ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		if ( $user->getRequest()->getBool( 'noupdatewikibaseitem', false ) ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
@@ -794,6 +835,70 @@ final class ClientHooks {
 		}
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Inject a checkbox
+	 *
+	 * @since 0.4
+	 *
+	 * @param &$descriptor[]
+	 * @param \HTMLForm &$form
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialMovepageForm( &$descriptor, \HTMLForm &$form ) {
+		$descriptor['noupdatewikibaseitem'] = array(
+			'type' => 'toggle',
+			'label-message' => 'wikibase-pageaction-noupdatelinkitem',
+			'id' => 'noupdatewikibaseitem',
+			'name' => 'noupdatewikibaseitem',
+			'invert' => $form->getRequest()->getBool( 'noupdatewikibaseitem', false ),
+		);
+
+		return true;
+	}
+
+	/**
+	 * Add noupdatewikibaseitem parameter
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/APIGetAllowedParams
+	 *
+	 * @since 0.4
+	 *
+	 * @param \ApiBase &module
+	 * @param &$params[]
+	 *
+	 * @return bool
+	 */
+	public static function onAPIGetAllowedParams( &$module, &$params ) {
+		if ( ! $module instanceof \ApiMove ) {
+			return true;
+		}
+
+		$params['noupdatewikibaseitem'] = false;
+
+		return true;
+	}
+
+	/**
+	 * Add help text of noupdatewikibaseitem parameter
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/APIGetParamDescription
+	 *
+	 * @since 0.4
+	 *
+	 * @param \ApiBase &module
+	 * @param &$desc[]
+	 *
+	 * @return bool
+	 */
+	public static function onAPIGetParamDescription( &$module, &$desc ) {
+		if ( ! $module instanceof \ApiMove ) {
+			return true;
+		}
+
+		$desc['noupdatewikibaseitem'] = 'Do not update the associated Wikidata item';
+
 		return true;
 	}
 }
