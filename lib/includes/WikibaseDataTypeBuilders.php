@@ -80,10 +80,10 @@ class WikibaseDataTypeBuilders {
 			'string' => array( $this, 'buildStringType' ),
 			'time' => array( $this, 'buildTimeType' ),
 			'globe-coordinate' => array( $this, 'buildCoordinateType' ),
+			'url' => array( $this, 'buildUrlType' )
 		);
 
 		$experimental = array(
-			'url' => array( $this, 'buildUrlType' ),
 			// 'quantity'=> array( $this, 'buildQuantityType' ),
 			// 'monolingual-text' => array( $this, 'buildMonolingualTextType' ),
 			// 'multilingual-text' => array( $this, 'buildMultilingualTextType' ),
