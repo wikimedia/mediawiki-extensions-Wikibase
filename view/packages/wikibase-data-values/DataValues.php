@@ -73,13 +73,6 @@ global $wgDataValues;
  */
 $wgDataValues = array();
 
-$wgDataValues['boolean'] = 'DataValues\BooleanValue';
 $wgDataValues['globecoordinate'] = 'DataValues\GlobeCoordinateValue';
-$wgDataValues['iri'] = 'DataValues\IriValue';
-$wgDataValues['monolingualtext'] = 'DataValues\MonolingualTextValue';
-$wgDataValues['multilingualtext'] = 'DataValues\MultilingualTextValue';
-$wgDataValues['number'] = 'DataValues\NumberValue';
-$wgDataValues['quantity'] = 'DataValues\QuantityValue';
 $wgDataValues['string'] = 'DataValues\StringValue';
 $wgDataValues['time'] = 'DataValues\TimeValue';
-$wgDataValues['unknown'] = 'DataValues\UnknownValue';
