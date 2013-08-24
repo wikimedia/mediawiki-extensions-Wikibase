@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2995f1bc_d515dc9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-08-24T21:59:53Z",
+      "side": 1,
+      "message": "Don\u0027t list the bug number in the commit summary, the \"bug: ...\" below is enough",
+      "revId": "2c85fa5bfc481e7dfba23a4e276dd0a71f278aed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2995f1bc_f531f859",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
