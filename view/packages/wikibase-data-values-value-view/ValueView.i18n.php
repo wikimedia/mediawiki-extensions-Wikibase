@@ -722,6 +722,25 @@ $messages['ps'] = array(
 	'valueview-expert-emptyvalue-empty' => 'تش',
 );
 
+/** Portuguese (português)
+ * @author Luckas
+ */
+$messages['pt'] = array(
+	'valueview-expert-timeinput-calendar' => 'Calendário',
+);
+
+/** Brazilian Portuguese (português do Brasil)
+ * @author Luckas
+ */
+$messages['pt-br'] = array(
+	'valueview-expert-emptyvalue-empty' => 'vazio',
+	'valueview-expert-globecoordinateinput-precision' => 'Precisão:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregoriano',
+	'valueview-expert-timevalue-calendar-julian' => 'Juliano',
+	'valueview-expert-timeinput-precision' => 'Precisão:',
+	'valueview-expert-timeinput-calendar' => 'Calendário:',
+);
+
 /** tarandíne (tarandíne)
  * @author Joetaras
  */
