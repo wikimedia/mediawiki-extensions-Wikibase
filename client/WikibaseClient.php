@@ -145,6 +145,9 @@ call_user_func( function() {
 	$wgHooks['SpecialWatchlistFilters'][]          = '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
 	$wgHooks['InfoAction'][] 								= '\Wikibase\ClientHooks::onInfoAction';
 	$wgHooks['TitleMoveComplete'][]          = '\Wikibase\ClientHooks::onTitleMoveComplete';
+	$wgHooks['SpecialMovepageForm'][] = '\Wikibase\ClientHooks::onSpecialMovepageForm';
+	$wgHooks['APIGetAllowedParams'][] = '\Wikibase\ClientHooks::onAPIGetAllowedParams';
+	$wgHooks['APIGetParamDescription'][] = '\Wikibase\ClientHooks::onAPIGetParamDescription';
 
 	// extension hooks
 	$wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';

@@ -73,7 +73,8 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguage link|interlanguage links}} on the page)',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item ID',
 	'wikibase-pageinfo-entity-id-none' => 'None',
-	'wikibase-property-render-error' => 'Failed to render property $1: $2'
+	'wikibase-property-render-error' => 'Failed to render property $1: $2',
+	'wikibase-pageaction-noupdatelinkitem' => 'Do not update the associated Wikidata item',
 );
 
 /** Message documentation (Message documentation)
@@ -207,6 +208,7 @@ Parameters:
 Parameters:
 * $1 - the property ID or name
 * $2 - the original error message (this is typically in English and may be rather technical)',
+	'wikibase-pageaction-noupdatelinkitem' => 'Text for the checkbox.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -2116,6 +2118,7 @@ $messages['ja'] = array(
 	'wikibase-pageinfo-entity-id' => 'ウィキデータ項目 ID',
 	'wikibase-pageinfo-entity-id-none' => 'なし',
 	'wikibase-property-render-error' => 'プロパティ $1 のレンダリングに失敗しました: $2',
+	'wikibase-pageaction-noupdatelinkitem' => '関連付けられたウィキデータ項目を更新しない',
 );
 
 /** Georgian (ქართული)
