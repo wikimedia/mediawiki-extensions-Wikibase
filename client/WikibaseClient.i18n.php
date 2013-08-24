@@ -73,7 +73,8 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguage link|interlanguage links}} on the page)',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item ID',
 	'wikibase-pageinfo-entity-id-none' => 'None',
-	'wikibase-property-render-error' => 'Failed to render property $1: $2'
+	'wikibase-property-render-error' => 'Failed to render property $1: $2',
+	'wikibase-movepage-noupdatelinkitem' => 'Do not update the associated Wikidata item',
 );
 
 /** Message documentation (Message documentation)

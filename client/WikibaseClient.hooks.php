@@ -750,9 +750,15 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onTitleMoveComplete( $oldTitle, $newTitle, $user, $pageId, $redirectId ) {
+		global $wgRequest;
 		wfProfileIn( __METHOD__ );
 
 		if ( Settings::get( 'propagateChangesToRepo' ) !== true ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		if ( $wgRequest->getBool( 'noupdatewikibaseitem', false ) ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
@@ -794,6 +800,37 @@ final class ClientHooks {
 		}
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	public static function onSpecialMovepageForm( \MovePageForm $movePage, &$formrows ) {
+		$c = $movePage->getRequest()->getBool( 'noupdatewikibaseitem', false );
+		$formrows .= "\n<tr>\n<td></td>\n<td class=\"mw-input\">"
+			. Xml::checkLabel(
+				$movePage->msg( 'wikibase-movepage-noupdatelinkitem' )->text(),
+				'noupdatewikibaseitem', 'noupdatewikibaseitem', $c
+			) . "</td>\n</tr>";
+
+		return true;
+	}
+
+	public static function onAPIGetAllowedParams( &$module, &$params ) {
+		if ( ! $module instanceof \ApiMove ) {
+			return true;
+		}
+
+		$params['noupdatewikibaseitem'] = false;
+
+		return true;
+	}
+
+	public static function onAPIGetParamDescription( &$module, &$desc ) {
+		if ( ! $module instanceof \ApiMove ) {
+			return true;
+		}
+
+		$desc['noupdatewikibaseitem'] = 'Do not update the associated Wikidata item';
+
 		return true;
 	}
 }
