@@ -132,6 +132,7 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 			$copy = \Wikibase\SnakObject::newFromArray( $data );
 
 			$this->assertInstanceOf( '\Wikibase\Snak', $copy, 'newFromArray should return object implementing Snak' );
+			$this->assertEquals( $snak->getHash(), $copy->getHash(), 'newFromArray should return object with same Hash used previously' );
 
 			$this->assertTrue( $snak->equals( $copy ), 'getArray newFromArray roundtrip should work' );
 		}
