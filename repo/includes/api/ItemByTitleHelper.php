@@ -2,7 +2,6 @@
 
 namespace Wikibase\Api;
 
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
@@ -63,12 +62,10 @@ class ItemByTitleHelper {
 	 */
 	public function getEntityIds( array $sites, array $titles, $normalize ) {
 		$ids = array();
-		$missing = 0;
 		$numSites = count( $sites );
 		$numTitles = count( $titles );
-		$max = max( $numSites, $numTitles );
 
-		if ( $normalize === true && $max > 1 ) {
+		if ( $normalize === true && max( $numSites, $numTitles ) > 1 ) {
 			// For performance reasons we only do this if the user asked for it and only for one title!
 			$this->apiBase->dieUsage(
 				'Normalize is only allowed if exactly one site and one page have been given',
@@ -76,34 +73,53 @@ class ItemByTitleHelper {
 			);
 		}
 
-		$idxSites = 0;
-		$idxTitles = 0;
+		// Restrict the crazy combinations of sites and titles that can be used
+		if( $numSites !== 1 && $numSites !== $numTitles ){
+			$this->apiBase->dieUsage( 'Must request one site or an equal number of sites and titles','params-illegal' );
+		}
 
-		for ( $k = 0; $k < $max; $k++ ) {
-			$siteId = $sites[$idxSites++ % $numSites];
-			$title = $this->stringNormalizer->trimToNFC( $titles[$idxTitles++ % $numTitles] );
-
-			$id = $this->siteLinkCache->getItemIdForLink( $siteId, $title );
-
-			// Try harder by requesting normalization on the external site.
-			if ( $id === false && $normalize === true ) {
-				$siteObj = $this->siteStore->getSite( $siteId );
-				$id = $this->normalizeTitle( $title, $siteObj );
-			}
-
-			if ( $id === false ) {
-				$this->apiBase->getResult()->addValue( 'entities', (string)(--$missing),
-					array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
-				);
-			} else {
-				$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-
-				$id = ItemId::newFromNumber( $id );
-				$ids[] = $entityIdFormatter->format( $id );
+		foreach( $sites as $siteId ){
+			foreach( $titles as $title ){
+				$entityId = $this->getEntiyId( $siteId, $title, $normalize );
+				if( !is_null( $entityId ) ){
+					$ids[] = $entityId;
+				}
 			}
 		}
 
 		return $ids;
+	}
+
+	/**
+	 * Tries to find entity id for given siteId and title combination
+	 *
+	 * @param string $siteId
+	 * @param string $title
+	 * @param bool $normalize
+	 *
+	 * @return string|null
+	 */
+	private function getEntiyId( $siteId, $title, $normalize ) {
+		$missing = 0;
+		$title = $this->stringNormalizer->trimToNFC( $title );
+		$id = $this->siteLinkCache->getItemIdForLink( $siteId, $title );
+
+		// Try harder by requesting normalization on the external site.
+		if ( $id === false && $normalize === true ) {
+			$siteObj = $this->siteStore->getSite( $siteId );
+			$id = $this->normalizeTitle( $title, $siteObj );
+		}
+
+		if ( $id === false ) {
+			$this->apiBase->getResult()->addValue(
+				'entities',
+				(string)(--$missing),
+				array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
+			);
+		} else {
+			return ItemId::newFromNumber( $id )->getPrefixedId();
+		}
+		return null;
 	}
 
 	/**
