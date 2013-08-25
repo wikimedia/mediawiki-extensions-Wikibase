@@ -57,16 +57,23 @@ class GetEntities extends ApiWikibase {
 
 		$params = $this->extractRequestParams();
 
-		if ( !( isset( $params['ids'] ) XOR ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) ) ) {
+		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) && empty( $params['titles'] ) ) ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages', 'param-missing' );
 		}
 
 		if ( !isset( $params['ids'] ) ) {
+			// Since we merge into this, just create it
+			$params['ids'] = array();
+		}
+
+		if ( !empty( $params['sites'] ) ) {
+			// We only need to check if one is defined since we already checked above
 			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
 			$siteStore = \SiteSQLStore::newInstance();
 			$itemByTitleHelper = new ItemByTitleHelper( $this, $siteLinkCache, $siteStore, $this->stringNormalizer );
-			$params['ids'] = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
+			$otherIDs = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] )
+			$params['ids'] = array_merge( $params['ids'], $otherIDs );
 		}
 
 		$params['ids'] = $this->uniqueEntities( $params['ids'] );
