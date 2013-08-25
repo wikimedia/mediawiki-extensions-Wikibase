@@ -38,7 +38,7 @@ class GetEntities extends ApiWikibase {
 	protected $stringNormalizer;
 
 	/**
-	 * @var \Wikibase\EntityIdParser
+	 * @var \Wikibase\Lib\EntityIdParser
 	 */
 	protected $entityIdParser;
 
@@ -46,7 +46,7 @@ class GetEntities extends ApiWikibase {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
-		$this->entityIdParser = LibRegistry::getDefaultInstance()->getEntityIdParser();
+		$this->entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 	}
 
 	/**
