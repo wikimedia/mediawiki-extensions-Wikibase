@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2995f1bc_a4aae317",
+        "filename": "lib/includes/Validators/UrlSchemeValidators.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:12:27Z",
+      "side": 1,
+      "message": "Most of this block is clutter. Lets please stick with one comment block, not two. author and license can go in the same one as where we have the description, like we are doing elsewhere. You are also changing position of namespace and use statements, which we usually have at the top.\n\nThis comes of as very sloppy. For instance, why is there a space before the start of the comment block? And the date, that makes no sense.",
+      "revId": "ad4ca5c5deebde464be19d2948478335eeb4afa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_046ab7ee",
+        "filename": "lib/includes/Validators/UrlSchemeValidators.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:12:27Z",
+      "side": 1,
+      "message": "Is this supposed to mirror the namespace? If so, then what is the point? The info is already there. We are using a similar @ingroup tag elsewhere, which is perhaps also rather pointless. If you want to change from @ingroup to @package, I\u0027d first like to have this discussed. Now things just become more inconsistent.",
+      "revId": "ad4ca5c5deebde464be19d2948478335eeb4afa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
