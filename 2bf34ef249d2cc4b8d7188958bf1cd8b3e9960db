@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2995f1bc_e44dcb9b",
+        "filename": "repo/includes/specials/SpecialDispatchStats.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:23:21Z",
+      "side": 1,
+      "message": "Those comments are really unfortunate. Please use methods to group and label code.",
+      "revId": "2bf34ef249d2cc4b8d7188958bf1cd8b3e9960db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_445d9f44",
+        "filename": "repo/includes/specials/SpecialDispatchStats.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:23:21Z",
+      "side": 1,
+      "message": "Missing space",
+      "revId": "2bf34ef249d2cc4b8d7188958bf1cd8b3e9960db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_24489388",
+        "filename": "repo/includes/specials/SpecialDispatchStats.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:23:21Z",
+      "side": 1,
+      "message": "Missing space",
+      "revId": "2bf34ef249d2cc4b8d7188958bf1cd8b3e9960db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
