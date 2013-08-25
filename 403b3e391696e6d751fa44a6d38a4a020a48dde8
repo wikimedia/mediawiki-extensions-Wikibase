@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2995f1bc_90e5223c",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-08-25T09:49:39Z",
+      "side": 1,
+      "message": "Tested and all output from the API seems to be as expected !",
+      "revId": "403b3e391696e6d751fa44a6d38a4a020a48dde8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_d0d7aa48",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-08-25T09:49:39Z",
+      "side": 1,
+      "message": "Would be nice if this could be separated on to a few lines to make reading it easier",
+      "revId": "403b3e391696e6d751fa44a6d38a4a020a48dde8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
