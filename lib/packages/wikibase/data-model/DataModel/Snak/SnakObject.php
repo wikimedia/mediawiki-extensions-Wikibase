@@ -144,6 +144,7 @@ abstract class SnakObject implements Snak {
 	 *        will be represented using an UnDeserializableValue object.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @param array $data
 	 *
@@ -166,6 +167,7 @@ abstract class SnakObject implements Snak {
 	 * Constructs a new snak of specified type and returns it.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @param string $snakType
 	 * @param array $constructorArguments
