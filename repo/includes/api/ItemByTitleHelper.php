@@ -88,6 +88,11 @@ class ItemByTitleHelper {
 			);
 		}
 
+		// For cases when we have 0 sites we get a div0 error below. Instead we should die gracefully
+		if( $numSites === 0 ){
+			$this->apiBase->dieUsage( 'No valid sites','params-illegal' );
+		}
+
 		$idxSites = 0;
 		$idxTitles = 0;
 
