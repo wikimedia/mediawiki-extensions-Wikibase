@@ -1,27 +1,12 @@
 <?php
 
 namespace Wikibase\Api;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Helper class for api modules to resolve page+title pairs into items.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.4
  *
@@ -78,9 +63,8 @@ class ItemByTitleHelper {
 		$missing = 0;
 		$numSites = count( $sites );
 		$numTitles = count( $titles );
-		$max = max( $numSites, $numTitles );
 
-		if ( $normalize === true && $max > 1 ) {
+		if ( $normalize === true && max( $numSites, $numTitles ) > 1 ) {
 			// For performance reasons we only do this if the user asked for it and only for one title!
 			$this->apiBase->dieUsage(
 				'Normalize is only allowed if exactly one site and one page have been given',
@@ -88,30 +72,33 @@ class ItemByTitleHelper {
 			);
 		}
 
-		$idxSites = 0;
-		$idxTitles = 0;
+		// Restrict the crazy combinations of sites and titles that can be used
+		if( $numSites !== 1 && $numSites !== $numTitles ){
+			$this->apiBase->dieUsage( 'Must request one site or an equal number of sites and titles','params-illegal' );
+		}
 
-		for ( $k = 0; $k < $max; $k++ ) {
-			$siteId = $sites[$idxSites++ % $numSites];
-			$title = $this->stringNormalizer->trimToNFC( $titles[$idxTitles++ % $numTitles] );
+		foreach( $sites as $siteId ){
+			foreach( $titles as $title ){
 
-			$id = $this->siteLinkCache->getItemIdForLink( $siteId, $title );
+				$title = $this->stringNormalizer->trimToNFC( $title );
+				$id = $this->siteLinkCache->getItemIdForLink( $siteId, $title );
 
-			// Try harder by requesting normalization on the external site.
-			if ( $id === false && $normalize === true ) {
-				$siteObj = $this->siteStore->getSite( $siteId );
-				$id = $this->normalizeTitle( $title, $siteObj );
-			}
+				// Try harder by requesting normalization on the external site.
+				if ( $id === false && $normalize === true ) {
+					$siteObj = $this->siteStore->getSite( $siteId );
+					$id = $this->normalizeTitle( $title, $siteObj );
+				}
 
-			if ( $id === false ) {
-				$this->apiBase->getResult()->addValue( 'entities', (string)(--$missing),
-					array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
-				);
-			} else {
-				$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
+				if ( $id === false ) {
+					$this->apiBase->getResult()->addValue(
+						'entities',
+						(string)(--$missing),
+						array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
+					);
+				} else {
+					$ids[] = ItemId::newFromNumber( $id )->getPrefixedId();
+				}
 
-				$id = new EntityId( Item::ENTITY_TYPE, $id );
-				$ids[] = $entityIdFormatter->format( $id );
 			}
 		}
 
