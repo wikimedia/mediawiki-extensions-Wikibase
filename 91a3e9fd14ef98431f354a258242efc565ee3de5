@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2995f1bc_7af5d07f",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-08-25T21:31:20Z",
+      "side": 1,
+      "message": "Nice catch, fixed.",
+      "parentUuid": "2995f1bc_847ec7aa",
+      "revId": "91a3e9fd14ef98431f354a258242efc565ee3de5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2995f1bc_6471bbdd",
         "filename": "repo/includes/api/GetEntities.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-25T17:19:51Z",
       "side": 1,
       "message": "I do not understand this comment, reading it after I looked at the code. That strongly suggests the comment is better omitted",
+      "revId": "91a3e9fd14ef98431f354a258242efc565ee3de5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_5af81479",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-08-25T21:31:20Z",
+      "side": 1,
+      "message": "Ok sure.",
+      "parentUuid": "2995f1bc_6471bbdd",
       "revId": "91a3e9fd14ef98431f354a258242efc565ee3de5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
