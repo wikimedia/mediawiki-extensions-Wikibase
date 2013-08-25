@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2995f1bc_448affc1",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:00:38Z",
+      "side": 1,
+      "message": "Globals are bad. Boolean switches are also bad. Use inversion of control and polymorphism",
+      "revId": "ab84926668c945bf058620584916b14274f9b49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "499865f5_60beeed2",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 31
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "So how should it be done?",
       "parentUuid": "499865f5_60beeed2",
+      "revId": "ab84926668c945bf058620584916b14274f9b49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_c4be0f62",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:00:38Z",
+      "side": 1,
+      "message": "Ideally we do not have classes that switch on such a flag at all. This smells like bad separation of concerns, possibly across abstraction levels.\n\nThis is EntityView of course, which is our attempt to see how many different things we can mash together without the universe imploding, so its no surprise you\u0027d run into that here.\n\nInjecting a \"useFeatureX\" switch would already get rid of the global aspect (since the constant is clearly global). I\u0027d also allow one to test with the other value for the switch, without doing black magic to override the constant.\n\nEven then you are still left with a boolean switch, which in itself is bad. Use polymorphism and inversion of control: inject an instance of an interfaces that does the task. If in experimental mode you inject one instance, if not, you inject another instance. This keeps the constant in the \"startup\" area of the application, where it belongs.",
+      "parentUuid": "499865f5_402812f0",
       "revId": "ab84926668c945bf058620584916b14274f9b49a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
