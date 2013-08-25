@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2995f1bc_847ec7aa",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:19:51Z",
+      "side": 1,
+      "message": "One can now provide a title without providing a site, which should not work. The last \u0026\u0026 should be ||",
+      "revId": "91a3e9fd14ef98431f354a258242efc565ee3de5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_6471bbdd",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-25T17:19:51Z",
+      "side": 1,
+      "message": "I do not understand this comment, reading it after I looked at the code. That strongly suggests the comment is better omitted",
+      "revId": "91a3e9fd14ef98431f354a258242efc565ee3de5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
