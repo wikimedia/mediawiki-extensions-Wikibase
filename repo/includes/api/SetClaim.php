@@ -117,6 +117,7 @@ class SetClaim extends ApiWikibase {
 		$newRevisionId = isset( $statusValue['revision'] ) ? $statusValue['revision']->getId() : null;
 
 		if ( $newRevisionId !== null ) {
+			$this->getResult()->addValue( null, 'success', 1 );
 			$this->getResult()->addValue(
 				'pageinfo',
 				'lastrevid',

@@ -168,6 +168,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	protected function makeValidRequest( array $params ) {
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
+		$this->assertResultSuccess( $resultArray );
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );

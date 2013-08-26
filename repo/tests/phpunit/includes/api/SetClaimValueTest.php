@@ -110,6 +110,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
+		$this->assertResultSuccess( $resultArray );
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a claim key' );
 

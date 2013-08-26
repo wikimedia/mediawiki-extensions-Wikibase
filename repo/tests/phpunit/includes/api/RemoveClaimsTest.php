@@ -137,6 +137,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
+		$this->assertResultSuccess( $resultArray );
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );
 
