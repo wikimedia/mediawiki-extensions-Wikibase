@@ -62,7 +62,7 @@ class GetEntities extends ApiWikibase {
 
 		$params = $this->extractRequestParams();
 
-		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
+		if ( !isset( $params['ids'] ) XOR ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages', 'param-missing' );
 		}
@@ -72,6 +72,7 @@ class GetEntities extends ApiWikibase {
 			$params['ids'] = array();
 		}
 
+		// todo output a warning if the user gives one but not the other param
 		if ( !empty( $params['sites'] ) ) {
 			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
 			$siteStore = \SiteSQLStore::newInstance();
