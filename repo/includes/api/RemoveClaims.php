@@ -142,11 +142,6 @@ class RemoveClaims extends ModifyClaim {
 	 * @param string[] $removedClaimGuids
 	 */
 	protected function outputResult( $removedClaimGuids ) {
-		$this->getResult()->addValue(
-			null,
-			'success',
-			1
-		);
 
 		$this->getResult()->setIndexedTagName( $removedClaimGuids, 'claim' );
 

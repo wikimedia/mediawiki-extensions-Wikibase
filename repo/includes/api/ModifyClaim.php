@@ -88,6 +88,12 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
+
+		$this->getResult()->addValue(
+			null,
+			'success',
+			1
+		);
 	}
 
 	/**
