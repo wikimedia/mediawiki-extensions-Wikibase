@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2995f1bc_fd847a10",
+        "filename": "lib/includes/Validators/UrlSchemeValidators.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-26T07:43:47Z",
+      "side": 1,
+      "message": "Hm... to me it makes sense to keep the comment blocks for the file and the class separate. The file level one is about authorship/license stuff, the class level one is about the actual class. It also makes it easier to set up templates that work for files with and without class declaration.\n\nThe date is horrible - apparently PHPStorm uses the OS\u0027s locale to format the date, which gives me a (lightly broken) German-style date in an English comment.  Ugh.",
+      "parentUuid": "2995f1bc_a4aae317",
+      "revId": "ad4ca5c5deebde464be19d2948478335eeb4afa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2995f1bc_046ab7ee",
         "filename": "lib/includes/Validators/UrlSchemeValidators.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-25T17:12:27Z",
       "side": 1,
       "message": "Is this supposed to mirror the namespace? If so, then what is the point? The info is already there. We are using a similar @ingroup tag elsewhere, which is perhaps also rather pointless. If you want to change from @ingroup to @package, I\u0027d first like to have this discussed. Now things just become more inconsistent.",
+      "revId": "ad4ca5c5deebde464be19d2948478335eeb4afa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_dd8fbe29",
+        "filename": "lib/includes/Validators/UrlSchemeValidators.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-26T07:43:47Z",
+      "side": 1,
+      "message": "This comes from a PHPStorm template... but it doesn\u0027t seem to be there per default. Not sure when or how it got there :)",
+      "parentUuid": "2995f1bc_046ab7ee",
       "revId": "ad4ca5c5deebde464be19d2948478335eeb4afa9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
