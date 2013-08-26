@@ -108,7 +108,7 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	protected function displayItem( Wikibase\ItemContent $itemContent ) {
 		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 
-		$view = new Wikibase\ItemView( $valueFormatters, $this->getContext() );
+		$view = \Wikibase\EntityView::newForEntityContent( $itemContent, $valueFormatters, $this->getContext() );
 		$view->render( $itemContent );
 
 		$this->getOutput()->setPageTitle( $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() ) );
