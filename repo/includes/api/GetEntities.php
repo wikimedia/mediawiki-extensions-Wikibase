@@ -265,7 +265,7 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_ISMULTI => false,
 			),
 			'languages' => array(
-				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'normalize' => array(
