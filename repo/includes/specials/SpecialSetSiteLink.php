@@ -99,10 +99,13 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return string|boolean The summary or false
 	 */
 	protected function modifyEntity() {
+		// FIXME: This method is supposed to modify the entity and not alter the output. Do not
+		// paste message directly into the HTML output in this method.
+
 		$request = $this->getRequest();
 		// has to be checked before modifying but is no error
 		if ( $this->entityContent === null || !$this->isValidSiteId( $this->site ) || !$request->wasPosted() ) {
-			$this->showRightsMessage();
+			$this->showCopyrightMessage();
 
 			return false;
 		}

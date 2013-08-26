@@ -102,8 +102,10 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 	protected function modifyEntity() {
 		$request = $this->getRequest();
 
+		// FIXME: This method is supposed to modify the entity and not alter the output. Do not
+		// paste message directly into the HTML output in this method.
 		if ( $this->entityContent === null || !$this->isValidLanguageCode( $this->language ) || !$request->wasPosted() ) {
-			$this->showRightsMessage();
+			$this->showCopyrightMessage();
 
 			return false;
 		}

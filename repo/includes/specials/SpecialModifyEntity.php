@@ -4,7 +4,7 @@ use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
- * Abstract special page for modifing Wikibase entity.
+ * Abstract special page for modifying Wikibase entity.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -99,6 +99,8 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 				$this->getOutput()->redirect( $entityUrl );
 			}
 		}
+
+		return true;
 	}
 
 	/**
@@ -157,6 +159,8 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	private function setForm() {
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
+		// FIXME: Edit warning should be displayed above the license note like on "New Entity" page.
+		// (Unfortunately, the license note is generated in SpecialSetEntity::modifyEntity.)
 		if ( $this->getUser()->isAnon() ) {
 			$this->showErrorHTML(
 				$this->msg(
@@ -275,21 +279,5 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		if ( $this->getUser()->isBlocked() ) {
 			$this->displayBlockedError();
 		}
-	}
-
-	/**
-	 * Show the rights warning message
-	 *
-	 * @since 0.4
-	 */
-	public function showRightsMessage() {
-		$this->showErrorHTML(
-			Html::rawElement(
-				'p',
-				array(),
-				Utils::getRightsWarningMessage()->parse()
-			),
-			'warning'
-		);
 	}
 }
