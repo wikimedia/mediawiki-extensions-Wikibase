@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2995f1bc_ed7927fb",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-26T20:33:28Z",
+      "side": 1,
+      "message": "Please put this on multiple lines so it is readable",
+      "revId": "46b1f9f76832894a2752ec882290f0db203a21f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2995f1bc_4d893bec",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-26T20:33:28Z",
+      "side": 1,
+      "message": "We are dropping validation here?",
+      "revId": "46b1f9f76832894a2752ec882290f0db203a21f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
