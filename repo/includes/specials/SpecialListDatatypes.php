@@ -3,21 +3,6 @@
 /**
  * Page for listing available datatypes.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.2
  *
  * @file
@@ -59,13 +44,26 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		// 'wikibase-listdatatypes-time-head'
 		// 'wikibase-listdatatypes-text-body'
 
-		foreach (\Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
-			$baseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
-			$out = Html::rawElement( 'dt', array(), $this->msg( $baseKey . '-head' )->parse() )
-			. Html::rawElement( 'dd', array(), $this->msg( $baseKey . '-body' )->parse() );
-			$this->getOutput()->addHTML( $out );
+		foreach ( $this->getDataTypeIds() as $dataTypeId ) {
+			$this->getOutput()->addHTML( $this->getHtmlForDataTypeId( $dataTypeId ) );
 		}
 
 		$this->getOutput()->addHTML( Html::closeElement( 'dl' ));
 	}
+
+	protected function getDataTypeIds() {
+		return \Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds();
+	}
+
+	protected function getHtmlForDataTypeId( $dataTypeId ) {
+		$baseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
+
+		return Html::rawElement(
+			'dt',
+			array(),
+			$this->msg( $baseKey . '-head' )->parse() )
+				. Html::rawElement( 'dd', array(), $this->msg( $baseKey . '-body' )->parse()
+		);
+	}
+
 }
