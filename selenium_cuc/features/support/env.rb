@@ -46,9 +46,16 @@ def environment
 end
 
 def sauce_browser(test_name)
-  caps = Selenium::WebDriver::Remote::Capabilities.firefox
-  caps.version = "23"
-  caps.platform = "Windows 7"
+  browsers = YAML.load_file('config/browsers.yml')
+  if ENV['BROWSER_LABEL']
+    browser_label = browsers[ENV['BROWSER_LABEL']]
+  else
+    browser_label = browsers['firefox_linux']
+  end
+
+  caps = Selenium::WebDriver::Remote::Capabilities.send(browser_label['name'])
+  caps.platform = browser_label['platform']
+  caps.version = browser_label['version']
   caps[:name] = "#{test_name} #{ENV['JOB_NAME']}##{ENV['BUILD_NUMBER']}"
 
   require 'selenium/webdriver/remote/http/persistent' # http_client
@@ -103,7 +110,7 @@ def sauce_api(json)
 end
 
 After do |scenario|
-  if environment == :cloudbees && !ENV["windir"]
+  if environment == :cloudbees# && !ENV["windir"]
     sauce_api(%Q{{"passed": #{scenario.passed?}}})
     sauce_api(%Q{{"public": true}})
   end
