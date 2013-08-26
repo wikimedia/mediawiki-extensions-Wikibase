@@ -36,6 +36,16 @@ if ( !defined( 'Diff_VERSION' ) && file_exists( __DIR__ . '/../Diff/Diff.php' ) 
 	include_once( __DIR__ . '/../Diff/Diff.php' );
 }
 
+// Only initialize the extension when all dependencies are present.
+if ( !defined( 'DataValues_VERSION' ) ) {
+	throw new Exception( 'You need to have the DataValues library loaded in order to use WikibaseDataModel' );
+}
+
+// Only initialize the extension when all dependencies are present.
+if ( !defined( 'Diff_VERSION' ) ) {
+	throw new Exception( 'You need to have the Diff library loaded in order to use WikibaseDataModel' );
+}
+
 // @codeCoverageIgnoreStart
 spl_autoload_register( function ( $className ) {
 	static $classes = false;
