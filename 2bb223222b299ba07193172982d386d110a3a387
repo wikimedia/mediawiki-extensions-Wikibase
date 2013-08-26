@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2995f1bc_d3ddef12",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-26T16:03:47Z",
+      "side": 1,
+      "message": "This seems rather odd - is this really the intended behavior? I would suggest to force the number of sites to be either equal to the number of titles, or one. Wrapping around seems... surprising.",
+      "revId": "2bb223222b299ba07193172982d386d110a3a387",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
