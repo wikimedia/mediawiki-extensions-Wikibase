@@ -1,6 +1,8 @@
 <?php
-
 namespace ValueFormatters\Test;
+
+use ValueFormatters\ValueFormatter;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\MwTimeIsoFormatter;
 
 /**
@@ -97,7 +99,13 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param integer $precision
 	 */
 	public function testFormatDate( $expected, $extendedIsoString, $precision ) {
-		$isoFormatter = new MwTimeIsoFormatter( \Language::factory( 'en' ) );
+		$langCode = 'en';
+		$options = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => $langCode
+		) );
+
+		$isoFormatter = new MwTimeIsoFormatter( $options, \Language::factory( $langCode ) );
+
 		$this->assertEquals( $expected, $isoFormatter->formatDate( $extendedIsoString, $precision ) );
 	}
 

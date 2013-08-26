@@ -624,7 +624,10 @@ abstract class EntityView extends \ContextSource {
 		$valueFormatterOptions = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $languageCode,
 			Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap,
-			TimeFormatter::OPT_TIME_ISO_FORMATTER => new MwTimeIsoFormatter( \Language::factory( $languageCode ) ),
+			TimeFormatter::OPT_TIME_ISO_FORMATTER => new MwTimeIsoFormatter(
+				new FormatterOptions(),
+				\Language::factory( $languageCode )
+			),
 		) );
 
 		// TODO: display a "placeholder" message for novalue/somevalue snak
