@@ -160,7 +160,8 @@ class ChangeOpReference extends ChangeOp {
 	 */
 	protected function addReference( References $references, Summary $summary = null ) {
 		if ( $references->hasReference( $this->reference ) ) {
-			throw new ChangeOpException( "Claim has already a reference with hash $this->reference->getHash()" );
+			$hash = $this->reference->getHash();
+			throw new ChangeOpException( "Claim has already a reference with hash $hash" );
 		}
 		$references->addReference( $this->reference );
 		$this->updateSummary( $summary, 'add' );
