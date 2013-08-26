@@ -67,7 +67,8 @@ class GetEntities extends ApiWikibase {
 			$params['ids'] = array();
 		}
 
-		if ( !empty( $params['sites'] ) ) {
+		// todo output a warning if the user gives one but not the other param
+		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
 			$siteStore = \SiteSQLStore::newInstance();
 			$itemByTitleHelper = new ItemByTitleHelper( $this, $siteLinkCache, $siteStore, $this->stringNormalizer );
