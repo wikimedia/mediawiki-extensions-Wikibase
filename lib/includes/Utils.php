@@ -43,10 +43,11 @@ final class Utils {
 	 * @return array
 	 */
 	public static function getLanguageCodes() {
+		global $wgDummyLanguageCodes;
 		static $languageCodes = null;
 
 		if ( is_null( $languageCodes ) ) {
-			$languageCodes = array_keys( \Language::fetchLanguageNames() );
+			$languageCodes = array_diff( array_keys( \Language::fetchLanguageNames() ), array_keys( $wgDummyLanguageCodes ) );
 		}
 
 		return $languageCodes;
