@@ -71,7 +71,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	);
 
 	protected static $goodProps = array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype', 'labels|sitelinks', 'claims|datatype|aliases', 'info|aliases|labels|claims' );
-	protected static $goodLangs = array( 'de', 'zh', 'it|es|zh|ar', 'de|nn|no|en|en-gb', 'de|nn|no|en|en-gb|it|es|zh|ar' );
+	protected static $goodLangs = array( 'de', 'zh', 'it|es|zh|ar', 'de|nn|nb|en|en-gb', 'de|nn|nb|en|en-gb|it|es|zh|ar' );
 	protected static $goodSorts = array( array( 'sort' => 'sitelinks', 'dir' => 'descending' ), array( 'sort' => 'sitelinks', 'dir' => 'ascending' ) );
 	protected static $goodFormats = array( 'json', 'php', 'wddx', 'xml', 'yaml', 'txt', 'dbg', 'dump' );
 
