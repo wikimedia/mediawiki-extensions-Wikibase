@@ -26,13 +26,9 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public abstract function getClass();
 
-	public function validConstructorArgumentsProvider() {
-		return array();
-	}
+	public abstract function validConstructorArgumentsProvider();
 
-	public function invalidConstructorArgumentsProvider() {
-		return array();
-	}
+	public abstract function invalidConstructorArgumentsProvider();
 
 	/**
 	 * Creates and returns a new instance of the concrete class.
