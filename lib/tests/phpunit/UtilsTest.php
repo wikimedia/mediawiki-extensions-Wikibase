@@ -40,8 +40,31 @@ class UtilsTest extends \MediaWikiTestCase {
 		return array(
 			array( 'de' ),
 			array( 'en' ),
-			array( 'no' ),
+			array( 'nb' ),
 			array( 'nn' ),
+		);
+	}
+
+	/**
+	 * @group WikibaseUtils
+	 * @dataProvider providerGetLanguageCodesInvalid
+	 */
+	public function testGetLanguageCodesInvalid( $lang ) {
+		$result = Utils::getLanguageCodes();
+		$this->assertNotContains(
+			$lang,
+			$result,
+			"The language code {$lang} is found in the returned result"
+		);
+	}
+
+	public static function providerGetLanguageCodesInvalid() {
+		return array(
+			array( 'invalid' ),
+			array( 'no' ),
+			array( 'qqq' ),
+			array( 'qqx' ),
+			array( 'zh-classical' ),
 		);
 	}
 
