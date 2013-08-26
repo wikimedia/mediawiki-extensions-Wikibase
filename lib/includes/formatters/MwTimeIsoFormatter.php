@@ -2,7 +2,11 @@
 
 namespace Wikibase\Lib;
 
-use \ValueFormatters\TimeIsoFormatter;
+use Language;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\TimeIsoFormatter;
+use ValueFormatters\ValueFormatter;
+use ValueFormatters\ValueFormatterBase;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -28,16 +32,35 @@ use \ValueFormatters\TimeIsoFormatter;
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-class MwTimeIsoFormatter implements TimeIsoFormatter {
+class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter {
 
 	/**
 	 * MediaWiki language object.
-	 * @var \Language
+	 * @var Language
 	 */
-	private $language;
+	protected $language;
 
-	public function __construct( $language ) {
-		$this->language = $language;
+	/**
+	 * @param FormatterOptions $options
+	 */
+	public function __construct( FormatterOptions $options ) {
+		$this->options = $options;
+
+		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
+
+		$this->language = Language::factory(
+			$this->options->getOption( ValueFormatter::OPT_LANG )
+		);
+	}
+
+	/**
+ 	 * @see ValueFormatter::format
+	 */
+	public function format( $value ) {
+		return $this->formatDate(
+			$value->getTime(),
+			$value->getPrecision()
+		);
 	}
 
 	/**
