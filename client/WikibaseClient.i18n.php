@@ -1294,6 +1294,7 @@ $messages['et'] = array(
 /** Persian (فارسی)
  * @author Alireza
  * @author Calak
+ * @author Ebraminio
  * @author Ladsgroup
  * @author Mehran
  * @author Pouyana
@@ -1349,7 +1350,7 @@ $messages['fa'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» یک کد زبان نامعتبر است.',
 	'wikibase-unconnectedpages-page-warning' => 'عنوان صفحه برای کوئری استفاده نمی‌شود و نادیده گرفته شده‌است.',
 	'wikibase-unconnectedpages-iwdata-label' => 'فقط صفحات با پیوند میان‌ویکی',
-	'wikibase-unconnectedpages-format-row' => '( $1  {{PLURAL:$1| پیوند میان‌ویکی|پیوند میان‌ویکی}} در صفحه)',
+	'wikibase-unconnectedpages-format-row' => '($1  {{PLURAL:$1|پیوند میان‌ویکی|پیوند میان‌ویکی}} در صفحه)',
 	'wikibase-pageinfo-entity-id' => 'شناسه آیتم ویکی‌داده',
 	'wikibase-pageinfo-entity-id-none' => 'هیچ‌کدام',
 	'wikibase-property-render-error' => 'خطا در ارائهٔ خصوصیت  $1: $2',
@@ -1594,6 +1595,8 @@ $messages['gl'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase aínda non soporta o tipo de propiedade da propiedade "$1".',
 	'wikibase-rc-hide-wikidata' => '$1 o Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as modificacións do Wikidata nos cambios recentes',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Edición do Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Mostrar as modificacións do Wikidata na súa lista de vixilancia',
 	'wikibase-error-serialize-error' => 'Erro ao seriar os datos',
 	'wikibase-error-invalid-entity-id' => 'O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.',
@@ -2966,6 +2969,13 @@ $messages['nn'] = array(
 	'wikibase-pageinfo-entity-id' => 'Datasett-ID hjå Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Ingen',
 	'wikibase-property-render-error' => 'Kunne ikkje visa eigenskapen $1: $2',
+);
+
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'wikibase-rc-wikibase-edit-letter' => 'D',
 );
 
 /** Polish (polski)

@@ -5231,6 +5231,7 @@ $messages['eu'] = array(
  * @author Pouyana
  * @author Reza1615
  * @author Rtemis
+ * @author Taha
  * @author ZxxZxxZ
  * @author درفش کاویانی
  */
@@ -5307,7 +5308,7 @@ $messages['fa'] = array(
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|یک محدودیت|محدودیت‌هایی}} برای {{PLURAL:$1|برچسب|برچسب‌های}} «$3» {{PLURAL:$1|کد زبانی|کدهای زبانی}} «$2» نقض شد.',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|یک محدودیت|محدودیت}} برای  {{PLURAL:$1|توضیحات|توضیحات}} "$3" for {{PLURAL:$1|کد زبانی |کد زبانی}} "$2" نقض شد.',
 	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|یک محدودیت|محدودیت‌هایی}} برای {{PLURAL:$1|نام مستعار|نام‌های مستعار}} «$3» {{PLURAL:$1|کد زبانی|کدهای زبانی}} «$2» نقض شد.',
-	'wikibase-error-sitelink-already-used' => 'پیونداد [$1 $2] از قبل در آیتم دیگر [[$3]] به کار رفته‌است.',
+	'wikibase-error-sitelink-already-used' => 'پیوند [$1 $2] از قبل در آیتمی دیگر [[$3]] به کار رفته‌است.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'خصوصیت دیگری ($3) از قبل دارای نام «$1» مربوط به کد زبان $2 است',
 	'wikibase-error-label-not-unique-wikibase-query' => 'کوئری دیگری ($3) از قبل دارای نام "$1" مربوط به کد زبان $2 است',
 	'wikibase-error-label-not-unique-item' => 'آیتم دیگری ($3) از قبل دارای نام «$1» و توضیحات «$4» مربوط به کد زبان «$2» است',
