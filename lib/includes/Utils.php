@@ -317,7 +317,7 @@ final class Utils {
 	 *
 	 * @return \Message
 	 */
-	public static function getRightsWarningMessage() {
+	public static function getCopyrightMessage() {
 		global $wgRightsUrl, $wgRightsText;
 
 		if ( wfMessage( 'wikidata-shortcopyrightwarning' )->exists() ) {
@@ -334,14 +334,14 @@ final class Utils {
 	}
 
 	/**
-	 * Returns a string for indicating which version of the copyright message is being used when
-	 * calling getRightsWarningMessage.
+	 * Returns a string indicating which version of the copyright message is being used when
+	 * calling getCopyrightMessage.
 	 *
 	 * @since 0.4
 	 *
 	 * @return string
 	 */
-	public static function getRightsWarningVersion() {
+	public static function getCopyrightMessageVersion() {
 		return wfMessage( 'wikibase-shortcopyrightwarning-version' )->text();
 	}
 

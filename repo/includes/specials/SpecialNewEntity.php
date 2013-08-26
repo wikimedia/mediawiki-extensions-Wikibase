@@ -2,7 +2,6 @@
 
 use Wikibase\EntityContent;
 use Wikibase\Summary;
-use Wikibase\Utils;
 
 /**
  * Page for creating new Wikibase entities.
@@ -246,13 +245,10 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	 * @param string $additionalHtml initial value for the description input box
 	 */
 	public function createForm( $legend = null, $additionalHtml = '' ) {
+		$this->showCopyrightMessage();
+
 		$this->getOutput()->addHTML(
-				Html::rawElement(
-					'div',
-					array(),
-					Utils::getRightsWarningMessage()->parse()
-				)
-				. Html::openElement(
+				Html::openElement(
 					'form',
 					array(
 						'method' => 'post',

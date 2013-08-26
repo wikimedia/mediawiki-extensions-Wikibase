@@ -31,6 +31,7 @@
  */
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
+use Wikibase\Utils;
 
 abstract class SpecialWikibasePage extends SpecialPage {
 
@@ -109,6 +110,21 @@ abstract class SpecialWikibasePage extends SpecialPage {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Adds the "copyright info message" to the HTML output.
+	 *
+	 * @since 0.4
+	 */
+	public function showCopyrightMessage() {
+		$this->getOutput()->addHTML(
+			Html::rawElement(
+				'div',
+				array(),
+				Utils::getCopyrightMessage()->parse()
+			)
+		);
 	}
 
 }

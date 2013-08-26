@@ -6,6 +6,7 @@ use Wikibase\SiteLink;
 use Wikibase\Utils;
 use Wikibase\ChangeOpSiteLink;
 use Wikibase\ChangeOpException;
+use Wikibase\Summary;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -96,13 +97,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string|boolean The summary or false
+	 * @return Summary|boolean The summary or false
 	 */
 	protected function modifyEntity() {
+		// FIXME: This method is supposed to modify the entity and not alter the output. Do not
+		// paste message directly into the HTML output in this method.
+
 		$request = $this->getRequest();
 		// has to be checked before modifying but is no error
 		if ( $this->entityContent === null || !$this->isValidSiteId( $this->site ) || !$request->wasPosted() ) {
-			$this->showRightsMessage();
+			$this->showCopyrightMessage();
 
 			return false;
 		}
