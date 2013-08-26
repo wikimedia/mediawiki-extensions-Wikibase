@@ -72,7 +72,7 @@ class GlobeCoordinateValue extends DataValueObject {
 
 	protected function assertIsGlobe( $globe ) {
 		if ( !is_string( $globe ) ) {
-			throw new IllegalValueException( 'Can only construct GlobeCoordinateValue with a string or null globe parameter' );
+			throw new IllegalValueException( 'Can only construct GlobeCoordinateValue with a string globe parameter' );
 		}
 	}
 
