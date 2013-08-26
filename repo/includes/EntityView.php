@@ -842,8 +842,8 @@ abstract class EntityView extends \ContextSource {
 
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyright', array(
-			'version' => Utils::getRightsWarningVersion(),
-			'messageHtml' => Utils::getRightsWarningMessage()->parse(),
+			'version' => Utils::getCopyrightMessageVersion(),
+			'messageHtml' => Utils::getCopyrightMessage()->parse(),
 		) );
 
 		// TODO: use injected id formatter
