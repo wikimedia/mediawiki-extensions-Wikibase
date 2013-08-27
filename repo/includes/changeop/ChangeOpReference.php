@@ -180,7 +180,7 @@ class ChangeOpReference extends ChangeOp {
 			throw new ChangeOpException( "Reference with hash $this->referenceHash does not exist" );
 		}
 		if ( $references->hasReference( $this->reference ) ) {
-			throw new ChangeOpException( "Claim has already a reference with hash $this->reference->getHash()" );
+			throw new ChangeOpException( "Claim has already a reference with hash {$this->reference->getHash()}" );
 		}
 		$references->removeReferenceHash( $this->referenceHash );
 		$references->addReference( $this->reference );

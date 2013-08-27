@@ -149,7 +149,7 @@ class ChangeOpQualifier extends ChangeOp {
 	 */
 	protected function addQualifier( Snaks $qualifiers, Summary $summary = null ) {
 		if ( $qualifiers->hasSnak( $this->snak ) ) {
-			throw new ChangeOpException( "Claim has already a qualifier with hash $this->snak->getHash()" );
+			throw new ChangeOpException( "Claim has already a qualifier with hash {$this->snak->getHash()}" );
 		}
 		$qualifiers->addSnak( $this->snak );
 		//TODO: add the mainsnak as autocomment-arg & change messages
@@ -169,7 +169,7 @@ class ChangeOpQualifier extends ChangeOp {
 			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
 		}
 		if ( $qualifiers->hasSnak( $this->snak ) ) {
-			throw new ChangeOpException( "Claim has already a qualifier with hash $this->snak->getHash()" );
+			throw new ChangeOpException( "Claim has already a qualifier with hash {$this->snak->getHash()}" );
 		}
 		$qualifiers->removeSnakHash( $this->snakHash );
 		$qualifiers->addSnak( $this->snak );
