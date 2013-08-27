@@ -24,6 +24,7 @@ use WikiPage;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel kinzler
  */
 abstract class EntityContent extends AbstractContent {
 
