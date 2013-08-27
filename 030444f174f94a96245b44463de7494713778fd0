@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_1bc77f9a",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.SnakList.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-27T11:06:51Z",
+      "side": 1,
+      "message": "This code surprised me. Going on this I figured this variable was a flag, and then went wtf near the end of the function, as it actually is a list.",
+      "revId": "030444f174f94a96245b44463de7494713778fd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_3bc44393",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.SnakList.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-27T11:06:51Z",
+      "side": 1,
+      "message": "var propertyId \u003d order[i];\n\nThat will help readability and understandability a lot",
+      "revId": "030444f174f94a96245b44463de7494713778fd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_bb38539e",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.SnakList.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-27T11:06:51Z",
+      "side": 1,
+      "message": "There is some duplication here: adding of a list of snaks to the snakList object.\n\n$.each( snaksPerProperty, function( i, snakJson ) {\n\nfor( var j \u003d 0; j \u003c json[order[i]].length; j++ ) {\n\nThis can be put into its own method.\n\nI\u0027d also split the cases where you have an order and when you do not. Have one function that always takes an order, and one that does not take one. If you end up needing to duplicate things, that\u0027ll be more opportunity to split things into their own methods.\n\nIf this was PHP I\u0027d be arguing to put those methods into their own class. Not sure what is the better approach in JS.",
+      "revId": "030444f174f94a96245b44463de7494713778fd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
