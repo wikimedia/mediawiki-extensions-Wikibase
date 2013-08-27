@@ -4,6 +4,8 @@ namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
 use Language;
+use Site;
+use Sites;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\ClientStore;
@@ -82,6 +84,11 @@ final class WikibaseClient {
 	 * @var StringNormalizer
 	 */
 	private $stringNormalizer;
+
+	/**
+	 * @var \Site
+	 */
+	private $site = null;
 
 	/**
 	 * @since 0.4
@@ -350,4 +357,44 @@ final class WikibaseClient {
 		return $instance;
 	}
 
+	/**
+	 * Returns the this client wiki's site object.
+	 * This is taken from the siteGlobalID setting, which defaults
+	 * to the wiki's database name.
+	 *
+	 * @throws \MWException
+	 * @return Site
+	 */
+	public function getSite() {
+		if ( $this->site === null ) {
+			$id = $this->settings->getSetting( 'siteGlobalID' );
+			$sites = Sites::singleton();
+			$this->site = $sites->getSite( $id );
+
+			if ( !$this->site ) {
+				throw new \MWException( "Unable to resolve site ID '{$id}'!" );
+			}
+		}
+
+		return $this->site;
+	}
+
+	/**
+	 * Returns the site group ID for the group to be used for language links.
+	 * This is typically the group the client wiki itself belongs to, but
+	 * can be configured to be otherwise using the languageLinkSiteGroup setting.
+	 *
+	 * @return string
+	 * @throws \MWException
+	 */
+	public function getLangLinkSiteGroup() {
+		$group = $this->settings->getSetting( 'languageLinkSiteGroup' );
+
+		if ( $group === null ) {
+			$thisSite = $this->getSite();
+			$group = $thisSite->getGroup();
+		}
+
+		return $group;
+	}
 }

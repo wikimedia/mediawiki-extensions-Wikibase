@@ -44,6 +44,7 @@ return call_user_func( function() {
 		// @todo would be great to just get this from the sites stuff
 		// but we will need to make sure the caching works good enough
 		'siteLocalID' => $wgLanguageCode,
+		'languageLinkSiteGroup' => null,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
 		'defaultClientStore' => null,
@@ -227,6 +228,15 @@ return call_user_func( function() {
 		// The database name is a sane default for the site ID.
 		// On Wikimedia sites, this is always correct.
 		return $GLOBALS['wgDBname'];
+	};
+
+	 function ( SettingsArray $settings ) {
+		$thisSite = $this->sites->getSite( $this->siteId );
+		if ( !$thisSite ) {
+			throw new MWException( "Unable to resolve site ID '{$this->siteId}'!" );
+		}
+
+		return $thisSite->getGroup();
 	};
 
 	// Prefix to use for cache keys that should be shared among
