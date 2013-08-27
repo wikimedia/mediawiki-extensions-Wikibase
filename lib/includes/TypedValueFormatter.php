@@ -37,7 +37,7 @@ class TypedValueFormatter {
 		// in the DataTypes library have been made.
 
 		if ( $dataValue->getType() === 'bad' ) {
-			throw new IllegalValueException( $dataValue->getError() );
+			throw new IllegalValueException( $dataValue->getReason() );
 		}
 
 		$valueFormatters = $dataType->getFormatters();
