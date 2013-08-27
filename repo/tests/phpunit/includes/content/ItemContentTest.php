@@ -2,8 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
+use Wikibase\Item;
 use Wikibase\ItemContent;
 
 /**
@@ -50,6 +54,32 @@ class ItemContentTest extends EntityContentTest {
 	 */
 	protected function getContentClass() {
 		return '\Wikibase\ItemContent';
+	}
+
+	public function testNewFromItem() {
+		$item = Item::newEmpty();
+		$content = ItemContent::newFromItem( $item );
+
+		$this->assertEquals( $item, $content->getItem() );
+	}
+
+	public function testNewFromRedirect() {
+		$itemId = new ItemId( 'Q123' );
+		$content = ItemContent::newFromRedirect( $itemId );
+
+		$this->assertTrue( $content->isRedirect() );
+		$this->assertEquals( $itemId, $content->getRedirectTargetId() );
+		$this->assertInstanceOf( 'Title', $content->getRedirectTarget() );
+
+		// use unspecific entity ID
+		$itemId = new EntityId( Item::ENTITY_TYPE, 'Q123' );
+		ItemContent::newFromRedirect( $itemId );
+
+		// refuse to link to non-items
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$propertyId = new PropertyId( 'P123' );
+		ItemContent::newFromRedirect( $propertyId );
 	}
 
 	/**
@@ -124,6 +154,16 @@ class ItemContentTest extends EntityContentTest {
 		);
 	}
 
+	public function newFromArrayProvider() {
+		$cases = parent::newFromArrayProvider();
+
+		$cases[] = array(
+			array( 'redirect' => 'Q123' ),
+		);
+
+		return $cases;
+	}
+
 	public function provideEquals() {
 		return array(
 			array( #0
@@ -175,6 +215,23 @@ class ItemContentTest extends EntityContentTest {
 					'en' => array( 'foo', 'FOO', 'xyz' ),
 				) ),
 				false
+			),
+			array( #7
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO' ),
+				) ),
+				array( 'redirect' => 'Q123' ),
+				false
+			),
+			array( #8
+				array( 'redirect' => 'Q123' ),
+				array( 'redirect' => 'Q567' ),
+				false
+			),
+			array( #9
+				array( 'redirect' => 'Q123' ),
+				array( 'redirect' => 'Q123' ),
+				true
 			),
 		);
 	}

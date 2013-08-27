@@ -36,6 +36,7 @@ return call_user_func( function() {
 		'Disposable' => 'includes/Disposable.php',
 
 		// includes
+		'Wikibase\ArrayStructureCodec' => 'includes/ArrayStructureCodec.php',
 		'Wikibase\ChangeNotifier' => 'includes/ChangeNotifier.php',
 		'Wikibase\ChangeNotificationJob' => 'includes/ChangeNotificationJob.php',
 		'Wikibase\UpdateRepoOnMoveJob' => 'includes/UpdateRepoOnMoveJob.php',

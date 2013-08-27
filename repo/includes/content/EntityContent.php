@@ -12,7 +12,6 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -25,6 +24,7 @@ use WikiPage;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel kinzler
  */
 abstract class EntityContent extends AbstractContent {
 
@@ -35,6 +35,65 @@ abstract class EntityContent extends AbstractContent {
 	protected $editEntity = null;
 
 	/**
+	 * @since 0.5
+	 * @var EntityId|null
+	 */
+	protected $redirect;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param string $modelId
+	 * @param EntityId|null $redirect The entity this redirects to, if any
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function __construct( $modelId, EntityId $redirect = null ) {
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
+		$this->redirect = $redirect;
+	}
+
+	/**
+	 * @see Content::isRedirect
+	 *
+	 * @since 0.5
+	 *
+	 * @return bool
+	 */
+	public function isRedirect() {
+		return $this->redirect !== null;
+	}
+
+	/**
+	 * @see Content::getredirectTarget
+	 *
+	 * @since 0.5
+	 *
+	 * @return null|Title
+	 */
+	public function getRedirectTarget() {
+		if ( $this->redirect === null ) {
+			return null;
+		}
+
+		// TODO: find a better way to do this...
+		$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId(
+			$this->redirect
+		);
+
+		return $title;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityId|null
+	 */
+	public function getRedirectTargetId() {
+		return $this->redirect;
+	}
+
+	/**
 	 * Checks if this EntityContent is valid for saving.
 	 *
 	 * Returns false if the entity does not have an ID set.
@@ -42,7 +101,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::isValid()
 	 */
 	public function isValid() {
-		if ( is_null( $this->getEntity()->getId() ) ) {
+		if ( !$this->isRedirect()
+			&& is_null( $this->getEntity()->getId() ) ) {
 			return false;
 		}
 
@@ -75,7 +135,9 @@ abstract class EntityContent extends AbstractContent {
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
-			if ( !$this->isNew() ) {
+			//FIXME: We need to know this Entity page's title even if it's a redirect!
+			//       Ideally, we would just move the saving logic out of this class.
+			if ( !!$this->isRedirect() && !$this->isNew() ) {
 				$this->wikiPage = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId(
 					$this->getEntity()->getId()
 				);
@@ -93,6 +155,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return Title|bool
 	 */
 	public function getTitle() {
+		//FIXME: We need to know this Entity page's title even if it's a redirect!
 		$wikiPage = $this->getWikiPage();
 		return $wikiPage === false ? false : $wikiPage->getTitle();
 	}
@@ -105,7 +168,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return boolean
 	 */
 	public function isNew() {
-		return is_null( $this->getEntity()->getId() );
+		return !$this->isRedirect() && is_null( $this->getEntity()->getId() );
 	}
 
 	/**
@@ -118,6 +181,16 @@ abstract class EntityContent extends AbstractContent {
 	 * @return Entity
 	 */
 	abstract public function getEntity();
+
+	public function getRedirectWikiText() {
+		$title = $this->getRedirectTarget();
+
+		if ( $title === null ) {
+			return null;
+		}
+
+		return '#REDIRECT [[' . $title->getPrefixedText() . ']]';
+	}
 
 	/**
 	 * Returns a ParserOutput object containing the HTML.
@@ -134,6 +207,14 @@ abstract class EntityContent extends AbstractContent {
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null,
 		$generateHtml = true
 	) {
+		if ( $this->isRedirect() ) {
+			// hackish :/
+			$text = $this->getRedirectWikiText();
+			$output = new ParserOutput( $text );
+			$output->addLink( $this->getRedirectTarget() );
+			return $output;
+		}
+
 		$formatterOptions = new FormatterOptions(); //TODO: Language Fallback, etc
 
 		if ( $options !== null ) {
@@ -165,10 +246,14 @@ abstract class EntityContent extends AbstractContent {
 	public function getTextForSearchIndex() {
 		wfProfileIn( __METHOD__ );
 
-		$entity = $this->getEntity();
+		if ( $this->isRedirect() ) {
+			$text = $this->getRedirectWikiText();
+		} else {
+			$entity = $this->getEntity();
 
-		$searchTextGenerator = new EntitySearchTextGenerator();
-		$text = $searchTextGenerator->generate( $entity );
+			$searchTextGenerator = new EntitySearchTextGenerator();
+			$text = $searchTextGenerator->generate( $entity );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $text;
@@ -181,19 +266,23 @@ abstract class EntityContent extends AbstractContent {
 	public function getTextForFilters() {
 		wfProfileIn( __METHOD__ );
 
-		//XXX: $ignore contains knowledge about the Entity's internal representation.
-		//     This list should therefore rather be maintained in the Entity class.
-		static $ignore = array(
-			'language',
-			'site',
-			'type',
-		);
+		if ( $this->isRedirect() ) {
+			$text = $this->getRedirectWikiText();
+		} else {
+			//XXX: $ignore contains knowledge about the Entity's internal representation.
+			//     This list should therefore rather be maintained in the Entity class.
+			static $ignore = array(
+				'language',
+				'site',
+				'type',
+			);
 
-		$data = $this->getEntity()->toArray();
+			$data = $this->getEntity()->toArray();
 
-		$values = self::collectValues( $data, $ignore );
+			$values = self::collectValues( $data, $ignore );
 
-		$text = implode( "\n", $values );
+			$text = implode( "\n", $values );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $text;
@@ -243,7 +332,11 @@ abstract class EntityContent extends AbstractContent {
 	 * @return String the summary text
 	 */
 	public function getTextForSummary( $maxlength = 250 ) {
-		return $this->getEntity()->getDescription( $GLOBALS['wgLang']->getCode() );
+		if ( $this->isRedirect() ) {
+			return $this->getRedirectWikiText();
+		} else {
+			return $this->getEntity()->getDescription( $GLOBALS['wgLang']->getCode() );
+		}
 	}
 
 	/**
@@ -254,7 +347,13 @@ abstract class EntityContent extends AbstractContent {
 	 *		 structure, an object, a binary blob... anything, really.
 	 */
 	public function getNativeData() {
-		return $this->getEntity()->toArray();
+		if ( $this->isRedirect() ) {
+			return array(
+				'redirect' => $this->getRedirectTargetId()->getSerialization()
+			);
+		} else {
+			return $this->getEntity()->toArray();
+		}
 	}
 
 	/**
@@ -290,6 +389,14 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
+		if ( $that->isRedirect() !== $this->isRedirect() ) {
+			return false;
+		}
+
+		if ( $that->isRedirect() ) {
+			return $this->getRedirectTargetId()->equals( $that->getRedirectTargetId() );
+		}
+
 		$thisEntity = $this->getEntity();
 		$thatEntity = $that->getEntity();
 
@@ -311,7 +418,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return boolean
 	 */
 	public function isCountable( $hasLinks = null ) {
-		return !$this->getEntity()->isEmpty();
+		return !$this->isRedirect() && !$this->getEntity()->isEmpty();
 	}
 
 	/**
@@ -320,7 +427,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		return $this->getEntity()->isEmpty();
+		return !$this->isRedirect() && $this->getEntity()->isEmpty();
 	}
 
 	/**
@@ -333,7 +440,7 @@ abstract class EntityContent extends AbstractContent {
 	public function copy() {
 		$array = array();
 
-		foreach ( $this->getEntity()->toArray() as $key => $value ) {
+		foreach ( $this->getNativeData() as $key => $value ) {
 			$array[$key] = is_object( $value ) ? clone $value : $value;
 		}
 
@@ -434,6 +541,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @return int The new ID
 	 */
 	public function grabFreshId() {
+		if ( $this->isRedirect() ) {
+			throw new MWException( "This is a redirect, can't get a fresh ID!" );
+		}
+
 		if ( !$this->isNew() ) {
 			throw new MWException( "This entity already has an ID!" );
 		}

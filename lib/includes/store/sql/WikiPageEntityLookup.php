@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DBQueryError;
+use MWException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
@@ -38,6 +39,11 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 	protected $cacheTimeout;
 
 	/**
+	 * @var string
+	 */
+	protected $defaultSerializationFormat;
+
+	/**
 	 * @param String|bool $wiki           The name of thw wiki database to use, in a form
 	 *                                    that wfGetLB() understands. Use false to indicate the local wiki.
 	 * @param bool|int|null $cacheType      The cache type ID for the cache to use for
@@ -64,6 +70,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 		$this->cacheType = $cacheType;
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
 		$this->cacheTimeout = $cacheDuration;
+		$this->defaultSerializationFormat = Settings::get( 'serializationFormat' ); //FIXME: inject this
 	}
 
 	/**
@@ -396,8 +403,16 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			return null;
 		}
 
-		$format = $row->rev_content_format;
-		$entity = EntityFactory::singleton()->newFromBlob( $entityType, $blob, $format );
+		$format = $row->rev_content_format === null ? $this->defaultSerializationFormat : $row->rev_content_format;
+		$codec = new ArrayStructureCodec();
+		$data = $codec->unserializeData( $blob, $format );
+
+		if ( isset( $data['redirect'] ) ) {
+			//TODO: automatically resolve redirects (optionaly?)
+			throw new MWException( 'Entity ' . $row->page_title . ' is a redirect!' );
+		}
+
+		$entity = EntityFactory::singleton()->newFromArray( $entityType, $data );
 		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "

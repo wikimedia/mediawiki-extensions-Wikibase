@@ -195,9 +195,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
 
 			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-			$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
 
-			$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
+			$data = str_replace( '{testitemrev}', $content ? $content->getWikiPage()->getLatest() : 0, $data );
+
+			$ts = wfTimestamp( TS_RFC2822, $content ? $content->getWikiPage()->getTimestamp() : '' );
 			$data = str_replace( '{testitemtimestamp}', $ts, $data );
 		}
 	}

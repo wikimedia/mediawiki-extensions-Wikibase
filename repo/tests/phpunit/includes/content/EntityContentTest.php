@@ -320,4 +320,46 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		$this->assertInstanceOf( '\ParserOutput', $parserOutput );
 	}
+
+	/**
+	 * @dataProvider newFromArrayProvider
+	 */
+	public function testNewFromArray( $array ) {
+		$content = $this->newFromArray( $array );
+		$actual = $content->getNativeData();
+
+		$this->assertEquals( $array, array_intersect_key( $actual, $array ) );
+
+		$content2 = $this->newFromArray( $actual );
+		$this->assertTrue( $content->equals( $content2 ), 'equals' );
+	}
+
+	public function newFromArrayProvider() {
+		return array(
+			array( #0
+				array(),
+			),
+			array( #1
+				array( 'labels' => array() ),
+			),
+			array( #2
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+			),
+			array( #3
+				array( 'descriptions' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+			),
+			array( #4
+				array( 'aliases' => array(
+					'en' => array( 'foo' ),
+					'de' => array( 'bar' ),
+				) ),
+			),
+		);
+	}
 }
