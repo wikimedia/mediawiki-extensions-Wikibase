@@ -116,36 +116,12 @@ class EntityFactoryTest extends EntityTestCase {
 		$this->assertEntityStructureEquals( $data, $entity );
 	}
 
-	public static function provideNewFromBlob() {
-		$tests = array();
-
-		foreach ( self::provideNewFromArray() as $arrayTest ) {
-			$tests[] = array(
-				$arrayTest[0],
-				json_encode( $arrayTest[1] ),
-				null,
-				$arrayTest[1],
-				$arrayTest[2],
-			);
-		}
-
-		return $tests;
-	}
-
-	/**
-	 * @dataProvider provideNewFromBlob
-	 */
-	public function testNewFromBlob( $type, $blob, $format, $data, $class ) {
-		$entity = EntityFactory::singleton()->newFromBlob( $type, $blob, $format );
-
-		$this->assertInstanceOf( $class, $entity );
-		$this->assertEntityStructureEquals( $data, $entity );
-	}
-
 	/**
 	 * @param Entity|array $expected
 	 * @param Entity|array $actual
 	 * @param String|null  $message
+	 *
+	 * @todo factor this out so it can be reused by EntityContentFactoryTest, etc.
 	 */
 	protected function assertEntityStructureEquals( $expected, $actual, $message = null ) {
 		if ( $expected instanceof Entity ) {

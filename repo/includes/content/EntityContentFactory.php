@@ -35,6 +35,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class EntityContentFactory implements EntityTitleLookup {
 
@@ -205,15 +206,47 @@ class EntityContentFactory implements EntityTitleLookup {
 	 *
 	 * @param Entity $entity
 	 *
+	 * @throws \MWException
 	 * @return EntityContent
 	 */
 	public function newFromEntity( Entity $entity ) {
+		$entityType = $entity->getType();
+
+		if ( !isset( self::$typeMap[$entityType] ) ) {
+			throw new \MWException( "Unknown entity type: $entityType" );
+		}
+
 		/**
 		 * @var EntityHandler $handler
 		 */
-		$handler = \ContentHandler::getForModelID( self::$typeMap[$entity->getType()] );
+		$handler = \ContentHandler::getForModelID( self::$typeMap[$entityType] );
 
 		return $handler->newContentFromEntity( $entity );
+	}
+
+	/**
+	 * Constructs a new EntityContent from an encoded entity blob.
+	 *
+	 * @since    0.4
+	 *
+	 * @param string $entityType The entity type identifier
+	 * @param string $blob       The encoded entity
+	 * @param string $format     The encoding format
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return EntityContent
+	 */
+	public function newFromBlob( $entityType, $blob, $format = null ) {
+		if ( !isset( self::$typeMap[$entityType] ) ) {
+			throw new InvalidArgumentException( "Unknown entity type: $entityType" );
+		}
+
+		/**
+		 * @var EntityHandler $handler
+		 */
+		$handler = \ContentHandler::getForModelID( self::$typeMap[$entityType] );
+
+		return $handler->unserializeContent( $blob, $format );
 	}
 
 	/**
@@ -237,7 +270,7 @@ class EntityContentFactory implements EntityTitleLookup {
 		} elseif ( $type === Property::ENTITY_TYPE ) {
 			return PropertyContent::newEmpty();
 		} else {
-			throw new InvalidArgumentException( 'unknown entity type $type' );
+			throw new InvalidArgumentException( "Unknown entity type: $type" );
 		}
 	}
 

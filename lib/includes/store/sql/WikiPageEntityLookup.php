@@ -407,7 +407,12 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 		}
 
 		$format = $row->rev_content_format;
-		$entity = EntityFactory::singleton()->newFromBlob( $entityType, $blob, $format );
+		$codec = new ArrayStructureCodec();
+		$data = $codec->unserializeData( $blob, $format );
+
+		//FIXME: handle redirect
+
+		$entity = EntityFactory::singleton()->newFromArray( $entityType, $data );
 		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
