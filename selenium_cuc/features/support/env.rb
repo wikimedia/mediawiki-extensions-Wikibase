@@ -16,6 +16,7 @@ require 'watir-webdriver'
 require 'yaml'
 require 'net/http'
 require 'active_support/all'
+require 'rest_client'
 require 'require_all'
 
 config = YAML.load_file('config/config.yml')
@@ -102,10 +103,25 @@ def sauce_api(json)
   %x{curl -H 'Content-Type:text/json' -s -X PUT -d '#{json}' http://#{ENV['SAUCE_ONDEMAND_USERNAME']}:#{ENV['SAUCE_ONDEMAND_ACCESS_KEY']}@saucelabs.com/rest/v1/#{ENV['SAUCE_ONDEMAND_USERNAME']}/jobs/#{$session_id}}
 end
 
+def sauce_rest(body)
+  http = "https://saucelabs.com/rest/v1/#{ENV['SAUCE_ONDEMAND_USERNAME']}/jobs/#{$session_id}"
+
+  RestClient::Request.execute(
+      :method => :put,
+      :url => http,
+      :user => ENV['SAUCE_ONDEMAND_USERNAME'],
+      :password => ENV['SAUCE_ONDEMAND_ACCESS_KEY'],
+      :headers => {:content_type => "application/json"},
+      :payload => body.to_json
+  )
+end
+
 After do |scenario|
-  if environment == :cloudbees && !ENV["windir"]
-    sauce_api(%Q{{"passed": #{scenario.passed?}}})
-    sauce_api(%Q{{"public": true}})
+  if environment == :cloudbees# && !ENV["windir"]
+    #sauce_api(%Q{{"passed": #{scenario.passed?}}})
+    #sauce_api(%Q{{"public": true}})
+    sauce_rest(%Q{{"passed": #{scenario.passed?}}})
+    sauce_rest(%Q{{"public": true}})
   end
   @browser.close
 end
