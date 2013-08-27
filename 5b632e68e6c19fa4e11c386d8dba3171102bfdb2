@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "c95d3502_7ec4e961",
+        "filename": "lib/includes/formatters/EntityIdFormatter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-08-27T15:59:53Z",
+      "side": 1,
+      "message": "why is this still around?",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_1e968d4b",
+        "filename": "lib/includes/store/sql/SiteLinkTable.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-08-27T15:59:53Z",
+      "side": 1,
+      "message": "unsure about this",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_fede393a",
         "filename": "lib/resources/parsers/EntityIdParser.js",
         "patchSetId": 23
