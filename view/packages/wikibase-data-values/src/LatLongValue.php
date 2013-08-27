@@ -8,8 +8,8 @@ use OutOfRangeException;
 /**
  * Object representing a geographic point.
  *
- * Latitude is specified in degrees within the range [-90, 90].
- * Longitude is specified in degrees within the range [-180, 180].
+ * Latitude is specified in degrees within the range [-360, 360].
+ * Longitude is specified in degrees within the range [-360, 360].
  *
  * @since 0.1
  *
