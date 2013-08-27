@@ -692,6 +692,18 @@ $messages['nn'] = array(
 	'valueview-listrotator-auto' => 'auto',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'valueview-expert-emptyvalue-empty' => 'void',
+	'valueview-expert-globecoordinateinput-precision' => 'Precision :',
+	'valueview-expert-timeinput-precision' => 'Precision :',
+	'valueview-expert-timeinput-calendar' => 'Calendièr :',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendièr gregorian)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendièr julian)',
+);
+
 /** Polish (polski)
  * @author Chrumps
  * @author Ty221
