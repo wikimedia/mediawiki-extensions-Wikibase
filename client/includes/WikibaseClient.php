@@ -4,6 +4,8 @@ namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
 use Language;
+use Site;
+use Sites;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\ClientStore;
@@ -82,6 +84,11 @@ final class WikibaseClient {
 	 * @var StringNormalizer
 	 */
 	private $stringNormalizer;
+
+	/**
+	 * @var \Site
+	 */
+	private $site = null;
 
 	/**
 	 * @since 0.4
@@ -350,4 +357,61 @@ final class WikibaseClient {
 		return $instance;
 	}
 
+	/**
+	 * Returns the this client wiki's site object.
+	 *
+	 * This is taken from the siteGlobalID setting, which defaults
+	 * to the wiki's database name.
+	 *
+	 * If the configured site ID is not found in the Sites list, a
+	 * new Site object is constructed from the configured ID.
+	 *
+	 * @throws \MWException
+	 * @return Site
+	 */
+	public function getSite() {
+		if ( $this->site === null ) {
+			$globalId = $this->settings->getSetting( 'siteGlobalID' );
+			$localId = $this->settings->getSetting( 'siteLocalID' );
+
+			$sites = Sites::singleton();
+			$this->site = $sites->getSite( $globalId );
+
+			if ( !$this->site ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Unable to resolve site ID '{$globalId}'!" );
+
+				$this->site = new \MediaWikiSite();
+				$this->site->setGlobalId( $globalId );
+				$this->site->addLocalId( Site::ID_INTERWIKI, $localId );
+				$this->site->addLocalId( Site::ID_EQUIVALENT, $localId );
+			}
+
+			if ( !in_array( $localId, $this->site->getLocalIds() ) ) {
+				wfDebugLog( __CLASS__, __FUNCTION__
+						. ": The configured local id $localId does not match any local ID of site $globalId: "
+						. var_export( $this->site->getLocalIds(), true ) );
+			}
+		}
+
+		return $this->site;
+	}
+
+	/**
+	 * Returns the site group ID for the group to be used for language links.
+	 * This is typically the group the client wiki itself belongs to, but
+	 * can be configured to be otherwise using the languageLinkSiteGroup setting.
+	 *
+	 * @return string
+	 * @throws \MWException
+	 */
+	public function getLangLinkSiteGroup() {
+		$group = $this->settings->getSetting( 'languageLinkSiteGroup' );
+
+		if ( $group === null ) {
+			$thisSite = $this->getSite();
+			$group = $thisSite->getGroup();
+		}
+
+		return $group;
+	}
 }

@@ -89,7 +89,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			array(),
 			array( NS_TALK ),
 			$this->mockRepo,
-			$sites
+			$sites,
+			'wikipedia'
 		);
 	}
 
@@ -372,28 +373,6 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		}
 
 		return $links;
-	}
-
-	public static function provideGetSiteGroup() {
-		return array(
-			array( 'dewiki', 'wikipedia' ),
-			array( 'enwiktionary', 'wiktionary' ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetSiteGroup
-	 */
-	public function testGetSiteGroup( $siteId, $group ) {
-		$handler = new LangLinkHandler(
-			$siteId,
-			array(),
-			array( NS_TALK ),
-			$this->mockRepo,
-			MockSiteStore::newFromTestSites()
-		);
-
-		$this->assertEquals( $group, $handler->getSiteGroup() );
 	}
 
 	public static function provideFilterRepoLinksByGroup() {
