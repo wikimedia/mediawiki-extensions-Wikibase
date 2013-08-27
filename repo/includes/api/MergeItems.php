@@ -74,6 +74,15 @@ class MergeItems extends ApiWikibase {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
+		if ( $fromEntityContent->isEmpty() ) {
+			//XXX: check $user->isAllowed( 'suppressredirect' ) here?
+			// but that's for "suppress a redirect, just remove the old title",
+			// while here, we *keep* the old page when suppressing a redirect.
+			if ( !$params['noredirect'] ) {
+				$fromEntityContent = ItemContent::newFromRedirect( $fromEntityContent->getItem()->getId(), $toEntityContent->getItem()->getId() );
+			}
+		}
+
 		$this->attemptSaveMerge( $fromEntityContent, $toEntityContent, $params );
 	}
 
@@ -205,6 +214,9 @@ class MergeItems extends ApiWikibase {
 				'toid' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'noredirect' => array(
+					ApiBase::PARAM_TYPE => 'boolean',
+				),
 				'ignoreconflicts' => array(
 					ApiBase::PARAM_ISMULTI => true,
 					ApiBase::PARAM_TYPE => 'string',
@@ -227,6 +239,7 @@ class MergeItems extends ApiWikibase {
 			array(
 				'fromid' => array( 'The id to merge from' ),
 				'toid' => array( 'The id to merge to' ),
+				'noredirect' => array( 'Don\'t create a redirect in place of the old item.' ),
 				'ignoreconflicts' => array( 'Array of elements of the item to ignore conflicts for, can only contain values of "label" and or "description" and or "sitelink"' ),
 				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 				'summary' => array( 'Summary for the edit.',

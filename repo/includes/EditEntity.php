@@ -741,6 +741,7 @@ class EditEntity {
 		/**
 		 * @var Entity $entity
 		 */
+		//FIXME: doesn't work for redirects. Only needed for constraint checks, skip for redirects.
 		$entity = $this->newContent->getEntity();
 
 		$entityDiff = null;

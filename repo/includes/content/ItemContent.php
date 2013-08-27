@@ -1,18 +1,16 @@
 <?php
 
 namespace Wikibase;
-
 use Content;
 use DatabaseBase;
 use DataUpdate;
 use Message;
-use MWException;
-use ParserOptions;
 use ParserOutput;
 use SiteSQLStore;
 use Status;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\ItemSearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
@@ -24,6 +22,7 @@ use WikiPage;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ItemContent extends EntityContent {
 
@@ -34,6 +33,7 @@ class ItemContent extends EntityContent {
 	protected $item;
 
 	/**
+	 * Constructor.
 	 * Do not use to construct new stuff from outside of this class,
 	 * use the static newFoobar methods.
 	 *
@@ -42,10 +42,30 @@ class ItemContent extends EntityContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param Item|null $item
+	 * @param array|null $redirectData the redirect to represent, if any.
+	 *        Must contain the fields 'from' and 'target'.
+	 *
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( Item $item ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
+	public function __construct( Item $item = null, array $redirectData = null ) {
+		if ( !$item && !$redirectData ) {
+			throw new \InvalidArgumentException( 'Either $item or $redirect must be provided.' );
+		}
+
+		if ( $item && $redirectData ) {
+			throw new \InvalidArgumentException( 'Only one of $item or $redirect can be used.' );
+		}
+
+		if ( $redirectData && $redirectData['from']->getEntityType() !== Item::ENTITY_TYPE ) {
+			throw new \InvalidArgumentException( "Items can only redirect from an item ID" );
+		}
+
+		if ( $redirectData && $redirectData['target']->getEntityType() !== Item::ENTITY_TYPE ) {
+			throw new \InvalidArgumentException( "Items can only redirect to other items" );
+		}
+
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $redirectData );
 
 		$this->item = $item;
 	}
@@ -64,6 +84,22 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * Create a new ItemContent object as a redirect to the given entity.
+	 *
+	 * @since    0.4
+	 *
+	 * @param EntityId $from
+	 * @param EntityId $target
+	 *
+	 * @internal param \Wikibase\EntityId $redirect
+	 *
+	 * @return ItemContent
+	 */
+	public static function newFromRedirect( EntityId $from, EntityId $target ) {
+		return new static( null, array( 'from' => $from, 'target' => $target ) );
+	}
+
+	/**
 	 * Create a new ItemContent object from the provided Item data.
 	 *
 	 * @since 0.1
@@ -73,7 +109,15 @@ class ItemContent extends EntityContent {
 	 * @return ItemContent
 	 */
 	public static function newFromArray( array $data ) {
-		return new static( new Item( $data ) );
+		if ( isset( $data['redirect'] ) ) {
+			$redirect = new ItemId( $data['redirect'] );
+			$item = null;
+		} else {
+			$redirect = null;
+			$item = new Item( $data );
+		}
+
+		return new static( $item, $redirect );
 	}
 
 	/**
@@ -84,7 +128,26 @@ class ItemContent extends EntityContent {
 	 * @return Item
 	 */
 	public function getItem() {
+		if ( $this->isRedirect() ) {
+			// This is a TINY BIT ugly...
+			throw new \RuntimeException( "This ItemContent represents a redirect. Use getRedirectTarget to follow the redirect." );
+		}
+
 		return $this->item;
+	}
+
+	/**
+	 * Returns the Item that makes up this ItemContent.
+	 *
+	 * @see EntityContent::getEntity()
+	 * @see ItemContent::getItem()
+	 *
+	 * @since 0.1
+	 *
+	 * @return Item
+	 */
+	public function getEntity() {
+		return $this->getItem();
 	}
 
 	/**
@@ -93,8 +156,14 @@ class ItemContent extends EntityContent {
 	 * @since 0.1
 	 *
 	 * @param Item $item
+	 *
+	 * @throws \RuntimeException
 	 */
 	public function setItem( Item $item ) {
+		if ( $this->isRedirect() ) {
+			throw new \RuntimeException( "Can not set an item value if the content is defined to be a redirect." );
+		}
+
 		$this->item = $item;
 	}
 
@@ -222,17 +291,6 @@ class ItemContent extends EntityContent {
 	 */
 	public static function newEmpty() {
 		return new static( Item::newEmpty() );
-	}
-
-	/**
-	 * @see EntityContent::getEntity
-	 *
-	 * @since 0.1
-	 *
-	 * @return Item
-	 */
-	public function getEntity() {
-		return $this->item;
 	}
 
 	/**

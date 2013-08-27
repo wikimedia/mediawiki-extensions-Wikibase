@@ -10,6 +10,7 @@ use DifferenceEngine;
 use Html;
 use Linker;
 use ParserOptions;
+use ParserOutput;
 use Revision;
 use SiteSQLStore;
 use ValueFormatters\FormatterOptions;
@@ -156,13 +157,13 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * @see DifferenceEngine::generateContentDiffBody
 	 *
-	 * @param Content $old
-	 * @param Content $new
+	 * @param EntityContent $old
+	 * @param EntityContent $new
 	 *
 	 * @return string
 	 */
-	public function generateContentDiffBody( Content $old, Content $new ) {
-		$diff = $old->getEntity()->getDiff( $new->getEntity() );
+	public function generateContentDiffBody( EntityContent $old, EntityContent $new ) {
+		$diff = $old->getDiff( $new );
 
 		return $this->diffVisualizer->visualizeDiff( $diff );
 	}
@@ -179,7 +180,7 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 		$parserOptions->setTidy( true );
 
 		$parserOptions->setEditSection( false );
-		$parserOptions->addExtraKey("diff=1"); // don't poison parser cache with diff-specific stuff
+		$parserOptions->addExtraKey( "diff=1" ); // don't poison parser cache with diff-specific stuff
 
 		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
 		return $parserOutput;

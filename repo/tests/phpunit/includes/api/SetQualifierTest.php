@@ -74,7 +74,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$item = \Wikibase\Item::newEmpty();
 			$item->setId( new ItemId( 'q802' ) );
 
-			$content = new \Wikibase\ItemContent( $item );
+			$content = $content = \Wikibase\ItemContent::newfromItem( $item );
 			$content->save( '', null, EDIT_NEW );
 
 			$prop114id = new PropertyId( 'p114' );
