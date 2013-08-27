@@ -128,7 +128,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$item->setId( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 847 ) );
 		$item->setDescription( 'en', 'Largest city in Germany' );
 
-        $content = new \Wikibase\ItemContent( $item );
+        $content = \Wikibase\ItemContent::newfromItem( $item );
 		$status = $content->save( 'create' );
 		assert( $status->isOK() );
 		$revId1 = $content->getWikiPage()->getRevision()->getId();

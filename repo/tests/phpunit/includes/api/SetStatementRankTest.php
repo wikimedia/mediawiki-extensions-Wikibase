@@ -100,7 +100,7 @@ class SetStatementRankTest extends WikibaseApiTestCase {
 
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = \Wikibase\Item::newEmpty();
-			$content = new \Wikibase\ItemContent( $item );
+			$content = \Wikibase\ItemContent::newfromItem( $item );
 			$content->save( '', null, EDIT_NEW );
 
 			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );

@@ -85,7 +85,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 			$item = \Wikibase\Item::newEmpty();
 
 			wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
-			$content = new \Wikibase\ItemContent( $item );
+			$content = \Wikibase\ItemContent::newfromItem( $item );
 			$content->save( '', null, EDIT_NEW );
 
 			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );

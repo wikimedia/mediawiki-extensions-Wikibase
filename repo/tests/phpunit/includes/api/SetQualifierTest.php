@@ -156,7 +156,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		foreach( $this->claimProvider() as $claim ) {
 			$item = \Wikibase\Item::newEmpty();
 			$item->setId( new EntityId( Item::ENTITY_TYPE, 802 ) );
-			$content = new \Wikibase\ItemContent( $item );
+			$content = \Wikibase\ItemContent::newfromItem( $item );
 			$content->save( '', null, EDIT_NEW );
 
 			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );

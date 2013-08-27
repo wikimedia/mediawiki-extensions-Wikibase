@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Revision;
 use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
 
 /**
@@ -29,6 +30,7 @@ use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOu
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ItemContent extends EntityContent {
 
@@ -39,18 +41,34 @@ class ItemContent extends EntityContent {
 	protected $item;
 
 	/**
+	 * @since 0.4
+	 * @var EntityId
+	 */
+	protected $redirect;
+
+	/**
 	 * Constructor.
 	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
 	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param Item     $item
+	 * @param EntityId $redirect
 	 */
-	public function __construct( Item $item ) {
+	public function __construct( Item $item = null, EntityId $redirect = null ) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
+		if ( !$item && !$redirect ) {
+			throw new \InvalidArgumentException( 'Either $item or $redirect must be provided.' );
+		}
+
+		if ( $item && $redirect ) {
+			throw new \InvalidArgumentException( 'Only one of $item or $redirect can be used.' );
+		}
+
 		$this->item = $item;
+		$this->redirect = $redirect;
 	}
 
 	/**
@@ -67,6 +85,24 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * Create a new ItemContent object as a redirect to the given entity.
+	 *
+	 * @since    0.4
+	 *
+	 * @param EntityId $redirect
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return ItemContent
+	 */
+	public static function newFromRedirect( EntityId $redirect ) {
+		if ( $redirect->getEntityType() !== Item::ENTITY_TYPE ) {
+			throw new \InvalidArgumentException( "Items can only redirect to items" );
+		}
+
+		return new static( null, $redirect );
+	}
+
+	/**
 	 * Create a new ItemContent object from the provided Item data.
 	 *
 	 * @since 0.1
@@ -80,6 +116,55 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * @see Content::getredirectTarget
+	 *
+	 * @return null|Title
+	 */
+	public function getRedirectTarget() {
+		if ( $this->redirect === null ) {
+			return null;
+		}
+
+		$title = EntityContentFactory::singleton()->getTitleForId(
+			$this->redirect
+		);
+
+		return $title;
+	}
+
+	/**
+	 * @return EntityId|null
+	 */
+	public function getRedirectTargetId() {
+		return $this->redirect;
+	}
+
+	/**
+	 * @see Content::getredirectTarget
+	 * @see Revision::getContent
+	 *
+	 * @param int $audience see Revision::getContent()
+	 * @param \User $user see Revision::getContent()
+	 *
+	 * @throws \MWException
+	 * @return null|ItemContent
+	 */
+	public function getRedirectTargetEntity( $audience = Revision::FOR_PUBLIC, User $user = null ) {
+		if ( $this->redirect === null ) {
+			return null;
+		}
+
+		$page = EntityContentFactory::singleton()->getWikiPageForId( $this->redirect );
+		$content = $page->getContent( $audience, $user );
+
+		if ( !( $content instanceof  ItemContent ) ) {
+			throw new MWException( "Redirect target did not resolve into an ItemContent." );
+		}
+
+		return $content;
+	}
+
+	/**
 	 * Returns the Item that makes up this ItemContent.
 	 *
 	 * @since 0.1
@@ -87,6 +172,11 @@ class ItemContent extends EntityContent {
 	 * @return Item
 	 */
 	public function getItem() {
+		if ( $this->redirect ) {
+			// This is a bit ugly...
+			throw new \RuntimeException( "This ItemContent represents a redirect. Use getRedirectTargetEntity to get the actual entity." );
+		}
+
 		return $this->item;
 	}
 
@@ -98,6 +188,10 @@ class ItemContent extends EntityContent {
 	 * @param Item $item
 	 */
 	public function setItem( Item $item ) {
+		if ( $this->redirect !== null ) {
+			throw new \RuntimeException( "Can not set an item value if the content is defined to be a redirect." );
+		}
+
 		$this->item = $item;
 	}
 

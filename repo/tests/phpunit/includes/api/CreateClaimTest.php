@@ -43,7 +43,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 	protected static function getNewEntityAndProperty() {
 		$entity = \Wikibase\Item::newEmpty();
-		$content = new \Wikibase\ItemContent( $entity );
+		$content = \Wikibase\ItemContent::newfromItem( $entity );
 		$content->save( '', null, EDIT_NEW );
 		$entity = $content->getEntity();
 

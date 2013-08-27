@@ -124,7 +124,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testAddClaim() {
 		foreach ( $this->claimProvider() as $claim ) {
 			$item = \Wikibase\Item::newEmpty();
-			$content = new \Wikibase\ItemContent( $item );
+			$content = \Wikibase\ItemContent::newfromItem( $item );
 			$content->save( '', null, EDIT_NEW );
 
 			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
