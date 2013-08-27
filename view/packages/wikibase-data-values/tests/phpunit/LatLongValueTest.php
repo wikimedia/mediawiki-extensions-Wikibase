@@ -42,6 +42,8 @@ class LatLongValueTest extends DataValueTest {
 		$argLists[] = array( -4.2, -4.2 );
 		$argLists[] = array( 4.2, -42 );
 		$argLists[] = array( -42, 4.2 );
+		$argLists[] = array( 360, -360 );
+		$argLists[] = array( 48.269, -225.99 );
 		$argLists[] = array( 0, 0 );
 
 		return $argLists;
@@ -75,10 +77,10 @@ class LatLongValueTest extends DataValueTest {
 		$argLists[] = array( 42, '42' );
 		$argLists[] = array( '0', 0 );
 
-		$argLists[] = array( -91, 0 );
+		$argLists[] = array( -361, 0 );
 		$argLists[] = array( -999, 1 );
-		$argLists[] = array( 90.001, 2 );
-		$argLists[] = array( 3, 181 );
+		$argLists[] = array( 360.001, 2 );
+		$argLists[] = array( 3, 361 );
 		$argLists[] = array( 4, -1337 );
 
 		return $argLists;

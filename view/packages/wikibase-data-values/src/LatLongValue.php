@@ -68,8 +68,8 @@ class LatLongValue extends DataValueObject {
 			throw new InvalidArgumentException( 'Can only construct LatLongValue with a numeric latitude' );
 		}
 
-		if ( $latitude < -90 || $latitude > 90 ) {
-			throw new OutOfRangeException( 'Latitude needs to be between -90 and 90' );
+		if ( $latitude < -360 || $latitude > 360 ) {
+			throw new OutOfRangeException( 'Latitude needs to be between -360 and 360' );
 		}
 	}
 
@@ -78,8 +78,8 @@ class LatLongValue extends DataValueObject {
 			throw new InvalidArgumentException( 'Can only construct LatLongValue with a numeric longitude' );
 		}
 
-		if ( $longitude < -180 || $longitude > 180 ) {
-			throw new OutOfRangeException( 'Longitude needs to be between -180 and 180' );
+		if ( $longitude < -360 || $longitude > 360 ) {
+			throw new OutOfRangeException( 'Longitude needs to be between -360 and 360' );
 		}
 	}
 
