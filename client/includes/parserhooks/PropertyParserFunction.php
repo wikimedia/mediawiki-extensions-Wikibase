@@ -199,7 +199,7 @@ class PropertyParserFunction {
 
 		$status = $instance->renderForEntityId( $entityId, $propertyLabel );
 
-		if ( !$status->isGood() ) {
+		if ( !$status->isGood() && false ) { // patched out to hide issue with geo-coordinat data type for now.
 			// stuff the error messages into the ParserOutput, so we can render them later somewhere
 
 			$errors = $parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
@@ -207,7 +207,7 @@ class PropertyParserFunction {
 				$errors = array();
 			}
 
-			//XXX: if Status sucked less, we'd could get an array of Message objects
+			//XXX: if Status sucked less, we could get an array of Message objects
 			$errors[] = $status->getWikiText();
 
 			$parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
