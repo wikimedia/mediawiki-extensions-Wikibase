@@ -142,11 +142,52 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidEntityTypesProvider
-	 * @expectedException InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function testInvalidNewFromType( $type ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityContent = $entityContentFactory->newFromType( $type );
+	}
+
+	public static function provideNewFromArray() {
+		return array(
+			array( // #0
+				Item::ENTITY_TYPE,
+				array(
+					'label' => array(
+						'en' => 'Foo',
+						'de' => 'FOO',
+					)
+				),
+				'\Wikibase\ItemContent' ),
+		);
+	}
+
+	public static function provideNewFromBlob() {
+		$tests = array();
+
+		foreach ( self::provideNewFromArray() as $arrayTest ) {
+			$tests[] = array(
+				$arrayTest[0],
+				json_encode( $arrayTest[1] ),
+				null,
+				$arrayTest[1],
+				$arrayTest[2],
+			);
+		}
+
+		return $tests;
+	}
+
+	/**
+	 * @dataProvider provideNewFromBlob
+	 */
+	public function testNewFromBlob( $type, $blob, $format, $data, $class ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entity = $entityContentFactory->newFromBlob( $type, $blob, $format );
+
+		$this->assertInstanceOf( $class, $entity );
+		//TODO: $this->assertEntityStructureEquals( $data, $entity );
 	}
 
 }

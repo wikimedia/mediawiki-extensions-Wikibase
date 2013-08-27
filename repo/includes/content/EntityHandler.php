@@ -11,9 +11,7 @@ use Title;
 use WikiPage;
 
 /**
- * Base handler class for Wikibase\Entity content classes.
- * TODO: interface for enforcing singleton
- *
+ * Base handler class for Wikibase\Entity handler classes.
  * @since 0.1
  *
  * @licence GNU GPL v2+
@@ -32,11 +30,7 @@ abstract class EntityHandler extends ContentHandler {
 	abstract protected function getContentClass();
 
 	public function __construct( $modelId ) {
-		$formats = array(
-			CONTENT_FORMAT_JSON,
-			CONTENT_FORMAT_SERIALIZED
-		);
-
+		$formats = ArrayStructureCodec::getSupportedFormats();
 		parent::__construct( $modelId, $formats );
 	}
 
@@ -67,74 +61,78 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * Returns the default serialization format for entities, as defined by the
+	 * 'serializationFormat' setting.
+	 *
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
 	public function getDefaultFormat() {
-		return EntityFactory::singleton()->getDefaultFormat();
+		return Settings::get( 'serializationFormat' );
 	}
 
 	/**
-	 * @param \Content $content
+	 * @param \Content    $content
 	 * @param null|string $format
 	 *
-	 * @throws MWException
+	 * @throws \InvalidArgumentException
 	 * @return string
 	 */
 	public function serializeContent( Content $content, $format = null ) {
-
-		if ( is_null( $format ) ) {
-			$format = $this->getDefaultFormat();
+		if ( !( $content instanceof EntityContent ) ) {
+			throw new \InvalidArgumentException( '$content must be an instance of EntityContent.' );
 		}
 
-		//FIXME: assert $content is a WikibaseContent instance
 		$data = $content->getNativeData();
-
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$blob = serialize( $data );
-				break;
-			case CONTENT_FORMAT_JSON:
-				$blob = json_encode( $data );
-				break;
-			default:
-				throw new MWException( "serialization format $format is not supported for "
-					. "Wikibase content model" );
-		}
+		$blob = $this->serializeData( $data, $format );
 
 		return $blob;
 	}
 
 	/**
-	 * @param $blob
-	 * @param null $format
-	 * @return mixed
+	 * Encodes the given array structure into a blog using the
+	 * given serialization format.
+	 *
+	 * @param array $data
+	 * @param null|string $format
 	 *
 	 * @throws MWException
-	 * @throws \MWContentSerializationException
+	 * @return string
+	 */
+	protected function serializeData( array $data, $format = null ) {
+		if ( is_null( $format ) ) {
+			$format = $this->getDefaultFormat();
+		}
+
+		$codec = new ArrayStructureCodec();
+		$blob = $codec->serializeData( $data, $format );
+
+		return $blob;
+	}
+
+	/**
+	 * Decodes the given blob into a structure of nested arrays using the
+	 * given serialization format.
+	 *
+	 * Currently, two formats are supported: CONTENT_FORMAT_SERIALIZED, CONTENT_FORMAT_JSON.
+	 *
+	 * @param String $blob The data to decode
+	 * @param String|null $format The data format (if null, getDefaultFormat()
+	 * is used to determine it).
+	 *
+	 * @return array The deserialized data structure
+	 *
+	 * @throws MWException if an unsupported format is requested
+	 * @throws \MWContentSerializationException If serialization fails.
 	 */
 	protected function unserializedData( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
 			$format = $this->getDefaultFormat();
 		}
 
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$data = unserialize( $blob ); //FIXME: suppress notice on failed serialization!
-				break;
-			case CONTENT_FORMAT_JSON:
-				$data = json_decode( $blob, true ); //FIXME: suppress notice on failed serialization!
-				break;
-			default:
-				throw new MWException( "serialization format $format is not supported "
-					. "for Wikibase content model" );
-				break;
-		}
-
-		if ( $data === false || $data === null ) {
-			throw new MWContentSerializationException( 'failed to deserialize' );
-		}
+		$codec = new ArrayStructureCodec();
+		$data = $codec->unserializeData( $blob, $format );
 
 		return $data;
 	}
