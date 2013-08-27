@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_7bc07b2e",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-27T11:56:21Z",
+      "side": 1,
+      "message": "You can create a \"shouldEnableButton\" function that returns the boolean needed by this one.\n\nThe block that goes together with the comment should likely go into its own method, which with a good name, can make the comment not needed.",
+      "revId": "4aa989e4fab74e2d77d4a59cbe6f12e391598d87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_9bdd4f14",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-27T11:56:21Z",
+      "side": 1,
+      "message": "The contents of this if block probably ought to be its own method",
+      "revId": "4aa989e4fab74e2d77d4a59cbe6f12e391598d87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_fbec8bca",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-27T11:56:21Z",
+      "side": 1,
+      "message": "First a list of snaklistview is obtained from the qualifiers field\n\nsnaklistviews \u003d this._qualifiers.value\n\nThen the value of each apparently is a qualifier\n\nqualifiers.add( snaklistviews[i].value() )\n\nHuh? Something is wrong with the naming here",
+      "revId": "4aa989e4fab74e2d77d4a59cbe6f12e391598d87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
