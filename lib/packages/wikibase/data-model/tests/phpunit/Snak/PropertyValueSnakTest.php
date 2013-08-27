@@ -3,6 +3,9 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use DataValues\UnDeserializableValue;
+use Wikibase\EntityId;
+use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
 
 /**
@@ -73,4 +76,27 @@ class PropertyValueSnakTest extends SnakObjectTest {
 		return $argLists;
 	}
 
+	/**
+	 * @dataProvider toArrayProvider
+	 */
+	public function testToArray( PropertyValueSnak $snak, array $expected ) {
+		$actual = $snak->toArray();
+
+		$this->assertEquals( $expected, $actual );
+	}
+
+	public static function toArrayProvider() {
+		$q1 = new EntityId( Property::ENTITY_TYPE, 1 );
+
+		return array(
+			'string-value' => array(
+				new PropertyValueSnak( $q1, new StringValue( 'boo' ) ),
+				array( 'value', $q1->getNumericId(), 'string', 'boo' )
+			),
+			'bad-value' => array(
+				new PropertyValueSnak( $q1, new UnDeserializableValue( 77, 'string', 'not a string' ) ),
+				array( 'value', $q1->getNumericId(), 'string', 77 )
+			),
+		);
+	}
 }
