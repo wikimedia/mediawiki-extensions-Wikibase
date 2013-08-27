@@ -135,7 +135,7 @@ class ClaimSummaryBuilder {
 						$value = $value->getTime();
 					}
 				} else {
-					$value = '-'; // todo handle no values in general way (needed elsewhere)
+					$value = $snak->getType(); // todo handle no values in general way (needed elsewhere)
 				}
 
 				$pairs[$key][] = $value;
