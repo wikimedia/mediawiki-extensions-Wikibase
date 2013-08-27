@@ -1367,6 +1367,7 @@ $messages['fa'] = array(
 $messages['fi'] = array(
 	'wikibase-client-desc' => 'Wikibase-laajennuksen asiakasohjelma',
 	'specialpages-group-wikibaseclient' => 'Wikidata-asiakasohjelma',
+	'tooltip-t-wikibase' => 'Linkki yhdistettyyn keskustietovaraston kohteeseen',
 	'wikibase-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
 	'wikibase-after-page-move-queued' => 'Tähän sivuun liitetty [$1 Wikidata-kohde] päivitetään pian automaattisesti.',
 	'wikibase-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
@@ -1391,7 +1392,7 @@ $messages['fi'] = array(
 	'wikibase-linkitem-input-site' => 'Kieli',
 	'wikibase-linkitem-input-page' => 'Sivu',
 	'wikibase-linkitem-invalidsite' => 'Tuntematon tai virheellinen sivusto valittu',
-	'wikibase-linkitem-confirmitem-text' => 'Valitsemasi sivu on jo liitetty [$1 keskustietovaraston kohteeseen]. Vahvista, että haluat linkittää tämän sivun alla näkyviin sivuihin.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Valitsemasi sivu on jo liitetty [$1 keskustietovaraston kohteeseen]. Vahvista, että haluat linkittää tämän sivun alla {{PLURAL:$2|näkyvään sivuun|näkyviin sivuihin}}.',
 	'wikibase-linkitem-confirmitem-button' => 'Vahvista',
 	'wikibase-linkitem-not-loggedin-title' => 'Sinun täytyy olla sisäänkirjautuneena',
 	'wikibase-linkitem-not-loggedin' => 'Sinun täytyy olla kirjautuneena tässä wikissä ja [$1 keskustietovarastossa] käyttääksesi tätä toimintoa.',
@@ -1400,6 +1401,8 @@ $messages['fi'] = array(
 	'wikibase-property-notfound' => 'Ominaisuutta $1 ei löydy.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-muokkaus',
 	'wikibase-watchlist-show-changes-pref' => 'Näytä Wikidata-muokkaukset tarkkailulistallasi',
 	'wikibase-error-invalid-entity-id' => 'Antamasi tunniste on järjestelmälle tuntematon. Käytä kelvollista tunnistetta.',
 	'special-unconnectedpages' => 'Sivut, joita ei ole liitetty kohteisiin',
@@ -3522,6 +3525,7 @@ $messages['sr-el'] = array(
  * @author Ainali
  * @author Jopparn
  * @author Lokal Profil
+ * @author Skalman
  * @author Stryn
  * @author WikiPhoenix
  */
@@ -3563,6 +3567,8 @@ $messages['sv'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase stöder ännu inte egenskapstypen för egenskapen $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Visa Wikidataredigeringar i senaste ändringar',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-ändring',
 	'wikibase-watchlist-show-changes-pref' => 'Visa Wikidata-redigeringar i din bevakningslista',
 	'wikibase-error-serialize-error' => 'Misslyckades att serialisera data.',
 	'wikibase-error-invalid-entity-id' => 'Det angivna ID:et är okänt för systemet. Var god använd ett giltigt enhets-ID.',
