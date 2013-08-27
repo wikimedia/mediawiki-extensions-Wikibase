@@ -49,6 +49,10 @@ class TypedValueFormatter {
 		// TODO: update this code to obtain the string formatter as soon as corresponding changes
 		// in the DataTypes library have been made.
 
+		if ( $dataValue->getType() === 'bad' ) {
+			throw new IllegalValueException( $dataValue->getReason() );
+		}
+
 		$valueFormatters = $dataType->getFormatters();
 		$valueFormatter = reset( $valueFormatters );
 
