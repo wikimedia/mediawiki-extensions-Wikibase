@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_7f7ea0ad",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "If they could, I would have.",
+      "parentUuid": "c95d3502_9feb74dd",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_3fe42810",
         "filename": "lib/includes/ReferencedEntitiesFinder.php",
         "patchSetId": 23
@@ -47,6 +65,24 @@
       "writtenOn": "2013-08-28T14:44:23Z",
       "side": 1,
       "message": "Should be EntityId|EntityIdValue",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_ff42b06a",
+        "filename": "lib/includes/Validators/EntityExistsValidator.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c95d3502_5fe1dcfe",
       "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -122,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_5f5abc4e",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c95d3502_bf2e7842",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_1f2e8441",
         "filename": "lib/includes/parsers/EntityIdParser.php",
         "patchSetId": 23
@@ -133,6 +187,24 @@
       "writtenOn": "2013-08-28T14:44:23Z",
       "side": 1,
       "message": "The split of BasicEntityIdParser vs EntityIdParser still confuses me, especially the fact that the two are not related/compatible. Why is this needed?",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_bf31180d",
+        "filename": "lib/includes/parsers/EntityIdParser.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "EntityIdParser uses an arbitrary set of id builders and will be needed by Wikibase to facilitate handling types of entity ids not defined by DataModel. Actually, this is documented in this class, please read the docs...\n\nBasicEntityIdParser knows about the id types defined by DataModel and provides an interface to just parse those ids.",
+      "parentUuid": "c95d3502_1f2e8441",
       "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -192,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_df36cc01",
+        "filename": "lib/includes/store/sql/SiteLinkTable.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c95d3502_7f1dc00a",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_9f1a9412",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 23
@@ -203,6 +293,24 @@
       "writtenOn": "2013-08-28T14:44:23Z",
       "side": 1,
       "message": "Shouldn\u0027t this use LecayIdInterpreter::newIdFromTypeAndNumber?\nConstructing an EntityId from a given type and numeric ID is the typical case when we read info from the database. It seems very odd to me that this should be so awkward. There really ought to be a straight forward way to do this.",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_7f306001",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "LegacyIdInterpreter is internal to DataModel for now. It should generally not be used elsewhere, as it is does not, and cannot nicely, provide an extension mechanism. The code here now works fine for now. It is not nice, and fixing it will require some further thinking and changes elsewhere. I do not want to drag that into the scope of this already to big commit, hence the pragmatic solution plus fixme.",
+      "parentUuid": "c95d3502_9f1a9412",
       "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -226,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_9f2d34ab",
+        "filename": "lib/resources/jquery.valueview.experts.wikibase/experts.wikibase.EntityIdInput.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "unchanged",
+      "parentUuid": "c95d3502_dfd40c20",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_ffd9d054",
         "filename": "lib/resources/jquery.valueview.experts.wikibase/experts.wikibase.EntityIdValue.js",
         "patchSetId": 23
@@ -237,6 +363,24 @@
       "writtenOn": "2013-08-28T14:44:23Z",
       "side": 1,
       "message": "again?!",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_bf1af878",
+        "filename": "lib/resources/jquery.valueview.experts.wikibase/experts.wikibase.EntityIdValue.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "unchanged",
+      "parentUuid": "c95d3502_ffd9d054",
       "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -331,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_1f1a0478",
+        "filename": "lib/tests/phpunit/EntityLookupTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "The Item ID and PropertyId classes are not case sensitive, so it does not matter if you put in a lower case of upper case Q/P",
+      "parentUuid": "c95d3502_ff0f10e0",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_5ff71cd2",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 23
@@ -348,6 +510,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_3f0fc839",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c95d3502_5ff71cd2",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_ffb2b004",
         "filename": "lib/tests/phpunit/serializers/SiteLinkSerializerTest.php",
         "patchSetId": 23
@@ -359,6 +539,24 @@
       "writtenOn": "2013-08-28T14:44:23Z",
       "side": 1,
       "message": "can\u0027t we just omit the options?",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_5f0c7c42",
+        "filename": "lib/tests/phpunit/serializers/SiteLinkSerializerTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:12:54Z",
+      "side": 1,
+      "message": "no",
+      "parentUuid": "c95d3502_ffb2b004",
       "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
