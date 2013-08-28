@@ -74,16 +74,7 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	protected function getEntityIdParser() {
-		$entityPrefixes = array(
-			'q' => \Wikibase\Item::ENTITY_TYPE,
-			'p' => \Wikibase\Property::ENTITY_TYPE,
-		);
-
-		$options = new \ValueParsers\ParserOptions( array(
-			EntityIdParser::OPT_PREFIX_MAP => $entityPrefixes
-		) );
-
-		return new EntityIdParser( $options );
+		return new EntityIdParser( new \ValueParsers\ParserOptions() );
 	}
 
 	public function getLinksProvider() {

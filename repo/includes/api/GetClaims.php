@@ -214,8 +214,7 @@ class GetClaims extends ApiWikibase {
 
 		// @todo handle the settings in a more generalized way for all the api modules
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
-		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+		$claimGuidValidator = new ClaimGuidValidator();
 
 		if ( isset( $params['claim'] ) && $claimGuidValidator->validateFormat( $params['claim'] ) === false ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
