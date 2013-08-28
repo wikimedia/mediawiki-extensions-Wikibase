@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_78eeb6ef",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-08-28T20:00:56Z",
+      "side": 1,
+      "message": "I think this should be deprecated.  it\u0027s odd to have both getEntityIdFormatter() and getIdFormatter in this class",
+      "revId": "180a2e69adea5b17a5a79d8f8eb94cf9810a30f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
