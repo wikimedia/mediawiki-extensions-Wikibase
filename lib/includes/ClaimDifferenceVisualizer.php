@@ -1,6 +1,8 @@
 <?php
 namespace Wikibase;
 
+use DataValues\DataValue;
+use DataValues\GlobeCoordinateValue;
 use DataValues\TimeValue;
 use Html;
 use Diff\Diff;
@@ -289,23 +291,35 @@ class ClaimDifferenceVisualizer {
 		$snakType = $snak->getType();
 
 		if ( $snakType === 'value' ) {
-			$dataValue = $snak->getDataValue();
-
-			// FIXME! should use some value formatter
-			if ( $dataValue instanceof EntityId ) {
-				$diffValueString = $this->getEntityLabel( $dataValue );
-			} else if ( $dataValue instanceof TimeValue ) {
-				// TODO: this will just display the plain ISO8601-string,
-				// we should instead use a decent formatter
-				$diffValueString = $dataValue->getTime();
-			} else {
-				$diffValueString = $dataValue->getValue();
-			}
-
-			return $diffValueString;
+			return $this->formatDataValue( $snak->getDataValue() );
 		} else {
 			return $snakType;
 		}
+	}
+
+	/**
+	 * Format DataValue for diff view
+	 *
+	 * @todo use value formatters!
+	 *
+	 * @param DataValue $dataValue
+	 *
+	 * @return string;
+	 */
+	protected function formatDataValue( DataValue $dataValue ) {
+		if ( $dataValue instanceof EntityId ) {
+			$diffValueString = $this->getEntityLabel( $dataValue );
+		} elseif ( $dataValue instanceof TimeValue ) {
+			// TODO: this will just display the plain ISO8601-string,
+			// we should instead use a decent formatter
+			$diffValueString = $dataValue->getTime();
+		} elseif ( $dataValue instanceof GlobeCoordinateValue ) {
+			$diffValueString = $dataValue->getLatitude() . ', ' . $dataValue->getLongitude();
+		} else {
+			$diffValueString = $dataValue->getValue();
+		}
+
+		return $diffValueString;
 	}
 
 	/**
