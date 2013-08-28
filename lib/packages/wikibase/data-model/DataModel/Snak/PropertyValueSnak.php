@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DataValues\UnDeserializableValue;
 use DataValues\DataValue;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Class representing a property value snak.
@@ -28,9 +29,12 @@ class PropertyValueSnak extends SnakObject {
 	protected $dataValue;
 
 	/**
+	 * Support for passing in an EntityId instance that is not a PropertyId instance has
+	 * been deprecated since 0.5.
+	 *
 	 * @since 0.1
 	 *
-	 * @param EntityId|integer $propertyId
+	 * @param PropertyId|EntityId|integer $propertyId
 	 * @param DataValue $dataValue
 	 */
 	public function __construct( $propertyId, DataValue $dataValue ) {
@@ -73,7 +77,7 @@ class PropertyValueSnak extends SnakObject {
 		list( $propertyId, $dataValue ) = unserialize( $serialized );
 
 		$this->__construct(
-			new EntityId( Property::ENTITY_TYPE, $propertyId ),
+			PropertyId::newFromNumber( $propertyId ),
 			$dataValue
 		);
 	}
@@ -113,4 +117,5 @@ class PropertyValueSnak extends SnakObject {
 	public function getType() {
 		return 'value';
 	}
+
 }
