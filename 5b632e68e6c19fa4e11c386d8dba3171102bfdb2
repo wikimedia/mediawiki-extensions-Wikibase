@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_9fa7f4a9",
+        "filename": "lib/includes/formatters/EntityIdFormatter.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T12:14:14Z",
+      "side": 1,
+      "message": "Because usage of it has not been removed everywhere yet",
+      "parentUuid": "c95d3502_7ec4e961",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_1e968d4b",
         "filename": "lib/includes/store/sql/SiteLinkTable.php",
         "patchSetId": 23
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-27T15:59:53Z",
       "side": 1,
       "message": "unsure about this",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_ffae3081",
+        "filename": "lib/includes/store/sql/SiteLinkTable.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T12:14:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c95d3502_1e968d4b",
       "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_1fb4c4ce",
+        "filename": "lib/resources/parsers/EntityIdParser.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T12:14:14Z",
+      "side": 1,
+      "message": "well, like we agreed upon, this really does not matter.",
+      "parentUuid": "c95d3502_fede393a",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_3ee19100",
         "filename": "lib/tests/phpunit/EntityLookupTest.php",
         "patchSetId": 23
@@ -64,6 +118,24 @@
       "writtenOn": "2013-08-27T15:44:08Z",
       "side": 1,
       "message": "why is the P capitalized?",
+      "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_3fc9885c",
+        "filename": "lib/tests/phpunit/EntityLookupTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T12:14:14Z",
+      "side": 1,
+      "message": "why would it not be?",
+      "parentUuid": "c95d3502_3ee19100",
       "revId": "5b632e68e6c19fa4e11c386d8dba3171102bfdb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
