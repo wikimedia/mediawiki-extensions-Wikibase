@@ -336,7 +336,7 @@ abstract class EntityView extends \ContextSource {
 			$prefixedId,
 			wfTemplate( 'wb-property',
 				$label === false ? 'wb-value-empty' : '',
-				$label === false ? wfMessage( 'wikibase-label-empty' )->text() : htmlspecialchars( $label ),
+				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
 				$this->getHtmlForEditSection( $entity, $lang, $editUrl )
 			)
 		);
@@ -368,7 +368,7 @@ abstract class EntityView extends \ContextSource {
 		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
-				$description === false ? wfMessage( 'wikibase-description-empty' )->text() : htmlspecialchars( $description ),
+				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
 				$this->getHtmlForEditSection( $entity, $lang, $editUrl )
 			)
 		);
@@ -506,9 +506,9 @@ abstract class EntityView extends \ContextSource {
 			$tbody .= wfTemplate( 'wb-term',
 				$language,
 				$alternatingClass,
-				Utils::fetchLanguageName( $language ),
-				$label !== false ? $label : wfMessage( 'wikibase-label-empty' ),
-				$description !== false ? $description : wfMessage( 'wikibase-description-empty' ),
+				htmlspecialchars( Utils::fetchLanguageName( $language ) ),
+				htmlspecialchars( $label !== false ? $label : wfMessage( 'wikibase-label-empty' ) ),
+				htmlspecialchars( $description !== false ? $description : wfMessage( 'wikibase-description-empty' ) ),
 				$this->getHtmlForEditSection( $entity, $lang, $editLabelLink ),
 				$this->getHtmlForEditSection( $entity, $lang, $editDescriptionLink ),
 				$label !== false ? '' : 'wb-value-empty',
