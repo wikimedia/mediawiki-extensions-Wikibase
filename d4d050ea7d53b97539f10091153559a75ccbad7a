@@ -16,6 +16,74 @@
       "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_42482330",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:32:42Z",
+      "side": 1,
+      "message": "Err?! Echo here is not good.",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_02570bca",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:32:42Z",
+      "side": 1,
+      "message": "Why is this returning string or false? Why not have the caller deal with the exception as they like?",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_225c0fea",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:32:42Z",
+      "side": 1,
+      "message": "Looks like all the below code needs is $recentChange-\u003ecounter and $externalChange. Ought to go into its own method.",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_626e0799",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:32:42Z",
+      "side": 1,
+      "message": "You can easily extract two protected methods from this",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
