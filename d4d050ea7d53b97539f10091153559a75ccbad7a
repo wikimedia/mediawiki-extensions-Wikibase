@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_82c15b85",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:27:41Z",
+      "side": 1,
+      "message": "This pattern should be avoided. If you write new code, you can simply require the service to be provided. TobySen, the ERC guy, explicitly warned about doing this and making everything dependent on your top level factory.",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
