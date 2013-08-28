@@ -213,12 +213,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @return RdfBuilder
 	 */
 	protected static function newRdfBuilder() {
-		$idFormatter = new EntityIdFormatter( new FormatterOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => array(
-				Item::ENTITY_TYPE => 'Q',
-				Property::ENTITY_TYPE => 'P',
-			)
-		) ) );
+		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
 
 		return new RdfBuilder(
 			self::URI_BASE,
