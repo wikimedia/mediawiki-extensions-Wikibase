@@ -1,29 +1,14 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\SettingsArray;
 use Wikibase\StoreFactory;
 use Wikibase\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\EntityIdParser;
 
 /**
- * Tests for the Wikibase\EntityPerPageBuilder class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\EntityPerPageBuilder
  *
  * @file
  * @since 0.4
@@ -47,6 +32,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 
 	protected $entityPerPageRows;
 
+	/**
+	 * @var WikibaseRepo
+	 */
 	protected $wikibaseRepo;
 
 	public function setUp() {
@@ -87,10 +75,6 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 
 	protected function getTestSettings() {
 		$settings = new SettingsArray( array(
-			'entityPrefixes' => array(
-				'q' => \Wikibase\Item::ENTITY_TYPE,
-				'p' => \Wikibase\Property::ENTITY_TYPE
-			),
 			'entityNamespaces' => array(
 				'wikibase-item' => 0,
 				'wikibase-property' => 102
