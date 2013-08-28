@@ -5,7 +5,8 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Wikibase\Claim;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
@@ -13,26 +14,10 @@ use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\ParserErrorMessageFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyParserFunction;
-use Wikibase\PropertySQLLookup;
 use Wikibase\PropertyValueSnak;
 
 /**
- * Tests for the Wikibase\PropertyParserFunction class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\PropertyParserFunction
  *
  * @file
  * @since 0.4
@@ -74,7 +59,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newMockRepository() {
-		$propertyId = new EntityId( Property::ENTITY_TYPE, 1337 );
+		$propertyId = new PropertyId( 'P1337' );
 
 		$entityLookup = new MockRepository();
 
@@ -123,7 +108,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$parserFunction = $this->getDefaultInstance();
 
 		$status = $parserFunction->renderForEntityId(
-			new EntityId( Item::ENTITY_TYPE, 42 ),
+			new ItemId( 'Q42' ),
 			$name
 		);
 
