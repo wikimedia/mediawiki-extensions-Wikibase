@@ -23,11 +23,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 class EntityIdParser extends StringValueParser {
 
 	/**
-	 * @deprecated
-	 */
-	const OPT_PREFIX_MAP = 'prefixmap';
-
-	/**
 	 * @see StringValueParser::stringParse
 	 *
 	 * @since 0.4
