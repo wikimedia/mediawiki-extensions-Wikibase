@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_5fc47c93",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T10:16:26Z",
+      "side": 1,
+      "message": "if, foreach, if, foreach, if... a bit to much nesting no? Please split this up so it does not take 5 minutes to understand all of it\n\nI\u0027m rather concerned with this amount of complexity in a test helper.",
+      "revId": "7f5ccf920a782fa7fc6e2b55e2b211dcd9800764",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
