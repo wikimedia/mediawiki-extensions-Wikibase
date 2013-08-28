@@ -186,8 +186,16 @@ class WikibaseDataTypeBuilders {
 		//TODO: enforce IRI/URI syntax / item URIs
 		//TODO: enforce well known calendar models from config
 
-		$validators[] = new DataFieldValidator( 'globe', // Note: validate the 'calendarmodel' field
+		$validators[] = new DataFieldValidator( 'globe',
 			new CompositeValidator( $globeIdValidators, true ) //Note: each validator is fatal
+		);
+
+		$validators[] = new DataFieldValidator(
+			'globe',
+			new CallbackValidator( function( $value ) {
+				return ( is_int( $value ) || is_float( $value ) )
+				&& $value > 0;
+			} )
 		);
 
 		// top validator
