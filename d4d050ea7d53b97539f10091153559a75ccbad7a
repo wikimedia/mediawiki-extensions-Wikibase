@@ -84,6 +84,57 @@
       "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_a2681f8a",
+        "filename": "client/includes/recentchanges/ExternalChangeUnserializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:33:56Z",
+      "side": 1,
+      "message": "This comment adds 0 value. Please remove.",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_c20513c6",
+        "filename": "client/includes/recentchanges/ExternalChangeUnserializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:33:56Z",
+      "side": 1,
+      "message": "!array_",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_2215efef",
+        "filename": "client/includes/recentchanges/ExternalChangeUnserializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:33:56Z",
+      "side": 1,
+      "message": "!is_",
+      "revId": "d4d050ea7d53b97539f10091153559a75ccbad7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
