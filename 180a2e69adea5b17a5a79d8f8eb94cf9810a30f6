@@ -16,6 +16,24 @@
       "revId": "180a2e69adea5b17a5a79d8f8eb94cf9810a30f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_981c6ac0",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T20:28:56Z",
+      "side": 1,
+      "message": "UNCHANGED. So go ahead and create a follow up.",
+      "parentUuid": "c95d3502_78eeb6ef",
+      "revId": "180a2e69adea5b17a5a79d8f8eb94cf9810a30f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
