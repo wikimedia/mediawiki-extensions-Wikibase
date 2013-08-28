@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_1fbe845f",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-28T14:44:23Z",
+      "side": 0,
+      "message": "Why not keep the generic test for the base class?",
+      "revId": "030444f174f94a96245b44463de7494713778fd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
