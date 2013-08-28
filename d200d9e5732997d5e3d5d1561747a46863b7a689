@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_423903d5",
+        "filename": "repo/includes/changeop/ChangeOpClaim.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:18:28Z",
+      "side": 1,
+      "message": "oh noez! :)",
+      "revId": "d200d9e5732997d5e3d5d1561747a46863b7a689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_623607e8",
+        "filename": "repo/includes/changeop/ChangeOpClaim.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T15:18:28Z",
+      "side": 1,
+      "message": "should be \"add\" or \"remove\"",
+      "revId": "d200d9e5732997d5e3d5d1561747a46863b7a689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
