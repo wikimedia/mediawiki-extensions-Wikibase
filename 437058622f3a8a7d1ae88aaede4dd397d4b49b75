@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_38427e42",
+        "filename": "lib/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T19:17:27Z",
+      "side": 1,
+      "message": "This should now be Wikibase\\DataModel\\Entity\\EntityIdValue",
+      "revId": "437058622f3a8a7d1ae88aaede4dd397d4b49b75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
