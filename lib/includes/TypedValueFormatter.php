@@ -70,17 +70,7 @@ class TypedValueFormatter {
 	private function evilGetEntityIdFormatter( $language ) {
 		$entityLookup = new CachingEntityLoader( new WikiPageEntityLookup( Settings::get( 'repoDatabase' ) ) );
 
-		$prefixMap = array();
-
-		foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
-			$prefixMap[$entityType] = $prefix;
-		}
-
-		$options = new FormatterOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => $prefixMap
-		) );
-
-		$idFormatter = new EntityIdFormatter( $options );
+		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $language );

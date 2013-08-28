@@ -627,13 +627,8 @@ abstract class EntityView extends \ContextSource {
 
 		$languageCode = isset( $lang ) ? $lang->getCode() : $wgLang->getCode();
 
-		$entitiesPrefixMap = array();
-		foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
-			$entitiesPrefixMap[ $entityType ] = $prefix;
-		}
 		$valueFormatterOptions = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $languageCode,
-			Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap,
 			TimeFormatter::OPT_TIME_ISO_FORMATTER => new MwTimeIsoFormatter(
 				new FormatterOptions( array( ValueFormatter::OPT_LANG => $languageCode ) )
 			),
