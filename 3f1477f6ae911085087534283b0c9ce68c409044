@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_5fdb9c79",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-28T10:10:35Z",
+      "side": 1,
+      "message": "This method is a bit big/ugly",
+      "revId": "3f1477f6ae911085087534283b0c9ce68c409044",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
