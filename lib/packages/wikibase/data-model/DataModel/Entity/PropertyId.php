@@ -50,7 +50,7 @@ class PropertyId extends EntityId {
 	 *
 	 * @param int $number
 	 *
-	 * @return ItemId
+	 * @return PropertyId
 	 * @throws InvalidArgumentException
 	 */
 	public static function newFromNumber( $number ) {
