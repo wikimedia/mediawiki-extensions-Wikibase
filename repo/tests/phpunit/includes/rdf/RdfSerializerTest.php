@@ -144,12 +144,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$format = RdfSerializer::getFormat( $formatName );
 
 		$dataTypes = new DataTypeFactory( self::$dataTypes );
-		$idSerializer = new EntityIdFormatter( new FormatterOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => array(
-				Item::ENTITY_TYPE => 'Q',
-				Property::ENTITY_TYPE => 'P',
-			)
-		) ) );
+		$idSerializer = new EntityIdFormatter( new FormatterOptions() );
 
 		$mockRepo = new MockRepository();
 
