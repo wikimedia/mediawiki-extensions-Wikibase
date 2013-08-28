@@ -364,7 +364,8 @@ final class ClientHooks {
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
-			\Sites::singleton() );
+			\Sites::singleton(),
+			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup() );
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
 
@@ -503,7 +504,8 @@ final class ClientHooks {
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
-			\Sites::singleton() );
+			\Sites::singleton(),
+			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup() );
 
 		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );
 

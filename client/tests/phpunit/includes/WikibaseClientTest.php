@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Settings;
+use Wikibase\SettingsArray;
 
 /**
  * Tests for the Wikibase\Client\WikibaseClient class.
@@ -34,6 +36,7 @@ use Wikibase\Client\WikibaseClient;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
@@ -75,4 +78,16 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			WikibaseClient::getDefaultInstance() );
 	}
 
+	public function testGetLangLinkSiteGroup() {
+		$settings = clone Settings::singleton();
+		$settings->setSetting( 'languageLinkSiteGroup', null );
+
+		$client = new WikibaseClient( $settings, \Language::factory( 'en' ), true );
+		$this->assertNotNull( $client->getLangLinkSiteGroup() );
+	}
+
+	public function testGetSite() {
+		$client = $this->getDefaultInstance();
+		$this->assertNotNull( $client->getSite() );
+	}
 }

@@ -49,7 +49,8 @@ class NoLangLinkHandler {
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
-			\Sites::singleton()
+			\Sites::singleton(),
+			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
 		);
 
 		$langs = func_get_args();

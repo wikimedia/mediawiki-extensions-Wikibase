@@ -44,6 +44,7 @@ return call_user_func( function() {
 		// @todo would be great to just get this from the sites stuff
 		// but we will need to make sure the caching works good enough
 		'siteLocalID' => $wgLanguageCode,
+		'languageLinkSiteGroup' => null,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
 		'defaultClientStore' => null,
