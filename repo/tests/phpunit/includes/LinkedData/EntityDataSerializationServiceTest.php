@@ -75,12 +75,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	protected function newService() {
 		$entityLookup = new MockRepository();
 		$dataTypeFactory = new DataTypeFactory( self::$dataTypes );
-		$idFormatter = new EntityIdFormatter( new FormatterOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => array(
-				Item::ENTITY_TYPE => 'Q',
-				Property::ENTITY_TYPE => 'P',
-			)
-		) ) );
+		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
 
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
