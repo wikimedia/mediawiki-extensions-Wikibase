@@ -72,6 +72,7 @@ class ChangeOpClaim extends ChangeOp {
 			$this->updateSummary( $summary, 'add' );
 		} elseif ( $this->action === "remove" ) {
 			$claims = new Claims ( $entity->getClaims() );
+			$claims->removeClaimWithGuid( $this->claim->getGuid() );
 			$claims->removeClaim( $this->claim );
 			$entity->setClaims( $claims );
 			$this->updateSummary( $summary, 'remove' );
