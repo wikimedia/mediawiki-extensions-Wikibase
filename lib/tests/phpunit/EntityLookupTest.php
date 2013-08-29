@@ -47,18 +47,18 @@ abstract class EntityLookupTest extends EntityTestCase {
 			$item = Item::newEmpty();
 			$item->setId( 42 );
 
-			$entities[1] = $item;
+			$entities[11] = $item;
 
 			$item = $item->copy();
 			$item->setLabel( 'en', "Foo" );
 
-			$entities[2] = $item;
+			$entities[12] = $item;
 
 			$prop = Property::newEmpty();
 			$prop->setId( 753 );
 			$prop->setDataTypeId( "string" );
 
-			$entities[3] = $prop;
+			$entities[13] = $prop;
 		}
 
 		return $entities;
@@ -81,10 +81,10 @@ abstract class EntityLookupTest extends EntityTestCase {
 				'q42', 0, true,
 			),
 			array( // #1: first revision
-				'q42', 1, true,
+				'q42', 11, true,
 			),
 			array( // #2: second revision
-				'q42', 2, true,
+				'q42', 12, true,
 			),
 			array( // #3: bad revision
 				'q42', 600000, false, 'Wikibase\StorageException',
@@ -93,7 +93,7 @@ abstract class EntityLookupTest extends EntityTestCase {
 				'q753', 0, false,
 			),
 			array( // #5: bad revision
-				'p753', 1, false, 'Wikibase\StorageException',
+				'p753', 23, false, 'Wikibase\StorageException',
 			),
 			array( // #6: some revision
 				'p753', 0, true,
