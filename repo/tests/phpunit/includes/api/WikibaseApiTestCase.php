@@ -281,6 +281,24 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			// keys are significant in flat form
 			$this->assertArrayEquals( $exp, $data, false, true );
 		}
+
+		if ( isset( $expected['claims'] ) ) {
+			if( empty( $expected['claims'] ) ){
+				$this->assertArrayNotHasKey( 'claims', $actual );
+			} else {
+				$data = self::flattenArray( $actual['claims'], 'mainsnak', 'value', true );
+				$exp = self::flattenArray( $expected['claims'], 'language', 'value', true );
+				for( $i = 0; $i < count( $expected['claims'] ); $i++ ){
+					$this->assertArrayHasKey( $i, $data['id'] );
+					$this->assertGreaterThanOrEqual( 39 , strlen( $data['id'][$i] ) );
+				}
+				//unset stuff we dont actually want to compare
+				unset( $data['id'] );
+				unset( $data['hash'] );
+				unset( $data['qualifiers-order'] );
+				$this->assertArrayEquals( $exp, $data, false, true );
+			}
+		}
 	}
 
 	/**
