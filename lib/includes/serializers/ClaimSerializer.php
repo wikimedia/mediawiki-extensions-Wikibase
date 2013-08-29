@@ -161,7 +161,6 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		}
 
 		$requiredElements = array(
-			'id',
 			'mainsnak',
 		);
 
@@ -187,7 +186,9 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$claim = new $claimClass( $snakUnserializer->newFromSerialization( $serialization['mainsnak'] ) );
 		assert( $claim instanceof Claim );
 
-		$claim->setGuid( $serialization['id'] );
+		if( array_key_exists( 'id', $serialization ) ){
+			$claim->setGuid( $serialization['id'] );
+		}
 
 		$claim->setQualifiers( $this->unserializeQualifiers( $serialization, $snakUnserializer ) );
 
