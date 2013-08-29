@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_44266bd2",
+        "filename": "lib/tests/phpunit/store/WikiPageEntityLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-29T17:47:06Z",
+      "side": 1,
+      "message": "double tab",
+      "revId": "e3e83d79d80c3e9c23fc4fc012d3a8003055dd59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
