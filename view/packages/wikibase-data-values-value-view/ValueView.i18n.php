@@ -702,6 +702,8 @@ $messages['oc'] = array(
 	'valueview-expert-timeinput-calendar' => 'Calendièr :',
 	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendièr gregorian)',
 	'valueview-expert-timeinput-calendarhint-julian' => '(Calendièr julian)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; passar en Gregorian',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; passar en Julian',
 );
 
 /** Polish (polski)
