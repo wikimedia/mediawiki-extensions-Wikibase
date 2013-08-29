@@ -2,6 +2,9 @@
 
 namespace Wikibase\Api;
 
+use DataValues\IllegalValueException;
+use Wikibase\ChangeOpClaim;
+use Wikibase\Claim;
 use Wikibase\EntityContentFactory;
 use InvalidArgumentException;
 use Wikibase\ChangeOps;
@@ -11,7 +14,6 @@ use Wikibase\ChangeOpAliases;
 use Wikibase\ChangeOpSiteLink;
 use Wikibase\ChangeOpException;
 use ApiBase, User, Status, SiteList;
-use Wikibase\SiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
@@ -32,6 +34,7 @@ use Wikibase\Utils;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Adam Shorland
  */
 class EditEntity extends ModifyEntity {
 
@@ -159,6 +162,15 @@ class EditEntity extends ModifyEntity {
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $status ) );
 		}
 
+		if( array_key_exists( 'claims', $data ) ) {
+			if ( $entity->getType() !== Item::ENTITY_TYPE ) {
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage( "key can't be handled: claims", 'not-recognized' );
+			}
+
+			$changeOps->add( $this->getClaimsChangeOps( $data['claims'] ) );
+		}
+
 		if ( !$status->isOk() ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Edit failed: $1", 'failed-save' );
@@ -176,6 +188,7 @@ class EditEntity extends ModifyEntity {
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
 			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
+			$this->addClaimsToResult( $entity->getClaims(), 'entity' );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -350,6 +363,48 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @param array $claims
+	 *
+	 * @return mixed
+	 */
+	protected function getClaimsChangeOps( $claims ) {
+		$claimChangeOps = array();
+
+		if ( !is_array( $claims ) ) {
+			$this->dieUsage( "List of claims must be an array", 'not-recognized-array' );
+		}
+
+		foreach ( $claims as $claimArray ) {
+			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
+
+			try {
+				$claim = $unserializer->newFromSerialization( $claimArray );
+				assert( $claim instanceof Claim );
+			} catch ( IllegalValueException $illegalValueException ) {
+				$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
+			}
+
+			if ( array_key_exists( 'remove', $claimArray ) ) {
+				if( array_key_exists( 'id', $claimArray ) ){
+					$claimChangeOps[] = new ChangeOpClaim( $claim, 'remove' );
+				} else {
+					$this->dieUsage( 'Cannot remove a claim with no GUID', 'invalid-claim' );
+				}
+			} else {
+				if( array_key_exists( 'id', $claimArray ) ){
+					$claimChangeOps[] = new ChangeOpClaim( $claim, 'remove' );
+				}
+				$claimChangeOps[] = new ChangeOpClaim( $claim, 'add' );
+			}
+		}
+
+		return $claimChangeOps;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param array $data
@@ -379,6 +434,7 @@ class EditEntity extends ModifyEntity {
 			'descriptions',
 			'aliases',
 			'sitelinks',
+			'claims',
 			'datatype' );
 
 		if ( is_null( $data ) ) {
