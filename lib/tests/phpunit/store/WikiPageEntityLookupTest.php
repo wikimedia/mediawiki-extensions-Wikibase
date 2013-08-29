@@ -23,8 +23,6 @@ use Wikibase\WikiPageEntityLookup;
  * @group WikibaseLib
  * @group WikibaseEntityLookup
  *
- * @todo: test behavior for old revisions
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
@@ -77,6 +75,20 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 			throw new \MWException( "couldn't create " . $content->getTitle()->getFullText()
 				. ":\n" . $status->getWikiText() );
 		}
+
+		return new EntityRevision(
+			$entity,
+			$content->getWikiPage()->getRevision()->getId(),
+			$content->getWikiPage()->getRevision()->getTimestamp()
+		);
+	}
+
+	protected function resolveLogicalRevision( $revision ) {
+		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
+				$revision = self::$testEntities[$revision]->getRevision();
+		}
+
+		return $revision;
 	}
 
 	/**
