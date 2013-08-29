@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_e99afa10",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T13:36:20Z",
+      "side": 1,
+      "message": "( a XOR ( b \u0026\u0026 c ) ) would be more readable than ( !a XOR ( !b || !c ) )",
+      "revId": "6ce95270a007c1a1352e8d9c0f85839cb1dd6199",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_09a00e46",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T13:36:20Z",
+      "side": 1,
+      "message": "could just be:\n  if ( empty( $ids ) \u0026\u0026 ( empty( $sites ) XOR empty( $titles ) ) ) {\n    die\n }",
+      "revId": "6ce95270a007c1a1352e8d9c0f85839cb1dd6199",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
