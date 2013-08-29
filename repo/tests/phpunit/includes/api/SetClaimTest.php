@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
@@ -9,22 +10,6 @@ use Wikibase\PropertyContent;
 /**
  * Unit tests for the Wikibase\Repo\Api\ApSetClaim class.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
  *
  * @ingroup WikibaseRepoTest
@@ -50,9 +35,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 	protected function snakProvider() {
 		static $hasProperties = false;
 
-		$prop42 = new EntityId( Property::ENTITY_TYPE, 42 );
-		$prop9001 = new EntityId( Property::ENTITY_TYPE, 9001 );
-		$prop7201010 = new EntityId( Property::ENTITY_TYPE, 7201010 );
+		$prop42 = PropertyId::newFromNumber( 42 );
+		$prop9001 = PropertyId::newFromNumber( 9001 );
+		$prop7201010 = PropertyId::newFromNumber( 7201010 );
 
 		if ( !$hasProperties ) {
 			$prop = PropertyContent::newEmpty();
