@@ -3,9 +3,11 @@
 namespace Wikibase\Api;
 
 use User, Status, ApiBase;
+use Wikibase\Claims;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Serializers\ClaimsSerializer;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\SiteLink;
@@ -236,6 +238,33 @@ abstract class ApiWikibase extends \ApiBase {
 		$labelSerializer = new LabelSerializer( $options );
 
 		$value = $labelSerializer->getSerialized( $labels );
+
+		if ( $value !== array() ) {
+			if ( !$this->getUsekeys() ) {
+				$this->getResult()->setIndexedTagName( $value, $tag );
+			}
+
+			$this->getResult()->addValue( $path, $name, $value );
+		}
+	}
+
+	/**
+	 * Get serialized claims and add them to result
+	 *
+	 * @since 0.
+	 *
+	 * @param array $claims the labels to set in the result
+	 * @param array|string $path where the data is located
+	 * @param string $name name used for the entry
+	 * @param string $tag tag used for indexed entries in xml formats and similar
+	 *
+	 */
+	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
+		$options = new MultiLangSerializationOptions();
+		$options->setUseKeys( $this->getUsekeys() );
+		$claimSerializer = new ClaimsSerializer( $options );
+
+		$value = $claimSerializer->getSerialized( new Claims( $claims ) );
 
 		if ( $value !== array() ) {
 			if ( !$this->getUsekeys() ) {
