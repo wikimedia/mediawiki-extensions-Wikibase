@@ -2,13 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
 
 /**
- * Tests for the Wikibase\EntityId class.
+ * @covers Wikibase\DataModel\Entity\EntityId
  *
  * @since 0.3
  *
@@ -25,26 +25,37 @@ use Wikibase\Property;
  */
 class EntityIdTest extends \PHPUnit_Framework_TestCase {
 
-	public function constructorProvider() {
-		$argLists = array();
-
-		$argLists[] = array( Item::ENTITY_TYPE, 123 );
-		$argLists[] = array( Property::ENTITY_TYPE, 321 );
-
-		return $argLists;
-	}
-
 	/**
 	 * @dataProvider constructorProvider
 	 *
 	 * @param string $type
-	 * @param integer $number
+	 * @param integer $serialization
 	 */
-	public function testConstructor( $type, $number ) {
-		$id = new EntityId( $type, $number );
+	public function testConstructor( $type, $serialization ) {
+		$id = new EntityId( $type, $serialization );
 
 		$this->assertEquals( $type, $id->getEntityType() );
-		$this->assertEquals( $number, $id->getNumericId() );
+		$this->assertEquals( strtoupper( $serialization ), $id->getSerialization() );
+	}
+
+	public function constructorProvider() {
+		$argLists = array();
+
+		$argLists[] = array( Item::ENTITY_TYPE, 'Q123' );
+		$argLists[] = array( Property::ENTITY_TYPE, 'P321' );
+
+		$argLists[] = array( Item::ENTITY_TYPE, 'q123' );
+		$argLists[] = array( Property::ENTITY_TYPE, 'p321' );
+
+		return $argLists;
+	}
+
+	public function testConstructorWithNumericId() {
+		$id = new EntityId( Item::ENTITY_TYPE, 123 );
+		$this->assertEquals( $id->getNumericId(), 123 );
+
+		$id = new EntityId( Property::ENTITY_TYPE, 123 );
+		$this->assertEquals( $id->getNumericId(), 123 );
 	}
 
 	public function instanceProvider() {
@@ -95,7 +106,7 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testEqualsSimple( EntityId $id ) {
 		$this->assertTrue( $id->equals( $id ) );
-		$this->assertFalse( $id->equals( $id->getNumericId() ) );
+		$this->assertFalse( $id->equals( $id->getSerialization() ) );
 		$this->assertFalse( $id->equals( $id->getEntityType() ) );
 	}
 
