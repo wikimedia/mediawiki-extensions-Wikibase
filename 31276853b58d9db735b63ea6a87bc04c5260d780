@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_09ce4e2e",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T12:56:39Z",
+      "side": 1,
+      "message": "Why? To me it would be logical if it was the parser target language.",
+      "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_29d312d6",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T12:56:39Z",
+      "side": 1,
+      "message": "Wait - getLanguageCodes returns an indexed array (a list), right? And you are adding a mapping from language code to a fallback chain to that? And the serializer understands that? \n\nI\u0027m somewhat surprised by that - if this is actually how this works, please add a comment or two.",
+      "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
