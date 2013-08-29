@@ -34,6 +34,24 @@
       "revId": "7aadaa45c65129c5d832768f70f87c2679a15504",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_69d50ab5",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T13:05:42Z",
+      "side": 1,
+      "message": "Since the options are used by the LabelSerializer itself, as well as by the composite MultilingualSerializer, I think this is fine.",
+      "parentUuid": "499865f5_e0a91ee0",
+      "revId": "7aadaa45c65129c5d832768f70f87c2679a15504",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
