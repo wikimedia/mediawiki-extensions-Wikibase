@@ -78,25 +78,25 @@ abstract class EntityLookupTest extends EntityTestCase {
 	public static function provideGetEntity() {
 		$cases = array(
 			array( // #0: any revision
-				'q42', 0, true,
+				'Q42', 0, true,
 			),
 			array( // #1: first revision
-				'q42', 1, true,
+				'Q42', 1, true,
 			),
 			array( // #2: second revision
-				'q42', 2, true,
+				'Q42', 2, true,
 			),
 			array( // #3: bad revision
-				'q42', 600000, false, 'Wikibase\StorageException',
+				'Q42', 600000, false, 'Wikibase\StorageException',
 			),
 			array( // #4: wrong type
-				'q753', 0, false,
+				'Q753', 0, false,
 			),
 			array( // #5: bad revision
-				'p753', 1, false, 'Wikibase\StorageException',
+				'P753', 1, false, 'Wikibase\StorageException',
 			),
 			array( // #6: some revision
-				'p753', 0, true,
+				'P753', 0, true,
 			),
 		);
 
@@ -144,13 +144,13 @@ abstract class EntityLookupTest extends EntityTestCase {
 	public static function provideHasEntity() {
 		$cases = array(
 			array( // #0
-				'q42', true,
+				'Q42', true,
 			),
 			array( // #1
-				'q753', false,
+				'Q753', false,
 			),
 			array( // #2
-				'p753', true,
+				'P753', true,
 			),
 		);
 
