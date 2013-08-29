@@ -4,7 +4,8 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
 
@@ -30,13 +31,13 @@ class PropertyValueSnakTest extends SnakObjectTest {
 
 	public function constructorProvider() {
 		$argLists = array(
-			array( true, 1, new StringValue( 'a' ) ),
-			array( true, 9001, new StringValue( 'a' ) ),
+			array( true, 'P1', new StringValue( 'a' ) ),
+			array( true, 'P9001', new StringValue( 'a' ) ),
 		);
 
 		foreach ( $argLists as &$argList ) {
 			if ( count( $argList ) > 1 ) {
-				$argList[1] = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, $argList[1] );
+				$argList[1] = new PropertyId( $argList[1] );
 			}
 		}
 
@@ -62,12 +63,12 @@ class PropertyValueSnakTest extends SnakObjectTest {
 		$property = \Wikibase\Property::newFromType( 'wikibase-item' );
 		$property->setId( 852645 );
 
-		$argLists[] = array( clone $property, new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 42 ) );
-		$argLists[] = array( clone $property, new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 9001 ) );
+		$argLists[] = array( clone $property, new ItemId( 'Q42' ) );
+		$argLists[] = array( clone $property, new ItemId( 'Q9001' ) );
 
 		$property->setId( 852642 );
 
-		$argLists[] = array( clone $property, new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 9001 ) );
+		$argLists[] = array( clone $property, new ItemId( 'Q9001' ) );
 
 		$property->setDataTypeId( 'commonsMedia' );
 
@@ -86,7 +87,7 @@ class PropertyValueSnakTest extends SnakObjectTest {
 	}
 
 	public static function toArrayProvider() {
-		$q1 = new EntityId( Property::ENTITY_TYPE, 1 );
+		$q1 = new PropertyId( 'P1' );
 
 		return array(
 			'string-value' => array(
