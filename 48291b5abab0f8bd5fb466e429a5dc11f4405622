@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_c406fb88",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-29T16:35:41Z",
+      "side": 1,
+      "message": "In a case like this, I would suggest defining the testCases array outside this scope and then do testCases.length*4. would be easier to maintain whenever the test had to change.",
+      "revId": "48291b5abab0f8bd5fb466e429a5dc11f4405622",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
