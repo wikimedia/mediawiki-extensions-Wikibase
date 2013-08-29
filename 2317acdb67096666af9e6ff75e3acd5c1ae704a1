@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_c9ec5696",
+        "filename": "lib/includes/serializers/MultilingualSerializer.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T13:18:02Z",
+      "side": 1,
+      "message": "Wait - \u0027source-language\u0027 is the language that was loaded, \u0027language\u0027 is the language that is returned, and \u0027for-language\u0027 is the language that was requested? So \u0027for-language\u0027 is before the fallback, \u0027source-language\u0027 is after the fallback, and \u0027language\u0027 is after transliteration?\n\nThis should really be documented somewhere. Is there any high level documentation somewhere, describing the entire process, terminology, etc?",
+      "revId": "2317acdb67096666af9e6ff75e3acd5c1ae704a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_e9f11a6b",
+        "filename": "lib/includes/serializers/MultilingualSerializer.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T13:18:02Z",
+      "side": 1,
+      "message": "Does that perform any transliteration?",
+      "revId": "2317acdb67096666af9e6ff75e3acd5c1ae704a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
