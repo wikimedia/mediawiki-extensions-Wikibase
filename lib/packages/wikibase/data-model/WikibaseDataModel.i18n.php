@@ -133,6 +133,13 @@ $messages['ms'] = array(
 	'wikibasedatamodel-desc' => 'Komponen yang menakrifkan model data Wikibase',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'wikibasedatamodel-desc' => 'Component que definís lo modèl de donadas de Wikibase',
+);
+
 /** tarandíne (tarandíne)
  * @author Joetaras
  */
