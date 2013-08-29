@@ -2,6 +2,9 @@
 
 namespace Wikibase\Api;
 
+use DataValues\IllegalValueException;
+use Wikibase\ChangeOpClaim;
+use Wikibase\Claim;
 use Wikibase\EntityContentFactory;
 use InvalidArgumentException;
 use Wikibase\ChangeOps;
@@ -11,13 +14,13 @@ use Wikibase\ChangeOpAliases;
 use Wikibase\ChangeOpSiteLink;
 use Wikibase\ChangeOpException;
 use ApiBase, User, Status, SiteList;
-use Wikibase\SiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\QueryContent;
 use Wikibase\Utils;
+use WikiPage;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of site and page title.
@@ -32,6 +35,7 @@ use Wikibase\Utils;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Adam Shorland
  */
 class EditEntity extends ModifyEntity {
 
@@ -153,10 +157,19 @@ class EditEntity extends ModifyEntity {
 		if ( array_key_exists( 'sitelinks', $data ) ) {
 			if ( $entity->getType() !== Item::ENTITY_TYPE ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "key can't be handled: sitelinks", 'not-recognized' );
+				$this->dieUsage( "Non Items can not have sitelinks", 'not-recognized' );
 			}
 
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $status ) );
+		}
+
+		if( array_key_exists( 'claims', $data ) ) {
+			if ( $entity->getType() !== Item::ENTITY_TYPE ) {
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage( "Non Items can not have claims", 'not-recognized' );
+			}
+
+			$changeOps->add( $this->getClaimsChangeOps( $data['claims'] ) );
 		}
 
 		if ( !$status->isOk() ) {
@@ -176,6 +189,7 @@ class EditEntity extends ModifyEntity {
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
 			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
+			$this->addClaimsToResult( $entity->getClaims(), 'entity' );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -350,6 +364,50 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @param array $claims
+	 *
+	 * @return mixed
+	 */
+	protected function getClaimsChangeOps( $claims ) {
+		$claimChangeOps = array();
+
+		if ( !is_array( $claims ) ) {
+			$this->dieUsage( "List of claims must be an array", 'not-recognized-array' );
+		}
+
+		foreach ( $claims as $claimArray ) {
+			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
+
+			try {
+				$claim = $unserializer->newFromSerialization( $claimArray );
+				assert( $claim instanceof Claim );
+			} catch ( IllegalValueException $illegalValueException ) {
+				$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
+			}
+
+			if ( array_key_exists( 'remove', $claimArray ) ) {
+				if( array_key_exists( 'id', $claimArray ) ){
+					$claimChangeOps[] = new ChangeOpClaim( $claim, 'remove' );
+				} else {
+					$this->dieUsage( 'Cannot remove a claim with no GUID', 'invalid-claim' );
+				}
+			} else {
+
+
+				if( array_key_exists( 'id', $claimArray ) ){
+					$claimChangeOps[] = new ChangeOpClaim( $claim, 'remove' );
+				}
+				$claimChangeOps[] = new ChangeOpClaim( $claim, 'add' );
+			}
+		}
+
+		return $claimChangeOps;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param array $data
@@ -379,6 +437,7 @@ class EditEntity extends ModifyEntity {
 			'descriptions',
 			'aliases',
 			'sitelinks',
+			'claims',
 			'datatype' );
 
 		if ( is_null( $data ) ) {
@@ -395,7 +454,7 @@ class EditEntity extends ModifyEntity {
 			}
 
 			if ( !in_array( $prop, $allowedProps ) ) {
-				$this->dieUsage( "unknown key: $prop", 'not-recognized' );
+				$this->dieUsage( "Unknown key in json: $prop", 'not-recognized' );
 			}
 		}
 
@@ -514,6 +573,12 @@ class EditEntity extends ModifyEntity {
 			=> 'Create a new property containing the json data, returns extended with the item structure',
 			'api.php?action=wbeditentity&id=q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
 			=> 'Sets sitelink for nowiki, overwriting it if it already exists',
+			'api.php?action=wbeditentity&id=q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}'
+			=> 'Creates a new claim on the item for the property P56 and a value of "ExampleString"',
+			'api.php?action=wbeditentity&id=q42&data={"claims":[{"id":"q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"FirstClaim","type":"string"}},"remove":""},{"id":"q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"SecondClaim","type":"string"}},"remove":""}]}'
+			=> 'Removes the claims from the item with the guids q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F and q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X',
+			'api.php?action=wbeditentity&id=q42&data={"claims":[{"id":"q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ChangedString","type":"string"}},"type":"statement","rank":"normal"}]}'
+			=> 'Sets the claim with the GUID to the value of the claim',
 		);
 	}
 
