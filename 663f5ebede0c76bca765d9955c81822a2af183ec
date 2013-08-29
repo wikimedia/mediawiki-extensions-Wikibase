@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_c9c37608",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T12:52:33Z",
+      "side": 1,
+      "message": "Perhaps there should be a parameter for determining whether we want the dummy codes to be included in the result or not.",
+      "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_a94e42bf",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-08-29T12:52:33Z",
+      "side": 1,
+      "message": "If you remove this constraint here, the language code must be checked for validity elsewhere. Otherwise, any string could be used as a language code, and cause internal errors.\n\nHow about using array_unique( array_merge( Utils::getLanguageCodes(), $wgDummyLanguageCode ) ) here?",
+      "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
