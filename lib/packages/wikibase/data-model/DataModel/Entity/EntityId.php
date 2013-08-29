@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Entity;
 use Comparable;
 use InvalidArgumentException;
 use Serializable;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * @since 0.5
@@ -61,19 +62,9 @@ class EntityId implements Comparable, Serializable {
 		$this->serialization = strtoupper( $idSerialization );
 	}
 
-	private function replaceNumericIdArgument( $idSerialization ) {
-		$entityTypes = array(
-			'item' => 'q',
-			'property' => 'p',
-		);
-
-		if ( !array_key_exists( $this->entityType, $entityTypes ) ) {
-			throw new InvalidArgumentException(
-				'Provided a numeric id (deprecated) for an entity type that never supported this'
-			);
-		}
-
-		return $entityTypes[$this->entityType] . (string)$idSerialization;
+	private function replaceNumericIdArgument( $numericId ) {
+		return LegacyIdInterpreter::newIdFromTypeAndNumber( $this->entityType, $numericId )
+			->getSerialization();
 	}
 
 	/**

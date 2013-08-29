@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Internal;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Turns legacy entity id serializations consisting of entity type + numeric id
@@ -25,7 +26,7 @@ class LegacyIdInterpreter {
 	 * @param string $entityType
 	 * @param int|string $numericId
 	 *
-	 * @return mixed
+	 * @return EntityId
 	 */
 	public static function newIdFromTypeAndNumber( $entityType, $numericId ) {
 		$idParser = new BasicEntityIdParser();
@@ -43,12 +44,12 @@ class LegacyIdInterpreter {
 	 */
 	protected static function constructSerialization( $entityType, $numericId ) {
 		$entityTypes = array(
-			'item' => 'q',
-			'property' => 'p',
+			'item' => 'Q',
+			'property' => 'P',
 		);
 
 		if ( !array_key_exists( $entityType, $entityTypes ) ) {
-			throw new InvalidArgumentException( 'Unsupported entity type' );
+			throw new InvalidArgumentException( 'Provided a numeric id (deprecated) for an entity type that never supported this' );
 		}
 
 		return $entityTypes[$entityType] . (string)$numericId;
