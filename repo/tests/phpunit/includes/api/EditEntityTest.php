@@ -2,10 +2,13 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyContent;
 
 /**
  * Tests for the ApiWikibase class.
-
+ *
  * @since 0.1
  *
  * @ingroup WikibaseRepoTest
@@ -32,14 +35,21 @@ use ApiTestCase;
 class EditEntityTest extends WikibaseApiTestCase {
 
 	private static $testEntityId;
+	private static $testClaimGuid;
 	private static $hasSetup;
 	static public $id = null;
 
 	public function setup() {
 		parent::setup();
 
+		$prop56 = PropertyId::newFromNumber( 56 );
+
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Berlin' ) );
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop56 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'EditEntityTest' );
 		}
 		self::$hasSetup = true;
 	}
@@ -92,6 +102,89 @@ class EditEntityTest extends WikibaseApiTestCase {
 			array( //14 unset a sitelink using the other sitelink
 				'p' => array( 'site' => 'svwiki', 'title' => 'FOO', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
 				'e' => array( 'sitelinks' => array( 'svwiki' => 'FOO' ) ) ),
+
+			array( //15 add a claim
+				'p' => array( 'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+				'e' => array( 'claims' => array(
+					'P56' => array(
+						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56',
+							'datavalue' => array(
+								'value' => 'imastring',
+								'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal' ) ) ) ),
+
+			array( //15 change the claim
+				'p' => array( 'data' => '{"claims":[{"id":"GUID","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"diffstring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+				'e' => array( 'claims' => array(
+					'P56' => array(
+						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56',
+							'datavalue' => array(
+								'value' => 'diffstring',
+								'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal' ) ) ) ),
+
+			array( //15 remove the claim
+				'p' => array( 'data' => '{"claims":[{"id":"GUID","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"diffstring","type":"string"}},"type":"statement","rank":"normal","remove":""}]}' ),
+				'e' => array( 'claims' => array() ) ),
+
+			array( //15 add multiple claims
+				'p' => array(
+					'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'.
+					'{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring2","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+				'e' => array( 'claims' => array(
+					'P56' => array(
+						'mainsnak' => array(
+							'snaktype' => 'value', 'property' => 'P56',
+							'datavalue' => array(
+								'value' => 'imastring1',
+								'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal' ),
+					array(
+						'mainsnak' => array(
+							'snaktype' => 'value', 'property' => 'P56',
+							'datavalue' => array(
+								'value' => 'imastring2',
+								'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal' )
+				) )
+			),
+
+			array( //15 clear and add complex claim with qualifiers and references
+				'p' => array( 'clear' => '', 'data' => '{"claims": [{"mainsnak": {"snaktype": "value", "property": "P56", "datavalue": { "value": "str", "type": "string" } },'.
+					'"qualifiers": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "qual", "type": "string" } } ] }, "type": "statement", "rank": "normal",'.
+					'"references": [ { "snaks": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "src", "type": "string" } } ] } } ]}]}' ),
+				'e' => array( 'claims' => array(
+					'P56' => array(
+						'mainsnak' => array(
+							'snaktype' => 'value', 'property' => 'P56',
+							'datavalue' => array(
+								'value' => 'str',
+								'type' => 'string' ) ),
+						'qualifiers' => array(
+							'P56' => array(
+								'snaktype' => 'value', 'property' => 'P56',
+								'datavalue' => array(
+									'value' => 'qual',
+									'type' => 'string' ) ),
+						),
+						'type' => 'statement',
+						'rank' => 'normal',
+						'references' => array(
+							'snaks' => array(
+								'P56' => array(
+									'snaktype' => 'value', 'property' => 'P56',
+									'datavalue' => array(
+										'value' => 'src',
+										'type' => 'string' ) ),
+							),
+						),
+					)
+				) )
+			),
 		);
 	}
 
@@ -107,13 +200,23 @@ class EditEntityTest extends WikibaseApiTestCase {
 			&& !array_key_exists( 'title', $params) ){
 			$params['id'] = self::$testEntityId;
 		}
+		if( array_key_exists( 'data', $params ) && strstr( $params['data'], 'GUID' ) ){
+			$params['data'] = str_replace( 'GUID', self::$testClaimGuid, $params['data'] );
+		}
 
 		// -- do the request --------------------------------------------------
 		list($result,,) = $this->doApiRequestWithToken( $params );
 
-		// -- steal stuff for later tests -------------------------------------
+		// -- steal ids for later tests -------------------------------------
 		if( array_key_exists( 'new', $params ) && stristr( $params['new'], 'item' ) ){
 			self::$testEntityId = $result['entity']['id'];
+		}
+		if( array_key_exists( 'claims', $result['entity'] ) && array_key_exists( 'P56', $result['entity']['claims'] ) ){
+			foreach( $result['entity']['claims']['P56'] as $claim ){
+				if( array_key_exists( 'id', $claim ) ){
+					self::$testClaimGuid = $claim['id'];
+				}
+			}
 		}
 
 		// -- check the result ------------------------------------------------
@@ -199,6 +302,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"descriptions":{"en":{"language":"en","value":"'.LangAttributeTestHelper::makeOverlyLongString().'"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
 			//@todo add check for Bug:52731 once fixed
+			array( //19 removing invalid claim fails
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"claims":[{"remove":""}]}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-claim', 'message' => 'Invalid claim type specified'  ) ) ),
+			array( //20 removing valid claim with no guid fails
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized', 'message' => 'Unknown key in json: remove' ) ) ),
 		);
 	}
 
