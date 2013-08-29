@@ -190,7 +190,14 @@ See also:
 	'wikibase-unconnectedpages-page' => 'Label for the input field to specify the title of the article at which the search result list should start. This belongs to the options box of the special page for pages not connected to sitelinks.',
 	'wikibase-unconnectedpages-submit' => 'Text for the submit button in the options box of the special page for pages not connected to sitelinks.
 {{Identical|Go}}',
-	'wikibase-unconnectedpages-invalid-language' => 'Warning message about invalid language used at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-invalid-language' => 'Unused at this time.
+
+Warning message about invalid language used at the special page for pages not connected to sitelinks.
+
+Parameters:
+* $1 - language code
+See also:
+* {{msg-mw|Wikibase-entitieswithoutlabel-invalid-language}}',
 	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages that have interlanguage-links should be listed.',
 	'wikibase-unconnectedpages-format-row' => 'Formatting of the additional data for each row in the result set on the special page for pages not connected to sitelinks.
@@ -2491,11 +2498,26 @@ $messages['lt'] = array(
  * @author Papuass
  */
 $messages['lv'] = array(
+	'wikibase-comment-sitelink-add' => 'Valodas saite pievienota: $1',
+	'wikibase-comment-sitelink-change' => 'Valodas saite mainīta no $1 uz $2',
+	'wikibase-comment-sitelink-remove' => 'Valodas saite noņemta: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|izmaiņa|izmaiņas}}',
 	'wikibase-editlinks' => 'Labot saites',
 	'wikibase-editlinkstitle' => 'Labot starpvalodu saites',
 	'wikibase-linkitem-addlinks' => 'Pievienot saites',
+	'wikibase-linkitem-close' => 'Aizvērt dialoga logu un pārlādēt lapu',
+	'wikibase-linkitem-title' => 'Sasaistīt ar lapu',
+	'wikibase-linkitem-linkpage' => 'Sasaistīt ar lapu',
 	'wikibase-linkitem-input-site' => 'Valoda:',
 	'wikibase-linkitem-input-page' => 'Lapa:',
+	'wikibase-linkitem-confirmitem-button' => 'Apstiprināt',
+	'wikibase-linkitem-not-loggedin-title' => 'Jums ir jāpieslēdzas',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata labojums',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" nav derīgs valodas kods.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Tikai lapas ar starpvalodu saitēm',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|starpvalodu saite|starpvalodu saites}} šajā lapā)',
 );
 
 /** Malagasy (Malagasy)

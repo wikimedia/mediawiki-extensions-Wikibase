@@ -509,16 +509,28 @@ This is a generic text used as a placeholder while defining the site for a new s
 This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[d:Wikidata:Glossary#sitelink|sitelink]].',
 	'wikibase-alias-edit-placeholder' => 'This is a generic placeholder message used while editing the list of aliases of an item. It is displayed in an empty input box which can be used to define a new alias.',
 	'wikibase-label-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 I.png|right|0x150px]]
-Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument ($1) that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Item|item]].',
+Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument ($1) that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Item|item]].
+
+Parameters:
+* $1 - language name
+{{Related|Wikibase-input-help-message}}',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
-Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-description|description]] and [[d:Wikidata:Glossary#Item|item]].',
+Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-description|description]] and [[d:Wikidata:Glossary#Item|item]].
+
+Parameters:
+* $1 - language name
+{{Related|Wikibase-input-help-message}}',
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-terms' => 'Heading for the table with the labels and descriptions in other languages.
 {{Identical|Otherlanguages}}',
 	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [[d:Wikidata:Glossary#Sitelink|sitelinks]].",
 	'wikibase-sitelinks-empty' => 'There are no site links for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|sitelinks]] and [[d:Wikidata:Glossary#sitelinks-title|title]].',
 	'wikibase-sitelinks-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]
-Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#sitelinks-title|title]].',
+Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#sitelinks-title|title]].
+
+Parameters:
+* $1 - (Unused) language name
+{{Related|Wikibase-input-help-message}}',
 	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
 	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
@@ -556,8 +568,11 @@ Parameters:
 * $2 is the fixed quantity of the counter. The fixed quantity can for example be the number of site-links in an item's site-links table which are already saved and permanently displayed in the table, ready to be edited by the user.
 * $3 is the pending quantity of the counter with some additional markup around, expressing and explaining the pending nature of the number. Basically, this is the content of {{msg-mw|wikibase-ui-pendingquantitycounter-pending-pendingsubpart}}. The pending quantity can for example be the number of site-links in an item's site-links table which are not yet saved.",
 	'wikibase-ui-pendingquantitycounter-pending-pendingsubpart' => "{{optional}}
-The pending quantity of a counter and a leading '+'. The pending quantity of a counter can for example be the number of site-links in an item's site-links table which are not yet saved.
-This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantitycounter-pending}}.",
+The pending quantity of a counter and a leading '+'.
+
+The pending quantity of a counter can for example be the number of site-links in an item's site-links table which are not yet saved.
+
+Used as <code>$3</code> in {{msg-mw|Wikibase-ui-pendingquantitycounter-pending}}.",
 	'wikibase-propertyedittool-counter-pending-tooltip' => 'Parameters:
 * $1 is the number of elements not saved yet.',
 	'wikibase-propertyedittool-counter-entrieslabel' => "Used in the counter on top of the site-links table.
@@ -580,7 +595,11 @@ Parameters:
 * $1 - the new items id
 * $2 - a link back to the special page with "special-newitem" as label',
 	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list. Aliases are alternate names and nicknames for the item. See also [[d:Wikidata:Glossary]].',
-	'wikibase-aliases-input-help-message' => 'Bubble help message for entering the aliases of the data set used for a specific item.',
+	'wikibase-aliases-input-help-message' => 'Bubble help message for entering the aliases of the data set used for a specific item.
+
+Parameters:
+* $1 - (Unused) language name
+{{Related|Wikibase-input-help-message}}',
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
 	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.',
 	'wikibase-claimview-snak-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata:Glossary#Claim]]).
@@ -721,7 +740,10 @@ This special page returns all items with a given label. It provides an interface
 	'wikibase-itemdisambiguation-submit' => 'Text for the submit button in the search form.
 {{Identical|Search}}',
 	'wikibase-itemdisambiguation-nothing-found' => 'Response if the search failed because no such items have been found.',
-	'wikibase-itemdisambiguation-create' => 'Invitation to click a link and create an item with the given label.',
+	'wikibase-itemdisambiguation-create' => 'Invitation to click a link and create an item with the given label.
+
+Parameters:
+* $1 - the specified label',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.
 
 "language identifier" is the same as "language code".',
@@ -889,10 +911,12 @@ This special page returns a list of entities without label for a given language'
 {{Identical|All}}',
 	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.
 {{Identical|Find}}',
-	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the entity type passed in parameter is invalid.
+	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the language code passed in parameter is invalid.
 
 Parameters:
-* $1 - the invalid type',
+* $1 - language code
+See also:
+* {{msg-mw|Wikibase-unconnectedpages-invalid-language}}',
 	'wikibase-entitieswithoutlabel-invalid-type' => 'Parameters:
 * $1 - an invalid entity type. Valid entity types are: item, property and query.',
 	'special-itemswithoutsitelinks' => '{{doc-special|ItemsWithoutSitelinks}}
@@ -910,7 +934,10 @@ Paramters:
 * $2 - the requested revision ID',
 	'wikibase-entitydata-bad-id' => 'Error shown when the requested ID is invalid. Parameters:
 * $1: the malformed ID',
-	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data (HTTP error 415).',
+	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data (HTTP error 415).
+
+Parameters:
+* $1 - the specified data format name',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
 	'special-mylanguagefallbackchain' => '{{doc-special|MyLanguageFallbackChain}}
@@ -1007,7 +1034,8 @@ Parameters:
 	'wikibase-item-summary-wbsetaliases-add' => '{{wikibase summary messages|item|Automatic edit summary when adding one or more aliases.}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{wikibase summary messages|item|Automatic edit summary when a user removes one or more aliases.}}',
 	'wikibase-item-summary-wbsetsitelink-add' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when adding a language link. Such a summary could appear in English as "Added link to [itwiki]:  Italia".}}',
-	'wikibase-item-summary-wbsetsitelink-set' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when editing a language link. Such a summary could appear in English as "Changed link to [itwiki]:  Italia".}}',
+	'wikibase-item-summary-wbsetsitelink-set' => '{{doc-important|Translate this as "Changed link which points to <nowiki>[$2]</nowiki>".}}
+{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when editing a language link. Such a summary could appear in English as "Changed link to [itwiki]:  Italia".}}',
 	'wikibase-item-summary-wbsetsitelink-remove' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when removing a language link from a Wikidata item (page). Such a summary could appear in English as "Removed link to [itwiki]".}}',
 	'wikibase-item-summary-wblinktitles-create' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s) by creating a new data item.}}
 
@@ -1066,10 +1094,18 @@ Parameters:
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
 	'wikibase-property-summary-wbeditentity-override' => 'Automatic edit summary generated when overriding an existing property.',
-	'wikibase-property-summary-wbsetlabel-add' => 'Automatic edit summary generated when adding a property label, which appears in the h1 heading at top of the page. Example edit summary is "Added [en] label:  Egypt". Parameters:
-* $2 is the language code for the item page.',
-	'wikibase-property-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing a property label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters:
-* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetlabel-add' => 'Automatic edit summary generated when adding a property label, which appears in the h1 heading at top of the page.
+
+Example edit summary is "Added [en] label:  Egypt".
+
+Parameters:
+* $2 - the language code for the item page',
+	'wikibase-property-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing a property label, which appears in the h1 heading at top of the page.
+
+Example edit summary is "Updated [en] label:  Egypt".
+
+Parameters:
+* $2 - the language code for the item page',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing a property label. Example edit summary is "Removed [en] label". Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-property-summary-wbsetdescription-add' => 'Automatic edit summary when adding a property description. Example edit summary is "Added [en] description:  a country in Africa". Parameters:
@@ -1078,8 +1114,12 @@ Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Automatic edit summary when removing a property description. Example edit summary is "Removed [en] description". Parameters:
 * $2 is the language code for the item page.',
-	'wikibase-property-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing property aliases.  Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana". Parameters:
-* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing property aliases.
+
+Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana".
+
+Parameters:
+* $2 - the language code for the item page',
 	'wikibase-property-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing property aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit. Parameter:
 * $1 is the number of aliases added/removed;
 * $2 is the language code of the item page.',
@@ -6111,8 +6151,8 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-item-summary-wbeditentity-update' => 'Mise à jour d’un élément',
 	'wikibase-item-summary-wbeditentity-override' => 'Outrepasser un élément',
 	'wikibase-item-summary-wbsetreference' => 'Référence modifiée',
-	'wikibase-item-summary-wbsetreference-add' => 'Référence ajoutée pour réclamation',
-	'wikibase-item-summary-wbsetreference-set' => 'Référence modifiée pour réclamation',
+	'wikibase-item-summary-wbsetreference-add' => "Ajout d'une référence à une affirmation",
+	'wikibase-item-summary-wbsetreference-set' => "Modification d'une référence d'une affirmation",
 	'wikibase-item-summary-wbsetlabel-add' => 'Libellé [$2] ajouté',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changement du libellé [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Retrait du libellé [$2]',
@@ -8990,7 +9030,7 @@ $messages['ja'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'サイト',
 	'wikibase-sitelink-page-edit-placeholder' => 'ページ',
 	'wikibase-alias-edit-placeholder' => '別名を入力',
-	'wikibase-label-input-help-message' => 'このデータセットに対する名前を$1で入力します。',
+	'wikibase-label-input-help-message' => 'このデータセットに対する名前を$1で入力してください。',
 	'wikibase-description-input-help-message' => '短い説明を$1で入力してください。',
 	'wikibase-statements' => '文',
 	'wikibase-terms' => '他の言語',
@@ -9188,7 +9228,7 @@ $messages['ja'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '[$2] の{{PLURAL:$1|別名}}を追加',
 	'wikibase-item-summary-wbsetaliases-remove' => '[$2] の{{PLURAL:$1|別名}}を除去',
 	'wikibase-item-summary-wbsetsitelink-add' => '[$2] へのリンクを追加',
-	'wikibase-item-summary-wbsetsitelink-set' => 'リンクを [$2] に変更',
+	'wikibase-item-summary-wbsetsitelink-set' => '[$2] へのリンクを変更',
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] へのリンクを除去',
 	'wikibase-item-summary-wblinktitles-create' => 'ページを接続する項目を作成 [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'ページを接続する言語リンクを追加 [$2↔$3]',
@@ -10392,13 +10432,13 @@ $messages['lv'] = array(
 	'wikibase-save' => 'saglabāt',
 	'wikibase-cancel' => 'atcelt',
 	'wikibase-add' => 'pievienot',
+	'wikibase-addqualifier' => 'pievienot ierobežojumu',
 	'wikibase-addreference' => 'pievienot avotu',
 	'wikibase-save-inprogress' => 'Saglabā...',
 	'wikibase-remove-inprogress' => 'Dzēš...',
 	'wikibase-label-empty' => 'Nosaukums vēl nav norādīts',
 	'wikibase-label-edit-placeholder' => 'ievadiet nosaukumu',
 	'wikibase-description-empty' => 'Apraksts nav vēl norādīts',
-	'wikibase-deletedentity' => 'Izdzēsa $1',
 	'wikibase-description-edit-placeholder' => 'ievadiet aprakstu',
 	'wikibase-sitelink-site-edit-placeholder' => 'vietne',
 	'wikibase-sitelink-page-edit-placeholder' => 'raksts',
@@ -10460,6 +10500,12 @@ $messages['lv'] = array(
 	'wikibase-setaliases-warning-remove' => 'Vai tiešām vēlaties noņemt visus [[$1]] citus nosaukumus?',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Valoda:',
+	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-oldest-change' => 'Vecākais',
+	'wikibase-dispatchstats-newest-change' => 'Jaunākais',
+	'wikibase-dispatchstats-pos' => 'Pozīcija',
+	'wikibase-dispatchstats-lag-time' => 'Aizture',
+	'wikibase-dispatchstats-large-lag' => '(ļoti liels)',
 	'special-listdatatypes' => 'Saraksts ar visiem pieejamiem datu tipiem',
 	'wikibase-history-title-with-label' => '"$2" ($1) versiju hronoloģija',
 	'wikibase-history-title-without-label' => '($1) versiju hronoloģija',
@@ -10470,6 +10516,7 @@ $messages['lv'] = array(
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'visi',
 	'wikibase-entitieswithoutlabel-submit' => 'Atrast',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" nav derīgs valodas kods.',
+	'wikibase-entitydata-bad-id' => 'Nederīgs ID: $1.',
 	'wikibase-restoreold' => 'atjaunot',
 	'wikibase-no-direct-editing' => 'Vārdtelpā $1 tieša labošana ir atslēgta',
 	'wikibase-noentity-createone' => 'Jūs varat arī [[$1|izveidot jaunu]].',
@@ -10481,7 +10528,7 @@ $messages['lv'] = array(
 	'wikibase-property-summary-wbsetlabel-remove' => 'Nodzēsa [$2] nosaukumu',
 	'wikibase-property-summary-wbsetdescription-set' => 'Izmainīja [$2] aprakstu',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Nodzēsa [$2] aprakstu',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Ģeogrāfiskās koordinātas',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Ģeogrāfiskās koordinātas',
 	'right-label-remove' => 'Nodzēst nosaukumus',
 	'right-label-update' => 'Izmainīt nosaukumus',
 	'right-description-remove' => 'Dzēst aprakstus',

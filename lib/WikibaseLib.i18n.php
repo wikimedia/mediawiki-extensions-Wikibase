@@ -213,7 +213,7 @@ Parameters:
 
 Parameters:
 * $1 is the malformed URL',
-	'wikibase-validator-bad-mailto-url'  => 'Input validation error shown when the value is an invalid "mailto" URL.
+	'wikibase-validator-bad-mailto-url' => 'Input validation error shown when the value is an invalid "mailto" URL.
 
 Parameters:
 * $1 is the malformed URL',
@@ -621,7 +621,7 @@ $messages['ckb'] = array(
 	'wikibase-error-remove-connection' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.',
 	'wikibase-error-ui-no-external-page' => 'وتاری دەستنیشان‌کراو لە پێگەی ئاماژەکراودا نەدۆزرایەوە.',
 	'wikibase-replicationnote' => 'تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.',
-	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بەندەوە',
+	'wikibase-sitelinks-wikipedia' => 'پەڕە بەسراوەکانی ویکیپیدیا بەم بەندەوە',
 	'wikibase-sitelinks-sitename-columnheading' => 'زمان',
 	'wikibase-sitelinks-siteid-columnheading' => 'کۆد',
 	'wikibase-sitelinks-link-columnheading' => 'وتاری بەستەردراو',
@@ -1995,9 +1995,24 @@ $messages['lt'] = array(
  * @author Papuass
  */
 $messages['lv'] = array(
+	'wikibase-entity-property' => 'īpašība',
+	'wikibase-entity-query' => 'vaicājums',
+	'wikibase-deletedentity-item' => 'Dzēsts ieraksts',
+	'wikibase-deletedentity-property' => 'Dzēsta īpašība',
+	'wikibase-deletedentity-query' => 'Dzēsts vaicājums',
+	'wikibase-diffview-reference' => 'atsauce',
+	'wikibase-diffview-rank' => 'rangs',
+	'wikibase-diffview-qualifier' => 'ierobežotājs',
+	'wikibase-diffview-label' => 'nosaukums',
+	'wikibase-diffview-alias' => 'citi nosaukumi',
+	'wikibase-diffview-description' => 'apraksts',
+	'wikibase-diffview-link' => 'saites',
+	'wikibase-error-unexpected' => 'Radās neparedzēta kļūda.',
+	'wikibase-error-autocomplete-response' => 'Servera atbilde: $1',
 	'wikibase-sitelinks-sitename-columnheading' => 'Valoda',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kods',
 	'wikibase-sitelinks-link-columnheading' => 'Saistītais raksts',
+	'wikibase-validator-bad-value' => 'Neatļauta vērtība: $1',
 );
 
 /** Macedonian (македонски)
@@ -2584,6 +2599,10 @@ $messages['roa-tara'] = array(
 	'wikibase-validator-no-such-property' => 'Probbieta $1 none acchiate',
 	'wikibase-validator-bad-value' => 'Valore illegale: $1',
 	'wikibase-validator-bad-value-type' => "Tipe de valore sbagliate $1, s'aspettave $2",
+	'wikibase-validator-bad-url' => 'URL male formate: $1',
+	'wikibase-validator-bad-url-scheme' => 'Scheme de URL non supportate: $1',
+	'wikibase-validator-bad-http-url' => 'URL HTTP male formate: $1',
+	'wikibase-validator-bad-mailto-url' => 'URL de email male formate: $1',
 	'datatypes-type-wikibase-item' => 'Vôsce',
 	'datatypes-type-commonsMedia' => 'File media de Commons',
 	'version-wikibase' => 'Uicchibase',
@@ -2903,6 +2922,10 @@ $messages['uk'] = array(
 	'wikibase-validator-no-such-property' => 'Властивість  $1  не знайдено',
 	'wikibase-validator-bad-value' => 'Незаконне значення: $1',
 	'wikibase-validator-bad-value-type' => 'Поганий тип значення $1, очікується $2',
+	'wikibase-validator-bad-url' => 'Неправильна URL-адреса:$1',
+	'wikibase-validator-bad-url-scheme' => 'Непідтримувана схема URL:$1',
+	'wikibase-validator-bad-http-url' => 'Неправильний формат HTTP-адреси URL: $1',
+	'wikibase-validator-bad-mailto-url' => 'Неправильний формат адреси одержувача:$1',
 	'datatypes-type-wikibase-item' => 'Елемент',
 	'datatypes-type-commonsMedia' => 'Медіафайл з Вікісховища',
 	'version-wikibase' => 'Вікібаза',
@@ -3001,7 +3024,7 @@ $messages['vi'] = array(
 	'wikibase-error-ui-session-failure' => 'Phiên của bạn đã hết hạn. Xin hãy đăng nhập lại.',
 	'wikibase-error-ui-edit-conflict' => 'Một mâu thuẫn sửa đổi đã xảy ra. Xin hãy tải lại và lưu lần nữa.',
 	'wikibase-replicationnote' => 'Xin lưu ý, có thể phải chờ vài phút để cho các wiki trình bày được các thay đổi',
-	'wikibase-sitelinks-wikipedia' => 'Trang Wikipedia được liên kết với khoản mục này',
+	'wikibase-sitelinks-wikipedia' => 'Các trang Wikipedia được liên kết với khoản mục này',
 	'wikibase-sitelinks-sitename-columnheading' => 'Ngôn ngữ',
 	'wikibase-sitelinks-siteid-columnheading' => 'Mã',
 	'wikibase-sitelinks-link-columnheading' => 'Bài viết liên kết',
