@@ -50,6 +50,23 @@
       "revId": "4aa989e4fab74e2d77d4a59cbe6f12e391598d87",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_0432b35d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-08-29T16:53:44Z",
+      "side": 1,
+      "message": "This seems like a useful functionality for SnakList in general. Implementing it there would also allow for a dedicated test.\n\nSnakList.prototype.getGroupedSnaks\n\nor so.",
+      "revId": "4aa989e4fab74e2d77d4a59cbe6f12e391598d87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
