@@ -86,8 +86,3 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	}
 
 }
-
-/**
- * @deprecated since 0.4
- */
-class ReferenceObject extends Reference {}

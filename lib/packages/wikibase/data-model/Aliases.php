@@ -18,4 +18,9 @@ namespace Wikibase {
 	 */
 	class ItemObject extends Item {}
 
+	/**
+	 * @deprecated since 0.4, use the base class instead.
+	 */
+	class ReferenceObject extends Reference {}
+
 }
