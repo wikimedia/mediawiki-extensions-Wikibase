@@ -1,9 +1,4 @@
-These is the readme file for the "ValueView" library.
-
-Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:ValueView
-Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/DataValues.git;a=blob;f=ValueView/README
-
-== About ==
+# ValueView
 
 "ValueView" introduces the jQuery.ui.widget based frontend component jQuery.valueview which allows
 to display and edit data values defined by the "DataValues" extension. When added as a dependency in
