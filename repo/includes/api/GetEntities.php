@@ -77,7 +77,7 @@ class GetEntities extends ApiWikibase {
 
 		$params['ids'] = $this->uniqueEntities( $params['ids'] );
 
-		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
+		if ( in_array( 'sitelinks/urls', $params['props'] ) || in_array( 'sitelinks/badges', $params['props'] ) ) {
 			$props = array_flip( array_values( $params['props'] ) );
 			$props['sitelinks'] = true;
 			$props = array_keys( $props );
@@ -244,7 +244,7 @@ class GetEntities extends ApiWikibase {
 			),
 			'props' => array(
 				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels',
-					'descriptions', 'sitelinks/urls', 'claims', 'datatype' ),
+					'descriptions', 'sitelinks/urls', 'sitelinks/badges', 'claims', 'datatype' ),
 				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
 				ApiBase::PARAM_ISMULTI => true,
 			),
