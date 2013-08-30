@@ -2,8 +2,13 @@
 
 namespace Wikibase\Lib\Test\Serializers;
 
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListUnserializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListUnserializer
@@ -58,20 +63,20 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 
 		$dataValue0 = new \DataValues\StringValue( 'ohi' );
 
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
-		$id2 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 );
+		$id42 = new PropertyId( 'P42' );
+		$id2 = new PropertyId( 'P2' );
 
-		$snak0 = new \Wikibase\PropertyNoValueSnak( $id42 );
-		$snak1 = new \Wikibase\PropertySomeValueSnak( $id2 );
-		$snak2 = new \Wikibase\PropertyValueSnak( $id2, $dataValue0 );
+		$snak0 = new PropertyNoValueSnak( $id42 );
+		$snak1 = new PropertySomeValueSnak( $id2 );
+		$snak2 = new PropertyValueSnak( $id2, $dataValue0 );
 
-		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
+		$validArgs[] = new SnakList( array( $snak0, $snak1, $snak2 ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
 		$validArgs[] = array(
 			array(),
-			new \Wikibase\SnakList(),
+			new SnakList(),
 		);
 
 		$validArgs[] = array(
@@ -94,7 +99,7 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 					),
 				),
 			),
-			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),
+			new SnakList( array( $snak0, $snak1, $snak2 ) ),
 		);
 
 		return $validArgs;
