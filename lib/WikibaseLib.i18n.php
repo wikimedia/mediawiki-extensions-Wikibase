@@ -158,65 +158,83 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 	'wikibase-validator-bad-type' => 'Input validation error shown when the input has the wrong type.
 
 Parameters:
-* $1 is the expected type
-* $2 is the actual type',
-	'wikibase-validator-too-long' => 'Input validation error shown when the input is too long
+* $1 - the expected type
+* $2 - the actual type
+{{Related|Wikibase-validator}}',
+	'wikibase-validator-too-long' => 'Input validation error shown when the input is too long.
 
 Parameters:
-* $1 is the minimum length
-* $2 is the actual length',
-	'wikibase-validator-too-short' => 'Input validation error shown when the input is too short
+* $1 - the minimum length
+* $2 - the actual length
+{{Related|Wikibase-validator}}',
+	'wikibase-validator-too-short' => 'Input validation error shown when the input is too short.
 
 Parameters:
-* $1 is the minimum length
-* $2 is the actual length',
+* $1 - the minimum length
+* $2 - the actual length
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-malformed-value' => "Input validation error shown when the user's input was malformed in some way.
 
 Parameters:
-* $1 is the malformed input",
+* $1 - the malformed input
+{{Related|Wikibase-validator}}",
 	'wikibase-validator-bad-entity-id' => 'Input validation error shown when the entity ID given by the user is malformed.
 
 Parameters:
-* $1 is the malfromed entity ID',
+* $1 - the malformed entity ID
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-bad-entity-type' => 'Input validation error shown when the entity specified by the user was not of the correct type.
 
 Parameters:
-* $1 is the actual type',
+* $1 - the actual type
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-no-such-entity' => 'Input validation error shown when the entity specified by the user was not found.
 
 Parameters:
-* $1 is the entity id',
+* $1 - the entity ID
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-no-such-property' => 'Input validation error shown when the property used for a statement could not be found.
-This kind of error is unlekely to occur during normal operation, since the user interface should prevent illegal values from being entered.
 
-Parameters:
-* $1 is the property id',
-	'wikibase-validator-bad-value' => 'Input validation error shown when the value is syntactically or structurally invalid.
-This kind of error is unlekely to occur during normal operation, since the user interface should prevent illegal values from being entered.
-
-Parameters:
-* $1 is the technical error message describing the problem',
-	'wikibase-validator-bad-value-type' => 'Input validation error shown when the value has the wrong type for the property it is applied to.
 This kind of error is unlikely to occur during normal operation, since the user interface should prevent illegal values from being entered.
+
 Parameters:
-* $1 is the actual value type
-* $2 is the expected value type',
+* $1 - the property ID
+{{Related|Wikibase-validator}}',
+	'wikibase-validator-bad-value' => 'Input validation error shown when the value is syntactically or structurally invalid.
+
+This kind of error is unlikely to occur during normal operation, since the user interface should prevent illegal values from being entered.
+
+Parameters:
+* $1 - the technical error message describing the problem
+{{Related|Wikibase-validator}}',
+	'wikibase-validator-bad-value-type' => 'Input validation error shown when the value has the wrong type for the property it is applied to.
+
+This kind of error is unlikely to occur during normal operation, since the user interface should prevent illegal values from being entered.
+
+Parameters:
+* $1 - the actual value type
+* $2 - the expected value type
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-bad-url' => 'Input validation error shown when the value is an invalid URL.
 
 Parameters:
-* $1 is the malformed URL',
+* $1 - the malformed URL
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-bad-url-scheme' => 'Input validation error shown when the value is a URL using an unsupported protocol (scheme).
 
 Parameters:
-* $1 is the scheme name',
+* $1 - the scheme name
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-bad-http-url' => 'Input validation error shown when the value is an HTTP or HTTPS URL.
 
 Parameters:
-* $1 is the malformed URL',
+* $1 - the malformed URL
+{{Related|Wikibase-validator}}',
 	'wikibase-validator-bad-mailto-url' => 'Input validation error shown when the value is an invalid "mailto" URL.
 
 Parameters:
-* $1 is the malformed URL',
+* $1 - the malformed URL
+{{Related|Wikibase-validator}}',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
@@ -332,6 +350,10 @@ $messages['ast'] = array(
 	'wikibase-validator-no-such-property' => "Nun s'alcontró la propiedá $1",
 	'wikibase-validator-bad-value' => 'Valor illegal: $1',
 	'wikibase-validator-bad-value-type' => 'Tipu de valor incorreutu $1, esperábase $2',
+	'wikibase-validator-bad-url' => 'URL con mal formatu: $1',
+	'wikibase-validator-bad-url-scheme' => "Esquema d'URL ensin encontu: $1",
+	'wikibase-validator-bad-http-url' => 'URL HTTP con mal formatu: $1',
+	'wikibase-validator-bad-mailto-url' => 'URL de corréu con mal formatu: $1',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
 	'version-wikibase' => 'Wikibase',
@@ -850,6 +872,10 @@ $messages['de'] = array(
 	'wikibase-validator-no-such-property' => 'Eigenschaft $1 nicht gefunden',
 	'wikibase-validator-bad-value' => 'Ungültiger Wert: $1',
 	'wikibase-validator-bad-value-type' => 'Ungültiger Wertetyp $1, erwartet $2',
+	'wikibase-validator-bad-url' => 'Fehlerhafte URL: $1',
+	'wikibase-validator-bad-url-scheme' => 'Nicht unterstütztes URL-Schema: $1',
+	'wikibase-validator-bad-http-url' => 'Fehlerhafte HTTP-URL: $1',
+	'wikibase-validator-bad-mailto-url' => 'Fehlerhafte mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
 	'version-wikibase' => 'Wikibase-Erweiterungen',
@@ -1261,6 +1287,10 @@ $messages['fr'] = array(
 	'wikibase-validator-no-such-property' => 'Propriété $1 non trouvée',
 	'wikibase-validator-bad-value' => 'Valeur interdite : $1',
 	'wikibase-validator-bad-value-type' => 'Mauvais type de valeur $1, $2 attendu',
+	'wikibase-validator-bad-url' => 'URL mal formée : $1',
+	'wikibase-validator-bad-url-scheme' => 'Schéma d’URL non supporté : $1',
+	'wikibase-validator-bad-http-url' => 'URL HTTP mal formée : $1',
+	'wikibase-validator-bad-mailto-url' => 'URL mailto mal formée : $1',
 	'datatypes-type-wikibase-item' => 'Élément',
 	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
 	'version-wikibase' => 'Wikibase',
@@ -1680,6 +1710,10 @@ $messages['it'] = array(
 	'wikibase-validator-no-such-property' => 'Proprietà $1 non trovata',
 	'wikibase-validator-bad-value' => 'Valore non valido: $1',
 	'wikibase-validator-bad-value-type' => 'Tipo di valore errato $1, atteso $2',
+	'wikibase-validator-bad-url' => 'URL non valido: $1',
+	'wikibase-validator-bad-url-scheme' => 'Schema URL non supportato: $1',
+	'wikibase-validator-bad-http-url' => 'URL HTTP non valido: $1',
+	'wikibase-validator-bad-mailto-url' => 'URL mailto non valido: $1',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'File multimediale su Commons',
 	'version-wikibase' => 'Wikibase',
@@ -1736,6 +1770,10 @@ $messages['ja'] = array(
 	'wikibase-validator-no-such-property' => 'プロパティ $1 が見つかりません',
 	'wikibase-validator-bad-value' => '値の誤り: $1',
 	'wikibase-validator-bad-value-type' => '値の型 $1 は間違いです。$2 が正しい型です。',
+	'wikibase-validator-bad-url' => '誤った形式の URL: $1',
+	'wikibase-validator-bad-url-scheme' => '未対応の URL スキーム: $1',
+	'wikibase-validator-bad-http-url' => '誤った形式の HTTP URL: $1',
+	'wikibase-validator-bad-mailto-url' => '誤った形式の mailto URL: $1',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => 'コモンズのメディアファイル',
 	'version-wikibase' => 'ウィキベース',
@@ -1858,6 +1896,10 @@ $messages['ko'] = array(
 	'wikibase-validator-no-such-property' => '$1 속성을 찾을 수 없습니다',
 	'wikibase-validator-bad-value' => '잘못된 값: $1',
 	'wikibase-validator-bad-value-type' => '$1 값 유형이 잘못됨, $2(으)로 예상됨',
+	'wikibase-validator-bad-url' => '잘못된 형식의 URL: $1',
+	'wikibase-validator-bad-url-scheme' => '지원하지 않는 URL 계획: $1',
+	'wikibase-validator-bad-http-url' => '잘못된 형식의 HTTP URL: $1',
+	'wikibase-validator-bad-mailto-url' => '잘못된 형식의 mailto URL: $1',
 	'datatypes-type-wikibase-item' => '항목',
 	'datatypes-type-commonsMedia' => '공용 미디어 파일',
 	'version-wikibase' => '위키베이스',
@@ -2065,6 +2107,10 @@ $messages['mk'] = array(
 	'wikibase-validator-no-such-property' => 'Својството $1 не е пронајдено',
 	'wikibase-validator-bad-value' => 'Недопуштена вредност: $1',
 	'wikibase-validator-bad-value-type' => 'Погрешен тип на вредност $1; се очкеува $2',
+	'wikibase-validator-bad-url' => 'Неисправно обликувана URL: $1',
+	'wikibase-validator-bad-url-scheme' => 'Неподдржана URL: $1',
+	'wikibase-validator-bad-http-url' => 'Неисправно обликувана HTTP-URL: $1',
+	'wikibase-validator-bad-mailto-url' => 'Неисправно обликувана mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Предмет',
 	'datatypes-type-commonsMedia' => 'Податотека од Ризницата',
 	'version-wikibase' => 'Викибаза',
