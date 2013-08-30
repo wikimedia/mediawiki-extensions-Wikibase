@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_04a70cc1",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-30T15:08:57Z",
+      "side": 1,
+      "message": "Please avoid these kind of clutter comments",
+      "revId": "c602889370ad080676fa60239331a892378e798e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_24ac10a1",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-30T15:08:57Z",
+      "side": 1,
+      "message": "Wow, this method is huge...",
+      "revId": "c602889370ad080676fa60239331a892378e798e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_44b104f7",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-30T15:08:57Z",
+      "side": 1,
+      "message": "Why not factor this out into an assertHasCorrectProps or something?",
+      "revId": "c602889370ad080676fa60239331a892378e798e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_6496084d",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-08-30T15:08:57Z",
+      "side": 1,
+      "message": "The below needs its own method. 6 levels of nesting is not acceptable",
+      "revId": "c602889370ad080676fa60239331a892378e798e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
