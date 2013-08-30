@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_d9809d4f",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-08-30T05:16:45Z",
+      "side": 1,
+      "message": "This error message doesn\u0027t really make sense...maybe something like \"Non items cannot have claims\"?",
+      "revId": "c4ea72d4d8b3e69dce5063a7d943a211264a1a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_f985615c",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-08-30T05:16:45Z",
+      "side": 1,
+      "message": "Doesn\u0027t it return only an array?",
+      "revId": "c4ea72d4d8b3e69dce5063a7d943a211264a1a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
