@@ -18,6 +18,7 @@ Under development.
 #### Removals
 
 * ObjectComparer has been removed from the public namespace.
+* SnakFactory has been moved out of this component.
 
 #### Deprecations
 
