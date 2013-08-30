@@ -28,7 +28,7 @@ if ( defined( 'WBC_VERSION' ) ) {
 	return;
 }
 
-define( 'WBC_VERSION', '0.4 alpha'
+define( 'WBC_VERSION', '0.5 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
 if ( version_compare( $GLOBALS['wgVersion'], '1.21c', '<' ) ) { // Needs to be 1.21c because version_compare() works in confusing ways.
