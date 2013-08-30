@@ -570,7 +570,7 @@ class ChangeHandler {
 			$siteLinkDiff = ( $change instanceof ItemChange ) ? $change->getSiteLinkDiff() : null;
 
 			$siteLinkDiffOp = $siteLinkDiff !== null && isset( $siteLinkDiff[ $siteGlobalId ] )
-				? $siteLinkDiff[ $siteGlobalId ] : null;
+				? $siteLinkDiff[ $siteGlobalId ]['name'] : null;
 
 			if ( $siteLinkDiffOp === null ) {
 				// do nothing
@@ -694,7 +694,7 @@ class ChangeHandler {
 			return false;
 		}
 
-		$rcinfo['comment'] = $this->getEditComment( $change, $title );
+		$rcinfo['comment'] = $this->getEditComment( $change );
 
 		$fields = $change->getFields(); //@todo: add getFields() to the interface, or provide getters!
 		$fields['entity_type'] = $change->getEntityType();
@@ -703,7 +703,7 @@ class ChangeHandler {
 			$rcinfo['composite-comment'][] = array();
 
 			foreach ( $fields['info']['changes'] as $part ) {
-				$rcinfo['composite-comment'][] = $this->getEditComment( $part, $title );
+				$rcinfo['composite-comment'][] = $this->getEditComment( $part );
 			}
 		}
 
@@ -769,27 +769,16 @@ class ChangeHandler {
 	 * @since 0.4
 	 *
 	 * @param Change $change the change to get a comment for
-	 * @param \Title $title the target page for which to generate a comment
 	 *
 	 * @return array|null|string
 	 */
-	public function getEditComment( Change $change, \Title $title ) {
-		wfProfileIn( __METHOD__ );
+	public function getEditComment( Change $change ) {
+		$commentSerializer = new SiteLinkCommentSerializer(
+			$this->site,
+			$this->sites
+		);
 
-		if ( $change instanceof EntityChange ) {
-			$siteLinkDiff = ( $change instanceof ItemChange ) ? $change->getSiteLinkDiff() : null;
-
-			if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
-				$comment = self::getSiteLinkComment( $change->getAction(), $siteLinkDiff, $title ) ;
-			} else {
-				$comment = $change->getComment();
-			}
-		} else {
-			$comment = null; //TODO: some nice default comment?
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $comment;
+		return $commentSerializer->getEditComment( $change );
 	}
 
 	/**
@@ -823,7 +812,7 @@ class ChangeHandler {
 		// change involved site link to client wiki
 		if ( array_key_exists( $siteGlobalId, $siteLinkDiff ) ) {
 
-			$diffOp = $siteLinkDiff[$siteGlobalId];
+			$diffOp = $siteLinkDiff[$siteGlobalId]['name'];
 
 			if ( $action === 'remove' ) {
 				$params['message'] = 'wikibase-comment-remove';
@@ -857,7 +846,7 @@ class ChangeHandler {
 			*/
 			$params['message'] = $messagePrefix . 'change';
 
-			foreach( $siteLinkDiff as $siteKey => $diffOp ) {
+			foreach( $siteLinkDiff as $siteKey => $diff ) {
 				$site = $this->sites->getSite( $siteKey );
 
 				if( !$site ) {
@@ -865,36 +854,47 @@ class ChangeHandler {
 					continue;
 				}
 
-				if ( $diffOp instanceof \Diff\DiffOpAdd ) {
-					$params['message'] = $messagePrefix . 'add';
-					$params['sitelink'] = array(
-						'newlink' =>  array(
-							'site' => $siteKey,
-							'page' => $diffOp->getNewValue()
-						)
-					);
-				} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
-					$params['message'] = $messagePrefix . 'remove';
-					$params['sitelink'] = array(
-						'oldlink' => array(
-							'site' => $siteKey,
-							'page' => $diffOp->getOldValue()
-						)
-					);
-				} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
-					$params['sitelink'] = array(
-						'oldlink' => array(
-							'site' => $siteKey,
-							'page' => $diffOp->getOldValue()
-						),
-						'newlink' => array(
-							'site' => $siteKey,
-							'page' => $diffOp->getNewValue()
-						)
-					);
+
+				if ( $diff->isEmpty() ) {
+					continue;
 				}
-				// @todo: because of edit conflict bug in repo
-				// sometimes we get multiple stuff in diffOps
+
+				$diffOps = $diff->getOperations();
+
+				foreach( $diffOps as $diffOp ) {
+					if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+						$params['message'] = $messagePrefix . 'add';
+						$params['sitelink'] = array(
+							'newlink' =>  array(
+								'site' => $siteKey,
+								'page' => $diffOp->getNewValue()
+							)
+						);
+					} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
+						$params['message'] = $messagePrefix . 'remove';
+						$params['sitelink'] = array(
+							'oldlink' => array(
+								'site' => $siteKey,
+								'page' => $diffOp->getOldValue()
+							)
+						);
+					} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
+						$params['sitelink'] = array(
+							'oldlink' => array(
+								'site' => $siteKey,
+								'page' => $diffOp->getOldValue()
+							),
+							'newlink' => array(
+								'site' => $siteKey,
+								'page' => $diffOp->getNewValue()
+							)
+						);
+					}
+					// @todo: because of edit conflict bug in repo
+					// sometimes we get multiple stuff in diffOps
+					break;
+				}
+
 				break;
 			}
 		}
