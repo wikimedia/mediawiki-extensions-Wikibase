@@ -85,6 +85,7 @@ call_user_func( function() {
 	$wgAutoloadClasses['Wikibase\Client\WikibaseClient'] = $dir . 'includes/WikibaseClient.php';
 	$wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
 	$wgAutoloadClasses['Wikibase\PageUpdater'] 	= $dir . 'includes/PageUpdater.php';
+	$wgAutoloadClasses['Wikibase\SiteLinkCommentCreator'] = $dir . 'includes/SiteLinkCommentCreator.php';
 	$wgAutoloadClasses['Wikibase\WikiPageUpdater'] 	= $dir . 'includes/WikiPageUpdater.php';
 	$wgAutoloadClasses['Wikibase\UpdateRepo']       = $dir . 'includes/UpdateRepo.php';
 	$wgAutoloadClasses['Wikibase\UpdateRepoOnMove']         = $dir . 'includes/UpdateRepoOnMove.php';
