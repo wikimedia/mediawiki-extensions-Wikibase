@@ -26,6 +26,7 @@ use Wikibase\EntityContentFactory;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Michał Łazowik
  */
 class GetEntities extends ApiWikibase {
 
@@ -74,16 +75,8 @@ class GetEntities extends ApiWikibase {
 
 		$params['ids'] = $this->uniqueEntities( $params['ids'] );
 
-		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
-			$props = array_flip( array_values( $params['props'] ) );
-			$props['sitelinks'] = true;
-			$props = array_keys( $props );
-		} else {
-			$props = $params['props'];
-		}
-
 		foreach ( $params['ids'] as $entityId ) {
-			$this->handleEntity( $entityId, $params, $props );
+			$this->handleEntity( $entityId, $params );
 		}
 
 		if ( $this->getResult()->getIsRawMode() ) {
@@ -99,6 +92,36 @@ class GetEntities extends ApiWikibase {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Checks whether props contain sitelinks indirectly
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $props
+	 *
+	 * @return bool
+	 */
+	protected function hasImpliedSiteLinksProp( $props ) {
+		retrurn ( in_array( 'sitelinks/urls', $props ) || in_array( 'sitelinks/badges', $props ) );
+	}
+
+	/**
+	 * Returns props based on request parameters
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $params
+	 *
+	 * @return array
+	 */
+	protected function getPropsFromParams( $params ) {
+		if ( $this->hasImpliedSiteLinksProp( $params['props'] ) ) {
+			$params['props'][] = 'sitelinks';
+		}
+
+		return $params['props'];
 	}
 
 	/**
@@ -130,11 +153,10 @@ class GetEntities extends ApiWikibase {
 	 *
 	 * @param string $id
 	 * @param array $params
-	 * @param array $props
 	 *
 	 * @throws MWException
 	 */
-	protected function handleEntity( $id, array $params, array $props ) {
+	protected function handleEntity( $id, array $params ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = EntityContentFactory::singleton();
@@ -142,6 +164,8 @@ class GetEntities extends ApiWikibase {
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		$res = $this->getResult();
+
+		$props = $this->getPropsFromParams( $params );
 
 		try {
 			$entityId = $entityIdParser->parse( $id );
@@ -240,8 +264,8 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_ALLOW_DUPLICATES => true
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels',
-					'descriptions', 'sitelinks/urls', 'claims', 'datatype' ),
+				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'sitelinks/badges', 'aliases', 'labels',
+					'descriptions', 'claims', 'datatype' ),
 				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
 				ApiBase::PARAM_ISMULTI => true,
 			),
