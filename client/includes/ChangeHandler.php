@@ -1,8 +1,11 @@
 <?php
-
 namespace Wikibase;
 
-use \Wikibase\Client\WikibaseClient;
+use Site;
+use SiteList;
+use Sites;
+use Title;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -51,12 +54,12 @@ class ChangeHandler {
 	/**
 	 * The change requites any HTML output generated from the page to be purged from web cached.
 	 */
-	const WEB_PURGE_ACTION  = 4;
+	const WEB_PURGE_ACTION = 4;
 
 	/**
 	 * The change requites an entry to be injected into the recentchanges table.
 	 */
-	const RC_ENTRY_ACTION    = 8;
+	const RC_ENTRY_ACTION = 8;
 
 	/**
 	 * The change requites an entry to be injected into the revision table.
@@ -109,13 +112,13 @@ class ChangeHandler {
 	public function __construct( PageUpdater $updater = null,
 			EntityLookup $entityLookup = null,
 			EntityUsageIndex $entityUsageIndex = null,
-			\Site $localSite = null,
-			\SiteList $sites = null) {
+			Site $localSite = null,
+			SiteList $sites = null) {
 
 		wfProfileIn( __METHOD__ );
 
 		if ( $sites === null ) {
-			$sites = \Sites::singleton();
+			$sites = Sites::singleton()->getSites();
 		}
 
 		$this->sites = $sites;
@@ -138,7 +141,7 @@ class ChangeHandler {
 			$localSite = $this->sites->getSite( $siteGlobalId );
 
 			if ( $localSite === null ) {
-				throw new \MWException( "Unknown site ID configured: $siteGlobalId" );
+				throw new MWException( "Unknown site ID configured: $siteGlobalId" );
 			}
 		}
 
@@ -228,13 +231,13 @@ class ChangeHandler {
 	 *
 	 * @param EntityChange[] $changes The changes to combine.
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return Change a combined change representing the activity from all the original changes.
 	 */
 	public function mergeChanges( array $changes ) {
 		if ( empty( $changes ) )  {
 			return null;
-		} else if ( count( $changes ) === 1 )  {
+		} elseif ( count( $changes ) === 1 )  {
 			return reset( $changes );
 		}
 
@@ -272,7 +275,7 @@ class ChangeHandler {
 		$entity = $this->entityLookup->getEntity( $entityId, $latestRevId );
 
 		if ( !$entity ) {
-			throw new \MWException( "Failed to load revision $latestRevId of $entityId" );
+			throw new MWException( "Failed to load revision $latestRevId of $entityId" );
 		}
 
 		$parent = $parentRevId ? $this->entityLookup->getEntity( $entityId, $parentRevId ) : null;
@@ -369,7 +372,7 @@ class ChangeHandler {
 					if ( !empty( $currentRun ) ) {
 						try {
 							$coalesced[] = $this->mergeChanges( $currentRun );
-						} catch ( \MWException $ex ) {
+						} catch ( MWException $ex ) {
 							// Something went wrong while trying to merge the changes.
 							// Just keep the original run.
 							wfWarn( $ex->getMessage() );
@@ -393,7 +396,7 @@ class ChangeHandler {
 		if ( !empty( $currentRun ) ) {
 			try {
 				$coalesced[] = $this->mergeChanges( $currentRun );
-			} catch ( \MWException $ex ) {
+			} catch ( MWException $ex ) {
 				// Something went wrong while trying to merge the changes.
 				// Just keep the original run.
 				wfWarn( $ex->getMessage() );
@@ -446,13 +449,13 @@ class ChangeHandler {
 
 		if ( $a->getTime() > $b->getTime() ) {
 			return 1;
-		} else if ( $a->getTime() < $b->getTime() ) {
+		} elseif ( $a->getTime() < $b->getTime() ) {
 			return -1;
 		}
 
 		if ( $a->getId() > $b->getId() ) {
 			return 1;
-		} else if ( $a->getId() < $b->getId() ) {
+		} elseif ( $a->getId() < $b->getId() ) {
 			return -1;
 		}
 
@@ -497,7 +500,7 @@ class ChangeHandler {
 	 *
 	 * @param Change $change
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 *
 	 * @return bool
 	 */
@@ -549,7 +552,7 @@ class ChangeHandler {
 	 *
 	 * @param Change $change
 	 *
-	 * @return \Title[] the titles of the pages to update
+	 * @return Title[] the titles of the pages to update
 	 */
 	public function getPagesToUpdate( Change $change ) {
 		wfProfileIn( __METHOD__ );
@@ -567,23 +570,25 @@ class ChangeHandler {
 			$pagesToUpdate = array_merge( $pagesToUpdate, $usedOnPages );
 
 			// if an item's sitelinks change, update the old and the new target
-			$siteLinkDiff = ( $change instanceof ItemChange ) ? $change->getSiteLinkDiff() : null;
+			$siteLinkDiff = $change->getSiteLinkDiff();
 
-			$siteLinkDiffOp = $siteLinkDiff !== null && isset( $siteLinkDiff[ $siteGlobalId ] )
-				? $siteLinkDiff[ $siteGlobalId ] : null;
+			if ( isset( $siteLinkDiff[$siteGlobalId] ) ) {
+				// backwards compatibility for pre-badges site link structure,
+				// just in case something old is in the changes queue.
+				$siteLinkDiffOp = array_key_exists( 'name', $siteLinkDiff[$siteGlobalId] )
+					? $siteLinkDiff[$siteGlobalId]['name']
+					: $siteLinkDiff[$siteGlobalId];
 
-			if ( $siteLinkDiffOp === null ) {
-				// do nothing
-			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
-				$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
-			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpRemove ) {
-				$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpChange ) {
-				$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
-				$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-			} else {
-				wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp )
-					. " (" . $siteLinkDiffOp->getType() . ")" );
+				if ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
+					$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
+				} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpRemove ) {
+					$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+				} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpChange ) {
+					$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
+					$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+				} else {
+					wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp ) . ")" );
+				}
 			}
 		}
 
@@ -591,7 +596,7 @@ class ChangeHandler {
 		$titlesToUpdate = array();
 
 		foreach ( $pagesToUpdate as $page ) {
-			$title = \Title::newFromText( $page );
+			$title = Title::newFromText( $page );
 
 			if ( !$title->exists() && $this->checkPageExistence ) {
 				continue;
@@ -617,7 +622,7 @@ class ChangeHandler {
 	 *
 	 * @param Change   $change         the change to apply to the pages
 	 * @param int      $actions        a bit field of actions to take, as returned by getActions()
-	 * @param \Title[] $titlesToUpdate the pages to update
+	 * @param Title[] $titlesToUpdate the pages to update
 	 */
 	public function updatePages( Change $change, $actions, array $titlesToUpdate ) {
 		wfProfileIn( __METHOD__ );
@@ -634,15 +639,16 @@ class ChangeHandler {
 			$this->updater->scheduleRefreshLinks( $titlesToUpdate );
 		}
 
-		/* @var \Title $title */
+		/* @var Title $title */
 		foreach ( $titlesToUpdate as $title ) {
 			if ( $this->injectRC && ( $actions & self::RC_ENTRY_ACTION ) > 0 ) {
-				$rcAttribs = $this->getRCAttributes( $change, $title );
+				$rcAttribs = $this->getRCAttributes( $change );
 
 				if ( $rcAttribs !== false ) {
 					$this->updater->injectRCRecord( $title, $rcAttribs );
 				} else {
-					trigger_error( "change #" . self::getChangeIdForLog( $change ) . " did not provide RC info", E_USER_WARNING );
+					trigger_error( "change #" . self::getChangeIdForLog( $change )
+						. " did not provide RC info", E_USER_WARNING );
 				}
 			}
 
@@ -678,13 +684,12 @@ class ChangeHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityChange $change The Change that caused the update
-	 * @param \Title                 $title  The Title of the page to update
+	 * @param Wikibase\EntityChange $change The Change that caused the update
 	 *
 	 * @return array|boolean an array of RC attributes,
 	 *         or false if the change does not provide edit meta data
 	 */
-	protected function getRCAttributes( EntityChange $change, \Title $title ) {
+	protected function getRCAttributes( EntityChange $change ) {
 		wfProfileIn( __METHOD__ );
 
 		$rcinfo = $change->getMetadata();
@@ -694,16 +699,18 @@ class ChangeHandler {
 			return false;
 		}
 
-		$rcinfo['comment'] = $this->getEditComment( $change, $title );
-
 		$fields = $change->getFields(); //@todo: add getFields() to the interface, or provide getters!
 		$fields['entity_type'] = $change->getEntityType();
 
-		if ( isset( $fields['info']['changes'] ) ) {
-			$rcinfo['composite-comment'][] = array();
+		if ( $change instanceof ItemChange ) {
+			$rcinfo['comment'] = $this->getEditComment( $change );
 
-			foreach ( $fields['info']['changes'] as $part ) {
-				$rcinfo['composite-comment'][] = $this->getEditComment( $part, $title );
+			if ( isset( $fields['info']['changes'] ) ) {
+				$rcinfo['composite-comment'][] = array();
+
+				foreach ( $fields['info']['changes'] as $part ) {
+					$rcinfo['composite-comment'][] = $this->getEditComment( $part );
+				}
 			}
 		}
 
@@ -769,137 +776,19 @@ class ChangeHandler {
 	 * @since 0.4
 	 *
 	 * @param Change $change the change to get a comment for
-	 * @param \Title $title the target page for which to generate a comment
 	 *
-	 * @return array|null|string
+	 * @return array|string
 	 */
-	public function getEditComment( Change $change, \Title $title ) {
-		wfProfileIn( __METHOD__ );
+	public function getEditComment( Change $change ) {
+		$commentSerializer = new SiteLinkCommentSerializer(
+			$this->site->getGlobalId()
+		);
 
-		if ( $change instanceof EntityChange ) {
-			$siteLinkDiff = ( $change instanceof ItemChange ) ? $change->getSiteLinkDiff() : null;
+		$siteLinkDiff = $change->getSiteLinkDiff();
+		$action = $change->getAction();
+		$comment = $change->getComment();
 
-			if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
-				$comment = self::getSiteLinkComment( $change->getAction(), $siteLinkDiff, $title ) ;
-			} else {
-				$comment = $change->getComment();
-			}
-		} else {
-			$comment = null; //TODO: some nice default comment?
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $comment;
+		return $commentSerializer->getEditComment( $siteLinkDiff, $action, $comment );
 	}
 
-	/**
-	 * Returns an array structure suitable for building an edit summary for the respective
-	 * change to site links.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string      $action Change action
-	 * @param \Diff\Diff $siteLinkDiff The change's site link diff
-	 * @param \Title $title the target page for which to generate a comment
-	 *
-	 * @return array|null
-	 */
-	protected function getSiteLinkComment( $action, \Diff\Diff $siteLinkDiff, \Title $title ) {
-		$params = null;
-
-		if ( $siteLinkDiff->isEmpty() ) {
-			return null;
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		//TODO: Implement comments specific to the affected page.
-		//       Different pages may be affected in different ways by the same change.
-		//       Also, merged changes may affect the same page in multiple ways.
-
-		$params = array();
-		$siteGlobalId = $this->site->getGlobalId();
-
-		// change involved site link to client wiki
-		if ( array_key_exists( $siteGlobalId, $siteLinkDiff ) ) {
-
-			$diffOp = $siteLinkDiff[$siteGlobalId];
-
-			if ( $action === 'remove' ) {
-				$params['message'] = 'wikibase-comment-remove';
-			} else if ( $action === 'restore' ) {
-				$params['message'] = 'wikibase-comment-restore';
-			} else if ( $diffOp instanceof \Diff\DiffOpAdd ) {
-				$params['message'] = 'wikibase-comment-linked';
-			} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
-				$params['message'] = 'wikibase-comment-unlink';
-			} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
-				$params['message'] = 'wikibase-comment-sitelink-change';
-
-				// FIXME: this code appears to be doing something incorrect as "best effort"
-				// rather than allowing for proper error handling
-
-				$params['sitelink'] = array(
-					'oldlink' => array(
-						'site' => $siteGlobalId,
-						'page' => $diffOp->getOldValue()
-					),
-					'newlink' => array(
-						'site' => $siteGlobalId,
-						'page' => $diffOp->getNewValue()
-					)
-				);
-			}
-		} else {
-			$messagePrefix = 'wikibase-comment-sitelink-';
-			/* Messages used:
-				wikibase-comment-sitelink-add wikibase-comment-sitelink-change wikibase-comment-sitelink-remove
-			*/
-			$params['message'] = $messagePrefix . 'change';
-
-			foreach( $siteLinkDiff as $siteKey => $diffOp ) {
-				$site = $this->sites->getSite( $siteKey );
-
-				if( !$site ) {
-					trigger_error( "Could not get site with globalId $siteKey.", E_USER_WARNING );
-					continue;
-				}
-
-				if ( $diffOp instanceof \Diff\DiffOpAdd ) {
-					$params['message'] = $messagePrefix . 'add';
-					$params['sitelink'] = array(
-						'newlink' =>  array(
-							'site' => $siteKey,
-							'page' => $diffOp->getNewValue()
-						)
-					);
-				} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
-					$params['message'] = $messagePrefix . 'remove';
-					$params['sitelink'] = array(
-						'oldlink' => array(
-							'site' => $siteKey,
-							'page' => $diffOp->getOldValue()
-						)
-					);
-				} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
-					$params['sitelink'] = array(
-						'oldlink' => array(
-							'site' => $siteKey,
-							'page' => $diffOp->getOldValue()
-						),
-						'newlink' => array(
-							'site' => $siteKey,
-							'page' => $diffOp->getNewValue()
-						)
-					);
-				}
-				// @todo: because of edit conflict bug in repo
-				// sometimes we get multiple stuff in diffOps
-				break;
-			}
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $params;
-	}
 }
