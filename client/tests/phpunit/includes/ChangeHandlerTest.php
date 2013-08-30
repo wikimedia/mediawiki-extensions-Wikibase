@@ -28,6 +28,7 @@ use Wikibase\Property;
  * @group WikibaseClient
  * @group WikibaseChange
  * @group ChangeHandlerTest
+ * @group XXX
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -454,7 +455,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			array(),
 			array(
 				'label' => array( 'en' => 'Test' ),
-				'links' => array( 'enwiki' => 'Test' ),
+				'links' => array( 'enwiki' => 'Test' ), // old style sitelink representation
 			)
 		) );
 
@@ -491,7 +492,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			array(),
 			array(
 				'label' => array( 'en' => 'Test', 'de' => 'Test' ),
-				'links' => array( 'enwiki' => 'Test' ),
+				'links' => array( 'enwiki' => 'Test' ), // old style sitelink representation
 			)
 		) );
 
@@ -506,7 +507,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		), self::makeDiff( Item::ENTITY_TYPE,
 			array(),
 			array(
-				'links' => array( 'dewiki' => 'Testen' ),
+				'links' => array( 'dewiki' => array( 'name' => 'Testen', 'badges' => array() ) ),
 			)
 		) );
 
@@ -528,7 +529,10 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			array(),
 			array(
 				'label' => array( 'en' => 'Test', 'de' => 'Test' ),
-				'links' => array( 'enwiki' => 'Test', 'dewiki' => 'Test' ),
+				'links' => array(
+					'enwiki' => array( 'name' => 'Test' ), // incomplete new style sitelink representation
+					'dewiki' => array( 'name' => 'Test' ), // incomplete new style sitelink representation
+				),
 			)
 		) );
 
@@ -543,7 +547,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		), self::makeDiff( Item::ENTITY_TYPE,
 			array(),
 			array(
-				'label' => array( 'fr' => 'Test' ),
+				'label' => array( 'fr' => array( 'name' => 'Test', 'badges' => array() ) ),
 			)
 		) );
 
@@ -557,10 +561,27 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'user_id' => $userId,
 		), self::makeDiff( Item::ENTITY_TYPE,
 			array(
-				'links' => array( 'enwiki' => 'Test' ),
+				'links' => array( 'enwiki' => array( 'name' => 'Test', 'badges' => array( 'Q555' ) ) ),
 			),
 			array(
-				'links' => array( 'enwiki' => 'Spam' ),
+				'links' => array( 'enwiki' => array( 'name' => 'Spam', 'badges' => array( 'Q12345' ) ) ),
+			)
+		) );
+
+		// change only badges in link to local wiki
+		$updateLinkBadges = self::makeChange( array(
+			'id' => $offset + 14,
+			'type' => 'wikibase-item~update',
+			'time' => '20130102030405',
+			'object_id' => $idFormatter->format( $entity->getId() ),
+			'revision_id' => $offset + 18,
+			'user_id' => $userId,
+		), self::makeDiff( Item::ENTITY_TYPE,
+			array(
+				'links' => array( 'enwiki' => array( 'name' => 'Test', 'badges' => array( 'Q555' ) ) ),
+			),
+			array(
+				'links' => array( 'enwiki' => array( 'name' => 'Test', 'badges' => array( 'Q12345' ) ) ),
 			)
 		) );
 
@@ -586,6 +607,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'create+update' => $create_update, // merged create and update
 			'update/other' => $updateX,        // update by another user
 			'update-link/local' => $updateLink,  // change the link to this client wiki
+			'update-link/local/basges' => $updateLinkBadges,  // change the link to this client wiki
 			'update-link/other' => $updateXLink, // change the link to some other client wiki
 			'create+update+update-link/other' => $create_update_link, // merged create and update and update link to other wiki
 			'delete' => $delete, // delete item
@@ -1088,13 +1110,18 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
 				array( 'Emmy', 'Emmy2' )
 			),
-
 			array( // #16
+				$changes['change-enwiki-sitelink-badges'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' ) // do we really want/need this to be updated?
+			),
+
+			array( // #17
 				$changes['remove-dewiki-sitelink'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
 				array( 'Emmy2' )
 			),
-			array( // #17
+			array( // #18
 				$changes['remove-enwiki-sitelink'],
 				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
 				array( 'Emmy2' )

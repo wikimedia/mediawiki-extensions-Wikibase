@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use \Wikibase\Item;
 use \Wikibase\Property;
@@ -129,6 +130,11 @@ final class TestChanges {
 			$link = new SimpleSiteLink( 'enwiki', "Emmy2" );
 			$new->addSimpleSiteLink( $link, 'set' );
 			$changes['change-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$link = new SimpleSiteLink( 'enwiki', "Emmy2", array( new ItemId( 'Q17' ) ) );
+			$new->addSimpleSiteLink( $link, 'set' );
+			$changes['change-enwiki-sitelink-badges'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$new->removeSiteLink( 'dewiki', false );
