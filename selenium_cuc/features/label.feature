@@ -8,7 +8,7 @@
 Feature: Edit label
 
   Background:
-    Given I am on an entity page
+    Given I am on an item page
 
   Scenario: Label UI has all required elements
     Then Original label should be displayed
@@ -39,7 +39,7 @@ Feature: Edit label
   Scenario: Label cancel with ESCAPE
     When I click the label edit button
       And I enter MODIFIED LABEL as label
-      And I press the ESC key
+      And I press the ESC key in the label input field
     Then Original label should be displayed
       And Label edit button should be there
       And Label cancel button should not be there
@@ -57,7 +57,7 @@ Feature: Edit label
   Scenario: Label save with RETURN
     When I click the label edit button
       And I enter MODIFIED LABEL as label
-      And I press the RETURN key
+      And I press the RETURN key in the label input field
     Then MODIFIED LABEL should be displayed as label
     When I reload the page
     Then MODIFIED LABEL should be displayed as label
@@ -73,7 +73,7 @@ Feature: Edit label
   Scenario: Label with "0" as value
     When I click the label edit button
       And I enter 0 as label
-      And I click the label save button
+      And I click the label save buttn
     Then 0 should be displayed as label
 
   @save_label
