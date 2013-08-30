@@ -20,11 +20,6 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 class EntityIdFormatter extends ValueFormatterBase {
 
 	/**
-	 * @deprecated
-	 */
-	const OPT_PREFIX_MAP = 'prefixmap';
-
-	/**
 	 * Format an EntityId data value
 	 *
 	 * @since 0.4

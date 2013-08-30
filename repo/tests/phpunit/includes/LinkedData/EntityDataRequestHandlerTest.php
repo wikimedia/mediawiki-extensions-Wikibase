@@ -104,16 +104,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$entityLookup = new MockRepository();
 		$dataTypeFactory = new DataTypeFactory( EntityDataSerializationServiceTest::$dataTypes );
 
-		$prefixes = array(
-			Item::ENTITY_TYPE => 'q',
-			Property::ENTITY_TYPE => 'p',
-		);
-		$idFormatter = new EntityIdFormatter( new FormatterOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => $prefixes
-		) ) );
-		$idParser = new EntityIdParser( new ParserOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => array_flip( $prefixes )
-		) ) );
+		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
+		$idParser = new EntityIdParser( new ParserOptions() );
 
 		$contentFactory = new EntityContentFactory(
 			$idFormatter,

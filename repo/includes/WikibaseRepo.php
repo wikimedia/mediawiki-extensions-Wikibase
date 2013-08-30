@@ -168,17 +168,7 @@ class WikibaseRepo {
 	 */
 	public function getIdFormatter() {
 		if ( $this->idFormatter === null ) {
-			$prefixMap = array();
-
-			foreach ( $this->settings->getSetting( 'entityPrefixes' ) as $prefix => $entityType ) {
-				$prefixMap[$entityType] = $prefix;
-			}
-
-			$options = new FormatterOptions( array(
-				EntityIdFormatter::OPT_PREFIX_MAP => $prefixMap
-			) );
-
-			$this->idFormatter = new EntityIdFormatter( $options );
+			$this->idFormatter = new EntityIdFormatter( new FormatterOptions() );
 		}
 
 		return $this->idFormatter;
@@ -273,17 +263,7 @@ class WikibaseRepo {
 	 * @return EntityIdFormatter
 	 */
 	public function getEntityIdFormatter() {
-		$prefixMap = array();
-
-		foreach ( $this->settings->getSetting( 'entityPrefixes' ) as $prefix => $entityType ) {
-			$prefixMap[$entityType] = $prefix;
-		}
-
-		$options = new FormatterOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => $prefixMap
-		) );
-
-		return new EntityIdFormatter( $options );
+		return $this->getIdFormatter();
 	}
 
 	/**

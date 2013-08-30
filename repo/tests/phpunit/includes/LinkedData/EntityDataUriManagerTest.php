@@ -62,18 +62,9 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$prefixes = array(
-			Item::ENTITY_TYPE => 'q',
-			Property::ENTITY_TYPE => 'p',
-		);
+		$this->idFormatter = new EntityIdFormatter( new FormatterOptions() );
 
-		$this->idFormatter = new EntityIdFormatter( new FormatterOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => $prefixes
-		) ) );
-
-		$this->idParser = new EntityIdParser( new ParserOptions( array(
-			EntityIdFormatter::OPT_PREFIX_MAP => array_flip( $prefixes )
-		) ) );
+		$this->idParser = new EntityIdParser( new ParserOptions() );
 
 }
 
