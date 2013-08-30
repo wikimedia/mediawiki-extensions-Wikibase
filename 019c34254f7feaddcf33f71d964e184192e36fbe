@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95d3502_e480584f",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-08-30T13:50:01Z",
+      "side": 1,
+      "message": "isset( $siteLinkDiff[ $siteGlobalId ] ) needs to be\nisset( $siteLinkDiff[ $siteGlobalId ][\u0027name\u0027] )\n\nand the whole thing is to be checked against legacy format",
+      "revId": "019c34254f7feaddcf33f71d964e184192e36fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_247b307a",
+        "filename": "client/includes/SiteLinkCommentSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-08-30T13:50:01Z",
+      "side": 1,
+      "message": "the diffOp can be still in legacy format (when there are legacy changes in queue), only do that when $siteLinkDiff[$siteGlobalId] is a Diff object, otherwise leave it the old way",
+      "revId": "019c34254f7feaddcf33f71d964e184192e36fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_c48c3483",
+        "filename": "client/includes/SiteLinkCommentSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-08-30T13:50:01Z",
+      "side": 1,
+      "message": "as above, this might be in legacy format",
+      "revId": "019c34254f7feaddcf33f71d964e184192e36fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
