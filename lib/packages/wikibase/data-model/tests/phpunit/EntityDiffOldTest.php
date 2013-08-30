@@ -1,10 +1,11 @@
 <?php
+
 namespace Wikibase\Test;
+
 use Wikibase\Entity;
-use Wikibase\EntityDiff;
 
 /**
- * Tests for the Wikibase\EntityDiff deriving classes.
+ * @covers Wikibase\EntityDiff
  *
  * @file
  * @since 0.1

@@ -8,7 +8,6 @@ use Diff\DiffOpChange;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
-use Wikibase\EntityDiff;
 use Wikibase\Item;
 use Wikibase\ItemDiff;
 
