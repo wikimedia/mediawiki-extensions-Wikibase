@@ -199,32 +199,6 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 	 * @param DataValue $value
 	 * @param array $arguments
 	 */
-	public function testNewFromArray( DataValue $value, array $arguments ) {
-		$class = get_class( $value );
-		$arrayValue = $value->getArrayValue();
-
-		$newInstance = $class::newFromArray( $arrayValue );
-
-		$this->assertTrue( $value->equals( $newInstance ) );
-
-		$dvFactory = new \DataValues\DataValueFactory();
-
-		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
-			$dvFactory->registerDataValue( $type, $class );
-		}
-
-		if ( $dvFactory->hasDataValue( $value->getType() ) ) {
-			$newInstance = $dvFactory->newDataValue( $value->getType(), $arrayValue );
-
-			$this->assertTrue( $value->equals( $newInstance ) );
-		}
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param DataValue $value
-	 * @param array $arguments
-	 */
 	public function testToArray( DataValue $value, array $arguments ) {
 		$array = $value->toArray();
 
@@ -235,21 +209,6 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $value->getType(), $array['type'] );
 		$this->assertEquals( $value->getArrayValue(), $array['value'] );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param DataValue $value
-	 * @param array $arguments
-	 */
-	public function testNewFromArrayFactory( DataValue $value, array $arguments ) {
-		$dvFactory = new \DataValues\DataValueFactory();
-
-		$class = $this->getClass();
-
-		$dvFactory->registerDataValue( $class::getType(), $class );
-
-		$this->assertTrue( $value->equals( $dvFactory->newFromArray( $value->toArray() ) ) );
 	}
 
 }

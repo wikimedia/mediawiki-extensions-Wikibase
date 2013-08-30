@@ -126,20 +126,4 @@ class UnDeserializableValueTest extends DataValueTest {
 		$this->assertFalse( method_exists( $this->getClass(), 'newFromArray' ) );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 * @param DataValue $value
-	 * @param array $arguments
-	 */
-	public function testNewFromArrayFactory( DataValue $value, array $arguments ) {
-		$dvFactory = new \DataValues\DataValueFactory();
-		$dvFactory->registerDataValue( StringValue::getType(), '\DataValues\StringValue' );
-
-		$data = $value->toArray();
-		$newValue = $dvFactory->tryNewFromArray( $data );
-
-		$this->assertEquals( $value->getType(), $newValue->getType() );
-		$this->assertEquals( $value->getValue(), $newValue->getValue() );
-		$this->assertEquals( $value->getArrayValue(), $newValue->getArrayValue() );
-	}
 }

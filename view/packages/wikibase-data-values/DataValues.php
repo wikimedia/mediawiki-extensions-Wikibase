@@ -58,7 +58,12 @@ spl_autoload_register( function ( $className ) {
 
 	if ( $namespaceSegments[0] === 'DataValues' ) {
 		if ( count( $namespaceSegments ) === 1 || $namespaceSegments[1] !== 'Tests' ) {
-			require_once __DIR__ . '/src/' . substr( $fileName, 11 );
+			$fileName = __DIR__ . '/src/' . substr( $fileName, 11 );
+
+			// FIXME: this causes reads for lookups of files in the DataValues NS defined elsewhere
+			if ( is_readable( $fileName ) ) {
+				require_once $fileName;
+			}
 		}
 	}
 } );
