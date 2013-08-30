@@ -102,7 +102,6 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityId $id
 	 */
 	public function testEqualsSimple( EntityId $id ) {
 		$this->assertTrue( $id->equals( $id ) );
@@ -112,7 +111,6 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityId $id
 	 */
 	public function testSerializationRoundtrip( EntityId $id ) {
 		$this->assertEquals( $id, unserialize( serialize( $id ) ) );
@@ -147,6 +145,30 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 			serialize( $id ),
 			$v05serialization
 		);
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testReturnTypeOfToString( EntityId $id ) {
+		$this->assertInternalType( 'string', $id->__toString() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetPrefixedId( EntityId $id ) {
+		$this->assertEquals( $id->getSerialization(), $id->getPrefixedId() );
+	}
+
+	public function testCannotConstructWithNonStringEntityType() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new EntityId( null, 42 );
+	}
+
+	public function testCannotConstructWithInvalidSerialization() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new EntityId( 'item', null );
 	}
 
 }
