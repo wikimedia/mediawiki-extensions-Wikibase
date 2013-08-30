@@ -1,8 +1,0 @@
-These is the readme file for the DataValues library.
-
-Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:DataValues
-Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/DataValues.git;a=blob;f=DataValues/README
-
-== About ==
-
-A collection of objects representing various kinds of values.
