@@ -82,6 +82,8 @@ spl_autoload_register( function ( $className ) {
 // For more details, see Aliases.php.
 class_alias( 'Wikibase\Item', 'Wikibase\ItemObject' );
 class_alias( 'Wikibase\ReferenceObject', 'Wikibase\Reference' );
+class_alias( 'Wikibase\ClaimObject', 'Wikibase\Claim' );
+class_alias( 'Wikibase\StatementObject', 'Wikibase\Statement' );
 class_alias( 'Wikibase\DataModel\Entity\EntityId', 'Wikibase\EntityId' );
 
 if ( defined( 'MEDIAWIKI' ) ) {

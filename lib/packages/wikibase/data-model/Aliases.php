@@ -23,4 +23,14 @@ namespace Wikibase {
 	 */
 	class ReferenceObject extends Reference {}
 
+	/**
+	 * @deprecated since 0.4, use the base class instead.
+	 */
+	class StatementObject extends Statement {}
+
+	/**
+	 * @deprecated since 0.4, use the base class instead.
+	 */
+	class ClaimObject extends Claim {}
+
 }

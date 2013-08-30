@@ -264,8 +264,3 @@ class Claim implements \Hashable, \Serializable {
 		return $snaks;
 	}
 }
-
-/**
- * @deprecated since 0.4. Use Claim instead.
- */
-class ClaimObject extends Claim {}

@@ -192,8 +192,3 @@ class Statement extends Claim {
 		return $snaks;
 	}
 }
-
-/**
- * @deprecated
- */
-class StatementObject extends Statement {}
