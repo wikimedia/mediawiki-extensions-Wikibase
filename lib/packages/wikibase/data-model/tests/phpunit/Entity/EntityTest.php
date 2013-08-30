@@ -468,6 +468,9 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @covers Wikibase\Entity::equals
+	 * @covers Wikibase\DataModel\Internal\ObjectComparer::dataEquals
+	 *
 	 * @dataProvider provideEquals
 	 */
 	public function testEquals( array $a, array $b, $equals ) {

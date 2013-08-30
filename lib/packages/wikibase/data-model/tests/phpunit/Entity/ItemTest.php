@@ -26,6 +26,7 @@ use Wikibase\Statement;
 
 /**
  * @covers Wikibase\Item
+ * @covers Wikibase\Entity
  *
  * Some tests for this class are located in ItemMultilangTextsTest,
  * ItemNewEmptyTest and ItemNewFromArrayTest.

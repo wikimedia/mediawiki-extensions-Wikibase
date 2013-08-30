@@ -8,6 +8,7 @@ use Wikibase\Property;
 
 /**
  * @covers Wikibase\Property
+ * @covers Wikibase\Entity
  *
  * @file
  * @since 0.1
