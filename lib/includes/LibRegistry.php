@@ -108,10 +108,7 @@ final class LibRegistry {
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
-		$options = new ParserOptions( array(
-			EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
-		) );
-
+		$options = new ParserOptions();
 		return new EntityIdParser( $options );
 	}
 

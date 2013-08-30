@@ -263,10 +263,7 @@ class WikibaseRepo {
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
-		$options = new ParserOptions( array(
-			EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
-		) );
-
+		$options = new ParserOptions();
 		return new EntityIdParser( $options );
 	}
 
@@ -309,9 +306,7 @@ class WikibaseRepo {
 	 */
 	public function getClaimGuidValidator() {
 		if ( $this->claimGuidValidator === null ) {
-			$this->claimGuidValidator = new ClaimGuidValidator(
-				$this->settings->getSetting( 'entityPrefixes' )
-			);
+			$this->claimGuidValidator = new ClaimGuidValidator();
 		}
 
 		return $this->claimGuidValidator;
