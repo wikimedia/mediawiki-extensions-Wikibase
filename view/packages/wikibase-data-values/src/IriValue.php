@@ -247,12 +247,7 @@ class IriValue extends DataValueObject {
 	 * @return mixed
 	 */
 	public function getArrayValue() {
-		return array(
-			'scheme' => $this->scheme,
-			'fragment' => $this->fragment,
-			'query' => $this->query,
-			'hierarchicalpart' => $this->hierarchicalPart,
-		);
+		return $this->getValue();
 	}
 
 	/**
@@ -267,9 +262,8 @@ class IriValue extends DataValueObject {
 	 * @throws IllegalValueException
 	 */
 	public static function newFromArray( $data ) {
-		self::requireArrayFields( $data, array( 'scheme', 'hierarchicalpart', 'query', 'fragment' ) );
-
-		return new static( $data['scheme'], $data['hierarchicalpart'], $data['query'], $data['fragment'] );
+		list( $scheme, $hierarchicalPart, $query, $fragment ) = self::getIriParts( $data );
+		return new self( $scheme, $hierarchicalPart, $query, $fragment );
 	}
 
 }
