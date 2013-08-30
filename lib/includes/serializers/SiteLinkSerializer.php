@@ -33,6 +33,7 @@ use Wikibase\DataModel\SimpleSiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Michał Łazowik
  */
 class SiteLinkSerializer extends SerializerObject {
 
@@ -84,6 +85,7 @@ class SiteLinkSerializer extends SerializerObject {
 		$serialization = array();
 
 		$includeUrls = in_array( 'sitelinks/urls', $this->options->getProps() );
+		$includeBadges = in_array( 'sitelinks/badges' , $this->options->getProps() );
 
 		foreach ( $this->sortSiteLinks( $siteLinks ) as $link ) {
 			$response = array(
@@ -97,6 +99,13 @@ class SiteLinkSerializer extends SerializerObject {
 				if ( $site !== null ) {
 					$siteLink = new SiteLink( $site, $link->getPageName() );
 					$response['url'] = $siteLink->getUrl();
+				}
+			}
+
+			if ( $includeBadges ) {
+				$response['badges'] = array();
+				foreach ($link->getBadges() as $badge) {
+					$response['badges'][] = $badge->getSerialization();
 				}
 			}
 
