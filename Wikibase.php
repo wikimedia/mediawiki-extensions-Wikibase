@@ -34,14 +34,6 @@ switch( $jenkins_job_name) {
 	case 'mwext-Wikibase-client-tests':
 		require_once __DIR__ . '/client/WikibaseClient.php';
 		require_once __DIR__ . '/client/ExampleSettings.php';
-
-		$_SERVER['argv'] = array_merge(
-			$_SERVER['argv'],
-			array(
-				'--exclude-group', 'ChangeHandlerTest'
-			)
-		);
-
 		break;
 
 	case 'mwext-Wikibase-testextensions-master':
@@ -50,14 +42,6 @@ switch( $jenkins_job_name) {
 
 		require_once __DIR__ . '/repo/ExampleSettings.php';
 		require_once __DIR__ . '/client/ExampleSettings.php';
-
-		$_SERVER['argv'] = array_merge(
-			$_SERVER['argv'],
-			array(
-				'--exclude-group', 'ChangeHandlerTest'
-			)
-		);
-
 		break;
 
 	default:
