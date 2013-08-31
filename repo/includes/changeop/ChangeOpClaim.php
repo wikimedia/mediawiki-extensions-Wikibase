@@ -65,14 +65,20 @@ class ChangeOpClaim extends ChangeOp {
 	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		$guid = $this->claim->getGuid();
 		if ( $this->action === "add" ) {
-			$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
-			$this->claim->setGuid( $guidGenerator->newGuid() );
+			if( is_null( $guid )  ){
+				$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
+				$this->claim->setGuid( $guidGenerator->newGuid() );
+			}
 			$entity->addClaim( $this->claim );
 			$this->updateSummary( $summary, 'add' );
 		} elseif ( $this->action === "remove" ) {
 			$claims = new Claims ( $entity->getClaims() );
-			$claims->removeClaim( $this->claim );
+			if( is_null( $guid ) ){
+				throw new ChangeOpException( 'Cannot remove a claim with no GUID' );
+			}
+			$claims->removeClaimWithGuid( $guid );
 			$entity->setClaims( $claims );
 			$this->updateSummary( $summary, 'remove' );
 		} else {

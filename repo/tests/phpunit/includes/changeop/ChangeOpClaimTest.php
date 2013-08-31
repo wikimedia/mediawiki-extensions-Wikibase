@@ -5,10 +5,12 @@ namespace Wikibase\Test;
 use Wikibase\ChangeOpClaim;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
-use Wikibase\EntityId;
+use Wikibase\Item;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
+use Wikibase\ItemModificationUpdate;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\SnakObject;
@@ -50,37 +52,39 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$changeOp = new ChangeOpClaim( $claim, $action );
 	}
 
-	public function changeOpClaimProvider() {
-		$noValueClaim = new Claim( new PropertyNoValueSnak( 43 ) );
+	public function provideTestApply() {
+		$itemEmpty = Item::newEmpty();
+		$itemEmpty->setId( ItemId::newFromNumber( 888 ) );
+		$item777 = self::provideNewItemWithClaim( 777, new PropertyNoValueSnak( 45 ) );
+		$item666 = self::provideNewItemWithClaim( 666, new PropertySomeValueSnak( 44 ) );
 
-		$differentEntity = ItemContent::newEmpty()->getEntity();
-		$differentEntity->setId( new EntityId( 'item', 777 ) );
-		$oldNoValueClaim = $differentEntity->newClaim( new PropertyNoValueSnak( 43 ) );
+		$claims[0] = new Claim( new PropertyNoValueSnak( 43 ) );//0
+		$claims = array_merge(
+			$claims ,//0
+			$item777->getClaims(),//1
+			$item666->getClaims()//2
+		);
 
-		$entity = ItemContent::newEmpty()->getEntity();
-		$entity->setId( new EntityId( 'item', 555 ) );
-		$someValueClaim = new Claim( new PropertySomeValueSnak( 44 ) );
-		$newNoValueClaim = $entity->newClaim( new PropertyNoValueSnak( 43 ) );
 		$args = array();
-
-		$args[] = array ( $entity, clone $noValueClaim , 'add' , array( clone $noValueClaim ) );
-		$args[] = array ( $entity, clone $someValueClaim , 'add' , array( clone $noValueClaim, clone $someValueClaim ) );
-		$args[] = array ( $entity, clone $noValueClaim , 'remove' , array( clone $someValueClaim ) );
-		$args[] = array ( $entity, clone $someValueClaim , 'remove' , array( ) );
-		$args[] = array ( $entity, clone $oldNoValueClaim , 'add' , array( clone $newNoValueClaim ) );
-		$args[] = array ( $entity, clone $newNoValueClaim , 'remove' , array( ) );
+		//test adding claims
+		$args[] = array ( $itemEmpty, clone $claims[0] , 'add' , array( clone $claims[0] ) );
+		$args[] = array ( $itemEmpty, clone $claims[1] , 'add' , array( clone $claims[0], clone $claims[1] ) );
+		//test removing and re adding claims
+		$args[] = array ( $item777, clone $claims[1] , 'remove' , array( ) );
+		$args[] = array ( $item777, clone $claims[1] , 'add' , array( clone $claims[1] ) );
+		$args[] = array ( $item666, clone $claims[2] , 'remove' , array( ) );
+		$args[] = array ( $item666, clone $claims[2] , 'add' , array( clone $claims[2] ) );
 
 		return $args;
 	}
 
 	/**
-	 * @dataProvider changeOpClaimProvider
+	 * @dataProvider provideTestApply
 	 *
 	 * @param Entity $entity
-	 * @param $claim
-	 * @param $action
+	 * @param Claim $claim
+	 * @param string $action
 	 * @param Claim[] $expectedClaims
-	 * @internal param \Wikibase\ChangeOpClaim $changeOpClaim
 	 */
 	public function testApply( $entity, $claim, $action, $expectedClaims ) {
 		$changeOpClaim = new ChangeOpClaim( $claim, $action );
@@ -100,6 +104,23 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$entity = $item->getEntity();
 		$changeOpClaim = new ChangeOpClaim( new Claim( new PropertyNoValueSnak( 43 ) ) , 'invalidAction'  );
 		$changeOpClaim->apply( $entity );
+	}
+
+
+	/**
+	 * @param integer $itemId
+	 * @param $snak
+	 * @return Item
+	 */
+	protected function provideNewItemWithClaim( $itemId, $snak ) {
+		$entity = Item::newEmpty();
+		$entity->setId( ItemId::newFromNumber( $itemId ) );
+		$claim = $entity->newClaim( $snak );
+		$claims = new Claims();
+		$claims->addClaim( $claim );
+		$entity->setClaims( $claims );
+
+		return $entity;
 	}
 
 }
