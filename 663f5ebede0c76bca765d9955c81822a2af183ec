@@ -33,6 +33,24 @@
       "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_27532f18",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-08-31T08:37:54Z",
+      "side": 1,
+      "message": "array_unique( array_merge( Utils::getLanguageCodes(), $wgDummyLanguageCode ) ) doesn\u0027t work correctly, because it would include qqq and qqx into accepted values.\n\nHowever I guess using Utils::getLanguageCodes( true ) maybe a solution here but generally bool switch doesn\u0027t look like something nice.",
+      "parentUuid": "c95d3502_a94e42bf",
+      "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
