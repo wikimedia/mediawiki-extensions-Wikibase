@@ -22,15 +22,19 @@ class ClaimGuidValidator {
 	 * @since 0.4
 	 *
 	 * @param string $guid
-	 *
+	 * @param null $validPrefix optional validation for a specific prefix
 	 * @return boolean
 	 */
-	public function validate( $guid ) {
+	public function validate( $guid, $validPrefix = null ) {
 		if ( ! $this->validateFormat( $guid ) ) {
 			return false;
 		}
 
 		$guidParts = explode( '$', $guid );
+
+		if( is_string( $validPrefix ) && strtoupper( $guidParts[0] ) !== strtoupper(  $validPrefix ) ){
+			return false;
+		}
 
 		if ( ! $this->validateClaimGuidPrefix( $guidParts[0] ) || ! $this->validateGuid( $guidParts[1] ) ) {
 			return false;
@@ -104,5 +108,7 @@ class ClaimGuidValidator {
 
 		return true;
 	}
+
+
 
 }
