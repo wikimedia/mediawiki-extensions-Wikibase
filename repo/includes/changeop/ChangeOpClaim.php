@@ -32,14 +32,22 @@ class ChangeOpClaim extends ChangeOp {
 	protected $action;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var ClaimGuidGenerator
+	 */
+	protected $guidGenerator;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param Claim $claim
 	 * @param string $action should be add or remove
 	 *
-	 * @throws InvalidArgumentException
+	 * @param ClaimGuidGenerator $guidGenerator
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $claim, $action ) {
+	public function __construct( $claim, $action, ClaimGuidGenerator $guidGenerator ) {
 		if ( !$claim instanceof Claim ) {
 			throw new InvalidArgumentException( '$claim needs to be an instance of Claim' );
 		}
@@ -50,6 +58,7 @@ class ChangeOpClaim extends ChangeOp {
 
 		$this->claim = $claim;
 		$this->action = $action;
+		$this->guidGenerator = $guidGenerator;
 	}
 
 	/**
@@ -65,14 +74,20 @@ class ChangeOpClaim extends ChangeOp {
 	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		$guid = $this->claim->getGuid();
 		if ( $this->action === "add" ) {
-			$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
-			$this->claim->setGuid( $guidGenerator->newGuid() );
+			//todo also check the validity of the guid here
+			if( is_null( $guid ) ){
+				$this->claim->setGuid( $this->guidGenerator->newGuid() );
+			}
 			$entity->addClaim( $this->claim );
 			$this->updateSummary( $summary, 'add' );
 		} elseif ( $this->action === "remove" ) {
 			$claims = new Claims ( $entity->getClaims() );
-			$claims->removeClaim( $this->claim );
+			if( is_null( $guid ) ){
+				throw new ChangeOpException( 'Cannot remove a claim with no GUID' );
+			}
+			$claims->removeClaimWithGuid( $guid );
 			$entity->setClaims( $claims );
 			$this->updateSummary( $summary, 'remove' );
 		} else {
