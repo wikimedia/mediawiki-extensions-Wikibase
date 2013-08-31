@@ -86,6 +86,8 @@ class SerializerFactory {
 				return new ReferenceSerializer( $options );
 			case 'Wikibase\Claim':
 				return new ClaimSerializer( $options );
+			case 'Wikibase\Claims':
+				return new ClaimsSerializer( $options );
 		}
 
 		throw new OutOfBoundsException( '"' . $className . '" has no associated unserializer' );
