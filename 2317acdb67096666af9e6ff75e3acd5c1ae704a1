@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_277c0f80",
+        "filename": "lib/includes/serializers/MultilingualSerializer.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-08-31T09:12:53Z",
+      "side": 1,
+      "message": "\u0027source-language\u0027 is the language that was loaded, \u0027language\u0027 is the language that is returned, and \u0027for-language\u0027 is the language that was requested? - this is correct.",
+      "parentUuid": "c95d3502_c9ec5696",
+      "revId": "2317acdb67096666af9e6ff75e3acd5c1ae704a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_e9f11a6b",
         "filename": "lib/includes/serializers/MultilingualSerializer.php",
         "patchSetId": 26
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-29T13:18:02Z",
       "side": 1,
       "message": "Does that perform any transliteration?",
+      "revId": "2317acdb67096666af9e6ff75e3acd5c1ae704a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_477103a8",
+        "filename": "lib/includes/serializers/MultilingualSerializer.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-08-31T09:12:53Z",
+      "side": 1,
+      "message": "It does.",
+      "parentUuid": "c95d3502_e9f11a6b",
       "revId": "2317acdb67096666af9e6ff75e3acd5c1ae704a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
