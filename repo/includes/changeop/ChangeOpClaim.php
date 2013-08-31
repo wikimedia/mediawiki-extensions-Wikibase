@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * Class for claim change operation
@@ -32,14 +33,22 @@ class ChangeOpClaim extends ChangeOp {
 	protected $action;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var ClaimGuidGenerator
+	 */
+	protected $guidGenerator;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param Claim $claim
 	 * @param string $action should be add or remove
 	 *
-	 * @throws InvalidArgumentException
+	 * @param ClaimGuidGenerator $guidGenerator
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $claim, $action ) {
+	public function __construct( $claim, $action, ClaimGuidGenerator $guidGenerator ) {
 		if ( !$claim instanceof Claim ) {
 			throw new InvalidArgumentException( '$claim needs to be an instance of Claim' );
 		}
@@ -50,6 +59,7 @@ class ChangeOpClaim extends ChangeOp {
 
 		$this->claim = $claim;
 		$this->action = $action;
+		$this->guidGenerator = $guidGenerator;
 	}
 
 	/**
@@ -65,16 +75,31 @@ class ChangeOpClaim extends ChangeOp {
 	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+
 		if ( $this->action === "add" ) {
-			$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
-			$this->claim->setGuid( $guidGenerator->newGuid() );
+
+			$guidValidator = new ClaimGuidValidator();
+
+			if( $this->claim->getGuid() === null ){
+				$this->claim->setGuid( $this->guidGenerator->newGuid() );
+			}
+			if( $guidValidator->validate( $this->claim->getGuid() ) === false ){
+				throw new ChangeOpException( "Claim does not have a valid GUID" );
+			}
 			$entity->addClaim( $this->claim );
 			$this->updateSummary( $summary, 'add' );
+
 		} elseif ( $this->action === "remove" ) {
+
+			$guid = $this->claim->getGuid();
 			$claims = new Claims ( $entity->getClaims() );
-			$claims->removeClaim( $this->claim );
+			if( !$claims->hasClaimWithGuid( $guid ) ){
+				throw new ChangeOpException( 'Cannot remove a claim that does not exist on given entity' );
+			}
+			$claims->removeClaimWithGuid( $guid );
 			$entity->setClaims( $claims );
 			$this->updateSummary( $summary, 'remove' );
+
 		} else {
 			throw new ChangeOpException( "Unknown action for change op: $this->action" );
 		}
