@@ -29,7 +29,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimsSerializer extends SerializerObject {
+class ClaimsSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializer::getSerialized
@@ -50,6 +50,23 @@ class ClaimsSerializer extends SerializerObject {
 		$serializer = new ByPropertyListSerializer( 'claim', $claimSerializer, $this->options );
 
 		return $serializer->getSerialized( $claims );
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.5
+	 *
+	 * @param mixed $serialization
+	 *
+	 * @return Claims
+	 * @throws MWException
+	 */
+	public function newFromSerialization( array $serialization ) {
+		$claimSerializer = new ClaimSerializer( $this->options );
+		$unserializer = new ByPropertyListUnserializer( $claimSerializer );
+
+		return $unserializer->newFromSerialization( $serialization );
 	}
 
 }

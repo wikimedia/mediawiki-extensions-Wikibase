@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Serializers;
 use ApiResult, MWException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Serializer for Traversable objects that need to be grouped
@@ -67,14 +68,15 @@ class ByPropertyListUnserializer implements Unserializer {
 			if ( !is_array( $byPropId ) ) {
 				throw new MWException( "Element with key '$propertyId' should be an array, found " . gettype( $byPropId ) );
 			}
+			$parsedProperty = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $propertyId );
+			$parsedPropertyId = $parsedProperty->getPrefixedId();
 
 			foreach ( $byPropId as $serializedElement ) {
 				$element = $this->elementUnserializer->newFromSerialization( $serializedElement );
-				// FIXME: usage of deprecated method getPrefixedId
 				$elementPropertyId = $element->getPropertyId()->getPrefixedId();
 
-				if ( $elementPropertyId !== $propertyId ) {
-					throw new MWException( "Element with id '$elementPropertyId' found in list with id '$propertyId'" );
+				if ( !$element->getPropertyId()->equals( $parsedProperty ) ) {
+					throw new MWException( "Element with id '$elementPropertyId' found in list with id '$parsedPropertyId'" );
 				}
 
 				$elements[] = $element;
