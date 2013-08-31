@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c95d3502_c73353f4",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-08-31T08:34:44Z",
+      "side": 1,
+      "message": "mw.wikibase.label( ) takes label from mw.language.getContentLanguage(), but mw.language.getContentLanguage() always returns $wgContLang.",
+      "parentUuid": "c95d3502_09ce4e2e",
+      "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_29d312d6",
         "filename": "client/includes/WikibaseLibrary.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-29T12:56:39Z",
       "side": 1,
       "message": "Wait - getLanguageCodes returns an indexed array (a list), right? And you are adding a mapping from language code to a fallback chain to that? And the serializer understands that? \n\nI\u0027m somewhat surprised by that - if this is actually how this works, please add a comment or two.",
+      "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95d3502_e73057ea",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-08-31T08:34:44Z",
+      "side": 1,
+      "message": "MultilingualSerializationsOptions::setLanguages() works on items in the array one by one, and if is_numeric( key ), it sets key \u003d value, value \u003d new-chain-from-language( value, FALLBACK_SELF ).",
+      "parentUuid": "c95d3502_29d312d6",
       "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
