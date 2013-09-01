@@ -682,10 +682,12 @@ Parameters:
 * $1 - the count of violating languages
 * $2 - the violating languages
 * $3 - the violating string on a shortened form, but this is usually not very useful as the message is usually given in an edit window',
-	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a site link already used by another item. Parameters:
-* $1 is the url to the remote client page;
-* $2 is the title on the remote client site;
-* $3 is the item (e.g. Q60) on the repo with the conflicting site link.",
+	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a site link already used by another item.
+
+Parameters:
+* $1 - the URL to the remote client page
+* $2 - the title on the remote client site
+* $3 - the item (e.g. Q60) on the repo with the conflicting site link",
 	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
 * $1 is label text
 * $2 is the labels language code
@@ -989,9 +991,9 @@ See also:
 	'wikibase-api-not-an-item' => '!!DO NOT TRANSLATE!! The passed parameter is Not an item when an item is expected (the passed parameter may infact be a property)',
 	'wikibase-api-not-recognized-siteid' => '!!DO NOT TRANSLATE!! The supplied site identifier was not recognized',
 	'wikibase-api-not-recognized' => '!!DO NOT TRANSLATE!! Something was not recognized (general message)',
-	'wikibase-api-not-recognized-array' => '!!DO NOT TRANSLATE!! An array was expected, but not recognized. The user probably passed the api a malformed parameter',
-	'wikibase-api-not-recognized-language' => '!!DO NOT TRANSLATE!! The supplied language identifier was not recognized. The user probably passed the api a malformed parameter',
-	'wikibase-api-not-recognized-string' => '!!DO NOT TRANSLATE!! A string was expected, but not recognized. The user probably passed the api a malformed parameter',
+	'wikibase-api-not-recognized-array' => '!!DO NOT TRANSLATE!! An array was expected, but not recognized. The user probably passed the API a malformed parameter',
+	'wikibase-api-not-recognized-language' => '!!DO NOT TRANSLATE!! The supplied language identifier was not recognized. The user probably passed the API a malformed parameter',
+	'wikibase-api-not-recognized-string' => '!!DO NOT TRANSLATE!! A string was expected, but not recognized. The user probably passed the API a malformed parameter',
 	'wikibase-api-param-missing' => '!!DO NOT TRANSLATE!! A parameter that is required was missing, General message for when a parameter is missing from a request',
 	'wikibase-api-param-illegal' => '!!DO NOT TRANSLATE!! An illegal set of parameters have been used, General message for when the parameters passed in a request conflict or do not pass the initial tests',
 	'wikibase-api-permissiondenied' => '!!DO NOT TRANSLATE!! the user making the request does not have the correct permissions or rights to carry out the request',
@@ -9815,7 +9817,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'special-dispatchstats' => '편집 전송 통계',
 	'wikibase-dispatchstats-intro' => '이 문서는 변경 사항을 클라이언트에 전송하는 것에 관한 통계를 제공합니다.',
 	'wikibase-dispatchstats-no-stats' => '현재 사용할 수 있는 통계가 없습니다.',
-	'wikibase-dispatchstats-changes' => '변경 기록 통계',
+	'wikibase-dispatchstats-changes' => '바꾸기 기록 통계',
 	'wikibase-dispatchstats-stats' => '전송 통계',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => '시간 기록',
