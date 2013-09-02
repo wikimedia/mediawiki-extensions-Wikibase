@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_3c451918",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T17:48:34Z",
+      "side": 1,
+      "message": "this test case makes me sad :|",
+      "revId": "c6297d966e88ee2948e41f7433531d43ff81cc2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_1c485d2f",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T17:48:34Z",
+      "side": 1,
+      "message": "assertInternalType( \u0027array\u0027, ... )",
+      "revId": "c6297d966e88ee2948e41f7433531d43ff81cc2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
