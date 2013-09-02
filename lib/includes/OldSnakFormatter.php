@@ -18,10 +18,12 @@ use Wikibase\Snak;
  * @file
  * @ingroup WikibaseLib
  *
+ * @deprecated use a SnakFormatter from a SnakFormatterFactory instead.
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakFormatter {
+class OldSnakFormatter {
 
 	/**
 	 * @var TypedValueFormatter
