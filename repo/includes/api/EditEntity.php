@@ -506,13 +506,13 @@ class EditEntity extends ModifyEntity {
 		return array(
 			'api.php?action=wbeditentity&new=item&data={}'
 			=> 'Create a new empty item, returns extended with the item structure',
-			'api.php?action=wbeditentity&clear=true&id=q42&data={}'
-			=> 'Clear item with id q42',
+			'api.php?action=wbeditentity&clear=true&id=Q42&data={}'
+			=> 'Clear item with id Q42',
 			'api.php?action=wbeditentity&new=item&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
 			=> 'Create a new item and set labels for de and en',
 			'api.php?action=wbeditentity&new=property&data={"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}'
 			=> 'Create a new property containing the json data, returns extended with the item structure',
-			'api.php?action=wbeditentity&id=q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
+			'api.php?action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
 			=> 'Sets sitelink for nowiki, overwriting it if it already exists',
 		);
 	}

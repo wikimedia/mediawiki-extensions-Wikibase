@@ -184,7 +184,7 @@ class SetStatementRank extends ModifyClaim {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetstatementrank&format=json&statement=q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&rank=normal&token=foobar' => 'Set the rank for the given statement to normal',
+			'api.php?action=wbsetstatementrank&format=json&statement=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&rank=normal&token=foobar' => 'Set the rank for the given statement to normal',
 		);
 	}
 }

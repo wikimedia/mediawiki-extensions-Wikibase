@@ -228,7 +228,7 @@ class SetQualifier extends ModifyClaim {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetqualifier&claim=q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=p1&value=GdyjxP8I6XB3&snaktype=value&token=foobar' => 'Set the qualifier for the given claim with property p1 to string value GdyjxP8I6XB3',
+			'api.php?action=wbsetqualifier&claim=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=P1&value=GdyjxP8I6XB3&snaktype=value&token=foobar' => 'Set the qualifier for the given claim with property P1 to string value GdyjxP8I6XB3',
 		);
 	}
 }

@@ -235,17 +235,17 @@ class SetAliases extends ModifyEntity {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetaliases&language=en&id=q1&set=Foo|Bar'
-				=> 'Set the English aliases for the entity with id q1 to Foo and Bar',
+			'api.php?action=wbsetaliases&language=en&id=Q1&set=Foo|Bar'
+				=> 'Set the English aliases for the entity with id Q1 to Foo and Bar',
 
-			'api.php?action=wbsetaliases&language=en&id=q1&add=Foo|Bar'
-				=> 'Add Foo and Bar to the list of English aliases for the entity with id q1',
+			'api.php?action=wbsetaliases&language=en&id=Q1&add=Foo|Bar'
+				=> 'Add Foo and Bar to the list of English aliases for the entity with id Q1',
 
-			'api.php?action=wbsetaliases&language=en&id=q1&remove=Foo|Bar'
-				=> 'Remove Foo and Bar from the list of English aliases for the entity with id q1',
+			'api.php?action=wbsetaliases&language=en&id=Q1&remove=Foo|Bar'
+				=> 'Remove Foo and Bar from the list of English aliases for the entity with id Q1',
 
-			'api.php?action=wbsetaliases&language=en&id=q1&remove=Foo&add=Bar'
-				=> 'Remove Foo from the list of English aliases for the entity with id q1 while adding Bar to it',
+			'api.php?action=wbsetaliases&language=en&id=Q1&remove=Foo&add=Bar'
+				=> 'Remove Foo from the list of English aliases for the entity with id Q1 while adding Bar to it',
 		);
 	}
 

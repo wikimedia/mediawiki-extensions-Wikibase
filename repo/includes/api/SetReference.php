@@ -281,8 +281,8 @@ class SetReference extends ModifyClaim {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetreference&statement=q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks={"p39":[{"snaktype":"value","property":"p14","datavalue":{"type":"string","value":"wikipedia"}}}&baserevid=7201010&token=foobar' => 'Create a new reference for claim with GUID q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF',
-			'api.php?action=wbsetreference&statement=q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&reference=1eb8793c002b1d9820c833d234a1b54c8e94187e&snaks={"p39":[{"snaktype":"value","property":"p14","datavalue":{"type":"string","value":"wikipedia"}}}&baserevid=7201010&token=foobar' => 'Set reference for claim with GUID q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF which has hash of 1eb8793c002b1d9820c833d234a1b54c8e94187e',
+			'api.php?action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks={"P39":[{"snaktype":"value","property":"P14","datavalue":{"type":"string","value":"wikipedia"}}}&baserevid=7201010&token=foobar' => 'Create a new reference for claim with GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF',
+			'api.php?action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&reference=1eb8793c002b1d9820c833d234a1b54c8e94187e&snaks={"P39":[{"snaktype":"value","property":"P14","datavalue":{"type":"string","value":"wikipedia"}}}&baserevid=7201010&token=foobar' => 'Set reference for claim with GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF which has hash of 1eb8793c002b1d9820c833d234a1b54c8e94187e',
 		);
 	}
 }

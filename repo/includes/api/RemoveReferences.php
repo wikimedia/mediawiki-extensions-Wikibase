@@ -211,7 +211,7 @@ class RemoveReferences extends ModifyClaim {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbremovereferences&statement=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar&baserevid=7201010' => 'Remove reference with hash "455481eeac76e6a8af71a6b493c073d54788e7e9" from claim with GUID of "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F"',
+			'api.php?action=wbremovereferences&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar&baserevid=7201010' => 'Remove reference with hash "455481eeac76e6a8af71a6b493c073d54788e7e9" from claim with GUID of "Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F"',
 		);
 	}
 }
