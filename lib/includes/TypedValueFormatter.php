@@ -20,6 +20,8 @@ use Wikibase\WikiPageEntityLookup;
  * @file
  * @ingroup WikibaseLib
  *
+ * @todo make this an interface used by PropertyValueSnakFormatter instead.
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
