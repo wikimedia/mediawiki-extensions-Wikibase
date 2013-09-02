@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_3c92799f",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-02T17:21:51Z",
+      "side": 1,
+      "message": "$tag \u003d \u0027property\u0027?",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_5cb6553e",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-02T17:21:51Z",
+      "side": 1,
+      "message": "This looks wrong, the abstract class Entity allows claims, that means technically all entities can have claims, including Property, not only Item.",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_7cb3114d",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-02T17:21:51Z",
+      "side": 1,
+      "message": "getId will return null on a new entity, and ClaimGuidGenerator does not like that",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_9c80ed4e",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-02T17:21:51Z",
+      "side": 1,
+      "message": "see above, claims not only for Item objects.",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_dc7a6574",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-02T17:21:51Z",
+      "side": 1,
+      "message": "Using one unserializer for all claims or need a new one for each iteration?\nSee also I51f86d8cb0326d5e6fbfacb1289adce37ed0bf87",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_bc85a95d",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-02T17:21:51Z",
+      "side": 1,
+      "message": "The example of wbsetclaim contains a lowercase property (p56), not uppercase. It is possible to use both?",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
