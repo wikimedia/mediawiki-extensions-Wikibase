@@ -2,8 +2,11 @@
 
 namespace Wikibase\Test;
 
+use DataValues\DataValue;
+use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
+use Wikibase\Entity;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -12,25 +15,7 @@ use InvalidArgumentException;
 /**
  * @covers Wikibase\ChangeOpMainSnak
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
- *
- * @file
  * @since 0.4
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -44,16 +29,17 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
 		$validIdFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+		$validGuidGenerator = new ClaimGuidGenerator( $item->getId() );
 		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
 		$validSnak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
 
 		$args = array();
-		$args[] = array( 123, $validSnak, $validIdFormatter );
-		$args[] = array( 123, null, $validIdFormatter );
-		$args[] = array( $validClaimGuid, 'notASnak', $validIdFormatter );
-		$args[] = array( '', 'notASnak', $validIdFormatter );
-		$args[] = array( '', null, $validIdFormatter );
+		$args[] = array( 123, $validSnak, $validIdFormatter, $validGuidGenerator );
+		$args[] = array( 123, null, $validIdFormatter, $validGuidGenerator );
+		$args[] = array( $validClaimGuid, 'notASnak', $validIdFormatter, $validGuidGenerator );
+		$args[] = array( '', 'notASnak', $validIdFormatter, $validGuidGenerator );
+		$args[] = array( '', null, $validIdFormatter, $validGuidGenerator );
 
 		return $args;
 	}
@@ -63,8 +49,8 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $snak, $idFormatter ) {
-		$ChangeOpMainSnak = new ChangeOpMainSnak( $claimGuid, $snak, $idFormatter );
+	public function testInvalidConstruct( $claimGuid, $snak, $idFormatter, $guidGenerator ) {
+		$ChangeOpMainSnak = new ChangeOpMainSnak( $claimGuid, $snak, $idFormatter, $guidGenerator );
 	}
 
 	public function changeOpProvider() {
@@ -75,7 +61,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newSnak' ) );
 		$claimGuid = '';
-		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -83,14 +69,14 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedSnak' ) );
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
-		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
 		$item = $this->provideNewItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
-		$changeOp = new ChangeOpMainSnak( $claimGuid, null, $idFormatter );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, null, $idFormatter, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = null;
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -122,16 +108,17 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 
-		$args[] = array ( new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter ) );
-		$args[] = array ( new ChangeOpMainSnak( $claimGuid, null, $idFormatter ) );
+		$args[] = array ( new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter, $guidGenerator ) );
+		$args[] = array ( new ChangeOpMainSnak( $claimGuid, null, $idFormatter, $guidGenerator ) );
 
 		return $args;
 	}
 
 	/**
 	 * @dataProvider provideChangeOps
-	 * @expectedException Wikibase\ChangeOpException
+	 * @expectedException \Wikibase\ChangeOpException
 	 */
 	public function testInvalidApply( $changeOp ) {
 		$wrongItem = ItemContent::newEmpty();
@@ -140,7 +127,8 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	protected function provideNewItemWithClaim( $itemId, $snak ) {
 		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
+		$claim =$entity->newClaim( $snak );
+		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
 		$entity->setClaims( $claims );

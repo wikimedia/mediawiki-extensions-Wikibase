@@ -3,30 +3,14 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * Class for mainsnak change operation
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -61,11 +45,11 @@ class ChangeOpMainSnak extends ChangeOp {
 	 *
 	 * @param string $claimGuid
 	 * @param Snak|null $snak
-	 * @param EntityIdFormatter $entityIdFormatter
-	 *
-	 * @throws InvalidArgumentException
+	 * @param Lib\EntityIdFormatter $idFormatter
+	 * @param Lib\ClaimGuidGenerator $guidGenerator
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $snak, EntityIdFormatter $idFormatter ) {
+	public function __construct( $claimGuid, $snak, EntityIdFormatter $idFormatter, ClaimGuidGenerator $guidGenerator ) {
 		if ( !is_string( $claimGuid ) ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string' );
 		}
@@ -81,6 +65,7 @@ class ChangeOpMainSnak extends ChangeOp {
 		$this->claimGuid = $claimGuid;
 		$this->snak = $snak;
 		$this->idFormatter = $idFormatter;
+		$this->guidGenerator = $guidGenerator;
 	}
 
 	public function getClaimGuid() {
@@ -131,6 +116,7 @@ class ChangeOpMainSnak extends ChangeOp {
 	protected function addClaim( Entity $entity, Claims $claims, Summary $summary = null ) {
 		//TODO: check for claim uniqueness?
 		$claim = $entity->newClaim( $this->snak );
+		$claim->setGuid( $this->guidGenerator->newGuid() );
 		$claims->addClaim( $claim );
 		$this->updateSummary( $summary, 'create', '', $this->getClaimSummaryArgs( $this->snak ) );
 		$this->claimGuid = $claim->getGuid();
