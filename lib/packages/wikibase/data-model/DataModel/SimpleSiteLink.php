@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Class representing a link to another site.
@@ -20,8 +21,19 @@ class SimpleSiteLink {
 
 	protected $siteId;
 	protected $pageName;
+
+	/**
+	 * @var ItemId[]
+	 */
 	protected $badges;
 
+	/**
+	 * @param string $siteId
+	 * @param string $pageName
+	 * @param ItemId[] $badges
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	public function __construct( $siteId, $pageName, $badges = array() ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
@@ -36,8 +48,8 @@ class SimpleSiteLink {
 		}
 
 		foreach( $badges as $badge ) {
-			if ( !( $badge instanceof Entity\ItemId ) ) {
-				throw new InvalidArgumentException( 'Each value of $badges needs to be a ItemId' );
+			if ( !( $badge instanceof ItemId ) ) {
+				throw new InvalidArgumentException( 'Each element in $badges needs to be an ItemId' );
 			}
 		}
 
@@ -69,9 +81,7 @@ class SimpleSiteLink {
 	 *
 	 * @since 0.5
 	 *
-	 * Returns an array of ItemIds
-	 *
-	 * @return array
+	 * @return ItemId[]
 	 */
 	public function getBadges() {
 		return $this->badges;
@@ -91,7 +101,7 @@ class SimpleSiteLink {
 			'badges' => array()
 		);
 
-		foreach ($this->badges as $badge) {
+		foreach ( $this->badges as $badge ) {
 			$array['badges'][] = $badge->getSerialization();
 		}
 
@@ -104,8 +114,8 @@ class SimpleSiteLink {
 	 *
 	 * @since 0.5
 	 *
-	 * @param $siteId
-	 * @param $data
+	 * @param string $siteId
+	 * @param string|array $data
 	 *
 	 * @return SimpleSiteLink
 	 */
@@ -133,8 +143,8 @@ class SimpleSiteLink {
 	 		$pageName = $data['name'];
 	 		$badges = array();
 
-			foreach ($data['badges'] as $badge) {
-				$badges[] = new Entity\ItemId( $badge );
+			foreach ( $data['badges'] as $badge ) {
+				$badges[] = new ItemId( $badge );
 			}
 
 			$siteLink = new static( $siteId, $pageName, $badges );
