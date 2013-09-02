@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_3c93595c",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:11:26Z",
+      "side": 1,
+      "message": "For great justice!",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_9c8aad1b",
+        "filename": "client/includes/SiteLinkCommentSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:11:26Z",
+      "side": 1,
+      "message": "doc is wrong if this is a string",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_7c9dd161",
+        "filename": "client/includes/SiteLinkCommentSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:11:26Z",
+      "side": 1,
+      "message": "A since 0.4 ion a since 0.5 class? ;p",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_5ca015a3",
+        "filename": "client/includes/SiteLinkCommentSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:11:26Z",
+      "side": 1,
+      "message": "Missing type hint",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
