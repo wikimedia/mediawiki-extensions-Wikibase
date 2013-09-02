@@ -8,6 +8,7 @@ use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
 use Wikibase\ChangeOpException;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -63,7 +64,12 @@ class SetClaimValue extends ModifyClaim {
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $claim->getMainSnak()->getPropertyId() );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
-		$changeOp = new ChangeOpMainSnak( $claimGuid, $snak, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$changeOp = new ChangeOpMainSnak(
+			$claimGuid,
+			$snak,
+			WikibaseRepo::getDefaultInstance()->getIdFormatter(),
+			new ClaimGuidGenerator( $entity->getId() )
+		);
 
 		try {
 			$changeOp->apply( $entity, $summary );
