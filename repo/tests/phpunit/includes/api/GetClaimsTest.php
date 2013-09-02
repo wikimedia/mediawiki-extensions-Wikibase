@@ -10,25 +10,7 @@ use Wikibase\Statement;
 /**
  * Unit tests for the Wikibase\ApiGetClaims class.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseRepoTest
  *
  * @group API
  * @group Database
@@ -52,13 +34,19 @@ class GetClaimsTest extends \ApiTestCase {
 	 */
 	protected function addClaimsAndSave( Entity $entity ) {
 		wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
-		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
 		$content->save( '', null, EDIT_NEW );
 
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 1 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertySomeValueSnak( 42 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'o_O' ) ) ) );
+		/** @var $claims Claim[] */
+		$claims[0] = $entity->newClaimBase( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claims[1] = $entity->newClaimBase( new \Wikibase\PropertyNoValueSnak( 1 ) );
+		$claims[2] = $entity->newClaimBase( new \Wikibase\PropertySomeValueSnak( 42 ) );
+		$claims[3] = $entity->newClaimBase( new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'o_O' ) ) );
+
+		foreach( $claims as $key => $claim ){
+			$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
+			$entity->addClaim( $claim );
+		}
 
 		$content->save( '' );
 		wfRestoreWarnings();
