@@ -17,7 +17,7 @@ use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\OldSnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\RepoLinker;
@@ -175,10 +175,10 @@ final class WikibaseClient {
 	/**
 	 * @since 0.4
 	 *
-	 * @return SnakFormatter
+	 * @return OldSnakFormatter
 	 */
 	public function newSnakFormatter() {
-		return new SnakFormatter(
+		return new OldSnakFormatter(
 			$this->getPropertyDataTypeLookup(),
 			new TypedValueFormatter(),
 			$this->getDataTypeFactory()
