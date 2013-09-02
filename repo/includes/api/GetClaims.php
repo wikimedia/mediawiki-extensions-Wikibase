@@ -307,10 +307,10 @@ class GetClaims extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			"api.php?action=wbgetclaims&entity=q42" => "Get claims for item with ID q42",
-			"api.php?action=wbgetclaims&entity=q42&property=p2" => "Get claims for item with ID q42 and property with ID p2",
-			"api.php?action=wbgetclaims&entity=q42&rank=normal" => "Get claims for item with ID q42 that are ranked as normal",
-			'api.php?action=wbgetclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => 'Get claim with GUID of q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F',
+			"api.php?action=wbgetclaims&entity=Q42" => "Get claims for item with ID Q42",
+			"api.php?action=wbgetclaims&entity=Q42&property=P2" => "Get claims for item with ID Q42 and property with ID P2",
+			"api.php?action=wbgetclaims&entity=Q42&rank=normal" => "Get claims for item with ID Q42 that are ranked as normal",
+			'api.php?action=wbgetclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => 'Get claim with GUID of Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F',
 		);
 	}
 

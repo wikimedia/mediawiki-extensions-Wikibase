@@ -107,9 +107,9 @@ class SetDescription extends ModifyLangAttribute {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbsetdescription&id=Q42&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
-				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "Q42" as a decription in English language',
+				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "Q42" as a description in English language',
 			'api.php?action=wbsetdescription&site=enwiki&title=Wikipedia&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
-				=> 'Set the string "An encyclopedia that everyone can edit" as a decription in English language for page with a sitelink to enwiki:Wikipedia',
+				=> 'Set the string "An encyclopedia that everyone can edit" as a description in English language for page with a sitelink to enwiki:Wikipedia',
 		);
 	}
 
