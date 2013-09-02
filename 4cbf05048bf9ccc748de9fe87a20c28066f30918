@@ -118,6 +118,23 @@
       "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_1cc93d5c",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentSerializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:20:03Z",
+      "side": 1,
+      "message": "You can probably just use assertEquals here, and derive from the regular PHPUnit test case. Perhaps you need to do an assort of both assert inputs, though this will still be better then having the extra binding.",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
