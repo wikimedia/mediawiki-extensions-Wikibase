@@ -72,7 +72,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$claim = $resultArray['claim'];
 
-		foreach ( array( 'id', 'mainsnak', 'type', 'rank' ) as $requiredKey ) {
+		foreach ( array( 'id', 'mainsnak', 'type' ) as $requiredKey ) {
 			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
 		}
 

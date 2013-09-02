@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 
@@ -45,10 +46,10 @@ class ChangeOpMainSnak extends ChangeOp {
 	 * @param string $claimGuid
 	 * @param Snak|null $snak
 	 * @param Lib\EntityIdFormatter $idFormatter
+	 * @param Lib\ClaimGuidGenerator $guidGenerator
 	 * @throws \InvalidArgumentException
-	 *
 	 */
-	public function __construct( $claimGuid, $snak, EntityIdFormatter $idFormatter ) {
+	public function __construct( $claimGuid, $snak, EntityIdFormatter $idFormatter, ClaimGuidGenerator $guidGenerator ) {
 		if ( !is_string( $claimGuid ) ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string' );
 		}
@@ -64,6 +65,7 @@ class ChangeOpMainSnak extends ChangeOp {
 		$this->claimGuid = $claimGuid;
 		$this->snak = $snak;
 		$this->idFormatter = $idFormatter;
+		$this->guidGenerator = $guidGenerator;
 	}
 
 	public function getClaimGuid() {
@@ -113,7 +115,8 @@ class ChangeOpMainSnak extends ChangeOp {
 	 */
 	protected function addClaim( Entity $entity, Claims $claims, Summary $summary = null ) {
 		//TODO: check for claim uniqueness?
-		$claim = $entity->newClaim( $this->snak );
+		$claim = new Claim( $this->snak );
+		$claim->setGuid( $this->guidGenerator->newGuid() );
 		$claims->addClaim( $claim );
 		$this->updateSummary( $summary, 'create', '', $this->getClaimSummaryArgs( $this->snak ) );
 		$this->claimGuid = $claim->getGuid();
