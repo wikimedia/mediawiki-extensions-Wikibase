@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
 use Wikibase\ItemContent;
@@ -11,20 +12,6 @@ use InvalidArgumentException;
 
 /**
  * @covers Wikibase\ChangeOpMainSnak
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
  *
  * @file
  * @since 0.4
@@ -131,7 +118,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideChangeOps
-	 * @expectedException Wikibase\ChangeOpException
+	 * @expectedException \Wikibase\ChangeOpException
 	 */
 	public function testInvalidApply( $changeOp ) {
 		$wrongItem = ItemContent::newEmpty();
@@ -140,7 +127,8 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	protected function provideNewItemWithClaim( $itemId, $snak ) {
 		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
+		$claim = new Claim( $snak );
+		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
 		$entity->setClaims( $claims );
