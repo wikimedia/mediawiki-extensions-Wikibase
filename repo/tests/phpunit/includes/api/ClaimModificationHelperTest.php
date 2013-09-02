@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Api;
 
 use Wikibase\Api\CreateClaim;
+use Wikibase\Claim;
 use Wikibase\EntityId;
 use ApiMain;
 use Wikibase\Api\ClaimModificationHelper;
@@ -51,7 +52,9 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$apiMain = new ApiMain();
 		$snak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$claim = $item->newClaim( $snak );
+		$claim = new Claim( $snak );
+		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
+		$item->addClaim( $claim );
 
 		$claimModificationHelper = $this->getNewInstance( $apiMain );
 		$claimModificationHelper->addClaimToApiResult( $claim );
@@ -117,7 +120,8 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$claimModificationHelper = $this->getNewInstance();
 		$entity = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
-		$claim = $entity->newClaim( $snak );
+		$claim = new Claim( $snak );
+		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
 		$entity->setClaims( $claims );

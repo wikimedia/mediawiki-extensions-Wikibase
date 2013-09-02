@@ -2,29 +2,18 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ChangeOpStatementRank;
+use Wikibase\Entity;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
+use Wikibase\Statement;
 
 /**
  * @covers Wikibase\ChangeOpStatementRank
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
  *
  * @file
  * @since 0.4
@@ -86,6 +75,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param Entity $item
 	 * @param ChangeOpStatementRank $changeOp
+	 * @param $expectedRank
 	 */
 	public function testApplyStatementRank( $item, $changeOp, $expectedRank ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
@@ -96,7 +86,8 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	protected function provideNewItemWithClaim( $itemId, $snak ) {
 		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
+		$claim = new Statement( $snak );
+		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8499CDA-25E4-4334-AG03-A3290BCD9CQP' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
 		$entity->setClaims( $claims );
