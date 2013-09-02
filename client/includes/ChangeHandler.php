@@ -572,6 +572,11 @@ class ChangeHandler {
 			$siteLinkDiffOp = $siteLinkDiff !== null && isset( $siteLinkDiff[ $siteGlobalId ] )
 				? $siteLinkDiff[ $siteGlobalId ] : null;
 
+			// backwards compatibility
+			if ( ( $siteLinkDiffOp instanceof \Diff\Diff ) && array_key_exists( 'name', $siteLinkDiffOp ) ) {
+				$siteLinkDiffOp = $siteLinkDiffOp['name'];
+			}
+
 			if ( $siteLinkDiffOp === null ) {
 				// do nothing
 			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
@@ -780,7 +785,7 @@ class ChangeHandler {
 			$siteLinkDiff = ( $change instanceof ItemChange ) ? $change->getSiteLinkDiff() : null;
 
 			if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
-				$comment = self::getSiteLinkComment( $change->getAction(), $siteLinkDiff, $title ) ;
+				$comment = $this->getSiteLinkComment( $change->getAction(), $siteLinkDiff, $title ) ;
 			} else {
 				$comment = $change->getComment();
 			}
@@ -817,13 +822,24 @@ class ChangeHandler {
 		//       Different pages may be affected in different ways by the same change.
 		//       Also, merged changes may affect the same page in multiple ways.
 
-		$params = array();
+		$params = array(
+			'message' => 'wikibase-comment-update'
+		);
+
 		$siteGlobalId = $this->site->getGlobalId();
 
 		// change involved site link to client wiki
 		if ( array_key_exists( $siteGlobalId, $siteLinkDiff ) ) {
-
-			$diffOp = $siteLinkDiff[$siteGlobalId];
+			if ( $siteLinkDiff instanceof \Diff\MapDiff ) {
+				if ( array_key_exists( 'name', $siteLinkDiff[$siteGlobalId] ) ) {
+					$diffOp = $siteLinkDiff[$siteGlobalId]['name'];
+				} else {
+					// badge change
+					return $params;
+				}
+			} else {
+				$diffOp = $siteLinkDiff[$siteGlobalId];
+			}
 
 			if ( $action === 'remove' ) {
 				$params['message'] = 'wikibase-comment-remove';
@@ -858,6 +874,15 @@ class ChangeHandler {
 			$params['message'] = $messagePrefix . 'change';
 
 			foreach( $siteLinkDiff as $siteKey => $diffOp ) {
+				if ( $diffOp instanceof \Diff\MapDiff ) {
+					if ( array_key_exists( 'name', $diffOp ) ) {
+						$diffOp = $diffOp['name'];
+					} else {
+						// badge change
+						return $params;
+					}
+				}
+
 				$site = $this->sites->getSite( $siteKey );
 
 				if( !$site ) {
