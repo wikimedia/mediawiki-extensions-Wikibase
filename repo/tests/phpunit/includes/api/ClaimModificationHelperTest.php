@@ -2,40 +2,20 @@
 
 namespace Wikibase\Test\Api;
 
+use UsageException;
 use Wikibase\Api\CreateClaim;
-use Wikibase\EntityId;
+use Wikibase\Claim;
 use ApiMain;
 use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\SnakValidationHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ItemContent;
 use Wikibase\Claims;
-use Wikibase\PropertyContent;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * @covers Wikibase\Api\ClaimModificationHelper
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
- *
- * @file
  * @since 0.4
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -51,7 +31,9 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$apiMain = new ApiMain();
 		$snak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$claim = $item->newClaim( $snak );
+		$claim = $item->newClaimBase( $snak );
+		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
+		$item->addClaim( $claim );
 
 		$claimModificationHelper = $this->getNewInstance( $apiMain );
 		$claimModificationHelper->addClaimToApiResult( $claim );
@@ -117,7 +99,8 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$claimModificationHelper = $this->getNewInstance();
 		$entity = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
-		$claim = $entity->newClaim( $snak );
+		$claim = $entity->newClaimBase( $snak );
+		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
 		$entity->setClaims( $claims );

@@ -1,32 +1,16 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
 use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\EntityId;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\SetClaimValue
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseRepoTest
  *
  * @group API
  * @group Database
@@ -50,10 +34,12 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @return Entity
 	 */
 	protected function addClaimsAndSave( Entity $entity, EntityId $propertyId ) {
-		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
 		$content->save( '', null, EDIT_NEW );
 
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( $propertyId, new \DataValues\StringValue( 'o_O' ) ) ) );
+		$claim = $entity->newClaimBase( new \Wikibase\PropertyValueSnak( $propertyId, new \DataValues\StringValue( 'o_O' ) ) );
+		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
+		$entity->addClaim( $claim );
 
 		$content->save( '' );
 
