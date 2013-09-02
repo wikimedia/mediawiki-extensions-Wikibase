@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\OldSnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\ParserErrorMessageFormatter;
 use Wikibase\Property;
@@ -43,7 +43,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$mockRepo = $this->newMockRepository();
 		$mockResolver = new MockPropertyLabelResolver( $targetLanguage->getCode(), $mockRepo );
 
-		$formatter = new SnakFormatter(
+		$formatter = new OldSnakFormatter(
 			new EntityRetrievingDataTypeLookup( $mockRepo ),
 			new TypedValueFormatter(),
 			$dataTypeFactory
