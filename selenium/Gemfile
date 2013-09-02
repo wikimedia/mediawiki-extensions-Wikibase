@@ -1,4 +1,7 @@
-source "http://rubygems.org"
+#ruby=ruby-2.0.0-p247
+#ruby-gemset=Wikibase-selenium
+
+source 'https://rubygems.org'
 
 gem 'rake'
 gem 'rspec'
