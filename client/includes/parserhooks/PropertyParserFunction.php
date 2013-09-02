@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\OldSnakFormatter;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -49,7 +49,7 @@ class PropertyParserFunction {
 	/* @var ParserErrorMessageFormatter */
 	protected $errorFormatter;
 
-	/* @var SnakFormatter */
+	/* @var OldSnakFormatter */
 	protected $snaksFormatter;
 
 	/**
@@ -59,11 +59,11 @@ class PropertyParserFunction {
 	 * @param EntityLookup                $entityLookup
 	 * @param PropertyLabelResolver       $propertyLabelResolver
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param Lib\SnakFormatter           $snaksFormatter
+	 * @param Lib\OldSnakFormatter           $snaksFormatter
 	 */
 	public function __construct( \Language $language,
 		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
-		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
+		ParserErrorMessageFormatter $errorFormatter, OldSnakFormatter $snaksFormatter ) {
 		$this->language = $language;
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;

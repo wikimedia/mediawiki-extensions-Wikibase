@@ -17,6 +17,8 @@ use Wikibase\EntityLookup;
  * @file
  * @ingroup WikibaseLib
  *
+ * @todo: needs an option to turn off label resolution.
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
