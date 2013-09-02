@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8977bd7d_dc842511",
+        "filename": "client/includes/SiteLinkCommentSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:18:00Z",
+      "side": 1,
+      "message": "The name of this class is very strange. At least the last part, \"Serializer\", is. Its input is not a site link comment, and its output is not a serialized form of its input, hence not a serializer.\n\nThis looks like it just generates a site link comment based on a change... so SiteLinkCommentBuilder would be more appropriate. That might confuse people into thinking \"builder pattern\" though, so I recommend looking further for a better name",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_9c8aad1b",
         "filename": "client/includes/SiteLinkCommentSerializer.php",
         "patchSetId": 8
@@ -64,6 +81,40 @@
       "writtenOn": "2013-09-02T19:11:26Z",
       "side": 1,
       "message": "Missing type hint",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_fc89e125",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentSerializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:18:00Z",
+      "side": 1,
+      "message": "better rename this to $actualComment or so, overriding the input makes this harder to read",
+      "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_bc904943",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentSerializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T19:18:00Z",
+      "side": 1,
+      "message": "it should always be arrays no? Then why this if-else?",
       "revId": "4cbf05048bf9ccc748de9fe87a20c28066f30918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
