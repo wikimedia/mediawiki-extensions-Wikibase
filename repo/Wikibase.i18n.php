@@ -233,7 +233,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-entitydata-text' => 'This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.',
 	'special-mylanguagefallbackchain' => 'My language fallback chain',
 	'wikibase-mylanguagefallbackchain-text' => 'The language fallback chain used to display entity labels for you is shown below.',
-	'wikibase-mylanguagefallbackchain-babel' => 'You can edit it by putting <nowiki>{{#babel: }}</nowiki> on your [[Special:MyPage|user page]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'You can edit it by putting <nowiki>{{#babel: }}</nowiki> on {{GENDER:$1|your}} [[Special:MyPage|user page]].',
 	'wikibase-mylanguagefallbackchain-verbatim-item' => '$1 - $2',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, converted from $3 - $4',
 
@@ -945,7 +945,10 @@ Parameters:
 	'special-mylanguagefallbackchain' => '{{doc-special|MyLanguageFallbackChain}}
 The special page display the language fallback chain used to display Wikibase data for current context.',
 	'wikibase-mylanguagefallbackchain-text' => 'Explanatory text shown on the special page.',
-	'wikibase-mylanguagefallbackchain-babel' => 'More explanatory text shown on the special page. Only displayed when Extension:Babel is installed and the user is logged in.',
+	'wikibase-mylanguagefallbackchain-babel' => 'More explanatory text shown on the special page. Only displayed when Extension:Babel is installed and the user is logged in.
+
+Parameters:
+* $1 - User name for GENDER',
 	'wikibase-mylanguagefallbackchain-verbatim-item' => 'A "verbatim" (taken from database and displayed as-is) fallback chain item.
 
 Parameters:

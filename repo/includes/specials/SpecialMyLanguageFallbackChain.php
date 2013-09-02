@@ -107,7 +107,8 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 		$this->getOutput()->addWikiMsg( 'wikibase-mylanguagefallbackchain-text' );
 		if ( class_exists( 'Babel' ) && !$this->getContext()->getUser()->isAnon() ) {
-			$this->getOutput()->addWikiMsg( 'wikibase-mylanguagefallbackchain-babel' );
+			$this->getOutput()->addWikiMsg( 'wikibase-mylanguagefallbackchain-babel',
+				$this->getContext()->getUser()->getName() );
 		}
 
 		$inLanguage = $this->getContext()->getLanguage()->getCode();
