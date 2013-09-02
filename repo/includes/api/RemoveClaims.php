@@ -6,6 +6,7 @@ use ApiBase;
 use Wikibase\Claims;
 use Wikibase\EntityId;
 use Wikibase\Entity;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOps;
 use Wikibase\ChangeOpMainSnak;
@@ -128,9 +129,10 @@ class RemoveClaims extends ModifyClaim {
 	 */
 	protected function getChangeOps( array $params ) {
 		$changeOps = array();
+		$guidGenerator = new ClaimGuidGenerator( $this->getEntityId( $params ) );
 
 		foreach ( $params['claim'] as $guid ) {
-			$changeOps[] = new ChangeOpMainSnak( $guid, null, WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+			$changeOps[] = new ChangeOpMainSnak( $guid, null, WikibaseRepo::getDefaultInstance()->getIdFormatter(), $guidGenerator );
 		}
 
 		return $changeOps;
