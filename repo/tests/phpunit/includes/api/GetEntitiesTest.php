@@ -60,7 +60,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		array( 'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin', 'normalize' => '' ), 'e' => array( 'count' => 1, 'normalized' => false ) ),
 		array( 'p' => array( 'sites' => 'dewiki', 'titles' => 'hoo', 'normalize' => '' ), 'e' => array( 'count' => 1, 'missing' => 1, 'normalized' => true ) ),
 	);
-	protected static $goodProps = array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype', 'labels|sitelinks/urls', 'info|aliases|labels|claims' );
+	protected static $goodProps = array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype', 'sitelinks/badges', 'labels|sitelinks/urls', 'info|aliases|labels|claims|sitelinks/badges' );
 	protected static $goodLangs = array( 'de', 'zh', 'it|es|zh|ar', 'de|nn|no|en|en-gb|it|es|zh|ar' );
 	protected static $goodSorts = array( array( 'sort' => 'sitelinks', 'dir' => 'descending' ), array( 'sort' => 'sitelinks', 'dir' => 'ascending' ) );
 	protected static $goodFormats = array( 'json', 'php', 'wddx', 'xml', 'yaml', 'txt', 'dbg', 'dump' );
@@ -216,8 +216,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	private function assertPropsSitelinksBadges( $entity, $expected ) {
 		$expected['props'][] = 'sitelinks';
 		foreach( $entity['sitelinks'] as $sitelink ){
-			$this->assertArrayHasKey( 'badge', $sitelink );
-			$this->assertNotEmpty( $sitelink['badge'] );
+			$this->assertArrayHasKey( 'badges', $sitelink );
+			$this->assertInternalType( 'array', $sitelink['badges'] );
 		}
 	}
 
