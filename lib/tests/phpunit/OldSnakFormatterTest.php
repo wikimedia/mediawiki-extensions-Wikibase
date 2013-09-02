@@ -14,7 +14,7 @@ use Wikibase\Item;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\OldSnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
@@ -29,12 +29,12 @@ use Wikibase\PropertyValueSnak;
  * @ingroup Test
  *
  * @group WikibaseLib
- * @group SnakFormatterTest
+ * @group OldSnakFormatterTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
+class OldSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	private $stringPropertyId = 'P572106';
 
@@ -57,7 +57,7 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newFormatter() {
-		return new SnakFormatter(
+		return new OldSnakFormatter(
 			$this->newPropertyDataTypeLookup(),
 			new TypedValueFormatter(),
 			DataTypeFactory::newFromTypes( array(
