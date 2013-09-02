@@ -55,10 +55,16 @@ class GetClaimsTest extends \ApiTestCase {
 		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
 		$content->save( '', null, EDIT_NEW );
 
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyNoValueSnak( 1 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertySomeValueSnak( 42 ) ) );
-		$entity->addClaim( $entity->newClaim( new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'o_O' ) ) ) );
+		/** @var $claims Claim[] */
+		$claims[0] = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claims[1] = new Claim( new \Wikibase\PropertyNoValueSnak( 1 ) );
+		$claims[2] = new Claim( new \Wikibase\PropertySomeValueSnak( 42 ) );
+		$claims[3] = new Claim( new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'o_O' ) ) );
+
+		foreach( $claims as $key => $claim ){
+			$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
+			$entity->addClaim( $claim );
+		}
 
 		$content->save( '' );
 		wfRestoreWarnings();

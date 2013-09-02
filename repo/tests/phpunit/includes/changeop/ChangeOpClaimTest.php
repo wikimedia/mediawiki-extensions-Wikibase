@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\ChangeOpClaim;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\ItemContent;
@@ -54,13 +55,16 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$noValueClaim = new Claim( new PropertyNoValueSnak( 43 ) );
 
 		$differentEntity = ItemContent::newEmpty()->getEntity();
-		$differentEntity->setId( new EntityId( 'item', 777 ) );
-		$oldNoValueClaim = $differentEntity->newClaim( new PropertyNoValueSnak( 43 ) );
+		$differentEntity->setId( ItemId::newFromNumber( 777 ) );
+		$oldNoValueClaim = new Claim( new PropertyNoValueSnak( 43 ) );
+		$oldNoValueClaim->setGuid( $differentEntity->getId()->getPrefixedId() . '$D8404XXA-25E4-4004-AG93-A3290BCD9C0P' );
 
 		$entity = ItemContent::newEmpty()->getEntity();
-		$entity->setId( new EntityId( 'item', 555 ) );
+		$entity->setId( ItemId::newFromNumber( 555 ) );
 		$someValueClaim = new Claim( new PropertySomeValueSnak( 44 ) );
-		$newNoValueClaim = $entity->newClaim( new PropertyNoValueSnak( 43 ) );
+		$newNoValueClaim = new Claim( new PropertyNoValueSnak( 43 ) );
+		$oldNoValueClaim->setGuid( $entity->getId()->getPrefixedId() . '$D8404XXA-25E4-4004-AG93-A3290GGG9C0P' );
+		
 		$args = array();
 
 		$args[] = array ( $entity, clone $noValueClaim , 'add' , array( clone $noValueClaim ) );
