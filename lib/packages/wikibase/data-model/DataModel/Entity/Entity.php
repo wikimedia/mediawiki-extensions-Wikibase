@@ -793,35 +793,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	}
 
 	/**
-	 * Returns a new Claim with the provided Snak as main snak.
-	 *
-	 * @since 0.3
-	 *
-	 * @param Snak $mainSnak
-	 * @param GuidGenerator|null $guidGenerator
-	 *
-	 * @return Claim
-	 */
-	public final function newClaim( Snak $mainSnak, GuidGenerator $guidGenerator = null ) {
-		$claim = $this->newClaimBase( $mainSnak );
-
-		if ( $guidGenerator === null ) {
-			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $this->getId() );
-		}
-
-		$claim->setGuid( $guidGenerator->newGuid() );
-
-		return $claim;
-	}
-
-	/**
 	 * @since 0.3
 	 *
 	 * @param Snak $mainSnak
 	 *
 	 * @return Claim
 	 */
-	protected function newClaimBase( Snak $mainSnak ) {
+	public function newClaim( Snak $mainSnak ) {
 		return new Claim( $mainSnak );
 	}
 
