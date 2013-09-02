@@ -1142,7 +1142,9 @@ $messages['en-gb'] = array(
 $messages['eo'] = array(
 	'wikibase-client-desc' => 'Kliento por la Vikidatuma etendaĵo',
 	'specialpages-group-wikibaseclient' => 'Vikidatuma kliento',
+	'tooltip-t-wikibase' => 'Ligilo al konektita datuma ero',
 	'wikibase-after-page-move' => 'Vi povas [$1 ĝisdatigi] la ligitan Vikidatuman eron por pluteni la lingvan ligilon al la la movita paĝo.',
+	'wikibase-after-page-move-queued' => 'La [$1 Vikidatuma ero] asociigita kun tiu ĉi paĝo estos baldaŭ aŭtomate ĝisdatigita.',
 	'wikibase-comment-remove' => 'Ligita Vikidatuma ero etis forigita. La lingvaj ligiloj estas forviŝitaj.',
 	'wikibase-comment-linked' => 'Vikidatuma ero estis ligita al ĉi tiu paĝo.',
 	'wikibase-comment-unlink' => 'Ĉi tiu paĝo estis malligita de la Vikidatuma ero. La lingvaj ligiloj estas forigitaj.',
@@ -1152,6 +1154,7 @@ $messages['eo'] = array(
 	'wikibase-comment-sitelink-change' => 'Lingva ligilo ŝanĝita de $1 al $2',
 	'wikibase-comment-sitelink-remove' => 'Lingva ligilo forigita: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ŝanĝo|ŝanĝoj}}',
+	'wikibase-dataitem' => 'Datuma ero',
 	'wikibase-editlinks' => 'Redaktu ligilojn',
 	'wikibase-editlinkstitle' => 'Redaktu interlingvajn ligilojn',
 	'wikibase-linkitem-addlinks' => 'Aldoni ligilojn',
@@ -1182,6 +1185,8 @@ $messages['eo'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" ne estas valida lingva kodo.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Nur paĝon kun interlingva ligiloj',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlingva ligilo|interlingvaj ligiloj}} en la paĝo)',
+	'wikibase-pageinfo-entity-id' => 'Identigilo de Vikidatuma ero',
+	'wikibase-pageinfo-entity-id-none' => 'Nenio',
 );
 
 /** Spanish (español)

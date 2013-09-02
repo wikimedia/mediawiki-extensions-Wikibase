@@ -1124,10 +1124,13 @@ Parameters:
 Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana".
 
 Parameters:
+* $1 - number of aliases, for GENDER support
 * $2 - the language code for the item page',
-	'wikibase-property-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing property aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit. Parameter:
-* $1 is the number of aliases added/removed;
-* $2 is the language code of the item page.',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing property aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit.
+
+Parameters:
+* $1 - the number of aliases added/removed
+* $2 - the language code of the item page',
 	'wikibase-property-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es) for a property. Parameters:
 * $1 is the number of aliases that were added;
 * $2 is the language code for the item page.',
@@ -5478,7 +5481,7 @@ $messages['fa'] = array(
 	'wikibase-entitydata-text' => 'این صفحه رابطی از داده‌های پیوندداده‌شده به مقدارهای موضوع ارائه می‌کند. لطفاً شناسهٔ موضوع (ID) موجود در نشانی اینترنتی را با استفاده از نحو زیرصفحه ارائه کنید.',
 	'special-mylanguagefallbackchain' => 'زنجیره مجدد زبان من',
 	'wikibase-mylanguagefallbackchain-text' => 'اندوختهٔ زنجیرهٔ زبان برای نمایش برچسب‌های ورودی استفاده می‌شود که برای شما در پائین نمایش داده‌شده است.',
-	'wikibase-mylanguagefallbackchain-babel' => 'با قرار دادن <nowiki>{{#babel: }}</nowiki> در [[Special:MyPage|صفحه کاربریتان]] می‌توان این را ویرایش کنید.',
+	'wikibase-mylanguagefallbackchain-babel' => 'با قرار دادن <nowiki>{{#babel: }}</nowiki> در [[Special:MyPage|صفحه کاربریتان]] می‌توان این را ویرایش کنید.', # Fuzzy
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1- $2 ، تبدیل شده از  $3 - $4',
 	'wikibase-self-conflict-patched' => 'ویرایش شما د آخرین نسخه پچ شد و تعدادی از تغییرات میانیتان را باطل کرد.',
 	'wikibase-conflict-patched' => 'ویرایشتان در آخرین نسخه پچ شد.',
@@ -5823,7 +5826,7 @@ IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'wikibase-entitydata-text' => 'Tämä sivu tarjoaa linkitetyn datan näkymän aiheen arvoille. Kirjoita aiheen tunnus verkko-osoitteesta alasivumuotoa käyttäen.',
 	'special-mylanguagefallbackchain' => 'Varakieliketjuni',
 	'wikibase-mylanguagefallbackchain-text' => 'Varakieliketjua käytetään näyttämään aiheiden nimet sinulle seuraavasti.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> [[Special:MyPage|käyttäjäsivullesi]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> [[Special:MyPage|käyttäjäsivullesi]].', # Fuzzy
 	'wikibase-restoreold' => 'palauta',
 	'wikibase-restore-summary' => 'Käyttäjän [[Special:Contributions/$2|$2]] tekemän muokkauksen $1 palautus',
 	'wikibase-no-direct-editing' => 'Sivun lähdekoodin muokkaaminen on poistettu käytöstä nimiavaruudessa $1',
@@ -6139,7 +6142,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-entitydata-text' => "Cette page fournit une interface de données liées à des valeurs d’entité. Veuillez fournir l'ID de l’entité dans l'URL, en utilisant la syntaxe de sous-page.",
 	'special-mylanguagefallbackchain' => 'Mon enchaînement de langues de repli',
 	'wikibase-mylanguagefallbackchain-text' => 'L’enchaînement de langues de repli utilisé pour vous afficher les libellés des entités est présenté ci-dessous.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Vous pouvez la modifier en mettant <nowiki>{{#babel: }}</nowiki> sur votre [[Special:MyPage|page utilisateur]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'Vous pouvez la modifier en mettant <nowiki>{{#babel: }}</nowiki> sur votre [[Special:MyPage|page utilisateur]].', # Fuzzy
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, traduit depuis $3 - $4',
 	'wikibase-self-conflict-patched' => 'Votre modification a été intégrée dans la dernière version, écrasant certaines de vos corrections intermédiaires.',
 	'wikibase-conflict-patched' => 'Votre modification a été intégrée dans la dernière version.',
@@ -6651,7 +6654,7 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 	'wikibase-entitydata-text' => 'Esta páxina proporciona unha interface de datos ligados a valores de entidade. Achegue o identificador da entidade no enderezo URL, utilizando a sintaxe das subpáxinas.',
 	'special-mylanguagefallbackchain' => 'A miña cadea de linguas de respaldo',
 	'wikibase-mylanguagefallbackchain-text' => 'A cadea de linguas de respaldo usada para mostrarlle as etiquetas de entidade preséntase a continuación.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Pode modificala incluíndo <nowiki>{{#babel: }}</nowiki> na súa [[Special:MyPage|páxina de usuario]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'Pode modificala incluíndo <nowiki>{{#babel: }}</nowiki> na súa [[Special:MyPage|páxina de usuario]].', # Fuzzy
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, traducido do $3 - $4',
 	'wikibase-self-conflict-patched' => 'A súa edición incluíuse na última versión, sobrescribindo algunhas das súas modificacións intermedias.',
 	'wikibase-conflict-patched' => 'A súa edición incluíuse na última versión.',
@@ -9203,7 +9206,7 @@ $messages['ja'] = array(
 	'wikibase-entitydata-text' => 'このページではエンティティの値にリンクされたデータ インターフェイスを提供します。下位ページの構文を使用して、URL にエンティティ ID を指定してください。',
 	'special-mylanguagefallbackchain' => '言語フォールバックチェイン',
 	'wikibase-mylanguagefallbackchain-text' => 'エンティティのラベルをあなた向けに表示するために使われている言語フォールバックチェインを以下に表示します。',
-	'wikibase-mylanguagefallbackchain-babel' => '<nowiki>{{#babel: }}</nowiki> を自分の[[Special:MyPage|利用者ページ]]に置くことで編集できます。',
+	'wikibase-mylanguagefallbackchain-babel' => '<nowiki>{{#babel: }}</nowiki> を自分の[[Special:MyPage|利用者ページ]]に置くことで編集できます。', # Fuzzy
 	'wikibase-mylanguagefallbackchain-verbatim-item' => '$1 - $2',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2、変換元 $3 - $4',
 	'wikibase-self-conflict-patched' => '編集内容を最新版に反映させたため、あなたの中間の版での変更が上書きされます。',
@@ -9861,7 +9864,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-entitydata-text' => '이 문서는 개체 값에 연결된 데이터 인터페이스를 제공합니다. 하위 문서 구문을 사용하여 URL에 있는 개체 ID를 입력하세요.',
 	'special-mylanguagefallbackchain' => '내 언어 폴백 체인',
 	'wikibase-mylanguagefallbackchain-text' => '개체의 레이블을 보여주는 데 사용되는 언어 폴백 체인을 아래에 보여줍니다.',
-	'wikibase-mylanguagefallbackchain-babel' => '자신의 [[Special:MyPage|사용자 문서]]에 <nowiki>{{#babel: }}</nowiki>을 넣어 편집할 수 있습니다.',
+	'wikibase-mylanguagefallbackchain-babel' => '자신의 [[Special:MyPage|사용자 문서]]에 <nowiki>{{#babel: }}</nowiki>을 넣어 편집할 수 있습니다.', # Fuzzy
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, $3 - $4에서 변환됨',
 	'wikibase-self-conflict-patched' => '편집을 최신 버전으로 고쳤으며 중간 바뀜이 무시됩니다.',
 	'wikibase-conflict-patched' => '편집을 최신 버전으로 고쳤습니다.',
@@ -12485,19 +12488,19 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-newentity-submit' => 'Utwórz',
 	'special-setlabel' => 'Ustaw etykietę',
 	'wikibase-setlabel-introfull' => 'Ustawiasz etykietę $2 dla [[$1]].',
-	'wikibase-setlabel-intro' => 'Ten formularz pozwala ustawić etykietę encji. Należy podać identyfikator encji(np. Q23), kod języka (np.: „pl”) oraz tworzoną etykietę',
+	'wikibase-setlabel-intro' => 'Ten formularz pozwala ustawić etykietę encji. Należy podać identyfikator encji (np. Q23), kod języka (np. „pl”) oraz tworzoną etykietę.',
 	'wikibase-setlabel-label' => 'Etykieta:',
 	'wikibase-setlabel-submit' => 'Ustaw etykietę',
 	'wikibase-setlabel-warning-remove' => 'Czy na pewno chcesz usunąć etykietę dla [[$1]]?',
 	'special-setdescription' => 'Ustaw opis',
 	'wikibase-setdescription-introfull' => 'Ustawiasz opis $2 dla [[$1]].',
-	'wikibase-setdescription-intro' => 'Ten formularz pozwala ustawić opis encji. Należy podać identyfikator encji(np. Q23), kod języka (np.: „pl”) oraz tworzony opis.',
+	'wikibase-setdescription-intro' => 'Ten formularz pozwala ustawić opis encji. Należy podać identyfikator encji (np. Q23), kod języka (np. „pl”) oraz tworzony opis.',
 	'wikibase-setdescription-label' => 'Opis:',
 	'wikibase-setdescription-submit' => 'Ustaw opis',
 	'wikibase-setdescription-warning-remove' => 'Czy na pewno chcesz usunąć opis dla [[$1]]?',
 	'special-setaliases' => 'Ustaw aliasy',
 	'wikibase-setaliases-introfull' => 'Ustawiasz aliasy $2 dla [[$1]]. Gdy jest kilka aliasów, są one rozdzielone pionową kreską (znakiem <code>|</code>).',
-	'wikibase-setaliases-intro' => 'Ten formularz pozwala ustawić aliasy encji. Należy podać identyfikator encji (np. Q23), kod języka (np.: „pl”) oraz tworzone aliasy. Gdy jest kilka aliasów, są one rozdzielone pionową kreską (znakiem <code>|</code>).',
+	'wikibase-setaliases-intro' => 'Ten formularz pozwala ustawić aliasy encji. Należy podać identyfikator encji (np. Q23), kod języka (np. „pl”) oraz tworzone aliasy. Gdy jest kilka aliasów, rozdziela się je pionową kreską (znakiem <code>|</code>).',
 	'wikibase-setaliases-label' => 'Aliasy:',
 	'wikibase-setaliases-submit' => 'Ustaw aliasy',
 	'wikibase-setaliases-warning-remove' => 'Czy na pewno chcesz usunąć wszystkie aliasy dla [[$1]]?',
@@ -12535,6 +12538,8 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-listdatatypes-intro' => 'To jest lista wszystkich typów danych, które są obecnie wykorzystywane w tej instalacji:',
 	'wikibase-history-title-with-label' => '„$2” ($1): Historia wersji',
 	'wikibase-history-title-without-label' => '($1): Historia wersji',
+	'special-entitieswithoutdescription' => 'Encje bez opisu',
+	'wikibase-entitieswithoutdescription-legend' => 'Wyświetl listę encji bez opisu',
 	'special-entitieswithoutlabel' => 'Encje bez etykiety',
 	'wikibase-entitieswithoutlabel-legend' => 'Wyświetl listę encji bez etykiety',
 	'wikibase-entitieswithoutlabel-label-language' => 'Język:',
@@ -12549,6 +12554,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-entitydata-bad-revision' => 'Nie można pokazać wersji $2 encji $1.',
 	'wikibase-entitydata-bad-id' => 'Nieprawidłowy identyfikator: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Ten interfejs nie obsługuje formatu danych $1.',
+	'wikibase-mylanguagefallbackchain-babel' => 'Możesz to zmienić wstawiając <nowiki>{{#babel: }}</nowiki> na swojej [[Special:MyPage|stronie użytkownika]].', # Fuzzy
 	'wikibase-conflict-patched' => 'Do Twojej edycji została zastosowana poprawka do najnowszej wersji.',
 	'wikibase-restoreold' => 'przywróć',
 	'wikibase-restore-summary' => 'Przywrócono wersję $1 zrobioną przez [[Special:Contributions/$2|$2]]',
@@ -16115,6 +16121,7 @@ $messages['yi'] = array(
  * @author Stevenliuyi
  * @author Xiaomingyan
  * @author Yfdyh000
+ * @author Zhuyifei1999
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
@@ -16189,10 +16196,10 @@ $messages['zh-hans'] = array(
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|标签}}“$3”{{PLURAL:$1|违反限制}}。',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|说明}}“$3”违反{{PLURAL:$1|限制}}。',
 	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|别名}}“$3”违反{{PLURAL:$1|限制}}。',
-	'wikibase-error-sitelink-already-used' => '网站链接[$1 $2]已经被项[[$3]]使用。', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-property' => '另一个属性（$3）已经使用语言代码$2的标签“$1”', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => '另一个查询（$3）已经使用语言代码$2的标签“$1”', # Fuzzy
-	'wikibase-error-label-not-unique-item' => '另一个项（$3）已经使用语言代码$2的标签“$1”和说明“$4”', # Fuzzy
+	'wikibase-error-sitelink-already-used' => '网站链接[$1 $2]已经被项[[$3]]使用。',
+	'wikibase-error-label-not-unique-wikibase-property' => '另一个属性（$3）已经使用语言代码$2的标签“$1”。',
+	'wikibase-error-label-not-unique-wikibase-query' => '另一个查询（$3）已经使用语言代码$2的标签“$1”。',
+	'wikibase-error-label-not-unique-item' => '另一个项（$3）已经使用语言代码$2的标签“$1”和说明“$4”。',
 	'wikibase-itemlink' => '$1$2',
 	'wikibase-itemlink-id-wrapper' => '（$1）',
 	'wikibase-itemlink-userlang-wrapper' => '（$1：$2）',
@@ -16313,7 +16320,7 @@ $messages['zh-hans'] = array(
 	'wikibase-entitydata-text' => '本页面提供实体值的链接数据界面。请使用子页面句法提供URl中的实体ID。',
 	'special-mylanguagefallbackchain' => '我的语言备选链',
 	'wikibase-mylanguagefallbackchain-text' => '用于为你显示实体标签的语言备选链显示在下面。',
-	'wikibase-mylanguagefallbackchain-babel' => '你可以通过在你的[[Special:MyPage|用户页面]]放置<nowiki>{{#babel: }}</nowiki>编辑它。',
+	'wikibase-mylanguagefallbackchain-babel' => '你可以通过在你的[[Special:MyPage|用户页面]]放置<nowiki>{{#babel: }}</nowiki>编辑它。', # Fuzzy
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2，更改自$3 - $4',
 	'wikibase-self-conflict-patched' => '你的编辑已被修补至最后版本，覆盖某些你自己的中间更改。',
 	'wikibase-conflict-patched' => '你的编辑已被修补至最后版本。',
