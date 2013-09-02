@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_5c1d750a",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-02T18:23:00Z",
+      "side": 1,
+      "message": "what about extracing this if-else into a getPropsFromRequest() method? You can then call it from where it is needed, get rid of the $props variable in this scope, and reduce the number of arguments handleEntity accepts by one.\n\nthe above already applies before this change. what is however new is a if predicate that itself is better extracted into a dedicated method.\n\nif ( $this-\u003ehasImpliedSiteLinkProp() ) { ... }\n\nThe body of the if clause is also rather odd... you can do that simpler",
+      "revId": "6e6bee7489ea28910217105b29c6126ddaa249bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
