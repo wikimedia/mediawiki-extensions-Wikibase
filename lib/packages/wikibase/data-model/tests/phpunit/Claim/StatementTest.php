@@ -4,7 +4,12 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
+use Wikibase\ReferenceList;
+use Wikibase\SnakList;
 use Wikibase\Statement;
 
 /**
@@ -28,9 +33,9 @@ class StatementTest extends ClaimTest {
 	public function instanceProvider() {
 		$instances = array();
 
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id42 = new PropertyId( 'P42' );
 
-		$baseInstance = new Statement( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+		$baseInstance = new Statement( new PropertyNoValueSnak( $id42 ) );
 
 		$instances[] = $baseInstance;
 
@@ -45,9 +50,9 @@ class StatementTest extends ClaimTest {
 
 		$instance = clone $baseInstance;
 
-		$instance->setReferences( new \Wikibase\ReferenceList( array(
-			new Reference( new \Wikibase\SnakList(
-				new \Wikibase\PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ), new StringValue( 'a' ) )
+		$instance->setReferences( new ReferenceList( array(
+			new Reference( new SnakList(
+				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) )
 			) )
 		) ) );
 
@@ -73,10 +78,10 @@ class StatementTest extends ClaimTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSetReferences( Statement $statement ) {
-		$references = new \Wikibase\ReferenceList( array(
-			new Reference( new \Wikibase\SnakList(
-				new \Wikibase\PropertyValueSnak(
-					new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ),
+		$references = new ReferenceList( array(
+			new Reference( new SnakList(
+				new PropertyValueSnak(
+					new PropertyId( 'P1' ),
 					new StringValue( 'a' )
 				)
 			) ) )
@@ -160,11 +165,11 @@ class StatementTest extends ClaimTest {
 	}
 
 	public function testGetHash() {
-		$claim0 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim0 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim0->setGuid( 'claim0' );
 		$claim0->setRank( Claim::RANK_DEPRECATED );
 
-		$claim1 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim1->setGuid( 'claim1' );
 		$claim1->setRank( Claim::RANK_DEPRECATED );
 
@@ -173,8 +178,6 @@ class StatementTest extends ClaimTest {
 
 	/**
 	 * @dataProvider instanceProvider
-	 *
-	 * @param Statement $statement
 	 */
 	public function testGetAllSnaks( Claim $claim ) {
 		/* @var Statement $statement */
