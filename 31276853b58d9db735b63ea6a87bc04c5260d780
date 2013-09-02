@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8977bd7d_f989f325",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-02T13:35:40Z",
+      "side": 1,
+      "message": "Perhaps \tmw.wikibase.label( ) should be fixed to use the parser\u0027s target language instead.",
+      "parentUuid": "c95d3502_c73353f4",
+      "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_29d312d6",
         "filename": "client/includes/WikibaseLibrary.php",
         "patchSetId": 8
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "MultilingualSerializationsOptions::setLanguages() works on items in the array one by one, and if is_numeric( key ), it sets key \u003d value, value \u003d new-chain-from-language( value, FALLBACK_SELF ).",
       "parentUuid": "c95d3502_29d312d6",
+      "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_1996af4b",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-02T13:35:40Z",
+      "side": 1,
+      "message": "Hm, feels hackish, but it\u0027s an easy way to make this B/C, i guess.",
+      "parentUuid": "c95d3502_e73057ea",
       "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
