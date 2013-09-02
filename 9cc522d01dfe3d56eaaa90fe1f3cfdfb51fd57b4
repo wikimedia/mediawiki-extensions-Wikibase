@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8977bd7d_d65c047e",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-02T09:08:04Z",
+      "side": 1,
+      "message": "How would you suggest I go about creating such an array in a better way? :)\nI\u0027m all ears! :D",
+      "parentUuid": "8977bd7d_166e7c30",
+      "revId": "9cc522d01dfe3d56eaaa90fe1f3cfdfb51fd57b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_366b7821",
         "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8977bd7d_16575c58",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-02T09:08:04Z",
+      "side": 1,
+      "message": "Will add a comment",
+      "parentUuid": "8977bd7d_366b7821",
+      "revId": "9cc522d01dfe3d56eaaa90fe1f3cfdfb51fd57b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_7675f0f6",
         "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
         "patchSetId": 11
@@ -47,6 +83,24 @@
       "writtenOn": "2013-09-02T08:59:26Z",
       "side": 1,
       "message": "and",
+      "revId": "9cc522d01dfe3d56eaaa90fe1f3cfdfb51fd57b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_36545851",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-02T09:08:04Z",
+      "side": 1,
+      "message": ":\u003e",
+      "parentUuid": "8977bd7d_7675f0f6",
       "revId": "9cc522d01dfe3d56eaaa90fe1f3cfdfb51fd57b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
