@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_85624cd9",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-03T11:08:15Z",
+      "side": 1,
+      "message": "please get the spaces right",
+      "revId": "3b35df4b2300a114efa64611349ec2bd086c2340",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_a597489a",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-03T11:08:15Z",
+      "side": 1,
+      "message": "this has nothing to do with this change: but, why don\u0027t we use the idFormatter from line 141?",
+      "revId": "3b35df4b2300a114efa64611349ec2bd086c2340",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
