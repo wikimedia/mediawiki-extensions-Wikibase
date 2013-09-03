@@ -3,17 +3,15 @@
 namespace Wikibase\Api;
 
 use ApiBase, User, Status;
-
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\SiteLink;
-use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\Summary;
-use Wikibase\Settings;
 
 /**
  * API module to associate two pages on two different sites with a Wikibase item .
@@ -87,6 +85,8 @@ class LinkTitles extends ApiWikibase {
 		$summary = new Summary( $this->getModuleName() );
 		$summary->addAutoSummaryArgs( $fromSite->getGlobalId() . ":$fromPage", $toSite->getGlobalId() . ":$toPage" );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		// Figure out which parts to use and what to create anew
 		if ( !$fromId && !$toId ) {
 			// create new item
@@ -103,9 +103,8 @@ class LinkTitles extends ApiWikibase {
 		}
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
-			$itemContent = EntityContentFactory::singleton()->getFromId(
-				new EntityId( Item::ENTITY_TYPE, $toId )
-			);
+			/** @var ItemContent $itemContent */
+			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $toId ) );
 			$fromLink = new SimpleSiteLink( $fromSite->getGlobalId(), $fromPage );
 			$itemContent->getItem()->addSimpleSiteLink( $fromLink );
 			$return[] = $fromLink;
@@ -113,9 +112,8 @@ class LinkTitles extends ApiWikibase {
 		}
 		elseif ( $fromId && !$toId ) {
 			// reuse from-site's item
-			$itemContent = EntityContentFactory::singleton()->getFromId(
-				new EntityId( Item::ENTITY_TYPE, $fromId )
-			);
+			/** @var ItemContent $itemContent */
+			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $fromId ) );
 			$toLink = new SimpleSiteLink( $toSite->getGlobalId(), $toPage );
 			$itemContent->getItem()->addSimpleSiteLink( $toLink );
 			$return[] = $toLink;
