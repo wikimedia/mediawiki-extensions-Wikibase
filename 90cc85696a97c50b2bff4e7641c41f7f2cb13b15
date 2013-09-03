@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_456bd41f",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-03T13:06:24Z",
+      "side": 1,
+      "message": "Done as proposed in comment, but now this is run for every run of handleEntity, before it was only once in execute()",
+      "revId": "90cc85696a97c50b2bff4e7641c41f7f2cb13b15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
