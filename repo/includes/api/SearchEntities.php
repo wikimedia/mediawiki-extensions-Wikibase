@@ -3,7 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\StoreFactory;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
@@ -125,7 +125,7 @@ class SearchEntities extends ApiBase {
 		$entries = array();
 
 		/**
-		 * var EntityId $id
+		 * @var EntityId $id
 		 */
 		foreach ( $ids as $id ) {
 			$entry = array();

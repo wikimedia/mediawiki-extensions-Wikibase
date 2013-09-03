@@ -4,7 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\Claims;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOps;

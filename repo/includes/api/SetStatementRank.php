@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\Entity;
-use Wikibase\Claims;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpStatementRank;
