@@ -1,0 +1,74 @@
+chrome_linux:
+  name: chrome
+  platform: Linux
+  version:
+
+chrome_win:
+  name: chrome
+  platform: Windows 7
+  version:
+
+chrome_mac:
+  name: chrome
+  platform: OS X 10.8
+  version:
+
+firefox_linux:
+  name: firefox
+  platform: Linux
+  version: 23
+
+firefox_win:
+  name: firefox
+  platform: Windows 7
+  version: 23
+
+firefox_mac:
+  name: firefox
+  platform: OS X 10.6
+  version: 21
+
+safari_5:
+  name: safari
+  platform: OS X 10.6
+  version: 5
+
+safari_6:
+  name: safari
+  platform: OS X 10.8
+  version: 6
+
+ie_6:
+  name: internet_explorer
+  platform: Windows XP
+  version: 6
+
+ie_7:
+  name: internet_explorer
+  platform: Windows XP
+  version: 7
+
+ie_8:
+  name: internet_explorer
+  platform: Windows 7
+  version: 8
+
+ie_9:
+  name: internet_explorer
+  platform: Windows 7
+  version: 9
+
+ie_10:
+  name: internet_explorer
+  platform: Windows 8
+  version: 10
+
+opera_linux:
+  name: opera
+  platform: Linux
+  version: 12
+
+opera_win:
+  name: opera
+  platform: Windows 7
+  version: 12
