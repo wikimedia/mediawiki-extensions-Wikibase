@@ -17,7 +17,6 @@ use Wikibase\ClaimSummaryBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Validators\ValidatorErrorLocalizer;
-use Wikibase\validators\SnakValidator;
 
 /**
  * API module for creating or updating an entire Claim.

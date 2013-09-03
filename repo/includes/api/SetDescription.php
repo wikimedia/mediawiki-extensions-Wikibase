@@ -3,7 +3,6 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Utils;

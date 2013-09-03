@@ -4,11 +4,9 @@ namespace Wikibase\Api;
 
 use Wikibase\ChangeOpSiteLink;
 use ApiBase, User;
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
-use Wikibase\SiteLink;
 use Wikibase\Utils;
 
 /**

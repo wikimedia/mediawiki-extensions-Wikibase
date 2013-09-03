@@ -5,7 +5,6 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\Entity;
 use Wikibase\Statement;
-use Wikibase\Claims;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpReference;
 use Wikibase\ChangeOps;

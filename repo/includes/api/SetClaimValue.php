@@ -3,9 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\EntityId;
 use Wikibase\Entity;
-use Wikibase\Claims;
 use Wikibase\ChangeOpMainSnak;
 use Wikibase\ChangeOpException;
 use Wikibase\Repo\WikibaseRepo;
