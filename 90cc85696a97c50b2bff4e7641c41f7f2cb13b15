@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8977bd7d_90b36c4c",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-03T13:54:38Z",
+      "side": 1,
+      "message": "If you mean $badge-\u003egetSerialization(), that\u0027s not an internal serializaation.\n$badge is an ItemId. It\u0027s the same as getPrefixedId(), which is an alias for getSerialization()",
+      "parentUuid": "8977bd7d_659450e1",
+      "revId": "90cc85696a97c50b2bff4e7641c41f7f2cb13b15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_456bd41f",
         "filename": "repo/includes/api/GetEntities.php",
         "patchSetId": 10
