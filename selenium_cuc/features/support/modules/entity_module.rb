@@ -68,7 +68,7 @@ module EntityPage
   end
 
   def wait_for_api_callback
-    #TODO: workaround for weird error randomly claiming that apiCallWaitingMessage-element is not attached to the DOM anymore
+    ajax_wait
     wait_until do
       apiCallWaitingMessage? == false
     end
@@ -126,5 +126,15 @@ module EntityPage
     string = ''
     length.times { string << chars[rand(chars.size)] }
     return string
+  end
+
+  def set_copyright_ack_cookie
+    cookie = "$.cookie( 'wikibase.acknowledgedcopyrightversion', 'wikibase-1', { 'expires': null, 'path': '/' } );"
+    @browser.execute_script(cookie)
+  end
+
+  def set_noanonymouseditwarning_cookie
+    cookie = "$.cookie( 'wikibase-no-anonymouseditwarning', '1', { 'expires': null, 'path': '/' } );"
+    @browser.execute_script(cookie)
   end
 end

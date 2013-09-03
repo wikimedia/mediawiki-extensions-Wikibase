@@ -10,7 +10,12 @@ Given /^I am on an item page$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
   item = create_new_entity(item_data, 'item')
   @entity = item
-  on(ItemPage).navigate_to_entity item["url"]
+  on(ItemPage) do |page|
+    page.navigate_to_entity item["url"]
+    page.set_copyright_ack_cookie
+    page.set_noanonymouseditwarning_cookie
+  end
+
 end
 
 Given /^I am on an item page with empty label and description$/ do
