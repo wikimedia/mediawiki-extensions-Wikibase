@@ -26,6 +26,7 @@ $messages['en'] = array(
 	'tooltip-t-wikibase' => 'Link to connected data repository item',
 	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
 	'wikibase-after-page-move-queued' => 'The [$1 Wikidata item] associated with this page will be automatically updated soon.',
+	'wikibase-comment-add' => 'A Wikidata item has been created.',
 	'wikibase-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
 	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
 	'wikibase-comment-unlink' => 'This page has been unlinked from Wikidata item. Language links removed.',
@@ -100,7 +101,8 @@ Parameters:
 
 Parameters:
 * $1 - the link for the associated Wikibase item.',
-	'wikibase-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
+	'wikibase-comment-add' => 'Autocomment message in the client for when an item is created (and then is linked to the client page).',
+'wikibase-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
 	'wikibase-comment-linked' => 'Autocomment message in the client for when a Wikidata item is linked to a page in the client.',
 	'wikibase-comment-unlink' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.',
 	'wikibase-comment-restore' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.',
