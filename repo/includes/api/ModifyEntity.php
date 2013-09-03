@@ -6,7 +6,6 @@ use Status;
 use User;
 use Title;
 use ApiBase;
-use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
@@ -78,15 +77,19 @@ abstract class ModifyEntity extends ApiWikibase {
 		if ( isset( $params['id'] ) ) {
 			$id = $params['id'];
 
-			$entityContentFactory = EntityContentFactory::singleton();
+			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-			//NOTE: $id is user-supplied and may be invalid!
-			$entityId = EntityId::newFromPrefixedId( $id );
+			try{
+				$entityId = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $id );
+			} catch( \ValueParsers\ParseException $e ){
+				$this->dieUsage( "Could not parse {$id}, No entity found", 'no-such-entity-id' );
+			}
+
 			$entityTitle = $entityId ? $entityContentFactory->getTitleForId( $entityId, \Revision::FOR_THIS_USER ) : null;
-
 			if ( is_null( $entityTitle ) ) {
 				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
 			}
+
 		}
 		// Otherwise check if we have a link and try that.
 		// This will always result in an item, because only items have sitelinks.
