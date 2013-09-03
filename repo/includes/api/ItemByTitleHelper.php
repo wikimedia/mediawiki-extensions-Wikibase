@@ -1,27 +1,14 @@
 <?php
 
 namespace Wikibase\Api;
-use Wikibase\EntityId;
+
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Helper class for api modules to resolve page+title pairs into items.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.4
  *
@@ -56,6 +43,7 @@ class ItemByTitleHelper {
 	 * @param \ApiBase $apiBase
 	 * @param \Wikibase\SiteLinkCache $siteLinkCache
 	 * @param \SiteStore $siteStore
+	 * @param \Wikibase\StringNormalizer $stringNormalizer
 	 */
 	public function __construct( \ApiBase $apiBase, \Wikibase\SiteLinkCache $siteLinkCache, \SiteStore $siteStore, \Wikibase\StringNormalizer $stringNormalizer ) {
 		$this->apiBase = $apiBase;
@@ -110,7 +98,7 @@ class ItemByTitleHelper {
 			} else {
 				$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
-				$id = new EntityId( Item::ENTITY_TYPE, $id );
+				$id = ItemId::newFromNumber( $id );
 				$ids[] = $entityIdFormatter->format( $id );
 			}
 		}
@@ -123,7 +111,7 @@ class ItemByTitleHelper {
 	 * Updates $title accordingly and adds the normalization to the API output.
 	 *
 	 * @param string &$title
-	 * @param \Site $siteId
+	 * @param \Site $site
 	 *
 	 * @return integer|boolean
 	 */
