@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_a5b4a8d3",
+        "filename": "repo/includes/changeop/ChangeOpClaim.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-03T12:41:50Z",
+      "side": 1,
+      "message": "you can now use $guid instead of $this-\u003eclaim-\u003egetGuid()",
+      "revId": "f20c8b2030df8bcdd3d3fda32617e761b72e2823",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
