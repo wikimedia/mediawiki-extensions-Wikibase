@@ -91,6 +91,7 @@ return call_user_func( function() {
 		'Wikibase\Api\SetLabel' => 'includes/api/SetLabel.php',
 		'Wikibase\Api\SetSiteLink' => 'includes/api/SetSiteLink.php',
 		'Wikibase\Api\CreateClaim' => 'includes/api/CreateClaim.php',
+		'Wikibase\Api\CopyClaim' => 'includes/api/CopyClaim.php',
 		'Wikibase\Api\GetClaims' => 'includes/api/GetClaims.php',
 		'Wikibase\Api\RemoveClaims' => 'includes/api/RemoveClaims.php',
 		'Wikibase\Api\SetClaimValue' => 'includes/api/SetClaimValue.php',

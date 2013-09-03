@@ -113,6 +113,7 @@ call_user_func( function() {
 	$wgAPIModules['wblinktitles'] 						= 'Wikibase\Api\LinkTitles';
 	$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\Api\SetSiteLink';
 	$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\Api\CreateClaim';
+	$wgAPIModules['wbcopyclaim']						= 'Wikibase\Api\CopyClaim';
 	$wgAPIModules['wbgetclaims'] 						= 'Wikibase\Api\GetClaims';
 	$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\Api\RemoveClaims';
 	$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Api\SetClaimValue';
