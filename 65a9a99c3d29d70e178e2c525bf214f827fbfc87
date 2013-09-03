@@ -16,6 +16,24 @@
       "revId": "65a9a99c3d29d70e178e2c525bf214f827fbfc87",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_0a41eb5d",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-03T10:04:37Z",
+      "side": 1,
+      "message": "Due to use of EntityId in getEntity() and propertyMatchesFilter()\n\nlines 107 and 169",
+      "parentUuid": "8977bd7d_aa31d70c",
+      "revId": "65a9a99c3d29d70e178e2c525bf214f827fbfc87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
