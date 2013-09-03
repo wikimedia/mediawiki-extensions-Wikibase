@@ -16,6 +16,24 @@
       "revId": "2bb223222b299ba07193172982d386d110a3a387",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_4a7123dd",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-03T09:31:07Z",
+      "side": 1,
+      "message": "If we force sites and titles to be equal there is no way to request multiple articles from the same site etc.?\n\nsites\u003denwiki\u0026titles\u003dBerlin|England|NewYork",
+      "parentUuid": "2995f1bc_d3ddef12",
+      "revId": "2bb223222b299ba07193172982d386d110a3a387",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
