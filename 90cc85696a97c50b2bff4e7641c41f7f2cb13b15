@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8977bd7d_258a58c1",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-03T13:31:27Z",
+      "side": 1,
+      "message": "perhaps use a local variable, $includeBadges, similar to $includeUrls",
+      "revId": "90cc85696a97c50b2bff4e7641c41f7f2cb13b15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_659450e1",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-03T13:31:27Z",
+      "side": 1,
+      "message": "We use the internal serialization of the badges in the external format here. SHould be fine, but may cause trouble when the internal format gets changed.",
+      "revId": "90cc85696a97c50b2bff4e7641c41f7f2cb13b15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_456bd41f",
         "filename": "repo/includes/api/GetEntities.php",
         "patchSetId": 10
