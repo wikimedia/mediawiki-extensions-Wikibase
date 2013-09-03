@@ -4,16 +4,13 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use MWException;
-
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 use Wikibase\StoreFactory;
-use Wikibase\EntityId;
 use Wikibase\Item;
-use Wikibase\Settings;
-use Wikibase\LibRegistry;
 use Wikibase\EntityContentFactory;
 
 /**
@@ -142,13 +139,13 @@ class GetEntities extends ApiWikibase {
 
 		$entityContentFactory = EntityContentFactory::singleton();
 		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
+		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		$res = $this->getResult();
 
-		$entityId = EntityId::newFromPrefixedId( $id );
-
-		if ( !$entityId ) {
-			//TODO: report as missing instead?
+		try {
+			$entityId = $entityIdParser->parse( $id );
+		} catch( \ValueParsers\ParseException $e ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
 		}
