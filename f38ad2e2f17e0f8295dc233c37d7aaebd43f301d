@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_30e45810",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-03T15:05:24Z",
+      "side": 1,
+      "message": "spaces. also, putting a newline between control structures and assignments helps readability imo (so that would mean a newline before the foreach)",
+      "revId": "f38ad2e2f17e0f8295dc233c37d7aaebd43f301d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_f0d90055",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-03T15:05:24Z",
+      "side": 1,
+      "message": "Uhm. :D\n\nYou can simplify this quite a lot! ;p",
+      "revId": "f38ad2e2f17e0f8295dc233c37d7aaebd43f301d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
