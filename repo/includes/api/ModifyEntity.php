@@ -292,6 +292,8 @@ abstract class ModifyEntity extends ApiWikibase {
 			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
 			array( 'code' => 'no-such-entity-link', 'info' => $this->msg( 'wikibase-api-no-such-entity-link' )->text() ),
 			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'no-such-item-id-badges', 'info' => $this->msg( 'wikibase-api-no-such-item-id-badges' )->text() ),
+			array( 'code' => 'no-such-item-badges', 'info' => $this->msg( 'wikibase-api-no-such-item-badges' )->text() ),
 			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
 			array( 'code' => 'permissiondenied', 'info' => $this->msg( 'wikibase-api-permissiondenied' )->text() ),
 			array( 'code' => 'failed-modify', 'info' => $this->msg( 'wikibase-api-failed-modify' )->text() ),

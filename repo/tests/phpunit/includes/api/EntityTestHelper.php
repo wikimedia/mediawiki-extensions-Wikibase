@@ -11,6 +11,7 @@ use OutOfBoundsException;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 class EntityTestHelper {
 
@@ -190,6 +191,14 @@ class EntityTestHelper {
 					array( "language" => "zh-hk", "value" => "廣東的省會。" ),
 				),
 			)
+		),
+		'Featured' => array(
+			"new" => "item",
+			"data" => array()
+		),
+		'Good' => array(
+			"new" => "item",
+			"data" => array()
 		),
 
 	);
