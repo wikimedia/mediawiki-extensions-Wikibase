@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_b6b4ddd3",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-04T11:10:49Z",
+      "side": 1,
+      "message": "It seems to me that in a diff for the old structure, $siteLinkDiff[$siteGlobalId]  is going to be an atomic DiffOp like DiffOpChange, which doesn\u0027t support array_key_exists and would cause a fatal error here. Am I missing something?",
+      "revId": "99cdb00a43a08dc225cdb1876d3c356d2a85bb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
