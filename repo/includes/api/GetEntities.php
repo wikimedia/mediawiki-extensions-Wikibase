@@ -377,6 +377,8 @@ class GetEntities extends ApiWikibase {
 			=> 'Get the item for page "Berlin" on the site "enwiki", with language attributes in English language',
 			'api.php?action=wbgetentities&sites=enwiki&titles=berlin&normalize='
 			=> 'Get the item for page "Berlin" on the site "enwiki" after normalizing the title from "berlin"',
+			'api.php?action=wbgetentities&ids=Q42&props=sitelinks&sort&dir=descending'
+			=> 'Get the sitelinks for item Q42 sorted in a descending order"',
 		);
 	}
 
