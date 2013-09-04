@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_7665e5e1",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "Out code style has changed and we no longer want this lovely licence block :)",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_f6a1f5fb",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "You need to make sure that entitiyContent is actually an ItemContent here, or self -\u003egetItem() will not exist.\n\nSo before this you need if( !$entitiyContent instanceof ItemContent ){ $this-\u003edieUsage()}\n\nThen you can be sure we are working with an item!",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_56a9c9dd",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "Deprecated, although this is probably fine for now until a better solution is actually created..",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_b6977d9a",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "missing wfProfileOut( __METHOD__ );",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_96b3614c",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "This should probably be called a $changeOps rather than $chaneOp",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_d69cf9be",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "yes!",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_d685d95c",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "and moving?",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_b6805d4e",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T08:09:59Z",
+      "side": 1,
+      "message": "Please try and use uppercase item Ids in the examples now,\n$id-\u003egetPrefixId() will now always give you uppercase so its goo to try and reflect that in our examples",
+      "revId": "e4d790996b8bb657d3f55c3a28551d527869294d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
