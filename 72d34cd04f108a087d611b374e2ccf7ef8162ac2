@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_16be715f",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbareditgroup.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-09-04T14:18:27Z",
+      "side": 1,
+      "message": "Better use this.widgetBaseClass + \u0027-editbutton\u0027 to reflect the controller widget within the class name.",
+      "revId": "72d34cd04f108a087d611b374e2ccf7ef8162ac2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
