@@ -189,11 +189,33 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @dataProvider newFromArrayProvider
+	 */
+	public function testNewFromArray( $siteLink, $array ) {
+		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $array ), $siteLink );
+	}
+
+	public function newFromArrayProvider() {
+		$argLists = array();
+
+		$siteLink = new SimpleSiteLink(
+			'enwiki',
+			'Nyan Cat'
+		);
+		$array = array(
+			'name' => 'Nyan Cat',
+		);
+		$argLists[] = array( $siteLink, $array );
+
+		return array_merge( $this->siteLinkProvider(), $argLists );
+	}
+
+	/**
 	 * @dataProvider siteLinkProvider
 	 */
-	public function testArrayConversion( $siteLink, $array ) {
+	public function testToArrayRoundtrip( $siteLink, $array ) {
 		$this->assertEquals( $siteLink->toArray(), $array );
-		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $array ), $siteLink );
+		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $siteLink->toArray() ), $siteLink );
 	}
 
 	public function siteLinkProvider() {
@@ -214,7 +236,6 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		);
 		$argLists[] = array( $siteLink, $array );
 
-
 		$siteLink = new SimpleSiteLink(
 			'enwiki',
 			'Nyan Cat'
@@ -224,7 +245,6 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			'badges' => array()
 		);
 		$argLists[] = array( $siteLink, $array );
-
 
 		$siteLink = new SimpleSiteLink(
 			'enwiki',
@@ -242,7 +262,6 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 		$argLists[] = array( $siteLink, $array );
-
 
 		return $argLists;
 	}
@@ -286,11 +305,6 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( array(
 			'Nyan Takeover!' => 149,
 			'badges' => array()
-		) );
-
-		$argLists[] = array( array(
-			'name' => "Nyan Cat",
-			'Wikidata' => 42
 		) );
 
 		$argLists[] = array( array(

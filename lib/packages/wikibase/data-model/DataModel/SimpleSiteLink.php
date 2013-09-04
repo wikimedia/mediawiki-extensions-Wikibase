@@ -108,7 +108,7 @@ class SimpleSiteLink {
 		return $array;
 	 }
 
-	 /**
+	/**
 	 * Constructs a new SimpleSiteLink from an array
 	 * in the same format as SimpleSiteLink::toArray returns.
 	 *
@@ -119,11 +119,11 @@ class SimpleSiteLink {
 	 *
 	 * @return SimpleSiteLink
 	 */
-	 public static function newFromArray( $siteId, $data ) {
-	 	if ( is_string( $data ) ) {
-	 		// legacy serialization format
-	 		$siteLink = new static( $siteId, $data );
-	 	} else {
+	public static function newFromArray( $siteId, $data ) {
+		if ( is_string( $data ) ) {
+			// legacy serialization format
+			$siteLink = new static( $siteId, $data );
+		} else {
 			if ( !is_array( $data ) ) {
 				throw new InvalidArgumentException( '$data needs to be an array or string (legacy)' );
 			}
@@ -132,25 +132,40 @@ class SimpleSiteLink {
 				throw new InvalidArgumentException( '$data needs to have a "name" key' );
 			}
 
-			if ( !array_key_exists( 'badges' , $data ) ) {
-				throw new InvalidArgumentException( '$data needs to have a "badges" key' );
-			}
-
-			if ( !is_array( $data['badges'] ) ) {
-				throw new InvalidArgumentException( '$data["badges"] needs to be an array' );
-			}
-
-	 		$pageName = $data['name'];
-	 		$badges = array();
-
-			foreach ( $data['badges'] as $badge ) {
-				$badges[] = new ItemId( $badge );
-			}
+			$badges = self::getBadgesFromArray( $data );
+			$pageName = $data['name'];
 
 			$siteLink = new static( $siteId, $pageName, $badges );
-	 	}
+		}
 
 		return $siteLink;
-	 }
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param array $data
+	 *
+	 * @return ItemId[]
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	protected static function getBadgesFromArray( $data ) {
+		if ( !array_key_exists( 'badges', $data ) ) {
+			return array();
+		}
+
+		if ( !is_array( $data['badges'] ) ) {
+			throw new InvalidArgumentException( '$data["badges"] needs to be an array' );
+		}
+
+		$badges = array();
+
+		foreach ( $data['badges'] as $badge ) {
+			$badges[] = new ItemId( $badge );
+		}
+
+		return $badges;
+	}
 
 }
