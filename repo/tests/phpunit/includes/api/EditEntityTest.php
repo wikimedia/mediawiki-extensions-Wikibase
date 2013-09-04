@@ -3,8 +3,9 @@
 namespace Wikibase\Test\Api;
 
 use ApiTestCase;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
 
 /**
@@ -14,6 +15,7 @@ use Wikibase\PropertyContent;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Michał Łazowik
  *
  * @group API
  * @group Wikibase
@@ -40,8 +42,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 	public function setup() {
 		parent::setup();
 
-		$prop56 = PropertyId::newFromNumber( 56 );
-		$prop72 = PropertyId::newFromNumber( 72 );
+		$prop56 = new PropertyId( "P56" );
+		$prop72 = new PropertyId( "P72" );
+
+		$GA = new ItemId( "Q42" );
+		$FA = new ItemId( "Q149" );
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Berlin' ) );
@@ -55,6 +60,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$prop->getEntity()->setId( $prop72 );
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'EditEntityTestP72' );
+
+			$badge = ItemContent::newEmpty();
+			$badge->getEntity()->setId( $GA );
+			$badge->save( 'EditEntityTestQ42' );
+
+			$badge = ItemContent::newEmpty();
+			$badge->getEntity()->setId( $FA );
+			$badge->save( 'EditEntityTestQ149' );
 		}
 		self::$hasSetup = true;
 	}
@@ -72,14 +85,44 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}' ),
 				'e' => array( 'type' => 'property' ) ),
 			array( //3 add a sitelink..
-				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ) ) ),
+				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["Q42","Q149"]}}}' ),
+				'e' => array(
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'TestPage!',
+							'badges' => array( 'Q42', 'Q149' )
+						)
+					)
+				)
+			),
 			array( //4 add a label..
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ), 'labels' => array( 'en' => 'A Label' ) ) ),
+				'e' => array(
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'TestPage!',
+							'badges' => array( 'Q42', 'Q149' )
+						)
+					),
+					'labels' => array( 'en' => 'A Label' )
+				)
+			),
 			array( //5 add a description..
 				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ), 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
+				'e' => array(
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'TestPage!',
+							'badges' => array( 'Q42', 'Q149' )
+						)
+					),
+					'labels' => array( 'en' => 'A Label' ),
+					'descriptions' => array( 'en' => 'DESC' )
+				)
+			),
 			array( //6 remove a sitelink..
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
 				'e' => array( 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
@@ -91,7 +134,17 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'type' => 'item' ) ),
 			array( //9 clear an item with some new value
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}', 'clear' => '' ),
-				'e' => array( 'type' => 'item', 'sitelinks' => array( 'dewiki' => 'Page' ) ) ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'Page',
+							'badges' => array()
+						)
+					)
+				)
+			),
 			array( //10 clear an item with no value
 				'p' => array( 'data' => '{}', 'clear' => '' ),
 				'e' => array( 'type' => 'item' ) ),
@@ -103,12 +156,68 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'descriptions' => array( 'en' => 'DESC1', 'de' => 'DESC2' ) ) ),
 			array( //13 override and add a 2 sitelinks..
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"BAA"},"svwiki":{"site":"svwiki","title":"FOO"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'BAA', 'svwiki' => 'FOO' ) ) ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'BAA',
+							'badges' => array()
+						),
+						array(
+							'site' => 'svwiki',
+							'title' => 'FOO',
+							'badges' => array()
+						)
+					)
+				)
+			),
 			array( //14 unset a sitelink using the other sitelink
 				'p' => array( 'site' => 'svwiki', 'title' => 'FOO', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
-				'e' => array( 'sitelinks' => array( 'svwiki' => 'FOO' ) ) ),
-
-			array( //15 add a claim
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'svwiki',
+							'title' => 'FOO',
+							'badges' => array()
+						)
+					)
+				)
+			),
+			array( //15 set badges for a existing sitelink, title intact
+				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["Q149","Q42"]}}}' ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'svwiki',
+							'title' => 'FOO',
+							'badges' => array( "Q149", "Q42" )
+						)
+					)
+				)
+			),
+			array( //16 set title for a existing sitelink, badges intact
+				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","title":"FOO2"}}}' ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'svwiki',
+							'title' => 'FOO2',
+							'badges' => array( "Q149", "Q42" )
+						)
+					)
+				)
+			),
+			array( //17 delete sitelink by providing neither title nor badges
+				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki"}}}' ),
+				'e' => array(
+					'type' => 'item',
+				)
+			),
+			array( //18 add a claim
 				'p' => array( 'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
 				'e' => array( 'claims' => array(
 					'P56' => array(
@@ -119,7 +228,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'type' => 'statement',
 						'rank' => 'normal' ) ) ) ),
 
-			array( //16 change the claim
+			array( //19 change the claim
 				'p' => array( 'data' => '{"claims":[{"id":"GUID","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"diffstring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
 				'e' => array( 'claims' => array(
 					'P56' => array(
@@ -130,11 +239,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'type' => 'statement',
 						'rank' => 'normal' ) ) ) ),
 
-			array( //17 remove the claim
+			array( //20 remove the claim
 				'p' => array( 'data' => '{"claims":[{"id":"GUID","remove":""}]}' ),
 				'e' => array( 'claims' => array() ) ),
 
-			array( //18 add multiple claims
+			array( //21 add multiple claims
 				'p' => array(
 					'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'.
 					'{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring2","type":"string"}},"type":"statement","rank":"normal"}]}' ),
@@ -158,7 +267,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				) )
 			),
 
-			array( //19 clear and add complex claim with qualifiers and references
+			array( //22 clear and add complex claim with qualifiers and references
 				'p' => array( 'clear' => '', 'data' => '{"claims": [{"mainsnak": {"snaktype": "value", "property": "P56", "datavalue": { "value": "str", "type": "string" } },'.
 					'"qualifiers": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "qual", "type": "string" } } ] }, "type": "statement", "rank": "normal",'.
 					'"references": [ { "snaks": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "src", "type": "string" } } ] } } ]}]}' ),
@@ -192,7 +301,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				) )
 			),
 
-			array( //20 clear and add multiple claims within property groups
+			array( //23 clear and add multiple claims within property groups
 				'p' => array( 'clear' => '',
 					'data' => '{"claims":{"P56":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring56","type":"string"}},"type":"statement","rank":"normal"}],'.
 							'"P72":[{"mainsnak":{"snaktype":"value","property":"P72","datavalue":{"value":"imastring72","type":"string"}},"type":"statement","rank":"normal"}]}}' ),
@@ -338,6 +447,18 @@ class EditEntityTest extends WikibaseApiTestCase {
 			array( //20 removing valid claim with no guid fails
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized', 'message' => 'Unknown key in json: remove' ) ) ),
+			array( //21 bad badge id
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["abc","Q149"]}}}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+			array( //22 badge id is not an item id
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["P2","Q149"]}}}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
+			array( //22 badge item does not exist
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["Q99999","Q149"]}}}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
+			array( //23 no sitelink - cannot change badges
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["Q42","Q149"]}}}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
 		);
 	}
 

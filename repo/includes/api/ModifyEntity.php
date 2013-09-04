@@ -9,14 +9,16 @@ use SiteSQLStore;
 use Status;
 use ApiBase;
 use Title;
-use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
+use Wikibase\Utils;
+use ValueParsers\ParseException;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -26,6 +28,7 @@ use Wikibase\Summary;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 abstract class ModifyEntity extends ApiWikibase {
 
@@ -145,6 +148,44 @@ abstract class ModifyEntity extends ApiWikibase {
 			$this->dieUsage( 'No entity found matching site link ' . $site . ':' . $title , 'no-such-entity-link' );
 		}
 		return $entityTitle;
+	}
+
+	/**
+	 * Validates badges from params and turns them into an array of ItemIds.
+	 *
+	 * @param array $badgesParams
+	 *
+	 * @return ItemId[]
+	 */
+	protected function parseSiteLinkBadges( array $badgesParams ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		$entityContentFactory = $repo->getEntityContentFactory();
+		$entityIdParser = $repo->getEntityIdParser();
+
+		$badges = array();
+
+		foreach ( $badgesParams as $badgeSerialization ) {
+			try {
+				$badgeId = $entityIdParser->parse( $badgeSerialization );
+			} catch( ParseException $e ) {
+				$this->dieUsage( "Badges: could not parse '{$badgeSerialization}', the id is invalid", 'no-such-entity-id' );
+			}
+
+			if ( !( $badgeId instanceof ItemId ) ) {
+				$this->dieUsage( "Badges: entity with id '{$badgeSerialization}' is not an item", 'not-item' );
+			}
+
+			$itemTitle = $entityContentFactory->getTitleForId( $badgeId, Revision::FOR_THIS_USER );
+
+			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
+				$this->dieUsage( "Badges: no item found matching id '{$badgeSerialization}'", 'no-such-entity' );
+			}
+
+			$badges[] = $badgeId;
+		}
+
+		return $badges;
 	}
 
 	/**
