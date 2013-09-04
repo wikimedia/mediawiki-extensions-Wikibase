@@ -16,6 +16,24 @@
       "revId": "c33763f4cd5f789937b9c1bd02a1eb8a4ddd7185",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "296ed1b0_f97f2f61",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-04T20:55:45Z",
+      "side": 1,
+      "message": "Indeed",
+      "parentUuid": "8977bd7d_6c68b4bb",
+      "revId": "c33763f4cd5f789937b9c1bd02a1eb8a4ddd7185",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
