@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use Status, User, Title;
 use ApiBase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\ItemHandler;
@@ -20,6 +21,7 @@ use Wikibase\Utils;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 abstract class ModifyEntity extends ApiWikibase {
 
@@ -109,6 +111,44 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		return $entityContent;
+	}
+
+	/**
+	 * Validates badges from params and turns them into an array of ItemIds.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $badgesParams
+	 *
+	 * @return ItemId[]
+	 */
+	protected function parseSiteLinkBadges( array $badgesParams ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
+		$badges = array();
+
+		foreach ( $badgesParams as $badgeSerialization ) {
+			try{
+				$badgeId = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $badgeSerialization );
+			} catch( \ValueParsers\ParseException $e ){
+				$this->dieUsage( "Badges: could not parse {$badgeSerialization}, the id is invalid", 'no-such-entity-id' );
+			}
+
+			if ( !( $badgeId instanceof ItemId ) ) {
+				$this->dieUsage( "Badges: entity id {$badgeSerialization} is not an id of item", 'not-item' );
+			}
+
+			$itemTitle = $entityContentFactory->getTitleForId( $badgeId, \Revision::FOR_THIS_USER );
+
+			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage( "Badges: no item found matching id {$badgeSerialization}", 'no-such-entity' );
+			}
+
+			$badges[] = $badgeId;
+		}
+
+		return $badges;
 	}
 
 	/**
@@ -289,6 +329,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
 			array( 'code' => 'no-such-entity-link', 'info' => $this->msg( 'wikibase-api-no-such-entity-link' )->text() ),
 			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
 			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
 			array( 'code' => 'permissiondenied', 'info' => $this->msg( 'wikibase-api-permissiondenied' )->text() ),
 			array( 'code' => 'failed-modify', 'info' => $this->msg( 'wikibase-api-failed-modify' )->text() ),

@@ -287,7 +287,7 @@ class GetEntities extends ApiWikibase {
 			'props' => array(
 				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
 					'descriptions', 'claims', 'datatype' ),
-				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
+				ApiBase::PARAM_DFLT => 'info|sitelinks|sitelinks/badges|aliases|labels|descriptions|claims|datatype',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sort' => array(
