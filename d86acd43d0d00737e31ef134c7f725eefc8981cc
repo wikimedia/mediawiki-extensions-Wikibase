@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_f669f5fa",
+        "filename": "client/tests/phpunit/includes/ChangeHandlerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-04T14:30:56Z",
+      "side": 1,
+      "message": "guess this was used for debugging...\nan alternative would be to run phpunit with --filter ChangeHandlerTest",
+      "revId": "d86acd43d0d00737e31ef134c7f725eefc8981cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
