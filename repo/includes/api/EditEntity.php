@@ -324,6 +324,9 @@ class EditEntity extends ModifyEntity {
 			$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
 			$globalSiteId = $arg['site'];
 			$pageTitle = $arg['title'];
+			$badges = ( array_key_exists( 'badges', $arg ) )
+				? $arg['badges']
+				: null;
 
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
@@ -342,7 +345,7 @@ class EditEntity extends ModifyEntity {
 						'no-external-page' );
 				}
 
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage, $badges );
 			}
 		}
 

@@ -5,6 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 use Site;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Class for sitelink change operation
@@ -48,6 +49,13 @@ class ChangeOpSiteLink extends ChangeOp {
 	protected $pageName;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var string[]|null
+	 */
+	 protected $badges;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $siteId
@@ -55,17 +63,22 @@ class ChangeOpSiteLink extends ChangeOp {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName ) {
+	public function __construct( $siteId, $pageName, $badges = null ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
 
-		if ( !is_string( $pageName ) && $pageName !==null ) {
+		if ( !is_string( $pageName ) && $pageName !== null ) {
 			throw new InvalidArgumentException( '$linkPage needs to be a string|null' );
+		}
+
+		if ( !is_array( $badges ) && $badges !== null ) {
+			throw new InvalidArgumentException( '$badges need to be an array|null' );
 		}
 
 		$this->siteId = $siteId;
 		$this->pageName = $pageName;
+		$this->badges = $badges;
 	}
 
 	/**
@@ -92,9 +105,24 @@ class ChangeOpSiteLink extends ChangeOp {
 				//TODO: throw error, or ignore silently?
 			}
 		} else {
+			if ( $this->badges === null ) {
+				if ( $entity->hasLinkToSite( $this->siteId ) ) {
+					$badges = $entity->getSimpleSiteLink( $this->siteId )->getBadges();
+				} else {
+					$badges = array();
+				}
+			} else {
+				$badges = array();
+
+				foreach ( $this->badges as $badgeSerialization ) {
+					$badges[] = new ItemId( $badgeSerialization );
+					//TODO: make sure that these Items actually exist
+				}
+			}
+
 			$entity->hasLinkToSite( $this->siteId ) ? $action = 'set' : $action = 'add';
 			$this->updateSummary( $summary, $action, $this->siteId, $this->pageName );
-			$entity->addSimpleSiteLink( new SimpleSiteLink( $this->siteId, $this->pageName ) );
+			$entity->addSimpleSiteLink( new SimpleSiteLink( $this->siteId, $this->pageName, $badges ) );
 		}
 
 		return true;
