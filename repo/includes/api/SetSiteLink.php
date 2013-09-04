@@ -19,8 +19,25 @@ use Wikibase\Utils;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Michał Łazowik
  */
 class SetSiteLink extends ModifyEntity {
+
+	/**
+	 * @since 0.5
+	 *
+	 * Checks whether the link should be removed based on params
+	 *
+	 * @param array $params
+	 * @return bool
+	 */
+	protected function shouldRemove( array $params ) {
+		if ( $params['linktitle'] === '' || ( !isset( $params['linktitle'] ) && !isset( $params['badges'] ) ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
@@ -28,7 +45,7 @@ class SetSiteLink extends ModifyEntity {
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
 
-		$permissions[] = 'sitelink-' . ( strlen( $params['linktitle'] ) ? 'update' : 'remove' );
+		$permissions[] = 'sitelink-' . ( $this->shouldRemove( $params ) ? 'update' : 'remove' );
 		return $permissions;
 	}
 
@@ -61,10 +78,7 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entityContent->getItem();
 		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
-		if (
-			isset( $params['linksite'] ) &&
-			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
-		{
+		if ( $this->shouldRemove( $params ) ) {
 			if ( $item->hasLinkToSite( $linksite ) ) {
 				$link = $item->getSimpleSiteLink( $linksite );
 				$this->getChangeOp( $params )->apply( $item, $summary );
@@ -88,13 +102,10 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	protected function getChangeOp( array $params ) {
 		wfProfileIn( __METHOD__ );
-		if (
-			isset( $params['linksite'] ) &&
-			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
-		{
+		if ( $this->shouldRemove( $params ) ) {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			wfProfileOut( __METHOD__ );
-			return new ChangeOpSiteLink( $linksite, null );
+			return new ChangeOpSiteLink( $linksite );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			$sites = $this->getSiteLinkTargetSites();
@@ -105,15 +116,23 @@ class SetSiteLink extends ModifyEntity {
 				$this->dieUsage( 'The supplied site identifier was not recognized' , 'not-recognized-siteid' );
 			}
 
-			$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
+			if ( isset( $params['linktitle'] ) ) {
+				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
 
-			if ( $page === false ) {
-				wfProfileOut( __METHOD__ );
-				$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+				if ( $page === false ) {
+					wfProfileOut( __METHOD__ );
+					$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+				}
+			} else {
+				$page = null;
 			}
 
+			$badges = ( isset( $params['badges'] ) )
+				? $this->parseSiteLinkBadges( $params['badges'] )
+				: null;
+
 			wfProfileOut( __METHOD__ );
-			return new ChangeOpSiteLink( $linksite, $page );
+			return new ChangeOpSiteLink( $linksite, $page, $badges );
 		}
 	}
 
@@ -124,7 +143,6 @@ class SetSiteLink extends ModifyEntity {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
-			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
 			array( 'code' => 'not-recognized-siteid', 'info' => $this->msg( 'wikibase-api-not-recognized-siteid' )->text() ),
 			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
 		) );
@@ -151,6 +169,10 @@ class SetSiteLink extends ModifyEntity {
 				'linktitle' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'badges' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_ISMULTI => true,
+				),
 			)
 		);
 	}
@@ -169,7 +191,8 @@ class SetSiteLink extends ModifyEntity {
 			parent::getParamDescriptionForEntity(),
 			array(
 				'linksite' => 'The identifier of the site on which the article to link resides',
-				'linktitle' => 'The title of the article to link. If this parameter is not set or an empty string, the link will be removed',
+				'linktitle' => 'The title of the article to link. If this parameter is an empty string or both linktitle and badges are not set, the link will be removed.',
+				'badges' => 'The IDs of items to be set as badges. They will replace the current ones. If this parameter is not set, the badges will not be changed',
 			)
 		);
 	}
