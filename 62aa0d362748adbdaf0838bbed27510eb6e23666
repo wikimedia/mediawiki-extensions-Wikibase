@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "296ed1b0_93761ca2",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-04T18:05:41Z",
+      "side": 1,
+      "message": "Probably should check first if $diffOp is an instance of \\Diff\\Diff as it is above.",
+      "revId": "62aa0d362748adbdaf0838bbed27510eb6e23666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "296ed1b0_b37b1889",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-04T18:05:41Z",
+      "side": 1,
+      "message": "Probably should check first if $diffOp is an instance of \\Diff\\Diff as it is above.",
+      "revId": "62aa0d362748adbdaf0838bbed27510eb6e23666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
