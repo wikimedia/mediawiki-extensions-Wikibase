@@ -48,34 +48,19 @@ class LinkTitles extends ApiWikibase {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$user = $this->getUser();
 		$sites = $this->getSiteLinkTargetSites();
 
-		// Get all parts for the from-link
 		// Site is already tested through allowed params ;)
 		$fromSite = $sites->getSite( $params['fromsite'] );
-		// This must be tested now
 		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
-
-		if ( $fromPage === false ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'The external client site did not provide page information for the from page' , 'no-external-page' );
-		}
-
-		// This is used for testing purposes later
+		$this->validatePage( $fromPage, 'from' );
 		$fromId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['fromsite'], $fromPage );
 
-		// Get all part for the to-link
 		// Site is already tested through allowed params ;)
 		$toSite = $sites->getSite( $params['tosite'] );
 		// This must be tested now
 		$toPage = $toSite->normalizePageName( $params['totitle'] );
-
-		if ( $toPage === false ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'The external client site did not provide page information for the to page' , 'no-external-page' );
-		}
-		// This is used for testing purposes later
+		$this->validatePage( $toPage, 'to' );
 		$toId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['tosite'], $toPage );
 
 		$return = array();
@@ -275,6 +260,12 @@ class LinkTitles extends ApiWikibase {
 			'api.php?action=wblinktitles&fromsite=enwiki&fromtitle=Hydrogen&tosite=dewiki&totitle=Wasserstoff'
 			=> 'Add a link "Hydrogen" from the English page to "Wasserstoff" at the German page',
 		);
+	}
+
+	private function validatePage( $page, $label ) {
+		if ( $page === false ) {
+			$this->dieUsage( "The external client site did not provide page information for the {$label} page" , 'no-external-page' );
+		}
 	}
 
 }
