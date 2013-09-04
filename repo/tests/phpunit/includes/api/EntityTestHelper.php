@@ -29,6 +29,10 @@ namespace Wikibase\Test\Api;
 
 class EntityTestHelper {
 
+	//@todo allow data to be defined dynamically in tests
+	//this way this class need not contain data but only a way to
+	//manage it for the tests
+
 	/**
 	 * @var array of currently active handles and their current ids
 	 */
@@ -188,13 +192,14 @@ class EntityTestHelper {
 	);
 
 	/**
+	 * Get the entity with the given handle
 	 * @param $handle string of entity to get data for
+	 * @throws \OutOfBoundsException
 	 * @return array of entity data
-	 * @throws \MWException
 	 */
 	public static function getEntity( $handle ){
 		if( !array_key_exists( $handle, self::$entityData ) ){
-			throw new \MWException( "No entity defined with handle {$handle}" );
+			throw new \OutOfBoundsException( "No entity defined with handle {$handle}" );
 		}
 		$entity = self::$entityData[ $handle ];
 
@@ -206,32 +211,52 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * Get the data to pass to the api to clear the entity with the given handle
 	 * @param $handle string of entity to get data for
+	 * @throws \OutOfBoundsException
 	 * @return array|null
 	 */
 	public static function getEntityClear( $handle ){
-		if( array_key_exists( $handle, self::$activeHandles ) ){
-			$id = self::$activeHandles[ $handle ];
-			self::unRegisterEntity( $handle );
-			return array( 'id' => $id, 'data' => '{}', 'clear' => '' );
+		if( !array_key_exists( $handle, self::$activeHandles ) ){
+			throw new \OutOfBoundsException( "No entity clear data defined with handle {$handle}" );
 		}
-		return null;
+		$id = self::$activeHandles[ $handle ];
+		self::unRegisterEntity( $handle );
+		return array( 'id' => $id, 'data' => '{}', 'clear' => '' );
 	}
 
+	/**
+	 * Get the data to pass to the api to create the entity with the given handle
+	 * @param $handle
+	 * @return mixed
+	 * @throws \OutOfBoundsException
+	 */
 	public static function getEntityData( $handle ){
 		if( !array_key_exists( $handle, self::$entityData ) ){
-			throw new \MWException( "No entity defined with handle {$handle}" );
+			throw new \OutOfBoundsException( "No entity defined with handle {$handle}" );
 		}
 		return self::$entityData[ $handle ]['data'];
 	}
 
+	/**
+	 * Get the data of the entity with the given handle we received after creation
+	 * @param $handle
+	 * @return mixed
+	 * @throws \OutOfBoundsException
+	 */
 	public static function getEntityOutput( $handle ){
 		if( !array_key_exists( $handle, self::$entityOutput ) ){
-			throw new \MWException( "No entity output defined with handle {$handle}" );
+			throw new \OutOfBoundsException( "No entity output defined with handle {$handle}" );
 		}
 		return self::$entityOutput[ $handle ];
 	}
 
+	/**
+	 * Register the entity after it has been created
+	 * @param $handle
+	 * @param $id
+	 * @param null $entity
+	 */
 	public static function registerEntity( $handle, $id, $entity = null) {
 		self::$activeHandles[ $handle ] = $id;
 		if( $entity ){
@@ -239,11 +264,20 @@ class EntityTestHelper {
 		}
 	}
 
+	/**
+	 * Unregister the entity after it has been cleared
+	 * @param $handle
+	 * @throws \OutOfBoundsException
+	 */
 	private static function unRegisterEntity( $handle ) {
+		if( !array_key_exists( $handle, self::$activeHandles ) ){
+			throw new \OutOfBoundsException( "No active entity defined with handle {$handle}" );
+		}
 		unset( self::$activeHandles[ $handle ] );
 	}
 
 	/**
+	 * Returns an array of currently activated handles
 	 * @return array of currently active handles
 	 */
 	public static function getActiveHandles(){
@@ -252,14 +286,16 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * Return the id for the entity with the given handle
 	 * @param $handle string of handles
+	 * @throws \OutOfBoundsException
 	 * @return null|string id of current handle (if active)
 	 */
 	public static function getId( $handle ){
-		if( array_key_exists( $handle, self::$activeHandles ) ){
-			return self::$activeHandles[ $handle ];
+		if( !array_key_exists( $handle, self::$activeHandles ) ){
+			throw new \OutOfBoundsException( "No entity id defined with handle {$handle}" );
 		}
-		return null;
+		return self::$activeHandles[ $handle ];
 	}
 
 }
