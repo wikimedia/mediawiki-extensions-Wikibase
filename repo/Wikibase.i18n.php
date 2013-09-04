@@ -18,6 +18,7 @@ $messages = array();
  * @author Jens Ohlig
  * @author Anja Jentzsch
  * @author Daniel Werner
+ * @author Michał Łazowik
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -269,6 +270,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-no-such-entity-link' => 'Could not find such an entity link', # Do not translate
 	'wikibase-api-no-such-reference' => 'Could not find such a reference', # Do not translate
 	'wikibase-api-no-such-site' => 'Could not find such a site', # Do not translate
+	'wikibase-api-no-such-sitelink' => 'Could not find such a sitelink', # Do not translate
 	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
 	'wikibase-api-not-a-statement' => 'Not a statement', # Do not translate
 	'wikibase-api-not-an-item' => 'Not an item', # Do not translate
@@ -314,7 +316,10 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Added link to [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Added link with badges to [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Changed link to [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Changed badges for [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Changed link and badges for [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed link to [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Created this item to connect pages [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Added a language link to connect pages [$2↔$3]',
@@ -1032,6 +1037,7 @@ See also:
 	'wikibase-api-no-such-entity-link' => '!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-reference' => '!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-site' => '!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data',
+	'wikibase-api-no-such-sitelink' => '!!DO NOT TRANSLATE!! Could not find such a sitelink, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-statement' => '!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data',
 	'wikibase-api-not-a-statement' => '!!DO NOT TRANSLATE!! The passed parameter is Not a statement when a statement is expected',
 	'wikibase-api-not-an-item' => '!!DO NOT TRANSLATE!! The passed parameter is Not an item when an item is expected (the passed parameter may infact be a property)',
@@ -1082,8 +1088,13 @@ Parameters:
 	'wikibase-item-summary-wbsetaliases-add' => '{{wikibase summary messages|item|Automatic edit summary when adding one or more aliases.}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{wikibase summary messages|item|Automatic edit summary when a user removes one or more aliases.}}',
 	'wikibase-item-summary-wbsetsitelink-add' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when adding a language link. Such a summary could appear in English as "Added link to [itwiki]:  Italia".}}',
+	'wikibase-item-summary-wbsetsitelink-add-both' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when adding a language link with badges. Such a summary could appear in English as "Added link to [itwiki]:  Italia, Q2, Q3".}}',
 	'wikibase-item-summary-wbsetsitelink-set' => '{{doc-important|Translate this as "Changed link which points to <nowiki>[$2]</nowiki>".}}
 {{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when editing a language link. Such a summary could appear in English as "Changed link to [itwiki]:  Italia".}}',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => '{{doc-important|Translate this as "Changed badges for link which points to <nowiki>[$2]</nowiki>".}}
+{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when editing badges of a language link. Such a summary could appear in English as "Changed badges for [itwiki]:  Q2, Q3".}}',
+	'wikibase-item-summary-wbsetsitelink-set-both' => '{{doc-important|Translate this as "Changed link which points to <nowiki>[$2]</nowiki> and its badges".}}
+{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when editing a language link and its badges. Such a summary could appear in English as "Changed link and badges for [itwiki]:  Italia, Q2, Q3".}}',
 	'wikibase-item-summary-wbsetsitelink-remove' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when removing a language link from a Wikidata item (page). Such a summary could appear in English as "Removed link to [itwiki]".}}',
 	'wikibase-item-summary-wblinktitles-create' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s) by creating a new data item.}}
 
