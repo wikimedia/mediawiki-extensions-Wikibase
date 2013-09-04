@@ -18,6 +18,7 @@ use Wikibase\ChangeOpSiteLink;
 use Wikibase\ChangeOpException;
 use ApiBase, User, Status, SiteList;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -36,6 +37,7 @@ use WikiPage;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 class EditEntity extends ModifyEntity {
 
@@ -195,7 +197,7 @@ class EditEntity extends ModifyEntity {
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
-			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
+			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity', 'sitelinks', 'sitelink', array( 'badges' ) );
 		}
 		$this->addClaimsToResult( $entity->getClaims(), 'entity' );
 
@@ -346,6 +348,35 @@ class EditEntity extends ModifyEntity {
 			$globalSiteId = $arg['site'];
 			$pageTitle = $arg['title'];
 
+			if ( array_key_exists( 'badges', $arg ) ) {
+				$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+				$badges = array();
+
+				foreach ( $arg['badges'] as $badgeSrialization ) {
+					$badgeId = new ItemId( $badgeSrialization );
+
+					$itemTitle = $entityContentFactory->getTitleForId( $badgeId, \Revision::FOR_THIS_USER );
+
+					if ( is_null( $itemTitle ) ) {
+						wfProfileOut( __METHOD__ );
+						$this->dieUsage( "Badges: no item found matching ID $badgeSrialization", 'no-such-item-id-badges' );
+					}
+
+					$itemContent = $this->loadEntityContent( $itemTitle );
+
+					if ( is_null( $itemContent ) ) {
+						//XXX: this is actually never executed, as loadEntityContent checks that,
+						//     but it would be nice to have different error code for non-existing badges
+						wfProfileOut( __METHOD__ );
+						$this->dieUsage( "Badges: can't access item content of " . $itemTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-item-badges' );
+					}
+
+					$badges[] = $badgeId;
+				}
+			} else {
+				$badges = null;
+			}
+
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
 			} else {
@@ -363,7 +394,7 @@ class EditEntity extends ModifyEntity {
 						'no-external-page' );
 				}
 
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage, $badges );
 			}
 		}
 
