@@ -22,6 +22,7 @@
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 
 namespace Wikibase\Test\Api;
@@ -50,9 +51,9 @@ class EntityTestHelper {
 			"new" => "item",
 			"data" => array(
 				"sitelinks" => array(
-					array( "site" => "dewiki", "title" => "Berlin" ),
-					array( "site" => "enwiki", "title" => "Berlin" ),
-					array( "site" => "nlwiki", "title" => "Berlin" ),
+					array( "site" => "dewiki", "title" => "Berlin", 'badges' => array( "Q42", "Q149" ) ),
+					array( "site" => "enwiki", "title" => "Berlin", 'badges' => array() ),
+					array( "site" => "nlwiki", "title" => "Berlin", 'badges' => array( "Q149" ) ),
 					array( "site" => "nnwiki", "title" => "Berlin" ),
 				),
 				"labels" => array(
@@ -78,10 +79,10 @@ class EntityTestHelper {
 			"new" => "item",
 			"data" => array(
 				"sitelinks" => array(
-					array( "site" => "enwiki", "title" => "London" ),
-					array( "site" => "dewiki", "title" => "London" ),
-					array( "site" => "nlwiki", "title" => "London" ),
-					array( "site" => "nnwiki", "title" => "London" ),
+					array( "site" => "enwiki", "title" => "London", 'badges' => array( "Q42" ) ),
+					array( "site" => "dewiki", "title" => "London", 'badges' ),
+					array( "site" => "nlwiki", "title" => "London", 'badges' => array() ),
+					array( "site" => "nnwiki", "title" => "London", 'badges' => array( "Q42", "Q149" ) ),
 				),
 				"labels" => array(
 					array( "language" => "de", "value" => "London" ),
@@ -115,10 +116,10 @@ class EntityTestHelper {
 			"new" => "item",
 			"data" => array(
 				"sitelinks" => array(
-					array( "site" => "dewiki", "title" => "Oslo" ),
-					array( "site" => "enwiki", "title" => "Oslo" ),
-					array( "site" => "nlwiki", "title" => "Oslo" ),
-					array( "site" => "nnwiki", "title" => "Oslo" ),
+					array( "site" => "dewiki", "title" => "Oslo", 'badges' => array() ),
+					array( "site" => "enwiki", "title" => "Oslo", 'badges' => array( "Q42", "Q149" ) ),
+					array( "site" => "nlwiki", "title" => "Oslo", 'badges' ),
+					array( "site" => "nnwiki", "title" => "Oslo", 'badges' => array( "Q42" ) ),
 				),
 				"labels" => array(
 					array( "language" => "de", "value" => "Oslo" ),
@@ -152,8 +153,8 @@ class EntityTestHelper {
 			"data" => array(
 				"sitelinks" => array(
 					array( "site" => "dewiki", "title" => "Episkopi Cantonment" ),
-					array( "site" => "enwiki", "title" => "Episkopi Cantonment" ),
-					array( "site" => "nlwiki", "title" => "Episkopi Cantonment" ),
+					array( "site" => "enwiki", "title" => "Episkopi Cantonment", 'badges' => array( "Q149" ) ),
+					array( "site" => "nlwiki", "title" => "Episkopi Cantonment", 'badges' => array( "Q42" ) ),
 				),
 				"labels" => array(
 					array( "language" => "de", "value" => "Episkopi Cantonment" ),

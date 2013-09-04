@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 use ApiTestCase;
 
 /**
- * Additional tests for ApiLinkSite API module.
+ * Additional tests for SetSiteLink API module.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,16 +55,16 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		return array(
 			array( //0 set new link using id
 				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'leipzig' ),
-				'e' => array( 'value' => array( 'dewiki' => 'Leipzig' ) ) ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Leipzig', 'badges' => array() ) ) ) ),
 			array( //1 set new link using sitelink
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => 'berlin' ),
-				'e' => array( 'value' => array( 'nowiki' => 'Berlin' ), 'indb' => 5 ) ),
+				'e' => array( 'value' => array( 'nowiki' => array( 'title' => 'Berlin', 'badges' => array() ) ), 'indb' => 5 ) ),
 			array( //2 modify link using id
 				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'Leipzig_Two' ),
-				'e' => array( 'value' => array( 'dewiki' => 'Leipzig Two' ) ) ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Leipzig Two', 'badges' => array() ) ) ) ),
 			array( //3 modify link using sitelink
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => 'Berlin_Two' ),
-				'e' => array( 'value' => array( 'nowiki' => 'Berlin Two' ), 'indb' => 5 ) ),
+				'e' => array( 'value' => array( 'nowiki' => array( 'title' => 'Berlin Two', 'badges' => array() ) ), 'indb' => 5 ) ),
 			array( //4 remove link using id (with a summary)
 				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => '', 'summary' => 'WooSummary' ),
 				'e' => array( 'value' => array() ) ),
@@ -72,8 +72,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => '' ),
 				'e' => array( 'value' => array(), 'indb' => 4 ) ),
 			array( //6 no change
-				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin' ),
-				'e' => array( 'value' => array( 'dewiki' => 'Berlin' ), 'warning' => 'edit-no-change', 'indb' => 4 ) ),
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => 'Q42|Q149' ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( 'Q4', 'Q149' ) ) ), 'warning' => 'edit-no-change', 'indb' => 4 ) ),
 		);
 	}
 
@@ -132,14 +132,39 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'lastrevid', $result['entity'], 'entity should contain lastrevid key' );
 
 		// -- check the result only has our changed data (if any)  ------------
-		$this->assertEquals( 1, count( $result['entity']['sitelinks'] ), "Entity return contained more than a single site" );
-		$this->assertArrayHasKey( $params['linksite'], $result['entity']['sitelinks'], "Entity doesn't return expected site" );
-		$this->assertEquals( $params['linksite'], $result['entity']['sitelinks'][$params['linksite']]['site'], "Returned incorrect site" );
-		if ( array_key_exists( $params['linksite'], $expected['value'] ) ) {
-			$this->assertArrayHasKey( 'url', $result['entity']['sitelinks'][$params['linksite']] );
-			$this->assertEquals( $expected['value'][$params['linksite']], $result['entity']['sitelinks'][$params['linksite']]['title'], "Returned incorrect sitelink" );
-		} else if ( empty( $value ) ) {
-			$this->assertArrayHasKey( 'removed', $result['entity']['sitelinks'][$params['linksite']], "Entity doesn't return expected 'removed' marker" );
+		$linkSite = $params['linksite'];
+		$sitelinks = $result['entity']['sitelinks'];
+
+		$this->assertEquals( 1, count( $sitelinks ),
+			"Entity return contained more than a single site"
+		);
+
+		$this->assertArrayHasKey( $linkSite, $sitelinks,
+			"Entity doesn't return expected site"
+		);
+
+		$sitelink = $sitelinks[$linkSite];
+
+		$this->assertEquals( $linkSite, $sitelink['site'],
+			"Returned incorrect site"
+		);
+
+		if ( array_key_exists( $linkSite, $expected['value'] ) ) {
+			$expSitelink = $expected['value'][ $linkSite ];
+
+			$this->assertArrayHasKey( 'url', $sitelink );
+			$this->assertEquals( $expSitelink['title'], $sitelink['title'],
+				"Returned incorrect title"
+			);
+
+			/*$this->assertArrayHasKey( 'badges', $sitelink );
+			$this->assertEquals( $expSitelink['badges'], $sitelink['badges'],
+				"Returned incorrect badges"
+			);*/
+		} else if ( empty( $expected['value'] ) ) {
+			$this->assertArrayHasKey( 'removed', $sitelink,
+				"Entity doesn't return expected 'removed' marker"
+			);
 		}
 
 		// -- check any warnings ----------------------------------------------
@@ -157,11 +182,16 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		}
 		if ( $expectedInDb ) {
 			$this->assertArrayHasKey( 'sitelinks', $dbEntity );
-			$dbSitelinks = self::flattenArray( $dbEntity['sitelinks'], 'site', 'title', true );
-			$this->assertEquals( $expectedInDb, count( $dbSitelinks ) );
-			foreach ( $expected['value'] as $valueSite => $value ) {
-				$this->assertArrayHasKey( $valueSite, $dbSitelinks );
-				$this->assertEquals( $value, $dbSitelinks[$valueSite][0] );
+
+			foreach ( array( 'title', 'badges' ) as $prop ) {
+				$dbSitelinks = self::flattenArray( $dbEntity['sitelinks'], 'site', $prop );
+				$this->assertEquals( $expectedInDb, count( $dbSitelinks ) );
+				foreach ( $expected['value'] as $valueSite => $value ) {
+					$this->assertArrayHasKey( $valueSite, $dbSitelinks );
+					$this->assertEquals( $value[$prop], $dbSitelinks[$valueSite],
+						"'$prop' value is not correct"
+					);
+				}
 			}
 		} else {
 			$this->assertArrayNotHasKey( 'sitelinks', $dbEntity );

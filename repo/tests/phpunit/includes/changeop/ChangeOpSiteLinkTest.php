@@ -4,10 +4,10 @@ namespace Wikibase\Test;
 
 use Site;
 use Wikibase\ChangeOpSiteLink;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
 use InvalidArgumentException;
-use Wikibase\SiteLink;
 
 /**
  * @covers Wikibase\ChangeOpSiteLink
@@ -38,6 +38,7 @@ use Wikibase\SiteLink;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Michał Łazowik
  */
 class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
@@ -45,8 +46,8 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorProvider
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testConstructorWithInvalidArguments( $siteId, $linkPage ) {
-		new ChangeOpSiteLink( $siteId, $linkPage );
+	public function testConstructorWithInvalidArguments( $siteId, $linkPage, $badges = null ) {
+		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
 	}
 
 	public function invalidConstructorProvider() {
@@ -54,13 +55,20 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		$argLists[] = array( 'enwiki', 1234 );
 		$argLists[] = array( 1234, 'Berlin' );
+		$argLists[] = array( 'enwiki', 'Berlin', 'Nyan Certified' );
 
 		return $argLists;
 	}
 
 	public function changeOpSiteLinkProvider() {
-		$existingSiteLinks = array( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
-		$enSiteLink = new SimpleSiteLink( 'enwiki', 'Berlin' );
+		$deSiteLink = new SimpleSiteLink( 'dewiki', 'Berlin' );
+		$enSiteLink = new SimpleSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
+		$plSiteLink = new SimpleSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
+
+		$existingSiteLinks = array(
+			$deSiteLink,
+			$plSiteLink
+		);
 
 		$item = Item::newEmpty();
 
@@ -69,8 +77,40 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$args = array();
-		$args[] = array ( clone $item, new ChangeOpSiteLink( 'enwiki', 'Berlin' ), array_merge( $existingSiteLinks, array ( $enSiteLink ) ) );
-		$args[] = array ( clone $item, new ChangeOpSiteLink( 'dewiki', null ), array() );
+
+		// adding sitelink with badges
+		$args[] = array(
+			clone $item,
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( 'Q149' ) ),
+			array_merge( $existingSiteLinks, array ( $enSiteLink ) )
+		);
+
+		// deleting sitelink
+		$args[] = array(
+			clone $item,
+			new ChangeOpSiteLink( 'dewiki', null ),
+			array( $plSiteLink )
+		);
+
+		// setting badges on existing sitelink
+		$args[] = array(
+			clone $item,
+			new ChangeOpSiteLink( 'plwiki', 'Berlin', array( 'Q42', 'Q149' ) ),
+			array(
+				$deSiteLink,
+				new SimpleSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
+			)
+		);
+
+		// changing sitelink without modifying badges
+		$args[] = array(
+			clone $item,
+			new ChangeOpSiteLink( 'plwiki', 'Test' ),
+			array(
+				$deSiteLink,
+				new SimpleSiteLink( 'plwiki', 'Test', array( new ItemId( 'Q42' ) ) )
+			)
+		);
 
 		return $args;
 	}
