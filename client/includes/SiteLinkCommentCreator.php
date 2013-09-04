@@ -41,11 +41,15 @@ class SiteLinkCommentCreator {
 	 * @param string $action
 	 * @param string $comment
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	public function getEditComment( Diff $siteLinkDiff, $action, $comment ) {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
-			return $this->getSiteLinkComment( $action, $siteLinkDiff );
+			$siteLinkComment = $this->getSiteLinkComment( $action, $siteLinkDiff );
+
+			if ( !empty( $siteLinkComment ) ) {
+				return $siteLinkComment;
+			}
 		}
 
 		return $comment;
@@ -58,13 +62,11 @@ class SiteLinkCommentCreator {
 	 * @param string $action Change action
 	 * @param Diff $siteLinkDiff The change's site link diff
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function getSiteLinkComment( $action, Diff $siteLinkDiff ) {
-		$params = array();
-
 		if ( $siteLinkDiff->isEmpty() ) {
-			return $params;
+			return null;
 		}
 
 		//TODO: Implement comments specific to the affected page.
@@ -75,9 +77,19 @@ class SiteLinkCommentCreator {
 
 		// change involved site link to client wiki
 		if ( array_key_exists( $siteId, $diffOps ) ) {
-			// backwards compatibility in case of old, pre-badges changes still in the queue
-			$diffOp = $diffOp = array_key_exists( 'name', $siteLinkDiff[$siteId] )
-				? $siteLinkDiff[$siteId]['name'] : $siteLinkDiff[$siteId];
+
+			// $siteLinkDiff changed from containing atomic diffs to
+			// containing map diffs. For B/C, handle both cases.
+			$diffOp = $diffOps[$siteId];
+
+			if ( $diffOp instanceof Diff ) {
+				if ( array_key_exists( 'name', $diffOp ) ) {
+					$diffOp = $diffOp['name'];
+				} else {
+					// change to badges only
+					return null;
+				}
+			}
 
 			$params = $this->getSiteLinkAddRemoveParams( $diffOp, $action, $siteId );
 		} else {
@@ -98,7 +110,7 @@ class SiteLinkCommentCreator {
 	/**
 	 * @param Diff[] $diffs
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function getSiteLinkChangeParams( array $diffs ) {
 		$messagePrefix = 'wikibase-comment-sitelink-';
@@ -109,11 +121,16 @@ class SiteLinkCommentCreator {
 
 		foreach( $diffs as $siteId => $diff ) {
 			// backwards compatibility in case of old, pre-badges changes in the queue
-			$diffOp = array_key_exists( 'name', $diff ) ? $diff['name'] : $diff;
+			$diffOp = ( ( $diff instanceof Diff ) && array_key_exists( 'name', $diff ) ) ? $diff['name'] : $diff;
+			$args = $this->getChangeParamsForDiffOp( $diffOp, $siteId, $messagePrefix );
+
+			if ( empty( $args ) ) {
+				return null;
+			}
 
 			$params = array_merge(
 				$params,
-				$this->getChangeParamsForDiffOp( $diffOp, $siteId, $messagePrefix )
+				$args
 			);
 
 			// todo handle if there are multiple diffOps here
@@ -128,7 +145,7 @@ class SiteLinkCommentCreator {
 	 * @param string $siteId
 	 * @param string $messagePrefix
 	 *
-	 * return array
+	 * return array|null
 	 */
 	protected function getChangeParamsForDiffOp( DiffOp $diffOp, $siteId, $messagePrefix ) {
 		$params = array();
@@ -160,6 +177,9 @@ class SiteLinkCommentCreator {
 					'page' => $diffOp->getNewValue()
 				)
 			);
+		} else {
+			// whatever
+			$params = null;
 		}
 
 		return $params;
@@ -170,7 +190,7 @@ class SiteLinkCommentCreator {
 	 * @param string $action
 	 * @param string $siteId
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	protected function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId ) {
 		$params = array();
@@ -196,6 +216,9 @@ class SiteLinkCommentCreator {
 					'page' => $diffOp->getNewValue()
 				)
 			);
+		} else {
+			// whatever
+			$params = null;
 		}
 
 		return $params;

@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use Diff\Diff;
+use Diff\DiffOpChange;
+use Diff\MapDiff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
@@ -107,6 +109,26 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		return $change->getSiteLinkDiff();
 	}
 
+	protected function getOldLinkChangeDiff() {
+		$diff = new MapDiff( array(
+			'enwiki' => new DiffOpChange( 'Japan', 'Tokyo' )
+		) );
+
+		return $diff;
+	}
+
+	protected function getBadgeChangeDiff() {
+		$item = $this->getNewItem();
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+
+		$item2 = $item->copy();
+		$item2->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) ) );
+
+		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
+
+		return $change->getSiteLinkDiff();
+	}
+
 	protected function getAddLinkDiff() {
 		$item = $this->getNewItem();
 		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
@@ -204,6 +226,28 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 					)
 				)
 			)
+		);
+
+		$updates[] = array(
+			$this->getOldLinkChangeDiff(),
+			array(
+				'message' => 'wikibase-comment-sitelink-change',
+				'sitelink' => array(
+					'oldlink' => array(
+						'site' => 'enwiki',
+						'page' => 'Japan'
+					),
+					'newlink' => array(
+						'site' => 'enwiki',
+						'page' => 'Tokyo'
+					)
+				)
+			)
+		);
+
+		$updates[] = array(
+			$this->getBadgeChangeDiff(),
+			'wikibase-comment-update',
 		);
 
 		$updates[] = array(
