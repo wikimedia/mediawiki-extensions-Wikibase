@@ -32,6 +32,7 @@ use Wikibase\Utils;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Michał Łazowik
  */
 class EditEntity extends ModifyEntity {
 
@@ -175,7 +176,7 @@ class EditEntity extends ModifyEntity {
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
-			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
+			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity', 'sitelinks', 'sitelink', array( 'badges' ) );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -324,6 +325,9 @@ class EditEntity extends ModifyEntity {
 			$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
 			$globalSiteId = $arg['site'];
 			$pageTitle = $arg['title'];
+			$badges = ( array_key_exists( 'badges', $arg ) )
+				? $arg['badges']
+				: null;
 
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
@@ -342,7 +346,7 @@ class EditEntity extends ModifyEntity {
 						'no-external-page' );
 				}
 
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage, $badges );
 			}
 		}
 

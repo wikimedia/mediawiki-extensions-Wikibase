@@ -32,6 +32,7 @@ use ApiTestCase;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Michał Łazowik
  *
  * @group API
  * @group Wikibase
@@ -76,14 +77,44 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}' ),
 				'e' => array( 'type' => 'property' ) ),
 			array( //3 add a sitelink..
-				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ) ) ),
+				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["Q42","Q149"]}}}' ),
+				'e' => array(
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'TestPage!',
+							'badges' => array( 'Q42', 'Q149' )
+						)
+					)
+				)
+			),
 			array( //4 add a label..
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ), 'labels' => array( 'en' => 'A Label' ) ) ),
+				'e' => array(
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'TestPage!',
+							'badges' => array( 'Q42', 'Q149' )
+						)
+					),
+					'labels' => array( 'en' => 'A Label' )
+				)
+			),
 			array( //5 add a description..
 				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'TestPage!' ), 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
+				'e' => array(
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'TestPage!',
+							'badges' => array( 'Q42', 'Q149' )
+						)
+					),
+					'labels' => array( 'en' => 'A Label' ),
+					'descriptions' => array( 'en' => 'DESC' )
+				)
+			),
 			array( //6 remove a sitelink..
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
 				'e' => array( 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
@@ -95,7 +126,17 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'type' => 'item' ) ),
 			array( //9 clear an item with some new value
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}', 'clear' => '' ),
-				'e' => array( 'type' => 'item', 'sitelinks' => array( 'dewiki' => 'Page' ) ) ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'Page',
+							'badges' => array()
+						)
+					)
+				)
+			),
 			array( //10 clear an item with no value
 				'p' => array( 'data' => '{}', 'clear' => '' ),
 				'e' => array( 'type' => 'item' ) ),
@@ -107,10 +148,48 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'descriptions' => array( 'en' => 'DESC1', 'de' => 'DESC2' ) ) ),
 			array( //13 override and add a 2 sitelinks..
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"BAA"},"svwiki":{"site":"svwiki","title":"FOO"}}}' ),
-				'e' => array( 'sitelinks' => array( 'dewiki' => 'BAA', 'svwiki' => 'FOO' ) ) ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'dewiki',
+							'title' => 'BAA',
+							'badges' => array()
+						),
+						array(
+							'site' => 'svwiki',
+							'title' => 'FOO',
+							'badges' => array()
+						)
+					)
+				)
+			),
 			array( //14 unset a sitelink using the other sitelink
 				'p' => array( 'site' => 'svwiki', 'title' => 'FOO', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
-				'e' => array( 'sitelinks' => array( 'svwiki' => 'FOO' ) ) ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'svwiki',
+							'title' => 'FOO',
+							'badges' => array()
+						)
+					)
+				)
+			),
+			array( //15 set badges for a existing sitelink
+				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","title":"FOO","badges":["Q149","Q42"]}}}' ),
+				'e' => array(
+					'type' => 'item',
+					'sitelinks' => array(
+						array(
+							'site' => 'svwiki',
+							'title' => 'FOO',
+							'badges' => array( "Q149", "Q42" )
+						)
+					)
+				)
+			)
 		);
 	}
 
