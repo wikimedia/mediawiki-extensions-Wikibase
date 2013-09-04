@@ -22,6 +22,7 @@
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 
 namespace Wikibase\Test\Api;
@@ -184,6 +185,14 @@ class EntityTestHelper {
 				),
 			)
 		),
+		'Featured' => array(
+			"new" => "item",
+			"data" => array()
+		),
+		'Good' => array(
+			"new" => "item",
+			"data" => array()
+		)
 
 	);
 

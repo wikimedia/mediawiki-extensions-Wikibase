@@ -42,6 +42,7 @@ use Wikibase\Settings;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 abstract class WikibaseApiTestCase extends ApiTestCase {
 
@@ -267,11 +268,15 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			$data = self::flattenArray( $actual['sitelinks'], 'site', 'title' );
-			$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
+			foreach( array( 'title', 'badges' ) as $valueField ) {
+				$data = self::flattenArray( $actual['sitelinks'], 'site', $valueField );
+				$exp = self::flattenArray( $expected['sitelinks'], 'site', $valueField );
 
-			// keys are significant in flat form
-			$this->assertArrayEquals( $exp, $data, false, true );
+				// keys are significant in flat form
+				$this->assertArrayEquals( $exp, $data, false, true,
+					"'$valueField' value is not correct"
+				);
+			}
 		}
 
 		if ( isset( $expected['aliases'] ) ) {
