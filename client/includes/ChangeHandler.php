@@ -803,7 +803,10 @@ class ChangeHandler {
 		$action = $change->getAction();
 		$comment = $change->getComment();
 
-		return $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+		assert( !is_array( $editComment ) || !empty( $editComment ) );
+
+		return $editComment;
 	}
 
 }
