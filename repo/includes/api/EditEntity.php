@@ -42,6 +42,7 @@ use WikiPage;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 class EditEntity extends ModifyEntity {
 
@@ -190,7 +191,7 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "Non Items can not have sitelinks", 'not-recognized' );
 			}
 
-			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'] ) );
+			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $entity ) );
 		}
 
 		if( array_key_exists( 'claims', $data ) ) {
@@ -331,10 +332,13 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @since 0.4
+	 *
 	 * @param array $siteLinks
+	 * @param Entity $entity
+	 *
 	 * @return ChangeOpSiteLink[]
 	 */
-	protected function getSitelinksChangeOps( $siteLinks ) {
+	protected function getSitelinksChangeOps( $siteLinks, Entity $entity ) {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
@@ -346,7 +350,10 @@ class EditEntity extends ModifyEntity {
 		foreach ( $siteLinks as $siteId => $arg ) {
 			$this->checkSiteLinks( $arg, $siteId, $sites );
 			$globalSiteId = $arg['site'];
-			$pageTitle = $arg['title'];
+
+			$shouldRemove = array_key_exists( 'remove', $arg )
+				|| ( !isset( $arg['title'] ) && !isset( $arg['badges'] ) )
+				|| ( isset( $arg['title'] ) && $arg['title'] === '' );
 
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
@@ -354,18 +361,30 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
 
-			if ( array_key_exists( 'remove', $arg ) || $pageTitle === "" ) {
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, null );
+			if ( $shouldRemove ) {
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId );
 			} else {
-				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $pageTitle ) );
+				$badges = ( isset( $arg['badges'] ) )
+					? $this->parseSiteLinkBadges( $arg['badges'] )
+					: null;
 
-				if ( $linkPage === false ) {
-					$this->dieUsage(
-						"The external client site did not provide page information for site '{$globalSiteId}' and title '{$pageTitle}'",
-						'no-external-page' );
+				if ( isset( $arg['title'] ) ) {
+					$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $arg['title'] ) );
+
+					if ( $linkPage === false ) {
+						$this->dieUsage(
+							"The external client site did not provide page information for site '{$globalSiteId}' and title '{$pageTitle}'",
+							'no-external-page' );
+					}
+				} else {
+					$linkPage = null;
+
+					if ( !$entity->hasLinkToSite( $globalSiteId ) ) {
+						$this->dieUsage( "Cannot modify badges: sitelink to '{$globalSiteId}' doesn't exist", 'no-such-sitelink' );
+					}
 				}
 
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage, $badges );
 			}
 		}
 
@@ -607,6 +626,8 @@ class EditEntity extends ModifyEntity {
 			array( 'code' => 'not-recognized-array', 'info' => $this->msg( 'wikibase-api-not-recognized-array' )->text() ),
 			array( 'code' => 'no-such-site', 'info' => $this->msg( 'wikibase-api-no-such-site' )->text() ),
 			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
+			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
+			array( 'code' => 'no-such-sitelink', 'info' => $this->msg( 'wikibase-api-no-sitelink' )->text() ),
 			array( 'code' => 'invalid-json', 'info' => $this->msg( 'wikibase-api-invalid-json' )->text() ),
 			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
 			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
@@ -757,8 +778,19 @@ class EditEntity extends ModifyEntity {
 		if ( isset( $sites ) && !$sites->hasSite( $arg['site'] ) ) {
 			$this->dieUsage( "unknown site: {$arg['site']}", 'not-recognized-site' );
 		}
-		if ( !is_string( $arg['title'] ) ) {
+		if ( isset( $arg['title'] ) && !is_string( $arg['title'] ) ) {
 			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
+		}
+		if ( isset( $arg['badges'] ) ) {
+			if ( !is_array( $arg['badges'] ) ) {
+				$this->dieUsage( 'Badges: an array was expected, but not found' , 'not-recognized-array' );
+			} else {
+				foreach ( $arg['badges'] as $badge ) {
+					if ( !is_string( $badge ) ) {
+						$this->dieUsage( 'Badges: a string was expected, but not found' , 'not-recognized-string' );
+					}
+				}
+			}
 		}
 	}
 
