@@ -82,7 +82,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
-		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 
 		$claims = new \Wikibase\Claims( $entityContent->getEntity()->getClaims() );
 
@@ -226,7 +226,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$this->assertEquals( $errorCode, $e->getCodeString(), 'Invalid request raised correct error' );
 		}
 
-		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 
 		$this->assertFalse( $entityContent->getEntity()->hasClaims() );
 	}
@@ -280,7 +280,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$this->assertNotEquals( $firstGuid, $secondGuid );
 
-		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 
 		$claims = new \Wikibase\Claims( $entityContent->getEntity()->getClaims() );
 
