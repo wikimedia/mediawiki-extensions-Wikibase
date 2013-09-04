@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_cc80e84f",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-04T17:37:26Z",
+      "side": 1,
+      "message": "This comment seems misleading, it looks like this part of code \"change[s] to badges only\". I\u0027d write \"only badges changed\"",
+      "revId": "baf1004444f02ee8cd8a1e6178eaaacf37b27cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
