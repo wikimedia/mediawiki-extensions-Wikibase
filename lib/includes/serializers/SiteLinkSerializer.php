@@ -103,11 +103,15 @@ class SiteLinkSerializer extends SerializerObject {
 			}
 
 			if ( $includeBadges ) {
-				$response['badges'] = array();
+				$badges = array();
 
 				foreach ( $link->getBadges() as $badge ) {
-					$response['badges'][] = $badge->getSerialization();
+					$badges[] = $badge->getSerialization();
 				}
+
+				$this->setIndexedTagName( $badges , 'badge' );
+
+				$response['badges'] = $badges;
 			}
 
 			if ( in_array( 'sitelinks/removed', $this->options->getProps() ) ) {
