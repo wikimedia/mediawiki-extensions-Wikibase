@@ -174,6 +174,10 @@ abstract class ApiWikibase extends \ApiBase {
 				$serializerOptions->addProp( 'sitelinks/urls' );
 			}
 
+			if ( in_array( 'badges', $options ) ) {
+				$serializerOptions->addProp( 'sitelinks/badges' );
+			}
+
 			if ( in_array( 'removed', $options ) ) {
 				$serializerOptions->addProp( 'sitelinks/removed' );
 			}

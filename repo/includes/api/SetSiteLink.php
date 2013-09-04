@@ -24,6 +24,7 @@ use Wikibase\Utils;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Michał Łazowik
  */
 class SetSiteLink extends ModifyEntity {
 
@@ -92,7 +93,7 @@ class SetSiteLink extends ModifyEntity {
 		} else {
 			$this->getChangeOp( $params )->apply( $item, $summary );
 			$link = $item->getSimpleSiteLink( $linksite );
-			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url', 'badges' ) );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -131,8 +132,19 @@ class SetSiteLink extends ModifyEntity {
 				$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
 			}
 
+			if ( $params['badges'] !== null ) {
+				print_r( $params );
+				$badges = array();
+
+				foreach ( $params['badges'] as $badge ) {
+					$badges[] = $this->stringNormalizer->trimWhitespace( $badge );
+				}
+			} else {
+				$badges = null;
+			}
+
 			wfProfileOut( __METHOD__ );
-			return new ChangeOpSiteLink( $linksite, $page );
+			return new ChangeOpSiteLink( $linksite, $page, $badges );
 		}
 	}
 
@@ -170,6 +182,10 @@ class SetSiteLink extends ModifyEntity {
 				'linktitle' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'badges' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_ISMULTI => true,
+				),
 			)
 		);
 	}
@@ -189,6 +205,7 @@ class SetSiteLink extends ModifyEntity {
 			array(
 				'linksite' => 'The identifier of the site on which the article to link resides',
 				'linktitle' => 'The title of the article to link. If this parameter is not set or an empty string, the link will be removed',
+				'badges' => 'An array of badges to replace the current ones. If this parameter is not set the badges will not be changed',
 			)
 		);
 	}
