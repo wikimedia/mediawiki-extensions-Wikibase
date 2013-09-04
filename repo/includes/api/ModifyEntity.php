@@ -6,6 +6,7 @@ use Status;
 use User;
 use Title;
 use ApiBase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
@@ -23,6 +24,7 @@ use Wikibase\Utils;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 abstract class ModifyEntity extends ApiWikibase {
 
@@ -112,6 +114,53 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		return $entityContent;
+	}
+
+	/**
+	 * Validates badges from params and turns them into an array of ItemIds.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $badgesParams
+	 *
+	 * @return ItemId[]
+	 */
+	protected function parseSitelinkBadges( array $badgesParams ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
+		$badges = array();
+
+		foreach ( $badgesParams as $badgeSerialization ) {
+			try{
+				$badgeId = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $badgeSerialization );
+			} catch( \ValueParsers\ParseException $e ){
+				$this->dieUsage( "Badges: could not parse {$badgeSerialization}, no entity found", 'no-such-entity-id' );
+			}
+
+			if ( !( $badgeId instanceof ItemId ) ) {
+				$this->dieUsage( "Badges: entity id {$badgeSerialization} is not an id of item", 'not-item' );
+			}
+
+			$itemTitle = $entityContentFactory->getTitleForId( $badgeId, \Revision::FOR_THIS_USER );
+
+			if ( is_null( $itemTitle ) ) {
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage( "Badges: no item found matching ID $badgeSrialization", 'no-such-entity' );
+			}
+
+			$itemContent = $this->loadEntityContent( $itemTitle );
+
+			if ( is_null( $itemContent ) ) {
+				//FIXME: this is actually never executed, as loadEntityContent checks that,
+				//       but it would be nice to have different error code for non-existing badges
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage( "Badges: can't access item content of " . $itemTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'cant-load-entity-content' );
+			}
+
+			$badges[] = $badgeId;
+		}
+
+		return $badges;
 	}
 
 	/**
@@ -292,6 +341,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
 			array( 'code' => 'no-such-entity-link', 'info' => $this->msg( 'wikibase-api-no-such-entity-link' )->text() ),
 			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
 			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
 			array( 'code' => 'permissiondenied', 'info' => $this->msg( 'wikibase-api-permissiondenied' )->text() ),
 			array( 'code' => 'failed-modify', 'info' => $this->msg( 'wikibase-api-failed-modify' )->text() ),
