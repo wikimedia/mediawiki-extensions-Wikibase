@@ -244,7 +244,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		if( array_key_exists( 'props', $params ) ){
 			$expected['props'] = explode( '|', $params['props'] );
 		} else {
-			$expected['props'] = array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype' );
+			$expected['props'] = array( 'info', 'sitelinks', 'sitelinks/badges', 'aliases', 'labels', 'descriptions', 'claims', 'datatype' );
 		}
 		//expect the languages in params or just all languages
 		if( array_key_exists( 'languages', $params ) ){
