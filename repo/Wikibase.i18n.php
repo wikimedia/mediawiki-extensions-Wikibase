@@ -20,6 +20,7 @@ $messages = array();
  * @author Jens Ohlig
  * @author Anja Jentzsch
  * @author Daniel Werner
+ * @author Michał Łazowik
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -264,6 +265,8 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-no-such-entity' => 'Could not find such an entity', # Do not translate
 	'wikibase-api-no-such-entity-id' => 'Could not find such an entity id', # Do not translate
 	'wikibase-api-no-such-entity-link' => 'Could not find such an entity link', # Do not translate
+	'wikibase-api-no-such-item-badges' => 'Badges: could not find such an item', # Do not translate
+	'wikibase-api-no-such-item-id-badges' => 'Badges: could not find such an item id', # Do not translate
 	'wikibase-api-no-such-reference' => 'Could not find such a reference', # Do not translate
 	'wikibase-api-no-such-site' => 'Could not find such a site', # Do not translate
 	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
@@ -313,6 +316,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Added link to [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Changed link to [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed link to [$2]',
+	'wikibase-item-summary-wbsetsitelink-badges' => 'badges',
 	'wikibase-item-summary-wblinktitles-create' => 'Created this item to connect pages [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Added a language link to connect pages [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
@@ -1012,6 +1016,8 @@ See also:
 	'wikibase-api-no-such-entity' => '!!DO NOT TRANSLATE!! Could not find such an entity, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-entity-id' => '!!DO NOT TRANSLATE!! Could not find such an entity id, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-entity-link' => '!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data',
+	'wikibase-api-no-such-item-badges' => '!!DO NOT TRANSLATE!! Badges: could not find such an item, this could be to the user entering the wrong data',
+	'wikibase-api-no-such-item-id-badges' => '!!DO NOT TRANSLATE!! Badges: could not find such an item id, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-reference' => '!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-site' => '!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-statement' => '!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data',
@@ -1067,6 +1073,7 @@ Parameters:
 	'wikibase-item-summary-wbsetsitelink-set' => '{{doc-important|Translate this as "Changed link which points to <nowiki>[$2]</nowiki>".}}
 {{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when editing a language link. Such a summary could appear in English as "Changed link to [itwiki]:  Italia".}}',
 	'wikibase-item-summary-wbsetsitelink-remove' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when removing a language link from a Wikidata item (page). Such a summary could appear in English as "Removed link to [itwiki]".}}',
+	'wikibase-item-summary-wbsetsitelink-badges' => '{{wikibase summary messages|sitelinks|Part of automatic edit summary (autocomment) indicating that badges were changed. This message preceeds the list of badges.}}',
 	'wikibase-item-summary-wblinktitles-create' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s) by creating a new data item.}}
 
 This module generates a slightly different summary (autocomment) than the other ones.
@@ -8448,7 +8455,7 @@ tapno birukem ti napananda.',
 * pagsasao – nalawag a pateg para iti pananginagan ti pagsasao para iti testo a paset
 * pateg – nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti pagsasao',
 	'wikibase-listdatatypes-string-head' => 'Kuerdas',
-	'wikibase-listdatatypes-string-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas dagiti karakter. Ti kadawyan a panag-usar ket dagiti pananginagan nga adda dagiti naisurat a porma a saan nga agtaltalek iti pagsasao iti agbasbasa. 
+	'wikibase-listdatatypes-string-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas dagiti karakter. Ti kadawyan a panag-usar ket dagiti pananginagan nga adda dagiti naisurat a porma a saan nga agtaltalek iti pagsasao iti agbasbasa.
 
 * pateg– nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti kuerdas',
 	'wikibase-listdatatypes-time-head' => 'Oras',
@@ -9683,7 +9690,7 @@ $messages['kk-cyrl'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'белгісіз мән',
 	'wikibase-snakview-snaktypeselector-novalue' => 'мән жоқ',
 	'wikibase-entityselector-more' => 'толығырақ',
-	'wikibase-anonymouseditwarning' => 'Ескерту: Сіз жүйеге кірмегенсіз. 
+	'wikibase-anonymouseditwarning' => 'Ескерту: Сіз жүйеге кірмегенсіз.
 IP-мекенжайыңыз бұл  $1 түзету тарихында жазылып алынады.',
 	'wikibase-restrictionedit-tooltip-message' => 'Бұл бет құлыпталған. Өңдеуге рұқсатыңыз жоқ.',
 	'wikibase-blockeduser-tooltip-message' => 'Қатысушы атыңыз не IP мекенжайыңыз бұғатталғандықтан өңдеуге рұқсатыңыз жоқ.',
@@ -16080,7 +16087,7 @@ $messages['yi'] = array(
 	'wikibase-shortcopyrightwarning' => 'דורך קליקן "$1", זענט איר מסכים צו די [[$2|ניצבאדינגונגען]], און איר זענט מסכים אָן חרטה צו פארעפנטלעכן אייער ביישטייערונג אונטער דעם $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'איך נעם אָן די באדינגונגען פֿאר מײַנע קומעדיקע רעדאקטירונגען. ווײַזט נישט מער די מעלדונג.',
 	'wikibase-entityselector-more' => 'נאך',
-	'wikibase-anonymouseditwarning' => 'ווארענונג: איר זענט נישט אריינלאגירט. 
+	'wikibase-anonymouseditwarning' => 'ווארענונג: איר זענט נישט אריינלאגירט.
 אייער IP־אדרעס וועט ווערן דאקומענטירט אין דעם רעדאקטירן היסטאריע פון דעם אביעקט.',
 	'wikibase-restrictionedit-tooltip-message' => 'דער בלאט איז געשיצט. מען טאר נישט רעדאקטירן.',
 	'wikibase-blockeduser-tooltip-message' => 'איר האט נישט קיין דערלויבניש צו רעדאקטירן ווייל אייער באניצער־נאמען אדער IP אדרעס איז געווארן בלאקירט.',

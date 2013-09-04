@@ -4,9 +4,11 @@ namespace Wikibase\Api;
 
 use Wikibase\ChangeOpSiteLink;
 use ApiBase, User;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
 /**
@@ -20,6 +22,7 @@ use Wikibase\Utils;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Michał Łazowik
  */
 class SetSiteLink extends ModifyEntity {
 
@@ -88,7 +91,7 @@ class SetSiteLink extends ModifyEntity {
 		} else {
 			$this->getChangeOp( $params )->apply( $item, $summary );
 			$link = $item->getSimpleSiteLink( $linksite );
-			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url', 'badges' ) );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -127,8 +130,37 @@ class SetSiteLink extends ModifyEntity {
 				$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
 			}
 
+			if ( array_key_exists( 'badges', $params ) && $params['badges'] !== null ) {
+				$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+				$badges = array();
+
+				foreach ( $params['badges'] as $badgeSrialization ) {
+					$badgeId = new ItemId( $badgeSrialization );
+
+					$itemTitle = $entityContentFactory->getTitleForId( $badgeId, \Revision::FOR_THIS_USER );
+
+					if ( is_null( $itemTitle ) ) {
+						wfProfileOut( __METHOD__ );
+						$this->dieUsage( "Badges: no item found matching ID $badgeSrialization", 'no-such-item-id-badges' );
+					}
+
+					$itemContent = $this->loadEntityContent( $itemTitle );
+
+					if ( is_null( $itemContent ) ) {
+						//XXX: this is actually never executed, as loadEntityContent checks that,
+						//     but it would be nice to have different error code for non-existing badges
+						wfProfileOut( __METHOD__ );
+						$this->dieUsage( "Badges: can't access item content of " . $itemTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-item-badges' );
+					}
+
+					$badges[] = $badgeId;
+				}
+			} else {
+				$badges = null;
+			}
+
 			wfProfileOut( __METHOD__ );
-			return new ChangeOpSiteLink( $linksite, $page );
+			return new ChangeOpSiteLink( $linksite, $page, $badges );
 		}
 	}
 
@@ -166,6 +198,10 @@ class SetSiteLink extends ModifyEntity {
 				'linktitle' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'badges' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_ISMULTI => true,
+				),
 			)
 		);
 	}
@@ -185,6 +221,7 @@ class SetSiteLink extends ModifyEntity {
 			array(
 				'linksite' => 'The identifier of the site on which the article to link resides',
 				'linktitle' => 'The title of the article to link. If this parameter is not set or an empty string, the link will be removed',
+				'badges' => 'The IDs of items to be set as badges. They will replace the current ones. If this parameter is not set, the badges will not be changed',
 			)
 		);
 	}
