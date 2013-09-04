@@ -43,6 +43,7 @@ use WikiPage;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 class EditEntity extends ModifyEntity {
 
@@ -347,7 +348,10 @@ class EditEntity extends ModifyEntity {
 		foreach ( $siteLinks as $siteId => $arg ) {
 			$this->checkSiteLinks( $arg, $siteId, $sites );
 			$globalSiteId = $arg['site'];
-			$pageTitle = $arg['title'];
+
+			$shouldRemove = array_key_exists( 'remove', $arg )
+				|| ( !isset( $arg['title'] ) && !isset( $arg['badges'] ) )
+				|| ( isset( $arg['title'] ) && $arg['title'] === '' );
 
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
@@ -355,18 +359,26 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
 
-			if ( array_key_exists( 'remove', $arg ) || $pageTitle === "" ) {
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, null );
+			if ( $shouldRemove ) {
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId );
 			} else {
-				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $pageTitle ) );
+				$badges = ( isset( $arg['badges'] ) )
+					? $this->parseSiteLinkBadges( $arg['badges'] )
+					: null;
 
-				if ( $linkPage === false ) {
-					$this->dieUsage(
-						"The external client site did not provide page information for site '{$globalSiteId}' and title '{$pageTitle}'",
-						'no-external-page' );
+				if ( isset( $arg['title'] ) ) {
+					$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $arg['title'] ) );
+
+					if ( $linkPage === false ) {
+						$this->dieUsage(
+							"The external client site did not provide page information for site '{$globalSiteId}' and title '{$pageTitle}'",
+							'no-external-page' );
+					}
+				} else {
+					$linkPage = null;
 				}
 
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage, $badges );
 			}
 		}
 
