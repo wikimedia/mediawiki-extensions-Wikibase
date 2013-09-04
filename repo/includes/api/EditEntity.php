@@ -18,6 +18,7 @@ use Wikibase\ChangeOpSiteLink;
 use Wikibase\ChangeOpException;
 use ApiBase, User, Status, SiteList;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -36,6 +37,7 @@ use WikiPage;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
+ * @author Michał Łazowik
  */
 class EditEntity extends ModifyEntity {
 
@@ -195,7 +197,13 @@ class EditEntity extends ModifyEntity {
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
-			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
+			$this->addSiteLinksToResult(
+				$entity->getSimpleSiteLinks(),
+				'entity',
+				'sitelinks',
+				'sitelink',
+				array( 'badges' )
+			);
 		}
 		$this->addClaimsToResult( $entity->getClaims(), 'entity' );
 
@@ -346,6 +354,10 @@ class EditEntity extends ModifyEntity {
 			$globalSiteId = $arg['site'];
 			$pageTitle = $arg['title'];
 
+			$badges = ( array_key_exists( 'badges', $arg ) && !is_null( $arg['badges'] ) )
+				? $this->parseSiteLinkBadges( $arg['badges'] )
+				: null;
+
 			if ( $sites->hasSite( $globalSiteId ) ) {
 				$linkSite = $sites->getSite( $globalSiteId );
 			} else {
@@ -363,7 +375,7 @@ class EditEntity extends ModifyEntity {
 						'no-external-page' );
 				}
 
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage, $badges );
 			}
 		}
 
