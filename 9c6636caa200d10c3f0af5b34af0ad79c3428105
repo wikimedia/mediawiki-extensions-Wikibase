@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_96d9a121",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T11:55:33Z",
+      "side": 1,
+      "message": "Your missing use Wikibase\\ItemContent; so this will always fail.",
+      "revId": "9c6636caa200d10c3f0af5b34af0ad79c3428105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8977bd7d_d60b198e",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-04T11:55:33Z",
+      "side": 1,
+      "message": "From entity here is returned as a string.\nBelow you use it as it it were an object :)\nThe string needs to be parsed as above to get the item.",
+      "revId": "9c6636caa200d10c3f0af5b34af0ad79c3428105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
