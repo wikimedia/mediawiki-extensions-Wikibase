@@ -799,11 +799,17 @@ class ChangeHandler {
 			$this->site->getGlobalId()
 		);
 
+		//FIXME: this will only work for instances of ItemChange
 		$siteLinkDiff = $change->getSiteLinkDiff();
 		$action = $change->getAction();
 		$comment = $change->getComment();
 
-		return $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+		if( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
+			throw new \MWException( 'getEditComment returned an empty comment' );
+		}
+
+		return $editComment;
 	}
 
 }
