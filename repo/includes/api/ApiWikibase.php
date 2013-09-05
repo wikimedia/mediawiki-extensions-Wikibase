@@ -162,6 +162,7 @@ abstract class ApiWikibase extends \ApiBase {
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
 		$serializerOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_NONE );
+		$serializerOptions->setUseKeys( $this->getUsekeys() );
 
 		if ( isset( $options ) ) {
 			if ( in_array( EntitySerializationOptions::SORT_ASC, $options ) ) {
