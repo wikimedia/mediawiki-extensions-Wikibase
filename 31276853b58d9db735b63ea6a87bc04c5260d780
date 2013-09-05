@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8977bd7d_5c0495c2",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-05T13:56:29Z",
+      "side": 1,
+      "message": "Is there an existing Lua api to fetch it?",
+      "parentUuid": "8977bd7d_f989f325",
+      "revId": "31276853b58d9db735b63ea6a87bc04c5260d780",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c95d3502_29d312d6",
         "filename": "client/includes/WikibaseLibrary.php",
         "patchSetId": 8
