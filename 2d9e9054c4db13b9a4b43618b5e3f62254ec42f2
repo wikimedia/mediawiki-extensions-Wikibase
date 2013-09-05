@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "893c1da4_711c32bf",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T10:59:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow your comment..\nWe are adding claims.. Why would we say they are properties?",
+      "parentUuid": "8977bd7d_3c92799f",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_5cb6553e",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-02T17:21:51Z",
       "side": 1,
       "message": "This looks wrong, the abstract class Entity allows claims, that means technically all entities can have claims, including Property, not only Item.",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_517816f0",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T10:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8977bd7d_5cb6553e",
       "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "893c1da4_5151f65f",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T10:59:35Z",
+      "side": 1,
+      "message": "Indeed and this doesn\u0027t look like a problem that is going to go away to quickly although I will work towards it. Will add",
+      "parentUuid": "8977bd7d_7cb3114d",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_9c80ed4e",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-02T17:21:51Z",
       "side": 1,
       "message": "see above, claims not only for Item objects.",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_316b8a21",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T10:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8977bd7d_9c80ed4e",
       "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "893c1da4_91799efc",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T10:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8977bd7d_dc7a6574",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_bc85a95d",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2013-09-02T17:21:51Z",
       "side": 1,
       "message": "The example of wbsetclaim contains a lowercase property (p56), not uppercase. It is possible to use both?",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_f18822eb",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T10:59:35Z",
+      "side": 1,
+      "message": "All examples have now been changed to uppercase to fall inline with what actually happens in the code now. Both lowercase and uppercase are accepted everywhere (or should be)",
+      "parentUuid": "8977bd7d_bc85a95d",
       "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
