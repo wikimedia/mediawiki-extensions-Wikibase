@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "893c1da4_710192b1",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-05T09:24:50Z",
+      "side": 1,
+      "message": "This is *supposed* to trigger a fatal error, since it violates an internal contract. And I think using asserts for something like that is actually good practice - in theory. PHP\u0027s assert sucks, though. Maybe I\u0027ll introduce wfAssert, as suggested on the mailing list...",
+      "parentUuid": "893c1da4_8e76dba1",
+      "revId": "baf1004444f02ee8cd8a1e6178eaaacf37b27cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_cc80e84f",
         "filename": "client/includes/SiteLinkCommentCreator.php",
         "patchSetId": 1
