@@ -42,13 +42,9 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	}
 
 	/**
-	 * Main method.
+	 * @see SpecialItemResolver::execute
 	 *
 	 * @since 0.1
-	 *
-	 * @param string|null $subPage
-	 *
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );

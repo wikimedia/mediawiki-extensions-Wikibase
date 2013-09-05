@@ -44,13 +44,9 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	}
 
 	/**
-	 * Main method.
+	 * @see SpecialItemResolver::execute
 	 *
 	 * @since 0.1
-	 *
-	 * @param string|null $subPage
-	 *
-	 * @return boolean if the page call was successful
 	 */
 	public function execute( $subPage ) {
 		if ( !parent::execute( $subPage ) ) {
