@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "893c1da4_8e76dba1",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-05T00:39:02Z",
+      "side": 1,
+      "message": "please don\u0027t use assert here.  an exception would be okay, as long as it\u0027s handled in the right places",
+      "revId": "baf1004444f02ee8cd8a1e6178eaaacf37b27cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_cc80e84f",
         "filename": "client/includes/SiteLinkCommentCreator.php",
         "patchSetId": 1
