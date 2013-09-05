@@ -11,7 +11,7 @@ class EntitiesWithoutLabelPage < ItemPage
   page_url WIKI_REPO_URL + "Special:EntitiesWithoutLabel"
 
   text_field(:languageField, :name => "language")
-  button(:entitiesWithoutLabelSubmit, :css => "form#wb-entitieswithoutlabel-form > fieldset > p > input[type='submit']")
+  button(:entitiesWithoutLabelSubmit, :css => "form#wb-entitieswithoutpage-form > fieldset > p > input[type='submit']")
 
   link(:listItemLink, :css => "ol.special > li:nth-of-type(1) > a:nth-of-type(1)")
 
