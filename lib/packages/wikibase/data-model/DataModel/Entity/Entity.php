@@ -204,6 +204,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	/**
 	 * Can be EntityId since 0.3.
 	 * The support for setting an integer here is deprecated since 0.5.
+	 * New deriving classes are allowed to reject anything that is not an EntityId of the correct type.
 	 *
 	 * @since 0.1
 	 *
