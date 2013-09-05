@@ -37,7 +37,7 @@ class ItemId extends EntityId {
 		}
 
 		if ( !preg_match( self::PATTERN, $idSerialization ) ) {
-			throw new InvalidArgumentException( 'Invalid PropertyId serialization provided.' );
+			throw new InvalidArgumentException( 'Invalid ItemId serialization provided.' );
 		}
 	}
 
