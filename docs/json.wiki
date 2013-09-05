@@ -1,0 +1,584 @@
+= Wikibase JSON format =
+
+This document describes the canonical JSON format used to represent Wikibase entities in the API, in JSON dumps,
+as well as by Special:EntityData (when using JSON output).
+This format can be expected to be reasonably stable, and is designed with flexibility and robustness in mind.
+
+'''NOTE:''' this is different from the JSON format used by Wikibase internally, when storing entities to the database.
+The internal format is what is used in MediaWiki's XML dumps and returned by Special:Export and
+the by some API modules that return raw revision text. The internal format is designed to be terse, and may frequently change.
+External tools should use the canonical JSON format whenever possible, and should not rely on the internal format.
+
+== Top Level Structure ==
+<syntaxhighlight lang="javascript">
+{
+  "id": "q60",
+  "type": "item",
+  "labels": {},
+  "descriptions": {},
+  "aliases": {}
+  "claims": {},
+  "sitelinks": {},
+  "_revision_": 67872331,
+  "_modified_": "2013-09-01T12:05:48Z"
+}
+</syntaxhighlight>
+
+The JSON representation consists of the following fields in the top level structure:
+
+* '''id''': The canonical ID of the entity.
+* '''type''': The entity type identifyer. "item" for data items, and "property" for properties.
+* '''labels''': Contains the labels in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* '''descriptions''': Contains the descriptions in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* '''aliases''': Contains aliases in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* '''claims''': Contains any number of claims or statements, groups by property. See [[#Claims and Statements|Claims and Statements]] below.
+* '''sitelinks''': Contains site links to pages on different sites describing the item, see ''[[#Site Links|Site Links]]'' below.
+* '''_revision_: The JSON document's version (this is a MediaWiki revision ID).
+* '''_modified_: The JSON document's publication date (this is a MediaWiki revision timestamp).
+
+== Labels, Descriptions and Aliases ==
+<syntaxhighlight lang="javascript">
+{
+  "labels": {
+    "en": {
+      "language": "en",
+      "value": "New York City"
+    },
+    "ar": {
+      "language": "ar",
+      "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
+    }
+  },
+  "descriptions": {
+    "en": {
+      "language": "en",
+      "value": "city in New York, United States of America"
+    },
+    "it": {
+      "language": "it",
+      "value": "citt\u00e0 degli Stati Uniti d'America"
+    }
+  },
+  "aliases": {
+    "en": [
+      {
+        "language": "en",
+        "value": "NYC"
+      },
+      {
+        "language": "en",
+        "value": "New York"
+      },
+    ],
+    "fr": [
+      {
+        "language": "fr",
+        "value": "New York City"
+      },
+      {
+        "language": "fr",
+        "value": "NYC"
+      },
+      {
+        "language": "fr",
+        "value": "The City"
+      },
+    ]
+  }
+}
+</syntaxhighlight>
+
+Labels, descriptions and aliases are represented by the same basic data structure. For each language,
+there is a record using the following fields:
+
+* '''language''': The language code.
+* '''value''': The actual label or description.
+
+In the case of aliases, each language is associated with a list of such records, while for labels
+and descriptions the record is associated directly with the language.
+
+== Site Links ==
+<syntaxhighlight lang="javascript">
+{
+  "sitelinks": {
+    "arwiki": {
+      "site": "arwiki",
+      "title": "\u0646\u064a\u0648\u064a\u0648\u0631\u0643 (\u0645\u062f\u064a\u0646\u0629)"
+    },
+    "frwiki": {
+      "site": "frwiki",
+      "title": "New York"
+    },
+    "nlwiki": {
+      "site": "nlwiki",
+      "title": "New York City",
+      "url": "https://nl.wikipedia.org/wiki/New_York_City"
+    },
+    "enwiki": {
+      "site": "enwiki",
+      "title": "New York City"
+      "url": "https://en.wikipedia.org/wiki/New_York_City"
+      "badges": [ "Q16465" ]
+    },
+    "dewiki": {
+      "site": "dewiki",
+      "title": "New York City"
+      "url": "https://de.wikipedia.org/wiki/New_York_City"
+      "badges": [ "Q16465" ]
+    }
+  },
+}
+</syntaxhighlight>
+
+Site links are given as records for each site identifier. Each such record contains the following fields:
+
+* '''site''': The site ID.
+* '''title''': The page title.
+* '''''badges''''': Optionally, any "badges" associated with the page (such as "featured article"). Badges are given as a list of item IDs.
+* '''''url''''': Optionally, the full URL of the page may be included.
+
+== Claims and Statements ==
+<syntaxhighlight lang="javascript">
+{
+}
+</syntaxhighlight>
+
+=== Snaks ===
+<syntaxhighlight lang="javascript">
+{
+}
+</syntaxhighlight>
+
+=== Qualifiers ===
+<syntaxhighlight lang="javascript">
+{
+}
+</syntaxhighlight>
+
+=== References ===
+<syntaxhighlight lang="javascript">
+{
+}
+</syntaxhighlight>
+
+== Example ==
+
+<syntaxhighlight lang="javascript">
+{
+  "id": "q60",
+  "type": "item",
+  "labels": {
+    "en": {
+      "language": "en",
+      "value": "New York City"
+    },
+    "ar": {
+      "language": "ar",
+      "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
+    },
+    "fr": {
+      "language": "fr",
+      "value": "New York"
+    },
+    "it": {
+      "language": "it",
+      "value": "New York"
+    },
+    "pl": {
+      "language": "pl",
+      "value": "Nowy Jork"
+    },
+    "de": {
+      "language": "de",
+      "value": "New York City"
+    },
+    "nl": {
+      "language": "nl",
+      "value": "New York City"
+    },
+    "zh": {
+      "language": "zh",
+      "value": "\u7ebd\u7ea6"
+    },
+    "zh-classical": {
+      "language": "zh-classical",
+      "value": "\u7d10\u7d04\u5e02"
+    },
+    "zh-yue": {
+      "language": "zh-yue",
+      "value": "\u7d10\u7d04\u5e02"
+    }
+  },
+  "descriptions": {
+    "en": {
+      "language": "en",
+      "value": "city in New York, United States of America"
+    },
+    "it": {
+      "language": "it",
+      "value": "citt\u00e0 degli Stati Uniti d'America"
+    },
+    "pl": {
+      "language": "pl",
+      "value": "miasto w Stanach Zjednoczonych"
+    },
+    "fr": {
+      "language": "fr",
+      "value": "ville des \u00c9tats-Unis"
+    },
+    "de": {
+      "language": "de",
+      "value": "Metropole an der Ostk\u00fcste der Vereinigten Staaten"
+    },
+    "nl": {
+      "language": "nl",
+      "value": "stad aan de oostkust van de Verenigde Staten"
+    },
+    "es": {
+      "language": "es",
+      "value": "ciudad de Estados Unidos"
+    },
+    "ko": {
+      "language": "ko",
+      "value": "\ubbf8\uad6d \ub274\uc695 \uc8fc\uc758 \ub3c4\uc2dc"
+    },
+    "nb": {
+      "language": "nb",
+      "value": "by i USA"
+    },
+    "zh-hans": {
+      "language": "zh-hans",
+      "value": "\u7f8e\u56fd\u7ebd\u7ea6\u5dde\u7684\u57ce\u5e02"
+    },
+  },
+  "aliases": {
+    "en": [
+      {
+        "language": "en",
+        "value": "NYC"
+      },
+      {
+        "language": "en",
+        "value": "New York"
+      },
+      {
+        "language": "en",
+        "value": "City of New York"
+      },
+      {
+        "language": "en",
+        "value": "New York, New York"
+      },
+      {
+        "language": "en",
+        "value": "The Big Apple"
+      },
+      {
+        "language": "en",
+        "value": "Gotham"
+      }
+    ],
+    "fr": [
+      {
+        "language": "fr",
+        "value": "New York City"
+      },
+      {
+        "language": "fr",
+        "value": "NYC"
+      },
+      {
+        "language": "fr",
+        "value": "The City"
+      },
+      {
+        "language": "fr",
+        "value": "City of New York"
+      },
+      {
+        "language": "fr",
+        "value": "The Big Apple"
+      }
+    ],
+    "it": [
+      {
+        "language": "it",
+        "value": "New York City"
+      },
+      {
+        "language": "it",
+        "value": "The City of New York"
+      },
+      {
+        "language": "it",
+        "value": "La grande mela"
+      },
+      {
+        "language": "it",
+        "value": "NYC"
+      },
+      {
+        "language": "it",
+        "value": "NY"
+      }
+    ],
+    "de": [
+      {
+        "language": "de",
+        "value": "City of New York"
+      },
+      {
+        "language": "de",
+        "value": "The Big Apple"
+      },
+      {
+        "language": "de",
+        "value": "NYC"
+      },
+      {
+        "language": "de",
+        "value": "New York"
+      }
+    ],
+    "nl": [
+      {
+        "language": "nl",
+        "value": "New York"
+      }
+    ],
+    "zh": [
+      {
+        "language": "zh",
+        "value": "\u7ebd\u7ea6\u5e02"
+      }
+    ],
+    "zh-hk": [
+      {
+        "language": "zh-hk",
+        "value": "\u7d10\u7d04\u5e02"
+      }
+    ],
+    "zh-tw": [
+      {
+        "language": "zh-tw",
+        "value": "\u7d10\u7d04\u5e02"
+      }
+    ],
+    "zh-mo": [
+      {
+        "language": "zh-mo",
+        "value": "\u7d10\u7d04\u5e02"
+      }
+    ]
+  },
+  "claims": {
+    "p17": [
+      {
+        "id": "q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "p17",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 30
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "type": "statement",
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+            "snaks": {
+              "p143": [
+                {
+                  "snaktype": "value",
+                  "property": "p143",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855
+                    },
+                    "type": "wikibase-entityid"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "p107": [
+      {
+        "id": "q60$4B2F299A-F5BB-4268-AD25-4F19B350CEB7",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "p107",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 618123
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "type": "statement",
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+            "snaks": {
+              "p143": [
+                {
+                  "snaktype": "value",
+                  "property": "p143",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855
+                    },
+                    "type": "wikibase-entityid"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "p6": [
+      {
+        "id": "q60$a465c511-47bf-a90a-b527-aac32e185260",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "p6",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 212648
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "qualifiers": {
+          "p580": [
+            {
+              "snaktype": "value",
+              "property": "p580",
+              "datavalue": {
+                "value": {
+                  "time": "+00000001994-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ],
+          "p582": [
+            {
+              "snaktype": "value",
+              "property": "p582",
+              "datavalue": {
+                "value": {
+                  "time": "+00000002001-12-31T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ]
+        },
+        "type": "statement",
+        "rank": "normal"
+      },
+      {
+        "id": "q60$b6d61f0b-408c-68e4-2dd4-b7f31c938f3d",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "p6",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 467133
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "qualifiers": {
+          "p580": [
+            {
+              "snaktype": "value",
+              "property": "p580",
+              "datavalue": {
+                "value": {
+                  "time": "+00000001990-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ],
+          "p582": [
+            {
+              "snaktype": "value",
+              "property": "p582",
+              "datavalue": {
+                "value": {
+                  "time": "+00000001993-12-31T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ]
+        },
+        "type": "statement",
+        "rank": "normal"
+      }
+    ]
+  },
+  "sitelinks": {
+    "arwiki": {
+      "site": "arwiki",
+      "title": "\u0646\u064a\u0648\u064a\u0648\u0631\u0643 (\u0645\u062f\u064a\u0646\u0629)"
+    },
+    "frwiki": {
+      "site": "frwiki",
+      "title": "New York"
+    },
+    "nlwiki": {
+      "site": "nlwiki",
+      "title": "New York City"
+    },
+    "enwiki": {
+      "site": "enwiki",
+      "title": "New York City"
+    },
+    "dewiki": {
+      "site": "dewiki",
+      "title": "New York City"
+    }
+  },
+  "_revision_": 67872331,
+  "_modified_": "2013-09-01T12:05:48Z"
+}
+</syntaxhighlight>
+
