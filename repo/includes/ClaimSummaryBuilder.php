@@ -2,9 +2,11 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\Entity\EntityIdValue;
 use DataValues\TimeValue;
 use InvalidArgumentException;
 use Wikibase\Lib\EntityIdFormatter;
+use DataValues\GlobeCoordinateValue;
 
 /**
  * EditSummary-Builder for claim operations
@@ -130,9 +132,19 @@ class ClaimSummaryBuilder {
 
 				if ( $snak instanceof PropertyValueSnak ) {
 					$value = $snak->getDataValue();
+
 					// TODO: we should use value formatters here!
-					if ( $value instanceof TimeValue ) {
+					if ( $value instanceof EntityIdValue ) {
+						$value = $value->getEntityId();
+					} elseif ( $value instanceof TimeValue ) {
 						$value = $value->getTime();
+					} elseif ( $value instanceof GlobeCoordinateValue ) {
+						$value = $value->getLatitude() . ', ' . $value->getLongitude();
+					} elseif ( is_string( $value->getValue() ) ) {
+						$value = $value->getValue();
+					} else {
+						//type not supported;
+						$value = "";
 					}
 				} else {
 					$value = $snak->getType(); // todo handle no values in general way (needed elsewhere)
