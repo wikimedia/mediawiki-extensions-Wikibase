@@ -281,6 +281,9 @@ final class ClientHooks {
 			}
 		}
 
+		// OutputPage will ignore multiply calls
+		$changesList->getOutput()->addModuleStyles( 'wikibase.client.changeslist.css' );
+
 		wfProfileOut( __METHOD__ );
 		return true;
 	}
