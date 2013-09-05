@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "893c1da4_11012e3d",
+        "filename": "repo/includes/api/SetClaimValue.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-05T11:12:55Z",
+      "side": 1,
+      "message": "Should be initialized in the constructor, so it can be injected later.",
+      "revId": "3c5b5466afe395bf9b4969978247fd8c79f87c7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
