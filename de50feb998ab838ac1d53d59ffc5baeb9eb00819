@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_0c959786",
+        "filename": "lib/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-05T19:14:07Z",
+      "side": 1,
+      "message": "?",
+      "revId": "de50feb998ab838ac1d53d59ffc5baeb9eb00819",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
