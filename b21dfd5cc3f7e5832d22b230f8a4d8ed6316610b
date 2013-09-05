@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "893c1da4_d1ab2689",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-05T09:42:08Z",
+      "side": 1,
+      "message": "That\u0027s actually forward compatibility :)",
+      "revId": "b21dfd5cc3f7e5832d22b230f8a4d8ed6316610b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_11968e4b",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-05T09:42:08Z",
+      "side": 1,
+      "message": "Must check for Diff, not MapDiff. It actualyl should be a MapDiff, but it isn\u0027t at the moment. And what\u0027s relevant here is just whether we can access it as an array.",
+      "revId": "b21dfd5cc3f7e5832d22b230f8a4d8ed6316610b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_31938a5c",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-05T09:42:08Z",
+      "side": 1,
+      "message": "Must check for Diff, not MapDiff. It actualyl should be a MapDiff, but it isn\u0027t at the moment. And what\u0027s relevant here is just whether we can access it as an array.",
+      "revId": "b21dfd5cc3f7e5832d22b230f8a4d8ed6316610b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
