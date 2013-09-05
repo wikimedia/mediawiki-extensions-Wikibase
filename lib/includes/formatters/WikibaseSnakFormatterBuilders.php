@@ -2,9 +2,12 @@
 
 namespace Wikibase\Lib;
 
+use Language;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\EntityLookup;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -22,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
 class WikibaseSnakFormatterBuilders {
 
 	/**
-	 * @var \Wikibase\EntityLookup
+	 * @var EntityLookup
 	 */
 	protected $entityLookup;
 
@@ -30,6 +33,11 @@ class WikibaseSnakFormatterBuilders {
 	 * @var PropertyDataTypeLookup
 	 */
 	protected $propertyDataTypeLookup;
+
+	/**
+	 * @var Language
+	 */
+	protected $defaultLanguage;
 
 	/**
 	 * This determines which value is formatted how by providing a formatter mapping
@@ -85,15 +93,18 @@ class WikibaseSnakFormatterBuilders {
 	);
 
 	/**
-	 * @param \Wikibase\EntityLookup   $lookup
+	 * @param EntityLookup           $lookup
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param Language               $defaultLanguage
 	 */
 	public function __construct(
-		\Wikibase\EntityLookup $lookup,
-		PropertyDataTypeLookup $propertyDataTypeLookup
+		EntityLookup $lookup,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		Language $defaultLanguage
 	) {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->entityLookup = $lookup;
+		$this->defaultLanguage = $defaultLanguage;
 	}
 
 	/**
@@ -134,7 +145,18 @@ class WikibaseSnakFormatterBuilders {
 	 * @return DispatchingSnakFormatter
 	 */
 	public function buildDispatchingSnakFormatter( SnakFormatterFactory $factory, $format, FormatterOptions $options ) {
-		$languages = $options->hasOption( 'languages' ) ? $options->getOption( 'languages' ) : array();
+		//TODO: Sort out how the desired language is specified. We have two language options,
+		//      each accepting different ways of specifying the language. That's horrible.
+		if ( !$options->hasOption( 'languages' ) ) {
+			$options->setOption( 'languages', array( $this->defaultLanguage ) );
+		}
+
+		if ( !$options->hasOption( ValueFormatter::OPT_LANG ) ) {
+			$options->setOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );
+		}
+
+		$languages = $options->getOption( 'languages' );
+
 		$noValueSnakFormatter = new MessageSnakFormatter( $this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $languages ), $format );
 		$someValueSnakFormatter = new MessageSnakFormatter( $this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $languages ), $format );
 		$valueSnakFormatter = $this->buildValueSnakFormatter( $factory, $format, $options );
