@@ -77,6 +77,8 @@ class ByPropertyListSerializer extends SerializerObject {
 			throw new MWException( 'ByPropertyListSerializer can only serialize Traversable objects' );
 		}
 
+		//NOTE: when changing the serialization structure, update docs/json.wiki too!
+
 		$serialization = array();
 
 		// FIXME: "iterator => array => iterator" is stupid

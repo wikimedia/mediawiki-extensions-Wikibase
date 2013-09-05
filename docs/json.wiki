@@ -1,0 +1,863 @@
+= Wikibase JSON format =
+
+This document describes the canonical JSON format used to represent Wikibase entities in the API, in JSON dumps,
+as well as by Special:EntityData (when using JSON output).
+This format can be expected to be reasonably stable, and is designed with flexibility and robustness in mind.
+
+'''NOTE:''' this is different from the JSON format used by Wikibase internally, when storing entities to the database.
+The internal format is what is used in MediaWiki's XML dumps and returned by Special:Export and
+the by some API modules that return raw revision text. The internal format is designed to be terse, and may frequently change.
+External tools should use the canonical JSON format whenever possible, and should not rely on the internal format.
+
+For an explanation of the terms used in this document, please refer to the Wikibase Glossary.
+
+== JSON Flavor ==
+
+When encoding the data structure in JSON, several choices had to be made as to how values are represented:
+
+* Strings are encoded in one of two ways:
+** using either Unicode escape sequences (like \u0645) resulting in a UTF16 representation when decoded.
+** ...or using native UTF8 encoding.
+* Numbers may be given in two ways:
+** as numeric JavaScript literals (float or int)
+** ...or as strings. Strings are preferrable where the precision of numeric literals guaranteed by JSON may not be sufficient.
+* Entity IDs are given as upper-case strings, e.g. "P29" or "Q623289". ''Note:'' until recently, lower-case prefixes were used in entity IDs!
+
+Clients should be ready to process any of the forms given above.
+
+== Top Level Structure ==
+<syntaxhighlight lang="javascript">
+{
+  "id": "Q60",
+  "type": "item",
+  "labels": {},
+  "descriptions": {},
+  "aliases": {}
+  "claims": {},
+  "sitelinks": {},
+  "_revision_": 67872331,
+  "_modified_": "2013-09-01T12:05:48Z"
+}
+</syntaxhighlight>
+
+The JSON representation consists of the following fields in the top level structure:
+
+* '''id''': The canonical ID of the entity.
+* '''type''': The entity type identifyer. "item" for data items, and "property" for properties.
+* '''labels''': Contains the labels in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* '''descriptions''': Contains the descriptions in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* '''aliases''': Contains aliases in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* '''claims''': Contains any number of claims or statements, groups by property. See [[#Claims and Statements|Claims and Statements]] below.
+* '''sitelinks''': Contains site links to pages on different sites describing the item, see ''[[#Site Links|Site Links]]'' below.
+* '''_revision_: The JSON document's version (this is a MediaWiki revision ID).
+* '''_modified_: The JSON document's publication date (this is a MediaWiki revision timestamp).
+
+== Labels, Descriptions and Aliases ==
+<syntaxhighlight lang="javascript">
+{
+  "labels": {
+    "en": {
+      "language": "en",
+      "value": "New York City"
+    },
+    "ar": {
+      "language": "ar",
+      "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
+    }
+  },
+  "descriptions": {
+    "en": {
+      "language": "en",
+      "value": "city in New York, United States of America"
+    },
+    "it": {
+      "language": "it",
+      "value": "citt\u00e0 degli Stati Uniti d'America"
+    }
+  },
+  "aliases": {
+    "en": [
+      {
+        "language": "en",
+        "value": "NYC"
+      },
+      {
+        "language": "en",
+        "value": "New York"
+      },
+    ],
+    "fr": [
+      {
+        "language": "fr",
+        "value": "New York City"
+      },
+      {
+        "language": "fr",
+        "value": "NYC"
+      },
+      {
+        "language": "fr",
+        "value": "The City"
+      },
+    ]
+  }
+}
+</syntaxhighlight>
+
+Labels, descriptions and aliases are represented by the same basic data structure. For each language,
+there is a record using the following fields:
+
+* '''language''': The language code.
+* '''value''': The actual label or description.
+
+In the case of aliases, each language is associated with a list of such records, while for labels
+and descriptions the record is associated directly with the language.
+
+== Site Links ==
+<syntaxhighlight lang="javascript">
+{
+  "sitelinks": {
+    "arwiki": {
+      "site": "arwiki",
+      "title": "\u0646\u064a\u0648\u064a\u0648\u0631\u0643 (\u0645\u062f\u064a\u0646\u0629)"
+    },
+    "frwiki": {
+      "site": "frwiki",
+      "title": "New York"
+    },
+    "nlwiki": {
+      "site": "nlwiki",
+      "title": "New York City",
+      "url": "https://nl.wikipedia.org/wiki/New_York_City"
+    },
+    "enwiki": {
+      "site": "enwiki",
+      "title": "New York City"
+      "url": "https://en.wikipedia.org/wiki/New_York_City"
+      "badges": [ "Q16465" ]
+    },
+    "dewiki": {
+      "site": "dewiki",
+      "title": "New York City"
+      "url": "https://de.wikipedia.org/wiki/New_York_City"
+      "badges": [ "Q16465" ]
+    }
+  },
+}
+</syntaxhighlight>
+
+Site links are given as records for each site identifier. Each such record contains the following fields:
+
+* '''site''': The site ID.
+* '''title''': The page title.
+* '''''badges''''': Optionally, any "badges" associated with the page (such as "featured article"). Badges are given as a list of item IDs.
+* '''''url''''': Optionally, the full URL of the page may be included.
+
+== Claims and Statements ==
+<syntaxhighlight lang="javascript">
+{
+  "claims": {
+    "P17": [
+      {
+        "id": "Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
+        "mainsnak": {},
+        "type": "statement",
+        "rank": "normal",
+        "qualifiers": {
+          "P580": [],
+          "P5436": []
+         }
+        "references": [
+           {
+             "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+             "snaks": []
+           }
+         ]
+      }
+    ]
+  }
+}
+</syntaxhighlight>
+
+A Claim consists of a main value (or main Snak) and a number of qualifier Snaks. A Statement is a Claim
+that also contains a (possile empty) list of source references. A claim is always associated with a
+Property (semantically, the Claim is ''about'' the Property), and there can be multiple Claims about the
+same Property in a single Entity. This is represented by a map structure that uses Property IDs as keys,
+and maps them to lists of Claim records.
+
+A Claim record uses the following fields:
+
+* '''id''': An arbitrary identifier for the claim, which is unique accross the repository. No assumptions can and shall be made about the identifier's structure, and no guarantees are given that the format will stay the same.
+* '''type''': the type of the claim - currently either ''statement'' or ''claim''.
+* '''''mainsnak''''': If the claim has the type ''value'', it has a ''mainsnak'' field that contains the Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the property the Claim is associated with. That is, if a value claim is provided for property P17, its main Snak will specify P17 as the property the value is assigned to.
+* '''rank''': Ihe rank expresses whether this value will be used in queries, and shown be visible per default on a clinet system. The value is either ''preferred'', ''normal'' or ''deprecated''.
+* '''qualifiers''': Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See [[#Qualifiers|Qualifiers]] below.
+* '''''references''''': If the Claim's type is ''statement'', there may be a list of source references, given as a list of reference records. See [[#References|References]] below.
+
+=== Snaks ===
+<syntaxhighlight lang="javascript">
+{
+  "claims": {
+    "P17": [
+      {
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P17",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 30
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+      },
+      {
+        "mainsnak": {
+          "snaktype": "somevalue",
+          "property": "P17",
+        },
+      }
+    ],
+    "P356": [
+      {
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P356",
+          "datavalue": {
+            "value": "SomePicture.jpg",
+            "type": "string"
+          }
+        },
+      }
+    ]
+  }
+}
+</syntaxhighlight>
+
+A Snak provides some kind of information about a specific Property of a given Entity. Currently, there are three kinds of Snaks: ''value'', ''somevalue'' or ''novalue''.  A ''value'' snak represents a specific value for the property, which ''novalue'' and ''somevalue'' only express that there is no, or respectively some unknown, value.
+
+A Snak is represented by providing the following fields:
+
+* '''snaktype''': The type of the snak. Currently, this is one of ''value'', ''somevalue'' or ''novalue''.
+* '''property''': The ID of the property this Snak is about.
+* '''''datavalue''''': If the snaktype is ''value'', there is a ''datavalue'' field that contains the actual value the Snak associates with the Property. See [[#Data Values|Data Values]] below.
+* '''''datatype''''': In the future, the ''datatype'' field will indicate how the value of the Snak can be interpreted. Currently, this information has to be obtained by looking up the datatype associated with the Snak's property.
+
+==== Data Values ====
+<syntaxhighlight lang="javascript">
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 30
+            },
+            "type": "wikibase-entityid"
+          }
+
+
+          "datavalue": {
+            "value": "SomePicture.jpg",
+            "type": "string"
+          }
+</syntaxhighlight>
+
+Data value records represent a value of a specific type. They consist of two fields:
+
+* '''type''': the value type. This defines the structure of the ''value'' field, and is not to be confused with the Snak's data type (which is derived from the Snak's Property's data type). The value type does not allow for interpretation of the value, only for processing of the raw structure. As an example, a link to a web page may use the data type "url", but have the value type "string".
+* '''value''': the actual value. This field may contain a single string, a number, or a complex structure. The structure is defined by the ''type'' field.
+
+Some value types and their structure are defined in the following sections.
+
+===== string =====
+<syntaxhighlight lang="javascript">
+          "datavalue": {
+            "value": "SomePicture.jpg",
+            "type": "string"
+          }
+</syntaxhighlight>
+
+Strings are given is given as simple string literals.
+
+===== wikibase-entityid =====
+<syntaxhighlight lang="javascript">
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 30
+            },
+            "type": "wikibase-entityid"
+          }
+</syntaxhighlight>
+
+Entity IDs are used to reference entities on the same repository. They are represented
+by a map structure containing two fields:
+
+* ''entity-type'': defines the type of the entitiy, such as ''item'' or ''property''.
+* ''numeric-id'': the is the actual ID number.
+
+'''''WARNING:''''' ''wikibase-entityid' may in the future change to be represented as a single
+string literal, or may even be dropped in favor of using the ''string'' value type to reference entities.
+
+'''''NOTE:''''' There is currently no reliable mechanism for clients to generate a prefixed ID or a
+URL from the information in the data value.
+
+===== globecoordinate =====
+<syntaxhighlight lang="javascript">
+          "datavalue": {
+            "value": {
+              "latitude": 52.516666666667,
+              "longitude": 13.383333333333,
+              "altitude": null,
+              "precision": 0.016666666666667,
+              "globe": "http:\/\/www.wikidata.org\/entity\/Q2"
+            },
+            "type": "globecoordinate"
+          }
+</syntaxhighlight>
+
+* '''latitude''': The latitude part of the coordinate in degrees, as a float literal (or an equivalent string).
+* '''longitude''': The longitude part of the coordinate in degrees, as a float literal (or an equivalent string).
+* '''precision''': the coordinate's precision, in (fractions of) degrees, given as a float literal (or an equivalent string).
+* '''globe''': the URI of a reference globe. This would typically refer to a data item on wikidata.org. This is usually just an indication of the celestial body (e.g. Q2 = earth), but could be more specific, like WGS 84 or ED50.
+* '''''altitude''''': ''Deprecated and no longer used. Will be dropped in the future.''
+
+===== time =====
+<syntaxhighlight lang="javascript">
+          "datavalue": {
+            "value": {
+              "time": "+00000002001-12-31T00:00:00Z",
+              "timezone": 0,
+              "before": 0,
+              "after": 0,
+              "precision": 11,
+              "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+            },
+            "type": "time"
+          }
+</syntaxhighlight>
+
+Time values are given as a map with the following fields:
+
+* '''time''': Date and time in ISO notation, including. E.g. ''"+00000001994-01-01T00:00:00Z"''. ''Note:'' the format and interpretation of this string may vary based on the calendar model. Currently, only julian and gregorian dates are supported, which use the ISO format.
+* '''timezone''': The time zone offset against UTC, in minutes. May be given as an integer or string literal.
+* '''calendarmodel''': A URI of a calendar model, such as ''gregorian'' or ''julian''. Typically given as the URI of a data item on wikidata.org.
+* '''precision''': To what unit is the given date/time significant? Given as an integer indicating one of the following units:
+** 0: 1 Gigayear
+** 1: 100 Megayears
+** 2: 10 Megayears
+** 3: Megayear
+** 4: 100 Kiloyears
+** 5: 10 Kiloyears
+** 6: Kiloyear
+** 7: 100 years
+** 8: 10 years
+** 9: years
+** 10: months
+** 11: days
+** 12: hours
+** 13: minutes
+** 14: seconds
+** ''more may be added in the future, in order to indicate milli-, micro-, and nanoseconds.''
+* '''''before''''': Begin of an uncertainty range, given in the unit defined by the ''precision'' field. (Currently unused, may be dropped in the future)
+* '''''after''''': End of an uncertainty range, given in the unit defined by the ''precision'' field. (Currently unused, may be dropped in the future)
+
+=== Qualifiers ===
+<syntaxhighlight lang="javascript">
+{
+        "qualifiers": {
+          "P580": [
+            {
+              "snaktype": "value",
+              "property": "P580",
+              "datavalue": {
+                "value": {
+                  "time": "+00000001994-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ],
+          "P582": [
+            {
+              "snaktype": "value",
+              "property": "P582",
+              "datavalue": {
+                "value": {
+                  "time": "+00000002001-12-31T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ]
+        },
+}
+</syntaxhighlight>
+
+Qualifiers provide context for a Claim's value, such as a point in time, a method of measurement, etc.
+Qualifiers are given as snaks. The set of qualifiers for a statement is provided grouped by property ID,
+resulting in a map which associates property IDs with one list of snaks each.
+
+=== References ===
+<syntaxhighlight lang="javascript">
+{
+        "references": [
+          {
+            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855
+                    },
+                    "type": "wikibase-entityid"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+}
+</syntaxhighlight>
+
+References provide provenance/authority information for individual claims. Each source reference
+is a set of Snaks structured in a similar way to how qualifiers are represented: Snaks about the same
+property are grouped together in a list and made accessible by putting all these lists into a map,
+using the property IDs as keys.
+
+== Example ==
+
+Below is an example of a complete entity represented in JSON.
+
+<syntaxhighlight lang="javascript">
+{
+  "id": "Q60",
+  "type": "item",
+  "labels": {
+    "en": {
+      "language": "en",
+      "value": "New York City"
+    },
+    "ar": {
+      "language": "ar",
+      "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
+    },
+    "fr": {
+      "language": "fr",
+      "value": "New York"
+    },
+    "it": {
+      "language": "it",
+      "value": "New York"
+    },
+    "pl": {
+      "language": "pl",
+      "value": "Nowy Jork"
+    },
+    "de": {
+      "language": "de",
+      "value": "New York City"
+    },
+    "nl": {
+      "language": "nl",
+      "value": "New York City"
+    },
+    "zh": {
+      "language": "zh",
+      "value": "\u7ebd\u7ea6"
+    },
+    "zh-classical": {
+      "language": "zh-classical",
+      "value": "\u7d10\u7d04\u5e02"
+    },
+    "zh-yue": {
+      "language": "zh-yue",
+      "value": "\u7d10\u7d04\u5e02"
+    }
+  },
+  "descriptions": {
+    "en": {
+      "language": "en",
+      "value": "city in New York, United States of America"
+    },
+    "it": {
+      "language": "it",
+      "value": "citt\u00e0 degli Stati Uniti d'America"
+    },
+    "pl": {
+      "language": "pl",
+      "value": "miasto w Stanach Zjednoczonych"
+    },
+    "fr": {
+      "language": "fr",
+      "value": "ville des \u00c9tats-Unis"
+    },
+    "de": {
+      "language": "de",
+      "value": "Metropole an der Ostk\u00fcste der Vereinigten Staaten"
+    },
+    "nl": {
+      "language": "nl",
+      "value": "stad aan de oostkust van de Verenigde Staten"
+    },
+    "es": {
+      "language": "es",
+      "value": "ciudad de Estados Unidos"
+    },
+    "ko": {
+      "language": "ko",
+      "value": "\ubbf8\uad6d \ub274\uc695 \uc8fc\uc758 \ub3c4\uc2dc"
+    },
+    "nb": {
+      "language": "nb",
+      "value": "by i USA"
+    },
+    "zh-hans": {
+      "language": "zh-hans",
+      "value": "\u7f8e\u56fd\u7ebd\u7ea6\u5dde\u7684\u57ce\u5e02"
+    },
+  },
+  "aliases": {
+    "en": [
+      {
+        "language": "en",
+        "value": "NYC"
+      },
+      {
+        "language": "en",
+        "value": "New York"
+      },
+      {
+        "language": "en",
+        "value": "City of New York"
+      },
+      {
+        "language": "en",
+        "value": "New York, New York"
+      },
+      {
+        "language": "en",
+        "value": "The Big Apple"
+      },
+      {
+        "language": "en",
+        "value": "Gotham"
+      }
+    ],
+    "fr": [
+      {
+        "language": "fr",
+        "value": "New York City"
+      },
+      {
+        "language": "fr",
+        "value": "NYC"
+      },
+      { 
+        "language": "fr",
+        "value": "The City"
+      },
+      {
+        "language": "fr",
+        "value": "City of New York"
+      },
+      {
+        "language": "fr",
+        "value": "The Big Apple"
+      }
+    ],
+    "it": [
+      {
+        "language": "it",
+        "value": "New York City"
+      },
+      {
+        "language": "it",
+        "value": "The City of New York"
+      },
+      {
+        "language": "it",
+        "value": "La grande mela"
+      },
+      {
+        "language": "it",
+        "value": "NYC"
+      },
+      {
+        "language": "it",
+        "value": "NY"
+      }
+    ],
+    "de": [
+      {
+        "language": "de",
+        "value": "City of New York"
+      },
+      {
+        "language": "de",
+        "value": "The Big Apple"
+      },
+      {
+        "language": "de",
+        "value": "NYC"
+      },
+      {
+        "language": "de",
+        "value": "New York"
+      }
+    ],
+    "nl": [
+      {
+        "language": "nl",
+        "value": "New York"
+      }
+    ],
+    "zh": [
+      {
+        "language": "zh",
+        "value": "\u7ebd\u7ea6\u5e02"
+      }
+    ],
+    "zh-hk": [
+      {
+        "language": "zh-hk",
+        "value": "\u7d10\u7d04\u5e02"
+      }
+    ],
+    "zh-tw": [
+      {
+        "language": "zh-tw",
+        "value": "\u7d10\u7d04\u5e02"
+      }
+    ],
+    "zh-mo": [
+      {
+        "language": "zh-mo",
+        "value": "\u7d10\u7d04\u5e02"
+      }
+    ]
+  },
+  "sitelinks": {
+    "arwiki": {
+      "site": "arwiki",
+      "title": "\u0646\u064a\u0648\u064a\u0648\u0631\u0643 (\u0645\u062f\u064a\u0646\u0629)"
+    },
+    "frwiki": {
+      "site": "frwiki",
+      "title": "New York"
+    },
+    "nlwiki": {
+      "site": "nlwiki",
+      "title": "New York City"
+    },
+    "enwiki": {
+      "site": "enwiki",
+      "title": "New York City"
+    },
+    "dewiki": {
+      "site": "dewiki",
+      "title": "New York City"
+    }
+  },
+  "claims": {
+    "P17": [
+      {
+        "id": "Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P17",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 30
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "type": "statement",
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855
+                    },
+                    "type": "wikibase-entityid"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "P107": [
+      {
+        "id": "Q60$4B2F299A-F5BB-4268-AD25-4F19B350CEB7",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P107",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 618123
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "type": "statement",
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855
+                    },
+                    "type": "wikibase-entityid"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "P6": [
+      {
+        "id": "Q60$a465c511-47bf-a90a-b527-aac32e185260",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P6",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 212648
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "qualifiers": {
+          "P580": [
+            {
+              "snaktype": "value",
+              "property": "P580",
+              "datavalue": {
+                "value": {
+                  "time": "+00000001994-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ],
+          "P582": [
+            {
+              "snaktype": "value",
+              "property": "P582",
+              "datavalue": {
+                "value": {
+                  "time": "+00000002001-12-31T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ]
+        },
+        "type": "statement",
+        "rank": "normal"
+      },
+      {
+        "id": "Q60$b6d61f0b-408c-68e4-2dd4-b7f31c938f3d",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P6",
+          "datavalue": {
+            "value": {
+              "entity-type": "item",
+              "numeric-id": 467133
+            },
+            "type": "wikibase-entityid"
+          }
+        },
+        "qualifiers": {
+          "P580": [
+            {
+              "snaktype": "value",
+              "property": "P580",
+              "datavalue": {
+                "value": {
+                  "time": "+00000001990-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ],
+          "P582": [
+            {
+              "snaktype": "value",
+              "property": "P582",
+              "datavalue": {
+                "value": {
+                  "time": "+00000001993-12-31T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+                },
+                "type": "time"
+              }
+            }
+          ]
+        },
+        "type": "statement",
+        "rank": "normal"
+      }
+    ]
+  },
+  "_revision_": 67872331,
+  "_modified_": "2013-09-01T12:05:48Z"
+}
+</syntaxhighlight>
+
