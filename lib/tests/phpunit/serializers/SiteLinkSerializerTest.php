@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\EntityIdFormatter;
@@ -47,15 +48,16 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$options = new EntitySerializationOptions( $idFormatter );
 		$options->setUseKeys( true );
+		$options->addProp( "sitelinks/badges" );
 		$siteLinks = array(
-			new SimpleSiteLink( "enwiki", "Rome" ),
+			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q42" ) ) ),
 			new SimpleSiteLink( "dewiki", "Rom" ),
-			new SimpleSiteLink( "itwiki", "Roma" ),
+			new SimpleSiteLink( "itwiki", "Roma", array( new ItemId( "Q149" ) ) ),
 		);
 		$expectedSerialization = array(
-			"enwiki" => array( "site" => "enwiki", "title" => "Rome" ),
-			"dewiki" => array( "site" => "dewiki", "title" => "Rom" ),
-			"itwiki" => array( "site" => "itwiki", "title" => "Roma" ),
+			"enwiki" => array( "site" => "enwiki", "title" => "Rome", "badges" => array( "Q42" => "Q42" ) ),
+			"dewiki" => array( "site" => "dewiki", "title" => "Rom", "badges" => array() ),
+			"itwiki" => array( "site" => "itwiki", "title" => "Roma", "badges" => array( "Q149" => "Q149" ) ),
 		);
 		$validArgs[] = array( $siteLinks, $options, $expectedSerialization );
 
@@ -76,9 +78,26 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$options = new EntitySerializationOptions( $idFormatter );
 		$options->setUseKeys( false );
+		$options->addProp( "sitelinks/badges" );
 		$siteLinks = array(
-			new SimpleSiteLink( "enwiki", "Rome" ),
-			new SimpleSiteLink( "dewiki", "Rom" ),
+			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q149" ), new ItemId( "Q49" ) ) ),
+			new SimpleSiteLink( "dewiki", "Rom", array( new ItemId( "Q42" ) ) ),
+			new SimpleSiteLink( "itwiki", "Roma" ),
+		);
+		$expectedSerialization = array(
+			array( "site" => "enwiki", "title" => "Rome", "badges" => array( "Q149", "Q49", "_element" => "badge" ) ),
+			array( "site" => "dewiki", "title" => "Rom", "badges" => array( "Q42", "_element" => "badge" ) ),
+			array( "site" => "itwiki", "title" => "Roma", "badges" => array( "_element" => "badge" ) ),
+			"_element" => "sitelink",
+		);
+		$validArgs[] = array( $siteLinks, $options, $expectedSerialization );
+
+		// no badges props
+		$options = new EntitySerializationOptions( $idFormatter );
+		$options->setUseKeys( false );
+		$siteLinks = array(
+			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q149" ), new ItemId( "Q49" ) ) ),
+			new SimpleSiteLink( "dewiki", "Rom", array( new ItemId( "Q42" ) ) ),
 			new SimpleSiteLink( "itwiki", "Roma" ),
 		);
 		$expectedSerialization = array(
