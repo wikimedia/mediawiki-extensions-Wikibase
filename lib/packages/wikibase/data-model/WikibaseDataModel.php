@@ -81,9 +81,9 @@ spl_autoload_register( function ( $className ) {
 // Aliasing of classes that got renamed.
 // For more details, see Aliases.php.
 class_alias( 'Wikibase\Item', 'Wikibase\ItemObject' );
-class_alias( 'Wikibase\ReferenceObject', 'Wikibase\Reference' );
-class_alias( 'Wikibase\ClaimObject', 'Wikibase\Claim' );
-class_alias( 'Wikibase\StatementObject', 'Wikibase\Statement' );
+class_alias( 'Wikibase\Reference', 'Wikibase\ReferenceObject' );
+class_alias( 'Wikibase\Claim', 'Wikibase\ClaimObject' );
+class_alias( 'Wikibase\Statement', 'Wikibase\StatementObject' );
 class_alias( 'Wikibase\DataModel\Entity\EntityId', 'Wikibase\EntityId' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
