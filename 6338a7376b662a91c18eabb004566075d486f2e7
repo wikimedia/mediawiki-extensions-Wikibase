@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "893c1da4_f10f4287",
+        "filename": "repo/includes/changeop/ChangeOpMainSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-05T11:11:02Z",
+      "side": 1,
+      "message": "Please get rid of this line.\nActually, is the IdFormatter even still used? Since the refactoring, it should be redundant almost everywhere.",
+      "revId": "6338a7376b662a91c18eabb004566075d486f2e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_511f36b4",
+        "filename": "repo/tests/phpunit/includes/api/ClaimModificationHelperTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-05T11:11:02Z",
+      "side": 1,
+      "message": "addClaim must make sure the Claim has a valid ID, pointing to the right item.",
+      "revId": "6338a7376b662a91c18eabb004566075d486f2e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
