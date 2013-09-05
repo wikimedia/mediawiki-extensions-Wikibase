@@ -9,7 +9,11 @@ use Wikibase\Item;
 /**
  * Serializer for items.
  *
+ * See docs/json.wiki for details of the format.
+ *
  * @since 0.2
+ *
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -56,6 +60,8 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 		if ( !( $item instanceof Item ) ) {
 			throw new MWException( 'ItemSerializer can only serialize Item implementing objects' );
 		}
+
+		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
 		$serialization = array();
 

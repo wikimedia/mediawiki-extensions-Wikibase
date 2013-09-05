@@ -7,7 +7,11 @@ use InvalidArgumentException;
 /**
  * Serializer for descriptions.
  *
+ * See docs/json.wiki for details of the format.
+ *
  * @since 0.4
+ *
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -64,6 +68,8 @@ class DescriptionSerializer extends SerializerObject implements Unserializer {
 		if ( !is_array( $descriptions ) ) {
 			throw new InvalidArgumentException( 'DescriptionSerializer can only serialize an array of descriptions' );
 		}
+
+		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
 		$value = $this->multilingualSerializer->serializeMultilingualValues( $descriptions );
 

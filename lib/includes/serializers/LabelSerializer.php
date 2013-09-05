@@ -7,9 +7,10 @@ use InvalidArgumentException;
 /**
  * Serializer for labels.
  *
+ * See docs/json.wiki for details of the format.
+ *
  * @since 0.4
  *
- * @file
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
@@ -67,6 +68,8 @@ class LabelSerializer extends SerializerObject implements Unserializer {
 		if ( !is_array( $labels ) ) {
 			throw new InvalidArgumentException( 'LabelSerializer can only serialize an array of labels' );
 		}
+
+		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
 		$value = $this->multilingualSerializer->serializeMultilingualValues( $labels );
 

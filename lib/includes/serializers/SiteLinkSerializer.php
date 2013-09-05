@@ -11,7 +11,11 @@ use Wikibase\DataModel\SimpleSiteLink;
 /**
  * Serializer for sitelinks.
  *
+ * See docs/json.wiki for details of the format.
+ *
  * @since 0.4
+ *
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -66,6 +70,8 @@ class SiteLinkSerializer extends SerializerObject {
 		if ( !is_array( $siteLinks ) ) {
 			throw new InvalidArgumentException( 'SiteLinkSerializer can only serialize an array of sitelinks' );
 		}
+
+		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
 		$serialization = array();
 

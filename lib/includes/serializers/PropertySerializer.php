@@ -9,9 +9,10 @@ use Wikibase\Property;
 /**
  * Serializer for properties.
  *
+ * See docs/json.wiki for details of the format.
+ *
  * @since 0.3
  *
- * @file
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
@@ -35,6 +36,8 @@ class PropertySerializer extends EntitySerializer implements Unserializer {
 			throw new InvalidArgumentException( 'PropertySerializer can only serialize '
 				. 'Property implementing objects' );
 		}
+
+		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
 		$serialization = array();
 
