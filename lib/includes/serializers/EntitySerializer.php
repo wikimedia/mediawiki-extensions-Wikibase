@@ -9,6 +9,8 @@ use Wikibase\Entity;
 /**
  * Serializer for entities.
  *
+ * See docs/json.wiki for details of the format.
+ *
  * @since 0.2
  *
  * @licence GNU GPL v2+
@@ -53,7 +55,9 @@ class EntitySerializer extends SerializerObject {
 			throw new MWException( 'EntitySerializer can only serialize Entity objects' );
 		}
 
+		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 		$serialization['id'] = $entity->getId() ? $entity->getId()->getPrefixedId() : '';
+
 		$serialization['type'] = $entity->getType();
 
 		foreach ( $this->options->getProps() as $key ) {
