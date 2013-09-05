@@ -270,8 +270,6 @@ abstract class EntityView extends \ContextSource {
 		$refFinder = new ReferencedEntitiesFinder();
 		$usedEntityIds = $refFinder->findSnakLinks( $allSnaks );
 
-		$contentFactory = EntityContentFactory::singleton();
-
 		foreach ( $usedEntityIds as $entityId ) {
 			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
 		}
@@ -290,7 +288,7 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		//@todo: record sitelinks as iwlinks
-		//@todo: record CommnsMedia values as imagelinks
+		//@todo: record CommonsMedia values as imagelinks
 
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array(
