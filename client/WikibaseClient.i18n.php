@@ -335,6 +335,7 @@ $messages['ast'] = array(
 	'tooltip-t-wikibase' => 'Enllaz al elementu del depósitu de datos coneutáu',
 	'wikibase-after-page-move' => "Tamién pue [$1 anovar] l'elementu asociáu de Wikidata pa caltener los enllaces d'idioma na páxina treslladada.",
 	'wikibase-after-page-move-queued' => "L'[$1 elementu de Wikidata] asociáu con esta páxina pronto s'actualizará automáticamente.",
+	'wikibase-comment-add' => 'Creóse un elementu en Wikidata.',
 	'wikibase-comment-remove' => "Desanicióse l'elementu asociáu de Wikidata. Quitaronse los enllaces de llingua.",
 	'wikibase-comment-linked' => 'Enllazóse un elementu de Wikidata a esta páxina.',
 	'wikibase-comment-unlink' => "Desenllazóse esta páxina d'un elementu de Wikidata. Quitaronse los enllaces de llingua.",
@@ -1256,9 +1257,10 @@ $messages['es'] = array(
 $messages['et'] = array(
 	'wikibase-client-desc' => 'Lisa Vikibaas klient',
 	'specialpages-group-wikibaseclient' => 'Vikiandmete klient',
-	'tooltip-t-wikibase' => 'Lingi andmehoidla seonduva üksusega',
+	'tooltip-t-wikibase' => 'Link andmehoidla seonduva üksuse juurde',
 	'wikibase-after-page-move' => 'Võid [$1 värskendada] ka vastavat Vikiandmete üksust, et teisaldatud lehekülje keelelingid jääksid töökorda.',
 	'wikibase-after-page-move-queued' => 'Selle leheküljega seotud [$1 Vikiandmete üksus] uuendatakse peagi automaatselt.',
+	'wikibase-comment-add' => 'Vikiandmete üksus on loodud.',
 	'wikibase-comment-remove' => 'Vastav Vikiandmete üksus on kustutatud. Keelelingid eemaldatud.',
 	'wikibase-comment-linked' => 'Vikiandmete üksus viitab nüüd sellele leheküljele.',
 	'wikibase-comment-unlink' => 'Vikiandmete üksus ei viita enam sellele leheküljele. Keelelingid eemaldatud.',
@@ -2255,6 +2257,7 @@ $messages['ko'] = array(
 	'tooltip-t-wikibase' => '데이터 저장소에 연결된 항목을 가리키는 링크',
 	'wikibase-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
 	'wikibase-after-page-move-queued' => '이 문서와 연결된 [$1 위키데이터 항목]은 곧 자동적으로 업데이트됩니다.',
+	'wikibase-comment-add' => '위키데이터 항목이 만들어졌습니다.',
 	'wikibase-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
 	'wikibase-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
 	'wikibase-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
@@ -3073,7 +3076,7 @@ $messages['pl'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase nie obsługuje jeszcze typu właściwość dla właściwości $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidane',
 	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje w Wikidanych w ostatnich zmianach',
-	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-letter' => 'd',
 	'wikibase-rc-wikibase-edit-title' => 'Edycja w Wikidanych',
 	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje w Wikidanych w obserwowanych',
 	'wikibase-error-invalid-entity-id' => 'Wprowadzony identyfikator jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.',
@@ -3136,6 +3139,7 @@ $messages['pt'] = array(
 );
 
 /** Brazilian Portuguese (português do Brasil)
+ * @author Cainamarques
  * @author Helder.wiki
  * @author Jaideraf
  * @author Opraco
@@ -3182,12 +3186,12 @@ $messages['pt-br'] = array(
 	'wikibase-error-invalid-entity-id' => 'O ID inserido é desconhecido pelo sistema. Por favor, utilize um ID de entidade válido.',
 	'special-unconnectedpages' => 'Páginas não conectadas a itens',
 	'wikibase-unconnectedpages-legend' => 'Opções de páginas não conectadas',
-	'wikibase-unconnectedpages-page' => 'Iniciar lista de resultados com o artículo:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Iniciar lista de resultados com a página:',
 	'wikibase-unconnectedpages-submit' => 'Ir',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" não é um código de idioma válido.',
 	'wikibase-unconnectedpages-page-warning' => 'O título da página não pôde ser utilizado para a consulta e foi ignorado.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Apenas páginas com links interlínguas',
-	'wikibase-unconnectedpages-format-row' => '($1 links interlínguas na página)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguage link|ligações interlíngua}} na página)',
 	'wikibase-pageinfo-entity-id' => 'ID do item no Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Não há',
 );
@@ -3512,6 +3516,7 @@ $messages['sr-ec'] = array(
 	'tooltip-t-wikibase' => 'Веза ка ставки на википодацима',
 	'wikibase-after-page-move' => 'Можете такође [$1 ажурирати] придружене ставке на Википодацима ради одржавања језичких веза на премештеној страници.',
 	'wikibase-after-page-move-queued' => '[$1 Ставка Википодатака] повезана са овом страницом ће се ускоро аутоматски ажурирати.',
+	'wikibase-comment-add' => 'Ставка на Википодацима је направљена.',
 	'wikibase-comment-remove' => 'Придружена ставка на Википодацима је избрисана. Језичке везе уклоњене.',
 	'wikibase-comment-linked' => 'Ставка на Википодацима је повезана са овом страницом.',
 	'wikibase-comment-unlink' => 'Веза до ове странице је уклоњена са ставке на Википодацима. Језичке везе уклоњене.',

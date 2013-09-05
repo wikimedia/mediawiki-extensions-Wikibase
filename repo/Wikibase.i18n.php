@@ -563,10 +563,12 @@ Parameters:
 ** {{msg-mw|Wikibase-propertyedittool-counter-entrieslabel}}
 ** {{msg-mw|Wikibase-statementview-referencesheading-pendingcountersubject}}
 * $2 - the number the quantity the counter is currently displaying. E.g. on an item page, the entries in the list of Wikipedia pages linked to the item.",
-	'wikibase-ui-pendingquantitycounter-pending' => "Message for a generic counter which will display a fixed quantity as well as a non-fixed, pending quantity and of what nature those quantities are. Parameters:
-* $1 is the label of the counter's subject. E.g. 'sources' in an item's statement's references counter displayed in the heading above the references.
-* $2 is the fixed quantity of the counter. The fixed quantity can for example be the number of site-links in an item's site-links table which are already saved and permanently displayed in the table, ready to be edited by the user.
-* $3 is the pending quantity of the counter with some additional markup around, expressing and explaining the pending nature of the number. Basically, this is the content of {{msg-mw|wikibase-ui-pendingquantitycounter-pending-pendingsubpart}}. The pending quantity can for example be the number of site-links in an item's site-links table which are not yet saved.",
+	'wikibase-ui-pendingquantitycounter-pending' => "Message for a generic counter which will display a fixed quantity as well as a non-fixed, pending quantity and of what nature those quantities are.
+
+Parameters:
+* $1 - the label of the counter's subject. E.g. 'sources' in an item's statement's references counter displayed in the heading above the references.
+* $2 - the fixed quantity of the counter. The fixed quantity can for example be the number of site-links in an item's site-links table which are already saved and permanently displayed in the table, ready to be edited by the user.
+* $3 - the pending quantity of the counter with some additional markup around, expressing and explaining the pending nature of the number. Basically, this is the content of {{msg-mw|Wikibase-ui-pendingquantitycounter-pending-pendingsubpart}}. The pending quantity can for example be the number of site-links in an item's site-links table which are not yet saved.",
 	'wikibase-ui-pendingquantitycounter-pending-pendingsubpart' => "{{optional}}
 The pending quantity of a counter and a leading '+'.
 
@@ -814,8 +816,8 @@ Parameters:
 	'special-setaliases' => '{{doc-special|SetAliases}}
 The special page allows the user to set aliases for an entity.',
 	'wikibase-setaliases-introfull' => 'Intro text when aliases are to be set. Parameters:
-* $1 is the ID that links to the entity;
-* $2 is the translated language name (possibly autonym) the aliases are to be set in.',
+* $1 - the ID that links to the entity
+* $2 - the translated language name (possibly autonym) the aliases are to be set in',
 	'wikibase-setaliases-intro' => 'A short text at the top of the page that allows users to set the aliases of an entity, explaining the form.',
 	'wikibase-setaliases-label' => 'Label for the input field to type the aliases to set the entity to.
 {{Identical|Alias}}',
@@ -827,8 +829,8 @@ Parameters:
 	'special-setsitelink' => '{{doc-special|SetSiteLink}}
 The special page allows the user to set a site link for an entity.',
 	'wikibase-setsitelink-introfull' => 'Intro text when a site link is to be set. Parameters:
-* $1 is the ID that links to the entity;
-* $2 is the site id the site link is to be set to.',
+* $1 - the ID that links to the entity
+* $2 - the site id the site link is to be set to',
 	'wikibase-setsitelink-intro' => 'A short text at the top of the page that allows users to set the site link of an entity, explaining the form.',
 	'wikibase-setsitelink-site' => 'Label for the input field to type the site id to set the site link to.',
 	'wikibase-setsitelink-label' => 'Label for the input field to type the site link to set the entity to.',
@@ -1111,14 +1113,26 @@ Example edit summary is "Updated [en] label:  Egypt".
 
 Parameters:
 * $2 - the language code for the item page',
-	'wikibase-property-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing a property label. Example edit summary is "Removed [en] label". Parameters:
-* $2 is the language code for the item page.',
-	'wikibase-property-summary-wbsetdescription-add' => 'Automatic edit summary when adding a property description. Example edit summary is "Added [en] description:  a country in Africa". Parameters:
-* $2 is the language code for the item page.',
-	'wikibase-property-summary-wbsetdescription-set' => 'Automatic edit summary when editing a property description. Example edit summary is "Updated [en] description:  a country in Africa". Parameters:
-* $2 is the language code for the item page.',
-	'wikibase-property-summary-wbsetdescription-remove' => 'Automatic edit summary when removing a property description. Example edit summary is "Removed [en] description". Parameters:
-* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing a property label. Example edit summary is "Removed [en] label".
+
+Parameters:
+* $1 - (Unused)
+* $2 - the language code for the item page',
+	'wikibase-property-summary-wbsetdescription-add' => 'Automatic edit summary when adding a property description. Example edit summary is "Added [en] description:  a country in Africa".
+
+Parameters:
+* $1 - (Unused)
+* $2 - the language code for the item page',
+	'wikibase-property-summary-wbsetdescription-set' => 'Automatic edit summary when editing a property description. Example edit summary is "Updated [en] description:  a country in Africa".
+
+Parameters:
+* $1 - (Unused)
+* $2 - the language code for the item page',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Automatic edit summary when removing a property description. Example edit summary is "Removed [en] description".
+
+Parameters:
+* $1 - (Unused)
+* $2 - the language code for the item page',
 	'wikibase-property-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing property aliases.
 
 Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana".
@@ -1132,14 +1146,14 @@ Parameters:
 * $1 - the number of aliases added/removed
 * $2 - the language code of the item page',
 	'wikibase-property-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es) for a property. Parameters:
-* $1 is the number of aliases that were added;
-* $2 is the language code for the item page.',
+* $1 - the number of aliases that were added
+* $2 - the language code for the item page',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases from a property. Parameters:
-* $1 is the number of aliases that were removed;
-* $2 is the language code for the item page.',
+* $1 - the number of aliases that were removed
+* $2 - the language code for the item page',
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
-* $1 is the number of values set (that is 0 - zero);
-* $2 is the language code of the entity page during creation.',
+* $1 - the number of values set (that is 0 - zero)
+* $2 - the language code of the entity page during creation',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}
@@ -2449,6 +2463,7 @@ $messages['bn'] = array(
 	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" কোন বৈধ ভুক্তি নয়।',
 	'special-itemswithoutsitelinks' => 'সাইটলিংক বিহীন আইটেম',
 	'wikibase-entitydata-bad-id' => 'অবৈধ আইডি: $1।',
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, $3 - $4 থেকে রূপান্তরিত',
 	'wikibase-restoreold' => 'পুনরুদ্ধার',
 	'wikibase-restore-summary' => '[[Special:Contributions/$2|$2]] কর্তৃক $1-এর সংশোধনটি পুনরুদ্ধার করা হয়েছে',
 	'wikibase-noentity' => 'এই তথ্য সংকলন বিদ্যমান নয়। আপনি এ সম্পর্কিত <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} প্রাসঙ্গিক লগ খুঁজে বের] করতে অনুসন্ধান করতে পারেন।',
@@ -2459,18 +2474,22 @@ $messages['bn'] = array(
 	'wikibase-item-summary-wbeditentity-create' => 'নতুন একটি আইটেম তৈরি হয়েছে',
 	'wikibase-item-summary-wbeditentity-update' => 'আইটেম হালনাগাদ করা হয়েছে',
 	'wikibase-item-summary-wbsetreference' => 'একটি রেফারেন্স নির্ধারণ করুন',
+	'wikibase-item-summary-wbsetlabel-add' => '[$2] লেভেল যোগ হয়েছে',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] লেভেল পরিবর্তন হয়েছে',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] লেভেল সরানো হয়েছে',
+	'wikibase-item-summary-wbsetdescription-add' => '[$2] বিবরণ যোগ হয়েছে',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] বিবরণ পরিবর্তন হয়েছে',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2] বিবরণ অপসারিত হয়েছে',
-	'wikibase-item-summary-wbsetsitelink-add' => '[$2] লিঙ্ক যোগ হয়েছে', # Fuzzy
-	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] লিঙ্ক অপসারিত হয়েছে',
+	'wikibase-item-summary-wbsetsitelink-add' => '[$2]-এ লিঙ্ক যোগ হয়েছে',
+	'wikibase-item-summary-wbsetsitelink-remove' => '[$2]-এ লিঙ্ক অপসারিত হয়েছে',
 	'wikibase-property-summary-wbcreate-new' => 'নতুন বৈশিষ্ট্য তৈরি হয়েছে',
 	'wikibase-property-summary-wbeditentity-create' => 'নতুন বৈশিষ্ট্য তৈরি হয়েছে',
 	'wikibase-property-summary-wbeditentity-update' => 'বৈশিষ্ট্য হালনাগাদ',
 	'wikibase-property-summary-wbeditentity-override' => 'বৈশিষ্ট্য পরিষ্কার করা হয়েছে',
+	'wikibase-property-summary-wbsetlabel-add' => '[$2] লেভেল যোগ হয়েছে',
 	'wikibase-property-summary-wbsetlabel-set' => '[$2] লেভেল পরিবর্তন হয়েছে',
 	'wikibase-property-summary-wbsetlabel-remove' => '[$2] লেভেল সরানো হয়েছে',
+	'wikibase-property-summary-wbsetdescription-add' => '[$2] বিবরণ যোগ হয়েছে',
 	'wikibase-property-summary-wbsetdescription-set' => '[$2] বিবরণ পরিবর্তন হয়েছে',
 	'wikibase-property-summary-wbsetdescription-remove' => '[$2] বিবরণ অপসারিত হয়েছে',
 	'wikibase-listdatatypes-wikibase-item-head' => 'আইটেম',
@@ -2480,6 +2499,8 @@ $messages['bn'] = array(
 	'wikibase-listdatatypes-multilingual-text-head' => 'বহুভাষিক টেক্সট',
 	'wikibase-listdatatypes-string-head' => 'স্ট্রিং',
 	'wikibase-listdatatypes-time-head' => 'সময়',
+	'wikibase-listdatatypes-url-head' => 'ইউআরএল',
+	'datatypes-type-url' => 'ইউআরএল',
 	'content-model-wikibase-item' => 'উইকিভিত্তিক আইটেম',
 	'content-model-wikibase-property' => 'উইকিবেজ বৈশিষ্ট্য',
 	'content-model-wikibase-query' => 'উইকিবেজ কোয়েরি',
@@ -12953,6 +12974,7 @@ para descobrir o que lhe sucedeu.',
 );
 
 /** Brazilian Portuguese (português do Brasil)
+ * @author Cainamarques
  * @author Helder.wiki
  * @author Jaideraf
  * @author MisterSanderson
@@ -13020,12 +13042,12 @@ $messages['pt-br'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'Eu aceito estes termos para minhas futuras edições. Não mostre esta mensagem novamente.',
 	'wikibase-entityselector-more' => 'mais',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, a edição não é permitida.',
-	'wikibase-blockeduser-tooltip-message' => 'Você está bloqueado e, por isso, não pode editar.', # Fuzzy
+	'wikibase-blockeduser-tooltip-message' => 'Você não tem permissão para editar porque sua conta de usuário ou endereço IP foi bloqueado.',
 	'wikibase-move-error' => 'Você não pode mover páginas que estão no domínio de dados, além disso, você não pode mover páginas para dentro de tal domínio.',
-	'wikibase-error-sitelink-already-used' => 'Link do site [$1 $2] já utilizado pelo item [[$3]].',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propriedade ($3) já tem o rótulo "$1" associado com o código de idioma $2',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Outra consulta ($3) já tem o rótulo "$1" associado com o código de idioma $2',
-	'wikibase-error-label-not-unique-item' => 'Outro item ($3) já tem o rótulo "$1" e a descrição "$4" associados com o código de idioma $2',
+	'wikibase-error-sitelink-already-used' => 'A ligação [$1 $2] já é utilizada pelo item [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propriedade ($3) já tem o rótulo "$1" associado com o código de idioma $2', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-query' => 'Outra consulta ($3) já tem o rótulo "$1" associado com o código de idioma $2', # Fuzzy
+	'wikibase-error-label-not-unique-item' => 'Outro item ($3) já tem o rótulo "$1" e a descrição "$4" associados com o código de idioma $2', # Fuzzy
 	'special-itembytitle' => 'Item por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Pesquisar itens por site e título',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -13047,7 +13069,7 @@ $messages['pt-br'] = array(
 	'special-newproperty' => 'Criar uma nova propriedade',
 	'wikibase-newproperty-fieldset' => 'Criar uma nova propriedade',
 	'wikibase-newproperty-datatype' => 'Tipo de dados:',
-	'wikibase-newproperty-invalid-datatype' => 'O tipo de dados especificado é inválido',
+	'wikibase-newproperty-invalid-datatype' => 'O tipo de dados especificado é inválido', # Fuzzy
 	'special-newitem' => 'Criar um novo item',
 	'wikibase-newitem-summary' => 'Tenha certeza de [[Special:ItemByTitle|conferir se o item já existe]]!<br/>Você deve criar um [[Help:Label|rótulo]] e uma [[Help:Description|descrição]] para todos os novos itens.', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Criar um novo item',
@@ -13169,8 +13191,6 @@ para descobrir para onde ele foi.',
 	'right-property-override' => 'sobrescrever propriedades',
 	'right-property-create' => 'criar propriedades',
 	'right-property-remove' => 'remover propriedades',
-	'right-alias-add' => 'Adicionar nomes alternativos',
-	'right-alias-set' => 'Estabelecer nomes alternativos',
 	'right-alias-remove' => 'Remover nomes alternativos',
 	'right-sitelink-remove' => 'Remover links de sites',
 	'right-sitelink-update' => 'Atualizar links de sites',

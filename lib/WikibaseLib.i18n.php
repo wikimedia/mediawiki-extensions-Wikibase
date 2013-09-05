@@ -1986,6 +1986,7 @@ $messages['lb'] = array(
 	'wikibase-validator-no-such-entity' => '$1 net fonnt',
 	'wikibase-validator-no-such-property' => 'Eegeschaft $1 net fonnt',
 	'wikibase-validator-bad-value' => 'net valabele wäert: $1',
+	'wikibase-validator-bad-url' => 'URL mat Feeler: $1',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
 	'version-wikibase' => 'Wikibase',
@@ -2550,6 +2551,7 @@ $messages['pt'] = array(
 );
 
 /** Brazilian Portuguese (português do Brasil)
+ * @author Cainamarques
  * @author Jaideraf
  * @author Luckas
  * @author 555
@@ -2571,7 +2573,7 @@ $messages['pt-br'] = array(
 	'wikibase-error-remove-connection' => 'Ocorreu um erro de conexão ao tentar remover e, por isso, as alterações não puderam ser completadas. Por favor, verifique sua conexão com a Internet.',
 	'wikibase-error-save-timeout' => 'Nós estamos tendo dificuldades técnicas e, por isso, sua ação de "salvar" pode não ter sido completada.',
 	'wikibase-error-remove-timeout' => 'Nós estamos tendo dificuldades técnicas e, por isso, sua ação de "remover" pode não ter sido completada.',
-	'wikibase-error-autocomplete-connection' => 'Não foi possível consultar a API da Wikipédia. Por favor, tente novamente mais tarde.', # Fuzzy
+	'wikibase-error-autocomplete-connection' => 'Não foi possível consultar a API do site. Por favor, tente novamente mais tarde.',
 	'wikibase-error-autocomplete-response' => 'O servidor respondeu: $1',
 	'wikibase-error-ui-client-error' => 'Falha na conexão para a página do cliente. Por favor, tente novamente mais tarde.',
 	'wikibase-error-ui-no-external-page' => 'O artigo especificado não pôde ser encontrado no site correspondente.',
