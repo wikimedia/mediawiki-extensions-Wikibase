@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_6c629bdc",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-05T19:12:23Z",
+      "side": 1,
+      "message": "That is right, but looking at the xml output from wbgetentities, you will see a property tag and than the claim tag. Actually this method generate two claim tags on the output of wbeditentity",
+      "parentUuid": "893c1da4_711c32bf",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_5cb6553e",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 11
