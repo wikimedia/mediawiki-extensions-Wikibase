@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "893c1da4_746260dc",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T12:29:04Z",
+      "side": 1,
+      "message": "thinking about this again technically claims can be on any type of entity so this check is not needed",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_9497cc9a",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T12:29:04Z",
+      "side": 1,
+      "message": "this will therefor be getentity and everything called item will be called entity",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_31238ac2",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T12:29:04Z",
+      "side": 1,
+      "message": "attemptSaveEntity takes a string as the summary param. so -\u003etoString()",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_911a7e79",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T12:29:04Z",
+      "side": 1,
+      "message": "typo, should be success",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_b49cc8bd",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-05T12:29:04Z",
+      "side": 1,
+      "message": "move does not currently do anything extra?",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
