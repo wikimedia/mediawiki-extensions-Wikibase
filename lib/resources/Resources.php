@@ -73,6 +73,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase',
+				'dataTypes',
 				'mw.config.values.wbDataTypes',
 			),
 		),
