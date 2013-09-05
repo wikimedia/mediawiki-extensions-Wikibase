@@ -45,7 +45,9 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		return new WikibaseSnakFormatterBuilders( $entityLookup, $typeLookup );
+		$lang = \Language::factory( 'en' );
+
+		return new WikibaseSnakFormatterBuilders( $entityLookup, $typeLookup, $lang );
 	}
 
 	/**
