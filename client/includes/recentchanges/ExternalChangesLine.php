@@ -147,12 +147,16 @@ class ExternalChangesLine {
 		if ( is_array( $comment ) ) {
 			if ( $entityData['type'] === 'wikibase-item~add' ) {
 				// @todo: provide a link to the entity
+				// @todo: move this to SiteLinkCommentCreator
 				$message = wfMessage( 'wikibase-comment-linked' )->text();
 			} else if ( array_key_exists( 'sitelink', $comment ) ) {
 				// @fixme site link change message
 				$message = wfMessage( 'wikibase-comment-update' )->text();
-			} else {
+			} elseif ( array_key_exists( 'message', $comment ) )  {
 				$message = wfMessage( $comment['message'] )->text();
+			} else {
+				wfLogWarning( __METHOD__ . ': comment array is missing "message" field!' );
+				$message = wfMessage( 'wikibase-comment-update' )->text();
 			}
 		} else {
 			$msg = wfMessage( $comment );
