@@ -24,7 +24,6 @@ use Wikibase\PropertyValueSnak;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
- * @group XXX
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -46,7 +45,9 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		return new WikibaseSnakFormatterBuilders( $entityLookup, $typeLookup );
+		$lang = \Language::factory( 'en' );
+
+		return new WikibaseSnakFormatterBuilders( $entityLookup, $typeLookup, $lang );
 	}
 
 	/**

@@ -2,10 +2,16 @@
 
 namespace Wikibase\Lib;
 
+use Language;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\EntityLookup;
 use Wikibase\Item;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\LanguageWithConversion;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -22,7 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
 class WikibaseSnakFormatterBuilders {
 
 	/**
-	 * @var \Wikibase\EntityLookup
+	 * @var EntityLookup
 	 */
 	protected $entityLookup;
 
@@ -30,6 +36,11 @@ class WikibaseSnakFormatterBuilders {
 	 * @var PropertyDataTypeLookup
 	 */
 	protected $propertyDataTypeLookup;
+
+	/**
+	 * @var Language
+	 */
+	protected $defaultLanguage;
 
 	/**
 	 * This determines which value is formatted how by providing a formatter mapping
@@ -85,15 +96,18 @@ class WikibaseSnakFormatterBuilders {
 	);
 
 	/**
-	 * @param \Wikibase\EntityLookup   $lookup
+	 * @param EntityLookup           $lookup
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param Language               $defaultLanguage
 	 */
 	public function __construct(
-		\Wikibase\EntityLookup $lookup,
-		PropertyDataTypeLookup $propertyDataTypeLookup
+		EntityLookup $lookup,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		Language $defaultLanguage
 	) {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->entityLookup = $lookup;
+		$this->defaultLanguage = $defaultLanguage;
 	}
 
 	/**
@@ -112,17 +126,6 @@ class WikibaseSnakFormatterBuilders {
 		return $types;
 	}
 
-	private function getMessage( $key, $languages ) {
-		$msg = wfMessage( $key );
-
-		if ( !empty( $languages ) ) {
-			$lang = reset( $languages );
-			$msg = $msg->inLanguage( $lang );
-		}
-
-		return $msg;
-	}
-
 	/**
 	 * Returns a DispatchingSnakFormatter for the given format, that will dispatch based on
 	 * the snak type. The instance returned by this method will cover all standard snak types.
@@ -134,9 +137,11 @@ class WikibaseSnakFormatterBuilders {
 	 * @return DispatchingSnakFormatter
 	 */
 	public function buildDispatchingSnakFormatter( SnakFormatterFactory $factory, $format, FormatterOptions $options ) {
-		$languages = $options->hasOption( 'languages' ) ? $options->getOption( 'languages' ) : array();
-		$noValueSnakFormatter = new MessageSnakFormatter( $this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $languages ), $format );
-		$someValueSnakFormatter = new MessageSnakFormatter( $this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $languages ), $format );
+		$this->initLanguageDefaults( $options );
+		$lang = $options->getOption( ValueFormatter::OPT_LANG );
+
+		$noValueSnakFormatter = new MessageSnakFormatter( wfMessage( 'wikibase-snakview-snaktypeselector-novalue')->inLanguage( $lang ), $format );
+		$someValueSnakFormatter = new MessageSnakFormatter( wfMessage( 'wikibase-snakview-snaktypeselector-somevalue' )->inLanguage( $lang ), $format );
 		$valueSnakFormatter = $this->buildValueSnakFormatter( $factory, $format, $options );
 
 		$formatters = array(
@@ -146,6 +151,42 @@ class WikibaseSnakFormatterBuilders {
 		);
 
 		return new DispatchingSnakFormatter( $format, $formatters );
+	}
+
+	/**
+	 * Initializes the options keys ValueFormatter::OPT_LANG and 'languages' if
+	 * they are not yet set.
+	 *
+	 * @param FormatterOptions $options
+	 *
+	 * @throws \InvalidArgumentException
+	 * @todo  : Sort out how the desired language is specified. We have two language options,
+	 *        each accepting different ways of specifying the language. That's horrible.
+	 */
+	private function initLanguageDefaults( $options ) {
+		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
+
+		if ( !$options->hasOption( ValueFormatter::OPT_LANG ) ) {
+			$options->setOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );
+		}
+
+		$lang = $options->getOption( ValueFormatter::OPT_LANG );
+		if ( !is_string( $lang ) ) {
+			throw new \InvalidArgumentException( 'The value of OPT_LANG must be a language code. For a fallback chain, use the `languages` option.' );
+		}
+
+		if ( !$options->hasOption( 'languages' ) ) {
+			$fallbackMode = (
+				LanguageFallbackChainFactory::FALLBACK_VARIANTS
+				| LanguageFallbackChainFactory::FALLBACK_OTHERS
+				| LanguageFallbackChainFactory::FALLBACK_SELF );
+
+			$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode ) );
+		}
+
+		if ( !( $options->getOption( 'languages' ) instanceof LanguageFallbackChain ) ) {
+			throw new \InvalidArgumentException( 'The value of the `languages` option must be an instance of LanguageFallbackChain.' );
+		}
 	}
 
 	public function buildValueSnakFormatter( SnakFormatterFactory $factory, $format, FormatterOptions $options ) {
