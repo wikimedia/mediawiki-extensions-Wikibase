@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
@@ -29,6 +28,7 @@ use Wikibase\Property;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 
@@ -39,16 +39,12 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$entity->setLabel( 'en', 'foo' );
 		$entity->setLabel( 'nl', 'bar' );
 		$entity->setLabel( 'zh-cn', '测试' );
-		$entity->setId( 42 );
+		$entity->setId( new ItemId( 'Q42' ) );
+
 
 		$loader->putEntity( $entity );
 
 		return $loader;
-	}
-
-	protected function newEntityIdFormatter() {
-		$options = new FormatterOptions();
-		return new EntityIdFormatter( $options );
 	}
 
 	/**
@@ -64,11 +60,11 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 
-		$argLists[] = array( new ItemId( 'q42' ), 'foo', $options );
+		$argLists[] = array( new ItemId( 'Q42' ), 'foo', $options );
 
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'en' ) ) );
+		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'en' ) ) );
 
 		$argLists[] = array( new ItemId( 'q42' ), 'foo', $options );
 
@@ -76,35 +72,35 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'nl' );
 
-		$argLists[] = array( new ItemId( 'q42' ), 'bar', $options );
+		$argLists[] = array( new ItemId( 'Q42' ), 'bar', $options );
 
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'de' );
 
-		$argLists[] = array( new ItemId( 'q42' ), 'Q42', $options );
+		$argLists[] = array( new ItemId( 'Q42' ), 'Q42', $options );
 
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'de' ) ) );
+		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'de' ) ) );
 
 		$argLists[] = array( new ItemId( 'q42' ), 'foo', $options );
 
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh' ) ) );
+		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh' ) ) );
 
 		$argLists[] = array( new ItemId( 'q42' ), '测试', $options );
 
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh-tw' ) ) );
+		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh-tw' ) ) );
 
 		$argLists[] = array( new ItemId( 'q42' ), '測試', $options );
 
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage(
+		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage(
 			Language::factory( 'zh-tw' ), LanguageFallbackChainFactory::FALLBACK_SELF
 		) );
 
@@ -112,7 +108,7 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage(
+		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage(
 			Language::factory( 'zh-tw' ),
 			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		) );
@@ -121,7 +117,7 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage(
+		$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguage(
 			Language::factory( 'sr' )
 		) );
 
@@ -132,37 +128,27 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'de' );
 		$options->setOption( EntityIdLabelFormatter::OPT_LABEL_FALLBACK, EntityIdLabelFormatter::FALLBACK_EMPTY_STRING );
 
-		$argLists[] = array( new ItemId( 'q42' ), '', $options );
-
-
-		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
-		$options->setOption( EntityIdLabelFormatter::OPT_LABEL_FALLBACK, EntityIdLabelFormatter::FALLBACK_EMPTY_STRING );
-
-		$argLists[] = array( new ItemId( 'q42' ), 'foo', $options );
-
+		$argLists[] = array( new EntityIdValue( new ItemId( 'Q42' ) ), '', $options );
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
+		$options->setOption( EntityIdLabelFormatter::OPT_RESOLVE_ID, false );
 
-		$argLists[] = array( new ItemId( 'q9001' ), 'Q9001', $options );
+		$argLists[] = array( new EntityIdValue( new ItemId( 'Q42' ) ), 'Q42', $options );
 
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 
-		$argLists[] = array( new PropertyId( 'p9001' ), 'P9001', $options );
+		$argLists[] = array( new EntityIdValue( new ItemId( 'Q9001' ) ), 'Q9001', $options );
 
-		$allArgLists = array();
 
-		foreach ( $argLists as $argList ) {
-			$allArgLists[] = $argList;
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 
-			$argList[0] = new EntityIdValue( $argList[0] );
-			$allArgLists[] = $argList;
-		}
+		$argLists[] = array( new PropertyId( 'P9001' ), 'P9001', $options );
 
-		return $allArgLists;
+		return $argLists;
 	}
 
 	/**
@@ -174,7 +160,6 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testParseWithValidArguments( $entityId, $expectedString, FormatterOptions $formatterOptions ) {
 		$formatter = new EntityIdLabelFormatter( $formatterOptions, $this->newEntityLoader() );
-		$formatter->setIdFormatter( $this->newEntityIdFormatter() );
 
 		$formattedValue = $formatter->format( $entityId );
 
