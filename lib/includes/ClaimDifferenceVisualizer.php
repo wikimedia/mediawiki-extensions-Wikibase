@@ -9,6 +9,8 @@ use Html;
 use Diff\Diff;
 use RuntimeException;
 use Wikibase\Lib\EntityIdFormatter;
+use DataValues\GlobeCoordinateValue;
+use Wikibase\DataModel\Entity\EntityIdValue;
 
 /**
  * Class for generating HTML for Claim Diffs.
@@ -277,16 +279,21 @@ class ClaimDifferenceVisualizer {
 
 		if ( $snakType === 'value' ) {
 			$dataValue = $snak->getDataValue();
+			$diffValueString = "";
 
 			// FIXME! should use some value formatter
-			if ( $dataValue instanceof EntityId ) {
-				$diffValueString = $this->getEntityLabel( $dataValue );
+			if ( $dataValue instanceof EntityIdValue ) {
+				$diffValueString = $this->getEntityLabel( $dataValue->getEntityId() );
 			} else if ( $dataValue instanceof TimeValue ) {
 				// TODO: this will just display the plain ISO8601-string,
 				// we should instead use a decent formatter
 				$diffValueString = $dataValue->getTime();
-			} else {
+			} else if ( $dataValue instanceof GlobeCoordinateValue ) {
+				$diffValueString = $dataValue->getLatitude() . ', ' . $dataValue->getLongitude();
+			} else if ( is_string( $dataValue->getValue() ) ) {
 				$diffValueString = $dataValue->getValue();
+			} else {
+				//type not supported;
 			}
 
 			return $diffValueString;
