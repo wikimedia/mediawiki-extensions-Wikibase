@@ -8,8 +8,8 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\Entity;
 use Wikibase\EntityLookup;
+use Wikibase\LanguageFallbackChain;
 
 /**
  * @since 0.4
@@ -17,14 +17,24 @@ use Wikibase\EntityLookup;
  * @file
  * @ingroup WikibaseLib
  *
- * @todo: needs an option to turn off label resolution.
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
+ *
+ * @todo: once this is no longer used directly, rename it to EntityIdValueFormatter
+ * @todo: add support for language fallback chains
  */
 class EntityIdLabelFormatter extends ValueFormatterBase {
 
+	/**
+	 * Whether we should try to find the label of the entity
+	 */
+	const OPT_RESOLVE_ID = 'resolveEntityId';
+
+	/**
+	 * What we should do if we can't find the label.
+	 */
 	const OPT_LABEL_FALLBACK = 'labelFallback';
 
 	const FALLBACK_PREFIXED_ID = 0;
@@ -37,14 +47,10 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 	protected $entityLookup;
 
 	/**
-	 * @var EntityIdFormatter|null
-	 */
-	protected $idFormatter = null;
-
-	/**
 	 * @since 0.4
 	 *
-	 * @param FormatterOptions $options
+	 * @param FormatterOptions $options Supported options: OPT_RESOLVE_ID (boolean),
+	 *        OPT_LABEL_FALLBACK (FALLBACK_XXX)
 	 * @param EntityLookup $entityLookup
 	 *
 	 * @throws \InvalidArgumentException
@@ -54,6 +60,7 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 
 		$this->entityLookup = $entityLookup;
 
+		$this->defaultOption( self::OPT_RESOLVE_ID, true );
 		$this->defaultOption( self::OPT_LABEL_FALLBACK, self::FALLBACK_PREFIXED_ID );
 
 		$fallbackOptionIsValid = in_array(
@@ -66,15 +73,21 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 		);
 
 		if ( !$fallbackOptionIsValid ) {
-			throw new InvalidArgumentException( 'Got an invalid label fallback option' );
+			throw new InvalidArgumentException( 'Bad value for OPT_LABEL_FALLBACK option' );
+		}
+
+		if ( !is_bool( $this->getOption( self::OPT_RESOLVE_ID ) ) ) {
+			throw new InvalidArgumentException( 'Bad value for OPT_RESOLVE_ID option: must be a boolean' );
 		}
 	}
 
 	/**
 	 * @param EntityIdFormatter $idFormatter
+	 * @deprecated
+	 * @todo remove this when it's no longer being called
 	 */
 	public function setIdFormatter( EntityIdFormatter $idFormatter ) {
-		$this->idFormatter = $idFormatter;
+		// noop
 	}
 
 	/**
@@ -82,9 +95,10 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityIdValue|EntityId $value The value to format
+	 * @param EntityId|EntityIdValue $value The value to format
 	 *
 	 * @return string
+	 *
 	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
 	 */
@@ -94,26 +108,25 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 		}
 
 		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId.' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
 		}
 
-		$label = $this->lookupItemLabel( $value );
+		if ( $this->getOption( self::OPT_RESOLVE_ID )  ) {
+			$label = $this->lookupItemLabel( $value );
+		} else {
+			$label = false;
+		}
 
 		if ( $label === false ) {
-			switch ( $this->getOption( 'labelFallback' ) ) {
+			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
 				case self::FALLBACK_EMPTY_STRING:
 					$label = '';
 					break;
 				case self::FALLBACK_PREFIXED_ID:
-					if ( $this->idFormatter === null ) {
-						throw new RuntimeException( 'Cannot format the id using a prefix without the EntityIdFormatter being set' );
-					}
-
-					$label = $this->idFormatter->format( $value );
+					$label = $value->getPrefixedId();
 					break;
 				default:
-					// TODO: implement: return formatting error
-					$label = 'TODO: ERROR: label not found';
+					throw new FormattingException( 'No label found for ' . $value );
 			}
 		}
 
@@ -137,16 +150,18 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 			return false;
 		}
 
-		$languageFallbackChain = $this->getOption( self::OPT_LANG );
+		/* @var LanguageFallbackChain $languageFallbackChain */
+		if ( $this->options->hasOption( 'languages' ) ) {
+			$languageFallbackChain = $this->getOption( 'languages' );
+		} else {
+			$languageFallbackChain = $this->getOption( self::OPT_LANG );
+		}
 
 		// back-compat for usages where self::OPT_LANG is a string as a language code
 		if ( is_string( $languageFallbackChain ) ) {
 			return $entity->getLabel( $languageFallbackChain );
 		}
 
-		/**
-		 * @var Entity $entity
-		 */
 		$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
 
 		if ( $extractedData === null ) {
