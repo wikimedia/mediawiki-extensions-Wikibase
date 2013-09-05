@@ -156,8 +156,8 @@ describe "Check undo/history/oldrevision" do
         page.undo1_element.when_present.click
         page.undoDel_element.when_present.text.should == sitelinks[1][1]
         page.undoIns?.should be_false
-        page.undoDelTitle_element.when_present.text.should == "links / dewiki"
-        page.undoInsTitle_element.when_present.text.should == "links / dewiki"
+        page.undoDelTitle_element.when_present.text.should == "links / dewiki / name"
+        page.undoInsTitle_element.when_present.text.should == "links / dewiki / name"
         page.undoSave
       end
     end
@@ -174,8 +174,8 @@ describe "Check undo/history/oldrevision" do
         page.undo6_element.when_present.click
         page.undoDel_element.when_present.text.should == sitelink_changed
         page.undoIns_element.when_present.text.should == sitelinks[0][1]
-        page.undoDelTitle_element.when_present.text.should == "links / enwiki"
-        page.undoInsTitle_element.when_present.text.should == "links / enwiki"
+        page.undoDelTitle_element.when_present.text.should == "links / enwiki / name"
+        page.undoInsTitle_element.when_present.text.should == "links / enwiki / name"
         page.undoSave
       end
     end
