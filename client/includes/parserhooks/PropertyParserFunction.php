@@ -2,9 +2,11 @@
 
 namespace Wikibase;
 
+use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Lib\OldSnakFormatter;
+use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\SnakFormatterFactory;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -34,6 +36,7 @@ use Wikibase\Lib\OldSnakFormatter;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class PropertyParserFunction {
 
@@ -49,7 +52,7 @@ class PropertyParserFunction {
 	/* @var ParserErrorMessageFormatter */
 	protected $errorFormatter;
 
-	/* @var OldSnakFormatter */
+	/* @var SnakFormatter */
 	protected $snaksFormatter;
 
 	/**
@@ -59,11 +62,11 @@ class PropertyParserFunction {
 	 * @param EntityLookup                $entityLookup
 	 * @param PropertyLabelResolver       $propertyLabelResolver
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param Lib\OldSnakFormatter           $snaksFormatter
+	 * @param SnakFormatter               $snaksFormatter
 	 */
 	public function __construct( \Language $language,
 		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
-		ParserErrorMessageFormatter $errorFormatter, OldSnakFormatter $snaksFormatter ) {
+		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
 		$this->language = $language;
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
@@ -114,12 +117,18 @@ class PropertyParserFunction {
 	 * @return string - wikitext format
 	 */
 	private function formatSnakList( $snaks ) {
-		$languageFallbackChainFactory = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory();
-		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $this->language,
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
-		$formattedValues = $this->snaksFormatter->formatSnaks( $snaks, $languageFallbackChain );
+		$formattedValues = $this->formatSnaks( $snaks );
 		return $this->language->commaList( $formattedValues );
+	}
+
+	private function formatSnaks( $snaks ) {
+		$strings = array();
+
+		foreach ( $snaks as $snak ) {
+			$strings[] = $this->snaksFormatter->formatSnak( $snak );
+		}
+
+		return $strings;
 	}
 
 	/**
@@ -191,7 +200,18 @@ class PropertyParserFunction {
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
-		$formatter = $wikibaseClient->newSnakFormatter();
+
+		$languageFallbackChainFactory = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $targetLanguage,
+			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+		);
+
+		$options = new FormatterOptions( array(
+			'languages' => $languageFallbackChain,
+			// ...more options...
+		) );
+
+		$formatter = $wikibaseClient->newSnakFormatter( SnakFormatterFactory::FORMAT_WIKI, $options );
 
 		$instance = new self( $targetLanguage,
 			$entityLookup, $propertyLabelResolver,
