@@ -20,67 +20,23 @@ use Wikibase\WikiPageEntityLookup;
  * @file
  * @ingroup WikibaseLib
  *
- * @deprecated use PropertyValueSnakFormatter instead.
- *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class TypedValueFormatter {
+interface TypedValueFormatter {
 
 	/**
-	 * @param DataValue $dataValue
-	 * @param DataType $dataType
-	 * @param LanguageFallbackChain|string $language language code string or LanguageFallbackChain object
+	 * Formats the given DataValue.
 	 *
+	 * If $dataTypeId is given, it may be used as a hint for providing
+	 * more appropriate formatting.
+	 *
+	 * @param DataValue $value
+	 * @param string    $dataTypeId
+	 *
+	 * @throws FormattingException
 	 * @return string
 	 */
-	public function formatToString( DataValue $dataValue, DataType $dataType, $language ) {
-		// TODO: update this code to obtain the string formatter as soon as corresponding changes
-		// in the DataTypes library have been made.
-
-		if ( $dataValue->getType() === 'bad' ) {
-			throw new IllegalValueException( $dataValue->getReason() );
-		}
-
-		$valueFormatters = $dataType->getFormatters();
-		$valueFormatter = reset( $valueFormatters );
-
-		// FIXME: before we can properly use the DataType system some issues to its implementation need
-		// to be solved. Once this is done, this evil if block and function it calls should go.
-		if ( $valueFormatter === false && $dataType->getId() === 'wikibase-item' ) {
-			$valueFormatter = $this->evilGetEntityIdFormatter( $language );
-		}
-
-		if ( $valueFormatter === false ) {
-			$value = $dataValue->getValue();
-
-			if ( is_string( $value ) ) {
-				return $value;
-			}
-
-			// @todo: implement: error message or other error handling
-			// @todo: implement value formatter for time!
-			return '';
-		}
-
-		/**
-		 * @var ValueFormatter $valueFormatter
-		 */
-		return $valueFormatter->format( $dataValue );
-	}
-
-	private function evilGetEntityIdFormatter( $language ) {
-		$entityLookup = new CachingEntityLoader( new WikiPageEntityLookup( Settings::get( 'repoDatabase' ) ) );
-
-		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
-
-		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $language );
-
-		$labelFormatter = new EntityIdLabelFormatter( $options, $entityLookup );
-		$labelFormatter->setIdFormatter( $idFormatter );
-
-		return $labelFormatter;
-	}
+	public function formatValue( DataValue $value, $dataTypeId = null );
 
 }

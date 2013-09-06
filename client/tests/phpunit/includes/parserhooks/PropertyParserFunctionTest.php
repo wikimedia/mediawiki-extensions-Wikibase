@@ -8,9 +8,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
-use Wikibase\Lib\EntityRetrievingDataTypeLookup;
-use Wikibase\Lib\OldSnakFormatter;
-use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\ParserErrorMessageFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyParserFunction;
@@ -43,11 +40,10 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$mockRepo = $this->newMockRepository();
 		$mockResolver = new MockPropertyLabelResolver( $targetLanguage->getCode(), $mockRepo );
 
-		$formatter = new OldSnakFormatter(
-			new EntityRetrievingDataTypeLookup( $mockRepo ),
-			new TypedValueFormatter(),
-			$dataTypeFactory
-		);
+		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$formatter->expects( $this->any() )
+			->method( 'formatSnak' )
+			->will( $this->returnValue( '(a kitten)' ) );
 
 		return new PropertyParserFunction(
 			$targetLanguage,
@@ -90,12 +86,12 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				'p1337',
-				'Please write tests before merging your code, or kittens will die',
+				'(a kitten), (a kitten)',
 				'Congratulations, you just killed a kitten'
 			),
 			array(
 				'kitten',
-				'Please write tests before merging your code, or kittens will die',
+				'(a kitten), (a kitten)',
 				'Congratulations, you just killed a kitten'
 			),
 		);
