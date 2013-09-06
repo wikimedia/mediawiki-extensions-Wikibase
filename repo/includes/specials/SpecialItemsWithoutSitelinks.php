@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\EntityId;
+use Wikibase\StoreFactory;
 
 /**
  * Page for listing entities without label.
@@ -56,7 +56,7 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
+		$entityPerPage = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
 		return $entityPerPage->getItemsWithoutSitelinks( null, $limit, $offset );
 	}
 

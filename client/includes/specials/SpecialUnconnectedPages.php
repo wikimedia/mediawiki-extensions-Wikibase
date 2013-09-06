@@ -81,9 +81,6 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 			return false;
 		}
 
-		# 10 seconds server-side caching max
-		$this->getOutput()->setSquidMaxage( 10 );
-
 		$output = $this->getOutput();
 		$request = $this->getRequest();
 
