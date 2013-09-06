@@ -2,6 +2,7 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
+use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use Wikibase\DataModel\Entity\EntityId;
@@ -46,7 +47,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		$lang = \Language::factory( 'en' );
+		$lang = Language::factory( 'en' );
 
 		return new WikibaseSnakFormatterBuilders( $entityLookup, $typeLookup, $lang );
 	}

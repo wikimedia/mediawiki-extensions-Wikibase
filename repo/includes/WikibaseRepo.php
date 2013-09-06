@@ -4,6 +4,7 @@ namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use Language;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
@@ -19,8 +20,10 @@ use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
+use Wikibase\Lib\SnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Store;
@@ -101,16 +104,27 @@ class WikibaseRepo {
 	 */
 	private $stringNormalizer;
 
+	/**
+	 * @var Language
+	 */
+	private $contentLanguage;
+
+	/**
+	 * @var SnakFormatterFactory
+	 */
+	private $snakFormatterFactory;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param SettingsArray   $settings
-	 * @param Store           $store
+	 * @param SettingsArray $settings
+	 * @param Store         $store
+	 * @param Language      $contentLanguage
 	 */
-	public function __construct( SettingsArray $settings, Store $store ) {
+	public function __construct( SettingsArray $settings, Store $store, Language $contentLanguage ) {
 		$this->settings = $settings;
 		$this->store = $store;
+		$this->contentLanguage = $contentLanguage;
 	}
 
 	/**
@@ -328,9 +342,11 @@ class WikibaseRepo {
 	 * @return WikibaseRepo
 	 */
 	protected static function newInstance() {
+		global $wgContLang;
 		return new self(
 			Settings::singleton(),
-			StoreFactory::getStore()
+			StoreFactory::getStore(),
+			$wgContLang
 		);
 	}
 
@@ -362,4 +378,32 @@ class WikibaseRepo {
 		return StoreFactory::getStore();
 	}
 
+
+	/**
+	 * Returns a SnakFormatterFactory the provides SnakFormatters
+	 * for different output formats.
+	 *
+	 * @return SnakFormatterFactory
+	 */
+	public function getSnakFormatterFactory() {
+		if ( !$this->snakFormatterFactory ) {
+			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
+		}
+
+		return $this->snakFormatterFactory;
+	}
+
+	/**
+	 * @return SnakFormatterFactory
+	 */
+	protected function newSnakFormatterFactory() {
+		$builders = new WikibaseSnakFormatterBuilders(
+			$this->getEntityLookup(),
+			$this->getPropertyDataTypeLookup(),
+			$this->contentLanguage
+		);
+
+		$factory = new SnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		return $factory;
+	}
 }
