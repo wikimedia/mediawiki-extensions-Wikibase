@@ -69,9 +69,7 @@ module EntityPage
 
   def wait_for_api_callback
     ajax_wait
-    wait_until do
-      apiCallWaitingMessage? == false
-    end
+    apiCallWaitingMessage_element.when_not_visible
   end
 
   def wait_for_entity_to_load
