@@ -54,7 +54,7 @@ class SnakFormatterFactory {
 	 * @throws \InvalidArgumentException
 	 * @return SnakFormatter
 	 */
-	public function getFormatter( $format, FormatterOptions $options = null ) {
+	public function getFormatter( $format, FormatterOptions $options ) {
 		if ( !array_key_exists( $format, $this->builders ) ) {
 			throw new \InvalidArgumentException( "Unsupported format: $format" );
 		}

@@ -73,7 +73,7 @@ class SnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetFormatter( $builders, $format ) {
 		$factory = new SnakFormatterFactory( $builders );
-		$formatter = $factory->getFormatter( $format );
+		$formatter = $factory->getFormatter( $format, new FormatterOptions() );
 
 		$this->assertInstanceOf( 'Wikibase\Lib\SnakFormatter', $formatter );
 		$this->assertEquals( $format, $formatter->getFormat() );
