@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use Wikibase\SettingsArray;
 use Wikibase\StoreFactory;
 use Wikibase\EntityPerPageBuilder;
@@ -42,10 +43,12 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 
 		$settings = $this->getTestSettings();
 		$store = StoreFactory::getStore( 'sqlstore' );
+		$lang = Language::factory( 'en' );
 
 		$this->wikibaseRepo = new WikibaseRepo(
 			$settings,
-			$store
+			$store,
+			$lang
 		);
 
 		$this->entityPerPageTable = $store->newEntityPerPage();
