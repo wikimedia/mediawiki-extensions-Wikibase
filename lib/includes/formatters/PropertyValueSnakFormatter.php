@@ -13,7 +13,7 @@ use Wikibase\Snak;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class PropertyValueSnakFormatter implements SnakFormatter {
+class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 
 	/**
 	 * @var string
@@ -90,6 +90,8 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 * If $dataTypeId is given, this will first try to find an appropriate formatter based on
 	 * the data type. If none is found, this falls back to finding a formatter based on the
 	 * value's type.
+	 *
+	 * @see TypedValueFormatter::formatValue.
 	 *
 	 * @param DataValue $value
 	 * @param string    $dataTypeId
