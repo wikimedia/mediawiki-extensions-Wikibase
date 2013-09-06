@@ -12,19 +12,27 @@ module AliasPage
   div(:aliasesDiv, :class => "wb-aliases")
   span(:aliasesTitle, :class => "wb-aliases-label")
   unordered_list(:aliasesList, :class => "wb-aliases-container")
-  link(:addAliases, :xpath => "//div[contains(@class, 'wb-aliases')]/span[contains(@class, 'wb-ui-propertyedittool-toolbar')]/span/a[text()='add']")
-  span(:addAliasesDisabled, :xpath => "//div[contains(@class, 'wb-aliases')]/span[contains(@class, 'wb-ui-propertyedittool-toolbar')]/span/span")
-  link(:editAliases, :xpath => "//div[contains(@class, 'wb-aliases')]/div/span[contains(@class, 'wb-ui-propertyedittool-editablevalue')]/span/span/span/span/a[text()='edit']")
-  link(:saveAliases, :xpath => "//div[contains(@class, 'wb-aliases')]/div/span[contains(@class, 'wb-ui-propertyedittool-editablevalue')]/span/span/span/span/a[text()='save']")
-  link(:cancelAliases, :xpath => "//div[contains(@class, 'wb-aliases')]/div/span[contains(@class, 'wb-ui-propertyedittool-editablevalue')]/span/span/span/span/a[text()='cancel']")
-  text_field(:aliasesInputFirst, :xpath => "//li[contains(@class, 'wb-aliases-alias')]/span/input")
-  link(:aliasesInputFirstRemove, :xpath => "//li[contains(@class, 'wb-aliases-alias')]/a[contains(@class, 'tagadata-close')]")
-  text_field(:aliasesInputEmpty, :xpath => "//li[contains(@class, 'tagadata-choice-empty')]/span/input")
-  text_field(:aliasesInputModified, :xpath => "//li[contains(@class, 'tagadata-choice-modified')]/span/input")
-  text_field(:aliasesInputEqual, :xpath => "//li[contains(@class, 'tagadata-choice-equal')]/span/input")
-  link(:aliasesInputRemove, :xpath => "//li[contains(@class, 'tagadata-choice-modified')]/a[contains(@class, 'tagadata-close')]")
+  link(:addAliases,	:css => "div.wb-aliases a.wb-ui-propertyedittool-toolbarbutton-addbutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:editAliases, :css => "div.wb-aliases a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:saveAliases, :css => "div.wb-aliases a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:saveAliasesDisabled, :css => "div.wb-aliases a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
+  link(:cancelAliases, :css => "div.wb-aliases a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
+  text_field(:aliasesInputFirst, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'wb-aliases-alias')]//input")
+  link(:aliasesInputFirstRemove, :css => "div.wb-aliases a.tagadata-close")
+  text_field(:aliasesInputEmpty, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-empty')]//input")
+  text_field(:aliasesInputModified, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-modified')]//input")
+  text_field(:aliasesInputEqual, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-equal')]//input")
+  span(:aliasesHelpField, :css => "div.wb-aliases span.mw-help-field-hint")
 
   # aliases methods
+  def get_aliases
+    aliases = Array.new
+    aliasesList_element.each do |aliasElem|
+      aliases.push(aliasElem.text)
+    end
+    aliases
+  end
+
   def count_existing_aliases
     count = 0
     if aliasesList? == false
@@ -36,26 +44,10 @@ module AliasPage
     count
   end
 
-  def get_nth_alias n
-    count = 1
-    if aliasesList_element.exists?
-      aliasesList_element.each do |aliasElem|
-        if count == n
-          return aliasElem
-        end
-        count = count+1
-      end
-    end
-    false
-  end
-
   def add_aliases(aliases)
-    addAliases
     aliases.each do |ali|
       self.aliasesInputEmpty= ali
     end
-    saveAliases
-    ajax_wait
-    wait_for_api_callback
   end
+
 end
