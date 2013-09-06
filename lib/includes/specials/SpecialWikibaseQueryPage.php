@@ -17,6 +17,14 @@ use Wikibase\EntityContentFactory;
  * @author Thomas Pellissier Tanon
  */
 abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
+	/**
+	 * Max server side caching time in seconds.
+	 *
+	 * @since 0.5
+	 *
+	 * @type integer
+	 */
+	const CACHE_TTL_IN_SECONDS = 10;
 
 	/**
 	 * The offset in use
@@ -46,6 +54,21 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @var integer
 	 */
 	protected $numRows;
+
+	/**
+	 * @see SpecialWikibasePage::execute
+	 *
+	 * @since 0.5
+	 */
+	public function execute( $subPage ) {
+		if( !parent::execute( $subPage ) ) {
+			return false;
+		}
+
+		$output = $this->getOutput();
+		$output->setSquidMaxage( static::CACHE_TTL_IN_SECONDS );
+		return true;
+	}
 
 	/**
 	 * Formats a row for display.
@@ -87,6 +110,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @since 0.3
 	 */
 	protected function showQuery( array $query = array() ) {
+		$paging = false;
 		$out = $this->getOutput();
 
 		if ( $this->limit == 0 && $this->offset == 0 ) {
@@ -105,15 +129,19 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 				min( $this->numRows, $this->limit ),
 				$this->offset + 1 )->parseAsBlock() );
 			// Disable the "next" link when we reach the end
-			$paging = $this->getLanguage()->viewPrevNext( $this->getTitleForNavigation(), $this->offset,
-				$this->limit, $query, ( $this->numRows <= $this->limit ) );
+			$paging = $this->getLanguage()->viewPrevNext(
+				$this->getTitleForNavigation(),
+				$this->offset,
+				$this->limit,
+				$query,
+				$this->numRows <= $this->limit
+			);
 			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
 		} else {
 			// No results to show, so don't bother with "showing X of Y" etc.
 			// -- just let the user know and give up now
 			$out->addWikiMsg( 'specialpage-empty' );
 			$out->addHTML( Html::closeElement( 'div' ) );
-			return true;
 		}
 
 		$this->outputResults(
@@ -123,11 +151,11 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			$this->offset
 		);
 
-		$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
+		if( $paging ) {
+			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
+		}
 
 		$out->addHTML( Html::closeElement( 'div' ) );
-
-		return true;
 	}
 
 	/**

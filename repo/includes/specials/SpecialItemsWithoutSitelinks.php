@@ -1,5 +1,6 @@
 <?php
 
+use Wikibase\StoreFactory;
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;

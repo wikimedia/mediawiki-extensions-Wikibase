@@ -56,9 +56,6 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			return false;
 		}
 
-		// 10 seconds server-side caching max
-		$this->getOutput()->setSquidMaxage( 10 );
-
 		$this->prepareArguments( $subPage );
 
 		$this->setForm();
