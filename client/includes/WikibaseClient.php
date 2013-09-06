@@ -17,9 +17,10 @@ use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\OldSnakFormatter;
-use Wikibase\Lib\TypedValueFormatter;
+use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\SnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
+use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -74,6 +75,11 @@ final class WikibaseClient {
 	 * @var \Site
 	 */
 	private $site = null;
+
+	/**
+	 * @var SnakFormatterFactory
+	 */
+	private $snakFormatterFactory;
 
 	/**
 	 * @since 0.4
@@ -175,14 +181,13 @@ final class WikibaseClient {
 	/**
 	 * @since 0.4
 	 *
-	 * @return OldSnakFormatter
+	 * @param string $format The desired format, use SnakFormatterFactory::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return SnakFormatter
 	 */
-	public function newSnakFormatter() {
-		return new OldSnakFormatter(
-			$this->getPropertyDataTypeLookup(),
-			new TypedValueFormatter(),
-			$this->getDataTypeFactory()
-		);
+	public function newSnakFormatter( $format = SnakFormatterFactory::FORMAT_PLAIN, FormatterOptions $options = null )  {
+		return $this->getSnakFormatterFactory()->getFormatter( $format, $options );
 	}
 
 	/**
@@ -385,5 +390,33 @@ final class WikibaseClient {
 		}
 
 		return $group;
+	}
+
+	/**
+	 * Returns a SnakFormatterFactory the provides SnakFormatters
+	 * for different output formats.
+	 *
+	 * @return SnakFormatterFactory
+	 */
+	public function getSnakFormatterFactory() {
+		if ( !$this->snakFormatterFactory ) {
+			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
+		}
+
+		return $this->snakFormatterFactory;
+	}
+
+	/**
+	 * @return SnakFormatterFactory
+	 */
+	protected function newSnakFormatterFactory() {
+		$builders = new WikibaseSnakFormatterBuilders(
+			$this->getEntityLookup(),
+			$this->getPropertyDataTypeLookup(),
+			$this->contentLanguage
+		);
+
+		$factory = new SnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		return $factory;
 	}
 }
