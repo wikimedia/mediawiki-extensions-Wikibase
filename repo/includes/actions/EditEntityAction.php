@@ -3,6 +3,10 @@
 namespace Wikibase;
 use Diff\CallbackListDiffer;
 use  Html, Linker, Skin, Status, Revision;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\EntityIdLabelFormatter;
+use Wikibase\Lib\SnakFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -24,6 +28,21 @@ use Wikibase\Repo\WikibaseRepo;
  * @since 0.1
  */
 abstract class EditEntityAction extends ViewEntityAction {
+
+	public function __construct( \Page $page, \IContextSource $context = null ) {
+		parent::__construct( $page, $context );
+
+		//TODO: proper injection
+		$options = new FormatterOptions( array(
+			//TODO: fallback chain
+			ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode()
+		) );
+
+		$this->propertyNameFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$this->snakValueFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getFormatter( SnakFormatterFactory::FORMAT_PLAIN, $options );
+
+	}
+
 	/**
 	 * @see Action::getName()
 	 *
@@ -440,9 +459,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 			$this->getContext(),
 			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
 			new ClaimDifferenceVisualizer(
-				new WikiPageEntityLookup(),
-				$langCode,
-				WikibaseRepo::getDefaultInstance()->getIdFormatter()
+				$this->propertyNameFormatter,
+				$this->snakValueFormatter
 			)
 		);
 
