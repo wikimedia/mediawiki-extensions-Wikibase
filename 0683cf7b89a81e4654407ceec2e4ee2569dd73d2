@@ -33,6 +33,24 @@
       "revId": "0683cf7b89a81e4654407ceec2e4ee2569dd73d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_b64da575",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-07T09:03:30Z",
+      "side": 1,
+      "message": "shouldUseKeys means whether result should use \"meaningful\" keys, e.g. \"dewiki\" -\u003e sitelink\nif it\u0027s not set you need to set what tag should be displayed instead of a key for formats that always require a tag (e.g. xml)",
+      "parentUuid": "4946a543_76333df6",
+      "revId": "0683cf7b89a81e4654407ceec2e4ee2569dd73d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
