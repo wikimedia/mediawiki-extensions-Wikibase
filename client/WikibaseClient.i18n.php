@@ -3848,6 +3848,7 @@ $messages['vi'] = array(
 	'tooltip-t-wikibase' => 'Liên kết đến khoản mục kết nối trong kho dữ liệu',
 	'wikibase-after-page-move' => 'Bạn cũng có thể [$1 cập nhật] khoản mục Wikidata liên kết để duy trì các liên kết ngôn ngữ trên trang được di chuyển.',
 	'wikibase-after-page-move-queued' => 'Chẳng bao lâu [$1 khoản mục Wikidata] được liên kết với trang này sẽ được tự động cập nhật.',
+	'wikibase-comment-add' => 'Một khoản mục Wikidata đã được tạo ra.',
 	'wikibase-comment-remove' => 'Đã xóa khoản mục liên kết Wikidata. Đã loại bỏ các liên kết ngôn ngữ.',
 	'wikibase-comment-linked' => 'Một khoản mục Wikidata đã được liên kết đến trang này.',
 	'wikibase-comment-unlink' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',

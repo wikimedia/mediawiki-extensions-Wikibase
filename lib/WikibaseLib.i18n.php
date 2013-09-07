@@ -161,17 +161,13 @@ Parameters:
 * $1 - the expected type
 * $2 - the actual type
 {{Related|Wikibase-validator}}',
-	'wikibase-validator-too-long' => 'Input validation error shown when the input is too long.
-
-Parameters:
+	'wikibase-validator-too-long' => 'Input validation error shown when the input is too long. Parameters:
 * $1 - the minimum length
-* $2 - the actual length
+* $2 - (Unused) the actual length
 {{Related|Wikibase-validator}}',
-	'wikibase-validator-too-short' => 'Input validation error shown when the input is too short.
-
-Parameters:
+	'wikibase-validator-too-short' => 'Input validation error shown when the input is too short. Parameters:
 * $1 - the minimum length
-* $2 - the actual length
+* $2 - (Unused) the actual length
 {{Related|Wikibase-validator}}',
 	'wikibase-validator-malformed-value' => "Input validation error shown when the user's input was malformed in some way.
 
@@ -3116,6 +3112,10 @@ $messages['vi'] = array(
 	'wikibase-validator-no-such-property' => 'Không tìm thấy thuộc tính $1',
 	'wikibase-validator-bad-value' => 'Giá trị không hợp lệ: $1',
 	'wikibase-validator-bad-value-type' => 'Kiểu giá trị không hợp lệ $1; đáng lẽ phải là $2',
+	'wikibase-validator-bad-url' => 'URL hỏng: $1',
+	'wikibase-validator-bad-url-scheme' => 'Giao thức URL không được hỗ trợ: $1',
+	'wikibase-validator-bad-http-url' => 'URL HTTP hỏng: $1',
+	'wikibase-validator-bad-mailto-url' => 'URL mailto: hỏng: $1',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
 	'version-wikibase' => 'Wikibase',
