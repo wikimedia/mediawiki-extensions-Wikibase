@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_160bd926",
+        "filename": "repo/includes/WikibaseRepoLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-07T07:48:20Z",
+      "side": 1,
+      "message": "This violates our coding style policies, see https://www.mediawiki.org/wiki/Wikibase/Coding_conventions#File_level_formatting\n\nAlso note that this component is at 0.5.",
+      "revId": "25328d38cc49e54110f2092e83d9a111e1085209",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_b6fbe511",
+        "filename": "repo/includes/WikibaseRepoLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-07T07:48:20Z",
+      "side": 1,
+      "message": "We use the actual namespace feature rather then the old underscore hack. Also, this is part of the Wikibase package, not the Scribuntu one, so you got the naming in the wrong order.",
+      "revId": "25328d38cc49e54110f2092e83d9a111e1085209",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_f6056d13",
+        "filename": "repo/includes/WikibaseRepoLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-07T07:48:20Z",
+      "side": 1,
+      "message": "you are abusing inheritance for code sharing here. Using the strategy pattern would be better then inheritance combined with the template method. If you need to retrieve an entity based on an entity id in the Scribunto_LuaWikibaseLibrary class, then have it require an interface that provides an implementation of that task to be provided in its constructor.",
+      "revId": "25328d38cc49e54110f2092e83d9a111e1085209",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
