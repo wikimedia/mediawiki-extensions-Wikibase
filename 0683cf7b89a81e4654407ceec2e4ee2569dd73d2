@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_563641e7",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-07T08:46:00Z",
+      "side": 1,
+      "message": "$badges[$badge-\u003egetSerialization()]",
+      "revId": "0683cf7b89a81e4654407ceec2e4ee2569dd73d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_76333df6",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-07T08:46:00Z",
+      "side": 1,
+      "message": "why is this condition negated? looks wrong now",
+      "revId": "0683cf7b89a81e4654407ceec2e4ee2569dd73d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
