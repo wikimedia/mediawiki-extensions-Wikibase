@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_165d991e",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-07T09:06:27Z",
+      "side": 1,
+      "message": "Compare this...",
+      "revId": "d517e0a97f522c3b8598a83c8e6ca0380a9ab20f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_36429542",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-07T09:06:27Z",
+      "side": 1,
+      "message": "...with that.",
+      "revId": "d517e0a97f522c3b8598a83c8e6ca0380a9ab20f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
