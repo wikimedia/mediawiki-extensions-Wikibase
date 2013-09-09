@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_473ccd2d",
+        "filename": "lib/includes/TypedValueFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "ok, turning this into a todo. will make a follow-up that turns this into an interface.",
+      "parentUuid": "4946a543_67cf0958",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_e7e219d8",
         "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
         "patchSetId": 5
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_2762613f",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "yes!",
+      "parentUuid": "4946a543_07e805b5",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_87c3153b",
         "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
         "patchSetId": 5
@@ -64,6 +100,24 @@
       "writtenOn": "2013-09-09T10:33:07Z",
       "side": 1,
       "message": "public? if for good reason, why not throw an exception?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_075d6577",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "It seems handy to be able to ask for a formatter, and it seems fine to assume a DispatchingSnakFormatter should have/know formatters. \n\nAs to throwing an exception: I think asking a getXXX method for something that could be there but isn\u0027t isn\u0027t an exceptional case. Otherwise, we need a hasXXX method. I see no benefit.",
+      "parentUuid": "4946a543_87c3153b",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_a77571f9",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_a7c0112f",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_c7dd1d13",
         "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
         "patchSetId": 5
@@ -98,6 +170,24 @@
       "writtenOn": "2013-09-09T10:33:07Z",
       "side": 1,
       "message": "use @see",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c7627d41",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_c7dd1d13",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_47576d57",
+        "filename": "lib/includes/formatters/FormattingException.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Fixed the code.\nIf i exclude Symfony from the environment, PHPUnit won\u0027t run any more, right?",
+      "parentUuid": "4946a543_27ed01c5",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_e7b939ca",
         "filename": "lib/includes/formatters/MessageSnakFormatter.php",
         "patchSetId": 5
@@ -132,6 +240,24 @@
       "writtenOn": "2013-09-09T10:33:07Z",
       "side": 1,
       "message": "not needed \\",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a74e51bf",
+        "filename": "lib/includes/formatters/MessageSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_e7b939ca",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_67546952",
+        "filename": "lib/includes/formatters/MessageSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "whut?",
+      "parentUuid": "4946a543_07af257f",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_27b421cf",
         "filename": "lib/includes/formatters/MessageSnakFormatter.php",
         "patchSetId": 5
@@ -166,6 +310,24 @@
       "writtenOn": "2013-09-09T10:33:07Z",
       "side": 1,
       "message": "$snak is not used. Why does this class implement SnakFormatter?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a7df31d2",
+        "filename": "lib/includes/formatters/MessageSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Because it generates output representing a snak\u0027s value. The fact that it doesn\u0027t actually look at the snak doesn\u0027t matter: for novalue and somevalue, there\u0027s just nothing to look at.\n\nSnak formatters are generally specific to a given snak type, so the message is fixed. Alternatively, the message key could be build dynamically from the given snak\u0027s type. I don\u0027t see the advantage, though.",
+      "parentUuid": "4946a543_27b421cf",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_c7ec3d96",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "i guess i need to tell phpstorm to stop doing that, then",
+      "parentUuid": "4946a543_c7b8bde8",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_2706e186",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -200,6 +380,24 @@
       "writtenOn": "2013-09-09T10:45:03Z",
       "side": 1,
       "message": "Did you create DispatchingSnakFormatter for injecting here and then forgot about that?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_27ec2190",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "No. DispatchingSnakFormatter dispatches to other SnakFormatters based on snak type. PropertyValueSnakFormatter only works on PropertyValueSnaks, and delegates to ValueFormatters based on the data type and value type.",
+      "parentUuid": "4946a543_2706e186",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_87095534",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_e7bdb9d5",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_c7b43dd5",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -234,6 +450,24 @@
       "writtenOn": "2013-09-09T10:33:07Z",
       "side": 1,
       "message": "LSP violation. And no explicit check...",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a7065120",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Added an explicit check.\n\nI can\u0027t see a good way to avoid the LSP violation... it\u0027s the same for any interface with specialized implementation that work only on certain kinds of input: formatters, serializers, etc...",
+      "parentUuid": "4946a543_c7b43dd5",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +491,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_47012d3c",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "bah. much easier to read this way.",
+      "parentUuid": "4946a543_27b8a1e2",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_07b3a50a",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -268,6 +520,24 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "public?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_87fb1544",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "why not? actually, following your suggestion, I\u0027ll turn TypedValueFormatter into an interface, and use this method to implement that interface.",
+      "parentUuid": "4946a543_07b3a50a",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +561,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_e79a1911",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Why not? Makes testing easier, and may come in handy. Could use composition, but I don\u0027t see the harm. \n\nBasically, the question is whether it\u0027s necessary to separate the concerns of \"format a snak\u0027s value based on data type/value type\" vs \"find a formatter for a snak\u0027s value  based on data type/value type\".",
+      "parentUuid": "4946a543_47cdad86",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_67caa971",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -302,6 +590,24 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "duplication, use @see doc",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c2fb4b11",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_67caa971",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +631,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_27a50156",
+        "filename": "lib/includes/formatters/SnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_e70bf98d",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_87c79566",
         "filename": "lib/includes/formatters/SnakFormatterFactory.php",
         "patchSetId": 5
@@ -342,6 +666,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_478a0dc2",
+        "filename": "lib/includes/formatters/SnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_87c79566",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_a7c49162",
         "filename": "lib/includes/formatters/SnakFormatterFactory.php",
         "patchSetId": 5
@@ -353,6 +695,24 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "This makes the class dependent on MW. Why would it be dependent on MW?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c7befd61",
+        "filename": "lib/includes/formatters/SnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "for consistency. oh, well.",
+      "parentUuid": "4946a543_a7c49162",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -393,6 +753,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_07b9e577",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "re prefixes: I tried to handle the two separately throughout, but it required quite a bit of duplicate code and redundant methods and parameters, cluttering the interfaces. The prefixes make the configuration array easier to read and understand, IMHO. \n\nYes, it\u0027s hackish. It\u0027s an effect of the inherent oddness of splitting the two in the first place. I still believe that was a mistake.\n\nre terminology: What *is* the existing terminology, then? \"data type\" vs. \"data value type\" seems extremely confusing and unclear, as has been apparent in email discussions etc.",
+      "parentUuid": "4946a543_0701e56e",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_0785650a",
         "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
         "patchSetId": 5
@@ -404,6 +782,24 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "array",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c748bd8e",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "??",
+      "parentUuid": "4946a543_0785650a",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -444,6 +840,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_e74db99b",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Because it makes sense to have a way to get all value formatters for a well known output format. This is bootstrapping code, so factoring this out seems pointless.",
+      "parentUuid": "4946a543_477f6d12",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_87dcf510",
         "filename": "lib/tests/phpunit/formatters/EscapingValueFormatterTest.php",
         "patchSetId": 5
@@ -455,6 +869,24 @@
       "writtenOn": "2013-09-09T10:33:07Z",
       "side": 1,
       "message": "wrong",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_47268dd2",
+        "filename": "lib/tests/phpunit/formatters/EscapingValueFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_87dcf510",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -489,6 +921,24 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "The below lines are duplicated many times. This can trivially be fixed by making a dedicated assert method.",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_670c6943",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-09T12:18:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_8779552e",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
