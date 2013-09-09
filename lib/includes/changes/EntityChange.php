@@ -48,6 +48,25 @@ class EntityChange extends DiffChange {
 	protected $comment;
 
 	/**
+	 * @see ORMRow::setField
+	 *
+	 * Overwritten to force lower case object_id
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 *
+	 * @throws \MWException
+	 */
+	public function setField( $name, $value ) {
+		if ( $name === 'object_id' && is_string( $value ) ) {
+			//NOTE: for compatibility with earlier versions, use lower case IDs in the database.
+			$value = strtolower( $value );
+		}
+
+		parent::setField( $name, $value );
+	}
+
+	/**
 	 * @since 0.3
 	 *
 	 * @deprecated: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
