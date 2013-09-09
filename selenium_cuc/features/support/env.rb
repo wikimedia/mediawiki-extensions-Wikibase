@@ -123,6 +123,7 @@ After do |scenario|
   if environment == :cloudbees
     sauce_api(%Q{{"passed": #{scenario.passed?}}})
     sauce_api(%Q{{"public": true}})
+    sauce_api(%Q{{"build": #{ENV['BUILD_NUMBER']}}})
   end
   @browser.close
 end
