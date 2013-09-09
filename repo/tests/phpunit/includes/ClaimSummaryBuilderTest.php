@@ -81,7 +81,13 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 		/**
 		 * @var \Wikibase\Statement[] $statements
 		 */
+
+		$i = 0;
 		foreach ( $statements as &$statement ) {
+			$i++;
+			$guid = "Q{$i}\$7{$i}d";
+
+			$statement->setGuid( $guid );
 			$statement->setRank( \Wikibase\Statement::RANK_NORMAL );
 		}
 
