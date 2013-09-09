@@ -267,7 +267,8 @@ class EntityChange extends DiffChange {
 		);
 
 		if ( !$instance->hasField( 'object_id' ) ) {
-			$instance->setField( 'object_id', $entityId->getPrefixedId() );
+			//NOTE: for compatibility reasons, use lower case IDs in the database.
+			$instance->setField( 'object_id', strtolower( $entityId->getPrefixedId() ) );
 		}
 
 		if ( !$instance->hasField( 'info' ) ) {
