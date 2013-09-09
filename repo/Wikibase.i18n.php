@@ -9886,7 +9886,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-entitydata-text' => '이 문서는 개체 값에 연결된 데이터 인터페이스를 제공합니다. 하위 문서 구문을 사용하여 URL에 있는 개체 ID를 입력하세요.',
 	'special-mylanguagefallbackchain' => '내 언어 폴백 체인',
 	'wikibase-mylanguagefallbackchain-text' => '개체의 레이블을 보여주는 데 사용되는 언어 폴백 체인을 아래에 보여줍니다.',
-	'wikibase-mylanguagefallbackchain-babel' => '자신의 [[Special:MyPage|사용자 문서]]에 <nowiki>{{#babel: }}</nowiki>을 넣어 편집할 수 있습니다.', # Fuzzy
+	'wikibase-mylanguagefallbackchain-babel' => '{{GENDER:$1|자신의}} [[Special:MyPage|사용자 문서]]에 <nowiki>{{#babel: }}</nowiki>을 넣어 편집할 수 있습니다.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, $3 - $4에서 변환됨',
 	'wikibase-self-conflict-patched' => '편집을 최신 버전으로 고쳤으며 중간 바뀜이 무시됩니다.',
 	'wikibase-conflict-patched' => '편집을 최신 버전으로 고쳤습니다.',
@@ -10122,9 +10122,14 @@ $messages['ksh'] = array(
 	'wikibase-property-summary-wbeditentity-create' => 'En neu Eijeschaff aanjelaat',
 	'wikibase-property-summary-wbeditentity-update' => 'En Eijeschaff obb ene neue Schtand jebraat',
 	'wikibase-property-summary-wbeditentity-override' => 'En Eijeschaff ußjetuusch', # Fuzzy
+	'wikibase-listdatatypes-quantity-head' => 'En Aanzahl',
+	'wikibase-listdatatypes-string-head' => 'En ZeischeKätt',
 	'wikibase-listdatatypes-string-body' => 'Daatefäld för en wöötlesche Ennjaabe vun enem Täx. Et weet fö jewöhnlesch jebruch för Name, Bezeischnonge udder Kännzeische, di nit en en beschtemmpte Schprooch sin. Se künne mänschmohl en ander Schreffte ömjesaz wääde.
 * <code langg="en">language</code> – jitt de Schprooch (un domet de Schreff) för dä Täx-Deil aan
 * <code langg="en">text</code> – dä Täx-Deil en dä aanjejovve Schprooch', # Fuzzy
+	'wikibase-listdatatypes-time-head' => 'En Uhrzick',
+	'wikibase-listdatatypes-url-head' => 'en <i lang="en">URL</i>',
+	'datatypes-type-url' => '<i lang="en">URL</i>',
 	'right-item-override' => 'Daatesäz övverschriive',
 	'right-item-create' => 'Daatesäz aanlääje',
 	'right-item-remove' => 'Daatesäz fott schmiiße',
