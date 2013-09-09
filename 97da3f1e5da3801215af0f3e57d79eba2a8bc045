@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_02af137f",
+        "filename": "selenium_cuc/features/aliases.feature",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-09-09T17:03:03Z",
+      "side": 1,
+      "message": "This could be:\n\nAnd List of aliases should contain \u0027alias3\u0027, \u0027alias4\u0027, \u0027alias5\u0027\n\nTake a look at the steps file for implementation.",
+      "revId": "97da3f1e5da3801215af0f3e57d79eba2a8bc045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_42967b4c",
+        "filename": "selenium_cuc/features/step_definitions/aliases_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-09-09T17:03:03Z",
+      "side": 1,
+      "message": "\"The Ruby way\" would be: no.to_i",
+      "revId": "97da3f1e5da3801215af0f3e57d79eba2a8bc045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_22b40fcf",
+        "filename": "selenium_cuc/features/step_definitions/aliases_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-09-09T17:03:03Z",
+      "side": 1,
+      "message": "This could be simplified, like this:\n\non(ItemPage).aliases.should \u003d\u003d eval(\"[#{values}]\")\n\nMake sure to implement ItemPage#aliases.",
+      "revId": "97da3f1e5da3801215af0f3e57d79eba2a8bc045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
