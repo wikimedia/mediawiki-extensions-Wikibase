@@ -2,6 +2,176 @@
   "comments": [
     {
       "key": {
+        "uuid": "4946a543_67cf0958",
+        "filename": "lib/includes/TypedValueFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "Why? That has a quite different interface. What if I have a DataValue and a DataType? Having an interface like this one makes sense. PropertyValueSnakFormatter could use it. (That is only about the interface, not the implementation. The code in this file should clearly die)",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_e7e219d8",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "method visibility",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_07e805b5",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "porn!",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_87c3153b",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "public? if for good reason, why not throw an exception?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a7c0112f",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "string[]",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c7dd1d13",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "use @see",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_27ed01c5",
+        "filename": "lib/includes/formatters/FormattingException.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "this is still here? please fix your environment, this should fail your build",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_e7b939ca",
+        "filename": "lib/includes/formatters/MessageSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "not needed \\",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_07af257f",
+        "filename": "lib/includes/formatters/MessageSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "align",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_27b421cf",
+        "filename": "lib/includes/formatters/MessageSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "$snak is not used. Why does this class implement SnakFormatter?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_c7b8bde8",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -30,6 +200,23 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "method visibility",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c7b43dd5",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "LSP violation. And no explicit check...",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -200,6 +387,40 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "why are these things public?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_87dcf510",
+        "filename": "lib/tests/phpunit/formatters/EscapingValueFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": "wrong",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c78b5d17",
+        "filename": "lib/tests/phpunit/formatters/SnakFormatterFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:33:07Z",
+      "side": 1,
+      "message": ";;",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
