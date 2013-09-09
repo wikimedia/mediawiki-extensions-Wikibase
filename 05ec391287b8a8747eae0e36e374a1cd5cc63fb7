@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8977bd7d_701df00a",
+        "filename": "lib/includes/formatters/FormattingException.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T09:32:46Z",
+      "side": 1,
+      "message": ":D\n\nYou might want to have a look at your PHP include paths. Just include the PHPUnit dir, not its parent",
+      "revId": "05ec391287b8a8747eae0e36e374a1cd5cc63fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
