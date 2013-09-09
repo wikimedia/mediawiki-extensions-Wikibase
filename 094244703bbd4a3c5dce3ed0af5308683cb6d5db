@@ -189,6 +189,23 @@
     },
     {
       "key": {
+        "uuid": "4946a543_2706e186",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:45:03Z",
+      "side": 1,
+      "message": "Did you create DispatchingSnakFormatter for injecting here and then forgot about that?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_e7bdb9d5",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -291,6 +308,23 @@
     },
     {
       "key": {
+        "uuid": "4946a543_e70bf98d",
+        "filename": "lib/includes/formatters/SnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:45:03Z",
+      "side": 1,
+      "message": "unused imports",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_87c79566",
         "filename": "lib/includes/formatters/SnakFormatterFactory.php",
         "patchSetId": 5
@@ -336,6 +370,23 @@
       "writtenOn": "2013-09-09T10:07:30Z",
       "side": 1,
       "message": "???",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_0701e56e",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:45:03Z",
+      "side": 1,
+      "message": "Why are those two distinct kinds of types put together? I\u0027d rather avoid having such a prefixing scheme, which makes things less clear.\n\nAlso, please do not introduce an alternative (PropertyType and ValueType) to the existing terminology without discussing it first. This makes the code less easy to understand and muddles the terminology if done in an half assed way.",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
