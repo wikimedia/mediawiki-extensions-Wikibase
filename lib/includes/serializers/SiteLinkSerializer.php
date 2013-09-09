@@ -109,7 +109,9 @@ class SiteLinkSerializer extends SerializerObject {
 					$badges[] = $badge->getSerialization();
 				}
 
-				$this->setIndexedTagName( $badges , 'badge' );
+				if ( !$this->options->shouldUseKeys() ) {
+					$this->setIndexedTagName( $badges , 'badge' );
+				}
 
 				$response['badges'] = $badges;
 			}
