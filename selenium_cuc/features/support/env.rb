@@ -57,7 +57,7 @@ def sauce_browser(test_name)
   caps = Selenium::WebDriver::Remote::Capabilities.send(browser_label['name'])
   caps.platform = browser_label['platform']
   caps.version = browser_label['version']
-  caps[:name] = "#{test_name} #{ENV['JOB_NAME']}##{ENV['BUILD_NUMBER']}"
+  caps[:name] = "#{test_name} #{ENV['JOB_NAME']}"
 
   require 'selenium/webdriver/remote/http/persistent' # http_client
   browser = Watir::Browser.new(
@@ -123,6 +123,7 @@ After do |scenario|
   if environment == :cloudbees
     sauce_api(%Q{{"passed": #{scenario.passed?}}})
     sauce_api(%Q{{"public": true}})
+    sauce_api(%Q{{"build": #{ENV['BUILD_NUMBER']}}}) if ENV['BUILD_NUMBER']
   end
   @browser.close
 end
