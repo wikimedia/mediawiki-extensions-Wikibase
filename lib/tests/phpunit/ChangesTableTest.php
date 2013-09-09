@@ -119,9 +119,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $wgUser->getId(), $change->getUser()->getId() );
 
-		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {
-			$this->assertEquals( $data[$field], $change->getField( $field ) );
-		}
+		$this->assertWellKnownFieldsEqual( $data, $change->getFields() );
 	}
 
 	/**
@@ -155,12 +153,20 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( 1, $changesTable->count( array( 'id' => $id ) ) );
 
-		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {
-			$this->assertEquals( $data[$field], $obtainedChange->getField( $field ) );
-		}
+		$this->assertWellKnownFieldsEqual( $data, $obtainedChange->getFields() );
 
 		$this->assertTrue( $obtainedChange->remove() );
 		$this->assertEquals( 0, $changesTable->count( array( 'id' => $id ) ) );
+	}
+
+	private function assertWellKnownFieldsEqual( $expected, $actual ) {
+		foreach ( array( 'revision_id', 'user_id', 'type' ) as $field ) {
+			$this->assertEquals( $expected[$field], $actual[$field] );
+		}
+
+		foreach ( array( 'object_id' ) as $field ) {
+			$this->assertEquals( strtolower( $expected[$field] ), strtolower( $actual[$field] ) );
+		}
 	}
 
 }
