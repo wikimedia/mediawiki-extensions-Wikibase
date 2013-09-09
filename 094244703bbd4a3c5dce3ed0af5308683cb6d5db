@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_c7b8bde8",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "this kind of alignment is discouraged by the style guide and everyone else in the team has been sticking to that",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_e7bdb9d5",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "method visibility",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_27b8a1e2",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "spaces",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_07b3a50a",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_47cdad86",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_67caa971",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "duplication, use @see doc",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_87c79566",
+        "filename": "lib/includes/formatters/SnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "half of these are unused",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a7c49162",
+        "filename": "lib/includes/formatters/SnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "This makes the class dependent on MW. Why would it be dependent on MW?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c7a19dae",
+        "filename": "lib/includes/formatters/SnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "???",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_0785650a",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "array",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_278a611a",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "align",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_477f6d12",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "why are these things public?",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_8779552e",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-09T10:07:30Z",
+      "side": 1,
+      "message": "The below lines are duplicated many times. This can trivially be fixed by making a dedicated assert method.",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
