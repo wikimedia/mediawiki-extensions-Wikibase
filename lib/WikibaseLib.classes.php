@@ -125,6 +125,8 @@ return call_user_func( function() {
 		'Wikibase\Lib\Serializers\SerializerObject' => 'includes/serializers/SerializerObject.php',
 		'Wikibase\Lib\Serializers\SnakSerializer' => 'includes/serializers/SnakSerializer.php',
 		'Wikibase\Lib\Serializers\Unserializer' => 'includes/serializers/Unserializer.php',
+		'Wikibase\Lib\Serializers\FetchedEntityContentSerializer' => 'includes/serializers/FetchedEntityContentSerializer.php',
+		'Wikibase\Lib\Serializers\FetchedEntityContentSerializationOptions' => 'includes/serializers/FetchedEntityContentSerializationOptions.php',
 
 		// includes/store
 		'Wikibase\ChunkCache' => 'includes/store/ChunkCache.php',
