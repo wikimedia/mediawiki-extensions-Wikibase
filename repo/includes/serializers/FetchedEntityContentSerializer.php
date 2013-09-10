@@ -60,6 +60,7 @@ class FetchedEntityContentSerializer extends SerializerObject {
 
 		/** @var $entity Entity */
 		$entity = $entityContent->getEntity();
+		$entityTitle = $entityContent->getTitle();
 		$entitySerializationOptions = $this->options->getEntitySerializationOptions();
 
 		$serializerFactory = new SerializerFactory();
@@ -68,15 +69,8 @@ class FetchedEntityContentSerializer extends SerializerObject {
 			$entitySerializationOptions
 		);
 		$serialization['content'] = $entitySerializer->getSerialized( $entity );
-		$serialization['title'] = $entityContent->getTitle()->getPrefixedText();
-
-		$entityPageRevision = $entityContent->getWikiPage()->getRevision();
-
-		if( !$entityPageRevision ) {
-			$serialization['revision'] = '';
-		} else {
-			$serialization['revision'] = $entityPageRevision->getId();
-		}
+		$serialization['title'] = $entityTitle->getPrefixedText();
+		$serialization['revision'] = $entityTitle->getLatestRevID() ?: '';
 
 		return $serialization;
 	}
