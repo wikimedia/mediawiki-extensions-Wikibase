@@ -16,6 +16,8 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Serializers\FetchedEntityContentSerializer;
+use Wikibase\Serializers\FetchedEntityContentSerializerOptions;
 use ValueFormatters\ValueFormatterFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -888,29 +890,18 @@ abstract class EntityView extends \ContextSource {
 	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entities = $this->entityLookup->getEntities( $entityIds );
 		$entityInfo = array();
 
-		$serializerFactory = new SerializerFactory();
-		$serializationOptions = new EntitySerializationOptions( $this->idFormatter );
-		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
+		$serializer = FetchedEntityContentSerializer::newForFrontendStore( $langCode );
 
-		$serializationOptions->setLanguages( array( $langCode ) );
-
-		/* @var Entity $entity */
 		foreach( $entities as $prefixedId => $entity ) {
 			if( $entity === null ) {
 				continue;
 			}
-			$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
-			$entityInfo[ $prefixedId ] = $serializer->getSerialized( $entity );
-
-			$title = $this->entityTitleLookup->getTitleForId( $entity->getId() );
-
-			// TODO: should perhaps implement and use a EntityContentSerializer since this is mixed,
-			//  serialized Entity and EntityContent data because of adding the URL:
-			$entityInfo[ $prefixedId ]['title'] = $title->getPrefixedText();
-			$entityInfo[ $prefixedId ]['lastrevid'] = $title->getLatestRevID();
+			$entityContent = $entityContentFactory->getFromId( $entity->getId() );
+			$entityInfo[ $prefixedId ] = $serializer->getSerialized( $entityContent );
 		}
 
 		wfProfileOut( __METHOD__ );
