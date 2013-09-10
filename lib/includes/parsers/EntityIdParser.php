@@ -5,6 +5,7 @@ namespace Wikibase\Lib;
 use ValueParsers\ParseException;
 use ValueParsers\StringValueParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
@@ -38,7 +39,7 @@ class EntityIdParser extends StringValueParser {
 		// TODO: extensions need to be able to add builders.
 		// The construction of the actual id parser will thus need to be moved out.
 
-		$parser = new \Wikibase\DataModel\Entity\EntityIdParser( $idBuilders );
+		$parser = new DispatchingEntityIdParser( $idBuilders );
 
 		try {
 			return $parser->parse( $value );
