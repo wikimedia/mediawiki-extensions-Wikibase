@@ -16,6 +16,24 @@
       "revId": "c4215e01943890a8e6c49bfb93ef344e2dc6b1b0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_04863c68",
+        "filename": "selenium_cuc/features/aliases.feature",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-10T09:38:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_4223db59",
+      "revId": "c4215e01943890a8e6c49bfb93ef344e2dc6b1b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
