@@ -10,17 +10,20 @@ Feature: Edit description
   Background:
     Given I am on an item page
 
+  @ui_only
   Scenario: Description UI has all required elements
     Then Original description should be displayed
       And Description edit button should be there
       And Description cancel button should not be there
 
+  @ui_only
   Scenario: Click edit button
     When I click the description edit button
     Then Description input element should be there
       And Description input element should contain original description
       And Description cancel button should be there
 
+  @ui_only
   Scenario: Modify the description
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
@@ -28,6 +31,7 @@ Feature: Edit description
       And Description cancel button should be there
       And Description edit button should not be there
 
+  @ui_only
   Scenario: Description cancel
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
@@ -36,6 +40,7 @@ Feature: Edit description
       And Description edit button should be there
       And Description cancel button should not be there
 
+  @ui_only
   Scenario: Description cancel with ESCAPE
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
@@ -44,7 +49,7 @@ Feature: Edit description
       And Description edit button should be there
       And Description cancel button should not be there
 
-  @save_description
+  @save_description @modify_entity
   Scenario: Description save
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
@@ -53,7 +58,7 @@ Feature: Edit description
     When I reload the page
     Then MODIFIED DESCRIPTION should be displayed as description
 
-  @save_description
+  @save_description @modify_entity
   Scenario: Description save with RETURN
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
@@ -62,14 +67,14 @@ Feature: Edit description
     When I reload the page
     Then MODIFIED DESCRIPTION should be displayed as description
 
-  @save_description
+  @save_description @modify_entity
   Scenario: Description with unnormalized value
     When I click the description edit button
       And I enter    bla   bla    as description
       And I click the description save button
     Then bla bla should be displayed as description
 
-  @save_description
+  @save_description @modify_entity
   Scenario: Description with "0" as value
     When I click the description edit button
       And I enter 0 as description
