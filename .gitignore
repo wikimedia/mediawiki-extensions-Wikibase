@@ -1,16 +1,5 @@
-.*
 *~
 *.kate-swp
-
-!.gitignore
-!.gitreview
-
-!.jshintrc
-!.jshintignore
-
-!.travis.yml
-!.travis.sh
-!.coveralls.yml
 
 composer.phar
 composer.lock
@@ -21,3 +10,5 @@ vendor/
 selenium/configuration.yml
 
 easyrdf/
+
+!.*
