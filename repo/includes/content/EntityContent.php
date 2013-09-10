@@ -238,14 +238,22 @@ abstract class EntityContent extends \AbstractContent {
 	}
 
 	/**
-	 * Returns native representation of the data. Interpretation depends on the data model used,
-	 * as given by getDataModel().
+	 * @see Content::getNativeData
 	 *
-	 * @return mixed the native representation of the content. Could be a string, a nested array
-	 *		 structure, an object, a binary blob... anything, really.
+	 * @return array
 	 */
 	public function getNativeData() {
 		return $this->getEntity()->toArray();
+	}
+
+	/**
+	 * @see Content::getActualContent
+	 * @since 0.5
+	 *
+	 * @return mixed The data given to the constructor.
+	 */
+	public function getActualContent() {
+		return $this->getEntity();
 	}
 
 	/**
@@ -254,7 +262,7 @@ abstract class EntityContent extends \AbstractContent {
 	 * @return int
 	 */
 	public function getSize()  {
-		return strlen( serialize( $this->getNativeData() ) );
+		return strlen( serialize( $this->getEntity()->toArray() ) );
 	}
 
 	/**
