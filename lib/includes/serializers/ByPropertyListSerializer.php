@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Serializers;
 use Traversable, ApiResult, MWException;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Serializer for Traversable objects that need to be grouped
@@ -31,6 +32,8 @@ use Traversable, ApiResult, MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ByPropertyListSerializer extends SerializerObject {
+
+	const OPT_ADD_LOWER_CASE_KEYS = 'addLowerCaseKeys';
 
 	/**
 	 * @since 0.2
@@ -92,14 +95,24 @@ class ByPropertyListSerializer extends SerializerObject {
 
 			$this->setIndexedTagName( $serializedObjects, $this->elementName );
 
-			$propertyId = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, $propertyId );
+			$propertyId = PropertyId::newFromNumber( $propertyId );
 
 			if ( $this->options->shouldIndexTags() ) {
 				$serializedObjects['id'] = $propertyId->getPrefixedId();
 				$serialization[] = $serializedObjects;
 			}
 			else {
-				$serialization[$propertyId->getPrefixedId()] = $serializedObjects;
+				$key = $propertyId->getPrefixedId();
+
+				if ( $this->getOptions()->shouldUseUpperCaseIdsAsKeys() ) {
+					$key = strtoupper( $key );
+					$serialization[$key] = $serializedObjects;
+				}
+
+				if ( $this->getOptions()->shouldUseLowerCaseIdsAsKeys() ) {
+					$key = strtolower( $key );
+					$serialization[$key] = $serializedObjects;
+				}
 			}
 		}
 

@@ -43,6 +43,17 @@ class SerializationOptions {
 	 */
 	protected $indexTags = false;
 
+	const ID_KEYS_UPPER = 1;
+	const ID_KEYS_LOWER = 2;
+	const ID_KEYS_BOTH = 3;
+
+	/**
+	 * @since 0.5
+	 * @var int $idKeyMode bit field determining whether to use upper case entities IDs as
+	 *      keys in the serialized structure, or lower case IDs, or both.
+	 */
+	protected $idKeyMode = self::ID_KEYS_UPPER;
+
 	/**
 	 * Sets if tags should be indexed.
 	 * The MediaWiki API needs this when building API results in formats such as XML.
@@ -100,6 +111,58 @@ class SerializationOptions {
 	 */
 	public function shouldUseKeys() {
 		return !$this->indexTags;
+	}
+
+	/**
+	 * Returns whether lower case entities IDs should be used as keys in the serialized data structure.
+	 *
+	 * @see setIdKeyMode()
+	 *
+	 * @since 0.5
+	 *
+	 * @return boolean
+	 */
+	public function shouldUseLowerCaseIdsAsKeys() {
+		return ( $this->idKeyMode & self::ID_KEYS_LOWER ) > 0;
+	}
+
+	/**
+	 * Returns whether upper case entities IDs should be used as keys in the serialized data structure.
+	 *
+	 * @see setIdKeyMode()
+	 *
+	 * @since 0.5
+	 *
+	 * @return boolean
+	 */
+	public function shouldUseUpperCaseIdsAsKeys() {
+		return ( $this->idKeyMode & self::ID_KEYS_UPPER ) > 0;
+	}
+
+	/**
+	 * Sets whether upper case entities IDs should be used as keys in the serialized data structure,
+	 * or lower case, or both.
+	 *
+	 * Allowing for different forms of IDs to be used as keys is needed for backwards
+	 * compatibility while we change from lower case to upper case IDs in version 0.5.
+	 *
+	 * @see shouldUseLowerCaseIdsAsKeys()
+	 * @see shouldUseUpperCaseIdsAsKeys()
+	 *
+	 * @since 0.5
+	 *
+	 * @param int $mode a bit field using the ID_KEYS_XXX constants.
+	 */
+	public function setIdKeyMode( $mode ) {
+		if ( ( $mode & self::ID_KEYS_BOTH ) === 0 ) {
+			throw new \InvalidArgumentException( "At least one ID key mode must be set in the bit field." );
+		}
+
+		if ( ( $mode & ~self::ID_KEYS_BOTH ) !== 0 ) {
+			throw new \InvalidArgumentException( "Unknown bits set in ID key mode, use the ID_KEYS_XXX constants." );
+		}
+
+		$this->idKeyMode = $mode;
 	}
 }
 
