@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -38,7 +38,7 @@ class EntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function newParser() {
-		return new EntityIdParser( BasicEntityIdParser::getBuilders() );
+		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
 	}
 
 	/**

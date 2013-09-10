@@ -5,8 +5,8 @@ namespace Wikibase\DataModel\Claim;
 use Wikibase\DataModel\Claim\ClaimGuid;
 use Wikibase\DataModel\Claim\ClaimGuidParsingException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Parser;
 
 /**
  * @since 0.5
@@ -17,14 +17,14 @@ use Wikibase\Parser;
 class ClaimGuidParser {
 
 	/**
-	 * @var EntityIdParser $entityIdParser
+	 * @var DispatchingEntityIdParser $entityIdParser
 	 */
 	private $entityIdParser;
 
 	/**
 	 * @param EntityIdParser $entityIdParser
 	 */
-	public function __construct( Parser $entityIdParser ) {
+	public function __construct( EntityIdParser $entityIdParser ) {
 		$this->entityIdParser = $entityIdParser;
 	}
 

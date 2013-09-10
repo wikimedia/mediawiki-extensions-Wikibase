@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\DataModel\Entity;
-use Wikibase\Parser;
 
 /**
  * Object that can parse the serializations of the EntityIds defined by the DataModel.
@@ -13,7 +12,7 @@ use Wikibase\Parser;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  */
-class BasicEntityIdParser implements Parser {
+class BasicEntityIdParser implements EntityIdParser {
 
 	/**
 	 * @param string $idSerialization
@@ -22,20 +21,20 @@ class BasicEntityIdParser implements Parser {
 	 * @throws EntityIdParsingException
 	 */
 	public function parse( $idSerialization ) {
-		$idParser = new EntityIdParser( self::getBuilders() );
+		$idParser = new DispatchingEntityIdParser( self::getBuilders() );
 		return $idParser->parse( $idSerialization );
 	}
 
 	/**
 	 * Returns an id builders array.
 	 * Keys are preg_match patterns, values are callables.
-	 * (See the EntityIdParser constructor for more details.)
+	 * (See the DispatchingEntityIdParser constructor for more details.)
 	 *
 	 * This method returns builders for the ids of all entity types
 	 * defined by WikibaseDataModel. It is intended to be used by
 	 * applications that allow for registration of additional entity
 	 * types, and thus want to extend upon this list. The extended
-	 * list can then be used to construct a EntityIdParser instance.
+	 * list can then be used to construct a DispatchingEntityIdParser instance.
 	 *
 	 * @return callable[]
 	 */
