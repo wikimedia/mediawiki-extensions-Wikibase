@@ -23,7 +23,11 @@ Feature: Empty label and description behaviour
     When I enter NEW DESCRIPTION as description
     Then Description cancel button should be there
       And Description save button should be there
-    When I click the description cancel button
+
+  @ui_only
+  Scenario: Description UI behaves correctly when description is empty
+    When I enter NEW DESCRIPTION as description
+      And I click the description cancel button
     Then Description cancel button should not be there
       And Description edit button should not be there
       And Description save button should not be there
@@ -43,7 +47,11 @@ Feature: Empty label and description behaviour
     When I enter NEW LABEL as label
     Then Label cancel button should be there
       And Label save button should be there
-    When I click the label cancel button
+
+  @ui_only
+  Scenario: Label UI behaves correctly when label is empty
+    When I enter NEW LABEL as label
+      And I click the label cancel button
     Then Label cancel button should not be there
       And Label edit button should not be there
       And Label save button should not be there
