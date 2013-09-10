@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
+use Wikibase\Parser;
 
 /**
  * @since 0.5
@@ -12,7 +13,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  */
-class EntityIdParser {
+class EntityIdParser implements Parser {
 
 	protected $idBuilders;
 

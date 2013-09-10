@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\DataModel\Entity;
+use Wikibase\Parser;
 
 /**
  * Object that can parse the serializations of the EntityIds defined by the DataModel.
@@ -12,7 +13,7 @@ namespace Wikibase\DataModel\Entity;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  */
-class BasicEntityIdParser {
+class BasicEntityIdParser implements Parser {
 
 	/**
 	 * @param string $idSerialization
