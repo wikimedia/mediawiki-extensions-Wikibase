@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_47068687",
+        "filename": "docs/json.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-10T17:41:01Z",
+      "side": 1,
+      "message": "identifier",
+      "revId": "c32b72021192a77432bdf60093bd0268af15d7b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_87f86e7a",
+        "filename": "docs/json.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-10T17:41:01Z",
+      "side": 1,
+      "message": "client",
+      "revId": "c32b72021192a77432bdf60093bd0268af15d7b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
