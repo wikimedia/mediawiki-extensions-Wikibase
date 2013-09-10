@@ -67,6 +67,24 @@
       "revId": "4aa989e4fab74e2d77d4a59cbe6f12e391598d87",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_e4a130ae",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-09-10T11:47:26Z",
+      "side": 1,
+      "message": "The following lines gather the SnakList objects of the snaklistview widgets. Each of these snaklistviews contains a group of one or more snaks that share the same property. There is no way to use a getGroupedSnaks function here since it does not fit the purpose. The snaklistviews are wrapped by a listview widget which would need to handle the SnakLists of the snaklistviews.",
+      "parentUuid": "c95d3502_0432b35d",
+      "revId": "4aa989e4fab74e2d77d4a59cbe6f12e391598d87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
