@@ -25,6 +25,16 @@ Given /^I am on an item page with empty label and description$/ do
   on(ItemPage).navigate_to_entity item["url"]
 end
 
+Given /^the sitelink (.+)\/(.+) does not exist$/ do |siteid, pagename|
+  remove_sitelinks(siteid, pagename).should be_true
+end
+
+Given /^The following sitelinks do not exist:$/ do |sitelinks|
+  sitelinks.raw.each do |sitelink|
+    remove_sitelink(sitelink[0], sitelink[1]).should be_true
+  end
+end
+
 Then /^An error message should be displayed$/ do
   on(ItemPage).wbErrorDiv?.should be_true
 end
