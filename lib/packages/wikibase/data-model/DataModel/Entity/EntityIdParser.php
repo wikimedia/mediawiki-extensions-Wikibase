@@ -13,14 +13,12 @@ namespace Wikibase\DataModel\Entity;
 interface EntityIdParser {
 
 	/**
-	 * Parses the given param
-	 *
 	 * @since 0.5
 	 *
-	 * @param mixed $data
+	 * @param string $entityId
 	 *
 	 * @return mixed
 	 */
-	public function parse( $data );
+	public function parse( $entityId );
 
 }
