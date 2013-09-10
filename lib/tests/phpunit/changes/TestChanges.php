@@ -158,6 +158,7 @@ final class TestChanges {
 			$propertyId = new EntityId( \Wikibase\Property::ENTITY_TYPE, 23 );
 			$snak = new \Wikibase\PropertyNoValueSnak( $propertyId );
 			$claim = new \Wikibase\Claim( $snak );
+			$claim->setGuid( 'test-guid' );
 
 			$claims = new \Wikibase\Claims( array( $claim ) );
 			$new->setClaims( $claims );
