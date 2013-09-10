@@ -824,17 +824,16 @@ class ChangeHandler {
 
 		// change involved site link to client wiki
 		if ( array_key_exists( $siteGlobalId, $siteLinkDiff ) ) {
+			$diffOp = $siteLinkDiff[$siteGlobalId];
+
 			// check for new site link diff structure, with badges
-			if ( $siteLinkDiff instanceof \Diff\Diff ) {
-				if ( array_key_exists( 'name', $siteLinkDiff[$siteGlobalId] ) ) {
-					$diffOp = $siteLinkDiff[$siteGlobalId]['name'];
+			if ( $diffOp instanceof \Diff\Diff ) {
+				if ( array_key_exists( 'name', $diffOp ) ) {
+					$diffOp = $diffOp['name'];
 				} else {
-					// badge change
+					// badge change, use generic comment message
 					return $params;
 				}
-			} else {
-				// it is the old structure
-				$diffOp = $siteLinkDiff[$siteGlobalId];
 			}
 
 			if ( $action === 'remove' ) {
