@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_84714ce0",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-10T15:25:36Z",
+      "side": 1,
+      "message": "this is in the base class?!",
+      "revId": "7e213fc7e3bde5a560e80daf3eb92fcecf8aaeac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
