@@ -16,6 +16,24 @@
       "revId": "7e213fc7e3bde5a560e80daf3eb92fcecf8aaeac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_2706da1f",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-10T15:52:22Z",
+      "side": 1,
+      "message": "On the same level as shouldIndexTags(), yes.\n\nThere is no way calling code can really know where entity IDs will be used as keys in the resulting data structure. So how can the calling code express the preference, if not using the base class?\n\nActually, putting it into a separate ByIdSerializerOptions class would make it impossible to use this in the WikibaseLibrary for Lua.\n\nThis is a general problem - we use a nested structure of serializers to serialize a nested object structure. But we can only supply options at the top level. We would need to supply an option object for each serializer that may be used...",
+      "parentUuid": "4946a543_84714ce0",
+      "revId": "7e213fc7e3bde5a560e80daf3eb92fcecf8aaeac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
