@@ -33,6 +33,23 @@
       "revId": "c32b72021192a77432bdf60093bd0268af15d7b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_072d5efe",
+        "filename": "lib/includes/serializers/ByPropertyListSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-10T17:43:08Z",
+      "side": 1,
+      "message": "Oops, forgot to put the \"see docs/json.wiki\" line here.",
+      "revId": "c32b72021192a77432bdf60093bd0268af15d7b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
