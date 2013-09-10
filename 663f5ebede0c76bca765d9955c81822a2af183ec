@@ -51,6 +51,24 @@
       "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "893c1da4_d10a467a",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-10T19:00:28Z",
+      "side": 1,
+      "message": "you can use a string switch instead of a boolean:\n\n Utils::getLanguageCodes( \u0027nodummys\u0027 )  vs.  Utils::getLanguageCodes( \u0027withdummys\u0027 ).\n\nThis isn\u0027t so pretty, but it works fine, and it\u0027s actually used in core already. Nikerabbit \u0026 co advocate it as best practice.",
+      "parentUuid": "c95d3502_27532f18",
+      "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
