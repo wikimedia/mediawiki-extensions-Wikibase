@@ -4,7 +4,9 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListSerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
+use Wikibase\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListSerializer
@@ -41,8 +43,8 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	 * @return ByPropertyListSerializer
 	 */
 	protected function getInstance() {
-		$snakSetailizer = new SnakSerializer();
-		return new ByPropertyListSerializer( 'test', $snakSetailizer );
+		$snakSerializer = new SnakSerializer();
+		return new ByPropertyListSerializer( 'test', $snakSerializer );
 	}
 
 	/**
@@ -99,4 +101,27 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 		return $validArgs;
 	}
 
+	/**
+	 * @dataProvider provideIdKeyMode
+	 */
+	public function testIdKeyMode( $mode ) {
+		$snakSerializer = new SnakSerializer();
+		$snak = new PropertyNoValueSnak( new PropertyId( "P123" ) );
+
+		$options = new SerializationOptions();
+		$options->setIdKeyMode( $mode );
+		$serializer = new ByPropertyListSerializer( 'test', $snakSerializer, $options );
+
+		$data = $serializer->getSerialized( new \ArrayObject( array( $snak ) ) );
+		$this->assertEquals( ( $mode & SerializationOptions::ID_KEYS_UPPER ) > 0, array_key_exists( 'P123', $data ), 'upper case key' );
+		$this->assertEquals( ( $mode & SerializationOptions::ID_KEYS_LOWER ) > 0, array_key_exists( 'p123', $data ), 'lower case key' );
+	}
+
+	public function provideIdKeyMode() {
+		return array(
+			'lower' => array( SerializationOptions::ID_KEYS_LOWER ),
+			'upper' => array( SerializationOptions::ID_KEYS_UPPER ),
+			'both' => array( SerializationOptions::ID_KEYS_BOTH ),
+		);
+	}
 }
