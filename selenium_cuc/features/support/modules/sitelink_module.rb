@@ -9,42 +9,63 @@
 module SitelinkPage
   include PageObject
   # sitelinks UI elements
-  table(:sitelinksTable, :class => "wb-sitelinks")
-  element(:sitelinksTableColumnHeaders, :tr, :class => "wb-sitelinks-columnheaders")
-  element(:sitelinksHeaderLanguage, :th, :class => "wb-sitelinks-sitename")
-  element(:sitelinksHeaderCode, :th, :class => "wb-sitelinks-siteid")
-  element(:sitelinksHeaderLink, :th, :class => "wb-sitelinks-link")
-  element(:sitelinksTableBody, :tbody, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody")
-  element(:sitelinksTableLanguage, :td, :index => 1)
-  link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot > tr > td > span.wb-ui-toolbar > span.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
-  span(:siteLinkCounter, :class => "wb-ui-propertyedittool-counter")
-  text_field(:siteIdInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tfoot/tr/td[1]/input")
-  text_field(:pageInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tfoot/tr/td[contains(@class, 'wb-sitelinks-link')]/input")
-  text_field(:pageInputFieldExistingSiteLink, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[contains(@class, 'wb-sitelinks-link')]/input")
-  span(:saveSitelinkLinkDisabled, :class => "wb-ui-toolbar-button-disabled")
-  unordered_list(:siteIdAutocompleteList, :class => "wikibase-siteselector-list")
-  #todo: this is not a nice way to get the suggestion list, we should find a better way
-  unordered_list(:pageAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
-  unordered_list(:editSitelinkAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
-  link(:saveSitelinkLink, :text => "save")
-  link(:cancelSitelinkLink, :text => "cancel")
-  link(:removeSitelinkLink, :text => "remove")
-  link(:editSitelinkLink, :xpath => "//td[contains(@class, 'wb-ui-propertyedittool-editablevalue-toolbarparent')]/span/span/span/a")
-  link(:englishEditSitelinkLink, :xpath => "//tr[contains(@class, 'wb-sitelinks-en')]/td[4]/span/span/span/a")
-  link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
-  link(:germanSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-de')]/a")
-  link(:englishSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-en')]/a")
-  span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
+  h2(:sitelinkHeading, :id => "sitelinks-wikipedia")
+  #h2(:sitelinkHeadingWikivoyage, :id => "sitelinks-wikivoyage")
+  table(:sitelinkTable, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]")
+  #table(:sitelinkTableWikivoyage, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikivoyage')]")
+  element(:sitelinkTableHeader, :tr, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//tr[contains(@class, 'wb-sitelinks-columnheaders')]")
+  #element(:sitelinksHeaderLanguage, :th, :class => "wb-sitelinks-sitename")
+  #element(:sitelinksHeaderCode, :th, :class => "wb-sitelinks-siteid")
+  #element(:sitelinksHeaderLink, :th, :class => "wb-sitelinks-link")
+  #element(:sitelinksTableBody, :tbody, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody")
+  #element(:sitelinksTableLanguage, :td, :index => 1)
+  span(:sitelinkCounter, :class => "wb-ui-propertyedittool-counter")
+  text_field(:siteIdInputField, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//td[contains(@class, 'wb-sitelinks-sitename')]/input")
+  text_field(:pageInputField, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//td[contains(@class, 'wb-sitelinks-link')]/input[not(@disabled)]")
+  text_field(:pageInputFieldDisabled, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//td[contains(@class, 'wb-sitelinks-link')]/input[contains(@disabled, 'disabled')]")
+  #text_field(:pageInputFieldExistingSiteLink, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[contains(@class, 'wb-sitelinks-link')]/input")
+  unordered_list(:siteIdDropdown, :xpath => "//ul[contains(@class, 'wikibase-siteselector-list')]")
+  list_item(:siteIdDropdownFirstElement, :xpath => "//ul[contains(@class, 'wikibase-siteselector-list')]/li")
+  unordered_list(:pageNameDropdown, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
+  list_item(:pageNameDropdownFirstElement, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']/li")
+
+  #unordered_list(:editSitelinkAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
+  link(:addSitelinkLink, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wb-ui-propertyedittool-toolbarbutton-addbutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:addSitelinkLinkDisabled, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wb-ui-propertyedittool-toolbarbutton-addbutton.wikibase-toolbarbutton-disabled")
+  link(:saveSitelinkLink, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:saveSitelinkLinkDisabled, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
+  link(:cancelSitelinkLink, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:removeSitelinkLink, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wikibase-toolbareditgroup-removebutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:editSitelinkLink, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:editSitelinkLinkDisabled, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
+  link(:editSitelinkLinkEn, :css => "table[data-wb-sitelinks-group='wikipedia'] tr.wb-sitelinks-en a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
+  link(:editSitelinkLinkEnDisabled, :css => "table[data-wb-sitelinks-group='wikipedia'] tr.wb-sitelinks-en a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
+  #link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
+  #link(:germanSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-de')]/a")
+  #link(:englishSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-en')]/a")
+  #span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
+  span(:sitelinkHelpField, :css => "table[data-wb-sitelinks-group='wikipedia'] span.mw-help-field-hint")
+
   # sitelinks methods
-  def get_number_of_sitelinks_from_counter
-    wait_until do
-      siteLinkCounter?
+  def count_existing_sitelinks
+    if sitelinkTableHeader? == false
+      return 0
     end
-    scanned = siteLinkCounter.scan(/\(([^)]+)\)/)
-    integerValue = scanned[0][0].to_i()
-    return integerValue
+    count = 0
+    sitelinkTable_element.each do |tableRow|
+      count = count+1
+    end
+    return count - 2 # subtracting the table header row and the footer row
   end
 
+  def get_number_of_sitelinks_from_counter
+    sitelinkCounter_element.when_visible
+
+    scanned = sitelinkCounter.scan(/\(([^)]+)\)/)
+    return scanned[0][0]
+  end
+
+  ######################### not used #################################
   def get_nth_element_in_autocomplete_list(list, n)
     count = 0
     list.each do |listItem|
@@ -58,17 +79,6 @@ module SitelinkPage
 
   def get_text_from_sitelist_table(x, y)
     return sitelinksTable_element[x][y].text
-  end
-
-  def count_existing_sitelinks
-    if sitelinksTableColumnHeaders? == false
-      return 0
-    end
-    count = 0
-    sitelinksTable_element.each do |tableRow|
-      count = count+1
-    end
-    return count - 2 # subtracting the table header row and the footer row
   end
 
   def add_sitelinks(sitelinks)
