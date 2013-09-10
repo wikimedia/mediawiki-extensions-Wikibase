@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_e4d2105b",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-09-10T10:11:08Z",
+      "side": 1,
+      "message": "this.UI_CLASS + \u0027-toolbarbutton-addbutton\u0027",
+      "revId": "b89484143e73350167e32e43fd317b25f0f59a50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
