@@ -289,21 +289,19 @@ class LangLinkHandler {
 		wfProfileIn( __METHOD__ );
 
 		//FIXME: this needs to be moved into core, into SiteList resp. SiteArray!
-		if ( $this->sitesByNavigationId === null ) {
-			$this->sitesByNavigationId = array();
+		$allSites = $this->sites->getSites();
+		$sitesInGroup = $allSites->getGroup( $this->siteGroup );
 
-			/* @var Site $site */
-			foreach ( $this->sites->getSites() as $site ) {
-				$ids = $site->getNavigationIds();
-
-				foreach ( $ids as $navId ) {
-					$this->sitesByNavigationId[$navId] = $site;
-				}
+		// use language code as navigation id
+		foreach( $sitesInGroup as $site ) {
+			if ( $id === $site->getLanguageCode() ) {
+				wfProfileOut( __METHOD__ );
+				return $site;
 			}
 		}
 
 		wfProfileOut( __METHOD__ );
-		return isset( $this->sitesByNavigationId[$id] ) ? $this->sitesByNavigationId[$id] : false;
+		return false;
 	}
 
 	/**
