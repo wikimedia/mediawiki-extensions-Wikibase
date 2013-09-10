@@ -204,7 +204,7 @@ class EntityChangeTest extends DiffChangeTest {
 		$id = $entityChange->getEntityId()->getPrefixedId();
 		$type = $entityChange->getType();
 
-		$this->assertTrue( strpos( $s, $id ) !== false, "contains entity ID" );
-		$this->assertTrue( strpos( $s, $type ) !== false, "contains type" );
+		$this->assertTrue( stripos( $s, $id ) !== false, "missing entity ID $id" );
+		$this->assertTrue( stripos( $s, $type ) !== false, "missing type $type" );
 	}
 }
