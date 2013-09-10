@@ -9000,6 +9000,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 * precisione – valore espresso codificato in un intero breve. I numeri hanno il seguente significato: 0 - miliardi di anni, 100 milioni anni,..., 6 - millenio, 7 - secolo, 8 - decade, 9 - anno, 10 - mese, 11 - giorno, 12 - ora, 13 - minuto, 14 - secondo.
 * calendario – valore espresso fornito come un URI. Identificherà il modello di calendario che dovrebbe essere utilizzato per visualizzare il valore del tempo.",
 	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Campo dati letterale per un URL. Gli URL sono limitati ai protocolli supportati per i collegamenti esterni nel wikitesto.',
 	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Elemento Wikibase',
 	'content-model-wikibase-property' => 'Proprietà Wikibase',
@@ -16368,7 +16369,7 @@ $messages['zh-hans'] = array(
 	'wikibase-entitydata-text' => '本页面提供实体值的链接数据界面。请使用子页面句法提供URl中的实体ID。',
 	'special-mylanguagefallbackchain' => '我的语言备选链',
 	'wikibase-mylanguagefallbackchain-text' => '用于为你显示实体标签的语言备选链显示在下面。',
-	'wikibase-mylanguagefallbackchain-babel' => '你可以通过在你的[[Special:MyPage|用户页面]]放置<nowiki>{{#babel: }}</nowiki>编辑它。', # Fuzzy
+	'wikibase-mylanguagefallbackchain-babel' => '你可以通过在{{GENDER:$1|你的}}[[Special:MyPage|用户页面]]放置<nowiki>{{#babel: }}</nowiki>编辑它。',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2，更改自$3 - $4',
 	'wikibase-self-conflict-patched' => '你的编辑已被修补至最后版本，覆盖某些你自己的中间更改。',
 	'wikibase-conflict-patched' => '你的编辑已被修补至最后版本。',
@@ -16420,6 +16421,7 @@ $messages['zh-hans'] = array(
 	'wikibase-item-summary-wbsetqualifier-update' => '更改{{PLURAL:$1|限定符}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '删除{{PLURAL:$1|限定符}}',
 	'wikibase-item-summary-wbremovereferences-remove' => '删除声称的{{PLURAL:$3|参考}}',
+	'wikibase-item-summary-wbsetstatementrank' => "改变语句的等级从 ' $3 '到' $4 '",
 	'wikibase-property-summary-wbcreate-new' => '创建新属性',
 	'wikibase-property-summary-wbeditentity-create' => '创建新属性',
 	'wikibase-property-summary-wbeditentity-update' => '更新属性',
@@ -16427,6 +16429,7 @@ $messages['zh-hans'] = array(
 	'wikibase-property-summary-wbsetlabel-add' => '[$2]标签已添加',
 	'wikibase-property-summary-wbsetlabel-set' => '更改[$2]标签',
 	'wikibase-property-summary-wbsetlabel-remove' => '删除[$2]标签',
+	'wikibase-property-summary-wbsetdescription-add' => '添加[$2]说明',
 	'wikibase-property-summary-wbsetdescription-set' => '更改[$2]说明',
 	'wikibase-property-summary-wbsetdescription-remove' => '删除[$2]说明',
 	'wikibase-property-summary-wbsetaliases-set' => '设置[$2]{{PLURAL:$1|别名}}',

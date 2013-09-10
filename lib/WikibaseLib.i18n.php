@@ -3172,6 +3172,7 @@ $messages['yi'] = array(
  * @author Stevenliuyi
  * @author Xiaomingyan
  * @author Yfdyh000
+ * @author Zhuyifei1999
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
@@ -3221,6 +3222,9 @@ $messages['zh-hans'] = array(
 	'wikibase-validator-no-such-property' => '未找到属性$1',
 	'wikibase-validator-bad-value' => '非法值：$1',
 	'wikibase-validator-bad-value-type' => '错误值类型$1，预期为$2',
+	'wikibase-validator-bad-url' => '格式不正确的地址：$1',
+	'wikibase-validator-bad-http-url' => '格式不正确的 HTTP 地址：$1',
+	'wikibase-validator-bad-mailto-url' => '格式不正确 mailto 地址：$1',
 	'datatypes-type-wikibase-item' => '项',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
 	'version-wikibase' => '维基数据库',

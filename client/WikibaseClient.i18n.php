@@ -1440,6 +1440,7 @@ $messages['fi'] = array(
  * @author Ayack
  * @author Crochet.david
  * @author Gomoko
+ * @author Jean-Frédéric
  * @author Linedwell
  * @author Ltrlg
  * @author Peter17
@@ -1452,6 +1453,7 @@ $messages['fr'] = array(
 	'tooltip-t-wikibase' => 'Lien vers l’élément de référentiel des données connectées',
 	'wikibase-after-page-move' => 'Vous pouvez aussi [$1 mettre à jour] l’élément Wikidata associé pour conserver les liens de langue sur la page déplacée.',
 	'wikibase-after-page-move-queued' => 'L’[$1 élément Wikidata] associé avec cette page sera bientôt mis à jour automatiquement.',
+	'wikibase-comment-add' => 'Un élément Wikidata a été créé.',
 	'wikibase-comment-remove' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
 	'wikibase-comment-linked' => 'Un élément Wikidata a été lié à cette page.',
 	'wikibase-comment-unlink' => 'Cette page a été dissociée de l’élément Wikidata. Liens de langue supprimés.',
@@ -4006,6 +4008,7 @@ $messages['yue'] = array(
  * @author Stevenliuyi
  * @author Xiaomingyan
  * @author Yfdyh000
+ * @author Zhuyifei1999
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
@@ -4014,6 +4017,7 @@ $messages['zh-hans'] = array(
 	'tooltip-t-wikibase' => '链接到已连接的数据存储库项',
 	'wikibase-after-page-move' => '您还可以[$1 更新]关联的维基数据项，使其链接至移动后的页面。',
 	'wikibase-after-page-move-queued' => '[$1 维基数据项]及其相关页面将很快自动更新。',
+	'wikibase-comment-add' => '已创建一个维基数据的项。',
 	'wikibase-comment-remove' => '关联的维基数据项已删除。跨语言链接已移除。',
 	'wikibase-comment-linked' => '一个维基数据项已链接至此页面。',
 	'wikibase-comment-unlink' => '本页已解除至维基数据项的链接。跨语言链接已移除。',
@@ -4047,6 +4051,7 @@ $messages['zh-hans'] = array(
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 	'wikibase-rc-wikibase-edit-letter' => '编',
+	'wikibase-rc-wikibase-edit-title' => '维基数据的编辑',
 	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示维基数据的编辑',
 	'wikibase-error-serialize-error' => '无法序列化数据。',
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
