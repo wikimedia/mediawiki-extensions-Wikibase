@@ -27,6 +27,7 @@
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Utils;
@@ -78,6 +79,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$serializerFactory = new SerializerFactory();
 		$opt = new EntitySerializationOptions( WikibaseClient::getDefaultInstance()->getEntityIdFormatter() );
+
+		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
+		// twice, once with a lower case key and once with an upper case key.
+		// This is a B/C hack to allow existing lua code to use hardcoded IDs
+		// in both lower (legacy) and upper case.
+		$opt->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
 
 		// This is $wgContLang, not parser target language or anything else.
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
