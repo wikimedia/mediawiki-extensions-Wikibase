@@ -1,31 +1,19 @@
 <?php
 
+namespace Wikibase\Repo\Specials;
+
+use Html;
+use Status;
+use UserBlockedError;
+use Wikibase\EditEntity;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Summary;
 
 /**
  * Page for creating new Wikibase entities.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
@@ -97,7 +85,7 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 					$summary = new Summary( 'wbeditentity', 'create' );
 					$summary->setLanguage( $this->getLanguage()->getCode() );
 					$summary->addAutoSummaryArgs( array( $this->label, $this->description ) );
-					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
+					$editEntity = new EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
 					$editEntity->attemptSave(
 						$summary->toString(),
 						EDIT_AUTOSUMMARY|EDIT_NEW,
@@ -168,11 +156,11 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Wikibase\EntityContent &$entity
+	 * @param EntityContent &$entity
 	 *
 	 * @return Status
 	 */
-	protected function modifyEntity( \Wikibase\EntityContent &$entity ) {
+	protected function modifyEntity( EntityContent &$entity ) {
 		$lang = $this->getLanguage()->getCode();
 		if ( $this->label !== '' ) {
 			$entity->getEntity()->setLabel( $lang, $this->label );
@@ -306,6 +294,7 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 
 	/**
 	 * Output an error message telling the user that he is blocked
+	 * @throws UserBlockedError
 	 */
 	function displayBlockedError() {
 		throw new UserBlockedError( $this->getUser()->getBlock() );
