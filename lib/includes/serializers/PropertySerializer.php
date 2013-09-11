@@ -32,7 +32,7 @@ use Wikibase\Property;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertySerializer extends EntitySerializer {
+class PropertySerializer extends EntitySerializer implements Unserializer {
 
 	/**
 	 * @see EntitySerializer::getEntityTypeSpecificSerialization
@@ -56,6 +56,21 @@ class PropertySerializer extends EntitySerializer {
 		}
 
 		return $serialization;
+	}
+
+	/**
+	 * @param array $data
+	 *
+	 * @return Property
+	 */
+	public function newFromSerialization( array $data ) {
+		$entity = parent::newFromSerialization( $data );
+
+		if ( array_key_exists( 'datatype', $data ) ) {
+			$entity->setDataTypeId( $data['datatype'] );
+		}
+
+		return $entity;
 	}
 
 }
