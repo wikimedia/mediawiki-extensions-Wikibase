@@ -280,6 +280,13 @@ $messages['pms'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
+/** Brazilian Portuguese (português do Brasil)
+ * @author Cainamarques
+ */
+$messages['pt-br'] = array(
+	'datavalues-desc' => 'Coleção de objetos representando vários tipos de valores',
+);
+
 /** tarandíne (tarandíne)
  * @author Joetaras
  */
