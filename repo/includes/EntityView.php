@@ -245,7 +245,9 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( EntityContent $entity, ParserOptions $options = null, $generateHtml = true ) {
+	public function getParserOutput( EntityContent $entityContent, ParserOptions $options = null,
+		$generateHtml = true ) {
+
 		wfProfileIn( __METHOD__ );
 
 		if ( !$options ) {
@@ -264,7 +266,12 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
-		$allSnaks = $entity->getEntity()->getAllSnaks();
+		$entity = $entityContent->getEntity();
+
+		$serializedEntity = $entity->serialize();
+		$pout->setExtensionData( 'wikibase-entity', $serializedEntity );
+
+		$allSnaks = $entity->getAllSnaks();
 
 		// treat referenced entities as page links ------
 		$refFinder = new ReferencedEntitiesFinder();
@@ -283,7 +290,7 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		if ( $generateHtml ) {
-			$html = $this->getHtml( $entity, $langCode, $editable );
+			$html = $this->getHtml( $entityContent, $langCode, $editable );
 			$pout->setText( $html );
 		}
 
@@ -829,7 +836,7 @@ abstract class EntityView extends \ContextSource {
 
 		$parser = new \Parser();
 		$user = $this->getUser();
-		$entity = $entityContent->getEntity();
+		$entity = $this->getEntityFromJson( $out->getProperty( 'wikibase-entity' ) );
 		$title = $out->getTitle();
 
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
@@ -851,15 +858,11 @@ abstract class EntityView extends \ContextSource {
 			'messageHtml' => Utils::getCopyrightMessage()->parse(),
 		) );
 
-		// TODO: use injected id formatter
-		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		$serializedEntity = $this->getSerializedEntity( $entity );
 
 		$out->addJsConfigVars(
 			'wbEntity',
-			FormatJson::encode( $serializer->getSerialized( $entity ) )
+			FormatJson::encode( $serializedEntity )
 		);
 
 		// make information about other entities used in this entity available in JavaScript view:
@@ -874,6 +877,43 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * @todo use EntitySerializer instead of internal serialization
+	 *
+	 * @param string $entityJson
+	 *
+	 * @return string
+	 */
+	protected function getEntityFromJson( $entityJson ) {
+		$entity = EntityFactory::singleton()->newFromBlob(
+			'item', // fixme
+			$entityJson,
+			CONTENT_FORMAT_JSON
+		);
+
+		return $entity;
+	}
+
+	/**
+	 * @param Entity $entity
+	 * @param EntitySerializationOptions $options
+	 *
+	 * @return string
+	 */
+	protected function getSerializedEntity( Entity $entity, EntitySerializationOptions $options = null ) {
+		if ( $options === null ) {
+			// TODO: use injected id formatter
+			$options = new EntitySerializationOptions(
+				WikibaseRepo::getDefaultInstance()->getIdFormatter()
+			);
+		}
+
+		$serializerFactory = new SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $entity, $options );
+
+		return $serializer->getSerialized( $entity );
 	}
 
 	/**
