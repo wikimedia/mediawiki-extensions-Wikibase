@@ -28,6 +28,7 @@ use SpecialSearch;
 use SplFileInfo;
 use Title;
 use User;
+use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -44,6 +45,13 @@ use WikiPage;
  * @author Jens Ohlig
  */
 final class RepoHooks {
+
+	private static function isTitleInEntityNamespace( Title $title ) {
+		$entityNamespaces = array_flip( NamespaceUtils::getEntityNamespaces() );
+		$namespace = $title->getNamespace();
+
+		return in_array( $namespace, $entityNamespaces );
+    }
 
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
@@ -1068,7 +1076,7 @@ final class RepoHooks {
 
 	/**
 	 * Called when pushing meta-info from the ParserOutput into OutputPage.
-	 * Used to transfer the 'wb-placeholders' from ParserOutput to OutputPage.
+	 * Used to transfer 'wikibase-view-chunks' and entity data from ParserOutput to OutputPage.
 	 *
 	 * @param OutputPage $out
 	 * @param ParserOutput $parserOutput
@@ -1081,6 +1089,9 @@ final class RepoHooks {
 		if ( $placeholders ) {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
+
+	//	$configVars = $parserOutput->getExtensionData( 'wikibase-configvars' );
+	//	$out->setProperty( 'wikibase-configvars', $configVars );
 
 		return true;
 	}
@@ -1114,6 +1125,34 @@ final class RepoHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Puts user-specific and other vars that we don't want stuck
+	 * in parser cache (e.g. copyright message)
+	 *
+	 * @param OutputPage $out
+	 * @param string &$html
+	 *
+	 * @return boolean
+	 */
+	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
+		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
+			return true;
+		}
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$langCode = $out->getContext()->getLanguage()->getCode();
+
+		$hookHandler = new OutputPageJsConfigHookHandler(
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getEntityContentFactory(),
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$wikibaseRepo->getParserOutputJsConfigBuilder( $langCode ),
+			$wikibaseRepo->getSettings()
+		);
+
+		return $hookHandler->handle( $out );
 	}
 
 	/**
