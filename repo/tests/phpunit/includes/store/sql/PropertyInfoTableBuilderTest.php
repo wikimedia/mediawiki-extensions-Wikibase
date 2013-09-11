@@ -40,6 +40,7 @@ namespace Wikibase\Test;
 
 use RuntimeException;
 use Wikibase\EntityId;
+use Wikibase\EntityPerPageTable;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoStore;
@@ -60,6 +61,9 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		static $properties = null;
 
 		if ( $properties === null ) {
+			$table = new EntityPerPageTable();
+			$table->clear();
+
 			$infos = array(
 				array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'one' ),
 				array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'two' ),
