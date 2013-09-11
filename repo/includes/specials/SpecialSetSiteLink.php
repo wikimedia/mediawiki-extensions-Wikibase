@@ -1,9 +1,11 @@
 <?php
 
-use Wikibase\DataModel\SimpleSiteLink;
+namespace Wikibase\Repo\Specials;
+
+use Html;
+use Sites;
+use Status;
 use Wikibase\EntityContent;
-use Wikibase\SiteLink;
-use Wikibase\Utils;
 use Wikibase\ChangeOpSiteLink;
 use Wikibase\ChangeOpException;
 use Wikibase\Summary;
@@ -11,26 +13,7 @@ use Wikibase\Summary;
 /**
  * Special page for setting the sitepage of a Wikibase entity.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
@@ -148,7 +131,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isValidSiteId( $siteId ) {
-		return $siteId !== null && \Sites::singleton()->getSite( $siteId ) !== null;
+		return $siteId !== null && Sites::singleton()->getSite( $siteId ) !== null;
 	}
 
 	/**
@@ -233,7 +216,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityContent $entityContent
+	 * @param EntityContent $entityContent
 	 * @param string $siteId
 	 *
 	 * @return string
@@ -264,8 +247,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return Status
 	 */
 	protected function setSiteLink( EntityContent $entityContent, $siteId, $pageName, &$summary ) {
-		$status = \Status::newGood();
-		$site = \Sites::singleton()->getSite( $siteId );
+		$status = Status::newGood();
+		$site = Sites::singleton()->getSite( $siteId );
 
 		if ( $site === null ) {
 			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );

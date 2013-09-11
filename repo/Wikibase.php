@@ -123,21 +123,21 @@ call_user_func( function() {
 	$wgAPIModules['wbsetqualifier']                     = 'Wikibase\Api\SetQualifier';
 
 	// Special page registration
-	$wgSpecialPages['NewItem'] 							= 'SpecialNewItem';
-	$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
-	$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
-	$wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
-	$wgSpecialPages['ItemsWithoutSitelinks']			= 'SpecialItemsWithoutSitelinks';
-	$wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
-	$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
-	$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
-	$wgSpecialPages['SetSiteLink']						= 'SpecialSetSiteLink';
-	$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
-	$wgSpecialPages['EntitiesWithoutDescription']		= 'SpecialEntitiesWithoutDescription';
-	$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
-	$wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
-	$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
-	$wgSpecialPages['MyLanguageFallbackChain'] 				= 'SpecialMyLanguageFallbackChain';
+	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';
+	$wgSpecialPages['NewProperty'] 						= 'Wikibase\Repo\Specials\SpecialNewProperty';
+	$wgSpecialPages['ItemByTitle'] 						= 'Wikibase\Repo\Specials\SpecialItemByTitle';
+	$wgSpecialPages['ItemDisambiguation'] 				= 'Wikibase\Repo\Specials\SpecialItemDisambiguation';
+	$wgSpecialPages['ItemsWithoutSitelinks']			= 'Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks';
+	$wgSpecialPages['SetLabel'] 						= 'Wikibase\Repo\Specials\SpecialSetLabel';
+	$wgSpecialPages['SetDescription'] 					= 'Wikibase\Repo\Specials\SpecialSetDescription';
+	$wgSpecialPages['SetAliases'] 						= 'Wikibase\Repo\Specials\SpecialSetAliases';
+	$wgSpecialPages['SetSiteLink']						= 'Wikibase\Repo\Specials\SpecialSetSiteLink';
+	$wgSpecialPages['EntitiesWithoutLabel'] 			= 'Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel';
+	$wgSpecialPages['EntitiesWithoutDescription']		= 'Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription';
+	$wgSpecialPages['ListDatatypes']					= 'Wikibase\Repo\Specials\SpecialListDatatypes';
+	$wgSpecialPages['DispatchStats']					= 'Wikibase\Repo\Specials\SpecialDispatchStats';
+	$wgSpecialPages['EntityData'] 						= 'Wikibase\Repo\Specials\SpecialEntityData';
+	$wgSpecialPages['MyLanguageFallbackChain'] 			= 'Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain';
 
 	// Special page groups
 	$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';

@@ -1,31 +1,19 @@
 <?php
 
+namespace Wikibase\Repo\Specials;
+
+use Html;
+use Language;
+use Wikibase\EntityContentFactory;
+use Wikibase\Item;
+use Wikibase\ItemDisambiguation;
+
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
  * A result page is shown, disambiguating between multiple results if necessary.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file SpecialItemDisambiguation.php
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
- *
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -34,7 +22,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	/**
 	 * Constructor.
 	 *
-	 * @ see SpecialItemResolver::__construct
+	 * @see SpecialItemResolver::__construct
 	 *
 	 * @since 0.1
 	 */
@@ -74,7 +62,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		// Display the result set
 		if ( isset( $language ) && isset( $label ) ) {
 			// TODO: should search over aliases as well, not just labels
-			$itemContents = \Wikibase\EntityContentFactory::singleton()->getFromLabel( $language, $label, null, \Wikibase\Item::ENTITY_TYPE, true );
+			$itemContents = EntityContentFactory::singleton()->getFromLabel( $language, $label, null, Item::ENTITY_TYPE, true );
 
 			if ( 0 < count( $itemContents ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
@@ -109,7 +97,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @param string $langCode
 	 */
 	protected function displayDisambiguationPage( array /* of ItemContent */ $items, $langCode ) {
-		$disambiguationList = new Wikibase\ItemDisambiguation( $items, $langCode, $this->getContext() );
+		$disambiguationList = new ItemDisambiguation( $items, $langCode, $this->getContext() );
 		$disambiguationList->display();
 	}
 

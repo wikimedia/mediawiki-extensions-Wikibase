@@ -1,13 +1,15 @@
 <?php
 
+namespace Wikibase\Repo\Specials;
+
+use Html;
+use Wikibase\Lib\Specials\SpecialWikibasePage;
+use Wikibase\Repo\WikibaseRepo;
+
 /**
  * Page for listing available datatypes.
  *
  * @since 0.2
- *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Jens Ohlig
  */
@@ -52,7 +54,7 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 	}
 
 	protected function getDataTypeIds() {
-		return \Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds();
+		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds();
 	}
 
 	protected function getHtmlForDataTypeId( $dataTypeId ) {
