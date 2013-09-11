@@ -69,6 +69,24 @@
       "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_1b7f72de",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-11T20:32:22Z",
+      "side": 1,
+      "message": "btw. Is it better or worse to use:\n\n Utils::getLanguageCodes( \u0027forread\u0027 ) vs. Utils::getLanguageCodes( \u0027forwrite\u0027 )\n\n?",
+      "parentUuid": "893c1da4_d10a467a",
+      "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
