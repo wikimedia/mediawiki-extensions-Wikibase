@@ -98,10 +98,9 @@ return call_user_func( function() {
 		// includes/parsers
 		'Wikibase\Lib\EntityIdParser' => 'includes/parsers/EntityIdParser.php',
 
-
 		// includes/specials
-		'SpecialWikibasePage' => 'includes/specials/SpecialWikibasePage.php',
-		'SpecialWikibaseQueryPage' => 'includes/specials/SpecialWikibaseQueryPage.php',
+		'Wikibase\Lib\Specials\SpecialWikibasePage' => 'includes/specials/SpecialWikibasePage.php',
+		'Wikibase\Lib\Specials\SpecialWikibaseQueryPage' => 'includes/specials/SpecialWikibaseQueryPage.php',
 
 		// includes/api/serializers
 		'Wikibase\Lib\Serializers\ByPropertyListSerializer' => 'includes/serializers/ByPropertyListSerializer.php',

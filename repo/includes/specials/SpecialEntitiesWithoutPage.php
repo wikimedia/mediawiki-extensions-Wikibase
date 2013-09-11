@@ -1,28 +1,18 @@
 <?php
 
+namespace Wikibase\Repo\Specials;
+
+use Html;
+use Wikibase\EntityFactory;
+use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
+use Wikibase\StoreFactory;
+use Wikibase\Utils;
+use XmlSelect;
+
 /**
  * Base page for pages listing entities without a specific value.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Bene*
@@ -100,13 +90,13 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->language = $request->getText( 'language', $this->language );
-		if ( $this->language !== '' && !in_array( $this->language, \Wikibase\Utils::getLanguageCodes() ) ) {
+		if ( $this->language !== '' && !in_array( $this->language, Utils::getLanguageCodes() ) ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language )->parse() );
 			$this->language = '';
 		}
 
 		$this->type = $request->getText( 'type', $this->type );
-		$this->possibleTypes = \Wikibase\EntityFactory::singleton()->getEntityTypes();
+		$this->possibleTypes = EntityFactory::singleton()->getEntityTypes();
 		if ( $this->type === '' ) {
 			$this->type = null;
 		}
@@ -207,7 +197,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
+		$entityPerPage = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
 		return $entityPerPage->getEntitiesWithoutTerm( $this->getTermType(), $this->language, $this->type, $limit, $offset );
 	}
 

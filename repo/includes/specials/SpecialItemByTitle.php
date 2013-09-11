@@ -1,29 +1,16 @@
 <?php
 
+namespace Wikibase\Repo\Specials;
+use Html;
+use Site;
+use Wikibase\ItemHandler;
+use Wikibase\Settings;
+
 /**
  * Enables accessing items by providing the identifier of a site and the title
  * of the corresponding page on that site.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -73,10 +60,10 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				$siteId .= 'wiki';
 			}
 
-			$itemHandler = new \Wikibase\ItemHandler();
+			$itemHandler = new ItemHandler();
 			$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
 			// Do we have an item content, and if not can we try harder?
-			if ( $itemContent === null && \Wikibase\Settings::get( 'normalizeItemByTitlePageNames' ) === true ) {
+			if ( $itemContent === null && Settings::get( 'normalizeItemByTitlePageNames' ) === true ) {
 				// Try harder by requesting normalization on the external site
 				$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
@@ -107,7 +94,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 */
 	protected function switchForm( $siteId, $page ) {
 
-		$groups = \Wikibase\Settings::get( 'siteLinkGroups' );
+		$groups = Settings::get( 'siteLinkGroups' );
 		$sites = \SiteSQLStore::newInstance()->getSites();
 
 		if ( $sites->hasSite( $siteId ) ) {
