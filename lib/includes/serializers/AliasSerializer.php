@@ -7,30 +7,13 @@ use InvalidArgumentException;
 /**
  * Serializer for aliases.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class AliasSerializer extends SerializerObject {
+class AliasSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializerObject::$options
@@ -65,7 +48,7 @@ class AliasSerializer extends SerializerObject {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public final function getSerialized( $aliases ) {
+	final public function getSerialized( $aliases ) {
 		if ( !is_array( $aliases ) ) {
 			throw new InvalidArgumentException( 'AliasSerializer can only serialize an array of aliases' );
 		}
@@ -106,5 +89,57 @@ class AliasSerializer extends SerializerObject {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	public function newFromSerialization( array $data ) {
+		$aliases = array();
+
+		foreach( $data as $key => $aliasSet ) {
+			if ( $key === '_element' ) {
+				continue;
+			}
+
+			if ( !is_array( $aliasSet ) ) {
+				throw new InvalidArgumentException( 'Alias data is invalid.' );
+			}
+
+			$lang = array_key_exists( 'language', $aliasSet ) ? $aliasSet['language'] : $key;
+
+			if ( array_key_exists( 'value', $aliasSet ) ) {
+				$aliases[$lang][] = $aliasSet['value'];
+			} else {
+				$aliases[$lang] = $this->extractAliasValues( $aliasSet );
+			}
+		}
+
+		return $aliases;
+	}
+
+	/**
+	 * @param array
+	 *
+	 * @return string[]
+	 */
+	protected function extractAliasValues( array $aliasSet ) {
+		$aliases = array();
+
+		foreach( $aliasSet as $alias ) {
+			if ( is_array( $alias ) && array_key_exists( 'value', $alias ) && is_string( $alias['value'] ) ) {
+				$aliases[] = $alias['value'];
+			} else {
+				throw new InvalidArgumentException( 'Alias value is invalid' );
+			}
+		}
+
+		return $aliases;
 	}
 }

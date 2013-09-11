@@ -4,36 +4,21 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use Wikibase\SiteLink;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Serializer for sitelinks.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Michał Łazowik
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteLinkSerializer extends SerializerObject {
 
@@ -77,7 +62,7 @@ class SiteLinkSerializer extends SerializerObject {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public final function getSerialized( $siteLinks ) {
+	final public function getSerialized( $siteLinks ) {
 		if ( !is_array( $siteLinks ) ) {
 			throw new InvalidArgumentException( 'SiteLinkSerializer can only serialize an array of sitelinks' );
 		}
@@ -85,7 +70,7 @@ class SiteLinkSerializer extends SerializerObject {
 		$serialization = array();
 
 		$includeUrls = in_array( 'sitelinks/urls', $this->options->getProps() );
-		$setRemoved = in_array( 'sitelinks/removed' , $this->options->getProps() );
+		$setRemoved = in_array( 'sitelinks/removed', $this->options->getProps() );
 
 		foreach ( $this->sortSiteLinks( $siteLinks ) as $link ) {
 			$response = array(
@@ -110,7 +95,7 @@ class SiteLinkSerializer extends SerializerObject {
 				}
 
 				if ( $this->options->shouldIndexTags() ) {
-					$this->setIndexedTagName( $badges , 'badge' );
+					$this->setIndexedTagName( $badges, 'badge' );
 				}
 
 				$response['badges'] = $badges;
@@ -172,5 +157,57 @@ class SiteLinkSerializer extends SerializerObject {
 		}
 
 		return $siteLinks;
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $data
+	 *
+	 * @return SimpleSiteLink[]
+	 * @throws InvalidArgumentException
+	 */
+	public function newFromSerialization( array $data ) {
+		$siteLinks = array();
+
+		foreach( $data as $siteLink ) {
+			if ( !array_key_exists( 'site', $siteLink ) || !array_key_exists( 'title', $siteLink ) ) {
+				throw new InvalidArgumentException( 'Site link serialization is invalid.' );
+			}
+
+			if ( array_key_exists( 'badges', $siteLink ) ) {
+				$badges = $this->extractBadges( $siteLink['badges'] );
+			}
+
+			$siteLinks[] = new SimpleSiteLink( $siteLink['site'], $siteLink['title'], $badges );
+		}
+
+		return $siteLinks;
+	}
+
+	/**
+	 * @param array $badges
+	 *
+	 * @return ItemId[]
+	 */
+	protected function extractBadges( array $data ) {
+		$idParser = new BasicEntityIdParser();
+
+		$badges = array();
+
+		foreach( $data as $badge ) {
+			$itemId = $idParser->parse( $badge );
+
+			if ( ! $itemId instanceof ItemId ) {
+				throw new InvalidArgumentException( 'Site link badges must be valid item ids.' );
+			}
+
+			$badges[] = $itemId;
+
+		}
+
+		return $badges;
 	}
 }

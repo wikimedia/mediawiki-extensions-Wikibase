@@ -246,7 +246,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 			'key-fr' => $languageFallbackChainFactory->newFromLanguageCode( 'fr' ),
 			'sr-ec' => $languageFallbackChainFactory->newFromLanguageCode( 'zh-cn', LanguageFallbackChainFactory::FALLBACK_SELF ),
 			'gan-hant' => $languageFallbackChainFactory->newFromLanguageCode( 'gan-hant' ),
-	      	) );
+		) );
 		$values = array(
 			"en" => "capital city of Italy",
 			"de" => "Hauptstadt von Italien",
@@ -257,5 +257,41 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs[] = array( $values, $options );
 
 		return $validArgs;
+	}
+
+	/**
+	 * @dataProvider newFromSerializationProvider
+	 */
+	public function testNewFromSerialization( $expected, $serialized, $message ) {
+		$descriptionSerializer = new DescriptionSerializer(
+			new MultiLangSerializationOptions()
+		);
+
+		$descriptions = $descriptionSerializer->newFromSerialization( $serialized );
+		$this->assertEquals( $expected, $descriptions, $message );
+	}
+
+	public function newFromSerializationProvider() {
+		$options = new MultiLangSerializationOptions();
+		$options->setIndexTags( true );
+
+		$descriptionSerializer = new DescriptionSerializer( $options );
+
+		$descriptions = array(
+			"en" => "capital city of Italy",
+			"de" => "Hauptstadt von Italien",
+			"fi" => "kunta Italiassa"
+		);
+
+		$serialized = $descriptionSerializer->getSerialized( $descriptions );
+
+		$options->setIndexTags( false );
+		$descriptionSerializer = new DescriptionSerializer( $options );
+		$serialized2 = $descriptionSerializer->getSerialized( $descriptions );
+
+		return array(
+			array( $descriptions, $serialized, 'serialization with index tags' ),
+			array( $descriptions, $serialized2, 'serialization without index tags' )
+		);
 	}
 }

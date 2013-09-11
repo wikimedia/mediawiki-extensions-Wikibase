@@ -80,6 +80,10 @@ class SerializerFactory {
 		}
 
 		switch ( ltrim( $className, '\\' ) ) {
+			case 'Wikibase\Item':
+				return new ItemSerializer( $options );
+			case 'Wikibase\Property':
+				return new PropertySerializer( $options );
 			case 'Wikibase\Snak':
 				return new SnakSerializer( $options );
 			case 'Wikibase\Reference':
@@ -91,6 +95,23 @@ class SerializerFactory {
 		}
 
 		throw new OutOfBoundsException( '"' . $className . '" has no associated unserializer' );
+	}
+
+	/**
+	 * @param string $entityType
+	 *
+	 * @throws OutOfBoundsException
+	 * @return Unserializer
+	 */
+	public function newUnserializerForEntity( $entityType, $options ) {
+		switch( $entityType ) {
+			case 'wikibase-item':
+				return new ItemSerializer( $options );
+			case 'wikibase-property':
+				return new PropertySerializer( $options );
+			default:
+				throw new InvalidArgumentException( '$entityType is invalid' );
+		}
 	}
 
 }
