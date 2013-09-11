@@ -234,7 +234,8 @@ abstract class EntityContent extends AbstractContent {
 			$entityInfoBuilder,
 			$entityContentFactory,
 			$idParser,
-			$languageFallbackChain );
+			$languageFallbackChain
+		);
 
 		return $entityView;
 	}

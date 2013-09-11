@@ -17,6 +17,7 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\ItemSearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Utils;
 use WikiPage;
 
 /**
@@ -262,7 +263,6 @@ class ItemContent extends EntityContent {
 	 * @param Title              $title
 	 * @param Content|null       $old
 	 * @param bool               $recursive
-	 *
 	 * @param null|ParserOutput  $parserOutput
 	 *
 	 * @return \Title of DataUpdate
@@ -310,14 +310,23 @@ class ItemContent extends EntityContent {
 		EntityIdParser $idParser,
 		LanguageFallbackChain $languageFallbackChain
 	) {
+		$configBuilder = new ParserOutputJsConfigBuilder(
+			$languageFallbackChain,
+			$entityInfoBuilder,
+			$idParser,
+			$entityTitleLookup,
+			new ReferencedEntitiesFinder(),
+			Utils::getLanguageCodes(),
+			$context->getLanguage()->getCode()
+		);
+
 		return new ItemView(
 			$context,
 			$snakFormatter,
 			$dataTypeLookup,
 			$entityInfoBuilder,
 			$entityTitleLookup,
-			$idParser,
-			$languageFallbackChain
+			$configBuilder
 		);
 	}
 }
