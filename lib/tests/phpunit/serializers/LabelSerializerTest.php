@@ -276,4 +276,34 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		return $validArgs;
 	}
+
+    /**
+     * @dataProvider newFromSerializationProvider
+     */
+    public function testNewFromSerialization( $labels, $options ) {
+        $labelSerializer = new LabelSerializer( $options );
+        $serializedLabels = $labelSerializer->getSerialized( $labels );
+
+        $deserializedLabels = $labelSerializer->newFromSerialization( $serializedLabels );
+        $this->assertEquals( $labels, $deserializedLabels );
+    }
+
+    public function newFromSerializationProvider() {
+        $options = new MultiLangSerializationOptions();
+        $options->setUseKeys( true );
+
+        $labels = array(
+            "en" => "Rome",
+            "de" => "Rom",
+            "it" => "Roma"
+        );
+
+        $options2 = new MultiLangSerializationOptions();
+        $options2->setUseKeys( false );
+
+        return array(
+            array( $labels, $options ),
+            array( $labels, $options2 )
+        );
+    }
 }

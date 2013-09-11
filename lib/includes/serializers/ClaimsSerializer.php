@@ -50,7 +50,9 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 		$claimSerializer = new ClaimSerializer( $this->options );
 		$serializer = new ByPropertyListSerializer( 'claim', $claimSerializer, $this->options );
 
-		return $serializer->getSerialized( $claims );
+		$serialized = $serializer->getSerialized( $claims );
+
+		return $serialized;
 	}
 
 	/**
