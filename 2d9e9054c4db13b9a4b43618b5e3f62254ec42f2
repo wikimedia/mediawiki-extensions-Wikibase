@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_18b93b78",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-11T08:59:49Z",
+      "side": 1,
+      "message": "Ahh, so your saying that this output is different to getentities and that they should be the same! got it :).\nWill look at it further and attempt to fix in the next patch set",
+      "parentUuid": "4946a543_6c629bdc",
+      "revId": "2d9e9054c4db13b9a4b43618b5e3f62254ec42f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8977bd7d_5cb6553e",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 11
