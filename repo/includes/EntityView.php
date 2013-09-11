@@ -264,6 +264,9 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
+		$serializedEntity = $this->getSerializedEntity( $entity->getEntity() );
+		$pout->setExtensionData( 'wikibase-entity', $serializedEntity );
+
 		$allSnaks = $entity->getEntity()->getAllSnaks();
 
 		// treat referenced entities as page links ------
@@ -851,15 +854,11 @@ abstract class EntityView extends \ContextSource {
 			'messageHtml' => Utils::getCopyrightMessage()->parse(),
 		) );
 
-		// TODO: use injected id formatter
-		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		$serializedEntity = $this->getSerializedEntity( $entity );
 
 		$out->addJsConfigVars(
 			'wbEntity',
-			FormatJson::encode( $serializer->getSerialized( $entity ) )
+			FormatJson::encode( $serializedEntity )
 		);
 
 		// make information about other entities used in this entity available in JavaScript view:
@@ -874,6 +873,20 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	protected function getSerializedEntity( Entity $entity, EntitySerializerOptions $options = null ) {
+		if ( $options === null ) {
+			// TODO: use injected id formatter
+			$options = new EntitySerializationOptions(
+				WikibaseRepo::getDefaultInstance()->getIdFormatter()
+			);
+		}
+
+		$serializerFactory = new SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $entity, $options );
+
+		return $serializer->getSerialized( $entity );
 	}
 
 	/**
