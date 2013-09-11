@@ -1,33 +1,17 @@
 <?php
-
 namespace Wikibase;
+
+use Iterator;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
  * Corresponds to the wb_entities_per_page table.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.2
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Daniel Kinzler
  */
 class EntityPerPageTable implements EntityPerPage {
 
@@ -218,5 +202,26 @@ class EntityPerPageTable implements EntityPerPage {
 			$entities[] = new EntityId( Item::ENTITY_TYPE, (int)$row->entity_id );
 		}
 		return $entities;
+	}
+
+	/**
+	 * Returns an iterator providing an EntityId object for each entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @return Iterator
+	 */
+	public function getEntities() {
+		//XXX: Would be nice to get the DBR from a load balancer and allow access to foreign wikis.
+		// But since we return a ResultWrapper, we don't know when we can release the connection for re-use.
+
+		$dbr = wfGetDB( DB_SLAVE );
+		$rows = $dbr->select(
+			'wb_entity_per_page',
+			array( 'epp_entity_id', 'epp_entity_type' ),
+			'',
+			__METHOD__ );
+
+		return new DatabaseRowEntityIdIterator( $rows, 'epp_entity_type', 'epp_entity_id' );
 	}
 }
