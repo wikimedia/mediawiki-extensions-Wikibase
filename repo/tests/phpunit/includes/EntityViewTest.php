@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
+use Wikibase\EntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
@@ -19,7 +20,10 @@ use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Lib\Serializers\ItemSerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
@@ -140,7 +144,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$revId++;
 
 		$entity = Item::newEmpty();
-		$entity->setId( new ItemId( "Q$revId" ) );
+		$entity->setId( ItemId::newFromNumber( 301 ) );
 
 		foreach ( $claims as $claim ) {
 			$entity->addClaim( $claim );
@@ -203,6 +207,50 @@ class EntityViewTest extends \MediaWikiTestCase {
 		// Clear error cache and re-enable default error handling:
 		libxml_clear_errors();
 		libxml_use_internal_errors();
+	}
+
+	/**
+	 * @dataProvider parserOutputExtensionDataProvider
+	 */
+	public function testParserOutputExtensionData( EntityRevision $revision, $label ) {
+		$entityView = $this->newEntityView( $revision->getEntity()->getType() );
+
+		$parserOutput = $entityView->getParserOutput( $revision, null, false );
+		$data = $parserOutput->getExtensionData( 'wikibase-entity' );
+
+		$options = new SerializationOptions();
+		$options->setLanguages( array( 'en' ) );
+
+		$serializer = new ItemSerializer( $options );
+		$entity = $serializer->newFromSerialization( $data );
+
+		$this->assertEquals( $label, $entity->getLabel( 'en' ) );
+	}
+
+	public function parserOutputExtensionDataProvider() {
+		$entity = Item::newEmpty();
+		$itemId = ItemId::newFromNumber( 301 );
+		$entity->setId( $itemId );
+		$entity->setLabel( 'en', 'Cat' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'p1' ),
+			new StringValue( 'cats!' )
+		);
+
+		$claimGuidGenerator = new ClaimGuidGenerator( $itemId );
+
+		$claim = new Claim( $snak );
+		$claim->setGuid( $claimGuidGenerator->newGuid() );
+
+		$entity->addClaim( $claim );
+
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $entity, 13044, $timestamp );
+
+		return array(
+			array( $revision, 'Cat' )
+		);
 	}
 
 	/**
@@ -348,7 +396,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 		// test whether we get the right EntityView from an EntityRevision
 		$view = EntityView::newForEntityType(
 			$entityRevision->getEntity()->getType(),
-			$this->newSnakFormatterMock(), 
+			$this->newSnakFormatterMock(),
 			$dataTypeLookup,
 			$entityLoader,
 			$entityTitleLookup
