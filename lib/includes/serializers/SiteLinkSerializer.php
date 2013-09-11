@@ -173,4 +173,28 @@ class SiteLinkSerializer extends SerializerObject {
 
 		return $siteLinks;
 	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $data
+	 *
+	 * @return SimpleSiteLink[]
+	 */
+	public function newFromSerialization( array $data ) {
+		$siteLinks = array();
+
+		// todo badges!
+		foreach( $data as $sitelink ) {
+			if ( array_key_exists( 'site', $sitelink ) && array_key_exists( 'title', $sitelink ) ) {
+				$siteLinks[] = new SimpleSiteLink( $sitelink['site'], $sitelink['title'] );
+			} else {
+				// todo legacy format
+			}
+		}
+
+		return $siteLinks;
+	}
 }

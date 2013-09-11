@@ -1,7 +1,8 @@
 <?php
-
 namespace Wikibase\Lib\Serializers;
+
 use MWException;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\Item;
 
@@ -33,7 +34,7 @@ use Wikibase\Item;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ItemSerializer extends EntitySerializer {
+class ItemSerializer extends EntitySerializer implements Unserializer {
 
 	/**
 	 * @since 0.4
@@ -82,5 +83,29 @@ class ItemSerializer extends EntitySerializer {
 		}
 
 		return $serialization;
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $data
+	 *
+	 * @return Item
+	 */
+	public function newFromSerialization( array $data ) {
+		$item = parent::newFromSerialization( $data );
+
+		if ( array_key_exists( 'sitelinks', $data ) ) {
+            $siteLinkSerializer = new SiteLinkSerializer( $this->options );                               
+            $siteLinks = $siteLinkSerializer->newFromSerialization( $data['sitelinks'] );                    
+                                                                                                    
+			foreach( $siteLinks as $siteLink ) {
+				$item->addSimpleSiteLink( $siteLink );
+			}
+		}
+
+		return $item;
 	}
 }

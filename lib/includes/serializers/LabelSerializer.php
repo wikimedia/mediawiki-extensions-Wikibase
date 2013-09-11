@@ -30,7 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class LabelSerializer extends SerializerObject {
+class LabelSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializerObject::$options
@@ -77,7 +77,7 @@ class LabelSerializer extends SerializerObject {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public final function getSerialized( $labels ) {
+	final public function getSerialized( $labels ) {
 		if ( !is_array( $labels ) ) {
 			throw new InvalidArgumentException( 'LabelSerializer can only serialize an array of labels' );
 		}
@@ -103,8 +103,39 @@ class LabelSerializer extends SerializerObject {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public final function getSerializedMultilingualValues( $labels ) {
+	final public function getSerializedMultilingualValues( $labels ) {
 		$labels = $this->multilingualSerializer->filterPreferredMultilingualValues( $labels );
 		return $this->getSerialized( $labels );
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $data
+	 *
+	 * @return array $labels
+	 */
+	public function newFromSerialization( array $data ) {
+		$labels = array();
+
+		foreach( $data as $label ) {
+			if ( is_array( $label )
+				&& array_key_exists( 'language', $label )
+				&& array_key_exists( 'value', $label )
+			) {
+
+				$lang = $label['language'];
+				$labels[$lang] = $label['value'];
+			} else {
+				// indexed tag name
+				if ( $label !== 'label' ) {
+					throw new InvalidArgumentException( 'label serialization is invalid' );
+				}
+			}
+		}
+
+		return $labels;
 	}
 }

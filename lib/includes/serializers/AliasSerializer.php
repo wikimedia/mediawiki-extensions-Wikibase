@@ -30,7 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class AliasSerializer extends SerializerObject {
+class AliasSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializerObject::$options
@@ -65,7 +65,7 @@ class AliasSerializer extends SerializerObject {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public final function getSerialized( $aliases ) {
+	final public function getSerialized( $aliases ) {
 		if ( !is_array( $aliases ) ) {
 			throw new InvalidArgumentException( 'AliasSerializer can only serialize an array of aliases' );
 		}
@@ -106,5 +106,44 @@ class AliasSerializer extends SerializerObject {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	public function newFromSerialization( array $data ) {
+		$aliases = array();
+
+		foreach( $data as $key => $aliasSet ) {
+			if ( is_string( $key ) && $key !== '_element' && is_array( $aliasSet ) ) {
+				$aliases[$key] = $this->extractIndexedAliases( $aliasSet );
+			} else {
+				if ( is_array( $aliasSet ) && array_key_exists( 'language', $aliasSet ) ) {
+					$key = $aliasSet['language'];
+
+					$aliases[$key][] = $aliasSet['value'];
+				}
+			}
+		}
+
+		return $aliases;
+	}
+
+	protected function extractIndexedAliases( array $aliasSet ) {
+		$aliases = array();
+
+		foreach( $aliasSet as $alias ) {
+			if ( array_key_exists( 'value', $alias ) && is_string( $alias['value'] ) ) {
+				$aliases[] = $alias['value'];
+			}
+		}
+
+		return $aliases;
 	}
 }
