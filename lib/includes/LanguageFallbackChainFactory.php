@@ -1,7 +1,12 @@
 <?php
 
 namespace Wikibase;
-use User, Language, LanguageConverter, IContextSource, MWException;
+
+use IContextSource;
+use Language;
+use LanguageConverter;
+use MWException;
+use User;
 
 /**
  * Object creating LanguageFallbackChain objects in Wikibase.
@@ -335,12 +340,21 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromContextForPageView( IContextSource $context ) {
-		if ( $this->anonymousPageViewCached && $context->getUser()->isAnon() ) {
-			// Anonymous users share the same Squid cache, which is splitted by URL.
-			// That means we can't do anything except for what completely depends by URL such as &uselang=.
-			return $this->newFromLanguage( $context->getLanguage() );
-		} else {
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+
+			// The generated chain should yield a cacheable result
+			if ( $this->anonymousPageViewCached && $context->getUser()->isAnon() ) {
+				// Anonymous users share the same Squid cache, which is splitted by URL.
+				// That means we can't do anything except for what completely depends by URL such as &uselang=.
+				return $this->newFromLanguage( $context->getLanguage() );
+			}
+
 			return $this->newFromContext( $context );
+		} else {
+			return $this->newFromLanguage(
+				$context->getLanguage(),
+				LanguageFallbackChainFactory::FALLBACK_SELF
+			);
 		}
 	}
 
