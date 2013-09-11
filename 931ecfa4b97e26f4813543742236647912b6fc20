@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_db06ca21",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-11T20:58:13Z",
+      "side": 1,
+      "message": "jason? :)",
+      "revId": "931ecfa4b97e26f4813543742236647912b6fc20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_1e012008",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-11T20:58:13Z",
+      "side": 1,
+      "message": "0.4?",
+      "revId": "931ecfa4b97e26f4813543742236647912b6fc20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
