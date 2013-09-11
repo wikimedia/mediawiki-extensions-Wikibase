@@ -68,6 +68,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newEntityContentForClaims( $claims ) {
 		$entity = Item::newEmpty();
+		$entity->setId( ItemId::newFromNumber( 301 ) );
 
 		foreach ( $claims as $claim ) {
 			$entity->addClaim( $claim );
@@ -125,6 +126,35 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 		// Clear error cache and re-enable default error handling:
 		libxml_clear_errors();
 		libxml_use_internal_errors();
+	}
+
+	/**
+	 * @dataProvider parserOutputExtensionDataProvider
+	 */
+	public function testParserOutputExtensionData( array $claims, array $expected ) {
+		$entityContent = $this->newEntityContentForClaims( $claims );
+		$entityView = $this->newEntityView( $entityContent );
+
+		$parserOutput = $entityView->getParserOutput( $entityContent, null, false );
+		$entityData = $parserOutput->getExtensionData( 'wikibase-entity' );
+
+		$this->assertEquals( array( 'id', 'type', 'claims' ), array_keys( $entityData ) );
+		$this->assertEquals( $expected, array( 'P1', 'P2' ) );
+	}
+
+	public function parserOutputExtensionDataProvider() {
+		$p1 = new PropertyId( 'p1' );
+		$p2 = new PropertyId( 'p2' );
+
+		return array(
+			array(
+				array(
+					new Claim( new PropertyNoValueSnak( $p1 ) ),
+					new Claim( new PropertyValueSnak( $p2, new StringValue( 'cats!' ) ) )
+				),
+				array( 'P1', 'P2' )
+			)
+		);
 	}
 
 	/**
@@ -195,7 +225,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 		return $argLists;
 	}
-	
+
 	/**
 	 * @dataProvider getParserOutputExternalLinksProvider
 	 *
