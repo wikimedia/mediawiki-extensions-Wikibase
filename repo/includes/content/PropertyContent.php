@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Utils;
 use WikiPage;
 
 /**
@@ -221,14 +222,23 @@ class PropertyContent extends EntityContent {
 		EntityIdParser $idParser,
 		LanguageFallbackChain $languageFallbackChain
 	) {
+		$configBuilder = new ParserOutputJsConfigBuilder(
+			$languageFallbackChain,
+			$entityInfoBuilder,
+			$idParser,
+			$entityTitleLookup,
+			new ReferencedEntitiesFinder(),
+			Utils::getLanguageCodes(),
+			$context->getLanguage()->getCode()
+		);
+
 		return new PropertyView(
 			$context,
 			$snakFormatter,
 			$dataTypeLookup,
 			$entityInfoBuilder,
 			$entityTitleLookup,
-			$idParser,
-			$languageFallbackChain
+			$configBuilder
 		);
 	}
 }

@@ -29,6 +29,7 @@ use SpecialSearch;
 use SplFileInfo;
 use Title;
 use User;
+use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -1035,7 +1036,7 @@ final class RepoHooks {
 
 	/**
 	 * Called when pushing meta-info from the ParserOutput into OutputPage.
-	 * Used to transfer the 'wb-placeholders' from ParserOutput to OutputPage.
+	 * Used to transfer 'wikibase-view-chunks' and entity data from ParserOutput to OutputPage.
 	 *
 	 * @param OutputPage $out
 	 * @param ParserOutput $parserOutput
@@ -1048,6 +1049,9 @@ final class RepoHooks {
 		if ( $placeholders ) {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
+
+		$configVars = $parserOutput->getExtensionData( 'wikibase-configvars' );
+		$out->setProperty( 'wikibase-configvars', $configVars );
 
 		return true;
 	}
@@ -1081,6 +1085,22 @@ final class RepoHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param OutputPage $out
+	 * @param string &$html
+	 *
+	 * @return boolean
+	 */
+	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
+		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+
+		$hookHandler = new OutputPageJsConfigHookHandler( $idParser, $entityTitleLookup, $settings );
+
+		return $hookHandler->handle( $out );
 	}
 
 	/**
