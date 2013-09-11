@@ -30,7 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class LabelSerializer extends SerializerObject {
+class LabelSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializerObject::$options
@@ -106,5 +106,27 @@ class LabelSerializer extends SerializerObject {
 	public final function getSerializedMultilingualValues( $labels ) {
 		$labels = $this->multilingualSerializer->filterPreferredMultilingualValues( $labels );
 		return $this->getSerialized( $labels );
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $labels
+	 *
+	 * @return array
+	 */
+	public function newFromSerialization( array $labels ) {
+		$data = array();
+
+		foreach( $labels as $label ) {
+			if ( is_array( $label ) ) {
+				$lang = $label['language'];
+				$data[$lang] = $label['value'];
+			}
+		}
+
+		return $data;
 	}
 }

@@ -80,6 +80,10 @@ class SerializerFactory {
 		}
 
 		switch ( ltrim( $className, '\\' ) ) {
+			case 'Wikibase\Item':
+				return new ItemSerializer( $options );
+			case 'Wikibase\Property':
+				return new PropertySerializer( $options );
 			case 'Wikibase\Snak':
 				return new SnakSerializer( $options );
 			case 'Wikibase\Reference':
