@@ -7,7 +7,6 @@ use ParserOutput;
 use Language;
 use IContextSource;
 use OutputPage;
-use FormatJson;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
@@ -96,7 +95,7 @@ abstract class EntityView extends \ContextSource {
 	);
 
 	/**
-	 * @since    0.1
+	 * @since 0.1
 	 *
 	 * @param IContextSource|null $context
 	 * @param SnakFormatter $snakFormatter
@@ -337,6 +336,10 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
+		$configVars = $this->getConfigVars( $entityRevision->getEntity() );
+
+		$pout->setExtensionData( 'wikibase-configvars', $configVars );
+
 		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
 
 		// treat referenced entities as page links ------
@@ -384,6 +387,37 @@ abstract class EntityView extends \ContextSource {
 
 		wfProfileOut( __METHOD__ );
 		return $pout;
+	}
+
+	/**
+	 * @param Entity $entity
+	 *
+	 * @return array
+	 */
+	protected function getConfigVars( Entity $entity ) {
+		$configBuilder = $this->getConfigBuilder();
+
+		$configVars = $configBuilder->buildJsConfigVars(
+			$entity,
+			$this->getCopyrightMessage(),
+			defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES
+		);
+
+		return $configVars;
+	}
+
+	/**
+	 * @return Message
+	 */
+	protected function getCopyrightMessage() {
+		$copyrightMessageBuilder = new CopyrightMessageBuilder();
+		$copyrightMessage = $copyrightMessageBuilder->build(
+			$this->rightsUrl,
+			$this->rightsText,
+			$this->getLanguage()
+		);
+
+		return $copyrightMessage;
 	}
 
 	/**
@@ -595,7 +629,7 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Returns the url of the editlink.
 	 *
-	 * @since    0.4
+	 * @since 0.4
 	 *
 	 * @param string  $specialpagename
 	 * @param Entity  $entity
@@ -619,108 +653,6 @@ abstract class EntityView extends \ContextSource {
 		return $specialpage->getPageTitle()->getLocalURL()
 				. '/' . wfUrlencode( $id )
 				. ( $lang === null ? '' : '/' . wfUrlencode( $lang->getCode() ) );
-	}
-
-	/**
-	 * Helper function for registering any JavaScript stuff needed to show the entity.
-	 * @todo Would be much nicer if we could do that via the ResourceLoader Module or via some hook.
-	 * @todo ...or at least stuff this information into ParserOutput, so it would get cached
-	 *
-	 * @since 0.1
-	 *
-	 * @param OutputPage    $out the OutputPage to add to
-	 * @param EntityRevision  $entityRevision the entity for which we want to add the JS config
-	 * @param bool           $editableView whether entities on this page should be editable.
-	 *                       This is independent of user permissions.
-	 *
-	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
-	 */
-	public function registerJsConfigVars( OutputPage $out, EntityRevision $entityRevision, $editableView = false  ) {
-		wfProfileIn( __METHOD__ );
-
-		$langCode = $this->getLanguage()->getCode();
-		$user = $this->getUser();
-		$entity = $entityRevision->getEntity();
-		$title = $this->entityTitleLookup->getTitleForId( $entityRevision->getEntity()->getId() );
-
-		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
-		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $title ) ); //NOTE: deprecated
-
-		// tell JS whether the user can edit
-		$out->addJsConfigVars( 'wbUserCanEdit', $title->userCan( 'edit', $user, false ) ); //TODO: make this a per-entity info
-		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
-
-		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
-		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
-
-		// entity specific data
-		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
-
-		$copyrightMessageBuilder = new CopyrightMessageBuilder();
-		$copyrightMessage = $copyrightMessageBuilder->build(
-			$this->rightsUrl,
-			$this->rightsText,
-			$this->getLanguage()
-		);
-
-		// copyright warning message
-		$out->addJsConfigVars( 'wbCopyright', array(
-			'version' => $this->getContext()->msg( 'wikibase-shortcopyrightwarning-version' )->parse(),
-			'messageHtml' => $copyrightMessage->inLanguage( $this->getLanguage() )->parse()
-		) );
-
-		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
-
-		// TODO: use injected id formatter
-		$serializationOptions = new SerializationOptions();
-		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
-
-		$serializerFactory = new SerializerFactory( $serializationOptions );
-		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
-
-		$entityData = $serializer->getSerialized( $entity );
-
-		$out->addJsConfigVars(
-			'wbEntity',
-			FormatJson::encode( $entityData )
-		);
-
-		// make information about other entities used in this entity available in JavaScript view:
-		$refFinder = new ReferencedEntitiesFinder();
-
-		$usedEntityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
-		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode );
-
-		$out->addJsConfigVars(
-			'wbUsedEntities',
-			FormatJson::encode( $basicEntityInfo )
-		);
-
-		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Fetches some basic entity information required for the entity view in JavaScript from a
-	 * set of entity IDs.
-	 * @since 0.4
-	 *
-	 * @param EntityId[] $entityIds
-	 * @param string $langCode For the entity labels which will be included in one language only.
-	 * @return array
-	 */
-	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
-		wfProfileIn( __METHOD__ );
-
-		//TODO: apply language fallback! Restore fallback test case in EntityViewTest::provideRegisterJsConfigVars()
-		$entities = $this->entityInfoBuilder->buildEntityInfo( $entityIds );
-		$this->entityInfoBuilder->removeMissing( $entities );
-		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
-		$this->entityInfoBuilder->addDataTypes( $entities );
-		$revisions = $this->attachRevisionInfo( $entities );
-
-		wfProfileOut( __METHOD__ );
-		return $revisions;
 	}
 
 	/**
@@ -762,33 +694,15 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
-	 * Wraps each record in $entities with revision info, similar to how EntityRevisionSerializer
-	 * does this.
-	 *
-	 * @todo: perhaps move this into EntityInfoBuilder; Note however that it is useful to be
-	 * able to pick which information is actually needed in which context. E.g. we are skipping the
-	 * actual revision ID here, and thereby avoiding any database access.
-	 *
-	 * @param array $entities A list of entity records
-	 *
-	 * @return array A list of revision records
+	 * @return EntityViewConfigBuilder
 	 */
-	private function attachRevisionInfo( array $entities ) {
-		$idParser = $this->idParser;
-		$titleLookup = $this->entityTitleLookup;
-
-		return array_map( function( $entity ) use ( $idParser, $titleLookup ) {
-				$id = $idParser->parse( $entity['id'] );
-
-				// If the title lookup needs DB access, we really need a better way to do this!
-				$title = $titleLookup->getTitleForId( $id );
-
-				return array(
-					'content' => $entity,
-					'title' => $title->getPrefixedText(),
-					//'revision' => 0,
-				);
-			},
-			$entities );
+	protected function getConfigBuilder() {
+		return new EntityViewConfigBuilder(
+			$this->languageFallbackChain,
+			$this->entityInfoBuilder,
+			$this->idParser,
+			$this->entityTitleLookup,
+			$this->getLanguage()->getCode()
+		);
 	}
 }
