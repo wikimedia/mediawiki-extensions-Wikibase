@@ -27,6 +27,8 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Store;
@@ -472,4 +474,13 @@ class WikibaseRepo {
 		return $formatter;
 	}
 
+	public function getParserOutputJsConfigBuilder( $langCode ) {
+		return new ParserOutputJsConfigBuilder(
+			$this->getStore()->getEntityInfoBuilder(),
+			$this->getEntityIdParser(),
+			$this->getEntityContentFactory(),
+			new ReferencedEntitiesFinder(),
+			$langCode
+		);
+	}
 }

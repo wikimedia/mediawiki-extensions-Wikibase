@@ -106,26 +106,10 @@ abstract class ViewEntityAction extends \ViewAction {
 
 		if ( is_null( $content ) ) {
 			$this->displayMissingEntity();
-		}
-		else {
-			/* @var EntityContent $content */
-
+		} else {
 			$this->getArticle()->getRevisionFetched();
 
 			$this->displayEntityContent( $content );
-
-			$isEditableView = $this->isPlainView();
-
-			// @todo: It would be nice to get the JS config vars from the ParserOutput
-			// also used by displayEntityContent (via the parser cache),
-			// instead of re-generating them here!
-			$view = $content->getEntityView();
-
-			$view->registerJsConfigVars(
-				$this->getOutput(),
-				$content->getEntityRevision(),
-				$isEditableView // not in the parser cache key?!
-			);
 		}
 	}
 
@@ -178,6 +162,10 @@ abstract class ViewEntityAction extends \ViewAction {
 
 		// can edit?
 		$editable = $this->isPlainView();
+
+		// NOTE: page-wide property, independent of user permissions
+		$out->addJsConfigVars( 'wbIsEditView', $editable );
+
 		$editable = ( $editable && $content->userCanEdit( null, false ) );
 
 		// View it!

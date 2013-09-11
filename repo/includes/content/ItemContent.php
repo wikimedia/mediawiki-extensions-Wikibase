@@ -14,9 +14,11 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\ItemSearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Utils;
 use WikiPage;
 
 /**
@@ -262,7 +264,6 @@ class ItemContent extends EntityContent {
 	 * @param Title              $title
 	 * @param Content|null       $old
 	 * @param bool               $recursive
-	 *
 	 * @param null|ParserOutput  $parserOutput
 	 *
 	 * @return \Title of DataUpdate
@@ -293,11 +294,11 @@ class ItemContent extends EntityContent {
 	 *
 	 * @param IContextSource $context
 	 * @param SnakFormatter $snakFormatter
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param SerializationOptions $options
 	 *
 	 * @return EntityView
 	 */
@@ -308,16 +309,24 @@ class ItemContent extends EntityContent {
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
-		LanguageFallbackChain $languageFallbackChain
+		SerializationOptions $options
 	) {
+		$configBuilder = new ParserOutputJsConfigBuilder(
+			$entityInfoBuilder,
+			$idParser,
+			$entityTitleLookup,
+			new ReferencedEntitiesFinder(),
+			$context->getLanguage()->getCode()
+		);
+
 		return new ItemView(
 			$context,
 			$snakFormatter,
 			$dataTypeLookup,
 			$entityInfoBuilder,
 			$entityTitleLookup,
-			$idParser,
-			$languageFallbackChain
+			$options,
+			$configBuilder
 		);
 	}
 }
