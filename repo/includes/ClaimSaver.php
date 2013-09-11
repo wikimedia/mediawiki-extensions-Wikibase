@@ -7,6 +7,7 @@ use MWException;
 use Status;
 use ValueParsers\ParseException;
 use Wikibase\Claims;
+use Wikibase\DataModel\Claim\ClaimGuidParsingException;
 use Wikibase\ExceptionWithCode;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -99,30 +100,14 @@ class ClaimSaver {
 	 * @throws ExceptionWithCode
 	 */
 	protected function getEntityIdForClaim( Claim $claim ) {
-		$guid = $claim->getGuid();
-
-		if ( $guid === null ) {
-			throw new ExceptionWithCode( 'The ID of the claim needs to be set', 'setclaim-no-guid' );
-		}
-
 		try {
-			$entityId = Entity::getIdFromClaimGuid( $guid );
+			$parser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+			return $parser->parse( $claim->getGuid() )->getEntityId();
 		}
-		catch ( MWException $exception ) {
+		catch( ClaimGuidParsingException $exception ) {
+			//todo fix the error code below to be 'invalid-guid'
 			throw new ExceptionWithCode( $exception->getMessage(), 'setclaim-invalid-guid' );
 		}
-
-		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-
-		try {
-			$entityId = $idParser->parse( $entityId );
-		}
-		catch ( ParseException $parseException ) {
-			throw new ExceptionWithCode( $parseException->getMessage(), 'setclaim-invalid-guid' );
-		}
-
-		assert( $entityId instanceof EntityId );
-		return $entityId;
 	}
 
 	/**
