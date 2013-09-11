@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_7b7f9612",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-11T19:53:55Z",
+      "side": 1,
+      "message": "$sth \u003d \\Wikibase\\DataModel\\Entity\\BasicEntityIdParser-\u003eparse( $badge )\nassertInstanceOf( \u0027\\Wikibase\\DataModel\\Entity\\ItemId\u0027, $sth )\n\nor something along these lines would be great :)",
+      "revId": "79fdbee3ccbf79efd62aed386122899442c28bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
