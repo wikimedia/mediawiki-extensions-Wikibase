@@ -332,6 +332,9 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	public function testGetParserOutput() {
 		$content = $this->newEmpty();
 
+		$id = $content->grabFreshId();
+		$content->getEntity()->setId( $id );
+
 		$title = Title::newFromText( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );
 
