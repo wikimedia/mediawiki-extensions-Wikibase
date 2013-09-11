@@ -41,6 +41,7 @@ return call_user_func( function() {
 		'Wikibase\ItemContentDiffView' => 'includes/ItemContentDiffView.php',
 		'Wikibase\ItemDisambiguation' => 'includes/ItemDisambiguation.php',
 		'Wikibase\EntityView' => 'includes/EntityView.php',
+		'Wikibase\EntityViewConfigRegistry' => 'includes/EntityViewConfigRegistry.php',
 		'Wikibase\EntityViewPlaceholderExpander' => 'includes/EntityViewPlaceholderExpander.php',
 		'Wikibase\ExceptionWithCode' => 'includes/ExceptionWithCode.php',
 		'Wikibase\ItemView' => 'includes/ItemView.php',

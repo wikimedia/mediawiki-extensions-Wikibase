@@ -123,11 +123,16 @@ abstract class ViewEntityAction extends \ViewAction {
 			// instead of re-generating them here!
 			$view = $content->getEntityView();
 
-			$view->registerJsConfigVars(
-				$this->getOutput(),
-				$content->getEntityRevision(),
-				$isEditableView // not in the parser cache key?!
-			);
+			$configVars = $this->getOutput()->getProperty( 'wikibase-configvars' );
+
+			if ( !$configVars ) {
+				$configVars = $view->getJsConfigVars(
+					$content->getEntityRevision(),
+					$isEditableView // @fixme put into parser cache key
+				);
+			}
+
+			$view->registerJsConfigVars( $this->getOutput(), $configVars );
 		}
 	}
 
