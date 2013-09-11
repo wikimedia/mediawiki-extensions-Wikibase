@@ -62,7 +62,7 @@ class EntityTestHelper {
 				"labels" => array(
 					array( "language" => "de", "value" => "Berlin" ),
 					array( "language" => "en", "value" => "Berlin" ),
-					array( "language" => "no", "value" => "Berlin" ),
+					array( "language" => "nb", "value" => "Berlin" ),
 					array( "language" => "nn", "value" => "Berlin" ),
 				),
 				"aliases" => array(
@@ -73,7 +73,7 @@ class EntityTestHelper {
 				"descriptions" => array(
 					array( "language" => "de", "value" => "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland." ),
 					array( "language" => "en", "value" => "Capital city and a federated state of the Federal Republic of Germany." ),
-					array( "language" => "no", "value" => "Hovedsted og delstat og i Forbundsrepublikken Tyskland." ),
+					array( "language" => "nb", "value" => "Hovedsted og delstat og i Forbundsrepublikken Tyskland." ),
 					array( "language" => "nn", "value" => "Hovudstad og delstat i Forbundsrepublikken Tyskland." ),
 				),
 			)
@@ -90,7 +90,7 @@ class EntityTestHelper {
 				"labels" => array(
 					array( "language" => "de", "value" => "London" ),
 					array( "language" => "en", "value" => "London" ),
-					array( "language" => "no", "value" => "London" ),
+					array( "language" => "nb", "value" => "London" ),
 					array( "language" => "nn", "value" => "London" ),
 				),
 				"aliases" => array(
@@ -110,7 +110,7 @@ class EntityTestHelper {
 				"descriptions" => array(
 					array( "language" => "de", "value" => "Hauptstadt Englands und des Vereinigten Königreiches." ),
 					array( "language" => "en", "value" => "Capital city of England and the United Kingdom." ),
-					array( "language" => "no", "value" => "Hovedsted i England og Storbritannia." ),
+					array( "language" => "nb", "value" => "Hovedsted i England og Storbritannia." ),
 					array( "language" => "nn", "value" => "Hovudstad i England og Storbritannia." ),
 				),
 			)
@@ -127,13 +127,13 @@ class EntityTestHelper {
 				"labels" => array(
 					array( "language" => "de", "value" => "Oslo" ),
 					array( "language" => "en", "value" => "Oslo" ),
-					array( "language" => "no", "value" => "Oslo" ),
+					array( "language" => "nb", "value" => "Oslo" ),
 					array( "language" => "nn", "value" => "Oslo" ),
 				),
 				"aliases" => array(
 					array(
-						array( "language" => "no", "value" => "Christiania" ),
-						array( "language" => "no", "value" => "Kristiania" ),
+						array( "language" => "nb", "value" => "Christiania" ),
+						array( "language" => "nb", "value" => "Kristiania" ),
 					),
 					array(
 						array( "language" => "nn", "value" => "Christiania" ),
@@ -146,7 +146,7 @@ class EntityTestHelper {
 				"descriptions" => array(
 					array( "language" => "de", "value" => "Hauptstadt der Norwegen." ),
 					array( "language" => "en", "value" => "Capital city in Norway." ),
-					array( "language" => "no", "value" => "Hovedsted i Norge." ),
+					array( "language" => "nb", "value" => "Hovedsted i Norge." ),
 					array( "language" => "nn", "value" => "Hovudstad i Noreg." ),
 				),
 			)
