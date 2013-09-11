@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_73f8a079",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-11T15:34:00Z",
+      "side": 1,
+      "message": "If this is a boolean, then why do this kind of check?",
+      "revId": "32b518667f555f3fb2189379b0b5b8827f949ad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_b3f20897",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-11T15:34:00Z",
+      "side": 1,
+      "message": ") {\n\nmultiple occurrences",
+      "revId": "32b518667f555f3fb2189379b0b5b8827f949ad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_3337f84d",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-11T15:34:00Z",
+      "side": 1,
+      "message": "this comment is amusing",
+      "revId": "32b518667f555f3fb2189379b0b5b8827f949ad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_1332fc5d",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-11T15:34:00Z",
+      "side": 1,
+      "message": "again, this is a bool no?",
+      "revId": "32b518667f555f3fb2189379b0b5b8827f949ad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_f32c9004",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-11T15:34:00Z",
+      "side": 1,
+      "message": "If you put the return in the if block, this is easier to read",
+      "revId": "32b518667f555f3fb2189379b0b5b8827f949ad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
