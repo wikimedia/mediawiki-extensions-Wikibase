@@ -1,15 +1,10 @@
-.*
 *~
 *.kate-swp
 
 composer.phar
 composer.lock
 
-!.gitignore
-!.gitreview
-
-!.travis.yml
-!.coveralls.yml
+!.*
 
 vendor/
 build/
