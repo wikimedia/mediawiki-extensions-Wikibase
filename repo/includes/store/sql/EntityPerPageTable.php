@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Iterator;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -28,6 +29,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Daniel Kinzler
  */
 class EntityPerPageTable implements EntityPerPage {
 
@@ -218,5 +220,24 @@ class EntityPerPageTable implements EntityPerPage {
 			$entities[] = new EntityId( Item::ENTITY_TYPE, (int)$row->entity_id );
 		}
 		return $entities;
+	}
+
+	/**
+	 * Returns an iterator providing an EntityId object for each entity.
+	 *
+	 * @return Iterator
+	 */
+	public function getEntities() {
+		//XXX: Would be nice to get the DBR from a load balancer and allow access to foreign wikis.
+		// But since we return a ResultWrapper, we don't know when we can release the connection for re-use.
+
+		$dbr = wfGetDB( DB_SLAVE );
+		$rows = $dbr->select(
+			'wb_entity_per_page',
+			array( 'epp_entity_id', 'epp_entity_type' ),
+			'',
+			__METHOD__ );
+
+		return new DatabaseRowEntityIdIterator( $rows, 'epp_entity_type', 'epp_entity_id' );
 	}
 }
