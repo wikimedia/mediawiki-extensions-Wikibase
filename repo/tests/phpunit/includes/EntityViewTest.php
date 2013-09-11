@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityFactory;
 use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\ItemContent;
@@ -68,6 +69,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newEntityContentForClaims( $claims ) {
 		$entity = Item::newEmpty();
+		$entity->setId( ItemId::newFromNumber( 301 ) );
 
 		foreach ( $claims as $claim ) {
 			$entity->addClaim( $claim );
@@ -125,6 +127,43 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 		// Clear error cache and re-enable default error handling:
 		libxml_clear_errors();
 		libxml_use_internal_errors();
+	}
+
+	/**
+	 * @dataProvider parserOutputExtensionDataProvider
+	 */
+	public function testParserOutputExtensionData( EntityContent $entityContent, $label ) {
+		$entityView = $this->newEntityView( $entityContent );
+
+		$parserOutput = $entityView->getParserOutput( $entityContent, null, false );
+		$entityJson = $parserOutput->getExtensionData( 'wikibase-entity' );
+
+		$entity = EntityFactory::singleton()->newFromBlob(
+			'item',
+			$entityJson,
+			CONTENT_FORMAT_JSON
+		);
+
+		$this->assertEquals( $label, $entity->getLabel( 'en' ) );
+	}
+
+	public function parserOutputExtensionDataProvider() {
+		$entity = Item::newEmpty();
+		$entity->setId( ItemId::newFromNumber( 301 ) );
+		$entity->setLabel( 'en', 'Cat' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'p1' ),
+			new StringValue( 'cats!' )
+		);
+
+		$entity->addClaim( new Claim( $snak ) );
+
+		$content = EntityContentFactory::singleton()->newFromEntity( $entity );
+
+		return array(
+			array( $content, 'Cat' )
+		);
 	}
 
 	/**
@@ -195,7 +234,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 		return $argLists;
 	}
-	
+
 	/**
 	 * @dataProvider getParserOutputExternalLinksProvider
 	 *
