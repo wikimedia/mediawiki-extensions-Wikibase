@@ -1197,6 +1197,7 @@ $messages['eo'] = array(
 /** Spanish (español)
  * @author Armando-Martin
  * @author Dalton2
+ * @author Fitoschido
  * @author Gustronico
  * @author Hazard-SJ
  * @author Hereñu
@@ -1208,6 +1209,7 @@ $messages['es'] = array(
 	'wikibase-client-desc' => 'Cliente para la extensión Wikibase',
 	'specialpages-group-wikibaseclient' => 'Cliente de Wikidata',
 	'wikibase-after-page-move' => 'También puedes [$1 actualizar] el elemento Wikidata asociado para mantener los vínculos de idioma en la página que se ha movido.',
+	'wikibase-comment-add' => 'Se ha creado un elemento en Wikidata.',
 	'wikibase-comment-remove' => 'Se ha borrado un elemento asociado a Wikidata. Se han eliminado los enlaces lingüísticos.',
 	'wikibase-comment-linked' => 'Un artículo de Wikidata ha sido enlazado a esta página.',
 	'wikibase-comment-unlink' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos.',
@@ -3047,6 +3049,7 @@ $messages['pl'] = array(
 	'tooltip-t-wikibase' => 'Link do powiązanego elementu w repozytorium danych',
 	'wikibase-after-page-move' => 'Możesz także [$1 zaktualizować] powiązany element Wikidanych w celu zachowania linków do innych wersji językowych na przeniesionej stronie.',
 	'wikibase-after-page-move-queued' => 'Powiązany z tą stroną [$1 element Wikidanych] zostanie wkrótce automatycznie zaktualizowany.',
+	'wikibase-comment-add' => 'Utworzono element Wikidanych.',
 	'wikibase-comment-remove' => 'Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.',
 	'wikibase-comment-linked' => 'Element Wikidanych został powiązany z tą stroną.',
 	'wikibase-comment-unlink' => 'Zostało zerwane powiązanie elementu Wikidanych z tą stroną. Linki do innych wersji językowych usunięte.',

@@ -12589,7 +12589,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-entitydata-bad-revision' => 'Nie można pokazać wersji $2 encji $1.',
 	'wikibase-entitydata-bad-id' => 'Nieprawidłowy identyfikator: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Ten interfejs nie obsługuje formatu danych $1.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Możesz to zmienić wstawiając <nowiki>{{#babel: }}</nowiki> na swojej [[Special:MyPage|stronie użytkownika]].', # Fuzzy
+	'wikibase-mylanguagefallbackchain-babel' => 'Możesz to zmienić wstawiając <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|swojej}} [[Special:MyPage|stronie użytkownika]].',
 	'wikibase-conflict-patched' => 'Do Twojej edycji została zastosowana poprawka do najnowszej wersji.',
 	'wikibase-restoreold' => 'przywróć',
 	'wikibase-restore-summary' => 'Przywrócono wersję $1 zrobioną przez [[Special:Contributions/$2|$2]]',
