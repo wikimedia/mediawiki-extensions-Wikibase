@@ -3,14 +3,13 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use MWException;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
-use Wikibase\Property;
 use Wikibase\Claims;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
@@ -191,33 +190,31 @@ class GetClaims extends ApiWikibase {
 	 * Second element is either null or a claim GUID
 	 */
 	protected function getIdentifiers( $params ) {
+		if ( isset( $params['claim'] ) ) {
+			$claimGuid = $params['claim'];
+			$entityId = $this->getEntityIdFromClaimGuid( $params['claim'] );
 
-		$claimGuid = null;
-
-		// @todo handle the settings in a more generalized way for all the api modules
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$claimGuidValidator = new ClaimGuidValidator();
-
-		if ( isset( $params['claim'] ) && $claimGuidValidator->validateFormat( $params['claim'] ) === false ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
-		}
-
-		if ( isset( $params['entity'] ) && isset( $params['claim'] ) ) {
-			$entityId = Entity::getIdFromClaimGuid( $params['claim'] );
-
-			if ( $entityId !== $params['entity'] ) {
+			if( isset( $params['entity'] ) && $entityId !== $params['entity'] ) {
 				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
 			}
-		}
-		else if ( isset( $params['entity'] ) ) {
+		} else {
+			$claimGuid = null;
 			$entityId = $params['entity'];
-		}
-		else {
-			$entityId = Entity::getIdFromClaimGuid( $params['claim'] );
-			$claimGuid = $params['claim'];
 		}
 
 		return array( $entityId, $claimGuid );
+	}
+
+	protected function getEntityIdFromClaimGuid( $claimGuid ) {
+		$claimGuidValidator = new ClaimGuidValidator();
+
+		if ( $claimGuidValidator->validateFormat( $claimGuid ) === false ) {
+			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+		}
+
+		$claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+
+		return $claimGuidParser->parse( $claimGuid )->getEntityId()->getSerialization();
 	}
 
 	/**

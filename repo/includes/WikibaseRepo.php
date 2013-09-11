@@ -6,6 +6,9 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\LanguageFallbackChainFactory;
@@ -255,6 +258,21 @@ class WikibaseRepo {
 	public function getEntityIdParser() {
 		$options = new ParserOptions();
 		return new EntityIdParser( $options );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ClaimGuidParser
+	 */
+	public function getClaimGuidParser() {
+		$idBuilders = BasicEntityIdParser::getBuilders();
+
+		// TODO: extensions need to be able to add builders.
+
+		$parser = new DispatchingEntityIdParser( $idBuilders );
+
+		return new ClaimGuidParser( $parser );
 	}
 
 	/**

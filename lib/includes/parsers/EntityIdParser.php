@@ -12,6 +12,8 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 /**
  * Parser that parses entity id strings into EntityId objects.
  *
+ * TODO: this should be turned into a proper adapter using a DataModel EntityIdParser
+ *
  * @since 0.4
  *
  * @file
