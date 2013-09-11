@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_78715fdd",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-11T09:28:17Z",
+      "side": 1,
+      "message": "This was written before you saw the clean functions talk I figure? ;p",
+      "revId": "42e66733009b57885f8e31bd99dc7bd5e38750eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
