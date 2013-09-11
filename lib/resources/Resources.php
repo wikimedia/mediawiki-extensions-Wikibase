@@ -510,6 +510,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-claimview-snak-tooltip',
+				'wikibase-claimview-snak-new-tooltip',
 			)
 		),
 
