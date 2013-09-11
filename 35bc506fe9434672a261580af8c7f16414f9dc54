@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_585d8344",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-11T09:35:53Z",
+      "side": 1,
+      "message": "Please move the body of this loop into a separate function for readability.",
+      "revId": "35bc506fe9434672a261580af8c7f16414f9dc54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
