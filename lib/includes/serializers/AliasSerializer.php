@@ -30,7 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class AliasSerializer extends SerializerObject {
+class AliasSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializerObject::$options
@@ -106,5 +106,40 @@ class AliasSerializer extends SerializerObject {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $serialization
+	 *
+	 * @return array
+	 */
+	public function newFromSerialization( array $data ) {
+		$aliases = array();
+
+		foreach( $data as $key => $aliasSet ) {
+			if ( is_string( $key ) && $key !== '_element' ) {
+				$aliases[$key] = array();
+
+				foreach( $aliasSet as $alias ) {
+					$aliases[$key][] = $alias['value'];
+				}
+			} else {
+				if ( is_array( $aliasSet ) ) {
+					$key = $aliasSet['language'];
+
+					if ( !isset( $aliases[$key] ) ) {
+						$aliases[$key] = array();
+					}
+
+					$aliases[$key][] = $aliasSet['value'];
+				}
+			}
+		}
+
+		return $aliases;
 	}
 }
