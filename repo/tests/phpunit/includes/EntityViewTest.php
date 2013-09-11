@@ -2,9 +2,11 @@
 
 namespace Wikibase\Test;
 
+use IContextSource;
 use InvalidArgumentException;
 use Language;
 use MediaWikiTestCase;
+use OutputPage;
 use RequestContext;
 use Title;
 use DataValues\StringValue;
@@ -21,9 +23,14 @@ use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
+use Wikibase\EntityViewConfigRegistry;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
@@ -31,6 +38,7 @@ use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
+use Wikibase\Utils;
 
 /**
  * @covers Wikibase\EntityView
@@ -42,13 +50,15 @@ use Wikibase\Snak;
  * @group EntityView
  *
  * @group Database
- *        ^---- needed because we rely on Title objects internally
+ *		^---- needed because we rely on Title objects internally
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
 abstract class EntityViewTest extends MediaWikiTestCase {
+
+	protected static $mockRepo;
 
 	protected function newEntityIdParser() {
 		// The data provides use P123 and Q123 IDs, so the parser needs to understand these.
@@ -117,18 +127,7 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			$languageFallbackChain = $factory->newFromLanguage( $context->getLanguage() );
 		}
 
-		$mockRepo = new MockRepository();
-
-		$mockRepo->putEntity( $this->makeItem( 'Q33' ) );
-		$mockRepo->putEntity( $this->makeItem( 'Q22' ) );
-		$mockRepo->putEntity( $this->makeItem( 'Q23' ) );
-		$mockRepo->putEntity( $this->makeItem( 'Q24' ) );
-
-		$mockRepo->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
-		$mockRepo->putEntity( $this->makeProperty( 'P23', 'string' ) );
-		$mockRepo->putEntity( $this->makeProperty( 'P42', 'url' ) );
-		$mockRepo->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
-
+		$mockRepo = $this->getMockRepo();
 
 		if ( !$entityInfoBuilder ) {
 			$entityInfoBuilder = $mockRepo;
@@ -155,6 +154,26 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			$languageFallbackChain );
 
 		return $entityView;
+	}
+
+	protected function getMockRepo() {
+		if ( !isset( self::$mockRepo ) ) {
+			$mockRepo = new MockRepository();
+
+			$mockRepo->putEntity( $this->makeItem( 'Q33' ) );
+			$mockRepo->putEntity( $this->makeItem( 'Q22' ) );
+			$mockRepo->putEntity( $this->makeItem( 'Q23' ) );
+			$mockRepo->putEntity( $this->makeItem( 'Q24' ) );
+
+			$mockRepo->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
+			$mockRepo->putEntity( $this->makeProperty( 'P23', 'string' ) );
+			$mockRepo->putEntity( $this->makeProperty( 'P42', 'url' ) );
+			$mockRepo->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
+
+			self::$mockRepo = $mockRepo;
+		}
+
+		return self::$mockRepo;
 	}
 
 	/**
@@ -249,6 +268,45 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 		// Clear error cache and re-enable default error handling:
 		libxml_clear_errors();
 		libxml_use_internal_errors();
+	}
+
+	/**
+	 * @dataProvider parserOutputExtensionDataProvider
+	 */
+	public function testParserOutputExtensionData( EntityRevision $revision ) {
+		$entityView = $this->newEntityView( $revision->getEntity()->getType() );
+
+		$parserOutput = $entityView->getParserOutput( $revision, null, false );
+		$configVars = $parserOutput->getExtensionData( 'wikibase-configvars' );
+
+		// @todo moar tests
+		$this->assertInternalType( 'array', $configVars );
+	}
+
+	public function parserOutputExtensionDataProvider() {
+		$entity = Item::newEmpty();
+		$itemId = ItemId::newFromNumber( 301 );
+		$entity->setId( $itemId );
+		$entity->setLabel( 'en', 'Cat' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'p1' ),
+			new StringValue( 'cats!' )
+		);
+
+		$claimGuidGenerator = new ClaimGuidGenerator( $itemId );
+
+		$claim = new Claim( $snak );
+		$claim->setGuid( $claimGuidGenerator->newGuid() );
+
+		$entity->addClaim( $claim );
+
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $entity, 13044, $timestamp );
+
+		return array(
+			array( $revision )
+		);
 	}
 
 	/**
@@ -424,7 +482,7 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 	 * @dataProvider provideRegisterJsConfigVars
 	 */
 	public function testRegisterJsConfigVars( EntityRevision $entityRevision,
-		\IContextSource $context, LanguageFallbackChain $languageFallbackChain, $editableView, $expected
+		IContextSource $context, LanguageFallbackChain $languageFallbackChain, $editable, $expected
 	) {
 		$this->setMwGlobals( 'wgLang', $context->getLanguage() );
 
@@ -436,8 +494,18 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			$languageFallbackChain
 		);
 
-		$out = new \OutputPage( $context );
-		$entityView->registerJsConfigVars( $out, $entityRevision, $editableView );
+		$configRegistry = new EntityViewConfigRegistry(
+			$languageFallbackChain,
+			$this->getMockRepo(),
+			$this->newEntityIdParser(),
+			$this->getEntityTitleLookupMock(),
+			$context->getLanguage()->getCode()
+		);
+
+		$configVars = $configRegistry->getJsConfigVars( $entityRevision, $editable );
+		$out = new OutputPage( $context );
+
+		$entityView->registerJsConfigVars( $out, $configVars );
 		$actual = array_intersect_key( $out->mJsConfigVars, $expected );
 
 		ksort( $expected );
@@ -460,25 +528,10 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 
 		$argLists = array();
 
-		$entity = $this->makeEntity( $this->makeEntityId( '22' ) );
-		$entity->setLabel( 'de', 'fuh' );
-		$entity->setLabel( 'en', 'foo' );
-
-		$entity->setDescription( 'de', 'fuh barr' );
-		$entity->setDescription( 'en', 'foo bar' );
-
-		$q33 = new ItemId( 'Q33' );
-		$q44 = new ItemId( 'Q44' ); // unknown item
-		$p11 = new PropertyId( 'p11' );
-		$p77 = new PropertyId( 'p77' ); // unknown property
-
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
-
+		$entity = $this->getTestEntity();
 		$revision = new EntityRevision( $entity, 1234567, '20130505333333' );
 
-		//FIXME: re-enable once language fallback for referenced entity labels works again. See EntityView::getBasicEntityInfo
+		//FIXME: re-enable once language fallback for referenced entity labels works again. See EntityViewConfigRegistry::getBasicEntityInfo
 		/*
 		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguageCode(
 			'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL
@@ -497,101 +550,23 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			'de-formal', LanguageFallbackChainFactory::FALLBACK_SELF
 		); // with no fallback
 
+		// @fixme: inject
+		$langCodes = Utils::getLanguageCodes() + array( 'nl' => $languageFallbackChain );
+		$options = new SerializationOptions();
+		$options->setLanguages( $langCodes );
+
+		$serializerFactory = new SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForEntity( $entity->getType(), $options );
+		$serializedData = $serializer->getSerialized( $entity );
+
 		$context = new RequestContext();
 		$context->setLanguage( 'nl' );
-
-		$entityData = array(
-			'id' => $entity->getId()->getSerialization(),
-			'type' => $entity->getType(),
-			'labels' => array(
-				'de' => array(
-					'language' => 'de',
-					'value' => 'fuh',
-				),
-				'en' => array(
-					'language' => 'en',
-					'value' => 'foo',
-				),
-				'simple' => array( // fallback applies
-					'language' => 'en',
-					'value' => 'foo',
-				),
-			),
-			'descriptions' => array(
-				'de' => array(
-					'language' => 'de',
-					'value' => 'fuh barr',
-				),
-				'en' => array(
-					'language' => 'en',
-					'value' => 'foo bar',
-				),
-				'simple' => array( // fallback applies
-					'language' => 'en',
-					'value' => 'foo bar',
-				),
-			),
-			'claims' =>
-				array(
-					'P11' => array(
-						array(
-							'id' => 'EntityViewTest$1',
-							'mainsnak' => array(
-								'snaktype' => 'value',
-								'property' => 'P11',
-								'datavalue' => array(
-									'value' => array(
-										'entity-type' => 'item',
-										'numeric-id' => 33,
-									),
-									'type' => 'wikibase-entityid',
-								),
-							),
-							'type' => 'claim',
-						),
-						array(
-							'id' => 'EntityViewTest$2',
-							'mainsnak' => array(
-								'snaktype' => 'value',
-								'property' => 'P11',
-								'datavalue' => array(
-									'value' => array(
-										'entity-type' => 'item',
-										'numeric-id' => 44,
-									),
-									'type' => 'wikibase-entityid',
-								),
-							),
-							'type' => 'claim',
-						),
-					),
-					'P77' => array(
-						array(
-							'id' => 'EntityViewTest$3',
-							'mainsnak' => array(
-								'snaktype' => 'value',
-								'property' => 'P77',
-								'datavalue' => array(
-									'value' => array(
-										'entity-type' => 'item',
-										'numeric-id' => 33,
-									),
-									'type' => 'wikibase-entityid',
-								),
-							),
-							'type' => 'claim',
-						),
-					),
-				)
-		);
-
-		$this->prepareEntityData( $entity, $entityData );
 
 		$argLists[] = array( $revision, $context, $languageFallbackChain, true, array(
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'Nederlands',
 			'wbEntityId' => $entity->getId()->getSerialization(),
-			'wbEntity' => json_encode( $entityData ),
+			'wbEntity' => json_encode( $serializedData ),
 			'wbUsedEntities' => json_encode( array(
 				'P11' => array(
 					'content' => array(
@@ -621,13 +596,26 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Prepares the given entity data for comparison with $entity.
-	 * That is, this method should add any extra data from $entity to $entityData.
-	 *
-	 * @param Entity $entity
-	 * @param array $entityData
+	 * @return Entity
 	 */
-	protected function prepareEntityData( Entity $entity, array &$entityData ) {
-		// nothing to do
+	protected function getTestEntity() {
+		$entity = $this->makeEntity( $this->makeEntityId( '22' ) );
+		$entity->setLabel( 'de', 'fuh' );
+		$entity->setLabel( 'en', 'foo' );
+
+		$entity->setDescription( 'de', 'fuh barr' );
+		$entity->setDescription( 'en', 'foo bar' );
+
+		$q33 = new ItemId( 'Q33' );
+		$q44 = new ItemId( 'Q44' ); // unknown item
+		$p11 = new PropertyId( 'p11' );
+		$p77 = new PropertyId( 'p77' ); // unknown property
+
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
+
+		return $entity;
 	}
+
 }
