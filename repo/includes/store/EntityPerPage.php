@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Iterator;
 
 /**
  * Interface to a table that join wiki pages and entities.
@@ -96,4 +97,11 @@ interface EntityPerPage {
 	 * @return EntityId[]
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 );
+
+	/**
+	 * Returns an iterator providing an EntityId object for each entity.
+	 *
+	 * @return Iterator
+	 */
+	public function getEntities();
 }
