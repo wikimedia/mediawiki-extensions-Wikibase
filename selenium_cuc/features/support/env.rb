@@ -71,8 +71,9 @@ end
 
 
 def local_browser(language)
+  browsers = YAML.load_file('config/browsers.yml')
   if ENV['BROWSER_LABEL']
-    browser_label = ENV['BROWSER_LABEL'].to_sym
+    browser_label = browsers[ENV['BROWSER_LABEL']]['name'].to_sym
   else
     browser_label = :firefox
   end
