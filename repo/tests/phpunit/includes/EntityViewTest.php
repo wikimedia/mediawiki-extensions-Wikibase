@@ -24,6 +24,10 @@ use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
@@ -42,7 +46,7 @@ use Wikibase\Snak;
  * @group EntityView
  *
  * @group Database
- *        ^---- needed because we rely on Title objects internally
+ *		^---- needed because we rely on Title objects internally
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
@@ -252,6 +256,45 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 	}
 
 	/**
+	 * @dataProvider parserOutputExtensionDataProvider
+	 */
+	public function testParserOutputExtensionData( EntityRevision $revision, $label ) {
+		$entityView = $this->newEntityView( $revision->getEntity()->getType() );
+
+		$parserOutput = $entityView->getParserOutput( $revision, null, false );
+		$configVars = $parserOutput->getExtensionData( 'wikibase-configvars' );
+
+		// @todo moar tests
+		$this->assertInternalType( 'array', $configVars );
+	}
+
+	public function parserOutputExtensionDataProvider() {
+		$entity = Item::newEmpty();
+		$itemId = ItemId::newFromNumber( 301 );
+		$entity->setId( $itemId );
+		$entity->setLabel( 'en', 'Cat' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'p1' ),
+			new StringValue( 'cats!' )
+		);
+
+		$claimGuidGenerator = new ClaimGuidGenerator( $itemId );
+
+		$claim = new Claim( $snak );
+		$claim->setGuid( $claimGuidGenerator->newGuid() );
+
+		$entity->addClaim( $claim );
+
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $entity, 13044, $timestamp );
+
+		return array(
+			array( $revision, 'Cat' )
+		);
+	}
+
+	/**
 	 * @dataProvider getParserOutputLinksProvider
 	 *
 	 * @param Claim[] $claims
@@ -437,7 +480,8 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 		);
 
 		$out = new \OutputPage( $context );
-		$entityView->registerJsConfigVars( $out, $entityRevision, $editableView );
+		$configVars = $entityView->getJsConfigVars( $entityRevision, $editableView );
+		$entityView->registerJsConfigVars( $out, $configVars );
 		$actual = array_intersect_key( $out->mJsConfigVars, $expected );
 
 		ksort( $expected );
@@ -460,22 +504,7 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 
 		$argLists = array();
 
-		$entity = $this->makeEntity( $this->makeEntityId( '22' ) );
-		$entity->setLabel( 'de', 'fuh' );
-		$entity->setLabel( 'en', 'foo' );
-
-		$entity->setDescription( 'de', 'fuh barr' );
-		$entity->setDescription( 'en', 'foo bar' );
-
-		$q33 = new ItemId( 'Q33' );
-		$q44 = new ItemId( 'Q44' ); // unknown item
-		$p11 = new PropertyId( 'p11' );
-		$p77 = new PropertyId( 'p77' ); // unknown property
-
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
-
+		$entity = $this->getTestEntity();
 		$revision = new EntityRevision( $entity, 1234567, '20130505333333' );
 
 		//FIXME: re-enable once language fallback for referenced entity labels works again. See EntityView::getBasicEntityInfo
@@ -618,6 +647,29 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 		// TODO: add more tests for other JS vars
 
 		return $argLists;
+	}
+
+	/**
+	 * @return Entity
+	 */
+	protected function getTestEntity() {
+		$entity = $this->makeEntity( $this->makeEntityId( '22' ) );
+		$entity->setLabel( 'de', 'fuh' );
+		$entity->setLabel( 'en', 'foo' );
+
+		$entity->setDescription( 'de', 'fuh barr' );
+		$entity->setDescription( 'en', 'foo bar' );
+
+		$q33 = new ItemId( 'Q33' );
+		$q44 = new ItemId( 'Q44' ); // unknown item
+		$p11 = new PropertyId( 'p11' );
+		$p77 = new PropertyId( 'p77' ); // unknown property
+
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
+
+		return $entity;
 	}
 
 	/**

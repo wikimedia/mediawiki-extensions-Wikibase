@@ -20,8 +20,8 @@ use Wikibase\Lib\SnakFormatter;
  * For the Wikibase\Entity this basically is what the Parser is for WikitextContent.
  *
  * @todo  We might want to re-design this at a later point, designing this as a more generic and encapsulated rendering
- *        of DataValue instances instead of having functions here for generating different parts of the HTML. Right now
- *        these functions require an EntityRevision while a DataValue (if it were implemented) should be sufficient.
+ *		of DataValue instances instead of having functions here for generating different parts of the HTML. Right now
+ *		these functions require an EntityRevision while a DataValue (if it were implemented) should be sufficient.
  *
  * @since 0.1
  * @licence GNU GPL v2+
@@ -69,6 +69,11 @@ abstract class EntityView extends \ContextSource {
 	protected $injector;
 
 	/**
+	 * @var EntityViewConfigRegistry
+	 */
+	protected $configRegistry;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -85,7 +90,7 @@ abstract class EntityView extends \ContextSource {
 	);
 
 	/**
-	 * @since    0.1
+	 * @since	0.1
 	 *
 	 * @param IContextSource|null $context
 	 * @param SnakFormatter $snakFormatter
@@ -124,6 +129,14 @@ abstract class EntityView extends \ContextSource {
 
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->injector = new TextInjector();
+
+		$this->configRegistry = new EntityViewConfigRegistry(
+            $languageFallbackChain,
+            $entityInfoBuilder,
+            $idParser,
+            $entityTitleLookup,
+            $context->getLanguage()->getCode()
+        );
 	}
 
 	/**
@@ -311,6 +324,9 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
+		$configVars = $this->getJsConfigVars( $entityRevision, $editable );
+		$pout->setExtensionData( 'wikibase-configvars', $configVars );
+
 		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
 
 		// treat referenced entities as page links ------
@@ -351,8 +367,8 @@ abstract class EntityView extends \ContextSource {
 		$pout->addModules( 'wikibase.ui.entityViewInit' );
 
 		//FIXME: some places, like Special:NewItem, don't want to override the page title.
-		//       But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
-		//       So, for now, we leave it to the caller to override the display title, if desired.
+		//	   But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
+		//	   So, for now, we leave it to the caller to override the display title, if desired.
 		// set the display title
 		//$pout->setTitleText( $entity>getLabel( $langCode ) );
 
@@ -565,7 +581,7 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Returns the url of the editlink.
 	 *
-	 * @since    0.4
+	 * @since	0.4
 	 *
 	 * @param string  $specialpagename
 	 * @param Entity  $entity
@@ -594,96 +610,36 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Helper function for registering any JavaScript stuff needed to show the entity.
 	 * @todo Would be much nicer if we could do that via the ResourceLoader Module or via some hook.
-	 * @todo ...or at least stuff this information into ParserOutput, so it would get cached
 	 *
 	 * @since 0.1
 	 *
-	 * @param OutputPage    $out the OutputPage to add to
 	 * @param EntityRevision  $entityRevision the entity for which we want to add the JS config
-	 * @param bool           $editableView whether entities on this page should be editable.
-	 *                       This is independent of user permissions.
+	 * @param bool		   $editableView whether entities on this page should be editable.
+	 *					   This is independent of user permissions.
 	 *
-	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
+	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id
+	 *  is in a global JS config variable.
 	 */
-	public function registerJsConfigVars( OutputPage $out, EntityRevision $entityRevision, $editableView = false  ) {
-		wfProfileIn( __METHOD__ );
-
-		$langCode = $this->getLanguage()->getCode();
-		$user = $this->getUser();
-		$entity = $entityRevision->getEntity();
-		$title = $this->entityTitleLookup->getTitleForId( $entityRevision->getEntity()->getId() );
-
-		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
-		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $title ) ); //NOTE: deprecated
-
-		// tell JS whether the user can edit
-		$out->addJsConfigVars( 'wbUserCanEdit', $title->userCan( 'edit', $user, false ) ); //TODO: make this a per-entity info
-		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
-
-		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
-		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
-
-		// entity specific data
-		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
-
-		// copyright warning message
-		$out->addJsConfigVars( 'wbCopyright', array(
-			'version' => Utils::getCopyrightMessageVersion(),
-			'messageHtml' => Utils::getCopyrightMessage()->parse(),
-		) );
-
-		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
-
-		// TODO: use injected id formatter
-		$serializationOptions = new SerializationOptions();
-		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
-
-		$serializerFactory = new SerializerFactory( $serializationOptions );
-		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
-
-		$entityData = $serializer->getSerialized( $entity );
-
-		$out->addJsConfigVars(
-			'wbEntity',
-			FormatJson::encode( $entityData )
-		);
-
-		// make information about other entities used in this entity available in JavaScript view:
-		$refFinder = new ReferencedEntitiesFinder();
-
-		$usedEntityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
-		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode );
-
-		$out->addJsConfigVars(
-			'wbUsedEntities',
-			FormatJson::encode( $basicEntityInfo )
-		);
-
-		wfProfileOut( __METHOD__ );
+	public function getJsConfigVars( EntityRevision $entityRevision, $editableView = false ) {
+		return $this->configRegistry->getJsConfigVars( $entityRevision, $editableView );
 	}
 
 	/**
-	 * Fetches some basic entity information required for the entity view in JavaScript from a
-	 * set of entity IDs.
-	 * @since 0.4
-	 *
-	 * @param EntityId[] $entityIds
-	 * @param string $langCode For the entity labels which will be included in one language only.
-	 * @return array
+	 * @param OutputPage $out
+	 * @param array $configVars
 	 */
-	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
-		wfProfileIn( __METHOD__ );
+	public function registerJsConfigVars( OutputPage $out, array $configVars ) {
+        $entityId = $this->idParser->parse( $configVars['wbEntityId'] );
 
-		//TODO: apply language fallback! Restore fallback test case in EntityViewTest::provideRegisterJsConfigVars()
-		$entities = $this->entityInfoBuilder->buildEntityInfo( $entityIds );
-		$this->entityInfoBuilder->removeMissing( $entities );
-		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
-		$this->entityInfoBuilder->addDataTypes( $entities );
-		$revisions = $this->attachRevisionInfo( $entities );
+        $configVars = array_merge(
+            $configVars,
+            $this->configRegistry->getUserConfigVars( $entityId, $this->getUser() )
+        );
 
-		wfProfileOut( __METHOD__ );
-		return $revisions;
+		foreach( $configVars as $key => $configVar ) {
+			$configVar = is_array( $configVar ) ? FormatJson::encode( $configVar ) : $configVar;
+			$out->addJsConfigVars( $key, $configVar );
+		}
 	}
 
 	/**
@@ -724,34 +680,4 @@ abstract class EntityView extends \ContextSource {
 		return $propertyLabels;
 	}
 
-	/**
-	 * Wraps each record in $entities with revision info, similar to how EntityRevisionSerializer
-	 * does this.
-	 *
-	 * @todo: perhaps move this into EntityInfoBuilder; Note however that it is useful to be
-	 * able to pick which information is actually needed in which context. E.g. we are skipping the
-	 * actual revision ID here, and thereby avoiding any database access.
-	 *
-	 * @param array $entities A list of entity records
-	 *
-	 * @return array A list of revision records
-	 */
-	private function attachRevisionInfo( array $entities ) {
-		$idParser = $this->idParser;
-		$titleLookup = $this->entityTitleLookup;
-
-		return array_map( function( $entity ) use ( $idParser, $titleLookup ) {
-				$id = $idParser->parse( $entity['id'] );
-
-				// If the title lookup needs DB access, we really need a better way to do this!
-				$title = $titleLookup->getTitleForId( $id );
-
-				return array(
-					'content' => $entity,
-					'title' => $title->getPrefixedText(),
-					//'revision' => 0,
-				);
-			},
-			$entities );
-	}
 }
