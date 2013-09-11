@@ -5,6 +5,7 @@ namespace Wikibase;
 use AbstractContent;
 use Content;
 use IContextSource;
+use Language;
 use MWException;
 use ParserOptions;
 use ParserOutput;
@@ -18,6 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -155,6 +157,7 @@ abstract class EntityContent extends AbstractContent {
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
+		// @todo also vary by fallback chain
 		$output->recordOption( 'userlang' );
 
 		return $output;
@@ -182,37 +185,26 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		// determine output language ----
-		$lang = $context->getLanguage()->getCode();
+		$langCode = $context->getLanguage()->getCode();
 
 		if ( $options !== null ) {
 			// NOTE: Parser Options language overrides context language!
-			$lang = $options->getUserLang();
+			$langCode = $options->getUserLang();
 		}
 
 		// make formatter options ----
 		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $lang );
+		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $langCode );
 
 		// Force the context's language to be the one specified by the parser options.
-		if ( $context && $context->getLanguage()->getCode() !== $lang ) {
+		if ( $context && $context->getLanguage()->getCode() !== $langCode ) {
 			$context = clone $context;
-			$context->setLanguage( $lang );
+			$context->setLanguage( $langCode );
 		}
 
 		// apply language fallback chain ----
 		if ( !$languageFallbackChain ) {
-			// Note: $context already has the correct language set, see above
-			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
-
-			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-				// The generated chain should yield a cacheable result
-				$languageFallbackChain = $factory->newFromContextForPageView( $context );
-			} else {
-				// Effectively disables fallback.
-				$languageFallbackChain = $factory->newFromLanguage(
-					$context->getLanguage(), LanguageFallbackChainFactory::FALLBACK_SELF
-				);
-			}
+			$languageFallbackChain = $this->getLanguageFallbackChain( $context->getLanguage() );
 		}
 
 		$formatterOptions->setOption( 'languages', $languageFallbackChain );
@@ -226,6 +218,8 @@ abstract class EntityContent extends AbstractContent {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$idParser = new BasicEntityIdParser();
 
+		$options = $this->makeSerializationOptions( $langCode, $languageFallbackChain );
+
 		// construct the instance ----
 		$entityView = $this->newEntityView(
 			$context,
@@ -234,7 +228,8 @@ abstract class EntityContent extends AbstractContent {
 			$entityInfoBuilder,
 			$entityContentFactory,
 			$idParser,
-			$languageFallbackChain );
+			$options
+		);
 
 		return $entityView;
 	}
@@ -250,7 +245,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param SerializationOptions $options
 	 *
 	 * @return EntityView
 	 */
@@ -261,7 +256,7 @@ abstract class EntityContent extends AbstractContent {
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
-		LanguageFallbackChain $languageFallbackChain
+		SerializationOptions $options
 	);
 
 	/**
@@ -770,6 +765,36 @@ abstract class EntityContent extends AbstractContent {
 		);
 
 		return $itemRevision;
+	}
+
+	/**
+	 * @return SerializationOptions
+	 */
+    protected function makeSerializationOptions( $langCode, LanguageFallbackChain $fallbackChain ) {
+        $langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
+
+        $options = new SerializationOptions();
+        $options->setLanguages( $langCodes );
+
+        return $options;
+    }
+
+	protected function getLanguageFallbackChain( Language $language ) {
+		// Note: $context already has the correct language set, see above
+		$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			// The generated chain should yield a cacheable result
+			$languageFallbackChain = $factory->newFromContextForPageView( $context );
+		} else {
+			// Effectively disables fallback.
+			$languageFallbackChain = $factory->newFromLanguage(
+				$language,
+				LanguageFallbackChainFactory::FALLBACK_SELF
+			);
+		}
+
+		return $languageFallbackChain;
 	}
 
 }
