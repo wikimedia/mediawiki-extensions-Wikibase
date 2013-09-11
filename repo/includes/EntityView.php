@@ -311,6 +311,14 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
+		$langCode = $this->getLanguage()->getCode();
+		$langCodes = Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain );
+
+		$entity = $entityRevision->getEntity();
+
+		$serializedEntity = $this->getSerializedEntity( $entity, $langCodes );
+		$pout->setExtensionData( 'wikibase-entity', $serializedEntity );
+
 		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
 
 		// treat referenced entities as page links ------
@@ -754,4 +762,21 @@ abstract class EntityView extends \ContextSource {
 			},
 			$entities );
 	}
+
+	/**
+	 * @param Entity $entity
+	 * @param string[] $langCodes
+	 *
+	 * @return string
+	 */
+	protected function getSerializedEntity( Entity $entity, array $langCodes ) {
+		$options = new SerializationOptions();
+		$options->setLanguages( $langCodes );
+
+		$serializerFactory = new SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $entity, $options );
+
+		return $serializer->getSerialized( $entity );
+	}
+
 }
