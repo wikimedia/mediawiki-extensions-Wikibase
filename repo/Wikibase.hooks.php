@@ -5,7 +5,17 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RequestContext;
 use SplFileInfo;
-use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException;
+use OutputPage;
+use Title;
+use Language;
+use User;
+use ParserOutput;
+use Revision;
+use WikiPage;
+use EditPage;
+use ContentHandler;
+use Html;
+use MWException;
 use Wikibase\Repo\WikibaseRepo;
 
 
@@ -1030,6 +1040,19 @@ final class RepoHooks {
 				$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
 			}
 		}
+		return true;
+	}
+
+	/**
+	 * @param OutputPage &$out
+	 * @param ParserOutput $parserOutput
+	 *
+	 * @return boolean
+	 */
+	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $parserOutput ) {
+		$entity = $parserOutput->getExtensionData( 'wikibase-entity' );
+		$out->setProperty( 'wikibase-entity', $entity );
+
 		return true;
 	}
 }

@@ -256,7 +256,14 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
-		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
+		$entity = $entityRevision->getEntity();
+
+		$langCodes = Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain );
+
+		$serializedEntity = $this->getSerializedEntity( $entity, $langCodes );
+		$pout->setExtensionData( 'wikibase-entity', $serializedEntity );
+
+		$allSnaks = $entity->getAllSnaks();
 
 		// treat referenced entities as page links ------
 		$refFinder = new ReferencedEntitiesFinder();
@@ -836,16 +843,12 @@ abstract class EntityView extends \ContextSource {
 		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
 		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
 
-		// TODO: use injected id formatter
-		$serializationOptions = new EntitySerializationOptions();
-		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
-
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		$langCodes = Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain );
+		$serializedEntity = $this->getSerializedEntity( $entity, $langCodes );
 
 		$out->addJsConfigVars(
 			'wbEntity',
-			FormatJson::encode( $serializer->getSerialized( $entity ) )
+			FormatJson::encode( $serializedEntity )
 		);
 
 		// make information about other entities used in this entity available in JavaScript view:
@@ -860,6 +863,24 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * @param Entity $entity
+	 * @param array $langCodes
+	 *
+	 * @return string
+	 */
+	protected function getSerializedEntity( Entity $entity, array $langCodes ) {
+		$options = new EntitySerializationOptions();
+		$options->setLanguages( $langCodes );
+
+		$serializerFactory = new SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $entity, $options );
+
+		$serialized = $serializer->getSerialized( $entity );
+
+		return $serialized;
 	}
 
 	/**
