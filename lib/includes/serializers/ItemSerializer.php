@@ -33,7 +33,7 @@ use Wikibase\Item;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ItemSerializer extends EntitySerializer {
+class ItemSerializer extends EntitySerializer implements Unserializer {
 
 	/**
 	 * @since 0.4
