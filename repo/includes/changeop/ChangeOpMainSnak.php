@@ -5,6 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 use Wikibase\Snak;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Entity\EntityIdValue;
 
 /**
  * Class for mainsnak change operation
@@ -179,12 +180,25 @@ class ChangeOpMainSnak extends ChangeOp {
 	protected function getClaimSummaryArgs( Snak $mainSnak ) {
 		$propertyId = $this->idFormatter->format( $mainSnak->getPropertyId() );
 
-		//TODO: use formatters here!
-		if ( $mainSnak instanceof PropertyValueSnak ) {
-			$value = $mainSnak->getDataValue();
-		} else {
-			$value = $mainSnak->getType();
-		}
+        if ( $mainSnak instanceof PropertyValueSnak ) {
+            $value = $mainSnak->getDataValue();
+
+            // TODO: we should use value formatters here!
+            if ( $value instanceof EntityIdValue ) {
+                $value = $value->getEntityId();
+            } elseif ( $value instanceof TimeValue ) {
+                $value = $value->getTime();
+            } elseif ( $value instanceof GlobeCoordinateValue ) {
+                $value = $value->getLatitude() . ', ' . $value->getLongitude();
+            } elseif ( is_string( $value->getValue() ) ) {
+                $value = $value->getValue();
+            } else {
+                //type not supported;
+                $value = "";
+            }
+        } else {
+            $value = $mainSnak->getType(); // todo handle no values in general way (needed elsewhere)
+        }
 
 		$args = array( $propertyId => array( $value ) );
 		return array( $args );
