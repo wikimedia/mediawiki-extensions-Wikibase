@@ -16,6 +16,7 @@ use LogEntryBase;
 use MWContentSerializationException;
 use MWException;
 use OutputPage;
+use ParserOutput;
 use RecentChange;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -1029,6 +1030,19 @@ final class RepoHooks {
 				$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
 			}
 		}
+		return true;
+	}
+
+	/**
+	 * @param OutputPage &$out
+	 * @param ParserOutput $parserOutput
+	 *
+	 * @return boolean
+	 */
+	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $parserOutput ) {
+		$entity = $parserOutput->getExtensionData( 'wikibase-entity' );
+		$out->setProperty( 'wikibase-entity', $entity );
+
 		return true;
 	}
 }

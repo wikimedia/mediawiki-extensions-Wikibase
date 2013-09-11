@@ -20,7 +20,10 @@ use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
@@ -243,6 +246,51 @@ class EntityViewTest extends \MediaWikiTestCase {
 		// Clear error cache and re-enable default error handling:
 		libxml_clear_errors();
 		libxml_use_internal_errors();
+	}
+
+	/**
+	 * @dataProvider parserOutputExtensionDataProvider
+	 */
+	public function testParserOutputExtensionData( EntityRevision $revision, $label ) {
+		$entityView = $this->newEntityView( $revision->getEntity()->getType() );
+
+		$parserOutput = $entityView->getParserOutput( $revision, null, false );
+		$data = $parserOutput->getExtensionData( 'wikibase-entity' );
+
+		$options = new SerializationOptions();
+		$options->setLanguages( array( 'en' ) );
+
+		$serializerFactory = new SerializerFactory( $options );
+		$serializer = $serializerFactory->newItemUnserializer( $options );
+		$entity = $serializer->newFromSerialization( $data );
+
+		$this->assertEquals( $label, $entity->getLabel( 'en' ) );
+	}
+
+	public function parserOutputExtensionDataProvider() {
+		$entity = Item::newEmpty();
+		$itemId = ItemId::newFromNumber( 301 );
+		$entity->setId( $itemId );
+		$entity->setLabel( 'en', 'Cat' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'p1' ),
+			new StringValue( 'cats!' )
+		);
+
+		$claimGuidGenerator = new ClaimGuidGenerator( $itemId );
+
+		$claim = new Claim( $snak );
+		$claim->setGuid( $claimGuidGenerator->newGuid() );
+
+		$entity->addClaim( $claim );
+
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $entity, 13044, $timestamp );
+
+		return array(
+			array( $revision, 'Cat' )
+		);
 	}
 
 	/**
