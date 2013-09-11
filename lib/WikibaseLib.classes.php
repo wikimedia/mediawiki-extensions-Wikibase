@@ -85,6 +85,9 @@ return call_user_func( function() {
 		'Wikibase\EntityDiffVisualizer' => 'includes/EntityDiffVisualizer.php',
 		'Wikibase\EntityFactory' => 'includes/EntityFactory.php',
 
+		// includes/Dumpers
+		'Wikibase\Dumpers\JsonDumpGenerator' => 'includes/Dumpers/JsonDumpGenerator.php',
+
 		// includes/formatters
 		'Wikibase\Lib\DispatchingSnakFormatter' => 'includes/formatters/DispatchingSnakFormatter.php',
 		'Wikibase\Lib\EntityIdFormatter' => 'includes/formatters/EntityIdFormatter.php',

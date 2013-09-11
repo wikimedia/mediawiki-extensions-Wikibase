@@ -157,6 +157,8 @@ return call_user_func( function() {
 		'Wikibase\DispatchStats' => 'includes/store/sql/DispatchStats.php',
 		'Wikibase\TermSearchKeyBuilder' => 'includes/store/sql/TermSearchKeyBuilder.php',
 		'Wikibase\PropertyInfoTableBuilder' => 'includes/store/sql/PropertyInfoTableBuilder.php',
+		'Wikibase\ConvertingResultWrapper' => 'includes/store/sql/ConvertingResultWrapper.php',
+		'Wikibase\DatabaseRowEntityIdIterator' => 'includes/store/sql/DatabaseRowEntityIdIterator.php',
 
 		// includes/updates
 		'Wikibase\EntityDeletionUpdate' => 'includes/updates/EntityDeletionUpdate.php',
