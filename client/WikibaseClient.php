@@ -110,7 +110,7 @@ call_user_func( function() {
 	$wgAutoloadClasses['Wikibase\RecentChangesFilterOptions'] 	= $dir . 'includes/recentchanges/RecentChangesFilterOptions.php';
 
 	// includes/specials
-	$wgAutoloadClasses['SpecialUnconnectedPages']			= $dir . 'includes/specials/SpecialUnconnectedPages.php';
+	$wgAutoloadClasses['Wikibase\Client\Specials\SpecialUnconnectedPages']	= $dir . 'includes/specials/SpecialUnconnectedPages.php';
 
 	// includes/store
 	$wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
@@ -155,7 +155,7 @@ call_user_func( function() {
 	$wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
 
 	// Special page registration
-	$wgSpecialPages['UnconnectedPages']						= 'SpecialUnconnectedPages';
+	$wgSpecialPages['UnconnectedPages']						= 'Wikibase\Client\Specials\SpecialUnconnectedPages';
 
 	// Special page groups
 	$wgSpecialPageGroups['UnconnectedPages']				= 'wikibaseclient';

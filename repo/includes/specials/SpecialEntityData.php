@@ -1,14 +1,15 @@
 <?php
 
-use DataTypes\DataTypeFactory;
-use Wikibase\Lib\EntityIdParser;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\EntityContent;
+namespace Wikibase\Repo\Specials;
+
+use HttpError;
 use Wikibase\EntityContentFactory;
+use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
-use Wikibase\RdfSerializer;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Settings;
 
 /**
  * Special page to act as a data endpoint for the linked data web.
@@ -19,10 +20,6 @@ use Wikibase\RdfSerializer;
  * for the web server to map ID prefixes to wiki namespaces.
  *
  * @since 0.4
- *
- * @file 
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon
@@ -53,7 +50,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		// Initialize serialization service.
 		// TODO: use reverse DI facility (global registry/factory)
-		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$repo = WikibaseRepo::getDefaultInstance();
 
 		$entityContentFactory = EntityContentFactory::singleton();
 		$entityIdParser = $repo->getEntityIdParser();
@@ -67,8 +64,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityIdFormatter
 		);
 
-		$maxAge = \Wikibase\Settings::get( 'dataSquidMaxage' );
-		$formats = \Wikibase\Settings::get( 'entityDataFormats' );
+		$maxAge = Settings::get( 'dataSquidMaxage' );
+		$formats = Settings::get( 'entityDataFormats' );
 		$serializationService->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
