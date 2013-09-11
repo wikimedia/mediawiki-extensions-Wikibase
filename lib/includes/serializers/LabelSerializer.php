@@ -7,21 +7,6 @@ use InvalidArgumentException;
 /**
  * Serializer for labels.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
  *
  * @file
@@ -29,8 +14,9 @@ use InvalidArgumentException;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class LabelSerializer extends SerializerObject {
+class LabelSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializerObject::$options
@@ -77,7 +63,7 @@ class LabelSerializer extends SerializerObject {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public final function getSerialized( $labels ) {
+	final public function getSerialized( $labels ) {
 		if ( !is_array( $labels ) ) {
 			throw new InvalidArgumentException( 'LabelSerializer can only serialize an array of labels' );
 		}
@@ -103,8 +89,38 @@ class LabelSerializer extends SerializerObject {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	public final function getSerializedMultilingualValues( $labels ) {
+	final public function getSerializedMultilingualValues( $labels ) {
 		$labels = $this->multilingualSerializer->filterPreferredMultilingualValues( $labels );
 		return $this->getSerialized( $labels );
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $data
+	 *
+	 * @return array $labels
+	 */
+	public function newFromSerialization( array $data ) {
+		$labels = array();
+
+		foreach( $data as $key => $label ) {
+			if ( $key === '_element' ) {
+				continue;
+			}
+
+			if ( is_array( $label ) && array_key_exists( 'language', $label )
+				&& array_key_exists( 'value', $label )
+			) {
+				$lang = $label['language'];
+				$labels[$lang] = $label['value'];
+			} else {
+				throw new InvalidArgumentException( 'label serialization is invalid' );
+			}
+		}
+
+		return $labels;
 	}
 }

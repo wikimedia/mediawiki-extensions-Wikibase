@@ -246,7 +246,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 			'key-fr' => $languageFallbackChainFactory->newFromLanguageCode( 'fr' ),
 			'sr-ec' => $languageFallbackChainFactory->newFromLanguageCode( 'zh-cn', LanguageFallbackChainFactory::FALLBACK_SELF ),
 			'gan-hant' => $languageFallbackChainFactory->newFromLanguageCode( 'gan-hant' ),
-	      	) );
+		) );
 		$values = array(
 			"en" => "capital city of Italy",
 			"de" => "Hauptstadt von Italien",
@@ -257,5 +257,41 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs[] = array( $values, $options );
 
 		return $validArgs;
+	}
+
+	/**
+	 * @dataProvider newFromSerializationProvider
+	 */
+	public function testNewFromSerialization( $expected, $serialized, $message ) {
+		$labelSerializer = new LabelSerializer(
+			new MultiLangSerializationOptions()
+		);
+
+		$labels = $labelSerializer->newFromSerialization( $serialized );
+		$this->assertEquals( $expected, $labels, $message );
+	}
+
+	public function newFromSerializationProvider() {
+		$options = new MultiLangSerializationOptions();
+		$options->setIndexTags( true );
+		$labelSerializer = new LabelSerializer( $options );
+
+		$labels = array(
+			"en" => "Rome",
+			"de" => "Rom",
+			"it" => "Roma"
+		);
+
+		$serialized = $labelSerializer->getSerialized( $labels );
+
+		$options->setIndexTags( false );
+		$labelSerializer = new LabelSerializer( $options );
+
+		$serialized2 = $labelSerializer->getSerialized( $labels );
+
+		return array(
+			array( $labels, $serialized, 'serialization with index tags' ),
+			array( $labels, $serialized2, 'serialization without index tags' )
+		);
 	}
 }

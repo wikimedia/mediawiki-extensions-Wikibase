@@ -95,4 +95,40 @@ class AliasSerializerTest extends \PHPUnit_Framework_TestCase {
 		$aliasSerializer = new AliasSerializer();
 		$serializedAliases = $aliasSerializer->getSerialized( $aliases );
 	}
+
+	/**
+	 * @dataProvider newFromSerializationProvider
+	 */
+	public function testNewFromSerialization( $expected, $serialized, $message ) {
+		$aliasSerializer = new AliasSerializer(
+			new MultiLangSerializationOptions()
+		);
+
+		$deserializedAliases = $aliasSerializer->newFromSerialization( $serialized );
+		$this->assertEquals( $expected, $deserializedAliases, $message );
+	}
+
+	public function newFromSerializationProvider() {
+		$options = new MultiLangSerializationOptions();
+		$options->setIndexTags( true );
+		$aliases = array(
+			"en" => array( "Roma", "Rome, Italy", "The Eternal City" ),
+			"de" => array( "Die ewige Stadt" ),
+			"it" => array( "Urbe", "Città eterna" ),
+		);
+
+		$aliasSerializer = new AliasSerializer( $options );
+		$serialized = $aliasSerializer->getSerialized( $aliases );
+
+		$options->setIndexTags( false );
+
+		$aliasSerializer = new AliasSerializer( $options );
+		$serialized2 = $aliasSerializer->getSerialized( $aliases );
+
+		$data = array();
+		$data[] = array( $aliases, $serialized, 'serialization with index tags' );
+		$data[] = array( $aliases, $serialized2, 'serialization without index tags' );
+
+		return $data;
+	}
 }

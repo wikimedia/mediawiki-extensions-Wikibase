@@ -3,7 +3,12 @@
 namespace Wikibase\Test;
 
 use ValueFormatters\FormatterOptions;
+use DataValues\StringValue;
+use Wikibase\Claim;
 use Wikibase\Entity;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 
@@ -26,7 +31,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 	 *
 	 * @return Entity
 	 */
-	protected abstract function getEntityInstance();
+	abstract protected function getEntityInstance();
 
 	protected function getInstance() {
 		$class = $this->getClass();
@@ -80,7 +85,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 							'language' => 'de',
 						),
 					),
-				),
+				)
 			),
 			$options
 		);
@@ -119,6 +124,53 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 						'language' => 'de',
 					),
 				),
+			),
+			$options
+		);
+
+		$entity2 = $this->getEntityInstance();
+		$options->setProps( array( 'descriptions', 'labels', 'claims', 'aliases' ) );
+
+		$claim = new Claim(
+			new PropertyValueSnak(
+				new PropertyId( 'P42' ),
+				new StringValue( 'foobar!' )
+			)
+		);
+
+		$claimGuidGenerator = new ClaimGuidGenerator( $entity2->getId() );
+		$claim->setGuid( $claimGuidGenerator->newGuid() );
+
+		$entity2->setLabel( 'en', 'foo' );
+		$entity2->addClaim( $claim );
+
+		$validArgs[] = array(
+			$entity2,
+			array(
+				'id' => $this->getFormattedIdForEntity( $entity2 ),
+				'type' => $entity2->getType(),
+				'labels' => array(
+					'en' => array(
+						'language' => 'en',
+						'value' => 'foo',
+					)
+				),
+				'claims' => array(
+					'P42' => array(
+						array(
+							'id' => $claim->getGuid(),
+							'mainsnak' => array(
+								'snaktype' => 'value',
+								'property' => 'P42',
+								'datavalue' => array(
+									'value' => 'foobar!',
+									'type' => 'string'
+								)
+							),
+							'type' => 'claim'
+						)
+					)
+				)
 			),
 			$options
 		);
