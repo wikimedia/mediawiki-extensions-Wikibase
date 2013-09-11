@@ -90,7 +90,7 @@ class PropertyContentTest extends EntityContentTest {
 
 		$status = $propertyContent->save( 'save property' );
 		$this->assertFalse( $status->isOK(), "saving a proeprty with a valid property id as label should not work" );
-		$this->assertTRue( $status->hasMessage( 'wikibase-error-label-no-entityid' ) );
+		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-no-entityid' ) );
 	}
 
 }
