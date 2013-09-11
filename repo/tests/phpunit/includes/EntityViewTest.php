@@ -68,6 +68,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newEntityContentForClaims( $claims ) {
 		$entity = Item::newEmpty();
+		$entity->setId( ItemId::newFromNumber( 3 ) );
 
 		foreach ( $claims as $claim ) {
 			$entity->addClaim( $claim );
@@ -195,7 +196,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 		return $argLists;
 	}
-	
+
 	/**
 	 * @dataProvider getParserOutputExternalLinksProvider
 	 *
