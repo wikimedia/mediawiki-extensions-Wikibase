@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Tests for blocking of direct editing.
@@ -80,7 +81,7 @@ class EditPageTest extends WikibaseApiTestCase {
 		global $wgContentHandlerUseDB;
 
 		$id = new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 1234567 );
-		$page = \Wikibase\EntityContentFactory::singleton()->getWikiPageForId( $id );
+		$page = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
 
 		$text = "hallo welt";
 
