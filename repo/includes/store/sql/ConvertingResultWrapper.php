@@ -13,6 +13,9 @@ use ResultWrapper;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ *
+ * @todo: this should implement Disposable know a LoadBalancer instance, so
+ *        we can recycle the DB connection when done.
  */
 abstract class ConvertingResultWrapper implements Iterator {
 

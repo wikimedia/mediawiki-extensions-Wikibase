@@ -32,6 +32,9 @@ return call_user_func( function() {
 		// Autoloading
 		'Wikibase\LibHooks' => 'WikibaseLib.hooks.php',
 
+		// generic things that could be factored out
+		'Disposable' => 'includes/Disposable.php',
+
 		// includes
 		'Wikibase\ChangeNotifier' => 'includes/ChangeNotifier.php',
 		'Wikibase\ChangeNotificationJob' => 'includes/ChangeNotificationJob.php',
@@ -92,6 +95,10 @@ return call_user_func( function() {
 		'Wikibase\Lib\EntityIdFormatter' => 'includes/formatters/EntityIdFormatter.php',
 		'Wikibase\Lib\EntityIdLabelFormatter' => 'includes/formatters/EntityIdLabelFormatter.php',
 		'Wikibase\Lib\MwTimeIsoFormatter' => 'includes/formatters/MwTimeIsoFormatter.php',
+
+		// includes/IO
+		'Wikibase\IO\LineReader' => 'includes/IO/LineReader.php',
+		'Wikibase\IO\EntityIdReader' => 'includes/IO/EntityIdReader.php',
 
 		// includes/modules
 		'Wikibase\RepoAccessModule' => 'includes/modules/RepoAccessModule.php',
