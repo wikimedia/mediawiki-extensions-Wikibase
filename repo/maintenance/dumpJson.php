@@ -1,10 +1,13 @@
 <?php
 
 namespace Wikibase;
+use Disposable;
 use Iterator;
 use Maintenance;
+use Traversable;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Dumpers\JsonDumpGenerator;
+use Wikibase\IO\EntityIdReader;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
@@ -47,11 +50,12 @@ class DumpJson extends Maintenance {
 
 		$this->mDescription = 'Generate a JSON dump from entities in the repository.';
 
-		//TODO: read list of IDs from file
 		//TODO: filter by entity type
+		//TODO: shard by id congruence class ( id % n == m )
 		//$this->addOption( 'rebuild-all', "Update property info for all properties (per default, only missing entries are created)" );
 		//$this->addOption( 'start-row', "The ID of the first row to update (useful for continuing aborted runs)", false, true );
-		//$this->addOption( 'batch-size', "Number of rows to update per database transaction (100 per default)", false, true );
+
+		$this->addOption( 'list-file', "A file containing one entity ID per line", false, true );
 	}
 
 	public function finalSetup() {
@@ -83,16 +87,43 @@ class DumpJson extends Maintenance {
 
 		$idStream = $this->makeIdStream();
 		$dumper->generateDump( $idStream );
+
+		if ( $idStream instanceof Disposable ) {
+			// close stream / free resources
+			$idStream->dispose();
+		}
 	}
 
 	/**
 	 * @return Iterator a stream of EntityId objects
 	 */
 	public function makeIdStream() {
-		//TODO: provide list/filter of entities
-		//TODO: allow ids to be read from a file
+		$listFile = $this->getOption( 'list-file' );
 
-		$stream = $this->entityPerPage->getEntities();
+		if ( $listFile !== null ) {
+			//TODO: allow filtering by entity type, id congruence class ( id % n == m ), etc.
+			$stream = $this->makeIdFileStream( $listFile );
+		} else {
+			$stream = $this->entityPerPage->getEntities();
+		}
+
+		return $stream;
+	}
+
+	/**
+	 * @param $listFile
+	 *
+	 * @return Traversable
+	 * @throws \MWException
+	 */
+	protected function makeIdFileStream( $listFile ) {
+		$input = fopen( $listFile, 'r' );
+
+		if ( !$input ) {
+			throw new \MWException( "Failed to open ID file: $input" );
+		}
+
+		$stream = new EntityIdReader( $input );
 		return $stream;
 	}
 }
