@@ -1390,6 +1390,7 @@ $messages['fi'] = array(
 	'tooltip-t-wikibase' => 'Linkki yhdistettyyn keskustietovaraston kohteeseen',
 	'wikibase-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
 	'wikibase-after-page-move-queued' => 'Tähän sivuun liitetty [$1 Wikidata-kohde] päivitetään pian automaattisesti.',
+	'wikibase-comment-add' => 'Wikidata-kohde luotu.',
 	'wikibase-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
 	'wikibase-comment-linked' => 'Wikidata-kohde liitettiin tähän sivuun.',
 	'wikibase-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',

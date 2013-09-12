@@ -479,6 +479,8 @@ See example: [[d:Special:SpecialPages#mw-specialpagesgroup-wikibaserepo|d:Specia
 This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.',
 	'wikibase-save' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.
+
+Used as <code>$1</code> in {{msg-mw|Wikibase-shortcopyrightwarning}}.
 {{Identical|Save}}',
 	'wikibase-cancel' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that cancels what the user has done while the user interface has been in edit mode.
@@ -861,7 +863,16 @@ Parameters:
 * $1 - the invalid ID',
 	'special-dispatchstats' => '{{doc-special|DispatchStats}}
 This special page shows statistics about the process used to notify client wikis about changes on the repository. "Dispatch" here is similar to "notify", "send" or "distribute".',
-	'wikibase-dispatchstats-intro' => 'Intro text for the DispatchStats special page.',
+	'wikibase-dispatchstats-intro' => 'Intro text for [[Special:DispatchStats]].
+
+Refers to:
+* {{msg-mw|wikibase-dispatchstats-changes}}
+* {{msg-mw|wikibase-dispatchstats-stats}}
+* {{msg-mw|wikibase-dispatchstats-site-id}}
+* {{msg-mw|wikibase-dispatchstats-pos}}
+* {{msg-mw|wikibase-dispatchstats-lag-num}}
+* {{msg-mw|wikibase-dispatchstats-lag-time}}
+* {{msg-mw|wikibase-dispatchstats-touched}}',
 	'wikibase-dispatchstats-no-stats' => 'Message shown when there are no statistics to be shown.',
 	'wikibase-dispatchstats-changes' => 'Section header (<code><nowiki><h2></nowiki></code>) for statistics about the change log',
 	'wikibase-dispatchstats-stats' => 'Section header for statistics about the dispatcher',
@@ -5848,7 +5859,7 @@ IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'wikibase-entitydata-text' => 'Tämä sivu tarjoaa linkitetyn datan näkymän aiheen arvoille. Kirjoita aiheen tunnus verkko-osoitteesta alasivumuotoa käyttäen.',
 	'special-mylanguagefallbackchain' => 'Varakieliketjuni',
 	'wikibase-mylanguagefallbackchain-text' => 'Varakieliketjua käytetään näyttämään aiheiden nimet sinulle seuraavasti.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> [[Special:MyPage|käyttäjäsivullesi]].', # Fuzzy
+	'wikibase-mylanguagefallbackchain-babel' => 'Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> {{GENDER:$1|sinun}}[[Special:MyPage|käyttäjäsivullesi]].',
 	'wikibase-restoreold' => 'palauta',
 	'wikibase-restore-summary' => 'Käyttäjän [[Special:Contributions/$2|$2]] tekemän muokkauksen $1 palautus',
 	'wikibase-no-direct-editing' => 'Sivun lähdekoodin muokkaaminen on poistettu käytöstä nimiavaruudessa $1',
@@ -5862,6 +5873,8 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbeditentity-update' => 'Kohde päivitetty',
 	'wikibase-item-summary-wbeditentity-override' => 'Kohde korvattu',
 	'wikibase-item-summary-wbsetreference' => 'Asetettu lähde',
+	'wikibase-item-summary-wbsetreference-add' => 'Lisätty lähde väitteelle',
+	'wikibase-item-summary-wbsetreference-set' => 'Muutettu väitteen lähdettä',
 	'wikibase-item-summary-wbsetlabel-add' => 'Lisätty [$2]-nimi',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2]-nimi muutettu',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2]-nimi poistettu',
@@ -5890,7 +5903,13 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetclaim-create' => 'Luotu {{PLURAL:$3|väite|väitettä}}',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Muutettu {{PLURAL:$3|väitteen|väitteiden}} {{PLURAL:$4|yhtä määrettä|$4 määrettä}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Muutettu {{PLURAL:$3|väitteen|väitteiden}} {{PLURAL:$4|yhtä lähdettä|$4 lähteitä}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Muutettu {{PLURAL:$3|väitteen|väitteiden}} sijoitusta',
 	'wikibase-item-summary-clientsitelink-update' => 'Sivu [$3] siirretty nimelle [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => 'Lisätty {{PLURAL:$1|muuttuja|muuttujaa}}',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Muutettu {{PLURAL:$1|muuttuja|muuttujaa}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => 'Poistettu {{PLURAL:$1|muuttuja|muuttujaa}}',
+	'wikibase-item-summary-wbremovereferences-remove' => 'Poistettu {{PLURAL:$3|lähde|lähdettä}} väitteestä',
+	'wikibase-item-summary-wbsetstatementrank' => "Muutettu esityksen sijoitusta: '$3' → '$4'",
 	'wikibase-property-summary-wbcreate-new' => 'Luotu uusi ominaisuus',
 	'wikibase-property-summary-wbeditentity-create' => 'Luotu uusi ominaisuus',
 	'wikibase-property-summary-wbeditentity-update' => 'Ominaisuus päivitetty',
