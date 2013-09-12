@@ -32,54 +32,57 @@ Feature: Edit description
       And Description edit button should not be there
 
   @ui_only
-  Scenario: Description cancel
+  Scenario Outline: Cancel description
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
-      And I click the description cancel button
+      And I <cancel>
     Then Original description should be displayed
       And Description edit button should be there
       And Description cancel button should not be there
 
-  @ui_only
-  Scenario: Description cancel with ESCAPE
+    Examples:
+      | cancel |
+      | click the description cancel button |
+      | press the ESC key in the description input field |
+
+  @save_description @modify_entity
+  Scenario Outline: Save description
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
-      And I press the ESC key in the description input field
-    Then Original description should be displayed
-      And Description edit button should be there
-      And Description cancel button should not be there
+      And I <save>
+    Then MODIFIED DESCRIPTION should be displayed as description
+
+    Examples:
+     | save |
+     | click the description save button |
+     | press the RETURN key in the description input field |
 
   @save_description @modify_entity
-  Scenario: Description save
+  Scenario Outline: Save description
     When I click the description edit button
       And I enter MODIFIED DESCRIPTION as description
-      And I click the description save button
-    Then MODIFIED DESCRIPTION should be displayed as description
-    When I reload the page
-    Then MODIFIED DESCRIPTION should be displayed as description
-
-  @save_description @modify_entity
-  Scenario: Description save with RETURN
-    When I click the description edit button
-      And I enter MODIFIED DESCRIPTION as description
-      And I press the RETURN key in the description input field
-    Then MODIFIED DESCRIPTION should be displayed as description
-    When I reload the page
+      And I <save>
+      And I reload the page
     Then MODIFIED DESCRIPTION should be displayed as description
 
-  @save_description @modify_entity
-  Scenario: Description with unnormalized value
-    When I click the description edit button
-      And I enter    bla   bla    as description
-      And I click the description save button
-    Then bla bla should be displayed as description
+    Examples:
+      | save |
+      | click the description save button |
+      | press the RETURN key in the description input field |
 
   @save_description @modify_entity
-  Scenario: Description with "0" as value
+  Scenario Outline: Description with special input
     When I click the description edit button
-      And I enter 0 as description
+      And I enter <description> as description
       And I click the description save button
-    Then 0 should be displayed as description
+    Then <expected_description> should be displayed as description
+
+    Examples:
+      | description | expected_description |
+      | 0           | 0                    |
+      |    norm    a   lize  me   | norm a lize me |
+      | <script>$("body").empty();</script> | <script>$("body").empty();</script> |
+      | {{Template:blabla}} | {{Template:blabla}} |
 
   @save_description
   Scenario: Description with a too long value
