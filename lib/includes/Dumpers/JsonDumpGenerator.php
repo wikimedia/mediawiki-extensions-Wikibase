@@ -83,7 +83,7 @@ class JsonDumpGenerator {
 			}
 		}
 
-		$json = "]\n"; //TODO: make optional
+		$json = "\n]\n"; //TODO: make optional
 		$this->writeToDump( $json );
 	}
 
