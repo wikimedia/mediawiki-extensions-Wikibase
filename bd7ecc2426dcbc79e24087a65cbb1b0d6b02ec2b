@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_14ef3f20",
+        "filename": "repo/tests/phpunit/includes/ClaimSummaryBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-12T10:42:01Z",
+      "side": 1,
+      "message": ":)",
+      "revId": "bd7ecc2426dcbc79e24087a65cbb1b0d6b02ec2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
