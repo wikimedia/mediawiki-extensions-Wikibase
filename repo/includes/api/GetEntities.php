@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use SiteSQLStore;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
@@ -67,20 +68,7 @@ class GetEntities extends ApiWikibase {
 			$this->dieUsage( 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages', 'param-missing' );
 		}
 
-		if ( !isset( $params['ids'] ) ) {
-			// Since we merge into this, just create it
-			$params['ids'] = array();
-		}
-
-		if ( !empty( $params['sites'] ) ) {
-			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
-			$siteStore = \SiteSQLStore::newInstance();
-			$itemByTitleHelper = new ItemByTitleHelper( $this, $siteLinkCache, $siteStore, $this->stringNormalizer );
-			$otherIDs = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
-			$params['ids'] = array_merge( $params['ids'], $otherIDs );
-		}
-
-		$params['ids'] = $this->uniqueEntities( $params['ids'] );
+		$params['ids'] = $this->getEntityIdsFromParams( $params );
 
 		foreach ( $params['ids'] as $entityId ) {
 			$this->handleEntity( $entityId, $params );
@@ -99,6 +87,27 @@ class GetEntities extends ApiWikibase {
 		);
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Get array of entities from api request params
+	 *
+	 * @param array $params
+	 *
+	 * @return array
+	 */
+	protected function getEntityIdsFromParams( array $params ) {
+		$entityIds = isset( $params['ids'] ) ? $params['ids'] : array();
+
+		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
+			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
+			$siteStore = SiteSQLStore::newInstance();
+			$itemByTitleHelper = new ItemByTitleHelper( $this, $siteLinkCache, $siteStore, $this->stringNormalizer );
+			$otherIDs = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
+			$entityIds = array_merge( $entityIds, $otherIDs );
+		}
+
+		return $this->uniqueEntities( $entityIds );
 	}
 
 	/**
