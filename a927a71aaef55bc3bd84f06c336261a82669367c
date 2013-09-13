@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_d03f80af",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T08:52:45Z",
+      "side": 1,
+      "message": "Please provide a unit test for  this.",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_104ae855",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T08:52:45Z",
+      "side": 1,
+      "message": "Please document clearly what is going to happen if this is or is not provided.\nIs there a good reason for it ever not being provided?",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_f04c7c73",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T08:52:45Z",
+      "side": 1,
+      "message": "Please factor the contents of this block into a separate function (ideally into a separate class, so we can test it separately).\n\nMaybe it would be better to have this logic in the code that calls this method?",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_3077e4a0",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T08:52:45Z",
+      "side": 1,
+      "message": "Why is only squid caching relevant, and not the parser cache? For anons, the parser cache isn\u0027t split by language either, is it?",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
