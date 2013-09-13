@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_50d55018",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T12:51:14Z",
+      "side": 1,
+      "message": "Uh, no. It would be checking assumptions we make about the resulting fallback chain based on the context we pass in. \n\nBasically, based on the caching mechanism and the user\u0027s status, the resulting chain should be different, right? So it should be possible to test this.",
+      "parentUuid": "4946a543_d06ea096",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_104ae855",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 40
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "It\u0027s passed in only for tests, because logic with WB_EXPERIMENTAL_FEATURES switch is difficult to test.",
       "parentUuid": "4946a543_104ae855",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_70da4c4a",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T12:51:14Z",
+      "side": 1,
+      "message": "Unless you make the test itself depend on WB_EXPERIMENTAL_FEATURES (or skip it if WB_EXPERIMENTAL_FEATURES isn\u0027t set).\n\nIn any case - if that parameter should only be used for testing, plese say so in the documentation.",
+      "parentUuid": "4946a543_302fe441",
       "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_90dfb836",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T12:51:14Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "4946a543_70296c39",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_3077e4a0",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 40
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "We\u0027re only outputting different contents in JS vars, which are not a part of parser output but output page which is not cached, or, better to say, is squid cached only, IIRC.",
       "parentUuid": "4946a543_3077e4a0",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_b0e4b411",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T12:51:14Z",
+      "side": 1,
+      "message": "That seems correct, but is non-obvious here. At least, but that explanation into a comment in the code.",
+      "parentUuid": "4946a543_b023d458",
       "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
