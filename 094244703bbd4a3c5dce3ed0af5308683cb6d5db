@@ -229,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_70716ca8",
+        "filename": "lib/includes/formatters/FormattingException.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-13T09:55:36Z",
+      "side": 1,
+      "message": "I removed it from the \"external libraries\" of my MW phpstorm project, and it is all still working fine.",
+      "parentUuid": "4946a543_47576d57",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_e7b939ca",
         "filename": "lib/includes/formatters/MessageSnakFormatter.php",
         "patchSetId": 5
@@ -328,6 +346,24 @@
       "side": 1,
       "message": "Because it generates output representing a snak\u0027s value. The fact that it doesn\u0027t actually look at the snak doesn\u0027t matter: for novalue and somevalue, there\u0027s just nothing to look at.\n\nSnak formatters are generally specific to a given snak type, so the message is fixed. Alternatively, the message key could be build dynamically from the given snak\u0027s type. I don\u0027t see the advantage, though.",
       "parentUuid": "4946a543_27b421cf",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_9076d89e",
+        "filename": "lib/includes/formatters/MessageSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-13T09:55:36Z",
+      "side": 1,
+      "message": "So this class is specific to novalue and somevalue snaks? I see nothing here to indicate this. If I see a MessageSnakFormatter used somewhere, how am I supposed to know it is only for these two snak types? And it it for both, as you are saying these formatters are generally specific to one snak type.",
+      "parentUuid": "4946a543_a7df31d2",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -579,6 +615,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_b06bd4b7",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-13T09:55:36Z",
+      "side": 1,
+      "message": "By adding this as public here, you basically answer the question already with \"no\".\n\nThis code is more of a liability in that it is a lot more likely to cause rot then if it where not publicly accessible. And when bad usage occurs, it  might very well not be spot. After all, it\u0027ll be using a method already there, already going through the CR process. Why introduce such a liability? Because it \"may come in handy\"? If you find a use for it, making this thing public will not be hard, if that is indeed the right thing to do for the use you have.",
+      "parentUuid": "4946a543_e79a1911",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_67caa971",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -719,6 +773,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_d06860bd",
+        "filename": "lib/includes/formatters/SnakFormatterFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-13T09:55:36Z",
+      "side": 1,
+      "message": "Did not occur to me last time that these constants are oddly placed. The SnakFormatter interface is now dependent on the SnakFormatterFactory. Better place those things in SnakFormatter.",
+      "parentUuid": "4946a543_c7befd61",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_c7a19dae",
         "filename": "lib/includes/formatters/SnakFormatterFactory.php",
         "patchSetId": 5
@@ -771,6 +843,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_f0655ce3",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-13T09:55:36Z",
+      "side": 1,
+      "message": "on the lowest level we have data values, which have a type, and above that we have data types that have an id. That is actually not all that hard to remember if you try to, rather then either making fun of it, or complaining about it, every time you come across it. And not demand this is explained to you over and over again.\n\nmaking inconsistent use of terminology does not make things clearer.\n\nthe DataValue and DataType system is an important part of our architecture. Which you disagree with, which is fine. Trying to subvert it is however not wise - if we pull it in two different directions, the end result is not going to be pretty.\n\nif the terminology issue is fixed then this code is good for now to me. I\u0027m still concerned about it, and suspect there are better ways to design this. This is however your work, so I\u0027ll leave the choice and responsibility with you.",
+      "parentUuid": "4946a543_07b9e577",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_0785650a",
         "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
         "patchSetId": 5
@@ -800,6 +890,24 @@
       "side": 1,
       "message": "??",
       "parentUuid": "4946a543_0785650a",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_509d50b7",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-13T09:55:36Z",
+      "side": 1,
+      "message": "type hint",
+      "parentUuid": "4946a543_c748bd8e",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -852,6 +960,24 @@
       "side": 1,
       "message": "Because it makes sense to have a way to get all value formatters for a well known output format. This is bootstrapping code, so factoring this out seems pointless.",
       "parentUuid": "4946a543_477f6d12",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_90a7b80d",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-13T09:55:36Z",
+      "side": 1,
+      "message": "factoring it out? what about making it non-pulic?",
+      "parentUuid": "4946a543_e74db99b",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
