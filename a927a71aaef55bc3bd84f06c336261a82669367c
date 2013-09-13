@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_90b898e4",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 40
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-13T13:17:26Z",
+      "side": 1,
+      "message": "They may be actually the same with current codebase ... newFromContext is now simply newFromUserAndLanguage, and for anons there\u0027s no user (to fetch Babel info), so the only thing left is newFromLanguage too.\n\nHowever more work may be added to newFromContext later, for example, Accept-Language HTTP header is one thing I can think of (this doesn\u0027t break cache -- see discussion at $wgUseSquid). I\u0027m just future-proofing things, and trying to avoid deeper changes if caching setup ever changes in the future.",
+      "parentUuid": "4946a543_50d55018",
+      "revId": "a927a71aaef55bc3bd84f06c336261a82669367c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_104ae855",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 40
