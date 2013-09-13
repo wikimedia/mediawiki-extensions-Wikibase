@@ -16,6 +16,24 @@
       "revId": "b0086cd92e15fe2f5ff34d97ec0728039597a01c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_d0f780d0",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-13T12:10:27Z",
+      "side": 1,
+      "message": "parent::getRequiredPermissions adds the \u0027edit\u0027 permission to the array of required perms :)",
+      "parentUuid": "4946a543_9015f8f1",
+      "revId": "b0086cd92e15fe2f5ff34d97ec0728039597a01c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
