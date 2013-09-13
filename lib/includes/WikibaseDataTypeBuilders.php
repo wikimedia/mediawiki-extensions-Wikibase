@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataValues\TimeValue;
+use DataValues\QuantityValue;
 use Parser;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
@@ -79,7 +80,7 @@ class WikibaseDataTypeBuilders {
 		);
 
 		$experimental = array(
-			// 'quantity'=> array( $this, 'buildQuantityType' ),
+			'quantity'=> array( $this, 'buildQuantityType' ),
 			// 'monolingual-text' => array( $this, 'buildMonolingualTextType' ),
 			// 'multilingual-text' => array( $this, 'buildMultilingualTextType' ),
 		);
@@ -229,6 +230,31 @@ class WikibaseDataTypeBuilders {
 		);
 
 		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+	}
+
+	public function buildQuantityType( $id ) {
+		$validators = array();
+		$validators[] = new TypeValidator( 'array' );
+
+		// the 'amount' field is already validated by QuantityValue's constructor
+		// the 'digits' field is already validated by QuantityValue's constructor
+
+		// only allow the '1' unit for now:
+		$unitValidators = array(
+			new TypeValidator( 'string' ),
+			new RegexValidator( '/^1$/', false, 'unknown-unit' ),
+		);
+
+		$validators[] = new DataFieldValidator( 'unit', // Note: validate the 'unit' field
+			new CompositeValidator( $unitValidators, true ) //Note: each validator is fatal
+		);
+
+		// top validator
+		$topValidator = new DataValueValidator( //Note: validate the DataValue's native value.
+			new CompositeValidator( $validators, true ) //Note: each validator is fatal
+		);
+
+		return new DataType( $id, 'quantity', array( new TypeValidator( 'DataValues\QuantityValue' ), $topValidator ) );
 	}
 
 }
