@@ -11,7 +11,7 @@ use Wikibase\ChangeOpAliases;
 use Wikibase\ChangeOpSiteLink;
 use Wikibase\ChangeOpException;
 use ApiBase, User, Status, SiteList;
-use Wikibase\SiteLink;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
@@ -23,10 +23,6 @@ use Wikibase\Utils;
  * Derived class for API modules modifying a single entity identified by id xor a combination of site and page title.
  *
  * @since 0.1
- *
- * @file ApiWikibaseModifyEntity.php
- * @ingroup WikibaseRepo
- * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
@@ -69,12 +65,15 @@ class EditEntity extends ModifyEntity {
 	protected function createEntity( array $params ) {
 		$type = $params['new'];
 		$this->flags |= EDIT_NEW;
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		try {
-			return $entityContentFactory->newFromType( $type );
+			$entityContent = $entityContentFactory->newFromType( $type );
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
+		/** @var $entityContent EntityContent */
+		$entityContent->grabFreshId();
+		return $entityContent;
 	}
 
 	/**
@@ -130,12 +129,12 @@ class EditEntity extends ModifyEntity {
 		}
 
 		// if we create a new property, make sure we set the datatype
-		if ( $entityContent->isNew() && $entity->getType() === Property::ENTITY_TYPE ) {
-			if ( !isset( $data['datatype'] ) ) {
-				$this->dieUsage( 'No datatype given', 'param-illegal' );
-			} else {
-				$entity->setDataTypeId( $data['datatype'] );
-			}
+		if( !$entityContent->getTitle()->exists() && $entity->getType() === Property::ENTITY_TYPE ){
+				if ( !isset( $data['datatype'] ) ) {
+					$this->dieUsage( 'No datatype given', 'param-illegal' );
+				} else {
+					$entity->setDataTypeId( $data['datatype'] );
+				}
 		}
 
 		if ( array_key_exists( 'labels', $data ) ) {
@@ -483,8 +482,8 @@ class EditEntity extends ModifyEntity {
 					'The entity will not be saved before it is filled with the "data", possibly with parts excluded.'
 				),
 				'new' => array( "If set, a new entity will be created.",
-						"Set this to the type of the entity you want to create - currently 'item'|'property'.",
-						"It is not allowed to have this set when 'id' is also set."
+					"Set this to the type of the entity you want to create - currently 'item'|'property'.",
+					"It is not allowed to have this set when 'id' is also set."
 				),
 			)
 		);
