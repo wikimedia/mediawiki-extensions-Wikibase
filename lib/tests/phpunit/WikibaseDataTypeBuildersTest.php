@@ -7,6 +7,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\GlobeCoordinateValue;
 use DataValues\LatLongValue;
 use DataValues\NumberValue;
+use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use ValueParsers\ParserOptions;
@@ -158,6 +159,11 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$cases = array_merge( $cases, array(
+				//quantity
+				array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
+				array( 'quantity', QuantityValue::newFromNumber( 5, 'm' ), false, 'We don\'t support units yet' ),
+				array( 'quantity', QuantityValue::newFromDecimal( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
+
 				// ....
 			) );
 		}
