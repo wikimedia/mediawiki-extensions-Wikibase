@@ -103,6 +103,10 @@ return call_user_func( function() {
 		'Wikibase\Api\ModifyClaim' => 'includes/api/ModifyClaim.php',
 		'Wikibase\Api\ClaimModificationHelper' => 'includes/api/ClaimModificationHelper.php',
 
+		// includes/serializers
+		'Wikibase\Serializers\FetchedEntityContentSerializer' => 'includes/serializers/FetchedEntityContentSerializer.php',
+		'Wikibase\Serializers\FetchedEntityContentSerializationOptions' => 'includes/serializers/FetchedEntityContentSerializationOptions.php',
+
 		// includes/content
 		'Wikibase\EntityContent' => 'includes/content/EntityContent.php',
 		'Wikibase\EntityContentFactory' => 'includes/content/EntityContentFactory.php',
