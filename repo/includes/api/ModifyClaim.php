@@ -18,9 +18,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  *
  * @since 0.4
  *
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -117,10 +114,10 @@ abstract class ModifyClaim extends ApiWikibase {
 	}
 
 	/**
-	 * @see  \Api::getRequiredPermissions()
+	 * @see  \Wikibase\Api\ApiWikibase::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entityContent, $params );
 
 		$permissions[] = 'edit';
 		return $permissions;

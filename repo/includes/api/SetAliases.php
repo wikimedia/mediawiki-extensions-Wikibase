@@ -15,10 +15,6 @@ use Wikibase\ChangeOpAliases;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
@@ -30,8 +26,8 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entityContent, $params );
 
 		if ( !empty( $params['add'] ) || isset( $params['set'] ) ) {
 			// add and set has a common permission due to the special page SetAliases
