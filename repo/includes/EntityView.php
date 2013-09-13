@@ -644,9 +644,13 @@ abstract class EntityView extends \ContextSource {
 			if ( $valueFormatter !== null ) {
 				$value = $valueFormatter->format( $value );
 			} else {
+				$type = $value->getType();
+
 				// If value representation is a string, just display that one as a
 				// fallback for values not having a formatter implemented yet.
-				if ( is_string( $value->getValue() ) ) {
+				if ( $type === 'quantity' ) {
+					$value = $value->getAmount();
+				} elseif ( is_string( $value->getValue() ) ) {
 					$value = $value->getValue();
 				} elseif ( $value instanceof \DataValues\UnDeserializableValue ) {
 					$value = $value->getReason();
