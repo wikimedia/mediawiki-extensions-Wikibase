@@ -18,6 +18,7 @@ use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Snak;
+use Wikibase\Validators\EntityIdValidator;
 
 /**
  * @covers Wikibase\ReferencedEntitiesFinder
@@ -31,6 +32,7 @@ use Wikibase\Snak;
  * @group Wikibase
  * @group WikibaseLib
  * @group EntityLinkFinder
+ * @group xxx
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -45,8 +47,8 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 		$p27 = new PropertyId( 'p27' );
 		$p44 = new PropertyId( 'p44' );
 
-		$q23 = new EntityIdValue( new ItemId( 'q23' ) );
-		$q24 = new EntityIdValue( new ItemId( 'q24' ) );
+		$q23Value = new EntityIdValue( new ItemId( 'q23' ) );
+		$q24Value = new EntityIdValue( new ItemId( 'q24' ) );
 
 		$argLists[] = array(
 			array(),
@@ -73,20 +75,20 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$argLists[] = array(
-			array( new PropertyValueSnak( $p27, $q23 ) ),
-			array( $p27, $q23->getEntityId() ),
+			array( new PropertyValueSnak( $p27, $q23Value ) ),
+			array( $p27, $q23Value->getEntityId() ),
 			"PropertyValueSnak with EntityId"
 		);
 
 		$argLists[] = array(
 			array(
-				new PropertyValueSnak( $p11, $q23 ),
+				new PropertyValueSnak( $p11, $q23Value ),
 				new PropertyNoValueSnak( $p27 ),
 				new PropertySomeValueSnak( $p44 ),
 				new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ),
-				new PropertyValueSnak( $p44, $q24 ),
+				new PropertyValueSnak( $p44, $q24Value ),
 			),
-			array( $p11, $q23->getEntityId(), $p27, $p44, $q24->getEntityId() ),
+			array( $p11, $q23Value->getEntityId(), $p27, $p44, $q24Value->getEntityId() ),
 			"PropertyValueSnak with EntityId"
 		);
 
@@ -114,4 +116,55 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $actual, $message );
 	}
 
+	public function dataValuesProvider() {
+		$p21 = new PropertyId( 'p11' );
+		$q42 = new ItemId( 'q42' );
+		$stringValue = new StringValue( 'q1337' );
+
+		return array(
+			$this->dataValuesTestCaseFromEntity( $p21 ),
+			$this->dataValuesTestCaseFromEntity( $q42 ),
+			array(
+				$stringValue,
+				array(),
+				'StringValue without references'
+			)
+		);
+	}
+
+	/**
+	 * Returns a test definition suitable for "testFindDataValueLinks".
+	 *
+	 * @param string $entity
+	 * @return array
+	 */
+	private function dataValuesTestCaseFromEntity( $entity ) {
+		$definition = array(
+			new EntityIdValue( $entity ),
+			array( $entity ),
+			$entity->getEntityType()
+		);
+		return $definition;
+	}
+
+	/**
+	 * @dataProvider dataValuesProvider
+	 *
+	 * @param DataValue $dataValue
+	 * @param array $expected
+	 * @param string $message
+	 */
+	public function testFindDataValueLinks( DataValue $dataValue, array $expected, $message = '' ) {
+		$linkFinder = new ReferencedEntitiesFinder();
+
+		$actual = $linkFinder->findDataValueLinks( $dataValue );
+
+		$expected = array_values( $expected );
+		$actual = array_values( $actual );
+
+		asort( $expected );
+		asort( $actual );
+
+		$this->assertEquals( $expected, $actual, $message );
+	}
 }
