@@ -1319,6 +1319,7 @@ $messages['et'] = array(
  * @author Mehran
  * @author Pouyana
  * @author Reza1615
+ * @author Rtemis
  * @author ZxxZxxZ
  * @author درفش کاویانی
  */
@@ -1328,6 +1329,7 @@ $messages['fa'] = array(
 	'tooltip-t-wikibase' => 'پیوند به آیتم متصل به مخزن داده',
 	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.',
 	'wikibase-after-page-move-queued' => '[$1 آیتم ویکی‌داده] مرتبط با این صفحه به زودی به طور خودکار به‌روزرسانی می‌شود.',
+	'wikibase-comment-add' => 'یک آیتم ویکی‌داده ایجاد شد.',
 	'wikibase-comment-remove' => 'پیوند آیتم ویکی‌داده حذف گردید. پیوند زبان حذف شد.',
 	'wikibase-comment-linked' => 'یک آیتم ویکی‌داده به این صفحه پیوند دارد.',
 	'wikibase-comment-unlink' => 'این صفحه به ویکی‌داده پیوند ندارد. پیوند زبان حذف شد.',
@@ -1360,6 +1362,7 @@ $messages['fa'] = array(
 	'wikibase-property-notsupportedyet' => 'ویکی‌بیس هنوز نوع خصوصیت برای خصوصیت $1 را پشتیبانی نمی‌کند.',
 	'wikibase-rc-hide-wikidata' => '$1 ویکی‌داده',
 	'wikibase-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
+	'wikibase-rc-wikibase-edit-title' => 'ویرایش ویکی‌داده',
 	'wikibase-watchlist-show-changes-pref' => 'نمایش ویرایش‌های ویکی‌داده در فهرست پیگیری‌ها',
 	'wikibase-error-serialize-error' => 'مرتب کردن داده انجام نشد.',
 	'wikibase-error-invalid-entity-id' => 'شناسهٔ واردشده برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
@@ -1928,7 +1931,8 @@ $messages['ilo'] = array(
 	'specialpages-group-wikibaseclient' => 'Kliente ti Wikidata',
 	'tooltip-t-wikibase' => 'Isilpo iti naikapet a datos ti repositorio ti banag',
 	'wikibase-after-page-move' => 'Mabalinmo pay a [$1 pabaruen] ti mainaig a banag ti Wikidata tapno mataripatu dagiti silpo ti pagsasao ti naiyalis a panid.',
-	'wikibase-after-page-move-queued' => 'Ti [$1 Wikidata a banag] amainaig iti daytoy a panid ket automatikonton a mapabaro.',
+	'wikibase-after-page-move-queued' => 'Ti [$1 Wikidata a banag] a mainaig iti daytoy a panid ket automatikonton a mapabaro.',
+	'wikibase-comment-add' => 'Napartuaten ti maysa a banag ti Wikidata.',
 	'wikibase-comment-remove' => 'Ti mainaig a banag ti Wikidata ket naikkaten. Dagiti silpo ti pagsasao ket naikkaten.',
 	'wikibase-comment-linked' => 'Ti Wikidata a banag ket naisilpon iti daytoy a panid.',
 	'wikibase-comment-unlink' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Dagiti silpo ti pagsasao ket naikkaten.',

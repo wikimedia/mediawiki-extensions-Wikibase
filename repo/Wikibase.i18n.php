@@ -5514,7 +5514,7 @@ $messages['fa'] = array(
 	'wikibase-entitydata-text' => 'این صفحه رابطی از داده‌های پیوندداده‌شده به مقدارهای موضوع ارائه می‌کند. لطفاً شناسهٔ موضوع (ID) موجود در نشانی اینترنتی را با استفاده از نحو زیرصفحه ارائه کنید.',
 	'special-mylanguagefallbackchain' => 'زنجیره مجدد زبان من',
 	'wikibase-mylanguagefallbackchain-text' => 'اندوختهٔ زنجیرهٔ زبان برای نمایش برچسب‌های ورودی استفاده می‌شود که برای شما در پائین نمایش داده‌شده است.',
-	'wikibase-mylanguagefallbackchain-babel' => 'با قرار دادن <nowiki>{{#babel: }}</nowiki> در [[Special:MyPage|صفحه کاربریتان]] می‌توان این را ویرایش کنید.', # Fuzzy
+	'wikibase-mylanguagefallbackchain-babel' => 'با قرار دادن <nowiki>{{#babel: }}</nowiki> در {{GENDER:$1|قسمت}} [[Special:MyPage|صفحه کاربریتان]] می‌توانید این را ویرایش کنید.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1- $2 ، تبدیل شده از  $3 - $4',
 	'wikibase-self-conflict-patched' => 'ویرایش شما د آخرین نسخه پچ شد و تعدادی از تغییرات میانیتان را باطل کرد.',
 	'wikibase-conflict-patched' => 'ویرایشتان در آخرین نسخه پچ شد.',
@@ -11840,6 +11840,7 @@ for å finne ut hva som har skjedd.',
 /** Dutch (Nederlands)
  * @author Konovalov
  * @author McDutchie
+ * @author Multichill
  * @author Romaine
  * @author SPQRobin
  * @author Saruman
@@ -11913,7 +11914,7 @@ $messages['nl'] = array(
 	'wikibase-copyrighttooltip-acknowledge' => 'I accepteer deze voorwaarden voor mijn toekomstige bewerken. Geef dit bericht niet opnieuw weer.',
 	'wikibase-entityselector-more' => 'meer',
 	'wikibase-anonymouseditwarning' => 'Waarschuwing: u bent niet aangemeld.
-Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.', # Fuzzy
+Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-restrictionedit-tooltip-message' => 'Deze pagina is beveiligd, bewerken is niet toegestaan.',
 	'wikibase-blockeduser-tooltip-message' => 'U kunt geen bewerkingen uitvoeren omdat uw gebruikersnaam of IP-adres geblokkeerd is.',
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
@@ -11921,10 +11922,10 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.', # F
 	'wikibase-error-constraint-violation-label' => 'Er {{PLURAL:$1|is een overschrijding van een beperking voor het label|zijn overschrijdingen van beperkingen voor de labels}} "$3" voor {{PLURAL:$1|taalcode|taalcodes}} "$2".',
 	'wikibase-error-constraint-violation-description' => 'Er {{PLURAL:$1|is een overschrijding van een beperking voor de beschrijving|zijn overschrijdingen van beperkingen voor de beschrijvingen}} "$3" voor {{PLURAL:$1|taalcode|taalcodes}} "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'Er {{PLURAL:$1|is een overschrijding van een beperking voor het alias|zijn overschrijdingen van beperkingen voor de aliassen}} "$3" voor {{PLURAL:$1|taalcode|taalcodes}} "$2".',
-	'wikibase-error-sitelink-already-used' => 'De sitekoppeling [$1 $2] wordt al gebruikt door het item [[$3]].', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-property' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere eigenschap ($3)', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere zoekopdracht ($3)', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Een ander item ($3) is al gekoppeld met het label "$1" en de beschrijving "$4" voor de taalcode $2', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'De sitekoppeling [$1 $2] wordt al gebruikt door het item [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere eigenschap ($3).',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere zoekopdracht ($3).',
+	'wikibase-error-label-not-unique-item' => 'Een ander item ($3) is al gekoppeld met het label "$1" en de beschrijving "$4" voor de taalcode $2.',
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'wikibase-itembytitle-lookup-fieldset' => 'Items zoeken op site en paginanaam',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -11947,7 +11948,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.', # F
 	'wikibase-newproperty-summary' => 'Zorg ervoor dat u [[Special:PropertyDisambiguation|controleert of de eigenschap al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe eigenschappen, als ook een geldig eigenschapstype.',
 	'wikibase-newproperty-fieldset' => 'Nieuwe eigenschap aanmaken',
 	'wikibase-newproperty-datatype' => 'Gegevenstype:',
-	'wikibase-newproperty-invalid-datatype' => 'Er is een ongeldig gegevenstype opgegeven', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Er is een ongeldig gegevenstype opgegeven.',
 	'special-newitem' => 'Nieuw item aanmaken',
 	'wikibase-newitem-summary' => 'Zorg ervoor dat u [[Special:ItemByTitle|controleert of de eigenschap al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe items.',
 	'wikibase-newitem-fieldset' => 'Nieuw item aanmaken',
@@ -12093,7 +12094,7 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 * hierarchicalpart – impliciet onderdeel van de Iri-tekst
 * query – impliciet onderdeel van de Iri-tekst
 * fragment – impliciet onderdeel van de Iri-tekst',
-	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media�',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Koppeling naar bestanden die zijn opgeslagen op Wikimedia Commons. Tijdens de invoer wordt de naamruimte "File" op Commons doorzocht voor overeenkomende bestanden.
 * scheme - impliciet onderdeel van de Iristring
 * hierarchicalpart  - impliciet onderdeel van de Iristring
