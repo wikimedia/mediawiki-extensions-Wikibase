@@ -20,10 +20,6 @@ use Wikibase\Utils;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
@@ -52,10 +48,10 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected $flags;
 
 	/**
-	 * @see  \Api::getRequiredPermissions()
+	 * @see  Wikibase\Api\ApiWikibase::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entityContent, $params );
 
 		$permissions[] = 'edit';
 		return $permissions;

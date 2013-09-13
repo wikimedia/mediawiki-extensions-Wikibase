@@ -22,10 +22,6 @@ use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -251,12 +247,12 @@ abstract class ApiWikibase extends \ApiBase {
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
-	 * @param $entity \Wikibase\Entity the entity to check permissions for
+	 * @param \Wikibase\EntityContent $entityContent the entityContent to check permissions for
 	 * @param $params array of arguments for the module, describing the operation to be performed
 	 *
 	 * @return \Status the check's result
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = array( 'read' );
 
 		//could directly check for each module here:
@@ -281,7 +277,7 @@ abstract class ApiWikibase extends \ApiBase {
 			return Status::newGood();
 		}
 
-		$permissions = $this->getRequiredPermissions( $entityContent->getEntity(), $params );
+		$permissions = $this->getRequiredPermissions( $entityContent, $params );
 		$status = Status::newGood();
 
 		foreach ( $permissions as $perm ) {

@@ -14,10 +14,6 @@ use Wikibase\ChangeOpLabel;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
@@ -28,8 +24,8 @@ class SetLabel extends ModifyLangAttribute {
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entityContent, $params );
 
 		$permissions[] = ( isset( $params['value'] ) && 0 < strlen( $params['value'] ) )
 			? 'label-update'
