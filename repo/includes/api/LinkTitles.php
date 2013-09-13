@@ -19,19 +19,15 @@ use Wikibase\Summary;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  */
 class LinkTitles extends ApiWikibase {
 
 	/**
-	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see  \Wikibase\Api\ApiWikiBase::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entityContent, $params );
 
 		$permissions[] = 'linktitles-update';
 		return $permissions;

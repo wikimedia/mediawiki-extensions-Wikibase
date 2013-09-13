@@ -15,10 +15,6 @@ use Wikibase\Utils;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -30,8 +26,8 @@ class SetSiteLink extends ModifyEntity {
 	/**
 	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entityContent, $params );
 
 		$permissions[] = 'sitelink-' . ( strlen( $params['linktitle'] ) ? 'update' : 'remove' );
 		return $permissions;
