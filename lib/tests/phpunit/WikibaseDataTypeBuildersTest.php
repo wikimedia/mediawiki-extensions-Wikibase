@@ -7,6 +7,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\GlobeCoordinateValue;
 use DataValues\LatLongValue;
 use DataValues\NumberValue;
+use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use ValueParsers\ParserOptions;
@@ -118,6 +119,10 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, ' javascript:alert(1) ' ), false, 'globe: bad URL scheme' ),
 			//TODO: globe must be an item reference
 			//TODO: globe must be from a list of configured values
+
+			//quantity
+			array( 'quantity', new QuantityValue( 5 ), true, 'Simple integer' ),
+			array( 'quantity', new QuantityValue( 5, 'm' ), false, 'We don\'t support units yet' ),
 		);
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {

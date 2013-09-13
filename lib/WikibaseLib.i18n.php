@@ -69,6 +69,7 @@ $messages['en'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Malformed mailto URL: $1',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
+	'datatypes-type-quantity' => 'Quantity',
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -234,6 +235,7 @@ Parameters:
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
+	'datatypes-type-quantity' => 'The name of a data type for quantities (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
 );
 
