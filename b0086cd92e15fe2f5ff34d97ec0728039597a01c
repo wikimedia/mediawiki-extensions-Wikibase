@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_9015f8f1",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-13T12:09:33Z",
+      "side": 1,
+      "message": "what happend to the \"edit\" permission?",
+      "revId": "b0086cd92e15fe2f5ff34d97ec0728039597a01c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
