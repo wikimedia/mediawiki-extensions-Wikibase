@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_3081a451",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T10:03:21Z",
+      "side": 1,
+      "message": "Please use tabs at the beginning of lines only, not for alignment inside the line. That\u0027s going to look horrible to anyone who uses a different tab width.",
+      "revId": "93d7bb7825c7c6f3c2c57122121e3c7bc135755d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
