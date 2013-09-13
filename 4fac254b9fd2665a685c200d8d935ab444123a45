@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_b0967449",
+        "filename": "lib/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-13T13:53:41Z",
+      "side": 1,
+      "message": "where is GlobeCoordinateValue?",
+      "revId": "4fac254b9fd2665a685c200d8d935ab444123a45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
