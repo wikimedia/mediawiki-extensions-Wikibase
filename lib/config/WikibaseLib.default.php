@@ -128,8 +128,8 @@ return call_user_func( function() {
 		// experimental data types
 		$defaults['dataTypes'] = array_merge( $defaults['dataTypes'], array(
 			'quantity',
-			'monolingual-text',
-			'multilingual-text',
+			//'monolingual-text',
+			//'multilingual-text',
 		) );
 	}
 

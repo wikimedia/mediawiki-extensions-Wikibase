@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase;
 
+use DataValues\QuantityValue;
 use DataValues\TimeValue;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
@@ -8,6 +9,7 @@ use Diff\DiffOpRemove;
 use Html;
 use Diff\Diff;
 use RuntimeException;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Lib\EntityIdFormatter;
 
 /**
@@ -279,12 +281,16 @@ class ClaimDifferenceVisualizer {
 			$dataValue = $snak->getDataValue();
 
 			// FIXME! should use some value formatter
-			if ( $dataValue instanceof EntityId ) {
+			if ( $dataValue instanceof EntityIdValue ) {
 				$diffValueString = $this->getEntityLabel( $dataValue );
 			} else if ( $dataValue instanceof TimeValue ) {
 				// TODO: this will just display the plain ISO8601-string,
 				// we should instead use a decent formatter
 				$diffValueString = $dataValue->getTime();
+			} else if ( $dataValue instanceof QuantityValue ) {
+				// TODO: this will just display the plain ISO31-string,
+				// we should instead use a decent formatter
+				$diffValueString = $dataValue->getAmount();
 			} else {
 				$diffValueString = $dataValue->getValue();
 			}
