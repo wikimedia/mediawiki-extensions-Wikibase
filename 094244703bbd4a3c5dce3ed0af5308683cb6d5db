@@ -861,6 +861,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_90d25857",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T10:38:02Z",
+      "side": 1,
+      "message": "I\u0027m not very happy with the prefixes myself, I just found the alternative to be worse. I\u0027ll investgate whether I can use ValueFormatterFactory to solve this more nicely.\n\nIt\u0027s not my intention to subvert the architecture. I will however point out when I find that it gets in the way.",
+      "parentUuid": "4946a543_f0655ce3",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_0785650a",
         "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
         "patchSetId": 5
@@ -984,6 +1002,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_b0c75498",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T10:38:02Z",
+      "side": 1,
+      "message": "Then I can\u0027t test it separately, right?",
+      "parentUuid": "4946a543_90a7b80d",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_87dcf510",
         "filename": "lib/tests/phpunit/formatters/EscapingValueFormatterTest.php",
         "patchSetId": 5
@@ -1030,6 +1066,24 @@
       "writtenOn": "2013-09-09T10:33:07Z",
       "side": 1,
       "message": ";;",
+      "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_d0c4e095",
+        "filename": "lib/tests/phpunit/formatters/SnakFormatterFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T10:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_c78b5d17",
       "revId": "094244703bbd4a3c5dce3ed0af5308683cb6d5db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
