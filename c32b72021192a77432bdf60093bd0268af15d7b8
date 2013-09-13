@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4946a543_50d8f078",
+        "filename": "docs/json.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T10:19:42Z",
+      "side": 1,
+      "message": "Special:EntityData uses _revision_ and _modified_, but the API uses a different format!",
+      "revId": "c32b72021192a77432bdf60093bd0268af15d7b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_47068687",
         "filename": "docs/json.wiki",
         "patchSetId": 2
