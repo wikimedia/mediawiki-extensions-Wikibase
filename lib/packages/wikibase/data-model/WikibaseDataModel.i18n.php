@@ -84,6 +84,13 @@ $messages['id'] = array(
 	'wikibasedatamodel-desc' => 'Komponen yang mendefinisikan model data Wikibase',
 );
 
+/** Iloko (Ilokano)
+ * @author Lam-ang
+ */
+$messages['ilo'] = array(
+	'wikibasedatamodel-desc' => 'Komponente ti panangipalawag ti datos a modelo ti Wikibase',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */
