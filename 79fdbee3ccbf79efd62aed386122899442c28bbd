@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "4946a543_3098c4c9",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T09:58:05Z",
+      "side": 1,
+      "message": "Hm, no documentation and fivel levels of nesting... whzat does this thing do, and why?\n\nPlease factor out the guts of the loops, and provide some documentation.",
+      "revId": "79fdbee3ccbf79efd62aed386122899442c28bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_70a24c01",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T09:58:05Z",
+      "side": 1,
+      "message": "Lots of lines, deep nesting... please split this up.",
+      "revId": "79fdbee3ccbf79efd62aed386122899442c28bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_d0a940e0",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-13T09:58:05Z",
+      "side": 1,
+      "message": "This loop especially should be factored out, i suppose.",
+      "revId": "79fdbee3ccbf79efd62aed386122899442c28bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_7b7f9612",
         "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
         "patchSetId": 20
