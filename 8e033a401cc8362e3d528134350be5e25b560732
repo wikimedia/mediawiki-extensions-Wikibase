@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_104f48be",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-09-13T15:15:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_b03cb42e",
+      "revId": "8e033a401cc8362e3d528134350be5e25b560732",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_501630a7",
         "filename": "repo/includes/serializers/FetchedEntityContentSerializationOptions.php",
         "patchSetId": 13
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_b0d834ef",
+        "filename": "repo/includes/serializers/FetchedEntityContentSerializer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-09-13T15:15:45Z",
+      "side": 1,
+      "message": "Personal style, not so spacey style, whatever. Not part of the coding conventions and no good reason for having a new line here. Results in less scrolling.",
+      "parentUuid": "4946a543_700b2c7f",
+      "revId": "8e033a401cc8362e3d528134350be5e25b560732",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_b025940e",
         "filename": "repo/includes/serializers/FetchedEntityContentSerializer.php",
         "patchSetId": 13
@@ -64,6 +100,24 @@
       "writtenOn": "2013-09-13T14:39:36Z",
       "side": 1,
       "message": "should add use Wikibase\\Entity; for the above comment",
+      "revId": "8e033a401cc8362e3d528134350be5e25b560732",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_d0d5c0b6",
+        "filename": "repo/includes/serializers/FetchedEntityContentSerializer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-09-13T15:15:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_b025940e",
       "revId": "8e033a401cc8362e3d528134350be5e25b560732",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
