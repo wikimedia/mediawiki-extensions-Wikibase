@@ -27,12 +27,11 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 		if( !gcDef || typeof gcDef !== 'object'
 			|| gcDef.latitude === undefined
 			|| gcDef.longitude === undefined
-			|| gcDef.precision === undefined
 		) {
 			throw new Error( 'No proper globe coordinate definition given' );
 		}
 
-		if( !isValidPrecision( gcDef.precision ) ) {
+		if( gcDef.precision && !isValidPrecision( gcDef.precision ) ) {
 			throw new Error( 'No valid precision given' );
 		}
 

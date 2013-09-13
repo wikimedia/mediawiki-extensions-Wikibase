@@ -68,6 +68,27 @@
 			'Verified iso6709()'
 		);
 
+		// test with no precision provided
+		c = new globeCoordinate.GlobeCoordinate( { latitude: 20, longitude: 25.5 } );
+
+		assert.equal(
+			c.getLatitude(),
+			20,
+			'Verified getLatitude()'
+		);
+
+		assert.equal(
+			c.getLongitude(),
+			25.5,
+			'Verified getLatitude()'
+		);
+
+		assert.equal(
+			c.getPrecision(),
+			null,
+			'Verified precision is null'
+		);
+
 	} );
 
 	QUnit.test( 'equals()', function( assert ) {
