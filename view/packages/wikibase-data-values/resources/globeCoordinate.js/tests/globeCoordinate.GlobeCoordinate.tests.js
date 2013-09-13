@@ -96,6 +96,7 @@
 				{ latitude: 0, longitude: 0, precision: 1 },
 				{ latitude: -3, longitude: 2, precision: 1 },
 				{ latitude: 1.1, longitude: 2, precision: 0.1 },
+				{ latitude: 11.92, longitude: 255.92, precision: 0.1 },
 				{ latitude: 90, longitude: 30.1, precision: 0.01 },
 				{ latitude: 0.1, longitude: 0.0075, precision: 1 / 3600 },
 				{ latitude: -0.1, longitude: 0, precision: 1 / 60 },

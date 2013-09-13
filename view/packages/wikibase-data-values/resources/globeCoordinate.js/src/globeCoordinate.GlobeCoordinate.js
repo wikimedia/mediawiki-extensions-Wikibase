@@ -41,12 +41,12 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 
 		// TODO: Capture altitude and globe
 
-		// TODO: The following checks are earth specific. When implementing additional globes,
-		// either loosen the restrictions or implement globe specific restrictions.
-		if( Math.abs( this._latitude ) > 90 ) {
+		// TODO: Implement globe specific restrictions. The restrictions below
+		// allow coordinates for Mars and other globes.
+		if( Math.abs( this._latitude ) > 360 ) {
 			throw new Error( 'Latitude (' + this._latitude + ') is out of bounds' );
 		}
-		if( Math.abs( this._longitude ) > 180 ) {
+		if( Math.abs( this._longitude ) > 360 ) {
 			throw new Error( 'Longitude (' + this._longitude + ') is out of bounds' );
 		}
 
