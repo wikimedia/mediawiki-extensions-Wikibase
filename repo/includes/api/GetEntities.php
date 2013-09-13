@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use SiteSQLStore;
 use MWException;
+use Revision;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -206,10 +207,16 @@ class GetEntities extends ApiWikibase {
 			if ( $page->exists() ) {
 
 				// as long as getWikiPageForId only returns ids for legal items this holds
+
+				if ( isset( $params['revision'] ) ) {
+					$revision = Revision::newFromPageId( $page->getId(), $params['revision'] );
+				} else {
+					$revision = $page->getRevision();
+				}
 				/**
 				 * @var $entityContent \Wikibase\EntityContent
 				 */
-				$entityContent = $page->getContent();
+				$entityContent = $revision->getContent();
 
 				// this should not happen unless a page is not what we assume it to be
 				// that is, we want this to be a little more solid if something ges wrong
@@ -228,7 +235,8 @@ class GetEntities extends ApiWikibase {
 					$revision = $page->getRevision();
 
 					if ( $revision !== null ) {
-						$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
+						$res->addValue( $entityPath, 'lastrevid', intval( $page->getRevision()->getId() ) );
+						$res->addValue( $entityPath, 'revid', intval( $revision->getId() ) );
 						$res->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
 					}
 				}
@@ -324,6 +332,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
+			'revision' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_ISMULTI => false,
+			),
 		) );
 	}
 
@@ -358,6 +370,8 @@ class GetEntities extends ApiWikibase {
 			),
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
+			),
+			'revision' => array( 'Get the content for this revision.'
 			),
 		) );
 	}
