@@ -82,6 +82,7 @@ class RemoveClaims extends ModifyClaim {
 	 * @return EntityId
 	 */
 	protected function getEntityId( array $params ) {
+		$claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 		$entityId = null;
 
 		foreach ( $params['claim'] as $guid ) {
@@ -90,11 +91,11 @@ class RemoveClaims extends ModifyClaim {
 			}
 
 			if ( !is_null( $entityId ) ) {
-				if ( Entity::getIdFromClaimGuid( $guid ) !== $entityId ) {
+				if ( !$claimGuidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
 					$this->dieUsage( 'All claims must belong to the same entity' , 'invalid-guid' );
 				}
 			} else {
-				$entityId = Entity::getIdFromClaimGuid( $guid );
+				$entityId = $claimGuidParser->parse( $guid );
 			}
 		}
 
