@@ -12623,6 +12623,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-item-summary-wbeditentity-update' => 'Zaktualizowano element',
 	'wikibase-item-summary-wbeditentity-override' => 'Nadpisano element',
 	'wikibase-item-summary-wbsetreference' => 'Wstawiono przypis',
+	'wikibase-item-summary-wbsetreference-add' => 'Dodano źródło do stwierdzenia',
 	'wikibase-item-summary-wbsetlabel-add' => 'Dodano etykietę [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Zmieniono etykietę [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Usunięto etykietę [$2]',
@@ -12652,7 +12653,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Zmieniono {{PLURAL:$4|kwalifikator|$4 kwalifikatory|$4 kwalifikatorów}} w {{PLURAL:$3|stwierdzeniu|stwierdzeniach}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Zmieniono {{PLURAL:$4|przypis|$4 przypisy|$4 przypisów}} w {{PLURAL:$3|stwierdzeniu|stwierdzeniach}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Zmieniono rangę {{PLURAL:$3|stwierdzenia|stwierdzeń}}',
-	'wikibase-item-summary-clientsitelink-update' => 'Strona przeniesiona z [$3] na [$4]',
+	'wikibase-item-summary-clientsitelink-update' => 'Strona przeniesiona z [$3] do [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-create' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-update' => 'Zaktualizowano właściwość',
@@ -13078,9 +13079,9 @@ $messages['pt-br'] = array(
 	'wikibase-blockeduser-tooltip-message' => 'Você não tem permissão para editar porque sua conta de usuário ou endereço IP foi bloqueado.',
 	'wikibase-move-error' => 'Você não pode mover páginas que estão no domínio de dados, além disso, você não pode mover páginas para dentro de tal domínio.',
 	'wikibase-error-sitelink-already-used' => 'A ligação [$1 $2] já é utilizada pelo item [[$3]].',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propriedade ($3) já tem o rótulo "$1" associado com o código de idioma $2', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Outra consulta ($3) já tem o rótulo "$1" associado com o código de idioma $2', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Outro item ($3) já tem o rótulo "$1" e a descrição "$4" associados com o código de idioma $2', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propriedade ($3) já tem o rótulo "$1" associado com o código de idioma $2.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Outra consulta ($3) já tem o rótulo "$1" associado com o código de idioma $2.',
+	'wikibase-error-label-not-unique-item' => 'Outro item ($3) já tem o rótulo "$1" e a descrição "$4" associados com o código de idioma $2.',
 	'special-itembytitle' => 'Item por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Pesquisar itens por site e título',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -13102,7 +13103,7 @@ $messages['pt-br'] = array(
 	'special-newproperty' => 'Criar uma nova propriedade',
 	'wikibase-newproperty-fieldset' => 'Criar uma nova propriedade',
 	'wikibase-newproperty-datatype' => 'Tipo de dados:',
-	'wikibase-newproperty-invalid-datatype' => 'O tipo de dados especificado é inválido', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'O tipo de dado especificado é inválido.',
 	'special-newitem' => 'Criar um novo item',
 	'wikibase-newitem-summary' => 'Tenha certeza de [[Special:ItemByTitle|conferir se o item já existe]]!<br/>Você deve criar um [[Help:Label|rótulo]] e uma [[Help:Description|descrição]] para todos os novos itens.', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Criar um novo item',
@@ -13432,6 +13433,7 @@ $messages['roa-tara'] = array(
  * @author Amire80
  * @author Ignatus
  * @author Kaganer
+ * @author Okras
  * @author Ole Yves
  * @author Putnik
  * @author ShinePhantom
@@ -13537,7 +13539,7 @@ $messages['ru'] = array(
 	'wikibase-newproperty-summary' => 'Убедитесь, что проверили, не существует ли уже такое свойство!<br />Вы должны указать для всех новых свойств [[Help:Label/ru|метку (название)]] и [[Help:Description/ru|описание]], и вдобавок — задать допустимый тип свойства.',
 	'wikibase-newproperty-fieldset' => 'Создать новое свойство',
 	'wikibase-newproperty-datatype' => 'Тип данных:',
-	'wikibase-newproperty-invalid-datatype' => 'Указан недопустимый тип данных', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Указан недопустимый тип данных.',
 	'special-newitem' => 'Создание нового элемента',
 	'wikibase-newitem-summary' => 'Убедитесь, что [[Special:ItemByTitle|проверили, не существует ли уже такой элемент]]!<br />Вы должны задать для всех новых элементов [[Help:Label|метку (название)]] и [[Help:Description|описание]].',
 	'wikibase-newitem-fieldset' => 'Создать новый элемент',
@@ -13623,7 +13625,7 @@ $messages['ru'] = array(
 	'wikibase-entitydata-text' => 'Эта страница предоставляет интерфейс связанных данных для значений сущности. Просьба предоставить идентификатор сущности в URL, используя синтаксис подстраниц.',
 	'special-mylanguagefallbackchain' => 'Моя цепочка резервных языков',
 	'wikibase-mylanguagefallbackchain-text' => 'Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице участника]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице участника]].', # Fuzzy
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 — $2, преобразованные из $3 — $4',
 	'wikibase-self-conflict-patched' => 'Ваша правка была помещена в последнюю версию, при этом были перекрыты некоторые из ваших собственных промежуточных изменений.',
 	'wikibase-conflict-patched' => 'Ваша правка было исправлена в последней версии.',
