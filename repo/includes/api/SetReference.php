@@ -51,10 +51,10 @@ class SetReference extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$entityId = $this->claimModificationHelper->getEntityIdFromString(
+		$entityId = $this->entityModificationHelper->getEntityIdFromString(
 			Entity::getIdFromClaimGuid( $params['statement'] )
 		);
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
 		$entityContent = $this->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );

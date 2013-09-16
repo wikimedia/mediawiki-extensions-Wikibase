@@ -50,7 +50,7 @@ class RemoveClaims extends ModifyClaim {
 
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
 		$entityContent = $this->getEntityContent( $entityTitle );
 
 		$this->checkClaims( $entityContent->getEntity(), $params['claim'] );
@@ -98,7 +98,7 @@ class RemoveClaims extends ModifyClaim {
 			}
 		}
 
-		return $this->claimModificationHelper->getEntityIdFromString( $entityId );
+		return $this->entityModificationHelper->getEntityIdFromString( $entityId );
 	}
 
 	/**

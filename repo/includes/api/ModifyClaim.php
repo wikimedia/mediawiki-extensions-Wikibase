@@ -8,7 +8,6 @@ use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\Summary;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Entity;
 use Wikibase\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -32,6 +31,13 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $claimModificationHelper;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var EntityModificationHelper
+	 */
+	protected $entityModificationHelper;
+
+	/**
 	 * see ApiBase::__construct()
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
@@ -51,6 +57,11 @@ abstract class ModifyClaim extends ApiWikibase {
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
 			$snakValidation
+		);
+
+		$this->entityModificationHelper = new EntityModificationHelper(
+			$mainModule,
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
 		);
 	}
 
