@@ -184,7 +184,7 @@ class SetAliasesTest extends LangAttributeTestCase {
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
 			array( //3
 				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id', 'message' => 'No entity found' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id', 'message' => 'Invalid entity ID' ) ) ),
 			array( //4
 				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site', 'message' => "Unrecognized value for parameter 'site'" ) ) ),
