@@ -61,7 +61,6 @@ return call_user_func( function() {
 		'Wikibase\SiteLink' => 'includes/SiteLink.php',
 		'Wikibase\Lib\SnakConstructionService' => 'includes/SnakConstructionService.php',
 		'Wikibase\SnakFactory' => 'includes/SnakFactory.php',
-		'Wikibase\Lib\OldSnakFormatter' => 'includes/OldSnakFormatter.php',
 		'Wikibase\Term' => 'includes/Term.php',
 		'Wikibase\Lib\TermsToClaimsTranslator' => 'includes/TermsToClaimsTranslator.php',
 		'Wikibase\Lib\TypedValueFormatter' => 'includes/TypedValueFormatter.php',
