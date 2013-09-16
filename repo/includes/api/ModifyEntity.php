@@ -43,7 +43,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 
-		$this->entityHelper = new entityHelper(
+		$this->entityHelper = new EntityHelper(
 			$main,
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
 		);
@@ -103,7 +103,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entityContent = $this->entityModificationHelper->getEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( is_null( $entityContent ) ) {
 			$this->dieUsage( "Can't access item content of " . $entityTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-entity' );

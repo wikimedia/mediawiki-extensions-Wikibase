@@ -69,7 +69,7 @@ abstract class ModifyClaim extends ApiWikibase {
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 
-		$this->entityHelper = new entityHelper(
+		$this->entityHelper = new EntityHelper(
 			$mainModule,
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
 		);
@@ -115,23 +115,6 @@ abstract class ModifyClaim extends ApiWikibase {
 				array( 'code' => 'failed-save', 'info' => $this->msg( 'wikibase-api-failed-save' )->text() ),
 			)
 		);
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param \Title $entityTitle
-	 *
-	 * @return EntityContent
-	 *
-	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
-	 */
-	protected function getEntityContent( \Title $entityTitle ) {
-		$params = $this->extractRequestParams();
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
-
-		return $entityContent;
 	}
 
 	/**
