@@ -16,6 +16,24 @@
       "revId": "bbe20d52913f6cb7ed43e162d808592eb633f0d3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_2a776f39",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-16T14:38:51Z",
+      "side": 1,
+      "message": "as the only line of code we need for reuse from modifyentity would be\n\n$permissions[] \u003d \u0027edit\u0027;",
+      "parentUuid": "4946a543_aab19ff9",
+      "revId": "bbe20d52913f6cb7ed43e162d808592eb633f0d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
