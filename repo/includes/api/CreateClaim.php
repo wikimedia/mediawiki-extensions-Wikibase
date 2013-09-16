@@ -35,12 +35,12 @@ class CreateClaim extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$entityId = $this->claimModificationHelper->getEntityIdFromString( $params['entity'] );
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		$entityId = $this->entityHelper->getEntityIdFromString( $params['entity'] );
+		$entityTitle = $this->entityHelper->getEntityTitleFromEntityId( $entityId );
 		$entityContent = $this->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 
-		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+		$propertyId = $this->entityHelper->getEntityIdFromString( $params['property'] );
 
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
