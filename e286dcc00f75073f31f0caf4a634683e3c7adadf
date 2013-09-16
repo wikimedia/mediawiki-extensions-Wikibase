@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_ca718b78",
+        "filename": "repo/tests/phpunit/includes/api/CreateClaimTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-16T14:08:22Z",
+      "side": 1,
+      "message": "I think this is something that has somehow got lost through all of the rebasing etc.. adding it back now",
+      "parentUuid": "4946a543_6a6257b2",
+      "revId": "e286dcc00f75073f31f0caf4a634683e3c7adadf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_2a8daf7c",
         "filename": "repo/tests/phpunit/includes/api/SetReferenceTest.php",
         "patchSetId": 8
@@ -48,6 +66,24 @@
       "writtenOn": "2013-09-16T13:29:20Z",
       "side": 1,
       "message": "The ID\u0027s structure seems to be hardcoded now in several tests. Can we avoid that?",
+      "revId": "e286dcc00f75073f31f0caf4a634683e3c7adadf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_ea6e4796",
+        "filename": "repo/tests/phpunit/includes/api/SetReferenceTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-16T14:08:22Z",
+      "side": 1,
+      "message": "currently this is no different to including a hardcoded entityId serialization in tests. Cant really see a way around it that makes sense.",
+      "parentUuid": "4946a543_2a8daf7c",
       "revId": "e286dcc00f75073f31f0caf4a634683e3c7adadf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
