@@ -140,12 +140,20 @@
 				} );
 			} );
 
-			$( '.wb-entity' )
-			.toolbarcontroller( { // BUILD TOOLBARS
+			// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
+			// be initialized:
+			var toolbarControllerConfig = {
 				addtoolbar: ['claimlistview', 'claimsection', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
 				edittoolbar: ['statementview', 'referenceview'],
 				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
-			} )
+			};
+
+			if( mw.config.get( 'wbExperimentalFeatures' ) ) {
+				toolbarControllerConfig.movetoolbar = ['claim-qualifiers-snak'];
+			}
+
+			$( '.wb-entity' )
+			.toolbarcontroller( toolbarControllerConfig ) // BUILD TOOLBARS
 			.claimgrouplabelscroll();
 		}
 
