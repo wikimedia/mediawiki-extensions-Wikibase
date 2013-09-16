@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_6a6257b2",
+        "filename": "repo/tests/phpunit/includes/api/CreateClaimTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-16T14:04:30Z",
+      "side": 1,
+      "message": "it should still be",
+      "parentUuid": "4946a543_ca950b88",
+      "revId": "e286dcc00f75073f31f0caf4a634683e3c7adadf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_2a8daf7c",
         "filename": "repo/tests/phpunit/includes/api/SetReferenceTest.php",
         "patchSetId": 8
