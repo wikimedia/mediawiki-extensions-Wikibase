@@ -102,6 +102,7 @@ return call_user_func( function() {
 		'Wikibase\Api\SnakValidationHelper' => 'includes/api/SnakValidationHelper.php',
 		'Wikibase\Api\ModifyClaim' => 'includes/api/ModifyClaim.php',
 		'Wikibase\Api\ClaimModificationHelper' => 'includes/api/ClaimModificationHelper.php',
+		'Wikibase\Api\EntityModificationHelper' => 'includes/api/EntityModificationHelper.php',
 
 		// includes/serializers
 		'Wikibase\Serializers\FetchedEntityContentSerializer' => 'includes/serializers/FetchedEntityContentSerializer.php',
