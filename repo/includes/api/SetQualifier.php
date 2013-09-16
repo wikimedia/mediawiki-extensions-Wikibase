@@ -36,7 +36,7 @@ class SetQualifier extends ModifyClaim {
 		$this->validateParameters( $params );
 
 		$entityId = $this->claimGuidParser->parse( $params['claim'] )->getEntityId();
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
 		$entityContent = $this->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
@@ -112,11 +112,11 @@ class SetQualifier extends ModifyClaim {
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		if ( isset( $params['snakhash'] ) ) {
-			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+			$propertyId = $this->entityModificationHelper->getEntityIdFromString( $params['property'] );
 			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, $params['snakhash'], $idFormatter );
 		} else {
-			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+			$propertyId = $this->entityModificationHelper->getEntityIdFromString( $params['property'] );
 			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '', $idFormatter );
 		}

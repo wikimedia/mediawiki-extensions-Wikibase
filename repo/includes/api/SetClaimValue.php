@@ -33,7 +33,7 @@ class SetClaimValue extends ModifyClaim {
 
 		$claimGuid = $params['claim'];
 		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
 		$entityContent = $this->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 

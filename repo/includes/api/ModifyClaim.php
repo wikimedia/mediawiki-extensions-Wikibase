@@ -39,6 +39,13 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $claimGuidParser;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var EntityModificationHelper
+	 */
+	protected $entityModificationHelper;
+
+	/**
 	 * see ApiBase::__construct()
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
@@ -61,6 +68,11 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+
+		$this->entityModificationHelper = new EntityModificationHelper(
+			$mainModule,
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+		);
 	}
 
 	/**
