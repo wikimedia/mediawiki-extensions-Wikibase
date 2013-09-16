@@ -55,7 +55,7 @@ class RemoveQualifiers extends ModifyClaim {
 			Entity::getIdFromClaimGuid( $claimGuid )
 		);
 		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
-		$entityContent = $this->getEntityContent( $entityTitle );
+		$entityContent = $this->entityModificationHelper->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 

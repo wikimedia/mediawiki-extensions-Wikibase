@@ -52,7 +52,7 @@ class SetClaimValue extends ModifyClaim {
 			Entity::getIdFromClaimGuid( $params['claim'] )
 		);
 		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
-		$entityContent = $this->getEntityContent( $entityTitle );
+		$entityContent = $this->entityModificationHelper->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 		$claimGuid = $params['claim'];
 

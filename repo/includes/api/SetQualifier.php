@@ -39,7 +39,7 @@ class SetQualifier extends ModifyClaim {
 			Entity::getIdFromClaimGuid( $params['claim'] )
 		);
 		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
-		$entityContent = $this->getEntityContent( $entityTitle );
+		$entityContent = $this->entityModificationHelper->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
@@ -74,7 +74,7 @@ class SetQualifier extends ModifyClaim {
 		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['claim'] ) ) ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
-		//@todo addshore all of these errors should be more general
+
 		if ( !isset( $params['snakhash'] ) ) {
 			if ( !isset( $params['snaktype'] ) ) {
 				$this->dieUsage( 'When creating a new qualifier (ie when not providing a snakhash) a snaktype should be specified', 'param-missing' );
