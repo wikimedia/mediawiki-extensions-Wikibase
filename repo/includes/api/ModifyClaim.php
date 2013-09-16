@@ -41,7 +41,7 @@ abstract class ModifyClaim extends ApiWikibase {
 	/**
 	 * @since 0.5
 	 *
-	 * @var entityHelper
+	 * @var EntityHelper
 	 */
 	protected $entityHelper;
 
