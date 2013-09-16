@@ -92,9 +92,9 @@ class ChangeOps {
 	 * @param Entity $entity
 	 * @param Summary|null $summary
 	 *
+	 * @throws ChangeOpException
 	 * @return bool
 	 *
-	 * @throws Change
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		try {

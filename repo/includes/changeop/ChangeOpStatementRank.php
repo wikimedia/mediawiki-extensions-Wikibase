@@ -33,7 +33,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpStatementRank extends ChangeOp {
+class ChangeOpStatementRank extends ChangeOpBase {
 
 	/**
 	 * @since 0.4
@@ -82,16 +82,7 @@ class ChangeOpStatementRank extends ChangeOp {
 	}
 
 	/**
-	 * Applies the change to the given entity
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary|null $summary
-	 *
-	 * @return bool
-	 *
-	 * @throws ChangeOpException
+	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );

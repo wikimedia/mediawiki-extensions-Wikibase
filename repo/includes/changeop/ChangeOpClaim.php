@@ -16,7 +16,7 @@ use Wikibase\Lib\ClaimGuidValidator;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ChangeOpClaim extends ChangeOp {
+class ChangeOpClaim extends ChangeOpBase {
 
 	/**
 	 * @since 0.4
@@ -63,16 +63,7 @@ class ChangeOpClaim extends ChangeOp {
 	}
 
 	/**
-	 * Applies the change to the given entity
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary|null $summary
-	 *
-	 * @return bool
-	 *
-	 * @throws ChangeOpException
+	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 

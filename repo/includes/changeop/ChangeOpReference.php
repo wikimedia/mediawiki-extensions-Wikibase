@@ -34,7 +34,7 @@ use Wikibase\Lib\EntityIdFormatter;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpReference extends ChangeOp {
+class ChangeOpReference extends ChangeOpBase {
 
 	/**
 	 * @since 0.4
@@ -100,20 +100,10 @@ class ChangeOpReference extends ChangeOp {
 	}
 
 	/**
-	 * Applies the change to the given entity
-	 *
+	 * @see ChangeOp::apply()
 	 * - the reference gets removed when $referenceHash is set and $reference is not set
 	 * - a new reference gets added when $referenceHash is empty and $reference is set
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary|null $summary
-	 *
-	 * @return bool
-	 *
-	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );

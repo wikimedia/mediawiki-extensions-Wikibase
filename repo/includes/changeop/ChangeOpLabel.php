@@ -29,7 +29,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpLabel extends ChangeOp {
+class ChangeOpLabel extends ChangeOpBase {
 
 	/**
 	 * @since 0.4
@@ -63,14 +63,7 @@ class ChangeOpLabel extends ChangeOp {
 	}
 
 	/**
-	 * Applies the change to the given entity
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary|null $summary
-	 *
-	 * @return bool
+	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->label === null ) {

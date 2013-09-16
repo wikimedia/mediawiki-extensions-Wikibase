@@ -32,7 +32,7 @@ use Wikibase\Lib\EntityIdFormatter;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpQualifier extends ChangeOp {
+class ChangeOpQualifier extends ChangeOpBase {
 
 	/**
 	 * @since 0.4
@@ -98,20 +98,10 @@ class ChangeOpQualifier extends ChangeOp {
 	}
 
 	/**
-	 * Applies the change to the given entity
-	 *
+	 * @see ChangeOp::apply()
 	 * - the qualifier gets removed when $snakHash is set and $snak is not set
 	 * - a new qualifier gets added when $snakHash is empty and $snak is set
 	 * - the qualifier gets set to $snak when $snakHash and $snak are set
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary|null $summary
-	 *
-	 * @return bool
-	 *
-	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );

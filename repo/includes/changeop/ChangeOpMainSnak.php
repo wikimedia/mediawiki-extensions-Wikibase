@@ -15,7 +15,7 @@ use Wikibase\Lib\EntityIdFormatter;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpMainSnak extends ChangeOp {
+class ChangeOpMainSnak extends ChangeOpBase {
 
 	/**
 	 * @since 0.4
@@ -73,20 +73,10 @@ class ChangeOpMainSnak extends ChangeOp {
 	}
 
 	/**
-	 * Applies the change to the given entity
-	 *
+	 * @see ChangeOp::apply()
 	 * - the claim gets removed when $claimGuid is set and $snak is not set
 	 * - a new claim with $snak as mainsnak gets added when $claimGuid is empty and $snak is set
 	 * - the claim's mainsnak gets set to $snak when $claimGuid and $snak are set
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary|null $summary
-	 *
-	 * @return bool
-	 *
-	 * @throws ChangeOpException
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );

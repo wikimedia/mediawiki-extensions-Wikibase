@@ -52,6 +52,7 @@ return call_user_func( function() {
 		// includes/changeop
 		'Wikibase\ChangeOps' => 'includes/changeop/ChangeOps.php',
 		'Wikibase\ChangeOp' => 'includes/changeop/ChangeOp.php',
+		'Wikibase\ChangeOpBase' => 'includes/changeop/ChangeOpBase.php',
 		'Wikibase\ChangeOpLabel' => 'includes/changeop/ChangeOpLabel.php',
 		'Wikibase\ChangeOpDescription' => 'includes/changeop/ChangeOpDescription.php',
 		'Wikibase\ChangeOpAliases' => 'includes/changeop/ChangeOpAliases.php',
