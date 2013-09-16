@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use Title;
 use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
@@ -73,6 +74,52 @@ class EntityHelper {
 		}
 
 		return $entityTitle;
+	}
+
+	/**
+	 * Load the entity content of the given revision.
+	 *
+	 * Will fail by calling dieUsage() if the revision can not be found or can not be loaded.
+	 *
+	 * @param Title   $title   : the title of the page to load the revision for
+	 * @param bool|int $revId   : the revision to load. If not given, the current revision will be loaded.
+	 * @param int      $audience
+	 * @param \User    $user
+	 * @param int      $audience: the audience to load this for, see Revision::FOR_XXX constants and
+	 *                          Revision::getContent().
+	 * @param \User    $user    : the user to consider if $audience == Revision::FOR_THIS_USER
+	 *
+	 * @return \Wikibase\EntityContent the revision's content.
+	 */
+	public function getEntityContent( Title $title, $revId = false,
+										  $audience = \Revision::FOR_PUBLIC,
+										  \User $user = null
+	) {
+		if ( $revId === null || $revId === false || $revId === 0 ) {
+			$page = \WikiPage::factory( $title );
+			$content = $page->getContent( $audience, $user );
+		} else {
+			$revision = \Revision::newFromId( $revId );
+
+			if ( !$revision ) {
+				$this->apiMain->dieUsage( "Revision not found: $revId", 'nosuchrevid' );
+			}
+
+			if ( $revision->getPage() != $title->getArticleID() ) {
+				$this->apiMain->dieUsage( "Revision $revId does not belong to " .
+				$title->getPrefixedDBkey(), 'nosuchrevid' );
+			}
+
+			$content = $revision->getContent( $audience, $user );
+		}
+
+		if ( is_null( $content ) ) {
+			$this->apiMain->dieUsage( "Can't access item content of " .
+			$title->getPrefixedDBkey() .
+			", revision may have been deleted.", 'cant-load-entity-content' );
+		}
+
+		return $content;
 	}
 
 }
