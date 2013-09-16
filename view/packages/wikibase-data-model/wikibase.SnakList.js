@@ -122,6 +122,23 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * Returns a list of wb.SnakList objects, each of them grouped by the property used by the
+	 * snaks.
+	 * @since 0.5
+	 *
+	 * @return {wikibase.SnakList[]}
+	 */
+	getGroupedSnakLists: function() {
+		var groupedSnakLists = [],
+			propertyIds = this.getPropertyOrder();
+
+		for( var i = 0; i < propertyIds.length; i++ ) {
+			groupedSnakLists.push( this.getFilteredSnakList( propertyIds[i] ) );
+		}
+
+		return groupedSnakLists;
+	},
+	/**
 	 * Returns whether the list contains a Snak equal to a given one.
 	 *
 	 * @since 0.4
