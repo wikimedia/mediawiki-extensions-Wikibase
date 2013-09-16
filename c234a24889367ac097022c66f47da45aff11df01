@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_0a4713c0",
+        "filename": "repo/includes/api/EntityModificationHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-16T15:21:29Z",
+      "side": 1,
+      "message": "Nothing here seems to be specific to *modifying* an Entity.  At least currently, it\u0027s just for juggling titles and IDs... \n\nBasically: the functional scope of this class is unclear, please clarify/rename to avoid creep.",
+      "revId": "c234a24889367ac097022c66f47da45aff11df01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
