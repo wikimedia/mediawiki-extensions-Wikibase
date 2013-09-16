@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_2ada0f14",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-16T15:12:36Z",
+      "side": 1,
+      "message": "It\u0027s a bit surprising that a method called getXXX is modifying the output...\nEither it should just return the ID and leave it to the called to generate output, or it should be renamed to reflect what it actually does.\n\nBut I\u0027m a bit confused really - should we always add this to the result, no matter what the entities we found are used for? Seems like this is mixing concerns.",
+      "revId": "80336956447d76baac52a4ef48ac63a25d3a46fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
