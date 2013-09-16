@@ -18,11 +18,7 @@ use Wikibase\SnakObject;
 /**
  * @covers Wikibase\ChangeOpClaim
  *
- * @file
  * @since 0.4
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseRepo
