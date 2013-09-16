@@ -140,13 +140,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 		return array(
 			array( //0 no entity id given
 				'p' => array( 'id' => '', 'data' => '{}'),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 			array( //1 invalid id
 				'p' => array( 'id' => 'abcde', 'data' => '{}'),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 			array( //2 invalid explicit id
 				'p' => array( 'id' => '1234', 'data' => '{}'),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 			array( //3 non existent sitelink
 				'p' => array( 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-link' ) ) ),

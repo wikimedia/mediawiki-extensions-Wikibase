@@ -31,10 +31,22 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $stringNormalizer;
 
+	/**
+	 * @since 0.5
+	 *
+	 * @var EntityModificationHelper
+	 */
+	protected $entityModificationHelper;
+
 	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+
+		$this->entityModificationHelper = new EntityModificationHelper(
+			$main,
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+		);
 	}
 
 	/**
@@ -71,24 +83,10 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
 		if ( isset( $params['id'] ) ) {
-			$id = $params['id'];
-
-			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-			try{
-				$entityId = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $id );
-			} catch( \ValueParsers\ParseException $e ){
-				$this->dieUsage( "Could not parse {$id}, No entity found", 'no-such-entity-id' );
-			}
-
-			$entityTitle = $entityId ? $entityContentFactory->getTitleForId( $entityId, \Revision::FOR_THIS_USER ) : null;
-			if ( is_null( $entityTitle ) ) {
-				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
-			}
-
+			$entityId = $this->entityModificationHelper->getEntityIdFromString( $params['id'] );
+			$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
 		}
-		// Otherwise check if we have a link and try that.
-		// This will always result in an item, because only items have sitelinks.
+		// Otherwise check if we have a link, This will always result in an item, because only items have sitelinks.
 		elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$itemHandler = new ItemHandler();
 
