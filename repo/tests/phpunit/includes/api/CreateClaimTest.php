@@ -76,9 +76,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
 		}
 
-		$entityId = \Wikibase\Entity::getIdFromClaimGuid( $claim['id'] );
-
-		$this->assertEquals( $this->getFormattedIdForEntity( $entity ), $entityId );
+		$this->assertStringStartsWith( $this->getFormattedIdForEntity( $entity ) , $claim['id'] );
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
