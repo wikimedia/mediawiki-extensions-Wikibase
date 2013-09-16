@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4946a543_7f5777c9",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-16T08:39:42Z",
+      "side": 1,
+      "message": "please use\n  $entityId \u003d $this-\u003eclaimModificationHelper-\u003egetEntityIdFromString( $params[\u0027id\u0027] );\ninstead",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "893c1da4_746260dc",
         "filename": "repo/includes/api/CopyClaim.php",
         "patchSetId": 5
@@ -36,6 +53,57 @@
     },
     {
       "key": {
+        "uuid": "4946a543_df45cb18",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-16T08:39:42Z",
+      "side": 1,
+      "message": "this whole logic should go into a separate method to reduce the complexity of the execute() method",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_3f5defe9",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-16T08:39:42Z",
+      "side": 1,
+      "message": "you don\u0027t need a ChangeOps object here because you\u0027ll only have one changeOp, so doing\n  $changeOp \u003d new ChangeOpClaim( $claimCopy, \u0027add\u0027, new ClaimGuidGenerator( $item-\u003egetID() );\n  $changeOp-\u003eapply( $item );\nis enough.",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_7f3e9789",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-16T08:39:42Z",
+      "side": 1,
+      "message": "please use\n  $summary \u003d $this-\u003eclaimModificationHelper-\u003ecreateSummary( $params, $this );\ninstead",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "893c1da4_31238ac2",
         "filename": "repo/includes/api/CopyClaim.php",
         "patchSetId": 5
@@ -47,6 +115,40 @@
       "writtenOn": "2013-09-05T12:29:04Z",
       "side": 1,
       "message": "attemptSaveEntity takes a string as the summary param. so -\u003etoString()",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_9f434316",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-16T08:39:42Z",
+      "side": 1,
+      "message": "please use \n  $this-\u003esaveChanges( $entityContent, $summary );\ninstead",
+      "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_5f39db9f",
+        "filename": "repo/includes/api/CopyClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-16T08:39:42Z",
+      "side": 1,
+      "message": "please use\n  $this-\u003eclaimModificationHelper-\u003eaddClaimToApiResult( $claim );\ninstead",
       "revId": "dab0beab9e5b4a133f31a6cb831670b4a9ab4f1c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
