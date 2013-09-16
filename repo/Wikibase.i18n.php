@@ -537,10 +537,10 @@ Parameters:
 {{Related|Wikibase-input-help-message}}',
 	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
-	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
-* $1 is the item label.',
 	'wikibase-move-up' => 'Label of a link to move a list item one step up within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.',
 	'wikibase-move-down' => 'Label of a link to move a list item one step down within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.',
+	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
+* $1 is the item label.',
 	'wikibase-restore-title' => 'Title shown on the form for restoring old revisions. Example is Restoring Old Revision of "Spain". Parameters:
 * $1 is the item label.',
 	'wikibase-partial-undo' => 'Message indicating that an edit can only partially be undone. This happens when the respective value has been changed again after the edit that is being undone.',
@@ -14921,6 +14921,8 @@ $messages['uk'] = array(
 	'wikibase-sitelinks-empty' => 'Жодна сторінка сайту ще не посилається сюди.',
 	'wikibase-sitelinks-input-help-message' => 'Вкажіть посилання на сторінку, що відноситься до цього пункту.',
 	'wikibase-remove' => 'вилучити',
+	'wikibase-move-up' => 'вгору',
+	'wikibase-move-down' => 'вниз',
 	'wikibase-undo-title' => 'Скасування редагування «$1»',
 	'wikibase-restore-title' => 'Відновлення старої версії «$1»',
 	'wikibase-partial-undo' => 'Це редагування може бути частково скасоване.',

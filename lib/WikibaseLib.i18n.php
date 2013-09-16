@@ -1859,6 +1859,7 @@ $messages['kk-cyrl'] = array(
 
 /** Korean (한국어)
  * @author Kwj2772
+ * @author 관인생략
  * @author 아라
  */
 $messages['ko'] = array(
@@ -1891,8 +1892,8 @@ $messages['ko'] = array(
 	'wikibase-error-ui-no-permissions' => '이 작업을 수행할 수 있는 충분한 권한이 없습니다.',
 	'wikibase-error-ui-link-exists' => '다른 항목을 이미 링크했기 때문에 이 문서에 링크할 수 없습니다.',
 	'wikibase-error-ui-session-failure' => '세션이 만료되었습니다. 다시 로그인하세요.',
-	'wikibase-error-ui-edit-conflict' => '편집 충돌입니다. 다시 불러오고 나서 다시 저장하세요.',
-	'wikibase-replicationnote' => '바뀜을 모든 위키에 보이는 시간이 걸릴 수 있음에 주의하세요.',
+	'wikibase-error-ui-edit-conflict' => '편집 충돌이 발생했습니다. 다시 불러오고 나서 다시 저장하세요.',
+	'wikibase-replicationnote' => '바뀐 내용이 모든 위키에 보이는데 시간이 걸릴 수 있음을 주의하세요.',
 	'wikibase-sitelinks-wikipedia' => '이 항목으로 링크한 위키백과 문서',
 	'wikibase-sitelinks-sitename-columnheading' => '언어',
 	'wikibase-sitelinks-siteid-columnheading' => '코드',
@@ -1900,7 +1901,7 @@ $messages['ko'] = array(
 	'wikibase-tooltip-error-details' => '자세한 사항',
 	'wikibase-validator-bad-type' => '$1 대신 $2',
 	'wikibase-validator-too-long' => '{{PLURAL:$1|한 문자|$1 문자}}보다 더 길지 않아야 합니다',
-	'wikibase-validator-too-short' => '{{PLURAL:$1|한 문자|$1 문자}} 이상 길어야 합니다',
+	'wikibase-validator-too-short' => '{{PLURAL:$1|한 문자|$1 문자}} 이상이어야 합니다',
 	'wikibase-validator-malformed-value' => '잘못된 형식의 입력: $1',
 	'wikibase-validator-bad-entity-id' => '잘못된 형식의 ID: $1',
 	'wikibase-validator-bad-entity-type' => '예기치 않은 $1 개체 유형',
