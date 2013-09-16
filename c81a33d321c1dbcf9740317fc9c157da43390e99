@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_fadff2d0",
+        "filename": "repo/includes/api/EntityHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-16T20:53:28Z",
+      "side": 1,
+      "message": "I know this might be splitting the code from another fail class, though nevertheless this is not good code.\n\nIt has two public methods that do something completely different, and has a class description that suggests other methods that happen to do anything vaguely related to \"entities\" should go in here as well. Also note how both methods need a different service to operate. The first one needs an id parser, while the second one needs an entity content factory. What if I need the second method? Why do I need to provide an id parser?\n\nSRP violation, OCP violation, ISP violation...\n\nWhat for? To not repeat 3 lines of code 5 times? This likely is more actual code, more complexity and definitely more spaghetti.\n\n\"FooHelper\" is a class name screaming you are doing something wrong.",
+      "revId": "c81a33d321c1dbcf9740317fc9c157da43390e99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
