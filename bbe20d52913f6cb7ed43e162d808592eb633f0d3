@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_aab19ff9",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-16T14:29:15Z",
+      "side": 1,
+      "message": "why does it not extend ModifyEntity?",
+      "revId": "bbe20d52913f6cb7ed43e162d808592eb633f0d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
