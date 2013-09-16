@@ -87,6 +87,24 @@
       "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_905df820",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-16T14:11:45Z",
+      "side": 1,
+      "message": "I prefer \u0027nodummys\u0027/\u0027withdummies\u0027, because it specifies precisely what to do. When reading the call with \u0027forread\u0027/\u0027forwrite\u0027, you don\u0027t get additional information, while with \u0027nodummys\u0027/\u0027withdummies\u0027 it\u0027S obvious what you are expecting to get back.",
+      "parentUuid": "4946a543_1b7f72de",
+      "revId": "663f5ebede0c76bca765d9955c81822a2af183ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
