@@ -199,22 +199,22 @@ class EditEntity extends ModifyEntity {
 		if ( !is_array( $labels ) ) {
 			$this->dieUsage( "List of labels must be an array", 'not-recognized-array' );
 		}
-
 		foreach ( $labels as $langCode => $arg ) {
 			$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
-
-			$language = $arg['language'];
-			$newLabel = $this->stringNormalizer->trimToNFC( $arg['value'] );
-
-			if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
-				$labelChangeOps[] = new ChangeOpLabel( $language, null );
-			}
-			else {
-				$labelChangeOps[] = new ChangeOpLabel( $language, $newLabel );
-			}
+			$labelChangeOps[] = $this->getLabelChangeOp( $arg );
 		}
 
 		return $labelChangeOps;
+	}
+
+	protected function getLabelChangeOp( $arg ){
+		$newLabel = $this->stringNormalizer->trimToNFC( $arg['value'] );
+		if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
+			return new ChangeOpLabel( $arg['language'], null );
+		}
+		else {
+			return new ChangeOpLabel( $arg['language'], $newLabel );
+		}
 	}
 
 	/**
@@ -231,22 +231,22 @@ class EditEntity extends ModifyEntity {
 		if ( !is_array( $descriptions ) ) {
 			$this->dieUsage( "List of descriptions must be an array", 'not-recognized-array' );
 		}
-
 		foreach ( $descriptions as $langCode => $arg ) {
 			$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
-
-			$language = $arg['language'];
-			$newDescription = $this->stringNormalizer->trimToNFC( $arg['value'] );
-
-			if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
-				$descriptionChangeOps[] = new ChangeOpDescription( $language, null );
-			}
-			else {
-				$descriptionChangeOps[] = new ChangeOpDescription( $language, $newDescription );
-			}
+			$descriptionChangeOps[] = $this->getDescriptionChangeOp( $arg );
 		}
 
 		return $descriptionChangeOps;
+	}
+
+	protected function getDescriptionChangeOp( $arg ){
+		$newDescription = $this->stringNormalizer->trimToNFC( $arg['value'] );
+		if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
+			$descriptionChangeOps[] = new ChangeOpDescription( $arg['language'], null );
+		}
+		else {
+			$descriptionChangeOps[] = new ChangeOpDescription( $arg['language'], $newDescription );
+		}
 	}
 
 	/**
@@ -320,36 +320,38 @@ class EditEntity extends ModifyEntity {
 		if ( !is_array( $siteLinks ) ) {
 			$this->dieUsage( "List of sitelinks must be an array", 'not-recognized-array' );
 		}
-
 		$sites = $this->getSiteLinkTargetSites();
-
 		foreach ( $siteLinks as $siteId => $arg ) {
 			$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
-			$globalSiteId = $arg['site'];
-			$pageTitle = $arg['title'];
-
-			if ( $sites->hasSite( $globalSiteId ) ) {
-				$linkSite = $sites->getSite( $globalSiteId );
-			} else {
-				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
-			}
-
-			if ( array_key_exists( 'remove', $arg ) || $pageTitle === "" ) {
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, null );
-			} else {
-				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $pageTitle ) );
-
-				if ( $linkPage === false ) {
-					$this->dieUsage(
-						"The external client site did not provide page information for site '{$globalSiteId}' and title '{$pageTitle}'",
-						'no-external-page' );
-				}
-
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
-			}
+			$siteLinksChangeOps[] = $this->getSitelinkChangeOp( $arg, $sites );
 		}
 
 		return $siteLinksChangeOps;
+	}
+
+	protected function getSitelinkChangeOp( $arg, \SiteList $sites ){
+		$globalSiteId = $arg['site'];
+		$pageTitle = $arg['title'];
+
+		if ( $sites->hasSite( $globalSiteId ) ) {
+			$linkSite = $sites->getSite( $globalSiteId );
+		} else {
+			$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
+		}
+
+		if ( array_key_exists( 'remove', $arg ) || $pageTitle === "" ) {
+			return new ChangeOpSiteLink( $globalSiteId, null );
+		} else {
+			$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $pageTitle ) );
+
+			if ( $linkPage === false ) {
+				$this->dieUsage(
+					"The external client site did not provide page information for site '{$globalSiteId}' and title '{$pageTitle}'",
+					'no-external-page' );
+			}
+
+			return new ChangeOpSiteLink( $globalSiteId, $linkPage );
+		}
 	}
 
 	/**
