@@ -10,7 +10,7 @@ use Wikibase\ChangeOpQualifier;
 use Wikibase\ChangeOpException;
 
 /**
- * API module for creating a qualifier or setting the value of an existing one.
+ * API module for creating a qualifier or setting the value of an existing one. Foo.
  *
  * @since 0.3
  *
