@@ -53,7 +53,7 @@ class RemoveReferences extends ModifyClaim {
 		$claimGuid = $params['statement'];
 		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
 		$entityTitle = $this->entityModificationHelper->getEntityTitleFromEntityId( $entityId );
-		$entityContent = $this->getEntityContent( $entityTitle );
+		$entityContent = $this->entityModificationHelper->getEntityContent( $entityTitle );
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 

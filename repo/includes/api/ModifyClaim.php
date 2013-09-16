@@ -118,23 +118,6 @@ abstract class ModifyClaim extends ApiWikibase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @param \Title $entityTitle
-	 *
-	 * @return EntityContent
-	 *
-	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
-	 */
-	protected function getEntityContent( \Title $entityTitle ) {
-		$params = $this->extractRequestParams();
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
-
-		return $entityContent;
-	}
-
-	/**
 	 * @see  \Wikibase\Api\ApiWikibase::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
