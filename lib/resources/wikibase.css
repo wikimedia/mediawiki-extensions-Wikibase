@@ -734,21 +734,21 @@ div.wb-statement-references .wb-error {
 	min-height: 3.2em;
 }
 
-.wb-referenceview .wb-snaklistview-heading {
+.wb-referenceview .wb-referenceview-heading {
 	min-height: 1.5em;
 	padding: 5px;
 	background-color: #F0F0F0;
 }
 
-.wb-referenceview .wb-snaklistview-heading .wb-snaklistview-toolbar .wb-editsection {
+.wb-referenceview .wb-referenceview-heading .wb-snaklistview-toolbar .wb-editsection {
 	top: 5px;
 }
 
-.wb-statement-references .wb-edit > .wb-snaklistview-heading {
+.wb-statement-references .wb-edit > .wb-referenceview-heading {
 	background-color: #C0DAE5;
 }
 
-.wb-statement-references .wb-error > .wb-snaklistview-heading {
+.wb-statement-references .wb-error > .wb-referenceview-heading {
 	background-color: #E5C8B5;
 }
 

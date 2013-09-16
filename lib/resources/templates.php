@@ -111,10 +111,19 @@ HTML;
 	</div>
 	<div class="wb-statement-references-container">
 		<div class="wb-statement-references-heading">$6</div>
-		<div class="wb-statement-references">$7 <!-- [0,*] wb-reference --></div>
+		<div class="wb-statement-references">$7 <!-- [0,*] wb-referenceview --></div>
 	</div>
 </div>
 HTML;
+
+	$templates['wb-referenceview'] =
+<<<HTML
+<div>
+	<div class="wb-referenceview-heading"></div>
+	$1<!-- [0,*] wb-snaklistview -->
+</div>
+HTML;
+
 
 	$templates['wb-listview'] =
 <<<HTML
@@ -124,8 +133,7 @@ HTML;
 	$templates['wb-snaklistview'] =
 <<<HTML
 <div class="wb-snaklistview">
-	<div class="wb-snaklistview-heading"></div>
-	<div class="wb-snaklistview-listview">$1</div> <!-- wb-listview -->
+	<div class="wb-snaklistview-listview">$1<!-- wb-listview --></div>
 </div>
 HTML;
 
