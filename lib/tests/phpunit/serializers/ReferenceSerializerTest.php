@@ -54,6 +54,9 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 		$snakSerializer = new SnakSerializer();
 
 		$reference = new \Wikibase\Reference( new \Wikibase\SnakList( $snaks ) );
+		$sortedReference = new \Wikibase\Reference( new \Wikibase\SnakList(
+			array( $snaks[0], $snaks[2], $snaks[1], $snaks[3], $snaks[4] )
+		) );
 
 		$validArgs[] = array(
 			$reference,
@@ -73,6 +76,8 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 					),
 				),
 			),
+			null,
+			$sortedReference,
 		);
 
 		return $validArgs;
