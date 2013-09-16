@@ -47,6 +47,7 @@ return call_user_func( function() {
 		'Wikibase\NamespaceUtils' => 'includes/NamespaceUtils.php',
 		'Wikibase\PropertyView' => 'includes/PropertyView.php',
 		'Wikibase\Summary' => 'includes/Summary.php',
+		'Wikibase\SummaryFormatter' => 'includes/SummaryFormatter.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
 
 		// includes/changeop
