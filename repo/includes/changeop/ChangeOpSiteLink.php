@@ -31,7 +31,7 @@ use Wikibase\DataModel\SimpleSiteLink;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpSiteLink extends ChangeOp {
+class ChangeOpSiteLink extends ChangeOpBase {
 
 	/**
 	 * @since 0.4
@@ -69,15 +69,7 @@ class ChangeOpSiteLink extends ChangeOp {
 	}
 
 	/**
-	 * Applies the change to the given entity
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary|null $summary
-	 *
-	 * @throws InvalidArgumentException
-	 * @throws ChangeOpException
+	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {
