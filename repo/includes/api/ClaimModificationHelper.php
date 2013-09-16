@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\SnakConstructionService;
 use ApiBase, MWException;
@@ -13,7 +14,6 @@ use Wikibase\Claims;
 use Wikibase\Summary;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Entity;
-use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -125,10 +125,10 @@ class ClaimModificationHelper {
 	 *
 	 * @return \Title
 	 *
-	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
+	 * @deprecated use EntityHelper::getEntityTitleFromEntityId()
 	 */
 	public function getEntityTitle( EntityId $entityId ) {
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+		$entityTitle = $this->entityContentFactory->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
 			$this->apiMain->dieUsage( 'No such entity' , 'no-such-entity' );
@@ -223,11 +223,10 @@ class ClaimModificationHelper {
 	 * Parses an entity id string coming from the user
 	 *
 	 * @since 0.4
-	 *
 	 * @param string $entityIdParam
+	 * @return EntityId
 	 *
-	 * TODO: this could go into an EntityModificationHelper or even in a ApiWikibaseHelper
-	 * as it is useful for almost all API modules
+	 * @deprecated use EntityHelper::getEntityIdFromString()
 	 */
 	public function getEntityIdFromString( $entityIdParam ) {
 		try {
