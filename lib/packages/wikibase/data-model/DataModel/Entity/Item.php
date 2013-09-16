@@ -251,7 +251,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Entity::newClaim
+	 * @see Entity::newClaimBase
 	 *
 	 * @since 0.3
 	 *
@@ -259,7 +259,7 @@ class Item extends Entity {
 	 *
 	 * @return Statement
 	 */
-	public function newClaim( Snak $mainSnak ) {
+	protected function newClaimBase( Snak $mainSnak ) {
 		return new Statement( $mainSnak );
 	}
 
