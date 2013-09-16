@@ -90,10 +90,19 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 		 * @return {string}
 		 */
 		decimal: function( gc ) {
+			var latitude = gc.getLatitude();
+			var longitude = gc.getLongitude();
+			var precision = gc.getPrecision();
+
+			if( gc.getPrecision() ) {
+				latitude = globeCoordinate.toDecimal( latitude, precision );
+				longitude = globeCoordinate.toDecimal( longitude, precision );
+			}
+
 			return ''
-				+ globeCoordinate.toDecimal( gc.getLatitude(), gc.getPrecision() )
+				+ latitude
 				+ this._options.latLongCombinator
-				+ globeCoordinate.toDecimal( gc.getLongitude(), gc.getPrecision() );
+				+ longitude;
 		},
 
 		/**
