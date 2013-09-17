@@ -219,7 +219,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		// collect information and create an EditEntity
 		$status = $this->attemptSaveEntity(
 			$entityContent,
-			$summary->toString(),
+			$summary,
 			$this->flags
 		);
 
