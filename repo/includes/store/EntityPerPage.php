@@ -101,7 +101,9 @@ interface EntityPerPage {
 	/**
 	 * Returns an iterator providing an EntityId object for each entity.
 	 *
+	 * @param string $entityType The type of entity to return, or null for any type.
+	 *
 	 * @return Iterator
 	 */
-	public function getEntities();
+	public function getEntities( $entityType = null );
 }
