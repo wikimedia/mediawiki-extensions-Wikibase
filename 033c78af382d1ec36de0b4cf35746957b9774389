@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_eb4646c2",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T13:46:13Z",
+      "side": 1,
+      "message": "Maybe you\u0027ll want to add your name here?",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_4b167aa7",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T13:46:13Z",
+      "side": 1,
+      "message": "Please provide a pointer to some information about the -{...}- syntax. I have no idea what it is.",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_ab251e0e",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T13:46:13Z",
+      "side": 1,
+      "message": "What does this condition effectively check? What does it *mean*? Could be made obvious by moving it to a properly named function, or at least use a properly named local variable. Would \"isWikitextOutputExpected\" fit the bill?",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_0b1d52ba",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T13:46:13Z",
+      "side": 1,
+      "message": "It would be better to ask for an EntityLookup, a PropertyLabelResolver and a SnakFormatter in the constructor. \n\nActually, to make this less painful, you could just inject the PropertyParserFunctionRenderer into the constructor of PropertyParserFunction. That would also make the initialization code clearer.",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_2b7a0eef",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T13:46:13Z",
+      "side": 1,
+      "message": "This loop should go into its own function, so it has a name. That will make this function more readable.",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_4b7f5add",
+        "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T13:46:13Z",
+      "side": 1,
+      "message": "We have decided to no longer include the GPL block in every file, and remove it when we find it somewhere.",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_8b8942ef",
+        "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T13:46:13Z",
+      "side": 1,
+      "message": "Want to add your name here?",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
