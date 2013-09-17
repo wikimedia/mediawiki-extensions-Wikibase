@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use DataValues\TimeValue;
 use InvalidArgumentException;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * EditSummary-Builder for claim operations
@@ -16,7 +16,6 @@ use Wikibase\Lib\SnakFormatter;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Daniel Kinzler
  */
 class ClaimSummaryBuilder {
 
@@ -31,9 +30,9 @@ class ClaimSummaryBuilder {
 	private $claimDiffer;
 
 	/**
-	 * @var Lib\SnakFormatter
+	 * @var EntityIdFormatter
 	 */
-	private $snakValueFormatter;
+	private $idFormatter;
 
 	/**
 	 * Constructs a new ClaimSummaryBuilder
@@ -42,24 +41,18 @@ class ClaimSummaryBuilder {
 	 *
 	 * @param string $apiModuleName
 	 * @param ClaimDiffer $claimDiffer
-	 * @param SnakFormatter $snakValueFormatter
+	 * @param EntityIdFormatter $idFormatter
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer, SnakFormatter $snakValueFormatter ) {
+	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer, EntityIdFormatter $idFormatter ) {
 		if ( !is_string( $apiModuleName ) ) {
 			throw new InvalidArgumentException( '$apiModuleName needs to be a string' );
 		}
 
-		if ( $snakValueFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
-			throw new InvalidArgumentException(
-				'Expected $snakValueFormatter to procude plain text output, not '
-						. $snakValueFormatter->getFormat() );
-		}
-
 		$this->apiModuleName = $apiModuleName;
 		$this->claimDiffer = $claimDiffer;
-		$this->snakValueFormatter = $snakValueFormatter;
+		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -129,13 +122,22 @@ class ClaimSummaryBuilder {
 		foreach( $guids as $guid ) {
 			if ( $claims->hasClaimWithGuid( $guid ) ) {
 				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
-				$key = $snak->getPropertyId()->getPrefixedId();
+				$key = $this->idFormatter->format( $snak->getPropertyId() );
 
 				if ( !array_key_exists( $key, $pairs ) ) {
 					$pairs[$key] = array();
 				}
 
-				$value = $this->snakValueFormatter->formatSnak( $snak );
+				if ( $snak instanceof PropertyValueSnak ) {
+					$value = $snak->getDataValue();
+					// TODO: we should use value formatters here!
+					if ( $value instanceof TimeValue ) {
+						$value = $value->getTime();
+					}
+				} else {
+					$value = $snak->getType(); // todo handle no values in general way (needed elsewhere)
+				}
+
 				$pairs[$key][] = $value;
 			}
 		}
