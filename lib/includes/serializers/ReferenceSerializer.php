@@ -56,6 +56,15 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['snaks'] = $snaksSerializer->getSerialized( $reference->getSnaks() );
 
+		$serialization['snaks-order'] = array();
+		foreach( $reference->getSnaks() as $snak ) {
+			$id = $snak->getPropertyId()->getPrefixedId();
+			if( !in_array( $id, $serialization['snaks-order'] ) ) {
+				$serialization['snaks-order'][] = $id;
+			}
+		}
+		$this->setIndexedTagName( $serialization['snaks-order'], 'property' );
+
 		return $serialization;
 	}
 
@@ -74,10 +83,36 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 			throw new MWException( 'A reference serialization needs to have a list of snaks' );
 		}
 
+		$sortedSnaks = array();
+
+		if(
+			!array_key_exists( 'snaks-order', $serialization )
+			|| !is_array( $serialization['snaks-order'] )
+		) {
+			$sortedSnaks = $serialization['snaks'];
+
+		} else {
+			foreach( $serialization['snaks-order'] as $propertyId ) {
+				if( !isset( $serialization['snaks'][$propertyId] ) ) {
+					throw new MWException( 'No snaks with property id "' . $propertyId . '" found '
+					. 'in "snaks" parameter although specified in "snaks-order"' );
+				}
+
+				$sortedSnaks[$propertyId] = $serialization['snaks'][$propertyId];
+			}
+
+			$missingProperties = array_diff_key( $sortedSnaks, $serialization['snaks'] );
+
+			if( count( $missingProperties ) > 0 ) {
+				throw new MWException( 'Property ids ' . implode( ', ', $missingProperties )
+				. ' have not been specified in "snaks-order"' );
+			}
+		}
+
 		$snakUnserializer = new SnakSerializer( $this->options );
 		$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
 
-		$snaks = $snaksUnserializer->newFromSerialization( $serialization['snaks'] );
+		$snaks = $snaksUnserializer->newFromSerialization( $sortedSnaks );
 
 		$reference = new Reference( new \Wikibase\SnakList( $snaks ) );
 
