@@ -470,6 +470,7 @@ $messages['ia'] = array(
 	'valueview-expert-globecoordinateinput-precision' => 'Precision:',
 	'valueview-expert-timevalue-calendar-gregorian' => 'Gregorian',
 	'valueview-expert-timevalue-calendar-julian' => 'Julian',
+	'valueview-expert-timeinput-precision' => 'Precision:',
 	'valueview-expert-timeinput-calendar' => 'Calendario:',
 	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendario gregorian)',
 	'valueview-expert-timeinput-calendarhint-julian' => '(Calendario julian)',
