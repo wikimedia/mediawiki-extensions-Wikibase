@@ -103,7 +103,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\SnakFormatter' => 'includes/formatters/SnakFormatter.php',
 		'Wikibase\Lib\OutputFormatSnakFormatterFactory' => 'includes/formatters/OutputFormatSnakFormatterFactory.php',
 		'Wikibase\Lib\OutputFormatValueFormatterFactory' => 'includes/formatters/OutputFormatValueFormatterFactory.php',
-		'Wikibase\Lib\WikibaseSnakFormatterBuilders' => 'includes/formatters/WikibaseSnakFormatterBuilders.php',
+		'Wikibase\Lib\WikibaseFormatterBuilders' => 'includes/formatters/WikibaseFormatterBuilders.php',
 
 		// includes/IO
 		'Wikibase\IO\LineReader' => 'includes/IO/LineReader.php',
