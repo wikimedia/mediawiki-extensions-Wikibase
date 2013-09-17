@@ -139,8 +139,8 @@ class WikibaseSnakFormatterBuilders {
 	public function buildDispatchingSnakFormatter( SnakFormatterFactory $factory, $format, FormatterOptions $options ) {
 		$this->initLanguageDefaults( $options );
 
-		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', wfMessage( 'wikibase-snakview-snaktypeselector-novalue', $this->defaultLanguage ), $format );
-		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', wfMessage( 'wikibase-snakview-snaktypeselector-somevalue', $this->defaultLanguage ), $format );
+		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', wfMessage( 'wikibase-snakview-snaktypeselector-novalue', $this->defaultLanguage->getCode() ), $format );
+		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', wfMessage( 'wikibase-snakview-snaktypeselector-somevalue', $this->defaultLanguage->getCode() ), $format );
 		$valueSnakFormatter = $this->buildValueSnakFormatter( $factory, $format, $options );
 
 		$formatters = array(
