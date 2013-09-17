@@ -36,6 +36,11 @@ use Wikibase\Repo\WikibaseRepo;
 class UpdateRepoOnMoveJob extends \Job {
 
 	/**
+	 * @var SummaryFormatter
+	 */
+	private $summaryFormatter = null;
+
+	/**
 	 * Constructs a UpdateRepoOnMoveJob propagating a page move to the repo
 	 *
 	 * @note: This is for use by Job::factory, don't call it directly;
@@ -214,8 +219,10 @@ class UpdateRepoOnMoveJob extends \Job {
 
 		$item->addSimpleSiteLink( $siteLink );
 
+		$summaryString = $this->summaryFormatter->formatSUmmary( $summary );
+
 		$status = $editEntity->attemptSave(
-			$summary->toString(),
+			$summaryString,
 			EDIT_UPDATE,
 			false,
 			// Don't (un)watch any pages here, as the user didn't explicitly kick this off
@@ -244,6 +251,12 @@ class UpdateRepoOnMoveJob extends \Job {
 			wfLogWarning( 'User ' . $params['user'] . " doesn't exist while CentralAuth pretends it does" );
 			wfProfileOut( __METHOD__ );
 			return true;
+		}
+
+		if ( $this->summaryFormatter === null ) {
+			// No good way to do proper injection here...
+			// NOTE: this will fail with a fatal error when run on the client!
+			$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 		}
 
 		$this->updateSiteLink(

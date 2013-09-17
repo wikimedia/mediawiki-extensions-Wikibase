@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use Language;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\StringFormatter;
 use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -15,21 +16,26 @@ use Wikibase\EntityLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
+use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\EntityIdTitleFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\Lib\WikibaseFormatterBuilders;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Store;
 use Wikibase\StoreFactory;
 use Wikibase\SnakFactory;
 use Wikibase\StringNormalizer;
+use Wikibase\SummaryFormatter;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -113,6 +119,16 @@ class WikibaseRepo {
 	 * @var OutputFormatSnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
+
+	/**
+	 * @var OutputFormatValueFormatterFactory
+	 */
+	private $valueFormatterFactory;
+
+	/**
+	 * @var SummaryFormatter
+	 */
+	private $summaryFormatter;
 
 	/**
 	 * @since 0.4
@@ -378,7 +394,6 @@ class WikibaseRepo {
 		return StoreFactory::getStore();
 	}
 
-
 	/**
 	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
@@ -397,7 +412,7 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
-		$builders = new WikibaseSnakFormatterBuilders(
+		$builders = new WikibaseFormatterBuilders(
 			$this->getEntityLookup(),
 			$this->getPropertyDataTypeLookup(),
 			$this->contentLanguage
@@ -405,5 +420,74 @@ class WikibaseRepo {
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 		return $factory;
+	}
+
+	/**
+	 * Returns a OutputFormatValueFormatterFactory the provides ValueFormatters
+	 * for different output formats.
+	 *
+	 * @return OutputFormatValueFormatterFactory
+	 */
+	public function getValueFormatterFactory() {
+		if ( !$this->valueFormatterFactory ) {
+			$this->valueFormatterFactory = $this->newValueFormatterFactory();
+		}
+
+		return $this->valueFormatterFactory;
+	}
+
+	/**
+	 * @return OutputFormatValueFormatterFactory
+	 */
+	protected function newValueFormatterFactory() {
+		$builders = new WikibaseFormatterBuilders(
+			$this->getEntityLookup(),
+			$this->getPropertyDataTypeLookup(),
+			$this->contentLanguage
+		);
+
+		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+		return $factory;
+	}
+
+	/**
+	 * Returns a SummaryFormatter.
+	 *
+	 * @return SummaryFormatter
+	 */
+	public function getSummaryFormatter() {
+		if ( !$this->summaryFormatter ) {
+			$this->summaryFormatter = $this->newSummaryFormatter();
+		}
+
+		return $this->summaryFormatter;
+	}
+
+	/**
+	 * @return SummaryFormatter
+	 */
+	protected function newSummaryFormatter() {
+		$options = new FormatterOptions();
+		$titleLookup = $this->getEntityContentFactory();
+		$idFormatter = new EntityIdTitleFormatter( $options, $titleLookup );
+
+		$options = new FormatterOptions();
+		$options->setOption( 'formatter-builders-text/plain', array(
+			'VT:wikibase-entityid' => function() use ( $idFormatter ) {
+				return $idFormatter;
+			}
+		) );
+
+		$snakFormatter = $this->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+		$valueFormatter = $this->getValueFormatterFactory()->getValueFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+
+		$formatter = new SummaryFormatter(
+			$idFormatter,
+			$valueFormatter,
+			$snakFormatter,
+			$this->contentLanguage
+		);
+
+		return $formatter;
 	}
 }
