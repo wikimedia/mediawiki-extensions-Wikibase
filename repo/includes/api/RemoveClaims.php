@@ -100,6 +100,10 @@ class RemoveClaims extends ModifyClaim {
 			}
 		}
 
+		if ( is_null( $entityId ) ) {
+			$this->dieUsage( 'Could not find an entity for the claims' , 'invalid-guid' );
+		}
+
 		return $entityId ;
 	}
 

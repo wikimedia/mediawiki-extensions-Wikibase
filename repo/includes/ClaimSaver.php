@@ -39,8 +39,20 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ClaimSaver {
+
+	/**
+	 * @var SummaryFormatter
+	 */
+	private $summaryFormatter = null;
+
+	public function __construct( SummaryFormatter $summaryFormatter ) {
+		//TODO: also inject EntityContentFactory, etc
+		$this->summaryFormatter = $summaryFormatter;
+	}
+
 	/**
 	 * @see ApiBase::execute
 	 *
@@ -180,7 +192,7 @@ class ClaimSaver {
 		$flags = $flags !== 0 ? $flags | EDIT_UPDATE : EDIT_UPDATE;
 
 		$status = $editEntity->attemptSave(
-			$summary !== null ? $summary->toString() : '',
+			$summary !== null ? $this->summaryFormatter->formatSummary( $summary ) : '',
 			$flags,
 			$token
 		);
