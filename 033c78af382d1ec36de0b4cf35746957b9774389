@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_0b763204",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-17T14:07:41Z",
+      "side": 1,
+      "message": "https://www.mediawiki.org/wiki/Writing_systems/Syntax",
+      "parentUuid": "4946a543_4b167aa7",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_ab251e0e",
         "filename": "client/includes/parserhooks/PropertyParserFunction.php",
         "patchSetId": 20
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_ab57de55",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-17T14:07:41Z",
+      "side": 1,
+      "message": "I have no idea what it means... I was just copying stuff done before for language without variants (it was \u0027nowiki\u0027 \u003d\u003e true in the resulting array and \u0027nowiki\u0027 \u003d\u003e true simply means this behavior).\n\nSee https://git.wikimedia.org/blob/mediawiki%2Fcore.git/e7ce589265c7500759735d9e5c8ecbd008073fc9/includes%2Fparser%2FParser.php#L3488 : the logic is a little obscure there that $nowiki is extract()\u0027ed from the array returned.",
+      "parentUuid": "4946a543_ab251e0e",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_0b1d52ba",
         "filename": "client/includes/parserhooks/PropertyParserFunction.php",
         "patchSetId": 20
@@ -64,6 +100,24 @@
       "writtenOn": "2013-09-17T13:46:13Z",
       "side": 1,
       "message": "It would be better to ask for an EntityLookup, a PropertyLabelResolver and a SnakFormatter in the constructor. \n\nActually, to make this less painful, you could just inject the PropertyParserFunctionRenderer into the constructor of PropertyParserFunction. That would also make the initialization code clearer.",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_2bc4ce0f",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-17T14:07:41Z",
+      "side": 1,
+      "message": "These lines were copied from old code.\n\nIt\u0027s not possible to do such a move, because PropertyParserFunctionRenderer is per-language, and one instance is created for one variant, in a single PropertyParserFunction run.\n\nThough it might be possible to save an EntityLookup, a PropertyLabelResolver and a SnakFormatter in the PropertyParserFunction instance.",
+      "parentUuid": "4946a543_0b1d52ba",
       "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
