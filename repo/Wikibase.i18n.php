@@ -537,8 +537,16 @@ Parameters:
 {{Related|Wikibase-input-help-message}}',
 	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
-	'wikibase-move-up' => 'Label of a link to move a list item one step up within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.',
-	'wikibase-move-down' => 'Label of a link to move a list item one step down within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.',
+	'wikibase-move-up' => 'Label of a link to move a list item one step up within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.
+
+See also:
+* {{msg-mw|Wikibase-move-down}}
+{{Identical|Move up}}',
+	'wikibase-move-down' => 'Label of a link to move a list item one step down within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.
+
+See also:
+* {{msg-mw|Wikibase-move-up}}
+{{Identical|Move down}}',
 	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
 * $1 is the item label.',
 	'wikibase-restore-title' => 'Title shown on the form for restoring old revisions. Example is Restoring Old Revision of "Spain". Parameters:
@@ -3775,6 +3783,8 @@ $messages['de'] = array(
 	'wikibase-sitelinks-empty' => 'Bislang sind zu diesem Datenobjekt noch keine Websiteverknüpfungen vorhanden.',
 	'wikibase-sitelinks-input-help-message' => 'Leg eine Verknüpfung zu einer diesem Datenobjekt entsprechenden Seite fest.',
 	'wikibase-remove' => 'entfernen',
+	'wikibase-move-up' => 'nach oben verschieben',
+	'wikibase-move-down' => 'nach unten verschieben',
 	'wikibase-undo-title' => 'Bearbeitung an „$1“ rückgängig machen',
 	'wikibase-restore-title' => 'Alte Version von „$1“ wiederherstellen',
 	'wikibase-partial-undo' => 'Die Bearbeitung kann teilweise rückgängig gemacht werden.',
@@ -8760,6 +8770,8 @@ $messages['it'] = array(
 	'wikibase-sitelinks-empty' => 'Nessuna pagina è ancora collegata a questo elemento.',
 	'wikibase-sitelinks-input-help-message' => 'Imposta un collegamento ad una pagina relativa a questo elemento.',
 	'wikibase-remove' => 'rimuovi',
+	'wikibase-move-up' => 'sposta su',
+	'wikibase-move-down' => 'sposta giù',
 	'wikibase-undo-title' => 'Annullamento modifica a "$1"',
 	'wikibase-restore-title' => 'Ripristino vecchia versione di "$1"',
 	'wikibase-partial-undo' => 'La modifica può essere parzialmente annullata.',
@@ -9092,6 +9104,8 @@ $messages['ja'] = array(
 	'wikibase-sitelinks-empty' => 'この項目にはサイトリンクがまだありません。',
 	'wikibase-sitelinks-input-help-message' => 'この項目に関連するページヘのリンクを設定してください。',
 	'wikibase-remove' => '除去',
+	'wikibase-move-up' => '上に移動',
+	'wikibase-move-down' => '下に移動',
 	'wikibase-undo-title' => '「$1」の編集の差し戻し',
 	'wikibase-restore-title' => '「$1」の古い版の復元',
 	'wikibase-partial-undo' => '編集は部分的に取り消せます。',
@@ -10246,6 +10260,8 @@ $messages['lb'] = array(
 	'wikibase-sitelinks-empty' => 'Bis elo nach kee Link op ee Site fir dëst Element.',
 	'wikibase-sitelinks-input-help-message' => 'Setzt e Link op eng Säit déi mat dësem Element verbonn sinn.',
 	'wikibase-remove' => 'ewechhuelen',
+	'wikibase-move-up' => 'erop réckelen',
+	'wikibase-move-down' => 'erof réckelen',
 	'wikibase-undo-title' => 'Ännerung un "$1" zrécksetzen',
 	'wikibase-restore-title' => 'Al Versioun vun "$1" restauréieren',
 	'wikibase-partial-undo' => "D'Ännerung kann deelweis réckgängeg gemaach ginn.",
@@ -10764,6 +10780,8 @@ $messages['mk'] = array(
 	'wikibase-sitelinks-empty' => 'Досега нема врски до страници за овој предмет.',
 	'wikibase-sitelinks-input-help-message' => 'Задајте врска до страница поврзана со овој предмет.',
 	'wikibase-remove' => 'отстрани',
+	'wikibase-move-up' => 'премести нагоре',
+	'wikibase-move-down' => 'премести надолу',
 	'wikibase-undo-title' => 'Отповикување на уредувањето на „$1“',
 	'wikibase-restore-title' => 'Враќам стара ревизија на „$1“',
 	'wikibase-partial-undo' => 'Уредувањето може делумно да се отповика.',
