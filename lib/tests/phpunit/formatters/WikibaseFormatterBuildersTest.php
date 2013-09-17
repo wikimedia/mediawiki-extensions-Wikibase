@@ -11,14 +11,15 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityFactory;
+use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
-use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\Lib\WikibaseFormatterBuilders;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
 
 /**
- * @covers Wikibase\Lib\WikibaseSnakFormatterBuilders
+ * @covers Wikibase\Lib\WikibaseFormatterBuilders
  *
  * @since 0.5
  *
@@ -31,7 +32,7 @@ use Wikibase\PropertyValueSnak;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
+class WikibaseFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 	public function newBuilders( $propertyType, EntityId $entityId ) {
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
@@ -50,11 +51,11 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 		$lang = Language::factory( 'en' );
 
-		return new WikibaseSnakFormatterBuilders( $entityLookup, $typeLookup, $lang );
+		return new WikibaseFormatterBuilders( $entityLookup, $typeLookup, $lang );
 	}
 
 	/**
-	 * @covers WikibaseSnakFormatterBuilders::getSnakFormatterBuildersForFormats
+	 * @covers WikibaseFormatterBuilders::getSnakFormatterBuildersForFormats
 	 */
 	public function testGetSnakFormatterBuildersForFormats() {
 		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
@@ -79,7 +80,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider buildDispatchingSnakFormatterProvider
-	 * @covers WikibaseSnakFormatterBuilders::buildDispatchingSnakFormatter
+	 * @covers WikibaseFormatterBuilders::buildDispatchingSnakFormatter
 	 */
 	public function testBuildDispatchingSnakFormatter( $format, $options, $type, $snak, $expected ) {
 		$builders = $this->newBuilders( $type, new ItemId( 'Q5' ) );
@@ -133,7 +134,58 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers WikibaseSnakFormatterBuilders::getPlainTextFormatters
+	 * @dataProvider buildDispatchingValueFormatterProvider
+	 * @covers WikibaseFormatterBuilders::buildDispatchingValueFormatter
+	 */
+	public function testBuildDispatchingValueFormatter( $format, $options, $snak, $expected ) {
+		$builders = $this->newBuilders( '-/-', new ItemId( 'Q5' ) );
+		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+
+		$formatter = $builders->buildDispatchingValueFormatter(
+			$factory,
+			$format,
+			$options
+		);
+
+		$text = $formatter->formatValue( $snak );
+		$this->assertEquals( $expected, $text );
+	}
+
+	public function buildDispatchingValueFormatterProvider() {
+		$options = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => 'en',
+		) );
+
+		return array(
+			'plain url' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				$options,
+				new StringValue( 'http://acme.com/' ),
+				'http://acme.com/'
+			),
+			'wikitext no value' => array(
+				SnakFormatter::FORMAT_WIKI,
+				$options,
+				new StringValue( '{Wikibase}' ),
+				'&#123;Wikibase&#125;'
+			),
+			'html string' => array(
+				SnakFormatter::FORMAT_HTML,
+				$options,
+				new StringValue( 'I <3 Wikibase & stuff' ),
+				'I &lt;3 Wikibase &amp; stuff'
+			),
+			'widget item label (with entity lookup)' => array(
+				SnakFormatter::FORMAT_HTML_WIDGET,
+				$options,
+				new EntityIdValue( new ItemId( 'Q5' ) ),
+				'Label for Q5' // compare mock object created in newBuilders()
+			),
+		);
+	}
+
+	/**
+	 * @covers WikibaseFormatterBuilders::getPlainTextFormatters
 	 */
 	public function testGetPlainTextFormatters() {
 		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
@@ -162,7 +214,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers WikibaseSnakFormatterBuilders::getWikiTextFormatters
+	 * @covers WikibaseFormatterBuilders::getWikiTextFormatters
 	 */
 	public function testGetWikiTextFormatters() {
 		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
@@ -184,7 +236,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers WikibaseSnakFormatterBuilders::getHtmlFormatters
+	 * @covers WikibaseFormatterBuilders::getHtmlFormatters
 	 */
 	public function testGetHtmlFormatters() {
 		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
@@ -206,7 +258,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers WikibaseSnakFormatterBuilders::getWidgetFormatters
+	 * @covers WikibaseFormatterBuilders::getWidgetFormatters
 	 */
 	public function testGetWidgetFormatters() {
 		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
@@ -252,7 +304,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers WikibaseSnakFormatterBuilders::makeEscapingFormatters
+	 * @covers WikibaseFormatterBuilders::makeEscapingFormatters
 	 */
 	public function testMakeEscapingFormatters() {
 		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
