@@ -138,9 +138,10 @@ class WikibaseSnakFormatterBuilders {
 	 */
 	public function buildDispatchingSnakFormatter( SnakFormatterFactory $factory, $format, FormatterOptions $options ) {
 		$this->initLanguageDefaults( $options );
+		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
-		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', wfMessage( 'wikibase-snakview-snaktypeselector-novalue', $this->defaultLanguage->getCode() ), $format );
-		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', wfMessage( 'wikibase-snakview-snaktypeselector-somevalue', $this->defaultLanguage->getCode() ), $format );
+		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $lang ), $format );
+		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $lang ), $format );
 		$valueSnakFormatter = $this->buildValueSnakFormatter( $factory, $format, $options );
 
 		$formatters = array(
@@ -150,6 +151,18 @@ class WikibaseSnakFormatterBuilders {
 		);
 
 		return new DispatchingSnakFormatter( $format, $formatters );
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $lang
+	 *
+	 * @return \Message
+	 */
+	private function getMessage( $key, $lang ) {
+		$msg = wfMessage( $key );
+		$msg = $msg->inLanguage( $lang );
+		return $msg;
 	}
 
 	/**
