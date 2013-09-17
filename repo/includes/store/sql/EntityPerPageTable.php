@@ -225,17 +225,26 @@ class EntityPerPageTable implements EntityPerPage {
 	/**
 	 * Returns an iterator providing an EntityId object for each entity.
 	 *
+	 * @see EntityPerPage::getEntities
+	 * @param null|string $entityType
+	 *
 	 * @return Iterator
 	 */
-	public function getEntities() {
+	public function getEntities( $entityType = null ) {
 		//XXX: Would be nice to get the DBR from a load balancer and allow access to foreign wikis.
 		// But since we return a ResultWrapper, we don't know when we can release the connection for re-use.
+
+		if ( $entityType !== null ) {
+			$where = array( 'epp_entity_type' => $entityType );
+		} else {
+			$where = array();
+		}
 
 		$dbr = wfGetDB( DB_SLAVE );
 		$rows = $dbr->select(
 			'wb_entity_per_page',
 			array( 'epp_entity_id', 'epp_entity_type' ),
-			'',
+			$where,
 			__METHOD__ );
 
 		return new DatabaseRowEntityIdIterator( $rows, 'epp_entity_type', 'epp_entity_id' );

@@ -9,6 +9,7 @@ use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
+use Wikibase\Item;
 use Wikibase\Property;
 
 /**
@@ -16,7 +17,11 @@ use Wikibase\Property;
  *
  * @covers JsonDumpGenerator
  *
+ * @ingroup Wikibase
+ * @ingroup Test
  *
+ * @group Wikibase
+ * @group WikibaseLib
  *
  * @license GPL 2+
  * @author Daniel Kinzler
@@ -79,8 +84,27 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider idProvider
 	 */
 	public function testGenerateDump( array $ids ) {
+		$this->testTypeFilterDump( $ids, null, $ids );
+	}
+
+	public static function idProvider() {
+		$p10 = new PropertyId( 'P10' );
+		$q30 = new ItemId( 'Q30' );
+
+		return array(
+			'empty' => array( array() ),
+			'some entities' => array( array( $p10, $q30 ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider typeFilterProvider
+	 */
+	public function testTypeFilterDump( array $ids, $type, $expectedIds ) {
 		$dumper = $this->newDumpGenerator( $ids );
 		$idList = new ArrayObject( $ids );
+
+		$dumper->setEntityTypeFilter( $type );
 
 		ob_start();
 		$dumper->generateDump( $idList );
@@ -95,20 +119,113 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			return $entityData['id'];
 		}, $data );
 
-		$expectedIds = array_map( function( EntityId $id ) {
-			return $id->getPrefixedId();
-		}, $ids );
-
 		$this->assertEquals( $expectedIds, $actualIds );
 	}
 
-	public static function idProvider() {
+	public static function typeFilterProvider() {
 		$p10 = new PropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 
 		return array(
-			'empty' => array( array() ),
-			'some entities' => array( array( $p10, $q30 ) ),
+			'empty' => array( array(), null, array() ),
+			'some entities' => array( array( $p10, $q30 ), null, array( $p10, $q30 ) ),
+			'just properties' => array( array( $p10, $q30 ), Property::ENTITY_TYPE, array( $p10 ) ),
+			'no matches' => array( array( $p10 ), Item::ENTITY_TYPE, array() ),
+		);
+	}
+
+	/**
+	 * @dataProvider shardingProvider
+	 */
+	public function testSharding( array $ids, $shardingFactor ) {
+		$dumper = $this->newDumpGenerator( $ids );
+		$idList = new ArrayObject( $ids );
+
+		$actualIds = array();
+
+		// Generate and check a dump for each shard,
+		// then combine the results and check again.
+		for ( $shard = 0; $shard < $shardingFactor; $shard++ ) {
+			$dumper->setShardingFilter( $shardingFactor, $shard );
+
+			// Generate the dump and grab the output
+			ob_start();
+			$dumper->generateDump( $idList );
+			$json = ob_get_clean();
+
+			// check that the resulting json contains all the ids we asked for.
+			$data = json_decode( $json, true );
+			$this->assertTrue( is_array( $data ), 'decode failed: ' . $json );
+
+			$shardIds = array_map( function( $entityData ) {
+				return $entityData['id'];
+			}, $data );
+
+			// check shard
+			$this->assertEquals( array(), array_intersect( $actualIds, $shardIds ), 'shard ' . $shard . ' overlaps previous shards' );
+
+			// collect ids from all shards
+			$actualIds = array_merge( $actualIds, $shardIds );
+		}
+
+		$expectedIds = array_map( function( EntityId $id ) {
+			return $id->getPrefixedId();
+		}, $ids );
+
+		sort( $actualIds );
+		sort( $expectedIds );
+		$this->assertEquals( $expectedIds, $actualIds, 'bad sharding' );
+	}
+
+	public static function shardingProvider() {
+		$ids = array();
+
+		for ( $i = 10; $i < 20; $i++ ) {
+			$ids[] = new PropertyId( "P$i" );
+			$ids[] = new ItemId( "Q$i" );
+		}
+
+		for ( $i = 50; $i < 101; $i += 10 ) {
+			$ids[] = new PropertyId( "P$i" );
+			$ids[] = new ItemId( "Q$i" );
+		}
+
+		return array(
+			'empty sharding' => array( array(), 2 ),
+			'no sharding' => array( $ids, 1 ),
+			'two shards' => array( $ids, 2 ),
+			'three shards' => array( $ids, 3 ),
+			'five shards' => array( $ids, 5 ),
+			'ten shards' => array( $ids, 10 ),
+		);
+	}
+
+	/**
+	 * @dataProvider badShardingProvider
+	 */
+	public function testInvalidSharding( $shardingFactor, $shard ) {
+		$dumper = $this->newDumpGenerator( array() );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$dumper->setShardingFilter( $shardingFactor, $shard );
+	}
+
+	public function badShardingProvider() {
+		return array(
+			array( 0, 0 ),
+			array( 1, 1 ),
+			array( 2, 3 ),
+			array( 2, -1 ),
+			array( -2, 2 ),
+			array( -3, -2 ),
+			array( -2, -3 ),
+			array( array(), 1 ),
+			array( 2, array() ),
+			array( null, 1 ),
+			array( 2, null ),
+			array( '2', 1 ),
+			array( 2, '1' ),
 		);
 	}
 
