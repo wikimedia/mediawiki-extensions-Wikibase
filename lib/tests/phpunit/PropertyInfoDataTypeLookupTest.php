@@ -52,20 +52,6 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		9001 => 'positive whole number',
 	);
 
-	private function newEntityLookup() {
-		$lookup = new MockRepository();
-
-		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
-			$property = Property::newEmpty();
-			$property->setId( $propertyId );
-			$property->setDataTypeId( $dataTypeId );
-
-			$lookup->putEntity( $property );
-		}
-
-		return $lookup;
-	}
-
 	public function getDataTypeForPropertyProvider() {
 		$argLists = array();
 
