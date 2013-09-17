@@ -8,8 +8,7 @@ use Diff\DiffOpRemove;
 use Html;
 use Diff\Diff;
 use RuntimeException;
-use Wikibase\Lib\EntityIdLabelFormatter;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * Class for generating HTML for Claim Diffs.
@@ -28,43 +27,37 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * @since 0.4
 	 *
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @since 0.4
+	 *
 	 * @var string
 	 */
 	private $langCode;
 
 	/**
-	 * @since 0.5
+	 * @since 0.4
 	 *
-	 * @var EntityIdLabelFormatter
+	 * @var EntityIdFormatter
 	 */
-	private $propertyFormatter;
-
-	/**
-	 * @since 0.5
-	 *
-	 * @var SnakFormatter
-	 */
-	private $snakFormatter;
+	private $idFormatter;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityIdLabelFormatter $propertyFormatter
-	 * @param SnakFormatter          $snakFormatter
-	 *
-	 * @throws \InvalidArgumentException
+	 * @param EntityLookup $entityLookup
+	 * @param string $langCode
+	 * @param EntityIdFormatter $idFormatter
 	 */
-	public function __construct( EntityIdLabelFormatter $propertyFormatter, SnakFormatter $snakFormatter ) {
-		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
-			throw new \InvalidArgumentException(
-				'Expected $snakFormatter to generate plain text, not '
-				. $snakFormatter->getFormat() );
-		}
-
-		$this->propertyFormatter = $propertyFormatter;
-		$this->snakFormatter = $snakFormatter;
+	public function __construct( $entityLookup, $langCode, EntityIdFormatter $idFormatter ) {
+		$this->entityLookup = $entityLookup;
+		$this->langCode = $langCode;
+		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -162,8 +155,8 @@ class ClaimDifferenceVisualizer {
 		$valueFormatter = new DiffOpValueFormatter(
 			// todo: should show specific headers for both columns
 			$this->getSnakHeader( $mainSnakChange->getNewValue() ),
-			$this->snakFormatter->formatSnak( $mainSnakChange->getOldValue() ),
-			$this->snakFormatter->formatSnak( $mainSnakChange->getNewValue() )
+			$this->getSnakValue( $mainSnakChange->getOldValue() ),
+			$this->getSnakValue( $mainSnakChange->getNewValue() )
 		);
 
 		return $valueFormatter->generateHtml();
@@ -217,11 +210,11 @@ class ClaimDifferenceVisualizer {
 		$newValue = null;
 
 		if ( $oldSnak instanceof Snak ) {
-			$oldValue = $this->snakFormatter->formatSnak( $oldSnak );
+			$oldValue = $this->getSnakValue( $oldSnak );
 		}
 
 		if ( $newSnak instanceof Snak ) {
-			$newValue = $this->snakFormatter->formatSnak( $newSnak );
+			$newValue = $this->getSnakValue( $newSnak );
 		}
 
 		$valueFormatter = new DiffOpValueFormatter( $snakHeader, $oldValue, $newValue );
@@ -245,9 +238,9 @@ class ClaimDifferenceVisualizer {
 			// TODO: change hardcoded ": " so something like wfMessage( 'colon-separator' ),
 			// but this will require further refactoring as it would add HTML which gets escaped
 			$values[] =
-				$this->propertyFormatter->format( $snak->getPropertyId() ) .
+				$this->getEntityLabel( $snak->getPropertyId() ) .
 				': '.
-				$this->snakFormatter->formatSnak( $snak );
+				$this->getSnakValue( $snak );
 		}
 
 		return $values;
@@ -264,10 +257,65 @@ class ClaimDifferenceVisualizer {
  	 */
 	protected function getSnakHeader( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
-		$propertyLabel = $this->propertyFormatter->format( $propertyId );
+		$propertyLabel = $this->getEntityLabel( $propertyId );
 		$headerText = wfMessage( 'wikibase-entity-property' ) . ' / ' . $propertyLabel;
 
 		return $headerText;
+	}
+
+	/**
+	 * Get snak value in string form
+	 *
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 *
+	 * @return string
+ 	 */
+	protected function getSnakValue( Snak $snak ) {
+		$snakType = $snak->getType();
+
+		if ( $snakType === 'value' ) {
+			$dataValue = $snak->getDataValue();
+
+			// FIXME! should use some value formatter
+			if ( $dataValue instanceof EntityId ) {
+				$diffValueString = $this->getEntityLabel( $dataValue );
+			} else if ( $dataValue instanceof TimeValue ) {
+				// TODO: this will just display the plain ISO8601-string,
+				// we should instead use a decent formatter
+				$diffValueString = $dataValue->getTime();
+			} else {
+				$diffValueString = $dataValue->getValue();
+			}
+
+			return $diffValueString;
+		} else {
+			return $snakType;
+		}
+	}
+
+	/**
+	 * Get an entity label
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	protected function getEntityLabel( EntityId $entityId  ) {
+		$entity = $this->entityLookup->getEntity( $entityId );
+
+		if ( $entity instanceof Entity ) {
+			$lookedUpLabel = $this->entityLookup->getEntity( $entityId )->getLabel( $this->langCode );
+
+			if ( $lookedUpLabel !== false ) {
+				return $lookedUpLabel;
+			}
+		}
+
+		return $this->idFormatter->format( $entityId );
 	}
 
 	/**
@@ -339,23 +387,23 @@ class ClaimDifferenceVisualizer {
 			// but this will require further refactoring as it would add HTML which gets escaped
 			if ( $change instanceof DiffOpAdd ) {
 				$newVal =
-					$this->propertyFormatter->format( $change->getNewValue()->getPropertyId() ) .
+					$this->getEntityLabel( $change->getNewValue()->getPropertyId() ) .
 					': ' .
-					$this->snakFormatter->formatSnak( $change->getNewValue() );
+					$this->getSnakValue( $change->getNewValue() );
 			} else if ( $change instanceof DiffOpRemove ) {
 				$oldVal =
-					$this->propertyFormatter->format( $change->getOldValue()->getPropertyId() ) .
+					$this->getEntityLabel( $change->getOldValue()->getPropertyId() ) .
 					': ' .
-					$this->snakFormatter->formatSnak( $change->getOldValue() );
+					$this->getSnakValue( $change->getOldValue() );
 			} else if ( $change instanceof DiffOpChange ) {
 				$oldVal =
-					$this->propertyFormatter->format( $change->getOldValue()->getPropertyId() ) .
+					$this->getEntityLabel( $change->getOldValue()->getPropertyId() ) .
 					': ' .
-					$this->snakFormatter->formatSnak( $change->getOldValue() );
+					$this->getSnakValue( $change->getOldValue() );
 				$newVal =
-					$this->propertyFormatter->format( $change->getNewValue()->getPropertyId() ) .
+					$this->getEntityLabel( $change->getNewValue()->getPropertyId() ) .
 					': ' .
-					$this->snakFormatter->formatSnak( $change->getNewValue() );
+					$this->getSnakValue( $change->getNewValue() );
 			} else {
 				throw new RuntimeException( 'Diff operation of unknown type.' );
 			}

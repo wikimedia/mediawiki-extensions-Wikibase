@@ -8,7 +8,7 @@ use Wikibase\ClaimDiffer;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ClaimSummaryBuilder;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -40,7 +40,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Daniel Kinzler
  */
 class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 
@@ -139,14 +138,11 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testBuildCreateClaimSummary() {
-		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\SnakFormatter' )
+		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
 			->disableOriginalConstructor()->getMock();
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$idFormatter->expects( $this->any() )
+			->method( 'format' )
 			->will( $this->returnValue( 'foo' ) );
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		$comparer = function( \Comparable $old, \Comparable $new ) {
 			return $old->equals( $new );
@@ -155,7 +151,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
 			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
-			$snakFormatter
+			$idFormatter
 		);
 
 		$claims = new Claims();
@@ -177,14 +173,11 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	 * @param string $action
 	 */
 	public function testBuildUpdateClaimSummary( $originalClaim, $modifiedClaim, $action ) {
-		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\SnakFormatter' )
+		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
 			->disableOriginalConstructor()->getMock();
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
+		$idFormatter->expects( $this->any() )
+			->method( 'format' )
 			->will( $this->returnValue( 'foo' ) );
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		$comparer = function( \Comparable $old, \Comparable $new ) {
 			return $old->equals( $new );
@@ -193,7 +186,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
 			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
-			$snakFormatter
+			$idFormatter
 		);
 
 		$claims = new Claims();

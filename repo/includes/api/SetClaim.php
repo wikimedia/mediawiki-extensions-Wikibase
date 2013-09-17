@@ -8,15 +8,12 @@ use Diff\CallbackListDiffer;
 use MWException;
 use ApiBase;
 use Diff\ListDiffer;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\EntityContentFactory;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSaver;
 use Wikibase\ClaimSummaryBuilder;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -88,16 +85,10 @@ class SetClaim extends ApiWikibase {
 		};
 
 		$claimDiffer = new ClaimDiffer( new CallbackListDiffer( $comparer ) );
-
-		$options = new FormatterOptions( array(
-			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode()
-		) );
-
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			$claimDiffer,
-			WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getFormatter( SnakFormatter::FORMAT_PLAIN, $options )
+			WikibaseRepo::getDefaultInstance()->getIdFormatter()
 		);
 		$claimSaver = new ClaimSaver();
 
