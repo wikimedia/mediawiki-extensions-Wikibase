@@ -2,16 +2,8 @@
 
 namespace Wikibase\Test;
 
-use DataValues\StringValue;
-use Wikibase\Claim;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Item;
-use Wikibase\ParserErrorMessageFormatter;
-use Wikibase\Property;
 use Wikibase\PropertyParserFunction;
-use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\PropertyParserFunction
@@ -31,92 +23,78 @@ use Wikibase\PropertyValueSnak;
  */
 class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 
-	private function getDefaultInstance() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$targetLanguage = \Language::factory( 'en' );
-		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
-		$dataTypeFactory = $wikibaseClient->getDataTypeFactory();
-		$mockRepo = $this->newMockRepository();
-		$mockResolver = new MockPropertyLabelResolver( $targetLanguage->getCode(), $mockRepo );
-
-		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
-		$formatter->expects( $this->any() )
-			->method( 'formatSnak' )
-			->will( $this->returnValue( '(a kitten)' ) );
-
-		return new PropertyParserFunction(
-			$targetLanguage,
-			$mockRepo,
-			$mockResolver,
-			$errorFormatter,
-			$formatter
-		);
-	}
-
-	private function newMockRepository() {
-		$propertyId = new PropertyId( 'P1337' );
-
+	public function getPropertyParserFunction( $parser, $entityId ) {
 		$entityLookup = new MockRepository();
+		$propertyLabelResolver = new MockPropertyLabelResolver();
 
-		$item = Item::newEmpty();
-		$item->setId( 42 );
-		$item->addClaim( new Claim( new PropertyValueSnak(
-			$propertyId,
-			new StringValue( 'Please write tests before merging your code' )
-		) ) );
-		$item->addClaim( new Claim( new PropertyValueSnak(
-			$propertyId,
-			new StringValue( 'or kittens will die' )
-		) ) );
-
-		$property = Property::newEmpty();
-		$property->setId( $propertyId );
-
-		$property->setDataTypeId( 'string' );
-		$property->setLabel( 'en', 'kitten' );
-
-		$entityLookup->putEntity( $item );
-		$entityLookup->putEntity( $property );
-
-		return $entityLookup;
+		return new PropertyParserFunction( $parser, $entityId, $entityLookup,
+			$propertyLabelResolver );
 	}
 
-	public static function provideRenderForEntityId() {
+	/**
+	 * @dataProvider provideGetRenderer
+	 */
+	public function testGetRenderer( $languageCode, $outputType ) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$instance = $this->getPropertyParserFunction( $parser, new ItemId( 'q42' ) );
+		$renderer = $instance->getRenderer( \Language::factory( $languageCode ) );
+		$this->assertInstanceOf( 'Wikibase\PropertyParserFunctionRenderer', $renderer );
+	}
+
+	public function provideGetRenderer() {
 		return array(
-			array(
-				'p1337',
-				'(a kitten), (a kitten)',
-				'Congratulations, you just killed a kitten'
-			),
-			array(
-				'kitten',
-				'(a kitten), (a kitten)',
-				'Congratulations, you just killed a kitten'
-			),
+			array( 'en', \Parser::OT_HTML ),
+			array( 'zh', \Parser::OT_WIKI ),
 		);
 	}
 
 	/**
-	 * @dataProvider provideRenderForEntityId
+	 * @dataProvider provideIsParserUsingVariants
 	 */
-	public function testRenderForEntityId( $name, $expected, $info ) {
-		$parserFunction = $this->getDefaultInstance();
+	public function testIsParserUsingVariants(
+		$outputType, $interfaceMessage, $disableContentConversion, $disableTitleConversion, $expected
+	) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parserOptions->setInterfaceMessage( $interfaceMessage );
+		$parserOptions->disableContentConversion( $disableContentConversion );
+		$parserOptions->disableTitleConversion( $disableTitleConversion );
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$instance = $this->getPropertyParserFunction( $parser, new ItemId( 'q42' ) );
+		$this->assertEquals( $expected, $instance->isParserUsingVariants() );
+	}
 
-		$status = $parserFunction->renderForEntityId(
-			new ItemId( 'Q42' ),
-			$name
+	public function provideIsParserUsingVariants() {
+		return array(
+			array( \Parser::OT_HTML, false, false, false, true ),
+			array( \Parser::OT_WIKI, false, false, false, false ),
+			array( \Parser::OT_PREPROCESS, false, false, false, false ),
+			array( \Parser::OT_PLAIN, false, false, false, false ),
+			array( \Parser::OT_HTML, true, false, false, false ),
+			array( \Parser::OT_HTML, false, true, false, false ),
+			array( \Parser::OT_HTML, false, false, true, true ),
 		);
+	}
 
-		$this->assertTrue( $status->isOK() );
+	/**
+	 * @dataProvider provideProcessRenderedArray
+	 */
+	public function testProcessRenderedArray( $outputType, $textArray, $expected ) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$instance = $this->getPropertyParserFunction( $parser, new ItemId( 'q42' ) );
+		$this->assertEquals( $expected, $instance->processRenderedArray( $textArray ) );
+	}
 
-		$text = $status->getValue();
-		$this->assertInternalType( 'string', $text );
-
-		$this->assertEquals(
-			$expected,
-			$text,
-			$info
+	public function provideProcessRenderedArray() {
+		return array(
+			array( \Parser::OT_HTML, array(
+				'zh-cn' => 'fo&#60;ob&#62;ar',
+				'zh-tw' => 'FO&#60;OB&#62;AR',
+			), '-{zh-cn:fo&#60;b&#62;ob&#60;/b&#62;ar;zh-tw:FO&#60;b&#62;OB&#60;/b&#62;AR;}-' ),
 		);
 	}
 
