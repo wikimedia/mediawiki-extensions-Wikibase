@@ -254,6 +254,40 @@
       "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_8643f715",
+        "filename": "repo/tests/phpunit/includes/store/sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-17T16:15:47Z",
+      "side": 1,
+      "message": "too many blank lines :)",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_663e0b8a",
+        "filename": "repo/tests/phpunit/includes/store/sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-17T16:15:47Z",
+      "side": 1,
+      "message": "too many extra lines :)",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
