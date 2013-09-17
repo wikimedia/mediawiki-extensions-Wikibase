@@ -52,7 +52,20 @@ class PopulateSitesTable extends \Maintenance {
 		$stripProtocols = $this->getOption( 'strip-protocols' ) ? "stripProtocol" : false;
 		$wiki = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
 
-		\Wikibase\Utils::insertSitesFrom( $wiki, $stripProtocols );
+		$groupMap = array(
+			'wiki' => 'wikipedia',
+			'wiktionary' => 'wiktionary',
+			'wikibooks' => 'wikibooks',
+			'wikiquote' => 'wikiquote',
+			'wikisource' => 'wikisource',
+			'wikiversity' => 'wikiversity',
+			'wikivoyage' => 'wikivoyage',
+			'wikinews' => 'wikinews',
+		);
+
+		$sitesTableBuilder = new \Wikibase\SitesTableBuilder( $groupMap );
+		$sitesTableBuilder->insertSitesFrom( $wiki, $stripProtocols );
+
 		$this->output( "done.\n" );
 	}
 
