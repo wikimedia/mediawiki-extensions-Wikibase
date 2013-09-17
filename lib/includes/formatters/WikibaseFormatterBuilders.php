@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikibaseSnakFormatterBuilders {
+class WikibaseFormatterBuilders {
 
 	/**
 	 * @var EntityLookup
@@ -50,7 +50,7 @@ class WikibaseSnakFormatterBuilders {
 	 * prefix "PT:" for property data type based mappings, and "VT:" for data value type mappings.
 	 * The spec can either be a class name or a callable builder. If a class name is given, the
 	 * constructor is called with a single argument, the FormatterOptions. If a builder is
-	 * used, this WikibaseSnakFormatterBuilders will be provided as an additional parameter
+	 * used, this WikibaseFormatterBuilders will be provided as an additional parameter
 	 * to the builder.
 	 *
 	 * When determining the formatter for a given format, data type and value type, two
@@ -71,7 +71,7 @@ class WikibaseSnakFormatterBuilders {
 			'VT:string' => 'ValueFormatters\StringFormatter',
 			'VT:globecoordinate' => 'ValueFormatters\GlobeCoordinateFormatter',
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
-			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseSnakFormatterBuilders', 'newEntityIdFormatter' ),
+			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseFormatterBuilders', 'newEntityIdFormatter' ),
 		),
 
 		// Formatters to use for wiki text output.
@@ -111,11 +111,13 @@ class WikibaseSnakFormatterBuilders {
 	}
 
 	/**
-	 * @return array DataType builder specs
+	 * @return array SnakFormatter builder specs
 	 */
 	public function getSnakFormatterBuildersForFormats() {
 		$buildDispatchingSnakFormatter = array( $this, 'buildDispatchingSnakFormatter' );
 
+		// the format is passed as a parameter to the builder,
+		// so we can use the same builder for all formats
 		$types = array(
 			SnakFormatter::FORMAT_WIKI => $buildDispatchingSnakFormatter,
 			SnakFormatter::FORMAT_PLAIN => $buildDispatchingSnakFormatter,
@@ -127,23 +129,56 @@ class WikibaseSnakFormatterBuilders {
 	}
 
 	/**
+	 * @return array ValueFormatter builder specs
+	 */
+	public function getValueFormatterBuildersForFormats() {
+		$buildDispatchingValueFormatter = array( $this, 'buildDispatchingValueFormatter' );
+
+		// the format is passed as a parameter to the builder,
+		// so we can use the same builder for all formats
+		$types = array(
+			SnakFormatter::FORMAT_WIKI => $buildDispatchingValueFormatter,
+			SnakFormatter::FORMAT_PLAIN => $buildDispatchingValueFormatter,
+			SnakFormatter::FORMAT_HTML => $buildDispatchingValueFormatter,
+			SnakFormatter::FORMAT_HTML_WIDGET => $buildDispatchingValueFormatter,
+		);
+
+		return $types;
+	}
+
+
+	/**
+	 * Wrapper for newDispatchingSnakFormatter() that exposes the signature required for builders
+	 * in the constructor of OutputFormatSnakFormatterFactory.
+	 *
+	 * @param OutputFormatSnakFormatterFactory $factory (unused)
+	 * @param string $format
+	 * @param FormatterOptions $options
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return DispatchingValueFormatter
+	 */
+	public function buildDispatchingSnakFormatter( OutputFormatSnakFormatterFactory $factory, $format, FormatterOptions $options ) {
+		return $this->newDispatchingSnakFormatter( $format, $options );
+	}
+
+	/**
 	 * Returns a DispatchingSnakFormatter for the given format, that will dispatch based on
 	 * the snak type. The instance returned by this method will cover all standard snak types.
 	 *
-	 * @param OutputFormatSnakFormatterFactory $factory
 	 * @param string               $format
 	 * @param FormatterOptions     $options
 	 *
 	 * @return DispatchingSnakFormatter
 	 */
-	public function buildDispatchingSnakFormatter( OutputFormatSnakFormatterFactory $factory, $format, FormatterOptions $options ) {
+	public function newDispatchingSnakFormatter( $format, FormatterOptions $options ) {
 		$this->initLanguageDefaults( $options );
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
 		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $lang ), $format );
 		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $lang ), $format );
 
-		$valueFormatter = $this->buildDispatchingValueFormatter( $format, $options );
+		$valueFormatter = $this->newDispatchingValueFormatter( $format, $options );
 		$valueSnakFormatter = new PropertyValueSnakFormatter( $format, $valueFormatter, $this->propertyDataTypeLookup );
 
 		$formatters = array(
@@ -204,16 +239,31 @@ class WikibaseSnakFormatterBuilders {
 	}
 
 	/**
+	 * Wrapper for newDispatchingValueFormatter() that exposes the signature required for builders
+	 * in the constructor of OutputFormatValueFormatterFactory.
+	 *
+	 * @param OutputFormatValueFormatterFactory $factory (unused)
+	 * @param string $format
+	 * @param FormatterOptions $options
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return DispatchingValueFormatter
+	 */
+	public function buildDispatchingValueFormatter( OutputFormatValueFormatterFactory $factory, $format, FormatterOptions $options ) {
+		return $this->newDispatchingValueFormatter( $format, $options );
+	}
+
+	/**
 	 * Returns a DispatchingSnakFormatter for the given format, that will dispatch based on
 	 * the data value type or property data type.
 	 *
 	 * @param string $format
 	 * @param FormatterOptions $options
 	 *
-	 * @return DispatchingValueFormatter
 	 * @throws \InvalidArgumentException
+	 * @return DispatchingValueFormatter
 	 */
-	public function buildDispatchingValueFormatter( $format, FormatterOptions $options ) {
+	public function newDispatchingValueFormatter( $format, FormatterOptions $options ) {
 		switch ( $format ) {
 			case SnakFormatter::FORMAT_PLAIN:
 				$formatters = $this->getPlainTextFormatters( $options );
@@ -320,9 +370,9 @@ class WikibaseSnakFormatterBuilders {
 
 	/**
 	 * Instantiates the formatters defined for the given format in
-	 * WikibaseSnakFormatterBuilders::$valueFormatterSpecs.
+	 * WikibaseFormatterBuilders::$valueFormatterSpecs.
 	 *
-	 * @see WikibaseSnakFormatterBuilders::$valueFormatterSpecs
+	 * @see WikibaseFormatterBuilders::$valueFormatterSpecs
 	 *
 	 * @param string $format
 	 * @param FormatterOptions $options
@@ -377,11 +427,11 @@ class WikibaseSnakFormatterBuilders {
 	}
 
 	/**
-	 * Builder callback for use in WikibaseSnakFormatterBuilders::$valueFormatterSpecs.
+	 * Builder callback for use in WikibaseFormatterBuilders::$valueFormatterSpecs.
 	 * Used to inject services into the Formatter.
 	 *
 	 * @param FormatterOptions $options
-	 * @param WikibaseSnakFormatterBuilders $builders
+	 * @param WikibaseFormatterBuilders $builders
 	 *
 	 * @return EntityIdLabelFormatter
 	 */
