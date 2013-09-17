@@ -87,7 +87,7 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 					$summary->addAutoSummaryArgs( array( $this->label, $this->description ) );
 					$editEntity = new EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
 					$editEntity->attemptSave(
-						$summary->toString(),
+						$summary,
 						EDIT_AUTOSUMMARY|EDIT_NEW,
 						$this->getRequest()->getVal( 'token' )
 					);
