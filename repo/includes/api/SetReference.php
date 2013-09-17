@@ -69,9 +69,20 @@ class SetReference extends ModifyClaim {
 			$this->validateReferenceHash( $claim, $params['reference'] );
 		}
 
-		$rawSnaks = $this->getRawSnaksFromParam( $params['snaks'] );
-		$snaks = $this->getSnaks( $rawSnaks );
-		$newReference = new Reference( $snaks );
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Reference' );
+
+		$decodedParams = array(
+			'snaks' => $this->getArrayFromParam( $params['snaks'] )
+		);
+
+		if( isset( $params['snaks-order' ] ) ) {
+			$decodedParams['snaks-order'] = $this->getArrayFromParam( $params['snaks-order'] );
+		}
+
+		$newReference = $unserializer->newFromSerialization(
+			array_merge( $params, $decodedParams )
+		);
 
 		$changeOp = $this->getChangeOp( $newReference );
 
@@ -112,41 +123,44 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @param string $snaksParam
+	 * @param string $arrayParam
 	 *
 	 * @return array
 	 */
-	protected function getRawSnaksFromParam( $snaksParam ) {
-		$rawSnaks = \FormatJson::decode( $snaksParam, true );
+	protected function getArrayFromParam( $arrayParam ) {
+		$rawArray = \FormatJson::decode( $arrayParam, true );
 
-		if ( !is_array( $rawSnaks ) || !count( $rawSnaks ) ) {
-			$this->dieUsage( 'No snaks or invalid JSON given', 'invalid-json' );
+		if ( !is_array( $rawArray ) || !count( $rawArray ) ) {
+			$this->dieUsage( 'No array or invalid JSON given', 'invalid-json' );
 		}
 
-		return $rawSnaks;
+		return $rawArray;
 	}
 
 	/**
 	 * @since 0.3
 	 *
 	 * @param array $rawSnaks
+	 * @param array $snakOrder List of property ids the snaks are supposed to be ordered by.
 	 *
 	 * @return SnakList
 	 */
-	protected function getSnaks( array $rawSnaks ) {
+	protected function getSnaks( array $rawSnaks, array $snakOrder = array() ) {
 		$snaks = new SnakList();
 
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
 		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
 
+		$snakOrder = ( count( $snakOrder ) > 0 ) ? $snakOrder : array_keys( $rawSnaks );
+
 		try {
-			foreach ( $rawSnaks as $byPropertySnaks ) {
-				if ( !is_array( $byPropertySnaks ) ) {
+			foreach( $snakOrder as $propertyId ) {
+				if ( !is_array( $rawSnaks[$propertyId] ) ) {
 					$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
 				}
-				foreach ( $byPropertySnaks as $rawSnak ) {
+				foreach ( $rawSnaks[$propertyId] as $rawSnak ) {
 					if ( !is_array( $rawSnak ) ) {
 						$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
 					}
@@ -221,6 +235,9 @@ class SetReference extends ModifyClaim {
 				'snaks' => array(
 					ApiBase::PARAM_TYPE => 'string',
 					ApiBase::PARAM_REQUIRED => true,
+				),
+				'snaks-order' => array(
+					ApiBase::PARAM_TYPE => 'string',
 				),
 				'reference' => array(
 					ApiBase::PARAM_TYPE => 'string',
