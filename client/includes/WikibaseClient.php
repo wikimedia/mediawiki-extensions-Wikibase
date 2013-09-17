@@ -20,7 +20,7 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
-use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\Lib\WikibaseFormatterBuilders;
 use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -410,7 +410,7 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
-		$builders = new WikibaseSnakFormatterBuilders(
+		$builders = new WikibaseFormatterBuilders(
 			$this->getEntityLookup(),
 			$this->getPropertyDataTypeLookup(),
 			$this->contentLanguage
