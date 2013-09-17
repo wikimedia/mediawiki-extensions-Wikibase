@@ -65,7 +65,14 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	 * @return string
 	 */
 	public function getHash() {
-		return $this->snaks->getHash();
+		// For considering the reference snaks' property order without actually manipulating the
+		// reference snaks's order, a new SnakList is generated. The new SnakList is ordered
+		// by property and its hash is returned.
+		$orderedSnaks = new SnakList( $this->snaks );
+
+		$orderedSnaks->orderByProperty();
+
+		return $orderedSnaks->getHash();
 	}
 
 	/**
