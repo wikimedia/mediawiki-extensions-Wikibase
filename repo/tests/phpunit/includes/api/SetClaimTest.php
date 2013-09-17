@@ -2,10 +2,24 @@
 
 namespace Wikibase\Test\Api;
 use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
+use Wikibase\EntityContentFactory;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Statement;
+use Wikibase\Reference;
+use Wikibase\Snak;
+use Wikibase\SnakList;
+use Wikibase\PropertyValueSnak;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\Lib\ClaimGuidGenerator;
+
 
 /**
  * Unit tests for the Wikibase\Repo\Api\ApSetClaim class.
@@ -30,7 +44,7 @@ use Wikibase\PropertyContent;
 class SetClaimTest extends WikibaseApiTestCase {
 
 	/**
-	 * @return \Wikibase\Snak[]
+	 * @return Snak[]
 	 */
 	protected function snakProvider() {
 		static $hasProperties = false;
@@ -60,9 +74,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( $prop42 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( $prop9001 );
-		$snaks[] = new \Wikibase\PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyNoValueSnak( $prop42 );
+		$snaks[] = new PropertySomeValueSnak( $prop9001 );
+		$snaks[] = new PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
@@ -75,35 +89,35 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$snaks = $this->snakProvider();
 		$mainSnak = $snaks[0];
-		$statement = new \Wikibase\Statement( $mainSnak );
+		$statement = new Statement( $mainSnak );
 		$statements[] = $statement;
 
 		foreach ( $snaks as $snak ) {
 			$statement = clone $statement;
-			$snaks = new \Wikibase\SnakList( array( $snak ) );
-			$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+			$snaks = new SnakList( array( $snak ) );
+			$statement->getReferences()->addReference( new Reference( $snaks ) );
 			$statements[] = $statement;
 		}
 
 		$statement = clone $statement;
-		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
-		$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+		$snaks = new SnakList( $this->snakProvider() );
+		$statement->getReferences()->addReference( new Reference( $snaks ) );
 		$statements[] = $statement;
 
 		$statement = clone $statement;
-		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
+		$snaks = new SnakList( $this->snakProvider() );
 		$statement->setQualifiers( $snaks );
-		$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+		$statement->getReferences()->addReference( new Reference( $snaks ) );
 		$statements[] = $statement;
 
 		$ranks = array(
-			\Wikibase\Statement::RANK_DEPRECATED,
-			\Wikibase\Statement::RANK_NORMAL,
-			\Wikibase\Statement::RANK_PREFERRED
+			Statement::RANK_DEPRECATED,
+			Statement::RANK_NORMAL,
+			Statement::RANK_PREFERRED
 		);
 
 		/**
-		 * @var \Wikibase\Statement[] $statements
+		 * @var Statement[] $statements
 		 */
 		foreach ( $statements as &$statement ) {
 			$statement->setRank( $ranks[array_rand( $ranks )] );
@@ -114,11 +128,11 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	public function testAddClaim() {
 		foreach ( $this->claimProvider() as $claim ) {
-			$item = \Wikibase\Item::newEmpty();
-			$content = new \Wikibase\ItemContent( $item );
+			$item = Item::newEmpty();
+			$content = new ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
 
-			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
+			$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 			$guid = $guidGenerator->newGuid();
 
 			$claim->setGuid( $guid );
@@ -131,7 +145,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 				// Simply reorder the qualifiers by putting the first qualifier to the end. This is
 				// supposed to be done in the serialized representation since changing the actual
 				// object might apply intrinsic sorting.
-				$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+				$serializerFactory = new SerializerFactory();
 				$serializer = $serializerFactory->newSerializerForObject( $claim );
 				$serializedClaim = $serializer->getSerialized( $claim );
 				$firstPropertyId = array_shift( $serializedClaim['qualifiers-order'] );
@@ -139,7 +153,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 				$this->makeRequest( $serializedClaim, $item->getId(), 1 );
 			}
 
-			$claim = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 9001 ) );
+			$claim = new Statement( new PropertyNoValueSnak( 9001 ) );
 			$claim->setGuid( $guid );
 
 			// Update request
@@ -148,12 +162,12 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @param \Wikibase\Claim|array $claim Native or serialized claim object.
+	 * @param Claim|array $claim Native or serialized claim object.
 	 * @param EntityId $entityId
 	 * @param $claimCount
 	 */
-	protected function makeRequest( $claim, \Wikibase\EntityId $entityId, $claimCount ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+	protected function makeRequest( $claim, EntityId $entityId, $claimCount ) {
+		$serializerFactory = new SerializerFactory();
 
 		if( is_a( $claim, '\Wikibase\Claim' ) ) {
 			$serializer = $serializerFactory->newSerializerForObject( $claim );
@@ -171,11 +185,11 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$this->makeValidRequest( $params );
 
-		$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entityId );
+		$content = EntityContentFactory::singleton()->getFromId( $entityId );
 
 		$this->assertInstanceOf( '\Wikibase\EntityContent', $content );
 
-		$claims = new \Wikibase\Claims( $content->getEntity()->getClaims() );
+		$claims = new Claims( $content->getEntity()->getClaims() );
 
 		$this->assertTrue( $claims->hasClaim( $claim ) );
 
