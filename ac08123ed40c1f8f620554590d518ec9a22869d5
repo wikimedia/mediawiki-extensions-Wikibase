@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_61da754a",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-17T18:23:38Z",
+      "side": 1,
+      "message": "tag should be \u0027property\u0027 to match wbgetentities. It is only used in xml format, but it would be nice to have both the same.",
+      "revId": "ac08123ed40c1f8f620554590d518ec9a22869d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_e104a5c4",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2013-09-17T18:23:38Z",
+      "side": 1,
+      "message": "You should use the Claim*s*Unserializer here or the ByPropertyListUnserializer, because you missed one array level here (you cannot pass two statements for one property as list). Try to pass a full json object from action\u003dwbgetentites to action\u003dwbeditentry, you will get the error message \"Invalid claim type specified\"",
+      "revId": "ac08123ed40c1f8f620554590d518ec9a22869d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
