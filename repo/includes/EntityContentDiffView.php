@@ -5,6 +5,10 @@ use Diff\CallbackListDiffer;
 use Diff\ListDiffer;
 
 use Content, Html;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\EntityIdLabelFormatter;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -49,7 +53,14 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 	public function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct( $context, $old, $new, $rcid, $refreshCache, $unhide );
 
-		$this->mRefreshCache = true; //FIXME: debug only!
+		//TODO: proper injection
+		$options = new FormatterOptions( array(
+			//TODO: fallback chain
+			ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode()
+		) );
+
+		$this->propertyNameFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$this->snakValueFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getFormatter( SnakFormatter::FORMAT_PLAIN, $options );
 	}
 
 	/**
@@ -134,7 +145,6 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		 * @var EntityContent $new
 		 */
 		$diff = $old->getEntity()->getDiff( $new->getEntity() );
-		$langCode = $this->getContext()->getLanguage()->getCode();
 
 		$comparer = function( \Comparable $old, \Comparable $new ) {
 			return $old->equals( $new );
@@ -145,9 +155,8 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 			$this->getContext(),
 			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
 			new ClaimDifferenceVisualizer(
-				new WikiPageEntityLookup(),
-				$langCode,
-				WikibaseRepo::getDefaultInstance()->getIdFormatter()
+				$this->propertyNameFormatter,
+				$this->snakValueFormatter
 			)
 		);
 
