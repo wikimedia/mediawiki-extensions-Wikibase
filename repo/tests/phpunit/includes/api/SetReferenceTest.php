@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test\Api;
-
 use Wikibase\PropertyContent;
 use Wikibase\Reference;
 use Wikibase\Statement;
@@ -24,6 +23,7 @@ use Wikibase\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author H. Snater < mediawiki@snater.com >
  */
 class SetReferenceTest extends WikibaseApiTestCase {
 
@@ -32,6 +32,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		if ( !$hasProperties ) {
 			$prop = PropertyContent::newEmpty();
 			$prop->getEntity()->setId( 42 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( 43 );
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
@@ -68,7 +73,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			array( new \Wikibase\PropertyNoValueSnak( 42 ) )
 		) );
 
-		$this->makeValidRequest(
+		$serializedReference = $this->makeValidRequest(
 			$statement->getGuid(),
 			$referenceHash,
 			$reference
@@ -80,19 +85,48 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$referenceHash,
 			$reference
 		);
+
+		$referenceHash = $serializedReference['hash'];
+
+		$reference = new \Wikibase\Reference( new \Wikibase\SnakList(
+			array(
+				new \Wikibase\PropertyNoValueSnak( 42 ),
+				new \Wikibase\PropertyNoValueSnak( 43 ),
+			)
+		) );
+
+		// Set reference with two snaks:
+		$serializedReference = $this->makeValidRequest(
+			$statement->getGuid(),
+			$referenceHash,
+			$reference
+		);
+
+		$referenceHash = $serializedReference['hash'];
+
+		// Reorder reference snaks by moving the last property id to the front:
+		$firstPropertyId = array_shift( $serializedReference['snaks-order'] );
+		array_push( $serializedReference['snaks-order'], $firstPropertyId );
+
+		// Make another request with reordered snaks-order:
+		$this->makeValidRequest(
+			$statement->getGuid(),
+			$referenceHash,
+			$serializedReference
+		);
 	}
 
-	protected function makeValidRequest( $statementGuid, $referenceHash, Reference $reference ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $reference );
-		$serializedReference = $serializer->getSerialized( $reference );
+	/**
+	 * @param string|null $statementGuid
+	 * @param string $referenceHash
+	 * @param Reference|array $reference Reference object or serialized reference
+	 * @return array Serialized reference
+	 */
+	protected function makeValidRequest( $statementGuid, $referenceHash, $reference ) {
+		$serializedReference = $this->serializeReference( $reference );
+		$reference = $this->unserializeReference( $reference );
 
-		$params = array(
-			'action' => 'wbsetreference',
-			'statement' => $statementGuid,
-			'reference' => $referenceHash,
-			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
-		);
+		$params = $this->generateRequestParams( $statementGuid, $referenceHash, $serializedReference );
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -102,20 +136,16 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$serializedReference = $resultArray['reference'];
 
 		unset( $serializedReference['lastrevid'] );
-		$this->assertArrayEquals( $serializer->getSerialized( $reference ), $serializedReference );
+
+		$this->assertArrayEquals( $this->serializeReference( $reference ), $serializedReference );
+
+		return $serializedReference;
 	}
 
 	protected function makeInvalidRequest( $statementGuid, $referenceHash, Reference $reference ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $reference );
-		$serializedReference = $serializer->getSerialized( $reference );
+		$serializedReference = $this->serializeReference( $reference );
 
-		$params = array(
-			'action' => 'wbsetreference',
-			'statement' => $statementGuid,
-			'reference' => $referenceHash,
-			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
-		);
+		$params = $this->generateRequestParams( $statementGuid, $referenceHash, $serializedReference );
 
 		try {
 			$this->doApiRequestWithToken( $params );
@@ -124,6 +154,57 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		catch ( \UsageException $e ) {
 			$this->assertEquals( 'no-such-reference', $e->getCodeString(), 'Invalid request raised correct error' );
 		}
+	}
+
+	/**
+	 * Serializes a Reference object (if not serialized already).
+	 *
+	 * @param Reference|array $reference
+	 * @return array
+	 */
+	protected function serializeReference( $reference ) {
+		if( !is_a( $reference, '\Wikibase\Reference' ) ) {
+			return $reference;
+		} else {
+			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$serializer = $serializerFactory->newSerializerForObject( $reference );
+			return $serializer->getSerialized( $reference );
+		}
+	}
+
+	/**
+	 * Unserializes a serialized Reference object (if not unserialized already).
+	 *
+	 * @param array|Reference $reference
+	 * @return Reference Reference
+	 */
+	protected function unserializeReference( $reference ) {
+		if( is_a( $reference, '\Wikibase\Reference' ) ) {
+			return $reference;
+		} else {
+			unset( $reference['hash'] );
+			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$unserializer = $serializerFactory->newUnserializerForClass( '\Wikibase\Reference' );
+			return $unserializer->newFromSerialization( $reference );
+		}
+	}
+
+	/**
+	 * Generates the parameters for a 'wbsetreference' API request.
+	 *
+	 * @param string $statementGuid
+	 * @param string $referenceHash
+	 * @param array $serializedReference
+	 * @return array
+	 */
+	protected function generateRequestParams( $statementGuid, $referenceHash, $serializedReference ) {
+		return array(
+			'action' => 'wbsetreference',
+			'statement' => $statementGuid,
+			'reference' => $referenceHash,
+			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
+			'snaks-order' => \FormatJson::encode( $serializedReference['snaks-order'] ),
+		);
 	}
 
 	/**
