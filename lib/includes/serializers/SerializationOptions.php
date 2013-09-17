@@ -152,6 +152,7 @@ class SerializationOptions {
 	 * @since 0.5
 	 *
 	 * @param int $mode a bit field using the ID_KEYS_XXX constants.
+	 * @throws \InvalidArgumentException
 	 */
 	public function setIdKeyMode( $mode ) {
 		if ( ( $mode & self::ID_KEYS_BOTH ) === 0 ) {

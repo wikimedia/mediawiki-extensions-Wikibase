@@ -65,7 +65,7 @@ class LanguageWithConversion {
 	 *
 	 * @return string Validated and normalized code.
 	 *
-	 * @throw MWException on invalid code
+	 * @throws MWException on invalid code
 	 */
 	public static function validateLanguageCode( $code ) {
 		global $wgDummyLanguageCodes;
@@ -89,6 +89,7 @@ class LanguageWithConversion {
 	 * @param $language Language|string: Language (code) for this object
 	 * @param $sourceLanguage null|Language|string:
 	 *          Source language (code) if this is a converted language, or null
+	 * @throws \MWException
 	 * @return LanguageWithConversion
 	 */
 	public static function factory( $language, $sourceLanguage = null ) {

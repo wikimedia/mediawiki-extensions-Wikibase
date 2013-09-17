@@ -70,6 +70,7 @@ final class LibRegistry {
 	/**
 	 * @since 0.4
 	 *
+	 * @throws \RuntimeException
 	 * @return DataTypeFactory
 	 */
 	public function getDataTypeFactory() {

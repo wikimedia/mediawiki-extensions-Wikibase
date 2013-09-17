@@ -278,6 +278,7 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @param \DatabaseBase $dbw the database connection to use
 	 * @param EntityId $id the Property to process
+	 * @throws \InvalidArgumentException
 	 */
 	protected function updatePropertyInfo( \DatabaseBase $dbw, EntityId $id ) {
 		if ( $id->getEntityType() !== Property::ENTITY_TYPE ) {

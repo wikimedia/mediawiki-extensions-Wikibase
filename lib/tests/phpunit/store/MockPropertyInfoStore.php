@@ -87,7 +87,8 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 * @see PropertyInfoStore::setPropertyInfo
 	 *
 	 * @param EntityId $propertyId
-	 * @param array    $info
+	 * @param array $info
+	 * @throws \InvalidArgumentException
 	 */
 	public function setPropertyInfo( EntityId $propertyId, array $info ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
@@ -107,6 +108,7 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 *
 	 * @param EntityId $propertyId
 	 *
+	 * @throws \InvalidArgumentException
 	 * @return bool
 	 */
 	public function removePropertyInfo( EntityId $propertyId ) {
