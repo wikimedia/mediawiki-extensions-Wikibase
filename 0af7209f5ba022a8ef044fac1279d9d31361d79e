@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_e6b67b3c",
+        "filename": "lib/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "newline :O",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_46866f69",
+        "filename": "lib/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "should maybe also have a @throws tag?",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a6955388",
+        "filename": "lib/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "newline!",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c6925f9e",
+        "filename": "lib/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "I love new lines but this is perhaps a few too many",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_068d477c",
+        "filename": "repo/includes/store/EntityPerPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "newline ! :D",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_46ef4f1f",
+        "filename": "repo/includes/store/sql/ConvertingResultWrapper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "newlinnne",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_06e62746",
+        "filename": "repo/includes/store/sql/ConvertingResultWrapper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "are we getting rid of ingroup?",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_66f44bf1",
+        "filename": "repo/includes/store/sql/DatabaseRowEntityIdIterator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "newline :D",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c6db3f78",
+        "filename": "repo/includes/store/sql/DatabaseRowEntityIdIterator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "As far as I remember we are getting rid of ingroup?",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_46d82f79",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "newline!!",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_26d32361",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "i think we are getting rid of file and ingroup",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_66cd2bb9",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "newlineeee",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a6c71398",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "eww ingroup",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c6c41f96",
+        "filename": "repo/tests/phpunit/includes/store/sql/DatabaseRowEntityIdIteratorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "eww ingroup",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_e6c11b84",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageTableTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T16:12:20Z",
+      "side": 1,
+      "message": "ewww ingroup :D",
+      "revId": "0af7209f5ba022a8ef044fac1279d9d31361d79e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
