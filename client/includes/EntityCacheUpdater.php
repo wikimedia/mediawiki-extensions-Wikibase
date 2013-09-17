@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+
+use MWException;
 use Title;
 use Wikibase\Client\WikibaseClient;
 
@@ -46,6 +48,7 @@ class EntityCacheUpdater {
 	 * @since 0.1
 	 *
 	 * @param EntityChange $change
+	 * @throws MWException
 	 */
 	public function handleChange( EntityChange $change ) {
 		list( , $updateType ) = explode( '~', $change->getType() );
@@ -56,7 +59,7 @@ class EntityCacheUpdater {
 		$entity = $change->getEntity();
 
 		if ( !$entity ) {
-			throw new \MWException( "The provided Change does not contain full entity data!" );
+			throw new MWException( "The provided Change does not contain full entity data!" );
 		}
 
 		$id = $change->getEntityId();

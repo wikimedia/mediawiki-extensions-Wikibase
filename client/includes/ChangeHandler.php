@@ -793,6 +793,7 @@ class ChangeHandler {
 	 *
 	 * @param Change $change the change to get a comment for
 	 *
+	 * @throws \MWException
 	 * @return array
 	 */
 	public function getEditComment( Change $change ) {

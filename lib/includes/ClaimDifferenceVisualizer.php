@@ -196,6 +196,7 @@ class ClaimDifferenceVisualizer {
 	 * @param Snak|null $newSnak
 	 * @param string|null $prependHeader
 	 *
+	 * @throws \MWException
 	 * @return string
 	 */
 	public function getSnakHtml( $oldSnak, $newSnak, $prependHeader = null ) {

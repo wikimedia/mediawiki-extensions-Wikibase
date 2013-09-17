@@ -47,6 +47,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/../resources/' . 'mw.wikibase.lua', $lib, array() );
 	}
+
 	/**
 	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
 	 *
@@ -54,6 +55,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $prefixedEntityId
 	 *
+	 * @throws ScribuntoException
 	 * @return array $entityArr
 	 */
 	public function getEntity( $prefixedEntityId = null ) {

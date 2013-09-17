@@ -256,6 +256,7 @@ class Summary {
 	 *
 	 * @param array $parts parts to be stringed together
 	 *
+	 * @throws \MWException
 	 * @return string The $parts concatenated
 	 */
 	public static function formatAutoSummary( $parts ) {

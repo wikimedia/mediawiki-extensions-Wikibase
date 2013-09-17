@@ -330,6 +330,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @param string $entityType
 	 * @param string|null $language Language code
 	 *
+	 * @throws \MWException
 	 * @return Term[]
 	 */
 	public function getTermsOfEntities( array $ids, $entityType, $language = null ) {

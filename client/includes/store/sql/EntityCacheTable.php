@@ -217,6 +217,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 * @param EntityID[] $entityIds
 	 * @param array|bool $revision
 	 *
+	 * @throws \MWException
 	 * @return Entity|null[]
 	 */
 	public function getEntities( array $entityIds, $revision = false ) {

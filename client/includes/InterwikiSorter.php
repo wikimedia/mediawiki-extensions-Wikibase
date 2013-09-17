@@ -117,9 +117,10 @@ class InterwikiSorter {
 	 * @since 0.1
 	 *
 	 * @param string $sort
-	 * @param $sortOrders[]
-	 * @param $sortPrepend[]
+	 * @param array $sortOrders []
+	 * @param array $sortPrepend []
 	 *
+	 * @throws \MWException
 	 * @return array
 	 */
 	protected function buildSortOrder( $sort, array $sortOrders, array $sortPrepend ) {

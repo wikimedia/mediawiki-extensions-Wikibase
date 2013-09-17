@@ -206,9 +206,11 @@ class CachingSqlStore implements ClientStore {
 
 		return $this->propertyLabelResolver;
 	}
+
 	/**
 	 * Get a TermIndex object
 	 *
+	 * @throws \LogicException
 	 * @return TermIndex
 	 */
 	public function getTermIndex() {
@@ -220,6 +222,7 @@ class CachingSqlStore implements ClientStore {
 	 *
 	 * @since 0.4
 	 *
+	 * @throws \LogicException
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {

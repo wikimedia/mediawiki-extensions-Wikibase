@@ -632,10 +632,11 @@ class DispatchChanges extends \Maintenance {
 	 * Updates the given client wiki's entry in the dispatch table and
 	 * releases the global lock on that wiki.
 	 *
-	 * @param int   $seen   :  the ID of the last change processed in the pass.
+	 * @param int $seen   :  the ID of the last change processed in the pass.
 	 * @param array $state  : associative array representing the client wiki's state before the
 	 *                      update pass, as returned by selectWiki().
 	 *
+	 * @throws \Exception
 	 * @see selectWiki()
 	 */
 	protected function releaseClient( $seen, array $state ) {

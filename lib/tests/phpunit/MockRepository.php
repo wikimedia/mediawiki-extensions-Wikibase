@@ -57,6 +57,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	 * @param EntityID $entityId
 	 * @param int $revision The desired revision id, 0 means "current".
 	 *
+	 * @throws \Wikibase\StorageException
 	 * @return EntityRevision|null
 	 * @throw StorageException
 	 */

@@ -143,6 +143,7 @@ class ItemChangeTest extends EntityChangeTest {
 	 * @dataProvider changeBackwardsCompatProvider
 	 *
 	 * @param \Wikibase\ItemChange $change
+	 * @throws Exception
 	 */
 	public function testGetSiteLinkDiffBackwardsCompat( ItemChange $change ) {
 		//NOTE: Disable developer warnings that may get triggered by
