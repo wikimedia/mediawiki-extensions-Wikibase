@@ -53,4 +53,4 @@ switch( $jenkins_job_name) {
 // Avoid polluting the global namespace
 unset( $jenkins_job_name );
 
-
+array_splice( $_SERVER['argv'], 1, 0, array( '--log-tap', 'php://stdout' ) );
