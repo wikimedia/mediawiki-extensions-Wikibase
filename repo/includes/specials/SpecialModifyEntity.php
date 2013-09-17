@@ -72,7 +72,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			// TODO: need conflict detection??
 			$editEntity = new EditEntity( $this->entityContent, $this->getUser(), false, $this->getContext() );
 			$editEntity->attemptSave(
-				$summary->toString(),
+				$summary,
 				EDIT_UPDATE,
 				$this->getRequest()->getVal( 'wpEditToken' )
 			);

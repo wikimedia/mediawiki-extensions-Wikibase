@@ -120,7 +120,7 @@ class LinkTitles extends ApiWikibase {
 		else {
 			// Do the actual save, or if it don't exist yet create it.
 			$status = $this->attemptSaveEntity( $itemContent,
-				$summary->toString(),
+				$summary,
 				$flags );
 
 			$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
