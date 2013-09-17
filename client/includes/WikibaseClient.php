@@ -181,12 +181,12 @@ final class WikibaseClient {
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $format The desired format, use SnakFormatterFactory::FORMAT_XXX
+	 * @param string $format The desired format, use SnakFormatter::FORMAT_XXX
 	 * @param FormatterOptions $options
 	 *
 	 * @return SnakFormatter
 	 */
-	public function newSnakFormatter( $format = SnakFormatterFactory::FORMAT_PLAIN, FormatterOptions $options = null )  {
+	public function newSnakFormatter( $format = SnakFormatter::FORMAT_PLAIN, FormatterOptions $options = null )  {
 		return $this->getSnakFormatterFactory()->getFormatter( $format, $options );
 	}
 
