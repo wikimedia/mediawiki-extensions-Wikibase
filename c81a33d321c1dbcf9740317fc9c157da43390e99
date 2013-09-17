@@ -16,6 +16,24 @@
       "revId": "c81a33d321c1dbcf9740317fc9c157da43390e99",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_0b4472b8",
+        "filename": "repo/includes/api/EntityHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-17T13:28:22Z",
+      "side": 1,
+      "message": "Well, potentially the better way to go about this then would be to have these methods in the base class as they are used in almost all api module (if not all modules).\n\nThen we could remove them from the claim helper which would remove some of the things it has to be constructed with as well as generally making things nicer..?",
+      "parentUuid": "4946a543_fadff2d0",
+      "revId": "c81a33d321c1dbcf9740317fc9c157da43390e99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
