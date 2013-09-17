@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_2a1bef18",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:09:01Z",
+      "side": 1,
+      "message": "Do we really need an EntityContent here? I would like to reduce the usage of that class to an absolute minimum. Ideally, we\u0027d only use them for saving, and we should get rid of that soon, too.",
+      "revId": "965279b26a8cc2c9f68bb9d15b61ef9418826a8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_eae1e700",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpsMergeTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:09:01Z",
+      "side": 1,
+      "message": "That seems somewhat redundant, considering the line immediately before :)",
+      "revId": "965279b26a8cc2c9f68bb9d15b61ef9418826a8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_eacac76e",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpsMergeTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:09:01Z",
+      "side": 1,
+      "message": "This is a self-check for getItemContent(), I suppose?",
+      "revId": "965279b26a8cc2c9f68bb9d15b61ef9418826a8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_0ac8f374",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpsMergeTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:09:01Z",
+      "side": 1,
+      "message": "is $expectedFromData ever different from $fromData? Is there any reason to believe it ever changes? Or is it included in the test to make sure it doesn\u0027t change?",
+      "revId": "965279b26a8cc2c9f68bb9d15b61ef9418826a8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
