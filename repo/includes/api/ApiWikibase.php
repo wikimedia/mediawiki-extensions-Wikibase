@@ -16,6 +16,7 @@ use Wikibase\Lib\Serializers\AliasSerializer;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+use Wikibase\Summary;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -592,8 +593,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * handleStatus()).
 	 *
 	 * @param EntityContent $content  The content to save
-	 * @param String $summary    The edit summary
-	 * @param int    $flags      The edit flags (see WikiPage::doEditContent)
+	 * @param string|Summary $summary The edit summary
+	 * @param int    $flags           The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
 	 * @see  EditEntity::attemptSave()
@@ -603,6 +604,10 @@ abstract class ApiWikibase extends \ApiBase {
 	 *        for now pending further discussion.
 	 */
 	protected function attemptSaveEntity( EntityContent $content, $summary, $flags = 0 ) {
+		if ( $summary instanceof Summary ) {
+			$summary = $this->formatSummary( $summary );
+		}
+
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
@@ -629,6 +634,11 @@ abstract class ApiWikibase extends \ApiBase {
 
 		$this->handleSaveStatus( $status );
 		return $status;
+	}
+
+	protected function formatSummary( Summary $summary ) {
+		$formatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		return $formatter->formatSummary( $summary );
 	}
 
 	/**

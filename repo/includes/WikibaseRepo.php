@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use Language;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\StringFormatter;
 use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -20,6 +21,7 @@ use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\SnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -30,6 +32,7 @@ use Wikibase\Store;
 use Wikibase\StoreFactory;
 use Wikibase\SnakFactory;
 use Wikibase\StringNormalizer;
+use Wikibase\SummaryFormatter;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -113,6 +116,11 @@ class WikibaseRepo {
 	 * @var SnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
+
+	/**
+	 * @var SummaryFormatter
+	 */
+	private $summaryFormatter;
 
 	/**
 	 * @since 0.4
@@ -378,7 +386,6 @@ class WikibaseRepo {
 		return StoreFactory::getStore();
 	}
 
-
 	/**
 	 * Returns a SnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
@@ -405,5 +412,38 @@ class WikibaseRepo {
 
 		$factory = new SnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 		return $factory;
+	}
+
+	/**
+	 * Returns a SummaryFormatter.
+	 *
+	 * @return SummaryFormatter
+	 */
+	public function getSummaryFormatter() {
+		if ( !$this->summaryFormatter ) {
+			$this->summaryFormatter = $this->newSummaryFormatter();
+		}
+
+		return $this->summaryFormatter;
+	}
+
+	/**
+	 * @return SummaryFormatter
+	 */
+	protected function newSummaryFormatter() {
+		$options = new FormatterOptions();
+		$snakFormatter = $this->getSnakFormatterFactory()->getFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+
+		//FIXME: build a DispatchingValueFormatter here, use info from WikibaseSnakFormatterBuilders
+		$valueFormatter = new StringFormatter( $options );
+
+		$formatter = new SummaryFormatter(
+			$this->getIdFormatter(),
+			$valueFormatter,
+			$snakFormatter,
+			$this->contentLanguage
+		);
+
+		return $formatter;
 	}
 }
