@@ -31,7 +31,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class PopulateSitesTable extends \Maintenance {
+class PopulateSitesTable extends Maintenance {
 
 	public function __construct() {
 		$this->mDescription = 'Populate the sites table from another wiki that runs the SiteMatrix extension';
@@ -44,19 +44,40 @@ class PopulateSitesTable extends \Maintenance {
 	}
 
 	public function execute() {
-		if ( !defined( 'WBL_VERSION' ) ) {
-			$this->output( "You need to have WikibaseLib enabled in order to use this maintenance script!\n\n" );
-			exit;
+		$stripProtocols = $this->getOption( 'strip-protocols' ) ? "stripProtocol" : false;
+		$url = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
+		$wiki = $this->getOption( 'wiki' );
+
+		$groupMap = array(
+			'wiki' => 'wikipedia',
+			'wiktionary' => 'wiktionary',
+			'wikibooks' => 'wikibooks',
+			'wikiquote' => 'wikiquote',
+			'wikisource' => 'wikisource',
+			'wikiversity' => 'wikiversity',
+			'wikivoyage' => 'wikivoyage',
+			'wikinews' => 'wikinews',
+		);
+
+		$url .= '?action=sitematrix&format=json';
+
+		//NOTE: the raiseException option needs change Iad3995a6 to be merged, otherwise it is ignored.
+		$json = Http::get( $url, 'default', array( 'raiseException' => true ) );
+
+		if ( !$json ) {
+			throw new MWException( "Got no data from $url" );
 		}
 
-		$stripProtocols = $this->getOption( 'strip-protocols' ) ? "stripProtocol" : false;
-		$wiki = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
+		$siteMatrixParser = new \Wikibase\SiteMatrixParser( $groupMap, $wiki, $stripProtocols );
+		$sites = $siteMatrixParser->newFromJson( $json, $wiki );
 
-		\Wikibase\Utils::insertSitesFrom( $wiki, $stripProtocols );
+		$sitesTableBuilder = new \Wikibase\SitesTableBuilder();
+		$sitesTableBuilder->addSiteMatrix( $sites );
+
 		$this->output( "done.\n" );
 	}
 
 }
 
 $maintClass = 'PopulateSitesTable';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once ( RUN_MAINTENANCE_IF_MAIN );
