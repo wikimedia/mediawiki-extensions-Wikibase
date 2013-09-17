@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_6be7b6af",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-17T15:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_eb4646c2",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_4b167aa7",
         "filename": "client/includes/parserhooks/PropertyParserFunction.php",
         "patchSetId": 20
@@ -158,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_2bedae8f",
+        "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-17T15:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_4b7f5add",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_8b8942ef",
         "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
         "patchSetId": 20
@@ -169,6 +205,24 @@
       "writtenOn": "2013-09-17T13:46:13Z",
       "side": 1,
       "message": "Want to add your name here?",
+      "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_4bf2fa6f",
+        "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-09-17T15:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_8b8942ef",
       "revId": "033c78af382d1ec36de0b4cf35746957b9774389",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
