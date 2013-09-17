@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_a6963349",
+        "filename": "lib/includes/sites/SiteMatrixParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "PLease give the purpose of this class in a brief sentence.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c6933f59",
+        "filename": "lib/includes/sites/SiteMatrixParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "Should document what exactly should be mapped to what here. What should the caller provide? Where does this information typically come from?",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_86b857e4",
+        "filename": "lib/includes/sites/SiteMatrixParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "should be called newSitesFromJson or sitesFromJson or just parseJson. newFromJson would imply that it returns a SiteMatrixParser.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_26a243b2",
+        "filename": "lib/includes/sites/SiteMatrixParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "Should document what exactly this returns. A list of sites that all have the same content language? Or the same language prefix? Or all languages for one family? Or what?",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_268b2322",
+        "filename": "lib/includes/sites/SiteMatrixParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "The mapping is a pretty important bit of the logic, it\u0027s easier to find if it\u0027S on a separate line and not hidden in a setter call.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_46a74fc0",
+        "filename": "lib/includes/sites/SiteMatrixParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "These paths should be configurable - at least, they should come from member variables, and there should be setters for them.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_868a1718",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "except when it isn\u0027t.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_46910f45",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "I really dislike having this hardcoded inline. Put it into a member at least.\nAlso, there should be a note saying that this is wikimedia specific.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a6a0f395",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "Should we try to catch and handle any exceptions thrown? \nI don\u0027t think it\u0027s necessary, but it\u0027s worth a thought.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_c69dff55",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-17T16:50:10Z",
+      "side": 1,
+      "message": "!is_null or !\u003d\u003d null is clearer, i think.",
+      "revId": "4f3367867c38f93d3650ef8057530276d22674f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
