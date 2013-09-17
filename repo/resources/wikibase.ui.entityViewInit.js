@@ -149,7 +149,7 @@
 			};
 
 			if( mw.config.get( 'wbExperimentalFeatures' ) ) {
-				toolbarControllerConfig.movetoolbar = ['claim-qualifiers-snak'];
+				toolbarControllerConfig.movetoolbar = ['claim-qualifiers-snak', 'referenceview-snakview'];
 			}
 
 			$( '.wb-entity' )
