@@ -132,6 +132,9 @@ return call_user_func( function() {
 		'Wikibase\Lib\Serializers\SnakSerializer' => 'includes/serializers/SnakSerializer.php',
 		'Wikibase\Lib\Serializers\Unserializer' => 'includes/serializers/Unserializer.php',
 
+		// includes/sites
+		'SiteMatrixParser' => 'includes/sites/SiteMatrixParser.php',
+
 		// includes/store
 		'Wikibase\ChunkCache' => 'includes/store/ChunkCache.php',
 		'Wikibase\ChunkAccess' => 'includes/store/ChunkAccess.php',
