@@ -50,12 +50,10 @@ class DumpJson extends Maintenance {
 
 		$this->mDescription = 'Generate a JSON dump from entities in the repository.';
 
-		//TODO: filter by entity type
-		//TODO: shard by id congruence class ( id % n == m )
-		//$this->addOption( 'rebuild-all', "Update property info for all properties (per default, only missing entries are created)" );
-		//$this->addOption( 'start-row', "The ID of the first row to update (useful for continuing aborted runs)", false, true );
-
-		$this->addOption( 'list-file', "A file containing one entity ID per line", false, true );
+		$this->addOption( 'list-file', "A file containing one entity ID per line.", false, true );
+		$this->addOption( 'entity-type', "Only dump this kind of entitiy, e.g. `item` or `property`.", false, true );
+		$this->addOption( 'sharding-factor', "The number of shards (must be >= 1)", false, true );
+		$this->addOption( 'shard', "A the shard to output (must be lett than the sharding-factor) ", false, true );
 	}
 
 	public function initServices() {
@@ -82,10 +80,21 @@ class DumpJson extends Maintenance {
 	public function execute() {
 		$this->initServices();
 
+		//TODO: more validation for options
+		$entityType = $this->getOption( 'entity-type' );
+		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
+		$shard = (int)$this->getOption( 'shard', 0 );
+		//TODO: echo filter options to reporter
+
 		$output = fopen( 'php://stdout', 'wa' ); //TODO: Allow injection of an OutputStream
 		$dumper = new JsonDumpGenerator( $output, $this->entityLookup, $this->entitySerializer );
 
-		$idStream = $this->makeIdStream();
+		//NOTE: we filter for $entityType twice: filtering in the DB is efficient,
+		//      but filtering in the dumper is needed when working from a list file.
+		$dumper->setShardingFilter( $shardingFactor, $shard );
+		$dumper->setEntityTypeFilter( $entityType );
+
+		$idStream = $this->makeIdStream( $entityType );
 		$dumper->generateDump( $idStream );
 
 		if ( $idStream instanceof Disposable ) {
@@ -95,16 +104,17 @@ class DumpJson extends Maintenance {
 	}
 
 	/**
+	 * @param string|null $entityType
+	 *
 	 * @return Iterator a stream of EntityId objects
 	 */
-	public function makeIdStream() {
+	public function makeIdStream( $entityType = null ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
-			//TODO: allow filtering by entity type, id congruence class ( id % n == m ), etc.
 			$stream = $this->makeIdFileStream( $listFile );
 		} else {
-			$stream = $this->entityPerPage->getEntities();
+			$stream = $this->entityPerPage->getEntities( $entityType );
 		}
 
 		return $stream;

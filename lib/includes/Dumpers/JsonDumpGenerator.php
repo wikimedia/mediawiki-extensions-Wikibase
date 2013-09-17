@@ -39,6 +39,21 @@ class JsonDumpGenerator {
 	protected $entityLookup;
 
 	/**
+	 * @var int
+	 */
+	protected $shardingFactor = 1;
+
+	/*
+	 * @var int
+	 */
+	protected $shard = 0;
+
+	/*
+	 * @var string|null
+	 */
+	protected $entityType = null;
+
+	/**
 	 * @param resource $out
 	 * @param \Wikibase\EntityLookup $lookup
 	 * @param Serializer $entitySerializer
@@ -56,6 +71,45 @@ class JsonDumpGenerator {
 	}
 
 	/**
+	 * Set the sharding factor and desired shard.
+	 * For instance, to generate four dumps in parallel, use setShardingFilter( 4, 0 )
+	 * for the first dump, setShardingFilter( 4, 1 ) for the second dump,
+	 * etc.
+	 *
+	 * @param int $shardingFactor
+	 * @param int $shard
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function setShardingFilter( $shardingFactor, $shard ) {
+		if ( !is_int( $shardingFactor ) || $shardingFactor < 1 ) {
+			throw new \InvalidArgumentException( '$shardingFactor must be an integer > 0' );
+		}
+
+		if ( !is_int( $shard ) || $shard < 0 ) {
+			throw new \InvalidArgumentException( '$shard must be an integer >= 0' );
+		}
+
+		if ( $shard >= $shardingFactor ) {
+			throw new \InvalidArgumentException( '$shard must be smaller than $shardingFactor' );
+		}
+
+		$this->shardingFactor = $shardingFactor;
+		$this->shard = $shard;
+	}
+
+	/**
+	 * Set the entity type to be included in the output.
+	 *
+	 * @param string|null $type The desired type (use null for any type).
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function setEntityTypeFilter( $type ) {
+		$this->entityType = $type;
+	}
+
+	/**
 	 * Generates a JSON dump, writing to the file handle provided to the constructor.
 	 *
 	 * @param Traversable $idStream an Iterator that returns EntityId instances
@@ -69,6 +123,10 @@ class JsonDumpGenerator {
 
 		/* @var EntityId $id */
 		foreach ( $idStream as $id ) {
+			if ( !$this->idMatchesFilters( $id ) ) {
+				continue;
+			}
+
 			try {
 				if ( $i++ > 0 ) {
 					$this->writeToDump( ",\n" );
@@ -81,10 +139,30 @@ class JsonDumpGenerator {
 			} catch ( StorageException $ex ) {
 				$this->handleStorageException( $ex );
 			}
+
+			//TODO: use callback for reporting progress
 		}
 
 		$json = "\n]\n"; //TODO: make optional
 		$this->writeToDump( $json );
+	}
+
+	private function idMatchesFilters( EntityId $id ) {
+		return $this->idMatchesShard( $id )
+			&& $this->idMatchesType( $id );
+	}
+
+	private function idMatchesShard( EntityId $id ) {
+		$hash = sha1( $id->getSerialization() );
+		$n = (int)hexdec( substr( $hash, 0, 8 ) ); // 4 bytes of the hash
+		$n = $n % $this->shardingFactor; // modulo number of shards
+
+		return $n == $this->shard;
+	}
+
+	private function idMatchesType( EntityId $id ) {
+		return $this->entityType === null
+			|| ( $id->getEntityType() === $this->entityType );
 	}
 
 	/**

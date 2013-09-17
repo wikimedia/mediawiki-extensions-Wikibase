@@ -9,6 +9,7 @@ use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\EntityPerPageTable;
+use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -93,13 +94,13 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getEntitiesProvider
 	 */
-	public function testGetEntities( $ids ) {
+	public function testGetEntities( $ids, $type, $expected ) {
 		$table = $this->newEntityPerPageTable( $ids );
 
-		$iterator = $table->getEntities();
+		$iterator = $table->getEntities( $type );
 		$actual = iterator_to_array( $iterator );
 
-		$this->assertArrayEquals( $ids, $actual );
+		$this->assertArrayEquals( $expected, $actual );
 	}
 
 	public static function getEntitiesProvider() {
@@ -107,8 +108,10 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$q30 = new ItemId( 'Q30' );
 
 		return array(
-			'empty' => array( array() ),
-			'some entities' => array( array( $p10, $q30 ) ),
+			'empty' => array( array(), null, array() ),
+			'some entities' => array( array( $p10, $q30 ), null, array( $p10, $q30 ) ),
+			'just properties' => array( array( $p10, $q30 ), Property::ENTITY_TYPE, array( $p10 ) ),
+			'no matches' => array( array( $p10 ), Item::ENTITY_TYPE, array() ),
 		);
 	}
 }
