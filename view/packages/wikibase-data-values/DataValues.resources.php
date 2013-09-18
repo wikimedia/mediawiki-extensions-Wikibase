@@ -46,7 +46,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				// Note: The order here is relevant, scripts should be places after the ones they
 				//  depend on.
-				// TODO: Make one module per data value type.
 				'values/BoolValue.js',
 				'values/GlobeCoordinateValue.js',
 				'values/MonolingualTextValue.js',
@@ -54,6 +53,7 @@ return call_user_func( function() {
 				'values/StringValue.js',
 				'values/NumberValue.js',
 				'values/TimeValue.js',
+				'values/QuantityValue.js',
 				'values/UnknownValue.js',
 				'values/UnUnserializableValue.js',
 			),
