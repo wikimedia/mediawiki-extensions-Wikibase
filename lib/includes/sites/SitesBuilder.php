@@ -30,6 +30,17 @@ class SitesBuilder {
 		$sites = $this->addInterwikiIdsToGroup( $sites, $siteGroup, $wikiId );
 
 		$this->store->getSites( "nocache" );
+
+		foreach( $sites as $site ) {
+			$siteId = $site->getGlobalId();
+			$existingSites = $this->store->getSites( false );
+
+			if ( $existingSites->hasSite( $siteId ) ) {
+				$existingSite = $existingSites->getSite( $siteId );
+				$site->setInternalId( $existingSite->getInternalId() );
+			}
+		}
+
 		$this->store->saveSites( $sites );
 	}
 

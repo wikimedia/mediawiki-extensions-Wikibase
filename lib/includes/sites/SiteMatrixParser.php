@@ -94,8 +94,8 @@ class SiteMatrixParser {
 
 		foreach( $specialSites as $specialSite ) {
 			$site = $this->getSiteFromSiteData( $specialSite );
-			$siteId= $site->getGlobalId();
-			$sites[$siteId] = $this->getSiteFromSiteData( $specialSite );
+			$siteId = $site->getGlobalId();
+			$sites[$siteId] = $site;
 		}
 
 		return $sites;
@@ -144,7 +144,7 @@ class SiteMatrixParser {
 
 		$url = $siteData['url'];
 
-		if ( $this->stripProtocol === 'stripProtocol' ) {
+		if ( $this->stripProtocol ) {
 			$url = preg_replace( '@^https?:@', '', $url );
 		}
 
