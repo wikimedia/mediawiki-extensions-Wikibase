@@ -37,7 +37,7 @@ class PopulateSitesTable extends Maintenance {
 	}
 
 	public function execute() {
-		$stripProtocols = $this->getOption( 'strip-protocols' ) ? "stripProtocol" : false;
+		$stripProtocols = $this->getOption( 'strip-protocols' ) ? true : false;
 		$url = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
 		$scriptPath = $this->getOption( 'script-path', '/w/$1' );
 		$articlePath = $this->getOption( 'article-path', '/wiki/$1' );
