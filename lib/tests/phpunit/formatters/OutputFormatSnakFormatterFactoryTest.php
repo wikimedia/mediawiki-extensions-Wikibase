@@ -4,10 +4,10 @@ namespace Wikibase\Lib\Test;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\SnakFormatterFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 
 /**
- * @covers Wikibase\Lib\SnakFormatterFactory
+ * @covers Wikibase\Lib\OutputFormatSnakFormatterFactory
  *
  * @since 0.5
  *
@@ -20,14 +20,10 @@ use Wikibase\Lib\SnakFormatterFactory;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class SnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
+class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider constructorErrorsProvider
-	 *
-	 * @param $format
-	 * @param $formatters
-	 * @param $error
 	 */
 	public function testConstructorErrors( $builder, $error ) {
 		$this->setExpectedException( $error );
@@ -35,7 +31,7 @@ class SnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		new SnakFormatterFactory( $builder );
+		new OutputFormatSnakFormatterFactory( $builder );
 	}
 
 	public function constructorErrorsProvider() {
@@ -68,18 +64,18 @@ class SnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider getFormatterProvider
+	 * @dataProvider getSnakFormatterProvider
 	 * @covers SnakFormatterFactory::formatSnak()
 	 */
-	public function testGetFormatter( $builders, $format ) {
-		$factory = new SnakFormatterFactory( $builders );
-		$formatter = $factory->getFormatter( $format, new FormatterOptions() );
+	public function testGetSnakFormatter( $builders, $format ) {
+		$factory = new OutputFormatSnakFormatterFactory( $builders );
+		$formatter = $factory->getSnakFormatter( $format, new FormatterOptions() );
 
 		$this->assertInstanceOf( 'Wikibase\Lib\SnakFormatter', $formatter );
 		$this->assertEquals( $format, $formatter->getFormat() );
 	}
 
-	public function getFormatterProvider() {
+	public function getSnakFormatterProvider() {
 		$this_ = $this;
 		$builders = array(
 			'foo' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'foo', 'FOO' ); },

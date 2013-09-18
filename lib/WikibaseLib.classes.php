@@ -92,6 +92,7 @@ return call_user_func( function() {
 
 		// includes/formatters
 		'Wikibase\Lib\DispatchingSnakFormatter' => 'includes/formatters/DispatchingSnakFormatter.php',
+		'Wikibase\Lib\DispatchingValueFormatter' => 'includes/formatters/DispatchingValueFormatter.php',
 		'Wikibase\Lib\EntityIdFormatter' => 'includes/formatters/EntityIdFormatter.php',
 		'Wikibase\Lib\EntityIdLabelFormatter' => 'includes/formatters/EntityIdLabelFormatter.php',
 		'Wikibase\Lib\MwTimeIsoFormatter' => 'includes/formatters/MwTimeIsoFormatter.php',
@@ -100,7 +101,8 @@ return call_user_func( function() {
 		'Wikibase\Lib\MessageSnakFormatter' => 'includes/formatters/MessageSnakFormatter.php',
 		'Wikibase\Lib\PropertyValueSnakFormatter' => 'includes/formatters/PropertyValueSnakFormatter.php',
 		'Wikibase\Lib\SnakFormatter' => 'includes/formatters/SnakFormatter.php',
-		'Wikibase\Lib\SnakFormatterFactory' => 'includes/formatters/SnakFormatterFactory.php',
+		'Wikibase\Lib\OutputFormatSnakFormatterFactory' => 'includes/formatters/OutputFormatSnakFormatterFactory.php',
+		'Wikibase\Lib\OutputFormatValueFormatterFactory' => 'includes/formatters/OutputFormatValueFormatterFactory.php',
 		'Wikibase\Lib\WikibaseSnakFormatterBuilders' => 'includes/formatters/WikibaseSnakFormatterBuilders.php',
 
 		// includes/IO
