@@ -5,13 +5,14 @@ use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\SnakFormatterFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -82,9 +83,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testBuildDispatchingSnakFormatter( $format, $options, $type, $snak, $expected ) {
 		$builders = $this->newBuilders( $type, new ItemId( 'Q5' ) );
-		$factory = new SnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
-
-		$options = new FormatterOptions();
+		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 
 		$formatter = $builders->buildDispatchingSnakFormatter(
 			$factory,
@@ -98,7 +97,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 	public function buildDispatchingSnakFormatterProvider() {
 		$options = new FormatterOptions( array(
-			'languages' => array( 'en' ),
+			ValueFormatter::OPT_LANG => 'en',
 		) );
 
 		return array(

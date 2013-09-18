@@ -2,9 +2,8 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\StringFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\DispatchingValueFormatter;
 use Wikibase\Lib\PropertyValueSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\PropertySomeValueSnak;
@@ -33,37 +32,21 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param $formatters
 	 * @param $error
 	 */
-	public function testConstructorErrors( $format, $formatters, $error ) {
+	public function testConstructorErrors( $format, $error ) {
 		$this->setExpectedException( $error );
 
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
-		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );;
+		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		new PropertyValueSnakFormatter( $format, $formatters, $typeLookup );
+		$valueFormatter = new DispatchingValueFormatter( array() );
+
+		new PropertyValueSnakFormatter( $format, $valueFormatter, $typeLookup );
 	}
 
 	public function constructorErrorsProvider() {
-		$stringFormatter = new StringFormatter( new FormatterOptions() );
-
 		return array(
 			'format must be a string' => array(
 				17,
-				array(),
-				'InvalidArgumentException'
-			),
-			'keys must be strings' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				array( 17 => $stringFormatter ),
-				'InvalidArgumentException'
-			),
-			'keys must have prefix' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				array( 'foo' => $stringFormatter ),
-				'InvalidArgumentException'
-			),
-			'formatters must be instances of ValueFormatter' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				array( 'novalue' => 17 ),
 				'InvalidArgumentException'
 			),
 		);
@@ -81,7 +64,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$formatter = new PropertyValueSnakFormatter(
 			SnakFormatter::FORMAT_PLAIN,
-			$formatters,
+			new DispatchingValueFormatter( $formatters ),
 			$typeLookup
 		);
 
@@ -128,7 +111,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		$formatter = new PropertyValueSnakFormatter( 'test', array(), $typeLookup );
+		$formatter = new PropertyValueSnakFormatter( 'test', new DispatchingValueFormatter( array() ), $typeLookup );
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
@@ -140,7 +123,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		$formatter = new PropertyValueSnakFormatter( 'test', array(), $typeLookup );
+		$formatter = new PropertyValueSnakFormatter( 'test', new DispatchingValueFormatter( array() ), $typeLookup );
 
 		$snak = new PropertyValueSnak( new PropertyId( "P23" ), new StringValue( 'test' ) );
 		$this->assertTrue( $formatter->canFormatSnak( $snak ), $snak->getType() );
