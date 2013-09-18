@@ -59,7 +59,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
 		// test whether we get the right EntityView from an EntityContent
-		$view = ItemView::newForEntityContent( $entityContent, $valueFormatters, $dataTypeLookup, $entityLoader );
+		$view = ItemView::newForEntityContent();
 
 		$this->assertType(
 			ItemView::$typeMap[ $entityContent->getEntity()->getType() ],
