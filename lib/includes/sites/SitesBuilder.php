@@ -29,7 +29,17 @@ class SitesBuilder {
 	public function buildStore( array $sites, $siteGroup, $wikiId ) {
 		$sites = $this->addInterwikiIdsToGroup( $sites, $siteGroup, $wikiId );
 
-		$this->store->getSites( "nocache" );
+		$existingSites = $this->store->getSites( "nocache" );
+
+		foreach( $sites as $site ) {
+			$siteId = $site->getGlobalId();
+
+			if ( $existingSites->hasSite( $siteId ) ) {
+				$existingSite = $existingSites->getSite( $siteId );
+				$site->setInternalId( $existingSite->getInternalId() );
+			}
+		}
+
 		$this->store->saveSites( $sites );
 	}
 
