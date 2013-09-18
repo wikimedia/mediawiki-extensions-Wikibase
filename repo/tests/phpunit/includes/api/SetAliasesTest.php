@@ -49,6 +49,9 @@ use ApiTestCase;
  * @group SetAliasesTest
  * @group BreakingTheSlownessBarrier
  *
+ * @group Database
+ *        ^---- needed because we rely on Title objects internally
+ *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */

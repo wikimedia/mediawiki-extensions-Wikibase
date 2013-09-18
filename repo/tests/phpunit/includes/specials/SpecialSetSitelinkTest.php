@@ -15,13 +15,16 @@ namespace Wikibase\Test;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *
+ * @group Database
+ *        ^---- needed because we rely on Title objects internally
+ *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
 class SpecialSetSitelinkTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialSetSitelink();
+		return new \Wikibase\Repo\Specials\SpecialSetSiteLink();
 	}
 
 	public function testExecute() {

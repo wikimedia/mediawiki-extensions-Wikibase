@@ -15,6 +15,9 @@ namespace Wikibase\Test;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *
+ * @group Database
+ *        ^---- needed because we rely on Title objects internally
+ *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Adam Shorland

@@ -19,6 +19,10 @@ use Title;
  * @group Wikibase
  * @group WikibaseSerialization
  *
+ * @group Database
+ *        ^--- Needed because FetchedEntityContentSerializer uses WikiPage.
+ *             Also because the test uses Title.
+ *
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >

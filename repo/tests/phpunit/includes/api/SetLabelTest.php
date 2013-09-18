@@ -49,6 +49,9 @@ namespace Wikibase\Test\Api;
  * @group LanguageAttributeTest
  * @group BreakingTheSlownessBarrier
  *
+ * @group Database
+ *        ^---- needed because we rely on Title objects internally
+ *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
