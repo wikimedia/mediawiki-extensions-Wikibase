@@ -66,7 +66,8 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 
 		$apiBaseMock
 			->expects( $expectDieUsage ? $this->once() : $this->never() )
-			->method( 'dieUsage' );
+			->method( 'dieUsage' )
+			->will( $this->throwException( new \UsageException( 'MockUsageExceptionMessage', 'MockUsageExceptionCode' ) ) );
 
 		$apiResultMock = $this->getMockBuilder( '\ApiResult' )
 			->disableOriginalConstructor()
@@ -168,6 +169,8 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	 * Makes sure the request will fail if we want normalization for two titles
 	 */
 	public function testGetEntityIdsNormalizationNotAllowed() {
+		$this->setExpectedException( 'UsageException' );
+
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getApiBaseMock( 0, true ),
 			$this->getSiteLinkCacheMock( 1 ),
@@ -217,4 +220,18 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
 		$this->assertEquals( \Title::newFromText( $title )->getPrefixedText(), $title );
 	}
+
+	public function testNoSites(){
+		$this->setExpectedException( 'UsageException' );
+
+		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getApiBaseMock( null, true ),
+			$this->getSiteLinkCacheMock( 123 ),
+			$this->getSiteStoreMock(),
+			new StringNormalizer()
+		);
+
+		$entityId = $itemByTitleHelper->getEntityIds( array( ), array( 'barfoo' ), false );
+	}
+
 }
