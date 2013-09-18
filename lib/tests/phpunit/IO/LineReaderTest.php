@@ -1,14 +1,12 @@
 <?php
 
 namespace Wikibase\Test\IO;
+
 use PHPUnit_Framework_TestCase;
 use Wikibase\IO\LineReader;
 
 /**
  * @covers Wikibase\IO\LineReader
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

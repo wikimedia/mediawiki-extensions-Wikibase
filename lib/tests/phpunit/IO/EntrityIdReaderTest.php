@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test\IO;
+
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -8,9 +9,6 @@ use Wikibase\IO\EntityIdReader;
 
 /**
  * @covers Wikibase\IO\EntityIdReader
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

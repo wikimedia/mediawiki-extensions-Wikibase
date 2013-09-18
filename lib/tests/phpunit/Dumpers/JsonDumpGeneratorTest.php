@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test\Dumpers;
+
 use ArrayObject;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,9 +17,6 @@ use Wikibase\Property;
  * JsonDumpGeneratorTest
  *
  * @covers JsonDumpGenerator
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

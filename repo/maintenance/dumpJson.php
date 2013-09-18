@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Disposable;
 use Iterator;
 use Maintenance;
