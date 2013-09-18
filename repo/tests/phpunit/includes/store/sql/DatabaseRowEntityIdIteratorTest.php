@@ -17,9 +17,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.5
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
  * @group Wikibase
  * @group WikibaseStore
  * @group Database
@@ -32,7 +29,7 @@ use Wikibase\Repo\WikibaseRepo;
 class DatabaseRowEntityIdIteratorTest extends \MediaWikiTestCase {
 
 	/**
-	 * @param EntityId[] $entityId
+	 * @param array $entityIds
 	 *
 	 * @return string the table name
 	 */

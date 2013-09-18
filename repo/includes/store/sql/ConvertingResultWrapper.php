@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Iterator;
 use ResultWrapper;
 
@@ -8,8 +9,6 @@ use ResultWrapper;
  * Base class for iterators that convert each row of a database result into an appropriate object.
  *
  * @since 0.5
- *
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

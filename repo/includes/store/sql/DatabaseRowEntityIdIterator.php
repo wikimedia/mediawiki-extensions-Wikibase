@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use ResultWrapper;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -9,8 +10,6 @@ use Wikibase\DataModel\Entity\PropertyId;
  * Allows a database result set containing entity IDs to be iterated as EntityId objects.
  *
  * @since 0.5
- *
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -39,6 +38,7 @@ class DatabaseRowEntityIdIterator extends ConvertingResultWrapper {
 	 *
 	 * @param object $row An object representing the raw database row, as returned by ResultWrapper::current().
 	 *
+	 * @throws \RuntimeException
 	 * @return EntityId
 	 */
 	protected function convert( $row ) {
