@@ -38,7 +38,7 @@ interface SnakFormatter {
 
 	/**
 	 * Returns the format ID of the format this formatter generates.
-	 * This uses the FORMAT_XXX constants defined in SnakFormatterFactory.
+	 * This uses the FORMAT_XXX constants defined in OutputFormatSnakFormatterFactory.
 	 *
 	 * @see SnakFormatter::FORMAT_PLAIN
 	 * @see SnakFormatter::FORMAT_WIKI

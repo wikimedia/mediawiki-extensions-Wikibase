@@ -6,7 +6,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\SnakFormatterFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -211,7 +211,7 @@ class PropertyParserFunction {
 			// ...more options...
 		) );
 
-		$formatter = $wikibaseClient->newSnakFormatter( SnakFormatterFactory::FORMAT_WIKI, $options );
+		$formatter = $wikibaseClient->newSnakFormatter( OutputFormatSnakFormatterFactory::FORMAT_WIKI, $options );
 
 		$instance = new self( $targetLanguage,
 			$entityLookup, $propertyLabelResolver,

@@ -39,7 +39,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		) );
 
 		$this->propertyNameFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
-		$this->snakValueFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+		$this->snakValueFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options );
 
 	}
 

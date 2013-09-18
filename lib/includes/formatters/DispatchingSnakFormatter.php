@@ -51,7 +51,7 @@ class DispatchingSnakFormatter implements SnakFormatter {
 		$this->format = $format;
 		$this->formatters = $formatters;
 
-		//XXX: this should perhaps use, or be, a SnakFormatterFactory
+		//XXX: this should perhaps use, or be, a OutputFormatSnakFormatterFactory
 	}
 
 	/**
