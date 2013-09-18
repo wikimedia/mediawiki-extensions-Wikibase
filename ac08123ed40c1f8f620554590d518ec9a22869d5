@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_ab68b71f",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-18T09:35:51Z",
+      "side": 1,
+      "message": "This is being consistent with the ClaimModificationHelper which displays the same output for all api modules that edit claims. (again different to get entities)",
+      "parentUuid": "4946a543_61da754a",
+      "revId": "ac08123ed40c1f8f620554590d518ec9a22869d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_e104a5c4",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 20
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-17T18:23:38Z",
       "side": 1,
       "message": "You should use the Claim*s*Unserializer here or the ByPropertyListUnserializer, because you missed one array level here (you cannot pass two statements for one property as list). Try to pass a full json object from action\u003dwbgetentites to action\u003dwbeditentry, you will get the error message \"Invalid claim type specified\"",
+      "revId": "ac08123ed40c1f8f620554590d518ec9a22869d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_eb89dfed",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-18T09:35:51Z",
+      "side": 1,
+      "message": "The format wbgetentities provides is not identical to that of wbeditentities.\nTest case 15 in the test for edit entities successfully adds 2 claims for the same property.\nEdit Entity simply accepts an array of claims",
+      "parentUuid": "4946a543_e104a5c4",
       "revId": "ac08123ed40c1f8f620554590d518ec9a22869d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
