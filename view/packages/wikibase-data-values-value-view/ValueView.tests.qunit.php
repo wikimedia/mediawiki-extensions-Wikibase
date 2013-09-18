@@ -20,6 +20,15 @@ return call_user_func( function() {
 	$bp = 'tests/qunit';
 
 	return array(
+		'jquery.PurposedCallbacks.tests' => array(
+			'scripts' => array(
+				"$bp/jquery/jquery.PurposedCallbacks.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.PurposedCallbacks',
+			),
+		),
+
 		'jquery.eachchange.tests' => array(
 			'scripts' => array(
 				"$bp/jquery/jquery.eachchange.tests.js",
