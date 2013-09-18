@@ -5071,6 +5071,8 @@ $messages['et'] = array(
 	'wikibase-sitelinks-empty' => 'Selle üksuse võrgukohalingid puuduvad seni.',
 	'wikibase-sitelinks-input-help-message' => 'Määra selle üksusega seotud leheküljele viitav link.',
 	'wikibase-remove' => 'eemalda',
+	'wikibase-move-up' => 'liiguta üles',
+	'wikibase-move-down' => 'liiguta alla',
 	'wikibase-undo-title' => 'Üksuse "$1" redigeerimise tagasi võtmine',
 	'wikibase-restore-title' => 'Üksuse "$1" vana redaktsiooni taastamine',
 	'wikibase-partial-undo' => 'Selle muudatuse saab osaliselt tagasi võtta.',
@@ -6548,6 +6550,8 @@ $messages['gl'] = array(
 	'wikibase-sitelinks-empty' => 'Ningunha páxina do sitio ten ligazóns cara a este elemento.',
 	'wikibase-sitelinks-input-help-message' => 'Defina unha ligazón cara a unha páxina relacionada co elemento.',
 	'wikibase-remove' => 'eliminar',
+	'wikibase-move-up' => 'mover arriba',
+	'wikibase-move-down' => 'mover abaixo',
 	'wikibase-undo-title' => 'Desfacer unha edición feita en "$1"',
 	'wikibase-restore-title' => 'Restaurar unha revisión vella de "$1"',
 	'wikibase-partial-undo' => 'A edición pódese desfacer parcialmente.',
@@ -14842,6 +14846,7 @@ $messages['tl'] = array(
 
 /** Turkish (Türkçe)
  * @author Emperyan
+ * @author Incelemeelemani
  * @author Rapsar
  */
 $messages['tr'] = array(
@@ -16245,6 +16250,8 @@ $messages['zh-hans'] = array(
 	'wikibase-sitelinks-empty' => '还没有该项的网站链接。',
 	'wikibase-sitelinks-input-help-message' => '请设置至该项相关页面的链接。',
 	'wikibase-remove' => '删除',
+	'wikibase-move-up' => '向上移动',
+	'wikibase-move-down' => '向下移动',
 	'wikibase-undo-title' => '撤销“$1”的编辑',
 	'wikibase-restore-title' => '恢复“$1”的旧版本',
 	'wikibase-partial-undo' => '该编辑可以部分撤消。',

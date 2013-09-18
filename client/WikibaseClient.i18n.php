@@ -1258,7 +1258,7 @@ $messages['es'] = array(
  * @author Pikne
  */
 $messages['et'] = array(
-	'wikibase-client-desc' => 'Lisa Vikibaas klient',
+	'wikibase-client-desc' => 'Vikibaasi-lisa klient',
 	'specialpages-group-wikibaseclient' => 'Vikiandmete klient',
 	'tooltip-t-wikibase' => 'Link andmehoidla seonduva üksuse juurde',
 	'wikibase-after-page-move' => 'Võid [$1 värskendada] ka vastavat Vikiandmete üksust, et teisaldatud lehekülje keelelingid jääksid töökorda.',

@@ -2932,6 +2932,7 @@ $messages['tl'] = array(
 );
 
 /** Turkish (Türkçe)
+ * @author Incelemeelemani
  * @author Rapsar
  */
 $messages['tr'] = array(
@@ -2939,6 +2940,8 @@ $messages['tr'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Dil',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Bağlantılı madde',
+	'wikibase-validator-no-such-entity' => '$1 bulunamadı',
+	'wikibase-validator-no-such-property' => '$1 özelliği bulunamadı',
 );
 
 /** Uyghur (Arabic script) (ئۇيغۇرچە)
