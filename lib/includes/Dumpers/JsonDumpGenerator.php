@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Dumpers;
+
 use MWException;
 use Traversable;
 use Wikibase\DataModel\Entity\EntityId;
@@ -167,6 +168,7 @@ class JsonDumpGenerator {
 
 	/**
 	 * @param $ex
+	 * @throws StorageException
 	 */
 	private function handleStorageException( $ex ) {
 		//TODO: optionally, log & ignore.

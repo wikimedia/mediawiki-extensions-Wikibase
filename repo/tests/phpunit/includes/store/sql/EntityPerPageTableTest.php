@@ -37,7 +37,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityId[] $entityId
+	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityPerPageTable
 	 */
