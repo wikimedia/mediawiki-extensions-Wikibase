@@ -97,7 +97,7 @@ class SetClaim extends ApiWikibase {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			$claimDiffer,
-			WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getFormatter( SnakFormatter::FORMAT_PLAIN, $options )
+			WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options )
 		);
 		$claimSaver = new ClaimSaver();
 

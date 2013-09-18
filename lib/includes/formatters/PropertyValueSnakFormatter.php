@@ -21,9 +21,9 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	private $format;
 
 	/**
-	 * @var ValueFormatter[]
+	 * @var DispatchingValueFormatter
 	 */
-	private $formatters;
+	private $valueFormatter;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -32,37 +32,19 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 
 	/**
 	 * @param string $format The name of this formatter's output format.
-	 *        Use the FORMAT_XXX constants defined in SnakFormatterFactory.
-	 * @param ValueFormatter[] $formatters Maps prefixed type ids to ValueFormatter instances.
-	 *        Each type ID must be prefixed with either "PT:" for property data types
-	 *        or "VT:" fordata value types.
+	 *        Use the FORMAT_XXX constants defined in OutputFormatSnakFormatterFactory.
+	 * @param DispatchingValueFormatter $valueFormatter
 	 * @param PropertyDataTypeLookup $typeLookup
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $format, array $formatters, PropertyDataTypeLookup $typeLookup) {
-
+	public function __construct( $format, DispatchingValueFormatter $valueFormatter, PropertyDataTypeLookup $typeLookup) {
 		if ( !is_string( $format ) ) {
 			throw new InvalidArgumentException( '$format must be a string' );
 		}
 
-		foreach ( $formatters as $type => $formatter ) {
-			if ( !is_string( $type ) ) {
-				throw new InvalidArgumentException( '$formatters must map type IDs to formatters.' );
-			}
-
-			if ( !preg_match( '/^(PT|VT):/', $type ) ) {
-				throw new InvalidArgumentException( 'Type ID must be prefixed with "PT:" or "VT:" to'
-						. ' indicate property data type or data value type, respectively.' );
-			}
-
-			if ( !( $formatter instanceof ValueFormatter ) ) {
-				throw new InvalidArgumentException( '$formatters must contain instances of ValueFormatter' );
-			}
-		}
-
-		$this->format     = $format;
-		$this->formatters = $formatters;
+		$this->format = $format;
+		$this->valueFormatter = $valueFormatter;
 		$this->typeLookup = $typeLookup;
 	}
 
@@ -88,12 +70,9 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	}
 
 	/**
-	 * Formats the given value by finding an appropriate formatter among the ones supplied
-	 * to the constructor, and applying it.
+	 * @see ValueFormatter::format().
 	 *
-	 * If $dataTypeId is given, this will first try to find an appropriate formatter based on
-	 * the data type. If none is found, this falls back to finding a formatter based on the
-	 * value's type.
+	 * Implemented by delegating to the DispatchingValueFormatter passed to the constructor.
 	 *
 	 * @see TypedValueFormatter::formatValue.
 	 *
@@ -104,52 +83,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @return string
 	 */
 	public function formatValue( DataValue $value, $dataTypeId = null ) {
-		$formatter = $this->getFormatter( $value->getType(), $dataTypeId );
-
-		$text = $formatter->format( $value );
-		return $text;
-	}
-
-	/**
-	 * Finds an appropriate formatter among the ones supplied to the constructor.
-	 *
-	 * If $dataTypeId is given, this will first try to find an appropriate formatter based on
-	 * the data type. If none is found, this falls back to finding a formatter based
-	 * on $dataValueType.
-	 *
-	 * @param string $dataValueType
-	 * @param string|null $dataTypeId
-	 *
-	 * @return ValueFormatter
-	 * @throws FormattingException if no appropriate formatter is found
-	 */
-	protected function getFormatter( $dataValueType, $dataTypeId = null ) {
-		/* @var ValueFormatter */
-		$formatter = null;
-
-		if ( $dataTypeId !== null ) {
-			if ( isset( $this->formatters["PT:$dataTypeId"] ) ) {
-				$formatter = $this->formatters["PT:$dataTypeId"];
-			}
-		}
-
-		if ( $formatter === null ) {
-			if ( isset( $this->formatters["VT:$dataValueType"] ) ) {
-				$formatter = $this->formatters["VT:$dataValueType"];
-			}
-		}
-
-		if ( $formatter === null ) {
-			if ( $dataTypeId !== null ) {
-				$msg = "No formatter defined for data type $dataTypeId nor for value type $dataValueType.";
-			} else {
-				$msg = "No formatter defined for value type $dataValueType.";
-			}
-
-			throw new FormattingException( $msg );
-		}
-
-		return $formatter;
+		return $this->valueFormatter->formatValue( $value, $dataTypeId );
 	}
 
 	/**
