@@ -29,6 +29,9 @@ use Wikibase\Property;
  * @group WikibaseChange
  * @group ChangeHandlerTest
  *
+ * @group Database
+ *        ^---- needed because we rely on Title objects internally
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -15,6 +15,9 @@ namespace Wikibase\Test;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *
+ * @group Database
+ *        ^---- needed because we rely on Title objects internally
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  * @author Adam Shorland

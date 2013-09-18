@@ -34,6 +34,9 @@ use Wikibase\SettingsArray;
  * @group WikibaseClient
  * @group WikibaseClientTest
  *
+ * @group Database
+ *        ^---- needed because we rely on Title objects internally
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
