@@ -782,10 +782,20 @@ $messages['roa-tara'] = array(
 );
 
 /** Russian (русский)
+ * @author Okras
  */
 $messages['ru'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Обработка значений типа «$1» пока не поддерживается.', # Fuzzy
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Обработка значений для типа данных «$1» пока не поддерживается.', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => 'пусто',
+	'valueview-expert-globecoordinateinput-precision' => 'Точность:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Григорианский',
+	'valueview-expert-timevalue-calendar-julian' => 'Юлианский',
+	'valueview-expert-timeinput-precision' => 'Точность:',
+	'valueview-expert-timeinput-calendar' => 'Календарь:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Григорианский календарь)',
+	'valueview-preview-label' => 'будет отображаться как:',
+	'valueview-listrotator-auto' => 'автоматически',
 );
 
 /** Serbo-Croatian (srpskohrvatski / српскохрватски)
