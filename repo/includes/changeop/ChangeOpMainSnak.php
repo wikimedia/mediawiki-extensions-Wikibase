@@ -8,6 +8,7 @@ use Wikibase\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use DataValues\GlobeCoordinateValue;
+use DataValues\TimeValue;
 
 /**
  * Class for mainsnak change operation

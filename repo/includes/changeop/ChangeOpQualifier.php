@@ -6,6 +6,9 @@ use InvalidArgumentException;
 use Wikibase\Snak;
 use Wikibase\Snaks;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use DataValues\GlobeCoordinateValue;
+use DataValues\TimeValue;
 
 /**
  * Class for qualifier change operation
@@ -198,8 +201,21 @@ class ChangeOpQualifier extends ChangeOpBase {
 		//TODO: use formatters here!
 		if ( $snak instanceof PropertyValueSnak ) {
 			$value = $snak->getDataValue();
+			// TODO: we should use value formatters here!
+			if ( $value instanceof EntityIdValue ) {
+				$value = $value->getEntityId();
+			} elseif ( $value instanceof TimeValue ) {
+				$value = $value->getTime();
+			} elseif ( $value instanceof GlobeCoordinateValue ) {
+				$value = $value->getLatitude() . ', ' . $value->getLongitude();
+			} elseif ( is_string( $value->getValue() ) ) {
+				$value = $value->getValue();
+			} else {
+				//type not supported;
+				$value = "";
+			}
 		} else {
-			$value = $snak->getType();
+			$value = $snak->getType(); // todo handle no values in general way (needed elsewhere)
 		}
 
 		$args = array( $propertyId => array( $value ) );
