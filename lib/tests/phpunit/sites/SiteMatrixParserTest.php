@@ -3,7 +3,7 @@
 /**
  * @covers SiteMatrixParser
  *
- * @since 0.1
+ * @since 0.5
  *
  * @group Wikibase
  *
@@ -15,20 +15,31 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider sitesFromJsonProvider
 	 */
-	public function testSitesFromJson( $json, $expected ) {
-		$siteMatrixParser = new SiteMatrixParser( '/w/$1', '/wiki/$1', false );
+	public function testSitesFromJson( $scriptPath, $articlePath, $expected ) {
+		$json = $this->getSiteMatrixJson();
+
+		$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath, true );
+
 		$sites = $siteMatrixParser->sitesFromJson( $json );
-		$this->assertEquals( ksort( $expected ), ksort( $sites ) );
+
+		ksort( $expected );
+		ksort( $sites );
+
+		$this->assertEquals( $expected, $sites );
 	}
 
 	public function sitesFromJsonProvider() {
-		$json = $this->getSiteMatrixJson();
-		$sitesData = $this->getSitesData();
-		$sites = $this->getSites( $sitesData );
+		$siteData = $this->getSiteData();
 
-		return array(
-			array( $json, $sites )
+		$data = array();
+
+		$data[] = array(
+			'/w/$1',
+			'/wiki/$1',
+			$this->getSites( $siteData, '/w/$1', '/wiki/$1' )
 		);
+
+		return $data;
 	}
 
 	protected function getSiteMatrixJson() {
@@ -108,81 +119,83 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 		return json_encode( $data );
 	}
 
-	protected function getSitesData() {
-		$sitesData = array(
+	protected function getSiteData() {
+		$siteData = array(
 			array(
-				'id' => 'enwiki',
+				'siteid' => 'enwiki',
 				'group' => 'wikipedia',
-				'lang' => 'en',
-				'scriptpath' => 'http://en.wikipedia.org/w/$1',
-				'articlepath' => 'http://en.wikipedia.org/wiki/$1'
+				'url' => 'en.wikipedia.org',
+				'lang' => 'en'
 			),
 			array(
-				'id' => 'frwiki',
+				'siteid' => 'frwiki',
 				'group' => 'wikipedia',
-				'lang' => 'fr',
-				'scriptpath' => 'http://fr.wikipedia.org/w/$1',
-				'articlepath' => 'http://fr.wikipedia.org/wiki/$1'
+				'url' => 'fr.wikipedia.org',
+				'lang' => 'fr'
 			),
 			array(
-				'id' => 'enwikivoyage',
+				'siteid' => 'enwikivoyage',
 				'group' => 'wikivoyage',
-				'lang' => 'en',
-				'scriptpath' => 'http://en.wikivoyage.org/w/$1',
-				'articlepath' => 'http://en.wikivoyage.org/wiki/$1'
+				'url' => 'en.wikivoyage.org',
+				'lang' => 'en'
 			),
 			array(
-				'id' => 'frwikivoyage',
+				'siteid' => 'frwikivoyage',
 				'group' => 'wikivoyage',
-				'lang' => 'fr',
-				'scriptpath' => 'http://fr.wikivoyage.org/w/$1',
-				'articlepath' => 'http://fr.wikivoyage.org/wiki/$1'
+				'url' => 'fr.wikivoyage.org',
+				'lang' => 'fr'
 			),
 			array(
-				'id' => 'enwikiquote',
+				'siteid' => 'enwikiquote',
 				'group' => 'wikiquote',
-				'lang' => 'en',
-				'scriptpath' => 'http://en.wikiquote.org/w/$1',
-				'articlepath' => 'http://en.wikiquote.org/wiki/$1'
+				'url' => 'en.wikiquote.org',
+				'lang' => 'en'
 			),
 			array(
-				'id' => 'commonswiki',
+				'siteid' => 'commonswiki',
 				'group' => 'commons',
-				'scriptpath' => 'http://www.commons.org/w/$1',
-				'articlepath' => 'http://www.commons.org/wiki/$1'
+				'url' => 'commons.wikimedia.org',
+				'lang' => 'en'
 			),
 			array(
-				'id' => 'wikidatawiki',
+				'siteid' => 'wikidatawiki',
 				'group' => 'wikidata',
-				'scriptpath' => 'http://www.wikidata.org/w/$1',
-				'articlepath' => 'http://www.wikidata.org/wiki/$1'
+				'url' => 'www.wikidata.org',
+				'lang' => 'en'
 			)
 		);
 
-		return $sitesData;
+		return $siteData;
 	}
 
-	protected function getSites( $sitesData ) {
+	public function getSites( array $sitesData, $scriptPath, $articlePath ) {
 		$sites = array();
 
 		foreach( $sitesData as $siteData ) {
-			$siteId = $siteData['id'];
+			$fields = array(
+				'globalid' => $siteData['siteid'],
+				'type' => 'mediawiki',
+				'group' => $siteData['group'],
+				'source' => 'local',
+				'language' => $siteData['lang'],
+				'localids' => array(),
+				'internalid' => null,
+				'data' => array(
+					'paths' => array(
+						'file_path' => '//' . $siteData['url'] . $scriptPath,
+						'page_path' => '//' . $siteData['url'] . $articlePath
+					)
+				),
+				'forward' => false,
+				'config' => array()
+			);
 
 			$site = new MediaWikiSite();
-			$site->setGlobalId( $siteId );
-			$site->setGroup( $siteData['group'] );
-
-			if( array_key_exists( 'lang', $siteData ) ) {
-				$site->setLanguageCode( $siteData['lang'] );
-			}
-
-			$site->setFilePath( $siteData['scriptpath'] );
-			$site->setPagePath( $siteData['articlepath'] );
-
+			$site->unserialize( serialize( $fields ) );
+			$siteId = $siteData['siteid'];
 			$sites[$siteId] = $site;
 		}
 
 		return $sites;
 	}
-
 }

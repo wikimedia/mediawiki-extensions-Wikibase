@@ -5,7 +5,7 @@ use Wikibase\Test\MockSiteStore;
 /**
  * @covers SitesBuilder
  *
- * @since 0.1
+ * @since 0.5
  *
  * @group Wikibase
  *
