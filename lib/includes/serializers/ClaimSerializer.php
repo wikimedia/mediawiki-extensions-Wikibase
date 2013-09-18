@@ -111,10 +111,13 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			$serialization['qualifiers'] = $qualifiers;
 
 			$serialization['qualifiers-order'] = array();
-			foreach( $qualifiers as $propertyId => $snaks ) {
-				$serialization['qualifiers-order'][] = $propertyId;
+			foreach( $claim->getQualifiers() as $snak ) {
+				$id = $snak->getPropertyId()->getPrefixedId();
+				if( !in_array( $id, $serialization['qualifiers-order'] ) ) {
+					$serialization['qualifiers-order'][] = $snak->getPropertyId()->getPrefixedId();
+				}
 			}
-			$this->setIndexedTagName( $serialization['qualifiers-order'], 'qualifiers-order' );
+			$this->setIndexedTagName( $serialization['qualifiers-order'], 'property' );
 		}
 
 		$serialization['type'] = $claim instanceof Statement ? 'statement' : 'claim';
