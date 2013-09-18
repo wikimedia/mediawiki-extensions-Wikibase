@@ -130,19 +130,21 @@ class WikibaseSnakFormatterBuilders {
 	 * Returns a DispatchingSnakFormatter for the given format, that will dispatch based on
 	 * the snak type. The instance returned by this method will cover all standard snak types.
 	 *
-	 * @param SnakFormatterFactory $factory
+	 * @param OutputFormatSnakFormatterFactory $factory
 	 * @param string               $format
 	 * @param FormatterOptions     $options
 	 *
 	 * @return DispatchingSnakFormatter
 	 */
-	public function buildDispatchingSnakFormatter( SnakFormatterFactory $factory, $format, FormatterOptions $options ) {
+	public function buildDispatchingSnakFormatter( OutputFormatSnakFormatterFactory $factory, $format, FormatterOptions $options ) {
 		$this->initLanguageDefaults( $options );
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
 		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $lang ), $format );
 		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $lang ), $format );
-		$valueSnakFormatter = $this->buildValueSnakFormatter( $factory, $format, $options );
+
+		$valueFormatter = $this->buildDispatchingValueFormatter( $format, $options );
+		$valueSnakFormatter = new PropertyValueSnakFormatter( $format, $valueFormatter, $this->propertyDataTypeLookup );
 
 		$formatters = array(
 			'novalue' => $noValueSnakFormatter,
@@ -203,16 +205,15 @@ class WikibaseSnakFormatterBuilders {
 
 	/**
 	 * Returns a DispatchingSnakFormatter for the given format, that will dispatch based on
-	 * the snak type. The instance returned by this method will cover all standard snak types.
+	 * the data value type or property data type.
 	 *
-	 * @param SnakFormatterFactory $factory
 	 * @param string $format
 	 * @param FormatterOptions $options
 	 *
-	 * @return PropertyValueSnakFormatter
+	 * @return DispatchingValueFormatter
 	 * @throws \InvalidArgumentException
 	 */
-	public function buildValueSnakFormatter( SnakFormatterFactory $factory, $format, FormatterOptions $options ) {
+	public function buildDispatchingValueFormatter( $format, FormatterOptions $options ) {
 		switch ( $format ) {
 			case SnakFormatter::FORMAT_PLAIN:
 				$formatters = $this->getPlainTextFormatters( $options );
@@ -230,7 +231,7 @@ class WikibaseSnakFormatterBuilders {
 				throw new \InvalidArgumentException( 'Unsupported format: ' . $format );
 		}
 
-		return new PropertyValueSnakFormatter( $format, $formatters, $this->propertyDataTypeLookup );
+		return new DispatchingValueFormatter( $formatters );
 	}
 
 	/**

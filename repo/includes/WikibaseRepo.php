@@ -20,7 +20,7 @@ use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
-use Wikibase\Lib\SnakFormatterFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -110,7 +110,7 @@ class WikibaseRepo {
 	private $contentLanguage;
 
 	/**
-	 * @var SnakFormatterFactory
+	 * @var OutputFormatSnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
 
@@ -380,10 +380,10 @@ class WikibaseRepo {
 
 
 	/**
-	 * Returns a SnakFormatterFactory the provides SnakFormatters
+	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
 	 *
-	 * @return SnakFormatterFactory
+	 * @return OutputFormatSnakFormatterFactory
 	 */
 	public function getSnakFormatterFactory() {
 		if ( !$this->snakFormatterFactory ) {
@@ -394,7 +394,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return SnakFormatterFactory
+	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
 		$builders = new WikibaseSnakFormatterBuilders(
@@ -403,7 +403,7 @@ class WikibaseRepo {
 			$this->contentLanguage
 		);
 
-		$factory = new SnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 		return $factory;
 	}
 }
