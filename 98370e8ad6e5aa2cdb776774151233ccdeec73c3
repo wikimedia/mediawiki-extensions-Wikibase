@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_4b52f366",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 51
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-18T09:43:20Z",
+      "side": 1,
+      "message": "This is brittle against things being added to mJsConfigVars, and even against the order of these things.\n\nTo make this more robust, I suggest this:\n\n  $actual \u003d array_intersect_keys(  $out-\u003emJsConfigVars, $expected );\n  ksort( $expected );\n  ksort( $actual );\n  $this-\u003eassertEquals( $expected, $actual );",
+      "revId": "98370e8ad6e5aa2cdb776774151233ccdeec73c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
