@@ -1,21 +1,10 @@
 <?php
+
+namespace Wikibase\Test\Api;
+
+use OutOfBoundsException;
+
 /**
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
  *
  * @licence GNU GPL v2+
@@ -23,10 +12,6 @@
  * @author Daniel Kinzler
  * @author Adam Shorland
  */
-
-namespace Wikibase\Test\Api;
-
-
 class EntityTestHelper {
 
 	//@todo allow data to be defined dynamically in tests
@@ -37,6 +22,10 @@ class EntityTestHelper {
 	 * @var array of currently active handles and their current ids
 	 */
 	private static $activeHandles = array();
+	/**
+	 * @var array of currently active ids and their current handles
+	 */
+	private static $activeIds;
 	/**
 	 * @var array handles and any registered default output data
 	 */
@@ -208,12 +197,12 @@ class EntityTestHelper {
 	/**
 	 * Get the entity with the given handle
 	 * @param $handle string of entity to get data for
-	 * @throws \OutOfBoundsException
+	 * @throws OutOfBoundsException
 	 * @return array of entity data
 	 */
 	public static function getEntity( $handle ){
 		if( !array_key_exists( $handle, self::$entityData ) ){
-			throw new \OutOfBoundsException( "No entity defined with handle {$handle}" );
+			throw new OutOfBoundsException( "No entity defined with handle {$handle}" );
 		}
 		$entity = self::$entityData[ $handle ];
 
@@ -227,12 +216,12 @@ class EntityTestHelper {
 	/**
 	 * Get the data to pass to the api to clear the entity with the given handle
 	 * @param $handle string of entity to get data for
-	 * @throws \OutOfBoundsException
+	 * @throws OutOfBoundsException
 	 * @return array|null
 	 */
 	public static function getEntityClear( $handle ){
 		if( !array_key_exists( $handle, self::$activeHandles ) ){
-			throw new \OutOfBoundsException( "No entity clear data defined with handle {$handle}" );
+			throw new OutOfBoundsException( "No entity clear data defined with handle {$handle}" );
 		}
 		$id = self::$activeHandles[ $handle ];
 		self::unRegisterEntity( $handle );
@@ -243,26 +232,66 @@ class EntityTestHelper {
 	 * Get the data to pass to the api to create the entity with the given handle
 	 * @param $handle
 	 * @return mixed
-	 * @throws \OutOfBoundsException
+	 * @throws OutOfBoundsException
 	 */
 	public static function getEntityData( $handle ){
 		if( !array_key_exists( $handle, self::$entityData ) ){
-			throw new \OutOfBoundsException( "No entity defined with handle {$handle}" );
+			throw new OutOfBoundsException( "No entity defined with handle {$handle}" );
 		}
 		return self::$entityData[ $handle ]['data'];
 	}
 
 	/**
 	 * Get the data of the entity with the given handle we received after creation
-	 * @param $handle
+	 * @param string $handle
+	 * @param null|array $props array of props we want the output to have
+	 * @param null|array $langs array of langs we want the output to have
+	 * @throws OutOfBoundsException
 	 * @return mixed
-	 * @throws \OutOfBoundsException
 	 */
-	public static function getEntityOutput( $handle ){
+	public static function getEntityOutput( $handle, $props = null, $langs = null ){
 		if( !array_key_exists( $handle, self::$entityOutput ) ){
-			throw new \OutOfBoundsException( "No entity output defined with handle {$handle}" );
+			throw new OutOfBoundsException( "No entity output defined with handle {$handle}" );
 		}
-		return self::$entityOutput[ $handle ];
+		if( !is_array( $props ) ){
+			return self::$entityOutput[ $handle ];
+		} else {
+			return self::stripUnwantedOutputValues( self::$entityOutput[ $handle ], $props, $langs );
+		}
+	}
+
+	/**
+	 * Remove props and langs that are not included in $props or $langs from the $entityOutput array
+	 * @param array $entityOutput Array of entity output
+	 * @param null|array $props Props to keep in the output
+	 * @param null|array $langs Languages to keep in the output
+	 * @return array Array of entity output with props and langs removed
+	 */
+	protected static function stripUnwantedOutputValues( $entityOutput, $props = null, $langs = null  ){
+		$entityProps = array();
+		foreach( $props as $prop ){
+			if( array_key_exists( $prop, $entityOutput ) ){
+				$entityProps[ $prop ] = array( $entityOutput[ $prop ] );
+			}
+		}
+		foreach( $entityProps as $prop => $value ){
+			$value = $value[0];
+			if( ( $prop == 'aliases' || $prop == 'labels' || $prop == 'descriptions' ) && $langs != null && is_array( $langs ) ){
+				$langValues = array();
+				foreach( $langs as $langCode ){
+					if( array_key_exists( $langCode, $value ) ){
+						$langValues[ $langCode ] = $value[ $langCode ];
+					}
+				}
+				if( $langValues === array() ){
+					unset( $entityProps[ $prop ] );
+				} else {
+					$entityProps[ $prop ] = $langValues;
+				}
+
+			}
+		}
+		return $entityProps;
 	}
 
 	/**
@@ -273,6 +302,7 @@ class EntityTestHelper {
 	 */
 	public static function registerEntity( $handle, $id, $entity = null) {
 		self::$activeHandles[ $handle ] = $id;
+		self::$activeIds[ $id ] = $handle;
 		if( $entity ){
 			self::$entityOutput[ $handle ] = $entity;
 		}
@@ -281,12 +311,10 @@ class EntityTestHelper {
 	/**
 	 * Unregister the entity after it has been cleared
 	 * @param $handle
-	 * @throws \OutOfBoundsException
+	 * @throws OutOfBoundsException
 	 */
 	private static function unRegisterEntity( $handle ) {
-		if( !array_key_exists( $handle, self::$activeHandles ) ){
-			throw new \OutOfBoundsException( "No active entity defined with handle {$handle}" );
-		}
+		unset( self::$activeIds[ self::$activeHandles[ $handle ] ] );
 		unset( self::$activeHandles[ $handle ] );
 	}
 
@@ -302,14 +330,25 @@ class EntityTestHelper {
 	/**
 	 * Return the id for the entity with the given handle
 	 * @param $handle string of handles
-	 * @throws \OutOfBoundsException
+	 * @throws OutOfBoundsException
 	 * @return null|string id of current handle (if active)
 	 */
 	public static function getId( $handle ){
 		if( !array_key_exists( $handle, self::$activeHandles ) ){
-			throw new \OutOfBoundsException( "No entity id defined with handle {$handle}" );
+			throw new OutOfBoundsException( "No entity id defined with handle {$handle}" );
 		}
 		return self::$activeHandles[ $handle ];
+	}
+
+	/**
+	 * @param $id string of entityid
+	 * @return null|string id of current handle (if active)
+	 */
+	public static function getHandle( $id ){
+		if( array_key_exists( $id, self::$activeIds ) ){
+			return self::$activeIds[ $id ];
+		}
+		return null;
 	}
 
 }
