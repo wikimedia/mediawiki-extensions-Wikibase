@@ -1,32 +1,5 @@
 <?php
- /**
- *
- * Copyright © 10.06.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- *
- * @author Daniel Kinzler
- */
-
-
 namespace Wikibase\Validators;
-
 
 use DataValues\DataValue;
 use DataValues\IllegalValueException;
@@ -40,7 +13,8 @@ use ValueValidators\ValueValidator;
  *
  * @since 0.4
  *
- * @package Wikibase\Validators
+ * @license GPL 2+
+ * @author Daniel Kinzler
  */
 class DataFieldValidator implements ValueValidator {
 
@@ -58,11 +32,11 @@ class DataFieldValidator implements ValueValidator {
 	 * @param string|int     $field     The field on the target DataValue's array representation to check
 	 * @param ValueValidator $validator The validator to apply to the given field
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $field, ValueValidator $validator ) {
 		if ( !is_string( $field ) && !is_int( $field ) ) {
-			throw new InvalidArgumentException( '$field need to be a stringor int' );
+			throw new InvalidArgumentException( '$field need to be a string or int' );
 		}
 
 		$this->field = $field;
@@ -87,7 +61,8 @@ class DataFieldValidator implements ValueValidator {
 
 		if ( !array_key_exists( $this->field, $data ) ) {
 			//XXX: or should this just be reported as invalid?
-			throw new InvalidArgumentException( "DataValue's array representation does not contain the field " . $this->field );
+			throw new InvalidArgumentException( "DataValue's array representation does not "
+				. "contain the field " . $this->field );
 		}
 
 		$fieldValue = $data[$this->field];
