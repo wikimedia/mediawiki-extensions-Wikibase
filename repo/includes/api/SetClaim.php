@@ -71,15 +71,9 @@ class SetClaim extends ApiWikibase {
 
 		$claimDiffer = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );
 
-		$options = new FormatterOptions( array(
-			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode()
-		) );
-
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
-			$claimDiffer,
-			WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options )
+			$claimDiffer
 		);
 		$claimSaver = new ClaimSaver( WikibaseRepo::getDefaultInstance()->getSummaryFormatter() );
 
