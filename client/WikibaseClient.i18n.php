@@ -2199,7 +2199,7 @@ $messages['ka'] = array(
 	'wikibase-property-notsupportedyet' => 'ვიკიბაზას ჯერ არ აქვს $1 თვისების ტიპის მხარდაჭერა.',
 	'wikibase-rc-hide-wikidata' => 'ვიკიმონაცემების $1',
 	'wikibase-rc-show-wikidata-pref' => 'ბოლო ცვლილებების სიაში ვიკიმონაცემების რედაქტირებების ჩვენება',
-	'wikibase-rc-wikibase-edit-letter' => 'ვ',
+	'wikibase-rc-wikibase-edit-letter' => "'''ვ'''",
 	'wikibase-rc-wikibase-edit-title' => 'ვიკიმონაცემების რედაქტირება',
 	'wikibase-watchlist-show-changes-pref' => 'თქვენი კონტროლის სიაში ვიკიმონაცემების რედაქტირებების ჩვენება',
 	'wikibase-error-invalid-entity-id' => 'მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.',
@@ -3586,11 +3586,13 @@ $messages['sr-ec'] = array(
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
+ * @author Milicevic01
  */
 $messages['sr-el'] = array(
 	'wikibase-client-desc' => 'Klijent za proširenje Vikibaza',
 	'wikibase-editlinks' => 'Uredi veze',
 	'wikibase-editlinkstitle' => 'Uređivanje međujezičkih veza',
+	'wikibase-rc-show-wikidata-pref' => 'Prikaži izmene na Vikipodacima u skorašnjim izmenama',
 );
 
 /** Swedish (svenska)

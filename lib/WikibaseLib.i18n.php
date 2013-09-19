@@ -3239,6 +3239,7 @@ $messages['zh-hans'] = array(
 	'wikibase-validator-bad-value' => '非法值：$1',
 	'wikibase-validator-bad-value-type' => '错误值类型$1，预期为$2',
 	'wikibase-validator-bad-url' => '格式不正确的地址：$1',
+	'wikibase-validator-bad-url-scheme' => '不被支持的URL方案：$1',
 	'wikibase-validator-bad-http-url' => '格式不正确的 HTTP 地址：$1',
 	'wikibase-validator-bad-mailto-url' => '格式不正确 mailto 地址：$1',
 	'datatypes-type-wikibase-item' => '项',
