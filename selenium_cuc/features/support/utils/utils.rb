@@ -40,7 +40,7 @@ def create_new_entity(data, type = 'item')
   end
 
   id = resp["entity"]["id"]
-  url = URL.repo_url(id)
+  url = URL.repo_url(ITEM_NAMESPACE + id + '?setlang=' + LANGUAGE_CODE)
   entity_data = ActiveSupport::JSON.decode(data)
   entity = {"id" => id, "url" => url, "label" => entity_data["labels"]["en"]["value"], "description" => entity_data["descriptions"]["en"]["value"]}
   return entity
