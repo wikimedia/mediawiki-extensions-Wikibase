@@ -5,6 +5,7 @@
 #
 # feature definition for item aliases tests
 
+@wikidata.beta.wmflabs.org
 Feature: Edit aliases
 
   Background:

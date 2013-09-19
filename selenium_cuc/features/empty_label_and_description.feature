@@ -5,6 +5,7 @@
 #
 # feature definition for item description tests
 
+@wikidata.beta.wmflabs.org
 Feature: Empty label and description behaviour
 
   Background:

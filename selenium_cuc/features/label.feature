@@ -5,6 +5,7 @@
 #
 # feature definition for item label tests
 
+@wikidata.beta.wmflabs.org
 Feature: Edit label
 
   Background:
