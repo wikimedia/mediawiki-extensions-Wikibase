@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Article;
 use Diff\CallbackListDiffer;
 use  Html, Linker, Skin, Status, Revision;
 use ValueFormatters\FormatterOptions;
@@ -30,6 +31,11 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class EditEntityAction extends ViewEntityAction {
 
 	public function __construct( \Page $page, \IContextSource $context = null ) {
+		// Workaround, pending core fix I6d8db29dfd1
+		if ( $context === null && !( $page instanceof Article ) ) {
+			$context = \RequestContext::getMain();
+		}
+
 		parent::__construct( $page, $context );
 
 		//TODO: proper injection
