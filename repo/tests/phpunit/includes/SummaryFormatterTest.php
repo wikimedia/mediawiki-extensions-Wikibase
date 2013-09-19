@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\Summary;
@@ -92,10 +93,14 @@ class SummaryFormatterTest extends \MediaWikiTestCase {
 		$valueFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
 		$valueFormatter->expects( $this->any() )->method( 'format' )
 			->will( $this->returnCallback( array( $this, 'formatValue' ) ) );
+		$valueFormatter->expects( $this->any() )->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
 			->will( $this->returnCallback( array( $this, 'formatSnak' ) ) );
+		$snakFormatter->expects( $this->any() )->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		$language = Language::factory( 'en' );
 
