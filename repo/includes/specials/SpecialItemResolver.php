@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\Specials;
 
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use \ValueFormatters\ValueFormatterFactory;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityView;
 use Wikibase\ItemContent;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -89,20 +91,18 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 * @param ItemContent $itemContent
 	 */
 	protected function displayItem( ItemContent $itemContent ) {
-		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+		$formatterOptions = new FormatterOptions(); //TODO: Language Fallback
+		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getContext()->getLanguage()->getCode() );
+
+		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
+			->getFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
-		$view = EntityView::newForEntityType(
-			$itemContent->getEntity()->getType(),
-			$valueFormatters,
-			$dataTypeLookup,
-			$entityRevisionLookup,
-			$entityTitleLookup
-		);
+		$view = EntityView::newForEntityContent( $itemContent, $snakFormatter, $dataTypeLookup, $entityLoader );
+		$view->render( $itemContent );
 
-		$view->render( $itemContent->getEntityRevision() );
 		$this->getOutput()->setPageTitle( $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() ) );
 	}
 
