@@ -12,13 +12,14 @@ use OutputPage;
 use MediaWikiSite;
 use MWException;
 use FormatJson;
+use ValueParsers\FormattingException;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Serializers\FetchedEntityContentSerializer;
-use Wikibase\Serializers\FetchedEntityContentSerializerOptions;
-use ValueFormatters\ValueFormatterFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\TimeFormatter;
@@ -63,9 +64,9 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * @since 0.4
 	 *
-	 * @var ValueFormatterFactory
+	 * @var SnakFormatter
 	 */
-	protected $valueFormatters;
+	protected $snakFormatter;
 
 	/**
 	 * @var EntityIdFormatter
@@ -107,7 +108,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since    0.1
 	 *
 	 * @param IContextSource|null        $context
-	 * @param ValueFormatterFactory      $valueFormatters
+	 * @param SnakFormatter      $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityLookup               $entityLookup
 	 * @param EntityTitleLookup          $entityTitleLookup
@@ -115,14 +116,20 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public function __construct(
 		IContextSource $context,
-		ValueFormatterFactory $valueFormatters,
+		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdFormatter $idFormatter
 	) {
+		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
+				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
+			throw new \InvalidArgumentException( '$snakFormatter is expected to return text/html, not '
+					. $snakFormatter->getFormat() );
+		}
+
 		$this->setContext( $context );
-		$this->valueFormatters = $valueFormatters;
+		$this->snakFormatter = $snakFormatter;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -634,30 +641,12 @@ abstract class EntityView extends \ContextSource {
 			),
 		) );
 
-		// TODO: display a "placeholder" message for novalue/somevalue snak
-		$value = '';
-		if ( $claim->getMainSnak()->getType() === 'value' ) {
-			$value = $claim->getMainSnak()->getDataValue();
-
-			$valueFormatter = $this->valueFormatters->newFormatter(
-				$value->getType(), $valueFormatterOptions
-			);
-
-			if ( $valueFormatter !== null ) {
-				$value = $valueFormatter->format( $value );
-			} else {
-				// If value representation is a string, just display that one as a
-				// fallback for values not having a formatter implemented yet.
-				if ( is_string( $value->getValue() ) ) {
-					$value = $value->getValue();
-				} elseif ( $value instanceof \DataValues\UnDeserializableValue ) {
-					$value = $value->getReason();
-				} else {
-					// TODO: don't fail here, display a message in the UI instead
-					throw new MWException( 'Displaying of values of type "'
-						. $value->getType() . '" not supported yet' );
-				}
-			}
+		try {
+			$snakValueHtml = $this->snakFormatter->formatSnak( $claim->getMainSnak() );
+		} catch ( FormattingException $ex ) {
+			$snakValueHtml = '?'; // XXX: perhaps show error message?
+		} catch ( PropertyNotFoundException $ex ) {
+			$snakValueHtml = '?'; // XXX: perhaps show error message?
 		}
 
 		$mainSnakHtml = wfTemplate( 'wb-snak',
@@ -666,7 +655,7 @@ abstract class EntityView extends \ContextSource {
 				// Claim group level) If this was a public function, this should be generated
 				// anyhow since important when displaying a Claim on its own.
 			'', // type selector, JS only
-			( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
+			( $snakValueHtml === '' ) ? '&nbsp;' : $snakValueHtml
 		);
 
 		// TODO: Use 'wb-claim' or 'wb-statement' template accordingly
@@ -917,7 +906,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.2
 	 *
 	 * @param EntityContent              $entity
-	 * @param ValueFormatterFactory      $valueFormatters
+	 * @param SnakFormatter      $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityLookup               $entityLookup
 	 * @param IContextSource|null        $context
@@ -927,7 +916,7 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public static function newForEntityContent(
 		EntityContent $entity,
-		ValueFormatterFactory $valueFormatters,
+		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityLookup $entityLookup,
 		IContextSource $context = null
@@ -945,7 +934,7 @@ abstract class EntityView extends \ContextSource {
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$entityTitleLookup = EntityContentFactory::singleton();
 
-		$instance = new self::$typeMap[ $type ]( $context, $valueFormatters, $dataTypeLookup, $entityLookup, $entityTitleLookup, $idFormatter );
+		$instance = new self::$typeMap[ $type ]( $context, $snakFormatter, $dataTypeLookup, $entityLookup, $entityTitleLookup, $idFormatter );
 		return $instance;
 	}
 }

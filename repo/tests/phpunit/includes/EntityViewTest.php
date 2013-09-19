@@ -15,6 +15,7 @@ use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyNoValueSnak;
@@ -43,8 +44,25 @@ use Wikibase\PropertyValueSnak;
  */
 class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return SnakFormatter
+	 */
+	protected function newSnakFormatterMock() {
+		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+
+		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
+			->will( $this->returnValue( '(value)' ) );
+
+		$snakFormatter->expects( $this->any() )->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_HTML_WIDGET ) );
+
+		$snakFormatter->expects( $this->any() )->method( 'canFormatSnak' )
+			->will( $this->returnValue( true ) );
+
+		return $snakFormatter;
+	}
+
 	protected function newEntityView( EntityContent $entityContent ) {
-		$valueFormatters = new ValueFormatterFactory( array() );
 		$entityLoader = new MockRepository();
 
 		$p11 = new PropertyId( 'p11' );
@@ -61,7 +79,7 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
 		$entityView = EntityView::newForEntityContent(
 			$entityContent,
-			$valueFormatters,
+			$this->newSnakFormatterMock(),
 			$dataTypeLookup,
 			$entityLoader
 		);
@@ -254,12 +272,11 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider providerNewForEntityContent
 	 */
 	public function testNewForEntityContent( EntityContent $entityContent ) {
-		$valueFormatters = new ValueFormatterFactory( array() );
 		$dataTypeLookup = new InMemoryDataTypeLookup( array() );
 		$entityLoader = new MockRepository();
 
 		// test whether we get the right EntityView from an EntityContent
-		$view = EntityView::newForEntityContent( $entityContent, $valueFormatters, $dataTypeLookup, $entityLoader );
+		$view = EntityView::newForEntityContent( $entityContent, $this->newSnakFormatterMock(), $dataTypeLookup, $entityLoader );
 		$this->assertInstanceOf(
 			EntityView::$typeMap[ $entityContent->getEntity()->getType() ],
 			$view
