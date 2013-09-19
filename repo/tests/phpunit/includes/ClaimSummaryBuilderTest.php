@@ -139,23 +139,13 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testBuildCreateClaimSummary() {
-		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\SnakFormatter' )
-			->disableOriginalConstructor()->getMock();
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
-			->will( $this->returnValue( 'foo' ) );
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
-
 		$comparer = function( \Comparable $old, \Comparable $new ) {
 			return $old->equals( $new );
 		};
 
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
-			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
-			$snakFormatter
+			new ClaimDiffer( new CallbackListDiffer( $comparer ) )
 		);
 
 		$claims = new Claims();
@@ -177,23 +167,13 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	 * @param string $action
 	 */
 	public function testBuildUpdateClaimSummary( $originalClaim, $modifiedClaim, $action ) {
-		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\SnakFormatter' )
-			->disableOriginalConstructor()->getMock();
-		$snakFormatter->expects( $this->any() )
-			->method( 'formatSnak' )
-			->will( $this->returnValue( 'foo' ) );
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
-
 		$comparer = function( \Comparable $old, \Comparable $new ) {
 			return $old->equals( $new );
 		};
 
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
-			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
-			$snakFormatter
+			new ClaimDiffer( new CallbackListDiffer( $comparer ) )
 		);
 
 		$claims = new Claims();
