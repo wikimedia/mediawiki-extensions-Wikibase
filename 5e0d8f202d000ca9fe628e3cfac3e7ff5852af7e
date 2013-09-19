@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_1de90616",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-19T16:35:48Z",
+      "side": 1,
+      "message": "can be removed",
+      "revId": "5e0d8f202d000ca9fe628e3cfac3e7ff5852af7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
