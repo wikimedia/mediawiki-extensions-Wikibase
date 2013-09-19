@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
+use Exception;
+use InvalidArgumentException;
 use Language;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\EntityIdFormatter;
@@ -48,8 +50,17 @@ class SummaryFormatter {
 	 * @param EntityIdFormatter $idFormatter
 	 * @param ValueFormatter $valueFormatter
 	 * @param SnakFormatter $snakFormatter
+	 * @param \Language $language
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct( EntityIdFormatter $idFormatter, ValueFormatter $valueFormatter, SnakFormatter $snakFormatter, Language $language ) {
+		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
+			throw new InvalidArgumentException(
+				'Expected $snakFormatter to procude text/plain output, not '
+				. $snakFormatter->getFormat() );
+		}
+
 		$this->idFormatter = $idFormatter;
 		$this->valueFormatter = $valueFormatter;
 		$this->snakFormatter = $snakFormatter;
@@ -139,27 +150,33 @@ class SummaryFormatter {
 	 * @return string
 	 */
 	protected function formatArg( $arg ) {
-		if ( $arg instanceof Snak ) {
-			return $this->snakFormatter->formatSnak( $arg );
-		} elseif ( $arg instanceof EntityId ) {
-			return $this->idFormatter->format( $arg );
-		} elseif ( $arg instanceof DataValue ) {
-			return $this->valueFormatter->format( $arg );
-		} elseif ( method_exists( $arg, '__toString' ) ) {
-			return strval( $arg );
-		} elseif ( is_object( $arg ) ) {
-			return '<' . get_class( $arg ) . '>';
-		} elseif ( is_array( $arg ) ) {
-			if ( !empty( $arg ) && !isset( $arg[0] ) ) {
-				// turn assoc array into a list
-				$arg = $this->formatKeyValuePairs( $arg );
-			}
+		try {
+			if ( $arg instanceof Snak ) {
+				return $this->snakFormatter->formatSnak( $arg );
+			} elseif ( $arg instanceof EntityId ) {
+				return $this->idFormatter->format( $arg );
+			} elseif ( $arg instanceof DataValue ) {
+				return $this->valueFormatter->format( $arg );
+			} elseif ( method_exists( $arg, '__toString' ) ) {
+				return strval( $arg );
+			} elseif ( is_object( $arg ) ) {
+				return '<' . get_class( $arg ) . '>';
+			} elseif ( is_array( $arg ) ) {
+				if ( !empty( $arg ) && !isset( $arg[0] ) ) {
+					// turn assoc array into a list
+					$arg = $this->formatKeyValuePairs( $arg );
+				}
 
-			$strings = $this->formatArgList( $arg );
-			return $this->language->commaList( $strings );
-		} else {
-			return strval( $arg );
+				$strings = $this->formatArgList( $arg );
+				return $this->language->commaList( $strings );
+			} else {
+				return strval( $arg );
+			}
+		} catch ( Exception $ex ) {
+			wfWarn( __METHOD__ . ': failed to render value: ' . $ex->getMessage() );
 		}
+
+		return '?';
 	}
 
 	/**
