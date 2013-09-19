@@ -6,6 +6,7 @@ use Wikibase\ItemContent;
 use Wikibase\Item;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Property;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Utils;
 use Wikibase\ItemView;
 use ValueFormatters\ValueFormatterFactory;
@@ -52,16 +53,38 @@ use ValueFormatters\ValueFormatterFactory;
 class ItemViewTest extends EntityViewTest {
 
 	/**
+	 * @return SnakFormatter
+	 */
+	protected function newSnakFormatterMock() {
+		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+
+		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
+			->will( $this->returnValue( '(value)' ) );
+
+		$snakFormatter->expects( $this->any() )->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_HTML_WIDGET ) );
+
+		$snakFormatter->expects( $this->any() )->method( 'canFormatSnak' )
+			->will( $this->returnValue( true ) );
+
+		return $snakFormatter;
+	}
+
+	/**
 	 * @dataProvider providerNewForEntityType
 	 */
 	public function testNewForEntityType( $type, $expectedClass ) {
-		$valueFormatters = new ValueFormatterFactory( array() );
 		$entityLoader = new MockRepository();
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
 		// test whether we get the right EntityView from an EntityContent
-		$view = ItemView::newForEntityType( $type, $valueFormatters, $dataTypeLookup, $entityLoader, $entityTitleLookup );
+		$view = ItemView::newForEntityType(
+			$type,
+			$this->newSnakFormatterMock(),
+			$dataTypeLookup,
+			$entityLoader,
+			$entityTitleLookup );
 
 		$this->assertInstanceOf(
 			$expectedClass,
