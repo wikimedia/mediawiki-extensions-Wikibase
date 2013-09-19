@@ -62,8 +62,14 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 			throw new InvalidArgumentException( "Not a PropertyValueSnak: " . get_class( $snak ) );
 		}
 
-		/* @var PropertyValueSnak $snak */
-		$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+		try {
+			/* @var PropertyValueSnak $snak */
+			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+		} catch ( PropertyNotFoundException $ex ) {
+			// If the property has been removed, we should still be able to render the snak value, so don't fail here.
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Can\'t look up data type for property ' . $snak->getPropertyId()->getPrefixedId() );
+			$propertyType = null;
+		}
 
 		$text = $this->formatValue( $snak->getDataValue(), $propertyType );
 		return $text;

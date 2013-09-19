@@ -77,10 +77,9 @@ class RemoveQualifiers extends ModifyClaim {
 	 */
 	protected function getChangeOps( $claimGuid, array $qualifierHashes ) {
 		$changeOps = array();
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = new ChangeOpQualifier( $claimGuid, null, $qualifierHash, $idFormatter );
+			$changeOps[] = new ChangeOpQualifier( $claimGuid, null, $qualifierHash );
 		}
 
 		return $changeOps;
