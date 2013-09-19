@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 use Language, Article, \ValueFormatters\ValueFormatterFactory;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -151,7 +154,12 @@ abstract class ViewEntityAction extends \ViewAction {
 
 			$this->displayEntityContent( $content );
 
-			$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+			$formatterOptions = new FormatterOptions(); //TODO: Language Fallback
+			$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getContext()->getLanguage()->getCode() );
+
+			$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
+								->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
 			$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 			$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
 			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -160,7 +168,7 @@ abstract class ViewEntityAction extends \ViewAction {
 
 			$view = EntityView::newForEntityType(
 				$content->getEntity()->getType(),
-				$valueFormatters,
+				$snakFormatter,
 				$dataTypeLookup,
 				$entityLoader,
 				$entityContentFactory
