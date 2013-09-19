@@ -211,7 +211,7 @@ class PropertyParserFunction {
 			// ...more options...
 		) );
 
-		$formatter = $wikibaseClient->newSnakFormatter( SnakFormatterFactory::FORMAT_WIKI, $options );
+		$formatter = $wikibaseClient->newSnakFormatter( SnakFormatter::FORMAT_WIKI, $options );
 
 		$instance = new self( $targetLanguage,
 			$entityLookup, $propertyLabelResolver,
