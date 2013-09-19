@@ -3,7 +3,6 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\Entity;
 use Wikibase\ChangeOpMainSnak;
 use Wikibase\ChangeOpException;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -48,7 +47,6 @@ class SetClaimValue extends ModifyClaim {
 		$changeOp = new ChangeOpMainSnak(
 			$claimGuid,
 			$snak,
-			WikibaseRepo::getDefaultInstance()->getIdFormatter(),
 			$guidGenerator
 		);
 

@@ -27,20 +27,19 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$validIdFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
 		$validSnak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
 		$validSnakHash = $validSnak->getHash();
 
 		$args = array();
-		$args[] = array( 123, $validSnak, $validSnakHash, $validIdFormatter );
-		$args[] = array( '', $validSnak, $validSnakHash, $validIdFormatter );
-		$args[] = array( 123, null, $validSnakHash, $validIdFormatter );
-		$args[] = array( $validClaimGuid, 'notASnak', $validSnakHash, $validIdFormatter );
-		$args[] = array( $validClaimGuid, 'notASnak', '', $validIdFormatter );
-		$args[] = array( $validClaimGuid, null, '', $validIdFormatter );
-		$args[] = array( $validClaimGuid, $validSnak, 123, $validIdFormatter );
+		$args[] = array( 123, $validSnak, $validSnakHash );
+		$args[] = array( '', $validSnak, $validSnakHash );
+		$args[] = array( 123, null, $validSnakHash );
+		$args[] = array( $validClaimGuid, 'notASnak', $validSnakHash );
+		$args[] = array( $validClaimGuid, 'notASnak', '' );
+		$args[] = array( $validClaimGuid, null, '' );
+		$args[] = array( $validClaimGuid, $validSnak, 123 );
 
 		return $args;
 	}
@@ -50,12 +49,11 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $snak, $snakHash, $idFormatter ) {
-		$ChangeOpQualifier = new ChangeOpQualifier( $claimGuid, $snak, $snakHash, $idFormatter );
+	public function testInvalidConstruct( $claimGuid, $snak, $snakHash ) {
+		$ChangeOpQualifier = new ChangeOpQualifier( $claimGuid, $snak, $snakHash );
 	}
 
 	public function changeOpAddProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
@@ -63,7 +61,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
 		$newQualifier = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '', $idFormatter );
+		$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '' );
 		$snakHash = $newQualifier->getHash();
 		$args[] = array ( $item, $changeOp, $snakHash );
 
@@ -85,7 +83,6 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpRemoveProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
@@ -98,7 +95,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$claims[0]->setQualifiers( $qualifiers );
 		$item->setClaims( new Claims( $claims ) );
 		$snakHash = $newQualifier->getHash();
-		$changeOp = new ChangeOpQualifier( $claimGuid, null, $snakHash, $idFormatter );
+		$changeOp = new ChangeOpQualifier( $claimGuid, null, $snakHash );
 		$args[] = array ( $item, $changeOp, $snakHash );
 
 		return $args;
@@ -119,7 +116,6 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpSetProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
@@ -133,7 +129,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$item->setClaims( new Claims( $claims ) );
 		$snakHash = $newQualifier->getHash();
 		$changedQualifier = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $claimGuid, $changedQualifier, $snakHash, $idFormatter );
+		$changeOp = new ChangeOpQualifier( $claimGuid, $changedQualifier, $snakHash );
 		$args[] = array ( $item, $changeOp, $changedQualifier->getHash() );
 
 		return $args;
