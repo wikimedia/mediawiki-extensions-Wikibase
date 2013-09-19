@@ -155,6 +155,11 @@ HTML;
 </span>
 HTML;
 
+	$templates['wb-property-value-supplement'] =
+<<<HTML
+<span class="wb-value-supplement">$1</span>
+HTML;
+
 	$templates['wb-aliases-wrapper'] =
 <<<HTML
 <div class="wb-aliases $1">

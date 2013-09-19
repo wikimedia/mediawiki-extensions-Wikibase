@@ -96,3 +96,14 @@ Then /^(.+) should be displayed as label$/ do |value|
     page.entityLabelSpan.should == value
   end
 end
+
+Then /^Entity id should be displayed next to the label$/ do
+  on(ItemPage) do |page|
+      page.entityIdSpan_element.visible?.should be_true
+      page.entityIdSpan.sub(/[()]/, '') == @entity["label"]
+    end
+end
+
+Then /^Entity id should not be displayed next to the label$/ do
+  on(ItemPage).entityIdSpan_element.visible?.should be_false
+end

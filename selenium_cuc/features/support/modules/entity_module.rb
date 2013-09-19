@@ -26,6 +26,7 @@ module EntityPage
   h1(:firstHeading, :xpath => "//h1[contains(@class, 'wb-firstHeading')]")
   h1(:uiPropertyEdittool, :class => "wb-ui-propertyedittool")
   span(:entityLabelSpan, :xpath => "//h1[contains(@class, 'wb-firstHeading')]/span/span")
+  span(:entityIdSpan, :xpath => "//h1[contains(@class, 'wb-firstHeading')]/span/span[contains(@class, 'wb-value-supplement')]")
   text_field(:labelInputField, :xpath => "//h1[contains(@class, 'wb-firstHeading')]/span/span/input")
   link(:editLabelLink, :css => "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
   link(:editLabelLinkDisabled, :css => "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
