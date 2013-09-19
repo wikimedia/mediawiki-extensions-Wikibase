@@ -15,6 +15,7 @@ Feature: Edit label
     Then Original label should be displayed
       And Label edit button should be there
       And Label cancel button should not be there
+      And Entity id should be displayed next to the label
 
   @ui_only
   Scenario: Click edit button
@@ -22,6 +23,7 @@ Feature: Edit label
     Then Label input element should be there
       And Label input element should contain original label
       And Label cancel button should be there
+      And Entity id should not be displayed next to the label
 
   @ui_only
   Scenario: Modify the label
@@ -39,6 +41,7 @@ Feature: Edit label
     Then Original label should be displayed
       And Label edit button should be there
       And Label cancel button should not be there
+      And Entity id should be displayed next to the label
 
     Examples:
       | cancel |
