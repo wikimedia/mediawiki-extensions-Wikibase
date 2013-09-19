@@ -31,35 +31,22 @@ class ClaimSummaryBuilder {
 	private $claimDiffer;
 
 	/**
-	 * @var Lib\SnakFormatter
-	 */
-	private $snakValueFormatter;
-
-	/**
 	 * Constructs a new ClaimSummaryBuilder
 	 *
 	 * @since 0.4
 	 *
 	 * @param string $apiModuleName
 	 * @param ClaimDiffer $claimDiffer
-	 * @param SnakFormatter $snakValueFormatter
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer, SnakFormatter $snakValueFormatter ) {
+	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer ) {
 		if ( !is_string( $apiModuleName ) ) {
 			throw new InvalidArgumentException( '$apiModuleName needs to be a string' );
 		}
 
-		if ( $snakValueFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
-			throw new InvalidArgumentException(
-				'Expected $snakValueFormatter to procude plain text output, not '
-						. $snakValueFormatter->getFormat() );
-		}
-
 		$this->apiModuleName = $apiModuleName;
 		$this->claimDiffer = $claimDiffer;
-		$this->snakValueFormatter = $snakValueFormatter;
 	}
 
 	/**
@@ -135,8 +122,7 @@ class ClaimSummaryBuilder {
 					$pairs[$key] = array();
 				}
 
-				$value = $this->snakValueFormatter->formatSnak( $snak );
-				$pairs[$key][] = $value;
+				$pairs[$key][] = $snak;
 			}
 		}
 
