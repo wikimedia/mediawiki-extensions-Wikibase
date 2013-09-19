@@ -137,7 +137,7 @@ class RemoveClaims extends ModifyClaim {
 		$guidGenerator = new ClaimGuidGenerator( $this->getEntityId( $params ) );
 
 		foreach ( $params['claim'] as $guid ) {
-			$changeOps[] = new ChangeOpMainSnak( $guid, null, WikibaseRepo::getDefaultInstance()->getIdFormatter(), $guidGenerator );
+			$changeOps[] = new ChangeOpMainSnak( $guid, null, $guidGenerator );
 		}
 
 		return $changeOps;

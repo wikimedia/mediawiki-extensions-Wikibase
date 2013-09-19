@@ -3,7 +3,6 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpStatementRank;
@@ -14,25 +13,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
 /**
  * API module for setting the rank of a statement
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.3
- *
- * @ingroup WikibaseRepo
- * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -98,10 +79,9 @@ class SetStatementRank extends ModifyClaim {
 		$params = $this->extractRequestParams();
 
 		$claimGuid = $params['statement'];
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		$rank = ClaimSerializer::unserializeRank( $params['rank'] );
-		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank, $idFormatter );
+		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank );
 
 		return $changeOp;
 	}
