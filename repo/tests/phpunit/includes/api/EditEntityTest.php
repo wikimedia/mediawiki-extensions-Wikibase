@@ -41,13 +41,20 @@ class EditEntityTest extends WikibaseApiTestCase {
 		parent::setup();
 
 		$prop56 = PropertyId::newFromNumber( 56 );
+		$prop72 = PropertyId::newFromNumber( 72 );
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Berlin' ) );
+
 			$prop = PropertyContent::newEmpty();
 			$prop->getEntity()->setId( $prop56 );
 			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'EditEntityTest' );
+			$prop->save( 'EditEntityTestP56' );
+
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop72 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'EditEntityTestP72' );
 		}
 		self::$hasSetup = true;
 	}
@@ -181,6 +188,30 @@ class EditEntityTest extends WikibaseApiTestCase {
 							),
 						),
 					)
+				) )
+			),
+
+			array( //15 clear and add multiple claims within property groups
+				'p' => array( 'clear' => '',
+					'data' => '{"claims":{"P56":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring56","type":"string"}},"type":"statement","rank":"normal"}],'.
+							'"P72":[{"mainsnak":{"snaktype":"value","property":"P72","datavalue":{"value":"imastring72","type":"string"}},"type":"statement","rank":"normal"}]}}' ),
+				'e' => array( 'claims' => array(
+					'P56' => array(
+						'mainsnak' => array(
+							'snaktype' => 'value', 'property' => 'P56',
+							'datavalue' => array(
+								'value' => 'imastring56',
+								'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal' ),
+					array(
+						'mainsnak' => array(
+							'snaktype' => 'value', 'property' => 'P72',
+							'datavalue' => array(
+								'value' => 'imastring72',
+								'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal' )
 				) )
 			),
 		);
