@@ -35,6 +35,7 @@ use InvalidArgumentException;
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp
+ * @group ChangeOpMainSnak
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
