@@ -9,8 +9,6 @@ use Wikibase\Reference;
 use Wikibase\References;
 use Wikibase\Snak;
 use Wikibase\Statement;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Summary;
 
 /**
@@ -44,13 +42,6 @@ class ChangeOpReference extends ChangeOpBase {
 	protected $referenceHash;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter;
-
-	/**
 	 * Constructs a new reference change operation
 	 *
 	 * @since 0.4
@@ -62,7 +53,7 @@ class ChangeOpReference extends ChangeOpBase {
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $reference, $referenceHash, EntityIdFormatter $idFormatter ) {
+	public function __construct( $claimGuid, $reference, $referenceHash ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
@@ -82,7 +73,6 @@ class ChangeOpReference extends ChangeOpBase {
 		$this->claimGuid = $claimGuid;
 		$this->reference = $reference;
 		$this->referenceHash = $referenceHash;
-		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -188,20 +178,10 @@ class ChangeOpReference extends ChangeOpBase {
 	 *
 	 * @param Snak $snak
 	 * @return array
-	 *
-	 * @todo: REUSE!!
 	 */
 	protected function getSnakSummaryArgs( Snak $snak ) {
-		$propertyId = $this->idFormatter->format( $snak->getPropertyId() );
+		$propertyId = $snak->getPropertyId();
 
-		//TODO: use formatters here!
-		if ( $snak instanceof PropertyValueSnak ) {
-			$value = $snak->getDataValue();
-		} else {
-			$value = $snak->getType();
-		}
-
-		$args = array( $propertyId => array( $value ) );
-		return array( $args );
+		return array( array( $propertyId->getPrefixedId() => $snak ) );
 	}
 }
