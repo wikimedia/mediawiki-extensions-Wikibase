@@ -27,22 +27,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 
 class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 
-	public function testAddClaimToApiResult() {
-		$apiMain = new ApiMain();
-		$snak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$claim = $item->newClaim( $snak );
-		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
-		$item->addClaim( $claim );
-
-		$claimModificationHelper = $this->getNewInstance( $apiMain );
-		$claimModificationHelper->addClaimToApiResult( $claim );
-
-		$resultData = $apiMain->getResultData();
-		$this->assertArrayHasKey( 'claim', $resultData );
-		$this->assertEquals( $claim->getGuid(), $resultData['claim']['id'] );
-	}
-
 	public function testGetEntityTitle() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
 		$entityId = $item->getId();
