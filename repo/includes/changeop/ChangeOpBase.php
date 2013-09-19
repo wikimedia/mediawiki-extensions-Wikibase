@@ -35,5 +35,4 @@ abstract class ChangeOpBase implements ChangeOp {
 			$summary->addAutoSummaryArgs( $args );
 		}
 	}
-
 }
