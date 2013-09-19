@@ -78,7 +78,7 @@ describe "Check functionality of editing sitelinks on client" do
         page.clientLinkItemLanguagePage?.should be_true
         page.clientLinkItemSubmit?.should be_true
         page.clientLinkDialogClose?.should be_true
-        page.clientLinkItemLanguageInput = "Deutsch (de)"
+        page.clientLinkItemLanguageInput = "Deutsch (dewiki)"
         ajax_wait
         page.clientLinkItemLanguageSelectorFirst?.should be_true
         page.clientLinkItemLanguageSelectorFirst
