@@ -12,24 +12,7 @@ use Wikibase\Lib\EntityIdFormatter;
 /**
  * Class for reference change operation
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -58,13 +41,6 @@ class ChangeOpReference extends ChangeOpBase {
 	protected $referenceHash;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter;
-
-	/**
 	 * Constructs a new reference change operation
 	 *
 	 * @since 0.4
@@ -72,11 +48,10 @@ class ChangeOpReference extends ChangeOpBase {
 	 * @param string $claimGuid
 	 * @param Reference|null $reference
 	 * @param string $referenceHash
-	 * @param EntityIdFormatter $entityIdFormatter
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $reference, $referenceHash, EntityIdFormatter $idFormatter ) {
+	public function __construct( $claimGuid, $reference, $referenceHash ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
@@ -96,7 +71,6 @@ class ChangeOpReference extends ChangeOpBase {
 		$this->claimGuid = $claimGuid;
 		$this->reference = $reference;
 		$this->referenceHash = $referenceHash;
-		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -203,20 +177,10 @@ class ChangeOpReference extends ChangeOpBase {
 	 * @param Reference $reference
 	 *
 	 * @return array
-	 *
-	 * @todo: REUSE!!
 	 */
 	protected function getSnakSummaryArgs( Snak $snak ) {
-		$propertyId = $this->idFormatter->format( $snak->getPropertyId() );
+		$propertyId = $snak->getPropertyId();
 
-		//TODO: use formatters here!
-		if ( $snak instanceof PropertyValueSnak ) {
-			$value = $snak->getDataValue();
-		} else {
-			$value = $snak->getType();
-		}
-
-		$args = array( $propertyId => array( $value ) );
-		return array( $args );
+		return array( $propertyId, $snak );
 	}
 }

@@ -48,7 +48,6 @@ class SetClaimValue extends ModifyClaim {
 		$changeOp = new ChangeOpMainSnak(
 			$claimGuid,
 			$snak,
-			WikibaseRepo::getDefaultInstance()->getIdFormatter(),
 			$guidGenerator
 		);
 
