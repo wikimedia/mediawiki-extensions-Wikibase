@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_fd227a03",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-19T17:45:01Z",
+      "side": 1,
+      "message": "in the case of the maintenance script, I think it more consistent and clear.",
+      "parentUuid": "4946a543_1ddd860b",
+      "revId": "fe20f55948512736db141e50253eba861aacfc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_3dda4214",
         "filename": "lib/tests/phpunit/sites/SiteMatrixParserTest.php",
         "patchSetId": 2
@@ -64,6 +82,24 @@
       "writtenOn": "2013-09-19T17:34:35Z",
       "side": 1,
       "message": "Why the change from \u0027id\u0027 to \u0027siteid\u0027?",
+      "revId": "fe20f55948512736db141e50253eba861aacfc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_9d0b367e",
+        "filename": "lib/tests/phpunit/sites/SiteMatrixParserTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-19T17:45:01Z",
+      "side": 1,
+      "message": "it\u0027s more clear that it\u0027s not the internal id or some other id",
+      "parentUuid": "4946a543_3dda4214",
       "revId": "fe20f55948512736db141e50253eba861aacfc74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
