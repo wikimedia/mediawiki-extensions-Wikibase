@@ -27,14 +27,13 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$validIdFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
 		$validRank = 1;
 
 		$args = array();
-		$args[] = array( 123, $validRank, $validIdFormatter );
-		$args[] = array( $validClaimGuid, ':-)', $validIdFormatter );
+		$args[] = array( 123, $validRank );
+		$args[] = array( $validClaimGuid, ':-)' );
 
 		return $args;
 	}
@@ -44,8 +43,8 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $rank, $idFormatter ) {
-		$ChangeOpStatementRank = new ChangeOpStatementRank( $claimGuid, $rank, $idFormatter );
+	public function testInvalidConstruct( $claimGuid, $rank ) {
+		$ChangeOpStatementRank = new ChangeOpStatementRank( $claimGuid, $rank );
 	}
 
 	public function changeOpProvider() {
@@ -58,7 +57,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$claimGuid = $claims[0]->getGuid();
 		$rank = 1;
 
-		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank, $idFormatter );
+		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank );
 
 		$args[] = array ( $item, $changeOp, $rank );
 
