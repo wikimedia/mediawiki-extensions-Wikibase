@@ -241,13 +241,13 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected function addToOutput( EntityContent $entityContent, Status $status ) {
 		$formatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			'entity',
 			'id',
 			$formatter->format( $entityContent->getEntity()->getId() )
 		);
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			'entity',
 			'type', $entityContent->getEntity()->getType()
 		);
@@ -260,7 +260,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$this->addNormalizationInfoToOutput( $params['title'] );
 		}
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'success',
 			1
@@ -277,7 +277,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		if ( $normalized !== array() ) {
-			$this->getResult()->addValue(
+			$this->getResult()->addValue(//todo builder!
 				'entity',
 				'normalized', $normalized
 			);

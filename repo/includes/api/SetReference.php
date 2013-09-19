@@ -209,7 +209,7 @@ class SetReference extends ModifyClaim {
 		$serializer = $serializerFactory->newSerializerForObject( $reference );
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'reference',
 			$serializer->getSerialized( $reference )

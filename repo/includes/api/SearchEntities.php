@@ -174,7 +174,7 @@ class SearchEntities extends ApiBase {
 
 		$entries = $this->getSearchEntries( $params );
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'searchinfo',
 			array(
@@ -182,7 +182,7 @@ class SearchEntities extends ApiBase {
 			)
 		);
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'search',
 			array()
@@ -202,14 +202,14 @@ class SearchEntities extends ApiBase {
 		// Only pass search-continue param if there are more results and the maximum continuation
 		// limit is not exceeded.
 		if ( $hits > $nextContinuation && $nextContinuation <= $maxContinuation ) {
-			$this->getResult()->addValue(
+			$this->getResult()->addValue(//todo builder!
 				null,
 				'search-continue',
 				$nextContinuation
 			);
 		}
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'search',
 			$entries
@@ -217,7 +217,7 @@ class SearchEntities extends ApiBase {
 
 		$this->getResult()->setIndexedTagName_internal( array( 'search' ), 'entity' );
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'success',
 			(int)true

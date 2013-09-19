@@ -71,9 +71,8 @@ class SetStatementRank extends ModifyClaim {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
-
-		$this->claimModificationHelper->addClaimToApiResult( $claim, 'statement' );
+		$status = $this->saveChanges( $entityContent, $summary );
+		$this->buildResult( $claim, $status, null, 'statement' );
 
 		wfProfileOut( __METHOD__ );
 	}

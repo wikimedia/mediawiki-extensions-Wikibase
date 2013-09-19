@@ -80,6 +80,7 @@ return call_user_func( function() {
 
 		// includes/api
 		'Wikibase\Api\ApiWikibase' => 'includes/api/ApiWikibase.php',
+		'Wikibase\Api\ResultBuilder' => 'includes/api/ResultBuilder.php',
 		'Wikibase\Api\ItemByTitleHelper' => 'includes/api/ItemByTitleHelper.php',
 		'Wikibase\Api\EditEntity' => 'includes/api/EditEntity.php',
 		'Wikibase\Api\GetEntities' => 'includes/api/GetEntities.php',

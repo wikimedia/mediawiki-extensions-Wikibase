@@ -66,9 +66,8 @@ class RemoveClaims extends ModifyClaim {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
-
-		$this->outputResult( $params['claim'] );
+		$status = $this->saveChanges( $entityContent, $summary );
+		$this->buildResult( $params['claim'], $status, 'claims' );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -137,22 +136,6 @@ class RemoveClaims extends ModifyClaim {
 		}
 
 		return $changeOps;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param string[] $removedClaimGuids
-	 */
-	protected function outputResult( $removedClaimGuids ) {
-
-		$this->getResult()->setIndexedTagName( $removedClaimGuids, 'claim' );
-
-		$this->getResult()->addValue(
-			null,
-			'claims',
-			$removedClaimGuids
-		);
 	}
 
 	/**

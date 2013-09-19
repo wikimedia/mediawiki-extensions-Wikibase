@@ -4,6 +4,8 @@ namespace Wikibase\Api;
 
 use ApiMain;
 use ApiBase;
+use Status;
+use Wikibase\Claims;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
@@ -68,21 +70,27 @@ abstract class ModifyClaim extends ApiWikibase {
 	 *
 	 * @param \Wikibase\EntityContent $content
 	 * @param \Wikibase\Summary $summary
+	 * @return \Status
 	 */
 	public function saveChanges( EntityContent $content, Summary $summary ) {
-		$status = $this->attemptSaveEntity(
+		return $this->attemptSaveEntity(
 			$content,
 			$summary->toString(),
 			$this->getFlags()
 		);
+	}
 
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
+	protected function buildResult( $claim, Status $status, $path = null , $key = 'claim' ){
+		$resultBuilder = new ResultBuilder( $this->getResult() );
 
-		$this->getResult()->addValue(
-			null,
-			'success',
-			1
-		);
+		if( $claim instanceof Claim ){
+			$resultBuilder->addClaim( $claim, $path, $key );
+		} else if ( is_array( $claim ) ){
+			$resultBuilder->addArray( $claim, $path, $key );
+		}
+
+		$resultBuilder->addRevisionIdFromStatus( $path = 'pageinfo', $key = 'lastrevid', $status );
+		$resultBuilder->markSuccess();
 	}
 
 	/**

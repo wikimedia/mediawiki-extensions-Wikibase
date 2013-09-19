@@ -80,7 +80,7 @@ class GetEntities extends ApiWikibase {
 
 		$success = true;
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'success',
 			(int)$success
@@ -214,22 +214,22 @@ class GetEntities extends ApiWikibase {
 				// this should not happen unless a page is not what we assume it to be
 				// that is, we want this to be a little more solid if something ges wrong
 				if ( is_null( $entityContent ) ) {
-					$res->addValue( $entityPath, 'id', $entityIdFormatter->format( $entityId ) );
-					$res->addValue( $entityPath, 'illegal', "" );
+					$res->addValue( $entityPath, 'id', $entityIdFormatter->format( $entityId ) );//todo builder!
+					$res->addValue( $entityPath, 'illegal', "" );//todo builder!
 					return;
 				}
 
 				// default stuff to add that comes from the title/page/revision
 				if ( in_array( 'info', $props ) ) {
-					$res->addValue( $entityPath, 'pageid', intval( $page->getId() ) );
+					$res->addValue( $entityPath, 'pageid', intval( $page->getId() ) );//todo builder!
 					$title = $page->getTitle();
-					$res->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
-					$res->addValue( $entityPath, 'title', $title->getPrefixedText() );
+					$res->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );//todo builder!
+					$res->addValue( $entityPath, 'title', $title->getPrefixedText() );//todo builder!
 					$revision = $page->getRevision();
 
 					if ( $revision !== null ) {
-						$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
-						$res->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+						$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );//todo builder!
+						$res->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );//todo builder!
 					}
 				}
 
@@ -258,15 +258,15 @@ class GetEntities extends ApiWikibase {
 				$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 				foreach ( $entitySerialization as $key => $value ) {
-					$res->addValue( $entityPath, $key, $value );
+					$res->addValue( $entityPath, $key, $value );//todo builder!
 				}
 			}
 			else {
-				$res->addValue( $entityPath, 'missing', "" );
+				$res->addValue( $entityPath, 'missing', "" );//todo builder!
 			}
 		} else {
-			$res->addValue( $entityPath, 'id', $entityIdFormatter->format( $entityId ) );
-			$res->addValue( $entityPath, 'type', $entityId->getEntityType() );
+			$res->addValue( $entityPath, 'id', $entityIdFormatter->format( $entityId ) );//todo builder!
+			$res->addValue( $entityPath, 'type', $entityId->getEntityType() );//todo builder!
 		}
 		wfProfileOut( __METHOD__ );
 	}

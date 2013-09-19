@@ -127,17 +127,17 @@ class LinkTitles extends ApiWikibase {
 		}
 
 		if ( $itemContent !== null ) {
-			$this->getResult()->addValue(
+			$this->getResult()->addValue(//todo builder!
 				'entity',
 				'id', $itemContent->getItem()->getId()->getNumericId()
 			);
-			$this->getResult()->addValue(
+			$this->getResult()->addValue(//todo builder!
 				'entity',
 				'type', $itemContent->getItem()->getType()
 			);
 		}
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'success',
 			(int)$status->isOK()

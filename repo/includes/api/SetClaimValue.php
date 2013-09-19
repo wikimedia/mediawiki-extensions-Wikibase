@@ -58,9 +58,8 @@ class SetClaimValue extends ModifyClaim {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
-
-		$this->claimModificationHelper->addClaimToApiResult( $claim );
+		$status = $this->saveChanges( $entityContent, $summary );
+		$this->buildResult( $claim, $status );
 
 		wfProfileOut( __METHOD__ );
 	}

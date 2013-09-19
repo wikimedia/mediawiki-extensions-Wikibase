@@ -121,7 +121,7 @@ class ItemByTitleHelper {
 	 * @todo factor this out of ItemByTitleHelper, this has nothing to do with looking for item by titles
 	 */
 	protected function addMissingEntityToResult( $siteId, $title, $counter ){
-			$this->apiBase->getResult()->addValue(
+			$this->apiBase->getResult()->addValue(//todo builder!
 				'entities',
 				(string)($counter),
 				array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
@@ -141,7 +141,7 @@ class ItemByTitleHelper {
 		$normalizedTitle = $site->normalizePageName( $title );
 		if ( $normalizedTitle !== false && $normalizedTitle !== $title ) {
 			// Let the user know that we normalized
-			$this->apiBase->getResult()->addValue(
+			$this->apiBase->getResult()->addValue(//todo builder!
 				'normalized',
 				'n',
 				array( 'from' => $title, 'to' => $normalizedTitle )

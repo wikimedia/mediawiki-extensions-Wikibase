@@ -117,159 +117,34 @@ abstract class ApiWikibase extends \ApiBase {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
 	}
 
-	/**
-	 * Get serialized aliases and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $aliases the aliases to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
-		$aliasSerializer = new AliasSerializer( $options );
-		$value = $aliasSerializer->getSerialized( $aliases );
-
-		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-			$this->getResult()->addValue( $path, $name, $value );
-		}
-
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addAliasesToResult( $aliases, $path, $name, $tag );
 	}
 
-	/**
-	 * Get serialized sitelinks and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 * @param array $options additional information to include in the listelinks structure. For example:
-	 *              * 'url' will include the full URL of the sitelink in the result
-	 *              * 'removed' will mark the sitelinks as removed
-	 *
-	 */
+	/** @deprecated */
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$serializerOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-		$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_NONE );
-		$serializerOptions->setUseKeys( $this->getUsekeys() );
-
-		if ( isset( $options ) ) {
-			if ( in_array( EntitySerializationOptions::SORT_ASC, $options ) ) {
-				$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_ASC );
-			} elseif ( in_array( EntitySerializationOptions::SORT_DESC, $options ) ) {
-				$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_DESC );
-			}
-
-			if ( in_array( 'url', $options ) ) {
-				$serializerOptions->addProp( 'sitelinks/urls' );
-			}
-
-			if ( in_array( 'removed', $options ) ) {
-				$serializerOptions->addProp( 'sitelinks/removed' );
-			}
-		}
-
-		$siteStore = \SiteSQLStore::newInstance();
-		$siteLinkSerializer = new SiteLinkSerializer( $serializerOptions, $siteStore );
-		$value = $siteLinkSerializer->getSerialized( $siteLinks );
-
-		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addSiteLinksToResult( $siteLinks, $path, $name, $tag, $options );
 	}
 
-	/**
-	 * Get serialized descriptions and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $descriptions the descriptions to insert in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
-		$descriptionSerializer = new DescriptionSerializer( $options );
-
-		$value = $descriptionSerializer->getSerialized( $descriptions );
-
-		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addDescriptionsToResult( $descriptions, $path, $name, $tag );
 	}
 
-	/**
-	 * Get serialized labels and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $labels the labels to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
-		$labelSerializer = new LabelSerializer( $options );
-
-		$value = $labelSerializer->getSerialized( $labels );
-
-		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addLabelsToResult( $labels, $path, $name, $tag );
 	}
 
-	/**
-	 * Get serialized claims and add them to result
-	 *
-	 * @since 0.5
-	 *
-	 * @param array $claims the labels to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
-		$claimSerializer = new ClaimsSerializer( $options );
-
-		$value = $claimSerializer->getSerialized( new Claims( $claims ) );
-
-		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addClaimsToResult( $claims, $path, $name, $tag );
 	}
 
 	/**
@@ -453,6 +328,7 @@ abstract class ApiWikibase extends \ApiBase {
 	public function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
 		wfProfileIn( __METHOD__ );
 
+		//todo builder!
 		$res = $this->getResult();
 		$isError = !$status->isOK();
 
@@ -482,7 +358,7 @@ abstract class ApiWikibase extends \ApiBase {
 			$this->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 		} elseif ( $messages ) {
 			$res->disableSizeCheck();
-			$res->addValue( array( 'warnings' ), 'messages', $messages, true );
+			$res->addValue( array( 'warnings' ), 'messages', $messages, true );//todo builder!?????
 			$res->enableSizeCheck();
 
 			wfProfileOut( __METHOD__ );
@@ -543,6 +419,7 @@ abstract class ApiWikibase extends \ApiBase {
 			return $messages;
 		}
 
+		//todo builder!
 		$res = $this->getResult();
 
 		foreach ( $errors as $m ) {
@@ -661,18 +538,7 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
-	 * Adds the ID of the new revision from the Status object to the API result structure.
-	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
-	 * resp WikiPage::doEditContent() do it: as an array, with the new revision object in the
-	 * 'revision' field.
-	 *
-	 * If no revision is found the the Status object, this method does nothing.
-	 *
-	 * @see ApiResult::addValue()
-	 *
-	 * @param string|null|array  $path  Where in the result to put the revision idf
-	 * @param string  $name   The name to use for the revision id in the result structure
-	 * @param \Status $status The status to get the revision ID from.
+	 * @deprecated USE RESULT BUILDER
 	 */
 	protected function addRevisionIdFromStatusToResult( $path, $name, Status $status ) {
 		$statusValue = $status->getValue();
@@ -682,7 +548,7 @@ abstract class ApiWikibase extends \ApiBase {
 			? $statusValue['revision'] : null;
 
 		if ( $revision ) {
-			$this->getResult()->addValue(
+			$this->getResult()->addValue(//todo builder!
 				$path,
 				$name,
 				intval( $revision->getId() )

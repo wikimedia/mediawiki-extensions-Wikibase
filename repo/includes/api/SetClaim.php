@@ -125,8 +125,8 @@ class SetClaim extends ApiWikibase {
 		$newRevisionId = isset( $statusValue['revision'] ) ? $statusValue['revision']->getId() : null;
 
 		if ( $newRevisionId !== null ) {
-			$this->getResult()->addValue( null, 'success', 1 );
-			$this->getResult()->addValue(
+			$this->getResult()->addValue( null, 'success', 1 );//todo builder!
+			$this->getResult()->addValue(//todo builder!
 				'pageinfo',
 				'lastrevid',
 				$newRevisionId
@@ -167,7 +167,7 @@ class SetClaim extends ApiWikibase {
 		$serializer = $serializerFactory->newSerializerForObject( $claim );
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
-		$this->getResult()->addValue(
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'claim',
 			$serializer->getSerialized( $claim )

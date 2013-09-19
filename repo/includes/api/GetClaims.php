@@ -94,7 +94,9 @@ class GetClaims extends ApiWikibase {
 
 		$serializedClaims = $serializer->getSerialized( $claims );
 
-		$this->getResult()->addValue(
+		$resultBuilder = new ResultBuilder( $this->getResult() );
+
+		$this->getResult()->addValue(//todo builder!
 			null,
 			'claims',
 			$serializedClaims
