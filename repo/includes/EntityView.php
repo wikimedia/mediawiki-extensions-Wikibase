@@ -337,7 +337,8 @@ abstract class EntityView extends \ContextSource {
 			wfTemplate( 'wb-property',
 				$label === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
-				$this->getHtmlForEditSection( $entity, $lang, $editUrl )
+				wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $prefixedId ) )
+					. $this->getHtmlForEditSection( $entity, $lang, $editUrl )
 			)
 		);
 

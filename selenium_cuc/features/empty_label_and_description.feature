@@ -42,6 +42,7 @@ Feature: Empty label and description behaviour
       And Label edit button should not be there
       And Label cancel button should not be there
       And Label save button should not be there
+      And Entity id should be displayed next to the label
 
   @ui_only
   Scenario: Label UI behaves correctly when label is empty

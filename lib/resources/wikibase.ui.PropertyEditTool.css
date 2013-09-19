@@ -23,10 +23,6 @@
 	font-style: italic;
 }
 
-.wb-ui-propertyedittool-editablevalue-ineditmode {
-	white-space: nowrap;
-}
-
 /* disabled input element */
 .wb-ui-propertyedittool-editablevalueinterface-disabled input {
 	background-color: #F0F0F0;

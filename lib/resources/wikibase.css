@@ -121,7 +121,11 @@ h2.wb-section-heading {
 	display: block; /* need to force block explicitly to achieve 100% width */
 }
 
-.wb-value-empty {
+.wb-value, .wb-value-supplement {
+	display: inline;
+}
+
+.wb-value-empty, .wb-value-supplement {
 	color: #A1A1A1;
 }
 
@@ -184,6 +188,10 @@ label and its toolbar */
 	font-size: 188%;
 	line-height: 1.2; /* adjust line height to input box height in edit mode */
 	padding: 1px 0; /* even out border of input box in edit mode */
+}
+
+.wb-firstHeading .wb-value-supplement {
+	line-height: 188%;
 }
 
 .wb-firstHeading .wb-value-container {
