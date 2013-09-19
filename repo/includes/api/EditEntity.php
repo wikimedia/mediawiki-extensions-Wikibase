@@ -382,12 +382,22 @@ class EditEntity extends ModifyEntity {
 		if ( !is_array( $claims ) ) {
 			$this->dieUsage( "List of claims must be an array", 'not-recognized-array' );
 		}
+		$changeOps = array();
 
-		//todo allow claims to be passed grouped by property rather than just an array of claims
-		$removeChangeops = $this->getRemoveClaimsChangeOps( $claims, $guidGenerator );
-		$modifyChangeOps = $this->getModifyClaimsChangeOps( $claims, $guidGenerator );
+		//check if the array is associative or in arrays by property
+		if( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ){
+			foreach( $claims as $subClaims ){
+				$changeOps = array_merge( $changeOps,
+					$this->getRemoveClaimsChangeOps( $subClaims, $guidGenerator ),
+					$this->getModifyClaimsChangeOps( $subClaims, $guidGenerator ) );
+			}
+		} else {
+			$changeOps = array_merge( $changeOps,
+				$this->getRemoveClaimsChangeOps( $claims, $guidGenerator ),
+				$this->getModifyClaimsChangeOps( $claims, $guidGenerator ) );
+		}
 
-		return array_merge( $removeChangeops, $modifyChangeOps );
+		return $changeOps;
 	}
 
 	/**
