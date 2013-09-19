@@ -30,18 +30,17 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$validIdFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$validGuidGenerator = new ClaimGuidGenerator( $item->getId() );
 		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
 		$validSnak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
 
 		$args = array();
-		$args[] = array( 123, $validSnak, $validIdFormatter, $validGuidGenerator );
-		$args[] = array( 123, null, $validIdFormatter, $validGuidGenerator );
-		$args[] = array( $validClaimGuid, 'notASnak', $validIdFormatter, $validGuidGenerator );
-		$args[] = array( '', 'notASnak', $validIdFormatter, $validGuidGenerator );
-		$args[] = array( '', null, $validIdFormatter, $validGuidGenerator );
+		$args[] = array( 123, $validSnak, $validGuidGenerator );
+		$args[] = array( 123, null, $validGuidGenerator );
+		$args[] = array( $validClaimGuid, 'notASnak', $validGuidGenerator );
+		$args[] = array( '', 'notASnak', $validGuidGenerator );
+		$args[] = array( '', null, $validGuidGenerator );
 
 		return $args;
 	}
@@ -51,19 +50,18 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $snak, $idFormatter, $guidGenerator ) {
-		$ChangeOpMainSnak = new ChangeOpMainSnak( $claimGuid, $snak, $idFormatter, $guidGenerator );
+	public function testInvalidConstruct( $claimGuid, $snak, $guidGenerator ) {
+		$ChangeOpMainSnak = new ChangeOpMainSnak( $claimGuid, $snak, $guidGenerator );
 	}
 
 	public function changeOpProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newSnak' ) );
 		$claimGuid = '';
-		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter, new ClaimGuidGenerator( $item->getId() ) );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -71,14 +69,14 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedSnak' ) );
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
-		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter, new ClaimGuidGenerator( $item->getId() ) );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
 		$item = $this->provideNewItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
-		$changeOp = new ChangeOpMainSnak( $claimGuid, null, $idFormatter, new ClaimGuidGenerator( $item->getId() ) );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, null, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = null;
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -109,11 +107,10 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->provideNewItemWithClaim( 'q777', $snak );
 		$claims = $item->getClaims();
 		$claimGuid = $claims[0]->getGuid();
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 
-		$args[] = array ( new ChangeOpMainSnak( $claimGuid, $newSnak, $idFormatter, $guidGenerator ) );
-		$args[] = array ( new ChangeOpMainSnak( $claimGuid, null, $idFormatter, $guidGenerator ) );
+		$args[] = array ( new ChangeOpMainSnak( $claimGuid, $newSnak, $guidGenerator ) );
+		$args[] = array ( new ChangeOpMainSnak( $claimGuid, null, $guidGenerator ) );
 
 		return $args;
 	}

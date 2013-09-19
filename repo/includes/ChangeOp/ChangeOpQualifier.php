@@ -8,7 +8,6 @@ use Wikibase\Entity;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\Snaks;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Summary;
 
 /**
@@ -42,13 +41,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 	protected $snakHash;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter;
-
-	/**
 	 * Constructs a new qualifier change operation
 	 *
 	 * @since 0.4
@@ -56,11 +48,10 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 * @param string $claimGuid
 	 * @param Snak|null $snak
 	 * @param string $snakHash
-	 * @param EntityIdFormatter $entityIdFormatter
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $snak, $snakHash, EntityIdFormatter $idFormatter ) {
+	public function __construct( $claimGuid, $snak, $snakHash ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
@@ -80,7 +71,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 		$this->claimGuid = $claimGuid;
 		$this->snak = $snak;
 		$this->snakHash = $snakHash;
-		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -172,23 +162,12 @@ class ChangeOpQualifier extends ChangeOpBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Snak $mainSnak
+	 * @param Snak $snak
 	 *
 	 * @return array
-	 *
-	 * @todo: REUSE!!
 	 */
 	protected function getSnakSummaryArgs( Snak $snak ) {
-		$propertyId = $this->idFormatter->format( $snak->getPropertyId() );
-
-		//TODO: use formatters here!
-		if ( $snak instanceof PropertyValueSnak ) {
-			$value = $snak->getDataValue();
-		} else {
-			$value = $snak->getType();
-		}
-
-		$args = array( $propertyId => array( $value ) );
-		return array( $args );
+		$propertyId = $snak->getPropertyId();
+		return array( array( $propertyId->getPrefixedId() => $snak ) );
 	}
 }

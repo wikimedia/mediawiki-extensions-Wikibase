@@ -80,10 +80,9 @@ class SetStatementRank extends ModifyClaim {
 		$params = $this->extractRequestParams();
 
 		$claimGuid = $params['statement'];
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		$rank = ClaimSerializer::unserializeRank( $params['rank'] );
-		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank, $idFormatter );
+		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank );
 
 		return $changeOp;
 	}

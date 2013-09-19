@@ -412,7 +412,6 @@ class EditEntity extends ModifyEntity {
 
 		$serializerFactory = new SerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
-		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
 		foreach ( $claims as $claimArray ) {
 			if( !array_key_exists( 'remove', $claimArray ) ){
@@ -431,7 +430,6 @@ class EditEntity extends ModifyEntity {
 					$opsToReturn[] = new ChangeOpMainSnak(
 						$claim->getGuid(),
 						null,
-						$entityIdFormatter,
 						$guidGenerator
 					);
 				}
@@ -455,7 +453,6 @@ class EditEntity extends ModifyEntity {
 					$opsToReturn[] = new ChangeOpMainSnak(
 						$claimArray['id'],
 						null,
-						WikibaseRepo::getDefaultInstance()->getEntityIdFormatter(),
 						$guidGenerator
 					);
 				} else {

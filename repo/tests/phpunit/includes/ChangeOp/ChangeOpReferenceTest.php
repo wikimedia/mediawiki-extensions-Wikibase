@@ -28,7 +28,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$validIdFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
 		$snaks = new SnakList();
@@ -37,13 +36,13 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$validReferenceHash = $validReference->getHash();
 
 		$args = array();
-		$args[] = array( 123, $validReference, $validReferenceHash, $validIdFormatter );
-		$args[] = array( '', $validReference, $validReferenceHash, $validIdFormatter );
-		$args[] = array( '', null, $validReferenceHash, $validIdFormatter );
-		$args[] = array( $validClaimGuid, $validReference, 123, $validIdFormatter );
-		$args[] = array( $validClaimGuid, 'notAReference', $validReferenceHash, $validIdFormatter );
-		$args[] = array( $validClaimGuid, 'notAReference', '', $validIdFormatter );
-		$args[] = array( $validClaimGuid, null, '', $validIdFormatter );
+		$args[] = array( 123, $validReference, $validReferenceHash );
+		$args[] = array( '', $validReference, $validReferenceHash );
+		$args[] = array( '', null, $validReferenceHash );
+		$args[] = array( $validClaimGuid, $validReference, 123 );
+		$args[] = array( $validClaimGuid, 'notAReference', $validReferenceHash );
+		$args[] = array( $validClaimGuid, 'notAReference', '' );
+		$args[] = array( $validClaimGuid, null, '' );
 
 		return $args;
 	}
@@ -53,12 +52,11 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $reference, $referenceHash, $idFormatter ) {
-		$ChangeOpQualifier = new ChangeOpReference( $claimGuid, $reference, $referenceHash, $idFormatter );
+	public function testInvalidConstruct( $claimGuid, $reference, $referenceHash ) {
+		$ChangeOpQualifier = new ChangeOpReference( $claimGuid, $reference, $referenceHash );
 	}
 
 	public function changeOpAddProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
@@ -68,7 +66,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$snaks = new SnakList();
 		$snaks[] = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
 		$newReference = new Reference( $snaks );
-		$changeOp = new ChangeOpReference( $claimGuid, $newReference, '', $idFormatter );
+		$changeOp = new ChangeOpReference( $claimGuid, $newReference, '' );
 		$referenceHash = $newReference->getHash();
 		$args[] = array ( $item, $changeOp, $referenceHash );
 
@@ -90,7 +88,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpRemoveProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
@@ -105,7 +102,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$claims[0]->setReferences( $references );
 		$item->setClaims( new Claims( $claims ) );
 		$referenceHash = $newReference->getHash();
-		$changeOp = new ChangeOpReference( $claimGuid, null, $referenceHash, $idFormatter );
+		$changeOp = new ChangeOpReference( $claimGuid, null, $referenceHash );
 		$args[] = array ( $item, $changeOp, $referenceHash );
 
 		return $args;
@@ -126,7 +123,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpSetProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
@@ -144,7 +140,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$snaks = new SnakList();
 		$snaks[] = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedQualifier' ) );
 		$changedReference = new Reference( $snaks );
-		$changeOp = new ChangeOpReference( $claimGuid, $changedReference, $referenceHash, $idFormatter );
+		$changeOp = new ChangeOpReference( $claimGuid, $changedReference, $referenceHash );
 		$args[] = array ( $item, $changeOp, $changedReference->getHash() );
 
 		return $args;
