@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_9de896b7",
+        "filename": "lib/includes/sites/SitesBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-19T17:34:35Z",
+      "side": 1,
+      "message": "how about $existingSites \u003d $this-\u003estore-\u003egetSites( \"nocache\" );",
+      "revId": "fe20f55948512736db141e50253eba861aacfc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_5dde2e0f",
+        "filename": "lib/includes/sites/SitesBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-19T17:34:35Z",
+      "side": 1,
+      "message": "...then this wouldn\u0027t be needed at all.",
+      "revId": "fe20f55948512736db141e50253eba861aacfc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_1ddd860b",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-19T17:34:35Z",
+      "side": 1,
+      "message": "Why did you change this from a string flag to a boolean? I just got told off for suggesting boolean params into core...",
+      "revId": "fe20f55948512736db141e50253eba861aacfc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_3dda4214",
+        "filename": "lib/tests/phpunit/sites/SiteMatrixParserTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-19T17:34:35Z",
+      "side": 1,
+      "message": "Why the change from \u0027id\u0027 to \u0027siteid\u0027?",
+      "revId": "fe20f55948512736db141e50253eba861aacfc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
