@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
 use ApiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -10,9 +11,6 @@ use Wikibase\PropertyContent;
  * Tests for the ApiWikibase class.
  *
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
@@ -126,7 +124,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal' ) ) ) ),
 
 			array( //15 remove the claim
-				'p' => array( 'data' => '{"claims":[{"id":"GUID","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"diffstring","type":"string"}},"type":"statement","rank":"normal","remove":""}]}' ),
+				'p' => array( 'data' => '{"claims":[{"id":"GUID","remove":""}]}' ),
 				'e' => array( 'claims' => array() ) ),
 
 			array( //15 add multiple claims
@@ -304,7 +302,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			//@todo add check for Bug:52731 once fixed
 			array( //19 removing invalid claim fails
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"claims":[{"remove":""}]}'),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-claim', 'message' => 'Invalid claim type specified'  ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-claim', 'message' => 'Cannot remove a claim with no GUID'  ) ) ),
 			array( //20 removing valid claim with no guid fails
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized', 'message' => 'Unknown key in json: remove' ) ) ),
