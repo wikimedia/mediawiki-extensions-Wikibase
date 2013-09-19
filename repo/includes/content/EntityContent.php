@@ -3,6 +3,10 @@
 namespace Wikibase;
 
 use ParserOutput;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\Test\FormatterOptionsTest;
+use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\SnakFormatter;
 use WikiPage, Title, User, Status, ParserOptions;
 use \ValueFormatters\ValueFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -121,7 +125,16 @@ abstract class EntityContent extends \AbstractContent {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+		$formatterOptions = new FormatterOptions(); //TODO: Language Fallback, etc
+
+		if ( $options !== null ) {
+			$lang = $options->getUserLang(); //XXX: the right language?!
+			$formatterOptions->setOption( ValueFormatter::OPT_LANG, $lang );
+		}
+
+		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
+			->getFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
