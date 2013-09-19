@@ -8,7 +8,6 @@ use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
 use Wikibase\Item;
-use Wikibase\ItemContent;
 use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\PropertyNoValueSnak;
@@ -16,13 +15,14 @@ use Wikibase\PropertySomeValueSnak;
 use Wikibase\SnakObject;
 
 /**
- * @covers Wikibase\ChangeOpClaim
+ * @covers Wikibase\ChangeOpModifyClaim
  *
  * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp
+ * @group ChangeOpClaim
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
@@ -33,9 +33,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$validGuidGenerator = new ClaimGuidGenerator( ItemId::newFromNumber( 42 ) );
 
 		$args = array();
-		$args[] = array( 42, 'add', $validGuidGenerator );
-		$args[] = array( 'en', 'remove', $validGuidGenerator );
-		$args[] = array( array(), 'remove', $validGuidGenerator );
+		$args[] = array( array() , $validGuidGenerator );
 		return $args;
 	}
 
@@ -44,11 +42,10 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 *
 	 * @param Claim $claim
-	 * @param string $action
 	 * @param ClaimGuidGenerator $guidGenerator
 	 */
-	public function testInvalidConstruct( $claim, $action, $guidGenerator) {
-		$changeOp = new ChangeOpClaim( $claim, $action, $guidGenerator);
+	public function testInvalidConstruct( $claim, $guidGenerator) {
+		new ChangeOpClaim( $claim, $guidGenerator);
 	}
 
 	public function provideTestApply() {
@@ -57,35 +54,35 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$item777 = self::provideNewItemWithClaim( 777, new PropertyNoValueSnak( 45 ) );
 		$item666 = self::provideNewItemWithClaim( 666, new PropertySomeValueSnak( 44 ) );
 
+		//claims that exist on the given entities
 		$claims[0] = new Claim( new PropertyNoValueSnak( 43 ) );
 		$item777Claims = $item777->getClaims();
 		$claims[777] = clone $item777Claims[0];
 		$item666Claims = $item666->getClaims();
 		$claims[666] = clone $item666Claims[0];
+		//claims with a null guid
+		$claims[7770] = clone $item777Claims[0];
+		$claims[7770]->setGuid( null );
+		$claims[6660] = clone $item666Claims[0];
+		$claims[6660]->setGuid( null );
+		//new claims not yet on the entity
+		$claims[7777] = clone $item777Claims[0];
+		$claims[7777]->setGuid( 'Q777$D8404CDA-25E4-4334-AF13-A3290BC77777' );
+		$claims[6666] = clone $item666Claims[0];
+		$claims[6666]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66666' );
 
 		$args = array();
 		//test adding claims with guids from other items
-		$args[] = array ( $itemEmpty, clone $claims[666] , 'add' , false );
-		$args[] = array ( $itemEmpty, clone $claims[777] , 'add' , false );
-		$args[] = array ( $item666, clone $claims[777] , 'add' , false );
-		$args[] = array ( $item777, clone $claims[666] , 'add' , false );
-		//test adding claims with from this item
-		$args[] = array ( $item777, clone $claims[777] , 'remove' , array( ) );
-		$args[] = array ( $item777, clone $claims[777] , 'add' , array( clone $claims[777] ) );
-		$args[] = array ( $item666, clone $claims[666] , 'remove' , array( ) );
-		$args[] = array ( $item666, clone $claims[666] , 'add' , array( clone $claims[666] ) );
-		//test adding claims with no guid
-		$args[] = array ( $itemEmpty, clone $claims[0] , 'add' , array( clone $claims[0] ) );
-		$args[] = array ( $item777, clone $claims[0] , 'add' , array( clone $claims[777], clone $claims[0] ) );
-		$args[] = array ( $item666, clone $claims[0] , 'add' , array( clone $claims[666], clone $claims[0] ) );
-		//test removing claims with good guids that exist
-		$args[] = array ( $item777, clone $claims[777] , 'remove' , array( clone $claims[0] ) );
-		$args[] = array ( $item666, clone $claims[666] , 'remove' , array( clone $claims[0] ) );
-		//test removing claims with good guids that dont exist
-		$args[] = array ( $item777, clone $claims[777] , 'remove' , false );
-		$args[] = array ( $item666, clone $claims[666] , 'remove' , false );
-		//test removing claim with no guid
-		$args[] = array ( $itemEmpty, clone $claims[0] , 'remove' , false );
+		$args[] = array ( $itemEmpty, clone $claims[666] , false );
+		$args[] = array ( $itemEmpty, clone $claims[777] ,  false );
+		$args[] = array ( $item666, clone $claims[777] ,  false );
+		$args[] = array ( $item777, clone $claims[666] ,  false );
+		//test adding the same claims with a null guid (one should be created)
+		$args[] = array ( $item777, clone $claims[7770]  , array( $claims[777], $claims[7770] ) );
+		$args[] = array ( $item666, clone $claims[6660]  , array( $claims[666], $claims[6660] ) );
+		//test adding the same claims with a correct guid
+		$args[] = array ( $item777, clone $claims[7777]  , array( $claims[777], $claims[7770], $claims[7777]) );
+		$args[] = array ( $item666, clone $claims[6666]  , array( $claims[666], $claims[6660], $claims[6666] ) );
 
 		return $args;
 	}
@@ -95,15 +92,14 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param Entity $entity
 	 * @param Claim $claim
-	 * @param string $action
 	 * @param Claim[]|bool $expected
 	 */
-	public function testApply( $entity, $claim, $action, $expected ) {
+	public function testApply( $entity, $claim, $expected ) {
 		if( $expected === false ){
 			$this->setExpectedException( '\Wikibase\ChangeOpException' );
 		}
 
-		$changeOpClaim = new ChangeOpClaim( $claim, $action, new ClaimGuidGenerator( $entity->getId() ) );
+		$changeOpClaim = new ChangeOpClaim( $claim, new ClaimGuidGenerator( $entity->getId() ) );
 		$changeOpClaim->apply( $entity );
 
 		if( $expected === false ){
@@ -116,22 +112,6 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		}
 		$this->assertEquals( count( $expected ), $entityClaims->count() );
 	}
-
-	/**
-	 * @expectedException \Wikibase\ChangeOpException
-	 */
-	public function testApplyWithInvalidAction() {
-		$item = ItemContent::newEmpty();
-		$entity = $item->getEntity();
-
-		$changeOpClaim = new ChangeOpClaim(
-			new Claim( new PropertyNoValueSnak( 43 ) ) ,
-			'invalidAction',
-			new ClaimGuidGenerator( ItemId::newFromNumber( 42 ) ) );
-
-		$changeOpClaim->apply( $entity );
-	}
-
 
 	/**
 	 * @param integer $itemId
