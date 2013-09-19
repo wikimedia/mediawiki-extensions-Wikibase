@@ -211,7 +211,7 @@ class PropertyParserFunction {
 			// ...more options...
 		) );
 
-		$formatter = $wikibaseClient->newSnakFormatter( SnakFormatterFactory::FORMAT_WIKI, $options );
+		$formatter = $wikibaseClient->newSnakFormatter( SnakFormatter::FORMAT_WIKI, $options );
 
 		$instance = new self( $targetLanguage,
 			$entityLookup, $propertyLabelResolver,
@@ -237,8 +237,8 @@ class PropertyParserFunction {
 
 		$result = array(
 			$text,
-			'noparse' => false,
-			'nowiki' => true,
+			'noparse' => false, // parse wikitext
+			'nowiki' => false,  // formatters take care of escaping as needed
 		);
 
 		wfProfileOut( __METHOD__ );
