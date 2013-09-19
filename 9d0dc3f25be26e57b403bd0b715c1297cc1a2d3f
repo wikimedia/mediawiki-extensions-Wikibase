@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_fd9d1a55",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-19T17:23:52Z",
+      "side": 1,
+      "message": "A ChangeOpMainSnak is being used for removing Claims? That seems confusing...",
+      "revId": "9d0dc3f25be26e57b403bd0b715c1297cc1a2d3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
