@@ -57,6 +57,8 @@ $messages['en'] = array(
 	'wikibase-validator-bad-type' => '$2 instead of $1',
 	'wikibase-validator-too-long' => 'Must be no more than {{PLURAL:$1|one character|$1 characters}} long',
 	'wikibase-validator-too-short' => 'Must be at least {{PLURAL:$1|one character|$1 characters}} long',
+	'wikibase-validator-too-high' => 'Out of range, must be no higher than $1',
+	'wikibase-validator-too-low' => 'Out of range, must be no lower than $1',
 	'wikibase-validator-malformed-value' => 'Malformed input: $1',
 	'wikibase-validator-bad-entity-id' => 'Malformed ID: $1',
 	'wikibase-validator-bad-entity-type' => 'Unexpected entity type $1',
@@ -164,11 +166,19 @@ Parameters:
 * $2 - the actual type
 {{Related|Wikibase-validator}}',
 	'wikibase-validator-too-long' => 'Input validation error shown when the input is too long. Parameters:
-* $1 - the minimum length
+* $1 - the maximum length
 * $2 - (Unused) the actual length
 {{Related|Wikibase-validator}}',
 	'wikibase-validator-too-short' => 'Input validation error shown when the input is too short. Parameters:
 * $1 - the minimum length
+* $2 - (Unused) the actual length
+{{Related|Wikibase-validator}}',
+	'wikibase-validator-too-high' => 'Input validation error shown when the input is too high. Parameters:
+* $1 - the maximum value
+* $2 - (Unused) the actual length
+{{Related|Wikibase-validator}}',
+	'wikibase-validator-too-low' => 'Input validation error shown when the input is too low. Parameters:
+* $1 - the minimum value
 * $2 - (Unused) the actual length
 {{Related|Wikibase-validator}}',
 	'wikibase-validator-malformed-value' => "Input validation error shown when the user's input was malformed in some way.

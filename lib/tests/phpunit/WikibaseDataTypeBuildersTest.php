@@ -86,11 +86,15 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'time', new NumberValue( 7 ), false, 'TimeValue expected' ),
 
 			//time['calendar-model']
-			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, '' ), false, 'calendar: empty string should be invalid' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, 'http://' . str_repeat('x', 256) ), false, 'calendar: too long' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, 'http://acme.com/calendar' ), true, 'calendar: URL' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, ' http://acme.com/calendar ' ), false, 'calendar: untrimmed' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, ' javascript:alert(1)' ), false, 'calendar: bad URL' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, '' ), false, 'calendar: empty string should be invalid' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://' . str_repeat('x', 256) ), false, 'calendar: too long' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), true, 'calendar: URL' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' http://acme.com/calendar ' ), false, 'calendar: untrimmed' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' javascript:alert(1)' ), false, 'calendar: bad URL' ),
+
+			//precision to the second (currently not allowed)
+			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), false, 'time given to the second' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, 'http://acme.com/calendar' ), false, 'precision: second' ),
 
 			//time['time']
 			//NOTE: The below will fail with a IllegalValueExcpetion once the TimeValue constructor enforces the time format.
@@ -133,26 +137,27 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, ' javascript:alert(1) ' ), false, 'globe: bad URL scheme' ),
 			//TODO: globe must be an item reference
 			//TODO: globe must be from a list of configured values
+
+			// url
+			array( 'url', 'Foo', false, 'StringValue expected, string supplied' ),
+			array( 'url', new NumberValue( 7 ), false, 'StringValue expected' ),
+
+			array( 'url', new StringValue( 'http://acme.com' ), true, 'Simple HTTP URL' ),
+			array( 'url', new StringValue( 'https://acme.com/' ), true, 'Simple HTTPS URL' ),
+			array( 'url', new StringValue( 'http://acme.com/foo/bar?some=stuff#fragment' ), true, 'Complex HTTP URL' ),
+
+			// evil url
+			array( 'url', new StringValue( '//bla' ), false, 'Protocol-relative' ),
+			array( 'url', new StringValue( '/bla/bla' ), false, 'relative path' ),
+			array( 'url', new StringValue( 'just stuff' ), false, 'just words' ),
+			array( 'url', new StringValue( 'javascript:alert("evil")' ), false, 'JavaScript URL' ),
+			array( 'url', new StringValue( 'http://' ), false, 'bad http URL' ),
+			array( 'url', new StringValue( 'http://' . str_repeat('x', 505) ), false, 'URL too long' ),
 		);
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$cases = array_merge( $cases, array(
-
-				// url
-				array( 'url', 'Foo', false, 'StringValue expected, string supplied' ),
-				array( 'url', new NumberValue( 7 ), false, 'StringValue expected' ),
-
-				array( 'url', new StringValue( 'http://acme.com' ), true, 'Simple HTTP URL' ),
-				array( 'url', new StringValue( 'https://acme.com/' ), true, 'Simple HTTPS URL' ),
-				array( 'url', new StringValue( 'http://acme.com/foo/bar?some=stuff#fragment' ), true, 'Complex HTTP URL' ),
-
-				// evil url
-				array( 'url', new StringValue( '//bla' ), false, 'Protocol-relative' ),
-				array( 'url', new StringValue( '/bla/bla' ), false, 'relative path' ),
-				array( 'url', new StringValue( 'just stuff' ), false, 'just words' ),
-				array( 'url', new StringValue( 'javascript:alert("evil")' ), false, 'JavaScript URL' ),
-				array( 'url', new StringValue( 'http://' ), false, 'bad http URL' ),
-				array( 'url', new StringValue( 'http://' . str_repeat('x', 505) ), false, 'URL too long' ),
+				// ....
 			) );
 		}
 

@@ -192,6 +192,7 @@ return call_user_func( function() {
 		'Wikibase\Validators\NumberValidator' => 'includes/Validators/NumberValidator.php',
 		'Wikibase\Validators\RegexValidator' => 'includes/Validators/RegexValidator.php',
 		'Wikibase\Validators\StringLengthValidator' => 'includes/Validators/StringLengthValidator.php',
+		'Wikibase\Validators\NumberRangeValidator' => 'includes/Validators/NumberRangeValidator.php',
 		'Wikibase\Validators\TypeValidator' => 'includes/Validators/TypeValidator.php',
 		'Wikibase\Validators\ValidatorErrorLocalizer' => 'includes/Validators/ValidatorErrorLocalizer.php',
 		'Wikibase\Validators\UrlValidator' => 'includes/Validators/UrlValidator.php',

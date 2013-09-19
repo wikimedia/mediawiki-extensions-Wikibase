@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use DataTypes\DataType;
+use DataValues\TimeValue;
 use Parser;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
@@ -10,6 +11,7 @@ use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
 use Wikibase\Validators\EntityExistsValidator;
+use Wikibase\Validators\NumberRangeValidator;
 use Wikibase\Validators\NumberValidator;
 use Wikibase\Validators\RegexValidator;
 use Wikibase\Validators\StringLengthValidator;
@@ -150,11 +152,26 @@ class WikibaseDataTypeBuilders {
 		$timeStringValidators = array();
 		$timeStringValidators[] = new TypeValidator( 'string' );
 
-		$isoDataPattern = '!^[-+]\d{1,16}-(0\d|1[012])-([012]\d|3[01])T([01]\d|2[0123]):[0-5]\d:([0-5]\d|6[012])Z$!';
+		// down to the second
+		//$maxPrecision = TimeValue::PRECISION_SECOND;
+		//$isoDataPattern = '!^[-+]\d{1,16}-(0\d|1[012])-([012]\d|3[01])T([01]\d|2[0123]):[0-5]\d:([0-5]\d|6[012])Z$!';
+
+		// down to the day
+		$maxPrecision = TimeValue::PRECISION_DAY;
+		$isoDataPattern = '!^[-+]\d{1,16}-(0\d|1[012])-([012]\d|3[01])T00:00:00Z$!';
+
 		$timeStringValidators[] = new RegexValidator( $isoDataPattern );
 
-		$validators[] = new DataFieldValidator( 'time', // Note: validate the 'calendarmodel' field
+		$validators[] = new DataFieldValidator( 'time', // Note: validate the 'time' field
 			new CompositeValidator( $timeStringValidators, true ) //Note: each validator is fatal
+		);
+
+		$precisionValidators = array();
+		$precisionValidators[] = new TypeValidator( 'integer' );
+		$precisionValidators[] = new NumberRangeValidator( TimeValue::PRECISION_Ga, $maxPrecision );
+
+		$validators[] = new DataFieldValidator( 'precision', // Note: validate the 'precision' field
+			new CompositeValidator( $precisionValidators, true ) //Note: each validator is fatal
 		);
 
 		// top validator
