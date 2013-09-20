@@ -53,12 +53,7 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	 *
 	 * @since 0.2
 	 */
-	public function testGetSerializedValid(
-		$input,
-		array $expected = null,
-		SerializationOptions $options = null,
-		$normalizedInput = null
-	) {
+	public function testGetSerializedValid( $input, array $expected = null, SerializationOptions $options = null ) {
 		$serializer = $this->getInstance();
 
 		if ( $options !== null ) {
@@ -74,9 +69,6 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 
 		if ( $serializer instanceof Unserializer ) {
 			$roundtrippedValue = $serializer->newFromSerialization( $output );
-			if( !is_null( $normalizedInput ) ) {
-				$input = $normalizedInput;
-			}
 			$this->assertMeaningfulEquals( $input, $roundtrippedValue, 'getSerialized, getUnserialized roundtrip should result in input value' );
 		}
 	}
