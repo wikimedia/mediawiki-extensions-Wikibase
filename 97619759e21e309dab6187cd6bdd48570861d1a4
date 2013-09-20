@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_07337062",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-20T10:52:50Z",
+      "side": 1,
+      "message": "used in line 48",
+      "parentUuid": "4946a543_fd927a9d",
+      "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_9d7b3678",
         "filename": "repo/includes/api/RemoveQualifiers.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-19T16:34:21Z",
       "side": 1,
       "message": "unused",
+      "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_2736ac50",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-20T10:52:50Z",
+      "side": 1,
+      "message": "Claim is used in line 114",
+      "parentUuid": "4946a543_9d7b3678",
       "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +191,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_6738b439",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpQualifierTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-20T10:52:50Z",
+      "side": 1,
+      "message": "used in line 29",
+      "parentUuid": "4946a543_9da256fe",
+      "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_7d9daab7",
         "filename": "repo/tests/phpunit/includes/changeop/ChangeOpReferenceTest.php",
         "patchSetId": 2
@@ -172,6 +226,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_874760be",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpReferenceTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-20T10:52:50Z",
+      "side": 1,
+      "message": "line 30",
+      "parentUuid": "4946a543_7d9daab7",
+      "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_5d98eec9",
         "filename": "repo/tests/phpunit/includes/changeop/ChangeOpStatementRankTest.php",
         "patchSetId": 2
@@ -183,6 +255,24 @@
       "writtenOn": "2013-09-19T16:34:21Z",
       "side": 1,
       "message": "unused",
+      "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_a7429cac",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpStatementRankTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-09-20T10:52:50Z",
+      "side": 1,
+      "message": "line 29\n\nAnd Entity is used in the doc comments, e.g. line 70",
+      "parentUuid": "4946a543_5d98eec9",
       "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
