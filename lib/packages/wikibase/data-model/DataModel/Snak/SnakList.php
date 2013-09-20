@@ -102,49 +102,6 @@ class SnakList extends HashArray implements Snaks {
 	}
 
 	/**
-	 * @see HashArray::getHash
-	 *
-	 * @since 0.5
-	 *
-	 * @return string
-	 */
-	public function getHash() {
-		$args = func_get_args();
-
-		/**
-		 * @var MapHasher $hasher
-		 */
-		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher( true );
-
-		return parent::getHash( $hasher );
-	}
-
-	/**
-	 * Orders the snaks in the list grouping them by property.
-	 *
-	 * @since 0.5
-	 */
-	public function orderByProperty() {
-		$snaksByProperty = array();
-
-		foreach( $this as $snak ) {
-			$propertyId = $snak->getPropertyId()->getSerialization();
-
-			if( !isset( $snaksByProperty[$propertyId] ) ) {
-				$snaksByProperty[$propertyId] = array();
-			}
-			$snaksByProperty[$propertyId][] = $snak;
-		}
-
-		foreach( $snaksByProperty as $snaks ) {
-			foreach( $snaks as $snak ) {
-				$this->removeSnak( $snak );
-				$this->addSnak( $snak );
-			}
-		}
-	}
-
-	/**
 	 * @see Snaks::toArray
 	 *
 	 * @since 0.3
