@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "4946a543_aad8a31b",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-20T15:10:32Z",
+      "side": 1,
+      "message": "I meant WikibaseRepo",
+      "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_9d7b3678",
         "filename": "repo/includes/api/RemoveQualifiers.php",
         "patchSetId": 2
@@ -66,6 +83,24 @@
       "side": 1,
       "message": "Claim is used in line 114",
       "parentUuid": "4946a543_9d7b3678",
+      "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_ea0aab8a",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-20T15:10:32Z",
+      "side": 1,
+      "message": "ah, made the comment in the wrong line, meant WikibaseRepo",
+      "parentUuid": "4946a543_2736ac50",
       "revId": "97619759e21e309dab6187cd6bdd48570861d1a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
