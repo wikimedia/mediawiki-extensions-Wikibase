@@ -17,8 +17,14 @@ class SitesBuilder {
 	 */
 	protected $store;
 
-	public function __construct( SiteStore $store ) {
+	/**
+	 * @var array
+	 */
+	protected $validGroups;
+
+	public function __construct( SiteStore $store, array $validGroups ) {
 		$this->store = $store;
+		$this->validGroups = $validGroups;
 	}
 
 	/**
@@ -26,8 +32,14 @@ class SitesBuilder {
 	 * @param string $siteGroup
 	 * @param string $wikiId
 	 */
-	public function buildStore( array $sites, $siteGroup, $wikiId ) {
-		$sites = $this->addInterwikiIdsToGroup( $sites, $siteGroup, $wikiId );
+	public function buildStore( array $sites, $siteGroup = null, $wikiId = null ) {
+		if ( $siteGroup === null && is_string( $wikiId ) ) {
+			$siteGroup = $this->getInterwikiGroup( $sites, $wikiId );
+		}
+
+		if ( $siteGroup && in_array( $siteGroup, $this->validGroups ) ) {
+			$sites = $this->addInterwikiIdsToGroup( $sites, $siteGroup );
+		}
 
 		$existingSites = $this->store->getSites( "nocache" );
 
@@ -46,28 +58,10 @@ class SitesBuilder {
 	/**
 	 * @param Site[] $sites
 	 * @param string $siteGroup
-	 * @param string $wikiId
 	 *
 	 * @return Site[]
 	 */
-	public function addInterwikiIdsToGroup( array $sites, $siteGroup, $wikiId ) {
-		if ( $siteGroup !== null ) {
-			$sites = $this->addInterwikiIds( $sites, $siteGroup );
-		} elseif ( is_string( $wikiId ) ) {
-			$siteGroup = $this->getSiteGroupFromWikiId( $sites, $wikiId );
-			$sites = $this->addInterwikiIds( $sites, $siteGroup );
-		}
-
-		return $sites;
-	}
-
-	/**
-	 * @param Site[] $sites
-	 * @param string $siteGroup
-	 *
-	 * @return Site[]
-	 */
-	protected function addInterwikiIds( array $sites, $siteGroup ) {
+	protected function addInterwikiIdsToGroup( array $sites, $siteGroup ) {
 		foreach( $sites as $site ) {
 			if( $site->getGroup() === $siteGroup ) {
 				$localId = $site->getLanguageCode();
@@ -88,12 +82,17 @@ class SitesBuilder {
 	 *
 	 * @return string
 	 */
-	protected function getSiteGroupFromWikiId( $sites, $wikiId ) {
+	protected function getInterwikiGroup( array $sites, $wikiId ) {
 		if ( !array_key_exists( $wikiId, $sites ) ) {
 			return null;
 		}
 
 		$site = $sites[$wikiId];
+
+		// @fixme: handle interwiki prefixes in a better way!
+		if ( preg_match( '/^([\w-]*)wiki$/', $site->getGlobalId() ) ) {
+			return 'wikipedia';
+		}
 
 		return $site->getGroup();
 	}

@@ -45,6 +45,10 @@ class PopulateSitesTable extends Maintenance {
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
 
+		// @todo make it configurable, such as from a config file.
+		$validGroups = array( 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
+			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' );
+
 		try {
 			$json = $this->getSiteMatrixData( $url );
 
@@ -54,7 +58,7 @@ class PopulateSitesTable extends Maintenance {
 			$sites = $siteMatrixParser->sitesFromJson( $json );
 
 			$store = SiteSQLStore::newInstance();
-			$sitesBuilder = new SitesBuilder( $store );
+			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 
 		} catch ( MWException $e ) {
