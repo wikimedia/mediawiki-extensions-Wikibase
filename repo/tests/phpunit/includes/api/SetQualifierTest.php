@@ -4,7 +4,6 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
@@ -13,10 +12,8 @@ use Wikibase\PropertyContent;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
-use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Claim;
 
@@ -45,134 +42,140 @@ use Wikibase\Claim;
 class SetQualifierTest extends WikibaseApiTestCase {
 
 	/**
-	 * @return Snak[]
+	 * Creates the given property in the database, if necessary.
+	 *
+	 * @param \Wikibase\DataModel\Entity\PropertyId $id
+	 * @param $type
+	 *
+	 * @return Property
 	 */
-	protected function snakProvider() {
-		static $hasProperties = false;
+	protected function makeProperty( PropertyId $id, $type ) {
+		static $properties = array();
 
-		$prop42 = new PropertyId( 'p42' );
-		$prop9001 = new PropertyId( 'p9001' );
-		$prop7201010 = new PropertyId( 'p7201010' );
+		$key = $id->getPrefixedId();
 
-		if ( !$hasProperties ) {
+		if ( !isset( $properties[$key] ) ) {
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop42 );
-			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->getProperty()->setId( $id );
+			$prop->getProperty()->setDataTypeId( $type );
 			$prop->save( 'testing' );
 
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop9001 );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
-
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop7201010 );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
-
-			$hasProperties = true;
+			$properties[$key] = $prop->getProperty();
 		}
 
-		$snaks = array();
-
-		$snaks[] = new PropertyNoValueSnak( $prop42 );
-		$snaks[] = new PropertySomeValueSnak( $prop9001 );
-		$snaks[] = new PropertyValueSnak( $prop7201010, new StringValue( 'o_O' ) );
-
-		return $snaks;
+		return $properties[$key];
 	}
 
-	/**
-	 * @return Claim[]
-	 */
-	protected function claimProvider() {
-		$statements = array();
 
-		$mainSnak = new PropertyNoValueSnak( 42 );
-		$statement = new Statement( $mainSnak );
-		$statements[] = $statement;
+	protected function getTestItem() {
+		static $item = null;
 
-		foreach ( $this->snakProvider() as $snak ) {
-			$statement = clone $statement;
-			$snaks = new SnakList( array( $snak ) );
-			$statement->getReferences()->addReference( new Reference( $snaks ) );
-			$statements[] = $statement;
-		}
-
-		$statement = clone $statement;
-		$snaks = new SnakList( $this->snakProvider() );
-		$statement->getReferences()->addReference( new Reference( $snaks ) );
-		$statements[] = $statement;
-
-		$ranks = array(
-			Statement::RANK_DEPRECATED,
-			Statement::RANK_NORMAL,
-			Statement::RANK_PREFERRED
-		);
-
-		/**
-		 * @var Statement[] $statements
-		 */
-		foreach ( $statements as &$statement ) {
-			$statement->setRank( $ranks[array_rand( $ranks )] );
-		}
-
-		return $statements;
-	}
-
-	/**
-	 * @return Snak[]
-	 */
-	protected function newQualifierProvider() {
-		$properties = array();
-
-		$property1 = Property::newFromType( 'commonsMedia' );
-		$properties[] = $property1;
-
-		$property2 = Property::newFromType( 'wikibase-item' );
-		$properties[] = $property2;
-
-		foreach( $properties as $property ) {
-			$content = new \Wikibase\PropertyContent( $property );
-			$status = $content->save( '', null, EDIT_NEW );
-
-			$this->assertTrue( $status->isOK() );
-		}
-
-		return array(
-			new PropertySomeValueSnak( 9001 ),
-			new PropertyNoValueSnak( 9001 ),
-			new PropertyValueSnak( $property1->getId(), new StringValue( 'Dummy.jpg' ) ),
-			new PropertyValueSnak( $property2->getId(), new EntityIdValue( new ItemId( 'q802' ) ) ),
-		);
-	}
-
-	public function testRequests() {
-		foreach( $this->claimProvider() as $claim ) {
+		if ( !$item ) {
 			$item = \Wikibase\Item::newEmpty();
 			$item->setId( new ItemId( 'q802' ) );
+
 			$content = new \Wikibase\ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
+
+			$prop114id = new PropertyId( 'p114' );
+			$prop114 = $this->makeProperty( $prop114id, 'string' );
+			$claim = new Statement( new PropertyValueSnak( $prop114id, new StringValue( '^_^' ) ) );
 
 			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
 			$claim->setGuid( $guidGenerator->newGuid() );
 			$item->addClaim( $claim );
 
 			$content->save( '' );
-
-			// This qualifier should not be part of the Claim yet!
-			foreach ( $this->newQualifierProvider() as $qualifier ) {
-				$this->makeAddRequest( $claim->getGuid(), $qualifier, $item->getId() );
-			}
 		}
+
+		return $item;
 	}
 
-	protected function makeAddRequest( $statementGuid, Snak $qualifier, EntityId $entityId ) {
+
+	public function provideAddRequests() {
+		$prop42 = new PropertyId( 'p42' );
+		$prop9001 = new PropertyId( 'p9001' );
+		$prop7201010 = new PropertyId( 'p7201010' );
+
+		$prop = PropertyContent::newEmpty();
+		$prop->getEntity()->setId( $prop42 );
+		$prop->getEntity()->setDataTypeId( 'string' );
+
+		$prop = PropertyContent::newEmpty();
+		$prop->getEntity()->setId( $prop9001 );
+		$prop->getEntity()->setDataTypeId( 'string' );
+
+		$prop = PropertyContent::newEmpty();
+		$prop->getEntity()->setId( $prop7201010 );
+		$prop->getEntity()->setDataTypeId( 'string' );
+
+		$cases = array();
+
+		$cases['p42'] = array( new PropertyNoValueSnak( $prop42 ), 'string' );
+		$cases['p9001'] = array( new PropertySomeValueSnak( $prop9001 ), 'string' );
+		$cases['p7201010'] = array( new PropertyValueSnak( $prop7201010, new StringValue( 'o_O' ) ), 'string' );
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideAddRequests
+	 */
+	public function testAddRequests( Snak $snak, $type ) {
+		$item = $this->getTestItem();
+		$claims = $item->getClaims();
+		$claim = reset( $claims );
+
+		$prop = $snak->getPropertyId();
+		$this->makeProperty( $prop, $type );
+
+		$this->makeSetQualifierRequest( $claim->getGuid(), null, $snak, $item->getId() );
+
+		// now the hash exists, so the same request should fail
+		$this->setExpectedException( 'UsageException' );
+		$this->makeSetQualifierRequest( $claim->getGuid(), null, $snak, $item->getId() );
+	}
+
+	public function provideChangeRequests() {
+		$cases = array_filter(
+			$this->provideAddRequests(),
+			function ( $case ) {
+				return $case[0] instanceof PropertyValueSnak;
+			}
+		);
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideChangeRequests
+	 */
+	public function testChangeRequests( Snak $snak, $type ) {
+		$item = $this->getTestItem();
+		$claims = $item->getClaims();
+		$claim = reset( $claims );
+
+		$prop = $snak->getPropertyId();
+		$this->makeProperty( $prop, $type );
+
+		static $counter = 1;
+		$hash = $snak->getHash();
+		$newQualifier = new PropertyValueSnak( $snak->getPropertyId(), new StringValue( __METHOD__ . '#' . $counter++ ) );
+
+		$this->makeSetQualifierRequest( $claim->getGuid(), $hash, $newQualifier, $item->getId() );
+
+		// now the hash changed, so the same request should fail
+		$this->setExpectedException( 'UsageException' );
+		$this->makeSetQualifierRequest( $claim->getGuid(), $hash, $newQualifier, $item->getId() );
+	}
+
+	protected function makeSetQualifierRequest( $statementGuid, $snakhash, Snak $qualifier, EntityId $entityId ) {
 		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
 		$params = array(
 			'action' => 'wbsetqualifier',
 			'claim' => $statementGuid,
+			'snakhash' => $snakhash,
 			'snaktype' => $qualifier->getType(),
 			'property' => $entityIdFormatter->format( $qualifier->getPropertyId() ),
 		);
@@ -209,9 +212,6 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		return $resultArray;
 	}
-
-	// TODO: test update requests
-
 
 	/**
 	 * @dataProvider invalidClaimProvider

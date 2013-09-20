@@ -3,7 +3,6 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOpQualifier;
@@ -44,7 +43,7 @@ class SetQualifier extends ModifyClaim {
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['claim'], $entity );
 
 		if ( isset( $params['snakhash'] ) ) {
-			$this->validateReferenceHash( $claim, $params['snakhash'] );
+			$this->validateQualifierHash( $claim, $params['snakhash'] );
 		}
 
 		$changeOp = $this->getChangeOp();
@@ -95,8 +94,8 @@ class SetQualifier extends ModifyClaim {
 	 * @param string $qualifierHash
 	 */
 	protected function validateQualifierHash( Claim $claim, $qualifierHash ) {
-		if ( !$claim->getReferences()->hasReferenceHash( $qualifierHash ) ) {
-			$this->dieUsage( "Claim does not have a qualifier with the given hash" , 'no-such-reference' );
+		if ( !$claim->getQualifiers()->hasSnakHash( $qualifierHash ) ) {
+			$this->dieUsage( "Claim does not have a qualifier with the given hash" , 'no-such-qualifier' );
 		}
 	}
 
