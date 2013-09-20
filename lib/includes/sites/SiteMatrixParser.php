@@ -94,8 +94,12 @@ class SiteMatrixParser {
 
 		foreach( $specialSites as $specialSite ) {
 			$site = $this->getSiteFromSiteData( $specialSite );
-			$siteId= $site->getGlobalId();
-			$sites[$siteId] = $this->getSiteFromSiteData( $specialSite );
+			$siteId = $site->getGlobalId();
+
+			// todo: get this from $wgConf
+			$site->setLanguageCode( 'en' );
+
+			$sites[$siteId] = $site;
 		}
 
 		return $sites;
@@ -138,13 +142,13 @@ class SiteMatrixParser {
 
 		// @note: expandGroup is specific to wikimedia site matrix sources
 		$siteGroup = ( $this->expandGroup && $siteData['code'] === 'wiki' )
-		 ? 'wikipedia' : $siteData['code'];
+			? 'wikipedia' : $siteData['code'];
 
 		$site->setGroup( $siteGroup );
 
 		$url = $siteData['url'];
 
-		if ( $this->stripProtocol === 'stripProtocol' ) {
+		if ( $this->stripProtocol ) {
 			$url = preg_replace( '@^https?:@', '', $url );
 		}
 

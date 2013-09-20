@@ -37,7 +37,7 @@ class PopulateSitesTable extends Maintenance {
 	}
 
 	public function execute() {
-		$stripProtocols = $this->getOption( 'strip-protocols' ) ? "stripProtocol" : false;
+		$stripProtocols = $this->getOption( 'strip-protocols', false );
 		$url = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
 		$scriptPath = $this->getOption( 'script-path', '/w/$1' );
 		$articlePath = $this->getOption( 'article-path', '/wiki/$1' );
@@ -78,7 +78,7 @@ class PopulateSitesTable extends Maintenance {
 		$json = Http::get( $url, 'default', array( 'raiseException' => true ) );
 
 		if ( !$json ) {
-			throw new MWException( "Got no data from $url" );
+			throw new MWException( "Got no data from $url\n" );
 		}
 
 		return $json;
