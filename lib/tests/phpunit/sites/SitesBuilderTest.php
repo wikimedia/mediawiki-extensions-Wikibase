@@ -15,12 +15,15 @@ use Wikibase\Test\MockSiteStore;
 class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider sitesProvider
+	 * @dataProvider buildSitesProvider
 	 */
 	public function testBuildSites( $sites, $group, $wikiId, $expected ) {
 		$store = new MockSiteStore();
 
-		$sitesBuilder = new SitesBuilder( $store );
+		$validGroups = array( 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
+			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' );
+
+		$sitesBuilder = new SitesBuilder( $store, $validGroups );
 		$sitesBuilder->buildStore( $sites, $group, $wikiId );
 
 		$expectedSiteList = new SiteList( $expected );
@@ -28,104 +31,120 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedSiteList, $store->getSites() );
 	}
 
-	/**
-	 * @dataProvider sitesProvider
-	 */
-	public function testAddInterwikiIdsToGroup( $sites, $group, $wikiId, $expected ) {
-		$store = new MockSiteStore();
-
-		$sitesBuilder = new SitesBuilder( $store );
-		$sites = $sitesBuilder->addInterwikiIdsToGroup( $sites, $group, $wikiId );
-
-		$this->assertEquals( $expected, $sites );
-	}
-
-	public function sitesProvider() {
+	public function buildSitesProvider() {
 		$sitesData = $this->getSitesData();
 		$sites = $this->getSites( $sitesData );
-
-		$groupData = array(
-			'enwikivoyage' => 'en',
-			'frwikivoyage' => 'fr'
-		);
-
 		$expectedSites = $sites;
 
 		foreach( $expectedSites as $site ) {
-			$siteId = $site->getGlobalId();
-
-			if( array_key_exists( $siteId, $groupData ) ) {
-				$site->addInterwikiId( $groupData[$siteId] );
-				$site->addNavigationId( $groupData[$siteId] );
+			if ( $site->getGroup() === 'wikipedia' ) {
+				$site->addInterwikiId( $site->getLanguageCode() );
+				$site->addNavigationId( $site->getLanguageCode() );
 			}
 		}
 
-		return array(
-			array( $sites, 'wikivoyage', null, $expectedSites ),
-			array( $sites, 'wikidata', null, $sites ),
-			array( $sites, null, 'enwikivoyage', $expectedSites )
-		);
+		$data = array();
+
+		$data[] = array( $sites, 'wikidata', null, $expectedSites );
+		$data[] = array( $sites, 'commons', null, $expectedSites );
+		$data[] = array( $sites, 'wikipedia', null, $expectedSites );
+		$data[] = array( $sites, null, 'enwiki', $expectedSites );
+		$data[] = array( $sites, null, 'commonswiki', $expectedSites );
+
+		$expectedSites2 = $sites;
+
+		foreach( $expectedSites2 as $site ) {
+			if ( $site->getGroup() === 'wikivoyage' ) {
+				$site->addInterwikiId( $site->getLanguageCode() );
+				$site->addNavigationId( $site->getLanguageCode() );
+			}
+		}
+
+		$data[] = array( $sites, 'wikivoyage', null, $expectedSites2 );
+		$data[] = array( $sites, null, 'enwikivoyage', $expectedSites2 );
+		$data[] = array( $sites, 'wikivoyage', 'enwiki', $expectedSites2 );
+
+		$data[] = array( $sites, 'kittens', null, $sites );
+		$data[] = array( $sites, 'kittens', 'enwiki', $sites );
+		$data[] = array( $sites, null, 'kittenswiki', $sites );
+
+		return $data;
 	}
 
 	protected function getSitesData() {
 		$sitesData = array(
 			array(
-				'id' => 'enwiki',
+				'siteid' => 'enwiki',
 				'group' => 'wikipedia',
+				'url' => 'en.wikipedia.org',
 				'lang' => 'en'
 			),
 			array(
-				'id' => 'dewiki',
+				'siteid' => 'dewiki',
 				'group' => 'wikipedia',
+				'url' => 'de.wikipedia.org',
 				'lang' => 'de'
 			),
 			array(
-				'id' => 'enwikivoyage',
+				'siteid' => 'enwikivoyage',
 				'group' => 'wikivoyage',
+				'url' => 'en.wikivoyage.org',
 				'lang' => 'en'
 			),
 			array(
-				'id' => 'frwikivoyage',
+				'siteid' => 'frwikivoyage',
 				'group' => 'wikivoyage',
+				'url' => 'fr.wikivoyage.org',
 				'lang' => 'fr'
 			),
 			array(
-				'id' => 'enwikiquote',
+				'siteid' => 'enwikiquote',
 				'group' => 'wikiquote',
+				'url' => 'en.wikiquote.org',
 				'lang' => 'en'
 			),
 			array(
-				'id' => 'commonswiki',
-				'group' => 'commons'
+				'siteid' => 'commonswiki',
+				'group' => 'commons',
+				'url' => 'commons.wikimedia.org',
+				'lang' => 'en'
 			),
 			array(
-				'id' => 'wikidatawiki',
-				'group' => 'wikidata'
-			)
+				'siteid' => 'wikidatawiki',
+				'group' => 'wikidata',
+				'url' => 'www.wikidata.org',
+				'lang' => 'en'
+			),
 		);
 
 		return $sitesData;
 	}
 
-	protected function getSites( $sitesData ) {
+	protected function getSites( array $sitesData ) {
 		$sites = array();
 
 		foreach( $sitesData as $siteData ) {
-			$siteId = $siteData['id'];
+			$fields = array(
+				'globalid' => $siteData['siteid'],
+				'type' => 'mediawiki',
+				'group' => $siteData['group'],
+				'source' => 'local',
+				'language' => $siteData['lang'],
+				'localids' => array(),
+				'internalid' => null,
+				'data' => array(
+					'paths' => array(
+						'file_path' => '//' . $siteData['url'] . '/w/$1',
+						'page_path' => '//' . $siteData['url'] . '/wiki/$1'
+					)
+				),
+				'forward' => false,
+				'config' => array()
+			);
 
 			$site = new MediaWikiSite();
-			$site->setGlobalId( $siteId );
-			$site->setGroup( $siteData['group'] );
-
-			if( array_key_exists( 'lang', $siteData ) ) {
-				$site->setLanguageCode( $siteData['lang'] );
-			}
-
-			if( array_key_exists( 'interwiki', $siteData ) ) {
-				$site->addInterwikiId( $siteData['interwiki'] );
-				$site->addNavigationId( $siteData['interwiki'] );
-			}
-
+			$site->unserialize( serialize( $fields ) );
+			$siteId = $siteData['siteid'];
 			$sites[$siteId] = $site;
 		}
 
