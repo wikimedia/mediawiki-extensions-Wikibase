@@ -8183,6 +8183,8 @@ $messages['ilo'] = array(
 	'wikibase-sitelinks-empty' => 'Awan pay ti sitio a silpo para iti daytoy a banag.',
 	'wikibase-sitelinks-input-help-message' => 'Idisso ti silpo iti maysa a panid a mainaig ti daytoy a banag.',
 	'wikibase-remove' => 'ikkaten',
+	'wikibase-move-up' => 'agpangato',
+	'wikibase-move-down' => 'agpababa',
 	'wikibase-undo-title' => 'Agibabbabawi ti panagurnos iti "$1"',
 	'wikibase-restore-title' => 'Agisubsubli ti daan a panagbaliw ti "$1"',
 	'wikibase-partial-undo' => 'Daytoy a panagurnos ket mabalin laeng ti bassit a panagibabawi.',
@@ -8344,7 +8346,7 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-entitydata-text' => 'Daytoy a panid ket mangited ti naisilpo a datos ti interface kadagidiay pateg ti entidad. Pangngaasi a mangited ti ID ti entidad idiay URL, a mangusar ti apo ti panid a gramatika.',
 	'special-mylanguagefallbackchain' => 'Andingay a kawar ti pagsasaok',
 	'wikibase-mylanguagefallbackchain-text' => 'Ti andingay a kawar ti pagsasao a mangidaya kadagiti etiketa ti entidad para kenka ket naipakita dita baba.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Mabalinmo ti agurnos babaen ti panagikabil ti <nowiki>{{#babel: }}</nowiki> idiay bukodmo a [[Special:MyPage|panid ti agar-aramat]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'Mabalinmo ti agurnos babaen ti panangikabil ti <nowiki>{{#babel: }}</nowiki> idiay {{GENDER:$1|bukodmo}} a [[Special:MyPage|panid ti agar-aramat]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, a pagbaliwen manipud ti $3 - $4',
 	'wikibase-self-conflict-patched' => 'Ti inurnosmo  ket natakupan idiay kinaudi a bersion, a nangbalbaliw kadagiti bukodmo a naipakatengngaan a panagbalbaliw.',
 	'wikibase-conflict-patched' => 'Ti inurnosmo ket natakupan idiay kinaudi a bersion.',
@@ -9769,6 +9771,8 @@ $messages['ko'] = array(
 	'wikibase-sitelinks-empty' => '아직 이 항목에 대한 사이트 링크가 없습니다.',
 	'wikibase-sitelinks-input-help-message' => '이 항목과 관련된 문서로 링크를 설정하세요.',
 	'wikibase-remove' => '삭제',
+	'wikibase-move-up' => '위로 올리기',
+	'wikibase-move-down' => '아래로 내리기',
 	'wikibase-undo-title' => '"$1" 편집 되돌리기',
 	'wikibase-restore-title' => '"$1" 이전 판 복구',
 	'wikibase-partial-undo' => '편집을 부분적으로 취소할 수 있습니다.',
@@ -13494,6 +13498,8 @@ $messages['ru'] = array(
 	'wikibase-sitelinks-empty' => 'Ни одна страница сайта ещё не ссылается сюда.',
 	'wikibase-sitelinks-input-help-message' => 'Поставьте ссылку на страницу, относящуюся к этому элементу.',
 	'wikibase-remove' => 'удалить',
+	'wikibase-move-up' => 'передвинуть выше',
+	'wikibase-move-down' => 'передвинуть ниже',
 	'wikibase-undo-title' => 'Отмена редактирования для «$1»',
 	'wikibase-restore-title' => 'Восстановление старой версии для «$1»',
 	'wikibase-partial-undo' => 'Правка может быть частично отменена.',
@@ -13541,10 +13547,10 @@ $messages['ru'] = array(
 	'wikibase-error-constraint-violation-label' => 'У {{PLURAL:$1|метки (названии)|меток (названиях)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
 	'wikibase-error-constraint-violation-description' => 'У {{PLURAL:$1|описания|описаний}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
 	'wikibase-error-constraint-violation-aliases' => 'У {{PLURAL:$1|альтернативного названия (синонима)|альтернативных названий (синонимов)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
-	'wikibase-error-sitelink-already-used' => 'Ссылка на сайт [$1 $2] уже включена в другой элемент, [[$3]].',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому свойству ($3)', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-query' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому запросу ($3)', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Название «$1» и описание «$4», связанные с кодом языка «$2», уже присвоены другому элементу ($3)', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Ссылка на сайт [$1 $2] уже включена в другой элемент — [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому свойству ($3).',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому запросу ($3).',
+	'wikibase-error-label-not-unique-item' => 'Название «$1» и описание «$4», связанные с кодом языка «$2», уже присвоены другому элементу ($3).',
 	'special-itembytitle' => 'Элементы по заголовку',
 	'wikibase-itembytitle-lookup-fieldset' => 'Искать элементы по сайту и заголовку',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
@@ -13612,7 +13618,14 @@ $messages['ru'] = array(
 	'wikibase-setentity-invalid-langcode' => 'Неизвестный код языка «$1». Пожалуйста, используйте один из известных системе языковых кодов, например «ru».',
 	'wikibase-setentity-invalid-id' => 'Системе неизвестен идентификатор «$1». Пожалуйста, используйте один из существующих идентификаторов.',
 	'special-dispatchstats' => 'Статистика рассылки изменений',
-	'wikibase-dispatchstats-intro' => 'Эта страница содержит статистические данные о процессе рассылки клиентам изменений в базе данных.',
+	'wikibase-dispatchstats-intro' => 'Эта страница содержит статистические данные о процессе рассылки клиентам изменений в базе данных. Клиентский вики-проект уведомляется об изменениях на сайте «{{SITENAME}}»,  как только изменения были отправлены в этот вики-проект, и уведомление было обработано очередью заданий для этой вики.
+* [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]]  показывает количество, а также дату старейших и самых последних элементов, находящихся в настоящее время в очереди.
+* [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] содержит информацию о наиболее и наименее отставших в смысле обновлений клиентских вики-проектах, а также среднее значение отставания. По каждому вики-проекту предоставляется следующая информация:
+** «{{int:wikibase-dispatchstats-site-id}}» — внутренний идентификатор клиентского вики-проекта;
+** «{{int:wikibase-dispatchstats-pos}}» — идентификатор последнего изменения,  отправляенного в этот вики-проект;
+** «{{int:wikibase-dispatchstats-lag-num}}» — количество изменений, которые еще не переданы в клиентский вики-проект;
+** «{{int:wikibase-dispatchstats-lag-time}}» — время между последним отправленным изменением и последним изменением на сайте «{{SITENAME}}»;
+** «{{int:wikibase-dispatchstats-touched}}» — время, когда последний пакет изменений был отправлен в клиентский вики-проект.',
 	'wikibase-dispatchstats-no-stats' => 'В настоящее время отсутствуют доступные статистические данные.',
 	'wikibase-dispatchstats-changes' => 'Статистика журнала изменений',
 	'wikibase-dispatchstats-stats' => 'Статистика рассылки',
@@ -13634,6 +13647,8 @@ $messages['ru'] = array(
 	'wikibase-listdatatypes-intro' => 'Это список всех типов данных, используемых сейчас в этой инсталляции:',
 	'wikibase-history-title-with-label' => 'История изменений для «$2» ($1)',
 	'wikibase-history-title-without-label' => '$1 — история изменений',
+	'special-entitieswithoutdescription' => 'Сущности без описаний',
+	'wikibase-entitieswithoutdescription-legend' => 'Получить список сущностей, у которых нет описаний',
 	'special-entitieswithoutlabel' => 'Сущности без меток (названий)',
 	'wikibase-entitieswithoutlabel-legend' => 'Получить список сущностей без названий',
 	'wikibase-entitieswithoutlabel-label-language' => 'Язык:',
@@ -13653,7 +13668,7 @@ $messages['ru'] = array(
 	'wikibase-entitydata-text' => 'Эта страница предоставляет интерфейс связанных данных для значений сущности. Просьба предоставить идентификатор сущности в URL, используя синтаксис подстраниц.',
 	'special-mylanguagefallbackchain' => 'Моя цепочка резервных языков',
 	'wikibase-mylanguagefallbackchain-text' => 'Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице участника]].', # Fuzzy
+	'wikibase-mylanguagefallbackchain-babel' => 'Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 — $2, преобразованные из $3 — $4',
 	'wikibase-self-conflict-patched' => 'Ваша правка была помещена в последнюю версию, при этом были перекрыты некоторые из ваших собственных промежуточных изменений.',
 	'wikibase-conflict-patched' => 'Ваша правка было исправлена в последней версии.',
@@ -13706,12 +13721,15 @@ $messages['ru'] = array(
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Изменён квалификатор|Изменены квалификаторы}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Удалён квалификатор|Удалены квалификаторы}}',
 	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Удалена ссылка|Удалены ссылки}} из заявления',
+	'wikibase-item-summary-wbsetstatementrank' => 'Ранг заявления изменился с «$3» на «$4»',
 	'wikibase-property-summary-wbcreate-new' => 'Создано новое свойство',
 	'wikibase-property-summary-wbeditentity-create' => 'Создано новое свойство',
 	'wikibase-property-summary-wbeditentity-update' => 'Обновлено свойство',
 	'wikibase-property-summary-wbeditentity-override' => 'Очищено значение свойства',
-	'wikibase-property-summary-wbsetlabel-set' => 'Изменено название [$2]',
-	'wikibase-property-summary-wbsetlabel-remove' => 'Убрано название [$2]',
+	'wikibase-property-summary-wbsetlabel-add' => 'Добавлена метка [$2]',
+	'wikibase-property-summary-wbsetlabel-set' => 'Изменена метка [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Убрана метка [$2]',
+	'wikibase-property-summary-wbsetdescription-add' => 'Добавлено описание [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Изменено описание [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Убрано описание [$2]',
 	'wikibase-property-summary-wbsetaliases-set' => '{{PLURAL:$1|Задано|Заданы}} доп. {{PLURAL:$1|название|названия}} ({{PLURAL:$1|синоним|синонимы}}) [$2]',
@@ -13732,7 +13750,7 @@ $messages['ru'] = array(
 * query — неявно задаваемая часть строки IRI
 * fragment — неявно задаваемая часть строки IRI',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Глобальные координаты',
-	'wikibase-listdatatypes-globe-coordinate-body' => 'Символьные данные о географическом положении для определённого небесного тела, задаваемые в виде пары «широта—долгота» в формате «градусы минуты секунды» (°ʹʺ) или в десятичном формате. По умолчанию это «Земля», а затем «WGS84». Это добавляет разрешение и диапазон.
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Символьное поле данных о географическом положении для определённого небесного тела, задаваемые в виде пары «широта—долгота» в формате «градусы минуты секунды» (°ʹʺ) или в десятичном формате. По умолчанию это «Земля», а затем «WGS84». Добавляет разрешение и диапазон.
 * latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S
 * longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W
 * altitude (необяз.) — явно задаваемое (?) значение для высоты над плоскостью отсчёта, для планеты «Земля» это будет глобус «WGS84».
@@ -13773,7 +13791,8 @@ $messages['ru'] = array(
 	'right-property-override' => 'переопределение свойств',
 	'right-property-create' => 'создание свойств',
 	'right-property-remove' => 'удаление свойств',
-	'right-alias-remove' => 'удаление альтернативных названий (псевдонимов, синонимов)',
+	'right-alias-remove' => 'удаление альт. названий (псевдонимов, синонимов)',
+	'right-alias-update' => 'обновление альт. названий (псевдонимов, синонимов)',
 	'right-sitelink-remove' => 'удаление ссылок на сайты',
 	'right-sitelink-update' => 'обновление ссылок на сайты',
 	'right-linktitles-update' => 'обновление заголовков ссылок',
@@ -13787,8 +13806,8 @@ $messages['ru'] = array(
 	'action-property-override' => 'переопределение свойств',
 	'action-property-create' => 'создание свойств',
 	'action-property-remove' => 'удаление свойств',
-	'action-alias-update' => 'обновление альтернативных названий (псевдонимов, синонимов)',
-	'action-alias-remove' => 'удаление альтернативных названий (псевдонимов, синонимов)',
+	'action-alias-update' => 'обновление альт. названий (псевдонимов, синонимов)',
+	'action-alias-remove' => 'удаление альт. названий (псевдонимов, синонимов)',
 	'action-sitelink-remove' => 'удаление ссылок на сайты',
 	'action-sitelink-update' => 'обновление ссылок на сайты',
 	'action-linktitles-update' => 'обновление заголовков ссылок',
@@ -15986,6 +16005,14 @@ $messages['vo'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'yeged',
 	'wikibase-itembytitle-lookup-page' => 'Pad:',
 	'wikibase-itemdisambiguation-lookup-language' => 'Pük:',
+);
+
+/** Wu (吴语)
+ * @author 十弌
+ */
+$messages['wuu'] = array(
+	'wikibase-move-up' => '移上向去',
+	'wikibase-move-down' => '移下向去',
 );
 
 /** Yiddish (ייִדיש)

@@ -3310,6 +3310,7 @@ $messages['ru'] = array(
 	'tooltip-t-wikibase' => 'Ссылка на связанный элемент репозитория данных',
 	'wikibase-after-page-move' => 'Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент Викиданных.',
 	'wikibase-after-page-move-queued' => 'Связанный с этой страницей [$1 элемент Викиданных] вскоре будет автоматически обновлён.',
+	'wikibase-comment-add' => 'Был создан элемент Викиданных.',
 	'wikibase-comment-remove' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
 	'wikibase-comment-linked' => 'Элемент Викиданных был связан с данной страницей.',
 	'wikibase-comment-unlink' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены.',
@@ -3342,6 +3343,8 @@ $messages['ru'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase пока не поддерживает тип свойства «$1».',
 	'wikibase-rc-hide-wikidata' => '$1 Викиданные',
 	'wikibase-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
+	'wikibase-rc-wikibase-edit-letter' => 'д',
+	'wikibase-rc-wikibase-edit-title' => 'Это изменение связанного элемента Викиданных',
 	'wikibase-watchlist-show-changes-pref' => 'Показать изменения на Викиданных в вашем списке наблюдения',
 	'wikibase-error-serialize-error' => 'Не удалось сериализовать данные.',
 	'wikibase-error-invalid-entity-id' => 'Введённый идентификатор не известен системе. Используйте один из действующих идентификаторов сущностей.',
@@ -3354,7 +3357,7 @@ $messages['ru'] = array(
 	'wikibase-unconnectedpages-iwdata-label' => 'Только страницы с межъязыковыми ссылками:',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|межъязыковая ссылка|межъязыковые ссылки|межъязыковых ссылок}} на странице)',
 	'wikibase-pageinfo-entity-id' => 'Идентификатор элемента в Викиданных',
-	'wikibase-pageinfo-entity-id-none' => 'Нет',
+	'wikibase-pageinfo-entity-id-none' => 'отсутствует',
 	'wikibase-property-render-error' => 'Ошибка раскрытия свойства «$1»: $2',
 );
 
