@@ -178,6 +178,7 @@ $messages['br'] = array(
 	'valueview-expert-timeinput-calendar' => 'Deiziadur :',
 	'valueview-expert-timeinput-calendarhint-gregorian' => '(Deiziadur gregorian)',
 	'valueview-expert-timeinput-calendarhint-julian' => '(Deiziadur julian)',
+	'valueview-preview-label' => 'diskwelet evel :',
 );
 
 /** Catalan (català)
