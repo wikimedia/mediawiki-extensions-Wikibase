@@ -77,13 +77,3 @@ if ( defined( 'MEDIAWIKI' ) ) {
 	include __DIR__ . '/DataValues.mw.php';
 }
 
-global $wgDataValues;
-/**
- * @deprecated since 0.1 This is a global registry that provides no control over object lifecycle
- */
-$wgDataValues = array();
-
-$wgDataValues['boolean'] = 'DataValues\BooleanValue';
-$wgDataValues['number'] = 'DataValues\NumberValue';
-$wgDataValues['string'] = 'DataValues\StringValue';
-$wgDataValues['unknown'] = 'DataValues\UnknownValue';
