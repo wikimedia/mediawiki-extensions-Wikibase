@@ -34,7 +34,12 @@ if ( defined( 'DataValues_VERSION' ) ) {
 	return;
 }
 
-define( 'DataValues_VERSION', '0.1 alpha' );
+define( 'DATAVALUES_VERSION', '0.1 alpha' );
+
+/**
+ * @deprecated
+ */
+define( 'DataValues_VERSION', DATAVALUES_VERSION );
 
 spl_autoload_register( function ( $className ) {
 	if ( in_array( $className, array( 'Comparable', 'Copyable', 'Hashable', 'Immutable' ) ) ) {
