@@ -16,6 +16,24 @@
       "revId": "9d0dc3f25be26e57b403bd0b715c1297cc1a2d3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_27b30cea",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-09-20T09:37:30Z",
+      "side": 1,
+      "message": "Indeed, as if the you remove the mainsnak in the changeop, the claim is removed.\n\nI think a follow up to all of this could potentially be to refactor changeOpClaim into changeOpsClaim or something similar, which then holds various changeops, mainsnak, qualifiers etc",
+      "parentUuid": "4946a543_fd9d1a55",
+      "revId": "9d0dc3f25be26e57b403bd0b715c1297cc1a2d3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
