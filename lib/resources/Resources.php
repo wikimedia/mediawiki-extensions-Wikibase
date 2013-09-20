@@ -597,6 +597,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.referenceview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.listview',
 				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.AbstractedRepoApi',
