@@ -154,7 +154,7 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 {{Identical|Code}}',
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (wiki) page.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).
-{{Identical|Details}}',
+{{Identical|Detail}}',
 	'wikibase-validator-bad-type' => 'Input validation error shown when the input has the wrong type.
 
 Parameters:

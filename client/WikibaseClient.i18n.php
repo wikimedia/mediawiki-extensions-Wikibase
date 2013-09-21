@@ -305,7 +305,7 @@ $messages['ar'] = array(
 	'wikibase-linkitem-confirmitem-text' => 'الصفحة التي اخترتها مرتبطة بالفعل ب[$1 مادة في المستودع المركزي للبيانات]. تيقن من أن {{PLURAL:$2|الصفحة|الصفحات}} الظاهرة أسفله هي التي تريد ربطها بهذه الصفحة.',
 	'wikibase-linkitem-confirmitem-button' => 'أكّد',
 	'wikibase-linkitem-not-loggedin-title' => 'يتوجب عليك تسجيل الدخول',
-	'wikibase-linkitem-not-loggedin' => 'لاستخدام هذه الميزة انت بحاجة إلى تسجيل الدخول على هذه الويكي وعلى [ $1   مستودع البيانات المركزي].',
+	'wikibase-linkitem-not-loggedin' => 'لاستخدام هذه الميزة لا بد من تسجيل الدخول على هذه الويكي وعلى [$1 مستودع البيانات المركزي].',
 	'wikibase-linkitem-success-create' => 'تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات الذي تم إنشاؤها حديثا على [ $1  مستودعنا المركزي للبيانات].',
 	'wikibase-linkitem-success-link' => 'تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [ $1  مستودعنا المركزي للبيانات].',
 	'wikibase-rc-hide-wikidata' => '$1 ويكيبيانات',
@@ -3801,6 +3801,7 @@ $messages['ur'] = array(
  * @author Sociologist
  */
 $messages['uz'] = array(
+	'wikibase-dataitem' => 'Maʼlumot qismi',
 	'wikibase-editlinks' => 'Ishoratlarni tahrirla',
 	'wikibase-editlinkstitle' => 'Tillararo havolalarni tahrirlash',
 	'wikibase-linkitem-addlinks' => 'Ishorat qoʻshish',
