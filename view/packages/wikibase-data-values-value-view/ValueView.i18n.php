@@ -760,15 +760,20 @@ $messages['pt'] = array(
 );
 
 /** Brazilian Portuguese (português do Brasil)
+ * @author Cainamarques
  * @author Luckas
  */
 $messages['pt-br'] = array(
+	'valueview-desc' => 'Componentes da interface para exibir e editar valores de dados.',
+	'valueview-expert-advancedadjustments' => 'ajustes avançados',
 	'valueview-expert-emptyvalue-empty' => 'vazio',
 	'valueview-expert-globecoordinateinput-precision' => 'Precisão:',
 	'valueview-expert-timevalue-calendar-gregorian' => 'Gregoriano',
 	'valueview-expert-timevalue-calendar-julian' => 'Juliano',
 	'valueview-expert-timeinput-precision' => 'Precisão:',
 	'valueview-expert-timeinput-calendar' => 'Calendário:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendário gregoriano)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendário juliano)',
 );
 
 /** tarandíne (tarandíne)
@@ -798,8 +803,8 @@ $messages['roa-tara'] = array(
  * @author Okras
  */
 $messages['ru'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Обработка значений типа «$1» пока не поддерживается.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Обработка значений для типа данных «$1» пока не поддерживается.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Обработка значений типа «$1» пока не поддерживается.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Обработка значений для типа данных «$1» пока не поддерживается.',
 	'valueview-expert-emptyvalue-empty' => 'пусто',
 	'valueview-expert-globecoordinateinput-precision' => 'Точность:',
 	'valueview-expert-timevalue-calendar-gregorian' => 'Григорианский',
