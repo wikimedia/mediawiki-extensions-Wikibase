@@ -1,27 +1,14 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
+
 use MWException;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\SnakObject;
 
 /**
  * Serializer for Snak objects.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.2
  *
@@ -54,16 +41,24 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['property'] = $snak->getPropertyId()->getPrefixedId();
 
-		// TODO: we might want to include the data type of the property here as well
-
 		if ( $snak->getType() === 'value' ) {
 			/**
-			 * @var \Wikibase\PropertyValueSnak $snak
+			 * @var PropertyValueSnak $snak
 			 */
 			$serialization['datavalue'] = $snak->getDataValue()->toArray();
+
+			$serialization['datatype'] = $this->getDataTypeOfSnak( $snak );
 		}
 
 		return $serialization;
+	}
+
+	protected function getDataTypeOfSnak( PropertyValueSnak $snak ) {
+		if ( is_string( $snak->getDataTypeId() ) ) {
+			return $snak->getDataTypeId();
+		}
+
+		// TODO: return fetch dataType based on prop id
 	}
 
 	/**
