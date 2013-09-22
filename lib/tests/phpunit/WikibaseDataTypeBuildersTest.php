@@ -21,19 +21,12 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\Lib\WikibaseDataTypeBuilders
  *
- * @license GPL 2+
- * @file
- *
- * @ingroup WikibaseLib
- * @ingroup Test
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @license GPL 2+
  * @author Daniel Kinzler
- *
- * @package Wikibase\Test
  */
 class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
@@ -41,7 +34,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 		$entityIdParser = new EntityIdParser( new ParserOptions() );
 
 		$q8 = Item::newEmpty();
-		$q8->setId( 8 );
+		$q8->setId( new ItemId( 'q8' ) );
 
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $q8 );
