@@ -75,8 +75,8 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 		$lengthValidator = new TestValidator( '/^.{1,10}$/' );
 
 		$this->dataTypeFactory = new DataTypeFactory();
-		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array(), array(), array( $numericValidator, $lengthValidator ) ) );
-		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array(), array(), array( $alphabeticValidator, $lengthValidator ) ) );
+		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array( $numericValidator, $lengthValidator ) ) );
+		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array( $alphabeticValidator, $lengthValidator ) ) );
 
 		$p1 = new EntityId( Property::ENTITY_TYPE, 1 );
 		$p2 = new EntityId( Property::ENTITY_TYPE, 2 );
