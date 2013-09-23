@@ -186,6 +186,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 										'value' => 'src',
 										'type' => 'string' ) ),
 							),
+							'snaks-order' => array( 'P56' ),
 						),
 					)
 				) )

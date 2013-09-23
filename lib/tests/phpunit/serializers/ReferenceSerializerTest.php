@@ -75,6 +75,11 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 						$snakSerializer->getSerialized( $snaks[4] ),
 					),
 				),
+				'snaks-order' => array(
+					'P42',
+					'P1',
+					'P9001',
+				)
 			),
 			null,
 			$sortedReference,
