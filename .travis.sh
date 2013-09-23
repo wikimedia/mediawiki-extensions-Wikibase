@@ -25,8 +25,6 @@ echo '$wgShowExceptionDetails = true;' >> LocalSettings.php
 echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
 
 echo "define( 'WB_EXPERIMENTAL_FEATURES', true );" >> LocalSettings.php
-echo 'require_once __DIR__ . "/extensions/Wikibase/vendor/autoload.php";' >> LocalSettings.php
-echo 'require_once __DIR__ . "/extensions/Wikibase/vendor/data-values/data-values/ValueView/ValueView.php";' >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/repo/Wikibase.php";' >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
