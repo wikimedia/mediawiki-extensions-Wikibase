@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_9a0b2a2b",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-23T08:51:28Z",
+      "side": 1,
+      "message": "please do:\nuse Wikibase\\Lib\\Serializers\\SerializerFactory;",
+      "revId": "ec3d72f8ae85363e6a7ac2735c9fff89b8341dbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
