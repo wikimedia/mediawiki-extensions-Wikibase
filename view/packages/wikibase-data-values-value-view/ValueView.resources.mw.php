@@ -56,6 +56,12 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.nativeEventHandler' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.nativeEventHandler.js',
+			)
+		),
+
 		'jquery.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.eachchange.js'

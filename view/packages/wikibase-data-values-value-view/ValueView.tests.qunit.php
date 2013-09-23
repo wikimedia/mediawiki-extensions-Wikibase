@@ -39,6 +39,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.nativeEventHandler.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.NativeEventHandler/NativeEventHandler.test.js",
+				"$bp/jquery.NativeEventHandler/NativeEventHandler.test.testDefinition.js",
+				"$bp/jquery.NativeEventHandler/NativeEventHandler.testsOnObject.js",
+				"$bp/jquery.NativeEventHandler/NativeEventHandler.testsOnWidget.js",
+			),
+			'dependencies' => array(
+				'jquery.nativeEventHandler',
+			),
+		),
+
 		'jquery.eachchange.tests' => array(
 			'scripts' => array(
 				"$bp/jquery/jquery.eachchange.tests.js",
