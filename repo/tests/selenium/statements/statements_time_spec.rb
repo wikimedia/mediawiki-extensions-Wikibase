@@ -164,6 +164,7 @@ describe "Check time statements UI" do
         page.timeCalendar_element.visible?.should be_false
         page.timeInputExtenderAdvanced
         page.timePrecision_element.when_visible
+        page.timePrecisionRotatorSelect_element.when_visible
         page.timePrecisionRotatorSelect
         page.timePrecisionMenu_element.when_visible
         page.timePrecisionMenu_element.visible?.should be_true
