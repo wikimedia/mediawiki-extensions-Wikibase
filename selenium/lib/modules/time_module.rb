@@ -28,6 +28,7 @@ module TimePage
   # methods
   def select_time_precision prec
     self.show_advanced_time_settings
+    self.timePrecisionRotatorAuto_element.when_visible
     if prec == "auto"
       self.timePrecisionRotatorAuto
       return
