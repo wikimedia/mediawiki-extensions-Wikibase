@@ -21,7 +21,12 @@ if ( defined( 'ValueView_VERSION' ) ) {
 	return;
 }
 
-define( 'ValueView_VERSION', '0.1 alpha' );
+define( 'VALUEVIEW_VERSION', '0.1 alpha' );
+
+/**
+ * @deprecated
+ */
+define( 'ValueView_VERSION', VALUEVIEW_VERSION );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	include __DIR__ . '/ValueView.mw.php';

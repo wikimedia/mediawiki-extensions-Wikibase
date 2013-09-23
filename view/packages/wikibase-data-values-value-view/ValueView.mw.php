@@ -21,7 +21,7 @@ global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgResourceModu
 $wgExtensionCredits['datavalues'][] = array(
 	'path' => __DIR__,
 	'name' => 'ValueView',
-	'version' => ValueView_VERSION,
+	'version' => VALUEVIEW_VERSION,
 	'author' => array(
 		'[https://www.mediawiki.org/wiki/User:Danwe Daniel Werner]'
 	),
