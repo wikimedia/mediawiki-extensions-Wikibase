@@ -112,9 +112,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.testsOnObject.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.testsOnWidget.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 
 				'tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js',
