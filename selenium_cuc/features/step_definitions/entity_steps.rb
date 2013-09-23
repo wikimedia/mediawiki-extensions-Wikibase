@@ -10,12 +10,15 @@ Given /^I am on an item page$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
   item = create_new_entity(item_data, 'item')
   @entity = item
-  on(ItemPage) do |page|
-    page.navigate_to_entity item["url"]
-    page.set_copyright_ack_cookie
-    page.set_noanonymouseditwarning_cookie
-  end
+  on(ItemPage).navigate_to_entity item["url"]
+end
 
+Given /^The copyright warning has been dismissed$/ do
+  on(ItemPage).set_copyright_ack_cookie
+end
+
+Given /^Anonymous edit warnings are disabled$/ do
+  on(ItemPage).set_noanonymouseditwarning_cookie
 end
 
 Given /^I am on an item page with empty label and description$/ do

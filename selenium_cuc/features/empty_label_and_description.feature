@@ -10,6 +10,8 @@ Feature: Empty label and description behaviour
 
   Background:
     Given I am on an item page with empty label and description
+      And The copyright warning has been dismissed
+      And Anonymous edit warnings are disabled
 
   @ui_only
   Scenario: Description UI is shown correctly when description is empty

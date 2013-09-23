@@ -10,6 +10,8 @@ Feature: Edit description
 
   Background:
     Given I am on an item page
+      And The copyright warning has been dismissed
+      And Anonymous edit warnings are disabled
 
   @ui_only
   Scenario: Description UI has all required elements
