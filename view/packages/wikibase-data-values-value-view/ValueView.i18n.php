@@ -175,6 +175,8 @@ $messages['bn'] = array(
  */
 $messages['br'] = array(
 	'valueview-expert-emptyvalue-empty' => 'goullo',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregorian',
+	'valueview-expert-timevalue-calendar-julian' => 'Juluan',
 	'valueview-expert-timeinput-calendar' => 'Deiziadur :',
 	'valueview-expert-timeinput-calendarhint-gregorian' => '(Deiziadur gregorian)',
 	'valueview-expert-timeinput-calendarhint-julian' => '(Deiziadur julian)',
