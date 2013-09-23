@@ -1,33 +1,24 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
+use DataValues\StringValue;
 use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
 use Wikibase\Snak;
+use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
- * Unit tests for the Wikibase\Api\SetStatementRank class.
+ * @covers Wikibase\Api\SetStatementRank
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseRepoTest
  *
  * @group API
  * @group Database
@@ -50,9 +41,9 @@ class SetStatementRankTest extends WikibaseApiTestCase {
 	protected function snakProvider() {
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( 9001 );
-		$snaks[] = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyNoValueSnak( 42 );
+		$snaks[] = new PropertySomeValueSnak( 9001 );
+		$snaks[] = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
@@ -63,20 +54,20 @@ class SetStatementRankTest extends WikibaseApiTestCase {
 	protected function statementProvider() {
 		$statements = array();
 
-		$mainSnak = new \Wikibase\PropertyNoValueSnak( 42 );
-		$statement = new \Wikibase\Statement( $mainSnak );
+		$mainSnak = new PropertyNoValueSnak( 42 );
+		$statement = new Statement( $mainSnak );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
-			$snaks = new \Wikibase\SnakList( array( $snak ) );
-			$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+			$snaks = new SnakList( array( $snak ) );
+			$statement->getReferences()->addReference( new Reference( $snaks ) );
 			$statements[] = $statement;
 		}
 
 		$statement = clone $statement;
-		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
-		$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+		$snaks = new SnakList( $this->snakProvider() );
+		$statement->getReferences()->addReference( new Reference( $snaks ) );
 		$statements[] = $statement;
 
 		$ranks = array(
@@ -99,11 +90,11 @@ class SetStatementRankTest extends WikibaseApiTestCase {
 		$ranks = ClaimSerializer::getRanks();
 
 		foreach ( $this->statementProvider() as $statement ) {
-			$item = \Wikibase\Item::newEmpty();
-			$content = new \Wikibase\ItemContent( $item );
+			$item = Item::newEmpty();
+			$content = new ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
 
-			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
+			$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 			$statement->setGuid( $guidGenerator->newGuid() );
 			$item->addClaim( $statement );
 
