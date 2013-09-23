@@ -75,7 +75,7 @@ if ( !defined( 'DATAVALUES_COMMON_VERSION' ) ) {
 }
 
 // Include the ValueView library if that hasn't been done yet.
-if ( !defined( 'ValueView_VERSION' ) ) {
+if ( !defined( 'VALUEVIEW_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../DataValues/ValueView/ValueView.php' );
 }
 
@@ -91,7 +91,7 @@ $dependencies = array(
 	'DATAVALUES_INTERFACES_VERSION' => 'DataValuesInterfaces',
 	'DATAVALUES_COMMON_VERSION' => 'DataValuesCommon',
 	'DataTypes_VERSION' => 'DataTypes',
-	'ValueView_VERSION' => 'ValueView',
+	'VALUEVIEW_VERSION' => 'ValueView',
 );
 
 foreach ( $dependencies as $constant => $name ) {
