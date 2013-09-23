@@ -9,14 +9,11 @@
  *
  * @since 0.1
  *
- * @file
- * @ingroup ValueView
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-if ( defined( 'ValueView_VERSION' ) ) {
+if ( defined( 'VALUEVIEW_VERSION' ) ) {
 	// Do not initialize more then once.
 	return;
 }
