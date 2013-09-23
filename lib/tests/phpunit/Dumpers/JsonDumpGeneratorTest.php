@@ -14,9 +14,7 @@ use Wikibase\Item;
 use Wikibase\Property;
 
 /**
- * JsonDumpGeneratorTest
- *
- * @covers JsonDumpGenerator
+ * @covers Wikibase\Dumpers\JsonDumpGenerator
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -52,17 +50,17 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return JsonDumpGenerator
 	 */
 	protected function newDumpGenerator( array $ids = array() ) {
-		$out = fopen( 'php://output', 'w' ); // eek
+		$out = fopen( 'php://output', 'w' );
 
 		$serializer = $this->getMock( 'Wikibase\Lib\Serializers\Serializer' );
 		$serializer->expects( $this->any() )
-				->method( 'getSerialized' )
-				->will( $this->returnCallback( function ( Entity $entity ) {
-							return array(
-								'id' => $entity->getId()->getPrefixedId()
-							);
-						}
-				) );
+			->method( 'getSerialized' )
+			->will( $this->returnCallback( function ( Entity $entity ) {
+						return array(
+							'id' => $entity->getId()->getPrefixedId()
+						);
+					}
+			) );
 
 		$entities = $this->makeEntities( $ids );
 
@@ -160,7 +158,11 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			}, $data );
 
 			// check shard
-			$this->assertEquals( array(), array_intersect( $actualIds, $shardIds ), 'shard ' . $shard . ' overlaps previous shards' );
+			$this->assertEquals(
+				array(),
+				array_intersect( $actualIds, $shardIds ),
+				'shard ' . $shard . ' overlaps previous shards'
+			);
 
 			// collect ids from all shards
 			$actualIds = array_merge( $actualIds, $shardIds );
