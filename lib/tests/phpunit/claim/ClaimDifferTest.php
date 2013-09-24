@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Diff\CallbackListDiffer;
+use Diff\OrderedListDiffer;
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
@@ -140,7 +140,7 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 			return $old->equals( $new );
 		};
 
-		$differ = new ClaimDiffer( new CallbackListDiffer( $comparer ) );
+		$differ = new ClaimDiffer( new OrderedListDiffer( $comparer ) );
 		$actual = $differ->diffClaims( $oldClaim, $newClaim );
 
 		$this->assertInstanceOf( 'Wikibase\ClaimDifference', $actual );
