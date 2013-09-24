@@ -47,7 +47,7 @@ def create_new_entity(data, type = 'item')
 end
 
 # removes a sitelink
-def remove_sitelinks(siteid, pagename)
+def remove_sitelink(siteid, pagename)
   uri = URI(URL.repo_api)
 
   request = Net::HTTP::Post.new(uri.to_s)

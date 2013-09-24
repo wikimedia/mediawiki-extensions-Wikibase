@@ -23,8 +23,10 @@ module SitelinkPage
   list_item(:siteIdDropdownFirstElement, :xpath => "//ul[contains(@class, 'wikibase-siteselector-list')]/li")
   unordered_list(:pageNameDropdown, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
   list_item(:pageNameDropdownFirstElement, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']/li")
+  element(:sitelinkSortLanguage, :th, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//th[contains(@class, 'wb-sitelinks-sitename')]")
+  element(:sitelinkSortCode, :th, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//th[contains(@class, 'wb-sitelinks-siteid')]")
+  element(:sitelinkSortLink, :th, :xpath => "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//th[contains(@class, 'wb-sitelinks-link')]")
 
-  #unordered_list(:editSitelinkAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
   link(:addSitelinkLink, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wb-ui-propertyedittool-toolbarbutton-addbutton:not(.wikibase-toolbarbutton-disabled)")
   link(:addSitelinkLinkDisabled, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wb-ui-propertyedittool-toolbarbutton-addbutton.wikibase-toolbarbutton-disabled")
   link(:saveSitelinkLink, :css => "table[data-wb-sitelinks-group='wikipedia'] a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
@@ -63,9 +65,34 @@ module SitelinkPage
     while count < (number_of_sitelinks)
       editSitelinkLink
       removeSitelinkLink
-      ajax_wait
       wait_for_api_callback
       count = count + 1
     end
+  end
+
+  def add_sitelinks(sitelinks)
+    sitelinks.each do |sitelink|
+      addSitelinkLink
+      self.siteIdInputField = sitelink[0]
+      self.pageInputField_element.when_visible
+      self.pageInputField = sitelink[1]
+      saveSitelinkLink
+      wait_for_api_callback
+    end
+  end
+
+  def get_sitelinks_order
+    siteids = Array.new
+    sitelinkTable_element.each do |row|
+      siteids.push(row[1].text)
+    end
+    siteids.delete_at(0)
+    siteids.delete_at(siteids.count-1)
+
+    return siteids
+  end
+
+  def set_sitelink_list_to_full
+    @browser.execute_script("wb.ui.SiteLinksEditTool.prototype.isFull = function() { return true; };")
   end
 end

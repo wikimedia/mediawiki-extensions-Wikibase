@@ -134,9 +134,25 @@ Feature: Edit sitelinks
       | press the RETURN key in the pagename input field |
 
   @save_sitelink @modify_entity
+  Scenario: Edit sitelink
+    Given The following sitelinks do not exist:
+      | enwiki | Africa |
+      | enwiki | Europe |
+    When I add the following sitelinks:
+      | enwiki | Africa |
+      And I reload the page
+      And I click the sitelink edit button
+      And I type Europe into the page input field
+      And I click the sitelink save button
+    Then There should be 1 sitelinks in the list
+      And Sitelink add button should be there
+      And Sitelink edit button should be there
+      And Sitelink save button should not be there
+
+  @save_sitelink @modify_entity
   Scenario Outline: Add sitelink
     Given The following sitelinks do not exist:
-      | <siteid> | <pagename> |
+      | <siteid> | <normalized_pagename> |
     When I click the sitelink add button
       And I type <siteid> into the siteid input field
       And I type <pagename> into the page input field
@@ -155,6 +171,7 @@ Feature: Edit sitelinks
     Examples:
       | siteid | pagename | expected_language | normalized_pagename |
       | enwiki | Africa   | English           | Africa              |
+      | srwiki | Helijum  | српски / srpski   | Хелијум             |
 
   @save_sitelink @modify_entity
   Scenario: Add multiple sitelinks
@@ -168,8 +185,71 @@ Feature: Edit sitelinks
         | itwiki | Europa |
       Then There should be 3 sitelinks in the list
 
+  @save_sitelink @modify_entity
+  Scenario: Remove multiple sitelinks
+    Given The following sitelinks do not exist:
+      | enwiki | Europe |
+      | dewiki | Europa |
+      | itwiki | Europa |
+    When I add the following sitelinks:
+      | enwiki | Europe |
+      | dewiki | Europa |
+      | itwiki | Europa |
+      And I remove all sitelinks
+      And I reload the page
+    Then There should be 0 sitelinks in the list
+      And Sitelink add button should be there
+      And Sitelink edit button should not be there
+
+  @save_sitelink @modify_entity
+  Scenario: Initial sorting of sitelinks
+    Given The following sitelinks do not exist:
+      | enwiki | Rome |
+      | dewiki | Rom |
+      | itwiki | Roma |
+      | fiwiki | Rooma |
+    When I add the following sitelinks:
+      | enwiki | Rome |
+      | dewiki | Rom |
+      | itwiki | Roma |
+      | fiwiki | Rooma |
+    And I reload the page
+    Then There should be 4 sitelinks in the list
+     And Order of sitelinks should be:
+       | dewiki | enwiki | fiwiki | itwiki |
+
+  @save_sitelink @modify_entity
+  Scenario: Sorting sitelinks by languagename
+    Given The following sitelinks do not exist:
+      | enwiki | Rome |
+      | dewiki | Rom |
+      | itwiki | Roma |
+      | fiwiki | Rooma |
+    When I add the following sitelinks:
+      | enwiki | Rome |
+      | dewiki | Rom |
+      | itwiki | Roma |
+      | fiwiki | Rooma |
+    And I reload the page
+    And I order the sitelinks by languagename
+    Then There should be 4 sitelinks in the list
+      And Order of sitelinks should be:
+        | dewiki | enwiki | itwiki | fiwiki |
+
+  @save_sitelink @modify_entity
+  Scenario: List of sitelinks is complete
+    Given The following sitelinks do not exist:
+      | enwiki | Europe |
+      | dewiki | Europa |
+    When I add the following sitelinks:
+      | enwiki | Europe |
+      And I mock that the list of sitelinks is complete
+      And I add the following sitelinks:
+        | dewiki | Europa |
+    Then Sitelink add button should be disabled
+
   @save_sitelink
-  Scenario: Add multiple sitelinks
+  Scenario: Add sitelink to non existent page
     When I click the sitelink add button
       And I type enwiki into the siteid input field
       And I type xyz_nonexistentarticle_xyz into the page input field
