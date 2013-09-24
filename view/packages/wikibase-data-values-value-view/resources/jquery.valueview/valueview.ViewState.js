@@ -25,7 +25,7 @@
 		this._view = valueview;
 	};
 
-	SELF.prototype = {
+	$.extend( SELF.prototype, {
 		/**
 		 * The widget object whose status is represented.
 		 * @type jQuery.valueview
@@ -73,6 +73,6 @@
 		option: function( key ) {
 			return this._view.option( key );
 		}
-	};
+	} );
 
 }( jQuery, jQuery.valueview ) );

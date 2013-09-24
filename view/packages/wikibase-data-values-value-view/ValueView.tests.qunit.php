@@ -160,6 +160,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts',
+				'jquery.valueview.MockViewState',
 				'qunit.parameterize',
 			),
 		),

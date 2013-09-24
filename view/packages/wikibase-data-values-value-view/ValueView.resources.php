@@ -77,7 +77,6 @@ return call_user_func( function() {
 		'jquery.valueview.valueview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview/valueview.valueview.js', // the actual widget definition
-				'jquery.valueview/valueview.ViewState.js',
 			),
 			'styles' => array(
 				'jquery.valueview/valueview.css',
