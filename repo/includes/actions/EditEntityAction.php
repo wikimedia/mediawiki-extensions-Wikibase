@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Diff\CallbackListDiffer;
-use  Html, Linker, Skin, Status, Revision;
+
+use Diff\CallbackOrderedListDiffer;
+use Html, Linker, Skin, Status, Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
@@ -454,10 +455,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 			return $old->equals( $new );
 		};
 
-		// TODO: derp inject the EntityDiffVisualizer
+		// TODO: deep inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
-			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
+			new ClaimDiffer( new CallbackOrderedListDiffer( $comparer ) ),
 			new ClaimDifferenceVisualizer(
 				$this->propertyNameFormatter,
 				$this->snakValueFormatter
