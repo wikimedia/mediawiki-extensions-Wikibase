@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Diff\CallbackListDiffer;
+use Diff\CallbackOrderedListDiffer;
 use Diff\ListDiffer;
 
 use Content, Html;
@@ -150,10 +150,10 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 			return $old->equals( $new );
 		};
 
-		// TODO: derp inject the EntityDiffVisualizer
+		// TODO: deep inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
-			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
+			new ClaimDiffer( new CallbackOrderedListDiffer( $comparer ) ),
 			new ClaimDifferenceVisualizer(
 				$this->propertyNameFormatter,
 				$this->snakValueFormatter
