@@ -4,7 +4,7 @@ namespace Wikibase\Api;
 
 use DataValues\IllegalValueException;
 use ApiMain;
-use Diff\CallbackListDiffer;
+use Diff\OrderedListDiffer;
 use MWException;
 use ApiBase;
 use Diff\ListDiffer;
@@ -87,7 +87,7 @@ class SetClaim extends ApiWikibase {
 			return $old->equals( $new );
 		};
 
-		$claimDiffer = new ClaimDiffer( new CallbackListDiffer( $comparer ) );
+		$claimDiffer = new ClaimDiffer( new OrderedListDiffer( $comparer ) );
 
 		$options = new FormatterOptions( array(
 			//TODO: fallback chain

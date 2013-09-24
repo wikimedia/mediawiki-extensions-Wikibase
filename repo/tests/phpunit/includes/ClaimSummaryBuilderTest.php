@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Diff\CallbackListDiffer;
+use Diff\OrderedListDiffer;
 use Diff\ListDiffer;
 use Wikibase\ClaimDiffer;
 use Wikibase\Claim;
@@ -154,7 +154,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
-			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
+			new ClaimDiffer( new OrderedListDiffer( $comparer ) ),
 			$snakFormatter
 		);
 
@@ -192,7 +192,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
-			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
+			new ClaimDiffer( new OrderedListDiffer( $comparer ) ),
 			$snakFormatter
 		);
 
