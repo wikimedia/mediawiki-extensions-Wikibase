@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_6b2f8b89",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-24T17:54:22Z",
+      "side": 1,
+      "message": "clutter comment",
+      "revId": "54f97c59e6f9f1ed989e99b0b2e788e4b92d267b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_4bc2cf88",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-24T17:54:22Z",
+      "side": 1,
+      "message": "If the goal is to support ALL of the types here, you are still missing a few :)",
+      "revId": "54f97c59e6f9f1ed989e99b0b2e788e4b92d267b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
