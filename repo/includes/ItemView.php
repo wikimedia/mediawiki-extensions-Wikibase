@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
@@ -43,7 +44,8 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
-		$groups = Settings::get( "siteLinkGroups" );
+		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "siteLinkGroups" );
+		#$groups = Settings::get( "siteLinkGroups" );
 		$html = '';
 
 		foreach ( $groups as $group ) {
@@ -69,6 +71,13 @@ class ItemView extends EntityView {
 		 * @var ItemContent $itemContent
 		 */
 		$allSiteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+
+		// wrapping in a try-catch to handle nonexisting setting gracefully
+		try {
+			$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
+		} catch( \OutOfBoundsException $e ) {
+			$specialGroups = null;
+		}
 
 		$siteLinks = array(); // site links of the currently handled site group
 
@@ -144,6 +153,13 @@ class ItemView extends EntityView {
 			} else {
 				$languageCode = $site->getLanguageCode();
 				$escapedSiteId = htmlspecialchars( $site->getGlobalId() );
+				// FIXME: this is a quickfix to allow a custom site-name for groups defined in $wgSpecialSiteLinkGroups instead of showing the language-name
+				if ( is_array( $specialGroups ) && in_array( $group, $specialGroups ) ) {
+					$siteName = wfMessage( 'wikibase-sitelinks-sitename-' . $group )->parse();
+				} else {
+					// TODO: get an actual site name rather then just the language
+					$siteName = htmlspecialchars( Utils::fetchLanguageName( $languageCode ) );
+				}
 
 				// TODO: for non-JS, also set the dir attribute on the link cell;
 				// but do not build language objects for each site since it causes too much load
@@ -151,7 +167,7 @@ class ItemView extends EntityView {
 				$tbody .= wfTemplate( 'wb-sitelink',
 					$languageCode,
 					$alternatingClass,
-					htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ), // TODO: get an actual site name rather then just the language
+					$siteName,
 					$escapedSiteId, // displayed site ID
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),

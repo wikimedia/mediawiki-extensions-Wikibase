@@ -67,6 +67,7 @@ $messages['en'] = array(
 	'wikibase-validator-bad-url-scheme' => 'Unsupported URL scheme: $1',
 	'wikibase-validator-bad-http-url' => 'Malformed HTTP URL: $1',
 	'wikibase-validator-bad-mailto-url' => 'Malformed mailto URL: $1',
+	'wikibase-sitelinks-sitename-commons' => 'Wikimedia Commons',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
 	'version-wikibase' => 'Wikibase',
@@ -231,6 +232,7 @@ Parameters:
 Parameters:
 * $1 - the malformed URL
 {{Related|Wikibase-validator}}',
+	'wikibase-sitelinks-sitename-commons' => 'Name that should be shown in the first column of the sitelink table for wikimedia commons links.',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
