@@ -51,6 +51,8 @@ return call_user_func( function() {
 			'wikipedia',
 		),
 
+		'specialSiteLinkGroups' => array(),
+
 		// local by default. Set to something LBFactory understands.
 		'changesDatabase' => false,
 
