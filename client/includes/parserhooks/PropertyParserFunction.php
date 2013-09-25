@@ -6,7 +6,6 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\SnakFormatterFactory;
 
 /**
  * Handler of the {{#property}} parser function.

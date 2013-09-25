@@ -51,7 +51,7 @@ class MessageSnakFormatter implements SnakFormatter {
 
 	/**
 	 * Returns the format ID of the format this formatter generates.
-	 * This uses the FORMAT_XXX constants defined in SnakFormatterFactory.
+	 * This uses the FORMAT_XXX constants defined in OutputFormatSnakFormatterFactory.
 	 *
 	 * @return string
 	 */

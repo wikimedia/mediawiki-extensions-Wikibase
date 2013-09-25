@@ -18,7 +18,7 @@ use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\SnakFormatterFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\RepoLinker;
@@ -77,7 +77,7 @@ final class WikibaseClient {
 	private $site = null;
 
 	/**
-	 * @var SnakFormatterFactory
+	 * @var OutputFormatSnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
 
@@ -187,7 +187,7 @@ final class WikibaseClient {
 	 * @return SnakFormatter
 	 */
 	public function newSnakFormatter( $format = SnakFormatter::FORMAT_PLAIN, FormatterOptions $options = null )  {
-		return $this->getSnakFormatterFactory()->getFormatter( $format, $options );
+		return $this->getSnakFormatterFactory()->getSnakFormatter( $format, $options );
 	}
 
 	/**
@@ -393,10 +393,10 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns a SnakFormatterFactory the provides SnakFormatters
+	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
 	 *
-	 * @return SnakFormatterFactory
+	 * @return OutputFormatSnakFormatterFactory
 	 */
 	public function getSnakFormatterFactory() {
 		if ( !$this->snakFormatterFactory ) {
@@ -407,7 +407,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return SnakFormatterFactory
+	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
 		$builders = new WikibaseSnakFormatterBuilders(
@@ -416,7 +416,7 @@ final class WikibaseClient {
 			$this->contentLanguage
 		);
 
-		$factory = new SnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 		return $factory;
 	}
 }
