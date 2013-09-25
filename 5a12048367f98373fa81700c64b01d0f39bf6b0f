@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_d38e712e",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-09-25T14:53:11Z",
+      "side": 1,
+      "message": "I don\u0027t want to have an exception thrown here when the setting is not available. because it is a resource loader module it would be very hard to find out why it failed.. could use hasSetting instead..",
+      "parentUuid": "4946a543_3397b548",
+      "revId": "5a12048367f98373fa81700c64b01d0f39bf6b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_73a13da6",
         "filename": "repo/includes/ItemView.php",
         "patchSetId": 1
