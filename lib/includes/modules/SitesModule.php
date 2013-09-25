@@ -48,6 +48,7 @@ class SitesModule extends ResourceLoaderModule {
 		$sites = array();
 
 		$groups = Settings::get( "siteLinkGroups" );
+		$specialGroups = Settings::get( "specialSiteLinkGroups" );
 
 		/**
 		 * @var MediaWikiSite $site
@@ -56,7 +57,15 @@ class SitesModule extends ResourceLoaderModule {
 			$group = $site->getGroup();
 
 			if ( $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $group, $groups ) ) {
-				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
+				// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
+				if ( in_array( $group, $specialGroups ) ) {
+					$languageNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
+					$languageName = $languageNameMsg->exists() ? $languageNameMsg->parse() : $site->getGlobalId();
+					$groupName = 'special';
+				} else {
+					$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
+					$groupName = $group;
+				}
 				$globalId = $site->getGlobalId();
 
 				// Use protocol relative URIs, as it's safe to assume that all wikis support the same protocol
@@ -80,7 +89,7 @@ class SitesModule extends ResourceLoaderModule {
 					'pageUrl' => $pageUrl,
 					'apiUrl' => $apiUrl,
 					'languageCode' => $site->getLanguageCode(),
-					'group' => $group
+					'group' => $groupName
 				);
 			}
 		}

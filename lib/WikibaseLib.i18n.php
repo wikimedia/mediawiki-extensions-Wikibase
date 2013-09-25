@@ -50,6 +50,7 @@ $messages['en'] = array(
 	'wikibase-replicationnote' => 'Please notice that it can take several minutes until the changes are visible on all wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Wikipedia pages linked to this item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Site',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Linked article',
 	'wikibase-tooltip-error-details' => 'Details',
@@ -152,6 +153,8 @@ Preceded by any one of the following messages:
 Header messages for pages on different Wikipedias linked to this item. Similar messages can be created for each group of target sites, depending on configuration.
 See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
+{{Identical|Language}}',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Site links table column heading for the sitename column for special sites such as e.g. Commons.
 {{Identical|Language}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.
 {{Identical|Code}}',
