@@ -23,9 +23,6 @@ use Wikibase\Validators\UrlValidator;
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
@@ -100,7 +97,7 @@ class WikibaseDataTypeBuilders {
 		$validators[] = new TypeValidator( 'Wikibase\DataModel\Entity\EntityIdValue' );
 		$validators[] = new EntityExistsValidator( $this->entityLookup );
 
-		return new DataType( $id, 'wikibase-entityid', array(), array(), $validators );
+		return new DataType( $id, 'wikibase-entityid', $validators );
 	}
 
 	public function buildMediaType( $id ) {
@@ -119,7 +116,7 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildStringType( $id ) {
@@ -134,7 +131,7 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildTimeType( $id ) {
@@ -166,7 +163,7 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'time', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		return new DataType( $id, 'time', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildCoordinateType( $id ) {
@@ -187,7 +184,7 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
 		);
 
-		return new DataType( $id, 'globecoordinate', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		return new DataType( $id, 'globecoordinate', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildUrlValidator( $urlSchemes, $maxLength = 500 ) {
@@ -208,7 +205,7 @@ class WikibaseDataTypeBuilders {
 			$urlValidator
 		);
 
-		return new DataType( $id, 'string', array(), array(), array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 }
