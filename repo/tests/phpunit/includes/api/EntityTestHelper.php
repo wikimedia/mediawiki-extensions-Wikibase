@@ -271,11 +271,10 @@ class EntityTestHelper {
 		$entityProps = array();
 		foreach( $props as $prop ){
 			if( array_key_exists( $prop, $entityOutput ) ){
-				$entityProps[ $prop ] = array( $entityOutput[ $prop ] );
+				$entityProps[ $prop ] = $entityOutput[ $prop ] ;
 			}
 		}
 		foreach( $entityProps as $prop => $value ){
-			$value = $value[0];
 			if( ( $prop == 'aliases' || $prop == 'labels' || $prop == 'descriptions' ) && $langs != null && is_array( $langs ) ){
 				$langValues = array();
 				foreach( $langs as $langCode ){
