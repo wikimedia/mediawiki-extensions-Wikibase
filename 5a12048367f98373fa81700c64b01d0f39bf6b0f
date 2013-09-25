@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_3397b548",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-25T14:50:27Z",
+      "side": 1,
+      "message": "Why is this needed? Should it not be impossible for this to not be set?\n\nIn case it is needed, use Settings::singleton()-\u003ehasSetting()",
+      "revId": "5a12048367f98373fa81700c64b01d0f39bf6b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
