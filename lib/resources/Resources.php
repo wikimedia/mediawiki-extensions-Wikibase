@@ -369,6 +369,7 @@ return call_user_func( function() {
 				'wikibase-description-input-help-message',
 				'wikibase-sitelinks-input-help-message',
 				'wikibase-sitelinks-sitename-columnheading',
+				'wikibase-sitelinks-sitename-columnheading-special',
 				'wikibase-sitelinks-siteid-columnheading',
 				'wikibase-sitelinks-link-columnheading',
 				'wikibase-remove',
