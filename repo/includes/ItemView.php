@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
@@ -43,7 +44,7 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
-		$groups = Settings::get( "siteLinkGroups" );
+		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "siteLinkGroups" );
 		$html = '';
 
 		foreach ( $groups as $group ) {
@@ -69,6 +70,8 @@ class ItemView extends EntityView {
 		 * @var ItemContent $itemContent
 		 */
 		$allSiteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+
+		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
 
 		$siteLinks = array(); // site links of the currently handled site group
 
@@ -96,9 +99,15 @@ class ItemView extends EntityView {
 			// TODO: support entity-id as prefix for element IDs.
 		);
 
+		// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
+		$siteNameMessageKey = 'wikibase-sitelinks-sitename-columnheading';
+		if ( in_array( $group, $specialGroups ) ) {
+			$siteNameMessageKey .= '-special';
+		}
+
 		if( !empty( $siteLinks ) ) {
 			$thead = wfTemplate( 'wb-sitelinks-thead',
-				wfMessage( 'wikibase-sitelinks-sitename-columnheading' )->parse(),
+				wfMessage( $siteNameMessageKey )->parse(),
 				wfMessage( 'wikibase-sitelinks-siteid-columnheading' )->parse(),
 				wfMessage( 'wikibase-sitelinks-link-columnheading' )->parse()
 			);
@@ -144,6 +153,13 @@ class ItemView extends EntityView {
 			} else {
 				$languageCode = $site->getLanguageCode();
 				$escapedSiteId = htmlspecialchars( $site->getGlobalId() );
+				// FIXME: this is a quickfix to allow a custom site-name for groups defined in $wgSpecialSiteLinkGroups instead of showing the language-name
+				if ( is_array( $specialGroups ) && in_array( $group, $specialGroups ) ) {
+					$siteName = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() )->parse();
+				} else {
+					// TODO: get an actual site name rather then just the language
+					$siteName = htmlspecialchars( Utils::fetchLanguageName( $languageCode ) );
+				}
 
 				// TODO: for non-JS, also set the dir attribute on the link cell;
 				// but do not build language objects for each site since it causes too much load
@@ -151,7 +167,7 @@ class ItemView extends EntityView {
 				$tbody .= wfTemplate( 'wb-sitelink',
 					$languageCode,
 					$alternatingClass,
-					htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ), // TODO: get an actual site name rather then just the language
+					$siteName,
 					$escapedSiteId, // displayed site ID
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
@@ -169,12 +185,14 @@ class ItemView extends EntityView {
 			$this->getHtmlForEditSection( $itemContent, $lang, $editLink, 'td', 'add', !$isFull )
 		);
 
+		$groupName = in_array( $group, $specialGroups ) ? 'special' : $group;
+
 		return $html . wfTemplate(
 			'wb-sitelinks-table',
 			$thead,
 			$tbody,
 			$tfoot,
-			htmlspecialchars( $group )
+			htmlspecialchars( $groupName )
 		);
 	}
 
