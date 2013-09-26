@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "4946a543_a885efd3",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-26T18:46:27Z",
+      "side": 1,
+      "message": "So the bots should differentiate between item/badges errors based on message? I thought it would be neccessary to provide them a different error code. If I\u0027m wrong that\u0027s actually better for me, as the XXX in EditEntity wouldn\u0027t apply then.",
+      "parentUuid": "4946a543_87d8231c",
+      "revId": "6937207af01543d19e229cdc7b6ee61e4fd50603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_e701e76f",
         "filename": "repo/includes/api/SetSiteLink.php",
         "patchSetId": 10
@@ -98,6 +116,24 @@
       "writtenOn": "2013-09-26T11:43:19Z",
       "side": 1,
       "message": "As far as I can tell it looks like you have removed all testcases that simply set a sitelink without a badge below?\nIt might be best to leave some testcases to add just a sitelink and some that add a sitelink with a badge.\nThen also some that add a badge to an already existing sitelink",
+      "revId": "6937207af01543d19e229cdc7b6ee61e4fd50603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_687b07f3",
+        "filename": "repo/tests/phpunit/includes/api/SetSiteLinkTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-09-26T18:46:27Z",
+      "side": 1,
+      "message": "It might look like that, but it\u0027s not ;)\nThe tests number 1 and 3 do that, but there are badges already there, so they are in expected.\nTests 6, 8 \u0026 9 do what you said in the last sentence.",
+      "parentUuid": "4946a543_0736f34f",
       "revId": "6937207af01543d19e229cdc7b6ee61e4fd50603",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
