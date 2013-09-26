@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_c2ff79fb",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-26T13:31:56Z",
+      "side": 1,
+      "message": "wtf? :)",
+      "revId": "7b8ad5a511a50bf4ef439d5178a9dec243a70d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_e206351e",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-09-26T13:31:56Z",
+      "side": 1,
+      "message": "how about doing like this? though with nicer variable names :)\n\n$siteNameColumnHeadingKey \u003d \u0027wikibase-sitelinks-sitename-columnheading\u0027;\n\nif ( in_array( $group, $specialGroups ) ) {\n  $siteNameColumnHeadingKey .\u003d \u0027-special\u0027;\n}\n\n$siteNameColumnHeading \u003d wfMessage( $siteNameColumnHeadingKey )-\u003eparse();",
+      "revId": "7b8ad5a511a50bf4ef439d5178a9dec243a70d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
