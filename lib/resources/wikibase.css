@@ -338,6 +338,10 @@ EditableValue's "edit" button when aliases exist) */
 
 /********** TERMS **********/
 
+.wb-terms .wb-value {
+    display: block;
+}
+
 h2.wb-terms-heading {
     float: left;
     width: 100%;
