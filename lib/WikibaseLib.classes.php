@@ -186,6 +186,7 @@ return call_user_func( function() {
 		'Wikibase\Validators\DataValueValidator' => 'includes/Validators/DataValueValidator.php',
 		'Wikibase\Validators\EntityExistsValidator' => 'includes/Validators/EntityExistsValidator.php',
 		'Wikibase\Validators\EntityIdValidator' => 'includes/Validators/EntityIdValidator.php',
+		'Wikibase\Validators\NumberValidator' => 'includes/Validators/NumberValidator.php',
 		'Wikibase\Validators\RegexValidator' => 'includes/Validators/RegexValidator.php',
 		'Wikibase\Validators\StringLengthValidator' => 'includes/Validators/StringLengthValidator.php',
 		'Wikibase\Validators\TypeValidator' => 'includes/Validators/TypeValidator.php',

@@ -10,6 +10,7 @@ use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
 use Wikibase\Validators\EntityExistsValidator;
+use Wikibase\Validators\NumberValidator;
 use Wikibase\Validators\RegexValidator;
 use Wikibase\Validators\StringLengthValidator;
 use Wikibase\Validators\TypeValidator;
@@ -172,6 +173,13 @@ class WikibaseDataTypeBuilders {
 		$globeIdValidators = array();
 		$globeIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
 		//TODO: enforce well known reference globes from config
+
+		$precisionValidators = array();
+		$precisionValidators[] = new NumberValidator();
+
+		$validators[] = new DataFieldValidator( 'precision',
+			new CompositeValidator( $precisionValidators, true )
+		);
 
 		$validators[] = new DataFieldValidator( 'globe', // Note: validate the 'calendarmodel' field
 			new CompositeValidator( $globeIdValidators, true ) //Note: each validator is fatal
