@@ -173,6 +173,13 @@ class WikibaseDataTypeBuilders {
 		$globeIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
 		//TODO: enforce well known reference globes from config
 
+		$precisionValidators = array();
+		$precisionValidators[] = new NumericValidator();
+
+		$validators[] = new DataFieldValidator( 'precision',
+			new CompositeValidator( $precisionValidators, true )
+		);
+
 		$validators[] = new DataFieldValidator( 'globe', // Note: validate the 'calendarmodel' field
 			new CompositeValidator( $globeIdValidators, true ) //Note: each validator is fatal
 		);
