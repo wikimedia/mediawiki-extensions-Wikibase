@@ -70,60 +70,9 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['Wikibaseclientalias']	= $dir . 'WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 
-	// Autoloading
-	$wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
-
-	$wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
-	$wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
-	$wgAutoloadClasses['Wikibase\EntityIdPropertyUpdater'] = $dir . 'includes/EntityIdPropertyUpdater.php';
-	$wgAutoloadClasses['Wikibase\InterwikiSorter']      = $dir . 'includes/InterwikiSorter.php';
-	$wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
-	$wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
-	$wgAutoloadClasses['Wikibase\NamespaceChecker']		= $dir . 'includes/NamespaceChecker.php';
-	$wgAutoloadClasses['Wikibase\RepoItemLinkGenerator']	= $dir . 'includes/RepoItemLinkGenerator.php';
-	$wgAutoloadClasses['Wikibase\RepoLinker']			= $dir . 'includes/RepoLinker.php';
-	$wgAutoloadClasses['Wikibase\Client\WikibaseClient'] = $dir . 'includes/WikibaseClient.php';
-	$wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
-	$wgAutoloadClasses['Wikibase\PageUpdater'] 	= $dir . 'includes/PageUpdater.php';
-	$wgAutoloadClasses['Wikibase\SiteLinkCommentCreator'] = $dir . 'includes/SiteLinkCommentCreator.php';
-	$wgAutoloadClasses['Wikibase\WikiPageUpdater'] 	= $dir . 'includes/WikiPageUpdater.php';
-	$wgAutoloadClasses['Wikibase\UpdateRepo']       = $dir . 'includes/UpdateRepo.php';
-	$wgAutoloadClasses['Wikibase\UpdateRepoOnMove']         = $dir . 'includes/UpdateRepoOnMove.php';
-
-	// includes/api
-	$wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientInfo.php';
-
-	// includes/hooks
-	$wgAutoloadClasses['Wikibase\Client\MovePageNotice']	= $dir . 'includes/hooks/MovePageNotice.php';
-
-	// includes/modules
-	$wgAutoloadClasses['Wikibase\SiteModule']  = $dir . 'includes/modules/SiteModule.php';
-
-	// include/parserhooks
-	$wgAutoloadClasses['Wikibase\NoLangLinkHandler']    = $dir . 'includes/parserhooks/NoLangLinkHandler.php';
-	$wgAutoloadClasses['Wikibase\ParserErrorMessageFormatter']	= $dir . 'includes/parserhooks/ParserErrorMessageFormatter.php';
-	$wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserhooks/PropertyParserFunction.php';
-	$wgAutoloadClasses['Wikibase\PropertyParserFunctionRenderer'] = $dir . 'includes/parserhooks/PropertyParserFunctionRenderer.php';
-
-	// includes/recentchanges
-	$wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
-	$wgAutoloadClasses['Wikibase\ExternalRecentChange'] = $dir . 'includes/recentchanges/ExternalRecentChange.php';
-	$wgAutoloadClasses['Wikibase\RecentChangesFilterOptions'] 	= $dir . 'includes/recentchanges/RecentChangesFilterOptions.php';
-
-	// includes/specials
-	$wgAutoloadClasses['Wikibase\Client\Specials\SpecialUnconnectedPages']	= $dir . 'includes/specials/SpecialUnconnectedPages.php';
-
-	// includes/store
-	$wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
-	$wgAutoloadClasses['Wikibase\EntityCache'] 			= $dir . 'includes/store/EntityCache.php';
-
-	// includes/store/sql
-	$wgAutoloadClasses['Wikibase\CachingSqlStore'] 		= $dir . 'includes/store/sql/CachingSqlStore.php';
-	$wgAutoloadClasses['Wikibase\DirectSqlStore'] 		= $dir . 'includes/store/sql/DirectSqlStore.php';
-	$wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
-
-	// test
-	$wgAutoloadClasses['Wikibase\Test\MockPageUpdater'] 	= $dir . 'tests/phpunit/MockPageUpdater.php';
+	foreach ( include( __DIR__ . '/WikibaseClient.classes.php' ) as $class => $file ) {
+		$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
+	}
 
 	// Hooks
 	$wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
@@ -149,8 +98,8 @@ call_user_func( function() {
 	$wgHooks['TitleMoveComplete'][]          = '\Wikibase\ClientHooks::onTitleMoveComplete';
 
 	// extension hooks
-	$wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
-	$wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
+	$wgHooks['WikibaseDeleteData'][]			= '\Wikibase\ClientHooks::onWikibaseDeleteData';
+	$wgHooks['WikibaseRebuildData'][]			= '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
