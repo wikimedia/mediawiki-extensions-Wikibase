@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_52eeed8c",
+        "filename": "lib/resources/wikibase.ui.SiteLinksEditTool.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-29T09:48:20Z",
+      "side": 1,
+      "message": "why not put this in its own nice little method? in this patchset I\u0027m seeing lots of big scary methods just getting more big and scary :(",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4946a543_72f12969",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-29T09:48:20Z",
+      "side": 1,
+      "message": "This looks familiar... lets please not copy paste bad code all over under the pretense we will fix it later. It just becomes part of the already existing mess, which we also have not cared to clean up.",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
