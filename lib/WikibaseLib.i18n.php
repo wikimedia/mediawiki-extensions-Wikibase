@@ -705,6 +705,10 @@ $messages['cs'] = array(
 	'wikibase-validator-no-such-property' => 'Vlastnost $1 nenalezena',
 	'wikibase-validator-bad-value' => 'Neplatná hodnota: $1',
 	'wikibase-validator-bad-value-type' => 'Chybný typ hodnoty $1, očekáváno $2',
+	'wikibase-validator-bad-url' => 'URL má nesprávný tvar: $1',
+	'wikibase-validator-bad-url-scheme' => 'Nepodporovaný formát URL: $1',
+	'wikibase-validator-bad-http-url' => 'HTTP URL má nesprávný tvar: $1',
+	'wikibase-validator-bad-mailto-url' => 'URL mailto: má nesprávný tvar: $1',
 	'datatypes-type-wikibase-item' => 'Položka',
 	'datatypes-type-commonsMedia' => 'Mediální soubor na Commons',
 	'version-wikibase' => 'Wikibase',
@@ -1898,7 +1902,7 @@ $messages['ko'] = array(
 	'wikibase-error-ui-session-failure' => '세션이 만료되었습니다. 다시 로그인하세요.',
 	'wikibase-error-ui-edit-conflict' => '편집 충돌이 발생했습니다. 다시 불러오고 나서 다시 저장하세요.',
 	'wikibase-replicationnote' => '바뀐 내용이 모든 위키에 보이는데 시간이 걸릴 수 있음을 주의하세요.',
-	'wikibase-sitelinks-wikipedia' => '이 항목으로 링크한 위키백과 문서',
+	'wikibase-sitelinks-wikipedia' => '이 항목을 가리키는 위키백과 문서',
 	'wikibase-sitelinks-sitename-columnheading' => '언어',
 	'wikibase-sitelinks-siteid-columnheading' => '코드',
 	'wikibase-sitelinks-link-columnheading' => '링크된 문서',
@@ -1959,6 +1963,7 @@ $messages['ky'] = array(
 
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
+ * @author Soued031
  */
 $messages['lb'] = array(
 	'wikibase-entity-item' => 'Element',
@@ -1969,7 +1974,7 @@ $messages['lb'] = array(
 	'wikibase-deletedentity-query' => 'Geläschten Offro',
 	'wikibase-diffview-reference' => 'Referenz',
 	'wikibase-diffview-rank' => 'Classement',
-	'wikibase-diffview-label' => 'Etiquette',
+	'wikibase-diffview-label' => 'Etikett',
 	'wikibase-diffview-alias' => 'Aliasen',
 	'wikibase-diffview-description' => 'Beschreiwung',
 	'wikibase-diffview-link' => 'Linken',
@@ -3252,6 +3257,7 @@ $messages['zh-hans'] = array(
 );
 
 /** Traditional Chinese (中文（繁體）‎)
+ * @author Ch.Andrew
  * @author Justincheng12345
  * @author Li3939108
  * @author Simon Shek
@@ -3277,7 +3283,7 @@ $messages['zh-hant'] = array(
 	'wikibase-error-remove-connection' => '刪除時發生錯誤，因此您所作的更變可能未完成。請檢查您的網絡連接。',
 	'wikibase-error-save-timeout' => '我们遇到技術問題，因此無法完成儲存。',
 	'wikibase-error-remove-timeout' => '我们遇到技術問題，因此無法完成刪除。',
-	'wikibase-error-autocomplete-connection' => '無法查詢維基百科API。請稍後重試。', # Fuzzy
+	'wikibase-error-autocomplete-connection' => '無法查詢站台 API 。請稍後重試。',
 	'wikibase-error-autocomplete-response' => '系統回應：$1',
 	'wikibase-error-ui-client-error' => '無法連接到客戶端頁面。請稍後重試。',
 	'wikibase-error-ui-no-external-page' => '相應維基項目無法找到指定條目。',

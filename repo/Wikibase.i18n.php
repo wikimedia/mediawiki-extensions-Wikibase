@@ -3058,6 +3058,8 @@ $messages['cs'] = array(
 	'wikibase-sitelinks-empty' => 'Zatím není žádný odkaz na stránku pro tuto položku.',
 	'wikibase-sitelinks-input-help-message' => 'Nastavte odkaz na stránky vztahující se k této položce.',
 	'wikibase-remove' => 'odstranit',
+	'wikibase-move-up' => 'posunout výše',
+	'wikibase-move-down' => 'posunout níže',
 	'wikibase-undo-title' => 'Vrácení editace v „$1“ zpět',
 	'wikibase-restore-title' => 'Obnovení staré revize „$1“',
 	'wikibase-partial-undo' => 'Editaci lze částečně vrátit zpět.',
@@ -3178,6 +3180,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-dispatchstats-change-timestamp' => 'Časová značka',
 	'wikibase-dispatchstats-oldest-change' => 'Nejstarší',
 	'wikibase-dispatchstats-newest-change' => 'Nejnovější',
+	'wikibase-dispatchstats-site-id' => 'Kód',
 	'wikibase-dispatchstats-pos' => 'Pozice',
 	'wikibase-dispatchstats-lag-num' => 'Čekajících',
 	'wikibase-dispatchstats-lag-time' => 'Zpoždění',
@@ -3190,6 +3193,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-listdatatypes-intro' => 'Toto je seznam všech datových typů v současné době používaných na této instalaci:',
 	'wikibase-history-title-with-label' => 'Historie verzí položky „$2“ ($1)',
 	'wikibase-history-title-without-label' => 'Historie verzí položky ($1)',
+	'special-entitieswithoutdescription' => 'Entity bez popisu',
 	'special-entitieswithoutlabel' => 'Entity bez štítku',
 	'wikibase-entitieswithoutlabel-legend' => 'Získat seznam entit bez štítků',
 	'wikibase-entitieswithoutlabel-label-language' => 'Jazyk:',
@@ -3205,7 +3209,8 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-entitydata-unsupported-format' => 'Toto rozhraní nepodporuje datový formát $1.',
 	'special-mylanguagefallbackchain' => 'Můj řetězec záložních jazyků',
 	'wikibase-mylanguagefallbackchain-text' => 'Řetězec záložních jazyků, který se použije při zobrazování štítků entit, je zobrazen níže.',
-	'wikibase-mylanguagefallbackchain-babel' => 'Můžete jej upravit vložením <nowiki>{{#babel: }}</nowiki> na vaší [[Special:MyPage|uživatelské stránce]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'Můžete jej upravit vložením <nowiki>{{#babel: }}</nowiki> do vaší [[Special:MyPage|uživatelské stránky]].', # Fuzzy
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, konverze z $3 - $4',
 	'wikibase-conflict-patched' => 'Vaše úprava byla začleněna do nejnovější verze.',
 	'wikibase-restoreold' => 'obnovit',
 	'wikibase-restore-summary' => 'Obnovena revize $1 od {{GENDER:$2|uživatele|uživatelky}} [[Special:Contributions/$2|$2]]',
@@ -3286,9 +3291,11 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'right-item-override' => 'Přepisování položek',
 	'right-item-create' => 'Vytváření položek',
 	'right-item-remove' => 'Odstraňování položek',
+	'right-property-override' => 'Přepisování vlastností',
 	'right-property-create' => 'Vytváření vlastností',
 	'right-property-remove' => 'Odstraňování vlastností',
 	'right-alias-remove' => 'Odstraňování aliasů',
+	'right-alias-update' => 'Aktualizace aliasů',
 	'right-sitelink-remove' => 'Odstraňování odkazů',
 	'right-sitelink-update' => 'Aktualizace odkazů na články',
 	'right-linktitles-update' => 'Aktualizace odkazů na články',
@@ -4400,6 +4407,7 @@ $messages['dsb'] = array(
  * @author Geraki
  * @author Nikosguard
  * @author Protnet
+ * @author Xaris333
  */
 $messages['el'] = array(
 	'specialpages-group-wikibaserepo' => 'Wikibase αποθετήριο',
@@ -4428,6 +4436,7 @@ $messages['el'] = array(
 	'wikibase-undo-firstrev' => 'Δεν μπορεί να αναιρεθεί η δημιουργία σελίδας',
 	'wikibase-propertyedittool-full' => 'Ο κατάλογος με τις τιμές είναι πλήρης.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|μια τιμή δεν έχει|$1 τιμές δεν έχουν}} αποθηκευτεί ακόμα',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|καταχώρηση|καταχωρήσεις}}',
 	'wikibase-sitelinksedittool-full' => 'Οι συνδέσμοι σε σελίδες έχουν ήδη οριστεί για όλες τις γνωστές τοποθεσίες.',
 	'wikibase-disambiguation-title' => 'Αποσαφήνιση για "$1"',
 	'wikibase-aliases-label' => 'Γνωστό επίσης ως:',
@@ -4767,6 +4776,7 @@ por trovi de kie ĝi venis.',
  * @author Maor X
  * @author McDutchie
  * @author Mr.Ajedrez
+ * @author Ovruni
  * @author Savh
  * @author Vivaelcelta
  */
@@ -4796,6 +4806,8 @@ $messages['es'] = array(
 	'wikibase-sitelinks-empty' => 'No hay ningún enlace de sitio para este elemento.',
 	'wikibase-sitelinks-input-help-message' => 'Poner un enlace a una página relacionada con este elemento.',
 	'wikibase-remove' => 'eliminar',
+	'wikibase-move-up' => 'subir',
+	'wikibase-move-down' => 'bajar',
 	'wikibase-undo-title' => 'Deshaciendo una edición de "$1"',
 	'wikibase-restore-title' => 'Restaurando la revisión antigua de "$1"',
 	'wikibase-partial-undo' => 'La edición se puede deshacer parcialmente.',
@@ -5716,6 +5728,8 @@ $messages['fi'] = array(
 	'wikibase-sitelinks-empty' => 'Tässä kohteessa ei vielä ole sivustolinkkiä.',
 	'wikibase-sitelinks-input-help-message' => 'Aseta linkki tähän kohteeseen liittyvälle sivulle.',
 	'wikibase-remove' => 'poista',
+	'wikibase-move-up' => 'siirrä ylös',
+	'wikibase-move-down' => 'siirrä alas',
 	'wikibase-undo-title' => 'Kumotaan sivuun $1 tehty muokkaus',
 	'wikibase-restore-title' => 'Sivun "$1" vanhan version palauttaminen',
 	'wikibase-partial-undo' => 'Muokkaus voidaan kumota osittain.',
@@ -6974,6 +6988,7 @@ $messages['gu'] = array(
 /** Hebrew (עברית)
  * @author Amire80
  * @author ExampleTomer
+ * @author Guycn1
  * @author Inkbug
  * @author חיים
  * @author ערן
@@ -7165,7 +7180,7 @@ $messages['he'] = array(
 	'wikibase-entitydata-text' => 'הדף הזה מספק ממשק נתונים מקושר לערכי ישויות. נא לספר את מזהה הישות בכתובת URL באמצעות תחביר דפי־משנה.',
 	'special-mylanguagefallbackchain' => 'שרשרת שפות הגיבוי שלי',
 	'wikibase-mylanguagefallbackchain-text' => 'שרשרת שפות הגיבוי שמציגה לך את תוויות הישות מוצגת להלן.',
-	'wikibase-mylanguagefallbackchain-babel' => 'ניתן לערוך אותה באמצעות שימוש בקוד <nowiki>{{#babel: }}</nowiki> ב[[Special:MyPage|דף המשתמש]].',
+	'wikibase-mylanguagefallbackchain-babel' => 'ניתן לערוך אותה באמצעות שימוש בקוד <nowiki>{{#babel: }}</nowiki> ב[[Special:MyPage|דף המשתמש]].', # Fuzzy
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 – $2, הומר מ־$3 – $4',
 	'wikibase-self-conflict-patched' => 'העריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה ודרסה כמה ששינויי־הביניים שעשית.',
 	'wikibase-conflict-patched' => 'עריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה.',
@@ -7284,7 +7299,7 @@ $messages['he'] = array(
 	'right-item-override' => 'דריסת פריטים',
 	'right-item-create' => 'יצירת פריטים',
 	'right-item-remove' => 'הסרת פריטים',
-	'right-property-override' => 'דריסת מאפייןנים',
+	'right-property-override' => 'דריסת מאפיינים',
 	'right-property-create' => 'יצירת מאפיינים',
 	'right-property-remove' => 'הסרת מאפיינים',
 	'right-alias-remove' => 'הסרת כינויים',
@@ -9771,8 +9786,8 @@ $messages['ko'] = array(
 	'wikibase-sitelinks-empty' => '아직 이 항목에 대한 사이트 링크가 없습니다.',
 	'wikibase-sitelinks-input-help-message' => '이 항목과 관련된 문서로 링크를 설정하세요.',
 	'wikibase-remove' => '삭제',
-	'wikibase-move-up' => '위로 올리기',
-	'wikibase-move-down' => '아래로 내리기',
+	'wikibase-move-up' => '위로 이동',
+	'wikibase-move-down' => '아래로 이동',
 	'wikibase-undo-title' => '"$1" 편집 되돌리기',
 	'wikibase-restore-title' => '"$1" 이전 판 복구',
 	'wikibase-partial-undo' => '편집을 부분적으로 취소할 수 있습니다.',
@@ -10246,6 +10261,7 @@ $messages['ky'] = array(
 
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
+ * @author Soued031
  */
 $messages['lb'] = array(
 	'wikibase-edit' => 'änneren',
@@ -10255,8 +10271,8 @@ $messages['lb'] = array(
 	'wikibase-addreference' => 'Quell derbäisetzen',
 	'wikibase-save-inprogress' => 'Späicheren...',
 	'wikibase-remove-inprogress' => 'Ewechuelen...',
-	'wikibase-label-empty' => 'Et ass nach keng Etiquette definéiert',
-	'wikibase-label-edit-placeholder' => 'Etiquette aginn',
+	'wikibase-label-empty' => 'Et ass nach keng Etikett definéiert',
+	'wikibase-label-edit-placeholder' => 'Etikett aginn',
 	'wikibase-description-empty' => 'Nach keng Beschreiwung definéiert',
 	'wikibase-description-edit-placeholder' => 'Beschreiwung aginn',
 	'wikibase-sitelink-site-edit-placeholder' => 'Site',
@@ -10308,9 +10324,9 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-move-error' => 'Dir kënnt keng Säiten déi am Data-Nummraum si réckelen an Dir kënnt och keng Säiten dohi réckelen.',
 	'wikibase-warning-constraint-violation-length' => 'Eng Limitatioun vun der Längt vum Sproochcode "$1" gëtt markéiert.',
 	'wikibase-error-sitelink-already-used' => 'Link op de Site [$1 $2] ass schonn an engem aneren Element dran, [[$3]].',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Eng aner Eegeschaft ($3) huet schonns d\'Etiquette "$1" associéiert mam Sproochcode $2.',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Eng aner Ufro ($3) huet schonns d\'Etiquette "$1" associéiert mam Sproochcode $2.',
-	'wikibase-error-label-not-unique-item' => 'En anert Element ($3) huet schonn d\'Etiquette "$1" an d\'Beschreiwung "$4" associéiert mam Sproochecode $2.',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Eng aner Eegeschaft ($3) huet schonn d\'Etikett "$1" associéiert mam Sproochcode $2.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Eng aner Ufro ($3) huet schonn d\'Etikett "$1" associéiert mam Sproochcode $2.',
+	'wikibase-error-label-not-unique-item' => 'En anert Element ($3) huet schonn d\'Etikett "$1" an d\'Beschreiwung "$4" associéiert mam Sproochecode $2.',
 	'special-itembytitle' => 'Element no Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Sicht no Elementer mam Site a mam Titel',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -10320,11 +10336,11 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-itembytitle-description' => 'Site ass en Identifikatiouns-Code  esou wéi z. Bsp. "lbwiki"',
 	'wikibase-itembytitle-create' => 'Dir kënnt och [{{fullurl:Special:NewItem|site=$1&page=$2}} en Element uleeën].',
 	'special-itemdisambiguation' => 'Homonymie Element',
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Elementer no Sprooch an Etiquette sichen',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Elementer no Sprooch an Etikett sichen',
 	'wikibase-itemdisambiguation-lookup-language' => 'Sprooch:',
-	'wikibase-itemdisambiguation-lookup-label' => 'Etiquette:',
+	'wikibase-itemdisambiguation-lookup-label' => 'Etikett:',
 	'wikibase-itemdisambiguation-submit' => 'Sichen',
-	'wikibase-itemdisambiguation-nothing-found' => 'Pardon, en Element mat där Etiquette gouf net fonnt.',
+	'wikibase-itemdisambiguation-nothing-found' => 'Pardon, en Element mat där Etikett gouf net fonnt.',
 	'wikibase-itemdisambiguation-create' => "Dir kënnt [{{fullurl:Special:NewItem|label=$1}} d'Element uleeën].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Pardon, de Sproochecode deen Dir uginn hutt ass dem System net bekannt. Benotzt w.e.g. e valabele Code wéi "lb".',
 	'special-newproperty' => 'Eng nei Eegeschaft uleeën',
@@ -10338,14 +10354,14 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-newitem-no-external-page' => 'Déi spezifizéiert Säit konnt op dem korrespondéierte Site net fonnt ginn.',
 	'wikibase-newitem-add-sitelink-failed' => 'De Link op de Site konnt net gespäichert ginn.',
 	'wikibase-newitem-not-recognized-siteid' => 'Den Identifiant fir de Site deen Dir uginn hutt gouf net erkannt.',
-	'wikibase-newentity-label' => 'Etiquette:',
+	'wikibase-newentity-label' => 'Etikett:',
 	'wikibase-newentity-description' => 'Beschreiwung:',
 	'wikibase-newentity-submit' => 'Uleeën',
-	'special-setlabel' => 'Eng Etiquette festleeën',
-	'wikibase-setlabel-introfull' => 'Dir gitt elo eng Etiquette op $2 a fir [[$1]].',
-	'wikibase-setlabel-label' => 'Etiquette:',
-	'wikibase-setlabel-submit' => "D'Etiquette festleeën",
-	'wikibase-setlabel-warning-remove' => "Wëllt Dir wierklech d'Etiquette vun [[$1]] ewechhuelen?",
+	'special-setlabel' => 'Eng Etikett festleeën',
+	'wikibase-setlabel-introfull' => 'Dir gitt elo eng Etikett op $2 a fir [[$1]].',
+	'wikibase-setlabel-label' => 'Etikett:',
+	'wikibase-setlabel-submit' => "D'Etikett festleeën",
+	'wikibase-setlabel-warning-remove' => "Wëllt Dir wierklech d'Etikett vun [[$1]] ewechhuelen?",
 	'special-setdescription' => 'Eng Beschreiwung festleeën',
 	'wikibase-setdescription-introfull' => 'Dir gitt elo eng Beschreiwung op $2 fir [[$1]] an.',
 	'wikibase-setdescription-label' => 'Beschreiwung:',
@@ -10385,8 +10401,8 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-history-title-with-label' => 'Versioune vun "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Versioune vun ($1)',
 	'special-entitieswithoutdescription' => 'Objeten ouni Beschreiwung',
-	'special-entitieswithoutlabel' => 'Objeten ouni Etiquette',
-	'wikibase-entitieswithoutlabel-legend' => 'Lëscht vun den Objeten ouni Etiquette kréien',
+	'special-entitieswithoutlabel' => 'Objeten ouni Etikett',
+	'wikibase-entitieswithoutlabel-legend' => 'Lëscht vun den Objeten ouni Etikette kréien',
 	'wikibase-entitieswithoutlabel-label-language' => 'Sprooch:',
 	'wikibase-entitieswithoutlabel-label-type' => 'Typ:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'all',
@@ -10412,9 +10428,9 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-item-summary-wbeditentity-update' => 'Huet en Element aktualiséiert',
 	'wikibase-item-summary-wbeditentity-override' => 'En Element gouf iwwerschriwwen',
 	'wikibase-item-summary-wbsetreference' => 'Huet eng Referenz festgeluecht',
-	'wikibase-item-summary-wbsetlabel-add' => '[$2]-Etiquette derbäigesat',
-	'wikibase-item-summary-wbsetlabel-set' => "Huet d'Etiquette fir [$2] geännert",
-	'wikibase-item-summary-wbsetlabel-remove' => "Huet d'Etiquette fir [$2] ewechgeholl",
+	'wikibase-item-summary-wbsetlabel-add' => '[$2]-Etikett derbäigesat',
+	'wikibase-item-summary-wbsetlabel-set' => "Huet d'Etikett fir [$2] geännert",
+	'wikibase-item-summary-wbsetlabel-remove' => "Huet d'Etikett fir [$2] ewechgeholl",
 	'wikibase-item-summary-wbsetdescription-add' => '[$2]-Beschreiwung derbäigesat',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2]-Beschreiwung geännert',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2]-Beschreiwung ewechgeholl',
@@ -10428,9 +10444,9 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-property-summary-wbeditentity-create' => 'Eng nei Eegeschaft gouf ugeluecht',
 	'wikibase-property-summary-wbeditentity-update' => 'Huet eng Eegeschaft aktualiséiert',
 	'wikibase-property-summary-wbeditentity-override' => 'Huet eng Eegeschaft iwwerschriwwen',
-	'wikibase-property-summary-wbsetlabel-add' => '[$2]-Etiquette derbäigesat',
-	'wikibase-property-summary-wbsetlabel-set' => "Huet d'Etiquette fir $2 geännert",
-	'wikibase-property-summary-wbsetlabel-remove' => 'Etiquette fir [$2] ewechgeholl',
+	'wikibase-property-summary-wbsetlabel-add' => '[$2]-Etikett derbäigesat',
+	'wikibase-property-summary-wbsetlabel-set' => "Huet d'Etikett fir $2 geännert",
+	'wikibase-property-summary-wbsetlabel-remove' => 'Etikett fir [$2] ewechgeholl',
 	'wikibase-property-summary-wbsetdescription-add' => '[$2]-Beschreiwung derbäigesat',
 	'wikibase-property-summary-wbsetdescription-set' => '[$2]-Beschreiwung geännert',
 	'wikibase-property-summary-wbsetdescription-remove' => '[$2]-Beschreiwung ewechgeholl',
@@ -10458,8 +10474,8 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'right-sitelink-remove' => 'Linken op Siten ewechhuelen',
 	'right-sitelink-update' => 'Website-Linken aktualiséieren',
 	'right-linktitles-update' => 'Linktitelen aktualiséieren',
-	'right-label-remove' => 'Etiquetten ewechhuelen',
-	'right-label-update' => 'Etiquetten aktualiséieren',
+	'right-label-remove' => 'Etiketten ewechhuelen',
+	'right-label-update' => 'Etiketten aktualiséieren',
 	'right-description-remove' => 'Beschreiwungen ewechhuelen',
 	'right-description-update' => 'Beschreiwungen aktualiséieren',
 	'action-item-override' => 'Elementer iwwerschreiwen',
@@ -10473,8 +10489,8 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'action-sitelink-remove' => 'Website-Linken ewechhuelen',
 	'action-sitelink-update' => 'Website-Linken aktualiséieren',
 	'action-linktitles-update' => 'Linktitelen aktualiséieren',
-	'action-label-remove' => 'Etiquetten ewechhuelen',
-	'action-label-update' => 'Etiquetten aktualiséieren',
+	'action-label-remove' => 'Etiketten ewechhuelen',
+	'action-label-update' => 'Etiketten aktualiséieren',
 	'action-description-remove' => 'Beschreiwungen ewechhuelen',
 	'action-description-update' => 'Beschreiwungen aktualiséieren',
 );
@@ -11137,6 +11153,8 @@ $messages['ml'] = array(
 	'wikibase-sitelinks-empty' => 'ഇതുവരെ ഈ ഇനത്തിന് സൈറ്റ്-കണ്ണി നൽകിയിട്ടില്ല.',
 	'wikibase-sitelinks-input-help-message' => 'ഈ ഇനവുമായി ബന്ധമുള്ള താളിലേയ്ക്ക് ഒരു കണ്ണി സജ്ജീകരിക്കുക.',
 	'wikibase-remove' => 'നീക്കം ചെയ്യുക',
+	'wikibase-move-up' => 'മുകളിലേക്ക് നീക്കുക',
+	'wikibase-move-down' => 'താഴേക്ക് നീക്കുക',
 	'wikibase-undo-title' => '"$1" എന്നതിൽ നടത്തിയ തിരുത്ത് തിരസ്കരിക്കുന്നു',
 	'wikibase-restore-title' => '"$1" എന്നതിന്റെ പഴയ പതിപ്പ് പുനഃസ്ഥാപിക്കുന്നു',
 	'wikibase-partial-undo' => 'തിരുത്ത് ഭാഗികമായി ഒഴിവാക്കാവുന്നതാണ്.',
@@ -14476,6 +14494,8 @@ $messages['sv'] = array(
 	'wikibase-sitelinks-empty' => 'Inga webbplatssidor länkade till det här objektet ännu.',
 	'wikibase-sitelinks-input-help-message' => 'Ange en länk till en sida relaterad till detta objekt.',
 	'wikibase-remove' => 'ta bort',
+	'wikibase-move-up' => 'flytta upp',
+	'wikibase-move-down' => 'flytta ned',
 	'wikibase-undo-title' => 'Ångra redigering av "$1"',
 	'wikibase-restore-title' => 'Återställer gammal version av "$1"',
 	'wikibase-partial-undo' => 'Ändringen kan delvis ångras.',
@@ -14619,6 +14639,7 @@ Din IP-adress kommer att sparas i historiken för denna enhet.',
 	'wikibase-entitydata-bad-id' => 'Ogiltigt ID: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Dataformatet $1 stöds inte av detta gränssnitt.',
 	'wikibase-entitydata-title' => 'Enhetsdata',
+	'wikibase-mylanguagefallbackchain-babel' => 'Du kan redigera den genom att lägga in <nowiki>{{#babel: }}</nowiki> på {{GENDER:$1|din}} [[Special:MyPage|användarsida]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, konverterade från $3 - $4',
 	'wikibase-conflict-patched' => 'Din redigering lappades i den senaste versionen.',
 	'wikibase-restoreold' => 'återställ',
@@ -16250,6 +16271,7 @@ $messages['yi'] = array(
  * @author Shirayuki
  * @author Shizhao
  * @author Stevenliuyi
+ * @author TianyinLee
  * @author Xiaomingyan
  * @author Yfdyh000
  * @author Zhuyifei1999
@@ -16534,7 +16556,16 @@ $messages['zh-hans'] = array(
 *查询 – IRI字符串的含蓄部分
 *片断 – IRI字符串的含蓄部分',
 	'wikibase-listdatatypes-globe-coordinate-head' => '地球坐标',
+	'wikibase-listdatatypes-globe-coordinate-body' => '由dms或十进制经纬度度指定的地理位置的原始数据代码。默认为“地球”其次是“WGS84”。其加入一解析度及范围。
+*纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供
+*经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供
+*高度（可选）——距离参考平面的一个精确数值，“地球”將以“WGS84”作为参考
+*星球（可选）——精确值，默认指向“地球”，其次為“WGS84”',
 	'wikibase-listdatatypes-quantity-head' => '数量',
+	'wikibase-listdatatypes-quantity-body' => '一些精确定义单位的数值的原始暑假字段。实际单位也输入到数据中。
+*值－－字符的隐藏部分（单位不明）
+*单位－－字符的隐藏部分（实际实体不明）
+*精度（可选）－－精确值，与数值单位相同',
 	'wikibase-listdatatypes-monolingual-text-head' => '单语文本',
 	'wikibase-listdatatypes-monolingual-text-body' => '不能译为其他语言的一个串的原始数据字段。该类型的串一经定义就可在所有语言中使用。典型的是用于当地语言书写的地名、某种标识符、化学方程式或拉丁科学名称。
 *语言——标定文本部分语言的明确的值
@@ -16555,6 +16586,7 @@ $messages['zh-hans'] = array(
 *精度 – 编码为短整数的明确值。数字含义如下：0 - 十亿年，1 - 亿年，...，6 - 千年，7 - 世纪，8 - 十年，9 - 年，10 - 月，11 - 天，12 - 小时，13 - 分，14 - 秒。
 *日历模型 – 由一个URI给定的明确值。它可以确定用于显示时间值的日历模型。',
 	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => '一个URL的文本数据字段。协议中限制使用的URL支持以外部链接的方式写在维基文本中。',
 	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => '维基数据库项',
 	'content-model-wikibase-property' => '维基数据库属性',
@@ -16592,6 +16624,7 @@ $messages['zh-hans'] = array(
 );
 
 /** Traditional Chinese (中文（繁體）‎)
+ * @author Ch.Andrew
  * @author Justincheng12345
  * @author Li3939108
  * @author Shirayuki
@@ -16663,7 +16696,8 @@ $messages['zh-hant'] = array(
 	'wikibase-shortcopyrightwarning' => '點擊「$1」表示閣下接受[[$2|使用條款]]，並不可撤銷地接受以$3發布您的貢獻。',
 	'wikibase-copyrighttooltip-acknowledge' => '我接受這些條款包括我以後的編輯。不要再顯示此訊息。',
 	'wikibase-entityselector-more' => '更多',
-	'wikibase-anonymouseditwarning' => '警告：您沒有登錄。您的IP地址將會被記錄在$1的編輯歷史中。', # Fuzzy
+	'wikibase-anonymouseditwarning' => '警告：您沒有登入。
+您的 IP 位址將會被記錄在這個項目的編輯歷史中。',
 	'wikibase-restrictionedit-tooltip-message' => '此頁面已被保護。不容許編輯。',
 	'wikibase-blockeduser-tooltip-message' => '因您的用戶名或IP已被封禁，閣下沒有權限去編輯。',
 	'wikibase-move-error' => '您不能移動數據（data）名字空間中的頁面，您也不能移動頁面到這裡。',
@@ -16671,10 +16705,10 @@ $messages['zh-hant'] = array(
 	'wikibase-error-constraint-violation-label' => '語言代碼為「$2」的標籤「$3」違反了一{{PLURAL:$1|條|些}}限制。',
 	'wikibase-error-constraint-violation-description' => '語言代碼為「$2」的描述「$3」違反了一{{PLURAL:$1|條|些}}限制。',
 	'wikibase-error-constraint-violation-aliases' => '語言代碼為「$2」的別名「$3」違反了一{{PLURAL:$1|條|些}}限制。',
-	'wikibase-error-sitelink-already-used' => '站點連結[$1 $2]已被[[$3]]使用。',
-	'wikibase-error-label-not-unique-wikibase-property' => '另一個屬性（$3）已有標籤「$1」聯系了語言代碼$2',
-	'wikibase-error-label-not-unique-wikibase-query' => '另一個查詢（$3）已有標籤「$1」關聯了語言代碼$2',
-	'wikibase-error-label-not-unique-item' => '另一個項目（$3）已有標籤「$1」及描述「$4」關聯了語言代碼$2',
+	'wikibase-error-sitelink-already-used' => '站台連結[$1 $2]已經包括在項目當中，[[$3]]。',
+	'wikibase-error-label-not-unique-wikibase-property' => '另一個特性（$3）已經有標籤「$1」關聯了語言代碼$2。',
+	'wikibase-error-label-not-unique-wikibase-query' => '另一個查詢（$3）已有標籤「$1」關聯了語言代碼$2。',
+	'wikibase-error-label-not-unique-item' => '另一個項目（$3）已有標籤「$1」與描述「$4」關聯了語言代碼$2。',
 	'wikibase-itemlink-id-wrapper' => '（$1）',
 	'special-itembytitle' => '按標題查找項目',
 	'wikibase-itembytitle-lookup-fieldset' => '按站點及標題搜尋',
@@ -16698,7 +16732,7 @@ $messages['zh-hant'] = array(
 	'wikibase-newproperty-summary' => '請檢查屬性是否已經存在！<br />您應為所有新屬性創建一個[[Help:Label|標籤]]及[[Help:Description|描述]]，並加上一個有效的屬性類型。',
 	'wikibase-newproperty-fieldset' => '創建新屬性',
 	'wikibase-newproperty-datatype' => '數據類型：',
-	'wikibase-newproperty-invalid-datatype' => '指定的數據類型無效',
+	'wikibase-newproperty-invalid-datatype' => '特定的資料類型無效。',
 	'special-newitem' => '創建一個新項目',
 	'wikibase-newitem-summary' => '確定已檢查[[Special:ItemByTitle|項目是否已存在]]！<br />您應該對所有的新項目創建一個[[Help:Label|標籤]]和一個[[Help:Description|描述]]。',
 	'wikibase-newitem-fieldset' => '創建一個新項目',
@@ -16804,7 +16838,7 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => '增加及刪除[$2]{{PLURAL:$1|别名}}',
 	'wikibase-item-summary-wbsetaliases-add' => '設置[$2]的{{PLURAL:$1|别名}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '移除[$2]的{{PLURAL:$1|别名}}',
-	'wikibase-item-summary-wbsetsitelink-add' => '添加到[$2]的連接', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-add' => '加入到[$2]的連結',
 	'wikibase-item-summary-wbsetsitelink-remove' => '刪除到[$2]的連接',
 	'wikibase-item-summary-wblinktitles-create' => '創建此項目以連接頁面[$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => '添加語言連結連接頁面[$2↔$3]',
@@ -16825,7 +16859,7 @@ $messages['zh-hant'] = array(
 	'wikibase-property-summary-wbcreate-new' => '創建一個新屬性。',
 	'wikibase-property-summary-wbeditentity-create' => '創建新屬性',
 	'wikibase-property-summary-wbeditentity-update' => '更新屬性',
-	'wikibase-property-summary-wbeditentity-override' => '覆蓋屬性', # Fuzzy
+	'wikibase-property-summary-wbeditentity-override' => '覆蓋特性',
 	'wikibase-property-summary-wbsetlabel-set' => '更改[$2]標籤',
 	'wikibase-property-summary-wbsetlabel-remove' => '刪除[$2]標籤',
 	'wikibase-property-summary-wbsetdescription-set' => '更改[$2]描述',
@@ -16886,8 +16920,6 @@ $messages['zh-hant'] = array(
 	'right-property-override' => '覆蓋屬性',
 	'right-property-create' => '創建屬性',
 	'right-property-remove' => '刪除屬性',
-	'right-alias-add' => '新增別名',
-	'right-alias-set' => '設置別名',
 	'right-alias-remove' => '刪除別名',
 	'right-sitelink-remove' => '刪除站點連結',
 	'right-sitelink-update' => '更新維基項目連結',

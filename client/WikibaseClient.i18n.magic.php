@@ -22,6 +22,7 @@ $magicWords['en'] = array(
 /** Arabic (العربية) */
 $magicWords['ar'] = array(
 	'noexternallanglinks' => array( 0, 'لا_وصلات_لغة_خارجية' ),
+	'property' => array( 0, 'خاصية' ),
 );
 
 /** German (Deutsch) */
