@@ -805,6 +805,8 @@ $messages['roa-tara'] = array(
  * @author Okras
  */
 $messages['ru'] = array(
+	'valueview-desc' => 'Компоненты пользовательского интерфейса для отображения и редактирования значений',
+	'valueview-expert-advancedadjustments' => 'расширенные настройки',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Обработка значений типа «$1» пока не поддерживается.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Обработка значений для типа данных «$1» пока не поддерживается.',
 	'valueview-expert-emptyvalue-empty' => 'пусто',
@@ -814,7 +816,11 @@ $messages['ru'] = array(
 	'valueview-expert-timeinput-precision' => 'Точность:',
 	'valueview-expert-timeinput-calendar' => 'Календарь:',
 	'valueview-expert-timeinput-calendarhint-gregorian' => '(Григорианский календарь)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Юлианский календарь)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; изменить на грегорианский',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; изменить по юлианский',
 	'valueview-preview-label' => 'будет отображаться как:',
+	'valueview-preview-novalue' => 'не определено допустимое значение',
 	'valueview-listrotator-auto' => 'автоматически',
 );
 
