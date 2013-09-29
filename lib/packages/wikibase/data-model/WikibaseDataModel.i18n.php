@@ -189,6 +189,13 @@ $messages['yi'] = array(
 	'wikibasedatamodel-desc' => 'קאמפאנענט וואס דעפינירט דעם וויקיבאזע דאטן מאדעל',
 );
 
+/** Simplified Chinese (中文（简体）‎)
+ * @author TianyinLee
+ */
+$messages['zh-hans'] = array(
+	'wikibasedatamodel-desc' => '定义维基基本资料模型的组件',
+);
+
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
  */
