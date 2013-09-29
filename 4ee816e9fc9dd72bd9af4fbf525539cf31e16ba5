@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4946a543_b2eb9178",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-09-29T09:54:11Z",
+      "side": 1,
+      "message": "https://i.chzbgr.com/maxW500/4700836864/h5491D0B8/",
+      "revId": "4ee816e9fc9dd72bd9af4fbf525539cf31e16ba5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
