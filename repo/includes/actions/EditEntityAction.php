@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Diff\Comparer\CallbackComparer;
 use Diff\OrderedListDiffer;
 use Html, Linker, Skin, Status, Revision;
 use ValueFormatters\FormatterOptions;
@@ -458,7 +459,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		// TODO: deep inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
-			new ClaimDiffer( new OrderedListDiffer( $comparer ) ),
+			new ClaimDiffer( new OrderedListDiffer( new CallbackComparer( $comparer ) ) ),
 			new ClaimDifferenceVisualizer(
 				$this->propertyNameFormatter,
 				$this->snakValueFormatter
