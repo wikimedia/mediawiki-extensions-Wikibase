@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use Diff\ListDiffer;
 use Wikibase\ClaimDiffer;
@@ -148,13 +149,9 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
-		$comparer = function( \Comparable $old, \Comparable $new ) {
-			return $old->equals( $new );
-		};
-
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
-			new ClaimDiffer( new OrderedListDiffer( $comparer ) ),
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			$snakFormatter
 		);
 
@@ -186,13 +183,9 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
-		$comparer = function( \Comparable $old, \Comparable $new ) {
-			return $old->equals( $new );
-		};
-
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
-			new ClaimDiffer( new OrderedListDiffer( $comparer ) ),
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			$snakFormatter
 		);
 

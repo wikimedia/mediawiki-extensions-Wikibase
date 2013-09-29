@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use Diff\Diff;
 use Diff\DiffOpAdd;
@@ -16,28 +17,7 @@ use Wikibase\SnakList;
 use Wikibase\Statement;
 
 /**
- * Tests for the Wikibase\ClaimDiffer class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
- * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\ClaimDiffer
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -136,11 +116,7 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 	 * @param ClaimDifference $expected
 	 */
 	public function testDiffClaims( Claim $oldClaim, Claim $newClaim, ClaimDifference $expected ) {
-		$comparer = function( \Comparable $old, \Comparable $new ) {
-			return $old->equals( $new );
-		};
-
-		$differ = new ClaimDiffer( new OrderedListDiffer( $comparer ) );
+		$differ = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );
 		$actual = $differ->diffClaims( $oldClaim, $newClaim );
 
 		$this->assertInstanceOf( 'Wikibase\ClaimDifference', $actual );

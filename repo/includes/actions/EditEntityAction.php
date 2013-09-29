@@ -2,8 +2,13 @@
 
 namespace Wikibase;
 
+use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
-use Html, Linker, Skin, Status, Revision;
+use Html;
+use Linker;
+use Skin;
+use Status;
+use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
@@ -451,14 +456,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$langCode = $this->getContext()->getLanguage()->getCode();
 
-		$comparer = function( \Comparable $old, \Comparable $new ) {
-			return $old->equals( $new );
-		};
-
-		// TODO: deep inject the EntityDiffVisualizer
+		// TODO: derp inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
-			new ClaimDiffer( new OrderedListDiffer( $comparer ) ),
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(
 				$this->propertyNameFormatter,
 				$this->snakValueFormatter
