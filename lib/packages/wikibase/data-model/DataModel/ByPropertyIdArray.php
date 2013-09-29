@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use MWException;
 use OutOfBoundsException;
 use RuntimeException;
 
