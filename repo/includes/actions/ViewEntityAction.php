@@ -157,7 +157,7 @@ abstract class ViewEntityAction extends \ViewAction {
 
 			$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 			$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-			$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+			$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
 
 			$isEditableView = $this->isPlainView();
 
