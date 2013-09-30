@@ -123,7 +123,7 @@ abstract class EntityContent extends \AbstractContent {
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
 		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
 
 		$entityView = EntityView::newForEntityContent( $this, $valueFormatters, $dataTypeLookup, $entityLoader );
 		return $entityView->getParserOutput( $this, $options, $generateHtml );

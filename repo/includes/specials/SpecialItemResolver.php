@@ -6,6 +6,7 @@ use \ValueFormatters\ValueFormatterFactory;
 use Wikibase\EntityView;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base for special pages that resolve certain arguments to an item.
@@ -88,8 +89,10 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 */
 	protected function displayItem( ItemContent $itemContent ) {
 		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
+		$entityLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
 
-		$view = EntityView::newForEntityContent( $itemContent, $valueFormatters, $this->getContext() );
+		$view = EntityView::newForEntityContent( $itemContent, $valueFormatters, $dataTypeLookup, $entityLookup );
 		$view->render( $itemContent );
 
 		$this->getOutput()->setPageTitle( $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() ) );
