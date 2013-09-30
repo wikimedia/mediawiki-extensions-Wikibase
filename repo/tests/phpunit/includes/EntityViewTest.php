@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\ItemContent;
@@ -49,7 +50,7 @@ use Wikibase\PropertyValueSnak;
  */
 class EntityViewTest extends \MediaWikiTestCase {
 
-	protected function newEntityView( EntityContent $entityContent, EntityLookup $entityLoader = null,
+	protected function newEntityView( EntityContent $entityContent, EntityRevisionLookup $entityLoader = null,
 		\IContextSource $context = null, LanguageFallbackChain $languageFallbackChain = null
 	) {
 		$valueFormatters = new ValueFormatterFactory( array() );
@@ -288,7 +289,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideRegisterJsConfigVars
 	 */
-	public function testRegisterJsConfigVars( EntityContent $entityContent, EntityLookup $entityLoader,
+	public function testRegisterJsConfigVars( EntityContent $entityContent, EntityRevisionLookup $entityLoader,
 		$context, LanguageFallbackChain $languageFallbackChain, $langCode, $editableView, $expected
 	) {
 		$this->setMwGlobals( 'wgLang', Language::factory( "en" ) );

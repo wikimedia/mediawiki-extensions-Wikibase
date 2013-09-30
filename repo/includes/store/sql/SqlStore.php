@@ -30,6 +30,7 @@ use DBQueryError;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SqlStore implements Store {
 
@@ -37,6 +38,11 @@ class SqlStore implements Store {
 	 * @var EntityLookup
 	 */
 	private $entityLookup = null;
+
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup = null;
 
 	/**
 	 * @var PropertyInfoTable
@@ -299,7 +305,7 @@ class SqlStore implements Store {
 	/**
 	 * Creates a new EntityLookup
 	 *
-	 * @return CachingEntityLoader
+	 * @return EntityLookup
 	 */
 	protected function newEntityLookup() {
 		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
@@ -308,6 +314,34 @@ class SqlStore implements Store {
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
 		return new CachingEntityLoader( $lookup );
+	}
+
+	/**
+	 * @see Store::getEntityRevisionLookup
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	public function getEntityRevisionLookup() {
+		if ( !$this->entityRevisionLookup ) {
+			$this->entityRevisionLookup = $this->newEntityRevisionLookup();
+		}
+
+		return $this->entityRevisionLookup;
+	}
+
+	/**
+	 * Creates a new EntityRevisionLookup
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	protected function newEntityRevisionLookup() {
+		//TODO: implement CachingEntityLoader based on EntityRevisionLookup instead of
+		//      EntityLookup. Then we can layer an EntityLookup on top of that.
+		$key = $this->cachePrefix . ':WikiPageEntityLookup';
+		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
+		return $lookup;
 	}
 
 	/**

@@ -5,13 +5,13 @@ namespace Wikibase\Serializers;
 use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
- * Serialization options for FetchedEntityContentSerializer.
+ * Serialization options for EntityRevisionSerializer.
  *
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-class FetchedEntityContentSerializationOptions extends SerializationOptions {
+class EntityRevisionSerializationOptions extends SerializationOptions {
 	/**
 	 * @since 0.5
 	 * @var SerializationOptions|null
