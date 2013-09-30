@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use DataValues\DataValue;
 use Html;
 use ParserOptions;
 use ParserOutput;
@@ -16,8 +17,7 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Serializers\FetchedEntityContentSerializer;
-use Wikibase\Serializers\FetchedEntityContentSerializerOptions;
+use Wikibase\Serializers\EntityRevisionSerializer;
 use ValueFormatters\ValueFormatterFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -73,7 +73,7 @@ abstract class EntityView extends \ContextSource {
 	protected $idFormatter;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityRevisionLookup
 	 */
 	protected $entityLookup;
 
@@ -114,7 +114,7 @@ abstract class EntityView extends \ContextSource {
 	 * @param IContextSource|null        $context
 	 * @param ValueFormatterFactory      $valueFormatters
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityLookup               $entityLookup
+	 * @param EntityRevisionLookup       $entityLookup
 	 * @param EntityTitleLookup          $entityTitleLookup
 	 * @param Lib\EntityIdFormatter      $idFormatter
 	 * @param LanguageFallbackChain      $languageFallbackChain
@@ -123,7 +123,7 @@ abstract class EntityView extends \ContextSource {
 		IContextSource $context,
 		ValueFormatterFactory $valueFormatters,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdFormatter $idFormatter,
 		LanguageFallbackChain $languageFallbackChain
@@ -533,6 +533,35 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
+	 * @param EntityId $id
+	 *
+	 * @return null|Entity
+	 */
+	private function getEntity( EntityId $id ) {
+		$revision = $this->entityLookup->getEntityRevision( $id );
+		return $revision === null ? null : $revision->getEntity();
+	}
+
+	/**
+	 * @param EntityId[] $ids
+	 *
+	 * @return EntityRevision|null[] A map from IDs to the respective entities.
+	 *          If no entity is found for a given ID, the respective entry in
+	 *          the map will be null.
+	 */
+	private function getEntityRevisions( array $ids ) {
+		$revisions = array();
+
+		foreach ( $ids as $id ) {
+			$key = $id->getPrefixedId();
+			$revision = $this->entityLookup->getEntityRevision( $id );
+			$revisions[$key] = $revision;
+		}
+
+		return $revisions;
+	}
+
+	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's claims.
 	 *
 	 * @since 0.2
@@ -568,13 +597,14 @@ abstract class EntityView extends \ContextSource {
 
 		/**
 		 * @var string $claimsHtml
+		 * @var Claim[] $claims
 		 */
 		$claimsHtml = '';
 		foreach( $claimsByProperty as $claims ) {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-			$property = $this->entityLookup->getEntity( $propertyId );
+			$property = $this->getEntity( $propertyId );
 			$propertyLink = '';
 			if ( $property ) {
 				$propertyLink = \Linker::link(
@@ -646,6 +676,7 @@ abstract class EntityView extends \ContextSource {
 		// TODO: display a "placeholder" message for novalue/somevalue snak
 		$value = '';
 		if ( $claim->getMainSnak()->getType() === 'value' ) {
+			/* @var DataValue $value */
 			$value = $claim->getMainSnak()->getDataValue();
 
 			$valueFormatter = $this->valueFormatters->newFormatter(
@@ -903,22 +934,17 @@ abstract class EntityView extends \ContextSource {
 	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entities = $this->entityLookup->getEntities( $entityIds );
+		$revisions = $this->getEntityRevisions( $entityIds );
 		$entityInfo = array();
 
-		$serializer = FetchedEntityContentSerializer::newForFrontendStore( $langCode, $this->languageFallbackChain );
+		$serializer = EntityRevisionSerializer::newForFrontendStore( $this->entityTitleLookup, $langCode, $this->languageFallbackChain );
 
-		foreach( $entities as $prefixedId => $entity ) {
-			if( $entity === null ) {
+		foreach( $revisions as $prefixedId => $revision ) {
+			if( $revision === null ) {
 				continue;
 			}
-			$entityContent = $entityContentFactory->getFromId( $entity->getId() );
-			if ( !$entityContent ) {
-				// It's missing in the database, but we've already got an $entity (possibly from a MockRepository).
-				$entityContent = $entityContentFactory->newFromEntity( $entity );
-			}
-			$entityInfo[ $prefixedId ] = $serializer->getSerialized( $entityContent );
+
+			$entityInfo[ $prefixedId ] = $serializer->getSerialized( $revision );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -933,7 +959,7 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityContent              $entity
 	 * @param ValueFormatterFactory      $valueFormatters
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityLookup               $entityLookup
+	 * @param EntityRevisionLookup       $entityLookup
 	 * @param IContextSource|null        $context
 	 * @param LanguageFallbackChain|null $languageFallbackChain Overrides any language fallback chain created inside, for testing
 	 *
@@ -944,7 +970,7 @@ abstract class EntityView extends \ContextSource {
 		EntityContent $entity,
 		ValueFormatterFactory $valueFormatters,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityLookup,
 		IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
 	) {
