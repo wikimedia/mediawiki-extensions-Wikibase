@@ -1072,17 +1072,15 @@ Parameters:
 This module generates a slightly different summary (autocomment) than the other ones.
 
 Parameters:
-* $1 - the number of pages that were connected
-* $2 - the site code for the from-page
-* $3 - the site code for the to-page',
+* $1 - the site code for the from-page
+* $2 - the site code for the to-page',
 	'wikibase-item-summary-wblinktitles-connect' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s).}}
 
 This module generates a slightly different summary (autocomment) than the other ones.
 
 Parameters:
-* $1 - (Unused) the number of pages that were connected
-* $2 - the site code for the from-page
-* $3 - the site code for the to-page',
+* $1 - the site code for the from-page
+* $2 - the site code for the to-page',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties. This is a LEGACY value, needed for old log entries!}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value. This is a LEGACY value, needed for old log entries!}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value. This is a LEGACY value, needed for old log entries!}}',
@@ -1511,6 +1509,8 @@ $messages['ast'] = array(
 	'wikibase-sitelinks-empty' => "Inda nun hai páxina d'enllaces pa esti elementu.",
 	'wikibase-sitelinks-input-help-message' => 'Definirr un enllaz a una páxina rellacionada con esti elementu.',
 	'wikibase-remove' => 'desaniciar',
+	'wikibase-move-up' => 'mover arriba',
+	'wikibase-move-down' => 'mover abaxo',
 	'wikibase-undo-title' => 'Desfaciendo una edición en «$1»',
 	'wikibase-restore-title' => 'Restaurando la revisión antigua de «$1»',
 	'wikibase-partial-undo' => 'La edición pue desfacese parcialmente.',
@@ -1680,7 +1680,7 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-entitydata-text' => 'Esta páxina ufre una interfaz de datos enllazaos a los valores de la entidá. Por favor proporcione la ID de la entidá na URL, usando la sintaxis de subpáxina.',
 	'special-mylanguagefallbackchain' => 'Cadena predeterminada na mio llingua',
 	'wikibase-mylanguagefallbackchain-text' => "La cadena predeterminada de llingua que s'usa p'amosa-y les etiquetes apaez abaxo.",
-	'wikibase-mylanguagefallbackchain-babel' => "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na so [[Special:MyPage|páxina d'usuariu]].",
+	'wikibase-mylanguagefallbackchain-babel' => "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|so}} [[Special:MyPage|páxina d'usuariu]].",
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, convertíu del $3 - $4',
 	'wikibase-self-conflict-patched' => 'La so edición parcheóse na última versión, sobreescribiendo dalgún de los sos cambios intermedios.',
 	'wikibase-conflict-patched' => 'La so edición parcheóse na última versión.',
@@ -10292,7 +10292,7 @@ $messages['lb'] = array(
 	'wikibase-restore-title' => 'Al Versioun vun "$1" restauréieren',
 	'wikibase-partial-undo' => "D'Ännerung kann deelweis réckgängeg gemaach ginn.",
 	'wikibase-empty-undo' => 'Hei kann näischt réckgängeg gemaach ginn.',
-	'wikibase-undo-revision-error' => 'Réckgängeg maachen huet net fonctionnéiert',
+	'wikibase-undo-revision-error' => 'Réckgängeg maachen huet net funktionéiert',
 	'wikibase-undo-badpage' => "Falsch Versioun: D'Versioun $2 gehéiert net zu [[$1]].",
 	'wikibase-undo-firstrev' => "D'Uleeë vun der Säit kann net réckgängeg gemaach ginn",
 	'wikibase-undo-nocontent' => 'Den Inhalt vun der Versioun $2 vun der Säit $1 kann net geluede ginn',
@@ -12510,6 +12510,8 @@ $messages['pl'] = array(
 	'wikibase-sitelinks-empty' => 'Brak odnośników do tego elementu.',
 	'wikibase-sitelinks-input-help-message' => 'Podaj link do strony związanej z tym elementem.',
 	'wikibase-remove' => 'usuń',
+	'wikibase-move-up' => 'przenieś w górę',
+	'wikibase-move-down' => 'przenieś w dół',
 	'wikibase-undo-title' => 'Cofanie edycji „$1”',
 	'wikibase-restore-title' => 'Przywracanie poprzedniej wersji „$1”',
 	'wikibase-partial-undo' => 'Ta edycja może być częściowo cofnięta.',
@@ -12553,7 +12555,7 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-blockeduser-tooltip-message' => 'Nie masz uprawnienia do edycji, ponieważ twój login lub adres IP został zablokowany.',
 	'wikibase-move-error' => '',
 	'wikibase-warning-constraint-violation-length' => 'Dla języka o kodzie „$1” nastąpiło ograniczenie długości.',
-	'wikibase-error-sitelink-already-used' => 'Link [$1 $2] jest już wykorzystywany przez element [[$3]]. Być może elementy trzeba [[Help:Merge/pl|połączyć]], a jeden z nich [[Wikidata:Deletion_policy/pl|usunąć]]? Jeśli nie jesteś pewien, śmiało zadaj pytanie w [[Wikidata:Kafejka|Kafejce]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Link [$1 $2] jest już wstawiony do innego elementu, [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Inna właściwość ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Inne zapytanie ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2.',
 	'wikibase-error-label-not-unique-item' => 'Inny element ($3) ma już etykietę "$1" i opis "$4" powiązaną z językiem o kodzie $2.',
@@ -12704,12 +12706,18 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Zmieniono {{PLURAL:$4|przypis|$4 przypisy|$4 przypisów}} w {{PLURAL:$3|stwierdzeniu|stwierdzeniach}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Zmieniono rangę {{PLURAL:$3|stwierdzenia|stwierdzeń}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Strona przeniesiona z [$3] do [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => 'Dodano {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Zmieniono {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => 'Usunięto {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}',
+	'wikibase-item-summary-wbsetstatementrank' => "Zmieniono rangę deklaracji z '$3' na '$4'",
 	'wikibase-property-summary-wbcreate-new' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-create' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-update' => 'Zaktualizowano właściwość',
 	'wikibase-property-summary-wbeditentity-override' => 'Wyczyszczono właściwość',
+	'wikibase-property-summary-wbsetlabel-add' => 'Dodano etykietę [$2]',
 	'wikibase-property-summary-wbsetlabel-set' => 'Zmieniono etykietę [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Usunięto etykietę [$2]',
+	'wikibase-property-summary-wbsetdescription-add' => 'Dodano opis [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Zmieniono opis [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Usunięto opis [$2]',
 	'wikibase-property-summary-wbsetaliases-set' => 'Dodano [$2] {{PLURAL:$1|alias|aliasy}}',
@@ -12735,6 +12743,8 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-listdatatypes-multilingual-text-head' => 'Tekst wielojęzyczny',
 	'wikibase-listdatatypes-string-head' => 'Łańcuch',
 	'wikibase-listdatatypes-time-head' => 'Czas',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Element Wikibase',
 	'content-model-wikibase-property' => 'właściwość Wikibase',
 	'content-model-wikibase-query' => 'Zapytanie Wikibase',
@@ -12745,6 +12755,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'right-property-create' => 'Tworzenie właściwości',
 	'right-property-remove' => 'Usuwanie właściwości',
 	'right-alias-remove' => 'Usuwanie aliasów',
+	'right-alias-update' => 'aktualizacja aliasów',
 	'right-sitelink-remove' => 'Usuwanie odnośników',
 	'right-sitelink-update' => 'Aktualizacja odnośników',
 	'right-linktitles-update' => 'Aktualizacja tytułów linków',
@@ -13076,9 +13087,9 @@ $messages['pt-br'] = array(
 	'wikibase-addreference' => 'adicionar fonte',
 	'wikibase-save-inprogress' => 'Salvando...',
 	'wikibase-remove-inprogress' => 'Removendo...',
-	'wikibase-label-empty' => 'Nenhum rótulo definido ainda.',
+	'wikibase-label-empty' => 'Rótulo ainda não definido',
 	'wikibase-label-edit-placeholder' => 'insira um rótulo',
-	'wikibase-description-empty' => 'Nenhuma descrição definida ainda.',
+	'wikibase-description-empty' => 'Descrição ainda não definida',
 	'wikibase-description-edit-placeholder' => 'insira uma descrição',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'artigo',
@@ -13155,7 +13166,7 @@ $messages['pt-br'] = array(
 	'wikibase-newproperty-datatype' => 'Tipo de dados:',
 	'wikibase-newproperty-invalid-datatype' => 'O tipo de dado especificado é inválido.',
 	'special-newitem' => 'Criar um novo item',
-	'wikibase-newitem-summary' => 'Tenha certeza de [[Special:ItemByTitle|conferir se o item já existe]]!<br/>Você deve criar um [[Help:Label|rótulo]] e uma [[Help:Description|descrição]] para todos os novos itens.', # Fuzzy
+	'wikibase-newitem-summary' => '[[Special:ItemByTitle|Confira se o item já existe]]!<br/>Você deve criar um [[Help:Label|rótulo]] e uma [[Help:Description|descrição]] para todos os novos itens.', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Criar um novo item',
 	'wikibase-newitem-site' => 'Site da primeira página linkada',
 	'wikibase-newitem-page' => 'Nome da primeira página linkada',
@@ -13248,7 +13259,7 @@ para descobrir para onde ele foi.',
 	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|Removida uma afirmação|Removidas afirmações}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Criada uma nova propriedade',
 	'wikibase-property-summary-wbeditentity-update' => 'Uma propriedade foi atualizada',
-	'wikibase-property-summary-wbeditentity-override' => 'Uma propriedade foi sobrescrita', # Fuzzy
+	'wikibase-property-summary-wbeditentity-override' => 'Limpou uma propriedade',
 	'wikibase-property-summary-wbsetlabel-set' => 'Alterado o rótulo [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Removido o rótulo [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Alterada a descrição [$2]',
