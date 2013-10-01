@@ -48,7 +48,7 @@ use Wikibase\Lib\MwTimeIsoFormatter;
  *
  * @todo  We might want to re-design this at a later point, designing this as a more generic and encapsulated rendering
  *        of DataValue instances instead of having functions here for generating different parts of the HTML. Right now
- *        these functions require an EntityContent while a DataValue (if it were implemented) should be sufficient.
+ *        these functions require an EntityRevision while a DataValue (if it were implemented) should be sufficient.
  *
  * @file
  * @ingroup WikibaseRepo
@@ -142,12 +142,12 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $entity the entity to render
+	 * @param EntityRevision $entityRevision the entity to render
 	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getHtml( EntityRevision $entityRevision, Language $lang = null, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
@@ -155,15 +155,15 @@ abstract class EntityView extends \ContextSource {
 			$lang = $this->getLanguage();
 		}
 
-		$entityId = $entity->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
+		$entityId = $entityRevision->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
 		$html .= wfTemplate( 'wb-entity',
-			$entity->getEntity()->getType(),
+			$entityRevision->getEntity()->getType(),
 			$entityId,
 			$lang->getCode(),
 			$lang->getDir(),
-			$this->getInnerHtml( $entity, $lang, $editable )
+			$this->getInnerHtml( $entityRevision, $lang, $editable )
 		);
 
 		// show loading spinner as long as JavaScript is initialising;
@@ -209,27 +209,27 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @string
 	 *
-	 * @param EntityContent $entity
+	 * @param EntityRevision $entityRevision
 	 * @param \Language $lang
 	 * @param bool $editable
 	 * @return string
 	 */
-	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityRevision $entityRevision, Language $lang, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$claims = '';
 		$languageTerms = '';
 
-		if ( $entity->getEntity()->getType() === 'item' ) {
-			$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
+		if ( $entityRevision->getEntity()->getType() === 'item' ) {
+			$claims = $this->getHtmlForClaims( $entityRevision->getEntity(), $lang, $editable );
 		}
 
-		$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
+		$languageTerms = $this->getHtmlForLanguageTerms( $entityRevision->getEntity(), $lang, $editable );
 
 		$html = wfTemplate( 'wb-entity-content',
-			$this->getHtmlForLabel( $entity, $lang, $editable ),
-			$this->getHtmlForDescription( $entity, $lang, $editable ),
-			$this->getHtmlForAliases( $entity, $lang, $editable ),
+			$this->getHtmlForLabel( $entityRevision->getEntity(), $lang, $editable ),
+			$this->getHtmlForDescription( $entityRevision->getEntity(), $lang, $editable ),
+			$this->getHtmlForAliases( $entityRevision->getEntity(), $lang, $editable ),
 			$languageTerms,
 			$claims
 		);
@@ -249,13 +249,13 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent       $entity the entity to analyze/render
+	 * @param EntityRevision      $entityRevision the entity to analyze/render
 	 * @param null|\ParserOptions $options parser options. If nto provided, the local context will be used to create generic parser options.
 	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( EntityContent $entity, ParserOptions $options = null, $generateHtml = true ) {
+	public function getParserOutput( EntityRevision $entityRevision, ParserOptions $options = null, $generateHtml = true ) {
 		wfProfileIn( __METHOD__ );
 
 		if ( !$options ) {
@@ -274,7 +274,7 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
-		$allSnaks = $entity->getEntity()->getAllSnaks();
+		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
 
 		// treat referenced entities as page links ------
 		$refFinder = new ReferencedEntitiesFinder();
@@ -293,7 +293,7 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		if ( $generateHtml ) {
-			$html = $this->getHtml( $entity, $langCode, $editable );
+			$html = $this->getHtml( $entityRevision, $langCode, $editable );
 			$pout->setText( $html );
 		}
 
@@ -324,21 +324,17 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $entity the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Entity $entity the entity to render
+	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getHtmlForLabel( Entity $entity, Language $lang, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( !$lang ) {
-			$lang = $this->getLanguage();
-		}
-
-		$label = $entity->getEntity()->getLabel( $lang->getCode() );
-		$editUrl = $this->getEditUrl( 'SetLabel', $entity->getEntity(), $lang );
-		$prefixedId = $this->getFormattedIdForEntity( $entity->getEntity() );
+		$label = $entity->getLabel( $lang->getCode() );
+		$editUrl = $this->getEditUrl( 'SetLabel', $entity, $lang );
+		$prefixedId = $this->getFormattedIdForEntity( $entity );
 
 		$html = wfTemplate( 'wb-label',
 			$prefixedId,
@@ -359,20 +355,16 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $entity the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Entity $entity the entity to render
+	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getHtmlForDescription( Entity $entity, Language $lang, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( !$lang ) {
-			$lang = $this->getLanguage();
-		}
-
-		$description = $entity->getEntity()->getDescription( $lang->getCode() );
-		$editUrl = $this->getEditUrl( 'SetDescription', $entity->getEntity(), $lang );
+		$description = $entity->getDescription( $lang->getCode() );
+		$editUrl = $this->getEditUrl( 'SetDescription', $entity, $lang );
 
 		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
@@ -391,20 +383,16 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $entity the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Entity $entity the entity to render
+	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getHtmlForAliases( Entity $entity, Language $lang, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( !$lang ) {
-			$lang = $this->getLanguage();
-		}
-
-		$aliases = $entity->getEntity()->getAliases( $lang->getCode() );
-		$editUrl = $this->getEditUrl( 'SetAliases', $entity->getEntity(), $lang );
+		$aliases = $entity->getAliases( $lang->getCode() );
+		$editUrl = $this->getEditUrl( 'SetAliases', $entity, $lang );
 
 		if ( empty( $aliases ) ) {
 			$html = wfTemplate( 'wb-aliases-wrapper',
@@ -439,11 +427,11 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param \Language|null $lang
+	 * @param \Language $lang
 	 * @param \User $user
 	 * @return string[] selected langcodes
 	 */
-	private function selectTerms( Entity $entity, \Language $lang = null, \User $user = null ) {
+	private function selectTerms( Entity $entity, \Language $lang, \User $user ) {
 		wfProfileIn( __METHOD__ );
 		$result = array();
 
@@ -463,18 +451,14 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $entity the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Entity $entity the entity to render
+	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForLanguageTerms( EntityContent $entity, \Language $lang = null, $editable = true ) {
+	public function getHtmlForLanguageTerms( Entity $entity, \Language $lang, $editable = true ) {
 
-		if ( $lang === null ) {
-			$lang = $this->getLanguage();
-		}
-
-		$languages = $this->selectTerms( $entity->getEntity(), $lang, $this->getUser() );
+		$languages = $this->selectTerms( $entity, $lang, $this->getUser() );
 		if ( count ( $languages ) === 0 ) {
 			return '';
 		}
@@ -483,12 +467,12 @@ abstract class EntityView extends \ContextSource {
 
 		$html = $thead = $tbody = '';
 
-		$labels = $entity->getEntity()->getLabels();
-		$descriptions = $entity->getEntity()->getDescriptions();
+		$labels = $entity->getLabels();
+		$descriptions = $entity->getDescriptions();
 
 		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
 
-		$languages = $this->selectTerms( $entity->getEntity(), $lang, $this->getUser() );
+		$languages = $this->selectTerms( $entity, $lang, $this->getUser() );
 
 		$specialLabelPage = \SpecialPageFactory::getPage( "SetLabel" );
 		$specialDescriptionPage = \SpecialPageFactory::getPage( "SetDescription" );
@@ -501,13 +485,13 @@ abstract class EntityView extends \ContextSource {
 			$alternatingClass = ( $rowNumber++ % 2 ) ? 'even' : 'uneven';
 
 			$editLabelLink = $specialLabelPage->getTitle()->getLocalURL()
-				. '/' . $this->getFormattedIdForEntity( $entity->getEntity() ) . '/' . $language;
+				. '/' . $this->getFormattedIdForEntity( $entity ) . '/' . $language;
 
 			// TODO: this if is here just until the SetDescription special page exists and
 			// can be removed then
 			if ( $specialDescriptionPage !== null ) {
 				$editDescriptionLink = $specialDescriptionPage->getTitle()->getLocalURL()
-					. '/' . $this->getFormattedIdForEntity( $entity->getEntity() ) . '/' . $language;
+					. '/' . $this->getFormattedIdForEntity( $entity ) . '/' . $language;
 			} else {
 				$editDescriptionLink = '';
 			}
@@ -566,20 +550,18 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntityContent $entity the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local
+	 * @param Entity $entity the entity to render
+	 * @param \Language $lang the language to use for rendering. if not given, the local
 	 *        context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForClaims( EntityContent $entity, Language $lang = null, $editable = true ) {
-		global $wgLang;
-
+	public function getHtmlForClaims( Entity $entity, Language $lang, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$languageCode = isset( $lang ) ? $lang->getCode() : $wgLang->getCode();
+		$languageCode = $lang->getCode();
 
-		$claims = $entity->getEntity()->getClaims();
+		$claims = $entity->getClaims();
 		$html = '';
 
 		$html .= wfTemplate(
@@ -644,9 +626,9 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $entity the entity related to the claim
+	 * @param Entity $entity the entity related to the claim
 	 * @param Claim $claim the claim to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local
+	 * @param Language $lang the language to use for rendering. if not given, the local
 	 *        context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
@@ -655,16 +637,14 @@ abstract class EntityView extends \ContextSource {
 	 *         is not yet implemented or provided in the constructor. (Also see related todo)
 	 */
 	protected function getHtmlForClaim(
-		EntityContent $entity,
+		Entity $entity,
 		Claim $claim,
-		Language $lang = null,
+		Language $lang,
 		$editable = true
 	) {
-		global $wgLang;
-
 		wfProfileIn( __METHOD__ );
 
-		$languageCode = isset( $lang ) ? $lang->getCode() : $wgLang->getCode();
+		$languageCode = $lang->getCode();
 
 		$valueFormatterOptions = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $languageCode,
@@ -731,8 +711,8 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntityContent $entity
-	 * @param \Language|null $lang
+	 * @param Entity $entity
+	 * @param \Language $lang
 	 * @param string $url specifies the URL for the button, default is an empty string
 	 * @param string $tag allows to specify the type of the outer node
 	 * @param string $action by default 'edit', for aliases this could also be 'add'
@@ -740,7 +720,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForEditSection(
-		EntityContent $entity, Language $lang = null, $url = '', $tag = 'span', $action = 'edit', $enabled = true
+		Entity $entity, Language $lang, $url = '', $tag = 'span', $action = 'edit', $enabled = true
 	) {
 		wfProfileIn( __METHOD__ );
 
@@ -777,11 +757,11 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param string  $specialpagename
 	 * @param Entity  $entity
-	 * @param \Language|null $lang
+	 * @param \Language $lang
 	 *
 	 * @return string
 	 */
-	protected function getEditUrl( $specialpagename, Entity $entity, Language $lang = null ) {
+	protected function getEditUrl( $specialpagename, Entity $entity, Language $lang ) {
 		$specialpage = \SpecialPageFactory::getPage( $specialpagename );
 
 		if ( $specialpage === null ) {
@@ -804,7 +784,7 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent       $entity the entity to output
+	 * @param EntityRevision       $entityRevision the entity to output
 	 * @param null|\OutputPage    $out the output page to write to. If not given, the local context will be used.
 	 * @param null|\ParserOptions $options parser options to use for rendering. If not given, the local context will be used.
 	 * @param null|\ParserOutput  $pout optional parser object - provide this if you already have a parser options for
@@ -813,7 +793,7 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
-	public function render( EntityContent $entity, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
+	public function render( EntityRevision $entityRevision, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$isPoutSet = $pout !== null;
@@ -827,7 +807,7 @@ abstract class EntityView extends \ContextSource {
 				$options = $this->makeParserOptions();
 			}
 
-			$pout = $this->getParserOutput( $entity, $options, true );
+			$pout = $this->getParserOutput( $entityRevision, $options, true );
 		}
 
 		$langCode = null;
@@ -845,7 +825,7 @@ abstract class EntityView extends \ContextSource {
 
 		// register JS stuff
 		$editableView = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
-		$this->registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
+		$this->registerJsConfigVars( $out, $entityRevision, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
 
 		$out->addParserOutput( $pout );
 		wfProfileOut( __METHOD__ );
@@ -859,26 +839,25 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param OutputPage    $out the OutputPage to add to
-	 * @param EntityContent  $entityContent the entity for which we want to add the JS config
+	 * @param EntityRevision  $entityRevision the entity for which we want to add the JS config
 	 * @param string         $langCode the language used for showing the entity.
 	 * @param bool           $editableView whether entities on this page should be editable.
 	 *                       This is independent of user permissions.
 	 *
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
-	public function registerJsConfigVars( OutputPage $out, EntityContent $entityContent, $langCode, $editableView = false  ) {
+	public function registerJsConfigVars( OutputPage $out, EntityRevision $entityRevision, $langCode, $editableView = false  ) {
 		wfProfileIn( __METHOD__ );
 
-		$parser = new \Parser();
 		$user = $this->getUser();
-		$entity = $entityContent->getEntity();
-		$title = $out->getTitle();
+		$entity = $entityRevision->getEntity();
+		$title = $this->entityTitleLookup->getTitleForId( $entityRevision->getEntity()->getId() );
 
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
-		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $entityContent->getTitle() ) ); //NOTE: deprecated
+		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $title ) ); //NOTE: deprecated
 
 		// tell JS whether the user can edit
-		$out->addJsConfigVars( 'wbUserCanEdit', $entityContent->userCanEdit( $user, false ) ); //TODO: make this a per-entity info
+		$out->addJsConfigVars( 'wbUserCanEdit', $title->userCan( 'edit', $user, false ) ); //TODO: make this a per-entity info
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
 		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
@@ -897,7 +876,7 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
 
 		// TODO: use injected id formatter
-		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$serializationOptions = new EntitySerializationOptions( $this->idFormatter );
 		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
 
 		$serializerFactory = new SerializerFactory();
@@ -952,30 +931,30 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
-	 * Returns a new view which is suited to render different variations of EntityContent.
+	 * Returns a new view which is suited for rendering the given entity type
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntityContent              $entity
-	 * @param ValueFormatterFactory      $valueFormatters
+	 * @param string $type The entity type, e.g. Item::ENTITY_TYPE.
+	 * @param ValueFormatterFactory $valueFormatters
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityRevisionLookup       $entityLookup
-	 * @param IContextSource|null        $context
+	 * @param EntityRevisionLookup $entityLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param IContextSource|null $context
 	 * @param LanguageFallbackChain|null $languageFallbackChain Overrides any language fallback chain created inside, for testing
 	 *
 	 * @throws \MWException
 	 * @return EntityView
 	 */
-	public static function newForEntityContent(
-		EntityContent $entity,
+	public static function newForEntityType(
+		$type,
 		ValueFormatterFactory $valueFormatters,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityRevisionLookup $entityLookup,
+		EntityTitleLookup $entityTitleLookup,
 		IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
 	) {
-		$type = $entity->getEntity()->getType();
-
 		if ( !in_array( $type, array_keys( self::$typeMap ) ) ) {
 			throw new MWException( "No entity view known for handling entities of type '$type'" );
 		}
@@ -985,7 +964,6 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-		$entityTitleLookup = EntityContentFactory::singleton();
 
 		if ( !$languageFallbackChain ) {
 			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
@@ -999,7 +977,16 @@ abstract class EntityView extends \ContextSource {
 			}
 		}
 
-		$instance = new self::$typeMap[ $type ]( $context, $valueFormatters, $dataTypeLookup, $entityLookup, $entityTitleLookup, $idFormatter, $languageFallbackChain );
+		$instance = new self::$typeMap[ $type ](
+			$context,
+			$valueFormatters,
+			$dataTypeLookup,
+			$entityLookup,
+			$entityTitleLookup,
+			$idFormatter,
+			$languageFallbackChain
+		);
+
 		return $instance;
 	}
 }
