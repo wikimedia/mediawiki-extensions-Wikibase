@@ -265,9 +265,10 @@ class RdfBuilder {
 		$dataResource->addResource( self::NS_CC . ':license', 'http://creativecommons.org/publicdomain/zero/1.0/' );
 
 		if ( $rev ) {
-			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', $rev->getId() );
-			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', wfTimestamp( TS_ISO_8601, $rev->getTimestamp() ) );
-			//TODO: add support for date types to EasyRDF
+			$timestamp = wfTimestamp( TS_ISO_8601, $rev->getTimestamp() );
+			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', new \EasyRdf_Literal( $rev->getId(), null, 'xsd:integer' ) );
+			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', new \EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' ) );
+			//TODO: add support for property date types to RDF output
 		}
 
 		//TODO: revision timestamp, revision id, versioned data URI, current-version-of
