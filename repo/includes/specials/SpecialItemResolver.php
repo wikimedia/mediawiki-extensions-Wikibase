@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Specials;
 
 use \ValueFormatters\ValueFormatterFactory;
+use Wikibase\EntityContentFactory;
+use Wikibase\EntityRevision;
 use Wikibase\EntityView;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
@@ -91,9 +93,10 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
+		$entityTitleLookup = EntityContentFactory::singleton();
 
-		$view = EntityView::newForEntityContent( $itemContent, $valueFormatters, $dataTypeLookup, $entityLookup );
-		$view->render( $itemContent );
+		$view = EntityView::newForEntityType( $itemContent->getEntity()->getType(), $valueFormatters, $dataTypeLookup, $entityLookup, $entityTitleLookup );
+		$view->render( $itemContent->getEntityRevision() );
 
 		$this->getOutput()->setPageTitle( $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() ) );
 	}

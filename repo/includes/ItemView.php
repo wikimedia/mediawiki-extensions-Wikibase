@@ -23,7 +23,7 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityRevision $entity, Language $lang, $editable = true ) {
 		$html = parent::getInnerHtml( $entity, $lang, $editable );
 
 		// add site-links to default entity stuff
@@ -37,17 +37,18 @@ class ItemView extends EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $itemContent the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param EntityRevision $item the entity to render
+	 * @param \Language $lang the language to use for rendering.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
+	public function getHtmlForSiteLinks( EntityRevision $item, Language $lang, $editable = true ) {
 		$groups = Settings::get( "siteLinkGroups" );
 		$html = '';
 
 		foreach ( $groups as $group ) {
-			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $lang, $editable );
+			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $lang, $editable, $lang );
 		}
 
 		return $html;
@@ -58,17 +59,18 @@ class ItemView extends EntityView {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $itemContent the entity to render
+	 * @param EntityRevision $itemRevision the entity to render
 	 * @param string $group a site group ID
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForSiteLinkGroup( EntityContent $itemContent, $group, Language $lang = null, $editable = true ) {
+	public function getHtmlForSiteLinkGroup( EntityRevision $itemRevision, $group, Language $lang, $editable = true ) {
 		/**
-		 * @var ItemContent $itemContent
+		 * @var Item $item
 		 */
-		$allSiteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+		$item = $itemRevision->getEntity();
+		$allSiteLinks = $item->getSimpleSiteLinks();
 
 		$siteLinks = array(); // site links of the currently handled site group
 
@@ -123,7 +125,7 @@ class ItemView extends EntityView {
 		}
 
 		// Link to SpecialPage
-		$editLink = $this->getEditUrl( 'SetSiteLink', $itemContent->getEntity() );
+		$editLink = $this->getEditUrl( 'SetSiteLink', $itemRevision->getEntity(), $lang );
 
 		foreach( $siteLinks as $link ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
@@ -138,7 +140,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					htmlspecialchars( $link->getSite()->getGlobalId() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $itemContent, $lang, $editLink, 'td' )
+					$this->getHtmlForEditSection( $itemRevision->getEntity(), $lang, $editLink, 'td' )
 				);
 
 			} else {
@@ -155,7 +157,7 @@ class ItemView extends EntityView {
 					$escapedSiteId, // displayed site ID
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $itemContent, $lang, $editLink . '/' . $escapedSiteId, 'td' ),
+					$this->getHtmlForEditSection( $itemRevision->getEntity(), $lang, $editLink . '/' . $escapedSiteId, 'td' ),
 					$escapedSiteId // ID used in classes
 				);
 			}
@@ -166,7 +168,7 @@ class ItemView extends EntityView {
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			$this->getHtmlForEditSection( $itemContent, $lang, $editLink, 'td', 'add', !$isFull )
+			$this->getHtmlForEditSection( $itemRevision->getEntity(), $lang, $editLink, 'td', 'add', !$isFull )
 		);
 
 		return $html . wfTemplate(

@@ -124,9 +124,10 @@ abstract class EntityContent extends \AbstractContent {
 		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
+		$entityTitleLookup = EntityContentFactory::singleton();
 
-		$entityView = EntityView::newForEntityContent( $this, $valueFormatters, $dataTypeLookup, $entityLoader );
-		return $entityView->getParserOutput( $this, $options, $generateHtml );
+		$entityView = EntityView::newForEntityType( $this->getEntity()->getType(), $valueFormatters, $dataTypeLookup, $entityLoader, $entityTitleLookup );
+		return $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
 	}
 
 	/**
@@ -594,5 +595,21 @@ abstract class EntityContent extends \AbstractContent {
 				);
 			}
 		}
+	}
+
+	/**
+	 * @return EntityRevision
+	 */
+	public function getEntityRevision() {
+		$entityPage = $this->getWikiPage();
+		$pageRevision = !$entityPage ? null : $entityPage->getRevision();
+
+		$itemRevision = new EntityRevision(
+			$this->getEntity(),
+			$pageRevision === null ? 0 : $entityPage->getId(),
+			$pageRevision === null ? '' : $entityPage->getTimestamp()
+		);
+
+		return $itemRevision;
 	}
 }
