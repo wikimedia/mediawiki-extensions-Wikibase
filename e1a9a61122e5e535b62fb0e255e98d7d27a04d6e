@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29433135_c5e27ed8",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-01T14:25:56Z",
+      "side": 1,
+      "message": "perhaps we should refactor $entity to be $entityRevision here.\n\nOtherwise the below $entity-\u003egetEntity() just seems a bit odd.\n\nThe same goes for all of the methods in this class that now use EntityRevision instead of Entity :)",
+      "revId": "e1a9a61122e5e535b62fb0e255e98d7d27a04d6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_05ed66c4",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-01T14:25:56Z",
+      "side": 1,
+      "message": "$entity should probably also be renamed in this class\n\nIt looks like you have done so for a few methods but still some missing.",
+      "revId": "e1a9a61122e5e535b62fb0e255e98d7d27a04d6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
