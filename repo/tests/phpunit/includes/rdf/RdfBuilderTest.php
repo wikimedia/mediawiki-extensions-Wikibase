@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use DataTypes\DataTypeFactory;
+use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use MediaWikiSite;
 use ValueFormatters\FormatterOptions;
@@ -124,7 +125,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	protected static function addProperties( \EasyRdf_Graph $graph, \EasyRdf_Resource $resource, $properties ) {
 		foreach ( $properties as $prop => $values ) {
-			if ( is_scalar( $values ) ) {
+			if ( !is_array( $values ) ) {
 				$values = array( $values );
 			}
 
@@ -168,6 +169,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			),
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
+				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['empty']->getId() ),
+				//'schema:version' => new \EasyRdf_Literal( 23, null, 'xsd:integer' ),
+				'schema:version' => new \EasyRdf_Literal_Integer( 23 ),
+				'schema:dateModified' => new \EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
 			)
 		);
 
@@ -200,6 +205,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
 				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['terms']->getId() ),
+				'schema:version' => new \EasyRdf_Literal( 23, null, 'xsd:integer' ),
+				'schema:dateModified' => new \EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
 			)
 		);
 
@@ -222,16 +229,24 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public static function provideAddEntity() {
+	public function provideAddEntity() {
 		$entities = self::getTestEntities();
 		$graphs = self::getTestGraphs();
 
 		$cases = array();
 
+		$revision = $this->getMockBuilder( '\Revision' )
+			->disableOriginalConstructor()->getMock();
+		$revision->expects( $this->any() )->method( 'getId' )
+			->will( $this->returnValue( 23 ) );
+		$revision->expects( $this->any() )->method( 'getTimestamp' )
+			->will( $this->returnValue( '20130101000000' ) );
+
 		foreach ( $entities as $name => $entity ) {
 			if ( array_key_exists( $name, $graphs ) ) {
 				$cases[] = array(
 					$entity,
+					$revision,
 					$graphs[$name],
 				);
 			}
@@ -248,11 +263,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( Entity $entity, \EasyRdf_Graph $expectedGraph ) {
+	public function testAddEntity( Entity $entity, \Revision $revision, \EasyRdf_Graph $expectedGraph ) {
 		$builder = $this->newRdfBuilder();
 
-		//TODO: also test revision meta data
-		$builder->addEntity( $entity );
+		$builder->addEntity( $entity, $revision );
 		$graph = $builder->getGraph();
 
 		foreach ( $expectedGraph->resources() as $rc ) {
@@ -284,12 +298,24 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		if ( $obj instanceof \EasyRdf_Resource ) {
 			return '<' . $obj->getUri() . '>';
 		} elseif ( $obj instanceof \EasyRdf_Literal ) {
-			$s = '"' . $obj->getValue() . '"';
+			$value = $obj->getValue();
 
-			if ( $obj->getDatatype() ) {
-				$s .= '^^' . $obj->getDatatype();
-			} elseif ( $obj->getLang() ) {
-				$s .= '@' . $obj->getLang();
+			if ( $value instanceof \DateTime ) {
+				$value = wfTimestamp( TS_ISO_8601, $value->getTimestamp() );
+			}
+
+			if ( is_int( $value ) ) {
+				$s = strval( $value );
+			} elseif ( is_bool( $value ) ) {
+				$s = $value ? 'true' : 'false';
+			} else {
+				$s = '"' . strval( $value ) . '"';
+
+				if ( $obj->getDatatype() ) {
+					$s .= '^^' . $obj->getDatatype();
+				} elseif ( $obj->getLang() ) {
+					$s .= '@' . $obj->getLang();
+				}
 			}
 
 			return $s;
