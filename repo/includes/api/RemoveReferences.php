@@ -140,7 +140,6 @@ class RemoveReferences extends ModifyClaim {
 	 */
 	public function getAllowedParams() {
 		return array_merge(
-			parent::getAllowedParams(),
 			array(
 				'statement' => array(
 					ApiBase::PARAM_TYPE => 'string',
@@ -151,7 +150,8 @@ class RemoveReferences extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => true,
 					ApiBase::PARAM_ISMULTI => true,
 				),
-			)
+			),
+			parent::getAllowedParams()
 		);
 	}
 

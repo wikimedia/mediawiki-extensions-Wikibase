@@ -136,7 +136,6 @@ class RemoveQualifiers extends ModifyClaim {
 	 */
 	public function getAllowedParams() {
 		return array_merge(
-			parent::getAllowedParams(),
 			array(
 				'claim' => array(
 					ApiBase::PARAM_TYPE => 'string',
@@ -147,7 +146,8 @@ class RemoveQualifiers extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => true,
 					ApiBase::PARAM_ISMULTI => true,
 				),
-			)
+			),
+			parent::getAllowedParams()
 		);
 	}
 

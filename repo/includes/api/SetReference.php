@@ -225,7 +225,6 @@ class SetReference extends ModifyClaim {
 	 */
 	public function getAllowedParams() {
 		return array_merge(
-			parent::getAllowedParams(),
 			array(
 				'statement' => array(
 					ApiBase::PARAM_TYPE => 'string',
@@ -241,7 +240,8 @@ class SetReference extends ModifyClaim {
 				'reference' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
-			)
+			),
+			parent::getAllowedParams()
 		);
 	}
 

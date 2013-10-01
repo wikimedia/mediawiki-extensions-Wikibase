@@ -132,7 +132,6 @@ class SetQualifier extends ModifyClaim {
 	 */
 	public function getAllowedParams() {
 		return array_merge(
-			parent::getAllowedParams(),
 			array(
 				'claim' => array(
 					ApiBase::PARAM_TYPE => 'string',
@@ -154,7 +153,8 @@ class SetQualifier extends ModifyClaim {
 					ApiBase::PARAM_TYPE => 'string',
 					ApiBase::PARAM_REQUIRED => false,
 				),
-			)
+			),
+			parent::getAllowedParams()
 		);
 	}
 

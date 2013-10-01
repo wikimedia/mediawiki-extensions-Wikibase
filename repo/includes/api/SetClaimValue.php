@@ -85,7 +85,6 @@ class SetClaimValue extends ModifyClaim {
 	 */
 	public function getAllowedParams() {
 		return array_merge(
-			parent::getAllowedParams(),
 			array(
 				'claim' => array(
 					ApiBase::PARAM_TYPE => 'string',
@@ -99,7 +98,8 @@ class SetClaimValue extends ModifyClaim {
 					ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 					ApiBase::PARAM_REQUIRED => true,
 				),
-			)
+			),
+			parent::getAllowedParams()
 		);
 	}
 

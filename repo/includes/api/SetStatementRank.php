@@ -115,7 +115,6 @@ class SetStatementRank extends ModifyClaim {
 	 */
 	public function getAllowedParams() {
 		return array_merge(
-			parent::getAllowedParams(),
 			array(
 				'statement' => array(
 					ApiBase::PARAM_TYPE => 'string',
@@ -125,7 +124,8 @@ class SetStatementRank extends ModifyClaim {
 					ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
 					ApiBase::PARAM_REQUIRED => true,
 				),
-			)
+			),
+			parent::getAllowedParams()
 		);
 	}
 

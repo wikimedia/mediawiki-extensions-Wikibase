@@ -174,14 +174,14 @@ class RemoveClaims extends ModifyClaim {
 	 */
 	public function getAllowedParams() {
 		return array_merge(
-			parent::getAllowedParams(),
 			array(
 				'claim' => array(
 					ApiBase::PARAM_TYPE => 'string',
 					ApiBase::PARAM_ISMULTI => true,
 					ApiBase::PARAM_REQUIRED => true,
 				),
-			)
+			),
+			parent::getAllowedParams()
 		);
 	}
 
