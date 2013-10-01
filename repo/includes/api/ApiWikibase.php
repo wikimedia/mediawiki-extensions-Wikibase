@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api;
 
+use Revision;
+use Title;
 use User, Status, ApiBase;
 use Wikibase\Claims;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -17,6 +19,7 @@ use Wikibase\Lib\Serializers\AliasSerializer;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Summary;
+use WikiPage;
 
 /**
  * Base class for API modules
@@ -104,166 +107,37 @@ abstract class ApiWikibase extends \ApiBase {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
 	}
 
-	/**
-	 * Get serialized aliases and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $aliases the aliases to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$aliasSerializer = new AliasSerializer( $options );
-		$value = $aliasSerializer->getSerialized( $aliases );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-			$this->getResult()->addValue( $path, $name, $value );
-		}
-
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addAliases( $aliases, $path, $name, $tag );
 	}
-
-	/**
-	 * Get serialized sitelinks and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 * @param array $options additional information to include in the listelinks structure. For example:
-	 *              * 'url' will include the full URL of the sitelink in the result
-	 *              * 'removed' will mark the sitelinks as removed
-	 *
-	 */
+	/** @deprecated */
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$serializerOptions = new SerializationOptions();
-		$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
-		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		if ( isset( $options ) ) {
-			if ( in_array( EntitySerializer::SORT_ASC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
-			} elseif ( in_array( EntitySerializer::SORT_DESC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_DESC );
-			}
-
-			if ( in_array( 'url', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/urls" );
-			}
-
-			if ( in_array( 'removed', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
-			}
-		}
-
-		$siteStore = \SiteSQLStore::newInstance();
-		$siteLinkSerializer = new SiteLinkSerializer( $serializerOptions, $siteStore );
-		$value = $siteLinkSerializer->getSerialized( $siteLinks );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addSiteLinks( $siteLinks, $path, $name, $tag, $options );
 	}
-
-	/**
-	 * Get serialized descriptions and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $descriptions the descriptions to insert in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$descriptionSerializer = new DescriptionSerializer( $options );
-
-		$value = $descriptionSerializer->getSerialized( $descriptions );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addDescriptions( $descriptions, $path, $name, $tag );
 	}
-
-	/**
-	 * Get serialized labels and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $labels the labels to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$labelSerializer = new LabelSerializer( $options );
-
-		$value = $labelSerializer->getSerialized( $labels );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addLabels( $labels, $path, $name, $tag );
 	}
-
-	/**
-	 * Get serialized claims and add them to result
-	 *
-	 * @since 0.5
-	 *
-	 * @param array $claims the labels to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$claimSerializer = new ClaimsSerializer( $options );
-
-		$value = $claimSerializer->getSerialized( new Claims( $claims ) );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addClaims( $claims, $path, $name, $tag );
 	}
 
 	/**
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
-	 * @param \Wikibase\EntityContent $entityContent the entityContent to check permissions for
+	 * @param EntityContent $entityContent the entityContent to check permissions for
 	 * @param $params array of arguments for the module, describing the operation to be performed
 	 *
 	 * @return \Status the check's result
@@ -281,7 +155,7 @@ abstract class ApiWikibase extends \ApiBase {
 	/**
 	 * Check the rights for the user accessing the module.
 	 *
-	 * @param $entityContent \Wikibase\EntityContent the entity to check
+	 * @param $entityContent EntityContent the entity to check
 	 * @param $user User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 *
@@ -333,25 +207,25 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @since 0.3
 	 *
-	 * @param \Title   $title   : the title of the page to load the revision for
+	 * @param Title   $title   : the title of the page to load the revision for
 	 * @param bool|int $revId   : the revision to load. If not given, the current revision will be loaded.
 	 * @param int      $audience
-	 * @param \User    $user
+	 * @param User $user
 	 * @param int      $audience: the audience to load this for, see Revision::FOR_XXX constants and
 	 *                          Revision::getContent().
-	 * @param \User    $user    : the user to consider if $audience == Revision::FOR_THIS_USER
+	 * @param User $user    : the user to consider if $audience == Revision::FOR_THIS_USER
 	 *
-	 * @return \Wikibase\EntityContent the revision's content.
+	 * @return EntityContent the revision's content.
 	 */
-	protected function loadEntityContent( \Title $title, $revId = false,
-		$audience = \Revision::FOR_PUBLIC,
-		\User $user = null
+	protected function loadEntityContent( Title $title, $revId = false,
+		$audience = Revision::FOR_PUBLIC,
+		User $user = null
 	) {
 		if ( $revId === null || $revId === false || $revId === 0 ) {
-			$page = \WikiPage::factory( $title );
+			$page = WikiPage::factory( $title );
 			$content = $page->getContent( $audience, $user );
 		} else {
-			$revision = \Revision::newFromId( $revId );
+			$revision = Revision::newFromId( $revId );
 
 			if ( !$revision ) {
 				$this->dieUsage( "Revision not found: $revId", 'nosuchrevid' );
@@ -673,7 +547,7 @@ abstract class ApiWikibase extends \ApiBase {
 	protected function addRevisionIdFromStatusToResult( $path, $name, Status $status ) {
 		$statusValue = $status->getValue();
 
-		/* @var \Revision $revision */
+		/* @var Revision $revision */
 		$revision = isset( $statusValue['revision'] )
 			? $statusValue['revision'] : null;
 
