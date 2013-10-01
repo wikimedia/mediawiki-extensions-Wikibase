@@ -2424,6 +2424,7 @@ $messages['ku-latn'] = array(
 /** Luxembourgish (Lëtzebuergesch)
  * @author Les Meloures
  * @author Robby
+ * @author Soued031
  */
 $messages['lb'] = array(
 	'wikibase-client-desc' => "Client fir d'Wikibase Erweiderung",
@@ -2453,7 +2454,7 @@ $messages['lb'] = array(
 	'wikibase-linkitem-invalidsite' => 'Onbekannten oder net valabele Site erausgesicht',
 	'wikibase-linkitem-confirmitem-button' => 'Confirméieren',
 	'wikibase-linkitem-not-loggedin-title' => 'Dir musst ageloggt sinn',
-	'wikibase-linkitem-not-loggedin' => 'Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt si fir dës Fonctioun ze benotzen.',
+	'wikibase-linkitem-not-loggedin' => 'Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt si fir dës Funktioun ze benotzen.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
