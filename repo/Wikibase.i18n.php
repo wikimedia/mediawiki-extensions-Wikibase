@@ -1072,17 +1072,15 @@ Parameters:
 This module generates a slightly different summary (autocomment) than the other ones.
 
 Parameters:
-* $1 - the number of pages that were connected
-* $2 - the site code for the from-page
-* $3 - the site code for the to-page',
+* $1 - the site code for the from-page
+* $2 - the site code for the to-page',
 	'wikibase-item-summary-wblinktitles-connect' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s).}}
 
 This module generates a slightly different summary (autocomment) than the other ones.
 
 Parameters:
-* $1 - (Unused) the number of pages that were connected
-* $2 - the site code for the from-page
-* $3 - the site code for the to-page',
+* $1 - the site code for the from-page
+* $2 - the site code for the to-page',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties. This is a LEGACY value, needed for old log entries!}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value. This is a LEGACY value, needed for old log entries!}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value. This is a LEGACY value, needed for old log entries!}}',
