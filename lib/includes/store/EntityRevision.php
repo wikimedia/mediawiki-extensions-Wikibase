@@ -50,12 +50,23 @@ class EntityRevision {
 
 	/**
 	 * @param Entity $entity
-	 * @param int    $revision
-	 * @param string $timestamp in mediawiki format
+	 * @param int $revision (use 0 for none)
+	 * @param string $timestamp in mediawiki format (use '' for none)
+	 *
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( Entity $entity, $revision, $timestamp ) {
-		assert( is_int( $revision ) && $revision > 0 );
-		assert( preg_match( '/^\d{14}$/', $timestamp ) );
+	public function __construct( Entity $entity, $revision = 0, $timestamp = '' ) {
+		if ( !is_int( $revision ) ) {
+			throw new \InvalidArgumentException( '$revision must be an integer' );
+		}
+
+		if ( $revision < 0 ) {
+			throw new \InvalidArgumentException( '$revision must not be negative' );
+		}
+
+		if ( $timestamp !== '' && !preg_match( '/^\d{14}$/', $timestamp ) ) {
+			throw new \InvalidArgumentException( '$timestamp must be a string of 14 digits (or empty)' );
+		}
 
 		$this->entity = $entity;
 		$this->revision = $revision;

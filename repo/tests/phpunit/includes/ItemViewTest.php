@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\ItemContent;
 use Wikibase\Item;
 use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Property;
 use Wikibase\Utils;
 use Wikibase\ItemView;
 use ValueFormatters\ValueFormatterFactory;
@@ -48,29 +49,30 @@ use ValueFormatters\ValueFormatterFactory;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ItemViewTest extends \MediaWikiTestCase {
+class ItemViewTest extends EntityViewTest {
 
 	/**
-	 * @dataProvider providerNewForEntityContent
+	 * @dataProvider providerNewForEntityType
 	 */
-	public function testNewForEntityContent( $entityContent ) {
+	public function testNewForEntityType( $type, $expectedClass ) {
 		$valueFormatters = new ValueFormatterFactory( array() );
 		$entityLoader = new MockRepository();
 		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
 		// test whether we get the right EntityView from an EntityContent
-		$view = ItemView::newForEntityContent( $entityContent, $valueFormatters, $dataTypeLookup, $entityLoader );
+		$view = ItemView::newForEntityType( $type, $valueFormatters, $dataTypeLookup, $entityLoader, $entityTitleLookup );
 
-		$this->assertType(
-			ItemView::$typeMap[ $entityContent->getEntity()->getType() ],
+		$this->assertInstanceOf(
+			$expectedClass,
 			$view
 		);
 	}
 
-	public static function providerNewForEntityContent() {
+	public static function providerNewForEntityType() {
 		return array(
-			array( ItemContent::newEmpty() ),
-			array( \Wikibase\PropertyContent::newEmpty() )
+			array( Item::ENTITY_TYPE, 'Wikibase\ItemView' ),
+			array( Property::ENTITY_TYPE, 'Wikibase\PropertyView' )
 		);
 	}
 
