@@ -312,17 +312,17 @@ class EntityViewTest extends \MediaWikiTestCase {
 
 		$entity = Item::newEmpty();
 		$entity->setLabel( 'de', 'foo' );
-		$entity->setId( 49 );
+		$entity->setId( 27449 );
 
 		$content = $entityContentFactory->newFromEntity( $entity );
 
-		$q98 = new ItemId( 'Q98' );
+		$q98 = new ItemId( 'Q27498' );
 		$entityQ98 = Item::newEmpty();
 		$entityQ98->setLabel( 'de', 'bar' );
 		$entityQ98->setId( $q98 );
 
 		$itemHandler = new ItemHandler();
-		$itemTitle = Title::makeTitle( $itemHandler->getEntityNamespace(), 'Q98' );
+		$itemTitle = Title::makeTitle( $itemHandler->getEntityNamespace(), 'Q27498' );
 		$titleText = $itemTitle->getPrefixedText();
 
 		$entityLoader = new MockRepository();
@@ -339,9 +339,9 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$argLists[] = array( $content, $entityLoader, null, $languageFallbackChain, 'fr', true, array(
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'français',
-			'wbEntityId' => 'Q49',
-			'wbEntity' => '{"id":"Q49","type":"item","labels":{"de":{"language":"de","value":"foo"},"fr":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":98},"type":"wikibase-entityid"}},"type":"claim"}]}}',
-			'wbUsedEntities' => '{"Q98":{"content":{"id":"Q98","type":"item","labels":{"fr":{"language":"de","value":"bar"}}},"title":"' . $titleText . '","revision":""}}',
+			'wbEntityId' => 'Q27449',
+			'wbEntity' => '{"id":"Q27449","type":"item","labels":{"de":{"language":"de","value":"foo"},"fr":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":27498},"type":"wikibase-entityid"}},"type":"claim"}]}}',
+			'wbUsedEntities' => '{"Q27498":{"content":{"id":"Q27498","type":"item","labels":{"fr":{"language":"de","value":"bar"}}},"title":"' . $titleText . '","revision":""}}',
 		) );
 
 		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguageCode(
@@ -351,9 +351,9 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$argLists[] = array( $content, $entityLoader, null, $languageFallbackChain, 'nl', true, array(
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'Nederlands',
-			'wbEntityId' => 'Q49',
-			'wbEntity' => '{"id":"Q49","type":"item","labels":{"de":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":98},"type":"wikibase-entityid"}},"type":"claim"}]}}',
-			'wbUsedEntities' => '{"Q98":{"content":{"id":"Q98","type":"item"},"title":"' . $titleText . '","revision":""}}',
+			'wbEntityId' => 'Q27449',
+			'wbEntity' => '{"id":"Q27449","type":"item","labels":{"de":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":27498},"type":"wikibase-entityid"}},"type":"claim"}]}}',
+			'wbUsedEntities' => '{"Q27498":{"content":{"id":"Q27498","type":"item"},"title":"' . $titleText . '","revision":""}}',
 		) );
 
 		// TODO: add more tests for other JS vars
