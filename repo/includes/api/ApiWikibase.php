@@ -104,159 +104,30 @@ abstract class ApiWikibase extends \ApiBase {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
 	}
 
-	/**
-	 * Get serialized aliases and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $aliases the aliases to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$aliasSerializer = new AliasSerializer( $options );
-		$value = $aliasSerializer->getSerialized( $aliases );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-			$this->getResult()->addValue( $path, $name, $value );
-		}
-
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addAliases( $aliases, $path, $name, $tag );
 	}
-
-	/**
-	 * Get serialized sitelinks and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 * @param array $options additional information to include in the listelinks structure. For example:
-	 *              * 'url' will include the full URL of the sitelink in the result
-	 *              * 'removed' will mark the sitelinks as removed
-	 *
-	 */
+	/** @deprecated */
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$serializerOptions = new SerializationOptions();
-		$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
-		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		if ( isset( $options ) ) {
-			if ( in_array( EntitySerializer::SORT_ASC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
-			} elseif ( in_array( EntitySerializer::SORT_DESC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_DESC );
-			}
-
-			if ( in_array( 'url', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/urls" );
-			}
-
-			if ( in_array( 'removed', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
-			}
-		}
-
-		$siteStore = \SiteSQLStore::newInstance();
-		$siteLinkSerializer = new SiteLinkSerializer( $serializerOptions, $siteStore );
-		$value = $siteLinkSerializer->getSerialized( $siteLinks );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addSiteLinks( $siteLinks, $path, $name, $tag, $options );
 	}
-
-	/**
-	 * Get serialized descriptions and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $descriptions the descriptions to insert in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$descriptionSerializer = new DescriptionSerializer( $options );
-
-		$value = $descriptionSerializer->getSerialized( $descriptions );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addDescriptions( $descriptions, $path, $name, $tag );
 	}
-
-	/**
-	 * Get serialized labels and add them to result
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $labels the labels to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$labelSerializer = new LabelSerializer( $options );
-
-		$value = $labelSerializer->getSerialized( $labels );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addLabels( $labels, $path, $name, $tag );
 	}
-
-	/**
-	 * Get serialized claims and add them to result
-	 *
-	 * @since 0.5
-	 *
-	 * @param array $claims the labels to set in the result
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
-	 */
+	/** @deprecated */
 	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$claimSerializer = new ClaimsSerializer( $options );
-
-		$value = $claimSerializer->getSerialized( new Claims( $claims ) );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addClaims( $claims, $path, $name, $tag );
 	}
 
 	/**
@@ -344,8 +215,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @return \Wikibase\EntityContent the revision's content.
 	 */
 	protected function loadEntityContent( \Title $title, $revId = false,
-		$audience = \Revision::FOR_PUBLIC,
-		\User $user = null
+										  $audience = \Revision::FOR_PUBLIC,
+										  \User $user = null
 	) {
 		if ( $revId === null || $revId === false || $revId === 0 ) {
 			$page = \WikiPage::factory( $title );
