@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29433135_5d6bb9b8",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 38
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-10-02T18:26:24Z",
+      "side": 1,
+      "message": "Was \"Item\" supposed to be written with a capital in these two newly added messages? Seems to be incorrect.",
+      "revId": "03386fd8b2dcdfcd864b78b498a55497f1193472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
