@@ -1120,8 +1120,6 @@ Parameters:
 	'wikibase-item-summary-wbsetstatementrank' => 'Automatic edit summary when changing the rank of a statement. Parameters:
 * $3 is the old rank
 * $4 is the new rank',
-	'wikibase-item-summary-wbmergeitems-from' => 'Automatic edit summary generated when merging items. This summary is used for the entity that is being merged to!',
-	'wikibase-item-summary-wbmergeitems-to' => 'Automatic edit summary generated when merging items. This summary is used for the entity that is being merged from!',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
