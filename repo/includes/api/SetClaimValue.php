@@ -3,7 +3,6 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\Entity;
 use Wikibase\ChangeOpMainSnak;
 use Wikibase\ChangeOpException;
 use Wikibase\Lib\ClaimGuidGenerator;

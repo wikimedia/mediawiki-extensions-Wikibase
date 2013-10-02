@@ -2,11 +2,8 @@
 
 namespace Wikibase\Api;
 
-use Status;
-use User;
-use Title;
+use Status, User, Title;
 use ApiBase;
-use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\ItemHandler;
