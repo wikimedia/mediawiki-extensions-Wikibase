@@ -335,6 +335,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$3|reference|references}} from claim',
 	'wikibase-item-summary-wbsetstatementrank' => 'Changed rank of statement from \'$3\' to \'$4\'',
+	'wikibase-item-summary-wbmergeitems-from' => 'Merged Item from \'$3\'',
+	'wikibase-item-summary-wbmergeitems-to' => 'Merged Item in to \'$3\'',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -1118,6 +1120,8 @@ Parameters:
 	'wikibase-item-summary-wbsetstatementrank' => 'Automatic edit summary when changing the rank of a statement. Parameters:
 * $3 is the old rank
 * $4 is the new rank',
+	'wikibase-item-summary-wbmergeitems-from' => 'Automatic edit summary generated when merging items. This summary is used for the entity that is being merged to!',
+	'wikibase-item-summary-wbmergeitems-to' => 'Automatic edit summary generated when merging items. This summary is used for the entity that is being merged from!',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
