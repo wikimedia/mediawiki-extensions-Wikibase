@@ -8,7 +8,6 @@ use InvalidArgumentException;
  * Base class for change operations.
  *
  * @since 0.4
- *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */

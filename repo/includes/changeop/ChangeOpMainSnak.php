@@ -11,7 +11,6 @@ use Wikibase\Lib\EntityIdFormatter;
  * Class for mainsnak change operation
  *
  * @since 0.4
- *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
