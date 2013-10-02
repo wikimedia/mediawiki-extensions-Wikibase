@@ -5,10 +5,10 @@
 // It might well be removed at a future point.
 
 // Config:
-// wgWikibaseRepoEnable - defaults to true
+// wgEnableWikibaseRepo - defaults to true
 // wgEnableWikibaseClient - defaults to true
 
-if ( !array_key_exists( 'wgWikibaseRepoEnable', $GLOBALS ) || $GLOBALS['wgWikibaseRepoEnable'] ) {
+if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
 	require_once __DIR__ . '/repo/Wikibase.php';
 }
 
