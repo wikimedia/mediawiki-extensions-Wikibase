@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29433135_f9ab9a88",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T17:06:35Z",
+      "side": 1,
+      "message": "I think we agreed on one Class per line and \"use\" clause, no?",
+      "revId": "eb4da18886ee75812d8cb20c1d1f96d4bce71c32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
