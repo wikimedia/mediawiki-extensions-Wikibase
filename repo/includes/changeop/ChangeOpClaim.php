@@ -8,6 +8,7 @@ use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * Class for claim modification operations
+ *
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Adam Shorland

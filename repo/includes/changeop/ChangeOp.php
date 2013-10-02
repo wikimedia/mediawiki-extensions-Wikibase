@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use InvalidArgumentException;
 
 /**
  * @since 0.5
