@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29433135_fe69c0fa",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T15:42:14Z",
+      "side": 1,
+      "message": "\"no entity found\" is misleading. the id is invalid, that\u0027s it.",
+      "revId": "837c78f8116e3f300bd00cbeab0d22660f0a2422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_de640426",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T15:42:14Z",
+      "side": 1,
+      "message": "\"Srialization\"",
+      "revId": "837c78f8116e3f300bd00cbeab0d22660f0a2422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_be48188d",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T15:42:14Z",
+      "side": 1,
+      "message": "Is this only done to check whether the badge exists?Just use $itemTitle-\u003eexists(), that\u0027s a lot more efficient, since it just checks whether the page is there, but doesn\u0027t load it. Loading page content is a very expensive operation.",
+      "revId": "837c78f8116e3f300bd00cbeab0d22660f0a2422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_3e5d0846",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T15:42:14Z",
+      "side": 1,
+      "message": "isset( $params[\u0027badges\u0027] ) does the same thing and is easier to read, i think.",
+      "revId": "837c78f8116e3f300bd00cbeab0d22660f0a2422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_fe3b80e6",
+        "filename": "repo/includes/changeop/ChangeOpSiteLink.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T15:42:14Z",
+      "side": 1,
+      "message": "That\u0027s a core restriction (the /* foo */ stuff is a core feature), and unlikely to change since there\u0027s a hard limit of 255 bytes on the summary, imposed by the database schema.",
+      "revId": "837c78f8116e3f300bd00cbeab0d22660f0a2422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
