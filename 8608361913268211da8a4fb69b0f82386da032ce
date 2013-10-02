@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29433135_5e39f43b",
+        "filename": "repo/includes/changeop/ChangeOpReference.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-02T15:02:37Z",
+      "side": 1,
+      "message": "Please to not use relative names",
+      "revId": "8608361913268211da8a4fb69b0f82386da032ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_7e46b0c4",
+        "filename": "repo/includes/changeop/ChangeOpStatementRank.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-02T15:02:37Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "8608361913268211da8a4fb69b0f82386da032ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
