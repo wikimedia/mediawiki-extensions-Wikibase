@@ -29,30 +29,11 @@ use Wikibase\Lib\MwTimeIsoFormatter;
  * Base class for creating views for all different kinds of Wikibase\Entity.
  * For the Wikibase\Entity this basically is what the Parser is for WikitextContent.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @since 0.1
- *
  * @todo  We might want to re-design this at a later point, designing this as a more generic and encapsulated rendering
  *        of DataValue instances instead of having functions here for generating different parts of the HTML. Right now
  *        these functions require an EntityRevision while a DataValue (if it were implemented) should be sufficient.
  *
- * @file
- * @ingroup WikibaseRepo
- *
+ * @since 0.1
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  * @author Daniel Werner
@@ -75,7 +56,7 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * @var EntityRevisionLookup
 	 */
-	protected $entityLookup;
+	protected $entityRevisionLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -114,7 +95,7 @@ abstract class EntityView extends \ContextSource {
 	 * @param IContextSource|null        $context
 	 * @param ValueFormatterFactory      $valueFormatters
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityRevisionLookup       $entityLookup
+	 * @param EntityRevisionLookup       $entityRevisionLookup
 	 * @param EntityTitleLookup          $entityTitleLookup
 	 * @param Lib\EntityIdFormatter      $idFormatter
 	 * @param LanguageFallbackChain      $languageFallbackChain
@@ -123,7 +104,7 @@ abstract class EntityView extends \ContextSource {
 		IContextSource $context,
 		ValueFormatterFactory $valueFormatters,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityRevisionLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdFormatter $idFormatter,
 		LanguageFallbackChain $languageFallbackChain
@@ -131,7 +112,7 @@ abstract class EntityView extends \ContextSource {
 		$this->setContext( $context );
 		$this->valueFormatters = $valueFormatters;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->idFormatter = $idFormatter;
 		$this->languageFallbackChain = $languageFallbackChain;
@@ -522,7 +503,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return null|Entity
 	 */
 	private function getEntity( EntityId $id ) {
-		$revision = $this->entityLookup->getEntityRevision( $id );
+		$revision = $this->entityRevisionLookup->getEntityRevision( $id );
 		return $revision === null ? null : $revision->getEntity();
 	}
 
@@ -538,7 +519,7 @@ abstract class EntityView extends \ContextSource {
 
 		foreach ( $ids as $id ) {
 			$key = $id->getPrefixedId();
-			$revision = $this->entityLookup->getEntityRevision( $id );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $id );
 			$revisions[$key] = $revision;
 		}
 
@@ -916,7 +897,11 @@ abstract class EntityView extends \ContextSource {
 		$revisions = $this->getEntityRevisions( $entityIds );
 		$entityInfo = array();
 
-		$serializer = EntityRevisionSerializer::newForFrontendStore( $this->entityTitleLookup, $langCode, $this->languageFallbackChain );
+		$serializer = EntityRevisionSerializer::newForFrontendStore(
+			$this->entityTitleLookup,
+			$langCode,
+			$this->languageFallbackChain
+		);
 
 		foreach( $revisions as $prefixedId => $revision ) {
 			if( $revision === null ) {
@@ -938,7 +923,7 @@ abstract class EntityView extends \ContextSource {
 	 * @param string $type The entity type, e.g. Item::ENTITY_TYPE.
 	 * @param ValueFormatterFactory $valueFormatters
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityRevisionLookup $entityLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param IContextSource|null $context
 	 * @param LanguageFallbackChain|null $languageFallbackChain Overrides any language fallback chain created inside, for testing
@@ -950,7 +935,7 @@ abstract class EntityView extends \ContextSource {
 		$type,
 		ValueFormatterFactory $valueFormatters,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityRevisionLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
@@ -981,7 +966,7 @@ abstract class EntityView extends \ContextSource {
 			$context,
 			$valueFormatters,
 			$dataTypeLookup,
-			$entityLookup,
+			$entityRevisionLookup,
 			$entityTitleLookup,
 			$idFormatter,
 			$languageFallbackChain

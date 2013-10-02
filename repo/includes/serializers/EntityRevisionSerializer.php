@@ -4,7 +4,6 @@ namespace Wikibase\Serializers;
 
 use ApiResult;
 use InvalidArgumentException;
-use Content;
 use MWException;
 use Wikibase\Entity;
 use Wikibase\EntityRevision;

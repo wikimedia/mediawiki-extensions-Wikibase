@@ -28,11 +28,7 @@ use Wikibase\PropertyValueSnak;
 /**
  * @covers Wikibase\EntityView
  *
- * @file
  * @since 0.4
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -66,14 +62,14 @@ class EntityViewTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $entityType
-	 * @param EntityRevisionLookup $entityLoader
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param \IContextSource $context
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 *
 	 * @return EntityView
 	 */
-	protected function newEntityView( $entityType, EntityRevisionLookup $entityLoader = null,
+	protected function newEntityView( $entityType, EntityRevisionLookup $entityRevisionLookup = null,
 		EntityTitleLookup $entityTitleLookup = null, \IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
 	) {
@@ -82,8 +78,8 @@ class EntityViewTest extends \MediaWikiTestCase {
 		}
 
 		$valueFormatters = new ValueFormatterFactory( array() );
-		if ( !$entityLoader ) {
-			$entityLoader = new MockRepository();
+		if ( !$entityRevisionLookup ) {
+			$entityRevisionLookup = new MockRepository();
 		}
 
 		if ( !$entityTitleLookup ) {
@@ -106,7 +102,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 			$entityType,
 			$valueFormatters,
 			$dataTypeLookup,
-			$entityLoader,
+			$entityRevisionLookup,
 			$entityTitleLookup,
 			$context,
 			$languageFallbackChain
@@ -318,7 +314,14 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
 		// test whether we get the right EntityView from an EntityRevision
-		$view = EntityView::newForEntityType( $entityRevision->getEntity()->getType(), $valueFormatters, $dataTypeLookup, $entityLoader, $entityTitleLookup );
+		$view = EntityView::newForEntityType(
+			$entityRevision->getEntity()->getType(),
+			$valueFormatters,
+			$dataTypeLookup,
+			$entityLoader,
+			$entityTitleLookup
+		);
+
 		$this->assertInstanceOf(
 			EntityView::$typeMap[ $entityRevision->getEntity()->getType() ],
 			$view
@@ -335,12 +338,19 @@ class EntityViewTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideRegisterJsConfigVars
 	 */
-	public function testRegisterJsConfigVars( EntityRevision $entityRevision, EntityRevisionLookup $entityLoader,
+	public function testRegisterJsConfigVars( EntityRevision $entityRevision, EntityRevisionLookup $entityRevisionLookup,
 		$context, LanguageFallbackChain $languageFallbackChain, $langCode, $editableView, $expected
 	) {
 		$this->setMwGlobals( 'wgLang', Language::factory( "en" ) );
 
-		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType(), $entityLoader, $this->getEntityTitleLookupMock(), $context, $languageFallbackChain );
+		$entityView = $this->newEntityView(
+			$entityRevision->getEntity()->getType(),
+			$entityRevisionLookup,
+			$this->getEntityTitleLookupMock(),
+			$context,
+			$languageFallbackChain
+		);
+
 		$out = new \OutputPage( new \RequestContext() );
 		$entityView->registerJsConfigVars( $out, $entityRevision, $langCode, $editableView );
 		$actual = array_intersect_key( $out->mJsConfigVars, $expected );
