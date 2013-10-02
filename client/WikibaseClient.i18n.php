@@ -1846,6 +1846,7 @@ $messages['hu'] = array(
 	'wikibase-comment-sitelink-change' => 'Nyelvközi hivatkozás módosítása (régi: $1, új: $2)',
 	'wikibase-comment-sitelink-remove' => 'Nyelvközi hivatkozás törlése: $1',
 	'wikibase-comment-multi' => '$1 változtatás', # Fuzzy
+	'wikibase-dataitem' => 'Kapcsolódó adatok',
 	'wikibase-editlinks' => 'szerkesztés',
 	'wikibase-editlinkstitle' => 'Nyelvközi hivatkozások szerkesztése',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',

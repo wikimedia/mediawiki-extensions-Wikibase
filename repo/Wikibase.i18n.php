@@ -12956,7 +12956,7 @@ $messages['pms'] = array(
 $messages['ps'] = array(
 	'wikibase-edit' => 'سمول',
 	'wikibase-save' => 'خوندي کول',
-	'wikibase-cancel' => 'ناګارل',
+	'wikibase-cancel' => 'ناگارل',
 	'wikibase-add' => 'ورګډول',
 	'wikibase-save-inprogress' => 'خوندي کېدنې کې دی...',
 	'wikibase-sitelink-site-edit-placeholder' => 'وېبځی',
@@ -12966,7 +12966,7 @@ $messages['ps'] = array(
 	'wikibase-itembytitle-submit' => 'پلټل',
 	'wikibase-itemdisambiguation-lookup-language' => 'ژبه:',
 	'wikibase-itemdisambiguation-submit' => 'پلټل',
-	'wikibase-newentity-description' => 'څرګندونه:',
+	'wikibase-newentity-description' => 'څرگندونه:',
 	'wikibase-newentity-submit' => 'جوړول',
 	'wikibase-setentity-id' => 'پېژند:',
 	'wikibase-setentity-language' => 'ژبه:',
@@ -14218,6 +14218,14 @@ $messages['sk'] = array(
 	'wikibase-itemdisambiguation-submit' => 'Hľadať',
 	'wikibase-newproperty-datatype' => 'Typ údaju:',
 	'special-newitem' => 'Vytvoriť novú položku',
+);
+
+/** Slovenian (slovenščina)
+ * @author Eleassar
+ */
+$messages['sl'] = array(
+	'wikibase-move-up' => 'premakni gor',
+	'wikibase-move-down' => 'premakni dol',
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
