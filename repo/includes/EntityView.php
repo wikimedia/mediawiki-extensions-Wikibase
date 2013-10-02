@@ -13,6 +13,7 @@ use OutputPage;
 use MediaWikiSite;
 use MWException;
 use FormatJson;
+use User;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
@@ -407,12 +408,11 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Entity $entity
-	 * @param \Language $lang
-	 * @param \User $user
-	 * @return string[] selected langcodes
+	 * @param Language $lang
+	 * @param User $user
+	 * @return string[] Selected language codes
 	 */
-	private function selectTerms( Entity $entity, \Language $lang, \User $user ) {
+	private function getExtraUserLanguages( Language $lang , User $user ) {
 		wfProfileIn( __METHOD__ );
 		$result = array();
 
@@ -438,8 +438,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForLanguageTerms( Entity $entity, \Language $lang, $editable = true ) {
-
-		$languages = $this->selectTerms( $entity, $lang, $this->getUser() );
+		$languages = $this->getExtraUserLanguages( $lang, $this->getUser() );
 		if ( count ( $languages ) === 0 ) {
 			return '';
 		}
@@ -453,7 +452,7 @@ abstract class EntityView extends \ContextSource {
 
 		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
 
-		$languages = $this->selectTerms( $entity, $lang, $this->getUser() );
+		$languages = $this->getExtraUserLanguages( $lang, $this->getUser() );
 
 		$specialLabelPage = \SpecialPageFactory::getPage( "SetLabel" );
 		$specialDescriptionPage = \SpecialPageFactory::getPage( "SetDescription" );
