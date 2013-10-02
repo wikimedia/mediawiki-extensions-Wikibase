@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "29433135_1e620c3f",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T15:14:16Z",
+      "side": 1,
+      "message": "Perhaps allow this setting (and other settings) to be overwritten via a setter, so test cases can work on a well known configuration.",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_3ed8a8ed",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-02T15:14:16Z",
+      "side": 1,
+      "message": "if the message isn\u0027t defined, we should fall back to the wiki\u0027s global ID.",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_72f12969",
         "filename": "repo/includes/ItemView.php",
         "patchSetId": 8
