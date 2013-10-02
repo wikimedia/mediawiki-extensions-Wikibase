@@ -26,13 +26,6 @@ use Wikibase\Lib\SnakFormatter;
 class ClaimDifferenceVisualizer {
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var string
-	 */
-	private $langCode;
-
-	/**
 	 * @since 0.5
 	 *
 	 * @var EntityIdLabelFormatter
