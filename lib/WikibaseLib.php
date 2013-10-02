@@ -79,6 +79,11 @@ if ( !defined( 'VALUEVIEW_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../DataValues/ValueView/ValueView.php' );
 }
 
+// Include the ValueView library if that hasn't been done yet.
+if ( !defined( 'VALUEVIEW_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../../data-values/data-values/ValueView/ValueView.php' );
+}
+
 // Include the DataTypes library if that hasn't been done yet.
 if ( !defined( 'DataTypes_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../DataTypes/DataTypes.php' );
