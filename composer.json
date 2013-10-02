@@ -27,8 +27,7 @@
 	"minimum-stability" : "dev",
 	"autoload": {
 		"files" : [
-			"repo/Wikibase.php",
-			"client/WikibaseClient.php"
+			"Wikibase.composer.php"
 		]
 	}
 }
