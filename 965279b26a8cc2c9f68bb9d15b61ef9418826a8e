@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "29433135_b97672a1",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpsMergeTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-02T15:56:53Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "4946a543_eacac76e",
+      "revId": "965279b26a8cc2c9f68bb9d15b61ef9418826a8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_0ac8f374",
         "filename": "repo/tests/phpunit/includes/changeop/ChangeOpsMergeTest.php",
         "patchSetId": 26
@@ -64,6 +82,24 @@
       "writtenOn": "2013-09-17T16:09:01Z",
       "side": 1,
       "message": "is $expectedFromData ever different from $fromData? Is there any reason to believe it ever changes? Or is it included in the test to make sure it doesn\u0027t change?",
+      "revId": "965279b26a8cc2c9f68bb9d15b61ef9418826a8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_f970faa6",
+        "filename": "repo/tests/phpunit/includes/changeop/ChangeOpsMergeTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-02T15:56:53Z",
+      "side": 1,
+      "message": "As defined in the data provider, $expectedFromData is always different to $fromData.",
+      "parentUuid": "4946a543_0ac8f374",
       "revId": "965279b26a8cc2c9f68bb9d15b61ef9418826a8e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
