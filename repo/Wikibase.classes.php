@@ -105,8 +105,8 @@ return call_user_func( function() {
 		'Wikibase\Api\ClaimModificationHelper' => 'includes/api/ClaimModificationHelper.php',
 
 		// includes/serializers
-		'Wikibase\Serializers\FetchedEntityContentSerializer' => 'includes/serializers/FetchedEntityContentSerializer.php',
-		'Wikibase\Serializers\FetchedEntityContentSerializationOptions' => 'includes/serializers/FetchedEntityContentSerializationOptions.php',
+		'Wikibase\Serializers\EntityRevisionSerializer' => 'includes/serializers/EntityRevisionSerializer.php',
+		'Wikibase\Serializers\EntityRevisionSerializationOptions' => 'includes/serializers/EntityRevisionSerializationOptions.php',
 
 		// includes/content
 		'Wikibase\EntityContent' => 'includes/content/EntityContent.php',
@@ -187,6 +187,7 @@ return call_user_func( function() {
 		'Wikibase\Test\PermissionsHelper' => 'tests/phpunit/includes/PermissionsHelper.php',
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',
+		'Wikibase\Test\EntityViewTest' => 'tests/phpunit/includes/EntityViewTest.php',
 		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/rdf/RdfBuilderTest.php',
 
 		'MessageReporter' => 'includes/MessageReporter.php',

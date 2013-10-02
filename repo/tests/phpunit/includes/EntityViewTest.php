@@ -11,18 +11,16 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\EntityLookup;
+use Wikibase\Entity;
+use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
 use Wikibase\Item;
-use Wikibase\ItemContent;
-use Wikibase\ItemHandler;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Property;
-use Wikibase\PropertyContent;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -49,12 +47,47 @@ use Wikibase\PropertyValueSnak;
  */
 class EntityViewTest extends \MediaWikiTestCase {
 
-	protected function newEntityView( EntityContent $entityContent, EntityLookup $entityLoader = null,
-		\IContextSource $context = null, LanguageFallbackChain $languageFallbackChain = null
+	public function getTitleForId( EntityId $id ) {
+		$name = $id->getEntityType() . ':' . $id->getPrefixedId();
+		return Title::makeTitle( NS_MAIN, $name );
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	protected function getEntityTitleLookupMock() {
+		$lookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$lookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
+
+		return $lookup;
+	}
+
+	/**
+	 * @param string $entityType
+	 * @param EntityRevisionLookup $entityLoader
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param \IContextSource $context
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 *
+	 * @return EntityView
+	 */
+	protected function newEntityView( $entityType, EntityRevisionLookup $entityLoader = null,
+		EntityTitleLookup $entityTitleLookup = null, \IContextSource $context = null,
+		LanguageFallbackChain $languageFallbackChain = null
 	) {
+		if ( !is_string( $entityType ) ) {
+			throw new \InvalidArgumentException( '$entityType must be a string!' );
+		}
+
 		$valueFormatters = new ValueFormatterFactory( array() );
 		if ( !$entityLoader ) {
 			$entityLoader = new MockRepository();
+		}
+
+		if ( !$entityTitleLookup ) {
+			$entityTitleLookup = $this->getEntityTitleLookupMock();
 		}
 
 		$p11 = new PropertyId( 'p11' );
@@ -69,11 +102,12 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( $p11, 'wikibase-item' );
 		$dataTypeLookup->setDataTypeForProperty( $p44, 'wikibase-item' );
 
-		$entityView = EntityView::newForEntityContent(
-			$entityContent,
+		$entityView = EntityView::newForEntityType(
+			$entityType,
 			$valueFormatters,
 			$dataTypeLookup,
 			$entityLoader,
+			$entityTitleLookup,
 			$context,
 			$languageFallbackChain
 		);
@@ -81,15 +115,26 @@ class EntityViewTest extends \MediaWikiTestCase {
 		return $entityView;
 	}
 
-	protected function newEntityContentForClaims( $claims ) {
+	/**
+	 * @param Claim[] $claims
+	 *
+	 * @return EntityRevision
+	 */
+	protected function newEntityRevisionForClaims( $claims ) {
+		static $revId = 1234;
+		$revId++;
+
 		$entity = Item::newEmpty();
+		$entity->setId( new ItemId( "Q$revId" ) );
 
 		foreach ( $claims as $claim ) {
 			$entity->addClaim( $claim );
 		}
 
-		$content = EntityContentFactory::singleton()->newFromEntity( $entity );
-		return $content;
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $entity, $revId, $timestamp );
+
+		return $revision;
 	}
 
 	/**
@@ -98,16 +143,17 @@ class EntityViewTest extends \MediaWikiTestCase {
 	public function getHtmlForClaimsProvider() {
 		$argLists = array();
 
-		$itemContent = ItemContent::newEmpty();
-		$itemContent->getEntity()->addClaim(
-			new Claim(
-				new PropertyNoValueSnak(
-					new PropertyId( 'p24' )
-				)
+		$claim = new Claim(
+			new PropertyNoValueSnak(
+				new PropertyId( 'p24' )
 			)
 		);
 
-		$argLists[] = array( $itemContent );
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q96' ) );
+		$item->addClaim( $claim );
+
+		$argLists[] = array( $item );
 
 		return $argLists;
 	}
@@ -115,10 +161,12 @@ class EntityViewTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getHtmlForClaimsProvider
 	 *
-	 * @param EntityContent $entityContent
+	 * @param Entity $entity
 	 */
-	public function testGetHtmlForClaims( EntityContent $entityContent ) {
-		$entityView = $this->newEntityView( $entityContent );
+	public function testGetHtmlForClaims( Entity $entity ) {
+		$entityView = $this->newEntityView( $entity->getType() );
+
+		$lang = Language::factory( 'en' );
 
 		// Using a DOM document to parse HTML output:
 		$doc = new \DOMDocument();
@@ -127,7 +175,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 		libxml_use_internal_errors( true );
 
 		// Try loading the HTML:
-		$this->assertTrue( $doc->loadHTML( $entityView->getHtmlForClaims( $entityContent ) ) );
+		$this->assertTrue( $doc->loadHTML( $entityView->getHtmlForClaims( $entity, $lang ) ) );
 
 		// Check if no warnings have been thrown:
 		$errorString = '';
@@ -149,17 +197,15 @@ class EntityViewTest extends \MediaWikiTestCase {
 	 * @param EntityId[] $expectedLinks
 	 */
 	public function testParserOutputLinks( array $claims, $expectedLinks ) {
-		$entityContent = $this->newEntityContentForClaims( $claims );
-		$entityView = $this->newEntityView( $entityContent );
+		$entityRevision = $this->newEntityRevisionForClaims( $claims );
+		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
 
-		$out = $entityView->getParserOutput( $entityContent, null, false );
+		$out = $entityView->getParserOutput( $entityRevision, null, false );
 		$links = $out->getLinks();
 
 		// convert expected links to link structure
-		$contentFactory = EntityContentFactory::singleton();
-
 		foreach ( $expectedLinks as $entityId ) {
-			$title = $contentFactory->getTitleForId( $entityId );
+			$title = $this->getTitleForId( $entityId );
 			$ns = $title->getNamespace();
 			$dbk = $title->getDBkey();
 
@@ -218,10 +264,10 @@ class EntityViewTest extends \MediaWikiTestCase {
 	 * @param string[] $expectedLinks
 	 */
 	public function testParserOutputExternalLinks( array $claims, $expectedLinks ) {
-		$entityContent = $this->newEntityContentForClaims( $claims );
-		$entityView = $this->newEntityView( $entityContent );
+		$entityRevision = $this->newEntityRevisionForClaims( $claims );
+		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
 
-		$out = $entityView->getParserOutput( $entityContent, null, false );
+		$out = $entityView->getParserOutput( $entityRevision, null, false );
 		$links = $out->getExternalLinks();
 
 		$expectedLinks = array_values( $expectedLinks );
@@ -263,39 +309,40 @@ class EntityViewTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider providerNewForEntityContent
+	 * @dataProvider providerNewForEntityRevision
 	 */
-	public function testNewForEntityContent( EntityContent $entityContent ) {
+	public function testNewForEntityRevision( EntityRevision $entityRevision ) {
 		$valueFormatters = new ValueFormatterFactory( array() );
 		$dataTypeLookup = new InMemoryDataTypeLookup( array() );
 		$entityLoader = new MockRepository();
+		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
-		// test whether we get the right EntityView from an EntityContent
-		$view = EntityView::newForEntityContent( $entityContent, $valueFormatters, $dataTypeLookup, $entityLoader );
+		// test whether we get the right EntityView from an EntityRevision
+		$view = EntityView::newForEntityType( $entityRevision->getEntity()->getType(), $valueFormatters, $dataTypeLookup, $entityLoader, $entityTitleLookup );
 		$this->assertInstanceOf(
-			EntityView::$typeMap[ $entityContent->getEntity()->getType() ],
+			EntityView::$typeMap[ $entityRevision->getEntity()->getType() ],
 			$view
 		);
 	}
 
-	public static function providerNewForEntityContent() {
+	public static function providerNewForEntityRevision() {
 		return array(
-			array( ItemContent::newEmpty() ),
-			array( PropertyContent::newEmpty() )
+			array( new EntityRevision( Item::newEmpty(), 23, '20130102030405' ) ),
+			array( new EntityRevision( Property::newEmpty(), 42, '20130102030405' ) )
 		);
 	}
 
 	/**
 	 * @dataProvider provideRegisterJsConfigVars
 	 */
-	public function testRegisterJsConfigVars( EntityContent $entityContent, EntityLookup $entityLoader,
+	public function testRegisterJsConfigVars( EntityRevision $entityRevision, EntityRevisionLookup $entityLoader,
 		$context, LanguageFallbackChain $languageFallbackChain, $langCode, $editableView, $expected
 	) {
 		$this->setMwGlobals( 'wgLang', Language::factory( "en" ) );
 
-		$entityView = $this->newEntityView( $entityContent, $entityLoader, $context, $languageFallbackChain );
+		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType(), $entityLoader, $this->getEntityTitleLookupMock(), $context, $languageFallbackChain );
 		$out = new \OutputPage( new \RequestContext() );
-		$entityView->registerJsConfigVars( $out, $entityContent, $langCode, $editableView );
+		$entityView->registerJsConfigVars( $out, $entityRevision, $langCode, $editableView );
 		$actual = array_intersect_key( $out->mJsConfigVars, $expected );
 
 		ksort( $expected );
@@ -305,7 +352,6 @@ class EntityViewTest extends \MediaWikiTestCase {
 	}
 
 	public function provideRegisterJsConfigVars() {
-		$entityContentFactory = EntityContentFactory::singleton();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 
 		$argLists = array();
@@ -314,15 +360,12 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$entity->setLabel( 'de', 'foo' );
 		$entity->setId( 27449 );
 
-		$content = $entityContentFactory->newFromEntity( $entity );
-
 		$q98 = new ItemId( 'Q27498' );
 		$entityQ98 = Item::newEmpty();
 		$entityQ98->setLabel( 'de', 'bar' );
 		$entityQ98->setId( $q98 );
 
-		$itemHandler = new ItemHandler();
-		$itemTitle = Title::makeTitle( $itemHandler->getEntityNamespace(), 'Q27498' );
+		$itemTitle = $this->getTitleForId( $q98 );
 		$titleText = $itemTitle->getPrefixedText();
 
 		$entityLoader = new MockRepository();
@@ -332,11 +375,13 @@ class EntityViewTest extends \MediaWikiTestCase {
 
 		$entity->addClaim( new Claim( new PropertyValueSnak( $p11, new EntityIdValue( $q98 ) ) ) );
 
+		$revision = new EntityRevision( $entity, 1234567, '20130505333333' );
+
 		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguageCode(
 			'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL
 		); // with fallback to German
 
-		$argLists[] = array( $content, $entityLoader, null, $languageFallbackChain, 'fr', true, array(
+		$argLists[] = array( $revision, $entityLoader, null, $languageFallbackChain, 'fr', true, array(
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'français',
 			'wbEntityId' => 'Q27449',
@@ -348,7 +393,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 			'de-formal', LanguageFallbackChainFactory::FALLBACK_SELF
 		); // with no fallback
 
-		$argLists[] = array( $content, $entityLoader, null, $languageFallbackChain, 'nl', true, array(
+		$argLists[] = array( $revision, $entityLoader, null, $languageFallbackChain, 'nl', true, array(
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'Nederlands',
 			'wbEntityId' => 'Q27449',

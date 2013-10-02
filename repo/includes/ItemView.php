@@ -23,11 +23,11 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$html = parent::getInnerHtml( $entity, $lang, $editable );
+	public function getInnerHtml( EntityRevision $entityRevision, Language $lang, $editable = true ) {
+		$html = parent::getInnerHtml( $entityRevision, $lang, $editable );
 
 		// add site-links to default entity stuff
-		$html .= $this->getHtmlForSiteLinks( $entity, $lang, $editable );
+		$html .= $this->getHtmlForSiteLinks( $entityRevision->getEntity(), $lang, $editable );
 
 		return $html;
 	}
@@ -37,17 +37,18 @@ class ItemView extends EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $itemContent the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Item $item the entity to render
+	 * @param \Language $lang the language to use for rendering.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
+	public function getHtmlForSiteLinks( Item $item, Language $lang, $editable = true ) {
 		$groups = Settings::get( "siteLinkGroups" );
 		$html = '';
 
 		foreach ( $groups as $group ) {
-			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $lang, $editable );
+			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $lang, $editable, $lang );
 		}
 
 		return $html;
@@ -58,17 +59,14 @@ class ItemView extends EntityView {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $itemContent the entity to render
+	 * @param Item $item the entity to render
 	 * @param string $group a site group ID
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForSiteLinkGroup( EntityContent $itemContent, $group, Language $lang = null, $editable = true ) {
-		/**
-		 * @var ItemContent $itemContent
-		 */
-		$allSiteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+	public function getHtmlForSiteLinkGroup( Item $item, $group, Language $lang, $editable = true ) {
+		$allSiteLinks = $item->getSimpleSiteLinks();
 
 		$siteLinks = array(); // site links of the currently handled site group
 
@@ -123,8 +121,9 @@ class ItemView extends EntityView {
 		}
 
 		// Link to SpecialPage
-		$editLink = $this->getEditUrl( 'SetSiteLink', $itemContent->getEntity() );
+		$editLink = $this->getEditUrl( 'SetSiteLink', $item, $lang );
 
+		/* @var SiteLink $link */
 		foreach( $siteLinks as $link ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
@@ -138,7 +137,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					htmlspecialchars( $link->getSite()->getGlobalId() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $itemContent, $lang, $editLink, 'td' )
+					$this->getHtmlForEditSection( $item, $lang, $editLink, 'td' )
 				);
 
 			} else {
@@ -155,7 +154,7 @@ class ItemView extends EntityView {
 					$escapedSiteId, // displayed site ID
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $itemContent, $lang, $editLink . '/' . $escapedSiteId, 'td' ),
+					$this->getHtmlForEditSection( $item, $lang, $editLink . '/' . $escapedSiteId, 'td' ),
 					$escapedSiteId // ID used in classes
 				);
 			}
@@ -166,7 +165,7 @@ class ItemView extends EntityView {
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			$this->getHtmlForEditSection( $itemContent, $lang, $editLink, 'td', 'add', !$isFull )
+			$this->getHtmlForEditSection( $item, $lang, $editLink, 'td', 'add', !$isFull )
 		);
 
 		return $html . wfTemplate(

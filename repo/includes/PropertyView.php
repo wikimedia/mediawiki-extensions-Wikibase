@@ -39,21 +39,28 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 *
-	 * @param EntityContent $propertyContent
-	 * @param \Language|null $lang
+	 * @param EntityRevision $propertyRevision
+	 * @param \Language $lang
 	 * @param bool $editable
+	 *
+	 * @throws \InvalidArgumentException
 	 * @return string
 	 */
-	public function getInnerHtml( EntityContent $propertyContent, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityRevision $propertyRevision, Language $lang, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$html = parent::getInnerHtml( $propertyContent, $lang, $editable );
+		$property = $propertyRevision->getEntity();
 
-		/**
-		 * @var PropertyContent $propertyContent
-		 */
+		if ( !( $property instanceof Property ) ) {
+			throw new \InvalidArgumentException( '$propertyRevision must contain a Property' );
+		}
+
+		/* @var Property $property */
+
+		$html = parent::getInnerHtml( $propertyRevision, $lang, $editable );
+
 		$html .= $this->getHtmlForDataType(
-			$this->getDataType( $propertyContent ),
+			$this->getDataType( $property ),
 			$lang,
 			$editable
 		);
@@ -76,9 +83,9 @@ class PropertyView extends EntityView {
 		return $html;
 	}
 
-	protected function getDataType( PropertyContent $content ) {
+	protected function getDataType( Property $property ) {
 		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
-			->getType( $content->getProperty()->getDataTypeId() );
+			->getType( $property->getDataTypeId() );
 	}
 
 	/**
@@ -87,12 +94,12 @@ class PropertyView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param DataType $dataType the data type to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Language $lang the language to use for rendering.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForDataType( DataType $dataType, Language $lang = null, $editable = true ) {
+	protected function getHtmlForDataType( DataType $dataType, Language $lang, $editable = true ) {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
