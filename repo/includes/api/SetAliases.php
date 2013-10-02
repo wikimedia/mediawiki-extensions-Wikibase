@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use Wikibase\ChangeOps;
 use ApiBase, User, Language;
-use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
 use Wikibase\ChangeOpAliases;

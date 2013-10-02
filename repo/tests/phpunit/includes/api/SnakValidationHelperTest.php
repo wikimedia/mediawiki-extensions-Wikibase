@@ -4,9 +4,7 @@ namespace Wikibase\Test;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
-use DataValues\DataValue;
 use DataValues\StringValue;
-use ValueValidators\StringValidator;
 use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
@@ -17,11 +15,9 @@ use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
 use Wikibase\ReferenceList;
-use Wikibase\References;
 use Wikibase\Snak;
 use Wikibase\SnakList;
 use Wikibase\Statement;
-use Wikibase\Validators\DataValueValidator;
 use Wikibase\Validators\SnakValidator;
 
 /**

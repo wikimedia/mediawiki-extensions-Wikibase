@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use Wikibase\ChangeOpSiteLink;
 use ApiBase, User;
-use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Utils;

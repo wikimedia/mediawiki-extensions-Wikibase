@@ -1,9 +1,9 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
 use Wikibase\PropertyContent;
 use Wikibase\Reference;
-use Wikibase\Statement;
 
 /**
  * Unit tests for the Wikibase\ApiSetReference class.
