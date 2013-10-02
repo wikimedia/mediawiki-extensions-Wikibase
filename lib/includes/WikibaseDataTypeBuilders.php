@@ -4,10 +4,8 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use Parser;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
