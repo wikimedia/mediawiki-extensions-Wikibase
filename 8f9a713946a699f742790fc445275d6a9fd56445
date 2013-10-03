@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29433135_c38b5117",
+        "filename": "lib/includes/Validators/NumberRangeValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-03T21:07:53Z",
+      "side": 1,
+      "message": "just style preference thing, I would put the namespaces and use stuff at the top, above the docs",
+      "revId": "8f9a713946a699f742790fc445275d6a9fd56445",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29433135_8379492e",
+        "filename": "lib/includes/Validators/NumberRangeValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-03T21:07:53Z",
+      "side": 1,
+      "message": "ahem... :)",
+      "revId": "8f9a713946a699f742790fc445275d6a9fd56445",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_ea5ca724",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-03T21:07:53Z",
+      "side": 1,
+      "message": "I am concerned about this restriction, but can understand the arguments for adding the restriction for precision.",
+      "revId": "8f9a713946a699f742790fc445275d6a9fd56445",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
