@@ -4102,6 +4102,7 @@ $messages['zh-hans'] = array(
  * @author Justincheng12345
  * @author Li3939108
  * @author Liangent
+ * @author Liuxinyu970226
  * @author Simon Shek
  * @author Stevenliuyi
  * @author Tntchn
@@ -4143,6 +4144,8 @@ $messages['zh-hant'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase尚未支援$1屬性。',
 	'wikibase-rc-hide-wikidata' => '$1維基數據',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中顯示維基數據的編輯',
+	'wikibase-rc-wikibase-edit-letter' => '編',
+	'wikibase-rc-wikibase-edit-title' => '維基數據編輯',
 	'wikibase-watchlist-show-changes-pref' => '於監視列表中顯示維基數據的編輯',
 	'wikibase-error-serialize-error' => '無法序列化資料',
 	'wikibase-error-invalid-entity-id' => '系統無法辨認你輸入的ID。請使用一個有效的ID。',

@@ -3260,6 +3260,7 @@ $messages['zh-hans'] = array(
  * @author Ch.Andrew
  * @author Justincheng12345
  * @author Li3939108
+ * @author Liuxinyu970226
  * @author Simon Shek
  * @author Tntchn
  * @author Waihorace
@@ -3269,6 +3270,7 @@ $messages['zh-hant'] = array(
 	'wikibase-entity-item' => '項目',
 	'wikibase-entity-property' => '屬性',
 	'wikibase-entity-query' => '查詢',
+	'wikibase-deletedentity-item' => '已刪除項',
 	'wikibase-diffview-reference' => '參考',
 	'wikibase-diffview-rank' => '分級',
 	'wikibase-diffview-qualifier' => '修飾成分',
@@ -3298,6 +3300,7 @@ $messages['zh-hant'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => '代碼',
 	'wikibase-sitelinks-link-columnheading' => '已連結的條目',
 	'wikibase-tooltip-error-details' => '詳細資訊',
+	'wikibase-validator-no-such-entity' => '$1無法找尋',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
 	'version-wikibase' => 'Wikibase',
