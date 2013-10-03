@@ -2,27 +2,34 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use DataValues\IllegalValueException;
-use MWException;
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
-use Wikibase\ChangeOp\ChangeOpClaim;
-use Wikibase\Claim;
-use Wikibase\EntityContentFactory;
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\ChangeOpLabel;
-use Wikibase\ChangeOp\ChangeOpDescription;
+use MWException;
+use Revision;
+use SiteList;
+use Status;
+use Title;
+use User;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
-use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ChangeOpClaim;
+use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpException;
-use ApiBase, User, Status, SiteList;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\ChangeOp\ChangeOpLabel;
+use Wikibase\ChangeOp\ChangeOpMainSnak;
+use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ChangeOps;
+use Wikibase\Claim;
+use Wikibase\Entity;
 use Wikibase\EntityContent;
+use Wikibase\EntityContentFactory;
 use Wikibase\Item;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 use Wikibase\QueryContent;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 use WikiPage;
 
@@ -115,13 +122,11 @@ class EditEntity extends ModifyEntity {
 		wfProfileIn( __METHOD__ );
 		$summary = $this->createSummary( $params );
 		$entity = $entityContent->getEntity();
-		$changeOps = new ChangeOps();
 		$status = Status::newGood();
 
 		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
 			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
-		}
-		else {
+		} else {
 			$summary->setAction( 'create' );
 		}
 
@@ -142,12 +147,35 @@ class EditEntity extends ModifyEntity {
 
 		// if we create a new property, make sure we set the datatype
 		if( !$entityContent->getTitle()->exists() && $entity->getType() === Property::ENTITY_TYPE ){
-				if ( !isset( $data['datatype'] ) ) {
-					$this->dieUsage( 'No datatype given', 'param-illegal' );
-				} else {
-					$entity->setDataTypeId( $data['datatype'] );
-				}
+			if ( !isset( $data['datatype'] ) ) {
+				$this->dieUsage( 'No datatype given', 'param-illegal' );
+			} else {
+				$entity->setDataTypeId( $data['datatype'] );
+			}
 		}
+
+		$changeOps = $this->getChangeOps( $data, $entity, $status );
+
+		if ( !$status->isOk() ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Edit failed: $1", 'failed-save' );
+		}
+
+		try {
+			$changeOps->apply( $entity );
+		} catch ( ChangeOpException $e ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( 'Change could not be applied to entity: ' . $e->getMessage(), 'failed-save' );
+		}
+
+		$this->prepareApiResults( $entity );
+
+		wfProfileOut( __METHOD__ );
+		return $summary;
+	}
+
+	protected function getChangeOps( array $data, Entity $entity, Status $status ) {
+		$changeOps = new ChangeOps();
 
 		if ( array_key_exists( 'labels', $data ) ) {
 			$changeOps->add( $this->getLabelChangeOps( $data['labels'], $status ) );
@@ -163,7 +191,6 @@ class EditEntity extends ModifyEntity {
 
 		if ( array_key_exists( 'sitelinks', $data ) ) {
 			if ( $entity->getType() !== Item::ENTITY_TYPE ) {
-				wfProfileOut( __METHOD__ );
 				$this->dieUsage( "Non Items can not have sitelinks", 'not-recognized' );
 			}
 
@@ -179,28 +206,7 @@ class EditEntity extends ModifyEntity {
 			);
 		}
 
-		if ( !$status->isOk() ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Edit failed: $1", 'failed-save' );
-		}
-
-		try {
-			$changeOps->apply( $entity );
-		} catch ( ChangeOpException $e ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Change could not be applied to entity: ' . $e->getMessage(), 'failed-save' );
-		}
-
-		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
-		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
-		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
-		if ( $entity->getType() === Item::ENTITY_TYPE ) {
-			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
-		}
-		$this->addClaimsToResult( $entity->getClaims(), 'entity' );
-
-		wfProfileOut( __METHOD__ );
-		return $summary;
+		return $changeOps;
 	}
 
 	/**
@@ -282,6 +288,22 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "List of aliases must be an array", 'not-recognized-array' );
 		}
 
+		$indexedAliases = $this->getIndexedAliases( $aliases );
+		$aliasesChangeOps = $this->getIndexedAliasesChangeOps( $indexedAliases, $status );
+
+		if ( !$status->isOk() ) {
+			$this->dieUsage( "Contained status: $1", $status->getWikiText() );
+		}
+
+		return $aliasesChangeOps;
+	}
+
+	/**
+	 * @param array $aliases
+	 *
+	 * @return array
+	 */
+	protected function getIndexedAliases( array $aliases ) {
 		$indexedAliases = array();
 
 		foreach ( $aliases as $langCode => $arg ) {
@@ -292,6 +314,16 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
+		return $indexedAliases;
+	}
+
+	/**
+	 * @param array $indexedAliases
+	 * @param Status $status
+	 *
+	 * @return ChangeOpAliases[]
+	 */
+	protected function getIndexedAliasesChangeOps( array $indexedAliases, Status $status ) {
 		foreach ( $indexedAliases as $langCode => $args ) {
 			$aliasesToSet = array();
 
@@ -303,11 +335,9 @@ class EditEntity extends ModifyEntity {
 
 				if ( array_key_exists( 'remove', $arg ) ) {
 					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'remove' );
-				}
-				elseif ( array_key_exists( 'add', $arg ) ) {
+				} elseif ( array_key_exists( 'add', $arg ) ) {
 					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'add' );
-				}
-				else {
+				}  else {
 					$aliasesToSet[] = $alias[0];
 				}
 			}
@@ -315,10 +345,6 @@ class EditEntity extends ModifyEntity {
 			if ( $aliasesToSet !== array() ) {
 				$aliasesChangeOps[] = new ChangeOpAliases( $language, $aliasesToSet, 'set' );
 			}
-		}
-
-		if ( !$status->isOk() ) {
-			$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 		}
 
 		return $aliasesChangeOps;
@@ -408,7 +434,7 @@ class EditEntity extends ModifyEntity {
 	private function getModifyClaimsChangeOps( $claims, $guidGenerator ){
 		$opsToReturn = array();
 
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializerFactory = new SerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
@@ -465,6 +491,21 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
+	 * @param Entity $entity
+	 */
+	protected function prepareApiResults( Entity $entity ) {
+		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
+		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
+		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
+
+		if ( $entity->getType() === Item::ENTITY_TYPE ) {
+			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
+		}
+
+		$this->addClaimsToResult( $entity->getClaims(), 'entity' );
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param array $data
@@ -477,6 +518,7 @@ class EditEntity extends ModifyEntity {
 
 		$title = null;
 		$revision = null;
+
 		if ( $page ) {
 			$title = $page->getTitle();
 			$revision = $page->getRevision();
@@ -495,13 +537,30 @@ class EditEntity extends ModifyEntity {
 			'aliases',
 			'sitelinks',
 			'claims',
-			'datatype' );
+			'datatype'
+		);
 
+		$this->checkValidJson( $data, $allowedProps );
+		$this->checkPageIdProp( $data, $page );
+		$this->checkNamespaceProp( $data, $title );
+		$this->checkTitleProp( $data, $title );
+		$this->checkRevisionProp( $data, $revision );
+
+		return $status;
+	}
+
+	/**
+	 * @param $data
+	 * @param array $allowedProps
+	 */
+	protected function checkValidJson( $data, array $allowedProps ) {
 		if ( is_null( $data ) ) {
-			$this->dieUsage( 'Invalid json: The supplied JSON structure could not be parsed or recreated as a valid structure' , 'invalid-json' );
+			$this->dieUsage( 'Invalid json: The supplied JSON structure could not be parsed or '
+				. 'recreated as a valid structure' , 'invalid-json' );
 		}
 
-		if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
+		// NOTE: json_decode will decode any JS literal or structure, not just objects!
+		if ( !is_array( $data ) ) {
 			$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
 		}
 
@@ -514,23 +573,52 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "Unknown key in json: $prop", 'not-recognized' );
 			}
 		}
+	}
 
+	/**
+	 * @param $data
+	 * @param WikiPage|mixed(?) $page
+	 */
+	protected function checkPageIdProp( $data, $page ) {
 		// conditional processing
-		if ( isset( $data['pageid'] ) && ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
+		if ( isset( $data['pageid'] )
+			&& ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
 			$this->dieUsage( 'Illegal field used in call: pageid', 'param-illegal' );
 		}
+	}
+
+	/**
+	 * @param $data
+	 * @param Title|null $title
+	 */
+	protected function checkNamespaceProp( $data, $title ) {
 		// not completely convinced that we can use title to get the namespace in this case
-		if ( isset( $data['ns'] ) && ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
+		if ( isset( $data['ns'] )
+			&& ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
 			$this->dieUsage( 'Illegal field used in call: namespace', 'param-illegal' );
 		}
-		if ( isset( $data['title'] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
+	}
+
+	/**
+	 * @param $data
+	 * @param Title|null $title
+	 */
+	protected function checkTitleProp( $data, $title ) {
+		if ( isset( $data['title'] )
+			&& ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
 			$this->dieUsage( 'Illegal field used in call: title', 'param-illegal' );
 		}
-		if ( isset( $data['lastrevid'] ) && ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
+	}
+
+	/**
+	 * @param $data
+	 * @param Revision|null $revision
+	 */
+	protected function checkRevisionProp( $data, $revision ) {
+		if ( isset( $data['lastrevid'] )
+			&& ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
 			$this->dieUsage( 'Illegal field used in call: lastrevid', 'param-illegal' );
 		}
-
-		return $status;
 	}
 
 	/**
