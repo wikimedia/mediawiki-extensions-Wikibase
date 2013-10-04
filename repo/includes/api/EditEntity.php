@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use MWException;
 use Revision;
 use SiteList;
-use Status;
 use Title;
 use User;
 use Wikibase\ChangeOp\ChangeOp;
@@ -30,6 +29,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 use Wikibase\QueryContent;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 use Wikibase\Utils;
 use WikiPage;
 
@@ -120,33 +120,18 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
-		$summary = $this->createSummary( $params );
+
 		$entity = $entityContent->getEntity();
-		$status = Status::newGood();
-
-		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
-			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
-		} else {
-			$summary->setAction( 'create' );
-		}
-
-		//TODO: Construct a nice and meaningful summary from the changes that get applied!
-		//      Perhaps that could be based on the resulting diff?
-
-		if ( !isset( $params['data'] ) ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'No data to operate upon', 'no-data' );
-		}
-
+		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
-		$status->merge( $this->checkDataProperties( $data, $entityContent->getWikiPage() ) );
+		$this->validateDataProperties( $data, $entityContent->getWikiPage() );
 
 		if ( $params['clear'] ) {
-			$entityContent->getEntity()->clear();
+			$entity->clear();
 		}
 
 		// if we create a new property, make sure we set the datatype
-		if( !$entityContent->getTitle()->exists() && $entity->getType() === Property::ENTITY_TYPE ){
+		if( !$entityContent->getTitle()->exists() && $entity instanceof Property ){
 			if ( !isset( $data['datatype'] ) ) {
 				$this->dieUsage( 'No datatype given', 'param-illegal' );
 			} else {
@@ -154,12 +139,7 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
-		$changeOps = $this->getChangeOps( $data, $entity, $status );
-
-		if ( !$status->isOk() ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Edit failed: $1", 'failed-save' );
-		}
+		$changeOps = $this->getChangeOps( $data, $entity );
 
 		try {
 			$changeOps->apply( $entity );
@@ -168,25 +148,42 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( 'Change could not be applied to entity: ' . $e->getMessage(), 'failed-save' );
 		}
 
-		$this->prepareApiResults( $entity );
+		$this->buildResult( $entity );
+		$summary = $this->getSummary( $params );
 
 		wfProfileOut( __METHOD__ );
 		return $summary;
 	}
 
-	protected function getChangeOps( array $data, Entity $entity, Status $status ) {
+	/**
+	 * @param array $params
+	 * @return Summary
+	 */
+	private function getSummary( $params ) {
+		//TODO: Construct a nice and meaningful summary from the changes that get applied!
+		//      Perhaps that could be based on the resulting diff?]
+		$summary = $this->createSummary( $params );
+		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
+			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
+		} else {
+			$summary->setAction( 'create' );
+		}#
+		return $summary;
+	}
+
+	protected function getChangeOps( array $data, Entity $entity ) {
 		$changeOps = new ChangeOps();
 
 		if ( array_key_exists( 'labels', $data ) ) {
-			$changeOps->add( $this->getLabelChangeOps( $data['labels'], $status ) );
+			$changeOps->add( $this->getLabelChangeOps( $data['labels'] ) );
 		}
 
 		if ( array_key_exists( 'descriptions', $data ) ) {
-			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'], $status ) );
+			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'] ) );
 		}
 
 		if ( array_key_exists( 'aliases', $data ) ) {
-			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'], $status ) );
+			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'] ) );
 		}
 
 		if ( array_key_exists( 'sitelinks', $data ) ) {
@@ -194,7 +191,7 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "Non Items can not have sitelinks", 'not-recognized' );
 			}
 
-			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $status ) );
+			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'] ) );
 		}
 
 		if( array_key_exists( 'claims', $data ) ) {
@@ -211,13 +208,10 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @since 0.4
-	 *
 	 * @param array $labels
-	 * @param Status $status
-	 *
 	 * @return ChangeOpLabel[]
 	 */
-	protected function getLabelChangeOps( $labels, Status $status ) {
+	protected function getLabelChangeOps( $labels  ) {
 		$labelChangeOps = array();
 
 		if ( !is_array( $labels ) ) {
@@ -225,7 +219,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		foreach ( $labels as $langCode => $arg ) {
-			$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
+			$this->validateMultilangArgs( $arg, $langCode );
 
 			$language = $arg['language'];
 			$newLabel = $this->stringNormalizer->trimToNFC( $arg['value'] );
@@ -243,13 +237,10 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @since 0.4
-	 *
 	 * @param array $descriptions
-	 * @param Status $status
-	 *
 	 * @return ChangeOpdescription[]
 	 */
-	protected function getDescriptionChangeOps( $descriptions, Status $status ) {
+	protected function getDescriptionChangeOps( $descriptions ) {
 		$descriptionChangeOps = array();
 
 		if ( !is_array( $descriptions ) ) {
@@ -257,7 +248,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		foreach ( $descriptions as $langCode => $arg ) {
-			$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
+			$this->validateMultilangArgs( $arg, $langCode );
 
 			$language = $arg['language'];
 			$newDescription = $this->stringNormalizer->trimToNFC( $arg['value'] );
@@ -275,32 +266,22 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @since 0.4
-	 *
 	 * @param array $aliases
-	 * @param Status $status
-	 *
 	 * @return ChangeOpAliases[]
 	 */
-	protected function getAliasesChangeOps( $aliases, Status $status ) {
-		$aliasesChangeOps = array();
-
+	protected function getAliasesChangeOps( $aliases ) {
 		if ( !is_array( $aliases ) ) {
 			$this->dieUsage( "List of aliases must be an array", 'not-recognized-array' );
 		}
 
 		$indexedAliases = $this->getIndexedAliases( $aliases );
-		$aliasesChangeOps = $this->getIndexedAliasesChangeOps( $indexedAliases, $status );
-
-		if ( !$status->isOk() ) {
-			$this->dieUsage( "Contained status: $1", $status->getWikiText() );
-		}
+		$aliasesChangeOps = $this->getIndexedAliasesChangeOps( $indexedAliases );
 
 		return $aliasesChangeOps;
 	}
 
 	/**
 	 * @param array $aliases
-	 *
 	 * @return array
 	 */
 	protected function getIndexedAliases( array $aliases ) {
@@ -319,16 +300,15 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @param array $indexedAliases
-	 * @param Status $status
-	 *
 	 * @return ChangeOpAliases[]
 	 */
-	protected function getIndexedAliasesChangeOps( array $indexedAliases, Status $status ) {
+	protected function getIndexedAliasesChangeOps( array $indexedAliases ) {
+		$aliasesChangeOps = array();
 		foreach ( $indexedAliases as $langCode => $args ) {
 			$aliasesToSet = array();
 
 			foreach ( $args as $arg ) {
-				$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
+				$this->validateMultilangArgs( $arg, $langCode );
 
 				$alias = array( $this->stringNormalizer->trimToNFC( $arg['value'] ) );
 				$language = $arg['language'];
@@ -352,13 +332,10 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @since 0.4
-	 *
 	 * @param array $siteLinks
-	 * @param Status $status
-	 *
 	 * @return ChangeOpSiteLink[]
 	 */
-	protected function getSitelinksChangeOps( $siteLinks, Status $status ) {
+	protected function getSitelinksChangeOps( $siteLinks ) {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
@@ -368,7 +345,7 @@ class EditEntity extends ModifyEntity {
 		$sites = $this->getSiteLinkTargetSites();
 
 		foreach ( $siteLinks as $siteId => $arg ) {
-			$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
+			$this->checkSiteLinks( $arg, $siteId, $sites );
 			$globalSiteId = $arg['site'];
 			$pageTitle = $arg['title'];
 
@@ -400,7 +377,6 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.5
 	 *
 	 * @param array $claims
-	 *
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @return ChangeOpClaim[]
 	 */
@@ -493,12 +469,12 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @param Entity $entity
 	 */
-	protected function prepareApiResults( Entity $entity ) {
+	protected function buildResult( Entity $entity ) {
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 
-		if ( $entity->getType() === Item::ENTITY_TYPE ) {
+		if ( $entity instanceof Item ) {
 			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
 		}
 
@@ -506,16 +482,21 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
+	 * @param array $params
+	 */
+	private function validateDataParameter( $params ) {
+		if ( !isset( $params['data'] ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( 'No data to operate upon', 'no-data' );
+		}
+	}
+
+	/**
 	 * @since 0.4
-	 *
 	 * @param array $data
 	 * @param WikiPage|bool $page
-	 *
-	 * @return Status
 	 */
-	protected function checkDataProperties( $data, $page ) {
-		$status = Status::newGood();
-
+	protected function validateDataProperties( $data, $page ) {
 		$title = null;
 		$revision = null;
 
@@ -545,8 +526,6 @@ class EditEntity extends ModifyEntity {
 		$this->checkNamespaceProp( $data, $title );
 		$this->checkTitleProp( $data, $title );
 		$this->checkRevisionProp( $data, $revision );
-
-		return $status;
 	}
 
 	/**
@@ -728,32 +707,37 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * Check some of the supplied data for multilang arg
-	 *
-	 * @param $arg Array: The argument array to verify
-	 * @param $langCode string: The language code used in the value part
-	 *
-	 * @return Status: The result from the comparison (always true)
+	 * @param array $arg The argument array to verify
+	 * @param string $langCode The language code used in the value part
 	 */
-	public function checkMultilangArgs( $arg, $langCode ) {
-		$status = Status::newGood();
+	public function validateMultilangArgs( $arg, $langCode ) {
 		if ( !is_array( $arg ) ) {
-			$this->dieUsage( "An array was expected, but not found in the json for the langCode {$langCode}" , 'not-recognized-array' );
+			$this->dieUsage(
+				"An array was expected, but not found in the json for the langCode {$langCode}" ,
+				'not-recognized-array' );
 		}
 		if ( !is_string( $arg['language'] ) ) {
-			$this->dieUsage( "A string was expected, but not found in the json for the langCode {$langCode} and argument 'language'" , 'not-recognized-string' );
+			$this->dieUsage(
+				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'language'" ,
+				'not-recognized-string' );
 		}
 		if ( !is_numeric( $langCode ) ) {
 			if ( $langCode !== $arg['language'] ) {
-				$this->dieUsage( "inconsistent language: {$langCode} is not equal to {$arg['language']}", 'inconsistent-language' );
+				$this->dieUsage(
+					"inconsistent language: {$langCode} is not equal to {$arg['language']}",
+					'inconsistent-language' );
 			}
 		}
 		if ( isset( $this->validLanguageCodes ) && !array_key_exists( $arg['language'], $this->validLanguageCodes ) ) {
-			$this->dieUsage( "unknown language: {$arg['language']}", 'not-recognized-language' );
+			$this->dieUsage(
+				"unknown language: {$arg['language']}",
+				'not-recognized-language' );
 		}
 		if ( !is_string( $arg['value'] ) ) {
-			$this->dieUsage( "A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'" , 'not-recognized-string' );
+			$this->dieUsage(
+				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'" ,
+				'not-recognized-string' );
 		}
-		return $status;
 	}
 
 	/**
@@ -762,11 +746,8 @@ class EditEntity extends ModifyEntity {
 	 * @param $arg Array: The argument array to verify
 	 * @param $siteCode string: The site code used in the argument
 	 * @param &$sites \SiteList: The valid site codes as an assoc array
-	 *
-	 * @return Status: Always a good status
 	 */
 	public function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
-		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
 			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
 		}
@@ -784,7 +765,6 @@ class EditEntity extends ModifyEntity {
 		if ( !is_string( $arg['title'] ) ) {
 			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
-		return $status;
 	}
 
 }
