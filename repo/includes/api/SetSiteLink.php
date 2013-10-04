@@ -45,20 +45,6 @@ class SetSiteLink extends ModifyEntity {
 
 		return $entityContent;
 	}
-	/**
-	 * Make sure the required parameters are provided and that they are valid.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $params
-	 */
-	protected function validateParameters( array $params ) {
-		parent::validateParameters( $params );
-
-		// Note that linksite should always exist as a prerequisite for this
-		// call to succeede. The param linktitle will not always exist because
-		// that signals a sitelink to remove.
-	}
 
 	/**
 	 * @see ApiModifyEntity::modifyEntity()
