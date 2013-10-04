@@ -85,7 +85,7 @@ class SiteLinkSerializer extends SerializerObject {
 		$serialization = array();
 
 		$includeUrls = in_array( 'sitelinks/urls', $this->options->getProps() );
-		$includeBadges = in_array( 'sitelinks/badges' , $this->options->getProps() );
+		$setRemoved = in_array( 'sitelinks/removed' , $this->options->getProps() );
 
 		foreach ( $this->sortSiteLinks( $siteLinks ) as $link ) {
 			$response = array(
@@ -102,7 +102,7 @@ class SiteLinkSerializer extends SerializerObject {
 				}
 			}
 
-			if ( $includeBadges ) {
+			if ( !$setRemoved ) {
 				$badges = array();
 
 				foreach ( $link->getBadges() as $badge ) {
@@ -116,7 +116,7 @@ class SiteLinkSerializer extends SerializerObject {
 				$response['badges'] = $badges;
 			}
 
-			if ( in_array( 'sitelinks/removed', $this->options->getProps() ) ) {
+			if ( $setRemoved ) {
 				$response['removed'] = '';
 			}
 
