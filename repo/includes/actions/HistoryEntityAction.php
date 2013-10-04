@@ -8,10 +8,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.3
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup Action
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
