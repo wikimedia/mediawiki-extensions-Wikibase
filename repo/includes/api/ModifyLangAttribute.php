@@ -23,17 +23,6 @@ use Wikibase\Utils;
 abstract class ModifyLangAttribute extends ModifyEntity {
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
-	 */
-	protected function validateParameters( array $params ) {
-		parent::validateParameters( $params );
-
-		// Note that language should always exist as a prerequisite for this
-		// call to succeed. The param value will not always exist because
-		// that signals a label to remove.
-	}
-
-	/**
 	 * Creates a Summary object based on the given API call parameters.
 	 * The Summary will be initializes with the appropriate action name
 	 * and target language. It will not have any summary arguments set.
