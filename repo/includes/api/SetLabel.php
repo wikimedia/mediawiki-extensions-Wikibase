@@ -5,7 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
-use Wikibase\ChangeOpLabel;
+use Wikibase\ChangeOp\ChangeOpLabel;
 
 /**
  * API module to set the label for a Wikibase entity.

@@ -5,8 +5,8 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ChangeOpQualifier;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpQualifier;
+use Wikibase\ChangeOp\ChangeOpException;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.

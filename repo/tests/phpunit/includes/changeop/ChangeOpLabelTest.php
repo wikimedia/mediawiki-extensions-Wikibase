@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOp;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\Summary;
-use Wikibase\ChangeOpLabel;
+use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
 

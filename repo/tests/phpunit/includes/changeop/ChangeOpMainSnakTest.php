@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use DataValues\DataValue;
-use Wikibase\ChangeOp;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\Claim;
 use Wikibase\Claims;
-use Wikibase\ChangeOpMainSnak;
+use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Entity;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
@@ -120,7 +120,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideChangeOps
-	 * @expectedException \Wikibase\ChangeOpException
+	 * @expectedException \Wikibase\ChangeOp\ChangeOpException
 	 */
 	public function testInvalidApply( ChangeOp $changeOp ) {
 		$wrongItem = ItemContent::newEmpty();

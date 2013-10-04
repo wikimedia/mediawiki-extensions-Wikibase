@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Site;
-use Wikibase\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
 use InvalidArgumentException;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOpsMerge;
+use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -23,7 +23,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$from = $this->getItemContent( 'Q111' );
 		$to = $this->getItemContent( 'Q222' );
 		$changeOps = new ChangeOpsMerge( $from, $to );
-		$this->assertInstanceOf( '\Wikibase\ChangeOpsMerge', $changeOps );
+		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
 
 	public function getItemContent( $id, $data = array() ){

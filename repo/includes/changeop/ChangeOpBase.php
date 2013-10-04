@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Summary;
 
 /**
  * Base class for change operations.

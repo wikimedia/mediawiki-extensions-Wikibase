@@ -5,9 +5,9 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ChangeOpQualifier;
-use Wikibase\ChangeOps;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpQualifier;
+use Wikibase\ChangeOp\ChangeOps;
+use Wikibase\ChangeOp\ChangeOpException;
 
 /**
  * API module for removing qualifiers from a claim.
