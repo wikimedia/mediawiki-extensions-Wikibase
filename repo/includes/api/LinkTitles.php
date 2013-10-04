@@ -18,7 +18,6 @@ use Wikibase\Summary;
  * Requires API write mode to be enabled.
  *
  * @since 0.1
- *
  * @licence GNU GPL v2+
  */
 class LinkTitles extends ApiWikibase {
@@ -28,10 +27,10 @@ class LinkTitles extends ApiWikibase {
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-
 		$permissions[] = 'linktitles-update';
 		return $permissions;
 	}
+
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -44,20 +43,19 @@ class LinkTitles extends ApiWikibase {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
+		// Sites are already tested through allowed params ;)
 		$sites = $this->getSiteLinkTargetSites();
-
-		// Site is already tested through allowed params ;)
 		$fromSite = $sites->getSite( $params['fromsite'] );
+		$toSite = $sites->getSite( $params['tosite'] );
+
 		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
 		$this->validatePage( $fromPage, 'from' );
-		$fromId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['fromsite'], $fromPage );
-
-		// Site is already tested through allowed params ;)
-		$toSite = $sites->getSite( $params['tosite'] );
-		// This must be tested now
 		$toPage = $toSite->normalizePageName( $params['totitle'] );
 		$this->validatePage( $toPage, 'to' );
-		$toId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['tosite'], $toPage );
+
+		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
+		$fromId = $siteLinkCache->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
+		$toId = $siteLinkCache->getItemIdForLink( $toSite->getGlobalId(), $toPage );
 
 		$return = array();
 		$flags = 0;
@@ -112,21 +110,46 @@ class LinkTitles extends ApiWikibase {
 		}
 
 		$this->addSiteLinksToResult( $return, 'entity' );
+		$status = $this->getAttemptSaveStatus( $itemContent, $summary, $flags );
+		$this->buildResult( $itemContent, $status );
+		wfProfileOut( __METHOD__ );
+	}
 
+	/**
+	 * @param string $page
+	 * @param string $label
+	 */
+	private function validatePage( $page, $label ) {
+		if ( $page === false ) {
+			$this->dieUsage(
+				"The external client site did not provide page information for the {$label} page" ,
+				'no-external-page'
+			);
+		}
+	}
+
+	/**
+	 * @param ItemContent $itemContent
+	 * @param Summary $summary
+	 * @param int $flags
+	 * @return Status
+	 */
+	private function getAttemptSaveStatus( ItemContent $itemContent, Summary $summary, $flags ) {
 		if ( $itemContent === null ) {
 			// to not have an ItemContent isn't really bad at this point
-			$status = Status::newGood( true );
+			return Status::newGood( true );
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $this->attemptSaveEntity( $itemContent,
+			return $this->attemptSaveEntity( $itemContent,
 				$summary->toString(),
 				$flags );
-
-			$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
 		}
+	}
 
+	private function buildResult( ItemContent $itemContent, Status $status ) {
 		if ( $itemContent !== null ) {
+			$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
 			$this->getResult()->addValue(
 				'entity',
 				'id', $itemContent->getItem()->getId()->getNumericId()
@@ -142,8 +165,6 @@ class LinkTitles extends ApiWikibase {
 			'success',
 			(int)$status->isOK()
 		);
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -256,12 +277,6 @@ class LinkTitles extends ApiWikibase {
 			'api.php?action=wblinktitles&fromsite=enwiki&fromtitle=Hydrogen&tosite=dewiki&totitle=Wasserstoff'
 			=> 'Add a link "Hydrogen" from the English page to "Wasserstoff" at the German page',
 		);
-	}
-
-	private function validatePage( $page, $label ) {
-		if ( $page === false ) {
-			$this->dieUsage( "The external client site did not provide page information for the {$label} page" , 'no-external-page' );
-		}
 	}
 
 }
