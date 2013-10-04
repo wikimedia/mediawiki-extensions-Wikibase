@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_8476ba3a",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-04T13:40:03Z",
+      "side": 1,
+      "message": "how about just $fromSite here",
+      "revId": "9bb63b1edc326a8990f5e3f1c0627a6e8a0906da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_a48bbe17",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-04T13:40:03Z",
+      "side": 1,
+      "message": "$toSite",
+      "revId": "9bb63b1edc326a8990f5e3f1c0627a6e8a0906da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_c490b244",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-04T13:40:03Z",
+      "side": 1,
+      "message": "i am not convinced this function is necessary.  While it adds slight complexity to execute to call validatePage() twice, the extra function adds unnecessary complexity to the overall class.",
+      "revId": "9bb63b1edc326a8990f5e3f1c0627a6e8a0906da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
