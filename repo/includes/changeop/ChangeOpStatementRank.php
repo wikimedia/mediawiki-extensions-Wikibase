@@ -1,12 +1,16 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Claims;
+use Wikibase\Entity;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Summary;
 
 /**
  * Class for statement rank change operation
@@ -45,9 +49,9 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	 *
 	 * @param string $claimGuid
 	 * @param integer $rank
-	 * @param Lib\EntityIdFormatter $idFormatter
+	 * @param EntityIdFormatter $idFormatter
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $claimGuid, $rank, EntityIdFormatter $idFormatter ) {
 		if ( !is_string( $claimGuid ) ) {

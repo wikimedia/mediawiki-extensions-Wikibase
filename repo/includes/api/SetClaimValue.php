@@ -3,8 +3,8 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\ChangeOpMainSnak;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpMainSnak;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 

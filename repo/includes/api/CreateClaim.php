@@ -6,8 +6,8 @@ use ApiBase;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Claims;
-use Wikibase\ChangeOpMainSnak;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpMainSnak;
+use Wikibase\ChangeOp\ChangeOpException;
 
 /**
  * API module for creating claims.

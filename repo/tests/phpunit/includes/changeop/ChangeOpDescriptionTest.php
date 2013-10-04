@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOp;
-use Wikibase\ChangeOpDescription;
+use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
 use Wikibase\Summary;

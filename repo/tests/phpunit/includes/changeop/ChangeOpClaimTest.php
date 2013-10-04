@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOpClaim;
+use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
@@ -96,7 +96,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( $entity, $claim, $expected ) {
 		if( $expected === false ){
-			$this->setExpectedException( '\Wikibase\ChangeOpException' );
+			$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
 		}
 
 		$changeOpClaim = new ChangeOpClaim( $claim, new ClaimGuidGenerator( $entity->getId() ) );

@@ -1,10 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Claim;
+use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Summary;
 
 /**
  * Class for claim modification operations

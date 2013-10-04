@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 /**
  * Exception thrown during an invalid change operation.

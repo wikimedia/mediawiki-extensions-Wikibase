@@ -1,6 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
+
+use Wikibase\Entity;
+use Wikibase\Summary;
 
 /**
  * @since 0.5

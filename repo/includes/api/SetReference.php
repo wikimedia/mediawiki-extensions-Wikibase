@@ -4,8 +4,8 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ChangeOpReference;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpReference;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Reference;

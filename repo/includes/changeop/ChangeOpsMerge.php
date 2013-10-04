@@ -1,7 +1,8 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
+use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 

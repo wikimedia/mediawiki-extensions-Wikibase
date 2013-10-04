@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
-use Wikibase\ChangeOp;
-use Wikibase\ChangeOpLabel;
-use Wikibase\ChangeOpDescription;
-use Wikibase\ChangeOpAliases;
-use Wikibase\ChangeOps;
+use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpLabel;
+use Wikibase\ChangeOp\ChangeOpDescription;
+use Wikibase\ChangeOp\ChangeOpAliases;
+use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ItemContent;
 
 /**
@@ -125,7 +125,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException  \Wikibase\ChangeOpException
+	 * @expectedException  \Wikibase\ChangeOp\ChangeOpException
 	 */
 	public function testInvalidApply() {
 		$item = ItemContent::newEmpty();

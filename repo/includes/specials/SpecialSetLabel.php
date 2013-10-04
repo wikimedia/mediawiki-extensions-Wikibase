@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\ChangeOpLabel;
+use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\EntityContent;
 use Wikibase\Summary;
 

@@ -6,8 +6,8 @@ use Html;
 use Sites;
 use Status;
 use Wikibase\EntityContent;
-use Wikibase\ChangeOpSiteLink;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\Summary;
 
 /**

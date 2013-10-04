@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\ChangeOpAliases;
+use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\Summary;
 
 /**
