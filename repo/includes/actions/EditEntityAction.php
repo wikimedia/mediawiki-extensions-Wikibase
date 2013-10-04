@@ -6,11 +6,13 @@ use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use Html;
 use Linker;
+use MWException;
 use Skin;
 use Status;
 use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use WebRequest;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -82,8 +84,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @return \Status a Status object containing an array with three revisions, ($olderRevision, $newerRevision, $latestRevision)
-	 * @throws \MWException if the page's latest revision can not be loaded
+	 * @return Status a Status object containing an array with three revisions, ($olderRevision, $newerRevision, $latestRevision)
+	 * @throws MWException if the page's latest revision can not be loaded
 	 */
 	public function loadRevisions( ) {
 		$latestRevId = $this->getTitle()->getLatestRevID();
@@ -92,16 +94,19 @@ abstract class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'missing-article', $this->getTitle()->getPrefixedText(), '' ); //XXX: better message
 		}
 
-		$latestRevision = \Revision::newFromId( $latestRevId );
+		$latestRevision = Revision::newFromId( $latestRevId );
 
 		if ( !$latestRevId ) {
-			throw new \MWException( "latest revision not found: $latestRevId" );
+			throw new MWException( "latest revision not found: $latestRevId" );
 		}
 
 		$req = $this->getRequest();
+		return $this->getStatus( $req, $latestRevision );
+	}
 
+	private function getStatus( WebRequest $req, Revision $latestRevision ){
 		if ( $req->getCheck( 'restore' ) ) { // nearly the same as undoafter without undo
-			$olderRevision = \Revision::newFromId( $req->getInt( 'restore' ) );
+			$olderRevision = Revision::newFromId( $req->getInt( 'restore' ) );
 
 			if ( !$olderRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'restore' ) );
@@ -110,14 +115,14 @@ abstract class EditEntityAction extends ViewEntityAction {
 			// ignore undo, even if set
 			$newerRevision = $latestRevision;
 		} else if ( $req->getCheck( 'undo' ) ) {
-			$newerRevision = \Revision::newFromId( $req->getInt( 'undo' ) );
+			$newerRevision = Revision::newFromId( $req->getInt( 'undo' ) );
 
 			if ( !$newerRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );
 			}
 
 			if ( $req->getCheck( 'undoafter' ) ) {
-				$olderRevision = \Revision::newFromId( $req->getInt( 'undoafter' ) );
+				$olderRevision = Revision::newFromId( $req->getInt( 'undoafter' ) );
 
 				if ( !$olderRevision ) {
 					return Status::newFatal( 'undo-norev', $req->getInt( 'undoafter' ) );
@@ -130,7 +135,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 				}
 			}
 		} else if ( $req->getCheck( 'undoafter' ) ) {
-			$olderRevision = \Revision::newFromId( $req->getInt( 'undoafter' ) );
+			$olderRevision = Revision::newFromId( $req->getInt( 'undoafter' ) );
 
 			if ( !$olderRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );
@@ -166,9 +171,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $latestRevision->getId() );
 		}
 
-		return Status::newGood( array(
-			$olderRevision, $newerRevision, $latestRevision,
-		) );
+		return Status::newGood( array( $olderRevision, $newerRevision, $latestRevision ) );
 	}
 
 	/**
@@ -225,9 +228,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 		}
 
 		/**
-		 * @var \Revision $olderRevision
-		 * @var \Revision $newerRevision
-		 * @var \Revision $latestRevision
+		 * @var Revision $olderRevision
+		 * @var Revision $newerRevision
+		 * @var Revision $latestRevision
 		 */
 		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
 
@@ -321,9 +324,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Revision $olderRevision
-	 * @param \Revision $newerRevision
-	 * @param \Revision $latestRevision
+	 * @param Revision $olderRevision
+	 * @param Revision $newerRevision
+	 * @param Revision $latestRevision
 	 *
 	 * @return String
 	 */
@@ -342,9 +345,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Revision $olderRevision
-	 * @param \Revision $newerRevision
-	 * @param \Revision $latestRevision
+	 * @param Revision $olderRevision
+	 * @param Revision $newerRevision
+	 * @param Revision $latestRevision
 	 *
 	 * @return String
 	 */
@@ -446,8 +449,6 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-otitle1' ), $old ) ) );
 		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new ) ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
-
-		$langCode = $this->getContext()->getLanguage()->getCode();
 
 		// TODO: derp inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
