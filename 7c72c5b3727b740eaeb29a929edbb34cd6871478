@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_71fb4745",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-10-04T19:52:38Z",
+      "side": 1,
+      "message": "I know that this could be if - else, but I think this is more readable. Correct me if I\u0027m wrong.",
+      "revId": "7c72c5b3727b740eaeb29a929edbb34cd6871478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
