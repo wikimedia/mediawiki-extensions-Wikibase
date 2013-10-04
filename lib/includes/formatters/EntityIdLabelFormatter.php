@@ -82,15 +82,6 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * @param EntityIdFormatter $idFormatter
-	 * @deprecated
-	 * @todo remove this when it's no longer being called
-	 */
-	public function setIdFormatter( EntityIdFormatter $idFormatter ) {
-		// noop
-	}
-
-	/**
 	 * Format an EntityId data value
 	 *
 	 * @since 0.4
