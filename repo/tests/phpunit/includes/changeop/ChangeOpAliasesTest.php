@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOpAliases;
+use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\Entity;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
@@ -70,7 +70,7 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException  \Wikibase\ChangeOpException
+	 * @expectedException \Wikibase\ChangeOp\ChangeOpException
 	 */
 	public function testApplyWithInvalidAction() {
 		$item = ItemContent::newEmpty();

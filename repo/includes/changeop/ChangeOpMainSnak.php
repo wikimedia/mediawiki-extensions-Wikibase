@@ -1,11 +1,15 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Snak;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Claims;
+use Wikibase\Entity;
+use Wikibase\Snak;
+use Wikibase\Summary;
 
 /**
  * Class for mainsnak change operation
@@ -44,8 +48,8 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 *
 	 * @param string $claimGuid
 	 * @param Snak|null $snak
-	 * @param Lib\EntityIdFormatter $idFormatter
-	 * @param Lib\ClaimGuidGenerator $guidGenerator
+	 * @param EntityIdFormatter $idFormatter
+	 * @param ClaimGuidGenerator $guidGenerator
 	 * @throws \InvalidArgumentException
 	 */
 	public function __construct( $claimGuid, $snak, EntityIdFormatter $idFormatter, ClaimGuidGenerator $guidGenerator ) {

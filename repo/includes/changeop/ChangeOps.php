@@ -1,8 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Entity;
+use Wikibase\Summary;
 
 /**
  * Class for holding a batch of change operations

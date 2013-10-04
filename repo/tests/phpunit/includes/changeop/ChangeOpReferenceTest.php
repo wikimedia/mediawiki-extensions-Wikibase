@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Claims;
-use Wikibase\ChangeOpReference;
+use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\Entity;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;

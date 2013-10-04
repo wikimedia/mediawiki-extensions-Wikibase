@@ -1,10 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 use Site;
 use InvalidArgumentException;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Entity;
+use Wikibase\Item;
+use Wikibase\Summary;
 
 /**
  * Class for sitelink change operation

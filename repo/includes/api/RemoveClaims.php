@@ -8,9 +8,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ChangeOps;
-use Wikibase\ChangeOpMainSnak;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOps;
+use Wikibase\ChangeOp\ChangeOpMainSnak;
+use Wikibase\ChangeOp\ChangeOpException;
 
 /**
  * API module for removing claims.

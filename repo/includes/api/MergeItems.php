@@ -4,8 +4,8 @@ namespace Wikibase\Api;
 
 use ApiBase, User, Status, SiteList;
 use ValueParsers\ParseException;
-use Wikibase\ChangeOpException;
-use Wikibase\ChangeOpsMerge;
+use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContentFactory;

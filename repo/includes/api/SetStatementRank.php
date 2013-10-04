@@ -5,8 +5,8 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ChangeOpStatementRank;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpStatementRank;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 
