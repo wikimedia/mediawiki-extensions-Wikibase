@@ -4,7 +4,9 @@ namespace Wikibase\Test\Api;
 
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\ItemContent;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
 
@@ -35,11 +37,14 @@ class MergeItemsTest extends WikibaseApiTestCase {
 		parent::setUp();
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Empty', 'Empty2' ) );
-			$prop42 = PropertyId::newFromNumber( 56 );
+
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop42 );
+			$prop->getEntity()->setId( PropertyId::newFromNumber( 56 ) );
 			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
+			$prop->save( 'mergeitemstest' );
+			$item = ItemContent::newEmpty();
+			$item->getEntity()->setId( ItemId::newFromNumber( 999 ) );
+			$item->save( 'mergeitemstest' );
 		}
 		self::$hasSetup = true;
 	}
@@ -173,25 +178,25 @@ class MergeItemsTest extends WikibaseApiTestCase {
 				'p' => array( ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //1 only from id
-				'p' => array( 'fromid' => 'q1' ),
+				'p' => array( 'fromid' => 'q999' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //2 only to id
-				'p' => array( 'toid' => 'q1' ),
+				'p' => array( 'toid' => 'q999' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //3 toid bad
-				'p' => array( 'fromid' => 'q1', 'toid' => 'ABCDE' ),
+				'p' => array( 'fromid' => 'q999', 'toid' => 'ABCDE' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
 			array( //4 fromid bad
-				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'q1' ),
+				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'q999' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
-			array( //5 bot same id
-				'p' => array( 'fromid' => 'q1', 'toid' => 'q1' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
+			array( //5 both same id
+				'p' => array( 'fromid' => 'Q999', 'toid' => 'q999' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid', 'message' => 'You must provide unique ids' ) ) ),
 			array( //6 from id is property
-				'p' => array( 'fromid' => 'p56', 'toid' => 'q2' ),
+				'p' => array( 'fromid' => 'p56', 'toid' => 'q999' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
 			array( //7 to id is property
-				'p' => array( 'fromid' => 'q2', 'toid' => 'p56' ),
+				'p' => array( 'fromid' => 'q999', 'toid' => 'p56' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
 		);
 	}

@@ -25,11 +25,11 @@ use Wikibase\Utils;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ *
+ * @todo allow merging of specific parts of an item only (eg. sitelinks,aliases,claims)
+ * @todo allow optional deletion after merging (for admins)
  */
 class MergeItems extends ApiWikibase {
-
-	//todo allow merging of specific parts of an item only (eg. sitelinks,aliases,claims)
-	//todo allow optional deletion after merging (for admins)
 
 	/**
 	 * @see \Wikibase\Api\Api::getRequiredPermissions()
@@ -53,6 +53,10 @@ class MergeItems extends ApiWikibase {
 		$toEntityContent = $this->getEntityContentFromIdString( $params['toid'] );
 		$this->validateEntityContents( $fromEntityContent, $toEntityContent );
 
+		/**
+		 * @var ItemContent $fromEntityContent
+		 * @var ItemContent $toEntityContent
+		 */
 		try{
 			$changeOps = new ChangeOpsMerge( $fromEntityContent, $toEntityContent );
 			$changeOps->apply();
@@ -84,38 +88,36 @@ class MergeItems extends ApiWikibase {
 	private function getEntityContentFromIdString( $idString ) {
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = null;
 
 		try{
 			$entityId = $entityIdParser->parse( $idString );
-			$entityContent = $entityContentFactory->getFromId( $entityId );
+			return $entityContentFactory->getFromId( $entityId );
 		}
 		catch ( ParseException $e ){
 			$this->dieUsage( 'You must provide valid ids' , 'param-invalid' );
 		}
-
-		if( $entityContent === null ){
-			$this->dieUsage( 'You must provide valid ids' , 'param-invalid' );
-		}
-
-		return $entityContent;
+		return null;
 	}
 
 	/**
-	 * @param EntityContent $fromEntityContent
-	 * @param EntityContent $toEntityContent
+	 * @param EntityContent|null $fromEntityContent
+	 * @param EntityContent|null $toEntityContent
 	 */
 	private function validateEntityContents( $fromEntityContent, $toEntityContent ) {
+		if( $fromEntityContent === null || $toEntityContent === null ){
+			$this->dieUsage( 'One of more of the ids provided do not exist' , 'no-such-entity-id' );
+		}
+
 		if ( !( $fromEntityContent instanceof ItemContent && $toEntityContent instanceof ItemContent ) ) {
 			$this->dieUsage( "One or more of the entities are not items", "not-item" );
 		}
 
-		if( $fromEntityContent->getEntity()->getId()->getPrefixedId() === $toEntityContent->getEntity()->getId()->getPrefixedId() ){
+		if( $toEntityContent->getEntity()->getId()->equals( $fromEntityContent->getEntity()->getId() ) ){
 			$this->dieUsage( 'You must provide unique ids' , 'param-invalid' );
 		}
 	}
 
-	private function validateParams( $params ) {
+	private function validateParams( array $params ) {
 		if ( empty( $params['fromid'] ) || empty( $params['toid'] ) ){
 			$this->dieUsage( 'You must provide a fromid and a toid' , 'param-missing' );
 		}
@@ -165,6 +167,7 @@ class MergeItems extends ApiWikibase {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
+			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
 		) );
 	}
 
