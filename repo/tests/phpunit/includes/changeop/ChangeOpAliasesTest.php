@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOpAliases;
+use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\Entity;
 use Wikibase\ItemContent;
 use InvalidArgumentException;

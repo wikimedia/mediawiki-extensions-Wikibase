@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOpClaim;
+use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;

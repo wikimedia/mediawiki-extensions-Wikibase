@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Language;
 use Wikibase\Summary;
-use Wikibase\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\Utils;
 
 /**

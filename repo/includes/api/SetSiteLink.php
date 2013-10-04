@@ -2,7 +2,7 @@
 
 namespace Wikibase\Api;
 
-use Wikibase\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ChangeOpSiteLink;
 use ApiBase, User;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;

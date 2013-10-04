@@ -2,11 +2,11 @@
 
 namespace Wikibase\Api;
 
-use Wikibase\ChangeOps;
+use Wikibase\ChangeOp\ChangeOps;
 use ApiBase, User, Language;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
-use Wikibase\ChangeOpAliases;
+use Wikibase\ChangeOp\ChangeOpAliases;
 
 /**
  * API module to set the aliases for a Wikibase entity.

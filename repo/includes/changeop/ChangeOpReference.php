@@ -1,13 +1,17 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Claims;
+use Wikibase\Entity;
 use Wikibase\Reference;
 use Wikibase\References;
+use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Summary;
 
 /**
  * Class for reference change operation
@@ -54,7 +58,7 @@ class ChangeOpReference extends ChangeOpBase {
 	 * @param string $claimGuid
 	 * @param Reference|null $reference
 	 * @param string $referenceHash
-	 * @param Lib\EntityIdFormatter $idFormatter
+	 * @param EntityIdFormatter $idFormatter
 	 *
 	 * @throws \InvalidArgumentException
 	 */

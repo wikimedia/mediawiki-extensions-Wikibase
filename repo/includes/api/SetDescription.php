@@ -5,7 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
-use Wikibase\ChangeOpDescription;
+use Wikibase\ChangeOp\ChangeOpDescription;
 
 /**
  * API module for the language attributes for a Wikibase entity.
