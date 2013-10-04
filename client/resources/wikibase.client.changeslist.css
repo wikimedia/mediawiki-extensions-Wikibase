@@ -1,0 +1,6 @@
+/**
+ * Styling for Special:Watchlist and Special:RecentChanges
+ */
+abbr.wikibase-edit {
+	font-weight: bold;
+}

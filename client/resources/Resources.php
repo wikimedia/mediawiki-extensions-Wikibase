@@ -22,9 +22,8 @@ return call_user_func( function() {
 		'wikibase.client.page-move' => $moduleTemplate + array(
 			'styles' => 'wikibase.client.page-move.css'
 		),
-		'wbclient.watchlist.css' => $moduleTemplate + array(
-			'styles' => 'wbclient.watchlist.css',
-			'position' => 'top',
+		'wikibase.client.changeslist.css' => $moduleTemplate + array(
+			'styles' => 'wikibase.client.changeslist.css'
 		),
 		'wikibase.client.linkitem.init' => $moduleTemplate + array(
 			'scripts' => array(
