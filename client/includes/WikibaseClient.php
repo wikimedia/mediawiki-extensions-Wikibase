@@ -147,7 +147,6 @@ final class WikibaseClient {
 		) );
 
 		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
-		$labelFormatter->setIdFormatter( $this->getEntityIdFormatter() );
 
 		return $labelFormatter;
 	}
