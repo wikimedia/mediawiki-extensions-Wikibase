@@ -19,11 +19,6 @@ use Wikibase\LanguageFallbackChainFactory;
  * API module to get the data for one or more Wikibase entities.
  *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -196,7 +191,7 @@ class GetEntities extends ApiWikibase {
 		//FIXME: if we get different kinds of entities at once, $entityId->getNumericId() may not be unique.
 		$entityPath = array(
 			'entities',
-			$this->getUsekeys() ? $entityIdFormatter->format( $entityId ) : $entityId->getNumericId()
+			!$this->getResult()->getIsRawMode() ? $entityIdFormatter->format( $entityId ) : $entityId->getNumericId()
 		);
 
 		// later we do a getContent but only if props are defined

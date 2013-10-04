@@ -9,26 +9,7 @@ use Wikibase\Lib\Serializers\MultilingualSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\MultilingualSerializer
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -42,7 +23,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs = array();
 
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( true );
+		$options->setIndexTags( false );
 		$values = array(
 			"en" => "capital city of Italy",
 			"de" => "Hauptstadt von Italien",
@@ -70,7 +51,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs[] = array( $values, $options, $expectedSerialization );
 
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( false );
+		$options->setIndexTags( true );
 		$values = array(
 			"en" => "capital city of Italy",
 			"de" => "Hauptstadt von Italien",
@@ -98,7 +79,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs[] = array( $values, $options, $expectedSerialization );
 
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( true );
+		$options->setIndexTags( false );
 		$values = array(
 			"en" => "Rome",
 			"de-formal" => array(
@@ -145,7 +126,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs[] = array( $values, $options, $expectedSerialization );
 
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( false );
+		$options->setIndexTags( true );
 		$values = array(
 			"en" => "Rome",
 			"de-formal" => array(
@@ -219,7 +200,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs = array();
 
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( true );
+		$options->setIndexTags( false );
 		$options->setLanguages( array( 'en', 'it', 'de', 'fr' ) );
 		$values = array(
 			"en" => "capital city of Italy",
@@ -248,7 +229,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$options = new MultiLangSerializationOptions();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		$options->setUseKeys( true );
+		$options->setIndexTags( false );
 		$options->setLanguages( array(
 			'de-formal' => $languageFallbackChainFactory->newFromLanguageCode( 'de-formal' ),
 			'zh-cn' => $languageFallbackChainFactory->newFromLanguageCode( 'zh-cn' ),
