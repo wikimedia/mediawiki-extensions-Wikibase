@@ -8,26 +8,7 @@ use Wikibase\Lib\Serializers\AliasSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\AliasSerializer
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -43,7 +24,7 @@ class AliasSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs = array();
 
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( true );
+		$options->setIndexTags( false );
 		$aliases = array(
 			"en" => array( "Roma", "Rome, Italy", "The Eternal City" ),
 			"de" => array( "Die ewige Stadt", "" ),
@@ -66,7 +47,7 @@ class AliasSerializerTest extends \PHPUnit_Framework_TestCase {
 		$validArgs[] = array( $aliases, $options, $expectedSerialization );
 
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( false );
+		$options->setIndexTags( true );
 		$aliases = array(
 				"en" => array( "Roma", "Rome, Italy", "The Eternal City" ),
 				"de" => array( "Die ewige Stadt", "" ),

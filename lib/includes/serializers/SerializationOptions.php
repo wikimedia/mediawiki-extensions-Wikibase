@@ -1,37 +1,17 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
+
 use MWException;
 use ValueFormatters\ValueFormatter;
-use Wikibase\EntityId;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
  * Options for Serializer objects.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * TODO: use PDO like options system as done in ValueParsers
  *
  * @since 0.2
- *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -81,24 +61,6 @@ class SerializationOptions {
 	 */
 	public function shouldIndexTags() {
 		return $this->indexTags;
-	}
-
-	/**
-	 * Sets if keys should be used in the serialization.
-	 *
-	 * @since 0.2
-	 * @deprecated
-	 *
-	 * @param boolean $useKeys
-	 *
-	 * @throws MWException
-	 */
-	public function setUseKeys( $useKeys ) {
-		if ( !is_bool( $useKeys ) ) {
-			throw new MWException( __METHOD__ . ' expects a boolean' );
-		}
-
-		$this->indexTags = !$useKeys;
 	}
 
 	/**

@@ -21,7 +21,6 @@ use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
  *
  * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -41,17 +40,6 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @var bool|string
 	 */
 	protected static $longErrorContextMessage = false;
-
-	/**
-	 * Figure out the instance-specific usekeys-state
-	 *
-	 * @deprecated
-	 *
-	 * @return bool true if the keys should be present
-	 */
-	protected function getUsekeys() {
-		return !$this->getResult()->getIsRawMode();
-	}
 
 	/**
 	 * @see \ApiBase::getPossibleErrors()
@@ -128,12 +116,12 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
+		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$aliasSerializer = new AliasSerializer( $options );
 		$value = $aliasSerializer->getSerialized( $aliases );
 
 		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
+			if ( $this->getResult()->getIsRawMode() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 			$this->getResult()->addValue( $path, $name, $value );
@@ -158,7 +146,7 @@ abstract class ApiWikibase extends \ApiBase {
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
 		$serializerOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_NONE );
-		$serializerOptions->setUseKeys( $this->getUsekeys() );
+		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		if ( isset( $options ) ) {
 			if ( in_array( EntitySerializationOptions::SORT_ASC, $options ) ) {
@@ -181,7 +169,7 @@ abstract class ApiWikibase extends \ApiBase {
 		$value = $siteLinkSerializer->getSerialized( $siteLinks );
 
 		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
+			if ( $this->getResult()->getIsRawMode() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 
@@ -202,13 +190,13 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
+		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$descriptionSerializer = new DescriptionSerializer( $options );
 
 		$value = $descriptionSerializer->getSerialized( $descriptions );
 
 		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
+			if ( $this->getResult()->getIsRawMode() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 
@@ -229,13 +217,13 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
+		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$labelSerializer = new LabelSerializer( $options );
 
 		$value = $labelSerializer->getSerialized( $labels );
 
 		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
+			if ( $this->getResult()->getIsRawMode() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 
@@ -256,13 +244,13 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
 		$options = new MultiLangSerializationOptions();
-		$options->setUseKeys( $this->getUsekeys() );
+		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$claimSerializer = new ClaimsSerializer( $options );
 
 		$value = $claimSerializer->getSerialized( new Claims( $claims ) );
 
 		if ( $value !== array() ) {
-			if ( !$this->getUsekeys() ) {
+			if ( $this->getResult()->getIsRawMode() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 
