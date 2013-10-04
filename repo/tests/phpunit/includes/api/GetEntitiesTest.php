@@ -95,11 +95,9 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		'descriptions',
 		'claims',
 		'datatype',
-		//sub properties
-		'sitelinks/badges',
 		//multiple props
 		'labels|sitelinks/urls',
-		'info|aliases|labels|claims|sitelinks/badges'
+		'info|aliases|labels|claims'
 	);
 
 	/**
@@ -269,11 +267,11 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		if( in_array( 'datatype', $expected['props'] ) ){
 			$this->assertArrayHasKey( 'type', $entity, 'An entity is missing the type value' );
 		}
+		if( in_array( 'sitelinks', $expected['props'] ) ){
+			$this->assertEntityPropsSitelinksBadges( $entity, $expected );
+		}
 		if( in_array( 'sitelinks/urls', $expected['props'] ) ){
 			$this->assertEntityPropsSitelinksUrls( $entity, $expected );
-		}
-		if( in_array( 'sitelinks/badges', $expected['props'] ) ){
-			$this->assertEntityPropsSitelinksBadges( $entity, $expected );
 		}
 		if( array_key_exists( 'dir', $expected ) && array_key_exists( 'sitelinks', $entity ) ){
 			$this->assertEntitySitelinkSorting( $entity, $expected );
