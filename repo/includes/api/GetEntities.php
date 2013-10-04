@@ -115,8 +115,7 @@ class GetEntities extends ApiWikibase {
 	 * @return bool
 	 */
 	protected function hasImpliedSiteLinksProp( $props ) {
-		return in_array( 'sitelinks/urls', $props )
-			|| in_array( 'sitelinks/badges', $props );
+		return in_array( 'sitelinks/urls', $props );
 	}
 
 	/**
@@ -286,7 +285,7 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_ALLOW_DUPLICATES => true
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'sitelinks/badges', 'aliases', 'labels',
+				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
 					'descriptions', 'claims', 'datatype' ),
 				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
 				ApiBase::PARAM_ISMULTI => true,
