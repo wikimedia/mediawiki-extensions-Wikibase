@@ -75,9 +75,9 @@ return call_user_func( function() {
 		'Wikibase\ViewEntityAction' => 'includes/actions/ViewEntityAction.php',
 		'Wikibase\ViewItemAction' => 'includes/actions/ViewItemAction.php',
 		'Wikibase\ViewPropertyAction' => 'includes/actions/ViewPropertyAction.php',
-		'Wikibase\SubmitEntityAction' => 'includes/actions/EditEntityAction.php',
-		'Wikibase\SubmitItemAction' => 'includes/actions/EditItemAction.php',
-		'Wikibase\SubmitPropertyAction' => 'includes/actions/EditPropertyAction.php',
+		'Wikibase\SubmitEntityAction' => 'includes/actions/SubmitEntityAction.php',
+		'Wikibase\SubmitItemAction' => 'includes/actions/SubmitItemAction.php',
+		'Wikibase\SubmitPropertyAction' => 'includes/actions/SubmitPropertyAction.php',
 
 		// includes/api
 		'Wikibase\Api\ApiWikibase' => 'includes/api/ApiWikibase.php',
