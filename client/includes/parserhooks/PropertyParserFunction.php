@@ -219,7 +219,6 @@ class PropertyParserFunction {
 		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
 
 		$instance = new self( $parser, $entityId, $entityLookup, $propertyLabelResolver );
-		$formatter = $wikibaseClient->newSnakFormatter( SnakFormatter::FORMAT_WIKI, $options );
 
 		$result = array(
 			$instance->doRender( $propertyLabel ),
