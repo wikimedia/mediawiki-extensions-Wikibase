@@ -211,7 +211,9 @@ final class RepoHooks {
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( EntityContentFactory::singleton()->isEntityContentModel( $article->getContent()->getModel() ) ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
+		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
 			/**
 			 * @var $newEntity Entity
 			 */
@@ -263,7 +265,7 @@ final class RepoHooks {
 	) {
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$content || !$entityContentFactory->isEntityContentModel( $content->getModel() ) ) {
@@ -307,7 +309,7 @@ final class RepoHooks {
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
@@ -442,10 +444,12 @@ final class RepoHooks {
 	public static function onPageHistoryLineEnding( \HistoryPager $history, &$row, &$s, array &$classes  ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		$article = $history->getArticle();
 		$rev = new Revision( $row );
 
-		if ( EntityContentFactory::singleton()->isEntityContentModel( $history->getTitle()->getContentModel() )
+		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
 			&& $article->getPage()->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 		) {
@@ -480,10 +484,12 @@ final class RepoHooks {
 	public static function onPageTabs( \SkinTemplate &$sktemplate, array &$links ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		$title = $sktemplate->getTitle();
 		$request = $sktemplate->getRequest();
 
-		if ( EntityContentFactory::singleton()->isEntityContentModel( $title->getContentModel() ) ) {
+		if ( $entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
 			unset( $links['views']['edit'] );
 			unset( $links['views']['viewsource'] );
 
@@ -631,7 +637,9 @@ final class RepoHooks {
 	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( EntityContentFactory::singleton()->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
+		if ( $entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
@@ -678,9 +686,11 @@ final class RepoHooks {
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query, &$options, &$ret ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		//NOTE: the model returned by Title::getContentModel() is not reliable, see bug 37209
 		$model = $target->getContentModel();
-		$entityModels = EntityContentFactory::singleton()->getEntityContentModels();
+		$entityModels = $entityContentFactory->getEntityContentModels();
 
 
 		// we only want to handle links to Wikibase entities differently here
@@ -819,12 +829,14 @@ final class RepoHooks {
 	public static function onApiCheckCanExecute( \ApiBase $module, User $user, &$message ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		if ( $module instanceof \ApiEditPage ) {
 			$params = $module->extractRequestParams();
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
-			foreach ( EntityContentFactory::singleton()->getEntityContentModels() as $model ) {
+			foreach ( $entityContentFactory->getEntityContentModels() as $model ) {
 				/**
 				 * @var EntityHandler $handler
 				 */
@@ -883,9 +895,11 @@ final class RepoHooks {
 	) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		$model = $result->getTitle()->getContentModel();
 
-		if ( EntityContentFactory::singleton()->isEntityContentModel( $model ) ) {
+		if ( $entityContentFactory->isEntityContentModel( $model ) ) {
 			$lang = $searchPage->getLanguage();
 			$page = WikiPage::factory( $result->getTitle() );
 

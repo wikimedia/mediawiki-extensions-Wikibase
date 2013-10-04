@@ -7,6 +7,7 @@ use Linker;
 use MWException;
 use Title;
 use Wikibase\EntityContentFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base for special pages that show the result of a Query. Rewriting of QueryPage but
@@ -82,7 +83,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 */
 	protected function formatRow( $entry ) {
 		try {
-			$title = EntityContentFactory::singleton()->getTitleForId( $entry );
+			$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entry );
 			return Linker::linkKnown( $title );
 		} catch ( MWException $e ) {
 			wfWarn( "Error formatting result row: " . $e->getMessage() );

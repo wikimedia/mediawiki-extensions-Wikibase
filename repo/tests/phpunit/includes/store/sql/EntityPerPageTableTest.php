@@ -54,7 +54,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 				$entity->setDataTypeId( 'string' );
 			}
 
-			$content = EntityContentFactory::singleton()->newFromEntity( $entity );
+			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
 			$title = $content->getTitle();
 
 			if ( !$title->exists() ) {

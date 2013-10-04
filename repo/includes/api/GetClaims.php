@@ -109,7 +109,7 @@ class GetClaims extends ApiWikibase {
 	 * @return Entity
 	 */
 	protected function getEntity( EntityId $id ) {
-		$content = EntityContentFactory::singleton()->getFromId( $id );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $id );
 
 		if ( $content === null ) {
 			$this->dieUsage( 'The specified entity does not exist, so it\'s claims cannot be obtained', 'no-such-entity' );

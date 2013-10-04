@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -170,7 +171,7 @@ class ItemContent extends EntityContent {
 		/**
 		 * @var WikiPage $ipsPage
 		 */
-		$conflictingPage = EntityContentFactory::singleton()->getWikiPageForId( $id );
+		$conflictingPage = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
 
 		$siteSqlStore = \SiteSQLStore::newInstance();
 		$site = $siteSqlStore->getSite( $conflict['siteId'] );

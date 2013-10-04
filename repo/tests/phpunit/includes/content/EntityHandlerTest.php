@@ -8,6 +8,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
 use Wikibase\EntityContent;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  *  Tests for the Wikibase\EntityHandler class.
@@ -195,7 +196,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	protected function fakeRevision( Entity $entity, $id = 0 ) {
-		$content = EntityContentFactory::singleton()->newFromEntity( $entity );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
 
 		$revision = new Revision( array(
 			'id' => $id,

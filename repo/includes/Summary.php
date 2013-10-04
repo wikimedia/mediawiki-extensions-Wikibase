@@ -356,7 +356,7 @@ class Summary {
 				$string = $arg;
 				break;
 			case is_object( $arg ) && ($arg instanceof EntityId):
-				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
+				$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $arg );
 				$string = '[[' . $title->getFullText() . ']]';
 				break;
 			case is_object( $arg ) && ( $arg instanceof StringValue ):

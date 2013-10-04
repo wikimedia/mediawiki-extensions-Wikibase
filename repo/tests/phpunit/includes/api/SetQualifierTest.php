@@ -187,7 +187,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		$this->makeValidRequest( $params );
 
-		$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entityId );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entityId );
 
 		$this->assertInstanceOf( '\Wikibase\EntityContent', $content );
 

@@ -16,6 +16,7 @@ use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Property;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\LinkedData\EntityDataRequestHandler
@@ -193,7 +194,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
 			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
 
-			$content = EntityContentFactory::singleton()->getFromId( $entity->getId() );
+			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 			$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
 
 			$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );

@@ -65,7 +65,7 @@ abstract class EntityContent extends \AbstractContent {
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
 			if ( !$this->isNew() ) {
-				$this->wikiPage = EntityContentFactory::singleton()->getWikiPageForId(
+				$this->wikiPage = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId(
 					$this->getEntity()->getId()
 				);
 			}
@@ -124,9 +124,15 @@ abstract class EntityContent extends \AbstractContent {
 		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
-		$entityTitleLookup = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		$entityView = EntityView::newForEntityType( $this->getEntity()->getType(), $valueFormatters, $dataTypeLookup, $entityLoader, $entityTitleLookup );
+		$entityView = EntityView::newForEntityType(
+			$this->getEntity()->getType(),
+			$valueFormatters,
+			$dataTypeLookup,
+			$entityLoader,
+			$entityContentFactory
+		);
 		return $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
 	}
 

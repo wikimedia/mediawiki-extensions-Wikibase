@@ -52,7 +52,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		// TODO: use reverse DI facility (global registry/factory)
 		$repo = WikibaseRepo::getDefaultInstance();
 
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = $repo->getEntityContentFactory();
 		$entityIdParser = $repo->getEntityIdParser();
 		$entityIdFormatter = $repo->getIdFormatter();
 

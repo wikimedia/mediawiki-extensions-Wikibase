@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DBQueryError;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Implementation of the store interface using an SQL backend via MediaWiki's
@@ -113,7 +114,7 @@ class SqlStore implements Store {
 		$pages = $dbw->select(
 			array( 'page' ),
 			array( 'page_id', 'page_latest' ),
-			array( 'page_content_model' => EntityContentFactory::singleton()->getEntityContentModels() ),
+			array( 'page_content_model' => WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getEntityContentModels() ),
 			__METHOD__,
 			array( 'LIMIT' => 1000 ) // TODO: continuation
 		);

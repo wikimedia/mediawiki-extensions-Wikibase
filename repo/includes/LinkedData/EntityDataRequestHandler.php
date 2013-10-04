@@ -16,6 +16,7 @@ use \WebResponse;
 use \OutputPage;
 use \HttpError;
 use \SquidUpdate;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
@@ -363,7 +364,7 @@ class EntityDataRequestHandler {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision $revision does not belong to page "
 					. $page->getTitle()->getPrefixedDBkey() );
 				$entity = null;
-			} elseif ( !EntityContentFactory::singleton()->isEntityContentModel( $rev->getContentModel() ) ) {
+			} elseif ( !WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->isEntityContentModel( $rev->getContentModel() ) ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision has bad model: "
 					. $rev->getContentModel() );
 				$entity = null;

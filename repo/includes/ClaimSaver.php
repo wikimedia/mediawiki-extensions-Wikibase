@@ -138,11 +138,12 @@ class ClaimSaver {
 	 * @throws ExceptionWithCode
 	 */
 	protected function getEntityContent( EntityId $entityId, $revisionId ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		if ( $revisionId === null ) {
-			$content = EntityContentFactory::singleton()->getFromId( $entityId );
+			$content = $entityContentFactory->getFromId( $entityId );
 		}
 		else {
-			$content = EntityContentFactory::singleton()->getFromRevision( $revisionId );
+			$content = $entityContentFactory->getFromRevision( $revisionId );
 		}
 
 		if ( $content === null ) {

@@ -6,6 +6,7 @@ use Wikibase\NamespaceUtils;
 use Wikibase\Item;
 use Wikibase\EntityId;
 use Wikibase\EntityContentFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ViewItemAction;
 use WikiPage;
 use Title;
@@ -87,7 +88,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function testShow404() {
 		$id = new EntityId( Item::ENTITY_TYPE, 1122334455 );
-		$page = EntityContentFactory::singleton()->getWikiPageForId( $id );
+		$page = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
 		$action = $this->createAction( "view", $page );
 
 		/* @var \FauxResponse $response */

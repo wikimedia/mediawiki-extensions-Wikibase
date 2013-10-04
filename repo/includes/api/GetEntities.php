@@ -176,7 +176,7 @@ class GetEntities extends ApiWikibase {
 	protected function handleEntity( $id, array $params ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 

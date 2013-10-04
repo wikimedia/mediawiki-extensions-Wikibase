@@ -2,10 +2,12 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\EntityContentFactory
@@ -133,7 +135,7 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider entityTypesProvider
 	 */
 	public function testNewFromType( $type ) {
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityContent = $entityContentFactory->newFromType( $type );
 		$this->assertEquals( $type, $entityContent->getEntity()->getType() );
 	}
@@ -143,7 +145,7 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidNewFromType( $type ) {
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityContent = $entityContentFactory->newFromType( $type );
 	}
 

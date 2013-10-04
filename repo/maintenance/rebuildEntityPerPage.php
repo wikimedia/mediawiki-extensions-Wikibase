@@ -67,9 +67,7 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 		);
 
 		$entityPerPageTable = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
-
-		$entityContentFactory = EntityContentFactory::singleton();
-
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		$builder = new EntityPerPageBuilder( $entityPerPageTable, $entityContentFactory, $entityIdParser );

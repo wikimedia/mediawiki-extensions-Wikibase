@@ -84,7 +84,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		while ( $claim = array_shift( $claims ) ) {
 			$this->makeTheRequest( array( $claim->getGuid() ) );
 
-			$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 			$obtainedClaims = new \Wikibase\Claims( $content->getEntity()->getClaims() );
 
 			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $claim->getGuid() ) );
@@ -112,7 +112,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 
 		$this->makeTheRequest( $guids );
 
-		$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 		$obtainedEntity = $content->getEntity();
 
 		$this->assertFalse( $obtainedEntity->hasClaims() );

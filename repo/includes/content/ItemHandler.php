@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase;
+
 use User, Title, WikiPage, RequestContext;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content handler for Wikibase items.
@@ -93,7 +95,7 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getContentFromSiteLink( $siteId, $pageName ) {
 		$id = $this->getIdForSiteLink( $siteId, $pageName );
-		return $id === false ? null : EntityContentFactory::singleton()->getFromId( new EntityId( Item::ENTITY_TYPE, $id ) );
+		return $id === false ? null : WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( new EntityId( Item::ENTITY_TYPE, $id ) );
 	}
 
 	/**
@@ -123,7 +125,7 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getFromSiteLink( $siteId, $pageName ) {
 		$id = $this->getIdForSiteLink( $siteId, $pageName );
-		return $id === false ? null : EntityContentFactory::singleton()->getFromId( new EntityId( Item::ENTITY_TYPE, $id ) );
+		return $id === false ? null : WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( new EntityId( Item::ENTITY_TYPE, $id ) );
 	}
 
 	/**
@@ -145,7 +147,7 @@ class ItemHandler extends EntityHandler {
 		}
 
 		$eid = new EntityId( Item::ENTITY_TYPE, $id );
-		return EntityContentFactory::singleton()->getTitleForId( $eid );
+		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $eid );
 	}
 
 	/**

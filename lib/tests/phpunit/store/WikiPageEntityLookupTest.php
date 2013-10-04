@@ -7,6 +7,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\WikiPageEntityLookup;
 
 /**
@@ -68,7 +69,7 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 		}
 
 		// FIXME: this is using repo functionality
-		$content = EntityContentFactory::singleton()->newFromEntity( $entity );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
 		$status = $content->save( "storeTestEntity" );
 
 		if ( !$status->isOK() ) {

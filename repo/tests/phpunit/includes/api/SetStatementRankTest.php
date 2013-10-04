@@ -10,6 +10,7 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
 use Wikibase\SnakList;
 use Wikibase\Statement;
@@ -147,7 +148,7 @@ class SetStatementRankTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( $statementRank, $statement['rank'] );
 
-		$itemContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $item->getId() );
+		$itemContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $item->getId() );
 
 		$this->assertInstanceOf( '\Wikibase\ItemContent', $itemContent );
 

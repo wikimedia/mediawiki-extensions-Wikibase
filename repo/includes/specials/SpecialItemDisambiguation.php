@@ -7,6 +7,7 @@ use Language;
 use Wikibase\EntityContentFactory;
 use Wikibase\Item;
 use Wikibase\ItemDisambiguation;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -62,7 +63,13 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		// Display the result set
 		if ( isset( $language ) && isset( $label ) ) {
 			// TODO: should search over aliases as well, not just labels
-			$itemContents = EntityContentFactory::singleton()->getFromLabel( $language, $label, null, Item::ENTITY_TYPE, true );
+			$itemContents = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromLabel(
+				$language,
+				$label,
+				null,
+				Item::ENTITY_TYPE,
+				true
+			);
 
 			if ( 0 < count( $itemContents ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );

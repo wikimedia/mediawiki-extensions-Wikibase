@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Maintenance;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Script that queries the database for entity artifacts
@@ -64,7 +65,7 @@ class SearchEntityArtefacts extends Maintenance {
 	public function searchArtefacts() {
 		$dbw = wfGetDB( DB_MASTER );
 		$begin = 0;
-		$entityContentFactory = EntityContentFactory::singleton();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$pageArray = array();
 		do {
 			$pages = $dbw->select(

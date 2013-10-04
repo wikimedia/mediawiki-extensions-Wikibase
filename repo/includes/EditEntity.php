@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Status, Revision, User, WikiPage, Title, WebRequest, OutputPage;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -512,7 +513,7 @@ class EditEntity {
 		}
 
 		// create a new entity and tuck it away
-		$this->newContent = EntityContentFactory::singleton()->newFromEntity( $patchedCurrent );
+		$this->newContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $patchedCurrent );
 
 		return true;
 	}

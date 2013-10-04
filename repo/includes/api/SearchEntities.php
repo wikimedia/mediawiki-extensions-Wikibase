@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
@@ -94,8 +95,9 @@ class SearchEntities extends ApiBase {
 		$ids = array();
 		// Gets exact match for the search term as an id if it can be found
 		$entityId = \Wikibase\EntityId::newFromPrefixedId( $params['search'] );
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		if ( $entityId ) {
-			$page = EntityContentFactory::singleton()->getWikiPageForId( $entityId );
+			$page = $entityContentFactory->getWikiPageForId( $entityId );
 			if ( $page->exists() ) {
 				$entityContent = $page->getContent();
 				if ( ( $entityContent instanceof \Wikibase\EntityContent ) && ( $entityContent->getEntity()->getType() === $params['type'] ) ) {
@@ -131,7 +133,7 @@ class SearchEntities extends ApiBase {
 			$entry = array();
 
 			$entry['id'] = $id->getPrefixedId();
-			$entry['url'] = EntityContentFactory::singleton()->getTitleForId( $id )->getFullUrl();
+			$entry['url'] = $entityContentFactory->getTitleForId( $id )->getFullUrl();
 
 			$aliases = array();
 			foreach ( $terms as $term ) {

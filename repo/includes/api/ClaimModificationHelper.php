@@ -10,6 +10,7 @@ use ApiBase, MWException;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Entity;
@@ -128,7 +129,7 @@ class ClaimModificationHelper {
 	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
 	 */
 	public function getEntityTitle( EntityId $entityId ) {
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+		$entityTitle = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
 			$this->apiMain->dieUsage( 'No such entity' , 'no-such-entity' );

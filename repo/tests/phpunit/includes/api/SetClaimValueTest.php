@@ -84,7 +84,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	public function doTestValidRequest( Entity $entity, $claimGuid, $value ) {
-		$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$content = $entityContentFactory->getFromId( $entity->getId() );
 		$claimCount = count( $content->getEntity()->getClaims() );
 
 		$params = array(
@@ -104,7 +105,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( $value, $claim['mainsnak']['datavalue']['value'] );
 
-		$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+		$content = $entityContentFactory->getFromId( $entity->getId() );
 		$obtainedEntity = $content->getEntity();
 
 		$claims = new \Wikibase\Claims( $obtainedEntity->getClaims() );
