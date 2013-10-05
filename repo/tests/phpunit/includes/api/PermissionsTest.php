@@ -70,7 +70,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		parent::tearDown();
 	}
 
-	function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null, array $restore = array() ) {
+	function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null ) {
 		global $wgUser;
 
 		PermissionsHelper::applyPermissions( $permissions );
@@ -155,7 +155,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 			'ids' => EntityTestHelper::getId( 'Oslo' ),
 		);
 
-		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError, array() );
+		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
 	function provideAddItemPermissions() {
@@ -194,7 +194,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 			'new' => 'item',
 		);
 
-		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError, array() );
+		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
 	function provideSetSiteLinkPermissions() {
@@ -221,7 +221,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 			'linktitle' => 'Oslo',
 		);
 
-		$this->doPermissionsTest( 'wbsetsitelink', $params, $permissions, $expectedError, array( "Oslo" ) );
+		$this->doPermissionsTest( 'wbsetsitelink', $params, $permissions, $expectedError );
 	}
 
 	function provideSetLabelPermissions() {
@@ -248,7 +248,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 			'value' => 'Oslo',
 		);
 
-		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError, array( "Oslo" ) );
+		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError );
 	}
 
 	function provideSetDescriptionPermissions() {
@@ -275,7 +275,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 			'value' => 'Capitol of Norway',
 		);
 
-		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError, array( "Oslo" ) );
+		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
 	}
 
 	function provideMergeItemsPermissions() {
@@ -301,7 +301,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 			'toid' => EntityTestHelper::getId( 'Empty' ),
 		);
 
-		$this->doPermissionsTest( 'wbmergeitems', $params, $permissions, $expectedError, array( "Oslo" , "Empty" ) );
+		$this->doPermissionsTest( 'wbmergeitems', $params, $permissions, $expectedError );
 	}
 
 }
