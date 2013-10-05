@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_2a7f9413",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-05T15:06:28Z",
+      "side": 1,
+      "message": "follow up suggestion: drop negation by switching body",
+      "revId": "7c4e9b1c604153ad1db4b4b84e646623ab832b5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
