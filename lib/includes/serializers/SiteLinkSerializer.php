@@ -109,7 +109,7 @@ class SiteLinkSerializer extends SerializerObject {
 					$badges[] = $badge->getSerialization();
 				}
 
-				if ( !$this->options->shouldUseKeys() ) {
+				if ( $this->options->shouldIndexTags() ) {
 					$this->setIndexedTagName( $badges , 'badge' );
 				}
 
@@ -120,7 +120,7 @@ class SiteLinkSerializer extends SerializerObject {
 				$response['removed'] = '';
 			}
 
-			if ( $this->options->shouldUseKeys() ) {
+			if ( !$this->options->shouldIndexTags() ) {
 				$serialization[$link->getSiteId()] = $response;
 			}
 			else {
@@ -128,7 +128,7 @@ class SiteLinkSerializer extends SerializerObject {
 			}
 		}
 
-		if ( !$this->options->shouldUseKeys() ) {
+		if ( $this->options->shouldIndexTags() ) {
 			$this->setIndexedTagName( $serialization, 'sitelink' );
 		}
 

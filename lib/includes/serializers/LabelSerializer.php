@@ -84,7 +84,7 @@ class LabelSerializer extends SerializerObject {
 
 		$value = $this->multilingualSerializer->serializeMultilingualValues( $labels );
 
-		if ( !$this->options->shouldUseKeys() ) {
+		if ( $this->options->shouldIndexTags() ) {
 			$this->setIndexedTagName( $value, 'label' );
 		}
 

@@ -64,18 +64,6 @@ class SerializationOptions {
 	}
 
 	/**
-	 * Returns if keys should be used in the serialization.
-	 *
-	 * @since 0.2
-	 * @deprecated
-	 *
-	 * @return boolean
-	 */
-	public function shouldUseKeys() {
-		return !$this->indexTags;
-	}
-
-	/**
 	 * Returns whether lower case entities IDs should be used as keys in the serialized data structure.
 	 *
 	 * @see setIdKeyMode()

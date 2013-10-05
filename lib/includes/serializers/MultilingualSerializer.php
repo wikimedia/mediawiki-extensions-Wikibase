@@ -66,7 +66,7 @@ class MultilingualSerializer {
 		$idx = 0;
 
 		foreach ( $data as $languageCode => $valueData ) {
-			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
+			$key = $this->options->shouldIndexTags() ? $idx++ : $languageCode;
 			if ( is_array( $valueData ) ) {
 				$value = $valueData['value'];
 				$valueLanguageCode = $valueData['language'];
@@ -85,7 +85,7 @@ class MultilingualSerializer {
 			if ( $valueSourceLanguageCode !== null ) {
 				$values[$key]['source-language'] = $valueSourceLanguageCode;
 			}
-			if ( !$this->options->shouldUseKeys() && $languageCode !== $valueLanguageCode ) {
+			if ( $this->options->shouldIndexTags() && $languageCode !== $valueLanguageCode ) {
 				// To have $languageCode kept somewhere
 				$values[$key]['for-language'] = $languageCode;
 			}

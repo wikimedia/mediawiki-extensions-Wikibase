@@ -72,7 +72,7 @@ class AliasSerializer extends SerializerObject {
 
 		$value = array();
 
-		if ( $this->options->shouldUseKeys() ) {
+		if ( !$this->options->shouldIndexTags() ) {
 			foreach ( $aliases as $languageCode => $alarr ) {
 				$arr = array();
 				foreach ( $alarr as $alias ) {
@@ -101,7 +101,7 @@ class AliasSerializer extends SerializerObject {
 			}
 		}
 
-		if ( !$this->options->shouldUseKeys() ) {
+		if ( $this->options->shouldIndexTags() ) {
 			$this->setIndexedTagName( $value, 'alias' );
 		}
 

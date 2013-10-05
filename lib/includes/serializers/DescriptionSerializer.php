@@ -84,7 +84,7 @@ class DescriptionSerializer extends SerializerObject {
 
 		$value = $this->multilingualSerializer->serializeMultilingualValues( $descriptions );
 
-		if ( !$this->options->shouldUseKeys() ) {
+		if ( $this->options->shouldIndexTags() ) {
 			$this->setIndexedTagName( $value, 'description' );
 		}
 
