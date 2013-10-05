@@ -16,6 +16,23 @@
       "revId": "7c72c5b3727b740eaeb29a929edbb34cd6871478",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_ca6198ad",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-05T11:32:28Z",
+      "side": 1,
+      "message": "This needs to be below sitelinks/urls!\nsitelinks/urls will add \u0027sitelinks\u0027 to expected props. (as far as I remember without opening the code)\n\nIn the current order if sitelinks/urls is set badges will not be checked!",
+      "revId": "7c72c5b3727b740eaeb29a929edbb34cd6871478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
