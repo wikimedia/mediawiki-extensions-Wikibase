@@ -85,6 +85,7 @@ call_user_func( function() {
 	$wgGroupPermissions['*']['item-override']		= true;
 	$wgGroupPermissions['*']['item-create']			= true;
 	$wgGroupPermissions['*']['item-remove']			= true;
+	$wgGroupPermissions['*']['item-merge']			= true;
 	$wgGroupPermissions['*']['property-override']	= true;
 	$wgGroupPermissions['*']['property-create']		= true;
 	$wgGroupPermissions['*']['property-remove']		= true;

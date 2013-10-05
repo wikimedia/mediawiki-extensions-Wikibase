@@ -43,7 +43,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Oslo' ) );
+			$this->initTestEntities( array( 'Oslo', 'Empty' ) );
 		}
 		self::$hasSetup = true;
 
@@ -276,6 +276,32 @@ class PermissionsTest extends WikibaseApiTestCase {
 		);
 
 		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError, array( "Oslo" ) );
+	}
+
+	function provideMergeItemsPermissions() {
+		$permissions = $this->provideEditPermissions();
+
+		$permissions[] = array( #5
+			array( # permissions
+				'*'    => array( 'item-merge' => false ),
+				'user' => array( 'item-merge' => false )
+			),
+			'permissiondenied' # error
+		);
+
+		return $permissions;
+	}
+
+	/**
+	 * @dataProvider provideMergeItemsPermissions
+	 */
+	function testMergeItems( $permissions, $expectedError ) {
+		$params = array(
+			'fromid' => EntityTestHelper::getId( 'Oslo' ),
+			'toid' => EntityTestHelper::getId( 'Empty' ),
+		);
+
+		$this->doPermissionsTest( 'wbmergeitems', $params, $permissions, $expectedError, array( "Oslo" , "Empty" ) );
 	}
 
 }
