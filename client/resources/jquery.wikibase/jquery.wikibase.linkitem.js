@@ -181,7 +181,7 @@ $.widget( 'wikibase.linkitem', {
 		sites = wb.getSitesOfGroup( siteGroup );
 
 		for( site in sites ) {
-			if ( sites[ site ].getGlobalSiteId() !== currentSiteId ) {
+			if ( sites[ site ].getId() !== currentSiteId ) {
 				linkableSites[ site ] = sites[ site ];
 			}
 		}
@@ -327,7 +327,7 @@ $.widget( 'wikibase.linkitem', {
 	*/
 	_onSecondStep: function() {
 		if ( $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ) ) {
-			this.targetSite = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getGlobalSiteId();
+			this.targetSite = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getId();
 		} else {
 			// This should never happen because the button shouldn't be enabled if the site isn't valid
 			// ...keeping this for sanity and paranoia
@@ -390,7 +390,7 @@ $.widget( 'wikibase.linkitem', {
 					.find( 'table' )
 					.append(
 						this._siteLinkRow(
-							wb.getSiteByGlobalId( entity.sitelinks[ i ].site ),
+							wb.getSite( entity.sitelinks[ i ].site ),
 							entity.sitelinks[ i ]
 						)
 					);
