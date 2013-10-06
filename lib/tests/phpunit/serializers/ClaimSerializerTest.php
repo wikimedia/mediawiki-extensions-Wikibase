@@ -4,6 +4,9 @@ namespace Wikibase\Test;
 
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
@@ -11,11 +14,7 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\ClaimSerializer
  *
- * @file
  * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -50,13 +49,13 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$id = new PropertyId( 'P42' );
 
-		$validArgs[] = new Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$validArgs[] = new Claim( new PropertyNoValueSnak( $id ) );
 
-		$validArgs[] = new Claim( new \Wikibase\PropertySomeValueSnak( $id ) );
+		$validArgs[] = new Claim( new PropertySomeValueSnak( $id ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
-		$claim = new Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$claim = new Claim( new PropertyNoValueSnak( $id ) );
 
 		$validArgs[] = array(
 			$claim,
@@ -70,7 +69,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			),
 		);
 
-		$statement = new Statement( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$statement = new Statement( new PropertyNoValueSnak( $id ) );
 
 		$validArgs[] = array(
 			$statement,
@@ -86,11 +85,11 @@ class ClaimSerializerTest extends SerializerBaseTest {
 		);
 
 		$claim = new Claim(
-			new \Wikibase\PropertyNoValueSnak( $id ),
-			new \Wikibase\SnakList( array(
-				new \Wikibase\PropertyNoValueSnak( $id ),
-				new \Wikibase\PropertySomeValueSnak( $id ),
-				new \Wikibase\PropertyNoValueSnak(
+			new PropertyNoValueSnak( $id ),
+			new SnakList( array(
+				new PropertyNoValueSnak( $id ),
+				new PropertySomeValueSnak( $id ),
+				new PropertyNoValueSnak(
 					new PropertyId( 'P1' )
 				),
 			) )
@@ -102,20 +101,14 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			$claim,
 			array(
 				'id' => $claim->getGuid(),
-				'mainsnak' => $snakSerializer->getSerialized(
-					new \Wikibase\PropertyNoValueSnak( $id )
-				),
+				'mainsnak' => $snakSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
 				'qualifiers' => array(
 					'P42' => array(
-						$snakSerializer->getSerialized( new \Wikibase\PropertyNoValueSnak( $id ) ),
-						$snakSerializer->getSerialized(
-							new \Wikibase\PropertySomeValueSnak( $id )
-						),
+						$snakSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
+						$snakSerializer->getSerialized( new PropertySomeValueSnak( $id ) ),
 					),
 					'P1' => array(
-						$snakSerializer->getSerialized( new \Wikibase\PropertyNoValueSnak(
-							new PropertyId( 'P1' )
-						) ),
+						$snakSerializer->getSerialized( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ),
 					),
 				),
 				'qualifiers-order' => array( 'P42', 'P1' ),
@@ -141,7 +134,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	 */
 	public function testRankSerialization( $rank ) {
 		$id = new PropertyId( 'P42' );
-		$statement = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$statement = new Statement( new PropertyNoValueSnak( $id ) );
 
 		$statement->setRank( $rank );
 

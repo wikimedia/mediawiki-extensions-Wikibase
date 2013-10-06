@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test\Serializers;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListUnserializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
@@ -13,11 +14,7 @@ use Wikibase\SnakList;
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListUnserializer
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -61,7 +58,7 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$dataValue0 = new \DataValues\StringValue( 'ohi' );
+		$dataValue0 = new StringValue( 'ohi' );
 
 		$id42 = new PropertyId( 'P42' );
 		$id2 = new PropertyId( 'P2' );

@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Test;
 
 use ValueFormatters\FormatterOptions;
@@ -11,11 +12,10 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
  *
  * @since 0.5
  *
- * @ingroup WikibaseLibTest
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

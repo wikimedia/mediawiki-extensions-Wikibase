@@ -1,37 +1,25 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\Change;
+use Wikibase\ChangeRow;
+use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use \Wikibase\Item;
-use \Wikibase\Property;
-use \Wikibase\EntityChange;
-use \Wikibase\DiffChange;
-use \Wikibase\EntityId;
+use Wikibase\Entity;
+use Wikibase\EntityId;
+use Wikibase\Item;
+use Wikibase\EntityChange;
+use Wikibase\DiffChange;
+use Wikibase\Property;
+use Wikibase\PropertyNoValueSnak;
 
 /**
  * Test change data for ChangeRowTest
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -67,14 +55,14 @@ final class TestChanges {
 
 		if ( empty( $changes ) ) {
 			$empty = Property::newEmpty();
-			$empty->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
+			$empty->setId( new EntityId( Property::ENTITY_TYPE, 100 ) );
 
 			$changes['property-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
 			$changes['property-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
 			$old = Property::newEmpty();
-			$old->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
+			$old->setId( new EntityId( Property::ENTITY_TYPE, 100 ) );
 			$new = $old->copy();
 
 			$new->setLabel( "de", "dummy" );
@@ -83,7 +71,7 @@ final class TestChanges {
 
 			// -----
 			$old = Item::newEmpty();
-			$old->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 100 ) );
+			$old->setId( new EntityId( Item::ENTITY_TYPE, 100 ) );
 
 			/* @var Item $new */
 			$new = $old->copy();
@@ -155,17 +143,17 @@ final class TestChanges {
 			$old = $new->copy();
 
 			// -----
-			$propertyId = new EntityId( \Wikibase\Property::ENTITY_TYPE, 23 );
-			$snak = new \Wikibase\PropertyNoValueSnak( $propertyId );
-			$claim = new \Wikibase\Claim( $snak );
+			$propertyId = new EntityId( Property::ENTITY_TYPE, 23 );
+			$snak = new PropertyNoValueSnak( $propertyId );
+			$claim = new Claim( $snak );
 			$claim->setGuid( 'test-guid' );
 
-			$claims = new \Wikibase\Claims( array( $claim ) );
+			$claims = new Claims( array( $claim ) );
 			$new->setClaims( $claims );
 			$changes['add-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$claims = new \Wikibase\Claims();
+			$claims = new Claims();
 			$new->setClaims( $claims );
 			$changes['remove-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
@@ -226,7 +214,7 @@ final class TestChanges {
 	 * @param string[]|null $infoFilter The info to include in each change, as
 	 *        a list of keys to the info array.
 	 *
-	 * @return \Wikibase\ChangeRow[] a list of changes
+	 * @return ChangeRow[] a list of changes
 	 */
 	public static function getChanges( $changeFilter = null, $infoFilter = null ) {
 		$changes = self::getInstances();
@@ -241,7 +229,7 @@ final class TestChanges {
 			$infoFilter = array_flip( $infoFilter );
 			$filteredChanges = array();
 
-			/* @var \Wikibase\ChangeRow $change */
+			/* @var ChangeRow $change */
 			foreach ( $changes as $change ) {
 				if ( $change->hasField( 'info' ) ) {
 					$info = $change->getField( 'info' );
@@ -260,7 +248,7 @@ final class TestChanges {
 		return $changes;
 	}
 
-	protected static function applyDefaults( \Wikibase\Change $change, array $defaults ) {
+	protected static function applyDefaults( Change $change, array $defaults ) {
 		foreach ( $defaults as $name => $value ) {
 			if ( !$change->hasField( $name ) ) {
 				$change->setField( $name, $value );
@@ -273,7 +261,7 @@ final class TestChanges {
 		$diffs = array();
 
 		foreach ( $changes as $change ) {
-			if ( $change instanceof \Wikibase\DiffChange
+			if ( $change instanceof DiffChange
 				&& $change->hasDiff() ) {
 				$diffs[] = $change->getDiff();
 			}
@@ -287,11 +275,11 @@ final class TestChanges {
 
 		$entities = array(
 			Item::newEmpty(),
-			\Wikibase\Property::newEmpty(),
+			Property::newEmpty(),
 		);
 
 		/**
-		 * @var \Wikibase\Entity $entity
+		 * @var Entity $entity
 		 */
 		foreach( $entities as $entity ) {
 			$entityList[] = $entity;

@@ -1,16 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\TemplateRegistry;
 
 /**
- * Tests for the Wikibase\TemplateRegistry class.
+ * @covers Wikibase\TemplateRegistry
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -21,7 +18,6 @@ use Wikibase\TemplateRegistry;
 class TemplateRegistryTest extends \MediaWikiTestCase {
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider providerAddTemplate
 	 */
 	public function testAddTemplate( $html ) {
@@ -42,7 +38,6 @@ class TemplateRegistryTest extends \MediaWikiTestCase {
 
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider providerAddTemplates
 	 */
 	public function testAddTemplates( $data ) {

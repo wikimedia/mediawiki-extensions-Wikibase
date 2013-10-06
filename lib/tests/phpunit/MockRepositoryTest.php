@@ -13,11 +13,7 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\Test\MockRepository
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

@@ -10,11 +10,7 @@ use Wikibase\Item;
 /**
  * @covers Wikibase\SiteLinkTable
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

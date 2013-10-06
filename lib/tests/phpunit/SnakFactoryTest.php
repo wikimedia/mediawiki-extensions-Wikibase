@@ -1,22 +1,5 @@
 <?php
 
-/**
- * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
- *
- * @group Wikibase
- * @group WikibaseLib
- * @group WikibaseSnak
- * @group Database
- *
- * @license GPL 2+
- * @file
- *
- * @author Daniel Kinzler
- */
-
 namespace Wikibase\Test;
 
 use DataValues\DataValueFactory;
@@ -27,9 +10,17 @@ use Wikibase\PropertyValueSnak;
 use Wikibase\SnakFactory;
 
 /**
- * Class SnakFactoryTest
  * @covers Wikibase\SnakFactory
- * @package Wikibase\Test
+ *
+ * @since 0.4
+ *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseSnak
+ * @group Database
+ *
+ * @license GPL 2+
+ * @author Daniel Kinzler
  */
 class SnakFactoryTest extends \PHPUnit_Framework_TestCase {
 

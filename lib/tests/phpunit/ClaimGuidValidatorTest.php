@@ -7,11 +7,7 @@ use Wikibase\Lib\ClaimGuidValidator;
 /**
  * @covers Wikibase\Lib\ClaimGuidValidator
  *
- * @file
  * @since 0.4
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -35,7 +31,10 @@ class ClaimGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array( 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ),
 			array( 'q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095604' ),
-			array( 'q37$a212184b-434c-7e90-dd26-29eda5ee2580' )
+			array( 'q37$a212184b-434c-7e90-dd26-29eda5ee2580' ),
+			array( 'Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FA' ),
+			array( 'Q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095603' ),
+			array( 'Q37$a212184b-434c-7e90-dd26-29eda5ee2581' )
 		);
 	}
 

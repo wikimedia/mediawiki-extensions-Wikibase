@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Test;
 
 use Wikibase\DataModel\Entity\PropertyId;
@@ -12,11 +13,10 @@ use Wikibase\PropertySomeValueSnak;
  *
  * @since 0.5
  *
- * @ingroup WikibaseLibTest
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

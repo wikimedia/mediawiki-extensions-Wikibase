@@ -5,21 +5,17 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\Query;
 use Wikibase\EntityLookup;
 use Wikibase\Property;
-
 use DataTypes\DataTypeFactory;
 
 /**
  * Base class for testing EntityLookup implementations
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -28,7 +24,7 @@ use DataTypes\DataTypeFactory;
 abstract class EntityLookupTest extends EntityTestCase {
 
 	/**
-	 * @param \Wikibase\Entity[]     $entities
+	 * @param Entity[]     $entities
 	 *
 	 * @todo: Support for multiple revisions per entity.
 	 *        Needs a way to return the revision IDs.
@@ -38,7 +34,7 @@ abstract class EntityLookupTest extends EntityTestCase {
 	protected abstract function newEntityLoader( array $entities );
 
 	/**
-	 * @return \Wikibase\Entity[]
+	 * @return Entity[]
 	 */
 	protected function getTestEntities() {
 		static $entities = null;

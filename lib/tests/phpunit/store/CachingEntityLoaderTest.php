@@ -13,10 +13,6 @@ use Wikibase\Property;
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- * @ingroup Test
- *
  * @group WikibaseLib
  * @group WikibaseEntityLookup
  *

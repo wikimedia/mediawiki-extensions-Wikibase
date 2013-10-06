@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\IO;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\IO\LineReader;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\IO\LineReader;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class LineReaderTest extends PHPUnit_Framework_TestCase {
+class LineReaderTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getTestFile() {
 		return __DIR__ . '/LineReaderTest.txt';

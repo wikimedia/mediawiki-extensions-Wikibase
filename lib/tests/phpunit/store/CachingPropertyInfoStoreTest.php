@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use HashBagOStuff;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\CachingPropertyInfoStore;
@@ -11,11 +12,7 @@ use Wikibase\Item;
 /**
  * @covers Wikibase\CachingPropertyInfoStore
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -40,7 +37,7 @@ class CachingPropertyInfoStoreTest extends \MediaWikiTestCase {
 
 	public function newCachingPropertyInfoStore() {
 		$mock = new MockPropertyInfoStore();
-		$cache = new \HashBagOStuff();
+		$cache = new HashBagOStuff();
 		return new CachingPropertyInfoStore( $mock, $cache );
 	}
 
@@ -69,13 +66,12 @@ class CachingPropertyInfoStoreTest extends \MediaWikiTestCase {
 
 	public function testPropertyInfoWriteThrough() {
 		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
 		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
 
 		$mock = new MockPropertyInfoStore();
-		$cache = new \HashBagOStuff();
+		$cache = new HashBagOStuff();
 
 		$mock->setPropertyInfo( $p23, $info23 );
 

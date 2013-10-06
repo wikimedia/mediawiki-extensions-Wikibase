@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
+use SiteSQLStore;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Entity\ItemId;
@@ -97,7 +99,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validProvider
 	 */
 	public function testGetSerialized( $siteLinks, $options, $expectedSerialization ) {
-		$siteStore = \SiteSQLStore::newInstance();
+		$siteStore = SiteSQLStore::newInstance();
 		$siteStore->reset();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 		$serializedSiteLinks = $siteLinkSerializer->getSerialized( $siteLinks );
@@ -120,7 +122,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidGetSerialized( $sitelinks ) {
 		$options = new EntitySerializationOptions( $this->getIdFormatter() );
-		$siteStore = \SiteSQLStore::newInstance();
+		$siteStore = SiteSQLStore::newInstance();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 		$siteLinkSerializer->getSerialized( $sitelinks );
 	}

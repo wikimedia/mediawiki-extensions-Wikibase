@@ -11,10 +11,7 @@ use Wikibase\Lib\EntityIdParser;
 /**
  * @covers Wikibase\Lib\EntityIdParser
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLibTest
  *
  * @group ValueParsers
  * @group WikibaseLib

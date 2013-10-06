@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
@@ -12,11 +13,10 @@ use Wikibase\Lib\EscapingValueFormatter;
  *
  * @since 0.5
  *
- * @ingroup WikibaseLibTest
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

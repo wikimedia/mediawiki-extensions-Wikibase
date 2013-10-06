@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
@@ -8,18 +9,16 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DispatchingValueFormatter;
-use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Lib\DispatchingValueFormatter
  *
  * @since 0.5
  *
- * @ingroup WikibaseLibTest
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -29,7 +28,6 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorErrorsProvider
 	 *
-	 * @param $format
 	 * @param $formatters
 	 * @param $error
 	 */
