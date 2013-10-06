@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api;
 
+use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use Wikibase\Lib\EntityIdParser;
@@ -80,13 +81,15 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
-	 * @param \ApiMain $apiMain
+	 * @param ApiMain $apiMain
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param SnakConstructionService $snakConstructionService
 	 * @param EntityIdParser $entityIdParser
+	 * @param ClaimGuidValidator $claimGuidValidator
+	 * @param SnakValidationHelper $snakValidation
 	 */
 	public function __construct(
-		\ApiMain $apiMain,
+		ApiMain $apiMain,
 		EntityContentFactory $entityContentFactory,
 		SnakConstructionService $snakConstructionService,
 		EntityIdParser $entityIdParser,
@@ -206,29 +209,18 @@ class ClaimModificationHelper {
 			$this->apiMain->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
 		}
 
-		$this->validateSnak( $snak );
+		$this->snakValidation->validateSnak( $snak );
 
 		return $snak;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Snak $snak
-	 */
-	public function validateSnak( Snak $snak ) {
-		$this->snakValidation->validateSnak( $snak );
 	}
 
 	/**
 	 * Parses an entity id string coming from the user
 	 *
 	 * @since 0.4
-	 *
 	 * @param string $entityIdParam
-	 *
-	 * TODO: this could go into an EntityModificationHelper or even in a ApiWikibaseHelper
-	 * as it is useful for almost all API modules
+	 * @return EntityId
+	 * @todo this could go into an EntityModificationHelper or even in a ApiWikibaseHelper
 	 */
 	public function getEntityIdFromString( $entityIdParam ) {
 		try {
