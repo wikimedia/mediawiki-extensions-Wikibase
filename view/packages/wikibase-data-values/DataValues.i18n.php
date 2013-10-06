@@ -282,9 +282,11 @@ $messages['pms'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Cainamarques
+ * @author 555
  */
 $messages['pt-br'] = array(
 	'datavalues-desc' => 'Coleção de objetos representando vários tipos de valores',
+	'version-datavalues' => 'DataValues',
 );
 
 /** tarandíne (tarandíne)
