@@ -34,7 +34,8 @@ class SetStatementRank extends ModifyClaim {
 
 		$entityId = $this->claimGuidParser->parse( $params['statement'] )->getEntityId();
 		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
-		$entityContent = $this->getEntityContent( $entityTitle );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 		$entity = $entityContent->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 

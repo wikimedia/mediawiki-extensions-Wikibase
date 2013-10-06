@@ -53,8 +53,10 @@ class SetClaim extends ModifyClaim {
 		$guid = $this->claimGuidParser->parse( $guid );
 
 		$entityId = $guid->getEntityId();
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->getFromId( $entityId );
+		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityContent = $this->loadEntityContent( $entityTitle ,$baseRevisionId );
+
 		$entity = $entityContent->getEntity();
 		$summary = $this->getSummary( $params, $claim, $entityContent );
 
