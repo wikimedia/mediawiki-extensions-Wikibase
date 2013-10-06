@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
+use FormatJson;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -49,13 +50,13 @@ class SetClaimTest extends WikibaseApiTestCase {
 	protected static function snakProvider() {
 		static $hasProperties = false;
 
-		$prop42 = new PropertyId( 'P42' );
+		$prop4200 = new PropertyId( 'P4200' );
 		$prop9001 = new PropertyId( 'P9001' );
 		$prop7201010 = new PropertyId( 'P7201010' );
 
 		if ( !$hasProperties ) {
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop42 );
+			$prop->getEntity()->setId( $prop4200 );
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
@@ -74,7 +75,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$snaks = array();
 
-		$snaks[] = new PropertyNoValueSnak( $prop42 );
+		$snaks[] = new PropertyNoValueSnak( $prop4200 );
 		$snaks[] = new PropertySomeValueSnak( $prop9001 );
 		$snaks[] = new PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
 
@@ -126,7 +127,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testAddClaim( Claim $claim ) {
 		$item = Item::newEmpty();
 		$content = new ItemContent( $item );
-		$content->save( '', null, EDIT_NEW );
+		$content->save( 'setclaimtest', null, EDIT_NEW );
 
 		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 		$guid = $guidGenerator->newGuid();
@@ -134,7 +135,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claim->setGuid( $guid );
 
 		// Addition request
-		$this->makeRequest( $claim, $item->getId(), 1 );
+		$this->makeRequest( $claim, $item->getId(), 1, 'addition request' );
 
 		// Reorder qualifiers
 		if( count( $claim->getQualifiers() ) > 0 ) {
@@ -146,54 +147,51 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$serializedClaim = $serializer->getSerialized( $claim );
 			$firstPropertyId = array_shift( $serializedClaim['qualifiers-order'] );
 			array_push( $serializedClaim['qualifiers-order'], $firstPropertyId );
-			$this->makeRequest( $serializedClaim, $item->getId(), 1 );
+			$this->makeRequest( $serializedClaim, $item->getId(), 1, 'reorder qualifiers' );
 		}
 
 		$claim = new Statement( new PropertyNoValueSnak( 9001 ) );
 		$claim->setGuid( $guid );
 
 		// Update request
-		$this->makeRequest( $claim, $item->getId(), 1 );
+		$this->makeRequest( $claim, $item->getId(), 1, 'update request' );
 	}
 
 	/**
 	 * @param Claim|array $claim Native or serialized claim object.
 	 * @param EntityId $entityId
 	 * @param $claimCount
+	 * @param $requestLabel string a label to identify requests that are made in errors
 	 */
-	protected function makeRequest( $claim, EntityId $entityId, $claimCount ) {
+	protected function makeRequest( $claim, EntityId $entityId, $claimCount, $requestLabel ) {
 		$serializerFactory = new SerializerFactory();
 
 		if( is_a( $claim, '\Wikibase\Claim' ) ) {
-			$serializer = $serializerFactory->newSerializerForObject( $claim );
-			$serializedClaim = $serializer->getSerialized( $claim );
+			$unserializer = $serializerFactory->newSerializerForObject( $claim );
+			$serializedClaim = $unserializer->getSerialized( $claim );
 		} else {
-			$serializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
+			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 			$serializedClaim = $claim;
-			$claim = $serializer->newFromSerialization( $serializedClaim );
+			$claim = $unserializer->newFromSerialization( $serializedClaim );
 		}
 
-		$params = array(
+		$this->makeValidRequest( array(
 			'action' => 'wbsetclaim',
-			'claim' => \FormatJson::encode( $serializedClaim ),
-		);
-
-		$this->makeValidRequest( $params );
+			'claim' => FormatJson::encode( $serializedClaim ),
+		) );
 
 		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entityId );
-
 		$this->assertInstanceOf( '\Wikibase\EntityContent', $content );
 
 		$claims = new Claims( $content->getEntity()->getClaims() );
-
-		$this->assertTrue( $claims->hasClaim( $claim ) );
+		$this->assertTrue( $claims->hasClaim( $claim ), "Claims list does not have claim after {$requestLabel}" );
 
 		$savedClaim = $claims->getClaimWithGuid( $claim->getGuid() );
 		if( count( $claim->getQualifiers() ) ) {
 			$this->assertArrayEquals( $claim->getQualifiers()->toArray(), $savedClaim->getQualifiers()->toArray(), true );
 		}
 
-		$this->assertEquals( $claimCount, $claims->count() );
+		$this->assertEquals( $claimCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
 	}
 
 	protected function makeValidRequest( array $params ) {

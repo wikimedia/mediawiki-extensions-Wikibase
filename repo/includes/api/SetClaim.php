@@ -2,62 +2,39 @@
 
 namespace Wikibase\Api;
 
-use DataValues\IllegalValueException;
+use ApiBase;
 use ApiMain;
+use DataValues\IllegalValueException;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
-use MWException;
-use ApiBase;
+use FormatJson;
 use Diff\ListDiffer;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\ChangeOp\ChangeOpClaim;
+use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ClaimDiffer;
+use Wikibase\Claims;
+use Wikibase\ClaimSummaryBuilder;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\EntityContentFactory;
-use Wikibase\ClaimDiffer;
-use Wikibase\ClaimSaver;
-use Wikibase\ClaimSummaryBuilder;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * API module for creating or updating an entire Claim.
  *
  * @since 0.4
- *
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Adam Shorland
  */
-class SetClaim extends ApiWikibase {
-
-	/**
-	 * @var SnakValidationHelper
-	 */
-	protected $snakValidation;
-
-	/**
-	 * see ApiBase::__construct()
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string  $moduleName
-	 * @param string  $modulePrefix
-	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$this->snakValidation = new SnakValidationHelper(
-			$this,
-			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
-			new ValidatorErrorLocalizer()
-		);
-	}
+class SetClaim extends ModifyClaim {
 
 	/**
 	 * @see ApiBase::execute
@@ -65,95 +42,79 @@ class SetClaim extends ApiWikibase {
 	 * @since 0.4
 	 */
 	public function execute() {
-		$claim = $this->getClaimFromRequest();
-
+		$params = $this->extractRequestParams();
+		$claim = $this->getClaimFromParams( $params );
 		$this->snakValidation->validateClaimSnaks( $claim );
 
-		$claimDiffer = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );
+		$guid = $claim->getGuid();
+		if( $guid === null ){
+			$this->dieUsage( 'GUID must be set when setting a claim', 'invalid-claim' );
+		}
+		$guid = $this->claimGuidParser->parse( $guid );
 
-		$options = new FormatterOptions( array(
-			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode()
-		) );
+		$entityId = $guid->getEntityId();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityContent = $entityContentFactory->getFromId( $entityId );
+		$entity = $entityContent->getEntity();
+		$summary = $this->getSummary( $params, $claim, $entityContent );
 
-		$claimSummaryBuilder = new ClaimSummaryBuilder(
-			$this->getModuleName(),
-			$claimDiffer,
-			WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options )
-		);
-		$claimSaver = new ClaimSaver();
-
-		$params = $this->extractRequestParams();
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$token = isset( $params['token'] ) ? $params['token'] : '';
-
-		$user = $this->getUser();
-		$flags = ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-
-		$newRevisionId = null;
-
-		$status = $claimSaver->saveClaim(
-			$claim,
-			$baseRevisionId,
-			$token,
-			$user,
-			$claimSummaryBuilder,
-			$flags
-		);
-		$this->handleSaveStatus( $status ); // die on error, report warnings, etc
-
-		$statusValue = $status->getValue();
-		$newRevisionId = isset( $statusValue['revision'] ) ? $statusValue['revision']->getId() : null;
-
-		if ( $newRevisionId !== null ) {
-			$this->getResult()->addValue( null, 'success', 1 );
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				$newRevisionId
-			);
+		$changeop = new ChangeOpClaim( $claim , new ClaimGuidGenerator( $entityId ) );
+		try{
+			$changeop->apply( $entity, $summary );
+		} catch( ChangeOpException $exception ){
+			$this->dieUsage( 'Failed to apply changeOp:' . $exception->getMessage(), 'save-failed' );
 		}
 
-		$this->outputClaim( $claim );
+		$this->saveChanges( $entityContent, $summary );
+		$this->claimModificationHelper->addClaimToApiResult( $claim );
+	}
+
+	/**
+	 * @param array $params
+	 * @param Claim $claim
+	 * @param EntityContent $entityContent
+	 * @return Summary
+	 * @todo this summary builder is ugly and summary stuff needs to be refactored
+	 */
+	protected function getSummary( array $params, Claim $claim, EntityContent $entityContent ){
+		$claimSummaryBuilder = new ClaimSummaryBuilder(
+			$this->getModuleName(),
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
+			WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter(
+				SnakFormatter::FORMAT_PLAIN,
+				new FormatterOptions(
+					array( ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode() )
+				)
+			)
+		);
+		$summary = $claimSummaryBuilder->buildClaimSummary(
+			new Claims( $entityContent->getEntity()->getClaims() ),
+			$claim
+		);
+		if ( isset( $params['summary'] ) ) {
+			$summary->setUserSummary( $params['summary'] );
+		}
+		return $summary;
 	}
 
 	/**
 	 * @since 0.4
-	 *
+	 * @param array $params
 	 * @return Claim
 	 */
-	protected function getClaimFromRequest() {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+	protected function getClaimFromParams( array $params ) {
+		$serializerFactory = new SerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 
-		$params = $this->extractRequestParams();
-
 		try {
-			$claim = $unserializer->newFromSerialization( \FormatJson::decode( $params['claim'], true ) );
-
-			assert( $claim instanceof Claim );
+			$claim = $unserializer->newFromSerialization( FormatJson::decode( $params['claim'], true ) );
+			if( !$claim instanceof Claim ){
+				$this->dieUsage( 'Failed to get claim from claim Serialization', 'invalid-claim' );
+			}
 			return $claim;
 		} catch ( IllegalValueException $illegalValueException ) {
 			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
 		}
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Claim $claim
-	 */
-	protected function outputClaim( Claim $claim ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializer->getSerialized( $claim )
-		);
 	}
 
 	/**
@@ -164,16 +125,14 @@ class SetClaim extends ApiWikibase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'claim' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
+		return array_merge(
+			array(
+				'claim' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true
+				)
 			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => false,
+			parent::getAllowedParams()
 		);
 	}
 
@@ -194,15 +153,11 @@ class SetClaim extends ApiWikibase {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'claim' => 'Claim serialization',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'claim' => 'Claim serialization'
+			)
 		);
 	}
 
@@ -231,14 +186,6 @@ class SetClaim extends ApiWikibase {
 			'api.php?action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}'
 			=> 'Set the claim with the given id to property P1 with a string value of "City',
 		);
-	}
-
-	/**
-	 * @see ApiBase::isWriteMode
-	 * @return bool true
-	 */
-	public function isWriteMode() {
-		return true;
 	}
 
 }

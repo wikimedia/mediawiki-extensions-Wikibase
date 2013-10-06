@@ -39,12 +39,19 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $claimGuidParser;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
 	 * see ApiBase::__construct()
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$snakValidation = new SnakValidationHelper(
+		$this->snakValidation = new SnakValidationHelper(
 			$this,
 			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
@@ -57,7 +64,7 @@ abstract class ModifyClaim extends ApiWikibase {
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
-			$snakValidation
+			$this->snakValidation
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
