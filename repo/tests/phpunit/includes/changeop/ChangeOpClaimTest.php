@@ -72,15 +72,18 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$claims[6666]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66666' );
 
 		$args = array();
-		//test adding claims with guids from other items
+		//test adding claims with guids from other items(these shouldn't be added)
 		$args[] = array ( $itemEmpty, clone $claims[666] , false );
 		$args[] = array ( $itemEmpty, clone $claims[777] ,  false );
 		$args[] = array ( $item666, clone $claims[777] ,  false );
 		$args[] = array ( $item777, clone $claims[666] ,  false );
-		//test adding the same claims with a null guid (one should be created)
+		//test adding the same claims with a null guid (a guid should be created)
 		$args[] = array ( $item777, clone $claims[7770]  , array( $claims[777], $claims[7770] ) );
 		$args[] = array ( $item666, clone $claims[6660]  , array( $claims[666], $claims[6660] ) );
-		//test adding the same claims with a correct guid
+		//test adding the same claims with a correct but different guid (these should be added)
+		$args[] = array ( $item777, clone $claims[7777]  , array( $claims[777], $claims[7770], $claims[7777]) );
+		$args[] = array ( $item666, clone $claims[6666]  , array( $claims[666], $claims[6660], $claims[6666] ) );
+		//test adding the same claims with and id that already exists (these shouldn't be added)
 		$args[] = array ( $item777, clone $claims[7777]  , array( $claims[777], $claims[7770], $claims[7777]) );
 		$args[] = array ( $item666, clone $claims[6666]  , array( $claims[666], $claims[6660], $claims[6666] ) );
 
