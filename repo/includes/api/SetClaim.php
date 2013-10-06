@@ -2,7 +2,8 @@
 
 namespace Wikibase\Api;
 
-use ApiMain, ApiBase, MWException;
+use ApiBase;
+use ApiMain;
 use DataValues\IllegalValueException;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
@@ -57,7 +58,7 @@ class SetClaim extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->getSummary( $params, $claim, $entityContent );
 
-		$changeop = new ChangeOpClaim( $claim , new ClaimGuidGenerator( $guid->getEntityId() ) );
+		$changeop = new ChangeOpClaim( $claim , new ClaimGuidGenerator( $entityId ) );
 		try{
 			$changeop->apply( $entity, $summary );
 		} catch( ChangeOpException $exception ){

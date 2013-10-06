@@ -50,13 +50,13 @@ class SetClaimTest extends WikibaseApiTestCase {
 	protected static function snakProvider() {
 		static $hasProperties = false;
 
-		$prop42 = new PropertyId( 'P42' );
+		$prop4200 = new PropertyId( 'P4200' );
 		$prop9001 = new PropertyId( 'P9001' );
 		$prop7201010 = new PropertyId( 'P7201010' );
 
 		if ( !$hasProperties ) {
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop42 );
+			$prop->getEntity()->setId( $prop4200 );
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
@@ -75,7 +75,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$snaks = array();
 
-		$snaks[] = new PropertyNoValueSnak( $prop42 );
+		$snaks[] = new PropertyNoValueSnak( $prop4200 );
 		$snaks[] = new PropertySomeValueSnak( $prop9001 );
 		$snaks[] = new PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
 
