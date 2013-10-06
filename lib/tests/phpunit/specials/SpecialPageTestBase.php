@@ -2,14 +2,18 @@
 
 namespace Wikibase\Test;
 
+use DerivativeContext;
+use Exception;
+use HttpStatus;
+use OutputPage;
+use RequestContext;
+use SpecialPage;
+use WebRequest;
+
 /**
  * Base class for testing special pages.
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -43,29 +47,29 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 	/**
 	 * Returns a new instance of the special page under test.
 	 *
-	 * @return \SpecialPage
+	 * @return SpecialPage
 	 */
 	protected abstract function newSpecialPage();
 
 	/**
 	 * @param string $sub The subpage parameter to call the page with
-	 * @param \WebRequest $request Web request that may contain URL parameters, etc
+	 * @param WebRequest $request Web request that may contain URL parameters, etc
 	 *
-	 * @throws \Exception|null
+	 * @throws Exception|null
 	 * @return array array( String, \WebResponse ) containing the output generated
 	 *         by the special page.
 	 */
-	protected function executeSpecialPage( $sub = '', \WebRequest $request = null ) {
+	protected function executeSpecialPage( $sub = '', WebRequest $request = null ) {
 		if ( !$request ) {
 			$request = new \FauxRequest();
 		}
 
 		$response = $request->response();
 
-		$context = new \DerivativeContext( \RequestContext::getMain() );
+		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 
-		$out = new \OutputPage( $context );
+		$out = new OutputPage( $context );
 		$context->setOutput( $out );
 
 		$page = $this->newSpecialPage();
@@ -87,7 +91,7 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 			} else {
 				$text = $out->getHTML();
 			}
-		} catch ( \Exception $ex ) {
+		} catch ( Exception $ex ) {
 			// PHP 5.3 doesn't have `finally`
 			$exception = $ex;
 		}
@@ -103,7 +107,7 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 		$code = $response->getStatusCode();
 
 		if ( $code > 0 ) {
-			$response->header( "Status: " . $code . ' ' . \HttpStatus::getMessage( $code ) );
+			$response->header( "Status: " . $code . ' ' . HttpStatus::getMessage( $code ) );
 		}
 
 		return array( $text, $response );

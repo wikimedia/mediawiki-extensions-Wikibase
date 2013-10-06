@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Comparable;
+use Hashable;
 use Wikibase\Lib\Serializers\SerializerObject;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Unserializer;
@@ -9,11 +11,7 @@ use Wikibase\Lib\Serializers\Unserializer;
 /**
  * Base class for tests that test classes deriving from Wikibase\SerializerObject.
  *
- * @file
  * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -77,7 +75,10 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 			if( !is_null( $normalizedInput ) ) {
 				$input = $normalizedInput;
 			}
-			$this->assertMeaningfulEquals( $input, $roundtrippedValue, 'getSerialized, getUnserialized roundtrip should result in input value' );
+			$this->assertMeaningfulEquals(
+				$input,
+				$roundtrippedValue,
+				'getSerialized, getUnserialized roundtrip should result in input value' );
 		}
 	}
 
@@ -92,12 +93,12 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	 */
 	protected function assertMeaningfulEquals( $expected, $actual, $message = '' ) {
 		if ( is_object( $expected ) ) {
-			if ( $expected instanceof \Comparable ) {
+			if ( $expected instanceof Comparable ) {
 				$this->assertTrue( $expected->equals( $actual ), $message );
 				return;
 			}
 
-			if ( $expected instanceof \Hashable ) {
+			if ( $expected instanceof Hashable ) {
 				$this->assertInstanceOf( '\Hashable', $actual, $message );
 				$this->assertEquals( $expected->getHash( $actual ), $actual->getHash(), $message );
 				return;

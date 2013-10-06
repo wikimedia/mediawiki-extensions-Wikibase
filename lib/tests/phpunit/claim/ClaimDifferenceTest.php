@@ -2,31 +2,18 @@
 
 namespace Wikibase\Test;
 
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
 use Wikibase\ClaimDifference;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\Reference;
+use Wikibase\Statement;
 
 /**
- * Tests for the Wikibase\ClaimDifference class.
+ * @covers Wikibase\ClaimDifference
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -38,8 +25,8 @@ use Wikibase\ClaimDifference;
 class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 	public function testGetReferenceChanges() {
-		$expected = new \Diff\Diff( array(
-			new \Diff\DiffOpAdd( new \Wikibase\Reference() )
+		$expected = new Diff( array(
+			new DiffOpAdd( new Reference() )
 		), false );
 
 		$difference = new ClaimDifference( null, null, $expected );
@@ -51,8 +38,8 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetQualifierChanges() {
-		$expected = new \Diff\Diff( array(
-			new \Diff\DiffOpAdd( new \Wikibase\PropertyNoValueSnak( 42 ) )
+		$expected = new Diff( array(
+			new DiffOpAdd( new PropertyNoValueSnak( 42 ) )
 		), false );
 
 		$difference = new ClaimDifference( null, $expected );
@@ -64,9 +51,9 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetMainSnakChange() {
-		$expected = new \Diff\DiffOpChange(
-			new \Wikibase\PropertyNoValueSnak( 42 ),
-			new \Wikibase\PropertyNoValueSnak( 43 )
+		$expected = new DiffOpChange(
+			new PropertyNoValueSnak( 42 ),
+			new PropertyNoValueSnak( 43 )
 		);
 
 		$difference = new ClaimDifference( $expected );
@@ -78,9 +65,9 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetRankChange() {
-		$expected = new \Diff\DiffOpChange(
-			\Wikibase\Statement::RANK_PREFERRED,
-			\Wikibase\Statement::RANK_DEPRECATED
+		$expected = new DiffOpChange(
+			Statement::RANK_PREFERRED,
+			Statement::RANK_DEPRECATED
 		);
 
 		$difference = new ClaimDifference( null, null, null, $expected );

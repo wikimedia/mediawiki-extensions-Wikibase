@@ -1,16 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\Term;
+
+use Wikibase\Term;
 
 /**
- * Tests for the Wikibase\Term class.
+ * @covers Wikibase\Term
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseTerm
@@ -20,16 +17,6 @@ use \Wikibase\Term;
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  */
 class TermTest extends \MediaWikiTestCase {
-
-	/*
-	protected static $fieldNames = array(
-		'entityType',
-		'entityId',
-		'termType',
-		'termLanguage',
-		'termText',
-	);
-	 */
 
 	public static function provideContructor() {
 		return array(

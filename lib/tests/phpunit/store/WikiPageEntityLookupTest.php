@@ -13,11 +13,7 @@ use Wikibase\WikiPageEntityLookup;
 /**
  * @covers Wikibase\WikiPageEntityLookup
  *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group Database
  * @group Wikibase

@@ -10,23 +10,15 @@ use Wikibase\Validators\EntityExistsValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
- * @license GPL 2+
- * @file
+ * @covers Wikibase\Validators\EntityExistsValidator
  *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @license GPL 2+
  *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseValidators
  *
  * @author Daniel Kinzler
- */
-
-/**
- * Class EntityExistsValidatorTest
- * @covers Wikibase\Validators\EntityExistsValidator
- * @package Wikibase\Test\Validators
  */
 class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 

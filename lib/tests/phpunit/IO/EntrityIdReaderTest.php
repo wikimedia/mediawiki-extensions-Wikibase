@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\IO;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\IO\EntityIdReader;
@@ -17,7 +16,7 @@ use Wikibase\IO\EntityIdReader;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class EntityIdReaderTest extends PHPUnit_Framework_TestCase {
+class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getTestFile() {
 		return __DIR__ . '/EntityIdReaderTest.txt';

@@ -9,11 +9,7 @@ use Wikibase\Item;
 /**
  * @covers Wikibase\Test\MockPropertyInfoStore
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

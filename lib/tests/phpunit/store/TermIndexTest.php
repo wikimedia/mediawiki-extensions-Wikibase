@@ -1,6 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\Property;
+use Wikibase\Settings;
 use Wikibase\TermIndex;
 use Wikibase\ItemContent;
 use Wikibase\Item;
@@ -9,26 +12,7 @@ use Wikibase\Term;
 /**
  * Base class for tests for calsses implementing Wikibase\TermIndex.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -38,13 +22,10 @@ use Wikibase\Term;
 abstract class TermIndexTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return \Wikibase\TermIndex
+	 * @return TermIndex
 	 */
 	public abstract function getTermIndex();
 
-	/**
-	 * @param TermIndex $lookup
-	 */
 	public function testGetEntityIdsForLabel() {
 		$lookup = $this->getTermIndex();
 
@@ -132,10 +113,10 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de' ) );
 		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de', $item::ENTITY_TYPE ) );
 
-		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de', \Wikibase\Property::ENTITY_TYPE ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de', Property::ENTITY_TYPE ) );
 		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'nl' ) );
 		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, 'de' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, null, \Wikibase\Property::ENTITY_TYPE ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, null, Property::ENTITY_TYPE ) );
 		$this->assertFalse( $lookup->termExists( 'dzxfzdtrgfdrtgryfth', Term::TYPE_LABEL ) );
 
 		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION ) );
@@ -235,6 +216,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$content1->save( '', null, EDIT_NEW );
 		$id1 = $content1->getItem()->getId()->getNumericId();
 
+		/** @var Term[] $terms */
 		$terms = array(
 			$id0 => new Term( array(
 				'termLanguage' => 'en',
@@ -245,9 +227,10 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			) ),
 		);
 
+		/** @var Term[] $expectedTerms */
 		$expectedTerms = array();
 
-		if ( !\Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
+		if ( ! Settings::get( 'withoutTermSearchKey' ) ) {
 			// case insensitive match is only found if SearchKey can be used.
 			$expectedTerms[$id0] = new Term( array(
 				'termLanguage' => 'en',

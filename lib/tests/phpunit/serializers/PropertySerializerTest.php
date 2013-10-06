@@ -2,17 +2,12 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataType;
 use Wikibase\Property;
 
 /**
  * @covers Wikibase\Lib\Serializers\PropertySerializer
  *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase

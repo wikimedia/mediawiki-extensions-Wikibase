@@ -2,31 +2,23 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
 use Wikibase\ClaimDifference;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
+use Wikibase\SnakList;
+use Wikibase\Statement;
 
 /**
- * Tests for the Wikibase\ClaimDifferenceVisualizer class.
+ * @covers Wikibase\ClaimDifferenceVisualizer
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -43,26 +35,26 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 		$differences[] = new ClaimDifference();
 
 		$differences[] = new ClaimDifference(
-			new \Diff\DiffOpChange(
-				new \Wikibase\PropertyNoValueSnak( 42 ),
-				new \Wikibase\PropertyNoValueSnak( 43 )
+			new DiffOpChange(
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 43 )
 			),
-			new \Diff\Diff( array(
-				new \Diff\DiffOpAdd( new \Wikibase\PropertySomeValueSnak( 44 ) ),
-				new \Diff\DiffOpRemove( new \Wikibase\PropertyValueSnak( 45, new \DataValues\StringValue( 'foo' ) ) ),
-				new \Diff\DiffOpChange( new \Wikibase\PropertySomeValueSnak( 46 ), new \Wikibase\PropertySomeValueSnak( 47 ) ),
+			new Diff( array(
+				new DiffOpAdd( new PropertySomeValueSnak( 44 ) ),
+				new DiffOpRemove( new PropertyValueSnak( 45, new StringValue( 'foo' ) ) ),
+				new DiffOpChange( new PropertySomeValueSnak( 46 ), new PropertySomeValueSnak( 47 ) ),
 			) )
 		);
 
 		$differences[] = new ClaimDifference(
-			new \Diff\DiffOpChange(
-				new \Wikibase\PropertyNoValueSnak( 42 ),
-				new \Wikibase\PropertyNoValueSnak( 43 )
+			new DiffOpChange(
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 43 )
 			),
 			null,
-			new \Diff\Diff( array(
-				new \Diff\DiffOpAdd( new \Wikibase\Reference() ),
-				new \Diff\DiffOpRemove( new \Wikibase\Reference( new \Wikibase\SnakList( array( new \Wikibase\PropertyNoValueSnak( 50 ) ) ) ) ),
+			new Diff( array(
+				new DiffOpAdd( new Reference() ),
+				new DiffOpRemove( new Reference( new SnakList( array( new PropertyNoValueSnak( 50 ) ) ) ) ),
 			) )
 		);
 
@@ -70,7 +62,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 			null,
 			null,
 			null,
-			new \Diff\DiffOpChange( \Wikibase\Statement::RANK_DEPRECATED, \Wikibase\Statement::RANK_PREFERRED )
+			new DiffOpChange( Statement::RANK_DEPRECATED, Statement::RANK_PREFERRED )
 		);
 
 		return $this->arrayWrap( $differences );

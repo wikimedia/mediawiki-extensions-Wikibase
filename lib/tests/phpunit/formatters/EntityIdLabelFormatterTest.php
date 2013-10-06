@@ -16,14 +16,12 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLibTest
  *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
+ * @group Wikibase
  * @group EntityIdFormatterTest
  *
  * @licence GNU GPL v2+

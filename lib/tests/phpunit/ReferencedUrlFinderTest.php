@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Test;
 
 use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
-use Exception;
 use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\Item;
@@ -20,19 +19,13 @@ use Wikibase\Snak;
 /**
  * @covers Wikibase\ReferencedUrlFinder
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
- * @covers ReferencedUrlFinder
  */
 class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 

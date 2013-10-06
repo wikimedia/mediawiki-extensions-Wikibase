@@ -7,11 +7,7 @@ use Wikibase\Lib\Serializers\Unserializer;
 /**
  * Base class for tests that test classes deriving from Wikibase\SerializerObject.
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase

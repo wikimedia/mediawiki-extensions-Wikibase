@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Diff\Diff;
 use Diff\DiffOpChange;
 use Exception;
@@ -11,28 +12,9 @@ use Wikibase\Entity;
 use Wikibase\ItemDiff;
 
 /**
- * Tests for the Wikibase\ItemChange class.
+ * @covers Wikibase\ItemChange
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.3
-*
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Database
  * @group Wikibase
@@ -90,7 +72,7 @@ class ItemChangeTest extends EntityChangeTest {
 	/**
 	 * @dataProvider changeProvider
 	 *
-	 * @param \Wikibase\ItemChange $change
+	 * @param ItemChange $change
 	 */
 	public function testGetSiteLinkDiff( ItemChange $change ) {
 		$siteLinkDiff = $change->getSiteLinkDiff();
@@ -142,7 +124,7 @@ class ItemChangeTest extends EntityChangeTest {
 	/**
 	 * @dataProvider changeBackwardsCompatProvider
 	 *
-	 * @param \Wikibase\ItemChange $change
+	 * @param ItemChange $change
 	 * @throws Exception
 	 */
 	public function testGetSiteLinkDiffBackwardsCompat( ItemChange $change ) {

@@ -8,23 +8,15 @@ use Wikibase\Validators\TypeValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
- * @license GPL 2+
- * @file
+ * @covers Wikibase\Validators\TypeValidator
  *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @license GPL 2+
  *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseValidators
  *
  * @author Daniel Kinzler
- */
-
-/**
- * Class TypeValidatorTest
- * @covers Wikibase\Validators\TypeValidator
- * @package Wikibase\Test\Validators
  */
 class TypeValidatorTest extends \PHPUnit_Framework_TestCase {
 

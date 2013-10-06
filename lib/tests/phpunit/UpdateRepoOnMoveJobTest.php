@@ -2,16 +2,17 @@
 
 namespace Wikibase\Test;
 
+use Title, User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\UpdateRepoOnMoveJob;
 
 /**
  * @covers Wikibase\UpdateRepoOnMoveJob
  *
- * @file
  * @since 0.4
  *
- * @ingroup Test
+ * @group Wikibase
+ * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
@@ -38,10 +39,10 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	 */
 	public function getSampleData() {
 		return array(
-			'oldTitle' => \Title::newFromText( 'Foo' ),
-			'newTitle' => \Title::newFromText( 'Bar' ),
+			'oldTitle' => Title::newFromText( 'Foo' ),
+			'newTitle' => Title::newFromText( 'Bar' ),
 			'entityId' => new ItemId( 'q123' ),
-			'user' => \User::newFromName( 'RandomUserWhichDoesntExist' ),
+			'user' => User::newFromName( 'RandomUserWhichDoesntExist' ),
 			'siteId' => wfWikiID() // Doesn't really matter what we use here
 		);
 	}
