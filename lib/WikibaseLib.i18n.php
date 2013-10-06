@@ -3271,6 +3271,7 @@ $messages['zh-hant'] = array(
 	'wikibase-entity-property' => '屬性',
 	'wikibase-entity-query' => '查詢',
 	'wikibase-deletedentity-item' => '已刪除項',
+	'wikibase-deletedentity-property' => '已刪除屬性',
 	'wikibase-diffview-reference' => '參考',
 	'wikibase-diffview-rank' => '分級',
 	'wikibase-diffview-qualifier' => '修飾成分',

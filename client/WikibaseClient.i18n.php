@@ -781,6 +781,7 @@ $messages['ckb'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
 	'wikibase-watchlist-show-changes-pref' => 'دەستکارییەکانی ویکیدراوە لە پێرستی چاودێرییەکەت نیشان بدە',
 	'wikibase-unconnectedpages-submit' => 'بڕۆ',
+	'wikibase-pageinfo-entity-id' => 'پێناسەی بەندی ویکیدراوە',
 );
 
 /** Crimean Turkish (Cyrillic script) (къырымтатарджа (Кирилл)‎)
@@ -2911,7 +2912,7 @@ $messages['nds-nl'] = array(
 	'wikibase-linkitem-input-site' => 'Taal:',
 	'wikibase-linkitem-input-page' => 'Zied:',
 	'wikibase-linkitem-invalidsite' => 'Je hebben n onbekende of ongeldige webstee ekeuzen',
-	'wikibase-linkitem-confirmitem-text' => "De zied die'j ekeuzen hebben is al ekoppeld an n onderwarp in onze sentrale gegevensdatabanke. Bevestig dat de {{PLURAL:$2|zied|ziejen}} die hieronder vermeld {{PLURAL:$2|steet|staon}} inderdaod de {{PLURAL:$2|zied|ziejen}} bin die'j mit disse zied koppelen willen.", # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => "De zied die'j ekeuzen hebben is al ekoppeld an n [$1 onderwarp in onze sentrale gegevensdatabanke]. Bevestig dat de {{PLURAL:$2|zied|ziejen}} die hieronder vermeld {{PLURAL:$2|steet|staon}} inderdaod de {{PLURAL:$2|zied|ziejen}} bin die'j mit disse zied koppelen willen.",
 	'wikibase-linkitem-confirmitem-button' => 'Bevestigen',
 	'wikibase-linkitem-not-loggedin-title' => 'Je mutten an-emeld ween',
 	'wikibase-linkitem-not-loggedin' => 'Je mutten an-emeld ween bie disse wiki en de [$1 sentrale gegevensdatabanke] um disse funksie te kunnen gebruken.',
@@ -2935,14 +2936,17 @@ $messages['nds-nl'] = array(
 /** Dutch (Nederlands)
  * @author JurgenNL
  * @author Konovalov
+ * @author Multichill
  * @author Servien
  * @author Siebrand
  */
 $messages['nl'] = array(
 	'wikibase-client-desc' => 'Client voor de uitbreiding Wikibase',
 	'specialpages-group-wikibaseclient' => 'Wikidataclient',
+	'tooltip-t-wikibase' => 'Link naar gekoppeld gegevensrepository item',
 	'wikibase-after-page-move' => 'U kunt ook het gekoppelde Wikidataitem [$1 bijwerken] om de taalkoppelingen op de hernoemde pagina te kunnen beheren.',
 	'wikibase-after-page-move-queued' => 'Het [$1 Wikidata-item] gekoppeld aan deze pagina zal binnenkort automatisch worden bijgewerkt.',
+	'wikibase-comment-add' => 'Een Wikidata item is aangemaakt.',
 	'wikibase-comment-remove' => 'Het gekoppelde Wikidataitem is verwijderd. De taalkoppelingen zijn verwijderd.',
 	'wikibase-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
 	'wikibase-comment-unlink' => 'Deze pagina is ontkoppeld van het Wikidataitem. De taalkoppelingen zijn verwijderd.',
@@ -2975,6 +2979,8 @@ $messages['nl'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase ondersteunt het eigenschapstype voor de eigenschap $1 nog niet.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata bewerking',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata bewerkingen weergeven in uw volglijst',
 	'wikibase-error-serialize-error' => 'De gegevens konden niet geserialiseerd worden',
 	'wikibase-error-invalid-entity-id' => 'Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
@@ -2988,6 +2994,7 @@ $messages['nl'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item-ID',
 	'wikibase-pageinfo-entity-id-none' => 'Geen',
+	'wikibase-property-render-error' => 'Het renderen van eigenschap $1 is mislukt: $2',
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)
@@ -3140,16 +3147,25 @@ $messages['pms'] = array(
 	'wikibase-rc-show-wikidata-pref' => "Smon-e le modìfiche ëd Wikidata ant j'ùltime modìfiche",
 );
 
+/** Pashto (پښتو)
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ */
+$messages['ps'] = array(
+	'wikibase-after-page-move-queued' => 'د [$1 ويکيډاټا توکی] چې همدې مخ سره اړونده و هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.',
+);
+
 /** Portuguese (português)
  * @author Helder.wiki
  * @author Lijealso
  * @author Luckas
  * @author Malafaya
+ * @author OTAVIO1981
  * @author SandroHc
  */
 $messages['pt'] = array(
 	'wikibase-client-desc' => 'Cliente para a extensão Wikibase',
 	'wikibase-after-page-move' => 'Também pode [$1 atualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
+	'wikibase-after-page-move-queued' => 'O [ $1  item wikidata] associado a esta página será automaticamente atualizado em breve.',
 	'wikibase-comment-remove' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
 	'wikibase-comment-linked' => 'Um item do Wikidata foi ligado a esta página.',
 	'wikibase-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para outros idiomas foram removidos.',
@@ -3168,6 +3184,7 @@ $messages['pt'] = array(
  * @author Cainamarques
  * @author Helder.wiki
  * @author Jaideraf
+ * @author OTAVIO1981
  * @author Opraco
  * @author TheGabrielZaum
  * @author Tuliouel
@@ -3176,6 +3193,7 @@ $messages['pt-br'] = array(
 	'wikibase-client-desc' => 'Cliente para a extensão Wikibase',
 	'specialpages-group-wikibaseclient' => 'Cliente Wikidata',
 	'wikibase-after-page-move' => 'Você também pode [$1 atualizar] o item associado ao Wikidata para manter os links de idioma na página movida.',
+	'wikibase-after-page-move-queued' => 'O [ $1  item wikidata] associado a esta página será automaticamente atualizado em breve.',
 	'wikibase-comment-remove' => 'O item associado no Wikidata foi eliminado. Os links para os outros idiomas foram removidos.',
 	'wikibase-comment-linked' => 'Um item do Wikidata foi associado a esta página.',
 	'wikibase-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para os outros idiomas foram removidos.',
@@ -4112,6 +4130,7 @@ $messages['zh-hant'] = array(
 	'wikibase-client-desc' => 'Wikibase擴展客戶端',
 	'specialpages-group-wikibaseclient' => '維基數據客戶端',
 	'wikibase-after-page-move' => '您還可以[$1 更新]關聯的維基數據項，使其連結至移動後的頁面。',
+	'wikibase-comment-add' => '一個維基數據項已被创建。',
 	'wikibase-comment-remove' => '關聯的維基數據項目已刪除。語言連結已移除。',
 	'wikibase-comment-linked' => '一個維基數據項已連結至此頁面。',
 	'wikibase-comment-unlink' => '本頁已解除維基數據項目的連結。語言連結已移除。',
