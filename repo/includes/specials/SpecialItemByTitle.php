@@ -61,14 +61,14 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			}
 
 			$itemHandler = new ItemHandler();
-			$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
+			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
 			// Do we have an item content, and if not can we try harder?
 			if ( $itemContent === null && Settings::get( 'normalizeItemByTitlePageNames' ) === true ) {
 				// Try harder by requesting normalization on the external site
 				$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
 					$pageName = $siteObj->normalizePageName( $page );
-					$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
+					$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
 				}
 			}
 
