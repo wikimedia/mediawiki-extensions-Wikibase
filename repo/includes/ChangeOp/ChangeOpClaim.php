@@ -7,6 +7,7 @@ use Wikibase\Claim;
 use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -59,15 +60,17 @@ class ChangeOpClaim extends ChangeOpBase {
 	public function apply( Entity $entity, Summary $summary = null ) {
 
 		$guidValidator = new ClaimGuidValidator();
+		$guidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 
 		if( $this->claim->getGuid() === null ){
 			$this->claim->setGuid( $this->guidGenerator->newGuid() );
 		}
 		$guid = $this->claim->getGuid();
+		$guid = $guidParser->parse( $guid );
 
-		if ( $guidValidator->validate( $guid ) === false ) {
+		if ( $guidValidator->validate( $guid->getSerialization() ) === false ) {
 			throw new ChangeOpException( "Claim does not have a valid GUID" );
-		} else if ( strtoupper( $entity->getId()->getPrefixedId() ) !== substr( $guid, 0, strpos( $guid, '$' ) ) ){
+		} else if ( !$entity->getId()->equals( $guid->getEntityId() ) ){
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
