@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_6ccfe157",
+        "filename": "lib/tests/phpunit/Validators/NumberRangeValidatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-07T13:03:27Z",
+      "side": 1,
+      "message": "another reference to string length validations. can be fixed in followup, though",
+      "revId": "f9edd4d1e614913c2a7a0dba3dc4c43a768168c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
