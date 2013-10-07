@@ -11,7 +11,7 @@ use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ItemContent;
 
 /**
- * @covers Wikibase\ChangeOps
+ * @covers Wikibase\ChangeOp\ChangeOps
  *
  * @since 0.4
  *
@@ -30,7 +30,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \Wikibase\ChangeOp[]
+	 * @return ChangeOp[]
 	 */
 	public function changeOpProvider() {
 		$ops = array();

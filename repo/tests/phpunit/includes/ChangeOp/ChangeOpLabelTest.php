@@ -3,13 +3,13 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpDescription;
+use Wikibase\Summary;
+use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
-use Wikibase\Summary;
 
 /**
- * @covers Wikibase\ChangeOpDescription
+ * @covers Wikibase\ChangeOp\ChangeOpLabel
  *
  * @since 0.4
  *
@@ -20,36 +20,36 @@ use Wikibase\Summary;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct() {
-		$changeOpDescription = new ChangeOpDescription( 42, 'myOld' );
+		$changeOpLabel = new ChangeOpLabel( 42, 'myNew' );
 	}
 
-	public function changeOpDescriptionProvider() {
+	public function changeOpLabelProvider() {
 		$args = array();
-		$args[] = array ( new ChangeOpDescription( 'en', 'myNew' ), 'myNew' );
-		$args[] = array ( new ChangeOpDescription( 'en', null ), '' );
+		$args[] = array ( new ChangeOpLabel( 'en', 'myNew' ), 'myNew' );
+		$args[] = array ( new ChangeOpLabel( 'en', null ), '' );
 
 		return $args;
 	}
 
 	/**
-	 * @dataProvider changeOpDescriptionProvider
+	 * @dataProvider changeOpLabelProvider
 	 *
-	 * @param ChangeOpDescription $changeOpDescription
-	 * @param string $expectedDescription
+	 * @param ChangeOpLabel $changeOpLabel
+	 * @param string $expectedLabel
 	 */
-	public function testApply( $changeOpDescription, $expectedDescription ) {
+	public function testApply( $changeOpLabel, $expectedLabel ) {
 		$entity = $this->provideNewEntity();
-		$entity->setDescription( 'en', 'test' );
+		$entity->setLabel( 'en', 'test' );
 
-		$changeOpDescription->apply( $entity );
+		$changeOpLabel->apply( $entity );
 
-		$this->assertEquals( $expectedDescription, $entity->getDescription( 'en' ) );
+		$this->assertEquals( $expectedLabel, $entity->getLabel( 'en' ) );
 	}
 
 	protected function provideNewEntity() {
@@ -61,16 +61,16 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$entity = $this->provideNewEntity();
-		$entity->setDescription( 'de', 'Test' );
-		$args[] = array ( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung' ), 'set', 'de' );
+		$entity->setLabel( 'de', 'Test' );
+		$args[] = array ( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung' ), 'set', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->setDescription( 'de', 'Test' );
-		$args[] = array ( $entity, new ChangeOpDescription( 'de', null ), 'remove', 'de' );
+		$entity->setLabel( 'de', 'Test' );
+		$args[] = array ( $entity, new ChangeOpLabel( 'de', null ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->removeDescription( 'de' );
-		$args[] = array ( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung' ), 'add', 'de' );
+		$entity->removeLabel( 'de' );
+		$args[] = array ( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung' ), 'add', 'de' );
 
 		return $args;
 	}

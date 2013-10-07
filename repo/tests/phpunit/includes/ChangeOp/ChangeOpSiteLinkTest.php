@@ -10,7 +10,7 @@ use InvalidArgumentException;
 use Wikibase\SiteLink;
 
 /**
- * @covers Wikibase\ChangeOpSiteLink
+ * @covers Wikibase\ChangeOp\ChangeOpSiteLink
  *
  * @since 0.4
  *
