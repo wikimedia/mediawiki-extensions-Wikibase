@@ -10,6 +10,7 @@ use Wikibase\EntityId;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Abstract special page for modifying Wikibase entity.
@@ -30,6 +31,11 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	protected $entityContent;
 
 	/**
+	 * @var SummaryFormatter
+	 */
+	protected $summaryFormatter;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -39,6 +45,9 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 */
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
+
+		// TODO: find a way to inject this
+		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 	}
 
 	/**
@@ -73,7 +82,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			// TODO: need conflict detection??
 			$editEntity = new EditEntity( $this->entityContent, $this->getUser(), false, $this->getContext() );
 			$editEntity->attemptSave(
-				$summary->toString(),
+				$this->summaryFormatter->formatSummary( $summary ),
 				EDIT_UPDATE,
 				$this->getRequest()->getVal( 'wpEditToken' )
 			);

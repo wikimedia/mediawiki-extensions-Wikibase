@@ -8,7 +8,9 @@ use UserBlockedError;
 use Wikibase\EditEntity;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Page for creating new Wikibase entities.
@@ -39,6 +41,11 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	protected $description = null;
 
 	/**
+	 * @var SummaryFormatter
+	 */
+	protected $summaryFormatter;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param $name String: name of the special page, as seen in links and URLs
@@ -48,6 +55,9 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	 */
 	public function __construct( $name, $restriction = 'createpage' ) {
 		parent::__construct( $name, $restriction );
+
+		// TODO: find a way to inject this
+		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 	}
 
 	/**
@@ -84,10 +94,10 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 				if ( $status->isGood() ) {
 					$summary = new Summary( 'wbeditentity', 'create' );
 					$summary->setLanguage( $this->getLanguage()->getCode() );
-					$summary->addAutoSummaryArgs( array( $this->label, $this->description ) );
+					$summary->addAutoSummaryArgs( $this->label, $this->description );
 					$editEntity = new EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
 					$editEntity->attemptSave(
-						$summary->toString(),
+						$this->summaryFormatter->formatSummary( $summary ),
 						EDIT_AUTOSUMMARY|EDIT_NEW,
 						$this->getRequest()->getVal( 'token' )
 					);

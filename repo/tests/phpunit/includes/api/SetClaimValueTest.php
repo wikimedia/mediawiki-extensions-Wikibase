@@ -2,9 +2,17 @@
 
 namespace Wikibase\Test\Api;
 
+use DataValues\DataValue;
+use DataValues\StringValue;
+use Revision;
+use Title;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\EntityId;
+use Wikibase\Lib\EntityIdLinkFormatter;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -24,8 +32,19 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class SetClaimValueTest extends WikibaseApiTestCase {
+
+	/**
+	 * @var ValueFormatter
+	 */
+	private $entityIdFormatter = null;
+
+	/**
+	 * @var ValueFormatter
+	 */
+	private $propertyValueFormatter = null;
 
 	/**
 	 * @param Entity $entity
@@ -55,9 +74,11 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$property = \Wikibase\Property::newEmpty();
 		$property->setDataTypeId( 'string' );
 
+		$item = \Wikibase\Item::newEmpty();
+
 		return array(
-			$this->addClaimsAndSave( \Wikibase\Item::newEmpty(), $propertyId ),
-			$this->addClaimsAndSave( $property,$propertyId ),
+			$this->addClaimsAndSave( $item, $propertyId ),
+			$this->addClaimsAndSave( $property, $propertyId ),
 		);
 	}
 
@@ -74,7 +95,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			 * @var Claim $claim
 			 */
 			foreach ( $entity->getClaims() as $claim ) {
-				$argLists[] = array( $entity, $claim->getGuid(), 'Kittens.png' );
+				$value = new StringValue( 'Kittens.png' );
+				$argLists[] = array( $entity, $claim->getGuid(), $value->getArrayValue(), $this->getExpectedSummary( $claim, $value ) );
 			}
 		}
 
@@ -83,7 +105,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function doTestValidRequest( Entity $entity, $claimGuid, $value ) {
+	public function doTestValidRequest( Entity $entity, $claimGuid, $value, $summary ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$content = $entityContentFactory->getFromId( $entity->getId() );
 		$claimCount = count( $content->getEntity()->getClaims() );
@@ -107,6 +129,9 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$content = $entityContentFactory->getFromId( $entity->getId() );
 		$obtainedEntity = $content->getEntity();
+		$generatedSummary = $content->getWikiPage()->getRevision()->getComment( Revision::RAW );
+
+		$this->assertEquals( $summary, $generatedSummary, 'Summary mismatch' );
 
 		$claims = new \Wikibase\Claims( $obtainedEntity->getClaims() );
 
@@ -144,6 +169,61 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			array( 'x$y$z' ),
 			array( 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f' )
 		);
+	}
+
+	private function getExpectedSummary( Claim $oldClaim, DataValue $value = null ) {
+		$oldSnak = $oldClaim->getMainSnak();
+		$property = $this->getEntityIdFormatter()->format( $oldSnak->getPropertyId() );
+
+		//NOTE: new snak is always a PropertyValueSnak
+
+		if ( $value === null ) {
+			$value = $oldSnak->getDataValue();
+		}
+
+		$value = $this->getPropertyValueFormatter()->format( $value );
+		return '/* wbsetclaimvalue:1| */' . $property . ': ' . $value;
+	}
+
+	/**
+	 * Returns an EntityIdFormatter like the one that should be used internally for generating
+	 * summaries.
+	 *
+	 * @return ValueFormatter
+	 */
+	protected function getEntityIdFormatter() {
+		if ( !$this->entityIdFormatter ) {
+			$options = new FormatterOptions();
+
+			$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+			$this->entityIdFormatter = new EntityIdLinkFormatter( $options, $titleLookup );
+		}
+
+		return $this->entityIdFormatter;
+	}
+
+	/**
+	 * Returns a ValueFormatter like the one that should be used internally for generating
+	 * summaries.
+	 *
+	 * @return ValueFormatter
+	 */
+	protected function getPropertyValueFormatter() {
+		if ( !$this->propertyValueFormatter ) {
+			$idFormatter = $this->getEntityIdFormatter();
+			
+			$options = new FormatterOptions();
+			$options->setOption( 'formatter-builders-text/plain', array(
+				'VT:wikibase-entityid' => function() use ( $idFormatter ) {
+					return $idFormatter;
+				}
+			) );
+
+			$factory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
+			$this->propertyValueFormatter = $factory->getValueFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+		}
+
+		return $this->propertyValueFormatter;
 	}
 
 }
