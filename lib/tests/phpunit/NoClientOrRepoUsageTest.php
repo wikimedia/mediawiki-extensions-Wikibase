@@ -14,13 +14,15 @@ use SplFileInfo;
 class NoClientOrRepoUsageTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNoRepoUsage() {
-		// Increasing of this allowance is forbidden
+		// Increasing this allowance is forbidden
 		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 4 );
+		$this->assertStringNotInLib( 'Wikibase\\Repo\\', 4 );
 	}
 
 	public function testNoClientUsage() {
-		// Increasing of this allowance is forbidden
+		// Increasing this allowance is forbidden
 		$this->assertStringNotInLib( 'WikibaseClient' . '::', 3 );
+		$this->assertStringNotInLib( 'Wikibase\\Client\\', 5 );
 	}
 
 	public function assertStringNotInLib( $string, $maxAllowance = 0 ) {
