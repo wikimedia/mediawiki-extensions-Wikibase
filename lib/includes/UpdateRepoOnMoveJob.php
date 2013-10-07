@@ -214,8 +214,16 @@ class UpdateRepoOnMoveJob extends \Job {
 
 		$item->addSimpleSiteLink( $siteLink );
 
+		//NOTE: Temporary hack to avoid more dependency mess.
+		//      The Right Thing would be to use a SummaryFormatter.
+		//      This is fixed in a follow-up.
+		$commentArgs = implode( '|', $summary->getCommentArgs() );
+		$autoComment = '/* ' . $summary->getMessageKey()
+			. '|2|' . $summary->getLanguageCode()
+			. '|' . $commentArgs . ' */';
+
 		$status = $editEntity->attemptSave(
-			$summary->toString(),
+			$autoComment,
 			EDIT_UPDATE,
 			false,
 			// Don't (un)watch any pages here, as the user didn't explicitly kick this off
