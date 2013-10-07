@@ -70,6 +70,24 @@
       "revId": "0d15218515775bfbe418136513dee79ca7840018",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_67d53ab5",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-07T14:47:09Z",
+      "side": 1,
+      "message": "it\u0027s a bit involved or would take a bit to explain it.  probably a bot will need to fix these.  It\u0027s things like a coordinate has no \"globe\" specified that cause the error.\n\nNow we have improved validation in Wikibase, thus errors should be very infrequent or not happen at all in the future.",
+      "parentUuid": "0932edd2_a74e52bf",
+      "revId": "0d15218515775bfbe418136513dee79ca7840018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
