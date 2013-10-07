@@ -11,7 +11,7 @@ module StatementPage
   include EntitySelectorPage
   include ReferencePage
   # statements UI elements
-  link(:addStatement, :xpath => "//div[contains(@class, 'wb-claimlist')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
+  link(:addStatement, :xpath => "//div[contains(@class, 'wb-claimlistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
   link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
   link(:editFirstStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-innoneditmode')]/span/a")
   link(:saveStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
