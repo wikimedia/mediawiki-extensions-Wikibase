@@ -52,6 +52,24 @@
       "revId": "0d15218515775bfbe418136513dee79ca7840018",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_a74e52bf",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2013-10-07T14:44:32Z",
+      "side": 1,
+      "message": "Sounds OK for me :-) \n\nThe next question from a user would be: \"Oh, invalid value, how can I fix it, or will be fixed by the system?\" Do you expect that this error is shown very often? Or is it a very rare edge case? \n\nWhat I mean: Does it make sense to expand the error message by a description what to do?",
+      "parentUuid": "0932edd2_67229a06",
+      "revId": "0d15218515775bfbe418136513dee79ca7840018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
