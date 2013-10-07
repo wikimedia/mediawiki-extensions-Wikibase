@@ -412,7 +412,7 @@
 		} );
 
 		if( entity === null ) {
-			throw new Error( 'Unkown entity type "' + type + '"' );
+			throw new Error( 'Unknown entity type "' + type + '"' );
 		}
 		return entity;
 	};
