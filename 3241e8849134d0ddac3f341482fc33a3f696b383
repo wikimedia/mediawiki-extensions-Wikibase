@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_527f1612",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-07T16:00:25Z",
+      "side": 1,
+      "message": "No usage of repo code in lib.",
+      "revId": "3241e8849134d0ddac3f341482fc33a3f696b383",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
