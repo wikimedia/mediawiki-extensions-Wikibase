@@ -101,6 +101,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\PropertyValueSnakFormatter' => 'includes/formatters/PropertyValueSnakFormatter.php',
 		'Wikibase\Lib\SnakFormatter' => 'includes/formatters/SnakFormatter.php',
 		'Wikibase\Lib\SnakFormatterFactory' => 'includes/formatters/SnakFormatterFactory.php',
+		'Wikibase\Lib\UnDeserializableValueFormatter' => 'includes/formatters/UnDeserializableValueFormatter.php',
 		'Wikibase\Lib\WikibaseSnakFormatterBuilders' => 'includes/formatters/WikibaseSnakFormatterBuilders.php',
 
 		// includes/IO
