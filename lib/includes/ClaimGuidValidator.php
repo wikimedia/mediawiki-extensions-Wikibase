@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use Wikibase\Repo\WikibaseRepo;
 use ValueParsers\ParserOptions;
 
 /**
