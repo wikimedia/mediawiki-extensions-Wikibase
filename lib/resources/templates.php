@@ -51,6 +51,21 @@ HTML;
 <h2 class="wb-section-heading wb-sitelinks-heading" dir="auto" id="$2">$1</h2>
 HTML;
 
+	$templates['wb-claimgroupsview'] =
+<<<HTML
+<div>
+	<div class="wb-claimlists">$1<!-- [0,*] wb-claimlist--></div>
+	$2<!-- {1} wb-toolbar -->
+</div>
+HTML;
+
+	$templates['wb-claimgroupsview-groupname'] =
+<<<HTML
+<div class="wb-claimgroupsview-groupname">
+	<div class="wb-claim-name" dir="auto">$1</div>
+</div>
+HTML;
+
 	$templates['wb-claimlist'] =
 <<<HTML
 <div class="wb-claimlist">

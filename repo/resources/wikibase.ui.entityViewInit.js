@@ -143,7 +143,7 @@
 			// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
 			// be initialized:
 			var toolbarControllerConfig = {
-				addtoolbar: ['claimlistview', 'claimsection', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
+				addtoolbar: ['claimgroupsview', 'claimlistview', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
 				edittoolbar: ['statementview', 'referenceview'],
 				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
 			};

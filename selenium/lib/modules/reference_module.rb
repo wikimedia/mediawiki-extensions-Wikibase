@@ -39,9 +39,9 @@ module ReferencePage
   link(:removeReferenceLine2,			:xpath => "//div[contains(@class, 'wb-referenceview')]/div[3]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
   link(:addReferenceLine,				:xpath => "//div[contains(@class, 'wb-referenceview')]//span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add']")
   link(:addReferenceLineDisabled,		:xpath => "//div[contains(@class, 'wb-referenceview')]//span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[contains(@class, 'wikibase-toolbarbutton-disabled')][text()='add']")
-  link(:addReferenceToFirstClaim,			:xpath => "//div[contains(@class, 'wb-claim-section')][1]//a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add source']")
-  link(:addReferenceToFirstClaimDisabled,	:xpath => "//div[contains(@class, 'wb-claim-section')][1]//a[contains(@class, 'wikibase-toolbarbutton-disabled')][text()='add source']")
-  link(:addReferenceToSecondClaim,			:xpath => "//div[contains(@class, 'wb-claim-section')][2]//a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add source']")
+  link(:addReferenceToFirstClaim,			:xpath => "//div[contains(@class, 'wb-claimlistview')][1]//a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add source']")
+  link(:addReferenceToFirstClaimDisabled,	:xpath => "//div[contains(@class, 'wb-claimlistview')][1]//a[contains(@class, 'wikibase-toolbarbutton-disabled')][text()='add source']")
+  link(:addReferenceToSecondClaim,			:xpath => "//div[contains(@class, 'wb-claimlistview')][2]//a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='add source']")
   link(:editReference1, :xpath => "//div[contains(@class, 'wb-referenceview')][1]//span[contains(@class, 'wb-edittoolbar')]/span/span/span/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='edit']")
 
   def wait_for_reference_value_box
