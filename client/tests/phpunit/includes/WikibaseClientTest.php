@@ -75,6 +75,16 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdLabelFormatter', $returnValue );
 	}
 
+	public function testGetSnakFormatterFactory() {
+		$returnValue = $this->getDefaultInstance()->getSnakFormatterFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatSnakFormatterFactory', $returnValue );
+	}
+
+	public function testGetValueFormatterFactory() {
+		$returnValue = $this->getDefaultInstance()->getValueFormatterFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
+	}
+
 	public function testGetDefaultInstance() {
 		$this->assertSame(
 			WikibaseClient::getDefaultInstance(),
