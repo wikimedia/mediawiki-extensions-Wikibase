@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Specials;
 
 use Html;
 use SpecialPage;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
 

@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Serializers;
 use ApiResult;
 use MWException;
 use Wikibase\Entity;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Serializer for entities.

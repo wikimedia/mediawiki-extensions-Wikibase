@@ -1,9 +1,8 @@
 <?php
 
 namespace Wikibase;
+
 use MWException;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Object representing a term.
