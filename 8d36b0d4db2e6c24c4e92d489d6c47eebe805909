@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_4cc93d5b",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-07T13:01:58Z",
+      "side": 1,
+      "message": "you need to rebase again, $this-\u003econtentLanguage is no longer in WikibaseRepo",
+      "revId": "8d36b0d4db2e6c24c4e92d489d6c47eebe805909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
