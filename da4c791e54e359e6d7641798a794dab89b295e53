@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_52fab6bb",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-07T15:49:52Z",
+      "side": 1,
+      "message": "Do we really want to use the user language here?",
+      "revId": "da4c791e54e359e6d7641798a794dab89b295e53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_92042ec4",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-07T15:49:52Z",
+      "side": 1,
+      "message": "FormatJson::decode wil lreturn null if $params[\u0027claim\u0027] is not valid JSON.\nThat will cause a fatal error because newFromSerialization expects an array.\nSince $params[\u0027claim\u0027] is supplied by the client, this is quite bad.",
+      "revId": "da4c791e54e359e6d7641798a794dab89b295e53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
