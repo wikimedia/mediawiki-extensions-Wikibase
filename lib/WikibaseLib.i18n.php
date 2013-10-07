@@ -53,6 +53,7 @@ $messages['en'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Linked article',
 	'wikibase-tooltip-error-details' => 'Details',
+	'wikibase-undeserializable-value' => 'Value cannot be deserialized',
 	'wikibase-validator-bad-type' => '$2 instead of $1',
 	'wikibase-validator-too-long' => 'Must be no more than {{PLURAL:$1|one character|$1 characters}} long',
 	'wikibase-validator-too-short' => 'Must be at least {{PLURAL:$1|one character|$1 characters}} long',
@@ -155,6 +156,7 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (wiki) page.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).
 {{Identical|Detail}}',
+	'wikibase-undeserializable-value' => 'Message to display for any data values that are invalid and cannot be deserialized.  The message is displayed in such places as when users view a diff.',
 	'wikibase-validator-bad-type' => 'Input validation error shown when the input has the wrong type.
 
 Parameters:
