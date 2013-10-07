@@ -12,7 +12,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\ChangeOpQualifier
+ * @covers Wikibase\ChangeOp\ChangeOpQualifier
  *
  * @since 0.4
  *

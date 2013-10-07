@@ -10,9 +10,13 @@ use Wikibase\Item;
 use Wikibase\ItemContent;
 
 /**
+ * @covers Wikibase\ChangeOp\ChangeOpsMerge
+ *
  * @since 0.5
  *
  * @group Wikibase
+ * @group WikibaseRepo
+ * @group ChangeOp
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland

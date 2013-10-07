@@ -12,7 +12,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\ChangeOpStatementRank
+ * @covers Wikibase\ChangeOp\ChangeOpStatementRank
  *
  * @since 0.4
  *

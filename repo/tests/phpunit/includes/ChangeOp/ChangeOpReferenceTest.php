@@ -13,7 +13,7 @@ use Wikibase\SnakList;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\ChangeOpReference
+ * @covers Wikibase\ChangeOp\ChangeOpReference
  *
  * @since 0.4
  *

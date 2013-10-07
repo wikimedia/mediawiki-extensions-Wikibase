@@ -14,7 +14,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\ChangeOpMainSnak
+ * @covers Wikibase\ChangeOp\ChangeOpMainSnak
  *
  * @since 0.4
  *

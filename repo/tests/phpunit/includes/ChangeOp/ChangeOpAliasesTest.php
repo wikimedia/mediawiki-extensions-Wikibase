@@ -8,7 +8,7 @@ use Wikibase\ItemContent;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\ChangeOpAliases
+ * @covers Wikibase\ChangeOp\ChangeOpAliases
  *
  * @since 0.4
  *
