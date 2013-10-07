@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_41a7460e",
+        "filename": "lib/includes/formatters/EntityIdLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-07T10:02:30Z",
+      "side": 1,
+      "message": "This constructor is not doing anything and the doc looks wrong",
+      "revId": "38fc9af756ad311303483e43015267b9001b9cfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
