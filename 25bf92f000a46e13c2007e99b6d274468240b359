@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_6cf8c179",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-07T14:12:13Z",
+      "side": 1,
+      "message": "why put this all on the same line?",
+      "revId": "25bf92f000a46e13c2007e99b6d274468240b359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_cc10cdad",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-07T14:12:13Z",
+      "side": 1,
+      "message": "is this $guid-\u003egetEntityId() different in some way from the one in line 54?\n\nunrelated to this patch, it also seems odd that entity id is required in the  ClaimGuidGenerator constructor. suppose it\u0027s that way to comply with GuidGenerator interface.",
+      "revId": "25bf92f000a46e13c2007e99b6d274468240b359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
