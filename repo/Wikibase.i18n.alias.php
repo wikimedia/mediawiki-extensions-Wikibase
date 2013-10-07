@@ -11,6 +11,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
+// @codingStandardsIgnoreFile
 
 $specialPageAliases = array();
 
@@ -240,7 +241,9 @@ $specialPageAliases['nl'] = array(
 	'SetLabel' => array( 'LabelInstellen' ),
 	'SetDescription' => array( 'BeschrijvingInstellen' ),
 	'SetAliases' => array( 'AliassenInstellen' ),
+	'SetSiteLink' => array( 'SitekoppelingInstellen' ),
 	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
+	'EntitiesWithoutDescription' => array( 'EntiteitenZonderBeschrijving' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsZonderSitekoppelingen' ),
 );
 
