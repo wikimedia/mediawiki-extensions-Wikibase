@@ -77,9 +77,11 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 		$summary = $job->getSummary( 'SiteID', 'Test', 'MoarTest' );
 
+		$this->assertEquals( 'clientsitelink-update', $summary->getMessageKey() );
+		$this->assertEquals( 'SiteID', $summary->getLanguageCode() );
 		$this->assertEquals(
-			'/* clientsitelink-update:0|SiteID|SiteID:Test|SiteID:MoarTest */',
-			$summary->toString()
+			array( 'SiteID:Test', 'SiteID:MoarTest' ),
+			$summary->getCommentArgs()
 		);
 	}
 
