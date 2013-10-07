@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_4c23fd59",
+        "filename": "repo/includes/content/ItemHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-07T12:43:05Z",
+      "side": 1,
+      "message": "$eid?  slightly vague and confusing, imho",
+      "revId": "f9104b780d20a7f24da6726b70f68d59d3f74c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
