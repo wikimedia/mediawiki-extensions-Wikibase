@@ -51,22 +51,28 @@ HTML;
 <h2 class="wb-section-heading wb-sitelinks-heading" dir="auto" id="$2">$1</h2>
 HTML;
 
-	$templates['wb-claimlist'] =
+	$templates['wb-claimgrouplistview'] =
 <<<HTML
-<div class="wb-claimlist">
-	<div class="wb-claims">
-		$1 <!-- [0,*] wb-claim-section -->
-	</div>
+<div class="wb-claimgrouplistview">
+	<div class="wb-claimlists">$1<!-- [0,*] wb-claimlist--></div>
+	$2<!-- {1} wb-toolbar -->
 </div>
 HTML;
 
-	$templates['wb-claim-section'] =
+	$templates['wb-claimgrouplistview-groupname'] =
 <<<HTML
-<div class="wb-claim-section wb-claim-section-$1">
-	<div class="wb-claim-section-name">
-		<div class="wb-claim-name" dir="auto">$2</div>
+<div class="wb-claimgrouplistview-groupname">
+	<div class="wb-claim-name" dir="auto">$1</div>
+</div>
+HTML;
+
+	$templates['wb-claimlistview'] =
+<<<HTML
+<div class="wb-claimlistview">
+	<div class="wb-claims">
+		$1 <!-- [0,*] wb-claim|wb-statement -->
 	</div>
-	$3 <!-- [1,*] wb-claim -->
+	$2 <!-- [0,*] wb-toolbar -->
 </div>
 HTML;
 
@@ -99,7 +105,7 @@ HTML;
 	// the non-JS toolbar to attach to. This parameter should be removed.
 	$templates['wb-statement'] =
 <<<HTML
-<div class="wb-statement $1">
+<div class="wb-statement wb-statementview $1">
 	<div class="wb-statement-claim">
 		<div class="wb-claim wb-claim-$2">
 			<div class="wb-claim-mainsnak" dir="auto">

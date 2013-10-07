@@ -580,22 +580,23 @@ abstract class EntityView extends \ContextSource {
 				$propertyHtml .= $this->getHtmlForClaim( $entity, $claim, $lang, $editable );
 			}
 
-			$propertyHtml .= wfTemplate( 'wikibase-toolbar',
+			$toolbarHtml = wfTemplate( 'wikibase-toolbar',
 				'wb-addtoolbar',
 				// TODO: add link to SpecialPage
 				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' )
 			);
 
-			$claimsHtml .= wfTemplate( 'wb-claim-section',
-				$propertyId,
-				$propertyLink,
-				$propertyHtml
+			$claimsHtml .= wfTemplate( 'wb-claimlistview',
+				$propertyHtml,
+				wfTemplate( 'wb-claimgrouplistview-groupname', $propertyLink ) . $toolbarHtml
 			);
 
 		}
 
+		$claimgrouplistviewHtml = wfTemplate( 'wb-claimgrouplistview', $claimsHtml, '' );
+
 		// TODO: Add link to SpecialPage that allows adding a new claim.
-		$html = $html . wfTemplate( 'wb-claimlist', $claimsHtml );
+		$html = $html . wfTemplate( 'wb-claimlistview', $claimgrouplistviewHtml, '' );
 
 		wfProfileOut( __METHOD__ );
 		return $html;
