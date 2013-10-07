@@ -9,7 +9,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\LanguageWithConversion;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Defines the snak formatters supported by Wikibase.

@@ -11,7 +11,6 @@ use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\LanguageWithConversion;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Defines the formatters for DataValues supported by Wikibase.
