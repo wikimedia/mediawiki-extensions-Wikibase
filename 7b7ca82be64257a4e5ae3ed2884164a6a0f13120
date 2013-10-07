@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_2ca7a90f",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-07T12:20:54Z",
+      "side": 1,
+      "message": "Interesting case in the above method call \u0027formatSUmmary\u0027",
+      "revId": "7b7ca82be64257a4e5ae3ed2884164a6a0f13120",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_2c808949",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimValueTest.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-07T12:20:54Z",
+      "side": 1,
+      "message": "eww",
+      "revId": "7b7ca82be64257a4e5ae3ed2884164a6a0f13120",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
