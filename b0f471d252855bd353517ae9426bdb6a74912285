@@ -16,6 +16,24 @@
       "revId": "b0f471d252855bd353517ae9426bdb6a74912285",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_41d2e659",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-07T10:13:17Z",
+      "side": 1,
+      "message": "What is my other option?\nIf I inject it I will simply be calling WikibaseRepo::getDefaultInstance()-\u003egetClaimGuidParser() anyway.\nIf I want to create my own instance I will have to call WikibaseRepo::getDefaultInstance()-\u003egetIdFormatter()",
+      "parentUuid": "0932edd2_81dbfe78",
+      "revId": "b0f471d252855bd353517ae9426bdb6a74912285",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
