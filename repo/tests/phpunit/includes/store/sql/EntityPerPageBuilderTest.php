@@ -11,9 +11,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\EntityPerPageBuilder
  *
- * @file
- * @since 0.4
- *
  * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
@@ -41,17 +38,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$settings = $this->getTestSettings();
-		$store = StoreFactory::getStore( 'sqlstore' );
-		$lang = Language::factory( 'en' );
+		$this->wikibaseRepo = new WikibaseRepo( $this->getTestSettings() );
 
-		$this->wikibaseRepo = new WikibaseRepo(
-			$settings,
-			$store,
-			$lang
-		);
-
-		$this->entityPerPageTable = $store->newEntityPerPage();
+		$this->entityPerPageTable = $this->wikibaseRepo->getStore()->newEntityPerPage();
 
 		$this->clearTables();
 		$this->addItems();

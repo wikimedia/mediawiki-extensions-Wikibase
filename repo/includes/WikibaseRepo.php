@@ -34,24 +34,6 @@ use Wikibase\StringNormalizer;
 /**
  * Top level factory for the WikibaseRepo extension.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @since 0.4
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -73,11 +55,6 @@ class WikibaseRepo {
 	 * @var EntityIdFormatter|null
 	 */
 	private $idFormatter = null;
-
-	/**
-	 * @var Store
-	 */
-	private $store;
 
 	/**
 	 * @var SnakConstructionService|null
@@ -105,26 +82,40 @@ class WikibaseRepo {
 	private $stringNormalizer;
 
 	/**
-	 * @var Language
-	 */
-	private $contentLanguage;
-
-	/**
 	 * @var OutputFormatSnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * Returns the default instance constructed using newInstance().
+	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
+	 *
+	 * @since 0.4
+	 *
+	 * @return WikibaseRepo
+	 */
+	public static function getDefaultInstance() {
+		static $instance = null;
+
+		if ( $instance === null ) {
+			$instance = new self( Settings::singleton() );
+		}
+
+		return $instance;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
-	 * @param Store         $store
-	 * @param Language      $contentLanguage
 	 */
-	public function __construct( SettingsArray $settings, Store $store, Language $contentLanguage ) {
+	public function __construct( SettingsArray $settings ) {
 		$this->settings = $settings;
-		$this->store = $store;
-		$this->contentLanguage = $contentLanguage;
 	}
 
 	/**
@@ -225,7 +216,11 @@ class WikibaseRepo {
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		return $this->store->getEntityLookup();
+		if ( $this->entityLookup === null ) {
+			$this->entityLookup = StoreFactory::getStore()->getEntityLookup();
+		}
+
+		return $this->entityLookup;
 	}
 
 	/**
@@ -339,41 +334,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Returns a new instance constructed from global settings.
-	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
-	 *
-	 * @since 0.4
-	 *
-	 * @return WikibaseRepo
-	 */
-	protected static function newInstance() {
-		global $wgContLang;
-		return new self(
-			Settings::singleton(),
-			StoreFactory::getStore(),
-			$wgContLang
-		);
-	}
-
-	/**
-	 * Returns the default instance constructed using newInstance().
-	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
-	 *
-	 * @since 0.4
-	 *
-	 * @return WikibaseRepo
-	 */
-	public static function getDefaultInstance() {
-		static $instance = null;
-
-		if ( $instance === null ) {
-			$instance = self::newInstance();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * @since 0.4
 	 *
 	 * @return Store
@@ -402,13 +362,16 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
+		global $wgContLang;
+
 		$builders = new WikibaseSnakFormatterBuilders(
 			$this->getEntityLookup(),
 			$this->getPropertyDataTypeLookup(),
-			$this->contentLanguage
+			$wgContLang
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 		return $factory;
 	}
+
 }
