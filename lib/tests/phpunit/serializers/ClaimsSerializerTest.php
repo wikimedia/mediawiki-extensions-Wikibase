@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
@@ -12,11 +13,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\ClaimsSerializer
  *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -59,7 +56,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 		$claimSerializer = new ClaimSerializer();
 
 		$validArgs[] = array(
-			new \Wikibase\Claims( $claims ),
+			new Claims( $claims ),
 			array(
 				'P42' => array(
 					$claimSerializer->getSerialized( $claims[0] ),

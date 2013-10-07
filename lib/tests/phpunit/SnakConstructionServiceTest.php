@@ -7,44 +7,22 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Property;
 use Wikibase\SnakFactory;
 
 /**
- * Tests for the Wikibase\Lib\SnakConstructionService class.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\Lib\SnakConstructionService
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- * @ingroup Test
- *
+ * @group Wikibase
  * @group WikibaseLib
  * @group Snak
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
- * @covers Wikibase\Lib\SnakConstructionService
  */
 class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 
@@ -68,13 +46,6 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider newSnakProvider
-	 *
-	 * @param $propertyId
-	 * @param $snakType
-	 * @param $rawValue
-	 * @param $expectedSnakClass
-	 * @param $expectedValue
-	 * @param $expectedException
 	 */
 	public function testNewSnak( $propertyId, $snakType, $rawValue, $expectedSnakClass, $expectedValue, $expectedException ) {
 		if ( is_int( $propertyId ) ) {

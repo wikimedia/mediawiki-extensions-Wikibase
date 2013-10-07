@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
 use Wikibase\Lib\Serializers\AliasSerializer;
 

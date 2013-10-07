@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use Wikibase\Claim;
@@ -22,11 +21,7 @@ use Wikibase\Snak;
 /**
  * @covers Wikibase\ReferencedEntitiesFinder
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

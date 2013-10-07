@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
+
+use DatabaseBase;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -18,12 +20,7 @@ use Wikibase\StorageException;
 /**
  * Mock repository for use in tests.
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClient
- * @ingroup Test
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
@@ -57,7 +54,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	 * @param EntityID $entityId
 	 * @param int $revision The desired revision id, 0 means "current".
 	 *
-	 * @throws \Wikibase\StorageException
+	 * @throws StorageException
 	 * @return EntityRevision|null
 	 * @throw StorageException
 	 */
@@ -118,7 +115,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	 * - string sitePage
 	 *
 	 * @param Item               $item
-	 * @param \DatabaseBase|null $db The database object to use (optional).
+	 * @param DatabaseBase|null $db The database object to use (optional).
 	 *                               If conflict checking is performed as part of a save operation,
 	 *                               this should be used to provide the master DB connection that will
 	 *                               also be used for saving. This will preserve transactional integrity
@@ -126,7 +123,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	 *
 	 * @return array of array
 	 */
-	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
+	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
 		$newLinks = array();
 
 		foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
@@ -216,7 +213,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	/**
 	 * Registers the sitelinsk of the given Item so they can later be found with getLinks, etc
 	 *
-	 * @param \Wikibase\Item $item
+	 * @param Item $item
 	 */
 	protected function registerSiteLinks( Item $item ) {
 		$this->unregisterSiteLinks( $item );
@@ -232,7 +229,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	/**
 	 * Unregisters the sitelinsk of the given Item so they are no longer found with getLinks, etc
 	 *
-	 * @param \Wikibase\Item $item
+	 * @param Item $item
 	 */
 	protected function unregisterSiteLinks( Item $item ) {
 		// clean up old sitelinks
@@ -251,11 +248,11 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	 * in the mock repository, it is not removed, but replaced as the current one. If a revision
 	 * ID is given, the entity with the highest revision ID is considered the current one.
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param Entity $entity
 	 * @param int              $revision
 	 * @param int|string       $timestamp
 	 *
-	 * @return \Wikibase\EntityRevision
+	 * @return EntityRevision
 	 */
 	public function putEntity( Entity $entity, $revision = 0, $timestamp = 0 ) {
 		if ( $entity->getId() === null ) {
@@ -302,7 +299,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	/**
 	 * Removes an entity from the mock repository.
 	 *
-	 * @param \Wikibase\EntityId $id
+	 * @param EntityId $id
 	 *
 	 * @return Entity
 	 */

@@ -1,46 +1,17 @@
 <?php
- /**
- *
- * Copyright © 26.06.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
- * @author Daniel Kinzler
- */
-
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\PropertyInfoStore;
 
 /**
- * Class MockPropertyInfoStore is an implementation of PropertyInfoStore
- * based on a local array.
- *
+ * Class MockPropertyInfoStore is an implementation of PropertyInfoStore based on a local array.
  * @since 0.4
- *
- * @package Wikibase\Test
+ * @license GPL 2+
+ * @author Daniel Kinzler
  */
 class MockPropertyInfoStore implements PropertyInfoStore {
 
@@ -57,11 +28,11 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 * @param EntityId $propertyId
 	 *
 	 * @return array|null
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function getPropertyInfo( EntityId $propertyId ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new \InvalidArgumentException( 'Property ID expected! ' . $propertyId );
+			throw new InvalidArgumentException( 'Property ID expected! ' . $propertyId );
 		}
 
 		$propertyInfo = $this->getAllPropertyInfo();
@@ -88,15 +59,15 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 *
 	 * @param EntityId $propertyId
 	 * @param array $info
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setPropertyInfo( EntityId $propertyId, array $info ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new \InvalidArgumentException( 'Property ID expected! ' . $propertyId );
+			throw new InvalidArgumentException( 'Property ID expected! ' . $propertyId );
 		}
 
 		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ]) ) {
-			throw new \InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
+			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 
 		$id = $propertyId->getNumericId();
@@ -108,12 +79,12 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 *
 	 * @param EntityId $propertyId
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return bool
 	 */
 	public function removePropertyInfo( EntityId $propertyId ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new \InvalidArgumentException( 'Property ID expected! ' . $propertyId );
+			throw new InvalidArgumentException( 'Property ID expected! ' . $propertyId );
 		}
 
 		$id = $propertyId->getNumericId();

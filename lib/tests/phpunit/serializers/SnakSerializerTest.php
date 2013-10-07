@@ -2,16 +2,16 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\Lib\Serializers\SnakSerializer
  *
- * @file
  * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -46,7 +46,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 		$id = new PropertyId( 'P42' );
 
 		$validArgs[] = array(
-			new \Wikibase\PropertyNoValueSnak( $id ),
+			new PropertyNoValueSnak( $id ),
 			array(
 				'snaktype' => 'novalue',
 				'property' => 'P42',
@@ -54,17 +54,17 @@ class SnakSerializerTest extends SerializerBaseTest {
 		);
 
 		$validArgs[] = array(
-			new \Wikibase\PropertySomeValueSnak( $id ),
+			new PropertySomeValueSnak( $id ),
 			array(
 				'snaktype' => 'somevalue',
 				'property' => 'P42',
 			)
 		);
 
-		$dataValue = new \DataValues\StringValue( 'ohi' );
+		$dataValue = new StringValue( 'ohi' );
 
 		$validArgs[] = array(
-			new \Wikibase\PropertyValueSnak( $id, $dataValue ),
+			new PropertyValueSnak( $id, $dataValue ),
 			array(
 				'snaktype' => 'value',
 				'property' => 'P42',

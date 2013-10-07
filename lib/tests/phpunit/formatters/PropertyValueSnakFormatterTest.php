@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
@@ -14,11 +15,10 @@ use Wikibase\PropertyValueSnak;
  *
  * @since 0.5
  *
- * @ingroup WikibaseLibTest
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -29,7 +29,6 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider constructorErrorsProvider
 	 *
 	 * @param $format
-	 * @param $formatters
 	 * @param $error
 	 */
 	public function testConstructorErrors( $format, $error ) {

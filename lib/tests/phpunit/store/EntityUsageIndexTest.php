@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use MediaWikiSite;
 use Site;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -10,28 +11,9 @@ use Wikibase\EntityId;
 use Wikibase\Property;
 
 /**
- * Test class for EntityUsageIndex
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @covers Wikibase\EntityUsageIndex
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -218,7 +200,6 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideGetEntityUsage
-	 *
 	 */
 	public function testGetEntityUsage( array $repoItems,
 		Site $site, $wantedEntities, $expectedUsage ) {
@@ -327,7 +308,6 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideGetUsedEntities
-	 *
 	 */
 	public function testGetUsedEntities( array $repoItems,
 		Site $site, $wantedPages, $expectedUsed ) {
@@ -450,7 +430,6 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideFilterUnusedEntities
-	 *
 	 */
 	public function testFilterUnusedEntities( array $repoItems,
 		Site $site, $wantedEntities, $wantedType, $expectedUsed ) {

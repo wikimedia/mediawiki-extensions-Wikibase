@@ -1,27 +1,25 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
- * Tests for the Wikibase\LanguageFallbackChain class.
+ * @covers Wikibase\LanguageFallbackChain
  *
- * @file
  * @since 0.4
  *
- * @ingroup WikibaseLib
- * @ingroup Test
- *
  * @group Wikibase
+ * @group WikibaseLib
  * @group WikibaseUtils
  *
  * @licence GNU GPL v2+
+ * @author Liangent
  */
 class LanguageFallbackChainTest extends \MediaWikiTestCase {
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider provideExtractPreferredValue
 	 */
 	public function testExtractPreferredValue( $lang, $mode, $data, $expected ) {
@@ -113,7 +111,6 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider provideExtractPreferredValueOrAny
 	 */
 	public function testExtractPreferredValueOrAny( $lang, $mode, $data, $expected ) {

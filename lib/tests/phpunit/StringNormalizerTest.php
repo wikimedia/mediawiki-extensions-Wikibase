@@ -1,17 +1,14 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
 
 /**
- * Tests for the Wikibase\StringNormalizer class.
+ * @covers Wikibase\StringNormalizer
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase

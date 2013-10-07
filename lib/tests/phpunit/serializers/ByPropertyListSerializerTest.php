@@ -2,20 +2,21 @@
 
 namespace Wikibase\Test;
 
+use ArrayObject;
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListSerializer
  *
- * @file
  * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -57,26 +58,26 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$dataValue0 = new \DataValues\StringValue( 'ohi' );
+		$dataValue0 = new StringValue( 'ohi' );
 
 		$id42 = new PropertyId( 'p42' );
 		$id2 = new PropertyId( 'p2' );
 
-		$snak0 = new \Wikibase\PropertyNoValueSnak( $id42 );
-		$snak1 = new \Wikibase\PropertySomeValueSnak( $id2 );
-		$snak2 = new \Wikibase\PropertyValueSnak( $id2, $dataValue0 );
+		$snak0 = new PropertyNoValueSnak( $id42 );
+		$snak1 = new PropertySomeValueSnak( $id2 );
+		$snak2 = new PropertyValueSnak( $id2, $dataValue0 );
 
-		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
+		$validArgs[] = new SnakList( array( $snak0, $snak1, $snak2 ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
 		$validArgs[] = array(
-			new \Wikibase\SnakList(),
+			new SnakList(),
 			array(),
 		);
 
 		$validArgs[] = array(
-			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),
+			new SnakList( array( $snak0, $snak1, $snak2 ) ),
 			array(
 				'P42' => array(
 					0 => array(
@@ -112,7 +113,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 		$options->setIdKeyMode( $mode );
 		$serializer = new ByPropertyListSerializer( 'test', $snakSerializer, $options );
 
-		$data = $serializer->getSerialized( new \ArrayObject( array( $snak ) ) );
+		$data = $serializer->getSerialized( new ArrayObject( array( $snak ) ) );
 		$this->assertEquals( ( $mode & SerializationOptions::ID_KEYS_UPPER ) > 0, array_key_exists( 'P123', $data ), 'upper case key' );
 		$this->assertEquals( ( $mode & SerializationOptions::ID_KEYS_LOWER ) > 0, array_key_exists( 'p123', $data ), 'lower case key' );
 	}

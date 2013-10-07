@@ -1,22 +1,22 @@
 <?php
 
 namespace Wikibase\Test;
+
+use MWException;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
- * Tests for the Wikibase\LanguageFallbackChainFactory class.
+ * @covers Wikibase\LanguageFallbackChainFactory
  *
- * @file
  * @since 0.4
  *
- * @ingroup WikibaseLib
- * @ingroup Test
- *
  * @group Wikibase
+ * @group WikibaseLib
  * @group WikibaseUtils
  *
  * @licence GNU GPL v2+
+ * @author Liangent
  */
 class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 
@@ -51,7 +51,6 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider providerNewFromLanguage
 	 */
 	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = null ) {
@@ -63,7 +62,6 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider providerNewFromLanguage
 	 */
 	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = null ) {
@@ -219,18 +217,12 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @group WikibaseLib
-	 */
 	public function testNewFromContext() {
 		$factory = new LanguageFallbackChainFactory();
 		$languageFallbackChain = $factory->newFromContext( \RequestContext::getMain() );
 		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
 	}
 
-	/**
-	 * @group WikibaseLib
-	 */
 	public function testNewFromContextAndLanguageCode() {
 		$factory = new LanguageFallbackChainFactory();
 		$languageFallbackChain = $factory->newFromContext( \RequestContext::getMain(), 'en' );
@@ -238,7 +230,6 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider providerNewFromLanguage
 	 */
 	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected, $disabledVariants = null ) {
@@ -255,7 +246,6 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @group WikibaseLib
 	 * @dataProvider provideTestFromBabel
 	 */
 	public function testBuildFromBabel( $babel, $expected ) {

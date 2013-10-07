@@ -1,15 +1,14 @@
 <?php
+
 namespace Wikibase\Test;
+
 use Wikibase\ChangeNotificationJob;
+use Wikibase\ChangesTable;
 
 /**
- * Tests for the Wikibase\ChangeNotificationJob class.
+ * @covers Wikibase\ChangeNotificationJob
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -25,12 +24,12 @@ class ChangeNotificationJobTest extends \MediaWikiTestCase {
 	// TODO: testRun
 
 	public static function provideToString() {
-		$change1 = \Wikibase\ChangesTable::singleton()->newRow( array(
+		$change1 = ChangesTable::singleton()->newRow( array(
 			'id' => 1,
 			'type' => 'add~item',
 		) );
 
-		$change2 = \Wikibase\ChangesTable::singleton()->newRow( array(
+		$change2 = ChangesTable::singleton()->newRow( array(
 			'id' => 2,
 			'type' => 'update~item',
 		) );

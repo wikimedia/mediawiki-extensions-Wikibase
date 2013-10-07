@@ -1,20 +1,19 @@
 <?php
 
 namespace Wikibase\Test;
+
+use MWException;
 use Wikibase\LanguageWithConversion;
-use \Language;
+use Language;
 
 /**
- * Tests for the Wikibase\LanguageWithConversion class.
+ * @covers Wikibase\LanguageWithConversion
  *
- * @file
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  * @group Wikibase
  * @group WikibaseLib
  *
  * @licence GNU GPL v2+
+ * @author Liangent
  */
 class LanguageWithConversionTest extends \MediaWikiTestCase {
 

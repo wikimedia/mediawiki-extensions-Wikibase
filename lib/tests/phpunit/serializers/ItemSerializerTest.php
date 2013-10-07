@@ -8,11 +8,7 @@ use Wikibase\Lib\Serializers\EntitySerializationOptions;
 /**
  * @covers Wikibase\Lib\Serializers\ItemSerializer
  *
- * @file
  * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase

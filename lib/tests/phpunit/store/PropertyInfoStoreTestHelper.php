@@ -5,18 +5,12 @@ namespace Wikibase\Test;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\PropertyInfoStore;
-
-use Wikibase\SiteLinkTable;
 use Wikibase\Item;
 
 /**
  * Helper for testing PropertyInfoStore implementations
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

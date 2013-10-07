@@ -1,17 +1,14 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\TemplateRegistry;
 use Wikibase\Template;
 
 /**
- * Tests for the Wikibase\Template class.
+ * @covers Wikibase\Template
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

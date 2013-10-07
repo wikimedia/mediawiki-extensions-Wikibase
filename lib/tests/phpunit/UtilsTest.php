@@ -1,16 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\Utils;
 
 /**
- * Tests for the Wikibase\Utils class.
+ * @covers Wikibase\Utils
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase

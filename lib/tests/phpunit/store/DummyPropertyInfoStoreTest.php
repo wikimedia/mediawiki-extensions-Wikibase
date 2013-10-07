@@ -11,11 +11,7 @@ use Wikibase\PropertyInfoStore;
 /**
  * @covers Wikibase\DummyPropertyInfoStore
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib

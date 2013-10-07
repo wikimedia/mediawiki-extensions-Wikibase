@@ -1,30 +1,27 @@
 <?php
 
 namespace Wikibase\Test;
-use Diff\MapDiff;
+
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
 use Wikibase\ChangesTable;
+use Wikibase\Claim;
 use Wikibase\Item;
 use Wikibase\EntityId;
+use Wikibase\ItemDiff;
+use Wikibase\PropertyNoValueSnak;
 
 /**
- * Tests for the Wikibase\ChangesTable class.
+ * @covers Wikibase\ChangesTable
  *
- * @file
  * @since 0.1
  *
- * @ingroup WikibaseLib
- * @ingroup Test
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseChange
  *
- * The database group has as a side effect that temporal database tables are created. This makes
- * it possible to test without poisoning a production database.
  * @group Database
- *
- * Some of the tests takes more time, and needs therefor longer time before they can be aborted
- * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
- * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  *
  * @licence GNU GPL v2+
@@ -57,11 +54,11 @@ class ChangesTableTest extends \MediaWikiTestCase {
 		$this->setMwGlobals( 'wgUser', self::$user );
 
 		// Check that we can save and retrieve diffs.
-		$diff1 = new\Wikibase\ItemDiff(
+		$diff1 = new ItemDiff(
 			array(
-				'label' => new \Diff\Diff(
+				'label' => new Diff(
 					array(
-						"en" => new \Diff\DiffOpChange( "OLD", "NEW" ),
+						"en" => new DiffOpChange( "OLD", "NEW" ),
 					)
 				)
 			)
@@ -69,11 +66,11 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 		// Make sure we can save and retrieve complex diff structures,
 		// even if they contain objects as values.
-		$diff2 = new\Wikibase\ItemDiff(
+		$diff2 = new ItemDiff(
 			array(
-				'claim' => new \Diff\Diff(
+				'claim' => new Diff(
 					array(
-						new \Diff\DiffOpAdd( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 77 ) ) ),
+						new DiffOpAdd( new Claim( new PropertyNoValueSnak( 77 ) ) ),
 					)
 				)
 			)

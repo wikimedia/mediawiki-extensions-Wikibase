@@ -2,16 +2,18 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Wikibase\Lib\Serializers\SnakSerializer;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
+use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\Lib\Serializers\ReferenceSerializer
  *
- * @file
  * @since 0.3
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -44,17 +46,17 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 		$validArgs = array();
 
 		$snaks =  array(
-			new \Wikibase\PropertyNoValueSnak( 42 ),
-			new \Wikibase\PropertySomeValueSnak( 1 ),
-			new \Wikibase\PropertySomeValueSnak( 42 ),
-			new \Wikibase\PropertyValueSnak( 1, new \DataValues\StringValue( 'foobar' ) ),
-			new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'foobar' ) ),
+			new PropertyNoValueSnak( 42 ),
+			new PropertySomeValueSnak( 1 ),
+			new PropertySomeValueSnak( 42 ),
+			new PropertyValueSnak( 1, new StringValue( 'foobar' ) ),
+			new PropertyValueSnak( 9001, new StringValue( 'foobar' ) ),
 		);
 
 		$snakSerializer = new SnakSerializer();
 
-		$reference = new \Wikibase\Reference( new \Wikibase\SnakList( $snaks ) );
-		$sortedReference = new \Wikibase\Reference( new \Wikibase\SnakList(
+		$reference = new Reference( new SnakList( $snaks ) );
+		$sortedReference = new Reference( new SnakList(
 			array( $snaks[0], $snaks[2], $snaks[1], $snaks[3], $snaks[4] )
 		) );
 
