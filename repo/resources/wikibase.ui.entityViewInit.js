@@ -116,6 +116,8 @@
 			var $claims = $( '.wb-claims' ).first(),
 				$claimsParent = $claims.parent();
 
+			// FIXME: Initializing entityview on $claims leads to the claim section inserted as
+			// child of $claims. It should be direct child of ".wb-entity".
 			$claims.detach().entityview( { // take widget subject out of DOM while initializing
 				value: wb.entity
 			} ).appendTo( $claimsParent );
@@ -143,7 +145,7 @@
 			// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
 			// be initialized:
 			var toolbarControllerConfig = {
-				addtoolbar: ['claimlistview', 'claimsection', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
+				addtoolbar: ['claimgrouplistview', 'claimlistview', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
 				edittoolbar: ['statementview', 'referenceview'],
 				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
 			};

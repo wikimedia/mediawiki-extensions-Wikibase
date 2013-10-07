@@ -436,7 +436,7 @@ div.wb-claim textarea {
 }
 
 /* Section of claims referring to one property */
-div.wb-claim-section {
+.wb-claims .wb-claimlistview {
 	position: relative;
 	background-color: #FFF;
 	float: left;
@@ -446,7 +446,7 @@ div.wb-claim-section {
 }
 
 /* Container for the section title */
-div.wb-claim-section .wb-claim-section-name {
+.wb-claimgrouplistview .wb-claimgrouplistview-groupname {
 	width: 15em;
 	background: #E8E8E8;
 	position: absolute;
@@ -460,7 +460,7 @@ div.wb-claim-section .wb-claim-section-name {
 }
 
 /* The actual section title (the linked property name) */
-div.wb-claim-section .wb-claim-section-name .wb-claim-name {
+.wb-claimgrouplistview .wb-claimgrouplistview-groupname .wb-claim-name {
 	float: left;
 	word-wrap: break-word;
 	padding: 10px;
@@ -505,7 +505,7 @@ div.wb-snak .wb-snak-value-container {
 }
 
 /* Link to add claim to section */
-div.wb-claim-section > .wb-addtoolbar {
+.wb-claimlistview > .wb-addtoolbar {
 	min-height: 3em;
 	background-color: #F8F8F8;
 	width: 100%;
@@ -513,70 +513,73 @@ div.wb-claim-section > .wb-addtoolbar {
 	display: block;
 	float: left;
 }
-div.wb-claim-section > .wb-addtoolbar .wb-editsection {
+.wb-claimlistview > .wb-addtoolbar .wb-editsection {
 	position: absolute;
 	top: 10px;
 }
 
 /* General add new claim link */
-div.wb-claimlist > .wb-addtoolbar {
+div.wb-claimlistview > .wb-addtoolbar {
 	display: block;
 }
-div.wb-claimlist div.wb-editsection {
+div.wb-claimlistview div.wb-editsection {
 	position: static;
 	float: right;
 }
 
 /***** EDIT/NEW CLAIM *****/
 
-div.wb-claims .wb-edit .wb-claim-section-name,
-div.wb-claim-new .wb-snak-property-container {
+.wb-claimgrouplistview .wb-new > .wb-addtoolbar {
+	display: none;
+}
+
+.wb-claims .wb-claimgrouplistview-groupname.wb-edit,
+.wb-claims .wb-edit .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
-div.wb-claims .wb-error .wb-claim-section-name,
+.wb-claims .wb-claimgrouplistview-groupname.wb-error,
 .wb-error div.wb-claim-new .wb-snak-property-container {
 	background-color: #E5C8B5;
 }
 
-/**
- * TODO: styling Claims with .wb-edit with blue color should be enough; however, there needs to be
- * a new template wrapping a new/pending claim. See TODO in templates.php at 'wb-claim' template
- */
-div.wb-claim-section .wb-edit,
-div.wb-claim-new {
+.wb-claimgrouplistview .wb-claimview.wb-edit,
+.wb-claimgrouplistview .wb-claimview.wb-edit .wb-claim {
 	background-color: #D6F3FF;
 }
-
-div.wb-claims .wb-error .wb-error,
-.wb-error div.wb-claim-new {
+.wb-claimgrouplistview .wb-claimview.wb-error,
+.wb-claimgrouplistview .wb-claimview.wb-error .wb-claim {
 	background-color: #FFDFC9;
 }
+.wb-claimgrouplistview .wb-claimlistview.wb-new .wb-claimview {
+	background-color: transparent;
+}
 
-div.wb-claim-new {
+.wb-claimlistview.wb-new {
+	margin-bottom: 0;
+	border: none;
+}
+
+.wb-claimgrouplistview .wb-claimlistview.wb-new .wb-claim {
 	border: 1px solid #C9C9C9;
 	width: 100%;
 	margin-bottom: 1em;
+}
+
+.wb-claimgrouplistview .wb-claimview.wb-new {
 	padding-bottom: 0;
 }
 
-div.wb-claim-section .wb-claim-new {
-	margin-bottom: 0;
-	border: none;
-	border-bottom: 1px dashed #AAA;
-}
-
-div.wb-claim-new .wb-claim {
-	margin-bottom: 0;
+.wb-claimgrouplistview .wb-claimlistview.wb-new .wb-claimview.wb-edit {
 	border: none;
 }
 
-div.wb-claim-new .wb-claim-mainsnak {
+.wb-claimgrouplistview .wb-new .wb-claim-mainsnak {
 	margin: 0 18em 0 15em;
 	padding: 10px;
 }
 
-div.wb-claim-new .wb-snak-property-container {
+.wb-claimgrouplistview .wb-new .wb-snak-property-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -585,18 +588,18 @@ div.wb-claim-new .wb-snak-property-container {
 	display: block;
 }
 
-div.wb-claim-new .wb-snak-property {
+.wb-claimgrouplistview .wb-new .wb-snak-property {
 	padding: 10px;
 }
 
-div.wb-claim-new .wb-snak-property input {
+.wb-claimgrouplistview .wb-new .wb-snak-property input {
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-div.wb-claim-new .wb-snak-value {
+.wb-claimgrouplistview .wb-new .wb-snak-value {
 	min-height: 1.5em;
 	max-width: 32em;
 }
@@ -744,10 +747,6 @@ div.wb-statement .wb-editsection {
 	font-size: 90%;
 }
 
-div.wb-statement-references .wb-error {
-	background-color: #FFDFC9;
-}
-
 .wb-referenceview {
 	position: relative;
 	background: #F8F8F8;
@@ -766,11 +765,19 @@ div.wb-statement-references .wb-error {
 	top: 5px;
 }
 
-.wb-statement-references .wb-edit > .wb-referenceview-heading {
+.wb-referenceview.wb-edit {
+	background-color: #D6F3FF;
+}
+
+.wb-referenceview.wb-edit > .wb-referenceview-heading {
 	background-color: #C0DAE5;
 }
 
-.wb-statement-references .wb-error > .wb-referenceview-heading {
+.wb-referenceview.wb-error {
+	background-color: #FFDFC9;
+}
+
+.wb-referenceview.wb-error > .wb-referenceview-heading {
 	background-color: #E5C8B5;
 }
 
