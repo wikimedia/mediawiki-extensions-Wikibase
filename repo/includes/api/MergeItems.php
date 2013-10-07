@@ -146,18 +146,22 @@ class MergeItems extends ApiWikibase {
 	}
 
 	private function attemptSaveMerge( ItemContent $fromItemContent, ItemContent $toItemContent, $params ) {
+		$toSummary = $this->getSummary( 'to', $toItemContent->getItem()->getId(), $params );
+
 		$fromStatus = $this->attemptSaveEntity(
 			$fromItemContent,
-			$this->getSummary( 'to', $toItemContent->getItem()->getId(), $params )->toString()
+			$this->formatSummary( $toSummary )
 		);
+
 		$this->handleSaveStatus( $fromStatus );
 		$this->addEntityToOutput( $fromItemContent, $fromStatus, 'from' );
 
-		if( $fromStatus->isGood() ){
+		if( $fromStatus->isGood() ) {
+			$fromSummary = $this->getSummary( 'from', $fromItemContent->getItem()->getId(), $params );
 
 			$toStatus = $this->attemptSaveEntity(
 				$toItemContent,
-				$this->getSummary( 'from', $fromItemContent->getItem()->getId(), $params )->toString()
+				$this->formatSummary( $fromSummary )
 			);
 			$this->handleSaveStatus( $toStatus );
 			$this->addEntityToOutput( $toItemContent, $toStatus, 'to' );
