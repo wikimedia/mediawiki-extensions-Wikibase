@@ -80,6 +80,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
 	}
 
+	public function testGetSummaryFormatter() {
+		$returnValue = $this->getDefaultInstance()->getSummaryFormatter();
+		$this->assertInstanceOf( 'Wikibase\SummaryFormatter', $returnValue );
+	}
+
 	public static function provideGetRdfBaseURI() {
 		return array(
 			array ( 'http://acme.test', 'http://acme.test/entity/' ),

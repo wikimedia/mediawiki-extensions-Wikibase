@@ -79,7 +79,7 @@ abstract class ModifyClaim extends ApiWikibase {
 	public function saveChanges( EntityContent $content, Summary $summary ) {
 		$status = $this->attemptSaveEntity(
 			$content,
-			$summary->toString(),
+			$summary,
 			$this->getFlags()
 		);
 
