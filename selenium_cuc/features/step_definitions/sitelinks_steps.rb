@@ -10,6 +10,10 @@ When /^I click the sitelink add button$/ do
   on(ItemPage).addSitelinkLink
 end
 
+When /^I click the sitelink edit button$/ do
+  on(ItemPage).editSitelinkLink
+end
+
 When /^I click the sitelink cancel button$/ do
   on(ItemPage).cancelSitelinkLink
 end
@@ -59,6 +63,14 @@ When /^I add the following sitelinks:$/ do |table|
   on(ItemPage).add_sitelinks(table.raw)
 end
 
+When /^I order the sitelinks by languagename$/ do
+  on(ItemPage).sitelinkSortLanguage_element.click
+end
+
+When /^I mock that the list of sitelinks is complete$/ do
+  on(ItemPage).set_sitelink_list_to_full
+end
+
 Then /^Sitelink table should be there$/ do
   on(ItemPage).sitelinkTable?.should be_true
 end
@@ -80,6 +92,10 @@ end
 
 Then /^Sitelink edit button should be there$/ do
   on(ItemPage).editSitelinkLink?.should be_true
+end
+
+Then /^Sitelink edit button should not be there$/ do
+  on(ItemPage).editSitelinkLink?.should be_false
 end
 
 Then /^Sitelink edit button should be disabled$/ do
@@ -185,4 +201,8 @@ Then /^Sitelink link should lead to article (.+)$/ do |value|
     page.sitelinkLink
     page.articleTitle.should == value
   end
+end
+
+Then /^Order of sitelinks should be:$/ do |siteids|
+  on(ItemPage).get_sitelinks_order.should == siteids.raw[0]
 end
