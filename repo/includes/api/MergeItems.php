@@ -45,13 +45,20 @@ class MergeItems extends ApiWikibase {
 	 * @see \ApiBase::execute()
 	 */
 	public function execute() {
-		$this->getUser();
+		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 		$this->validateParams( $params );
 
 		$fromEntityContent = $this->getEntityContentFromIdString( $params['fromid'] );
 		$toEntityContent = $this->getEntityContentFromIdString( $params['toid'] );
 		$this->validateEntityContents( $fromEntityContent, $toEntityContent );
+
+		$status = Status::newGood();
+		$status->merge( $this->checkPermissions( $fromEntityContent, $user, $params ) );
+		$status->merge( $this->checkPermissions( $toEntityContent, $user, $params ) );
+		if( !$status->isGood() ){
+			$this->dieUsage( $status->getMessage(), 'permissiondenied');
+		}
 
 		/**
 		 * @var ItemContent $fromEntityContent
