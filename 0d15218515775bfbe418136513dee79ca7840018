@@ -34,6 +34,24 @@
       "revId": "0d15218515775bfbe418136513dee79ca7840018",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_67229a06",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-07T14:40:39Z",
+      "side": 1,
+      "message": "We came up with \"The value is invalid and cannot be displayed.\"",
+      "parentUuid": "0932edd2_67f8da79",
+      "revId": "0d15218515775bfbe418136513dee79ca7840018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
