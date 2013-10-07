@@ -2,13 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
-use Wikibase\RepoHooks;
 
 /**
- * Test Summary.
+ * @covers Wikibase\Summary
  *
- * @file
  * @since 0.1
  *
  * @ingroup WikibaseRepoTest
@@ -19,75 +18,19 @@ use Wikibase\RepoHooks;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  *
  */
 class SummaryTest extends \MediaWikiTestCase {
 
-	/**
-	 * @dataProvider providerFormatAutoComment
-	 */
-	public function testFormatAutoComment( $msg, $parts, $expected ) {
-		$result = Summary::formatAutoComment( $msg, $parts );
-		$this->assertEquals( $expected, $result, 'Not the expected result' );
-	}
-
-	public static function providerFormatAutoComment() {
-		return array(
-			array( '', array(), '' ),
-			array( 'msgkey', array(), 'msgkey' ),
-			array( 'msgkey', array( 'one' ), 'msgkey:one' ),
-			array( 'msgkey', array( 'one', 'two' ), 'msgkey:one|two' ),
-			array( 'msgkey', array( 'one', 'two', 'three' ), 'msgkey:one|two|three' ),
-		);
-	}
-
-	/**
-	 * @dataProvider providerFormatAutoSummary
-	 */
-	public function testFormatAutoSummary( $parts, $expected ) {
-		$result = Summary::formatAutoSummary( $parts );
-		$this->assertEquals( $expected, $result, 'Not the expected result' );
-	}
-
-	public static function providerFormatAutoSummary() {
-		return array(
-			array( array(), '' ),
-			array( array( 'one' ), 'one' ),
-			array( array( 'one', 'two' ), 'one, two' ),
-			array( array( 'one', 'two', 'three' ), 'one, two, three' ),
-		);
-	}
-
-	/**
-	 * @dataProvider providerFormatTotalSummary
-	 */
-	public function testFormatTotalSummary( $comment, $summary, $expected ) {
-		$result = Summary::formatTotalSummary( $comment, $summary );
-		$this->assertEquals( $expected, $result, 'Not the expected result' );
-	}
-
-	public static function providerFormatTotalSummary() {
-		return array(
-			array( '', '', '' ),
-			array( 'foobar', 'This is a test…', '/* foobar */This is a test…' ),
-			array( 'foobar:one', 'This is a test…', '/* foobar:one */This is a test…' ),
-			array( 'foobar:one|two', 'This is a test…', '/* foobar:one|two */This is a test…' ),
-			array( 'foobar:one|two|three', 'This is a test…', '/* foobar:one|two|three */This is a test…' ),
-			array( 'foobar:one|two|three|…', 'This is a test…', '/* foobar:one|two|three|… */This is a test…' ),
-			array( 'foobar:one|two|three|<>', 'This is a test…', '/* foobar:one|two|three|<> */This is a test…' ),
-			array( 'foobar:one|two|three|&lt;&gt;', 'This is a test…', '/* foobar:one|two|three|&lt;&gt; */This is a test…' ),
-			array(  '', str_repeat( 'a', 2*SUMMARY_MAX_LENGTH ), str_repeat( 'a', SUMMARY_MAX_LENGTH-3 ) . '...' ),
-		);
-	}
-
 	public function testAddAutoCommentArgs() {
 		$summary = new Summary( 'summarytest' );
 		$summary->addAutoCommentArgs( "one" );
-		$summary->addAutoCommentArgs( "two", "three" );
+		$summary->addAutoCommentArgs( 2, new ItemId( 'Q3' ) );
 		$summary->addAutoCommentArgs( array( "four", "five" ) );
 
-		$expected = $summary->getMessageKey() . ':one|two|three|four|five';
-		$this->assertEquals( $expected, $summary->getAutoComment() );
+		$expected = array( 'one', 2, new ItemId( 'Q3' ), 'four', 'five' );
+		$this->assertEquals( $expected, $summary->getCommentArgs() );
 	}
 
 	public function testSetLanguage() {
@@ -95,17 +38,23 @@ class SummaryTest extends \MediaWikiTestCase {
 		$summary->setLanguage( "xyz" );
 
 		$this->assertEquals( 'xyz', $summary->getLanguageCode() );
-		$this->assertEquals( "/* summarytest:0|xyz */", $summary->toString() );
+	}
+
+	public function testSetUserSummary() {
+		$summary = new Summary( 'summarytest' );
+		$summary->setUserSummary( "xyz" );
+
+		$this->assertEquals( 'xyz', $summary->getUserSummary() );
 	}
 
 	public function testAddAutoSummaryArgs() {
 		$summary = new Summary( 'summarytest' );
 		$summary->addAutoSummaryArgs( "one" );
-		$summary->addAutoSummaryArgs( "two", "three" );
+		$summary->addAutoSummaryArgs( 2, new ItemId( 'Q3' ) );
 		$summary->addAutoSummaryArgs( array( "four", "five" ) );
 
-		$this->assertEquals( 'one, two, three, four, five', $summary->getAutoSummary() );
-		$this->assertEquals( "/* summarytest:5| */one, two, three, four, five", $summary->toString() );
+		$expected = array( 'one', 2, new ItemId( 'Q3' ), 'four', 'five' );
+		$this->assertEquals( $expected, $summary->getAutoSummaryArgs() );
 	}
 
 	public function testSetAction() {
@@ -126,187 +75,9 @@ class SummaryTest extends \MediaWikiTestCase {
 
 		$summary->setAction( "testing" );
 		$this->assertEquals( "summarytest-testing", $summary->getMessageKey() );
+
+		$summary->setModuleName( "" );
+		$this->assertEquals( "testing", $summary->getMessageKey() );
 	}
 
-	/**
-	 * @dataProvider provideToString
-	 */
-	public function testToString( $module, $action, $language, $commentArgs, $summaryArgs, $userSummary, $expected ) {
-		$summary = new Summary( $module );
-
-		if ( $action !== null ) {
-			$summary->setAction( $action );
-		}
-
-		if ( $language !== null ) {
-			$summary->setLanguage( $language );
-		}
-
-		if ( $commentArgs ) {
-			$summary->addAutoCommentArgs( $commentArgs );
-		}
-
-		if ( $summaryArgs ) {
-			$summary->addAutoSummaryArgs( $summaryArgs );
-		}
-
-		if ( $userSummary !== null ) {
-			$summary->setUserSummary( $userSummary );
-		}
-
-		$this->assertEquals( $expected, $summary->toString() );
-	}
-
-	public static function provideToString() {
-		return array(
-			array( // #0
-				'summarytest',
-				null,
-				null,
-				null,
-				null,
-				null,
-				'/* summarytest:0| */'
-			),
-			array( // #1
-				'summarytest',
-				'testing',
-				'nl',
-				null,
-				null,
-				null,
-				'/* summarytest-testing:0|nl */'
-			),
-			array( // #2
-				'summarytest',
-				null,
-				null,
-				array( 'x' ),
-				null,
-				null,
-				'/* summarytest:0||x */'
-			),
-			array( // #3
-				'summarytest',
-				'testing',
-				'nl',
-				array( 'x', 'y' ),
-				array( 'A', 'B'),
-				null,
-				'/* summarytest-testing:2|nl|x|y */A, B'
-			),
-			array( // #4
-				'summarytest',
-				null,
-				null,
-				null,
-				array( 'A', 'B' ),
-				null,
-				'/* summarytest:2| */A, B'
-			),
-			array( // #5
-				'summarytest',
-				'testing',
-				'nl',
-				array( 'x', 'y' ),
-				array( 'A', 'B'),
-				'can I haz world domination?',
-				'/* summarytest-testing:2|nl|x|y */can I haz world domination?'
-				),
-			array( // #6
-				'summarytest',
-				null,
-				null,
-				null,
-				null,
-				'can I haz world domination?',
-				'/* summarytest:0| */can I haz world domination?'
-				),
-		);
-	}
-
-	/**
-	 * @dataProvider providerOnFormat
-	 */
-	public function testOnFormat( $model, $root, $pre, $auto, $post, $title, $local, $expected ) {
-		$itemTitle = $this->getMock( $title );
-		$itemTitle->expects( $this->once() )->method( 'getContentModel' )->will( $this->returnValue( $model ) );
-		$comment = null;
-		RepoHooks::onFormat( array($model, $root), $comment, $pre, $auto, $post, $itemTitle, $local );
-		if ( is_null( $expected ) ) {
-			$this->assertEquals( $expected, $comment, "Didn't find the expected null" );
-		}
-		else {
-			$this->assertRegExp( $expected, $comment, "Didn't find the expected final comment" );
-		}
-	}
-
-	public static function providerOnFormat() {
-		return array( //@todo: test other types of entities too!
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'', '', '',
-				'Title',
-				false,
-				null
-			),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'foo', '', 'bar',
-				'Title',
-				false,
-				null
-			),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'foo', 'wbeditentity', 'bar',
-				'Title',
-				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?</span>bar</span>!'
-			),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|en', 'bar',
-				'Title',
-				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[en\].*?</span>bar</span>!'
-			),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|<>', 'bar',
-				'Title',
-				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
-			),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|&lt;&gt;', 'bar',
-				'Title',
-				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
-			),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|&', 'bar',
-				'Title',
-				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span>bar</span>!'
-			),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|…', 'bar',
-				'Title',
-				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[…\].*?</span>bar</span>!'
-			)
-		);
-	}
 }

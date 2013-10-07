@@ -458,4 +458,52 @@ class WikibaseRepo {
 		return $factory;
 	}
 
+	/**
+	 * Returns a SummaryFormatter.
+	 *
+	 * @return SummaryFormatter
+	 */
+	public function getSummaryFormatter() {
+		if ( !$this->summaryFormatter ) {
+			$this->summaryFormatter = $this->newSummaryFormatter();
+		}
+
+		return $this->summaryFormatter;
+	}
+
+	/**
+	 * @return SummaryFormatter
+	 */
+	protected function newSummaryFormatter() {
+		$options = new FormatterOptions();
+		$idFormatter = new EntityIdLinkFormatter( $options, $this->getEntityContentFactory() );
+
+		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup(),
+			$this->contentLanguage
+		);
+
+		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
+			$valueFormatterBuilders,
+			$this->getPropertyDataTypeLookup()
+		);
+
+		$valueFormatterBuilders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:wikibase-entityid', $idFormatter );
+
+		$snakFormatterFactory = new OutputFormatSnakFormatterFactory( $snakFormatterBuilders->getSnakFormatterBuildersForFormats() );
+		$valueFormatterFactory = new OutputFormatValueFormatterFactory( $valueFormatterBuilders->getValueFormatterBuildersForFormats() );
+
+		$snakFormatter = $snakFormatterFactory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+		$valueFormatter = $valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+
+		$formatter = new SummaryFormatter(
+			$idFormatter,
+			$valueFormatter,
+			$snakFormatter,
+			$this->contentLanguage
+		);
+
+		return $formatter;
+	}
+
 }
