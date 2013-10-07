@@ -14,18 +14,14 @@ use Wikibase\LanguageFallbackChain;
 /**
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  *
- * @todo: once this is no longer used directly, rename it to EntityIdValueFormatter
  * @todo: add support for language fallback chains
  */
-class EntityIdLabelFormatter extends ValueFormatterBase {
+class EntityIdLabelFormatter extends EntityIdFormatter {
 
 	/**
 	 * Whether we should try to find the label of the entity
