@@ -72,6 +72,7 @@ class WikibaseSnakFormatterBuilders {
 			'VT:globecoordinate' => 'ValueFormatters\GlobeCoordinateFormatter',
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
 			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseSnakFormatterBuilders', 'newEntityIdFormatter' ),
+			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter'
 		),
 
 		// Formatters to use for wiki text output.
