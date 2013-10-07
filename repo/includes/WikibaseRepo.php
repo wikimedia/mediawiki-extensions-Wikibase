@@ -15,21 +15,27 @@ use Wikibase\EntityLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
+use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\EntityIdTitleFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Store;
 use Wikibase\StoreFactory;
 use Wikibase\SnakFactory;
 use Wikibase\StringNormalizer;
+use Wikibase\SummaryFormatter;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -113,6 +119,16 @@ class WikibaseRepo {
 	 * @var OutputFormatSnakFormatterFactory
 	 */
 	private $snakFormatterFactory;
+
+	/**
+	 * @var OutputFormatValueFormatterFactory
+	 */
+	private $valueFormatterFactory;
+
+	/**
+	 * @var SummaryFormatter
+	 */
+	private $summaryFormatter;
 
 	/**
 	 * @since 0.4
@@ -383,7 +399,6 @@ class WikibaseRepo {
 		return StoreFactory::getStore();
 	}
 
-
 	/**
 	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
@@ -402,13 +417,45 @@ class WikibaseRepo {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	protected function newSnakFormatterFactory() {
-		$builders = new WikibaseSnakFormatterBuilders(
+		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
-			$this->getPropertyDataTypeLookup(),
 			$this->contentLanguage
+		);
+
+		$builders = new WikibaseSnakFormatterBuilders(
+			$valueFormatterBuilders,
+			$this->getPropertyDataTypeLookup()
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 		return $factory;
 	}
+
+	/**
+	 * Returns a OutputFormatValueFormatterFactory the provides ValueFormatters
+	 * for different output formats.
+	 *
+	 * @return OutputFormatValueFormatterFactory
+	 */
+	public function getValueFormatterFactory() {
+		if ( !$this->valueFormatterFactory ) {
+			$this->valueFormatterFactory = $this->newValueFormatterFactory();
+		}
+
+		return $this->valueFormatterFactory;
+	}
+
+	/**
+	 * @return OutputFormatValueFormatterFactory
+	 */
+	protected function newValueFormatterFactory() {
+		$builders = new WikibaseValueFormatterBuilders(
+			$this->getEntityLookup(),
+			$this->contentLanguage
+		);
+
+		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+		return $factory;
+	}
+
 }

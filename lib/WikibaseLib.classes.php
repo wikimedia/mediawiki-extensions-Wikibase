@@ -107,6 +107,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\OutputFormatValueFormatterFactory' => 'includes/formatters/OutputFormatValueFormatterFactory.php',
 		'Wikibase\Lib\UnDeserializableValueFormatter' => 'includes/formatters/UnDeserializableValueFormatter.php',
 		'Wikibase\Lib\WikibaseSnakFormatterBuilders' => 'includes/formatters/WikibaseSnakFormatterBuilders.php',
+		'Wikibase\Lib\WikibaseValueFormatterBuilders' => 'includes/formatters/WikibaseValueFormatterBuilders.php',
 
 		// includes/IO
 		'Wikibase\IO\LineReader' => 'includes/IO/LineReader.php',
