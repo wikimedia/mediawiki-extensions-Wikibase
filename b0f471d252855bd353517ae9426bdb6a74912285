@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_81dbfe78",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-07T10:10:03Z",
+      "side": 1,
+      "message": "While we have this kind of code at several places for legacy reasons, it really should not be added for new dependencies. It is using global state. Convenient as it might be, it is quite harmful.",
+      "revId": "b0f471d252855bd353517ae9426bdb6a74912285",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
