@@ -48,6 +48,8 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideDataTypeValidation() {
+		$latLonValue = new LatLongValue( 0, 0 );
+
 		$cases = array(
 			//wikibase-item
 			array( 'wikibase-item', 'q8', false, 'Expected EntityId, string supplied' ),
@@ -91,7 +93,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, ' javascript:alert(1)' ), false, 'calendar: bad URL' ),
 
 			//time['time']
-			//NOTE: The below will fail with a IllevalValueExcpetion once the TimeValue constructor enforces the time format.
+			//NOTE: The below will fail with a IllegalValueExcpetion once the TimeValue constructor enforces the time format.
 			//      Once that is done, this test and the respective validator can and should both be removed.
 			//array( 'string', new TimeValue( '2013-06-06 11:22:33', 0, 0, 0, 0, 'http://acme.com/calendar' ), false, 'time: not ISO 8601' ),
 
@@ -102,13 +104,33 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'globe-coordinate', 'Foo', false, 'GlobeCoordinateValue expected, string supplied' ),
 			array( 'globe-coordinate', new NumberValue( 7 ), false, 'GlobeCoordinateValue expected' ),
 
+			//globe-coordinate[precision]
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, 'http://www.wikidata.org/entity/Q2' ),
+				true,
+				'integer precision is valid'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 0.2, 'http://www.wikidata.org/entity/Q2' ),
+				true,
+				'float precision is valid'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, null, 'http://www.wikdiata.org/entity/Q2' ),
+				false,
+				'null precision is invalid'
+			),
+
 			//globe-coordinate[globe]
 			// FIXME: this is testing unimplemented behaviour? Probably broken...
-			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, '' ), false, 'globe: empty string should be invalid' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, 'http://' . str_repeat('x', 256) ), false, 'globe: too long' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, 'http://acme.com/globe' ), true, 'globe: URL' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, ' http://acme.com/globe ' ), false, 'globe: untrimmed' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( new LatLongValue( 0, 0 ), 1, ' javascript:alert(1) ' ), false, 'globe: bad URL scheme' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, '' ), false, 'globe: empty string should be invalid' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, 'http://' . str_repeat('x', 256) ), false, 'globe: too long' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, 'http://acme.com/globe' ), true, 'globe: URL' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, ' http://acme.com/globe ' ), false, 'globe: untrimmed' ),
+			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, ' javascript:alert(1) ' ), false, 'globe: bad URL scheme' ),
 			//TODO: globe must be an item reference
 			//TODO: globe must be from a list of configured values
 		);
