@@ -142,7 +142,7 @@ class LinkTitles extends ApiWikibase {
 		else {
 			// Do the actual save, or if it don't exist yet create it.
 			return $this->attemptSaveEntity( $itemContent,
-				$summary->toString(),
+				$summary,
 				$flags );
 		}
 	}
