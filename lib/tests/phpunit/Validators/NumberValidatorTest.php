@@ -26,11 +26,11 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider validateProvider
 	 */
-	public function testValidate( $value, $expected ) {
+	public function testValidate( $value, $expected, $message ) {
 		$validator = new NumberValidator();
 		$result = $validator->validate( $value );
 
-		$this->assertEquals( $expected, $result->isValid() );
+		$this->assertEquals( $expected, $result->isValid(), $message );
 	}
 
 	public function validateProvider() {
