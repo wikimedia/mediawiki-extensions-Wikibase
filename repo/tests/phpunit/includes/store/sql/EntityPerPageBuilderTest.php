@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Language;
+use RuntimeException;
 use Wikibase\SettingsArray;
 use Wikibase\StoreFactory;
 use Wikibase\EntityPerPageBuilder;
@@ -117,10 +118,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @return int
+	 * @throws RuntimeException
 	 */
 	protected function getPageIdForPartialClear() {
-		$offset = floor( $this->countPages() / 2 );
-
 		$dbw = wfGetDB( DB_MASTER );
 		$pageRow = $dbw->select(
 			'page',
@@ -135,10 +135,10 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		);
 
 		foreach( $pageRow as $row ) {
-			$pageId = (int)$row->page_id;
+			return (int)$row->page_id;
 		}
 
-		return $pageId;
+		throw new RuntimeException( 'Expected at least one result' );
 	}
 
 	/**
