@@ -70,6 +70,16 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\ClaimGuidValidator', $returnValue );
 	}
 
+	public function testGetSnakFormatterFactory() {
+		$returnValue = $this->getDefaultInstance()->getSnakFormatterFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatSnakFormatterFactory', $returnValue );
+	}
+
+	public function testGetValueFormatterFactory() {
+		$returnValue = $this->getDefaultInstance()->getValueFormatterFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
+	}
+
 	public static function provideGetRdfBaseURI() {
 		return array(
 			array ( 'http://acme.test', 'http://acme.test/entity/' ),
