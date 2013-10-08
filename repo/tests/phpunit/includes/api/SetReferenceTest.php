@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\PropertyContent;
 use Wikibase\Reference;
 
@@ -166,7 +168,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		if( !is_a( $reference, '\Wikibase\Reference' ) ) {
 			return $reference;
 		} else {
-			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$options = new SerializationOptions();
+			$serializerFactory = new SerializerFactory( $options );
 			$serializer = $serializerFactory->newSerializerForObject( $reference );
 			return $serializer->getSerialized( $reference );
 		}
@@ -183,7 +186,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			return $reference;
 		} else {
 			unset( $reference['hash'] );
-			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$options = new SerializationOptions();
+			$serializerFactory = new SerializerFactory( $options );
 			$unserializer = $serializerFactory->newUnserializerForClass( '\Wikibase\Reference' );
 			return $unserializer->newFromSerialization( $reference );
 		}

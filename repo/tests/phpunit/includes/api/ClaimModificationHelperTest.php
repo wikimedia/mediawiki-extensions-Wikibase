@@ -129,7 +129,8 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
-			$snakValidation
+			$snakValidation,
+			WikibaseRepo::getDefaultInstance()->getSerializerFactory()
 		);
 
 		return $claimModificationHelper;

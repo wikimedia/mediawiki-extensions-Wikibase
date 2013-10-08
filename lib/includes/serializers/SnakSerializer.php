@@ -1,37 +1,58 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
+use DataValues\DataValueFactory;
 use MWException;
+use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\SnakObject;
 
 /**
  * Serializer for Snak objects.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.2
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SnakSerializer extends SerializerObject implements Unserializer {
+
+	/**
+	 * @const Options key for a PropertyDataTypeLookup service.
+	 * If provided, the lookup is used to include the property's
+	 * data type in the serialization of PropertyValueSnaks.
+	 */
+	const OPT_DATA_TYPE_LOOKUP = 'DataTypeLookup';
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	protected $dataTypeLookup;
+
+	/**
+	 * @param SerializationOptions $options Options. @see SnakSerializer::OPT_DATA_TYPE_LOOKUP.
+	 * @param PropertyDataTypeLookup $dataTypeLookup A lookup service for determining the data type
+	 *        of PropertyValueSnaks. If not set, the OPT_DATA_TYPE_LOOKUP option will be checked
+	 *        for a PropertyDataTypeLookup.
+	 *
+	 * @throws \InvalidArgumentException if no PropertyDataTypeLookup was found set in $options.
+	 */
+	public function __construct( SerializationOptions $options = null, PropertyDataTypeLookup $dataTypeLookup = null ) {
+		parent::__construct( $options );
+
+		if ( $dataTypeLookup === null ) {
+			$dataTypeLookup = $this->getOptions()->getOption( self::OPT_DATA_TYPE_LOOKUP );
+		}
+
+		$this->dataTypeLookup = $dataTypeLookup;
+
+		if ( $this->dataTypeLookup === null ) {
+			//TODO: make this use wfDebugLog
+			wfWarn( __CLASS__ . '::' . __FUNCTION__ . ': No data type lookup service provided, serialization will not include data types!' );
+		}
+	}
 
 	/**
 	 * @see ApiSerializer::getSerialized
@@ -54,12 +75,11 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['property'] = $snak->getPropertyId()->getPrefixedId();
 
-		// TODO: we might want to include the data type of the property here as well
+		if ( $snak instanceof PropertyValueSnak ) {
+			if ( $this->dataTypeLookup !== null ) {
+				$serialization['datatype'] = $this->dataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+			}
 
-		if ( $snak->getType() === 'value' ) {
-			/**
-			 * @var \Wikibase\PropertyValueSnak $snak
-			 */
 			$serialization['datavalue'] = $snak->getDataValue()->toArray();
 		}
 
@@ -82,7 +102,7 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 		);
 
 		if ( array_key_exists( 'datavalue', $serialization ) ) {
-			$constructorArguments[] = \DataValues\DataValueFactory::singleton()->newFromArray( $serialization['datavalue'] );
+			$constructorArguments[] = DataValueFactory::singleton()->newFromArray( $serialization['datavalue'] );
 		}
 
 		return SnakObject::newFromType( $serialization['snaktype'], $constructorArguments );

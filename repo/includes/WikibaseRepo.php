@@ -21,6 +21,9 @@ use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -45,6 +48,11 @@ use Wikibase\SummaryFormatter;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class WikibaseRepo {
+
+	/**
+	 * @var SerializerFactory
+	 */
+	public $serializerFactory;
 
 	/**
 	 * @var SettingsArray
@@ -471,4 +479,25 @@ class WikibaseRepo {
 		return $formatter;
 	}
 
+	/**
+	 * @return SerializerFactory
+	 */
+	public function getSerializerFactory() {
+		if ( !$this->serializerFactory ) {
+			$this->serializerFactory = $this->newSerializerFactory();
+		}
+
+		return $this->serializerFactory;
+	}
+
+	/**
+	 * @return SerializerFactory
+	 */
+	protected function newSerializerFactory() {
+		$options = new SerializationOptions();
+		$options->initOption( SnakSerializer::OPT_DATA_TYPE_LOOKUP, $this->getPropertyDataTypeLookup() );
+		$options->setLanguageFallbackChainFactory( $this->getLanguageFallbackChainFactory() );
+
+		return new SerializerFactory( $options );
+	}
 }
