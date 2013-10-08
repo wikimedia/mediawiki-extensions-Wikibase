@@ -105,9 +105,13 @@ class SetClaim extends ModifyClaim {
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 
 		try {
-			$claim = $unserializer->newFromSerialization( FormatJson::decode( $params['claim'], true ) );
+			$serializedClaim = FormatJson::decode( $params['claim'], true );
+			if( !is_array( $serializedClaim ) ){
+				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
+			}
+			$claim = $unserializer->newFromSerialization( $serializedClaim );
 			if( !$claim instanceof Claim ) {
-				$this->dieUsage( 'Failed to get claim from claim Serialization', 'invalid-claim' );
+				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
 			}
 			return $claim;
 		} catch ( IllegalValueException $illegalValueException ) {
