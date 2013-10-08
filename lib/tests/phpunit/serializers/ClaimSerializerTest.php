@@ -96,7 +96,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			) )
 		);
 
-		$snakSerializer = new SnakSerializer();
+		$snakSerializer = new SnakSerializer( $this->getSerializationOptions() );
 
 		$validArgs['complexClaimByProp'] = array(
 			$claim,
@@ -158,7 +158,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$statement->setRank( $rank );
 
-		$serializer = new ClaimSerializer();
+		$serializer = $this->getInstance();
 
 		$serialization = $serializer->getSerialized( $statement );
 

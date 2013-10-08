@@ -80,6 +80,11 @@ class ClaimModificationHelper {
 	protected $snakValidation;
 
 	/**
+	 * @var SerializerFactory
+	 */
+	protected $serializerFactory;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param ApiMain $apiMain
@@ -88,6 +93,7 @@ class ClaimModificationHelper {
 	 * @param EntityIdParser $entityIdParser
 	 * @param ClaimGuidValidator $claimGuidValidator
 	 * @param SnakValidationHelper $snakValidation
+	 * @param \Wikibase\Lib\Serializers\SerializerFactory $serializerFactory
 	 */
 	public function __construct(
 		ApiMain $apiMain,
@@ -95,7 +101,8 @@ class ClaimModificationHelper {
 		SnakConstructionService $snakConstructionService,
 		EntityIdParser $entityIdParser,
 		ClaimGuidValidator $claimGuidValidator,
-		SnakValidationHelper $snakValidation
+		SnakValidationHelper $snakValidation,
+		SerializerFactory $serializerFactory
 	) {
 		$this->apiMain = $apiMain;
 		$this->entityContentFactory = $entityContentFactory;
@@ -103,6 +110,7 @@ class ClaimModificationHelper {
 		$this->entityIdParser = $entityIdParser;
 		$this->claimGuidValidator = $claimGuidValidator;
 		$this->snakValidation = $snakValidation;
+		$this->serializerFactory = $serializerFactory;
 	}
 
 	/**
@@ -112,9 +120,10 @@ class ClaimModificationHelper {
 	 * @param string $key
 	 */
 	public function addClaimToApiResult( Claim $claim, $key = 'claim' ) {
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->apiMain->getResult()->getIsRawMode() );
+		$options = $this->serializerFactory->newSerializationOptions();
+		$options->setIndexTags( $this->apiMain->getResult()->getIsRawMode() );
+
+		$serializer = $this->serializerFactory->newSerializerForObject( $claim, $options );
 
 		$this->apiMain->getResult()->addValue(
 			null,

@@ -63,7 +63,7 @@ class DumpJson extends Maintenance {
 	}
 
 	public function initServices() {
-		$serializerOptions = new SerializationOptions();
+		$serializerOptions = WikibaseRepo::getDefaultInstance()->getSerializerFactory()->newSerializationOptions();
 		$this->entitySerializer = new EntitySerializer( $serializerOptions );
 
 		//TODO: allow injection for unit tests

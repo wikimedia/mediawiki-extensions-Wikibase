@@ -54,7 +54,7 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 			new PropertyValueSnak( 9001, new StringValue( 'foobar' ) ),
 		);
 
-		$snakSerializer = new SnakSerializer();
+		$snakSerializer = new SnakSerializer( $this->getSerializationOptions() );
 
 		$reference = new Reference( new SnakList( $snaks ) );
 		$sortedReference = new Reference( new SnakList(
