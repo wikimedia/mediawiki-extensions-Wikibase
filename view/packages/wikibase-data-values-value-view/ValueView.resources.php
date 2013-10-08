@@ -83,7 +83,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
-				'jquery.valueview.MessageProvider',
 				'jquery.valueview.base',
 				'jquery.valueview.ViewState',
 				'jquery.valueview.experts', // because vv deals with ExpertFactory
@@ -103,6 +102,7 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.experts/experts.js',
 			),
 			'dependencies' => array(
+				'jquery.valueview.MessageProvider',
 				'jquery.valueview.base',
 				'dataValues.util',
 				'dataValues.values',
