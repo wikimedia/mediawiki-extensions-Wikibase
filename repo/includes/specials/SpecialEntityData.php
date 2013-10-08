@@ -55,13 +55,15 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityContentFactory = $repo->getEntityContentFactory();
 		$entityIdParser = $repo->getEntityIdParser();
 		$entityIdFormatter = $repo->getIdFormatter();
+		$serializerFactory = $repo->getSerializerFactory();
 
 		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
 			$this->getTitle()->getCanonicalURL() . '/',
-			\Wikibase\StoreFactory::getStore()->getEntityLookup(),
+			$repo->getStore()->getEntityLookup(),
 			$repo->getDataTypeFactory(),
-			$entityIdFormatter
+			$entityIdFormatter,
+			$serializerFactory
 		);
 
 		$maxAge = Settings::get( 'dataSquidMaxage' );

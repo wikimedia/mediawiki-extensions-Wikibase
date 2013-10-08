@@ -29,6 +29,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\Utils;
 
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
@@ -78,7 +79,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return array( null );
 		}
 
+		$dataTypeLookup = WikibaseClient::getDefaultInstance()->getPropertyDataTypeLookup();
+
 		$opt = new SerializationOptions();
+		$opt->setOption( SnakSerializer::OPT_DATA_TYPE_LOOKUP, $dataTypeLookup );
+
 		$serializerFactory = new SerializerFactory( $opt );
 
 		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed

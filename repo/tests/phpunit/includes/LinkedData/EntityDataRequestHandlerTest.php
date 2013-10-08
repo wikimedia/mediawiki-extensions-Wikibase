@@ -12,6 +12,8 @@ use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
@@ -108,6 +110,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
 		$idParser = new EntityIdParser( new ParserOptions() );
 
+		$serializerFactory = new SerializerFactory( new SerializationOptions() );
+
 		$contentFactory = new EntityContentFactory(
 			$idFormatter,
 			array(
@@ -121,7 +125,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			EntityDataSerializationServiceTest::URI_DATA,
 			$entityLookup,
 			$dataTypeFactory,
-			$idFormatter
+			$idFormatter,
+			$serializerFactory
 		);
 
 		$service->setFormatWhiteList(
