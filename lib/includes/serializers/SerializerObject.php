@@ -57,14 +57,15 @@ abstract class SerializerObject implements Serializer {
 	}
 
 	/**
-	 * @see ApiSerializer::setOptions
+	 * @see Serializer::setOptions
 	 *
 	 * @since 0.3
 	 *
 	 * @param SerializationOptions $options
+	 * @deprecated provide the appropriate options to the constructor instead!
 	 */
 	public final function setOptions( SerializationOptions $options ) {
-		$this->options = $options;
+		$this->options->merge( $options );
 	}
 
 	/**

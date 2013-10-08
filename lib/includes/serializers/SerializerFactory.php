@@ -4,34 +4,50 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\Claim;
+use Wikibase\Claims;
+use Wikibase\Entity;
+use Wikibase\Item;
+use Wikibase\Property;
+use Wikibase\Reference;
+use Wikibase\Snak;
 
 /**
  * Factory for constructing Serializer and Unserializer objects.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SerializerFactory {
+
+	/**
+	 * @var SerializationOptions
+	 */
+	protected $options;
+
+	/**
+	 * @param SerializationOptions $options Default options.
+	 */
+	public function __construct( SerializationOptions $options ) {
+		$this->options = $options;
+	}
+
+	/**
+	 * Returns a new SerializationOptions object, based on both, the options provided to the
+	 * factory's constructor, and the $extraOptions.
+	 *
+	 * @param array $extraOptions An associative array of options.
+	 *
+	 * @return SerializationOptions
+	 */
+	public function newSerializationOptions( array $extraOptions = array() ) {
+		$options = clone $this->options;
+		$options->setOptions( $extraOptions );
+		return $options;
+	}
 
 	/**
 	 * @param mixed $object
@@ -41,33 +57,27 @@ class SerializerFactory {
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
 	 */
-	public function newSerializerForObject( $object, $options = null ) {
+	public function newSerializerForObject( $object, SerializationOptions $options = null ) {
 		if ( !is_object( $object ) ) {
 			throw new InvalidArgumentException( 'newSerializerForObject only accepts objects and got ' . gettype( $object ) );
 		}
 
-		//TODO: The factory should take options in the constructor.
-		//TODO: The factory should offer clones of the options via newSerializationOptions().
-		//TODO: This method should merge to options given with the options from the constructor.
-
-		if ( $options == null ) {
-			$options = new SerializationOptions();
-		}
+		$options = $this->newSerializationOptions( $options == null ? array() : $options->getOptions() );
 
 		switch ( true ) {
-			case ( $object instanceof \Wikibase\Snak ):
+			case ( $object instanceof Snak ):
 				return new SnakSerializer( $options );
-			case ( $object instanceof \Wikibase\Reference ):
+			case ( $object instanceof Reference ):
 				return new ReferenceSerializer( $options );
-			case ( $object instanceof \Wikibase\Item ):
+			case ( $object instanceof Item ):
 				return new ItemSerializer( $options );
-			case ( $object instanceof \Wikibase\Property ):
+			case ( $object instanceof Property ):
 				return new PropertySerializer( $options );
-			case ( $object instanceof \Wikibase\Entity ):
+			case ( $object instanceof Entity ):
 				return new EntitySerializer( $options );
-			case ( $object instanceof \Wikibase\Claim ):
+			case ( $object instanceof Claim ):
 				return new ClaimSerializer( $options );
-			case ( $object instanceof \Wikibase\Claims ):
+			case ( $object instanceof Claims ):
 				return new ClaimsSerializer( $options );
 		}
 
@@ -83,17 +93,11 @@ class SerializerFactory {
 	 * @throws InvalidArgumentException
 	 */
 	public function newUnserializerForClass( $className, $options = null ) {
-		if ( $options === null ) {
-			$options = new SerializationOptions();
-		}
-
-		//TODO: The factory should take options in the constructor.
-		//TODO: The factory should offer clones of the options via newSerializationOptions().
-		//TODO: This method should merge to options given with the options from the constructor.
-
 		if ( !is_string( $className ) ) {
 			throw new OutOfBoundsException( '$className needs to be a string' );
 		}
+
+		$options = $this->newSerializationOptions( $options == null ? array() : $options->getOptions() );
 
 		switch ( ltrim( $className, '\\' ) ) {
 			case 'Wikibase\Item':

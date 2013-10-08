@@ -40,9 +40,9 @@ class SerializationOptions {
 	const OPT_INDEX_TAGS = 'indexTags';
 
 	/**
-	 * @const Option key for the language fallback chains to apply. The value must be an array.
-	 * Array keys are language codes (may include pseudo ones to identify some given fallback chains); values are
-	 * LanguageFallbackChain objects (plain code inputs are constructed into language chains with a single language).
+	 * @const Option key for the list of languages to include in the output.
+	 *        The value is given as an associative array mapping from a language code
+	 *        to a LanguageFallbackChain object.
 	 *
 	 * @since 0.5
 	 */
@@ -50,8 +50,8 @@ class SerializationOptions {
 
 	/**
 	 * @const Option key for a LanguageFallbackChainFactory object
-	 * used to create LanguageFallbackChain objects when the old style array-of-strings
-	 * argument is used in setLanguage().
+	 *        used to create LanguageFallbackChain objects when the old style array-of-strings
+	 *        argument is used in setLanguage().
 	 *
 	 * @since 0.5
 	 */
@@ -398,7 +398,7 @@ class SerializationOptions {
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
-		$factory = $this->getOption( self::OPT_LANGUAGES );
+		$factory = $this->getOption( self::OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY );
 
 		if ( $factory === null ) {
 			$factory = new LanguageFallbackChainFactory();
@@ -416,6 +416,6 @@ class SerializationOptions {
 	 * @param LanguageFallbackChainFactory $factory
 	 */
 	public function setLanguageFallbackChainFactory( LanguageFallbackChainFactory $factory ) {
-		$this->setOption( self::OPT_LANGUAGES, $factory );
+		$this->setOption( self::OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY, $factory );
 	}
 }

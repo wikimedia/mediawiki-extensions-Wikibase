@@ -8,6 +8,7 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Serializers\ClaimsSerializer;
 use Wikibase\Lib\Serializers\EntitySerializer;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
@@ -41,6 +42,17 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @var bool|string
 	 */
 	protected static $longErrorContextMessage = false;
+
+	/**
+	 * @var SerializerFactory
+	 */
+	protected $serializerFactory;
+
+	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
+		parent::__construct( $main, $name, $prefix );
+
+		$this->serializerFactory = WikibaseRepo::getDefaultInstance()->getSerializerFactory();
+	}
 
 	/**
 	 * @see \ApiBase::getPossibleErrors()
@@ -116,7 +128,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$aliasSerializer = new AliasSerializer( $options );
 		$value = $aliasSerializer->getSerialized( $aliases );
@@ -145,7 +157,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$serializerOptions = new SerializationOptions();
+		$serializerOptions = $this->serializerFactory->newSerializationOptions();
 		$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
 
@@ -190,7 +202,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$descriptionSerializer = new DescriptionSerializer( $options );
 
@@ -217,7 +229,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$labelSerializer = new LabelSerializer( $options );
 
@@ -244,7 +256,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$claimSerializer = new ClaimsSerializer( $options );
 

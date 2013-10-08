@@ -70,8 +70,7 @@ class SetReference extends ModifyClaim {
 			$this->validateReferenceHash( $claim, $params['reference'] );
 		}
 
-		$serializerFactory = new SerializerFactory();
-		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Reference' );
+		$unserializer = $this->serializerFactory->newUnserializerForClass( 'Wikibase\Reference' );
 
 		$decodedParams = array(
 			'snaks' => $this->getArrayFromParam( $params['snaks'] )
@@ -151,8 +150,7 @@ class SetReference extends ModifyClaim {
 	protected function getSnaks( array $rawSnaks, array $snakOrder = array() ) {
 		$snaks = new SnakList();
 
-		$serializerFactory = new SerializerFactory();
-		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
+		$snakUnserializer = $this->serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
 
 		$snakOrder = ( count( $snakOrder ) > 0 ) ? $snakOrder : array_keys( $rawSnaks );
 
@@ -204,8 +202,7 @@ class SetReference extends ModifyClaim {
 	 * @param \Wikibase\Reference $reference
 	 */
 	protected function outputReference( Reference $reference ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $reference );
+		$serializer = $this->serializerFactory->newSerializerForObject( $reference );
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(
