@@ -28,7 +28,6 @@ use Wikibase\Repo\WikibaseRepo;
 class GetClaims extends ApiWikibase {
 
 	// TODO: rights
-	// TODO: conflict detection
 
 	/**
 	 * @see \ApiBase::execute
@@ -86,8 +85,7 @@ class GetClaims extends ApiWikibase {
 	protected function outputClaims( array $claims ) {
 		$claims = new Claims( $claims );
 
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claims );
+		$serializer = $this->serializerFactory->newSerializerForObject( $claims );
 
 		// TODO: hold into account props parameter
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );

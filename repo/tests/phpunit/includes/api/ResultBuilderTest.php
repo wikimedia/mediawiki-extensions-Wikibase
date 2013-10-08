@@ -9,11 +9,19 @@ use Wikibase\Api\ResultBuilder;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\Api\ResultBuilder
  * @todo mock and inject serializers to avoid massive expected output
+ *
+ * @group API
+ * @group Wikibase
+ * @group WikibaseAPI
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
@@ -26,30 +34,20 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function getResultBuilder( $result ){
-		return new ResultBuilder( $result );
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'test' ) );
+
+		$options = new SerializationOptions( array( SnakSerializer::OPT_DATA_TYPE_LOOKUP => $dataTypeLookup ) );
+		$serializerFactory = new SerializerFactory( $options );
+		return new ResultBuilder( $result, $serializerFactory );
 	}
 
 	public function testCanConstruct(){
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$this->assertInstanceOf( '\Wikibase\Api\ResultBuilder', $resultBuilder );
-	}
-
-	/**
-	 * @dataProvider provideBadConstructionData
-	 */
-	public function testBadConstruction( $result ){
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$this->getResultBuilder( $result );
-	}
-
-	public static function provideBadConstructionData() {
-		return array(
-			array( null ),
-			array( 1234 ),
-			array( "imastring" ),
-			array( array() ),
-		);
 	}
 
 	/**
@@ -222,6 +220,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 										'value' => 'stringVal',
 										'type' => 'string',
 									),
+									'datatype' => 'test',
 								),
 								'type' => 'claim',
 							)

@@ -249,8 +249,7 @@ class GetEntities extends ApiWikibase {
 				$options->setOption( EntitySerializer::OPT_PARTS, $props );
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
 
-				$serializerFactory = new SerializerFactory();
-				$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );
+				$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $options );
 
 				$entitySerialization = $entitySerializer->getSerialized( $entity );
 
