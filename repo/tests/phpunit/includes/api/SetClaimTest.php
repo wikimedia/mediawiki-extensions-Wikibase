@@ -7,6 +7,7 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -142,7 +143,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 			// Simply reorder the qualifiers by putting the first qualifier to the end. This is
 			// supposed to be done in the serialized representation since changing the actual
 			// object might apply intrinsic sorting.
-			$serializerFactory = new SerializerFactory();
+			$options = new SerializationOptions();
+			$serializerFactory = new SerializerFactory( $options );
 			$serializer = $serializerFactory->newSerializerForObject( $claim );
 			$serializedClaim = $serializer->getSerialized( $claim );
 			$firstPropertyId = array_shift( $serializedClaim['qualifiers-order'] );
@@ -164,7 +166,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @param $requestLabel string a label to identify requests that are made in errors
 	 */
 	protected function makeRequest( $claim, EntityId $entityId, $claimCount, $requestLabel ) {
-		$serializerFactory = new SerializerFactory();
+		$options = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $options );
 
 		if( is_a( $claim, '\Wikibase\Claim' ) ) {
 			$unserializer = $serializerFactory->newSerializerForObject( $claim );
