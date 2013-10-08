@@ -22,6 +22,7 @@ use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\Serializers\EntityRevisionSerializer;
 use Wikibase\Lib\SnakFormatter;
 use ValueFormatters\FormatterOptions;
@@ -93,12 +94,15 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * @since    0.1
 	 *
-	 * @param IContextSource|null        $context
-	 * @param SnakFormatter      $snakFormatter
+	 * @param IContextSource|null $context
+	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityRevisionLookup       $entityRevisionLookup
-	 * @param EntityTitleLookup          $entityTitleLookup
-	 * @param LanguageFallbackChain      $languageFallbackChain
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param SerializerFactory $serializerFactory
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
 		IContextSource $context,
@@ -106,7 +110,8 @@ abstract class EntityView extends \ContextSource {
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		LanguageFallbackChain $languageFallbackChain
+		LanguageFallbackChain $languageFallbackChain,
+		SerializerFactory $serializerFactory
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -120,6 +125,7 @@ abstract class EntityView extends \ContextSource {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackChain = $languageFallbackChain;
+		$this->serializerFactory = $serializerFactory;
 	}
 
 	/**
@@ -782,11 +788,12 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
 
 		// TODO: use injected id formatter
-		$serializationOptions = new SerializationOptions();
+		$serializationOptions = $this->serializerFactory->newSerializationOptions();
+
+		$serializationOptions->setOption( SnakSerializer::OPT_DATA_TYPE_LOOKUP, $this->dataTypeLookup );
 		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
 
-		$serializerFactory = new SerializerFactory( $serializationOptions );
-		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		$serializer = $this->serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 
 		$out->addJsConfigVars(
 			'wbEntity',
@@ -885,6 +892,8 @@ abstract class EntityView extends \ContextSource {
 			}
 		}
 
+		$serializerFactory = WikibaseRepo::getDefaultInstance()->getSerializerFactory();
+
 		$class = self::$typeMap[ $type ];
 		$instance = new $class(
 			$context,
@@ -892,7 +901,8 @@ abstract class EntityView extends \ContextSource {
 			$dataTypeLookup,
 			$entityRevisionLookup,
 			$entityTitleLookup,
-			$languageFallbackChain );
+			$languageFallbackChain,
+			$serializerFactory );
 
 		return $instance;
 	}

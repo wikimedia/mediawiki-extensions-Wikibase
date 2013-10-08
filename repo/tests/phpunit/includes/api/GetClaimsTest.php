@@ -6,6 +6,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Statement;
 
@@ -144,7 +146,8 @@ class GetClaimsTest extends \ApiTestCase {
 			$claims = new \Wikibase\Claims( $claims );
 		}
 
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$options = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $options );
 		$serializer = $serializerFactory->newSerializerForObject( $claims );
 		$expected = $serializer->getSerialized( $claims );
 
