@@ -36,6 +36,22 @@ switch( $jenkins_job_name) {
 		require_once __DIR__ . '/client/ExampleSettings.php';
 		break;
 
+	case 'mwext-Wikibase-repo-tests':
+		require_once __DIR__ . '/repo/Wikibase.php';
+		require_once __DIR__ . '/repo/ExampleSettings.php';
+		$_SERVER['argv'] = array_merge( $_SERVER['argv'], array(
+			'--exclude-group', 'WikibaseAPI',
+		) );
+		break;
+
+	case 'mwext-Wikibase-repoapi-tests':
+		require_once __DIR__ . '/repo/Wikibase.php';
+		require_once __DIR__ . '/repo/ExampleSettings.php';
+		$_SERVER['argv'] = array_merge( $_SERVER['argv'], array(
+			'--group', 'WikibaseAPI',
+		) );
+		break;
+
 	case 'mwext-Wikibase-testextensions-master':
 		require_once __DIR__ . '/repo/Wikibase.php';
 		require_once __DIR__ . '/client/WikibaseClient.php';
@@ -44,6 +60,7 @@ switch( $jenkins_job_name) {
 		require_once __DIR__ . '/client/ExampleSettings.php';
 		break;
 
+	//The default should not be reached by jenkins...
 	default:
 		require_once __DIR__ . '/repo/Wikibase.php';
 		require_once __DIR__ . '/repo/ExampleSettings.php';
@@ -52,5 +69,3 @@ switch( $jenkins_job_name) {
 
 // Avoid polluting the global namespace
 unset( $jenkins_job_name );
-
-
