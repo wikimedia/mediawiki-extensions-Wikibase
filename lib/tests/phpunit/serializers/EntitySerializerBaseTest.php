@@ -30,7 +30,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 	protected function getInstance() {
 		$class = $this->getClass();
-		return new $class( new EntitySerializationOptions( $this->getIdFormatter() ) );
+		return new $class( new EntitySerializationOptions() );
 	}
 
 	/**
@@ -47,7 +47,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 		$validArgs = array();
 
-		$options = new EntitySerializationOptions( $this->getIdFormatter() );
+		$options = new EntitySerializationOptions();
 		$options->setProps( array( 'aliases' ) );
 
 		$entity0 = $entity->copy();
@@ -85,7 +85,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 			$options
 		);
 
-		$options = new EntitySerializationOptions( $this->getIdFormatter() );
+		$options = new EntitySerializationOptions();
 		$options->setProps( array( 'descriptions', 'labels' ) );
 
 		$entity1 = $entity->copy();

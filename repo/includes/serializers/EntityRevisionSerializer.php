@@ -100,7 +100,7 @@ class EntityRevisionSerializer extends SerializerObject {
 	 */
 	public static function newForFrontendStore( EntityTitleLookup $titleLookup, $primaryLanguage, LanguageFallbackChain $languageFallbackChain ) {
 		$entitySerializationOptions =
-			new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+			new EntitySerializationOptions();
 		
 		$entitySerializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
 		$entitySerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );

@@ -28,9 +28,8 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function validProvider() {
 		$validArgs = array();
-		$idFormatter = $this->getIdFormatter();
 
-		$options = new EntitySerializationOptions( $idFormatter );
+		$options = new EntitySerializationOptions();
 		$options->setIndexTags( false );
 		$siteLinks = array(
 			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q42" ) ) ),
@@ -44,7 +43,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $siteLinks, $options, $expectedSerialization );
 
-		$options = new EntitySerializationOptions( $idFormatter );
+		$options = new EntitySerializationOptions();
 		$options->setIndexTags( false );
 		$options->addProp( "sitelinks/removed" );
 		$siteLinks = array(
@@ -59,7 +58,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $siteLinks, $options, $expectedSerialization );
 
-		$options = new EntitySerializationOptions( $idFormatter );
+		$options = new EntitySerializationOptions();
 		$options->setIndexTags( true );
 		$siteLinks = array(
 			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q149" ), new ItemId( "Q49" ) ) ),
@@ -103,7 +102,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidGetSerialized( $sitelinks ) {
-		$options = new EntitySerializationOptions( $this->getIdFormatter() );
+		$options = new EntitySerializationOptions();
 		$siteStore = SiteSQLStore::newInstance();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 		$siteLinkSerializer->getSerialized( $sitelinks );
