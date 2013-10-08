@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_a951c062",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-08T11:10:23Z",
+      "side": 1,
+      "message": "nice catch!",
+      "revId": "2898eea57dd1f4ddbcd05da9e768b7c518509221",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
