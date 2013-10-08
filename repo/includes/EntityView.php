@@ -737,11 +737,11 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param string  $specialpagename
 	 * @param Entity  $entity
-	 * @param \Language $lang
+	 * @param \Language $lang|null
 	 *
 	 * @return string
 	 */
-	protected function getEditUrl( $specialpagename, Entity $entity, Language $lang ) {
+	protected function getEditUrl( $specialpagename, Entity $entity, Language $lang = null ) {
 		$specialpage = \SpecialPageFactory::getPage( $specialpagename );
 
 		if ( $specialpage === null ) {

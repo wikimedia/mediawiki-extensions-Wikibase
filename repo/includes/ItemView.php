@@ -121,7 +121,7 @@ class ItemView extends EntityView {
 		}
 
 		// Link to SpecialPage
-		$editLink = $this->getEditUrl( 'SetSiteLink', $item, $lang );
+		$editLink = $this->getEditUrl( 'SetSiteLink', $item, null );
 
 		/* @var SiteLink $link */
 		foreach( $siteLinks as $link ) {
