@@ -114,7 +114,7 @@ class UpdateRepoOnMoveJob extends \Job {
 	 * @param Item $item
 	 * @param string $globalId
 	 *
-	 * @return Wikibase\DataModel\SimpleSiteLink|null
+	 * @return SimpleSiteLink|null
 	 */
 	protected function getSimpleSiteLink( $item, $globalId ) {
 		try {
