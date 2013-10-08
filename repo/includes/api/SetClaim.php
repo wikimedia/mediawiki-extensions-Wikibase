@@ -81,11 +81,7 @@ class SetClaim extends ModifyClaim {
 	protected function getSummary( array $params, Claim $claim, EntityContent $entityContent ){
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
-			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter(
-				SnakFormatter::FORMAT_PLAIN,
-				new FormatterOptions()
-			)
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 		$summary = $claimSummaryBuilder->buildClaimSummary(
 			new Claims( $entityContent->getEntity()->getClaims() ),
