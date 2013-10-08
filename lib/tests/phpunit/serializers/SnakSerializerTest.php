@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -31,6 +32,23 @@ class SnakSerializerTest extends SerializerBaseTest {
 	 */
 	protected function getClass() {
 		return '\Wikibase\Lib\Serializers\SnakSerializer';
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @return SnakSerializer
+	 */
+	protected function getInstance() {
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'test' ) );
+
+		$options = $this->getSerializationOptions();
+
+		$class = $this->getClass();
+		return new $class( $options, $dataTypeLookup );
 	}
 
 	/**
@@ -68,6 +86,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 			array(
 				'snaktype' => 'value',
 				'property' => 'P42',
+				'datatype' => 'test', // from the PropertyDataTypeLookupMock defined in getInstance()
 				'datavalue' => $dataValue->toArray(),
 			)
 		);

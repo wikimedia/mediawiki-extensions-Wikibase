@@ -109,10 +109,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'sitelinks' => array( 'svwiki' => 'FOO' ) ) ),
 
 			array( //15 add a claim
-				'p' => array( 'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+				'p' => array( 'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datatype":"string","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
 				'e' => array( 'claims' => array(
 					'P56' => array(
-						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56',
+						'mainsnak' => array(
+							'snaktype' => 'value',
+							'property' => 'P56',
+							'datatype' => 'string',
 							'datavalue' => array(
 								'value' => 'imastring',
 								'type' => 'string' ) ),
@@ -120,10 +123,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal' ) ) ) ),
 
 			array( //15 change the claim
-				'p' => array( 'data' => '{"claims":[{"id":"GUID","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"diffstring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+				'p' => array( 'data' => '{"claims":[{"id":"GUID","mainsnak":{"snaktype":"value","property":"P56","datatype":"string","datavalue":{"value":"diffstring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
 				'e' => array( 'claims' => array(
 					'P56' => array(
-						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56',
+						'mainsnak' => array(
+							'snaktype' => 'value',
+							'property' => 'P56',
+							'datatype' => 'string',
 							'datavalue' => array(
 								'value' => 'diffstring',
 								'type' => 'string' ) ),
@@ -136,12 +142,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 			array( //15 add multiple claims
 				'p' => array(
-					'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'.
-					'{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring2","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+					'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datatype":"string","datavalue":{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'.
+					'{"mainsnak":{"snaktype":"value","property":"P56","datatype":"string","datavalue":{"value":"imastring2","type":"string"}},"type":"statement","rank":"normal"}]}' ),
 				'e' => array( 'claims' => array(
 					'P56' => array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value',
+							'property' => 'P56',
+							'datatype' => 'string',
 							'datavalue' => array(
 								'value' => 'imastring1',
 								'type' => 'string' ) ),
@@ -149,7 +157,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal' ),
 					array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value',
+							'property' => 'P56',
+							'datatype' => 'string',
 							'datavalue' => array(
 								'value' => 'imastring2',
 								'type' => 'string' ) ),
@@ -159,19 +169,23 @@ class EditEntityTest extends WikibaseApiTestCase {
 			),
 
 			array( //15 clear and add complex claim with qualifiers and references
-				'p' => array( 'clear' => '', 'data' => '{"claims": [{"mainsnak": {"snaktype": "value", "property": "P56", "datavalue": { "value": "str", "type": "string" } },'.
-					'"qualifiers": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "qual", "type": "string" } } ] }, "type": "statement", "rank": "normal",'.
-					'"references": [ { "snaks": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "src", "type": "string" } } ] } } ]}]}' ),
+				'p' => array( 'clear' => '', 'data' => '{"claims": [{"mainsnak": {"snaktype": "value", "property": "P56", "datatype": "string", "datavalue": { "value": "str", "type": "string" } },'.
+					'"qualifiers": { "P56": [ { "snaktype": "value", "property": "P56", "datatype": "string", "datavalue": { "value": "qual", "type": "string" } } ] }, "type": "statement", "rank": "normal",'.
+					'"references": [ { "snaks": { "P56": [ { "snaktype": "value", "property": "P56", "datatype": "string", "datavalue": { "value": "src", "type": "string" } } ] } } ]}]}' ),
 				'e' => array( 'claims' => array(
 					'P56' => array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value',
+							'property' => 'P56',
+							'datatype' => 'string',
 							'datavalue' => array(
 								'value' => 'str',
 								'type' => 'string' ) ),
 						'qualifiers' => array(
 							'P56' => array(
-								'snaktype' => 'value', 'property' => 'P56',
+								'snaktype' => 'value',
+								'property' => 'P56',
+								'datatype' => 'string',
 								'datavalue' => array(
 									'value' => 'qual',
 									'type' => 'string' ) ),
@@ -181,7 +195,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'references' => array(
 							'snaks' => array(
 								'P56' => array(
-									'snaktype' => 'value', 'property' => 'P56',
+									'snaktype' => 'value',
+									'property' => 'P56',
+									'datatype' => 'string',
 									'datavalue' => array(
 										'value' => 'src',
 										'type' => 'string' ) ),
@@ -194,12 +210,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 			array( //15 clear and add multiple claims within property groups
 				'p' => array( 'clear' => '',
-					'data' => '{"claims":{"P56":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring56","type":"string"}},"type":"statement","rank":"normal"}],'.
-							'"P72":[{"mainsnak":{"snaktype":"value","property":"P72","datavalue":{"value":"imastring72","type":"string"}},"type":"statement","rank":"normal"}]}}' ),
+					'data' => '{"claims":{"P56":[{"mainsnak":{"snaktype":"value","property":"P56","datatype":"string","datavalue":{"value":"imastring56","type":"string"}},"type":"statement","rank":"normal"}],'.
+							'"P72":[{"mainsnak":{"snaktype":"value","property":"P72","datatype":"string","datavalue":{"value":"imastring72","type":"string"}},"type":"statement","rank":"normal"}]}}' ),
 				'e' => array( 'claims' => array(
 					'P56' => array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value',
+							'property' => 'P56',
+							'datatype' => 'string',
 							'datavalue' => array(
 								'value' => 'imastring56',
 								'type' => 'string' ) ),
@@ -207,7 +225,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal' ),
 					array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P72',
+							'snaktype' => 'value',
+							'property' => 'P72',
+							'datatype' => 'string',
 							'datavalue' => array(
 								'value' => 'imastring72',
 								'type' => 'string' ) ),
@@ -336,7 +356,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"claims":[{"remove":""}]}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-claim', 'message' => 'Cannot remove a claim with no GUID'  ) ) ),
 			array( //20 removing valid claim with no guid fails
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"P56","datatype":"string","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized', 'message' => 'Unknown key in json: remove' ) ) ),
 		);
 	}

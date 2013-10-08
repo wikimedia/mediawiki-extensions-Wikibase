@@ -8,6 +8,7 @@ use User;
 use Status;
 use ApiBase;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
@@ -24,14 +25,10 @@ use WikiPage;
  */
 abstract class ApiWikibase extends \ApiBase {
 
+	/**
+	 * @var ResultBuilder
+	 */
 	protected $resultBuilder;
-
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		// todo inject serialization factory to result builder
-		$this->resultBuilder = new ResultBuilder( $this->getResult() );
-	}
 
 	/**
 	 * Wrapper message for single errors
@@ -46,6 +43,18 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @var bool|string
 	 */
 	protected static $longErrorContextMessage = false;
+
+	/**
+	 * @var SerializerFactory
+	 */
+	protected $serializerFactory;
+
+	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
+		parent::__construct( $main, $name, $prefix );
+
+		$this->serializerFactory = WikibaseRepo::getDefaultInstance()->getSerializerFactory();
+		$this->resultBuilder = new ResultBuilder( $this->getResult(), $this->serializerFactory  );
+	}
 
 	/**
 	 * @see \ApiBase::getPossibleErrors()

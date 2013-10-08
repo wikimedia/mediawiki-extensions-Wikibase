@@ -24,7 +24,9 @@ use Wikibase\Reference;
 class SerializerFactoryTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
-		new SerializerFactory();
+		$options = new SerializationOptions();
+		new SerializerFactory( $options );
+
 		$this->assertTrue( true );
 	}
 
@@ -44,7 +46,8 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider objectProvider
 	 */
 	public function testNewSerializerForObject( $object, $options = null ) {
-		$factory = new SerializerFactory();
+		$options = new SerializationOptions();
+		$factory = new SerializerFactory( $options );
 
 		$serializer = $factory->newSerializerForObject( $object, $options );
 
@@ -58,7 +61,8 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 
 		$snak = new PropertyNoValueSnak( 42 );
 
-		$factory = new SerializerFactory();
+		$options = new SerializationOptions();
+		$factory = new SerializerFactory( $options );
 		$serializer = $factory->newSerializerForObject( $snak );
 
 		$argLists[] = array( 'Wikibase\Snak', $serializer->getSerialized( $snak ) );
@@ -73,7 +77,8 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @param array $serialization
 	 */
 	public function testNewUnserializerForClass( $className, array $serialization ) {
-		$factory = new SerializerFactory();
+		$options = new SerializationOptions();
+		$factory = new SerializerFactory( $options );
 
 		$unserializer = $factory->newUnserializerForClass( $className );
 

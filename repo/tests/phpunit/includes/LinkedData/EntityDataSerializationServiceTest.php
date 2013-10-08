@@ -8,6 +8,8 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\Property;
 
@@ -76,13 +78,15 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$entityLookup = new MockRepository();
 		$dataTypeFactory = new DataTypeFactory( self::$dataTypes );
 		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
+		$serializerFactory = new SerializerFactory( new SerializationOptions() );
 
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
 			$entityLookup,
 			$dataTypeFactory,
-			$idFormatter
+			$idFormatter,
+			$serializerFactory
 		);
 
 		$service->setFormatWhiteList(

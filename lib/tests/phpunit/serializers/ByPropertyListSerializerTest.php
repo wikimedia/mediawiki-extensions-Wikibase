@@ -43,8 +43,25 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	 * @return ByPropertyListSerializer
 	 */
 	protected function getInstance() {
-		$snakSerializer = new SnakSerializer();
+		$snakSerializer = new SnakSerializer( $this->getSerializationOptions() );
 		return new ByPropertyListSerializer( 'test', $snakSerializer );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return SerializationOptions
+	 */
+	protected function getSerializationOptions() {
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'test' ) );
+
+		$options = new SerializationOptions();
+		$options->setOption( SnakSerializer::OPT_DATA_TYPE_LOOKUP, $dataTypeLookup );
+
+		return $options;
 	}
 
 	/**
@@ -93,6 +110,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 						'snaktype' => 'value',
 						'property' => 'P2',
 						'datavalue' => $dataValue0->toArray(),
+						'datatype' => 'test',
 					),
 				),
 			),
@@ -119,6 +137,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 						'snaktype' => 'value',
 						'property' => 'P2',
 						'datavalue' => $dataValue0->toArray(),
+						'datatype' => 'test'
 					),
 				),
 			),
@@ -146,6 +165,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 						'snaktype' => 'value',
 						'property' => 'P2',
 						'datavalue' => $dataValue0->toArray(),
+						'datatype' => 'test'
 					),
 				),
 			),
@@ -174,6 +194,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 						'snaktype' => 'value',
 						'property' => 'P2',
 						'datavalue' => $dataValue0->toArray(),
+						'datatype' => 'test'
 					),
 				),
 				'p42' => array(
@@ -191,6 +212,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 						'snaktype' => 'value',
 						'property' => 'P2',
 						'datavalue' => $dataValue0->toArray(),
+						'datatype' => 'test'
 					),
 				),
 			),

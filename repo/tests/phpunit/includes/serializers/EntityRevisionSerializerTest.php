@@ -9,6 +9,7 @@ use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 use Wikibase\Serializers\EntityRevisionSerializationOptions;
 use Wikibase\Serializers\EntityRevisionSerializer;
@@ -71,7 +72,9 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 	 * @return EntityRevisionSerializer
 	 */
 	protected function getInstance() {
-		return new EntityRevisionSerializer( $this->getTitleLookupMock() );
+		$options = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $options );
+		return new EntityRevisionSerializer( $this->getTitleLookupMock(), $serializerFactory );
 	}
 
 	/**
@@ -83,9 +86,6 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 	 */
 	public function validProvider() {
 		$entitySerializerOptions = new SerializationOptions();
-
-		$entityContentSerializerOptions =
-			new EntityRevisionSerializationOptions( $entitySerializerOptions );
 
 		$entity = Property::newEmpty();
 		$entity->setId( new PropertyId( 'P652320' ) );
@@ -106,7 +106,7 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 					'datatype' => 'foo'
 				)
 			),
-			$entityContentSerializerOptions
+			$entitySerializerOptions
 		);
 
 		return $validArgs;
