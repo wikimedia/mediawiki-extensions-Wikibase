@@ -50,10 +50,6 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 
-	public function formatId( EntityId $id ) {
-		return $id->getPrefixedId();
-	}
-
 	/**
 	 * @return EntityTitleLookup
 	 */
@@ -63,21 +59,6 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
-
-		return $titleLookup;
-	}
-
-	/**
-	 * @return EntityIdFormatter
-	 */
-	protected function getIdFormatterMock() {
-		$titleLookup = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$titleLookup->expects( $this->any() )
-			->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'formatId' ) ) );
 
 		return $titleLookup;
 	}
@@ -101,7 +82,7 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 	 * @return array
 	 */
 	public function validProvider() {
-		$entitySerializerOptions = new EntitySerializationOptions( $this->getIdFormatterMock() );
+		$entitySerializerOptions = new EntitySerializationOptions();
 
 		$entityContentSerializerOptions =
 			new EntityRevisionSerializationOptions( $entitySerializerOptions );

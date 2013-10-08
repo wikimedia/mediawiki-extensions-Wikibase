@@ -53,7 +53,7 @@ class EntitySerializer extends SerializerObject {
 			throw new MWException( 'EntitySerializer can only serialize Entity objects' );
 		}
 
-		$serialization['id'] = $this->options->getIdFormatter()->format( $entity->getId() );
+		$serialization['id'] = $entity->getId() ? $entity->getId()->getPrefixedId() : '';
 		$serialization['type'] = $entity->getType();
 
 		foreach ( $this->options->getProps() as $key ) {

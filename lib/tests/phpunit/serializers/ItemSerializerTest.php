@@ -65,7 +65,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 			),
 		);
 
-		$options = new EntitySerializationOptions( $this->getIdFormatter() );
+		$options = new EntitySerializationOptions();
 		$options->setProps( array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ) );
 
 		$validArgs[] = array(

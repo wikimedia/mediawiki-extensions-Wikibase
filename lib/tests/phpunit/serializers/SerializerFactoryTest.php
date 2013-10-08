@@ -35,9 +35,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 		$argLists[] = array( new Reference() );
 		$argLists[] = array( new Claim( new PropertyNoValueSnak( 42 ) ) );
 
-		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
-			->disableOriginalConstructor()->getMock();
-		$argLists[] = array( Item::newEmpty(), new EntitySerializationOptions( $idFormatter ) );
+		$argLists[] = array( Item::newEmpty(), new EntitySerializationOptions() );
 
 		return $argLists;
 	}

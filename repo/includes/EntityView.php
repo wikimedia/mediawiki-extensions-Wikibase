@@ -50,11 +50,6 @@ abstract class EntityView extends \ContextSource {
 	protected $valueFormatters;
 
 	/**
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter;
-
-	/**
 	 * @var EntityRevisionLookup
 	 */
 	protected $entityRevisionLookup;
@@ -98,7 +93,6 @@ abstract class EntityView extends \ContextSource {
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityRevisionLookup       $entityRevisionLookup
 	 * @param EntityTitleLookup          $entityTitleLookup
-	 * @param Lib\EntityIdFormatter      $idFormatter
 	 * @param LanguageFallbackChain      $languageFallbackChain
 	 */
 	public function __construct(
@@ -107,7 +101,6 @@ abstract class EntityView extends \ContextSource {
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		EntityIdFormatter $idFormatter,
 		LanguageFallbackChain $languageFallbackChain
 	) {
 		$this->setContext( $context );
@@ -115,7 +108,6 @@ abstract class EntityView extends \ContextSource {
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->idFormatter = $idFormatter;
 		$this->languageFallbackChain = $languageFallbackChain;
 	}
 
@@ -182,7 +174,7 @@ abstract class EntityView extends \ContextSource {
 			return ''; //XXX: should probably throw an exception
 		}
 
-		return $this->idFormatter->format( $entity->getId() );
+		return $entity->getId()->getPrefixedId();
 	}
 
 	/**
@@ -856,7 +848,7 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
 
 		// TODO: use injected id formatter
-		$serializationOptions = new EntitySerializationOptions( $this->idFormatter );
+		$serializationOptions = new EntitySerializationOptions();
 		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
 
 		$serializerFactory = new SerializerFactory();
@@ -947,8 +939,6 @@ abstract class EntityView extends \ContextSource {
 			$context = \RequestContext::getMain();
 		}
 
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-
 		if ( !$languageFallbackChain ) {
 			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
 			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
@@ -967,7 +957,6 @@ abstract class EntityView extends \ContextSource {
 			$dataTypeLookup,
 			$entityRevisionLookup,
 			$entityTitleLookup,
-			$idFormatter,
 			$languageFallbackChain
 		);
 
