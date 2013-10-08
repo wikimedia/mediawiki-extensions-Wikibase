@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Comparable;
 use Hashable;
+use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializerObject;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Unserializer;
@@ -19,6 +20,7 @@ use Wikibase\Lib\Serializers\Unserializer;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class SerializerBaseTest extends \MediaWikiTestCase {
 
@@ -37,13 +39,24 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	public abstract function validProvider();
 
 	/**
+	 * @since 0.5
+	 *
+	 * @return SerializationOptions
+	 */
+	protected function getSerializationOptions() {
+		$options = new SerializationOptions();
+		return $options;
+	}
+
+	/**
 	 * @since 0.2
 	 *
 	 * @return SerializerObject
 	 */
 	protected function getInstance() {
+		$options = $this->getSerializationOptions();
 		$class = $this->getClass();
-		return new $class();
+		return new $class( $options );
 	}
 
 	/**
@@ -141,4 +154,10 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 		$serializer->getSerialized( $input );
 	}
 
+	public function testSetOptions() {
+		$serializer = $this->getInstance();
+
+		$serializer->setOptions( new SerializationOptions() );
+		$this->assertTrue( true );
+	}
 }
