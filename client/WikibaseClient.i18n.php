@@ -246,7 +246,7 @@ $messages['af'] = array(
 	'wikibase-linkitem-input-site' => 'Taal:',
 	'wikibase-linkitem-input-page' => 'Bladsy:',
 	'wikibase-linkitem-invalidsite' => 'Onbekende of ongeldige webwerf gekies',
-	'wikibase-linkitem-confirmitem-text' => "Die bladsy wat u gekies het is reeds aan 'n [$1 item in ons sentrale data-resevoir] gekoppel. Bevestig dat die onderstaande bladsye inderdaad die bladsye is waaraan u hierdie bladsy wil skakel.",
+	'wikibase-linkitem-confirmitem-text' => "Die bladsy wat u gekies het is reeds aan 'n [$1 item in ons sentrale data-resevoir] gekoppel. Bevestig dat die onderstaande bladsye inderdaad die bladsye is waaraan u hierdie bladsy wil skakel.", # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Bevestig',
 	'wikibase-linkitem-not-loggedin-title' => 'U moet aangemeld wees',
 	'wikibase-linkitem-not-loggedin' => 'U moet by hierdie wiki en die [$1 sentrale data-resevoir] aangemeld wees om hierdie funksie te kan gebruik.',
@@ -265,7 +265,7 @@ $messages['af'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is nie \'n geldige taalkode nie.',
 	'wikibase-unconnectedpages-page-warning' => 'Die bladsynaam kan nie vir die soekopdrag gebruik word nie en is geïgnoreer.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Slegs bladsye met taalskakels',
-	'wikibase-unconnectedpages-format-row' => '($1 taalskakel{{PLURAL:$1||s}} op die bladsy)',
+	'wikibase-unconnectedpages-format-row' => '($1 taalskakel{{PLURAL:$1||s}} op die bladsy)', # Fuzzy
 );
 
 /** Arabic (العربية)
@@ -421,7 +421,7 @@ $messages['be'] = array(
 	'wikibase-linkitem-input-site' => 'Мова:',
 	'wikibase-linkitem-input-page' => 'Старонка:',
 	'wikibase-linkitem-invalidsite' => 'Выбраны невядомы ці няслушны сайт',
-	'wikibase-linkitem-confirmitem-text' => "Старонка, якую вы выбралі, ужо далучана да [$1 аб'екта ў цэнтральным рэпазыторыі]. Пацвердзіце, калі ласка, што ўказаныя ніжэй старонкі з'яўляецца тымі, з якімі вы хочаце злучыць гэту старонку.",
+	'wikibase-linkitem-confirmitem-text' => "Старонка, якую вы выбралі, ужо далучана да [$1 аб'екта ў цэнтральным рэпазыторыі]. Пацвердзіце, калі ласка, што ўказаныя ніжэй старонкі з'яўляецца тымі, з якімі вы хочаце злучыць гэту старонку.", # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Пацвердзіць',
 	'wikibase-linkitem-not-loggedin-title' => 'Вы павінны ўвайсці ў сітэму',
 	'wikibase-linkitem-not-loggedin' => 'Для карыстання гэтай функцыяй вы павінны ўвайсці ў гэту вікі і [$1 цэнтральны рэпазыторый].',
@@ -1067,7 +1067,7 @@ $messages['dsb'] = array(
 	'wikibase-linkitem-input-site' => 'Rěc:',
 	'wikibase-linkitem-input-page' => 'Bok:',
 	'wikibase-linkitem-invalidsite' => 'Njeznate abo njepłaśiwe sedło wubrane',
-	'wikibase-linkitem-confirmitem-text' => 'Bok, kótaryž sy wubrał, jo južo z [$1 elementom w našom centralnem datowem repozitoriumje] zwězany. Pšosym wobkšuś, až slědujuce boki su te, kótarež coš z toś tym bokom zwězaś.',
+	'wikibase-linkitem-confirmitem-text' => 'Bok, kótaryž sy wubrał, jo južo z [$1 elementom w našom centralnem datowem repozitoriumje] zwězany. Pšosym wobkšuś, až slědujuce boki su te, kótarež coš z toś tym bokom zwězaś.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Wobkšuśiś',
 	'wikibase-linkitem-not-loggedin-title' => 'Musyš pśizjawjony byś',
 	'wikibase-linkitem-not-loggedin' => 'Musyš w toś tom wikiju a w [$1 centralnem datowem repozitoriumje] pśizjawjony byś, aby toś tu funkciju wužywał.',
@@ -1761,7 +1761,7 @@ $messages['hi'] = array(
 	'wikibase-linkitem-input-site' => 'भाषा:',
 	'wikibase-linkitem-input-page' => 'पृष्ठ:',
 	'wikibase-linkitem-invalidsite' => 'अज्ञात या अमान्य साइट का चयन',
-	'wikibase-linkitem-confirmitem-text' => 'जिस पृष्ठ को आपने चुना था वह [हमारी केन्द्रीय डेटा रिपोज़िटरी के $1 आइटम] के साथ पहले से ही जुड़ा हुआ है। कृपया सुनिश्चित करें कि नीचे दिखाए गए पृष्ठ वही हैं जिन्हें आप इस पृष्ठ के साथ जोड़ना चाहते है।',
+	'wikibase-linkitem-confirmitem-text' => 'जिस पृष्ठ को आपने चुना था वह [हमारी केन्द्रीय डेटा रिपोज़िटरी के $1 आइटम] के साथ पहले से ही जुड़ा हुआ है। कृपया सुनिश्चित करें कि नीचे दिखाए गए पृष्ठ वही हैं जिन्हें आप इस पृष्ठ के साथ जोड़ना चाहते है।', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'पुष्टि करें',
 	'wikibase-linkitem-not-loggedin-title' => 'आप को लॉग इन होने की आवश्यकता है',
 	'wikibase-linkitem-not-loggedin' => 'इस सुविधा के उपयोग के लिए आपका इस विकि और [$1 केन्द्रीय डेटा रिपोज़िटरी] पर लॉग इन होना आवश्यक है।',
@@ -2400,7 +2400,7 @@ $messages['ksh'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Do moß enjelogg sin',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Donn Änderonge aan Wikidata en de „{{int:recentchanges}}“ zeije',
-	'wikibase-unconnectedpages-format-row' => '(Mer {{PLURAL:$1|han eine Lenk|han $1 Lenks|hann_er kein Lenks}} op ander Schprooche en dä Sigg)',
+	'wikibase-unconnectedpages-format-row' => '(Mer {{PLURAL:$1|han eine Lenk|han $1 Lenks|hann_er kein Lenks}} op ander Schprooche en dä Sigg)', # Fuzzy
 );
 
 /** Kurdish (Kurdî)
@@ -2947,10 +2947,10 @@ $messages['nds-nl'] = array(
 $messages['nl'] = array(
 	'wikibase-client-desc' => 'Client voor de uitbreiding Wikibase',
 	'specialpages-group-wikibaseclient' => 'Wikidataclient',
-	'tooltip-t-wikibase' => 'Link naar gekoppeld gegevensrepository item',
+	'tooltip-t-wikibase' => 'Koppeling naar item in verbonden gegevensrepository',
 	'wikibase-after-page-move' => 'U kunt ook het gekoppelde Wikidataitem [$1 bijwerken] om de taalkoppelingen op de hernoemde pagina te kunnen beheren.',
 	'wikibase-after-page-move-queued' => 'Het [$1 Wikidata-item] gekoppeld aan deze pagina zal binnenkort automatisch worden bijgewerkt.',
-	'wikibase-comment-add' => 'Een Wikidata item is aangemaakt.',
+	'wikibase-comment-add' => 'Wikidata item aangemaakt.',
 	'wikibase-comment-remove' => 'Het gekoppelde Wikidataitem is verwijderd. De taalkoppelingen zijn verwijderd.',
 	'wikibase-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
 	'wikibase-comment-unlink' => 'Deze pagina is ontkoppeld van het Wikidataitem. De taalkoppelingen zijn verwijderd.',
@@ -2984,7 +2984,7 @@ $messages['nl'] = array(
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
-	'wikibase-rc-wikibase-edit-title' => 'Wikidata bewerking',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidatabewerking',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata bewerkingen weergeven in uw volglijst',
 	'wikibase-error-serialize-error' => 'De gegevens konden niet geserialiseerd worden',
 	'wikibase-error-invalid-entity-id' => 'Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
@@ -2998,7 +2998,7 @@ $messages['nl'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item-ID',
 	'wikibase-pageinfo-entity-id-none' => 'Geen',
-	'wikibase-property-render-error' => 'Het renderen van eigenschap $1 is mislukt: $2',
+	'wikibase-property-render-error' => 'Het verwerken van de eigenschap $1 is mislukt: $2',
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)
@@ -3870,7 +3870,7 @@ $messages['vec'] = array(
 	'wikibase-linkitem-input-site' => 'Lengua:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
 	'wikibase-linkitem-invalidsite' => 'Sito selessionà sconossùo o mia valido',
-	'wikibase-linkitem-confirmitem-text' => "La pagina che te ghè sielto la xe zà colegà a n'altro [$1 elemento nel nostro archivio sentrale dei dati]. Conferma che le pagine mostrà qua soto le xe quele che te vol colegar co sta pagina.",
+	'wikibase-linkitem-confirmitem-text' => "La pagina che te ghè sielto la xe zà colegà a n'altro [$1 elemento nel nostro archivio sentrale dei dati]. Conferma che le pagine mostrà qua soto le xe quele che te vol colegar co sta pagina.", # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Va ben',
 	'wikibase-linkitem-not-loggedin-title' => 'Te ghè da ver fato el login.',
 	'wikibase-linkitem-not-loggedin' => "Te ghè da ver fato el login su sta wiki e su l'[$1 archivio dati sentralizà] par doparar sta funsionalità.",
@@ -3889,7 +3889,7 @@ $messages['vec'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" no xe un còdese de lengua valido.',
 	'wikibase-unconnectedpages-page-warning' => 'El titolo de la pagina no se pol dopararlo par la riserca e quindi el vien ignorà.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Solo le pagine con colegamenti interlenguìsteghi',
-	'wikibase-unconnectedpages-format-row' => '($1 colegamenti interlinguìsteghi in te la pagina)',
+	'wikibase-unconnectedpages-format-row' => '($1 colegamenti interlinguìsteghi in te la pagina)', # Fuzzy
 );
 
 /** Vietnamese (Tiếng Việt)
