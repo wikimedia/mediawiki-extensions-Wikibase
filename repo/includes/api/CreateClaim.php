@@ -37,7 +37,8 @@ class CreateClaim extends ModifyClaim {
 
 		$entityId = $this->claimModificationHelper->getEntityIdFromString( $params['entity'] );
 		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
-		$entityContent = $this->getEntityContent( $entityTitle );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 		$entity = $entityContent->getEntity();
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );

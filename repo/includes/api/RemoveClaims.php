@@ -52,7 +52,8 @@ class RemoveClaims extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
 		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
-		$entityContent = $this->getEntityContent( $entityTitle );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		$this->checkClaims( $entityContent->getEntity(), $params['claim'] );
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
