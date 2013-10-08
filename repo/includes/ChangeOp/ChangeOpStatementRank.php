@@ -8,7 +8,6 @@ use Wikibase\Entity;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\Statement;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Summary;
 
@@ -36,13 +35,6 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	protected $rank;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter;
-
-	/**
 	 * Constructs a new statement rank change operation
 	 *
 	 * @since 0.4
@@ -53,7 +45,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $rank, EntityIdFormatter $idFormatter ) {
+	public function __construct( $claimGuid, $rank ) {
 		if ( !is_string( $claimGuid ) ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string' );
 		}
@@ -64,7 +56,6 @@ class ChangeOpStatementRank extends ChangeOpBase {
 
 		$this->claimGuid = $claimGuid;
 		$this->rank = $rank;
-		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -104,20 +95,10 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	 * @param Snak $snak
 	 *
 	 * @return array
-	 *
-	 * @todo: REUSE!!
 	 */
 	protected function getSnakSummaryArgs( Snak $snak ) {
-		$propertyId = $this->idFormatter->format( $snak->getPropertyId() );
+		$propertyId = $snak->getPropertyId();
 
-		//TODO: use formatters here!
-		if ( $snak instanceof PropertyValueSnak ) {
-			$value = $snak->getDataValue();
-		} else {
-			$value = $snak->getType();
-		}
-
-		$args = array( $propertyId => array( $value ) );
-		return array( $args );
+		return array( array( $propertyId->getPrefixedId() => $snak ) );
 	}
 }

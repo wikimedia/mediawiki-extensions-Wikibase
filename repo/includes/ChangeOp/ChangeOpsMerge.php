@@ -95,7 +95,6 @@ class ChangeOpsMerge {
 			$this->fromChangeOps->add( new ChangeOpMainSnak(
 				$fromClaim->getGuid(),
 				null,
-				WikibaseRepo::getDefaultInstance()->getEntityIdFormatter(),
 				new ClaimGuidGenerator( $this->fromItemContent->getItem()->getId() )
 			) );
 

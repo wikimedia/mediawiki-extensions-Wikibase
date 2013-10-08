@@ -82,10 +82,9 @@ class RemoveReferences extends ModifyClaim {
 	 */
 	protected function getChangeOps( $claimGuid, array $referenceHashes ) {
 		$changeOps = array();
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		foreach ( $referenceHashes as $referenceHash ) {
-			$changeOps[] = new ChangeOpReference( $claimGuid, null, $referenceHash, $idFormatter );
+			$changeOps[] = new ChangeOpReference( $claimGuid, null, $referenceHash );
 		}
 
 		return $changeOps;

@@ -109,16 +109,15 @@ class SetQualifier extends ModifyClaim {
 		$params = $this->extractRequestParams();
 
 		$claimGuid = $params['claim'];
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		if ( isset( $params['snakhash'] ) ) {
 			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
-			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, $params['snakhash'], $idFormatter );
+			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, $params['snakhash'] );
 		} else {
 			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
-			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '', $idFormatter );
+			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '' );
 		}
 
 		return $changeOp;

@@ -4,7 +4,6 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Claims;
 use Wikibase\Entity;
@@ -35,13 +34,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	protected $snak;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter;
-
-	/**
 	 * Constructs a new mainsnak change operation
 	 *
 	 * @since 0.4
@@ -52,7 +44,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $snak, EntityIdFormatter $idFormatter, ClaimGuidGenerator $guidGenerator ) {
+	public function __construct( $claimGuid, $snak, ClaimGuidGenerator $guidGenerator ) {
 		if ( !is_string( $claimGuid ) ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string' );
 		}
@@ -67,7 +59,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 
 		$this->claimGuid = $claimGuid;
 		$this->snak = $snak;
-		$this->idFormatter = $idFormatter;
 		$this->guidGenerator = $guidGenerator;
 	}
 
@@ -156,16 +147,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * @return array
 	 */
 	protected function getClaimSummaryArgs( Snak $mainSnak ) {
-		$propertyId = $this->idFormatter->format( $mainSnak->getPropertyId() );
-
-		//TODO: use formatters here!
-		if ( $mainSnak instanceof PropertyValueSnak ) {
-			$value = $mainSnak->getDataValue();
-		} else {
-			$value = $mainSnak->getType();
-		}
-
-		$args = array( $propertyId => array( $value ) );
-		return array( $args );
+		$propertyId = $mainSnak->getPropertyId();
+		return array( array( $propertyId->getPrefixedId() => $mainSnak ) );
 	}
 }
