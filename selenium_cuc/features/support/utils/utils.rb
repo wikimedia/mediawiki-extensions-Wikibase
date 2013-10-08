@@ -67,6 +67,8 @@ def remove_sitelink(siteid, pagename)
   resp = ActiveSupport::JSON.decode(response.body)
 
   if resp["success"] != 1 && resp["error"]["code"] != 'no-such-entity-link'
+    puts siteid
+    puts resp["error"]["code"]
     abort('Failed to create new entity: API error')
   end
 
