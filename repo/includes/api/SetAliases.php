@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use ApiBase, User, Language;
 use Wikibase\EntityContent;
@@ -68,19 +69,23 @@ class SetAliases extends ModifyEntity {
 
 		$aliasesChangeOps = $this->getChangeOps( $params );
 
-		if ( count( $aliasesChangeOps ) == 1 ) {
-			$aliasesChangeOps[0]->apply( $entity, $summary );
-		} else {
-			$changeOps = new ChangeOps();
-			$changeOps->add( $aliasesChangeOps );
-			$changeOps->apply( $entity );
+		try{
+			if ( count( $aliasesChangeOps ) == 1 ) {
+				$aliasesChangeOps[0]->apply( $entity, $summary );
+			} else {
+				$changeOps = new ChangeOps();
+				$changeOps->add( $aliasesChangeOps );
+				$changeOps->apply( $entity );
 
-			// Set the action to 'set' in case we add and remove aliases in a single edit
-			$summary->setAction( 'set' );
-			$summary->setLanguage( $language );
+				// Set the action to 'set' in case we add and remove aliases in a single edit
+				$summary->setAction( 'set' );
+				$summary->setLanguage( $language );
 
-			// Get the full list of current aliases
-			$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
+				// Get the full list of current aliases
+				$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
+			}
+		} catch ( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
 		$aliases = $entity->getAliases( $language );
