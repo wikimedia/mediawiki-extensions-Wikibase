@@ -4,6 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -65,8 +66,7 @@ class ChangeOpClaim extends ChangeOpBase {
 		if( $this->claim->getGuid() === null ){
 			$this->claim->setGuid( $this->guidGenerator->newGuid() );
 		}
-		$guid = $this->claim->getGuid();
-		$guid = $guidParser->parse( $guid );
+		$guid = $guidParser->parse( $this->claim->getGuid() );
 
 		if ( $guidValidator->validate( $guid->getSerialization() ) === false ) {
 			throw new ChangeOpException( "Claim does not have a valid GUID" );
@@ -74,8 +74,15 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
-		$entity->addClaim( $this->claim );
-		$this->updateSummary( $summary, 'add' );
+		$claims = new Claims( $entity->getClaims() );
+		if( $claims->hasClaimWithGuid( $guid->getSerialization() ) ){
+			$claims->removeClaimWithGuid( $guid->getSerialization() );
+			$this->updateSummary( $summary, 'update' );
+		} else {
+			$this->updateSummary( $summary, 'create' );
+		}
+		$claims->addClaim( $this->claim );
+		$entity->setClaims( $claims );
 
 		return true;
 	}
