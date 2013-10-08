@@ -12,6 +12,9 @@ use Wikibase\StringNormalizer;
  *
  * @since 0.4
  *
+ * @group Wikibase
+ * @group WikibaseAPI
+ *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
