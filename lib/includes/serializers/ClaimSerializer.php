@@ -176,7 +176,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			}
 		}
 
-		$snakUnserializer = new SnakSerializer(); // FIXME: derp injection
+		$snakUnserializer = new SnakSerializer( $this->options ); // FIXME: derp injection
 
 		$claimClass = $isStatement ? '\Wikibase\Statement' : '\Wikibase\Claim';
 

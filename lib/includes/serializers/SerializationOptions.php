@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Serializers;
 use MWException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\PropertyDataTypeLookup;
 
 /**
  * Options for Serializer objects.
@@ -92,6 +93,34 @@ class SerializationOptions {
 		} else {
 			return $default;
 		}
+	}
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	protected $dataTypeLookup;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 */
+	public function __construct( PropertyDataTypeLookup $dataTypeLookup = null ) {
+		$this->dataTypeLookup = $dataTypeLookup;
+	}
+
+	/**
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 */
+	public function setDataTypeLookup( $dataTypeLookup ) {
+		$this->dataTypeLookup = $dataTypeLookup;
+	}
+
+	/**
+	 * @return PropertyDataTypeLookup|null
+	 */
+	public function getDataTypeLookup() {
+		return $this->dataTypeLookup;
 	}
 
 	/**

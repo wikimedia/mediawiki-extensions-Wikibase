@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test\Serializers;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListUnserializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
@@ -37,6 +38,18 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @return SerializationOptions
+	 */
+	protected function getSerializationOptions() {
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+
+		$options = new SerializationOptions( $dataTypeLookup );
+		return $options;
+	}
+
+	/**
 	 * @see UnserializerBaseTest::getInstance
 	 *
 	 * @since 0.4
@@ -44,8 +57,8 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 	 * @return ByPropertyListUnserializer
 	 */
 	protected function getInstance() {
-		$snakSetailizer = new SnakSerializer();
-		return new ByPropertyListUnserializer( $snakSetailizer );
+		$snakSerializer = new SnakSerializer( $this->getSerializationOptions() );
+		return new ByPropertyListUnserializer( $snakSerializer );
 	}
 
 	/**

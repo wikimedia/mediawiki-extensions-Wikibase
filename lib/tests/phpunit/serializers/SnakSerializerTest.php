@@ -4,6 +4,8 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -69,6 +71,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 				'snaktype' => 'value',
 				'property' => 'P42',
 				'datavalue' => $dataValue->toArray(),
+				'datatype' => 'test',
 			)
 		);
 

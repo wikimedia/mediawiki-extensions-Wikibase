@@ -30,8 +30,30 @@ use OutOfBoundsException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SerializerFactory {
+
+	/**
+	 * @var SerializationOptions
+	 */
+	protected $options;
+
+	/**
+	 * @param SerializationOptions $options Default options.
+	 */
+	public function __construct( SerializationOptions $options ) {
+		$this->options = $options;
+	}
+
+	/**
+	 * Returns a new serialization object, based on the options provided to the factory's constructor.
+	 *
+	 * @return SerializationOptions
+	 */
+	public function newSerializerOptions() {
+		return clone $this->options;
+	}
 
 	/**
 	 * @param mixed $object
@@ -44,6 +66,10 @@ class SerializerFactory {
 	public function newSerializerForObject( $object, $options = null ) {
 		if ( !is_object( $object ) ) {
 			throw new InvalidArgumentException( 'newSerializerForObject only accepts objects and got ' . gettype( $object ) );
+		}
+
+		if ( $options === null ) {
+			$options = $this->options;
 		}
 
 		switch ( true ) {

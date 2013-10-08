@@ -79,8 +79,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return array( null );
 		}
 
-		$serializerFactory = new SerializerFactory();
 		$opt = new EntitySerializationOptions();
+		$opt->setDataTypeLookup( WikibaseClient::getDefaultInstance()->getPropertyDataTypeLookup() );
+
+		$serializerFactory = new SerializerFactory( $opt );
 
 		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
 		// twice, once with a lower case key and once with an upper case key.

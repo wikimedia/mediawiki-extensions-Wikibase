@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test\Serializers;
 use Wikibase\Claim;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\Reference;
@@ -20,11 +21,27 @@ use Wikibase\Reference;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SerializerFactoryTest extends \MediaWikiTestCase {
 
+	/**
+	 * @since 0.5
+	 *
+	 * @return SerializationOptions
+	 */
+	protected function getSerializationOptions() {
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'test' ) );
+
+		$options = new SerializationOptions( $dataTypeLookup );
+		return $options;
+	}
+
 	public function testConstructor() {
-		new SerializerFactory();
+		new SerializerFactory( $this->getSerializationOptions() );
 		$this->assertTrue( true );
 	}
 
@@ -44,7 +61,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider objectProvider
 	 */
 	public function testNewSerializerForObject( $object, $options = null ) {
-		$factory = new SerializerFactory();
+		$factory = new SerializerFactory( $this->getSerializationOptions() );
 
 		$serializer = $factory->newSerializerForObject( $object, $options );
 
@@ -58,7 +75,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 
 		$snak = new PropertyNoValueSnak( 42 );
 
-		$factory = new SerializerFactory();
+		$factory = new SerializerFactory( $this->getSerializationOptions() );
 		$serializer = $factory->newSerializerForObject( $snak );
 
 		$argLists[] = array( 'Wikibase\Snak', $serializer->getSerialized( $snak ) );
@@ -73,7 +90,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @param array $serialization
 	 */
 	public function testNewUnserializerForClass( $className, array $serialization ) {
-		$factory = new SerializerFactory();
+		$factory = new SerializerFactory( $this->getSerializationOptions() );
 
 		$unserializer = $factory->newUnserializerForClass( $className );
 
