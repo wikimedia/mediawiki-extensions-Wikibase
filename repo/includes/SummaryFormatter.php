@@ -111,7 +111,13 @@ class SummaryFormatter {
 		if ( $count === 0 ) {
 			return '';
 		} else {
-			// @todo have some sort of key value formatter
+			$parts = array_filter(
+				$parts,
+				function ( $arg ) {
+					return $arg !== '';
+				}
+			);
+
 			return $this->language->commaList( $parts );
 		}
 	}
@@ -122,6 +128,11 @@ class SummaryFormatter {
 	 * @return string[]
 	 */
 	protected function formatArgList( array $args ) {
+		if ( !empty( $args ) && !isset( $args[0] ) ) {
+			// turn assoc array into a list
+			$args = $this->formatKeyValuePairs( $args );
+		}
+
 		$strings = array();
 
 		foreach ( $args as $key => $arg ) {
@@ -152,11 +163,6 @@ class SummaryFormatter {
 		} elseif ( is_object( $arg ) ) {
 			return '<' . get_class( $arg ) . '>';
 		} elseif ( is_array( $arg ) ) {
-			if ( !empty( $arg ) && !isset( $arg[0] ) ) {
-				// turn assoc array into a list
-				$arg = $this->formatKeyValuePairs( $arg );
-			}
-
 			$strings = $this->formatArgList( $arg );
 			return $this->language->commaList( $strings );
 		} else {
