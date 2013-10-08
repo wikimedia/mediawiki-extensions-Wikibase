@@ -64,7 +64,8 @@ abstract class ModifyClaim extends ApiWikibase {
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
-			$this->snakValidation
+			$this->snakValidation,
+			WikibaseRepo::getDefaultInstance()->getSerializerFactory()
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();

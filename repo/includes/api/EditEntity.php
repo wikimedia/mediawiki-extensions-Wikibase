@@ -407,8 +407,7 @@ class EditEntity extends ModifyEntity {
 	private function getModifyClaimsChangeOps( $claims, $guidGenerator ){
 		$opsToReturn = array();
 
-		$serializerFactory = new SerializerFactory();
-		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
+		$unserializer = $this->serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 
 		foreach ( $claims as $claimArray ) {
 			if( !array_key_exists( 'remove', $claimArray ) ){

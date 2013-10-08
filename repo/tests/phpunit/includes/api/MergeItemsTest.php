@@ -84,12 +84,12 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			),
 			array(
 				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+					'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 				array(),
 				array(),
 				array( 'claims' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+					'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 					'type' => 'statement', 'rank' => 'normal' ) ) ),
 			),
 			//check merges of elements work as expected
@@ -101,27 +101,27 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			),
 			array(
 				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
+					'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
 					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
+					'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
 					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 				array(),
 				array( 'claims' => array(
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
+					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
+					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
 			),
 			array(
 				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+					'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+					'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 				array(),
 				array( 'claims' => array(
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
+					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
+					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datatype' => 'string', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
 			),
 		);
 	}
