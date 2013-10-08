@@ -319,22 +319,6 @@ class EntitySerializationOptions extends MultiLangSerializationOptions {
 	protected $sortDirection = self::SORT_NONE;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var ValueFormatter
-	 */
-	protected $idFormatter;
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param ValueFormatter $formatter
-	 */
-	public function __construct( ValueFormatter $formatter ) {
-		$this->idFormatter = $formatter;
-	}
-
-	/**
 	 * Sets the optional properties of the entity that should be included in the serialization.
 	 *
 	 * @since 0.2
@@ -425,15 +409,6 @@ class EntitySerializationOptions extends MultiLangSerializationOptions {
 	 */
 	public function getSortDirection() {
 		return $this->sortDirection;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @return ValueFormatter
-	 */
-	public function getIdFormatter() {
-		return $this->idFormatter;
 	}
 
 }

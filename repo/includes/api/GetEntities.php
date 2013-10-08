@@ -230,7 +230,7 @@ class GetEntities extends ApiWikibase {
 				$entity = $entityContent->getEntity();
 
 				// TODO: inject id formatter
-				$options = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+				$options = new EntitySerializationOptions();
 				if ( $params['languagefallback'] ) {
 					$languages = array();
 					foreach ( $params['languages'] as $languageCode ) {

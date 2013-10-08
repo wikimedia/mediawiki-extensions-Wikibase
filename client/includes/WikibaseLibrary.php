@@ -80,7 +80,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		}
 
 		$serializerFactory = new SerializerFactory();
-		$opt = new EntitySerializationOptions( WikibaseClient::getDefaultInstance()->getEntityIdFormatter() );
+		$opt = new EntitySerializationOptions();
 
 		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
 		// twice, once with a lower case key and once with an upper case key.

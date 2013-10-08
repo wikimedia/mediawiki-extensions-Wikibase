@@ -536,7 +536,7 @@ class EntityDataSerializationService {
 		}
 
 		$serializerFactory = new SerializerFactory();
-		$serializationOptions = new EntitySerializationOptions( $this->idFormatter );
+		$serializationOptions = new EntitySerializationOptions();
 		$serializationOptions->setIndexTags( $res->getIsRawMode() ); //FIXME: $res->rawMode doesn't seem to be set to what we want.
 		$serializationOptions->setProps( $this->fieldsToShow );      //FIXME: someone does not know how to write clear FIXMEs
 		$serializer =$serializerFactory->newSerializerForObject( $entity, $serializationOptions );

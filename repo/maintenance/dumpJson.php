@@ -58,7 +58,7 @@ class DumpJson extends Maintenance {
 	}
 
 	public function initServices() {
-		$serializerOptions = new EntitySerializationOptions( new EntityIdFormatter( new FormatterOptions() ) );
+		$serializerOptions = new EntitySerializationOptions();
 		$this->entitySerializer = new EntitySerializer( $serializerOptions );
 
 		//TODO: allow injection for unit tests
