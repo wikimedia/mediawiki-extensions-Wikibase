@@ -169,7 +169,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			}
 		}
 
-		$snakUnserializer = new SnakSerializer(); // FIXME: derp injection
+		$snakUnserializer = new SnakSerializer( $this->options ); // FIXME: derp injection
 
 		$claimClass = $isStatement ? '\Wikibase\Statement' : '\Wikibase\Claim';
 
@@ -198,7 +198,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			if ( array_key_exists( 'references', $serialization ) ) {
 				$references = array();
 
-				$referenceUnserializer = new ReferenceSerializer();
+				$referenceUnserializer = new ReferenceSerializer( $this->options );
 
 				foreach ( $serialization['references'] as $referenceSerialization ) {
 					$references[] = $referenceUnserializer->newFromSerialization( $referenceSerialization );

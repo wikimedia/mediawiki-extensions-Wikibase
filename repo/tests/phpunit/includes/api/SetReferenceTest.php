@@ -4,10 +4,11 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use FormatJson;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use UsageException;
 use Wikibase\Item;
 use Wikibase\ItemContent;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
@@ -225,7 +226,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		if( !is_a( $reference, '\Wikibase\Reference' ) ) {
 			return $reference;
 		} else {
-			$serializerFactory = new SerializerFactory();
+			$options = new SerializationOptions();
+			$serializerFactory = new SerializerFactory( $options );
 			$serializer = $serializerFactory->newSerializerForObject( $reference );
 			return $serializer->getSerialized( $reference );
 		}
@@ -242,7 +244,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			return $reference;
 		} else {
 			unset( $reference['hash'] );
-			$serializerFactory = new SerializerFactory();
+			$options = new SerializationOptions();
+			$serializerFactory = new SerializerFactory( $options );
 			$unserializer = $serializerFactory->newUnserializerForClass( '\Wikibase\Reference' );
 			return $unserializer->newFromSerialization( $reference );
 		}

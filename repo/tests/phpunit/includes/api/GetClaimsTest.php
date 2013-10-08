@@ -6,6 +6,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Statement;
 
@@ -141,10 +144,17 @@ class GetClaimsTest extends \ApiTestCase {
 		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );
 
 		if ( is_array( $claims ) ) {
-			$claims = new \Wikibase\Claims( $claims );
+			$claims = new Claims( $claims );
 		}
 
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		// since the API module uses the "real" lookup, we have to also use the "real" lookup.
+		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
+
+		$options = new SerializationOptions( array(
+			SnakSerializer::OPT_DATA_TYPE_LOOKUP => $dataTypeLookup
+		) );
+
+		$serializerFactory = new SerializerFactory( $options );
 		$serializer = $serializerFactory->newSerializerForObject( $claims );
 		$expected = $serializer->getSerialized( $claims );
 

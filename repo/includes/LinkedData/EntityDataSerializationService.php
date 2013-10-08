@@ -118,13 +118,15 @@ class EntityDataSerializationService {
 		$rdfDataURI,
 		EntityLookup $entityLookup,
 		DataTypeFactory $dataTypeFactory,
-		EntityIdFormatter $idFormatter
+		EntityIdFormatter $idFormatter,
+		SerializerFactory $serializerFactory
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
 		$this->rdfDataURI = $rdfDataURI;
 		$this->entityLookup = $entityLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->idFormatter = $idFormatter;
+		$this->serializerFactory = $serializerFactory;
 	}
 
 	/**
@@ -536,11 +538,10 @@ class EntityDataSerializationService {
 			$printer->setRootElement( $entityKey );
 		}
 
-		$serializerFactory = new SerializerFactory();
 		$serializationOptions = new SerializationOptions();
 		$serializationOptions->setIndexTags( $res->getIsRawMode() );
 		$serializationOptions->setOption( EntitySerializer::OPT_PARTS,  $this->fieldsToShow );
-		$serializer =$serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		$serializer = $this->serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 
 		$arr = $serializer->getSerialized( $entity );
 

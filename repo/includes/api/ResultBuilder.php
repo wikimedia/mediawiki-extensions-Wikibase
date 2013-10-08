@@ -12,6 +12,7 @@ use Wikibase\Lib\Serializers\DescriptionSerializer;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\LabelSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
 
 /**
@@ -34,12 +35,24 @@ class ResultBuilder {
 	 */
 	protected $missingEntityCounter;
 
-	public function __construct( $result ) {
+	/**
+	 * @var SerializerFactory
+	 */
+	protected $serializerFactory;
+
+	/**
+	 * @param ApiResult $result
+	 * @param SerializerFactory $serializerFactory
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function __construct( ApiResult $result, SerializerFactory $serializerFactory ) {
 		if( !$result instanceof ApiResult ){
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
 		}
 
 		$this->result = $result;
+		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
 	}
 
@@ -74,7 +87,7 @@ class ResultBuilder {
 	 *
 	 */
 	public function addLabels( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$labelSerializer = new LabelSerializer( $options );
 
@@ -101,7 +114,7 @@ class ResultBuilder {
 	 *
 	 */
 	public function addDescriptions( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$descriptionSerializer = new DescriptionSerializer( $options );
 
@@ -128,7 +141,7 @@ class ResultBuilder {
 	 *
 	 */
 	public function addAliases( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$aliasSerializer = new AliasSerializer( $options );
 		$value = $aliasSerializer->getSerialized( $aliases );
@@ -154,7 +167,7 @@ class ResultBuilder {
 	 * @param $options
 	 */
 	public function addSiteLinks( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$serializerOptions = new SerializationOptions();
+		$serializerOptions = $this->serializerFactory->newSerializationOptions();
 		$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
 
@@ -199,7 +212,7 @@ class ResultBuilder {
 	 *
 	 */
 	public function addClaims( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$options = new SerializationOptions();
+		$options = $this->serializerFactory->newSerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$claimSerializer = new ClaimsSerializer( $options );
 
