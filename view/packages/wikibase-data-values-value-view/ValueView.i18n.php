@@ -164,8 +164,6 @@ $messages['be-tarask'] = array(
  */
 $messages['bn'] = array(
 	'valueview-expert-emptyvalue-empty' => 'খালি',
-	'valueview-expert-timeinput-calendarhint' => '($1 ক্যালেন্ডার)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1-এ পরিবর্তন',
 	'valueview-preview-label' => 'যা হিসাবে প্রদর্শন করা হবে:',
 );
 
@@ -372,8 +370,6 @@ $messages['fi'] = array(
 	'valueview-expert-emptyvalue-empty' => 'tyhjä',
 	'valueview-expert-timeinput-precision' => 'Tarkkuus:',
 	'valueview-expert-timeinput-calendar' => 'Kalenteri:',
-	'valueview-expert-timeinput-calendarhint' => '(kalenteri: $1)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; vaihda kalenteriin $1',
 	'valueview-preview-label' => 'näytetään muodossa:',
 	'valueview-preview-novalue' => 'kelvollista arvoa ei tunnistettu',
 	'valueview-listrotator-auto' => 'auto',
@@ -436,7 +432,6 @@ $messages['gl'] = array(
  */
 $messages['gu'] = array(
 	'valueview-expert-emptyvalue-empty' => 'ખાલી',
-	'valueview-expert-timeinput-calendarhint' => '($1 પંચાંગ)',
 	'valueview-listrotator-auto' => 'સ્વયં',
 );
 
@@ -452,8 +447,6 @@ $messages['he'] = array(
 	'valueview-expert-emptyvalue-empty' => 'ריק',
 	'valueview-expert-timeinput-precision' => 'דיוק:',
 	'valueview-expert-timeinput-calendar' => 'לוח שנה:',
-	'valueview-expert-timeinput-calendarhint' => '(לוח שנה $1 מקדים)', # Fuzzy
-	'valueview-expert-timeinput-calendarhint-switch' => '&larr; שינוי ל$1',
 	'valueview-preview-label' => 'יוצג בתור:',
 	'valueview-preview-novalue' => 'לא הוכר שום ערך תקין',
 	'valueview-listrotator-auto' => 'אוטומטי',
@@ -727,6 +720,7 @@ $messages['oc'] = array(
 /** Polish (polski)
  * @author Chrumps
  * @author Ty221
+ * @author WTM
  */
 $messages['pl'] = array(
 	'valueview-expert-advancedadjustments' => 'ustawienia zaawansowane',
@@ -738,6 +732,11 @@ $messages['pl'] = array(
 	'valueview-expert-timeinput-calendar' => 'Kalendarz',
 	'valueview-expert-timeinput-calendarhint-gregorian' => '(kalendarz gregoriański)',
 	'valueview-expert-timeinput-calendarhint-julian' => '(kalendarz juliański)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; na gregoriański',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; na juliański',
+	'valueview-preview-label' => 'będzie wyświetlane jako:',
+	'valueview-preview-novalue' => 'nie rozpoznano prawidłowej wartości',
+	'valueview-listrotator-auto' => 'auto',
 );
 
 /** Piedmontese (Piemontèis)
@@ -889,8 +888,8 @@ $messages['uk'] = array(
 /** Vietnamese (Tiếng Việt)
  */
 $messages['vi'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Chưa hỗ trợ các giá trị dữ liệu “$1”.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Chưa hỗ trợ các giá trị có kiểu dữ liệu “$1”.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Chưa hỗ trợ các giá trị dữ liệu “$1”.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Chưa hỗ trợ các giá trị có kiểu dữ liệu “$1”.',
 );
 
 /** Simplified Chinese (中文（简体）‎)
