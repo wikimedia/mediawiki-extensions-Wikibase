@@ -20,6 +20,7 @@ use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
@@ -61,6 +62,24 @@ class EntityViewTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @return SnakFormatter
+	 */
+	protected function newSnakFormatterMock() {
+		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+
+		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
+			->will( $this->returnValue( '(value)' ) );
+
+		$snakFormatter->expects( $this->any() )->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_HTML_WIDGET ) );
+
+		$snakFormatter->expects( $this->any() )->method( 'canFormatSnak' )
+			->will( $this->returnValue( true ) );
+
+		return $snakFormatter;
+	}
+
+	/**
 	 * @param string $entityType
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -77,7 +96,6 @@ class EntityViewTest extends \MediaWikiTestCase {
 			throw new \InvalidArgumentException( '$entityType must be a string!' );
 		}
 
-		$valueFormatters = new ValueFormatterFactory( array() );
 		if ( !$entityRevisionLookup ) {
 			$entityRevisionLookup = new MockRepository();
 		}
@@ -100,7 +118,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 
 		$entityView = EntityView::newForEntityType(
 			$entityType,
-			$valueFormatters,
+			$this->newSnakFormatterMock(),
 			$dataTypeLookup,
 			$entityRevisionLookup,
 			$entityTitleLookup,
@@ -308,7 +326,6 @@ class EntityViewTest extends \MediaWikiTestCase {
 	 * @dataProvider providerNewForEntityRevision
 	 */
 	public function testNewForEntityRevision( EntityRevision $entityRevision ) {
-		$valueFormatters = new ValueFormatterFactory( array() );
 		$dataTypeLookup = new InMemoryDataTypeLookup( array() );
 		$entityLoader = new MockRepository();
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
@@ -316,12 +333,13 @@ class EntityViewTest extends \MediaWikiTestCase {
 		// test whether we get the right EntityView from an EntityRevision
 		$view = EntityView::newForEntityType(
 			$entityRevision->getEntity()->getType(),
-			$valueFormatters,
+			$this->newSnakFormatterMock(), 
 			$dataTypeLookup,
 			$entityLoader,
 			$entityTitleLookup
 		);
 
+		// test whether we get the right EntityView from an EntityContent
 		$this->assertInstanceOf(
 			EntityView::$typeMap[ $entityRevision->getEntity()->getType() ],
 			$view
