@@ -105,10 +105,10 @@ Feature: Edit sitelinks
   @save_sitelink @modify_entity
   Scenario Outline: Save sitelink
     Given The following sitelinks do not exist:
-      | enwiki | Africa |
+      | enwiki | Asia |
     When I click the sitelink add button
       And I type enwiki into the siteid input field
-      And I type Africa into the page input field
+      And I type Asia into the page input field
       And I <save>
     Then There should be 1 sitelinks in the list
 
@@ -120,10 +120,10 @@ Feature: Edit sitelinks
   @save_sitelink @modify_entity
   Scenario Outline: Save sitelink & reload
     Given The following sitelinks do not exist:
-      | enwiki | Africa |
+      | enwiki | Asia |
     When I click the sitelink add button
       And I type enwiki into the siteid input field
-      And I type Africa into the page input field
+      And I type Asia into the page input field
       And I <save>
       And I reload the page
     Then There should be 1 sitelinks in the list
@@ -136,10 +136,10 @@ Feature: Edit sitelinks
   @save_sitelink @modify_entity
   Scenario: Edit sitelink
     Given The following sitelinks do not exist:
-      | enwiki | Africa |
+      | enwiki | Asia |
       | enwiki | Europe |
     When I add the following sitelinks:
-      | enwiki | Africa |
+      | enwiki | Asia |
       And I reload the page
       And I click the sitelink edit button
       And I type Europe into the page input field
@@ -170,31 +170,31 @@ Feature: Edit sitelinks
 
     Examples:
       | siteid | pagename | expected_language | normalized_pagename |
-      | enwiki | Africa   | English           | Africa              |
-      | srwiki | Helijum  | српски / srpski   | Хелијум             |
+      | enwiki | Asia   | English           | Asia              |
+    #  | srwiki | Helijum  | српски / srpski   | Хелијум             |
 
   @save_sitelink @modify_entity
   Scenario: Add multiple sitelinks
     Given The following sitelinks do not exist:
       | enwiki | Europe |
-      | dewiki | Europa |
-      | itwiki | Europa |
+      | dewiki | Testseite |
+      | sqwiki | Wikipedia |
       When I add the following sitelinks:
         | enwiki | Europe |
-        | dewiki | Europa |
-        | itwiki | Europa |
+        | dewiki | Testseite |
+        | sqwiki | Wikipedia |
       Then There should be 3 sitelinks in the list
 
   @save_sitelink @modify_entity
   Scenario: Remove multiple sitelinks
     Given The following sitelinks do not exist:
       | enwiki | Europe |
-      | dewiki | Europa |
-      | itwiki | Europa |
+      | dewiki | Testseite |
+      | sqwiki | Wikipedia |
     When I add the following sitelinks:
       | enwiki | Europe |
-      | dewiki | Europa |
-      | itwiki | Europa |
+      | dewiki | Testseite |
+      | sqwiki | Wikipedia |
       And I remove all sitelinks
       And I reload the page
     Then There should be 0 sitelinks in the list
@@ -204,48 +204,48 @@ Feature: Edit sitelinks
   @save_sitelink @modify_entity
   Scenario: Initial sorting of sitelinks
     Given The following sitelinks do not exist:
-      | enwiki | Rome |
-      | dewiki | Rom |
-      | itwiki | Roma |
-      | fiwiki | Rooma |
+      | enwiki | Rashidun |
+      | dewiki | Error |
+      | sqwiki | Wikipedia |
+      | simplewiki | Wiktionary |
     When I add the following sitelinks:
-      | enwiki | Rome |
-      | dewiki | Rom |
-      | itwiki | Roma |
-      | fiwiki | Rooma |
+      | enwiki | Rashidun |
+      | dewiki | Error |
+      | sqwiki | Wikipedia |
+      | simplewiki | Wiktionary |
     And I reload the page
     Then There should be 4 sitelinks in the list
      And Order of sitelinks should be:
-       | dewiki | enwiki | fiwiki | itwiki |
+       | dewiki | enwiki | simplewiki | sqwiki |
 
   @save_sitelink @modify_entity
   Scenario: Sorting sitelinks by languagename
     Given The following sitelinks do not exist:
-      | enwiki | Rome |
-      | dewiki | Rom |
-      | itwiki | Roma |
-      | fiwiki | Rooma |
+      | enwiki | Rashidun |
+      | dewiki | Error |
+      | sqwiki | Wikipedia |
+      | simplewiki | Wiktionary |
     When I add the following sitelinks:
-      | enwiki | Rome |
-      | dewiki | Rom |
-      | itwiki | Roma |
-      | fiwiki | Rooma |
+      | enwiki | Rashidun |
+      | dewiki | Error |
+      | sqwiki | Wikipedia |
+      | simplewiki | Wiktionary |
     And I reload the page
     And I order the sitelinks by languagename
     Then There should be 4 sitelinks in the list
       And Order of sitelinks should be:
-        | dewiki | enwiki | itwiki | fiwiki |
+        | dewiki | enwiki | sqwiki | simplewiki |
 
   @save_sitelink @modify_entity
   Scenario: List of sitelinks is complete
     Given The following sitelinks do not exist:
       | enwiki | Europe |
-      | dewiki | Europa |
+      | dewiki | Testseite |
     When I add the following sitelinks:
       | enwiki | Europe |
       And I mock that the list of sitelinks is complete
       And I add the following sitelinks:
-        | dewiki | Europa |
+        | dewiki | Testseite |
     Then Sitelink add button should be disabled
 
   @save_sitelink
