@@ -12,3 +12,5 @@ selenium/configuration.yml
 easyrdf/
 
 !.*
+
+selenium_cuc/.idea
