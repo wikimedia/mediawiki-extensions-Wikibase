@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_2d907249",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-09T15:06:40Z",
+      "side": 1,
+      "message": "This is somewhat inaccurate. If Wikibase is installed via Composer, the include below this one is the correct one. This one is for when one installs the dependencies of Wikibase via Composer.",
+      "revId": "d0328ceff776ba0b58d919ecf9589cb95206c5e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
