@@ -75,8 +75,8 @@ class ChangeOpClaim extends ChangeOpBase {
 		}
 
 		$claims = new Claims( $entity->getClaims() );
-		if( $claims->hasClaimWithGuid( $guid->getSerialization() ) ){
-			$claims->removeClaimWithGuid( $guid->getSerialization() );
+		if( $claims->hasClaimWithGuid( $this->claim->getGuid() ) ){
+			$claims->removeClaimWithGuid( $this->claim->getGuid() );
 			$this->updateSummary( $summary, 'update' );
 		} else {
 			$this->updateSummary( $summary, 'create' );
