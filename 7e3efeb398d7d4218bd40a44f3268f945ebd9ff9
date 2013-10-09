@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0932edd2_20da3a14",
+        "filename": "lib/resources/wikibase.ui.SiteLinksEditTool.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-10-09T09:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4946a543_52eeed8c",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29433135_1e620c3f",
         "filename": "repo/includes/ItemView.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-02T15:14:16Z",
       "side": 1,
       "message": "Perhaps allow this setting (and other settings) to be overwritten via a setter, so test cases can work on a well known configuration.",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_0079b6f3",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-10-09T09:31:32Z",
+      "side": 1,
+      "message": "not in this change.",
+      "parentUuid": "29433135_1e620c3f",
       "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0932edd2_c06ebe2f",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-10-09T09:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29433135_3ed8a8ed",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_72f12969",
         "filename": "repo/includes/ItemView.php",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-29T09:48:20Z",
       "side": 1,
       "message": "This looks familiar... lets please not copy paste bad code all over under the pretense we will fix it later. It just becomes part of the already existing mess, which we also have not cared to clean up.",
+      "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_e06bc21d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-10-09T09:31:32Z",
+      "side": 1,
+      "message": "this is a different check than the one above. this is about the sitename inside the table rows while the one above is about the table header.",
+      "parentUuid": "4946a543_72f12969",
       "revId": "7e3efeb398d7d4218bd40a44f3268f945ebd9ff9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
