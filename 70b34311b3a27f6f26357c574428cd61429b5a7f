@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_4db3e609",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-09T14:50:09Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "70b34311b3a27f6f26357c574428cd61429b5a7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
