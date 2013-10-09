@@ -22,7 +22,7 @@
 		"data-values/data-values": "*",
 		"data-values/data-types": "*",
 		"wikibase/data-model": "*",
-        "diff/diff": ">=0.6"
+        "diff/diff": ">=0.9"
     },
 	"minimum-stability" : "dev",
 	"autoload": {
