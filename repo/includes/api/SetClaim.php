@@ -62,7 +62,7 @@ class SetClaim extends ModifyClaim {
 
 		$changeop = new ChangeOpClaim( $claim , new ClaimGuidGenerator( $guid->getEntityId() ) );
 		try{
-			$changeop->apply( $entity, $summary );
+			$changeop->apply( $entity );
 		} catch( ChangeOpException $exception ){
 			$this->dieUsage( 'Failed to apply changeOp:' . $exception->getMessage(), 'save-failed' );
 		}
