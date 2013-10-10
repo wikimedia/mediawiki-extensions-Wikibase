@@ -189,14 +189,10 @@ class SetReference extends ModifyClaim {
 		$params = $this->extractRequestParams();
 
 		$claimGuid = $params['statement'];
+		$hash = isset( $params['reference'] ) ? $params['reference'] : '';
+		$index = isset( $params['index'] ) ? $params['index'] : null;
 
-		if ( isset( $params['reference'] ) ) {
-			$changeOp = new ChangeOpReference( $claimGuid, $reference, $params['reference'] );
-		} else {
-			$changeOp = new ChangeOpReference( $claimGuid, $reference, '' );
-		}
-
-		return $changeOp;
+		return new ChangeOpReference( $claimGuid, $reference, $hash, $index );
 	}
 
 	/**
@@ -240,6 +236,9 @@ class SetReference extends ModifyClaim {
 				'reference' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'index' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
 			),
 			parent::getAllowedParams()
 		);
@@ -274,6 +273,7 @@ class SetReference extends ModifyClaim {
 				'statement' => 'A GUID identifying the statement for which a reference is being set',
 				'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
 				'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
+				'index' => 'The index within the statement\'s list of references where to move the reference to. Optional. When not provided, the reference will stay in place.',
 			)
 		);
 	}
@@ -300,6 +300,8 @@ class SetReference extends ModifyClaim {
 				=> 'Create a new reference for claim with GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF',
 			'api.php?action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&reference=1eb8793c002b1d9820c833d234a1b54c8e94187e&snaks={"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string","value":"bar"}}]}&baserevid=7201010&token=foobar'
 				=> 'Set reference for claim with GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF which has hash of 1eb8793c002b1d9820c833d234a1b54c8e94187e',
+			'api.php?action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks={"P212":[{"snaktype":"novalue","property":"P212"}]}&index=0&baserevid=7201010&token=foobar'
+				=> 'Creates a new reference for the claim with GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF and inserts the new reference at the top of the list of references instead of appending it to the bottom.',
 		);
 	}
 }
