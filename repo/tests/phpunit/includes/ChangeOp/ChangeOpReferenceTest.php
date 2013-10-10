@@ -2,12 +2,14 @@
 
 namespace Wikibase\Test;
 
+use LogicException;
 use Wikibase\Claims;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\Entity;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\PropertyNoValueSnak;
 use Wikibase\Reference;
 use Wikibase\SnakList;
 use InvalidArgumentException;
@@ -43,6 +45,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array( $validClaimGuid, 'notAReference', $validReferenceHash );
 		$args[] = array( $validClaimGuid, 'notAReference', '' );
 		$args[] = array( $validClaimGuid, null, '' );
+		$args[] = array( $validClaimGuid, $validReference, $validReferenceHash, 'string' );
 
 		return $args;
 	}
@@ -52,8 +55,8 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $reference, $referenceHash ) {
-		$ChangeOpQualifier = new ChangeOpReference( $claimGuid, $reference, $referenceHash );
+	public function testInvalidConstruct( $claimGuid, $reference, $referenceHash, $index = null ) {
+		new ChangeOpReference( $claimGuid, $reference, $referenceHash, $index );
 	}
 
 	public function changeOpAddProvider() {
@@ -87,6 +90,64 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$claim = reset( $claims );
 		$references = $claim->getReferences();
 		$this->assertTrue( $references->hasReferenceHash( $referenceHash ), "No reference with expected hash" );
+	}
+
+	public function changeOpAddProviderWithIndex() {
+		$snak = new PropertyNoValueSnak( 1 );
+		$args = array();
+
+		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$claims = $item->getClaims();
+		$claim = reset( $claims );
+
+		$references = array(
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 1 ) ) ) ),
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
+		);
+
+		$referenceList = $claim->getReferences();
+		$referenceList->addReference( $references[0] );
+		$referenceList->addReference( $references[1] );
+
+		$item->setClaims( new Claims( $claims ) );
+
+		$claimGuid = $claim->getGuid();
+
+		$newReference = new Reference( new SnakList( array( new PropertyNoValueSnak( 3 ) ) ) );
+		$newReferenceIndex = 1;
+
+		$changeOp = new ChangeOpReference(
+			$claimGuid,
+			$newReference,
+			'',
+			$newReferenceIndex
+		);
+
+		$args[] = array ( $item, $changeOp, $newReference, $newReferenceIndex );
+
+		return $args;
+	}
+
+	/**
+	 * @dataProvider changeOpAddProviderWithIndex
+	 *
+	 * @param Entity $item
+	 * @param ChangeOpReference $changeOp
+	 * @param Reference $newReference
+	 * @param int $expectedIndex
+	 *
+	 * @throws \LogicException
+	 */
+	public function testApplyAddNewReferenceWithIndex(
+		$item,
+		$changeOp,
+		$newReference,
+		$expectedIndex
+	) {
+		$this->assertTrue( $changeOp->apply( $item ), 'Applying the ChangeOp did not return true' );
+		$claims = new Claims( $item->getClaims() );
+		$references = $claims[0]->getReferences();
+		$this->assertEquals( $expectedIndex, $references->indexOf( $newReference ) );
 	}
 
 	public function changeOpRemoveProvider() {
@@ -147,6 +208,30 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$changedReference = new Reference( $snaks );
 		$changeOp = new ChangeOpReference( $claimGuid, $changedReference, $referenceHash );
 		$args[] = array ( $item, $changeOp, $changedReference->getHash() );
+
+		// Just change a reference's index:
+		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$claims = $item->getClaims();
+		$claim = reset( $claims );
+
+		$references = array(
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 1 ) ) ) ),
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
+		);
+
+		$referenceList = $claim->getReferences();
+		$referenceList->addReference( $references[0] );
+		$referenceList->addReference( $references[1] );
+
+		$claim->setReferences( $referenceList );
+		$item->setClaims( new Claims( $claims ) );
+		$changeOp = new ChangeOpReference(
+			$claim->getGuid(),
+			$references[1],
+			$references[1]->getHash(),
+			0
+		);
+		$args[] = array ( $item, $changeOp, $references[1]->getHash() );
 
 		return $args;
 	}
