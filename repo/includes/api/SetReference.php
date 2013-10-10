@@ -191,7 +191,13 @@ class SetReference extends ModifyClaim {
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		if ( isset( $params['reference'] ) ) {
-			$changeOp = new ChangeOpReference( $claimGuid, $reference, $params['reference'], $idFormatter );
+			$changeOp = new ChangeOpReference(
+				$claimGuid,
+				$reference,
+				$params['reference'],
+				$idFormatter,
+				$params['index']
+			);
 		} else {
 			$changeOp = new ChangeOpReference( $claimGuid, $reference, '', $idFormatter );
 		}
@@ -240,6 +246,9 @@ class SetReference extends ModifyClaim {
 				'reference' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'index' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
 			),
 			parent::getAllowedParams()
 		);
@@ -274,6 +283,7 @@ class SetReference extends ModifyClaim {
 				'statement' => 'A GUID identifying the statement for which a reference is being set',
 				'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
 				'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
+				'index' => 'The index within the statement\'s list of references where to move the reference to. Optional. When not provided, the reference will stay in place.',
 			)
 		);
 	}

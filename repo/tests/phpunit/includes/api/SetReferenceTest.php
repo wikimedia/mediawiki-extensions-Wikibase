@@ -2,8 +2,13 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\Item;
+use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
 use Wikibase\Reference;
+use Wikibase\SnakList;
 
 /**
  * Unit tests for the Wikibase\ApiSetReference class.
@@ -116,17 +121,60 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		);
 	}
 
+	public function testSettingIndex() {
+		$item = Item::newEmpty();
+		$content = new ItemContent( $item );
+		$content->save( '', null, EDIT_NEW );
+
+		// Create a statement to act upon:
+		$statement = $item->newClaim( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid(
+			$item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
+		);
+
+		// Pre-fill statement with three references:
+		$references = array(
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 1 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 2 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 3 ) ) ) ),
+		);
+
+		foreach( $references as $reference ) {
+			$statement->getReferences()->addReference( $reference );
+		}
+
+		$item->addClaim( $statement );
+
+		$content->save( '' );
+
+		$this->makeValidRequest(
+			$statement->getGuid(),
+			$references[2]->getHash(),
+			$references[2],
+			0
+		);
+
+		$this->assertEquals( $statement->getReferences()->indexOf( $references[0] ), 0 );
+	}
+
 	/**
 	 * @param string|null $statementGuid
 	 * @param string $referenceHash
 	 * @param Reference|array $reference Reference object or serialized reference
+	 * @param int|null $index
+	 *
 	 * @return array Serialized reference
 	 */
-	protected function makeValidRequest( $statementGuid, $referenceHash, $reference ) {
+	protected function makeValidRequest( $statementGuid, $referenceHash, $reference, $index = null ) {
 		$serializedReference = $this->serializeReference( $reference );
 		$reference = $this->unserializeReference( $reference );
 
-		$params = $this->generateRequestParams( $statementGuid, $referenceHash, $serializedReference );
+		$params = $this->generateRequestParams(
+			$statementGuid,
+			$referenceHash,
+			$serializedReference,
+			$index
+		);
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -195,16 +243,29 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @param string $statementGuid
 	 * @param string $referenceHash
 	 * @param array $serializedReference
+	 * @param int|null $index
+	 *
 	 * @return array
 	 */
-	protected function generateRequestParams( $statementGuid, $referenceHash, $serializedReference ) {
-		return array(
+	protected function generateRequestParams(
+		$statementGuid,
+		$referenceHash,
+		$serializedReference,
+		$index = null
+	) {
+		$params = array(
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
 			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
 			'snaks-order' => \FormatJson::encode( $serializedReference['snaks-order'] ),
 		);
+
+		if( !is_null( $index ) ) {
+			$params['index'] = $index;
+		}
+
+		return $params;
 	}
 
 	/**
