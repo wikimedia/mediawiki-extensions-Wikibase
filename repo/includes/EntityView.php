@@ -192,7 +192,7 @@ abstract class EntityView extends \ContextSource {
 	 * @string
 	 *
 	 * @param EntityRevision $entityRevision
-	 * @param \Language $lang
+	 * @param Language $lang
 	 * @param bool $editable
 	 * @return string
 	 */
@@ -200,7 +200,6 @@ abstract class EntityView extends \ContextSource {
 		wfProfileIn( __METHOD__ );
 
 		$claims = '';
-		$languageTerms = '';
 
 		if ( $entityRevision->getEntity()->getType() === 'item' ) {
 			$claims = $this->getHtmlForClaims( $entityRevision->getEntity(), $lang, $editable );
