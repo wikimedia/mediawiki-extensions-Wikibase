@@ -25,6 +25,7 @@ use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Snak;
 
 /**
  * @covers Wikibase\EntityView
@@ -157,7 +158,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 	public function getHtmlForClaimsProvider() {
 		$argLists = array();
 
-		$claim = new Claim(
+		$claim = $this->makeClaim(
 			new PropertyNoValueSnak(
 				new PropertyId( 'p24' )
 			)
@@ -228,6 +229,20 @@ class EntityViewTest extends \MediaWikiTestCase {
 		}
 	}
 
+	protected $guidCounter = 0;
+
+	protected function makeClaim( Snak $mainSnak, $guid = null ) {
+		if ( $guid === null ) {
+			$this->guidCounter++;
+			$guid = 'EntityViewTest$' . $this->guidCounter;
+		}
+
+		$claim = new Claim( $mainSnak );
+		$claim->setGuid( $guid );
+
+		return $claim;
+	}
+
 	public function getParserOutputLinksProvider() {
 		$argLists = array();
 
@@ -243,28 +258,28 @@ class EntityViewTest extends \MediaWikiTestCase {
 			array() );
 
 		$argLists["PropertyNoValueSnak"] = array(
-			array( new Claim( new PropertyNoValueSnak( $p44 ) ) ),
+			array( $this->makeClaim( new PropertyNoValueSnak( $p44 ) ) ),
 			array( $p44 ) );
 
 		$argLists["PropertySomeValueSnak"] = array(
-			array( new Claim( new PropertySomeValueSnak( $p44 ) ) ),
+			array( $this->makeClaim( new PropertySomeValueSnak( $p44 ) ) ),
 			array( $p44 ) );
 
 		$argLists["PropertyValueSnak with string value"] = array(
-			array( new Claim( new PropertyValueSnak( $p23, new StringValue( 'onoez' ) ) ) ),
+			array( $this->makeClaim( new PropertyValueSnak( $p23, new StringValue( 'onoez' ) ) ) ),
 			array( $p23 ) );
 
 		$argLists["PropertyValueSnak with EntityId"] = array(
-			array( new Claim( new PropertyValueSnak( $p44, new EntityIdValue( $q23 ) ) ) ),
+			array( $this->makeClaim( new PropertyValueSnak( $p44, new EntityIdValue( $q23 ) ) ) ),
 			array( $p44, $q23 ) );
 
 		$argLists["Mixed Snaks"] = array(
 			array(
-				new Claim( new PropertyValueSnak( $p11, new EntityIdValue( $q23 ) ) ),
-				new Claim( new PropertyNoValueSnak( $p44 ) ),
-				new Claim( new PropertySomeValueSnak( $p44 ) ),
-				new Claim( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
-				new Claim( new PropertyValueSnak( $p44, new EntityIdValue( $q24 ) ) ),
+				$this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q23 ) ) ),
+				$this->makeClaim( new PropertyNoValueSnak( $p44 ) ),
+				$this->makeClaim( new PropertySomeValueSnak( $p44 ) ),
+				$this->makeClaim( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
+				$this->makeClaim( new PropertyValueSnak( $p44, new EntityIdValue( $q24 ) ) ),
 			),
 			array( $p11, $q23, $p44, $q24 ) );
 
@@ -304,19 +319,19 @@ class EntityViewTest extends \MediaWikiTestCase {
 			array() );
 
 		$argLists["PropertyNoValueSnak"] = array(
-			array( new Claim( new PropertyNoValueSnak( $p42 ) ) ),
+			array( $this->makeClaim( new PropertyNoValueSnak( $p42 ) ) ),
 			array());
 
 		$argLists["PropertySomeValueSnak"] = array(
-			array( new Claim( new PropertySomeValueSnak( $p42 ) ) ),
+			array( $this->makeClaim( new PropertySomeValueSnak( $p42 ) ) ),
 			array() );
 
 		$argLists["PropertyValueSnak with string value"] = array(
-			array( new Claim( new PropertyValueSnak( $p23, new StringValue( 'http://not/a/url' )  ) ) ),
+			array( $this->makeClaim( new PropertyValueSnak( $p23, new StringValue( 'http://not/a/url' )  ) ) ),
 			array() );
 
 		$argLists["PropertyValueSnak with URL"] = array(
-			array( new Claim( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ) ),
+			array( $this->makeClaim( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ) ),
 			array( 'http://acme.com/test' ) );
 
 		return $argLists;
@@ -401,7 +416,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 
 		$p11 = new PropertyId( 'p11' );
 
-		$entity->addClaim( new Claim( new PropertyValueSnak( $p11, new EntityIdValue( $q98 ) ) ) );
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q98 ) ) ) );
 
 		$revision = new EntityRevision( $entity, 1234567, '20130505333333' );
 
@@ -413,7 +428,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'français',
 			'wbEntityId' => 'Q27449',
-			'wbEntity' => '{"id":"Q27449","type":"item","labels":{"de":{"language":"de","value":"foo"},"fr":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":27498},"type":"wikibase-entityid"}},"type":"claim"}]}}',
+			'wbEntity' => '{"id":"Q27449","type":"item","labels":{"de":{"language":"de","value":"foo"},"fr":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":"EntityViewTest$1","mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":27498},"type":"wikibase-entityid"}},"type":"claim"}]}}',
 			'wbUsedEntities' => '{"Q27498":{"content":{"id":"Q27498","type":"item","labels":{"fr":{"language":"de","value":"bar"}}},"title":"' . $titleText . '","revision":""}}',
 		) );
 
@@ -425,7 +440,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'Nederlands',
 			'wbEntityId' => 'Q27449',
-			'wbEntity' => '{"id":"Q27449","type":"item","labels":{"de":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":27498},"type":"wikibase-entityid"}},"type":"claim"}]}}',
+			'wbEntity' => '{"id":"Q27449","type":"item","labels":{"de":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":"EntityViewTest$1","mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":27498},"type":"wikibase-entityid"}},"type":"claim"}]}}',
 			'wbUsedEntities' => '{"Q27498":{"content":{"id":"Q27498","type":"item"},"title":"' . $titleText . '","revision":""}}',
 		) );
 

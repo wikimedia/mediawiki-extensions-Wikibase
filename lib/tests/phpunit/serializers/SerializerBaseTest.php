@@ -94,13 +94,14 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	protected function assertMeaningfulEquals( $expected, $actual, $message = '' ) {
 		if ( is_object( $expected ) ) {
 			if ( $expected instanceof Comparable ) {
+				$this->assertInstanceOf( '\Comparable', $actual, $message );
 				$this->assertTrue( $expected->equals( $actual ), $message );
 				return;
 			}
 
 			if ( $expected instanceof Hashable ) {
 				$this->assertInstanceOf( '\Hashable', $actual, $message );
-				$this->assertEquals( $expected->getHash( $actual ), $actual->getHash(), $message );
+				$this->assertEquals( $expected->getHash(), $actual->getHash(), $message );
 				return;
 			}
 		}

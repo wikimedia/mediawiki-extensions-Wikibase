@@ -54,21 +54,25 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$item777 = self::provideNewItemWithClaim( 777, new PropertyNoValueSnak( 45 ) );
 		$item666 = self::provideNewItemWithClaim( 666, new PropertySomeValueSnak( 44 ) );
 
+		$item777Claims = $item777->getClaims();
+		$item666Claims = $item666->getClaims();
+
+		$claim777 = reset( $item777Claims );
+		$claim666 = reset( $item666Claims );
+
 		//claims that exist on the given entities
 		$claims[0] = new Claim( new PropertyNoValueSnak( 43 ) );
-		$item777Claims = $item777->getClaims();
-		$claims[777] = clone $item777Claims[0];
-		$item666Claims = $item666->getClaims();
-		$claims[666] = clone $item666Claims[0];
+		$claims[777] = clone $claim777;
+		$claims[666] = clone $claim666;
 		//claims with a null guid
-		$claims[7770] = clone $item777Claims[0];
+		$claims[7770] = clone $claim777;
 		$claims[7770]->setGuid( null );
-		$claims[6660] = clone $item666Claims[0];
+		$claims[6660] = clone $claim666;
 		$claims[6660]->setGuid( null );
 		//new claims not yet on the entity
-		$claims[7777] = clone $item777Claims[0];
+		$claims[7777] = clone $claim777;
 		$claims[7777]->setGuid( 'Q777$D8404CDA-25E4-4334-AF13-A3290BC77777' );
-		$claims[6666] = clone $item666Claims[0];
+		$claims[6666] = clone $claim666;
 		$claims[6666]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66666' );
 
 		$args = array();
@@ -110,9 +114,18 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$entityClaims = new Claims( $entity->getClaims() );
+		$entityClaimHashSet = array_flip( $entityClaims->getHashes() );
 		foreach( $expected as $expectedClaim ){
-			$this->assertTrue( $entityClaims->hasClaim( $expectedClaim ) );
+			$guid = $expectedClaim->getGuid();
+			$hash = $expectedClaim->getHash();
+
+			if ( $guid !== null ) {
+				$this->assertTrue( $entityClaims->hasClaimWithGuid( $guid ) );
+			}
+
+			$this->assertArrayHasKey( $hash, $entityClaimHashSet );
 		}
+
 		$this->assertEquals( count( $expected ), $entityClaims->count() );
 	}
 
