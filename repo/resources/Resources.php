@@ -37,6 +37,31 @@ return call_user_func( function() {
 	);
 
 	return array(
+		'wikibase.repo' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.repo/repo.js',
+				'wikibase.repo/repo.fetchedEntities.js'
+			),
+			'dependencies' => array(
+				'wikibase'
+			),
+		),
+
+		'mw.ext.wikibase.repo.fetchedEntitiesFromMwConfig' => $moduleTemplate + array(
+			'scripts' => array(
+				'mw.ext.wikibase.repo/repo.js',
+				'mw.ext.wikibase.repo/repo.fetchedEntitiesFromMwConfig.js'
+			),
+			'dependencies' => array(
+				'mw.ext.wikibase',
+				'wikibase.repo',
+				'wikibase.datamodel',
+				'wikibase.serialization.entities',
+				'wikibase.serialization.FetchedContent',
+				'jquery.json',
+			),
+		),
+
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
@@ -50,9 +75,8 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'jquery.json',
 				'jquery.cookie',
-				'wikibase.serialization.entities',
-				'wikibase.serialization.fetchedcontent',
-				'jquery.wikibase.claimgrouplabelscroll'
+				'jquery.wikibase.claimgrouplabelscroll',
+				'mw.ext.wikibase.repo.fetchedEntitiesFromMwConfig',
 			),
 			'messages' => array(
 				'wikibase-statements',
