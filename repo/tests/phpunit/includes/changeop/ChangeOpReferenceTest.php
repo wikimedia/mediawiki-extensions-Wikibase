@@ -8,6 +8,7 @@ use Wikibase\Entity;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\PropertyNoValueSnak;
 use Wikibase\Reference;
 use Wikibase\SnakList;
 use InvalidArgumentException;
@@ -44,6 +45,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array( $validClaimGuid, 'notAReference', $validReferenceHash, $validIdFormatter );
 		$args[] = array( $validClaimGuid, 'notAReference', '', $validIdFormatter );
 		$args[] = array( $validClaimGuid, null, '', $validIdFormatter );
+		$args[] = array( $validClaimGuid, $validReference, $validReferenceHash, $validIdFormatter, 'string' );
 
 		return $args;
 	}
@@ -53,12 +55,11 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $reference, $referenceHash, $idFormatter ) {
-		$ChangeOpQualifier = new ChangeOpReference( $claimGuid, $reference, $referenceHash, $idFormatter );
+	public function testInvalidConstruct( $claimGuid, $reference, $referenceHash, $idFormatter, $index = null ) {
+		new ChangeOpReference( $claimGuid, $reference, $referenceHash, $idFormatter, $index );
 	}
 
 	public function changeOpAddProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
 		$args = array();
 
@@ -146,6 +147,29 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$changedReference = new Reference( $snaks );
 		$changeOp = new ChangeOpReference( $claimGuid, $changedReference, $referenceHash, $idFormatter );
 		$args[] = array ( $item, $changeOp, $changedReference->getHash() );
+
+		// Just change a reference's index:
+		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$claims = $item->getClaims();
+
+		$references = array(
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 1 ) ) ) ),
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
+		);
+
+		$referenceList = $claims[0]->getReferences();
+		$referenceList->addReference( $references[0] );
+		$referenceList->addReference( $references[1] );
+
+		$item->setClaims( new Claims( $claims ) );
+		$changeOp = new ChangeOpReference(
+			$claims[0]->getGuid(),
+			$references[1],
+			$references[1]->getHash(),
+			$idFormatter,
+			0
+		);
+		$args[] = array ( $item, $changeOp, $references[1]->getHash() );
 
 		return $args;
 	}
