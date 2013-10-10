@@ -155,7 +155,7 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
 {{Identical|Language}}',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Site links table column heading for the sitename column for special sites such as e.g. Commons.
-{{Identical|Language}}',
+{{Identical|Site}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.
 {{Identical|Code}}',
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (wiki) page.',
@@ -1753,6 +1753,7 @@ $messages['it'] = array(
 	'wikibase-replicationnote' => 'Potrebbero essere necessari diversi minuti prima che le modifiche siano visibili su tutti i wiki',
 	'wikibase-sitelinks-wikipedia' => 'Pagine di Wikipedia collegate a questo elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Sito',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codice',
 	'wikibase-sitelinks-link-columnheading' => 'Voce collegata',
 	'wikibase-tooltip-error-details' => 'Dettagli',
@@ -1816,6 +1817,7 @@ $messages['ja'] = array(
 	'wikibase-replicationnote' => '変更内容をすべてのウィキに反映させるのに時間がかかる場合があることにご注意ください。',
 	'wikibase-sitelinks-wikipedia' => 'この項目にリンクしているウィキペディアのページ',
 	'wikibase-sitelinks-sitename-columnheading' => '言語',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'サイト',
 	'wikibase-sitelinks-siteid-columnheading' => 'コード',
 	'wikibase-sitelinks-link-columnheading' => 'リンクされている記事',
 	'wikibase-tooltip-error-details' => '詳細',
@@ -1905,6 +1907,7 @@ $messages['kk-cyrl'] = array(
 );
 
 /** Korean (한국어)
+ * @author Hym411
  * @author Kwj2772
  * @author 관인생략
  * @author 아라
@@ -1943,6 +1946,7 @@ $messages['ko'] = array(
 	'wikibase-replicationnote' => '바뀐 내용이 모든 위키에 보이는데 시간이 걸릴 수 있음을 주의하세요.',
 	'wikibase-sitelinks-wikipedia' => '이 항목을 가리키는 위키백과 문서',
 	'wikibase-sitelinks-sitename-columnheading' => '언어',
+	'wikibase-sitelinks-sitename-columnheading-special' => '사이트',
 	'wikibase-sitelinks-siteid-columnheading' => '코드',
 	'wikibase-sitelinks-link-columnheading' => '링크된 문서',
 	'wikibase-tooltip-error-details' => '자세한 사항',
@@ -2031,6 +2035,7 @@ $messages['lb'] = array(
 	'wikibase-replicationnote' => "Denkt w.e.g. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
 	'wikibase-sitelinks-wikipedia' => 'Wikipediasäiten déi mat dësem Element verlinkt sinn',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Site',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Verlinkten Artikel',
 	'wikibase-tooltip-error-details' => 'Detailer',
@@ -2155,6 +2160,7 @@ $messages['mk'] = array(
 	'wikibase-replicationnote' => 'Имајте предвид дека се потребни неколку минути за промените да станат видливи на сите викија',
 	'wikibase-sitelinks-wikipedia' => 'Страници на Википедија сврзани со предметот',
 	'wikibase-sitelinks-sitename-columnheading' => 'Јазик',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Вики',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 	'wikibase-sitelinks-link-columnheading' => 'Сврзана статија',
 	'wikibase-tooltip-error-details' => 'Подробно',
