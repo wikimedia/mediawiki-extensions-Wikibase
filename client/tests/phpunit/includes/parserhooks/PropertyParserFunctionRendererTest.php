@@ -59,16 +59,22 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 
 		$entityLookup = new MockRepository();
 
-		$item = Item::newEmpty();
-		$item->setId( 42 );
-		$item->addClaim( new Claim( new PropertyValueSnak(
+		$claim1 = new Claim( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'Please write tests before merging your code' )
-		) ) );
-		$item->addClaim( new Claim( new PropertyValueSnak(
+		) );
+		$claim1->setGuid( __METHOD__ . '$' . 1 );
+
+		$claim2 = new Claim( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'or kittens will die' )
-		) ) );
+		) );
+		$claim2->setGuid( __METHOD__ . '$' . 2 );
+
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+		$item->addClaim( $claim1 );
+		$item->addClaim( $claim2 );
 
 		$property = Property::newEmpty();
 		$property->setId( $propertyId );
