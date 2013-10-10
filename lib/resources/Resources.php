@@ -56,6 +56,16 @@ return call_user_func( function() {
 			)
 		),
 
+		'mw.ext.wikibase' => $moduleTemplate + array(
+			'scripts' => array(
+				'mw.ext.wikibase.js',
+			),
+			'dependencies' => array(
+				'mediawiki',
+				'wikibase',
+			),
+		),
+
 		'wikibase.parsers' => $moduleTemplate + array(
 			'scripts' => array(
 				'parsers/EntityIdParser.js',
@@ -711,6 +721,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.wikibase/experts.wikibase.js',
 			),
 			'dependencies' => array(
+				'wikibase',
 				'mw.ext.valueView',
 			),
 		),
