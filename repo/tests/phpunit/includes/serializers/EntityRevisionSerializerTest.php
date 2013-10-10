@@ -101,19 +101,40 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 		return $validArgs;
 	}
 
+	/**
+	 * @dataProvider newForFrontendStoreArgumentsProvider
+	 */
 	public function testNewForFrontendStore() {
-		$titleLookup = $this->getTitleLookupMock();
+		$serializer = call_user_func_array(
+				'Wikibase\Serializers\EntityRevisionSerializer::newForFrontendStore',
+				func_get_args()
+		);
+		$this->assertInstanceOf( $this->getClass(), $serializer );
+	}
 
+	/**
+	 * Provides function arguments which are expected to create a valid instance when provided to
+	 * EntityRevisionSerializer::newForFrontendStore.
+	 */
+	public function newForFrontendStoreArgumentsProvider() {
+		$titleLookup = $this->getTitleLookupMock();
 		$fallbackChain = new LanguageFallbackChain( array(
 			LanguageWithConversion::factory( 'en' )
 		) );
 
-		$serializer = EntityRevisionSerializer::newForFrontendStore(
+		$cases = array();
+
+		$cases[] = array(
 			$titleLookup,
 			'en',
 			$fallbackChain
 		);
 
-		$this->assertInstanceOf( $this->getClass(), $serializer );
+		$cases[] = array(
+			$titleLookup,
+			'de'
+		);
+
+		return $cases;
 	}
 }

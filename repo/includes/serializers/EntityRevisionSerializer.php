@@ -95,12 +95,18 @@ class EntityRevisionSerializer extends SerializerObject {
 	 *
 	 * @return EntityRevisionSerializer
 	 */
-	public static function newForFrontendStore( EntityTitleLookup $titleLookup, $primaryLanguage, LanguageFallbackChain $languageFallbackChain ) {
+	public static function newForFrontendStore(
+		EntityTitleLookup $titleLookup,
+		$primaryLanguage,
+		LanguageFallbackChain $languageFallbackChain = null
+	) {
 		$SerializationOptions =
 			new SerializationOptions();
 
 		$SerializationOptions->setOption( EntitySerializer::OPT_PARTS, array( 'labels', 'descriptions', 'datatype' ) );
-		$SerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
+		if( $languageFallbackChain ) {
+			$SerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
+		}
 
 		$entityRevisionSerializationOptions =
 			new EntityRevisionSerializationOptions( $SerializationOptions );
