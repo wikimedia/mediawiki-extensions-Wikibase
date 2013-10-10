@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Internal\ObjectComparer;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
 use Wikibase\ItemContent;
@@ -50,29 +51,32 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOps->apply();
 
-		//Cycle through thr old claims and set the guids to null (we no longer know what they should be)
-		$fromClaims = new Claims( $from->getEntity()->getClaims() );
-		foreach( $from->getEntity()->getClaims() as $claim ) {
-			$this->assertStringStartsWith(
-				$from->getEntity()->getId()->getSerialization(), $claim->getGuid(),
-				'FromItem has a claim prefixed with the wrong guid'
-			);
-			$fromClaims->removeClaim( $claim );
-			$claim->setGuid( null );
-			$fromClaims->addClaim( $claim );
-		}
-		$from->getEntity()->setClaims( $fromClaims );
-		$toClaims = new Claims( $to->getEntity()->getClaims() );
-		foreach( $to->getEntity()->getClaims() as $claim ) {
-			$this->assertStringStartsWith( $to->getEntity()->getId()->getSerialization(), $claim->getGuid() );
-			$toClaims->removeClaim( $claim );
-			$claim->setGuid( null );
-			$toClaims->addClaim( $claim );
-		}
-		$to->getEntity()->setClaims( $toClaims );
 
-		$this->assertTrue( $from->getEntity()->equals( new Item( $expectedFromData ) ) );
-		$this->assertTrue( $to->getEntity()->equals( new Item( $expectedToData ) ) );
+		$fromData = $from->getItem()->toArray();
+		$toData = $to->getItem()->toArray();
+
+		//Cycle through the old claims and set the guids to null (we no longer know what they should be)
+		$fromClaims = array();
+		foreach( $fromData['claims'] as $claim ) {
+			unset( $claim['g'] );
+			$fromClaims[] = $claim;
+		}
+
+		$toClaims = array();
+		foreach( $toData['claims'] as $claim ) {
+			unset( $claim['g'] );
+			$toClaims[] = $claim;
+		}
+
+		$fromData['claims'] = $fromClaims;
+		$toData['claims'] = $toClaims;
+
+		$fromData = array_intersect_key( $fromData, $expectedFromData );
+		$toData = array_intersect_key( $toData, $expectedToData );
+
+		$comparer = new ObjectComparer();
+		$this->assertTrue( $comparer->dataEquals( $expectedFromData, $fromData, array( 'entity' ) ) );
+		$this->assertTrue( $comparer->dataEquals( $expectedToData, $toData, array( 'entity' ) ) );
 	}
 
 	public static function provideData(){
@@ -115,8 +119,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				array( 'claims' => array(
 					array(
 						'm' => array( 'novalue', 56 ),
-						'q' => array( ),
-						'g' => null )
+						'q' => array( ) )
 				),
 				),
 			),
@@ -133,8 +136,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				array( 'claims' => array(
 					array(
 						'm' => array( 'novalue', 56 ),
-						'q' => array( array(  'novalue', 56  ) ),
-						'g' => null )
+						'q' => array( array(  'novalue', 56  ) ) )
 				),
 				),
 			),
@@ -161,8 +163,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 					'claims' => array(
 						array(
 							'm' => array( 'novalue', 88 ),
-							'q' => array( array(  'novalue', 88  ) ),
-							'g' => null )
+							'q' => array( array(  'novalue', 88  ) ) )
 					),
 				),
 			),
