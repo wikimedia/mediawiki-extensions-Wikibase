@@ -58,7 +58,7 @@ class EntityRevisionSerializer extends SerializerObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @param EntityRevision $entityContent
+	 * @param EntityRevision $entityRevision
 	 * @return array
 	 *
 	 * @throws InvalidArgumentException If $entityContent is no instance of Content.
@@ -98,12 +98,19 @@ class EntityRevisionSerializer extends SerializerObject {
 	 *
 	 * @return EntityRevisionSerializer
 	 */
-	public static function newForFrontendStore( EntityTitleLookup $titleLookup, $primaryLanguage, LanguageFallbackChain $languageFallbackChain ) {
+	public static function newForFrontendStore(
+		EntityTitleLookup $titleLookup,
+		$primaryLanguage,
+		LanguageFallbackChain $languageFallbackChain = null
+	) {
 		$entitySerializationOptions =
 			new EntitySerializationOptions();
 		
 		$entitySerializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
-		$entitySerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
+		if( $languageFallbackChain ) {
+			$entitySerializationOptions->setLanguages(
+				array( $primaryLanguage => $languageFallbackChain ) );
+		}
 
 		$entityRevisionSerializationOptions =
 			new EntityRevisionSerializationOptions( $entitySerializationOptions );
