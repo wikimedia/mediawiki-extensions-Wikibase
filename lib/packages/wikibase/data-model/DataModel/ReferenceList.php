@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Hashable;
+use InvalidArgumentException;
 
 /**
  * Implementation of the References interface.
@@ -29,9 +30,48 @@ class ReferenceList extends HashableObjectStorage implements References {
 	 * @since 0.1
 	 *
 	 * @param Reference $reference
+	 * @param int|null $index
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function addReference( Reference $reference ) {
+	public function addReference( Reference $reference, $index = null ) {
+		if( !is_null( $index ) && !is_integer( $index ) ) {
+			throw new InvalidArgumentException( 'Index needs to be an integer value' );
+		} else if ( is_null( $index ) || $index >= count( $this ) ) {
+			// Append object to the end of the reference list.
+			$this->attach( $reference );
+		} else {
+			$this->insertReferenceAtIndex( $reference, $index );
+		}
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param Reference $reference
+	 * @param int $index
+	 */
+	protected function insertReferenceAtIndex( Reference $reference, $index ) {
+		$referencesToShift = array();
+		$i = 0;
+
+		// Determine the references that need to be shifted and detach them:
+		foreach( $this as $object ) {
+			if( $i++ >= $index ) {
+				$referencesToShift[] = $object;
+			}
+		}
+
+		foreach( $referencesToShift as $object ) {
+			$this->detach( $object );
+		}
+
+		// Attach the new reference and reattach the previously detached references:
 		$this->attach( $reference );
+
+		foreach( $referencesToShift as $object ) {
+			$this->attach( $object );
+		}
 	}
 
 	/**

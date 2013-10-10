@@ -123,14 +123,35 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	 * @param \Wikibase\ReferenceList $array
 	 */
 	public function testAddReference( ReferenceList $array ) {
+		// Append object to the end:
 		$elementCount = count( $array );
 
 		$elements = $this->getElementInstances();
 		$element = array_shift( $elements );
-
 		$array->addReference( $element );
 
 		$this->assertEquals( ++$elementCount, count( $array ) );
+
+		// Insert object at the beginning:
+		$elements = $this->getElementInstances();
+		$element = array_shift( $elements );
+		$array->addReference( $element, 0 );
+
+		$array->rewind();
+
+		$this->assertEquals( ++$elementCount, count( $array ) );
+		$this->assertEquals( $array->current(), $element, 'Inserted object at the beginning' );
+
+		// Insert object at another index:
+		$elements = $this->getElementInstances();
+		$element = array_shift( $elements );
+		$array->addReference( $element, 1 );
+
+		$array->rewind();
+		$array->next();
+
+		$this->assertEquals( ++$elementCount, count( $array ) );
+		$this->assertEquals( $array->current(), $element, 'Inserted object at index 1' );
 	}
 
 	/**
