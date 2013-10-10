@@ -184,7 +184,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.add_sitelinks([["српски", "Helijum"]])
+        page.add_sitelinks([["srwiki", "Helijum"]])
         page.pageArticleNormalized?.should be_true
         page.pageArticleNormalized_element.text.should == "Хелијум"
       end
