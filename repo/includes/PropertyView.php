@@ -3,32 +3,20 @@
 namespace Wikibase;
 
 use DataTypes\DataType;
-use Html, ParserOutput, Title, Language, OutputPage, MediaWikiSite;
+use Html;
+use InvalidArgumentException;
+use Language;
+use MediaWikiSite;
+use OutputPage;
+use ParserOutput;
+use Title;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class for creating views for Wikibase\Property instances.
  * For the Wikibase\Property this basically is what the Parser is for WikitextContent.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
@@ -39,30 +27,26 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 *
-	 * @param EntityRevision $propertyRevision
-	 * @param \Language $lang
-	 * @param bool $editable
+	 * @param EntityRevision $entityRevision
+	 * @param Language $lang
 	 *
 	 * @throws \InvalidArgumentException
+	 * @internal param bool $editable
+	 *
 	 * @return string
 	 */
-	public function getInnerHtml( EntityRevision $propertyRevision, Language $lang, $editable = true ) {
+	public function getInnerHtml( EntityRevision $entityRevision, Language $lang ) {
 		wfProfileIn( __METHOD__ );
 
-		$property = $propertyRevision->getEntity();
+		$property = $entityRevision->getEntity();
 
 		if ( !( $property instanceof Property ) ) {
-			throw new \InvalidArgumentException( '$propertyRevision must contain a Property' );
+			throw new InvalidArgumentException( '$propertyRevision must contain a Property' );
 		}
 
-		/* @var Property $property */
+		$html = parent::getInnerHtml( $entityRevision, $lang );
 
-		$html = parent::getInnerHtml( $propertyRevision, $lang, $editable );
-
-		$html .= $this->getHtmlForDataType(
-			$this->getDataType( $property ),
-			$lang,
-			$editable
+		$html .= $this->getHtmlForDataType( $this->getDataType( $property ), $lang
 		);
 
 		$html .= $this->getFooterHtml();
@@ -95,11 +79,10 @@ class PropertyView extends EntityView {
 	 *
 	 * @param DataType $dataType the data type to render
 	 * @param Language $lang the language to use for rendering.
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForDataType( DataType $dataType, Language $lang, $editable = true ) {
+	protected function getHtmlForDataType( DataType $dataType, Language $lang ) {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
