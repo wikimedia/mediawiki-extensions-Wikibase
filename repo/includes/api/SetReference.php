@@ -191,7 +191,13 @@ class SetReference extends ModifyClaim {
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 
 		if ( isset( $params['reference'] ) ) {
-			$changeOp = new ChangeOpReference( $claimGuid, $reference, $params['reference'], $idFormatter );
+			$changeOp = new ChangeOpReference(
+				$claimGuid,
+				$reference,
+				$params['reference'],
+				$idFormatter,
+				$params['index']
+			);
 		} else {
 			$changeOp = new ChangeOpReference( $claimGuid, $reference, '', $idFormatter );
 		}
@@ -239,6 +245,9 @@ class SetReference extends ModifyClaim {
 				),
 				'reference' => array(
 					ApiBase::PARAM_TYPE => 'string',
+				),
+				'index' => array(
+					ApiBase::PARAM_TYPE => 'integer',
 				),
 			),
 			parent::getAllowedParams()
