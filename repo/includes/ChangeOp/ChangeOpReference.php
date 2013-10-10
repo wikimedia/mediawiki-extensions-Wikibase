@@ -42,6 +42,13 @@ class ChangeOpReference extends ChangeOpBase {
 	protected $referenceHash;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var int|null
+	 */
+	protected $index;
+
+	/**
 	 * Constructs a new reference change operation
 	 *
 	 * @since 0.4
@@ -49,11 +56,11 @@ class ChangeOpReference extends ChangeOpBase {
 	 * @param string $claimGuid
 	 * @param Reference|null $reference
 	 * @param string $referenceHash
-	 * @param EntityIdFormatter $idFormatter
+	 * @param int|null $index
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $reference, $referenceHash ) {
+	public function __construct( $claimGuid, $reference, $referenceHash, $index = null ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
@@ -70,9 +77,14 @@ class ChangeOpReference extends ChangeOpBase {
 			throw new InvalidArgumentException( 'Either $referenceHash or $reference needs to be set' );
 		}
 
+		if( !is_null( $index ) && !is_integer( $index ) ) {
+			throw new InvalidArgumentException( '$index needs to be null or an integer value' );
+		}
+
 		$this->claimGuid = $claimGuid;
 		$this->reference = $reference;
 		$this->referenceHash = $referenceHash;
+		$this->index = $index;
 	}
 
 	/**
@@ -129,7 +141,7 @@ class ChangeOpReference extends ChangeOpBase {
 			$hash = $this->reference->getHash();
 			throw new ChangeOpException( "Claim has already a reference with hash $hash" );
 		}
-		$references->addReference( $this->reference );
+		$references->addReference( $this->reference, $this->index );
 		$this->updateSummary( $summary, 'add' );
 	}
 
@@ -145,11 +157,21 @@ class ChangeOpReference extends ChangeOpBase {
 		if ( !$references->hasReferenceHash( $this->referenceHash ) ) {
 			throw new ChangeOpException( "Reference with hash $this->referenceHash does not exist" );
 		}
-		if ( $references->hasReference( $this->reference ) ) {
-			throw new ChangeOpException( "Claim has already a reference with hash {$this->reference->getHash()}" );
+
+		$currentIndex = $references->indexOf( $this->reference );
+
+		if( is_null( $this->index ) && $currentIndex !== false ) {
+			// Set index to current index to not have the reference removed and appended but
+			// retain its position within the list of references.
+			$this->index = $currentIndex;
+		}
+
+		if ( $references->hasReference( $this->reference ) && $this->index === $currentIndex ) {
+			throw new ChangeOpException( "Claim has already a reference with hash "
+			. "{$this->reference->getHash()} and index ($currentIndex) is not changed" );
 		}
 		$references->removeReferenceHash( $this->referenceHash );
-		$references->addReference( $this->reference );
+		$references->addReference( $this->reference, $this->index );
 		$this->updateSummary( $summary, 'set' );
 	}
 
