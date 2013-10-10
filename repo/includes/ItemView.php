@@ -12,12 +12,10 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
+ * @author Adam Shorland
  */
 class ItemView extends EntityView {
 
@@ -28,7 +26,7 @@ class ItemView extends EntityView {
 		$html = parent::getInnerHtml( $entityRevision, $lang, $editable );
 
 		// add site-links to default entity stuff
-		$html .= $this->getHtmlForSiteLinks( $entityRevision->getEntity(), $lang, $editable );
+		$html .= $this->getHtmlForSiteLinks( $entityRevision->getEntity() );
 
 		return $html;
 	}
@@ -39,17 +37,15 @@ class ItemView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param Item $item the entity to render
-	 * @param \Language $lang the language to use for rendering.
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	public function getHtmlForSiteLinks( Item $item, Language $lang, $editable = true ) {
+	public function getHtmlForSiteLinks( Item $item ) {
 		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "siteLinkGroups" );
 		$html = '';
 
 		foreach ( $groups as $group ) {
-			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $lang, $editable, $lang );
+			$html .= $this->getHtmlForSiteLinkGroup( $item, $group );
 		}
 
 		return $html;
@@ -62,18 +58,42 @@ class ItemView extends EntityView {
 	 *
 	 * @param Item $item the entity to render
 	 * @param string $group a site group ID
-	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
-	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	public function getHtmlForSiteLinkGroup( Item $item, $group, Language $lang, $editable = true ) {
-		$allSiteLinks = $item->getSimpleSiteLinks();
+	public function getHtmlForSiteLinkGroup( Item $item, $group ) {
+		$siteLinksHeadingHtml = wfTemplate(
+			'wb-section-heading-sitelinks',
+			wfMessage( 'wikibase-sitelinks-' . $group )->parse(), // heading
+			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ) // ID
+		// TODO: support entity-id as prefix for element IDs.
+		);
 
+		$siteLinks = $this->getSiteLinks( $item, $group );
 		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
+		$editLink = $this->getEditUrl( 'SetSiteLink', $item, null );
+		$groupName = in_array( $group, $specialGroups ) ? 'special' : $group;
 
-		$siteLinks = array(); // site links of the currently handled site group
+		$sitelinksTableHtml = wfTemplate(
+			'wb-sitelinks-table',
+			$this->getHead( $siteLinks, $group, $specialGroups ),
+			$this->getBody( $siteLinks, $group, $specialGroups, $editLink ),
+			$this->getFoot( $siteLinks, $group, $editLink ),
+			htmlspecialchars( $groupName )
+		);
 
-		foreach( $allSiteLinks as $siteLink ) {
+		return $siteLinksHeadingHtml . $sitelinksTableHtml;
+	}
+
+	/**
+	 * Returns an array of sitelinks that are on the given Item and in the given group
+	 * @param Item $item the entity to render
+	 * @param string $group a site group ID
+	 * @return SiteLink[] $siteLinks
+	 */
+	private function getSiteLinks( Item $item, $group ) {
+		$siteLinks = array();
+		foreach( $item->getSimpleSiteLinks() as $siteLink ) {
 			// FIXME: depracted method usage
 			$site = \Sites::singleton()->getSite( $siteLink->getSiteId() );
 
@@ -87,16 +107,17 @@ class ItemView extends EntityView {
 				$siteLinks[] = $link;
 			}
 		}
+		return $siteLinks;
+	}
 
-		$html = $thead = $tbody = $tfoot = '';
-
-		$html .= wfTemplate(
-			'wb-section-heading-sitelinks',
-			wfMessage( 'wikibase-sitelinks-' . $group )->parse(), // heading
-			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ) // ID
-			// TODO: support entity-id as prefix for element IDs.
-		);
-
+	/**
+	 * @param SiteLink[] $siteLinks
+	 * @param string $group
+	 * @param array $specialGroups
+	 *
+	 * @return string
+	 */
+	private function getHead( array $siteLinks, $group, array $specialGroups ) {
 		// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
 		$siteNameMessageKey = 'wikibase-sitelinks-sitename-columnheading';
 		if ( in_array( $group, $specialGroups ) ) {
@@ -104,19 +125,110 @@ class ItemView extends EntityView {
 		}
 
 		if( !empty( $siteLinks ) ) {
-			$thead = wfTemplate( 'wb-sitelinks-thead',
+			return wfTemplate( 'wb-sitelinks-thead',
 				wfMessage( $siteNameMessageKey )->parse(),
 				wfMessage( 'wikibase-sitelinks-siteid-columnheading' )->parse(),
 				wfMessage( 'wikibase-sitelinks-link-columnheading' )->parse()
 			);
 		}
+		return '';
+	}
 
+	/**
+	 * @param SiteLink[] $siteLinks
+	 * @param string $group
+	 * @param array $specialGroups
+	 * @param string $editLink
+	 * @return string
+	 */
+	private function getBody( array $siteLinks, $group, array $specialGroups, $editLink ) {
+		$tbody = '';
+		$siteLinks = $this->sortSiteLinks( $siteLinks );
 		$i = 0;
 
+		foreach( $siteLinks as $link ) {
+			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+			$tbody .= $this->getBodyForSitelink( $link, $alternatingClass, $group, $specialGroups, $editLink );
+		}
+		return $tbody;
+	}
+
+	/**
+	 * @param SiteLink $link
+	 * @param string $class
+	 * @param string $group
+	 * @param array $specialGroups
+	 * @param string $editLink
+	 *
+	 * @return string
+	 */
+	private function getBodyForSitelink( SiteLink $link, $class, $group, $specialGroups, $editLink ) {
+		$site = $link->getSite();
+
+		if ( $site->getDomain() === '' ) {
+			// XXX: link is pointing to an unknown site. hide it? make it red? strike it out?
+			return wfTemplate( 'wb-sitelink-unknown',
+				$class,
+				htmlspecialchars( $link->getSite()->getGlobalId() ),
+				htmlspecialchars( $link->getPage() ),
+				$this->getHtmlForEditSection( $editLink, 'td' )
+			);
+
+		} else {
+			$languageCode = $site->getLanguageCode();
+			$escapedSiteId = htmlspecialchars( $site->getGlobalId() );
+
+			// FIXME: this is a quickfix to allow a custom site-name for groups defined in $wgSpecialSiteLinkGroups instead of showing the language-name
+			if ( in_array( $group, $specialGroups ) ) {
+				$siteNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
+				$siteName = $siteNameMsg->exists() ? $siteNameMsg->parse() : $site->getGlobalId();
+			} else {
+				// TODO: get an actual site name rather then just the language
+				$siteName = htmlspecialchars( Utils::fetchLanguageName( $languageCode ) );
+			}
+
+			// TODO: for non-JS, also set the dir attribute on the link cell;
+			// but do not build language objects for each site since it causes too much load
+			// and will fail when having too much site links
+			return wfTemplate( 'wb-sitelink',
+				$languageCode,
+				$class,
+				$siteName,
+				$escapedSiteId, // displayed site ID
+				htmlspecialchars( $link->getUrl() ),
+				htmlspecialchars( $link->getPage() ),
+				$this->getHtmlForEditSection( $editLink . '/' . $escapedSiteId, 'td' ),
+				$escapedSiteId // ID used in classes
+			);
+		}
+	}
+
+	/**
+	 * @param SiteLink[] $siteLinks
+	 * @param string $group
+	 * @param string $editLink
+	 *
+	 * @return string
+	 */
+	private function getFoot( array $siteLinks, $group, $editLink ) {
 		// Batch load the sites we need info about during the building of the sitelink list.
 		$sites = Sites::singleton()->getSiteGroup( $group );
 
-		// Sort the sitelinks according to their global id
+		// built table footer with button to add site-links, consider list could be complete!
+		$isFull = count( $siteLinks ) >= count( $sites );
+
+		return wfTemplate( 'wb-sitelinks-tfoot',
+			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
+			$this->getHtmlForEditSection( $editLink, 'td', 'add', ! $isFull )
+		);
+	}
+
+	/**
+	 * Sort the sitelinks according to their global id
+	 * @param SiteLink[] $siteLinks
+	 * @return SiteLink[]
+	 */
+	private function sortSiteLinks( $siteLinks ) {
 		$safetyCopy = $siteLinks; // keep a shallow copy;
 		$sortOk = usort(
 			$siteLinks,
@@ -128,72 +240,7 @@ class ItemView extends EntityView {
 		if ( !$sortOk ) {
 			$siteLinks = $safetyCopy;
 		}
-
-		// Link to SpecialPage
-		$editLink = $this->getEditUrl( 'SetSiteLink', $item, null );
-
-		/* @var SiteLink $link */
-		foreach( $siteLinks as $link ) {
-			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
-
-			$site = $link->getSite();
-
-			if ( $site->getDomain() === '' ) {
-				// the link is pointing to an unknown site.
-				// XXX: hide it? make it red? strike it out?
-
-				$tbody .= wfTemplate( 'wb-sitelink-unknown',
-					$alternatingClass,
-					htmlspecialchars( $link->getSite()->getGlobalId() ),
-					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink, 'td' )
-				);
-
-			} else {
-				$languageCode = $site->getLanguageCode();
-				$escapedSiteId = htmlspecialchars( $site->getGlobalId() );
-				// FIXME: this is a quickfix to allow a custom site-name for groups defined in $wgSpecialSiteLinkGroups instead of showing the language-name
-				if ( in_array( $group, $specialGroups ) ) {
-					$siteNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
-					$siteName = $siteNameMsg->exists() ? $siteNameMsg->parse() : $site->getGlobalId();
-				} else {
-					// TODO: get an actual site name rather then just the language
-					$siteName = htmlspecialchars( Utils::fetchLanguageName( $languageCode ) );
-				}
-
-				// TODO: for non-JS, also set the dir attribute on the link cell;
-				// but do not build language objects for each site since it causes too much load
-				// and will fail when having too much site links
-				$tbody .= wfTemplate( 'wb-sitelink',
-					$languageCode,
-					$alternatingClass,
-					$siteName,
-					$escapedSiteId, // displayed site ID
-					htmlspecialchars( $link->getUrl() ),
-					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink . '/' . $escapedSiteId, 'td' ),
-					$escapedSiteId // ID used in classes
-				);
-			}
-		}
-
-		// built table footer with button to add site-links, consider list could be complete!
-		$isFull = count( $siteLinks ) >= count( $sites );
-
-		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
-			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			$this->getHtmlForEditSection( $item, $lang, $editLink, 'td', 'add', !$isFull )
-		);
-
-		$groupName = in_array( $group, $specialGroups ) ? 'special' : $group;
-
-		return $html . wfTemplate(
-			'wb-sitelinks-table',
-			$thead,
-			$tbody,
-			$tfoot,
-			htmlspecialchars( $groupName )
-		);
+		return $siteLinks;
 	}
 
 }

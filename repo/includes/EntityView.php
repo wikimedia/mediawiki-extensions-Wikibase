@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DataValues\DataValue;
 use Html;
+use InvalidArgumentException;
 use ParserOptions;
 use ParserOutput;
 use Title;
@@ -90,12 +91,14 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * @since    0.1
 	 *
-	 * @param IContextSource|null        $context
-	 * @param SnakFormatter      $snakFormatter
+	 * @param IContextSource|null $context
+	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityRevisionLookup       $entityRevisionLookup
-	 * @param EntityTitleLookup          $entityTitleLookup
-	 * @param LanguageFallbackChain      $languageFallbackChain
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		IContextSource $context,
@@ -125,7 +128,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
@@ -192,7 +195,7 @@ abstract class EntityView extends \ContextSource {
 	 * @string
 	 *
 	 * @param EntityRevision $entityRevision
-	 * @param \Language $lang
+	 * @param Language $lang
 	 * @param bool $editable
 	 * @return string
 	 */
@@ -200,7 +203,6 @@ abstract class EntityView extends \ContextSource {
 		wfProfileIn( __METHOD__ );
 
 		$claims = '';
-		$languageTerms = '';
 
 		if ( $entityRevision->getEntity()->getType() === 'item' ) {
 			$claims = $this->getHtmlForClaims( $entityRevision->getEntity(), $lang, $editable );
@@ -307,7 +309,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param Entity $entity the entity to render
-	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
@@ -324,7 +326,7 @@ abstract class EntityView extends \ContextSource {
 				$label === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
 				wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $prefixedId ) )
-					. $this->getHtmlForEditSection( $entity, $lang, $editUrl )
+					. $this->getHtmlForEditSection( $editUrl )
 			)
 		);
 
@@ -338,7 +340,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param Entity $entity the entity to render
-	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
@@ -352,7 +354,7 @@ abstract class EntityView extends \ContextSource {
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
-				$this->getHtmlForEditSection( $entity, $lang, $editUrl )
+				$this->getHtmlForEditSection( $editUrl )
 			)
 		);
 
@@ -366,7 +368,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param Entity $entity the entity to render
-	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
@@ -381,7 +383,7 @@ abstract class EntityView extends \ContextSource {
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$this->getHtmlForEditSection( $entity, $lang, $editUrl, 'span', 'add' )
+				$this->getHtmlForEditSection( $editUrl, 'span', 'add' )
 			);
 		} else {
 			$aliasesHtml = '';
@@ -394,7 +396,7 @@ abstract class EntityView extends \ContextSource {
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $this->getHtmlForEditSection( $entity, $lang, $editUrl )
+				$aliasList . $this->getHtmlForEditSection( $editUrl )
 			);
 		}
 
@@ -433,11 +435,11 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity the entity to render
-	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForLanguageTerms( Entity $entity, \Language $lang, $editable = true ) {
+	public function getHtmlForLanguageTerms( Entity $entity, Language $lang, $editable = true ) {
 		$languages = $this->getExtraUserLanguages( $lang, $this->getUser() );
 		if ( count ( $languages ) === 0 ) {
 			return '';
@@ -482,8 +484,8 @@ abstract class EntityView extends \ContextSource {
 				htmlspecialchars( Utils::fetchLanguageName( $language ) ),
 				htmlspecialchars( $label !== false ? $label : wfMessage( 'wikibase-label-empty' ) ),
 				htmlspecialchars( $description !== false ? $description : wfMessage( 'wikibase-description-empty' ) ),
-				$this->getHtmlForEditSection( $entity, $lang, $editLabelLink ),
-				$this->getHtmlForEditSection( $entity, $lang, $editDescriptionLink ),
+				$this->getHtmlForEditSection( $editLabelLink ),
+				$this->getHtmlForEditSection( $editDescriptionLink ),
 				$label !== false ? '' : 'wb-value-empty',
 				$description !== false ? '' : 'wb-value-empty',
 				$this->getTitle()->getLocalURL() . '?setlang=' . $language
@@ -531,7 +533,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.2
 	 *
 	 * @param Entity $entity the entity to render
-	 * @param \Language $lang the language to use for rendering. if not given, the local
+	 * @param Language $lang the language to use for rendering. if not given, the local
 	 *        context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
@@ -583,7 +585,7 @@ abstract class EntityView extends \ContextSource {
 			$propertyHtml .= wfTemplate( 'wikibase-toolbar',
 				'wb-addtoolbar',
 				// TODO: add link to SpecialPage
-				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' )
+				$this->getHtmlForEditSection( '', 'span', 'add' )
 			);
 
 			$claimsHtml .= wfTemplate( 'wb-claim-section',
@@ -656,7 +658,7 @@ abstract class EntityView extends \ContextSource {
 			$claim->getGuid(),
 			$mainSnakHtml,
 			'', // TODO: Qualifiers
-			$this->getHtmlForEditSection( $entity, $lang, '', 'span' ), // TODO: add link to SpecialPage
+			$this->getHtmlForEditSection( '', 'span' ), // TODO: add link to SpecialPage
 			'', // TODO: References heading
 			'' // TODO: References
 		);
@@ -672,16 +674,14 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.2
 	 *
-	 * @param Entity $entity
-	 * @param \Language $lang
 	 * @param string $url specifies the URL for the button, default is an empty string
 	 * @param string $tag allows to specify the type of the outer node
 	 * @param string $action by default 'edit', for aliases this could also be 'add'
 	 * @param bool $enabled can be set to false to display the button disabled
+	 *
 	 * @return string
 	 */
-	public function getHtmlForEditSection(
-		Entity $entity, Language $lang, $url = '', $tag = 'span', $action = 'edit', $enabled = true
+	public function getHtmlForEditSection( $url = '', $tag = 'span', $action = 'edit', $enabled = true
 	) {
 		wfProfileIn( __METHOD__ );
 
@@ -718,7 +718,7 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param string  $specialpagename
 	 * @param Entity  $entity
-	 * @param \Language $lang|null
+	 * @param Language $lang|null
 	 *
 	 * @return string
 	 */

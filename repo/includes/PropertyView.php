@@ -59,10 +59,7 @@ class PropertyView extends EntityView {
 
 		$html = parent::getInnerHtml( $propertyRevision, $lang, $editable );
 
-		$html .= $this->getHtmlForDataType(
-			$this->getDataType( $property ),
-			$lang,
-			$editable
+		$html .= $this->getHtmlForDataType( $this->getDataType( $property ), $lang
 		);
 
 		$html .= $this->getFooterHtml();
@@ -95,11 +92,10 @@ class PropertyView extends EntityView {
 	 *
 	 * @param DataType $dataType the data type to render
 	 * @param Language $lang the language to use for rendering.
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForDataType( DataType $dataType, Language $lang, $editable = true ) {
+	protected function getHtmlForDataType( DataType $dataType, Language $lang ) {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
