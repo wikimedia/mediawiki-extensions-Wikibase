@@ -49,9 +49,13 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 
 		$claims = array(
 			new Claim( new PropertyNoValueSnak( $propertyId ) ),
-			new Claim( new PropertySomeValueSnak( new PropertyId( 'P1' ) ) ),
 			new Statement( new PropertyNoValueSnak( $propertyId ) ),
+			new Claim( new PropertySomeValueSnak( new PropertyId( 'P1' ) ) ),
 		);
+
+		foreach ( $claims as $i => $claim ) {
+			$claim->setGuid( 'ClaimsSerializerTest$claim-' . $i );
+		}
 
 		$claimSerializer = new ClaimSerializer();
 
@@ -60,10 +64,10 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 			array(
 				'P42' => array(
 					$claimSerializer->getSerialized( $claims[0] ),
-					$claimSerializer->getSerialized( $claims[2] ),
+					$claimSerializer->getSerialized( $claims[1] ),
 				),
 				'P1' => array(
-					$claimSerializer->getSerialized( $claims[1] ),
+					$claimSerializer->getSerialized( $claims[2] ),
 				),
 			),
 		);

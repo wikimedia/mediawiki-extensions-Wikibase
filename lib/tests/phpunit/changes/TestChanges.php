@@ -146,7 +146,7 @@ final class TestChanges {
 			$propertyId = new EntityId( Property::ENTITY_TYPE, 23 );
 			$snak = new PropertyNoValueSnak( $propertyId );
 			$claim = new Claim( $snak );
-			$claim->setGuid( 'test-guid' );
+			$claim->setGuid( 'TEST$test-guid' );
 
 			$claims = new Claims( array( $claim ) );
 			$new->setClaims( $claims );

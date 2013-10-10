@@ -54,7 +54,8 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$claims = $item->getClaims();
-		$claimGuid = $claims[0]->getGuid();
+		$claim = reset( $claims );
+		$claimGuid = $claim->getGuid();
 		$rank = 1;
 
 		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank );
@@ -73,8 +74,9 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApplyStatementRank( $item, $changeOp, $expectedRank ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = new Claims( $item->getClaims() );
-		$rank = $claims[0]->getRank();
+		$claims = $item->getClaims();
+		$claim = reset( $claims );
+		$rank = $claim->getRank();
 		$this->assertEquals( $rank, $expectedRank, "No reference with expected hash" );
 	}
 
