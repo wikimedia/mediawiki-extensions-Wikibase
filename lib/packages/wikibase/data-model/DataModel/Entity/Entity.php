@@ -51,7 +51,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	/**
 	 * @since 0.3
 	 *
-	 * @var Claims|null
+	 * @var Claim[]|null
 	 */
 	protected $claims;
 
@@ -715,9 +715,14 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param Claim $claim
 	 */
 	public function addClaim( Claim $claim ) {
+		if ( $claim->getGuid() === null ) {
+			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
+		}
+
+		// TODO: ensure guid is valid for entity
+
 		$this->unstubClaims();
 		$this->claims[] = $claim;
-		// TODO: ensure guid is valid for entity
 	}
 
 	/**

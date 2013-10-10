@@ -16,7 +16,8 @@ namespace Wikibase;
 interface ClaimListAccess {
 
 	/**
-	 * Adds the provided claims to the list.
+	 * Adds the provided claims to the list. If a claim with the same GUID is
+	 * already in the list, it is replaced.
 	 *
 	 * @since 0.2
 	 *
@@ -25,7 +26,7 @@ interface ClaimListAccess {
 	public function addClaim( Claim $claim );
 
 	/**
-	 * Returns if the list contains a claim with the same hash as the provided claim.
+	 * Returns if the list contains a claim with the same GUID as the provided claim.
 	 *
 	 * @since 0.2
 	 *
@@ -36,7 +37,8 @@ interface ClaimListAccess {
 	public function hasClaim( Claim $claim );
 
 	/**
-	 * Removes the claim with the same hash as the provided claim if such a claim exists in the list.
+	 * Removes the claim with the same GUID as the provided claim if such a claim exists in the list.
+	 * If the claim is not in the list, the call has no effect.
 	 *
 	 * @since 0.2
 	 *

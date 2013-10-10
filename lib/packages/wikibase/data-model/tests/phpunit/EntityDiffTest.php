@@ -85,7 +85,10 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$claims = new \Wikibase\Claims( array( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$claim = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim->setGuid( 'EntityDiffTest$foo' );
+
+		$claims = new \Wikibase\Claims( array( $claim ) );
 
 		$diffOps['claim'] = $claims->getDiff( new \Wikibase\Claims() );
 

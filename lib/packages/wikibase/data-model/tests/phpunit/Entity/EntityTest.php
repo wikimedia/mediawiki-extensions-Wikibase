@@ -886,6 +886,9 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 			$claim1 = new Claim( new PropertySomeValueSnak( 42 ) ),
 		);
 
+		$claims[0]->setGuid( 'TEST$NVS42' );
+		$claims[1]->setGuid( 'TEST$SVS42' );
+
 		$entity->setClaims( new Claims( $claims ) );
 		$this->assertSameSize( $claims, $entity->getClaims(), "added some claims" );
 

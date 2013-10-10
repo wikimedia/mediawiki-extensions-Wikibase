@@ -97,6 +97,10 @@ class ItemTest extends EntityTest {
 			) )
 		);
 
+		foreach ( $claims as $i => $claim ) {
+			$claim->setGuid( "ItemTest\$claim-$i" );
+		}
+
 		return $claims;
 	}
 

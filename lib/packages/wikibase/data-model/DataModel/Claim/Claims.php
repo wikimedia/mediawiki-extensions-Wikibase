@@ -2,11 +2,14 @@
 
 namespace Wikibase;
 
+use ArrayObject;
+use Diff\Diff;
 use Diff\Differ;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\MapDiffer;
+use Hashable;
 use InvalidArgumentException;
 
 /**
@@ -14,9 +17,6 @@ use InvalidArgumentException;
  * @see Claims
  *
  * A claim (identified using it's GUID) can only be added once.
- *
- * TODO: if it turns out we do not need efficient lookups by guid after all
- * we can switch back to extending the simpler HashableObjectStorage.
  *
  * @since 0.1
  *
@@ -27,28 +27,31 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class Claims extends HashArray implements ClaimListAccess {
-
-	/**
-	 * Maps claim GUIDs to their offsets.
-	 *
-	 * @since 0.1
-	 *
-	 * @var array [ element hash (string) => element offset (string|int) ]
-	 */
-	protected $guidIndex = array();
+class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 
 	/**
 	 * Constructor.
+	 *
 	 * @see GenericArrayObject::__construct
 	 *
 	 * @since 0.3
 	 *
 	 * @param null|array $input
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct( $input = null ) {
-		$this->acceptDuplicates = true;
-		parent::__construct( $input );
+		parent::__construct( array() );
+
+		if ( $input !== null ) {
+			if ( !is_array( $input) && !( $input instanceof \Traversable ) ) {
+				throw new InvalidArgumentException( '$input must be traversable' );
+			}
+
+			foreach ( $input as $claim ) {
+				$this->append( $claim );
+			}
+		}
 	}
 
 	/**
@@ -63,6 +66,45 @@ class Claims extends HashArray implements ClaimListAccess {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @param string $guid
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return string
+	 */
+	protected function getGuidKey( $guid ) {
+		if ( !is_string( $guid ) ) {
+			throw new InvalidArgumentException( 'Expected a GUID string' );
+		}
+
+		$key = strtoupper( $guid );
+		return $key;
+	}
+
+	/**
+	 * @param Claim $claim
+	 *
+	 * @since 0.5
+	 *
+	 *
+	 * @param Claim $claim
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return string
+	 */
+	protected function getClaimKey( Claim $claim ) {
+		$guid = $claim->getGuid();
+
+		if ( $guid === null ) {
+			throw new InvalidArgumentException( 'Can\'t handle claims with no GUID set!' );
+		}
+
+		$key = $this->getGuidKey( $guid );
+		return $key;
+	}
+
+	/**
 	 * @see ClaimListAccess::addClaim
 	 *
 	 * @since 0.1
@@ -70,7 +112,25 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @param Claim $claim
 	 */
 	public function addClaim( Claim $claim ) {
-		$this->append( $claim );
+		$key = $this->getClaimKey( $claim );
+		$this->offsetSet( $key, $claim );
+	}
+
+	/**
+	 * @see ArrayAccess::append
+	 *
+	 * @since 0.5
+	 *
+	 * @param Claim $claim
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function append( $claim ) {
+		if ( !( $claim instanceof Claim ) ) {
+			throw new InvalidArgumentException( '$claim must be a Claim instances' );
+		}
+
+		$this->addClaim( $claim );
 	}
 
 	/**
@@ -83,7 +143,14 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @return boolean
 	 */
 	public function hasClaim( Claim $claim ) {
-		return $this->hasElement( $claim );
+		$guid = $claim->getGuid();
+
+		if ( $guid === null ) {
+			return false;
+		}
+
+		$key = $this->getGuidKey( $guid );
+		return $this->offsetExists( $key );
 	}
 
 	/**
@@ -94,7 +161,17 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @param Claim $claim
 	 */
 	public function removeClaim( Claim $claim ) {
-		$this->removeElement( $claim );
+		$guid = $claim->getGuid();
+
+		if ( $guid === null ) {
+			return;
+		}
+
+		$key = $this->getGuidKey( $guid );
+
+		if ( $this->offsetExists( $key ) ) {
+			$this->offsetUnset( $key );
+		}
 	}
 
 	/**
@@ -107,7 +184,7 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @return boolean
 	 */
 	public function hasClaimWithGuid( $claimGuid ) {
-		return array_key_exists( $claimGuid, $this->guidIndex );
+		return $this->offsetExists( $claimGuid );
 	}
 
 	/**
@@ -118,7 +195,9 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @param string $claimGuid
 	 */
 	public function removeClaimWithGuid( $claimGuid ) {
-		$this->offsetUnset( $this->guidIndex[$claimGuid] );
+		if ( $this->offsetExists( $claimGuid ) ) {
+			$this->offsetUnset( $claimGuid );
+		}
 	}
 
 	/**
@@ -131,12 +210,75 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @return Claim|null
 	 */
 	public function getClaimWithGuid( $claimGuid ) {
-		if ( $this->hasClaimWithGuid( $claimGuid ) ) {
-			return $this->offsetGet( $this->guidIndex[$claimGuid] );
-		}
-		else {
+		if ( $this->offsetExists( $claimGuid ) ) {
+			return $this->offsetGet( $claimGuid );
+		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @see ArrayAccess::offsetExists
+	 *
+	 * @param string $guid
+	 *
+	 * @return bool
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function offsetExists( $guid ) {
+		$key = $this->getGuidKey( $guid );
+		return parent::offsetExists( $key );
+	}
+
+	/**
+	 * @see ArrayAccess::offsetGet
+	 *
+	 * @param string $guid
+	 *
+	 * @return Claim
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function offsetGet( $guid ) {
+		$key = $this->getGuidKey( $guid );
+		return parent::offsetGet( $key );
+	}
+
+	/**
+	 * @see ArrayAccess::offsetSet
+	 *
+	 * @param string $guid
+	 * @param Claim $claim
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function offsetSet( $guid, $claim ) {
+		if ( !is_object( $claim ) || !( $claim instanceof Claim ) ) {
+			throw new InvalidArgumentException( 'Expected a Claim instance' );
+		}
+
+		$claimKey = $this->getClaimKey( $claim );
+
+		if ( $guid !== null ) {
+			$guidKey = $this->getGuidKey( $guid );
+
+			if ( $guidKey !== $claimKey ) {
+				throw new InvalidArgumentException( 'The key must be the claim\'s GUID.' );
+			}
+		}
+
+		parent::offsetSet( $claimKey, $claim );
+	}
+
+	/**
+	 * @see ArrayAccess::offsetUnset
+	 *
+	 * @param string $guid
+	 */
+	public function offsetUnset( $guid ) {
+		$key = $this->getGuidKey( $guid );
+		parent::offsetUnset( $key );
 	}
 
 	/**
@@ -147,7 +289,9 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @return string[]
 	 */
 	public function getGuids() {
-		return array_keys( $this->guidIndex );
+		return array_map( function ( Claim $claim ) {
+			return $claim->getGuid();
+		}, iterator_to_array( $this ) );
 	}
 
 	/**
@@ -188,104 +332,71 @@ class Claims extends HashArray implements ClaimListAccess {
 
 		/* @var Claim $claim */
 		foreach ( $this as $claim ) {
-			$snaks[] = $claim->getMainSnak();
+			$guid = $claim->getGuid();
+			$snaks[$guid] = $claim->getMainSnak();
 		}
 
 		return $snaks;
 	}
 
 	/**
-	 * @see GenericArrayObject::preSetElement
+	 * Returns a map from GUIDs to claim hashes.
 	 *
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param int|string $index
-	 * @param Claim $claim
-	 *
-	 * @return boolean
+	 * @return string[]
 	 */
-	protected function preSetElement( $index, $claim ) {
-		$shouldSet = parent::preSetElement( $index, $claim );
+	public function getHashes() {
+		$snaks = array();
 
-		if ( $shouldSet ) {
-			$this->guidIndex[$claim->getGuid()] = $index;
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			$guid = $claim->getGuid();
+			$snaks[$guid] = $claim->getHash();
 		}
 
-		return $shouldSet;
-	}
-
-	/**
-	 * @see ArrayObject::offsetUnset()
-	 *
-	 * @since 0.3
-	 *
-	 * @param mixed $index
-	 */
-	public function offsetUnset( $index ) {
-		if ( $this->offsetExists( $index ) ) {
-			/**
-			 * @var Claim $claim
-			 */
-			$claim = $this->offsetGet( $index );
-
-			unset( $this->guidIndex[$claim->getGuid()] );
-			parent::offsetUnset( $index );
-		}
+		return $snaks;
 	}
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param Claims $claims
-	 * @param Differ|null $differ
+	 * @param Differ|null $differ for building a diff of two GUID-to-hash maps.
 	 *
-	 * @return \Diff\Diff
+	 * @return Diff
 	 * @throws InvalidArgumentException
 	 */
 	public function getDiff( Claims $claims, Differ $differ = null ) {
-		assert( $this->indicesAreUpToDate() );
-		assert( $claims->indicesAreUpToDate() );
-
 		if ( $differ === null ) {
 			$differ = new MapDiffer();
 		}
 
-		$sourceHashes = array();
-		$targetHashes = array();
+		$sourceHashes = $this->getHashes();
+		$targetHashes = $claims->getHashes();
 
-		/**
-		 * @var Claim $claim
-		 */
-		foreach ( $this as $claim ) {
-			$sourceHashes[$claim->getGuid()] = $claim->getHash();
-		}
+		$diff = new Diff( array(), true );
 
-		foreach ( $claims as $claim ) {
-			$targetHashes[$claim->getGuid()] = $claim->getHash();
-		}
-
-		$diff = new \Diff\Diff( array(), true );
-
-		foreach ( $differ->doDiff( $sourceHashes, $targetHashes ) as $diffOp ) {
+		foreach ( $differ->doDiff( $sourceHashes, $targetHashes ) as $guid => $diffOp ) {
 			if ( $diffOp instanceof DiffOpChange ) {
-				$oldClaim = $this->getByElementHash( $diffOp->getOldValue() );
-				$newClaim = $claims->getByElementHash( $diffOp->getNewValue() );
+				$oldClaim = $this->getClaimWithGuid( $guid );
+				$newClaim = $claims->getClaimWithGuid( $guid );
 
 				assert( $oldClaim instanceof Claim );
 				assert( $newClaim instanceof Claim );
 				assert( $oldClaim->getGuid() === $newClaim->getGuid() );
 
-				$diff[$oldClaim->getGuid()] = new DiffOpChange( $oldClaim, $newClaim );
+				$diff[$guid] = new DiffOpChange( $oldClaim, $newClaim );
 			}
 			elseif ( $diffOp instanceof DiffOpAdd ) {
-				$claim = $claims->getByElementHash( $diffOp->getNewValue() );
+				$claim = $claims->getClaimWithGuid( $guid );
 				assert( $claim instanceof Claim );
-				$diff[$claim->getGuid()] = new DiffOpAdd( $claim );
+				$diff[$guid] = new DiffOpAdd( $claim );
 			}
 			elseif ( $diffOp instanceof DiffOpRemove ) {
-				$claim = $this->getByElementHash( $diffOp->getOldValue() );
+				$claim = $this->getClaimWithGuid( $guid );
 				assert( $claim instanceof Claim );
-				$diff[$claim->getGuid()] = new DiffOpRemove( $claim );
+				$diff[$guid] = new DiffOpRemove( $claim );
 			}
 			else {
 				throw new InvalidArgumentException( 'Invalid DiffOp type cannot be handled' );
@@ -295,4 +406,31 @@ class Claims extends HashArray implements ClaimListAccess {
 		return $diff;
 	}
 
+	/**
+	 * Returns a hash based on the value of the object.
+	 * The hash is based on the hashes of the claims contained,
+	 * with the order of claims considered significant.
+	 *
+	 * @since 0.5
+	 *
+	 * @return string
+	 */
+	public function getHash() {
+		$hash = sha1( '' );
+
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			$hash = sha1( $hash . $claim->getHash() );
+		}
+
+		return $hash;
+	}
+
+	/**
+	 * Returns true if this list contains no claims
+	 */
+	public function isEmpty() {
+		$iter = $this->getIterator();
+		return !$iter->valid();
+	}
 }
