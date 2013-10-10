@@ -8,7 +8,6 @@ use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Property;
 use Wikibase\Serializers\EntityRevisionSerializationOptions;
 use Wikibase\Serializers\EntityRevisionSerializer;
@@ -113,21 +112,44 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
+	 * @dataProvider newForFrontendStoreArgumentsProvider
 	 * @since 0.5
 	 */
 	public function testNewForFrontendStore() {
-		$titleLookup = $this->getTitleLookupMock();
+		$serializer = call_user_func_array(
+				'Wikibase\Serializers\EntityRevisionSerializer::newForFrontendStore',
+				func_get_args()
+		);
+		$this->assertInstanceOf( $this->getClass(), $serializer );
+	}
 
+	/**
+	 * Provides function arguments which are expected to create a valid instance when provided to
+	 * EntityRevisionSerializer::newForFrontendStore.
+	 *
+	 * @since 0.5
+	 *
+	 * @return array[]
+	 */
+	public function newForFrontendStoreArgumentsProvider() {
+		$titleLookup = $this->getTitleLookupMock();
 		$fallbackChain = new LanguageFallbackChain( array(
 			LanguageWithConversion::factory( 'en' )
 		) );
 
-		$serializer = EntityRevisionSerializer::newForFrontendStore(
+		$cases = array();
+
+		$cases[] = array(
 			$titleLookup,
 			'en',
 			$fallbackChain
 		);
 
-		$this->assertInstanceOf( $this->getClass(), $serializer );
+		$cases[] = array(
+			$titleLookup,
+			'de'
+		);
+
+		return $cases;
 	}
 }
