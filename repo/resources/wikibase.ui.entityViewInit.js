@@ -77,24 +77,12 @@
 		} );
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
-			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
-				usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) ),
-				unserializerFactory = new wb.serialization.SerializerFactory(),
-				entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
-
-			// unserializer for fetched content whose content is a wb.Entity:
-			var fetchedEntityUnserializer = unserializerFactory.newUnserializerFor(
-				wb.store.FetchedContent, {
-					contentUnserializer: entityUnserializer
-				}
-			);
+			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) );
+			var unserializerFactory = new wb.serialization.SerializerFactory();
+			var entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
 
 			wb.entity = entityUnserializer.unserialize( entityJSON );
 			entityJSON = null;
-
-			$.each( usedEntitiesJSON, function( id, fetchedEntityJSON ) {
-				wb.fetchedEntities[ id ] = fetchedEntityUnserializer.unserialize( fetchedEntityJSON );
-			} );
 
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
