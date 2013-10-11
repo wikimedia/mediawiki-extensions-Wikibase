@@ -98,11 +98,6 @@
 			'Suggestion menu gets resized.'
 		);
 
-		assert.ok(
-			suggester._getScrollbarWidth() > 0,
-			'Detected scrollbar width.'
-		);
-
 		suggester.destroy();
 		$input.remove();
 

@@ -219,6 +219,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.util.getscrollbarwidth.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.util/jquery.util.getscrollbarwidth.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.util.getscrollbarwidth',
+			),
+		),
+
 	);
 
 } );

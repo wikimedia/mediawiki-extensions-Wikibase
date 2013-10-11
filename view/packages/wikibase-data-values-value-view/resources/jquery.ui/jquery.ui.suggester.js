@@ -82,6 +82,7 @@
  * @dependency jquery.eachchange
  * @dependency jquery.ui.autocomplete
  * @dependency jquery.util.adaptlettercase
+ * @dependency jquery.util.getscrollbarwidth
  */
 ( function( $ ) {
 	'use strict';
@@ -338,7 +339,7 @@
 					for ( var i = 0; i < this.options.maxItems; i++ ) {
 						fixedHeight += $( $menu.children()[i] ).height();
 					}
-					$menu.width( $menu.width() + this._getScrollbarWidth() );
+					$menu.width( $menu.width() + $.util.getscrollbarwidth() );
 					$menu.height( fixedHeight );
 					$menu.css( 'overflowY', 'scroll' );
 				}
@@ -453,25 +454,6 @@
 				height += $( this ).height();
 			} );
 			return height;
-		},
-
-		/**
-		 * Calculates the width of the browser's scrollbar.
-		 *
-		 * @returns {Number} scrollbar width
-		 */
-		_getScrollbarWidth: function() {
-			var $inner = $( '<p/>', { style: 'width:100px;height:100px' } ),
-				$outer = $( '<div/>', {
-					style: 'position:absolute;top:-1000px;left:-1000px;visibility:hidden;'
-						+ 'width:50px;height:50px;overflow:hidden;'
-				} ).append( $inner ).appendTo( $( 'body' ) ),
-				majorWidth = $outer[0].clientWidth;
-
-			$outer.css( 'overflow', 'scroll' );
-			var minorWidth = $outer[0].clientWidth;
-			$outer.remove();
-			return ( majorWidth - minorWidth );
 		},
 
 		/**

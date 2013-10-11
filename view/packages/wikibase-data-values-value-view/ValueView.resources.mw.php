@@ -101,6 +101,7 @@ return call_user_func( function() {
 				'jquery.ui.autocomplete',
 				'jquery.ui.widget',
 				'jquery.util.adaptlettercase',
+				'jquery.util.getscrollbarwidth',
 			)
 		),
 
@@ -172,6 +173,12 @@ return call_user_func( function() {
 		'jquery.util.adaptlettercase' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.util/jquery.util.adaptlettercase.js',
+			),
+		),
+
+		'jquery.util.getscrollbarwidth' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.util/jquery.util.getscrollbarwidth.js',
 			),
 		),
 
