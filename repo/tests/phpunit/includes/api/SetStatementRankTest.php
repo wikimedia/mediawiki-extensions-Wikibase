@@ -88,6 +88,11 @@ class SetStatementRankTest extends WikibaseApiTestCase {
 	}
 
 	public function testRequests() {
+		//TODO REMOVE ONCE ENABLED
+		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
+			$this->markTestSkipped( 'WB_EXPERIMENTAL_FEATURES are not enabled so this module is not enabled..' );
+		}
+
 		$ranks = ClaimSerializer::getRanks();
 
 		foreach ( $this->statementProvider() as $statement ) {
@@ -202,6 +207,11 @@ class SetStatementRankTest extends WikibaseApiTestCase {
 	 * @dataProvider invalidClaimProvider
 	 */
 	public function testInvalidClaimGuid( $claimGuid ) {
+		//TODO REMOVE ONCE ENABLED
+		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
+			$this->markTestSkipped( 'WB_EXPERIMENTAL_FEATURES are not enabled so this module is not enabled..' );
+		}
+
 		$ranks = ClaimSerializer::getRanks();
 
 		$params = array(
