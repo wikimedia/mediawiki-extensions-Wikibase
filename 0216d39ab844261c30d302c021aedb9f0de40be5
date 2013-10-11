@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_aeda8d46",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-11T14:44:11Z",
+      "side": 1,
+      "message": "$editable \u003d true should actually be here. it determins (among other things) whether [edit]  links should be generated. That it is currently ignored sucks, but that doesn\u0027t mean the parameter should be removed.",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_aeb36d08",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-11T14:44:11Z",
+      "side": 1,
+      "message": "You don\u0027t think the language should be passed through?\nAlso, this is actually a good example for a bit of code that should be skipped if $editable \u003d\u003d false.",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_0ecb9974",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-11T14:44:11Z",
+      "side": 1,
+      "message": "I suppose we could have a default language (and/or fallback chain() as a member of EntityView that would be used for most HTML generation. The only exception being stuff used in the \"in other languages\" section.",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_4ec5915c",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-11T14:44:11Z",
+      "side": 1,
+      "message": "Again, $editable should be here and be used to enable/disable edit links / widgets. Or am I missing something?",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_8ea789bf",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-11T14:44:11Z",
+      "side": 1,
+      "message": "should be skipped if $editable \u003d\u003d false",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
