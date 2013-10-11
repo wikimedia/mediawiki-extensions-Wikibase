@@ -127,6 +127,10 @@
 				this.source = this._filterArray;
 			}
 
+			// Get rid of autocomplete's native blur handling resetting the input (causing the
+			// auto-completed string to be dropped).
+			this.menu.option( 'blur', null );
+
 			/**
 			 * @see ui.menu.refresh
 			 */
