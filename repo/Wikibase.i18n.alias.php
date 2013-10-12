@@ -283,7 +283,7 @@ $specialPageAliases['zh-hans'] = array(
 	'DispatchStats' => array( '发送统计' ),
 	'EntityData' => array( '实体数据' ),
 	'NewItem' => array( '创建项' ),
-	'NewProperty' => array( '新建属性' ),
+	'NewProperty' => array( '新属性' ),
 	'ItemByTitle' => array( '项（按标题）' ),
 	'ItemDisambiguation' => array( '项消歧义' ),
 	'ListDatatypes' => array( '数据类型列表' ),
@@ -292,6 +292,7 @@ $specialPageAliases['zh-hans'] = array(
 	'SetAliases' => array( '设置别名' ),
 	'SetSiteLink' => array( '设置网站链接' ),
 	'EntitiesWithoutLabel' => array( '无标签实体' ),
+	'EntitiesWithoutDescription' => array( '无说明实体' ),
 	'ItemsWithoutSitelinks' => array( '无网站链接项' ),
 	'MyLanguageFallbackChain' => array( '我的语言备选链' ),
 );
