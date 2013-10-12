@@ -2,8 +2,16 @@
 
 namespace Wikibase\Test;
 
+use DataValues\GlobeCoordinateValue;
+use DataValues\LatLongValue;
+use DataValues\NumberValue;
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
+use Wikibase\SnakObject;
 
 /**
  * Unit tests for classes that implement Wikibase\Snak.
@@ -28,18 +36,18 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 
 		$id42 = new PropertyId( 'p42' );
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( $id42 );
+		$snaks[] = new PropertyNoValueSnak( $id42 );
 
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( $id42 );
+		$snaks[] = new PropertySomeValueSnak( $id42 );
 
 		$values = array();
 
-		$values[] = new \DataValues\StringValue( 'Ohi there!' );
-		$values[] = new \DataValues\NumberValue( 42 );
-		$values[] = new \DataValues\QuantityValue( 4.2, 'm', 1 );
+		$values[] = new StringValue( 'Ohi there!' );
+		$values[] = new NumberValue( 42 );
+		$values[] = new GlobeCoordinateValue( new LatLongValue( 4.2, 4.2 ), 1 );
 
 		foreach ( $values as $value ) {
-			$snaks[] = new \Wikibase\PropertyValueSnak( $id42, $value );
+			$snaks[] = new PropertyValueSnak( $id42, $value );
 		}
 
 		$argLists = array();
@@ -105,18 +113,18 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 	public function testEqualsMoar() {
 		$id42 = new PropertyId( 'p42' );
 
-		$snak = new \Wikibase\PropertyNoValueSnak( $id42 );
+		$snak = new PropertyNoValueSnak( $id42 );
 
-		$this->assertFalse( $snak->equals( new \Wikibase\PropertySomeValueSnak( $id42 ) ) );
+		$this->assertFalse( $snak->equals( new PropertySomeValueSnak( $id42 ) ) );
 
-		$this->assertFalse( $snak->equals( new \Wikibase\PropertyValueSnak(
+		$this->assertFalse( $snak->equals( new PropertyValueSnak(
 			$id42,
-			new \DataValues\StringValue( 'Ohi there!' )
+			new StringValue( 'Ohi there!' )
 		) ) );
 
 		$id43 = new PropertyId( 'p43' );
 
-		$this->assertFalse( $snak->equals( new \Wikibase\PropertyNoValueSnak( $id43 ) ) );
+		$this->assertFalse( $snak->equals( new PropertyNoValueSnak( $id43 ) ) );
 	}
 
 	/**
@@ -130,7 +138,7 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $array, 'toArray should return array' );
 
 		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
-			$copy = \Wikibase\SnakObject::newFromArray( $data );
+			$copy = SnakObject::newFromArray( $data );
 
 			$this->assertInstanceOf( '\Wikibase\Snak', $copy, 'newFromArray should return object implementing Snak' );
 			$this->assertEquals( $snak->getHash(), $copy->getHash(), 'newFromArray should return object with same Hash used previously' );
