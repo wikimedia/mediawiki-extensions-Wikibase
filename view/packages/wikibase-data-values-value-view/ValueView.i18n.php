@@ -345,17 +345,24 @@ $messages['et'] = array(
 
 /** Persian (فارسی)
  * @author Alireza
+ * @author Rtemis
  */
 $messages['fa'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'دستکاری داده "$1" فعلا امکان پذیر نیست', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.', # Fuzzy
+	'valueview-expert-advancedadjustments' => 'تنظیم‌های پیشرفته',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'پشتیبانی از داده "$1" فعلا امکان پذیر نیست',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.',
 	'valueview-expert-emptyvalue-empty' => 'خالی',
+	'valueview-expert-globecoordinateinput-precision' => 'دقت:',
 	'valueview-expert-timevalue-calendar-gregorian' => 'میلادی',
 	'valueview-expert-timevalue-calendar-julian' => 'ژولینی',
 	'valueview-expert-timeinput-precision' => 'دقت:',
 	'valueview-expert-timeinput-calendar' => 'تقویم:',
 	'valueview-expert-timeinput-calendarhint-gregorian' => '(گاه‌شماری میلادی)',
 	'valueview-expert-timeinput-calendarhint-julian' => '(گاه‌شماری ژولینی)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr؛ تبدیل به میلادی',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr؛ تبدیل به ژولینی',
+	'valueview-preview-label' => 'پیش‌نمایش:',
+	'valueview-preview-novalue' => 'مقدار وارد شده معتبر نمی‌باشد',
 	'valueview-listrotator-auto' => 'خودکار',
 );
 
