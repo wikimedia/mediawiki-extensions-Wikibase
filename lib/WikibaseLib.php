@@ -79,7 +79,12 @@ if ( !defined( 'VALUEVIEW_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../DataValues/ValueView/ValueView.php' );
 }
 
-// Include the ValueView library if that hasn't been done yet.
+// Include the ValueView library if Wikibase dependencies are installed via composer.
+if ( !defined( 'VALUEVIEW_VERSION' ) ) {
+	@include_once( __DIR__ . '/../vendor/data-values/data-values/ValueView/ValueView.php' );
+}
+
+// Include the ValueView library if that hasn't been done yet. (e.g. using Wikibase build)
 if ( !defined( 'VALUEVIEW_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../../data-values/data-values/ValueView/ValueView.php' );
 }
