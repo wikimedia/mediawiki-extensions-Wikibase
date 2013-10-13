@@ -61,7 +61,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		$this->switchForm( $language, $label );
 
 		// Display the result set
-		if ( isset( $language ) && isset( $label ) ) {
+		if ( isset( $language ) && isset( $label ) && $label !== '' ) {
 			// TODO: should search over aliases as well, not just labels
 			$itemContents = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromLabel(
 				$language,
