@@ -1333,7 +1333,7 @@ $messages['et'] = array(
  */
 $messages['fa'] = array(
 	'wikibase-client-desc' => 'کارخواه برای افزونهٔ ویکی‌بیس',
-	'specialpages-group-wikibaseclient' => 'مشتری ویکی‌داده',
+	'specialpages-group-wikibaseclient' => 'کارخواه ویکی‌داده',
 	'tooltip-t-wikibase' => 'پیوند به آیتم متصل به مخزن داده',
 	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.',
 	'wikibase-after-page-move-queued' => '[$1 آیتم ویکی‌داده] مرتبط با این صفحه به زودی به طور خودکار به‌روزرسانی می‌شود.',
