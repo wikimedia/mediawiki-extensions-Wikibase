@@ -51,6 +51,8 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 			array( 'http', 'http://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
 			array( 'https', 'https://acme.com' ),
 			array( 'https', 'https://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
+			array( 'ftp', 'ftp://acme.com' ),
+			array( 'ftp', 'ftp://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
 			array( 'mailto', 'mailto:foo@bar' ),
 			array( 'mailto', 'mailto:Eve.Elder+spam@some.place.else?Subject=test' ),
 			array( 'any', 'http://acme.com' ),
@@ -73,6 +75,11 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 			array( 'https', 'https://' ),
 			array( 'https', 'https://acme.com/foo' . "\n" . 'bar' ),
 			array( 'https', '*https://acme.com/foo' ),
+			array( 'ftp', 'yadda' ),
+			array( 'ftp', 'ftp:' ),
+			array( 'ftp', 'ftp://' ),
+			array( 'ftp', 'ftp://acme.com/foo' . "\n" . 'bar' ),
+			array( 'ftp', '*ftp://acme.com/foo' ),
 			array( 'mailto', 'yadda' ),
 			array( 'mailto', 'mailto:stuff' ),
 			array( 'mailto', 'mailto:james@thingy' . "\n" . '.com' ),
@@ -104,6 +111,7 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertNotNull( $fatory->getValidator( 'http' ), 'http' );
 		$this->assertNotNull( $fatory->getValidator( 'https' ), 'https' );
+		$this->assertNotNull( $fatory->getValidator( 'ftp' ), 'ftp' );
 		$this->assertNotNull( $fatory->getValidator( 'mailto' ), 'mailto' );
 
 		$this->assertNull( $fatory->getValidator( 'notaprotocol' ), 'notaprotocol' );
@@ -112,10 +120,10 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 	public function testGetValidators() {
 		$fatory = new UrlSchemeValidators();
 
-		$schemes = array( 'http', 'https', 'dummy' );
+		$schemes = array( 'http', 'https', 'ftp', 'dummy' );
 		$validators = $fatory->getValidators( $schemes );
 
-		$this->assertEquals( array( 'http', 'https' ), array_keys( $validators ) );
+		$this->assertEquals( array( 'http', 'https', 'ftp' ), array_keys( $validators ) );
 
 		foreach ( $validators as $validator ) {
 			$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );

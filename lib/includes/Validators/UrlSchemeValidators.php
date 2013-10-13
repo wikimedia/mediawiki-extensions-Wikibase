@@ -76,6 +76,15 @@ class UrlSchemeValidators {
 	}
 
 	/**
+	 * Returns a ValueValidator that will match URLs using the FTP scheme.
+	 *
+	 * @return RegexValidator
+	 */
+	public function ftp() {
+		return $this->httpish( 'ftp' );
+	}
+
+	/**
 	 * Returns a ValueValidator that will match URLS using the mailto scheme.
 	 *
 	 * @return RegexValidator
