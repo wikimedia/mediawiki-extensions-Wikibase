@@ -396,13 +396,8 @@ final class RepoHooks {
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		wfProfileIn( __METHOD__ );
 
-		$preferences['wb-languages'] = array(
-			'type' => 'multiselect',
-			'usecheckboxes' => false,
-			'label-message' => 'wikibase-setting-languages',
-			'options' => $preferences['language']['options'], // all languages available in 'language' selector
-			'section' => 'personal/i18n',
-			'prefix' => 'wb-languages-',
+		$preferences['wb-acknowledgedcopyrightversion'] = array(
+			'type' => 'api'
 		);
 
 		wfProfileOut( __METHOD__ );
