@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_b2c3c859",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-13T23:55:54Z",
+      "side": 1,
+      "message": "This single var thing is really fucked up. $claimGroupLabel is defined before the below check, which makes no sense whatsoever.\n\nThe whole body of the loop can be in its own function. The part that gets executed only when $claimNameSection.length, can be in its own function as well, which is then invoked from a simple if in the former one.",
+      "revId": "6ca34e4d2e959598510f02ae059085953af824d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
