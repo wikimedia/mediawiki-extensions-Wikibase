@@ -39,7 +39,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $q8 );
 
-		$urlSchemes = array( 'http', 'https', 'mailto' );
+		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
 
 		$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes );
 		$dataTypeFactory = new DataTypeFactory( $builders->getDataTypeBuilders() );
@@ -143,7 +143,8 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'url', new NumberValue( 7 ), false, 'StringValue expected' ),
 
 			array( 'url', new StringValue( 'http://acme.com' ), true, 'Simple HTTP URL' ),
-			array( 'url', new StringValue( 'https://acme.com/' ), true, 'Simple HTTPS URL' ),
+			array( 'url', new StringValue( 'https://acme.com' ), true, 'Simple HTTPS URL' ),
+			array( 'url', new StringValue( 'ftp://acme.com' ), true, 'Simple FTP URL' ),
 			array( 'url', new StringValue( 'http://acme.com/foo/bar?some=stuff#fragment' ), true, 'Complex HTTP URL' ),
 
 			// evil url
