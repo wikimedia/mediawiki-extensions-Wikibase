@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_b20028af",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-13T23:36:25Z",
+      "side": 1,
+      "message": "let me count... this is... 5 stars code!",
+      "revId": "fd45ed638a6a86cb9689946701f3b9b20f44f0dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
