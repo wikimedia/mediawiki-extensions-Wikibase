@@ -178,12 +178,10 @@
 			} );
 		} );
 
-		if (
-			mw.config.get( 'wgRestrictionEdit' ) !== null &&
+		if ( mw.config.get( 'wgRestrictionEdit' ) !== null &&
 			mw.config.get( 'wgRestrictionEdit' ).length === 1
 		) { // editing is restricted
-			if (
-				$.inArray(
+			if ( $.inArray(
 					mw.config.get( 'wgRestrictionEdit' )[0],
 					mw.config.get( 'wgUserGroups' )
 				) === -1
@@ -225,7 +223,8 @@
 			// Display anonymous user edit warning:
 			if ( mw.user && mw.user.isAnon()
 				&& $.find( '.mw-notification-content' ).length === 0
-				&& !$.cookie( 'wikibase-no-anonymouseditwarning' ) ) {
+				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
+			) {
 				mw.notify(
 					mw.msg( 'wikibase-anonymouseditwarning',
 						mw.msg( 'wikibase-entity-' + wb.entity.getType() )
@@ -239,9 +238,12 @@
 				var copyRight = mw.config.get( 'wbCopyright' ),
 					copyRightVersion = copyRight.version,
 					copyRightMessageHtml = copyRight.messageHtml,
-					cookieKey = 'wikibase.acknowledgedcopyrightversion';
+					cookieKey = 'wikibase.acknowledgedcopyrightversion',
+					optionsKey = 'wb-acknowledgedcopyrightversion';
 
-				if( copyRightVersion === $.cookie( cookieKey ) ) {
+				if ( $.cookie( cookieKey ) === copyRightVersion ||
+					mw.user.options.get( optionsKey ) === copyRightVersion
+				) {
 					return;
 				}
 
@@ -260,7 +262,8 @@
 					|| $activeToolbar.data( 'toolbar' );
 
 				var $hideMessage = $( '<a/>', {
-						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
+						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' ),
+						href: 'javascript:;'
 					} ).appendTo( $message );
 
 				var gravity = ( options && options.wbCopyrightWarningGravity )
@@ -284,7 +287,24 @@
 				$hideMessage.on( 'click', function( event ) {
 					event.preventDefault();
 					$messageAnchor.data( 'wbtooltip' ).degrade( true );
-					$.cookie( cookieKey, copyRightVersion, { 'expires': 365*3, 'path': '/' } );
+					if ( mw.user.isAnon() ) {
+						$.cookie( cookieKey, copyRightVersion, { 'expires': 365 * 3, 'path': '/' } );
+					} else {
+						var api = new mw.Api();
+						api.get( {
+							'action': 'tokens',
+							'type': 'options'
+						}, function( data ) {
+							if ( data.tokens && data.tokens.optionstoken ) {
+								api.post( {
+									'action': 'options',
+									'token': data.tokens.optionstoken,
+									'optionname': optionsKey,
+									'optionvalue': copyRightVersion
+								} );
+							}
+						} );
+					}
 				} );
 
 				$messageAnchor.data( 'wbtooltip' ).show();
