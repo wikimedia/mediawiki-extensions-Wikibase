@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_b248285e",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-10-13T20:52:39Z",
+      "side": 1,
+      "message": "WikibaseLib.default.php disagrees!\n\n// Supported types include \u0027http\u0027, \u0027https\u0027, \u0027ftp\u0027, and \u0027mailto\u0027.\n\u0027urlSchemes\u0027 \u003d\u003e array( \u0027http\u0027, \u0027https\u0027 ),",
+      "revId": "8b4e31eb45d04424f6f995e3c29d5d041e626efc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
