@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_1211f404",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-13T23:32:43Z",
+      "side": 1,
+      "message": "If you want to remove the code, then remove it. No random commented out stuff lying around master...",
+      "revId": "f380ad10ee57ef41cd6bf58679dbadea7754418e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
