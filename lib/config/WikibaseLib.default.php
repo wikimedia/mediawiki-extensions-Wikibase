@@ -121,7 +121,7 @@ return call_user_func( function() {
 		),
 
 		// URL schemes allowed for values of the URL type.
-		// Supported types include 'http', 'https', and 'mailto'.
+		// Supported types include 'http', 'https', 'ftp', and 'mailto'.
 		'urlSchemes' => array( 'http', 'https' ),
 	);
 
