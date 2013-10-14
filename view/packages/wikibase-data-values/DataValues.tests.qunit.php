@@ -58,7 +58,8 @@ return call_user_func( function() {
 
 		'dataValues.util.tests' => array(
 			'scripts' => array(
-				"$bp/dataValues.util.inherit.tests.js",
+				"$bp/util.inherit/inherit.testWithDifferentArguments.js",
+				"$bp/util.inherit/inherit.testConstructorNames.js",
 				"$bp/dataValues.util.Notifier.tests.js",
 			),
 			'dependencies' => array(
