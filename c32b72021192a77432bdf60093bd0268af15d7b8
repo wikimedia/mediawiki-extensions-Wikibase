@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0932edd2_9b589f55",
+        "filename": "docs/json.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-14T17:21:39Z",
+      "side": 1,
+      "message": "Or infact just dont say \n\n\u0027This document describes the canonical JSON format used to represent Wikibase entities in the API\u0027\n\ninstead say this is what the serializers output.",
+      "parentUuid": "0932edd2_5b5e2743",
+      "revId": "c32b72021192a77432bdf60093bd0268af15d7b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946a543_47068687",
         "filename": "docs/json.wiki",
         "patchSetId": 2
