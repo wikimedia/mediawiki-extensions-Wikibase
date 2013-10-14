@@ -28,8 +28,8 @@ module ReferencePage
   link(:reference1ValueLink2, :xpath => "//div[contains(@class, 'wb-referenceview')][1]/div[contains(@class, 'wb-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
   # TODO: could this lead to problems? for CM & item type properties there is an additional "a" element around the textbox; this is not the case for string type properies
   #text_area(:referenceValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
-  text_area(:referenceValueInput, :xpath => "//div[contains(@class, 'wb-claimlist')]//textarea[contains(@class, 'valueview-input')]", :index => 0)
-  text_area(:referenceValueInput2, :xpath => "//div[contains(@class, 'wb-claimlist')]//textarea[contains(@class, 'valueview-input')]", :index => 1)
+  text_area(:referenceValueInput, :xpath => "//div[contains(@class, 'wb-claimlistview')]//textarea[contains(@class, 'valueview-input')]", :index => 0)
+  text_area(:referenceValueInput2, :xpath => "//div[contains(@class, 'wb-claimlistview')]//textarea[contains(@class, 'valueview-input')]", :index => 1)
   link(:saveReference, :xpath => "//div[contains(@class, 'wb-referenceview')]/span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
   link(:cancelReference, :xpath => "//div[contains(@class, 'wb-referenceview')]/span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
   link(:removeReference, :xpath => "//div[contains(@class, 'wb-referenceview')]/span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")

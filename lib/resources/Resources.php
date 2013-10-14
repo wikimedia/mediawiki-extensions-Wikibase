@@ -624,16 +624,39 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.claimlistview.js'
 			),
 			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'jquery.ui.widget',
 				'jquery.wikibase.claimview',
+				'jquery.wikibase.listview',
+				'jquery.wikibase.statementview',
 				'jquery.wikibase.toolbarcontroller',
+				'wikibase',
 				'wikibase.AbstractedRepoApi',
+				'wikibase.datamodel',
+				'wikibase.RepoApiError',
 				'wikibase.templates',
 				'wikibase.utilities.ClaimGuidGenerator',
 			),
 			'messages' => array(
 				'wikibase-entity-property',
+			),
+		),
+
+		'jquery.wikibase.claimgrouplistview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.claimgrouplistview.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'jquery.ui.widget',
+				'jquery.wikibase.claimlistview',
+				'jquery.wikibase.listview',
+				'jquery.wikibase.toolbarcontroller',
+				'wikibase',
+				'wikibase.AbstractedRepoApi',
+				'wikibase.templates',
 				'wikibase.utilities'
-			)
+			),
 		),
 
 		'jquery.wikibase.entityview' => $moduleTemplate + array(
@@ -643,6 +666,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.claimlistview',
+				'jquery.wikibase.claimgrouplistview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.templates'
 			)
