@@ -24,6 +24,7 @@ $messages['en'] = array(
 	'wikibase-client-desc' => 'Client for the Wikibase extension',
 	'specialpages-group-wikibaseclient' => 'Wikidata client',
 	'tooltip-t-wikibase' => 'Link to connected data repository item',
+	'accesskey-t-wikibase' => 'g',
 	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
 	'wikibase-after-page-move-queued' => 'The [$1 Wikidata item] associated with this page will be automatically updated soon.',
 	'wikibase-comment-add' => 'A Wikidata item has been created.',
@@ -93,6 +94,7 @@ $messages['qqq'] = array(
 See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
 	'specialpages-group-wikibaseclient' => '{{doc-special-group|that=is related to Wikidata clients|like=[[Special:UnconnectedPages]]}}',
 	'tooltip-t-wikibase' => 'Tooltip for toolbox link to connected Wikibase data repository item',
+	'accesskey-t-wikibase' => 'The quick access key for the link to the connected repository [[d:Wikidata:Glossary#Item|item]] displayed in the client\'s toolbox.',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
 
 Parameters:
