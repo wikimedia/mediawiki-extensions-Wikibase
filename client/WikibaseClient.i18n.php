@@ -39,6 +39,7 @@ $messages['en'] = array(
 	'wikibase-dataitem' => 'Data item',
 	'wikibase-editlinks' => 'Edit links',
 	'wikibase-editlinkstitle' => 'Edit interlanguage links',
+	'wikibase-accesskey-editlinks' => 'g',
 	'wikibase-linkitem-addlinks' => 'Add links',
 	'wikibase-linkitem-alreadylinked' => 'The page you wanted to link with is already attached to an [$1 item] on the central data repository which links to $2 on this site. Items can only have one page per site attached. Please choose a different page to link with.',
 	'wikibase-linkitem-close' => 'Close dialog and reload page',
@@ -129,6 +130,7 @@ Parameters:
 	'wikibase-editlinkstitle' => "This is the '''tooltip''' text on a link in the sidebar that opens a wizard to edit interlanguage links.
 
 The link text is {{msg-mw|Wikibase-editlinks}}.",
+	'wikibase-accesskey-editlinks' => 'The accesskey for the link to the page on Wikidata',
 	'wikibase-linkitem-addlinks' => 'Link in the sidebar asking to add language links and link the current page with pages on other sites. Only visible in case the current page has no langlinks.
 {{Identical|Add link}}',
 	'wikibase-linkitem-alreadylinked' => 'Tells that the page which the user wanted to link with the current one is already attached to an item on the central data repository. That item already links to an article on this site while items can only have one page per site attached.
