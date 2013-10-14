@@ -37,6 +37,7 @@ $messages['en'] = array(
 	'wikibase-comment-sitelink-remove' => 'Language link removed: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|change|changes}}',
 	'wikibase-dataitem' => 'Data item',
+	'wikibase-accesskey-dataitem' => 'g',
 	'wikibase-editlinks' => 'Edit links',
 	'wikibase-editlinkstitle' => 'Edit interlanguage links',
 	'wikibase-linkitem-addlinks' => 'Add links',
@@ -123,6 +124,7 @@ Format of wikilink is [[:de:Berlin|de:Berlin]].',
 Parameters:
 * $1 - the number of changes; is always at least 2.',
 	'wikibase-dataitem' => 'Toolbox link text for link to connected Wikibase data item',
+	'wikibase-accesskey-dataitem' => 'The accesskey for the link to the page on Wikidata',
 	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.
 {{Identical|Edit link}}',

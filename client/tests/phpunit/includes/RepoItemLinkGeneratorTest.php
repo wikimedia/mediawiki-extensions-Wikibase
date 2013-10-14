@@ -68,8 +68,9 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 		$editLinksLink = array(
 			'href' => $href,
 			'text' => 'Edit links',
-			'title' => 'Edit interlanguage links',
-			'class' => 'wbc-editpage'
+			'title' => 'Edit interlanguage links [g]',
+			'class' => 'wbc-editpage',
+			'accesskey' => 'g',
 		);
 
 		$title = Title::newFromText( 'Tokyo', NS_MAIN );
