@@ -16,6 +16,23 @@
       "revId": "2b1db4a2974d6732639bdc89df93befb7a723a01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_06529212",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-10-14T17:52:25Z",
+      "side": 1,
+      "message": "Don\u0027t hardcode. Use core\u0027s \u0027brackets\u0027 message if possible.",
+      "revId": "2b1db4a2974d6732639bdc89df93befb7a723a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
