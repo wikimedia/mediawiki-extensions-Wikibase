@@ -1790,6 +1790,7 @@ $messages['hr'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdi',
 	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
 	'wikibase-linkitem-success-create' => 'Stranice su uspješno povezane. Možete pronaći ove nove poveznice na projektu [$1 wikidata].',
+	'wikibase-rc-show-wikidata-pref' => 'Prikaži Wikidata promjene na popisu nedavnih promjena',
 	'wikibase-watchlist-show-changes-pref' => 'Prikaži Wikidata promjene na mom popisu praćenih članaka',
 	'wikibase-pageinfo-entity-id' => 'Oznaka na Wikidati',
 );
