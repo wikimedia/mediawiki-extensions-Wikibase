@@ -10,18 +10,15 @@
  * installation instructions is recommended. See the INSTALL
  * and README file for more information.
  *
- * @file
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 
 //TODO: Use a different file for jenkins, use this for a standard repo+client setup.
 
-$jenkins_job_name = getenv( 'JOB_NAME' );
-
-if( PHP_SAPI !== 'cli' || $jenkins_job_name === false ) {
+if( isset( $wgWikimediaJenkinsCI ) && !$wgWikimediaJenkinsCI ) {
 	die( "This entry point is for use by the Jenkins testing framework only.\n"
 		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
 }
@@ -30,7 +27,7 @@ if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	define( 'WB_EXPERIMENTAL_FEATURES', true );
 }
 
-switch( $jenkins_job_name ) {
+switch( getenv( 'JOB_NAME' ) ) {
 	case 'mwext-Wikibase-client-tests':
 		require_once __DIR__ . '/client/WikibaseClient.php';
 		require_once __DIR__ . '/client/ExampleSettings.php';
