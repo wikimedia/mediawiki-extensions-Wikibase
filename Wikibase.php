@@ -10,18 +10,22 @@
  * installation instructions is recommended. See the INSTALL
  * and README file for more information.
  *
- * @file
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 
 //TODO: Use a different file for jenkins, use this for a standard repo+client setup.
 
 $jenkins_job_name = getenv( 'JOB_NAME' );
 
-if( PHP_SAPI !== 'cli' || $jenkins_job_name === false ) {
+/**
+ * PHPUnit jobs will have $jenkins_job_name defined
+ * QUnit jobs will have $wgWikimediaJenkinsCI defined
+ * If neither is defined DIE!
+ */
+if( $jenkins_job_name === false && ( isset( $wgWikimediaJenkinsCI ) && !$wgWikimediaJenkinsCI ) ) {
 	die( "This entry point is for use by the Jenkins testing framework only.\n"
 		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
 }
