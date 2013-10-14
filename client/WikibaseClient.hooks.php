@@ -403,7 +403,8 @@ final class ClientHooks {
 			$toolbox['wikibase'] = array(
 				'text' => $sk->getMsg( 'wikibase-dataitem' )->text(),
 				'href' => $itemLink,
-				'id' => 't-wikibase'
+				'id' => 't-wikibase',
+				'accesskey' => $sk->getMsg( 'wikibase-accesskey-dataitem' )->text()
 			);
 		}
 
