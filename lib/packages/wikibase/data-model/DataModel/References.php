@@ -37,6 +37,17 @@ interface References extends \Traversable, \Countable, \Serializable, \Comparabl
 	public function hasReference( Reference $reference );
 
 	/**
+	 * Returns the index of a reference or false if the reference could not be found.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Reference $reference
+	 *
+	 * @return int|boolean
+	 */
+	public function indexOf( Reference $reference );
+
+	/**
 	 * Removes the reference with the same hash as the provided reference if such a reference exists in the list.
 	 *
 	 * @since 0.1

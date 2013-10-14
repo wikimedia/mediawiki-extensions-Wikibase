@@ -3,8 +3,10 @@
 namespace Wikibase\Test;
 
 use Hashable;
+use Wikibase\PropertyNoValueSnak;
 use Wikibase\Reference;
 use Wikibase\ReferenceList;
+use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\ReferenceList
@@ -41,11 +43,11 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getElementInstances() {
-		$instances = array();
-
-		$instances[] = new Reference();
-
-		return $instances;
+		return array(
+			new Reference(),
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
+			new Reference( new SnakList( array( new PropertyNoValueSnak( 3 ) ) ) ),
+		);
 	}
 
 	public function getConstructorArg() {
@@ -53,6 +55,14 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 			null,
 			array(),
 			$this->getElementInstances(),
+		);
+	}
+
+	public function referenceListProvider() {
+		$class = $this->getInstanceClass();
+
+		return array(
+			array( new $class( $this->getElementInstances() ) )
 		);
 	}
 
@@ -155,6 +165,20 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @dataProvider referenceListProvider
+	 *
+	 * @param ReferenceList $array
+	 */
+	public function testIndexOf( ReferenceList $array ) {
+		$this->assertFalse( $array->indexOf( new Reference() ) );
+
+		$i = 0;
+		foreach( $array as $reference ) {
+			$this->assertEquals( $i++, $array->indexOf( $reference ) );
+		}
+	}
+
+	/**
 	 * @dataProvider instanceProvider
 	 * @param ReferenceList $references
 	 */
@@ -232,11 +256,17 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	public function testRemoveReferenceHash( ReferenceList $references ) {
 		$references->removeReferenceHash( '~=[,,_,,]:3' );
 
+		$hashes = array();
+
 		/**
 		 * @var Reference $reference
 		 */
 		foreach ( $references as $reference ) {
-			$references->removeReferenceHash( $reference->getHash() );
+			$hashes[] = $reference->getHash();
+		}
+
+		foreach( $hashes as $hash ) {
+			$references->removeReferenceHash( $hash );
 		}
 
 		$this->assertEquals( 0, count( $references ) );

@@ -21,6 +21,7 @@ use InvalidArgumentException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
 class ReferenceList extends HashableObjectStorage implements References {
 
@@ -86,6 +87,28 @@ class ReferenceList extends HashableObjectStorage implements References {
 	public function hasReference( Reference $reference ) {
 		return $this->contains( $reference )
 			|| $this->hasReferenceHash( $reference->getHash() );
+	}
+
+	/**
+	 * @see References::indexOf
+	 *
+	 * @since 0.1
+	 *
+	 * @param Reference $reference
+	 *
+	 * @return int|boolean
+	 */
+	public function indexOf( Reference $reference ) {
+		$index = 0;
+
+		foreach( $this as $object ) {
+			if( $object === $reference ) {
+				return $index;
+			}
+			$index++;
+		}
+
+		return false;
 	}
 
 	/**
