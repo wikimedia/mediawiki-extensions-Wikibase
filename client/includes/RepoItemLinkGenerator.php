@@ -142,8 +142,9 @@ class RepoItemLinkGenerator {
 		$link = array(
 			'href' => $this->repoLinker->repoItemUrl( $entityId ) . $fragment,
 			'text' => wfMessage( 'wikibase-editlinks' )->text(),
-			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
+			'title' => wfMessage( 'wikibase-editlinkstitle' )->text() . ' ' . wfMessage( 'brackets', wfMessage( 'wikibase-accesskey-editlinks' )->text() )->text(),
 			'class' => 'wbc-editpage',
+			'accesskey' => wfMessage( 'wikibase-accesskey-editlinks' )->text(),
 		);
 
 		return $link;
