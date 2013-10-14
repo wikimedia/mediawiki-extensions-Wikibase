@@ -10,8 +10,6 @@
  * installation instructions is recommended. See the INSTALL
  * and README file for more information.
  *
- * @file
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -21,7 +19,7 @@
 
 $jenkins_job_name = getenv( 'JOB_NAME' );
 
-if( PHP_SAPI !== 'cli' || $jenkins_job_name === false ) {
+if( $jenkins_job_name === false ) {
 	die( "This entry point is for use by the Jenkins testing framework only.\n"
 		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
 }
@@ -31,6 +29,11 @@ if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 }
 
 switch( $jenkins_job_name ) {
+	case 'mwext-Wikibase-qunit':
+		require_once __DIR__ . '/repo/Wikibase.php';
+		require_once __DIR__ . '/repo/ExampleSettings.php';
+		break;
+
 	case 'mwext-Wikibase-client-tests':
 		require_once __DIR__ . '/client/WikibaseClient.php';
 		require_once __DIR__ . '/client/ExampleSettings.php';
