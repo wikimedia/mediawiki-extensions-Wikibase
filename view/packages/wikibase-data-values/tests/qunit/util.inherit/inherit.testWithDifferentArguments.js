@@ -3,7 +3,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function( dv, $, QUnit ) {
+( function( inherit, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'dataValues.util.inherit with different (optional) arguments' );
@@ -25,12 +25,12 @@ var // the following are a couple of var definitions used by the tests beyond
 		var C;
 		if( constructor === null && members === null ) {
 			// only base is given:
-			C = dv.util.inherit( base );
+			C = inherit( base );
 		}
 		else if( constructor === null ) {
 			// constructor omitted, check for right param mapping:
-			C = dv.util.inherit( base, members );
-			var C2 = dv.util.inherit( base, C.prototype.constructor, members ),
+			C = inherit( base, members );
+			var C2 = inherit( base, C.prototype.constructor, members ),
 				origConstructorOfC = C.prototype.constructor;
 
 			// constructors will never be the same since a new function will be created in inherit(),
@@ -47,10 +47,10 @@ var // the following are a couple of var definitions used by the tests beyond
 			C.prototype.constructor = origConstructorOfC;
 		}
 		else if( members === null ) {
-			C = dv.util.inherit( base, constructor );
+			C = inherit( base, constructor );
 		}
 		else {
-			C = dv.util.inherit( base, constructor, members );
+			C = inherit( base, constructor, members );
 		}
 
 		QUnit.assert.ok(
@@ -114,20 +114,9 @@ var // the following are a couple of var definitions used by the tests beyond
 		var C1 = inheritTest( Object, inheritConstructor, null );
 		inheritConstructorTest( C1 );
 
-		QUnit.assert.equal(
-			C1.name,
-			inheritConstructor.name,
-			'Constructor returned by inherit() takes name of given constructor function'
-		);
-
 		// inherit from C2:
 		var C2 = inheritTest( C1, null, inheritMembers );
 		inheritConstructorTest( C2 );
-
-		QUnit.assert.ok(
-			C2.name.indexOf( inheritConstructor.name ) === 0,
-			'Constructor returned by inherit() uses name of given constructor plus suffix'
-		);
 	} );
 
 	QUnit.test( 'inherit( base, constructor, members )', function( assert ) {
@@ -136,4 +125,4 @@ var // the following are a couple of var definitions used by the tests beyond
 		inheritConstructorTest( C );
 	} );
 
-}( dataValues, jQuery, QUnit ) );
+}( dataValues.util.inherit, jQuery, QUnit ) );

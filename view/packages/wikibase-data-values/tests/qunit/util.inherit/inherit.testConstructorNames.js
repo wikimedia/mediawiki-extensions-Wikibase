@@ -3,50 +3,80 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function( dv, $, QUnit ) {
+( function( inherit, $, QUnit ) {
 	'use strict';
+
+	var namedFunction = function namedFunction() {};
+	if( namedFunction.name !== 'namedFunction' ) {
+		return; // Named functions are not supported by environment, so skip this test.
+	}
 
 	QUnit.module( 'dataValues.util.inherit constructor names' );
 
-	QUnit.test( 'inherit( name, ... ) with different names', function( assert ) {
-		var names = [
+	function inheritConstructorNameTest( description, testArguments, test ) {
+		QUnit.test( description, function( assert ) {
+			for( var i = 0; i < testArguments.length; i++ ) {
+				test.apply( assert, testArguments[i] );
+			}
+		} );
+	}
+
+	inheritConstructorNameTest(
+		'inherit( name, ... ) with legal names',
+		[
 			[ '$' ],
 			[ '_' ],
 			[ '$foo' ],
 			[ '_foo' ],
 			[ 'foo' ],
 			[ 'foo42' ],
+		],
+		function( constructorName ) {
+			this.equal(
+				inherit( constructorName, Object ).name,
+				constructorName,
+				'inherit( \'' + constructorName + '\', ... ); creates constructor named as "' +
+					constructorName + '".'
+			);
+		}
+	);
+
+	inheritConstructorNameTest(
+		'inherit( name, ... ) with names which will be altered',
+		[
 			[ '42foo', 'foo' ],
 			[ 'function()xxx(){};', 'functionxxx' ],
 			[ 'xyz;${]123', 'xyz$123' ],
 			[ ';a;1;$;b;_;', 'a1$b_' ],
 			[ 'a1$b2c3d4;', 'a1$b2c3d4' ],
-			[ '();', false ],
-			[ '42', false ], // can't start function name with number
-			[ 'class', false ], // reserved word
-			[ 'function', false ] // reserved word
-		];
+		],
+		function( constructorName, expectedName ) {
+			this.equal(
+				inherit( constructorName, Object ).name,
+				expectedName,
+				'inherit( \'' + constructorName + '\', ... ); will use "' + expectedName +
+					'" as name.'
+			);
+		}
+	);
 
-		$.each( names, function( i, definition ) {
-			var testName = definition[0],
-				expectedName =  definition[1] || ( definition[1] === undefined ? testName : false );
+	inheritConstructorNameTest(
+		'inherit( name, ... ) with illegal names',
+		[
+			[ '();' ],
+			[ '42' ], // can't start function name with number
+			[ 'class' ], // reserved word
+			[ 'function' ] // reserved word
+		],
+		function( constructorName ) {
+			this.throws(
+				function() {
+					inherit( constructorName, Object );
+				},
+				'inherit( \'' + constructorName + '\', ... ); will throw an error because of ' +
+					'illegal constructor name.'
+			);
+		}
+	);
 
-			if( !expectedName ) {
-				assert.throws(
-					function() {
-						dv.util.inherit( testName, Object );
-					},
-					'inherit( \'' + testName + '\', ... ); will throw and error because of malicious constructor name.'
-				);
-			} else {
-				assert.equal(
-					dv.util.inherit( testName, Object ).name,
-					expectedName,
-					'inherit( \'' + testName + '\', ... ); will use "' + expectedName + '" as name.'
-				);
-			}
-
-		} );
-	} );
-
-}( dataValues, jQuery, QUnit ) );
+}( dataValues.util.inherit, jQuery, QUnit ) );
