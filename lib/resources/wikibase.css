@@ -640,6 +640,16 @@ div.wb-claim-new .wb-snak-value {
 	padding-left: 17em;
 }
 
+.wb-claim-qualifiers .wb-snaklistview:first-child {
+	border-top: 1px dotted #D8D8D8;
+}
+.wb-claim-qualifiers .wb-snaklistview {
+	border-bottom: 1px dotted #D8D8D8;
+}
+.wb-edit .wb-claim-qualifiers .wb-snaklistview {
+	border-color: #C0DAE5;
+}
+
 .wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-property {
 	width: 12em;
 	position: absolute;
@@ -681,8 +691,8 @@ div.wb-claim-new .wb-snak-value {
 .wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snakview {
 	position: relative;
 	min-height: 1.8em;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 4px;
+	padding-bottom: 2px;
 }
 
 /* "remove" link at each reference's snak */
@@ -764,6 +774,16 @@ div.wb-statement-references .wb-error {
 	background-color: #E5C8B5;
 }
 
+.wb-referenceview .wb-snaklistview {
+	border-top: 1px dotted #D8D8D8;
+}
+.wb-referenceview .wb-snaklistview:nth-child(2) {
+	border-top: none;
+}
+.wb-referenceview.wb-edit .wb-snaklistview {
+	border-color: #C0DAE5;
+}
+
 .wb-referenceview .wb-snaklistview-listview .wb-snak-property {
 	width: 12em;
 	position: absolute;
@@ -805,8 +825,8 @@ div.wb-statement-references .wb-error {
 .wb-referenceview .wb-snaklistview-listview .wb-snakview {
 	position: relative;
 	min-height: 1.8em;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 4px;
+	padding-bottom: 2px;
 }
 
 /* a reference's "edit" toolbar */
