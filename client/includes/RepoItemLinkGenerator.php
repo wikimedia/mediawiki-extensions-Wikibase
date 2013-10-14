@@ -121,12 +121,14 @@ class RepoItemLinkGenerator {
 	 */
 	protected function getEditLinksLink( EntityId $entityId ) {
 		$fragment = '#sitelinks-' . htmlspecialchars( $this->siteGroup, ENT_QUOTES );
+		$accesskey = wfMessage( 'wikibase-accesskey-editlinks' )->text();
 
 		$link = array(
 			'href' => $this->repoLinker->getEntityUrl( $entityId ) . $fragment,
 			'text' => wfMessage( 'wikibase-editlinks' )->text(),
-			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
+			'title' => wfMessage( 'wikibase-editlinkstitle' )->text() . wfMessage( 'word-separator' )->text() . wfMessage( 'brackets', $accesskey )->text(),
 			'class' => 'wbc-editpage',
+			'accesskey' => $accesskey,
 		);
 
 		return $link;
