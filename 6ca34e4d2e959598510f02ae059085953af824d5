@@ -16,6 +16,24 @@
       "revId": "6ca34e4d2e959598510f02ae059085953af824d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_75385a39",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-10-14T09:22:30Z",
+      "side": 1,
+      "message": "Let\u0027s not discuss the single var conventions here. These are part of the JS coding conventions and should be discussed on another place.\nAlso let\u0027s keep our language on a respectful level, especially on public places like gerrit.",
+      "parentUuid": "0932edd2_b2c3c859",
+      "revId": "6ca34e4d2e959598510f02ae059085953af824d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
