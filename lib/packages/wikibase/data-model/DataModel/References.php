@@ -21,8 +21,9 @@ interface References extends \Traversable, \Countable, \Serializable, \Comparabl
 	 * @since 0.1
 	 *
 	 * @param Reference $reference
+	 * @param int|null $index
 	 */
-	public function addReference( Reference $reference );
+	public function addReference( Reference $reference, $index = null );
 
 	/**
 	 * Returns if the list contains a reference with the same hash as the provided reference.
