@@ -39,6 +39,7 @@ $messages['en'] = array(
 	'wikibase-dataitem' => 'Data item',
 	'wikibase-editlinks' => 'Edit links',
 	'wikibase-editlinkstitle' => 'Edit interlanguage links',
+	'wikibase-accesskey-editlinks' => 'g',
 	'wikibase-linkitem-addlinks' => 'Add links',
 	'wikibase-linkitem-alreadylinked' => 'The page you wanted to link with is already attached to an [$1 item] on the central data repository which links to $2 on this site. Items can only have one page per site attached. Please choose a different page to link with.',
 	'wikibase-linkitem-close' => 'Close dialog and reload page',
