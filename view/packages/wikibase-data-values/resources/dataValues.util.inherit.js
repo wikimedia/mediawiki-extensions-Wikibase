@@ -1,11 +1,14 @@
 /**
- * @file
- * @ingroup DataValues
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 ( function( $, util ) {
 	'use strict';
+
+	/**
+	 * @type Function
+	 */
+	var EMPTY_FN = function() {};
 
 	/**
 	 * Helper to create a named function which will execute a given function.
@@ -21,9 +24,9 @@
 	function createNamedFunction( name, originalFn ) {
 		/* jshint evil: true */
 		/* jshint unused: false */
-		var namedFn,
-			evilsSeed = originalFn || $.noop,
-			fnName = name.replace( /(?:(^\d+)|[^\w$])/ig, '' );
+		var namedFn;
+		var evilsSeed = originalFn || EMPTY_FN;
+		var fnName = name.replace( /(?:(^\d+)|[^\w$])/ig, '' );
 
 		if( !fnName ) {
 			// only bad characters were in the name!
@@ -80,9 +83,15 @@
 
 		NewConstructor.prototype = $.extend(
 			new NewPrototype(),
-			{ constructor: NewConstructor }, // make sure "constructor" property is set properly...
-			members // ... but allow members to overwrite "constructor"
+			members
 		);
+
+		// Set "constructor" property properly, allow explicit overwrite via member definition.
+		// NOTE: in IE < 9, overwritten "constructor" properties are still set as not enumerable,
+		//  so don't do this as part of the extend above.
+		NewConstructor.prototype.constructor =
+			members.hasOwnProperty( 'constructor' ) ? members.constructor : NewConstructor;
+
 		return NewConstructor;
 	};
 
