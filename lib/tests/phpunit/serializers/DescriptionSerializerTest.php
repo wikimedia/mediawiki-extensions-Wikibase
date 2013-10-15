@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
-use Wikibase\Lib\Serializers\DescriptionSerializer;
 use Wikibase\Lib\Serializers\MultilingualSerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\DescriptionSerializer;
 
 /**
  * @covers Wikibase\Lib\Serializers\DescriptionSerializer
@@ -26,7 +26,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function validProvider() {
 		$validArgs = array();
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$descriptions = array(
 			"en" => "capital city of Italy",
@@ -54,7 +54,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$descriptions = array(
 			"en" => "capital city of Italy",
@@ -83,7 +83,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$descriptions = array(
 			"en" => "Rome",
@@ -130,7 +130,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$descriptions = array(
 			"en" => "Rome",
@@ -226,7 +226,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetSerializedMultilingualValues() {
 		$validArgs = array();
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$options->setLanguages( array( 'en', 'it', 'de', 'fr' ) );
 		$values = array(
@@ -237,7 +237,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $values, $options );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		$options->setIndexTags( false );
 		$options->setLanguages( array(
@@ -263,16 +263,14 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider newFromSerializationProvider
 	 */
 	public function testNewFromSerialization( $expected, $serialized, $message ) {
-		$descriptionSerializer = new DescriptionSerializer(
-			new MultiLangSerializationOptions()
-		);
+		$descriptionSerializer = new DescriptionSerializer( new SerializationOptions() );
 
 		$descriptions = $descriptionSerializer->newFromSerialization( $serialized );
 		$this->assertEquals( $expected, $descriptions, $message );
 	}
 
 	public function newFromSerializationProvider() {
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 
 		$descriptionSerializer = new DescriptionSerializer( $options );

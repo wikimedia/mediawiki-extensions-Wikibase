@@ -12,7 +12,7 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Property;
 use Wikibase\Serializers\EntityRevisionSerializationOptions;
 use Wikibase\Serializers\EntityRevisionSerializer;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\LanguageFallbackChainFactory;
 use Title;
@@ -82,7 +82,7 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 	 * @return array
 	 */
 	public function validProvider() {
-		$entitySerializerOptions = new EntitySerializationOptions();
+		$entitySerializerOptions = new SerializationOptions();
 
 		$entityContentSerializerOptions =
 			new EntityRevisionSerializationOptions( $entitySerializerOptions );

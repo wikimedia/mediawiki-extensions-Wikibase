@@ -10,7 +10,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\IO\EntityIdReader;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Repo\WikibaseRepo;
@@ -58,7 +58,7 @@ class DumpJson extends Maintenance {
 	}
 
 	public function initServices() {
-		$serializerOptions = new EntitySerializationOptions();
+		$serializerOptions = new SerializationOptions();
 		$this->entitySerializer = new EntitySerializer( $serializerOptions );
 
 		//TODO: allow injection for unit tests

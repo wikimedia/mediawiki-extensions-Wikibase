@@ -3,7 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\Item;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\EntitySerializer;
 
 /**
  * @covers Wikibase\Lib\Serializers\ItemSerializer
@@ -65,8 +66,8 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 			),
 		);
 
-		$options = new EntitySerializationOptions();
-		$options->setProps( array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ) );
+		$options = new SerializationOptions();
+		$options->setOption( EntitySerializer::OPT_PARTS, array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ) );
 
 		$validArgs[] = array(
 			$item,

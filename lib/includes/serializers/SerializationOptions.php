@@ -5,23 +5,27 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\PropertyDataTypeLookup;
 
 /**
  * Options for Serializer objects.
  *
- * TODO: use PDO like options system as done in ValueParsers
- *
  * @since 0.2
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Liangent
  */
 class SerializationOptions {
 
 	/**
-	 * @since 0.3
-	 * @var boolean
+	 * @since 0.5
+	 * @const key for the entityIdKeyMode option, a  bit field determining whether to use
+	 *        upper case entities IDs as keys in the serialized structure, or lower case
+	 *        IDs, or both.
 	 */
-	protected $indexTags = false;
+	const OPT_ID_KEY_MODE = 'entityIdKeyMode';
 
 	const ID_KEYS_UPPER = 1;
 	const ID_KEYS_LOWER = 2;
@@ -29,10 +33,218 @@ class SerializationOptions {
 
 	/**
 	 * @since 0.5
-	 * @var int $idKeyMode bit field determining whether to use upper case entities IDs as
-	 *      keys in the serialized structure, or lower case IDs, or both.
+	 * @const key for the indexTags option, a boolean indicating whether associative or indexed
+	 *        arrays should be used for output. This allows indexed mode to be forced for used
+	 *        with ApiResults in XML model.
 	 */
-	protected $idKeyMode = self::ID_KEYS_UPPER;
+	const OPT_INDEX_TAGS = 'indexTags';
+
+	/**
+	 * @const Option key for the language fallback chains to apply. The value must be an array.
+	 * Array keys are language codes (may include pseudo ones to identify some given fallback chains); values are
+	 * LanguageFallbackChain objects (plain code inputs are constructed into language chains with a single language).
+	 *
+	 * @since 0.5
+	 */
+	const OPT_LANGUAGES = 'languages';
+
+	/**
+	 * @const Option key for a LanguageFallbackChainFactory object
+	 * used to create LanguageFallbackChain objects when the old style array-of-strings
+	 * argument is used in setLanguage().
+	 *
+	 * @since 0.5
+	 */
+	const OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY = 'languageFallbackChainFactory';
+
+	/**
+	 * @var array
+	 */
+	protected $options = array();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param array $options
+	 */
+	public function __construct( array $options = array() ) {
+		$this->setOptions( $options );
+
+		$this->initOption( self::OPT_ID_KEY_MODE, self::ID_KEYS_UPPER );
+		$this->initOption( self::OPT_INDEX_TAGS, false );
+	}
+
+	protected function checkKey( $key) {
+		if ( !is_string( $key ) ) {
+			throw new \InvalidArgumentException( 'option keys must be strings' );
+		}
+
+		if ( !preg_match( '/^[-.\/:_+*!$#@0-9a-zA-Z]+$/', $key ) ) {
+			throw new \InvalidArgumentException( 'malformed option key: ' . $key );
+		}
+	}
+
+	/**
+	 * Sets the given option if it is not already set.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	public function initOption( $key, $value ) {
+		$this->checkKey( $key );
+
+		if ( !array_key_exists( $key, $this->options ) && $value !== null ) {
+			$this->options[$key] = $value;
+		}
+	}
+
+	/**
+	 * Sets the given option.
+	 * Setting an option to null is equivalent to removing it.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	public function setOption( $key, $value ) {
+		$this->checkKey( $key );
+
+		if ( $value === null ) {
+			unset( $this->options[$key] );
+		} else {
+			$this->options[$key] = $value;
+		}
+	}
+
+	/**
+	 * Returns whether the given option is set.
+	 *
+	 * @param $key
+	 *
+	 * @since 0.5
+	 *
+	 * @return bool
+	 */
+	public function hasOption( $key ) {
+		return isset( $this->options[$key] );
+	}
+
+	/**
+	 * Adds an entry to an option that is defined to be a list.
+	 * If the option specified is not a list, an error is raised.
+	 * If the given value is already in the list, this method has no effect.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 *
+	 * @throws \RuntimeException
+	 */
+	public function addToOption( $key, $value ) {
+		if ( !isset( $this->options[$key] ) ) {
+			$this->options[$key] = array();
+		}
+
+		if ( !is_array( $this->options[$key] ) ) {
+			throw new \RuntimeException( 'option ' . $key . ' is not a list!' );
+		}
+
+		if ( !in_array( $value, $this->options[$key] ) ) {
+			$this->options[$key][] = $value;
+		}
+	}
+
+	/**
+	 * Removes an entry from an option that is defined to be a list.
+	 * If the option specified is not a list, an error is raised.
+	 * If the given value is not in the list, this method has no effect.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 *
+	 * @throws \RuntimeException
+	 */
+	public function removeFromOption( $key, $value ) {
+		if ( !isset( $this->options[$key] ) ) {
+			return; //nothing to do.
+		}
+
+		if ( !is_array( $this->options[$key] ) ) {
+			throw new \RuntimeException( 'option ' . $key . ' is not a list!' );
+		}
+
+		if ( in_array( $value, $this->options[$key] ) ) {
+			$oldList = $this->options[$key];
+			$newList = array_diff( $oldList, array( $value ) );
+			$this->options[$key] = $newList;
+		}
+	}
+
+	/**
+	 * Returns the given option.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $key
+	 * @param mixed $default used if the option wasn't set.
+	 *
+	 * @return mixed
+	 */
+	public function getOption( $key, $default = null ) {
+		if ( array_key_exists( $key, $this->options ) ) {
+			return $this->options[$key];
+		} else {
+			return $default;
+		}
+	}
+
+	/**
+	 * Sets the given options in this options object.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array $options associative array of options
+	 */
+	public function setOptions( array $options ) {
+		foreach ( $options as $key => $value) {
+			$this->setOption( $key, $value );
+		}
+	}
+
+	/**
+	 * Returns the options set in this SerializationOptions object
+	 * as an associative array.
+	 *
+	 * The array returned by this method is a copy of the internal data structure.
+	 * Manipulating that array has no impact on this SerializationOptions object.
+	 *
+	 * @since 0.5
+	 *
+	 * @return array the options
+	 */
+	public function getOptions() {
+		return $this->options;
+	}
+
+	/**
+	 * Merges the given options into this options object.
+	 * Options set in $options will override options already present in this options object.
+	 *
+	 * Shorthand for $this->setOptions( $options->getOptions() );
+	 *
+	 * @since 0.5
+	 *
+	 * @param SerializationOptions $options
+	 */
+	public function merge( SerializationOptions $options ) {
+		$this->setOptions( $options->getOptions() );
+	}
 
 	/**
 	 * Sets if tags should be indexed.
@@ -49,7 +261,7 @@ class SerializationOptions {
 			throw new InvalidArgumentException( 'Expected boolean, got something else' );
 		}
 
-		$this->indexTags = $indexTags;
+		$this->setOption( self::OPT_INDEX_TAGS, $indexTags );
 	}
 
 	/**
@@ -60,7 +272,7 @@ class SerializationOptions {
 	 * @return boolean
 	 */
 	public function shouldIndexTags() {
-		return $this->indexTags;
+		return $this->getOption( self::OPT_INDEX_TAGS );
 	}
 
 	/**
@@ -73,7 +285,8 @@ class SerializationOptions {
 	 * @return boolean
 	 */
 	public function shouldUseLowerCaseIdsAsKeys() {
-		return ( $this->idKeyMode & self::ID_KEYS_LOWER ) > 0;
+		$idKeyMode = $this->getOption( self::OPT_ID_KEY_MODE );
+		return ( $idKeyMode & self::ID_KEYS_LOWER ) > 0;
 	}
 
 	/**
@@ -86,7 +299,8 @@ class SerializationOptions {
 	 * @return boolean
 	 */
 	public function shouldUseUpperCaseIdsAsKeys() {
-		return ( $this->idKeyMode & self::ID_KEYS_UPPER ) > 0;
+		$idKeyMode = $this->getOption( self::OPT_ID_KEY_MODE );
+		return ( $idKeyMode & self::ID_KEYS_UPPER ) > 0;
 	}
 
 	/**
@@ -113,57 +327,8 @@ class SerializationOptions {
 			throw new \InvalidArgumentException( "Unknown bits set in ID key mode, use the ID_KEYS_XXX constants." );
 		}
 
-		$this->idKeyMode = $mode;
+		$this->setOption( self::OPT_ID_KEY_MODE, $mode );
 	}
-}
-
-/**
- * Options for MultiLang Serializers.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
- *
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Jeroen De Dauw < tobias.gritschacher@wikimedia.de >
- */
-class MultiLangSerializationOptions extends SerializationOptions {
-	/**
-	 * The language info array of the languages for which internationalized data (ie descriptions) should be returned.
-	 * Or null for no restriction.
-	 *
-	 * Array keys are language codes (may include pseudo ones to identify some given fallback chains); values are
-	 * LanguageFallbackChain objects (plain code inputs are constructed into language chains with a single language).
-	 *
-	 * @since 0.4
-	 *
-	 * @var null|array as described above
-	 */
-	protected $languages = null;
-
-	/**
-	 * Used to create LanguageFallbackChain objects when the old style array-of-strings argument is used in setLanguage().
-	 *
-	 * @var LanguageFallbackChainFactory
-	 */
-	protected $languageFallbackChainFactory;
 
 	/**
 	 * Sets the language codes or language fallback chains of the languages for which internationalized data
@@ -176,12 +341,11 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 */
 	public function setLanguages( array $languages = null ) {
 		if ( $languages === null ) {
-			$this->languages = null;
-
+			$this->setOption( self::OPT_LANGUAGES, null );
 			return;
 		}
 
-		$this->languages = array();
+		$chains = array();
 
 		foreach ( $languages as $languageCode => $languageFallbackChain ) {
 			// back-compat
@@ -192,8 +356,10 @@ class MultiLangSerializationOptions extends SerializationOptions {
 				);
 			}
 
-			$this->languages[$languageCode] = $languageFallbackChain;
+			$chains[$languageCode] = $languageFallbackChain;
 		}
+
+		$this->setOption( self::OPT_LANGUAGES, $chains );
 	}
 
 	/**
@@ -204,10 +370,12 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 * @return array|null
 	 */
 	public function getLanguages() {
-		if ( $this->languages === null ) {
+		$languages = $this->getLanguageFallbackChains();
+
+		if ( $languages === null ) {
 			return null;
 		} else {
-			return array_keys( $this->languages );
+			return array_keys( $languages );
 		}
 	}
 
@@ -219,7 +387,7 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 * @return array|null
 	 */
 	public function getLanguageFallbackChains() {
-		return $this->languages;
+		return $this->getOption( self::OPT_LANGUAGES );
 	}
 
 	/**
@@ -230,11 +398,14 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
-		if ( $this->languageFallbackChainFactory === null ) {
-			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		$factory = $this->getOption( self::OPT_LANGUAGES );
+
+		if ( $factory === null ) {
+			$factory = new LanguageFallbackChainFactory();
+			$this->setLanguageFallbackChainFactory( $factory );
 		}
 
-		return $this->languageFallbackChainFactory;
+		return $factory;
 	}
 
 	/**
@@ -243,172 +414,8 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 * @since 0.4
 	 *
 	 * @param LanguageFallbackChainFactory $factory
-	 *
-	 * @return LanguageFallbackChainFactory|null
 	 */
 	public function setLanguageFallbackChainFactory( LanguageFallbackChainFactory $factory ) {
-		return wfSetVar( $this->languageFallbackChainFactory, $factory );
+		$this->setOption( self::OPT_LANGUAGES, $factory );
 	}
-}
-
-/**
- * Options for Entity serializers.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @since 0.2
- *
- * @file
- * @ingroup WikibaseLib
- *
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
-class EntitySerializationOptions extends MultiLangSerializationOptions {
-
-	const SORT_ASC = 'ascending';
-	const SORT_DESC = 'descending';
-	const SORT_NONE = 'none';
-
-	/**
-	 * The optional properties of the entity that should be included in the serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @var array of string
-	 */
-	protected $props = array(
-		'aliases',
-		'descriptions',
-		'labels',
-		'claims',
-		// TODO: the following properties are not part of all entities, listing them here is not nice
-		'datatype', // property specific
-		'sitelinks', // item specific
-	);
-
-	/**
-	 * Names of fields to sort on.
-	 *
-	 * @since 0.2
-	 *
-	 * @var array
-	 */
-	protected $sortFields = array();
-
-	/**
-	 * The direction the result should be sorted in.
-	 *
-	 * @since 0.2
-	 *
-	 * @var string Element of the EntitySerializationOptions::SORT_ enum
-	 */
-	protected $sortDirection = self::SORT_NONE;
-
-	/**
-	 * Sets the optional properties of the entity that should be included in the serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $props
-	 */
-	public function setProps( array $props ) {
-		$this->props = $props;
-	}
-
-	/**
-	 * Gets the optional properties of the entity that should be included in the serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
-	 */
-	public function getProps() {
-		return $this->props;
-	}
-
-	/**
-	 * Adds a prop to the list of optionally included elements of the entity.
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $name
-	 */
-	public function addProp( $name ) {
-		$this->props[] = $name;
-	}
-
-	/**
-	 * Removes a prop from the list of optionally included elements of the entity.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $name
-	 */
-	public function removeProp ( $name ) {
-		$this->props = array_diff( $this->props, array( $name ) );
-	}
-
-	/**
-	 * Sets the names of fields to sort on.
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $sortFields
-	 */
-	public function setSortFields( array $sortFields ) {
-		$this->sortFields = $sortFields;
-	}
-
-	/**
-	 * Returns the names of fields to sort on.
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
-	 */
-	public function getSortFields() {
-		return $this->sortFields;
-	}
-
-	/**
-	 * Sets the direction the result should be sorted in.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $sortDirection Element of the EntitySerializationOptions::SORT_ enum
-	 * @throws InvalidArgumentException
-	 */
-	public function setSortDirection( $sortDirection ) {
-		if ( !in_array( $sortDirection, array( self::SORT_ASC, self::SORT_DESC, self::SORT_NONE ) ) ) {
-			throw new InvalidArgumentException( 'Invalid sort direction provided' );
-		}
-
-		$this->sortDirection = $sortDirection;
-	}
-
-	/**
-	 * Returns the direction the result should be sorted in.
-	 *
-	 * @since 0.2
-	 *
-	 * @return string Element of the EntitySerializationOptions::SORT_ enum
-	 */
-	public function getSortDirection() {
-		return $this->sortDirection;
-	}
-
 }

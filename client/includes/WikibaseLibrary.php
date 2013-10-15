@@ -26,7 +26,6 @@
 
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
@@ -79,8 +78,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return array( null );
 		}
 
-		$serializerFactory = new SerializerFactory();
-		$opt = new EntitySerializationOptions();
+		$opt = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $opt );
 
 		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
 		// twice, once with a lower case key and once with an upper case key.
@@ -98,7 +97,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$chain = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory()->newFromLanguage(
 			$wgContLang, LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
-		// MultiLangSerializationOptions accepts mixed types of keys happily.
+		// SerializationOptions accepts mixed types of keys happily.
 		$opt->setLanguages( Utils::getLanguageCodes() + array( $wgContLang->getCode() => $chain ) );
 
 		$serializer = $serializerFactory->newSerializerForObject( $entityObject, $opt );

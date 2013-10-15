@@ -2,15 +2,16 @@
 
 namespace Wikibase\Test;
 
-use ValueFormatters\FormatterOptions;
 use DataValues\StringValue;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Claim;
-use Wikibase\Entity;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyValueSnak;
+use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\EntitySerializer;
+use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\Lib\Serializers\EntitySerializer
@@ -35,7 +36,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 	protected function getInstance() {
 		$class = $this->getClass();
-		return new $class( new EntitySerializationOptions() );
+		return new $class( new SerializationOptions() );
 	}
 
 	/**
@@ -52,8 +53,8 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 		$validArgs = array();
 
-		$options = new EntitySerializationOptions();
-		$options->setProps( array( 'aliases' ) );
+		$options = new SerializationOptions();
+		$options->setOption( EntitySerializer::OPT_PARTS, array( 'aliases' ) );
 
 		$entity0 = $entity->copy();
 		$entity0->setAliases( 'en', array( 'foo', 'bar' ) );
@@ -90,8 +91,8 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 			$options
 		);
 
-		$options = new EntitySerializationOptions();
-		$options->setProps( array( 'descriptions', 'labels' ) );
+		$options = new SerializationOptions();
+		$options->setOption( EntitySerializer::OPT_PARTS, array( 'descriptions', 'labels' ) );
 
 		$entity1 = $entity->copy();
 		$entity1->setLabel( 'en', 'foo' );
@@ -129,7 +130,11 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		);
 
 		$entity2 = $this->getEntityInstance();
-		$options->setProps( array( 'descriptions', 'labels', 'claims', 'aliases' ) );
+
+		$options->setOption(
+			EntitySerializer::OPT_PARTS,
+			array( 'descriptions', 'labels', 'claims', 'aliases' )
+		);
 
 		$claim = new Claim(
 			new PropertyValueSnak(

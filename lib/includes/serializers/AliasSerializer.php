@@ -20,25 +20,13 @@ use InvalidArgumentException;
 class AliasSerializer extends SerializerObject implements Unserializer {
 
 	/**
-	 * @see ApiSerializerObject::$options
-	 *
-	 * @since 0.4
-	 *
-	 * @var MultiLangSerializationOptions
-	 */
-	protected $options;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
 	 *
-	 * @param MultiLangSerializationOptions $options
+	 * @param SerializationOptions $options
 	 */
-	public function __construct( MultiLangSerializationOptions $options = null ) {
-		if ( $options === null ) {
-			$this->options = new MultiLangSerializationOptions();
-		}
+	public function __construct( SerializationOptions $options = null ) {
 		parent::__construct( $options );
 	}
 
