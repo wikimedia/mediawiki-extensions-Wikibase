@@ -345,11 +345,12 @@ $messages['et'] = array(
 
 /** Persian (فارسی)
  * @author Alireza
+ * @author Ebraminio
  * @author Rtemis
  */
 $messages['fa'] = array(
 	'valueview-expert-advancedadjustments' => 'تنظیم‌های پیشرفته',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'پشتیبانی از داده "$1" فعلا امکان پذیر نیست',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'پشتیبانی از مقادیر «$1» فعلاً امکان‌پذیر نیست.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.',
 	'valueview-expert-emptyvalue-empty' => 'خالی',
 	'valueview-expert-globecoordinateinput-precision' => 'دقت:',
@@ -362,7 +363,7 @@ $messages['fa'] = array(
 	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr؛ تبدیل به میلادی',
 	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr؛ تبدیل به ژولینی',
 	'valueview-preview-label' => 'پیش‌نمایش:',
-	'valueview-preview-novalue' => 'مقدار وارد شده معتبر نمی‌باشد',
+	'valueview-preview-novalue' => 'مقدار وارد شده معتبر نیست',
 	'valueview-listrotator-auto' => 'خودکار',
 );
 
