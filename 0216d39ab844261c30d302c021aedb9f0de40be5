@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0932edd2_2ce937ba",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:39:59Z",
+      "side": 1,
+      "message": "The interface should not be dictated by what is currently implemented, but what information is *logically* needed to perform the task. In order to get an HTML view of an entity (or some part of it), you need to know whether it\u0027s supposed to be editable. So the parameter shouod be there.\n\nAlso, further down are a few places where $editable could trivially be used to skip code for generating edit links. Adding these conditionals makes more sense (and is less work) than removing the parameter, I believe.",
+      "parentUuid": "0932edd2_0e947940",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0932edd2_aeb36d08",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "again $lang is not used anywhere, it is just passed around for no apparent reason.",
       "parentUuid": "0932edd2_aeb36d08",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_8ccea359",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:39:59Z",
+      "side": 1,
+      "message": "don\u0027t care much in this case, it\u0027s not clear that the language should be known to getHtmlForEditSection",
+      "parentUuid": "0932edd2_8e90694b",
       "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -118,6 +154,24 @@
       "side": 1,
       "message": "again it is not used anywhere in the code, I guess this is being done somewhere else.",
       "parentUuid": "0932edd2_4ec5915c",
+      "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_0c0b9390",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:39:59Z",
+      "side": 1,
+      "message": "It\u0027s not being done at all, as far as I can tell. It *should* be done here, so please don\u0027t remove the parameter ;)",
+      "parentUuid": "0932edd2_2e7a1d21",
       "revId": "0216d39ab844261c30d302c021aedb9f0de40be5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
