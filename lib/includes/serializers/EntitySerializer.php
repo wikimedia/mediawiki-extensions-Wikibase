@@ -18,12 +18,33 @@ use Wikibase\Entity;
  */
 class EntitySerializer extends SerializerObject {
 
+	const SORT_ASC = 'ascending';
+	const SORT_DESC = 'descending';
+	const SORT_NONE = 'none';
+
+	/**
+	 * @const option key for setting the sort order; use the SORT_XXX constants as values.
+	 */
+	const OPT_SORT_ORDER = 'entityPartOrder';
+
+	/**
+	 * @const option key for the list of entity parts to include in the serialization, e.g.
+	 *        array( 'aliases', 'descriptions', 'labels', 'claims', 'datatype',  'sitelinks' )
+	 */
+	const OPT_PARTS = 'entityParts';
+
+	/**
+	 * @const option key for specifying which fields to use for sorting.
+	 * @todo: find out whether this is still needed.
+	 */
+	const OPT_SORT_FIELDS = 'entitySortFields';
+
 	/**
 	 * @see ApiSerializerObject::$options
 	 *
 	 * @since 0.2
 	 *
-	 * @var EntitySerializationOptions
+	 * @var SerializationOptions
 	 */
 	protected $options;
 
@@ -32,9 +53,23 @@ class EntitySerializer extends SerializerObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntitySerializationOptions $options
+	 * @param SerializationOptions $options
 	 */
-	public function __construct( EntitySerializationOptions $options ) {
+	public function __construct( SerializationOptions $options ) {
+		$options->initOption( self::OPT_SORT_ORDER, self::SORT_NONE );
+
+		$options->initOption( self::OPT_PARTS,  array(
+			'aliases',
+			'descriptions',
+			'labels',
+			'claims',
+			// TODO: the following properties are not part of all entities, listing them here is not nice
+			'datatype', // property specific
+			'sitelinks', // item specific
+		) );
+
+		$options->initOption( self::OPT_SORT_FIELDS,  array() );
+
 		parent::__construct( $options );
 	}
 
@@ -56,7 +91,9 @@ class EntitySerializer extends SerializerObject {
 		$serialization['id'] = $entity->getId() ? $entity->getId()->getPrefixedId() : '';
 		$serialization['type'] = $entity->getType();
 
-		foreach ( $this->options->getProps() as $key ) {
+		$parts = $this->options->getOption( EntitySerializer::OPT_PARTS, array() );
+
+		foreach ( $parts as $key ) {
 			switch ( $key ) {
 				case 'aliases':
 					$aliasSerializer = new AliasSerializer( $this->options );

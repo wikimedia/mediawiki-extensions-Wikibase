@@ -5,7 +5,8 @@ namespace Wikibase\Test;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\EntitySerializer;
 
 /**
  * @covers Wikibase\Lib\Serializers\EntitySerializer
@@ -30,7 +31,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 	protected function getInstance() {
 		$class = $this->getClass();
-		return new $class( new EntitySerializationOptions() );
+		return new $class( new SerializationOptions() );
 	}
 
 	/**
@@ -47,8 +48,8 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 		$validArgs = array();
 
-		$options = new EntitySerializationOptions();
-		$options->setProps( array( 'aliases' ) );
+		$options = new SerializationOptions();
+		$options->setOption( EntitySerializer::OPT_PARTS, array( 'aliases' ) );
 
 		$entity0 = $entity->copy();
 		$entity0->setAliases( 'en', array( 'foo', 'bar' ) );
@@ -85,8 +86,8 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 			$options
 		);
 
-		$options = new EntitySerializationOptions();
-		$options->setProps( array( 'descriptions', 'labels' ) );
+		$options = new SerializationOptions();
+		$options->setOption( EntitySerializer::OPT_PARTS, array( 'descriptions', 'labels' ) );
 
 		$entity1 = $entity->copy();
 		$entity1->setLabel( 'en', 'foo' );
