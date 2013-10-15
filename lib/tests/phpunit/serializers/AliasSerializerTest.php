@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
-use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\AliasSerializer;
 
 /**
@@ -24,7 +24,7 @@ class AliasSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function validProvider() {
 		$validArgs = array();
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$aliases = array(
 			"en" => array( "Roma", "Rome, Italy", "The Eternal City" ),
@@ -47,7 +47,7 @@ class AliasSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $aliases, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$aliases = array(
 				"en" => array( "Roma", "Rome, Italy", "The Eternal City" ),
@@ -100,16 +100,14 @@ class AliasSerializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider newFromSerializationProvider
 	 */
 	public function testNewFromSerialization( $expected, $serialized, $message ) {
-		$aliasSerializer = new AliasSerializer(
-			new MultiLangSerializationOptions()
-		);
+		$aliasSerializer = new AliasSerializer( new SerializationOptions() );
 
 		$deserializedAliases = $aliasSerializer->newFromSerialization( $serialized );
 		$this->assertEquals( $expected, $deserializedAliases, $message );
 	}
 
 	public function newFromSerializationProvider() {
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$aliases = array(
 			"en" => array( "Roma", "Rome, Italy", "The Eternal City" ),

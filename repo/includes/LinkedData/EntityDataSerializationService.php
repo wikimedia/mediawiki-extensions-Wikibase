@@ -16,7 +16,8 @@ use \ApiFormatXml;
 use \DerivativeContext;
 use \DerivativeRequest;
 use \RequestContext;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\RdfSerializer;
 
@@ -536,9 +537,9 @@ class EntityDataSerializationService {
 		}
 
 		$serializerFactory = new SerializerFactory();
-		$serializationOptions = new EntitySerializationOptions();
-		$serializationOptions->setIndexTags( $res->getIsRawMode() ); //FIXME: $res->rawMode doesn't seem to be set to what we want.
-		$serializationOptions->setProps( $this->fieldsToShow );      //FIXME: someone does not know how to write clear FIXMEs
+		$serializationOptions = new SerializationOptions();
+		$serializationOptions->setIndexTags( $res->getIsRawMode() );
+		$serializationOptions->setOption( EntitySerializer::OPT_PARTS,  $this->fieldsToShow );
 		$serializer =$serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 
 		$arr = $serializer->getSerialized( $entity );
