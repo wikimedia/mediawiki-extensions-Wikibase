@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_ecb9dfea",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "Please split the inner loop into a separate function",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_4cb74bf4",
+        "filename": "lib/includes/serializers/DescriptionSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "@file and @ingroup can go away too",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_8cc9437d",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "Not needed, EntityIdFormatter accepts EntityId objects as well as EntityIdValue objects.",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_acc8c776",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "Please be more spectific",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_eca2bfb0",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "check the ID\u0027s entity type against $entityType.",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_2cadb79d",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "You can just use $entity-\u003esetAllAliases()",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_4cb02bf4",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "use $entity-\u003esetDescriptions()",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_6c97af47",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "use $entity-\u003esetLabels()",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_aca1a7a8",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "use $entity-\u003esetClaims( $claims )",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_0c8f132c",
+        "filename": "lib/includes/serializers/ItemSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "Factor this out into a (Simple)SiteLinkSerializer class.",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_2c869717",
+        "filename": "lib/includes/serializers/PropertySerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "validate type?",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_ec8c7f31",
+        "filename": "lib/includes/serializers/SerializerFactory.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-15T09:22:19Z",
+      "side": 1,
+      "message": "Please add a newUnserializerForEntityType method. It could just map type ids to class names (using EntityFactory, perhaps) and then call newUnserializerForClass().\n\nThe idea is that generally, we\u0027ll just have the serialized form with a type field, and don\u0027t know the class.\n\n(The same mechanism could be used for the different kinds of snaks too).",
+      "revId": "59cebf2836a1dcac864b4572f79fc71066a24bab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
