@@ -397,16 +397,64 @@ final class RepoHooks {
 		wfProfileIn( __METHOD__ );
 
 		$preferences['wb-languages'] = array(
-			'type' => 'multiselect',
-			'usecheckboxes' => false,
+			'type' => 'text',
 			'label-message' => 'wikibase-setting-languages',
-			'options' => $preferences['language']['options'], // all languages available in 'language' selector
+			'help-message' => 'wikibase-setting-languages-help',
+			'default' => implode( ',', self::getDefaultLanguages( $user ) ),
+			'validation-callback' => 'Wikibase\RepoHooks::onLanguagesPreferencesValidated',
+			'filter-callback' => 'Wikibase\RepoHooks::onLanguagesPreferencesFiltered',
 			'section' => 'personal/i18n',
-			'prefix' => 'wb-languages-',
 		);
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	/**
+	 * Returns the default languages to use.
+	 *
+	 * @param User $user
+	 *
+	 * @return string[]
+	 */
+	private static function getDefaultLanguages( User $user ) {
+		$defaultLangs = array();
+		// if the Babel extension is installed, add all languages of the user
+		if ( class_exists( 'Babel' ) ) {
+			$defaultLangs = \Babel::getUserLanguages( $user );
+		}
+		return array_merge( explode( ',', $user->getOption( 'wb-languages' ) ), $defaultLangs );
+	}
+
+	/**
+	 * Called when language settings are changed.
+	 * @see https://www.mediawiki.org/wiki/HTMLForm
+	 *
+	 * @param string $value
+	 *
+	 * @return bool|string
+	 */
+	public static function onLanguagesPreferencesValidated( $value ) {
+		$values = explode( ',', $value );
+		if( count( array_intersect( $values, array_keys( Language::fetchLanguageNames() ) ) ) === count( $values ) ) {
+			return true;
+		}
+		else {
+			$invalidLangs = array_diff( $values, array_keys( Language::fetchLanguageNames() ) );
+			return wfMessage( 'wikibase-setting-languages-invalidlang', implode( ',', $invalidLangs ) )->text();
+		}
+	}
+
+	/**
+	 * Called when language settings are filtered.
+	 * @see https://www.mediawiki.org/wiki/HTMLForm
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	public static function onLanguagesPreferencesFiltered( $value ) {
+		return str_replace( ' ', '', $value );
 	}
 
 	/**
@@ -421,8 +469,7 @@ final class RepoHooks {
 		wfProfileIn( __METHOD__ );
 
 		// pre-select default language in the list of fallback languages
-		$defaultLang = $defaultOptions['language'];
-		$defaultOptions[ 'wb-languages-' . $defaultLang ] = 1;
+		$defaultOptions['wb-languages'] = $defaultOptions['language'];
 
 		wfProfileOut( __METHOD__ );
 		return true;
