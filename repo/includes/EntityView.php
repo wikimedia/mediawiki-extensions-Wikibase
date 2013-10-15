@@ -406,9 +406,10 @@ abstract class EntityView extends \ContextSource {
 		wfProfileIn( __METHOD__ );
 		$result = array();
 
-		// if the Babel extension is installed, add all languages of the user
-		if ( class_exists( 'Babel' ) && ( ! $user->isAnon() ) ) {
-			$result = \Babel::getUserLanguages( $user );
+		if( !$user->isAnon() ) {
+			// add languages from user preferences
+			$result = explode( ',', $user->getOption( 'wb-languages' ) );
+			// remove the language itself
 			if( $lang !== null ) {
 				$result = array_diff( $result, array( $lang->getCode() ) );
 			}
@@ -441,8 +442,6 @@ abstract class EntityView extends \ContextSource {
 		$descriptions = $entity->getDescriptions();
 
 		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
-
-		$languages = $this->getExtraUserLanguages( $lang, $this->getUser() );
 
 		$specialLabelPage = \SpecialPageFactory::getPage( "SetLabel" );
 		$specialDescriptionPage = \SpecialPageFactory::getPage( "SetDescription" );
