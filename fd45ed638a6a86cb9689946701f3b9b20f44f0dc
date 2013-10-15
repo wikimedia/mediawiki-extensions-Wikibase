@@ -16,6 +16,24 @@
       "revId": "fd45ed638a6a86cb9689946701f3b9b20f44f0dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_ecde3f0d",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-15T09:35:42Z",
+      "side": 1,
+      "message": "I thought the challenge was to make the start of your line of code reach the side of the screen!",
+      "parentUuid": "0932edd2_b20028af",
+      "revId": "fd45ed638a6a86cb9689946701f3b9b20f44f0dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
