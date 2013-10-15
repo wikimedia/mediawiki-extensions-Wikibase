@@ -14,25 +14,85 @@ use Wikibase\LanguageFallbackChainFactory;
  * @since 0.2
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SerializationOptions {
 
 	/**
-	 * @since 0.3
-	 * @var boolean
+	 * @since 0.5
+	 * @const key for the entityIdKeyMode option, a  bit field determining whether to use
+	 *        upper case entities IDs as keys in the serialized structure, or lower case
+	 *        IDs, or both.
 	 */
-	protected $indexTags = false;
+	const OPT_ID_KEY_MODE = 'entityIdKeyMode';
 
 	const ID_KEYS_UPPER = 1;
 	const ID_KEYS_LOWER = 2;
 	const ID_KEYS_BOTH = 3;
 
+
 	/**
 	 * @since 0.5
-	 * @var int $idKeyMode bit field determining whether to use upper case entities IDs as
-	 *      keys in the serialized structure, or lower case IDs, or both.
+	 * @const key for the indexTags option, a boolean indicating whether associative or indexed
+	 *        arrays should be used for output. This allows indexed mode to be forced for used
+	 *        with ApiResults in XML model.
 	 */
-	protected $idKeyMode = self::ID_KEYS_UPPER;
+	const OPT_INDEX_TAGS = 'indexTags';
+
+	/**
+	 * @var array
+	 */
+	protected $options;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param array $options
+	 */
+	public function __construct( array $options = array() ) {
+		$this->options = $options;
+
+		$this->initOption( self::OPT_ID_KEY_MODE, self::ID_KEYS_UPPER );
+		$this->initOption( self::OPT_INDEX_TAGS, false );
+	}
+
+	/**
+	 * Sets the given option if it is not already set.
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	protected function initOption( $key, $value ) {
+		if ( !array_key_exists( $key, $this->options ) ) {
+			$this->options[$key] = $value;
+		}
+	}
+
+	/**
+	 * Sets the given option.
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	public function setOption( $key, $value ) {
+		$this->options[$key] = $value;
+	}
+
+	/**
+	 * Returns the given option.
+	 *
+	 * @param string $key
+	 * @param mixed $default used if the option wasn't set.
+	 *
+	 * @return mixed
+	 */
+	public function getOption( $key, $default = null ) {
+		if ( array_key_exists( $key, $this->options ) ) {
+			return $this->options[$key];
+		} else {
+			return $default;
+		}
+	}
 
 	/**
 	 * Sets if tags should be indexed.
@@ -49,7 +109,7 @@ class SerializationOptions {
 			throw new MWException( 'Expected boolean, got something else' );
 		}
 
-		$this->indexTags = $indexTags;
+		$this->setOption( self::OPT_INDEX_TAGS, $indexTags );
 	}
 
 	/**
@@ -60,7 +120,7 @@ class SerializationOptions {
 	 * @return boolean
 	 */
 	public function shouldIndexTags() {
-		return $this->indexTags;
+		return $this->getOption( self::OPT_INDEX_TAGS );
 	}
 
 	/**
@@ -73,7 +133,8 @@ class SerializationOptions {
 	 * @return boolean
 	 */
 	public function shouldUseLowerCaseIdsAsKeys() {
-		return ( $this->idKeyMode & self::ID_KEYS_LOWER ) > 0;
+		$idKeyMode = $this->getOption( self::OPT_ID_KEY_MODE );
+		return ( $idKeyMode & self::ID_KEYS_LOWER ) > 0;
 	}
 
 	/**
@@ -86,7 +147,8 @@ class SerializationOptions {
 	 * @return boolean
 	 */
 	public function shouldUseUpperCaseIdsAsKeys() {
-		return ( $this->idKeyMode & self::ID_KEYS_UPPER ) > 0;
+		$idKeyMode = $this->getOption( self::OPT_ID_KEY_MODE );
+		return ( $idKeyMode & self::ID_KEYS_UPPER ) > 0;
 	}
 
 	/**
@@ -113,7 +175,7 @@ class SerializationOptions {
 			throw new \InvalidArgumentException( "Unknown bits set in ID key mode, use the ID_KEYS_XXX constants." );
 		}
 
-		$this->idKeyMode = $mode;
+		$this->setOption( self::OPT_ID_KEY_MODE, $mode );
 	}
 }
 
