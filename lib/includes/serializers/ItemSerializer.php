@@ -35,9 +35,9 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntitySerializationOptions $options
+	 * @param SerializationOptions $options
 	 */
-	public function __construct( EntitySerializationOptions $options, \SiteSQLStore $siteStore = null ) {
+	public function __construct( SerializationOptions $options, \SiteSQLStore $siteStore = null ) {
 		if ( $siteStore === null ) {
 			$this->siteStore = \SiteSQLStore::newInstance();
 		} else {
@@ -65,7 +65,9 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 
 		$serialization = array();
 
-		if ( in_array( 'sitelinks', $this->options->getProps() ) ) {
+		$parts = $this->options->getOption( EntitySerializer::OPT_PARTS );
+
+		if ( in_array( 'sitelinks', $parts ) ) {
 			$siteLinkSerializer = new SiteLinkSerializer( $this->options, $this->siteStore );
 			$siteLinks = $item->getSimpleSiteLinks();
 			$serialization['sitelinks'] = $siteLinkSerializer->getSerialized( $siteLinks );

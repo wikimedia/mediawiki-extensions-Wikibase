@@ -6,7 +6,8 @@ use ApiBase;
 use SiteSQLStore;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
@@ -230,7 +231,7 @@ class GetEntities extends ApiWikibase {
 				$entity = $entityContent->getEntity();
 
 				// TODO: inject id formatter
-				$options = new EntitySerializationOptions();
+				$options = new SerializationOptions();
 				if ( $params['languagefallback'] ) {
 					$languages = array();
 					foreach ( $params['languages'] as $languageCode ) {
@@ -242,8 +243,8 @@ class GetEntities extends ApiWikibase {
 					$languages = $params['languages'];
 				}
 				$options->setLanguages( $languages );
-				$options->setSortDirection( $params['dir'] );
-				$options->setProps( $props );
+				$options->setOption( EntitySerializer::OPT_SORT_ORDER, $params['dir'] );
+				$options->setOption( EntitySerializer::OPT_PARTS, $props );
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
 
 				$serializerFactory = new SerializerFactory();
@@ -299,11 +300,11 @@ class GetEntities extends ApiWikibase {
 			),
 			'dir' => array(
 				ApiBase::PARAM_TYPE => array(
-					EntitySerializationOptions::SORT_ASC,
-					EntitySerializationOptions::SORT_DESC,
-					EntitySerializationOptions::SORT_NONE
+					EntitySerializer::SORT_ASC,
+					EntitySerializer::SORT_DESC,
+					EntitySerializer::SORT_NONE
 				),
-				ApiBase::PARAM_DFLT => EntitySerializationOptions::SORT_ASC,
+				ApiBase::PARAM_DFLT => EntitySerializer::SORT_ASC,
 				ApiBase::PARAM_ISMULTI => false,
 			),
 			'languages' => array(

@@ -46,6 +46,14 @@ class SerializerFactory {
 			throw new InvalidArgumentException( 'newSerializerForObject only accepts objects and got ' . gettype( $object ) );
 		}
 
+		//TODO: The factory should take options in the constructor.
+		//TODO: The factory should offer clones of the options via newSerializationOptions().
+		//TODO: This method should merge to options given with the options from the constructor.
+
+		if ( $options == null ) {
+			$options = new SerializationOptions();
+		}
+
 		switch ( true ) {
 			case ( $object instanceof \Wikibase\Snak ):
 				return new SnakSerializer( $options );
@@ -75,6 +83,14 @@ class SerializerFactory {
 	 * @throws InvalidArgumentException
 	 */
 	public function newUnserializerForClass( $className, $options = null ) {
+		if ( $options === null ) {
+			$options = new SerializationOptions();
+		}
+
+		//TODO: The factory should take options in the constructor.
+		//TODO: The factory should offer clones of the options via newSerializationOptions().
+		//TODO: This method should merge to options given with the options from the constructor.
+
 		if ( !is_string( $className ) ) {
 			throw new OutOfBoundsException( '$className needs to be a string' );
 		}

@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use SiteSQLStore;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
-use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -30,7 +30,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function validProvider() {
 		$validArgs = array();
 
-		$options = new EntitySerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$siteLinks = array(
 			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q42" ) ) ),
@@ -44,9 +44,9 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $siteLinks, $options, $expectedSerialization );
 
-		$options = new EntitySerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
-		$options->addProp( "sitelinks/removed" );
+		$options->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
 		$siteLinks = array(
 				new SimpleSiteLink( "enwiki", "", array( new ItemId( "Q42" ) ) ),
 				new SimpleSiteLink( "dewiki", "", array() ),
@@ -59,7 +59,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $siteLinks, $options, $expectedSerialization );
 
-		$options = new EntitySerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$siteLinks = array(
 			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q149" ), new ItemId( "Q49" ) ) ),
@@ -103,7 +103,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidGetSerialized( $sitelinks ) {
-		$options = new EntitySerializationOptions();
+		$options = new SerializationOptions();
 		$siteStore = SiteSQLStore::newInstance();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 		$siteLinkSerializer->getSerialized( $sitelinks );
@@ -120,7 +120,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function testNewFromSerialization( $expected, $serialized ) {
 		// todo inject / mock
 		$siteStore = SiteSQLStore::newInstance();
-		$options = new EntitySerializationOptions();
+		$options = new SerializationOptions();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 
 		$simpleSiteLinks = $siteLinkSerializer->newFromSerialization( $serialized );
@@ -140,7 +140,7 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		// todo inject / mock
 		$siteStore = SiteSQLStore::newInstance();
-		$options = new EntitySerializationOptions();
+		$options = new SerializationOptions();
 
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 		$serialized = $siteLinkSerializer->getSerialized( $siteLinks );
