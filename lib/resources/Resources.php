@@ -450,7 +450,10 @@ return call_user_func( function() {
 				'jquery.wikibase/toolbar/themes/default/movetoolbar.css',
 			),
 			'dependencies' => array(
+				'jquery.ui.widget',
 				'jquery.wikibase.toolbarbase',
+				'jquery.wikibase.toolbarbutton',
+				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-move-up',
