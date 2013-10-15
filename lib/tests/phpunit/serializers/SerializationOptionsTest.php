@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
@@ -26,12 +25,7 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	public function testMultiLangSerializationOptionsConstructor() {
-		new MultiLangSerializationOptions();
-		$this->assertTrue( true );
-	}
-
-	private function preprocessTestMultiLangSerializationOptionsLanguages( $languages ) {
+	private function preprocessTestSerializationOptionsLanguages( $languages ) {
 		if ( $languages === null ) {
 			return null;
 		}
@@ -48,20 +42,20 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideTestMultiLangSerializationOptionsLanguages
+	 * @dataProvider provideTestSerializationOptionsLanguages
 	 */
-	public function testMultiLangSerializationOptionsLanguages( $languages, $codes, $fallbackChains ) {
-		$languages = $this->preprocessTestMultiLangSerializationOptionsLanguages( $languages );
-		$fallbackChains = $this->preprocessTestMultiLangSerializationOptionsLanguages( $fallbackChains );
+	public function testSerializationOptionsLanguages( $languages, $codes, $fallbackChains ) {
+		$languages = $this->preprocessTestSerializationOptionsLanguages( $languages );
+		$fallbackChains = $this->preprocessTestSerializationOptionsLanguages( $fallbackChains );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setLanguages( $languages );
 
 		$this->assertEquals( $codes, $options->getLanguages() );
 		$this->assertEquals( $fallbackChains, $options->getLanguageFallbackChains() );
 	}
 
-	public function provideTestMultiLangSerializationOptionsLanguages() {
+	public function provideTestSerializationOptionsLanguages() {
 		return array(
 			array( null, null, null ),
 			array( array( 'en' ), array( 'en' ), array( 'en' => LanguageFallbackChainFactory::FALLBACK_SELF ) ),

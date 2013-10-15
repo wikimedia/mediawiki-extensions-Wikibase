@@ -7,6 +7,7 @@ use Wikibase\Claims;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Serializers\ClaimsSerializer;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
@@ -14,8 +15,7 @@ use Wikibase\Lib\Serializers\LabelSerializer;
 use Wikibase\Lib\Serializers\DescriptionSerializer;
 use Wikibase\Lib\Serializers\AliasSerializer;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
-use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Summary;
 
 /**
@@ -116,7 +116,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$aliasSerializer = new AliasSerializer( $options );
 		$value = $aliasSerializer->getSerialized( $aliases );
@@ -145,23 +145,23 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$serializerOptions = new EntitySerializationOptions();
-		$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_NONE );
+		$serializerOptions = new SerializationOptions();
+		$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		if ( isset( $options ) ) {
-			if ( in_array( EntitySerializationOptions::SORT_ASC, $options ) ) {
-				$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_ASC );
-			} elseif ( in_array( EntitySerializationOptions::SORT_DESC, $options ) ) {
-				$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_DESC );
+			if ( in_array( EntitySerializer::SORT_ASC, $options ) ) {
+				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
+			} elseif ( in_array( EntitySerializer::SORT_DESC, $options ) ) {
+				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_DESC );
 			}
 
 			if ( in_array( 'url', $options ) ) {
-				$serializerOptions->addProp( 'sitelinks/urls' );
+				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/urls" );
 			}
 
 			if ( in_array( 'removed', $options ) ) {
-				$serializerOptions->addProp( 'sitelinks/removed' );
+				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
 			}
 		}
 
@@ -190,7 +190,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$descriptionSerializer = new DescriptionSerializer( $options );
 
@@ -217,7 +217,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$labelSerializer = new LabelSerializer( $options );
 
@@ -244,7 +244,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 */
 	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$claimSerializer = new ClaimsSerializer( $options );
 

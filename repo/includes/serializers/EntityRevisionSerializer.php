@@ -8,11 +8,12 @@ use MWException;
 use Wikibase\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializerObject;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
@@ -72,12 +73,12 @@ class EntityRevisionSerializer extends SerializerObject {
 		/** @var $entity Entity */
 		$entity = $entityRevision->getEntity();
 		$entityTitle = $this->titleLookup->getTitleForId( $entity->getId() );
-		$entitySerializationOptions = $this->options->getEntitySerializationOptions();
+		$SerializationOptions = $this->options->getSerializationOptions();
 
 		$serializerFactory = new SerializerFactory(); //TODO: inject
 		$entitySerializer = $serializerFactory->newSerializerForObject(
 			$entity,
-			$entitySerializationOptions
+			$SerializationOptions
 		);
 		$serialization['content'] = $entitySerializer->getSerialized( $entity );
 		$serialization['title'] = $entityTitle->getPrefixedText();
@@ -99,14 +100,14 @@ class EntityRevisionSerializer extends SerializerObject {
 	 * @return EntityRevisionSerializer
 	 */
 	public static function newForFrontendStore( EntityTitleLookup $titleLookup, $primaryLanguage, LanguageFallbackChain $languageFallbackChain ) {
-		$entitySerializationOptions =
-			new EntitySerializationOptions();
+		$SerializationOptions =
+			new SerializationOptions();
 		
-		$entitySerializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
-		$entitySerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
+		$SerializationOptions->setOption( EntitySerializer::OPT_PARTS, array( 'labels', 'descriptions', 'datatype' ) );
+		$SerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
 
 		$entityRevisionSerializationOptions =
-			new EntityRevisionSerializationOptions( $entitySerializationOptions );
+			new EntityRevisionSerializationOptions( $SerializationOptions );
 
 		$serializer = new EntityRevisionSerializer( $titleLookup, $entityRevisionSerializationOptions );
 		return $serializer;
