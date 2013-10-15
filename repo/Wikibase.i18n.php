@@ -116,6 +116,10 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-itemlink-userlang-wrapper' => '&nbsp;($1: $2)',
 	'wikibase-itemlink-title' => '$1 | $2',
 
+	'wikibase-setting-languages' => 'Additional languages:',
+	'wikibase-setting-languages-help' => 'Enter the language codes of the languages you want to see in the "In other languages" section, seperated by a comma.',
+	'wikibase-setting-languages-invalidlang' => 'The language codes $1 are not valid.',
+
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'wikibase-itembytitle-lookup-fieldset' => 'Search for items by site and title',
@@ -736,6 +740,10 @@ Used to wrap the language and label for an additional entry when the language ar
 Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description. Parameters:
 * $1 label as a directional string
 * $2 description as a directional string',
+	'wikibase-setting-languages' => 'The label besides the text field in the user preferences to choose the extra languages.',
+	'wikibase-setting-languages-help' => 'The help message below the text field in the user preferences to choose the extra languages.',
+	'wikibase-setting-languages-invalidlang' => 'Error shown if an invalid language has been chosen. Parameters:
+* $1 is a string containing the language codes separated by commas',
 	'special-itembytitle' => "{{doc-special|ItemByTitle}}
 The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	'wikibase-itembytitle-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.',
