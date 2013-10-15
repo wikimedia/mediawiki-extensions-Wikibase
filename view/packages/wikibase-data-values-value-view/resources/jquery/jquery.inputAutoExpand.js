@@ -450,7 +450,13 @@
 				ruler.value = text;
 
 				// Update the width in case the original textarea width has changed
-				ruler.style.width = this.input.width() + 'px';
+				var width = this.input.width();
+				// Catch miscalculation (IE < 9):
+				if( width < 0 ) {
+					width = 0;
+				}
+
+				ruler.style.width = width + 'px';
 
 				// Needed for IE to reliably return the correct scrollHeight
 				ruler.scrollTop = 0;
