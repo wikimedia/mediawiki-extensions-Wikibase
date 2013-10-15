@@ -127,11 +127,11 @@ $.widget( 'wikibase.linkitem', {
 		this.$dialog = $( '<div>' )
 			.attr( 'id', 'wbclient-linkItem-dialog' )
 			.dialog( {
-				title: mw.message( 'wikibase-linkitem-title' ).escaped(),
+				title: mw.message( 'wikibase-linkitem-title' ),
 				width: 500,
 				resizable: false,
 				buttons: [ {
-					text: mw.message( 'wikibase-linkitem-linkpage' ).escaped(),
+					text: mw.message( 'wikibase-linkitem-linkpage' ),
 					id: 'wbclient-linkItem-goButton',
 					disabled: 'disabled',
 					click: $.proxy( this._onSecondStep, this )
@@ -142,7 +142,7 @@ $.widget( 'wikibase.linkitem', {
 			.on( 'dialogclose', $.proxy( this._onDialogClose, this ) )
 			.append(
 				$( '<p>' )
-					.text( mw.message( 'wikibase-linkitem-selectlink' ).escaped() )
+					.text( mw.message( 'wikibase-linkitem-selectlink' ) )
 			)
 			.append( this._getSiteLinkForm() );
 
@@ -200,76 +200,94 @@ $.widget( 'wikibase.linkitem', {
 				name: 'wikibase-linkItem-form'
 			} )
 			.append(
-				$( '<label>' )
-					.attr( {
-						'for': 'wbclient-linkItem-Site'
-					} )
-					.text( mw.message( 'wikibase-linkitem-input-site' ) )
-			)
-			.append(
-				$( '<input />' )
-					.attr( {
-						name: 'wbclient-linkItem-Site',
-						id: 'wbclient-linkItem-Site',
-						'class': 'wbclient-linkItem-Input'
-					} )
-					.siteselector( {
-						resultSet: this._getLinkableSites()
-					} )
-					.on( 'siteselectoropen siteselectorclose siteselectorautocomplete blur', $.proxy( function() {
-						var apiUrl;
+				$( '<table>' )
+					.append(
+						$( '<tr>' )
+							.append(
+								$( '<td>' )
+									.append(
+										$( '<label>' )
+											.attr( {
+												'for': 'wbclient-linkItem-Site'
+											} )
+											.text( mw.message( 'wikibase-linkitem-input-site' ) )
+									)
+							)
+							.append(
+								$( '<td>' )
+									.append(
+										$( '<input />' )
+											.attr( {
+												name: 'wbclient-linkItem-Site',
+												id: 'wbclient-linkItem-Site',
+												'class': 'wbclient-linkItem-Input'
+											} )
+											.siteselector( {
+												resultSet: this._getLinkableSites()
+											} )
+											.on( 'siteselectoropen siteselectorclose siteselectorautocomplete blur', $.proxy( function() {
+												var apiUrl;
 
-						$( '#wbclient-linkItem-page' )
-							.val( '' );
+												$( '#wbclient-linkItem-page' )
+													.val( '' );
 
-						try {
-							apiUrl = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getApi();
-						} catch( e ) {
-							// Invalid input (likely incomplete). Disable the page input an re-disable to button
-							$( '#wbclient-linkItem-page' )
-								.attr( 'disabled', 'disabled' );
-							this.$goButton.button( 'disable' );
-							return;
-						}
-						// If the language gets changed the yet selected page is no longer available so we clear the input element.
-						// Furthermore we remove the old suggestor (if there's one) and create a new one working on the right wiki
-						$( '#wbclient-linkItem-page' )
-							.removeAttr( 'disabled' )
-							.suggester( {
-								ajax: {
-									url: apiUrl,
-									params: {
-										action: 'opensearch',
-										namespace: mw.config.get( 'wgNamespaceNumber' )
-									}
-								}
-							} );
-					}, this ) )
-			)
-			.append(
-				$( '<br />' )
-			)
-			.append(
-				$( '<label>' )
-					.attr( {
-						'for': 'wbclient-linkItem-Site'
-					} )
-					.text( mw.msg( 'wikibase-linkitem-input-page' ) )
-			)
-			.append(
-				$( '<input />' )
-					.attr( {
-						name: 'wbclient-linkItem-page',
-						id: 'wbclient-linkItem-page',
-						disabled: 'disabled',
-						'class' : 'wbclient-linkItem-Input'
-					} )
-					.on(
-						'focus',
-						$.proxy( function () {
-							// Enable the button by the time the user uses this field
-							this.$goButton.button( 'enable' );
-						}, this )
+												try {
+													apiUrl = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getApi();
+												} catch( e ) {
+													// Invalid input (likely incomplete). Disable the page input an re-disable to button
+													$( '#wbclient-linkItem-page' )
+														.attr( 'disabled', 'disabled' );
+													this.$goButton.button( 'disable' );
+													return;
+												}
+												// If the language gets changed the yet selected page is no longer available so we clear the input element.
+												// Furthermore we remove the old suggestor (if there's one) and create a new one working on the right wiki
+												$( '#wbclient-linkItem-page' )
+													.removeAttr( 'disabled' )
+													.suggester( {
+														ajax: {
+															url: apiUrl,
+															params: {
+																action: 'opensearch',
+																namespace: mw.config.get( 'wgNamespaceNumber' )
+															}
+														}
+													} );
+											}, this ) )
+									)
+							)
+					)
+					.append(
+						$( '<tr>' )
+							.append(
+								$( '<td>' )
+									.append(
+										$( '<label>' )
+											.attr( {
+												'for': 'wbclient-linkItem-Site'
+											} )
+											.text( mw.msg( 'wikibase-linkitem-input-page' ) )
+									)
+							)
+							.append(
+								$( '<td>' )
+									.append(
+										$( '<input />' )
+											.attr( {
+												name: 'wbclient-linkItem-page',
+												id: 'wbclient-linkItem-page',
+												disabled: 'disabled',
+												'class' : 'wbclient-linkItem-Input'
+											} )
+											.on(
+												'focus',
+												$.proxy( function () {
+													// Enable the button by the time the user uses this field
+													this.$goButton.button( 'enable' );
+												}, this )
+											)
+									)
+							)
 					)
 			);
 	},
