@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LabelSerializer;
 use Wikibase\Lib\Serializers\MultilingualSerializer;
 
@@ -26,7 +26,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function validProvider() {
 		$validArgs = array();
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$labels = array(
 			"en" => "Rome",
@@ -54,7 +54,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $labels, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$labels = array(
 			"en" => "Rome",
@@ -83,7 +83,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $labels, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$labels = array(
 			"en" => "Rome",
@@ -130,7 +130,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $labels, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$descriptions = array(
 			"en" => "Rome",
@@ -226,7 +226,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetSerializedMultilingualValues() {
 		$validArgs = array();
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$options->setLanguages( array( 'en', 'it', 'de', 'fr' ) );
 		$values = array(
@@ -237,7 +237,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $values, $options );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		$options->setIndexTags( false );
 		$options->setLanguages( array(
@@ -263,16 +263,14 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider newFromSerializationProvider
 	 */
 	public function testNewFromSerialization( $expected, $serialized, $message ) {
-		$labelSerializer = new LabelSerializer(
-			new MultiLangSerializationOptions()
-		);
+		$labelSerializer = new LabelSerializer( new SerializationOptions() );
 
 		$labels = $labelSerializer->newFromSerialization( $serialized );
 		$this->assertEquals( $expected, $labels, $message );
 	}
 
 	public function newFromSerializationProvider() {
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$labelSerializer = new LabelSerializer( $options );
 

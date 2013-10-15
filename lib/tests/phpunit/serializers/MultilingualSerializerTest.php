@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\MultilingualSerializer;
 
 /**
@@ -22,7 +22,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function provideSerialize() {
 		$validArgs = array();
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$values = array(
 			"en" => "capital city of Italy",
@@ -50,7 +50,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $values, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$values = array(
 			"en" => "capital city of Italy",
@@ -78,7 +78,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $values, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$values = array(
 			"en" => "Rome",
@@ -125,7 +125,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $values, $options, $expectedSerialization );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$values = array(
 			"en" => "Rome",
@@ -199,7 +199,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function provideFilter() {
 		$validArgs = array();
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$options->setLanguages( array( 'en', 'it', 'de', 'fr' ) );
 		$values = array(
@@ -227,7 +227,7 @@ class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $values, $options, $expectedOutput );
 
-		$options = new MultiLangSerializationOptions();
+		$options = new SerializationOptions();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		$options->setIndexTags( false );
 		$options->setLanguages( array(
