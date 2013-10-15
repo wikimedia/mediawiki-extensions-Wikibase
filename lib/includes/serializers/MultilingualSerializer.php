@@ -32,7 +32,7 @@ class MultilingualSerializer {
 	/**
 	 * @since 0.4
 	 *
-	 * @var MultiLangSerializationOptions
+	 * @var SerializationOptions
 	 */
 	protected $options;
 
@@ -41,14 +41,14 @@ class MultilingualSerializer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param MultiLangSerializationOptions $options
+	 * @param SerializationOptions $options
 	 */
-	public function __construct( MultiLangSerializationOptions $options = null ) {
+	public function __construct( SerializationOptions $options = null ) {
 		if ( $options === null ) {
-			$this->options = new MultiLangSerializationOptions();
-		} else {
-			$this->options = $options;
+			$options = new SerializationOptions();
 		}
+
+		$this->options = $options;
 	}
 
 	/**

@@ -33,15 +33,6 @@ use InvalidArgumentException;
 class LabelSerializer extends SerializerObject {
 
 	/**
-	 * @see ApiSerializerObject::$options
-	 *
-	 * @since 0.4
-	 *
-	 * @var MultiLangSerializationOptions
-	 */
-	protected $options;
-
-	/**
 	 * @var MultilingualSerializer
 	 */
 	protected $multilingualSerializer;
@@ -51,14 +42,12 @@ class LabelSerializer extends SerializerObject {
 	 *
 	 * @since 0.4
 	 *
-	 * @param MultiLangSerializationOptions $options
+	 * @param SerializationOptions $options
+	 * @param MultilingualSerializer $multilingualSerializer
 	 */
-	public function __construct( MultiLangSerializationOptions $options = null,
+	public function __construct( SerializationOptions $options = null,
 		MultilingualSerializer $multilingualSerializer = null
 	) {
-		if ( $options === null ) {
-			$this->options = new MultiLangSerializationOptions();
-		}
 		if ( $multilingualSerializer === null ) {
 			$this->multilingualSerializer = new MultilingualSerializer( $options );
 		} else {

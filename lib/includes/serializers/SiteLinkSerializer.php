@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
+use SiteSQLStore;
 use Wikibase\SiteLink;
 use Wikibase\DataModel\SimpleSiteLink;
 
@@ -38,15 +39,6 @@ use Wikibase\DataModel\SimpleSiteLink;
 class SiteLinkSerializer extends SerializerObject {
 
 	/**
-	 * @see ApiSerializerObject::$options
-	 *
-	 * @since 0.4
-	 *
-	 * @var EntitySerializationOptions
-	 */
-	protected $options;
-
-	/**
 	 * @since 0.4
 	 *
 	 * @var SiteSQLStore $siteStore
@@ -58,11 +50,14 @@ class SiteLinkSerializer extends SerializerObject {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntitySerializationOptions $options
+	 * @param SerializationOptions $options
 	 * @param SiteSQLStore $siteStore
 	 */
-	public function __construct( EntitySerializationOptions $options, \SiteSQLStore $siteStore ) {
-		$this->options = new MultiLangSerializationOptions();
+	public function __construct( SerializationOptions $options, \SiteSQLStore $siteStore ) {
+		$options->initOption( EntitySerializer::OPT_PARTS,  array(
+			'sitelinks',
+		) );
+
 		$this->siteStore = $siteStore;
 		parent::__construct( $options );
 	}
@@ -84,8 +79,10 @@ class SiteLinkSerializer extends SerializerObject {
 
 		$serialization = array();
 
-		$includeUrls = in_array( 'sitelinks/urls', $this->options->getProps() );
-		$setRemoved = in_array( 'sitelinks/removed' , $this->options->getProps() );
+		$parts = $this->options->getOption( EntitySerializer::OPT_PARTS );
+
+		$includeUrls = in_array( 'sitelinks/urls', $parts );
+		$setRemoved = in_array( 'sitelinks/removed' , $parts );
 
 		foreach ( $this->sortSiteLinks( $siteLinks ) as $link ) {
 			$response = array(
@@ -145,19 +142,19 @@ class SiteLinkSerializer extends SerializerObject {
 	 */
 	protected function sortSiteLinks( $siteLinks ) {
 		$unsortedSiteLinks = $siteLinks;
-		$sortDirection = $this->options->getSortDirection();
+		$sortDirection = $this->options->getOption( EntitySerializer::OPT_SORT_ORDER );
 
-		if ( $sortDirection !== EntitySerializationOptions::SORT_NONE ) {
+		if ( $sortDirection !== EntitySerializer::SORT_NONE ) {
 			$sortOk = false;
 
-			if ( $sortDirection === EntitySerializationOptions::SORT_ASC ) {
+			if ( $sortDirection === EntitySerializer::SORT_ASC ) {
 				$sortOk = usort(
 					$siteLinks,
 					function( SimpleSiteLink $a, SimpleSiteLink $b ) {
 						return strcmp( $a->getSiteId(), $b->getSiteId() );
 					}
 				);
-			} elseif ( $sortDirection === EntitySerializationOptions::SORT_DESC ) {
+			} elseif ( $sortDirection === EntitySerializer::SORT_DESC ) {
 				$sortOk = usort(
 					$siteLinks,
 					function( SimpleSiteLink $a, SimpleSiteLink $b ) {
