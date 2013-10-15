@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_f977e09c",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "Use of MWException here is bad.",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_197bd48a",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "This should be injected",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_59754c92",
+        "filename": "lib/includes/serializers/ItemSerializer.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "Silent ignore??",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_796cd0cf",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "Again, silent ignore",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_b93488dd",
+        "filename": "lib/tests/phpunit/serializers/AliasSerializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_d92f7c87",
+        "filename": "lib/tests/phpunit/serializers/AliasSerializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_b96648ed",
+        "filename": "lib/tests/phpunit/serializers/DescriptionSerializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_d9613cd7",
+        "filename": "lib/tests/phpunit/serializers/DescriptionSerializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_f998c0cb",
+        "filename": "lib/tests/phpunit/serializers/LabelSerializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_199cb4bb",
+        "filename": "lib/tests/phpunit/serializers/LabelSerializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-15T14:03:47Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fd1fe063c1b2e709133a768825e44f55620c0098",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
