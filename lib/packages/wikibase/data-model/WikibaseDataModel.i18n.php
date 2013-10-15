@@ -147,6 +147,13 @@ $messages['oc'] = array(
 	'wikibasedatamodel-desc' => 'Component que definís lo modèl de donadas de Wikibase',
 );
 
+/** Polish (polski)
+ * @author Chrumps
+ */
+$messages['pl'] = array(
+	'wikibasedatamodel-desc' => 'Komponent definiujący model danych Wikibase',
+);
+
 /** tarandíne (tarandíne)
  * @author Joetaras
  */
