@@ -5,7 +5,6 @@ namespace Wikibase\Lib;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\LanguageWithConversion;
