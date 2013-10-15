@@ -1161,6 +1161,7 @@ $messages['eu'] = array(
  * @author Alireza
  * @author Calak
  * @author Dalba
+ * @author Ebraminio
  * @author Ladsgroup
  * @author Reza1615
  * @author Rtemis
@@ -1204,7 +1205,7 @@ $messages['fa'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'کد',
 	'wikibase-sitelinks-link-columnheading' => 'مقالهٔ پیوندداده‌شده',
 	'wikibase-tooltip-error-details' => 'جزئیات',
-	'wikibase-undeserializable-value' => 'این مقدار معتبر نیست و قابل نمایش نمی‌باشد.',
+	'wikibase-undeserializable-value' => 'این مقدار معتبر نیست و قابل نمایش نیست.',
 	'wikibase-validator-bad-type' => '$2 به جای $1',
 	'wikibase-validator-too-long' => 'نباید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد',
 	'wikibase-validator-too-short' => 'باید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد',
@@ -1265,10 +1266,15 @@ $messages['fi'] = array(
 	'wikibase-replicationnote' => 'Huomaa, että voi kestää useita minuutteja ennen kuin muutokset näkyvät kaikissa wikeissä.',
 	'wikibase-sitelinks-wikipedia' => 'Tähän kohteeseen linkitetyt Wikipedia-sivut',
 	'wikibase-sitelinks-sitename-columnheading' => 'Kieli',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Sivusto',
 	'wikibase-sitelinks-siteid-columnheading' => 'Koodi',
 	'wikibase-sitelinks-link-columnheading' => 'Linkitetty artikkeli',
 	'wikibase-tooltip-error-details' => 'Tiedot',
+	'wikibase-undeserializable-value' => 'Arvo on virheellinen, eikä sitä voida näyttää.',
+	'wikibase-validator-too-long' => 'Saa olla enintään {{PLURAL:$1|yhden merkin|$1 merkin}} pituinen',
+	'wikibase-validator-too-short' => 'Pitää olla vähintään {{PLURAL:$1|yhden merkin|$1 merkin}} pituinen',
 	'wikibase-validator-no-such-entity' => '$1 ei löydy',
+	'wikibase-validator-bad-url-scheme' => 'Ei-tuettu URL-järjestelmä: $1',
 	'datatypes-type-wikibase-item' => 'Kohde',
 	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
 	'version-wikibase' => 'Wikibase',
@@ -3187,12 +3193,16 @@ $messages['vi'] = array(
 	'wikibase-replicationnote' => 'Xin lưu ý, có thể phải chờ vài phút để cho các wiki trình bày được các thay đổi',
 	'wikibase-sitelinks-wikipedia' => 'Các trang Wikipedia được liên kết với khoản mục này',
 	'wikibase-sitelinks-sitename-columnheading' => 'Ngôn ngữ',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Dịch vụ',
 	'wikibase-sitelinks-siteid-columnheading' => 'Mã',
 	'wikibase-sitelinks-link-columnheading' => 'Bài viết liên kết',
 	'wikibase-tooltip-error-details' => 'Chi tiết',
+	'wikibase-undeserializable-value' => 'Không thể hiển thị giá trị vì nó không hợp lệ.',
 	'wikibase-validator-bad-type' => '$2 thay vì $1',
 	'wikibase-validator-too-long' => 'Không được dài hơn {{PLURAL:$1|một ký tự|$1 ký tự}}',
 	'wikibase-validator-too-short' => 'Phải có ít nhất {{PLURAL:$1|một ký tự|$1 ký tự}}',
+	'wikibase-validator-too-high' => 'Ngoài phạm vi, không được hơn $1',
+	'wikibase-validator-too-low' => 'Ngoài phạm vi, không được ít hơn $1',
 	'wikibase-validator-malformed-value' => 'Giá trị hỏng: $1',
 	'wikibase-validator-bad-entity-id' => 'ID hỏng: $1',
 	'wikibase-validator-bad-entity-type' => 'Kiểu thực thể bất ngờ $1',
