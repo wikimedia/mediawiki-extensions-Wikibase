@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Test\Serializers;
 
 use Wikibase\Claim;
 use Wikibase\Item;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\Reference;
@@ -35,7 +35,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 		$argLists[] = array( new Reference() );
 		$argLists[] = array( new Claim( new PropertyNoValueSnak( 42 ) ) );
 
-		$argLists[] = array( Item::newEmpty(), new EntitySerializationOptions() );
+		$argLists[] = array( Item::newEmpty(), new SerializationOptions() );
 
 		return $argLists;
 	}

@@ -19,6 +19,7 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Serializers\EntityRevisionSerializer;
 use Wikibase\Lib\SnakFormatter;
@@ -838,10 +839,10 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
 
 		// TODO: use injected id formatter
-		$serializationOptions = new EntitySerializationOptions();
+		$serializationOptions = new SerializationOptions();
 		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
 
-		$serializerFactory = new SerializerFactory();
+		$serializerFactory = new SerializerFactory( $serializationOptions );
 		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 
 		$out->addJsConfigVars(

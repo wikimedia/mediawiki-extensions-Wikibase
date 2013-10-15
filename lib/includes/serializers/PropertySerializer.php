@@ -51,7 +51,9 @@ class PropertySerializer extends EntitySerializer {
 
 		$serialization = array();
 
-		if ( in_array( 'datatype', $this->options->getProps() ) ) {
+		$parts = $this->options->getOption( EntitySerializer::OPT_PARTS );
+
+		if ( in_array( 'datatype', $parts ) ) {
 			$serialization['datatype'] = $property->getDataTypeId();
 		}
 
