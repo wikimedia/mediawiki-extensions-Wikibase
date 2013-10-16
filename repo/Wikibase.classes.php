@@ -46,6 +46,7 @@ return call_user_func( function() {
 		'Wikibase\MultiLangConstraintDetector' => 'includes/MultiLangConstraintDetector.php',
 		'Wikibase\NamespaceUtils' => 'includes/NamespaceUtils.php',
 		'Wikibase\PropertyView' => 'includes/PropertyView.php',
+		'Wikibase\Repo\EntitySearchTextGenerator' => 'includes/EntitySearchTextGenerator.php',
 		'Wikibase\Summary' => 'includes/Summary.php',
 		'Wikibase\SummaryFormatter' => 'includes/SummaryFormatter.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
