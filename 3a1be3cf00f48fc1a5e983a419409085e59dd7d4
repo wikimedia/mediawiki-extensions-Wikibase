@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_e629f03a",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T16:36:57Z",
+      "side": 1,
+      "message": "checking for the \u0027value\u0027 key here would make more sense",
+      "revId": "3a1be3cf00f48fc1a5e983a419409085e59dd7d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_06de043b",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T16:36:57Z",
+      "side": 1,
+      "message": "Why not just use $entity-\u003esetAllAliases()?",
+      "revId": "3a1be3cf00f48fc1a5e983a419409085e59dd7d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_e6b3b007",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T16:36:57Z",
+      "side": 1,
+      "message": "Please put this into a separate function.",
+      "revId": "3a1be3cf00f48fc1a5e983a419409085e59dd7d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
