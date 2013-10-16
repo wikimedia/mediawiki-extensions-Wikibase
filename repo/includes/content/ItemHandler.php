@@ -2,8 +2,11 @@
 
 namespace Wikibase;
 
-use User, Title, WikiPage, RequestContext;
+use RequestContext;
+use Title;
+use User;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Content handler for Wikibase items.
@@ -65,7 +68,8 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * Get the item corresponding to the provided site and title pair, or null if there is no such item.
+	 * Get the item corresponding to the provided site and title pair,
+	 * or null if there is no such item.
 	 *
 	 * @since 0.1
 	 *

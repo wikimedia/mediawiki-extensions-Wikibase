@@ -1,32 +1,25 @@
 <?php
 
 namespace Wikibase;
-use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
+
+use Content;
+use DatabaseBase;
+use DataUpdate;
+use Message;
+use MWException;
+use ParserOptions;
+use ParserOutput;
+use SiteSQLStore;
+use Status;
+use Title;
+use User;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Content object for articles representing Wikibase items.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup Content
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -40,9 +33,11 @@ class ItemContent extends EntityContent {
 	protected $item;
 
 	/**
-	 * Constructor.
-	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
-	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
+	 * Do not use to construct new stuff from outside of this class,
+	 * use the static newFoobar methods.
+	 *
+	 * In other words: treat as protected (which it was, but now cannot
+	 * be since we derive from Content).
 	 *
 	 * @since 0.1
 	 *
@@ -142,10 +137,11 @@ class ItemContent extends EntityContent {
 	 *        also be used for saving. This will preserve transactional integrity
 	 *        and avoid race conditions.
 	 */
-	protected function addSiteLinkConflicts( Status $status, \DatabaseBase $db = null ) {
+	protected function addSiteLinkConflicts( Status $status, DatabaseBase $db = null ) {
 		wfProfileIn( __METHOD__ );
 
-		$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem(), $db );
+		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
+		$conflicts = $siteLinkCache->getConflictsForItem( $this->getItem(), $db );
 
 		foreach ( $conflicts as $conflict ) {
 			$msg = $this->getConflictMessage( $conflict );
@@ -168,20 +164,22 @@ class ItemContent extends EntityContent {
 	protected function getConflictMessage( array $conflict ) {
 		$id = new EntityId( Item::ENTITY_TYPE, $conflict['itemId'] );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		/**
 		 * @var WikiPage $ipsPage
 		 */
-		$conflictingPage = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
+		$conflictingPage = $entityContentFactory->getWikiPageForId( $id );
 
-		$siteSqlStore = \SiteSQLStore::newInstance();
+		$siteSqlStore = SiteSQLStore::newInstance();
 		$site = $siteSqlStore->getSite( $conflict['siteId'] );
 		$pageUrl = $site->getPageUrl( $conflict['sitePage'] );
 
 		// $pageUrl shouldn't be a raw param (it's causing the link not to be parsed)
-		return new \Message(
+		return new Message(
 			'wikibase-error-sitelink-already-used',
 			array(
-				$pageUrl, 
+				$pageUrl,
 				$conflict['sitePage'],
 				$conflictingPage->getTitle()->getFullText(),
 				$conflict['siteId'],
@@ -207,8 +205,11 @@ class ItemContent extends EntityContent {
 	 *
 	 * @return int: One of WikiPage::DELETE_* constants
 	 */
-	public function delete( $reason = '', $suppress = false, $id = 0, $commit = true, &$error = '', User $user = null ) {
-		return $this->getWikiPage()->doDeleteArticleReal( $reason, $suppress, $id, $commit, $error, $user );
+	public function delete( $reason = '', $suppress = false, $id = 0, $commit = true,
+		&$error = '', User $user = null
+	) {
+		return $this->getWikiPage()->doDeleteArticleReal( $reason, $suppress, $id, $commit,
+			$error, $user );
 	}
 
 	/**
@@ -243,7 +244,7 @@ class ItemContent extends EntityContent {
 	 *
 	 * @return DataUpdate[]
 	 */
-	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
+	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
 		return array_merge(
 			parent::getDeletionUpdates( $page, $parserOutput ),
 			array( new ItemDeletionUpdate( $this ) )

@@ -1,38 +1,26 @@
 <?php
 
 namespace Wikibase;
-use MWException, WikiPage, Title, Content;
+
+use Content;
+use ContentHandler;
+use MWContentSerializationException;
+use MWException;
 use Revision;
+use Title;
+use WikiPage;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
  * TODO: interface for enforcing singleton
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityHandler extends \ContentHandler {
+abstract class EntityHandler extends ContentHandler {
 
 	/**
 	 * Returns the name of the EntityContent deriving class.
@@ -41,7 +29,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 *
 	 * @return string
 	 */
-	protected abstract function getContentClass();
+	abstract protected function getContentClass();
 
 	public function __construct( $modelId ) {
 		$formats = array(
@@ -94,7 +82,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @throws MWException
 	 * @return string
 	 */
-	public function serializeContent( \Content $content, $format = null ) {
+	public function serializeContent( Content $content, $format = null ) {
 
 		if ( is_null( $format ) ) {
 			$format = $this->getDefaultFormat();
@@ -111,7 +99,8 @@ abstract class EntityHandler extends \ContentHandler {
 				$blob = json_encode( $data );
 				break;
 			default:
-				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				throw new MWException( "serialization format $format is not supported for "
+					. "Wikibase content model" );
 		}
 
 		return $blob;
@@ -138,12 +127,13 @@ abstract class EntityHandler extends \ContentHandler {
 				$data = json_decode( $blob, true ); //FIXME: suppress notice on failed serialization!
 				break;
 			default:
-				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				throw new MWException( "serialization format $format is not supported "
+					. "for Wikibase content model" );
 				break;
 		}
 
 		if ( $data === false || $data === null ) {
-			throw new \MWContentSerializationException( 'failed to deserialize' );
+			throw new MWContentSerializationException( 'failed to deserialize' );
 		}
 
 		return $data;
@@ -170,8 +160,8 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return bool true if $title represents a page in the appropriate entity namespace.
 	 */
 	public function canBeUsedOn( Title $title ) {
-		$ns = $this->getEntityNamespace();
-		return $ns === $title->getNamespace();
+		$namespace = $this->getEntityNamespace();
+		return $namespace === $title->getNamespace();
 	}
 
 	/**
@@ -231,8 +221,10 @@ abstract class EntityHandler extends \ContentHandler {
 	}
 
 	/**
-	 * Returns the name of the special page responsible for creating a page for this type of entity content.
+	 * Returns the name of the special page responsible for creating a page
+	 * for this type of entity content.
 	 * Returns null if there is no such special page.
+	 *
 	 * @since 0.2
 	 *
 	 * @return string|null
@@ -266,7 +258,9 @@ abstract class EntityHandler extends \ContentHandler {
 	 *
 	 * @return Content|bool Content on success, false on failure
 	 */
-	public function getUndoContent( Revision $latestRevision, Revision $newerRevision, Revision $olderRevision ) {
+	public function getUndoContent( Revision $latestRevision, Revision $newerRevision,
+		Revision $olderRevision
+	) {
 		/**
 		 * @var EntityContent $latestContent
 		 * @var EntityContent $olderContent
@@ -305,5 +299,5 @@ abstract class EntityHandler extends \ContentHandler {
 	 *
 	 * @return string
 	 */
-	public abstract function getEntityType();
+	abstract public function getEntityType();
 }

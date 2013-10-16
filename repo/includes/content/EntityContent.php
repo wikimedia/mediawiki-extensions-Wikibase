@@ -2,14 +2,21 @@
 
 namespace Wikibase;
 
+use AbstractContent;
+use Content;
+use MWException;
+use ParserOptions;
 use ParserOutput;
+use Status;
+use Title;
+use User;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\Test\FormatterOptionsTest;
+//use ValueFormatters\Test\FormatterOptionsTest;
 use ValueFormatters\ValueFormatter;
+use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use WikiPage, Title, User, Status, ParserOptions;
-use \ValueFormatters\ValueFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Abstract content object for articles representing Wikibase entities.
@@ -19,7 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityContent extends \AbstractContent {
+abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * @since 0.1
@@ -110,7 +117,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return Entity
 	 */
-	public abstract function getEntity();
+	abstract public function getEntity();
 
 	/**
 	 * Returns a ParserOutput object containing the HTML.
@@ -124,7 +131,9 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null,
+		$generateHtml = true
+	) {
 		$formatterOptions = new FormatterOptions(); //TODO: Language Fallback, etc
 
 		if ( $options !== null ) {
@@ -254,7 +263,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return int
 	 */
-	public function getSize()  {
+	public function getSize() {
 		return strlen( serialize( $this->getNativeData() ) );
 	}
 
@@ -265,7 +274,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @see Content::equals
 	 */
-	public function equals( \Content $that = null ) {
+	public function equals( Content $that = null ) {
 		if ( is_null( $that ) ) {
 			return false;
 		}
@@ -311,7 +320,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return boolean
 	 */
-	public function isEmpty()  {
+	public function isEmpty() {
 		return $this->getEntity()->isEmpty();
 	}
 
@@ -361,7 +370,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return bool whether the user is allowed to edit this item.
 	 */
-	public function userCanEdit( \User $user = null, $doExpensiveQueries = true ) {
+	public function userCanEdit( User $user = null, $doExpensiveQueries = true ) {
 		return $this->userCan( 'edit', $user, $doExpensiveQueries );
 	}
 
@@ -427,7 +436,7 @@ abstract class EntityContent extends \AbstractContent {
 	 */
 	public function grabFreshId() {
 		if ( !$this->isNew() ) {
-			throw new \MWException( "This entity already has an ID!" );
+			throw new MWException( "This entity already has an ID!" );
 		}
 
 		wfProfileIn( __METHOD__ );
@@ -484,7 +493,7 @@ abstract class EntityContent extends \AbstractContent {
 		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
 			if ( $this->isNew() ) {
 				$this->grabFreshId();
-			} else if ( $this->getTitle()->exists() ) {
+			} elseif ( $this->getTitle()->exists() ) {
 				wfProfileOut( __METHOD__ );
 				return Status::newFatal( 'edit-already-exists' );
 			}
@@ -557,11 +566,13 @@ abstract class EntityContent extends \AbstractContent {
 			return $status;
 		}
 
-		// If editEntity is set, check whether the current revision is still what the EditEntity though it was.
+		// If editEntity is set, check whether the current revision is still what
+		// the EditEntity thought it was.
 		// If it isn't, then someone managed to squeeze in an edit after we checked for conflicts.
 		if ( $this->editEntity !== null && $page->getRevision() !== null ) {
-			if ( $page->getRevision()->getId() !==  $this->editEntity->getCurrentRevisionId() ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': encountered late edit conflict: current revision changed after regular conflict check.' );
+			if ( $page->getRevision()->getId() !== $this->editEntity->getCurrentRevisionId() ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ': encountered late edit conflict: '
+					. 'current revision changed after regular conflict check.' );
 				$status->fatal('edit-conflict');
 			}
 		}
@@ -576,9 +587,9 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Status $status
+	 * @param Status $status
 	 */
-	protected final function addLabelUniquenessConflicts( Status $status ) {
+	final protected function addLabelUniquenessConflicts( Status $status ) {
 		$labels = array();
 
 		$entity = $this->getEntity();
