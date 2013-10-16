@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_e0b39807",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "why final?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_00b7ccf4",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "do if ( $key !\u003d\u003d \u0027_element\u0027 ) { continue; } first.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_e0ac78a3",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "I\u0027m confused, this looks too complex... \n\nThe key is either a string or an int. the value is a map that has a \"language\" and a \"value\" field (can it also be just the list if values?). In the former case, just use language and value. If we need to support the latter case, use the key as the language.\n\nSo, the top level conditional would be based on array_key_exists( \u0027language\u0027, $aliasSet ), and if no, just fail (or use the key as the language, if we want to allow the plain language -\u003e list form).\n\nAm I missing something?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_00b0acf2",
+        "filename": "lib/includes/serializers/DescriptionSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "When would this not be the case? And if it is not the case, shouldn\u0027t this method fail with an exception?\n\nDon\u0027t be lenient about the input here (except for well defined B/C support), fail fast \u0026 safe.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_809c9c67",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Please check that $id-\u003egetType() matches $entityType",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_c08e942e",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Why not just use $entity-\u003esetAllAliases()?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_e085580b",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Why not just use $entity-\u003esetDescriptions()?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_00898c24",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Why not just use $entity-\u003esetLabels()?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_208050f8",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Why not just use $entity-\u003esetClaims()?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_607a4822",
+        "filename": "lib/includes/serializers/ItemSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Your name here?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_407b8425",
+        "filename": "lib/includes/serializers/ItemSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Eek, trailing space! And Indented using spaces!",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_a08c4030",
+        "filename": "lib/includes/serializers/ItemSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Hm, the SiteLinkSerializer should serialize/deserialize a single site link, I think.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_e096383c",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Seems odd to me that these are final.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_c08f7421",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Hm, i\u0027d rather suggest to skip the key \u0027_element\u0027 than using this rather obscure condition...",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_009a6c5f",
+        "filename": "lib/includes/serializers/PropertySerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "else fail! A Property object should never be without a datatype.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_20a13099",
+        "filename": "lib/includes/serializers/SerializerFactory.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "I don\u0027t really like OutOfBounds for this - that should IMHO be only used for array-like access. A simple InvalidArgumentException would do.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_409c6458",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Hm, misnamed - if this (de)serializes a list of site links, it should be called SiteLinkListSerializer or SiteLinksSerialiezr (plural). Seems like a good time to fix this.\n\n(Also, having a serializer for single SiteLinks seems like a good idea, too).",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_80a65cac",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "Does this expect SiteLink or SimpleSiteLink objects? Or are both acceptable? Please improve documentation.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_a0b520d0",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "It\u0027s quite important to support this, I think most bots still use the old format.\nIn any case, don\u0027t just skip unknown/invalid entries. Fail fast and safe!",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_c0e134d5",
+        "filename": "lib/tests/phpunit/serializers/AliasSerializerTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "hm, in my mind, this belongs into the provider.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_a0de000c",
+        "filename": "lib/tests/phpunit/serializers/DescriptionSerializerTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "hm, in my mind, this belongs into the provider.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_40c5443e",
+        "filename": "lib/tests/phpunit/serializers/LabelSerializerTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "hm, in my mind, this belongs into the provider.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_40ce245c",
+        "filename": "lib/tests/phpunit/serializers/SiteLinkSerializerTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:16:33Z",
+      "side": 1,
+      "message": "This should be in the provider, I think.",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
