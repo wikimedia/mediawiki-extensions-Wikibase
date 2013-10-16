@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_40f7048a",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:22:28Z",
+      "side": 1,
+      "message": "Just use a type hint?",
+      "revId": "9e523735ced8eeacbafab2cfbbae393ac17ab258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_80f1fc95",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:22:28Z",
+      "side": 1,
+      "message": "Missing the DataType used by properties.",
+      "revId": "9e523735ced8eeacbafab2cfbbae393ac17ab258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_c02bf4e9",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T12:22:28Z",
+      "side": 1,
+      "message": "Some API modules output claims grouped by property, some don\u0027t. We need to support both here (using separate methods, I guess)",
+      "revId": "9e523735ced8eeacbafab2cfbbae393ac17ab258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
