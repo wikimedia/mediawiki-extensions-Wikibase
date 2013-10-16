@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_1411ce52",
+        "filename": "lib/includes/serializers/ByPropertyListUnserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-16T19:47:35Z",
+      "side": 1,
+      "message": "This it not really the kind of exception you want to throw here either. While it does not introduce a silly dependency, it does force the caller to simply catch RuntimeException. Though perhaps that is not much worse then MWException...\n\nIdeally this would throw an exception deriving from some DeserializationException. Then again, it only makes sense to really do that when we fix the whole serializer mess and start using the Serialization component which provides such exceptions.\n\nSo no strong objection against this, as long as it does not break the existing users of this code. And it might well do so.",
+      "revId": "e3da89e9748c4d8c4dbf76cea4633410b8a0b6d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
