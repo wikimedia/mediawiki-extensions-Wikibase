@@ -219,7 +219,7 @@ class UpdateRepoOnMoveJob extends \Job {
 		//      This is fixed in a follow-up.
 		$commentArgs = implode( '|', $summary->getCommentArgs() );
 		$autoComment = '/* ' . $summary->getMessageKey()
-			. '|2|' . $summary->getLanguageCode()
+			. ':2|' . $summary->getLanguageCode()
 			. '|' . $commentArgs . ' */';
 
 		$status = $editEntity->attemptSave(
