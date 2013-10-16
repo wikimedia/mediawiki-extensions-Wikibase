@@ -5,7 +5,8 @@ namespace Wikibase\Api;
 use ApiMain;
 use ApiBase;
 use MWException;
-use DataValues\IllegalValueException;
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use FormatJson;
@@ -112,10 +113,10 @@ class SetClaim extends ModifyClaim {
 				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
 			}
 			return $claim;
-		} catch ( IllegalValueException $illegalValueException ) {
-			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
-		} catch( MWException $mwException ) {
-			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $mwException->getMessage(), 'invalid-claim' );
+		} catch( InvalidArgumentException $invalidArgumentException ) {
+			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(), 'invalid-claim' );
+		} catch( OutOfBoundsException $outOfBoundsException ) {
+			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
 		}
 	}
 

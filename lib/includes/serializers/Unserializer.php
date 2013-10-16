@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
 
 /**
  * Interface for service objects doing unserialization.

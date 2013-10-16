@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use MWException;
+use InvalidArgumentException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChainFactory;
 
@@ -42,11 +42,11 @@ class SerializationOptions {
 	 *
 	 * @param boolean $indexTags
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function setIndexTags( $indexTags ) {
 		if ( !is_bool( $indexTags ) ) {
-			throw new MWException( 'Expected boolean, got something else' );
+			throw new InvalidArgumentException( 'Expected boolean, got something else' );
 		}
 
 		$this->indexTags = $indexTags;
@@ -390,11 +390,11 @@ class EntitySerializationOptions extends MultiLangSerializationOptions {
 	 * @since 0.2
 	 *
 	 * @param string $sortDirection Element of the EntitySerializationOptions::SORT_ enum
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function setSortDirection( $sortDirection ) {
 		if ( !in_array( $sortDirection, array( self::SORT_ASC, self::SORT_DESC, self::SORT_NONE ) ) ) {
-			throw new MWException( 'Invalid sort direction provided' );
+			throw new InvalidArgumentException( 'Invalid sort direction provided' );
 		}
 
 		$this->sortDirection = $sortDirection;
