@@ -1500,7 +1500,7 @@ $messages['ast'] = array(
 	'wikibase-description-empty' => 'Inda nun ta definida denguna descripción',
 	'wikibase-description-edit-placeholder' => 'escriba la descripción',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitiu',
-	'wikibase-sitelink-page-edit-placeholder' => 'artículu', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'páxina',
 	'wikibase-alias-edit-placeholder' => 'escriba un alcuñu',
 	'wikibase-label-input-help-message' => "Escriba'l títulu d'esti conxuntu de datos en $1.",
 	'wikibase-description-input-help-message' => 'Escriba una descripción curtia en $1.',
@@ -1611,7 +1611,7 @@ La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-setdescription-warning-remove' => '¿Realmente quier desaniciar la descripción de [[$1]]?',
 	'special-setaliases' => 'Definir alcuños',
 	'wikibase-setaliases-introfull' => 'Ta definiendo los alcuños en $2 pa [[$1]]. Puen separase dellos alcuños col caráuter barra vertical (<code>|</code>).',
-	'wikibase-setaliases-intro' => 'Esti formulariu permite definir los alcuños d\'una entidá. Tien de dar el ID de la entidá (p. ex. Q23), un códigu d\'idioma (p. ex. "ast") y los alcuños a definir. Puen separase dellos alcuños col caráuter barra vertical (<code>|</code>).', # Fuzzy
+	'wikibase-setaliases-intro' => 'Esti formulariu permite definir los alcuños d\'una entidá. Tien de dar el ID de la entidá (p. ex. Q23), un códigu d\'idioma (p. ex. "ast") y los alcuños a definir. Puen separase dellos alcuños col caráuter barra vertical (<code>|</code>).',
 	'wikibase-setaliases-label' => 'Alcuños:',
 	'wikibase-setaliases-submit' => 'Definir los alcuños',
 	'wikibase-setaliases-warning-remove' => '¿Realmente quier desaniciar tolos alcuños de [[$1]]?',
@@ -14979,7 +14979,11 @@ $messages['tr'] = array(
 	'wikibase-description-input-help-message' => '$1 dilinde kısa bir açıklama girin',
 	'wikibase-remove' => 'kaldır',
 	'wikibase-aliases-label' => 'Şu şekilde de bilinir:',
+	'special-itembytitle' => 'Başlığına göre öge',
 	'wikibase-itemdisambiguation-lookup-language' => 'Dil:',
+	'special-newitem' => 'Yeni bir öge oluştur',
+	'wikibase-newitem-summary' => 'Ögenin [[Special:ItemByTitle|halihazırda var olup olmadığından]] emin olun!<br />Oluşturulan her bir öge için birer [[Help:Label|etiket]] ve [[Help:Description|tanımlama]] da oluşturmanız gerekmektedir.',
+	'wikibase-newitem-fieldset' => 'Yeni bir öge oluştur',
 );
 
 /** Central Atlas Tamazight (ⵜⴰⵎⴰⵣⵉⵖⵜ)

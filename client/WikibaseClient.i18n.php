@@ -492,6 +492,7 @@ $messages['be-tarask'] = array(
 );
 
 /** Bulgarian (български)
+ * @author DCLXVI
  * @author Spiritia
  */
 $messages['bg'] = array(
@@ -502,13 +503,16 @@ $messages['bg'] = array(
 	'wikibase-comment-sitelink-remove' => 'Премахната междуезикова препратка: $1',
 	'wikibase-editlinks' => 'Редактиране',
 	'wikibase-editlinkstitle' => 'Редактиране на междуезиковите препратки',
+	'wikibase-linkitem-addlinks' => 'Добавяне на препратки',
 	'wikibase-linkitem-failure' => 'При опита за свързване с дадената страница възникна неизвестна грешка.',
 	'wikibase-linkitem-selectlink' => 'Изберете сайта и страницата от него, с която искате да свържете тази.',
 	'wikibase-linkitem-input-site' => 'Език:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-invalidsite' => 'Избран е неизвестен или невалиден сайт',
 	'wikibase-linkitem-confirmitem-text' => 'Избраната страница е вече свързана с [$1 обект от нашето централно хранилище с данни]. Потвърдете, ако страниците, показани по-долу, са онези, които искате да свържете с тази страница.', # Fuzzy
+	'wikibase-linkitem-confirmitem-button' => 'Потвърждаване',
 	'wikibase-linkitem-not-loggedin-title' => 'Трябва да сте влезли в системата',
+	'wikibase-rc-hide-wikidata' => '$1 на Уикиданни',
 	'wikibase-pageinfo-entity-id' => 'ID на обекта в Уикиданни',
 );
 
@@ -1506,7 +1510,7 @@ $messages['fr'] = array(
 	'wikibase-watchlist-show-changes-pref' => 'Voir les modifications de Wikidata dans votre liste de suivi',
 	'wikibase-error-serialize-error' => 'Échec à la sérialisation des données',
 	'wikibase-error-invalid-entity-id' => 'L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.',
-	'special-unconnectedpages' => 'Pages non reliées à l’élément',
+	'special-unconnectedpages' => 'Pages non reliées à un élément',
 	'wikibase-unconnectedpages-legend' => 'Options de pages non reliées',
 	'wikibase-unconnectedpages-page' => 'Début de la liste des résultats avec la page :',
 	'wikibase-unconnectedpages-submit' => 'Démarrer',
