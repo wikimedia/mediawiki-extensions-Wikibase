@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_49d48fb9",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-10-16T19:18:09Z",
+      "side": 1,
+      "message": "You should use hard coded separators for implode. Please use Language::commaList() or listToText() (if I\u0027m not mistaken in the function names).",
+      "revId": "e4c2965b1c8247d2eb2ede5235be456f9954ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_e9ce232d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-10-16T19:18:09Z",
+      "side": 1,
+      "message": "Please do not use trailing (or leading) whitespace in your UI strings.\n\nUse core\u0027s \u0027space-separator\u0027 if you must.",
+      "revId": "e4c2965b1c8247d2eb2ede5235be456f9954ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_29d91bf2",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-10-16T19:18:09Z",
+      "side": 1,
+      "message": "This should have a period at the end of the string.",
+      "revId": "e4c2965b1c8247d2eb2ede5235be456f9954ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
