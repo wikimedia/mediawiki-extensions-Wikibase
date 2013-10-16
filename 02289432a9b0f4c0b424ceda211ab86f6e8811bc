@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0932edd2_63b7b239",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-16T15:07:18Z",
+      "side": 1,
+      "message": "i am only changing this to appease mediawiki codesniffer to put final declaration before visibility. :)\n\nIf final is not desired, then it should be done in a follow-up in this and other serializer classes.",
+      "parentUuid": "0932edd2_e0b39807",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0932edd2_00b7ccf4",
         "filename": "lib/includes/serializers/AliasSerializer.php",
         "patchSetId": 20
@@ -47,6 +65,24 @@
       "writtenOn": "2013-10-16T12:16:33Z",
       "side": 1,
       "message": "I\u0027m confused, this looks too complex... \n\nThe key is either a string or an int. the value is a map that has a \"language\" and a \"value\" field (can it also be just the list if values?). In the former case, just use language and value. If we need to support the latter case, use the key as the language.\n\nSo, the top level conditional would be based on array_key_exists( \u0027language\u0027, $aliasSet ), and if no, just fail (or use the key as the language, if we want to allow the plain language -\u003e list form).\n\nAm I missing something?",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_c39bfec3",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-16T15:07:18Z",
+      "side": 1,
+      "message": "why would we not want to support both formats?",
+      "parentUuid": "0932edd2_e0ac78a3",
       "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +259,24 @@
     },
     {
       "key": {
+        "uuid": "0932edd2_63c25289",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-16T15:07:18Z",
+      "side": 1,
+      "message": "I suggest these be changed in a follow-up. I am just reducing the amount that phpcs is screaming at me for violating mediawiki codesniff rules. :)",
+      "parentUuid": "0932edd2_e096383c",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0932edd2_c08f7421",
         "filename": "lib/includes/serializers/LabelSerializer.php",
         "patchSetId": 20
@@ -291,6 +345,24 @@
     },
     {
       "key": {
+        "uuid": "0932edd2_e3af227c",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-16T15:07:18Z",
+      "side": 1,
+      "message": "hmmm, this seems to be a general issue in serializers.  We also have AliasSerializer but it serializes / handles aliases.  Agree with your suggested, but suggest it be done in a follow up for all serializers.",
+      "parentUuid": "0932edd2_409c6458",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0932edd2_80a65cac",
         "filename": "lib/includes/serializers/SiteLinkSerializer.php",
         "patchSetId": 20
@@ -319,6 +391,24 @@
       "writtenOn": "2013-10-16T12:16:33Z",
       "side": 1,
       "message": "It\u0027s quite important to support this, I think most bots still use the old format.\nIn any case, don\u0027t just skip unknown/invalid entries. Fail fast and safe!",
+      "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_83a666ac",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-16T15:07:18Z",
+      "side": 1,
+      "message": "old format is the same (site + title), except no \u0027badges\u0027 key.",
+      "parentUuid": "0932edd2_a0b520d0",
       "revId": "02289432a9b0f4c0b424ceda211ab86f6e8811bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
