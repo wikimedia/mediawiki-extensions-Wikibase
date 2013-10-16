@@ -1,33 +1,22 @@
 <?php
 
 namespace Wikibase;
-use Title, Content, ParserOptions, ParserOutput, WikiPage, User, Status, DataUpdate;
-use \ValueFormatters\ValueFormatterFactory;
+
+use Content;
+use DataUpdate;
+use ParserOptions;
+use ParserOutput;
+use Status;
+use Title;
+use User;
+use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Content object for articles representing Wikibase properties.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup Content
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -41,9 +30,12 @@ class PropertyContent extends EntityContent {
 	protected $property;
 
 	/**
-	 * Constructor.
-	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
-	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
+	 * Do not use to construct new stuff from outside of this class,
+	 * use the static newFoobar methods.
+	 *
+	 * In other words: treat as protected (which it was, but now
+	 * cannot be since we derive from Content).
+	 *
 	 * @protected
 	 *
 	 * @since 0.1
