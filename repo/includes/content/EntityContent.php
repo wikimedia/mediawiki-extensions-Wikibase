@@ -14,6 +14,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -164,11 +165,10 @@ abstract class EntityContent extends AbstractContent {
 	public function getTextForSearchIndex() {
 		wfProfileIn( __METHOD__ );
 
-		$text = implode( "\n", $this->getEntity()->getLabels() );
+		$entity = $this->getEntity();
 
-		foreach ( $this->getEntity()->getAllAliases() as $aliases ) {
-			$text .= "\n" . implode( "\n", $aliases );
-		}
+		$searchTextGenerator = new EntitySearchTextGenerator();
+		$text = $searchTextGenerator->generate( $entity );
 
 		wfProfileOut( __METHOD__ );
 		return $text;
