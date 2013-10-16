@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
 
 /**
  * Interface for objects that can transform variables of a certain type into an array

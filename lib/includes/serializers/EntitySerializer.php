@@ -2,8 +2,7 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use ApiResult;
-use MWException;
+use InvalidArgumentException;
 use Wikibase\Entity;
 
 /**
@@ -46,11 +45,11 @@ class EntitySerializer extends SerializerObject {
 	 * @param mixed $entity
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	final public function getSerialized( $entity ) {
 		if ( !( $entity instanceof Entity ) ) {
-			throw new MWException( 'EntitySerializer can only serialize Entity objects' );
+			throw new InvalidArgumentException( 'EntitySerializer can only serialize Entity objects' );
 		}
 
 		$serialization['id'] = $entity->getId() ? $entity->getId()->getPrefixedId() : '';

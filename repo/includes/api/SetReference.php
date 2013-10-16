@@ -3,6 +3,8 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -10,7 +12,6 @@ use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Reference;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use DataValues\IllegalValueException;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -170,9 +171,11 @@ class SetReference extends ModifyClaim {
 					$snaks[] = $snak;
 				}
 			}
-		} catch ( IllegalValueException $ex ) {
+		} catch( InvalidArgumentException $invalidArgumentException ) {
 			// Handle Snak instantiation failures
-			$this->dieUsage( 'Invalid snak JSON given. IllegalValueException', 'invalid-json' );
+			$this->dieUsage( 'Failed to get reference from reference Serialization ' . $invalidArgumentException->getMessage() );
+		} catch( OutOfBoundsException $outOfBoundsException ) {
+			$this->dieUsage( 'Failed to get reference from reference Serialization ' . $outOfBoundsException->getMessage() );
 		}
 
 		return $snaks;

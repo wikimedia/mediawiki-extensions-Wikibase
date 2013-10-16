@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
+
+use InvalidArgumentException;
 use Wikibase\Entity;
 use Wikibase\Item;
 
@@ -66,11 +67,11 @@ class ItemSerializer extends EntitySerializer {
 	 * @param Entity $item
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	protected function getEntityTypeSpecificSerialization( Entity $item ) {
 		if ( !( $item instanceof Item ) ) {
-			throw new MWException( 'ItemSerializer can only serialize Item implementing objects' );
+			throw new InvalidArgumentException( 'ItemSerializer can only serialize Item implementing objects' );
 		}
 
 		$serialization = array();

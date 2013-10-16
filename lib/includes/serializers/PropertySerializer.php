@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use MWException;
+use InvalidArgumentException;
 use Wikibase\Entity;
 use Wikibase\Property;
 
@@ -42,11 +42,11 @@ class PropertySerializer extends EntitySerializer {
 	 * @param Entity $property
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	protected function getEntityTypeSpecificSerialization( Entity $property ) {
 		if ( !( $property instanceof Property ) ) {
-			throw new MWException( 'PropertySerializer can only serialize Property implementing objects' );
+			throw new InvalidArgumentException( 'PropertySerializer can only serialize Property implementing objects' );
 		}
 
 		$serialization = array();

@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use Traversable, ApiResult, MWException;
+
+use Traversable;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -73,11 +75,11 @@ class ByPropertyListSerializer extends SerializerObject {
 	 * @param mixed $objects
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function getSerialized( $objects ) {
 		if ( !( $objects instanceof Traversable ) ) {
-			throw new MWException( 'ByPropertyListSerializer can only serialize Traversable objects' );
+			throw new InvalidArgumentException( 'ByPropertyListSerializer can only serialize Traversable objects' );
 		}
 
 		$serialization = array();
