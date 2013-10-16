@@ -50,6 +50,23 @@
       "revId": "3a1be3cf00f48fc1a5e983a419409085e59dd7d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_46c9dc79",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-10-16T16:38:04Z",
+      "side": 1,
+      "message": "Can we do this once per serializer, instead of every time the loop runs?...",
+      "revId": "3a1be3cf00f48fc1a5e983a419409085e59dd7d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
