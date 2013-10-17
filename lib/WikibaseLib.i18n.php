@@ -372,6 +372,7 @@ $messages['ast'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL de corréu con mal formatu: $1',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
+	'datatypes-type-quantity' => 'Cantidá', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -617,6 +618,7 @@ $messages['ca'] = array(
 	'wikibase-tooltip-error-details' => 'Detalls',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
+	'datatypes-type-quantity' => 'Quantitat', # Fuzzy
 );
 
 /** Chechen (нохчийн)
@@ -846,6 +848,7 @@ $messages['da'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Forkert udformet mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Emne',
 	'datatypes-type-commonsMedia' => 'Commons media-fil',
+	'datatypes-type-quantity' => 'Kvantitet', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -913,6 +916,7 @@ $messages['de'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Fehlerhafte mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
+	'datatypes-type-quantity' => 'Maß', # Fuzzy
 	'version-wikibase' => 'Wikibase-Erweiterungen',
 );
 
@@ -1228,12 +1232,14 @@ $messages['fa'] = array(
 	'wikibase-validator-bad-mailto-url' => 'یوآرال رایانامۀ ناقص: $1',
 	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
+	'datatypes-type-quantity' => 'مقدار', # Fuzzy
 	'version-wikibase' => 'ویکی‌بیس',
 );
 
 /** Finnish (suomi)
  * @author Crt
  * @author Harriv
+ * @author Nedergard
  * @author Nike
  * @author Stryn
  * @author VezonThunder
@@ -1283,6 +1289,7 @@ $messages['fi'] = array(
 	'wikibase-validator-bad-url-scheme' => 'Ei-tuettu URL-järjestelmä: $1',
 	'datatypes-type-wikibase-item' => 'Kohde',
 	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
+	'datatypes-type-quantity' => 'Määrä', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -1356,6 +1363,7 @@ $messages['fr'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL mailto mal formée : $1',
 	'datatypes-type-wikibase-item' => 'Élément',
 	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
+	'datatypes-type-quantity' => 'Quantité', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -1435,6 +1443,7 @@ $messages['gl'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Enderezo URL mailto con formato non válido: $1',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'Ficheiro multimedia de Commons',
+	'datatypes-type-quantity' => 'Cantidade', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -1794,6 +1803,7 @@ $messages['it'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL mailto non valido: $1',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'File multimediale su Commons',
+	'datatypes-type-quantity' => 'Quantità', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -1856,6 +1866,7 @@ $messages['ja'] = array(
 	'wikibase-validator-bad-mailto-url' => '誤った形式の mailto URL: $1',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => 'コモンズのメディアファイル',
+	'datatypes-type-quantity' => '数量', # Fuzzy
 	'version-wikibase' => 'ウィキベース',
 );
 
@@ -1987,6 +1998,7 @@ $messages['ko'] = array(
 	'wikibase-validator-bad-mailto-url' => '잘못된 형식의 mailto URL: $1',
 	'datatypes-type-wikibase-item' => '항목',
 	'datatypes-type-commonsMedia' => '공용 미디어 파일',
+	'datatypes-type-quantity' => '양', # Fuzzy
 	'version-wikibase' => '위키베이스',
 );
 
@@ -2067,6 +2079,7 @@ $messages['lb'] = array(
 	'wikibase-validator-bad-url' => 'URL mat Feeler: $1',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
+	'datatypes-type-quantity' => 'Quantitéit', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -2204,6 +2217,7 @@ $messages['mk'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Неисправно обликувана mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Предмет',
 	'datatypes-type-commonsMedia' => 'Податотека од Ризницата',
+	'datatypes-type-quantity' => 'Количина', # Fuzzy
 	'version-wikibase' => 'Викибаза',
 );
 
@@ -2267,6 +2281,7 @@ $messages['ml'] = array(
 	'wikibase-validator-bad-mailto-url' => 'തെറ്റായവിധത്തിലുള്ള മെയിൽറ്റു യു.ആർ.എൽ.: $1',
 	'datatypes-type-wikibase-item' => 'ഇനം',
 	'datatypes-type-commonsMedia' => 'കോമൺസിൽ നിന്നുള്ള മീഡിയ പ്രമാണം',
+	'datatypes-type-quantity' => 'അളവ്', # Fuzzy
 	'version-wikibase' => 'വിക്കിബേസ്',
 );
 
@@ -2959,6 +2974,7 @@ $messages['sv'] = array(
 	'wikibase-validator-no-such-entity' => '$1 hittades inte',
 	'datatypes-type-wikibase-item' => 'Objekt',
 	'datatypes-type-commonsMedia' => 'Commons mediafil',
+	'datatypes-type-quantity' => 'Kvantitet', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -3102,6 +3118,7 @@ $messages['uk'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Неправильний формат адреси одержувача:$1',
 	'datatypes-type-wikibase-item' => 'Елемент',
 	'datatypes-type-commonsMedia' => 'Медіафайл з Вікісховища',
+	'datatypes-type-quantity' => 'Кількість', # Fuzzy
 	'version-wikibase' => 'Вікібаза',
 );
 
@@ -3222,6 +3239,7 @@ $messages['vi'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL mailto: hỏng: $1',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
+	'datatypes-type-quantity' => 'Số lượng', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -3336,6 +3354,7 @@ $messages['zh-hans'] = array(
 	'wikibase-validator-bad-mailto-url' => '格式不正确 mailto 地址：$1',
 	'datatypes-type-wikibase-item' => '项',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
+	'datatypes-type-quantity' => '数量', # Fuzzy
 	'version-wikibase' => '维基数据库',
 );
 
@@ -3388,5 +3407,6 @@ $messages['zh-hant'] = array(
 	'wikibase-validator-no-such-entity' => '$1無法找尋',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
+	'datatypes-type-quantity' => '數量', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
