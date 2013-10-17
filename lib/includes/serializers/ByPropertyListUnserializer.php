@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use ApiResult, MWException;
+
+use InvalidArgumentException;
+use OutOfBoundsException;
 
 /**
  * Serializer for Traversable objects that need to be grouped
@@ -58,14 +60,15 @@ class ByPropertyListUnserializer implements Unserializer {
 	 * @param array $serialization
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
+	 * @throws OutOfBoundsException
 	 */
 	public function newFromSerialization( array $serialization ) {
 		$elements = array();
 
 		foreach ( $serialization as $propertyId => $byPropId ) {
 			if ( !is_array( $byPropId ) ) {
-				throw new MWException( "Element with key '$propertyId' should be an array, found " . gettype( $byPropId ) );
+				throw new InvalidArgumentException( "Element with key '$propertyId' should be an array, found " . gettype( $byPropId ) );
 			}
 
 			foreach ( $byPropId as $serializedElement ) {
@@ -74,7 +77,7 @@ class ByPropertyListUnserializer implements Unserializer {
 				$elementPropertyId = $element->getPropertyId()->getPrefixedId();
 
 				if ( $elementPropertyId !== $propertyId ) {
-					throw new MWException( "Element with id '$elementPropertyId' found in list with id '$propertyId'" );
+					throw new OutOfBoundsException( "Element with id '$elementPropertyId' found in list with id '$propertyId'" );
 				}
 
 				$elements[] = $element;

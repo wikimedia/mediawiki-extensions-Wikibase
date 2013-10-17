@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
+
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\Claims;
 
 /**
@@ -26,11 +28,11 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 	 * @param mixed $claims
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function getSerialized( $claims ) {
 		if ( !( $claims instanceof \Wikibase\Claims ) ) {
-			throw new MWException( 'ClaimsSerializer can only serialize Claims objects' );
+			throw new InvalidArgumentException( 'ClaimsSerializer can only serialize Claims objects' );
 		}
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
@@ -49,7 +51,8 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 	 * @param mixed $serialization
 	 *
 	 * @return Claims
-	 * @throws MWException
+	 * @throws InvalidArgumentException
+	 * @throws OutOfBoundsException
 	 */
 	public function newFromSerialization( array $serialization ) {
 		$claimSerializer = new ClaimSerializer( $this->options );

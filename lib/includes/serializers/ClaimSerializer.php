@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
+
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\Statement;
 use Wikibase\Claim;
 
@@ -78,11 +80,11 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 * @param mixed $claim
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function getSerialized( $claim ) {
 		if ( !( $claim instanceof Claim ) ) {
-			throw new MWException( 'ClaimSerializer can only serialize Claim objects' );
+			throw new InvalidArgumentException( 'ClaimSerializer can only serialize Claim objects' );
 		}
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
@@ -140,12 +142,13 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 * @param array $serialization
 	 *
 	 * @return Claim
-	 * @throws MWException
+	 * @throws InvalidArgumentException
+	 * @throws OutOfBoundsException
 	 */
 	public function newFromSerialization( array $serialization ) {
 		if ( !array_key_exists( 'type', $serialization )
 			|| !in_array( $serialization['type'], array( 'claim', 'statement' ) ) ) {
-			throw new MWException( 'Invalid claim type specified' );
+			throw new InvalidArgumentException( 'Invalid claim type specified' );
 		}
 
 		$requiredElements = array(
@@ -160,7 +163,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 		foreach ( $requiredElements as $requiredElement ) {
 			if ( !array_key_exists( $requiredElement, $serialization ) ) {
-				throw new MWException( "Required key '$requiredElement' missing" );
+				throw new InvalidArgumentException( "Required key '$requiredElement' missing" );
 			}
 		}
 
@@ -182,7 +185,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 		if ( $isStatement ) {
 			if ( !in_array( $serialization['rank'], self::$rankMap ) ) {
-				throw new MWException( 'Invalid statement rank provided' );
+				throw new InvalidArgumentException( 'Invalid statement rank provided' );
 			}
 
 			/**
@@ -214,7 +217,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 * @param array $serialization
 	 * @param SnakSerializer $snakUnserializer
 	 * @return \Wikibase\SnakList
-	 * @throws \MWException
+	 * @throws OutOfBoundsException
 	 */
 	protected function unserializeQualifiers( $serialization, $snakUnserializer ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
@@ -228,7 +231,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			} else {
 				foreach( $serialization['qualifiers-order'] as $propertyId ) {
 					if( !isset( $serialization['qualifiers'][$propertyId] ) ) {
-						throw new MWException( 'No snaks with property id "' . $propertyId . '" '
+						throw new OutOfBoundsException( 'No snaks with property id "' . $propertyId . '" '
 						. 'found in "qualifiers" parameter although specified in '
 						. '"qualifiers-order"' );
 					}
@@ -242,7 +245,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 				);
 
 				if( count( $missingProperties ) > 0 ) {
-					throw new MWException( 'Property ids ' . implode( ', ', $missingProperties )
+					throw new OutOfBoundsException( 'Property ids ' . implode( ', ', $missingProperties )
 					. ' have not been specified in "qualifiers-order"' );
 				}
 			}

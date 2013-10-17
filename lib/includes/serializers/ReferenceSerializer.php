@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
+
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\Reference;
 
 /**
@@ -26,11 +28,11 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 	 * @param mixed $reference
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function getSerialized( $reference ) {
 		if ( !( $reference instanceof Reference ) ) {
-			throw new MWException( 'ReferenceSerializer can only serialize Reference objects' );
+			throw new InvalidArgumentException( 'ReferenceSerializer can only serialize Reference objects' );
 		}
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
@@ -64,11 +66,12 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 	 * @param array $serialization
 	 *
 	 * @return Reference
-	 * @throws MWException
+	 * @throws InvalidArgumentException
+	 * @throws OutOfBoundsException
 	 */
 	public function newFromSerialization( array $serialization ) {
 		if ( !array_key_exists( 'snaks', $serialization ) || !is_array( $serialization['snaks'] ) ) {
-			throw new MWException( 'A reference serialization needs to have a list of snaks' );
+			throw new InvalidArgumentException( 'A reference serialization needs to have a list of snaks' );
 		}
 
 		$sortedSnaks = array();
@@ -82,7 +85,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 		} else {
 			foreach( $serialization['snaks-order'] as $propertyId ) {
 				if( !isset( $serialization['snaks'][$propertyId] ) ) {
-					throw new MWException( 'No snaks with property id "' . $propertyId . '" found '
+					throw new OutOfBoundsException( 'No snaks with property id "' . $propertyId . '" found '
 					. 'in "snaks" parameter although specified in "snaks-order"' );
 				}
 
@@ -92,7 +95,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 			$missingProperties = array_diff_key( $sortedSnaks, $serialization['snaks'] );
 
 			if( count( $missingProperties ) > 0 ) {
-				throw new MWException( 'Property ids ' . implode( ', ', $missingProperties )
+				throw new OutOfBoundsException( 'Property ids ' . implode( ', ', $missingProperties )
 				. ' have not been specified in "snaks-order"' );
 			}
 		}
@@ -105,7 +108,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 		$reference = new Reference( new \Wikibase\SnakList( $snaks ) );
 
 		if ( array_key_exists( 'hash', $serialization ) && $serialization['hash'] !== $reference->getHash() ) {
-			throw new MWException( 'If a hash is present in a reference serialization it needs to be correct' );
+			throw new InvalidArgumentException( 'If a hash is present in a reference serialization it needs to be correct' );
 		}
 
 		return $reference;

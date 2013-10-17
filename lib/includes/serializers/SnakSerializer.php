@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
+
+use InvalidArgumentException;
 use Wikibase\Snak;
 use Wikibase\SnakObject;
 
@@ -27,11 +28,11 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	 * @param mixed $snak
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function getSerialized( $snak ) {
 		if ( !( $snak instanceof Snak ) ) {
-			throw new MWException( 'SnakSerializer can only serialize Snak objects' );
+			throw new InvalidArgumentException( 'SnakSerializer can only serialize Snak objects' );
 		}
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!

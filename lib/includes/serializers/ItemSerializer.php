@@ -1,7 +1,7 @@
 <?php
 namespace Wikibase\Lib\Serializers;
 
-use MWException;
+use InvalidArgumentException;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\Item;
@@ -54,11 +54,11 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 	 * @param Entity $item
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	protected function getEntityTypeSpecificSerialization( Entity $item ) {
 		if ( !( $item instanceof Item ) ) {
-			throw new MWException( 'ItemSerializer can only serialize Item implementing objects' );
+			throw new InvalidArgumentException( 'ItemSerializer can only serialize Item implementing objects' );
 		}
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!

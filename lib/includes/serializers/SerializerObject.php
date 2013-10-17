@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use ApiResult, MWException;
 
 /**
  * Base class for ApiSerializers.
@@ -47,7 +46,6 @@ abstract class SerializerObject implements Serializer {
 	 *
 	 * @since 0.3
 	 *
-	 * @param ApiResult $apiResult
 	 * @param SerializationOptions|null $options
 	 */
 	public function __construct( SerializationOptions $options = null ) {
