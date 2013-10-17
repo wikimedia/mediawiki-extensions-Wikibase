@@ -33,6 +33,24 @@
       "revId": "2b1db4a2974d6732639bdc89df93befb7a723a01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_35f7ac8b",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T09:39:45Z",
+      "side": 1,
+      "message": "What about the \" \", isn\u0027t that hardcoded as well?\n\nShouldn\u0027t the whole of this be just one message? Either one message including the shortcut key or a message \"$1 $2\" taking both of the messages as parameters. I don\u0027t think all languages would use the \" \" character to separate this.",
+      "parentUuid": "0932edd2_06529212",
+      "revId": "2b1db4a2974d6732639bdc89df93befb7a723a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
