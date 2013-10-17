@@ -110,10 +110,47 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
+	 * @param int|null $index
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function addClaim( Claim $claim ) {
-		$key = $this->getClaimKey( $claim );
-		$this->offsetSet( $key, $claim );
+	public function addClaim( Claim $claim, $index = null ) {
+		if( !is_null( $index ) && !is_integer( $index ) ) {
+			throw new InvalidArgumentException( 'Index needs to be null or an integer value' );
+		} else if ( is_null( $index ) || $index >= count( $this ) ) {
+			$this->append( $claim );
+		} else {
+			$this->insertClaimAtIndex( $claim, $index );
+		}
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param Claim $claim
+	 * @param int $index
+	 */
+	protected function insertClaimAtIndex( Claim $claim, $index ) {
+		$claimsToShift = array();
+		$i = 0;
+
+		// Determine the claims to shift and remove them from the array:
+		foreach( $this as $object ) {
+			if( $i++ >= $index ) {
+				$claimsToShift[] = $object;
+			}
+		}
+
+		foreach( $claimsToShift as $object ) {
+			$this->offsetUnset( $this->getClaimKey( $object ) );
+		}
+
+		// Append the new claim and re-append the previously removed claims:
+		$this->append( $claim );
+
+		foreach( $claimsToShift as $object ) {
+			$this->append( $object );
+		}
 	}
 
 	/**
@@ -123,14 +160,14 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 *
 	 * @param Claim $claim
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function append( $claim ) {
 		if ( !( $claim instanceof Claim ) ) {
 			throw new InvalidArgumentException( '$claim must be a Claim instances' );
 		}
 
-		$this->addClaim( $claim );
+		parent::append( $claim );
 	}
 
 	/**
@@ -151,6 +188,32 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 
 		$key = $this->getGuidKey( $guid );
 		return $this->offsetExists( $key );
+	}
+
+	/**
+	 * @see ClaimListAccess::indexOf
+	 *
+	 * @since 0.5
+	 *
+	 * @param Claim $claim
+	 *
+	 * @return int|boolean
+	 */
+	public function indexOf( Claim $claim ) {
+		$guid = $claim->getGuid();
+		$index = 0;
+
+		/**
+		 * @var Claim $claimObject
+		 */
+		foreach( $this as $claimObject ) {
+			if( $claimObject->getGuid() === $guid ) {
+				return $index;
+			}
+			$index++;
+		}
+
+		return false;
 	}
 
 	/**

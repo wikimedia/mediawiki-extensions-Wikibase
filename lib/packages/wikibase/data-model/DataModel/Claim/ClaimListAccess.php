@@ -16,14 +16,17 @@ namespace Wikibase;
 interface ClaimListAccess {
 
 	/**
-	 * Adds the provided claims to the list. If a claim with the same GUID is
-	 * already in the list, it is replaced.
+	 * Adds the provided claims to the list. If a claim with the same GUID is already in the list,
+	 * it is replaced. Specifying an index within the list of claims will shift existing claims. If
+	 * the index where to insert the claim in the list of claims is not specified, the claim will be
+	 * appended to the list.
 	 *
 	 * @since 0.2
 	 *
 	 * @param Claim $claim
+	 * @param int|null $index
 	 */
-	public function addClaim( Claim $claim );
+	public function addClaim( Claim $claim, $index = null );
 
 	/**
 	 * Returns if the list contains a claim with the same GUID as the provided claim.
@@ -35,6 +38,17 @@ interface ClaimListAccess {
 	 * @return boolean
 	 */
 	public function hasClaim( Claim $claim );
+
+	/**
+	 * Returns the index of a claim or false if the claim could not be found.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Claim $claim
+	 *
+	 * @return int|boolean
+	 */
+	public function indexOf( Claim $claim );
 
 	/**
 	 * Removes the claim with the same GUID as the provided claim if such a claim exists in the list.

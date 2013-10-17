@@ -39,7 +39,7 @@ interface References extends \Traversable, \Countable, \Serializable, \Comparabl
 	/**
 	 * Returns the index of a reference or false if the reference could not be found.
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @param Reference $reference
 	 *

@@ -47,7 +47,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	}
 
 	/**
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @param Reference $reference
 	 * @param int $index
@@ -92,7 +92,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	/**
 	 * @see References::indexOf
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @param Reference $reference
 	 *

@@ -243,6 +243,42 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertNotNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
 		$this->assertNotNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
+
+		// Insert claim at the beginning:
+		$claim3 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P17' ) ) );
+		$claims->addClaim( $claim3, 0 );
+		$this->assertEquals( 0, $claims->indexOf( $claim3 ), 'Inserting claim at the beginning failed' );
+
+		// Insert claim at another index:
+		$claim4 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P18' ) ) );
+		$claims->addClaim( $claim4, 1 );
+		$this->assertEquals( 1, $claims->indexOf( $claim4 ), 'Inserting claim at index 1 failed' );
+
+		// Insert claim with an index out of bounds:
+		$claim5 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P19' ) ) );
+		$claims->addClaim( $claim5, 99999 );
+		$this->assertEquals( 4, $claims->indexOf( $claim5 ), 'Appending claim by specifying an index out of bounds failed' );
+	}
+
+	public function testIndexOf() {
+		$claims = new Claims();
+		$claimArray = array(
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) ),
+			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P3' ) ) ),
+		);
+		$excludedClaim = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P99' ) ) );
+
+		foreach( $claimArray as $claim ) {
+			$claims->addClaim( $claim );
+		}
+
+		$this->assertFalse( $claims->indexOf( $excludedClaim ) );
+
+		$i = 0;
+		foreach( $claimArray as $claim ) {
+			$this->assertEquals( $i++, $claims->indexOf( $claim ) );
+		}
 	}
 
 	public function testAppend() {
@@ -602,7 +638,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $claimsA->getHash(), $claimsB->getHash(), 'same content' );
 	}
 
-	public function testItrerator() {
+	public function testIterator() {
 		$claims = new Claims( array(
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P42" ) ) ),
 			$this->makeClaim( new PropertySomeValueSnak( new PropertyId( "P42" ) ) ),
