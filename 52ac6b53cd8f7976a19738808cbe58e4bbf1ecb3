@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_7574c4fb",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T10:02:07Z",
+      "side": 1,
+      "message": "no need for a new-line here (personal taste?)...",
+      "revId": "52ac6b53cd8f7976a19738808cbe58e4bbf1ecb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_1558e884",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T10:02:07Z",
+      "side": 1,
+      "message": "... yes, here the new-line is very legit",
+      "revId": "52ac6b53cd8f7976a19738808cbe58e4bbf1ecb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_f587d4d7",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T10:02:07Z",
+      "side": 1,
+      "message": "Like a Yoda conditional, this looks (http://www.globalnerdy.com/wordpress/wp-content/uploads/2010/05/yodaconditional.jpg) - don\u0027t do it, wonder whether I wrote the existing one here which is bad already.",
+      "revId": "52ac6b53cd8f7976a19738808cbe58e4bbf1ecb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_957a18ed",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T10:02:07Z",
+      "side": 1,
+      "message": "cookie should now only be set for anons, or is there any point in still setting this together with the user setting?",
+      "revId": "52ac6b53cd8f7976a19738808cbe58e4bbf1ecb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
