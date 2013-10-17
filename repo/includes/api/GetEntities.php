@@ -385,21 +385,21 @@ class GetEntities extends ApiWikibase {
 	protected function getExamples() {
 		return array(
 			"api.php?action=wbgetentities&ids=Q42"
-			=> "Get entity with ID Q42 with all available attributes in all available languages",
-			"api.php?action=wbgetentities&ids=P2"
-			=> "Get entity with ID P2 with all available attributes in all available languages",
-			"api.php?action=wbgetentities&ids=Q42|P2"
-			=> "Get entities with IDs Q42 and p2 with all available attributes in all available languages",
+			=> "Get entities with ID Q42 with all available attributes in all available languages",
+			"api.php?action=wbgetentities&ids=P17"
+			=> "Get entities with ID P17 with all available attributes in all available languages",
+			"api.php?action=wbgetentities&ids=Q42|P17"
+			=> "Get entities with IDs Q42 and P17 with all available attributes in all available languages",
 			"api.php?action=wbgetentities&ids=Q42&languages=en"
-			=> "Get entity with ID Q42 with all available attributes in English language",
+			=> "Get entities with ID Q42 with all available attributes in English language",
 			"api.php?action=wbgetentities&ids=Q42&languages=ii&languagefallback="
-			=> "Get entity with ID q42 with all available attributes in any possible fallback language for the ii language",
+			=> "Get entities with ID Q42 with all available attributes in any possible fallback language for the ii language",
 			"api.php?action=wbgetentities&ids=Q42&props=labels"
-			=> "Get entity with ID Q42 showing all labels in all available languages",
-			"api.php?action=wbgetentities&ids=P2|P3&props=datatype"
-			=> "Get entities with IDs P2 and P3 showing only datatypes",
+			=> "Get entities with ID Q42 showing all labels in all available languages",
+			"api.php?action=wbgetentities&ids=P17|P3&props=datatype"
+			=> "Get entities with IDs P17 and P3 showing only datatypes",
 			"api.php?action=wbgetentities&ids=Q42&props=aliases&languages=en"
-			=> "Get entity with ID Q42 showing all aliases in English language",
+			=> "Get entities with ID Q42 showing all aliases in English language",
 			"api.php?action=wbgetentities&ids=Q1|Q42&props=descriptions&languages=en|de|fr"
 			=> "Get entities with IDs Q1 and Q42 showing descriptions in English, German and French languages",
 			'api.php?action=wbgetentities&sites=enwiki&titles=Berlin&languages=en'
