@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_eaffeefa",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-17T14:07:38Z",
+      "side": 1,
+      "message": "why is this only commented out? :O Could we not just remove it? :)",
+      "revId": "b5fa24deb77f2ef31d786546c62826eac2bb6da5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
