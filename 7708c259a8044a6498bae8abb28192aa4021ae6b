@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_754204b0",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T09:46:33Z",
+      "side": 1,
+      "message": "Sorry, but this makes the already poorly readable code even worse from a readability perspective. How about splitting this up into smaller functions in this change as it gets even more complex now?",
+      "revId": "7708c259a8044a6498bae8abb28192aa4021ae6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
