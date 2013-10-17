@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0932edd2_952858f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T09:42:15Z",
+      "side": 1,
+      "message": "Please be more accurate - just describe the \"better\"",
+      "revId": "d98f0171aada876b2f2dc52cb9c4d8d88fc54e84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
