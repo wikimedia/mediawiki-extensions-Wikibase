@@ -231,6 +231,10 @@
 			}
 
 			response( resultSet );
+
+			if( this._lastKeyDown !== $.ui.keyCode.BACKSPACE ) {
+				this.element.autocompletestring( request.term, resultSet[0] );
+			}
 		},
 
 		/**
@@ -284,7 +288,7 @@
 
 				// auto-complete input box text (because of the API call lag, this is
 				// avoided when hitting backspace, since the value would be reset too slow)
-				if ( this._lastKeyDown !== 8 && response[1].length > 0 ) {
+				if ( this._lastKeyDown !== $.ui.keyCode.BACKSPACE && response[1].length > 0 ) {
 					var incomplete = response[0],
 						complete = response[1][0];
 
