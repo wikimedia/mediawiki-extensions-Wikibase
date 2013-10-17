@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use InvalidArgumentException;
 use SiteSQLStore;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -111,5 +112,41 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 	protected function getIdFormatter() {
 		$formatterOptions = new FormatterOptions();
 		return new EntityIdFormatter( $formatterOptions );
+	}
+
+	/**
+	 * @dataProvider newFromSerializationProvider
+	 */
+	public function testNewFromSerialization( $expected, $serialized ) {
+		// todo inject / mock
+		$siteStore = SiteSQLStore::newInstance();
+		$options = new EntitySerializationOptions();
+		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
+
+		$simpleSiteLinks = $siteLinkSerializer->newFromSerialization( $serialized );
+		$this->assertEquals( $expected, $simpleSiteLinks );
+	}
+
+	public function newFromSerializationProvider() {
+		$siteLinks = array();
+
+		$badges = array(
+			new ItemId( 'Q944' ),
+			new ItemId( 'Q1004' )
+		);
+
+		$siteLinks[] = new SimpleSiteLink( 'enwiki', 'Cat' );
+		$siteLinks[] = new SimpleSiteLink( 'dewiki', 'Katze', $badges );
+
+		// todo inject / mock
+		$siteStore = SiteSQLStore::newInstance();
+		$options = new EntitySerializationOptions();
+
+		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
+		$serialized = $siteLinkSerializer->getSerialized( $siteLinks );
+
+		return array(
+			array( $siteLinks, $serialized )
+		);
 	}
 }
