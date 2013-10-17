@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use DataValues\GlobeCoordinateValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use DataValues\UnDeserializableValue;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -109,6 +110,12 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			ValueFormatter::OPT_LANG => 'en',
 		) );
 
+		$msg = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
+		$noValueMsg = $msg->inLanguage( 'en' )->text();
+
+		$msg = wfMessage( 'wikibase-undeserializable-value' );
+		$badValueMsg = $msg->inLanguage( 'en' )->text();
+
 		return array(
 			'plain url' => array(
 				SnakFormatter::FORMAT_PLAIN,
@@ -122,7 +129,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				$options,
 				'string',
 				new PropertyNoValueSnak( 7 ),
-				wfMessage( 'wikibase-snakview-snaktypeselector-novalue' )->text()
+				$noValueMsg
 			),
 			'html string' => array(
 				SnakFormatter::FORMAT_HTML,
@@ -138,6 +145,15 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				new PropertyValueSnak( 7, new EntityIdValue( new ItemId( 'Q5' ) ) ),
 				'Label for Q5' // compare mock object created in newBuilders()
 			),
+			'bad value' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				$options,
+				'globecoordinate',
+				new PropertyValueSnak( 7,
+					new UnDeserializableValue( 'cookie', 'globecoordinate', 'cannot understand!' )
+				),
+				$badValueMsg
+			)
 		);
 	}
 
