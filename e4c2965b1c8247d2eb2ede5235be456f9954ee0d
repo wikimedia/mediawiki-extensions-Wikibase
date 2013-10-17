@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0932edd2_f504347f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T09:31:01Z",
+      "side": 1,
+      "message": "please split this into more lines and name $values more clearly. I assume $values could be something like $usedLanguages and\n\n$allLanguages \u003d array_keys( Language::fetchLanguageNames();\n$invalidLanguages \u003d array_intersect( $usedLanguages, $allLanguages );\n\nso you\u0027d have a much clearer and more performant\n\nif( !empty( $invalidLanguages ) ) {...",
+      "revId": "e4c2965b1c8247d2eb2ede5235be456f9954ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0932edd2_d501f06f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-10-17T09:31:01Z",
+      "side": 1,
+      "message": "... also, you can simplye reuse $invalidLanguages down here rather than fetching all languages again.",
+      "revId": "e4c2965b1c8247d2eb2ede5235be456f9954ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0932edd2_49d48fb9",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
