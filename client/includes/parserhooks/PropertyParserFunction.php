@@ -80,11 +80,13 @@ class PropertyParserFunction {
 	 */
 	public function processRenderedArray( $textArray ) {
 		// We got arrays, so they must have already checked that variants are being used.
-		$text = '-{';
+		$text = '';
 		foreach ( $textArray as $variantCode => $variantText ) {
 			$text .= "$variantCode:$variantText;";
 		}
-		$text .= '}-';
+		if ( $text !== '' ) {
+			$text = '-{' . $text . '}-';
+		}
 
 		return $text;
 	}
@@ -161,7 +163,13 @@ class PropertyParserFunction {
 
 		foreach ( $variants as $variantCode ) {
 			$variantLanguage = \Language::factory( $variantCode );
-			$textArray[$variantCode] = $this->renderInLanguage( $propertyLabel, $variantLanguage );
+			$variantText = $this->renderInLanguage( $propertyLabel, $variantLanguage );
+			// LanguageConverter doesn't handle empty strings correctly, and it's more difficult
+			// to fix the issue there, as it's using empty string as a special value.
+			// Also keeping the ability to check a missing property with {{#if: }} is another reason.
+			if ( $variantText !== '' ) {
+				$textArray[$variantCode] = $variantText;
+			}
 		}
 
 		return $textArray;

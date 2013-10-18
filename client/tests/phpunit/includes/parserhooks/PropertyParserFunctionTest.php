@@ -95,6 +95,9 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 				'zh-cn' => 'fo&#60;ob&#62;ar',
 				'zh-tw' => 'FO&#60;OB&#62;AR',
 			), '-{zh-cn:fo&#60;ob&#62;ar;zh-tw:FO&#60;OB&#62;AR;}-' ),
+			// Don't create "-{}-" for empty input,
+			// to keep the ability to check a missing property with {{#if: }}.
+			array( \Parser::OT_HTML, array(), '' ),
 		);
 	}
 
