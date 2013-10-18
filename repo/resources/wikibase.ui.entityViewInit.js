@@ -126,6 +126,7 @@
 
 			if( mw.config.get( 'wbExperimentalFeatures' ) ) {
 				toolbarControllerConfig.movetoolbar = [
+					'claimlistview-claimview',
 					'claim-qualifiers-snak',
 					'statementview-referenceview',
 					'referenceview-snakview'
