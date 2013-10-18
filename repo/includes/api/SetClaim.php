@@ -55,7 +55,11 @@ class SetClaim extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->getSummary( $params, $claim, $entityContent );
 
-		$changeop = new ChangeOpClaim( $claim , new ClaimGuidGenerator( $guid->getEntityId() ) );
+		$changeop = new ChangeOpClaim(
+			$claim,
+			new ClaimGuidGenerator( $guid->getEntityId() ),
+			( isset( $params['index'] ) ? $params['index'] : null )
+		);
 		try{
 			$changeop->apply( $entity );
 		} catch( ChangeOpException $exception ){
@@ -127,7 +131,10 @@ class SetClaim extends ModifyClaim {
 				'claim' => array(
 					ApiBase::PARAM_TYPE => 'string',
 					ApiBase::PARAM_REQUIRED => true
-				)
+				),
+				'index' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
 			),
 			parent::getAllowedParams()
 		);
@@ -153,7 +160,8 @@ class SetClaim extends ModifyClaim {
 		return array_merge(
 			parent::getParamDescription(),
 			array(
-				'claim' => 'Claim serialization'
+				'claim' => 'Claim serialization',
+				'index' => 'The index within the entity\'s list of claims/statements featuring the same main snak property where to move the claim/statement to. Optional. When not provided, an existing claim/statement will stay in place while a new claim/statement will be appended to the last claim/statement whose main snak features the same property.',
 			)
 		);
 	}
