@@ -7,6 +7,7 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -158,12 +159,53 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	/**
+	 * @dataProvider provideClaims
+	 */
+	public function testSetClaimAtIndex( Claim $claim ) {
+		// Generate an item with some claims:
+		$item = Item::newEmpty();
+		$item->setId( ItemId::newFromNumber( 10 ) );
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
+
+		$claims = new Claims();
+
+		// (Re-)initialize item content with empty claims:
+		$item->setClaims( $claims );
+		$content = new ItemContent( $item );
+		$content->save( 'setclaimtest', null, EDIT_NEW );
+
+		for( $i = 1; $i <= 3; $i++ ) {
+			$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( $i ) );
+			$preexistingClaim->setGuid( $guidGenerator->newGuid() );
+			$claims->addClaim( $preexistingClaim );
+		}
+
+		// Add preexisting claims:
+		$item->setClaims( $claims );
+		$content = new ItemContent( $item );
+		$content->save( 'setclaimtest', null, EDIT_UPDATE );
+
+		// Add new claim at index 2:
+		$guid = $guidGenerator->newGuid();
+		$claim->setGuid( $guid );
+
+		$this->makeRequest( $claim, $item->getId(), 4, 'addition request', 2 );
+	}
+
+	/**
 	 * @param Claim|array $claim Native or serialized claim object.
 	 * @param EntityId $entityId
 	 * @param $claimCount
 	 * @param $requestLabel string a label to identify requests that are made in errors
+	 * @param int|null $index
 	 */
-	protected function makeRequest( $claim, EntityId $entityId, $claimCount, $requestLabel ) {
+	protected function makeRequest(
+		$claim,
+		EntityId $entityId,
+		$claimCount,
+		$requestLabel,
+		$index = null
+	) {
 		$serializerFactory = new SerializerFactory();
 
 		if( is_a( $claim, '\Wikibase\Claim' ) ) {
@@ -175,10 +217,16 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$claim = $unserializer->newFromSerialization( $serializedClaim );
 		}
 
-		$this->makeValidRequest( array(
+		$params = array(
 			'action' => 'wbsetclaim',
 			'claim' => FormatJson::encode( $serializedClaim ),
-		) );
+		);
+
+		if( !is_null( $index ) ) {
+			$params['index'] = $index;
+		}
+
+		$this->makeValidRequest( $params );
 
 		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entityId );
 		$this->assertInstanceOf( '\Wikibase\EntityContent', $content );
