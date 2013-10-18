@@ -916,7 +916,7 @@ $messages['de'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Fehlerhafte mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
-	'datatypes-type-quantity' => 'Maß', # Fuzzy
+	'datatypes-type-quantity' => 'Menge',
 	'version-wikibase' => 'Wikibase-Erweiterungen',
 );
 
@@ -1998,7 +1998,7 @@ $messages['ko'] = array(
 	'wikibase-validator-bad-mailto-url' => '잘못된 형식의 mailto URL: $1',
 	'datatypes-type-wikibase-item' => '항목',
 	'datatypes-type-commonsMedia' => '공용 미디어 파일',
-	'datatypes-type-quantity' => '양', # Fuzzy
+	'datatypes-type-quantity' => '양',
 	'version-wikibase' => '위키베이스',
 );
 
@@ -2072,6 +2072,7 @@ $messages['lb'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Verlinkten Artikel',
 	'wikibase-tooltip-error-details' => 'Detailer',
+	'wikibase-undeserializable-value' => 'De Wäert ass net valabel a kann net gewise ginn.',
 	'wikibase-validator-bad-type' => '$2 amplaz vu(n) $1',
 	'wikibase-validator-no-such-entity' => '$1 net fonnt',
 	'wikibase-validator-no-such-property' => 'Eegeschaft $1 net fonnt',
@@ -2079,7 +2080,7 @@ $messages['lb'] = array(
 	'wikibase-validator-bad-url' => 'URL mat Feeler: $1',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
-	'datatypes-type-quantity' => 'Quantitéit', # Fuzzy
+	'datatypes-type-quantity' => 'Quantitéit',
 	'version-wikibase' => 'Wikibase',
 );
 

@@ -13037,6 +13037,7 @@ $messages['ps'] = array(
  * @author Hamilton Abreu
  * @author Helder.wiki
  * @author Malafaya
+ * @author MisterSanderson
  * @author SandroHc
  * @author Sarilho1
  * @author Vivaelcelta
@@ -13087,6 +13088,7 @@ $messages['pt'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valor personalizado',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valor desconhecido',
 	'wikibase-snakview-snaktypeselector-novalue' => 'sem valor',
+	'wikibase-shortcopyrightwarning' => 'Ao clicar "$1", você concorda com os [[$2|termos de uso]], e você irrevogavelmente concorda em liberar sua contribuição sob $3.',
 	'wikibase-entityselector-more' => 'mais',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida. Não pode ser editada.',
 	'wikibase-blockeduser-tooltip-message' => 'Não possui permissões para editar porque o seu nome de utilizador ou endereço IP foi bloqueado.',
