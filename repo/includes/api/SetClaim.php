@@ -55,7 +55,11 @@ class SetClaim extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 		$summary = $this->getSummary( $params, $claim, $entityContent );
 
-		$changeop = new ChangeOpClaim( $claim , new ClaimGuidGenerator( $guid->getEntityId() ) );
+		$changeop = new ChangeOpClaim(
+			$claim,
+			new ClaimGuidGenerator( $guid->getEntityId() ),
+			( isset( $params['index'] ) ? $params['index'] : null )
+		);
 		try{
 			$changeop->apply( $entity );
 		} catch( ChangeOpException $exception ){
@@ -127,7 +131,10 @@ class SetClaim extends ModifyClaim {
 				'claim' => array(
 					ApiBase::PARAM_TYPE => 'string',
 					ApiBase::PARAM_REQUIRED => true
-				)
+				),
+				'index' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
 			),
 			parent::getAllowedParams()
 		);
@@ -153,7 +160,8 @@ class SetClaim extends ModifyClaim {
 		return array_merge(
 			parent::getParamDescription(),
 			array(
-				'claim' => 'Claim serialization'
+				'claim' => 'Claim serialization',
+				'index' => 'The index within the entity\'s list of claims/statements featuring the same main snak property where to move the claim/statement to. Optional. When not provided, an existing claim/statement will stay in place while a new claim/statement will be appended to the last claim/statement whose main snak features the same property.',
 			)
 		);
 	}
@@ -181,7 +189,9 @@ class SetClaim extends ModifyClaim {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}'
-			=> 'Set the claim with the given id to property P1 with a string value of "City',
+			=> 'Set the claim with the given id to property P1 with a string value of "City"',
+			'api.php?action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}&index=0'
+			=> 'Set the claim with the given id to property P1 with a string value of "City" and move the claim to the topmost position within the entity\'s subgroup of claims that feature the main snak property P1.',
 		);
 	}
 
