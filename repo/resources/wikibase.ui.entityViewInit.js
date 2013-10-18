@@ -151,7 +151,12 @@
 			};
 
 			if( mw.config.get( 'wbExperimentalFeatures' ) ) {
-				toolbarControllerConfig.movetoolbar = ['claim-qualifiers-snak', 'referenceview-snakview'];
+				toolbarControllerConfig.movetoolbar = [
+					'claimlistview-claimview',
+					'claim-qualifiers-snak',
+					'statementview-referenceview',
+					'referenceview-snakview'
+				];
 			}
 
 			$( '.wb-entity' )
