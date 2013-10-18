@@ -17,6 +17,7 @@ use Wikibase\Summary;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author H. Snater < mediawiki@snater.com >
  */
 class ChangeOpClaim extends ChangeOpBase {
 
@@ -35,14 +36,20 @@ class ChangeOpClaim extends ChangeOpBase {
 	protected $guidGenerator;
 
 	/**
-	 * @since 0.4
+	 * @since 0.5
 	 *
+	 * @var int|null
+	 */
+	protected $index;
+
+	/**
 	 * @param Claim $claim
 	 * @param ClaimGuidGenerator $guidGenerator
+	 * @param int|null $index
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claim, $guidGenerator ) {
+	public function __construct( $claim, $guidGenerator, $index = null ) {
 		if ( !$claim instanceof Claim ) {
 			throw new InvalidArgumentException( '$claim needs to be an instance of Claim' );
 		}
@@ -51,8 +58,13 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new InvalidArgumentException( '$guidGenerator needs to be an instance of ClaimGuidGenerator' );
 		}
 
+		if( !is_null( $index ) && !is_integer( $index ) ) {
+			throw new InvalidArgumentException( '$index needs to be null or an integer value' );
+		}
+
 		$this->claim = $claim;
 		$this->guidGenerator = $guidGenerator;
+		$this->index = $index;
 	}
 
 	/**
@@ -74,17 +86,57 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
-		$claims = new Claims( $entity->getClaims() );
+		$entityClaims = $entity->getClaims();
+		$claims = new Claims( $entityClaims );
+
+		$index = $this->index;
+
+		if( $index !== null ) {
+			$index = $this->getOverallClaimIndex( $entityClaims );
+		}
+
 		if( $claims->hasClaimWithGuid( $this->claim->getGuid() ) ){
+			if( is_null( $index ) ) {
+				// Set index to current index to not have the claim removed and appended but retain
+				// its position within the list of claims.
+				$index = $claims->indexOf( $this->claim );
+			}
+
 			$claims->removeClaimWithGuid( $this->claim->getGuid() );
 			$this->updateSummary( $summary, 'update' );
 		} else {
 			$this->updateSummary( $summary, 'create' );
 		}
-		$claims->addClaim( $this->claim );
+
+		$claims->addClaim( $this->claim, $index );
 		$entity->setClaims( $claims );
 
 		return true;
+	}
+
+	/**
+	 * Computes the claim's overall index within the list of claims from the index within the subset
+	 * of claims whose main snak features the same property id.
+	 * @since 0.5
+	 *
+	 * @param Claim[] $claims
+	 * @return int|null
+	 */
+	protected function getOverallClaimIndex( $claims ) {
+		$overallIndex = 0;
+		$indexInProperty = 0;
+
+		foreach( $claims as $claim ) {
+			if( $claim->getPropertyId()->equals( $this->claim->getPropertyId() ) ) {
+				if( $indexInProperty++ === $this->index ) {
+					return $overallIndex;
+				}
+			}
+			$overallIndex++;
+		}
+
+		// No claims with the same main snak property exist.
+		return $this->index;
 	}
 
 }
