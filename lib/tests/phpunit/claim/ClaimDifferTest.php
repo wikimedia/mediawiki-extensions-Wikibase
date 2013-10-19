@@ -122,7 +122,7 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\ClaimDifference', $actual );
 
 		if ( !$expected->equals( $actual ) ) {
-			q($expected, $actual);
+			$this->assertEquals($expected, $actual);
 		}
 
 		$this->assertTrue(

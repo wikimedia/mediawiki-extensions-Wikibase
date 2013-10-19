@@ -39,38 +39,42 @@ class ClaimDiffer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Claim $oldClaim
-	 * @param Claim $newClaim
+	 * @param Claim|null $oldClaim
+	 * @param Claim|null $newClaim
 	 *
 	 * @return ClaimDifference
 	 */
-	public function diffClaims( Claim $oldClaim, Claim $newClaim ) {
+	public function diffClaims( $oldClaim, $newClaim ) {
 		$mainSnakChange = null;
+		$qualifierChanges = null;
 		$rankChange = null;
 		$referenceChanges = null;
 
-		if ( !$oldClaim->getMainSnak()->equals( $newClaim->getMainSnak() ) ) {
-			$mainSnakChange = new DiffOpChange( $oldClaim->getMainSnak(), $newClaim->getMainSnak() );
+		$oldClaimMainSnak = $oldClaim === null ? null : $oldClaim->getMainSnak();
+		$newClaimMainSnak = $newClaim === null ? null : $newClaim->getMainSnak();
+		if( $oldClaimMainSnak !== $newClaimMainSnak ){
+			$mainSnakChange = new DiffOpChange( $oldClaimMainSnak, $newClaimMainSnak );
 		}
 
-		$oldQualifiers = iterator_to_array( $oldClaim->getQualifiers() );
-		$newQualifiers = iterator_to_array( $newClaim->getQualifiers() );
 
-		$qualifierChanges = new Diff( $this->listDiffer->doDiff(
-			$oldQualifiers,
-			$newQualifiers
-		), false );
+		$oldQualifiers = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getQualifiers() );
+		$newQualifiers = $newClaim === null ? array() : iterator_to_array( $newClaim->getQualifiers() );
+		if( $oldQualifiers !== $newQualifiers ){
+			$qualifierChanges = new Diff( $this->listDiffer->doDiff( $oldQualifiers, $newQualifiers ), false );
+		}
 
-		if ( $oldClaim instanceof Statement && $newClaim instanceof Statement ) {
-
-			if ( $oldClaim->getRank() !== $newClaim->getRank() ) {
-				$rankChange = new DiffOpChange( $oldClaim->getRank(), $newClaim->getRank() );
+		if ( $oldClaim instanceof Statement || $newClaim instanceof Statement ) {
+			$oldRank = $oldClaim === null ? null : $oldClaim->getRank();
+			$newRank = $newClaim === null ? null : $newClaim->getRank();
+			if( $oldRank !== $newRank ){
+				$rankChange = new DiffOpChange( $oldRank, $newRank );
 			}
 
-			$referenceChanges = new Diff( $this->listDiffer->doDiff(
-				iterator_to_array( $oldClaim->getReferences() ),
-				iterator_to_array( $newClaim->getReferences() )
-			), false );
+			$oldReferences = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getReferences() );
+			$newReferences = $newClaim === null ? array() : iterator_to_array( $newClaim->getReferences() );
+			if( $oldReferences !== $newReferences ){
+				$referenceChanges = new Diff( $this->listDiffer->doDiff( $oldReferences, $newReferences ), false );
+			}
 		}
 
 		return new ClaimDifference( $mainSnakChange, $qualifierChanges, $referenceChanges, $rankChange );
