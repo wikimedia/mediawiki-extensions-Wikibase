@@ -34,6 +34,20 @@ class ItemView extends EntityView {
 	}
 
 	/**
+	 * @see EntityView::getTocSections
+	 */
+	protected function getTocSections() {
+		$array = parent::getTocSections();
+		$array['claims'] = 'wikibase-statements';
+		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
+		foreach( $groups as $group ) {
+			$id = htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES );
+			$array[$id] = 'wikibase-sitelinks-' . $group;
+		}
+		return $array;
+	}
+
+	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's site-links.
 	 *
 	 * @since 0.1
@@ -45,7 +59,7 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinks( Item $item, Language $lang, $editable = true ) {
-		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "siteLinkGroups" );
+		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
 		$html = '';
 
 		foreach ( $groups as $group ) {

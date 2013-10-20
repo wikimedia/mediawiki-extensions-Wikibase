@@ -96,7 +96,7 @@ h2.wb-section-heading {
 }
 
 .wb-widget-container {
-	float: left;
+	float: right;
 }
 
 /* basically, a row in the grid layout */

@@ -25,7 +25,28 @@ return call_user_func( function() {
 // TODO: no point in inserting this here, is there? Should be generated in JS!
 <<<HTML
 <div id="wb-$1-$2" class="wb-entity wb-$1" lang="$3" dir="$4">$5</div>
-<div id="wb-widget-container-$2" class="wb-widget-container"></div>
+<div id="wb-widget-container-$2" class="wb-widget-container">$6</div>
+HTML;
+
+
+	$templates['wb-entity-toc'] =
+<<<HTML
+<div id="toc" class="toc">
+<div id="toctitle">
+<h2>$1</h2>
+</div>
+<ul>
+$2
+</ul>
+</div>
+HTML;
+
+// $1: Index of the section
+// $2: Target of the link
+// $3: Text of the link
+	$templates['wb-entity-toc-section'] =
+<<<HTML
+<li class="toclevel-1 tocsection-$1"><a href="#$2"><span class="tocnumber">$1</span> <span class="toctext">$3</span></a></li>
 HTML;
 
 
