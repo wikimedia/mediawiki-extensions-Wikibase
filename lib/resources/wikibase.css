@@ -156,6 +156,10 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 	width: auto;
 }
 
+.wb-toc {
+	margin-top: 1.8em;
+	float: left;
+}
 
 /********** /BASIC LAYOUT **********/
 
