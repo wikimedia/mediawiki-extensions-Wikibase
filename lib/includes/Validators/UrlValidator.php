@@ -1,33 +1,8 @@
 <?php
- /**
- *
- * Copyright © 10.06.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- *
- * @author Daniel Kinzler
- */
-
 
 namespace Wikibase\Validators;
 
-
+use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -35,7 +10,8 @@ use ValueValidators\ValueValidator;
 /**
  * UrlValidator checks URLs based on sub-validators for each scheme.
  *
- * @package Wikibase\Validators
+ * @license GPL 2+
+ * @author Daniel Kinzler
  */
 class UrlValidator implements ValueValidator {
 
@@ -52,16 +28,16 @@ class UrlValidator implements ValueValidator {
 	 *        other schemes. You may want to use UrlSchemaValidators to create the
 	 *        respective validators conveniently.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $schemes ) {
 		foreach ( $schemes as $scheme => $validator ) {
 			if ( !is_string( $scheme ) ) {
-				throw new \InvalidArgumentException( 'The keys in $scheme must be strings (scheme names).' );
+				throw new InvalidArgumentException( 'The keys in $scheme must be strings (scheme names).' );
 			}
 
 			if ( !is_object( $validator ) || !( $validator instanceof ValueValidator ) ) {
-				throw new \InvalidArgumentException( 'The values in $scheme must be instances of ValueValidator.' );
+				throw new InvalidArgumentException( 'The values in $scheme must be instances of ValueValidator.' );
 			}
 		}
 
@@ -73,8 +49,8 @@ class UrlValidator implements ValueValidator {
 	 *
 	 * @param mixed $value The value to validate
 	 *
-	 * @return \ValueValidators\Result
-	 * @throws \InvalidArgumentException
+	 * @return Result
+	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		// See RFC 3986, section-3.1.

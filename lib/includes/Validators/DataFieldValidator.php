@@ -1,7 +1,7 @@
 <?php
+
 namespace Wikibase\Validators;
 
-use DataValues\DataValue;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use ValueValidators\Result;
