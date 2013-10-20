@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e93679c6_491f81b4",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2013-10-20T13:20:11Z",
+      "side": 1,
+      "message": "This message key is a dupe with an identical message key/text in the Datatype extension.\ntranslatewiki.net scripts are whining about the key conflict...\n\nReported in https://bugzilla.wikimedia.org/show_bug.cgi?id\u003d55937",
+      "revId": "2970434f539773db8882bd25b729923f51718862",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
