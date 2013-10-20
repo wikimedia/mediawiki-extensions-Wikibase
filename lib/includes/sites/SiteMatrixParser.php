@@ -4,7 +4,6 @@
  * Translates api sitematrix results json into an array of Site objects
  *
  * @licence GNU GPL v2+
- *
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteMatrixParser {
@@ -45,61 +44,81 @@ class SiteMatrixParser {
 	/**
 	 * @param string $json
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Site[]
 	 */
 	public function sitesFromJson( $json ) {
-		$specials = null;
+		$data = $this->decodeJson( $json );
+		$specialSites = $this->getSpecialSites( $data );
 
-		$data = json_decode( $json, true );
-
-		if ( !is_array( $data ) || !array_key_exists( 'sitematrix', $data ) ) {
-			throw new InvalidArgumentException( 'Cannot decode site matrix data.' );
-		}
-
-		if ( array_key_exists( 'specials', $data['sitematrix'] ) ) {
-			$specials = $data['sitematrix']['specials'];
-			unset( $data['sitematrix']['specials'] );
-		}
-
-		if ( array_key_exists( 'count', $data['sitematrix'] ) ) {
-			unset( $data['sitematrix']['count'] );
-		}
-
-		$groups = $data['sitematrix'];
+		$data = $this->removeSpecialsFromData( $data );
+		$data = $this->removeCountFromData( $data );
 
 		$sites = array();
-
-		foreach( $groups as $groupData ) {
+		foreach( $data['sitematrix'] as $groupData ) {
 			$sites = array_merge(
 				$sites,
 				$this->getSitesFromLangGroup( $groupData )
 			);
 		}
 
-		$sites = array_merge(
-			$sites,
-			$this->getSpecialSites( $specials )
-		);
-
-		return $sites;
+		return array_merge( $sites, $specialSites );
 	}
 
 	/**
-	 * @param array $specialSites
+	 * @param string $json
+	 * @return array
+	 * @throws InvalidArgumentException
+	 */
+	protected function decodeJson( $json ){
+		$data = json_decode( $json, true );
+
+		if ( !is_array( $data ) || !array_key_exists( 'sitematrix', $data ) ) {
+			throw new InvalidArgumentException( 'Cannot decode site matrix data.' );
+		}
+		return $data;
+	}
+
+	/**
+	 * @param array $data
+	 * @return array
+	 */
+	protected function removeCountFromData( $data ){
+		if ( array_key_exists( 'count', $data['sitematrix'] ) ) {
+			unset( $data['sitematrix']['count'] );
+		}
+		return $data;
+	}
+
+	/**
+	 * @param array $data
+	 * @return array
+	 */
+	protected function removeSpecialsFromData( $data ){
+		if ( array_key_exists( 'specials', $data['sitematrix'] ) ) {
+			unset( $data['sitematrix']['specials'] );
+		}
+		return $data;
+	}
+
+	/**
+	 * @param array $data
 	 *
 	 * @return Site[]
 	 */
-	protected function getSpecialSites( array $specialSites ) {
+	protected function getSpecialSites( array $data ) {
 		$sites = array();
 
-		foreach( $specialSites as $specialSite ) {
-			$site = $this->getSiteFromSiteData( $specialSite );
-			$siteId = $site->getGlobalId();
+		if ( array_key_exists( 'specials', $data['sitematrix'] ) ) {
+			foreach( $data['sitematrix'] as $specialSite ) {
+				$site = $this->getSiteFromSiteData( $specialSite );
+				$siteId = $site->getGlobalId();
 
-			// todo: get this from $wgConf
-			$site->setLanguageCode( 'en' );
+				// todo: get this from $wgConf
+				$site->setLanguageCode( 'en' );
 
-			$sites[$siteId] = $site;
+				$sites[$siteId] = $site;
+			}
 		}
 
 		return $sites;
@@ -132,7 +151,6 @@ class SiteMatrixParser {
 
 	/**
 	 * @param array $siteData
-	 * @param string $langCode
 	 *
 	 * @return Site
 	 */
