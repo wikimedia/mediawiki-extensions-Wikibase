@@ -146,7 +146,8 @@ abstract class EntityView extends \ContextSource {
 			$entityId,
 			$lang->getCode(),
 			$lang->getDir(),
-			$this->getInnerHtml( $entityRevision, $lang, $editable )
+			$this->getInnerHtml( $entityRevision, $lang, $editable ),
+			$this->getHtmlForToc()
 		);
 
 		// show loading spinner as long as JavaScript is initialising;
@@ -184,6 +185,43 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		return $entity->getId()->getPrefixedId();
+	}
+
+	/**
+	 * Builds and returns the html for the toc.
+	 *
+	 * @return string
+	 */
+	protected function getHtmlForToc() {
+		$tocContent = '';
+		$tocSections = $this->getTocSections();
+		if( empty( $tocSections ) ) {
+			return '';
+		}
+		$i = 1;
+		foreach( $tocSections as $id => $message ) {
+			$tocContent .= wfTemplate( 'wb-entity-toc-section',
+				$i++,
+				$id,
+				wfMessage( $message )->text()
+			);
+		}
+
+		$toc = wfTemplate( 'wb-entity-toc',
+			wfMessage( 'toc' )->text(),
+			$tocContent
+		);
+
+		return $toc;
+	}
+
+	/**
+	 * Returns the sections that should displayed in the toc.
+	 *
+	 * @return array( link target => system message key )
+	 */
+	protected function getTocSections() {
+		return array();
 	}
 
 	/**
