@@ -2,6 +2,7 @@
 namespace Wikibase;
 
 use DataValues\TimeValue;
+use Diff\DiffOp;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
@@ -109,14 +110,39 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 */
 	public function visualizeNewClaim( Claim $claim ) {
-		$mainSnak = $claim->getMainSnak();
-
 		$html = '';
 
 		$html .= $this->getSnakHtml(
 			null,
-			$mainSnak
+			$claim->getMainSnak()
 		);
+
+		if ( $claim->getQualifiers() !== null ) {
+			$qualifiers = array();
+			foreach ( $claim->getQualifiers() as $qualifier ) {
+				$qualifiers[] = new DiffOpAdd( $qualifier );
+			}
+			$html .= $this->visualizeQualifierChanges(
+				new Diff( $qualifiers, false ),
+				$claim
+			);
+		}
+
+		if ( $claim instanceof Statement ) {
+			$this->visualizeRankChange( new DiffOpAdd( $claim->getRank() ) );
+
+			if ( $claim->getReferences() != null ) {
+				$references = array();
+				foreach ( $claim->getReferences() as $reference ) {
+					$references[] = new DiffOpAdd( $reference );
+				}
+				$html .= $this->visualizeSnakListChanges(
+					new Diff( $references, false ),
+					$claim,
+					wfMessage( 'wikibase-diffview-reference' )
+				);
+			}
+		}
 
 		return $html;
 	}
@@ -131,14 +157,39 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 */
 	public function visualizeRemovedClaim( Claim $claim ) {
-		$mainSnak = $claim->getMainSnak();
-
 		$html = '';
 
 		$html .= $this->getSnakHtml(
-			$mainSnak,
+			$claim->getMainSnak(),
 			null
 		);
+
+		if ( $claim->getQualifiers() !== null ) {
+			$qualifiers = array();
+			foreach ( $claim->getQualifiers() as $qualifier ) {
+				$qualifiers[] = new DiffOpRemove( $qualifier );
+			}
+			$html .= $this->visualizeQualifierChanges(
+				new Diff( $qualifiers, false ),
+				$claim
+			);
+		}
+
+		if ( $claim instanceof Statement ) {
+			$this->visualizeRankChange( new DiffOpRemove( $claim->getRank() ) );
+
+			if ( $claim->getReferences() != null ) {
+				$references = array();
+				foreach ( $claim->getReferences() as $reference ) {
+					$references[] = new DiffOpRemove( $reference );
+				}
+				$html .= $this->visualizeSnakListChanges(
+					new Diff( $references, false ),
+					$claim,
+					wfMessage( 'wikibase-diffview-reference' )
+				);
+			}
+		}
 
 		return $html;
 	}
@@ -172,11 +223,18 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string
 	 */
-	protected function visualizeRankChange( DiffOpChange $rankChange ) {
+	protected function visualizeRankChange( DiffOp $rankChange ) {
+		$rankOldValue = $rankNewValue = null;
+		if ( $rankChange instanceof DiffOpChange || $rankChange instanceof DiffOpRemove ) {
+			$rankOldValue = $rankChange->getOldValue();
+		}
+		if ( $rankChange instanceof DiffOpChange || $rankChange instanceof DiffOpAdd ) {
+			$rankNewValue = $rankChange->getNewValue();
+		}
 		$valueFormatter = new DiffOpValueFormatter(
 			wfMessage( 'wikibase-diffview-rank' ),
-			$rankChange->getOldValue(),
-			$rankChange->getNewValue()
+			$rankOldValue,
+			$rankNewValue
 		);
 		return $valueFormatter->generateHtml();
 	}
