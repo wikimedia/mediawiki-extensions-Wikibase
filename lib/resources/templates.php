@@ -32,8 +32,32 @@ $1 <!-- label -->
 $2 <!-- description -->
 <hr class="wb-hr" />
 $3 <!-- aliases -->
-$4 <!-- terms -->
-$5 <!-- claims -->
+$4 <!-- table of contents -->
+$5 <!-- terms -->
+$6 <!-- claims -->
+HTML;
+
+	$templates['wb-entity-toc'] =
+<<<HTML
+<div id="toc" class="toc wb-toc">
+	<div id="toctitle">
+		<h2>$1</h2>
+	</div>
+	<ul>$2</ul>
+</div>
+HTML;
+
+// $1: Index of the section
+// $2: Target of the link
+// $3: Text of the link
+	$templates['wb-entity-toc-section'] =
+<<<HTML
+<li class="toclevel-1 tocsection-$1">
+	<a href="#$2">
+		<span class="tocnumber">$1</span>
+		<span class="toctext">$3</span>
+	</a>
+</li>
 HTML;
 
 // $1: Text of the heading.
@@ -215,13 +239,13 @@ HTML;
 HTML;
 
 	$templates['wb-terms-heading'] =
-		<<<HTML
-		<h2 class="wb-terms-heading">$1</h2>
+<<<HTML
+<h2 id="wb-terms" class="wb-terms-heading">$1</h2>
 HTML;
 
 	$templates['wb-terms-table'] =
-		<<<HTML
-		<table class="wb-terms">
+<<<HTML
+<table class="wb-terms">
 	<colgroup>
 		<col class="wb-terms-language" />
 		<col class="wb-terms-term" />
