@@ -848,7 +848,7 @@ $messages['da'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Forkert udformet mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Emne',
 	'datatypes-type-commonsMedia' => 'Commons media-fil',
-	'datatypes-type-quantity' => 'Kvantitet', # Fuzzy
+	'datatypes-type-quantity' => 'Mængde',
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -1496,12 +1496,16 @@ $messages['he'] = array(
 	'wikibase-replicationnote' => 'יש לשים לב לכך שייקח מספר דקות עד שהשינויים יוצגו בכל אתרי הוויקי',
 	'wikibase-sitelinks-wikipedia' => 'דפי ויקיפדיה שמקושרים לפריט הזה',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפה',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'אתר',
 	'wikibase-sitelinks-siteid-columnheading' => 'קוד',
 	'wikibase-sitelinks-link-columnheading' => 'ערך מקושר',
 	'wikibase-tooltip-error-details' => 'פרטים',
+	'wikibase-undeserializable-value' => 'הערך אינו תקין ואינו יכול להיות מוצג.',
 	'wikibase-validator-bad-type' => '$2 במקום $1',
 	'wikibase-validator-too-long' => 'חייב להיות באורך של {{PLURAL:$1|תו אחד|$1 תווים}} לכל היותר',
 	'wikibase-validator-too-short' => 'חייב להיות באורך של {{PLURAL:$1|תו אחד|$1 תווים}} לכל הפחות',
+	'wikibase-validator-too-high' => 'מחוץ לטווח, צריך להיות מעל $1',
+	'wikibase-validator-too-low' => 'מחוץ לטווח, צריך להיות מתחת ל{{GRAMMAR:תחילית|$1}}',
 	'wikibase-validator-malformed-value' => 'קלט בלתי־תקין: $1',
 	'wikibase-validator-bad-entity-id' => 'מזהה בלתי־תקין: $1',
 	'wikibase-validator-bad-entity-type' => 'סוג ישות בלתי־צפוי $1',
@@ -1515,6 +1519,7 @@ $messages['he'] = array(
 	'wikibase-validator-bad-mailto-url' => 'כתובת URL של mailto בלתי־תקינה: $1',
 	'datatypes-type-wikibase-item' => 'פריט',
 	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
+	'datatypes-type-quantity' => 'כמות',
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -3355,7 +3360,7 @@ $messages['zh-hans'] = array(
 	'wikibase-validator-bad-mailto-url' => '格式不正确 mailto 地址：$1',
 	'datatypes-type-wikibase-item' => '项',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
-	'datatypes-type-quantity' => '数量', # Fuzzy
+	'datatypes-type-quantity' => '数量',
 	'version-wikibase' => '维基数据库',
 );
 
@@ -3405,9 +3410,11 @@ $messages['zh-hant'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => '代碼',
 	'wikibase-sitelinks-link-columnheading' => '已連結的條目',
 	'wikibase-tooltip-error-details' => '詳細資訊',
+	'wikibase-validator-too-high' => '超出範圍，必須不高於$1',
+	'wikibase-validator-too-low' => '超出範圍，必須不低於$1',
 	'wikibase-validator-no-such-entity' => '$1無法找尋',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
-	'datatypes-type-quantity' => '數量', # Fuzzy
+	'datatypes-type-quantity' => '數量',
 	'version-wikibase' => 'Wikibase',
 );

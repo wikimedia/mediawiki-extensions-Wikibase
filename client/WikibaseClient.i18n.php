@@ -3608,7 +3608,7 @@ $messages['sr-ec'] = array(
 	'wikibase-linkitem-success-link' => 'Странице су успешно повезане. Можете пронаћи ставку која садржи везе на нашој [$1 централној бази података].',
 	'wikibase-property-notfound' => '$1 својство није пронађено.',
 	'wikibase-property-notsupportedyet' => 'Викибаза још не подржава врсту својства за $1 својство.',
-	'wikibase-rc-hide-wikidata' => '$1 Википодаци',
+	'wikibase-rc-hide-wikidata' => '$1 Википодатке',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажи измене на Википодацима у скорашњим изменама',
 	'wikibase-watchlist-show-changes-pref' => 'Прикажи измене на Википодацима у списку надгледања',
 	'wikibase-error-serialize-error' => 'Неуспешна серијализација података',
@@ -3632,6 +3632,7 @@ $messages['sr-el'] = array(
 	'wikibase-client-desc' => 'Klijent za proširenje Vikibaza',
 	'wikibase-editlinks' => 'Uredi veze',
 	'wikibase-editlinkstitle' => 'Uređivanje međujezičkih veza',
+	'wikibase-rc-hide-wikidata' => '$1 Vikipodatke',
 	'wikibase-rc-show-wikidata-pref' => 'Prikaži izmene na Vikipodacima u skorašnjim izmenama',
 );
 
