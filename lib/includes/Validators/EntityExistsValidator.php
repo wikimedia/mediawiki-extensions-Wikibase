@@ -2,6 +2,7 @@
 
 namespace Wikibase\Validators;
 
+use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -13,11 +14,7 @@ use Wikibase\EntityLookup;
  * EntityExistsValidator checks that a given entity exists.
  *
  * @license GPL 2+
- * @file
- *
  * @author Daniel Kinzler
- *
- * @package Wikibase\Validators
  */
 class EntityExistsValidator implements ValueValidator {
 
@@ -38,8 +35,8 @@ class EntityExistsValidator implements ValueValidator {
 	 *
 	 * @param EntityIdValue|EntityId $value The ID to validate
 	 *
-	 * @return \ValueValidators\Result
-	 * @throws \InvalidArgumentException
+	 * @return Result
+	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		if ( $value instanceof EntityIdValue ) {
@@ -47,7 +44,7 @@ class EntityExistsValidator implements ValueValidator {
 		}
 
 		if ( !( $value instanceof EntityId ) ) {
-			throw new \InvalidArgumentException( "Expected an EntityId object" );
+			throw new InvalidArgumentException( "Expected an EntityId object" );
 		}
 
 		if ( !$this->lookup->hasEntity( $value ) ) {

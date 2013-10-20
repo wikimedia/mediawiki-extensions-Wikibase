@@ -2,6 +2,7 @@
 
 namespace Wikibase\Validators;
 
+use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -43,8 +44,8 @@ class NumberRangeValidator implements ValueValidator {
 	 *
 	 * @param string $value The value to validate
 	 *
-	 * @return \ValueValidators\Result
-	 * @throws \InvalidArgumentException
+	 * @return Result
+	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		if ( $value < $this->min ) {
