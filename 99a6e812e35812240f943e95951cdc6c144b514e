@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_639d4262",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "would probably be an idea to give a little more information in this message potentially pass back the siteId and or title\nOther wise a user may spend a while hunting around ;p",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e3893226",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "dont need a since tag in this protected method",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a38f3a2a",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "here for eachy badgeserialization here are looking through and calling WikibaseRepo::getDefaultInstance()-\u003egetEntityIdParser()-\u003e\n\nThis should probably be outside of the forloop! similar to what is done for the entity content factory",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_838a3e1b",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "would be great to not use fully qualified class names here",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c3843611",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "you dont need this profileOut as there is no profileIn at the begining of the method",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_237c2a1c",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "this die should have a profileOut before it as the class starts with a profileIn",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_4379262b",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "you have removed not-item from here but this error code is still used in this class",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_838b1e18",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "We should add examples for the new use with badges\n\nAdding a badge to a sitelink\nRemoving a badge\nChanging both a title and badge\netc.\n(try to cover one of every case)",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a3901a43",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpSiteLinkTest.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "All of the tests look lovely in here! +11!!!",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c3951632",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "Again lovely test cases!!!",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e39a125f",
+        "filename": "repo/tests/phpunit/includes/api/SetSiteLinkTest.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T15:43:38Z",
+      "side": 1,
+      "message": "if you feel like it an extra space between the namespace and the use block would be great!",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
