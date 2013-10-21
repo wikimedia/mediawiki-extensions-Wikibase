@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\Serializers;
 use ApiResult, MWException;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityIdParser;
 
 /**
  * Serializer for Traversable objects that need to be grouped
@@ -62,19 +64,24 @@ class ByPropertyListUnserializer implements Unserializer {
 	 */
 	public function newFromSerialization( array $serialization ) {
 		$elements = array();
+		$idParser = new EntityIdParser();
 
 		foreach ( $serialization as $propertyId => $byPropId ) {
 			if ( !is_array( $byPropId ) ) {
 				throw new MWException( "Element with key '$propertyId' should be an array, found " . gettype( $byPropId ) );
 			}
 
+			$propertyId = $idParser->parse( $propertyId );
+
 			foreach ( $byPropId as $serializedElement ) {
 				$element = $this->elementUnserializer->newFromSerialization( $serializedElement );
-				// FIXME: usage of deprecated method getPrefixedId
-				$elementPropertyId = $element->getPropertyId()->getPrefixedId();
 
-				if ( $elementPropertyId !== $propertyId ) {
-					throw new MWException( "Element with id '$elementPropertyId' found in list with id '$propertyId'" );
+				/** @var PropertyId $elementPropertyId */
+				$elementPropertyId = $element->getPropertyId();
+
+				if ( !$elementPropertyId->equals( $propertyId ) ) {
+					throw new MWException( "Element with id '" . $elementPropertyId->getSerialization() .
+					"' found in list with id '" . $propertyId->getSerialization() . "'" );
 				}
 
 				$elements[] = $element;
