@@ -7,6 +7,10 @@ use Diff\OrderedListDiffer;
 use Diff\ListDiffer;
 use Content;
 use Html;
+use Linker;
+use ParserOptions;
+use Revision;
+use SiteSQLStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
@@ -66,12 +70,12 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 	/**
 	 * Get a header for a specified revision.
 	 *
-	 * @param $rev \Revision
+	 * @param $rev Revision
 	 * @param $complete String: 'complete' to get the header wrapped depending
 	 *        the visibility of the revision and a link to edit the page.
 	 * @return String HTML fragment
 	 */
-	protected function getRevisionHeader( \Revision $rev, $complete = '' ) {
+	protected function getRevisionHeader( Revision $rev, $complete = '' ) {
 		//NOTE: This must be kept in sync with the parent implementation.
 		//      Perhaps some parts could be factored out to reduce code duplication.
 
@@ -95,10 +99,10 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 
 		$title = $rev->getTitle();
 
-		$header = \Linker::linkKnown( $title, $header, array(),
+		$header = Linker::linkKnown( $title, $header, array(),
 			array( 'oldid' => $rev->getID() ) );
 
-		if ( $rev->userCan( \Revision::DELETED_TEXT, $user ) ) {
+		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
 			if ( $title->quickUserCan( 'edit', $user ) ) {
 				if ( $rev->isCurrent() ) {
 					$editQuery = array( 'action' => 'edit' );
@@ -109,10 +113,10 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 					$msg = $this->msg( 'wikibase-restoreold' )->escaped();
 				}
 
-				$header .= ' (' . \Linker::linkKnown( $title, $msg, array(), $editQuery ) . ')';
+				$header .= ' (' . Linker::linkKnown( $title, $msg, array(), $editQuery ) . ')';
 			}
 
-			if ( $rev->isDeleted( \Revision::DELETED_TEXT ) ) {
+			if ( $rev->isDeleted( Revision::DELETED_TEXT ) ) {
 				$header = Html::rawElement( 'span', array( 'class' => 'history-deleted' ), $header );
 			}
 		} else {
@@ -134,17 +138,15 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer(
-				$this->propertyNameFormatter,
-				$this->snakValueFormatter
-			)
+			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter ),
+			SiteSQLStore::newInstance()
 		);
 
 		return $diffVisualizer->visualizeDiff( $diff );
 	}
 
-	protected function getParserOutput( \WikiPage $page, \Revision $rev ) {
-		$parserOptions = \ParserOptions::newFromContext( $this->getContext() );
+	protected function getParserOutput( \WikiPage $page, Revision $rev ) {
+		$parserOptions = ParserOptions::newFromContext( $this->getContext() );
 		$parserOptions->enableLimitReport();
 		$parserOptions->setTidy( true );
 

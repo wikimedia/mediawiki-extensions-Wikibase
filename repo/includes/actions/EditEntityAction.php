@@ -5,8 +5,11 @@ namespace Wikibase;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use Html;
+use IContextSource;
 use Linker;
 use MWException;
+use Page;
+use SiteSQLStore;
 use Skin;
 use Status;
 use Revision;
@@ -30,7 +33,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class EditEntityAction extends ViewEntityAction {
 
-	public function __construct( \Page $page, \IContextSource $context = null ) {
+	public function __construct( Page $page, IContextSource $context = null ) {
 		parent::__construct( $page, $context );
 
 		//TODO: proper injection
@@ -454,10 +457,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer(
-				$this->propertyNameFormatter,
-				$this->snakValueFormatter
-			)
+			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter ),
+			SiteSQLStore::newInstance()
 		);
 
 		$this->getOutput()->addHTML( $diffVisualizer->visualizeDiff( $diff ) );
