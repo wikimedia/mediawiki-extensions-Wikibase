@@ -1,37 +1,24 @@
 <?php
 
 namespace Wikibase;
+
 use Html;
 use Diff\Diff;
 use Diff\DiffOp;
+use IContextSource;
+use MWException;
+use SiteSQLStore;
 
 /**
  * Class for generating views of DiffOp objects.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Adam Shorland
  */
 class DiffView extends \ContextSource {
 
@@ -56,9 +43,9 @@ class DiffView extends \ContextSource {
 	 *
 	 * @param array $path
 	 * @param Diff $diff
-	 * @param \IContextSource|null $contextSource
+	 * @param IContextSource|null $contextSource
 	 */
-	public function __construct( array $path, Diff $diff, \IContextSource $contextSource = null ) {
+	public function __construct( array $path, Diff $diff, IContextSource $contextSource = null ) {
 		$this->path = $path;
 		$this->diff = $diff;
 
@@ -87,23 +74,23 @@ class DiffView extends \ContextSource {
 	 * @param DiffOp $op
 	 *
 	 * @return string
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
 			$html = $this->generateDiffHeaderHtml( implode( ' / ', $path ) );
 
-			//TODO: no path, but localized section title.
+			//TODO: no path, but localized section title
 
 			//FIXME: complex objects as values?
 			if ( $op->getType() === 'add' ) {
-				$html .= $this->generateAddOpHtml( $op->getNewValue() );
+				$html .= $this->generateAddOpHtml( $op->getNewValue(), $path );
 			} elseif ( $op->getType() === 'remove' ) {
-				$html .= $this->generateRemoveOpHtml( $op->getOldValue() );
+				$html .= $this->generateRemoveOpHtml( $op->getOldValue(), $path );
 			} elseif ( $op->getType() === 'change' ) {
-				$html .= $this->generateChangeOpHtml( $op->getOldValue(), $op->getNewValue() );
+				$html .= $this->generateChangeOpHtml( $op->getOldValue(), $op->getNewValue(), $path );
 			} else {
-				throw new \MWException( 'Invalid diffOp type' );
+				throw new MWException( 'Invalid diffOp type' );
 			}
 		} else {
 			$html = '';
@@ -124,17 +111,26 @@ class DiffView extends \ContextSource {
 	 * @since 0.4
 	 *
 	 * @param string $value
+	 * @param array $path
 	 *
 	 * @return string
 	 */
-	protected function generateAddOpHtml( $value ) {
+	protected function generateAddOpHtml( $value, $path ) {
+		if( $path[0] === 'links' ){
+			$siteStore = SiteSQLStore::newInstance();
+			$siteLink = new SiteLink( $siteStore->getSite( $path[1] ), $value );
+			$innerElement = Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'a', array( 'href' => $siteLink->getUrl() ), $value )
+			);
+		} else {
+			$innerElement = Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ), $value );
+		}
+
 		$html = Html::openElement( 'tr' );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-			Html::rawElement( 'div', array(),
-				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$value ) ) );
+			Html::rawElement( 'div', array(), $innerElement ) );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
@@ -146,16 +142,25 @@ class DiffView extends \ContextSource {
 	 * @since 0.4
 	 *
 	 * @param string $value
+	 * @param array $path
 	 *
 	 * @return string
 	 */
-	protected function generateRemoveOpHtml( $value ) {
+	protected function generateRemoveOpHtml( $value, $path ) {
+		if( $path[0] === 'links' ){
+			$siteStore = SiteSQLStore::newInstance();
+			$siteLink = new SiteLink( $siteStore->getSite( $path[1] ), $value );
+			$innerElement = Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'a', array( 'href' => $siteLink->getUrl() ), $value )
+			);
+		} else {
+			$innerElement = Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ), $value );
+		}
+
 		$html = Html::openElement( 'tr' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-			Html::rawElement( 'div', array(),
-				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$value ) ) );
+			Html::rawElement( 'div', array(), $innerElement ) );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 		$html .= Html::closeElement( 'tr' );
 
@@ -169,22 +174,39 @@ class DiffView extends \ContextSource {
 	 *
 	 * @param string $oldValue
 	 * @param string $newValue
+	 * @param array $path
 	 *
 	 * @return string
 	 */
-	protected function generateChangeOpHtml( $oldValue, $newValue ) {
+	protected function generateChangeOpHtml( $oldValue, $newValue, $path ) {
+		if( $path[0] === 'links' ){
+			$siteStore = SiteSQLStore::newInstance();
+			$siteLink = new SiteLink( $siteStore->getSite( $path[1] ), $newValue );
+			$innerElementIns = Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'a', array( 'href' => $siteLink->getUrl() ), $newValue )
+			);
+		} else {
+			$innerElementIns = Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ), $value );
+		}
+
+		if( $path[0] === 'links' ){
+			$siteStore = SiteSQLStore::newInstance();
+			$siteLink = new SiteLink( $siteStore->getSite( $path[1] ), $oldValue );
+			$innerElementDel = Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'a', array( 'href' => $siteLink->getUrl() ), $oldValue )
+			);
+		} else {
+			$innerElementDel = Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ), $value );
+		}
+
 		//TODO: use WordLevelDiff!
 		$html = Html::openElement( 'tr' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-			Html::rawElement( 'div', array(),
-			Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$oldValue ) ) );
+			Html::rawElement( 'div', array(), $innerElementDel ) );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-			Html::rawElement( 'div', array(),
-				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$newValue ) ) );
+			Html::rawElement( 'div', array(), $innerElementIns ) );
 		$html .= Html::closeElement( 'tr' );
 		$html .= Html::closeElement( 'tr' );
 
