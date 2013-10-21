@@ -52,7 +52,7 @@ $messages['en'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Site',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
-	'wikibase-sitelinks-link-columnheading' => 'Linked article',
+	'wikibase-sitelinks-link-columnheading' => 'Linked page',
 	'wikibase-tooltip-error-details' => 'Details',
 	'wikibase-undeserializable-value' => 'The value is invalid and cannot be displayed.',
 	'wikibase-validator-bad-type' => '$2 instead of $1',
@@ -73,7 +73,6 @@ $messages['en'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Malformed mailto URL: $1',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
-	'datatypes-type-quantity' => 'Quantity',
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -250,7 +249,6 @@ Parameters:
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
-	'datatypes-type-quantity' => 'The name of a data type for quantities (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
 );
 
@@ -351,7 +349,7 @@ $messages['ast'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Llingua',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Sitiu',
 	'wikibase-sitelinks-siteid-columnheading' => 'Códigu',
-	'wikibase-sitelinks-link-columnheading' => 'Artículu enllazáu',
+	'wikibase-sitelinks-link-columnheading' => 'Artículu enllazáu', # Fuzzy
 	'wikibase-tooltip-error-details' => 'Detalles',
 	'wikibase-undeserializable-value' => 'El valor ye inválidu y nun se pue amosar.',
 	'wikibase-validator-bad-type' => '$2 en llugar de $1',
@@ -372,7 +370,6 @@ $messages['ast'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL de corréu con mal formatu: $1',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
-	'datatypes-type-quantity' => 'Cantidá', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -776,7 +773,7 @@ $messages['cy'] = array(
 	'wikibase-replicationnote' => 'Dalier sylw: efallai na welwch y newidiadau ar bob wici cyn pen rhai munudau.',
 	'wikibase-sitelinks-sitename-columnheading' => 'Iaith',
 	'wikibase-sitelinks-siteid-columnheading' => 'Cod',
-	'wikibase-sitelinks-link-columnheading' => 'Erthygl a gysylltwyd',
+	'wikibase-sitelinks-link-columnheading' => 'Tudalen a gysylltwyd',
 	'wikibase-tooltip-error-details' => 'Manylion',
 	'wikibase-validator-bad-type' => '$2 yn lle $1',
 	'datatypes-type-wikibase-item' => 'Eitem',
@@ -895,7 +892,7 @@ $messages['de'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprache',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Website',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
-	'wikibase-sitelinks-link-columnheading' => 'Verlinkter Artikel',
+	'wikibase-sitelinks-link-columnheading' => 'Verlinkte Seite',
 	'wikibase-tooltip-error-details' => 'Einzelheiten',
 	'wikibase-undeserializable-value' => 'Der Wert ist ungültig und kann nicht angezeigt werden.',
 	'wikibase-validator-bad-type' => '$2 anstatt von $1',
@@ -916,7 +913,6 @@ $messages['de'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Fehlerhafte mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
-	'datatypes-type-quantity' => 'Menge',
 	'version-wikibase' => 'Wikibase-Erweiterungen',
 );
 
@@ -1213,7 +1209,7 @@ $messages['fa'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'زبان',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'وب‌گاه',
 	'wikibase-sitelinks-siteid-columnheading' => 'کد',
-	'wikibase-sitelinks-link-columnheading' => 'مقالهٔ پیوندداده‌شده',
+	'wikibase-sitelinks-link-columnheading' => 'مقالهٔ پیوندداده‌شده', # Fuzzy
 	'wikibase-tooltip-error-details' => 'جزئیات',
 	'wikibase-undeserializable-value' => 'این مقدار معتبر نیست و قابل نمایش نیست.',
 	'wikibase-validator-bad-type' => '$2 به جای $1',
@@ -1224,7 +1220,7 @@ $messages['fa'] = array(
 	'wikibase-validator-bad-entity-type' => 'نوع ورودی غیرمنتظره  $1',
 	'wikibase-validator-no-such-entity' => '$1 یافت نشد',
 	'wikibase-validator-no-such-property' => 'خصوصیت $1 یافت نشد',
-	'wikibase-validator-bad-value' => 'مقدار غیرمجاز: $1',
+	'wikibase-validator-bad-value' => 'مقدار نامجاز: $1',
 	'wikibase-validator-bad-value-type' => 'نوع دادۀ غلط $1 برای $2',
 	'wikibase-validator-bad-url' => 'یوآرال ناقص: $1',
 	'wikibase-validator-bad-url-scheme' => 'یوآرال پوشش داده نشده: $1',
@@ -1232,7 +1228,6 @@ $messages['fa'] = array(
 	'wikibase-validator-bad-mailto-url' => 'یوآرال رایانامۀ ناقص: $1',
 	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
-	'datatypes-type-quantity' => 'مقدار', # Fuzzy
 	'version-wikibase' => 'ویکی‌بیس',
 );
 
@@ -1280,7 +1275,7 @@ $messages['fi'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Kieli',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Sivusto',
 	'wikibase-sitelinks-siteid-columnheading' => 'Koodi',
-	'wikibase-sitelinks-link-columnheading' => 'Linkitetty artikkeli',
+	'wikibase-sitelinks-link-columnheading' => 'Linkitetty artikkeli', # Fuzzy
 	'wikibase-tooltip-error-details' => 'Tiedot',
 	'wikibase-undeserializable-value' => 'Arvo on virheellinen, eikä sitä voida näyttää.',
 	'wikibase-validator-too-long' => 'Saa olla enintään {{PLURAL:$1|yhden merkin|$1 merkin}} pituinen',
@@ -1289,7 +1284,6 @@ $messages['fi'] = array(
 	'wikibase-validator-bad-url-scheme' => 'Ei-tuettu URL-järjestelmä: $1',
 	'datatypes-type-wikibase-item' => 'Kohde',
 	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
-	'datatypes-type-quantity' => 'Määrä', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -1498,7 +1492,7 @@ $messages['he'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'שפה',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'אתר',
 	'wikibase-sitelinks-siteid-columnheading' => 'קוד',
-	'wikibase-sitelinks-link-columnheading' => 'ערך מקושר',
+	'wikibase-sitelinks-link-columnheading' => 'דף מקושר',
 	'wikibase-tooltip-error-details' => 'פרטים',
 	'wikibase-undeserializable-value' => 'הערך אינו תקין ואינו יכול להיות מוצג.',
 	'wikibase-validator-bad-type' => '$2 במקום $1',
@@ -1519,7 +1513,6 @@ $messages['he'] = array(
 	'wikibase-validator-bad-mailto-url' => 'כתובת URL של mailto בלתי־תקינה: $1',
 	'datatypes-type-wikibase-item' => 'פריט',
 	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
-	'datatypes-type-quantity' => 'כמות',
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -1787,7 +1780,7 @@ $messages['it'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Sito',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codice',
-	'wikibase-sitelinks-link-columnheading' => 'Voce collegata',
+	'wikibase-sitelinks-link-columnheading' => 'Pagina collegata',
 	'wikibase-tooltip-error-details' => 'Dettagli',
 	'wikibase-undeserializable-value' => 'Il valore non è valido e non può essere visualizzato.',
 	'wikibase-validator-bad-type' => '$2 anziché $1',
@@ -1808,7 +1801,6 @@ $messages['it'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL mailto non valido: $1',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'File multimediale su Commons',
-	'datatypes-type-quantity' => 'Quantità', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -2075,7 +2067,7 @@ $messages['lb'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Site',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
-	'wikibase-sitelinks-link-columnheading' => 'Verlinkten Artikel',
+	'wikibase-sitelinks-link-columnheading' => 'Verlinkten Artikel', # Fuzzy
 	'wikibase-tooltip-error-details' => 'Detailer',
 	'wikibase-undeserializable-value' => 'De Wäert ass net valabel a kann net gewise ginn.',
 	'wikibase-validator-bad-type' => '$2 amplaz vu(n) $1',
@@ -2085,7 +2077,6 @@ $messages['lb'] = array(
 	'wikibase-validator-bad-url' => 'URL mat Feeler: $1',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
-	'datatypes-type-quantity' => 'Quantitéit',
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -2797,6 +2788,7 @@ $messages['roa-tara'] = array(
  * @author Amire80
  * @author Kaganer
  * @author Lockal
+ * @author Okras
  * @author Ole Yves
  * @author ShinePhantom
  */
@@ -2835,7 +2827,7 @@ $messages['ru'] = array(
 	'wikibase-sitelinks-wikipedia' => 'Страницы Википедии, связанные с этим элементом',
 	'wikibase-sitelinks-sitename-columnheading' => 'Язык',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
-	'wikibase-sitelinks-link-columnheading' => 'Связанные статьи',
+	'wikibase-sitelinks-link-columnheading' => 'Связанная страница',
 	'wikibase-tooltip-error-details' => 'Подробности',
 	'wikibase-validator-bad-type' => '$2 вместо $1',
 	'wikibase-validator-too-long' => 'Длина должна быть не более чем $1 {{PLURAL:$1|символ|символа|символов}}',
@@ -3103,7 +3095,7 @@ $messages['uk'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Сайт',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
-	'wikibase-sitelinks-link-columnheading' => "Пов'язані статті",
+	'wikibase-sitelinks-link-columnheading' => "Пов'язана сторінка",
 	'wikibase-tooltip-error-details' => 'Деталі',
 	'wikibase-undeserializable-value' => 'Значення неприпустиме і не може бути відображене.',
 	'wikibase-validator-bad-type' => '$2 замість $1',
@@ -3124,7 +3116,6 @@ $messages['uk'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Неправильний формат адреси одержувача:$1',
 	'datatypes-type-wikibase-item' => 'Елемент',
 	'datatypes-type-commonsMedia' => 'Медіафайл з Вікісховища',
-	'datatypes-type-quantity' => 'Кількість', # Fuzzy
 	'version-wikibase' => 'Вікібаза',
 );
 
@@ -3224,7 +3215,7 @@ $messages['vi'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Ngôn ngữ',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Dịch vụ',
 	'wikibase-sitelinks-siteid-columnheading' => 'Mã',
-	'wikibase-sitelinks-link-columnheading' => 'Bài viết liên kết',
+	'wikibase-sitelinks-link-columnheading' => 'Bài viết liên kết', # Fuzzy
 	'wikibase-tooltip-error-details' => 'Chi tiết',
 	'wikibase-undeserializable-value' => 'Không thể hiển thị giá trị vì nó không hợp lệ.',
 	'wikibase-validator-bad-type' => '$2 thay vì $1',
@@ -3245,7 +3236,6 @@ $messages['vi'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL mailto: hỏng: $1',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
-	'datatypes-type-quantity' => 'Số lượng', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -3408,13 +3398,12 @@ $messages['zh-hant'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => '語言',
 	'wikibase-sitelinks-sitename-columnheading-special' => '站點',
 	'wikibase-sitelinks-siteid-columnheading' => '代碼',
-	'wikibase-sitelinks-link-columnheading' => '已連結的條目',
+	'wikibase-sitelinks-link-columnheading' => '已連結的條目', # Fuzzy
 	'wikibase-tooltip-error-details' => '詳細資訊',
 	'wikibase-validator-too-high' => '超出範圍，必須不高於$1',
 	'wikibase-validator-too-low' => '超出範圍，必須不低於$1',
 	'wikibase-validator-no-such-entity' => '$1無法找尋',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
-	'datatypes-type-quantity' => '數量',
 	'version-wikibase' => 'Wikibase',
 );
