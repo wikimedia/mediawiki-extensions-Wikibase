@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_c6f36408",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T17:39:22Z",
+      "side": 1,
+      "message": "The UI wouldnt use Editentity so the UI would never get here ;p",
+      "parentUuid": "291c1151_43304601",
+      "revId": "99a6e812e35812240f943e95951cdc6c144b514e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_e3893226",
         "filename": "repo/includes/api/ModifyEntity.php",
         "patchSetId": 25
