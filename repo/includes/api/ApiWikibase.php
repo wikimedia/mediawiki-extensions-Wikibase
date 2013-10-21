@@ -19,7 +19,7 @@ use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
 use Wikibase\Summary;
 
 /**
- * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
+ * Base class for API modules
  *
  * @since 0.1
  * @licence GNU GPL v2+
