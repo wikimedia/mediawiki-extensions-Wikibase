@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use Wikibase\DataModel\Claim\ClaimGuid;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -42,7 +43,7 @@ class ClaimGuidGenerator implements GuidGenerator {
 	 * @return string
 	 */
 	public function newGuid() {
-		return $this->entityId->getSerialization() . '$' . $this->baseGenerator->newGuid();
+		return $this->entityId->getSerialization() . ClaimGuid::SEPARATOR . $this->baseGenerator->newGuid();
 	}
 
 }
