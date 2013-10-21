@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_ccd9c355",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T20:05:49Z",
+      "side": 1,
+      "message": "this message above doesn\u0027t quite make sense \u0027is not an id of item\u0027",
+      "revId": "34abff9543512dae6f534ae5590d9779fc268739",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_ecde7f3a",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-21T20:05:49Z",
+      "side": 1,
+      "message": "/would be great to not use a FQN here also! (above for Revision)",
+      "revId": "34abff9543512dae6f534ae5590d9779fc268739",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
