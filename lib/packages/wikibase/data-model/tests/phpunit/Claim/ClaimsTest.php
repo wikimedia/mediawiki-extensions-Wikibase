@@ -453,15 +453,15 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 			$this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P23" ) ) ),
 		) );
 
-		$matches = $claims->getClaimsForProperty( 42 );
+		$matches = $claims->getClaimsForProperty( new PropertyId( 'P42' ) );
 		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
 		$this->assertCount( 2, $matches );
 
-		$matches = $claims->getClaimsForProperty( 23 );
+		$matches = $claims->getClaimsForProperty( new PropertyId( 'P23' ) );
 		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
 		$this->assertCount( 1, $matches );
 
-		$matches = $claims->getClaimsForProperty( 9000 );
+		$matches = $claims->getClaimsForProperty( new PropertyId( 'P9000' ) );
 		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
 		$this->assertCount( 0, $matches );
 	}
@@ -608,13 +608,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 		// Note: this makes order of inner arrays relevant, and this order is not guaranteed by the interface
 		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
-	}
-
-	public function testCallingGetClaimsForPropertyWithInvalidArgumentCausesException() {
-		$claims = new Claims();
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$claims->getClaimsForProperty( 'foo bar' );
 	}
 
 	public function testGetHash() {

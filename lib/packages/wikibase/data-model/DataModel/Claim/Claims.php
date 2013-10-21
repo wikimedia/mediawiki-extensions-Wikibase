@@ -11,6 +11,7 @@ use Diff\DiffOpRemove;
 use Diff\MapDiffer;
 use Hashable;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Implementation of the Claims interface.
@@ -362,16 +363,11 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 *
 	 * @since 0.4
 	 *
-	 * @param int $propertyId
+	 * @param PropertyId $propertyId
 	 *
-	 * @throws InvalidArgumentException
 	 * @return Claims
 	 */
-	public function getClaimsForProperty( $propertyId ) {
-		if ( !is_int( $propertyId ) ) {
-			throw new InvalidArgumentException( '$propertyId must be an integer' );
-		}
-
+	public function getClaimsForProperty( PropertyId $propertyId ) {
 		$claimsByProp = new ByPropertyIdArray( $this );
 		$claimsByProp->buildIndex();
 
@@ -379,8 +375,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 			return new Claims();
 		}
 
-		$claimsForProperty = new Claims( $claimsByProp->getByPropertyId( $propertyId ) );
-		return $claimsForProperty;
+		return new Claims( $claimsByProp->getByPropertyId( $propertyId ) );
 	}
 
 	/**

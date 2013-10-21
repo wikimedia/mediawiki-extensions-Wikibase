@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\ByPropertyIdArray;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Property;
 use Wikibase\Snak;
 use Wikibase\Claim;
@@ -35,11 +35,11 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$lists = array();
 
 		$snaks = array(
-			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
-			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
-			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ) ),
-			new PropertyValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ), new StringValue( 'ohi' ) ),
-			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
+			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
+			new PropertySomeValueSnak( new PropertyId( 'P42' ) ),
+			new PropertySomeValueSnak( new PropertyId( 'P10' ) ),
+			new PropertyValueSnak( new PropertyId( 'P10' ), new StringValue( 'ohi' ) ),
+			new PropertySomeValueSnak( new PropertyId( 'P1' ) ),
 		);
 
 		$lists[] = $snaks;
@@ -77,7 +77,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$expected = array();
 
 		foreach ( $objects as $object ) {
-			$expected[] = $object->getPropertyId()->getNumericId();
+			$expected[] = $object->getPropertyId();
 		}
 
 		$expected = array_unique( $expected );
@@ -100,7 +100,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$ids = array();
 
 		foreach ( $objects as $object ) {
-			$ids[] = $object->getPropertyId()->getNumericId();
+			$ids[] = $object->getPropertyId();
 		}
 
 		$ids = array_unique( $ids );
@@ -112,7 +112,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		foreach ( $ids as $id ) {
 			foreach ( $indexedArray->getByPropertyId( $id ) as $obtainedObject ) {
 				$allObtainedObjects[] = $obtainedObject;
-				$this->assertEquals( $id, $obtainedObject->getPropertyId()->getNumericId() );
+				$this->assertEquals( $id, $obtainedObject->getPropertyId() );
 			}
 		}
 
@@ -128,14 +128,14 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 
-		$indexedArray->getByPropertyId( 9000 );
+		$indexedArray->getByPropertyId( PropertyId::newFromNumber( 9000 ) );
 	}
 
 	public function testNotBuildExceptionIsThrownForByPropertyId() {
 		$indexedArray = new ByPropertyIdArray();
 
 		$this->setExpectedException( 'RuntimeException' );
-		$indexedArray->getByPropertyId( 9000 );
+		$indexedArray->getByPropertyId( PropertyId::newFromNumber( 9000 ) );
 	}
 
 	public function testNotBuildExceptionIsThrownForGetPropertyIds() {
