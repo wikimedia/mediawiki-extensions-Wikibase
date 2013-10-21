@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8925fd91_49c3053c",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-10-21T11:57:50Z",
+      "side": 1,
+      "message": "I think there needs to be a comma in front of \"separated\".",
+      "revId": "811f113654994db2f8f2c28497789bdd0ea5e44a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8925fd91_69c0c12e",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-10-21T11:57:50Z",
+      "side": 1,
+      "message": "Needs punctuation.",
+      "revId": "811f113654994db2f8f2c28497789bdd0ea5e44a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
