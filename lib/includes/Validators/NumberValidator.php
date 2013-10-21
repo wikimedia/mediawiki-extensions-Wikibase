@@ -1,13 +1,13 @@
 <?php
 namespace Wikibase\Validators;
 
+use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 
 /**
  * @license GPL 2+
- *
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class NumberValidator implements ValueValidator {
