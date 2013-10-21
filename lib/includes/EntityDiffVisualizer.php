@@ -10,6 +10,8 @@ use Diff\DiffOp;
 use Diff\DiffOpChange;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
+use SiteSQLStore;
+use SiteStore;
 
 /**
  * Class for generating views of EntityDiff objects.
@@ -60,6 +62,10 @@ class EntityDiffVisualizer {
 	 * @var ClaimDifferenceVisualizer|null
 	 */
 	private $claimDiffVisualizer;
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
 
 	/**
 	 * Constructor.
@@ -69,12 +75,14 @@ class EntityDiffVisualizer {
 	 * @param IContextSource $contextSource
 	 * @param ClaimDiffer $claimDiffer
 	 * @param ClaimDifferenceVisualizer $claimDiffView
+	 * @param SiteStore $siteStore
 	 */
 	public function __construct( IContextSource $contextSource, ClaimDiffer $claimDiffer,
-		ClaimDifferenceVisualizer $claimDiffView ) {
+								 ClaimDifferenceVisualizer $claimDiffView, SiteStore $siteStore ) {
 		$this->context = $contextSource;
 		$this->claimDiffer = $claimDiffer;
 		$this->claimDiffVisualizer = $claimDiffView;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -91,11 +99,15 @@ class EntityDiffVisualizer {
 
 		$termDiffVisualizer = new DiffView(
 			array(),
-			new Diff( array(
-				$this->context->getLanguage()->getMessage( 'wikibase-diffview-label' ) => $diff->getLabelsDiff(),
-				$this->context->getLanguage()->getMessage( 'wikibase-diffview-alias' ) => $diff->getAliasesDiff(),
-				$this->context->getLanguage()->getMessage( 'wikibase-diffview-description' ) => $diff->getDescriptionsDiff(),
-			), true ),
+			new Diff(
+				array (
+					$this->context->getLanguage()->getMessage( 'wikibase-diffview-label' ) => $diff->getLabelsDiff(),
+					$this->context->getLanguage()->getMessage( 'wikibase-diffview-alias' ) => $diff->getAliasesDiff(),
+					$this->context->getLanguage()->getMessage( 'wikibase-diffview-description' ) => $diff->getDescriptionsDiff(),
+				),
+				true
+			),
+			$this->siteStore,
 			$this->context
 		);
 
@@ -109,9 +121,13 @@ class EntityDiffVisualizer {
 		if ( $diff instanceof ItemDiff ) {
 			$termDiffVisualizer = new DiffView(
 				array(),
-				new Diff( array(
-					$this->context->getLanguage()->getMessage( 'wikibase-diffview-link' ) => $diff->getSiteLinkDiff(),
-				), true ),
+				new Diff(
+					array (
+						$this->context->getLanguage()->getMessage( 'wikibase-diffview-link' ) => $diff->getSiteLinkDiff(),
+					),
+					true
+				),
+				$this->siteStore,
 				$this->context
 			);
 

@@ -7,6 +7,7 @@ use Diff\OrderedListDiffer;
 use Html;
 use Linker;
 use MWException;
+use SiteSQLStore;
 use Skin;
 use Status;
 use Revision;
@@ -454,10 +455,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer(
-				$this->propertyNameFormatter,
-				$this->snakValueFormatter
-			)
+			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter ),
+			SiteSQLStore::newInstance()
 		);
 
 		$this->getOutput()->addHTML( $diffVisualizer->visualizeDiff( $diff ) );

@@ -7,6 +7,7 @@ use Diff\OrderedListDiffer;
 use Diff\ListDiffer;
 use Content;
 use Html;
+use SiteSQLStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
@@ -134,10 +135,8 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer(
-				$this->propertyNameFormatter,
-				$this->snakValueFormatter
-			)
+			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter ),
+			SiteSQLStore::newInstance()
 		);
 
 		return $diffVisualizer->visualizeDiff( $diff );
