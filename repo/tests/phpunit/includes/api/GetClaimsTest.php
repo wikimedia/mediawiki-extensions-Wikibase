@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase\Test\Api;
+use Wikibase\ByPropertyIdArray;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\Claims;
@@ -146,17 +148,16 @@ class GetClaimsTest extends \ApiTestCase {
 		$serializer = $serializerFactory->newSerializerForObject( $claims );
 		$expected = $serializer->getSerialized( $claims );
 
-		$byPropClaims = new \Wikibase\ByPropertyIdArray( $claims );
+		$byPropClaims = new ByPropertyIdArray( $claims );
 		$byPropClaims->buildIndex();
 
 		// TODO: this is a rather simplistic test.
 		// Would be nicer if we could deserialize the list and then use the equals method
 		// or to serialize the expected value and have a recursive array compare on that
 		foreach ( $expected as $propertyId => $claimsForProperty ) {
-			$id = \Wikibase\EntityId::newFromPrefixedId( $propertyId );
 			$this->assertEquals(
 				count( $claimsForProperty ),
-				count( $byPropClaims->getByPropertyId( $id->getNumericId() ) )
+				count( $byPropClaims->getByPropertyId( new PropertyId( $propertyId ) ) )
 			);
 		}
 	}

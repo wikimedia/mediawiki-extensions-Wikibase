@@ -83,7 +83,7 @@ class PropertyParserFunctionRenderer {
 		}
 
 		$allClaims = new Claims( $entity->getClaims() );
-		$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
+		$claims = $allClaims->getClaimsForProperty( $propertyIdToFind );
 
 		return $claims;
 	}
