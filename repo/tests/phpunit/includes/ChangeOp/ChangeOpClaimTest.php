@@ -75,6 +75,13 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$claims[6666] = clone $claim666;
 		$claims[6666]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66666' );
 
+		$claims[11] = new Claim( new PropertyNoValueSnak( 1 ) );
+		$claims[11]->setGuid( null );
+		$claims[12] = new Claim( new PropertySomeValueSnak( 1 ) );
+		$claims[12]->setGuid( null );
+		$claims[13] = clone $claims[12];
+		$claims[13]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66613' );
+
 		$args = array();
 		//test adding claims with guids from other items(these shouldn't be added)
 		$args[] = array( $itemEmpty, $claims[666], false );
@@ -94,6 +101,11 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array( $item777, $claims[0], array( $claims[0], $claims[777], $claims[7770], $claims[7777] ), 0 );
 		// test moving a claim
 		$args[] = array( $item666, $claims[6666], array( $claims[666], $claims[6666], $claims[6660] ), 1 );
+		// test adding a claim featuring another property id within the boundaries of claims the
+		// same property
+		$args[] = array( $item666, $claims[11], array( $claims[666], $claims[6666], $claims[6660], $claims[11] ), 1 );
+		// test moving a subset of claims featuring the same property
+		$args[] = array( $item666, $claims[12], array( $claims[12], $claims[11], $claims[666], $claims[6666], $claims[6660] ), 0 );
 
 		return $args;
 	}
