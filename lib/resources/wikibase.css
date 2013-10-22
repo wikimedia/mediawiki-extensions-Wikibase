@@ -192,6 +192,13 @@ label and its toolbar */
 
 .wb-firstHeading .wb-value-supplement {
 	line-height: 188%;
+	/* In RTL UI, if the last word of the label is LTR,
+	 * the supplement will get jumbled without isolation */
+	unicode-bidi: -moz-isolate;
+	unicode-bidi: -webkit-isolate;
+	unicode-bidi: -ms-isolate;
+	unicode-bidi: -o-isolate;
+	unicode-bidi: isolate;
 }
 
 .wb-firstHeading .wb-value-container {
