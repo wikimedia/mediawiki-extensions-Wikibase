@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_b22cde03",
+        "filename": "lib/includes/serializers/ByPropertyListUnserializer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-22T00:22:17Z",
+      "side": 1,
+      "message": "if we want the code nicer, this code inside the foreach loop could be factored out.",
+      "revId": "1bdb08f7f6b497021fc69e008f83439789c93eac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_72f2669a",
+        "filename": "lib/includes/serializers/ByPropertyListUnserializer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-22T00:22:17Z",
+      "side": 1,
+      "message": "this needs to go outside of this foreach loop.  otherwise, second time around, idParser tries to parse a PropertyId and throws an exception.",
+      "revId": "1bdb08f7f6b497021fc69e008f83439789c93eac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
