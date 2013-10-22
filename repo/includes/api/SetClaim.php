@@ -161,7 +161,7 @@ class SetClaim extends ModifyClaim {
 			parent::getParamDescription(),
 			array(
 				'claim' => 'Claim serialization',
-				'index' => 'The index within the entity\'s list of claims/statements featuring the same main snak property where to move the claim/statement to. Optional. When not provided, an existing claim/statement will stay in place while a new claim/statement will be appended to the last claim/statement whose main snak features the same property.',
+				'index' => 'The index within the entity\'s list of claims/statements to move the claim/statement to. Optional. Be aware that when setting an index that specifies a position not next to a clam/statement whose main snak does not feature the same property, the whole group of claims/statements whose main snaks feature the same property is moved. When not provided, an existing claim/statement will stay in place while a new claim/statement will be appended to the last claim/statement whose main snak features the same property.',
 			)
 		);
 	}
