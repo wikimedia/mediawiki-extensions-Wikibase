@@ -162,7 +162,7 @@ class SetClaim extends ModifyClaim {
 			parent::getParamDescription(),
 			array(
 				'claim' => 'Claim serialization',
-				'index' => 'The index within the entity\'s list of claims/statements featuring the same main snak property where to move the claim/statement to. Optional. When not provided, an existing claim/statement will stay in place while a new claim/statement will be appended to the last claim/statement whose main snak features the same property.',
+				'index' => 'The index within the entity\'s list of claims/statements to move the claim/statement to. Optional. Be aware that when setting an index that specifies a position not next to a clam/statement whose main snak does not feature the same property, the whole group of claims/statements whose main snaks feature the same property is moved. When not provided, an existing claim/statement will stay in place while a new claim/statement will be appended to the last claim/statement whose main snak features the same property.',
 			)
 		);
 	}
@@ -192,7 +192,7 @@ class SetClaim extends ModifyClaim {
 			'api.php?action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}'
 			=> 'Set the claim with the given id to property P1 with a string value of "City"',
 			'api.php?action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}&index=0'
-			=> 'Set the claim with the given id to property P1 with a string value of "City" and move the claim to the topmost position within the entity\'s subgroup of claims that feature the main snak property P1.',
+			=> 'Set the claim with the given id to property P1 with a string value of "City" and move the claim to the topmost position within the entity\'s subgroup of claims that feature the main snak property P1. In addition, move the whole subgroup to the top of all subgroups aggregated by property.',
 		);
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\ByPropertyIdArray;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\Entity;
@@ -89,54 +90,35 @@ class ChangeOpClaim extends ChangeOpBase {
 		$entityClaims = $entity->getClaims();
 		$claims = new Claims( $entityClaims );
 
-		$index = $this->index;
-
-		if( $index !== null ) {
-			$index = $this->getOverallClaimIndex( $entityClaims );
-		}
-
-		if( $claims->hasClaimWithGuid( $this->claim->getGuid() ) ){
-			if( is_null( $index ) ) {
-				// Set index to current index to not have the claim removed and appended but retain
-				// its position within the list of claims.
-				$index = $claims->indexOf( $this->claim );
-			}
-
-			$claims->removeClaimWithGuid( $this->claim->getGuid() );
-			$this->updateSummary( $summary, 'update' );
-		} else {
+		if( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
+			// Adding a new claim.
 			$this->updateSummary( $summary, 'create' );
+
+			$indexedClaimList = new ByPropertyIdArray( $entityClaims );
+			$indexedClaimList->buildIndex();
+
+			$indexedClaimList->addObjectAtIndex( $this->claim, $this->index );
+
+		} else {
+			// Altering an existing claim.
+			$this->updateSummary( $summary, 'update' );
+
+			// Replace claim at its current index:
+			$currentIndex = $claims->indexOf( $this->claim );
+			$claims->removeClaimWithGuid( $this->claim->getGuid() );
+			$claims->addClaim( $this->claim, $currentIndex );
+
+			// Move claim to its designated index:
+			$indexedClaimList = new ByPropertyIdArray( $claims );
+			$indexedClaimList->buildIndex();
+
+			$index = !is_null( $this->index ) ? $this->index : $currentIndex;
+			$indexedClaimList->moveObjectToIndex( $this->claim, $index );
 		}
 
-		$claims->addClaim( $this->claim, $index );
+		$claims = new Claims( $indexedClaimList->toFlatArray() );
 		$entity->setClaims( $claims );
 
 		return true;
 	}
-
-	/**
-	 * Computes the claim's overall index within the list of claims from the index within the subset
-	 * of claims whose main snak features the same property id.
-	 * @since 0.5
-	 *
-	 * @param Claim[] $claims
-	 * @return int|null
-	 */
-	protected function getOverallClaimIndex( $claims ) {
-		$overallIndex = 0;
-		$indexInProperty = 0;
-
-		foreach( $claims as $claim ) {
-			if( $claim->getPropertyId()->equals( $this->claim->getPropertyId() ) ) {
-				if( $indexInProperty++ === $this->index ) {
-					return $overallIndex;
-				}
-			}
-			$overallIndex++;
-		}
-
-		// No claims with the same main snak property exist.
-		return $this->index;
-	}
-
 }
