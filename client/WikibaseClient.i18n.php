@@ -3262,11 +3262,13 @@ $messages['qu'] = array(
 	'wikibase-editlinks' => "T'inkikunata llamk'apuy",
 	'wikibase-editlinkstitle' => "Wikipura t'inkikunata llamk'apuy",
 	'wikibase-linkitem-addlinks' => "T'inkikunata yapay",
+	'wikibase-linkitem-close' => "Rimanakuyta wichq'ay p'anqata musuqmanta chaqnaspa",
 	'wikibase-linkitem-title' => "P'anqawan t'inkiy",
 	'wikibase-linkitem-linkpage' => "P'anqawan t'inkiy",
 	'wikibase-linkitem-selectlink' => "Ama hina kaspa, llika tiyayta p'anqatapas akllay kay p'anqawan t'inkinanpaq.",
 	'wikibase-linkitem-input-site' => 'Rimay:',
 	'wikibase-linkitem-input-page' => "P'anqa:",
+	'wikibase-linkitem-success-create' => "P'anqakunaqa aypalla t'inkinakusqañam. Ñaqha kamarisqa t'inkikunayuq kaq qallawata [$1 chawpi willañiqintinpim] tariyta atinki.",
 );
 
 /** Romansh (rumantsch)

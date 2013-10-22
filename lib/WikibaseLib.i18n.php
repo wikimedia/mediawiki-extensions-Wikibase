@@ -349,7 +349,7 @@ $messages['ast'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Llingua',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Sitiu',
 	'wikibase-sitelinks-siteid-columnheading' => 'Códigu',
-	'wikibase-sitelinks-link-columnheading' => 'Artículu enllazáu', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'Páxina enllazada',
 	'wikibase-tooltip-error-details' => 'Detalles',
 	'wikibase-undeserializable-value' => 'El valor ye inválidu y nun se pue amosar.',
 	'wikibase-validator-bad-type' => '$2 en llugar de $1',
@@ -2193,7 +2193,7 @@ $messages['mk'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Јазик',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Вики',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
-	'wikibase-sitelinks-link-columnheading' => 'Сврзана статија',
+	'wikibase-sitelinks-link-columnheading' => 'Сврзана страница',
 	'wikibase-tooltip-error-details' => 'Подробно',
 	'wikibase-undeserializable-value' => 'Вредноста е неважечка и затоа не може да се прикаже.',
 	'wikibase-validator-bad-type' => '$2 наместо $1',
@@ -2214,7 +2214,6 @@ $messages['mk'] = array(
 	'wikibase-validator-bad-mailto-url' => 'Неисправно обликувана mailto-URL: $1',
 	'datatypes-type-wikibase-item' => 'Предмет',
 	'datatypes-type-commonsMedia' => 'Податотека од Ризницата',
-	'datatypes-type-quantity' => 'Количина', # Fuzzy
 	'version-wikibase' => 'Викибаза',
 );
 
@@ -2695,6 +2694,7 @@ $messages['pt-br'] = array(
  * @author AlimanRuna
  */
 $messages['qu'] = array(
+	'wikibase-replicationnote' => 'Ama qunqaychu, huk minutukunam unayanqaman hukchasqaykikuna tukuy wikikunapi rikunalla kanankama.',
 	'wikibase-sitelinks-sitename-columnheading' => 'Rimay',
 );
 
@@ -3272,7 +3272,7 @@ $messages['yi'] = array(
 	'wikibase-sitelinks-wikipedia' => 'וויקיפעדיע בלעטער פארבונדן מיט דעם דאטנאביעקט',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
 	'wikibase-sitelinks-siteid-columnheading' => 'קאד',
-	'wikibase-sitelinks-link-columnheading' => 'פארלינקטער ארטיקל',
+	'wikibase-sitelinks-link-columnheading' => 'פארלינקטער בלאט',
 	'wikibase-tooltip-error-details' => 'פרטים',
 	'wikibase-validator-bad-type' => '$2 אַנשטאָט $1',
 	'wikibase-validator-no-such-entity' => '$1 נישט געטראפן',
@@ -3329,7 +3329,7 @@ $messages['zh-hans'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => '语言',
 	'wikibase-sitelinks-sitename-columnheading-special' => '网站',
 	'wikibase-sitelinks-siteid-columnheading' => '代码',
-	'wikibase-sitelinks-link-columnheading' => '链接条目',
+	'wikibase-sitelinks-link-columnheading' => '已链接页面',
 	'wikibase-tooltip-error-details' => '详情',
 	'wikibase-undeserializable-value' => '这个值无效以及无法显示。',
 	'wikibase-validator-bad-type' => '$2，预期类型为$1',
@@ -3350,7 +3350,6 @@ $messages['zh-hans'] = array(
 	'wikibase-validator-bad-mailto-url' => '格式不正确 mailto 地址：$1',
 	'datatypes-type-wikibase-item' => '项',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
-	'datatypes-type-quantity' => '数量',
 	'version-wikibase' => '维基数据库',
 );
 
