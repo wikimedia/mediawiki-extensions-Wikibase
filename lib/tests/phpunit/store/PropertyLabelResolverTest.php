@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyLabelResolver;
@@ -104,8 +104,8 @@ abstract class PropertyLabelResolverTest extends \MediaWikiTestCase {
 					'Zwei'
 				),
 				array(  // expected
-					'Eins' => new EntityId( Property::ENTITY_TYPE, 1 ),
-					'Zwei' => new EntityId( Property::ENTITY_TYPE, 2 ),
+					'Eins' => new PropertyId( 'P1' ),
+					'Zwei' => new PropertyId( 'P2' ),
 				)
 			),
 			array( // #2
@@ -116,7 +116,7 @@ abstract class PropertyLabelResolverTest extends \MediaWikiTestCase {
 					'Vier'
 				),
 				array(  // expected
-					'Drei' => new EntityId( Property::ENTITY_TYPE, 3 ),
+					'Drei' => new PropertyId( 'P3' ),
 				)
 			),
 			array( // #3
@@ -138,7 +138,7 @@ abstract class PropertyLabelResolverTest extends \MediaWikiTestCase {
 					'Four'
 				),
 				array(  // expected
-					'One' => new EntityId( Property::ENTITY_TYPE, 1 ),
+					'One' => new PropertyId( 'P1' ),
 				)
 			),
 		);
