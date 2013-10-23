@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_9ec19f85",
+        "filename": "lib/tests/phpunit/claim/ClaimDifferTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T20:55:59Z",
+      "side": 0,
+      "message": "lolwat? why was this not failing Jenkins before?",
+      "revId": "b7172155b4e7ce75c8a56b257094c40f7cb445cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

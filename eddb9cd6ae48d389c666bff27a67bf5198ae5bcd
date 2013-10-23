@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_de3317c2",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T20:55:59Z",
+      "side": 1,
+      "message": "This code is now actually painful to look at :|\n\nSome splitting up would certainly not hurt. Now everything is in one method *frown*",
+      "revId": "eddb9cd6ae48d389c666bff27a67bf5198ae5bcd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_fed7f347",
+        "filename": "lib/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T20:55:59Z",
+      "side": 1,
+      "message": "what about putting this into its own method?",
+      "revId": "eddb9cd6ae48d389c666bff27a67bf5198ae5bcd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
