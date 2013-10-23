@@ -13,6 +13,7 @@ use SiteSQLStore;
 use Status;
 use Title;
 use User;
+use Wikibase\Repo\ItemSearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -271,5 +272,15 @@ class ItemContent extends EntityContent {
 			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
 			array( new ItemModificationUpdate( $this ) )
 		);
+	}
+
+	/**
+	 * @see EntityContent::getTextForSearchIndex()
+	 */
+	public function getTextForSearchIndex() {
+		$item = $this->getEntity();
+
+		$searchTextGenerator = new ItemSearchTextGenerator();
+		return $searchTextGenerator->generate( $item );
 	}
 }
