@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use ValueParsers\ParserOptions;
+use Wikibase\DataModel\Claim\ClaimGuid;
 
 /**
  * @since 0.4
@@ -29,7 +30,7 @@ class ClaimGuidValidator {
 			return false;
 		}
 
-		$guidParts = explode( '$', $guid );
+		$guidParts = explode( ClaimGuid::SEPARATOR, $guid );
 
 		if ( ! $this->validateClaimGuidPrefix( $guidParts[0] ) || ! $this->validateGuid( $guidParts[1] ) ) {
 			return false;
