@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_be49fb62",
+        "filename": "repo/includes/EntitySearchTextGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T20:47:11Z",
+      "side": 1,
+      "message": "doing\n\n  $this-\u003eentity \u003d $entity\n\nand then accessing that in the methods will result in fewer method arguments and in better separation of abstraction levels, as this method can then just be\n\n  $text \u003d $this-\u003egetLabelText();\n  $text .\u003d $this-\u003egetDescriptionText();\n  // ...\n  return $text;",
+      "revId": "a760a2502872872242d5b6c323066762f0cf32ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_7e6863bb",
+        "filename": "repo/includes/EntitySearchTextGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T20:47:11Z",
+      "side": 1,
+      "message": "This \\n here is really out of place abstraction level wise",
+      "revId": "a760a2502872872242d5b6c323066762f0cf32ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_de979799",
+        "filename": "repo/tests/phpunit/includes/EntitySearchTextGeneratorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T20:47:11Z",
+      "side": 1,
+      "message": "Not clear to me what this \"m\" is for. Perhaps name it, for instance with a constant?\n\nEdit: this was just moved apparently... still nice if you could fix it :)",
+      "revId": "a760a2502872872242d5b6c323066762f0cf32ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
