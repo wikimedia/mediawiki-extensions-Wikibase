@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_f1280b38",
+        "filename": "repo/includes/serializers/EntityRevisionSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-10-23T13:52:56Z",
+      "side": 1,
+      "message": "In new code, when $languageFallbackChain is set to null (\u003d omitted), $primaryLanguage is no longer used. It makes sense to have $primaryLanguage optional too, and use it in if () instead of $languageFallbackChain.",
+      "revId": "2d39b291f41c9621a4aee97c97e1e9c4665f3d03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
