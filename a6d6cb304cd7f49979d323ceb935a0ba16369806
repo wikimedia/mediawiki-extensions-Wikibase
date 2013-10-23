@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_55d8eaed",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T17:44:34Z",
+      "side": 1,
+      "message": "The below code can probably go into its own method and only be executed if the cache key is not false already. Else running it is rather pointless.",
+      "revId": "a6d6cb304cd7f49979d323ceb935a0ba16369806",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b54e7ebf",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-23T17:44:34Z",
+      "side": 1,
+      "message": "Operator precedence here is not obvious. I\u0027m actually not even sure it is correct without looking at the docs. Please add some brackets",
+      "revId": "a6d6cb304cd7f49979d323ceb935a0ba16369806",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
