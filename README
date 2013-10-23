@@ -8,8 +8,8 @@ The Wikibase package consists of three interconnected extensions:
 
 == About ==
 
-These extensions allow for the creation, maintenance, dissemination,
-and usage of structured data in MediaWiki.
+These extensions allow for the creation, maintenance, dissemination, and
+usage of structured data in MediaWiki.
 
 The repo is the extension for the repository. It allows the creation and maintenance of structured data. This is
 being used on wikidata.org.
