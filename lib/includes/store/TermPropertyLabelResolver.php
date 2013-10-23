@@ -1,38 +1,18 @@
 <?php
- /**
- *
- * Copyright © 24.04.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- *
- * @author daniel
- */
-
 
 namespace Wikibase;
 
+use BagOStuff;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Resolves property labels (which are unique per language) into entity IDs
  * using a TermIndex.
  *
- * @package Wikibase
+ * @license GPL 2+
+ *
+ * @author Daniel Kinzler
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 
 class TermPropertyLabelResolver implements PropertyLabelResolver {
@@ -50,7 +30,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	protected $termIndex;
 
 	/**
-	 * @var \BagOStuff
+	 * @var BagOStuff
 	 */
 	protected $cache;
 
@@ -75,7 +55,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 * @param string      $lang             The language of the labels to look up (typically,
 	 *                                      the wiki's content language)
 	 * @param TermIndex   $termIndex        The TermIndex service to look up labels with
-	 * @param \BagOStuff  $cache            The cache to use for labels (typically from wfGetMainCache())
+	 * @param BagOStuff  $cache            The cache to use for labels (typically from wfGetMainCache())
 	 * @param int         $cacheDuration    Number of seconds to keep the cached version for.
 	 *                                      Defaults to 3600 seconds = 1 hour.
 	 * @param string|null $cacheKey         The cache key to use, auto-generated based on $lang per default.
@@ -85,7 +65,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	public function __construct(
 		$lang,
 		TermIndex $termIndex,
-		\BagOStuff $cache,
+		BagOStuff $cache,
 		$cacheDuration = 3600,
 		$cacheKey = null
 	) {
@@ -136,11 +116,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		wfProfileIn( __METHOD__ );
 
-		if ( $recache === 'recache' ) {
-			$cached = false;
-		} else {
-			$cached = $this->cache->get( $this->cacheKey );
-		}
+		$cached = $this->getCachedLabelMap( $recache );
 
 		if ( $cached !== false && $cached !== null ) {
 			$this->propertiesByLabel = $cached;
@@ -172,7 +148,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		foreach ( $terms as $term ) {
 			$label = $term->getText();
-			$id = new EntityId( $term->getEntityType(), $term->getEntityId() );
+			$id = PropertyId::newFromNumber( $term->getEntityId() );
 
 			$this->propertiesByLabel[$label] = $id;
 		}
@@ -182,6 +158,40 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 		wfProfileOut( __METHOD__ . '#load' );
 		wfProfileOut( __METHOD__ );
 		return $this->propertiesByLabel;
+	}
+
+	/**
+	 * @param mixed $recache
+	 *
+	 * @return array|false
+	 */
+	protected function getCachedLabelMap( $recache ) {
+		$cached = false;
+
+		if ( $recache !== 'recache' ) {
+			$cached = $this->cache->get( $this->cacheKey );
+
+			if ( is_array( $cached ) && $this->needsRecache( $cached ) ) {
+				$cached = false;
+			}
+		}
+
+		return $cached;
+	}
+
+	/**
+	 * Checks if recache is needed
+	 *
+	 * @return boolean
+	 */
+	protected function needsRecache( array $propertyIds ) {
+		foreach( $propertyIds as $propertyId ) {
+			if ( !( $propertyId instanceof PropertyId ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }
