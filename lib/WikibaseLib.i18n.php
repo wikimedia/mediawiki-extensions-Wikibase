@@ -1140,8 +1140,9 @@ $messages['et'] = array(
 	'wikibase-replicationnote' => 'Palun pane tähele, et võib kuluda mitu minutit, enne kui muudatused on kõigis vikides nähtavad.',
 	'wikibase-sitelinks-wikipedia' => 'Sellele üksusele viitavad Vikipeedia-leheküljed',
 	'wikibase-sitelinks-sitename-columnheading' => 'Keel',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Võrgukoht',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kood',
-	'wikibase-sitelinks-link-columnheading' => 'Lingitud artikkel',
+	'wikibase-sitelinks-link-columnheading' => 'Lingitud lehekülg',
 	'wikibase-tooltip-error-details' => 'Üksikasjad',
 	'wikibase-validator-bad-type' => 'Tüübi $1 asemel $2',
 	'wikibase-validator-too-long' => 'Ei tohi olla {{PLURAL:$1|ühest|$1}} märgist pikem.',
@@ -1296,6 +1297,7 @@ $messages['fi'] = array(
  * @author Gomoko
  * @author Ltrlg
  * @author Metroitendo
+ * @author NemesisIII
  * @author Nnemo
  * @author Tititou36
  * @author Wyz
@@ -1336,7 +1338,7 @@ $messages['fr'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Langue',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Site',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
-	'wikibase-sitelinks-link-columnheading' => 'Articles liés',
+	'wikibase-sitelinks-link-columnheading' => 'Page liée',
 	'wikibase-tooltip-error-details' => 'Détails',
 	'wikibase-undeserializable-value' => 'La valeur n’est pas valide et ne peut pas être affichée.',
 	'wikibase-validator-bad-type' => '$2 au lieu de $1',
@@ -1357,7 +1359,6 @@ $messages['fr'] = array(
 	'wikibase-validator-bad-mailto-url' => 'URL mailto mal formée : $1',
 	'datatypes-type-wikibase-item' => 'Élément',
 	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
-	'datatypes-type-quantity' => 'Quantité', # Fuzzy
 	'version-wikibase' => 'Wikibase',
 );
 
@@ -2067,7 +2068,7 @@ $messages['lb'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Site',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
-	'wikibase-sitelinks-link-columnheading' => 'Verlinkten Artikel', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'Verlinkt Säit',
 	'wikibase-tooltip-error-details' => 'Detailer',
 	'wikibase-undeserializable-value' => 'De Wäert ass net valabel a kann net gewise ginn.',
 	'wikibase-validator-bad-type' => '$2 amplaz vu(n) $1',
@@ -2134,6 +2135,7 @@ $messages['lt'] = array(
  * @author Papuass
  */
 $messages['lv'] = array(
+	'wikibase-entity-item' => 'ieraksts',
 	'wikibase-entity-property' => 'īpašība',
 	'wikibase-entity-query' => 'vaicājums',
 	'wikibase-deletedentity-item' => 'Dzēsts ieraksts',
@@ -2150,8 +2152,10 @@ $messages['lv'] = array(
 	'wikibase-error-autocomplete-response' => 'Servera atbilde: $1',
 	'wikibase-sitelinks-sitename-columnheading' => 'Valoda',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kods',
-	'wikibase-sitelinks-link-columnheading' => 'Saistītais raksts',
+	'wikibase-sitelinks-link-columnheading' => 'Saistītā lapa',
 	'wikibase-validator-bad-value' => 'Neatļauta vērtība: $1',
+	'datatypes-type-wikibase-item' => 'Ieraksts',
+	'datatypes-type-commonsMedia' => 'Commons multivides fails',
 );
 
 /** Macedonian (македонски)

@@ -2552,6 +2552,7 @@ $messages['lv'] = array(
 	'wikibase-comment-sitelink-change' => 'Valodas saite mainīta no $1 uz $2',
 	'wikibase-comment-sitelink-remove' => 'Valodas saite noņemta: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|izmaiņa|izmaiņas}}',
+	'wikibase-dataitem' => 'Datu ieraksts',
 	'wikibase-editlinks' => 'Labot saites',
 	'wikibase-editlinkstitle' => 'Labot starpvalodu saites',
 	'wikibase-linkitem-addlinks' => 'Pievienot saites',
@@ -2568,6 +2569,7 @@ $messages['lv'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" nav derīgs valodas kods.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Tikai lapas ar starpvalodu saitēm',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|starpvalodu saite|starpvalodu saites}} šajā lapā)',
+	'wikibase-pageinfo-entity-id' => 'Wikidata ieraksta ID',
 );
 
 /** Malagasy (Malagasy)
