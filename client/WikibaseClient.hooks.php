@@ -2,10 +2,12 @@
 namespace Wikibase;
 
 use IContextSource;
+use MovePageForm;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 use SiteSQLStore;
+use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -171,13 +173,13 @@ final class ClientHooks {
 	 *
 	 * @since 0.3
 	 *
-	 * @param \MovePageForm $movePage
-	 * @param \Title &$oldTitle
-	 * @param \Title &$newTitle
+	 * @param MovePageForm $movePage
+	 * @param Title &$oldTitle
+	 * @param Title &$newTitle
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
+	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle, Title &$newTitle ) {
 		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
@@ -187,11 +189,14 @@ final class ClientHooks {
 			$repoLinker
 		);
 
-		$movePageNotice->reportRepoUpdate(
-			$movePage->getOutput(),
-			$oldTitle,
-			$newTitle
-		);
+		$html = $movePageNotice->getPageMoveNoticeHtml(                                             
+			$oldTitle,                                                                              
+			$newTitle                                                                               
+		);                                                                                          
+                                                                                                    
+		$out = $movePage->getOutput();                                                              
+		$out->addModules( 'wikibase.client.page-move' );                                            
+		$out->addHTML( $html );  
 
 		return true;
 	}
