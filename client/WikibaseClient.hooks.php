@@ -422,7 +422,7 @@ final class ClientHooks {
 			$entityId = $entityIdParser->parse( $prefixedId );
 
 			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
-			$itemLink = $repoLinker->repoItemUrl( $entityId );
+			$itemLink = $repoLinker->getEntityUrl( $entityId );
 
 			$toolbox['wikibase'] = array(
 				'text' => $sk->getMsg( 'wikibase-dataitem' )->text(),

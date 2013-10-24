@@ -3,7 +3,6 @@
 namespace Wikibase\Client;
 
 use Html;
-use OutputPage;
 use Title;
 use Wikibase\SiteLinkLookup;
 use Wikibase\RepoLinker;
@@ -67,13 +66,12 @@ final class MovePageNotice {
 			return null;
 		}
 
-		return $this->repoLinker->repoItemUrl( $entityId );
+		return $this->repoLinker->getEntityUrl( $entityId );
 	}
 
 	/**
 	 * Append the appropriate content to the page
 	 *
-	 * @param OutputPage $output
 	 * @param Title $oldTitle Title of the page before the move
 	 * @param Title $newTitle Title of the page after the move
 	 */
@@ -99,10 +97,10 @@ final class MovePageNotice {
 	}
 
 	protected function getPageMoveMessage( Title $newTitle ) {
-        if ( isset( $newTitle->wikibasePushedMoveToRepo ) && ( $newTitle->wikibasePushedMoveToRepo === true ) ) {
-            // We're going to update the item using the repo job queue \o/
+		if ( isset( $newTitle->wikibasePushedMoveToRepo ) ) {
+			// We're going to update the item using the repo job queue \o/
 			return 'wikibase-after-page-move-queued';
-        }
+		}
 
 		// The user has to update the item per hand for some reason
 		return 'wikibase-after-page-move';

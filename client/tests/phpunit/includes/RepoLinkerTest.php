@@ -1,33 +1,14 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\RepoLinker;
-use Wikibase\EntityId;
-use Wikibase\Item;
 
 /**
- * Tests for the Wikibase\RepoLinker class.
+ * @covers Wikibase\RepoLinker
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group WikibaseClient
  * @group RepoLinkerTest
@@ -35,9 +16,9 @@ use Wikibase\Item;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RepoLinkerTest extends \MediaWikiTestCase {
+class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
-	public function getRepoSettings() {
+	protected function getRepoSettings() {
 		return array(
 			array(
 				'baseUrl' => '//www.example.com',
@@ -49,7 +30,7 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 				)
 			),
 			array(
-				'baseUrl' => '//example.com',
+				'baseUrl' => '//example.com/',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 				'repoNamespaces' => array(
@@ -69,119 +50,23 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function baseUrlProvider() {
-		$settings = $this->getRepoSettings();
-
-		return array(
-			array(
-				'//www.example.com',
-				$settings[0]
-			),
-			array(
-				'//example.com',
-				$settings[1]
-			),
-			array(
-				'http://www.example.com',
-				$settings[2]
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider baseUrlProvider
-	 */
-	public function testBaseUrl( $expected, array $settings ) {
-		$repoLinker = new RepoLinker(
+	protected function getRepoLinkerForSettings( $settings ) {
+		return new RepoLinker(
 			$settings['baseUrl'],
 			$settings['articlePath'],
 			$settings['scriptPath'],
 			$settings['repoNamespaces']
 		);
-
-		$baseUrl = $repoLinker->baseUrl();
-		$this->assertEquals( $expected, $baseUrl );
-	}
-
-	public function repoArticleUrlProvider() {
-		$settings = $this->getRepoSettings();
-
-		return array(
-			array(
-				'//www.example.com/wiki/Rome',
-				$settings[0],
-				'Rome'
-			),
-			array(
-				'//example.com/wiki/Rome',
-				$settings[1],
-				'Rome'
-			),
-			array(
-				'//www.example.com/wiki/Hall_%26_Oates',
-				$settings[0],
-				'Hall & Oates'
-			),
-			array(
-				'http://www.example.com/wiki/Why%3F_(film)',
-				$settings[2],
-				'Why? (film)'
-			)
-		);
 	}
 
 	/**
-	 * @dataProvider repoArticleUrlProvider
+	 * @dataProvider namespaceProvider
 	 */
-	 public function testRepoArticleUrl( $expected, array $settings, $page ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+	public function testGetNamespace( $expected, array $settings, $entityType ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+		$namespace = $repoLinker->getNamespace( $entityType );
 
-		$repoUrl = $repoLinker->repoArticleUrl( $page );
-
-		$this->assertEquals( $expected, $repoUrl );
-	}
-
-	public function repoItemUrlProvider() {
-		$settings = $this->getRepoSettings();
-
-		return array(
-			array(
-				'//www.example.com/wiki/Q4',
-				$settings[0],
-				new EntityId( Item::ENTITY_TYPE, 4 )
-			),
-			array(
-				'//example.com/wiki/Q100',
-				$settings[1],
-				new EntityId( Item::ENTITY_TYPE, 100 )
-			),
-			array(
-				'http://www.example.com/wiki/Item:Q100',
-				$settings[2],
-				new EntityId( Item::ENTITY_TYPE, 100 )
-			)
-		);
-	}
-
-	/**
-	 * @dataProvider repoItemUrlProvider
-	 */
-	public function testRepoItemUrl( $expected, array $settings, EntityId $entityId ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
-
-		$itemUrl = $repoLinker->repoItemUrl( $entityId );
-
-		$this->assertEquals( $expected, $itemUrl );
+		$this->assertEquals( $expected, $namespace );
 	}
 
 	public function namespaceProvider() {
@@ -207,84 +92,186 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider namespaceProvider
+	 * @dataProvider getPageUrlProvider
 	 */
-	public function testGetNamespace( $expected, array $settings, $entityType ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+	public function testGetPageUrl( $expected, $settings, $page ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
-		$namespace = $repoLinker->getNamespace( $entityType );
-
-		$this->assertEquals( $expected, $namespace );
+		$this->assertEquals( $expected, $repoLinker->getPageUrl( $page ) );
 	}
 
-	public function repoLinkProvider() {
+	public function getPageUrlProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array( '//www.example.com/wiki/Cat', $settings[0], 'Cat' ),
+			array( 'http://www.example.com/wiki/Frog', $settings[2], 'Frog' )
+		);
+	}
+
+	/**
+	 * @dataProvider formatLinkProvider
+	 */
+	public function testFormatLink( $expected, $settings, $url, $text, $attribs ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->formatLink( $url, $text, $attribs ) );
+	}
+
+	public function formatLinkProvider() {
 		$settings = $this->getRepoSettings();
 
 		return array(
 			array(
-				'<a class="plainlinks" href="//www.example.com/api.php?action=query&amp;meta=siteinfo">api query</a>',
-				$settings[0],
-				array(
-					'target' => null,
-					'text' => 'api query',
-					'params' => array(
-						'query' => array(
-							'params' => array(
-								'action' => 'query',
-								'meta' => 'siteinfo'
-							),
-							'type' => 'api'
-						)
-					)
-				)
-			),
-			array(
-				'<a class="plainlinks" href="//example.com/index.php?title=Rome">Roma</a>',
+				'<a class="plainlinks" href="//example.com/wiki/Special:Log/delete">delete</a>',
 				$settings[1],
-				array(
-					'target' => 'Rome',
-					'text' => 'Roma',
-					'params' => array(
-						'query' => array(
-							'params' => array(
-								'title' => 'Rome'
-							),
-							'type' => 'index'
-						)
-					)
-				)
+				'//example.com/wiki/Special:Log/delete',
+				'delete',
+				null
 			),
 			array(
-				'<a class="plainlinks" href="http://www.example.com/wiki/Rome">Rome</a>',
+				'<a class="plainlinks" tabindex="1" href="http://www.example.com/w/index.php'
+					. '?title=Q730&amp;diff=prev&amp;oldid=778">diff</a>',
 				$settings[2],
+				'http://www.example.com/w/index.php?title=Q730&diff=prev&oldid=778',
+				'diff',
 				array(
-					'target' => 'Rome',
-					'text' => 'Rome',
-					'params' => array()
+					'class' => 'plainlinks',
+					'tabindex' => 1
 				)
 			)
 		);
 	}
 
 	/**
-	 * @dataProvider repoLinkProvider
+	 * @dataProvider buildEntityLinkProvider
 	 */
-	public function testRepoLink( $expected, $settings, $params ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+	public function testBuildEntityLink( $expected, $settings, $entityId ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
-		$repoLink = $repoLinker->repoLink( $params['target'], $params['text'], $params['params'] );
-
-		$this->assertEquals( $expected, $repoLink );
+		$this->assertEquals( $expected, $repoLinker->buildEntityLink( $entityId ) );
 	}
 
+	public function buildEntityLinkProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array(
+				'<a class="plainlinks wb-entity-link" href="http://www.example.com/wiki/Q730">Q730</a>',
+				$settings[2],
+				new ItemId( 'Q730' )
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getEntityUrlProvider
+	 */
+	public function testGetEntityUrl( $expected, $settings, $entityId ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->getEntityUrl( $entityId ) );
+	}
+
+	public function getEntityUrlProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array(
+				'http://www.example.com/wiki/Q730',
+				$settings[2],
+				new ItemId( 'Q730' )
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getBaseUrlProvider
+	 */
+	public function testGetBaseUrl( $expected, $settings ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->getBaseUrl() );
+	}
+
+	public function getBaseUrlProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array(
+				'http://www.example.com',
+				$settings[2]
+			),
+			array(
+				'//example.com',
+				$settings[1]
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getApiUrlProvider
+	 */
+	public function testGetApiUrl( $expected, $settings ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->getApiUrl() );
+	}
+
+	public function getApiUrlProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array(
+				'http://www.example.com/w/api.php',
+				$settings[2]
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getIndexUrlProvider
+	 */
+	public function testGetIndexUrl( $expected, $settings ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->getIndexUrl() );
+	}
+
+	public function getIndexUrlProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array(
+				'http://www.example.com/w/index.php',
+				$settings[2]
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider addQueryParamsProvider
+	 */
+	public function testAddQueryParams( $expected, $settings, $url, $params ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->addQueryParams( $url, $params ) );
+	}
+
+	public function addQueryParamsProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array(
+				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Q60',
+				$settings[2],
+				'http://www.example.com/w/api.php',
+				array(
+					'action' => 'query',
+					'prop' => 'revisions',
+					'titles' => 'Q60'
+				)
+			)
+		);
+	}
 }
