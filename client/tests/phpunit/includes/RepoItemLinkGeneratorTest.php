@@ -2,35 +2,18 @@
 
 namespace Wikibase\Test;
 
-use \Wikibase\RepoItemLinkGenerator;
-use \Wikibase\RepoLinker;
-use \Wikibase\NamespaceChecker;
-use \Wikibase\Lib\EntityIdParser;
-use \ValueParsers\ParserOptions;
+use Language;
+use Title;
+use ValueParsers\ParserOptions;
+use Wikibase\Lib\EntityIdParser;
+use Wikibase\NamespaceChecker;
+use Wikibase\RepoItemLinkGenerator;
+use Wikibase\RepoLinker;
 
 /**
- * Tests for the Wikibase\RepoItemLinkGenerator class.
+ * @covers Wikibase\RepoItemLinkGenerator
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group WikibaseClient
  * @group RepoItemLinkGenerator
@@ -41,11 +24,6 @@ use \ValueParsers\ParserOptions;
 class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var RepoLinker
-	 */
-	protected $repoLinker;
-
-	/**
 	 * @var NamespaceChecker
 	 */
 	protected $namespaceChecker;
@@ -53,7 +31,7 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 		$this->setMwGlobals( array(
-			'wgLang' => \Language::factory( 'en' )
+			'wgLang' => Language::factory( 'en' )
 		) );
 	}
 
@@ -74,14 +52,12 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	protected function getEntityIdParser() {
-		return new EntityIdParser( new \ValueParsers\ParserOptions() );
+		return new EntityIdParser( new ParserOptions() );
 	}
 
 	public function getLinksProvider() {
-		$repoLinker = $this->getRepoLinker();
-
 		$prefixedId = 'q9000';
-		$href = $repoLinker->repoArticleUrl( strtoupper( $prefixedId ) ) . '#sitelinks-wikipedia';
+		$href = 'http://www.example.com/wiki/Q9000#sitelinks-wikipedia';
 
 		$addLinksLink = array(
 			'text' => '',
@@ -96,8 +72,8 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 			'class' => 'wbc-editpage'
 		);
 
-		$title = \Title::newFromText( 'Tokyo', NS_MAIN );
-		$nonExistingTitle = \Title::newFromText( 'pfuwdodx2', NS_MAIN );
+		$title = Title::newFromText( 'Tokyo', NS_MAIN );
+		$nonExistingTitle = Title::newFromText( 'pfuwdodx2', NS_MAIN );
 
 		$title->resetArticleID( 9638 );
 
@@ -123,7 +99,13 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 		$namespaceChecker = $this->getNamespaceChecker();
 		$entityIdParser = $this->getEntityIdParser();
 
-		$repoItemLinkGenerator = new RepoItemLinkGenerator( $namespaceChecker, $repoLinker, $entityIdParser, true, 'wikipedia' );
+		$repoItemLinkGenerator = new RepoItemLinkGenerator(
+			$namespaceChecker,
+			$repoLinker,
+			$entityIdParser,
+			true,
+			'wikipedia'
+		);
 
 		$link = $repoItemLinkGenerator->getLink(
 			$title, $action, $isAnon, $noExternalLangLinks, $prefixedId
