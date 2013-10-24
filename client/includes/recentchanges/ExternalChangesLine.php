@@ -2,7 +2,8 @@
 
 namespace Wikibase;
 
-use \Wikibase\Client\WikibaseClient;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @todo remove static stuff and refactor
@@ -76,7 +77,11 @@ class ExternalChangesLine {
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
 			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
-			$deletionLog = $repoLinker->repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
+			$deletionLog = $repoLinker->formatLink(
+				$repoLinker->getPageUrl( 'Special:Log/delete' ),
+				wfMessage( 'dellogpage' )->text()
+			);
+
 			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
 		} else if ( in_array( $changeType, array( 'add', 'update' ) ) ) {
 
@@ -106,11 +111,16 @@ class ExternalChangesLine {
 		$line .= \Linker::link( $title );
 
 		if ( in_array( $changeType, array( 'add', 'restore', 'update' ) ) ) {
-			$entityLink = self::entityLink( $entityData );
-			if ( $entityLink !== false ) {
-				$line .= wfMessage( 'word-separator' )->plain()
-				 . wfMessage( 'parentheses' )->rawParams( self::entityLink( $entityData ) )->text();
+			$entityIdParser = new BasicEntityIdParser();
+
+			try {
+				$entityId = $entityIdParser->parse( $entityData['object_id'] );
+			} catch ( \Exception $e ) {
+				// bail... (for now)
+				return false;
 			}
+
+			$line .= self::entityLink( $entityId );
 		}
 
 		$line .= self::getTimestamp( $cl, $rc );
@@ -175,7 +185,7 @@ class ExternalChangesLine {
 	 */
 	public static function getComment( $entityData ) {
 		//TODO: If $entityData['changes'] is set, this is a coalesced change.
-		//      Combine all the comments! Up to some max length?
+		//	  Combine all the comments! Up to some max length?
 		if ( array_key_exists( 'composite-comment', $entityData ) ) {
 			$commentText = wfMessage( 'wikibase-comment-multi' )->numParams( count( $entityData['composite-comment'] ) )->text();
 		} else if ( array_key_exists( 'comment', $entityData  ) ) {
@@ -208,21 +218,21 @@ class ExternalChangesLine {
 	protected static function diffLink( $titleText, $entityData, $rc ) {
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
-		return $repoLinker->repoLink(
-			null,
+		$params = array(
+			'title' => $titleText,
+			'curid' => $entityData['page_id'],
+			'diff' => $entityData['rev_id'],
+			'oldid' => $entityData['parent_id']
+		);
+
+		$url = $repoLinker->addQueryParams( $repoLinker->getIndexUrl(), $params );
+
+		return $repoLinker->formatLink(
+			$url,
 			wfMessage( 'diff' )->text(),
 			array(
 				'class' => 'plainlinks',
-				'tabindex' => $rc->counter,
-				'query' => array(
-					'type' => 'index',
-					'params' => array(
-						'title' => $titleText,
-						'curid' => $entityData['page_id'],
-						'diff' => $entityData['rev_id'],
-						'oldid' => $entityData['parent_id']
-					)
-				)
+				'tabindex' => $rc->counter
 			)
 		);
 	}
@@ -238,22 +248,21 @@ class ExternalChangesLine {
 	protected static function historyLink( $titleText, $entityData ) {
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
-		$link = $repoLinker->repoLink(
-			null,
+		$params = array(
+			'title' => $titleText,
+			'curid' => $entityData['page_id'],
+			'action' => 'history'
+		);
+
+		$url = $repoLinker->addQueryParams( $repoLinker->getIndexUrl(), $params );
+
+		return $repoLinker->formatLink(
+			$url,
 			wfMessage( 'hist' )->text(),
 			array(
-				'class' => 'plainlinks',
-				'query' => array(
-					'type' => 'index',
-					'params' =>  array(
-						'title' => $titleText,
-						'curid' => $entityData['page_id'],
-						'action' => 'history'
-					)
-				)
+				'class' => 'plainlinks'
 			)
 		);
-		return $link;
 	}
 
 	/**
@@ -285,12 +294,14 @@ class ExternalChangesLine {
 	protected static function userLink( $userName ) {
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
-		// @todo: localise this once namespaces are localised on the repo
-		$link = "User:$userName";
-		$attribs = array(
-			 'class' => 'mw-userlink'
+		return $repoLinker->formatLink(
+			// @todo: localise this once namespaces are localised on the repo
+			$repoLinker->getPageUrl( "User:$userName" ),
+			$userName,
+			array(
+				'class' => 'mw-userlink'
+			)
 		);
-		return $repoLinker->repoLink( $link, $userName, $attribs );
 	}
 
 	/**
@@ -304,14 +315,15 @@ class ExternalChangesLine {
 	protected static function userContribsLink( $userName, $text = null ) {
 		// @todo: know how the repo is localised. it's english now
 		// for namespaces and special pages
-		$link = "Special:Contributions/$userName";
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+
+		$link = $repoLinker->getPageUrl( "Special:Contributions/$userName" );
+
 		if ( $text === null ) {
 			$text = wfMessage( 'contribslink' );
 		}
 
-		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
-
-		return $repoLinker->repoLink( $link, $text );
+		return $repoLinker->formatLink( $link, $text );
 	}
 
 	/**
@@ -325,9 +337,10 @@ class ExternalChangesLine {
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 		// @todo: localize this once we can localize namespaces on the repo
-		$link = "User_talk:$userName";
+		$link = $repoLinker->getPageUrl( "User_talk:$userName" );
 		$text = wfMessage( 'talkpagelinktext' )->text();
-		return $repoLinker->repoLink( $link, $text );
+
+		return $repoLinker->formatLink( $link, $text );
 	}
 
 	/**
@@ -361,21 +374,16 @@ class ExternalChangesLine {
 	/**
 	 * @since 0.2
 	 *
-	 * @param array $entityData
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
-	protected static function entityLink( $entityData ) {
-		$entityText = self::titleTextFromEntityData( $entityData );
-		$entityId = self::titleTextFromEntityData( $entityData, false );
-
-		if ( $entityText === false ) {
-			return false;
-		}
-
+	protected static function entityLink( EntityId $entityId ) {
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$entityLink = $repoLinker->buildEntityLink( $entityId );
 
-		return $repoLinker->repoLink( $entityText, $entityId, array( 'class' => 'wb-entity-link' ) );
+		return wfMessage( 'word-separator' )->plain()
+			. wfMessage( 'parentheses' )->rawParams( $entityLink )->text();
 	}
 
 	/**
