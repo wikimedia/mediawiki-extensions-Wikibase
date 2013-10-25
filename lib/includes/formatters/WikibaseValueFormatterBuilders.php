@@ -62,6 +62,7 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_PLAIN => array(
 			'VT:string' => 'ValueFormatters\StringFormatter',
 			'VT:globecoordinate' => 'ValueFormatters\GlobeCoordinateFormatter',
+			'VT:quantity' => 'ValueFormatters\QuantityFormatter',
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
 			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdFormatter' ),
 			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter'
