@@ -1,13 +1,30 @@
 <?php
 namespace Wikibase;
 
+use Action;
+use ChangesList;
+use DatabaseUpdater;
+use FormOptions;
 use IContextSource;
+use JobQueueGroup;
+use Linker;
 use MovePageForm;
+use OutputPage;
+use Parser;
+use ParserOutput;
+use QuickTemplate;
+use RecentChange;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RuntimeException;
 use SplFileInfo;
 use SiteSQLStore;
+use Sites;
+use Skin;
+use SpecialRecentChanges;
+use StripState;
 use Title;
+use User;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -16,9 +33,6 @@ use Wikibase\DataModel\SimpleSiteLink;
  * File defining the hook handlers for the Wikibase Client extension.
  *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+
  *
@@ -29,7 +43,6 @@ use Wikibase\DataModel\SimpleSiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-
 final class ClientHooks {
 
 	/**
@@ -38,11 +51,11 @@ final class ClientHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \DatabaseUpdater $updater
+	 * @param DatabaseUpdater $updater
 	 *
 	 * @return bool
 	 */
-	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
+	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		wfProfileIn( __METHOD__ );
 
 		$type = $updater->getDB()->getType();
@@ -151,7 +164,8 @@ final class ClientHooks {
 
 		$store = WikibaseClient::getDefaultInstance()->getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
-		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )] . " store on the client..." );
+		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )]
+			. " store on the client..." );
 		$store->rebuild();
 		$changes = ChangesTable::singleton();
 		$changes = $changes->select(
@@ -179,7 +193,8 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle, Title &$newTitle ) {
+	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
+		Title &$newTitle ) {
 		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
@@ -206,11 +221,11 @@ final class ClientHooks {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $engine
+	 * @param string $engine
 	 * @param array $extraLibraries
 	 * @return bool
 	 */
-	public static function onScribuntoExternalLibraries ( $engine, array &$extraLibraries ) {
+	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
 		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
 			$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
 		}
@@ -227,14 +242,15 @@ final class ClientHooks {
 	 * @param &$conds[]
 	 * @param &$tables[]
 	 * @param &$join_conds[]
-	 * @param \FormOptions $opts
+	 * @param FormOptions $opts
 	 * @param &$query_options[]
 	 * @param &$fields[]
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables, array &$join_conds,
-		\FormOptions $opts, array &$query_options, array &$fields ) {
+	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables,
+		array &$join_conds, FormOptions $opts, array &$query_options, array &$fields
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$rcFilterOpts = new RecentChangesFilterOptions( $opts );
@@ -253,14 +269,15 @@ final class ClientHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param \ChangesList $changesList
+	 * @param ChangesList $changesList
 	 * @param string $s
-	 * @param \RecentChange $rc
+	 * @param RecentChange $rc
+	 * @param string[] &$classes
 	 *
 	 * @return bool
 	 */
-	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s,
-		\RecentChange $rc, &$classes = array() ) {
+	public static function onOldChangesListRecentChangesLine( ChangesList &$changesList, &$s,
+		RecentChange $rc, &$classes = array() ) {
 
 		wfProfileIn( __METHOD__ );
 
@@ -307,7 +324,9 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields, array $values = array() ) {
+	public static function onSpecialWatchlistQuery( array &$conds, array &$tables,
+		array &$join_conds, array &$fields, array $values = array()
+	) {
 		global $wgRequest, $wgUser;
 
 		wfProfileIn( __METHOD__ );
@@ -322,7 +341,7 @@ final class ClientHooks {
 
 			$newConds = array();
 			foreach( $conds as $k => $v ) {
-				if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
+				if ( $v === 'rc_this_oldid=page_latest OR rc_type=3' ) {
 					$where = array(
 						'rc_this_oldid=page_latest',
 						'rc_type' => array( 3, 5 )
@@ -347,13 +366,13 @@ final class ClientHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Parser $parser
+	 * @param Parser $parser
 	 * @param string $text
-	 * @param \StripState $stripState
+	 * @param StripState $stripState
 	 *
 	 * @return bool
 	 */
-	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
+	public static function onParserAfterParse( Parser &$parser, &$text, StripState $stripState ) {
 		wfProfileIn( __METHOD__ );
 
 		// @todo split up the multiple responsibilities here and in lang link handler
@@ -372,7 +391,7 @@ final class ClientHooks {
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
-			\Sites::singleton(),
+			Sites::singleton(),
 			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup() );
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
@@ -409,12 +428,12 @@ final class ClientHooks {
 	 *
 	 * @since 0.4
 	 *
-	 * @param SkinTemplate &$sk
+	 * @param QuickTemplate &$sk
 	 * @param array &$toolbox
 	 *
 	 * @return boolean
 	 */
-	public static function onBaseTemplateToolbox( &$sk, &$toolbox ) {
+	public static function onBaseTemplateToolbox( QuickTemplate &$sk, &$toolbox ) {
 		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
 
 		if ( $prefixedId !== null ) {
@@ -437,14 +456,14 @@ final class ClientHooks {
 	/**
 	 * Add the connected item prefixed id as a JS config variable, for gadgets etc.
 	 *
-	 * @param \OutputPage &$out
-	 * @param \Skin &$skin
+	 * @param OutputPage &$out
+	 * @param Skin &$skin
 	 *
 	 * @since 0.4
 	 *
 	 * @return bool
 	 */
-	public static function onBeforePageDisplayAddJsConfig( \OutputPage &$out, \Skin &$skin ) {
+	public static function onBeforePageDisplayAddJsConfig( OutputPage &$out, Skin &$skin ) {
 		$prefixedId = $out->getProperty( 'wikibase_item' );
 
 		if ( $prefixedId !== null ) {
@@ -458,14 +477,14 @@ final class ClientHooks {
 	 * Adds css for the edit links sidebar link or JS to create a new item
 	 * or to link with an existing one.
 	 *
-	 * @param \OutputPage &$out
-	 * @param \Skin &$skin
+	 * @param OutputPage &$out
+	 * @param Skin &$skin
 	 *
 	 * @since 0.1
 	 *
 	 * @return bool
 	 */
-	public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
+	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		wfProfileIn( __METHOD__ );
 
 		$title = $out->getTitle();
@@ -478,15 +497,17 @@ final class ClientHooks {
 
 		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			$out->addModules( 'wikibase.client.init' );
+			$actionName = Action::getActionName( $skin->getContext() );
 
-			if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
+			if ( !$out->getLanguageLinks() && $actionName === 'view' && $title->exists() ) {
 				// Module with the sole purpose to hide #p-lang
 				// Needed as we can't do that in the regular CSS nor in JavaScript
 				// (as that only runs after the element initially appeared).
 				$out->addModules( 'wikibase.client.nolanglinks' );
 
 				if ( Settings::get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
-					// Add the JavaScript which lazy-loads the link item widget (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
+					// Add the JavaScript which lazy-loads the link item widget
+					// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 					$out->addModules( 'wikibase.client.linkitem.init' );
 				}
 			}
@@ -501,18 +522,18 @@ final class ClientHooks {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \OutputPage &$out
-	 * @param \ParserOutput $pout
+	 * @param OutputPage &$out
+	 * @param ParserOutput $pout
 	 *
 	 * @return bool
 	 */
-	public static function onOutputPageParserOutput( \OutputPage &$out, \ParserOutput $pout ) {
+	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $pout ) {
 		$langLinkHandler = new LangLinkHandler(
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
-			\Sites::singleton(),
+			Sites::singleton(),
 			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup() );
 
 		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );
@@ -545,12 +566,12 @@ final class ClientHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Skin $skin
-	 * @param \QuickTemplate $template
+	 * @param Skin $skin
+	 * @param QuickTemplate $template
 	 *
 	 * @return bool
 	 */
-	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
+	public static function onSkinTemplateOutputPageBeforeExec( Skin &$skin, QuickTemplate &$template ) {
 		wfProfileIn( __METHOD__ );
 
 		$namespaceChecker = new NamespaceChecker(
@@ -577,7 +598,7 @@ final class ClientHooks {
 			$site->getGroup()
 		);
 
-		$action = \Action::getActionName( $skin->getContext() );
+		$action = Action::getActionName( $skin->getContext() );
 		$title = $skin->getContext()->getTitle();
 
 		$isAnon = ! $skin->getContext()->getUser()->isLoggedIn();
@@ -597,12 +618,12 @@ final class ClientHooks {
 	/**
 	 * Adds a toggle for showing/hiding Wikidata entries in recent changes
 	 *
-	 * @param \SpecialRecentChanges $special
+	 * @param SpecialRecentChanges $special
 	 * @param array &$filters
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialRecentChangesFilters( \SpecialRecentChanges $special, array &$filters ) {
+	public static function onSpecialRecentChangesFilters( SpecialRecentChanges $special, array &$filters ) {
 		$context = $special->getContext();
 
 		if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
@@ -619,12 +640,12 @@ final class ClientHooks {
 	/**
 	 * Adds a preference for showing or hiding Wikidata entries in recent changes
 	 *
-	 * @param \User $user
+	 * @param User $user
 	 * @param &$prefs[]
 	 *
 	 * @return bool
 	 */
-	public static function onGetPreferences( \User $user, array &$prefs ) {
+	public static function onGetPreferences( User $user, array &$prefs ) {
 		$prefs['rcshowwikidata'] = array(
 			'type' => 'toggle',
 			'label-message' => 'wikibase-rc-show-wikidata-pref',
@@ -643,11 +664,11 @@ final class ClientHooks {
 	/**
 	 * Register the parser functions.
 	 *
-	 * @param $parser \Parser
+	 * @param $parser Parser
 	 *
 	 * @return bool
 	 */
-	public static function onParserFirstCallInit( &$parser ) {
+	public static function onParserFirstCallInit( Parser &$parser ) {
 		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::handle', SFH_NO_HASH );
 
 		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
@@ -690,7 +711,8 @@ final class ClientHooks {
 	public static function onSpecialWatchlistFilters( $special, &$filters ) {
 		$user = $special->getContext()->getUser();
 
-		if ( $special->getContext()->getRequest()->getBool( 'enhanced', $user->getOption( 'usenewrc' ) ) === false ) {
+		if ( $special->getContext()->getRequest()->getBool( 'enhanced',
+			$user->getOption( 'usenewrc' ) ) === false ) {
 			// Allow toggling wikibase changes in case the enhanced watchlist is disabled
 			$filters['hideWikibase'] = array(
 				'msg' => 'wikibase-rc-hide-wikidata',
@@ -708,7 +730,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onInfoAction( $context, array &$pageInfo ) {
+	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
 		// Check if wikibase namespace is enabled
 		$title = $context->getTitle();
 		$namespaceChecker = new NamespaceChecker(
@@ -728,7 +750,12 @@ final class ClientHooks {
 				$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 				$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
 				$idString = $idFormatter->format( $entityId );
-				$itemLink = \Linker::makeExternalLink( $repoLinker->repoItemUrl( $entityId ), $idString, true, 'plainlink' );
+				$itemLink = Linker::makeExternalLink(
+					$repoLinker->repoItemUrl( $entityId ),
+					$idString,
+					true,
+					'plainlink'
+				);
 
 				// Adding the Repo link to array &$pageInfo
 				$pageInfo['header-basic'][] = array(
@@ -759,7 +786,8 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onTitleMoveComplete( $oldTitle, $newTitle, $user, $pageId, $redirectId ) {
+	public static function onTitleMoveComplete( Title $oldTitle, Title $newTitle, User $user,
+		$pageId, $redirectId ) {
 		wfProfileIn( __METHOD__ );
 
 		if ( Settings::get( 'propagateChangesToRepo' ) !== true ) {
@@ -769,7 +797,7 @@ final class ClientHooks {
 
 		$repoDB = Settings::get( 'repoDatabase' );
 		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
-		$jobQueueGroup = \JobQueueGroup::singleton( $repoDB );
+		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
 
 		if ( !$jobQueueGroup ) {
 			wfLogWarning( "Failed to acquire a JobQueueGroup for $repoDB" );
@@ -796,7 +824,7 @@ final class ClientHooks {
 
 			// To be able to find out about this in the SpecialMovepageAfterMove hook
 			$newTitle->wikibasePushedMoveToRepo = true;
-		} catch( \RuntimeException $e ) {
+		} catch( RuntimeException $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
