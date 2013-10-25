@@ -47,6 +47,7 @@ return call_user_func( function() {
 				// Note: The order here is relevant, scripts should be places after the ones they
 				//  depend on.
 				'values/BoolValue.js',
+				'values/DecimalValue.js',
 				'values/GlobeCoordinateValue.js',
 				'values/MonolingualTextValue.js',
 				'values/MultilingualTextValue.js',
