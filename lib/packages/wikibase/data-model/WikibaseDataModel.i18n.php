@@ -175,6 +175,13 @@ $messages['sr-ec'] = array(
 	'wikibasedatamodel-desc' => 'Компонента која дефинише модел података Викибазе',
 );
 
+/** Swedish (svenska)
+ * @author Jopparn
+ */
+$messages['sv'] = array(
+	'wikibasedatamodel-desc' => 'Komponenten definierar Wikibase-datamodellen',
+);
+
 /** Ukrainian (українська)
  * @author Ата
  */
