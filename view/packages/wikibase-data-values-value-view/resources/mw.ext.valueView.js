@@ -26,6 +26,11 @@
 	);
 
 	expertProvider.registerExpert(
+		dv.QuantityValue,
+		vv.experts.QuantityType
+	);
+
+	expertProvider.registerExpert(
 		dv.TimeValue,
 		vv.experts.TimeValue
 	);

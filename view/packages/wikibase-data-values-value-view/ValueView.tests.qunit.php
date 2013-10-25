@@ -201,6 +201,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.quantitytype.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.experts/experts.QuantityType.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.quantitytype',
+			),
+		),
+
 		'jquery.autocompletestring.tests' => array(
 			'scripts' => array(
 				"$bp/jquery/jquery.autocompletestring.tests.js",
