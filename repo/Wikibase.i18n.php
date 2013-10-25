@@ -2863,7 +2863,7 @@ $messages['ce'] = array(
 	'wikibase-label-input-help-message' => 'ДӀаязъе цӀе хӀокху $1 меттахь.',
 	'wikibase-statements' => 'ТIечIагIдалар',
 	'wikibase-terms' => 'Кхечу маттахь дерш',
-	'wikibase-sitelinks-add' => 'Сайтан агӀона тӀе тӀетоха хьажориг',
+	'wikibase-sitelinks-add' => 'Сайтан агӀона тӀе тӀетоха хьажораг',
 	'wikibase-remove' => 'дӀаяккха',
 	'wikibase-empty-undo' => 'Эцахь хӀума яц кхузахь билгаляккха',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|дӀаяздар|дӀаяздарш}}',
@@ -2876,7 +2876,7 @@ $messages['ce'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'маьӀна хууш дац',
 	'wikibase-snakview-snaktypeselector-novalue' => 'маьӀна цакарийна',
 	'wikibase-entityselector-more' => 'кхин',
-	'wikibase-error-sitelink-already-used' => 'Хьажориг оцу [$1 $2] сайтан тӏе хӏинцале лелош ю хӏокху [[$3]] элементо.', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Хьажораг оцу [$1 $2] сайтан тӀе хӀинцале лелош ю хӀокху [[$3]] элементо.',
 	'special-itembytitle' => 'Элементаш коьртамогӀомца',
 	'wikibase-itembytitle-lookup-fieldset' => 'Лаха элемент сайтаца а коьртамгӀанца а',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
@@ -2893,7 +2893,7 @@ $messages['ce'] = array(
 	'wikibase-setlabel-label' => 'ЦӀе (билгало):',
 	'wikibase-setlabel-submit' => 'Язъе цӀе',
 	'wikibase-setdescription-label' => 'Цуьнах лаьцна:',
-	'wikibase-setsitelink-label' => 'Сайтан тӀе хьажориг:',
+	'wikibase-setsitelink-label' => 'Сайтан тӀе хьажораг:',
 	'wikibase-setentity-language' => 'Мотт:',
 	'wikibase-dispatchstats-change-timestamp' => 'Терахь/хан',
 	'wikibase-history-title-with-label' => 'Хийцаман истори «$2» ($1)',
@@ -2901,10 +2901,10 @@ $messages['ce'] = array(
 	'wikibase-entitieswithoutlabel-submit' => 'Лаха',
 	'wikibase-restoreold' => 'меттахӀоттае',
 	'wikibase-item-summary-wbeditentity-update' => 'Элемент карлаяьккина',
-	'wikibase-item-summary-wbsetreference' => 'Хьостан тӀе хьажориг къастина',
-	'wikibase-item-summary-wbsetsitelink-add' => 'ХӀокхуна [$2] тӀетоьхна хьажориг',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Хийцина хьажориг оцу [$2]',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'ТӀера [$2] хьажориг дӀааькхина',
+	'wikibase-item-summary-wbsetreference' => 'Хьостан тӀе хьажораг къастина',
+	'wikibase-item-summary-wbsetsitelink-add' => 'ХӀокхуна [$2] тӀетоьхна хьажораг',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Хийцина хьажораг оцу [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'ТӀера [$2] хьажораг дӀаяьккхина',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Кхоьллина дехар|Кхоьллина дехар}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Кхоьллина дехар|Кхоьллина дехарш}}',
 	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Кхоьллина дехар|Кхоьллина дехарш}}',
@@ -5392,6 +5392,7 @@ $messages['eu'] = array(
  * @author Alireza
  * @author Calak
  * @author Dalba
+ * @author Ebraminio
  * @author Ladsgroup
  * @author Mahan
  * @author Mahdiz
@@ -5505,7 +5506,7 @@ $messages['fa'] = array(
 	'wikibase-newproperty-datatype' => 'نوع داده:',
 	'wikibase-newproperty-invalid-datatype' => 'نوع داده غیر معتبر است',
 	'special-newitem' => 'ایجاد یک آیتم جدید',
-	'wikibase-newitem-summary' => 'مطمئن شوید که [[Special:ItemByTitle|مورد مربوطه از قبل وجود دارد]]!<br /> شما باید یک [[Help:Label|برچسب]] و یک [[Help:Description|توضیح]] برای همهٔ موردهای جدید ایجاد کنید.',
+	'wikibase-newitem-summary' => 'مطمئن شوید که [[Special:ItemByTitle|اگر آیتم مربوطه از قبل وجود داشته باشد]]!<br /> شما باید یک [[Help:Label|برچسب]] و [[Help:Description|توضیح]] برای همهٔ آیتم‌های جدید ایجاد کنید.',
 	'wikibase-newitem-fieldset' => 'ایجاد یک آیتم جدید',
 	'wikibase-newitem-site' => 'وب‌گاه نخستین صفحهٔ پیوندداده‌شده',
 	'wikibase-newitem-page' => 'نام نخستین صفحهٔ پیوندداده‌شده',
@@ -14757,6 +14758,8 @@ Din IP-adress kommer att sparas i historiken för denna enhet.',
 	'wikibase-listdatatypes-intro' => 'Detta är en lista över alla datatyper som nu används i denna installation:',
 	'wikibase-history-title-with-label' => 'Versionshistorik för "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Versionshistorik för ($1)',
+	'special-entitieswithoutdescription' => 'Entiteter utan beskrivning',
+	'wikibase-entitieswithoutdescription-legend' => 'Få en lista av entiteter utan beskrivning',
 	'special-entitieswithoutlabel' => 'Enheter utan etikett',
 	'wikibase-entitieswithoutlabel-legend' => 'Hämta listan över enheter utan etikett',
 	'wikibase-entitieswithoutlabel-label-language' => 'Språk:',
@@ -14822,8 +14825,12 @@ för att ta reda på var den tog vägen.',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Ändrade {{PLURAL:$4|en referens|$4 referenser}} för {{PLURAL:$3|anspråk}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Ändrade rank för {{PLURAL:$3|anspråk}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Sida flyttades från [$3] till [$4]',
-	'wikibase-item-summary-wbsetqualifier-add' => 'La till', # Fuzzy
+	'wikibase-item-summary-wbsetqualifier-add' => 'La till {{PLURAL:$1|kvalifikator|kvalifikatorer}}',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Ändrade {{PLURAL:$1|kvalifikator|kvalifikatorer}}',
+	'wikibase-item-summary-wbremovequalifiers-remove' => 'Tog bort {{PLURAL:$1|kvalifikator|kvalifikatorer}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Tog bort {{PLURAL:$3|källa|källor}} från påstående',
+	'wikibase-item-summary-wbmergeitems-from' => 'Slå samman objekt från "$3"',
+	'wikibase-item-summary-wbmergeitems-to' => 'Slå samman objekt in till "$3"',
 	'wikibase-property-summary-wbcreate-new' => 'Skapade en ny egenskap',
 	'wikibase-property-summary-wbeditentity-create' => 'Skapade en ny egenskap',
 	'wikibase-property-summary-wbeditentity-update' => 'Uppdaterade en egenskap',
