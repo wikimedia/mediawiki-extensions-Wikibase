@@ -259,7 +259,8 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 		try {
 			$out = Linker::linkKnown( $entry['title'] );
 			if ( $entry['num'] > 0 ) {
-				$out .= ' ' . $this->msg( 'wikibase-unconnectedpages-format-row', $entry['num'] )->text();
+				$out .= ' ' . $this->msg( 'wikibase-unconnectedpages-format-row' )
+					->numParams( $entry['num'] )->text();
 			}
 			return $out;
 		} catch ( MWException $e ) {
