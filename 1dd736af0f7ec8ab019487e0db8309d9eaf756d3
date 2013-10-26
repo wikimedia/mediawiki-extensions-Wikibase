@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_1b4f6fbe",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2013-10-26T10:17:36Z",
+      "side": 1,
+      "message": "Please split the line as it is over 100 characters.\n\nOne way to do it is (use tab):\n$out .\u003d \u0027 \u0027 . $this-\u003emsg( \u0027wikibase-unconnectedpages-format-row\u0027 )\n    -\u003enumParams( $entry[\u0027num\u0027] )-\u003etext();",
+      "revId": "1dd736af0f7ec8ab019487e0db8309d9eaf756d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
