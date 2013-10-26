@@ -781,7 +781,7 @@ $messages['ckb'] = array(
 	'wikibase-linkitem-success-create' => 'پەڕەکان سەرکەوتووانە بەستەر دران. دەتوانی بەندە تازە دروست‌کراوەکە کە بەستەرەکانی تێدایە لە [$1 خەزێنەی ناوەندیی دراوەکان]ماندا بدۆزییەوە.',
 	'wikibase-linkitem-success-link' => 'پەڕەکان سەرکەوتووانە بەستەر دران. دەتوانی ئەو بەندەی بەستەرەکانی تێدایە لە [$1 خەزێنەی ناوەندیی دراوەکان]ماندا بدۆزییەوە.',
 	'wikibase-property-notfound' => 'تایبەتمەندیی $1 نەدۆزرایەوە.',
-	'wikibase-rc-hide-wikidata' => 'ویکیدراوه $1',
+	'wikibase-rc-hide-wikidata' => 'ویکیدراوە $1',
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
 	'wikibase-watchlist-show-changes-pref' => 'دەستکارییەکانی ویکیدراوە لە پێرستی چاودێرییەکەت نیشان بدە',
 	'wikibase-unconnectedpages-submit' => 'بڕۆ',
@@ -1680,6 +1680,7 @@ $messages['gu'] = array(
 /** Hebrew (עברית)
  * @author Amire80
  * @author ExampleTomer
+ * @author Guycn1
  * @author ערן
  */
 $messages['he'] = array(
@@ -1723,7 +1724,7 @@ $messages['he'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
 	'wikibase-rc-wikibase-edit-letter' => 'נ',
 	'wikibase-rc-wikibase-edit-title' => 'עריכת ויקינתונים',
-	'wikibase-watchlist-show-changes-pref' => 'להציג עריכות בוויקינתונים ברשימת המעקב שלך',
+	'wikibase-watchlist-show-changes-pref' => 'הצגת עריכות שנעשו בוויקינתונים ברשימת המעקב',
 	'wikibase-error-serialize-error' => 'כשל בהכנת נתונים לשמירה',
 	'wikibase-error-invalid-entity-id' => 'המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
 	'special-unconnectedpages' => 'דפים שלא מקושרים לפריטים',
