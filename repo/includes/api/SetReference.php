@@ -85,6 +85,10 @@ class SetReference extends ModifyClaim {
 			array_merge( $params, $decodedParams )
 		);
 
+		foreach( $newReference->getSnaks() as $snak ) {
+			$this->snakValidation->validateSnak( $snak );
+		}
+
 		$changeOp = $this->getChangeOp( $newReference );
 
 		try {
@@ -173,9 +177,17 @@ class SetReference extends ModifyClaim {
 			}
 		} catch( InvalidArgumentException $invalidArgumentException ) {
 			// Handle Snak instantiation failures
-			$this->dieUsage( 'Failed to get reference from reference Serialization ' . $invalidArgumentException->getMessage() );
+			$this->dieUsage(
+				'Failed to get reference from reference Serialization '
+					. $invalidArgumentException->getMessage(),
+				'snak-instantiation-failure'
+			);
 		} catch( OutOfBoundsException $outOfBoundsException ) {
-			$this->dieUsage( 'Failed to get reference from reference Serialization ' . $outOfBoundsException->getMessage() );
+			$this->dieUsage(
+				'Failed to get reference from reference Serialization '
+					. $outOfBoundsException->getMessage(),
+				'snak-instantiation-failure'
+			);
 		}
 
 		return $snaks;
