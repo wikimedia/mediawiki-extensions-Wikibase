@@ -141,11 +141,20 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.removeSitelinkLink?.should be_true
         page.cancelSitelinkLink
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.editSitelinkLink
+        page.pageInputFieldExistingSiteLink="England"
+        page.saveSitelinkLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.editSitelinkLink
+        # Check that "remove" button is enabled after editing (bug #51307):
+        page.removeSitelinkLink?.should be_true
       end
     end
   end
