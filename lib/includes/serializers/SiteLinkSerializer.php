@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
+use SiteStore;
 use Wikibase\SiteLink;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -38,7 +39,7 @@ class SiteLinkSerializer extends SerializerObject {
 	/**
 	 * @since 0.4
 	 *
-	 * @var SiteSQLStore $siteStore
+	 * @var SiteStore $siteStore
 	 */
 	protected $siteStore;
 
@@ -48,9 +49,9 @@ class SiteLinkSerializer extends SerializerObject {
 	 * @since 0.4
 	 *
 	 * @param EntitySerializationOptions $options
-	 * @param SiteSQLStore $siteStore
+	 * @param SiteStore $siteStore
 	 */
-	public function __construct( EntitySerializationOptions $options, \SiteSQLStore $siteStore ) {
+	public function __construct( EntitySerializationOptions $options, SiteStore $siteStore ) {
 		$this->options = new MultiLangSerializationOptions();
 		$this->siteStore = $siteStore;
 		parent::__construct( $options );
