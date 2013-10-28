@@ -34,6 +34,24 @@
       "revId": "b7172155b4e7ce75c8a56b257094c40f7cb445cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e901e8b2",
+        "filename": "lib/tests/phpunit/claim/ClaimDifferTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-28T16:14:41Z",
+      "side": 0,
+      "message": "Oh, this was part of the debugging hack. Then the whole if should go. If you look at the new code, its rather odd indeed.",
+      "parentUuid": "291c1151_3e434b18",
+      "revId": "b7172155b4e7ce75c8a56b257094c40f7cb445cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
