@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use ApiResult;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -34,14 +33,28 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 	protected $options;
 
 	/**
+	 * @since 0.4
+	 *
+	 * @var EntityFactory
+	 */
+	protected $entityFactory;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.2
 	 *
 	 * @param EntitySerializationOptions $options
+	 * @param EntityFactory $entityFactory
 	 */
-	public function __construct( EntitySerializationOptions $options ) {
+	public function __construct( EntitySerializationOptions $options, EntityFactory $entityFactory = null ) {
 		parent::__construct( $options );
+
+		if ( $entityFactory === null ) {
+			$this->entityFactory = new EntityFactory();
+		} else {
+			$this->entityFactory = $entityFactory;
+		}
 	}
 
 	/**
@@ -126,16 +139,14 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 	 * @throws InvalidArgumentException
 	 */
 	public function newFromSerialization( array $data ) {
-		// @todo inject EntityFactory
-		$entityFactory = new EntityFactory();
-		$validTypes = $entityFactory->getEntityTypes();
+		$validTypes = $this->entityFactory->getEntityTypes();
 
 		if ( !array_key_exists( 'type', $data ) || !in_array( $data['type'], $validTypes ) ) {
 			throw new InvalidArgumentException( 'Invalid entity serialization' );
 		}
 
 		$entityType = $data['type'];
-		$entity = $entityFactory->newEmpty( $entityType );
+		$entity = $this->entityFactory->newEmpty( $entityType );
 
 		if ( array_key_exists( 'id', $data ) ) {
 			$idParser = new BasicEntityIdParser();
