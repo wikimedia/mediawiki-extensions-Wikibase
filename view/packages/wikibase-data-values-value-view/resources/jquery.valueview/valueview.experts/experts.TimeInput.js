@@ -101,6 +101,14 @@
 				'class': this.uiBaseClass + '-input valueview-input'
 			} )
 			.appendTo( this.$viewPort )
+			.eachchange( function( event, oldValue ) {
+				var value = self.$input.data( 'timeinput' ).value();
+				if( oldValue === '' && value === null || self.$input.val() === '' ) {
+					self._updatePreview();
+					self._updateCalendarHint();
+				}
+			} )
+			.timeinput( { mediaWiki: this._options.mediaWiki } )
 			.inputextender( {
 				initCallback: function( $extension ) {
 					self._initInputExtender( $extension );
@@ -115,19 +123,6 @@
 							self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
 						}
 					} );
-				}
-			} )
-			.eachchange( function( event, oldValue ) {
-				var value = self.$input.data( 'timeinput' ).value();
-				if( oldValue === '' && value === null || self.$input.val() === '' ) {
-					self._updatePreview();
-					self._updateCalendarHint();
-				}
-			} )
-			.timeinput( { mediaWiki: this._options.mediaWiki } )
-			.inputextender( {
-				initCallback: function( $extension ) {
-					self._initInputExtender( $extension );
 				},
 				contentAnimationEvents: 'toggleranimation'
 			} )
