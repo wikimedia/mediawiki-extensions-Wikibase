@@ -261,7 +261,7 @@ abstract class ViewEntityAction extends \ViewAction {
 					// or should set the attribute of the h1 to correct direction.
 					// Still note that the direction is "auto" so guessing should
 					// give the right direction in most cases.
-				)->rawParams( $labelText )
+				)->rawParams( htmlspecialchars( $labelText ) )
 			);
 		} else {
 			// Prevent replacing {{...}} by using rawParams() instead of params():

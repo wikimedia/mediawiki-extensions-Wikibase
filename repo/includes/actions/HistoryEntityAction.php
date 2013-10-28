@@ -87,7 +87,7 @@ class HistoryEntityAction extends \HistoryAction {
 
 		if ( isset( $labelText ) ) {
 			return $this->msg( 'wikibase-history-title-with-label' )
-				->rawParams( $prefixedId, $labelText )->text();
+				->rawParams( $prefixedId, htmlspecialchars( $labelText ) )->text();
 		}
 		else {
 			return $this->msg( 'wikibase-history-title-without-label' )
