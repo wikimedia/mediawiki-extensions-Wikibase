@@ -1,13 +1,24 @@
 /**
- * @file
- * @ingroup ValueView
+ * Factory for creating jQuery.valueview.Expert instances suitable for handling data values of a
+ * specific data value type or for handling data values suitable for a certain data type.
+ *
+ * Experts can be registered for generic handling of a certain data value type or for handling of
+ * data values suitable for a given data type.
+ * EXAMPLE:
+ *  The String data value could be handled by a StringExpert, so this expert would be used when
+ *  asking for "getExpert( stringValue )". An url data type which is internally using string values
+ *  to represent URLs would now automatically work with that same StringExpert when asking for
+ *  "getExpert( urlDataType )". Displaying the value via the expert would result into the URL being
+ *  formatted as a string. As a solution for rendering the URL as a link, an UrlExpert could be
+ *  created and registered for the URL data type explicitly.
+ *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( DataValue, dt, $, vv ) {
+jQuery.valueview.ExpertFactory = ( function( DataValue, dt, $ ) {
 	'use strict';
 
-	var SELF = vv.ExpertFactory = function ValueviewExpertFactory() {
+	var SELF = function ValueviewExpertFactory() {
 		this._expertsForDataValueTypes = {};
 		this._expertsForDataTypes = {};
 	};
@@ -214,4 +225,6 @@
 		}
 	};
 
-}( dataValues.DataValue, dataTypes, jQuery, jQuery.valueview ) );
+	return SELF;
+
+}( dataValues.DataValue, dataTypes, jQuery ) );

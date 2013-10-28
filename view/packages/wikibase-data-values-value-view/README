@@ -1,15 +1,23 @@
-# ValueView
+= MediaWiki Extension:ValueView =
 
-"ValueView" introduces the jQuery.ui.widget based frontend component jQuery.valueview which allows
-to display and edit data values defined by the "DataValues" extension. When added as a dependency in
-a resource loader definition, the following components introduced by this extension will be available:
+''ValueView'' introduces the jQuery.ui.widget based front-end component ''jquery.valueview'' which allows to display and edit data values defined by the ''DataValues'' extension.
 
-* jQuery.valueview: Widget definition for displaying and editing data values. Each data value which
-  should be supported by the valueview widget has to be implemented as a jQuery.valueview.Expert.
-* jQuery.fn.valueview: jQuery widget bridge to instantiate a jQuery.valueview widget in the DOM.
-* mediaWiki.ext.valueView: Object representing the "ValueView" MediaWiki extension.
-* Support of valueview for some basic data value types. These valueview experts can be found in
-  jQuery.valueview.experts.<constructor-name>.
-* other jQuery extensions required by this library which are not available in MediaWiki itself:
-  - jQuery.eachchange
-  - jQuery.inputAutoExpand
+
+== Components ==
+When loading the ''jquery.valueview'' resource loader definition, the following components introduced by this extension will be available:
+
+* '''jquery.valueview:''' Widget for displaying and editing data values.
+* '''mediaWiki.ext.valueView:''' Object representing the "ValueView" MediaWiki extension. When loaded, this will hook ''jQuery.valueview'' up to some of its basic formatters by overwriting <code>jQuery.valueview.valueview.prototype.options.expertProvider</code>
+
+
+== jquery.valueview ==
+@see resources/jquery.valueview/README
+
+
+=== Dependencies ===
+See <code>ValueView.resources.mw.php</code> for dependencies of this library. These dependencies are shipped as part of the MediaWiki extension while the core jQuery.valueview component can be found under <code>resources/jQuery.valueview</code>.
+
+
+== Requirements ==
+* [[Extension:DataValues|DataValues]] extension must be installed
+* [[Extension:DataTypes|DataTypes]] extension must be installed

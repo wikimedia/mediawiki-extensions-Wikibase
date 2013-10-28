@@ -1,0 +1,61 @@
+= jquery.valueview =
+
+''jquery.valueview'' introduces a jQuery widget for displaying and editing data values, open for extension to support custom data value implementations.
+It consists out of the following parts:
+
+; jQuery.valueview.valueview : Widget definition for displaying and editing data values. Can be instantiated via the widget's bridge <code>jQuery.fn.valueview</code>.
+; jQuery.valueview.Expert : Base for strategies defining how to handle (edit/display) data values of a specific data value type or data values suitable for a certain data type.
+; jQuery.valueview.ExpertFactory : Factory for creating jQuery.valueview.Expert instances.
+; jQuery.valueview.ViewState : Link between experts and valueview widget in form of a facade that allows experts to observe certain aspects of a valueview.
+; jQuery.valueview.experts : Expert definitions for some basic data value types.
+
+
+== Usage ==
+When using the jQuery valueview widget for handling a data value of some sort, an ExpertFactory with knowledge about an Expert dedicated to the used data value type is required and can be set up as follows:
+
+<syntaxhighlight lang="javascript">
+var dv = dataValues;
+var vv = jQuery.valueview;
+var experts = new vv.ExpertFactory();
+
+// Consider this a data value using the "string" data value type internally.
+var urlDataType = dataTypes.getDataType( 'url' );
+
+
+experts.registerExpert( dv.StringValue, vv.experts.StringValue );
+
+console.log(
+  experts.getExpert( new dv.StringValue( 'foo' ) ) === experts.getExpert( urlDataType ) );
+  // true because "url" data type's data value type is "string".
+  // The string expert will be used as fallback.
+
+
+experts.registerExpert( urlDataType, vv.experts.UrlType );
+
+console.log(
+  experts.getExpert( new dv.StringValue( 'foo' ) ) === experts.getExpert( urlDataType ) );
+  // false because we now have a dedicated expert registered for the "url" data type.</syntaxhighlight>
+
+The ExpertFactory <code>experts</code> can now be injected into a new jQuery.valueview which will then be able to present string data values.
+
+<syntaxhighlight lang="javascript">
+var $subject = $( '<div/>' ).appendTo( $( 'body' ).empty() );
+$subject.valueview( {
+  expertProvider: experts,
+  value: new dv.StringValue( 'text' )
+} );
+var valueView = $subject.data( 'valueview' );
+</syntaxhighlight>
+
+Creates a jQuery.valueview displaying ''text''. <code>valueView.<memberFn></code> or alternatively <code>$subject.valueview( '<memberFn>' )</code> will now allow to invoke member functions. For example:
+
+* ''Emptying the view:'' <code>valueView.value( null );</code>
+* ''Allowing the user to edit the value:'' <code>valueView.startEditing();</code>
+* ''Stopping the user from editing the value any further:'' <code>valueView.stopEditing();</code>
+* ''Returning the current value:'' <code>valueView.value();</code>
+
+Setting the view to a data value it can not handle because of lack of a suitable expert will result into a proper notification being displayed. Calling <code>.value()</code> will still return the value but the user can neither see nor edit the value.
+
+
+== Adding support for custom data value types ==
+Supporting a new data value type will require implementation of a suitable jQuery.valueview.Expert as well as its registration to the jQuery.valueview.ExpertFactory instance used in the actual valueview widget.

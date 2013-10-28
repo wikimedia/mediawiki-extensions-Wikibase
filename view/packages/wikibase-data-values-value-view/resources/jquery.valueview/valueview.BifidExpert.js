@@ -1,17 +1,19 @@
 /**
- * @file
- * @ingroup ValueView
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, vp, $, vv ) {
+jQuery.valueview = ( function( dv, vp, $, Expert ) {
 	'use strict';
 
-	var PARENT = vv.Expert;
+	var PARENT = Expert;
 
 	/**
 	 * Abstract definition of a Valueview expert whose responsibilities are shared by two valueview
 	 * experts; one taking over during edit mode, one being responsible while in static mode.
+	 *
+	 * TODO: Get rid of this by using value formatters in jQuery.valueview by injecting a
+	 *  formatter factory. Experts will then no longer be responsible for serving a non-edit
+	 *  representation of the value and there won't be any purpose for the BifidExpert anymore.
 	 *
 	 * @since 0.1
 	 *
@@ -19,7 +21,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.BifidExpert = dv.util.inherit( PARENT, {
+	return dv.util.inherit( PARENT, {
 		/**
 		 * Constructor for the valueview expert responsible during static mode.
 		 * @type Function
@@ -172,4 +174,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview.Expert ) );
