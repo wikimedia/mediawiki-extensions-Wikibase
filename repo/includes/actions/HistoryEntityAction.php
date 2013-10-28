@@ -86,8 +86,11 @@ class HistoryEntityAction extends \HistoryAction {
 		$prefixedId = ucfirst( $idPrefixer->format( $entity->getId() ) );
 
 		if ( isset( $labelText ) ) {
+			// Escaping HTML characters in order to retain original label that may contain HTML
+			// characters. This prevents having characters evaluated or stripped via
+			// OutputPage::setPageTitle:
 			return $this->msg( 'wikibase-history-title-with-label' )
-				->rawParams( $prefixedId, $labelText )->text();
+				->rawParams( $prefixedId, htmlspecialchars( $labelText ) )->text();
 		}
 		else {
 			return $this->msg( 'wikibase-history-title-without-label' )
