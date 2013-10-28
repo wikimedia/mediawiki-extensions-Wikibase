@@ -114,8 +114,8 @@ $magicWords['uk'] = array(
 
 /** Vietnamese (Tiếng Việt) */
 $magicWords['vi'] = array(
-	'noexternallanglinks' => array( 0, 'khôngliênkếtngônngữngoài' ),
-	'property' => array( 0, 'thuộctính' ),
+	'noexternallanglinks' => array( 0, 'không_liên_kết_ngôn_ngữ_ngoài', 'khôngliênkếtngônngữngoài' ),
+	'property' => array( 0, 'thuộc_tính', 'thuộctính' ),
 );
 
 /** Yiddish (ייִדיש) */
