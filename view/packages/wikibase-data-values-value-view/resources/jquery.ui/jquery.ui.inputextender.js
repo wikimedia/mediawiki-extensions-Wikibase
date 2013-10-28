@@ -53,7 +53,11 @@
 	 * class on the document body like it is done in MediaWiki.
 	 * @type {boolean}
 	 */
-	var isRtl = $( 'body' ).hasClass( 'rtl' );
+	var IS_RTL = false;
+
+	$( document ).ready( function() {
+		IS_RTL = $( 'body' ).hasClass( 'rtl' );
+	} );
 
 	/**
 	 * Collection for keeping track which input extender widgets have their extension shown at the
@@ -95,8 +99,8 @@
 			initCallback: null,
 			hideWhenInputEmpty: true,
 			position: {
-				my: ( isRtl ) ? 'right top' : 'left top',
-				at: ( isRtl ) ? 'right bottom' : 'left bottom',
+				my: 'left top',
+				at: 'left bottom',
 				collision: 'none',
 				offset: '-4 2'
 			}
@@ -390,21 +394,39 @@
 		 * Repositions the extension.
 		 */
 		_reposition: function() {
-			var offset = this.element.offset();
+			var offset = this.element.offset(),
+				vOffsetChanged = this._offset && offset.top !== this._offset.top,
+				hOffsetChanged = this._offset && ( offset.left !== this._offset.left
+					|| IS_RTL && offset.right !== this._offset.right );
 
-			if(
-				this._offset
-				&& offset.top === this._offset.top && offset.left === this._offset.left
-			) {
+			if( this._offset && ( vOffsetChanged || hOffsetChanged ) ) {
 				return; // Position has not changed.
 			}
+
+			/**
+			 * Flips the position string in RTL context.
+			 * @param {string} string
+			 * @return {string}
+			 */
+			function evaluateRtl( string ) {
+				if( IS_RTL ) {
+					string = ( string.indexOf( 'left' ) !== -1 )
+						? string.replace( /left/ig, 'right' )
+						: string.replace( /right/ig, 'left' );
+				}
+				return string;
+			}
+
+			var positionParams = {
+				of: this.element,
+				my: evaluateRtl( this.options.position.my ),
+				at: evaluateRtl( this.options.position.at )
+			};
 
 			// TODO: Repositioning is not optimal in RTL context when hitting the toggler in the
 			//  extension to hide additional input. This seems to be caused by a width
 			//  miscalculation which can be debugged with "console.log( this.$extension.width() )".
-			this.$extension.position( $.extend( {
-				of: this.element
-			}, this.options.position ) );
+			this.$extension.position( $.extend( {}, this.options.position, positionParams ) );
 
 			this._offset = offset;
 		},
@@ -427,6 +449,7 @@
 				}
 			} )
 			.on( this.options.contentAnimationEvents, function( animationEvent ) {
+				self._reposition();
 				self._trigger( 'contentanimation', animationEvent );
 			} )
 			.on( 'keydown.' + this.widgetName, function( event ) {
