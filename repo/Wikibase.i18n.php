@@ -1214,22 +1214,37 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-property' => 'The name for Wikibase property content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-query' => 'The name for Wikibase query content model, used when describing what type of content a page contains.',
-	'right-item-override' => '{{doc-right|item-override}}',
-	'right-item-create' => '{{doc-right|item-create}}',
+	'right-item-override' => '{{doc-right|item-override}}
+Right to alter the contents of [[d:Wikidata:Glossary#Item|items]].',
+	'right-item-create' => '{{doc-right|item-create}}
+Right to create new [[d:Wikidata:Glossary#Item|items]].',
 	'right-item-remove' => '{{doc-right|item-remove}}
-{{Identical|Remove item}}',
-	'right-property-override' => '{{doc-right|property-override}}',
-	'right-property-create' => '{{doc-right|property-create}}',
-	'right-property-remove' => '{{doc-right|property-remove}}',
-	'right-alias-remove' => '{{doc-right|alias-remove}}',
-	'right-alias-update' => '{{doc-right|alias-update}}',
-	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}',
-	'right-sitelink-update' => '{{doc-right|sitelink-update}}',
-	'right-linktitles-update' => '{{doc-right|linktitles-update}}',
-	'right-label-remove' => '{{doc-right|label-remove}}',
-	'right-label-update' => '{{doc-right|label-update}}',
-	'right-description-remove' => '{{doc-right|description-remove}}',
-	'right-description-update' => '{{doc-right|description-update}}',
+{{Identical|Remove item}}
+Right to delete [[d:Wikidata:Glossary#Item|items]].',
+	'right-property-override' => '{{doc-right|property-override}}
+Right to alter the contents of [[d:Wikidata:Glossary#Property|properties]].',
+	'right-property-create' => '{{doc-right|property-create}}
+Right to create new [[d:Wikidata:Glossary#Property|properties]].',
+	'right-property-remove' => '{{doc-right|property-remove}}
+Right to delete [[d:Wikidata:Glossary#Property|properties]].',
+	'right-alias-remove' => '{{doc-right|alias-remove}}
+Right to remove [[d:Wikidata:Glossary#Aliases|aliases]] from [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-alias-update' => '{{doc-right|alias-update}}
+Right to add new [[d:Wikidata:Glossary#Aliases|aliases]] to [[d:Wikidata:Glossary#Entity|entities]] and to alter existing ones.',
+	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}
+Right to remove [[d:Wikidata:Glossary#Sitelink|sitelinks]] from [[d:Wikidata:Glossary#Item|items]].',
+	'right-sitelink-update' => '{{doc-right|sitelink-update}}
+Right to add [[d:Wikidata:Glossary#Sitelinks|sitelinks]] to [[d:Wikidata:Glossary#Item|items]] and to alter existing ones.',
+	'right-linktitles-update' => '{{doc-right|linktitles-update}}
+Right to associate two [[d:Wikidata:Glossary#Page|pages]] on two different [[d:Wikidata:Glossary#Site|sites]] with [[d:Wikidata:Glossary#Item|items]].',
+	'right-label-remove' => '{{doc-right|label-remove}}
+Right to erase [[d:Wikidata:Glossary#Label|labels]] of [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-label-update' => '{{doc-right|label-update}}
+Right to set and alter [[d:Wikidata:Glossary#Label|labels]] of [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-description-remove' => '{{doc-right|description-remove}}
+Right to erase [[d:Wikidata:Glossary#Description|descriptions]] of [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-description-update' => '{{doc-right|description-update}}
+Right to set and alter [[d:Wikidata:Glossary#Description|descriptions]] of [[d:Wikidata:Glossary#Entity|entities]].',
 	'action-item-override' => '{{doc-action|item-override}}',
 	'action-item-create' => '{{doc-action|item-create}}',
 	'action-item-remove' => '{{doc-action|item-remove}}
