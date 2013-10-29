@@ -410,37 +410,37 @@ to find out where it went.',
 	'content-model-wikibase-query' => 'Wikibase query',
 
 	// User rights
-	'right-item-override' => 'Override items',
+	'right-item-override' => 'Overwrite items',
 	'right-item-create' => 'Create items',
-	'right-item-remove' => 'Remove items',
-	'right-property-override' => 'Override properties',
+	'right-item-remove' => 'Delete items',
+	'right-property-override' => 'Overwrite properties',
 	'right-property-create' => 'Create properties',
-	'right-property-remove' => 'Remove properties',
+	'right-property-remove' => 'Delete properties',
 	'right-alias-remove' => 'Remove aliases',
 	'right-alias-update' => 'Update aliases',
 	'right-sitelink-remove' => 'Remove site links',
 	'right-sitelink-update' => 'Update site links',
-	'right-linktitles-update' => 'Update link titles',
-	'right-label-remove' => 'Remove labels',
+	'right-linktitles-update' => 'Associate pages',
+	'right-label-remove' => 'Erase labels',
 	'right-label-update' => 'Update labels',
-	'right-description-remove' => 'Remove descriptions',
+	'right-description-remove' => 'Erase descriptions',
 	'right-description-update' => 'Update descriptions',
 
 	// User actions
-	'action-item-override' => 'override items',
+	'action-item-override' => 'overwrite items',
 	'action-item-create' => 'create items',
-	'action-item-remove' => 'remove items',
-	'action-property-override' => 'override properties',
+	'action-item-remove' => 'delete items',
+	'action-property-override' => 'overwrite properties',
 	'action-property-create' => 'create properties',
-	'action-property-remove' => 'remove properties',
+	'action-property-remove' => 'delete properties',
 	'action-alias-update' => 'update aliases',
 	'action-alias-remove' => 'remove aliases',
 	'action-sitelink-remove' => 'remove site links',
 	'action-sitelink-update' => 'update site links',
-	'action-linktitles-update' => 'update link titles',
-	'action-label-remove' => 'remove labels',
+	'action-linktitles-update' => 'associate pages',
+	'action-label-remove' => 'erase labels',
 	'action-label-update' => 'update labels',
-	'action-description-remove' => 'remove descriptions',
+	'action-description-remove' => 'erase descriptions',
 	'action-description-update' => 'update descriptions',
 );
 
@@ -1214,22 +1214,37 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-property' => 'The name for Wikibase property content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-query' => 'The name for Wikibase query content model, used when describing what type of content a page contains.',
-	'right-item-override' => '{{doc-right|item-override}}',
-	'right-item-create' => '{{doc-right|item-create}}',
+	'right-item-override' => '{{doc-right|item-override}}
+Right to alter the contents of [[d:Wikidata:Glossary#Item|items]].',
+	'right-item-create' => '{{doc-right|item-create}}
+Right to create new [[d:Wikidata:Glossary#Item|items]].',
 	'right-item-remove' => '{{doc-right|item-remove}}
-{{Identical|Remove item}}',
-	'right-property-override' => '{{doc-right|property-override}}',
-	'right-property-create' => '{{doc-right|property-create}}',
-	'right-property-remove' => '{{doc-right|property-remove}}',
-	'right-alias-remove' => '{{doc-right|alias-remove}}',
-	'right-alias-update' => '{{doc-right|alias-update}}',
-	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}',
-	'right-sitelink-update' => '{{doc-right|sitelink-update}}',
-	'right-linktitles-update' => '{{doc-right|linktitles-update}}',
-	'right-label-remove' => '{{doc-right|label-remove}}',
-	'right-label-update' => '{{doc-right|label-update}}',
-	'right-description-remove' => '{{doc-right|description-remove}}',
-	'right-description-update' => '{{doc-right|description-update}}',
+{{Identical|Remove item}}
+Right to delete [[d:Wikidata:Glossary#Item|items]].',
+	'right-property-override' => '{{doc-right|property-override}}
+Right to alter the contents of [[d:Wikidata:Glossary#Property|properties]].',
+	'right-property-create' => '{{doc-right|property-create}}
+Right to create new [[d:Wikidata:Glossary#Property|properties]].',
+	'right-property-remove' => '{{doc-right|property-remove}}
+Right to delete [[d:Wikidata:Glossary#Property|properties]].',
+	'right-alias-remove' => '{{doc-right|alias-remove}}
+Right to remove [[d:Wikidata:Glossary#Aliases|aliases]] from [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-alias-update' => '{{doc-right|alias-update}}
+Right to add new [[d:Wikidata:Glossary#Aliases|aliases]] to [[d:Wikidata:Glossary#Entity|entities]] and to alter existing ones.',
+	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}
+Right to remove [[d:Wikidata:Glossary#Sitelink|sitelinks]] from [[d:Wikidata:Glossary#Item|items]].',
+	'right-sitelink-update' => '{{doc-right|sitelink-update}}
+Right to add [[d:Wikidata:Glossary#Sitelinks|sitelinks]] to [[d:Wikidata:Glossary#Item|items]] and to alter existing ones.',
+	'right-linktitles-update' => '{{doc-right|linktitles-update}}
+Right to associate two [[d:Wikidata:Glossary#Page|pages]] on two different [[d:Wikidata:Glossary#Site|sites]] with [[d:Wikidata:Glossary#Item|items]].',
+	'right-label-remove' => '{{doc-right|label-remove}}
+Right to erase [[d:Wikidata:Glossary#Label|labels]] of [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-label-update' => '{{doc-right|label-update}}
+Right to set and alter [[d:Wikidata:Glossary#Label|labels]] of [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-description-remove' => '{{doc-right|description-remove}}
+Right to erase [[d:Wikidata:Glossary#Description|descriptions]] of [[d:Wikidata:Glossary#Entity|entities]].',
+	'right-description-update' => '{{doc-right|description-update}}
+Right to set and alter [[d:Wikidata:Glossary#Description|descriptions]] of [[d:Wikidata:Glossary#Entity|entities]].',
 	'action-item-override' => '{{doc-action|item-override}}',
 	'action-item-create' => '{{doc-action|item-create}}',
 	'action-item-remove' => '{{doc-action|item-remove}}
