@@ -254,6 +254,13 @@
 
 				if( !$activeToolbar.length ) {
 					return; // no toolbar for some reason, just stop
+				} else if ( $( 'table.wb-terms' ).hasClass( 'wb-edit' ) ) {
+					// TODO: When having multiple empty EditableValues which are initialized in edit
+					// mode, every EditableValue has the same classes assigned. This check should
+					// either be made more generic (not just invoked for the terms table) or an
+					// improved detection of the active toolbar be implemented.
+					$activeToolbar = origin.getSubject()
+						.find( '.wikibase-toolbareditgroup-ineditmode' );
 				}
 
 				var toolbar = $activeToolbar.data( 'toolbareditgroup' )
