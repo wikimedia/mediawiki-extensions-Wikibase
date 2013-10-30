@@ -72,6 +72,16 @@ return call_user_func( function() {
 		'Wikibase\WikibaseDiffOpFactory' => 'includes/WikibaseDiffOpFactory.php',
 		'Wikibase\Lib\WikibaseDataTypeBuilders' => 'includes/WikibaseDataTypeBuilders.php',
 
+		// this should really be in core
+		'MessageReporter' => 'includes/MessageReporter.php',
+		'ObservableMessageReporter' => 'includes/MessageReporter.php',
+		'NullMessageReporter' => 'includes/MessageReporter.php',
+
+		// this should also really be in core
+		'ExceptionHandler' => 'includes/ExceptionHandler.php',
+		'ReportingExceptionHandler' => 'includes/ExceptionHandler.php',
+		'RethrowingExceptionHandler' => 'includes/ExceptionHandler.php',
+
 		// includes/changes
 		'Wikibase\Change' => 'includes/changes/Change.php',
 		'Wikibase\ChangeRow' => 'includes/changes/ChangeRow.php',
