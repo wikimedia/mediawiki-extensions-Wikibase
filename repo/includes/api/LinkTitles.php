@@ -109,7 +109,8 @@ class LinkTitles extends ApiWikibase {
 			$this->dieUsage( 'No common item detected, unable to link titles' , 'no-common-item' );
 		}
 
-		$this->addSiteLinksToResult( $return, 'entity' );
+		$builder = new ResultBuilder( $this->getResult() );
+		$builder->addSiteLinks( $return, 'entity' );
 		$status = $this->getAttemptSaveStatus( $itemContent, $summary, $flags );
 		$this->buildResult( $itemContent, $status );
 		wfProfileOut( __METHOD__ );
