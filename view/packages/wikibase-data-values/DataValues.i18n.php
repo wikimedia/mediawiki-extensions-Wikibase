@@ -239,6 +239,14 @@ $messages['mk'] = array(
 	'version-datavalues' => 'ПодаточниВредности',
 );
 
+/** Malayalam (മലയാളം)
+ * @author Praveenp
+ */
+$messages['ml'] = array(
+	'datavalues-desc' => 'വിവിധ തരത്തിലുള്ള വിലകളെ പ്രതിനിധീകരിക്കുന്നവയുടെ ശേഖരം',
+	'version-datavalues' => 'ഡേറ്റാവിലകൾ',
+);
+
 /** Malay (Bahasa Melayu)
  * @author Anakmalaysia
  */
