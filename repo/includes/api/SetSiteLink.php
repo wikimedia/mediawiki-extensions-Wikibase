@@ -61,6 +61,7 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entityContent->getItem();
 		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
+		$builder = new ResultBuilder( $this->getResult() );
 		if (
 			isset( $params['linksite'] ) &&
 			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
@@ -68,12 +69,12 @@ class SetSiteLink extends ModifyEntity {
 			if ( $item->hasLinkToSite( $linksite ) ) {
 				$link = $item->getSimpleSiteLink( $linksite );
 				$this->getChangeOp( $params )->apply( $item, $summary );
-				$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
+				$builder->addSiteLinks( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
 			}
 		} else {
 			$this->getChangeOp( $params )->apply( $item, $summary );
 			$link = $item->getSimpleSiteLink( $linksite );
-			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+			$builder->addSiteLinks( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
 		}
 
 		wfProfileOut( __METHOD__ );
