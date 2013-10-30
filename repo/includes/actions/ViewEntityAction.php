@@ -51,6 +51,23 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
+	 * Get the revision specified in the diff parameter or prev/next revision of oldid
+	 *
+	 * @since 0.4
+	 * @deprecated since 0.5
+	 * use ContentRetriever::getDiffRevision
+	 *
+	 * @param int $oldId
+	 * @param string|int $diffValue
+	 *
+	 * @return Revision|null
+	 */
+	public function getDiffRevision( $oldId, $diffValue ) {
+		$contentRetriever = new ContentRetriever();
+		return $contentRetriever->getDiffRevision( $oldId, $diffValue );
+	}
+
+	/**
 	 * @see Action::getName()
 	 *
 	 * @since 0.1
@@ -59,69 +76,6 @@ abstract class ViewEntityAction extends \ViewAction {
 	 */
 	public function getName() {
 		return 'view';
-	}
-
-	/**
-	 * Returns the content of the page in the revision being viewed.
-	 *
-	 * @todo split out the get revision id stuff, add tests and see if
-	 * any core code can be shared here
-	 *
-	 * @return EntityContent|null
-	 */
-	protected function getContent() {
-		$title = $this->getTitle();
-		$queryValues = $this->getRequest()->getQueryValues();
-
-		if ( array_key_exists( 'diff', $queryValues ) ) {
-			$oldId = $this->getArticle()->getOldID();
-			$revision = $this->getDiffRevision( $oldId, $queryValues['diff'] );
-		} else {
-			$revisionId = $this->getArticle()->getOldID();
-			$revision = \Revision::newFromTitle( $title, $revisionId );
-		}
-
-		return $revision !== null ? $revision->getContent() : null;
-	}
-
-	/**
-	 * Get the revision specified in the diff parameter or prev/next revision of oldid
-	 *
-	 * @todo ViewEntityAction really isn't a great place for this
-	 *
-	 * @since 0.4
-	 *
-	 * @param int $oldId
-	 * @param string|int $diffValue
-	 *
-	 * @return \Revision|null
-	 */
-	public function getDiffRevision( $oldId, $diffValue ) {
-		$revision = null;
-
-		if ( in_array( $diffValue, array( 'prev', 'next', 'cur' ) ) ) {
-			$oldIdRev = \Revision::newFromId( $oldId );
-
-			if ( $oldIdRev !== null ) {
-				switch ( $diffValue ) {
-					case 'next':
-						$revision = $oldIdRev->getNext();
-						break;
-					case 'cur':
-						$curId = $oldIdRev->getTitle()->getLatestRevID();
-						$revision = \Revision::newFromId( $curId );
-						break;
-					default:
-						$revision = $oldIdRev;
-						break;
-				}
-			}
-		} else {
-			$revId = (int)$diffValue;
-			$revision = \Revision::newFromId( $revId );
-		}
-
-		return $revision;
 	}
 
 	/**
@@ -144,7 +98,12 @@ abstract class ViewEntityAction extends \ViewAction {
 	 * Parent is doing $this->checkCanExecute( $this->getUser() )
 	 */
 	public function show() {
-		$content = $this->getContent();
+		$contentRetriever = new ContentRetriever();
+		$content = $contentRetriever->getContentForRequest(
+			$this->getArticle(),
+			$this->getTitle(),
+			$this->getRequest()
+		);
 
 		if ( is_null( $content ) ) {
 			$this->displayMissingEntity();
@@ -199,7 +158,12 @@ abstract class ViewEntityAction extends \ViewAction {
 			return false;
 		}
 
-		$content = $this->getContent();
+		$contentRetriever = new ContentRetriever();
+		$content = $contentRetriever->getContentForRequest(
+			$this->getArticle(),
+			$this->getTitle(),
+			$this->getRequest()
+		);
 
 		if ( !( $content instanceof EntityContent ) ) {
 			//XXX: HACK against evil tricks in Article::getContentObject
