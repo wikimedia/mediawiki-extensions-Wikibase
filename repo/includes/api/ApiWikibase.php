@@ -104,32 +104,6 @@ abstract class ApiWikibase extends \ApiBase {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
 	}
 
-	/** @deprecated */
-	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addAliases( $aliases, $path, $name, $tag );
-	}
-	/** @deprecated */
-	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addSiteLinks( $siteLinks, $path, $name, $tag, $options );
-	}
-	/** @deprecated */
-	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addDescriptions( $descriptions, $path, $name, $tag );
-	}
-	/** @deprecated */
-	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addLabels( $labels, $path, $name, $tag );
-	}
-	/** @deprecated */
-	protected function addClaimsToResult( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addClaims( $claims, $path, $name, $tag );
-	}
-
 	/**
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
