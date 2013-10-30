@@ -193,10 +193,6 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityViewTest' => 'tests/phpunit/includes/EntityViewTest.php',
 		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/rdf/RdfBuilderTest.php',
 
-		'MessageReporter' => 'includes/MessageReporter.php',
-		'ObservableMessageReporter' => 'includes/MessageReporter.php',
-		'NullMessageReporter' => 'includes/MessageReporter.php',
-
 		'Wikibase\Test\EntityDataSerializationServiceTest' => 'tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php',
 		'Wikibase\Test\EntityDataRequestHandlerTest' => 'tests/phpunit/includes/LinkedData/EntityDataRequestHandlerTest.php',
 		'Wikibase\Test\EntityDataTestProvider' => 'tests/phpunit/includes/LinkedData/EntityDataTestProvider.php',
