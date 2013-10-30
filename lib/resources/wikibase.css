@@ -735,23 +735,19 @@ div.wb-claimlistview div.wb-editsection {
 	padding-bottom: 1em;
 }
 
-div.wb-statement .wb-statement-claim > .wikibase-toolbar {
+.wb-statement > .wikibase-toolbar {
 	display: block;
 }
 
-div.wb-statement .wb-editsection {
+.wb-statement .wb-editsection {
 	top: 10px; /* even out padding */
 }
 
 /***** REFERENCES *****/
 
-.wb-statement-references-container {
+.wb-statement-references-heading, .wb-statement-references {
 	padding-left: 17em;
 	clear: both;
-}
-
-.wb-statement-references-container .wb-statement-references-heading {
-	font-size: 90%;
 }
 
 .wb-referenceview {
