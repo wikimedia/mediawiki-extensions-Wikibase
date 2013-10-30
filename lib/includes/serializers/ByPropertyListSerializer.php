@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Serializers;
 use Traversable;
 use InvalidArgumentException;
 use Wikibase\ByPropertyIdArray;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Serializer for Traversable objects that need to be grouped
@@ -27,9 +26,6 @@ use Wikibase\DataModel\Entity\PropertyId;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.2
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

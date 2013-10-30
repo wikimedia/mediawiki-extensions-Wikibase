@@ -11,8 +11,6 @@ use InvalidArgumentException;
  *
  * @since 0.4
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -39,6 +37,7 @@ class LabelSerializer extends SerializerObject implements Unserializer {
 	 * @since 0.4
 	 *
 	 * @param MultiLangSerializationOptions $options
+	 * @param MultilingualSerializer $multilingualSerializer
 	 */
 	public function __construct( MultiLangSerializationOptions $options = null,
 		MultilingualSerializer $multilingualSerializer = null

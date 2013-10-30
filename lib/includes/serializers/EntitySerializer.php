@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Entity;
 use Wikibase\EntityFactory;
 

@@ -13,8 +13,6 @@ use Wikibase\Reference;
  *
  * @since 0.3
  *
- * @ingroup Wikibase
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

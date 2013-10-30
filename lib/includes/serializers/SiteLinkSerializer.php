@@ -16,8 +16,6 @@ use Wikibase\DataModel\SimpleSiteLink;
  *
  * @since 0.4
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
@@ -62,10 +60,10 @@ class SiteLinkSerializer extends SerializerObject {
 	 *
 	 * @since 0.4
 	 *
-	 * @param array $sitelinks
+	 * @param array $siteLinks
 	 *
-	 * @return array
 	 * @throws InvalidArgumentException
+	 * @return array
 	 */
 	final public function getSerialized( $siteLinks ) {
 		if ( !is_array( $siteLinks ) ) {

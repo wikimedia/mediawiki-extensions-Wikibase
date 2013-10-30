@@ -13,8 +13,6 @@ use Wikibase\SnakObject;
  *
  * @since 0.2
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
