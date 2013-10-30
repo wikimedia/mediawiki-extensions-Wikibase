@@ -197,6 +197,10 @@ return call_user_func( function() {
 		'ObservableMessageReporter' => 'includes/MessageReporter.php',
 		'NullMessageReporter' => 'includes/MessageReporter.php',
 
+		'ExceptionHandler' => 'includes/ExceptionHandler.php',
+		'ReportingExceptionHandler' => 'includes/ExceptionHandler.php',
+		'RethrowingExceptionHandler' => 'includes/ExceptionHandler.php',
+
 		'Wikibase\Test\EntityDataSerializationServiceTest' => 'tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php',
 		'Wikibase\Test\EntityDataRequestHandlerTest' => 'tests/phpunit/includes/LinkedData/EntityDataRequestHandlerTest.php',
 		'Wikibase\Test\EntityDataTestProvider' => 'tests/phpunit/includes/LinkedData/EntityDataTestProvider.php',

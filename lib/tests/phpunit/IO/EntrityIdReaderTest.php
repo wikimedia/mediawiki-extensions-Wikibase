@@ -23,7 +23,8 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function openIdReader( $file ) {
-		$handle = fopen( $file, 'r' );
+		$path = __DIR__ . '/' . $file;
+		$handle = fopen( $path, 'r' );
 		return new EntityIdReader( $handle );
 	}
 
@@ -35,8 +36,26 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 			new PropertyId( 'P4' ),
 		);
 
-		$file = $this->getTestFile();
-		$reader = $this->openIdReader( $file );
+		$reader = $this->openIdReader( 'EntityIdReaderTest.txt' );
+		$actual = iterator_to_array( $reader );
+		$reader->dispose();
+
+		$this->assertEmpty( array_diff( $expected, $actual ), "Different IDs" );
+	}
+
+	public function testIterationWithErrors() {
+		$expected = array(
+			new ItemId( 'Q23' ),
+			new PropertyId( 'P42' ),
+		);
+
+		$exceptionHandler = $this->getMock( 'ExceptionHandler' );
+		$exceptionHandler->expects( $this->exactly( 2 ) ) //two bad lines in EntityIdReaderTest.bad.txt
+			->method( 'handleException' );
+
+		$reader = $this->openIdReader( 'EntityIdReaderTest.bad.txt' );
+		$reader->setExceptionHandler( $exceptionHandler );
+
 		$actual = iterator_to_array( $reader );
 		$reader->dispose();
 

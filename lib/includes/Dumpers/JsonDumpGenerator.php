@@ -2,7 +2,11 @@
 
 namespace Wikibase\Dumpers;
 
+use ExceptionHandler;
+use MessageReporter;
 use MWException;
+use NullMessageReporter;
+use RethrowingExceptionHandler;
 use Traversable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityLookup;
@@ -23,6 +27,11 @@ class JsonDumpGenerator {
 	 * @var int flags to use with json_encode as a bit field, see PHP's JSON_XXX constants.
 	 */
 	public $jsonFlags = 0;
+
+	/**
+	 * @var int interval at which to output progress messages.
+	 */
+	public $progressInterval = 100;
 
 	/**
 	 * @var resource File handle for output
@@ -55,6 +64,16 @@ class JsonDumpGenerator {
 	protected $entityType = null;
 
 	/**
+	 * @var MessageReporter
+	 */
+	protected $progressReporter;
+
+	/**
+	 * @var ExceptionHandler
+	 */
+	protected $exceptionHandler;
+
+	/**
 	 * @param resource $out
 	 * @param \Wikibase\EntityLookup $lookup
 	 * @param Serializer $entitySerializer
@@ -69,6 +88,55 @@ class JsonDumpGenerator {
 		$this->out = $out;
 		$this->entitySerializer = $entitySerializer;
 		$this->entityLookup = $lookup;
+
+		$this->progressReporter = new NullMessageReporter();
+		$this->exceptionHandler = new RethrowingExceptionHandler();
+	}
+
+	/**
+	 * Sets the interval for progress reporting
+	 *
+	 * @param int $progressInterval
+	 */
+	public function setProgressInterval( $progressInterval ) {
+		$this->progressInterval = $progressInterval;
+	}
+
+	/**
+	 * Returns the interval for progress reporting
+	 *
+	 * @return int
+	 */
+	public function getProgressInterval() {
+		return $this->progressInterval;
+	}
+
+	/**
+	 * @param \MessageReporter $progressReporter
+	 */
+	public function setProgressReporter( MessageReporter $progressReporter ) {
+		$this->progressReporter = $progressReporter;
+	}
+
+	/**
+	 * @return \MessageReporter
+	 */
+	public function getProgressReporter() {
+		return $this->progressReporter;
+	}
+
+	/**
+	 * @param \ExceptionHandler $exceptionHandler
+	 */
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
+		$this->exceptionHandler = $exceptionHandler;
+	}
+
+	/**
+	 * @return \ExceptionHandler
+	 */
+	public function getExceptionHandler() {
+		return $this->exceptionHandler;
 	}
 
 	/**
@@ -134,15 +202,25 @@ class JsonDumpGenerator {
 				}
 
 				$entity = $this->entityLookup->getEntity( $id );
+
+				if ( !$entity ) {
+					throw new StorageException( 'Entity not found: ' . $id->getSerialization() );
+				}
+
 				$data = $this->entitySerializer->getSerialized( $entity );
 				$json = $this->encode( $data );
+
 				$this->writeToDump( $json );
 			} catch ( StorageException $ex ) {
-				$this->handleStorageException( $ex );
+				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump '. $id );
 			}
 
-			//TODO: use callback for reporting progress
+			if ( $this->progressInterval > 0 && ( $i % $this->progressInterval ) === 0 ) {
+				$this->progressReporter->reportMessage( 'Processed ' . $i . ' entities.' );
+			}
 		}
+
+		$this->progressReporter->reportMessage( 'Processed ' . $i . ' entities.' );
 
 		$json = "\n]\n"; //TODO: make optional
 		$this->writeToDump( $json );
@@ -167,15 +245,6 @@ class JsonDumpGenerator {
 	}
 
 	/**
-	 * @param $ex
-	 * @throws StorageException
-	 */
-	private function handleStorageException( $ex ) {
-		//TODO: optionally, log & ignore.
-		throw $ex;
-	}
-
-	/**
 	 * Encodes the given data as JSON
 	 *
 	 * @param $data
@@ -187,8 +256,7 @@ class JsonDumpGenerator {
 		$json = json_encode( $data, $this->jsonFlags );
 
 		if ( $json === false ) {
-			// TODO: optionally catch & skip this
-			throw new MWException( 'Failed to encode data structure.' );
+			throw new StorageException( 'Failed to encode data structure.' );
 		}
 
 		return $json;

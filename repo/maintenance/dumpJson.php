@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Disposable;
+use ExceptionHandler;
 use Iterator;
 use Maintenance;
 use Traversable;
@@ -46,6 +47,8 @@ class DumpJson extends Maintenance {
 	 */
 	public $entityPerPage;
 
+	public $quiet = true;
+
 	public function __construct() {
 		parent::__construct();
 
@@ -55,6 +58,8 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'entity-type', "Only dump this kind of entitiy, e.g. `item` or `property`.", false, true );
 		$this->addOption( 'sharding-factor', "The number of shards (must be >= 1)", false, true );
 		$this->addOption( 'shard', "A the shard to output (must be lett than the sharding-factor) ", false, true );
+		$this->addOption( 'output', "Output file (default is stdout) ", false, true );
+		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 	}
 
 	public function initServices() {
@@ -69,10 +74,12 @@ class DumpJson extends Maintenance {
 	/**
 	 * Outputs a message vis the output() method.
 	 *
-	 * @param $msg
+	 * @see MessageReporter::reportMessage()
+	 *
+	 * @param string $message
 	 */
-	public function report( $msg ) {
-		$this->output( "$msg\n" );
+	public function reportMessage( $message ) {
+			$this->output( "$message\n" );
 	}
 
 	/**
@@ -85,17 +92,48 @@ class DumpJson extends Maintenance {
 		$entityType = $this->getOption( 'entity-type' );
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
-		//TODO: echo filter options to reporter
 
-		$output = fopen( 'php://stdout', 'wa' ); //TODO: Allow injection of an OutputStream
+		$outFile = $this->getOption( 'output', 'php://stdout' );
+
+		if ( $outFile === '-' ) {
+			$outFile = 'php://stdout';
+		}
+
+		$output = fopen( $outFile, 'wa' ); //TODO: Allow injection of an OutputStream
+
+		if ( !$output ) {
+			throw new \MWException( 'Failed to open ' . $outFile . '!' );
+		}
+
+		if ( $entityType ) {
+			$this->reportMessage( "Dumping entities of type $entityType" );
+		}
+
+		if ( $shardingFactor && $shard ) {
+			$this->reportMessage( "Dumping shard $shard/$shardingFactor" );
+		}
+
 		$dumper = new JsonDumpGenerator( $output, $this->entityLookup, $this->entitySerializer );
+
+		if ( $outFile !== 'php://stdout' && $outFile !== 'php://output' ) {
+			$progressReporter = new \ObservableMessageReporter();
+			$progressReporter->registerReporterCallback( array( $this, 'reportMessage' ) );
+
+			$dumper->setProgressReporter( $progressReporter );
+		} else {
+			$progressReporter = new \NullMessageReporter();
+			$this->mQuiet = true; // suppress in-band output
+		}
+
+		$exceptionReporter = new \ReportingExceptionHandler( $progressReporter );
+		$dumper->setExceptionHandler( $exceptionReporter );
 
 		//NOTE: we filter for $entityType twice: filtering in the DB is efficient,
 		//      but filtering in the dumper is needed when working from a list file.
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 		$dumper->setEntityTypeFilter( $entityType );
 
-		$idStream = $this->makeIdStream( $entityType );
+		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
 		$dumper->generateDump( $idStream );
 
 		if ( $idStream instanceof Disposable ) {
@@ -106,14 +144,15 @@ class DumpJson extends Maintenance {
 
 	/**
 	 * @param string|null $entityType
+	 * @param \ExceptionHandler $exceptionReporter
 	 *
 	 * @return Iterator a stream of EntityId objects
 	 */
-	public function makeIdStream( $entityType = null ) {
+	public function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
-			$stream = $this->makeIdFileStream( $listFile );
+			$stream = $this->makeIdFileStream( $listFile, $exceptionReporter );
 		} else {
 			$stream = $this->entityPerPage->getEntities( $entityType );
 		}
@@ -123,11 +162,12 @@ class DumpJson extends Maintenance {
 
 	/**
 	 * @param $listFile
+	 * @param \ExceptionHandler $exceptionReporter
 	 *
-	 * @return Traversable
 	 * @throws \MWException
+	 * @return Traversable
 	 */
-	protected function makeIdFileStream( $listFile ) {
+	protected function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {
@@ -135,8 +175,11 @@ class DumpJson extends Maintenance {
 		}
 
 		$stream = new EntityIdReader( $input );
+		$stream->setExceptionHandler( $exceptionReporter );
+
 		return $stream;
 	}
+
 }
 
 $maintClass = 'Wikibase\DumpJson';
