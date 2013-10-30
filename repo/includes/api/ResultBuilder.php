@@ -153,7 +153,7 @@ class ResultBuilder {
 	 * @param string $tag tag used for indexed entries in xml formats and similar
 	 * @param $options
 	 */
-	public function addSiteLinks( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options ) {
+	public function addSiteLinks( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
 		$serializerOptions = new SerializationOptions();
 		$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
