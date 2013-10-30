@@ -8,9 +8,6 @@ namespace Wikibase;
  *
  * @since 0.2
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
  *
@@ -106,18 +103,16 @@ HTML;
 	$templates['wb-statement'] =
 <<<HTML
 <div class="wb-statement wb-statementview $1">
-	<div class="wb-statement-claim">
-		<div class="wb-claim wb-claim-$2">
-			<div class="wb-claim-mainsnak" dir="auto">
-				$3 <!-- wb-snak (Main Snak) -->
-			</div>
-			<div class="wb-claim-qualifiers wb-statement-qualifiers">$4</div>
+	<div class="wb-claim wb-claim-$2">
+		<div class="wb-claim-mainsnak" dir="auto">
+			$3 <!-- wb-snak (Main Snak) -->
 		</div>
-		$5
+		<div class="wb-claim-qualifiers wb-statement-qualifiers">$4</div>
 	</div>
-	<div class="wb-statement-references-container">
-		<div class="wb-statement-references-heading">$6</div>
-		<div class="wb-statement-references">$7 <!-- [0,*] wb-referenceview --></div>
+	$5 <!-- wikibase-toolbar -->
+	<div class="wb-statement-references-heading">$6</div>
+	<div class="wb-statement-references">
+		$7 <!-- [0,*] wb-referenceview -->
 	</div>
 </div>
 HTML;

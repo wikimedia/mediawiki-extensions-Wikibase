@@ -9,7 +9,7 @@
 module ReferencePage
   include PageObject
   # references UI elements
-  div(:referenceContainer, :class => "wb-statement-references-container")
+  div(:referenceContainer, :class => "wb-statement-references")
   div(:referenceHeading, :class => "wb-statement-references-heading")
   link(:referenceHeadingToggleLink, :css => ".wb-statement-references-heading a")
   div(:referenceEditHeading, :css => ".wb-referenceview .wb-referenceview-heading")
