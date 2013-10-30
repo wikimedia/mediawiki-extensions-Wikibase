@@ -190,6 +190,14 @@ describe "Check statements UI" do
         page.entityLabelSpan.should == properties_cm[0]["label"]
       end
     end
+    it "should check whether property input does not exist when adding an additional statement to a statement group" do
+      on_page(ItemPage) do |page|
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        page.addClaimToFirstStatement
+        page.entitySelectorInput?.should be_false
+      end
+    end
     it "should check removing of claim/statement" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
