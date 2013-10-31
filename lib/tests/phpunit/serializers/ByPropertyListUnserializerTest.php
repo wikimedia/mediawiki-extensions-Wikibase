@@ -9,12 +9,9 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListUnserializer
- *
- * @since 0.4
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -22,14 +19,11 @@ use Wikibase\SnakList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
-class ByPropertyListUnserializerTest extends UnserializerBaseTest {
+class ByPropertyListUnserializerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @see UnserializerBaseTest::getClass
-	 *
-	 * @since 0.4
-	 *
 	 * @return string
 	 */
 	protected function getClass() {
@@ -37,24 +31,22 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 	}
 
 	/**
-	 * @see UnserializerBaseTest::getInstance
-	 *
-	 * @since 0.4
-	 *
 	 * @return ByPropertyListUnserializer
 	 */
 	protected function getInstance() {
-		$snakSetailizer = new SnakSerializer();
-		return new ByPropertyListUnserializer( $snakSetailizer );
+		$snakSerializer = new SnakSerializer();
+		return new ByPropertyListUnserializer( $snakSerializer );
 	}
 
 	/**
-	 * @see UnserializerBaseTest::validProvider
-	 *
-	 * @since 0.4
-	 *
-	 * @return array
+	 * @dataProvider validProvider
 	 */
+	public function testGetUnserializedValid( array $input, $expected ) {
+		$unserializer = $this->getInstance();
+		$unserialized = $unserializer->newFromSerialization( $input );
+		$this->assertEquals( $expected, $unserialized );
+	}
+
 	public function validProvider() {
 		$validArgs = array();
 
@@ -67,13 +59,19 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 		$snak1 = new PropertySomeValueSnak( $id2 );
 		$snak2 = new PropertyValueSnak( $id2, $dataValue0 );
 
-		$validArgs[] = new SnakList( array( $snak0, $snak1, $snak2 ) );
-
-		$validArgs = $this->arrayWrap( $validArgs );
-
 		$validArgs[] = array(
 			array(),
-			new SnakList(),
+			array(),
+		);
+
+		$validArgs[] = array(
+			array(
+				'P42' => array(
+				),
+				'P2' => array(
+				),
+			),
+			array(),
 		);
 
 		$validArgs[] = array(
@@ -96,10 +94,32 @@ class ByPropertyListUnserializerTest extends UnserializerBaseTest {
 					),
 				),
 			),
-			new SnakList( array( $snak0, $snak1, $snak2 ) ),
+			array( $snak0, $snak1, $snak2 ),
 		);
 
 		return $validArgs;
+	}
+
+	public function invalidProvider() {
+		$invalid = array(
+			false,
+			true,
+			null,
+			42,
+			4.2,
+			'',
+			'foo bar baz',
+		);
+
+		return $this->arrayWrap( $this->arrayWrap( $invalid ) );
+	}
+
+	/**
+	 * @dataProvider invalidProvider
+	 */
+	public function testNewFromSerializationInvalid( $input ) {
+		$serializer = $this->getInstance();
+		$this->assertException( function() use ( $serializer, $input ) { $serializer->newFromSerialization( $input ); } );
 	}
 
 }
