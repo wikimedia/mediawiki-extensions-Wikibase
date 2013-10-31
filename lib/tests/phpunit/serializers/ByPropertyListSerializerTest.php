@@ -71,12 +71,12 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
-		$validArgs[] = array(
+		$validArgs[ 'Empty' ] = array(
 			new SnakList(),
 			array(),
 		);
 
-		$validArgs[] = array(
+		$validArgs[ 'Default' ] = array(
 			new SnakList( array( $snak0, $snak1, $snak2 ) ),
 			array(
 				'P42' => array(
@@ -99,30 +99,105 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 			),
 		);
 
-		return $validArgs;
-	}
+		$options = new SerializationOptions();
+		$options->setIdKeyMode( SerializationOptions::ID_KEYS_LOWER );
 
-	/**
-	 * @dataProvider provideIdKeyMode
-	 */
-	public function testIdKeyMode( $mode ) {
-		$snakSerializer = new SnakSerializer();
-		$snak = new PropertyNoValueSnak( new PropertyId( "P123" ) );
+		$validArgs[ 'ID_KEYS_LOWER' ] = array(
+			new SnakList( array( $snak0, $snak1, $snak2 ) ),
+			array(
+				'p42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'P42',
+					),
+				),
+				'p2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'P2',
+					),
+					1 => array(
+						'snaktype' => 'value',
+						'property' => 'P2',
+						'datavalue' => $dataValue0->toArray(),
+					),
+				),
+			),
+			$options
+		);
 
 		$options = new SerializationOptions();
-		$options->setIdKeyMode( $mode );
-		$serializer = new ByPropertyListSerializer( 'test', $snakSerializer, $options );
+		$options->setIdKeyMode( SerializationOptions::ID_KEYS_UPPER );
 
-		$data = $serializer->getSerialized( new ArrayObject( array( $snak ) ) );
-		$this->assertEquals( ( $mode & SerializationOptions::ID_KEYS_UPPER ) > 0, array_key_exists( 'P123', $data ), 'upper case key' );
-		$this->assertEquals( ( $mode & SerializationOptions::ID_KEYS_LOWER ) > 0, array_key_exists( 'p123', $data ), 'lower case key' );
-	}
-
-	public function provideIdKeyMode() {
-		return array(
-			'lower' => array( SerializationOptions::ID_KEYS_LOWER ),
-			'upper' => array( SerializationOptions::ID_KEYS_UPPER ),
-			'both' => array( SerializationOptions::ID_KEYS_BOTH ),
+		$validArgs[ 'ID_KEYS_UPPER' ] = array(
+			new SnakList( array( $snak0, $snak1, $snak2 ) ),
+			array(
+				'P42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'P42',
+					),
+				),
+				'P2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'P2',
+					),
+					1 => array(
+						'snaktype' => 'value',
+						'property' => 'P2',
+						'datavalue' => $dataValue0->toArray(),
+					),
+				),
+			),
+			$options
 		);
+
+
+		$options = new SerializationOptions();
+		$options->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
+
+		$validArgs[ 'ID_KEYS_BOTH' ] = array(
+			new SnakList( array( $snak0, $snak1, $snak2 ) ),
+			array(
+				'P42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'P42',
+					),
+				),
+				'P2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'P2',
+					),
+					1 => array(
+						'snaktype' => 'value',
+						'property' => 'P2',
+						'datavalue' => $dataValue0->toArray(),
+					),
+				),
+				'p42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'P42',
+					),
+				),
+				'p2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'P2',
+					),
+					1 => array(
+						'snaktype' => 'value',
+						'property' => 'P2',
+						'datavalue' => $dataValue0->toArray(),
+					),
+				),
+			),
+			$options
+		);
+
+		return $validArgs;
 	}
 }
