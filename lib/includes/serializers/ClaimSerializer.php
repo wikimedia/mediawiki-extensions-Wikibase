@@ -93,10 +93,16 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$serialization['id'] = $claim->getGuid();
 
 		$snakSerializer = new SnakSerializer( $this->options );
+
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
-		$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
+		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+			$listSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
+		} else {
+			$listSerializer = new ListSerializer( 'qualifiers', $snakSerializer, $this->options );
+		}
+
+		$qualifiers = $listSerializer->getSerialized( $claim->getQualifiers() );
 
 		if ( $qualifiers !== array() ) {
 			$serialization['qualifiers'] = $qualifiers;
@@ -119,16 +125,16 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 			$referenceSerializer = new ReferenceSerializer( $this->options );
 
-			$serialization['references'] = array();
-
-			foreach ( $claim->getReferences() as $reference ) {
-				$serialization['references'][] = $referenceSerializer->getSerialized( $reference );
+			if( in_array( 'references', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+				$listSerializer = new ByPropertyListSerializer( 'references', $referenceSerializer, $this->options );
+			} else {
+				$listSerializer = new ListSerializer( 'references', $referenceSerializer, $this->options );
 			}
 
-			if ( $serialization['references'] === array() ) {
-				unset( $serialization['references'] );
-			}
-			else {
+			$references = $listSerializer->getSerialized( $claim->getReferences() );
+
+			if ( $references !== array() ) {
+				$serialization['references'] = $references;
 				$this->setIndexedTagName( $serialization['references'], 'reference' );
 			}
 		}
