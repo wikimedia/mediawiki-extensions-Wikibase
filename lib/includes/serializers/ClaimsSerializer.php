@@ -13,8 +13,6 @@ use Wikibase\Claims;
  *
  * @since 0.3
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -31,7 +29,7 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 	 * @throws InvalidArgumentException
 	 */
 	public function getSerialized( $claims ) {
-		if ( !( $claims instanceof \Wikibase\Claims ) ) {
+		if ( !( $claims instanceof Claims ) ) {
 			throw new InvalidArgumentException( 'ClaimsSerializer can only serialize Claims objects' );
 		}
 

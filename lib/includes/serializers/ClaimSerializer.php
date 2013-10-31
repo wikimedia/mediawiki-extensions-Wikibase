@@ -4,6 +4,9 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\ReferenceList;
+use Wikibase\Snak;
+use Wikibase\SnakList;
 use Wikibase\Statement;
 use Wikibase\Claim;
 
@@ -13,8 +16,6 @@ use Wikibase\Claim;
  * See docs/json.wiki for details of the format.
  *
  * @since 0.2
- *
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -102,6 +103,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 			$serialization['qualifiers-order'] = array();
 			foreach( $claim->getQualifiers() as $snak ) {
+				/** @var Snak $snak $id */
 				$id = $snak->getPropertyId()->getPrefixedId();
 				if( !in_array( $id, $serialization['qualifiers-order'] ) ) {
 					$serialization['qualifiers-order'][] = $snak->getPropertyId()->getPrefixedId();
@@ -202,7 +204,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 					$references[] = $referenceUnserializer->newFromSerialization( $referenceSerialization );
 				}
 
-				$claim->setReferences( new \Wikibase\ReferenceList( $references ) );
+				$claim->setReferences( new ReferenceList( $references ) );
 			}
 		}
 
@@ -216,12 +218,12 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @param array $serialization
 	 * @param SnakSerializer $snakUnserializer
-	 * @return \Wikibase\SnakList
+	 * @return SnakList
 	 * @throws OutOfBoundsException
 	 */
 	protected function unserializeQualifiers( $serialization, $snakUnserializer ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
-			return new \Wikibase\SnakList();
+			return new SnakList();
 		} else {
 			$sortedQualifiers = array();
 
@@ -251,7 +253,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			}
 
 			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
-			return new \Wikibase\SnakList( $snaksUnserializer->newFromSerialization( $sortedQualifiers ) );
+			return new SnakList( $snaksUnserializer->newFromSerialization( $sortedQualifiers ) );
 		}
 	}
 

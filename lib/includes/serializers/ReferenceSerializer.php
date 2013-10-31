@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\Reference;
+use Wikibase\SnakList;
 
 /**
  * Serializer for Reference objects.
@@ -12,8 +13,6 @@ use Wikibase\Reference;
  * See docs/json.wiki for details of the format.
  *
  * @since 0.3
- *
- * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -105,7 +104,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$snaks = $snaksUnserializer->newFromSerialization( $sortedSnaks );
 
-		$reference = new Reference( new \Wikibase\SnakList( $snaks ) );
+		$reference = new Reference( new SnakList( $snaks ) );
 
 		if ( array_key_exists( 'hash', $serialization ) && $serialization['hash'] !== $reference->getHash() ) {
 			throw new InvalidArgumentException( 'If a hash is present in a reference serialization it needs to be correct' );

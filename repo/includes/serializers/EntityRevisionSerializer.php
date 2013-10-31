@@ -2,16 +2,12 @@
 
 namespace Wikibase\Serializers;
 
-use ApiResult;
 use InvalidArgumentException;
-use MWException;
 use Wikibase\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Serializers\EntitySerializer;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializerObject;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -42,7 +38,7 @@ class EntityRevisionSerializer extends SerializerObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @param \Wikibase\EntityTitleLookup $titleLookup
+	 * @param EntityTitleLookup $titleLookup
 	 * @param EntityRevisionSerializationOptions $options
 	 */
 	public function __construct( EntityTitleLookup $titleLookup, EntityRevisionSerializationOptions $options = null ) {
@@ -93,7 +89,7 @@ class EntityRevisionSerializer extends SerializerObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @param \Wikibase\EntityTitleLookup $titleLookup
+	 * @param EntityTitleLookup $titleLookup
 	 * @param string $primaryLanguage
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 *
@@ -102,7 +98,7 @@ class EntityRevisionSerializer extends SerializerObject {
 	public static function newForFrontendStore( EntityTitleLookup $titleLookup, $primaryLanguage, LanguageFallbackChain $languageFallbackChain ) {
 		$SerializationOptions =
 			new SerializationOptions();
-		
+
 		$SerializationOptions->setOption( EntitySerializer::OPT_PARTS, array( 'labels', 'descriptions', 'datatype' ) );
 		$SerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
 

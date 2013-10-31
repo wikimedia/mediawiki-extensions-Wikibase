@@ -16,8 +16,6 @@ use Wikibase\DataModel\SimpleSiteLink;
  *
  * @since 0.4
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
@@ -191,8 +189,9 @@ class SiteLinkSerializer extends SerializerObject {
 	}
 
 	/**
-	 * @param array $badges
+	 * @param array $data
 	 *
+	 * @throws InvalidArgumentException
 	 * @return ItemId[]
 	 */
 	protected function extractBadges( array $data ) {
