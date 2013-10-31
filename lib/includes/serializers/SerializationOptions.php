@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
+use RuntimeException;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
@@ -74,11 +75,11 @@ class SerializationOptions {
 
 	protected function checkKey( $key) {
 		if ( !is_string( $key ) ) {
-			throw new \InvalidArgumentException( 'option keys must be strings' );
+			throw new InvalidArgumentException( 'option keys must be strings' );
 		}
 
 		if ( !preg_match( '/^[-.\/:_+*!$#@0-9a-zA-Z]+$/', $key ) ) {
-			throw new \InvalidArgumentException( 'malformed option key: ' . $key );
+			throw new InvalidArgumentException( 'malformed option key: ' . $key );
 		}
 	}
 
@@ -140,7 +141,7 @@ class SerializationOptions {
 	 * @param string $key
 	 * @param mixed $value
 	 *
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
 	 */
 	public function addToOption( $key, $value ) {
 		if ( !isset( $this->options[$key] ) ) {
@@ -148,7 +149,7 @@ class SerializationOptions {
 		}
 
 		if ( !is_array( $this->options[$key] ) ) {
-			throw new \RuntimeException( 'option ' . $key . ' is not a list!' );
+			throw new RuntimeException( 'option ' . $key . ' is not a list!' );
 		}
 
 		if ( !in_array( $value, $this->options[$key] ) ) {
@@ -166,7 +167,7 @@ class SerializationOptions {
 	 * @param string $key
 	 * @param mixed $value
 	 *
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
 	 */
 	public function removeFromOption( $key, $value ) {
 		if ( !isset( $this->options[$key] ) ) {
@@ -174,7 +175,7 @@ class SerializationOptions {
 		}
 
 		if ( !is_array( $this->options[$key] ) ) {
-			throw new \RuntimeException( 'option ' . $key . ' is not a list!' );
+			throw new RuntimeException( 'option ' . $key . ' is not a list!' );
 		}
 
 		if ( in_array( $value, $this->options[$key] ) ) {
@@ -314,15 +315,16 @@ class SerializationOptions {
 	 * @since 0.5
 	 *
 	 * @param int $mode a bit field using the ID_KEYS_XXX constants.
-	 * @throws \InvalidArgumentException
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setIdKeyMode( $mode ) {
 		if ( ( $mode & self::ID_KEYS_BOTH ) === 0 ) {
-			throw new \InvalidArgumentException( "At least one ID key mode must be set in the bit field." );
+			throw new InvalidArgumentException( "At least one ID key mode must be set in the bit field." );
 		}
 
 		if ( ( $mode & ~self::ID_KEYS_BOTH ) !== 0 ) {
-			throw new \InvalidArgumentException( "Unknown bits set in ID key mode, use the ID_KEYS_XXX constants." );
+			throw new InvalidArgumentException( "Unknown bits set in ID key mode, use the ID_KEYS_XXX constants." );
 		}
 
 		$this->setOption( self::OPT_ID_KEY_MODE, $mode );
