@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_d1acc1f1",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-31T00:45:08Z",
+      "side": 1,
+      "message": "do we really want to use OPT_LANGUAGES here? or the new OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY constant defined at the top?",
+      "revId": "70a3385ec04ddbba8330062273775602061eb291",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f1a9bddf",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-31T00:45:08Z",
+      "side": 1,
+      "message": "OPT_LANGUAGES or OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY here?",
+      "revId": "70a3385ec04ddbba8330062273775602061eb291",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
