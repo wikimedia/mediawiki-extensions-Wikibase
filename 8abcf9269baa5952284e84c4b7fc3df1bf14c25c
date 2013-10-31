@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_677c2f81",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-10-31T15:00:00Z",
+      "side": 1,
+      "message": "You can easily split this into 3 parts\n\nif ( $this-\u003eisSomeSortOfDiffValue( $diffValue ) ) {\n    return $this-\u003efoo();\n}\nelse {\n    return $this-\u003ebar();\n}\n\nWhere isSomeSortOfDiffValue is a name that describes what the current check is about.",
+      "revId": "8abcf9269baa5952284e84c4b7fc3df1bf14c25c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
