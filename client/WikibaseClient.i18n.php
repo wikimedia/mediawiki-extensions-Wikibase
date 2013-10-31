@@ -1369,7 +1369,7 @@ $messages['fa'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'باید وارد سیستم شوید.',
 	'wikibase-linkitem-not-loggedin' => 'شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.',
 	'wikibase-linkitem-success-create' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 مخزن مرکزی داده‌ها] ما بیابید.',
-	'wikibase-linkitem-success-link' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 central data repository] بیابید.',
+	'wikibase-linkitem-success-link' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 مخزن مرکزی داده‌ها] بیابید.',
 	'wikibase-property-notfound' => 'خصوصیت $1 یافت نشد.',
 	'wikibase-property-notsupportedyet' => 'ویکی‌بیس هنوز نوع خصوصیت برای خصوصیت $1 را پشتیبانی نمی‌کند.',
 	'wikibase-rc-hide-wikidata' => '$1 ویکی‌داده',
@@ -3637,6 +3637,7 @@ $messages['sr-ec'] = array(
  */
 $messages['sr-el'] = array(
 	'wikibase-client-desc' => 'Klijent za proširenje Vikibaza',
+	'wikibase-after-page-move-queued' => '[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se uskoro automatski ažurirati.',
 	'wikibase-editlinks' => 'Uredi veze',
 	'wikibase-editlinkstitle' => 'Uređivanje međujezičkih veza',
 	'wikibase-rc-hide-wikidata' => '$1 Vikipodatke',
