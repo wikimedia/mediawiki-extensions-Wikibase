@@ -57,6 +57,12 @@ class SerializationOptions {
 	const OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY = 'languageFallbackChainFactory';
 
 	/**
+	 * @since 0.5
+	 * @const key for the groupByProperties option
+	 */
+	const OPT_GROUP_BY_PROPERTIES = 'groupByProperties';
+
+	/**
 	 * @var array
 	 */
 	protected $options = array();
@@ -71,6 +77,7 @@ class SerializationOptions {
 
 		$this->initOption( self::OPT_ID_KEY_MODE, self::ID_KEYS_UPPER );
 		$this->initOption( self::OPT_INDEX_TAGS, false );
+		$this->initOption( self::OPT_GROUP_BY_PROPERTIES, array( 'claims', 'qualifiers', 'references' ) );
 	}
 
 	protected function checkKey( $key) {

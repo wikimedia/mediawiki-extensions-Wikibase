@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\Snak;
 use Wikibase\SnakList;
@@ -93,10 +94,16 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$serialization['id'] = $claim->getGuid();
 
 		$snakSerializer = new SnakSerializer( $this->options );
+
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
-		$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
+		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+			$listSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
+		} else {
+			$listSerializer = new ListSerializer( 'qualifiers', $snakSerializer, $this->options );
+		}
+
+		$qualifiers = $listSerializer->getSerialized( $claim->getQualifiers() );
 
 		if ( $qualifiers !== array() ) {
 			$serialization['qualifiers'] = $qualifiers;
@@ -219,41 +226,25 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 * @param array $serialization
 	 * @param SnakSerializer $snakUnserializer
 	 * @return SnakList
-	 * @throws OutOfBoundsException
 	 */
 	protected function unserializeQualifiers( $serialization, $snakUnserializer ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return new SnakList();
+
 		} else {
-			$sortedQualifiers = array();
 
-			if( !array_key_exists( 'qualifiers-order', $serialization ) ) {
-				$sortedQualifiers = $serialization['qualifiers'];
-
+			if( $this->isAssociative( $serialization['qualifiers'] ) ){
+				$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
 			} else {
-				foreach( $serialization['qualifiers-order'] as $propertyId ) {
-					if( !isset( $serialization['qualifiers'][$propertyId] ) ) {
-						throw new OutOfBoundsException( 'No snaks with property id "' . $propertyId . '" '
-						. 'found in "qualifiers" parameter although specified in '
-						. '"qualifiers-order"' );
-					}
+				$unserializer = new ListUnserializer( $snakUnserializer );
+			}
+			$snakList = new SnakList( $unserializer->newFromSerialization( $serialization['qualifiers'] ) );
 
-					$sortedQualifiers[$propertyId] = $serialization['qualifiers'][$propertyId];
-				}
-
-				$missingProperties = array_diff_key(
-					$sortedQualifiers,
-					$serialization['qualifiers']
-				);
-
-				if( count( $missingProperties ) > 0 ) {
-					throw new OutOfBoundsException( 'Property ids ' . implode( ', ', $missingProperties )
-					. ' have not been specified in "qualifiers-order"' );
-				}
+			if( array_key_exists( 'qualifiers-order', $serialization ) ) {
+				$snakList->orderByProperty( $serialization['qualifiers-order'] );
 			}
 
-			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
-			return new SnakList( $snaksUnserializer->newFromSerialization( $sortedQualifiers ) );
+			return $snakList;
 		}
 	}
 
