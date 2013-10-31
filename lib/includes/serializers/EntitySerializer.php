@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
+use Wikibase\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Entity;
 use Wikibase\EntityFactory;
@@ -92,8 +93,6 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 	}
 
 	/**
-	 * @see ApiSerializer::getSerialized
-	 *
 	 * @since 0.2
 	 *
 	 * @param mixed $entity
@@ -132,7 +131,7 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
-					$serialization['claims'] = $claimsSerializer->getSerialized( new \Wikibase\Claims( $entity->getClaims() ) );
+					$serialization['claims'] = $claimsSerializer->getSerialized( new Claims( $entity->getClaims() ) );
 					break;
 			}
 		}

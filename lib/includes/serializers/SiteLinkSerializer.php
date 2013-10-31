@@ -54,7 +54,7 @@ class SiteLinkSerializer extends SerializerObject {
 	 *
 	 * @since 0.4
 	 *
-	 * @param array $sitelinks
+	 * @param array $siteLinks
 	 *
 	 * @return array
 	 * @throws InvalidArgumentException
@@ -178,6 +178,7 @@ class SiteLinkSerializer extends SerializerObject {
 				throw new InvalidArgumentException( 'Site link serialization is invalid.' );
 			}
 
+			$badges = array();
 			if ( array_key_exists( 'badges', $siteLink ) ) {
 				$badges = $this->extractBadges( $siteLink['badges'] );
 			}
