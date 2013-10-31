@@ -182,10 +182,24 @@ $messages['br'] = array(
 );
 
 /** Catalan (català)
+ * @author Arnaugir
  * @author Pitort
  */
 $messages['ca'] = array(
+	'valueview-expert-advancedadjustments' => 'ajustaments avançats',
 	'valueview-expert-emptyvalue-empty' => 'buit',
+	'valueview-expert-globecoordinateinput-precision' => 'Precisió',
+	'valueview-expert-timevalue-calendar-gregorian' => 'gregorià',
+	'valueview-expert-timevalue-calendar-julian' => 'julià',
+	'valueview-expert-timeinput-precision' => 'Precisió:',
+	'valueview-expert-timeinput-calendar' => 'Calendari:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(calendari gregorià)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(calendari julià)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; canvia a gregorià',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; canvia a julià',
+	'valueview-preview-label' => 'es mostrarà com:',
+	'valueview-preview-novalue' => "no s'ha reconegut cap valor vàlid",
+	'valueview-listrotator-auto' => 'auto',
 );
 
 /** Czech (česky)
