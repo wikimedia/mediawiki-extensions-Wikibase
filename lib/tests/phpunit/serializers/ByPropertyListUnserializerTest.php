@@ -171,8 +171,9 @@ class ByPropertyListUnserializerTest extends \MediaWikiTestCase {
 	 * @dataProvider invalidProvider
 	 */
 	public function testNewFromSerializationInvalid( $input ) {
+		$this->setExpectedException( 'Exception' );
 		$serializer = $this->getInstance();
-		$this->assertException( function() use ( $serializer, $input ) { $serializer->newFromSerialization( $input ); } );
+		$serializer->newFromSerialization( $input );
 	}
 
 }
