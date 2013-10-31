@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\Snak;
 use Wikibase\SnakList;
@@ -93,10 +94,16 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$serialization['id'] = $claim->getGuid();
 
 		$snakSerializer = new SnakSerializer( $this->options );
+
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
-		$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
+		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+			$listSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
+		} else {
+			$listSerializer = new ListSerializer( 'qualifiers', $snakSerializer, $this->options );
+		}
+
+		$qualifiers = $listSerializer->getSerialized( $claim->getQualifiers() );
 
 		if ( $qualifiers !== array() ) {
 			$serialization['qualifiers'] = $qualifiers;
