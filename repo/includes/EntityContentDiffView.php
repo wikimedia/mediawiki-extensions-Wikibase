@@ -40,7 +40,7 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		//TODO: proper injection
 		$options = new FormatterOptions( array(
 			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode()
+			ValueFormatter::OPT_LANG => $this->getLanguage()->getCode()
 		) );
 
 		$this->propertyNameFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
@@ -153,6 +153,17 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 
 		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
 		return $parserOutput;
+	}
+
+	/**
+	 * Returns the cache key for diff body text or content.
+	 *
+	 * @return string
+	 */
+	protected function getDiffBodyCacheKey() {
+		return wfMemcKey( 'diff', 'version', MW_DIFF_VERSION,
+			'oldid', $this->getOldid(), 'newid', $this->getNewid(),
+			'lang', $this->getLanguage()->getCode() );
 	}
 
 }
