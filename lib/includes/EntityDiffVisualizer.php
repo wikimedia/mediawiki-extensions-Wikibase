@@ -10,29 +10,12 @@ use Diff\DiffOp;
 use Diff\DiffOpChange;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
+use SiteStore;
 
 /**
  * Class for generating views of EntityDiff objects.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -62,6 +45,11 @@ class EntityDiffVisualizer {
 	private $claimDiffVisualizer;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -69,12 +57,17 @@ class EntityDiffVisualizer {
 	 * @param IContextSource $contextSource
 	 * @param ClaimDiffer $claimDiffer
 	 * @param ClaimDifferenceVisualizer $claimDiffView
+	 * @param SiteStore $siteStore
 	 */
-	public function __construct( IContextSource $contextSource, ClaimDiffer $claimDiffer,
-		ClaimDifferenceVisualizer $claimDiffView ) {
+	public function __construct( IContextSource $contextSource,
+		ClaimDiffer $claimDiffer,
+		ClaimDifferenceVisualizer $claimDiffView,
+		SiteStore $siteStore
+	) {
 		$this->context = $contextSource;
 		$this->claimDiffer = $claimDiffer;
 		$this->claimDiffVisualizer = $claimDiffView;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -91,11 +84,15 @@ class EntityDiffVisualizer {
 
 		$termDiffVisualizer = new DiffView(
 			array(),
-			new Diff( array(
-				$this->context->getLanguage()->getMessage( 'wikibase-diffview-label' ) => $diff->getLabelsDiff(),
-				$this->context->getLanguage()->getMessage( 'wikibase-diffview-alias' ) => $diff->getAliasesDiff(),
-				$this->context->getLanguage()->getMessage( 'wikibase-diffview-description' ) => $diff->getDescriptionsDiff(),
-			), true ),
+			new Diff(
+				array (
+					$this->context->getLanguage()->getMessage( 'wikibase-diffview-label' ) => $diff->getLabelsDiff(),
+					$this->context->getLanguage()->getMessage( 'wikibase-diffview-alias' ) => $diff->getAliasesDiff(),
+					$this->context->getLanguage()->getMessage( 'wikibase-diffview-description' ) => $diff->getDescriptionsDiff(),
+				),
+				true
+			),
+			$this->siteStore,
 			$this->context
 		);
 
@@ -109,9 +106,13 @@ class EntityDiffVisualizer {
 		if ( $diff instanceof ItemDiff ) {
 			$termDiffVisualizer = new DiffView(
 				array(),
-				new Diff( array(
-					$this->context->getLanguage()->getMessage( 'wikibase-diffview-link' ) => $diff->getSiteLinkDiff(),
-				), true ),
+				new Diff(
+					array (
+						$this->context->getLanguage()->getMessage( 'wikibase-diffview-link' ) => $diff->getSiteLinkDiff(),
+					),
+					true
+				),
+				$this->siteStore,
 				$this->context
 			);
 
