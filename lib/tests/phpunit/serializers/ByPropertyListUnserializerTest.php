@@ -59,11 +59,13 @@ class ByPropertyListUnserializerTest extends \MediaWikiTestCase {
 		$snak1 = new PropertySomeValueSnak( $id2 );
 		$snak2 = new PropertyValueSnak( $id2, $dataValue0 );
 
+		//0 empty serialization 1
 		$validArgs[] = array(
 			array(),
 			array(),
 		);
 
+		//1 empty serialization 2
 		$validArgs[] = array(
 			array(
 				'P42' => array(
@@ -74,6 +76,7 @@ class ByPropertyListUnserializerTest extends \MediaWikiTestCase {
 			array(),
 		);
 
+		//2 Snaks by property (uppercase)
 		$validArgs[] = array(
 			array(
 				'P42' => array(
@@ -90,6 +93,56 @@ class ByPropertyListUnserializerTest extends \MediaWikiTestCase {
 					1 => array(
 						'snaktype' => 'value',
 						'property' => 'P2',
+						'datavalue' => $dataValue0->toArray(),
+					),
+				),
+			),
+			array( $snak0, $snak1, $snak2 ),
+		);
+
+		//2 Snaks by property (lowercase)
+		$validArgs[] = array(
+			array(
+				'p42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'p42',
+					),
+				),
+				'p2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'p2',
+					),
+					1 => array(
+						'snaktype' => 'value',
+						'property' => 'p2',
+						'datavalue' => $dataValue0->toArray(),
+					),
+				),
+			),
+			array( $snak0, $snak1, $snak2 ),
+		);
+
+		//2 Snaks by property (upper and lower case)
+		$validArgs[] = array(
+			array(
+				'P42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'P42',
+					),
+				),
+				'P2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'P2',
+					),
+				),
+				'p2' => array(
+					0 => array(
+						'snaktype' => 'value',
+						'property' => 'p2',
 						'datavalue' => $dataValue0->toArray(),
 					),
 				),
