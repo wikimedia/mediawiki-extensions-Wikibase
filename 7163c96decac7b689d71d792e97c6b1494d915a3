@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_cc8a68c0",
+        "filename": "lib/includes/EntityDiffVisualizer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-31T14:14:10Z",
+      "side": 1,
+      "message": "so would i!",
+      "parentUuid": "291c1151_8c5dd079",
+      "revId": "7163c96decac7b689d71d792e97c6b1494d915a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_4c63d845",
         "filename": "lib/includes/EntityDiffVisualizer.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-31T14:13:20Z",
       "side": 1,
       "message": "what\u0027s with all the tabs?",
+      "revId": "7163c96decac7b689d71d792e97c6b1494d915a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_ec8724b6",
+        "filename": "lib/includes/EntityDiffVisualizer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-31T14:14:10Z",
+      "side": 1,
+      "message": "I have no idea O_o",
+      "parentUuid": "291c1151_4c63d845",
       "revId": "7163c96decac7b689d71d792e97c6b1494d915a3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
