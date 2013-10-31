@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_4cbf585e",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-10-31T14:17:33Z",
+      "side": 1,
+      "message": "?",
+      "revId": "b5bce9cd75f91fb2043acfedd1c295ab728804aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
