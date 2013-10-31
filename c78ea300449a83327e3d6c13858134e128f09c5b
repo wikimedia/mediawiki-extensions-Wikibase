@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_1131f904",
+        "filename": "repo/includes/serializers/EntityRevisionSerializer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-10-31T09:23:41Z",
+      "side": 1,
+      "message": "I will fix this is my followup",
+      "revId": "c78ea300449a83327e3d6c13858134e128f09c5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
