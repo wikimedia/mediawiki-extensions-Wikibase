@@ -145,6 +145,8 @@ return call_user_func( function() {
 		'Wikibase\Lib\Serializers\SerializerObject' => 'includes/serializers/SerializerObject.php',
 		'Wikibase\Lib\Serializers\SnakSerializer' => 'includes/serializers/SnakSerializer.php',
 		'Wikibase\Lib\Serializers\Unserializer' => 'includes/serializers/Unserializer.php',
+		'Wikibase\Lib\Serializers\ListSerializer' => 'includes/serializers/ListSerializer.php',
+		'Wikibase\Lib\Serializers\ListUnserializer' => 'includes/serializers/ListUnserializer.php',
 
 		// includes/sites
 		'SiteMatrixParser' => 'includes/sites/SiteMatrixParser.php',

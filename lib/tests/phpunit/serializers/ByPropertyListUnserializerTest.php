@@ -153,26 +153,4 @@ class ByPropertyListUnserializerTest extends \MediaWikiTestCase {
 		return $validArgs;
 	}
 
-	public function invalidProvider() {
-		$invalid = array(
-			false,
-			true,
-			null,
-			42,
-			4.2,
-			'',
-			'foo bar baz',
-		);
-
-		return $this->arrayWrap( $this->arrayWrap( $invalid ) );
-	}
-
-	/**
-	 * @dataProvider invalidProvider
-	 */
-	public function testNewFromSerializationInvalid( $input ) {
-		$serializer = $this->getInstance();
-		$this->assertException( function() use ( $serializer, $input ) { $serializer->newFromSerialization( $input ); } );
-	}
-
 }

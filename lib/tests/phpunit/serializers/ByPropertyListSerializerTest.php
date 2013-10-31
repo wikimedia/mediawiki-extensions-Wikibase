@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use ArrayObject;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListSerializer;
