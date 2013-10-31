@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\Reference;
+use Wikibase\Snak;
 use Wikibase\SnakList;
 
 /**
@@ -41,11 +42,17 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 		$serialization['hash'] = $reference->getHash();
 
 		$snakSerializer = new SnakSerializer( $this->options );
-		$snaksSerializer = new ByPropertyListSerializer( 'snak', $snakSerializer, $this->options );
 
-		$serialization['snaks'] = $snaksSerializer->getSerialized( $reference->getSnaks() );
+		if( in_array( 'references', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+			$listSerializer = new ByPropertyListSerializer( 'snak', $snakSerializer, $this->options );
+		} else {
+			$listSerializer = new ListSerializer( 'snak', $snakSerializer, $this->options );
+		}
+
+		$serialization['snaks'] = $listSerializer->getSerialized( $reference->getSnaks() );
 
 		$serialization['snaks-order'] = array();
+		/** @var Snak $snak */
 		foreach( $reference->getSnaks() as $snak ) {
 			$id = $snak->getPropertyId()->getPrefixedId();
 			if( !in_array( $id, $serialization['snaks-order'] ) ) {
