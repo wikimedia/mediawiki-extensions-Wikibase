@@ -2,7 +2,7 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\SimpleSiteLink;
+use SiteSQLStore;
 use Wikibase\Entity;
 use Wikibase\Item;
 
@@ -12,8 +12,6 @@ use Wikibase\Item;
  * See docs/json.wiki for details of the format.
  *
  * @since 0.2
- *
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -26,7 +24,7 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 	/**
 	 * @since 0.4
 	 *
-	 * @var \SiteSQLStore
+	 * @var SiteSQLStore
 	 */
 	protected $siteStore;
 
@@ -36,10 +34,11 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 	 * @since 0.4
 	 *
 	 * @param SerializationOptions $options
+	 * @param SiteSQLStore $siteStore
 	 */
-	public function __construct( SerializationOptions $options, \SiteSQLStore $siteStore = null ) {
+	public function __construct( SerializationOptions $options, SiteSQLStore $siteStore = null ) {
 		if ( $siteStore === null ) {
-			$this->siteStore = \SiteSQLStore::newInstance();
+			$this->siteStore = SiteSQLStore::newInstance();
 		} else {
 			$this->siteStore = $siteStore;
 		}
@@ -86,10 +85,11 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 	 * @return Item
 	 */
 	public function newFromSerialization( array $data ) {
+		/** @var Item $item */
 		$item = parent::newFromSerialization( $data );
 
 		if ( array_key_exists( 'sitelinks', $data ) ) {
-			$siteLinkSerializer = new SiteLinkSerializer( $this->options );
+			$siteLinkSerializer = new SiteLinkSerializer( $this->options, $this->siteStore );
 			$siteLinks = $siteLinkSerializer->newFromSerialization( $data['sitelinks'] );
 
 			foreach( $siteLinks as $siteLink ) {

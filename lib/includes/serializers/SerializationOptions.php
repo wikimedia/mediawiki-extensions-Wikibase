@@ -3,9 +3,7 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\PropertyDataTypeLookup;
 
 /**
  * Options for Serializer objects.

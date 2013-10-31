@@ -11,8 +11,6 @@ use InvalidArgumentException;
  *
  * @since 0.4
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -92,6 +90,7 @@ class AliasSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @param array $data
 	 *
+	 * @throws InvalidArgumentException
 	 * @return array
 	 */
 	public function newFromSerialization( array $data ) {
@@ -119,8 +118,9 @@ class AliasSerializer extends SerializerObject implements Unserializer {
 	}
 
 	/**
-	 * @param array
+	 * @param array $aliasSet
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string[]
 	 */
 	protected function extractAliasValues( array $aliasSet ) {

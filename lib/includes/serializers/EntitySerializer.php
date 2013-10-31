@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Entity;
 use Wikibase\EntityFactory;
 
@@ -65,7 +64,7 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntitySerializationOptions $options
+	 * @param SerializationOptions $options
 	 * @param EntityFactory $entityFactory
 	 */
 	public function __construct( SerializationOptions $options, EntityFactory $entityFactory = null ) {

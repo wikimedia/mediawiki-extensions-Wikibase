@@ -13,8 +13,6 @@ use Wikibase\Property;
  *
  * @since 0.3
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -53,10 +51,11 @@ class PropertySerializer extends EntitySerializer implements Unserializer {
 	/**
 	 * @param array $data
 	 *
-	 * $return Property
+	 * @return Property
 	 * @throws InvalidArgumentException
 	 */
 	public function newFromSerialization( array $data ) {
+		/** @var Property $entity */
 		$entity = parent::newFromSerialization( $data );
 
 		if ( !array_key_exists( 'datatype', $data ) ) {

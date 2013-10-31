@@ -2,7 +2,9 @@
 
 namespace Wikibase\Lib\Serializers;
 
+use DataValues\DataValueFactory;
 use InvalidArgumentException;
+use Wikibase\EntityId;
 use Wikibase\Snak;
 use Wikibase\SnakObject;
 
@@ -12,8 +14,6 @@ use Wikibase\SnakObject;
  * See docs/json.wiki for details of the format.
  *
  * @since 0.2
- *
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -67,11 +67,11 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	public function newFromSerialization( array $serialization ) {
 		// TODO: inject id parser
 		$constructorArguments = array(
-			\Wikibase\EntityId::newFromPrefixedId( $serialization['property'] ),
+			EntityId::newFromPrefixedId( $serialization['property'] ),
 		);
 
 		if ( array_key_exists( 'datavalue', $serialization ) ) {
-			$constructorArguments[] = \DataValues\DataValueFactory::singleton()->newFromArray( $serialization['datavalue'] );
+			$constructorArguments[] = DataValueFactory::singleton()->newFromArray( $serialization['datavalue'] );
 		}
 
 		return SnakObject::newFromType( $serialization['snaktype'], $constructorArguments );
