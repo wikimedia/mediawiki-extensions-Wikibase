@@ -116,6 +116,26 @@
 			var $claims = $( '.wb-claims' ).first(),
 				$claimsParent = $claims.parent();
 
+			// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
+			// be initialized:
+			var toolbarControllerConfig = {
+				addtoolbar: ['claimgrouplistview', 'claimlistview', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
+				edittoolbar: ['statementview', 'referenceview'],
+				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
+			};
+
+			if( mw.config.get( 'wbExperimentalFeatures' ) ) {
+				toolbarControllerConfig.movetoolbar = [
+					'claim-qualifiers-snak',
+					'statementview-referenceview',
+					'referenceview-snakview'
+				];
+			}
+
+			// TODO: Initialize toolbarcontroller on entity node when initializing entityview on
+			// the entity node (see FIXME below).
+			$claims.toolbarcontroller( toolbarControllerConfig ); // BUILD TOOLBARS
+
 			// FIXME: Initializing entityview on $claims leads to the claim section inserted as
 			// child of $claims. It should be direct child of ".wb-entity".
 			$claims.detach().entityview( { // take widget subject out of DOM while initializing
@@ -142,25 +162,7 @@
 				} );
 			} );
 
-			// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
-			// be initialized:
-			var toolbarControllerConfig = {
-				addtoolbar: ['claimgrouplistview', 'claimlistview', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
-				edittoolbar: ['statementview', 'referenceview'],
-				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
-			};
-
-			if( mw.config.get( 'wbExperimentalFeatures' ) ) {
-				toolbarControllerConfig.movetoolbar = [
-					'claim-qualifiers-snak',
-					'statementview-referenceview',
-					'referenceview-snakview'
-				];
-			}
-
-			$( '.wb-entity' )
-			.toolbarcontroller( toolbarControllerConfig ) // BUILD TOOLBARS
-			.claimgrouplabelscroll();
+			$( '.wb-entity' ).claimgrouplabelscroll();
 		}
 
 		// Handle edit restrictions:
