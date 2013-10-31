@@ -4,6 +4,13 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\Claim;
+use Wikibase\Claims;
+use Wikibase\Entity;
+use Wikibase\Item;
+use Wikibase\Property;
+use Wikibase\Reference;
+use Wikibase\Snak;
 
 /**
  * Factory for constructing Serializer and Unserializer objects.
@@ -37,19 +44,19 @@ class SerializerFactory {
 		}
 
 		switch ( true ) {
-			case ( $object instanceof \Wikibase\Snak ):
+			case ( $object instanceof Snak ):
 				return new SnakSerializer( $options );
-			case ( $object instanceof \Wikibase\Reference ):
+			case ( $object instanceof Reference ):
 				return new ReferenceSerializer( $options );
-			case ( $object instanceof \Wikibase\Item ):
+			case ( $object instanceof Item ):
 				return new ItemSerializer( $options );
-			case ( $object instanceof \Wikibase\Property ):
+			case ( $object instanceof Property ):
 				return new PropertySerializer( $options );
-			case ( $object instanceof \Wikibase\Entity ):
+			case ( $object instanceof Entity ):
 				return new EntitySerializer( $options );
-			case ( $object instanceof \Wikibase\Claim ):
+			case ( $object instanceof Claim ):
 				return new ClaimSerializer( $options );
-			case ( $object instanceof \Wikibase\Claims ):
+			case ( $object instanceof Claims ):
 				return new ClaimsSerializer( $options );
 		}
 
