@@ -107,7 +107,12 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 		}
 
 		$snakUnserializer = new SnakSerializer( $this->options );
-		$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
+
+		if( $this->isAssociative( $sortedSnaks ) ){
+			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
+		} else {
+			$snaksUnserializer = new ListUnserializer( $snakUnserializer );
+		}
 
 		$snaks = $snaksUnserializer->newFromSerialization( $sortedSnaks );
 

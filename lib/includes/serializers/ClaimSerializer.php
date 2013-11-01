@@ -231,13 +231,17 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	protected function unserializeQualifiers( $serialization, $snakUnserializer ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return new SnakList();
+
 		} else {
-			$sortedQualifiers = array();
 
-			if( !array_key_exists( 'qualifiers-order', $serialization ) ) {
-				$sortedQualifiers = $serialization['qualifiers'];
-
+			if( $this->isAssociative( $serialization ) ){
+				$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
 			} else {
+				$unserializer = new ListUnserializer( $snakUnserializer );
+			}
+			$snakList = new SnakList( $unserializer->newFromSerialization( $serialization ) );
+
+			if( array_key_exists( 'qualifiers-order', $serialization ) ) {
 				foreach( $serialization['qualifiers-order'] as $propertyId ) {
 					if( !isset( $serialization['qualifiers'][$propertyId] ) ) {
 						throw new OutOfBoundsException( 'No snaks with property id "' . $propertyId . '" '
@@ -259,8 +263,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 				}
 			}
 
-			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
-			return new SnakList( $snaksUnserializer->newFromSerialization( $sortedQualifiers ) );
+			return new ;
 		}
 	}
 

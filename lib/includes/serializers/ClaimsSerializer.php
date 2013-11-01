@@ -59,7 +59,12 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 	 */
 	public function newFromSerialization( array $serialization ) {
 		$claimSerializer = new ClaimSerializer( $this->options );
-		$unserializer = new ByPropertyListUnserializer( $claimSerializer );
+
+		if( $this->isAssociative( $serialization ) ){
+			$unserializer = new ByPropertyListUnserializer( $claimSerializer );
+		} else {
+			$unserializer = new ListUnserializer( $claimSerializer );
+		}
 
 		return new Claims( $unserializer->newFromSerialization( $serialization ) );
 	}
