@@ -13,6 +13,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
 class SnakList extends HashArray implements Snaks {
 
@@ -121,27 +122,49 @@ class SnakList extends HashArray implements Snaks {
 
 	/**
 	 * Orders the snaks in the list grouping them by property.
+	 * @param $order array of serliazed propertyIds to order by.
 	 *
 	 * @since 0.5
 	 */
-	public function orderByProperty() {
+	public function orderByProperty( $order = array() ) {
+		$snaksByProperty = $this->getSnaksByProperty();
+		$orderedProperties = array_unique( array_merge( $order, array_keys( $snaksByProperty ) ) );
+
+		foreach( $orderedProperties as $property ){
+			$snaks = $snaksByProperty[ $property ];
+			$this->moveSnaksToBottom( $snaks );
+		}
+	}
+
+	/**
+	 * @param array $snaks to remove and re add
+	 */
+	private function moveSnaksToBottom( $snaks ) {
+		foreach( $snaks as $snak ) {
+			$this->removeSnak( $snak );
+			$this->addSnak( $snak );
+		}
+	}
+
+	/**
+	 * Gets the snaks in the current object in an array
+	 * grouped by property id
+	 *
+	 * @return array
+	 */
+	private function getSnaksByProperty() {
 		$snaksByProperty = array();
 
 		foreach( $this as $snak ) {
+			/** @var Snak $snak */
 			$propertyId = $snak->getPropertyId()->getSerialization();
-
 			if( !isset( $snaksByProperty[$propertyId] ) ) {
 				$snaksByProperty[$propertyId] = array();
 			}
 			$snaksByProperty[$propertyId][] = $snak;
 		}
 
-		foreach( $snaksByProperty as $snaks ) {
-			foreach( $snaks as $snak ) {
-				$this->removeSnak( $snak );
-				$this->addSnak( $snak );
-			}
-		}
+		return $snaksByProperty;
 	}
 
 	/**

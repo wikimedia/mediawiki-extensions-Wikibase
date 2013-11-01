@@ -12,12 +12,8 @@ use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\SnakList
- *
- * @file
+
  * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -25,6 +21,7 @@ use Wikibase\SnakList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
 class SnakListTest extends HashArrayTest {
 
@@ -75,7 +72,7 @@ class SnakListTest extends HashArrayTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\SnakList $array
+	 * @param SnakList $array
 	 */
 	public function testHasSnak( SnakList $array ) {
 		/**
@@ -95,7 +92,7 @@ class SnakListTest extends HashArrayTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\SnakList $array
+	 * @param SnakList $array
 	 */
 	public function testRemoveSnak( SnakList $array ) {
 		$elementCount = $array->count();
@@ -128,7 +125,7 @@ class SnakListTest extends HashArrayTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\SnakList $array
+	 * @param SnakList $array
 	 */
 	public function testAddSnak( SnakList $array ) {
 		$elementCount = $array->count();
@@ -175,6 +172,7 @@ class SnakListTest extends HashArrayTest {
 
 		$id1 = new EntityId( Property::ENTITY_TYPE, 1 );
 		$id2 = new EntityId( Property::ENTITY_TYPE, 2 );
+		$id3 = new EntityId( Property::ENTITY_TYPE, 3 );
 
 		/**
 		 * List of test data containing snaks to initialize SnakList objects. The first list of
@@ -183,6 +181,7 @@ class SnakListTest extends HashArrayTest {
 		 * @var array
 		 */
 		$rawArguments = array(
+			//default order
 			array( array(), array() ),
 			array(
 				array( new PropertyNoValueSnak( $id1 ) ),
@@ -208,14 +207,49 @@ class SnakListTest extends HashArrayTest {
 					new PropertyNoValueSnak( $id1 ),
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
 					new PropertyNoValueSnak( $id2 ),
-				)
+				),
+			),
+			//with additional order
+			array(
+				array(
+					new PropertyNoValueSnak( $id3 ),
+					new PropertyNoValueSnak( $id2 ),
+					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
+				),
+				array(
+					new PropertyNoValueSnak( $id2 ),
+					new PropertyNoValueSnak( $id3 ),
+					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
+				),
+				array( $id2->getSerialization() )
+			),
+			array(
+				array(
+					new PropertyNoValueSnak( $id3 ),
+					new PropertyNoValueSnak( $id2 ),
+					new PropertyNoValueSnak( $id2 ),
+					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
+					new PropertyNoValueSnak( $id1 ),
+				),
+				array(
+
+					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
+					new PropertyNoValueSnak( $id1 ),
+					new PropertyNoValueSnak( $id3 ),
+					new PropertyNoValueSnak( $id2 ),
+					new PropertyNoValueSnak( $id2 ),
+				),
+				array( $id1->getSerialization() )
 			),
 		);
 
 		$arguments = array();
 
-		foreach( $rawArguments as $rawSnakLists ) {
-			$arguments[] = array( new $class( $rawSnakLists[0] ), new $class( $rawSnakLists[1] ) );
+		foreach( $rawArguments as $rawArgument ) {
+			if( !array_key_exists( 2, $rawArgument ) ){
+				$rawArgument[2] = array();
+			}
+			$arguments[] = array( new $class( $rawArgument[0] ), new $class( $rawArgument[1] ), $rawArgument[2] );
 		}
 
 		return $arguments;
@@ -226,17 +260,18 @@ class SnakListTest extends HashArrayTest {
 	 *
 	 * @param SnakList $snakList
 	 * @param SnakList $expected
+	 * @param array $order
 	 */
-	public function testOrderByProperty( SnakList $snakList, SnakList $expected ) {
+	public function testOrderByProperty( SnakList $snakList, SnakList $expected, $order = array() ) {
 		$initialSnakList = SnakList::newFromArray( $snakList->toArray() );
 
-		$snakList->orderByProperty();
+		$snakList->orderByProperty( $order );
 
 		// Instantiate new SnakList resetting the snaks' array keys. This allows comparing the
 		// reordered SnakList to the expected SnakList.
 		$orderedSnakList = SnakList::newFromArray( $snakList->toArray() );
 
-		$this->assertEquals( $orderedSnakList, $expected );
+		$this->assertEquals( $expected, $orderedSnakList );
 
 		if( $orderedSnakList->equals( $initialSnakList ) ) {
 			$this->assertTrue( $initialSnakList->getHash() === $snakList->getHash() );
