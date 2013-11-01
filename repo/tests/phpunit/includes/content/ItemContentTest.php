@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 
 /**
@@ -197,10 +198,10 @@ class ItemContentTest extends EntityContentTest {
 	 *
 	 * @dataProvider getTextForSearchIndexProvider
 	 *
-	 * @param ItemContent $itemContent
+	 * @param EntityContent $itemContent
 	 * @param string $pattern
 	 */
-	public function testGetTextForSearchIndex( ItemContent $itemContent, $pattern ) {
+	public function testGetTextForSearchIndex( EntityContent $itemContent, $pattern ) {
 		$text = $itemContent->getTextForSearchIndex();
 		$this->assertRegExp( $pattern . 'm', $text );
 	}
