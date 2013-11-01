@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\SnakList;
@@ -71,7 +72,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$statement = new Statement( new PropertyNoValueSnak( $id ) );
 
-		$validArgs[] = array(
+		$validArgs['statement'] = array(
 			$statement,
 			array(
 				'id' => $statement->getGuid(),
@@ -97,7 +98,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$snakSerializer = new SnakSerializer();
 
-		$validArgs[] = array(
+		$validArgs['complexClaimByProp'] = array(
 			$claim,
 			array(
 				'id' => $claim->getGuid(),
@@ -114,6 +115,25 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'qualifiers-order' => array( 'P42', 'P1' ),
 				'type' => 'claim',
 			),
+		);
+
+		$opts = new SerializationOptions();
+		$opts->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
+
+		$validArgs['complexClaimList'] = array(
+			$claim,
+			array(
+				'id' => $claim->getGuid(),
+				'mainsnak' => $snakSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
+				'qualifiers' => array(
+					$snakSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
+					$snakSerializer->getSerialized( new PropertySomeValueSnak( $id ) ),
+					$snakSerializer->getSerialized( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ),
+				),
+				'qualifiers-order' => array( 'P42', 'P1' ),
+				'type' => 'claim',
+			),
+			$opts
 		);
 
 		return $validArgs;
