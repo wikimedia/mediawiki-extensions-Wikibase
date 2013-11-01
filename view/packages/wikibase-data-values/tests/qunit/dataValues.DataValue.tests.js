@@ -116,7 +116,10 @@
 					instance instanceof dv.DataValue,
 					'is instance of DataValue'
 				);
-
+				assert.ok(
+					instance instanceof this.getConstructor(),
+					'is instance of actual data value implementation\'s constructor'
+				);
 				assert.equal(
 					typeof( instance.getType() ),
 					'string',
