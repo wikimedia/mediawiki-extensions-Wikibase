@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_b453ae37",
+        "filename": "lib/tests/phpunit/serializers/ByPropertyListUnserializerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-01T10:30:26Z",
+      "side": 0,
+      "message": "to the reviewer.\nDue to the typehint this is not needed / should always break, and has started to break..",
+      "revId": "723380ac0dee85eda610b4d522f2fd946b4ad180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
