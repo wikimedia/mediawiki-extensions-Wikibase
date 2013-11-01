@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_d463ca43",
+        "filename": "repo/includes/EntitySearchTextGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-01T09:53:52Z",
+      "side": 1,
+      "message": "I disagree - passing information around using members hides information flow and is prone to cause confusion.",
+      "parentUuid": "291c1151_be49fb62",
+      "revId": "a760a2502872872242d5b6c323066762f0cf32ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_7e6863bb",
         "filename": "repo/includes/EntitySearchTextGenerator.php",
         "patchSetId": 4
