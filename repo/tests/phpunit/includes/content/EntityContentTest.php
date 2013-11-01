@@ -53,26 +53,6 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		parent::tearDown();
 	}
 
-	public function dataGetTextForSearchIndex() {
-		return array( // runs
-			array( // //0
-				array( // data
-					'label' => array( 'en' => 'Test', 'de' => 'Testen' ),
-					'aliases' => array( 'en' => array( 'abc', 'cde' ), 'de' => array( 'xyz', 'uvw' ) )
-				),
-				array( // patterns
-					'/^Test$/',
-					'/^Testen$/',
-					'/^abc$/',
-					'/^cde$/',
-					'/^uvw$/',
-					'/^xyz$/',
-					'/^(?!abcde).*$/',
-				),
-			),
-		);
-	}
-
 	/**
 	 * @since 0.1
 	 *
@@ -105,18 +85,23 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	/**
 	 * Tests @see Wikibase\Entity::getTextForSearchIndex
 	 *
-	 * @dataProvider dataGetTextForSearchIndex
+	 * @dataProvider getTextForSearchIndexProvider
 	 *
-	 * @param array $data
-	 * @param array $patterns
+	 * @param EntityContent $entityContent
+	 * @param string $pattern
 	 */
-	public function testGetTextForSearchIndex( array $data, array $patterns ) {
-		$entity = $this->newFromArray( $data );
-		$text = $entity->getTextForSearchIndex();
+	public function testGetTextForSearchIndex( EntityContent $entityContent, $pattern ) {
+		$text = $entityContent->getTextForSearchIndex();
+		$this->assertRegExp( $pattern . 'm', $text );
+	}
 
-		foreach ( $patterns as $pattern ) {
-			$this->assertRegExp( $pattern . 'm', $text );
-		}
+	public function getTextForSearchIndexProvider() {
+		$entityContent = $this->newEmpty();
+		$entityContent->getEntity()->setLabel( 'en', "cake" );
+
+		return array(
+			array( $entityContent, '/^cake$/' )
+		);
 	}
 
 	public function testSaveFlags() {

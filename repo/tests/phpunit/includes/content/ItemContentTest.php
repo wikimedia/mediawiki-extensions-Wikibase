@@ -192,4 +192,28 @@ class ItemContentTest extends EntityContentTest {
 		$this->assertEquals( $equals, $actual );
 	}
 
+	/**
+	 * Tests @see Wikibase\Entity::getTextForSearchIndex
+	 *
+	 * @dataProvider getTextForSearchIndexProvider
+	 *
+	 * @param ItemContent $itemContent
+	 * @param string $pattern
+	 */
+	public function testGetTextForSearchIndex( ItemContent $itemContent, $pattern ) {
+		$text = $itemContent->getTextForSearchIndex();
+		$this->assertRegExp( $pattern . 'm', $text );
+	}
+
+	public function getTextForSearchIndexProvider() {
+		$itemContent = $this->newEmpty();
+		$itemContent->getEntity()->setLabel( 'en', "cake" );
+		$itemContent->getEntity()->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
+
+		return array(
+			array( $itemContent, '/^cake$/' ),
+			array( $itemContent, '/^Berlin$/' )
+		);
+	}
+
 }
