@@ -76,42 +76,26 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 	 * @throws OutOfBoundsException
 	 */
 	public function newFromSerialization( array $serialization ) {
+
 		if ( !array_key_exists( 'snaks', $serialization ) || !is_array( $serialization['snaks'] ) ) {
 			throw new InvalidArgumentException( 'A reference serialization needs to have a list of snaks' );
 		}
 
-		$sortedSnaks = array();
+		$snakUnserializer = new SnakSerializer( $this->options );
 
-		if(
-			!array_key_exists( 'snaks-order', $serialization )
-			|| !is_array( $serialization['snaks-order'] )
-		) {
-			$sortedSnaks = $serialization['snaks'];
-
+		if( $this->isAssociative( $serialization['snaks'] ) ){
+			$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
 		} else {
-			foreach( $serialization['snaks-order'] as $propertyId ) {
-				if( !isset( $serialization['snaks'][$propertyId] ) ) {
-					throw new OutOfBoundsException( 'No snaks with property id "' . $propertyId . '" found '
-					. 'in "snaks" parameter although specified in "snaks-order"' );
-				}
-
-				$sortedSnaks[$propertyId] = $serialization['snaks'][$propertyId];
-			}
-
-			$missingProperties = array_diff_key( $sortedSnaks, $serialization['snaks'] );
-
-			if( count( $missingProperties ) > 0 ) {
-				throw new OutOfBoundsException( 'Property ids ' . implode( ', ', $missingProperties )
-				. ' have not been specified in "snaks-order"' );
-			}
+			$unserializer = new ListUnserializer( $snakUnserializer );
 		}
 
-		$snakUnserializer = new SnakSerializer( $this->options );
-		$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
+		$snakList = new SnakList( $unserializer->newFromSerialization( $serialization['snaks'] ) );
 
-		$snaks = $snaksUnserializer->newFromSerialization( $sortedSnaks );
+		if( array_key_exists( 'snaks-order', $serialization ) ) {
+			$snakList->orderByProperty( $serialization['snaks-order'] );
+		}
 
-		$reference = new Reference( new SnakList( $snaks ) );
+		$reference = new Reference( new SnakList( $snakList ) );
 
 		if ( array_key_exists( 'hash', $serialization ) && $serialization['hash'] !== $reference->getHash() ) {
 			throw new InvalidArgumentException( 'If a hash is present in a reference serialization it needs to be correct' );

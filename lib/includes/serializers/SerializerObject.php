@@ -76,4 +76,13 @@ abstract class SerializerObject implements Serializer {
 		return $this->options;
 	}
 
+	/**
+	 * @since 0.5
+	 * @param array $arr
+	 * @return bool Is the array an
+	 */
+	protected final function isAssociative( $arr ) {
+		return array_keys( $arr ) !== range( 0, count( $arr ) - 1 );
+	}
+
 }
