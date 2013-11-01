@@ -259,8 +259,13 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 				}
 			}
 
-			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
-			return new SnakList( $snaksUnserializer->newFromSerialization( $sortedQualifiers ) );
+			if( $this->isAssociative( $sortedQualifiers ) ){
+				$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
+			} else {
+				$unserializer = new ListUnserializer( $snakUnserializer );
+			}
+
+			return new SnakList( $unserializer->newFromSerialization( $sortedQualifiers ) );
 		}
 	}
 
