@@ -68,6 +68,24 @@
       "revId": "a760a2502872872242d5b6c323066762f0cf32ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_9f6c0b9f",
+        "filename": "repo/tests/phpunit/includes/EntitySearchTextGeneratorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-01T12:01:09Z",
+      "side": 1,
+      "message": "\u0027m\u0027 is the PCRE flag for \"multiline match\".",
+      "parentUuid": "291c1151_de979799",
+      "revId": "a760a2502872872242d5b6c323066762f0cf32ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
