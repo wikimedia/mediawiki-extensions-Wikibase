@@ -111,8 +111,8 @@
 			// Resize textarea to fit the value (which might be empty):
 			this._resizeInput();
 
-			// We always use the textare for displaying the value, only in edit mode we format the
-			// textare as an input field though.
+			// We always use the textarea for displaying the value, only in edit mode we format the
+			// textarea as an input field though.
 			if( this._viewState.isInEditMode() ) {
 				// in EDIT MODE:
 				this.$input.prop( {
