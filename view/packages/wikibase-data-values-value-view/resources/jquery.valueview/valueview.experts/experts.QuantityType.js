@@ -7,13 +7,12 @@
  * @since 0.1
  *
  * @constructor
- * @extends jQuery.valueview.experts.BifidExpert
+ * @extends jQuery.valueview.experts.StringValue
  */
 jQuery.valueview.experts.QuantityType = ( function( dv, vp, $, vv ) {
 	'use strict';
 
-	var PARENT = vv.StringValue;
-//	var editableExpert = vv.experts.StringValue;
+	var PARENT = vv.experts.StringValue;
 
 	return vv.expert( 'quantitytype', PARENT, {
 		/**
@@ -21,6 +20,18 @@ jQuery.valueview.experts.QuantityType = ( function( dv, vp, $, vv ) {
 		 */
 		parser: function() {
 			return new vp.QuantityParser();
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert._setRawValue
+		 */
+		_setRawValue: function( rawValue ) {
+			if( rawValue instanceof dv.QuantityValue ) {
+				rawValue = rawValue.getAmount().getValue();
+			} else if( typeof rawValue !== 'string' ) {
+				rawValue = null;
+			}
+			this._newValue = rawValue;
 		}
 	} );
 

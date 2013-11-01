@@ -293,6 +293,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.quantitytype' => $moduleTemplate + array(
+				'scripts' => array(
+					'jquery.valueview/valueview.experts/experts.QuantityType.js',
+				),
+				'dependencies' => array(
+					'jquery.valueview.experts.stringvalue',
+				),
+			),
+
 		'jquery.valueview.preview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview/valueview.preview.js',
