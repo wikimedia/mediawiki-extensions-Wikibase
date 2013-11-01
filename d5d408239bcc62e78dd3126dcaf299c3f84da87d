@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_059c4ebb",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-01T20:02:46Z",
+      "side": 1,
+      "message": "$wasSuccessfull",
+      "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
