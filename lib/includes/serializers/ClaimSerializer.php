@@ -226,41 +226,25 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 * @param array $serialization
 	 * @param SnakSerializer $snakUnserializer
 	 * @return SnakList
-	 * @throws OutOfBoundsException
 	 */
 	protected function unserializeQualifiers( $serialization, $snakUnserializer ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return new SnakList();
+
 		} else {
-			$sortedQualifiers = array();
 
-			if( !array_key_exists( 'qualifiers-order', $serialization ) ) {
-				$sortedQualifiers = $serialization['qualifiers'];
-
+			if( $this->isAssociative( $serialization['qualifiers'] ) ){
+				$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
 			} else {
-				foreach( $serialization['qualifiers-order'] as $propertyId ) {
-					if( !isset( $serialization['qualifiers'][$propertyId] ) ) {
-						throw new OutOfBoundsException( 'No snaks with property id "' . $propertyId . '" '
-						. 'found in "qualifiers" parameter although specified in '
-						. '"qualifiers-order"' );
-					}
+				$unserializer = new ListUnserializer( $snakUnserializer );
+			}
+			$snakList = new SnakList( $unserializer->newFromSerialization( $serialization['qualifiers'] ) );
 
-					$sortedQualifiers[$propertyId] = $serialization['qualifiers'][$propertyId];
-				}
-
-				$missingProperties = array_diff_key(
-					$sortedQualifiers,
-					$serialization['qualifiers']
-				);
-
-				if( count( $missingProperties ) > 0 ) {
-					throw new OutOfBoundsException( 'Property ids ' . implode( ', ', $missingProperties )
-					. ' have not been specified in "qualifiers-order"' );
-				}
+			if( array_key_exists( 'qualifiers-order', $serialization ) ) {
+				$snakList->orderByProperty( $serialization['qualifiers-order'] );
 			}
 
-			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
-			return new SnakList( $snaksUnserializer->newFromSerialization( $sortedQualifiers ) );
+			return $snakList;
 		}
 	}
 
