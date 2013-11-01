@@ -1,8 +1,9 @@
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
-dataValues.QuantityValue = ( function( inherit, dv, $ ) {
+dataValues.QuantityValue = ( function( inherit, dv ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
@@ -12,84 +13,39 @@ dataValues.QuantityValue = ( function( inherit, dv, $ ) {
 	 *
 	 * @since 0.1
 	 *
-	 * @param {string|number} amount Numeric string or a number.
-	 * @param {string|null} [unit] A unit identifier, or null for unit-less quantities.
-	 * @param {number} [significantDigits] The number of significant digits in the amount, counting
-	 *        from the most significant digit, not counting the sign or decimal separator.
+	 * @param {dataValues.DecimalValue} amount Numeric string or a number.
+	 * @param {string} unit A unit identifier. Must not be empty, use "1" for unit-less quantities.
+	 * @param {dataValues.DecimalValue} upperBound The upper bound of the quantity, inclusive.
+	 * @param {dataValues.DecimalValue} lowerBound The lower bound of the quantity, inclusive.
 	 *
-	 * @throws {Error}
+	 * @throws {Error} if constructor parameters are invalid.
 	 */
-	var constructor = function( amount, unit, significantDigits ) {
-		if( typeof unit === 'number' ) {
-			significantDigits = unit;
-			unit = null;
+	var constructor = function( amount, unit, upperBound, lowerBound ) {
+		if( !amount || !( amount instanceof dv.DecimalValue ) ) {
+			throw new Error( 'amount needs to be a DecimalValue object' );
 		}
-		var amount = processAmount( amount );
-		this._unit = processUnit( unit );
-		this._significantDigits = processSignificantDigits( significantDigits, amount );
-		this._amount = enforceSignificanceOnAmount( amount, this._significantDigits );
+
+		if( typeof unit !== 'string' ) {
+			throw new Error( 'unit must be of type string' );
+		}
+
+		if( typeof unit === '' ) {
+			throw new Error( 'unit can not be an empty string (use "1" for unit-less quantities)' );
+		}
+
+		if( !lowerBound || !( lowerBound instanceof dv.DecimalValue ) ) {
+			throw new Error( 'lowerBound needs to be a DecimalValue object' );
+		}
+
+		if( !upperBound || !( upperBound instanceof dv.DecimalValue ) ) {
+			throw new Error( 'upperBound needs to be a DecimalValue object' );
+		}
+
+		this._amount = amount;
+		this._unit = unit;
+		this._lowerBound = lowerBound;
+		this._upperBound = upperBound;
 	};
-
-	function processAmount( amount ) {
-		if( typeof amount === 'number' ) {
-			amount = '' + amount;
-			if( amount.indexOf( 'e' ) !== -1 ) {
-				throw new Error( 'Can not cast huge numbers to the string format required for ' +
-					'representing quantity values' );
-			}
-			// The next check will also handle NaN and Infinity.
-		}
-
-		if( typeof amount !== 'string'
-			|| amount.match( /^[+-]?(?:[1-9]\d*|\d)(?:\.\d+)?$/ ) === null
-		) {
-			throw new Error(
-				'Amount has to be a number or a numeric string using "." as decimal separator.' );
-		}
-
-		return amount.replace( /^(\d)/, '+$1' );
-	}
-
-	function processUnit( unit ) {
-		if( unit === undefined ) {
-			unit = null;
-		}
-		else if( unit !== null && typeof unit !== 'string' ) {
-			throw new Error( 'The unit has to be a string or null' );
-		}
-		return unit;
-	}
-
-	function processSignificantDigits( significantDigits, amount ) {
-		if( significantDigits === undefined ) {
-			var hasDecimalSeparator = amount.indexOf( '.' ) !== -1;
-			significantDigits = amount.length - 1 - hasDecimalSeparator;
-		}
-		else if( typeof significantDigits !== 'number' || significantDigits <= 0  ) {
-			throw new Error( '' );
-		}
-		return significantDigits;
-	}
-
-	function enforceSignificanceOnAmount( amount, significantDigits ) {
-		function padRight( string, desiredLength ) {
-			while( string.length < desiredLength ) {
-				string += '0';
-			}
-			return string;
-		}
-
-		var decimalSeparatorIndex = amount.indexOf( '.' );
-		var hasDecimalSeparator = decimalSeparatorIndex !== -1;
-		var significantChars = significantDigits + 1 + hasDecimalSeparator;
-		var significantPart = amount.substr( 0, significantChars );
-
-		if( significantChars > decimalSeparatorIndex ) {
-			significantPart = significantPart.replace( /\.?$/, '.' );
-		}
-		significantPart = padRight( significantPart, decimalSeparatorIndex );
-		return significantPart.replace( /\.$/, '' );
-	}
 
 	var QuantityValue = inherit( 'DvQuantityValue', PARENT, constructor, {
 		/**
@@ -100,13 +56,12 @@ dataValues.QuantityValue = ( function( inherit, dv, $ ) {
 		 * @return string
 		 */
 		getSortKey: function() {
-			return this.getAmount();
+			return this.getAmount().getValue();
 		},
 
 		/**
 		 * Returns a self-reference.
 		 * @see dv.DataValue.getValue
-		 *
 		 * @since 0.1
 		 *
 		 * @return dataValues.QuantityValue
@@ -138,15 +93,25 @@ dataValues.QuantityValue = ( function( inherit, dv, $ ) {
 		},
 
 		/**
-		 * Returns the number of significant digits in the amount, counting from the most
-		 * significant digit, not counting the sign or decimal separator.
+		 * Returns the quantity's lower boundary.
 		 *
 		 * @since 0.1
 		 *
-		 * @return number
+		 * @return {dataValues.DecimalValue|null}
 		 */
-		getSignificantDigits: function() {
-			return this._significantDigits;
+		getLowerBound: function() {
+			return this._lowerBound;
+		},
+
+		/**
+		 * Returns the quantity's upper boundary.
+		 *
+		 * @since 0.1
+		 *
+		 * @return {dataValues.DecimalValue|null}
+		 */
+		getUpperBound: function() {
+			return this._upperBound;
 		},
 
 		/**
@@ -154,14 +119,15 @@ dataValues.QuantityValue = ( function( inherit, dv, $ ) {
 		 *
 		 * @since 0.1
 		 */
-		equals: function( value ) {
-			if ( !( value instanceof this.constructor ) ) {
+		equals: function( that ) {
+			if ( !( that instanceof this.constructor ) ) {
 				return false;
 			}
 
-			return this.getAmount() === value.getAmount()
-				&& this.getUnit() === value.getUnit()
-				&& this.getSignificantDigits() === value.getSignificantDigits();
+			return this.getAmount().equals( that.getAmount() )
+				&& this.getUnit() === that.getUnit()
+				&& this.getLowerBound().equals( that.getLowerBound() )
+				&& this.getUpperBound().equals( that.getUpperBound() );
 		},
 
 		/**
@@ -169,13 +135,14 @@ dataValues.QuantityValue = ( function( inherit, dv, $ ) {
 		 *
 		 * @since 0.1
 		 *
-		 * @return Object
+		 * @return {Object}
 		 */
 		toJSON: function() {
 			return {
-				amount: this.getAmount(),
+				amount: this.getAmount().toJSON(),
 				unit: this.getUnit(),
-				digits: this.getSignificantDigits()
+				upperBound: this.getUpperBound().toJSON(),
+				lowerBound: this.getLowerBound().toJSON()
 			};
 		}
 	} );
@@ -185,9 +152,10 @@ dataValues.QuantityValue = ( function( inherit, dv, $ ) {
 	 */
 	QuantityValue.newFromJSON = function( json ) {
 		return new QuantityValue(
-			json.amount,
+			new dv.DecimalValue( json.amount ),
 			json.unit,
-			json.digits
+			new dv.DecimalValue( json.upperBound ),
+			new dv.DecimalValue( json.lowerBound )
 		);
 	};
 
@@ -198,6 +166,6 @@ dataValues.QuantityValue = ( function( inherit, dv, $ ) {
 
 	return QuantityValue;
 
-}( dataValues.util.inherit, dataValues, jQuery ) );
+}( dataValues.util.inherit, dataValues ) );
 
-dataValues.registerDataValue( dataValues.StringValue );
+dataValues.registerDataValue( dataValues.QuantityValue );
