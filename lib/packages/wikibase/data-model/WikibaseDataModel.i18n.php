@@ -42,7 +42,7 @@ $messages['be-tarask'] = array(
 	'wikibasedatamodel-desc' => 'Кампанэнт, які вызначае мадэль зьвестак Wikibase',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Mormegil
  */
 $messages['cs'] = array(
