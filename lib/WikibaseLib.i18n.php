@@ -669,7 +669,7 @@ $messages['ckb'] = array(
 	'datatypes-type-wikibase-item' => 'بەند',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Danny B.
  * @author JAn Dudík
  * @author Littledogboy
@@ -1214,12 +1214,14 @@ $messages['fa'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'زبان',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'وب‌گاه',
 	'wikibase-sitelinks-siteid-columnheading' => 'کد',
-	'wikibase-sitelinks-link-columnheading' => 'مقالهٔ پیوندداده‌شده', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'صفحهٔ پیوندداده‌شده',
 	'wikibase-tooltip-error-details' => 'جزئیات',
 	'wikibase-undeserializable-value' => 'این مقدار معتبر نیست و قابل نمایش نیست.',
 	'wikibase-validator-bad-type' => '$2 به جای $1',
 	'wikibase-validator-too-long' => 'نباید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد',
 	'wikibase-validator-too-short' => 'باید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد',
+	'wikibase-validator-too-high' => 'خارج از محدوده، نباید بیش از $1 باشد',
+	'wikibase-validator-too-low' => 'خارج از محدوده، نباید کمتر از $1 باشد',
 	'wikibase-validator-malformed-value' => 'ورودی ناقص:$1',
 	'wikibase-validator-bad-entity-id' => 'شناسه ناقص:$1',
 	'wikibase-validator-bad-entity-type' => 'نوع ورودی غیرمنتظره  $1',
@@ -2069,7 +2071,7 @@ $messages['lb'] = array(
 	'wikibase-error-ui-no-permissions' => 'Dir hutt net genuch Rechter fir dës Aktioun ze maachen.',
 	'wikibase-error-ui-link-exists' => 'Dir kënnt kee Link mat dëser Säit maachen well schonn een anert Element hei hinner linkt.',
 	'wikibase-error-ui-session-failure' => 'Är Sessioun ass ofgelaf. Loggt Iech w.e.g. nees an.',
-	'wikibase-error-ui-edit-conflict' => "Et gëtt en Editiounskonflikt. Lued d'Säit nach eng Kéier a späichert nach eng Kéier.",
+	'wikibase-error-ui-edit-conflict' => "Et gëtt en Editiounskonflikt. Luet d'Säit nees a späichert nach eng Kéier.",
 	'wikibase-replicationnote' => "Denkt w.e.g. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
 	'wikibase-sitelinks-wikipedia' => 'Wikipediasäiten déi mat dësem Element verlinkt sinn',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
