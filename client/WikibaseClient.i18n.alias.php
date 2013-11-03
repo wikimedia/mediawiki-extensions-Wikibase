@@ -74,3 +74,8 @@ $specialPageAliases['tr'] = array(
 $specialPageAliases['vi'] = array(
 	'UnconnectedPages' => array( 'Trang_không_kết_nối', 'Trang_không_có_liên_kết_site' ),
 );
+
+/** Simplified Chinese (中文（简体）‎) */
+$specialPageAliases['zh-hans'] = array(
+	'UnconnectedPages' => array( '未连接页面' ),
+);
