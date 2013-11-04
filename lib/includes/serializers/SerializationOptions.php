@@ -398,7 +398,7 @@ class SerializationOptions {
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
-		$factory = $this->getOption( self::OPT_LANGUAGES );
+		$factory = $this->getOption( self::OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY );
 
 		if ( $factory === null ) {
 			$factory = new LanguageFallbackChainFactory();
@@ -416,6 +416,6 @@ class SerializationOptions {
 	 * @param LanguageFallbackChainFactory $factory
 	 */
 	public function setLanguageFallbackChainFactory( LanguageFallbackChainFactory $factory ) {
-		$this->setOption( self::OPT_LANGUAGES, $factory );
+		$this->setOption( self::OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY, $factory );
 	}
 }
