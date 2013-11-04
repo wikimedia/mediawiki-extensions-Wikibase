@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_5e19ac81",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:16:54Z",
+      "side": 1,
+      "message": "GPL header, @file and @ingroup should go. We changed our conventions wrt that.",
+      "revId": "343e8bae4c0095023bd003a1a64dede0329a46b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_be0aa024",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:16:54Z",
+      "side": 1,
+      "message": "Please update author info to be accurate.",
+      "revId": "343e8bae4c0095023bd003a1a64dede0329a46b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_19002e03",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:16:54Z",
+      "side": 1,
+      "message": "You can just use array_flip().\nBut this does not seem to be used anywhere?",
+      "revId": "343e8bae4c0095023bd003a1a64dede0329a46b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b91b9a6f",
+        "filename": "repo/tests/phpunit/includes/ClaimHtmlGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:16:54Z",
+      "side": 1,
+      "message": "Instead of testing the *exact* string, including all whitespace and quoting specifics, it would probably more robust to use a regular expression to check that the desired info is in the output.",
+      "revId": "343e8bae4c0095023bd003a1a64dede0329a46b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
