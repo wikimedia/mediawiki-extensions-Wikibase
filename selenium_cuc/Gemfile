@@ -3,13 +3,6 @@
 
 source 'https://rubygems.org'
 
-gem 'page-object'
-gem 'require_all'
-gem 'rspec-expectations'
-gem 'syntax'
-gem 'cucumber'
-gem 'json'
 gem 'activesupport'
-gem 'net-http-persistent'
-gem 'rest-client'
 gem 'mediawiki-selenium'
+gem 'require_all'
