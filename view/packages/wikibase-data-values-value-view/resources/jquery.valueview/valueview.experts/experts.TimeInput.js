@@ -101,13 +101,6 @@
 				'class': this.uiBaseClass + '-input valueview-input'
 			} )
 			.appendTo( this.$viewPort )
-			.eachchange( function( event, oldValue ) {
-				var value = self.$input.data( 'timeinput' ).value();
-				if( oldValue === '' && value === null || self.$input.val() === '' ) {
-					self._updatePreview();
-					self._updateCalendarHint();
-				}
-			} )
 			.timeinput( { mediaWiki: this._options.mediaWiki } )
 			.inputextender( {
 				initCallback: function( $extension ) {
@@ -127,14 +120,16 @@
 				contentAnimationEvents: 'toggleranimation'
 			} )
 			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
-				self._updateCalendarHint( value );
-				if( value ) {
-					self.$precision.data( 'listrotator' ).rotate( value.precision() );
-					self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
+				if( self.$input.data( 'inputextender' ).extensionIsActive() ) {
+					self._updateCalendarHint( value );
+					if( value ) {
+						self.$precision.data( 'listrotator' ).rotate( value.precision() );
+						self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
+					}
+					self._updatePreview();
 				}
 				self._newValue = false; // value, not yet handled by draw(), is outdated now
 				self._viewNotifier.notify( 'change' );
-				self._updatePreview();
 			} );
 
 		},
