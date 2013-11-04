@@ -16,6 +16,24 @@
       "revId": "6017a7c4485e6dae55ae89a2cd5d2ffc15665694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_190aeed3",
+        "filename": "lib/WikibaseLib.classes.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-04T14:11:51Z",
+      "side": 1,
+      "message": "I am just trying to stay consistent with the other list serializer and deserializer.\nPersonally I have no preference.",
+      "parentUuid": "291c1151_793a02cc",
+      "revId": "6017a7c4485e6dae55ae89a2cd5d2ffc15665694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

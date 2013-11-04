@@ -50,6 +50,24 @@
       "revId": "d43f40e30bf522160453dbb282f0bcf7a1fc8ebe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_79fbe2be",
+        "filename": "lib/tests/phpunit/serializers/ByPropertyListUnserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-04T14:11:51Z",
+      "side": 0,
+      "message": "As discussed in the office this fails due to the type hint of array.\nCopying the same test case over to the new list serializer and deserializer means phpunit fails, even though exactly the same thing happens.",
+      "parentUuid": "291c1151_f94ef26e",
+      "revId": "d43f40e30bf522160453dbb282f0bcf7a1fc8ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
