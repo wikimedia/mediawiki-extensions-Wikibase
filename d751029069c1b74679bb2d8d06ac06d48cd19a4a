@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_b94d5a6f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:35:20Z",
+      "side": 1,
+      "message": "Why is the \u0027wb-languages\u0027 preference removed?",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f977d29c",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:35:20Z",
+      "side": 1,
+      "message": "We could just always set the cookie, for good measure...",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_d948565f",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:35:20Z",
+      "side": 1,
+      "message": "Is it really OK to hardcode the path?",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
