@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "291c1151_fe497890",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:09:17Z",
+      "side": 1,
+      "message": "@deprecated should always be followed with information about what to use instead.",
+      "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_1e4d749a",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:09:17Z",
+      "side": 1,
+      "message": "Indent galore?",
+      "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_059c4ebb",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 11
@@ -13,6 +47,24 @@
       "writtenOn": "2013-11-01T20:02:46Z",
       "side": 1,
       "message": "$wasSuccessfull",
+      "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_1e365402",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:09:17Z",
+      "side": 1,
+      "message": "But the flag is called \"success\"...",
+      "parentUuid": "291c1151_059c4ebb",
       "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
