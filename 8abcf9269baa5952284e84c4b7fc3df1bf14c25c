@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "291c1151_59a62613",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:39:13Z",
+      "side": 1,
+      "message": "Please explain which cases are covered.\n\nAlso, in the diff case, there may be two revisions given explicitly in the request - which one is returned by this method?",
+      "revId": "8abcf9269baa5952284e84c4b7fc3df1bf14c25c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_677c2f81",
         "filename": "repo/includes/ContentRetriever.php",
         "patchSetId": 1
@@ -13,6 +30,23 @@
       "writtenOn": "2013-10-31T15:00:00Z",
       "side": 1,
       "message": "You can easily split this into 3 parts\n\nif ( $this-\u003eisSomeSortOfDiffValue( $diffValue ) ) {\n    return $this-\u003efoo();\n}\nelse {\n    return $this-\u003ebar();\n}\n\nWhere isSomeSortOfDiffValue is a name that describes what the current check is about.",
+      "revId": "8abcf9269baa5952284e84c4b7fc3df1bf14c25c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_796cc2cf",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:39:13Z",
+      "side": 1,
+      "message": "Tabs please",
       "revId": "8abcf9269baa5952284e84c4b7fc3df1bf14c25c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
