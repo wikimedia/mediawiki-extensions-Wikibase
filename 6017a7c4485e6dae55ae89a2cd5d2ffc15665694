@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_793a02cc",
+        "filename": "lib/WikibaseLib.classes.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:31:55Z",
+      "side": 1,
+      "message": "I see no good reason to not have both in one class (it\u0027s a codec, or mathematically, a bijective function representing a relation object\u003cR\u003eblob). But I guess it doesn\u0027t hurt.",
+      "revId": "6017a7c4485e6dae55ae89a2cd5d2ffc15665694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_39596a34",
+        "filename": "lib/tests/phpunit/serializers/ByPropertyListUnserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:31:55Z",
+      "side": 0,
+      "message": "test cases for failing type hints may cause phpunit to fail silently (if a previous test messed with the error reporting flags). It\u0027s probably not necessary to test this, but we should still test with structurally invalid input.",
+      "revId": "d43f40e30bf522160453dbb282f0bcf7a1fc8ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b9347add",
+        "filename": "lib/tests/phpunit/serializers/ByPropertyListUnserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:31:55Z",
+      "side": 0,
+      "message": "Why did you delete this? This should be tested, right?",
+      "revId": "d43f40e30bf522160453dbb282f0bcf7a1fc8ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f94ef26e",
+        "filename": "lib/tests/phpunit/serializers/ByPropertyListUnserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-04T13:31:55Z",
+      "side": 0,
+      "message": "Please use setExpectedException() instead of assertException().",
+      "revId": "d43f40e30bf522160453dbb282f0bcf7a1fc8ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
