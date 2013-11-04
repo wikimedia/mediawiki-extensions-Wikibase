@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_a3536d69",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-04T03:31:49Z",
+      "side": 1,
+      "message": "This line should be part of the if block, and the body of that block can be its own method.",
+      "revId": "23c80beac653a0d656079f212d2515a6cd73ec8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
