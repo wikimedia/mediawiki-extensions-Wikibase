@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_d90056b0",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-04T14:12:51Z",
+      "side": 1,
+      "message": "This is removed in the next patchset which you have already +2ed",
+      "parentUuid": "291c1151_fe497890",
+      "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_1e4d749a",
         "filename": "repo/includes/api/ApiWikibase.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-04T13:09:17Z",
       "side": 1,
       "message": "Indent galore?",
+      "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f92fd23d",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-04T14:12:51Z",
+      "side": 1,
+      "message": "stupid php 7...",
+      "parentUuid": "291c1151_1e4d749a",
       "revId": "d5d408239bcc62e78dd3126dcaf299c3f84da87d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
