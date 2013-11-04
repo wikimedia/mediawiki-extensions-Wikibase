@@ -2438,6 +2438,13 @@ $messages['ku-latn'] = array(
 	'wikibase-rc-hide-wikidata' => 'Wikidatayê $1',
 );
 
+/** Latin (Latina)
+ * @author Autokrator
+ */
+$messages['la'] = array(
+	'wikibase-editlinks' => 'Nexus recensere',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Les Meloures
  * @author Robby
