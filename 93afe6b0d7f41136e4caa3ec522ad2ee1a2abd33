@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_37f7ae8b",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-05T15:45:36Z",
+      "side": 1,
+      "message": "to make the dynamic default obvious, you can put a closure here that will be called to generate the value on first use.",
+      "revId": "93afe6b0d7f41136e4caa3ec522ad2ee1a2abd33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
