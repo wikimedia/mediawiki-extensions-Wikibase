@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_a9c34259",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-11-05T21:31:48Z",
+      "side": 1,
+      "message": "Yey, the hook got never called",
+      "parentUuid": "291c1151_17d9d2f1",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_f977d29c",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 5
