@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_17d9d2f1",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-05T16:07:49Z",
+      "side": 1,
+      "message": "Hm, odd that this unused code was here in the first place. It war really unused, right?",
+      "parentUuid": "291c1151_990b3e2b",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_f977d29c",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 5
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Take a look at Daniel Werner\u0027s comments here: https://gerrit.wikimedia.org/r/#/c/89607/2/repo/resources/wikibase.ui.entityViewInit.js",
       "parentUuid": "291c1151_f977d29c",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f7d196cc",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-05T16:07:49Z",
+      "side": 1,
+      "message": "Well, if you also set the cookie, the message would stay hidden after the user logs out.  *shrug* don\u0027t care much :)",
+      "parentUuid": "291c1151_1d11f952",
       "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
