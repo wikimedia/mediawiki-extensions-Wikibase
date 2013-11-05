@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -97,6 +98,26 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 		$client = new WikibaseClient( $settings, \Language::factory( 'en' ), true );
 		$this->assertNotNull( $client->getLangLinkSiteGroup() );
+	}
+
+	public function testGetSiteGroup() {
+		$siteStore = $this->getMockBuilder( 'SiteSQLStore' )
+				->disableOriginalConstructor()
+				->getMock();
+
+		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
+		$site->setGroup( 'wikipedia' );
+
+		$settings = clone Settings::singleton();
+		$settings->setSetting( 'siteGroup', null );
+		$settings->setSettings( 'siteGlobalID', 'enwiki' );
+
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), true, $siteStore );
+		$this->assertEquals( 'wikipedia', $client->getSiteGroup() );
+
+		$settings->setSetting( 'siteGroup', 'wikivoyage' );
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), true, $siteStore );
+		$this->assertEquals( 'wikivoyage', $client->getSiteGroup() );
 	}
 
 	public function testGetSite() {
