@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_b7b8fec5",
+        "filename": "repo/tests/phpunit/includes/ClaimHtmlGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-05T15:35:18Z",
+      "side": 1,
+      "message": "ok, that\u0027s *very* basic :)",
+      "revId": "5bf58561544156ea5cc850505f96f410e9a010e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
