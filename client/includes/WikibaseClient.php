@@ -5,6 +5,7 @@ namespace Wikibase\Client;
 use DataTypes\DataTypeFactory;
 use Language;
 use Site;
+use SiteStore;
 use Sites;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
@@ -89,16 +90,25 @@ final class WikibaseClient {
 	private $valueFormatterFactory;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
 	 * @param Language      $contentLanguage
 	 * @param               $inTestMode
+	 * @param SiteStore $siteStore
 	 */
-	public function __construct( SettingsArray $settings, Language $contentLanguage, $inTestMode ) {
+	public function __construct( SettingsArray $settings, Language $contentLanguage, $inTestMode = false,
+		SiteStore $siteStore = null
+	) {
 		$this->contentLanguage = $contentLanguage;
 		$this->settings = $settings;
 		$this->inTestMode = $inTestMode;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -385,17 +395,56 @@ final class WikibaseClient {
 	 * can be configured to be otherwise using the languageLinkSiteGroup setting.
 	 *
 	 * @return string
-	 * @throws \MWException
 	 */
 	public function getLangLinkSiteGroup() {
 		$group = $this->settings->getSetting( 'languageLinkSiteGroup' );
 
 		if ( $group === null ) {
-			$thisSite = $this->getSite();
-			$group = $thisSite->getGroup();
+			$group = $this->getSiteGroup();
 		}
 
 		return $group;
+	}
+
+	/**
+	 * Gets the site group ID from setting, which if not set then does
+	 * lookup in site store.
+	 *
+	 * @return string
+	 */
+	protected function newSiteGroup() {
+		$siteGroup = Settings::get( 'siteGroup' );
+
+		if ( !$siteGroup ) {
+			$siteId = Settings::get( 'siteGlobalID' );
+
+			$siteStore = $this->siteStore !== null
+				? $this->siteStore : SiteSQLStore::newInstance();
+
+			$site = $siteStore->getSite( $siteId );
+
+			if ( !$site ) {
+				wfWarn( 'Cannot find site ' . $siteId . ' in sites table' );
+				return true;
+			}
+
+			$siteGroup = $site->getGroup();
+		}
+
+		return $siteGroup;
+	}
+
+	/**
+	 * Get site group ID
+	 *
+	 * @return string
+	 */
+	public function getSiteGroup() {
+		if ( !$this->siteGroup ) {
+			$this->siteGroup = $this->newSiteGroup();
+		}
+
+		return $this->siteGroup;
 	}
 
 	/**
