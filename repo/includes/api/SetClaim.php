@@ -2,16 +2,13 @@
 
 namespace Wikibase\Api;
 
-use ApiMain;
 use ApiBase;
-use MWException;
+use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use FormatJson;
-use Diff\ListDiffer;
-use ValueFormatters\FormatterOptions;
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ClaimDiffer;
@@ -19,11 +16,8 @@ use Wikibase\Claims;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
-use Wikibase\EntityContentFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**

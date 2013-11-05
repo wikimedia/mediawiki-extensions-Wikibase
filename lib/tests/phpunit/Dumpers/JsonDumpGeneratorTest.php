@@ -18,6 +18,7 @@ use Wikibase\Property;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group JsonDump
  *
  * @license GPL 2+
  * @author Daniel Kinzler
