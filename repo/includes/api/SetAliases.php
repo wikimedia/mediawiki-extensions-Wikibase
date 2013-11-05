@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use ApiBase, User, Language;
@@ -67,6 +68,7 @@ class SetAliases extends ModifyEntity {
 		$entity = $entityContent->getEntity();
 		$language = $params['language'];
 
+		/** @var ChangeOp[] $aliasesChangeOps */
 		$aliasesChangeOps = $this->getChangeOps( $params );
 
 		try{

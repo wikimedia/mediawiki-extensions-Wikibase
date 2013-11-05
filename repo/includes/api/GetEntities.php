@@ -5,7 +5,9 @@ namespace Wikibase\Api;
 use ApiBase;
 use SiteSQLStore;
 use MWException;
+use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -150,7 +152,7 @@ class GetEntities extends ApiWikibase {
 				$id = $this->entityIdParser->parse( $entityId );
 				$ids[] = $id->getPrefixedId();
 			}
-			catch ( \ValueParsers\ParseException $parseException ) {
+			catch ( ParseException $parseException ) {
 				// This will error below
 				$ids[] = null;
 			}
@@ -181,7 +183,7 @@ class GetEntities extends ApiWikibase {
 
 		try {
 			$entityId = $entityIdParser->parse( $id );
-		} catch( \ValueParsers\ParseException $e ) {
+		} catch( ParseException $e ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
 		}
@@ -202,7 +204,7 @@ class GetEntities extends ApiWikibase {
 
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				/**
-				 * @var $entityContent \Wikibase\EntityContent
+				 * @var $entityContent EntityContent
 				 */
 				$entityContent = $page->getContent();
 

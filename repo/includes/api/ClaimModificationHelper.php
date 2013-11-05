@@ -238,10 +238,11 @@ class ClaimModificationHelper {
 	 * @since 0.4
 	 *
 	 * @param array $params
+	 * @param ApiBase $module
 	 *
 	 * @return Summary
 	 */
-	public function createSummary( array $params, \ApiBase $module ) {
+	public function createSummary( array $params, ApiBase $module ) {
 		$summary = new Summary( $module->getModuleName() );
 		if ( isset( $params['summary'] ) ) {
 			$summary->setUserSummary( $params['summary'] );

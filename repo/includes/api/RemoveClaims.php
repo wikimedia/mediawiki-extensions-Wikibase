@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;

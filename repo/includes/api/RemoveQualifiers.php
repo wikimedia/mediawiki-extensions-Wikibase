@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOp\ChangeOpQualifier;

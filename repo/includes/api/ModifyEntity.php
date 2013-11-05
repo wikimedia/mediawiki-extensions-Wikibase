@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use Status, User, Title;
 use ApiBase;
+use ValueParsers\ParseException;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\ItemHandler;
@@ -74,7 +75,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 			try{
 				$entityId = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $id );
-			} catch( \ValueParsers\ParseException $e ){
+			} catch( ParseException $e ){
 				$this->dieUsage( "Could not parse {$id}, No entity found", 'no-such-entity-id' );
 			}
 
