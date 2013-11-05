@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_17a1d298",
+        "filename": "lib/maintenance/dispatchChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-05T15:33:21Z",
+      "side": 1,
+      "message": "This is a blind guess, right? So please check the new path too, and fail (or at least warn) if the path still isn\u0027t found.",
+      "revId": "a30cdd83e903e1837713c5bd48126819ff9bac2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
