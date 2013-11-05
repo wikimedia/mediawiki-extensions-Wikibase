@@ -3,8 +3,15 @@
 namespace Wikibase;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
+$maintenanceFile = "$basePath/maintenance/Maintenance.php";
 
-require_once $basePath . '/maintenance/Maintenance.php';
+if ( !file_exists( $maintenanceFile ) ) {
+	// if Wikibase is not in the standard location, then a build might be used.
+	// a build may put Wikibase another level deep.
+	$maintenanceFile = __DIR__ . '/../../../../../maintenance/Maintenance.php';
+}
+
+require_once $maintenanceFile;
 
 /**
  * Maintenance script that polls for Wikibase changes in the shared wb_changes table
