@@ -51,6 +51,7 @@ return call_user_func( function() {
 		'Wikibase\Summary' => 'includes/Summary.php',
 		'Wikibase\SummaryFormatter' => 'includes/SummaryFormatter.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
+		'Wikibase\ClaimHtmlGenerator' => 'includes/ClaimHtmlGenerator.php',
 
 		// includes/ChangeOp
 		'Wikibase\ChangeOp\ChangeOps' => 'includes/ChangeOp/ChangeOps.php',
