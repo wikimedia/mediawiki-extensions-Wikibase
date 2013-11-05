@@ -230,6 +230,11 @@ return call_user_func( function() {
 		return $GLOBALS['wgDBname'];
 	};
 
+	$defaults['siteGroup'] = function ( SettingsArray $settings ) {
+		// by default lookup from SiteSQLStore, can override with setting for performance reasons
+		return null;
+	};
+
 	// Prefix to use for cache keys that should be shared among
 	// a wikibase repo and all its clients.
 	// In order to share caches between clients (and the repo)
