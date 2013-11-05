@@ -2,33 +2,17 @@
 
 namespace Wikibase\Test;
 
+use Language;
+use MediaWikiSite;
+use SiteStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 
 /**
- * Tests for the Wikibase\Client\WikibaseClient class.
+ * @covers Wikibase\Client\WikibaseClient
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -40,6 +24,7 @@ use Wikibase\SettingsArray;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
@@ -95,8 +80,38 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings = clone Settings::singleton();
 		$settings->setSetting( 'languageLinkSiteGroup', null );
 
-		$client = new WikibaseClient( $settings, \Language::factory( 'en' ), true );
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), true );
 		$this->assertNotNull( $client->getLangLinkSiteGroup() );
+	}
+
+	/**
+	 * @dataProvider getSiteGroupProvider
+	 */
+	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteStore $siteStore ) {
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), true, $siteStore );
+		$this->assertEquals( $expected, $client->getSiteGroup() );
+	}
+
+	public function getSiteGroupProvider() {
+		$siteStore = new MockSiteStore();
+
+		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
+		$site->setGroup( 'wikipedia' );
+
+		$siteStore->saveSite( $site );
+
+		$settings = clone Settings::singleton();
+		$settings->setSetting( 'siteGroup', null );
+		$settings->setSetting( 'siteGlobalID', 'enwiki' );
+
+		$settings2 = clone Settings::singleton();
+		$settings->setSetting( 'siteGroup', 'wikivoyage' );
+		$settings->setSetting( 'siteGlobalID', 'enwiki' );
+
+		return array(
+			array( 'wikipedia', $settings, $siteStore ),
+			array( 'wikivoyage', $settings2, $siteStore )
+		);
 	}
 
 	public function testGetSite() {
