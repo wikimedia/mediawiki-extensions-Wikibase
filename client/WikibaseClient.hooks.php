@@ -392,7 +392,8 @@ final class ClientHooks {
 			Settings::get( 'excludeNamespaces' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
 			Sites::singleton(),
-			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup() );
+			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
+		);
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
 
@@ -582,20 +583,14 @@ final class ClientHooks {
 		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 		$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
-		$siteId = Settings::get( 'siteGlobalID' );
-		$site = SiteSQLStore::newInstance()->getSite( $siteId );
-
-		if ( !$site ) {
-			wfWarn( 'Cannot find site ' . $siteId . ' in sites table' );
-			return true;
-		}
+		$siteGroup = WikibaseClient::getDefaultInstance()->getSiteGroup();
 
 		$editLinkInjector = new RepoItemLinkGenerator(
 			$namespaceChecker,
 			$repoLinker,
 			$entityIdParser,
 			Settings::get( 'enableSiteLinkWidget' ),
-			$site->getGroup()
+			$siteGroup
 		);
 
 		$action = Action::getActionName( $skin->getContext() );
