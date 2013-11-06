@@ -139,7 +139,7 @@ final class LibHooks {
 				'jquery.wikibase.toolbareditgroup',
 				'jquery.nativeEventHandler',
 				'jquery.client',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 			)
 		);
 
