@@ -55,7 +55,7 @@ return call_user_func( function() {
 				'themes/default/wikibase.ui.entitysearch.css',
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.wikibase.entityselector',
 			),
 			'messages' => array(
