@@ -5,6 +5,8 @@ namespace Wikibase\Api;
 use ApiBase;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\ByPropertyIdArray;
+use Wikibase\Lib\Serializers\ByPropertyListUnserializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -81,9 +83,14 @@ class SetReference extends ModifyClaim {
 			$decodedParams['snaks-order'] = $this->getArrayFromParam( $params['snaks-order'] );
 		}
 
+		/** @var Reference $newReference */
 		$newReference = $unserializer->newFromSerialization(
 			array_merge( $params, $decodedParams )
 		);
+
+		foreach( $newReference->getSnaks() as $snak ){
+			$this->snakValidation->validateSnak( $snak );
+		}
 
 		$changeOp = $this->getChangeOp( $newReference );
 
