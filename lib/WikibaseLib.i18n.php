@@ -247,6 +247,11 @@ Parameters:
 Parameters:
 * $1 - the malformed URL
 {{Related|Wikibase-validator}}',
+	'wikibase-validator-unknown-unit' => 'Input validation error when the value has an unknown unit.
+
+Parameters:
+* $1 - the unknown unit
+{{Related|Wikibase-validator}}',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
