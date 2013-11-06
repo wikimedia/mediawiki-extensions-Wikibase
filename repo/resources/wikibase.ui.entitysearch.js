@@ -69,7 +69,7 @@
 		.on( 'entityselectoropen', function( event ) {
 			updateSuggestionSpecial();
 		} )
-		.eachchange( function( event, oldVal ) {
+		.on( 'eachchange', function( event, oldVal ) {
 			updateSuggestionSpecial();
 		} );
 
