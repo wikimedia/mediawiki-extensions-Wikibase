@@ -38,7 +38,10 @@ When /^I enter (.+) in the property input field$/ do |value|
 end
 
 When /^I enter (.+) as string statement value$/ do |value|
-  on(ItemPage).statement_value_input_field = value
+  on(ItemPage) do |page|
+    page.statement_value_input_field = value
+    page.wait_for_save_button
+  end
 end
 
 When /^I enter a too long string as statement value$/ do

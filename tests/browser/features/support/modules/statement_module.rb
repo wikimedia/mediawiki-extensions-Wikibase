@@ -68,6 +68,9 @@ module StatementPage
     end
   end
 
+  def wait_for_save_button
+    save_statement_element.when_visible
+  end
 =begin
   def add_statement(property_label, statement_value)
     add_statement
