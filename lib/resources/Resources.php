@@ -281,7 +281,7 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.css',
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.effects.blind',
 				'jquery.inputAutoExpand',
 				'jquery.ui.widget'
@@ -331,7 +331,7 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool.css'
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.nativeEventHandler',
 				'jquery.inputAutoExpand',
 				'jquery.tablesorter',
@@ -544,7 +544,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.snakview/themes/default/snakview.SnakTypeSelector.css',
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.nativeEventHandler',
 				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
@@ -684,7 +684,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.autocompletestring',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.ui.suggester',
 				'jquery.ui.resizable',
 				'jquery.ui.widget',
@@ -726,7 +726,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.staticdom',
 				'jquery.valueview.experts.wikibase',
 				'wikibase.parsers',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.inputAutoExpand',
 				'wikibase.utilities',
 			),
