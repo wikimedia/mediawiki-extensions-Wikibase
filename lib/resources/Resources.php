@@ -170,13 +170,10 @@ return call_user_func( function() {
 				'wikibase.dataTypes/wikibase.dataTypes.js',
 			),
 			'dependencies' => array(
-				'wikibase',
 				'dataTypes',
+				'jquery',
 				'mw.config.values.wbDataTypes',
-				'mw.ext.valueView',
-				'jquery.valueview.experts',
-				'jquery.valueview.experts.UrlType',
-				'jquery.valueview.experts.CommonsMediaType',
+				'wikibase',
 			),
 		),
 
@@ -383,7 +380,7 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.css',
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.effects.blind',
 				'jquery.inputautoexpand',
 				'jquery.ui.widget'
@@ -433,7 +430,7 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool.css'
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.NativeEventHandler',
 				'jquery.inputautoexpand',
 				'jquery.tablesorter',
@@ -649,7 +646,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.snakview/themes/default/snakview.SnakTypeSelector.css',
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.NativeEventHandler',
 				'util.inherit',
 				'jquery.wikibase.entityselector',
@@ -659,10 +656,9 @@ return call_user_func( function() {
 				'mediawiki.legacy.shared',
 				'jquery.ui.position',
 				'jquery.ui.TemplatedWidget',
-				// valueviews for representing DataValues in snakview:
-				'jquery.valueview.experts.StringValue',
-				'jquery.valueview.experts.CommonsMediaType',
-				'jquery.valueview.experts.wikibase.entityidvalue',
+				'mw.ext.valueView',
+				'wikibase.formatters',
+				'wikibase.parsers',
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
@@ -801,7 +797,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.autocompletestring',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.ui.suggester',
 				'jquery.ui.resizable',
 				'jquery.ui.widget',
@@ -820,40 +816,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.widget',
 			),
-		),
-
-		// jQuery.valueview views for Wikibase specific DataValues/DataTypes
-		'jquery.valueview.experts.wikibase' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.valueview.experts.wikibase/experts.wikibase.js',
-			),
-			'dependencies' => array(
-				'mw.ext.valueView',
-				'mw.ext.valueFormatters',
-				'mw.ext.valueParsers',
-				'wikibase.formatters',
-				'wikibase.parsers',
-			),
-		),
-
-		'jquery.valueview.experts.wikibase.entityidvalue' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.valueview.experts.wikibase/experts.wikibase.js',
-				'jquery.valueview.experts.wikibase/experts.wikibase.EntityIdInput.js',
-				'jquery.valueview.experts.wikibase/experts.wikibase.EntityIdValue.js',
-			),
-			'dependencies' => array(
-				'jquery.valueview.BifidExpert',
-				'jquery.valueview.experts.StaticDom',
-				'jquery.valueview.experts.wikibase',
-				'jquery.eachchange',
-				'jquery.inputautoexpand',
-				'wikibase.utilities',
-				'wikibase.store.FetchedContent'
-			),
-			'messages' => array(
-				'wikibase-entity-item',
-			)
 		),
 
 		'jquery.wikibase.toolbarlabel' => $moduleTemplate + array(
@@ -924,6 +886,11 @@ return call_user_func( function() {
 
 	);
 
+	$modules = array_merge(
+		$modules,
+		include( __DIR__ . '/experts/resources.php' )
+	);
+
 	if ( defined( 'ULS_VERSION' ) ) {
 		$modules['wikibase']['dependencies'][] = 'jquery.uls.data';
 		$modules['wikibase.sites']['dependencies'] = array( 'jquery.uls.data' );
@@ -932,4 +899,3 @@ return call_user_func( function() {
 
 	return $modules;
 } );
-// @codeCoverageIgnoreEnd
