@@ -12,6 +12,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\Property;
+use Wikibase\StorageException;
 
 /**
  * @covers Wikibase\Dumpers\JsonDumpGenerator
@@ -50,7 +51,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return JsonDumpGenerator
 	 */
-	protected function newDumpGenerator( array $ids = array() ) {
+	protected function newDumpGenerator( array $ids = array(), array $missingIds = array() ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$serializer = $this->getMock( 'Wikibase\Lib\Serializers\Serializer' );
@@ -68,7 +69,11 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = $this->getMock( 'Wikibase\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $entities ) {
+			->will( $this->returnCallback( function ( EntityId $id ) use ( $entities, $missingIds ) {
+					if ( in_array( $id, $missingIds ) ) {
+						return null;
+					}
+
 					$key = $id->getPrefixedId();
 					return $entities[$key];
 				}
@@ -249,4 +254,53 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testExceptionHandler() {
+		$ids = array();
+		$missingIds = array();
+
+		for ( $i = 1; $i<=100; $i++) {
+			$id = new ItemId( "Q$i" );
+			$ids[] = $id;
+
+			if ( ( $i % 10 ) === 0 ) {
+				$missingIds[] = $id;
+			}
+		}
+
+		$dumper = $this->newDumpGenerator( $ids, $missingIds );
+		$idList = new ArrayObject( $ids );
+
+		$exceptionHandler = $this->getMock( 'ExceptionHandler' );
+		$exceptionHandler->expects( $this->exactly( count( $missingIds ) ) )
+			->method( 'handleException' );
+
+		$dumper->setExceptionHandler( $exceptionHandler );
+
+		ob_start();
+		$dumper->generateDump( $idList );
+		ob_end_clean();
+	}
+
+	public function testProgressReporter() {
+		$ids = array();
+
+		for ( $i = 1; $i<=100; $i++) {
+			$id = new ItemId( "Q$i" );
+			$ids[] = $id;
+		}
+
+		$dumper = $this->newDumpGenerator( $ids );
+		$idList = new ArrayObject( $ids );
+
+		$progressReporter = $this->getMock( 'MessageReporter' );
+		$progressReporter->expects( $this->exactly( ( count( $ids ) / 10 ) +1 ) )
+			->method( 'reportMessage' );
+
+		$dumper->setProgressInterval( 10 );
+		$dumper->setProgressReporter( $progressReporter );
+
+		ob_start();
+		$dumper->generateDump( $idList );
+		ob_end_clean();
+	}
 }
