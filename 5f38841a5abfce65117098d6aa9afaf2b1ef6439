@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_355ec142",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-11-06T18:18:10Z",
+      "side": 1,
+      "message": "Please add message dcoumentation when adding message keys. See https://www.mediawiki.org/wiki/I18n#Message_documentation for details.",
+      "revId": "5f38841a5abfce65117098d6aa9afaf2b1ef6439",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
