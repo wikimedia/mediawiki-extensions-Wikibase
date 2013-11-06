@@ -7,9 +7,6 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -20,10 +17,10 @@ class ItemDeletionUpdate extends EntityDeletionUpdate {
 	 *
 	 * @since 0.1
 	 *
-	 * @param ItemContent $content
+	 * @param ItemContent $newContent
 	 */
-	public function __construct( ItemContent $content ) {
-		$this->content = $content;
+	public function __construct( ItemContent $newContent ) {
+		$this->content = $newContent;
 	}
 
 	/**

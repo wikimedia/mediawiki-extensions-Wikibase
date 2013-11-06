@@ -270,7 +270,7 @@ class ItemContent extends EntityContent {
 
 		return array_merge(
 			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
-			array( new ItemModificationUpdate( $this ) )
+			array( new ItemModificationUpdate( $this, $old ) )
 		);
 	}
 

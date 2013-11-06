@@ -4,9 +4,16 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikiba
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=repo/RELEASE-NOTES
 
 
+=== Version 0.5 ===
+(dev)
+
+* WikibaseEntityModificationUpdate hook now only gets fired on modification and not on insertion and
+takes different arguments then it did before.
+* WikibaseEntityInsertionUpdate hook was added
+* WikibaseEntityDeletionUpdate hook now gets an EntityContent rather than an EntityDeletionUpdate.
 
 === Version 0.4 ===
-(dev)
+(not released)
 
 ; Interface
 
@@ -19,7 +26,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Referenced entities are now added to the pagelinks table and thus show up on places such as Special:WhatLinksHere
 
 === Version 0.3 ===
-(???)
+(not released)
 
 ; Interface
 
@@ -45,7 +52,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Internal serialization logic for Snak, Claim, Statement and Reference has been implemented in toArray and newFromArray.
 
 === Version 0.2 ===
-(???)
+(not released)
 
 * Added Special:SetLabel
 * Added Special:EntitiesWithoutLabel
