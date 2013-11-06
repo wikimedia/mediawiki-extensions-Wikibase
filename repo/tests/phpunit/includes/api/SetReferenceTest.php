@@ -45,6 +45,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( 3 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
 			$hasProperties = true;
 		}
 
@@ -298,6 +303,39 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			array( 'xyz', $snakHash, $refHash, 'invalid-guid' ),
 			array( 'x$y$z', $snakHash, $refHash, 'invalid-guid' )
 		);
+	}
+
+	/**
+	 * @dataProvider invalidClaimProvider
+	 * @todo test more bad serializations...
+	 */
+	public function testInvalidSerialization() {
+		$this->setExpectedException( 'UsageException' );
+		// has bad calender model
+		$params = array(
+			'action' => 'wbsetreference',
+			'statement' => 'Foo$Guid',
+			'snaks' => '{
+   "P813":[
+      {
+         "snaktype":"value",
+         "property":"P813",
+         "datavalue":{
+            "value":{
+               "time":"+00000002013-10-05T00:00:00Z",
+               "timezone":0,
+               "before":0,
+               "after":0,
+               "precision":11,
+               "calendarmodel":"http://www.wikidata.org/entity/Q111"
+            },
+            "type":"time"
+         }
+      }
+   ]
+}',
+		);
+		$this->doApiRequestWithToken( $params );
 	}
 
 }
