@@ -5,6 +5,7 @@ namespace Wikibase;
 use Diff\Diff;
 use Diff\Differ;
 use Diff\DiffOpChange;
+use Wikibase\DataModel\Internal\ObjectComparer;
 
 /**
  * Class for generating a ClaimDifference given two claims.
@@ -69,7 +70,9 @@ class ClaimDiffer {
 	private function diffMainSnaks( $oldClaim, $newClaim ) {
 		$oldClaimMainSnak = $oldClaim === null ? null : $oldClaim->getMainSnak();
 		$newClaimMainSnak = $newClaim === null ? null : $newClaim->getMainSnak();
-		if( $oldClaimMainSnak !== $newClaimMainSnak ){
+
+		$mainSnakComparer = new ObjectComparer();
+		if( !$mainSnakComparer->dataEquals( $oldClaimMainSnak, $newClaimMainSnak ) ) {
 			return new DiffOpChange( $oldClaimMainSnak, $newClaimMainSnak );
 		}
 		return null;
@@ -79,12 +82,14 @@ class ClaimDiffer {
 	 * @param Claim $oldClaim
 	 * @param Claim $newClaim
 	 *
-	 * @return DiffOpChange|null
+	 * @return Diff
 	 */
 	private function diffQualifiers( $oldClaim, $newClaim ) {
 		$oldQualifiers = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getQualifiers() );
 		$newQualifiers = $newClaim === null ? array() : iterator_to_array( $newClaim->getQualifiers() );
-		if( $oldQualifiers !== $newQualifiers ){
+
+		$qualifierComparer = new ObjectComparer();
+		if (  !$qualifierComparer->dataEquals( $oldQualifiers, $newQualifiers ) ) {
 			return new Diff( $this->listDiffer->doDiff( $oldQualifiers, $newQualifiers ), false );
 		}
 		return null;
@@ -99,7 +104,9 @@ class ClaimDiffer {
 	private function diffRank( $oldClaim, $newClaim ) {
 		$oldRank = $oldClaim === null ? null : $oldClaim->getRank();
 		$newRank = $newClaim === null ? null : $newClaim->getRank();
-		if( $oldRank !== $newRank ){
+
+		$rankComparer = new ObjectComparer();
+		if( !$rankComparer->dataEquals( $oldRank, $newRank ) ){
 			return new DiffOpChange( $oldRank, $newRank );
 		}
 		return null;
@@ -109,12 +116,14 @@ class ClaimDiffer {
 	 * @param Statement $oldClaim
 	 * @param Statement $newClaim
 	 *
-	 * @return DiffOpChange|null
+	 * @return Diff
 	 */
 	private function diffReferences( $oldClaim, $newClaim ) {
 		$oldReferences = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getReferences() );
 		$newReferences = $newClaim === null ? array() : iterator_to_array( $newClaim->getReferences() );
-		if( $oldReferences !== $newReferences ){
+
+		$referenceComparer = new ObjectComparer();
+		if ( !$referenceComparer->dataEquals( $oldReferences, $newReferences ) ) {
 			return new Diff( $this->listDiffer->doDiff( $oldReferences, $newReferences ), false );
 		}
 		return null;
