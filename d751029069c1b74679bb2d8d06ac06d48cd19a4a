@@ -73,6 +73,23 @@
     },
     {
       "key": {
+        "uuid": "291c1151_b807011a",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-11-07T14:20:16Z",
+      "side": 1,
+      "message": "would be nice to have to || in the second line to be consistent with the style throughout the file.",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_f977d29c",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 5
@@ -120,6 +137,24 @@
       "side": 1,
       "message": "Well, if you also set the cookie, the message would stay hidden after the user logs out.  *shrug* don\u0027t care much :)",
       "parentUuid": "291c1151_1d11f952",
+      "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_9829658d",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-11-07T14:20:16Z",
+      "side": 1,
+      "message": "If there is no need for the cookie anymore, we shouldn\u0027t use it. I heard complains about having cookies on our wikis in general, this will make some people happy.",
+      "parentUuid": "291c1151_f7d196cc",
       "revId": "d751029069c1b74679bb2d8d06ac06d48cd19a4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
