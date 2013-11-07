@@ -36,7 +36,7 @@ class ObjectComparer {
 	 *
 	 * @return bool
 	 */
-	public function dataEquals( &$a, &$b, $skip = null ) {
+	public function dataEquals( $a, $b, $skip = null ) {
 		if ( is_array( $a ) ) {
 			if ( !is_array( $b ) ) {
 				return false;
