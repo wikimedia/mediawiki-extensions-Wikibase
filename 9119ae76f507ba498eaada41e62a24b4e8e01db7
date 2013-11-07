@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_951f7068",
+        "filename": "repo/tests/phpunit/includes/api/SetReferenceTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-11-07T14:10:29Z",
+      "side": 1,
+      "message": "TYPO!!",
+      "revId": "9119ae76f507ba498eaada41e62a24b4e8e01db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
