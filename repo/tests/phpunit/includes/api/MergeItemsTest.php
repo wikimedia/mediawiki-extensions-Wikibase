@@ -2,16 +2,13 @@
 
 namespace Wikibase\Test\Api;
 
-use Wikibase\Claim;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\ItemContent;
-use Wikibase\Property;
 use Wikibase\PropertyContent;
 
 /**
- * Unit tests for the Wikibase\Repo\Api\MergeItems class.
+ * @covers Wikibase\Api\MergeItems
  *
  * @since 0.5
  *
@@ -28,8 +25,6 @@ use Wikibase\PropertyContent;
  * @author Adam Shorland
  */
 class MergeItemsTest extends WikibaseApiTestCase {
-
-	//todo add check merge conflicts are thrown
 
 	private static $hasSetup;
 
@@ -50,86 +45,127 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	}
 
 	public static function provideData(){
-		return array(
-			//check all elements move individually
-			array(
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array(),
-				array(),
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			),
-			array(//make sure items with the same labels are still merged
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array(),
-				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			),
-			array(
-				array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-				array(),
-				array(),
-				array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			),
-			array(
-				array( 'aliases' => array( array( "language" => "nl", "value" => "Dickes B" ) ) ),
-				array(),
-				array(),
-				array( 'aliases' => array( array( "language" => "nl", "value" => "Dickes B" ) ) ),
-			),
-			array(
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-				array(),
-				array(),
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-			),
-			array(
-				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-				array(),
-				array(),
-				array( 'claims' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-					'type' => 'statement', 'rank' => 'normal' ) ) ),
-			),
-			//check merges of elements work as expected
-			array(
-				array( 'aliases' => array( array( "language" => "nl", "value" => "Ali1" ) ) ),
-				array( 'aliases' => array( array( "language" => "nl", "value" => "Ali2" ) ) ),
-				array(),
-				array( 'aliases' => array( array( "language" => "nl", "value" => "Ali2" ),array( "language" => "nl", "value" => "Ali1" ) ) ),
-			),
-			array(
-				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
-					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
-					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-				array(),
-				array( 'claims' => array(
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
-			),
-			array(
-				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-				array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-					'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-				array(),
-				array( 'claims' => array(
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-					array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
-			),
+		$testCases = array();
+		$testCases['labelMerge'] = array(
+			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+			array(),
+			array(),
+			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 		);
+		$testCases['identicalLabelMerge'] = array(
+			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+			array(),
+			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+		);
+		$testCases['ignoreConflictLabelMerge'] = array(
+			array( 'labels' => array(
+				'en' => array( 'language' => 'en', 'value' => 'foo' ),
+				'de' => array( 'language' => 'de', 'value' => 'berlin' )
+			) ),
+			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
+			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+			array( 'labels' => array(
+				'en' => array( 'language' => 'en', 'value' => 'bar' ),
+				'de' => array( 'language' => 'de', 'value' => 'berlin' )
+			) ),
+			'label'
+		);
+		$testCases['descriptionMerge'] = array(
+			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
+			array(),
+			array(),
+			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
+		);
+		$testCases['identicalDescriptionMerge'] = array(
+			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
+			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
+			array(),
+			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
+		);
+		$testCases['ignoreConflictDescriptionMerge'] = array(
+			array( 'descriptions' => array(
+				'en' => array( 'language' => 'en', 'value' => 'foo' ),
+				'de' => array( 'language' => 'de', 'value' => 'berlin' )
+			) ),
+			array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
+			array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+			array( 'descriptions' => array(
+				'en' => array( 'language' => 'en', 'value' => 'bar' ),
+				'de' => array( 'language' => 'de', 'value' => 'berlin' )
+			) ),
+			'description'
+		);
+		$testCases['aliasesMerge'] = array(
+			array( 'aliases' => array( array( "language" => "nl", "value" => "Dickes B" ) ) ),
+			array(),
+			array(),
+			array( 'aliases' => array( array( "language" => "nl", "value" => "Dickes B" ) ) ),
+		);
+		$testCases[] = array(
+			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali1" ) ) ),
+			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali2" ) ) ),
+			array(),
+			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali2" ),array( "language" => "nl", "value" => "Ali1" ) ) ),
+		);
+		$testCases['sitelinksMerge'] = array(
+			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
+			array(),
+			array(),
+			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
+		);
+		$testCases['claimMerge'] = array(
+			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
+			array(),
+			array(),
+			array( 'claims' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+				'type' => 'statement', 'rank' => 'normal' ) ) ),
+		);
+		$testCases['claimMerge'] = array(
+			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
+				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
+			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
+				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
+			array(),
+			array( 'claims' => array(
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
+		);
+		//Identical claims should not be replaced but duplicated instead
+		$testCases['identicalClaimMerge'] = array(
+			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
+			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
+			array(),
+			array( 'claims' => array(
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
+		);
+		return $testCases;
 	}
 
 	/**
 	 * @dataProvider provideData
 	 */
-	function testMergeRequest( $pre1, $pre2, $expected1, $expected2 ){
+	function testMergeRequest( $pre1, $pre2, $expected1, $expected2, $ignoreConflicts = null ){
+		// -- set up params ---------------------------------
+		$params = array(
+			'action' => 'wbmergeitems',
+			'fromid' => EntityTestHelper::getId( 'Empty' ),
+			'toid' => EntityTestHelper::getId( 'Empty2' ),
+			'summary' => 'CustomSummary!',
+		);
+		if( $ignoreConflicts !== null ){
+			$params['ignoreconflicts'] = $ignoreConflicts;
+		}
 		// -- prefill the entities --------------------------------------------
 		$this->doApiRequestWithToken( array(
 			'action' => 'wbeditentity',
@@ -143,12 +179,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			'data' => json_encode( $pre2 ) ) );
 
 		// -- do the request --------------------------------------------
-		list( $result,, ) = $this->doApiRequestWithToken( array(
-			'action' => 'wbmergeitems',
-			'fromid' => EntityTestHelper::getId( 'Empty' ),
-			'toid' => EntityTestHelper::getId( 'Empty2' ),
-			'summary' => 'CustomSummary!',
-		) );
+		list( $result,, ) = $this->doApiRequestWithToken( $params );
 
 		// -- check the result --------------------------------------------
 		$this->assertResultSuccess( $result );
@@ -198,6 +229,12 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			array( //7 to id is property
 				'p' => array( 'fromid' => 'q999', 'toid' => 'p56' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
+			array( //8 bad ignoreconficts (GETVALIDID is replaced by a valid id)
+				'p' => array( 'fromid' => 'GETVALIDID', 'toid' => 'GETVALIDID', 'ignoreconflicts' => 'foo' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
+			array( //9 bad ignoreconficts (GETVALIDID is replaced by a valid id)
+				'p' => array( 'fromid' => 'GETVALIDID', 'toid' => 'GETVALIDID', 'ignoreconflicts' => 'label|foo' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
 		);
 	}
 
@@ -207,6 +244,12 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	public function testMergeItemsParamsExceptions( $params, $expected ){
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbmergeitems';
+		if( isset( $params['from'] ) && $params['from'] === 'GETVALIDID' ){
+			$params['from'] = EntityTestHelper::getId( 'Empty' );
+		}
+		if( isset( $params['to'] ) && $params['to'] === 'GETVALIDID' ){
+			$params['to'] = EntityTestHelper::getId( 'Empty2' );
+		}
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 

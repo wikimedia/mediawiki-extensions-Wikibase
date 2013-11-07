@@ -2,26 +2,19 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, User, Status, SiteList;
+use ApiBase;
+use Deserializers\Exceptions\InvalidAttributeException;
+use Status;
 use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
-use Wikibase\Claim;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityContent;
-use Wikibase\Item;
 use Wikibase\ItemContent;
-use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\Utils;
 
 /**
  * @since 0.5
- *
- * @ingroup WikibaseRepo
- * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
@@ -60,19 +53,35 @@ class MergeItems extends ApiWikibase {
 			$this->dieUsage( $status->getMessage(), 'permissiondenied');
 		}
 
+		$ignoreConflicts = $this->getIgnoreConflicts( $params );
+
 		/**
 		 * @var ItemContent $fromEntityContent
 		 * @var ItemContent $toEntityContent
 		 */
 		try{
-			$changeOps = new ChangeOpsMerge( $fromEntityContent, $toEntityContent );
+			$changeOps = new ChangeOpsMerge(
+				$fromEntityContent,
+				$toEntityContent,
+				$ignoreConflicts
+			);
 			$changeOps->apply();
 		}
-		catch( ChangeOpException $e ){
-			$this->dieUsage( $e->getMessage(), 'failed-save');
+		catch( InvalidAttributeException $e ) {
+			$this->dieUsage( $e->getMessage(), 'param-invalid' );
+		}
+		catch( ChangeOpException $e ) {
+			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
 		$this->attemptSaveMerge( $fromEntityContent, $toEntityContent, $params );
+	}
+
+	protected function getIgnoreConflicts( $params ) {
+		if( isset( $params['ignoreconflicts'] ) ){
+			return $params['ignoreconflicts'];
+		}
+		return array();
 	}
 
 	protected function addEntityToOutput( EntityContent $entityContent, Status $status, $name ) {
@@ -167,8 +176,9 @@ class MergeItems extends ApiWikibase {
 			$this->addEntityToOutput( $toItemContent, $toStatus, 'to' );
 
 			$this->getResult()->addValue( null,	'success', 1 );
-
+		} else {
 			//todo if the second result is not a success we should probably undo the first change
+			$this->getResult()->addValue( null,	'success', 0 );
 		}
 	}
 
@@ -195,6 +205,11 @@ class MergeItems extends ApiWikibase {
 				'toid' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'ignoreconflicts' => array(
+					ApiBase::PARAM_ISMULTI => true,
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
 				'summary' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
@@ -212,6 +227,7 @@ class MergeItems extends ApiWikibase {
 			array(
 				'fromid' => array( 'The id to merge from' ),
 				'toid' => array( 'The id to merge to' ),
+				'ignoreconflicts' => array( 'Array of elements of the item to ignore conflicts for, can only contain values of "label" and or "description"' ),
 				'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 				'summary' => array( 'Summary for the edit.',
 					"Will be prepended by an automatically generated comment. The length limit of the
@@ -236,8 +252,14 @@ class MergeItems extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbmergeitems&fromid=Q42&toid=Q222' => 'Merges data from Q42 into Q222',
-			'api.php?action=wbmergeitems&fromid=Q555&toid=Q3' => 'Merges data from Q555 into Q3',
+			'api.php?action=wbmergeitems&fromid=Q42&toid=Q222' =>
+				'Merges data from Q42 into Q222',
+			'api.php?action=wbmergeitems&fromid=Q555&toid=Q3' =>
+				'Merges data from Q555 into Q3',
+			'api.php?action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=label' =>
+				'Merges data from Q66 into Q99 ignoring any conflicting labels',
+			'api.php?action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=label|description' =>
+				'Merges data from Q66 into Q99 ignoring any conflicting labels and descriptions',
 		);
 	}
 
