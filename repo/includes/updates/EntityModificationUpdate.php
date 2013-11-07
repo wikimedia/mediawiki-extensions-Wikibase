@@ -6,25 +6,7 @@ namespace Wikibase;
  * Represents an update to the structured storage for a single Entity.
  * TODO: we could keep track of actual changes in a lot of cases, and so be able to do less (expensive) queries to update.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -32,34 +14,30 @@ namespace Wikibase;
 class EntityModificationUpdate extends \DataUpdate {
 
 	/**
-	 * The entity to update.
-	 *
 	 * @since 0.1
 	 *
 	 * @var EntityContent
 	 */
-	protected $content;
+	protected $newContent;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var null|EntityContent
+	 */
+	protected $oldContent;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $content
+	 * @param EntityContent $newContent
+	 * @param EntityContent|null $oldContent
 	 */
-	public function __construct( EntityContent $content ) {
-		$this->content = $content;
-	}
-
-	/**
-	 * Returns the EntityContent that's being saved.
-	 *
-	 * @since 0.1
-	 *
-	 * @return EntityContent
-	 */
-	public function getEntityContent() {
-		return $this->content;
+	public function __construct( EntityContent $newContent, EntityContent $oldContent = null ) {
+		$this->newContent = $newContent;
+		$this->oldContent = $oldContent;
 	}
 
 	/**
@@ -70,23 +48,18 @@ class EntityModificationUpdate extends \DataUpdate {
 	public function doUpdate() {
 		wfProfileIn( __METHOD__ );
 
+		$this->updateRepoStore();
+		$this->fireHooks();
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	protected function updateRepoStore() {
 		$store = StoreFactory::getStore();
-		$entity = $this->content->getEntity();
+		$entity = $this->newContent->getEntity();
 
 		$store->getTermIndex()->saveTermsOfEntity( $entity );
 		$this->doTypeSpecificStuff( $store, $entity );
-
-		/**
-		 * Gets called after the structured save of an item has been comitted,
-		 * allowing for extensions to do additional storage/indexing.
-		 *
-		 * @since 0.1
-		 *
-		 * @param EntityModificationUpdate $this
-		 */
-		wfRunHooks( 'WikibaseEntityModificationUpdate', array( $this ) );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -99,6 +72,44 @@ class EntityModificationUpdate extends \DataUpdate {
 	 */
 	protected function doTypeSpecificStuff( Store $store, Entity $entity ) {
 		// Override to add behavior.
+	}
+
+	protected function fireHooks() {
+		if ( $this->isInsertionUpdate() ) {
+			$this->firstInsertionHook();
+		}
+		else {
+			$this->fireModificationHook();
+		}
+	}
+
+	protected function isInsertionUpdate() {
+		return $this->oldContent === null;
+	}
+
+	protected function firstInsertionHook() {
+		/**
+		 * Gets called after the structured save of an item has been committed,
+		 * allowing for extensions to do additional storage/indexing.
+		 *
+		 * @since 0.5
+		 *
+		 * @param EntityContent $entityContent
+		 */
+		wfRunHooks( 'WikibaseEntityInsertionUpdate', array( $this->newContent ) );
+	}
+
+	protected function fireModificationHook() {
+		/**
+		 * Gets called after the structured save of an item has been committed,
+		 * allowing for extensions to do additional storage/indexing.
+		 *
+		 * @since 0.5
+		 *
+		 * @param EntityContent $newEntityContent
+		 * @param EntityContent $oldEntityContent
+		 */
+		wfRunHooks( 'WikibaseEntityModificationUpdate', array( $this->newContent, $this->oldContent ) );
 	}
 
 }

@@ -186,7 +186,7 @@ class PropertyContent extends EntityContent {
 		return array_merge(
 			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
 			array(
-				new EntityModificationUpdate( $this ),
+				new EntityModificationUpdate( $this, $old ),
 				new PropertyInfoUpdate( $this->getProperty(), $infoStore ),
 			)
 		);
