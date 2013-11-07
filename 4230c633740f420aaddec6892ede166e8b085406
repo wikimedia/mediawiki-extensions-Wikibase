@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_3854f1c7",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-07T15:05:41Z",
+      "side": 1,
+      "message": "Please document parameter types (and add type hints).",
+      "revId": "4230c633740f420aaddec6892ede166e8b085406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
