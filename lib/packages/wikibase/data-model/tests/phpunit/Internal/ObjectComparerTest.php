@@ -24,6 +24,7 @@ class ObjectComparerTest extends \PHPUnit_Framework_TestCase {
 			array( 'abc', 'abc', true ),
 			array( new \Exception(), new \Exception(), true ),
 			array( new \Exception( 'foo' ), new \Exception( 'foo' ), true ),
+			array( new StubComparable( 'foo' ), new StubComparable( 'foo' ), true ),
 			//notequals
 			array( array(), array( 'foo' ), false ),
 			array( array( 'foo' ), array( 'foo2' ), false ),
@@ -33,8 +34,11 @@ class ObjectComparerTest extends \PHPUnit_Framework_TestCase {
 			array( 100, 101, false ),
 			array( 'abc', 'abcc', false ),
 			array( new \Exception(), null, false ),
-			array( new \Exception( 'foo2' ), new \Exception( 'foo' ), true ),
 			array( false, null, false ),
+			array( new StubComparable( 'foo' ), new StubComparable( 'foo1' ), false ),
+			array( new StubComparable( 'foo' ), new StubComparable( null ), false ),
+			array( new StubComparable( 'foo' ), null, false ),
+			array( null, new StubComparable( 'foo' ), false ),
 		);
 	}
 
@@ -45,6 +49,25 @@ class ObjectComparerTest extends \PHPUnit_Framework_TestCase {
 		$comparer = new ObjectComparer();
 		$result = $comparer->dataEquals( $a, $b );
 		$this->assertEquals( $expected, $result );
+	}
+
+}
+
+class StubComparable {
+
+	protected $field;
+
+	public function __construct( $field ) {
+		$this->field = $field;
+	}
+
+	public function equals( $otherComparable ) {
+		return $otherComparable instanceof StubComparable
+		&& $otherComparable->getField() === $this->field;
+	}
+
+	public function getField() {
+		return $this->field;
 	}
 
 }

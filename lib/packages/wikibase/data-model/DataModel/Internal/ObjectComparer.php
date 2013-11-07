@@ -91,6 +91,10 @@ class ObjectComparer {
 				return false;
 			}
 
+			if( method_exists( $a, 'equals' ) ){
+				return $a->equals( $b );
+			}
+
 			// special handling for some types of objects here
 			return $this->dataEquals( get_object_vars( $a ), get_object_vars( $b ) );
 		} else if ( is_object( $b ) ) {
