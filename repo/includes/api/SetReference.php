@@ -52,10 +52,16 @@ class SetReference extends ModifyClaim {
 			$this->validateReferenceHash( $claim, $params['reference'] );
 		}
 
+		if( isset( $params['snaks-order' ] ) ) {
+			$snaksOrder = $this->getArrayFromParam( $params['snaks-order'] );
+		} else {
+			$snaksOrder = array();
+		}
+
 		$newReference = new Reference(
 			$this->getSnaks(
 				$this->getArrayFromParam( $params['snaks'] ),
-				$this->getArrayFromParam( $params['snaks-order'] )
+				$snaksOrder
 			)
 		);
 
