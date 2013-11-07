@@ -3,7 +3,9 @@
 namespace Wikibase\Lib;
 
 use Language;
+use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
@@ -62,7 +64,7 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_PLAIN => array(
 			'VT:string' => 'ValueFormatters\StringFormatter',
 			'VT:globecoordinate' => 'ValueFormatters\GlobeCoordinateFormatter',
-			'VT:quantity' => 'ValueFormatters\QuantityFormatter',
+			'VT:quantity' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newQuantityFormatter' ),
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
 			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdFormatter' ),
 			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter'
@@ -422,7 +424,7 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
-	 * Used to inject services into the Formatter.
+	 * Used to inject services into the EntityIdLabelFormatter.
 	 *
 	 * @param FormatterOptions $options
 	 * @param WikibaseValueFormatterBuilders $builders
@@ -431,6 +433,21 @@ class WikibaseValueFormatterBuilders {
 	 */
 	protected static function newEntityIdFormatter( FormatterOptions $options, $builders ) {
 		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+	}
+
+	/**
+	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
+	 * Used to compose the QuantityFormatter.
+	 *
+	 * @param FormatterOptions $options
+	 * @param WikibaseValueFormatterBuilders $builders
+	 *
+	 * @return QuantityFormatter
+	 */
+	protected static function newQuantityFormatter( FormatterOptions $options, $builders ) {
+		//TODO: use a builder for this DecimalFormatter
+		$decimalFormatter = new DecimalFormatter( $options );
+		return new QuantityFormatter( $decimalFormatter, $options );
 	}
 
 	/**
