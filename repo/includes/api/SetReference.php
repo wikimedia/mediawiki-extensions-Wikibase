@@ -3,9 +3,9 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\SnakList;
@@ -16,25 +16,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 /**
  * API module for creating a reference or setting the value of an existing one.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.3
- *
- * @ingroup WikibaseRepo
- * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -70,19 +52,11 @@ class SetReference extends ModifyClaim {
 			$this->validateReferenceHash( $claim, $params['reference'] );
 		}
 
-		$serializerFactory = new SerializerFactory();
-		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Reference' );
-
-		$decodedParams = array(
-			'snaks' => $this->getArrayFromParam( $params['snaks'] )
-		);
-
-		if( isset( $params['snaks-order' ] ) ) {
-			$decodedParams['snaks-order'] = $this->getArrayFromParam( $params['snaks-order'] );
-		}
-
-		$newReference = $unserializer->newFromSerialization(
-			array_merge( $params, $decodedParams )
+		$newReference = new Reference(
+			$this->getSnaks(
+				$this->getArrayFromParam( $params['snaks'] ),
+				$this->getArrayFromParam( $params['snaks-order'] )
+			)
 		);
 
 		$changeOp = $this->getChangeOp( $newReference );
@@ -131,7 +105,7 @@ class SetReference extends ModifyClaim {
 	 * @return array
 	 */
 	protected function getArrayFromParam( $arrayParam ) {
-		$rawArray = \FormatJson::decode( $arrayParam, true );
+		$rawArray = FormatJson::decode( $arrayParam, true );
 
 		if ( !is_array( $rawArray ) || !count( $rawArray ) ) {
 			$this->dieUsage( 'No array or invalid JSON given', 'invalid-json' );
@@ -143,8 +117,8 @@ class SetReference extends ModifyClaim {
 	/**
 	 * @since 0.3
 	 *
-	 * @param array $rawSnaks
-	 * @param array $snakOrder List of property ids the snaks are supposed to be ordered by.
+	 * @param array $rawSnaks array of snaks
+	 * @param array $snakOrder array of property ids the snaks are supposed to be ordered by.
 	 *
 	 * @return SnakList
 	 */
@@ -173,9 +147,15 @@ class SetReference extends ModifyClaim {
 			}
 		} catch( InvalidArgumentException $invalidArgumentException ) {
 			// Handle Snak instantiation failures
-			$this->dieUsage( 'Failed to get reference from reference Serialization ' . $invalidArgumentException->getMessage() );
+			$this->dieUsage(
+				'Failed to get reference from reference Serialization ' . $invalidArgumentException->getMessage(),
+				'invalid-json'
+			);
 		} catch( OutOfBoundsException $outOfBoundsException ) {
-			$this->dieUsage( 'Failed to get reference from reference Serialization ' . $outOfBoundsException->getMessage() );
+			$this->dieUsage(
+				'Failed to get reference from reference Serialization ' . $outOfBoundsException->getMessage(),
+				'invalid-json'
+			);
 		}
 
 		return $snaks;
@@ -201,10 +181,10 @@ class SetReference extends ModifyClaim {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Reference $reference
+	 * @param Reference $reference
 	 */
 	protected function outputReference( Reference $reference ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $reference );
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
