@@ -27,6 +27,28 @@ class SimpleSiteLink {
 	 */
 	protected $badges;
 
+
+	/**
+	 * @param ItemId[] $badges
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	protected function assertBadgesAreValid( $badges ) {
+		if ( !is_array( $badges ) ) {
+			throw new InvalidArgumentException( '$badges needs to be an array' );
+		}
+
+		foreach( $badges as $badge ) {
+			if ( !( $badge instanceof ItemId ) ) {
+				throw new InvalidArgumentException( 'Each element in $badges needs to be an ItemId' );
+			}
+		}
+
+		if ( count( $badges ) !== count( array_unique( $badges ) ) ) {
+			throw new InvalidArgumentException( '$badges array cannot contain duplicates' );
+		}
+	}
+
 	/**
 	 * @param string $siteId
 	 * @param string $pageName
@@ -43,15 +65,7 @@ class SimpleSiteLink {
 			throw new InvalidArgumentException( '$pageName needs to be a string' );
 		}
 
-		if ( !is_array( $badges ) ) {
-			throw new InvalidArgumentException( '$badges needs to be an array' );
-		}
-
-		foreach( $badges as $badge ) {
-			if ( !( $badge instanceof ItemId ) ) {
-				throw new InvalidArgumentException( 'Each element in $badges needs to be an ItemId' );
-			}
-		}
+		$this->assertBadgesAreValid( $badges );
 
 		$this->siteId = $siteId;
 		$this->pageName = $pageName;

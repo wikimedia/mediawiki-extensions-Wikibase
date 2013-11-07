@@ -158,16 +158,17 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider stuffThatIsNotArrayOfItemIdsProvider
+	 * @dataProvider invalidBadgesProvider
 	 */
-	public function testCannotConstructWithNonArrayOfItemIdsBadges( $invalidBadges ) {
+	public function testCannotConstructWithInvalidBadges( $invalidBadges ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new SimpleSiteLink( 'enwiki', 'Wikidata', $invalidBadges );
 	}
 
-	public function stuffThatIsNotArrayOfItemIdsProvider() {
+	public function invalidBadgesProvider() {
 		$argLists = array();
 
+		// non ItemIds
 		$argLists[] = array( array(
 			'nyan',
 			42
@@ -183,6 +184,13 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( array(
 			new PropertyId( 'P2' ),
 			new PropertyId( 'P3' )
+		) );
+
+		// duplicates
+		$argLists[] = array( array(
+			new ItemId( 'Q42' ),
+			new ItemId( 'q149' ),
+			new ItemId( 'q42' )
 		) );
 
 		return $argLists;
