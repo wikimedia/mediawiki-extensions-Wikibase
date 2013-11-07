@@ -2,9 +2,9 @@
 
 namespace Wikibase\ChangeOp;
 
+use InvalidArgumentException;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -18,17 +18,37 @@ class ChangeOpsMerge {
 	private $toItemContent;
 	private $fromChangeOps;
 	private $toChangeOps;
+	/** @var array */
+	private $ignoreConflicts;
 
 	/**
 	 * @param ItemContent $fromItemContent
 	 * @param ItemContent $toItemContent
+	 * @param array $ignoreConflicts list of elements to ignore conflicts for
+	 *   can only contain 'label' and or 'description'
 	 */
-	public function __construct( ItemContent $fromItemContent, ItemContent $toItemContent ) {
+	public function __construct(
+		ItemContent $fromItemContent,
+		ItemContent $toItemContent,
+		$ignoreConflicts = array()
+	) {
 		$this->fromItemContent = $fromItemContent;
 		$this->toItemContent = $toItemContent;
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
+		$this->ignoreConflicts = $ignoreConflicts;
+		$this->assertValidIgnoreConflictValues();
+	}
 
+	private function assertValidIgnoreConflictValues() {
+		if( !is_array( $this->ignoreConflicts ) ){
+			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );
+		}
+		foreach( $this->ignoreConflicts as $ignoreConflict ){
+			if( $ignoreConflict !== 'label' && $ignoreConflict !== 'description' ){
+				throw new InvalidArgumentException( '$ignoreConflicts array can only contain "label" or "description"' );
+			}
+		}
 	}
 
 	public function apply() {
@@ -53,7 +73,9 @@ class ChangeOpsMerge {
 				$this->toChangeOps->add( new ChangeOpLabel( $langCode, $label ) );
 			} else {
 				//todo add the option to merge conflicting labels into the aliases
-				throw new ChangeOpException( "Conflicting labels for language {$langCode}" );
+				if( !in_array( 'label', $this->ignoreConflicts ) ){
+					throw new ChangeOpException( "Conflicting labels for language {$langCode}" );
+				}
 			}
 		}
 	}
@@ -66,7 +88,9 @@ class ChangeOpsMerge {
 				$this->toChangeOps->add( new ChangeOpDescription( $langCode, $desc ) );
 			} else {
 				//todo add the option to ignore description conflicts, or prioritise one
-				throw new ChangeOpException( "Conflicting descriptions for language {$langCode}" );
+				if( !in_array( 'description', $this->ignoreConflicts ) ){
+					throw new ChangeOpException( "Conflicting descriptions for language {$langCode}" );
+				}
 			}
 		}
 	}
