@@ -22,14 +22,45 @@ use Wikibase\ItemContent;
  */
 class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 
-	public function testCanConstruct() {
-		$from = $this->getItemContent( 'Q111' );
-		$to = $this->getItemContent( 'Q222' );
-		$changeOps = new ChangeOpsMerge( $from, $to );
+	/**
+	 * @dataProvider provideValidConstruction
+	 */
+	public function testCanConstruct( $from, $to, $ignoreConflicts ) {
+		$changeOps = new ChangeOpsMerge( $from, $to, $ignoreConflicts );
 		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
 
-	public function getItemContent( $id, $data = array() ) {
+	public static function provideValidConstruction(){
+		$from = self::getItemContent( 'Q111' );
+		$to = self::getItemContent( 'Q222' );
+		return array(
+			array( $from, $to, array() ),
+			array( $from, $to, array( 'label' ) ),
+			array( $from, $to, array( 'description' ) ),
+			array( $from, $to, array( 'description', 'label' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideInvalidConstruction
+	 */
+	public function testInvalidIgnoreConflicts( $from, $to, $ignoreConflicts ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new ChangeOpsMerge( $from, $to, $ignoreConflicts );
+	}
+
+	public static function provideInvalidConstruction(){
+		$from = self::getItemContent( 'Q111' );
+		$to = self::getItemContent( 'Q222' );
+		return array(
+			array( $from, $to, 'foo' ),
+			array( $from, $to, array( 'foo' ) ),
+			array( $from, $to, array( 'label', 'foo' ) ),
+			array( $from, $to, null ),
+		);
+	}
+
+	public static function getItemContent( $id, $data = array() ) {
 		$item = new Item( $data );
 		$item->setId( new ItemId( $id ) );
 		$itemContent = new ItemContent( $item );
@@ -40,8 +71,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideData
 	 */
 	public function testCanApply( $fromData, $toData, $expectedFromData, $expectedToData ) {
-		$from = $this->getItemContent( 'Q111', $fromData );
-		$to = $this->getItemContent( 'Q222', $toData );
+		$from = self::getItemContent( 'Q111', $fromData );
+		$to = self::getItemContent( 'Q222', $toData );
 		$changeOps = new ChangeOpsMerge( $from, $to );
 
 		$this->assertTrue( $from->getEntity()->equals( new Item( $fromData ) ), 'FromItem was not filled correctly' );
