@@ -3,10 +3,9 @@
 namespace Wikibase\Api;
 
 use Wikibase\ChangeOp\ChangeOpSiteLink;
-use ApiBase, User;
+use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
-use Wikibase\Utils;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -61,7 +60,6 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entityContent->getItem();
 		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
-		$builder = new ResultBuilder( $this->getResult() );
 		if (
 			isset( $params['linksite'] ) &&
 			( is_null( $params['linktitle'] ) || $params['linktitle'] === '' ) )
@@ -69,12 +67,12 @@ class SetSiteLink extends ModifyEntity {
 			if ( $item->hasLinkToSite( $linksite ) ) {
 				$link = $item->getSimpleSiteLink( $linksite );
 				$this->getChangeOp( $params )->apply( $item, $summary );
-				$builder->addSiteLinks( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
+				$this->resultBuilder->addSiteLinks( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
 			}
 		} else {
 			$this->getChangeOp( $params )->apply( $item, $summary );
 			$link = $item->getSimpleSiteLink( $linksite );
-			$builder->addSiteLinks( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+			$this->resultBuilder->addSiteLinks( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
 		}
 
 		wfProfileOut( __METHOD__ );

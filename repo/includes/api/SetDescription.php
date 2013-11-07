@@ -2,9 +2,7 @@
 
 namespace Wikibase\Api;
 
-use ApiBase;
 use Wikibase\EntityContent;
-use Wikibase\Utils;
 use Wikibase\ChangeOp\ChangeOpDescription;
 
 /**
@@ -44,8 +42,7 @@ class SetDescription extends ModifyLangAttribute {
 		$this->getChangeOp( $params )->apply( $entity, $summary );
 		$descriptions = array( $language => ( $entity->getDescription( $language ) !== false ) ? $entity->getDescription( $language ) : "" );
 
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addDescriptions( $descriptions, 'entity' );
+		$this->resultBuilder->addDescriptions( $descriptions, 'entity' );
 
 		wfProfileOut( __METHOD__ );
 		return $summary;

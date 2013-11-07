@@ -4,20 +4,13 @@ namespace Wikibase\Api;
 
 use Revision;
 use Title;
-use User, Status, ApiBase;
-use Wikibase\Claims;
-use Wikibase\DataModel\SimpleSiteLink;
+use User;
+use Status;
+use ApiBase;
 use Wikibase\EntityContent;
-use Wikibase\Lib\Serializers\ClaimsSerializer;
-use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\Serializers\LabelSerializer;
-use Wikibase\Lib\Serializers\DescriptionSerializer;
-use Wikibase\Lib\Serializers\AliasSerializer;
-use Wikibase\Lib\Serializers\SiteLinkSerializer;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Summary;
 use WikiPage;
 
@@ -30,6 +23,15 @@ use WikiPage;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 abstract class ApiWikibase extends \ApiBase {
+
+	protected $resultBuilder;
+
+	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		// todo inject serialization factory to result builder
+		$this->resultBuilder = new ResultBuilder( $this->getResult() );
+	}
 
 	/**
 	 * Wrapper message for single errors

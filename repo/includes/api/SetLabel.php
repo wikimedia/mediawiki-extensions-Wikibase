@@ -2,9 +2,7 @@
 
 namespace Wikibase\Api;
 
-use ApiBase;
 use Wikibase\EntityContent;
-use Wikibase\Utils;
 use Wikibase\ChangeOp\ChangeOpLabel;
 
 /**
@@ -44,8 +42,7 @@ class SetLabel extends ModifyLangAttribute {
 		$this->getChangeOp( $params )->apply( $entity, $summary );
 		$labels = array( $language => ( $entity->getLabel( $language ) !== false ) ? $entity->getLabel( $language ) : "" );
 
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addLabels( $labels, 'entity' );
+		$this->resultBuilder->addLabels( $labels, 'entity' );
 
 		wfProfileOut( __METHOD__ );
 		return $summary;

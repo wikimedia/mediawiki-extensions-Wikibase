@@ -5,7 +5,7 @@ namespace Wikibase\Api;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
-use ApiBase, User, Language;
+use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
 use Wikibase\ChangeOp\ChangeOpAliases;
@@ -91,9 +91,8 @@ class SetAliases extends ModifyEntity {
 		}
 
 		$aliases = $entity->getAliases( $language );
-		$builder = new ResultBuilder( $this->getResult() );
 		if ( count( $aliases ) ) {
-			$builder->addAliases( array( $language => $aliases ), 'entity' );
+			$this->resultBuilder->addAliases( array( $language => $aliases ), 'entity' );
 		}
 
 		wfProfileOut( __METHOD__ );

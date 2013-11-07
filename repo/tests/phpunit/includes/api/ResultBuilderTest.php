@@ -25,8 +25,13 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		return new ApiResult( $apiMain );
 	}
 
+	protected function getResultBuilder( $result ){
+		return new ResultBuilder( $result );
+	}
+
 	public function testCanConstruct(){
-		$resultBuilder = new ResultBuilder( $this->getDefaultResult() );
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
 		$this->assertInstanceOf( '\Wikibase\Api\ResultBuilder', $resultBuilder );
 	}
 
@@ -35,7 +40,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testBadConstruction( $result ){
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new ResultBuilder( $result );
+		$this->getResultBuilder( $result );
 	}
 
 	public static function provideBadConstructionData() {
@@ -52,7 +57,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testMarkResultSuccess( $param, $expected ){
 		$result = $this->getDefaultResult();
-		$resultBuilder = new ResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->markSuccess( $param );
 		$this->assertEquals( array( 'success' => $expected ),  $result->getData() );
 	}
@@ -67,7 +72,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 	public function testMarkResultSuccessExceptions( $param ){
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$result = $this->getDefaultResult();
-		$resultBuilder = new ResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->markSuccess( $param );
 	}
 
@@ -96,7 +101,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$resultBuilder = new ResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addLabels( $labels, $path );
 
 		$this->assertEquals( $expected, $result->getData() );
@@ -123,7 +128,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$resultBuilder = new ResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addDescriptions( $descriptions, $path );
 
 		$this->assertEquals( $expected, $result->getData() );
@@ -162,7 +167,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$resultBuilder = new ResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addAliases( $aliases, $path );
 
 		$this->assertEquals( $expected, $result->getData() );
@@ -191,7 +196,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$resultBuilder = new ResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addSiteLinks( $sitelinks, $path );
 
 		$this->assertEquals( $expected, $result->getData() );
@@ -226,7 +231,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$resultBuilder = new ResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addClaims( $claims, $path );
 
 		$this->assertEquals( $expected, $result->getData() );

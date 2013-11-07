@@ -2,12 +2,10 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, User, Status;
+use ApiBase, Status;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
@@ -109,8 +107,7 @@ class LinkTitles extends ApiWikibase {
 			$this->dieUsage( 'No common item detected, unable to link titles' , 'no-common-item' );
 		}
 
-		$builder = new ResultBuilder( $this->getResult() );
-		$builder->addSiteLinks( $return, 'entity' );
+		$this->resultBuilder->addSiteLinks( $return, 'entity' );
 		$status = $this->getAttemptSaveStatus( $itemContent, $summary, $flags );
 		$this->buildResult( $itemContent, $status );
 		wfProfileOut( __METHOD__ );
