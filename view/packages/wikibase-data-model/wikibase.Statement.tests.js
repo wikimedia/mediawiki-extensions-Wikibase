@@ -1,10 +1,4 @@
 /**
- * QUnit tests for wikibase.Statement
- * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- *
- * @since 0.4
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
@@ -15,7 +9,7 @@
 	QUnit.module( 'wikibase.datamodel.Statement', QUnit.newWbEnvironment() );
 
 	QUnit.test( 'toJSON', function( assert ) {
-		var statement = new wb.Statement( new wb.PropertyNoValueSnak( 'p42' ) );
+		var statement = new wb.Statement( new wb.PropertyNoValueSnak( 'P42' ) );
 
 		assert.ok(
 			statement.equals( wb.Claim.newFromJSON( statement.toJSON() ) ),
@@ -23,27 +17,27 @@
 		);
 
 		statement = new wb.Statement(
-			new wb.PropertyValueSnak( 'p23', new dv.StringValue( '~=[,,_,,]:3' ) ),
+			new wb.PropertyValueSnak( 'P23', new dv.StringValue( '~=[,,_,,]:3' ) ),
 			new wb.SnakList(
 				[
-					new wb.PropertyNoValueSnak( 'p9001' ),
-					new wb.PropertySomeValueSnak( 'p42' )
+					new wb.PropertyNoValueSnak( 'P9001' ),
+					new wb.PropertySomeValueSnak( 'P42' )
 				]
 			),
 			[
 				new wb.Reference(
 					new wb.SnakList(
 						[
-							new wb.PropertyValueSnak( 'p3', new dv.StringValue( 'string' ) ),
-							new wb.PropertySomeValueSnak( 'p245' )
+							new wb.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
+							new wb.PropertySomeValueSnak( 'P245' )
 						]
 					)
 				),
 				new wb.Reference(
 					new wb.SnakList(
 						[
-							new wb.PropertyValueSnak( 'p856', new dv.StringValue( 'another string' ) ),
-							new wb.PropertySomeValueSnak( 'p97' )
+							new wb.PropertyValueSnak( 'P856', new dv.StringValue( 'another string' ) ),
+							new wb.PropertySomeValueSnak( 'P97' )
 						]
 					)
 				)
@@ -60,67 +54,67 @@
 
 	QUnit.test( 'equals()', function( assert ) {
 		var statements = [
-			new wb.Statement( new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
+			new wb.Statement( new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ) ),
 			new wb.Statement(
-				new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ),
+				new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
 				new wb.SnakList(
 					[
-						new wb.PropertyValueSnak( 'p2', new dv.StringValue( 'some string' ) ),
-						new wb.PropertySomeValueSnak( 'p9001' )
+						new wb.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
+						new wb.PropertySomeValueSnak( 'P9001' )
 					]
 				),
 				[
 					new wb.Reference(
 						new wb.SnakList(
 							[
-								new wb.PropertyValueSnak( 'p3', new dv.StringValue( 'string' ) ),
-								new wb.PropertySomeValueSnak( 'p245' )
+								new wb.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
+								new wb.PropertySomeValueSnak( 'P245' )
 							]
 						)
 					),
 					new wb.Reference(
 						new wb.SnakList(
 							[
-								new wb.PropertyValueSnak( 'p856', new dv.StringValue( 'another string' ) ),
-								new wb.PropertySomeValueSnak( 'p97' )
+								new wb.PropertyValueSnak( 'P856', new dv.StringValue( 'another string' ) ),
+								new wb.PropertySomeValueSnak( 'P97' )
 							]
 						)
 					)
 				],
 				wb.Statement.RANK.PREFERRED
 			),
-			new wb.Statement( new wb.PropertyValueSnak( 41, new dv.StringValue( 'string' ) ) ),
+			new wb.Statement( new wb.PropertyValueSnak( 'P41', new dv.StringValue( 'string' ) ) ),
 			new wb.Statement(
-				new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ),
+				new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
 				new wb.SnakList(
 					[
-						new wb.PropertyValueSnak( 2, new dv.StringValue( 'some string' ) ),
-						new wb.PropertySomeValueSnak( 'p9001' )
+						new wb.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
+						new wb.PropertySomeValueSnak( 'P9001' )
 					]
 				)
 			),
 			new wb.Statement(
-				new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ),
+				new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
 				new wb.SnakList(
 					[
-						new wb.PropertyValueSnak( 'p2', new dv.StringValue( 'some string' ) ),
-						new wb.PropertySomeValueSnak( 'p9001' )
+						new wb.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
+						new wb.PropertySomeValueSnak( 'P9001' )
 					]
 				),
 				[
 					new wb.Reference(
 						new wb.SnakList(
 							[
-								new wb.PropertyValueSnak( 'p3', new dv.StringValue( 'string' ) ),
-								new wb.PropertySomeValueSnak( 'p245' )
+								new wb.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
+								new wb.PropertySomeValueSnak( 'P245' )
 							]
 						)
 					),
 					new wb.Reference(
 						new wb.SnakList(
 							[
-								new wb.PropertyValueSnak( 'p123', new dv.StringValue( 'another string' ) ),
-								new wb.PropertySomeValueSnak( 'p97' )
+								new wb.PropertyValueSnak( 'P123', new dv.StringValue( 'another string' ) ),
+								new wb.PropertySomeValueSnak( 'P97' )
 							]
 						)
 					)
@@ -152,9 +146,9 @@
 		} );
 
 		// Compare claim to statement:
-		var claim = new wb.Claim( new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
+		var claim = new wb.Claim( new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ) ),
 			statement = new wb.Statement(
-				new wb.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) )
+				new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) )
 			);
 
 		assert.ok(

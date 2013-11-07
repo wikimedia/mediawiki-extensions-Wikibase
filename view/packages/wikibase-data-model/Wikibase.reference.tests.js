@@ -1,29 +1,22 @@
 /**
- * QUnit tests for wikibase.Reference
- * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- *
- * @since 0.3
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( wb, dv, $, QUnit, undefined ) {
+( function( wb, dv, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.datamodel.Reference', QUnit.newWbEnvironment() );
 
 	var snakLists = [
 		new wb.SnakList( [
-			new wb.PropertyNoValueSnak( 9001 ),
-			new wb.PropertySomeValueSnak( 42 ),
-			new wb.PropertyValueSnak( 23, new dv.StringValue( '~=[,,_,,]:3' ) )
+			new wb.PropertyNoValueSnak( 'P9001' ),
+			new wb.PropertySomeValueSnak( 'P42' ),
+			new wb.PropertyValueSnak( 'P23', new dv.StringValue( '~=[,,_,,]:3' ) )
 		] ),
 		new wb.SnakList( [] ),
-		new wb.SnakList( [ new wb.PropertyNoValueSnak( 9001 ) ] )
+		new wb.SnakList( [ new wb.PropertyNoValueSnak( 'P9001' ) ] )
 	];
 
 	QUnit.test( 'constructor', function( assert ) {
@@ -78,8 +71,8 @@
 		var reference = new wb.Reference(
 			new wb.SnakList(
 				[
-					new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ),
-					new wb.PropertySomeValueSnak( 9001 )
+					new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
+					new wb.PropertySomeValueSnak( 'P9001' )
 				]
 			),
 			'hash12390213'
@@ -97,8 +90,8 @@
 			new wb.Reference(
 				new wb.SnakList(
 					[
-						new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ),
-						new wb.PropertySomeValueSnak( 9001 )
+						new wb.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
+						new wb.PropertySomeValueSnak( 'P9001' )
 					]
 				),
 				'hash12390213'
@@ -106,8 +99,8 @@
 			new wb.Reference(
 				new wb.SnakList(
 					[
-						new wb.PropertyValueSnak( 345, new dv.StringValue( 'string' ) ),
-						new wb.PropertySomeValueSnak( 9001 )
+						new wb.PropertyValueSnak( 'P345', new dv.StringValue( 'string' ) ),
+						new wb.PropertySomeValueSnak( 'P9001' )
 					]
 				)
 			)
