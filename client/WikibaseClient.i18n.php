@@ -3158,15 +3158,20 @@ $messages['pl'] = array(
  */
 $messages['pms'] = array(
 	'wikibase-client-desc' => "Client për l'estension Wikibase",
+	'specialpages-group-wikibaseclient' => 'Client Wikidata',
+	'tooltip-t-wikibase' => "Liura a l'element ëd referensa dij dàit colegà",
 	'wikibase-after-page-move' => "A peul ëdcò [$1 agiorné] j'element Wikidata associà për goerné le liure ëd lenga an sla pàgina tramudà.",
+	'wikibase-after-page-move-queued' => "L'[$1 element Wikidata] associà con costa pàgina a sarà tòst agiornà an automàtich.",
+	'wikibase-comment-add' => "N'element Wikidata a l'é stàit creà.",
 	'wikibase-comment-remove' => 'Element Wikidata associà scancelà. Liura ëd lenga gavà.',
 	'wikibase-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pàgina.",
 	'wikibase-comment-unlink' => "Sta pàgina a l'é stàita dëscolegà da l'element Wikidata. Liure ëd lenga gavà.",
 	'wikibase-comment-restore' => 'Element associà Wikidata ripristinà. Liure ëd lenga ripristinà.',
-	'wikibase-comment-update' => 'Liure ëd lenga agiornà.', # Fuzzy
+	'wikibase-comment-update' => "L'element Wikidata a l'é cangià",
 	'wikibase-comment-sitelink-add' => 'Liure ëd lenga giontà: $1',
 	'wikibase-comment-sitelink-change' => 'Liure ëd lenga modificà da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Liure ëd lenga gavà: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modìfica|modìfiche}}',
 	'wikibase-editlinks' => "Modifiché j'anliure",
 	'wikibase-editlinkstitle' => 'Modifiché le liure antërlenga',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
@@ -4095,7 +4100,7 @@ $messages['yue'] = array(
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
-	'wikibase-client-desc' => '维基数据库扩展程序客户端',
+	'wikibase-client-desc' => '维基数据库扩展程序的客户端',
 	'specialpages-group-wikibaseclient' => '维基数据客户端',
 	'tooltip-t-wikibase' => '链接至被连接的数据存储库项',
 	'wikibase-after-page-move' => '你也可以[$1 更新]相关维基数据项以维护被移动页面的语言链接。',
@@ -4138,17 +4143,17 @@ $messages['zh-hans'] = array(
 	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示维基数据的编辑',
 	'wikibase-error-serialize-error' => '无法序列化数据。',
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
-	'special-unconnectedpages' => '未连接到项的页面',
-	'wikibase-unconnectedpages-legend' => '未连接页面的选项',
+	'special-unconnectedpages' => '未连接至项的页面',
+	'wikibase-unconnectedpages-legend' => '未连接页面选项',
 	'wikibase-unconnectedpages-page' => '以该页面开始结果列表：',
 	'wikibase-unconnectedpages-submit' => '提交',
 	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
 	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',
-	'wikibase-unconnectedpages-iwdata-label' => '仅含有跨语言链接的页面',
+	'wikibase-unconnectedpages-iwdata-label' => '仅有跨语言链接的页面',
 	'wikibase-unconnectedpages-format-row' => '（该页面有$1个{{PLURAL:$1|跨语言链接}}）',
 	'wikibase-pageinfo-entity-id' => '维基数据项ID',
 	'wikibase-pageinfo-entity-id-none' => '无',
-	'wikibase-property-render-error' => '无法呈现属性$1：$2',
+	'wikibase-property-render-error' => '无法生成属性$1：$2',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
