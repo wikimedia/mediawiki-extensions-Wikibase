@@ -2,16 +2,21 @@
 
 namespace Wikibase\Test\Api;
 
+use DataValues\StringValue;
+use FormatJson;
+use UsageException;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
 use Wikibase\SnakList;
 
 /**
- * Unit tests for the Wikibase\ApiSetReference class.
+ * @covers Wikibase\Api\SetReference
  *
  * @since 0.3
  *
@@ -29,6 +34,7 @@ use Wikibase\SnakList;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
+ * @author Adam Shorland
  */
 class SetReferenceTest extends WikibaseApiTestCase {
 
@@ -45,6 +51,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( 3 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
 			$hasProperties = true;
 		}
 
@@ -55,15 +66,15 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	// semi-blocked by cleanup of GUID handling in claims
 	// can perhaps tseal from RemoveReferencesTest
 	public function testRequests() {
-		$item = \Wikibase\Item::newEmpty();
-		$content = new \Wikibase\ItemContent( $item );
+		$item = Item::newEmpty();
+		$content = new ItemContent( $item );
 		$content->save( '', null, EDIT_NEW );
 
-		$statement = $item->newClaim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$statement = $item->newClaim( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( $item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P' );
 
-		$reference = new \Wikibase\Reference( new \Wikibase\SnakList(
-			array( new \Wikibase\PropertySomeValueSnak( 1 ) )
+		$reference = new Reference( new SnakList(
+			array( new PropertySomeValueSnak( 1 ) )
 		) );
 
 		$statement->getReferences()->addReference( $reference );
@@ -74,8 +85,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$referenceHash = $reference->getHash();
 
-		$reference = new \Wikibase\Reference( new \Wikibase\SnakList(
-			array( new \Wikibase\PropertyNoValueSnak( 42 ) )
+		$reference = new Reference( new SnakList(
+			array( new PropertyNoValueSnak( 42 ) )
 		) );
 
 		$serializedReference = $this->makeValidRequest(
@@ -93,10 +104,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$referenceHash = $serializedReference['hash'];
 
-		$reference = new \Wikibase\Reference( new \Wikibase\SnakList(
+		$reference = new Reference( new SnakList(
 			array(
-				new \Wikibase\PropertyNoValueSnak( 42 ),
-				new \Wikibase\PropertyNoValueSnak( 43 ),
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 43 ),
 			)
 		) );
 
@@ -199,7 +210,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
 		}
-		catch ( \UsageException $e ) {
+		catch ( UsageException $e ) {
 			$this->assertEquals( 'no-such-reference', $e->getCodeString(), 'Invalid request raised correct error' );
 		}
 	}
@@ -214,7 +225,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		if( !is_a( $reference, '\Wikibase\Reference' ) ) {
 			return $reference;
 		} else {
-			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$serializerFactory = new SerializerFactory();
 			$serializer = $serializerFactory->newSerializerForObject( $reference );
 			return $serializer->getSerialized( $reference );
 		}
@@ -231,7 +242,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			return $reference;
 		} else {
 			unset( $reference['hash'] );
-			$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+			$serializerFactory = new SerializerFactory();
 			$unserializer = $serializerFactory->newUnserializerForClass( '\Wikibase\Reference' );
 			return $unserializer->newFromSerialization( $reference );
 		}
@@ -257,8 +268,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
-			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
-			'snaks-order' => \FormatJson::encode( $serializedReference['snaks-order'] ),
+			'snaks' => FormatJson::encode( $serializedReference['snaks'] ),
+			'snaks-order' => FormatJson::encode( $serializedReference['snaks-order'] ),
 		);
 
 		if( !is_null( $index ) ) {
@@ -282,22 +293,54 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( "Exception with code $expectedError expected" );
-		} catch ( \UsageException $e ) {
+		} catch ( UsageException $e ) {
 			$this->assertEquals( $expectedError, $e->getCodeString(), 'Error code' );
 		}
 	}
 
 	public function invalidClaimProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'abc') );
+		$snak = new PropertyValueSnak( 42, new StringValue( 'abc') );
 		$snakHash = $snak->getHash();
 
-		$reference = new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'def' ) );
+		$reference = new PropertyValueSnak( 42, new StringValue( 'def' ) );
 		$refHash = $reference->getHash();
 
 		return array(
 			array( 'xyz', $snakHash, $refHash, 'invalid-guid' ),
 			array( 'x$y$z', $snakHash, $refHash, 'invalid-guid' )
 		);
+	}
+
+	/**
+	 * Currently tests bad calender model
+	 * @todo test more bad serializations...
+	 */
+	public function testInvalidSerialization() {
+		$this->setExpectedException( 'UsageException' );
+		$params = array(
+			'action' => 'wbsetreference',
+			'statement' => 'Foo$Guid',
+			'snaks' => '{
+   "P813":[
+      {
+         "snaktype":"value",
+         "property":"P813",
+         "datavalue":{
+            "value":{
+               "time":"+00000002013-10-05T00:00:00Z",
+               "timezone":0,
+               "before":0,
+               "after":0,
+               "precision":11,
+               "calendarmodel":"FOOBAR :D"
+            },
+            "type":"time"
+         }
+      }
+   ]
+}',
+		);
+		$this->doApiRequestWithToken( $params );
 	}
 
 }
