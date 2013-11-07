@@ -1,33 +1,39 @@
 {
-    "name": "wikibase/wikibase",
-    "type": "mediawiki-extension",
-    "description": "Structured data repository for MediaWiki",
-    "keywords": ["wikibase", "wikidata", "wikibaselib", "wikibaseclient", "wikibaserepo"],
-    "homepage": "https://www.mediawiki.org/wiki/Wikibase",
-    "license": "GNU GPL v2+",
-    "authors": [
-        {
-            "name": "The Wikidata team",
-            "role": "Developer"
-        }
-    ],
-	"support": {
-		"issues": "https://bugzilla.wikimedia.org/",
-		"irc": "irc://irc.freenode.net/wikimedia-wikidata",
-		"forum": "https://www.mediawiki.org/wiki/Talk:Wikibase",
-		"wiki": "https://www.mediawiki.org/wiki/Wikibase"
-	},
-    "require": {
-        "php": ">=5.3.0",
-		"data-values/data-values": "*",
-		"data-values/data-types": "*",
-		"wikibase/data-model": "*",
-        "diff/diff": ">=0.9"
-    },
-	"minimum-stability" : "dev",
-	"autoload": {
-		"files" : [
-			"Wikibase.composer.php"
-		]
-	}
+  "name": "wikibase/wikibase",
+  "type": "mediawiki-extension",
+  "description": "Structured data repository for MediaWiki",
+  "keywords": [
+    "wikibase",
+    "wikidata",
+    "wikibaselib",
+    "wikibaseclient",
+    "wikibaserepo"
+  ],
+  "homepage": "https://www.mediawiki.org/wiki/Wikibase",
+  "license": "GNU GPL v2+",
+  "authors": [
+    {
+      "name": "The Wikidata team",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://bugzilla.wikimedia.org/",
+    "irc": "irc://irc.freenode.net/wikimedia-wikidata",
+    "forum": "https://www.mediawiki.org/wiki/Talk:Wikibase",
+    "wiki": "https://www.mediawiki.org/wiki/Wikibase"
+  },
+  "require": {
+    "php": ">=5.3.0",
+    "data-values/data-values": "dev-mw1.23-wmf3",
+    "data-values/data-types": "dev-mw1.23-wmf3",
+    "wikibase/data-model": "dev-mw1.23-wmf3",
+    "diff/diff": "dev-mw1.23-wmf3"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "files": [
+      "Wikibase.composer.php"
+    ]
+  }
 }
