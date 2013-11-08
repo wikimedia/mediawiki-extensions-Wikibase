@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_6e2cde02",
+        "filename": "lib/includes/ArrayStructureCodec.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-08T14:04:25Z",
+      "side": 1,
+      "message": "hm, right :)",
+      "parentUuid": "291c1151_63495e60",
+      "revId": "7e168a81cd3cfc7d8fe565818fba8a3ecd674557",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_a37b5688",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-07T16:54:59Z",
       "side": 1,
       "message": "0.5",
+      "revId": "7e168a81cd3cfc7d8fe565818fba8a3ecd674557",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_8e33da60",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-08T14:04:25Z",
+      "side": 1,
+      "message": "right, will fix.",
+      "parentUuid": "291c1151_a37b5688",
       "revId": "7e168a81cd3cfc7d8fe565818fba8a3ecd674557",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
