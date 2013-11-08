@@ -76,12 +76,28 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			WikibaseClient::getDefaultInstance() );
 	}
 
-	public function testGetLangLinkSiteGroup() {
+	/**
+	 * @dataProvider getLangLinkSiteGroupProvider
+	 */
+	public function testGetLangLinkSiteGroup( $expected, $settings, $siteStore ) {
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), true, $siteStore );
+		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
+	}
+
+	public function getLangLinkSiteGroupProvider() {
+		$siteStore = $this->getMockSiteStore();
 		$settings = clone Settings::singleton();
+		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', null );
 
-		$client = new WikibaseClient( $settings, Language::factory( 'en' ), true );
-		$this->assertNotNull( $client->getLangLinkSiteGroup() );
+		$settings2 = clone Settings::singleton();
+		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
+		$settings2->setSetting( 'languageLinkSiteGroup', 'wikivoyage' );
+
+		return array(
+			array( 'wikipedia', $settings, $siteStore ),
+			array( 'wikivoyage', $settings2, $siteStore )
+		);
 	}
 
 	/**
@@ -92,7 +108,10 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $client->getSiteGroup() );
 	}
 
-	public function getSiteGroupProvider() {
+	/**
+	 * @return SiteStore
+	 */
+	public function getMockSiteStore() {
 		$siteStore = new MockSiteStore();
 
 		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
@@ -100,6 +119,10 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 		$siteStore->saveSite( $site );
 
+		return $siteStore;
+	}
+
+	public function getSiteGroupProvider() {
 		$settings = clone Settings::singleton();
 		$settings->setSetting( 'siteGroup', null );
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
@@ -107,6 +130,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings2 = clone Settings::singleton();
 		$settings2->setSetting( 'siteGroup', 'wikivoyage' );
 		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
+
+		$siteStore = $this->getMockSiteStore();
 
 		return array(
 			array( 'wikipedia', $settings, $siteStore ),
