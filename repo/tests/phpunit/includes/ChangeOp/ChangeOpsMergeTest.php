@@ -38,6 +38,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			array( $from, $to, array( 'label' ) ),
 			array( $from, $to, array( 'description' ) ),
 			array( $from, $to, array( 'description', 'label' ) ),
+			array( $from, $to, array( 'description', 'label', 'sitelink' ) ),
 		);
 	}
 
@@ -169,6 +170,13 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			array(),
 			array( 'links' => array( 'enwiki' => array( 'name' => 'foo', 'badges' => array() ) ) ),
 		);
+		$testCases['ignoreConflictLinkMerge'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'foo', 'badges' => array() ) ) ),
+			array( 'links' => array( 'enwiki' => array( 'name' => 'bar', 'badges' => array() ) ) ),
+			array( 'links' => array( 'enwiki' => array( 'name' => 'foo', 'badges' => array() ) ) ),
+			array( 'links' => array( 'enwiki' => array( 'name' => 'bar', 'badges' => array() ) ) ),
+			array( 'sitelink' ),
+		);
 		$testCases['claimMerge'] = array(
 			array( 'claims' => array(
 				array(
@@ -235,7 +243,10 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				'label' => array( 'en' => 'foo', 'pt' => 'ptfoo' ),
 				'description' => array( 'en' => 'foo', 'pl' => 'pldesc'  ),
 				'aliases' => array( 'en' => array( 'foo', 'bar' ), 'de' => array( 'defoo', 'debar' ) ),
-				'links' => array( 'dewiki' => array( 'name' => 'foo', 'badges' => array() ) ),
+				'links' => array(
+					'dewiki' => array( 'name' => 'foo', 'badges' => array() ),
+					'plwiki' => array( 'name' => 'bar', 'badges' => array() ),
+				),
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
@@ -245,24 +256,29 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				'label' => array( 'en' => 'toLabel' ),
-				'description' => array( 'pl' => 'toLabel' )
+				'description' => array( 'pl' => 'toLabel' ),
+				'links' => array( 'plwiki' => array( 'name' => 'toLink', 'badges' => array() ) ),
 			),
 			array(
 				'label' => array( 'en' => 'foo' ),
-				'description' => array( 'pl' => 'pldesc' )
+				'description' => array( 'pl' => 'pldesc' ),
+				'links' => array( 'plwiki' => array( 'name' => 'bar', 'badges' => array() ) ),
 			),
 			array(
 				'label' => array( 'en' => 'toLabel', 'pt' => 'ptfoo'  ),
 				'description' => array( 'en' => 'foo', 'pl' => 'toLabel' ),
 				'aliases' => array( 'en' => array( 'foo', 'bar' ), 'de' => array( 'defoo', 'debar' ) ),
-				'links' => array( 'dewiki' => array( 'name' => 'foo', 'badges' => array() ) ),
+				'links' => array(
+					'dewiki' => array( 'name' => 'foo', 'badges' => array() ),
+					'plwiki' => array( 'name' => 'toLink', 'badges' => array() ),
+				),
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
 						'q' => array( array(  'novalue', 88  ) ) )
 				),
 			),
-			array( 'label', 'description' )
+			array( 'label', 'description', 'sitelink' )
 		);
 		return $testCases;
 	}
