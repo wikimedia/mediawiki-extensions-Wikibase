@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_ce495235",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-08T11:41:11Z",
+      "side": 1,
+      "message": "this should be a multi-value enumeration, not a string. I think you\u0027d just set PARAM_TYPE to a list of allowed values.",
+      "revId": "ced87a22131fc53fc379f01837f0db29eaedebaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
