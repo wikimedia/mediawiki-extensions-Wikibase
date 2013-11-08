@@ -36,15 +36,15 @@ class ChangeOpsMerge {
 		$this->toItemContent = $toItemContent;
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
+		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 		$this->ignoreConflicts = $ignoreConflicts;
-		$this->assertValidIgnoreConflictValues();
 	}
 
-	private function assertValidIgnoreConflictValues() {
-		if( !is_array( $this->ignoreConflicts ) ){
+	private function assertValidIgnoreConflictValues( $ignoreConflicts ) {
+		if( !is_array( $ignoreConflicts ) ){
 			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );
 		}
-		foreach( $this->ignoreConflicts as $ignoreConflict ){
+		foreach( $ignoreConflicts as $ignoreConflict ){
 			if( $ignoreConflict !== 'label' && $ignoreConflict !== 'description' && $ignoreConflict !== 'sitelink' ){
 				throw new InvalidArgumentException( '$ignoreConflicts array can only contain "label", "description" and or "sitelink" values' );
 			}
