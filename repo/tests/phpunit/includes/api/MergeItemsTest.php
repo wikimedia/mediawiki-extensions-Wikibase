@@ -102,7 +102,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			array(),
 			array( 'aliases' => array( array( "language" => "nl", "value" => "Dickes B" ) ) ),
 		);
-		$testCases[] = array(
+		$testCases['aliasesMerge2'] = array(
 			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali1" ) ) ),
 			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali2" ) ) ),
 			array(),
@@ -113,6 +113,19 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			array(),
 			array(),
 			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
+		);
+		$testCases['IgnoreConflictSitelinksMerge'] = array(
+			array( 'sitelinks' => array(
+				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ),
+				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
+			) ),
+			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ) ) ),
+			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ) ) ),
+			array( 'sitelinks' => array(
+				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ),
+				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
+			) ),
+			'sitelink'
 		);
 		$testCases['claimMerge'] = array(
 			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(

@@ -25,7 +25,7 @@ class ChangeOpsMerge {
 	 * @param ItemContent $fromItemContent
 	 * @param ItemContent $toItemContent
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
-	 *   can only contain 'label' and or 'description'
+	 *   can only contain 'label' and or 'description' and or 'sitelink'
 	 */
 	public function __construct(
 		ItemContent $fromItemContent,
@@ -45,8 +45,8 @@ class ChangeOpsMerge {
 			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );
 		}
 		foreach( $this->ignoreConflicts as $ignoreConflict ){
-			if( $ignoreConflict !== 'label' && $ignoreConflict !== 'description' ){
-				throw new InvalidArgumentException( '$ignoreConflicts array can only contain "label" or "description"' );
+			if( $ignoreConflict !== 'label' && $ignoreConflict !== 'description' && $ignoreConflict !== 'sitelink' ){
+				throw new InvalidArgumentException( '$ignoreConflicts array can only contain "label", "description" and or "sitelink" values' );
 			}
 		}
 	}
@@ -109,7 +109,9 @@ class ChangeOpsMerge {
 				$this->fromChangeOps->add( new ChangeOpSiteLink( $siteId, null ) );
 				$this->toChangeOps->add( new ChangeOpSiteLink( $siteId, $simpleSiteLink->getPageName() ) );
 			} else {
-				throw new ChangeOpException( "Conflicting sitelinks for {$siteId}" );
+				if( !in_array( 'sitelink', $this->ignoreConflicts ) ){
+					throw new ChangeOpException( "Conflicting sitelinks for {$siteId}" );
+				}
 			}
 		}
 	}
