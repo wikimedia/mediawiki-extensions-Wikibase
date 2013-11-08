@@ -36,15 +36,15 @@ class ChangeOpsMerge {
 		$this->toItemContent = $toItemContent;
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
+		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 		$this->ignoreConflicts = $ignoreConflicts;
-		$this->assertValidIgnoreConflictValues();
 	}
 
-	private function assertValidIgnoreConflictValues() {
-		if( !is_array( $this->ignoreConflicts ) ){
+	private function assertValidIgnoreConflictValues( $ignoreConflicts ) {
+		if( !is_array( $ignoreConflicts ) ){
 			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );
 		}
-		foreach( $this->ignoreConflicts as $ignoreConflict ){
+		foreach( $ignoreConflicts as $ignoreConflict ){
 			if( $ignoreConflict !== 'label' && $ignoreConflict !== 'description' && $ignoreConflict !== 'sitelink' ){
 				throw new InvalidArgumentException( '$ignoreConflicts array can only contain "label", "description" and or "sitelink" values' );
 			}
@@ -72,7 +72,6 @@ class ChangeOpsMerge {
 				$this->fromChangeOps->add( new ChangeOpLabel( $langCode, null ) );
 				$this->toChangeOps->add( new ChangeOpLabel( $langCode, $label ) );
 			} else {
-				//todo add the option to merge conflicting labels into the aliases
 				if( !in_array( 'label', $this->ignoreConflicts ) ){
 					throw new ChangeOpException( "Conflicting labels for language {$langCode}" );
 				}
@@ -87,7 +86,6 @@ class ChangeOpsMerge {
 				$this->fromChangeOps->add( new ChangeOpDescription( $langCode, null ) );
 				$this->toChangeOps->add( new ChangeOpDescription( $langCode, $desc ) );
 			} else {
-				//todo add the option to ignore description conflicts, or prioritise one
 				if( !in_array( 'description', $this->ignoreConflicts ) ){
 					throw new ChangeOpException( "Conflicting descriptions for language {$langCode}" );
 				}
