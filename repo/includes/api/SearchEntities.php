@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\EntityFactory;
@@ -130,6 +131,21 @@ class SearchEntities extends ApiBase {
 			$entry['id'] = $id->getPrefixedId();
 			$entry['url'] = $entityContentFactory->getTitleForId( $id )->getFullUrl();
 
+			if ( isset( $params['sites'] ) ) {
+				$sites = $params['sites'];
+				/** @var Item $item */
+				$item = $entityContentFactory->getFromId( $id )->getEntity();
+				$pickedSiteLinks = array();
+				foreach ( $sites as $site ) {
+					if ( $item->hasLinkToSite( $site ) ) {
+						$pickedSiteLinks[$site] = $item->getSiteLink( $site )->getPageName();
+					}
+				}
+				$entry['sitelinks'] = $pickedSiteLinks;
+				//@todo add to ResultBuilder class
+				$this->getResult()->setIndexedTagName( $entry['sitelinks'], 'sitelinks' );
+			}
+
 			$aliases = array();
 			foreach ( $terms as $term ) {
 				if ( $term->getEntityId() === $id->getNumericId() ) {
@@ -237,6 +253,11 @@ class SearchEntities extends ApiBase {
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
+			'sites' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_ALLOW_DUPLICATES => true
+			),
 			'type' => array(
 				ApiBase::PARAM_TYPE => EntityFactory::singleton()->getEntityTypes(),
 				ApiBase::PARAM_DFLT => 'item',
@@ -267,6 +288,7 @@ class SearchEntities extends ApiBase {
 		return array(
 			'search' => 'Search for this text.',
 			'language' => 'Search in this language.',
+			'sites' => 'Return sitelinks for these sites (separated by |). If sitelink for a requested site is missing, it will not be present in the output.',
 			'type' => 'Search for this type of entity.',
 			'limit' => 'Maximal number of results',
 			'continue' => 'Offset where to continue a search',
@@ -297,6 +319,7 @@ class SearchEntities extends ApiBase {
 			'api.php?action=wbsearchentities&search=abc&language=en' => 'Search for "abc" in English language, with defaults for type and limit',
 			'api.php?action=wbsearchentities&search=abc&language=en&limit=50' => 'Search for "abc" in English language with a limit of 50',
 			'api.php?action=wbsearchentities&search=alphabet&language=en&type=property' => 'Search for "alphabet" in English language for type property',
+			'api.php?action=wbsearchentities&search=abc&language=en&sites=enwiki' => 'Search for "abc" in English language, with defaults for type and limit. Include sitelink to enwiki if present'
 		);
 	}
 
