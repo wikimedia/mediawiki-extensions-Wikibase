@@ -395,6 +395,7 @@ $messages['ba'] = array(
 );
 
 /** Belarusian (беларуская)
+ * @author Дзяніс Тутэйшы
  * @author Чаховіч Уладзіслаў
  */
 $messages['be'] = array(
@@ -408,7 +409,7 @@ $messages['be'] = array(
 	'wikibase-comment-sitelink-add' => 'Дададзена моўная спасылка: $1',
 	'wikibase-comment-sitelink-change' => 'Моўная спасылка зменена з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Моўная спасылка выдалена: $1',
-	'wikibase-comment-multi' => '$1 {{PLURAL:$1|змена|змены|зменаў}}',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|змена|змены|змен}}',
 	'wikibase-editlinks' => 'Правіць спасылкі',
 	'wikibase-editlinkstitle' => 'Правіць міжмоўныя спасылкі',
 	'wikibase-linkitem-addlinks' => 'Дадаць спасылкі',
@@ -885,10 +886,12 @@ $messages['cy'] = array(
 	'wikibase-comment-sitelink-change' => 'Newidiwyd y cyswllt rhwng ieithoedd o $1 i $2',
 	'wikibase-comment-sitelink-remove' => 'Tynnwyd cyswllt rhwng ieithoedd i ffwrdd: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|newid}}',
+	'wikibase-dataitem' => 'Eitem o ddata',
 	'wikibase-editlinks' => 'Golygu cysylltau',
 	'wikibase-editlinkstitle' => 'Golygu cysylltau rhyngwici rhwng ieithoedd',
 	'wikibase-linkitem-addlinks' => 'Ychwanegu cysylltau',
 	'wikibase-linkitem-alreadylinked' => "Mae'r dudalen yr ydych am gysylltu â hi eisoes wedi ei chysylltu ag [$1 eitem] ar y cof data canolog, a honno'n cysylltu â'r dudalen $2 ar y wefan hon. Dim ond un dudalen y wici sy'n gallu cael ei chysylltu ag eitem. Dewiswch dudalen arall i gysylltu â hi.",
+	'wikibase-linkitem-close' => "Cau'r deialog ac ail-lwytho'r dudalen",
 	'wikibase-linkitem-title' => 'Cysylltu â thudalen',
 	'wikibase-linkitem-linkpage' => "Cysyllter â'r dudalen",
 	'wikibase-linkitem-input-site' => 'Iaith:',
@@ -903,6 +906,7 @@ $messages['cy'] = array(
 	'wikibase-error-invalid-entity-id' => "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
 	'wikibase-unconnectedpages-submit' => 'Gwneler',
 	'wikibase-unconnectedpages-invalid-language' => 'Nid yw "$1" yn gôd iaith dilys',
+	'wikibase-pageinfo-entity-id-none' => 'Dim',
 );
 
 /** Danish (dansk)
@@ -2555,6 +2559,7 @@ $messages['lt'] = array(
 );
 
 /** Latvian (latviešu)
+ * @author Edgars2007
  * @author Papuass
  */
 $messages['lv'] = array(
@@ -2574,8 +2579,10 @@ $messages['lv'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Apstiprināt',
 	'wikibase-linkitem-not-loggedin-title' => 'Jums ir jāpieslēdzas',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Rādīt labojumos Vikidatos pēdējās izmaiņās',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Wikidata labojums',
+	'wikibase-watchlist-show-changes-pref' => 'Rādīt labojumus Vikidatos uzraugāmo lapu sarakstā',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" nav derīgs valodas kods.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Tikai lapas ar starpvalodu saitēm',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|starpvalodu saite|starpvalodu saites}} šajā lapā)',
@@ -3172,10 +3179,45 @@ $messages['pms'] = array(
 	'wikibase-comment-sitelink-change' => 'Liure ëd lenga modificà da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Liure ëd lenga gavà: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modìfica|modìfiche}}',
+	'wikibase-dataitem' => 'Element ëd dàit',
 	'wikibase-editlinks' => "Modifiché j'anliure",
 	'wikibase-editlinkstitle' => 'Modifiché le liure antërlenga',
+	'wikibase-linkitem-addlinks' => 'Gionté dle liure',
+	'wikibase-linkitem-alreadylinked' => "La pàgina vers la qual a vorìa buté na liura a l'é già gropà a n'[$1 element] ant ël depòsit ëd dàit sentral ch'a l'é lijà a $2 ansima a 's sit. J'element a peulo mach avèj na pàgina tacà për sit. Për piasì, ch'a serna n'àutra pàgine con a la qual buté na liura.",
+	'wikibase-linkitem-close' => 'Saré ël diàlogh e carié torna la pàgina',
+	'wikibase-linkitem-failure' => "N'eror ësconossù a l'é rivaje an sërcand ëd buté na liura a la pàgina fornìa.",
+	'wikibase-linkitem-title' => 'Lijesse a la pàgina',
+	'wikibase-linkitem-linkpage' => 'Liura con la pàgina',
+	'wikibase-linkitem-selectlink' => "Për piasì, ch'a selession-a un sit e na pàgina a la qual a veul lijé costa pàgina-sì.",
+	'wikibase-linkitem-input-site' => 'Lenga:',
+	'wikibase-linkitem-input-page' => 'Pàgina:',
+	'wikibase-linkitem-invalidsite' => 'Sit selessionà sconossù o nen bon',
+	'wikibase-linkitem-confirmitem-text' => "La pàgina ch'a l'ha sernù a l'é già associà a n'[$1 element an nòstr depòsit ëd dàit sentral]. Për piasì, ch'a confirma che {{PLURAL:$2|la pàgina smonùa sì-sota a l'é cola|le pàgine smonùe sì-sota a son cole}} che chiel a vorìa lijé a costa pàgina-sì.",
+	'wikibase-linkitem-confirmitem-button' => 'Confermé',
+	'wikibase-linkitem-not-loggedin-title' => 'A dev esse rintrà ant ël sistema',
+	'wikibase-linkitem-not-loggedin' => 'A dev esse rintrà an costa wiki e ant ël [$1 depòsit sentral ëd dàit] për dovré costa fonsionalità.',
+	'wikibase-linkitem-success-create' => "Le pàgine a son ëstàite lijà për da bin. A peul trové l'element neuv creà ch'a conten le liure an nòstr [$1 depòsit sentral ëd dàit].",
+	'wikibase-linkitem-success-link' => "Le pàgine a son ëstàit lijà për da bin. A peul trové l'element ch'a conten le liure an nòstr [$1 depòsit sentral dij dàit].",
+	'wikibase-property-notfound' => 'Propietà $1 nen trovà.',
+	'wikibase-property-notsupportedyet' => 'Wikibase a manten ancor nen ëd sòrt ëd propietà për la propietà $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => "Smon-e le modìfiche ëd Wikidata ant j'ùltime modìfiche",
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Modìfica ëd wikidata',
+	'wikibase-watchlist-show-changes-pref' => "Vëdde le modìfiche ëd Wikidata ant la lista dla ròba ch'as ten sot-euj",
+	'wikibase-error-serialize-error' => 'Falì a serialisé ij dàit.',
+	'wikibase-error-invalid-entity-id' => "L'ID butà a l'é nen conossù dal sistema. Për piasì, ch'a buta n'ID d'entità bon.",
+	'special-unconnectedpages' => "Pàgine nen gropà a d'element",
+	'wikibase-unconnectedpages-legend' => 'Opsion dle pàgine nen lijà',
+	'wikibase-unconnectedpages-page' => "Anandié la lista dj'arzultà con la pàgina:",
+	'wikibase-unconnectedpages-submit' => 'Ancaminé',
+	'wikibase-unconnectedpages-invalid-language' => "«$1» a l'é nen un còdes ëd lenga bon.",
+	'wikibase-unconnectedpages-page-warning' => "Ël tìtol ëd la pàgina a l'ha pa podù esse dovrà për l'arcesta e a l'é ignorà.",
+	'wikibase-unconnectedpages-iwdata-label' => 'Mach le pàgine con dle liure antërlenga',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|liura|liure}} antërlenga ant la pàgina)',
+	'wikibase-pageinfo-entity-id' => "ID ëd l'element Wikidata",
+	'wikibase-pageinfo-entity-id-none' => 'Gnun',
+	'wikibase-property-render-error' => 'Faliment ant ël rendiment ëd la propietà $1: $2',
 );
 
 /** Pashto (پښتو)

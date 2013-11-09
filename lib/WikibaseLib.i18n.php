@@ -292,6 +292,7 @@ $messages['af'] = array(
 
 /** Arabic (العربية)
  * @author زكريا
+ * @author مشعل الحربي
  */
 $messages['ar'] = array(
 	'wikibase-entity-item' => 'عنصر',
@@ -314,6 +315,7 @@ $messages['ar'] = array(
 	'wikibase-error-save-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحفظ.',
 	'wikibase-error-remove-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحذف.',
 	'wikibase-replicationnote' => 'قد يلزم وقت لتظهر التعديلات في جميع الويكيات.',
+	'wikibase-validator-unknown-unit' => 'وحدة غير معروفة: $1',
 );
 
 /** Asturian (asturianu)
@@ -1525,6 +1527,7 @@ $messages['he'] = array(
 	'wikibase-validator-bad-url-scheme' => 'סכמת URL לא נתמכת: $1',
 	'wikibase-validator-bad-http-url' => 'כתובת URL של HTTP בלתי־תקינה: $1',
 	'wikibase-validator-bad-mailto-url' => 'כתובת URL של mailto בלתי־תקינה: $1',
+	'wikibase-validator-unknown-unit' => 'יחידה בלתי־ידועה: $1',
 	'datatypes-type-wikibase-item' => 'פריט',
 	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
 	'version-wikibase' => 'Wikibase',
@@ -1720,6 +1723,7 @@ $messages['ilo'] = array(
 	'wikibase-validator-bad-url-scheme' => 'Saan a nasuportaran a panggep ti URL: $1',
 	'wikibase-validator-bad-http-url' => 'Nadadael a HTTP URL: $1',
 	'wikibase-validator-bad-mailto-url' => 'Nadadael a mailto URL: $1',
+	'wikibase-validator-unknown-unit' => 'Di ammo nga unit: $1',
 	'datatypes-type-wikibase-item' => 'Banag',
 	'datatypes-type-commonsMedia' => 'Midia a papeles ti Commons',
 	'version-wikibase' => 'Wikibase',
@@ -2094,6 +2098,7 @@ $messages['lb'] = array(
 	'wikibase-validator-no-such-property' => 'Eegeschaft $1 net fonnt',
 	'wikibase-validator-bad-value' => 'net valabele wäert: $1',
 	'wikibase-validator-bad-url' => 'URL mat Feeler: $1',
+	'wikibase-validator-unknown-unit' => 'Onbekannten Eenheet: $1',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
 	'version-wikibase' => 'Wikibase',
@@ -3411,6 +3416,7 @@ $messages['zh-hans'] = array(
 	'wikibase-validator-bad-url-scheme' => '不被支持的URL方案：$1',
 	'wikibase-validator-bad-http-url' => '格式不正确的 HTTP 地址：$1',
 	'wikibase-validator-bad-mailto-url' => '格式不正确 mailto 地址：$1',
+	'wikibase-validator-unknown-unit' => '未知单位：$1',
 	'datatypes-type-wikibase-item' => '项',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
 	'version-wikibase' => '维基数据库',
