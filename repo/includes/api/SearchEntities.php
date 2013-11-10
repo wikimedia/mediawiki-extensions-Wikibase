@@ -31,7 +31,7 @@ use Wikibase\Utils;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SearchEntities extends ApiBase {
+class SearchEntities extends ApiWikibase {
 
 	/**
 	 * Get the entities corresponding to the provided language and term pair.
