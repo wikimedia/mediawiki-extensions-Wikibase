@@ -663,6 +663,7 @@ $messages['ca'] = array(
 	'wikibase-comment-sitelink-change' => 'Enllaç de llengua canviat de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Tret enllaç de llengua: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|canvi|canvis}}',
+	'wikibase-dataitem' => 'Element de dades',
 	'wikibase-editlinks' => 'Modifica els enllaços',
 	'wikibase-editlinkstitle' => 'Modifica enllaços interlingües',
 	'wikibase-linkitem-addlinks' => 'Afegeix enllaços',
