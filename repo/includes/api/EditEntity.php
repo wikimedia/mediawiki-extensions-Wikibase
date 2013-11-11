@@ -7,6 +7,7 @@ use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use MWException;
 use Revision;
+use Site;
 use SiteList;
 use Title;
 use Wikibase\ChangeOp\ChangeOp;
@@ -19,6 +20,7 @@ use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
@@ -121,7 +123,7 @@ class EditEntity extends ModifyEntity {
 		$entity = $entityContent->getEntity();
 		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
-		$this->validateDataProperties( $data, $entityContent->getWikiPage() );
+		$this->validateDataProperties( $data, $entityContent );
 
 		if ( $params['clear'] ) {
 			$entity->clear();
@@ -168,6 +170,12 @@ class EditEntity extends ModifyEntity {
 		return $summary;
 	}
 
+	/**
+	 * @param array $data
+	 * @param Entity $entity
+	 *
+	 * @return ChangeOps
+	 */
 	protected function getChangeOps( array $data, Entity $entity ) {
 		$changeOps = new ChangeOps();
 
@@ -303,6 +311,7 @@ class EditEntity extends ModifyEntity {
 		$aliasesChangeOps = array();
 		foreach ( $indexedAliases as $langCode => $args ) {
 			$aliasesToSet = array();
+			$language = '';
 
 			foreach ( $args as $arg ) {
 				$this->validateMultilangArgs( $arg, $langCode );
@@ -351,6 +360,7 @@ class EditEntity extends ModifyEntity {
 			} else {
 				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
+			/** @var Site $linkSite */
 
 			if ( array_key_exists( 'remove', $arg ) || $pageTitle === "" ) {
 				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, null );
@@ -487,26 +497,33 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @since 0.4
+	 *
 	 * @param array $data
-	 * @param WikiPage|bool $page
+	 * @param EntityContent|bool $entityContent
 	 */
-	protected function validateDataProperties( $data, $page ) {
+	protected function validateDataProperties( $data, $entityContent ) {
 		$title = null;
 		$revision = null;
 
-		if ( $page ) {
-			$title = $page->getTitle();
-			$revision = $page->getRevision();
+		if ( $entityContent ) {
+			$wikiPage = $entityContent->getWikiPage();
+			$title = $wikiPage->getTitle();
+			$revision = $wikiPage->getTitle();
 		}
 
 		$allowedProps = array(
+			// ignored props
+			'id',
+			'type',
 			'length',
 			'count',
 			'touched',
+			// checked props
 			'pageid',
 			'ns',
 			'title',
 			'lastrevid',
+			// useful props
 			'labels',
 			'descriptions',
 			'aliases',
@@ -516,7 +533,9 @@ class EditEntity extends ModifyEntity {
 		);
 
 		$this->checkValidJson( $data, $allowedProps );
-		$this->checkPageIdProp( $data, $page );
+		$this->checkEntityId( $data, $entityContent->getEntity()->getId() );
+		$this->checkEntityType( $data, $entityContent );
+		$this->checkPageIdProp( $data, $entityContent );
 		$this->checkNamespaceProp( $data, $title );
 		$this->checkTitleProp( $data, $title );
 		$this->checkRevisionProp( $data, $revision );
@@ -590,6 +609,23 @@ class EditEntity extends ModifyEntity {
 		if ( isset( $data['lastrevid'] )
 			&& ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
 			$this->dieUsage( 'Illegal field used in call: "lastrevid", must either be correct or not given', 'param-illegal' );
+		}
+	}
+
+	private function checkEntityId( $data, EntityId $entityId ) {
+		if ( isset( $data['id'] ) ) {
+			$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+			$dataId = $entityIdParser->parse( $data['id'] );
+			if( !$entityId->equals( $dataId ) ) {
+				$this->dieUsage( 'Illegal field used in call: id', 'param-illegal' );
+			}
+		}
+	}
+
+	private function checkEntityType( $data, EntityContent $entityContent ) {
+		if ( isset( $data['type'] )
+			&& $entityContent->getEntity()->getType() !== $data['type'] ) {
+			$this->dieUsage( 'Illegal field used in call: type', 'param-illegal' );
 		}
 	}
 
