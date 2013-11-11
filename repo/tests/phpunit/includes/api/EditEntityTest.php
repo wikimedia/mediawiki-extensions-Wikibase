@@ -2,9 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
 
@@ -15,22 +12,15 @@ use Wikibase\PropertyContent;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
- * @author Michał Łazowik
+ * @author Michal Lazowik
  *
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
  * @group EditEntityTest
  * @group BreakingTheSlownessBarrier
- *
- * The database group has as a side effect that temporal database tables are created. This makes
- * it possible to test without poisoning a production database.
  * @group Database
- *
- * Some of the tests takes more time, and needs therefor longer time before they can be aborted
- * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
- * that hold the first tests in a pending state awaiting access to the database.
- * @group large
+ * @group medium
  */
 class EditEntityTest extends WikibaseApiTestCase {
 
@@ -42,6 +32,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Berlin' ) );
+			self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
 
 			$prop = PropertyContent::newEmpty();
 			$prop->getEntity()->setDataTypeId( 'string' );
@@ -64,19 +55,23 @@ class EditEntityTest extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 	}
 
+	/**
+	 * Provide data for a sequence of requests that will work when run in order
+	 * @return array
+	 */
 	public static function provideData() {
 		return array(
 			'new item' => array( // new item
 				'p' => array( 'new' => 'item', 'data' => '{}' ),
 				'e' => array( 'type' => 'item' ) ),
-			'new property' => array( // new property
+			'new property' => array( // new property (also make sure if we pass in a valid type it is accepted)
 				'p' => array( 'new' => 'property', 'data' => '{"datatype":"string"}' ),
 				'e' => array( 'type' => 'property' ) ),
 			'new property (this is our current example in the api doc)' => array( // new property (this is our current example in the api doc)
 				'p' => array( 'new' => 'property', 'data' => '{"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'.
 				'"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}' ),
 				'e' => array( 'type' => 'property' ) ),
-			'add a sitelink..' => array( // add a sitelink..
+			'add a sitelink..' => array( // add a sitelink.. (also makes sure if we pass in a valid id it is accepted)
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["%Q42%","%Q149%"]}}}' ),
 				'e' => array(
 					'sitelinks' => array(
@@ -358,7 +353,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	function testEditEntity( $params, $expected ) {
+	public function testEditEntity( $params, $expected ) {
 		$this->injectIds( $params );
 		$this->injectIds( $expected );
 
@@ -413,6 +408,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 		}
 	}
 
+	/**
+	 * Provide data for requests that will fail with a set exception, code and message
+	 * @return array
+	 */
 	public static function provideExceptionData() {
 		return array(
 			'no entity id given' => array( // no entity id given
@@ -494,6 +493,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'no sitelink - cannot change badges' => array( // no sitelink - cannot change badges
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q42%","%Q149%"]}}}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
+			'bad id in serialization' => array( // no entity id given
+				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"Q13244"}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid', 'message' => 'Invalid field used in call: "id", must match id parameter' ) ) ),
+			'bad type in serialization' => array( // no entity id given
+				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"%Berlin%","type":"foobar"}'),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid', 'message' => 'Invalid field used in call: "type", must match type associated with id' ) ) ),
 		);
 	}
 
