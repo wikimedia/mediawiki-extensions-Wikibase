@@ -121,7 +121,7 @@ class EditEntity extends ModifyEntity {
 		$entity = $entityContent->getEntity();
 		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
-		$this->validateDataProperties( $data, $entityContent->getWikiPage() );
+		$this->validateDataProperties( $data, $entityContent );
 
 		if ( $params['clear'] ) {
 			$entity->clear();
@@ -487,26 +487,33 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @since 0.4
+	 *
 	 * @param array $data
-	 * @param WikiPage|bool $page
+	 * @param EntityContent|bool $entityContent
 	 */
-	protected function validateDataProperties( $data, $page ) {
+	protected function validateDataProperties( $data, $entityContent ) {
 		$title = null;
 		$revision = null;
 
-		if ( $page ) {
-			$title = $page->getTitle();
-			$revision = $page->getRevision();
+		if ( $entityContent ) {
+			$wikiPage = $entityContent->getWikiPage();
+			$title = $wikiPage->getTitle();
+			$revision = $wikiPage->getTitle();
 		}
 
 		$allowedProps = array(
+			// ignored props
+			'id',
+			'type',
 			'length',
 			'count',
 			'touched',
+			// checked props
 			'pageid',
 			'ns',
 			'title',
 			'lastrevid',
+			// useful props
 			'labels',
 			'descriptions',
 			'aliases',
@@ -516,7 +523,9 @@ class EditEntity extends ModifyEntity {
 		);
 
 		$this->checkValidJson( $data, $allowedProps );
-		$this->checkPageIdProp( $data, $page );
+		$this->checkEntityId( $data, $entityContent );
+		$this->checkEntityType( $data, $entityContent );
+		$this->checkPageIdProp( $data, $entityContent );
 		$this->checkNamespaceProp( $data, $title );
 		$this->checkTitleProp( $data, $title );
 		$this->checkRevisionProp( $data, $revision );
@@ -591,6 +600,20 @@ class EditEntity extends ModifyEntity {
 		if ( isset( $data['lastrevid'] )
 			&& ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
 			$this->dieUsage( 'Illegal field used in call: lastrevid', 'param-illegal' );
+		}
+	}
+
+	private function checkEntityId( $data, EntityContent $entityContent ) {
+		if ( isset( $data['id'] )
+			&& $entityContent->getEntity()->getId()->getSerialization() !== $data['id'] ) {
+			$this->dieUsage( 'Illegal field used in call: id', 'param-illegal' );
+		}
+	}
+
+	private function checkEntityType( $data, EntityContent $entityContent ) {
+		if ( isset( $data['type'] )
+			&& $entityContent->getEntity()->getType() !== $data['type'] ) {
+			$this->dieUsage( 'Illegal field used in call: type', 'param-illegal' );
 		}
 	}
 
