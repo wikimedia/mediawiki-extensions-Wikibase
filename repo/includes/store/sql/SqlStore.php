@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DBQueryError;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -25,6 +26,11 @@ class SqlStore implements Store {
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup = null;
+
+	/**
+	 * @var EntityInfoBuilder
+	 */
+	private $entityInfoBuilder = null;
 
 	/**
 	 * @var PropertyInfoTable
@@ -324,6 +330,33 @@ class SqlStore implements Store {
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
 		return $lookup;
+	}
+
+	/**
+	 * @see Store::getEntityInfoBuilder
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityInfoBuilder
+	 */
+	public function getEntityInfoBuilder() {
+		if ( !$this->entityInfoBuilder ) {
+			$this->entityInfoBuilder = $this->newEntityInfoBuilder();
+		}
+
+		return $this->entityInfoBuilder;
+	}
+
+	/**
+	 * Creates a new EntityInfoBuilder
+	 *
+	 * @return EntityInfoBuilder
+	 */
+	protected function newEntityInfoBuilder() {
+		//TODO: Get $idParser from WikibaseRepo?
+		$idParser = new BasicEntityIdParser();
+		$builder = new SqlEntityInfoBuilder( $idParser );
+		return $builder;
 	}
 
 	/**

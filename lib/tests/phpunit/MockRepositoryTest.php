@@ -359,8 +359,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	protected function setupGetEntities() {
 		$one = new Item( array( 'id' => 1, 'label' => array( 'en' => 'one' ) ) );
 		$two = new Item( array( 'id' => 2, 'label' => array( 'en' => 'two' ) ) );
-		$three = new Item( array( 'id' => 3, 'label' => array( 'en' => 'three' ) ) );
-		$prop = new Property( array( 'id' => 101, 'label' => array( 'en' => 'property!' ) ) );
+		$three = new Item( array( 'id' => 3, 'label' => array( 'en' => 'three', 'de' => 'drei' ), 'description' => array( 'en' => 'the third' ) ) );
+		$prop = new Property( array( 'id' => 4, 'label' => array( 'en' => 'property!' ), 'datatype' => 'string' ) );
 
 		$this->repo->putEntity( $one, 1001 );
 		$this->repo->putEntity( $two, 1002 );
@@ -459,4 +459,149 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEmpty( $this->repo->getSiteLinksForItem( new ItemId( 'q123' ) ) );
 	}
 
+	public function provideBuildEntityInfo() {
+		return array(
+			array(
+				array(),
+				array()
+			),
+
+			array(
+				array(
+					new ItemId( 'Q1' ),
+					new PropertyId( 'P3' )
+				),
+				array(
+					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ),
+					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE ),
+				)
+			),
+
+			array(
+				array(
+					new ItemId( 'Q1' ),
+					new ItemId( 'Q1' ),
+				),
+				array(
+					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ),
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideBuildEntityInfo
+	 */
+	public function testBuildEntityInfo( array $ids, array $expected ) {
+		$actual = $this->repo->buildEntityInfo( $ids );
+
+		$this->assertArrayEquals( $expected, $actual, false, true );
+	}
+
+	public function provideAddTerms() {
+		return array(
+			array(
+				array(
+					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ),
+					'Q3' => array( 'id' => 'Q3', 'type' => Item::ENTITY_TYPE ),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+				),
+				null,
+				null,
+				array(
+					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
+						'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'one' ),
+											'de' => array( 'language' => 'de', 'value' => 'eins' ), ),
+						'descriptions' => array(),
+						'aliases' => array(),
+					),
+					'Q3' => array( 'id' => 'Q3', 'type' => Item::ENTITY_TYPE,
+						'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'three' ),
+											'de' => array( 'language' => 'de', 'value' => 'drei' ) ),
+						'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'the third' ) ),
+						'aliases' => array(),
+					),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
+						'labels' => array(),
+						'descriptions' => array(),
+						'aliases' => array() ),
+				)
+			),
+
+			array(
+				array(
+					'Q3' => array( 'id' => 'Q3', 'type' => Item::ENTITY_TYPE ),
+				),
+				array( 'label' ),
+				array( 'de' ),
+				array(
+					'Q3' => array( 'id' => 'Q3', 'type' => Item::ENTITY_TYPE,
+						'labels' => array( 'de' => array( 'language' => 'de', 'value' => 'drei' ) ),
+					),
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideAddTerms
+	 */
+	public function testAddTerms( array $entityInfo, array $types = null, array $languages = null, array $expected = null ) {
+		$this->setupGetEntities();
+		$this->repo->addTerms( $entityInfo, $types, $languages );
+
+		foreach ( $expected as $id => $expectedRecord ) {
+			$this->assertArrayHasKey( $id, $entityInfo );
+			$actualRecord = $entityInfo[$id];
+
+			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
+		}
+	}
+
+	public function provideAddDataTypes() {
+		return array(
+			array(
+				array(
+					'P4' => array( 'id' => 'P4', 'type' => Property::ENTITY_TYPE ),
+					'P7' => array( 'id' => 'P7', 'type' => Property::ENTITY_TYPE ),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+				),
+				array(
+					'P4' => array( 'id' => 'P4', 'type' => Property::ENTITY_TYPE, 'datatype' => 'string' ),
+					'P7' => array( 'id' => 'P7', 'type' => Property::ENTITY_TYPE, 'datatype' => null ),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideAddDataTypes
+	 */
+	public function testAddDataTypes( array $entityInfo, array $expected = null ) {
+		$this->setupGetEntities();
+		$this->repo->addDataTypes( $entityInfo );
+
+		foreach ( $expected as $id => $expectedRecord ) {
+			$this->assertArrayHasKey( $id, $entityInfo );
+			$actualRecord = $entityInfo[$id];
+
+			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
+		}
+	}
+
+	/**
+	 * @dataProvider provideAddDataTypes
+	 */
+	public function testGetDataTypeIdForProperty() {
+		$property = Property::newEmpty();
+		$property->setId( new PropertyId( 'P4' ) );
+		$property->setDataTypeId( 'url' );
+
+		$this->repo->putEntity( $property );
+		$this->assertEquals( 'url', $this->repo->getDataTypeIdForProperty( new PropertyId( 'P4' ) ) );
+
+		$this->setExpectedException( 'Wikibase\Lib\PropertyNotFoundException' );
+		$this->repo->getDataTypeIdForProperty( new PropertyId( 'P3645' ) );
+	}
 }
