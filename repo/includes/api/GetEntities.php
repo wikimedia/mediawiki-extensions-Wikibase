@@ -76,13 +76,7 @@ class GetEntities extends ApiWikibase {
 			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 		}
 
-		$success = true;
-
-		$this->getResult()->addValue(
-			null,
-			'success',
-			(int)$success
-		);
+		$this->resultBuilder->markSuccess( 1 );
 
 		wfProfileOut( __METHOD__ );
 	}

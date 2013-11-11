@@ -69,8 +69,8 @@ class RemoveClaims extends ModifyClaim {
 		}
 
 		$this->saveChanges( $entityContent, $summary );
-
-		$this->outputResult( $params['claim'] );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addValue( null, $params['claim'], 'claims', 'claim' );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -143,22 +143,6 @@ class RemoveClaims extends ModifyClaim {
 		}
 
 		return $changeOps;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param string[] $removedClaimGuids
-	 */
-	protected function outputResult( $removedClaimGuids ) {
-
-		$this->getResult()->setIndexedTagName( $removedClaimGuids, 'claim' );
-
-		$this->getResult()->addValue(
-			null,
-			'claims',
-			$removedClaimGuids
-		);
 	}
 
 	/**

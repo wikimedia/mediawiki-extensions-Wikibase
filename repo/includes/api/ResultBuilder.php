@@ -5,14 +5,19 @@ namespace Wikibase\Api;
 use ApiResult;
 use InvalidArgumentException;
 use SiteSQLStore;
+use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\Lib\Serializers\AliasSerializer;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\ClaimsSerializer;
 use Wikibase\Lib\Serializers\DescriptionSerializer;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\LabelSerializer;
+use Wikibase\Lib\Serializers\ReferenceSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
+use Wikibase\Reference;
 
 /**
  * Builder for Api Results
@@ -30,17 +35,47 @@ class ResultBuilder {
 	protected $result;
 
 	/**
+	 * @var SerializationOptions
+	 */
+	protected $serializationOptions;
+
+	/**
 	 * @var int
 	 */
 	protected $missingEntityCounter;
 
-	public function __construct( $result ) {
+	//@todo remove this comment, the below is to be merged with daniels
+	/**
+	 * @var SerializerFactory
+	 */
+	protected $serializerFactory;
+
+	/**
+	 * @param ApiResult $result
+	 * @param SerializerFactory $serializerFactory
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function __construct( ApiResult $result, SerializerFactory $serializerFactory = null ) {
 		if( !$result instanceof ApiResult ){
-			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
+			throw new InvalidArgumentException( 'ResultBuilder must be constructed with an ApiResult' );
 		}
 
 		$this->result = $result;
+		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
+		$this->serializationOptions = new SerializationOptions();
+
+		//@todo cleanup the below which is to deal with daniels patch
+		if( ! $this->serializerFactory instanceof SerializerFactory ){
+			$this->serializerFactory = new SerializerFactory();
+		}
+
+		if ( method_exists( $this->serializerFactory, 'newSerializationOptions' ) ) {
+			$this->serializationOptions = $this->serializerFactory->newSerializationOptions();
+		}
+
+		$this->serializationOptions->setIndexTags( $this->getResult()->getIsRawMode() );
 	}
 
 	private function getResult(){
@@ -54,12 +89,28 @@ class ResultBuilder {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function markSuccess( $success ) {
+	public function markSuccess( $success = true ) {
 		$value = intval( $success );
 		if( $value !== 1 && $value !== 0 ){
 			throw new InvalidArgumentException( '$wasSuccess must evaluate to either 1 or 0 when using intval()' );
 		}
 		$this->result->addValue( null, 'success', $value );
+	}
+
+	/**
+	 * @see ApiResult::addValue
+	 * @see ApiResult::setIndexedTagName
+	 *
+	 * @param $path array|string|null
+	 * @param $value mixed
+	 * @param $name string
+	 * @param string $tag Tag name
+	 */
+	public function addValue( $path, $value, $name, $tag ){
+		if ( $this->getResult()->getIsRawMode() ) {
+			$this->getResult()->setIndexedTagName( $value, $tag );
+		}
+		$this->getResult()->addValue( $path, $name, $value );
 	}
 
 	/**
@@ -69,24 +120,11 @@ class ResultBuilder {
 	 *
 	 * @param array $labels the labels to set in the result
 	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
 	 */
-	public function addLabels( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$labelSerializer = new LabelSerializer( $options );
-
+	public function addLabels( array $labels, $path ) {
+		$labelSerializer = new LabelSerializer( $this->serializationOptions );
 		$value = $labelSerializer->getSerialized( $labels );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$this->addValue( $path, $value, 'labels', 'label' );
 	}
 
 	/**
@@ -96,24 +134,11 @@ class ResultBuilder {
 	 *
 	 * @param array $descriptions the descriptions to insert in the result
 	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
 	 */
-	public function addDescriptions( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$descriptionSerializer = new DescriptionSerializer( $options );
-
+	public function addDescriptions( array $descriptions, $path ) {
+		$descriptionSerializer = new DescriptionSerializer( $this->serializationOptions );
 		$value = $descriptionSerializer->getSerialized( $descriptions );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$this->addValue( $path, $value, 'descriptions', 'description' );
 	}
 
 	/**
@@ -123,23 +148,11 @@ class ResultBuilder {
 	 *
 	 * @param array $aliases the aliases to set in the result
 	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
 	 */
-	public function addAliases( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$aliasSerializer = new AliasSerializer( $options );
+	public function addAliases( array $aliases, $path ) {
+		$aliasSerializer = new AliasSerializer( $this->serializationOptions );
 		$value = $aliasSerializer->getSerialized( $aliases );
-
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-			$this->getResult()->addValue( $path, $name, $value );
-		}
-
+		$this->addValue( $path, $value, 'aliases', 'alias' );
 	}
 
 	/**
@@ -149,16 +162,13 @@ class ResultBuilder {
 	 *
 	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
 	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 * @param $options
+	 * @param array|null $options
 	 */
-	public function addSiteLinks( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$serializerOptions = new SerializationOptions();
+	public function addSiteLinks( array $siteLinks, $path, $options = null ) {
+		$serializerOptions = $this->serializationOptions;
 		$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
-		$serializerOptions->setIndexTags( $this->getResult()->getIsRawMode() );
 
-		if ( isset( $options ) ) {
+		if ( is_array( $options ) ) {
 			if ( in_array( EntitySerializer::SORT_ASC, $options ) ) {
 				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
 			} elseif ( in_array( EntitySerializer::SORT_DESC, $options ) ) {
@@ -174,17 +184,11 @@ class ResultBuilder {
 			}
 		}
 
-		$siteStore = \SiteSQLStore::newInstance();
+		$siteStore = SiteSQLStore::newInstance();
 		$siteLinkSerializer = new SiteLinkSerializer( $serializerOptions, $siteStore );
 		$value = $siteLinkSerializer->getSerialized( $siteLinks );
 
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
-
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+		$this->addValue( $path, $value, 'sitelinks', 'sitelink' );
 	}
 
 	/**
@@ -192,26 +196,48 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param array $claims the labels to set in the result
+	 * @param Claim[] $claims the labels to set in the result
 	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 * @param string $tag tag used for indexed entries in xml formats and similar
-	 *
 	 */
-	public function addClaims( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
-		$options = new SerializationOptions();
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$claimSerializer = new ClaimsSerializer( $options );
+	public function addClaims( array $claims, $path ) {
+		$claimsSerializer = new ClaimsSerializer( $this->serializationOptions );
+		$value = $claimsSerializer->getSerialized( new Claims( $claims ) );
+		$this->addValue( $path, $value, 'claims', 'claim' );
+	}
 
-		$value = $claimSerializer->getSerialized( new Claims( $claims ) );
+	/**
+	 * Get serialized claim and add it to result
+	 * @param Claim $claim#
+	 * @todo test
+	 */
+	public function addClaim( Claim $claim ) {
+		$serializer = new ClaimSerializer( $this->serializationOptions );
+		$value = $serializer->getSerialized( $claim );
+		$this->addValue( null, $value, 'claim', 'claim' );
+	}
 
-		if ( $value !== array() ) {
-			if ( $this->getResult()->getIsRawMode() ) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
-			}
+	/**
+	 * Get serialized reference and add it to result
+	 * @param Reference $reference
+	 * @todo test
+	 */
+	public function addReference( Reference $reference ) {
+		$serializer = new ReferenceSerializer( $this->serializationOptions );
+		$value = $serializer->getSerialized( $reference );
+		$this->addValue( null, $value, 'reference', 'reference' );
+	}
 
-			$this->getResult()->addValue( $path, $name, $value );
-		}
+	/**
+	 * @todo test
+	 */
+	public function addMissingEntity( $siteId, $title ){
+		//@todo fix Bug 45509 (useless missing attribute in xml...)
+		$this->getResult()->addValue(
+			'entities',
+			(string)($this->missingEntityCounter),
+			array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
+		);
+		$this->missingEntityCounter--;
 	}
 
 }
