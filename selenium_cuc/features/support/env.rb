@@ -40,9 +40,9 @@ def sauce_browser(test_name, language)
   require 'selenium/webdriver/remote/http/persistent' # http_client
   browser = Watir::Browser.new(
       :remote,
-      :http_client => Selenium::WebDriver::Remote::Http::Persistent.new,
-      :url => "http://#{ENV['SAUCE_ONDEMAND_USERNAME']}:#{ENV['SAUCE_ONDEMAND_ACCESS_KEY']}@ondemand.saucelabs.com:80/wd/hub",
-      :desired_capabilities => caps)
+      http_client: Selenium::WebDriver::Remote::Http::Persistent.new,
+      url: "http://#{ENV['SAUCE_ONDEMAND_USERNAME']}:#{ENV['SAUCE_ONDEMAND_ACCESS_KEY']}@ondemand.saucelabs.com:80/wd/hub",
+      desired_capabilities: caps)
 
   browser
 end
