@@ -19,7 +19,6 @@ use Wikibase\Property;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-
 class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 
 	private $dataTypeIds = array();
@@ -36,7 +35,7 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 		$this->verifyIdIsOfAProperty( $propertyId );
 		$this->verifyDataTypeIsSet( $propertyId );
 
-		return $this->dataTypeIds[$propertyId->getNumericId()];
+		return $this->dataTypeIds[$propertyId->getSerialization()];
 	}
 
 	/**
@@ -48,11 +47,11 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	public function setDataTypeForProperty( EntityId $propertyId, $dataTypeId ) {
 		$this->verifyIdIsOfAProperty( $propertyId );
 		$this->verifyDataTypeIdType( $dataTypeId );
-		$this->dataTypeIds[$propertyId->getNumericId()] = $dataTypeId;
+		$this->dataTypeIds[$propertyId->getSerialization()] = $dataTypeId;
 	}
 
 	private function verifyDataTypeIsSet( EntityId $propertyId ) {
-		$numericId = $propertyId->getNumericId();
+		$numericId = $propertyId->getSerialization();
 
 		if ( !array_key_exists( $numericId, $this->dataTypeIds ) ) {
 			throw new PropertyNotFoundException( $propertyId, "The DataType for property '$numericId' is not set" );
