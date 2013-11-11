@@ -31,7 +31,7 @@ Feature: Edit label
   @ui_only
   Scenario: Modify the label
     When I click the label edit button
-      And I enter MODIFIED LABEL as label
+      And I enter 'MODIFIED LABEL' as label
     Then Label save button should be there
       And Label cancel button should be there
       And Label edit button should not be there
@@ -39,7 +39,7 @@ Feature: Edit label
   @ui_only
   Scenario Outline: Cancel label
     When I click the label edit button
-      And I enter MODIFIED LABEL as label
+      And I enter 'MODIFIED LABEL' as label
       And I <cancel>
     Then Original label should be displayed
       And Label edit button should be there
@@ -54,7 +54,7 @@ Feature: Edit label
   @save_label @modify_entity
   Scenario Outline: Save label
     When I click the label edit button
-      And I enter MODIFIED LABEL as label
+      And I enter 'MODIFIED LABEL' as label
       And I <save>
     Then MODIFIED LABEL should be displayed as label
 
@@ -66,7 +66,7 @@ Feature: Edit label
   @save_label @modify_entity
   Scenario Outline: Save label and reload
     When I click the label edit button
-      And I enter MODIFIED LABEL as label
+      And I enter 'MODIFIED LABEL' as label
       And I <save>
       And I reload the page
     Then MODIFIED LABEL should be displayed as label
@@ -79,7 +79,7 @@ Feature: Edit label
   @save_label @modify_entity
   Scenario Outline: Label with special input
     When I click the label edit button
-      And I enter <label> as label
+      And I enter '<label>' as label
       And I click the label save button
     Then <expected_label> should be displayed as label
 
@@ -93,6 +93,6 @@ Feature: Edit label
   @save_label
   Scenario: Label with a too long value
     When I click the label edit button
-      And I enter looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong as label
+      And I enter a long string as label
       And I click the label save button
     Then An error message should be displayed

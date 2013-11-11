@@ -32,11 +32,15 @@ When /^I click the label save button$/ do
   end
 end
 
-When /^I enter (.+) as label$/ do |value|
+When /^I enter '(.+)' as label$/ do |value|
   on(ItemPage) do |page|
     page.labelInputField_element.clear
     page.labelInputField = value
   end
+end
+
+When /^I enter a long string as label$/ do
+  step "I enter 'looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong' as label"
 end
 
 Then /^Label edit button should be there$/ do

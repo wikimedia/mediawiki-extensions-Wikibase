@@ -32,11 +32,15 @@ When /^I click the description save button$/ do
   end
 end
 
-When /^I enter (.+) as description$/ do |value|
+When /^I enter '(.+)' as description$/ do |value|
   on(ItemPage) do |page|
     page.descriptionInputField_element.clear
     page.descriptionInputField = value
   end
+end
+
+When /^I enter a long string as description$/ do
+  step "I enter 'looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong' as description"
 end
 
 Then /^Description edit button should be there$/ do
