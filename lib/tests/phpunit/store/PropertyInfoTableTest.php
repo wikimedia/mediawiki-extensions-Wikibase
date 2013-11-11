@@ -2,11 +2,9 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityId;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoTable;
 use Wikibase\Settings;
-use Wikibase\Item;
 
 /**
  * @covers Wikibase\PropertyInfoTable
@@ -60,7 +58,7 @@ class PropertyInfoTableTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSetPropertyInfo
 	 */
-	public function testSetPropertyInfo( EntityId $id, array $info, $expectedException ) {
+	public function testSetPropertyInfo( PropertyId $id, array $info, $expectedException ) {
 		$this->helper->testSetPropertyInfo( $id, $info, $expectedException );
 	}
 
