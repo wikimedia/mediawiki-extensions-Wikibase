@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_96de8439",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-11T20:20:52Z",
+      "side": 1,
+      "message": "Please make the class visible using a \"use SiteSQLStore\" above",
+      "revId": "64ce6f16915e16601865a101515de595b36235a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f6efb8e7",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-11T20:20:52Z",
+      "side": 1,
+      "message": "I think you should rather create those the client JS",
+      "revId": "64ce6f16915e16601865a101515de595b36235a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_56d40c1d",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-11T20:20:52Z",
+      "side": 1,
+      "message": "I don\u0027t think you should import that file per hand... set a dependency on wikibase.special rather",
+      "revId": "64ce6f16915e16601865a101515de595b36235a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f605f8be",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-11T20:20:52Z",
+      "side": 1,
+      "message": "Please have a look at https://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript",
+      "revId": "64ce6f16915e16601865a101515de595b36235a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_3630709e",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-11T20:20:52Z",
+      "side": 1,
+      "message": "Try to avoid such long lines, you could eg. create a var with $(\u0027#wb-entitieswithoutpage-language\u0027) above",
+      "revId": "64ce6f16915e16601865a101515de595b36235a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_9614c4f4",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-11T20:20:52Z",
+      "side": 1,
+      "message": "You don\u0027t actually need mw",
+      "revId": "64ce6f16915e16601865a101515de595b36235a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
