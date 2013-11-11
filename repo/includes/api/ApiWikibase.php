@@ -34,6 +34,13 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
+	 * @return ResultBuilder
+	 */
+	public function getResultBuilder(){
+		return $this->resultBuilder;
+	}
+
+	/**
 	 * Wrapper message for single errors
 	 *
 	 * @var bool|string
@@ -516,11 +523,10 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @see ApiResult::addValue()
 	 *
-	 * @param string|null|array  $path  Where in the result to put the revision idf
-	 * @param string  $name   The name to use for the revision id in the result structure
+	 * @param string|null|array $path Where in the result to put the revision idf
 	 * @param \Status $status The status to get the revision ID from.
 	 */
-	protected function addRevisionIdFromStatusToResult( $path, $name, Status $status ) {
+	protected function addRevisionIdFromStatusToResult( $path, Status $status ) {
 		$statusValue = $status->getValue();
 
 		/* @var Revision $revision */
@@ -530,7 +536,7 @@ abstract class ApiWikibase extends \ApiBase {
 		if ( $revision ) {
 			$this->getResult()->addValue(
 				$path,
-				$name,
+				'lastrevid',
 				intval( $revision->getId() )
 			);
 		}

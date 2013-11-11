@@ -74,8 +74,8 @@ class SetReference extends ModifyClaim {
 		}
 
 		$this->saveChanges( $entityContent, $summary );
-
-		$this->outputReference( $newReference );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addReference( $newReference );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -182,23 +182,6 @@ class SetReference extends ModifyClaim {
 		$index = isset( $params['index'] ) ? $params['index'] : null;
 
 		return new ChangeOpReference( $claimGuid, $reference, $hash, $index );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param Reference $reference
-	 */
-	protected function outputReference( Reference $reference ) {
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $reference );
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'reference',
-			$serializer->getSerialized( $reference )
-		);
 	}
 
 	/**
