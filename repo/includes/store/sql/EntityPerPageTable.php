@@ -213,6 +213,47 @@ class EntityPerPageTable implements EntityPerPage {
 		return $this->getItemIdsFromRows( $rows );
 	}
 
+	/**
+	 * Return all items with the most sitelinks
+	 *
+	 * @since 0.5
+	 *
+	 * @param string|null $siteId Restrict the request to a specific site.
+	 * @param integer $limit Limit of the query.
+	 * @param integer $offset Offset of the query.
+	 * @return EntityId[]
+	 */
+	public function getItemsWithMostSitelinks( $siteId = null, $limit = 50, $offset = 0 ) {
+		$dbr = wfGetDB( DB_SLAVE );
+		$conditions = array(
+			'epp_entity_type' => Item::ENTITY_TYPE
+		);
+		$joinConditions = 'ips_item_id = epp_entity_id';
+
+		if ( $siteId !== null ) {
+			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
+		}
+
+		$vars = array( 'ips_item_id', 'COUNT(ips_item_id)' );
+		$vars['entity_id'] = 'epp_entity_id';
+
+		$rows = $dbr->select(
+			array( 'wb_entity_per_page', 'wb_items_per_site' ),
+			$vars,
+			$conditions,
+			__METHOD__,
+			array(
+				'OFFSET' => $offset,
+				'LIMIT' => $limit,
+				'ORDER BY' => 'COUNT(ips_item_id) DESC',
+				'GROUP BY' => 'ips_item_id'
+			),
+			array( 'wb_items_per_site' => array( 'LEFT JOIN', $joinConditions ) )
+		);
+
+		return $this->getItemIdsFromRows( $rows );
+	}
+
 	protected function getItemIdsFromRows( $rows ) {
 		$itemIds = array();
 
