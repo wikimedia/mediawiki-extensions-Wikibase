@@ -13,6 +13,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterFactory;
+use ValueParsers\ParseException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -622,6 +623,31 @@ abstract class EntityContent extends AbstractContent {
 					$foundLabel->getLanguage(),
 					$foundLabel->getEntityId()
 				);
+			}
+		}
+	}
+
+	/**
+	 * Adds errors to the status if there are labels that represent a valid entity id.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Status $status
+	 * @param string $forbiddenEntityType entity type that should lead to a conflict
+	 */
+	final protected function addLabelEntityIdConflicts( Status $status, $forbiddenEntityType ) {
+		$entity = $this->getEntity();
+		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+
+		foreach ( $entity->getLabels() as $labelText ) {
+			try {
+				$entityId = $entityIdParser->parse( $labelText );
+				if ( $entityId->getEntityType() === $forbiddenEntityType ) {
+					$status->fatal( 'wikibase-error-label-no-entityid' );
+				}
+			}
+			catch ( ParseException $parseException ) {
+				// All fine, the parsing did not work, so there is no entity id :)
 			}
 		}
 	}

@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\PropertyContent;
 use Wikibase\EntityContent;
+use Wikibase\StoreFactory;
 
 /**
  * @covers Wikibase\PropertyContent
@@ -51,7 +52,7 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	public function testLabelUniquenessRestriction() {
-		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
+		StoreFactory::getStore()->getTermIndex()->clear();
 
 		$propertyContent = PropertyContent::newEmpty();
 		$propertyContent->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
@@ -73,6 +74,36 @@ class PropertyContentTest extends EntityContentTest {
 		$status = $propertyContent1->save( 'save property' );
 		$this->assertFalse( $status->isOK(), "saving a property with duplicate label+lang should not work" );
 		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-wikibase-property' ) );
+	}
+
+	public function testLabelEntityIdRestriction() {
+		StoreFactory::getStore()->getTermIndex()->clear();
+
+		$propertyContent = PropertyContent::newEmpty();
+		$propertyContent->getProperty()->setLabel( 'en', 'testLabelEntityIdRestriction' );
+		$propertyContent->getProperty()->setDataTypeId( 'wikibase-item' );
+
+		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), "property creation should work" );
+
+		// save a property
+		$propertyContent->getProperty()->setLabel( 'de', 'testLabelEntityIdRestriction' );
+
+		$status = $propertyContent->save( 'save property' );
+		$this->assertTrue( $status->isOK(), "saving a property should work" );
+
+		// save a property with a valid item id as label
+		$propertyContent->getProperty()->setLabel( 'fr', 'Q42' );
+
+		$status = $propertyContent->save( 'save property' );
+		$this->assertTrue( $status->isOK(), "saving a property with a valid item id as label should work" );
+
+		// save a property with a valid property id as label
+		$propertyContent->getProperty()->setLabel( 'nl', 'P23' );
+
+		$status = $propertyContent->save( 'save property' );
+		$this->assertFalse( $status->isOK(), "saving a proeprty with a valid property id as label should not work" );
+		$this->assertTRue( $status->hasMessage( 'wikibase-error-label-no-entityid' ) );
 	}
 
 }
