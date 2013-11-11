@@ -134,6 +134,8 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $type )->text(), $type );
 		}
 
+		$this->getOutput()->addModules( 'wikibase.special.entitiesWithout' );
+
 		$this->getOutput()->addHTML(
 			Html::openElement(
 				'form',
