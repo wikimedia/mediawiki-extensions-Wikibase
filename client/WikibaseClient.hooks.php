@@ -320,12 +320,12 @@ final class ClientHooks {
 	 * @param array &$tables
 	 * @param array &$join_conds
 	 * @param array &$fields
-	 * @param array $values
+	 * @param array|FormOptions $opts array until MW 1.22, FormOptions since MW 1.23
 	 *
 	 * @return bool
 	 */
 	public static function onSpecialWatchlistQuery( array &$conds, array &$tables,
-		array &$join_conds, array &$fields, array $values = array()
+		array &$join_conds, array &$fields, $opts = array()
 	) {
 		global $wgRequest, $wgUser;
 
@@ -335,7 +335,7 @@ final class ClientHooks {
 			// Don't act on activated enhanced watchlist
 			$wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false &&
 			// Or in case the user disabled it
-			$values['hideWikibase'] === 0
+			$opts['hideWikibase'] === 0
 		) {
 			$dbr = wfGetDB( DB_SLAVE );
 
