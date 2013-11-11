@@ -222,6 +222,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-entitieswithoutlabel-label-type' => 'Type:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'all',
 	'wikibase-entitieswithoutlabel-submit' => 'Find',
+	'wikibase-entitieswithoutlabel-invalid-site' => '"$1" is not a valid site.',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is not a valid language code.',
 	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" is not a valid entity type.',
 	'special-itemswithoutsitelinks' => 'Items without sitelinks',
@@ -942,6 +943,12 @@ This special page returns a list of entities without label for a given language'
 {{Identical|All}}',
 	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.
 {{Identical|Find}}',
+	'wikibase-entitieswithoutlabel-invalid-site' => 'Error message shown when the user specified an invalid site.
+
+Parameters:
+* $1 - site identifier the user entered
+See also:
+* {{msg-mw|Wikibase-unconnectedpages-invalid-language}}',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the language code passed in parameter is invalid.
 
 Parameters:
@@ -8560,7 +8567,7 @@ tapno birukem ti napananda.',
 * pagsasao – nalawag a pateg para iti pananginagan ti pagsasao para iti testo a paset
 * pateg – nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti pagsasao',
 	'wikibase-listdatatypes-string-head' => 'Kuerdas',
-	'wikibase-listdatatypes-string-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas dagiti karakter. Ti kadawyan a panag-usar ket dagiti pananginagan nga adda dagiti naisurat a porma a saan nga agtaltalek iti pagsasao iti agbasbasa. 
+	'wikibase-listdatatypes-string-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas dagiti karakter. Ti kadawyan a panag-usar ket dagiti pananginagan nga adda dagiti naisurat a porma a saan nga agtaltalek iti pagsasao iti agbasbasa.
 
 * pateg– nalawag a pateg para iti kuerdas ti naisangsangayan a kita ti kuerdas',
 	'wikibase-listdatatypes-time-head' => 'Oras',
@@ -9797,7 +9804,7 @@ $messages['kk-cyrl'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'белгісіз мән',
 	'wikibase-snakview-snaktypeselector-novalue' => 'мән жоқ',
 	'wikibase-entityselector-more' => 'толығырақ',
-	'wikibase-anonymouseditwarning' => 'Ескерту: Сіз жүйеге кірмегенсіз. 
+	'wikibase-anonymouseditwarning' => 'Ескерту: Сіз жүйеге кірмегенсіз.
 IP-мекенжайыңыз бұл  $1 түзету тарихында жазылып алынады.', # Fuzzy
 	'wikibase-restrictionedit-tooltip-message' => 'Бұл бет құлыпталған. Өңдеуге рұқсатыңыз жоқ.',
 	'wikibase-blockeduser-tooltip-message' => 'Қатысушы атыңыз не IP мекенжайыңыз бұғатталғандықтан өңдеуге рұқсатыңыз жоқ.',
@@ -16612,7 +16619,7 @@ $messages['yi'] = array(
 	'wikibase-shortcopyrightwarning' => 'דורך קליקן "$1", זענט איר מסכים צו די [[$2|ניצבאדינגונגען]], און איר זענט מסכים אָן חרטה צו פארעפנטלעכן אייער ביישטייערונג אונטער דעם $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'איך נעם אָן די באדינגונגען פֿאר מײַנע קומעדיקע רעדאקטירונגען. ווײַזט נישט מער די מעלדונג.',
 	'wikibase-entityselector-more' => 'נאך',
-	'wikibase-anonymouseditwarning' => 'ווארענונג: איר זענט נישט אריינלאגירט. 
+	'wikibase-anonymouseditwarning' => 'ווארענונג: איר זענט נישט אריינלאגירט.
 אייער IP־אדרעס וועט ווערן דאקומענטירט אין דעם רעדאקטירן היסטאריע פון דעם אביעקט.',
 	'wikibase-restrictionedit-tooltip-message' => 'דער בלאט איז געשיצט. מען טאר נישט רעדאקטירן.',
 	'wikibase-blockeduser-tooltip-message' => 'איר האט נישט קיין דערלויבניש צו רעדאקטירן ווייל אייער באניצער־נאמען אדער IP אדרעס איז געווארן בלאקירט.',
