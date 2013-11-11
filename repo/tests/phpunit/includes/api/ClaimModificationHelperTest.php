@@ -2,12 +2,13 @@
 
 namespace Wikibase\Test\Api;
 
+use DataValues\StringValue;
 use UsageException;
 use Wikibase\Api\CreateClaim;
-use Wikibase\Claim;
 use ApiMain;
 use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\SnakValidationHelper;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ItemContent;
 use Wikibase\Claims;
@@ -15,7 +16,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * @covers Wikibase\Api\ClaimModificationHelper
- * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -24,24 +24,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-
 class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
-
-	public function testAddClaimToApiResult() {
-		$apiMain = new ApiMain();
-		$snak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$claim = $item->newClaim( $snak );
-		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
-		$item->addClaim( $claim );
-
-		$claimModificationHelper = $this->getNewInstance( $apiMain );
-		$claimModificationHelper->addClaimToApiResult( $claim );
-
-		$resultData = $apiMain->getResultData();
-		$this->assertArrayHasKey( 'claim', $resultData );
-		$this->assertEquals( $claim->getGuid(), $resultData['claim']['id'] );
-	}
 
 	public function testGetEntityTitle() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
@@ -98,7 +81,7 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 	public function testGetClaimFromEntity() {
 		$claimModificationHelper = $this->getNewInstance();
 		$entity = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$claim = $entity->newClaim( $snak );
 		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
 		$claims = new Claims();

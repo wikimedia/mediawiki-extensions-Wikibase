@@ -10,10 +10,12 @@ use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
+use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\Api\ResultBuilder
- * @todo mock and inject serializers to avoid massive expected output
+ * @todo mock and inject serializers to avoid massive expected output?
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
@@ -237,4 +239,137 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $result->getData() );
 	}
 
+	public function testAddClaim(){
+		$result = $this->getDefaultResult();
+		$claim = new Claim( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
+		$claim->setGuid( 'fooguidbar' );
+		$expected = array(
+			'claims' => array(
+				'fooguidbar' => array(
+					'id' => 'fooguidbar',
+					'mainsnak' => array(
+						'snaktype' => 'value',
+						'property' => 'P12',
+						'datavalue' => array(
+							'value' => 'stringVal',
+							'type' => 'string',
+						),
+					),
+					'type' => 'claim',
+				)
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addClaim( $claim );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddReference(){
+		$result = $this->getDefaultResult();
+		$reference = new Reference( new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) ) ) );
+		$hash = $reference->getHash();
+		$expected = array(
+			'references' => array(
+				$hash => array(
+					'hash' => $hash,
+					'snaks' => array(
+						'P12' => array(
+							array(
+								'snaktype' => 'value',
+								'property' => 'P12',
+								'datavalue' => array(
+									'value' => 'stringVal',
+									'type' => 'string',
+								),
+							)
+						),
+					),
+					'snaks-order' => array( 'P12' ),
+				)
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addReference( $reference );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	/**
+	 * @dataProvider provideMissingEntity
+	 */
+	public function testAddMissingEntity( $missingEntities, $expected ){
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
+
+		foreach( $missingEntities as $missingDetails ){
+			$resultBuilder->addMissingEntity( $missingDetails['siteId'], $missingDetails['title'] );
+		}
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public static function provideMissingEntity() {
+		return array(
+			array(
+				array(
+					array( 'siteId' => 'enwiki', 'title' => 'Berlin'),
+				),
+				array(
+					'entities' => array(
+						'-1' => array(
+							'site' => 'enwiki',
+							'title' => 'Berlin',
+							//@todo fix bug 45509 useless missing flag
+							'missing' => '',
+						)
+					),
+				)
+			),
+			array(
+				array(
+					array( 'siteId' => 'enwiki', 'title' => 'Berlin'),
+					array( 'siteId' => 'dewiki', 'title' => 'Foo'),
+				),
+				array(
+					'entities' => array(
+						'-1' => array(
+							'site' => 'enwiki',
+							'title' => 'Berlin',
+							//@todo fix bug 45509 useless missing flag
+							'missing' => '',
+						),
+						'-2' => array(
+							'site' => 'dewiki',
+							'title' => 'Foo',
+							//@todo fix bug 45509 useless missing flag
+							'missing' => '',
+						)
+					),
+				)
+			),
+		);
+	}
+
+	public function testAddNormalizedTitle(){
+		$result = $this->getDefaultResult();
+		$from = 'berlin';
+		$to = 'Berlin';
+		$expected = array(
+			'normalized' => array(
+				//todo this is JUST SILLY
+				'n' => array(
+					'from' => 'berlin',
+					'to' => 'Berlin'
+				),
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addNormalizedTitle( $from, $to );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
 }
