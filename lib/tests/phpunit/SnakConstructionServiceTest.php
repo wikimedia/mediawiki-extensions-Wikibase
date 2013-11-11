@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Lib\InMemoryDataTypeLookup;
@@ -49,7 +50,7 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testNewSnak( $propertyId, $snakType, $rawValue, $expectedSnakClass, $expectedValue, $expectedException ) {
 		if ( is_int( $propertyId ) ) {
-			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+			$propertyId = PropertyId::newFromNumber( $propertyId );
 		}
 
 		if ( $expectedException !== null ) {
@@ -69,8 +70,6 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 
 	public function newSnakProvider() {
 		return array(
-			'bad id' => array( new EntityId( Item::ENTITY_TYPE, 1 ), 'novalue', null, 'Wikibase\PropertyNoValueSnak', null, 'InvalidArgumentException' ),
-
 			'novalue' => array( 1, 'novalue', null, 'Wikibase\PropertyNoValueSnak', null, null ),
 			'somevalue' => array( 1, 'somevalue', null, 'Wikibase\PropertySomeValueSnak', null, null ),
 			'value' => array( 1, 'value', '"hello"', 'Wikibase\PropertyValueSnak', null, null ),

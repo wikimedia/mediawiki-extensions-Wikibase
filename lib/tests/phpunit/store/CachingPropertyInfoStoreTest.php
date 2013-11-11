@@ -3,11 +3,9 @@
 namespace Wikibase\Test;
 
 use HashBagOStuff;
-use Wikibase\EntityId;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\CachingPropertyInfoStore;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Item;
 
 /**
  * @covers Wikibase\CachingPropertyInfoStore
@@ -48,7 +46,7 @@ class CachingPropertyInfoStoreTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSetPropertyInfo
 	 */
-	public function testSetPropertyInfo( EntityId $id, array $info, $expectedException ) {
+	public function testSetPropertyInfo( PropertyId $id, array $info, $expectedException ) {
 		$this->helper->testSetPropertyInfo( $id, $info, $expectedException );
 	}
 
@@ -65,8 +63,8 @@ class CachingPropertyInfoStoreTest extends \MediaWikiTestCase {
 	}
 
 	public function testPropertyInfoWriteThrough() {
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'P23' );
+		$p42 = new PropertyId( 'P42' );
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
 

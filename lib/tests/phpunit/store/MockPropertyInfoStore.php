@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Property;
 use Wikibase\PropertyInfoStore;
 
@@ -23,14 +23,14 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	protected $propertyInfo = array();
 
 	/**
-	 * @see   PropertyInfoStore::getPropertyInfo
+	 * @see PropertyInfoStore::getPropertyInfo
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return array|null
 	 * @throws InvalidArgumentException
 	 */
-	public function getPropertyInfo( EntityId $propertyId ) {
+	public function getPropertyInfo( PropertyId $propertyId ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( 'Property ID expected! ' . $propertyId );
 		}
@@ -57,16 +57,12 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::setPropertyInfo
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 * @param array $info
 	 * @throws InvalidArgumentException
 	 */
-	public function setPropertyInfo( EntityId $propertyId, array $info ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new InvalidArgumentException( 'Property ID expected! ' . $propertyId );
-		}
-
-		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ]) ) {
+	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
+		if ( !isset( $info[PropertyInfoStore::KEY_DATA_TYPE] ) ) {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 
@@ -75,18 +71,14 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see   PropertyInfoStore::removePropertyInfo
+	 * @see PropertyInfoStore::removePropertyInfo
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @throws InvalidArgumentException
 	 * @return bool
 	 */
-	public function removePropertyInfo( EntityId $propertyId ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new InvalidArgumentException( 'Property ID expected! ' . $propertyId );
-		}
-
+	public function removePropertyInfo( PropertyId $propertyId ) {
 		$id = $propertyId->getNumericId();
 
 		if ( array_key_exists( $id, $this->propertyInfo ) ) {
@@ -96,4 +88,5 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 			return false;
 		}
 	}
+
 }
