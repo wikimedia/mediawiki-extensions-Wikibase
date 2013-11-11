@@ -92,6 +92,16 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.special.entitiesWithout' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.special/wikibase.special.entitiesWithout.js'
+			),
+			'dependencies' => array(
+				'wikibase.special',
+				'jquery.wikibase.siteselector'
+			)
+		),
+
 		'wikibase.special.itemByTitle' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.special/wikibase.special.itemByTitle.js'
