@@ -77,6 +77,16 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.special.entitiesWithout' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.special/wikibase.special.entitiesWithout.js'
+			),
+			'dependencies' => array(
+				'wikibase.special',
+				'jquery.ui.suggester'
+			)
+		),
+
 		'wikibase.special.itemByTitle' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.special/wikibase.special.itemByTitle.js'
@@ -100,6 +110,7 @@ return call_user_func( function() {
 
 	if ( defined( 'ULS_VERSION' ) ) {
 		$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'jquery.uls.data';
+		$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'jquery.uls.data';
 	}
 
 	return $modules;
