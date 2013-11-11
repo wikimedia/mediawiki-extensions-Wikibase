@@ -27,6 +27,7 @@ use Title;
 use User;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
@@ -740,13 +741,13 @@ final class ClientHooks {
 				new SimpleSiteLink( Settings::get( 'siteGlobalID' ), $title->getFullText() )
 			);
 
-			if( $entityId ) {
+			if ( $entityId instanceof ItemId ) {
 				// Creating a Repo link with Item ID as anchor text
 				$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 				$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
 				$idString = $idFormatter->format( $entityId );
 				$itemLink = Linker::makeExternalLink(
-					$repoLinker->repoItemUrl( $entityId ),
+					$repoLinker->getEntityUrl( $entityId ),
 					$idString,
 					true,
 					'plainlink'
@@ -764,6 +765,7 @@ final class ClientHooks {
 				);
 			}
 		}
+
 		return true;
 	}
 
