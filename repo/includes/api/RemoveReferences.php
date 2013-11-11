@@ -58,6 +58,7 @@ class RemoveReferences extends ModifyClaim {
 		}
 
 		$this->saveChanges( $entityContent, $summary );
+		$this->resultBuilder->markSuccess();
 
 		wfProfileOut( __METHOD__ );
 	}
