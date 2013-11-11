@@ -53,7 +53,6 @@ $messages['en'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Confirm',
 	'wikibase-linkitem-not-loggedin-title' => 'You need to be logged in',
 	'wikibase-linkitem-not-loggedin' => 'You need to be logged in on this wiki and in the [$1 central data repository] to use this feature.',
-	'wikibase-linkitem-success-create' => 'The pages have successfully been linked. You can find the newly created item containing the links in our [$1 central data repository].',
 	'wikibase-linkitem-success-link' => 'The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].',
 	'wikibase-property-notfound' => '$1 property not found.',
 	'wikibase-property-notsupportedyet' => 'Wikibase does not yet support property type for $1 property.',
