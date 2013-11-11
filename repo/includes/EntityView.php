@@ -11,10 +11,12 @@ use OutputPage;
 use MWException;
 use FormatJson;
 use User;
+use Wikibase\ClaimHtmlGenerator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Serializers\EntityRevisionSerializer;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -42,7 +44,7 @@ abstract class EntityView extends \ContextSource {
 	protected $snakFormatter;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var EntityInfoBuilder
 	 */
 	protected $entityRevisionLookup;
 
@@ -80,19 +82,23 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * @since    0.1
 	 *
-	 * @param IContextSource|null        $context
-	 * @param SnakFormatter      $snakFormatter
+	 * @param IContextSource|null $context
+	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityRevisionLookup       $entityRevisionLookup
-	 * @param EntityTitleLookup          $entityTitleLookup
-	 * @param LanguageFallbackChain      $languageFallbackChain
+	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdParser $idParser
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
 		IContextSource $context,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityRevisionLookup $entityRevisionLookup,
+		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
+		EntityIdParser $idParser,
 		LanguageFallbackChain $languageFallbackChain
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
@@ -104,8 +110,9 @@ abstract class EntityView extends \ContextSource {
 		$this->setContext( $context );
 		$this->snakFormatter = $snakFormatter;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->idParser = $idParser;
 		$this->languageFallbackChain = $languageFallbackChain;
 	}
 
@@ -487,35 +494,6 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
-	 * @param EntityId $id
-	 *
-	 * @return null|Entity
-	 */
-	private function getEntity( EntityId $id ) {
-		$revision = $this->entityRevisionLookup->getEntityRevision( $id );
-		return $revision === null ? null : $revision->getEntity();
-	}
-
-	/**
-	 * @param EntityId[] $ids
-	 *
-	 * @return EntityRevision|null[] A map from IDs to the respective entities.
-	 *          If no entity is found for a given ID, the respective entry in
-	 *          the map will be null.
-	 */
-	private function getEntityRevisions( array $ids ) {
-		$revisions = array();
-
-		foreach ( $ids as $id ) {
-			$key = $id->getPrefixedId();
-			$revision = $this->entityRevisionLookup->getEntityRevision( $id );
-			$revisions[$key] = $revision;
-		}
-
-		return $revisions;
-	}
-
-	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's claims.
 	 *
 	 * @since 0.2
@@ -547,6 +525,8 @@ abstract class EntityView extends \ContextSource {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 
+		$labels = $this->getPropertyLabels( $entity, $languageCode );
+
 		/**
 		 * @var string $claimsHtml
 		 * @var Claim[] $claims
@@ -556,14 +536,12 @@ abstract class EntityView extends \ContextSource {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-			$property = $this->getEntity( $propertyId );
-			$propertyLink = '';
-			if ( $property ) {
-				$propertyLink = \Linker::link(
-					$this->entityTitleLookup->getTitleForId( $property->getId() ),
-					htmlspecialchars( $property->getLabel( $languageCode ) )
-				);
-			}
+			$propertyKey = $propertyId->getSerialization();
+			$propertyLabel = isset( $labels[$propertyKey] ) ? $labels[$propertyKey] : $propertyKey;
+			$propertyLink = \Linker::link(
+				$this->entityTitleLookup->getTitleForId( $propertyId ),
+				htmlspecialchars( $propertyLabel )
+			);
 
 			$htmlForEditSection = $this->getHtmlForEditSection( $entity, $lang, '', 'span' ); // TODO: add link to SpecialPage
 
@@ -806,25 +784,91 @@ abstract class EntityView extends \ContextSource {
 	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
-		$revisions = $this->getEntityRevisions( $entityIds );
-		$entityInfo = array();
+		//TODO: apply language fallback! Restore fallback test case in EntityViewTest::provideRegisterJsConfigVars()
+		$entities = $this->entityInfoBuilder->buildEntityInfo( $entityIds );
+		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
+		$this->entityInfoBuilder->addDataTypes( $entities );
 
-		$serializer = EntityRevisionSerializer::newForFrontendStore(
-			$this->entityTitleLookup,
-			$langCode,
-			$this->languageFallbackChain
+		// filter non-existing properties
+		$entities = array_filter( $entities,
+			function ( $entity ) {
+				return $entity['type'] !== Property::ENTITY_TYPE || !empty( $entity['datatype'] );
+			}
 		);
 
-		foreach( $revisions as $prefixedId => $revision ) {
-			if( $revision === null ) {
-				continue;
-			}
+		$revisions = $this->attachRevisionInfo( $entities );
 
-			$entityInfo[ $prefixedId ] = $serializer->getSerialized( $revision );
+		wfProfileOut( __METHOD__ );
+		return $revisions;
+	}
+
+	/**
+	 * Fetches labels for all properties used as properties in snaks in the given entity.
+	 *
+	 * @param Entity $entity
+	 * @param string $langCode the language code of the labels to fetch.
+	 *
+	 * @todo: we may also want to have the descriptions, in addition to the labels
+	 * @return array maps property IDs to labels.
+	 */
+	protected function getPropertyLabels( Entity $entity, $langCode ) {
+		wfProfileIn( __METHOD__ );
+		//TODO: share cache with PropertyLabelResolver
+		//TODO: ...or share info with getBasicEntityInfo
+
+		//TODO: make a finder just for properties, so we don't have to filter
+		$refFinder = new ReferencedEntitiesFinder();
+		$entityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
+		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
+			return $id->getEntityType() === Property::ENTITY_TYPE;
+		} );
+
+		//NOTE: this is a bit hackish,it would be more appropriate to use a TermTable here.
+		$entities = $this->entityInfoBuilder->buildEntityInfo( $propertyIds );
+		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
+
+		//TODO: apply language fallback
+		$propertyLabels = array();
+		foreach ( $entities as $id => $entity ) {
+			if ( isset( $entity['labels'][$langCode] ) ) {
+				$label = $entity['labels'][$langCode]['value'];
+				$propertyLabels[$id] = $label;
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $entityInfo;
+		return $propertyLabels;
+	}
+
+	/**
+	 * Wraps each record in $entities with revision info, similar to how EntityRevisionSerializer
+	 * does this.
+	 *
+	 * @todo: perhaps move this into EntityInfoBuilder; Note however that it is useful to be
+	 * able to pick which information is actually needed in which context. E.g. we are skipping the
+	 * actual revision ID here, and thereby avoiding any database access.
+	 *
+	 * @param array $entities A list of entity records
+	 *
+	 * @return array A list of revision records
+	 */
+	private function attachRevisionInfo( array $entities ) {
+		$idParser = $this->idParser;
+		$titleLookup = $this->entityTitleLookup;
+
+		return array_map( function( $entity ) use ( $idParser, $titleLookup ) {
+				$id = $idParser->parse( $entity['id'] );
+
+				// If the title lookup needs DB access, we really need a better way to do this!
+				$title = $titleLookup->getTitleForId( $id );
+
+				return array(
+					'content' => $entity,
+					'title' => $title->getPrefixedText(),
+					//'revision' => 0,
+				);
+			},
+			$entities );
 	}
 
 	/**
@@ -835,7 +879,7 @@ abstract class EntityView extends \ContextSource {
 	 * @param string $type The entity type, e.g. Item::ENTITY_TYPE.
 	 * @param SnakFormatter      $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param IContextSource|null $context
 	 * @param LanguageFallbackChain|null $languageFallbackChain Overrides any language fallback chain created inside, for testing
@@ -847,7 +891,7 @@ abstract class EntityView extends \ContextSource {
 		$type,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityRevisionLookup $entityRevisionLookup,
+		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
@@ -872,13 +916,16 @@ abstract class EntityView extends \ContextSource {
 			}
 		}
 
+		$idParser = new BasicEntityIdParser();
+
 		$class = self::$typeMap[ $type ];
 		$instance = new $class(
 			$context,
 			$snakFormatter,
 			$dataTypeLookup,
-			$entityRevisionLookup,
+			$entityInfoBuilder,
 			$entityTitleLookup,
+			$idParser,
 			$languageFallbackChain );
 
 		return $instance;
