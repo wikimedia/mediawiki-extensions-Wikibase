@@ -91,6 +91,7 @@ class PropertyContent extends EntityContent {
 
 		if ( $status->isOK() ) {
 			$this->addLabelUniquenessConflicts( $status );
+			$this->addLabelEntityIdConflicts( $status );
 		}
 
 		wfProfileOut( __METHOD__ );
