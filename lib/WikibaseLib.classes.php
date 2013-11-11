@@ -165,6 +165,7 @@ return call_user_func( function() {
 		// includes/store
 		'Wikibase\ChunkCache' => 'includes/store/ChunkCache.php',
 		'Wikibase\ChunkAccess' => 'includes/store/ChunkAccess.php',
+		'Wikibase\EntityInfoBuilder' => 'includes/store/EntityInfoBuilder.php',
 		'Wikibase\EntityLookup' => 'includes/store/EntityLookup.php',
 		'Wikibase\EntityRevision' => 'includes/store/EntityRevision.php',
 		'Wikibase\EntityRevisionLookup' => 'includes/store/EntityRevisionLookup.php',
@@ -189,6 +190,7 @@ return call_user_func( function() {
 		'Wikibase\WikiPageEntityLookup' => 'includes/store/sql/WikiPageEntityLookup.php',
 		'Wikibase\TermSqlIndex' => 'includes/store/sql/TermSqlIndex.php',
 		'Wikibase\PropertyInfoTable' => 'includes/store/sql/PropertyInfoTable.php',
+		'Wikibase\SqlEntityInfoBuilder' => 'includes/store/sql/SqlEntityInfoBuilder.php',
 
 		// includes/util
 		'Wikibase\HttpAcceptNegotiator' => 'includes/util/HttpAcceptNegotiator.php',
