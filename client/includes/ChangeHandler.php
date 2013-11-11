@@ -116,7 +116,7 @@ class ChangeHandler {
 
 	public function __construct( PageUpdater $updater = null,
 			EntityLookup $entityLookup = null,
-			EntityUsageIndex $entityUsageIndex = null,
+			ItemUsageIndex $entityUsageIndex = null,
 			Site $localSite = null,
 			SiteList $sites = null) {
 
@@ -137,7 +137,7 @@ class ChangeHandler {
 		}
 
 		if ( !$entityUsageIndex ) {
-			$entityUsageIndex = WikibaseClient::getDefaultInstance()->getStore()->getEntityUsageIndex();
+			$entityUsageIndex = WikibaseClient::getDefaultInstance()->getStore()->getItemUsageIndex();
 		}
 
 		if ( !$localSite ) {

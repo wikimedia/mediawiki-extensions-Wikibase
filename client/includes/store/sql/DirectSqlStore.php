@@ -74,7 +74,7 @@ class DirectSqlStore implements ClientStore {
 	private $siteLinkTable = null;
 
 	/**
-	 * @var EntityUsageIndex
+	 * @var ItemUsageIndex
 	 */
 	private $entityUsageIndex = null;
 
@@ -122,9 +122,9 @@ class DirectSqlStore implements ClientStore {
 	 *
 	 * @since 0.4
 	 *
-	 * @return EntityUsageIndex
+	 * @return ItemUsageIndex
 	 */
-	public function getEntityUsageIndex() {
+	public function getItemUsageIndex() {
 		if ( !$this->entityUsageIndex ) {
 			$this->entityUsageIndex = $this->newEntityUsageIndex();
 		}
@@ -135,10 +135,10 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @since 0.4
 	 *
-	 * @return EntityUsageIndex
+	 * @return ItemUsageIndex
 	 */
 	protected function newEntityUsageIndex() {
-		return new EntityUsageIndex( $this->getSite(), $this->getSiteLinkTable() );
+		return new ItemUsageIndex( $this->getSite(), $this->getSiteLinkTable() );
 	}
 
 	/**

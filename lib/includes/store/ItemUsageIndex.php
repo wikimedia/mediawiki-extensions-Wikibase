@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityUsageIndex {
+class ItemUsageIndex {
 
 	protected $clientSite;
 	protected $siteLinks;
@@ -39,16 +39,16 @@ class EntityUsageIndex {
 	}
 
 	/**
-	 * Determines which pages use any of the given entities.
+	 * Determines which pages use any of the given items.
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId[] $entities
+	 * @param ItemId[] $itemIds
 	 *
-	 * @return String[] list of pages using any of the given entities
+	 * @return string[] list of pages using any of the given entities
 	 */
-	public function getEntityUsage( array $entities ) {
-		if ( empty( $entities ) ) {
+	public function getEntityUsage( array $itemIds ) {
+		if ( empty( $itemIds ) ) {
 			return array();
 		}
 
@@ -56,7 +56,7 @@ class EntityUsageIndex {
 			function ( ItemId $id ) {
 				return $id->getNumericId();
 			},
-			$entities
+			$itemIds
 		);
 
 		$rows = $this->siteLinks->getLinks( $ids, array( $this->clientSite->getGlobalId() ) );
@@ -68,26 +68,25 @@ class EntityUsageIndex {
 			$rows
 		);
 
-		$pages = array_unique( $pages );
-		return $pages;
+		return array_unique( $pages );
 	}
 
 	/**
-	 * Checks which of the given entities is used on the target wiki,
+	 * Checks which of the given items is used on the target wiki,
 	 * and removed all others.
 	 *
-	 * @since    0.4
+	 * @since 0.4
 	 *
-	 * @param EntityId[]  $entities The entities to check
+	 * @param ItemId[] $itemIds The entities to check
 	 * @param string|null $type     The entity type to check. This is an optional hint that may
 	 *                              be used for optimization. If given, all IDs in the $entities
 	 *                              array must refer to entities of the given type.
 	 *
-	 * @return EntityId[] the entities actually used on the target wiki
+	 * @return ItemId[] the items actually used on the target wiki
 	 * @throws \MWException if $type is set and one of the ids in $entities
 	 */
-	public function filterUnusedEntities( array $entities, $type = null ) {
-		if ( empty( $entities ) ) {
+	public function filterUnusedEntities( array $itemIds, $type = null ) {
+		if ( empty( $itemIds ) ) {
 			return array();
 		}
 
@@ -103,7 +102,7 @@ class EntityUsageIndex {
 
 				return $id->getNumericId();
 			},
-			$entities
+			$itemIds
 		);
 
 		//todo: pass the type hint to the SiteLinksLookup, to allow for more efficient queries
@@ -111,7 +110,7 @@ class EntityUsageIndex {
 
 		$used = array_map(
 			function ( array $row ) {
-				return intval($row[2]); // item id
+				return intval( $row[2] ); // item id
 			},
 			$rows
 		);
@@ -119,7 +118,7 @@ class EntityUsageIndex {
 		$used = array_flip( $used );
 
 		$filtered = array_filter(
-			$entities,
+			$itemIds,
 			function ( ItemId $id ) use ( $used ) {
 				return array_key_exists( $id->getNumericId(), $used );
 			}
@@ -130,7 +129,7 @@ class EntityUsageIndex {
 	}
 
 	/**
-	 * Determines which entities are used by any of the given pages.
+	 * Determines which items are used by any of the given pages.
 	 *
 	 * The page titles must be strings in the canonical form, as returned
 	 * by Title::getPrefixedText() on the target wiki. Note that it is not
@@ -141,7 +140,7 @@ class EntityUsageIndex {
 	 *
 	 * @param string[] $pages The titles of the pages to check.
 	 *
-	 * @return EntityId[] The entities used.
+	 * @return ItemId[]
 	 */
 	public function getUsedEntities( array $pages ) {
 		if ( empty( $pages ) ) {

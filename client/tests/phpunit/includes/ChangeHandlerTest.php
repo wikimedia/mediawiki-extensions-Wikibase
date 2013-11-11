@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityChange;
 use Wikibase\EntityDiff;
-use Wikibase\EntityUsageIndex;
+use Wikibase\ItemUsageIndex;
 use Wikibase\Item;
 use Wikibase\Property;
 
@@ -60,7 +60,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->site->addNavigationId( 'en' );
 
 		$repo = self::getMockRepo();
-		$usageIndex = new EntityUsageIndex( $this->site, $repo );
+		$usageIndex = new ItemUsageIndex( $this->site, $repo );
 
 		$siteList = $this->getMock( 'SiteList' );
 		$siteList->expects( $this->any() )
@@ -987,7 +987,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->updateMockRepo( $entities );
 
 		$repo = self::getMockRepo();
-		$usageIndex = new EntityUsageIndex( $this->site, $repo );
+		$usageIndex = new ItemUsageIndex( $this->site, $repo );
 
 		$siteList = $this->getMock( 'SiteList' );
 		$siteList->expects( $this->any() )

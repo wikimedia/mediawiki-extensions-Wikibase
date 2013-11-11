@@ -170,7 +170,7 @@ return call_user_func( function() {
 		'Wikibase\EntityRevisionLookup' => 'includes/store/EntityRevisionLookup.php',
 		'Wikibase\EntityTitleLookup' => 'includes/store/EntityTitleLookup.php',
 		'Wikibase\PropertyLabelResolver' => 'includes/store/PropertyLabelResolver.php',
-		'Wikibase\EntityUsageIndex' => 'includes/store/EntityUsageIndex.php',
+		'Wikibase\ItemUsageIndex' => 'includes/store/ItemUsageIndex.php',
 		'Wikibase\SiteLinkCache' => 'includes/store/SiteLinkCache.php',
 		'Wikibase\SiteLinkLookup' => 'includes/store/SiteLinkLookup.php',
 		'Wikibase\StorageException' => 'includes/store/StorageException.php',

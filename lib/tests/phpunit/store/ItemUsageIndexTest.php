@@ -7,10 +7,10 @@ use Site;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
-use Wikibase\EntityUsageIndex;
+use Wikibase\ItemUsageIndex;
 
 /**
- * @covers Wikibase\EntityUsageIndex
+ * @covers Wikibase\ItemUsageIndex
  *
  * @since 0.4
  *
@@ -21,7 +21,7 @@ use Wikibase\EntityUsageIndex;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityUsageIndexTest extends \MediaWikiTestCase {
+class ItemUsageIndexTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param int $id
@@ -41,19 +41,19 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param Item[]      $items
-	 * @param Site        $site
+	 * @param Item[] $items
+	 * @param Site $site
 	 *
-	 * @return EntityUsageIndex
+	 * @return ItemUsageIndex
 	 */
-	protected function newEntityUsageIndex( array $items, Site $site ) {
+	protected function newItemUsageIndex( array $items, Site $site ) {
 		$repo = new MockRepository();
 
 		foreach ( $items as $item ) {
 			$repo->putEntity( $item );
 		}
 
-		$index = new EntityUsageIndex( $site, $repo );
+		$index = new ItemUsageIndex( $site, $repo );
 		return $index;
 	}
 
@@ -203,7 +203,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 	public function testGetEntityUsage( array $repoItems,
 		Site $site, $wantedEntities, $expectedUsage ) {
 
-		$index = $this->newEntityUsageIndex( $repoItems, $site );
+		$index = $this->newItemUsageIndex( $repoItems, $site );
 		$usage = $index->getEntityUsage( $wantedEntities );
 
 		$this->assertArrayEquals( $expectedUsage, $usage );
@@ -311,7 +311,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 	public function testGetUsedEntities( array $repoItems,
 		Site $site, $wantedPages, $expectedUsed ) {
 
-		$index = $this->newEntityUsageIndex( $repoItems, $site );
+		$index = $this->newItemUsageIndex( $repoItems, $site );
 		$used = $index->getUsedEntities( $wantedPages );
 
 		$this->assertArrayEquals( $expectedUsed, $used );
@@ -433,9 +433,10 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 	public function testFilterUnusedEntities( array $repoItems,
 		Site $site, $wantedEntities, $wantedType, $expectedUsed ) {
 
-		$index = $this->newEntityUsageIndex( $repoItems, $site );
+		$index = $this->newItemUsageIndex( $repoItems, $site );
 		$used = $index->filterUnusedEntities( $wantedEntities, $wantedType );
 
 		$this->assertArrayEquals( $expectedUsed, $used );
 	}
+
 }
