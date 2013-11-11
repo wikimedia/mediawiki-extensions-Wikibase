@@ -75,4 +75,26 @@ class PropertyContentTest extends EntityContentTest {
 		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-wikibase-property' ) );
 	}
 
+	public function testLabelEntityIdRestriction() {
+		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
+
+		$propertyContent = PropertyContent::newEmpty();
+		$propertyContent->getProperty()->setLabel( 'en', 'testLabelEntityIdRestriction' );
+		$propertyContent->getProperty()->setDataTypeId( 'wikibase-item' );
+
+		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), "property creation should work" );
+
+		$propertyContent->getProperty()->setLabel( 'de', 'testLabelEntityIdRestriction' );
+
+		$status = $propertyContent->save( 'save property' );
+		$this->assertTrue( $status->isOK(), "saving a property should work" );
+
+		$propertyContent->getProperty()->setLabel( 'nl', 'P23' );
+
+		$status = $propertyContent->save( 'save property' );
+		$this->assertFalse( $status->isOK(), "saving a proeprty with a valid entity id as label should not work" );
+		$this->assertTRue( $status->hasMessage( 'wikibase-error-label-no-entityid' ) );
+	}
+
 }
