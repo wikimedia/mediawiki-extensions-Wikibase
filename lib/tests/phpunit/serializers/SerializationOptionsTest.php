@@ -6,7 +6,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
- * @covers  Wikibase\Lib\Serializers\SerializationOptions
+ * @covers Wikibase\Lib\Serializers\SerializationOptions
  *
  * @since 0.2
  *
@@ -35,6 +35,8 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 				$this->assertEquals( $value, $options->getOption( $key ) );
 			}
 		}
+
+		$this->assertTrue( true );
 	}
 
 	public function constructorProvider() {
