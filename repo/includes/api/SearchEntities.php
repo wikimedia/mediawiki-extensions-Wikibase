@@ -219,6 +219,7 @@ class SearchEntities extends ApiBase {
 
 		$this->getResult()->setIndexedTagName_internal( array( 'search' ), 'entity' );
 
+		// @todo use result builder?
 		$this->getResult()->addValue(
 			null,
 			'success',

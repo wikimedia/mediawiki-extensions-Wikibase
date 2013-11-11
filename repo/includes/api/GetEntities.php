@@ -76,13 +76,7 @@ class GetEntities extends ApiWikibase {
 			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 		}
 
-		$success = true;
-
-		$this->getResult()->addValue(
-			null,
-			'success',
-			(int)$success
-		);
+		$this->resultBuilder->markSuccess( 1 );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -100,7 +94,7 @@ class GetEntities extends ApiWikibase {
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
 			$siteStore = SiteSQLStore::newInstance();
-			$itemByTitleHelper = new ItemByTitleHelper( $this, $siteLinkCache, $siteStore, $this->stringNormalizer );
+			$itemByTitleHelper = new ItemByTitleHelper( $this->resultBuilder, $siteLinkCache, $siteStore, $this->stringNormalizer );
 			$otherIDs = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
 			$entityIds = array_merge( $entityIds, $otherIDs );
 		}
