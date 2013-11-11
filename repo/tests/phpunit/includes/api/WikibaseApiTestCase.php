@@ -207,10 +207,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * Compares two entity structures and asserts that they are equal. Only fields present in $expected are considered.
 	 * $expected and $actual can both be either in "flat" or in "deep" form, they are converted as needed before comparison.
 	 *
-	 * @param $expected
-	 * @param $actual
+	 * @param array $expected
+	 * @param array $actual
+	 * @param bool $expectEmptyArrays Should we expect empty arrays or just ignore them?
 	 */
-	public function assertEntityEquals( $expected, $actual ) {
+	public function assertEntityEquals( $expected, $actual, $expectEmptyArrays = true ) {
 		if ( isset( $expected['id'] ) ) {
 			$this->assertEquals( $expected['id'], $actual['id'], 'id' );
 		}
@@ -222,41 +223,47 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['labels'] ) ) {
-			$data = self::flattenArray( $actual['labels'], 'language', 'value' );
-			$exp = self::flattenArray( $expected['labels'], 'language', 'value' );
+			if( ! ( $expectEmptyArrays === false && $expected['labels'] === array() ) ) {
+				$data = self::flattenArray( $actual['labels'], 'language', 'value' );
+				$exp = self::flattenArray( $expected['labels'], 'language', 'value' );
 
-			// keys are significant in flat form
-			$this->assertArrayEquals( $exp, $data, false, true );
+				// keys are significant in flat form
+				$this->assertArrayEquals( $exp, $data, false, true );
+			}
 		}
 
 		if ( isset( $expected['descriptions'] ) ) {
-			$data = self::flattenArray( $actual['descriptions'], 'language', 'value' );
-			$exp = self::flattenArray( $expected['descriptions'], 'language', 'value' );
+			if( ! ( $expectEmptyArrays === false && $expected['descriptions'] === array() ) ) {
+				$data = self::flattenArray( $actual['descriptions'], 'language', 'value' );
+				$exp = self::flattenArray( $expected['descriptions'], 'language', 'value' );
 
-			// keys are significant in flat form
-			$this->assertArrayEquals( $exp, $data, false, true );
+				// keys are significant in flat form
+				$this->assertArrayEquals( $exp, $data, false, true );
+			}
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			$data = self::flattenArray( $actual['sitelinks'], 'site', 'title' );
-			$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
+			if( ! ( $expectEmptyArrays === false && $expected['sitelinks'] === array() ) ) {
+				$data = self::flattenArray( $actual['sitelinks'], 'site', 'title' );
+				$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
 
-			// keys are significant in flat form
-			$this->assertArrayEquals( $exp, $data, false, true );
+				// keys are significant in flat form
+				$this->assertArrayEquals( $exp, $data, false, true );
+			}
 		}
 
 		if ( isset( $expected['aliases'] ) ) {
-			$data = self::flattenArray( $actual['aliases'], 'language', 'value', true );
-			$exp = self::flattenArray( $expected['aliases'], 'language', 'value', true );
+			if( ! ( $expectEmptyArrays === false && $expected['aliases'] === array() ) ) {
+				$data = self::flattenArray( $actual['aliases'], 'language', 'value', true );
+				$exp = self::flattenArray( $expected['aliases'], 'language', 'value', true );
 
-			// keys are significant in flat form
-			$this->assertArrayEquals( $exp, $data, false, true );
+				// keys are significant in flat form
+				$this->assertArrayEquals( $exp, $data, false, true );
+			}
 		}
 
 		if ( isset( $expected['claims'] ) ) {
-			if( empty( $expected['claims'] ) ){
-				$this->assertArrayNotHasKey( 'claims', $actual );
-			} else {
+			if( ! ( $expectEmptyArrays === false && $expected['claims'] === array() ) ) {
 				$data = self::flattenArray( $actual['claims'], 'mainsnak', 'value', true );
 				$exp = self::flattenArray( $expected['claims'], 'language', 'value', true );
 				for( $i = 0; $i < count( $expected['claims'] ); $i++ ){

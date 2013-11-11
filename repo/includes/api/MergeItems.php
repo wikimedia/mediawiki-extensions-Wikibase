@@ -98,7 +98,7 @@ class MergeItems extends ApiWikibase {
 			'type', $entityContent->getEntity()->getType()
 		);
 
-		$this->addRevisionIdFromStatusToResult( $name, 'lastrevid', $status );
+		$this->addRevisionIdFromStatusToResult( $name, $status );
 	}
 
 	private function getEntityContentFromIdString( $idString ) {
@@ -175,10 +175,10 @@ class MergeItems extends ApiWikibase {
 			$this->handleSaveStatus( $toStatus );
 			$this->addEntityToOutput( $toItemContent, $toStatus, 'to' );
 
-			$this->getResult()->addValue( null,	'success', 1 );
+			$this->resultBuilder->markSuccess( 1 );
 		} else {
 			//todo if the second result is not a success we should probably undo the first change
-			$this->getResult()->addValue( null,	'success', 0 );
+			$this->resultBuilder->markSuccess( 0 );
 		}
 	}
 
