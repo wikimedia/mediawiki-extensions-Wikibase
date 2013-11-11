@@ -570,55 +570,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entity->getId(), $instance->getId() );
 	}
 
-	public function baseIdProvider() {
-		$ids = array();
-
-		$ids[] = 1;
-		$ids[] = 42;
-		$ids[] = 9001;
-
-		$type = $this->getNewEmpty()->getType();
-
-		foreach ( array_values( $ids ) as $id ) {
-			$ids[] = new EntityId( $type, $id );
-		}
-
-		$argLists = array();
-
-		foreach ( $ids as $id ) {
-			$argLists[] = array( $id );
-		}
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider baseIdProvider
-	 */
-	public function testSetIdBase( $id ) {
-		$entity = $this->getNewEmpty();
-
-		$this->assertEquals( null, $entity->getId(), 'Getting an ID from an empty entity should return null' );
-
-		$entity->setId( $id );
-
-		$this->assertEquals(
-			$entity->getType(),
-			$entity->getId()->getEntityType(),
-			'Entity type of returned ID is correct'
-		);
-
-		if ( $id instanceof EntityId ) {
-			$id = $id->getNumericId();
-		}
-
-		$this->assertEquals( $id, $entity->getId()->getNumericId(), 'Numeric part of returned entity id is correct' );
-
-		$entity->setId( 42 );
-
-		$this->assertEquals( 42, $entity->getId()->getNumericId(), 'Numeric part of returned id is still correct' );
-	}
-
 	public function oldSerializationProvider() {
 		$serializations = array();
 

@@ -103,15 +103,6 @@ class EntityId implements Comparable, Serializable {
 	}
 
 	/**
-	 * @deprecated since 0.5
-	 *
-	 * @return integer
-	 */
-	public function getNumericId() {
-		return (int)substr( $this->serialization, 1 );
-	}
-
-	/**
 	 * @see Comparable::equals
 	 *
 	 * @since 0.5

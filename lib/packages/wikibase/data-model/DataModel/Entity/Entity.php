@@ -658,6 +658,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			return $id;
 		}
 		else {
+			// FIXME: this only works for Item and Property
 			return array( $id->getEntityType(), $id->getNumericId() );
 		}
 	}

@@ -52,10 +52,10 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructorWithNumericId() {
 		$id = new EntityId( Item::ENTITY_TYPE, 123 );
-		$this->assertEquals( $id->getNumericId(), 123 );
+		$this->assertEquals( $id->getSerialization(),'Q123' );
 
 		$id = new EntityId( Property::ENTITY_TYPE, 123 );
-		$this->assertEquals( $id->getNumericId(), 123 );
+		$this->assertEquals( $id->getSerialization(), 'P123' );
 	}
 
 	public function instanceProvider() {

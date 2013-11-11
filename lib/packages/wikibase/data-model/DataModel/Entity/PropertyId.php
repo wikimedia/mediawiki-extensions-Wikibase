@@ -42,6 +42,13 @@ class PropertyId extends EntityId {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getNumericId() {
+		return (int)substr( $this->serialization, 1 );
+	}
+
+	/**
 	 * Construct a PropertyId given the numeric part of its serialization.
 	 *
 	 * CAUTION: new usages of this method are discouraged. Typically you
