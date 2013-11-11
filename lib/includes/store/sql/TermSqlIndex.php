@@ -97,6 +97,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return boolean Success indicator
 	 */
 	public function saveTermsOfEntity( Entity $entity ) {
+		wfProfileIn( __METHOD__ );
+
 		//First check whether there's anything to update
 		$newTerms = $entity->getTerms();
 		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
@@ -119,6 +121,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 
 			if ( $equal ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": terms did not change, returning." );
+				wfProfileOut( __METHOD__ );
 				return true; // nothing to do.
 			}
 		}
@@ -128,6 +131,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 
 		$ok = $dbw->deadlockLoop( array( $this, 'saveTermsOfEntityInternal' ), $entity, $dbw );
 		$this->releaseConnection( $dbw );
+
+		wfProfileOut( __METHOD__ );
 
 		return $ok;
 	}
@@ -146,6 +151,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return boolean Success indicator
 	 */
 	public function saveTermsOfEntityInternal( Entity $entity, DatabaseBase $dbw ) {
+		wfProfileIn( __METHOD__ );
+
 		$entityIdentifiers = array(
 			'term_entity_id' => $entity->getId()->getNumericId(),
 			'term_entity_type' => $entity->getType()
@@ -184,6 +191,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 				break;
 			}
 		}
+
+		wfProfileOut( __METHOD__ );
 
 		return $success;
 	}
@@ -242,6 +251,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return boolean Success indicator
 	 */
 	public function deleteTermsOfEntity( Entity $entity ) {
+		wfProfileIn( __METHOD__ );
+
 		$dbw = $this->getConnection( DB_MASTER );
 
 		//TODO: do this via deadlockLoop. Currently triggers warnings, because deleteTermsOfEntity
@@ -254,6 +265,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 
 		$ok = $this->deleteTermsOfEntityInternal( $entity, $dbw );
 		$this->releaseConnection( $dbw );
+
+		wfProfileOut( __METHOD__ );
 
 		return $ok;
 	}
@@ -295,6 +308,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return Term[]
 	 */
 	public function getTermsOfEntity( EntityId $id ) {
+		wfProfileIn( __METHOD__ );
+
 		$entityIdentifiers = array(
 			'term_entity_id' => $id->getNumericId(),
 			'term_entity_type' => $id->getEntityType()
@@ -318,6 +333,9 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		$terms = $this->buildTermResult( $res );
 
 		$this->releaseConnection( $dbr );
+
+		wfProfileOut( __METHOD__ );
+
 		return $terms;
 	}
 
@@ -330,11 +348,14 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @param string $entityType
 	 * @param string|null $language Language code
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return Term[]
 	 */
 	public function getTermsOfEntities( array $ids, $entityType, $language = null ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( empty($ids) ) {
+			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -348,7 +369,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		$numericIds = array();
 		foreach ( $ids as $id ) {
 			if ( $id->getEntityType() !== $entityType ) {
-				throw new \MWException( "ID " . $id->getPrefixedId()
+				throw new MWException( "ID " . $id->getPrefixedId()
 					. " does not refer to an entity of type $entityType." );
 			}
 
@@ -377,6 +398,9 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		$terms = $this->buildTermResult( $res );
 
 		$this->releaseConnection( $dbr );
+
+		wfProfileOut( __METHOD__ );
+
 		return $terms;
 	}
 
@@ -415,6 +439,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return boolean
 	 */
 	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null ) {
+		wfProfileIn( __METHOD__ );
+
 		$conditions = array(
 			'term_text' => $termValue,
 		);
@@ -443,6 +469,9 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		);
 
 		$this->releaseConnection( $dbr );
+
+		wfProfileOut( __METHOD__ );
+
 		return $result !== false;
 	}
 
@@ -460,6 +489,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return array of array( entity type, entity id )
 	 */
 	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false ) {
+		wfProfileIn( __METHOD__ );
+
 		$fuzzySearch = false; // TODO switched off for now until we have a solution for limiting the results
 		$db = $this->getReadDb();
 
@@ -512,12 +543,16 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 
 		$this->releaseConnection( $db );
 
-		return array_map(
+		$result = array_map(
 			function( $entity ) {
 				return array( $entity->term_entity_type, intval( $entity->term_entity_id ) );
 			},
 			iterator_to_array( $entities )
 		);
+
+		wfProfileOut( __METHOD__ );
+
+		return $result;
 	}
 
 	/**
@@ -533,7 +568,10 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return array
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( empty( $terms ) ) {
+			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -560,6 +598,9 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		$terms = $this->buildTermResult( $obtainedTerms );
 
 		$this->releaseConnection( $dbr );
+
+		wfProfileOut( __METHOD__ );
+
 		return $terms;
 	}
 
@@ -575,7 +616,10 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return EntityId[]
 	 */
 	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( empty( $terms ) ) {
+			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -653,6 +697,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			$result[] = $idParser->parse( $id->getSerialization() );
 		}
 
+		wfProfileOut( __METHOD__ );
+
 		return $result;
 	}
 
@@ -670,6 +716,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return array
 	 */
 	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false, array $options = array() ) {
+		wfProfileIn( __METHOD__ );
+
 		$options = array_merge(
 			array(
 				'caseSensitive' => true,
@@ -746,6 +794,9 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		}
 
 		$this->releaseConnection( $dbr );
+
+		wfProfileOut( __METHOD__ );
+
 		return $conditions;
 	}
 
@@ -760,6 +811,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return array
 	 */
 	protected function buildTermResult( $obtainedTerms ) {
+		wfProfileIn( __METHOD__ );
+
 		$matchingTerms = array();
 
 		foreach ( $obtainedTerms as $obtainedTerm ) {
@@ -780,6 +833,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 
 			$matchingTerms[] = new Term( $matchingTerm );
 		}
+
+		wfProfileOut( __METHOD__ );
 
 		return $matchingTerms;
 	}
@@ -814,7 +869,10 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return array
 	 */
 	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( empty( $terms ) ) {
+			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -878,6 +936,9 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		$terms = $this->buildTermResult( $this->getNormalizedJoinResult( $obtainedTerms, $joinCount ) );
 
 		$this->releaseConnection( $dbr );
+
+		wfProfileOut( __METHOD__ );
+
 		return $terms;
 	}
 
@@ -896,6 +957,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return array
 	 */
 	protected function getNormalizedJoinResult( \ResultWrapper $obtainedTerms, $joinCount ) {
+		wfProfileIn( __METHOD__ );
+
 		$resultTerms = array();
 
 		foreach ( $obtainedTerms as $obtainedTerm ) {
@@ -918,6 +981,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 				}
 			}
 		}
+
+		wfProfileOut( __METHOD__ );
 
 		return $resultTerms;
 	}
