@@ -3,7 +3,7 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityLookup;
 use Wikibase\Property;
 
@@ -12,9 +12,6 @@ use Wikibase\Property;
  * a property's data type ID.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -33,29 +30,29 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return string
 	 * @throws PropertyNotFoundException
 	 */
-	public function getDataTypeIdForProperty( EntityId $propertyId ) {
+	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		$this->verifyIdIsOfAProperty( $propertyId );
 		return $this->getProperty( $propertyId )->getDataTypeId();
 	}
 
-	private function verifyIdIsOfAProperty( EntityId $propertyId ) {
+	private function verifyIdIsOfAProperty( PropertyId $propertyId ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( '$propertyId with non-property entity type provided' );
 		}
 	}
 
 	/**
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return Property
 	 * @throws PropertyNotFoundException
 	 */
-	private function getProperty( EntityId $propertyId ) {
+	private function getProperty( PropertyId $propertyId ) {
 		$property = $this->entityLookup->getEntity( $propertyId );
 
 		if ( $property === null ) {

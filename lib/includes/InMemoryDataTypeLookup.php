@@ -3,8 +3,7 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use Wikibase\EntityId;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * PropertyDataTypeLookup that uses an in memory array to retrieve the requested information.
@@ -12,9 +11,6 @@ use Wikibase\Property;
  * This class can be used as a mock in tests.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -26,13 +22,12 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return string
 	 * @throws PropertyNotFoundException
 	 */
-	public function getDataTypeIdForProperty( EntityId $propertyId ) {
-		$this->verifyIdIsOfAProperty( $propertyId );
+	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		$this->verifyDataTypeIsSet( $propertyId );
 
 		return $this->dataTypeIds[$propertyId->getSerialization()];
@@ -41,16 +36,15 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 * @param string $dataTypeId
 	 */
-	public function setDataTypeForProperty( EntityId $propertyId, $dataTypeId ) {
-		$this->verifyIdIsOfAProperty( $propertyId );
+	public function setDataTypeForProperty( PropertyId $propertyId, $dataTypeId ) {
 		$this->verifyDataTypeIdType( $dataTypeId );
 		$this->dataTypeIds[$propertyId->getSerialization()] = $dataTypeId;
 	}
 
-	private function verifyDataTypeIsSet( EntityId $propertyId ) {
+	private function verifyDataTypeIsSet( PropertyId $propertyId ) {
 		$numericId = $propertyId->getSerialization();
 
 		if ( !array_key_exists( $numericId, $this->dataTypeIds ) ) {
@@ -61,12 +55,6 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	private function verifyDataTypeIdType( $dataTypeId ) {
 		if ( !is_string( $dataTypeId ) ) {
 			throw new InvalidArgumentException( '$dataTypeId needs to be a string' );
-		}
-	}
-
-	private function verifyIdIsOfAProperty( EntityId $propertyId ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new InvalidArgumentException( '$propertyId with non-property entity type provided' );
 		}
 	}
 
