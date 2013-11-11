@@ -1,33 +1,8 @@
 <?php
-/**
- *
- * Copyright © 26.06.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- * @ingroup WikibaseLib
- *
- * @author Daniel Kinzler
- */
-
 
 namespace Wikibase;
 
+use BagOStuff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -36,8 +11,8 @@ use Wikibase\DataModel\Entity\PropertyId;
  * that maintains a cached copy of the property info in memcached.
  *
  * @since 0.4
- *
- * @package Wikibase
+ * @license GPL 2+
+ * @author Daniel Kinzler
  */
 class CachingPropertyInfoStore implements PropertyInfoStore {
 
@@ -47,7 +22,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	protected $store;
 
 	/**
-	 * @var \BagOStuff
+	 * @var BagOStuff
 	 */
 	protected $cache;
 
@@ -70,7 +45,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 
 	/**
 	 * @param PropertyInfoStore $store      The info store to call back to.
-	 * @param \BagOStuff  $cache            The cache to use for labels (typically from wfGetMainCache())
+	 * @param BagOStuff  $cache            The cache to use for labels (typically from wfGetMainCache())
 	 * @param int         $cacheDuration    Number of seconds to keep the cached version for.
 	 *                                      Defaults to 3600 seconds = 1 hour.
 	 * @param string|null $cacheKey         The cache key to use, auto-generated per default.
@@ -79,7 +54,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	 */
 	public function __construct(
 		PropertyInfoStore $store,
-		\BagOStuff $cache,
+		BagOStuff $cache,
 		$cacheDuration = 3600,
 		$cacheKey = null
 	) {
@@ -115,7 +90,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see   PropertyInfoStore::getAllPropertyInfo
+	 * @see PropertyInfoStore::getAllPropertyInfo
 	 *
 	 * @return array[]
 	 */
@@ -141,11 +116,12 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	 *
 	 * @param PropertyId $propertyId
 	 * @param array $info
-	 * @throws \InvalidArgumentException
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
 		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ]) ) {
-			throw new \InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
+			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 
 		// update primary store
