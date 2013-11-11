@@ -146,10 +146,7 @@ See also:
 	'wikibase-error-ui-edit-conflict' => 'This is a human readable version of the API error "edit-conflict" which is shown in the UI.
 Note that the default message says the user shall "reload and save", but after a reload the content that should be saved will be lost.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.
-
-Preceded by any one of the following messages:
-* {{msg-mw|Wikibase-linkitem-success-create}}
-* {{msg-mw|Wikibase-linkitem-success-link}}',
+Preceded by message {{msg-mw|Wikibase-linkitem-success-link}}',
 	'wikibase-sitelinks-wikipedia' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on different Wikipedias linked to this item. Similar messages can be created for each group of target sites, depending on configuration.
 See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',
