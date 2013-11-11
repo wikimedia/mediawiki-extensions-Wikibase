@@ -2,34 +2,21 @@
 
 namespace Wikibase;
 
-use DataValues\DataValue;
 use Html;
 use ParserOptions;
 use ParserOutput;
-use Title;
 use Language;
 use IContextSource;
 use OutputPage;
-use MediaWikiSite;
 use MWException;
 use FormatJson;
 use User;
-use ValueParsers\FormattingException;
-use Wikibase\ClaimHtmlGenerator;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Serializers\EntityRevisionSerializer;
 use Wikibase\Lib\SnakFormatter;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterFactory;
-use ValueFormatters\TimeFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\MwTimeIsoFormatter;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.

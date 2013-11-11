@@ -15,7 +15,6 @@ use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
 use Wikibase\References;
 use Wikibase\Snak;
-use Wikibase\SnakObject;
 use Wikibase\Statement;
 
 /**
@@ -24,8 +23,6 @@ use Wikibase\Statement;
  * @since 0.4
  *
  * @license GPL 2+
- * @file
- *
  * @author Daniel Kinzler
  */
 class SnakValidator implements ValueValidator {

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -27,10 +27,10 @@ use Wikibase\Test\MockRepository;
 class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
 	private $propertiesAndTypes = array(
-		1 => 'NyanData all the way across the sky',
-		42 => 'string',
-		1337 => 'percentage',
-		9001 => 'positive whole number',
+		'P1' => 'NyanData all the way across the sky',
+		'P42' => 'string',
+		'P1337' => 'percentage',
+		'P9001' => 'positive whole number',
 	);
 
 	public function getDataTypeForPropertyProvider() {
@@ -43,7 +43,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		$mockDataTypeLookup = new EntityRetrievingDataTypeLookup( $mockRepo );
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
-			$id = new EntityId( Property::ENTITY_TYPE, $propertyId );
+			$id = new PropertyId( $propertyId );
 
 			// register property info
 			$mockInfoStore->setPropertyInfo(
@@ -75,7 +75,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		// try unknown property
-		$id = new EntityId( Property::ENTITY_TYPE, 23 );
+		$id = new PropertyId( 'P23' );
 
 		// try with a working info store
 		$argLists[] = array(
@@ -102,7 +102,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 	public function testGetDataTypeForProperty(
 		PropertyInfoStore $infoStore,
 		PropertyDataTypeLookup $fallbackLookup = null,
-		EntityId $propertyId,
+		PropertyId $propertyId,
 		$expectedDataType
 	) {
 		if ( $expectedDataType === false ) {
