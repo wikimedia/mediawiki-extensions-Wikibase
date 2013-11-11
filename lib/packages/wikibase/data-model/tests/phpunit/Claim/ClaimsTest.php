@@ -62,23 +62,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider constructorProvider
-	 */
-	public function testConstructor() {
-		$class = new ReflectionClass( 'Wikibase\Claims' );
-		$class->newInstanceArgs( func_get_args() );
-	}
-
-	public function constructorProvider() {
-		return array(
-			array(),
-			array( null ),
-			array( array() ),
-			array( array( $this->makeClaim( new PropertyNoValueSnak( new PropertyId( "P15" ) ) ) ) ),
-		);
-	}
-
-	/**
 	 * @dataProvider constructorErrorProvider
 	 */
 	public function testConstructorError() {
@@ -668,4 +651,5 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$claims->removeClaim( $claim1 );
 		$this->assertTrue( $claims->isEmpty() );
 	}
+
 }
