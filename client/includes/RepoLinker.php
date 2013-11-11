@@ -114,16 +114,23 @@ class RepoLinker {
 	 * @since 0.4
 	 *
 	 * @param ExternalChange $externalChange
+	 * @param array $classes
 	 *
 	 * @return string
 	 */
-	public function buildEntityLink( EntityId $entityId ) {
-		$prefixedId = $entityId->getPrefixedId();
+	public function buildEntityLink( EntityId $entityId, array $classes = array() ) {
+		$prefixedId = $entityId->getSerialization();
+
+		$class = 'wb-entity-link';
+
+		if ( $classes !== array() ) {
+			$class .= ' ' . implode( ' ', $classes );
+		}
 
 		return $this->formatLink(
 			$this->getEntityUrl( $entityId ),
 			$prefixedId,
-			array( 'class' => 'wb-entity-link' )
+			array( 'class' => $class )
 		);
 	}
 

@@ -146,10 +146,10 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider buildEntityLinkProvider
 	 */
-	public function testBuildEntityLink( $expected, $settings, $entityId ) {
+	public function testBuildEntityLink( $expected, $settings, $entityId, $classes ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
-		$this->assertEquals( $expected, $repoLinker->buildEntityLink( $entityId ) );
+		$this->assertEquals( $expected, $repoLinker->buildEntityLink( $entityId, $classes ) );
 	}
 
 	public function buildEntityLinkProvider() {
@@ -159,7 +159,14 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'<a class="plainlinks wb-entity-link" href="http://www.example.com/wiki/Q730">Q730</a>',
 				$settings[2],
-				new ItemId( 'Q730' )
+				new ItemId( 'Q730' ),
+				array()
+			),
+			array(
+				'<a class="plainlinks wb-entity-link kittens" href="http://www.example.com/wiki/Q730">Q730</a>',
+				$settings[2],
+				new ItemId( 'Q730' ),
+				array( 'kittens' )
 			)
 		);
 	}

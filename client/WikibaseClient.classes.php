@@ -15,6 +15,7 @@ return call_user_func( function() {
 		'Wikibase\CachedEntity' => 'includes/CachedEntity.php',
 		'Wikibase\EntityCacheUpdater' => 'includes/EntityCacheUpdater.php',
 		'Wikibase\EntityIdPropertyUpdater' => 'includes/EntityIdPropertyUpdater.php',
+		'Wikibase\InfoActionHookHandler' => 'includes/InfoActionHookHandler.php',
 		'Wikibase\InterwikiSorter' => 'includes/InterwikiSorter.php',
 		'Wikibase\LangLinkHandler' => 'includes/LangLinkHandler.php',
 		'Wikibase\ChangeHandler' => 'includes/ChangeHandler.php',
