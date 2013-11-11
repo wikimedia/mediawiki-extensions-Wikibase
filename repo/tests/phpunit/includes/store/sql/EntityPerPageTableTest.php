@@ -91,6 +91,10 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->markTestIncomplete( "test me!" );
 	}
 
+	public function testGetItemsWithMostSitelinks( /* $siteId = null, $limit = 50, $offset = 0 */ ) {
+		$this->markTestIncomplete( "test me!" );
+	}
+
 	/**
 	 * @dataProvider getEntitiesProvider
 	 */

@@ -6,22 +6,22 @@ use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
 use Wikibase\StoreFactory;
 
 /**
- * Page for listing items without sitelinks.
+ * Page for listing items with most sitelinks.
  *
- * @since 0.4
+ * @since 0.5
  * @licence GNU GPL v2+
- * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
+class SpecialItemsWithMostSitelinks extends SpecialWikibaseQueryPage {
 
 	public function __construct() {
-		parent::__construct( 'ItemsWithoutSitelinks' );
+		parent::__construct( 'ItemsWithMostSitelinks' );
 	}
 
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param string $subPage
 	 * @return boolean
@@ -38,11 +38,11 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
-		return $entityPerPage->getItemsWithoutSitelinks( null, $limit, $offset );
+		return $entityPerPage->getItemsWithMostSitelinks( null, $limit, $offset );
 	}
 
 }

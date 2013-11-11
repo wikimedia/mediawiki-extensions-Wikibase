@@ -225,6 +225,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is not a valid language code.',
 	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" is not a valid entity type.',
 	'special-itemswithoutsitelinks' => 'Items without sitelinks',
+	'special-itemswithmostsitelinks' => 'Items with most sitelinks',
 	'special-entitydata' => 'Entity data',
 	'wikibase-entitydata-not-found' => "No entity with ID $1 was found.",
 	'wikibase-entitydata-not-acceptable' => "No matching format found. Supported MIME types: $1",
@@ -952,6 +953,8 @@ See also:
 * $1 - an invalid entity type. Valid entity types are: item, property and query.',
 	'special-itemswithoutsitelinks' => '{{doc-special|ItemsWithoutSitelinks}}
 This special page returns a list of items without any site link',
+	'special-itemswithmostsitelinks' => '{{doc-special|ItemsWithMostSitelinks}}
+This special page returns a list of items with the most site links',
 	'special-entitydata' => '{{doc-special|EntityData}}
 The special page provides a linked data interface and easy way to get the JSON data representation for an entity.',
 	'wikibase-entitydata-not-found' => 'Error shown when no entity with the given ID could be found (HTTP error 404). Paramters:

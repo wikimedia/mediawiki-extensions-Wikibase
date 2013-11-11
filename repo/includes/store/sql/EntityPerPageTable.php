@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
+ * @author Bene*
  */
 class EntityPerPageTable implements EntityPerPage {
 
@@ -184,10 +185,48 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return ItemId[]
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 ) {
-		$dbr = wfGetDB( DB_SLAVE );
-		$conditions = array(
-			'ips_site_page IS NULL'
+		$rows = $this->getRowsFromSitelinks(
+			array( 'ips_site_page IS NULL' ),
+			array(),
+			array(
+				'OFFSET' => $offset,
+				'LIMIT' => $limit,
+				'ORDER BY' => 'epp_page_id DESC'
+			),
+			$siteId
 		);
+
+		return $this->getItemIdsFromRows( $rows );
+	}
+
+	/**
+	 * Return all items with the most sitelinks
+	 *
+	 * @since 0.5
+	 *
+	 * @param string|null $siteId Restrict the request to a specific site.
+	 * @param integer $limit Limit of the query.
+	 * @param integer $offset Offset of the query.
+	 * @return ItemId[]
+	 */
+	public function getItemsWithMostSitelinks( $siteId = null, $limit = 50, $offset = 0 ) {
+		$rows = $this->getRowsFromSitelinks(
+			array(),
+			array( 'ips_item_id', 'COUNT(ips_item_id)' ),
+			array(
+				'OFFSET' => $offset,
+				'LIMIT' => $limit,
+				'ORDER BY' => 'COUNT(ips_item_id) DESC',
+				'GROUP BY' => 'ips_item_id'
+			),
+			$siteId
+		);
+
+		return $this->getItemIdsFromRows( $rows );
+	}
+
+	protected function getRowsFromSitelinks( array $conditions = array(), array $vars = array(), array $options = array(), $siteId = null ) {
+		$dbr = wfGetDB( DB_SLAVE );
 		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
 		$joinConditions = 'ips_item_id = epp_entity_id';
 
@@ -195,22 +234,16 @@ class EntityPerPageTable implements EntityPerPage {
 			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
 		}
 
-		$rows = $dbr->select(
+		$vars['entity_id'] = 'epp_entity_id';
+
+		return $dbr->select(
 			array( 'wb_entity_per_page', 'wb_items_per_site' ),
-			array(
-				'entity_id' => 'epp_entity_id'
-			),
+			$vars,
 			$conditions,
 			__METHOD__,
-			array(
-				'OFFSET' => $offset,
-				'LIMIT' => $limit,
-				'ORDER BY' => 'epp_page_id DESC'
-			),
+			$options,
 			array( 'wb_items_per_site' => array( 'LEFT JOIN', $joinConditions ) )
 		);
-
-		return $this->getItemIdsFromRows( $rows );
 	}
 
 	protected function getItemIdsFromRows( $rows ) {

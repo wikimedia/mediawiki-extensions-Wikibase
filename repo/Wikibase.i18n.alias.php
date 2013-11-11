@@ -31,6 +31,7 @@ $specialPageAliases['en'] = array(
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
 	'EntitiesWithoutDescription' => array( 'EntitiesWithoutDescription' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsWithoutSitelinks' ),
+	'ItemsWithMostSitelinks' => array( 'ItemsWithMostSitelinks' ),
 	'MyLanguageFallbackChain' => array( 'MyLanguageFallbackChain' ),
 );
 

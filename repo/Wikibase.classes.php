@@ -143,6 +143,7 @@ return call_user_func( function() {
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel' => 'includes/specials/SpecialEntitiesWithoutLabel.php',
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription' => 'includes/specials/SpecialEntitiesWithoutDescription.php',
 		'Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks' => 'includes/specials/SpecialItemsWithoutSitelinks.php',
+		'Wikibase\Repo\Specials\SpecialItemsWithMostSitelinks' => 'includes/specials/SpecialItemsWithMostSitelinks.php',
 		'Wikibase\Repo\Specials\SpecialListDatatypes' => 'includes/specials/SpecialListDatatypes.php',
 		'Wikibase\Repo\Specials\SpecialDispatchStats' => 'includes/specials/SpecialDispatchStats.php',
 		'Wikibase\Repo\Specials\SpecialEntityData' => 'includes/specials/SpecialEntityData.php',
