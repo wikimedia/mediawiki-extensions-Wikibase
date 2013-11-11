@@ -6,6 +6,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\Item;
+use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Statement;
 
@@ -60,12 +62,12 @@ class GetClaimsTest extends \ApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getNewEntities() {
-		$property = \Wikibase\Property::newEmpty();
+		$property = Property::newEmpty();
 
 		$property->setDataTypeId( 'string' );
 
 		return array(
-			$this->addClaimsAndSave( \Wikibase\Item::newEmpty() ),
+			$this->addClaimsAndSave( Item::newEmpty() ),
 			$this->addClaimsAndSave( $property ),
 		);
 	}

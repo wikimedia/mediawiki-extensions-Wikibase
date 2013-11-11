@@ -1,15 +1,17 @@
 <?php
+
 namespace Wikibase\Test;
 
+use Title;
 use Wikibase\Api\ItemByTitleHelper;
+use Wikibase\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityId;
-use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SiteLinkCache;
 use Wikibase\StringNormalizer;
 
 /**
- * Tests for the ItemByTitleHelper api helper class.
+ * @covers \Wikibase\Api\ItemByTitleHelper
  *
  * @since 0.4
  *
@@ -18,6 +20,7 @@ use Wikibase\StringNormalizer;
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
+ * @author Adam Shorland
  */
 class ItemByTitleHelperTest extends \MediaWikiTestCase {
 
@@ -36,42 +39,28 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Gets a mock ApiBase object which excepts a certain number
-	 * of calls to certain (sub)methods
+	 * Gets a mock ResultBuilder object which excepts a certain number of calls to certain methods
 	 *
-	 * @param integer|null $expectedAddValueCount How many times
-	 * 		do we expect values to be added to the result (ApiResult::addValue)
-	 * @param bool $expectDieUsage Whether we expect ApiBase::dieUsage
-	 * 		to be called
+	 * @param int $expectedMissingEntities number of expected call to this method
+	 * @param int $expectedNormalizedTitle number of expected call to this method
+	 *
+	 * @return ResultBuilder
 	 */
-	public function getApiBaseMock( $expectedAddValueCount = null, $expectDieUsage = false ) {
-		$apiBaseMock = $this->getMockBuilder( '\ApiBase' )
+	public function getResultBuilderMock( $expectedMissingEntities = 0, $expectedNormalizedTitle = 0) {
+		$apiResultBuilderMock = $this->getMockBuilder( 'Wikibase\Api\ResultBuilder' )
 			->disableOriginalConstructor()
 			->getMock();
+		$apiResultBuilderMock->expects( $this->exactly( $expectedMissingEntities ) )
+			->method( 'addMissingEntity' );
+		$apiResultBuilderMock->expects( $this->exactly( $expectedNormalizedTitle ) )
+			->method( 'addNormalizedTitle' );
 
-		$apiBaseMock
-			->expects( $expectDieUsage ? $this->once() : $this->never() )
-			->method( 'dieUsage' )
-			->will( $this->throwException( new \UsageException( 'MockUsageExceptionMessage', 'MockUsageExceptionCode' ) ) );
-
-		$apiResultMock = $this->getMockBuilder( '\ApiResult' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		if ( !is_null( $expectedAddValueCount ) ) {
-			$apiResultMock->expects( $this->exactly( $expectedAddValueCount ) )
-				->method( 'addValue' );
-		}
-
-		$apiBaseMock->expects( $this->any() )
-			->method( 'getResult' )
-			->will( $this->returnValue( $apiResultMock ) );
-
-		return $apiBaseMock;
+		return $apiResultBuilderMock;
 	}
 
 	/**
 	 * @param integer|null $entityId
+	 * @return SiteLinkCache
 	 */
 	public function getSiteLinkCacheMock( $entityId = null ) {
 		$siteLinkCacheMock = $this->getMockBuilder( '\Wikibase\SiteLinkCache' )
@@ -90,11 +79,11 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdsSuccess() {
 		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
-		$expectedEntityId = new ItemId( 'q123' );
+		$expectedEntityId = new ItemId( 'Q123' );
 		$expectedEntityId = $entityIdFormatter->format( $expectedEntityId );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( 0 ),
+			$this->getResultBuilderMock(),
 			$this->getSiteLinkCacheMock( 123 ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -116,7 +105,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdNormalized() {
 		$itemByTitleHelper = new ItemByTitleHelper(
 		// Two values should be added: The normalization and the failure to find an entity
-			$this->getApiBaseMock( 2 ),
+			$this->getResultBuilderMock( 1, 1 ),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -138,7 +127,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdsNotFound() {
 		$itemByTitleHelper = new ItemByTitleHelper(
 		// Two result values should be added (for both titles which wont be found)
-			$this->getApiBaseMock( 2 ),
+			$this->getResultBuilderMock( 2 ),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -147,7 +136,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$sites = array( 'FooSite' );
 		$titles = array( 'Berlin', 'London' );
 
-		$entityIds = $itemByTitleHelper->getEntityIds( $sites, $titles, false );
+		$itemByTitleHelper->getEntityIds( $sites, $titles, false );
 	}
 
 	/**
@@ -157,7 +146,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$this->setExpectedException( 'UsageException' );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( 0, true ),
+			$this->getResultBuilderMock(),
 			$this->getSiteLinkCacheMock( 1 ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -166,7 +155,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$sites = array( 'FooSite' );
 		$titles = array( 'Berlin', 'London' );
 
-		$entityIds = $itemByTitleHelper->getEntityIds( $sites, $titles, true );
+		$itemByTitleHelper->getEntityIds( $sites, $titles, true );
 	}
 
 	static public function normalizeTitleProvider() {
@@ -189,11 +178,11 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider normalizeTitleProvider
 	 */
-	public function testNormalizeTitle( $title, $expectedEntityId, $expectedAddValueCount ) {
+	public function testNormalizeTitle( $title, $expectedEntityId, $expectedAddNormalizedCalls ) {
 		$dummySite = new \MediaWikiSite();
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( $expectedAddValueCount ),
+			$this->getResultBuilderMock( 0, $expectedAddNormalizedCalls ),
 			$this->getSiteLinkCacheMock( $expectedEntityId ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -202,21 +191,23 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$entityId = $itemByTitleHelper->normalizeTitle( $title, $dummySite );
 
 		$this->assertEquals( $expectedEntityId, $entityId );
+
 		// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
-		$this->assertEquals( \Title::newFromText( $title )->getPrefixedText(), $title );
+		// XXX: The Normalized title is passed by via reference to $title...
+		$this->assertEquals( Title::newFromText( $title )->getPrefixedText() , $title );
 	}
 
 	public function testNoSites(){
 		$this->setExpectedException( 'UsageException' );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( null, true ),
+			$this->getResultBuilderMock(),
 			$this->getSiteLinkCacheMock( 123 ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
 		);
 
-		$entityId = $itemByTitleHelper->getEntityIds( array( ), array( 'barfoo' ), false );
+		$itemByTitleHelper->getEntityIds( array( ), array( 'barfoo' ), false );
 	}
 
 }
