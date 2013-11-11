@@ -33,6 +33,7 @@ return call_user_func( function() {
 		'Wikibase\ApiClientInfo' => 'includes/api/ApiClientInfo.php',
 
 		// includes/hooks
+		'Wikibase\Client\Hooks\InfoActionHookHandler' => 'includes/hooks/InfoActionHookHandler.php',
 		'Wikibase\Client\MovePageNotice' => 'includes/hooks/MovePageNotice.php',
 
 		// includes/modules
