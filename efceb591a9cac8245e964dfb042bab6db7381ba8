@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_7007501b",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 168
+      },
+      "writtenOn": "2013-11-11T11:53:24Z",
+      "side": 1,
+      "message": "Will do!",
+      "parentUuid": "291c1151_351cea74",
+      "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_b510da57",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_30fdd805",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 168
+      },
+      "writtenOn": "2013-11-11T11:53:24Z",
+      "side": 1,
+      "message": "Hehe, third person to point that out. wbsearchentities does not inherit from ApiWikibase, so that can\u0027t happen. I\u0027ve a patch for that too, but I have a weird feeling that\u0027s going to balloon into a much bigger patch.",
+      "parentUuid": "291c1151_b510da57",
+      "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_d50b9629",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2013-11-11T11:50:48Z",
       "side": 1,
       "message": "might be nice to have an example for using multiple sitelinks",
+      "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_50009403",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 168
+      },
+      "writtenOn": "2013-11-11T11:53:24Z",
+      "side": 1,
+      "message": "Will do!",
+      "parentUuid": "291c1151_d50b9629",
       "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
