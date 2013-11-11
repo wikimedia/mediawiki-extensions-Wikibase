@@ -9,20 +9,20 @@
 module AliasPage
   include PageObject
   # aliases UI elements
-  div(:aliasesDiv, :class => "wb-aliases")
-  span(:aliasesTitle, :class => "wb-aliases-label")
-  ul(:aliasesList, :class => "wb-aliases-container")
-  a(:addAliases,	:css => "div.wb-aliases a.wb-ui-propertyedittool-toolbarbutton-addbutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:editAliases, :css => "div.wb-aliases a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:saveAliases, :css => "div.wb-aliases a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:saveAliasesDisabled, :css => "div.wb-aliases a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
-  a(:cancelAliases, :css => "div.wb-aliases a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
-  text_field(:aliasesInputFirst, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'wb-aliases-alias')]//input")
-  a(:aliasesInputFirstRemove, :css => "div.wb-aliases a.tagadata-close")
-  text_field(:aliasesInputEmpty, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-empty')]//input")
-  text_field(:aliasesInputModified, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-modified')]//input")
-  text_field(:aliasesInputEqual, :xpath => "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-equal')]//input")
-  span(:aliasesHelpField, :css => "div.wb-aliases span.mw-help-field-hint")
+  div(:aliasesDiv, class: "wb-aliases")
+  span(:aliasesTitle, class: "wb-aliases-label")
+  ul(:aliasesList, class: "wb-aliases-container")
+  a(:addAliases, css: "div.wb-aliases a.wb-ui-propertyedittool-toolbarbutton-addbutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:editAliases, css: "div.wb-aliases a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:saveAliases, css: "div.wb-aliases a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:saveAliasesDisabled, css: "div.wb-aliases a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
+  a(:cancelAliases, css: "div.wb-aliases a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
+  text_field(:aliasesInputFirst, xpath: "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'wb-aliases-alias')]//input")
+  a(:aliasesInputFirstRemove, css: "div.wb-aliases a.tagadata-close")
+  text_field(:aliasesInputEmpty, xpath: "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-empty')]//input")
+  text_field(:aliasesInputModified, xpath: "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-modified')]//input")
+  text_field(:aliasesInputEqual, xpath: "//div[contains(@class, 'wb-ui-aliasesedittool')]//li[contains(@class, 'tagadata-choice-equal')]//input")
+  span(:aliasesHelpField, css: "div.wb-aliases span.mw-help-field-hint")
 
   # aliases methods
   def get_aliases
