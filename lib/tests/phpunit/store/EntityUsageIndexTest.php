@@ -4,11 +4,10 @@ namespace Wikibase\Test;
 
 use MediaWikiSite;
 use Site;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
 use Wikibase\EntityUsageIndex;
-use Wikibase\EntityId;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\EntityUsageIndex
@@ -112,7 +111,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				),
 				array( // expectedUsage
 					'Foo'
@@ -123,7 +122,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$barWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				),
 				array( // expectedUsage
 					'Bar'
@@ -134,7 +133,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 2 )
+					new ItemId( 'q2' )
 				),
 				array( // expectedUsage
 					'Too'
@@ -145,7 +144,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$barWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 2 )
+					new ItemId( 'q2' )
 				),
 				array( // expectedUsage
 				)
@@ -155,8 +154,8 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 2 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q2' ),
 				),
 				array( // expectedUsage
 					'Foo', 'Too'
@@ -167,8 +166,8 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$barWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 2 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q2' ),
 				),
 				array( // expectedUsage
 					'Bar'
@@ -179,8 +178,8 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 1 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q1' ),
 				),
 				array( // expectedUsage
 					'Foo'
@@ -225,7 +224,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 					'Foo'
 				),
 				array( // expectedUsed
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				)
 			),
 
@@ -236,7 +235,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 					'Bar'
 				),
 				array( // expectedUsed
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				)
 			),
 
@@ -247,7 +246,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 					'Too'
 				),
 				array( // expectedUsed
-					new EntityId( Item::ENTITY_TYPE, 2 )
+					new ItemId( 'q2' )
 				)
 			),
 
@@ -268,8 +267,8 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 					'Foo', 'Too'
 				),
 				array( // expectedUsed
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 2 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q2' ),
 				)
 			),
 
@@ -280,7 +279,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 					'Bar', 'Tar'
 				),
 				array( // expectedUsed
-					new EntityId( Item::ENTITY_TYPE, 1 ),
+					new ItemId( 'q1' ),
 				)
 			),
 
@@ -291,7 +290,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 					'Foo', 'Foo'
 				),
 				array( // expectedUsed
-					new EntityId( Item::ENTITY_TYPE, 1 ),
+					new ItemId( 'q1' ),
 				)
 			),
 
@@ -331,11 +330,11 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				),
 				Item::ENTITY_TYPE,
 				array( // expectedUsage
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				)
 			),
 
@@ -343,11 +342,11 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$barWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				),
 				Item::ENTITY_TYPE,
 				array( // expectedUsage
-					new EntityId( Item::ENTITY_TYPE, 1 )
+					new ItemId( 'q1' )
 				)
 			),
 
@@ -355,11 +354,11 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 2 )
+					new ItemId( 'q2' )
 				),
 				Item::ENTITY_TYPE,
 				array( // expectedUsage
-					new EntityId( Item::ENTITY_TYPE, 2 )
+					new ItemId( 'q2' )
 				)
 			),
 
@@ -367,7 +366,7 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$barWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 2 )
+					new ItemId( 'q2' )
 				),
 				Item::ENTITY_TYPE,
 				array( // expectedUsage
@@ -378,14 +377,14 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 2 ),
-					new EntityId( Item::ENTITY_TYPE, 3 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q2' ),
+					new ItemId( 'q3' ),
 				),
 				Item::ENTITY_TYPE,
 				array( // expectedUsage
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 2 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q2' ),
 				)
 			),
 
@@ -393,12 +392,12 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$barWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 2 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q2' ),
 				),
 				Item::ENTITY_TYPE,
 				array( // expectedUsage
-					new EntityId( Item::ENTITY_TYPE, 1 ),
+					new ItemId( 'q1' ),
 				)
 			),
 
@@ -406,13 +405,13 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 				$items,
 				$fooWiki,
 				array( // wantedEntities
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 1 ),
+					new ItemId( 'q1' ),
+					new ItemId( 'q1' ),
 				),
 				Item::ENTITY_TYPE,
 				array( // expectedUsage
-					new EntityId( Item::ENTITY_TYPE, 1 ),
-					new EntityId( Item::ENTITY_TYPE, 1 ), //TODO: do we want to remove dupes here too?!
+					new ItemId( 'q1' ),
+					new ItemId( 'q1' ), //TODO: do we want to remove dupes here too?!
 				)
 			),
 

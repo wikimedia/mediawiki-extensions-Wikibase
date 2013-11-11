@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\PropertyNotFoundException;
 
 /**
@@ -19,7 +19,7 @@ use Wikibase\Lib\PropertyNotFoundException;
 class PropertyNotFoundExceptionTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructorWithJustATable() {
-		$propertyId = new EntityId( 'item', 42 );
+		$propertyId = new ItemId( 'q42' );
 
 		$exception = new PropertyNotFoundException( $propertyId );
 

@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\SnakConstructionService;
 use ApiBase, MWException;
@@ -196,6 +197,11 @@ class ClaimModificationHelper {
 
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			$this->apiMain->dieUsage( 'Property expected, got ' . $propertyId->getEntityType(), 'invalid-snak' );
+		}
+
+		// TODO: remove this hack and the above check by propagating the PropertyId type upwards
+		if ( !( $propertyId instanceof PropertyId ) ) {
+			$propertyId = PropertyId::newFromNumber( $propertyId->getNumericId() );
 		}
 
 		try {
