@@ -1,169 +1,312 @@
 /**
- * QUnit tests for inputAutoExpand jQuery plugin
- *
- * @since 0.1
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author H. Snater < mediawiki at snater.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
 
 ( function( $, QUnit ) {
 	'use strict';
 
 	/**
-	 * Factory for creating a new input element with auto-expand functionality suited for testing.
+	 * Factory for creating a new input element suited for testing.
 	 *
 	 * @return {jQuery} input element
 	 */
 	var newTestInputAutoExpand = function() {
 		var $input = $( '<input/>', {
-			id: 'inputAutoExpandTest',
-			type: 'text',
-			name: 'test',
-			value: ''
+			'class': 'test_inputAutoExpand',
+			width: '20px',
+			type: 'text'
 		} )
-		.appendTo( 'body' ); // append input box to body, otherwise the thing won't work
+		// Append to body to be able to detect the element width:
+		.appendTo( 'body' );
 
 		/**
-		 * Changes the text of the input field and triggers an event for the growing process.
+		 * Changes the text of the input field and triggers expansion/contraction.
 		 *
-		 * @param {String} text
-		 * @return {Number} Amount of the changed size in pixels
+		 * @param {string} text
 		 */
 		$input.testInsert = function( text ) {
 			this.val( text );
-			return this.testTrigger();
-		};
-
-		/**
-		 * Triggers the expand() of the AutoExpandInput.
-		 *
-		 * @return {*}
-		 */
-		$input.testTrigger = function() {
-			var autoExpand = this.data( 'AutoExpandInput' );
-			return autoExpand.expand();
+			this.data( 'inputAutoExpand' ).expand();
 		};
 
 		return $input;
 	};
 
 	/**
-	 * Factory for creating a new textarea element with auto-expand functionality suited for testing.
+	 * Factory for creating a new textarea element suited for testing.
 	 *
 	 * @return {jQuery} textarea element
 	 */
 	var newTestTextareaAutoExpand = function() {
 		var $textarea = $( '<textarea/>', {
-			id: 'inputAutoExpandTest',
+			'class': 'test_inputAutoExpand',
 			width: '20px'
 		} )
-		.appendTo( 'body' ); // append input box to body, otherwise the thing won't work
+		// Append to body to be able to detect the element width:
+		.appendTo( 'body' );
 
 		/**
-		 * Changes the text of the textarea and triggers an event for the resize process.
+		 * Changes the text of the textarea and triggers expansion/contraction.
 		 *
-		 * @param {String} text
-		 * @return {Number} Amount of the changed size in pixels
+		 * @param {string} text
 		 */
 		$textarea.testInsert = function( text ) {
 			this.text( text );
-			return this.testTrigger();
-		};
-
-		/**
-		 * Triggers the expand() of the AutoExpandInput.
-		 *
-		 * @return {*}
-		 */
-		$textarea.testTrigger = function() {
-			var autoExpand = this.data( 'AutoExpandInput' );
-			return autoExpand.expand();
+			this.data( 'inputAutoExpand' ).expand();
 		};
 
 		return $textarea;
 	};
 
 	QUnit.module( 'jquery.inputAutoExpand', {
-		teardown: function() { $( '#inputAutoExpandTest' ).remove(); }
+		teardown: function() {
+			$( '.test_inputAutoExpand' ).remove();
+		}
 	} );
 
-	QUnit.test( 'Apply jquery.inputAutoExpand() on input boxes', function( assert ) {
-		var subject = newTestInputAutoExpand();
+	QUnit.test( 'Initialize plugin', function( assert ) {
+		var $input = newTestInputAutoExpand(),
+			$textarea = newTestTextareaAutoExpand(),
+			$div = $( '<div/>' ).addClass( 'test_inputAutoExpand' ).appendTo( 'body' );
 
 		assert.equal(
-			subject.inputAutoExpand(),
-			subject,
-			'auto expand initialized, returned the input box wrapped in jQuery object'
-		);
-
-		assert.ok(
-			subject.testInsert( 'AA' ) > 0,
-			'Input field has grown after longer string was inserted'
-		);
-
-		// set placeholder:
-		subject.attr( 'placeholder', 'AA BB CC' );
-
-		assert.ok(
-			subject.testTrigger() > 0,
-			'Input field has grown after long placeholder was inserted'
+			$input.inputAutoExpand(),
+			$input,
+			'Initialized plugin on input box.'
 		);
 
 		assert.equal(
-			subject.testInsert( '' ),
-			0,
-			'Remove input fields text, size shouldn\'t change since we still have a placeholder'
+			$textarea.inputAutoExpand(),
+			$textarea,
+			'Initialized plugin.'
 		);
 
-		// remove placeholder
-		subject.attr( 'placeholder', null );
-		subject.testTrigger();
+		$div.inputAutoExpand();
 
 		assert.equal(
-			subject.data( 'AutoExpandInput' ).getWidth(),
-			subject.data( 'AutoExpandInput' ).getComfortZone() + subject.innerWidth() - subject.width(),
-			'Removed placeholder, width should be comfort zone width and padding of text box since there is no text set now'
+			undefined,
+			$div.data( 'inputAutoExpand' ),
+			'Not initializing plugin on div.'
 		);
 	} );
 
-	QUnit.test( 'Apply jquery.inputAutoExpand() on textareas', function( assert ) {
-		var subject = newTestTextareaAutoExpand();
+	QUnit.test( 'Applying plugin to input boxes', function( assert ) {
+		var $input = newTestInputAutoExpand(),
+			initialWidth = Math.ceil( $input.width() ),
+			previousWidth,
+			currentWidth;
+
+		$input.inputAutoExpand();
+
+		$input.testInsert( 'OOOOOOOOOO' );
+		currentWidth = Math.ceil( $input.width() );
+
+		assert.ok(
+			currentWidth > initialWidth,
+			'Input field grows when inserting a string. '
+				+ '(initial: ' + initialWidth + ', current: ' + currentWidth + ')'
+		);
+
+		$input.attr( 'placeholder', 'OOOOOOOOOO OOOOOOOOOO' );
+
+		previousWidth = currentWidth;
+		$input.testInsert( 'OOO' );
+		currentWidth = Math.ceil( $input.width() );
+
+		assert.ok(
+			currentWidth > previousWidth,
+			'Input field has grown after setting a placeholder longer than the current input. '
+				+ '(previous: ' + previousWidth + ', current: ' + currentWidth + ')'
+		);
+
+		previousWidth = currentWidth;
+		$input.testInsert( 'O' );
+		currentWidth = Math.ceil( $input.width() );
 
 		assert.equal(
-			subject.inputAutoExpand( { expandWidth: false, expandHeight: true } ),
-			subject,
-			'Initialized auto-expand, returned the textarea box wrapped in jQuery object.'
+			previousWidth,
+			currentWidth,
+			'Width does not change when clearing the input while a placeholder longer than the '
+				+ 'erased input is set. '
+				+ '(previous: ' + previousWidth + ', current: ' + currentWidth + ')'
 		);
 
-		var initialHeight = subject.height();
+		$input.removeAttr( 'placeholder' );
 
-		subject.testInsert( 'a\na' );
+		previousWidth = currentWidth;
+		$input.testInsert( '' );
+		currentWidth = Math.ceil( $input.width() );
 
 		assert.ok(
-			subject.height() > initialHeight,
-			'Input field has grown after a new line was inserted.'
+			currentWidth < previousWidth,
+			'Input element contracts after removing the placeholder. '
+				+ '(previous: ' + previousWidth + ', current: ' + currentWidth + ', initial: '
+				+ initialWidth + ')'
 		);
+	} );
 
-		var cachedHeight = subject.height();
+	QUnit.test( 'Applying horizontally growing plugin to textareas', function( assert ) {
+		var $textarea = newTestTextareaAutoExpand().inputAutoExpand(),
+			initialWidth = Math.ceil( $textarea.width() ),
+			previousWidth,
+			currentWidth;
 
-		subject.testInsert( 'a\naa' );
+		$textarea.testInsert( 'OOOOOOOOOO' );
+		currentWidth = Math.ceil( $textarea.width() );
 
 		assert.ok(
-			subject.height() === cachedHeight,
-			'Not growing when adding another character on the same line.'
+			currentWidth > initialWidth,
+			'Textarea grows when inserting a string. '
+				+ '(initial: ' + initialWidth + ', current: ' + currentWidth + ')'
 		);
 
-		subject.testInsert( '' );
+		previousWidth = currentWidth;
+		$textarea.testInsert( 'OOO' );
+		currentWidth = Math.ceil( $textarea.width() );
 
 		assert.ok(
-			subject.height() === initialHeight,
-			'Textarea contracted after removing text.'
+			currentWidth < previousWidth,
+			'Width shrinks when removing characters. '
+				+ '(previous: ' + previousWidth + ', current: ' + currentWidth + ')'
 		);
 
+		previousWidth = currentWidth;
+		$textarea.testInsert( '' );
+		currentWidth = Math.ceil( $textarea.width() );
+
+		assert.equal(
+			initialWidth,
+			currentWidth,
+			'Textarea contracts to initial width after erasing its content. '
+				+ '(previous: ' + previousWidth + ', current: ' + currentWidth + ', initial: '
+				+ initialWidth + ')'
+		);
+	} );
+
+	QUnit.test( 'Applying vertically growing plugin to textareas', function( assert ) {
+		var $textarea = newTestTextareaAutoExpand();
+
+		// Init plugin before measuring the initial height since the plugin will shrink the textarea
+		// to one line first:
+		$textarea.inputAutoExpand( { expandWidth: false, expandHeight: true } );
+
+		var initialHeight = Math.ceil( $textarea.height() ),
+			previousHeight,
+			currentHeight;
+
+		$textarea.testInsert( 'a\na' );
+		currentHeight = Math.ceil( $textarea.height() );
+
+		assert.ok(
+			currentHeight > initialHeight,
+			'Textarea grows when inserting a new line. '
+				+ '(initial: ' + initialHeight + ', current: ' + currentHeight + ')'
+		);
+
+		previousHeight = currentHeight;
+		$textarea.testInsert( 'a\naa' );
+		currentHeight = Math.ceil( $textarea.height() );
+
+		assert.equal(
+			previousHeight,
+			currentHeight,
+			'Textarea does not grow when adding characters to an existing line. '
+				+ '(previous: ' + previousHeight + ', current: ' + currentHeight + ')'
+		);
+
+		previousHeight = currentHeight;
+		$textarea.testInsert( '' );
+		currentHeight = Math.ceil( $textarea.height() );
+
+		assert.equal(
+			initialHeight,
+			currentHeight,
+			'Textarea contracts to initial height after erasing its content. '
+				+ '(previous: ' + previousHeight + ', current: ' + currentHeight + ', '
+				+ 'initial: ' + initialHeight + ')'
+		);
+	} );
+
+	QUnit.test( 'Applying horizontally and vertically growing plugin to textareas', function( assert ) {
+		var $textarea = newTestTextareaAutoExpand(),
+			MAXIMUM_WIDTH = 150;
+
+		$textarea.inputAutoExpand( {
+			expandWidth: true,
+			expandHeight: true,
+			maxWidth: MAXIMUM_WIDTH
+		} );
+
+		var initialHeight = Math.ceil( $textarea.height() ),
+			initialWidth = Math.ceil( $textarea.width() ),
+			previousHeight,
+			previousWidth,
+			currentHeight,
+			currentWidth;
+
+		// The following string should be >20px and <MAXIMUM_WIDTHpx:
+		$textarea.testInsert( 'OOOOOOOOOO' );
+		currentHeight = Math.ceil( $textarea.height() );
+		currentWidth = Math.ceil( $textarea.width() );
+
+		assert.equal(
+			initialHeight,
+			currentHeight,
+			'Textarea does not grow vertically when inserting a string shorter than the maximum '
+				+ 'width. '
+				+ '(initial: ' + initialHeight + ', current: ' + currentHeight + ')'
+		);
+
+		assert.ok(
+			currentWidth > initialWidth,
+			'Textarea grows horizontally when inserting a string shorter than the maximum width. '
+				+ '(initial: ' + initialWidth + ', current: ' + currentWidth + ')'
+		);
+
+		previousHeight = currentHeight;
+		previousWidth = currentWidth;
+		// The following string should be >MAXIMUM_WIDTHpx:
+		$textarea.testInsert( 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO' );
+		currentHeight = Math.ceil( $textarea.height() );
+		currentWidth = Math.ceil( $textarea.width() );
+
+		assert.ok(
+			currentHeight > previousHeight,
+			'Textarea grows vertically when inserting a string longer than the maximum width. '
+				+ '(previous: ' + previousHeight + ', current: ' + currentHeight + ')'
+		);
+
+		assert.ok(
+			currentWidth === MAXIMUM_WIDTH
+			// Consider rounding:
+			|| currentWidth + 1 === MAXIMUM_WIDTH || currentWidth - 1 === MAXIMUM_WIDTH,
+			'Textarea grows to maximum width when inserting a string longer than the maximum '
+				+ 'width. '
+				+ '(previous: ' + previousWidth + ', current: ' + currentWidth + ')'
+		);
+
+		previousHeight = currentHeight;
+		previousWidth = currentWidth;
+		$textarea.testInsert( '' );
+		currentHeight = Math.ceil( $textarea.height() );
+		currentWidth = Math.ceil( $textarea.width() );
+
+		assert.equal(
+			initialHeight,
+			currentHeight,
+			'Textarea contracts to initial height after erasing its content. '
+				+ '(previous: ' + previousHeight + ', current: ' + currentHeight + ', '
+				+ 'initial: ' + initialHeight + ')'
+		);
+
+		assert.equal(
+			initialWidth,
+			currentWidth,
+			'Textarea contracts to initial width after erasing its content. '
+				+ '(previous: ' + previousWidth + ', current: ' + currentWidth + ', initial: '
+				+ initialWidth + ')'
+		);
 	} );
 
 }( jQuery, QUnit ) );

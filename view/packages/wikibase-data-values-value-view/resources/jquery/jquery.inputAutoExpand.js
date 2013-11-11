@@ -1,64 +1,367 @@
 /**
- * Makes input or textarea elements automatically expand/contract their size according to their
- * input while typing. Vertical resizing will of course work for textareas only.
+ * jQuery.inputAutoExpand plugin
  *
- * Based on autoGrowInput plugin by James Padolsey
- * (see: http://stackoverflow.com/questions/931207/is-there-a-jquery-autogrow-plugin-for-text-fields)
- * and Autosize plugin by Jack Moore (license: MIT)
- * (see: http://www.jacklmoore.com/autosize)
+ * Makes input or textarea elements automatically expand/contract their size according to their
+ * input value while typing. Vertical resizing will of course work for textareas only.
+ * The input/textarea element the plugin is initialized on needs to be in the DOM in order to be
+ * able to correctly detect the element's native width.
+ * Compatibility: IE >= 8
+ *
+ * Based on:
+ * - autoGrowInput plugin by James Padolsey (http://jsbin.com/ahaxe)
+ * - Autosize plugin by Jack Moore (license: MIT) (http://www.jacklmoore.com/autosize)
  *
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki at snater.com >
  *
- * @since 0.1 (moved from WikibaseLib 0.4 alpha)
+ * @option expandWidth {boolean} Whether to horizontally expand/contract the input element.
+ *         Default: true
  *
- * @example $( 'input' ).inputAutoExpand();
- * @desc Enhances an input element with horiontal auto-expanding functionality.
+ * @option expandHeight {boolean} Whether to vertically expand/contract the input element.
+ *         Default: false
  *
- * @example $( 'textarea' ).inputAutoExpand( { expandWidth: false, expandHeight: true } );
- * @desc Enhances an input element with vertical auto-expanding functionality.
+ * @option maxWidth {number} Maximum width the input element may stretch.
+ *         Default: 1000
  *
- * @option expandWidth {Boolean} Whether to horizontally expand/contract the input element.
- *         default: true
+ * @option minWidth {number} Minimum width. If null, the space required by the input element's
+ *         placeholder text will be determined automatically (taking placeholder into account).
+ *         Default: undefined
  *
- * @option expandHeight {Boolean} Whether to vertically expand/contract the input element.
- *         default: false
+ * @option maxHeight {number} Maximum height the input element may stretch. If null, the height is
+ *         not constrained to a maximum.
+ *         Default: undefined
  *
- * @option maxWidth {Number} Maximum width the input element may stretch.
- *         default: 1000
+ * @option minHeight {number} Minimum height. If null, the height is not constrained to a minimum.
+ *         Default: undefined
  *
- * @option minWidth {Number} Minimum width. If not set or false, the space required by the input
- *         elements placeholder text will be determined automatically (taking placeholder into
- *         account).
- *         default: false
+ * @option comfortZone {number} White space behind the input text to prevent resize jitters while
+ *         typing. If null, an appropriate amount of space will be calculated automatically.
+ *         Default: undefined
  *
- * @option maxHeigth {Number} Maximum height the input element may stretch. Set to false for not
- *         constraining the height to a  maximum.
- *         default: false
+ * @option suppressNewLine {boolean} Whether to suppress new-line characters.
+ *         Default: false
  *
- * @option minHeight {Number} Minimum height. Set to false for not constraining the height to a
- *         minimum.
- *         default: false
- *
- * @option comfortZone {Number} White space behind the input text. If set to false, an
- *         appropriate amount of space will be calculated automatically.
- *         default: false
- *
- * @option expandOnResize {Boolean} Whether width should be re-calculated when the browser
- *         window has been resized.
- *         default: true
- *
- * @option suppressNewLine {Boolean} Whether to suppress new-line characters.
- *         default: false
+ * @option eventNamespace {string} Namespace used for the events the plugin attaches handlers to.
+ *         Default: 'inputautoexpand'
  *
  * @dependency jquery.eachchange
- *
- * @todo Make expandWidth and expandHeight work simultaneously.
- * @todo Destroy mechanism
  */
 ( function( $ ) {
 	'use strict';
+
+	$.fn.inputAutoExpand = function( options ) {
+		if( !options ) {
+			options = {};
+		}
+
+		// Inject default options for missing ones:
+		var fullOptions = $.extend( {
+			expandWidth: true,
+			expandHeight: false,
+			maxWidth: 1000,
+			minWidth: undefined,
+			maxHeight: undefined,
+			minHeight: undefined,
+			comfortZone: undefined,
+			suppressNewLine: false,
+			eventNamespace: 'inputAutoExpand'
+		}, options );
+
+		// Expand input fields:
+		this.filter( 'input:text, textarea' ).each( function() {
+			var instance = $.data( this, 'inputAutoExpand' );
+
+			if( instance ) {
+				// AutoExpand initialized already, update options only (will also expand):
+				if( options ) {
+					instance.options( options );
+				}
+				instance.expand();
+
+			} else {
+				// Initialize new auto expand:
+				$.data( this, 'inputAutoExpand', new AutoExpandInput( this, fullOptions ) );
+			}
+		} );
+
+		return this;
+	};
+
+	/**
+	 * Prototype for auto expanding input elements.
+	 * @constructor
+	 *
+	 * @param {Object} element
+	 * @param {Object} options
+	 */
+	var AutoExpandInput = function( element, options ) {
+		this.$input = $( element );
+		this._options = options;
+
+		var self = this;
+
+		this._nodeName = element.nodeName;
+
+		this.$input
+		.eachchange( function( event, oldValue ) {
+			if ( self._options.suppressNewLine ) {
+				self.$input.val( self.$input.val().replace( /\r?\n/g, '' ) );
+			}
+			self.expand();
+		} );
+
+		initRulers();
+
+		this.expand();
+
+		// Do not show any resize handle for manual resizing:
+		this.$input.css( 'resize', 'none' );
+
+		$( window )
+		.off( '.' + this._options.eventNamespace )
+		.on( 'resize.' + this._options.eventNamespace, function( event ) {
+			$( 'input:text, textarea' ).each( function() {
+				var instance = $.data( this, 'inputAutoExpand' );
+				if( instance ) {
+					instance.expand();
+				}
+			} );
+		} );
+	};
+
+	$.extend( AutoExpandInput.prototype, {
+		/**
+		 * The input element the auto-expand mechanism is initialized on.
+		 * @type {jQuery}
+		 */
+		$input: null,
+
+		/**
+		 * Options.
+		 * @type {Object}
+		 */
+		_options: null,
+
+		/**
+		 * Caching the previous input to simply abort expanding when it did not change.
+		 * @type {string}
+		 */
+		_previousVal: null,
+
+		/**
+		 * The input element's node name.
+		 * @type {string}
+		 */
+		_nodeName: null,
+
+		/**
+		 * Sets the input box's width to fit the box's content.
+		 */
+		expand: function() {
+			var newVal = this.$input.val();
+
+			if( newVal === this._previousVal ) {
+				return;
+			}
+
+			if( this._options.expandWidth ) {
+				this._expandWidth();
+			}
+
+			if( this._options.expandHeight && this._nodeName === 'TEXTAREA' ) {
+				this._expandHeight();
+			}
+
+			this._previousVal = newVal;
+		},
+
+		/**
+		 * Expands/Contracts the input element's width.
+		 */
+		_expandWidth: function() {
+			copySpaceAffectingStyles( this.$input, $rulerX );
+
+			var minWidth = this._getMinWidth(),
+				maxWidth = this._options.maxWidth,
+				comfortZone = this._getComfortZone();
+
+			// Since the minimum width may have been calculated dynamically using the placeholder,
+			// the minimum width may be greater than the maximum width.
+			if( minWidth > maxWidth ) {
+				minWidth = maxWidth;
+			}
+
+			var valWidth = this._getWidthFor( this.$input.val() ),
+				newWidth = valWidth + comfortZone;
+
+			if( newWidth < minWidth ) {
+				newWidth = minWidth;
+			} else if( newWidth >= maxWidth  ) {
+				newWidth = maxWidth;
+			}
+
+			this.$input.width( newWidth );
+		},
+
+		/**
+		 * Expands/Contracts the input element's height.
+		 */
+		_expandHeight: function() {
+			copySpaceAffectingStyles( this.$input, $rulerY );
+
+			var newHeight = this._getHeightFor( this.$input.val() ),
+				input = this.$input.get( 0 ),
+				minHeight = this._options.minHeight || 0,// keeps at least one single line
+				maxHeight = this._options.maxHeight;
+
+			if( maxHeight && newHeight > maxHeight ) {
+				input.style.height = maxHeight + 'px';
+				input.style.overflow = 'scroll';
+			} else {
+				if( minHeight && newHeight < minHeight ) {
+					input.style.height = minHeight + 'px';
+				} else {
+					input.style.height = ( !isNaN( newHeight ) ? newHeight : 0 ) + 'px';
+				}
+				input.style.overflow = 'hidden';
+			}
+		},
+
+		/**
+		 * Calculates the width which would be required for the input field if the given text was
+		 * inserted. This does not consider the comfort zone given in the options and doesn't check
+		 * for min/max width restraints.
+		 *
+		 * @param {string} text
+		 * @return {number}
+		 */
+		_getWidthFor: function( text ) {
+			$rulerX.html( escaped( text ) );
+			return $rulerX.width();
+		},
+
+		/**
+		 * Returns the minimum width the input element may have assigned.
+		 *
+		 * @return {number}
+		 */
+		_getMinWidth: function() {
+			if( this._options.minWidth ) {
+				return this._options.minWidth;
+			}
+
+			// If there is no static minimum width, the placeholder is used to detect the minimum
+			// width. Since the placeholder may change, its width is calculated always.
+			if( !this.$input.attr( 'placeholder' ) ) {
+				return 0;
+			}
+			// Don't need comfort zone in this case, just some sane space:
+			return Math.ceil( this._getWidthFor( this.$input.attr( 'placeholder' ) + ' ' ) );
+		},
+
+		/**
+		 * Calculates the height the given text would require to not show any scrollbar within the
+		 * input element.
+		 *
+		 * @param {string} text
+		 */
+		_getHeightFor: function( text ) {
+			if( text === '' ) {
+				text = ' ';
+			}
+
+			var ruler = $rulerY.get( 0 );
+			ruler.value = text;
+
+			// Update the width in case the original textarea width has changed:
+			var width = this._options.maxWidth;
+			if( !this._options.expandWidth || this.$input.width() > this._options.maxWidth ) {
+				width = Math.ceil( this.$input.width() ) - 1;
+			}
+
+			// Catch miscalculation:
+			if( width < 0 ) {
+				width = 0;
+			}
+
+			ruler.style.width = width + 'px';
+
+			// Set a very high value for scrollTop to be sure the mirror is scrolled all the way to
+			// the bottom.
+			ruler.scrollTop = 9e4;
+
+			var border = parseInt( this.$input.css( 'borderTopWidth' ), 10 )
+				+ parseInt( this.$input.css( 'borderBottomWidth' ), 10 );
+
+			return ( browserSupports0Height )
+				? ruler.scrollTop + border
+				: ruler.scrollTop + border + ruler.clientHeight;
+		},
+
+		/**
+		 * Returns the width to add to the input element to prevent jitters when resizing while
+		 * typing.
+		 *
+		 * @return {number}
+		 */
+		_getComfortZone: function() {
+			return ( this._options.comfortZone )
+				? this._options.comfortZone
+				: Math.ceil( this._getWidthFor( ' ' ) * 2 );
+		},
+
+		/**
+		 * Sets the plugin's options or gets the options when no parameter is passed in.
+		 *
+		 * @param {Object} [options]
+		 * @return {*|undefined}
+		 *
+		 * @throws {Error} when trying to set eventNamespace option which should only be set on
+		 *         initialization.
+		 */
+		options: function( options ) {
+			if( !options ) {
+				return this._options;
+			}
+
+			if( options.eventNamespace ) {
+				throw new Error( 'Cannot alter eventNamespace after initialization.' );
+			}
+
+			$.extend( this._options, options );
+		},
+
+		/**
+		 * Destroys the plugin instance.
+		 */
+		destroy: function() {
+			$.removeData( this.$input.get( 0 ), 'inputAutoExpand' );
+
+			var hasRemainingInstances = false;
+
+			$( 'input' ).each( function() {
+				if( $.data( this, 'inputAutoExpand' ) ) {
+					hasRemainingInstances = true;
+					return false;
+				}
+			} );
+
+			if( !hasRemainingInstances ) {
+				$( 'window' ).off( this._options.eventNamespace );
+				destroyRulers();
+			}
+		}
+	} );
+
+	/**
+	 * Whether the user client is capable of setting the textarea height to 0.
+	 * @type {boolean}
+	 */
+	var browserSupports0Height;
+
+	$( document ).ready( function() {
+		browserSupports0Height = supports0Height();
+	} );
 
 	/**
 	 * Tests if the user client is capable of assigning a height of 0 to a textarea. (E.g. Firefox
@@ -71,130 +374,33 @@
 		var support = true,
 			$t = $( '<textarea/>' );
 
-		$t.attr( 'style', 'height: 0 !important; width: 0 !important; top:-9999px; left: -9999px;' )
+		$t
+		.attr( 'style', 'height: 0 !important; width: 0 !important; top:-9999px; left: -9999px;' )
 		.text( 'text' )
 		.appendTo( $( 'body' ) );
 
-		if( $t.height() >= 1 ) { // addressing rounding
+		// Take rounding (height < 1) into account:
+		if( $t.height() >= 1 ) {
 			support = false;
 		}
+
 		$t.remove();
 
 		return support;
 	}
 
 	/**
-	 * Whether the user client is capable of setting the textarea height to 0.
-	 * @type {boolean}
+	 * Rulers used for measuring the input content.
+	 * @type {jQuery}
 	 */
-	var browserSupports0Height;
-
-	$( document ).ready( function() {
-		browserSupports0Height = supports0Height();
-	} );
-
-
-	$.fn.inputAutoExpand = function( options ) {
-		if( ! options ) {
-			options = {};
-		}
-
-		// inject default options for missing ones:
-		var fullOptions = $.extend( {
-			expandWidth: true,
-			expandHeight: false,
-			maxWidth: 1000,
-			minWidth: false,
-			maxHeight: false,
-			minHeight: false,
-			comfortZone: false,
-			expandOnResize: true,
-			suppressNewLine: false
-		}, options );
-
-		// expand input fields:
-		this.filter( 'input:text, textarea' ).each( function() {
-			var input = $( this );
-			var inputAE = input.data( 'AutoExpandInput' );
-
-			if( inputAE ) {
-				// AutoExpand initialized already, update options only (will also expand)
-				if( options ) {
-					inputAE.setOptions( options ); // also triggers re-calculation of width
-				} else {
-					inputAE.expand();
-				}
-
-			} else {
-				// initialize new auto expand:
-				var autoExpandInput = new AutoExpandInput( this, fullOptions );
-				$( this ).data( 'AutoExpandInput', autoExpandInput );
-			}
-		} );
-
-		return this;
-	};
+	var $rulerX, $rulerY;
 
 	/**
-	 * Prototype for auto expanding input elements.
-	 * @constructor
-	 *
-	 * @param inputElem
-	 * @param options
+	 * Initializes the rulers used for measuring the input content.
 	 */
-	var AutoExpandInput = function( inputElem, options ) {
-		this.input = $( inputElem );
-		this._o = options;
-		this._active = false;
-
-		var self = this;
-
-		var domCheck = function() {
-			return !!self.input.closest( 'html' ).length; // false if input is not in DOM
-		};
-
-		if( ! domCheck() ) {
-			// use timeout till input is in DOM. This might not be the prettiest way but seems
-			// necessary in some situations.
-			window.setTimeout( function() {
-				if( domCheck() ) {
-					window.clearTimeout( this );
-					self.expand();
-				}
-			}, 10 );
-		}
-
-		// set width on all important related events:
-		$( this.input )
-		.eachchange( function( e, oldValue ) {
-			// NOTE/FIXME: won't be triggered if placeholder has changed (via JS) but not input text
-
-			// Got to check on each change since value might have been pasted or dragged into the
-			// input element
-			if ( self._o.suppressNewLine ) {
-				self.input.val( self.input.val().replace( /\r?\n/g, '' ) );
-			}
-			self.expand();
-		} );
-
-		var rulers = AutoExpandInput.initRulers();
-		this.$rulerX = rulers[0];
-		this.$rulerY = rulers[1];
-
-		this.expand(); // calculate width initially
-
-		// do not show any resize handle for manual resizing
-		this.input.css( 'resize', 'none' );
-
-		// make sure box will consider window size after resize:
-		AutoExpandInput.activateResizeHandler();
-	};
-
-	AutoExpandInput.initRulers = function() {
-		var $rulerX = $( '#AutoExpandInput_rulerX' );
-		if ( !$rulerX.length ) {
+	function initRulers() {
+		if( !$rulerX ) {
 			$rulerX = $( '<div/>' )
-				.attr( 'id', 'AutoExpandInput_rulerX' )
 				.css( {
 					width: 'auto',
 					whiteSpace: 'nowrap',
@@ -203,14 +409,15 @@
 					left: '-9999px',
 					visibility: 'hidden',
 					display: 'none'
-				} )
-				.appendTo( 'body' );
+				} );
 		}
 
-		var $rulerY = $( '#AutoExpandInput_rulerY' );
-		if ( !$rulerY.length ) {
+		if( !$rulerX.closest( 'body' ).length ) {
+			$rulerX.appendTo( 'body' );
+		}
+
+		if( !$rulerY ) {
 			$rulerY = $( '<textarea style="minHeight: 0!important; height: 0!important;"/>' )
-				.attr( 'id', 'AutoExpandInput_rulerY' )
 				.attr( 'tabindex', '-1' )
 				.css( {
 					position: 'absolute',
@@ -219,338 +426,68 @@
 					right: 'auto',
 					bottom: 'auto',
 					wordWrap: 'break-word'
-				} )
-				.appendTo( 'body' );
-		}
-
-		return [$rulerX, $rulerY];
-	};
-
-	/**
-	 * Once called, this will make sure AutoExpandInput's will adjust on resize. When called for a
-	 * second time the resize handler will not be initialized again.
-	 *
-	 * @return bool false if the handler was active before.
-	 */
-	AutoExpandInput.activateResizeHandler = function() {
-		if( AutoExpandInput.activateResizeHandler.active ) {
-			return false; // don't initialize this more than once
-		}
-		AutoExpandInput.activateResizeHandler.active = true;
-
-		( function() {
-			var oldWidth; // width before resize
-			var resizeHandler = function() {
-				var newWidth = $( this ).width();
-
-				if( oldWidth === newWidth ) {
-					// no change in horizontal width after resize
-					return;
-				}
-
-				$.each( AutoExpandInput.getActiveInstances(), function() {
-					// NOTE: this could be more efficient in case many inputs are set. We could just
-					//  calculate the inputs (new) max-width and check whether it is exceeded in
-					//  which case we set it to the max width. Basically the same but other way
-					//  around for minWidth.
-					if( this.getOptions().expandOnResize ) {
-						this.expand();
-					}
 				} );
-
-				oldWidth = newWidth;
-			};
-
-			$( window ).on( 'resize', resizeHandler );
-		}() );
-
-		return true;
-	};
-
-	/**
-	 * Returns all active instances whose related input is still in the DOM
-	 *
-	 * @return AutoExpandInput[]
-	 */
-	AutoExpandInput.getActiveInstances = function() {
-		var instances = [];
-
-		// get all AutoExpandInput by checking input $.data().
-		// If $.remove() was called, the data was removed!
-		$( 'input' ).each( function() {
-			var instance = $.data( this, 'AutoExpandInput' );
-			if( instance ) {
-				instances.push( instance );
-			}
-		} );
-
-		return instances;
-	};
-
-	$.extend( AutoExpandInput.prototype, {
-		/**
-		 * sets the input boxes width to fit the boxes content.
-		 *
-		 * @return number how much the input with grew. If the value is negative, it shrank.
-		 */
-		expand: function() {
-
-			if ( this._o.expandWidth ) {
-				this.copyStyles( this.$rulerX );
-			}
-			if ( this._o.expandHeight ) {
-				this.copyStyles( this.$rulerY );
-			}
-
-			if ( this._o.expandWidth ) {
-				var minWidth = this.getMinWidth(),
-					maxWidth = this.getMaxWidth(),
-					comfortZone = this.getComfortZone();
-
-				// give min width higher priority than max width:
-				maxWidth = ( maxWidth > minWidth ) ? maxWidth : minWidth;
-
-				//console.log( '=== START EXPANSION ===' );
-				//console.log( 'min: ' + minWidth + ' | max: ' + maxWidth + ' | comfort: ' + comfortZone );
-
-				var val = this.input.val();
-				var valWidth = this.getWidthFor( val ); // pure width of the input, without additional calculation
-
-				//console.log( 'valWidth: ' + valWidth + ' | val: ' + val );
-
-				// add comfort zone or take min-width if too short
-				var newWidth = ( valWidth + comfortZone ) > minWidth
-						? valWidth + comfortZone
-						: minWidth,
-					oldWidth = this.getWidth();
-
-				if( newWidth >= maxWidth  ) {
-					// NOTE: check for this in all cases, FF had some bug not returning false for
-					//  isValidWidthChange due to some floating point issues apparently make sure
-					//  we set the width if the content is too long from the start.
-					this.input.width( maxWidth );
-					//console.log( 'set to max width!' );
-				}
-				else {
-					// Calculate new width + whether to change
-					var isValidWidthChange =
-							( newWidth < oldWidth && newWidth >= minWidth )
-							|| ( newWidth >= minWidth && newWidth < maxWidth );
-
-					//console.log( 'newWidth: ' + newWidth + ' | oldWidth: ' + oldWidth
-					//	+ ' | isValidChange: ' + ( isValidWidthChange ? 'true' : 'false' ) );
-
-					// Animate width
-					if( isValidWidthChange ) {
-						this.input.width( newWidth );
-						//console.log( 'set to calculated width!' );
-					}
-				}
-
-				//console.log( '=== END EXPANSION (' + ( this.getWidth() - oldWidth ) + ') ===' );
-
-				// return change
-				return this.getWidth() - oldWidth;
-			}
-			if ( this._o.expandHeight ) {
-				var valHeight = this.getHeightFor( this.input.val() ),
-					input = this.input[0],
-					minHeight = this._o.minHeight || 0, // will keep one line in any case
-					maxHeight = this._o.maxHeight,
-					oldHeight = this.input.height();
-
-				if ( maxHeight && valHeight > maxHeight ) {
-					input.style.height = maxHeight + 'px';
-					input.style.overflow = 'scroll';
-				} else {
-					if ( minHeight && valHeight < minHeight ) {
-						input.style.height = minHeight + 'px';
-					} else {
-						input.style.height = ( !isNaN( valHeight ) ? valHeight : 0 ) + 'px';
-					}
-					this.input.css( 'overflow', 'hidden' );
-				}
-				return valHeight - oldHeight;
-			}
-		},
-
-		/**
-		 * Copy styles that affect spacing from the original element to the element used to measure
-		 * any size change.
-		 *
-		 * @param {jQuery} $to Element used to determine the size change
-		 */
-		copyStyles: function( $to ) {
-			// line-height is omitted because IE7/IE8 doesn't return the correct value.
-			var $input = this.input,
-				stylesToCopy = [
-					'fontFamily',
-					'fontSize',
-					'fontWeight',
-					'fontStyle',
-					'letterSpacing',
-					'textTransform',
-					'wordSpacing',
-					'textIndent',
-					'overflowY'
-				];
-
-			// test that line-height can be accurately copied to avoid
-			// incorrect value reporting in old IE and old Opera
-			$to.css( 'lineHeight', '99px' );
-			if ( $to.css( 'lineHeight' ) === '99px' ) {
-				stylesToCopy.push( 'lineHeight' );
-			}
-
-			$.each( stylesToCopy, function( i, styleName ) {
-				$to.css( styleName, $input.css( styleName ) );
-			} );
-
-			// styles not being influenced by copying styles
-			$to.css( {
-				overflow: 'hidden',
-				overflowY: 'hidden',
-				wordWrap: 'break-word'
-			} );
-		},
-
-		/**
-		 * Calculates the width which would be required for the input field if the given text were
-		 * inserted. This does not consider the comfort zone given in the options and doesn't check
-		 * for min/max width restraints.
-		 *
-		 * @param {String} text
-		 * @return {String}
-		 */
-		getWidthFor: function( text ) {
-			this.$rulerX.html( text // escape stuff
-				.replace(/&/g, '&amp;')
-				.replace(/</g, '&lt;')
-				.replace(/>/g, '&gt;')
-				.replace(/\s/g,'&nbsp;')
-			);
-
-			return this.$rulerX.width();
-		},
-
-		/**
-		 * Calculates the height the given text would require to not show any scrollbar within the
-		 * input element.
-		 *
-		 * @param {String} text
-		 */
-		getHeightFor: function( text ) {
-			var active = this._active;
-
-			if ( !active ) {
-				active = true;
-
-				var ruler = this.$rulerY[0];
-
-				ruler.value = text;
-
-				// Update the width in case the original textarea width has changed
-				var width = this.input.width();
-				// Catch miscalculation (IE < 9):
-				if( width < 0 ) {
-					width = 0;
-				}
-
-				ruler.style.width = width + 'px';
-
-				// Needed for IE to reliably return the correct scrollHeight
-				ruler.scrollTop = 0;
-
-				// Set a very high value for scrollTop to be sure the
-				// mirror is scrolled all the way to the bottom.
-				ruler.scrollTop = 9e4;
-
-				// This small timeout gives IE a chance to draw its scrollbar
-				// before adjust can be run again (prevents an infinite loop).
-				setTimeout( function () {
-					active = false;
-				}, 10 );
-
-				var border = parseInt( this.input.css( 'borderTopWidth' ), 10 )
-					+ parseInt( this.input.css( 'borderBottomWidth' ), 10 );
-
-				return ( browserSupports0Height )
-					? ruler.scrollTop + border
-					: ruler.scrollTop + border + ruler.clientHeight;
-			}
-		},
-
-		/**
-		 * Returns the current width.
-		 *
-		 * @return number
-		 */
-		getWidth: function() {
-			return this._normalizeWidth( this.input.width() );
-		},
-
-		getMaxWidth: function() {
-			return this._normalizeWidth( this._o.maxWidth );
-		},
-
-		getMinWidth: function() {
-			var width = this._o.minWidth;
-
-			if( width === false ) {
-				// dynamic min width, depending on placeholder...
-				// always calculate in case placeholder changes!
-				if( ! this.input.attr( 'placeholder' ) ) {
-					return 0; // ... or 0 if no placeholder
-				}
-				// don't need comfort zone in this case just some sane space
-				width = this.getWidthFor( this.input.attr( 'placeholder' ) + ' ' );
-			}
-			return this._normalizeWidth( width );
-		},
-
-		getComfortZone: function() {
-			var width = this._o.comfortZone;
-			if( width === false ) {
-				// this is much faster for getting a good estimation for the perfect comfort zone
-				// compared to the method where we did "this.getWidthFor( '@%_MW' ) / 5 * 1.25;"
-				width = this.input.height();
-			}
-			return this._normalizeWidth( width );
-		},
-
-		/**
-		 * Normalizes the width, allowing integers as well as objects to get their current width as
-		 * return value. This can also be a callback to return the value.
-		 *
-		 * @param number|function|jQuery width
-		 * @param jQuery elem
-		 * @return number
-		 */
-		_normalizeWidth: function( width ) {
-			if( $.isFunction( width ) ) {
-				return width.call( this );
-			}
-			if( width instanceof $ ) {
-				width = width.width();
-			}
-			// round it up to avoid issues where we can't round down because it wouldn't fit
-			return Math.ceil( width );
-		},
-
-		getOptions: function() {
-			return this._o;
-		},
-
-		/**
-		 * Updates the options of the object. After the options are set, expand() will be called.
-		 *
-		 * @param Array options one or more options which will extend the current options.
-		 */
-		setOptions: function( options ) {
-			this._o = $.extend( this._o, options );
-			this.expand();
 		}
 
-	} );
+		if( !$rulerY.closest( 'body' ).length ) {
+			$rulerY.appendTo( 'body' );
+		}
+	}
+
+	/**
+	 * Destroys the rulers.
+	 */
+	function destroyRulers() {
+		if( $rulerX ) {
+			$rulerX.remove();
+			$rulerX = null;
+		}
+		if( $rulerY ) {
+			$rulerY.remove();
+			$rulerY.remove();
+		}
+	}
+
+	/**
+	 * Copy styles that affect spacing from one element to another.
+	 *
+	 * @param {jQuery} $from
+	 * @param {jQuery} $to
+	 */
+	function copySpaceAffectingStyles( $from, $to ) {
+		var stylesToCopy = [
+			'fontFamily',
+			'fontSize',
+			'fontWeight',
+			'fontStyle',
+			'letterSpacing',
+			'lineHeight',
+			'textTransform',
+			'wordSpacing',
+			'textIndent',
+			'overflowY'
+		];
+
+		for( var i = 0; i < stylesToCopy.length; i++ ) {
+			$to.css( stylesToCopy[i], $from.css( stylesToCopy[i] ) );
+		}
+
+		// styles not being influenced by copying styles
+		$to.css( {
+			overflow: 'hidden',
+			overflowY: 'hidden',
+			wordWrap: 'break-word'
+		} );
+	}
+
+	/**
+	 * Escapes HTML entities.
+	 *
+	 * @param {string} text
+	 * @return {string}
+	 */
+	function escaped( text ) {
+		return $( '<div/>' ).text( text ).html();
+	}
 
 }( jQuery ) );
