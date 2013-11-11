@@ -54,7 +54,8 @@ class GetClaims extends ApiWikibase {
 			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity' );
 		}
 
-		$this->outputClaims( $this->getClaims( $entity, $claimGuid ) );
+		$claims = $this->getClaims( $entity, $claimGuid );
+		$this->resultBuilder->addClaims( $claims, null );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -75,30 +76,6 @@ class GetClaims extends ApiWikibase {
 			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
 			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
 		) );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param array $claims
-	 * @param \Wikibase\Claim[] $claims
-	 */
-	protected function outputClaims( array $claims ) {
-		$claims = new Claims( $claims );
-
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claims );
-
-		// TODO: hold into account props parameter
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$serializedClaims = $serializer->getSerialized( $claims );
-
-		$this->getResult()->addValue(
-			null,
-			'claims',
-			$serializedClaims
-		);
 	}
 
 	/**

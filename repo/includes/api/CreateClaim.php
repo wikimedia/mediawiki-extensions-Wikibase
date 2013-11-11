@@ -58,8 +58,8 @@ class CreateClaim extends ModifyClaim {
 		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
 
 		$this->saveChanges( $entityContent, $summary );
-
-		$this->claimModificationHelper->addClaimToApiResult( $claim );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}

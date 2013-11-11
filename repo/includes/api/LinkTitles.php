@@ -147,7 +147,7 @@ class LinkTitles extends ApiWikibase {
 
 	private function buildResult( ItemContent $itemContent, Status $status ) {
 		if ( $itemContent !== null ) {
-			$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
+			$this->addRevisionIdFromStatusToResult( 'entity', $status );
 			$this->getResult()->addValue(
 				'entity',
 				'id', $itemContent->getItem()->getId()->getNumericId()
@@ -158,11 +158,7 @@ class LinkTitles extends ApiWikibase {
 			);
 		}
 
-		$this->getResult()->addValue(
-			null,
-			'success',
-			(int)$status->isOK()
-		);
+		$this->resultBuilder->markSuccess( $status->isOK() );
 	}
 
 	/**
