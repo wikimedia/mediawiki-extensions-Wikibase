@@ -2,7 +2,12 @@
 
 namespace Wikibase;
 
-use ResourceLoaderModule, ResourceLoaderContext, MediaWikiSite, Site, Sites;
+use ResourceLoaderModule;
+use ResourceLoaderContext;
+use MediaWikiSite;
+use Site;
+use Sites;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Provides information about the current (client) site
@@ -37,7 +42,8 @@ class SiteModule extends ResourceLoaderModule {
 				'shortName' => $languageName,
 				'name' => $languageName,
 				'globalSiteId' => $site->getGlobalId(),
-				'languageCode' => $site->getLanguageCode()
+				'languageCode' => $site->getLanguageCode(),
+				'langLinkSiteGroup' => WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
 			);
 		}
 
