@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_9b0f8d88",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-11T18:36:53Z",
+      "side": 1,
+      "message": "Looking at your changes here this might be better called ItemUsageIndex?",
+      "revId": "efa487f16076194e4b1c06e2deadd3afd1b0c87f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_3b7bf9f3",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-11T18:36:53Z",
+      "side": 1,
+      "message": "reason for the above comment, I see lots of EntiyId[] s in the comments....",
+      "revId": "efa487f16076194e4b1c06e2deadd3afd1b0c87f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_5b7ef5e1",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-11T18:36:53Z",
+      "side": 1,
+      "message": "but then lots of ItemId type hints e.t.c",
+      "revId": "efa487f16076194e4b1c06e2deadd3afd1b0c87f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
