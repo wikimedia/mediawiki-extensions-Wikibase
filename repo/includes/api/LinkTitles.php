@@ -150,7 +150,7 @@ class LinkTitles extends ApiWikibase {
 			$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
 			$this->getResult()->addValue(
 				'entity',
-				'id', $itemContent->getItem()->getId()->getNumericId()
+				'id', $itemContent->getItem()->getId()->getSerialization()
 			);
 			$this->getResult()->addValue(
 				'entity',
