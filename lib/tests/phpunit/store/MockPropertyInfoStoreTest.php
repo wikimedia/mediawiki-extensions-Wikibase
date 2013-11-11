@@ -2,9 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityId;
-use Wikibase\Property;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Wikibase\Test\MockPropertyInfoStore
@@ -43,7 +41,7 @@ class MockPropertyInfoStoreTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSetPropertyInfo
 	 */
-	public function testSetPropertyInfo( EntityId $id, array $info, $expectedException ) {
+	public function testSetPropertyInfo( PropertyId $id, array $info, $expectedException ) {
 		$this->helper->testSetPropertyInfo( $id, $info, $expectedException );
 	}
 

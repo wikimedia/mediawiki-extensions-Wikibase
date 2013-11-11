@@ -2,10 +2,9 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityId;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Item;
 
 /**
  * Helper for testing PropertyInfoStore implementations
@@ -34,29 +33,29 @@ class PropertyInfoStoreTestHelper {
 	public static function provideSetPropertyInfo() {
 		return array(
 			array( // #0: ok
-				new EntityId( Property::ENTITY_TYPE, 23 ),
+				new PropertyId( 'P23' ),
 				array( PropertyInfoStore::KEY_DATA_TYPE => 'string' ),
 				null
 			),
 			array( // #1: not a property
-				new EntityId( Item::ENTITY_TYPE, 23 ),
+				new PropertyId( 'P23' ),
 				array( PropertyInfoStore::KEY_DATA_TYPE => 'string' ),
 				'InvalidArgumentException'
 			),
 			array( // #2: missing required field
-				new EntityId( Property::ENTITY_TYPE, 23 ),
+				new PropertyId( 'P23' ),
 				array(),
 				'InvalidArgumentException'
 			),
 			array( // #3: extra data
-				new EntityId( Property::ENTITY_TYPE, 23 ),
+				new PropertyId( 'P23' ),
 				array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ),
 				null
 			),
 		);
 	}
 
-	public function testSetPropertyInfo( EntityId $id, array $info, $expectedException ) {
+	public function testSetPropertyInfo( PropertyId $id, array $info, $expectedException ) {
 		if ( $expectedException !== null ) {
 			$this->test->setExpectedException( $expectedException );
 		}
@@ -71,9 +70,9 @@ class PropertyInfoStoreTestHelper {
 
 	public function testGetPropertyInfo() {
 		$table = $this->newPropertyInfoStore();
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'p23' );
+		$q23 = new ItemId( 'q23' );
+		$p42 = new PropertyId( 'p42' );
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
 
@@ -95,8 +94,8 @@ class PropertyInfoStoreTestHelper {
 
 	public function testGetAllPropertyInfo() {
 		$table = $this->newPropertyInfoStore();
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'P23' );
+		$p42 = new PropertyId( 'P42' );
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
 
@@ -114,9 +113,9 @@ class PropertyInfoStoreTestHelper {
 
 	public function testRemovePropertyInfo() {
 		$table = $this->newPropertyInfoStore();
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'p23' );
+		$q23 = new ItemId( 'q23' );
+		$p42 = new PropertyId( 'p42' );
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 
 		$table->setPropertyInfo( $p23, $info23 );
@@ -131,7 +130,7 @@ class PropertyInfoStoreTestHelper {
 	}
 
 	public function testPropertyInfoPersistance() {
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
+		$p23 = new PropertyId( 'p23' );
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 
 		$table1 = $this->newPropertyInfoStore();

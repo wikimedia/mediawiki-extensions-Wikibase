@@ -1,42 +1,19 @@
 <?php
- /**
- *
- * Copyright © 26.06.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- * @ingroup WikibaseLib
- *
- * @author Daniel Kinzler
- */
-
 
 namespace Wikibase;
 
-
+use DatabaseUpdater;
 use DBError;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * Class PropertyInfoTable implemnents PropertyInfoStore on top of an SQL table.
+ * Class PropertyInfoTable implements PropertyInfoStore on top of an SQL table.
  *
  * @since 0.4
  *
- * @package Wikibase
+ * @license GPL 2+
+ * @author Daniel Kinzler
  */
 class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 
@@ -51,7 +28,6 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	protected $readonly;
 
 	/**
-	 * @param string $table The table to use
 	 * @param bool $readonly Whether the table can be modified.
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
@@ -95,9 +71,9 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	 * Wrapper for invoking PropertyInfoTableBuilder from DatabaseUpdater
 	 * during a database update.
 	 *
-	 * @param \DatabaseUpdater $updater
+	 * @param DatabaseUpdater $updater
 	 */
-	public static function rebuildPropertyInfo( \DatabaseUpdater $updater ) {
+	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
 		$reporter = new \ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			function ( $msg ) use ( $updater ) {
@@ -117,20 +93,16 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see   PropertyInfoStore::getPropertyInfo
+	 * @see PropertyInfoStore::getPropertyInfo
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return array|null
 	 *
-	 * @throws \InvalidArgumentException
-	 * @throws \DBError
+	 * @throws InvalidArgumentException
+	 * @throws DBError
 	 */
-	public function getPropertyInfo( EntityId $propertyId ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new \InvalidArgumentException( 'Property ID expected! ' . $propertyId );
-		}
-
+	public function getPropertyInfo( PropertyId $propertyId ) {
 		wfProfileIn( __METHOD__ );
 
 		$dbw = $this->getConnection( DB_SLAVE );
@@ -221,23 +193,19 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::setPropertyInfo
 	 *
-	 * @param EntityId $propertyId
-	 * @param array    $info
+	 * @param PropertyId $propertyId
+	 * @param array $info
 	 *
-	 * @throws \DBError
-	 * @throws \InvalidArgumentException
+	 * @throws DBError
+	 * @throws InvalidArgumentException
 	 */
-	public function setPropertyInfo( EntityId $propertyId, array $info ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new \InvalidArgumentException( 'Property ID expected! ' . $propertyId );
-		}
-
+	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
 		if ( $this->readonly ) {
 			throw new DBError( 'Cannot write when in readonly mode' );
 		}
 
 		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ]) ) {
-			throw new \InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
+			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 
 		wfProfileIn( __METHOD__ );
@@ -264,19 +232,15 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see   PropertyInfoStore::removePropertyInfo
+	 * @see PropertyInfoStore::removePropertyInfo
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @throws DBError
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return bool
 	 */
-	public function removePropertyInfo( EntityId $propertyId ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new \InvalidArgumentException( 'Property ID expected! ' . $propertyId );
-		}
-
+	public function removePropertyInfo( PropertyId $propertyId ) {
 		if ( $this->readonly ) {
 			throw new DBError( 'Cannot write when in readonly mode' );
 		}
@@ -294,7 +258,7 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 		$this->releaseConnection( $dbw );
 
 		wfProfileOut( __METHOD__ );
-		return $c > 0 ? true : false;
+		return $c > 0;
 	}
 
 	/**
