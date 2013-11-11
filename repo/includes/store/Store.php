@@ -105,6 +105,15 @@ interface Store {
 	public function getEntityRevisionLookup();
 
 	/**
+	 * Returns an EntityInfoBuilder
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityInfoBuilder
+	 */
+	public function getEntityInfoBuilder();
+
+	/**
 	 * Returns an PropertyInfoStore
 	 *
 	 * @since 0.4
