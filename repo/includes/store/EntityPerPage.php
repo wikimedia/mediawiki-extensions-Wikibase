@@ -11,6 +11,7 @@ use Iterator;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene*
  */
 interface EntityPerPage {
 
@@ -77,9 +78,21 @@ interface EntityPerPage {
 	 * @param string|null $siteId Restrict the request to a specific site.
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
-	 * @return EntityId[]
+	 * @return ItemId[]
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 );
+
+	/**
+	 * Return all items with the most sitelinks
+	 *
+	 * @since 0.5
+	 *
+	 * @param string|null $siteId Restrict the request to a specific site.
+	 * @param integer $limit Limit of the query.
+	 * @param integer $offset Offset of the query.
+	 * @return ItemId[]
+	 */
+	public function getItemsWithMostSitelinks( $siteId = null, $limit = 50, $offset = 0 );
 
 	/**
 	 * Returns an iterator providing an EntityId object for each entity.

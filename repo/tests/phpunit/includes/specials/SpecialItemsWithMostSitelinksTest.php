@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 /**
- * @covers \Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks
+ * @covers \Wikibase\Repo\Specials\SpecialItemsWithMostSitelinks
  *
- * @since 0.4
+ * @since 0.5
  *
  * @group Wikibase
  * @group SpecialPage
@@ -15,12 +15,12 @@ namespace Wikibase\Test;
  *        ^---- needed because we rely on Title objects internally
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Bene*
  */
-class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
+class SpecialItemsWithMostSitelinksTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks();
+		return new \Wikibase\Repo\Specials\SpecialItemsWithMostSitelinks();
 	}
 
 	public function testExecute() {
