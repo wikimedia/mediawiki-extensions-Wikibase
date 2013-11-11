@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use DBQueryError;
-use MWException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -87,14 +86,14 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 	/**
 	 * @see EntityLookup::getEntity
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 * @param int $revision The desired revision id, 0 means "current".
 	 *
 	 * @return Entity|null
 	 *
 	 * @throw StorageException
 	 */
-	public function getEntity( EntityID $entityId, $revision = 0 ) {
+	public function getEntity( EntityId $entityId, $revision = 0 ) {
 		$entityRev = $this->getEntityRevision( $entityId, $revision );
 		return $entityRev === null ? null : $entityRev->getEntity();
 	}
@@ -103,13 +102,13 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 	 * @since 0.4
 	 * @see   EntityRevisionLookup::getEntityRevision
 	 *
-	 * @param EntityID $entityId
-	 * @param int      $revision The desired revision id, 0 means "current".
+	 * @param EntityId $entityId
+	 * @param int $revision The desired revision id, 0 means "current".
 	 *
 	 * @return EntityRevision|null
 	 * @throws StorageException
 	 */
-	public function getEntityRevision( EntityID $entityId, $revision = 0 ) {
+	public function getEntityRevision( EntityId $entityId, $revision = 0 ) {
 		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up entity " . $entityId
 				. " (rev $revision)" );
@@ -353,9 +352,9 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 		$entities = array();
 
 		// TODO: we really want batch lookup here :)
-		foreach ( $entityIds as $key => $entityId ) {
+		foreach ( $entityIds as $entityId ) {
 
-			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId );
+			$entities[$entityId->getSerialization()] = $this->getEntity( $entityId );
 		}
 
 		return $entities;
