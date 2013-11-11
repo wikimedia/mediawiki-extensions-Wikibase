@@ -74,7 +74,7 @@ class ItemViewTest extends EntityViewTest {
 	 * @dataProvider providerNewForEntityType
 	 */
 	public function testNewForEntityType( $type, $expectedClass ) {
-		$entityLoader = new MockRepository();
+		$entityInfoBuilder = new MockRepository();
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
@@ -83,7 +83,7 @@ class ItemViewTest extends EntityViewTest {
 			$type,
 			$this->newSnakFormatterMock(),
 			$dataTypeLookup,
-			$entityLoader,
+			$entityInfoBuilder,
 			$entityTitleLookup );
 
 		$this->assertInstanceOf(

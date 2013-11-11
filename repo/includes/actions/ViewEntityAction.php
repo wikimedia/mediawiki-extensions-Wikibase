@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Language, Article, \ValueFormatters\ValueFormatterFactory;
+use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\SnakFormatter;
@@ -120,7 +121,7 @@ abstract class ViewEntityAction extends \ViewAction {
 								->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
 
 			$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-			$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
+			$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
 			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 			$isEditableView = $this->isPlainView();
@@ -129,7 +130,7 @@ abstract class ViewEntityAction extends \ViewAction {
 				$content->getEntity()->getType(),
 				$snakFormatter,
 				$dataTypeLookup,
-				$entityLoader,
+				$entityInfoBuilder,
 				$entityContentFactory
 			);
 
