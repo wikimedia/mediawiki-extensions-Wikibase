@@ -5,13 +5,17 @@ namespace Wikibase\Test;
 use DatabaseBase;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityId;
+use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\Item;
+use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\SiteLink;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Property;
@@ -24,7 +28,7 @@ use Wikibase\StorageException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLookup {
+class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLookup, EntityInfoBuilder, PropertyDataTypeLookup {
 
 	/**
 	 * Entity id serialization => array of EntityRevision
@@ -540,4 +544,154 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 		return null;
 	}
 
+	/**
+	 * Builds basic stubs of entity info records based on the given list of entity IDs.
+	 *
+	 * @param EntityId[] $ids
+	 *
+	 * @return array A map of prefixed entity IDs to records representing an entity each.
+	 */
+	public function buildEntityInfo( array $ids ) {
+		$entityInfo = array();
+
+		foreach ( $ids as $id ) {
+			$prefixedId = $id->getPrefixedId();
+
+			$entityInfo[$prefixedId] = array(
+				'id' => $prefixedId,
+				'type' => $id->getEntityType(),
+			);
+		}
+
+		return $entityInfo;
+	}
+
+	/**
+	 * Adds terms (like labels and/or descriptions) to
+	 *
+	 * @param array $entityInfo a map of strings to arrays, each array representing an entity,
+	 *        with the key being the entity's ID. NOTE: This array will be updated!
+	 * @param array $types Which types of terms to include (e.g. "label", "description", "aliases").
+	 * @param array $languages Which languages to include
+	 */
+	public function addTerms( array &$entityInfo, array $types = null, array $languages = null ) {
+		foreach ( $entityInfo as $id => &$entityRecord ) {
+			$id = EntityId::newFromPrefixedId( $id );
+			$entity = $this->getEntity( $id );
+
+			if ( !$entity ) {
+				// hack: fake an empty entity, so the field get initialized
+				$entity = Item::newEmpty();
+			}
+
+			if ( $types === null || in_array( 'label', $types ) ) {
+				$this->injectLabels( $entityRecord, $entity, $languages );
+			}
+
+			if ( $types === null || in_array( 'description', $types ) ) {
+				$this->injectDescriptions( $entityRecord, $entity, $languages );
+			}
+
+			if ( $types === null || in_array( 'alias', $types ) ) {
+				$this->injectAliases( $entityRecord, $entity, $languages );
+			}
+		}
+	}
+
+	private function injectLabels( array &$entityRecord, Entity $entity, $languages ) {
+		$labels = $entity->getLabels( $languages );
+
+		if ( !isset( $entityRecord['labels'] ) ) {
+			$entityRecord['labels'] = array();
+		}
+
+		foreach ( $labels as $lang => $text ) {
+			$entityRecord['labels'][$lang] = array(
+				'language' => $lang,
+				'value' => $text,
+			);
+		}
+	}
+
+	private function injectDescriptions( array &$entityRecord, Entity $entity, $languages ) {
+		$descriptions = $entity->getDescriptions( $languages );
+
+		if ( !isset( $entityRecord['descriptions'] ) ) {
+			$entityRecord['descriptions'] = array();
+		}
+
+		foreach ( $descriptions as $lang => $text ) {
+			$entityRecord['descriptions'][$lang] = array(
+				'language' => $lang,
+				'value' => $text,
+			);
+		}
+	}
+
+	private function injectAliases( array &$entityRecord, Entity $entity, $languages ) {
+		if ( $languages === null ) {
+			$languages = array_keys( $entity->getAllAliases() );
+		}
+
+		if ( !isset( $entityRecord['aliases'] ) ) {
+			$entityRecord['aliases'] = array();
+		}
+
+		foreach ( $languages as $lang ) {
+			$aliases = $entity->getAliases( $lang );
+
+			foreach ( $aliases as $text ) {
+				$entityRecord['aliases'][$lang][] = array( // note: append
+					'language' => $lang,
+					'value' => $text,
+				);
+			}
+		}
+	}
+
+	/**
+	 * Adds property data types to the entries in $entityInfo. Entities that do not have a data type
+	 * remain unchanged.
+	 *
+	 * @param array $entityInfo a map of strings to arrays, each array representing an entity,
+	 *        with the key being the entity's ID. NOTE: This array will be updated!
+	 */
+	public function addDataTypes( array &$entityInfo ) {
+		foreach ( $entityInfo as $id => &$entityRecord ) {
+			$id = EntityId::newFromPrefixedId( $id );
+
+			if ( $id->getEntityType() !== Property::ENTITY_TYPE ) {
+				continue;
+			}
+
+			$entity = $this->getEntity( $id );
+
+			if ( !$entity ) {
+				$entityRecord['datatype'] = null;
+			} elseif ( $entity instanceof Property ) {
+				$entityRecord['datatype'] = $entity->getDataTypeId();
+			}
+		}
+	}
+
+	/**
+	 * @see PropertyDataTypeLookup::getDataTypeIdForProperty()
+	 *
+	 * @since 0.5
+	 *
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 * @throws PropertyNotFoundException
+	 */
+	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
+		/* @var Property $property */
+		$property = $this->getEntity( $propertyId );
+
+		if ( !$property ) {
+			throw new PropertyNotFoundException( $propertyId );
+		}
+
+		return $property->getDataTypeId();
+	}
 }

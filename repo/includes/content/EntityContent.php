@@ -145,14 +145,14 @@ abstract class EntityContent extends AbstractContent {
 			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
 
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRevisionLookup();
+		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$entityView = EntityView::newForEntityType(
 			$this->getEntity()->getType(),
 			$snakFormatter,
 			$dataTypeLookup,
-			$entityLoader,
+			$entityInfoBuilder,
 			$entityContentFactory
 		);
 		return $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
