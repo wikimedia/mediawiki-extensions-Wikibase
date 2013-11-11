@@ -10,6 +10,8 @@ use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
+use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\Api\ResultBuilder
@@ -237,4 +239,105 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $result->getData() );
 	}
 
+	public function testAddClaim(){
+		$result = $this->getDefaultResult();
+		$claim = new Claim( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
+		$claim->setGuid( 'fooguidbar' );
+		$path = 'claims';
+		$expected = array(
+			'claims' => array(
+				'fooguidbar' => array(
+					'id' => 'fooguidbar',
+					'mainsnak' => array(
+						'snaktype' => 'value',
+						'property' => 'P12',
+						'datavalue' => array(
+							'value' => 'stringVal',
+							'type' => 'string',
+						),
+					),
+					'type' => 'claim',
+				)
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addClaim( $claim, $path );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddReference(){
+		$result = $this->getDefaultResult();
+		$reference = new Reference( new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) ) ) );
+		$hash = $reference->getHash();
+		$path = 'references';
+		$expected = array(
+			'references' => array(
+				$hash => array(
+					'hash' => $hash,
+					'snaks' => array(
+						'P12' => array(
+							array(
+								'snaktype' => 'value',
+								'property' => 'P12',
+								'datavalue' => array(
+									'value' => 'stringVal',
+									'type' => 'string',
+								),
+							)
+						),
+					),
+					'snaks-order' => array( 'P12' ),
+				)
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addReference( $reference, $path );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	//todo add test for multiple missing entities
+	public function testAddMissingEntity(){
+		$result = $this->getDefaultResult();
+		$siteId = 'enwiki';
+		$title = 'Berlin';
+		$expected = array(
+			'entities' => array(
+				'-1' => array(
+					'site' => $siteId,
+					'title' => $title,
+					//@todo fix bug 45509 useless missing flag
+					'missing' => '',
+				)
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addMissingEntity( $siteId, $title );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddNormalizedTitle(){
+		$result = $this->getDefaultResult();
+		$from = 'berlin';
+		$to = 'Berlin';
+		$expected = array(
+			'normalized' => array(
+				//todo this is JUST SILLY
+				'n' => array(
+					'from' => 'berlin',
+					'to' => 'Berlin'
+				),
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addNormalizedTitle( $from, $to );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
 }
