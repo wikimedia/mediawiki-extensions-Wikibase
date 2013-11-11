@@ -1355,7 +1355,7 @@ $messages['fa'] = array(
 	'wikibase-comment-sitelink-add' => 'پیوند زبان اضافه شده:$1',
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
 	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
-	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر|تغییرها}}',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر}}',
 	'wikibase-dataitem' => 'آیتم این صفحه',
 	'wikibase-editlinks' => 'ویرایش پیوندها',
 	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
@@ -2448,6 +2448,7 @@ $messages['ku-latn'] = array(
  */
 $messages['la'] = array(
 	'wikibase-editlinks' => 'Nexus recensere',
+	'wikibase-editlinkstitle' => 'Nexus inter linguas recensere',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
