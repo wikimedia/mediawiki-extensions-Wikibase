@@ -1,11 +1,11 @@
 <?php
 namespace Wikibase\Test;
 
+use Wikibase\Api\ApiWikibase;
 use Wikibase\Api\ItemByTitleHelper;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityId;
-use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SiteLinkCache;
 use Wikibase\StringNormalizer;
 
 /**
@@ -36,42 +36,41 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Gets a mock ApiBase object which excepts a certain number
+	 * Gets a mock ApiWikibase object which excepts a certain number
 	 * of calls to certain (sub)methods
 	 *
-	 * @param integer|null $expectedAddValueCount How many times
-	 * 		do we expect values to be added to the result (ApiResult::addValue)
-	 * @param bool $expectDieUsage Whether we expect ApiBase::dieUsage
-	 * 		to be called
+	 * @param integer $expectedResultBuilderCalls How many times do we expect the result builder to be called
+	 * @param bool $expectDieUsage Whether we expect ApiWikibase::dieUsage to be called
+	 * @return ApiWikibase
 	 */
-	public function getApiBaseMock( $expectedAddValueCount = null, $expectDieUsage = false ) {
-		$apiBaseMock = $this->getMockBuilder( '\ApiBase' )
+	public function getApiWikibaseMock( $expectedResultBuilderCalls = 0, $expectDieUsage = false ) {
+		$apiWikibaseMock = $this->getMockBuilder( '\Wikibase\Api\ApiWikibase' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$apiBaseMock
+		$apiWikibaseMock
 			->expects( $expectDieUsage ? $this->once() : $this->never() )
 			->method( 'dieUsage' )
 			->will( $this->throwException( new \UsageException( 'MockUsageExceptionMessage', 'MockUsageExceptionCode' ) ) );
 
-		$apiResultMock = $this->getMockBuilder( '\ApiResult' )
+		$apiResultBuilderMock = $this->getMockBuilder( 'Wikibase\Api\ResultBuilder' )
 			->disableOriginalConstructor()
 			->getMock();
+		$apiResultBuilderMock->expects( $this->any() )
+			->method( 'addMissingEntity' );
+		$apiResultBuilderMock->expects( $this->any() )
+			->method( 'addNormalizedTitle' );
 
-		if ( !is_null( $expectedAddValueCount ) ) {
-			$apiResultMock->expects( $this->exactly( $expectedAddValueCount ) )
-				->method( 'addValue' );
-		}
+		$apiWikibaseMock->expects( $this->exactly( $expectedResultBuilderCalls ) )
+			->method( 'getResultBuilder' )
+			->will( $this->returnValue( $apiResultBuilderMock ) );
 
-		$apiBaseMock->expects( $this->any() )
-			->method( 'getResult' )
-			->will( $this->returnValue( $apiResultMock ) );
-
-		return $apiBaseMock;
+		return $apiWikibaseMock;
 	}
 
 	/**
 	 * @param integer|null $entityId
+	 * @return SiteLinkCache
 	 */
 	public function getSiteLinkCacheMock( $entityId = null ) {
 		$siteLinkCacheMock = $this->getMockBuilder( '\Wikibase\SiteLinkCache' )
@@ -94,7 +93,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$expectedEntityId = $entityIdFormatter->format( $expectedEntityId );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( 0 ),
+			$this->getApiWikibaseMock( 0 ),
 			$this->getSiteLinkCacheMock( 123 ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -116,7 +115,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdNormalized() {
 		$itemByTitleHelper = new ItemByTitleHelper(
 		// Two values should be added: The normalization and the failure to find an entity
-			$this->getApiBaseMock( 2 ),
+			$this->getApiWikibaseMock( 2 ),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -138,7 +137,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdsNotFound() {
 		$itemByTitleHelper = new ItemByTitleHelper(
 		// Two result values should be added (for both titles which wont be found)
-			$this->getApiBaseMock( 2 ),
+			$this->getApiWikibaseMock( 2 ),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -157,7 +156,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$this->setExpectedException( 'UsageException' );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( 0, true ),
+			$this->getApiWikibaseMock( 0, true ),
 			$this->getSiteLinkCacheMock( 1 ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -193,7 +192,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$dummySite = new \MediaWikiSite();
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( $expectedAddValueCount ),
+			$this->getApiWikibaseMock( $expectedAddValueCount ),
 			$this->getSiteLinkCacheMock( $expectedEntityId ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -210,13 +209,13 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$this->setExpectedException( 'UsageException' );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getApiBaseMock( null, true ),
+			$this->getApiWikibaseMock( null, true ),
 			$this->getSiteLinkCacheMock( 123 ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
 		);
 
-		$entityId = $itemByTitleHelper->getEntityIds( array( ), array( 'barfoo' ), false );
+		$itemByTitleHelper->getEntityIds( array( ), array( 'barfoo' ), false );
 	}
 
 }
