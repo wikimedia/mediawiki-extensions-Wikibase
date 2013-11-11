@@ -1,32 +1,8 @@
 <?php
- /**
- *
- * Copyright © 26.06.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- * @ingroup WikibaseLib
- *
- * @author Daniel Kinzler
- */
-
 
 namespace Wikibase;
+
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Class DummyPropertyInfoStore is an implementation of PropertyInfoStore
@@ -34,23 +10,24 @@ namespace Wikibase;
  *
  * @since 0.4
  *
- * @package Wikibase
+ * @license GPL 2+
+ * @author Daniel Kinzler
  */
 class DummyPropertyInfoStore implements PropertyInfoStore {
 
 	/**
-	 * @see   PropertyInfoStore::getPropertyInfo
+	 * @see PropertyInfoStore::getPropertyInfo
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return null
 	 */
-	public function getPropertyInfo( EntityId $propertyId ) {
+	public function getPropertyInfo( PropertyId $propertyId ) {
 		return null;
 	}
 
 	/**
-	 * @see   PropertyInfoStore::getAllPropertyInfo
+	 * @see PropertyInfoStore::getAllPropertyInfo
 	 *
 	 * @return array[]
 	 */
@@ -61,21 +38,22 @@ class DummyPropertyInfoStore implements PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::setPropertyInfo
 	 *
-	 * @param EntityId $propertyId
-	 * @param array    $info
+	 * @param PropertyId $propertyId
+	 * @param array $info
 	 */
-	public function setPropertyInfo( EntityId $propertyId, array $info ) {
+	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
 		// noop
 	}
 
 	/**
-	 * @see   PropertyInfoStore::removePropertyInfo
+	 * @see PropertyInfoStore::removePropertyInfo
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return bool false
 	 */
-	public function removePropertyInfo( EntityId $propertyId ) {
+	public function removePropertyInfo( PropertyId $propertyId ) {
 		return false;
 	}
+
 }

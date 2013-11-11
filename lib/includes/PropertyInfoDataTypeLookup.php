@@ -2,10 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use InvalidArgumentException;
-use Wikibase\EntityId;
-use Wikibase\EntityLookup;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoStore;
 
 /**
@@ -13,9 +10,6 @@ use Wikibase\PropertyInfoStore;
  * a property's data type ID.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -44,12 +38,12 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return string
 	 * @throws PropertyNotFoundException
 	 */
-	public function getDataTypeIdForProperty( EntityId $propertyId ) {
+	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		$dataTypeId = null;
 		$info = $this->infoStore->getPropertyInfo( $propertyId );
 
