@@ -2,6 +2,7 @@
 namespace Wikibase\Test;
 
 use User;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\NamespaceUtils;
 use Wikibase\Item;
 use Wikibase\EntityId;
@@ -87,7 +88,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	}
 
 	public function testShow404() {
-		$id = new EntityId( Item::ENTITY_TYPE, 1122334455 );
+		$id = new ItemId( 'q1122334455' );
 		$page = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
 		$action = $this->createAction( "view", $page );
 

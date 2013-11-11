@@ -7,8 +7,7 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Wikibase\ChangesTable;
 use Wikibase\Claim;
-use Wikibase\Item;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemDiff;
 use Wikibase\PropertyNoValueSnak;
 
@@ -44,7 +43,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 	public function newFromArrayProvider() {
 		global $wgUser;
-		$id = new EntityId( Item::ENTITY_TYPE, 42 );
+		$id = new ItemId( 'q42' );
 
 		if ( !self::$user ) {
 			self::$user = \User::newFromId( 0 );

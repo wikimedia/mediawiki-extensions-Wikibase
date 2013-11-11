@@ -2,10 +2,8 @@
 
 namespace Wikibase\Lib\Test;
 
-use Wikibase\EntityId;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\Lib\InMemoryDataTypeLookup
@@ -26,11 +24,11 @@ class InMemoryDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( '\Wikibase\Lib\PropertyNotFoundException' );
 
-		$lookup->getDataTypeIdForProperty( new EntityId( Property::ENTITY_TYPE, 7201010 ) );
+		$lookup->getDataTypeIdForProperty( new PropertyId( 'p7201010' ) );
 	}
 
 	public function testSetAndGetDataType() {
-		$propertyId = new EntityId( Property::ENTITY_TYPE, 7201010 );
+		$propertyId = new PropertyId( 'p7201010' );
 
 		$stringTypeId = 'string-datatype';
 		$intTypeId = 'integer';
@@ -50,17 +48,6 @@ class InMemoryDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertNotEquals( $stringTypeId, $actual );
 		$this->assertEquals( $intTypeId, $actual );
-	}
-
-	public function testSetWithItemId() {
-		$lookup = new InMemoryDataTypeLookup();
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-
-		$lookup->setDataTypeForProperty(
-			new EntityId( Item::ENTITY_TYPE, 42 ),
-			'string-datatype'
-		);
 	}
 
 }

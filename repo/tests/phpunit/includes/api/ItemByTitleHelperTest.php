@@ -2,6 +2,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Api\ItemByTitleHelper;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
@@ -89,7 +90,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdsSuccess() {
 		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
 
-		$expectedEntityId = new EntityId( Item::ENTITY_TYPE, 123 );
+		$expectedEntityId = new ItemId( 'q123' );
 		$expectedEntityId = $entityIdFormatter->format( $expectedEntityId );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
