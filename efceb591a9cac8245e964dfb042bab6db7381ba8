@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_351cea74",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-11T11:50:48Z",
+      "side": 1,
+      "message": "needs test cases in SearchEntitiesTest.php",
+      "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b510da57",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-11T11:50:48Z",
+      "side": 1,
+      "message": "ApiBase::PARAM_TYPE \u003d\u003e $this-\u003egetSiteLinkTargetSites()-\u003egetGlobalIdentifiers() would mean only valid sitesids could be provided.",
+      "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_d50b9629",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-11T11:50:48Z",
+      "side": 1,
+      "message": "might be nice to have an example for using multiple sitelinks",
+      "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
