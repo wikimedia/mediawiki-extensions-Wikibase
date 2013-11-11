@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\DataValueFactory;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyValueSnak;
@@ -58,7 +58,7 @@ class SnakFactoryTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testNewSnak( $propertyId, $snakType, $valueType, $snakValue, $expectedSnakClass, $expectedValueClass, $expectedException, $message ) {
 		if ( is_int( $propertyId ) ) {
-			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+			$propertyId = PropertyId::newFromNumber( $propertyId );
 		}
 
 		if ( $valueType !== null ) {

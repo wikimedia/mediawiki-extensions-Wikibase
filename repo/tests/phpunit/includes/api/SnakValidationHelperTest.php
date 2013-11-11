@@ -6,10 +6,9 @@ use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use Wikibase\Claim;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -53,8 +52,8 @@ class SnakValidationHelperTest extends \MediaWikiTestCase {
 		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array( $numericValidator, $lengthValidator ) ) );
 		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array( $alphabeticValidator, $lengthValidator ) ) );
 
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 );
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 );
+		$p1 = new PropertyId( 'p1' );
+		$p2 = new PropertyId( 'p2' );
 
 		$this->propertyDataTypeLookup = new InMemoryDataTypeLookup();
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p1, 'numeric' );
@@ -63,8 +62,8 @@ class SnakValidationHelperTest extends \MediaWikiTestCase {
 
 
 	public static function provideValidateClaimSnaks() {
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
+		$p1 = new PropertyId( 'p1' ); // numeric
+		$p2 = new PropertyId( 'p2' ); // alphabetic
 
 		$cases = array();
 
@@ -121,8 +120,8 @@ class SnakValidationHelperTest extends \MediaWikiTestCase {
 	public static function provideValidateSnak() {
 		//TODO: share code with SnakValidatorTest
 
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
+		$p1 = new PropertyId( 'p1' ); // numeric
+		$p2 = new PropertyId( 'p2' ); // alphabetic
 
 		$cases = array();
 

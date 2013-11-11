@@ -3,39 +3,23 @@
 namespace Wikibase;
 
 use Site;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Index for tracking the usage of entities on a specific client wiki.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
- *
- *
  * @author Daniel Kinzler
  */
 class EntityUsageIndex {
 
+	protected $clientSite;
+	protected $siteLinks;
+
 	/**
-	 * @param Site           $clientSite
+	 * @param Site $clientSite
 	 * @param SiteLinkLookup $siteLinks
 	 */
 	public function __construct( Site $clientSite, SiteLinkLookup $siteLinks ) {
@@ -46,7 +30,7 @@ class EntityUsageIndex {
 	/**
 	 * Returns the Site of the client wiki this usage index is tracking.
 	 *
-	 * @since    0.4
+	 * @since 0.4
 	 *
 	 * @return Site
 	 */
@@ -57,7 +41,7 @@ class EntityUsageIndex {
 	/**
 	 * Determines which pages use any of the given entities.
 	 *
-	 * @since    0.4
+	 * @since 0.4
 	 *
 	 * @param EntityId[] $entities
 	 *
@@ -69,13 +53,13 @@ class EntityUsageIndex {
 		}
 
 		$ids = array_map(
-			function ( EntityId $id ) {
+			function ( ItemId $id ) {
 				return $id->getNumericId();
 			},
 			$entities
 		);
 
-		$rows = $this->siteLinks->getLinks( $ids, array( $this->clientSite->getGlobalId() ) ) ;
+		$rows = $this->siteLinks->getLinks( $ids, array( $this->clientSite->getGlobalId() ) );
 
 		$pages = array_map(
 			function ( array $row ) {
@@ -94,12 +78,12 @@ class EntityUsageIndex {
 	 *
 	 * @since    0.4
 	 *
-	 * @param EntityID[]  $entities The entities to check
+	 * @param EntityId[]  $entities The entities to check
 	 * @param string|null $type     The entity type to check. This is an optional hint that may
 	 *                              be used for optimization. If given, all IDs in the $entities
 	 *                              array must refer to entities of the given type.
 	 *
-	 * @return EntityID[] the entities actually used on the target wiki
+	 * @return EntityId[] the entities actually used on the target wiki
 	 * @throws \MWException if $type is set and one of the ids in $entities
 	 */
 	public function filterUnusedEntities( array $entities, $type = null ) {
@@ -112,7 +96,7 @@ class EntityUsageIndex {
 		}
 
 		$ids = array_map(
-			function ( EntityId $id ) use ( $type ) {
+			function ( ItemId $id ) use ( $type ) {
 				if ( $type !== null && $id->getEntityType() !== $type ) {
 					throw new \MWException( "Optimizing for $type, encountered ID for " . $id->getEntityType() );
 				}
@@ -136,7 +120,7 @@ class EntityUsageIndex {
 
 		$filtered = array_filter(
 			$entities,
-			function ( EntityId $id ) use ( $used ) {
+			function ( ItemId $id ) use ( $used ) {
 				return array_key_exists( $id->getNumericId(), $used );
 			}
 		);
@@ -157,7 +141,7 @@ class EntityUsageIndex {
 	 *
 	 * @param string[] $pages The titles of the pages to check.
 	 *
-	 * @return EntityID[] The entities used.
+	 * @return EntityId[] The entities used.
 	 */
 	public function getUsedEntities( array $pages ) {
 		if ( empty( $pages ) ) {
@@ -174,10 +158,11 @@ class EntityUsageIndex {
 				//Note: we are using the numeric ID as the key here to make sure each item only
 				//      shows up once. If we had other entity types too, we'd need to use the
 				//      prefixed ID.
-				$entities[$id] = new EntityId( Item::ENTITY_TYPE, $id );
+				$entities[$id] = ItemId::newFromNumber( $id );
 			}
 		}
 
 		return $entities;
 	}
+
 }

@@ -9,10 +9,9 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\UnknownValue;
 use Wikibase\Claim;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -22,32 +21,12 @@ use Wikibase\References;
 use Wikibase\Snak;
 use Wikibase\SnakList;
 use Wikibase\Statement;
-use Wikibase\Validators\DataValueValidator;
 use Wikibase\Validators\SnakValidator;
 
 /**
  * @covers Wikibase\Validators\SnakValidator
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseValidators
@@ -78,8 +57,8 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array( $numericValidator, $lengthValidator ) ) );
 		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array( $alphabeticValidator, $lengthValidator ) ) );
 
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 );
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 );
+		$p1 = new PropertyId( 'p1' );
+		$p2 = new PropertyId( 'p2' );
 
 		$this->propertyDataTypeLookup = new InMemoryDataTypeLookup();
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p1, 'numeric' );
@@ -87,8 +66,8 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideValidateClaimSnaks() {
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
+		$p1 = new PropertyId( 'p1' ); // numeric
+		$p2 = new PropertyId( 'p2' ); // alphabetic
 
 		$cases = array();
 
@@ -143,8 +122,8 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideValidateReferences() {
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
+		$p1 = new PropertyId( 'p1' ); // numeric
+		$p2 = new PropertyId( 'p2' ); // alphabetic
 
 		$cases = array();
 
@@ -187,8 +166,8 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 
 
 	public static function provideValidateReference() {
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
+		$p1 = new PropertyId( 'p1' ); // numeric
+		$p2 = new PropertyId( 'p2' ); // alphabetic
 
 		$cases = array();
 
@@ -224,9 +203,9 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideValidate() {
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
-		$p3 = new EntityId( Property::ENTITY_TYPE, 3 ); // bad
+		$p1 = new PropertyId( 'p1' ); // numeric
+		$p2 = new PropertyId( 'p2' ); // alphabetic
+		$p3 = new PropertyId( 'p3' ); // bad
 
 		$cases = array();
 

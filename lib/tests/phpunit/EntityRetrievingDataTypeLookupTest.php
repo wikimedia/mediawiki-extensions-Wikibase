@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Property;
 use Wikibase\Test\MockRepository;
@@ -22,10 +22,10 @@ use Wikibase\Test\MockRepository;
 class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
 	private $propertiesAndTypes = array(
-		1 => 'NyanData all the way across the sky',
-		42 => 'string',
-		1337 => 'percentage',
-		9001 => 'positive whole number',
+		'P1' => 'NyanData all the way across the sky',
+		'P42' => 'string',
+		'P1337' => 'percentage',
+		'P9001' => 'positive whole number',
 	);
 
 	private function newEntityLookup() {
@@ -33,7 +33,7 @@ class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$property = Property::newEmpty();
-			$property->setId( $propertyId );
+			$property->setId( new PropertyId( $propertyId ) );
 			$property->setDataTypeId( $dataTypeId );
 
 			$lookup->putEntity( $property );
@@ -47,11 +47,10 @@ class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$argLists[] = array(
-				new EntityId( Property::ENTITY_TYPE, $propertyId ),
+				new PropertyId( $propertyId ),
 				$dataTypeId
 			);
 		}
-
 
 		return $argLists;
 	}
@@ -59,10 +58,10 @@ class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getDataTypeForPropertyProvider
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 * @param string $expectedDataType
 	 */
-	public function testGetDataTypeForProperty( EntityId $propertyId, $expectedDataType ) {
+	public function testGetDataTypeForProperty( PropertyId $propertyId, $expectedDataType ) {
 		$lookup = new EntityRetrievingDataTypeLookup( $this->newEntityLookup() );
 
 		$actualDataType = $lookup->getDataTypeIdForProperty( $propertyId );

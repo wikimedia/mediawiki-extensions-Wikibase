@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 use Iterator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -105,6 +107,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return boolean success indicator
 	 */
 	public function rebuild() {
+		// FIXME: class not found!
 		$rebuilder = new EntityPerPageRebuilder();
 		$rebuilder->rebuild( $this );
 
@@ -121,6 +124,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @param string|null $entityType Can be "item", "property" or "query". By default the search is done for all entities.
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
+	 *
 	 * @return EntityId[]
 	 */
 	public function getEntitiesWithoutTerm( $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 ) {
@@ -154,10 +158,18 @@ class EntityPerPageTable implements EntityPerPage {
 			array( 'wb_terms' => array( 'LEFT JOIN', $joinConditions ) )
 		);
 
+		return $this->getEntityIdsFromRows( $rows );
+	}
+
+	protected function getEntityIdsFromRows( $rows ) {
 		$entities = array();
+		$idParser = new BasicEntityIdParser();
+
 		foreach ( $rows as $row ) {
-			$entities[] = new EntityId( $row->entity_type, (int)$row->entity_id );
+			$id = new EntityId( $row->entity_type, (int)$row->entity_id );
+			$entities[] = $idParser->parse( $id->getSerialization() );
 		}
+
 		return $entities;
 	}
 
@@ -169,7 +181,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @param string|null $siteId Restrict the request to a specific site.
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
-	 * @return EntityId[]
+	 * @return ItemId[]
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 ) {
 		$dbr = wfGetDB( DB_SLAVE );
@@ -198,11 +210,17 @@ class EntityPerPageTable implements EntityPerPage {
 			array( 'wb_items_per_site' => array( 'LEFT JOIN', $joinConditions ) )
 		);
 
-		$entities = array();
+		return $this->getItemIdsFromRows( $rows );
+	}
+
+	protected function getItemIdsFromRows( $rows ) {
+		$itemIds = array();
+
 		foreach ( $rows as $row ) {
-			$entities[] = new EntityId( Item::ENTITY_TYPE, (int)$row->entity_id );
+			$itemIds[] = ItemId::newFromNumber( (int)$row->entity_id );
 		}
-		return $entities;
+
+		return $itemIds;
 	}
 
 	/**
@@ -228,8 +246,10 @@ class EntityPerPageTable implements EntityPerPage {
 			'wb_entity_per_page',
 			array( 'epp_entity_id', 'epp_entity_type' ),
 			$where,
-			__METHOD__ );
+			__METHOD__
+		);
 
 		return new DatabaseRowEntityIdIterator( $rows, 'epp_entity_type', 'epp_entity_id' );
 	}
+
 }

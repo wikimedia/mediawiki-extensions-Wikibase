@@ -1,36 +1,14 @@
 <?php
- /**
- *
- * Copyright © 26.06.13 by the authors listed below.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @license GPL 2+
- * @file
- * @ingroup WikibaseLib
- *
- * @author Daniel Kinzler
- */
-
 
 namespace Wikibase;
 
-
 use DBError;
+use Wikibase\DataModel\Entity\PropertyId;
 
+/**
+ * @license GPL 2+
+ * @author Daniel Kinzler
+ */
 interface PropertyInfoStore {
 
 	/**
@@ -44,14 +22,14 @@ interface PropertyInfoStore {
 	 * @note: Even if the property is known to exist, this method may not return
 	 *        an info array, or the info array may not contain all well known fields.
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return array|null
 	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
-	public function getPropertyInfo( EntityId $propertyId );
+	public function getPropertyInfo( PropertyId $propertyId );
 
 	/**
 	 * Returns the property info for all properties.
@@ -63,7 +41,7 @@ interface PropertyInfoStore {
 	 * @return array[] An associative array mapping property IDs to info arrays.
 	 *
 	 * @throws StorageException
-	 * @throws \DBError
+	 * @throws DBError
 	 */
 	public function getAllPropertyInfo();
 
@@ -72,24 +50,24 @@ interface PropertyInfoStore {
 	 *
 	 * @note: All well known fields MUST be set in $info.
 	 *
-	 * @param EntityId $propertyId
-	 * @param array    $info
+	 * @param PropertyId $propertyId
+	 * @param array $info
 	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
-	public function setPropertyInfo( EntityId $propertyId, array $info );
+	public function setPropertyInfo( PropertyId $propertyId, array $info );
 
 	/**
 	 * Remove the info entry for the given property.
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
 	 * @return bool true iff something was deleted
 	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
-	public function removePropertyInfo( EntityId $propertyId );
+	public function removePropertyInfo( PropertyId $propertyId );
 
 }

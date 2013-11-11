@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
@@ -96,13 +97,13 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetTitleForId() {
 		$factory = $this->newFactory();
 
-		$title = $factory->getTitleForId( new EntityId( 'item', 42 ) );
+		$title = $factory->getTitleForId( new ItemId( 'q42' ) );
 
 		$this->assertEquals( 'Nyan', $title->getText() );
 	}
 
 	public function testGetWikiPageForId() {
-		$entityId = new EntityId( 'item', 42 );
+		$entityId = new ItemId( 'q42' );
 
 		$factory = $this->newFactory();
 
