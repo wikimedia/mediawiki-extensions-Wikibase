@@ -250,7 +250,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			'type', $entityContent->getEntity()->getType()
 		);
 
-		$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
+		$this->addRevisionIdFromStatusToResult( 'entity', $status );
 
 		$params = $this->extractRequestParams();
 
@@ -258,11 +258,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$this->addNormalizationInfoToOutput( $params['title'] );
 		}
 
-		$this->getResult()->addValue(
-			null,
-			'success',
-			1
-		);
+		$this->resultBuilder->markSuccess( 1 );
 	}
 
 	protected function addNormalizationInfoToOutput( $title ) {
