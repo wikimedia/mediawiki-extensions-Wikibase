@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use LogicException;
 use Title;
 use ValueFormatters\FormatterOptions;
@@ -12,7 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Item;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Property;
 
 /**
@@ -41,7 +39,7 @@ class EntityIdLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 				'[[PROPERTY-TEST--P23]]'
 			),
 			'EntityId' => array(
-				new EntityId( Item::ENTITY_TYPE, 23 ),
+				new ItemId( 'q23' ),
 				'[[ITEM-TEST--Q23]]'
 			),
 			'EntityIdValue' => array(

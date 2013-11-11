@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 
@@ -14,9 +15,6 @@ use Wikibase\Lib\PropertyNotFoundException;
  * silently.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -72,7 +70,7 @@ class ReferencedUrlFinder {
 		}
 	}
 
-	protected function isUrlProperty( EntityId $propertyId ) {
+	protected function isUrlProperty( PropertyId $propertyId ) {
 		try {
 			$type = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		} catch ( PropertyNotFoundException $ex ) {

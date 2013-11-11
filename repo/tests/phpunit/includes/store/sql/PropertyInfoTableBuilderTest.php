@@ -39,6 +39,7 @@ namespace Wikibase\Test;
 
 
 use RuntimeException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
@@ -82,7 +83,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 					throw new RuntimeException( "could not save property: " . $status->getWikiText() );
 				}
 
-				$id = $content->getProperty()->getId()->getNumericId();
+				$id = $content->getProperty()->getId()->getSerialization();
 				$properties[$id] = $info;
 			}
 		}
@@ -106,12 +107,12 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$builder->rebuildPropertyInfo();
 
 		foreach ( $properties as $id => $expected ) {
-			$info = $table->getPropertyInfo( new EntityId( Property::ENTITY_TYPE, $id ) );
+			$info = $table->getPropertyInfo( new PropertyId( $id ) );
 			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $id" );
 		}
 
 		// make table incomplete ----
-		$propId1 = new EntityId( Property::ENTITY_TYPE, $propertyIds[0] );
+		$propId1 = new PropertyId( $propertyIds[0] );
 		$table->removePropertyInfo( $propId1 );
 
 		// rebuild from offset, with no effect ----
@@ -139,8 +140,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$builder->rebuildPropertyInfo();
 
 		foreach ( $properties as $propId => $expected ) {
-			$info = $table->getPropertyInfo( new EntityId( Property::ENTITY_TYPE, $propId ) );
-			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $id" );
+			$info = $table->getPropertyInfo( new PropertyId( $propId ) );
+			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $propId" );
 		}
 
 		// rebuild again ----

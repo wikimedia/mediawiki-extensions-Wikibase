@@ -7,9 +7,9 @@ use Wikibase\ChangeRow;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
-use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\EntityChange;
 use Wikibase\DiffChange;
@@ -55,23 +55,22 @@ final class TestChanges {
 
 		if ( empty( $changes ) ) {
 			$empty = Property::newEmpty();
-			$empty->setId( new EntityId( Property::ENTITY_TYPE, 100 ) );
+			$empty->setId( new PropertyId( 'p100' ) );
 
 			$changes['property-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
 			$changes['property-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
 			$old = Property::newEmpty();
-			$old->setId( new EntityId( Property::ENTITY_TYPE, 100 ) );
+			$old->setId( new PropertyId( 'p100' ) );
 			$new = $old->copy();
 
 			$new->setLabel( "de", "dummy" );
 			$changes['property-set-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
 
 			// -----
 			$old = Item::newEmpty();
-			$old->setId( new EntityId( Item::ENTITY_TYPE, 100 ) );
+			$old->setId( new ItemId( 'q100' ) );
 
 			/* @var Item $new */
 			$new = $old->copy();
@@ -143,7 +142,7 @@ final class TestChanges {
 			$old = $new->copy();
 
 			// -----
-			$propertyId = new EntityId( Property::ENTITY_TYPE, 23 );
+			$propertyId = new PropertyId( 'p23' );
 			$snak = new PropertyNoValueSnak( $propertyId );
 			$claim = new Claim( $snak );
 			$claim->setGuid( 'TEST$test-guid' );

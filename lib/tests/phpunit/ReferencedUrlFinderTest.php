@@ -2,14 +2,10 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
-use Wikibase\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityId;
-use Wikibase\Item;
 use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\LibRegistry;
-use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -32,8 +28,8 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 	public function snaksProvider() {
 		$argLists = array();
 
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'p23' );
+		$p42 = new PropertyId( 'p42' );
 
 		$argLists["empty"] = array(
 			array(),
@@ -65,8 +61,8 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 	 * @param EntityId[] $expected
 	 */
 	public function testFindSnakLinks( array $snaks, array $expected ) {
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p23 = new PropertyId( 'p23' );
+		$p42 = new PropertyId( 'p42' );
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeLookup->setDataTypeForProperty( $p23, 'string' );
@@ -82,7 +78,7 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$linkFinder = new ReferencedUrlFinder( $dataTypeLookup );
 
-		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p42 = new PropertyId( 'p42' );
 		$snaks = array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' )  ) );
 
 		$actual = $linkFinder->findSnakLinks( $snaks );
