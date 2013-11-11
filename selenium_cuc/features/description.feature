@@ -29,7 +29,7 @@ Feature: Edit description
   @ui_only
   Scenario: Modify the description
     When I click the description edit button
-      And I enter MODIFIED DESCRIPTION as description
+      And I enter 'MODIFIED DESCRIPTION' as description
     Then Description save button should be there
       And Description cancel button should be there
       And Description edit button should not be there
@@ -37,7 +37,7 @@ Feature: Edit description
   @ui_only
   Scenario Outline: Cancel description
     When I click the description edit button
-      And I enter MODIFIED DESCRIPTION as description
+      And I enter 'MODIFIED DESCRIPTION' as description
       And I <cancel>
     Then Original description should be displayed
       And Description edit button should be there
@@ -51,7 +51,7 @@ Feature: Edit description
   @save_description @modify_entity
   Scenario Outline: Save description
     When I click the description edit button
-      And I enter MODIFIED DESCRIPTION as description
+      And I enter 'MODIFIED DESCRIPTION' as description
       And I <save>
     Then MODIFIED DESCRIPTION should be displayed as description
 
@@ -63,7 +63,7 @@ Feature: Edit description
   @save_description @modify_entity
   Scenario Outline: Save description
     When I click the description edit button
-      And I enter MODIFIED DESCRIPTION as description
+      And I enter 'MODIFIED DESCRIPTION' as description
       And I <save>
       And I reload the page
     Then MODIFIED DESCRIPTION should be displayed as description
@@ -76,7 +76,7 @@ Feature: Edit description
   @save_description @modify_entity
   Scenario Outline: Description with special input
     When I click the description edit button
-      And I enter <description> as description
+      And I enter '<description>' as description
       And I click the description save button
     Then <expected_description> should be displayed as description
 
@@ -90,6 +90,6 @@ Feature: Edit description
   @save_description
   Scenario: Description with a too long value
     When I click the description edit button
-      And I enter looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong as description
+      And I enter a long string as description
       And I click the description save button
     Then An error message should be displayed
