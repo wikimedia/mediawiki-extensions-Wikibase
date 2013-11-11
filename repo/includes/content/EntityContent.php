@@ -13,6 +13,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterFactory;
+use Wikibase\EntityId;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -622,6 +623,24 @@ abstract class EntityContent extends AbstractContent {
 					$foundLabel->getLanguage(),
 					$foundLabel->getEntityId()
 				);
+			}
+		}
+	}
+
+	/**
+	 * Adds errors to the status if there are labels that represent
+	 * a valid entity id.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Status $status
+	 */
+	final protected function addLabelEntityIdConflicts( Status $status ) {
+		$entity = $this->getEntity();
+
+		foreach ( $entity->getLabels() as $langCode => $labelText ) {
+			if ( EntityId::newFromPrefixedId( $labelText ) !== null ) {
+				$status->fatal( 'wikibase-error-label-no-entityid' );
 			}
 		}
 	}
