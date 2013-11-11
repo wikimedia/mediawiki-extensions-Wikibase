@@ -1,38 +1,26 @@
 <?php
 
 namespace Wikibase;
-use Iterator, DatabaseBase;
+
+use DatabaseBase;
+use DBAccessBase;
+use Iterator;
+use MWException;
+use ResultWrapper;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * Term lookup cache.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Daniel Kinzler
+ * @author Denny
  */
-class TermSqlIndex extends \DBAccessBase implements TermIndex {
+class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 	/**
 	 * @since 0.1
@@ -348,7 +336,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		$numericIds = array();
 		foreach ( $ids as $id ) {
 			if ( $id->getEntityType() !== $entityType ) {
-				throw new \MWException( "ID " . $id->getPrefixedId()
+				throw new MWException( "ID " . $id->getPrefixedId()
 					. " does not refer to an entity of type $entityType." );
 			}
 
@@ -385,7 +373,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.1
 	 *
-	 * @return \DatabaseBase
+	 * @return DatabaseBase
 	 */
 	public function getReadDb() {
 		return $this->getConnection( DB_SLAVE );
@@ -396,7 +384,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.4
 	 *
-	 * @return \DatabaseBase
+	 * @return DatabaseBase
 	 */
 	public function getWriteDb() {
 		return $this->getConnection( DB_MASTER );
@@ -755,7 +743,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.2
 	 *
-	 * @param \Iterator|array $obtainedTerms PHP fails for not having a common iterator/array thing :<0
+	 * @param Iterator|array $obtainedTerms PHP fails for not having a common iterator/array thing :<0
 	 *
 	 * @return array
 	 */
@@ -890,12 +878,12 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 *
 	 * @since 0.2
 	 *
-	 * @param \ResultWrapper $obtainedTerms
+	 * @param ResultWrapper $obtainedTerms
 	 * @param integer $joinCount
 	 *
 	 * @return array
 	 */
-	protected function getNormalizedJoinResult( \ResultWrapper $obtainedTerms, $joinCount ) {
+	protected function getNormalizedJoinResult( ResultWrapper $obtainedTerms, $joinCount ) {
 		$resultTerms = array();
 
 		foreach ( $obtainedTerms as $obtainedTerm ) {
@@ -979,6 +967,6 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 * @return mixed
 	 */
 	public function supportsWeight() {
-		return !\Wikibase\Settings::get( 'withoutTermWeight' );
+		return !Settings::get( 'withoutTermWeight' );
 	}
 }
