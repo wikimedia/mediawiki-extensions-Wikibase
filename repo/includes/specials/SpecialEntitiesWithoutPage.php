@@ -8,6 +8,7 @@ use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
 use Wikibase\StoreFactory;
 use Wikibase\Utils;
 use XmlSelect;
+use SiteSQLStore;
 
 /**
  * Base page for pages listing entities without a specific value.
@@ -16,6 +17,7 @@ use XmlSelect;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Bene*
+ * @author lbenedix
  */
 abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 
@@ -77,6 +79,9 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$output = $this->getOutput();
 
 		$this->language = '';
+		$this->languagecode = '';
+		$this->site = '';
+
 		$this->type = null;
 		if ( $subPage !== null ) {
 			$parts = explode( '/', $subPage );
@@ -87,7 +92,14 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->language = $request->getText( 'language', $this->language );
-		if ( $this->language !== '' && !in_array( $this->language, Utils::getLanguageCodes() ) ) {
+		$this->languagecode = $request->getText( 'languagecode', $this->languagecode );
+		$this->site = $request->getText( 'site', $this->site );
+
+		if ( $this->site !== '' && !SiteSQLStore::newInstance()->getSites()->hasSite( $this->site ) ) {
+			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language )->parse() );
+		}
+
+		if( $this->site == '' && $this->language !== '' && !in_array( $this->language, Utils::getLanguageCodes() ) ){
 			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language )->parse() );
 			$this->language = '';
 		}
@@ -134,6 +146,8 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $type )->text(), $type );
 		}
 
+		$this->getOutput()->addModules( 'wikibase.special.entitiesWithout' );
+
 		$this->getOutput()->addHTML(
 			Html::openElement(
 				'form',
@@ -143,6 +157,12 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 					'id' => 'wb-entitieswithoutpage-form'
 				)
 			) .
+			Html::input (
+				'title',
+				$this->getTitle(),
+				'hidden',
+				array()
+			).
 			Html::openElement( 'fieldset' ) .
 			Html::element(
 				'legend',
@@ -186,6 +206,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			Html::closeElement( 'fieldset' ) .
 			Html::closeElement( 'form' )
 		);
+
 	}
 
 	/**
@@ -195,7 +216,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
-		return $entityPerPage->getEntitiesWithoutTerm( $this->getTermType(), $this->language, $this->type, $limit, $offset );
+		return $entityPerPage->getEntitiesWithoutTerm( $this->getTermType(), $this->languagecode, $this->type, $limit, $offset );
 	}
 
 
