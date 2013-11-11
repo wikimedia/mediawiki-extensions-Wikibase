@@ -548,7 +548,7 @@ class EditEntity extends ModifyEntity {
 
 		foreach ( $data as $prop => $args ) {
 			if ( !is_string( $prop ) ) { // NOTE: catch json_decode returning an indexed array (list)
-				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
+				$this->dieUsage( 'Top level structure must be a JSON object, (no keys found)', 'not-recognized-string' );
 			}
 
 			if ( !in_array( $prop, $allowedProps ) ) {
@@ -562,10 +562,9 @@ class EditEntity extends ModifyEntity {
 	 * @param WikiPage|mixed(?) $page
 	 */
 	protected function checkPageIdProp( $data, $page ) {
-		// conditional processing
 		if ( isset( $data['pageid'] )
 			&& ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
-			$this->dieUsage( 'Illegal field used in call: pageid', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call, "pageid", must either be correct or not given', 'param-illegal' );
 		}
 	}
 
@@ -577,7 +576,7 @@ class EditEntity extends ModifyEntity {
 		// not completely convinced that we can use title to get the namespace in this case
 		if ( isset( $data['ns'] )
 			&& ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
-			$this->dieUsage( 'Illegal field used in call: namespace', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: "namespace", must either be correct or not given', 'param-illegal' );
 		}
 	}
 
@@ -588,7 +587,7 @@ class EditEntity extends ModifyEntity {
 	protected function checkTitleProp( $data, $title ) {
 		if ( isset( $data['title'] )
 			&& ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
-			$this->dieUsage( 'Illegal field used in call: title', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: "title", must either be correct or not given', 'param-illegal' );
 		}
 	}
 
@@ -599,21 +598,21 @@ class EditEntity extends ModifyEntity {
 	protected function checkRevisionProp( $data, $revision ) {
 		if ( isset( $data['lastrevid'] )
 			&& ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
-			$this->dieUsage( 'Illegal field used in call: lastrevid', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: "lastrevid", must either be correct or not given', 'param-illegal' );
 		}
 	}
 
 	private function checkEntityId( $data, EntityContent $entityContent ) {
 		if ( isset( $data['id'] )
 			&& $entityContent->getEntity()->getId()->getSerialization() !== $data['id'] ) {
-			$this->dieUsage( 'Illegal field used in call: id', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: "id", must either be correct or not given', 'param-illegal' );
 		}
 	}
 
 	private function checkEntityType( $data, EntityContent $entityContent ) {
 		if ( isset( $data['type'] )
 			&& $entityContent->getEntity()->getType() !== $data['type'] ) {
-			$this->dieUsage( 'Illegal field used in call: type', 'param-illegal' );
+			$this->dieUsage( 'Illegal field used in call: "type", must either be correct or not given', 'param-illegal' );
 		}
 	}
 
