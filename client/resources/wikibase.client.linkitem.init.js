@@ -20,7 +20,9 @@
 			'jquery.wikibase.linkitem',
 			function() {
 				$spinner.remove();
-				$linkItemLink.show().linkitem();
+				$linkItemLink
+					.show()
+					.linkitem();
 			},
 			function() {
 				// Failure: This isn't very likely, but who knows

@@ -1,11 +1,11 @@
 /**
-* JavaScript that allows linking articles with Wikibase items or creating
-* new wikibase items directly in the client wikis
-*
-* @since 0.4
-*
-* @author Marius Hoch < hoo@online.de >
-*/
+ * JavaScript that allows linking articles with Wikibase items or creating
+ * new wikibase items directly in the client wikis
+ *
+ * @since 0.4
+ *
+ * @author Marius Hoch < hoo@online.de >
+ */
 ( function( wb, mw, $ ) {
 'use strict';
 
@@ -14,6 +14,11 @@ $.widget( 'wikibase.linkitem', {
 	 * @type wb.RepoApi
 	 */
 	repoApi: new wb.RepoApi(),
+
+	/**
+	 * @type wb.linkPages
+	 */
+	linkPages: null,
 
 	/**
 	 * @type jQuery
@@ -49,7 +54,13 @@ $.widget( 'wikibase.linkitem', {
 	 * @see jQuery.Widget.options
 	 */
 	options: {
-		// ...
+		// This should be in the most human readable format as this is might be used as label
+		pageTitle: (new mw.Title( mw.config.get( 'wgTitle' ), mw.config.get( 'wgNamespaceNumber' ) ) ).getPrefixedText(),
+		globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
+		namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
+		repoArticlePath: mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ),
+		// Fallback to the site group of the current site in case .langLinkSiteGroup isn't yet in the cache
+		langLinkSiteGroup: mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup || wb.getSite( mw.config.get( 'wbCurrentSite' ).globalSiteId ).getGroup()
 	},
 
 	/**
@@ -131,7 +142,7 @@ $.widget( 'wikibase.linkitem', {
 				width: 500,
 				resizable: false,
 				buttons: [ {
-					text: mw.message( 'wikibase-linkitem-linkpage' ).escaped(),
+					text: mw.msg( 'wikibase-linkitem-linkpage' ),
 					id: 'wbclient-linkItem-goButton',
 					disabled: 'disabled',
 					click: $.proxy( this._onSecondStep, this )
@@ -165,7 +176,7 @@ $.widget( 'wikibase.linkitem', {
 	},
 
 	/**
-	 * Gets an object with all sites despite the current one (as we can't link pages on the same wiki)
+	 * Gets an object with all linkable sites despite the current one (as we can't link pages on the same wiki)
 	 *
 	 * @return {object}
 	 */
@@ -173,12 +184,10 @@ $.widget( 'wikibase.linkitem', {
 		var sites,
 			linkableSites = {},
 			site,
-			currentSiteId,
-			siteGroup;
+			currentSiteId;
 
-		currentSiteId = mw.config.get( 'wbCurrentSite' ).globalSiteId;
-		siteGroup = wb.getSite( currentSiteId ).getGroup();
-		sites = wb.getSitesOfGroup( siteGroup );
+		currentSiteId = this.options.globalSiteId;
+		sites = wb.getSitesOfGroup( this.options.langLinkSiteGroup );
 
 		for( site in sites ) {
 			if ( sites[ site ].getId() !== currentSiteId ) {
@@ -202,16 +211,16 @@ $.widget( 'wikibase.linkitem', {
 			.append(
 				$( '<label>' )
 					.attr( {
-						'for': 'wbclient-linkItem-Site'
+						'for': 'wbclient-linkItem-site'
 					} )
 					.text( mw.message( 'wikibase-linkitem-input-site' ) )
 			)
 			.append(
 				$( '<input />' )
 					.attr( {
-						name: 'wbclient-linkItem-Site',
-						id: 'wbclient-linkItem-Site',
-						'class': 'wbclient-linkItem-Input'
+						name: 'wbclient-linkItem-site',
+						id: 'wbclient-linkItem-site',
+						'class': 'wbclient-linkItem-input'
 					} )
 					.siteselector( {
 						resultSet: this._getLinkableSites()
@@ -223,7 +232,7 @@ $.widget( 'wikibase.linkitem', {
 							.val( '' );
 
 						try {
-							apiUrl = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getApi();
+							apiUrl = $( '#wbclient-linkItem-site' ).siteselector( 'getSelectedSite' ).getApi();
 						} catch( e ) {
 							// Invalid input (likely incomplete). Disable the page input an re-disable to button
 							$( '#wbclient-linkItem-page' )
@@ -240,7 +249,7 @@ $.widget( 'wikibase.linkitem', {
 									url: apiUrl,
 									params: {
 										action: 'opensearch',
-										namespace: mw.config.get( 'wgNamespaceNumber' )
+										namespace: this.options.namespaceNumber
 									}
 								}
 							} );
@@ -252,7 +261,7 @@ $.widget( 'wikibase.linkitem', {
 			.append(
 				$( '<label>' )
 					.attr( {
-						'for': 'wbclient-linkItem-Site'
+						'for': 'wbclient-linkItem-site'
 					} )
 					.text( mw.msg( 'wikibase-linkitem-input-page' ) )
 			)
@@ -262,7 +271,7 @@ $.widget( 'wikibase.linkitem', {
 						name: 'wbclient-linkItem-page',
 						id: 'wbclient-linkItem-page',
 						disabled: 'disabled',
-						'class' : 'wbclient-linkItem-Input'
+						'class' : 'wbclient-linkItem-input'
 					} )
 					.on(
 						'focus',
@@ -326,8 +335,8 @@ $.widget( 'wikibase.linkitem', {
 	* tries to link the currently viewed page with an existing item
 	*/
 	_onSecondStep: function() {
-		if ( $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ) ) {
-			this.targetSite = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getId();
+		if ( $( '#wbclient-linkItem-site' ).siteselector( 'getSelectedSite' ) ) {
+			this.targetSite = $( '#wbclient-linkItem-site' ).siteselector( 'getSelectedSite' ).getId();
 		} else {
 			// This should never happen because the button shouldn't be enabled if the site isn't valid
 			// ...keeping this for sanity and paranoia
@@ -336,19 +345,19 @@ $.widget( 'wikibase.linkitem', {
 		}
 		this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
+		this.linkPages = new wb.linkPages(
+			this.options.globalSiteId,
+			this.options.pageTitle,
+			this.targetSite,
+			this.targetArticle
+		);
+
 		// Show a spinning animation and do an API request
 		this._showSpinner();
 
-		this.repoApi.getEntitiesByPage(
-			this.targetSite,
-			this.targetArticle,
-			['info', 'sitelinks'],
-			mw.config.get( 'wgUserLanguage' ),
-			'sitelinks',
-			'ascending',
-			true
-		)
-		.done( $.proxy( this._onEntityLoad, this ) )
+		this.linkPages.getNewlyLinkedPages()
+		.done( $.proxy( this._onConfirmationDataLoad, this ) )
+		// This will (as a side effect) also catch errors where the target page doesn't exist
 		.fail( $.proxy( this._onError, this ) );
 	},
 
@@ -400,46 +409,25 @@ $.widget( 'wikibase.linkitem', {
 	},
 
 	/**
-	 * Get the entity for the current page in case there is one
-	 */
-	getEntityForCurrentPage: function() {
-		return this.repoApi.getEntitiesByPage(
-			mw.config.get( 'wbCurrentSite' ).globalSiteId,
-			mw.config.get( 'wgPageName' ),
-			['info', 'sitelinks'],
-			mw.config.get( 'wgUserLanguage' ),
-			'sitelinks',
-			'ascending'
-		);
-	},
-
-	/**
 	 * Handles the data from getEntitiesByPage and either creates a new item or in case there already is an
 	 * item it shows the user a confirmation form
 	 *
 	 * @param {object} data
 	 */
-	_onEntityLoad: function( data ) {
+	_onConfirmationDataLoad: function( entity ) {
 		var i, entity, itemLink;
 
-		if ( !data.entities['-1'] ) {
-			this._removeSpinner();
-
+		if ( entity && entity.sitelinks ) {
 			var siteLinkCount = 0;
+
 			// Show a table with links to the user and ask for confirmation
-			for ( i in data.entities ) {
-				if ( data.entities[ i ].sitelinks ) {
-					entity = data.entities[ i ];
-					break;
-				}
-			}
 			itemLink = this._linkRepoTitle( entity.title );
 
 			// Count site links and abort in case the entity already is linked with a page on this wiki
 			for ( i in entity.sitelinks ) {
 				if ( entity.sitelinks[ i ].site ) {
 					siteLinkCount += 1;
-					if ( entity.sitelinks[ i ].site === mw.config.get( 'wbCurrentSite' ).globalSiteId ) {
+					if ( entity.sitelinks[ i ].site === this.options.globalSiteId ) {
 						// Abort as the entity already is linked with a page on this wiki
 						this._onError(
 							mw.message( 'wikibase-linkitem-alreadylinked', itemLink, entity.sitelinks[ i ].title ).parse()
@@ -451,8 +439,11 @@ $.widget( 'wikibase.linkitem', {
 
 			if ( siteLinkCount === 1 ) {
 				// The item we want to link with only has a single langlink so we don't have to ask for confirmation
-				this._linkWithEntity( entity );
+				this.linkPages.doLink()
+				.done( $.proxy( this._onSuccess, this ) )
+				.fail( $.proxy( this._onError, this ) );
 			} else {
+				this._removeSpinner();
 
 				this.$dialog
 					.empty()
@@ -470,176 +461,30 @@ $.widget( 'wikibase.linkitem', {
 					.off( 'click' )
 					.button( 'option', 'label', mw.msg( 'wikibase-linkitem-confirmitem-button' ) )
 					.click(
-						$.proxy(
-							function () {
-								// The user confirmed that this is the right item...
-								this._linkWithEntity( entity );
-							},
-							this
-						)
+						// The user confirmed that this is the right item...
+						$.proxy( function() {
+							this._showSpinner();
+							this.linkPages.doLink()
+							.done( $.proxy( this._onSuccess, this ) )
+							.fail( $.proxy( this._onError, this ) );
+						}, this )
 					);
 			}
 		} else {
-			// There is no item for the page the user wants to link
-			// Maybe there's one for the current page though (without other links then)
-
-			this.getEntityForCurrentPage()
-				.fail( $.proxy( this._onError, this ) )
-				.done( $.proxy( function( data ) {
-					if ( data.entities['-1'] ) {
-						// There's no item yet, create one
-
-						// JSON data for the new entity
-						var entityData = {
-							labels: {},
-							sitelinks: {}
-						}, title;
-
-						title = new mw.Title(
-							mw.config.get( 'wgTitle' ), mw.config.get( 'wgNamespaceNumber' )
-						);
-
-						// Label (page title)
-						entityData.labels[ mw.config.get( 'wgContentLanguage' ) ] = {
-							language: mw.config.get( 'wgContentLanguage' ),
-							value: title.getPrefixedText()
-						};
-						// Link this page
-						entityData.sitelinks[ mw.config.get( 'wbCurrentSite' ).globalSiteId ] = {
-							site: mw.config.get( 'wbCurrentSite' ).globalSiteId,
-							title: mw.config.get( 'wgPageName' )
-						};
-						// ...and the one given by the user
-						entityData.sitelinks[ this.targetSite ] = {
-							site: this.targetSite,
-							title: this.targetArticle
-						};
-						this.repoApi.createEntity( 'item', entityData )
-							.done( $.proxy( this._successfullyCreated, this ) )
-							.fail( $.proxy( this._onError, this ) );
-					} else {
-						// There already is an entity with the current page linked
-						// but it's empty (=only has the current page linked) cause this dialog isn't shown on pages with langlinks
-						var i, entity;
-
-						for ( i in data.entities ) {
-							if ( data.entities[ i ].title ) {
-								entity = data.entities[ i ];
-								break;
-							}
-						}
-
-						this.repoApi.setSitelink(
-							entity.id,
-							entity.lastrevid,
-							this.targetSite,
-							this.targetArticle
-						)
-						.done( $.proxy( this._successfullyLinked, this ) )
-						.fail( $.proxy( this._onError, this ) );
-					}
-				}, this ) );
+			this.linkPages.doLink()
+			.done( $.proxy( this._onSuccess, this ) )
+			.fail( $.proxy( this._onError, this ) );
 		}
 	},
 
-	/**
-	 * Links the current page with the given entity. If the current page yet is linked with an item we have to unlink it first.
-	 * This is only going to happen if the current page is linked with an item which only has the current item linked to prevent conflicts
-	 *
-	 * @param {object} entity
-	 */
-	_linkWithEntity: function( entity ) {
-		this._showSpinner();
-		this.getEntityForCurrentPage()
-			.fail( $.proxy( this._onError, this ) )
-			.done( $.proxy( function( data ) {
-
-				/**
-				 * Link the item with the current page
-				 */
-				var doLink = $.proxy( function() {
-					this.repoApi.setSitelink(
-						entity.id,
-						entity.lastrevid,
-						mw.config.get( 'wbCurrentSite' ).globalSiteId,
-						mw.config.get( 'wgPageName' )
-					)
-					.done( $.proxy( this._successfullyLinked, this ) )
-					.fail( $.proxy( this._onError, this ) );
-				}, this );
-
-				if ( data.entities['-1'] ) {
-					// Everything is ok
-					doLink();
-				} else {
-					// We have to unlink it first
-					var siteLinkCount = 0,
-						i, selfEntity;
-
-					for ( i in data.entities ) {
-						if ( data.entities[ i ].title ) {
-							selfEntity = data.entities[ i ];
-							break;
-						}
-					}
-					for ( i in selfEntity.sitelinks ) {
-						if ( selfEntity.sitelinks[ i ].site ) {
-							siteLinkCount += 1;
-						}
-					}
-					if ( siteLinkCount === 1 ) {
-						// The current page has an own item with no other links... unlink us
-						this.repoApi.removeSitelink( selfEntity.id, selfEntity.lastrevid, mw.config.get( 'wbCurrentSite' ).globalSiteId )
-							.done( $.proxy( doLink, this ) )
-							.fail( $.proxy( this._onError, this ) );
-					} else {
-						// The current page already is linked with an item which is linked with other pages... this probably some kind of edit conflict.
-						// Show an error and let the user purge the page
-						this.$goButton.wbtooltip( {
-							content: mw.msg( 'wikibase-linkitem-failure' )
-						} );
-
-						this._removeSpinner();
-						this.$goButton.data( 'wbtooltip' ).show();
-
-						// Replace the button with one asking to close the dialog and reload the current page
-						this.$goButton
-							.off( 'click' )
-							.click(
-								$.proxy( function() {
-									this._showSpinner();
-									window.location.href = mw.config.get( 'wgServer' ) + mw.config.get('wgScript' ) + '?title=' + encodeURIComponent( mw.config.get( 'wgPageName' ) ) + '&action=purge';
-								}, this )
-							)
-							.button( 'option', 'label', mw.msg( 'wikibase-linkitem-close' ) );
-					}
-				}
-			}, this ) );
-	},
-
-	/**
-	 * Called after an entity has succesfully been created.
-	 */
-	_successfullyCreated: function() {
-		this._onSuccess( 'create' );
-	},
-
-	/**
-	 * Called after an entity has succesfully been linked.
-	 */
-	_successfullyLinked: function() {
-		this._onSuccess( 'link' );
-	},
 
 	/**
 	 * Called after an entity has succesfully been linked or created. Replaces the dialog content with a useful
 	 * message linking the (new) item.
-	 *
-	 * @param {string} type ( create or link )
 	 */
-	_onSuccess: function( type ) {
+	_onSuccess: function() {
 		var mwApi = new mw.Api(),
-			itemUri = this._linkRepoTitle( 'Special:ItemByTitle/' + mw.config.get( 'wbCurrentSite' ).globalSiteId + '/' + mw.config.get( 'wgPageName' ) );
+			itemUri = this._linkRepoTitle( 'Special:ItemByTitle/' + this.options.globalSiteId + '/' + this.options.pageTitle );
 
 		this.$dialog
 			.empty()
@@ -651,8 +496,7 @@ $.widget( 'wikibase.linkitem', {
 			.append(
 				$( '<p>' )
 					.addClass( 'wbclient-linkItem-success-message' )
-					// Messages: wikibase-linkitem-success-create wikibase-linkitem-success-link
-					.html( mw.message( 'wikibase-linkitem-success-' + type, itemUri ).parse() )
+					.html( mw.message( 'wikibase-linkitem-success-link', itemUri ).parse() )
 			)
 			.append(
 				$( '<p>' )
@@ -674,7 +518,7 @@ $.widget( 'wikibase.linkitem', {
 		// Purge this page in the background... we shouldn't confuse the user with the newly added link(s) not being there
 		mwApi.post( {
 			action: 'purge',
-			titles: mw.config.get( 'wgPageName' )
+			titles: this.options.pageTitle
 		} );
 	},
 
@@ -698,15 +542,20 @@ $.widget( 'wikibase.linkitem', {
 			$elem = $( '#wbclient-linkItem-siteLinks' );
 		}
 
-		$elem.wbtooltip( { content: error } );
+		$elem.wbtooltip( {
+			content: error,
+			permanent: true
+		} );
 
 		this._removeSpinner();
 		$elem.data( 'wbtooltip' ).show();
 
 		// Remove the tooltip if the user clicks onto the dialog trying to correct the input
 		// Also remove the tooltip in case the dialog is getting closed
-		this.$dialog.on( 'dialogclose click', function() {
-			$elem.data( 'wbtooltip' ).destroy();
+		this.$dialog.one( 'dialogclose click', function() {
+			if ( $elem.data( 'wbtooltip' ) ) {
+				$elem.data( 'wbtooltip' ).destroy();
+			}
 		} );
 	},
 
@@ -714,7 +563,7 @@ $.widget( 'wikibase.linkitem', {
 	 * Let the user know that the site given is invalid
 	 */
 	_invalidSiteGiven: function() {
-		var $linkItemSite = $( '#wbclient-linkItem-Site' );
+		var $linkItemSite = $( '#wbclient-linkItem-site' );
 
 		$linkItemSite.wbtooltip( { content: mw.msg( 'wikibase-linkitem-invalidsite' ) } );
 
@@ -732,7 +581,7 @@ $.widget( 'wikibase.linkitem', {
 	 * @return {string}
 	 */
 	_linkRepoTitle: function( title ) {
-		return mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ).replace( /\$1/g, mw.util.wikiUrlencode( title ) );
+		return this.options.repoArticlePath.replace( /\$1/g, mw.util.wikiUrlencode( title ) );
 	}
 } );
 

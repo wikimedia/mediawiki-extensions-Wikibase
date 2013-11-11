@@ -38,6 +38,15 @@ return call_user_func( function() {
 				'mediawiki.notify'
 			),
 		),
+		'wikibase.client.linkPages' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.client.linkPages.js'
+			),
+			'dependencies' => array(
+				'wikibase.sites',
+				'wikibase.RepoApi',
+			),
+		),
 		'jquery.wikibase.linkitem' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.linkitem.js'
@@ -59,6 +68,7 @@ return call_user_func( function() {
 				'wikibase.sites',
 				'wikibase.RepoApi',
 				'wikibase.RepoApiError',
+				'wikibase.client.linkPages'
 			),
 			'messages' => array(
 				'wikibase-linkitem-alreadylinked',
