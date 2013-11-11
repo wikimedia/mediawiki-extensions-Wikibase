@@ -2,10 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DummyPropertyInfoStore;
-use Wikibase\EntityId;
-use Wikibase\Property;
-use Wikibase\Item;
 use Wikibase\PropertyInfoStore;
 
 /**
@@ -29,7 +27,7 @@ class DummyPropertyInfoStoreTest extends \MediaWikiTestCase {
 
 	public function testSetPropertyInfo() {
 		$store = $this->newDummyPropertyInfoStore();
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
+		$p23 = new PropertyId( 'P23' );
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 
 		// just check that there's no exception
@@ -39,7 +37,7 @@ class DummyPropertyInfoStoreTest extends \MediaWikiTestCase {
 
 	public function testGetPropertyInfo() {
 		$store = $this->newDummyPropertyInfoStore();
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
+		$p23 = new PropertyId( 'P23' );
 
 		$this->assertNull( $store->getPropertyInfo( $p23 ) );
 	}
@@ -52,7 +50,7 @@ class DummyPropertyInfoStoreTest extends \MediaWikiTestCase {
 
 	public function testRemovePropertyInfo() {
 		$store = $this->newDummyPropertyInfoStore();
-		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
+		$p23 = new PropertyId( 'P23' );
 
 		$this->assertFalse( $store->removePropertyInfo( $p23 ) );
 	}
