@@ -40,7 +40,7 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
-	 * @var \ApiMain
+	 * @var ApiMain
 	 */
 	protected $apiMain;
 
@@ -103,24 +103,6 @@ class ClaimModificationHelper {
 		$this->entityIdParser = $entityIdParser;
 		$this->claimGuidValidator = $claimGuidValidator;
 		$this->snakValidation = $snakValidation;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Claim $claim
-	 * @param string $key
-	 */
-	public function addClaimToApiResult( Claim $claim, $key = 'claim' ) {
-		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->apiMain->getResult()->getIsRawMode() );
-
-		$this->apiMain->getResult()->addValue(
-			null,
-			$key,
-			$serializer->getSerialized( $claim )
-		);
 	}
 
 	/**

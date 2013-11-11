@@ -290,7 +290,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				$expected['props'],
 				$expected['languages']
 			),
-			$entity
+			$entity,
+			false
 		);
 	}
 
