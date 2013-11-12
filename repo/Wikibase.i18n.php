@@ -179,10 +179,11 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-setsitelink-invalid-site' => 'The site id "$1" is unknown. Please use an existing site id, such as "enwiki".',
 	'wikibase-setsitelink-add-failed' => 'The site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'The site link could not be removed.',
+	'wikibase-setsitelink-not-itemid' => '"$1" is not a valid item id. Site links can only be set for items.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Language:',
 	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
-	'wikibase-setentity-invalid-id' => 'The ID "$1" is unknown to the system. Please use a valid entity ID.',
+	'wikibase-setentity-invalid-id' => 'The id "$1" is unknown to the system. Please use a valid entity id.',
 	'special-dispatchstats' => 'Change dispatch statistics',
 	'wikibase-dispatchstats-intro' => 'This page provides statistics about dispatching changes to the clients.
 A client wiki is notified of a change on {{SITENAME}} once the change has been dispatched on that wiki, and the job queue on that wiki has processed that notification.
@@ -863,6 +864,10 @@ Parameters:
 * $1 - the invalid id',
 	'wikibase-setsitelink-add-failed' => 'Error message when the site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'Error message when the site link could not be removed.',
+	'wikibase-setsitelink-not-itemid' => 'Error message when an entity id, other than item id, is entered. The message advises users that the id is invalid and only items have site links.
+
+Parameters:
+* $1 - the invalid id',
 	'wikibase-setentity-id' => 'Label for the input field to select the ID of the entity.
 {{Identical|ID}}',
 	'wikibase-setentity-language' => 'Label for the input field to select the language the label should be set in.
