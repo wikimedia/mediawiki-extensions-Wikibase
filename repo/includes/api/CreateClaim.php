@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Claims;
@@ -42,6 +43,12 @@ class CreateClaim extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+		if( !$propertyId instanceof PropertyId ){
+			$this->dieUsage(
+				$propertyId->getSerialization() . ' does not appear to be a property ID',
+				'param-illegal'
+			);
+		}
 
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
@@ -97,7 +104,6 @@ class CreateClaim extends ModifyClaim {
 	public function getPossibleErrors() {
 		return array_merge(
 			parent::getPossibleErrors(),
-			$this->claimModificationHelper->getPossibleErrors(),
 			array(
 				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
 				array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
