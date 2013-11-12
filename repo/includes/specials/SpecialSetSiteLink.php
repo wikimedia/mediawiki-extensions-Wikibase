@@ -3,11 +3,16 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use InvalidArgumentException;
 use Sites;
+use SpecialPageException;
 use Status;
 use Wikibase\EntityContent;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
 
 /**
@@ -73,6 +78,22 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		// title
 		$this->page = $request->getVal( 'page' );
+	}
+
+	/**
+	 * @see SpecialModifyEntity::parseEntityId()
+	 */
+	protected function parseEntityId( $rawId ) {
+		try {
+			return new ItemId( $rawId );
+		} catch ( InvalidArgumentException $ex ) {
+			throw new SpecialPageException(
+				'wikibase-setsitelink-not-itemid',
+				array( $rawId ),
+				$ex->getMessage(),
+				$ex
+			);
+		}
 	}
 
 	/**
