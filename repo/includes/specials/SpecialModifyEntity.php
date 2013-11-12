@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use UserBlockedError;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EditEntity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
@@ -112,23 +114,47 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
 		// Get id
-		$rawId = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : '' );
-		$id = EntityId::newFromPrefixedId( $rawId );
+		$rawId = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
+		$id = $rawId ? $this->parseEntityId( $rawId ) : null;
 
-		if ( $id === null ) {
-			$this->entityContent = null;
-		}
-		else {
-			$this->entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $id );
+		if ( $id !== null ) {
+			$entityContent = $this->loadEntityContent( $id );
+
+			if ( $entityContent === null ) {
+				$this->showErrorHTML( $this->msg( 'wikibase-setentity-unknown-id', $rawId )->parse() );
+			} else {
+				$this->entityContent = $entityContent;
+			}
 		}
 
-		if ( $rawId === '' ) {
-			$rawId = null;
-		}
-
-		if ( $this->entityContent === null && $rawId !== null ) {
+		if ( $rawId && $id === null ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-setentity-invalid-id', $rawId )->parse() );
 		}
+	}
+
+	/**
+	 * @param string $rawId
+	 *
+	 * @return EntityId
+	 */
+	protected function parseEntityId( $rawId ) {
+		$idParser = new BasicEntityIdParser();
+
+		try {
+			$id = $idParser->parse( $rawId );
+		} catch ( EntityIdParsingException $ex ) {
+			$this->showErrorHtml( $this->msg( 'wikibase-setentity-invalid-id', $rawId )->parse() );
+			return null;
+		}
+
+		return $id;
+	}
+
+	/**
+	 * @param EntityId $id
+	 */
+	protected function loadEntityContent( EntityId $id ) {
+		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $id );
 	}
 
 	/**
