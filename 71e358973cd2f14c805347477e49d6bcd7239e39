@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_733f50d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T23:01:25Z",
+      "side": 1,
+      "message": "This line is to long, please use a short summary as headline and explain things in detail below.",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_935f6c3d",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T23:01:25Z",
+      "side": 1,
+      "message": "You could do var $siteSelector \u003d $( \u0027#wb-entitieswithoutpage-language\u0027 ); here and reuse that in the function below.",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_33679829",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T23:01:25Z",
+      "side": 1,
+      "message": "please remove 2 indentation levels here (2 tabs)",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_93768cd5",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T23:01:25Z",
+      "side": 1,
+      "message": "please remove 2 indentation levels here (2 tabs)",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
