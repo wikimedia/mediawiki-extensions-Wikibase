@@ -8,6 +8,9 @@ use Status;
 use Wikibase\EntityContent;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
 
 /**
@@ -73,6 +76,27 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		// title
 		$this->page = $request->getVal( 'page' );
+	}
+
+	/**
+	 * @see SpecialModifyEntity::getId()
+	 */
+	protected function getId( $rawId ) {
+		$idParser = new BasicEntityIdParser();
+
+		try {
+			$id = $idParser->parse( $rawId );
+		} catch ( EntityIdParsingException $ex ) {
+			$this->showErrorHtml( $this->msg( 'wikibase-setentity-invalid-id', $rawId )->parse() );
+		}
+
+		if ( $id instanceof ItemId ) {
+			return $id;
+		}
+
+		$this->showErrorHtml( $this->msg( 'wikibase-setsitelink-not-itemid', $rawId )->parse() );
+
+		return null;
 	}
 
 	/**
