@@ -74,25 +74,25 @@ abstract class EntityLookupTest extends EntityTestCase {
 	public static function provideGetEntity() {
 		$cases = array(
 			array( // #0: any revision
-				'q42', 0, true,
+				new ItemId( 'q42' ), 0, true,
 			),
 			array( // #1: first revision
-				'q42', 11, true,
+				new ItemId( 'q42' ), 11, true,
 			),
 			array( // #2: second revision
-				'q42', 12, true,
+				new ItemId( 'q42' ), 12, true,
 			),
 			array( // #3: bad revision
-				'q42', 600000, false, 'Wikibase\StorageException',
+				new ItemId( 'q42' ), 600000, false, 'Wikibase\StorageException',
 			),
 			array( // #4: wrong type
-				'q753', 0, false,
+				new ItemId( 'q753' ), 0, false,
 			),
 			array( // #5: bad revision
-				'p753', 23, false, 'Wikibase\StorageException',
+				new PropertyId( 'p753' ), 23, false, 'Wikibase\StorageException',
 			),
 			array( // #6: some revision
-				'p753', 0, true,
+				new PropertyId( 'p753' ), 0, true,
 			),
 		);
 
@@ -102,7 +102,7 @@ abstract class EntityLookupTest extends EntityTestCase {
 	/**
 	 * @dataProvider provideGetEntity
 	 *
-	 * @param string|EntityId $id       The entity to get
+	 * @param EntityId $id    The entity to get
 	 * @param int             $revision The revision to get (or 0)
 	 * @param bool            $shouldExist
 	 * @param string|null     $expectException
@@ -110,10 +110,6 @@ abstract class EntityLookupTest extends EntityTestCase {
 	public function testGetEntity( $id, $revision, $shouldExist, $expectException = null ) {
 		if ( $expectException !== null ) {
 			$this->setExpectedException( $expectException );
-		}
-
-		if ( is_string( $id ) ) {
-			$id = EntityId::newFromPrefixedId( $id );
 		}
 
 		$revision = $this->resolveLogicalRevision( $revision );
