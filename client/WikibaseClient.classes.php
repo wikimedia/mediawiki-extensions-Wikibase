@@ -12,8 +12,6 @@ return call_user_func( function() {
 		// Autoloading
 		'Wikibase\ClientHooks' => 'WikibaseClient.hooks.php',
 
-		'Wikibase\CachedEntity' => 'includes/CachedEntity.php',
-		'Wikibase\EntityCacheUpdater' => 'includes/EntityCacheUpdater.php',
 		'Wikibase\EntityIdPropertyUpdater' => 'includes/EntityIdPropertyUpdater.php',
 		'Wikibase\InterwikiSorter' => 'includes/InterwikiSorter.php',
 		'Wikibase\LangLinkHandler' => 'includes/LangLinkHandler.php',
@@ -55,12 +53,9 @@ return call_user_func( function() {
 
 		// includes/store
 		'Wikibase\ClientStore' => 'includes/store/ClientStore.php',
-		'Wikibase\EntityCache' => 'includes/store/EntityCache.php',
 
 		// includes/store/sql
-		'Wikibase\CachingSqlStore' => 'includes/store/sql/CachingSqlStore.php',
 		'Wikibase\DirectSqlStore' => 'includes/store/sql/DirectSqlStore.php',
-		'Wikibase\EntityCacheTable' => 'includes/store/sql/EntityCacheTable.php',
 
 		// test
 		'Wikibase\Test\MockPageUpdater' => 'tests/phpunit/MockPageUpdater.php'

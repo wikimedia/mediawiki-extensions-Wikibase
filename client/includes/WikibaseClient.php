@@ -280,7 +280,7 @@ final class WikibaseClient {
 			if ( $repoDatabase !== null ) {
 				$store = 'DirectSqlStore';
 			} else {
-				$store = 'CachingSqlStore';
+				throw new \Exception( '$repoDatabase cannot be null' );
 			}
 		}
 

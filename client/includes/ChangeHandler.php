@@ -163,11 +163,7 @@ class ChangeHandler {
 
 		$this->injectRC = Settings::get( 'injectRecentChanges' );
 
-		if ( Settings::get( 'repoDatabase' ) === null ) {
-			$this->mirrorUpdater = new EntityCacheUpdater( new EntityCacheTable() );
-		} else {
-			$this->mirrorUpdater = null;
-		}
+		$this->mirrorUpdater = null;
 
 		$this->dataTransclusionAllowed = Settings::get( 'allowDataTransclusion' );
 		$this->actionMask = 0xFFFF; //TODO: use changeHanderActions setting

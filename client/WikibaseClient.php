@@ -114,7 +114,6 @@ call_user_func( function() {
 	$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 	$wgWBClientStores = array();
-	$wgWBClientStores['CachingSqlStore'] = 'Wikibase\CachingSqlStore';
 	$wgWBClientStores['DirectSqlStore'] = 'Wikibase\DirectSqlStore';
 
 	$wgWBClientSettings = array_merge(

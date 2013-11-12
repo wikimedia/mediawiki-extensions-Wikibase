@@ -33,9 +33,7 @@ use ObjectCache;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- *
- * @todo: share code with CachingSqlStore
- * */
+ */
 class DirectSqlStore implements ClientStore {
 
 	/**
