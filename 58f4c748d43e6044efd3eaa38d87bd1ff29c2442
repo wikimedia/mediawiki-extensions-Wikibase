@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_feb22a47",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-11-12T15:58:12Z",
+      "side": 1,
+      "message": "What if the array is a table like array( 0 \u003d\u003e \"0\", 2 \u003d\u003e \"2\" )?\narray_key_exists( 0, $value ) will return true but it isn\u0027t a simple array  (I don\u0027t think it\u0027s a problem here case but I\u0027m not sure).",
+      "revId": "58f4c748d43e6044efd3eaa38d87bd1ff29c2442",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
