@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_c07031dc",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:33:23Z",
+      "side": 1,
+      "message": "Invalid language? Its about the site thing here",
+      "revId": "3f90ce86ecaaf4178d0d75409c5e5a604de9f80e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a075f5cb",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:33:23Z",
+      "side": 1,
+      "message": "I see a big scary method becoming bigger and scarier. Please split at least the parts you are touching up appropriately.\n\nTwo things that should definitely go in their own methods are the if predicates. I want to see\n\nif ( $this-\u003ehasInvalidSite() )\n\nand\n\nif ( $this-\u003ehasInvalidLanguage() )",
+      "revId": "3f90ce86ecaaf4178d0d75409c5e5a604de9f80e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e07feda5",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:33:23Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d \u0027\u0027",
+      "revId": "3f90ce86ecaaf4178d0d75409c5e5a604de9f80e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_20c025e4",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:33:23Z",
+      "side": 1,
+      "message": "One arg per line",
+      "revId": "3f90ce86ecaaf4178d0d75409c5e5a604de9f80e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_204ae584",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:33:23Z",
+      "side": 1,
+      "message": "Please skip the @file and @ingroup as per https://www.mediawiki.org/wiki/Wikibase/Coding_conventions",
+      "revId": "3f90ce86ecaaf4178d0d75409c5e5a604de9f80e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
