@@ -301,7 +301,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 
 		foreach( $missingEntities as $missingDetails ){
-			$resultBuilder->addMissingEntity( $missingDetails['siteId'], $missingDetails['title'] );
+			$resultBuilder->addMissingEntity( $missingDetails );
 		}
 
 		$this->assertEquals( $expected, $result->getData() );
@@ -311,7 +311,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array(
-					array( 'siteId' => 'enwiki', 'title' => 'Berlin'),
+					array( 'site' => 'enwiki', 'title' => 'Berlin'),
 				),
 				array(
 					'entities' => array(
@@ -326,8 +326,8 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 			),
 			array(
 				array(
-					array( 'siteId' => 'enwiki', 'title' => 'Berlin'),
-					array( 'siteId' => 'dewiki', 'title' => 'Foo'),
+					array( 'site' => 'enwiki', 'title' => 'Berlin'),
+					array( 'site' => 'dewiki', 'title' => 'Foo'),
 				),
 				array(
 					'entities' => array(

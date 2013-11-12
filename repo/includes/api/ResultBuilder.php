@@ -217,15 +217,14 @@ class ResultBuilder {
 
 	/**
 	 * Add an entry for a missing entity...
-	 * @param string $siteId
-	 * @param string $title
+	 * @param array $missingDetails array containing key value pair missing details
 	 */
-	public function addMissingEntity( $siteId, $title ){
+	public function addMissingEntity( $missingDetails ){
 		//@todo fix Bug 45509 (useless missing attribute in xml...)
 		$this->getResult()->addValue(
 			'entities',
-			(string)($this->missingEntityCounter),
-			array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
+			(string)( $this->missingEntityCounter ),
+			array_merge( $missingDetails, array( 'missing' => "" ) )
 		);
 		$this->missingEntityCounter--;
 	}

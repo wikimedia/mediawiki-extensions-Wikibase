@@ -3,20 +3,19 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use SiteSQLStore;
 use MWException;
 use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityContent;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StringNormalizer;
 use Wikibase\Utils;
 use Wikibase\StoreFactory;
-use Wikibase\Item;
-use Wikibase\EntityContentFactory;
-use Wikibase\LanguageFallbackChainFactory;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -27,51 +26,47 @@ use Wikibase\LanguageFallbackChainFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  * @author Michał Łazowik
+ * @author Adam Shorland
  */
 class GetEntities extends ApiWikibase {
 
 	/**
-	 * @var \Wikibase\StringNormalizer
+	 * @var StringNormalizer
 	 */
 	protected $stringNormalizer;
 
 	/**
-	 * @var \Wikibase\Lib\EntityIdParser
-	 */
-	protected $entityIdParser;
-
-	/**
-	 * @var \Wikibase\LanguageFallbackChainFactory
+	 * @var LanguageFallbackChainFactory
 	 */
 	protected $languageFallbackChainFactory;
 
-	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
+	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
-		$this->entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
 	}
 
 	/**
-	 * @see \ApiBase::execute()
+	 * @see ApiBase::execute()
 	 */
 	public function execute() {
 		wfProfileIn( __METHOD__ );
-
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages', 'param-missing' );
+			$this->dieUsage(
+				'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages',
+				'param-missing'
+			);
 		}
 
-		$params['ids'] = $this->getEntityIdsFromParams( $params );
-
-		foreach ( $params['ids'] as $entityId ) {
+		foreach ( $this->getEntityIdsFromParams( $params ) as $entityId ) {
 			$this->handleEntity( $entityId, $params );
 		}
 
+		//todo remove once result builder is used...
 		if ( $this->getResult()->getIsRawMode() ) {
 			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 		}
@@ -82,37 +77,71 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * Get array of entities from api request params
+	 * Get a unique array of EntityIds from api request params
 	 *
 	 * @param array $params
 	 *
-	 * @return array
+	 * @return EntityId[]
 	 */
 	protected function getEntityIdsFromParams( array $params ) {
-		$entityIds = isset( $params['ids'] ) ? $params['ids'] : array();
-
-		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
-			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
-			$siteStore = SiteSQLStore::newInstance();
-			$itemByTitleHelper = new ItemByTitleHelper( $this->resultBuilder, $siteLinkCache, $siteStore, $this->stringNormalizer );
-			$otherIDs = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
-			$entityIds = array_merge( $entityIds, $otherIDs );
-		}
-
-		return $this->uniqueEntities( $entityIds );
+		$fromIds = $this->getEntityIdsFromIdParam( $params );
+		$fromSiteTitleCombinations = $this->getItemIdsFromSiteTitleParams( $params );
+		$ids = array_merge( $fromIds, $fromSiteTitleCombinations );
+		return array_unique( $ids );
 	}
 
 	/**
-	 * Checks whether props contain sitelinks indirectly
-	 *
-	 * @since 0.5
-	 *
-	 * @param array $props
-	 *
-	 * @return bool
+	 * @param array $params
+	 * @return EntityId[]
 	 */
-	protected function hasImpliedSiteLinksProp( $props ) {
-		return in_array( 'sitelinks/urls', $props );
+	private function getEntityIdsFromIdParam( $params ) {
+		$ids = array();
+		if( isset( $params['ids'] ) ) {
+			$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+			foreach( $params['ids'] as $id ) {
+				try {
+					$ids[] = $entityIdParser->parse( $id );
+				} catch( ParseException $e ) {
+					wfProfileOut( __METHOD__ );
+					$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
+				}
+			}
+		}
+		return $ids;
+	}
+
+	/**
+	 * @param array $params
+	 * @return EntityId[]
+	 */
+	private function getItemIdsFromSiteTitleParams( $params ) {
+		$ids = array();
+		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
+			$itemByTitleHelper = $this->getItemByTitleHelper();
+			list( $ids, $missingItems ) =  $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
+			$this->addMissingItemstoResult( $missingItems );
+		}
+		return $ids;
+	}
+
+	private function getItemByTitleHelper() {
+		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
+		$siteStore = SiteSQLStore::newInstance();
+		return new ItemByTitleHelper(
+			$this->resultBuilder,
+			$siteLinkCache,
+			$siteStore,
+			$this->stringNormalizer
+		);
+	}
+
+	/**
+	 * @param array $missingItems Array of arrays, Each internal array has a key 'site' and 'title'
+	 */
+	private function addMissingItemstoResult( $missingItems ){
+		foreach( $missingItems as $missingItem ) {
+			$this->resultBuilder->addMissingEntity( $missingItem );
+		}
 	}
 
 	/**
@@ -125,7 +154,7 @@ class GetEntities extends ApiWikibase {
 	 * @return array
 	 */
 	protected function getPropsFromParams( $params ) {
-		if ( $this->hasImpliedSiteLinksProp( $params['props'] ) ) {
+		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$params['props'][] = 'sitelinks';
 		}
 
@@ -133,137 +162,86 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * Makes an arry of entity ids unique after applaying normalization.
-	 *
-	 * @param array $entityIds
-	 *
-	 * @return array
-	 */
-	protected function uniqueEntities( $entityIds ) {
-		$ids = array();
-		foreach ( $entityIds as $entityId ) {
-			try {
-				$id = $this->entityIdParser->parse( $entityId );
-				$ids[] = $id->getPrefixedId();
-			}
-			catch ( ParseException $parseException ) {
-				// This will error below
-				$ids[] = null;
-			}
-		}
-		return array_unique( $ids );
-	}
-
-	/**
 	 * Fetches the entity with provided id and adds its serialization to the output.
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $id
+	 * @param EntityId $entityId
 	 * @param array $params
 	 *
 	 * @throws MWException
 	 */
-	protected function handleEntity( $id, array $params ) {
+	protected function handleEntity( $entityId, array $params ) {
 		wfProfileIn( __METHOD__ );
-
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-
-		$res = $this->getResult();
-
+		$result = $this->getResult();
 		$props = $this->getPropsFromParams( $params );
+		$entityPath = array( 'entities', $entityId->getSerialization() );
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		try {
-			$entityId = $entityIdParser->parse( $id );
-		} catch( ParseException $e ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
+		$entityContent = $entityContentFactory->getFromId( $entityId );
+		if ( is_null( $entityContent ) ) {
+			$this->resultBuilder->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
+			return;
 		}
 
-		// key should be numeric to get the correct behavior
-		// note that this setting depends upon "setIndexedTagName_internal"
-		//FIXME: if we get different kinds of entities at once, $entityId->getNumericId() may not be unique.
-		$entityPath = array(
-			'entities',
-			!$this->getResult()->getIsRawMode() ? $entityIdFormatter->format( $entityId ) : $entityId->getNumericId()
-		);
-
-		// later we do a getContent but only if props are defined
-		if ( $params['props'] !== array() ) {
-			$page = $entityContentFactory->getWikiPageForId( $entityId );
-
-			if ( $page->exists() ) {
-
-				// as long as getWikiPageForId only returns ids for legal items this holds
-				/**
-				 * @var $entityContent EntityContent
-				 */
-				$entityContent = $page->getContent();
-
-				// this should not happen unless a page is not what we assume it to be
-				// that is, we want this to be a little more solid if something ges wrong
-				if ( is_null( $entityContent ) ) {
-					$res->addValue( $entityPath, 'id', $entityIdFormatter->format( $entityId ) );
-					$res->addValue( $entityPath, 'illegal', "" );
-					return;
-				}
-
-				// default stuff to add that comes from the title/page/revision
-				if ( in_array( 'info', $props ) ) {
-					$res->addValue( $entityPath, 'pageid', intval( $page->getId() ) );
-					$title = $page->getTitle();
-					$res->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
-					$res->addValue( $entityPath, 'title', $title->getPrefixedText() );
-					$revision = $page->getRevision();
-
-					if ( $revision !== null ) {
-						$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
-						$res->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
-					}
-				}
-
-				$entity = $entityContent->getEntity();
-
-				// TODO: inject id formatter
-				$options = new SerializationOptions();
-				if ( $params['languagefallback'] ) {
-					$languages = array();
-					foreach ( $params['languages'] as $languageCode ) {
-						// $languageCode is already filtered as valid ones
-						$languages[$languageCode] = $this->languageFallbackChainFactory
-							->newFromContextAndLanguageCode( $this->getContext(), $languageCode );
-					}
-				} else {
-					$languages = $params['languages'];
-				}
-				$options->setLanguages( $languages );
-				$options->setOption( EntitySerializer::OPT_SORT_ORDER, $params['dir'] );
-				$options->setOption( EntitySerializer::OPT_PARTS, $props );
-				$options->setIndexTags( $this->getResult()->getIsRawMode() );
-
-				$serializerFactory = new SerializerFactory();
-				$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );
-
-				$entitySerialization = $entitySerializer->getSerialized( $entity );
-
-				foreach ( $entitySerialization as $key => $value ) {
-					$res->addValue( $entityPath, $key, $value );
-				}
-			}
-			else {
-				$res->addValue( $entityPath, 'missing', "" );
-			}
+		//if there are no props defined only return type and id..
+		if ( $params['props'] === array() ) {
+			$result->addValue( $entityPath, 'id', $entityId->getSerialization() );
+			$result->addValue( $entityPath, 'type', $entityId->getEntityType() );
 		} else {
-			$res->addValue( $entityPath, 'id', $entityIdFormatter->format( $entityId ) );
-			$res->addValue( $entityPath, 'type', $entityId->getEntityType() );
+			if ( in_array( 'info', $props ) ) {
+				$title = $entityContent->getTitle();
+				$result->addValue( $entityPath, 'pageid', $title->getArticleID() );
+				$result->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
+				$result->addValue( $entityPath, 'title', $title->getPrefixedText() );
+
+				$revision = $entityContent->getWikiPage()->getRevision();
+				if ( $revision !== null ) {
+					$result->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
+					$result->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+				}
+			}
+
+			$serializerFactory = new SerializerFactory();
+			$entity = $entityContent->getEntity();
+			$options = $this->getSerializationOptions( $params, $props );
+			$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );
+			$entitySerialization = $entitySerializer->getSerialized( $entity );
+
+			foreach ( $entitySerialization as $key => $value ) {
+				$result->addValue( $entityPath, $key, $value );
+			}
 		}
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams()
+	 * @param array $params
+	 * @param array $props
+	 *
+	 * @return SerializationOptions
+	 */
+	private function getSerializationOptions( $params, $props ){
+		$options = new SerializationOptions();
+		if ( $params['languagefallback'] ) {
+			$languages = array();
+			foreach ( $params['languages'] as $languageCode ) {
+				// $languageCode is already filtered as valid ones
+				$languages[$languageCode] = $this->languageFallbackChainFactory
+					->newFromContextAndLanguageCode( $this->getContext(), $languageCode );
+			}
+		} else {
+			$languages = $params['languages'];
+		}
+		$options->setLanguages( $languages );
+		$options->setOption( EntitySerializer::OPT_SORT_ORDER, $params['dir'] );
+		$options->setOption( EntitySerializer::OPT_PARTS, $props );
+		$options->setIndexTags( $this->getResult()->getIsRawMode() );
+		return $options;
+	}
+
+	/**
+	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
@@ -354,7 +332,7 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getDescription()
+	 * @see ApiBase::getDescription()
 	 */
 	public function getDescription() {
 		return array(
@@ -363,7 +341,7 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
+	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
@@ -377,7 +355,7 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getExamples()
+	 * @see ApiBase::getExamples()
 	 */
 	protected function getExamples() {
 		return array(
