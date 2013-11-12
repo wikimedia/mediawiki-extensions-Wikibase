@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_40d7e149",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_80a63910",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_e0b7ed36",
         "filename": "repo/includes/specials/SpecialModifyEntity.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-12T11:07:56Z",
       "side": 1,
       "message": "Several error cases lumped together here.",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_80d1d955",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:41:10Z",
+      "side": 1,
+      "message": "make nicer (this and a lot of stuff -- e.g. error handling -- in these special pages) should be done in a follow up",
+      "parentUuid": "291c1151_e0b7ed36",
       "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_a0c895a8",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_a096d590",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_209905ce",
         "filename": "repo/includes/specials/SpecialModifyEntity.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-12T11:07:56Z",
       "side": 1,
       "message": "Can\u0027t we just throw an exception here? Something that will be shown in a \"pretty\" way? Maybe we could (ab)use ErrorPageError for doing that.",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a0497535",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:41:10Z",
+      "side": 1,
+      "message": "not in the scope here, but agree good idea.\n\nerror handling should be improved over all in the special pages but in another patch",
+      "parentUuid": "291c1151_209905ce",
       "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
