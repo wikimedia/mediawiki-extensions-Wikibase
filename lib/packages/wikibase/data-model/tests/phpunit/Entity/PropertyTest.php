@@ -2,19 +2,12 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Claim;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Property;
 
 /**
  * @covers Wikibase\Property
  * @covers Wikibase\Entity
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseProperty
@@ -72,6 +65,33 @@ class PropertyTest extends EntityTest {
 			$property->setDataTypeId( $typeId );
 			$this->assertEquals( $typeId, $property->getDataTypeId() );
 		}
+	}
+
+	public function testWhenIdSetWithNumber_GetIdReturnsPropertyId() {
+		$property = Property::newFromType( 'string' );
+		$property->setId( 42 );
+
+		$this->assertHasCorrectIdType( $property );
+	}
+
+	protected function assertHasCorrectIdType( Property $property ) {
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyId', $property->getId() );
+	}
+
+	public function testWhenIdSetWithEntityId_GetIdReturnsPropertyId() {
+		$property = Property::newFromType( 'string' );
+		$property->setId( new EntityId( 'property', 42 ) );
+
+		$this->assertHasCorrectIdType( $property );
+	}
+
+	public function testWhenIdSetViaLegacyFormat_GetIdReturnsPropertyId() {
+		$property = Property::newFromArray( array(
+			'datatype' => 'string',
+			'entity' => array( 'property', 42 ),
+		) );
+
+		$this->assertHasCorrectIdType( $property );
 	}
 
 }
