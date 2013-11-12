@@ -55,9 +55,9 @@ class DumpJson extends Maintenance {
 		$this->mDescription = 'Generate a JSON dump from entities in the repository.';
 
 		$this->addOption( 'list-file', "A file containing one entity ID per line.", false, true );
-		$this->addOption( 'entity-type', "Only dump this kind of entitiy, e.g. `item` or `property`.", false, true );
+		$this->addOption( 'entity-type', "Only dump this kind of entity, e.g. `item` or `property`.", false, true );
 		$this->addOption( 'sharding-factor', "The number of shards (must be >= 1)", false, true );
-		$this->addOption( 'shard', "A the shard to output (must be lett than the sharding-factor) ", false, true );
+		$this->addOption( 'shard', "The shard to output (must be less than the sharding-factor) ", false, true );
 		$this->addOption( 'output', "Output file (default is stdout) ", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 	}
