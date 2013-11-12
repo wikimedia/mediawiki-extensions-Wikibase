@@ -16,6 +16,24 @@
       "revId": "7987380a5455272e638670045d3f132e4853359e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_7e5b9af3",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 0,
+      "message": "Good catch, done (couldn\u0027t find the usage in the qqq though)",
+      "parentUuid": "291c1151_e0efede7",
+      "revId": "7987380a5455272e638670045d3f132e4853359e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

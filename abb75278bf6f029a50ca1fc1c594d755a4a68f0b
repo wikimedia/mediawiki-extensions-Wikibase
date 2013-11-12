@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_dec80e78",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_8089d926",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_40e281d9",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "The destroy mechanism should receive some upgrade. You probably want to delete the linkPages object and $goButton is not removed as well. You could overwrite jQuery.Widget\u0027s native destroy function and call the parent destroy method there. The _onDialogClose() function is hard to spot when looking for the destroy routine. For a clean tear-down, you probably want to also instantiate the RepoApi in _create().",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_5e6b3ef2",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_40e281d9",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_5379747e",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_e390d796",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_c06af11a",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "Parameter name does not match the function documentation above.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_be927254",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_c06af11a",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_dea1eea7",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_e079adf4",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_408fe12a",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "I recommend not using $.proxy since it tends to create additional indentation and complexity.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_febf8aa4",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_408fe12a",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_7e89da23",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Probably you\u0027re right, I\u0027ve removed it",
+      "parentUuid": "291c1151_0075e9f6",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_401fe168",
         "filename": "client/resources/wikibase.client.linkPages.js",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "You do not seem to need the mediaWiki dependency here (which is great).",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_be2272ba",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done, I didn\u0027t even notice \\o/",
+      "parentUuid": "291c1151_401fe168",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_1e1c6674",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_60e93db9",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_a0a1759a",
         "filename": "client/resources/wikibase.client.linkPages.js",
         "patchSetId": 2
@@ -166,6 +328,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "The attributes should be documented in the prototype extension below (like repoApi) to keep the constructor slim. The constructor should be used for assigning only. Since you are using the underscore convention to mark functions private (which is a good thing), you should apply that convention to the variables as well.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_194f206d",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_a0a1759a",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_39521c13",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_c0ce715a",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_a06fb52a",
         "filename": "client/resources/wikibase.client.linkPages.js",
         "patchSetId": 2
@@ -200,6 +398,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "Why is there a lang parameter? It is not used by any call which actually results in the parameter being undefined which is not rendered in the function documentation. If you want to mark the parameter optional, you may want to use square brackets around the parameter name: {string|Object} [lang].",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_5e16de55",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done, removed the param",
+      "parentUuid": "291c1151_a06fb52a",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_99df9065",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done, I\u0027m indeed working with plain api responses here.",
+      "parentUuid": "291c1151_207bc5f3",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_a0fc156e",
         "filename": "client/resources/wikibase.client.linkPages.js",
         "patchSetId": 2
@@ -234,6 +468,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "\"data\" is a quite generic parameter name.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_3985bc5b",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "changed to apiResult",
+      "parentUuid": "291c1151_a0fc156e",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_99115055",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_c0af5129",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_402c4102",
         "filename": "client/resources/wikibase.client.linkPages.js",
         "patchSetId": 2
@@ -268,6 +538,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "\"doLink\" sounds a bit strange. Maybe this function should be called \"linkPages\" and the constructor should receive a name more resembling its nature as constructor.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_143527a6",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_402c4102",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_f34d003d",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_004329b3",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_e047edbc",
         "filename": "client/resources/wikibase.client.linkPages.js",
         "patchSetId": 2
@@ -302,6 +608,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "Documentation does not match the actual parameters.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_54a31f03",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_e047edbc",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_13ec5c2a",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_c0d4b1bb",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_c038313b",
         "filename": "client/resources/wikibase.client.linkPages.js",
         "patchSetId": 2
@@ -336,6 +678,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "Superfluous comma.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_d35004d7",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_c038313b",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -359,6 +719,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_fe678ab7",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_234f4f6d",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_23782f8d",
         "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
         "patchSetId": 2
@@ -376,6 +754,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_7e147af3",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_23782f8d",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_0006c921",
         "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
         "patchSetId": 2
@@ -387,6 +783,24 @@
       "writtenOn": "2013-11-12T14:01:21Z",
       "side": 1,
       "message": "\"ignoreconflicts\" should probably use camel case as well.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_5e117e03",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T22:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_0006c921",
       "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
