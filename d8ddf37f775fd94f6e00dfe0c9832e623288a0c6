@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_b36d4834",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T22:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_e358d755",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_8340035b",
         "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-12T15:17:40Z",
       "side": 1,
       "message": "Please do not declare fields dynamically and use camel case.",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b938cc39",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T22:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_8340035b",
       "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_f9d8841c",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T22:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_a3109f57",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_231caf74",
         "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
         "patchSetId": 7
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_b300e838",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T22:51:11Z",
+      "side": 1,
+      "message": "I think I dont really get this",
+      "parentUuid": "291c1151_231caf74",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_431feb68",
         "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
         "patchSetId": 7
@@ -81,6 +153,24 @@
       "writtenOn": "2013-11-12T15:17:40Z",
       "side": 1,
       "message": "The indentations look a bit odd. Closing parentheses should be on the same indentation level like the corresponding opening ones.",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_390bfc90",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T22:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_431feb68",
       "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
