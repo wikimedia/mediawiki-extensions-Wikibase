@@ -1,37 +1,19 @@
 <?php
 
 namespace Wikibase;
+
 use MWException;
+use ParserOutput;
 use SiteStore;
 use Sites;
 use Site;
 use Title;
-use ParserOutput;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Handles language links.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseClient
- * @ingroup RefuctoredCode
  *
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>
@@ -40,40 +22,57 @@ use Wikibase\DataModel\SimpleSiteLink;
  */
 class LangLinkHandler {
 
+	/**
+	 * @var string
+	 */
 	protected $siteId;
+
+	/**
+	 * @var array
+	 */
 	protected $namespaces;
+
+	/**
+	 * @var array
+	 */
 	protected $excludeNamespaces;
 
 	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinksLookup;
+	protected $siteLinkLookup;
 
 	/**
 	 * @var SiteStore
 	 */
 	protected $sites;
 
+	/**
+	 * @var Site[]
+	 */
 	private $sitesByNavigationId = null;
 
+	/**
+	 * @var string
+	 */
 	private $siteGroup;
 
 	/**
 	 * Constructs a new LangLinkHandler using the given service instances.
 	 *
-	 * @param string         $siteId            The global site ID for the local wiki
-	 * @param array          $namespaces        The list of namespaces for which language links should be handled.
-	 * @param array          $excludeNamespaces List of namespaces to exclude language links
-	 * @param SiteLinkLookup $siteLinksLookup   A site link lookup service
+	 * @param string $siteId            The global site ID for the local wiki
+	 * @param array $namespaces        The list of namespaces for which language links should be handled.
+	 * @param array $excludeNamespaces List of namespaces to exclude language links
+	 * @param SiteLinkLookup $siteLinkLookup   A site link lookup service
 	 * @param SiteStore      $sites             A site definition lookup service
 	 * @param string         $siteGroup         The ID of the site group to use for showing language links.
 	 */
 	public function __construct( $siteId, array $namespaces, array $excludeNamespaces,
-			SiteLinkLookup $siteLinksLookup, SiteStore $sites, $siteGroup ) {
+			SiteLinkLookup $siteLinkLookup, SiteStore $sites, $siteGroup ) {
 		$this->siteId = $siteId;
 		$this->namespaces = $namespaces;
 		$this->excludeNamespaces = $excludeNamespaces;
-		$this->siteLinksLookup = $siteLinksLookup;
+		$this->siteLinkLookup = $siteLinkLookup;
 		$this->sites = $sites;
 		$this->siteGroup = $siteGroup;
 	}
@@ -81,7 +80,7 @@ class LangLinkHandler {
 	/**
 	 * Finds the corresponding item on the repository and returns the item's site links.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
 	 * @param Title $title
 	 *
@@ -94,11 +93,11 @@ class LangLinkHandler {
 		$links = array();
 
 		$siteLink = new SimpleSiteLink( $this->siteId, $title->getFullText() );
-		$itemId = $this->siteLinksLookup->getEntityIdForSiteLink( $siteLink );
+		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
 
 		if ( $itemId !== null ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText() . " is " . $itemId->getPrefixedId() );
-			$links = $this->siteLinksLookup->getSiteLinksForItem( $itemId );
+			$links = $this->siteLinkLookup->getSiteLinksForItem( $itemId );
 		} else {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for " . $title->getFullText() );
 		}
@@ -117,8 +116,8 @@ class LangLinkHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Title        $title
-	 * @param \ParserOutput $out
+	 * @param Title $title
+	 * @param ParserOutput $out
 	 *
 	 * @return boolean
 	 */
@@ -232,7 +231,7 @@ class LangLinkHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \ParserOutput $out
+	 * @param ParserOutput $out
 	 * @param $langs[]
 	 */
 	public function excludeRepoLangLinks( ParserOutput $out, array $langs ) {
@@ -244,7 +243,7 @@ class LangLinkHandler {
 	 * Get the noexternallanglinks page property from the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
-	 * @param \ParserOutput $out
+	 * @param ParserOutput $out
 	 *
 	 * @return Array A list of language codes, identifying which repository links to ignore.
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
@@ -265,7 +264,7 @@ class LangLinkHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \ParserOutput $out
+	 * @param ParserOutput $out
 	 * @param array $noexternallanglinks a list of languages to suppress
 	 */
 	public function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
@@ -382,7 +381,7 @@ class LangLinkHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Title        $title The page's title
+	 * @param Title $title The page's title
 	 * @param ParserOutput $out   Parsed representation of the page
 	 *
 	 * @return \Wikibase\SiteLink[] An associative array, using site IDs for keys
@@ -422,8 +421,8 @@ class LangLinkHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Title        $title The page's title
-	 * @param \ParserOutput $out   Parsed representation of the page
+	 * @param Title $title The page's title
+	 * @param ParserOutput $out Parsed representation of the page
 	 */
 	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
@@ -477,7 +476,7 @@ class LangLinkHandler {
 	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityIdPropertyUpdater = new EntityIdPropertyUpdater( $this->siteLinksLookup, $this->siteId );
+		$entityIdPropertyUpdater = new EntityIdPropertyUpdater( $this->siteLinkLookup, $this->siteId );
 		$entityIdPropertyUpdater->updateItemIdProperty( $out, $title );
 
 		wfProfileOut( __METHOD__ );
