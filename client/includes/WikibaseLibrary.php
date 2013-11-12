@@ -48,6 +48,25 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
+	 * Recursively renumber a serialized array in place, so it is indexed at 1, not 0.
+	 * Just like Lua wants it.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$entityArr
+	 */
+	public function renumber( &$entityArr ) {
+		foreach( $entityArr as $key => &$value ) {
+			if ( is_array( $value ) ) {
+				if ( array_key_exists( 0, $value ) ) {
+					$value = array_combine( range( 1, count( $value ) ), array_values( $value ) );
+				}
+				$this->renumber( $value );
+			}
+		}
+	}
+
+	/**
 	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
 	 *
 	 * @since 0.4
@@ -104,6 +123,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		try {
 			$entityArr = $serializer->getSerialized( $entityObject );
+			$this->renumber( $entityArr ); // Renumber the array
 			return array( $entityArr );
 		} catch ( \Exception $e ) {
 			throw $this->getEngine()->newException( 'wikibase-error-serialize-error' );
@@ -141,15 +161,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		return array( $idFormatter->format( $id ) );
 	}
-    /**
-     * Get global site ID (e.g. "enwiki")
-     * This is basically a helper function.
-     * I can see this becoming part of mw.site in the Scribunto extension.
-     *
-     * @since 0.4
-     *
-     */
-    public function getGlobalSiteId() {
-        return array( \Wikibase\Settings::get( 'siteGlobalID' ) );
-    }
+	/**
+	 * Get global site ID (e.g. "enwiki")
+	 * This is basically a helper function.
+	 * I can see this becoming part of mw.site in the Scribunto extension.
+	 *
+	 * @since 0.4
+	 *
+	 */
+	public function getGlobalSiteId() {
+		return array( \Wikibase\Settings::get( 'siteGlobalID' ) );
+	}
 }
