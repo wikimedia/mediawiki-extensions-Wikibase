@@ -18,10 +18,10 @@
 		"wiki": "https://www.mediawiki.org/wiki/Wikibase"
 	},
     "require": {
-        "php": ">=5.3.0",
-		"data-values/data-values": "*",
-		"data-values/data-types": "*",
-		"wikibase/data-model": "*",
+        "php": ">=5.3.2",
+		"data-values/data-values": "dev-master",
+		"data-values/data-types": "dev-master",
+		"wikibase/data-model": "dev-master",
         "diff/diff": ">=0.9"
     },
 	"minimum-stability" : "dev",
