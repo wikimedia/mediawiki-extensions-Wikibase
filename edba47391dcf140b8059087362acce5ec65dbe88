@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_c3911b9b",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:53:53Z",
+      "side": 1,
+      "message": "No concrete suggestion, but this code just looks horrible. Could definitely use some cleaning up.",
+      "revId": "edba47391dcf140b8059087362acce5ec65dbe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a3adffec",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:53:53Z",
+      "side": 1,
+      "message": "This thing only handles Item and Property ids. Will fail for those not in DataModel. Need to get the parser via WikibaseRepo::getEntityIdParser",
+      "revId": "edba47391dcf140b8059087362acce5ec65dbe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_63f5c7eb",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:53:53Z",
+      "side": 1,
+      "message": "Can just construct an ItemId\n\ntry{\n  $id \u003d new ItemId( $rawId );\n}\n...\n\nThat is somewhat abusing exceptions for normal control flow, though is the best trade-of I see here",
+      "revId": "edba47391dcf140b8059087362acce5ec65dbe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
