@@ -16,6 +16,24 @@
       "revId": "58f4c748d43e6044efd3eaa38d87bd1ff29c2442",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_5e3fbe83",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T16:03:06Z",
+      "side": 1,
+      "message": "I doubt this is an issue here as this will only be used for entities.",
+      "parentUuid": "291c1151_feb22a47",
+      "revId": "58f4c748d43e6044efd3eaa38d87bd1ff29c2442",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
