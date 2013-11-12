@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiSite;
 use Title;
 use Wikibase\Api\ItemByTitleHelper;
 use Wikibase\Api\ResultBuilder;
@@ -25,7 +26,7 @@ use Wikibase\StringNormalizer;
 class ItemByTitleHelperTest extends \MediaWikiTestCase {
 
 	public function getSiteStoreMock() {
-		$dummySite = new \MediaWikiSite();
+		$dummySite = new MediaWikiSite();
 
 		$siteStoreMock = $this->getMockBuilder( '\SiteStore' )
 			->disableOriginalConstructor()
@@ -41,17 +42,13 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	/**
 	 * Gets a mock ResultBuilder object which excepts a certain number of calls to certain methods
 	 *
-	 * @param int $expectedMissingEntities number of expected call to this method
 	 * @param int $expectedNormalizedTitle number of expected call to this method
-	 *
 	 * @return ResultBuilder
 	 */
-	public function getResultBuilderMock( $expectedMissingEntities = 0, $expectedNormalizedTitle = 0) {
+	public function getResultBuilderMock( $expectedNormalizedTitle = 0 ) {
 		$apiResultBuilderMock = $this->getMockBuilder( 'Wikibase\Api\ResultBuilder' )
 			->disableOriginalConstructor()
 			->getMock();
-		$apiResultBuilderMock->expects( $this->exactly( $expectedMissingEntities ) )
-			->method( 'addMissingEntity' );
 		$apiResultBuilderMock->expects( $this->exactly( $expectedNormalizedTitle ) )
 			->method( 'addNormalizedTitle' );
 
@@ -92,7 +89,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$sites = array( 'FooSite' );
 		$titles = array( 'Berlin', 'London' );
 
-		$entityIds = $itemByTitleHelper->getEntityIds( $sites, $titles, false );
+		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, false );
 
 		foreach( $entityIds as $entityId ) {
 			$this->assertEquals( $expectedEntityId, $entityId );
@@ -105,7 +102,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdNormalized() {
 		$itemByTitleHelper = new ItemByTitleHelper(
 		// Two values should be added: The normalization and the failure to find an entity
-			$this->getResultBuilderMock( 1, 1 ),
+			$this->getResultBuilderMock( 1 ),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -114,7 +111,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$sites = array( 'FooSite' );
 		$titles = array( 'berlin_germany' );
 
-		$entityIds = $itemByTitleHelper->getEntityIds( $sites, $titles, true );
+		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, true );
 
 		// Still nothing could be found
 		$this->assertEquals( array(), $entityIds );
@@ -127,7 +124,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	public function testGetEntityIdsNotFound() {
 		$itemByTitleHelper = new ItemByTitleHelper(
 		// Two result values should be added (for both titles which wont be found)
-			$this->getResultBuilderMock( 2 ),
+			$this->getResultBuilderMock(),
 			$this->getSiteLinkCacheMock( false ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
@@ -136,7 +133,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$sites = array( 'FooSite' );
 		$titles = array( 'Berlin', 'London' );
 
-		$itemByTitleHelper->getEntityIds( $sites, $titles, false );
+		$itemByTitleHelper->getItemIds( $sites, $titles, false );
 	}
 
 	/**
@@ -155,7 +152,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$sites = array( 'FooSite' );
 		$titles = array( 'Berlin', 'London' );
 
-		$itemByTitleHelper->getEntityIds( $sites, $titles, true );
+		$itemByTitleHelper->getItemIds( $sites, $titles, true );
 	}
 
 	static public function normalizeTitleProvider() {
@@ -179,18 +176,16 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 	 * @dataProvider normalizeTitleProvider
 	 */
 	public function testNormalizeTitle( $title, $expectedEntityId, $expectedAddNormalizedCalls ) {
-		$dummySite = new \MediaWikiSite();
+		$dummySite = new MediaWikiSite();
 
 		$itemByTitleHelper = new ItemByTitleHelper(
-			$this->getResultBuilderMock( 0, $expectedAddNormalizedCalls ),
+			$this->getResultBuilderMock( $expectedAddNormalizedCalls ),
 			$this->getSiteLinkCacheMock( $expectedEntityId ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
 		);
 
-		$entityId = $itemByTitleHelper->normalizeTitle( $title, $dummySite );
-
-		$this->assertEquals( $expectedEntityId, $entityId );
+		$itemByTitleHelper->normalizeTitle( $title, $dummySite );
 
 		// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
 		// XXX: The Normalized title is passed by via reference to $title...
@@ -207,7 +202,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 			new StringNormalizer()
 		);
 
-		$itemByTitleHelper->getEntityIds( array( ), array( 'barfoo' ), false );
+		$itemByTitleHelper->getItemIds( array( ), array( 'barfoo' ), false );
 	}
 
 }
