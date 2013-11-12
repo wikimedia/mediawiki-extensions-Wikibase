@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_4038c19c",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T11:34:24Z",
+      "side": 1,
+      "message": "Please keep lines shorter than 100 characters (https://www.mediawiki.org/wiki/Manual:Coding_conventions#Line_continuation)",
+      "revId": "587f42152723592687759ac6daa6706a0fb5f136",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
