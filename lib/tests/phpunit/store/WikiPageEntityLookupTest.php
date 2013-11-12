@@ -82,7 +82,7 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 
 	protected function resolveLogicalRevision( $revision ) {
 		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
-				$revision = self::$testEntities[$revision]->getRevision();
+			$revision = self::$testEntities[$revision]->getRevision();
 		}
 
 		return $revision;
@@ -91,16 +91,12 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 	/**
 	 * @dataProvider provideGetEntity
 	 *
-	 * @param string|EntityId $id The entity to get
+	 * @param EntityId $id The entity to get
 	 * @param bool|int $revision The revision to get (or null)
-	 * @param bool|int $expectedRev The expected revision
-	 * @param string|null     $expectException
+	 * @param bool|int $shouldExist
+	 * @param string|null $expectException
 	 */
-	public function testGetEntityRevision( $id, $revision, $shouldExist, $expectException = null ) {
-		if ( is_string( $id ) ) {
-			$id = EntityId::newFromPrefixedId( $id );
-		}
-
+	public function testGetEntityRevision( EntityId $id, $revision, $shouldExist, $expectException = null ) {
 		if ( $expectException !== null ) {
 			$this->setExpectedException( $expectException );
 		}
