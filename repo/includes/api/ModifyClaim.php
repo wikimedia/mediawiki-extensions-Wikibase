@@ -56,8 +56,6 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->claimModificationHelper = new ClaimModificationHelper(
-			$mainModule,
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
@@ -100,6 +98,11 @@ abstract class ModifyClaim extends ApiWikibase {
 			parent::getPossibleErrors(),
 			array(
 				array( 'code' => 'failed-save', 'info' => $this->msg( 'wikibase-api-failed-save' )->text() ),
+				array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
+				array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
+				array( 'code' => 'invalid-snak', 'info' => $this->msg( 'wikibase-api-invalid-snak' )->text() ),
+				array( 'code' => 'invalid-entity-id', 'info' => $this->msg( 'wikibase-api-invalid-entity-id' )->text() ),
 			)
 		);
 	}
