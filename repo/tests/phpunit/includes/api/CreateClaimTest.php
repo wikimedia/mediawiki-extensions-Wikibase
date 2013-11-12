@@ -2,16 +2,19 @@
 
 namespace Wikibase\Test\Api;
 
+use UsageException;
+use Wikibase\Claims;
 use Wikibase\Entity;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\Property;
+use Wikibase\PropertyContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\CreateClaim
  *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseRepoTest
  *
  * @group API
  * @group Database
@@ -28,13 +31,13 @@ use Wikibase\Repo\WikibaseRepo;
 class CreateClaimTest extends WikibaseApiTestCase {
 
 	protected static function getNewEntityAndProperty() {
-		$entity = \Wikibase\Item::newEmpty();
-		$content = new \Wikibase\ItemContent( $entity );
+		$entity = Item::newEmpty();
+		$content = new ItemContent( $entity );
 		$content->save( '', null, EDIT_NEW );
 		$entity = $content->getEntity();
 
-		$property = \Wikibase\Property::newFromType( 'commonsMedia' );
-		$content = new \Wikibase\PropertyContent( $property );
+		$property = Property::newFromType( 'commonsMedia' );
+		$content = new PropertyContent( $property );
 		$content->save( '', null, EDIT_NEW );
 		$property = $content->getEntity();
 
@@ -52,10 +55,6 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testValidRequest() {
-		/**
-		 * @var Entity $entity
-		 * @var Entity $property
-		 */
 		list( $entity, $property ) = self::getNewEntityAndProperty();
 
 		$params = array(
@@ -82,7 +81,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 
-		$claims = new \Wikibase\Claims( $entityContent->getEntity()->getClaims() );
+		$claims = new Claims( $entityContent->getEntity()->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $claim['id'] ) );
 	}
@@ -90,6 +89,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	public function invalidRequestProvider() {
 		$argLists = array();
 
+		//0
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => 'q123456789',
@@ -97,9 +97,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => '-',
 			'value' => '"Foo.png"',
 		);
-
 		$argLists[] = array( 'cant-load-entity-content', $params );
 
+		//1
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => 'i123',
@@ -107,9 +107,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => '-',
 			'value' => '"Foo.png"',
 		);
-
 		$argLists[] = array( 'invalid-entity-id', $params );
 
+		//2
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
@@ -117,9 +117,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => 'i123',
 			'value' => '"Foo.png"',
 		);
-
 		$argLists[] = array( 'invalid-entity-id', $params );
 
+		//3
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
@@ -127,9 +127,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => 'p1',
 			'value' => 'Foo.png',
 		);
-
 		$argLists[] = array( 'invalid-snak', $params );
 
+		//4
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
@@ -137,9 +137,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => '-',
 			'value' => '"Foo.png"',
 		);
-
 		$argLists[] = array( 'unknown_snaktype', $params );
 
+		//5, 6
 		foreach ( array( 'entity', 'snaktype' ) as $requiredParam ) {
 			$params = array(
 				'action' => 'wbcreateclaim',
@@ -154,24 +154,25 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$argLists[] = array( 'no' . $requiredParam, $params );
 		}
 
+		//7
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'value' => '"Foo.png"',
 		);
-
 		$argLists[] = array( 'param-missing', $params );
 
+		//8
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => '-',
 		);
-
 		$argLists[] = array( 'param-missing', $params );
 
+		//9
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
@@ -179,7 +180,6 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => '-',
 			'value' => '{"x":"foo", "y":"bar"}',
 		);
-
 		$argLists[] = array( 'invalid-snak', $params );
 
 		return $argLists;
@@ -202,10 +202,6 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	 * @param array $params
 	 */
 	public function testInvalidRequest( $errorCode, array $params ) {
-		/**
-		 * @var Entity $entity
-		 * @var Entity $property
-		 */
 		list( $entity, $property ) = self::getEntityAndPropertyForInvalid();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
@@ -213,15 +209,18 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		}
 
 		if ( array_key_exists( 'property', $params ) && $params['property'] === '-' ) {
-			$params['property'] = $this->getFormattedIdForEntity( $entity );
+			$params['property'] = $this->getFormattedIdForEntity( $property );
 		}
 
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request should raise an exception' );
 		}
-		catch ( \UsageException $e ) {
-			$this->assertEquals( $errorCode, $e->getCodeString(), 'Invalid request raised correct error' );
+		catch ( UsageException $e ) {
+			$this->assertEquals(
+				$errorCode,
+				$e->getCodeString(), 'Invalid request raised correct error: ' . $e->getMessage()
+			);
 		}
 
 		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
@@ -235,10 +234,6 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testMultipleRequests() {
-		/**
-		 * @var Entity $entity
-		 * @var Entity $property
-		 */
 		list( $entity, $property ) = self::getNewEntityAndProperty();
 
 		$params = array(
@@ -280,7 +275,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
 
-		$claims = new \Wikibase\Claims( $entityContent->getEntity()->getClaims() );
+		$claims = new Claims( $entityContent->getEntity()->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $firstGuid ) );
 		$this->assertTrue( $claims->hasClaimWithGuid( $secondGuid ) );

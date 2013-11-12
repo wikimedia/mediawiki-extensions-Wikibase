@@ -2,25 +2,26 @@
 
 namespace Wikibase\Api;
 
-use ApiMain;
 use DataValues\IllegalValueException;
+use FormatJson;
 use InvalidArgumentException;
+use OutOfBoundsException;
+use Profiler;
+use Title;
+use UsageException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakConstructionService;
-use ApiBase, MWException;
-use Wikibase\EntityContent;
+use ApiBase;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
-use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Entity;
-use Wikibase\EntityId;
-use Wikibase\Property;
-use Wikibase\EntityContentFactory;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Snak;
+use Wikibase\Summary;
+use Wikibase\Entity;
+use Wikibase\Lib\ClaimGuidValidator;
 use ValueParsers\ParseException;
 
 /**
@@ -28,28 +29,12 @@ use ValueParsers\ParseException;
  *
  * @since 0.4
  *
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
 class ClaimModificationHelper {
-
-	/**
-	 * @since 0.4
-	 *
-	 * @var ApiMain
-	 */
-	protected $apiMain;
-
-	/**
-	 * @since 0.4
-	 *
-	 * @var EntityContentFactory
-	 */
-	protected $entityContentFactory;
 
 	/**
 	 * @since 0.4
@@ -82,23 +67,17 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
-	 * @param ApiMain $apiMain
-	 * @param EntityContentFactory $entityContentFactory
 	 * @param SnakConstructionService $snakConstructionService
 	 * @param EntityIdParser $entityIdParser
 	 * @param ClaimGuidValidator $claimGuidValidator
 	 * @param SnakValidationHelper $snakValidation
 	 */
 	public function __construct(
-		ApiMain $apiMain,
-		EntityContentFactory $entityContentFactory,
 		SnakConstructionService $snakConstructionService,
 		EntityIdParser $entityIdParser,
 		ClaimGuidValidator $claimGuidValidator,
 		SnakValidationHelper $snakValidation
 	) {
-		$this->apiMain = $apiMain;
-		$this->entityContentFactory = $entityContentFactory;
 		$this->snakConstructionService = $snakConstructionService;
 		$this->entityIdParser = $entityIdParser;
 		$this->claimGuidValidator = $claimGuidValidator;
@@ -110,7 +89,8 @@ class ClaimModificationHelper {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return \Title
+	 * @throws UsageException
+	 * @return Title
 	 *
 	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
 	 */
@@ -118,7 +98,7 @@ class ClaimModificationHelper {
 		$entityTitle = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->apiMain->dieUsage( 'No such entity' , 'no-such-entity' );
+			$this->throwUsageException( 'No such entity' , 'no-such-entity' );
 		}
 
 		return $entityTitle;
@@ -129,13 +109,14 @@ class ClaimModificationHelper {
 	 *
 	 * @param string $claimGuid
 	 *
+	 * @throws UsageException
 	 * @return bool
 	 */
 	public function validateClaimGuid( $claimGuid ) {
 		try {
 			return $this->claimGuidValidator->validate( $claimGuid );
 		} catch ( ParseException $e ) {
-			$this->apiMain->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->throwUsageException( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
 
@@ -145,13 +126,14 @@ class ClaimModificationHelper {
 	 * @param string $claimGuid
 	 * @param Entity $entity
 	 *
+	 * @throws UsageException
 	 * @return Claim
 	 */
 	public function getClaimFromEntity( $claimGuid, Entity $entity ) {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->apiMain->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+			$this->throwUsageException( 'Could not find the claim' , 'no-such-claim' );
 		}
 
 		return $claims->getClaimWithGuid( $claimGuid );
@@ -161,44 +143,39 @@ class ClaimModificationHelper {
 	 * @since 0.4
 	 *
 	 * @param array $params
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
-	 * @return \Wikibase\Snak
-	 *
-	 * @throws ParseException
-	 * @throws IllegalValueException
+	 * @throws UsageException
+	 * @return Snak
 	 */
-	public function getSnakInstance( $params, EntityId $propertyId ) {
+	public function getSnakInstance( $params, PropertyId $propertyId ) {
 		$valueData = null;
 		if ( isset( $params['value'] ) ) {
-			$valueData = \FormatJson::decode( $params['value'], true );
+			$valueData = FormatJson::decode( $params['value'], true );
 			if ( $valueData === null ) {
-				$this->apiMain->dieUsage( 'Could not decode snak value', 'invalid-snak' );
+				$this->throwUsageException( 'Could not decode snak value', 'invalid-snak' );
 			}
-		}
-
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->apiMain->dieUsage( 'Property expected, got ' . $propertyId->getEntityType(), 'invalid-snak' );
-		}
-
-		// TODO: remove this hack and the above check by propagating the PropertyId type upwards
-		if ( !( $propertyId instanceof PropertyId ) ) {
-			$propertyId = PropertyId::newFromNumber( $propertyId->getNumericId() );
 		}
 
 		try {
 			$snak = $this->snakConstructionService->newSnak( $propertyId, $params['snaktype'], $valueData );
 		}
 		catch ( IllegalValueException $ex ) {
-			$this->apiMain->dieUsage( 'Invalid snak: IllegalValueException', 'invalid-snak' );
+			$this->throwUsageException( 'Invalid snak: IllegalValueException', 'invalid-snak' );
 		}
 		catch ( InvalidArgumentException $ex ) {
 			// shouldn't happen, but might.
-			$this->apiMain->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
+			$this->throwUsageException( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
+		}
+		catch ( OutOfBoundsException $ex ) {
+			$this->throwUsageException( 'Invalid snak: OutOfBoundsException' . $ex->getMessage(), 'invalid-snak' );
+		}
+		catch ( PropertyNotFoundException $ex ) {
+			$this->throwUsageException( 'Invalid snak: PropertyNotFoundException' . $ex->getMessage(), 'invalid-snak' );
 		}
 
+		/** @var Snak $snak */
 		$this->snakValidation->validateSnak( $snak );
-
 		return $snak;
 	}
 
@@ -206,7 +183,10 @@ class ClaimModificationHelper {
 	 * Parses an entity id string coming from the user
 	 *
 	 * @since 0.4
+	 *
 	 * @param string $entityIdParam
+	 *
+	 * @throws UsageException
 	 * @return EntityId
 	 * @todo this could go into an EntityModificationHelper or even in a ApiWikibaseHelper
 	 */
@@ -214,9 +194,9 @@ class ClaimModificationHelper {
 		try {
 			$entityId = $this->entityIdParser->parse( $entityIdParam );
 		} catch ( ParseException $parseException ) {
-			$this->apiMain->dieUsage( 'Invalid entity ID: ParseException', 'invalid-entity-id' );
+			$this->throwUsageException( 'Invalid entity ID: ParseException', 'invalid-entity-id' );
 		}
-
+		/** @var EntityId $entityId */
 		return $entityId;
 	}
 
@@ -239,15 +219,13 @@ class ClaimModificationHelper {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
+	 * @param $messgae
+	 * @param $code
+	 * @throws UsageException
 	 */
-	public function getPossibleErrors() {
-		return array(
-			array( 'code' => 'invalid-guid', 'info' => $this->apiMain->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->apiMain->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-claim', 'info' => $this->apiMain->msg( 'wikibase-api-no-such-claim' )->text() ),
-			array( 'code' => 'invalid-snak', 'info' => $this->apiMain->msg( 'wikibase-api-invalid-snak' )->text() ),
-			array( 'code' => 'invalid-entity-id', 'info' => $this->apiMain->msg( 'wikibase-api-invalid-entity-id' )->text() ),
-		);
+	private function throwUsageException( $messgae, $code ) {
+		Profiler::instance()->close();
+		throw new UsageException( $messgae, $code );
 	}
+
 }

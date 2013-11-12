@@ -73,11 +73,6 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull( $summary->getUserSummary() );
 	}
 
-	public function testGetPossibleErrors() {
-		$claimModificationHelper = $this->getNewInstance();
-		$this->assertInternalType( 'array', $claimModificationHelper->getPossibleErrors() );
-	}
-
 	public function testGetClaimFromEntity() {
 		$claimModificationHelper = $this->getNewInstance();
 		$entity = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
@@ -107,8 +102,6 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$claimModificationHelper = new ClaimModificationHelper(
-			$apiMain,
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),

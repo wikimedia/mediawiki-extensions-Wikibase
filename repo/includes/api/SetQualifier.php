@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOp\ChangeOpQualifier;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -110,13 +111,18 @@ class SetQualifier extends ModifyClaim {
 
 		$claimGuid = $params['claim'];
 
+		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+		if( !$propertyId instanceof PropertyId ){
+			$this->dieUsage(
+				$propertyId->getSerialization() . ' does not appear to be a property ID',
+				'param-illegal'
+			);
+		}
+		$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
+
 		if ( isset( $params['snakhash'] ) ) {
-			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
-			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, $params['snakhash'] );
 		} else {
-			$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
-			$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '' );
 		}
 
@@ -196,7 +202,6 @@ class SetQualifier extends ModifyClaim {
 	public function getPossibleErrors() {
 		return array_merge(
 			parent::getPossibleErrors(),
-			$this->claimModificationHelper->getPossibleErrors(),
 			array(
 				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
 			)
