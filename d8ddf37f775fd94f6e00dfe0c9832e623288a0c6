@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_e358d755",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T15:17:40Z",
+      "side": 1,
+      "message": "The message description is too technical. From the perspective of a translator, the message description does not clarify what the message is about. You should specify where and on what occasion (from a user\u0027s perspective) this message is displayed.",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_8340035b",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T15:17:40Z",
+      "side": 1,
+      "message": "Please do not declare fields dynamically and use camel case.",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a3109f57",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T15:17:40Z",
+      "side": 1,
+      "message": "When amending the change, you may also want to add some spaces around the quotes here. :)",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_231caf74",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T15:17:40Z",
+      "side": 1,
+      "message": "Just a minor optimization suggestion:\n$siteSelector could be defined outsite the \"ready\" handler and the node can be assigned within the \"ready\" handler dropping the need to query for the node again.",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_431feb68",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T15:17:40Z",
+      "side": 1,
+      "message": "The indentations look a bit odd. Closing parentheses should be on the same indentation level like the corresponding opening ones.",
+      "revId": "d8ddf37f775fd94f6e00dfe0c9832e623288a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
