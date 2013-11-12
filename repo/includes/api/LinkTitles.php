@@ -17,6 +17,8 @@ use Wikibase\Summary;
  *
  * @since 0.1
  * @licence GNU GPL v2+
+ * @author John Erling Blad < jeblad@gmail.com >
+ * @author Adam Shorland
  */
 class LinkTitles extends ApiWikibase {
 
