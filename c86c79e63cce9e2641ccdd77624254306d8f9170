@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_6307871b",
+        "filename": "repo/includes/store/EntityPerPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:42:27Z",
+      "side": 1,
+      "message": "ItemId[]",
+      "revId": "c86c79e63cce9e2641ccdd77624254306d8f9170",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a3117f54",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:42:27Z",
+      "side": 1,
+      "message": "ItemId[]",
+      "revId": "c86c79e63cce9e2641ccdd77624254306d8f9170",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_6320679f",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:42:27Z",
+      "side": 1,
+      "message": "A lot of this seems to be copy pasted from the above method. If tasks overlap, then factor our the overlapping parts into dedicated methods that can be used in both cases (ie like etItemIdsFromRows), rather then duplicating.",
+      "revId": "c86c79e63cce9e2641ccdd77624254306d8f9170",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
