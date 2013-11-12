@@ -82,6 +82,10 @@ return call_user_func( function() {
 		'ReportingExceptionHandler' => 'includes/ExceptionHandler.php',
 		'RethrowingExceptionHandler' => 'includes/ExceptionHandler.php',
 
+		// exceptions, should really really be in core
+		'MessageException' => 'includes/MessageException.php',
+		'UserInputException' => 'includes/UserInputException.php',
+
 		// includes/changes
 		'Wikibase\Change' => 'includes/changes/Change.php',
 		'Wikibase\ChangeRow' => 'includes/changes/ChangeRow.php',
