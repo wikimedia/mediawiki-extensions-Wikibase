@@ -16,6 +16,24 @@
       "revId": "fc9aead55fa328291a4f0b6da198f31371b21c41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_60a13d4a",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:27:51Z",
+      "side": 1,
+      "message": "An EntityId parser should be used. Not sure how to sanely obtain one here - then again, this task seems to be quite misplaced to begin with",
+      "parentUuid": "291c1151_40c8c122",
+      "revId": "fc9aead55fa328291a4f0b6da198f31371b21c41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
