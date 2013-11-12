@@ -55,6 +55,13 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 				'class' => 'wb-input',
 				'name' => 'page',
 			) );
+		$matchers['badges'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wb-setsitelink-badges',
+				'class' => 'wb-input',
+				'name' => 'badges',
+			) );
 		$matchers['submit'] = array(
 			'tag' => 'input',
 			'attributes' => array(
