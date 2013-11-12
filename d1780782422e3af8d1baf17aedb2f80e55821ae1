@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_c33e7bb4",
+        "filename": "client/includes/hooks/InfoActionHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:47:50Z",
+      "side": 1,
+      "message": "2 pointless tags. https://www.mediawiki.org/wiki/Wikibase/Coding_conventions",
+      "revId": "d1780782422e3af8d1baf17aedb2f80e55821ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e34d376e",
+        "filename": "client/tests/phpunit/includes/RepoLinkerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:47:50Z",
+      "side": 1,
+      "message": "kittens!",
+      "revId": "d1780782422e3af8d1baf17aedb2f80e55821ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
