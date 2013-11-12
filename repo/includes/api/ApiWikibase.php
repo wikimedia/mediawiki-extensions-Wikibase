@@ -2,7 +2,12 @@
 
 namespace Wikibase\Api;
 
+use Message;
+use MessageCache;
 use Revision;
+use Site;
+use SiteList;
+use SiteSQLStore;
 use Title;
 use User;
 use Status;
@@ -34,13 +39,6 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
-	 * @return ResultBuilder
-	 */
-	public function getResultBuilder(){
-		return $this->resultBuilder;
-	}
-
-	/**
 	 * Wrapper message for single errors
 	 *
 	 * @var bool|string
@@ -55,7 +53,7 @@ abstract class ApiWikibase extends \ApiBase {
 	protected static $longErrorContextMessage = false;
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
+	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
 		return array(
@@ -68,7 +66,7 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription()
+	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
 		return array(
@@ -76,23 +74,22 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams()
+	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
 		return array(
 		);
 	}
 
-
 	/**
-	 * @see \ApiBase::needsToken()
+	 * @see ApiBase::needsToken()
 	 */
 	public function needsToken() {
 		return $this->isWriteMode() && ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens' ) );
 	}
 
 	/**
-	 * @see \ApiBase::mustBePosted()
+	 * @see ApiBase::mustBePosted()
 	 */
 	public function mustBePosted() {
 		return $this->isWriteMode() && ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithPost' ) );
@@ -123,14 +120,10 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param EntityContent $entityContent the entityContent to check permissions for
 	 * @param $params array of arguments for the module, describing the operation to be performed
 	 *
-	 * @return \Status the check's result
+	 * @return Status the check's result
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = array( 'read' );
-
-		//could directly check for each module here:
-		//$modulePermission = $this->getModuleName();
-		//$permissions[] = $modulePermission;
 
 		return $permissions;
 	}
@@ -164,15 +157,15 @@ abstract class ApiWikibase extends \ApiBase {
 	/**
 	 * Returns the list of sites that is suitable as a sitelink target.
 	 *
-	 * @return \SiteList
+	 * @return SiteList
 	 */
 	protected function getSiteLinkTargetSites() {
-		$sites = new \SiteList();
+		$sites = new SiteList();
 		$groups = Settings::get( 'siteLinkGroups' );
 
-		$allSites = \SiteSQLStore::newInstance()->getSites();
+		$allSites = SiteSQLStore::newInstance()->getSites();
 
-		/* @var \Site $site */
+		/* @var Site $site */
 		foreach ( $allSites as $site ) {
 			if ( in_array( $site->getGroup(), $groups ) ) {
 				$sites->append( $site );
@@ -181,7 +174,6 @@ abstract class ApiWikibase extends \ApiBase {
 
 		return $sites;
 	}
-
 
 	/**
 	 * Load the entity content of the given revision.
@@ -200,7 +192,9 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @return EntityContent the revision's content.
 	 */
-	protected function loadEntityContent( Title $title, $revId = false,
+	protected function loadEntityContent(
+		Title $title,
+		$revId = false,
 		$audience = Revision::FOR_PUBLIC,
 		User $user = null
 	) {
@@ -242,7 +236,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @see handleStatus().
 	 *
-	 * @param \Status $status The status to report
+	 * @param Status $status The status to report
 	 */
 	protected function handleSaveStatus( Status $status ) {
 		$value = $status->getValue();
@@ -282,7 +276,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 * is used that includes an HTML representation of the messages as well as a list of message
 	 * keys and parameters, for client side rendering and localization.
 	 *
-	 * @param \Status $status The status to report
+	 * @param Status $status The status to report
 	 * @param string  $errorCode The API error code to use in case $status->isOK() returns false
 	 * @param array   $extradata Additional data to include the the error report,
 	 *                if $status->isOK() returns false
@@ -292,7 +286,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @warning This is a temporary solution, pending a similar feature in MediaWiki core,
 	 *          see bug 45843.
 	 *
-	 * @see \ApiBase::dieUsage()
+	 * @see ApiBase::dieUsage()
 	 */
 	public function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
 		wfProfileIn( __METHOD__ );
@@ -342,15 +336,20 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @return string|null|bool HTML of the wikitext if $text is a string; $text if it's false or null
 	 *
-	 * @see \MessageCache::parse()
+	 * @see MessageCache::parse()
 	 */
 	protected function messageToHtml( $text ) {
 		if ( $text === null || $text === false || $text === '' ) {
 			return $text;
 		}
 
-		$out = \MessageCache::singleton()->parse( $text, $this->getContext()->getTitle(), /*linestart*/true,
-			/*interface*/true, $this->getContext()->getLanguage() );
+		$out = MessageCache::singleton()->parse(
+			$text,
+			$this->getContext()->getTitle(),
+			/*linestart*/true,
+			/*interface*/true,
+			$this->getContext()->getLanguage()
+		);
 
 		return $out->getText();
 	}
@@ -408,7 +407,7 @@ abstract class ApiWikibase extends \ApiBase {
 					$params = isset( $m['params'] ) ? $m['params'] : null;
 
 					if( isset( $m['message'] ) ) {
-						if ( $m['message'] instanceof \Message ) {
+						if ( $m['message'] instanceof Message ) {
 							// message object, handle below
 							$m = $m['message']; // NOTE: this triggers the "$m is an object" case below!
 						} else {
@@ -419,7 +418,7 @@ abstract class ApiWikibase extends \ApiBase {
 				}
 			}
 
-			if ( $m instanceof \Message ) { //NOTE: no elsif, since $m can be manipulated
+			if ( $m instanceof Message ) { //NOTE: no elsif, since $m can be manipulated
 				// a message object
 
 				$name = $m->getKey();
@@ -524,7 +523,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @see ApiResult::addValue()
 	 *
 	 * @param string|null|array $path Where in the result to put the revision idf
-	 * @param \Status $status The status to get the revision ID from.
+	 * @param Status $status The status to get the revision ID from.
 	 */
 	protected function addRevisionIdFromStatusToResult( $path, Status $status ) {
 		$statusValue = $status->getValue();

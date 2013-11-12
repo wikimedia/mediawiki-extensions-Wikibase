@@ -22,7 +22,7 @@ use Wikibase\ItemContent;
 class SetSiteLink extends ModifyEntity {
 
 	/**
-	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see ModifyEntity::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
@@ -32,10 +32,10 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see  \Wikibase\Api\ModifyEntity::getEntityContent
+	 * @see ModifyEntity::getEntityContentFromApiParams
 	 */
-	protected function getEntityContent( array $params ) {
-		$entityContent = parent::getEntityContent( $params );
+	protected function getEntityContentFromApiParams( array $params ) {
+		$entityContent = parent::getEntityContentFromApiParams( $params );
 
 		// If we found anything then check if it is of the correct base class
 		if ( !is_null( $entityContent ) && !( $entityContent instanceof ItemContent ) ) {

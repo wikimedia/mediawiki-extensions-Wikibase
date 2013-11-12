@@ -56,7 +56,6 @@ class SetLabel extends ModifyLangAttribute {
 	 */
 	protected function getChangeOp( array $params ) {
 		wfProfileIn( __METHOD__ );
-		$changeOps = array();
 		$label = "";
 		$language = $params['language'];
 
