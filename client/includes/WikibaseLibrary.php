@@ -31,20 +31,42 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Utils;
 
-class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
+class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase
+{
 
 	/**
 	 * Register mw.wikibase.lua library
 	 *
 	 * @since 0.4
 	 */
-	public function register() {
+	public function register()
+	{
 		$lib = array(
-			'getEntity' => array( $this, 'getEntity' ),
-			'getEntityId' => array( $this, 'getEntityId' ),
-			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
+			'getEntity' => array($this, 'getEntity'),
+			'getEntityId' => array($this, 'getEntityId'),
+			'getGlobalSiteId' => array($this, 'getGlobalSiteId')
 		);
-		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/../resources/' . 'mw.wikibase.lua', $lib, array() );
+		$this->getEngine()->registerInterface(dirname(__FILE__) . '/../resources/' . 'mw.wikibase.lua', $lib, array());
+	}
+
+	/**
+	 * Recursively renumber a serialized array in place, so it is indexed at 1, not 0.
+	 * Just like Lua wants it.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$entityArr
+	 */
+	public function renumber(&$entityArr)
+	{
+		foreach ($entityArr as $key => &$value) {
+			if (is_array($value)) {
+				if (array_key_exists(0, $value)) {
+					$value = array_combine(range(1, count($value)), array_values($value));
+				}
+				$this->renumber($value);
+			}
+		}
 	}
 
 	/**
@@ -57,35 +79,36 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 * @return array $entityArr
 	 */
-	public function getEntity( $prefixedEntityId = null ) {
-		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
-		$prefixedEntityId = trim( $prefixedEntityId );
+	public function getEntity($prefixedEntityId = null)
+	{
+		$this->checkType('getEntity', 1, $prefixedEntityId, 'string');
+		$prefixedEntityId = trim($prefixedEntityId);
 
 		$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		try {
-			$entityId = $entityIdParser->parse( $prefixedEntityId );
+			$entityId = $entityIdParser->parse($prefixedEntityId);
 		}
-		catch ( ParseException $parseException ) {
-			throw $this->getEngine()->newException( 'wikibase-error-invalid-entity-id' );
+		catch (ParseException $parseException) {
+			throw $this->getEngine()->newException('wikibase-error-invalid-entity-id');
 		}
 
 		$entityObject = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup()->getEntity(
 			$entityId
 		);
 
-		if ( $entityObject == null ) {
-			return array( null );
+		if ($entityObject == null) {
+			return array(null);
 		}
 
 		$opt = new SerializationOptions();
-		$serializerFactory = new SerializerFactory( $opt );
+		$serializerFactory = new SerializerFactory($opt);
 
 		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
 		// twice, once with a lower case key and once with an upper case key.
 		// This is a B/C hack to allow existing lua code to use hardcoded IDs
 		// in both lower (legacy) and upper case.
-		$opt->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
+		$opt->setIdKeyMode(SerializationOptions::ID_KEYS_BOTH);
 
 		// This is $wgContLang, not parser target language or anything else.
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
@@ -98,15 +121,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wgContLang, LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
 		// SerializationOptions accepts mixed types of keys happily.
-		$opt->setLanguages( Utils::getLanguageCodes() + array( $wgContLang->getCode() => $chain ) );
+		$opt->setLanguages(Utils::getLanguageCodes() + array($wgContLang->getCode() => $chain));
 
-		$serializer = $serializerFactory->newSerializerForObject( $entityObject, $opt );
+		$serializer = $serializerFactory->newSerializerForObject($entityObject, $opt);
 
 		try {
-			$entityArr = $serializer->getSerialized( $entityObject );
-			return array( $entityArr );
-		} catch ( \Exception $e ) {
-			throw $this->getEngine()->newException( 'wikibase-error-serialize-error' );
+			$entityArr = $serializer->getSerialized($entityObject);
+			$this->renumber($entityArr); // Renumber the array
+			return array($entityArr);
+		} catch (\Exception $e) {
+			throw $this->getEngine()->newException('wikibase-error-serialize-error');
 		}
 	}
 
@@ -119,37 +143,40 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @return string $id
 	 */
-	public function getEntityId( $pageTitle = null ) {
-		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		$globalSiteId = \Wikibase\Settings::get( 'siteGlobalID' );
+	public function getEntityId($pageTitle = null)
+	{
+		$this->checkType('getEntityByTitle', 1, $pageTitle, 'string');
+		$globalSiteId = \Wikibase\Settings::get('siteGlobalID');
 		$table = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
-		if ( $table == null ) {
-			return array( null );
+		if ($table == null) {
+			return array(null);
 		}
 
-		$numericId = $table->getItemIdForLink( $globalSiteId, $pageTitle );
-		if ( !is_int( $numericId ) ) {
-			return array( null );
+		$numericId = $table->getItemIdForLink($globalSiteId, $pageTitle);
+		if (!is_int($numericId)) {
+			return array(null);
 		}
 
-		$id = new Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, $numericId );
-		if ( $id == null ) {
-			return array( null );
+		$id = new Wikibase\EntityId(\Wikibase\Item::ENTITY_TYPE, $numericId);
+		if ($id == null) {
+			return array(null);
 		}
 
 		$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
 
-		return array( $idFormatter->format( $id ) );
+		return array($idFormatter->format($id));
 	}
-    /**
-     * Get global site ID (e.g. "enwiki")
-     * This is basically a helper function.
-     * I can see this becoming part of mw.site in the Scribunto extension.
-     *
-     * @since 0.4
-     *
-     */
-    public function getGlobalSiteId() {
-        return array( \Wikibase\Settings::get( 'siteGlobalID' ) );
-    }
+
+	/**
+	 * Get global site ID (e.g. "enwiki")
+	 * This is basically a helper function.
+	 * I can see this becoming part of mw.site in the Scribunto extension.
+	 *
+	 * @since 0.4
+	 *
+	 */
+	public function getGlobalSiteId()
+	{
+		return array(\Wikibase\Settings::get('siteGlobalID'));
+	}
 }
