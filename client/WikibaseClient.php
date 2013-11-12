@@ -76,7 +76,6 @@ call_user_func( function() {
 
 	// Hooks
 	$wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
-	$wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
 	$wgHooks['BaseTemplateToolbox'][]			= '\Wikibase\ClientHooks::onBaseTemplateToolbox';
 	$wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 	$wgHooks['OutputPageParserOutput'][]		= '\Wikibase\ClientHooks::onOutputPageParserOutput';
