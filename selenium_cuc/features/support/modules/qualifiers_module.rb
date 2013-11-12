@@ -6,7 +6,7 @@
 #
 # module for qualifiers page object
 
-module ReferencePage
+module QualifierPage
   include PageObject
   # qualifiers UI elements
   div(:qualifiersContainer, :class => "wb-claim-qualifiers")
