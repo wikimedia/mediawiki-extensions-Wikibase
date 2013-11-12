@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_8089d926",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "The options should be documented in the documentation section on top of the file and please keep lines shorter than 100 characters.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_40e281d9",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "The destroy mechanism should receive some upgrade. You probably want to delete the linkPages object and $goButton is not removed as well. You could overwrite jQuery.Widget\u0027s native destroy function and call the parent destroy method there. The _onDialogClose() function is hard to spot when looking for the destroy routine. For a clean tear-down, you probably want to also instantiate the RepoApi in _create().",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e390d796",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Since you are overhauling, you should really take this function apart.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c06af11a",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Parameter name does not match the function documentation above.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e079adf4",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "entity: Duplicate declaration.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_408fe12a",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "I recommend not using $.proxy since it tends to create additional indentation and complexity.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_0075e9f6",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Although it does not belong to this change directly, this method is never called. It may be supposed to be called from line 343 though which tries to call the function without an underscored prefix. As noted there, the function is probably not of use anyway...",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_401fe168",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "You do not seem to need the mediaWiki dependency here (which is great).",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_60e93db9",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "linkPages should be capitalized (LinkPages) because it is a constructor.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a0a1759a",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "The attributes should be documented in the prototype extension below (like repoApi) to keep the constructor slim. The constructor should be used for assigning only. Since you are using the underscore convention to mark functions private (which is a good thing), you should apply that convention to the variables as well.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c0ce715a",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "You probably want to instantiate RepoApi in the constructor to manage the tear-down in the (missing) destroy function properly.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a06fb52a",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Why is there a lang parameter? It is not used by any call which actually results in the parameter being undefined which is not rendered in the function documentation. If you want to mark the parameter optional, you may want to use square brackets around the parameter name: {string|Object} [lang].",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_207bc5f3",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "@return {Object|undefined}. According to the description above, I would expect {wikibase.Entity|undefined} though I guess that is not what is actually returned. Please clarify what you are actually returning (which applies to all usages of {Object} entity).",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a0fc156e",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "\"data\" is a quite generic parameter name.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c0af5129",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Why is this marked as public (not prefixed with underscore)? It does not seem to be used outside.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_402c4102",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "\"doLink\" sounds a bit strange. Maybe this function should be called \"linkPages\" and the constructor should receive a name more resembling its nature as constructor.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_004329b3",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "This whole function is too complex with its cascaded API requests.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e047edbc",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Documentation does not match the actual parameters.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c0d4b1bb",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "This methods is quite complex as well and the data parameters need some elaboration or better naming.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c038313b",
+        "filename": "client/resources/wikibase.client.linkPages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Superfluous comma.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_234f4f6d",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Parameter name missing. Data type doc should probably be {string[]|string} since we use square brackets around the parameter name to denote optional parameters though this is a convention aside the MediaWiki coding conventions.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_23782f8d",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "Similiar to the above, as to the file, this should be:  \"{string} [summary] Summary for the edit\".",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_0006c921",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 1,
+      "message": "\"ignoreconflicts\" should probably use camel case as well.",
+      "revId": "abb75278bf6f029a50ca1fc1c594d755a4a68f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

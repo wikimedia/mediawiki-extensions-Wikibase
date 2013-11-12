@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_e0efede7",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-12T14:01:21Z",
+      "side": 0,
+      "message": "The key string is still in use in WikibaseLib.i18n.php in client/resources/Resources.php and in this file\u0027s qqq message description for \u0027wikibase-linkitem-not-loggedin\u0027.",
+      "revId": "7987380a5455272e638670045d3f132e4853359e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
