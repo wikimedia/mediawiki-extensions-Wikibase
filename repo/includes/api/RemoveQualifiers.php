@@ -140,7 +140,6 @@ class RemoveQualifiers extends ModifyClaim {
 	public function getPossibleErrors() {
 		return array_merge(
 			parent::getPossibleErrors(),
-			$this->claimModificationHelper->getPossibleErrors(),
 			array(
 				array( 'code' => 'no-such-qualifier', 'info' => $this->msg( 'wikibase-api-no-such-qualifer' )->text() ),
 			)
