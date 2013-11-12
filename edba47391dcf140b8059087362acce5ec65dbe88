@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_831483f4",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T14:45:40Z",
+      "side": 1,
+      "message": "totally agree, however cleanup would be a bit more extensive and best done in follow up (with a bug ticket created for this)\n\nI am just fixing the immediate fatal error that occurs.",
+      "parentUuid": "291c1151_c3911b9b",
+      "revId": "edba47391dcf140b8059087362acce5ec65dbe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_a3adffec",
         "filename": "repo/includes/specials/SpecialModifyEntity.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-12T13:53:53Z",
       "side": 1,
       "message": "This thing only handles Item and Property ids. Will fail for those not in DataModel. Need to get the parser via WikibaseRepo::getEntityIdParser",
+      "revId": "edba47391dcf140b8059087362acce5ec65dbe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a3fb3fbd",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_a3adffec",
       "revId": "edba47391dcf140b8059087362acce5ec65dbe88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
