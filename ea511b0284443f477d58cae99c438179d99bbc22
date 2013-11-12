@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_1e9706ec",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T17:19:16Z",
+      "side": 1,
+      "message": "dirname( __FILE__ ) \u003d\u003d\u003d __DIR__",
+      "revId": "ea511b0284443f477d58cae99c438179d99bbc22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
