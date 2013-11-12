@@ -1,4 +1,9 @@
 /**
+ * Abstract base widget for editing and representing data values and a factory for defining
+ * more concrete implementations of that widget, similar to jQuery.widget.
+ *
+ * @file
+ * @ingroup ValueView
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
@@ -6,13 +11,12 @@
 	'use strict';
 
 	/**
-	 * Creates a new expert definition as it is required by jQuery.datatypes.valueview.
+	 * Creates a new expert definition as it is required within jQuery.datatypes.valueview to allow
+	 * usage of a certain data value type or data type.
 	 *
-	 * NOTE: Just by defining a new expert here, the expert won't be available in a valueview
-	 *  widget automatically. The expert has to be registered in a jQuery.valueview.ExpertFactory
-	 *  instance which has to be used as expert provider in the valueview widget's options.
-	 *
-	 * @see jQuery.valueview.Expert
+	 * NOTE: Just by defining a new expert here, the expert won't be available in the valueview
+	 *       widget automatically. The expert has to be registered in a jQuery.valueview.ExpertFactory
+	 *       instance which has to be used as expert provider in the valueview widget's options.
 	 *
 	 * @since 0.1
 	 *
@@ -46,11 +50,7 @@
 
 	/**
 	 * Abstract class for strategies used in jQuery.valueview.valueview for displaying and handling
-	 * a certain type of data value or data values suitable for a certain data type.
-	 * The expert itself is conceptually not dependent on data types. It always works with data
-	 * values but the way it is presenting the edit interface could be optimized for data values
-	 * suitable for a certain data type. This could for example be done by restrictions in the
-	 * edit interface by reflecting a data type's validation rules.
+	 * a certain type of data value or data values of a certain data type.
 	 *
 	 * NOTE: Consider using jQuery.valueview.expert to define a new expert instead of inheriting
 	 *       from this base directly.
@@ -67,8 +67,8 @@
 	 * @param {Object} [options={}]
 	 *
 	 * TODO: think about whether there should be a function to add multiple notifiers for widget
-	 *  developers or whether they should rather listen to the valueview widget while the experts
-	 *  can not be touched. Less performant alternative would be the usage of DOM events.
+	 *       developers or whether they should rather listen to the valueview widget while the
+	 *       experts can't be touched. Less performant alternative would be to use DOM events.
 	 *
 	 * @constructor
 	 * @abstract
