@@ -172,12 +172,14 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-setaliases-warning-remove' => 'Do you really want to remove all aliases of [[$1]]?',
 	'special-setsitelink' => 'Set a site link',
 	'wikibase-setsitelink-introfull' => 'You are setting the site link of $2 for [[$1]].',
-	'wikibase-setsitelink-intro' => 'This form allows you to set the site link of an entity. You need to provide the id of the entity (e.g. Q23), a site id (e.g. "enwiki") and the site link to set to.',
+	'wikibase-setsitelink-intro' => 'This form allows you to set the site link of an item. You need to provide the id of the item (e.g. Q23), a site id (e.g. "enwiki"), the site link and the item ids of the badges to set to. Several badges are separated by a pipe (<code>|</code>) character.',
 	'wikibase-setsitelink-site' => 'Site id:',
 	'wikibase-setsitelink-label' => 'Site link:',
+	'wikibase-setsitelink-badges' => 'Badges:',
 	'wikibase-setsitelink-submit' => 'Set the site link',
 	'wikibase-setsitelink-warning-remove' => 'Do you really want to remove the site link of [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'The site id "$1" is unknown. Please use an existing site id, such as "enwiki".',
+	'wikibase-setsitelink-not-item' => 'The id $1 does not belong to an item.',
 	'wikibase-setsitelink-add-failed' => 'The site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'The site link could not be removed.',
 	'wikibase-setsitelink-not-itemid' => '"$1" is not a valid item id. Site links can only be set for items.',
@@ -850,19 +852,24 @@ The special page allows the user to set aliases for an entity.',
 Parameters:
 * $1 - the id that links to the entity',
 	'special-setsitelink' => '{{doc-special|SetSiteLink}}
-The special page allows the user to set a site link for an entity.',
+The special page allows the user to set a site link for an item.',
 	'wikibase-setsitelink-introfull' => 'Intro text when a site link is to be set. Parameters:
-* $1 - the ID that links to the entity
+* $1 - the ID that links to the item
 * $2 - the site id the site link is to be set to',
-	'wikibase-setsitelink-intro' => 'A short text at the top of the page that allows users to set the site link of an entity, explaining the form.',
+	'wikibase-setsitelink-intro' => 'A short text at the top of the page that allows users to set the site link of an item, explaining the form.',
 	'wikibase-setsitelink-site' => 'Label for the input field to type the site id to set the site link to.',
-	'wikibase-setsitelink-label' => 'Label for the input field to type the site link to set the entity to.',
+	'wikibase-setsitelink-label' => 'Label for the input field to type the site link to set the item to.',
+	'wikibase-setsitelink-badges' => 'Label for the input field to type the badges to set the item to.',
 	'wikibase-setsitelink-submit' => 'Label for the button that activates the action.',
 	'wikibase-setsitelink-warning-remove' => 'A warning message to ask the user if he wants to remove the site link.
 
 Parameters:
 * $1 - the id that links to the entity',
 	'wikibase-setsitelink-invalid-site' => 'Response informing that the site id is not valid. Could give an example of a valid site id.
+
+Parameters:
+* $1 - the invalid id',
+	'wikibase-setsitelink-not-item' => 'Response informing that the given id does not belong to an item.
 
 Parameters:
 * $1 - the invalid id',
