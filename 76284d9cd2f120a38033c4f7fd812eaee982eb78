@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_a33a5fc8",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-12T13:43:54Z",
+      "side": 1,
+      "message": "Well, that comment is rather useless...",
+      "revId": "76284d9cd2f120a38033c4f7fd812eaee982eb78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
