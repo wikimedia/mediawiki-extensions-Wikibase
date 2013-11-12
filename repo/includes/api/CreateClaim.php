@@ -3,8 +3,8 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Claims;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -13,9 +13,6 @@ use Wikibase\ChangeOp\ChangeOpException;
  * API module for creating claims.
  *
  * @since 0.2
- *
- * @ingroup WikibaseRepo
- * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -42,6 +39,12 @@ class CreateClaim extends ModifyClaim {
 		$entity = $entityContent->getEntity();
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+		if( !$propertyId instanceof PropertyId ){
+			$this->dieUsage(
+				$propertyId->getSerialization() . ' does not appear to be a property ID',
+				'param-illegal'
+			);
+		}
 
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
@@ -97,7 +100,6 @@ class CreateClaim extends ModifyClaim {
 	public function getPossibleErrors() {
 		return array_merge(
 			parent::getPossibleErrors(),
-			$this->claimModificationHelper->getPossibleErrors(),
 			array(
 				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
 				array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
