@@ -34,6 +34,7 @@ return call_user_func( function() {
 		// includes
 		'Wikibase\ClaimSaver' => 'includes/ClaimSaver.php',
 		'Wikibase\ClaimSummaryBuilder' => 'includes/ClaimSummaryBuilder.php',
+		'Wikibase\ContentRetriever' => 'includes/ContentRetriever.php',
 		'Wikibase\DataTypeSelector' => 'includes/DataTypeSelector.php',
 		'Wikibase\EditEntity' => 'includes/EditEntity.php',
 		'Wikibase\EntityContentDiffView' => 'includes/EntityContentDiffView.php',
