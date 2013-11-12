@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_16fe0a02",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T23:17:21Z",
+      "side": 1,
+      "message": "the comments did not add valuable information that is not in the names of the variables.",
+      "parentUuid": "291c1151_f32b4093",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_935f6c3d",
         "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
         "patchSetId": 8
@@ -47,6 +65,24 @@
       "writtenOn": "2013-11-12T23:01:25Z",
       "side": 1,
       "message": "You could do var $siteSelector \u003d $( \u0027#wb-entitieswithoutpage-language\u0027 ); here and reuse that in the function below.",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f304201b",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T23:17:21Z",
+      "side": 1,
+      "message": "done?",
+      "parentUuid": "291c1151_935f6c3d",
       "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_b30e2839",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T23:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_33679829",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_93768cd5",
         "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
         "patchSetId": 8
@@ -81,6 +135,24 @@
       "writtenOn": "2013-11-12T23:01:25Z",
       "side": 1,
       "message": "please remove 2 indentation levels here (2 tabs)",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_d307241d",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-12T23:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_93768cd5",
       "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
