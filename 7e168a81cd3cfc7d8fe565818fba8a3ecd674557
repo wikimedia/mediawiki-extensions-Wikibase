@@ -103,6 +103,24 @@
       "revId": "7e168a81cd3cfc7d8fe565818fba8a3ecd674557",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_60593d33",
+        "filename": "repo/includes/content/ItemHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-12T10:47:29Z",
+      "side": 1,
+      "message": "No - EntityId is not abstract; an EntityId instance can actually have the type set to Item::ENTITY_TYPE, effectively making it an item ID.\n\nActually, any EntityId constructed from a DB query result that gives an entity type and a numeric ID will be a \"plain\" EntityId, since we currently don\u0027t have a factory that would generate the correct concrete subclass based on the entity type name.",
+      "parentUuid": "291c1151_b049c835",
+      "revId": "7e168a81cd3cfc7d8fe565818fba8a3ecd674557",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
