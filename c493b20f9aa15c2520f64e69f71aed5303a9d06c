@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_43336baa",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T14:03:55Z",
+      "side": 1,
+      "message": "this actually isn\u0027t the language selector, it is a site object, please name it like that ;)",
+      "revId": "c493b20f9aa15c2520f64e69f71aed5303a9d06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c3f67bd5",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T14:03:55Z",
+      "side": 1,
+      "message": "$( this ).append",
+      "revId": "c493b20f9aa15c2520f64e69f71aed5303a9d06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_23302f9e",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-12T14:03:55Z",
+      "side": 1,
+      "message": "just chain this with the above",
+      "revId": "c493b20f9aa15c2520f64e69f71aed5303a9d06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
