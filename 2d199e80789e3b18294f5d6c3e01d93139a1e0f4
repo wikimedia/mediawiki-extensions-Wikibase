@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_8d40325b",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-11-12T10:32:37Z",
+      "side": 1,
+      "message": "lower case id. Should be upper case?",
+      "revId": "2d199e80789e3b18294f5d6c3e01d93139a1e0f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_6d3db6da",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-11-12T10:32:37Z",
+      "side": 1,
+      "message": "lower case id. Should be upper case?",
+      "revId": "2d199e80789e3b18294f5d6c3e01d93139a1e0f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_4d363a03",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-11-12T10:32:37Z",
+      "side": 1,
+      "message": "I think in a previous patch set, id was written lower case. It appears to be used inconsistently throughout the English localisation. See comments elsewhere.\n\nSecond thought: I checked the previous version, and it was not this change set. Apparently different developers use different conventions. Probably something to look into, make consistent, and mention to the devs.",
+      "revId": "2d199e80789e3b18294f5d6c3e01d93139a1e0f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
