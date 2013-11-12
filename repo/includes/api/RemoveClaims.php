@@ -146,16 +146,6 @@ class RemoveClaims extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge(
-			parent::getPossibleErrors(),
-			$this->claimModificationHelper->getPossibleErrors()
-		);
-	}
-
-	/**
 	 * @see \ApiBase::getAllowedParams
 	 *
 	 * @since 0.3

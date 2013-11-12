@@ -2,16 +2,19 @@
 
 namespace Wikibase\Api;
 
-use Status, User, Title;
+use ApiMain;
+use MWException;
+use Revision;
+use Status;
 use ApiBase;
+use Title;
 use ValueParsers\ParseException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
-use Wikibase\Utils;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -29,7 +32,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $stringNormalizer;
 
-	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
+	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
@@ -38,15 +41,15 @@ abstract class ModifyEntity extends ApiWikibase {
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
 	 *
-	 * @see \EditEntity::attemptSave
-	 * @see \WikiPage::doEditContent
+	 * @see EditEntity::attemptSave
+	 * @see WikiPage::doEditContent
 	 *
 	 * @var integer $flags
 	 */
 	protected $flags;
 
 	/**
-	 * @see  Wikibase\Api\ApiWikibase::getRequiredPermissions()
+	 * @see ApiWikibase::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
@@ -56,52 +59,28 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
-	 * Get the entity.
+	 * Get the entity using the id, site and title params passed to the api
 	 *
 	 * @since 0.1
 	 *
 	 * @param array $params
 	 *
-	 * @return \Wikibase\EntityContent Found existing entity
+	 * @return EntityContent|null Found existing entity
 	 */
-	protected function getEntityContent( array $params ) {
-		$entityContent = null;
-
-		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
+	protected function getEntityContentFromApiParams( array $params ) {
 		if ( isset( $params['id'] ) ) {
 			$id = $params['id'];
-
-			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-			try{
-				$entityId = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $id );
-			} catch( ParseException $e ){
-				$this->dieUsage( "Could not parse {$id}, No entity found", 'no-such-entity-id' );
-			}
-
-			$entityTitle = $entityId ? $entityContentFactory->getTitleForId( $entityId, \Revision::FOR_THIS_USER ) : null;
-			if ( is_null( $entityTitle ) ) {
-				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
-			}
-
+			$entityId = $this->getEntityIdFromString( $id );
+			$entityTitle = $this->getTitleFromEntityId( $entityId );
 		}
-		// Otherwise check if we have a link and try that.
-		// This will always result in an item, because only items have sitelinks.
 		elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$itemHandler = new ItemHandler();
-
-			$entityTitle = $itemHandler->getTitleFromSiteLink(
-				$params['site'],
-				$this->stringNormalizer->trimToNFC( $params['title'] )
-			);
-
-			if ( is_null( $entityTitle ) ) {
-				$this->dieUsage( 'No entity found matching site link ' . $params['site'] . ':' . $params['title'] , 'no-such-entity-link' );
-			}
+			$entityTitle = $this->getTitleFromSiteTitleCombination( $params['site'],  $params['title'] );
 		} else {
+			//Things that use this method assume null means we want a new entity
 			return null;
 		}
 
+		/** @var Title $entityTitle */
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
@@ -113,14 +92,60 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
+	 * @param string $id
+	 * @return EntityId
+	 */
+	private function getEntityIdFromString( $id ) {
+		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		try{
+			return $entityIdParser->parse( $id );
+		} catch( ParseException $e ){
+			$this->dieUsage( "Could not parse {$id}, No entity found", 'no-such-entity-id' );
+		}
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @return Title
+	 */
+	private function getTitleFromEntityId( EntityId $entityId ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		try{
+			//This could return either null or a MWException (be ready for them both!)
+			$title = $entityContentFactory->getTitleForId( $entityId, Revision::FOR_THIS_USER );
+			if( $title === null ){
+				throw new MWException( "No entity found matching ID " . $entityId->getSerialization() );
+			}
+			return $title;
+		} catch( MWException $e ){
+			$this->dieUsage( "No entity found matching ID " . $entityId->getSerialization(), 'no-such-entity-id' );
+		}
+	}
+
+	/**
+	 * @param string $site
+	 * @param string $title
+	 * @return Title
+	 */
+	private function getTitleFromSiteTitleCombination( $site, $title ) {
+		$itemHandler = new ItemHandler();
+		$entityTitle = $itemHandler->getTitleFromSiteLink(
+			$site,
+			$this->stringNormalizer->trimToNFC( $title )
+		);
+		if ( is_null( $entityTitle ) ) {
+			$this->dieUsage( 'No entity found matching site link ' . $site . ':' . $title , 'no-such-entity-link' );
+		}
+		return $entityTitle;
+	}
+
+	/**
 	 * Create the entity.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
-	 * @param array       $params
-	 *
-	 * @internal param \Wikibase\EntityContent $entityContent
-	 * @return \Wikibase\EntityContent Newly created entity
+	 * @param array $params
+	 * @return EntityContent Newly created entity
 	 */
 	protected function createEntity( array $params ) {
 		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
@@ -147,9 +172,8 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $entity
-	 * @param array       $params
+	 * @param array $params
 	 *
-	 * @internal param \Wikibase\EntityContent $entityContent
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
 	protected abstract function modifyEntity( EntityContent &$entity, array $params );
@@ -169,7 +193,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::execute()
+	 * @see ApiBase::execute()
 	 *
 	 * @since 0.1
 	 */
@@ -183,7 +207,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$this->validateParameters( $params );
 
 		// Try to find the entity or fail and create it, or die in the process
-		$entityContent = $this->getEntityContent( $params );
+		$entityContent = $this->getEntityContentFromApiParams( $params );
 		if ( is_null( $entityContent ) ) {
 			$entityContent = $this->createEntity( $params );
 		}
@@ -213,8 +237,6 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
 		//      not added to $this->flags explicitly, the save will fail.
-
-		// collect information and create an EditEntity
 		$status = $this->attemptSaveEntity(
 			$entityContent,
 			$summary,
@@ -293,7 +315,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::isWriteMode()
+	 * @see ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
 		return true;
@@ -410,9 +432,6 @@ abstract class ModifyEntity extends ApiWikibase {
 				"Will default to 'item' as this will be the most common type."
 			),
 			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
-				//'Later it can be implemented a mechanism where a token can be returned spontaneously',
-				//'and the requester should then start using the new token from the next request, possibly when',
-				//'repeating a failed request.'
 			),
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'

@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Snak;
 use Wikibase\SnakFactory;
@@ -68,9 +69,10 @@ class SnakConstructionService {
 	 * @param mixed $rawValue
 	 *
 	 * @return Snak
-	 * @throws InvalidArgumentException
-	 * @throws IllegalValueException
-	 * @throws PropertyNotFoundException
+	 * @throws PropertyNotFoundException from getDataTypeIdForProperty
+	 * @throws OutOfBoundsException from getType
+	 * @throws InvalidArgumentException from newDataValue and newSnak
+	 * @throws IllegalValueException from newDataValue
 	 */
 	public function newSnak( PropertyId $propertyId, $snakType, $rawValue = null ) {
 		$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );

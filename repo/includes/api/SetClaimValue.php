@@ -103,17 +103,6 @@ class SetClaimValue extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge(
-			parent::getPossibleErrors(),
-			$this->claimModificationHelper->getPossibleErrors(),
-			array()
-		);
-	}
-
-	/**
 	 * @see \ApiBase::getParamDescription
 	 */
 	public function getParamDescription() {
