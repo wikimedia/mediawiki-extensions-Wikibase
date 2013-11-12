@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_e3ae172d",
+        "filename": "repo/tests/phpunit/includes/api/GetClaimsTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T15:04:06Z",
+      "side": 1,
+      "message": "why can\u0027t data type lookup service be provided here?",
+      "revId": "26a050af0a536d05a9242df373427117eb6a6424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
