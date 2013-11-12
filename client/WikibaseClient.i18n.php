@@ -2449,6 +2449,7 @@ $messages['ku-latn'] = array(
 $messages['la'] = array(
 	'wikibase-editlinks' => 'Nexus recensere',
 	'wikibase-editlinkstitle' => 'Nexus inter linguas recensere',
+	'wikibase-rc-hide-wikidata' => '$1 Vicidata',
 );
 
 /** Luxembourgish (Lëtzebuergesch)

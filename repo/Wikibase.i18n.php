@@ -480,7 +480,8 @@ See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
 See example: [[d:Special:SpecialPages#mw-specialpagesgroup-wikibaserepo|d:Special:SpecialPages]]',
 	'wikibase-edit' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
-This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.',
+This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.
+{{Identical|Edit}}',
 	'wikibase-save' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.
 
@@ -4232,7 +4233,7 @@ $messages['diq'] = array(
 	'wikibase-itemdisambiguation-submit' => 'Cı geyre',
 	'wikibase-newentity-label' => 'Etiket:',
 	'wikibase-newentity-description' => 'Şınasiyen:',
-	'wikibase-newentity-submit' => 'Vıraze',
+	'wikibase-newentity-submit' => 'İycad ke',
 	'wikibase-setlabel-label' => 'Etiket', # Fuzzy
 	'wikibase-setentity-id' => 'ID', # Fuzzy
 	'wikibase-setentity-language' => 'Zıwan:',
@@ -13234,11 +13235,12 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
  */
 $messages['pms'] = array(
 	'wikibase-desc' => 'Depòsit ëd dat struturà',
-	'specialpages-group-wikibaserepo' => 'Depòsit ëd Wikidata', # Fuzzy
+	'specialpages-group-wikibaserepo' => 'Depòsit ëd Wikidata',
 	'wikibase-edit' => 'modìfica',
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'scancela',
 	'wikibase-add' => 'gionta',
+	'wikibase-addqualifier' => 'gionté na qualìfica',
 	'wikibase-save-inprogress' => "An cors d'argistrassion...",
 	'wikibase-remove-inprogress' => 'Sganfura an cors...',
 	'wikibase-label-empty' => "Gnun-e tichëtte anco' definìe",
@@ -13382,16 +13384,16 @@ $messages['pms'] = array(
 	'content-model-wikibase-item' => 'Element ëd Wikibase',
 	'content-model-wikibase-property' => 'Propietà ëd Wikibase',
 	'content-model-wikibase-query' => 'Arcesta ëd Wikibase',
-	'right-item-override' => "Dzorascrive j'element",
+	'right-item-override' => "Dzorascrive j'element", # Fuzzy
 	'right-item-create' => "Creé dj'element",
-	'right-item-remove' => "Gavé j'element",
+	'right-item-remove' => "Gavé j'element", # Fuzzy
 	'right-alias-remove' => "Gavé dj'alternative",
 	'right-sitelink-remove' => 'Gavé dle liure ëd sit',
 	'right-sitelink-update' => 'Agiorné dle liure ëd sit',
-	'right-linktitles-update' => 'Agiorné ij tìtoj ëd le liure',
-	'right-label-remove' => 'Gavé dle tichëtte',
+	'right-linktitles-update' => 'Agiorné ij tìtoj ëd le liure', # Fuzzy
+	'right-label-remove' => 'Gavé dle tichëtte', # Fuzzy
 	'right-label-update' => 'Agiorna le tichëtte',
-	'right-description-remove' => 'Gavé dle descrission',
+	'right-description-remove' => 'Gavé dle descrission', # Fuzzy
 	'right-description-update' => 'Agiorné dle descrission',
 );
 
@@ -16722,6 +16724,7 @@ $messages['yi'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => 'צוגעלייגט [$2] {{PLURAL:$1|אליאס|אליאסן}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'אראפגענומען [$2] {{PLURAL:$1|אליאס|אליאסן}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'צוגעשטעלט לינק צו [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'לינק צו [$2] געענדערט',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'אראפגענומען לינק צו [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'געשאפן דעם אביעקט צו פארבינדן בלעטער [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'צוגעלייגט א שפראך לינק צו פארבינדן [$2↔$3]',
@@ -16739,11 +16742,17 @@ $messages['yi'] = array(
 	'wikibase-item-summary-wbsetclaim-update-references' => 'געענדערט {{PLURAL:$4|איין רעפערענץ|$4 רעפערענצן}} פון {{PLURAL:$3|טענה|טענות}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'געענדערט ראנג פון {{PLURAL:$3|טענה|טענות}}',
 	'wikibase-item-summary-clientsitelink-update' => 'בלאט באוועגט פון [$3] צו [$4]',
+	'wikibase-item-summary-wbremovereferences-remove' => 'אראפגענומען {{PLURAL:$3|רעפערענץ|רעפערענצן}} פֿון טענה',
+	'wikibase-item-summary-wbsetstatementrank' => "געענדערט ראַנג פֿון ארויסזאג פֿון '$3' אויף '$4'",
+	'wikibase-item-summary-wbmergeitems-from' => "צונויפֿגעפֿירט אביעקט פון '$3'",
+	'wikibase-item-summary-wbmergeitems-to' => "צונויפֿגעפֿירט אביעקט אין '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'געשאפֿן א נײַעם אטריבוט',
 	'wikibase-property-summary-wbeditentity-create' => 'געשאפֿן א נײַעם אטריבוט',
 	'wikibase-property-summary-wbeditentity-update' => 'דערהײַנטיקט אן אטריבוט',
+	'wikibase-property-summary-wbsetlabel-add' => 'צוגעלייגט [$2] באצייכענונג',
 	'wikibase-property-summary-wbsetlabel-set' => 'געענדערט [$2] באצייכענונג',
 	'wikibase-property-summary-wbsetlabel-remove' => 'אראפגענומען  [$2] באצייכענונג',
+	'wikibase-property-summary-wbsetdescription-add' => 'צוגעלייגט [$2] באשרייבונג',
 	'wikibase-property-summary-wbsetdescription-set' => 'געענדערט [$2] באשרייבונג',
 	'wikibase-property-summary-wbsetdescription-remove' => 'אַראָפּגענומען [$2] באַשרייַבונג',
 	'wikibase-property-summary-wbsetaliases-set' => 'שטעלן [$2] {{PLURAL:$1|אליאס|אליאסן}}',
@@ -16755,8 +16764,10 @@ $messages['yi'] = array(
 	'wikibase-listdatatypes-commonsmedia-head' => 'קאמאנס מעדיע',
 	'wikibase-listdatatypes-quantity-head' => 'קוואנטיטעט',
 	'wikibase-listdatatypes-monolingual-text-head' => 'איינשפראכיקער טעקסט',
+	'wikibase-listdatatypes-multilingual-text-head' => 'פֿילשפראכיקער טעקסט',
 	'wikibase-listdatatypes-string-head' => 'שנורל',
 	'wikibase-listdatatypes-time-head' => 'צײַט',
+	'wikibase-listdatatypes-url-head' => 'URL',
 	'content-model-wikibase-item' => 'Wikibase-דאטנאביעקט',
 	'content-model-wikibase-property' => 'Wikibase-אייגנשאפֿט',
 	'content-model-wikibase-query' => 'Wikibase-פֿראגע',
