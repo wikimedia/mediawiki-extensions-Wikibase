@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "291c1151_f32b4093",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-11-12T23:07:05Z",
+      "side": 1,
+      "message": "Is there any reason why you have removed the comments for this variables? It would be better to add a comment for the new variables than to remove the existing ones.",
+      "revId": "71e358973cd2f14c805347477e49d6bcd7239e39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_935f6c3d",
         "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
         "patchSetId": 8
