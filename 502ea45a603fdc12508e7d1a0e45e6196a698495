@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_20bae5de",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_006249da",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_c0a831dd",
         "filename": "repo/includes/specials/SpecialModifyEntity.php",
         "patchSetId": 3
@@ -170,6 +188,24 @@
       "writtenOn": "2013-11-12T11:07:56Z",
       "side": 1,
       "message": "...else throw an exception?",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_40bd21d3",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:42:23Z",
+      "side": 1,
+      "message": "good idea for another future patch",
+      "parentUuid": "291c1151_c0a831dd",
       "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -193,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_60b4ddf0",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_4085215a",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_2082e555",
         "filename": "repo/includes/specials/SpecialSetSiteLink.php",
         "patchSetId": 3
@@ -210,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_80b719f3",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_2082e555",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_807f1962",
         "filename": "repo/includes/specials/SpecialSetSiteLink.php",
         "patchSetId": 3
@@ -221,6 +293,24 @@
       "writtenOn": "2013-11-12T11:07:56Z",
       "side": 1,
       "message": "Exceptions are so much nicer for error reporting...",
+      "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a0ced581",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T11:42:23Z",
+      "side": 1,
+      "message": "please make a new bug report for improved error handling in the special pages and lydia can set priority for that",
+      "parentUuid": "291c1151_807f1962",
       "revId": "502ea45a603fdc12508e7d1a0e45e6196a698495",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
