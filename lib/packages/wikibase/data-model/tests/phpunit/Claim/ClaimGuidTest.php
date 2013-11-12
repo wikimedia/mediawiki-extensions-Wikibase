@@ -4,10 +4,7 @@ namespace Wikibase\Test;
 
 use Exception;
 use Wikibase\DataModel\Claim\ClaimGuid;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Item;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\DataModel\Claim\ClaimGuid

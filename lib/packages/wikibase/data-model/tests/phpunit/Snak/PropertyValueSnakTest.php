@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
 
 /**

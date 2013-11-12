@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\HashArray;
 use Hashable;
+use Wikibase\HashArray;
 
 /**
  * @covers Wikibase\HashArray

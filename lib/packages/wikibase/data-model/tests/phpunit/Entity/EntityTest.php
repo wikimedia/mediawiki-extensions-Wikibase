@@ -14,7 +14,6 @@ use Wikibase\Entity;
 use Wikibase\EntityDiff;
 use Wikibase\EntityId;
 use Wikibase\Item;
-use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;

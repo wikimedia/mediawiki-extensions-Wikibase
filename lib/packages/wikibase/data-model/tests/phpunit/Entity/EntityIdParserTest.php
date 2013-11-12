@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 

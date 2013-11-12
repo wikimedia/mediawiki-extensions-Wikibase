@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Diff\Diff;
-use Diff\DiffOp;
 
 /**
  * Represents a diff between two Wikibase\Item instances.

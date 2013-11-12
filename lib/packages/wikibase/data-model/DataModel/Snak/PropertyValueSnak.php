@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use DataValues\UnDeserializableValue;
 use DataValues\DataValue;
+use DataValues\UnDeserializableValue;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**

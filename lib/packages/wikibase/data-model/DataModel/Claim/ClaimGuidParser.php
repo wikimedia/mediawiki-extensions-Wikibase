@@ -2,9 +2,6 @@
 
 namespace Wikibase\DataModel\Claim;
 
-use Wikibase\DataModel\Claim\ClaimGuid;
-use Wikibase\DataModel\Claim\ClaimGuidParsingException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 

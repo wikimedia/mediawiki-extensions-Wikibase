@@ -15,7 +15,6 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\ItemDiff;
-use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;

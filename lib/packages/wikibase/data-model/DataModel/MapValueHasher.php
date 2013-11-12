@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
+use Hashable;
 use InvalidArgumentException;
 use Traversable;
-use Hashable;
 
 /**
  * Generates hashes for associative arrays based on the values of their elements.

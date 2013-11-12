@@ -11,7 +11,6 @@ use ReflectionClass;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;

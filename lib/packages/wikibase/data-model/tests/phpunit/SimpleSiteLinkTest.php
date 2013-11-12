@@ -2,9 +2,9 @@
 
 namespace Wikibase\DataModel\Test;
 
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * @covers Wikibase\DataModel\SimpleSiteLink

@@ -4,13 +4,12 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\ByPropertyIdArray;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Property;
-use Wikibase\Snak;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Snak;
 use Wikibase\Statement;
 
 /**

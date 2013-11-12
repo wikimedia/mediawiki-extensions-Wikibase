@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Claim;
 
 use Comparable;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

@@ -2,9 +2,9 @@
 
 namespace Wikibase\DataModel\Entity;
 
+use DataValues\DataValue;
 use DataValues\DataValueObject;
 use DataValues\IllegalValueException;
-use DataValues\DataValue;
 use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**

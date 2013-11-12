@@ -8,11 +8,9 @@ use Diff\MapPatcher;
 use Diff\Patcher;
 use InvalidArgumentException;
 use RuntimeException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use Wikibase\DataModel\Internal\ObjectComparer;
-use Wikibase\Lib\GuidGenerator;
-use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Represents a single Wikibase entity.
