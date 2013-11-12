@@ -22,28 +22,17 @@ use Wikibase\StoreFactory;
  */
 class SiteLinkLookupTest extends \MediaWikiTestCase {
 
-	public function instanceProvider() {
-		$instances = array();
+	public function setUp() {
+		parent::setUp();
 
-		if ( defined( 'WB_VERSION' ) ) {
-			$instances[] = StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
-
-		if ( defined( 'WBC_VERSION' ) ) {
-			$instances[] = WikibaseClient::getDefaultInstance()->getStore( 'sqlstore' )->getSiteLinkTable();
-		}
-
-		if ( empty( $instances ) ) {
-			$this->markTestIncomplete( 'No sitelink lookup tables available' );
-		}
-
-		return $this->arrayWrap( $instances );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetConflictsForItem( SiteLinkLookup $lookup ) {
+	public function testGetConflictsForItem() {
+		$lookup = StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
+
 		$conflicts = $lookup->getConflictsForItem( Item::newEmpty() );
 		$this->assertTrue( $conflicts === array() );
 	}
