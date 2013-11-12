@@ -50,6 +50,24 @@
       "revId": "2d199e80789e3b18294f5d6c3e01d93139a1e0f4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_20fd8505",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-12T10:37:40Z",
+      "side": 1,
+      "message": "i can make it lowercase here.  Thanks for catching that and we can try to improve.",
+      "parentUuid": "291c1151_4d363a03",
+      "revId": "2d199e80789e3b18294f5d6c3e01d93139a1e0f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
