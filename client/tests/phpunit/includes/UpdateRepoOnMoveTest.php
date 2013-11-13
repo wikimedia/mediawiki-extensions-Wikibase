@@ -6,7 +6,7 @@ use Wikibase\UpdateRepoOnMove;
 use Wikibase\Settings;
 
 /**
- * Tests for the UpdateRepoOnMove class.
+ * @covers Wikibase\UpdateRepoOnMove
  *
  * @file
  * @since 0.4
