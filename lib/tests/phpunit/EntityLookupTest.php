@@ -10,7 +10,6 @@ use Wikibase\Item;
 use Wikibase\Query;
 use Wikibase\EntityLookup;
 use Wikibase\Property;
-use DataTypes\DataTypeFactory;
 
 /**
  * Base class for testing EntityLookup implementations
@@ -24,7 +23,7 @@ use DataTypes\DataTypeFactory;
 abstract class EntityLookupTest extends EntityTestCase {
 
 	/**
-	 * @param Entity[]     $entities
+	 * @param Entity[] $entities
 	 *
 	 * @todo: Support for multiple revisions per entity.
 	 *        Needs a way to return the revision IDs.
@@ -136,13 +135,13 @@ abstract class EntityLookupTest extends EntityTestCase {
 	public static function provideHasEntity() {
 		$cases = array(
 			array( // #0
-				'q42', true,
+				new ItemId( 'q42' ), true,
 			),
 			array( // #1
-				'q753', false,
+				new ItemId( 'q753' ), false,
 			),
 			array( // #2
-				'p753', true,
+				new PropertyId( 'p753' ), true,
 			),
 		);
 
@@ -152,14 +151,10 @@ abstract class EntityLookupTest extends EntityTestCase {
 	/**
 	 * @dataProvider provideHasEntity
 	 *
-	 * @param string|EntityId $id The entity to check
+	 * @param EntityId $id The entity to check
 	 * @param bool $expected
 	 */
-	public function testHasEntity( $id, $expected ) {
-		if ( is_string( $id ) ) {
-			$id = EntityId::newFromPrefixedId( $id );
-		}
-
+	public function testHasEntity( EntityId $id, $expected ) {
 		$lookup = $this->getLookup();
 		$result = $lookup->hasEntity( $id );
 
