@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "291c1151_7c5abdf0",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-13T11:44:07Z",
+      "side": 1,
+      "message": "I\u0027d prefer to let that bubble up as far as possible before reporting it. That avoids try/catch blocks, special return values, etc.",
+      "revId": "146b0d194745e03ce4e41a665c465a920e65ee3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_dec2ce86",
         "filename": "repo/includes/specials/SpecialModifyEntity.php",
         "patchSetId": 5
@@ -48,6 +65,24 @@
       "writtenOn": "2013-11-12T16:01:35Z",
       "side": 1,
       "message": "comment in previous PS not addressed",
+      "revId": "146b0d194745e03ce4e41a665c465a920e65ee3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_dc69f18e",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-13T11:44:07Z",
+      "side": 1,
+      "message": "In the previous PS, Jeroen suggested to just use new ItemId() with try/catch.\nI suggest to use new ItemId() with no try/catch. Let the exception bubble up to the presentation layer and handle it there. That gets rid of a bunch of special cases.",
+      "parentUuid": "291c1151_febdcafe",
       "revId": "146b0d194745e03ce4e41a665c465a920e65ee3a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
