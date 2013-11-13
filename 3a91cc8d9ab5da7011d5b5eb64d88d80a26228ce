@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_c87e8b14",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-13T20:51:01Z",
+      "side": 1,
+      "message": "rather use getTitle()-\u003egetPrefixedText() here",
+      "revId": "3a91cc8d9ab5da7011d5b5eb64d88d80a26228ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
