@@ -2,14 +2,14 @@
 
 namespace Wikibase\Test;
 
+use Title;
+use Wikibase\Client\Specials\SpecialUnconnectedPages;
+use Wikibase\NamespaceChecker;
+
 /**
- * Tests for the SpecialUnconnectedPages class.
+ * @covers Wikibase\Client\Specials\SpecialUnconnectedPages
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClientTest
- * @ingroup Test
  *
  * @group WikibaseClient
  * @group SpecialPage
@@ -22,7 +22,7 @@ namespace Wikibase\Test;
 class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Client\Specials\SpecialUnconnectedPages();
+		return new SpecialUnconnectedPages();
 	}
 
 	public function testExecute(  ) {
@@ -37,7 +37,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	 */
 	public function testNamespaceChecker( $namespace, $expected ) {
 		$page = $this->newSpecialPage();
-		$checker = new \Wikibase\NamespaceChecker( array( 2, 4 ), array( 0 ) );
+		$checker = new NamespaceChecker( array( 2, 4 ), array( 0 ) );
 		$page->setNamespaceChecker( $checker );
 		$this->assertEquals( $expected, $page->getNamespaceChecker()->isWikibaseEnabled( $namespace ) );
 	}
@@ -60,8 +60,8 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	 */
 	public function testBuildConditionals( $text, $expected ) {
 		$page = $this->newSpecialPage();
-		$title = \Title::newFromText( $text);
-		$checker = new \Wikibase\NamespaceChecker( array( 2, 4 ), array( 0 ) );
+		$title = Title::newFromText( $text);
+		$checker = new NamespaceChecker( array( 2, 4 ), array( 0 ) );
 		$dbr = wfGetDB( DB_SLAVE );
 		$this->assertEquals( $expected, $page->buildConditionals( $dbr, $title, $checker ) );
 	}
