@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "291c1151_42d7dc21",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-11-13T18:37:56Z",
+      "side": 1,
+      "message": "Aren\u0027t $language and $languageCode redundant?",
+      "revId": "c69c8ed0b95c20081c4b0422f0dd4784c2a0b14b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_22d2e033",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-11-13T18:37:56Z",
+      "side": 1,
+      "message": "$site is never used (only in prepareArguments)",
+      "revId": "c69c8ed0b95c20081c4b0422f0dd4784c2a0b14b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e21b6816",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-11-13T18:37:56Z",
+      "side": 1,
+      "message": "According to this line, $language actually stores a language code...",
+      "revId": "c69c8ed0b95c20081c4b0422f0dd4784c2a0b14b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c2e3cc06",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-11-13T18:37:56Z",
+      "side": 1,
+      "message": "Just noting that a site selector is the wrong thing to select a language. I think here is some kind of misunderstanding according to the difference of site and language.",
+      "revId": "c69c8ed0b95c20081c4b0422f0dd4784c2a0b14b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_a7fd026b",
         "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
         "patchSetId": 9
