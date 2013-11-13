@@ -12,9 +12,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  *
  * @since 0.3
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
