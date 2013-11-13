@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_fc8a2d64",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-13T11:28:23Z",
+      "side": 1,
+      "message": "Why is this in EntityContent, if it\u0027s only used by PropertyContent?",
+      "revId": "3d508d2d482321131bb383f523b0071e6283c58c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_3cf12502",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-13T11:28:23Z",
+      "side": 1,
+      "message": "This reject all valid entity IDs, but we only want to reject valid *property* ids. When saving properties, that is.",
+      "revId": "3d508d2d482321131bb383f523b0071e6283c58c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_5cf26106",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-13T11:28:23Z",
+      "side": 1,
+      "message": "It would be nice to implement constraints using the ValueValidator interface. Perhaps EntityContent could have a function for returning a list of validators (two of them: one for pre-save validators, and one for client-input validators).",
+      "revId": "3d508d2d482321131bb383f523b0071e6283c58c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_dc8d717e",
+        "filename": "repo/includes/content/PropertyContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-13T11:28:23Z",
+      "side": 1,
+      "message": "Could be checked before the uniqueness, since it\u0027s the faster check.",
+      "revId": "3d508d2d482321131bb383f523b0071e6283c58c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_1cec692a",
+        "filename": "repo/tests/phpunit/includes/content/PropertyContentTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-13T11:28:23Z",
+      "side": 1,
+      "message": "Please test that setting a label to \"Q42\" *does* work.",
+      "revId": "3d508d2d482321131bb383f523b0071e6283c58c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
