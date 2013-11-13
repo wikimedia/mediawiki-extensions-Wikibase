@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_47d7ee21",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-13T17:22:29Z",
+      "side": 0,
+      "message": "I am okay with removing the description string, but the @var tag should not be stripped. The @var tag should also be added for the new fields.\n$type is kind of a problematic variable name which, at least, should be described properly (just mentioning, not related to this change). Same for $language since $language was actually the language code (and not a Language object) before. This may have caused some confusion (at least for me it did).",
+      "revId": "7987380a5455272e638670045d3f132e4853359e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

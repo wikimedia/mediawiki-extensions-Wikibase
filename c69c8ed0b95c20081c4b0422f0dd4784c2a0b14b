@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_a7fd026b",
+        "filename": "repo/resources/wikibase.special/wikibase.special.entitiesWithout.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-11-13T17:22:29Z",
+      "side": 1,
+      "message": "You do not need the jQuery wrapper here. You probably want to prefix the siteSelector variable with a dollar sign do indicate that the element is jQuery wrapped.",
+      "revId": "c69c8ed0b95c20081c4b0422f0dd4784c2a0b14b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
