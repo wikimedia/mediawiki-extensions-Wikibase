@@ -1,32 +1,17 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\LangLinkHandler;
+
 use MediaWikiSite;
+use ParserOutput;
+use Title;
+use Wikibase\Item;
+use Wikibase\LangLinkHandler;
 
 /**
- * Tests for the LangLinkHandler class.
+ * @covers Wikibase\LangLinkHandler
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group WikibaseClient
  * @group Database
@@ -78,7 +63,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( self::$itemData as $data ) {
-			$item = new \Wikibase\Item( $data );
+			$item = new Item( $data );
 			$this->mockRepo->putEntity( $item );
 		}
 
@@ -118,7 +103,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function testGetEntityLinks( $title, $expectedLinks ) {
 		if ( is_string( $title ) ) {
-			$title = \Title::newFromText( $title );
+			$title = Title::newFromText( $title );
 		}
 
 		$links = array();
@@ -148,7 +133,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	protected function makeParserOutput( $langlinks, $noexternallanglinks = array() ) {
-		$out = new \ParserOutput();
+		$out = new ParserOutput();
 		$this->langLinkHandler->setNoExternalLangLinks( $out, $noexternallanglinks );
 
 		foreach ( $langlinks as $lang => $link ) {
@@ -197,7 +182,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideExcludeRepoLinks
 	 */
 	public function testExcludeRepoLinks( $alreadyExcluded, $toExclude, $expected ) {
-		$out = new \ParserOutput();
+		$out = new ParserOutput();
 		$this->langLinkHandler->setNoExternalLangLinks( $out, $alreadyExcluded );
 		$this->langLinkHandler->excludeRepoLangLinks( $out, $toExclude );
 		$nel = $this->langLinkHandler->getNoExternalLangLinks( $out );
@@ -235,7 +220,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function testUseRepoLinks( $title, $noexternallanglinks, $expected ) {
 		if ( is_string( $title ) ) {
-			$title = \Title::newFromText( $title );
+			$title = Title::newFromText( $title );
 			$title->resetArticleID( 1 );
 		}
 
@@ -316,7 +301,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function testGetEffectiveRepoLinks( $title, $langlinks, $noexternallanglinks, $expectedLinks ) {
 		if ( is_string( $title ) ) {
-			$title = \Title::newFromText( $title );
+			$title = Title::newFromText( $title );
 		}
 
 		$out = $this->makeParserOutput( $langlinks, $noexternallanglinks );
@@ -353,7 +338,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function testAddLinksFromRepository( $title, $langlinks, $noexternallanglinks, $expectedLinks ) {
 		if ( is_string( $title ) ) {
-			$title = \Title::newFromText( $title );
+			$title = Title::newFromText( $title );
 		}
 
 		$out = $this->makeParserOutput( $langlinks, $noexternallanglinks );
@@ -465,7 +450,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideSuppressRepoLinks
 	 */
 	public function testSuppressRepoLinks( $repoLinks, $nel, $expectedLinks ) {
-		$out = new \ParserOutput();
+		$out = new ParserOutput();
 		$out->setProperty( 'noexternallanglinks', serialize( $nel ) );
 
 		$actualLinks = $this->langLinkHandler->suppressRepoLinks( $out, $repoLinks );

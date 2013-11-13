@@ -12,7 +12,7 @@ use Wikibase\RepoLinker;
 use Wikibase\SiteLinkTable;
 
 /**
- * @covers Wikibase\InfoActionHookHandler
+ * @covers Wikibase\Client\Hooks\InfoActionHookHandler
  *
  * @since 0.5
  *
