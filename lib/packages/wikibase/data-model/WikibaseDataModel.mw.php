@@ -23,6 +23,7 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'version' => WIKIBASE_DATAMODEL_VERSION,
 	'author' => array(
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
+		'The Wikidata team',
 	),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_DataModel',
 	'descriptionmsg' => 'wikibasedatamodel-desc'
