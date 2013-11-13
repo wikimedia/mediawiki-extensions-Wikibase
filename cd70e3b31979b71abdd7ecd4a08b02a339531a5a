@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_c824cb11",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-13T21:18:11Z",
+      "side": 1,
+      "message": "Missing space before the dot :D",
+      "revId": "cd70e3b31979b71abdd7ecd4a08b02a339531a5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
