@@ -26,7 +26,18 @@ use Wikibase\StorageException;
  */
 class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLookup {
 
+	/**
+	 * Entity id serialization => array of EntityRevision
+	 *
+	 * @var array[]
+	 */
 	protected $entities = array();
+
+	/**
+	 * "$globalSiteId:$pageTitle" => item id integer
+	 *
+	 * @var string[]
+	 */
 	protected $itemByLink = array();
 
 	private $maxId = 0;
