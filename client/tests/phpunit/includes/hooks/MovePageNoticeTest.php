@@ -10,7 +10,7 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\RepoLinker;
 
 /**
- * @covers Wikibase\Client\PageMoveNotice
+ * @covers Wikibase\Client\MovePageNotice
  *
  * @since 0.4
  *
