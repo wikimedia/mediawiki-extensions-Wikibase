@@ -178,14 +178,21 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * @see jQuery.widget._setOption
+	 * @triggers {Error} when trying to set an option that cannot be set after initialization.
 	 */
 	_setOption: function( key, value ) {
+		switch( key ) {
+			case 'autoStartEditing':
+				// doesn't make sense to change this after initialization
+				throw new Error( 'Can not change jQuery.valueview option "' + key
+					+ '" after widget initialization' );
+		}
+
 		PARENT.prototype._setOption.call( this, key, value );
 
 		switch( key ) {
-			case 'autoStartEditing':
-				break; // doesn't make sense to change this after initialization
 			case 'expertProvider':
+			case 'on': // TODO: make this work properly and test
 				this._updateExpert();
 				break;
 			case 'value':
