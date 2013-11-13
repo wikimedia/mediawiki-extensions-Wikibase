@@ -94,7 +94,7 @@ $messages['qqq'] = array(
 See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
 	'specialpages-group-wikibaseclient' => '{{doc-special-group|that=is related to Wikidata clients|like=[[Special:UnconnectedPages]]}}',
 	'tooltip-t-wikibase' => 'Tooltip for toolbox link to connected Wikibase data repository item',
-	'accesskey-t-wikibase' => 'The quick access key for the link to the connected repository [[d:Wikidata:Glossary#Item|item]] displayed in the client\'s toolbox.',
+	'accesskey-t-wikibase' => "The quick access key for the link to the connected repository [[d:Wikidata:Glossary#Item|item]] displayed in the client's toolbox.",
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
 
 Parameters:
@@ -986,6 +986,7 @@ $messages['de'] = array(
 	'wikibase-client-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
 	'specialpages-group-wikibaseclient' => 'Wikidata-Client',
 	'tooltip-t-wikibase' => 'Link zum verbundenen Datenrepositoriumsobjekt',
+	'accesskey-t-wikibase' => 'g',
 	'wikibase-after-page-move' => 'Du kannst auch das zugeordnete Wikidata-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.',
 	'wikibase-after-page-move-queued' => 'Das mit dieser Seite verbundene [$1 Wikidata-Objekt] wird bald automatisch aktualisiert werden.',
 	'wikibase-comment-add' => 'Ein Wikidata-Objekt wurde erstellt.',
@@ -3404,6 +3405,7 @@ $messages['roa-tara'] = array(
 /** Russian (русский)
  * @author Ignatus
  * @author Kaganer
+ * @author Okras
  * @author Ole Yves
  * @author Putnik
  * @author Soul Train
@@ -3413,6 +3415,7 @@ $messages['ru'] = array(
 	'wikibase-client-desc' => 'Клиент для расширения Wikibase',
 	'specialpages-group-wikibaseclient' => 'Клиент Викиданных',
 	'tooltip-t-wikibase' => 'Ссылка на связанный элемент репозитория данных',
+	'accesskey-t-wikibase' => 'g',
 	'wikibase-after-page-move' => 'Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент Викиданных.',
 	'wikibase-after-page-move-queued' => 'Связанный с этой страницей [$1 элемент Викиданных] вскоре будет автоматически обновлён.',
 	'wikibase-comment-add' => 'Был создан элемент Викиданных.',
@@ -3846,6 +3849,7 @@ $messages['uk'] = array(
 	'wikibase-client-desc' => 'Клієнт для розширення Wikibase',
 	'specialpages-group-wikibaseclient' => 'Клієнт Вікіданих',
 	'tooltip-t-wikibase' => 'Посилання на пов’язаний елемент сховища даних',
+	'accesskey-t-wikibase' => 'g',
 	'wikibase-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
 	'wikibase-after-page-move-queued' => "Пов'язаний з цією сторінкою [$1 елемент Вікіданих] буде невдовзі автоматично оновлено.",
 	'wikibase-comment-add' => 'Елемент вікі-даних вже створений.',

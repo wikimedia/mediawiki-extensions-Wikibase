@@ -3337,6 +3337,7 @@ $messages['vi'] = array(
 	'wikibase-validator-bad-url-scheme' => 'Giao thức URL không được hỗ trợ: $1',
 	'wikibase-validator-bad-http-url' => 'URL HTTP hỏng: $1',
 	'wikibase-validator-bad-mailto-url' => 'URL mailto: hỏng: $1',
+	'wikibase-validator-unknown-unit' => 'Đơn vị không rõ: $1',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
 	'version-wikibase' => 'Wikibase',
