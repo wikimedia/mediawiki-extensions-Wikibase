@@ -2,7 +2,9 @@
 
 namespace Wikibase;
 
+use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -63,9 +65,29 @@ class PropertyParserFunctionRenderer {
 	 * @return Claims The claims for the given property.
 	 */
 	private function getClaimsForProperty( Entity $entity, $propertyLabel ) {
-		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
+		$allClaims = new Claims( $entity->getClaims() );
 
-		if ( $propertyIdToFind === null ) {
+		$propertyId = $this->getPropertyIdFromIdSerializationOrLabel( $propertyLabel );
+		$claims = $allClaims->getClaimsForProperty( $propertyId );
+
+		return $claims;
+	}
+
+	/**
+	 * @param string $string
+	 * @return PropertyId
+	 */
+	private function getPropertyIdFromIdSerializationOrLabel( $string ) {
+		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+
+		try {
+			$propertyId = $idParser->parse( $string );
+		}
+		catch ( ParseException $ex ) {
+			$propertyId = null;
+		}
+
+		if ( $propertyId === null ) {
 			//XXX: It might become useful to give the PropertyLabelResolver a hint as to which
 			//     properties may become relevant during the present request, namely the ones
 			//     used by the Item linked to the current page. This could be done with
@@ -73,19 +95,16 @@ class PropertyParserFunctionRenderer {
 			//
 			//     $this->propertyLabelResolver->preloadLabelsFor( $propertiesUsedByItem );
 
-			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $propertyLabel ) );
+			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $string ) );
 
 			if ( empty( $propertyIds ) ) {
 				return new Claims();
 			} else {
-				$propertyIdToFind = $propertyIds[$propertyLabel];
+				$propertyId = $propertyIds[$string];
 			}
 		}
 
-		$allClaims = new Claims( $entity->getClaims() );
-		$claims = $allClaims->getClaimsForProperty( $propertyIdToFind );
-
-		return $claims;
+		return $propertyId;
 	}
 
 	/**
