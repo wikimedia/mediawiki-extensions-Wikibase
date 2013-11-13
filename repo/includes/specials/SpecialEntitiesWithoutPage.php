@@ -143,6 +143,12 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 					'id' => 'wb-entitieswithoutpage-form'
 				)
 			) .
+			Html::input (
+				'title',
+				$this->getTitle(),
+				'hidden',
+				array()
+			).
 			Html::openElement( 'fieldset' ) .
 			Html::element(
 				'legend',
