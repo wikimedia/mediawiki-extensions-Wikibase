@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DBQueryError;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -303,6 +304,9 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			// entity to page mapping
 			$tables[] = 'wb_entity_per_page';
 
+			// TODO: migrate table away from using a numeric field
+			$entityId = $this->getProperEntityId( $entityId );
+
 			// pick entity by id
 			$where['epp_entity_id'] = $entityId->getNumericId();
 			$where['epp_entity_type'] = $entityId->getEntityType();
@@ -337,6 +341,11 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			wfProfileOut( __METHOD__ );
 			return null;
 		}
+	}
+
+	protected function getProperEntityId( EntityId $id ) {
+		$parser = new BasicEntityIdParser();
+		return $parser->parse( $id->getSerialization() );
 	}
 
 	/**
