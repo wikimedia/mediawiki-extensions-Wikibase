@@ -5,7 +5,6 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOp\ChangeOpQualifier;
 use Wikibase\ChangeOp\ChangeOpException;
 
