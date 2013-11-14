@@ -5,13 +5,12 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use SiteSQLStore;
-use MWException;
 use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
@@ -62,11 +61,13 @@ class GetEntities extends ApiWikibase {
 			);
 		}
 
-		foreach ( $this->getEntityIdsFromParams( $params ) as $entityId ) {
-			$this->handleEntity( $entityId, $params );
+		$entityIds = $this->getEntityIdsFromParams( $params );
+		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds );
+		foreach( $entityRevisions as $entityRevision ) {
+			$this->handleEntity( $entityRevision, $params );
 		}
 
-		//todo remove once result builder is used...
+		//todo remove once result builder is used... (what exactly does this do....?)
 		if ( $this->getResult()->getIsRawMode() ) {
 			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 		}
@@ -162,56 +163,37 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
+	 * @param EntityId[] $entityIds
+	 * @return EntityRevision[]
+	 */
+	protected function getEntityRevisionsFromEntityIds( $entityIds ) {
+		$revisionArray = array();
+
+		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
+		foreach ( $entityIds as $entityId ) {
+			$entityRevision = $entityRevisionLookup->getEntityRevision( $entityId );
+			if ( is_null( $entityRevision ) ) {
+				$this->resultBuilder->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
+			} else {
+				$revisionArray[] = $entityRevision;
+			}
+		}
+		return $revisionArray;
+	}
+
+	/**
 	 * Fetches the entity with provided id and adds its serialization to the output.
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntityId $entityId
+	 * @param EntityRevision $entityRevision
 	 * @param array $params
-	 *
-	 * @throws MWException
 	 */
-	protected function handleEntity( EntityId $entityId, array $params ) {
+	protected function handleEntity( EntityRevision $entityRevision, array $params ) {
 		wfProfileIn( __METHOD__ );
-		$result = $this->getResult();
 		$props = $this->getPropsFromParams( $params );
-		$entityPath = array( 'entities', $entityId->getSerialization() );
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-		$entityContent = $entityContentFactory->getFromId( $entityId );
-		if ( is_null( $entityContent ) ) {
-			$this->resultBuilder->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
-			return;
-		}
-
-		//if there are no props defined only return type and id..
-		if ( $params['props'] === array() ) {
-			$result->addValue( $entityPath, 'id', $entityId->getSerialization() );
-			$result->addValue( $entityPath, 'type', $entityId->getEntityType() );
-		} else {
-			if ( in_array( 'info', $props ) ) {
-				$title = $entityContent->getTitle();
-				$result->addValue( $entityPath, 'pageid', $title->getArticleID() );
-				$result->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
-				$result->addValue( $entityPath, 'title', $title->getPrefixedText() );
-
-				$revision = $entityContent->getWikiPage()->getRevision();
-				if ( $revision !== null ) {
-					$result->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
-					$result->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
-				}
-			}
-
-			$serializerFactory = new SerializerFactory();
-			$entity = $entityContent->getEntity();
-			$options = $this->getSerializationOptions( $params, $props );
-			$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );
-			$entitySerialization = $entitySerializer->getSerialized( $entity );
-
-			foreach ( $entitySerialization as $key => $value ) {
-				$result->addValue( $entityPath, $key, $value );
-			}
-		}
+		$options = $this->getSerializationOptions( $params, $props );
+		$this->resultBuilder->addEntityRevision( $entityRevision, $options, $props );
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -236,7 +218,6 @@ class GetEntities extends ApiWikibase {
 		$options->setLanguages( $languages );
 		$options->setOption( EntitySerializer::OPT_SORT_ORDER, $params['dir'] );
 		$options->setOption( EntitySerializer::OPT_PARTS, $props );
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		return $options;
 	}
 
