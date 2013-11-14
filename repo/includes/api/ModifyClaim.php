@@ -79,7 +79,7 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		//@todo this doesnt belong here!...
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', $status );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 	}
 
 	/**

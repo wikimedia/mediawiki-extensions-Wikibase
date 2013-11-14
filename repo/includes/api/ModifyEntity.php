@@ -267,45 +267,19 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	protected function addToOutput( EntityContent $entityContent, Status $status ) {
-		$formatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-
-		$this->getResult()->addValue(
-			'entity',
-			'id',
-			$formatter->format( $entityContent->getEntity()->getId() )
-		);
-
-		$this->getResult()->addValue(
-			'entity',
-			'type', $entityContent->getEntity()->getType()
-		);
-
-		$this->addRevisionIdFromStatusToResult( 'entity', $status );
+		$this->getResultBuilder()->addBasicEntityInformation( $entityContent->getEntity()->getId(), 'entity' );
+		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity' );
 
 		$params = $this->extractRequestParams();
 
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$this->addNormalizationInfoToOutput( $params['title'] );
+			$normTitle = $this->stringNormalizer->trimToNFC( $params['title'] );
+			if ( $normTitle !== $params['title'] ) {
+				$this->getResultBuilder()->addNormalizedTitle( $params['title'], $normTitle, 'normalized' );
+			}
 		}
 
 		$this->getResultBuilder()->markSuccess( 1 );
-	}
-
-	protected function addNormalizationInfoToOutput( $title ) {
-		$normalized = array();
-
-		$normTitle = $this->stringNormalizer->trimToNFC( $title );
-		if ( $normTitle !== $title ) {
-			$normalized['from'] = $title;
-			$normalized['to'] = $normTitle;
-		}
-
-		if ( $normalized !== array() ) {
-			$this->getResult()->addValue(
-				'entity',
-				'normalized', $normalized
-			);
-		}
 	}
 
 	/**
