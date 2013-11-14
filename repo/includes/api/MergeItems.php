@@ -85,20 +85,8 @@ class MergeItems extends ApiWikibase {
 	}
 
 	protected function addEntityToOutput( EntityContent $entityContent, Status $status, $name ) {
-		$formatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-
-		$this->getResult()->addValue(
-			$name,
-			'id',
-			$formatter->format( $entityContent->getEntity()->getId() )
-		);
-
-		$this->getResult()->addValue(
-			$name,
-			'type', $entityContent->getEntity()->getType()
-		);
-
-		$this->addRevisionIdFromStatusToResult( $name, $status );
+		$this->resultBuilder->addBasicEntityInformation( $entityContent->getEntity()->getId(), $name );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, $name );
 	}
 
 	private function getEntityContentFromIdString( $idString ) {
