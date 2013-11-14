@@ -7,8 +7,13 @@ use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
 use Wikibase\SnakList;
@@ -80,6 +85,109 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 
 	public static function provideMarkResultSuccessExceptions() {
 		return array( array( 3 ), array( -1 ) );
+	}
+
+	public function testAddEntityContent() {
+		$result = $this->getDefaultResult();
+		$props = array( 'info' );
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q123' ) );
+		$item->setLabel( 'de', 'foo' );
+		$item->addAliases( 'en', array( 'bar', 'baz' ) );
+		$item->setDescription( 'pt', 'ptDesc' );
+		$item->setDescription( 'pl', 'plDesc' );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
+		$claim = new Claim( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$claim->setGuid( 'imaguid' );
+		$item->addClaim( $claim );
+		$itemContent = new ItemContent( $item );
+		$expected = array( 'entities' => array( 'Q123' => array(
+			'pageid' => 0,
+			'ns' => 120,
+			'title' => 'Item:Q123',
+			'id' => 'Q123',
+			'type' => 'item',
+			'aliases' => array(
+				'en' => array(
+					array(
+						'language' => 'en',
+						'value' => 'bar'
+					),
+					array(
+						'language' => 'en',
+						'value' => 'baz'
+					)
+				)
+			),
+			'descriptions' => array(
+				'pt' => array(
+					'language' => 'pt',
+					'value' => 'ptDesc'
+				),
+				'pl' => array(
+					'language' => 'pl',
+					'value' => 'plDesc'
+				),
+			),
+			'labels' => array(
+				'de' => array(
+					'language' => 'de',
+					'value' => 'foo'
+				),
+			),
+			'claims' => array(
+				'P65' => array(
+					array(
+						'id' => 'imaguid',
+						'mainsnak' => array(
+							'snaktype' => 'somevalue',
+							'property' => 'P65'
+						),
+						'type' => 'claim'
+					)
+				),
+			),
+			'sitelinks' => array(
+				'enwiki' => array(
+					'site' => 'enwiki',
+					'title' => 'Berlin',
+					'badges' => array( 'Q333' )
+				),
+			),
+		) ) );
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addEntityContent( $itemContent, new SerializationOptions(), $props );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddBasicEntityInformation() {
+		$result = $this->getDefaultResult();
+		$entityId = new ItemId( 'Q67' );
+		$expected = array( 'entity' => array(
+			'id' => 'Q67',
+			'type' => 'item',
+		) );
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addBasicEntityInformation( $entityId, 'entity' );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddBasicEntityInformationForcedNumeric() {
+		$result = $this->getDefaultResult();
+		$entityId = new ItemId( 'Q67' );
+		$expected = array( 'entity' => array(
+			'id' => '67',
+			'type' => 'item',
+		) );
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addBasicEntityInformation( $entityId, 'entity', true );
+
+		$this->assertEquals( $expected, $result->getData() );
 	}
 
 	public function testAddLabels(){
@@ -365,6 +473,26 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addNormalizedTitle( $from, $to );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddRevisionIdFromStatusToResult() {
+		$result = $this->getDefaultResult();
+		$mockRevision = $this->getMockBuilder( 'Revision' )
+		->disableOriginalConstructor()
+		->getMock();
+		$mockRevision->expects( $this->once() )
+			->method( 'getId' )
+			->will( $this->returnValue( 123 ) );
+		$mockStatus = $this->getMock( 'Status' );
+		$mockStatus->expects( $this->once() )
+			->method( 'getValue' )
+			->will( $this->returnValue( array( 'revision' => $mockRevision ) ) );
+		$expected = array( 'entity' => array( 'lastrevid' => '123' ) );
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addRevisionIdFromStatusToResult( $mockStatus, 'entity' );
 
 		$this->assertEquals( $expected, $result->getData() );
 	}
