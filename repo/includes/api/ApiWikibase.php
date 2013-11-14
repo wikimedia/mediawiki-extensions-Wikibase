@@ -155,28 +155,6 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
-	 * Returns the list of sites that is suitable as a sitelink target.
-	 *
-	 * @return \SiteList
-	 */
-	protected function getSiteLinkTargetSites() {
-		$sites = new \SiteList();
-		$groups = Settings::get( 'siteLinkGroups' );
-
-		$allSites = \SiteSQLStore::newInstance()->getSites();
-
-		/* @var \Site $site */
-		foreach ( $allSites as $site ) {
-			if ( in_array( $site->getGroup(), $groups ) ) {
-				$sites->append( $site );
-			}
-		}
-
-		return $sites;
-	}
-
-
-	/**
 	 * Load the entity content of the given revision.
 	 *
 	 * Will fail by calling dieUsage() if the revision can not be found or can not be loaded.
