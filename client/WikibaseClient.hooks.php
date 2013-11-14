@@ -329,6 +329,12 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onParserAfterParse( Parser &$parser, &$text, StripState $stripState ) {
+		// this hook tries to access repo SiteLinkTable
+		// it interferes with any test that parses something, like a page or a message
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true;
+		}
+
 		wfProfileIn( __METHOD__ );
 
 		// @todo split up the multiple responsibilities here and in lang link handler
