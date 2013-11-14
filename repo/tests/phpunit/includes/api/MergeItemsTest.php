@@ -38,7 +38,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'mergeitemstest' );
 			$item = ItemContent::newEmpty();
-			$item->getEntity()->setId( ItemId::newFromNumber( 999 ) );
+			$item->getEntity()->setId( new ItemId( 'q999' ) );
 			$item->save( 'mergeitemstest' );
 		}
 		self::$hasSetup = true;

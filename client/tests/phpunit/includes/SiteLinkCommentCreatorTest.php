@@ -70,7 +70,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getNewItem() {
 		$item = Item::newEmpty();
-		$item->setId( ItemId::newFromNumber( 1 ) );
+		$item->setId( new ItemId( 'q1' ) );
 
 		return $item;
 	}

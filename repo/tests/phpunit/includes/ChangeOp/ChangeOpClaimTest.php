@@ -30,10 +30,11 @@ use Wikibase\SnakObject;
 class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorProvider() {
-		$validGuidGenerator = new ClaimGuidGenerator( ItemId::newFromNumber( 42 ) );
+		$validGuidGenerator = new ClaimGuidGenerator( new ItemId( 'q42' ) );
 
 		$args = array();
-		$args[] = array( array() , $validGuidGenerator );
+		$args[] = array( array(), $validGuidGenerator );
+
 		return $args;
 	}
 
@@ -50,7 +51,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideTestApply() {
 		$itemEmpty = Item::newEmpty();
-		$itemEmpty->setId( ItemId::newFromNumber( 888 ) );
+		$itemEmpty->setId( new ItemId( 'q888' ) );
 		$item777 = self::provideNewItemWithClaim( 777, new PropertyNoValueSnak( 45 ) );
 		$item666 = self::provideNewItemWithClaim( 666, new PropertySomeValueSnak( 44 ) );
 
