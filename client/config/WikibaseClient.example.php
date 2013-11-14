@@ -61,6 +61,9 @@ $wgWBClientSettings['repoScriptPath'] = "/w";
 // The global site ID by which this wiki is known on the repo.
 $wgWBClientSettings['siteGlobalID'] = "mywiki";
 
+// Site group to display sidebar language links for
+$wgWBClientSettings['languageLinkSiteGroup'] = "wikipedia";
+
 // Database name of the repository, for direct access from the client.
 // repoDatabase and changesDatabase will generally be the same.
 // This requires the given database name to be known to LBFactory, see
