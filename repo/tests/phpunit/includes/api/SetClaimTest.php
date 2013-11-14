@@ -164,7 +164,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testSetClaimAtIndex( Claim $claim ) {
 		// Generate an item with some claims:
 		$item = Item::newEmpty();
-		$item->setId( ItemId::newFromNumber( 10 ) );
+		$item->setId( ItemId::newFromNumber( 906054 ) );
 		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 
 		$claims = new Claims();
