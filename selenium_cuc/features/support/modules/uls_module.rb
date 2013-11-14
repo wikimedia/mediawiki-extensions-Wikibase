@@ -26,6 +26,7 @@ module ULSPage
     end
     if ulsOpen_element.text.downcase != name.downcase
       ulsOpen
+      self.ulsLanguageFilter_element.when_present
       self.ulsLanguageFilter= name
       ajax_wait
       ulsLanguageLink
