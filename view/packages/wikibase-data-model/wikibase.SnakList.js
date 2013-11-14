@@ -454,14 +454,24 @@ $.extend( SELF.prototype, {
  * @return {wikibase.SnakList|null}
  */
 SELF.newFromJSON = function( json, order ) {
-	var snaksList = new SELF();
+	var snakList = new SELF();
+
+	/**
+	 * @param {object[]} serializedSnaks
+	 * @param {wikibase.SnakList} snakList
+	 * @return {wikibase.SnakList}
+	 */
+	function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
+		for( var i = 0; i < serializedSnaks.length; i++ ) {
+			snakList.addSnak( wb.Snak.newFromJSON( serializedSnaks[i] ) );
+		}
+		return snakList;
+	}
 
 	if( !order ) {
 		// No order specified: Just loop through the json object:
 		$.each( json, function( propertyId, snaksPerProperty ) {
-			$.each( snaksPerProperty, function( i, snakJson ) {
-				snaksList.addSnak( wb.Snak.newFromJSON( snakJson ) );
-			} );
+			addSerializedSnaksToSnakList( snaksPerProperty, snakList );
 		} );
 
 	} else {
@@ -477,18 +487,18 @@ SELF.newFromJSON = function( json, order ) {
 		// Add all snaks grouped by property according to the order specified via the "order"
 		// parameter:
 		for( var i = 0; i < order.length; i++ ) {
-			if( !json[order[i]] ) {
-				throw new Error( 'Trying to oder by property ' + order[i] + ' without any snak '
+			var propertyId = order[i];
+
+			if( !json[propertyId] ) {
+				throw new Error( 'Trying to oder by property ' + propertyId + ' without any snak '
 					+ ' featuring this property being present' );
 			}
 
-			for( var j = 0; j < json[order[i]].length; j++ ) {
-				snaksList.addSnak( wb.Snak.newFromJSON( json[order[i]][j] ) );
-			}
+			addSerializedSnaksToSnakList( json[propertyId], snakList );
 		}
 	}
 
-	return snaksList;
+	return snakList;
 };
 
 }( wikibase, jQuery ) );
