@@ -85,6 +85,16 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\SummaryFormatter', $returnValue );
 	}
 
+	public function testGetEntityTitleLookup() {
+		$returnValue = $this->getDefaultInstance()->getEntityTitleLookup();
+		$this->assertInstanceOf( 'Wikibase\EntityTitleLookup', $returnValue );
+	}
+
+	public function testGetEntityRevisionLookup() {
+		$returnValue = $this->getDefaultInstance()->getEntityRevisionLookup();
+		$this->assertInstanceOf( 'Wikibase\EntityRevisionLookup', $returnValue );
+	}
+
 	public static function provideGetRdfBaseURI() {
 		return array(
 			array ( 'http://acme.test', 'http://acme.test/entity/' ),
