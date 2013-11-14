@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_1516f747",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-14T12:24:02Z",
+      "side": 1,
+      "message": "Please see https://gerrit.wikimedia.org/r/#/c/95357\n\nThis means you can get the sitelist without having to inherit from ApiWikibase [\u003d",
+      "parentUuid": "291c1151_1017fc44",
+      "revId": "efceb591a9cac8245e964dfb042bab6db7381ba8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_d50b9629",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 4
