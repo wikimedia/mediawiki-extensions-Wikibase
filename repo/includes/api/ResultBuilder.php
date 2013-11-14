@@ -4,12 +4,17 @@ namespace Wikibase\Api;
 
 use ApiResult;
 use InvalidArgumentException;
+use Revision;
+use Status;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Reference;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Builder for Api Results
@@ -40,7 +45,7 @@ class ResultBuilder {
 	 * @param ApiResult $result
 	 * @param SerializerFactory $serializerFactory
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @todo require SerializerFactory
 	 */
 	public function __construct( $result, SerializerFactory $serializerFactory = null ) {
@@ -57,6 +62,9 @@ class ResultBuilder {
 		$this->missingEntityCounter = -1;
 	}
 
+	/**
+	 * @return ApiResult
+	 */
 	private function getResult(){
 		return $this->result;
 	}
@@ -90,6 +98,65 @@ class ResultBuilder {
 			$this->getResult()->setIndexedTagName( $value, $tag );
 		}
 		$this->getResult()->addValue( $path, $name, $value );
+	}
+
+	/**
+	 * Get serialized entity for the EntityRevision and add it to the result
+	 *
+	 * @param EntityRevision $entityRevision
+	 * @param SerializationOptions $options
+	 * @param array $props
+	 */
+	public function addEntityRevision( EntityRevision $entityRevision, $options, array $props = array() ) {
+		$entity = $entityRevision->getEntity();
+		$entityId = $entity->getId();
+		$record = array();
+
+		//if there are no props defined only return type and id..
+		if ( $props === array() ) {
+			$record['id'] = $entityId->getSerialization();
+			$record['type'] = $entityId->getEntityType();
+		} else {
+			if ( in_array( 'info', $props ) ) {
+				$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $entityId );
+				$record['pageid'] = $title->getArticleID();
+				$record['ns'] = intval( $title->getNamespace() );
+				$record['title'] = $title->getPrefixedText();
+				$record['lastrevid'] = intval( $entityRevision->getRevision() );
+				$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
+			}
+
+			$serializerFactory = new SerializerFactory();
+			$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );
+			$entitySerialization = $entitySerializer->getSerialized( $entity );
+
+			$record = array_merge( $record, $entitySerialization );
+		}
+
+		// key should be numeric to get the correct behavior
+		// note that this setting depends upon "setIndexedTagName_internal"
+		// NOTE see https://bugzilla.wikimedia.org/show_bug.cgi?id=57529
+		$resultName = !$this->getResult()->getIsRawMode() ? $entityId->getSerialization() : null;
+
+		$this->getResult()->addValue( array( 'entities' ), $resultName, $record );
+	}
+
+	/**
+	 * Get serialized information for the EntityId and add them to result
+	 *
+	 * @param EntityId $entityId
+	 * @param string|array|null $path
+	 * @param bool $forceNumericId should we force use the numeric id instead of serialization?
+	 * @todo once linktitles breaking change made remove $forceNumericId
+	 */
+	public function addBasicEntityInformation( EntityId $entityId, $path, $forceNumericId = false ){
+		if( $forceNumericId ) {
+			//FIXME: this is a very nasty hack as we presume IDs are always prefixed by a single letter
+			$this->getResult()->addValue( $path, 'id', substr( $entityId->getSerialization(), 1 ) );
+		} else {
+			$this->getResult()->addValue( $path, 'id', $entityId->getSerialization() );
+		}
+		$this->getResult()->addValue( $path, 'type', $entityId->getEntityType() );
 	}
 
 	/**
@@ -240,13 +307,44 @@ class ResultBuilder {
 	/**
 	 * @param string $from
 	 * @param string $to
+	 * @param string $name
 	 */
-	public function addNormalizedTitle( $from, $to ){
+	public function addNormalizedTitle( $from, $to, $name = 'n' ){
 		$this->getResult()->addValue(
 			'normalized',
-			'n',
+			$name,
 			array( 'from' => $from, 'to' => $to )
 		);
+	}
+
+	/**
+	 * Adds the ID of the new revision from the Status object to the API result structure.
+	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
+	 * resp WikiPage::doEditContent() do it: as an array, with the new revision object in the
+	 * 'revision' field.
+	 *
+	 * If no revision is found the the Status object, this method does nothing.
+	 *
+	 * @see ApiResult::addValue()
+	 *
+	 * @param Status $status The status to get the revision ID from.
+	 * @param string|null|array $path Where in the result to put the revision id
+	 */
+	public function addRevisionIdFromStatusToResult( Status $status, $path ) {
+		$statusValue = $status->getValue();
+
+		/* @var Revision $revision */
+		$revision = isset( $statusValue['revision'] )
+			? $statusValue['revision'] : null;
+
+		if ( $revision ) {
+			$this->getResult()->addValue(
+				$path,
+				'lastrevid',
+				intval( $revision->getId() )
+			);
+		}
+
 	}
 
 }
