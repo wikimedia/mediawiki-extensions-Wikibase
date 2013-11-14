@@ -34,6 +34,23 @@
       "revId": "7987380a5455272e638670045d3f132e4853359e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c68cb7dd",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-11-14T19:52:22Z",
+      "side": 0,
+      "message": "No need to remove qqq. Only increases chances of merge conflicts.",
+      "revId": "7987380a5455272e638670045d3f132e4853359e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
