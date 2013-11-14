@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiMain;
 use MWException;
 use Revision;
+use SiteSQLStore;
 use Status;
 use ApiBase;
 use Title;
@@ -13,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 
@@ -32,10 +34,16 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $stringNormalizer;
 
+	/**
+	 * @var SiteLinkTargetProvider
+	 */
+	protected $siteLinkTargetProvider;
+
 	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
 	}
 
 	/**
@@ -346,9 +354,10 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return array the allowed params
 	 */
 	public function getAllowedParamsForSiteLink() {
+		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
 		return array(
 			'site' => array(
-				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',

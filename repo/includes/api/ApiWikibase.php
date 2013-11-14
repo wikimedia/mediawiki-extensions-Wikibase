@@ -7,7 +7,6 @@ use MessageCache;
 use Revision;
 use Site;
 use SiteList;
-use SiteSQLStore;
 use Title;
 use User;
 use Status;
@@ -152,27 +151,6 @@ abstract class ApiWikibase extends \ApiBase {
 		}
 
 		return $status;
-	}
-
-	/**
-	 * Returns the list of sites that is suitable as a sitelink target.
-	 *
-	 * @return SiteList
-	 */
-	protected function getSiteLinkTargetSites() {
-		$sites = new SiteList();
-		$groups = Settings::get( 'siteLinkGroups' );
-
-		$allSites = SiteSQLStore::newInstance()->getSites();
-
-		/* @var Site $site */
-		foreach ( $allSites as $site ) {
-			if ( in_array( $site->getGroup(), $groups ) ) {
-				$sites->append( $site );
-			}
-		}
-
-		return $sites;
 	}
 
 	/**
