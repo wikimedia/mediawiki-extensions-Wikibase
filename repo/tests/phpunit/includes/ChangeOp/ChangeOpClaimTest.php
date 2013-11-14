@@ -45,8 +45,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @param Claim $claim
 	 * @param ClaimGuidGenerator $guidGenerator
 	 */
-	public function testInvalidConstruct( $claim, $guidGenerator) {
-		new ChangeOpClaim( $claim, $guidGenerator);
+	public function testInvalidConstruct( $claim, $guidGenerator ) {
+		new ChangeOpClaim( $claim, $guidGenerator );
 	}
 
 	public function provideTestApply() {
@@ -78,19 +78,23 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$args = array();
 		//test adding claims with guids from other items(these shouldn't be added)
-		$args[] = array ( $itemEmpty, clone $claims[666] , false );
-		$args[] = array ( $itemEmpty, clone $claims[777] ,  false );
-		$args[] = array ( $item666, clone $claims[777] ,  false );
-		$args[] = array ( $item777, clone $claims[666] ,  false );
+		$args[] = array( $itemEmpty, $claims[666], false );
+		$args[] = array( $itemEmpty, $claims[777], false );
+		$args[] = array( $item666, $claims[777], false );
+		$args[] = array( $item777, $claims[666], false );
 		//test adding the same claims with a null guid (a guid should be created)
-		$args[] = array ( $item777, clone $claims[7770]  , array( $claims[777], $claims[7770] ) );
-		$args[] = array ( $item666, clone $claims[6660]  , array( $claims[666], $claims[6660] ) );
+		$args[] = array( $item777, $claims[7770], array( $claims[777], $claims[7770] ) );
+		$args[] = array( $item666, $claims[6660], array( $claims[666], $claims[6660] ) );
 		//test adding the same claims with a correct but different guid (these should be added)
-		$args[] = array ( $item777, clone $claims[7777]  , array( $claims[777], $claims[7770], $claims[7777]) );
-		$args[] = array ( $item666, clone $claims[6666]  , array( $claims[666], $claims[6660], $claims[6666] ) );
+		$args[] = array( $item777, $claims[7777], array( $claims[777], $claims[7770], $claims[7777] ) );
+		$args[] = array( $item666, $claims[6666], array( $claims[666], $claims[6660], $claims[6666] ) );
 		//test adding the same claims with and id that already exists (these shouldn't be added)
-		$args[] = array ( $item777, clone $claims[7777]  , array( $claims[777], $claims[7770], $claims[7777]) );
-		$args[] = array ( $item666, clone $claims[6666]  , array( $claims[666], $claims[6660], $claims[6666] ) );
+		$args[] = array( $item777, $claims[7777], array( $claims[777], $claims[7770], $claims[7777] ) );
+		$args[] = array( $item666, $claims[6666], array( $claims[666], $claims[6660], $claims[6666] ) );
+		// test adding a claim at a specific index
+		$args[] = array( $item777, $claims[0], array( $claims[0], $claims[777], $claims[7770], $claims[7777] ), 0 );
+		// test moving a claim
+		$args[] = array( $item666, $claims[6666], array( $claims[666], $claims[6666], $claims[6660] ), 1 );
 
 		return $args;
 	}
@@ -101,13 +105,18 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @param Entity $entity
 	 * @param Claim $claim
 	 * @param Claim[]|bool $expected
+	 * @param int|null $index
 	 */
-	public function testApply( $entity, $claim, $expected ) {
+	public function testApply( $entity, $claim, $expected, $index = null ) {
 		if( $expected === false ){
 			$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
 		}
 
-		$changeOpClaim = new ChangeOpClaim( $claim, new ClaimGuidGenerator( $entity->getId() ) );
+		$changeOpClaim = new ChangeOpClaim(
+			$claim,
+			new ClaimGuidGenerator( $entity->getId() ),
+			$index
+		);
 		$changeOpClaim->apply( $entity );
 
 		if( $expected === false ){
@@ -116,12 +125,14 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$entityClaims = new Claims( $entity->getClaims() );
 		$entityClaimHashSet = array_flip( $entityClaims->getHashes() );
+		$i = 0;
+
 		foreach( $expected as $expectedClaim ){
 			$guid = $expectedClaim->getGuid();
 			$hash = $expectedClaim->getHash();
 
 			if ( $guid !== null ) {
-				$this->assertTrue( $entityClaims->hasClaimWithGuid( $guid ) );
+				$this->assertEquals( $i++, $entityClaims->indexOf( $expectedClaim ) );
 			}
 
 			$this->assertArrayHasKey( $hash, $entityClaimHashSet );
