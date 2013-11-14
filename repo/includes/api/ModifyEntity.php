@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 
@@ -346,9 +347,11 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return array the allowed params
 	 */
 	public function getAllowedParamsForSiteLink() {
+		$siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$sites = $siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
 		return array(
 			'site' => array(
-				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',

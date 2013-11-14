@@ -13,6 +13,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
 use Wikibase\StoreFactory;
@@ -244,13 +245,15 @@ class GetEntities extends ApiWikibase {
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
+		$siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$sites = $siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
 		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_ALLOW_DUPLICATES => true
 			),
