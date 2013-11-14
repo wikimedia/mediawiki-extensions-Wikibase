@@ -4,9 +4,13 @@ namespace Wikibase\Api;
 
 use ApiResult;
 use InvalidArgumentException;
+use Revision;
 use SiteSQLStore;
+use Status;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Serializers\AliasSerializer;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\ClaimsSerializer;
@@ -101,6 +105,66 @@ class ResultBuilder {
 			$this->getResult()->setIndexedTagName( $value, $tag );
 		}
 		$this->getResult()->addValue( $path, $name, $value );
+	}
+
+	/**
+	 * Get serialized entity for the EntityContent and add them to result
+	 *
+	 * @param EntityContent $entityContent
+	 * @param SerializationOptions $options
+	 * @param array $props
+	 */
+	public function addEntityContent( EntityContent $entityContent, $options, array $props = array() ) {
+		$serializationOptions = clone $this->serializationOptions;
+		$serializationOptions->merge( $options );
+
+		$entity = $entityContent->getEntity();
+		$entityId = $entity->getId();
+		$entityPath = array( 'entities', $entityId->getSerialization() );
+
+		//if there are no props defined only return type and id..
+		if ( $props === array() ) {
+			$this->addBasicEntityInformation( $entityId, $entityPath );
+		} else {
+			if ( in_array( 'info', $props ) ) {
+				$title = $entityContent->getTitle();
+				$this->getResult()->addValue( $entityPath, 'pageid', $title->getArticleID() );
+				$this->getResult()->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
+				$this->getResult()->addValue( $entityPath, 'title', $title->getPrefixedText() );
+
+				$revision = $entityContent->getWikiPage()->getRevision();
+				if ( $revision !== null ) {
+					$this->getResult()->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
+					$this->getResult()->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+				}
+			}
+
+			$serializerFactory = new SerializerFactory();
+			$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+			$entitySerialization = $entitySerializer->getSerialized( $entity );
+
+			foreach ( $entitySerialization as $key => $value ) {
+				$this->getResult()->addValue( $entityPath, $key, $value );
+			}
+		}
+	}
+
+	/**
+	 * Get serialized information for the EntityId and add them to result
+	 *
+	 * @param EntityId $entityId
+	 * @param string|array|null $path
+	 * @param bool $forceNumericId should we force use the numeric id instead of serialization?
+	 * @todo once linktitles breaking change made remove $forceNumericId
+	 */
+	public function addBasicEntityInformation( EntityId $entityId, $path, $forceNumericId = false ){
+		if( $forceNumericId ) {
+			//FIXME: this is a very nasty hack as we presume IDs are always prefixed by a single letter
+			$this->getResult()->addValue( $path, 'id', substr( $entityId->getSerialization(), 1 ) );
+		} else {
+			$this->getResult()->addValue( $path, 'id', $entityId->getSerialization() );
+		}
+		$this->getResult()->addValue( $path, 'type', $entityId->getEntityType() );
 	}
 
 	/**
@@ -232,13 +296,44 @@ class ResultBuilder {
 	/**
 	 * @param string $from
 	 * @param string $to
+	 * @param string $name
 	 */
-	public function addNormalizedTitle( $from, $to ){
+	public function addNormalizedTitle( $from, $to, $name = 'n' ){
 		$this->getResult()->addValue(
 			'normalized',
-			'n',
+			$name,
 			array( 'from' => $from, 'to' => $to )
 		);
+	}
+
+	/**
+	 * Adds the ID of the new revision from the Status object to the API result structure.
+	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
+	 * resp WikiPage::doEditContent() do it: as an array, with the new revision object in the
+	 * 'revision' field.
+	 *
+	 * If no revision is found the the Status object, this method does nothing.
+	 *
+	 * @see ApiResult::addValue()
+	 *
+	 * @param Status $status The status to get the revision ID from.
+	 * @param string|null|array $path Where in the result to put the revision id
+	 */
+	public function addRevisionIdFromStatusToResult( Status $status, $path ) {
+		$statusValue = $status->getValue();
+
+		/* @var Revision $revision */
+		$revision = isset( $statusValue['revision'] )
+			? $statusValue['revision'] : null;
+
+		if ( $revision ) {
+			$this->getResult()->addValue(
+				$path,
+				'lastrevid',
+				intval( $revision->getId() )
+			);
+		}
+
 	}
 
 }
