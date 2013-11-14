@@ -23,7 +23,7 @@ return call_user_func( function() {
 		'remoteExtPath' =>  'Wikibase/lib/resources',
 	);
 
-	return array(
+	$modules = array(
 		// common styles independent from JavaScript being enabled or disabled
 		'wikibase.common' => $moduleTemplate + array(
 			'styles' => array(
@@ -32,7 +32,7 @@ return call_user_func( function() {
 		),
 
 		'wikibase.sites' => $moduleTemplate + array(
-			'class' => 'Wikibase\SitesModule',
+			'class' => 'Wikibase\SitesModule'
 		),
 
 		'wikibase.repoAccess' => $moduleTemplate + array(
@@ -802,5 +802,13 @@ return call_user_func( function() {
 		),
 
 	);
+
+	if ( defined( 'ULS_VERSION' ) ) {
+		$modules['wikibase']['dependencies'][] = 'jquery.uls.data';
+		$modules['wikibase.sites']['dependencies'] = array( 'jquery.uls.data' );
+		$modules['wikibase.ui.PropertyEditTool']['dependencies'][] = 'jquery.uls.data';
+	}
+
+	return $modules;
 } );
 // @codeCoverageIgnoreEnd
