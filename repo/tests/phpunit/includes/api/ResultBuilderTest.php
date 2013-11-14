@@ -82,6 +82,16 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		return array( array( 3 ), array( -1 ) );
 	}
 
+	public function testAddEntityContent() {
+		//@todo test me
+		$this->markTestIncomplete( 'testme!' );
+	}
+
+	public function testAddBasicEntityInformation() {
+		//@todo test me
+		$this->markTestIncomplete( 'testme!' );
+	}
+
 	public function testAddLabels(){
 		$result = $this->getDefaultResult();
 		$labels = array( 'en' => 'foo', 'de' => 'bar' );
@@ -367,5 +377,10 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$resultBuilder->addNormalizedTitle( $from, $to );
 
 		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddRevisionIdFromStatusToResult() {
+		//@todo test me
+		$this->markTestIncomplete( 'testme!' );
 	}
 }

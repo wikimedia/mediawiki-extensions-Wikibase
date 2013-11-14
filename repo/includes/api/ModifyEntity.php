@@ -272,7 +272,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			'type', $entityContent->getEntity()->getType()
 		);
 
-		$this->addRevisionIdFromStatusToResult( 'entity', $status );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'entity' );
 
 		$params = $this->extractRequestParams();
 

@@ -98,7 +98,7 @@ class MergeItems extends ApiWikibase {
 			'type', $entityContent->getEntity()->getType()
 		);
 
-		$this->addRevisionIdFromStatusToResult( $name, $status );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, $name );
 	}
 
 	private function getEntityContentFromIdString( $idString ) {
