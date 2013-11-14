@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
@@ -105,6 +107,11 @@ class WikibaseRepo {
 	private $summaryFormatter;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
+
+	/**
 	 * Returns the default instance constructed using newInstance().
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
@@ -180,6 +187,28 @@ class WikibaseRepo {
 			$this->getIdFormatter(),
 			is_array( $entityNamespaces ) ? array_keys( $entityNamespaces ) : array()
 		);
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityTitleLookup
+	 */
+	public function getEntityTitleLookup() {
+		return $this->getEntityContentFactory();
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	public function getEntityRevisionLookup() {
+		if ( $this->entityRevisionLookup === null ) {
+			$this->entityRevisionLookup = StoreFactory::getStore()->getEntityRevisionLookup();
+		}
+
+		return $this->entityRevisionLookup;
 	}
 
 	/**

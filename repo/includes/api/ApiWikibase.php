@@ -493,34 +493,4 @@ abstract class ApiWikibase extends \ApiBase {
 		$formatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 		return $formatter->formatSummary( $summary );
 	}
-
-	/**
-	 * Adds the ID of the new revision from the Status object to the API result structure.
-	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
-	 * resp WikiPage::doEditContent() do it: as an array, with the new revision object in the
-	 * 'revision' field.
-	 *
-	 * If no revision is found the the Status object, this method does nothing.
-	 *
-	 * @see ApiResult::addValue()
-	 *
-	 * @param string|null|array $path Where in the result to put the revision idf
-	 * @param Status $status The status to get the revision ID from.
-	 */
-	protected function addRevisionIdFromStatusToResult( $path, Status $status ) {
-		$statusValue = $status->getValue();
-
-		/* @var Revision $revision */
-		$revision = isset( $statusValue['revision'] )
-			? $statusValue['revision'] : null;
-
-		if ( $revision ) {
-			$this->getResult()->addValue(
-				$path,
-				'lastrevid',
-				intval( $revision->getId() )
-			);
-		}
-
-	}
 }
