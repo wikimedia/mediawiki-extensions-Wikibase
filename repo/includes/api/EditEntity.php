@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use MWException;
 use Revision;
 use SiteList;
+use SiteSQLStore;
 use Title;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
@@ -26,6 +27,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Settings;
 use Wikibase\Summary;
 use Wikibase\Utils;
 use WikiPage;
@@ -339,7 +341,8 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "List of sitelinks must be an array", 'not-recognized-array' );
 		}
 
-		$sites = $this->getSiteLinkTargetSites();
+		$siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$sites = $siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
 
 		foreach ( $siteLinks as $siteId => $arg ) {
 			$this->checkSiteLinks( $arg, $siteId, $sites );
