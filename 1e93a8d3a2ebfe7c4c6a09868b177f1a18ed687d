@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_f5f31b9b",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-14T14:35:28Z",
+      "side": 1,
+      "message": "not sure why all of these tabs are here..?",
+      "revId": "1e93a8d3a2ebfe7c4c6a09868b177f1a18ed687d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_d5d1bffa",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithMostSitelinksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-14T14:35:28Z",
+      "side": 1,
+      "message": "Please add an @covers tag (this will make the above line redundant)",
+      "revId": "1e93a8d3a2ebfe7c4c6a09868b177f1a18ed687d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_95ebc7b0",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithMostSitelinksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-14T14:35:28Z",
+      "side": 1,
+      "message": "we no longer use @file tags",
+      "revId": "1e93a8d3a2ebfe7c4c6a09868b177f1a18ed687d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b5d443eb",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithMostSitelinksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-14T14:35:28Z",
+      "side": 1,
+      "message": "we no longer use @ingroup tags",
+      "revId": "1e93a8d3a2ebfe7c4c6a09868b177f1a18ed687d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f5da3b13",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithMostSitelinksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-14T14:35:28Z",
+      "side": 1,
+      "message": "please dont use overly qualified class names",
+      "revId": "1e93a8d3a2ebfe7c4c6a09868b177f1a18ed687d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
