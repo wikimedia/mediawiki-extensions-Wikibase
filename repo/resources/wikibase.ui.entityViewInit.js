@@ -138,7 +138,7 @@
 
 			// FIXME: Initializing entityview on $claims leads to the claim section inserted as
 			// child of $claims. It should be direct child of ".wb-entity".
-			$claims.detach().entityview( { // take widget subject out of DOM while initializing
+			$claims.entityview( {
 				value: wb.entity
 			} ).appendTo( $claimsParent );
 
