@@ -5,6 +5,7 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -42,17 +43,17 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		static $hasProperties = false;
 		if ( !$hasProperties ) {
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( 42 );
+			$prop->getEntity()->setId( new PropertyId( 'P42' ) );
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( 43 );
+			$prop->getEntity()->setId( new PropertyId( 'P43' ) );
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( 3 );
+			$prop->getEntity()->setId( new PropertyId( 'P66' ) );
 			$prop->getEntity()->setDataTypeId( 'string' );
 			$prop->save( 'testing' );
 
@@ -145,9 +146,9 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		// Pre-fill statement with three references:
 		$references = array(
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 1 ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 2 ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 3 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 42 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 43 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 66 ) ) ) ),
 		);
 
 		foreach( $references as $reference ) {
