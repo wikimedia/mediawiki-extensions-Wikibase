@@ -22,7 +22,6 @@ return call_user_func( function() {
 		'Wikibase\RepoItemLinkGenerator' => 'includes/RepoItemLinkGenerator.php',
 		'Wikibase\RepoLinker' => 'includes/RepoLinker.php',
 		'Wikibase\Client\WikibaseClient' => 'includes/WikibaseClient.php',
-		'Scribunto_LuaWikibaseLibrary' => 'includes/WikibaseLibrary.php',
 		'Wikibase\PageUpdater' => 'includes/PageUpdater.php',
 		'Wikibase\SiteLinkCommentCreator' => 'includes/SiteLinkCommentCreator.php',
 		'Wikibase\WikiPageUpdater' => 'includes/WikiPageUpdater.php',
@@ -60,6 +59,10 @@ return call_user_func( function() {
 		'Wikibase\CachingSqlStore' => 'includes/store/sql/CachingSqlStore.php',
 		'Wikibase\DirectSqlStore' => 'includes/store/sql/DirectSqlStore.php',
 		'Wikibase\EntityCacheTable' => 'includes/store/sql/EntityCacheTable.php',
+
+		// includes/scribunto
+		'Scribunto_LuaWikibaseLibrary' => 'includes/scribunto/Scribunto_LuaWikibaseLibrary.php',
+		'Scribunto_LuaWikibaseLibraryImplementation' => 'includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php',
 
 		// test
 		'Wikibase\Test\MockPageUpdater' => 'tests/phpunit/MockPageUpdater.php'
