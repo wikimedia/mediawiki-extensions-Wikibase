@@ -6,7 +6,7 @@ use Html;
 use Linker;
 use MWException;
 use Title;
-use Wikibase\EntityContentFactory;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
