@@ -26,7 +26,9 @@
 	"require": {
 		"php": ">=5.3.0",
 		"diff/diff": "dev-master",
-		"data-values/data-values": "dev-master"
+		"data-values/data-values": "dev-master",
+		"data-values/interfaces": "dev-master",
+		"data-values/common": "dev-master"
 	},
 	"autoload": {
 		"files" : [
