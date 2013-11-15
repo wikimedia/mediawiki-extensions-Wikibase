@@ -190,6 +190,7 @@ return call_user_func( function() {
 		'Wikibase\Test\ActionTestCase' => 'tests/phpunit/includes/actions/ActionTestCase.php',
 		'Wikibase\Test\Api\WikibaseApiTestCase' => 'tests/phpunit/includes/api/WikibaseApiTestCase.php',
 		'Wikibase\Test\Api\LangAttributeTestCase' => 'tests/phpunit/includes/api/LangAttributeTestCase.php',
+		'Wikibase\Test\Api\PermissionsTestCase' => 'tests/phpunit/includes/api/PermissionsTestCase.php',
 		'Wikibase\Test\Api\LangAttributeTestHelper' => 'tests/phpunit/includes/api/LangAttributeTestHelper.php',
 		'Wikibase\Test\Api\EntityTestHelper' => 'tests/phpunit/includes/api/EntityTestHelper.php',
 		'Wikibase\Test\PermissionsHelper' => 'tests/phpunit/includes/PermissionsHelper.php',

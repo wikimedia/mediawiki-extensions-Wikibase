@@ -1,9 +1,8 @@
 <?php
 
 namespace Wikibase\Test\Api;
-use ApiTestCase;
-use Wikibase\Settings;
-use Wikibase\Test\PermissionsHelper;
+
+use FormatJson;
 
 /**
  * Tests for permission handling in the Wikibase API.
@@ -20,83 +19,12 @@ use Wikibase\Test\PermissionsHelper;
  * @group WikibaseAPI
  * @group PermissionsTest
  * @group BreakingTheSlownessBarrier
- *
- * The database group has as a side effect that temporal database tables are created. This makes
- * it possible to test without poisoning a production database.
  * @group Database
- * 
- * Some of the tests takes more time, and needs therefor longer time before they can be aborted
- * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
- * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class PermissionsTest extends WikibaseApiTestCase {
+class PermissionsTest extends PermissionsTestCase {
 
-	protected $permissions;
-	protected $old_user;
-
-	private static $hasSetup;
-
-	function setUp() {
-		global $wgGroupPermissions, $wgUser;
-
-		parent::setUp();
-
-		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Oslo', 'Empty' ) );
-		}
-		self::$hasSetup = true;
-
-		$this->permissions = $wgGroupPermissions;
-		$this->old_user = $wgUser;
-	}
-
-	function tearDown() {
-		global $wgGroupPermissions;
-		global $wgUser;
-
-		$wgGroupPermissions = $this->permissions;
-
-		if ( $this->old_user ) { // should not be null, but sometimes, it is
-			$wgUser = $this->old_user;
-		}
-
-		if ( $wgUser ) { // should not be null, but sometimes, it is
-			// reset rights cache
-			$wgUser->addGroup( "dummy" );
-			$wgUser->removeGroup( "dummy" );
-		}
-
-		parent::tearDown();
-	}
-
-	function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null ) {
-		global $wgUser;
-
-		PermissionsHelper::applyPermissions( $permissions );
-
-		try {
-			if ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens', false ) ) {
-				$params[ 'token' ] = $wgUser->getEditToken();
-			}
-
-			$params[ 'action' ] = $action;
-			list( $re, , ) = $this->doApiRequest( $params, null, false, $wgUser );
-
-			if ( $expectedError == null ) {
-				$this->assertArrayHasKey( 'success', $re, 'API call must report success.' );
-				$this->assertEquals( '1', $re['success'], 'API call should have succeeded.' );
-			} else {
-				$this->fail( 'API call should have failed with a permission error!' );
-			}
-		} catch ( \UsageException $ex ) {
-			if ( $expectedError !== true ) {
-				$this->assertEquals( $expectedError, $ex->getCodeString(), 'API did not return expected error code. Got error message ' . $ex );
-			}
-		}
-	}
-
-	function provideReadPermissions() {
+	public function provideReadPermissions() {
 		return array(
 			array( //0
 				null, // normal permissions
@@ -113,7 +41,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		);
 	}
 
-	function provideEditPermissions() {
+	public function provideEditPermissions() {
 		return array_merge( $this->provideReadPermissions(), array(
 			array( //2
 				array( // permissions
@@ -141,8 +69,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		) );
 	}
 
-
-	function provideGetEntitiesPermissions() {
+	public function provideGetEntitiesPermissions() {
 		$permissions = $this->provideReadPermissions();
 		return $permissions;
 	}
@@ -150,7 +77,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideGetEntitiesPermissions
 	 */
-	function testGetEntities( $permissions, $expectedError ) {
+	public function testGetEntities( $permissions, $expectedError ) {
 		$params = array(
 			'ids' => EntityTestHelper::getId( 'Oslo' ),
 		);
@@ -158,7 +85,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
-	function provideAddItemPermissions() {
+	public function provideCreateItemPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( //5
@@ -182,22 +109,22 @@ class PermissionsTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideAddItemPermissions
+	 * @dataProvider provideCreateItemPermissions
 	 */
-	function testAddItem( $permissions, $expectedError ) {
+	public function testCreateItem( $permissions, $expectedError ) {
 		$itemData = array(
 			'labels' => array("en" => array( "language" => 'en', "value" => 'Test' ) ),
 		);
 
 		$params = array(
-			'data' => \FormatJson::encode( $itemData ),
+			'data' => FormatJson::encode( $itemData ),
 			'new' => 'item',
 		);
 
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
-	function provideSetSiteLinkPermissions() {
+	public function provideSetSiteLinkPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( #5
@@ -214,7 +141,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideSetSiteLinkPermissions
 	 */
-	function testSetSiteLink( $permissions, $expectedError ) {
+	public function testSetSiteLink( $permissions, $expectedError ) {
 		$params = array(
 			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'linksite' => 'enwiki',
@@ -224,7 +151,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		$this->doPermissionsTest( 'wbsetsitelink', $params, $permissions, $expectedError );
 	}
 
-	function provideSetLabelPermissions() {
+	public function provideSetLabelPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( //5
@@ -241,7 +168,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideSetLabelPermissions
 	 */
-	function testSetLabel( $permissions, $expectedError ) {
+	public function testSetLabel( $permissions, $expectedError ) {
 		$params = array(
 			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'de',
@@ -251,7 +178,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError );
 	}
 
-	function provideSetDescriptionPermissions() {
+	public function provideSetDescriptionPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( //5
@@ -268,7 +195,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideSetDescriptionPermissions
 	 */
-	function testSetDescription( $permissions, $expectedError ) {
+	public function testSetDescription( $permissions, $expectedError ) {
 		$params = array(
 			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'en',
@@ -278,7 +205,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
 	}
 
-	function provideMergeItemsPermissions() {
+	public function provideMergeItemsPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( #5
@@ -295,7 +222,7 @@ class PermissionsTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideMergeItemsPermissions
 	 */
-	function testMergeItems( $permissions, $expectedError ) {
+	public function testMergeItems( $permissions, $expectedError ) {
 		$params = array(
 			'fromid' => EntityTestHelper::getId( 'Oslo' ),
 			'toid' => EntityTestHelper::getId( 'Empty' ),
