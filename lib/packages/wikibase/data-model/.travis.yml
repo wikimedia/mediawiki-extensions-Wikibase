@@ -18,6 +18,6 @@ after_script:
 notifications:
   irc:
     channels:
-      - "chat.freenode.net#wikimedia-wikidata"
+      - "chat.freenode.net#wikidata"
     on_success: change
     on_failure: always
