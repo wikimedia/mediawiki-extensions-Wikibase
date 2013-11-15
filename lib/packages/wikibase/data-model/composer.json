@@ -19,7 +19,7 @@
 	],
 	"support": {
 		"issues": "https://bugzilla.wikimedia.org/",
-		"irc": "irc://irc.freenode.net/wikimedia-wikidata",
+		"irc": "irc://irc.freenode.net/wikidata",
 		"forum": "https://www.mediawiki.org/wiki/Extension_talk:WikibaseDataModel",
 		"wiki": "https://www.mediawiki.org/wiki/Extension:WikibaseDataModel"
 	},
