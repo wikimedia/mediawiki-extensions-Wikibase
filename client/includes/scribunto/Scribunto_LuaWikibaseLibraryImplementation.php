@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Registers and defines functions to access Wikibase through the Scribunto extension
+ * Actual implementations of the functions to access Wikibase through the Scribunto extension
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,55 +24,57 @@
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 
-use ValueParsers\ParseException;
-use Wikibase\Client\WikibaseClient;
+use Wikibase\EntityLookup;
+use Wikibase\SiteLinkLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Utils;
 
-class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
+class Scribunto_LuaWikibaseLibraryImplementation {
+
+	/* @var EntityIdParser */
+	protected $entityIdParser;
+
+	/* @var EntityLookup */
+	protected $entityLookup;
+
+	/* @var EntityIdFormatter */
+	protected $entityIdFormatter;
+
+	/* @var SiteLinkLookup */
+	protected $siteLinkTable;
+
 
 	/**
-	 * Register mw.wikibase.lua library
+	 * @param EntityIdParser $entityIdParser
 	 *
-	 * @since 0.4
 	 */
-	public function register() {
-		$lib = array(
-			'getEntity' => array( $this, 'getEntity' ),
-			'getEntityId' => array( $this, 'getEntityId' ),
-			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
-		);
-		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/../resources/' . 'mw.wikibase.lua', $lib, array() );
+	public function __construct( EntityIdParser $entityIdParser, EntityLookup $entityLookup, EntityIdFormatter $entityIdFormatter, SiteLinkLookup $siteLinkTable ) {
+		$this->entityIdParser = $entityIdParser;
+		$this->entityLookup = $entityLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
+		$this->siteLinkTable = $siteLinkTable;
 	}
+
 
 	/**
 	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param string $prefixedEntityId
 	 *
-	 * @throws ScribuntoException
 	 * @return array $entityArr
 	 */
 	public function getEntity( $prefixedEntityId = null ) {
-		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 		$prefixedEntityId = trim( $prefixedEntityId );
 
-		$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
-		try {
-			$entityId = $entityIdParser->parse( $prefixedEntityId );
-		}
-		catch ( ParseException $parseException ) {
-			throw $this->getEngine()->newException( 'wikibase-error-invalid-entity-id' );
-		}
-
-		$entityObject = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup()->getEntity(
-			$entityId
-		);
+		$entityObject = $this->entityLookup->getEntity( $entityId );
 
 		if ( $entityObject == null ) {
 			return array( null );
@@ -94,41 +96,35 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
 		// so any customized Lua modules can access labels of another entity written in another variant,
 		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
-		$chain = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory()->newFromLanguage(
-			$wgContLang, LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
+		$fallbackChainFactory = new LanguageFallbackChainFactory();
+		$chain = $fallbackChainFactory->newFromLanguage( $wgContLang, LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS );
 		// SerializationOptions accepts mixed types of keys happily.
 		$opt->setLanguages( Utils::getLanguageCodes() + array( $wgContLang->getCode() => $chain ) );
 
 		$serializer = $serializerFactory->newSerializerForObject( $entityObject, $opt );
 
-		try {
-			$entityArr = $serializer->getSerialized( $entityObject );
-			return array( $entityArr );
-		} catch ( \Exception $e ) {
-			throw $this->getEngine()->newException( 'wikibase-error-serialize-error' );
-		}
+		$entityArr = $serializer->getSerialized( $entityObject );
+		return array( $entityArr );
 	}
 
 	/**
 	 * Get entity id from page title.
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param string $pageTitle
 	 *
 	 * @return string $id
 	 */
 	public function getEntityId( $pageTitle = null ) {
-		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		$globalSiteId = \Wikibase\Settings::get( 'siteGlobalID' );
-		$table = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$globalSiteId = $this->getGlobalSiteId();
+		$table = $this->siteLinkTable;
 		if ( $table == null ) {
 			return array( null );
 		}
 
 		$numericId = $table->getItemIdForLink( $globalSiteId, $pageTitle );
-		if ( !is_int( $numericId ) ) {
+		if ( ! is_int( $numericId ) ) {
 			return array( null );
 		}
 
@@ -137,19 +133,18 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return array( null );
 		}
 
-		$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
-
-		return array( $idFormatter->format( $id ) );
+		return array( $this->entityIdFormatter->format( $id ) );
 	}
-    /**
-     * Get global site ID (e.g. "enwiki")
-     * This is basically a helper function.
-     * I can see this becoming part of mw.site in the Scribunto extension.
-     *
-     * @since 0.4
-     *
-     */
-    public function getGlobalSiteId() {
-        return array( \Wikibase\Settings::get( 'siteGlobalID' ) );
-    }
+
+	/**
+	 * Get global site ID (e.g. "enwiki")
+	 * This is basically a helper function.
+	 * I can see this becoming part of mw.site in the Scribunto extension.
+	 *
+	 * @since 0.5
+	 *
+	 */
+	public function getGlobalSiteId() {
+		return array( \Wikibase\Settings::get( 'siteGlobalID' ) );
+	}
 }
