@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_abccdf35",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "we no longer keep this verbose license header in our files :)\nWe now only have @licence GNU GPL v2+\n\nAlso the rest of this comment should be just above the start of the class as we no longer have file comments, just class comments!",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_cbd11bcd",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "comment for a non existent constructor",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_ebda57e5",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "same as the other file.",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_4bde0bd8",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "not needed extra line in comment",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_2bfaaf40",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "Per a sort of convention (not sure if its written down anywhere or not)\nPlease have global $wgContLang; at the top of the method rather than mid way through",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_0b01733b",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "would be nice to split this long line (above)  onto multiple lines",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_8bf4835a",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "is $entityArr a slight mistype? Maybe Array?",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_eb033743",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "$pageTitle can also be null? so string|null  ?",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_cbeafb74",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "Overly fully qualified class names (see comment at bottom of file)",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_abe5bfa7",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "Overlly qualified name \\Wikibase\\Settings\nPlease just use Settings and \u0027use\u0027 the class.",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_8bc643fe",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "we no longer use the @file tag",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_6bc107e8",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-15T16:04:12Z",
+      "side": 1,
+      "message": "we no longer use the @ingroup tag",
+      "revId": "d94f068827d42a9917e3b851a6e8dc4167cb231c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
