@@ -16,6 +16,24 @@
       "revId": "169063d8fa0913143544a8424b466bdd202eb929",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_ae922850",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-16T18:03:07Z",
+      "side": 1,
+      "message": "these are still needed to tell composer which branches to use.\n\nhttp://getcomposer.org/doc/05-repositories.md#loading-a-package-from-a-vcs-repository",
+      "parentUuid": "291c1151_2e96384a",
+      "revId": "169063d8fa0913143544a8424b466bdd202eb929",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
