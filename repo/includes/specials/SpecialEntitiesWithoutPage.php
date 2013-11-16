@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use Language;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
 use Wikibase\StoreFactory;
@@ -16,6 +17,7 @@ use XmlSelect;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Bene*
+ * @author lbenedix
  */
 abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 
@@ -27,6 +29,11 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @var string
 	 */
 	protected $language = '';
+
+	/**
+	 * @var string[]
+	 */
+	protected $validLanguages;
 
 	/**
 	 * The type used
@@ -57,6 +64,8 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->prepareArguments( $subPage );
+
+		$this->validLanguages = Language::fetchLanguageNames();
 
 		$this->setForm();
 
@@ -134,6 +143,12 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $type )->text(), $type );
 		}
 
+		$languageSelect = new XmlSelect( 'language', 'wb-entitieswithoutpage-language', $this->type );
+		$languageSelect->addOption( wfMessage( 'htmlform-chosen-placeholder' ), '' );
+		foreach( $this->validLanguages as $languageCode => $languageName ){
+			$languageSelect->addOption( $languageName, $languageCode );
+		}
+
 		$this->getOutput()->addHTML(
 			Html::openElement(
 				'form',
@@ -163,14 +178,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				),
 				$this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text()
 			) . ' ' .
-			Html::input(
-				'language',
-				$this->language,
-				'text',
-				array(
-					'id' => 'wb-entitieswithoutpage-language'
-				)
-			) . ' ' .
+			$languageSelect->getHTML() . ' ' .
 			Html::element(
 				'label',
 				array(
