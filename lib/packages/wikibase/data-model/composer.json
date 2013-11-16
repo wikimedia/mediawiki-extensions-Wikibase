@@ -23,12 +23,16 @@
 		"forum": "https://www.mediawiki.org/wiki/Extension_talk:WikibaseDataModel",
 		"wiki": "https://www.mediawiki.org/wiki/Extension:WikibaseDataModel"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataValues.git"
+		}
+	],
 	"require": {
 		"php": ">=5.3.0",
 		"diff/diff": "dev-master",
-		"data-values/data-values": "dev-master",
-		"data-values/interfaces": "dev-master",
-		"data-values/common": "dev-master"
+		"data-values/data-values": "dev-master"
 	},
 	"autoload": {
 		"files" : [
