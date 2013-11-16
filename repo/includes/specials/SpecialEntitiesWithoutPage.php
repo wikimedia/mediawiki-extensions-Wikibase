@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use Language;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
 use Wikibase\StoreFactory;
@@ -27,6 +28,11 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @var string
 	 */
 	protected $language = '';
+
+	/**
+	 * @var string[]
+	 */
+	protected $validLanguages;
 
 	/**
 	 * The type used
@@ -57,6 +63,8 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->prepareArguments( $subPage );
+
+		$this->validLanguages = Language::fetchLanguageNames();
 
 		$this->setForm();
 
@@ -163,13 +171,13 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				),
 				$this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text()
 			) . ' ' .
-			Html::input(
-				'language',
-				$this->language,
-				'text',
+			Html::rawElement(
+				'select',
 				array(
+					'name' => 'language',
 					'id' => 'wb-entitieswithoutpage-language'
-				)
+				),
+				$this->getListOfLanguagecodeOptions()
 			) . ' ' .
 			Html::element(
 				'label',
@@ -193,6 +201,28 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			Html::closeElement( 'form' )
 		);
 	}
+
+	/**
+	 * Returns a list of Html-<option> nodes with all valid language names and language codes
+	 * e.g. <option value="en">English</option>
+	 *
+	 * @return string
+	 */
+	private function getListOfLanguagecodeOptions(){
+		$result = Html::element( 'option',
+			array( 'value' => '' ),
+			wfMessage( 'htmlform-chosen-placeholder' )
+		);
+		foreach( $this->validLanguages as $languageCode => $languageName ){
+			$selected = $languageCode === $this->language ? array( 'selected' => 'selected' ) : array();
+			$result .= Html::element( 'option',
+				array( 'value' => $languageCode ) + $selected,
+				$languageName . ' (' . $languageCode . ')'
+			);
+		}
+		return $result;
+	}
+
 
 	/**
 	 * @see SpecialWikibaseQueryPage::getResult
