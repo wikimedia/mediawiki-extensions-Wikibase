@@ -31,6 +31,10 @@
 		{
 			"type": "vcs",
 			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataTypes.git"
+		},
+		{
+			"type": "vcs",
+			"url": "://gerrit.wikimedia.org/r/p/mediawiki/extensions/WikibaseDataModel.git"
 		}
 	],
     "require": {
