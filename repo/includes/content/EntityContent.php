@@ -508,17 +508,17 @@ abstract class EntityContent extends AbstractContent {
 		//     database transactions, we could simply check here.
 		$this->editEntity = $editEntity;
 
-		// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clear may cause the old content
-		//       to be loaded from the database again. This may be necessary, because EntityContent is mutable,
-		//       so the cached object might have changed.
+		// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clearPreparedEdit
+		//       may cause the old content to be loaded from the database again. This may be
+		//       necessary, because EntityContent is mutable, so the cached object might have changed.
 		//
-		//       The relevant test case is ItemContentTest::restRepeatedSave
+		//       The relevant test case is ItemContentTest::testRepeatedSave
 		//
-		//       We may be able to optimize this by only calling WikiPage::clear if
-		//       $this->getWikiPage()->getContent() == $this, but that needs further investigation.
+		//       TODO: might be able to further optimize handling of prepared edit in WikiPage.
 
 		$page = $this->getWikiPage();
 		$page->clear();
+		$page->clearPreparedEdit();
 
 		$status = $page->doEditContent(
 			$this,
