@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_a46409bc",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-17T15:34:01Z",
+      "side": 1,
+      "message": "That method returns an array, not a boolean. Having an hasPeparedEdit would be good, and make this code readable as well",
+      "revId": "38a6eb7ecf9a177fefbc39744600eb6e4d509317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
