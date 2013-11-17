@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_04fdddb0",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-17T15:51:45Z",
+      "side": 1,
+      "message": "This commit makes big scary methods bigger and scarier. This line can easily be replaced by a call to a new getLanguageSelectorHTML method.",
+      "revId": "b9b7518754f5941aac1a5819e54d77ae0c6b1152",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
