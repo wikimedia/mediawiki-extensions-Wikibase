@@ -12072,6 +12072,7 @@ for å finne ut hva som har skjedd.',
 );
 
 /** Dutch (Nederlands)
+ * @author Breghtje
  * @author Flightmare
  * @author Konovalov
  * @author McDutchie
@@ -12219,6 +12220,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-setsitelink-submit' => 'Sitekoppeling instellen',
 	'wikibase-setsitelink-add-failed' => 'De sitekoppeling kon niet worden opgeslagen.',
 	'wikibase-setsitelink-remove-failed' => 'De sitekoppeling kon niet worden verwijderd.',
+	'wikibase-setsitelink-not-itemid' => '" $1 " is niet een geldige object-id. Site-link kan alleen worden ingesteld voor items.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Taal:',
 	'wikibase-setentity-invalid-langcode' => 'De taalcode "$1" is niet bekend. Gebruik een taalcode die bekend is in het systeem, zoals "en".',
@@ -13398,10 +13400,43 @@ Soa adrëssa IP a sarà argistrà ant la stòria dle modìfiche ëd costa entit�
 	'wikibase-setaliases-intro' => "Ës formolari a-j përmet ëd dé ij sobrichet ëd n'entità. A l'ha damanca ëd fornì l'id ëd l'entità (pr'esempi Q23), un còdes ëd lenga (pr'esempi \"en\") e ij sobrichet da fissé. Diferent sobrichet a son separà da na sbara vertical (<code>|</code>).",
 	'wikibase-setaliases-label' => 'Sobrichet:',
 	'wikibase-setaliases-submit' => 'Fissé ij sobrichet',
-	'wikibase-setentity-id' => 'ID', # Fuzzy
-	'wikibase-setentity-language' => 'Lenga', # Fuzzy
+	'wikibase-setaliases-warning-remove' => 'Veul-lo për da bon gavé via tuti ij sobrichet ëd [[$1]]?',
+	'special-setsitelink' => 'Definì na liura ëd sit',
+	'wikibase-setsitelink-introfull' => "A l'é an camin ch'a definiss la liura ëd sit $2 për [[$1]].",
+	'wikibase-setsitelink-intro' => "Ës formolari a-j përmet ëd definì la liura ëd sit ëd n'entità. A dev fornì l'id ëd l'entità (pr'esempi Q23), n'id ëd sit (pr'esempi \"enwiki\") e la liura ëd sit da definì.",
+	'wikibase-setsitelink-site' => 'Id ëd sit:',
+	'wikibase-setsitelink-label' => 'Liura ëd sit:',
+	'wikibase-setsitelink-submit' => 'Definì la liura ëd sit',
+	'wikibase-setsitelink-warning-remove' => 'Veul-lo për da bon gavé la liura ëd sit ëd [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => "L'id ëd sit «$1» a l'é nen conossù. Për piasì, ch'a deuvra n'id ëd sit esistent, coma «enwiki».",
+	'wikibase-setsitelink-add-failed' => "La liura ëd sit a l'ha pa podù esse argistrà.",
+	'wikibase-setsitelink-remove-failed' => "La liura ëd sit a l'ha pa podù esse gavà.",
+	'wikibase-setsitelink-not-itemid' => "«$1» a l'é pa n'id d'element vàlid. Le liure ëd dit a peulo mach esse definìe për j'element.",
+	'wikibase-setentity-id' => 'ID:',
+	'wikibase-setentity-language' => 'Lenga:',
 	'wikibase-setentity-invalid-langcode' => "L'identificator ëd lenga «$1» a l'é pa conossù. Për piasì, ch'a deuvra n'identificator ëd lenga conossù dal sistema, për esempi «pms».",
 	'wikibase-setentity-invalid-id' => "L'ID «$1» a l'é pa conossù dal sistema. Për piasì, ch'a deuvra n'ID d'entità bon.",
+	'special-dispatchstats' => 'Statìstiche ëd ripartission dij cangiament',
+	'wikibase-dispatchstats-intro' => "Costa pàgina a forniss dle statìstiche a propòsit ëd la ripartission dle modìfiche antra ij client.
+Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che la modìfica a l'é stàita assignà a cola wiki e ël travaj ëd coa su cola wiki a l'ha tratà cola notìfica.
+* [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]] a mostra ël nùmer e la dàita dj'element pi vej e pi recent ch'a-i son al moment ant la coa.
+* [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] a forniss d'anformassion a propòsit dël client ëd la wiki con pi e con meno artard, e d'un mesan antra ij doi. Për minca wiki, j'anformassion sì-dapress a son ësmonùe: ** «{{int:wikibase-dispatchstats-site-id}}» a l'é l'identificativ antern dël client wiki.
+** «{{int:wikibase-dispatchstats-pos}}» a l'é l'identificativ ëd l'ùltima modìfica assignà a cola wiki.
+** «{{int:wikibase-dispatchstats-lag-num}}» a l'é ël nùmer ëd modìfiche ancor nen assignà a cola wiki.
+** «{{int:wikibase-dispatchstats-lag-time}}» a l'é ël temp antra l'ùltima modìfica assignà a la wiki e l'ùltima modìfica fàita su {{SITENAME}}.
+** «{{int:wikibase-dispatchstats-touched}}» a l'é l'ora ant la qual l'ùltima partìa ëd modìfiche a l'é stàita assignà a la wiki.",
+	'wikibase-dispatchstats-no-stats' => 'Al moment a-i é gnun-e statìstiche disponìbij.',
+	'wikibase-dispatchstats-changes' => "Statìstiche dl'argistr dle modìfiche",
+	'wikibase-dispatchstats-stats' => "Statìstiche d'arpartission",
+	'wikibase-dispatchstats-change-id' => 'Identificativ',
+	'wikibase-dispatchstats-change-timestamp' => 'Stampin data e ora',
+	'wikibase-dispatchstats-oldest-change' => 'Ij pì vej',
+	'wikibase-dispatchstats-newest-change' => 'Ij pi recent',
+	'wikibase-dispatchstats-site-id' => 'Sit',
+	'wikibase-dispatchstats-pos' => 'Posission',
+	'wikibase-dispatchstats-lag-num' => 'An atèisa',
+	'wikibase-dispatchstats-lag-time' => 'Artard',
+	'wikibase-dispatchstats-touched' => 'Tocà',
 	'special-listdatatypes' => 'Lista ëd tute le sòrt ëd dat disponìbij.',
 	'wikibase-listdatatypes-intro' => "Costa a l'é na lista ëd tute le sòrt ëd dat an cors d'usagi an st'istalassion:",
 	'wikibase-history-title-with-label' => 'Stòria dle revision ëd "$2" ($1)',
