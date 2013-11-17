@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_d1138563",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-17T10:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_5145d5b4",
+      "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_7142d1af",
         "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-16T23:35:54Z",
       "side": 1,
       "message": "@return string",
+      "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f1188180",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-17T10:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_7142d1af",
       "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_11127d5f",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-17T10:33:44Z",
+      "side": 1,
+      "message": "done?",
+      "parentUuid": "291c1151_f135e143",
+      "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_d130e556",
         "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-16T23:35:54Z",
       "side": 1,
       "message": "don\u0027t use this directly, rather create a new message (within wikibase) with the same value for English!",
+      "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_712c91ac",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-17T10:33:44Z",
+      "side": 1,
+      "message": "copy paste is not really reusing of existing code...",
+      "parentUuid": "291c1151_d130e556",
       "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_911d8d73",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-17T10:33:44Z",
+      "side": 1,
+      "message": "done?",
+      "parentUuid": "291c1151_113fdd22",
+      "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_313cd92b",
         "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2013-11-16T23:35:54Z",
       "side": 1,
       "message": "might be nicer to do this above and save it in a var?!\n$selected \u003d  $languageCode \u003d\u003d\u003d $this-\u003elanguage ? array( \u0027selected\u0027 \u003d\u003e \u0027selected\u0027 ) : array() );",
+      "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b12289b6",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 629
+      },
+      "writtenOn": "2013-11-17T10:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_313cd92b",
       "revId": "b51f73bdf3d871d0e7908b3b27cc657996527321",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
