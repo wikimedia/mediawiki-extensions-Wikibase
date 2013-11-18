@@ -47,7 +47,10 @@ class DumpJson extends Maintenance {
 	 */
 	public $entityPerPage;
 
-	public $quiet = true;
+	/**
+	 * @var bool|resource
+	 */
+	public $logFileHandle = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -58,7 +61,8 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'entity-type', "Only dump this kind of entity, e.g. `item` or `property`.", false, true );
 		$this->addOption( 'sharding-factor', "The number of shards (must be >= 1)", false, true );
 		$this->addOption( 'shard', "The shard to output (must be less than the sharding-factor) ", false, true );
-		$this->addOption( 'output', "Output file (default is stdout) ", false, true );
+		$this->addOption( 'output', "Output file (default is stdout). Will be overwritten.", false, true );
+		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 	}
 
@@ -74,12 +78,53 @@ class DumpJson extends Maintenance {
 	/**
 	 * Outputs a message vis the output() method.
 	 *
-	 * @see MessageReporter::reportMessage()
+	 * @see MessageReporter::logMessage()
 	 *
 	 * @param string $message
 	 */
-	public function reportMessage( $message ) {
+	public function logMessage( $message ) {
+		if ( $this->logFileHandle ) {
+			fwrite( $this->logFileHandle, "$message\n" );
+			fflush( $this->logFileHandle );
+		} else {
 			$this->output( "$message\n" );
+		}
+	}
+
+	/**
+	 * Opens the given file for use by logMessage().
+	 *
+	 * @param $file
+	 *
+	 * @throws \MWException
+	 */
+	protected function openLogFile( $file ) {
+		$this->closeLogFile();
+
+		if ( $file === '-' ) {
+			$file = 'php://stdout';
+		}
+
+		// wouldn't streams be nice...
+		$this->logFileHandle = fopen( $file, 'a' );
+
+		if ( !$this->logFileHandle ) {
+			throw new \MWException( 'Filed to open log file: ' . $file );
+		}
+	}
+
+	/**
+	 * Closes any currently open file opened with openLogFile().
+	 */
+	protected function closeLogFile() {
+		if ( $this->logFileHandle
+			&& $this->logFileHandle !== STDERR
+			&& $this->logFileHandle !== STDOUT ) {
+
+			fclose( $this->logFileHandle );
+		}
+
+		$this->logFileHandle = false;
 	}
 
 	/**
@@ -93,37 +138,38 @@ class DumpJson extends Maintenance {
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
 
+		//TODO: Allow injection of an OutputStream for logging
+		$this->openLogFile( $this->getOption( 'log', 'php://stderr' ) );
+
 		$outFile = $this->getOption( 'output', 'php://stdout' );
 
 		if ( $outFile === '-' ) {
 			$outFile = 'php://stdout';
 		}
 
-		$output = fopen( $outFile, 'wa' ); //TODO: Allow injection of an OutputStream
+		$output = fopen( $outFile, 'w' ); //TODO: Allow injection of an OutputStream
 
 		if ( !$output ) {
 			throw new \MWException( 'Failed to open ' . $outFile . '!' );
 		}
 
+		if ( $this->hasOption( 'list-file' ) ) {
+			$this->logMessage( "Dumping entities listed in " . $this->getOption( 'list-file' ) );
+		}
+
 		if ( $entityType ) {
-			$this->reportMessage( "Dumping entities of type $entityType" );
+			$this->logMessage( "Dumping entities of type $entityType" );
 		}
 
 		if ( $shardingFactor && $shard ) {
-			$this->reportMessage( "Dumping shard $shard/$shardingFactor" );
+			$this->logMessage( "Dumping shard $shard/$shardingFactor" );
 		}
 
 		$dumper = new JsonDumpGenerator( $output, $this->entityLookup, $this->entitySerializer );
 
-		if ( $outFile !== 'php://stdout' && $outFile !== 'php://output' ) {
-			$progressReporter = new \ObservableMessageReporter();
-			$progressReporter->registerReporterCallback( array( $this, 'reportMessage' ) );
-
-			$dumper->setProgressReporter( $progressReporter );
-		} else {
-			$progressReporter = new \NullMessageReporter();
-			$this->mQuiet = true; // suppress in-band output
-		}
+		$progressReporter = new \ObservableMessageReporter();
+		$progressReporter->registerReporterCallback( array( $this, 'logMessage' ) );
+		$dumper->setProgressReporter( $progressReporter );
 
 		$exceptionReporter = new \ReportingExceptionHandler( $progressReporter );
 		$dumper->setExceptionHandler( $exceptionReporter );
@@ -140,6 +186,8 @@ class DumpJson extends Maintenance {
 			// close stream / free resources
 			$idStream->dispose();
 		}
+
+		$this->closeLogFile();
 	}
 
 	/**
@@ -179,7 +227,6 @@ class DumpJson extends Maintenance {
 
 		return $stream;
 	}
-
 }
 
 $maintClass = 'Wikibase\DumpJson';
