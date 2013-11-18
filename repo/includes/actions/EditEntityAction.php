@@ -33,17 +33,41 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class EditEntityAction extends ViewEntityAction {
 
+	/**
+	 * @var EntityIdLabelFormatter
+	 */
+	protected $propertyNameFormatter;
+
+	/**
+	 * @var SnakFormatter
+	 */
+	protected $snakValueFormatter;
+
+	/**
+	 * @var EntityDiffVisualizer
+	 */
+	protected $diffVisualizer;
+
 	public function __construct( Page $page, IContextSource $context = null ) {
 		parent::__construct( $page, $context );
+
+		$langCode = $this->getContext()->getLanguage()->getCode();
 
 		//TODO: proper injection
 		$options = new FormatterOptions( array(
 			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $this->getContext()->getLanguage()->getCode()
+			ValueFormatter::OPT_LANG => $langCode
 		) );
 
 		$this->propertyNameFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
 		$this->snakValueFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+
+		$this->diffVisualizer = new EntityDiffVisualizer(
+			$this->getContext(),
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
+			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter, $langCode ),
+			SiteSQLStore::newInstance()
+		);
 
 	}
 
@@ -404,7 +428,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @return array An array in the format array( $label, $input )
 	 */
-	function getSummaryInput( $summary = "", $labelText = null, $inputAttrs = null, $spanLabelAttrs = null ) {
+	public function getSummaryInput( $summary = "", $labelText = null, $inputAttrs = null, $spanLabelAttrs = null ) {
 		// Note: the maxlength is overriden in JS to 255 and to make it use UTF-8 bytes, not characters.
 		$inputAttrs = ( is_array( $inputAttrs ) ? $inputAttrs : array() ) + array(
 			'id' => 'wpSummary',
@@ -453,15 +477,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new ) ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
-		// TODO: derp inject the EntityDiffVisualizer
-		$diffVisualizer = new EntityDiffVisualizer(
-			$this->getContext(),
-			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter ),
-			SiteSQLStore::newInstance()
-		);
-
-		$this->getOutput()->addHTML( $diffVisualizer->visualizeDiff( $diff ) );
+		$this->getOutput()->addHTML( $this->diffVisualizer->visualizeDiff( $diff ) );
 
 		$this->getOutput()->addHTML( Html::closeElement( 'tbody' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
