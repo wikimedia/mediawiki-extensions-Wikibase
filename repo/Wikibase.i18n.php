@@ -1058,7 +1058,7 @@ Parameters:
 	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
 	'wikibase-item-summary-wbeditentity-create' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item.}}',
 	'wikibase-item-summary-wbeditentity-update' => '{{wikibase summary messages|item|Automatic edit summary generated when updating an existing item.}}',
-	'wikibase-item-summary-wbeditentity-override' => '{{wikibase summary messages|item|Automatic edit summary generated when overriding an existing item.}}',
+	'wikibase-item-summary-wbeditentity-override' => '{{wikibase summary messages|item|Automatic edit summary generated when overriding an existing item. This is when a user specifically marks an edit in such a way that the data they provide will override any current data on the item.}}',
 	'wikibase-item-summary-wbsetreference' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a reference or setting the value of an existing one.}}',
 	'wikibase-item-summary-wbsetreference-add' => '{{wikibase summary messages|item|Automatic edit summary generated when adding a reference.}}',
 	'wikibase-item-summary-wbsetreference-set' => '{{wikibase summary messages|item|Automatic edit summary generated when editing a reference.}}',
