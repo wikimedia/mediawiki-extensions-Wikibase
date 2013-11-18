@@ -4,7 +4,9 @@ namespace Wikibase\Test;
 
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Serializers\ClaimsSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\Claim;
@@ -37,6 +39,14 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
+	 * @return ClaimsSerializer
+	 */
+	protected function getInstance() {
+		$class = $this->getClass();
+		return new $class( new ClaimSerializer( new SnakSerializer() ) );
+	}
+
+	/**
 	 * @see SerializerBaseTest::validProvider
 	 *
 	 * @since 0.2
@@ -58,7 +68,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 			$claim->setGuid( 'ClaimsSerializerTest$claim-' . $i );
 		}
 
-		$claimSerializer = new ClaimSerializer();
+		$claimSerializer = new ClaimSerializer( new SnakSerializer() );
 
 		$validArgs['grouped'] = array(
 			new Claims( $claims ),

@@ -4,15 +4,13 @@ namespace Wikibase\Api;
 
 use ApiResult;
 use InvalidArgumentException;
-use SiteSQLStore;
 use Wikibase\Claims;
 use Wikibase\Lib\Serializers\AliasSerializer;
-use Wikibase\Lib\Serializers\ClaimsSerializer;
 use Wikibase\Lib\Serializers\DescriptionSerializer;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\LabelSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SiteLinkSerializer;
+use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
  * Builder for Api Results
@@ -34,11 +32,28 @@ class ResultBuilder {
 	 */
 	protected $missingEntityCounter;
 
-	public function __construct( $result ) {
+	/**
+	 * @var SerializerFactory
+	 */
+	protected $serializerFactory;
+
+	/**
+	 * @param ApiResult $result
+	 * @param SerializerFactory $serializerFactory
+	 *
+	 * @throws \InvalidArgumentException
+	 * @todo require SerializerFactory
+	 */
+	public function __construct( $result, SerializerFactory $serializerFactory = null ) {
 		if( !$result instanceof ApiResult ){
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
 		}
 
+		if ( $serializerFactory === null ) {
+			$serializerFactory = new SerializerFactory();
+		}
+
+		$this->serializerFactory = $serializerFactory;
 		$this->result = $result;
 		$this->missingEntityCounter = -1;
 	}
@@ -76,7 +91,7 @@ class ResultBuilder {
 	public function addLabels( array $labels, $path, $name = 'labels', $tag = 'label' ) {
 		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$labelSerializer = new LabelSerializer( $options );
+		$labelSerializer = $this->serializerFactory->newLabelSerializer( $options );
 
 		$value = $labelSerializer->getSerialized( $labels );
 
@@ -103,7 +118,7 @@ class ResultBuilder {
 	public function addDescriptions( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
 		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$descriptionSerializer = new DescriptionSerializer( $options );
+		$descriptionSerializer = $this->serializerFactory->newDescriptionSerializer( $options );
 
 		$value = $descriptionSerializer->getSerialized( $descriptions );
 
@@ -130,7 +145,7 @@ class ResultBuilder {
 	public function addAliases( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
 		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$aliasSerializer = new AliasSerializer( $options );
+		$aliasSerializer = $this->serializerFactory->newAliasSerializer( $options );
 		$value = $aliasSerializer->getSerialized( $aliases );
 
 		if ( $value !== array() ) {
@@ -174,8 +189,7 @@ class ResultBuilder {
 			}
 		}
 
-		$siteStore = \SiteSQLStore::newInstance();
-		$siteLinkSerializer = new SiteLinkSerializer( $serializerOptions, $siteStore );
+		$siteLinkSerializer = $this->serializerFactory->newSiteLinkSerializer( $serializerOptions );
 		$value = $siteLinkSerializer->getSerialized( $siteLinks );
 
 		if ( $value !== array() ) {
@@ -201,7 +215,7 @@ class ResultBuilder {
 	public function addClaims( array $claims, $path, $name = 'claims', $tag = 'claim' ) {
 		$options = new SerializationOptions();
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		$claimSerializer = new ClaimsSerializer( $options );
+		$claimSerializer = $this->serializerFactory->newClaimsSerializer( $options );
 
 		$value = $claimSerializer->getSerialized( new Claims( $claims ) );
 

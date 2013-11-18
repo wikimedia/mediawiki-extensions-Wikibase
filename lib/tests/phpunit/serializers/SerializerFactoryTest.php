@@ -20,6 +20,7 @@ use Wikibase\Reference;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SerializerFactoryTest extends \MediaWikiTestCase {
 
@@ -80,6 +81,70 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Unserializer', $unserializer );
 
 		$unserializer->newFromSerialization( $serialization );
+	}
+
+	public function newUnserializerProvider() {
+		$names = array(
+			'SnakUnserializer',
+			'ReferenceUnserializer',
+			'ClaimUnserializer',
+			'ClaimsUnserializer',
+			'PropertyUnserializer',
+			'ItemUnserializer',
+			'LabelUnserializer',
+			'DescriptionUnserializer',
+			'AliasUnserializer',
+		);
+
+		return array_map( function( $name ) {
+			return array( $name );
+		}, $names );
+	}
+
+	/**
+	 * @dataProvider newUnserializerProvider
+	 */
+	public function testNewUnserializer( $serializerName ) {
+		$factory = new SerializerFactory();
+		$options = new SerializationOPtions();
+
+		$method = "new$serializerName";
+		$unserializer = $factory->$method( $options );
+
+		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Unserializer', $unserializer );
+	}
+
+	public function newSerializerProvider() {
+		$names = array(
+			'SnakSerializer',
+			'ReferenceSerializer',
+			'ClaimSerializer',
+			'ClaimsSerializer',
+			'PropertySerializer',
+			'ItemSerializer',
+			'LabelSerializer',
+			'DescriptionSerializer',
+			'AliasSerializer',
+
+			'SiteLinkSerializer',
+		);
+
+		return array_map( function( $name ) {
+			return array( $name );
+		}, $names );
+	}
+
+	/**
+	 * @dataProvider newSerializerProvider
+	 */
+	public function testNewSerializer( $serializerName ) {
+		$factory = new SerializerFactory();
+		$options = new SerializationOPtions();
+
+		$method = "new$serializerName";
+		$unserializer = $factory->$method( $options );
+
+		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Serializer', $unserializer );
 	}
 
 }

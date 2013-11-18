@@ -15,8 +15,24 @@ use Wikibase\Claims;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ClaimsSerializer extends SerializerObject implements Unserializer {
+
+	/**
+	 * @var ClaimSerializer
+	 */
+	protected $claimSerializer;
+
+	/**
+	 * @param ClaimSerializer $claimSerializer
+	 * @param SerializationOptions $options
+	 */
+	public function __construct( ClaimSerializer $claimSerializer, SerializationOptions $options = null ) {
+		parent::__construct( $options );
+
+		$this->claimSerializer = $claimSerializer;
+	}
 
 	/**
 	 * @see ApiSerializer::getSerialized
@@ -35,12 +51,10 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
-		$claimSerializer = new ClaimSerializer( $this->options );
-
 		if( in_array( 'claims', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
-			$listSerializer = new ByPropertyListSerializer( 'claim', $claimSerializer, $this->options );
+			$listSerializer = new ByPropertyListSerializer( 'claim', $this->claimSerializer, $this->options );
 		} else {
-			$listSerializer = new ListSerializer( 'claim', $claimSerializer, $this->options );
+			$listSerializer = new ListSerializer( 'claim', $this->claimSerializer, $this->options );
 		}
 
 		return $listSerializer->getSerialized( $claims );
@@ -58,12 +72,10 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 	 * @throws OutOfBoundsException
 	 */
 	public function newFromSerialization( array $serialization ) {
-		$claimSerializer = new ClaimSerializer( $this->options );
-
 		if( $this->isAssociative( $serialization ) ){
-			$unserializer = new ByPropertyListUnserializer( $claimSerializer );
+			$unserializer = new ByPropertyListUnserializer( $this->claimSerializer );
 		} else {
-			$unserializer = new ListUnserializer( $claimSerializer );
+			$unserializer = new ListUnserializer( $this->claimSerializer );
 		}
 
 		return new Claims( $unserializer->newFromSerialization( $serialization ) );
