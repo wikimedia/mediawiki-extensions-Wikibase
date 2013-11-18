@@ -63,7 +63,8 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 	public function newClaimDifferenceVisualizer(){
 		return new ClaimDifferenceVisualizer(
 			$this->newEntityIdLabelFormatter(),
-			$this->newSnakFormatter()
+			$this->newSnakFormatter(),
+			'en'
 		);
 	}
 
@@ -76,7 +77,8 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new ClaimDifferenceVisualizer(
 			$this->newEntityIdLabelFormatter(),
-			$this->newSnakFormatter( 'qwertyuiop' )
+			$this->newSnakFormatter( 'qwertyuiop' ),
+			'en'
 		);
 	}
 
