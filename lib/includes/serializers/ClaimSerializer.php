@@ -20,8 +20,24 @@ use Wikibase\Claim;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ClaimSerializer extends SerializerObject implements Unserializer {
+
+	/**
+	 * @var SnakSerializer
+	 */
+	protected $snakSerializer;
+
+	/**
+	 * @param SnakSerializer $snakSerializer
+	 * @param SerializationOptions $options
+	 */
+	public function __construct( SnakSerializer $snakSerializer, SerializationOptions $options = null ) {
+		parent::__construct( $options );
+
+		$this->snakSerializer = $snakSerializer;
+	}
 
 	/**
 	 * @since 0.3
@@ -93,14 +109,12 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['id'] = $claim->getGuid();
 
-		$snakSerializer = new SnakSerializer( $this->options );
-
-		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
+		$serialization['mainsnak'] = $this->snakSerializer->getSerialized( $claim->getMainSnak() );
 
 		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
-			$listSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
+			$listSerializer = new ByPropertyListSerializer( 'qualifiers', $this->snakSerializer, $this->options );
 		} else {
-			$listSerializer = new ListSerializer( 'qualifiers', $snakSerializer, $this->options );
+			$listSerializer = new ListSerializer( 'qualifiers', $this->snakSerializer, $this->options );
 		}
 
 		$qualifiers = $listSerializer->getSerialized( $claim->getQualifiers() );
@@ -124,7 +138,8 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		if ( $claim instanceof Statement ) {
 			$serialization['rank'] = self::$rankMap[ $claim->getRank() ];
 
-			$referenceSerializer = new ReferenceSerializer( $this->options );
+			//TODO: inject ReferenceSerializer
+			$referenceSerializer = new ReferenceSerializer( $this->snakSerializer, $this->options );
 
 			$serialization['references'] = array();
 
@@ -205,7 +220,8 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			if ( array_key_exists( 'references', $serialization ) ) {
 				$references = array();
 
-				$referenceUnserializer = new ReferenceSerializer();
+				//TODO: inject ReferenceSerializer
+				$referenceUnserializer = new ReferenceSerializer( $this->snakSerializer, $this->options );
 
 				foreach ( $serialization['references'] as $referenceSerialization ) {
 					$references[] = $referenceUnserializer->newFromSerialization( $referenceSerialization );
