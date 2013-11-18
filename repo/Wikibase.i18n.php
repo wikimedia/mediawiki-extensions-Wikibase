@@ -1125,6 +1125,10 @@ Parameters:
 	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
 * $3 is the number of references removed.',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
+	'wikibase-item-summary-wbmergeitems-to' => 'Automatic edit summary when merging items. This summary is for the edit made to the item being merged FROM. Parameters:
+* $3 is the item id of the item being merged to.',
+	'wikibase-item-summary-wbmergeitems-from' => 'Automatic edit summary when merging items. This summary is for the edit made to the item being merged TO. Parameters:
+* $3 is the item id of the item being merged from.',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
 	'wikibase-property-summary-wbeditentity-override' => 'Automatic edit summary generated when overriding an existing property.',
