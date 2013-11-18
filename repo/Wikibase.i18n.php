@@ -335,7 +335,6 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Changed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$3|reference|references}} from claim',
-	'wikibase-item-summary-wbsetstatementrank' => 'Changed rank of statement from \'$3\' to \'$4\'',
 	'wikibase-item-summary-wbmergeitems-from' => 'Merged Item from \'$3\'',
 	'wikibase-item-summary-wbmergeitems-to' => 'Merged Item in to \'$3\'',
 
@@ -1125,9 +1124,6 @@ Parameters:
 * $1 is the number of qualifiers removed.',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
 * $3 is the number of references removed.',
-	'wikibase-item-summary-wbsetstatementrank' => 'Automatic edit summary when changing the rank of a statement. Parameters:
-* $3 is the old rank
-* $4 is the new rank',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
