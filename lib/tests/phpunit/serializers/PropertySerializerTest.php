@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Lib\Serializers\PropertySerializer;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\Property;
 
 /**
@@ -27,6 +30,14 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 	 */
 	protected function getClass() {
 		return '\Wikibase\Lib\Serializers\PropertySerializer';
+	}
+
+	/**
+	 * @return PropertySerializer
+	 */
+	protected function getInstance() {
+		$class = $this->getClass();
+		return new $class( new ClaimSerializer( new SnakSerializer() ) );
 	}
 
 	/**
