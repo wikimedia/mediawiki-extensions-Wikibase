@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_b36fe9c4",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-18T16:23:08Z",
+      "side": 1,
+      "message": "What about a reorderClaims function?",
+      "revId": "9e9467aeaefd642938137206b51f65259f772c99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f36de1cb",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-18T16:23:08Z",
+      "side": 1,
+      "message": "\\o/ this indeed belongs into its own function",
+      "revId": "9e9467aeaefd642938137206b51f65259f772c99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
