@@ -4,7 +4,11 @@ namespace Wikibase\Lib\Serializers;
 
 use DataValues\DataValueFactory;
 use InvalidArgumentException;
-use Wikibase\EntityId;
+use MWException;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\SnakObject;
 
@@ -17,8 +21,31 @@ use Wikibase\SnakObject;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SnakSerializer extends SerializerObject implements Unserializer {
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	protected $dataTypeLookup;
+
+	/**
+	 * @param PropertyDataTypeLookup $dataTypeLookup A lookup service for determining the data type
+	 *        of PropertyValueSnaks. If not set, the OPT_DATA_TYPE_LOOKUP option will be checked
+	 *        for a PropertyDataTypeLookup.
+	 *
+	 * @param SerializationOptions $options Options. @see SnakSerializer::OPT_DATA_TYPE_LOOKUP.
+	 *
+	 * @todo: require $dataTypeLookup
+	 *
+	 * @throws \InvalidArgumentException if no PropertyDataTypeLookup was found set in $options.
+	 */
+	public function __construct( PropertyDataTypeLookup $dataTypeLookup = null, SerializationOptions $options = null ) {
+		parent::__construct( $options );
+
+		$this->dataTypeLookup = $dataTypeLookup;
+	}
 
 	/**
 	 * @see ApiSerializer::getSerialized
@@ -43,12 +70,17 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['property'] = $snak->getPropertyId()->getPrefixedId();
 
-		// TODO: we might want to include the data type of the property here as well
+		if ( $snak instanceof PropertyValueSnak ) {
+			if ( $this->dataTypeLookup !== null ) {
+				$propertyId = $snak->getPropertyId();
+				try {
+					$serialization['datatype'] = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+				} catch ( PropertyNotFoundException $ex ) {
+					wfDebugLog( __CLASS__, __FUNCTION__ . ': Property not found: ' . $propertyId->getSerialization() );
+					//XXX: shall we set $serialization['datatype'] = 'bad' ??
+				}
+			}
 
-		if ( $snak->getType() === 'value' ) {
-			/**
-			 * @var \Wikibase\PropertyValueSnak $snak
-			 */
 			$serialization['datavalue'] = $snak->getDataValue()->toArray();
 		}
 

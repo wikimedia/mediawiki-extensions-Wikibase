@@ -26,7 +26,7 @@ class SerializerTest extends \MediaWikiTestCase {
 		$serializers = array();
 
 		$serializers[] = new SnakSerializer();
-		$serializers[] = new ClaimSerializer();
+		$serializers[] = new ClaimSerializer( new SnakSerializer() );
 
 		$snakSetailizer = new SnakSerializer();
 		$serializers[] = new ByPropertyListSerializer( 'test', $snakSetailizer );
