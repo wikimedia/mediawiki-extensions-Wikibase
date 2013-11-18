@@ -189,6 +189,7 @@ class JsonDumpGenerator {
 		$this->writeToDump( $json );
 
 		$i = 0;
+		$wantComma = false;
 
 		/* @var EntityId $id */
 		foreach ( $idStream as $id ) {
@@ -197,10 +198,7 @@ class JsonDumpGenerator {
 			}
 
 			try {
-				if ( $i++ > 0 ) {
-					$this->writeToDump( ",\n" );
-				}
-
+				$i++;
 				$entity = $this->entityLookup->getEntity( $id );
 
 				if ( !$entity ) {
@@ -210,7 +208,13 @@ class JsonDumpGenerator {
 				$data = $this->entitySerializer->getSerialized( $entity );
 				$json = $this->encode( $data );
 
+				if ( $wantComma ) {
+					$this->writeToDump( ",\n" );
+					$wantComma = false;
+				}
+
 				$this->writeToDump( $json );
+				$wantComma = true;
 			} catch ( StorageException $ex ) {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump '. $id );
 			}

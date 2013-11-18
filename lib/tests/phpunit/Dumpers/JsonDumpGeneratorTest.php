@@ -278,7 +278,11 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		ob_start();
 		$dumper->generateDump( $idList );
-		ob_end_clean();
+		$json = ob_get_clean();
+
+		// make sure we get valid json even if there were exceptions.
+		$data = json_decode( $json, true );
+		$this->assertInternalType( 'array', $data, 'invalid json generated' );
 	}
 
 	public function testProgressReporter() {
