@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use Wikibase\Lib\Serializers\ReferenceSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
@@ -34,6 +35,14 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 	 */
 	protected function getClass() {
 		return '\Wikibase\Lib\Serializers\ReferenceSerializer';
+	}
+
+	/**
+	 * @return ReferenceSerializer
+	 */
+	protected function getInstance() {
+		$class = $this->getClass();
+		return new $class( new SnakSerializer() );
 	}
 
 	/**
@@ -90,7 +99,7 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 
 		$opts = new SerializationOptions();
 		$opts->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
-		$snakSerializer = new SnakSerializer( $opts );
+		$snakSerializer = new SnakSerializer( null, $opts );
 
 		$validArgs['list'] = array(
 			$reference,

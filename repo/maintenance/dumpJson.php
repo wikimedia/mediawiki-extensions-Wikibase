@@ -11,9 +11,11 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\IO\EntityIdReader;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\Serializer;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -67,8 +69,9 @@ class DumpJson extends Maintenance {
 	}
 
 	public function initServices() {
+		//FIXME: provide PropertyDataTypeLookup and make the entity serializer aware of different entity types
 		$serializerOptions = new SerializationOptions();
-		$this->entitySerializer = new EntitySerializer( $serializerOptions );
+		$this->entitySerializer = new EntitySerializer( new ClaimSerializer( new SnakSerializer(), $serializerOptions), $serializerOptions );
 
 		//TODO: allow injection for unit tests
 		$this->entityPerPage = new EntityPerPageTable();
