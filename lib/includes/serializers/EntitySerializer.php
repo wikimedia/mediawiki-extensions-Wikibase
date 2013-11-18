@@ -60,15 +60,28 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 	 */
 	protected $entityFactory;
 
+
+	/**
+	 * @var ClaimSerializer
+	 */
+	protected $claimSerializer;
+
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.2
 	 *
+	 * @param ClaimSerializer $claimSerializer
 	 * @param SerializationOptions $options
 	 * @param EntityFactory $entityFactory
+	 *
+	 * @todo: make $entityFactory required
 	 */
-	public function __construct( SerializationOptions $options, EntityFactory $entityFactory = null ) {
+	public function __construct( ClaimSerializer $claimSerializer, SerializationOptions $options = null, EntityFactory $entityFactory = null ) {
+		if ( $options === null ) {
+			$options = new SerializationOptions();
+		}
+
 		$options->initOption( self::OPT_SORT_ORDER, self::SORT_NONE );
 
 		$options->initOption( self::OPT_PARTS,  array(
@@ -90,6 +103,8 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 		} else {
 			$this->entityFactory = $entityFactory;
 		}
+
+		$this->claimSerializer = $claimSerializer;
 	}
 
 	/**
@@ -130,7 +145,7 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 						getSerializedMultilingualValues( $entity->getLabels() );
 					break;
 				case 'claims':
-					$claimsSerializer = new ClaimsSerializer( $this->options );
+					$claimsSerializer = new ClaimsSerializer( $this->claimSerializer, $this->options );
 					$serialization['claims'] = $claimsSerializer->getSerialized( new Claims( $entity->getClaims() ) );
 					break;
 			}
@@ -213,7 +228,7 @@ class EntitySerializer extends SerializerObject implements Unserializer {
 		}
 
 		if ( array_key_exists( 'claims', $data ) ) {
-			$claimsSerializer = new ClaimsSerializer( $this->options );
+			$claimsSerializer = new ClaimsSerializer( $this->claimSerializer, $this->options );
 			$claims = $claimsSerializer->newFromSerialization( $data['claims'] );
 			$entity->setClaims( $claims );
 		}
