@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_d8b2c2e3",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-18T13:57:54Z",
+      "side": 1,
+      "message": "another fully qualified class name ;p",
+      "revId": "188d9c843b796d2bbfd333b11ef828c427d0f278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
