@@ -16,6 +16,74 @@
       "revId": "188d9c843b796d2bbfd333b11ef828c427d0f278",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f3032143",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-18T18:00:07Z",
+      "side": 1,
+      "message": "line is a bit long.  I would put everything after \"$entityLookup,\" on a new line (indented, of course)",
+      "revId": "188d9c843b796d2bbfd333b11ef828c427d0f278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_73c6511a",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-18T18:00:07Z",
+      "side": 1,
+      "message": "can this be injected in the constructor, as well? otherwise more challenging to test getEntityId, etc.",
+      "revId": "188d9c843b796d2bbfd333b11ef828c427d0f278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_d3d1c5cc",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementationTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-18T18:00:07Z",
+      "side": 1,
+      "message": "0.5 :)",
+      "revId": "188d9c843b796d2bbfd333b11ef828c427d0f278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_33e1399f",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementationTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-18T18:00:07Z",
+      "side": 1,
+      "message": "getting default instances might not be what we want.  especially site link table, which involves accessing the repo database.\n\nfor a mock SiteLinkTable (SiteLinkLookup) implementation, there is MockSiteStore in lib or use the mocking capabilities in phpunit.\n\nhttp://phpunit.de/manual/3.7/en/test-doubles.html\n\nThen we can mock what \"getItemIdForLink\" returns.  There are some examples of using phpunit in Wikibase, or WikibaseQuery, or StatusTest in core.",
+      "revId": "188d9c843b796d2bbfd333b11ef828c427d0f278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
