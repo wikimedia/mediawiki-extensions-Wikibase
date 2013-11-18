@@ -5,11 +5,9 @@
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  */
+// @codingStandardsIgnoreFile
 
 $messages = array();
 
