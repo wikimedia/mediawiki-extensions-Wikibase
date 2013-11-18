@@ -16,6 +16,24 @@
       "revId": "d51873b76c7f5be85fdc2c7235fff3339ac57872",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_98c04a55",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-18T13:32:08Z",
+      "side": 1,
+      "message": "wtf!?",
+      "parentUuid": "291c1151_18e45a0e",
+      "revId": "d51873b76c7f5be85fdc2c7235fff3339ac57872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
