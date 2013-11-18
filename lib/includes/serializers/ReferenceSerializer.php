@@ -17,8 +17,24 @@ use Wikibase\SnakList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ReferenceSerializer extends SerializerObject implements Unserializer {
+
+	/**
+	 * @var SnakSerializer
+	 */
+	protected $snakSerializer;
+
+	/**
+	 * @param SnakSerializer $snakSerializer
+	 * @param SerializationOptions $options
+	 */
+	public function __construct( SnakSerializer $snakSerializer, SerializationOptions $options = null ) {
+		parent::__construct( $options );
+
+		$this->snakSerializer = $snakSerializer;
+	}
 
 	/**
 	 * @see ApiSerializer::getSerialized
@@ -41,12 +57,10 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['hash'] = $reference->getHash();
 
-		$snakSerializer = new SnakSerializer( $this->options );
-
 		if( in_array( 'references', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
-			$listSerializer = new ByPropertyListSerializer( 'snak', $snakSerializer, $this->options );
+			$listSerializer = new ByPropertyListSerializer( 'snak', $this->snakSerializer, $this->options );
 		} else {
-			$listSerializer = new ListSerializer( 'snak', $snakSerializer, $this->options );
+			$listSerializer = new ListSerializer( 'snak', $this->snakSerializer, $this->options );
 		}
 
 		$serialization['snaks'] = $listSerializer->getSerialized( $reference->getSnaks() );
@@ -81,7 +95,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 			throw new InvalidArgumentException( 'A reference serialization needs to have a list of snaks' );
 		}
 
-		$snakUnserializer = new SnakSerializer( $this->options );
+		$snakUnserializer = new SnakSerializer( null, $this->options );
 
 		if( $this->isAssociative( $serialization['snaks'] ) ){
 			$unserializer = new ByPropertyListUnserializer( $snakUnserializer );

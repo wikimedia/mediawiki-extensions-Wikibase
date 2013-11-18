@@ -3,8 +3,11 @@
 namespace Wikibase\Test;
 
 use Wikibase\Item;
+use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Lib\Serializers\ItemSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
+use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
  * @covers Wikibase\Lib\Serializers\ItemSerializer
@@ -29,6 +32,14 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	 */
 	protected function getClass() {
 		return '\Wikibase\Lib\Serializers\ItemSerializer';
+	}
+
+	/**
+	 * @return ItemSerializer
+	 */
+	protected function getInstance() {
+		$class = $this->getClass();
+		return new $class( new ClaimSerializer( new SnakSerializer() ) );
 	}
 
 	/**
