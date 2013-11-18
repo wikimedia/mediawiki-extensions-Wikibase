@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_1871ba75",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-18T12:24:35Z",
+      "side": 1,
+      "message": "Wikibase\\EntityId is deprecated. Please use \\Wikibase\\DataModel\\Entity\\EntityId",
+      "revId": "d898d9632ddc696c66f99ced719609e7f852d954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_1848da2d",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-18T12:24:35Z",
+      "side": 1,
+      "message": "since 0.5",
+      "revId": "d898d9632ddc696c66f99ced719609e7f852d954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_385116d9",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-18T12:24:35Z",
+      "side": 1,
+      "message": "should probably be \u003d\u003d\u003d",
+      "revId": "d898d9632ddc696c66f99ced719609e7f852d954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_f84a1e27",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-18T12:24:35Z",
+      "side": 1,
+      "message": "lots of tab here that probably should not be!\nThese lines should have one more tab (so 3 in total) than the line above",
+      "revId": "d898d9632ddc696c66f99ced719609e7f852d954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_584ed239",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-18T12:24:35Z",
+      "side": 1,
+      "message": "again \u003d\u003d\u003d",
+      "revId": "d898d9632ddc696c66f99ced719609e7f852d954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_785f0ee2",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-18T12:24:35Z",
+      "side": 1,
+      "message": "again \u003d\u003d\u003d",
+      "revId": "d898d9632ddc696c66f99ced719609e7f852d954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
