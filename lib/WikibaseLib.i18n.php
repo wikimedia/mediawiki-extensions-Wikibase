@@ -374,6 +374,7 @@ $messages['ast'] = array(
 	'wikibase-validator-bad-url-scheme' => "Esquema d'URL ensin encontu: $1",
 	'wikibase-validator-bad-http-url' => 'URL HTTP con mal formatu: $1',
 	'wikibase-validator-bad-mailto-url' => 'URL de corréu con mal formatu: $1',
+	'wikibase-validator-unknown-unit' => 'Unidá desconocida: $1',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
 	'version-wikibase' => 'Wikibase',

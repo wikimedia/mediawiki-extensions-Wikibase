@@ -7,7 +7,6 @@
  *
  * @licence GNU GPL v2+
  */
-// @codingStandardsIgnoreFile
 
 $magicWords = array();
 
