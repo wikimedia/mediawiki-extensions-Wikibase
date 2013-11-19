@@ -69,6 +69,10 @@ class ResultBuilder {
 		return $this->result;
 	}
 
+	public function getSerializationOptions() {
+		return $this->serializationOptions;
+	}
+
 	/**
 	 * @since 0.5
 	 *
