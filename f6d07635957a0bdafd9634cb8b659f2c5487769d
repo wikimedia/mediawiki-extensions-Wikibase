@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_7618f51a",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-19T22:12:50Z",
+      "side": 1,
+      "message": "This should be injected. The fewer classes inherently depend on global state, the better.",
+      "revId": "f6d07635957a0bdafd9634cb8b659f2c5487769d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_b6d6ed23",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementationTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-19T22:12:50Z",
+      "side": 1,
+      "message": "assertInternalType( \u0027array\u0027, $ )",
+      "revId": "f6d07635957a0bdafd9634cb8b659f2c5487769d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
