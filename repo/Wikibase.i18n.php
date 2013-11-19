@@ -73,6 +73,9 @@ $messages['en'] = array(
 	'wikibase-property-footer' => '', # do not translate or duplicate this message to other languages
 	'wikibase-claimview-snak-tooltip' => 'Enter a value corresponding to the property named "$1". If the property has no designated value or the actual value is not known, you may choose an alternative to specifying a custom value by clicking the icon next to the value input box.',
 	'wikibase-claimview-snak-new-tooltip' => 'After specifying a property you can enter a corresponding value. If the property has no designated value or the actual value is not known, you may choose an alternative to specifying a custom value by clicking the icon next to the value input box.',
+	'wikibase-statementview-rankselector-rank-preferred' => 'Preferred rank',
+	'wikibase-statementview-rankselector-rank-normal' => 'Normal rank',
+	'wikibase-statementview-rankselector-rank-deprecated' => 'Deprecated rank',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|source|sources}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|One source|$1 sources}} not saved yet',
 	'wikibase-snakview-property-input-placeholder' => 'property',
@@ -625,6 +628,9 @@ Parameters:
 Parameters:
 * $1 - the property name the user is about to edit a value of or add another value to',
 	'wikibase-claimview-snak-new-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata:Glossary]]) when about to add a completely new claim which includes specifying the property.',
+	'wikibase-statementview-rankselector-rank-preferred' => 'Label of the [[d:Wikidata:Glossary#Rank-preferred|Preferred Rank]] item within the menu that allows adjusting a [[d:Wikidata:Glossary#Statement|Statement\'s]] [[d:Wikidata:Glossary#Rank|Rank]].',
+	'wikibase-statementview-rankselector-rank-normal' => 'Label of the [[d:Wikidata:Glossary#Rank-normal|Normal Rank]] item within the menu that allows adjusting a [[d:Wikidata:Glossary#Statement|Statement\'s]] [[d:Wikidata:Glossary#Rank|Rank]].',
+	'wikibase-statementview-rankselector-rank-deprecated' => 'Label of the [[d:Wikidata:Glossary#Rank-deprecated|Deprecated Rank]] item within the menu that allows adjusting a [[d:Wikidata:Glossary#Statement|Statement\'s]] [[d:Wikidata:Glossary#Rank|Rank]].',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata:Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject: the number of references is not part of this message, and the word order is defined via {{msg-mw|wikibase-ui-pendingquantitycounter-nonpending}}.
 
 Parameters:
