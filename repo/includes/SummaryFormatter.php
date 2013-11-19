@@ -231,7 +231,6 @@ class SummaryFormatter {
 	 * @return string to be used for the summary
 	 */
 	private function assembleSummaryString( $comment, $summary, $length = SUMMARY_MAX_LENGTH ) {
-		global $wgContLang;
 		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 
 		$comment = $normalizer->trimToNFC( $comment );
@@ -241,7 +240,7 @@ class SummaryFormatter {
 			$mergedString .=  "/* $comment */";
 		}
 		if ( $summary !== "" ) {
-			$mergedString .= $wgContLang->truncate( $summary, $length - strlen( $mergedString ) );
+			$mergedString .= $this->language->truncate( $summary, $length - strlen( $mergedString ) );
 		}
 
 		// leftover entities should be removed, but its not clear how this shall be done
