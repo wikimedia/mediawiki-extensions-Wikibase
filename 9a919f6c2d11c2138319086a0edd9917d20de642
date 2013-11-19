@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_b1c27c54",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-19T13:53:08Z",
+      "side": 1,
+      "message": "current behavior is to remove the entity from the used entities array.  Maybe in this class and method, it can be marked as missing/deleted and then let EntityView decide what to do with it (e.g. drop them from the array, or otherwise adjust the js)",
+      "revId": "9a919f6c2d11c2138319086a0edd9917d20de642",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
