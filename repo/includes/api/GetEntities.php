@@ -5,14 +5,12 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use SiteSQLStore;
-use MWException;
 use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
@@ -61,6 +59,14 @@ class GetEntities extends ApiWikibase {
 				'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages',
 				'param-missing'
 			);
+		}
+
+		if( $params['ungroupedlist'] ) {
+			$this->resultBuilder->getSerializationOptions()
+				->setOption(
+					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
+					array()
+				);
 		}
 
 		$entityIds = $this->getEntityIdsFromParams( $params );
@@ -275,6 +281,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
+			'ungroupedlist' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
 		) );
 	}
 
@@ -310,6 +320,7 @@ class GetEntities extends ApiWikibase {
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
 			),
+			'ungroupedlist' => array( 'Do not group snaks by property id' ),
 		) );
 	}
 
