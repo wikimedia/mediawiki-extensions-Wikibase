@@ -1,31 +1,14 @@
 <?php
 
 namespace Wikibase;
+
 use Status;
 use Diff\Diff;
 
 /**
  * Detector for multilang constraint violations.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
@@ -39,11 +22,13 @@ class MultiLangConstraintDetector {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Entity $entity
+	 * @param array $entries
+	 * @param $limit
+	 * @param Status $status
 	 *
 	 * @return Term[]
 	 */
-	public function getLengthConstraintViolations( array $entries, $limit, \Status $status ) {
+	public function getLengthConstraintViolations( array $entries, $limit, Status $status ) {
 		$foundEntries = array();
 
 		foreach ( $entries as $langCode => $langValue ) {
@@ -80,9 +65,10 @@ class MultiLangConstraintDetector {
 	 *
 	 * @param Entity $entity The Entity for which to check if there is any conflict
 	 * @param Status $status The status to which to add an error if there is a violation
-	 * @param Diff|null $diff
+	 * @param EntityDiff|null $diff
+	 * @param array $limits
 	 */
-	public function addConstraintChecks( Entity $entity, Status $status, Diff $diff = null, array $limits = null ) {
+	public function addConstraintChecks( Entity $entity, Status $status, EntityDiff $diff = null, array $limits = null ) {
 		global $wgLang;
 
 		$truncateLength = Settings::get( 'multilang-truncate-length' );
