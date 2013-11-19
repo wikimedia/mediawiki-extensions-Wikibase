@@ -6,6 +6,7 @@ use Html;
 use Language;
 use MWException;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -85,10 +86,22 @@ class ClaimHtmlGenerator {
 
 		$mainSnakHtml = $this->getMainSnakHtml( $snakValueHtml );
 
+		$rankHtml = '';
+
+		if( is_a( $claim, 'Wikibase\Statement' ) ) {
+			$claimSerializer = new ClaimSerializer();
+			$serializedRank = $claimSerializer->serializeRank( $claim->getRank() );
+
+			$rankHtml = wfTemplate( 'wb-rankselector',
+				'wb-rankselector-' . $serializedRank
+			);
+		}
+
 		// @todo: Use 'wb-claim' or 'wb-statement' template accordingly
 		// @todo: get rid of usage of global wfTemplate function
 		$claimHtml = wfTemplate( 'wb-statement',
 			'', // additional classes
+			$rankHtml,
 			$claim->getGuid(),
 			$mainSnakHtml,
 			'', // TODO: Qualifiers
