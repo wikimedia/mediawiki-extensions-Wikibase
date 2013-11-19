@@ -215,7 +215,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param bool $expectEmptyArrays Should we expect empty arrays or just ignore them?
 	 */
 	public function assertEntityEquals( $expected, $actual, $expectEmptyArrays = true ) {
-		if ( isset( $expected['id'] ) ) {
+		if ( isset( $expected['id'] ) && !empty( $expected['id'] ) ) {
 			$this->assertEquals( $expected['id'], $actual['id'], 'id' );
 		}
 		if ( isset( $expected['lastrevid'] ) ) {
@@ -276,6 +276,10 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 					$this->assertGreaterThanOrEqual( 39, strlen( $data['id'][$i] ) );
 				}
 				//unset stuff we dont actually want to compare
+				if( isset( $exp['id'] ) ) {
+					$this->assertArrayHasKey( 'id', $data );
+				}
+				unset( $exp['id'] );
 				unset( $data['id'] );
 				unset( $data['hash'] );
 				unset( $data['qualifiers-order'] );
