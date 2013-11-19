@@ -11,11 +11,10 @@ use SplFileInfo;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
 final class LibHooks {
 
@@ -171,7 +170,16 @@ final class LibHooks {
 			),
 		);
 
-		$testModules['qunit']['jquery.wikibase.snaklistview.tests'] = $moduleBase +  array(
+		$testModules['qunit']['jquery.wikibase.statementview.tests'] = $moduleBase + array(
+				'scripts' => array(
+					'tests/qunit/jquery.wikibase/jquery.wikibase.statementview.RankSelector.tests.js',
+				),
+				'dependencies' => array(
+					'jquery.wikibase.statementview',
+				),
+			);
+
+		$testModules['qunit']['jquery.wikibase.snaklistview.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.snaklistview.tests.js',
 			),
