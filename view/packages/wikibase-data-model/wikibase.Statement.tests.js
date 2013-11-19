@@ -8,6 +8,59 @@
 
 	QUnit.module( 'wikibase.datamodel.Statement', QUnit.newWbEnvironment() );
 
+	QUnit.test( 'Rank evaluation on instantiation', function( assert ) {
+		var statement = new wb.Statement(
+			new wb.PropertyValueSnak( 'P1', new dv.StringValue( 'string1' ) )
+		);
+
+		assert.equal(
+			statement.getRank(),
+			wb.Statement.RANK.NORMAL,
+			'Assigning \'normal\' rank by default.'
+		);
+
+		statement = new wb.Statement(
+			new wb.PropertyValueSnak( 'P1', new dv.StringValue( 'string1' ) ),
+			null,
+			null,
+			wb.Statement.RANK.DEPRECATED
+		);
+
+		assert.equal(
+			statement.getRank(),
+			wb.Statement.RANK.DEPRECATED,
+			'Instantiated statement object with \'deprecated\' rank.'
+		);
+	} );
+
+	QUnit.test( 'setRank() & getRank()', function( assert ) {
+		var statement = new wb.Statement( new wb.PropertyNoValueSnak( 'P1' ) );
+
+		statement.setRank( wb.Statement.RANK.PREFERRED );
+
+		assert.equal(
+			statement.getRank(),
+			wb.Statement.RANK.PREFERRED,
+			'Assigned \'preferred\' rank.'
+		);
+
+		statement.setRank( wb.Statement.RANK.DEPRECATED );
+
+		assert.equal(
+			statement.getRank(),
+			wb.Statement.RANK.DEPRECATED,
+			'Assigned \'deprecated\' rank.'
+		);
+
+		statement.setRank( wb.Statement.RANK.NORMAL );
+
+		assert.equal(
+			statement.getRank(),
+			wb.Statement.RANK.NORMAL,
+			'Assigned \'normal\' rank.'
+		);
+	} );
+
 	QUnit.test( 'toJSON', function( assert ) {
 		var statement = new wb.Statement( new wb.PropertyNoValueSnak( 'P42' ) );
 
