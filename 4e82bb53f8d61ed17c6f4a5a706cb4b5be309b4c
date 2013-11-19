@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_43009d37",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T21:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c1151_a364f14c",
+      "revId": "4e82bb53f8d61ed17c6f4a5a706cb4b5be309b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_834c55c9",
         "filename": "repo/includes/api/ItemByTitleHelper.php",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "291c1151_03ea2575",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T21:25:52Z",
+      "side": 1,
+      "message": "This is the same as dieUsage in the Api.\nIf we thrown an exception from the api in a possiblly profiled method we should make sure the profiling stops",
+      "parentUuid": "291c1151_834c55c9",
+      "revId": "4e82bb53f8d61ed17c6f4a5a706cb4b5be309b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_a3c5d10d",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2013-11-19T21:22:06Z",
       "side": 1,
       "message": "These brackets are not needed\n\n(string)$this-\u003emissingEntityCounter",
+      "revId": "4e82bb53f8d61ed17c6f4a5a706cb4b5be309b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_2303a146",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T21:25:52Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "291c1151_a3c5d10d",
       "revId": "4e82bb53f8d61ed17c6f4a5a706cb4b5be309b4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
