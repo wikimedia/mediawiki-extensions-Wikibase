@@ -145,6 +145,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\Serializers\ByPropertyListUnserializer' => 'includes/serializers/ByPropertyListUnserializer.php',
 		'Wikibase\Lib\Serializers\ClaimSerializer' => 'includes/serializers/ClaimSerializer.php',
 		'Wikibase\Lib\Serializers\ClaimsSerializer' => 'includes/serializers/ClaimsSerializer.php',
+		'Wikibase\Lib\Serializers\DispatchingEntitySerializer' => 'includes/serializers/DispatchingEntitySerializer.php',
 		'Wikibase\Lib\Serializers\EntitySerializer' => 'includes/serializers/EntitySerializer.php',
 		'Wikibase\Lib\Serializers\ItemSerializer' => 'includes/serializers/ItemSerializer.php',
 		'Wikibase\Lib\Serializers\LabelSerializer' => 'includes/serializers/LabelSerializer.php',
