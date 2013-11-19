@@ -1,0 +1,68 @@
+.wb-rankselector {
+	border: none;
+	background: none transparent;
+	cursor: pointer;
+}
+
+.wb-rankselector.ui-state-disabled {
+	cursor: default;
+}
+
+.wb-rankselector .ui-icon {
+	/* @embed */ background-image: url(images/rankselector.png);
+	width: 6px;
+	height: 20px;
+}
+
+.wb-rankselector .ui-icon.wb-rankselector-preferred {
+	background-position: 0px;
+}
+
+.wb-rankselector .ui-icon.wb-rankselector-normal {
+	background-position: -7px;
+}
+
+.wb-rankselector .ui-icon.wb-rankselector-deprecated {
+	background-position: -14px;
+}
+
+.wb-rankselector.ui-state-disabled .ui-icon.wb-rankselector-preferred {
+	background-position: -21px;
+}
+
+.wb-rankselector.ui-state-disabled .ui-icon.wb-rankselector-normal {
+	background-position: -28px;
+}
+
+.wb-rankselector.ui-state-disabled .ui-icon.wb-rankselector-deprecated {
+	background-position: -35px;
+}
+
+.wb-rankselector.ui-state-default .ui-icon.wb-rankselector-preferred {
+	background-position: -42px;
+}
+
+.wb-rankselector.ui-state-default .ui-icon.wb-rankselector-normal {
+	background-position: -49px;
+}
+
+.wb-rankselector.ui-state-default .ui-icon.wb-rankselector-deprecated {
+	background-position: -56px;
+}
+
+.wb-rankselector.ui-state-hover .ui-icon.wb-rankselector-preferred {
+	background-position: -63px;
+}
+
+.wb-rankselector.ui-state-hover .ui-icon.wb-rankselector-normal {
+	background-position: -70px;
+}
+
+.wb-rankselector.ui-state-hover .ui-icon.wb-rankselector-deprecated {
+	background-position: -77px;
+}
+
+.wb-rankselector-menu {
+	position: absolute;
+	z-index: 2; /* Monobook #content has 2 */
+}

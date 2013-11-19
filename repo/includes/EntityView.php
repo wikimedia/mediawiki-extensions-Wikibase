@@ -281,6 +281,8 @@ abstract class EntityView extends \ContextSource {
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array(
 			'wikibase.common',
+			'jquery.ui.core',
+			'jquery.wikibase.statementview',
 			'jquery.wikibase.toolbar',
 		) );
 
