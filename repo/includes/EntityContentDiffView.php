@@ -36,7 +36,7 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 	protected $diffVisualizer;
 
 	/**
-	 * @var SnakValueFormatter
+	 * @var SnakFormatter
 	 */
 	protected $snakValueFormatter;
 

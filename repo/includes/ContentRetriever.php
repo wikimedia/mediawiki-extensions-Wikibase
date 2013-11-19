@@ -3,10 +3,10 @@
 namespace Wikibase;
 
 use Article;
+use Content;
 use Revision;
 use Title;
 use WebRequest;
-use WikiPage;
 
 /**
  * Fetches content for a given Title / Article and request (diff or not diff)

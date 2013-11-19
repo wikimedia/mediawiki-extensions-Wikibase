@@ -6,7 +6,6 @@ use Html;
 use UserInputException;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EditEntity;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;

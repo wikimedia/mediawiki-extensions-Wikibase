@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use \ValueFormatters\ValueFormatterFactory;
 use Wikibase\EntityView;
 use Wikibase\ItemContent;
 use Wikibase\Lib\SnakFormatter;

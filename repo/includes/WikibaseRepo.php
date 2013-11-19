@@ -4,7 +4,6 @@ namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
-use Language;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
@@ -14,7 +13,6 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;

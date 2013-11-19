@@ -2,10 +2,9 @@
 
 namespace Wikibase;
 
-use Html;
-use Language;
-use MWException;
-use Wikibase\Lib\EntityIdFormatter;
+use DataValues\DataValue;
+use Wikibase\Lib\FormattingException;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -61,12 +60,9 @@ class ClaimHtmlGenerator {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $entity the entity related to the claim
 	 * @param Claim $claim the claim to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local
-	 *		context will be used.
-	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 * @param editSectionHtml has the html for the edit section
+	 * @param null|string $editSectionHtml has the html for the edit section
+	 *
 	 * @return string
 	 */
 	public function getHtmlForClaim(

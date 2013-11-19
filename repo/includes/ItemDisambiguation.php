@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use IContextSource, MWException;
+use IContextSource;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

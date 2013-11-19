@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
-use Wikibase\EntityContentFactory;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;

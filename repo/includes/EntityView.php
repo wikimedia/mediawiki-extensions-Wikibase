@@ -11,7 +11,6 @@ use OutputPage;
 use MWException;
 use FormatJson;
 use User;
-use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;

@@ -80,9 +80,10 @@ class MultiLangConstraintDetector {
 	 *
 	 * @param Entity $entity The Entity for which to check if there is any conflict
 	 * @param Status $status The status to which to add an error if there is a violation
-	 * @param Diff|null $diff
+	 * @param EntityDiff|null $diff
+	 * @param array $limits
 	 */
-	public function addConstraintChecks( Entity $entity, Status $status, Diff $diff = null, array $limits = null ) {
+	public function addConstraintChecks( Entity $entity, Status $status, EntityDiff $diff = null, array $limits = null ) {
 		global $wgLang;
 
 		$truncateLength = Settings::get( 'multilang-truncate-length' );

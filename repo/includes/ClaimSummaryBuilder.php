@@ -2,17 +2,12 @@
 
 namespace Wikibase;
 
-use DataValues\TimeValue;
 use InvalidArgumentException;
-use Wikibase\Lib\SnakFormatter;
 
 /**
  * EditSummary-Builder for claim operations
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
