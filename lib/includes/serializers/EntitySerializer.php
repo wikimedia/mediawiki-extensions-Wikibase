@@ -20,8 +20,9 @@ use Wikibase\EntityFactory;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
-class EntitySerializer extends SerializerObject implements Unserializer {
+abstract class EntitySerializer extends SerializerObject implements Unserializer {
 
 	const SORT_ASC = 'ascending';
 	const SORT_DESC = 'descending';

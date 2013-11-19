@@ -104,6 +104,7 @@ class SerializerFactory {
 				return $this->newItemSerializer( $options );
 			case ( $object instanceof Property ):
 				return $this->newPropertySerializer( $options );
+			//TODO: support extra entity types!
 			case ( $object instanceof Claim ):
 				return $this->newClaimSerializer( $options );
 			case ( $object instanceof Claims ):
@@ -139,6 +140,7 @@ class SerializerFactory {
 				return $this->newItemUnserializer( $options );
 			case 'Wikibase\Property':
 				return $this->newPropertyUnserializer( $options );
+			//TODO: support extra entity types!
 			case 'Wikibase\Snak':
 				return $this->newSnakUnserializer( $options );
 			case 'Wikibase\Reference':
@@ -157,14 +159,34 @@ class SerializerFactory {
 	 * @param SerializationOptions $options
 	 *
 	 * @throws InvalidArgumentException
+	 * @return Serializer
+	 */
+	public function newSerializerForEntity( $entityType, $options ) {
+		switch( $entityType ) {
+			case Item::ENTITY_TYPE:
+				return $this->newItemSerializer( $options );
+			case Property::ENTITY_TYPE:
+				return $this->newPropertySerializer( $options );
+			//TODO: support extra entity types!
+			default:
+				throw new InvalidArgumentException( '$entityType is invalid' );
+		}
+	}
+
+	/**
+	 * @param string $entityType
+	 * @param SerializationOptions $options
+	 *
+	 * @throws InvalidArgumentException
 	 * @return Unserializer
 	 */
 	public function newUnserializerForEntity( $entityType, $options ) {
 		switch( $entityType ) {
-			case 'wikibase-item':
+			case Item::ENTITY_TYPE:
 				return $this->newItemUnserializer( $options );
-			case 'wikibase-property':
+			case Property::ENTITY_TYPE:
 				return $this->newPropertyUnserializer( $options );
+			//TODO: support extra entity types!
 			default:
 				throw new InvalidArgumentException( '$entityType is invalid' );
 		}
