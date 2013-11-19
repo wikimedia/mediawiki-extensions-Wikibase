@@ -8,11 +8,9 @@ use \Wikibase\LibRegistry;
  *
  * @since 0.2
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater < mediawiki@snater.com >
  *
  * @codeCoverageIgnoreStart
  */
@@ -551,6 +549,7 @@ return call_user_func( function() {
 				'wikibase.AbstractedRepoApi',
 				'wikibase.store', // required for getting datatype from entityselector selected property
 				'mediawiki.legacy.shared',
+				'jquery.ui.position',
 				'jquery.ui.TemplatedWidget',
 				// valueviews for representing DataValues in snakview:
 				'jquery.valueview.experts.stringvalue',
@@ -605,17 +604,26 @@ return call_user_func( function() {
 		'jquery.wikibase.statementview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.statementview.js',
+				'jquery.wikibase/jquery.wikibase.statementview.RankSelector.js',
+			),
+			'styles' => array(
+				'jquery.wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 			),
 			'dependencies' => array(
+				'jquery.ui.position',
+				'jquery.ui.toggler',
 				'jquery.wikibase.claimview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.AbstractedRepoApi',
+				'wikibase.datamodel',
 				'wikibase.utilities',
-				'jquery.ui.toggler',
 			),
 			'messages' => array(
+				'wikibase-statementview-rankselector-rank-preferred',
+				'wikibase-statementview-rankselector-rank-normal',
+				'wikibase-statementview-rankselector-rank-deprecated',
 				'wikibase-statementview-referencesheading-pendingcountersubject',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
 				'wikibase-addreference'

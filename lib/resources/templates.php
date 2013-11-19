@@ -103,18 +103,24 @@ HTML;
 	$templates['wb-statement'] =
 <<<HTML
 <div class="wb-statement wb-statementview $1">
-	<div class="wb-claim wb-claim-$2">
+	<div class="wb-statement-rank wb-rankselector ui-state-disabled">$2</div>
+	<div class="wb-claim wb-claim-$3">
 		<div class="wb-claim-mainsnak" dir="auto">
-			$3 <!-- wb-snak (Main Snak) -->
+			$4 <!-- wb-snak (Main Snak) -->
 		</div>
-		<div class="wb-claim-qualifiers wb-statement-qualifiers">$4</div>
+		<div class="wb-claim-qualifiers wb-statement-qualifiers">$5</div>
 	</div>
-	$5 <!-- wikibase-toolbar -->
-	<div class="wb-statement-references-heading">$6</div>
+	$6 <!-- wikibase-toolbar -->
+	<div class="wb-statement-references-heading">$7</div>
 	<div class="wb-statement-references">
-		$7 <!-- [0,*] wb-referenceview -->
+		$8 <!-- [0,*] wb-referenceview -->
 	</div>
 </div>
+HTML;
+
+	$templates['wb-rankselector'] =
+<<<HTML
+<span class="ui-icon ui-icon-rankselector $1"></span>
 HTML;
 
 	$templates['wb-referenceview'] =
