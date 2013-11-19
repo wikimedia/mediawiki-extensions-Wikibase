@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Language;
-use Wikibase\EntityContentFactory;
 use Wikibase\Item;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Repo\WikibaseRepo;
