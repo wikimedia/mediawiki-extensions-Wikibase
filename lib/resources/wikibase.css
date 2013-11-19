@@ -735,6 +735,13 @@ div.wb-claimlistview div.wb-editsection {
 	padding-bottom: 1em;
 }
 
+.wb-statement .wb-statement-rank {
+	position: absolute;
+	margin-left: 15.2em;
+	margin-top: 1em;
+	z-index: 1;
+}
+
 .wb-statement > .wikibase-toolbar {
 	display: block;
 }
