@@ -6,11 +6,15 @@ use ArrayObject;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Item;
+use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 use Wikibase\StorageException;
 
@@ -27,6 +31,23 @@ use Wikibase\StorageException;
 class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @var SerializerFactory
+	 */
+	public $serializerFactory = null;
+
+	/**
+	 * @var SerializationOptions
+	 */
+	public $serializationOptions = null;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->serializerFactory = new SerializerFactory();
+		$this->serializationOptions = new SerializationOptions();
+	}
+
+	/**
 	 * @param EntityId[] $ids
 	 *
 	 * @return Entity[]
@@ -36,14 +57,34 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		/* @var EntityId $id */
 		foreach ( $ids as $id ) {
-			$entity = EntityFactory::singleton()->newEmpty( $id->getEntityType() );
-			$entity->setId( $id );
+			$entity = $this->makeEntity( $id );
 
 			$key = $id->getPrefixedId();
 			$entities[$key] = $entity;
 		}
 
 		return $entities;
+	}
+
+	/**
+	 * @param EntityId $id
+	 *
+	 * @return Entity
+	 */
+	protected function makeEntity( EntityId $id ) {
+		$entity = EntityFactory::singleton()->newEmpty( $id->getEntityType() );
+		$entity->setId( $id );
+		$entity->setLabel( 'en', 'label:' . $id->getSerialization() );
+
+		if ( $entity instanceof Property ) {
+			$entity->setDataTypeId( 'wibblywobbly' );
+		}
+
+		if ( $entity instanceof Item ) {
+			$entity->addSimpleSiteLink( new SimpleSiteLink( 'test', 'Foo' ) );
+		}
+
+		return $entity;
 	}
 
 	/**
@@ -54,15 +95,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	protected function newDumpGenerator( array $ids = array(), array $missingIds = array() ) {
 		$out = fopen( 'php://output', 'w' );
 
-		$serializer = $this->getMock( 'Wikibase\Lib\Serializers\Serializer' );
-		$serializer->expects( $this->any() )
-			->method( 'getSerialized' )
-			->will( $this->returnCallback( function ( Entity $entity ) {
-						return array(
-							'id' => $entity->getId()->getPrefixedId()
-						);
-					}
-			) );
+		$serializer = new DispatchingEntitySerializer( $this->serializerFactory );
 
 		$entities = $this->makeEntities( $ids );
 
@@ -122,6 +155,24 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}, $data );
 
 		$this->assertEquals( $expectedIds, $actualIds );
+
+		foreach ( $data as $serialization ) {
+			$id = EntityId::newFromPrefixedId( $serialization['id'] );
+			$this->assertEntitySerialization( $id, $serialization );
+		}
+	}
+
+	protected function assertEntitySerialization( EntityId $id, $data ) {
+		$expectedEntity = $this->makeEntity( $id );
+
+		if ( !$expectedEntity ) {
+			return;
+		}
+
+		$serializer = $this->serializerFactory->newUnserializerForEntity( $id->getEntityType(), $this->serializationOptions );
+		$actualEntity = $serializer->newFromSerialization( $data );
+
+		$this->assertTrue( $expectedEntity->equals( $actualEntity ), 'Round trip failed for ' . $id->getSerialization() );
 	}
 
 	public static function typeFilterProvider() {
