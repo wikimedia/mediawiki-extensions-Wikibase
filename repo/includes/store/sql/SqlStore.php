@@ -177,7 +177,7 @@ class SqlStore implements Store {
 
 				$termsKeyUpdate = 'AddTermsSearchKey' . $extension;
 
-				if ( $type = 'sqlite' ) {
+				if ( $type === 'sqlite' ) {
 					$termsKeyUpdate = 'AddTermsSearchKey.sqlite.sql';
 				}
 
