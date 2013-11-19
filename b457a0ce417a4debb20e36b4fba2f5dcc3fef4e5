@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_c68ca039",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "Is there anything more specific than a general Exception we could catch here?",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_86770838",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "eww file and ingroup",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a6740434",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "no need to have @since on this protected method (and the ones below ;p)",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_c68d802c",
+        "filename": "client/includes/recentchanges/ExternalChange.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "file and ingroup",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_2699f46a",
+        "filename": "client/includes/recentchanges/ExternalChange.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "eww spacey tabtab thing",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_669f6c4d",
+        "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "file ingroup",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_86a8e87a",
+        "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "since on protected methods",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_a6a5e4a2",
+        "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "@param $type",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_e6bb5cbf",
+        "filename": "client/includes/recentchanges/RevisionObject.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "file ingroup",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_26b2d4e4",
+        "filename": "client/tests/phpunit/includes/recentchanges/ExternalChangeGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-19T10:16:46Z",
+      "side": 1,
+      "message": "eww @file",
+      "revId": "b457a0ce417a4debb20e36b4fba2f5dcc3fef4e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
