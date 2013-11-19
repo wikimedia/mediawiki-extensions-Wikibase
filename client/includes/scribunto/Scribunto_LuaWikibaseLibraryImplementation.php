@@ -45,6 +45,25 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		$this->siteLinkTable = $siteLinkTable;
 	}
 
+	/**
+	 * Recursively renumber a serialized array in place, so it is indexed at 1, not 0.
+	 * Just like Lua wants it.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$entityArr
+	 */
+	public function renumber( &$entityArr ) {
+		foreach( $entityArr as $key => &$value ) {
+			if ( is_array( $value ) ) {
+				if ( array_key_exists( 0, $value ) ) {
+					$value = array_combine( range( 1, count( $value ) ), array_values( $value ) );
+				}
+				$this->renumber( $value );
+			}
+		}
+	}
+
 
 	/**
 	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
@@ -94,6 +113,8 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		$serializer = $serializerFactory->newSerializerForObject( $entityObject, $opt );
 
 		$entityArr = $serializer->getSerialized( $entityObject );
+		$this->renumber( $entityArr ); // Renumber the array
+
 		return array( $entityArr );
 	}
 
