@@ -2,37 +2,6 @@
 
 namespace Wikibase;
 
-/**
- * RDF serialization for wikibase data model.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup Content
- * @ingroup RDF
- *
- * @licence GNU GPL v2+
- * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
- * @author Thomas Pellissier Tanon
- * @author Daniel Kinzler
- */
-
 use DataTypes\DataTypeFactory;
 use EasyRdf_Exception;
 use EasyRdf_Format;
@@ -40,6 +9,16 @@ use EasyRdf_Graph;
 use EasyRdf_Namespace;
 use Wikibase\Lib\EntityIdFormatter;
 
+/**
+ * RDF serialization for wikibase data model.
+ *
+ * @since 0.4
+ *
+ * @licence GNU GPL v2+
+ * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
+ * @author Thomas Pellissier Tanon
+ * @author Daniel Kinzler
+ */
 class RdfSerializer {
 
 	/**
