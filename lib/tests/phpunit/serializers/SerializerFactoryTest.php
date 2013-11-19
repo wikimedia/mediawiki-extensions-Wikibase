@@ -6,6 +6,7 @@ use Wikibase\Claim;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\Reference;
 
@@ -81,6 +82,37 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Unserializer', $unserializer );
 
 		$unserializer->newFromSerialization( $serialization );
+	}
+
+	public function entityTypeProvider() {
+		return array(
+			array( Item::ENTITY_TYPE ),
+			array( Property::ENTITY_TYPE ),
+		);
+	}
+
+	/**
+	 * @dataProvider entityTypeProvider
+	 */
+	public function testNewUnserializerForEntity( $entityType ) {
+		$factory = new SerializerFactory();
+		$options = new SerializationOPtions();
+
+		$unserializer = $factory->newUnserializerForEntity( $entityType, $options );
+
+		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Unserializer', $unserializer );
+	}
+
+	/**
+	 * @dataProvider entityTypeProvider
+	 */
+	public function testNewSerializerForEntity( $entityType ) {
+		$factory = new SerializerFactory();
+		$options = new SerializationOPtions();
+
+		$unserializer = $factory->newSerializerForEntity( $entityType, $options );
+
+		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Serializer', $unserializer );
 	}
 
 	public function newUnserializerProvider() {

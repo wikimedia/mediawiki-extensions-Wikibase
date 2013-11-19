@@ -11,9 +11,11 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\IO\EntityIdReader;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\Serializer;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -67,8 +69,16 @@ class DumpJson extends Maintenance {
 	}
 
 	public function initServices() {
+		$entityFactory = new EntityFactory(); // this should come from WikibaseRepo, really
 		$serializerOptions = new SerializationOptions();
-		$this->entitySerializer = new EntitySerializer( $serializerOptions );
+
+		$serializerFactory = new SerializerFactory(
+			$serializerOptions,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			$entityFactory
+		);
+
+		$this->entitySerializer = new DispatchingEntitySerializer( $serializerFactory, $serializerOptions );
 
 		//TODO: allow injection for unit tests
 		$this->entityPerPage = new EntityPerPageTable();
@@ -87,7 +97,7 @@ class DumpJson extends Maintenance {
 			fwrite( $this->logFileHandle, "$message\n" );
 			fflush( $this->logFileHandle );
 		} else {
-			$this->output( "$message\n" );
+		$this->output( "$message\n" );
 		}
 	}
 
