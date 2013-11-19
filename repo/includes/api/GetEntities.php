@@ -127,11 +127,14 @@ class GetEntities extends ApiWikibase {
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$itemByTitleHelper = $this->getItemByTitleHelper();
 			list( $ids, $missingItems ) =  $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
-			$this->addMissingItemstoResult( $missingItems );
+			$this->addMissingItemsToResult( $missingItems );
 		}
 		return $ids;
 	}
 
+	/**
+	 * @return ItemByTitleHelper
+	 */
 	private function getItemByTitleHelper() {
 		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
 		$siteStore = SiteSQLStore::newInstance();
@@ -146,7 +149,7 @@ class GetEntities extends ApiWikibase {
 	/**
 	 * @param array $missingItems Array of arrays, Each internal array has a key 'site' and 'title'
 	 */
-	private function addMissingItemstoResult( $missingItems ){
+	private function addMissingItemsToResult( $missingItems ){
 		foreach( $missingItems as $missingItem ) {
 			$this->getResultBuilder()->addMissingEntity( $missingItem );
 		}
@@ -222,6 +225,12 @@ class GetEntities extends ApiWikibase {
 		} else {
 			$languages = $params['languages'];
 		}
+		if( $params['ungroupedlist'] ) {
+			$options->setOption(
+					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
+					array()
+				);
+		}
 		$options->setLanguages( $languages );
 		$options->setOption( EntitySerializer::OPT_SORT_ORDER, $params['dir'] );
 		$options->setOption( EntitySerializer::OPT_PARTS, $props );
@@ -282,6 +291,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
+			'ungroupedlist' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
 		) );
 	}
 
@@ -317,6 +330,7 @@ class GetEntities extends ApiWikibase {
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
 			),
+			'ungroupedlist' => array( 'Do not group snaks by property id' ),
 		) );
 	}
 

@@ -4,7 +4,6 @@ namespace Wikibase\Test\Api;
 
 use ApiResult;
 use DataValues\StringValue;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\ItemId;
@@ -12,7 +11,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityRevision;
 use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -26,7 +24,7 @@ use Wikibase\SnakList;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ResultBuilderTest extends PHPUnit_Framework_TestCase {
+class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getDefaultResult(){
 		$apiMain =  $this->getMockBuilder( 'ApiMain' )->disableOriginalConstructor()->getMockForAbstractClass();

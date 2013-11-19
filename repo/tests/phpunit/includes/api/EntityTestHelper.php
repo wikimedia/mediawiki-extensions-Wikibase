@@ -69,6 +69,15 @@ class EntityTestHelper {
 					array( "language" => "nb", "value" => "Hovedsted og delstat og i Forbundsrepublikken Tyskland." ),
 					array( "language" => "nn", "value" => "Hovudstad og delstat i Forbundsrepublikken Tyskland." ),
 				),
+				"claims" => array(
+					array( 'mainsnak' => array(
+						'snaktype' => 'value',
+						'property' => 'P56',
+						'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ),
+					),
+					'type' => 'statement',
+					'rank' => 'normal' )
+				),
 			)
 		),
 		'London' => array(
@@ -267,12 +276,13 @@ class EntityTestHelper {
 	/**
 	 * Remove props and langs that are not included in $props or $langs from the $entityOutput array
 	 * @param array $entityOutput Array of entity output
-	 * @param null|array $props Props to keep in the output
+	 * @param array $props Props to keep in the output
 	 * @param null|array $langs Languages to keep in the output
 	 * @return array Array of entity output with props and langs removed
 	 */
-	protected static function stripUnwantedOutputValues( $entityOutput, $props = null, $langs = null  ){
+	protected static function stripUnwantedOutputValues( $entityOutput, $props = array(), $langs = null  ){
 		$entityProps = array();
+		$props[] = 'type'; // always return the type so we can demobilize
 		foreach( $props as $prop ){
 			if( array_key_exists( $prop, $entityOutput ) ){
 				$entityProps[ $prop ] = $entityOutput[ $prop ] ;
