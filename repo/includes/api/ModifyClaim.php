@@ -6,11 +6,8 @@ use ApiMain;
 use ApiBase;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\EntityContent;
-use Wikibase\Claim;
 use Wikibase\Summary;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Property;
-use Wikibase\EntityContentFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
@@ -73,8 +70,8 @@ abstract class ModifyClaim extends ApiWikibase {
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityContent $content
-	 * @param \Wikibase\Summary $summary
+	 * @param EntityContent $content
+	 * @param Summary $summary
 	 */
 	public function saveChanges( EntityContent $content, Summary $summary ) {
 		$status = $this->attemptSaveEntity(
@@ -83,13 +80,8 @@ abstract class ModifyClaim extends ApiWikibase {
 			$this->getFlags()
 		);
 
-		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
-
-		$this->getResult()->addValue(
-			null,
-			'success',
-			1
-		);
+		//@todo this doesnt belong here!...
+		$this->addRevisionIdFromStatusToResult( 'pageinfo', $status );
 	}
 
 	/**
