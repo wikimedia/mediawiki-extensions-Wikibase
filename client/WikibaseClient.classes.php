@@ -17,6 +17,7 @@ return call_user_func( function() {
 		'Wikibase\LangLinkHandler' => 'includes/LangLinkHandler.php',
 		'Wikibase\ChangeHandler' => 'includes/ChangeHandler.php',
 		'Wikibase\NamespaceChecker' => 'includes/NamespaceChecker.php',
+		'Wikibase\ReferencedPagesFinder' => 'includes/ReferencedPagesFinder.php',
 		'Wikibase\RepoItemLinkGenerator' => 'includes/RepoItemLinkGenerator.php',
 		'Wikibase\RepoLinker' => 'includes/RepoLinker.php',
 		'Wikibase\Client\WikibaseClient' => 'includes/WikibaseClient.php',
