@@ -61,6 +61,14 @@ class GetEntities extends ApiWikibase {
 			);
 		}
 
+		if( $params['ungroupedlist'] ) {
+			$this->resultBuilder->getSerializationOptions()
+				->setOption(
+					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
+					array()
+				);
+		}
+
 		$entityIds = $this->getEntityIdsFromParams( $params );
 		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds );
 		foreach( $entityRevisions as $entityRevision ) {
@@ -274,6 +282,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
+			'ungroupedlist' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
 		) );
 	}
 
@@ -309,6 +321,7 @@ class GetEntities extends ApiWikibase {
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
 			),
+			'ungroupedlist' => array( 'Do not group snaks by property id' ),
 		) );
 	}
 
