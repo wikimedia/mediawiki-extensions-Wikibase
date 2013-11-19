@@ -39,6 +39,13 @@ class ClaimDifferenceVisualizer {
 	private $snakFormatter;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var string
+	 */
+	private $langCode;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -48,7 +55,9 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdLabelFormatter $propertyIdFormatter, SnakFormatter $snakFormatter ) {
+	public function __construct( EntityIdLabelFormatter $propertyIdFormatter,
+		SnakFormatter $snakFormatter, $langCode
+	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
 			throw new InvalidArgumentException(
 				'Expected $snakFormatter to generate plain text, not '
@@ -57,6 +66,7 @@ class ClaimDifferenceVisualizer {
 
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->snakFormatter = $snakFormatter;
+		$this->langCode = $langCode;
 	}
 
 	/**
@@ -90,7 +100,7 @@ class ClaimDifferenceVisualizer {
 			$html .= $this->visualizeSnakListChanges(
 				$claimDifference->getReferenceChanges(),
 				$baseClaim,
-				wfMessage( 'wikibase-diffview-reference' )
+				wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->langCode )
 			);
 		}
 
@@ -158,7 +168,7 @@ class ClaimDifferenceVisualizer {
 	 */
 	protected function visualizeRankChange( DiffOpChange $rankChange ) {
 		$valueFormatter = new DiffOpValueFormatter(
-			wfMessage( 'wikibase-diffview-rank' ),
+			wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->langCode ),
 			$rankChange->getOldValue(),
 			$rankChange->getNewValue()
 		);
@@ -239,7 +249,8 @@ class ClaimDifferenceVisualizer {
 	protected function getSnakHeader( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 		$propertyLabel = $this->formatPropertyId( $propertyId );
-		$headerText = wfMessage( 'wikibase-entity-property' ) . ' / ' . $propertyLabel;
+		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->langCode )
+			. ' / ' . $propertyLabel;
 
 		return $headerText;
 	}
@@ -335,7 +346,7 @@ class ClaimDifferenceVisualizer {
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' ),
+					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->langCode ),
 					$oldVal,
 					$newVal
 			);

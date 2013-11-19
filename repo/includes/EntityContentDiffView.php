@@ -2,10 +2,11 @@
 
 namespace Wikibase;
 
+use Content;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use Diff\ListDiffer;
-use Content;
+use DifferenceEngine;
 use Html;
 use Linker;
 use ParserOptions;
@@ -16,6 +17,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Difference view for Wikibase entities.
@@ -26,7 +28,22 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityContentDiffView extends \DifferenceEngine {
+abstract class EntityContentDiffView extends DifferenceEngine {
+
+	/**
+	 * @var EntityDiffVisualizer
+	 */
+	protected $diffVisualizer;
+
+	/**
+	 * @var SnakValueFormatter
+	 */
+	protected $snakValueFormatter;
+
+	/**
+	 * @var EntityIdLabelFormatter
+	 */
+	protected $propertyNameFormatter;
 
 	/**
 	 * @see DifferenceEngine::__construct
@@ -41,14 +58,24 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 	public function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct( $context, $old, $new, $rcid, $refreshCache, $unhide );
 
+		$langCode = $this->getLanguage()->getCode();
+
 		//TODO: proper injection
 		$options = new FormatterOptions( array(
 			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $this->getLanguage()->getCode()
+			ValueFormatter::OPT_LANG => $langCode
 		) );
 
 		$this->propertyNameFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
 		$this->snakValueFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+
+		// @fixme inject!
+		$this->diffVisualizer = new EntityDiffVisualizer(
+			$this->getContext(),
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
+			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter, $langCode ),
+			SiteSQLStore::newInstance()
+		);
 	}
 
 	/**
@@ -126,26 +153,27 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		return $header;
 	}
 
-	// FIXME: can haz visibility?
-	function generateContentDiffBody( Content $old, Content $new ) {
-		/**
-		 * @var EntityContent $old
-		 * @var EntityContent $new
-		 */
+	/**
+	 * @see DifferenceEngine::generateContentDiffBody
+	 *
+	 * @param Content $old
+	 * @param Content $new
+	 *
+	 * @return string
+	 */
+	public function generateContentDiffBody( Content $old, Content $new ) {
 		$diff = $old->getEntity()->getDiff( $new->getEntity() );
 
-		// TODO: derp inject the EntityDiffVisualizer
-		$diffVisualizer = new EntityDiffVisualizer(
-			$this->getContext(),
-			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter ),
-			SiteSQLStore::newInstance()
-		);
-
-		return $diffVisualizer->visualizeDiff( $diff );
+		return $this->diffVisualizer->visualizeDiff( $diff );
 	}
 
-	protected function getParserOutput( \WikiPage $page, Revision $rev ) {
+	/**
+	 * @param WikiPage $page
+	 * @param Revision $rev
+	 *
+	 * @return ParserOutput
+	 */
+	protected function getParserOutput( WikiPage $page, Revision $rev ) {
 		$parserOptions = ParserOptions::newFromContext( $this->getContext() );
 		$parserOptions->enableLimitReport();
 		$parserOptions->setTidy( true );
