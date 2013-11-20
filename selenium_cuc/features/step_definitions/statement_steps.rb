@@ -14,6 +14,29 @@ When /^I click the statement cancel button$/ do
   on(ItemPage).cancelStatement
 end
 
+When /^I select the property (.+)$/ do |handle|
+  on(ItemPage) do |page|
+    page.select_entity(@properties[handle]["label"])
+    page.wait_for_property_value_box
+  end
+end
+
+When /^I enter (.+) in the property input field$/ do |value|
+  on(ItemPage) do |page|
+    page.entitySelectorInput_element.clear
+    page.entitySelectorInput = value
+    page.ajax_wait
+  end
+end
+
+When /^I enter (.+) as string statement value$/ do |value|
+  on(ItemPage).statementValueInputField = value
+end
+
+When /^I press the ESC key in the statement value input field$/ do
+  on(ItemPage).statementValueInputField_element.send_keys :escape
+end
+
 Then /^Statement help field should be there$/ do
   on(ItemPage).statementHelpField?.should be_true
 end
@@ -53,7 +76,7 @@ Then /^Statement cancel button should not be there$/ do
 end
 
 Then /^Statement value input element should be there$/ do
-  on(ItemPage).statementValueInput?.should be_true
+  on(ItemPage).statementValueInputField?.should be_true
 end
 
 Then /^Statement value input element should not be there$/ do

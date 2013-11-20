@@ -20,12 +20,13 @@ module StatementPage
   a(:cancelStatement, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:cancelStatementDisabled, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
   textarea(:statementValueInput, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'valueview-input')]")
+  text_field(:statementValueInputField, class: "valueview-input")
   span(:statementHelpField, :css => "div.claimlistview span.mw-help-field-hint")
 
   #a(:addClaimToFirstStatement, css: "div.wb-claimlistview:nth-child(1) > span.wb-addtoolbar a:not(.wikibase-toolbarbutton-disabled)")
   #a(:editFirstStatement, css: "span.wb-edittoolbar > span > span > span.wikibase-toolbareditgroup-innoneditmode > span > a:not(.wikibase-toolbarbutton-disabled):nth-child(1)")
   #a(:removeClaimButton,	xpath: "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wikibase-toolbareditgroup-ineditmode')]/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
-  #text_field(:statementValueInputField, class: "valueview-input")
+
   #div(:claimEditMode, xpath: "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-edit')]")
   #div(:statement1Name, xpath: "//div[contains(@class, 'wb-claimlistview')][1]//div[contains(@class, 'wb-claim-name')]")
   #div(:statement2Name, xpath: "//div[contains(@class, 'wb-claimlistview')][2]//div[contains(@class, 'wb-claim-name')]")
@@ -44,13 +45,13 @@ module StatementPage
   #a(:snaktypeSelectorNovalue, xpath: "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-novalue')]/a")
   #span(:previewSpinner, class: "mw-small-spinner")
 
-=begin
   def wait_for_property_value_box
     wait_until do
       self.statementValueInput? || self.statementValueInputField?
     end
   end
 
+=begin
   def wait_for_statement_request_finished
     wait_until do
       self.claimEditMode? == false
