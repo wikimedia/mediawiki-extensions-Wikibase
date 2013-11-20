@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "291c1151_2f98e074",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-20T11:46:25Z",
+      "side": 1,
+      "message": "can you please inject this in the constructor?\n\n$this-\u003elanguage \u003d $language;\n\nand then pass $wgContLang as a parameter when instantiating this class\n\ndoing that improves testability, especially when wikis have non-english or whatnot then tests produce unpredictable and failing results sometimes.",
+      "revId": "d21748a9ce43c8b3133dc9c34689fa2ab905fd35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291c1151_4f951c3c",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-20T11:46:25Z",
+      "side": 1,
+      "message": "this should also be passed in the constructor.\n\n$this-\u003esiteId \u003d $siteId",
+      "revId": "d21748a9ce43c8b3133dc9c34689fa2ab905fd35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
