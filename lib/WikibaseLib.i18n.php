@@ -1298,6 +1298,7 @@ $messages['fi'] = array(
 	'wikibase-validator-too-short' => 'Pitää olla vähintään {{PLURAL:$1|yhden merkin|$1 merkin}} pituinen',
 	'wikibase-validator-no-such-entity' => '$1 ei löydy',
 	'wikibase-validator-bad-url-scheme' => 'Ei-tuettu URL-järjestelmä: $1',
+	'wikibase-validator-unknown-unit' => 'Tuntematon yksikkö: $1',
 	'datatypes-type-wikibase-item' => 'Kohde',
 	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
 	'version-wikibase' => 'Wikibase',

@@ -1441,6 +1441,7 @@ $messages['fi'] = array(
 	'wikibase-linkitem-success-create' => 'Sivujen linkittäminen onnistui. Uusi, linkit sisältävä kohde on [$1 keskustietovarastossa].',
 	'wikibase-linkitem-success-link' => 'Sivujen linkittäminen onnistui. Linkit sisältävä kohde on [$1 keskustietovarastossa].',
 	'wikibase-property-notfound' => 'Ominaisuutta $1 ei löydy.',
+	'wikibase-property-notsupportedyet' => 'Wikibase ei tue vielä ominaisuustyyppiä ominaisuudelle $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
