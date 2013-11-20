@@ -16,6 +16,35 @@ def generate_random_string(length=8)
   return string
 end
 
+def create_new_properties(props)
+  properties = Hash.new
+
+  props.each do |prop|
+    handle = prop[0]
+    type = prop[1]
+    data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) +
+           '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) +
+           '"}},"datatype":"' + type + '"}'
+    property = create_new_entity(data, 'property')
+    properties[handle] = property
+  end
+
+  properties
+end
+
+def create_new_items(handles)
+  items = Hash.new
+
+  handles.each do |handle|
+    data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) +
+           '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
+    item = create_new_entity(data, 'item')
+    items[handle] = item
+  end
+
+  items
+end
+
 # creates a new entity via the API
 def create_new_entity(data, type = 'item')
   uri = URI(URL.repo_api)
@@ -36,7 +65,7 @@ def create_new_entity(data, type = 'item')
   resp = ActiveSupport::JSON.decode(response.body)
 
   if resp["success"] != 1
-    abort("Failed to create new entity: API error")
+    abort("Failed to create new entity: API error: " + resp["error"]["info"])
   end
 
   id = resp["entity"]["id"]
