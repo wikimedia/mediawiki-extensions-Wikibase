@@ -225,11 +225,16 @@
 		 * @param {Function} response
 		 */
 		_filterArray: function( request, response ) {
-			var resultSet = $.ui.autocomplete.filter( this.options.source, request.term );
+			var resultSet = $.ui.autocomplete.filter( this.options.source, request.term ),
+				firstLabel = resultSet[0];
+
+			if( $.isPlainObject( resultSet[0] ) ) {
+				firstLabel = resultSet[0].label;
+			}
 
 			if ( resultSet.length && this.options.adaptLetterCase ) {
 				this.term = $.util.adaptLetterCase( this.term,
-					resultSet[0],
+					firstLabel,
 					this.options.adaptLetterCase
 				);
 				this.element.val( this.term );
@@ -238,7 +243,7 @@
 			response( resultSet );
 
 			if( this._lastKeyDown !== $.ui.keyCode.BACKSPACE ) {
-				this.element.autocompletestring( request.term, resultSet[0] );
+				this.element.autocompletestring( request.term, firstLabel );
 			}
 		},
 
