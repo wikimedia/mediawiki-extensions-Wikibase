@@ -57,12 +57,12 @@ $wgWBClientSettings['showExternalRecentChanges'] = true;
 $wgWBClientSettings['sharedCacheKeyPrefix'] = $wgWBClientSettings['repoDatabase'] . ':WBL/' . WBL_VERSION;
 
 // In order to access a remote repo using a different database server,
-// LBFactory_Multi must be used. In that case, enabled the block below.
+// LBFactoryMulti must be used. In that case, enabled the block below.
 // If the repo is on the same server, this is not necessary.
 // This does not work with database types other than mysql.
 if ( false ) {
 	$wgLBFactoryConf = array(
-		'class' => 'LBFactory_Multi',
+		'class' => 'LBFactoryMulti',
 
 		// Connect to all databases using the same credentials.
 		'serverTemplate' => array(
