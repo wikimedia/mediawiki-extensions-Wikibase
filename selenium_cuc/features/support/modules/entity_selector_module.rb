@@ -16,15 +16,14 @@ module EntitySelectorPage
   text_field(:entitySelectorInput, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'ui-entityselector-input')]", index: 0)
   text_field(:entitySelectorInput2, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'ui-entityselector-input')]", index: 1)
 
-  #ul(:entitySelectorList, class: "ui-entityselector-list")
-  #a(:firstEntitySelectorLink, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a")
+  ul(:entitySelectorList, class: "ui-entityselector-list")
+  a(:firstEntitySelectorLink, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a")
   #span(:firstEntitySelectorLabel, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-label')]")
   #span(:firstEntitySelectorDescription, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-description')]")
   #text_field(:entitySelectorInput2, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'ui-entityselector-input')]", index: 1)
   #text_field(:entitySelectorSearchInput, id: "searchInput")
   #ul(:entitySelectorSearch, xpath: "//body/ul[contains(@class, 'ui-entityselector-list')]")
 
-=begin
   def wait_for_entity_selector_list
     wait_until do
       entitySelectorList?
@@ -45,6 +44,7 @@ module EntitySelectorPage
     ajax_wait
   end
 
+=begin
   def count_search_results
     entitySelectorSearch_element.items
   end

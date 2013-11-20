@@ -60,7 +60,7 @@ Then /^Label input element should not be there$/ do
 end
 
 Then /^Label input element should contain original label$/ do
-  on(ItemPage).labelInputField.should == @entity["label"]
+  on(ItemPage).labelInputField.should == @item_under_test["label"]
 end
 
 Then /^Label input element should be empty$/ do
@@ -87,8 +87,8 @@ Then /^Original label should be displayed$/ do
   on(ItemPage) do |page|
     page.firstHeading.should be_true
     page.entityLabelSpan.should be_true
-    @browser.title.include?(@entity["label"]).should be_true
-    page.entityLabelSpan.should == @entity["label"]
+    @browser.title.include?(@item_under_test["label"]).should be_true
+    page.entityLabelSpan.should == @item_under_test["label"]
   end
 end
 
@@ -104,7 +104,7 @@ end
 Then /^Entity id should be displayed next to the label$/ do
   on(ItemPage) do |page|
       page.entityIdSpan_element.visible?.should be_true
-      page.entityIdSpan.sub(/[()]/, '') == @entity["label"]
+      page.entityIdSpan.sub(/[()]/, '') == @item_under_test["label"]
     end
 end
 

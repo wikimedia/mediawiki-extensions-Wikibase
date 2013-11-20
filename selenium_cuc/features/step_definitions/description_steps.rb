@@ -60,7 +60,7 @@ Then /^Description input element should not be there$/ do
 end
 
 Then /^Description input element should contain original description$/ do
-  on(ItemPage).descriptionInputField.should == @entity["description"]
+  on(ItemPage).descriptionInputField.should == @item_under_test["description"]
 end
 
 Then /^Description input element should be empty$/ do
@@ -87,7 +87,7 @@ Then /^Original description should be displayed$/ do
   on(ItemPage) do |page|
     page.firstHeading.should be_true
     page.entityDescriptionSpan.should be_true
-    page.entityDescriptionSpan.should == @entity["description"]
+    page.entityDescriptionSpan.should == @item_under_test["description"]
   end
 end
 

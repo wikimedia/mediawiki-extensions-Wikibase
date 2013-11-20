@@ -45,3 +45,62 @@ Feature: Creating statements
     | cancel |
     | click the statement cancel button |
     | press the ESC key in the entity selector input field |
+
+  @ui_only
+  Scenario: Select a property
+    Given There are properties with the following handles and datatypes:
+      | stringprop | string |
+    When I click the statement add button
+      And I select the property stringprop
+    Then Statement add button should be disabled
+      And Statement cancel button should be there
+      And Statement save button should be disabled
+      And Entity selector input element should be there
+      And Statement value input element should be there
+
+  @ui_only
+  Scenario: Select a property and enter a statement value
+    Given There are properties with the following handles and datatypes:
+      | stringprop | string |
+    When I click the statement add button
+      And I select the property stringprop
+      And I enter something as string statement value
+    Then Statement add button should be disabled
+      And Statement cancel button should be there
+      And Statement save button should be there
+      And Entity selector input element should be there
+      And Statement value input element should be there
+
+  @ui_only
+  Scenario Outline: Cancel statement after selecting a property
+    Given There are properties with the following handles and datatypes:
+      | stringprop | string |
+    When I click the statement add button
+      And I select the property stringprop
+      And I enter something as string statement value
+      And I <cancel>
+    Then Statement add button should be there
+      And Statement cancel button should not be there
+      And Statement save button should not be there
+      And Entity selector input element should not be there
+      And Statement value input element should not be there
+
+  Examples:
+    | cancel |
+    | click the statement cancel button |
+    | press the ESC key in the entity selector input field |
+    | press the ESC key in the statement value input field |
+
+  @ui_only
+  Scenario: Select a property, enter a statement value and clear the property
+    Given There are properties with the following handles and datatypes:
+      | stringprop | string |
+    When I click the statement add button
+      And I select the property stringprop
+      And I enter something as string statement value
+      And I enter invalid in the property input field
+    Then Statement add button should be disabled
+      And Statement cancel button should be there
+      And Statement save button should be disabled
+      And Entity selector input element should be there
+      And Statement value input element should not be there

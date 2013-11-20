@@ -9,8 +9,16 @@
 Given /^I am on an item page$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
   item = create_new_entity(item_data, 'item')
-  @entity = item
+  @item_under_test = item
   on(ItemPage).navigate_to_entity item["url"]
+end
+
+Given /^There are properties with the following handles and datatypes:$/ do |props|
+  @properties = create_new_properties(props.raw)
+end
+
+Given /^There are items with the following handles:$/ do |handles|
+  @items = create_new_items(handles.raw)
 end
 
 Given /^The copyright warning has been dismissed$/ do
@@ -22,9 +30,9 @@ Given /^Anonymous edit warnings are disabled$/ do
 end
 
 Given /^I am on an item page with empty label and description$/ do
-  item_data = '{"labels":{"en":{"language":"en","value":"' + "" + '"}},"descriptions":{"en":{"language":"en","value":"' + "" + '"}}}'
+  item_data = '{"labels":{"en":{"language":"en","value":"' + '' + '"}},"descriptions":{"en":{"language":"en","value":"' + '' + '"}}}'
   item = create_new_entity(item_data, 'item')
-  @entity = item
+  @item_under_test = item
   on(ItemPage).navigate_to_entity item["url"]
 end
 
