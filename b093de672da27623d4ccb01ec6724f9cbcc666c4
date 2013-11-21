@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_6c80e44b",
+        "filename": "lib/includes/PropertyLabelNotResolvedException.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-21T20:41:42Z",
+      "side": 1,
+      "message": "Some documentation over here would be nice... $lang could be both a Language class object or a string.",
+      "revId": "b093de672da27623d4ccb01ec6724f9cbcc666c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
