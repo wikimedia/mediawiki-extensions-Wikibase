@@ -2,18 +2,20 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
+use Language;
+use Parser;
+use Status;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 
 /**
  * Handler of the {{#property}} parser function.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -24,7 +26,7 @@ use Wikibase\Lib\SnakFormatter;
 class PropertyParserFunction {
 
 	/**
-	 * @var \Parser
+	 * @var Parser
 	 */
 	protected $parser;
 
@@ -44,14 +46,12 @@ class PropertyParserFunction {
 	protected $propertyLabelResolver;
 
 	/**
-	 * Constructor.
-	 *
-	 * @param \Parser $parser
+	 * @param Parser $parser
 	 * @param EntityId $entityId
-	 * @param EntityLookup                $entityLookup
-	 * @param PropertyLabelResolver       $propertyLabelResolver
+	 * @param EntityLookup $entityLookup
+	 * @param PropertyLabelResolver $propertyLabelResolver
 	 */
-	public function __construct( \Parser $parser, EntityId $entityId,
+	public function __construct( Parser $parser, EntityId $entityId,
 		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver
 	) {
 		$this->parser = $parser;
@@ -63,12 +63,12 @@ class PropertyParserFunction {
 	/**
 	 * Check whether variants are used in this parser run.
 	 *
-	 * @param \Parser $parser
+	 * @param Parser $parser
 	 * @return bool
 	 */
 	public function isParserUsingVariants() {
 		$parserOptions = $this->parser->getOptions();
-		return $this->parser->OutputType() === \Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+		return $this->parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
 			&& !$parserOptions->getDisableContentConversion();
 	}
 
@@ -94,10 +94,10 @@ class PropertyParserFunction {
 	/**
 	 * Build a PropertyParserFunctionRenderer object for a given language.
 	 *
-	 * @param \Language $language
+	 * @param Language $language
 	 * @return PropertyParserFunctionRenderer
 	 */
-	public function getRenderer( \Language $language ) {
+	public function getRenderer( Language $language ) {
 		wfProfileIn( __METHOD__ );
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -125,20 +125,25 @@ class PropertyParserFunction {
 
 	/**
 	 * @param string $propertyLabel property label or ID (pXXX)
-	 * @param \Language $language
+	 * @param Language $language
 	 *
 	 * @return string
 	 */
-	public function renderInLanguage( $propertyLabel, \Language $language ) {
-
+	public function renderInLanguage( $propertyLabel, Language $language ) {
 		$renderer = $this->getRenderer( $language );
 
-		$status = $renderer->renderForEntityId( $this->entityId, $propertyLabel );
+		try {
+			$status = $renderer->renderForEntityId( $this->entityId, $propertyLabel );
+		} catch ( PropertyLabelNotResolvedException $ex ) {
+			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
+		} catch ( InvalidArgumentException $ex ) {
+			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
+		}
 
 		if ( !$status->isGood() ) {
 			// stuff the error messages into the ParserOutput, so we can render them later somewhere
-
 			$errors = $this->parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
+
 			if ( $errors === null ) {
 				$errors = array();
 			}
@@ -147,9 +152,25 @@ class PropertyParserFunction {
 			$errors[] = $status->getWikiText();
 
 			$this->parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
+
+			return '';
 		}
 
-		return $status->isOK() ? $status->getValue() : '';
+		return $status->getValue();
+	}
+
+	/**
+	 * @param string $propertyLabel
+	 * @param string $message
+	 *
+	 * @return Status
+	 */
+	private function getStatusForException( $propertyLabel, $message ) {
+		return Status::newFatal(
+			'wikibase-property-render-error',
+			$propertyLabel,
+			$message
+		);
 	}
 
 	/**
@@ -162,7 +183,7 @@ class PropertyParserFunction {
 		$textArray = array();
 
 		foreach ( $variants as $variantCode ) {
-			$variantLanguage = \Language::factory( $variantCode );
+			$variantLanguage = Language::factory( $variantCode );
 			$variantText = $this->renderInLanguage( $propertyLabel, $variantLanguage );
 			// LanguageConverter doesn't handle empty strings correctly, and it's more difficult
 			// to fix the issue there, as it's using empty string as a special value.
@@ -200,12 +221,12 @@ class PropertyParserFunction {
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Parser &$parser
+	 * @param Parser &$parser
 	 * @param string $propertyLabel property label or ID (pXXX)
 	 *
 	 * @return array
 	 */
-	public static function render( \Parser $parser, $propertyLabel ) {
+	public static function render( Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
 		$siteId = Settings::get( 'siteGlobalID' );
