@@ -76,11 +76,11 @@ class WikibaseDataTypeBuilders {
 			'string' => array( $this, 'buildStringType' ),
 			'time' => array( $this, 'buildTimeType' ),
 			'globe-coordinate' => array( $this, 'buildCoordinateType' ),
-			'url' => array( $this, 'buildUrlType' )
+			'url' => array( $this, 'buildUrlType' ),
+			'quantity'=> array( $this, 'buildQuantityType' )
 		);
 
 		$experimental = array(
-			'quantity'=> array( $this, 'buildQuantityType' ),
 			// 'monolingual-text' => array( $this, 'buildMonolingualTextType' ),
 			// 'multilingual-text' => array( $this, 'buildMultilingualTextType' ),
 		);
