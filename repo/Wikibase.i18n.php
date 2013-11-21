@@ -10162,13 +10162,13 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-property-summary-wbsetaliases-remove' => '[$2] {{PLURAL:$1|별칭}}을 제거함',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1|값}}으로 [$2] 속성을 만듦',
 	'wikibase-listdatatypes-wikibase-item-head' => '항목',
-	'wikibase-listdatatypes-wikibase-item-body' => '프로젝트에서 다른 항목의 링크입니다. 입력할 때 위키데이터의 "항목" 이름공간과 일치하는 항목을 찾습니다. 하나의 텍스트 입력 상자로 구성됩니다.
+	'wikibase-listdatatypes-wikibase-item-body' => '프로젝트에서 다른 항목의 링크입니다. 입력할 때 위키데이터의 "항목" 이름공간과 일치하는 항목을 검색합니다. 하나의 텍스트 입력 상자로 구성됩니다.
 * scheme – IRI 문자열의 명시적이지 않은 부분
 * hierarchicalpart – IRI 문자열의 명시적이지 않은 부분
 * query – IRI 문자열의 명시적이지 않은 부분
 * fragment – IRI 문자열의 명시적이지 않은 부분',
 	'wikibase-listdatatypes-commonsmedia-head' => '공용 미디어',
-	'wikibase-listdatatypes-commonsmedia-body' => '위키미디어 공용에서 저장된 파일의 링크입니다. 입력할 때 공용의 "파일" 이름공간과 일치하는 항목을 찾습니다.
+	'wikibase-listdatatypes-commonsmedia-body' => '위키미디어 공용에서 저장된 파일의 링크입니다. 입력할 때 공용의 "파일" 이름공간과 일치하는 항목을 검색합니다.
 * scheme – IRI 문자열의 명시적이지 않은 부분
 * hierarchicalpart – IRI 문자열의 명시적이지 않은 부분
 * query – IRI 문자열의 명시적이지 않은 부분
@@ -13510,7 +13510,15 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-item-summary-wbcreateclaim-value' => "Creà {{PLURAL:$1|n'arvendicassion|d'arvendicassion}}",
 	'wikibase-item-summary-wbcreateclaim-novalue' => "Creà {{PLURAL:$1|n'afermassion|d'afermassion}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => "Creà {{PLURAL:$1|n'arvendicassion|d'arvendicassion}}",
+	'wikibase-item-summary-wbcreateclaim' => "Creà {{PLURAL:$1|n'afermassion|d'afermassion}}",
+	'wikibase-item-summary-wbsetclaimvalue' => "Definì {{PLURAL:$1|un|dij}} valor d'afermassion",
+	'wikibase-item-summary-wbremoveclaims' => "Gavà {{PLURAL:$1|n'afermassion|d'afermassion}}",
 	'wikibase-item-summary-special-create-item' => "Creà n'element [$2] con {{PLURAL:$1|un valor|dij valor}}",
+	'wikibase-item-summary-wbcreateclaim-create' => 'Afermassion creà',
+	'wikibase-item-summary-wbremoveclaims-remove' => "Gavà {{PLURAL:$1|n'afermassion|d'afermassion}}",
+	'wikibase-item-summary-wbsetclaim-update' => "Modificà {{PLURAL:$3|n'afermassion|d'afermassion}}",
+	'wikibase-item-summary-wbsetclaim-create' => "Creà {{PLURAL:$3|n'afermassion|d'afermassion}}",
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => "Modificà {{PLURAL:$4|un qualificativ|$4 qualificativ}} d'{{PLURAL:$3|afermassion}}",
 	'wikibase-property-summary-wbeditentity-create' => 'Creà na propietà neuva',
 	'wikibase-property-summary-wbeditentity-update' => 'Modificà na proprietà',
 	'wikibase-property-summary-wbeditentity-override' => 'Dzor-ëscrivù na propietà', # Fuzzy

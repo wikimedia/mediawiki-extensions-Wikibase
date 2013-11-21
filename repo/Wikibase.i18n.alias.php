@@ -143,6 +143,7 @@ $specialPageAliases['is'] = array(
 
 /** Italian (italiano) */
 $specialPageAliases['it'] = array(
+	'DispatchStats' => array( 'StatistichePropagazione' ),
 	'EntityData' => array( 'DatiEntità' ),
 	'NewItem' => array( 'CreaElemento', 'NuovoElemento' ),
 	'NewProperty' => array( 'NuovaProprietà' ),
@@ -152,7 +153,9 @@ $specialPageAliases['it'] = array(
 	'SetLabel' => array( 'ImpostaEtichetta' ),
 	'SetDescription' => array( 'ImpostaDescrizione' ),
 	'SetAliases' => array( 'ImpostaAlias' ),
+	'SetSiteLink' => array( 'ImpostaSitelink' ),
 	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
+	'EntitiesWithoutDescription' => array( 'EntitàSenzaDescrizione' ),
 	'ItemsWithoutSitelinks' => array( 'ElementiSenzaSitelinks' ),
 );
 

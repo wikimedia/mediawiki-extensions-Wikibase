@@ -3401,6 +3401,7 @@ $messages['roa-tara'] = array(
 );
 
 /** Russian (русский)
+ * @author Agilight
  * @author Ignatus
  * @author Kaganer
  * @author Okras
@@ -3446,7 +3447,7 @@ $messages['ru'] = array(
 	'wikibase-linkitem-success-link' => 'Страницы были успешно связаны. Элемент, содержащий связи, находится в нашем [$1 центральном хранилище данных].',
 	'wikibase-property-notfound' => 'Свойство «$1» не найдено',
 	'wikibase-property-notsupportedyet' => 'Wikibase пока не поддерживает тип свойства «$1».',
-	'wikibase-rc-hide-wikidata' => '$1 Викиданные',
+	'wikibase-rc-hide-wikidata' => 'Викиданныйларны $1',
 	'wikibase-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
 	'wikibase-rc-wikibase-edit-letter' => 'д',
 	'wikibase-rc-wikibase-edit-title' => 'Это изменение связанного элемента Викиданных',
