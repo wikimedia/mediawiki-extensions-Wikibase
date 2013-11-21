@@ -41,7 +41,9 @@ class MockPropertyLabelResolver implements PropertyLabelResolver {
 		foreach ( $labels as $label ) {
 			$prop = $this->repo->getPropertyByLabel( $label, $this->lang );
 
-			$ids[$label] = $prop->getId();
+			if ( $prop !== null ) {
+				$ids[$label] = $prop->getId();
+			}
 		}
 
 		return $ids;
