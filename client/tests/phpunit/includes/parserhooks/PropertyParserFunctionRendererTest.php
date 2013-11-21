@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use Language;
 use Wikibase\Claim;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,11 +17,7 @@ use Wikibase\PropertyValueSnak;
 /**
  * @covers Wikibase\PropertyParserFunctionRenderer
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -32,11 +29,8 @@ use Wikibase\PropertyValueSnak;
 class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getDefaultInstance() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$targetLanguage = \Language::factory( 'en' );
+		$targetLanguage = Language::factory( 'en' );
 		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
-		$dataTypeFactory = $wikibaseClient->getDataTypeFactory();
 		$mockRepo = $this->newMockRepository();
 		$mockResolver = new MockPropertyLabelResolver( $targetLanguage->getCode(), $mockRepo );
 
@@ -88,21 +82,6 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 		return $entityLookup;
 	}
 
-	public static function provideRenderForEntityId() {
-		return array(
-			array(
-				'p1337',
-				'(a kitten), (a kitten)',
-				'Congratulations, you just killed a kitten'
-			),
-			array(
-				'kitten',
-				'(a kitten), (a kitten)',
-				'Congratulations, you just killed a kitten'
-			),
-		);
-	}
-
 	/**
 	 * @dataProvider provideRenderForEntityId
 	 */
@@ -123,6 +102,46 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 			$expected,
 			$text,
 			$info
+		);
+	}
+
+	public function provideRenderForEntityId() {
+		return array(
+			array(
+				'p1337',
+				'(a kitten), (a kitten)',
+				'Congratulations, you just killed a kitten'
+			),
+			array(
+				'P1337',
+				'(a kitten), (a kitten)',
+				'Congratulations, you just killed a kitten'
+			),
+			array(
+				'kitten',
+				'(a kitten), (a kitten)',
+				'Congratulations, you just killed a kitten'
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidRenderForEntityIdProvider
+	 */
+	public function testInvalidRenderForEntityId( $name, $message ) {
+		$parserFunction = $this->getDefaultInstance();
+
+		$status = $parserFunction->renderForEntityId(
+			new ItemId( 'Q42' ),
+			$name
+		);
+
+		$this->assertFalse( $status->isOK(), $message );
+	}
+
+	public function invalidRenderForEntityIdProvider() {
+		return array(
+			array( 'Kitten', 'invalid label, property by label lookup is case-sensitive' )
 		);
 	}
 

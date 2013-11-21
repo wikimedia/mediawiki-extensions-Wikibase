@@ -2,9 +2,11 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -130,10 +132,15 @@ class PropertyParserFunction {
 	 * @return string
 	 */
 	public function renderInLanguage( $propertyLabel, \Language $language ) {
-
 		$renderer = $this->getRenderer( $language );
 
-		$status = $renderer->renderForEntityId( $this->entityId, $propertyLabel );
+		try {
+			$status = $renderer->renderForEntityId( $this->entityId, $propertyLabel );
+		} catch ( PropertyLabelNotResolvedException $ex ) {
+			$status = Status::newFatal( 'wikibase-property-render-error', $propertyLabel, $ex->getMessage() );
+		} catch ( InvalidArgumentException $ex ) {
+			$status = Status::newFatal( 'wikibase-property-render-error', $propertyLabel, $ex->getMessage() );
+		}
 
 		if ( !$status->isGood() ) {
 			// stuff the error messages into the ParserOutput, so we can render them later somewhere
