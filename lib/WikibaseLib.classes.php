@@ -58,6 +58,7 @@ return call_user_func( function() {
 		'Wikibase\ReferencedEntitiesFinder' => 'includes/ReferencedEntitiesFinder.php',
 		'Wikibase\ReferencedUrlFinder' => 'includes/ReferencedUrlFinder.php',
 		'Wikibase\Lib\PropertyDataTypeLookup' => 'includes/PropertyDataTypeLookup.php',
+		'Wikibase\Lib\PropertyLabelNotResolvedException' => 'includes/PropertyLabelNotResolvedException.php',
 		'Wikibase\Lib\PropertyNotFoundException' => 'includes/PropertyNotFoundException.php',
 		'Wikibase\Settings' => 'includes/Settings.php',
 		'Wikibase\SettingsArray' => 'includes/SettingsArray.php',
