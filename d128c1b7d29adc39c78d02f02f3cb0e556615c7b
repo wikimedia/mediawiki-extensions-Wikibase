@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_097dca17",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-21T19:19:06Z",
+      "side": 1,
+      "message": "Try to be specific. At the very least RuntimeException is better",
+      "revId": "d128c1b7d29adc39c78d02f02f3cb0e556615c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8991da54",
+        "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-21T19:19:06Z",
+      "side": 1,
+      "message": "@throws PropertyLabelNotResolvedException",
+      "revId": "d128c1b7d29adc39c78d02f02f3cb0e556615c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e979862b",
+        "filename": "client/tests/phpunit/includes/parserhooks/PropertyParserFunctionRendererTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-21T19:19:06Z",
+      "side": 1,
+      "message": "\\o/",
+      "revId": "d128c1b7d29adc39c78d02f02f3cb0e556615c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_c976c239",
+        "filename": "client/tests/phpunit/includes/parserhooks/PropertyParserFunctionRendererTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-21T19:19:06Z",
+      "side": 1,
+      "message": "o_O",
+      "revId": "d128c1b7d29adc39c78d02f02f3cb0e556615c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_a98b7e1a",
+        "filename": "lib/includes/PropertyLabelNotResolvedException.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-21T19:19:06Z",
+      "side": 1,
+      "message": "nope",
+      "revId": "d128c1b7d29adc39c78d02f02f3cb0e556615c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
