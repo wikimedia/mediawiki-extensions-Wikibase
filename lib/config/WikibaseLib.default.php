@@ -118,6 +118,7 @@ return call_user_func( function() {
 			'time',
 			'globe-coordinate',
 			'url',
+			'quantity'
 		),
 
 		// URL schemes allowed for values of the URL type.
@@ -128,11 +129,12 @@ return call_user_func( function() {
 	// experimental stuff
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 		// experimental data types
+		/*
 		$defaults['dataTypes'] = array_merge( $defaults['dataTypes'], array(
-			'quantity',
 			//'monolingual-text',
 			//'multilingual-text',
 		) );
+		*/
 	}
 
 	return $defaults;
