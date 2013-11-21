@@ -2,9 +2,14 @@
 
 namespace Wikibase;
 
+use Exception;
+use InvalidArgumentException;
+use Language;
+use Status;
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -23,7 +28,7 @@ use Wikibase\Lib\SnakFormatter;
  */
 class PropertyParserFunctionRenderer {
 
-	/* @var \Language */
+	/* @var Language */
 	protected $language;
 
 	/* @var EntityLookup */
@@ -39,13 +44,13 @@ class PropertyParserFunctionRenderer {
 	protected $snaksFormatter;
 
 	/**
-	 * @param \Language                   $language
+	 * @param Language                   $language
 	 * @param EntityLookup                $entityLookup
 	 * @param PropertyLabelResolver       $propertyLabelResolver
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param Lib\SnakFormatter           $snaksFormatter
+	 * @param SnakFormatter           $snaksFormatter
 	 */
-	public function __construct( \Language $language,
+	public function __construct( Language $language,
 		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
 		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
 		$this->language = $language;
@@ -76,18 +81,18 @@ class PropertyParserFunctionRenderer {
 	/**
 	 * @param string $string
 	 * @return PropertyId
+	 * @throws InvalidArgumentException
 	 */
 	private function getPropertyIdFromIdSerializationOrLabel( $string ) {
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		try {
 			$propertyId = $idParser->parse( $string );
-		}
-		catch ( ParseException $ex ) {
-			$propertyId = null;
-		}
 
-		if ( $propertyId === null ) {
+			if ( ! ( $propertyId instanceof PropertyId ) ) {
+				throw new InvalidArgumentException( 'Not a valid property id' );
+			}
+		} catch ( ParseException $ex ) {
 			//XXX: It might become useful to give the PropertyLabelResolver a hint as to which
 			//     properties may become relevant during the present request, namely the ones
 			//     used by the Item linked to the current page. This could be done with
@@ -97,11 +102,11 @@ class PropertyParserFunctionRenderer {
 
 			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $string ) );
 
-			if ( empty( $propertyIds ) ) {
-				return new Claims();
-			} else {
-				$propertyId = $propertyIds[$string];
+			if ( $propertyIds === null || empty( $propertyIds ) ) {
+				throw new PropertyLabelNotResolvedException( $this->language->getCode(), $string );
 			}
+
+			$propertyId = $propertyIds[$string];
 		}
 
 		return $propertyId;
@@ -129,36 +134,30 @@ class PropertyParserFunctionRenderer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string   $propertyLabel
+	 * @param string $propertyLabel
 	 *
-	 * @return \Status a status object wrapping a wikitext string
+	 * @return Status a status object wrapping a wikitext string
 	 */
 	public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
-		try {
-			$entity = $this->entityLookup->getEntity( $entityId );
+		$entity = $this->entityLookup->getEntity( $entityId );
 
-			if ( !$entity ) {
-				wfProfileOut( __METHOD__ );
-				return \Status::newGood( '' );
-			}
-
-			$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
-
-			if ( $claims->isEmpty() ) {
-				wfProfileOut( __METHOD__ );
-				return \Status::newGood( '' );
-			}
-
-			$snakList = $claims->getMainSnaks();
-			$text = $this->formatSnakList( $snakList, $propertyLabel );
-			$status = \Status::newGood( $text );
-		} catch ( \Exception $ex ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . $ex->getMessage() );
-
-			$status = \Status::newFatal( 'wikibase-property-render-error', $propertyLabel, $ex->getMessage() );
+		if ( !$entity ) {
+			wfProfileOut( __METHOD__ );
+			return Status::newGood( '' );
 		}
+
+		$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
+
+		if ( $claims->isEmpty() ) {
+			wfProfileOut( __METHOD__ );
+			return Status::newGood( '' );
+		}
+
+		$snakList = $claims->getMainSnaks();
+		$text = $this->formatSnakList( $snakList, $propertyLabel );
+		$status = Status::newGood( $text );
 
 		wfProfileOut( __METHOD__ );
 		return $status;
