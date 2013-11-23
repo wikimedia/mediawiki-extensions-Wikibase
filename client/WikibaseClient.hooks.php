@@ -24,8 +24,9 @@ use SpecialRecentChanges;
 use StripState;
 use Title;
 use User;
-use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
