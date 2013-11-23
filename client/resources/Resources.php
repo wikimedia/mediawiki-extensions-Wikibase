@@ -20,6 +20,7 @@ return call_user_func( function() {
 			'class' => 'Wikibase\SiteModule'
 		),
 		'wikibase.client.page-move' => $moduleTemplate + array(
+			'position' => 'top',
 			'styles' => 'wikibase.client.page-move.css'
 		),
 		'wikibase.client.changeslist.css' => $moduleTemplate + array(
