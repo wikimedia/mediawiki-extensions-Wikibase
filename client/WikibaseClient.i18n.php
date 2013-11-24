@@ -1040,10 +1040,12 @@ $messages['de'] = array(
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
  * @author Gorizon
+ * @author Marmase
  * @author Mirzali
  */
 $messages['diq'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|vurnayış|vurnayışi}}',
+	'wikibase-dataitem' => 'Letey Wikidata',
 	'wikibase-editlinks' => 'Gırey bıvurne',
 	'wikibase-linkitem-input-site' => 'Zıwan:',
 	'wikibase-linkitem-input-page' => 'Pele:',
@@ -4219,6 +4221,7 @@ $messages['zh-hant'] = array(
 	'wikibase-client-desc' => 'Wikibase擴展客戶端',
 	'specialpages-group-wikibaseclient' => '維基數據客戶端',
 	'wikibase-after-page-move' => '您還可以[$1 更新]關聯的維基數據項，使其連結至移動後的頁面。',
+	'wikibase-after-page-move-queued' => '[$1 維基數據項]及之相關頁面將盡快更新。',
 	'wikibase-comment-add' => '一個維基數據項已被创建。',
 	'wikibase-comment-remove' => '關聯的維基數據項目已刪除。語言連結已移除。',
 	'wikibase-comment-linked' => '一個維基數據項已連結至此頁面。',
