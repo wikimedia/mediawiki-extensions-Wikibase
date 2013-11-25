@@ -196,6 +196,7 @@ class SiteLinkCommentCreator {
 		$params = array();
 
 		if ( in_array( $action, array( 'remove', 'restore' ) ) ) {
+			// Messages: wikibase-comment-remove, wikibase-comment-restore
 			$params['message'] = 'wikibase-comment-' . $action;
 		} elseif ( $diffOp instanceof \Diff\DiffOpAdd ) {
 			$params['message'] = 'wikibase-comment-linked';

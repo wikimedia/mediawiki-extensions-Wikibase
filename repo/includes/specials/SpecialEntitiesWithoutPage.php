@@ -129,8 +129,8 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private function setForm() {
 		$typeSelect = new XmlSelect( 'type', 'wb-entitieswithoutpage-type', $this->type );
 		$typeSelect->addOption( $this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text(), '' );
-		// item, property and query
 		foreach( $this->possibleTypes as $type ) {
+			// Messages: wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
 			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $type )->text(), $type );
 		}
 
