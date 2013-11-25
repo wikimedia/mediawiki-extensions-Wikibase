@@ -1122,10 +1122,18 @@ Parameters:
 * $1 is the number of qualifiers removed.',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Automatic edit summary when removing references. Parameters:
 * $3 is the number of references removed.',
-	'wikibase-item-summary-wbmergeitems-from' => 'Automatic edit summary when merging items. This summary is for the edit made to the item being merged TO. Parameters:
-* $3 is the item id of the item being merged from.',
-	'wikibase-item-summary-wbmergeitems-to' => 'Automatic edit summary when merging items. This summary is for the edit made to the item being merged FROM. Parameters:
-* $3 is the item id of the item being merged to.',
+	'wikibase-item-summary-wbmergeitems-from' => 'Automatic edit summary when merging items. This summary is for the edit made to the item being merged TO.
+
+Parameters:
+* $1 - (Unused)
+* $2 - (Unused)
+* $3 - the item id of the item being merged from',
+	'wikibase-item-summary-wbmergeitems-to' => 'Automatic edit summary when merging items. This summary is for the edit made to the item being merged FROM.
+
+Parameters:
+* $1 - (Unused)
+* $2 - (Unused)
+* $3 - the item id of the item being merged to',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
@@ -3207,6 +3215,11 @@ Vaše IP adresa bude zobrazena v historii této entity.',
 	'wikibase-setaliases-submit' => 'Nastavit aliasy',
 	'wikibase-setaliases-warning-remove' => 'Opravdu chcete odstranit všechny aliasy pro [[$1]]?',
 	'special-setsitelink' => 'Nastavení odkazu na článek',
+	'wikibase-setsitelink-site' => 'Zkratka webu:',
+	'wikibase-setsitelink-label' => 'Odkaz na článek:',
+	'wikibase-setsitelink-submit' => 'Nastavit odkaz na článek',
+	'wikibase-setsitelink-warning-remove' => 'Opravdu chcete odstranit odkaz na [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => '"$1" není platná zkratka webu. Příkladem správně zadané zkratky webu je "enwiki".',
 	'wikibase-setsitelink-add-failed' => 'Odkaz na článek se nepodařilo uložit.',
 	'wikibase-setsitelink-remove-failed' => 'Odkaz na článek se nepodařilo odstranit.',
 	'wikibase-setentity-id' => 'ID:',
@@ -3250,12 +3263,14 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'vše',
 	'wikibase-entitieswithoutlabel-submit' => 'Najít',
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ není platný kód jazyka.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" není platný druh entity.',
 	'special-itemswithoutsitelinks' => 'Položky bez odkazů na články',
 	'special-entitydata' => 'Data entity',
 	'wikibase-entitydata-not-found' => 'Žádná entita s ID $1 nebyla nalezena.',
 	'wikibase-entitydata-bad-revision' => 'Nelze zobrazit revizi $2 entity $1.',
 	'wikibase-entitydata-bad-id' => 'Chybné ID: $1',
 	'wikibase-entitydata-unsupported-format' => 'Toto rozhraní nepodporuje datový formát $1.',
+	'wikibase-entitydata-title' => 'Data entity',
 	'special-mylanguagefallbackchain' => 'Můj řetězec záložních jazyků',
 	'wikibase-mylanguagefallbackchain-text' => 'Řetězec záložních jazyků, který se použije při zobrazování štítků entit, je zobrazen níže.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Můžete jej upravit vložením <nowiki>{{#babel: }}</nowiki> do {{GENDER:$1|vaší}} [[Special:MyPage|uživatelské stránky]].',
@@ -3309,6 +3324,8 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Bylo změněno|Byla změněna}} vymezení',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Bylo odstraněno|Byla odstraněna}} vymezení',
 	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Odstraněna reference|Odstraněny reference}} z výroku',
+	'wikibase-item-summary-wbmergeitems-from' => "Sloučeno z položky '$3'",
+	'wikibase-item-summary-wbmergeitems-to' => "Sloučeno do položky '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-create' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-update' => 'Aktualizována vlastnost',
@@ -3355,8 +3372,9 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'action-item-override' => 'přepisovat položky', # Fuzzy
 	'action-item-create' => 'vytvářet položky',
 	'action-item-remove' => 'mazat položky',
+	'action-property-override' => 'přepisovat vlastnosti',
 	'action-property-create' => 'vytvořit vlastnosti',
-	'action-property-remove' => 'odstranit vlastnosti', # Fuzzy
+	'action-property-remove' => 'mazat vlastnosti',
 	'action-alias-update' => 'aktualizovat aliasy',
 	'action-alias-remove' => 'odstranit aliasy',
 	'action-sitelink-remove' => 'odstranit odkazy',
@@ -11811,7 +11829,7 @@ untuk mencari di mana set data itu.',
  */
 $messages['myv'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'Келесь:',
-	'wikibase-setentity-language' => 'Кель', # Fuzzy
+	'wikibase-setentity-language' => 'Келесь:',
 	'wikibase-entitieswithoutlabel-label-language' => 'Келесь:',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» аволь стандартонь келень код.',
 );
@@ -13103,6 +13121,8 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-setaliases-label' => 'Aliasy:',
 	'wikibase-setaliases-submit' => 'Ustaw aliasy',
 	'wikibase-setaliases-warning-remove' => 'Czy na pewno chcesz usunąć wszystkie aliasy dla [[$1]]?',
+	'special-setsitelink' => 'Ustaw link interwiki',
+	'wikibase-setsitelink-intro' => 'Ten formularz pozwala na dodanie linku do strony w danym elemencie. Należy podać identyfikator (np. Q23), kod języka (np. „plwiki”) oraz tytuł strony, którą chcesz dodać.',
 	'wikibase-setentity-id' => 'Identyfikator:',
 	'wikibase-setentity-language' => 'Język:',
 	'wikibase-setentity-invalid-langcode' => 'Identyfikator języka „$1” jest nieznany. Użyj identyfikatora języka, który jest znany w systemie, na przykład „pl”.',
@@ -13201,7 +13221,6 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-item-summary-wbsetqualifier-add' => 'Dodano {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Zmieniono {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Usunięto {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}',
-	'wikibase-item-summary-wbsetstatementrank' => "Zmieniono rangę deklaracji z '$3' na '$4'",
 	'wikibase-property-summary-wbcreate-new' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-create' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-update' => 'Zaktualizowano właściwość',
@@ -13240,35 +13259,35 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'content-model-wikibase-item' => 'Element Wikibase',
 	'content-model-wikibase-property' => 'właściwość Wikibase',
 	'content-model-wikibase-query' => 'Zapytanie Wikibase',
-	'right-item-override' => 'Nadpisywanie elementów',
+	'right-item-override' => 'Nadpisywanie elementów', # Fuzzy
 	'right-item-create' => 'Tworzenie elementów',
-	'right-item-remove' => 'Usuwanie elementów',
-	'right-property-override' => 'Nadpisywanie właściwości',
+	'right-item-remove' => 'Usuwanie elementów', # Fuzzy
+	'right-property-override' => 'Nadpisywanie właściwości', # Fuzzy
 	'right-property-create' => 'Tworzenie właściwości',
-	'right-property-remove' => 'Usuwanie właściwości',
+	'right-property-remove' => 'Usuwanie właściwości', # Fuzzy
 	'right-alias-remove' => 'Usuwanie aliasów',
 	'right-alias-update' => 'aktualizacja aliasów',
 	'right-sitelink-remove' => 'Usuwanie odnośników',
 	'right-sitelink-update' => 'Aktualizacja odnośników',
-	'right-linktitles-update' => 'Aktualizacja tytułów linków',
-	'right-label-remove' => 'Usuwanie etykiet',
+	'right-linktitles-update' => 'Aktualizacja tytułów linków', # Fuzzy
+	'right-label-remove' => 'Usuwanie etykiet', # Fuzzy
 	'right-label-update' => 'Aktualizacja etykiet',
-	'right-description-remove' => 'Usuwanie opisów',
+	'right-description-remove' => 'Usuwanie opisów', # Fuzzy
 	'right-description-update' => 'Aktualizacja opisów',
-	'action-item-override' => 'nadpisywania elementów',
+	'action-item-override' => 'nadpisywania elementów', # Fuzzy
 	'action-item-create' => 'tworzenia elementów',
-	'action-item-remove' => 'usuwania elementów',
-	'action-property-override' => 'nadpisywania właściwości',
+	'action-item-remove' => 'usuwania elementów', # Fuzzy
+	'action-property-override' => 'nadpisywania właściwości', # Fuzzy
 	'action-property-create' => 'tworzenia właściwości',
-	'action-property-remove' => 'usuwania właściwości',
+	'action-property-remove' => 'usuwania właściwości', # Fuzzy
 	'action-alias-update' => 'aktualizacji aliasów',
 	'action-alias-remove' => 'usuwania aliasów',
 	'action-sitelink-remove' => 'usuwania odnośników',
 	'action-sitelink-update' => 'aktualizowania odnośników',
-	'action-linktitles-update' => 'aktualizowania tytułów linków',
-	'action-label-remove' => 'usuwania etykiet',
+	'action-linktitles-update' => 'aktualizowania tytułów linków', # Fuzzy
+	'action-label-remove' => 'usuwania etykiet', # Fuzzy
 	'action-label-update' => 'aktualizacji etykiet',
-	'action-description-remove' => 'usuwania opisów',
+	'action-description-remove' => 'usuwania opisów', # Fuzzy
 	'action-description-update' => 'aktualizacji opisów',
 );
 

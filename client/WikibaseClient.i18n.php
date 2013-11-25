@@ -1045,7 +1045,7 @@ $messages['de'] = array(
  */
 $messages['diq'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|vurnayış|vurnayışi}}',
-	'wikibase-dataitem' => 'Letey Wikidata',
+	'wikibase-dataitem' => 'Leteyê Wikidata',
 	'wikibase-editlinks' => 'Gırey bıvurne',
 	'wikibase-linkitem-input-site' => 'Zıwan:',
 	'wikibase-linkitem-input-page' => 'Pele:',

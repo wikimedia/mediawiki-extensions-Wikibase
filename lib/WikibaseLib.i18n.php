@@ -739,6 +739,7 @@ $messages['cs'] = array(
 	'wikibase-validator-bad-url-scheme' => 'Nepodporovaný formát URL: $1',
 	'wikibase-validator-bad-http-url' => 'HTTP URL má nesprávný tvar: $1',
 	'wikibase-validator-bad-mailto-url' => 'URL mailto: má nesprávný tvar: $1',
+	'wikibase-validator-unknown-unit' => 'Neznámá jednotka: $1',
 	'datatypes-type-wikibase-item' => 'Položka',
 	'datatypes-type-commonsMedia' => 'Mediální soubor na Commons',
 	'version-wikibase' => 'Wikibase',
