@@ -182,7 +182,16 @@ class GetEntities extends ApiWikibase {
 		wfProfileIn( __METHOD__ );
 		$result = $this->getResult();
 		$props = $this->getPropsFromParams( $params );
-		$entityPath = array( 'entities', $entityId->getSerialization() );
+
+		// key should be numeric to get the correct behavior
+		// note that this setting depends upon "setIndexedTagName_internal"
+		// FIXME: if we get different kinds of entities at once, $entityId->getNumericId() may not be unique.
+		// NOTE see https://bugzilla.wikimedia.org/show_bug.cgi?id=57529
+		$entityPath = array(
+			'entities',
+			!$this->getResult()->getIsRawMode() ? $entityId->getSerialization() : $entityId->getNumericId()
+		);
+
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$entityContent = $entityContentFactory->getFromId( $entityId );
