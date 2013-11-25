@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_90a0cb3f",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T10:08:03Z",
+      "side": 1,
+      "message": "Most of the logic in this class is really generic for MediaWiki, not specific for Wikibase. Shouldn\u0027t core use such a class for formatting, so we could use subclassing for Wikibase?",
+      "revId": "2bfaae1e42aab8e9960595e3882043955dfe796c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_30f8df45",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T10:08:03Z",
+      "side": 1,
+      "message": "Better add the separators here explicitly",
+      "revId": "2bfaae1e42aab8e9960595e3882043955dfe796c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_50fb6344",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T10:08:03Z",
+      "side": 1,
+      "message": "I would prefer to keep the separators out of the functions for formatting the individual bits of information.",
+      "revId": "2bfaae1e42aab8e9960595e3882043955dfe796c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
