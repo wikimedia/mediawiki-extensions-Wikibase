@@ -123,6 +123,7 @@ call_user_func( function() {
 	$wgAPIModules['wbremovequalifiers']                 = 'Wikibase\Api\RemoveQualifiers';
 	$wgAPIModules['wbsetqualifier']                     = 'Wikibase\Api\SetQualifier';
 	$wgAPIModules['wbmergeitems']                       = 'Wikibase\Api\MergeItems';
+	$wgAPIModules['wbformatvalue']                      = 'Wikibase\Api\FormatSnakValue';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';
