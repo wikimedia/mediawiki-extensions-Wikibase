@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_10783bec",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:53:40Z",
+      "side": 1,
+      "message": "ResultBuilder should take care of this.",
+      "revId": "954aad6f884f97f61730ecc6e3b72b3816fdc927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_307b3fed",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:53:40Z",
+      "side": 1,
+      "message": "Would be nice to have ResultBuilder::addRevisionInfo( EntityRevision ) for this.",
+      "revId": "954aad6f884f97f61730ecc6e3b72b3816fdc927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_506ec32b",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:53:40Z",
+      "side": 1,
+      "message": "Please make a separate function for getting the list of languages",
+      "revId": "954aad6f884f97f61730ecc6e3b72b3816fdc927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_7071c70a",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:53:40Z",
+      "side": 1,
+      "message": "When? Where? How?",
+      "revId": "954aad6f884f97f61730ecc6e3b72b3816fdc927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_908c4b01",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:53:40Z",
+      "side": 1,
+      "message": "Please use a ResultBuilder",
+      "revId": "954aad6f884f97f61730ecc6e3b72b3816fdc927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
