@@ -111,6 +111,7 @@ return call_user_func( function() {
 		'Wikibase\Api\ModifyClaim' => 'includes/api/ModifyClaim.php',
 		'Wikibase\Api\ClaimModificationHelper' => 'includes/api/ClaimModificationHelper.php',
 		'Wikibase\Api\ResultBuilder' => 'includes/api/ResultBuilder.php',
+		'Wikibase\Api\FormatSnakValue' => 'includes/api/FormatSnakValue.php',
 
 		// includes/serializers
 		'Wikibase\Serializers\EntityRevisionSerializer' => 'includes/serializers/EntityRevisionSerializer.php',
