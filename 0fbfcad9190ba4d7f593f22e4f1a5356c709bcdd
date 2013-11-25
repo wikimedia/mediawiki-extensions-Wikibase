@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_6b6e7895",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T12:36:31Z",
+      "side": 1,
+      "message": "Id and Type should be in the \"checked\" section, right?...",
+      "revId": "0fbfcad9190ba4d7f593f22e4f1a5356c709bcdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_2b687083",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T12:36:31Z",
+      "side": 1,
+      "message": "The field isn\u0027t illegal, the value is invalid/inconsistent!",
+      "revId": "0fbfcad9190ba4d7f593f22e4f1a5356c709bcdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_eb0168ba",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T12:36:31Z",
+      "side": 1,
+      "message": "The field isn\u0027t illegal, the value is invalid/inconsistent!",
+      "revId": "0fbfcad9190ba4d7f593f22e4f1a5356c709bcdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
