@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_6bf558c7",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T12:46:30Z",
+      "side": 1,
+      "message": "Should use an EntityRevisionLookup. That would return EntityRevision objects, which also make it easy to record the revision ID.",
+      "revId": "a7625c0a3aeb6f51981c997dcfa1f40017b68241",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_4b197426",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T12:46:30Z",
+      "side": 1,
+      "message": "This relies on global state and does database queries. Can we please NOT do that?\nIf we want revision info in the output, use an EntityRevision object.\nEntityContent should really be avoided. That\u0027s just glue between the MediaWiki model and the Wikibase data model. Wikibase itself should not have need to use it (we still do for saving entities, but hopefully, that will go away soon).",
+      "revId": "a7625c0a3aeb6f51981c997dcfa1f40017b68241",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
