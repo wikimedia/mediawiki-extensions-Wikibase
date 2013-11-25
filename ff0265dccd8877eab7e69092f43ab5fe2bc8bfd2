@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_30245f07",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:42:00Z",
+      "side": 1,
+      "message": "Please make this a member and initialize it in the constructor. This way, we could override it with a mock service for testing, using a setter or injectServisesForTesting(...) tingy.",
+      "revId": "ff0265dccd8877eab7e69092f43ab5fe2bc8bfd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b0106fae",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:42:00Z",
+      "side": 1,
+      "message": "Please make this a member and initialize it in the constructor. This way, we could override it with a mock service for testing, using a setter or injectServisesForTesting(...) tingy.",
+      "revId": "ff0265dccd8877eab7e69092f43ab5fe2bc8bfd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_702ae7d8",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:42:00Z",
+      "side": 1,
+      "message": "Please make this a member and initialize it in the constructor. This way, we could override it with a mock service for testing, using a setter or injectServisesForTesting(...) tingy.",
+      "revId": "ff0265dccd8877eab7e69092f43ab5fe2bc8bfd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_5027e30d",
+        "filename": "repo/includes/api/SiteLinkTargetProvider.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-25T09:42:00Z",
+      "side": 1,
+      "message": "Perhaps this functionality could just go into SiteStore?",
+      "revId": "ff0265dccd8877eab7e69092f43ab5fe2bc8bfd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
