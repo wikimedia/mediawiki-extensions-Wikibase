@@ -141,6 +141,10 @@ class RepoLinker {
 	 */
 	public function getEntityUrl( EntityId $entityId ) {
 		$prefixedId = $entityId->getPrefixedId();
+		$namespacePrefix = $this->getNamespace( $entityId->getEntityType() );
+		if ( $namespacePrefix ) {
+			$prefixedId = $namespacePrefix . ':' . $prefixedId;
+		}
 
 		return $this->getPageUrl( $prefixedId );
 	}

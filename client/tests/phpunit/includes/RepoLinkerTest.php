@@ -157,13 +157,19 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				'<a class="plainlinks wb-entity-link" href="http://www.example.com/wiki/Q730">Q730</a>',
+				'<a class="plainlinks wb-entity-link" href="//example.com/wiki/Q730">Q730</a>',
+				$settings[1],
+				new ItemId( 'Q730' ),
+				array()
+			),
+			array(
+				'<a class="plainlinks wb-entity-link" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
 				array()
 			),
 			array(
-				'<a class="plainlinks wb-entity-link kittens" href="http://www.example.com/wiki/Q730">Q730</a>',
+				'<a class="plainlinks wb-entity-link kittens" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
 				array( 'kittens' )
@@ -185,9 +191,14 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				'http://www.example.com/wiki/Q730',
-				$settings[2],
+				'//example.com/wiki/Q730',
+				$settings[1],
 				new ItemId( 'Q730' )
+			),
+			array(
+				'http://www.example.com/wiki/Item:Q1234',
+				$settings[2],
+				new ItemId( 'Q1234' )
 			)
 		);
 	}
