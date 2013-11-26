@@ -109,7 +109,7 @@ class LinkTitles extends ApiWikibase {
 			$this->dieUsage( 'No common item detected, unable to link titles' , 'no-common-item' );
 		}
 
-		$this->resultBuilder->addSiteLinks( $return, 'entity' );
+		$this->getResultBuilder()->addSiteLinks( $return, 'entity' );
 		$status = $this->getAttemptSaveStatus( $itemContent, $summary, $flags );
 		$this->buildResult( $itemContent, $status );
 		wfProfileOut( __METHOD__ );
@@ -160,7 +160,7 @@ class LinkTitles extends ApiWikibase {
 			);
 		}
 
-		$this->resultBuilder->markSuccess( $status->isOK() );
+		$this->getResultBuilder()->markSuccess( $status->isOK() );
 	}
 
 	/**

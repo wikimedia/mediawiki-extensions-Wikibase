@@ -61,8 +61,8 @@ class CreateClaim extends ModifyClaim {
 		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
 
 		$this->saveChanges( $entityContent, $summary );
-		$this->resultBuilder->markSuccess();
-		$this->resultBuilder->addClaim( $claim );
+		$this->getResultBuilder()->markSuccess();
+		$this->getResultBuilder()->addClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}

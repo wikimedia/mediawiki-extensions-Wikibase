@@ -464,15 +464,15 @@ class EditEntity extends ModifyEntity {
 	 * @param Entity $entity
 	 */
 	protected function buildResult( Entity $entity ) {
-		$this->resultBuilder->addLabels( $entity->getLabels(), 'entity' );
-		$this->resultBuilder->addDescriptions( $entity->getDescriptions(), 'entity' );
-		$this->resultBuilder->addAliases( $entity->getAllAliases(), 'entity' );
+		$this->getResultBuilder()->addLabels( $entity->getLabels(), 'entity' );
+		$this->getResultBuilder()->addDescriptions( $entity->getDescriptions(), 'entity' );
+		$this->getResultBuilder()->addAliases( $entity->getAllAliases(), 'entity' );
 
 		if ( $entity instanceof Item ) {
-			$this->resultBuilder->addSiteLinks( $entity->getSimpleSiteLinks(), 'entity' );
+			$this->getResultBuilder()->addSiteLinks( $entity->getSimpleSiteLinks(), 'entity' );
 		}
 
-		$this->resultBuilder->addClaims( $entity->getClaims(), 'entity' );
+		$this->getResultBuilder()->addClaims( $entity->getClaims(), 'entity' );
 	}
 
 	/**

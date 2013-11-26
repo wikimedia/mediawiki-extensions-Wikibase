@@ -54,7 +54,7 @@ class RemoveQualifiers extends ModifyClaim {
 		}
 
 		$this->saveChanges( $entityContent, $summary );
-		$this->resultBuilder->markSuccess();
+		$this->getResultBuilder()->markSuccess();
 
 		wfProfileOut( __METHOD__ );
 	}
