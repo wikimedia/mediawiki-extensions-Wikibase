@@ -1,8 +1,8 @@
 <?php
 namespace Wikibase\Lib\Test;
 
-use DataValues\GlobeCoordinateValue;
 use DataValues\StringValue;
+use DataValues\QuantityValue;
 use DataValues\TimeValue;
 use Language;
 use ValueFormatters\FormatterOptions;
@@ -11,7 +11,6 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityFactory;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -76,6 +75,10 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			ValueFormatter::OPT_LANG => 'en',
 		) );
 
+		$optionsDe = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => 'de',
+		) );
+
 		return array(
 			'plain url' => array(
 				SnakFormatter::FORMAT_PLAIN,
@@ -100,6 +103,12 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				$options,
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'Label for Q5' // compare mock object created in newBuilders()
+			),
+			'localized quantity' => array(
+				SnakFormatter::FORMAT_WIKI,
+				$optionsDe,
+				QuantityValue::newFromNumber( '+123456.789' ),
+				'123.456,789'
 			),
 		);
 	}
@@ -178,6 +187,7 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			'VT:time',
 			'VT:globecoordinate',
 			'VT:wikibase-entityid',
+			'VT:quantity',
 		);
 
 		// check for all the required types, that is, the ones supported by the fallback format
