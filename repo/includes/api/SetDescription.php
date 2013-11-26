@@ -42,7 +42,7 @@ class SetDescription extends ModifyLangAttribute {
 		$this->getChangeOp( $params )->apply( $entity, $summary );
 		$descriptions = array( $language => ( $entity->getDescription( $language ) !== false ) ? $entity->getDescription( $language ) : "" );
 
-		$this->resultBuilder->addDescriptions( $descriptions, 'entity' );
+		$this->getResultBuilder()->addDescriptions( $descriptions, 'entity' );
 
 		wfProfileOut( __METHOD__ );
 		return $summary;

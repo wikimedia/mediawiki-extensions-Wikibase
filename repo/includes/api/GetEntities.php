@@ -71,7 +71,7 @@ class GetEntities extends ApiWikibase {
 			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 		}
 
-		$this->resultBuilder->markSuccess( 1 );
+		$this->getResultBuilder()->markSuccess( 1 );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -128,7 +128,7 @@ class GetEntities extends ApiWikibase {
 		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
 		$siteStore = SiteSQLStore::newInstance();
 		return new ItemByTitleHelper(
-			$this->resultBuilder,
+			$this->getResultBuilder(),
 			$siteLinkCache,
 			$siteStore,
 			$this->stringNormalizer
@@ -140,7 +140,7 @@ class GetEntities extends ApiWikibase {
 	 */
 	private function addMissingItemstoResult( $missingItems ){
 		foreach( $missingItems as $missingItem ) {
-			$this->resultBuilder->addMissingEntity( $missingItem );
+			$this->getResultBuilder()->addMissingEntity( $missingItem );
 		}
 	}
 
@@ -180,7 +180,7 @@ class GetEntities extends ApiWikibase {
 
 		$entityContent = $entityContentFactory->getFromId( $entityId );
 		if ( is_null( $entityContent ) ) {
-			$this->resultBuilder->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
+			$this->getResultBuilder()->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
 			return;
 		}
 

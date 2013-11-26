@@ -55,7 +55,7 @@ class GetClaims extends ApiWikibase {
 		}
 
 		$claims = $this->getClaims( $entity, $claimGuid );
-		$this->resultBuilder->addClaims( $claims, null );
+		$this->getResultBuilder()->addClaims( $claims, null );
 
 		wfProfileOut( __METHOD__ );
 	}
