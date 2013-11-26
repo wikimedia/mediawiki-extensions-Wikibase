@@ -183,7 +183,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
-		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
+		if ( $engine == 'lua' && Settings::get( 'allowDataTransclusion' ) === true ) {
 			$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
 		}
 
