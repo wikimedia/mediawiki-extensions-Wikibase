@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use UserBlockedError;
 use UserInputException;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EditEntity;
