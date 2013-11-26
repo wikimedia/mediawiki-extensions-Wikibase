@@ -6,6 +6,7 @@ use Wikibase\ChangeOp\ChangeOpSiteLink;
 use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Settings;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -96,7 +97,7 @@ class SetSiteLink extends ModifyEntity {
 			return new ChangeOpSiteLink( $linksite, null );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
-			$sites = $this->getSiteLinkTargetSites();
+			$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
 			$site = $sites->getSite( $linksite );
 
 			if ( $site === false ) {
@@ -137,6 +138,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
+		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
 		return array_merge(
 			parent::getAllowedParams(),
 			parent::getAllowedParamsForId(),
@@ -144,7 +146,7 @@ class SetSiteLink extends ModifyEntity {
 			parent::getAllowedParamsForEntity(),
 			array(
 				'linksite' => array(
-					ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
+					ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 					ApiBase::PARAM_REQUIRED => true,
 				),
 				'linktitle' => array(
