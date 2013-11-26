@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_4d7861ed",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-26T17:15:54Z",
+      "side": 1,
+      "message": "Again due to the current need for Title in the output simply having the Entity is not enough and we still need to EntityContent at this time",
+      "parentUuid": "0ee75395_6bf558c7",
+      "revId": "a7625c0a3aeb6f51981c997dcfa1f40017b68241",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_4b197426",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-25T12:46:30Z",
       "side": 1,
       "message": "This relies on global state and does database queries. Can we please NOT do that?\nIf we want revision info in the output, use an EntityRevision object.\nEntityContent should really be avoided. That\u0027s just glue between the MediaWiki model and the Wikibase data model. Wikibase itself should not have need to use it (we still do for saving entities, but hopefully, that will go away soon).",
+      "revId": "a7625c0a3aeb6f51981c997dcfa1f40017b68241",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_cd15919e",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-26T17:15:54Z",
+      "side": 1,
+      "message": "EntityRevision has no access to the Title, the Title is currently part of the API output and removing it would be a breaking change.\nNaturally I am all for removing this totally from the output in the future but we cant do this currently without potentially breaking things :/",
+      "parentUuid": "0ee75395_4b197426",
       "revId": "a7625c0a3aeb6f51981c997dcfa1f40017b68241",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
