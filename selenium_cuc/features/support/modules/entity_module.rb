@@ -6,7 +6,7 @@
 #
 # page object for entity page
 
-#require 'ruby_selenium'
+#require "ruby_selenium"
 
 module EntityPage
   include PageObject
@@ -121,14 +121,14 @@ module EntityPage
 
   # creates a random string
   def generate_random_string(length=8)
-    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
-    string = ''
+    chars = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+    string = ""
     length.times { string << chars[rand(chars.size)] }
     return string
   end
 
   def set_copyright_ack_cookie
-    cookie = "$.cookie( 'wikibase.acknowledgedcopyrightversion', 'wikibase-1', { 'expires': null, 'path': '/' } );"
+    cookie = "$.cookie( 'wikibase.acknowledgedcopyrightversion', 'wikibase-1', { 'expires': null, 'path': '/'' } );"
     @browser.execute_script(cookie)
   end
 
