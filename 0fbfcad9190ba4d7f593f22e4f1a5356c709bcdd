@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_4d4f41c1",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-26T17:21:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_6b6e7895",
+      "revId": "0fbfcad9190ba4d7f593f22e4f1a5356c709bcdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_2b687083",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_edcdf535",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-26T17:21:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_2b687083",
+      "revId": "0fbfcad9190ba4d7f593f22e4f1a5356c709bcdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_eb0168ba",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2013-11-25T12:36:31Z",
       "side": 1,
       "message": "The field isn\u0027t illegal, the value is invalid/inconsistent!",
+      "revId": "0fbfcad9190ba4d7f593f22e4f1a5356c709bcdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_cdd231d5",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-26T17:21:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_eb0168ba",
       "revId": "0fbfcad9190ba4d7f593f22e4f1a5356c709bcdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
