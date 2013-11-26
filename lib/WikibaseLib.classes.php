@@ -126,6 +126,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\UnDeserializableValueFormatter' => 'includes/formatters/UnDeserializableValueFormatter.php',
 		'Wikibase\Lib\WikibaseSnakFormatterBuilders' => 'includes/formatters/WikibaseSnakFormatterBuilders.php',
 		'Wikibase\Lib\WikibaseValueFormatterBuilders' => 'includes/formatters/WikibaseValueFormatterBuilders.php',
+		'Wikibase\Lib\MediaWikiNumberLocalizer' => 'includes/formatters/MediaWikiNumberLocalizer.php',
 
 		// includes/IO
 		'Wikibase\IO\LineReader' => 'includes/IO/LineReader.php',

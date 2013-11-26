@@ -2,6 +2,7 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
+use DataValues\QuantityValue;
 use DataValues\TimeValue;
 use Language;
 use ValueFormatters\FormatterOptions;
@@ -74,6 +75,10 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			ValueFormatter::OPT_LANG => 'en',
 		) );
 
+		$optionsDe = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => 'de',
+		) );
+
 		return array(
 			'plain url' => array(
 				SnakFormatter::FORMAT_PLAIN,
@@ -104,6 +109,12 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				$options,
 				new StringValue( '<http://acme.com/>' ),
 				'&lt;http://acme.com/&gt;'
+			),
+			'localized quantity' => array(
+				SnakFormatter::FORMAT_WIKI,
+				$optionsDe,
+				QuantityValue::newFromNumber( '+123456.789' ),
+				'123.456,789'
 			),
 		);
 	}
@@ -182,6 +193,7 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			'VT:time',
 			'VT:globecoordinate',
 			'VT:wikibase-entityid',
+			'VT:quantity',
 		);
 
 		// check for all the required types, that is, the ones supported by the fallback format

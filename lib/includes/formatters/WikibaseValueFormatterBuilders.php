@@ -8,10 +8,8 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityLookup;
-use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\LanguageWithConversion;
 
 /**
  * Defines the formatters for DataValues supported by Wikibase.
@@ -479,7 +477,8 @@ class WikibaseValueFormatterBuilders {
 	 */
 	protected static function newQuantityFormatter( FormatterOptions $options, $builders ) {
 		//TODO: use a builder for this DecimalFormatter
-		$decimalFormatter = new DecimalFormatter( $options );
+		$localizer = new MediaWikiNumberLocalizer();
+		$decimalFormatter = new DecimalFormatter( $options, $localizer );
 		return new QuantityFormatter( $decimalFormatter, $options );
 	}
 
