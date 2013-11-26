@@ -8,7 +8,7 @@
 
 Given /^I am on an item page$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
-  item = create_new_entity(item_data, 'item')
+  item = create_new_entity(item_data, "item")
   @item_under_test = item
   on(ItemPage).navigate_to_entity item["url"]
 end
@@ -31,7 +31,7 @@ end
 
 Given /^I am on an item page with empty label and description$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + '' + '"}},"descriptions":{"en":{"language":"en","value":"' + '' + '"}}}'
-  item = create_new_entity(item_data, 'item')
+  item = create_new_entity(item_data, "item")
   @item_under_test = item
   on(ItemPage).navigate_to_entity item["url"]
 end

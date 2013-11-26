@@ -32,7 +32,7 @@ When /^I click the label save button$/ do
   end
 end
 
-When /^I enter '(.+)' as label$/ do |value|
+When /^I enter "(.+)" as label$/ do |value|
   on(ItemPage) do |page|
     page.labelInputField_element.clear
     page.labelInputField = value
@@ -40,7 +40,7 @@ When /^I enter '(.+)' as label$/ do |value|
 end
 
 When /^I enter a long string as label$/ do
-  step "I enter 'looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong' as label"
+  step 'I enter "looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong" as label'
 end
 
 Then /^Label edit button should be there$/ do
@@ -104,7 +104,7 @@ end
 Then /^Entity id should be displayed next to the label$/ do
   on(ItemPage) do |page|
       page.entityIdSpan_element.visible?.should be_true
-      page.entityIdSpan.sub(/[()]/, '') == @item_under_test["label"]
+      page.entityIdSpan.sub(/[()]/, "") == @item_under_test["label"]
     end
 end
 
