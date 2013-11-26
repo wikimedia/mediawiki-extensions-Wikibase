@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_0d60199f",
+        "filename": "repo/includes/api/FormatSnakValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-26T16:08:11Z",
+      "side": 1,
+      "message": "an example or two would be great [\u003d",
+      "revId": "6945172546698b12c61364f735d64c00f5a7cefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_2d5bddfe",
+        "filename": "repo/includes/api/FormatSnakValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-26T16:08:11Z",
+      "side": 1,
+      "message": "dont need this function per the getHelpUrls in the ApiWikibase class which will automatically point us to mediawiki.org",
+      "revId": "6945172546698b12c61364f735d64c00f5a7cefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
