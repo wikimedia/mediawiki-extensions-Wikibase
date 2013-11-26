@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_9897c993",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-26T18:19:30Z",
+      "side": 1,
+      "message": "It still says \"Illegal field\" in the description...",
+      "revId": "99967129c412c29f3dddce7b9cb48d752951df37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
