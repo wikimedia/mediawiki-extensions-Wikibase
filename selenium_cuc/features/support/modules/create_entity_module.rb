@@ -13,6 +13,6 @@ module CreateEntityPage
   text_field(:createEntityLabelField, id: "wb-newentity-label")
   text_field(:createEntityDescriptionField, id: "wb-newentity-description")
   button(:createEntitySubmit, id: "wb-newentity-submit")
-  div(:ipWarning, xpath: "//div[@id='mw-content-text']/div[contains(@class, 'warning')]")
+  div(:ipWarning, xpath: "//div[@id=\"mw-content-text\"]/div[contains(@class, \"warning\")]")
 
 end

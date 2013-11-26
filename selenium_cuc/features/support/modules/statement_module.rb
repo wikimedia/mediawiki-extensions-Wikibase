@@ -19,7 +19,7 @@ module StatementPage
   a(:saveStatementDisabled, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
   a(:cancelStatement, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:cancelStatementDisabled, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
-  textarea(:statementValueInput, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'valueview-input')]")
+  textarea(:statementValueInput, xpath: "//div[contains(@class, \"wb-claimlistview\")]//input[contains(@class, \"valueview-input\")]")
   span(:statementHelpField, :css => "div.wb-claimlistview span.mw-help-field-hint")
   text_field(:statementValueInputField, class: "valueview-input")
 

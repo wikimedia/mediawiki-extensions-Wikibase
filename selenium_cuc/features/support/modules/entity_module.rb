@@ -6,7 +6,7 @@
 #
 # page object for entity page
 
-#require 'ruby_selenium'
+#require "ruby_selenium"
 
 module EntityPage
   include PageObject
@@ -23,11 +23,11 @@ module EntityPage
   # ***** ACCESSORS *****
   # label UI
   h1(:mwFirstHeading, id: "firstHeading")
-  h1(:firstHeading, xpath: "//h1[contains(@class, 'wb-firstHeading')]")
+  h1(:firstHeading, xpath: "//h1[contains(@class, \"wb-firstHeading\")]")
   h1(:uiPropertyEdittool, class: "wb-ui-propertyedittool")
-  span(:entityLabelSpan, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span")
-  span(:entityIdSpan, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span[contains(@class, 'wb-value-supplement')]")
-  text_field(:labelInputField, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span/input")
+  span(:entityLabelSpan, xpath: "//h1[contains(@class, \"wb-firstHeading\")]/span/span")
+  span(:entityIdSpan, xpath: "//h1[contains(@class, \"wb-firstHeading\")]/span/span[contains(@class, \"wb-value-supplement\")]")
+  text_field(:labelInputField, xpath: "//h1[contains(@class, \"wb-firstHeading\")]/span/span/input")
   a(:editLabelLink, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:editLabelLinkDisabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
   a(:saveLabelLink, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
@@ -36,8 +36,8 @@ module EntityPage
   a(:cancelLabelLinkDisabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
 
   # description UI
-  span(:entityDescriptionSpan, xpath: "//div[contains(@class, 'wb-ui-descriptionedittool')]/span[contains(@class, 'wb-property-container-value')]/span")
-  text_field(:descriptionInputField, xpath: "//div[contains(@class, 'wb-ui-descriptionedittool')]/span[contains(@class, 'wb-property-container-value')]/span/input")
+  span(:entityDescriptionSpan, xpath: "//div[contains(@class, \"wb-ui-descriptionedittool\")]/span[contains(@class, \"wb-property-container-value\")]/span")
+  text_field(:descriptionInputField, xpath: "//div[contains(@class, \"wb-ui-descriptionedittool\")]/span[contains(@class, \"wb-property-container-value\")]/span/input")
   a(:editDescriptionLink, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:editDescriptionLinkDisabled, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
   a(:saveDescriptionLink, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
@@ -51,7 +51,7 @@ module EntityPage
   li(:editTab, id: "ca-edit")
 
   # spinner
-  div(:entitySpinner, xpath: "//div[contains(@class, 'wb-entity-spinner')]")
+  div(:entitySpinner, xpath: "//div[contains(@class, \"wb-entity-spinner\")]")
 
   # tooltips & error tooltips
   div(:wbTooltip, class: "tipsy-inner")
@@ -60,7 +60,7 @@ module EntityPage
   a(:wbErrorDetailsLink, class: "wikibase-wbtooltip-error-details-link")
 
   # mw notifications
-  div(:mwNotificationContent, xpath: "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
+  div(:mwNotificationContent, xpath: "//div[@id=\"mw-notification-area\"]/div/div[contains(@class, \"mw-notification-content\")]")
 
   # ***** METHODS *****
   def navigate_to_entity url
@@ -121,19 +121,19 @@ module EntityPage
 
   # creates a random string
   def generate_random_string(length=8)
-    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
-    string = ''
+    chars = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+    string = ""
     length.times { string << chars[rand(chars.size)] }
     return string
   end
 
   def set_copyright_ack_cookie
-    cookie = "$.cookie( 'wikibase.acknowledgedcopyrightversion', 'wikibase-1', { 'expires': null, 'path': '/' } );"
+    cookie = "$.cookie( \"wikibase.acknowledgedcopyrightversion\", \"wikibase-1\", { \"expires\": null, \"path\": \"/\"\" } );"
     @browser.execute_script(cookie)
   end
 
   def set_noanonymouseditwarning_cookie
-    cookie = "$.cookie( 'wikibase-no-anonymouseditwarning', '1', { 'expires': null, 'path': '/' } );"
+    cookie = "$.cookie( \"wikibase-no-anonymouseditwarning\", \"1\", { \"expires\": null, \"path\": \"/\" } );"
     @browser.execute_script(cookie)
   end
 end
