@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_70ac2733",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-27T13:34:37Z",
+      "side": 1,
+      "message": "perhaps some parts of the code can be moved to core, at some point, but not yet :)",
+      "parentUuid": "0ee75395_90a0cb3f",
+      "revId": "2bfaae1e42aab8e9960595e3882043955dfe796c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_30f8df45",
         "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
         "patchSetId": 8
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_f04ef79a",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-27T13:34:37Z",
+      "side": 1,
+      "message": "moved the timestamp one out.  for user links, the separators are part of the formatting specific to that bit of info.",
+      "parentUuid": "0ee75395_30f8df45",
+      "revId": "2bfaae1e42aab8e9960595e3882043955dfe796c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_50fb6344",
         "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
         "patchSetId": 8
@@ -47,6 +83,24 @@
       "writtenOn": "2013-11-25T10:08:03Z",
       "side": 1,
       "message": "I would prefer to keep the separators out of the functions for formatting the individual bits of information.",
+      "revId": "2bfaae1e42aab8e9960595e3882043955dfe796c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d053f341",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-27T13:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_50fb6344",
       "revId": "2bfaae1e42aab8e9960595e3882043955dfe796c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
