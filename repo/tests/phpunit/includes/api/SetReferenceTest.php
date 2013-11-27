@@ -42,25 +42,28 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	public function setUp() {
 		static $hasProperties = false;
 		if ( !$hasProperties ) {
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( new PropertyId( 'P42' ) );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
-
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( new PropertyId( 'P43' ) );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
-
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( new PropertyId( 'P66' ) );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
+			$this->createProperty( 1 );
+			$this->createProperty( 2 );
+			$this->createProperty( 3 );
+			$this->createProperty( 42 );
+			$this->createProperty( 43 );
+			$this->createProperty( 66 );
 
 			$hasProperties = true;
 		}
 
 		parent::setUp();
+	}
+
+	/**
+	 * @param int $id
+	 * @param string $dataTypeId
+	 */
+	public function createProperty( $id, $dataTypeId = 'string' ) {
+		$prop = PropertyContent::newEmpty();
+		$prop->getEntity()->setId( $id );
+		$prop->getEntity()->setDataTypeId( $dataTypeId );
+		$prop->save( 'testing' );
 	}
 
 	// TODO: clean this up so more of the input space can easily be tested
@@ -133,6 +136,26 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		);
 	}
 
+	public function testRequestWithInvalidProperty() {
+		$item = Item::newEmpty();
+		$content = new ItemContent( $item );
+		$content->save( '', null, EDIT_NEW );
+
+		// Create a statement to act upon:
+		$statement = $item->newClaim( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid(
+			$item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
+		);
+
+		$item->addClaim( $statement );
+
+		$content->save( '' );
+
+		$reference = new Reference( new SnakList( array( new PropertySomeValueSnak( 9999 ) ) ) );
+
+		$this->makeInvalidRequest( $statement->getGuid(), null, $reference, 'invalid-snak-value' );
+	}
+
 	public function testSettingIndex() {
 		$item = Item::newEmpty();
 		$content = new ItemContent( $item );
@@ -202,7 +225,12 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		return $serializedReference;
 	}
 
-	protected function makeInvalidRequest( $statementGuid, $referenceHash, Reference $reference ) {
+	protected function makeInvalidRequest(
+		$statementGuid,
+		$referenceHash,
+		Reference $reference,
+		$expectedErrorCode = 'no-such-reference'
+	) {
 		$serializedReference = $this->serializeReference( $reference );
 
 		$params = $this->generateRequestParams( $statementGuid, $referenceHash, $serializedReference );
@@ -212,7 +240,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
 		}
 		catch ( UsageException $e ) {
-			$this->assertEquals( 'no-such-reference', $e->getCodeString(), 'Invalid request raised correct error' );
+			$this->assertEquals( $expectedErrorCode, $e->getCodeString(), 'Invalid request raised correct error' );
 		}
 	}
 
@@ -268,10 +296,13 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$params = array(
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
-			'reference' => $referenceHash,
 			'snaks' => FormatJson::encode( $serializedReference['snaks'] ),
 			'snaks-order' => FormatJson::encode( $serializedReference['snaks-order'] ),
 		);
+
+		if( !is_null( $referenceHash ) ) {
+			$params['reference'] = $referenceHash;
+		}
 
 		if( !is_null( $index ) ) {
 			$params['index'] = $index;

@@ -154,13 +154,15 @@ class SetReference extends ModifyClaim {
 		} catch( InvalidArgumentException $invalidArgumentException ) {
 			// Handle Snak instantiation failures
 			$this->dieUsage(
-				'Failed to get reference from reference Serialization ' . $invalidArgumentException->getMessage(),
-				'invalid-json'
+				'Failed to get reference from reference Serialization '
+					. $invalidArgumentException->getMessage(),
+				'snak-instantiation-failure'
 			);
 		} catch( OutOfBoundsException $outOfBoundsException ) {
 			$this->dieUsage(
-				'Failed to get reference from reference Serialization ' . $outOfBoundsException->getMessage(),
-				'invalid-json'
+				'Failed to get reference from reference Serialization '
+					. $outOfBoundsException->getMessage(),
+				'snak-instantiation-failure'
 			);
 		}
 
