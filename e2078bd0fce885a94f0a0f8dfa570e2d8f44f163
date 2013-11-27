@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ee75395_1ba3b040",
+        "filename": "selenium_cuc/features/step_definitions/entity_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Before this gets merged in, it should be tested.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_fb67ec20",
+        "filename": "selenium_cuc/features/step_definitions/entity_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "The same comment as above.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_db6c2808",
+        "filename": "selenium_cuc/features/support/env.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_5b7818bf",
         "filename": "selenium_cuc/features/support/modules/alias_module.rb",
         "patchSetId": 2
@@ -13,6 +64,210 @@
       "writtenOn": "2013-11-27T09:54:28Z",
       "side": 1,
       "message": "Having to escape the double-quote here, makes the readability of those complicated xpath and css-selectors even worse.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_bb7164df",
+        "filename": "selenium_cuc/features/support/modules/alias_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted. (Applies to the entire file.)",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_9b76a0d4",
+        "filename": "selenium_cuc/features/support/modules/create_entity_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_3b8554a0",
+        "filename": "selenium_cuc/features/support/modules/entity_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "This is good.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_7b7bdcbd",
+        "filename": "selenium_cuc/features/support/modules/entity_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "The above two lines (and the first change at the top of the file) are the only thing that should remain in this file, for the rest of the file single quotes inside double quotes make sense.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_db530842",
+        "filename": "selenium_cuc/features/support/modules/entity_selector_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted. (Applies to the entire file.)",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_9b4d809e",
+        "filename": "selenium_cuc/features/support/modules/qualifiers_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted. (Applies to the entire file.)",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_7b62bc07",
+        "filename": "selenium_cuc/features/support/modules/reference_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted. (Applies to the entire file.)",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_5b5ff844",
+        "filename": "selenium_cuc/features/support/modules/sitelink_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted. (Applies to the entire file.)",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_3b5c344e",
+        "filename": "selenium_cuc/features/support/modules/statement_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_1b59705d",
+        "filename": "selenium_cuc/features/support/modules/uls_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "Here single quotes inside double quotes make sense, so this should be reverted. (Applies to the entire file.)",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_db3ae8e3",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "This should be tested before merging.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_9b446070",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T10:00:08Z",
+      "side": 1,
+      "message": "This should be tested before merging.",
       "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
