@@ -16,6 +16,24 @@
       "revId": "5644ecaae571a0ce90b2849020345c5d4ff408a3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d99b101a",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T16:19:00Z",
+      "side": 1,
+      "message": "I eated it! nomnomnom...",
+      "parentUuid": "0ee75395_3ea302aa",
+      "revId": "5644ecaae571a0ce90b2849020345c5d4ff408a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
