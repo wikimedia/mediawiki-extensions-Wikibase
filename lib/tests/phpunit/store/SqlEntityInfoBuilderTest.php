@@ -40,6 +40,7 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';
+		$this->tablesUsed[] = 'wb_entity_per_page';
 
 		$this->insertRows(
 			'wb_terms',
@@ -79,6 +80,16 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 			array(
 				array( 2, 'type2', '{"type":"type2"}' ),
 				array( 3, 'type3', '{"type":"type3"}' ),
+			) );
+
+		$this->insertRows(
+			'wb_entity_per_page',
+			array( 'epp_entity_type', 'epp_entity_id', 'epp_page_id' ),
+			array(
+				array( Item::ENTITY_TYPE, 1, 1001 ),
+				array( Item::ENTITY_TYPE, 2, 1002 ),
+				array( Property::ENTITY_TYPE, 2, 2002 ),
+				array( Property::ENTITY_TYPE, 3, 2003 ),
 			) );
 	}
 
@@ -274,5 +285,54 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
 		}
+	}
+
+	public function provideRemoveMissing() {
+		return array(
+			array(
+				array(),
+				array()
+			),
+
+			array(
+				array(
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				),
+				array(
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				),
+			),
+
+			array(
+				array(
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+				),
+				array()
+			),
+
+			array(
+				array(
+					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE ),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+					'P7' => array( 'id' => 'P7', 'type' => Property::ENTITY_TYPE ),
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				),
+				array(
+					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE ),
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideRemoveMissing
+	 */
+	public function testRemoveMissing( array $entityInfo, array $expected = null ) {
+		$builder = $this->newEntityInfoBuilder();
+
+		$builder->removeMissing( $entityInfo );
+
+		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
 }
