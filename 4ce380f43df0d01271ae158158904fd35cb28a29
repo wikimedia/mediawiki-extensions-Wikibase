@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_6c92fd01",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-11-27T23:07:27Z",
+      "side": 1,
+      "message": "Agree with Hoo (and wondering how I overlooked this). This goes for both comments.",
+      "revId": "4ce380f43df0d01271ae158158904fd35cb28a29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_2c5515c6",
         "filename": "repo/includes/specials/SpecialSetSiteLink.php",
         "patchSetId": 1
