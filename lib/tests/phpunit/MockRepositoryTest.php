@@ -604,4 +604,50 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->setExpectedException( 'Wikibase\Lib\PropertyNotFoundException' );
 		$this->repo->getDataTypeIdForProperty( new PropertyId( 'P3645' ) );
 	}
+
+	public function provideRemoveMissing() {
+		return array(
+			array(
+				array(),
+				array()
+			),
+
+			array(
+				array(
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				),
+				array(
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				),
+			),
+
+			array(
+				array(
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+				),
+				array()
+			),
+
+			array(
+				array(
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+					'P7' => array( 'id' => 'P7', 'type' => Property::ENTITY_TYPE ),
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				),
+				array(
+					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideRemoveMissing
+	 */
+	public function testRemoveMissing( array $entityInfo, array $expected = null ) {
+		$this->setupGetEntities();
+		$this->repo->removeMissing( $entityInfo );
+
+		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
+	}
 }

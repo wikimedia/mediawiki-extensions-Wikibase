@@ -42,4 +42,12 @@ interface EntityInfoBuilder {
 	 *        with the key being the entity's ID. NOTE: This array will be updated!
 	 */
 	public function addDataTypes( array &$entityInfo );
+
+	/**
+	 * Removes entries for non-existent Entities from $entityInfo.
+	 *
+	 * @param array $entityInfo a map of strings to arrays, each array representing an entity,
+	 *        with the key being the entity's ID. NOTE: This array will be updated!
+	 */
+	public function removeMissing( array &$entityInfo );
 }

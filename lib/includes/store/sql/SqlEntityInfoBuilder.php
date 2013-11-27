@@ -39,6 +39,11 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	protected $propertyInfoTable;
 
 	/**
+	 * @var string
+	 */
+	protected $entityPerPageTable;
+
+	/**
 	 * @var EntityIdParser
 	 */
 	protected $idParser;
@@ -61,6 +66,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 
 		$this->termTable = 'wb_terms';
 		$this->propertyInfoTable = 'wb_property_info';
+		$this->entityPerPageTable = 'wb_entity_per_page';
 	}
 
 	/**
@@ -101,7 +107,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 			/* @var EntityId $id */
 			$id = $this->idParser->parse( $prefixedId );
 			$type = $id->getEntityType();
-			$ids[$type][] = $id->getNumericId();
+			$ids[$type][$prefixedId] = $id->getNumericId();
 		}
 
 		return $ids;
@@ -135,9 +141,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * Adds terms (like labels and/or descriptions and/or aliases) to the entity records in
-	 * $entityInfo. If no such terms are found for an entity, the respective field in the
-	 * entity records is set to array().
+	 * @see EntityInfoBuilder::addTerms()
 	 *
 	 * @param array $entityInfo a map of strings to arrays, each array representing an entity,
 	 *        with the key being the entity's ID. NOTE: This array will be updated!
@@ -271,8 +275,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * Adds property data types to the entries in $entityInfo. Missing Properties
-	 * will have their datatype field set to null. Other entities remain unchanged.
+	 * @see EntityInfoBuilder::addDataTypes()
 	 *
 	 * @param array $entityInfo a map of strings to arrays, each array representing an entity,
 	 *        with the key being the entity's ID. NOTE: This array will be updated!
@@ -329,5 +332,70 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 
 			$entityInfo[$key]['datatype'] = $row->pi_type;
 		}
+	}
+
+	/**
+	 * Adds property data types to the entries in $entityInfo. Missing Properties
+	 * will have their datatype field set to null. Other entities remain unchanged.
+	 *
+	 * @param array $entityInfo a map of strings to arrays, each array representing an entity,
+	 *        with the key being the entity's ID. NOTE: This array will be updated!
+	 */
+	public function removeMissing( array &$entityInfo ) {
+		wfProfileIn( __METHOD__ );
+
+		$entityIdsByType = $this->getNumericEntityIds( $entityInfo );
+
+		//NOTE: we make one DB query per entity type, so we can take advantage of the
+		//      database index on the epp_entity_type field.
+		foreach ( $entityIdsByType as $type => $idsForType ) {
+			$pageIds = $this->getPageIdsForEntities( $type, $idsForType );
+			$missingNumericIds = array_diff( $idsForType, array_keys( $pageIds ) );
+
+			// get the missing prefixed ids based on the missing numeric ids
+			$numericToPrefixed = array_flip( $idsForType );
+			$missingPrefixedIds = array_intersect_key( $numericToPrefixed, array_flip( array_values( $missingNumericIds ) ) );
+
+			// strip missing stuff from $entityInfo
+			$entityInfo = array_diff_key( $entityInfo, array_flip( $missingPrefixedIds ) );
+		}
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Creates a mapping from the given entity IDs to the corresponding page IDs.
+	 *
+	 * @param string $entityType
+	 * @param array $entityIds
+	 *
+	 * @return array A map of (numeric) entity IDs to page ids.
+	 */
+	private function getPageIdsForEntities( $entityType, $entityIds ) {
+		wfProfileIn( __METHOD__ );
+
+		$pageIds = array();
+
+		$dbw = $this->getConnection( DB_SLAVE );
+
+		$res = $dbw->select(
+			$this->entityPerPageTable,
+			array( 'epp_entity_type', 'epp_entity_id', 'epp_page_id' ),
+			array(
+				'epp_entity_type' => $entityType,
+				'epp_entity_id' => $entityIds,
+			),
+			__METHOD__
+		);
+
+		foreach ( $res as $row ) {
+			$pageIds[$row->epp_entity_id] = $row->epp_page_id;
+		}
+
+		$this->releaseConnection( $dbw );
+
+		wfProfileOut( __METHOD__ );
+
+		return $pageIds;
 	}
 }
