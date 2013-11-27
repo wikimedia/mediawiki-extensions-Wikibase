@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_14349da6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "Creating a new formatter for every line seems odd. Would be nice to have an *object* as the hook handler, so this could stay persistent. Oh, well.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d43d158c",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "adn -\u003e and; And please update docs/options.wiki",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_545105dc",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "Including \"for content type X\" in the error message would make life easier for whoever has to debug this.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d454f5cb",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "what goes into the flag?",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_941c2d1a",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "Is the flag specific to a given change? Then it should be a parameter to this function, not to the constructor.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_34132107",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "Would be nice to have this in an else-block.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b4e61112",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "I suppose this code is the same as it is for \"regular\" changes? Can you hint as to where the \"normal\" code is, to which this should be kept in sync? That would also serve as a hint that this should really be refactored to allow code reuse.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_94eb0ddb",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_34f201ce",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "This generates a link to the *deletion* log. Either rename, or make the name of the log a parameter to this function.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_94d2ed2a",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "Is this correct even if the entity isn\u0027t in the main namespace?",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f4aa5981",
+        "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "I would call this a \"factory\". A \"generator\" is a special kind of function which PHP starts supporting in 5.5 - using it here seems misleading.\n\nhttps://en.wikipedia.org/wiki/Generator_%28computer_programming%29",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_34a0c199",
+        "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "It\u0027s unclear why all these special cases are needed here. Please add a comment.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b48bb11f",
+        "filename": "client/includes/recentchanges/RevisionObject.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "I would prefer \"RevisionData\" or perhaps \"RevisionRecord\" (though that may imply an *active* record). \"Object\" does not really add any helpful information.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f4901948",
+        "filename": "client/tests/phpunit/includes/recentchanges/ChangeLineFormatterTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T18:03:54Z",
+      "side": 1,
+      "message": "Why do we need to set these? Does ChangeLineFormatter rely on these globals? How and why? The Linker, is it? There should at least be a TODO here about getting rid of that.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
