@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b485f15c",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T17:06:01Z",
+      "side": 1,
+      "message": "Eek, please inject this in the constructor!\nCould be done in a follow-up, but please provide a patch that does it.",
+      "revId": "8a8c9771de7758aae8eb4ae70f81fd40496fc47e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
