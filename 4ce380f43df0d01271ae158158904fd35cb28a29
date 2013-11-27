@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_ecf5edc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-27T22:23:31Z",
+      "side": 1,
+      "message": "Please not the bug below, this shouldn\u0027t be in the first line. Like this:\n\nBug: 57592\n\nThe first line should probably also note where the error was fixed, like this:\n\"Retain form input on Special:SetSiteLink in case of an error\"",
+      "revId": "4ce380f43df0d01271ae158158904fd35cb28a29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ac680585",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-27T22:23:31Z",
+      "side": 1,
+      "message": "This information wont be relevant after this patch got merged... please don\u0027t use comments that refer to previous state.",
+      "revId": "4ce380f43df0d01271ae158158904fd35cb28a29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_2c5515c6",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-27T22:23:31Z",
+      "side": 1,
+      "message": "This information wont be relevant after this patch got merged... please don\u0027t use comments that refer to previous state.",
+      "revId": "4ce380f43df0d01271ae158158904fd35cb28a29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_cc6b4981",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-27T22:23:31Z",
+      "side": 1,
+      "message": "This information wont be relevant after this patch got merged... please don\u0027t use comments that refer to previous state.",
+      "revId": "4ce380f43df0d01271ae158158904fd35cb28a29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
