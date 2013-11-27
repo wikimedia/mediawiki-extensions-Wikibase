@@ -415,7 +415,16 @@ class EntityViewTest extends \MediaWikiTestCase {
 		ksort( $expected );
 		ksort( $actual );
 
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( array_keys( $expected ), array_keys( $actual ) );
+
+		foreach ( $expected as $field => $expectedJson ) {
+			$actualJson = $actual[$field];
+
+			$expectedData = json_decode( $expectedJson, true );
+			$actualData = json_decode( $actualJson, true );
+
+			$this->assertEquals( $expectedData, $actualData, $field );
+		}
 	}
 
 	public function provideRegisterJsConfigVars() {
@@ -428,10 +437,12 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$entity->setId( new ItemId( 'Q22' ) );
 
 		$q33 = new ItemId( 'Q33' );
+		$q44 = new ItemId( 'Q44' ); // unknown item
 		$p11 = new PropertyId( 'p11' );
 		$p77 = new PropertyId( 'p77' ); // unknown property
 
 		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
+		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
 		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
 
 		$revision = new EntityRevision( $entity, 1234567, '20130505333333' );
@@ -486,10 +497,25 @@ class EntityViewTest extends \MediaWikiTestCase {
 							),
 							'type' => 'claim',
 						),
+						array(
+							'id' => 'EntityViewTest$2',
+							'mainsnak' => array(
+								'snaktype' => 'value',
+								'property' => 'P11',
+								'datavalue' => array(
+									'value' => array(
+										'entity-type' => 'item',
+										'numeric-id' => 44,
+									),
+									'type' => 'wikibase-entityid',
+								),
+							),
+							'type' => 'claim',
+						),
 					),
 					'P77' => array(
 						array(
-							'id' => 'EntityViewTest$2',
+							'id' => 'EntityViewTest$3',
 							'mainsnak' => array(
 								'snaktype' => 'value',
 								'property' => 'P77',

@@ -675,6 +675,24 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	}
 
 	/**
+	 * Adds property data types to the entries in $entityInfo. Entities that do not have a data type
+	 * remain unchanged.
+	 *
+	 * @param array $entityInfo a map of strings to arrays, each array representing an entity,
+	 *        with the key being the entity's ID. NOTE: This array will be updated!
+	 */
+	public function removeMissing( array &$entityInfo ) {
+		foreach ( array_keys( $entityInfo ) as $key ) {
+			$id = EntityId::newFromPrefixedId( $key );
+			$entity = $this->getEntity( $id );
+
+			if ( !$entity ) {
+				unset( $entityInfo[$key] );
+			}
+		}
+	}
+
+	/**
 	 * @see PropertyDataTypeLookup::getDataTypeIdForProperty()
 	 *
 	 * @since 0.5

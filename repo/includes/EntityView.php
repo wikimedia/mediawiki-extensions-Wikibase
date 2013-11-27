@@ -785,16 +785,9 @@ abstract class EntityView extends \ContextSource {
 
 		//TODO: apply language fallback! Restore fallback test case in EntityViewTest::provideRegisterJsConfigVars()
 		$entities = $this->entityInfoBuilder->buildEntityInfo( $entityIds );
+		$this->entityInfoBuilder->removeMissing( $entities );
 		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
 		$this->entityInfoBuilder->addDataTypes( $entities );
-
-		// filter non-existing properties
-		$entities = array_filter( $entities,
-			function ( $entity ) {
-				return $entity['type'] !== Property::ENTITY_TYPE || !empty( $entity['datatype'] );
-			}
-		);
-
 		$revisions = $this->attachRevisionInfo( $entities );
 
 		wfProfileOut( __METHOD__ );
