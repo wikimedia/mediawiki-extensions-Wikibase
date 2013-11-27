@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_197178a7",
+        "filename": "selenium_cuc/features/step_definitions/entity_steps.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T13:32:14Z",
+      "side": 1,
+      "message": "Tobi, please test if this works before merging it into master.",
+      "revId": "51c3de3b279a43b58e5d5f7ee34466e5754f4cbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f975b493",
+        "filename": "selenium_cuc/features/step_definitions/entity_steps.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T13:32:14Z",
+      "side": 1,
+      "message": "Tobi, please test if this works before merging it into master.",
+      "revId": "51c3de3b279a43b58e5d5f7ee34466e5754f4cbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_595ee018",
+        "filename": "selenium_cuc/features/support/modules/entity_module.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T13:32:14Z",
+      "side": 1,
+      "message": "Looks like you have forgot to remove one single quote here.",
+      "revId": "51c3de3b279a43b58e5d5f7ee34466e5754f4cbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d9a9d0dd",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T13:32:14Z",
+      "side": 1,
+      "message": "Tobi, please test if this works before merging it into master.",
+      "revId": "51c3de3b279a43b58e5d5f7ee34466e5754f4cbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b9ae0ce3",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T13:32:14Z",
+      "side": 1,
+      "message": "Tobi, please test if this works before merging it into master.",
+      "revId": "51c3de3b279a43b58e5d5f7ee34466e5754f4cbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_59bdc015",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T13:32:14Z",
+      "side": 1,
+      "message": "Tobi, should this be changed like this?\n\n \"token\" \u003d\u003e \"+\\\\\"",
+      "revId": "51c3de3b279a43b58e5d5f7ee34466e5754f4cbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_39bafc1e",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-27T13:32:14Z",
+      "side": 1,
+      "message": "Tobi, should this be changed like this?\n \"token\" \u003d\u003e \"+\\\\\"",
+      "revId": "51c3de3b279a43b58e5d5f7ee34466e5754f4cbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
