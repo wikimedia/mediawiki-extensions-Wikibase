@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_74b0893e",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-27T17:00:55Z",
+      "side": 1,
+      "message": "Will fail hard if $entityContent is false (which is allowed according to the doc). If that can\u0027t happen, change the docs.",
+      "revId": "52c0ef7ccb0bd64d5cd39775dde56f98ec25c77d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
