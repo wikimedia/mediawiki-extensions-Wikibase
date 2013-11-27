@@ -263,13 +263,16 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			),
 			$this->msg( 'wikibase-setentity-id' )->text()
 		)
-		. Html::input(
-			'id',
-			$id,
-			'text',
+		//Changed Input() to rawElement() to allow for "value" parameter
+		//Retains previous ID information
+		. Html::rawElement(
+			'input',
 			array(
+				'name'=>'id',
+				'type'=>'text',
 				'class' => 'wb-input',
-				'id' => 'wb-setentity-id'
+				'id' => 'wb-setentity-id',
+				'value' => $this->getRequest()->getVal( 'id' )
 			)
 		)
 		. Html::element( 'br' );

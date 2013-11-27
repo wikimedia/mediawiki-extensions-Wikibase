@@ -164,14 +164,17 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		if ( $this->page === null ) {
 			$this->page = $this->getSiteLink( $this->entityContent, $this->site );
 		}
-		$pageinput = Html::input(
-			'page',
-			$this->page,
-			'text',
+		//Changed Input() to rawElement() to allow for "value" parameter
+		//Retains previous page information
+		$pageinput = Html::rawElement(
+			'input',
 			array(
+				'name' => 'page',
+				'type' => 'text',
 				'class' => 'wb-input wb-input-text',
 				'id' => 'wb-setsitelink-page',
-				'size' => 50
+				'size' => 50,
+				'value' => $this->getRequest()->getVal( 'page' )
 			)
 		)
 		. Html::element( 'br' );
@@ -208,13 +211,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				),
 				$this->msg( 'wikibase-setsitelink-site' )->text()
 			)
-			. Html::input(
-				'site',
-				$this->site,
-				'text',
+			//Changed Input() to rawElement() to allow for "value" parameter
+			//Retains previous Site ID information
+			. Html::rawElement(
+				'input',
 				array(
+					'name'=>'site',
+					'type'=>'text',
 					'class' => 'wb-input',
-					'id' => 'wb-setsitelink-site'
+					'id' => 'wb-setsitelink-site',
+					'value' => $this->getRequest()->getVal( 'site' )
 				)
 			)
 			. Html::element( 'br' )
