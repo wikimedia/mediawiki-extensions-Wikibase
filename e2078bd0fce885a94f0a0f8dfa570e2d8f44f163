@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_5b7818bf",
+        "filename": "selenium_cuc/features/support/modules/alias_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-11-27T09:54:28Z",
+      "side": 1,
+      "message": "Having to escape the double-quote here, makes the readability of those complicated xpath and css-selectors even worse.",
+      "revId": "e2078bd0fce885a94f0a0f8dfa570e2d8f44f163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
