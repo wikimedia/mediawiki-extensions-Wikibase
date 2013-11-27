@@ -164,9 +164,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		if ( $this->page === null ) {
 			$this->page = $this->getSiteLink( $this->entityContent, $this->site );
 		}
+		//Retain form input on Special:SetSiteLink in case of an error
 		$pageinput = Html::input(
 			'page',
-			$this->page,
+			$this->getRequest()->getVal( 'page' ),
 			'text',
 			array(
 				'class' => 'wb-input wb-input-text',
@@ -208,9 +209,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				),
 				$this->msg( 'wikibase-setsitelink-site' )->text()
 			)
+			//Retain form input on Special:SetSiteLink in case of an error
 			. Html::input(
 				'site',
-				$this->site,
+				$this->getRequest()->getVal( 'site' ),
 				'text',
 				array(
 					'class' => 'wb-input',
