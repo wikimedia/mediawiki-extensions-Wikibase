@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_95d424ee",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:34:32Z",
+      "side": 1,
+      "message": "adn -\u003e and; And please update docs/options.wiki",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_7501a070",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:34:32Z",
+      "side": 1,
+      "message": "\"No namespace configured for entities of type $type\"",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f5c6d04d",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:34:32Z",
+      "side": 1,
+      "message": "What exactly goes into $flag?",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b5c04830",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:34:32Z",
+      "side": 1,
+      "message": "That doesn\u0027t seem safe to me. Missing htmlspecialchars?",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_15b254e1",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:34:32Z",
+      "side": 1,
+      "message": "why did the separator go back in here?\nAlso, -\u003etext() returns wikitext... shouldn\u0027t it be using -\u003eparse() to generate HTML?",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_55dfbc10",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:34:32Z",
+      "side": 1,
+      "message": "I still think this needs a comment explaining what each special case means, and why it is needed. This would allow others to work on the code \u0026 improve it.",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_15e934b3",
+        "filename": "client/maintenance/changes.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:34:32Z",
+      "side": 1,
+      "message": "This isn\u0027t quite true, is it?\n\nDid you commit this accidentally? It seems unfinished.",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
