@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use UserBlockedError;
 use UserInputException;
+use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EditEntity;
 use Wikibase\EntityId;
@@ -119,20 +120,18 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 
 		// Get id
 		$rawId = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
-		$id = $rawId ? $this->parseEntityId( $rawId ) : null;
+		$id = $this->parseEntityId( $rawId );
 
-		if ( $id !== null ) {
-			$entityContent = $this->loadEntityContent( $id );
+		$entityContent = $this->loadEntityContent( $id );
 
-			if ( $entityContent === null ) {
-				throw new SpecialPageException(
-					'wikibase-setentity-invalid-id',
-					array( $rawId ),
-					'Entity id is unknown'
-				);
-			} else {
-				$this->entityContent = $entityContent;
-			}
+		if ( $entityContent === null ) {
+			throw new UserInputException(
+				'wikibase-setentity-invalid-id',
+				array( $rawId ),
+				'Entity id is unknown'
+			);
+		} else {
+			$this->entityContent = $entityContent;
 		}
 	}
 
@@ -147,8 +146,17 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		try {
 			$id = $idParser->parse( $rawId );
 		} catch ( EntityIdParsingException $ex ) {
-			$this->showErrorHtml( $this->msg( 'wikibase-setentity-invalid-id', $rawId )->parse() );
-			return null;
+			throw new UserInputException(
+				'wikibase-setentity-invalid-id',
+				array( $rawId ),
+				'Entity id is invalid'
+			);
+		} catch ( ParseException $ex ) {
+			throw new UserInputException(
+				'wikibase-setentity-invalid-id',
+				array( $rawId ),
+				'Entity id is invalid'
+			);
 		}
 
 		return $id;
