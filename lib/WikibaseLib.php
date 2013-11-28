@@ -136,7 +136,15 @@ call_user_func( function() {
 	// i18n
 	$wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
+	// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
 	$wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
+	$wgValueParsers['quantity'] = function( ValueParsers\ParserOptions $options ) {
+		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer();
+		return new \ValueParsers\QuantityParser(
+			new \ValueParsers\DecimalParser( $options, $unlocalizer ),
+			$options );
+	};
+
 	$wgDataValues['wikibase-entityid'] = 'Wikibase\DataModel\Entity\EntityIdValue';
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
