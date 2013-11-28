@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_b5ee08b0",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:37:34Z",
+      "side": 1,
+      "message": "Why should we get rid if that? Maybe we need a better way to get or construct that object, but I don\u0027t see a reason not to use it.",
+      "parentUuid": "0ee75395_9458ad8d",
+      "revId": "1f607c104eed0c08793c28ea2f2514718d483f72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_d4e3d5d2",
         "filename": "client/includes/ReferencedPagesFinder.php",
         "patchSetId": 6
