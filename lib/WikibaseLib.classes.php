@@ -135,6 +135,7 @@ return call_user_func( function() {
 
 		// includes/parsers
 		'Wikibase\Lib\EntityIdParser' => 'includes/parsers/EntityIdParser.php',
+		'Wikibase\Lib\MediaWikiNumberUnlocalizer' => 'includes/parsers/MediaWikiNumberUnlocalizer.php',
 
 		// includes/specials
 		'Wikibase\Lib\Specials\SpecialWikibasePage' => 'includes/specials/SpecialWikibasePage.php',
