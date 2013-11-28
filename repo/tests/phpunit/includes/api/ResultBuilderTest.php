@@ -17,6 +17,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SnakList;
 
 /**
@@ -34,7 +35,28 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function getResultBuilder( $result ){
-		return new ResultBuilder( $result );
+		$mockTitle = $this->getMockBuilder( '\Title' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mockTitle->expects( $this->any() )
+			->method( 'getArticleID' )
+			->will( $this->returnValue( 123 ) );
+		$mockTitle->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( 456 ) );
+		$mockTitle->expects( $this->any() )
+			->method( 'getPrefixedText' )
+			->will( $this->returnValue( 'MockPrefixedText' ) );
+
+		$mockEntityTitleLookup = $this->getMock( '\Wikibase\EntityTitleLookup' );
+		$mockEntityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will(  $this->returnValue( $mockTitle ) );
+
+		return new ResultBuilder(
+			$result,
+			$mockEntityTitleLookup
+		);
 	}
 
 	public function testCanConstruct(){
@@ -106,9 +128,9 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
 		$expected = array( 'entities' => array( 'Q123' => array(
-			'pageid' => 0,
-			'ns' => 120,
-			'title' => 'Item:Q123',
+			'pageid' => 123, //mocked
+			'ns' => 456, //mocked
+			'title' => 'MockPrefixedText', //mocked
 			'id' => 'Q123',
 			'type' => 'item',
 			'lastrevid' => 33,
