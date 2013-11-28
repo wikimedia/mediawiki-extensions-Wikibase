@@ -6,31 +6,14 @@ use Html;
 use Diff;
 
 /**
- * Class for formatting diffs, @todo might be renamed or something....
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * Class for generating diff rows for a given set of old and new values.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class DiffOpValueFormatter {
 
@@ -44,14 +27,14 @@ class DiffOpValueFormatter {
 	/**
 	 * @since 0.4
 	 *
-	 * @var string|string[]
+	 * @var string|string[]|null
 	 */
 	protected $oldValues;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var string|string[]
+	 * @var string|string[]|null
 	 */
 	protected $newValues;
 
@@ -60,9 +43,9 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $name
-	 * @param string|string[] $oldValues
-	 * @param string|string[] $newValues
+	 * @param string $name HTML of name
+	 * @param string|string[]|null $oldValues HTML of old value(s)
+	 * @param string|string[]|null $newValues HTML of new value(s)
 	 */
 	public function __construct( $name, $oldValues, $newValues ) {
 		$this->name = $name;
@@ -75,15 +58,15 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function generateHeaderHtml() {
 		$oldHeader = is_array( $this->oldValues ) || is_string( $this->oldValues ) ? $this->name : '';
 		$newHeader = is_array( $this->newValues ) || is_string( $this->newValues ) ? $this->name : '';
 
 		$html = Html::openElement( 'tr' );
-		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
-		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
@@ -94,7 +77,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function generateChangeOpHtml() {
 		$html = Html::openElement( 'tr' );
@@ -102,12 +85,12 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
 				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateSafeValueHtml( $this->oldValues ) ) ) );
+					$this->generateValueHtml( $this->oldValues ) ) ) );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
 				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateSafeValueHtml( $this->newValues ) ) ) );
+					$this->generateValueHtml( $this->newValues ) ) ) );
 		$html .= Html::closeElement( 'tr' );
 		$html .= Html::closeElement( 'tr' );
 
@@ -119,7 +102,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function generateAddOpHtml() {
 		$html = Html::openElement( 'tr' );
@@ -128,7 +111,7 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
 				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateSafeValueHtml( $this->newValues ) )
+					$this->generateValueHtml( $this->newValues ) )
 			)
 		);
 		$html .= Html::closeElement( 'tr' );
@@ -141,7 +124,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function generateRemoveOpHtml() {
 		$html = Html::openElement( 'tr' );
@@ -149,7 +132,7 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
 				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateSafeValueHtml( $this->oldValues ) ) ) );
+					$this->generateValueHtml( $this->oldValues ) ) ) );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 		$html .= Html::closeElement( 'tr' );
 
@@ -157,24 +140,23 @@ class DiffOpValueFormatter {
 	}
 
 	/**
-	 * Generates safe HTML from a given value or array of values
+	 * Generates HTML from a given value or array of values
 	 *
 	 * @since 0.4
 	 *
-	 * @param string|string[] $values
+	 * @param string|string[] $values HTML
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function generateSafeValueHtml( $values ) {
-		if ( is_string( $values ) ) {
-			return Html::Element( 'span', array(), $values );
-		}
+	protected function generateValueHtml( $values ) {
+		$values = (array)$values;
+
 		$html = '';
 		foreach ( $values as $value ) {
 			if ( $html !== '' ) {
 				$html .= Html::rawElement( 'br', array(), '' );
 			}
-			$html .= Html::Element( 'span', array(), $value );
+			$html .= Html::rawElement( 'span', array(), $value );
 		}
 
 		return $html;
@@ -185,7 +167,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function generateHtml() {
 		$html = '';

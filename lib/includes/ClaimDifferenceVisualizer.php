@@ -7,9 +7,10 @@ use Diff\DiffOpRemove;
 use Diff\ListDiffer;
 use Diff\Diff;
 use InvalidArgumentException;
+use Message;
 use RuntimeException;
+use ValueFormatters\ValueFormatter;
 use ValueParsers\FormattingException;
-use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -21,13 +22,14 @@ use Wikibase\Lib\SnakFormatter;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class ClaimDifferenceVisualizer {
 
 	/**
 	 * @since 0.5
 	 *
-	 * @var EntityIdLabelFormatter
+	 * @var ValueFormatter
 	 */
 	private $propertyIdFormatter;
 
@@ -50,17 +52,21 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityIdLabelFormatter $propertyIdFormatter
-	 * @param SnakFormatter          $snakFormatter
+	 * @param ValueFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
+	 * @param SnakFormatter $snakFormatter Formatter for Snaks, must generate HTML.
+	 *
+	 * @param $langCode
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdLabelFormatter $propertyIdFormatter,
+	public function __construct( ValueFormatter $propertyIdFormatter,
 		SnakFormatter $snakFormatter, $langCode
 	) {
-		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
+		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
+			&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF ) {
+
 			throw new InvalidArgumentException(
-				'Expected $snakFormatter to generate plain text, not '
+				'Expected $snakFormatter to generate html, not '
 				. $snakFormatter->getFormat() );
 		}
 
@@ -178,7 +184,7 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * @param Snak|null $snak
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function formatSnak( $snak ) {
 		if( $snak === null ){
@@ -194,7 +200,7 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * @param EntityId
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function formatPropertyId( EntityId $id ) {
 		try {
@@ -211,7 +217,7 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @param SnakList $snakList
 	 *
-	 * @return string[]
+	 * @return string[] A list if HTML strings
 	 */
 	 protected function getSnakListValues( SnakList $snakList ) {
 		$values = array();
@@ -229,6 +235,11 @@ class ClaimDifferenceVisualizer {
 		return $values;
 	}
 
+	/**
+	 * @param DiffOpChange $snakChange
+	 *
+	 * @return string HTML
+	 */
 	protected function getSnakHeaderFromDiffOp( DiffOpChange $snakChange ){
 		if( $snakChange->getNewValue() === null ){
 			return $this->getSnakHeader( $snakChange->getOldValue() );
@@ -244,12 +255,12 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @param Snak $snak
 	 *
-	 * @return string
+	 * @return string HTML
  	 */
 	protected function getSnakHeader( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 		$propertyLabel = $this->formatPropertyId( $propertyId );
-		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->langCode )
+		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->langCode )->parse()
 			. ' / ' . $propertyLabel;
 
 		return $headerText;
@@ -262,12 +273,12 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @param Diff $changes
 	 * @param Claim $claim
-	 * @param string $breadCrumb
+	 * @param Message $breadCrumb
 	 *
 	 * @return string
 	 * @throws RuntimeException
 	 */
-	protected function visualizeSnakListChanges( Diff $changes, Claim $claim, $breadCrumb ) {
+	protected function visualizeSnakListChanges( Diff $changes, Claim $claim, Message $breadCrumb ) {
 		$html = '';
 
 		$claimMainSnak = $claim->getMainSnak();
@@ -289,7 +300,7 @@ class ClaimDifferenceVisualizer {
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-				$claimHeader . ' / ' . $breadCrumb,
+				$claimHeader . ' / ' . $breadCrumb->parse(),
 				$oldVal,
 				$newVal
 			);
@@ -346,7 +357,7 @@ class ClaimDifferenceVisualizer {
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->langCode ),
+					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->langCode )->parse(),
 					$oldVal,
 					$newVal
 			);
