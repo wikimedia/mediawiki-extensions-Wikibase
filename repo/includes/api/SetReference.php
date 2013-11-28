@@ -74,8 +74,8 @@ class SetReference extends ModifyClaim {
 		}
 
 		$this->saveChanges( $entityContent, $summary );
-		$this->resultBuilder->markSuccess();
-		$this->resultBuilder->addReference( $newReference );
+		$this->getResultBuilder()->markSuccess();
+		$this->getResultBuilder()->addReference( $newReference );
 
 		wfProfileOut( __METHOD__ );
 	}

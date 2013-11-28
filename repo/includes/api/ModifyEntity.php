@@ -280,7 +280,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$this->addNormalizationInfoToOutput( $params['title'] );
 		}
 
-		$this->resultBuilder->markSuccess( 1 );
+		$this->getResultBuilder()->markSuccess( 1 );
 	}
 
 	protected function addNormalizationInfoToOutput( $title ) {

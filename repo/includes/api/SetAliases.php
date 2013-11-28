@@ -92,7 +92,7 @@ class SetAliases extends ModifyEntity {
 
 		$aliases = $entity->getAliases( $language );
 		if ( count( $aliases ) ) {
-			$this->resultBuilder->addAliases( array( $language => $aliases ), 'entity' );
+			$this->getResultBuilder()->addAliases( array( $language => $aliases ), 'entity' );
 		}
 
 		wfProfileOut( __METHOD__ );
