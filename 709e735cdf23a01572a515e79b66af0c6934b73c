@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b5472850",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T16:17:06Z",
+      "side": 1,
+      "message": "Just use a counter instead of $entityId-\u003egetNumericId()",
+      "revId": "709e735cdf23a01572a515e79b66af0c6934b73c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
