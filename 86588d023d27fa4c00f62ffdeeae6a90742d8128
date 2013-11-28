@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_954ae4c6",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T18:57:22Z",
+      "side": 1,
+      "message": "fun working on a chain of stuff.  i fixed already and gerrit eats it",
+      "parentUuid": "0ee75395_95d424ee",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_7501a070",
         "filename": "client/includes/RepoLinker.php",
         "patchSetId": 13
@@ -133,6 +151,24 @@
       "writtenOn": "2013-11-28T18:34:32Z",
       "side": 1,
       "message": "This isn\u0027t quite true, is it?\n\nDid you commit this accidentally? It seems unfinished.",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_551c5ccb",
+        "filename": "client/maintenance/changes.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T18:57:22Z",
+      "side": 1,
+      "message": "wtf, how did this end up committed :)",
+      "parentUuid": "0ee75395_15e934b3",
       "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
