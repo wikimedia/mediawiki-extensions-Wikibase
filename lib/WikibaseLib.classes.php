@@ -115,6 +115,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\MwTimeIsoFormatter' => 'includes/formatters/MwTimeIsoFormatter.php',
 		'Wikibase\Lib\EscapingValueFormatter' => 'includes/formatters/EscapingValueFormatter.php',
 		'Wikibase\Lib\FormattingException' => 'includes/formatters/FormattingException.php',
+		'Wikibase\Lib\HtmlUrlFormatter' => 'includes/formatters/HtmlUrlFormatter.php',
 		'Wikibase\Lib\MessageSnakFormatter' => 'includes/formatters/MessageSnakFormatter.php',
 		'Wikibase\Lib\PropertyValueSnakFormatter' => 'includes/formatters/PropertyValueSnakFormatter.php',
 		'Wikibase\Lib\SnakFormatter' => 'includes/formatters/SnakFormatter.php',

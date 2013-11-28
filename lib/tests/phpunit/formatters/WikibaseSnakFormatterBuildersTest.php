@@ -2,9 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataValues\GlobeCoordinateValue;
 use DataValues\StringValue;
-use DataValues\TimeValue;
 use DataValues\UnDeserializableValue;
 use Language;
 use ValueFormatters\FormatterOptions;
@@ -12,7 +10,6 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -145,12 +142,12 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				new PropertyValueSnak( 7, new EntityIdValue( new ItemId( 'Q5' ) ) ),
 				'Label for Q5' // compare mock object created in newBuilders()
 			),
-			'diff <url>' => array(
+			'diff url' => array(
 				SnakFormatter::FORMAT_HTML_DIFF,
 				$options,
 				'url',
-				new PropertyValueSnak( 7, new StringValue( '<http://acme.com/>' ) ),
-				'&lt;http://acme.com/&gt;'
+				new PropertyValueSnak( 7, new StringValue( 'http://acme.com/' ) ),
+				'<a rel="nofollow" class="external free" href="http://acme.com/">http://acme.com/</a>'
 			),
 			'bad value' => array(
 				SnakFormatter::FORMAT_PLAIN,
