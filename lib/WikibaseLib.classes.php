@@ -120,6 +120,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\SnakFormatter' => 'includes/formatters/SnakFormatter.php',
 		'Wikibase\Lib\OutputFormatSnakFormatterFactory' => 'includes/formatters/OutputFormatSnakFormatterFactory.php',
 		'Wikibase\Lib\OutputFormatValueFormatterFactory' => 'includes/formatters/OutputFormatValueFormatterFactory.php',
+		'Wikibase\Lib\QuantityDetailsFormatter' => 'includes/formatters/QuantityDetailsFormatter.php',
 		'Wikibase\Lib\UnDeserializableValueFormatter' => 'includes/formatters/UnDeserializableValueFormatter.php',
 		'Wikibase\Lib\WikibaseSnakFormatterBuilders' => 'includes/formatters/WikibaseSnakFormatterBuilders.php',
 		'Wikibase\Lib\WikibaseValueFormatterBuilders' => 'includes/formatters/WikibaseValueFormatterBuilders.php',
