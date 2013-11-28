@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b54de8e2",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:44:16Z",
+      "side": 1,
+      "message": "This check should actually be in loadEntityContent, to be consistent with parseEntityId. Also, a method called \"loadXXX\" can be expected to throw an exception if the thing to load wasn\u0027t found.",
+      "revId": "2757ec978aea9271b4b037b2a428475524aff98b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
