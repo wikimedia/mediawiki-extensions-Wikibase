@@ -133,6 +133,7 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
 	'wikibase-itemdisambiguation-submit' => 'Search',
 	'wikibase-itemdisambiguation-nothing-found' => 'Sorry, no item with that label was found.',
+	'wikibase-itemdisambiguation-search' => 'Search for item using [{{fullurl:Special:Search|search=$1}} Special:Search].',
 	'wikibase-itemdisambiguation-create' => 'You can [{{fullurl:Special:NewItem|label=$1}} create the item].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Sorry, the language identifier you have provided is unknown to the system. Please use a valid identifier like "en".',
 	'wikibase-itemdisambiguation-description' => 'Values used for searching must be the complete text entry. Language is an identifier, such as "en".',
@@ -767,6 +768,10 @@ This special page returns all items with a given label. It provides an interface
 	'wikibase-itemdisambiguation-submit' => 'Text for the submit button in the search form.
 {{Identical|Search}}',
 	'wikibase-itemdisambiguation-nothing-found' => 'Response if the search failed because no such items have been found.',
+	'wikibase-itemdisambiguation-search' => 'Invitation to click a link and search for an item with the given label using Special:Search.
+
+Parameters:
+* $1 - the specified label',
 	'wikibase-itemdisambiguation-create' => 'Invitation to click a link and create an item with the given label.
 
 Parameters:
