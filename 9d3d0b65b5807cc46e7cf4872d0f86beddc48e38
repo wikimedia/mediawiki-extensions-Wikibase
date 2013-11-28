@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_15001469",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T18:35:55Z",
+      "side": 1,
+      "message": "This line is now redundant.",
+      "revId": "9d3d0b65b5807cc46e7cf4872d0f86beddc48e38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
