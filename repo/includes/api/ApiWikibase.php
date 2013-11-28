@@ -48,7 +48,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	public function getResultBuilder() {
 		if( !isset( $this->resultBuilder ) ) {
-			$this->resultBuilder = new ResultBuilder( $this->getResult() );
+			$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+			$this->resultBuilder = new ResultBuilder( $this->getResult(), $entityTitleLookup );
 		}
 		return $this->resultBuilder;
 	}
