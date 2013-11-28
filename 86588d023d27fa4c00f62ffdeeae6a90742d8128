@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_153ff423",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T18:41:14Z",
+      "side": 1,
+      "message": "then i think this needs to be refactored first",
+      "parentUuid": "0ee75395_55dfbc10",
+      "revId": "86588d023d27fa4c00f62ffdeeae6a90742d8128",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_15e934b3",
         "filename": "client/maintenance/changes.php",
         "patchSetId": 13
