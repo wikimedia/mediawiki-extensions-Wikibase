@@ -25,17 +25,11 @@ use WikiPage;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Adam Shorland
  */
 abstract class ApiWikibase extends \ApiBase {
 
-	protected $resultBuilder;
-
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		// todo inject serialization factory to result builder
-		$this->resultBuilder = new ResultBuilder( $this->getResult() );
-	}
+	private $resultBuilder;
 
 	/**
 	 * Wrapper message for single errors
@@ -50,6 +44,16 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @var bool|string
 	 */
 	protected static $longErrorContextMessage = false;
+
+	/**
+	 * @return ResultBuilder
+	 */
+	public function getResultBuilder() {
+		if( !isset( $this->resultBuilder ) ) {
+			$this->resultBuilder = new ResultBuilder( $this->getResult() );
+		}
+		return $this->resultBuilder;
+	}
 
 	/**
 	 * @see ApiBase::getPossibleErrors()

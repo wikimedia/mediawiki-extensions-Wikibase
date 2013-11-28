@@ -58,8 +58,8 @@ class SetClaimValue extends ModifyClaim {
 		}
 
 		$this->saveChanges( $entityContent, $summary );
-		$this->resultBuilder->markSuccess();
-		$this->resultBuilder->addClaim( $claim );
+		$this->getResultBuilder()->markSuccess();
+		$this->getResultBuilder()->addClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}
