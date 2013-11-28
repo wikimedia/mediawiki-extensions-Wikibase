@@ -166,7 +166,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider listProvider
 	 * @param array $objects
 	 */
-	public function testGetIndexOfObject( array $objects ) {
+	public function testGetFlatArrayIndexOfObject( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
 		$indexedArray->buildIndex();
 
@@ -176,7 +176,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$i = 0;
 		foreach( $objects as $object ) {
 			$indicesSource[$i++] = $object;
-			$indicesDestination[$indexedArray->getIndexOfObject( $object )] = $object;
+			$indicesDestination[$indexedArray->getFlatArrayIndexOfObject( $object )] = $object;
 		}
 
 		$this->assertEquals( $indicesSource, $indicesDestination );

@@ -128,7 +128,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	 *
 	 * @throws RuntimeException
 	 */
-	public function getIndexOfObject( $object ) {
+	public function getFlatArrayIndexOfObject( $object ) {
 		$this->assertIndexIsBuild();
 
 		$i = 0;
@@ -198,7 +198,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @throws OutOfBoundsException
 	 */
 	protected function moveObjectInPropertyGroup( $object, $toIndex ) {
-		$currentIndex = $this->getIndexOfObject( $object );
+		$currentIndex = $this->getFlatArrayIndexOfObject( $object );
 
 		if( $toIndex === $currentIndex ) {
 			return;
@@ -220,7 +220,7 @@ class ByPropertyIdArray extends \ArrayObject {
 		} else {
 			$insertBefore = $propertyGroup[$toIndex];
 			$this->removeObject( $object );
-			$this->insertObjectAtIndex( $object, $this->getIndexOfObject( $insertBefore ) );
+			$this->insertObjectAtIndex( $object, $this->getFlatArrayIndexOfObject( $insertBefore ) );
 		}
 	}
 
@@ -250,7 +250,12 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @param object $object
 	 */
 	protected function removeObject( $object ) {
-		unset( $this[$this->getIndexOfObject( $object )] );
+		foreach( $this as $key => $o ) {
+			if( $object === $o ) {
+				$this->offsetUnset( $key );
+				break;
+			}
+		}
 		$this->buildIndex();
 	}
 
@@ -363,7 +368,7 @@ class ByPropertyIdArray extends \ArrayObject {
 			throw new OutOfBoundsException( 'Object not present in array' );
 		} elseif( $toIndex < 0 || $toIndex > count( $this ) ) {
 			throw new OutOfBoundsException( 'Specified index is out of bounds' );
-		} elseif( $this->getIndexOfObject( $object ) === $toIndex ) {
+		} elseif( $this->getFlatArrayIndexOfObject( $object ) === $toIndex ) {
 			return;
 		}
 
