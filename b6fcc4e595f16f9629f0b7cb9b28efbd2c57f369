@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_55a57cff",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "added comment",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_941c2d1a",
         "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
         "patchSetId": 12
@@ -81,6 +98,24 @@
       "writtenOn": "2013-11-27T18:03:54Z",
       "side": 1,
       "message": "Is the flag specific to a given change? Then it should be a parameter to this function, not to the constructor.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d5b06c40",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "theoretically it is specific to each change, though for Wikibase changes would generally be same.",
+      "parentUuid": "0ee75395_941c2d1a",
       "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_75876067",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_34132107",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_b4e61112",
         "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
         "patchSetId": 12
@@ -115,6 +168,24 @@
       "writtenOn": "2013-11-27T18:03:54Z",
       "side": 1,
       "message": "I suppose this code is the same as it is for \"regular\" changes? Can you hint as to where the \"normal\" code is, to which this should be kept in sync? That would also serve as a hint that this should really be refactored to allow code reuse.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_558c5c89",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_b4e61112",
       "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +209,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_3581d84f",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_94eb0ddb",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_34f201ce",
         "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
         "patchSetId": 12
@@ -149,6 +238,24 @@
       "writtenOn": "2013-11-27T18:03:54Z",
       "side": 1,
       "message": "This generates a link to the *deletion* log. Either rename, or make the name of the log a parameter to this function.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_1586d467",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_34f201ce",
       "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +279,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_d5974c92",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_94d2ed2a",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_f4aa5981",
         "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
         "patchSetId": 12
@@ -189,6 +314,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_d41075af",
+        "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "I don\u0027t like \"generator\" but \"factory\" is not really a great either, but can live with it",
+      "parentUuid": "0ee75395_f4aa5981",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_34a0c199",
         "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
         "patchSetId": 12
@@ -200,6 +343,24 @@
       "writtenOn": "2013-11-27T18:03:54Z",
       "side": 1,
       "message": "It\u0027s unclear why all these special cases are needed here. Please add a comment.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_3421e1f6",
+        "filename": "client/includes/recentchanges/ExternalChangeGenerator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "https://bugzilla.wikimedia.org/56613",
+      "parentUuid": "0ee75395_34a0c199",
       "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -234,6 +395,24 @@
       "writtenOn": "2013-11-27T18:03:54Z",
       "side": 1,
       "message": "Why do we need to set these? Does ChangeLineFormatter rely on these globals? How and why? The Linker, is it? There should at least be a TODO here about getting rid of that.",
+      "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_14301d52",
+        "filename": "client/tests/phpunit/includes/recentchanges/ChangeLineFormatterTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-11-28T17:01:42Z",
+      "side": 1,
+      "message": "get rid of Linker would be awesome! :D  we can probably come up with something else to use",
+      "parentUuid": "0ee75395_f4901948",
       "revId": "b6fcc4e595f16f9629f0b7cb9b28efbd2c57f369",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
