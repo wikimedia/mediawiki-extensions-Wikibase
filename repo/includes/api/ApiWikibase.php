@@ -34,8 +34,13 @@ abstract class ApiWikibase extends \ApiBase {
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+
 		// todo inject serialization factory to result builder
-		$this->resultBuilder = new ResultBuilder( $this->getResult() );
+		$this->resultBuilder = new ResultBuilder(
+			$this->getResult(),
+			$entityTitleLookup
+		);
 	}
 
 	/**
