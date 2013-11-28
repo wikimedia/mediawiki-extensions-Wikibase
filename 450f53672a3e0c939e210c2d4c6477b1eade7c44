@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_f558108e",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-11-28T19:20:27Z",
+      "side": 1,
+      "message": "No, please return it, and let prepareArguments() assign it to a member. Obscure side effects are not good.",
+      "revId": "450f53672a3e0c939e210c2d4c6477b1eade7c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
