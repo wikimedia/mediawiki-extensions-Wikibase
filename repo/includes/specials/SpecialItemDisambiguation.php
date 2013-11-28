@@ -81,6 +81,10 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 
 					if ( $language === $this->getLanguage()->getCode() ) {
 						$this->getOutput()->addWikiMsg(
+							'wikibase-itemdisambiguation-search',
+							urlencode( $label )
+						);
+						$this->getOutput()->addWikiMsg(
 							'wikibase-itemdisambiguation-create',
 							urlencode( $label )
 						);
