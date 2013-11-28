@@ -2,12 +2,8 @@
 
 namespace Wikibase\Lib;
 
-use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Item;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\LanguageWithConversion;
 
 /**
  * Defines the snak formatters supported by Wikibase.
@@ -58,6 +54,7 @@ class WikibaseSnakFormatterBuilders {
 			SnakFormatter::FORMAT_PLAIN => $buildDispatchingSnakFormatter,
 			SnakFormatter::FORMAT_HTML => $buildDispatchingSnakFormatter,
 			SnakFormatter::FORMAT_HTML_WIDGET => $buildDispatchingSnakFormatter,
+			SnakFormatter::FORMAT_HTML_DIFF => $buildDispatchingSnakFormatter,
 		);
 
 		return $types;

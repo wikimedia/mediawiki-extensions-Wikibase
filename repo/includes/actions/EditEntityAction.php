@@ -17,6 +17,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use WebRequest;
 use Wikibase\Lib\EntityIdLabelFormatter;
+use Wikibase\Lib\EscapingValueFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -59,8 +60,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$this->propertyNameFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
-		$this->snakValueFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+		$labelFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
+
+		$formatterFactory = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory();
+		$this->snakValueFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
 
 		$this->diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),

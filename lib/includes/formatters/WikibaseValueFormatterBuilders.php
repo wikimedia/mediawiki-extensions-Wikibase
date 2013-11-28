@@ -89,6 +89,11 @@ class WikibaseValueFormatterBuilders {
 		// Falls back to HTML display formatters.
 		SnakFormatter::FORMAT_HTML_WIDGET => array(
 		),
+
+		// Formatters to use for HTML in diffs.
+		// Falls back to HTML display formatters.
+		SnakFormatter::FORMAT_HTML_DIFF => array(
+		),
 	);
 
 	/**
@@ -270,6 +275,9 @@ class WikibaseValueFormatterBuilders {
 			case SnakFormatter::FORMAT_HTML_WIDGET:
 				$formatters = $this->getWidgetFormatters( $options );
 				break;
+			case SnakFormatter::FORMAT_HTML_DIFF:
+				$formatters = $this->getDiffFormatters( $options );
+				break;
 			default:
 				throw new \InvalidArgumentException( 'Unsupported format: ' . $format );
 		}
@@ -359,6 +367,30 @@ class WikibaseValueFormatterBuilders {
 		);
 
 		return $widgetFormatters;
+	}
+
+
+	/**
+	 * Returns a full set of formatters for generating HTML for use in diffs.
+	 * If there are formatters defined for HTML that are not defined for diffs,
+	 * the HTML formatters are used.
+	 *
+	 * @param FormatterOptions $options
+	 * @param string[] $skip A list of types to be skipped. Useful when the caller already has
+	 *        formatters for some types.
+	 *
+	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
+	 */
+	public function getDiffFormatters( FormatterOptions $options, array $skip = array() ) {
+		$diffFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML_DIFF, $options );
+		$htmlFormatters = $this->getHtmlFormatters( $options, array_merge( $skip, array_keys( $diffFormatters ) ) );
+
+		$diffFormatters = array_merge(
+			$diffFormatters,
+			$htmlFormatters
+		);
+
+		return $diffFormatters;
 	}
 
 	/**

@@ -6,31 +6,16 @@ use Html;
 use Diff;
 
 /**
- * Class for formatting diffs, @todo might be renamed or something....
+ * Class for generating diff rows for a given set of old and new values.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * @todo might be renamed or something....
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class DiffOpValueFormatter {
 
@@ -44,14 +29,14 @@ class DiffOpValueFormatter {
 	/**
 	 * @since 0.4
 	 *
-	 * @var string|string[]
+	 * @var string|string[]|null
 	 */
 	protected $oldValues;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var string|string[]
+	 * @var string|string[]|null
 	 */
 	protected $newValues;
 
@@ -60,9 +45,9 @@ class DiffOpValueFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $name
-	 * @param string|string[] $oldValues
-	 * @param string|string[] $newValues
+	 * @param string $name HTML of name
+	 * @param string|string[]|null $oldValues HTML of old value(s)
+	 * @param string|string[]|null $newValues HTML of new value(s)
 	 */
 	public function __construct( $name, $oldValues, $newValues ) {
 		$this->name = $name;
@@ -82,8 +67,8 @@ class DiffOpValueFormatter {
 		$newHeader = is_array( $this->newValues ) || is_string( $this->newValues ) ? $this->name : '';
 
 		$html = Html::openElement( 'tr' );
-		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
-		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
@@ -167,14 +152,14 @@ class DiffOpValueFormatter {
 	 */
 	protected function generateSafeValueHtml( $values ) {
 		if ( is_string( $values ) ) {
-			return Html::Element( 'span', array(), $values );
+			return Html::rawElement( 'span', array(), $values );
 		}
 		$html = '';
 		foreach ( $values as $value ) {
 			if ( $html !== '' ) {
 				$html .= Html::rawElement( 'br', array(), '' );
 			}
-			$html .= Html::Element( 'span', array(), $value );
+			$html .= Html::rawElement( 'span', array(), $value );
 		}
 
 		return $html;
