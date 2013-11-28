@@ -80,7 +80,7 @@ class WikibaseValueFormatterBuilders {
 		// Formatters to use for HTML display.
 		// Falls back to plain text formatters (plus escaping).
 		SnakFormatter::FORMAT_HTML => array(
-			//'PT:url' => 'Wikibase\Lib\LinkFormatter', // TODO
+			'PT:url' => 'Wikibase\Lib\HtmlUrlFormatter',
 			//'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter', // TODO
 			//'PT:wikibase-item' => 'Wikibase\Lib\ItemLinkFormatter', // TODO
 		),
