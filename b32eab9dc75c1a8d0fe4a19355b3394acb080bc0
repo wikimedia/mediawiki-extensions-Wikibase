@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_f2f4a685",
+        "filename": "selenium_cuc/features/step_definitions/entity_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-11-28T13:15:28Z",
+      "side": 1,
+      "message": "Unfortunately this does not work. this creates invalid json. please change this back to what it was before.",
+      "revId": "b32eab9dc75c1a8d0fe4a19355b3394acb080bc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d2f1a293",
+        "filename": "selenium_cuc/features/step_definitions/entity_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-11-28T13:15:28Z",
+      "side": 1,
+      "message": "Unfortunately this does not work. this creates invalid json. please change this back to what it was before.",
+      "revId": "b32eab9dc75c1a8d0fe4a19355b3394acb080bc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_728c1633",
+        "filename": "selenium_cuc/features/step_definitions/label_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-11-28T13:15:28Z",
+      "side": 1,
+      "message": "can we have single quotes here? The need for escaping makes it difficult to read here..",
+      "revId": "b32eab9dc75c1a8d0fe4a19355b3394acb080bc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b2ee1eb0",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-11-28T13:15:28Z",
+      "side": 1,
+      "message": "Unfortunately this does not work. this creates invalid json. please change this back to what it was before.",
+      "revId": "b32eab9dc75c1a8d0fe4a19355b3394acb080bc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_92eb1aa0",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-11-28T13:15:28Z",
+      "side": 1,
+      "message": "Unfortunately this does not work. this creates invalid json. please change this back to what it was before.",
+      "revId": "b32eab9dc75c1a8d0fe4a19355b3394acb080bc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
