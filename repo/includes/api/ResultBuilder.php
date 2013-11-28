@@ -10,11 +10,11 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
+use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Reference;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Builder for Api Results
@@ -40,15 +40,24 @@ class ResultBuilder {
 	 * @var SerializerFactory
 	 */
 	protected $serializerFactory;
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $entityTitleLookup;
 
 	/**
 	 * @param ApiResult $result
+	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
 	 *
 	 * @throws InvalidArgumentException
 	 * @todo require SerializerFactory
 	 */
-	public function __construct( $result, SerializerFactory $serializerFactory = null ) {
+	public function __construct(
+		$result,
+		EntityTitleLookup $entityTitleLookup,
+		SerializerFactory $serializerFactory = null
+	) {
 		if( !$result instanceof ApiResult ){
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
 		}
@@ -57,8 +66,9 @@ class ResultBuilder {
 			$serializerFactory = new SerializerFactory();
 		}
 
-		$this->serializerFactory = $serializerFactory;
 		$this->result = $result;
+		$this->entityTitleLookup = $entityTitleLookup;
+		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
 	}
 
@@ -118,7 +128,7 @@ class ResultBuilder {
 			$record['type'] = $entityId->getEntityType();
 		} else {
 			if ( in_array( 'info', $props ) ) {
-				$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $entityId );
+				$title = $this->entityTitleLookup->getTitleForId( $entityId );
 				$record['pageid'] = $title->getArticleID();
 				$record['ns'] = intval( $title->getNamespace() );
 				$record['title'] = $title->getPrefixedText();
