@@ -63,6 +63,7 @@
 }
 
 .wb-rankselector-menu {
+	cursor: pointer;
 	position: absolute;
 	z-index: 2; /* Monobook #content has 2 */
 }
