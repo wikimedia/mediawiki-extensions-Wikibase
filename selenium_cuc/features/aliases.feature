@@ -33,7 +33,7 @@ Feature: Edit aliases
   @ui_only
   Scenario: Type new alias
     When I click the aliases add button
-      And I enter 'alias123' as new aliases
+      And I enter "alias123" as new aliases
     Then Aliases cancel button should be there
       And Aliases save button should be there
       And Modified alias input field should be there
@@ -42,7 +42,7 @@ Feature: Edit aliases
   @ui_only
   Scenario Outline: Cancel aliases
     When I click the aliases add button
-      And I enter 'alias123' as new aliases
+      And I enter "alias123" as new aliases
       And I <cancel>
     Then Aliases add button should be there
       And Aliases save button should not be there
@@ -59,7 +59,7 @@ Feature: Edit aliases
   @save_aliases @modify_entity
   Scenario Outline: Save alias
     When I click the aliases add button
-      And I enter 'alias123' as new aliases
+      And I enter "alias123" as new aliases
       And I <save>
     Then Aliases list should not be empty
       And Aliases add button should not be there
@@ -67,7 +67,7 @@ Feature: Edit aliases
       And Aliases save button should not be there
       And Aliases edit button should be there
       And There should be 1 aliases in the list
-      And List of aliases should be 'alias123'
+      And List of aliases should be "alias123"
 
     Examples:
       | save |
@@ -77,12 +77,12 @@ Feature: Edit aliases
   @save_aliases @modify_entity
   Scenario Outline: Save alias and reload
     When I click the aliases add button
-      And I enter 'alias123' as new aliases
+      And I enter "alias123" as new aliases
       And I <save>
       And I reload the page
     Then Aliases edit button should be there
       And There should be 1 aliases in the list
-      And List of aliases should be 'alias123'
+      And List of aliases should be "alias123"
 
     Examples:
       | save |
@@ -92,27 +92,27 @@ Feature: Edit aliases
   @save_aliases @modify_entity
   Scenario: Save multiple aliases
     When I click the aliases add button
-      And I enter 'alias1', 'alias2', 'alias3' as new aliases
+      And I enter "alias1", "alias2", "alias3" as new aliases
       And I click the aliases save button
     Then Aliases list should not be empty
       And There should be 3 aliases in the list
-      And List of aliases should be 'alias1', 'alias2', 'alias3'
+      And List of aliases should be "alias1", "alias2", "alias3"
 
   @save_aliases @modify_entity
   Scenario: Remove alias
     When I click the aliases add button
-      And I enter 'alias1', 'alias2' as new aliases
+      And I enter "alias1", "alias2" as new aliases
       And I click the aliases save button
       And I click the aliases edit button
       And I click the remove first alias button
       And I click the aliases save button
-    Then List of aliases should be 'alias2'
+    Then List of aliases should be "alias2"
       And There should be 1 aliases in the list
 
   @save_aliases @modify_entity
   Scenario: Remove all aliases
     When I click the aliases add button
-      And I enter 'alias1', 'alias2' as new aliases
+      And I enter "alias1", "alias2" as new aliases
       And I click the aliases save button
       And I click the aliases edit button
       And I click the remove first alias button
@@ -124,7 +124,7 @@ Feature: Edit aliases
   @save_aliases @modify_entity
   Scenario: Remove all aliases and reload
     When I click the aliases add button
-      And I enter 'alias1', 'alias2' as new aliases
+      And I enter "alias1", "alias2" as new aliases
       And I click the aliases save button
       And I click the aliases edit button
       And I click the remove first alias button
@@ -137,7 +137,7 @@ Feature: Edit aliases
   @ui_only
   Scenario: Edit aliases UI
     When I click the aliases add button
-      And I enter 'alias123' as new aliases
+      And I enter "alias123" as new aliases
       And I click the aliases save button
       And I click the aliases edit button
     Then New alias input field should be there
@@ -149,20 +149,20 @@ Feature: Edit aliases
   @save_aliases @modify_entity
   Scenario: Edit multiple aliases
     When I click the aliases add button
-      And I enter 'alias1', 'alias2' as new aliases
+      And I enter "alias1", "alias2" as new aliases
       And I click the aliases save button
       And I click the aliases edit button
-      And I enter 'alias3', 'alias4' as new aliases
+      And I enter "alias3", "alias4" as new aliases
       And I click the remove first alias button
       And I change the first alias to alias5
       And I click the aliases save button
     Then There should be 3 aliases in the list
-      And List of aliases should be 'alias5', 'alias3', 'alias4'
+      And List of aliases should be "alias5", "alias3", "alias4"
 
   @ui_only
   Scenario: Duplicated aliases detection
     When I click the aliases add button
-      And I enter 'alias1', 'alias2', 'alias1' as new aliases
+      And I enter "alias1", "alias2", "alias1" as new aliases
     Then Duplicate alias input field should be there
       And Aliases save button should be there
       And Aliases cancel button should be there
@@ -170,25 +170,25 @@ Feature: Edit aliases
   @ui_only
   Scenario: Duplicated aliases resolve
     When I click the aliases add button
-      And I enter 'alias1', 'alias2', 'alias1' as new aliases
+      And I enter "alias1", "alias2", "alias1" as new aliases
       And I click the remove first alias button
     Then Duplicate alias input field should not be there
 
   @save_aliases @modify_entity
   Scenario: Save duplicated aliases
     When I click the aliases add button
-      And I enter 'alias1', 'alias2', 'alias1' as new aliases
+      And I enter "alias1", "alias2", "alias1" as new aliases
       And I click the aliases save button
     Then There should be 2 aliases in the list
-      And List of aliases should be 'alias1', 'alias2'
+      And List of aliases should be "alias1", "alias2"
 
   @save_aliases @modify_entity
   Scenario Outline: Special inputs for aliases
     When I click the aliases add button
-      And I enter '<alias>' as new aliases
+      And I enter "<alias>" as new aliases
       And I click the aliases save button
     Then There should be 1 aliases in the list
-      And List of aliases should be '<alias_expected>'
+      And List of aliases should be "<alias_expected>"
 
     Examples:
       | alias | alias_expected |
@@ -199,24 +199,24 @@ Feature: Edit aliases
   @save_aliases
   Scenario: Too long input for alias
     When I click the aliases add button
-      And I enter 'loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong' as new aliases
+      And I enter "loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong" as new aliases
       And I click the aliases save button
     Then An error message should be displayed
 
   @save_aliases @modify_entity @bugfix
   Scenario: Zombie alias bugfix
     When I click the aliases add button
-      And I enter 'zombie' as new aliases
+      And I enter "zombie" as new aliases
       And I click the aliases save button
       And I reload the page
       And I click the aliases edit button
       And I click the remove first alias button
       And I click the aliases save button
       And I click the aliases add button
-      And I enter 'alias123' as new aliases
+      And I enter "alias123" as new aliases
       And I click the aliases save button
     Then There should be 1 aliases in the list
-      And List of aliases should be 'alias123'
+      And List of aliases should be "alias123"
 
   @ui_only @bugfix
   Scenario: Bugfix for addbutton appearing when it should not
