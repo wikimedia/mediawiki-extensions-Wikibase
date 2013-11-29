@@ -145,7 +145,7 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 		}
 		$valueinput = Html::input(
 			'value',
-			$this->value,
+			$this->getRequest()->getVal( 'value' ),
 			'text',
 			array(
 				'class' => 'wb-input',
