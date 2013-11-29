@@ -136,7 +136,7 @@ return call_user_func( function() {
 		'Wikibase\Repo\Specials\SpecialItemResolver' => 'includes/specials/SpecialItemResolver.php',
 		'Wikibase\Repo\Specials\SpecialItemDisambiguation' => 'includes/specials/SpecialItemDisambiguation.php',
 		'Wikibase\Repo\Specials\SpecialModifyEntity' => 'includes/specials/SpecialModifyEntity.php',
-		'Wikibase\Repo\Specials\SpecialSetEntity' => 'includes/specials/SpecialSetEntity.php',
+		'Wikibase\Repo\Specials\SpecialModifyTerm' => 'includes/specials/SpecialModifyTerm.php',
 		'Wikibase\Repo\Specials\SpecialSetLabel' => 'includes/specials/SpecialSetLabel.php',
 		'Wikibase\Repo\Specials\SpecialSetDescription' => 'includes/specials/SpecialSetDescription.php',
 		'Wikibase\Repo\Specials\SpecialSetAliases' => 'includes/specials/SpecialSetAliases.php',
