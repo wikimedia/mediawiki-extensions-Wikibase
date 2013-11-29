@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_00a1f041",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-29T11:21:30Z",
+      "side": 1,
+      "message": "When adding a new key to the i18n file you must also add a description of what the key means!\nPlease see the section with the key \u0027qqq\u0027 below, ( starts at around line 477)\nThis key is used by http://translatewiki.net/ so that people can translate your message into other languages",
+      "revId": "e700f8a1db88f096441603d456566dc813030843",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
