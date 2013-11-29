@@ -39,21 +39,21 @@ class SpecialSetLabelTest extends SpecialPageTestBase {
 		$matchers['id'] = array(
 			'tag' => 'input',
 			'attributes' => array(
-				'id' => 'wb-setentity-id',
+				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
 				'name' => 'id',
 			) );
 		$matchers['language'] = array(
 			'tag' => 'input',
 			'attributes' => array(
-				'id' => 'wb-setentity-language',
+				'id' => 'wb-modifyterm-language',
 				'class' => 'wb-input',
 				'name' => 'language',
 			) );
 		$matchers['value'] = array(
 			'tag' => 'input',
 			'attributes' => array(
-				'id' => 'wb-setentity-value',
+				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
 				'name' => 'value',
 			) );

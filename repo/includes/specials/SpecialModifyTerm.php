@@ -13,9 +13,9 @@ use Wikibase\Utils;
  *
  * @since 0.4
  * @licence GNU GPL v2+
- * @author Bene* < benestar.wikimedia@googlemail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-abstract class SpecialSetEntity extends SpecialModifyEntity {
+abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 	/**
 	 * The language the value is set in.
@@ -68,7 +68,7 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 		}
 
 		if ( !$this->isValidLanguageCode( $this->language ) && $this->language !== null ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-setentity-invalid-langcode', $this->language )->parse() );
+			$this->showErrorHTML( $this->msg( 'wikibase-modifyterm-invalid-langcode', $this->language )->parse() );
 		}
 
 		// Value
@@ -149,7 +149,7 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 			'text',
 			array(
 				'class' => 'wb-input',
-				'id' => 'wb-setentity-value',
+				'id' => 'wb-modifyterm-value',
 				'size' => 50
 			)
 		)
@@ -182,10 +182,10 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 			. Html::element(
 				'label',
 				array(
-					'for' => 'wb-setentity-language',
+					'for' => 'wb-modifyterm-language',
 					'class' => 'wb-label'
 				),
-				$this->msg( 'wikibase-setentity-language' )->text()
+				$this->msg( 'wikibase-modifyterm-language' )->text()
 			)
 			. Html::input(
 				'language',
@@ -193,14 +193,14 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 				'text',
 				array(
 					'class' => 'wb-input',
-					'id' => 'wb-setentity-language'
+					'id' => 'wb-modifyterm-language'
 				)
 			)
 			. Html::element( 'br' )
 			. Html::element(
 				'label',
 				array(
-					'for' => 'wb-setentity-value',
+					'for' => 'wb-modifyterm-value',
 					'class' => 'wb-label'
 				),
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text()
