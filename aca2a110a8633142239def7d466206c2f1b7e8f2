@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_803060fd",
+        "filename": "selenium_cuc/features/step_definitions/label_steps.rb",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-11-29T12:32:20Z",
+      "side": 1,
+      "message": "This will no longer work. Line 43 is calling line 35, and it uses double quotes around the string.\n\nThe simplest solution I see is to change this line to this:\n\nstep \u0027I enter \"looo...ng\" as label\u0027",
+      "revId": "aca2a110a8633142239def7d466206c2f1b7e8f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
