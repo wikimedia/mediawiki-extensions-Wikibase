@@ -12,7 +12,7 @@ use Wikibase\Summary;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetAliases extends SpecialSetEntity {
+class SpecialSetAliases extends SpecialModifyLangAttribute {
 
 	/**
 	 * Constructor
