@@ -1,25 +1,14 @@
 <?php
 
 namespace Wikibase;
-use \ORMRow, \User;
+
+use IORMTable;
+use MWException;
+use ORMRow;
+use User;
 
 /**
  * Class representing a single change (ie a row in the wb_changes).
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.1
  *
@@ -89,15 +78,11 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 1.20
-	 *
-	 * @param \IORMTable $table
+	 * @param IORMTable $table
 	 * @param array|null $fields
 	 * @param boolean $loadDefaults
 	 */
-	public function __construct( \IORMTable $table, $fields = null, $loadDefaults = false ) {
+	public function __construct( IORMTable $table, $fields = null, $loadDefaults = false ) {
 		parent::__construct( $table, $fields, $loadDefaults );
 
 		$this->postConstruct();
@@ -178,7 +163,7 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @return array
 	 */
-	public function getFields( ) {
+	public function getFields() {
 		$fields = parent::getFields();
 
 		if ( isset( $fields['info'] ) && is_string( $fields['info'] ) ) {
@@ -248,7 +233,7 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @param array $info
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return string
 	 */
 	public function serializeInfo( array $info ) {
@@ -260,7 +245,7 @@ class ChangeRow extends ORMRow implements Change {
 					$info,
 					function ( $v ) {
 						if ( is_object( $v ) ) {
-							throw new \MWException( "Refusing to serialize PHP object of type "
+							throw new MWException( "Refusing to serialize PHP object of type "
 								. get_class( $v ) );
 						}
  					}
