@@ -38,13 +38,17 @@ function expertProxy( fnName ) {
  *         The valueview will be able to handle all data value types and data types the given
  *         provider has experts registered for.
  *
+ * @option valueParserProvider {valueParsers.valueParserFactory} (required) Factory providing the
+ *         parsers that values may be parsed with.
+ *
  * @option on {dataTypes.DataType|Function|null} If this option is not null, then the widget will
- *         choose a jQuery.valueview.Expert based on a provided data type or on a given data value's
- *         constructor's data value type. This does basically mean that all data values, set as
- *         value, not valid against the given data (value) type will be displayed with a note that
- *         they are not suitable for the widget's current definition.
- *         If null is set, then the expert will be chosen on the widget's current value. If the
- *         value is null, then the widget won't be able to offer any input for new values though.
+ *         choose a jQuery.valueview.Expert and a valueParser.ValueParser based on a provided data
+ *         type or on a given data value's constructor's data value type. Basically, this means that
+ *         all data values, set as value, not valid against the given data (value) type will be
+ *         displayed with a note that they are not suitable for the widget's current definition.
+ *         If null is set, then expert and parser will be chosen on the widget's current value. If
+ *         the value is null, then the widget will not be able to offer any input for new values
+ *         though.
  *         Default: null
  *
  * @option value {dataValues.DataValue|null} The data value this view should represent initially.
@@ -124,6 +128,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 */
 	options: {
 		expertProvider: null,
+		valueParserProvider: null,
 		on: null,
 		value: null,
 		autoStartEditing: false,
@@ -533,18 +538,11 @@ $.widget( 'valueview.valueview', PARENT, {
 			clearTimeout( this._parseTimer );
 		}
 
-		var valueParser = expert.parser(),
+		var valueParser = self._instantiateParser( expert.valueCharacteristics() ),
 			delay = ( valueParser instanceof vp.ApiBasedValueParser ) ? this.options.parseDelay : 0;
 
 		this._parseTimer = setTimeout( function() {
 			self.__lastUpdateValue = rawValue;
-
-			// TODO: Get rid of parsers in experts, instead, inject a ValueParserFactory in here.
-			var parserOptions = expert.valueCharacteristics(),
-				valueParser = expert.parser();
-
-			parserOptions = $.extend( valueParser.getOptions(), parserOptions );
-			valueParser = new valueParser.constructor( parserOptions );
 
 			// TODO: Hacky preview spinner activation. Necessary until we move the responsibility
 			//  for previews out of the experts. The preview should be handled in the same place for
@@ -590,6 +588,35 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
+	 * Instantiates a parser adequate to the "on" option or the current value.
+	 *
+	 * @param {Object} [additionalParserOptions]
+	 * @return {valueParsers.ValueParser}
+	 */
+	_instantiateParser: function( additionalParserOptions ) {
+		additionalParserOptions = additionalParserOptions || {};
+
+		var parserHint = this.options.on;
+
+		if( !parserHint && this._value instanceof dv.DataValue ) {
+			parserHint = this._value.getType();
+		}
+
+		if( !parserHint ) {
+			throw new Error( 'No adequate information to find a parser' );
+		}
+
+		var Parser = this.options.valueParserProvider.getParser( parserHint ),
+			parserOptions = $.extend(
+				{},
+				Parser.prototype.getOptions(),
+				additionalParserOptions
+			);
+
+		return new Parser( parserOptions );
+	},
+
+	/**
 	 * Returns an object with information about the view. This is a immutable object which can be
 	 * passed if information about the view should be revealed to some function or constructor
 	 * without making the whole view object available.
@@ -608,7 +635,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *
 	 * @since 0.1
 	 *
-	 * @returns dv.util.Notifier
+	 * @return dataValues.util.Notifier
 	 */
 	viewNotifier: function() {
 		var self = this;

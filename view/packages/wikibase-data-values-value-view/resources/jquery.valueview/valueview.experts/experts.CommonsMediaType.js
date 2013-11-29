@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, vp, $, vv, wikiUrlencode ) {
+( function( dv, $, vv, wikiUrlencode ) {
 	'use strict';
 
 	/**
@@ -78,4 +78,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, mw.util.wikiUrlencode ) );
+}( dataValues, jQuery, jQuery.valueview, mw.util.wikiUrlencode ) );

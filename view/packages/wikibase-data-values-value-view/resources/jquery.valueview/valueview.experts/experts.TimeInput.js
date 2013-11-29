@@ -5,7 +5,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv, time ) {
+( function( dv, $, vv, time ) {
 	'use strict';
 
 	var Time = time.Time,
@@ -412,13 +412,6 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.parser
-		 */
-		parser: function() {
-			return new vp.TimeParser();
-		},
-
-		/**
 		 * @see jQuery.valueview.Expert._getRawValue
 		 *
 		 * @return {time.Time|null}
@@ -506,4 +499,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, time ) );
+}( dataValues, jQuery, jQuery.valueview, time ) );

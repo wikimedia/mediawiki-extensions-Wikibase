@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-jQuery.valueview.BifidExpert = ( function( dv, vp, $, Expert ) {
+jQuery.valueview.BifidExpert = ( function( dv, $, Expert ) {
 	'use strict';
 
 	var PARENT = Expert;
@@ -115,13 +115,6 @@ jQuery.valueview.BifidExpert = ( function( dv, vp, $, Expert ) {
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.parser
-		 */
-		parser: function() {
-			return this._currentExpert.parser();
-		},
-
-		/**
 		 * @see jQuery.valueview.Expert.valueCharacteristics
 		 */
 		valueCharacteristics: function() {
@@ -174,4 +167,4 @@ jQuery.valueview.BifidExpert = ( function( dv, vp, $, Expert ) {
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview.Expert ) );
+}( dataValues, jQuery, jQuery.valueview.Expert ) );

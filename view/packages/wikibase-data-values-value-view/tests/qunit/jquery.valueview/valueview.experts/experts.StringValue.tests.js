@@ -5,7 +5,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
- ( function( $, QUnit, valueview, StringParser ) {
+ ( function( $, QUnit, valueview ) {
 
 	'use strict';
 
@@ -18,8 +18,7 @@
 		rawValues: {
 			valid: [ 'foo bar', '42', '*(&#$@#*$' ],
 			unknown: testExpert.basicTestDefinition.rawValues.unknown.concat( [ 42 ] )
-		},
-		relatedValueParser: StringParser
+		}
 	} );
 
-}( jQuery, QUnit, jQuery.valueview, valueParsers.StringParser ) );
+}( jQuery, QUnit, jQuery.valueview ) );

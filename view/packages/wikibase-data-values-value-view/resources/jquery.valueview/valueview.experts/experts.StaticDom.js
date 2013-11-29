@@ -28,9 +28,9 @@
 	 *         (2) Expert's related ViewState object.
 	 *         (3) The message provider associated with this StaticDom instance.
 	 *
-	 * @option baseExpert {Function} Constructor of an expert whose "parser" and "rawValueCompare"
-	 *         functions will be borrowed. This is required because this expert doesn't need to
-	 *         know what kind of values it handles.
+	 * @option baseExpert {Function} Constructor of an expert whose "rawValueCompare" function will
+	 *         be borrowed. This is required because this expert doesn't need to know what kind of
+	 *         values it handles.
 	 *
 	 * TODO: the "baseExpert" function is conceptually not that nice. It is required because the
 	 *  a static DOM expert doesn't need to know what kind of values it handles.
@@ -48,13 +48,6 @@
 		destroy: function() {
 			this._value = null;
 			PARENT.prototype.destroy.call( this );
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert.parser
-		 */
-		parser: function() {
-			return this._options.baseExpert.prototype.parser.call( this );
 		},
 
 		/**

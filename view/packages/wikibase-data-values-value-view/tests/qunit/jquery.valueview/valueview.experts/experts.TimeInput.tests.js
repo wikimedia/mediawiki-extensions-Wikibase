@@ -5,7 +5,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( $, QUnit, valueview, TimeParser, Time ) {
+( function( $, QUnit, valueview, Time ) {
 	'use strict';
 
 	var testExpert = valueview.tests.testExpert;
@@ -24,8 +24,7 @@
 				42,
 				'1. 1984'
 			] )
-		},
-		relatedValueParser: TimeParser
+		}
 	} );
 
-}( jQuery, QUnit, jQuery.valueview, valueParsers.TimeParser, time.Time ) );
+}( jQuery, QUnit, jQuery.valueview, time.Time ) );

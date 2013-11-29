@@ -5,7 +5,7 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv, GlobeCoordinate, Formatter ) {
+( function( dv, $, vv, GlobeCoordinate, Formatter ) {
 	'use strict';
 
 	var formatter = new Formatter( { format: 'degree' } );
@@ -57,4 +57,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate, globeCoordinate.Formatter ) );
+}( dataValues, jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate, globeCoordinate.Formatter ) );

@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, vp, $, vv ) {
+( function( dv, $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -63,13 +63,6 @@
 			this.$input = null;
 
 			PARENT.prototype.destroy.call( this );  // empties viewport
-		},
-
-		/**
-		 * @see Query.valueview.Expert.parser
-		 */
-		parser: function() {
-			return new vp.StringParser();
 		},
 
 		/**
@@ -165,4 +158,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview ) );
+}( dataValues, jQuery, jQuery.valueview ) );
