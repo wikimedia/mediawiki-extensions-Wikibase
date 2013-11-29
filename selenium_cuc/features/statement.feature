@@ -5,7 +5,7 @@
 #
 # feature definition for statements tests
 
-#@wikidata.beta.wmflabs.org
+@wikidata.beta.wmflabs.org
 Feature: Creating statements
 
   Background:
