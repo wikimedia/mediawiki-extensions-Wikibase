@@ -13,7 +13,7 @@ use Wikibase\Summary;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetDescription extends SpecialSetEntity {
+class SpecialSetDescription extends SpecialModifyLangAttribute {
 
 	/**
 	 * Constructor
