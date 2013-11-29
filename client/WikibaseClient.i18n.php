@@ -644,6 +644,7 @@ $messages['bs'] = array(
 /** Catalan (català)
  * @author Arnaugir
  * @author Grondin
+ * @author Papapep
  * @author Qllach
  * @author Toniher
  * @author Vriullop
@@ -655,8 +656,8 @@ $messages['ca'] = array(
 	'wikibase-after-page-move' => "També podeu [$1 actualitzar] l'element associat de Wikidata per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
 	'wikibase-after-page-move-queued' => "L'[element $1 de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
 	'wikibase-comment-remove' => 'Element associat de Wikidata eliminat. Enllaços de llengua suprimits.',
-	'wikibase-comment-linked' => 'Un element de Wikidata ha estat enllaçat a aquesta pàgina.',
-	'wikibase-comment-unlink' => "Aquesta pàgina ha estat deslligada de l'element Wikidata. Enllaços de llengua suprimits.",
+	'wikibase-comment-linked' => "S'ha enllaçat un element de Wikidata a aquesta pàgina.",
+	'wikibase-comment-unlink' => "S'ha desvinculat aquesta pàgina de l'element Wikidata. Suprimits els enllaços de llengua.",
 	'wikibase-comment-restore' => 'Element associat de Wikidata recuperat. Enllaços de llengua restaurats.',
 	'wikibase-comment-update' => 'Element Wikidata modificat',
 	'wikibase-comment-sitelink-add' => 'Afegit enllaç de llengua: $1',
@@ -1045,7 +1046,7 @@ $messages['de'] = array(
  */
 $messages['diq'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|vurnayış|vurnayışi}}',
-	'wikibase-dataitem' => 'Leteyê Wikidata',
+	'wikibase-dataitem' => 'Leteyé Wikimalumati',
 	'wikibase-editlinks' => 'Gırey bıvurne',
 	'wikibase-linkitem-input-site' => 'Zıwan:',
 	'wikibase-linkitem-input-page' => 'Pele:',
@@ -1245,9 +1246,9 @@ $messages['es'] = array(
 	'wikibase-linkitem-alreadylinked' => 'La página que quieres enlazar con esta, ya está enlazada a un [$1 elemento] en el repositorio de datos central que une a $2 en este sitio. Los elementos sólo pueden tener una sola página por sitio enlazado. Por favor, elije una página diferente para enlazarlo.',
 	'wikibase-linkitem-close' => 'Cierre el cuadro de dialogo y recargue la página',
 	'wikibase-linkitem-failure' => 'Se produjo un error desconocido al intentar enlazar la página dada.',
-	'wikibase-linkitem-title' => 'Enlace con la página',
-	'wikibase-linkitem-linkpage' => 'Enlace con la página',
-	'wikibase-linkitem-selectlink' => 'Por favor, seleccione un sitio y una página que deseé vincultar a esta página.',
+	'wikibase-linkitem-title' => 'Enlazar las páginas',
+	'wikibase-linkitem-linkpage' => 'Enlazar las páginas',
+	'wikibase-linkitem-selectlink' => 'Selecciona un sitio y la página que quieres enlazar con esta.',
 	'wikibase-linkitem-input-site' => 'Idioma:',
 	'wikibase-linkitem-input-page' => 'Página:',
 	'wikibase-linkitem-invalidsite' => 'Seleccionó un sitio desconocido o no válido',
@@ -1256,7 +1257,7 @@ $messages['es'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Necesita haberse identificado',
 	'wikibase-linkitem-not-loggedin' => 'Necesita haberse identificado en esta wiki y en el [$1 central data repository], para usar esta función.',
 	'wikibase-linkitem-success-create' => 'Las páginas han sido enlazadas con éxito. Puedes encontrar encontrar el elemento recién creado que contiene los enlaces en nuestro [$1 depósito central de datos].',
-	'wikibase-linkitem-success-link' => 'Las páginas han sido enlazadas con éxito. Puedes encontrar encontrar el elemento recién creado que contiene los enlaces en nuestro [$1 depósito central de datos].',
+	'wikibase-linkitem-success-link' => 'Se han enlazado las páginas correctamente. Puedes encontrar encontrar el elemento que contiene los enlaces en el [$1 depósito central de datos].',
 	'wikibase-property-notfound' => 'No se encuentra la propiedad "$1"',
 	'wikibase-property-notsupportedyet' => 'Wikibase aún no soporta el tipo de propiedad de la propiedad "$1".',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
