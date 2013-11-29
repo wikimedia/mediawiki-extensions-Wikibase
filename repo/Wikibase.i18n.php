@@ -182,10 +182,10 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-setsitelink-add-failed' => 'The site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'The site link could not be removed.',
 	'wikibase-setsitelink-not-itemid' => '"$1" is not a valid item id. Site links can only be set for items.',
-	'wikibase-setentity-id' => 'ID:',
-	'wikibase-setentity-language' => 'Language:',
-	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
-	'wikibase-setentity-invalid-id' => 'The id "$1" is unknown to the system. Please use a valid entity id.',
+	'wikibase-modifyentity-id' => 'ID:',
+	'wikibase-modifyterm-language' => 'Language:',
+	'wikibase-modifyentity-invalid-id' => 'The id "$1" is unknown to the system. Please use a valid entity id.',
+	'wikibase-modifyterm-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
 	'special-dispatchstats' => 'Change dispatch statistics',
 	'wikibase-dispatchstats-intro' => 'This page provides statistics about dispatching changes to the clients.
 A client wiki is notified of a change on {{SITENAME}} once the change has been dispatched on that wiki, and the job queue on that wiki has processed that notification.
@@ -877,20 +877,20 @@ Parameters:
 
 Parameters:
 * $1 - the invalid id',
-	'wikibase-setentity-id' => 'Label for the input field to select the ID of the entity.
+	'wikibase-modifyentity-id' => 'Label for the input field to select the ID of the entity.
 {{Identical|ID}}',
-	'wikibase-setentity-language' => 'Label for the input field to select the language the label should be set in.
+	'wikibase-modifyterm-language' => 'Label for the input field to select the language the label should be set in.
 {{Identical|Language}}',
-	'wikibase-setentity-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.
+	'wikibase-modifyentity-invalid-id' => 'Response informing that the selected entity ID is not valid.
+
+Parameters:
+* $1 - the invalid ID',
+	'wikibase-modifyterm-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.
 
 Parameters:
 * $1 - the invalid code
 
 "language identifier" is the same as "language code".',
-	'wikibase-setentity-invalid-id' => 'Response informing that the selected entity ID is not valid.
-
-Parameters:
-* $1 - the invalid ID',
 	'special-dispatchstats' => '{{doc-special|DispatchStats}}
 This special page shows statistics about the process used to notify client wikis about changes on the repository. "Dispatch" here is similar to "notify", "send" or "distribute".',
 	'wikibase-dispatchstats-intro' => 'Intro text for [[Special:DispatchStats]].

@@ -141,7 +141,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			$id = $idParser->parse( $rawId );
 		} catch ( RuntimeException $ex ) {
 			throw new UserInputException(
-				'wikibase-setentity-invalid-id',
+				'wikibase-modifyentity-invalid-id',
 				array( $rawId ),
 				'Entity id is not valid'
 			);
@@ -159,7 +159,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 
 		if ( $entityContent === null ) {
 			throw new UserInputException(
-				'wikibase-setentity-invalid-id',
+				'wikibase-modifyentity-invalid-id',
 				array( $id->getSerialization() ),
 				'Entity id is unknown'
 			);
@@ -195,7 +195,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
 		// FIXME: Edit warning should be displayed above the license note like on "New Entity" page.
-		// (Unfortunately, the license note is generated in SpecialSetEntity::modifyEntity.)
+		// (Unfortunately, the license note is generated in SpecialModifyTerm::modifyEntity.)
 		if ( $this->getUser()->isAnon() ) {
 			$this->showErrorHTML(
 				$this->msg(
@@ -265,10 +265,10 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		return Html::element(
 			'label',
 			array(
-				'for' => 'wb-setentity-id',
+				'for' => 'wb-modifyentity-id',
 				'class' => 'wb-label'
 			),
-			$this->msg( 'wikibase-setentity-id' )->text()
+			$this->msg( 'wikibase-modifyentity-id' )->text()
 		)
 		. Html::input(
 			'id',
@@ -276,7 +276,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			'text',
 			array(
 				'class' => 'wb-input',
-				'id' => 'wb-setentity-id'
+				'id' => 'wb-modifyentity-id'
 			)
 		)
 		. Html::element( 'br' );

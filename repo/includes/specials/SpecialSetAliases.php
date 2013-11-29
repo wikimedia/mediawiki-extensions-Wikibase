@@ -10,9 +10,9 @@ use Wikibase\Summary;
  *
  * @since 0.4
  * @licence GNU GPL v2+
- * @author Bene* < benestar.wikimedia@googlemail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SpecialSetAliases extends SpecialSetEntity {
+class SpecialSetAliases extends SpecialModifyTerm {
 
 	/**
 	 * Constructor
