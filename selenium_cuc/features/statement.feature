@@ -46,7 +46,7 @@ Feature: Creating statements
     | click the statement cancel button |
     | press the ESC key in the entity selector input field |
 
-  @ui_only
+  @ui_only @repo_login
   Scenario: Select a property
     Given There are properties with the following handles and datatypes:
       | stringprop | string |
@@ -58,7 +58,7 @@ Feature: Creating statements
       And Entity selector input element should be there
       And Statement value input element should be there
 
-  @ui_only
+  @ui_only @repo_login
   Scenario: Select a property and enter a statement value
     Given There are properties with the following handles and datatypes:
       | stringprop | string |
@@ -71,7 +71,7 @@ Feature: Creating statements
       And Entity selector input element should be there
       And Statement value input element should be there
 
-  @ui_only
+  @ui_only @repo_login
   Scenario Outline: Cancel statement after selecting a property
     Given There are properties with the following handles and datatypes:
       | stringprop | string |
@@ -91,7 +91,7 @@ Feature: Creating statements
     | press the ESC key in the entity selector input field |
     | press the ESC key in the statement value input field |
 
-  @ui_only
+  @ui_only @repo_login
   Scenario: Select a property, enter a statement value and clear the property
     Given There are properties with the following handles and datatypes:
       | stringprop | string |

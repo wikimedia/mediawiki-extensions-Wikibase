@@ -8,17 +8,20 @@
 
 Given /^I am on an item page$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
-  item = create_new_entity(item_data, "item")
-  @item_under_test = item
-  on(ItemPage).navigate_to_entity item["url"]
+  wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  @item_under_test = wb_api.wb_create_entity(item_data, "item")
+  on(ItemPage).navigate_to_entity @item_under_test["url"]
 end
 
 Given /^There are properties with the following handles and datatypes:$/ do |props|
-  @properties = create_new_properties(props.raw)
+  wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
+  @properties = wb_api.wb_create_properties(props.raw)
 end
 
 Given /^There are items with the following handles:$/ do |handles|
-  @items = create_new_items(handles.raw)
+  wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  @items = wb_api.wb_create_items(handles.raw)
 end
 
 Given /^The copyright warning has been dismissed$/ do
@@ -31,14 +34,15 @@ end
 
 Given /^I am on an item page with empty label and description$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + '' + '"}},"descriptions":{"en":{"language":"en","value":"' + '' + '"}}}'
-  item = create_new_entity(item_data, "item")
-  @item_under_test = item
-  on(ItemPage).navigate_to_entity item["url"]
+  wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  @item_under_test = wb_api.wb_create_entity(item_data, "item")
+  on(ItemPage).navigate_to_entity @item_under_test["url"]
 end
 
 Given /^The following sitelinks do not exist:$/ do |sitelinks|
+  wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   sitelinks.raw.each do |sitelink|
-    remove_sitelink(sitelink[0], sitelink[1]).should be_true
+    wb_api.wb_remove_sitelink(sitelink[0], sitelink[1]).should be_true
   end
 end
 
