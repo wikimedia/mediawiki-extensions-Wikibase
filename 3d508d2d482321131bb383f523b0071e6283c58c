@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_fb636139",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-11-29T18:55:03Z",
+      "side": 1,
+      "message": "I thought this could be useful for Queries, too.",
+      "parentUuid": "291c1151_fc8a2d64",
+      "revId": "3d508d2d482321131bb383f523b0071e6283c58c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "291c1151_3cf12502",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 6
