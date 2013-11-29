@@ -10,9 +10,6 @@ use Wikibase\Summary;
  *
  * @since 0.1
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
  * @group Wikibase
  * @group WikibaseSummary
  *
