@@ -1,31 +1,38 @@
 <?php
 
 namespace Wikibase;
+
+use ApiBase;
+use ApiEditPage;
+use Content;
+use ContentHandler;
+use DatabaseUpdater;
+use EditPage;
+use HistoryPager;
+use Html;
+use Language;
+use Linker;
+use LogEntryBase;
+use MWContentSerializationException;
+use MWException;
+use OutputPage;
+use RecentChange;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RequestContext;
+use Revision;
+use SearchResult;
+use Skin;
+use SkinTemplate;
+use SpecialSearch;
 use SplFileInfo;
-use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException;
+use Title;
+use User;
 use Wikibase\Repo\WikibaseRepo;
-
+use WikiPage;
 
 /**
  * File defining the hook handlers for the Wikibase extension.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.1
  *
@@ -46,11 +53,11 @@ final class RepoHooks {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \OutputPage $out
-	 * @param \Skin $skin
+	 * @param OutputPage $out
+	 * @param Skin $skin
 	 * @return boolean
 	 */
-	public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
+	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		$out->addModules( 'wikibase.ui.entitysearch' );
 		return true;
 	}
@@ -76,7 +83,8 @@ final class RepoHooks {
 		if ( empty( $namespaces ) ) {
 			wfProfileOut( __METHOD__ );
 			throw new MWException( 'Wikibase: Incomplete configuration: '
-				. '$wgWBRepoSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
+				. '$wgWBRepoSettings["entityNamespaces"] has to be set to an '
+				. 'array mapping content model IDs to namespace IDs. '
 				. 'See ExampleSettings.php for details and examples.');
 		}
 
@@ -96,11 +104,11 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \DatabaseUpdater $updater
+	 * @param DatabaseUpdater $updater
 	 *
 	 * @return boolean
 	 */
-	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
+	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
@@ -253,15 +261,15 @@ final class RepoHooks {
 	 * @param User $user
 	 * @param string $reason
 	 * @param integer $id
-	 * @param \Content $content
-	 * @param \LogEntryBase $logEntry
+	 * @param Content $content
+	 * @param LogEntryBase $logEntry
 	 *
 	 * @throws MWException
 	 *
 	 * @return boolean
 	 */
 	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
-		\Content $content = null, \LogEntryBase $logEntry = null
+		Content $content = null, LogEntryBase $logEntry = null
 	) {
 		wfProfileIn( __METHOD__ );
 
@@ -353,10 +361,10 @@ final class RepoHooks {
 	 *
 	 * @since ?
 	 *
-	 * @param $rc \RecentChange
+	 * @param $rc RecentChange
 	 * @return bool
 	 */
-	public static function onRecentChangeSave( $rc ) {
+	public static function onRecentChangeSave( RecentChange $rc ) {
 		if ( $rc->getAttribute( 'rc_log_type' ) === null ) {
 			$changesTable = ChangesTable::singleton();
 
@@ -429,14 +437,14 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \HistoryPager $history
+	 * @param HistoryPager $history
 	 * @param object &$row
 	 * @param string &$s
 	 * @param array &$classes
 	 *
 	 * @return boolean
 	 */
-	public static function onPageHistoryLineEnding( \HistoryPager $history, &$row, &$s, array &$classes  ) {
+	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes  ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -448,7 +456,7 @@ final class RepoHooks {
 			&& $article->getPage()->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 		) {
-			$link = \Linker::linkKnown(
+			$link = Linker::linkKnown(
 				$rev->getTitle(),
 				$history->msg( 'wikibase-restoreold' )->escaped(),
 				array(),
@@ -471,12 +479,12 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \SkinTemplate $sktemplate
+	 * @param SkinTemplate $sktemplate
 	 * @param array $links
 	 *
 	 * @return boolean
 	 */
-	public static function onPageTabs( \SkinTemplate &$sktemplate, array &$links ) {
+	public static function onPageTabs( SkinTemplate &$sktemplate, array &$links ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -623,13 +631,13 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \OutputPage $out
-	 * @param \Skin $sk
+	 * @param OutputPage $out
+	 * @param Skin $sk
 	 * @param array $bodyAttrs
 	 *
 	 * @return bool
 	 */
-	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
+	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -725,7 +733,7 @@ final class RepoHooks {
 
 		try {
 			$content = $page->getContent();
-		} catch ( \MWContentSerializationException $ex ) {
+		} catch ( MWContentSerializationException $ex ) {
 			// if this fails, it's not horrible.
 			wfWarn( "Failed to get entity object for [[" . $page->getTitle()->getFullText() . "]]"
 					. ": " . $ex->getMessage() );
@@ -814,19 +822,19 @@ final class RepoHooks {
 	 * of structured data, and it also prevents other types of content being created in these
 	 * namespaces.
 	 *
-	 * @param \ApiBase $module The API module being called
+	 * @param ApiBase $module The API module being called
 	 * @param User    $user   The user calling the API
 	 * @param array|string|null   $message Output-parameter holding for the message the call should fail with.
 	 *                            This can be a message key or an array as expected by ApiBase::dieUsageMsg().
 	 *
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
 	 */
-	public static function onApiCheckCanExecute( \ApiBase $module, User $user, &$message ) {
+	public static function onApiCheckCanExecute( ApiBase $module, User $user, &$message ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		if ( $module instanceof \ApiEditPage ) {
+		if ( $module instanceof ApiEditPage ) {
 			$params = $module->extractRequestParams();
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
@@ -868,8 +876,8 @@ final class RepoHooks {
 	 *
 	 * @since 0.3
 	 *
-	 * @param \SpecialSearch $searchPage
-	 * @param \SearchResult $result
+	 * @param SpecialSearch $searchPage
+	 * @param SearchResult $result
 	 * @param $terms
 	 * @param &$link
 	 * @param &$redirect
@@ -883,10 +891,8 @@ final class RepoHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onShowSearchHit( \SpecialSearch $searchPage, \SearchResult $result, $terms,
-		&$link, &$redirect, &$section, &$extract,
-		&$score, &$size, &$date, &$related,
-		&$html
+	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result, $terms,
+		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
 	) {
 		wfProfileIn( __METHOD__ );
 
@@ -954,12 +960,12 @@ final class RepoHooks {
 	 * Hook handler for AbuseFilter's AbuseFilter-contentToString hook, implemented
 	 * to provide a custom text representation of Entities for filtering.
 	 *
-	 * @param \Content $content The content object
+	 * @param Content $content The content object
 	 * @param string  &$text The resulting text
 	 *
 	 * @return bool
 	 */
-	public static function onAbuseFilterContentToString( \Content $content, &$text ) {
+	public static function onAbuseFilterContentToString( Content $content, &$text ) {
 		if ( !( $content instanceof EntityContent ) ) {
 			return true;
 		}
@@ -983,7 +989,7 @@ final class RepoHooks {
 	 * @param string $pre the string before the autocomment
 	 * @param string $auto the autocomment unformatted
 	 * @param string $post the string after the autocomment
-	 * @param \Title $title use for further information
+	 * @param Title $title use for further information
 	 * @param boolean $local shall links be generated locally or globally
 	 *
 	 * @return boolean
