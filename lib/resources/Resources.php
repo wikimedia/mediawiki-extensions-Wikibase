@@ -56,11 +56,21 @@ return call_user_func( function() {
 
 		'wikibase.parsers' => $moduleTemplate + array(
 			'scripts' => array(
+				'parsers/wikibase.parsers.js',
+			),
+			'dependencies' => array(
+				'mw.ext.valueParsers',
+				'mw.ext.valueView',
+				'wikibase.EntityIdParser',
+			),
+		),
+
+		'wikibase.EntityIdParser' => $moduleTemplate + array(
+			'scripts' => array(
 				'parsers/EntityIdParser.js',
 			),
 			'dependencies' => array(
 				'valueParsers.ValueParser',
-				'valueParsers.api',
 				'wikibase.datamodel',
 			),
 		),
@@ -720,6 +730,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'mw.ext.valueView',
+				'mw.ext.valueParsers',
 			),
 		),
 
