@@ -180,17 +180,7 @@ class GetEntities extends ApiWikibase {
 	 */
 	protected function handleEntity( EntityId $entityId, array $params ) {
 		wfProfileIn( __METHOD__ );
-		$result = $this->getResult();
 		$props = $this->getPropsFromParams( $params );
-
-		// key should be numeric to get the correct behavior
-		// note that this setting depends upon "setIndexedTagName_internal"
-		// FIXME: if we get different kinds of entities at once, $entityId->getNumericId() may not be unique.
-		// NOTE see https://bugzilla.wikimedia.org/show_bug.cgi?id=57529
-		$entityPath = array(
-			'entities',
-			!$this->getResult()->getIsRawMode() ? $entityId->getSerialization() : $entityId->getNumericId()
-		);
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
@@ -200,21 +190,23 @@ class GetEntities extends ApiWikibase {
 			return;
 		}
 
+		$record = array();
+
 		//if there are no props defined only return type and id..
 		if ( $params['props'] === array() ) {
-			$result->addValue( $entityPath, 'id', $entityId->getSerialization() );
-			$result->addValue( $entityPath, 'type', $entityId->getEntityType() );
+			$record['id'] = $entityId->getSerialization();
+			$record['type'] = $entityId->getEntityType();
 		} else {
 			if ( in_array( 'info', $props ) ) {
 				$title = $entityContent->getTitle();
-				$result->addValue( $entityPath, 'pageid', $title->getArticleID() );
-				$result->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
-				$result->addValue( $entityPath, 'title', $title->getPrefixedText() );
+				$record['pageid'] = $title->getArticleID();
+				$record['ns'] = intval( $title->getNamespace() );
+				$record['title'] = $title->getPrefixedText();
 
 				$revision = $entityContent->getWikiPage()->getRevision();
 				if ( $revision !== null ) {
-					$result->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
-					$result->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+					$record['lastrevid'] = intval( $revision->getId() );
+					$record['modified'] = wfTimestamp( TS_ISO_8601, $revision->getTimestamp() );
 				}
 			}
 
@@ -224,10 +216,15 @@ class GetEntities extends ApiWikibase {
 			$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
-			foreach ( $entitySerialization as $key => $value ) {
-				$result->addValue( $entityPath, $key, $value );
-			}
+			$record = array_merge( $record, $entitySerialization );
 		}
+
+		// key should be numeric to get the correct behavior
+		// note that this setting depends upon "setIndexedTagName_internal"
+		// NOTE see https://bugzilla.wikimedia.org/show_bug.cgi?id=57529
+		$resultName = !$this->getResult()->getIsRawMode() ? $entityId->getSerialization() : null;
+
+		$this->getResult()->addValue( array( 'entities' ), $resultName, $record );
 		wfProfileOut( __METHOD__ );
 	}
 
