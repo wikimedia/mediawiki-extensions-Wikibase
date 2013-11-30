@@ -10,7 +10,6 @@ use UserInputException;
 use Wikibase\EntityContent;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
 
 /**
@@ -79,19 +78,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::parseEntityId()
+	 * @see SpecialWikibaseRepoPage::parseEntityId()
 	 */
 	protected function parseEntityId( $rawId ) {
-		try {
-			return new ItemId( $rawId );
-		} catch ( InvalidArgumentException $ex ) {
-			throw new UserInputException(
-				'wikibase-setsitelink-not-itemid',
-				array( $rawId ),
-				$ex->getMessage(),
-				$ex
-			);
-		}
+		return $this->parseItemId( $rawId );
 	}
 
 	/**
