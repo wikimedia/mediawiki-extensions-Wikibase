@@ -130,6 +130,7 @@ return call_user_func( function() {
 		'Wikibase\RdfSerializer' => 'includes/rdf/RdfSerializer.php',
 
 		// includes/specials
+		'Wikibase\Repo\Specials\SpecialWikibaseRepoPage' => 'includes/specials/SpecialWikibaseRepoPage.php',
 		'Wikibase\Repo\Specials\SpecialNewEntity' => 'includes/specials/SpecialNewEntity.php',
 		'Wikibase\Repo\Specials\SpecialNewItem' => 'includes/specials/SpecialNewItem.php',
 		'Wikibase\Repo\Specials\SpecialNewProperty' => 'includes/specials/SpecialNewProperty.php',
@@ -142,6 +143,7 @@ return call_user_func( function() {
 		'Wikibase\Repo\Specials\SpecialSetDescription' => 'includes/specials/SpecialSetDescription.php',
 		'Wikibase\Repo\Specials\SpecialSetAliases' => 'includes/specials/SpecialSetAliases.php',
 		'Wikibase\Repo\Specials\SpecialSetSiteLink' => 'includes/specials/SpecialSetSiteLink.php',
+		'Wikibase\Repo\Specials\SpecialMergeItems' => 'includes/specials/SpecialMergeItems.php',
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPage' => 'includes/specials/SpecialEntitiesWithoutPage.php',
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel' => 'includes/specials/SpecialEntitiesWithoutLabel.php',
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription' => 'includes/specials/SpecialEntitiesWithoutDescription.php',
