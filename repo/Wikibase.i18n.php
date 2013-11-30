@@ -118,6 +118,9 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-itemlink-title' => '$1 | $2',
 
 	// Special pages
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" is not a valid item id.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
+	'wikibase-wikibaserepopage-invalid-id' => 'The id "$1" is unknown to the system. Please use a valid entity id.',
 	'special-itembytitle' => 'Item by title',
 	'wikibase-itembytitle-lookup-fieldset' => 'Search for items by site and title',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -157,35 +160,37 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-setlabel-introfull' => 'You are setting the label in $2 for [[$1]].',
 	'wikibase-setlabel-intro' => 'This form allows you to set the label of an entity. You need to provide the id of the entity (e.g. Q23), a language code (e.g. "en") and the label to set to.',
 	'wikibase-setlabel-label' => 'Label:',
-	'wikibase-setlabel-submit' => 'Set the label',
+	'wikibase-setlabel-submit' => 'Set label',
 	'wikibase-setlabel-warning-remove' => 'Do you really want to remove the label of [[$1]]?',
 	'special-setdescription' => 'Set a description',
 	'wikibase-setdescription-introfull' => 'You are setting the description in $2 for [[$1]].',
 	'wikibase-setdescription-intro' => 'This form allows you to set the description of an entity. You need to provide the id of the entity (e.g. Q23), a language code (e.g. "en") and the description to set to.',
 	'wikibase-setdescription-label' => 'Description:',
-	'wikibase-setdescription-submit' => 'Set the description',
+	'wikibase-setdescription-submit' => 'Set description',
 	'wikibase-setdescription-warning-remove' => 'Do you really want to remove the description of [[$1]]?',
 	'special-setaliases' => 'Set aliases',
 	'wikibase-setaliases-introfull' => 'You are setting the aliases in $2 for [[$1]]. Several aliases are separated by a pipe (<code>|</code>) character.',
 	'wikibase-setaliases-intro' => 'This form allows you to set the aliases of an entity. You need to provide the id of the entity (e.g. Q23), a language code (e.g. "en") and the aliases to set to. Several aliases are separated by a pipe (<code>|</code>) character.',
 	'wikibase-setaliases-label' => 'Aliases:',
-	'wikibase-setaliases-submit' => 'Set the aliases',
+	'wikibase-setaliases-submit' => 'Set aliases',
 	'wikibase-setaliases-warning-remove' => 'Do you really want to remove all aliases of [[$1]]?',
 	'special-setsitelink' => 'Set a site link',
 	'wikibase-setsitelink-introfull' => 'You are setting the site link of $2 for [[$1]].',
 	'wikibase-setsitelink-intro' => 'This form allows you to set the site link of an entity. You need to provide the id of the entity (e.g. Q23), a site id (e.g. "enwiki") and the site link to set to.',
 	'wikibase-setsitelink-site' => 'Site id:',
 	'wikibase-setsitelink-label' => 'Site link:',
-	'wikibase-setsitelink-submit' => 'Set the site link',
+	'wikibase-setsitelink-submit' => 'Set site link',
 	'wikibase-setsitelink-warning-remove' => 'Do you really want to remove the site link of [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'The site id "$1" is unknown. Please use an existing site id, such as "enwiki".',
 	'wikibase-setsitelink-add-failed' => 'The site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'The site link could not be removed.',
-	'wikibase-setsitelink-not-itemid' => '"$1" is not a valid item id. Site links can only be set for items.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Language:',
-	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
-	'wikibase-setentity-invalid-id' => 'The id "$1" is unknown to the system. Please use a valid entity id.',
+	'special-mergeitems' => 'Merge two items',
+	'wikibase-mergeitems-intro' => 'If you merge two items, all labels, descriptions, aliases, sitelinks and statements will be moved from one item to the other.',
+	'wikibase-mergeitems-fromid' => 'The id to merge from',
+	'wikibase-mergeitems-toid' => 'The id to merge to',
+	'wikibase-mergeitems-submit' => 'Merge items',
 	'special-dispatchstats' => 'Change dispatch statistics',
 	'wikibase-dispatchstats-intro' => 'This page provides statistics about dispatching changes to the clients.
 A client wiki is notified of a change on {{SITENAME}} once the change has been dispatched on that wiki, and the job queue on that wiki has processed that notification.
@@ -742,6 +747,20 @@ Used to wrap the language and label for an additional entry when the language ar
 Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description. Parameters:
 * $1 label as a directional string
 * $2 description as a directional string',
+	'wikibase-wikibaserepopage-not-itemid' => 'Error message when an entity id, other than item id, is entered. The message advises users that the id is invalid.
+
+Parameters:
+* $1 - the invalid id',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.
+
+Parameters:
+* $1 - the invalid code
+
+"language identifier" is the same as "language code".',
+	'wikibase-wikibaserepopage-invalid-id' => 'Response informing that the selected entity ID is not valid.
+
+Parameters:
+* $1 - the invalid ID',
 	'special-itembytitle' => "{{doc-special|ItemByTitle}}
 The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	'wikibase-itembytitle-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.',
@@ -873,24 +892,15 @@ Parameters:
 * $1 - the invalid id',
 	'wikibase-setsitelink-add-failed' => 'Error message when the site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'Error message when the site link could not be removed.',
-	'wikibase-setsitelink-not-itemid' => 'Error message when an entity id, other than item id, is entered. The message advises users that the id is invalid and only items have site links.
-
-Parameters:
-* $1 - the invalid id',
 	'wikibase-setentity-id' => 'Label for the input field to select the ID of the entity.
 {{Identical|ID}}',
 	'wikibase-setentity-language' => 'Label for the input field to select the language the label should be set in.
 {{Identical|Language}}',
-	'wikibase-setentity-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.
-
-Parameters:
-* $1 - the invalid code
-
-"language identifier" is the same as "language code".',
-	'wikibase-setentity-invalid-id' => 'Response informing that the selected entity ID is not valid.
-
-Parameters:
-* $1 - the invalid ID',
+	'special-mergeitems' => '{{doc-special|MergeItems}}',
+	'wikibase-mergeitems-intro' => 'A short text at the top of the page that allows users to merge two items, explaining the form.',
+	'wikibase-mergeitems-fromid' => 'Label for the input field to select the ID of the entity to merge from.',
+	'wikibase-mergeitems-toid' => 'Label for the input field to select the ID of the entity to merge to.',
+	'wikibase-mergeitems-submit' => 'Label for the button that activates the action.',
 	'special-dispatchstats' => '{{doc-special|DispatchStats}}
 This special page shows statistics about the process used to notify client wikis about changes on the repository. "Dispatch" here is similar to "notify", "send" or "distribute".',
 	'wikibase-dispatchstats-intro' => 'Intro text for [[Special:DispatchStats]].

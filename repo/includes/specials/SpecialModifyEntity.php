@@ -8,7 +8,6 @@ use UserBlockedError;
 use UserInputException;
 use Wikibase\EditEntity;
 use Wikibase\EntityId;
-use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -20,7 +19,7 @@ use Wikibase\SummaryFormatter;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-abstract class SpecialModifyEntity extends SpecialWikibasePage {
+abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	/**
 	 * The entity content to modify.
@@ -32,11 +31,6 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	protected $entityContent;
 
 	/**
-	 * @var SummaryFormatter
-	 */
-	protected $summaryFormatter;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -46,9 +40,6 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 */
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
-
-		// TODO: find a way to inject this
-		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 	}
 
 	/**
@@ -130,63 +121,6 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	}
 
 	/**
-	 * @param string $rawId
-	 *
-	 * @return EntityId
-	 */
-	protected function parseEntityId( $rawId ) {
-		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-
-		try {
-			$id = $idParser->parse( $rawId );
-		} catch ( RuntimeException $ex ) {
-			throw new UserInputException(
-				'wikibase-setentity-invalid-id',
-				array( $rawId ),
-				'Entity id is not valid'
-			);
-		}
-
-		return $id;
-	}
-
-	/**
-	 * @param EntityId $id
-	 */
-	protected function loadEntityContent( EntityId $id ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->getFromId( $id );
-
-		if ( $entityContent === null ) {
-			throw new UserInputException(
-				'wikibase-setentity-invalid-id',
-				array( $id->getSerialization() ),
-				'Entity id is unknown'
-			);
-		}
-
-		return $entityContent;
-	}
-
-	/**
-	 * Showing an error.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $error The error message in HTML format
-	 * @param string $class The element's class, default 'error'
-	 */
-	protected function showErrorHTML( $error, $class = 'error' ) {
-		$this->getOutput()->addHTML(
-			Html::rawElement(
-				'p',
-				array( 'class' => $class ),
-				$error
-			)
-		);
-	}
-
-	/**
 	 * Building the HTML form for modifying an entity.
 	 *
 	 * @since 0.2
@@ -261,7 +195,6 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 * @return string
 	 */
 	protected function getFormElements() {
-		$id = $this->entityContent ? $this->entityContent->getTitle()->getText() : '';
 		return Html::element(
 			'label',
 			array(
@@ -283,37 +216,24 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Modifies the entity.
+	 * Returns the summary for the given module.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string|null $module
+	 *
+	 * @return Summary
+	 */
+	protected function getSummary( $module = null ) {
+		return new Summary( $module );
+	}
+
+	/**
+	 * Modifies the entity. A return value of false indicates that the edit failed.
 	 *
 	 * @since 0.4
 	 *
 	 * @return Summary|boolean The summary or false
 	 */
 	abstract protected function modifyEntity();
-
-	protected function getSummary( $module = null ) {
-		return new Summary( $module );
-	}
-
-	/**
-	 * Output an error message telling the user that he is blocked
-	 * @throws UserBlockedError
-	 */
-	function displayBlockedError() {
-		throw new UserBlockedError( $this->getUser()->getBlock() );
-	}
-
-	/**
-	 * Checks if user is blocked, and if he is blocked throws a UserBlocked
-	 *
-	 * @todo factor out to have some generic code for all editing
-	 *	   Wikibase pages to be able to use.  This applies to new entities also.
-	 *
-	 * @since 0.4
-	 */
-	public function checkBlocked() {
-		if ( $this->getUser()->isBlocked() ) {
-			$this->displayBlockedError();
-		}
-	}
 }
