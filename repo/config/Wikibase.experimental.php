@@ -15,7 +15,11 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 }
 
 call_user_func( function() {
-	global $wgHooks;
+	global $wgSpecialPages, $wgSpecialPageGroups, $wgHooks;
+
+	// Register Special:MergeItems here until the merge feature works well enough Bug: 55960
+	$wgSpecialPages['MergeItems'] = 'Wikibase\Repo\Specials\SpecialMergeItems';
+	$wgSpecialPageGroups['MergeItems'] = 'wikibaserepo';
 
 	/**
 	 * Hook to add PHPUnit test cases.
