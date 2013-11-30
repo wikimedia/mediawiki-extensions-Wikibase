@@ -25,6 +25,7 @@ $specialPageAliases['en'] = array(
 	'SetDescription' => array( 'SetDescription' ),
 	'SetAliases' => array( 'SetAliases' ),
 	'SetSiteLink' => array( 'SetSiteLink' ),
+	'MergeItems' => array( 'MergeItems' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
 	'EntitiesWithoutDescription' => array( 'EntitiesWithoutDescription' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsWithoutSitelinks' ),
