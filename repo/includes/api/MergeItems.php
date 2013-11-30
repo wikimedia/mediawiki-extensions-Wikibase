@@ -113,7 +113,7 @@ class MergeItems extends ApiWikibase {
 		}
 
 		if ( !( $fromEntityContent instanceof ItemContent && $toEntityContent instanceof ItemContent ) ) {
-			$this->dieUsage( "One or more of the entities are not items", "not-item" );
+			$this->dieUsage( 'One or more of the entities are not items', 'not-item' );
 		}
 
 		if( $toEntityContent->getEntity()->getId()->equals( $fromEntityContent->getEntity()->getId() ) ){
@@ -121,6 +121,9 @@ class MergeItems extends ApiWikibase {
 		}
 	}
 
+	/**
+	 * @param string[] $params
+	 */
 	private function validateParams( array $params ) {
 		if ( empty( $params['fromid'] ) || empty( $params['toid'] ) ){
 			$this->dieUsage( 'You must provide a fromid and a toid' , 'param-missing' );
