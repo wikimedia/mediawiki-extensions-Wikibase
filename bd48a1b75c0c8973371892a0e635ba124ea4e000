@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_93ee79b0",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-30T15:45:19Z",
+      "side": 1,
+      "message": "this is lib, don\u0027t use Repo code in it",
+      "revId": "bd48a1b75c0c8973371892a0e635ba124ea4e000",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_73ebf5a0",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-11-30T15:45:19Z",
+      "side": 1,
+      "message": "this is lib, don\u0027t use Repo code in it",
+      "revId": "bd48a1b75c0c8973371892a0e635ba124ea4e000",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
