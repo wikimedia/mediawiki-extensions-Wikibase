@@ -8,7 +8,6 @@ use UserBlockedError;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\EditEntity;
 use Wikibase\EntityContent;
-use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -21,8 +20,9 @@ use Wikibase\SummaryFormatter;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-abstract class SpecialNewEntity extends SpecialWikibasePage {
+abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 	/**
 	 * Contains pieces of the sub-page name of this special page if a subpage was called.
@@ -330,24 +330,5 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	 * @return string[] Warnings that should be presented to the user
 	 */
 	abstract protected function getWarnings();
-
-	/**
-	 * Output an error message telling the user that he is blocked
-	 * @throws UserBlockedError
-	 */
-	function displayBlockedError() {
-		throw new UserBlockedError( $this->getUser()->getBlock() );
-	}
-
-	/**
-	 * Checks if user is blocked, and if he is blocked throws a UserBlocked
-	 *
-	 * @since 0.4
-	 */
-	public function checkBlocked() {
-		if ( $this->getUser()->isBlocked() ) {
-			$this->displayBlockedError();
-		}
-	}
 
 }
