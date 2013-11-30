@@ -4,8 +4,12 @@ namespace Wikibase\Lib\Specials;
 
 use Html;
 use SpecialPage;
+use RuntimeException;
+use UserInputException;
+use Wikibase\EntityId;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base for special pages of the Wikibase extension,
@@ -17,6 +21,7 @@ use Wikibase\Utils;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class SpecialWikibasePage extends SpecialPage {
 
@@ -103,6 +108,99 @@ abstract class SpecialWikibasePage extends SpecialPage {
 				'div',
 				array(),
 				Utils::getCopyrightMessage()->parse()
+			)
+		);
+	}
+
+	/**
+	 * Output an error message telling the user that he is blocked
+	 *
+	 * @since 0.4
+	 *
+	 * @throws UserBlockedError
+	 */
+	private function displayBlockedError() {
+		throw new UserBlockedError( $this->getUser()->getBlock() );
+	}
+
+	/**
+	 * Checks if user is blocked, and if he is blocked throws a UserBlocked
+	 *
+	 * @since 0.4
+	 */
+	public function checkBlocked() {
+		if ( $this->getUser()->isBlocked() ) {
+			$this->displayBlockedError();
+		}
+	}
+
+	/**
+	 * Parses an entity id.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $rawId
+	 *
+	 * @return EntityId
+	 *
+	 * @throws UserInputException
+	 */
+	protected function parseEntityId( $rawId ) {
+		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+
+		try {
+			$id = $idParser->parse( $rawId );
+		} catch ( RuntimeException $ex ) {
+			throw new UserInputException(
+				'wikibase-setentity-invalid-id',
+				array( $rawId ),
+				'Entity id is not valid'
+			);
+		}
+
+		return $id;
+	}
+
+	/**
+	 * Loads the entity content for this entity id.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return EntityContent
+	 *
+	 * @throws UserInputException
+	 */
+	protected function loadEntityContent( EntityId $id ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityContent = $entityContentFactory->getFromId( $id );
+
+		if ( $entityContent === null ) {
+			throw new UserInputException(
+				'wikibase-setentity-invalid-id',
+				array( $id->getSerialization() ),
+				'Entity id is unknown'
+			);
+		}
+
+		return $entityContent;
+	}
+
+	/**
+	 * Showing an error.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $error The error message in HTML format
+	 * @param string $class The element's class, default 'error'
+	 */
+	protected function showErrorHTML( $error, $class = 'error' ) {
+		$this->getOutput()->addHTML(
+			Html::rawElement(
+				'p',
+				array( 'class' => $class ),
+				$error
 			)
 		);
 	}
