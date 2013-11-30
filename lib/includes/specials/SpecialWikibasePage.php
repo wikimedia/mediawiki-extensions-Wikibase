@@ -3,6 +3,8 @@
 namespace Wikibase\Lib\Specials;
 
 use SpecialPage;
+use Html;
+use UserBlockedError;
 use Wikibase\StringNormalizer;
 
 /**
@@ -15,6 +17,7 @@ use Wikibase\StringNormalizer;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class SpecialWikibasePage extends SpecialPage {
 
@@ -90,4 +93,43 @@ abstract class SpecialWikibasePage extends SpecialPage {
 		return true;
 	}
 
+	/**
+	 * Adds the "copyright info message" to the HTML output.
+	 */
+	protected function showCopyrightMessage() {
+		$this->getOutput()->addHTML(
+			Html::rawElement(
+				'div',
+				array(),
+				Utils::getCopyrightMessage()->parse()
+			)
+		);
+	}
+
+	/**
+	 * Checks if user is blocked, and if he is blocked throws a UserBlocked.
+	 *
+	 * @throws UserBlockedError
+	 */
+	protected function checkBlocked() {
+		if ( $this->getUser()->isBlocked() ) {
+			throw new UserBlockedError( $this->getUser()->getBlock() );
+		}
+	}
+
+	/**
+	 * Showing an error.
+	 *
+	 * @param string $error The error message in HTML format
+	 * @param string $class The element's class, default 'error'
+	 */
+	protected function showErrorHTML( $error, $class = 'error' ) {
+		$this->getOutput()->addHTML(
+			Html::rawElement(
+				'p',
+				array( 'class' => $class ),
+				$error
+			)
+		);
+	}
 }

@@ -15,6 +15,7 @@ use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Summary;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -122,19 +123,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::parseEntityId()
+	 * @see SpecialWikibaseRepoPage::parseEntityId()
 	 */
 	protected function parseEntityId( $rawId ) {
-		try {
-			return new ItemId( $rawId );
-		} catch ( InvalidArgumentException $ex ) {
-			throw new UserInputException(
-				'wikibase-setsitelink-not-itemid',
-				array( $rawId ),
-				$ex->getMessage(),
-				$ex
-			);
-		}
+		return $this->parseItemId( $rawId );
 	}
 
 	/**
