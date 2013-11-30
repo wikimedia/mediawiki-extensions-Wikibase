@@ -186,6 +186,11 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-setentity-language' => 'Language:',
 	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
 	'wikibase-setentity-invalid-id' => 'The id "$1" is unknown to the system. Please use a valid entity id.',
+	'special-mergeitems' => 'Merge two items',
+	'wikibase-mergeitems-intro' => 'If you merge two items, all labels, descriptions, aliases, sitelinks and statements will be moved from one item to the other.',
+	'wikibase-mergeitems-fromid' => 'The id to merge from',
+	'wikibase-mergeitems-toid' => 'The id to merge to',
+	'wikibase-mergeitems-submit' => 'Merge the items',
 	'special-dispatchstats' => 'Change dispatch statistics',
 	'wikibase-dispatchstats-intro' => 'This page provides statistics about dispatching changes to the clients.
 A client wiki is notified of a change on {{SITENAME}} once the change has been dispatched on that wiki, and the job queue on that wiki has processed that notification.
@@ -891,6 +896,11 @@ Parameters:
 
 Parameters:
 * $1 - the invalid ID',
+	'special-mergeitems' => '{{doc-special|MergeItems}}',
+	'wikibase-mergeitems-intro' => 'A short text at the top of the page that allows users to merge two items, explaining the form.',
+	'wikibase-mergeitems-fromid' => 'Label for the input field to select the ID of the entity to merge from.',
+	'wikibase-mergeitems-toid' => 'Label for the input field to select the ID of the entity to merge to.',
+	'wikibase-mergeitems-submit' => 'Label for the button that activates the action.',
 	'special-dispatchstats' => '{{doc-special|DispatchStats}}
 This special page shows statistics about the process used to notify client wikis about changes on the repository. "Dispatch" here is similar to "notify", "send" or "distribute".',
 	'wikibase-dispatchstats-intro' => 'Intro text for [[Special:DispatchStats]].

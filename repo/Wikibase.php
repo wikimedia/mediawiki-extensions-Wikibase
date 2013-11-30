@@ -135,6 +135,7 @@ call_user_func( function() {
 	$wgSpecialPages['SetDescription'] 					= 'Wikibase\Repo\Specials\SpecialSetDescription';
 	$wgSpecialPages['SetAliases'] 						= 'Wikibase\Repo\Specials\SpecialSetAliases';
 	$wgSpecialPages['SetSiteLink']						= 'Wikibase\Repo\Specials\SpecialSetSiteLink';
+	$wgSpecialPages['MergeItems']						= 'Wikibase\Repo\Specials\SpecialMergeItems';
 	$wgSpecialPages['EntitiesWithoutLabel'] 			= 'Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel';
 	$wgSpecialPages['EntitiesWithoutDescription']		= 'Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription';
 	$wgSpecialPages['ListDatatypes']					= 'Wikibase\Repo\Specials\SpecialListDatatypes';
@@ -152,6 +153,7 @@ call_user_func( function() {
 	$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
 	$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 	$wgSpecialPageGroups['SetSiteLink']					= 'wikibaserepo';
+	$wgSpecialPageGroups['MergeItems']					= 'wikibaserepo';
 	$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
 	$wgSpecialPageGroups['EntitiesWithoutDescription']	= 'wikibaserepo';
 	$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
