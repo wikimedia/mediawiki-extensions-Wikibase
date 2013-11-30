@@ -111,7 +111,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @param string $error The error message in HTML format
 	 * @param string $class The element's class, default 'error'
 	 */
-	private function showErrorHTML( $error, $class = 'error' ) {
+	protected function showErrorHTML( $error, $class = 'error' ) {
 		$this->getOutput()->addHTML(
 			Html::rawElement(
 				'p',
