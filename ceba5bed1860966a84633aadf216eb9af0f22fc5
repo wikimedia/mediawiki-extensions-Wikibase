@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b355fd54",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-11-30T16:45:00Z",
+      "side": 1,
+      "message": "not entirely sure we need to change these.",
+      "revId": "ceba5bed1860966a84633aadf216eb9af0f22fc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
