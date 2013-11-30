@@ -1574,6 +1574,9 @@ $messages['ast'] = array(
 	'wikibase-datatype-label' => 'Tipu de datu:',
 	'wikibase-claimview-snak-tooltip' => "Escriba un valor que correspuenda cola propiedá llamada «$1». Si la propiedá nun tien dengún valor designáu o nun se conoz el valor real, pue escoyer como alternativa da-y un valor personalizáu calcando nel iconu que ta cabo'l cuadru d'escritura.",
 	'wikibase-claimview-snak-new-tooltip' => "Dempués d'especificar una propiedá pue escribir el valor correspondiente. Si la propiedá nun tien dengún valor designáu o nun se conoz el valor real, pue escoyer como alternativa da-y un valor personalizáu calcando nel iconu que ta cabo'l cuadru d'escritura.",
+	'wikibase-statementview-rankselector-rank-preferred' => 'Rangu preferíu',
+	'wikibase-statementview-rankselector-rank-normal' => 'Rangu normal',
+	'wikibase-statementview-rankselector-rank-deprecated' => 'Rangu anticuáu',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fonte|fontes}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Una fonte|$1 fontes}} inda ensin guardar',
 	'wikibase-snakview-property-input-placeholder' => 'propiedá',
@@ -3992,6 +3995,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-itemdisambiguation-lookup-label' => 'Bezeichnung:',
 	'wikibase-itemdisambiguation-submit' => 'Suchen',
 	'wikibase-itemdisambiguation-nothing-found' => 'Es wurde leider kein Datenobjekt mit dieser Bezeichnung gefunden.',
+	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Suche nach einem Datenobjekt]',
 	'wikibase-itemdisambiguation-create' => 'Du kannst auch [{{fullurl:Special:NewItem|label=$1}} ein Datenobjekt erstellen].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Die angegebene Sprachkennung ist dem System leider nicht bekannt. Bitte verwende eine gültige Kennung, wie bspw. „de“.',
 	'wikibase-itemdisambiguation-description' => 'Die für die Suche genutzten Werte müssen vollständige Texteinträge sein. Sprache ist eine Kennung, z.&nbsp;B. „de“.',
@@ -7262,6 +7266,7 @@ $messages['he'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'תווית:',
 	'wikibase-itemdisambiguation-submit' => 'חיפוש',
 	'wikibase-itemdisambiguation-nothing-found' => 'מצטערים, לא נמצא שום פריט עם התווית הזאת.',
+	'wikibase-itemdisambiguation-search' => 'חיפוש פריט באמצעות [{{fullurl:Special:Search|search=$1}} Special:Search].',
 	'wikibase-itemdisambiguation-create' => 'אפשר גם [{{fullurl:Special:NewItem|label=$1}} ליצור את הפריט].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'מצטערים, מזהה השפה שהזנת אינו ידוע למערכת. נא להשתמש במזהה תקין כגון "en".',
 	'wikibase-itemdisambiguation-description' => 'ערכים שמשמשים לחיפוש צריכים להיות עיול טקסט שלם. שפה היא מזהה, כגון "en".',
@@ -9372,6 +9377,7 @@ $messages['ja'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'ラベル:',
 	'wikibase-itemdisambiguation-submit' => '検索',
 	'wikibase-itemdisambiguation-nothing-found' => '申し訳ありませんが、指定したラベルを持つ項目は見つかりませんでした。',
+	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Special:Search] で項目を検索できます。',
 	'wikibase-itemdisambiguation-create' => '[{{fullurl:Special:NewItem|label=$1}} 項目を新規作成]することもできます。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '申し訳ありませんが、指定した言語コードはこのシステムでは不明です。有効な言語コード (「en」など) を指定してください。',
 	'wikibase-itemdisambiguation-description' => '検索に用いる値は名前全体でなければなりません。言語は「en」などのIDを指定してください。',
@@ -9991,6 +9997,8 @@ $messages['ko'] = array(
 	'wikibase-datatype-label' => '데이터 유형:',
 	'wikibase-claimview-snak-tooltip' => '"$1"라는 이름의 속성에 해당하는 값을 입력하세요. 속성이 지정한 값이 없거나 실제 값이 알려져 있지 않으면 값 입력 상자 옆에 있는 아이콘을 클릭하여 사용자 정의 값을 지정하는 대체 값을 선택할 수 있습니다.',
 	'wikibase-claimview-snak-new-tooltip' => '속성을 지정하고 나서 해당하는 값을 입력할 수 있습니다.속성이 지정한 값이 없거나 실제 값이 알려져 있지 않으면 값 입력 상자 옆에 있는 아이콘을 클릭하여 사용자 정의 값을 지정하는 대체 값을 선택할 수 있습니다.',
+	'wikibase-statementview-rankselector-rank-preferred' => '선호하는 등급',
+	'wikibase-statementview-rankselector-rank-normal' => '일반 등급',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|출처}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|출처 한 개|출처 $1개}}를 아직 저장하지 않았습니다',
 	'wikibase-snakview-property-input-placeholder' => '속성',
@@ -14249,6 +14257,7 @@ $messages['ru'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Название:',
 	'wikibase-itemdisambiguation-submit' => 'Найти',
 	'wikibase-itemdisambiguation-nothing-found' => 'К сожалению, элемент с таким названием не найден.',
+	'wikibase-itemdisambiguation-search' => 'Искать элемент, используя [{{fullurl:Special:Search|search=$1}} Special:Search].',
 	'wikibase-itemdisambiguation-create' => 'Вы можете [{{fullurl:Special:NewItem|label=$1}} создать такой элемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Извините, но системе неизвестен введённый вами код языка. Пожалуйста, используйте действительный идентификатор, например «ru».',
 	'wikibase-itemdisambiguation-description' => 'Используемые для поиска значения должны представлять собой полный текст записи. Идентификатором выступает код языка, например «ru».',
@@ -15082,7 +15091,7 @@ $messages['sr-ec'] = array(
 	'special-setdescription' => 'Додај опис',
 	'wikibase-setdescription-introfull' => 'Постављате опис у $2 за [[$1]].',
 	'wikibase-setdescription-label' => 'Опис:',
-	'wikibase-setdescription-submit' => 'Постављање описа',
+	'wikibase-setdescription-submit' => 'Додај опис',
 	'wikibase-setdescription-warning-remove' => 'Да ли заиста желите да уклоните опис за [[$1]]?',
 	'special-setaliases' => 'Постављање псеудонима',
 	'wikibase-setaliases-label' => 'Псеудоними:',
@@ -15230,6 +15239,14 @@ $messages['sr-ec'] = array(
 	'action-label-update' => 'ажурирате називе',
 	'action-description-remove' => 'уклањате описе',
 	'action-description-update' => 'ажурирате описе',
+);
+
+/** Serbian (Latin script) (srpski (latinica)‎)
+ * @author Milicevic01
+ */
+$messages['sr-el'] = array(
+	'wikibase-setdescription-submit' => 'Dodaj opis',
+	'wikibase-setentity-language' => 'Jezik:',
 );
 
 /** Swedish (svenska)
@@ -15868,6 +15885,7 @@ $messages['uk'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Назва:',
 	'wikibase-itemdisambiguation-submit' => 'Знайти',
 	'wikibase-itemdisambiguation-nothing-found' => 'Вибачте, елемента з такою назвою не знайдено.',
+	'wikibase-itemdisambiguation-search' => 'Пошук елемента за допомогою [{{fullurl:Special:Search|search=$1}} Special:Search].',
 	'wikibase-itemdisambiguation-create' => 'Ви можете [{{fullurl:Special:NewItem|label=$1}} створити такий елемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Вибачте, система не знаю введеного ідентифікатора мови. Правильним ідентифікатором є, наприклад, «uk».',
 	'wikibase-itemdisambiguation-description' => 'Значення, що використовуються пошуку, повинні бути повним текстом запису. Ідентифікатором є код мови, наприклад «uk».',

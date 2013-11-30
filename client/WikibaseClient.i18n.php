@@ -645,6 +645,7 @@ $messages['bs'] = array(
  * @author Arnaugir
  * @author Grondin
  * @author Papapep
+ * @author Paucabot
  * @author Qllach
  * @author Toniher
  * @author Vriullop
@@ -690,7 +691,7 @@ $messages['ca'] = array(
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra les modificacions a Wikidata en la llista de seguiment',
 	'wikibase-error-invalid-entity-id' => "L'ID introduït és desconegut al sistema. Utilitzeu un ID d'entitat vàlid.",
-	'special-unconnectedpages' => 'Pàgines no connectats a elements',
+	'special-unconnectedpages' => 'Pàgines no connectades',
 	'wikibase-unconnectedpages-legend' => 'Opcions de pàgines no connectades',
 	'wikibase-unconnectedpages-page' => 'Mostra la llista des de la pàgina:',
 	'wikibase-unconnectedpages-submit' => 'Vés-hi',
