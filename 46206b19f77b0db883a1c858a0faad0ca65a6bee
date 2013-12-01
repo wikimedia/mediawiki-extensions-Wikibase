@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_89c08830",
+        "filename": "lib/includes/DiffOpValueFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:46:45Z",
+      "side": 0,
+      "message": "o_O",
+      "revId": "46206b19f77b0db883a1c858a0faad0ca65a6bee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

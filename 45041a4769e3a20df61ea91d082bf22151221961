@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_a9c34c3c",
+        "filename": "lib/includes/DiffOpValueFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:46:45Z",
+      "side": 1,
+      "message": "Yeah, and clutter like this might be around 5 years from now when no one has an idea what you where thinking here",
+      "revId": "45041a4769e3a20df61ea91d082bf22151221961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_69bd44ad",
+        "filename": "lib/includes/DiffOpValueFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:46:45Z",
+      "side": 1,
+      "message": "You removed the escaping, assuming all callers now provide HTML. The method name itself suggests it is still doing escaping, idem the docs. Very scary.",
+      "revId": "45041a4769e3a20df61ea91d082bf22151221961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
