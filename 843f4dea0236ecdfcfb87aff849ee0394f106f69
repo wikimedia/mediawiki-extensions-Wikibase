@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_a99c6c60",
+        "filename": "lib/includes/formatters/HtmlUrlFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:34:53Z",
+      "side": 1,
+      "message": "https://www.mediawiki.org/wiki/Wikibase/Coding_conventions#Documentation_header",
+      "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
