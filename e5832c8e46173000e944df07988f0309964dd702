@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_e20a8923",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithMostSitelinksTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-01T23:46:16Z",
+      "side": 1,
+      "message": "@covers \\Wikibase\\Repo\\Specials\\SpecialItemsWithMostSitelinks",
+      "revId": "e5832c8e46173000e944df07988f0309964dd702",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_02068d20",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithoutSitelinksTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-01T23:46:16Z",
+      "side": 1,
+      "message": "@covers \\Wikibase\\Repo\\Specials\\SpecialItemsWithoutSitelinks",
+      "revId": "e5832c8e46173000e944df07988f0309964dd702",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
