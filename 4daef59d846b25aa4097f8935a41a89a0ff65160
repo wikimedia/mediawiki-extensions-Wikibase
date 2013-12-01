@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_29df3c12",
+        "filename": "lib/includes/formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:52:12Z",
+      "side": 1,
+      "message": "https://www.mediawiki.org/wiki/Wikibase/Coding_conventions#Documentation_header",
+      "revId": "4daef59d846b25aa4097f8935a41a89a0ff65160",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_09e478da",
+        "filename": "lib/includes/formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:52:12Z",
+      "side": 1,
+      "message": "....",
+      "revId": "4daef59d846b25aa4097f8935a41a89a0ff65160",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e9e834b1",
+        "filename": "lib/tests/phpunit/formatters/QuantityDetailsFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:52:12Z",
+      "side": 1,
+      "message": "Using a stub allows you to not be bound to implementation of QuanityValue, which is not the object under test here. Just a suggestion, -0.1 for it or something",
+      "revId": "4daef59d846b25aa4097f8935a41a89a0ff65160",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
