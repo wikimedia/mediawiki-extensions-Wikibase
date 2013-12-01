@@ -16,6 +16,91 @@
       "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_29b85cc2",
+        "filename": "lib/includes/formatters/HtmlUrlFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:40:47Z",
+      "side": 1,
+      "message": "Why are you deriving from this base class rather then just implementing the interface? You do not seem to be using the functionality it provides. I suggest not deriving from it if possible.",
+      "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_49b3a0e8",
+        "filename": "lib/includes/formatters/HtmlUrlFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:40:47Z",
+      "side": 1,
+      "message": "This field is not defined?",
+      "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_09ad9880",
+        "filename": "lib/includes/formatters/HtmlUrlFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:40:47Z",
+      "side": 1,
+      "message": "wrong",
+      "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e9b154dd",
+        "filename": "lib/includes/formatters/HtmlUrlFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:40:47Z",
+      "side": 1,
+      "message": "OutOfBoundsException?",
+      "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_69a664a9",
+        "filename": "lib/includes/formatters/HtmlUrlFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-01T02:40:47Z",
+      "side": 1,
+      "message": "Now you also make this dependent on IriValue. (Note how the class description is lying about it.) Since we apparently have no use for Irivalue, why would all of Wikibase be dependent on it?",
+      "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
