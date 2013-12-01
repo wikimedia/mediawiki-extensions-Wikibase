@@ -2726,6 +2726,7 @@ $messages['bs'] = array(
 );
 
 /** Catalan (català)
+ * @author Alvaro Vidal-Abarca
  * @author Arnaugir
  * @author Grondin
  * @author Pginer
@@ -2751,7 +2752,7 @@ $messages['ca'] = array(
 	'wikibase-description-empty' => "Encara no s'ha definit cap descripció.",
 	'wikibase-description-edit-placeholder' => 'introduïu una descripció',
 	'wikibase-sitelink-site-edit-placeholder' => 'lloc',
-	'wikibase-sitelink-page-edit-placeholder' => 'article', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'pàgina',
 	'wikibase-alias-edit-placeholder' => 'introduïu un àlies',
 	'wikibase-label-input-help-message' => "Introduïu el títol d'aquest conjunt de dades en $1.",
 	'wikibase-description-input-help-message' => 'Introduïu una breu descripció en $1.',
@@ -2887,7 +2888,7 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'right-alias-remove' => 'Eliminar àlies',
 	'right-sitelink-remove' => 'Eliminar enllaços de lloc',
 	'right-sitelink-update' => 'Actualitzar enllaços de lloc',
-	'right-linktitles-update' => "Actualitzar títols d'enllaç",
+	'right-linktitles-update' => "Actualitzar títols d'enllaç", # Fuzzy
 	'right-label-remove' => 'Eliminar etiquetes',
 	'right-label-update' => 'Actualitzar etiquetes',
 	'right-description-remove' => 'Eliminar descripcions',
@@ -3099,6 +3100,7 @@ $messages['ckb'] = array(
  * @author JAn Dudík
  * @author Jkjk
  * @author Littledogboy
+ * @author Matěj Suchánek
  * @author Mormegil
  * @author Vks
  * @author Vogone
@@ -3293,7 +3295,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-restoreold' => 'obnovit',
 	'wikibase-restore-summary' => 'Obnovena revize $1 od {{GENDER:$2|uživatele|uživatelky}} [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Ve jmenném prostoru $1 není přímé editování povoleno',
-	'wikibase-noentity' => 'Tento dataset neexistuje. Co se s ním stalo zjistíte <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} vyhledáváním v záznamech]</span>.',
+	'wikibase-noentity' => 'Tento dataset neexistuje. Co se s ním stalo, zjistíte <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} vyhledáváním v záznamech]</span>.',
 	'wikibase-noentity-createone' => 'Můžete také [[$1|vytvořit novou]].',
 	'wikibase-item-summary-wbsetitem' => 'Vytvořena nová položka',
 	'wikibase-item-summary-wbcreate-new' => 'Vytvořena nová položka',
@@ -11073,6 +11075,7 @@ $messages['mk'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Етикета:',
 	'wikibase-itemdisambiguation-submit' => 'Пребарај',
 	'wikibase-itemdisambiguation-nothing-found' => 'Нажалост, не пронајдов ниедна етикета.',
+	'wikibase-itemdisambiguation-search' => 'Пребарајте го предметот со [{{fullurl:Special:Search|search=$1}} Специјална:Пребарување].',
 	'wikibase-itemdisambiguation-create' => 'Можете да [{{fullurl:Special:NewItem|label=$1}} создадете нов предмет].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Нажалост, укажаниот јазичен код не му е познат на системот. Кодот мора да биде важечки (на пр. „mk“).',
 	'wikibase-itemdisambiguation-description' => 'Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. Јазикот е назнака, како на пр. „mk“.',
@@ -15245,6 +15248,8 @@ $messages['sr-ec'] = array(
  * @author Milicevic01
  */
 $messages['sr-el'] = array(
+	'wikibase-cancel' => 'otkaži',
+	'wikibase-itemdisambiguation-lookup-language' => 'Jezik:',
 	'wikibase-setdescription-submit' => 'Dodaj opis',
 	'wikibase-setentity-language' => 'Jezik:',
 );
@@ -16553,6 +16558,9 @@ $messages['vi'] = array(
 	'wikibase-datatype-label' => 'Kiểu dữ liệu:',
 	'wikibase-claimview-snak-tooltip' => 'Hãy nhập một giá trị ứng với thuộc tính có tên “$1”. Nếu giá trị của thuộc tính không được định rõ hoặc nếu không biết giá trị chính xác, bạn có thể bấm hình bên cạnh hộp nhập giá trị thay vì định rõ một giá trị tùy biến.',
 	'wikibase-claimview-snak-new-tooltip' => 'Sau khi định rõ một thuộc tính, bạn có thể nhập giá trị tương ứng. Nếu giá trị của thuộc tính không được định rõ hoặc nếu không biết giá trị chính xác, bạn có thể bấm hình bên cạnh hộp nhập giá trị thay vì định rõ một giá trị tùy biến.',
+	'wikibase-statementview-rankselector-rank-preferred' => 'Hạng ưa thích',
+	'wikibase-statementview-rankselector-rank-normal' => 'Hạng bình thường',
+	'wikibase-statementview-rankselector-rank-deprecated' => 'Hạng phản đối',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1}}nguồn',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Một nguồn|$1 nguồn}} chưa được lưu',
 	'wikibase-snakview-property-input-placeholder' => 'thuộc tính',
@@ -16597,6 +16605,7 @@ $messages['vi'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Nhãn:',
 	'wikibase-itemdisambiguation-submit' => 'Tìm kiếm',
 	'wikibase-itemdisambiguation-nothing-found' => 'Rất tiếc, không tìm thấy khoản mục nào với nhãn đó.',
+	'wikibase-itemdisambiguation-search' => 'Tìm kiếm khoản mục dùng [{{fullurl:Special:Search|search=$1}} Đặc biệt:Tìm kiếm].',
 	'wikibase-itemdisambiguation-create' => 'Bạn có thể [{{fullurl:Special:NewItem|label=$1}} tạo khoản mục mới].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Rất tiếc, hệ thống không nhận ra định danh ngôn ngữ mà bạn đã cung cấp. Xin hãy sử dụng một định danh hợp lệ như “en”.',
 	'wikibase-itemdisambiguation-description' => 'Các giá trị truy vấn cần phải có văn bản đầy đủ. Ngôn ngữ là một định danh như “en”.',
@@ -17223,6 +17232,7 @@ $messages['zh-hans'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => '标签：',
 	'wikibase-itemdisambiguation-submit' => '搜索',
 	'wikibase-itemdisambiguation-nothing-found' => '对不起，没有找到使用标签的项。',
+	'wikibase-itemdisambiguation-search' => '通过[{{fullurl:Special:Search|search=$1}} Special:Search]搜索项。',
 	'wikibase-itemdisambiguation-create' => '你可以[{{fullurl:Special:NewItem|label=$1}} 创建本项]。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '对不起，你提供的语言标识符是系统未知的。请使用有效的标识符，例如“zh”。',
 	'wikibase-itemdisambiguation-description' => '用于搜索的值必须是完整的文字条目。语言是一种标识符，例如“zh”。',
@@ -17535,6 +17545,9 @@ $messages['zh-hant'] = array(
 	'wikibase-datatype-label' => '數據類型：',
 	'wikibase-claimview-snak-tooltip' => '請輸入屬性「$1」對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點擊數值輸入欄旁的圖示以指定自定義數值替代。',
 	'wikibase-claimview-snak-new-tooltip' => '指定屬性後你可以輸入對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點擊數值輸入欄旁的圖示以指定自定義數值替代。',
+	'wikibase-statementview-rankselector-rank-preferred' => '首選級別',
+	'wikibase-statementview-rankselector-rank-normal' => '正常級別',
+	'wikibase-statementview-rankselector-rank-deprecated' => '不建議級別',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|來源|來源}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|1個來源|$1個來源}}尚未保存',
 	'wikibase-snakview-property-input-placeholder' => '屬性',
@@ -17580,6 +17593,7 @@ $messages['zh-hant'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => '標籤：',
 	'wikibase-itemdisambiguation-submit' => '搜尋',
 	'wikibase-itemdisambiguation-nothing-found' => '抱歉，没有找到具有此標籤的項目。',
+	'wikibase-itemdisambiguation-search' => '通過[{{fullurl:Special:Search|search=$1}} Special:Search]搜索項。',
 	'wikibase-itemdisambiguation-create' => '您可以[{{fullurl:Special:NewItem|label=$1}} 創建項目]。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '抱歉，您提供了未知的語言標籤。請使用有效的標籤，如「en」。',
 	'wikibase-itemdisambiguation-description' => '用於搜尋的值必需是完整的文字。語言代碼是一種標籤，如「en」。',
@@ -17627,6 +17641,7 @@ $messages['zh-hant'] = array(
 	'wikibase-setsitelink-invalid-site' => '維基項目ID$1為未知。請使用一个存在的維基項目ID，如enwiki。',
 	'wikibase-setsitelink-add-failed' => '無法儲存該網站連結。',
 	'wikibase-setsitelink-remove-failed' => '無法移除該網站連結。',
+	'wikibase-setsitelink-not-itemid' => "''$1''並非一個有效項ID。僅可為項設置站點連接。",
 	'wikibase-setentity-id' => 'ID：',
 	'wikibase-setentity-language' => '語言：',
 	'wikibase-setentity-invalid-langcode' => '語言標籤「$1」未知。請使用已知的語言標籤，如「en」。',
@@ -17671,6 +17686,7 @@ $messages['zh-hant'] = array(
 	'wikibase-entitydata-unsupported-format' => '數據格式 $1 不支援此介面。',
 	'wikibase-entitydata-title' => '實體數據',
 	'wikibase-entitydata-text' => '此頁面提供實體數值連結的數據介面。請使用子頁面語法在URL中提供實體ID。',
+	'special-mylanguagefallbackchain' => '我的語言備用鏈',
 	'wikibase-mylanguagefallbackchain-babel' => '您可通過於{{GENDER:$1|您的}}[[Special:MyPage|用戶頁]]加入<nowiki>{{#babel: }}</nowiki>以編輯。',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1~$2，轉換自$3~$4',
 	'wikibase-self-conflict-patched' => '您的編輯已成最新版本，覆蓋了您自己中間做的一些更改。',

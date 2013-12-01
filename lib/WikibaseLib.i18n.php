@@ -527,23 +527,31 @@ $messages['bn'] = array(
 	'wikibase-error-save-connection' => 'সংরক্ষণ কার্য সম্পাদনার সময় একটি যোগাযোগ ত্রুটি দেখা দিয়েছে এবং এর কারণে আপনার পরিবর্তনগুলো সম্পন্ন হয়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগটি পরীক্ষা করুন।',
 	'wikibase-error-remove-connection' => 'অপসারণ কার্য সম্পাদনার সময় একটি যোগাযোগ ত্রুটি দেখা দিয়েছে এবং এর কারণে আপনার পরিবর্তনগুলো সম্পন্ন হয়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগটি পরীক্ষা করুন।',
 	'wikibase-error-autocomplete-response' => 'সার্ভারের প্রতিক্রিয়া: $1',
+	'wikibase-error-ui-client-error' => 'ক্লায়েন্ট পাতায় যোগাযোগ করতে ব্যর্থ হয়েছে। পরে আবার চেষ্টা করুন।',
+	'wikibase-error-ui-no-external-page' => 'উল্লেখিত নিবন্ধ সংশ্লিষ্ট সাইটে খুঁজে পাওয়া যায়নি।',
 	'wikibase-error-ui-cant-edit' => 'আপনাকে এই কর্ম সঞ্চালন করার অনুমতি দেওয়া হয়নি।',
 	'wikibase-error-ui-no-permissions' => 'আপনার এই কর্ম সঞ্চালন করার যথেষ্ট অধিকার নেই।',
+	'wikibase-error-ui-link-exists' => 'আপনি এই পাতায় সংযোগ দিতে পারবেন না কারণ ইতিমধ্যেই আরেকটি আইটেম এখানে সংযোগ করা আছে।',
 	'wikibase-error-ui-session-failure' => 'আপনার সেশনের মেয়াদ শেষ হয়ে গেছে। দয়া করে আবার প্রবেশ করুন।',
 	'wikibase-error-ui-edit-conflict' => 'এখানে একটি সম্পাদনা দ্বন্দ্ব হয়েছে। দয়া করে পুনঃলোড করুন এবং আবার সংরক্ষণ করুন।',
 	'wikibase-replicationnote' => 'দয়া করে লক্ষ্য করুন যে এই পরিবর্তনগুলি সকল উইকিতে দৃশ্যমান হতে কয়েক মিনিট পর্যন্ত সময় লাগতে পারে।',
 	'wikibase-sitelinks-wikipedia' => 'এই আইটেমটির সাথে সংযুক্ত উইকিপিডিয়ার পাতা',
 	'wikibase-sitelinks-sitename-columnheading' => 'ভাষা',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'সাইট',
 	'wikibase-sitelinks-siteid-columnheading' => 'কোড',
-	'wikibase-sitelinks-link-columnheading' => 'সংযুক্ত নিবন্ধ', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'সংযুক্ত পাতা',
 	'wikibase-tooltip-error-details' => 'বিস্তারিত',
+	'wikibase-undeserializable-value' => 'মানটি অবৈধ ও প্রদর্শন করা যাবে না।',
 	'wikibase-validator-bad-type' => '$1 এর পরিবর্তে $2',
 	'wikibase-validator-too-long' => '{{PLURAL:$1|একটি অক্ষরের|$1টি অক্ষরের}} চেয়ে বেশি হবে না',
 	'wikibase-validator-too-short' => 'অন্তত {{PLURAL:$1|একটি অক্ষর|$1টি অক্ষর}} হতে হবে',
+	'wikibase-validator-too-high' => 'সীমার বাইরে, অবশ্যই $1-এর থেকে বেশি হতে পারবে না।',
+	'wikibase-validator-too-low' => 'সীমার বাইরে, অবশ্যই $1-এর থেকে কম হতে পারবে না।',
 	'wikibase-validator-malformed-value' => 'ত্রুটিপূর্ণভাবে গঠিত ইনপুট: $1',
 	'wikibase-validator-bad-entity-id' => 'ত্রুটিপূর্ণভাবে গঠিত আইডি: $1',
 	'wikibase-validator-bad-entity-type' => '$1 অপ্রত্যাশিত ভুক্তির ধরণ',
 	'wikibase-validator-no-such-entity' => '$1 খুঁজে পাওয়া যায়নি',
+	'wikibase-validator-bad-value' => 'অবৈধ মান: $1',
 	'wikibase-validator-unknown-unit' => 'অজানা একক: $1',
 	'datatypes-type-wikibase-item' => 'আইটেম',
 	'datatypes-type-commonsMedia' => 'কমন্স মিডিয়া ফাইল',
@@ -600,6 +608,7 @@ $messages['bs'] = array(
 );
 
 /** Catalan (català)
+ * @author Alvaro Vidal-Abarca
  * @author Arnaugir
  * @author Grondin
  * @author Qllach
@@ -619,11 +628,10 @@ $messages['ca'] = array(
 	'wikibase-sitelinks-wikipedia' => 'Pàgines de la Viquipèdia vinculades a aquest element',
 	'wikibase-sitelinks-sitename-columnheading' => 'Llengua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codi',
-	'wikibase-sitelinks-link-columnheading' => 'Article enllaçat',
+	'wikibase-sitelinks-link-columnheading' => 'Pàgina enllaçada',
 	'wikibase-tooltip-error-details' => 'Detalls',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
-	'datatypes-type-quantity' => 'Quantitat', # Fuzzy
 );
 
 /** Chechen (нохчийн)
