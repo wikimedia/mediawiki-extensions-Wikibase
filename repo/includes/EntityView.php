@@ -301,8 +301,9 @@ abstract class EntityView extends \ContextSource {
 		//	$editable = false;
 		//}
 
-		// fresh parser output with entity markup
+		// fresh parser output for entity markup
 		$pout = new ParserOutput();
+		$pout->recordOption( 'userlang' );
 
 		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
 
