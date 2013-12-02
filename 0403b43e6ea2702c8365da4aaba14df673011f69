@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b8c834ab",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-02T13:26:12Z",
+      "side": 1,
+      "message": "which is doing it indirectly via EntityView.  might be good to be more clear about that.",
+      "revId": "0403b43e6ea2702c8365da4aaba14df673011f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
