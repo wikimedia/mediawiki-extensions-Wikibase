@@ -204,16 +204,68 @@ abstract class EntityView extends \ContextSource {
 
 		$languageTerms = $this->getHtmlForLanguageTerms( $entityRevision->getEntity(), $lang, $editable );
 
+		$tocHtml = '';
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$tocHtml = $this->getHtmlForToc( $lang );
+		}
+
 		$html = wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entityRevision->getEntity(), $lang, $editable ),
 			$this->getHtmlForDescription( $entityRevision->getEntity(), $lang, $editable ),
 			$this->getHtmlForAliases( $entityRevision->getEntity(), $lang, $editable ),
+			$tocHtml,
 			$languageTerms,
 			$claims
 		);
 
 		wfProfileOut( __METHOD__ );
 		return $html;
+	}
+
+	/**
+	 * Builds and returns the html for the toc.
+	 *
+	 * @param Language|null $lang
+	 * @return string
+	 */
+	protected function getHtmlForToc( Language $lang = null ) {
+		$tocContent = '';
+		$tocSections = $this->getTocSections( $lang );
+
+		if( empty( $tocSections ) ) {
+			return '';
+		}
+
+		$i = 1;
+
+		foreach( $tocSections as $id => $message ) {
+			$tocContent .= wfTemplate( 'wb-entity-toc-section',
+				$i++,
+				$id,
+				wfMessage( $message )->text()
+			);
+		}
+
+		$toc = wfTemplate( 'wb-entity-toc',
+			wfMessage( 'toc' )->text(),
+			$tocContent
+		);
+
+		return $toc;
+	}
+
+	/**
+	 * Returns the sections that should displayed in the toc.
+	 *
+	 * @param Language|null $lang
+	 * @return array( link target => system message key )
+	 */
+	protected function getTocSections( Language $lang = null ) {
+		if( !is_null( $lang ) && count( $this->getExtraUserLanguages( $lang, $this->getUser() ) ) > 0 ) {
+			return array( 'wb-terms' => 'wikibase-terms' );
+		} else {
+			return array();
+		}
 	}
 
 	protected function makeParserOptions( ) {
@@ -449,8 +501,6 @@ abstract class EntityView extends \ContextSource {
 		$descriptions = $entity->getDescriptions();
 
 		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
-
-		$languages = $this->getExtraUserLanguages( $lang, $this->getUser() );
 
 		$specialLabelPage = \SpecialPageFactory::getPage( "SetLabel" );
 		$specialDescriptionPage = \SpecialPageFactory::getPage( "SetDescription" );
