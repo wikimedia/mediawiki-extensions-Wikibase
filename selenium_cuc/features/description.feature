@@ -84,7 +84,7 @@ Feature: Edit description
       | description | expected_description |
       | 0           | 0                    |
       |    norm    a   lize  me   | norm a lize me |
-      | <script>$("body").empty();</script> | <script>$("body").empty();</script> |
+      | <script>$('body').empty();</script> | <script>$('body').empty();</script> |
       | {{Template:blabla}} | {{Template:blabla}} |
 
   @save_description

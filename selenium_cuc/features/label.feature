@@ -87,7 +87,7 @@ Feature: Edit label
       | label | expected_label |
       | 0           | 0                    |
       |    norm    a   lize  me   | norm a lize me |
-      | <script>$("body").empty();</script> | <script>$("body").empty();</script> |
+      | <script>$('body').empty();</script> | <script>$('body').empty();</script> |
       | {{Template:blabla}} | {{Template:blabla}} |
 
   @save_label
