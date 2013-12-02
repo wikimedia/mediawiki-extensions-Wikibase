@@ -194,7 +194,7 @@ Feature: Edit aliases
       | alias | alias_expected |
       | 0 | 0 |
       |    norm   a lize   me    | norm a lize me |
-      | <script>$("body").empty();</script> | <script>$("body").empty();</script> |
+      | <script>$('body').empty();</script> | <script>$('body').empty();</script> |
 
   @save_aliases
   Scenario: Too long input for alias
