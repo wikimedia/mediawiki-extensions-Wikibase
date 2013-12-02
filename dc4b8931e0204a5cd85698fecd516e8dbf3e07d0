@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_bdcdc664",
+        "filename": "lib/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-02T11:18:09Z",
+      "side": 1,
+      "message": "extra line?",
+      "revId": "dc4b8931e0204a5cd85698fecd516e8dbf3e07d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_dde88ab1",
+        "filename": "lib/tests/phpunit/claim/DiffOpValueFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-02T11:18:09Z",
+      "side": 1,
+      "message": "why MediaWikiTestCase?",
+      "revId": "dc4b8931e0204a5cd85698fecd516e8dbf3e07d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
