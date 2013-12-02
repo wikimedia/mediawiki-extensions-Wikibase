@@ -222,6 +222,24 @@
       "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_7852ac6b",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T16:12:21Z",
+      "side": 1,
+      "message": "see https://www.mediawiki.org/wiki/Wikibase/Coding_conventions#Referring_to_resources_in_other_namespaces\nIdeally we will slowly fix all other cases",
+      "parentUuid": "0ee75395_58eb68a0",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
