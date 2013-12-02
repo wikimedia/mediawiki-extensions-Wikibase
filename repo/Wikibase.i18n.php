@@ -2729,6 +2729,7 @@ $messages['bs'] = array(
  * @author Alvaro Vidal-Abarca
  * @author Arnaugir
  * @author Grondin
+ * @author Papapep
  * @author Pginer
  * @author Qllach
  * @author Toniher
@@ -2765,7 +2766,7 @@ $messages['ca'] = array(
 	'wikibase-undo-title' => 'S\'està desfent l\'edició de "$1"',
 	'wikibase-restore-title' => 'S\'està recuperant la revisió antiga de "$1"',
 	'wikibase-partial-undo' => 'Aquesta edició es pot desfer parcialment.',
-	'wikibase-omitted-undo-ops' => "$1 {{PLURAL:$1|canvi ha estat omès|canvis han estat omesos}} perquè {{PLURAL:$1|el valor respectiu ha|els valors respectius han}} canviat des d'aleshores.",
+	'wikibase-omitted-undo-ops' => "S'ha omès $1 {{PLURAL:$1|canvi|canvis}} perquè {{PLURAL:$1|el valor respectiu ha|els valors respectius han}} canviat des d'aleshores.",
 	'wikibase-empty-undo' => 'Aquí no hi ha res que es pugui desfer.',
 	'wikibase-undo-revision-error' => "No s'ha pogut desfer",
 	'wikibase-undo-samerev' => 'No es pot desfer, les dues revisions són la mateixa.',
@@ -6296,6 +6297,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-itemdisambiguation-lookup-label' => 'Libellé&nbsp;:',
 	'wikibase-itemdisambiguation-submit' => 'Rechercher',
 	'wikibase-itemdisambiguation-nothing-found' => "Désolé, aucun élément avec ce libellé n'a été trouvé.",
+	'wikibase-itemdisambiguation-search' => 'Recherche de l’élément en utilisant [{{fullurl:Special:Search|search=$1}} Special:Search].',
 	'wikibase-itemdisambiguation-create' => 'Vous pouvez [{{fullurl:Special:NewItem|label=$1}} créer l’élément].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Le code de langue que vous avez donné n’est pas reconnu par le système, désolé. Veuillez utiliser un code valide, par exemple «&nbsp;en&nbsp;».',
 	'wikibase-itemdisambiguation-description' => 'Les valeurs utilisées pour la recherche doivent être le texte entier. La langue est un identifiant, comme «&nbsp;en&nbsp;».',
@@ -9044,6 +9046,7 @@ Nella cronologia dell'entità verrà registrato il tuo indirizzo IP.",
 	'wikibase-itemdisambiguation-lookup-label' => 'Etichetta:',
 	'wikibase-itemdisambiguation-submit' => 'Ricerca',
 	'wikibase-itemdisambiguation-nothing-found' => 'Non è stato trovato alcun elemento con questa etichetta.',
+	'wikibase-itemdisambiguation-search' => 'Cerca gli elementi usando [{{fullurl:Special:Search|search=$1}} Speciale:Ricerca].',
 	'wikibase-itemdisambiguation-create' => "È possibile [{{fullurl:Special:NewItem|label=$1}} creare l'elemento].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'L\'identificatore di lingua inserito è sconosciuto al sistema. Usare un identificatore valido, per esempio "en".',
 	'wikibase-itemdisambiguation-description' => 'I valori utilizzati per la ricerca devono comprendere il testo completo dell\'elemento. La lingua è un identificatore, ad esempio "it".',
