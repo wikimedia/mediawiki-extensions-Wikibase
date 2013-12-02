@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_1d3b92e9",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-12-02T12:19:20Z",
+      "side": 1,
+      "message": "Bound should not be capitalised.",
+      "revId": "e179618c57879d649bf36895ecc27149994d8a36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_fd3fced1",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-12-02T12:19:20Z",
+      "side": 1,
+      "message": "Bound should not be capitalised.",
+      "revId": "e179618c57879d649bf36895ecc27149994d8a36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
