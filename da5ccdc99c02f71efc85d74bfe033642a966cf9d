@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_58bda8ac",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-02T15:32:33Z",
+      "side": 0,
+      "message": "this message is still needed",
+      "revId": "da5ccdc99c02f71efc85d74bfe033642a966cf9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_38dae421",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-02T15:32:33Z",
+      "side": 0,
+      "message": "still needed",
+      "revId": "da5ccdc99c02f71efc85d74bfe033642a966cf9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_78d74cf3",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-02T15:32:33Z",
+      "side": 0,
+      "message": "appears this is still needed",
+      "revId": "da5ccdc99c02f71efc85d74bfe033642a966cf9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
