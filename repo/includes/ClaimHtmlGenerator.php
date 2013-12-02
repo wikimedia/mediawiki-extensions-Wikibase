@@ -88,7 +88,8 @@ class ClaimHtmlGenerator {
 			$serializedRank = ClaimSerializer::serializeRank( $claim->getRank() );
 
 			$rankHtml = wfTemplate( 'wb-rankselector',
-				'wb-rankselector-' . $serializedRank
+				'wb-rankselector-' . $serializedRank,
+				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
 			);
 		}
 

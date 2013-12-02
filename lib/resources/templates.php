@@ -144,7 +144,7 @@ HTML;
 
 	$templates['wb-rankselector'] =
 <<<HTML
-<span class="ui-icon ui-icon-rankselector $1"></span>
+<span class="ui-icon ui-icon-rankselector $1" title="$2"></span>
 HTML;
 
 	$templates['wb-referenceview'] =
