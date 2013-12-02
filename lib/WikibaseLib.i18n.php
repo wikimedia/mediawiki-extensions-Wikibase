@@ -152,10 +152,7 @@ Note that the default message says the user shall "reload and save", but after a
 	'wikibase-quantitydetails-lowerbound' => 'Label used for the "lower bound" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.',
 	'wikibase-quantitydetails-unit' => 'Label used for the "unit" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.
-
-Preceded by any one of the following messages:
-* {{msg-mw|Wikibase-linkitem-success-create}}
-* {{msg-mw|Wikibase-linkitem-success-link}}',
+Preceded by message {{msg-mw|Wikibase-linkitem-success-link}}',
 	'wikibase-sitelinks-wikipedia' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on different Wikipedias linked to this item. Similar messages can be created for each group of target sites, depending on configuration.
 See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',

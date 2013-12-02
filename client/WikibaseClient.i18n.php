@@ -47,12 +47,10 @@ $messages['en'] = array(
 	'wikibase-linkitem-selectlink' => 'Please select a site and a page you want to link this page with.',
 	'wikibase-linkitem-input-site' => 'Language:',
 	'wikibase-linkitem-input-page' => 'Page:',
-	'wikibase-linkitem-invalidsite' => 'Unknown or invalid site selected',
 	'wikibase-linkitem-confirmitem-text' => 'The page you chose is already associated to an [$1 item on our central data repository]. Please confirm that the {{PLURAL:$2|page|pages}} shown below {{PLURAL:$2|is|are}} the {{PLURAL:$2|one|ones}} you want to link with this page.',
 	'wikibase-linkitem-confirmitem-button' => 'Confirm',
 	'wikibase-linkitem-not-loggedin-title' => 'You need to be logged in',
 	'wikibase-linkitem-not-loggedin' => 'You need to be logged in on this wiki and in the [$1 central data repository] to use this feature.',
-	'wikibase-linkitem-success-create' => 'The pages have successfully been linked. You can find the newly created item containing the links in our [$1 central data repository].',
 	'wikibase-linkitem-success-link' => 'The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].',
 	'wikibase-property-notfound' => '$1 property not found.',
 	'wikibase-property-notsupportedyet' => 'Wikibase does not yet support property type for $1 property.',
@@ -145,7 +143,6 @@ Parameters:
 {{Identical|Language}}',
 	'wikibase-linkitem-input-page' => 'Label for the (autocompleted) inputbox asking for a page.
 {{Identical|Page}}',
-	'wikibase-linkitem-invalidsite' => 'Tooltip shown if the user entered an invalid site to link pages with',
 	'wikibase-linkitem-confirmitem-text' => 'Text shown above a table containing links to other pages. Asks the user to confirm that the links are correct and should be linked with the current page.
 	The message string will only be used when there are multiple pages, still it has a count argument so it can use a correct plural parser function.
 
@@ -159,7 +156,6 @@ Parameters:
 
 Parameters:
 * $1 - the URI to the login form of the repository',
-	'wikibase-linkitem-success-create' => 'Success message after a new item has been created which contains links to the page the user is currently on and the one entered. $1 holds a URL pointing to the new item.',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
 	'wikibase-property-notfound' => 'Message for property parser function when a property is not found. Parameters:
 * $1 - the name of the property',

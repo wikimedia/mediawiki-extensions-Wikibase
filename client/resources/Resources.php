@@ -39,6 +39,15 @@ return call_user_func( function() {
 				'mediawiki.notify'
 			),
 		),
+		'wikibase.client.PageConnector' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.client.PageConnector.js'
+			),
+			'dependencies' => array(
+				'wikibase.sites',
+				'wikibase.RepoApi',
+			),
+		),
 		'jquery.wikibase.linkitem' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.linkitem.js'
@@ -60,6 +69,7 @@ return call_user_func( function() {
 				'wikibase.sites',
 				'wikibase.RepoApi',
 				'wikibase.RepoApiError',
+				'wikibase.client.PageConnector'
 			),
 			'messages' => array(
 				'wikibase-linkitem-alreadylinked',
@@ -68,10 +78,8 @@ return call_user_func( function() {
 				'wikibase-linkitem-selectlink',
 				'wikibase-linkitem-input-site',
 				'wikibase-linkitem-input-page',
-				'wikibase-linkitem-invalidsite',
 				'wikibase-linkitem-confirmitem-text',
 				'wikibase-linkitem-confirmitem-button',
-				'wikibase-linkitem-success-create',
 				'wikibase-linkitem-success-link',
 				'wikibase-linkitem-close',
 				'wikibase-linkitem-not-loggedin-title',
