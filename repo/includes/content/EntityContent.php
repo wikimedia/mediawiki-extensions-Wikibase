@@ -121,6 +121,13 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * Returns a ParserOutput object containing the HTML.
+	 * The actual work of generating a ParserOutput object is done by calling
+	 * EntityView::getParserOutput().
+	 *
+	 * @note: this calls ParserOutput::recordOption( 'userlang' ) to split the cache
+	 * by user language.
+	 *
+	 * @see Content::getParserOutput
 	 *
 	 * @since 0.1
 	 *
@@ -155,7 +162,14 @@ abstract class EntityContent extends AbstractContent {
 			$entityInfoBuilder,
 			$entityContentFactory
 		);
-		return $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
+
+		$output = $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
+
+		// Since the output depends on the user language, we must make sure
+		// ParserCache::getKey() includes it in the cache key.
+		$output->recordOption( 'userlang' );
+
+		return $output;
 	}
 
 	/**
