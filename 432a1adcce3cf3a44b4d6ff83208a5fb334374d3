@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_d81bf880",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-12-02T16:52:00Z",
+      "side": 1,
+      "message": "Maybe also fix that? :) It\u0027s inconsistent in the UI.",
+      "parentUuid": "0ee75395_f8391c3f",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_c2b3054b",
         "filename": "repo/includes/specials/SpecialMergeItems.php",
         "patchSetId": 5
