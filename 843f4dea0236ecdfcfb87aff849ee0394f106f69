@@ -101,6 +101,24 @@
       "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_5da0fa99",
+        "filename": "lib/includes/formatters/HtmlUrlFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-02T11:12:02Z",
+      "side": 1,
+      "message": "Why not have a renderer that can render URLs regardless of whether they are represented as strings or IRIs? \n\nPerhaps this class should just be moved to DataValuesCommon...",
+      "parentUuid": "0ee75395_69a664a9",
+      "revId": "843f4dea0236ecdfcfb87aff849ee0394f106f69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
