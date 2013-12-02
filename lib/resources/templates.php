@@ -54,7 +54,6 @@ HTML;
 <<<HTML
 <li class="toclevel-1 tocsection-$1">
 	<a href="#$2">
-		<span class="tocnumber">$1</span>
 		<span class="toctext">$3</span>
 	</a>
 </li>

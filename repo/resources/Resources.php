@@ -1,15 +1,12 @@
 <?php
 /**
- * File for Wikibase resourceloader modules.
- * When included this returns an array with all the modules introduced by Wikibase.
+ * Wikibase Repo ResourceLoader modules
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater < mediawiki@snater.com >
  *
  * @codeCoverageIgnoreStart
  */
@@ -105,6 +102,12 @@ return call_user_func( function() {
 				'wikibase.special',
 				'jquery.ui.suggester'
 			)
+		),
+
+		'wikibase.toc' => $moduleTemplate + array(
+			'styles' => array(
+				'themes/default/wikibase.toc.css',
+			),
 		),
 	);
 
