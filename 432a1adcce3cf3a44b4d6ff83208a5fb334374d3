@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_02aa0dd1",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "no need to have @since on a private method",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_c2b3054b",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "Please try not to use fully qualified class names :)",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_a2b0013f",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "Please try not to use fully qualified class names :)",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_4287f566",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "The line above is rather long so the params for the EditEntity should be on seperate lines",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_62baf91f",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "The line above is rather long so the params for the EditEntity should be on seperate lines",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e2ae09e4",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "eww tab",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_82bdfd18",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "The line above is rather long so the params for the Summary should be on seperate lines",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_228cf188",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "dont need the @file tag",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0281ed4e",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "dont need the @ingroup tags",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_c29ae5bc",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-02T00:25:34Z",
+      "side": 1,
+      "message": "dont need a fully qualified name",
+      "revId": "432a1adcce3cf3a44b4d6ff83208a5fb334374d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
