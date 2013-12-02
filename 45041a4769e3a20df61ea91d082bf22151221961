@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_9de8c2de",
+        "filename": "lib/includes/DiffOpValueFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-02T11:05:39Z",
+      "side": 1,
+      "message": "I wasn\u0027t thinking anything, this comment was already there. I just put it on a separate line.",
+      "parentUuid": "0ee75395_a9c34c3c",
+      "revId": "45041a4769e3a20df61ea91d082bf22151221961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_69bd44ad",
         "filename": "lib/includes/DiffOpValueFormatter.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-12-01T02:46:45Z",
       "side": 1,
       "message": "You removed the escaping, assuming all callers now provide HTML. The method name itself suggests it is still doing escaping, idem the docs. Very scary.",
+      "revId": "45041a4769e3a20df61ea91d082bf22151221961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_7df5feb4",
+        "filename": "lib/includes/DiffOpValueFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-02T11:05:39Z",
+      "side": 1,
+      "message": "you are right, the name should be changed.",
+      "parentUuid": "0ee75395_69bd44ad",
       "revId": "45041a4769e3a20df61ea91d082bf22151221961",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
