@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Lib\Test;
 
-use DataValues\GlobeCoordinateValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Language;
@@ -11,7 +10,6 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityFactory;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -100,6 +98,12 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				$options,
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'Label for Q5' // compare mock object created in newBuilders()
+			),
+			'diff <url>' => array(
+				SnakFormatter::FORMAT_HTML_DIFF,
+				$options,
+				new StringValue( '<http://acme.com/>' ),
+				'&lt;http://acme.com/&gt;'
 			),
 		);
 	}
@@ -257,6 +261,28 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$this->assertExcluded(
 			$skip,
 			array_keys( $builders->getWidgetFormatters( $options, $skip ) )
+		);
+	}
+
+	/**
+	 * @covers WikibaseValueFormatterBuilders::getDiffFormatters
+	 */
+	public function testGetDiffFormatters() {
+		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$options = new FormatterOptions();
+
+		// check for all the required types, that is, the ones supported by the fallback format
+		$required = array_keys( $builders->getHtmlFormatters( $options ) );
+		$this->assertIncluded(
+			$required,
+			array_keys( $builders->getDiffFormatters( $options ) )
+		);
+
+		// skip two of the required entries
+		$skip = array_slice( $required, 2 );
+		$this->assertExcluded(
+			$skip,
+			array_keys( $builders->getDiffFormatters( $options, $skip ) )
 		);
 	}
 

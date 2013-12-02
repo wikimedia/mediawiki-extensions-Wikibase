@@ -145,6 +145,13 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				new PropertyValueSnak( 7, new EntityIdValue( new ItemId( 'Q5' ) ) ),
 				'Label for Q5' // compare mock object created in newBuilders()
 			),
+			'diff <url>' => array(
+				SnakFormatter::FORMAT_HTML_DIFF,
+				$options,
+				'url',
+				new PropertyValueSnak( 7, new StringValue( '<http://acme.com/>' ) ),
+				'&lt;http://acme.com/&gt;'
+			),
 			'bad value' => array(
 				SnakFormatter::FORMAT_PLAIN,
 				$options,
