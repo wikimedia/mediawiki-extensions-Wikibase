@@ -2,23 +2,12 @@
 
 namespace Wikibase;
 
+use MWException;
+use RecentChange;
+use User;
+
 /**
  * Represents a change for an entity; to be extended by various change subtypes
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.3
  *
@@ -55,7 +44,7 @@ class EntityChange extends DiffChange {
 	 * @param string $name
 	 * @param mixed $value
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	public function setField( $name, $value ) {
 		if ( $name === 'object_id' && is_string( $value ) ) {
@@ -233,9 +222,9 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \RecentChange $rc
+	 * @param RecentChange $rc
 	 */
-	public function setMetadataFromRC( \RecentChange $rc ) {
+	public function setMetadataFromRC( RecentChange $rc ) {
 		$this->setMetadata( array(
 			'user_text' => $rc->getAttribute( 'rc_user_text' ),
 			'bot' => $rc->getAttribute( 'rc_bot' ),
@@ -249,9 +238,9 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \User $user
+	 * @param User $user
 	 */
-	public function setMetadataFromUser( \User $user ) {
+	public function setMetadataFromUser( User $user ) {
 		$this->setMetadata( array(
 			'user_text' => $user->getName(),
 			'page_id' => 0,
@@ -311,11 +300,11 @@ class EntityChange extends DiffChange {
 	 * @param array|null  $fields additional fields to set
 	 *
 	 * @return EntityChange
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	public static function newFromUpdate( $action, Entity $oldEntity = null, Entity $newEntity = null, array $fields = null ) {
 		if ( $oldEntity === null && $newEntity === null ) {
-			throw new \MWException( 'Either $oldEntity or $newEntity must be give.' );
+			throw new MWException( 'Either $oldEntity or $newEntity must be give.' );
 		}
 
 		if ( $oldEntity === null ) {
@@ -325,7 +314,7 @@ class EntityChange extends DiffChange {
 			$newEntity = EntityFactory::singleton()->newEmpty( $oldEntity->getType() );
 			$theEntity = $oldEntity;
 		} elseif ( $oldEntity->getType() !== $newEntity->getType() ) {
-			throw new \MWException( 'Entity type mismatch' );
+			throw new MWException( 'Entity type mismatch' );
 		} else {
 			$theEntity = $newEntity;
 		}
