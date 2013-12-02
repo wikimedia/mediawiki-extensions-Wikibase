@@ -45,6 +45,10 @@ $messages['en'] = array(
 	'wikibase-error-ui-link-exists' => 'You cannot link to this page because another item already links to it.',
 	'wikibase-error-ui-session-failure' => 'Your session has expired. Please log in again.',
 	'wikibase-error-ui-edit-conflict' => 'There is an edit conflict. Please reload and save again.',
+	'wikibase-quantitydetails-amount' => 'Amount',
+	'wikibase-quantitydetails-upperbound' => 'Upper Bound',
+	'wikibase-quantitydetails-lowerbound' => 'Lower Bound',
+	'wikibase-quantitydetails-unit' => 'Unit',
 	'wikibase-replicationnote' => 'Please notice that it can take several minutes until the changes are visible on all wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Wikipedia pages linked to this item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
@@ -143,6 +147,10 @@ See also:
 	'wikibase-error-ui-session-failure' => 'This is a human readable version of the API error "wikibase-api-session-failure" which is shown in the UI.',
 	'wikibase-error-ui-edit-conflict' => 'This is a human readable version of the API error "edit-conflict" which is shown in the UI.
 Note that the default message says the user shall "reload and save", but after a reload the content that should be saved will be lost.',
+	'wikibase-quantitydetails-amount' => 'Label used for the "amount" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.',
+	'wikibase-quantitydetails-upperbound' => 'Label used for the "upper bound" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.',
+	'wikibase-quantitydetails-lowerbound' => 'Label used for the "lower bound" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.',
+	'wikibase-quantitydetails-unit' => 'Label used for the "unit" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.
 
 Preceded by any one of the following messages:

@@ -93,6 +93,7 @@ class WikibaseValueFormatterBuilders {
 		// Formatters to use for HTML in diffs.
 		// Falls back to HTML display formatters.
 		SnakFormatter::FORMAT_HTML_DIFF => array(
+			'PT:quantity' => 'Wikibase\Lib\QuantityDetailsFormatter',
 		),
 	);
 
