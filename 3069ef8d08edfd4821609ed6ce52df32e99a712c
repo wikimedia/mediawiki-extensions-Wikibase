@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_9dd442c0",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-12-02T11:50:48Z",
+      "side": 1,
+      "message": "Special:Search is a bit technical. Can\u0027t this just be \"Search for item\"?",
+      "revId": "3069ef8d08edfd4821609ed6ce52df32e99a712c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
