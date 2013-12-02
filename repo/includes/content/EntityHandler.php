@@ -165,20 +165,20 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Returns false to indicate that the parser cache should not be used for data items.
-	 * The html representation of Items depends on the user language, splitting the parser
-	 * cache by user language is currently problematic and would need some core changes.
+	 * Returns true to indicate that the parser cache can be used for data items.
 	 *
-	 * @note: see also note on getPageLanguage()
+	 * @note: The html representation of entities depends on the user language, so
+	 * EntityContent::getParserOutput needs to call ParserOutput::recordOption( 'userlang' )
+	 * to split the cache by language.
 	 *
 	 * @see ContentHandler::isParserCacheSupported
 	 *
 	 * @since 0.1
 	 *
-	 * @return bool false
+	 * @return bool true
 	 */
 	public function isParserCacheSupported() {
-		return false;
+		return true;
 	}
 
 	/**
@@ -207,8 +207,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * currently doesn't support that.
 	 *
 	 * @note: in several places in mediawiki, most importantly the parser cache, getPageLanguage
-	 * is used in places where getPageViewLanguage would be more appropriate. This is the reason that
-	 * isParserCacheSupported() is overridden to return false.
+	 * is used in places where getPageViewLanguage would be more appropriate.
 	 *
 	 * @param Title        $title the page to determine the language for.
 	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
