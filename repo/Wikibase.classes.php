@@ -49,7 +49,6 @@ return call_user_func( function() {
 		'Wikibase\PropertyView' => 'includes/PropertyView.php',
 		'Wikibase\Repo\EntitySearchTextGenerator' => 'includes/EntitySearchTextGenerator.php',
 		'Wikibase\Repo\ItemSearchTextGenerator' => 'includes/ItemSearchTextGenerator.php',
-		'Wikibase\Summary' => 'includes/Summary.php',
 		'Wikibase\SummaryFormatter' => 'includes/SummaryFormatter.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
 		'Wikibase\ClaimHtmlGenerator' => 'includes/ClaimHtmlGenerator.php',

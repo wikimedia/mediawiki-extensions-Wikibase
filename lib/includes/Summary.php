@@ -3,15 +3,12 @@
 namespace Wikibase;
 
 use Language;
-use Wikibase\Repo\WikibaseRepo;
+use LogicException;
 
 /**
  * A Summary object can be used to build complex, translatable summaries.
  *
  * @since 0.1, major refactoring in 0.4
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad
@@ -68,7 +65,9 @@ class Summary {
 	 * @param object[]   $commentArgs the arguments to the autocomment
 	 * @param object[]   $summaryArgs the arguments to the autosummary
 	 */
-	public function __construct( $moduleName = null, $actionName = null, $language = null, $commentArgs = array(), $summaryArgs = array() ) {
+	public function __construct( $moduleName = null, $actionName = null, $language = null,
+		$commentArgs = array(), $summaryArgs = array()
+	) {
 		$this->moduleName = $moduleName;
 		$this->actionName = $actionName;
 		$this->language = $language === null ? null : (string)$language;
@@ -232,10 +231,10 @@ class Summary {
 
 	/**
 	 * @deprecated use SummaryFormatter instead
-	 * @throws \LogicException
+	 * @throws LogicException
 	 */
 	public function toString() {
-		throw new \LogicException( 'toString() is no longer supported, use SummaryFormatter instead' );
+		throw new LogicException( 'toString() is no longer supported, use SummaryFormatter instead' );
 	}
 
 }
