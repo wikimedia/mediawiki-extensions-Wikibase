@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_210bc52e",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-12-03T11:53:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure about its internals but is it cheaper to use EntityLookup instead of EntityRevisionLookup?",
+      "revId": "d32d42e5a1e2db7e403e20ecab2179cecf0da047",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
