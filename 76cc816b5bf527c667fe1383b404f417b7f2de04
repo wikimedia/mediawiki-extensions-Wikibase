@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_d78cdb34",
+        "filename": "repo/Wikibase.classes.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-03T16:38:57Z",
+      "side": 1,
+      "message": "Eek, don\u0027t steal my API module!",
+      "revId": "76cc816b5bf527c667fe1383b404f417b7f2de04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b78f1726",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-03T16:38:57Z",
+      "side": 1,
+      "message": "evil!",
+      "revId": "76cc816b5bf527c667fe1383b404f417b7f2de04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
