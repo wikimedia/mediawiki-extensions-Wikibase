@@ -501,4 +501,24 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
+	public function testClearFromBadRevId() {
+		$params = array( 'action' => 'wbeditentity', 'id' => '%Berlin%', 'data' => '{}', 'baserevid' => '%BadClearBaserevid%',
+		'clear' => '' );
+		$this->injectIds( $params );
+
+		$setupParams = array(
+			'action' => 'wbeditentity',
+			'id' => $params['id'],
+			'clear' => '',
+			'data' => '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc1"}}}',
+		);
+		list( $result, , ) = $this->doApiRequestWithToken( $setupParams );
+		$params['baserevid'] = $result['entity']['lastrevid'];
+		$setupParams['data'] = '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc2"}}}';
+		list( , , ) = $this->doApiRequestWithToken( $setupParams );
+
+		$expectedException = array( 'type' => 'UsageException', 'code' => 'editconflict' );
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
 }
