@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b7b6f7d5",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-03T16:43:54Z",
+      "side": 1,
+      "message": "ModifyTerm",
+      "revId": "553c063c092e1e8fb94254460ec6cb6675f3f948",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_57c7ab4a",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-03T16:43:54Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be ...modifyterm...?",
+      "revId": "553c063c092e1e8fb94254460ec6cb6675f3f948",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_37c2e739",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-03T16:43:54Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "553c063c092e1e8fb94254460ec6cb6675f3f948",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_17c12333",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-03T16:43:54Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "553c063c092e1e8fb94254460ec6cb6675f3f948",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b7ddd719",
+        "filename": "repo/includes/specials/SpecialSetDescription.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-03T16:43:54Z",
+      "side": 1,
+      "message": "eek, \\r!",
+      "revId": "553c063c092e1e8fb94254460ec6cb6675f3f948",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
