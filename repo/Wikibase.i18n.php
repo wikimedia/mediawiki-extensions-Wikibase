@@ -337,8 +337,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Changed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$3|reference|references}} from claim',
-	'wikibase-item-summary-wbmergeitems-from' => 'Merged Item from \'$3\'',
-	'wikibase-item-summary-wbmergeitems-to' => 'Merged Item in to \'$3\'',
+	'wikibase-item-summary-wbmergeitems-from' => 'Merged item from \'$3\'',
+	'wikibase-item-summary-wbmergeitems-to' => 'Merged item in to \'$3\'',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -753,7 +753,7 @@ The item is identified through use of the site and title, but the lookup failed 
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
 	'wikibase-itembytitle-invalid-site' => 'Informative text when the provided site id is invalid.',
 	'wikibase-itembytitle-description' => 'Further information about the search fields and the valid values.',
-	'wikibase-itembytitle-create' => 'Information about how to proceede to create a new item. This message is presented when a user searched (or requested by URL) for an item by site and page title (e.g. item, linked to a particular Wikipedia page in a particular language), but no item was found that linked to that page.  This gives the user the option to create a new item with the page title as the item label.  The user will be sent to the Create Item page and the label would be pre-populated.
+	'wikibase-itembytitle-create' => 'Information about how to proceede to create a new item. This message is presented when a user searched (or requested by URL) for an item by site and page title (e.g. item, linked to a particular Wikipedia page in a particular language), but no item was found that linked to that page.  This gives the user the option to create a new item with the page title as the item label.  The user will be sent to the Create item page and the label would be pre-populated.
 
 Parameters:
 * $1 - the site identifier used in the URL
