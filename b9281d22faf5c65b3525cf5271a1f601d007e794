@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_24d87321",
+        "filename": "selenium_cuc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-03T14:24:17Z",
+      "side": 1,
+      "message": "For Wikibase, a more detailed and accurate description on how to run the tests can be found here:\nhttps://meta.wikimedia.org/wiki/Wikidata/Development/Testing#Browser_Testing_for_Wikidata\n\nThis readme should better link to that page.",
+      "revId": "b9281d22faf5c65b3525cf5271a1f601d007e794",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
