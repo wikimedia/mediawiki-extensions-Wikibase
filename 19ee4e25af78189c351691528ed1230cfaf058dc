@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_4f483532",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:24:48Z",
+      "side": 1,
+      "message": "$langCode is not used",
+      "revId": "19ee4e25af78189c351691528ed1230cfaf058dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0f522de2",
+        "filename": "repo/tests/phpunit/includes/content/PropertyContentTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:24:48Z",
+      "side": 1,
+      "message": "overly qualified StoreFactory",
+      "revId": "19ee4e25af78189c351691528ed1230cfaf058dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
