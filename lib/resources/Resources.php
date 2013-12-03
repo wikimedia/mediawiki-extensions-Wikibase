@@ -621,9 +621,9 @@ return call_user_func( function() {
 				'wikibase.utilities',
 			),
 			'messages' => array(
-				'wikibase-statementview-rankselector-rank-preferred',
-				'wikibase-statementview-rankselector-rank-normal',
-				'wikibase-statementview-rankselector-rank-deprecated',
+				'wikibase-statementview-rank-preferred',
+				'wikibase-statementview-rank-normal',
+				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-referencesheading-pendingcountersubject',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
 				'wikibase-addreference'
