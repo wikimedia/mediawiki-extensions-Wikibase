@@ -45,8 +45,7 @@
 
 			$input.on( 'suggesterresponse suggesterclose', function( event, response ) {
 				notifier.notify( 'change' ); // here in addition to 'eachchange' from StringValue expert
-				$input.data( 'AutoExpandInput' ).expand();
-
+				$input.data( 'inputAutoExpand' ).expand();
 			} );
 		},
 
