@@ -39,7 +39,14 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @var SnakFormatter
 	 */
-	private $snakFormatter;
+	private $snakDetailsFormatter;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var SnakFormatter
+	 */
+	private $snakBreadCrumbFormatter;
 
 	/**
 	 * @since 0.5
@@ -54,24 +61,35 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param ValueFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
-	 * @param SnakFormatter $snakFormatter Formatter for Snaks, must generate HTML.
+	 * @param SnakFormatter $snakDetailsFormatter detailed Formatter for Snaks, must generate HTML.
+	 * @param SnakFormatter $snakBreadCrumbFormatter terse Formatter for Snaks, must generate HTML.
 	 * @param $langCode
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( ValueFormatter $propertyIdFormatter,
-		SnakFormatter $snakFormatter, $langCode
+		SnakFormatter $snakDetailsFormatter, SnakFormatter $snakBreadCrumbFormatter, $langCode
 	) {
-		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-			&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF ) {
+		if ( $snakDetailsFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
+			&& $snakDetailsFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF ) {
 
 			throw new InvalidArgumentException(
-				'Expected $snakFormatter to generate html, not '
-				. $snakFormatter->getFormat() );
+				'Expected $snakDetailsFormatter to generate html, not '
+				. $snakDetailsFormatter->getFormat() );
+		}
+
+		if ( $snakBreadCrumbFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
+			&& $snakBreadCrumbFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF ) {
+
+			throw new InvalidArgumentException(
+				'Expected $snakBreadCrumbFormatter to generate html, not '
+				. $snakBreadCrumbFormatter->getFormat() );
 		}
 
 		$this->propertyIdFormatter = $propertyIdFormatter;
-		$this->snakFormatter = $snakFormatter;
+		$this->snakDetailsFormatter = $snakDetailsFormatter;
+		$this->snakBreadCrumbFormatter = $snakBreadCrumbFormatter;
+
 		$this->langCode = $langCode;
 	}
 
@@ -153,11 +171,17 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 */
 	protected function visualizeMainSnakChange( DiffOpChange $mainSnakChange ) {
+		if( $mainSnakChange->getNewValue() === null ){
+			$headerHtml = $this->getSnakLabelHeader( $mainSnakChange->getOldValue() );
+		} else {
+			$headerHtml = $this->getSnakLabelHeader( $mainSnakChange->getNewValue() );
+		}
+
 		$valueFormatter = new DiffOpValueFormatter(
-			// todo: should show specific headers for both columns
-			$this->getSnakHeaderFromDiffOp( $mainSnakChange ),
-			$this->formatSnak( $mainSnakChange->getOldValue() ),
-			$this->formatSnak( $mainSnakChange->getNewValue() )
+			// todo: should show specific headers for each column
+			$headerHtml,
+			$this->formatSnakDetails( $mainSnakChange->getOldValue() ),
+			$this->formatSnakDetails( $mainSnakChange->getNewValue() )
 		);
 
 		return $valueFormatter->generateHtml();
@@ -175,7 +199,7 @@ class ClaimDifferenceVisualizer {
 	 */
 	protected function visualizeRankChange( DiffOpChange $rankChange, Claim $claim ) {
 		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakHeader( $claimMainSnak );
+		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
 
 		$valueFormatter = new DiffOpValueFormatter(
 			$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->langCode )->parse(),
@@ -209,12 +233,12 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string HTML
 	 */
-	protected function formatSnak( $snak ) {
+	protected function formatSnakDetails( $snak ) {
 		if( $snak === null ){
 			return null;
 		}
 		try {
-			return $this->snakFormatter->formatSnak( $snak );
+			return $this->snakDetailsFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {
 			return '?'; // XXX: or include the error message?
 		}
@@ -244,47 +268,56 @@ class ClaimDifferenceVisualizer {
 	 */
 	 protected function getSnakListValues( SnakList $snakList ) {
 		$values = array();
+		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->langCode )->escaped();
 
 		foreach ( $snakList as $snak ) {
 			/** @var $snak Snak */
-			// TODO: change hardcoded ": " so something like wfMessage( 'colon-separator' ),
-			// but this will require further refactoring as it would add HTML which gets escaped
 			$values[] =
 				$this->formatPropertyId( $snak->getPropertyId() ) .
-				': '.
-				$this->formatSnak( $snak );
+				$colon.
+				$this->formatSnakDetails( $snak );
 		}
 
 		return $values;
 	}
 
 	/**
-	 * @param DiffOpChange $snakChange
-	 *
-	 * @return string HTML
-	 */
-	protected function getSnakHeaderFromDiffOp( DiffOpChange $snakChange ){
-		if( $snakChange->getNewValue() === null ){
-			return $this->getSnakHeader( $snakChange->getOldValue() );
-		} else {
-			return $this->getSnakHeader( $snakChange->getNewValue() );
-		}
-	}
-
-	/**
-	 * Get formatted header for a snak
+	 * Get formatted header for a snak, including the snak's property label, but not the snak's value.
 	 *
 	 * @since 0.4
 	 *
 	 * @param Snak $snak
 	 *
 	 * @return string HTML
- 	 */
-	protected function getSnakHeader( Snak $snak ) {
+	 */
+	protected function getSnakLabelHeader( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 		$propertyLabel = $this->formatPropertyId( $propertyId );
+
 		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->langCode )->parse()
-			. ' / ' . $propertyLabel;
+			. ' / ' . $propertyLabel ;
+
+		return $headerText;
+	}
+
+	/**
+	 * Get formatted header for a snak, including the snak's property label and value.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 *
+	 * @return string HTML
+	 */
+	protected function getSnakValueHeader( Snak $snak ) {
+		$headerText = $this->getSnakLabelHeader( $snak );
+
+		try {
+			$headerText .= wfMessage( 'colon-separator' )->inLanguage( $this->langCode )->escaped()
+				. $this->snakBreadCrumbFormatter->formatSnak( $snak );
+		} catch ( FormattingException $ex ) {
+			// just ignore it
+		}
 
 		return $headerText;
 	}
@@ -305,7 +338,7 @@ class ClaimDifferenceVisualizer {
 		$html = '';
 
 		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakHeader( $claimMainSnak );
+		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
 
 		$newVal = null;
 		$oldVal = null;
@@ -348,33 +381,32 @@ class ClaimDifferenceVisualizer {
 	 */
 	protected function visualizeQualifierChanges( Diff $changes, Claim $claim ) {
 		$html = '';
+		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->langCode )->escaped();
 
 		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getSnakHeader( $claimMainSnak );
+		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
 		$newVal = $oldVal = null;
 
 		foreach( $changes as $change ) {
-			// TODO: change hardcoded ": " so something like wfMessage( 'colon-separator' ),
-			// but this will require further refactoring as it would add HTML which gets escaped
 			if ( $change instanceof DiffOpAdd ) {
 				$newVal =
 					$this->formatPropertyId( $change->getNewValue()->getPropertyId() ) .
-					': ' .
-					$this->formatSnak( $change->getNewValue() );
+					$colon .
+					$this->formatSnakDetails( $change->getNewValue() );
 			} else if ( $change instanceof DiffOpRemove ) {
 				$oldVal =
 					$this->formatPropertyId( $change->getOldValue()->getPropertyId() ) .
-					': ' .
-					$this->formatSnak( $change->getOldValue() );
+					$colon .
+					$this->formatSnakDetails( $change->getOldValue() );
 			} else if ( $change instanceof DiffOpChange ) {
 				$oldVal =
 					$this->formatPropertyId( $change->getOldValue()->getPropertyId() ) .
-					': ' .
-					$this->formatSnak( $change->getOldValue() );
+					$colon .
+					$this->formatSnakDetails( $change->getOldValue() );
 				$newVal =
 					$this->formatPropertyId( $change->getNewValue()->getPropertyId() ) .
-					': ' .
-					$this->formatSnak( $change->getNewValue() );
+					$colon .
+					$this->formatSnakDetails( $change->getNewValue() );
 			} else {
 				throw new RuntimeException( 'Diff operation of unknown type.' );
 			}

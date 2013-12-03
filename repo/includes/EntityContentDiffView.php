@@ -39,7 +39,12 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * @var SnakFormatter
 	 */
-	protected $snakValueFormatter;
+	protected $detailedSnakFormatter;
+
+	/**
+	 * @var SnakFormatter
+	 */
+	protected $terseSnakFormatter;
 
 	/**
 	 * @var EntityIdLabelFormatter
@@ -71,13 +76,14 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
 		$formatterFactory = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory();
-		$this->snakValueFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
+		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
+		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
 		// @fixme inject!
 		$this->diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->snakValueFormatter, $langCode ),
+			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->detailedSnakFormatter, $this->terseSnakFormatter, $langCode ),
 			SiteSQLStore::newInstance()
 		);
 	}
