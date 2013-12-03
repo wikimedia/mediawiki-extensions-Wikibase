@@ -19,14 +19,15 @@ use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContent;
-use Wikibase\Item;
+use Wikibase\EntityRevisionLookup;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Settings;
 use Wikibase\Summary;
@@ -55,12 +56,20 @@ class EditEntity extends ModifyEntity {
 	protected $validLanguageCodes;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var EntityRevisionLookup
+	 */
+	protected $entityRevisionLookup;
+
+	/**
 	 * @see ApiBase::_construct()
 	 */
 	public function __construct( $mainModule, $moduleName ) {
 		parent::__construct( $mainModule, $moduleName );
 
 		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
+		$this->entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
 	}
 
 	/**
@@ -128,12 +137,23 @@ class EditEntity extends ModifyEntity {
 		$this->validateDataProperties( $data, $entityContent );
 
 		if ( $params['clear'] ) {
+			if( $params['baserevid'] ) {
+				$currentEntityRevision = $this->entityRevisionLookup->getEntityRevision( $entity->getId() );
+				if( !$entityContent->getEntityRevision()->getRevision() === $currentEntityRevision->getRevision() ) {
+					wfProfileOut( __METHOD__ );
+					$this->dieUsage(
+						'Tried to clear entity using baserevid of entity not equal to current revision',
+						'editconflict'
+					);
+				}
+			}
 			$entity->clear();
 		}
 
 		// if we create a new property, make sure we set the datatype
 		if( !$entityContent->getTitle()->exists() && $entity instanceof Property ){
 			if ( !isset( $data['datatype'] ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'No datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
