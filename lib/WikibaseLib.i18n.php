@@ -24,6 +24,9 @@ $messages['en'] = array(
 	'wikibase-deletedentity-query' => 'Deleted query',
 	'wikibase-diffview-reference' => 'reference',
 	'wikibase-diffview-rank' => 'rank',
+	'wikibase-diffview-rank-preferred' => 'Preferred rank',
+	'wikibase-diffview-rank-normal' => 'Normal rank',
+	'wikibase-diffview-rank-deprecated' => 'Deprecated rank',
 	'wikibase-diffview-qualifier' => 'qualifier',
 	'wikibase-diffview-label' => 'label',
 	'wikibase-diffview-alias' => 'aliases',
@@ -121,6 +124,9 @@ See also:
 {{Identical|Reference}}',
 	'wikibase-diffview-rank' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects the rank of the statement. Will be shown as e.g. "claim / property q1 / rank".
 {{Identical|Rank}}',
+	'wikibase-diffview-rank-preferred' => 'The [[d:Wikidata:Glossary#Rank-preferred|Preferred Rank]] to be shown in diffs.',
+	'wikibase-diffview-rank-normal' => 'The [[d:Wikidata:Glossary#Rank-normal|Normal Rank]] to be shown in diffs.',
+	'wikibase-diffview-rank-deprecated' => 'The [[d:Wikidata:Glossary#Rank-deprecated|Deprecated Rank]] to be shown in diffs.',
 	'wikibase-diffview-qualifier' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a qualifier. Will be shown as e.g. "claim / property q1 / qualifier".',
 	'wikibase-diffview-label' => 'Sub heading for label changes in a diff.
 {{Identical|Label}}',
