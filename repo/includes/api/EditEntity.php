@@ -23,6 +23,7 @@ use Wikibase\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
+use Wikibase\EntityLookup;
 use Wikibase\Item;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -55,12 +56,20 @@ class EditEntity extends ModifyEntity {
 	protected $validLanguageCodes;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var EntityLookup
+	 */
+	protected $entityLookup;
+
+	/**
 	 * @see ApiBase::_construct()
 	 */
 	public function __construct( $mainModule, $moduleName ) {
 		parent::__construct( $mainModule, $moduleName );
 
 		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
+		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 	}
 
 	/**
@@ -127,13 +136,24 @@ class EditEntity extends ModifyEntity {
 		$data = json_decode( $params['data'], true );
 		$this->validateDataProperties( $data, $entityContent );
 
+		$currentEntity = $this->entityLookup->getEntity( $entity->getId() );
 		if ( $params['clear'] ) {
+			// If we are not clearing the current revision then die!
+			if( !$entityContent->getEntityRevision()->getEntity()->equals( $currentEntity ) ) {
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage(
+					'Tried to clear entity using baserevid of entity with content not equal to that of latest
+					revision',
+					'editconflict'
+				);
+			}
 			$entity->clear();
 		}
 
 		// if we create a new property, make sure we set the datatype
 		if( !$entityContent->getTitle()->exists() && $entity instanceof Property ){
 			if ( !isset( $data['datatype'] ) ) {
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'No datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
