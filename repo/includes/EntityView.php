@@ -204,16 +204,11 @@ abstract class EntityView extends \ContextSource {
 
 		$languageTerms = $this->getHtmlForLanguageTerms( $entityRevision->getEntity(), $lang, $editable );
 
-		$tocHtml = '';
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$tocHtml = $this->getHtmlForToc( $lang );
-		}
-
 		$html = wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entityRevision->getEntity(), $lang, $editable ),
 			$this->getHtmlForDescription( $entityRevision->getEntity(), $lang, $editable ),
 			$this->getHtmlForAliases( $entityRevision->getEntity(), $lang, $editable ),
-			$tocHtml,
+			$this->getHtmlForToc( $lang ),
 			$languageTerms,
 			$claims
 		);
@@ -333,6 +328,7 @@ abstract class EntityView extends \ContextSource {
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array(
 			'wikibase.common',
+			'wikibase.toc',
 			'jquery.ui.core',
 			'jquery.wikibase.statementview',
 			'jquery.wikibase.toolbar',
