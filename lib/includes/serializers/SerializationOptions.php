@@ -63,6 +63,12 @@ class SerializationOptions {
 	const OPT_GROUP_BY_PROPERTIES = 'groupByProperties';
 
 	/**
+	 * @since 0.5
+	 * @const key for the sortByRank option
+	 */
+	const OPT_SORT_BY_RANK = 'sortByRank';
+
+	/**
 	 * @var array
 	 */
 	protected $options = array();
@@ -78,6 +84,7 @@ class SerializationOptions {
 		$this->initOption( self::OPT_ID_KEY_MODE, self::ID_KEYS_UPPER );
 		$this->initOption( self::OPT_INDEX_TAGS, false );
 		$this->initOption( self::OPT_GROUP_BY_PROPERTIES, array( 'claims', 'qualifiers', 'references' ) );
+		$this->initOption( self::OPT_SORT_BY_RANK, false );
 	}
 
 	protected function checkKey( $key) {

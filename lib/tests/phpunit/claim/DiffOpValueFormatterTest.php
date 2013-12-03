@@ -14,7 +14,7 @@ use Wikibase\DiffOpValueFormatter;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DiffOpValueFormatterTest extends \PHPUnit_Framework_TestCase {
+class DiffOpValueFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideGenerateHtml
@@ -28,6 +28,8 @@ class DiffOpValueFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = new DiffOpValueFormatter( $name, $oldValues, $newValues );
 
 		$html = $formatter->generateHtml();
+
+		$this->assertValidHtml( '<table>' . $html . '</table><' );
 		$this->assertRegExp( $pattern, $html );
 	}
 

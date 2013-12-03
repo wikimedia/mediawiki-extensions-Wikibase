@@ -14,6 +14,7 @@ use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\Serializers\ByRankSorter;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -565,24 +566,21 @@ abstract class EntityView extends \ContextSource {
 			'claims' // ID - TODO: should not be added if output page is not the entity's page
 		);
 
-		// aggregate claims by properties
-		$claimsByProperty = array();
-		foreach( $claims as $claim ) {
-			$propertyId = $claim->getMainSnak()->getPropertyId();
-			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
-		}
-
 		$labels = $this->getPropertyLabels( $entity, $languageCode );
+		$byRankSorter = new ByRankSorter();
 
-		/**
-		 * @var string $claimsHtml
-		 * @var Claim[] $claims
-		 */
+		// aggregate claims by properties
+		$claimsByProperty = new ByPropertyIdArray( $claims );
+		$claimsByProperty->buildIndex();
+
 		$claimsHtml = '';
-		foreach( $claimsByProperty as $claims ) {
+		foreach ( $claimsByProperty->getPropertyIds() as $propertyId ) {
 			$propertyHtml = '';
 
-			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
+			/* @var Claim[] $claims */
+			$claims = $claimsByProperty->getByPropertyId( $propertyId );
+			$claims = $byRankSorter->sort( $claims );
+
 			$propertyKey = $propertyId->getSerialization();
 			$propertyLabel = isset( $labels[$propertyKey] ) ? $labels[$propertyKey] : $propertyKey;
 			$propertyLink = \Linker::link(
@@ -796,6 +794,7 @@ abstract class EntityView extends \ContextSource {
 		// TODO: use injected id formatter
 		$serializationOptions = new SerializationOptions();
 		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
+		$serializationOptions->setOption( SerializationOptions::OPT_SORT_BY_RANK, true );
 
 		$serializerFactory = new SerializerFactory( $serializationOptions );
 		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
