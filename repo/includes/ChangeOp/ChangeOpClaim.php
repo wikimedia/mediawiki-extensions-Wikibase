@@ -111,8 +111,8 @@ class ChangeOpClaim extends ChangeOpBase {
 			// Move claim to its designated index:
 			$indexedClaimList = new ByPropertyIdArray( $claims );
 			$indexedClaimList->buildIndex();
-
 			$index = !is_null( $this->index ) ? $this->index : $currentIndex;
+
 			$indexedClaimList->moveObjectToIndex( $this->claim, $index );
 		}
 
