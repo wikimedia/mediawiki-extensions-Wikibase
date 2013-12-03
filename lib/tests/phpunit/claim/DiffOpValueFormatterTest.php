@@ -54,5 +54,4 @@ class DiffOpValueFormatterTest extends \PHPUnit_Framework_TestCase {
 				'@<i>old 1</i>.*<i>old 2</i>.*<i>new 1</i>.*<i>new 2</i>@' ),
 		);
 	}
-
 }
