@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_2fc4d193",
+        "filename": "repo/includes/specials/SpecialItemsWithMostSitelinks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:20:30Z",
+      "side": 1,
+      "message": "0.5",
+      "revId": "d1f960ddbb9758202fee8425b889c07b077425ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6fd2d95e",
+        "filename": "repo/includes/specials/SpecialItemsWithMostSitelinks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:20:30Z",
+      "side": 1,
+      "message": "@return bool|void",
+      "revId": "d1f960ddbb9758202fee8425b889c07b077425ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0fc34d8d",
+        "filename": "repo/includes/specials/SpecialItemsWithMostSitelinks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:20:30Z",
+      "side": 1,
+      "message": "0.5",
+      "revId": "d1f960ddbb9758202fee8425b889c07b077425ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_af37c1aa",
+        "filename": "repo/includes/store/EntityPerPage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:20:30Z",
+      "side": 1,
+      "message": "You need to import the ItemId class",
+      "revId": "d1f960ddbb9758202fee8425b889c07b077425ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8f3e3d86",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithMostSitelinksTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:20:30Z",
+      "side": 1,
+      "message": "overly qualified",
+      "revId": "d1f960ddbb9758202fee8425b889c07b077425ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
