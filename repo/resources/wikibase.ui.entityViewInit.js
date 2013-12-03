@@ -185,18 +185,18 @@
 			} );
 		} );
 
-		if (
-			mw.config.get( 'wgRestrictionEdit' ) !== null &&
-			mw.config.get( 'wgRestrictionEdit' ).length === 1
-		) { // editing is restricted
-			if (
-				$.inArray(
-					mw.config.get( 'wgRestrictionEdit' )[0],
-					mw.config.get( 'wgUserGroups' )
-				) === -1
-			) {
-				// user is not allowed to edit
-				$( wb ).triggerHandler( 'restrictEntityPageActions' );
+		var editRestriction = mw.config.get( 'wgRestrictionEdit' );
+
+		// Restrict entity page actions if editing is restricted:
+		if( editRestriction !== null && editRestriction.length === 1 ) {
+			var hasGroup = $.inArray( editRestriction[0], mw.config.get( 'wgUserGroups' ) );
+			if( !hasGroup ) {
+				mw.user.getRights( function( rights ) {
+					var hasRight = $.inArray( editRestriction, rights ) !== -1;
+					if( !hasRight ) {
+						$( wb ).triggerHandler( 'restrictEntityPageActions' );
+					}
+				} );
 			}
 		}
 
