@@ -92,7 +92,6 @@ class DiffOpValueFormatter {
 				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->generateValueHtml( $this->newValues ) ) ) );
 		$html .= Html::closeElement( 'tr' );
-		$html .= Html::closeElement( 'tr' );
 
 		return $html;
 	}

@@ -103,7 +103,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span><i>SNAK</i></span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
-				'<div><ins class="diffchange diffchange-inline"><span><i>SNAK</i></span></ins></div></td></tr></tr>'
+				'<div><ins class="diffchange diffchange-inline"><span><i>SNAK</i></span></ins></div></td></tr>'
 			),
 			//2 +qualifiers
 			array(
