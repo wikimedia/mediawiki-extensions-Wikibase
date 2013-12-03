@@ -55,7 +55,7 @@ namespace Wikibase\Test\Api;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class SetDescriptionTest extends LangAttributeTestCase {
+class SetDescriptionTest extends ModifyTermTestCase {
 
 	private static $hasSetup;
 
@@ -74,13 +74,13 @@ class SetDescriptionTest extends LangAttributeTestCase {
 	 * @dataProvider provideData
 	 */
 	public function testSetDescription( $params, $expected ){
-		self::doTestSetLangAttribute( 'descriptions' ,$params, $expected );
+		self::doTestSetTerm( 'descriptions' ,$params, $expected );
 	}
 
 	/**
 	 * @dataProvider provideExceptionData
 	 */
 	public function testSetDescriptionExceptions( $params, $expected ){
-		self::doTestSetLangAttributeExceptions( $params, $expected );
+		self::doTestSetTermExceptions( $params, $expected );
 	}
 }

@@ -16,7 +16,7 @@ use Wikibase\ChangeOp\ChangeOpDescription;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetDescription extends ModifyLangAttribute {
+class SetDescription extends ModifyTerm {
 
 	/**
 	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()

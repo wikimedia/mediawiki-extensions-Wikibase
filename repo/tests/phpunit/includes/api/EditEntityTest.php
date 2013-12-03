@@ -325,11 +325,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 			//@todo the error codes in the overly long string tests make no sense and should be corrected...
 			array( //17 overly long label
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ,
-					'data' => '{"lables":{"en":{"language":"en","value":"'.LangAttributeTestHelper::makeOverlyLongString().'"}}}'),
+					'data' => '{"lables":{"en":{"language":"en","value":"'.TermTestHelper::makeOverlyLongString().'"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
 			array( //18 overly long description
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ,
-					'data' => '{"descriptions":{"en":{"language":"en","value":"'.LangAttributeTestHelper::makeOverlyLongString().'"}}}'),
+					'data' => '{"descriptions":{"en":{"language":"en","value":"'.TermTestHelper::makeOverlyLongString().'"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
 			//@todo add check for Bug:52731 once fixed
 			array( //19 removing invalid claim fails

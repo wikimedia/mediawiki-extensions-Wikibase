@@ -55,7 +55,7 @@ use ApiTestCase;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class SetAliasesTest extends LangAttributeTestCase {
+class SetAliasesTest extends ModifyTermTestCase {
 
 	private static $hasSetup;
 
@@ -180,7 +180,7 @@ class SetAliasesTest extends LangAttributeTestCase {
 				'p' => array( 'language' => '', 'add' => '' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
 			array( //1
-				'p' => array( 'language' => 'nl', 'set' => LangAttributeTestHelper::makeOverlyLongString() ),
+				'p' => array( 'language' => 'nl', 'set' => TermTestHelper::makeOverlyLongString() ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
 			array( //2
 				'p' => array( 'language' => 'pt', 'remove' => 'normalValue' ),
@@ -207,6 +207,6 @@ class SetAliasesTest extends LangAttributeTestCase {
 	 * @dataProvider provideExceptionData
 	 */
 	public function testSetLabelExceptions( $params, $expected ){
-		self::doTestSetLangAttributeExceptions( $params, $expected );
+		self::doTestSetTermExceptions( $params, $expected );
 	}
 }
