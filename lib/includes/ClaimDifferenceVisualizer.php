@@ -11,6 +11,7 @@ use Message;
 use RuntimeException;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\FormattingException;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -91,7 +92,7 @@ class ClaimDifferenceVisualizer {
 		}
 
 		if ( $claimDifference->getRankChange() !== null ) {
-			$html .= $this->visualizeRankChange( $claimDifference->getRankChange() );
+			$html .= $this->visualizeRankChange( $claimDifference->getRankChange(), $baseClaim );
 		}
 
 		if ( $claimDifference->getQualifierChanges() !== null ) {
@@ -168,15 +169,32 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param DiffOpChange $rankChange
+	 * @param Claim $claim the claim, as context for display
 	 *
 	 * @return string
 	 */
-	protected function visualizeRankChange( DiffOpChange $rankChange ) {
+	protected function visualizeRankChange( DiffOpChange $rankChange, Claim $claim ) {
+		$claimMainSnak = $claim->getMainSnak();
+		$claimHeader = $this->getSnakHeader( $claimMainSnak );
+
+		$oldValue = $rankChange->getOldValue();
+		$newValue = $rankChange->getNewValue();
+
+		// ranks are currently represented as integer values internally
+		if ( is_int( $oldValue ) ) {
+			$oldValue = ClaimSerializer::serializeRank( $oldValue );
+		}
+
+		if ( is_int( $newValue ) ) {
+			$newValue = ClaimSerializer::serializeRank( $newValue );
+		}
+
 		$valueFormatter = new DiffOpValueFormatter(
-			wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->langCode ),
-			$rankChange->getOldValue(),
-			$rankChange->getNewValue()
+			$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->langCode )->parse(),
+			wfMessage( 'wikibase-statementview-rank-' . $oldValue )->inLanguage( $this->langCode )->parse(),
+			wfMessage( 'wikibase-statementview-rank-' . $newValue )->inLanguage( $this->langCode )->parse()
 		);
+
 		return $valueFormatter->generateHtml();
 	}
 
