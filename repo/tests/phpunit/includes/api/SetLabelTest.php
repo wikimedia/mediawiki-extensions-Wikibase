@@ -55,7 +55,7 @@ namespace Wikibase\Test\Api;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class SetLabelTest extends LangAttributeTestCase {
+class SetLabelTest extends ModifyTermTestCase {
 
 	private static $hasSetup;
 
@@ -74,13 +74,13 @@ class SetLabelTest extends LangAttributeTestCase {
 	 * @dataProvider provideData
 	 */
 	public function testSetLabel( $params, $expected ){
-		self::doTestSetLangAttribute( 'labels' ,$params, $expected );
+		self::doTestSetTerm( 'labels' ,$params, $expected );
 	}
 
 	/**
 	 * @dataProvider provideExceptionData
 	 */
 	public function testSetLabelExceptions( $params, $expected ){
-		self::doTestSetLangAttributeExceptions( $params, $expected );
+		self::doTestSetTermExceptions( $params, $expected );
 	}
 }

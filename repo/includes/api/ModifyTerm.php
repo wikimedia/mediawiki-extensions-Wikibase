@@ -2,25 +2,21 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, Language;
+use ApiBase;
+use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
- * API module to set the language attributes for a Wikibase entity.
- * Requires API write mode to be enabled.
+ * API module to set the terms for a Wikibase entity.
  *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class ModifyLangAttribute extends ModifyEntity {
+abstract class ModifyTerm extends ModifyEntity {
 
 	/**
 	 * Creates a Summary object based on the given API call parameters.
@@ -31,7 +27,7 @@ abstract class ModifyLangAttribute extends ModifyEntity {
 	 *
 	 * @param array $params
 	 *
-	 * @return \Wikibase\Summary
+	 * @return Summary
 	 */
 	protected function createSummary( array $params ) {
 		$set = isset( $params['value'] ) && 0 < strlen( $params['value'] );

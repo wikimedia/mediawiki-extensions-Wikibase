@@ -10,7 +10,7 @@ namespace Wikibase\Test\Api;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-abstract class LangAttributeTestCase extends WikibaseApiTestCase {
+abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 
 	protected static $testAction;
 	protected static $testId;
@@ -57,7 +57,7 @@ abstract class LangAttributeTestCase extends WikibaseApiTestCase {
 		);
 	}
 	
-	public function doTestSetLangAttribute( $attribute ,$params, $expected ){
+	public function doTestSetTerm( $attribute ,$params, $expected ){
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
 		if( !array_key_exists( 'id', $params ) ){
@@ -79,10 +79,18 @@ abstract class LangAttributeTestCase extends WikibaseApiTestCase {
 		$this->assertEquals( 1, count( $result['entity'][$attribute] ), "Entity return contained more than a single language" );
 		$this->assertArrayHasKey( $params['language'], $result['entity'][$attribute], "Entity doesn't return expected language");
 		$this->assertEquals( $params['language'], $result['entity'][$attribute][ $params['language'] ]['language'], "Returned incorrect language" );
+
 		if( array_key_exists( $params['language'], $expected['value'] ) ){
-			$this->assertEquals( $expected['value'][ $params['language'] ], $result['entity'][$attribute][$params['language']]['value'] , "Returned incorrect label" );
+			$this->assertEquals(
+				$expected['value'][ $params['language'] ],
+				$result['entity'][$attribute][$params['language']]['value'] , "Returned incorrect attribute {$attribute}"
+			);
 		} else if( empty( $value ) ){
-			$this->assertArrayHasKey( 'removed', $result['entity'][$attribute][ $params['language'] ], "Entity doesn't return expected 'removed' marker");
+			$this->assertArrayHasKey(
+				'removed',
+				$result['entity'][$attribute][ $params['language'] ],
+				"Entity doesn't return expected 'removed' marker"
+			);
 		}
 
 		// -- check any warnings ----------------------------------------------
@@ -123,7 +131,7 @@ abstract class LangAttributeTestCase extends WikibaseApiTestCase {
 				'p' => array( 'language' => '', 'value' => '' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
 			array( //1
-				'p' => array( 'language' => 'nl', 'value' => LangAttributeTestHelper::makeOverlyLongString() ),
+				'p' => array( 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
 			array( //2
 				'p' => array( 'language' => 'pt', 'value' => 'normalValue' ),
@@ -146,7 +154,7 @@ abstract class LangAttributeTestCase extends WikibaseApiTestCase {
 		);
 	}
 
-	public function doTestSetLangAttributeExceptions( $params, $expected ){
+	public function doTestSetTermExceptions( $params, $expected ){
 
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
