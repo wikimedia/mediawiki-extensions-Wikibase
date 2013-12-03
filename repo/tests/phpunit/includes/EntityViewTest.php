@@ -27,6 +27,7 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
+use Wikibase\Statement;
 
 /**
  * @covers Wikibase\EntityView
@@ -154,14 +155,14 @@ class EntityViewTest extends \MediaWikiTestCase {
 	 */
 	public function getHtmlForClaimsProvider() {
 		$item = $this->makeItem( 'Q33', array(
-			$this->makeClaim( new PropertyNoValueSnak(
+			$this->makeStatement( new PropertyNoValueSnak(
 				new PropertyId( 'P11' )
 			) ),
-			$this->makeClaim( new PropertyValueSnak(
+			$this->makeStatement( new PropertyValueSnak(
 				new PropertyId( 'P11' ),
 				new EntityIdValue( new ItemId( 'Q22' ) )
-			) ),
-			$this->makeClaim( new PropertyValueSnak(
+			), Claim::RANK_PREFERRED ),
+			$this->makeStatement( new PropertyValueSnak(
 				new PropertyId( 'P23' ),
 				new StringValue( 'test' )
 			) ),
@@ -255,14 +256,15 @@ class EntityViewTest extends \MediaWikiTestCase {
 		return $property;
 	}
 
-	protected function makeClaim( Snak $mainSnak, $guid = null ) {
+	protected function makeStatement( Snak $mainSnak, $rank = Claim::RANK_NORMAL, $guid = null ) {
 		if ( $guid === null ) {
 			$this->guidCounter++;
 			$guid = 'EntityViewTest$' . $this->guidCounter;
 		}
 
-		$claim = new Claim( $mainSnak );
+		$claim = new Statement( $mainSnak );
 		$claim->setGuid( $guid );
+		$claim->setRank( $rank );
 
 		return $claim;
 	}
@@ -282,28 +284,28 @@ class EntityViewTest extends \MediaWikiTestCase {
 			array() );
 
 		$argLists["PropertyNoValueSnak"] = array(
-			array( $this->makeClaim( new PropertyNoValueSnak( $p44 ) ) ),
+			array( $this->makeStatement( new PropertyNoValueSnak( $p44 ) ) ),
 			array( $p44 ) );
 
 		$argLists["PropertySomeValueSnak"] = array(
-			array( $this->makeClaim( new PropertySomeValueSnak( $p44 ) ) ),
+			array( $this->makeStatement( new PropertySomeValueSnak( $p44 ) ) ),
 			array( $p44 ) );
 
 		$argLists["PropertyValueSnak with string value"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p23, new StringValue( 'onoez' ) ) ) ),
+			array( $this->makeStatement( new PropertyValueSnak( $p23, new StringValue( 'onoez' ) ) ) ),
 			array( $p23 ) );
 
 		$argLists["PropertyValueSnak with EntityId"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p44, new EntityIdValue( $q23 ) ) ) ),
+			array( $this->makeStatement( new PropertyValueSnak( $p44, new EntityIdValue( $q23 ) ) ) ),
 			array( $p44, $q23 ) );
 
 		$argLists["Mixed Snaks"] = array(
 			array(
-				$this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q23 ) ) ),
-				$this->makeClaim( new PropertyNoValueSnak( $p44 ) ),
-				$this->makeClaim( new PropertySomeValueSnak( $p44 ) ),
-				$this->makeClaim( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
-				$this->makeClaim( new PropertyValueSnak( $p44, new EntityIdValue( $q24 ) ) ),
+				$this->makeStatement( new PropertyValueSnak( $p11, new EntityIdValue( $q23 ) ) ),
+				$this->makeStatement( new PropertyNoValueSnak( $p44 ) ),
+				$this->makeStatement( new PropertySomeValueSnak( $p44 ) ),
+				$this->makeStatement( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
+				$this->makeStatement( new PropertyValueSnak( $p44, new EntityIdValue( $q24 ) ) ),
 			),
 			array( $p11, $q23, $p44, $q24 ) );
 
@@ -343,19 +345,19 @@ class EntityViewTest extends \MediaWikiTestCase {
 			array() );
 
 		$argLists["PropertyNoValueSnak"] = array(
-			array( $this->makeClaim( new PropertyNoValueSnak( $p42 ) ) ),
+			array( $this->makeStatement( new PropertyNoValueSnak( $p42 ) ) ),
 			array());
 
 		$argLists["PropertySomeValueSnak"] = array(
-			array( $this->makeClaim( new PropertySomeValueSnak( $p42 ) ) ),
+			array( $this->makeStatement( new PropertySomeValueSnak( $p42 ) ) ),
 			array() );
 
 		$argLists["PropertyValueSnak with string value"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p23, new StringValue( 'http://not/a/url' )  ) ) ),
+			array( $this->makeStatement( new PropertyValueSnak( $p23, new StringValue( 'http://not/a/url' )  ) ) ),
 			array() );
 
 		$argLists["PropertyValueSnak with URL"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ) ),
+			array( $this->makeStatement( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ) ),
 			array( 'http://acme.com/test' ) );
 
 		return $argLists;
@@ -441,9 +443,9 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$p11 = new PropertyId( 'p11' );
 		$p77 = new PropertyId( 'p77' ); // unknown property
 
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
+		$entity->addClaim( $this->makeStatement( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
+		$entity->addClaim( $this->makeStatement( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ), Claim::RANK_PREFERRED ) );
+		$entity->addClaim( $this->makeStatement( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
 
 		$revision = new EntityRevision( $entity, 1234567, '20130505333333' );
 
@@ -482,6 +484,22 @@ class EntityViewTest extends \MediaWikiTestCase {
 				'claims' =>
 				array(
 					'P11' => array(
+						array( // preferred statement first
+							'id' => 'EntityViewTest$2',
+							'mainsnak' => array(
+								'snaktype' => 'value',
+								'property' => 'P11',
+								'datavalue' => array(
+									'value' => array(
+										'entity-type' => 'item',
+										'numeric-id' => 44,
+									),
+									'type' => 'wikibase-entityid',
+								),
+							),
+							'type' => 'statement',
+							'rank' => 'preferred',
+						),
 						array(
 							'id' => 'EntityViewTest$1',
 							'mainsnak' => array(
@@ -495,22 +513,8 @@ class EntityViewTest extends \MediaWikiTestCase {
 									'type' => 'wikibase-entityid',
 								),
 							),
-							'type' => 'claim',
-						),
-						array(
-							'id' => 'EntityViewTest$2',
-							'mainsnak' => array(
-								'snaktype' => 'value',
-								'property' => 'P11',
-								'datavalue' => array(
-									'value' => array(
-										'entity-type' => 'item',
-										'numeric-id' => 44,
-									),
-									'type' => 'wikibase-entityid',
-								),
-							),
-							'type' => 'claim',
+							'type' => 'statement',
+							'rank' => 'normal',
 						),
 					),
 					'P77' => array(
@@ -527,7 +531,8 @@ class EntityViewTest extends \MediaWikiTestCase {
 									'type' => 'wikibase-entityid',
 								),
 							),
-							'type' => 'claim',
+							'type' => 'statement',
+							'rank' => 'normal',
 						),
 					),
 				),

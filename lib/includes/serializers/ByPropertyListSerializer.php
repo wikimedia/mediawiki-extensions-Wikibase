@@ -14,10 +14,9 @@ use Wikibase\ByPropertyIdArray;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ByPropertyListSerializer extends SerializerObject {
-
-	const OPT_ADD_LOWER_CASE_KEYS = 'addLowerCaseKeys';
 
 	/**
 	 * @since 0.2
@@ -34,6 +33,11 @@ class ByPropertyListSerializer extends SerializerObject {
 	protected $elementSerializer;
 
 	/**
+	 * @var ByRankSorter|null
+	 */
+	protected $sorter = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.2
@@ -47,6 +51,11 @@ class ByPropertyListSerializer extends SerializerObject {
 
 		$this->elementName = $elementName;
 		$this->elementSerializer = $elementSerializer;
+
+		if ( $this->options->hasOption( SerializationOptions::OPT_SORT_BY_RANK )
+			&& $this->options->getOption( SerializationOptions::OPT_SORT_BY_RANK ) ) {
+			$this->sorter = new ByRankSorter();
+		}
 	}
 
 	/**
@@ -73,9 +82,14 @@ class ByPropertyListSerializer extends SerializerObject {
 		$objects->buildIndex();
 
 		foreach ( $objects->getPropertyIds() as $propertyId ) {
-			$serializedObjects = array();
+			$objectsForId = $objects->getByPropertyId( $propertyId );
 
-			foreach ( $objects->getByPropertyId( $propertyId ) as $object ) {
+			if ( $this->sorter ) {
+				$objectsForId = $this->sorter->sort( $objectsForId );
+			}
+
+			$serializedObjects = array();
+			foreach ( $objectsForId as $object ) {
 				$serializedObjects[] = $this->elementSerializer->getSerialized( $object );
 			}
 

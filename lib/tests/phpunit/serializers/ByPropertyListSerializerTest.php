@@ -3,14 +3,18 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\ByPropertyListSerializer;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\SnakList;
+use Wikibase\Statement;
 
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListSerializer
@@ -23,6 +27,7 @@ use Wikibase\SnakList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ByPropertyListSerializerTest extends SerializerBaseTest {
 
@@ -198,5 +203,34 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 		);
 
 		return $validArgs;
+	}
+
+	public function testSortByRank() {
+		$claims = array(
+			new Statement( new PropertySomeValueSnak( new PropertyId( 'P2' ) ) ),
+			new Statement( new PropertyNoValueSnak( new PropertyId( 'P2' ) ) ),
+			new Claim( new PropertySomeValueSnak( new PropertyId( 'P1' ) ) ),
+		);
+
+		$claims[1]->setRank( Claim::RANK_PREFERRED );
+
+		foreach ( $claims as $i => $claim ) {
+			$claim->setGuid( 'ClaimsSerializerTest$claim-' . $i );
+		}
+
+		$opts = new SerializationOptions();
+		$opts->setOption( SerializationOptions::OPT_SORT_BY_RANK, true );
+
+		$serializer = new ByPropertyListSerializer( 'claim', new ClaimSerializer( new SnakSerializer( null, $opts ), $opts ), $opts );
+		$serialized = $serializer->getSerialized( new Claims( $claims ) );
+
+		$this->assertEquals( array( 'P2', 'P1' ), array_keys( $serialized ) );
+		$this->assertArrayHasKey( '0', $serialized['P2'] );
+		$this->assertArrayHasKey( '1', $serialized['P2'] );
+		$this->assertArrayHasKey( '0', $serialized['P1'] );
+
+		// make sure they got sorted
+		$this->assertEquals( $serialized['P2'][0]['id'], 'ClaimsSerializerTest$claim-1' );
+		$this->assertEquals( $serialized['P2'][1]['id'], 'ClaimsSerializerTest$claim-0' );
 	}
 }
