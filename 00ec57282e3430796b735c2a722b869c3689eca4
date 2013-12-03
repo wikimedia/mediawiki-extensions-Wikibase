@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_c63787aa",
+        "filename": "repo/tests/phpunit/includes/api/SetSiteLinkTest.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-12-03T22:44:27Z",
+      "side": 1,
+      "message": "This ends up as Q42|Q149 after duplicate removal, but api does not return \"no change\" when order is different (below is Q149|Q42). Change that to e.g. \"Q149|q149|Q42|Q149\" and it should work (and also test upper/lowercase.",
+      "revId": "00ec57282e3430796b735c2a722b869c3689eca4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
