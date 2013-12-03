@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_0f5fcd14",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "RuntimeException not used",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0f310de9",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "RuntimeException is not used",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ef2b8976",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "Neither is UserBlockedError",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6f577906",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "This is wrong, should be EntityContent",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_4f3ef5b6",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "This is wrong, should be EntityContent",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8f1d1d69",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "$status() is wrong above....",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0f48ed5e",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "should have an @returns tag",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ef42693e",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "InvalidAttributeException needs a \u0027use\u0027 at the top",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_af746197",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "$directino????",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6f6e59c6",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "$fromId and $toId do not appear to be used",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_efb82927",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "UserBlockedError not used",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8f819d51",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-03T02:13:52Z",
+      "side": 1,
+      "message": "Overly qualified",
+      "revId": "32ba9ba9a0f3928c779228afd22590fc073ed597",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
