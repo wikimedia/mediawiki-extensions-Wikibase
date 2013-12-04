@@ -122,7 +122,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		// -- do the request --------------------------------------------------
 		list( $result, , ) = $this->doApiRequestWithToken( $params );
 
-		//@todo all of the below is very similar to the code in LangAttributeTestCase
+		//@todo all of the below is very similar to the code in ModifyTermTestCase
 		//This might be able to go in the same place
 
 		// -- check the result ------------------------------------------------

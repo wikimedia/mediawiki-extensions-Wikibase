@@ -16,7 +16,7 @@ use Wikibase\ChangeOp\ChangeOpLabel;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetLabel extends ModifyLangAttribute {
+class SetLabel extends ModifyTerm {
 
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
