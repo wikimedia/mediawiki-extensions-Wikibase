@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_d18f40d0",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-04T14:17:19Z",
+      "side": 1,
+      "message": "Should be an InvalidArgumentException",
+      "revId": "507c27bebeeb09e8ed812c35b8122aa418fbb172",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
