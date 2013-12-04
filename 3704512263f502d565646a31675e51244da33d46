@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_528a0b1d",
+        "filename": "repo/tests/phpunit/includes/api/SetSiteLinkTest.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T23:19:46Z",
+      "side": 1,
+      "message": "This should really go into a separate function",
+      "revId": "3704512263f502d565646a31675e51244da33d46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
