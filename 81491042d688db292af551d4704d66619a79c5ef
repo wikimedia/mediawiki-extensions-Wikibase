@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b12b9c77",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T11:32:16Z",
+      "side": 1,
+      "message": "$serializerFactory is injected now, this line must go away.",
+      "revId": "81491042d688db292af551d4704d66619a79c5ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
