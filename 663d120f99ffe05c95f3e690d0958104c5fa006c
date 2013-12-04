@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_71a3d4fd",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T12:05:05Z",
+      "side": 1,
+      "message": "That assumption could be checked using ( $settings-\u003egetSetting( \u0027repoDatabase\u0027 ) \u003d\u003d\u003d false ). I suggest to default to using the repoDatabase setting as a default for \u0027repoSiteId\u0027 otherwise, since the database name and site id are typically the same. Compare the default for \u0027sharedCacheKeyPrefix\u0027.",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_31ad4ce8",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T12:05:05Z",
+      "side": 1,
+      "message": "Eek! There\u0027s no guarantee that this is true! Currently, the mappign is maintained by EntityContentFactory... which is a bad place, not not availabel to the client.\n\nWe can hack it for now, but it definitly deservs a FIXME.",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_11b48832",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T12:05:05Z",
+      "side": 1,
+      "message": "Should document that the result is HTML",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f1aec4e1",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T12:05:05Z",
+      "side": 1,
+      "message": "Should document that the result is HTML",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_91877866",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T12:05:05Z",
+      "side": 1,
+      "message": "There\u0027s no guarantee that this pattern holds true in the future. There should be a FIXME here; We should really use an EntityTitleLookup for the mapping, which, on the client, would probably return Title objects with the appropriate interwiki prefix set.",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_718ab46f",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T12:05:05Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this generate a link to the deletion filtered for the entity in question? And if this is somehow difficult, shouldn\u0027t we at least pass the necessary paramters here, and put a big TODO into the function?",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
