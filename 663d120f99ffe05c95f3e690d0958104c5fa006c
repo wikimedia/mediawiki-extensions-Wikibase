@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_f1e6c410",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-04T12:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_71a3d4fd",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_31ad4ce8",
         "filename": "client/includes/RepoLinker.php",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2013-12-04T12:05:05Z",
       "side": 1,
       "message": "Eek! There\u0027s no guarantee that this is true! Currently, the mappign is maintained by EntityContentFactory... which is a bad place, not not availabel to the client.\n\nWe can hack it for now, but it definitly deservs a FIXME.",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_91bf78cd",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-04T12:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_31ad4ce8",
       "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_71c2b45e",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-04T12:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_11b48832",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_f1aec4e1",
         "filename": "client/includes/RepoLinker.php",
         "patchSetId": 17
@@ -64,6 +118,24 @@
       "writtenOn": "2013-12-04T12:05:05Z",
       "side": 1,
       "message": "Should document that the result is HTML",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_51b9f0e4",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-04T12:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_f1aec4e1",
       "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_31266c64",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-04T12:37:24Z",
+      "side": 1,
+      "message": "as long as it doesn\u0027t involve database lookup or is efficient, then might work.\n\nright now, the repo-specific EntityContentFactory is used as \"EntityTitleLookup\", the code which I really think is not much better than this. :)",
+      "parentUuid": "0ee75395_91877866",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_718ab46f",
         "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
         "patchSetId": 17
@@ -98,6 +188,24 @@
       "writtenOn": "2013-12-04T12:05:05Z",
       "side": 1,
       "message": "Shouldn\u0027t this generate a link to the deletion filtered for the entity in question? And if this is somehow difficult, shouldn\u0027t we at least pass the necessary paramters here, and put a big TODO into the function?",
+      "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f1424410",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-04T12:37:24Z",
+      "side": 1,
+      "message": "this is consistent to how deletions are handled in core. would be a nice enhancement for core",
+      "parentUuid": "0ee75395_718ab46f",
       "revId": "663d120f99ffe05c95f3e690d0958104c5fa006c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
