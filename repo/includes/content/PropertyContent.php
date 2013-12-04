@@ -90,6 +90,8 @@ class PropertyContent extends EntityContent {
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
 		if ( $status->isOK() ) {
+			// first test for label entity id conflicts as this is the faster check
+			$this->addLabelEntityIdConflicts( $status, Property::ENTITY_TYPE );
 			$this->addLabelUniquenessConflicts( $status );
 		}
 
