@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_7c23aba6",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-04T14:47:38Z",
+      "side": 1,
+      "message": "should be a line between namespace and use block",
+      "revId": "f18de709492d0f1734384807784e80d6052c3b2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_5c26a7b6",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-04T14:47:38Z",
+      "side": 1,
+      "message": "eww space",
+      "revId": "f18de709492d0f1734384807784e80d6052c3b2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
