@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_fc369be3",
+        "filename": "lib/includes/formatters/MediaWikiNumberLocalizer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-04T14:48:35Z",
+      "side": 1,
+      "message": "eww @file and @ingroup",
+      "revId": "5ea76a9dd39e0866b667c7c12a80215ef5a0b34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
