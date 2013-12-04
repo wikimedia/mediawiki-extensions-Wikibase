@@ -250,12 +250,9 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @param object $object
 	 */
 	protected function removeObject( $object ) {
-		foreach( $this as $key => $o ) {
-			if( $object === $o ) {
-				$this->offsetUnset( $key );
-				break;
-			}
-		}
+		$flatArray = $this->toFlatArray();
+		$this->exchangeArray( $flatArray );
+		$this->offsetUnset( array_search( $object, $flatArray ) );
 		$this->buildIndex();
 	}
 

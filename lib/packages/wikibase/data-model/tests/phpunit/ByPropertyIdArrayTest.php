@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use ReflectionClass;
+use ReflectionMethod;
 use Wikibase\ByPropertyIdArray;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -26,6 +28,19 @@ use Wikibase\Statement;
  * @author H. Snater < mediawiki@snater.com >
  */
 class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * Returns an accessible ReflectionMethod of ByPropertyIdArray.
+	 *
+	 * @param string $methodName
+	 * @return ReflectionMethod
+	 */
+	protected static function getMethod( $methodName ) {
+		$class = new ReflectionClass( '\Wikibase\ByPropertyIdArray' );
+		$method = $class->getMethod( $methodName );
+		$method->setAccessible( true );
+		return $method;
+	}
 
 	public function listProvider() {
 		$lists = array();
@@ -137,6 +152,33 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 			array_values( $objects ),
 			array_values( $allObtainedObjects )
 		);
+	}
+
+	/**
+	 * @dataProvider listProvider
+	 * @param array $objects
+	 */
+	public function testRemoveObject( $objects ) {
+		$lastIndex = count( $objects ) - 1;
+		$indexedArray = new ByPropertyIdArray( $objects );
+		$indexedArray->buildIndex();
+
+		$removeObject = self::getMethod( 'removeObject' );
+
+		$removeObject->invokeArgs( $indexedArray, array( $objects[0] ) );
+		$removeObject->invokeArgs( $indexedArray, array( $objects[$lastIndex] ) );
+
+		$this->assertFalse(
+			in_array( $objects[0], $indexedArray->getByPropertyId( $objects[0]->getPropertyId() ) )
+		);
+
+		$this->assertFalse( in_array(
+			$objects[$lastIndex],
+			$indexedArray->getByPropertyId( $objects[1]->getPropertyId() )
+		) );
+
+		$this->assertFalse( in_array( $objects[0], $indexedArray->toFlatArray() ) );
+		$this->assertFalse( in_array( $objects[$lastIndex], $indexedArray->toFlatArray() ) );
 	}
 
 	public function testGetByNotSetIdThrowsException() {
