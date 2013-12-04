@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use DatabaseBase;
 use MWException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -52,73 +53,155 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	}
 
 	/**
+	 * @param SimpleSiteLink $a
+	 * @param SimpleSiteLink $b
+	 *
+	 * @return int
+	 */
+	public function compareSiteLinks( SimpleSiteLink $a, SimpleSiteLink $b ) {
+		$siteComp = strcmp( $a->getSiteId(), $b->getSiteId() );
+
+		if ( $siteComp !== 0 ) {
+			return $siteComp;
+		}
+
+		$pageComp = strcmp( $a->getPageName(), $b->getPageName() );
+
+		if ( $pageComp !== 0 ) {
+			return $pageComp;
+		}
+
+		return 0;
+	}
+
+	/**
 	 * @see SiteLinkCache::saveLinksOfItem
 	 *
 	 * @since 0.1
 	 *
 	 * @param Item $item
-	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
-	 * @throws MWException
 	 */
-	public function saveLinksOfItem( Item $item, $function = null ) {
-		if ( $this->readonly ) {
-			throw new MWException( 'Cannot write when in readonly mode' );
-		}
+	public function saveLinksOfItem( Item $item ) {
+		wfProfileIn( __METHOD__ );
 
-		$function = is_null( $function ) ? __METHOD__ : $function;
+		//First check whether there's anything to update
+		$newLinks = $item->getSimpleSiteLinks();
+		$oldLinks = $this->getSiteLinksForItem( $item->getId() );
 
-		if ( is_null( $item->getId() ) ) {
-			return false;
-		}
+		$linksToInsert = array_udiff( $newLinks, $oldLinks, array( $this, 'compareSiteLinks' ) );
+		$linksToDelete = array_udiff( $oldLinks, $newLinks, array( $this, 'compareSiteLinks' ) );
 
-		$dbw = $this->getConnection( DB_MASTER );
-
-		$success = $this->deleteLinksOfItem( $item->getId(), $function );
-
-		if ( !$success ) {
-			$this->releaseConnection( $dbw );
-			return false;
-		}
-
-		$siteLinks = $item->getSimpleSiteLinks();
-
-		if ( empty( $siteLinks ) ) {
-			$this->releaseConnection( $dbw );
+		if ( !$linksToInsert && !$linksToDelete ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": links did not change, returning." );
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
-		$transactionLevel = $dbw->trxLevel();
+		$ok = true;
+		$dbw = $this->getConnection( DB_MASTER );
 
-		if ( !$transactionLevel ) {
-			$dbw->begin( __METHOD__ );
+		//TODO: consider doing delete and insert in the same callback, so they share a transaction.
+
+		if ( $ok && $linksToDelete ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $linksToDelete ) . " links to delete." );
+			$ok = $dbw->deadlockLoop( array( $this, 'deleteLinksInternal' ), $item, $linksToDelete, $dbw );
 		}
 
-		/**
-		 * @var SimpleSiteLink $siteLink
-		 */
-		foreach ( $siteLinks as $siteLink ) {
-			$success = $dbw->insert(
-				$this->table,
-				array_merge(
-					array( 'ips_item_id' => $item->getId()->getNumericId() ),
-					array(
-						'ips_site_id' => $siteLink->getSiteId(),
-						'ips_site_page' => $siteLink->getPageName(),
-					)
-				),
-				$function
-			) && $success;
-		}
-
-		if ( !$transactionLevel ) {
-			$dbw->commit( __METHOD__ );
+		if ( $ok && $linksToInsert ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $linksToInsert ) . " links to insert." );
+			$ok = $dbw->deadlockLoop( array( $this, 'insertLinksInternal' ), $item, $linksToInsert, $dbw );
 		}
 
 		$this->releaseConnection( $dbw );
+		wfProfileOut( __METHOD__ );
+
+		return $ok;
+	}
+
+	/**
+	 * Internal callback for inserting a list of links.
+	 *
+	 * @note: this is public only because it acts as a callback, there should be no
+	 *        reason to call this directly!
+	 *
+	 * @since 0.5
+	 *
+	 * @param Item $item
+	 * @param SimpleSiteLink[] $links
+	 * @param DatabaseBase $dbw
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function insertLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
+		wfProfileIn( __METHOD__ );
+
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": inserting links for " . $item->getId()->getPrefixedId() );
+
+		$success = true;
+		foreach ( $links as $link ) {
+			$success = $dbw->insert(
+				$this->table,
+				array(
+					'ips_item_id' => $item->getId()->getNumericId(),
+					'ips_site_id' => $link->getSiteId(),
+					'ips_site_page' => $link->getPageName()
+				),
+				__METHOD__
+			);
+
+			if ( !$success ) {
+				break;
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
 		return $success;
 	}
+
+
+	/**
+	 * Internal callback for deleting a list of links.
+	 *
+	 * @note: this is public only because it acts as a callback, there should be no
+	 *        reason to call this directly!
+	 *
+	 * @since 0.5
+	 *
+	 * @param Item $item
+	 * @param SimpleSiteLink[] $links
+	 * @param DatabaseBase $dbw
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function deleteLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
+		wfProfileIn( __METHOD__ );
+
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": deleting links for " . $item->getId()->getPrefixedId() );
+
+		//TODO: We can do this in a single query by collecting all the site IDs into a set.
+
+		$success = true;
+		foreach ( $links as $link ) {
+			$success = $dbw->delete(
+				$this->table,
+				array(
+					'ips_item_id' => $item->getId()->getNumericId(),
+					'ips_site_id' => $link->getSiteId()
+				),
+				__METHOD__
+			);
+
+			if ( !$success ) {
+				break;
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $success;
+	}
+
 
 	/**
 	 * @see SiteLinkCache::deleteLinksOfItem
@@ -126,12 +209,11 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @since 0.1
 	 *
 	 * @param ItemId $itemId
-	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
 	 * @throws MWException
 	 */
-	public function deleteLinksOfItem( ItemId $itemId, $function = null ) {
+	public function deleteLinksOfItem( ItemId $itemId ) {
 		if ( $this->readonly ) {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
@@ -141,7 +223,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		$ok = $dbw->delete(
 			$this->table,
 			array( 'ips_item_id' => $itemId->getNumericId() ),
-			is_null( $function ) ? __METHOD__ : $function
+			__METHOD__
 		);
 
 		$this->releaseConnection( $dbw );
@@ -334,6 +416,8 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getLinks
 	 *
+	 * @note: SimpleSiteLink objects returned from this method will not contain badges!
+	 *
 	 * @since 0.3
 	 *
 	 * @param array $itemIds
@@ -388,6 +472,8 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @see SiteLinkLookup::getSiteLinksForItem
 	 *
 	 * Get array of SiteLink for an item or returns empty array if no site links
+	 *
+	 * @note: SimpleSiteLink objects returned from this method will not contain badges!
 	 *
 	 * @since 0.4
 	 *
