@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_1741180e",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T17:06:52Z",
+      "side": 1,
+      "message": "This functions is already long and confusing. PLease move this plock into a separate function.",
+      "revId": "669948bd1f82e2af8c59bdd3bb3111d3947d8491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_1758f8fb",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T17:06:52Z",
+      "side": 1,
+      "message": "Please don\u0027t use EntityContentFactory if you can avoid it. Use an EntityLookup instead.\n\nWould perhaps be best to do this at the top of the loop body, so any internal functions we want to call in the ( $ids as $id ) loop can access an item.",
+      "revId": "669948bd1f82e2af8c59bdd3bb3111d3947d8491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_170fd8e5",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T17:06:52Z",
+      "side": 1,
+      "message": "This kind of stuff should really be wrapped in the ResultBuilder.",
+      "revId": "669948bd1f82e2af8c59bdd3bb3111d3947d8491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d7429010",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T17:06:52Z",
+      "side": 1,
+      "message": "perhaps also factor this block out, while you are at it.",
+      "revId": "669948bd1f82e2af8c59bdd3bb3111d3947d8491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_97fac8b4",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T17:06:52Z",
+      "side": 1,
+      "message": "This should be changed to use ResultBuilder. Ideally, in a separate change *before* this one... try a rebase, maybe it has already been done :)",
+      "revId": "669948bd1f82e2af8c59bdd3bb3111d3947d8491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_7702a4bf",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-04T17:06:52Z",
+      "side": 1,
+      "message": "This should list an enumeration of all supported sites. We are already doing this for modules that accept site/title pairs for identifying items, e.g. GetEntities.",
+      "revId": "669948bd1f82e2af8c59bdd3bb3111d3947d8491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
