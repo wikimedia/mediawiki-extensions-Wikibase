@@ -1,49 +1,49 @@
 {
-    "name": "wikibase/wikibase",
-    "type": "mediawiki-extension",
-    "description": "Structured data repository for MediaWiki",
-    "keywords": [
-		"wikibase",
-		"wikidata",
-		"wikibaselib",
-		"wikibaseclient",
-		"wikibaserepo"
-	],
-    "homepage": "https://www.mediawiki.org/wiki/Wikibase",
-    "license": "GNU GPL v2+",
-    "authors": [
-        {
-            "name": "The Wikidata team",
-            "role": "Developer"
-        }
-    ],
-	"support": {
-		"issues": "https://bugzilla.wikimedia.org/",
-		"irc": "irc://irc.freenode.net/wikidata",
-		"forum": "https://www.mediawiki.org/wiki/Talk:Wikibase",
-		"wiki": "https://www.mediawiki.org/wiki/Wikibase"
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataValues.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataTypes.git"
-		}
-	],
-    "require": {
-        "php": ">=5.3.2",
-		"data-values/data-values": "dev-master",
-		"data-values/data-types": "dev-master",
-		"wikibase/data-model": "dev-master",
-        "diff/diff": ">=0.9"
+  "name": "wikibase/wikibase",
+  "type": "mediawiki-extension",
+  "description": "Structured data repository for MediaWiki",
+  "keywords": [
+    "wikibase",
+    "wikidata",
+    "wikibaselib",
+    "wikibaseclient",
+    "wikibaserepo"
+  ],
+  "homepage": "https://www.mediawiki.org/wiki/Wikibase",
+  "license": "GNU GPL v2+",
+  "authors": [
+    {
+      "name": "The Wikidata team",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://bugzilla.wikimedia.org/",
+    "irc": "irc://irc.freenode.net/wikidata",
+    "forum": "https://www.mediawiki.org/wiki/Talk:Wikibase",
+    "wiki": "https://www.mediawiki.org/wiki/Wikibase"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataValues.git"
     },
-	"minimum-stability" : "dev",
-	"autoload": {
-		"files" : [
-			"Wikibase.composer.php"
-		]
-	}
+    {
+      "type": "vcs",
+      "url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataTypes.git"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.2",
+    "data-values/data-values": "dev-mw1.23-wmf6",
+    "data-values/data-types": "dev-mw1.23-wmf6",
+    "wikibase/data-model": "dev-mw1.23-wmf6",
+    "diff/diff": "dev-mw1.23-wmf6"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "files": [
+      "Wikibase.composer.php"
+    ]
+  }
 }
