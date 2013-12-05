@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_833723ab",
+        "filename": "selenium_cuc/features/step_definitions/entity_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-05T10:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_bdd706c4",
+      "revId": "fd8b85e0d84749556987733afade28eae71217f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_bdfee633",
         "filename": "selenium_cuc/features/support/modules/wikibase_api_module.rb",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_03431316",
+        "filename": "selenium_cuc/features/support/modules/wikibase_api_module.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-05T10:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_bdfee633",
+      "revId": "fd8b85e0d84749556987733afade28eae71217f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_7de17e96",
         "filename": "selenium_cuc/features/support/modules/wikibase_api_module.rb",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2013-12-02T11:53:38Z",
       "side": 1,
       "message": "The above two lines are probably not needed.",
+      "revId": "fd8b85e0d84749556987733afade28eae71217f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e3514fde",
+        "filename": "selenium_cuc/features/support/modules/wikibase_api_module.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-05T10:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_7de17e96",
       "revId": "fd8b85e0d84749556987733afade28eae71217f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
