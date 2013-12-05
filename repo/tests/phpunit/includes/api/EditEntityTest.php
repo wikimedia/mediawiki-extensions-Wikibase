@@ -49,6 +49,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$FA = new ItemId( "Q149" );
 
 		if( !isset( self::$hasSetup ) ){
+			self::$hasSetup = true;
+
 			$this->initTestEntities( array( 'Berlin' ) );
 
 			$prop = PropertyContent::newEmpty();
@@ -69,7 +71,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$badge->getEntity()->setId( $FA );
 			$badge->save( 'EditEntityTestQ149' );
 		}
-		self::$hasSetup = true;
 	}
 
 	public static function provideData() {
