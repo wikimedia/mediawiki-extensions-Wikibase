@@ -5,7 +5,6 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -42,12 +41,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	public function setUp() {
 		static $hasProperties = false;
 		if ( !$hasProperties ) {
-			$this->createProperty( 1 );
-			$this->createProperty( 2 );
-			$this->createProperty( 3 );
-			$this->createProperty( 42 );
-			$this->createProperty( 43 );
-			$this->createProperty( 66 );
+			$this->createProperty( 100 );
+			$this->createProperty( 4200 );
+			$this->createProperty( 4300 );
+			$this->createProperty( 6600 );
 
 			$hasProperties = true;
 		}
@@ -74,11 +71,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$content = new ItemContent( $item );
 		$content->save( '', null, EDIT_NEW );
 
-		$statement = $item->newClaim( new PropertyNoValueSnak( 42 ) );
+		$statement = $item->newClaim( new PropertyNoValueSnak( 4200 ) );
 		$statement->setGuid( $item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P' );
 
 		$reference = new Reference( new SnakList(
-			array( new PropertySomeValueSnak( 1 ) )
+			array( new PropertySomeValueSnak( 100 ) )
 		) );
 
 		$statement->getReferences()->addReference( $reference );
@@ -90,7 +87,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$referenceHash = $reference->getHash();
 
 		$reference = new Reference( new SnakList(
-			array( new PropertyNoValueSnak( 42 ) )
+			array( new PropertyNoValueSnak( 4200 ) )
 		) );
 
 		$serializedReference = $this->makeValidRequest(
@@ -110,8 +107,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$reference = new Reference( new SnakList(
 			array(
-				new PropertyNoValueSnak( 42 ),
-				new PropertyNoValueSnak( 43 ),
+				new PropertyNoValueSnak( 4200 ),
+				new PropertyNoValueSnak( 4300 ),
 			)
 		) );
 
@@ -142,7 +139,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$content->save( '', null, EDIT_NEW );
 
 		// Create a statement to act upon:
-		$statement = $item->newClaim( new PropertyNoValueSnak( 42 ) );
+		$statement = $item->newClaim( new PropertyNoValueSnak( 4200 ) );
 		$statement->setGuid(
 			$item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
 		);
@@ -162,16 +159,16 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$content->save( '', null, EDIT_NEW );
 
 		// Create a statement to act upon:
-		$statement = $item->newClaim( new PropertyNoValueSnak( 42 ) );
+		$statement = $item->newClaim( new PropertyNoValueSnak( 4200 ) );
 		$statement->setGuid(
 			$item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
 		);
 
 		// Pre-fill statement with three references:
 		$references = array(
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 42 ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 43 ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 66 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 4200 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 4300 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( 6600 ) ) ) ),
 		);
 
 		foreach( $references as $reference ) {
@@ -331,10 +328,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidClaimProvider() {
-		$snak = new PropertyValueSnak( 42, new StringValue( 'abc') );
+		$snak = new PropertyValueSnak( 4200, new StringValue( 'abc') );
 		$snakHash = $snak->getHash();
 
-		$reference = new PropertyValueSnak( 42, new StringValue( 'def' ) );
+		$reference = new PropertyValueSnak( 4200, new StringValue( 'def' ) );
 		$refHash = $reference->getHash();
 
 		return array(
