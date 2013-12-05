@@ -70,6 +70,37 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @dataProvider itemProvider
+	 */
+	public function testUpdateLinksOfItem() {
+		// save initial links
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'q177' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'svwiki', 'Börk' ) );
+
+		$this->siteLinkTable->saveLinksOfItem( $item );
+
+		// modify links, and save again
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'FooK' ) );
+		$item->removeSiteLink( 'dewiki' );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'nlwiki', 'GrooK' ) );
+
+		$this->siteLinkTable->saveLinksOfItem( $item );
+
+		// check that the update worked correctly
+		$actualLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
+		$expectedLinks = $item->getSimpleSiteLinks();
+
+		$missingLinks = array_udiff( $expectedLinks, $actualLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
+		$extraLinks =   array_udiff( $actualLinks, $expectedLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
+
+		$this->assertEmpty( $missingLinks, 'Missing links' );
+		$this->assertEmpty( $extraLinks, 'Extra links' );
+	}
+
+	/**
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */

@@ -25,11 +25,10 @@ interface SiteLinkCache extends SiteLinkLookup {
 	 * @since 0.1
 	 *
 	 * @param Item $item
-	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function saveLinksOfItem( Item $item, $function = null );
+	public function saveLinksOfItem( Item $item );
 
 	/**
 	 * Removes the links for the provided item.
@@ -37,11 +36,10 @@ interface SiteLinkCache extends SiteLinkLookup {
 	 * @since 0.1
 	 *
 	 * @param ItemId $itemId
-	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteLinksOfItem( ItemId $itemId, $function = null );
+	public function deleteLinksOfItem( ItemId $itemId );
 
 	/**
 	 * Clears all sitelinks from the cache.
