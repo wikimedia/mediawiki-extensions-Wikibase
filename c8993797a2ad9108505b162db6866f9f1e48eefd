@@ -16,6 +16,24 @@
       "revId": "c8993797a2ad9108505b162db6866f9f1e48eefd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_5ee454db",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-05T14:40:47Z",
+      "side": 1,
+      "message": "We could do but I think it is a bit over the top when all we want is a string :/",
+      "parentUuid": "0ee75395_fec1e834",
+      "revId": "c8993797a2ad9108505b162db6866f9f1e48eefd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
