@@ -14,7 +14,7 @@ use Wikibase\Lib\SnakFormatter;
  * @since 0.1
  *
  * @group Wikibase
- * @group WikibaseApi
+ * @group WikibaseAPI
  *
  * @group medium
  *
