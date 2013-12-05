@@ -52,6 +52,24 @@
       "revId": "507c27bebeeb09e8ed812c35b8122aa418fbb172",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d9519ede",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-12-05T16:19:28Z",
+      "side": 1,
+      "message": "So this should probably be also changed in the API module, right?",
+      "parentUuid": "0ee75395_3ee51007",
+      "revId": "507c27bebeeb09e8ed812c35b8122aa418fbb172",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
