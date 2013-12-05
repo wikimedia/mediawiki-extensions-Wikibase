@@ -478,6 +478,13 @@
 				) {
 				this.options.position.my = 'right top';
 				this.options.position.at = 'right bottom';
+
+				if( this.options.position.offset ) {
+					this.options.position.offset = flipHorizontalOffset(
+						this.options.position.offset
+					);
+				}
+
 				this.menu.element.position( $.extend( {
 					of: this.element
 				}, this.options.position ) );
@@ -540,5 +547,20 @@
 		}
 
 	} );
+
+	/**
+	 * Flips the horizontal offset of a offset specified as string to be used as offset parameter
+	 * for jQuery.ui.position (1.8)
+	 *
+	 * @param {string} offset
+	 * @return {string}
+	 */
+	function flipHorizontalOffset( offset ) {
+		var offsets = offset.split( ' ' ),
+			hOffset = parseInt( offsets[0], 10 );
+
+		hOffset = ( hOffset <= 0 ) ? Math.abs( hOffset ) : hOffset * -1;
+		return hOffset + ' ' + offsets[1];
+	}
 
 } )( jQuery );
