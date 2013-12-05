@@ -46,3 +46,8 @@ def sauce_browser(test_name, language)
 
   browser
 end
+
+Before("@repo_login") do
+  abort("WB_REPO_USERNAME environment variable is not defined! Please export a value for that variable before proceeding.") unless ENV["WB_REPO_USERNAME"]
+  abort("WB_REPO_PASSWORD environment variable is not defined! Please export a value for that variable before proceeding.") unless ENV["WB_REPO_PASSWORD"]
+end
