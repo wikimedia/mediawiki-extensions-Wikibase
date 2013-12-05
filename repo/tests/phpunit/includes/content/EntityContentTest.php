@@ -336,6 +336,120 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		$parserOutput = $content->getParserOutput( $title );
 
 		$this->assertInstanceOf( '\ParserOutput', $parserOutput );
+		$this->assertEquals( EntityContent::STATUS_EMPTY, $parserOutput->getProperty( 'wb-status' ) );
+	}
+
+	public function providePageProperties() {
+		$cases = array();
+
+		$cases['empty'] = array(
+			array(),
+			array( 'wb-status' => EntityContent::STATUS_EMPTY, 'wb-claims' => 0 )
+		);
+
+		$cases['labels'] = array(
+			array( 'label' => array( 'en' => 'Foo' ) ),
+			array( 'wb-status' => EntityContent::STATUS_STUB, 'wb-claims' => 0 )
+		);
+
+		$cases['claims'] = array(
+			array( 'claims' => array( array( 'm' => array( 'value', 83, 'string', 'foo' ), 'q' => array(), 'g' => '$testing$' ) ) ),
+			array( 'wb-status' => EntityContent::STATUS_OK, 'wb-claims' => 1 )
+		);
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider providePageProperties
+	 *
+	 * @param array $entityData
+	 * @param array $expectedProps
+	 */
+	public function testPageProperties( array $entityData, array $expectedProps ) {
+		$content = $this->newFromArray( $entityData );
+
+		$title = \Title::newFromText( 'Foo' );
+		$parserOutput = $content->getParserOutput( $title, null, null, false );
+
+		foreach ( $expectedProps as $name => $expected ) {
+			$actual = $parserOutput->getProperty( $name );
+			$this->assertEquals( $expected, $actual, "page property $name");
+		}
+	}
+
+	public function provideGetEntityStatus() {
+		$label = array( 'language' => 'de', 'value' => 'xyz' );
+		$claim = array( 'm' => array( 'novalue', 83, ), 'q' => array(), 'g' => '$testing$' );
+
+		return array(
+			'empty' => array(
+				array(),
+				EntityContent::STATUS_EMPTY
+			),
+			'labels' => array(
+				array( 'label' => array( 'de' => $label ) ),
+				EntityContent::STATUS_STUB
+			),
+			'claims' => array(
+				array( 'claims' => array( $claim ) ),
+				EntityContent::STATUS_OK
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetEntityStatus
+	 */
+	public function testGetEntityStatus( array $entityData, $status ) {
+		$content = $this->newFromArray( $entityData );
+		$actual = $content->getEntityStatus();
+
+		$this->assertEquals( $status, $actual );
+	}
+
+	public function provideGetEntityPageProperties() {
+		$label = array( 'language' => 'de', 'value' => 'xyz' );
+		$claim = array( 'm' => array( 'novalue', 11 ), 'q' => array(), 'g' => 'P11x' );
+
+		return array(
+			'empty' => array(
+				array(),
+				array(
+					'wb-status' => EntityContent::STATUS_EMPTY,
+					'wb-claims' => 0,
+				)
+			),
+
+			'labels' => array(
+				array( 'label' => array( 'de' => $label ) ),
+				array(
+					'wb-status' => EntityContent::STATUS_STUB,
+					'wb-claims' => 0,
+				)
+			),
+
+			'claims' => array(
+				array( 'claims' => array( 'P11a' => $claim ) ),
+				array(
+					'wb-status' => EntityContent::STATUS_OK,
+					'wb-claims' => 1,
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetEntityPageProperties
+	 */
+	public function testGetEntityPageProperties( array $entityData, $pageProps ) {
+		$content = $this->newFromArray( $entityData );
+		$actual = $content->getEntityPageProperties();
+
+		foreach ( $pageProps as $key => $value ) {
+			$this->assertArrayHasKey( $key, $actual );
+			$this->assertEquals( $value, $actual[$key], $key );
+		}
 	}
 
 	public function dataGetEntityView() {
