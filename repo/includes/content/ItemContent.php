@@ -283,4 +283,22 @@ class ItemContent extends EntityContent {
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		return $searchTextGenerator->generate( $item );
 	}
+
+	/**
+	 * @see EntityContent::getEntityPageProperties
+	 *
+	 * Records the number of sitelinks in the 'wb-sitelinks' key.
+	 *
+	 * @return array A map from property names to property values.
+	 */
+	public function getEntityPageProperties() {
+		$item = $this->getItem();
+
+		return array_merge(
+			parent::getEntityPageProperties(),
+			array(
+				'wb-sitelinks' => count( $item->getSimpleSiteLinks() ),
+			)
+		);
+	}
 }
