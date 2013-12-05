@@ -124,14 +124,12 @@
 				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
 			};
 
-			if( mw.config.get( 'wbExperimentalFeatures' ) ) {
-				toolbarControllerConfig.movetoolbar = [
-					'claimlistview-claimview',
-					'claim-qualifiers-snak',
-					'statementview-referenceview',
-					'referenceview-snakview'
-				];
-			}
+			toolbarControllerConfig.movetoolbar = [
+				'claimlistview-claimview',
+				'claim-qualifiers-snak',
+				'statementview-referenceview',
+				'referenceview-snakview'
+			];
 
 			// TODO: Initialize toolbarcontroller on entity node when initializing entityview on
 			// the entity node (see FIXME below).
