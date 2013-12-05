@@ -34,6 +34,24 @@
       "revId": "507c27bebeeb09e8ed812c35b8122aa418fbb172",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_3ee51007",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-05T14:10:54Z",
+      "side": 1,
+      "message": "ChangeOpsMerge doesn\u0027t throw a InvalidAttributeException anywhere.\nAlso this would cause wikibase to depend on the Serialization extension which currently has nothing to do with anything!\n\nThe ChangeOpsMerge class does however throw a InvalidArgumentException during construction!",
+      "parentUuid": "0ee75395_3d1d1d67",
+      "revId": "507c27bebeeb09e8ed812c35b8122aa418fbb172",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
