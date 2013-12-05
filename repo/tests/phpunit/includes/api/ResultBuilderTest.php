@@ -5,6 +5,7 @@ namespace Wikibase\Test\Api;
 use ApiResult;
 use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
+use Title;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\ItemId;
@@ -12,7 +13,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityRevision;
 use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -22,6 +22,10 @@ use Wikibase\SnakList;
 /**
  * @covers Wikibase\Api\ResultBuilder
  * @todo mock and inject serializers to avoid massive expected output?
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
@@ -89,10 +93,13 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddEntityRevision() {
+		global $wgExtraNamespaces;
+
 		$result = $this->getDefaultResult();
 		$props = array( 'info' );
 		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q123' ) );
+		$id = new ItemId( 'Q123' );
+		$item->setId( $id );
 		$item->setLabel( 'de', 'foo' );
 		$item->addAliases( 'en', array( 'bar', 'baz' ) );
 		$item->setDescription( 'pt', 'ptDesc' );
@@ -102,13 +109,18 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$claim->setGuid( 'imaguid' );
 		$item->addClaim( $claim );
 
-		//todo
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
+		if( defined( 'WB_NS_ITEM' ) ) {
+			$title = Title::newFromText( $id->getSerialization(), WB_NS_ITEM );
+		} else {
+			$title = Title::newFromText( $id->getSerialization() );
+		}
+
 		$expected = array( 'entities' => array( 'Q123' => array(
-			'pageid' => 0,
-			'ns' => 120,
-			'title' => 'Item:Q123',
+			'pageid' => $title->getArticleID(),
+			'ns' => $title->getNamespace(),
+			'title' => $title->getPrefixedText(),
 			'id' => 'Q123',
 			'type' => 'item',
 			'lastrevid' => 33,
