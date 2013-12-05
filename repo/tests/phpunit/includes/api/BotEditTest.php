@@ -1,8 +1,10 @@
 <?php
 
 namespace Wikibase\Test\Api;
-use ApiTestCase, TestUser, Title;
-use Wikibase\Settings;
+
+use ApiTestCase;
+use TestUser;
+use Title;
 use Wikibase\NamespaceUtils;
 
 /**
@@ -11,47 +13,21 @@ use Wikibase\NamespaceUtils;
  * This testset only checks the validity of the calls and correct handling of tokens and users.
  * Note that we creates an empty database and then starts manipulating testusers.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
- * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
- * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
- * @author Adam Shorland
- *
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
  * @group BotEditTest
  * @group BreakingTheSlownessBarrier
- *
- * The database group has as a side effect that temporal database tables are created. This makes
- * it possible to test without poisoning a production database.
  * @group Database
- *
- * Some of the tests takes more time, and needs therefor longer time before they can be aborted
- * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
- * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
+ *
+ * @since 0.1
+ * @licence GNU GPL v2+
+ *
+ * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
+ * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
+ * @author Adam Shorland
  */
 class BotEditTest extends WikibaseApiTestCase {
 
@@ -64,6 +40,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Empty' ) );
 		}
+		self::$hasSetup = true;
 
 		ApiTestCase::$users['wbbot'] = new TestUser(
 			'Apitestbot',
@@ -81,10 +58,8 @@ class BotEditTest extends WikibaseApiTestCase {
 	 * production-like environment
 	 *
 	 * WARNING: This should always be run before any other tests that depend on it...
-	 *
-	 * @group API
 	 */
-	function testTokensAndRights() {
+	public function testTokensAndRights() {
 		// check if there is a production-like environment available
 		if ( !parent::$usetoken || !parent::$userights ) {
 			$this->markTestSkipped(
@@ -170,7 +145,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			'rctoponly' => '1',
 			'rclimit' => 5, // hope that no more than 50 edits where made in the last second
 		);
-		
+
 		//@todo this really makes this test slow, is there a better way?
 		$rcResult = $this->doApiRequest( $rcRequest, null, false, self::$users['wbbot']->user );
 
