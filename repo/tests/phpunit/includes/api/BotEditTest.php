@@ -64,6 +64,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Empty' ) );
 		}
+		self::$hasSetup = true;
 
 		ApiTestCase::$users['wbbot'] = new TestUser(
 			'Apitestbot',
