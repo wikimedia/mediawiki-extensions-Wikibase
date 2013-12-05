@@ -336,6 +336,102 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		$parserOutput = $content->getParserOutput( $title );
 
 		$this->assertInstanceOf( '\ParserOutput', $parserOutput );
+		$this->assertEquals( EntityContent::STATUS_EMPTY, $parserOutput->getProperty( 'wb-status' ) );
+	}
+
+	public function dataPageProperties() {
+		$cases = array();
+
+		$cases['empty'] = array(
+			array(),
+			array( 'wb-status' => 'empty', 'wb-claims' => 0 )
+		);
+
+		$cases['labels'] = array(
+			array( 'label' => array( 'en' => 'Foo' ) ),
+			array( 'wb-status' => 'ok', 'wb-claims' => 0 )
+		);
+
+		$cases['claims'] = array(
+			array( 'claims' => array( array( 'm' => array( 'value', 83, 'string', 'foo' ), 'q' => array(), 'g' => '$testing$' ) ) ),
+			array( 'wb-status' => 'ok', 'wb-claims' => 1 )
+		);
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider dataPageProperties
+	 *
+	 * @param array $entityData
+	 * @param array $expectedProps
+	 */
+	public function testPageProperties( array $entityData, array $expectedProps ) {
+		$content = $this->newFromArray( $entityData );
+
+		$title = \Title::newFromText( 'Foo' );
+		$parserOutput = $content->getParserOutput( $title, null, null, false );
+
+		foreach ( $expectedProps as $name => $value ) {
+			$this->assertEquals( $value, $parserOutput->getProperty( $name ), "page property $name");
+		}
+	}
+
+	public function dataGetEntityStatus() {
+		$label = array( 'language' => 'de', 'value' => 'xyz' );
+
+		return array(
+			'empty' => array( array(), EntityContent::STATUS_EMPTY ),
+			'labels' => array(
+				array( 'labels' => array( 'de' => $label ) ),
+				EntityContent::STATUS_EMPTY
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider dataGetEntityStatus
+	 */
+	public function testGetEntityStatus( array $entityData, $status ) {
+		$content = $this->newFromArray( $entityData );
+		$actual = $content->getEntityStatus();
+
+		$this->assertEquals( $status, $actual );
+	}
+
+	public function dataGetEntityPageProperties() {
+		$claim = array( 'm' => array( 'novalue', 11 ), 'q' => array(), 'g' => 'P11x' );
+
+		return array(
+			'empty' => array(
+				array(),
+				array(
+					'wb-status' => EntityContent::STATUS_EMPTY,
+					'wb-claims' => 0,
+				)
+			),
+
+			'claims' => array(
+				array( 'claims' => array( 'P11a' => $claim ) ),
+				array(
+					'wb-status' => EntityContent::STATUS_OK,
+					'wb-claims' => 1,
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider dataGetEntityPageProperties
+	 */
+	public function testGetEntityPageProperties( array $entityData, $pageProps ) {
+		$content = $this->newFromArray( $entityData );
+		$actual = $content->getEntityPageProperties();
+
+		foreach ( $pageProps as $key => $value ) {
+			$this->assertArrayHasKey( $key, $actual );
+			$this->assertEquals( $value, $actual[$key], $key );
+		}
 	}
 
 	public function dataGetEntityView() {

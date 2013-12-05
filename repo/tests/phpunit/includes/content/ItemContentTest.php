@@ -210,4 +210,14 @@ class ItemContentTest extends EntityContentTest {
 		);
 	}
 
+	public function dataPageProperties() {
+		$cases = parent::dataPageProperties();
+
+		$cases['links'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array()) ) ),
+			array( 'wb-status' => 'ok', 'wb-claims' => 0, 'wb-sitelinks' => 1 )
+		);
+
+		return $cases;
+	}
 }
