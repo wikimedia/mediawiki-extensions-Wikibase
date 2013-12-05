@@ -34,105 +34,97 @@ use Wikibase\PropertyContent;
  */
 class EditEntityTest extends WikibaseApiTestCase {
 
-	private static $testEntityId;
-	private static $testClaimGuid;
+	private static $idMap;
 	private static $hasSetup;
-	static public $id = null;
 
 	public function setup() {
 		parent::setup();
-
-		$prop56 = new PropertyId( "P56" );
-		$prop72 = new PropertyId( "P72" );
-
-		$GA = new ItemId( "Q42" );
-		$FA = new ItemId( "Q149" );
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Berlin' ) );
 
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop56 );
 			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'EditEntityTestP56' );
+			$this->assertTrue( $prop->save( 'EditEntityTestP56', null, EDIT_NEW )->isOK() );
+			self::$idMap['%P56%'] = $prop->getEntity()->getId()->getSerialization();
 
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop72 );
 			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'EditEntityTestP72' );
+			$this->assertTrue( $prop->save( 'EditEntityTestP72', null, EDIT_NEW )->isOK() );
+			self::$idMap['%P72%'] = $prop->getEntity()->getId()->getSerialization();
 
 			$badge = ItemContent::newEmpty();
-			$badge->getEntity()->setId( $GA );
-			$badge->save( 'EditEntityTestQ42' );
+			$this->assertTrue( $badge->save( 'EditEntityTestQ42', null, EDIT_NEW )->isOK() );
+			self::$idMap['%Q42%'] = $badge->getEntity()->getId()->getSerialization();
 
 			$badge = ItemContent::newEmpty();
-			$badge->getEntity()->setId( $FA );
-			$badge->save( 'EditEntityTestQ149' );
+			$this->assertTrue( $badge->save( 'EditEntityTestQ149', null, EDIT_NEW )->isOK() );
+			self::$idMap['%Q149%'] = $badge->getEntity()->getId()->getSerialization();
 		}
 		self::$hasSetup = true;
 	}
 
 	public static function provideData() {
 		return array(
-			array( //0 new item
+			'new item' => array( // new item
 				'p' => array( 'new' => 'item', 'data' => '{}' ),
 				'e' => array( 'type' => 'item' ) ),
-			array( //1 new property
+			'new property' => array( // new property
 				'p' => array( 'new' => 'property', 'data' => '{"datatype":"string"}' ),
 				'e' => array( 'type' => 'property' ) ),
-			array( //2 new property (this is our current example in the api doc)
+			'new property (this is our current example in the api doc)' => array( // new property (this is our current example in the api doc)
 				'p' => array( 'new' => 'property', 'data' => '{"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'.
 				'"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}' ),
 				'e' => array( 'type' => 'property' ) ),
-			array( //3 add a sitelink..
-				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["Q42","Q149"]}}}' ),
+			'add a sitelink..' => array( // add a sitelink..
+				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["%Q42%","%Q149%"]}}}' ),
 				'e' => array(
 					'sitelinks' => array(
 						array(
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => array( 'Q42', 'Q149' )
+							'badges' => array( '%Q42%', '%Q149%' )
 						)
 					)
 				)
 			),
-			array( //4 add a label..
+			'add a label..' => array( // add a label..
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"}}}' ),
 				'e' => array(
 					'sitelinks' => array(
 						array(
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => array( 'Q42', 'Q149' )
+							'badges' => array( '%Q42%', '%Q149%' )
 						)
 					),
 					'labels' => array( 'en' => 'A Label' )
 				)
 			),
-			array( //5 add a description..
+			'add a description..' => array( // add a description..
 				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC"}}}' ),
 				'e' => array(
 					'sitelinks' => array(
 						array(
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => array( 'Q42', 'Q149' )
+							'badges' => array( '%Q42%', '%Q149%' )
 						)
 					),
 					'labels' => array( 'en' => 'A Label' ),
 					'descriptions' => array( 'en' => 'DESC' )
 				)
 			),
-			array( //6 remove a sitelink..
+			'remove a sitelink..' => array( // remove a sitelink..
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
 				'e' => array( 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
-			array( //7 remove a label..
+			'remove a label..' => array( // remove a label..
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ),
 				'e' => array( 'descriptions' => array( 'en' => 'DESC' ) ) ),
-			array( //8 remove a description..
+			'remove a description..' => array( // remove a description..
 				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":""}}}' ),
 				'e' => array( 'type' => 'item' ) ),
-			array( //9 clear an item with some new value
+			'clear an item with some new value' => array( // clear an item with some new value
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}', 'clear' => '' ),
 				'e' => array(
 					'type' => 'item',
@@ -145,16 +137,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 					)
 				)
 			),
-			array( //10 clear an item with no value
+			'clear an item with no value' => array( // clear an item with no value
 				'p' => array( 'data' => '{}', 'clear' => '' ),
 				'e' => array( 'type' => 'item' ) ),
-			array( //11 add 2 labels
+			'add 2 labels' => array( // add 2 labels
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"},"sv":{"language":"sv","value":"SVLabel"}}}' ),
 				'e' => array( 'labels' => array( 'en' => 'A Label', 'sv' => 'SVLabel' ) ) ),
-			array( //12 override and add 2 descriptions
+			'override and add 2 descriptions' => array( // override and add 2 descriptions
 				'p' => array( 'clear' => '', 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC1"},"de":{"language":"de","value":"DESC2"}}}' ),
 				'e' => array( 'descriptions' => array( 'en' => 'DESC1', 'de' => 'DESC2' ) ) ),
-			array( //13 override and add a 2 sitelinks..
+			'override and add a 2 sitelinks..' => array( // override and add a 2 sitelinks..
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"BAA"},"svwiki":{"site":"svwiki","title":"FOO"}}}' ),
 				'e' => array(
 					'type' => 'item',
@@ -172,7 +164,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					)
 				)
 			),
-			array( //14 unset a sitelink using the other sitelink
+			'unset a sitelink using the other sitelink' => array( // unset a sitelink using the other sitelink
 				'p' => array( 'site' => 'svwiki', 'title' => 'FOO', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
 				'e' => array(
 					'type' => 'item',
@@ -185,20 +177,20 @@ class EditEntityTest extends WikibaseApiTestCase {
 					)
 				)
 			),
-			array( //15 set badges for a existing sitelink, title intact
-				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["Q149","Q42"]}}}' ),
+			'set badges for a existing sitelink, title intact' => array( // set badges for a existing sitelink, title intact
+				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q149%","%Q42%"]}}}' ),
 				'e' => array(
 					'type' => 'item',
 					'sitelinks' => array(
 						array(
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => array( "Q149", "Q42" )
+							'badges' => array( "%Q149%", "%Q42%" )
 						)
 					)
 				)
 			),
-			array( //16 set title for a existing sitelink, badges intact
+			'set title for a existing sitelink, badges intact' => array( // set title for a existing sitelink, badges intact
 				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","title":"FOO2"}}}' ),
 				'e' => array(
 					'type' => 'item',
@@ -206,51 +198,64 @@ class EditEntityTest extends WikibaseApiTestCase {
 						array(
 							'site' => 'svwiki',
 							'title' => 'FOO2',
-							'badges' => array( "Q149", "Q42" )
+							'badges' => array( "%Q149%", "%Q42%" )
 						)
 					)
 				)
 			),
-			array( //17 delete sitelink by providing neither title nor badges
+			'delete sitelink by providing neither title nor badges' => array( // delete sitelink by providing neither title nor badges
 				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki"}}}' ),
 				'e' => array(
 					'type' => 'item',
 				)
 			),
-			array( //18 add a claim
-				'p' => array( 'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+			'add a claim' => array( // add a claim
+				'p' => array( 'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
 				'e' => array( 'claims' => array(
-					'P56' => array(
-						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56',
+					'%P56%' => array(
+						'mainsnak' => array( 'snaktype' => 'value', 'property' => '%P56%',
 							'datavalue' => array(
 								'value' => 'imastring',
 								'type' => 'string' ) ),
 						'type' => 'statement',
 						'rank' => 'normal' ) ) ) ),
 
-			array( //19 change the claim
-				'p' => array( 'data' => '{"claims":[{"id":"GUID","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"diffstring","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+			'change the claim' => array( // change the claim
+				'p' => array( 'data' => array (
+					'claims' => array (
+							array (
+								'id' => '%lastClaimId%',
+								'mainsnak' => array (
+										'snaktype' => 'value',
+										'property' => '%P56%',
+										'datavalue' => array ( 'value' => 'diffstring', 'type' => 'string' ),
+									),
+								'type' => 'statement',
+								'rank' => 'normal',
+							),
+						),
+					) ),
 				'e' => array( 'claims' => array(
-					'P56' => array(
-						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56',
+					'%P56%' => array(
+						'mainsnak' => array( 'snaktype' => 'value', 'property' => '%P56%',
 							'datavalue' => array(
 								'value' => 'diffstring',
 								'type' => 'string' ) ),
 						'type' => 'statement',
 						'rank' => 'normal' ) ) ) ),
 
-			array( //20 remove the claim
-				'p' => array( 'data' => '{"claims":[{"id":"GUID","remove":""}]}' ),
+			'remove the claim' => array( // remove the claim
+				'p' => array( 'data' => '{"claims":[{"id":"%lastClaimId%","remove":""}]}' ),
 				'e' => array( 'claims' => array() ) ),
 
-			array( //21 add multiple claims
+			'add multiple claims' => array( // add multiple claims
 				'p' => array(
-					'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'.
-					'{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring2","type":"string"}},"type":"statement","rank":"normal"}]}' ),
+					'data' => '{"claims":[{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'.
+					'{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":{"value":"imastring2","type":"string"}},"type":"statement","rank":"normal"}]}' ),
 				'e' => array( 'claims' => array(
-					'P56' => array(
+					array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value', 'property' => '%P56%',
 							'datavalue' => array(
 								'value' => 'imastring1',
 								'type' => 'string' ) ),
@@ -258,7 +263,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal' ),
 					array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value', 'property' => '%P56%',
 							'datavalue' => array(
 								'value' => 'imastring2',
 								'type' => 'string' ) ),
@@ -267,20 +272,20 @@ class EditEntityTest extends WikibaseApiTestCase {
 				) )
 			),
 
-			array( //22 clear and add complex claim with qualifiers and references
-				'p' => array( 'clear' => '', 'data' => '{"claims": [{"mainsnak": {"snaktype": "value", "property": "P56", "datavalue": { "value": "str", "type": "string" } },'.
-					'"qualifiers": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "qual", "type": "string" } } ] }, "type": "statement", "rank": "normal",'.
-					'"references": [ { "snaks": { "P56": [ { "snaktype": "value", "property": "P56", "datavalue": { "value": "src", "type": "string" } } ] } } ]}]}' ),
+			'clear and add complex claim with qualifiers and references' => array( // clear and add complex claim with qualifiers and references
+				'p' => array( 'clear' => '', 'data' => '{"claims": [{"mainsnak": {"snaktype": "value", "property": "%P56%", "datavalue": { "value": "str", "type": "string" } },'.
+					'"qualifiers": { "%P56%": [ { "snaktype": "value", "property": "%P56%", "datavalue": { "value": "qual", "type": "string" } } ] }, "type": "statement", "rank": "normal",'.
+					'"references": [ { "snaks": { "%P56%": [ { "snaktype": "value", "property": "%P56%", "datavalue": { "value": "src", "type": "string" } } ] } } ]}]}' ),
 				'e' => array( 'claims' => array(
-					'P56' => array(
+					'%P56%' => array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value', 'property' => '%P56%',
 							'datavalue' => array(
 								'value' => 'str',
 								'type' => 'string' ) ),
 						'qualifiers' => array(
-							'P56' => array(
-								'snaktype' => 'value', 'property' => 'P56',
+							'%P56%' => array(
+								'snaktype' => 'value', 'property' => '%P56%',
 								'datavalue' => array(
 									'value' => 'qual',
 									'type' => 'string' ) ),
@@ -289,26 +294,26 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal',
 						'references' => array(
 							'snaks' => array(
-								'P56' => array(
-									'snaktype' => 'value', 'property' => 'P56',
+								'%P56%' => array(
+									'snaktype' => 'value', 'property' => '%P56%',
 									'datavalue' => array(
 										'value' => 'src',
 										'type' => 'string' ) ),
 							),
-							'snaks-order' => array( 'P56' ),
+							'snaks-order' => array( '%P56%' ),
 						),
 					)
 				) )
 			),
 
-			array( //23 clear and add multiple claims within property groups
+			'clear and add multiple claims within property groups' => array( // clear and add multiple claims within property groups
 				'p' => array( 'clear' => '',
-					'data' => '{"claims":{"P56":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring56","type":"string"}},"type":"statement","rank":"normal"}],'.
-							'"P72":[{"mainsnak":{"snaktype":"value","property":"P72","datavalue":{"value":"imastring72","type":"string"}},"type":"statement","rank":"normal"}]}}' ),
+					'data' => '{"claims":{"%P56%":[{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":{"value":"imastring56","type":"string"}},"type":"statement","rank":"normal"}],'.
+							'"%P72%":[{"mainsnak":{"snaktype":"value","property":"%P72%","datavalue":{"value":"imastring72","type":"string"}},"type":"statement","rank":"normal"}]}}' ),
 				'e' => array( 'claims' => array(
-					'P56' => array(
+					array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P56',
+							'snaktype' => 'value', 'property' => '%P56%',
 							'datavalue' => array(
 								'value' => 'imastring56',
 								'type' => 'string' ) ),
@@ -316,7 +321,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal' ),
 					array(
 						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => 'P72',
+							'snaktype' => 'value', 'property' => '%P72%',
 							'datavalue' => array(
 								'value' => 'imastring72',
 								'type' => 'string' ) ),
@@ -328,19 +333,49 @@ class EditEntityTest extends WikibaseApiTestCase {
 	}
 
 	/**
+	 * Applies self::$idMap to all data in the given data structure, recursively.
+	 *
+	 * @param $data
+	 */
+	protected function injectIds( &$data ) {
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => &$value ) {
+				$this->injectIds( $value );
+
+				$newKey = $key;
+				$this->injectIds( $newKey );
+
+				if ( $newKey !== $key ) {
+					$data[$newKey] = $value;
+					unset( $data[$key] );
+				}
+			}
+		} elseif ( is_string( $data ) ) {
+			$data = str_replace( array_keys( self::$idMap ), array_values( self::$idMap ), $data );
+		}
+	}
+
+	/**
 	 * @dataProvider provideData
 	 */
 	function testEditEntity( $params, $expected ) {
+		$this->injectIds( $params );
+		$this->injectIds( $expected );
+
+		$p56 = '%P56%';
+		$this->injectIds( $p56 );
+
+		if ( isset( $params['data'] ) && is_array( $params['data'] ) ) {
+			$params['data'] = json_encode( $params['data'] );
+		}
+
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbeditentity';
 		if( !array_key_exists( 'id', $params )
 			&& !array_key_exists( 'new', $params )
 			&& !array_key_exists( 'site', $params )
 			&& !array_key_exists( 'title', $params) ){
-			$params['id'] = self::$testEntityId;
-		}
-		if( array_key_exists( 'data', $params ) && strstr( $params['data'], 'GUID' ) ){
-			$params['data'] = str_replace( 'GUID', self::$testClaimGuid, $params['data'] );
+			$params['id'] = self::$idMap['!lastEntityId!'];
 		}
 
 		// -- do the request --------------------------------------------------
@@ -348,12 +383,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		// -- steal ids for later tests -------------------------------------
 		if( array_key_exists( 'new', $params ) && stristr( $params['new'], 'item' ) ){
-			self::$testEntityId = $result['entity']['id'];
+			self::$idMap['!lastEntityId!'] = $result['entity']['id'];
 		}
-		if( array_key_exists( 'claims', $result['entity'] ) && array_key_exists( 'P56', $result['entity']['claims'] ) ){
-			foreach( $result['entity']['claims']['P56'] as $claim ){
+		if( array_key_exists( 'claims', $result['entity'] ) && array_key_exists( $p56, $result['entity']['claims'] ) ){
+			foreach( $result['entity']['claims'][$p56] as $claim ){
 				if( array_key_exists( 'id', $claim ) ){
-					self::$testClaimGuid = $claim['id'];
+					self::$idMap['%lastClaimId%'] = $claim['id'];
 				}
 			}
 		}
@@ -380,84 +415,84 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 	public static function provideExceptionData() {
 		return array(
-			array( //0 no entity id given
+			'no entity id given' => array( // no entity id given
 				'p' => array( 'id' => '', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
-			array( //1 invalid id
+			'invalid id' => array( // invalid id
 				'p' => array( 'id' => 'abcde', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
-			array( //2 invalid explicit id
+			'invalid explicit id' => array( // invalid explicit id
 				'p' => array( 'id' => '1234', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
-			array( //3 non existent sitelink
+			'non existent sitelink' => array( // non existent sitelink
 				'p' => array( 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-link' ) ) ),
-			array( //4 missing site (also bad title)
+			'missing site (also bad title)' => array( // missing site (also bad title)
 				'p' => array( 'title' => 'abcde', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
-			array( //5 cant have id and new
+			'cant have id and new' => array( // cant have id and new
 				'p' => array( 'id' => 'q666', 'new' => 'item' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
-			array( //6 when clearing must also have data!
+			'when clearing must also have data!' => array( // when clearing must also have data!
 				'p' => array( 'site' => 'enwiki', 'new' => 'Berlin', 'clear' => '' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal' ) ) ),
-			array( //7 bad site
+			'bad site' => array( // bad site
 				'p' => array( 'site' => 'abcde', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site' ) ) ),
-			array( //8 no data provided
+			'no data provided' => array( // no data provided
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-data' ) ) ),
-			array( //9 malformed json
+			'malformed json' => array( // malformed json
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{{{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-json' ) ) ),
-			array( //10 must be a json object (json_decode s this an an int)
+			'must be a json object (json_decode s this an an int)' => array( // must be a json object (json_decode s this an an int)
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '1234'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-array' ) ) ),
-			array( //11 must be a json object (json_decode s this an an indexed array)
+			'must be a json object (json_decode s this an an indexed array)' => array( // must be a json object (json_decode s this an an indexed array)
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '[ "xyz" ]'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-string' ) ) ),
-			array( //12 must be a json object (json_decode s this an a string)
+			'must be a json object (json_decode s this an a string)' => array( // must be a json object (json_decode s this an a string)
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '"string"'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-array' ) ) ),
-			array( //13 inconsistent site in json
+			'inconsistent site in json' => array( // inconsistent site in json
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"sitelinks":{"ptwiki":{"site":"svwiki","title":"TestPage!"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'inconsistent-site' ) ) ),
-			array( //14 inconsistent lang in json
+			'inconsistent lang in json' => array( // inconsistent lang in json
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"labels":{"de":{"language":"pt","value":"TestPage!"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'inconsistent-language' ) ) ),
-			array( //15 inconsistent unknown site in json
+			'inconsistent unknown site in json' => array( // inconsistent unknown site in json
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"sitelinks":{"BLUB":{"site":"BLUB","title":"TestPage!"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-site' ) ) ),
-			array( //16 inconsistent unknown languages
+			'inconsistent unknown languages' => array( // inconsistent unknown languages
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"lables":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized' ) ) ),
 			//@todo the error codes in the overly long string tests make no sense and should be corrected...
-			array( //17 overly long label
+			'overly long label' => array( // overly long label
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ,
 					'data' => '{"lables":{"en":{"language":"en","value":"'.TermTestHelper::makeOverlyLongString().'"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			array( //18 overly long description
+			'overly long description' => array( // overly long description
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ,
 					'data' => '{"descriptions":{"en":{"language":"en","value":"'.TermTestHelper::makeOverlyLongString().'"}}}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
 			//@todo add check for Bug:52731 once fixed
-			array( //19 removing invalid claim fails
+			'removing invalid claim fails' => array( // removing invalid claim fails
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"claims":[{"remove":""}]}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-claim', 'message' => 'Cannot remove a claim with no GUID'  ) ) ),
-			array( //20 removing valid claim with no guid fails
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
+			'removing valid claim with no guid fails' => array( // removing valid claim with no guid fails
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized', 'message' => 'Unknown key in json: remove' ) ) ),
-			array( //21 bad badge id
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["abc","Q149"]}}}' ),
+			'bad badge id' => array( // bad badge id
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["abc","%Q149%"]}}}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
-			array( //22 badge id is not an item id
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["P2","Q149"]}}}' ),
+			'badge id is not an item id' => array( // badge id is not an item id
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["P2","%Q149%"]}}}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
-			array( //22 badge item does not exist
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["Q99999","Q149"]}}}' ),
+			'badge item does not exist' => array( // badge item does not exist
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["Q99999","%Q149%"]}}}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
-			array( //23 no sitelink - cannot change badges
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["Q42","Q149"]}}}' ),
+			'no sitelink - cannot change badges' => array( // no sitelink - cannot change badges
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q42%","%Q149%"]}}}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
 		);
 	}
@@ -466,6 +501,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 * @dataProvider provideExceptionData
 	 */
 	public function testEditEntityExceptions( $params, $expected ){
+		$this->injectIds( $params );
+		$this->injectIds( $expected );
+
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbeditentity';
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
