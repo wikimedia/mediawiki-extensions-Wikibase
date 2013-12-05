@@ -3,7 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Deserializers\Exceptions\InvalidAttributeException;
+use InvalidArgumentException;
 use Status;
 use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -67,7 +67,7 @@ class MergeItems extends ApiWikibase {
 			);
 			$changeOps->apply();
 		}
-		catch( InvalidAttributeException $e ) {
+		catch( InvalidArgumentException $e ) {
 			$this->dieUsage( $e->getMessage(), 'param-invalid' );
 		}
 		catch( ChangeOpException $e ) {
