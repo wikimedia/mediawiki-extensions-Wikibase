@@ -149,6 +149,18 @@ class EntityViewTest extends \MediaWikiTestCase {
 		return $revision;
 	}
 
+	public function testGetHtmlForEditSection() {
+		$entityView = $this->newEntityView( Item::ENTITY_TYPE );
+
+		$editSectionHtml = $entityView->getHtmlForEditSection( '', 'div', 'edit', true );
+		$matcher = array(
+			'tag' => 'div',
+			'class' => 'wb-editsection'
+		);
+
+		$this->assertTag( $matcher, $editSectionHtml );
+	}
+
 	/**
 	 * @return array
 	 */
@@ -372,7 +384,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 		// test whether we get the right EntityView from an EntityRevision
 		$view = EntityView::newForEntityType(
 			$entityRevision->getEntity()->getType(),
-			$this->newSnakFormatterMock(), 
+			$this->newSnakFormatterMock(),
 			$dataTypeLookup,
 			$entityInfoBuilder,
 			$entityTitleLookup
