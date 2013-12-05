@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Property;
 use Wikibase\Settings;
 use Wikibase\TermIndex;
@@ -383,6 +384,46 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			'fr',
 			Item::ENTITY_TYPE
 		) );
+	}
+
+	public function testUpdateTermsOfEntity() {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q568431314' ) );
+
+		// save original set of terms
+		$item->setLabel( 'en', 'abc' );
+		$item->setLabel( 'de', 'def' );
+		$item->setLabel( 'nl', 'ghi' );
+		$item->setDescription( 'en', '-abc-' );
+		$item->setDescription( 'de', '-def-' );
+		$item->setDescription( 'nl', '-ghi-' );
+		$item->setAliases( 'en', array( 'ABC', '_', 'X' ) );
+		$item->setAliases( 'de', array( 'DEF', '_', 'Y' ) );
+		$item->setAliases( 'nl', array( 'GHI', '_', 'Z' ) );
+
+		$lookup = $this->getTermIndex();
+		$lookup->saveTermsOfEntity( $item );
+
+		// modify the item and save new set of terms
+		$item->setLabel( 'en', 'abc' );
+		$item->removeLabel( 'de' );
+		$item->setLabel( 'nl', 'jke' );
+		$item->setDescription( 'it', '-xyz-' );
+		$item->setAliases( 'en', array( 'ABC', 'X', '_' ) );
+		$item->setAliases( 'de', array( 'DEF', 'Y' ) );
+		$item->setAliases( 'nl', array( '_', 'Z', 'foo' ) );
+		$item->setDescription( 'it', 'ABC' );
+		$lookup->saveTermsOfEntity( $item );
+
+		// check that the stored terms are the ones in the modified items
+		$expectedTerms = $item->getTerms();
+		$actualTerms = $lookup->getTermsOfEntity( $item->getId() );
+
+		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\Term::compare' );
+		$extraTerms =   array_udiff( $actualTerms, $expectedTerms, 'Wikibase\Term::compare' );
+
+		$this->assertEmpty( $missingTerms, 'Missing terms' );
+		$this->assertEmpty( $extraTerms, 'Extra terms' );
 	}
 
 	public function testGetMatchingTermCombination() {

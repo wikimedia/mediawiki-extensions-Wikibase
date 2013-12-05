@@ -91,54 +91,49 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$newTerms = $entity->getTerms();
 		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
 
-		//NOTE: for now, we just check if anything changed, and if yes, update all the entities's
-		//      terms in the database.
-		//TODO: generate lists of terms to add resp. remove and pass them to saveTermsOfEntityInternal
+		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\Term::compare' );
+		$termsToDelete = array_udiff( $oldTerms, $newTerms, 'Wikibase\Term::compare' );
 
-		if ( count( $newTerms ) === count( $oldTerms ) ) {
-			usort( $newTerms, 'Wikibase\Term::compare' );
-			usort( $oldTerms, 'Wikibase\Term::compare' );
-			$equal = true;
-
-			foreach ( $newTerms as $i => $term ) {
-				if ( !$term->equals( $oldTerms[$i] ) ) {
-					$equal = false;
-					break;
-				}
-			}
-
-			if ( $equal ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": terms did not change, returning." );
-				wfProfileOut( __METHOD__ );
-				return true; // nothing to do.
-			}
+		if ( !$termsToInsert && !$termsToDelete ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": terms did not change, returning." );
+			wfProfileOut( __METHOD__ );
+			return true;
 		}
 
+		$ok = true;
 		$dbw = $this->getConnection( DB_MASTER );
-		$dbw->commit( __METHOD__, "flush" ); // flush to make sure we are not in some explicit transaction
 
-		$ok = $dbw->deadlockLoop( array( $this, 'saveTermsOfEntityInternal' ), $entity, $dbw );
+		if ( $ok && $termsToDelete ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $termsToDelete ) . " terms to delete." );
+			$ok = $dbw->deadlockLoop( array( $this, 'deleteTermsInternal' ), $entity, $termsToDelete, $dbw );
+		}
+
+		if ( $ok && $termsToInsert ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $termsToInsert ) . " terms to insert." );
+			$ok = $dbw->deadlockLoop( array( $this, 'insertTermsInternal' ), $entity, $termsToInsert, $dbw );
+		}
+
 		$this->releaseConnection( $dbw );
-
 		wfProfileOut( __METHOD__ );
 
 		return $ok;
 	}
 
 	/**
-	 * Internal implementation of saveTermsOfEntity, called via DatabaseBase:deadlockLoop.
+	 * Internal callback for inserting a list of terms.
 	 *
 	 * @note: this is public only because it acts as a callback, there should be no
 	 *        reason to call this directly!
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param Entity $entity
+	 * @param Term[] $terms
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function saveTermsOfEntityInternal( Entity $entity, DatabaseBase $dbw ) {
+	public function insertTermsInternal( Entity $entity, $terms, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityIdentifiers = array(
@@ -146,31 +141,75 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			'term_entity_type' => $entity->getType()
 		);
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating terms for " . $entity->getId()->getPrefixedId() );
-
-		$success = $dbw->delete(
-			$this->tableName,
-			$entityIdentifiers,
-			__METHOD__
-		);
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": inserting terms for " . $entity->getId()->getPrefixedId() );
 
 		$weightField = array();
 		if ( $this->supportsWeight() ) {
 			$weightField = array( 'term_weight'  => $this->getWeight( $entity ) );
 		}
 
-
-		/**
-		 * @var Term $term
-		 */
-
-		foreach ( $entity->getTerms() as $term ) {
+		$success = true;
+		foreach ( $terms as $term ) {
 			$success = $dbw->insert(
 				$this->tableName,
 				array_merge(
 					$this->getTermFields( $term ),
 					$entityIdentifiers,
 					$weightField
+				),
+				__METHOD__
+			);
+
+			if ( !$success ) {
+				break;
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
+
+		return $success;
+	}
+
+
+	/**
+	 * Internal callback for deleting a list of terms.
+	 *
+	 * @note: this is public only because it acts as a callback, there should be no
+	 *        reason to call this directly!
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 * @param Term[] $terms
+	 * @param DatabaseBase $dbw
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function deleteTermsInternal( Entity $entity, $terms, DatabaseBase $dbw ) {
+		wfProfileIn( __METHOD__ );
+
+		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
+		//      That would allow us to do the deletion in a single query, based on a set of ids.
+
+		$entityIdentifiers = array(
+			'term_entity_id' => $entity->getId()->getNumericId(),
+			'term_entity_type' => $entity->getType()
+		);
+
+		$uniqueKeyFields = array( 'term_entity_type', 'term_entity_id', 'term_language', 'term_type', 'term_text' );
+
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": deleting terms for " . $entity->getId()->getPrefixedId() );
+
+		$success = true;
+		foreach ( $terms as $term ) {
+			$termIdentifiers = $this->getTermFields( $term );
+			$termIdentifiers = array_intersect_key( $termIdentifiers, array_flip( $uniqueKeyFields ) );
+
+			$success = $dbw->delete(
+				$this->tableName,
+				array_merge(
+					$termIdentifiers,
+					$entityIdentifiers
 				),
 				__METHOD__
 			);
@@ -243,38 +282,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$dbw = $this->getConnection( DB_MASTER );
 
-		//TODO: do this via deadlockLoop. Currently triggers warnings, because deleteTermsOfEntity
-		//      is called from EntityDeletionUpdate, which is called from within the transaction
-		//      started by WikiPage::doDeleteArticleReal.
-		/*
-		$dbw->commit( __METHOD__, "flush" ); // flush to make sure we are not in some explicit transaction
-		return $dbw->deadlockLoop( array( $this, 'deleteTermsOfEntityInternal' ), $entity, $dbw );
-		*/
-
-		$ok = $this->deleteTermsOfEntityInternal( $entity, $dbw );
-		$this->releaseConnection( $dbw );
-
-		wfProfileOut( __METHOD__ );
-
-		return $ok;
-	}
-
-	/**
-	 * Internal implementation of deleteTermsOfEntity, called via DatabaseBase:deadlockLoop.
-	 *
-	 * @note: this is public only because it acts as a callback, there should be no
-	 *        reason to call this directly!
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param DatabaseBase $dbw
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function deleteTermsOfEntityInternal( Entity $entity, DatabaseBase $dbw ) {
-
-		return $dbw->delete(
+		$success = $dbw->delete(
 			$this->tableName,
 			array(
 				'term_entity_id' => $entity->getId()->getNumericId(),
@@ -283,8 +291,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			__METHOD__
 		);
 
-		// TODO: failures here cause data that block valid stuff from being created to just stick around forever.
+		// NOTE: if we fail to delete some labels, it may not be possible to use those labels
+		// for other entities, without any way to remove them from the database.
 		// We probably want some extra handling here.
+
+		wfProfileOut( __METHOD__ );
+		return $success;
 	}
 
 	/**
