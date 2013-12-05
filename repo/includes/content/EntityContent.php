@@ -29,6 +29,24 @@ use WikiPage;
 abstract class EntityContent extends AbstractContent {
 
 	/**
+	 * For use in the wb-status page property.
+	 * @see getEntityStatus()
+	 */
+	const STATUS_EMPTY = 'empty';
+
+	/**
+	 * For use in the wb-status page property.
+	 * @see getEntityStatus()
+	 */
+	const STATUS_OK = 'ok';
+
+	/**
+	 * For use in the wb-status page property.
+	 * @see getEntityStatus()
+	 */
+	const STATUS_STUB = 'stub';
+
+	/**
 	 * @since 0.1
 	 * @var EditEntity|bool
 	 */
@@ -164,6 +182,8 @@ abstract class EntityContent extends AbstractContent {
 		);
 
 		$output = $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
+
+		$this->applyEntityPageProperties( $output );
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
@@ -679,5 +699,57 @@ abstract class EntityContent extends AbstractContent {
 		);
 
 		return $itemRevision;
+	}
+
+	/**
+	 * Registers any properties returned by getEntityPageProperties()
+	 * in $output.
+	 *
+	 * @param ParserOutput $output
+	 */
+	private function applyEntityPageProperties( ParserOutput $output ) {
+		$properties = $this->getEntityPageProperties();
+
+		foreach ( $properties as $name => $value ) {
+			$output->setProperty( $name, $value );
+		}
+	}
+
+	/**
+	 * Returns a map of properties about the entity, to be recorded in
+	 * MediaWiki's page_props table. The idea is to allow efficient lookups
+	 * of entities based on such properties.
+	 *
+	 * Keys used:
+	 * - wb-empty: whether the entity is empty (according to isEmpty())
+	 * - wb-claims: the number of claims in the entity
+	 *
+	 * @return array A map from property names to property values.
+	 */
+	public function getEntityPageProperties() {
+		$entity = $this->getEntity();
+
+		return array(
+			'wb-status' => $this->getEntityStatus(),
+			'wb-claims' => count( $entity->getClaims() ),
+		);
+	}
+
+	/**
+	 * Returns an identifier representing the status of the entity,
+	 * e.g. "empty", "ok", or "stub". Used by getEntityPageProperties().
+	 *
+	 * @see getEntityPageProperties()
+	 * @see STATUS_EMPTY
+	 * @see STATUS_OK
+	 *
+	 * @return string
+	 */
+	public function getEntityStatus() {
+		if ( $this->isEmpty() ) {
+			return 'empty';
+		} else {
+			return 'ok';
+		}
 	}
 }
