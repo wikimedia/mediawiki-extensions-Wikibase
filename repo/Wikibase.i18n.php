@@ -1634,7 +1634,7 @@ La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiqueta:',
 	'wikibase-itemdisambiguation-submit' => 'Guetar',
 	'wikibase-itemdisambiguation-nothing-found' => "Sentímoslo, nun s'alcontró nengún elementu con esa etiqueta.",
-	'wikibase-itemdisambiguation-search' => "Buscar l'elementu usando [{{fullurl:Special:Search|search=$1}} Especial:Gueta].",
+	'wikibase-itemdisambiguation-search' => "Buscar l'elementu usando [{{fullurl:Special:Search|search=$1}} Especial:Gueta].", # Fuzzy
 	'wikibase-itemdisambiguation-create' => "Pue [{{fullurl:Special:NewItem|label=$1}} crear l'elementu].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Sentímoslo, el sistema desconoz l\'identificador de llingua que proporcionó. Use un identificador válidu, como "en".',
 	'wikibase-itemdisambiguation-description' => 'Los valores usaos pa la gueta tienen de ser la entrada de textu completu. La llingua ye un identificador, como "ast".',
@@ -2534,7 +2534,7 @@ $messages['bn'] = array(
 	'wikibase-setentity-id' => 'আইডি:',
 	'wikibase-setentity-language' => 'ভাষা:',
 	'wikibase-setentity-invalid-langcode' => 'ভাষা শনাক্তকারী "$1" অজানা। সিস্টেমের জন্য পরিচিত এমন একটি ভাষা শনাক্তকারী ব্যবহার করুন, যেমন "bn"।',
-	'wikibase-setentity-invalid-id' => 'আইডি "$1" সিস্টেমের অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।',
+	'wikibase-setentity-invalid-id' => 'আইডি "$1" সিস্টেমে অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।',
 	'special-dispatchstats' => 'ডিসপ্যাচ পরিসংখ্যান পরিবর্তন',
 	'wikibase-dispatchstats-no-stats' => 'বর্তমানে কোন পরিসংখ্যান প্রাপ্তিসাধ্য নয়।',
 	'wikibase-dispatchstats-changes' => 'লগ পরিসংখ্যান পরবর্তন',
@@ -3900,6 +3900,7 @@ for at finde ud af, hvad der er sket med det.',
 
 /** German (Deutsch)
  * @author Anja Jentzsch
+ * @author Flow
  * @author G.Hagedorn
  * @author Geitost
  * @author Hazard-SJ
@@ -3913,6 +3914,7 @@ for at finde ud af, hvad der er sket med det.',
  * @author Tomabrafix
  * @author Umherirrender
  * @author Vogone
+ * @author Zolo
  */
 $messages['de'] = array(
 	'wikibase-desc' => 'Ermöglicht ein Repositorium strukturierter Daten',
@@ -3962,7 +3964,7 @@ $messages['de'] = array(
 	'wikibase-aliases-label' => 'Auch bekannt als:',
 	'wikibase-aliases-input-help-message' => 'Sofern dieser Datensatz unter mehr als einem bestimmten Namen bekannt ist, kannst du Aliasse und Synonyme eingeben, damit er auch unter seinen alternativen Namen gefunden werden kann.',
 	'wikibase-aliases-empty' => 'Es wurden keine Aliasse definiert.',
-	'wikibase-datatype-label' => 'Datentyp:',
+	'wikibase-datatype-label' => 'Datentyp',
 	'wikibase-claimview-snak-tooltip' => 'Gib einen Wert ein, der der Eigenschaft namens „$1“ entspricht. Falls die Eigenschaft keinen bestimmten Wert hat oder der derzeitige Wert unbekannt ist, kannst du eine Alternative wählen, um einen benutzerdefinierten Wert anzugeben, indem du auf das Symbol neben dem Werteingabekasten klickst.',
 	'wikibase-claimview-snak-new-tooltip' => 'Nach der Festlegung einer Eigenschaft kannst du einen dazugehörigen Wert eingeben. Falls die Eigenschaft keinen bestimmten Wert hat oder der derzeitige Wert unbekannt ist, kannst du eine Alternative wählen, um einen benutzerdefinierten Wert anzugeben, indem du auf das Symbol neben dem Werteingabekasten klickst.',
 	'wikibase-statementview-rank-preferred' => 'Vorrangig',
@@ -3997,6 +3999,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-error-label-not-unique-wikibase-property' => 'Eine andere Eigenschaft ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Eine andere Abfrage ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
 	'wikibase-error-label-not-unique-item' => 'Ein anderes Datenobjekt ($3) hat bereits die Bezeichnung „$1“ und die Beschreibung „$4“, die dem Sprachcode $2 zugeordnet ist.',
+	'wikibase-error-label-no-entityid' => 'Die Bezeichnung darf keine gültige Objektkennung sein.',
 	'special-itembytitle' => 'Datenobjekte nach Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Suche Datenobjekte nach Website und Titel',
 	'wikibase-itembytitle-lookup-site' => 'Website:',
@@ -4012,7 +4015,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-itemdisambiguation-lookup-label' => 'Bezeichnung:',
 	'wikibase-itemdisambiguation-submit' => 'Suchen',
 	'wikibase-itemdisambiguation-nothing-found' => 'Es wurde leider kein Datenobjekt mit dieser Bezeichnung gefunden.',
-	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Suche nach einem Datenobjekt]',
+	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Suche nach einem Datenobjekt]', # Fuzzy
 	'wikibase-itemdisambiguation-create' => 'Du kannst auch [{{fullurl:Special:NewItem|label=$1}} ein Datenobjekt erstellen].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Die angegebene Sprachkennung ist dem System leider nicht bekannt. Bitte verwende eine gültige Kennung, wie bspw. „de“.',
 	'wikibase-itemdisambiguation-description' => 'Die für die Suche genutzten Werte müssen vollständige Texteinträge sein. Sprache ist eine Kennung, z.&nbsp;B. „de“.',
@@ -4111,6 +4114,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-mylanguagefallbackchain-text' => 'Sprach-Fallbackkette zur Anzeige der Objektbezeichnungen wird unten stehend angezeigt.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Du kannst sie bearbeiten, indem du <nowiki>{{#babel:}}</nowiki> in {{GENDER:$1|deine}} [[Special:MyPage|Benutzerseite]] einfügst.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 – $2, konvertiert von $3 – $4',
+	'wikibase-api-no-such-sitelink' => 'Dieser Websitelink konnte nicht gefunden werden',
 	'wikibase-self-conflict-patched' => 'Deine Bearbeitung wurde in die aktuellste Version gepatcht und deine eigenen zwischenzeitlichen Änderungen überschrieben.',
 	'wikibase-conflict-patched' => 'Deine Bearbeitung wurde in die aktuellste Version gepatcht.',
 	'wikibase-restoreold' => 'zurücksetzen',
@@ -4138,7 +4142,10 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias|Aliasse}} für [$2] hinzugefügt',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias|Aliasse}} für [$2] entfernt',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Einen Link zu [$2] hinzugefügt',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Link mit Auszeichnungen zu [$2] hinzugefügt',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Link zu [$2] geändert',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Auszeichnungen für [$2] geändert',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Link und Auszeichnungen für [$2] geändert',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Link zu [$2] entfernt',
 	'wikibase-item-summary-wblinktitles-create' => 'Dieses Objekt erstellt, um Seiten zu verbinden [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Einen Sprachlink hinzugefügt, um Seiten zu verbinden [$2↔$3]',
@@ -4770,6 +4777,7 @@ Your IP address will be recorded in the edit history of this $1.', # Fuzzy
  */
 $messages['eo'] = array(
 	'wikibase-desc' => 'Deponejo por strukturitaj datumoj',
+	'specialpages-group-wikibaserepo' => 'Deponejo Vikibazo',
 	'wikibase-edit' => 'redakti',
 	'wikibase-save' => 'konservi',
 	'wikibase-cancel' => 'nuligi',
@@ -4830,10 +4838,10 @@ Via adreso IP estos konservita en la redakta historio de tiu ĉi aĵo.',
 	'wikibase-restrictionedit-tooltip-message' => 'Ĉi tiu paĝo estas protektita kontraŭ redaktado',
 	'wikibase-blockeduser-tooltip-message' => 'Vi ne havas permeson redakti ĉar via uzantonomo aŭ IP-adreso estas forbarita.',
 	'wikibase-move-error' => 'Vi ne povas alinomi paĝojn el la datuma nomspaco, nek povas alinomi paĝojn ene de ĝi.',
-	'wikibase-error-sitelink-already-used' => 'Reteja ligilo [$1 $2] jam uzata de ero [[$3]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Reteja ligilo [$1 $2] estas jam inkluzivita en alia ero, [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Alia atributo ($3) jam havas etikedon "$1" ligitan kun lingvokodo $2.',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Alia peto ($3) jam havas etikedon "$1" ligitan kun lingvokodo $2', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Alia ero ($3) jam havas etikedon "$1" kaj priskribon $4 ligitajn kun lingvokodo $2', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-query' => 'Alia peto ($3) jam havas etikedon "$1" ligitan kun lingvokodo $2.',
+	'wikibase-error-label-not-unique-item' => 'Alia ero ($3) jam havas etikedon "$1" kaj priskribon $4 ligitajn kun lingvokodo $2.',
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
 	'wikibase-itemlink-title' => '$1 | $2',
@@ -4881,6 +4889,8 @@ Via adreso IP estos konservita en la redakta historio de tiu ĉi aĵo.',
 	'wikibase-setaliases-warning-remove' => 'Ĉu vi vere volas forigi ĉiujn kromnomojn de [[$1]]?',
 	'wikibase-setsitelink-site' => 'Identigilo de retejo:',
 	'wikibase-setsitelink-label' => 'Reteja ligilo:',
+	'wikibase-setsitelink-add-failed' => 'La reteja ligilo ne povis esti konservita.',
+	'wikibase-setsitelink-remove-failed' => 'La reteja ligilo ne povis esti konservita.',
 	'wikibase-setentity-id' => 'Identigilo:',
 	'wikibase-setentity-language' => 'Lingvo:',
 	'wikibase-setentity-invalid-langcode' => 'Lingvokodo "$1" estas nekonata. Bonvolu uzi lingvokodon konatan de la sistemo kia "eo".',
@@ -4894,6 +4904,7 @@ Via adreso IP estos konservita en la redakta historio de tiu ĉi aĵo.',
 	'wikibase-dispatchstats-lag-time' => 'Malfruo',
 	'wikibase-dispatchstats-large-lag' => '(tre granda)',
 	'wikibase-dispatchstats-freshest' => 'Plej freŝa',
+	'wikibase-dispatchstats-average' => 'Avaraĝa',
 	'special-listdatatypes' => 'Listo de ĉiuj datumtipoj',
 	'wikibase-listdatatypes-intro' => 'Ĉi tio estas la listo de ĉiuj datumtipoj nune uzataj en ĉi tiu instalaĵo:',
 	'wikibase-history-title-with-label' => 'Revizia historio de "$2" ($1)',
@@ -4924,15 +4935,32 @@ por trovi de kie ĝi venis.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Aldonis {{PLURAL:$1|kromnomon|kromnomojn}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Forigis {{PLURAL:$1|kromnomon|kromnomojn}} [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Aldonita ligilo al [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Ŝanĝita ligilo liganta al [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Forigita ligilo de [$2]',
+	'wikibase-item-summary-wblinktitles-create' => 'Kreita ero por interkonekti paĝojn [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Aldonita lingva ligilo por konekti paĝojn [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Kreis {{PLURAL:$1|deklaron|deklarojn}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Kreis {{PLURAL:$1|deklaron|deklarojn}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Kreis {{PLURAL:$1|deklaron|deklarojn}}',
+	'wikibase-item-summary-wbmergeitems-from' => "Kunigita ero elde '$3'",
+	'wikibase-item-summary-wbmergeitems-to' => "Kunigita ero al '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'Kreita nova atributo',
 	'wikibase-property-summary-wbeditentity-update' => 'Ĝisdatigita atributo',
+	'wikibase-property-summary-wbsetlabel-add' => 'Kreita etikedo por [$2]',
+	'wikibase-property-summary-wbsetlabel-set' => 'Ŝanĝita etikedo por [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Forigita etikedo por [$2]',
+	'wikibase-property-summary-wbsetdescription-add' => 'Aldonita priskribo por [$2]',
+	'wikibase-property-summary-wbsetdescription-set' => 'Ŝanĝita priskribo por [$2]',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Forigita priskribo por [$2]',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Ero',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Medio en Komunejo',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Unulingva teksto',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Multlingva teksto',
 	'wikibase-listdatatypes-string-head' => 'Ĉeno',
 	'wikibase-listdatatypes-time-head' => 'Tempo',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
+	'content-model-wikibase-item' => 'Vikidatuma ero',
 );
 
 /** Spanish (español)
@@ -4952,6 +4980,7 @@ por trovi de kie ĝi venis.',
  * @author Savh
  * @author The Anonymouse
  * @author Vivaelcelta
+ * @author Zolo
  */
 $messages['es'] = array(
 	'wikibase-desc' => 'Repositorio de datos estructurados',
@@ -5000,7 +5029,7 @@ $messages['es'] = array(
 	'wikibase-aliases-label' => 'Alias y nombres alternativos:',
 	'wikibase-aliases-input-help-message' => 'Si este conjunto de datos es conocido bajo más de un nombre en particular, puede escribir sus alias y sinónimos, para que así pueda ser encontrado por sus nombres alternativos.',
 	'wikibase-aliases-empty' => 'No hay alias definidos.',
-	'wikibase-datatype-label' => 'Tipo de dato:',
+	'wikibase-datatype-label' => 'Tipo de dato',
 	'wikibase-claimview-snak-tooltip' => 'Ingresa un valor correspondiente a la propiedad "$1". Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir una alternativa y especificar un valor personalizado haciendo clic en el icono junto a la caja de entrada del valor.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fuente|fuentes}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Una fuente|$1 fuentes}} aún no se guardó',
@@ -5529,6 +5558,7 @@ $messages['eu'] = array(
  * @author Reza1615
  * @author Rtemis
  * @author Taha
+ * @author Zolo
  * @author ZxxZxxZ
  * @author درفش کاویانی
  */
@@ -5579,7 +5609,7 @@ $messages['fa'] = array(
 	'wikibase-aliases-label' => 'نام(های) دیگر:',
 	'wikibase-aliases-input-help-message' => 'اگر این دادگان با بیش از یک نام خاص شناخته می‌شود، می‌توانید نام‌های مستعار و هم‌معنی‌هایش را وارد کنید تا بتوان آن را با نام‌های دیگرش نیز پیدا کرد.',
 	'wikibase-aliases-empty' => 'هیچ نام مستعاری تعریف نشده‌است.',
-	'wikibase-datatype-label' => 'نوع داده:',
+	'wikibase-datatype-label' => 'نوع داده',
 	'wikibase-claimview-snak-tooltip' => 'مقدار مربوط به ویژگی «$1» را وارد کنید. اگر ویژگی فاقد مقدار است یا مقدار کنونی در دسترس نیست، می‌توانید مقدار موازی خود را با کلیک کردن روی دکمهٔ کنار جعبهٔ مقدار وارد کنید.',
 	'wikibase-claimview-snak-new-tooltip' => 'بعد از تعیین یک ویژگی، شما می‌توانید مقدار مربوطه را نیز وارد کنید. اگر ویژگی فاقد مقدار بود یا مقدار در دسترس نبود، شما می‌توانید با کلیک کردن روی دکمهٔ کنار جعبه مقدار، مقدار مورد نظر خود را وارد کنید.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|منبع|منبع}}',
@@ -5781,7 +5811,6 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|qualifier|گستره‌نما}} تغییر داده شد',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|qualifier|گستره‌نما}} حذف شد',
 	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|reference|مرجع‌ها}} از ادعا حذف شد',
-	'wikibase-item-summary-wbsetstatementrank' => "رتبۀ اظهارنظر از '$3' به '$4' تغییر داده شد",
 	'wikibase-item-summary-wbmergeitems-from' => 'آیتم از «$3» ادغام شد',
 	'wikibase-item-summary-wbmergeitems-to' => 'آیتم در «$3» ادغام شد',
 	'wikibase-property-summary-wbcreate-new' => 'ایجاد یک ویژگی جدید',
@@ -5890,6 +5919,7 @@ $messages['fa'] = array(
  * @author Silvonen
  * @author Stryn
  * @author VezonThunder
+ * @author Zolo
  * @author Тест
  */
 $messages['fi'] = array(
@@ -5939,7 +5969,7 @@ $messages['fi'] = array(
 	'wikibase-aliases-label' => 'Tunnetaan myös nimellä',
 	'wikibase-aliases-input-help-message' => 'Jos tämä datakokonaisuus tunnetaan useammalla kuin yhdellä nimellä, voit lisätä aliaksia ja synonyymejä, jotta sen voi löytää myös muilla nimillään.',
 	'wikibase-aliases-empty' => 'Aliaksia ei määritetty.',
-	'wikibase-datatype-label' => 'Tietotyyppi:',
+	'wikibase-datatype-label' => 'Tietotyyppi',
 	'wikibase-claimview-snak-tooltip' => 'Kirjoita arvo, joka vastaa ominaisuutta "$1". Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
 	'wikibase-claimview-snak-new-tooltip' => 'Määritettyäsi ominaisuuden voit kirjoittaa sitä vastaavan arvon. Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|lähde|lähdettä}}',
@@ -6129,7 +6159,6 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetqualifier-update' => 'Muutettu {{PLURAL:$1|muuttuja|muuttujaa}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Poistettu {{PLURAL:$1|muuttuja|muuttujaa}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Poistettu {{PLURAL:$3|lähde|lähdettä}} väitteestä',
-	'wikibase-item-summary-wbsetstatementrank' => "Muutettu esityksen sijoitusta: '$3' → '$4'",
 	'wikibase-item-summary-wbmergeitems-from' => "Kohde yhdistetty kohteesta '$3'",
 	'wikibase-item-summary-wbmergeitems-to' => "Kohde yhdistetty kohteeseen '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'Luotu uusi ominaisuus',
@@ -6265,7 +6294,7 @@ $messages['fr'] = array(
 	'wikibase-aliases-label' => 'Alias&nbsp;:',
 	'wikibase-aliases-input-help-message' => "Si cet ensemble de données est connu sous plus d'un nom particulier, vous pouvez entrer des alias et des synonymes, afin qu'il puisse être trouvé par ses autres noms.",
 	'wikibase-aliases-empty' => 'Aucun alias défini.',
-	'wikibase-datatype-label' => 'Type de données&nbsp;:',
+	'wikibase-datatype-label' => 'Type de données',
 	'wikibase-claimview-snak-tooltip' => 'Saisissez une valeur correspondant à la propriété appelée « $1 ». Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle n’est pas connue, vous pouvez choisir une alternative pour spécifier une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.',
 	'wikibase-claimview-snak-new-tooltip' => 'Après avoir spécifié une propriété, vous pouvez saisir une valeur correspondante. Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle est inconnue, vous pouvez choisir une alternative en spécifiant une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.',
 	'wikibase-statementview-rank-preferred' => 'Rang privilégié',
@@ -6300,6 +6329,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-error-label-not-unique-wikibase-property' => 'Une autre propriété ($3) a déjà un libellé « $1 » associé au code de langue $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Une autre requête ($3) a déjà le libellé « $1 » associé au code de langue $2.',
 	'wikibase-error-label-not-unique-item' => 'Un autre élément ($3) a déjà le libellé « $1 » et la description « $4 » associés au code de langue $2.',
+	'wikibase-error-label-no-entityid' => 'Le libellé ne doit pas être un id d’entité valide.',
 	'special-itembytitle' => 'Élément par titre',
 	'wikibase-itembytitle-lookup-fieldset' => 'Rechercher des éléments par site et par titre',
 	'wikibase-itembytitle-lookup-site' => 'Site&nbsp;:&nbsp;',
@@ -6315,7 +6345,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-itemdisambiguation-lookup-label' => 'Libellé&nbsp;:',
 	'wikibase-itemdisambiguation-submit' => 'Rechercher',
 	'wikibase-itemdisambiguation-nothing-found' => "Désolé, aucun élément avec ce libellé n'a été trouvé.",
-	'wikibase-itemdisambiguation-search' => 'Recherche de l’élément en utilisant [{{fullurl:Special:Search|search=$1}} Special:Search].',
+	'wikibase-itemdisambiguation-search' => 'Recherche de l’élément en utilisant [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
 	'wikibase-itemdisambiguation-create' => 'Vous pouvez [{{fullurl:Special:NewItem|label=$1}} créer l’élément].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Le code de langue que vous avez donné n’est pas reconnu par le système, désolé. Veuillez utiliser un code valide, par exemple «&nbsp;en&nbsp;».',
 	'wikibase-itemdisambiguation-description' => 'Les valeurs utilisées pour la recherche doivent être le texte entier. La langue est un identifiant, comme «&nbsp;en&nbsp;».',
@@ -6414,6 +6444,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-mylanguagefallbackchain-text' => 'L’enchaînement de langues de repli utilisé pour vous afficher les libellés des entités est présenté ci-dessous.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Vous pouvez la modifier en mettant <nowiki>{{#babel: }}</nowiki> sur {{GENDER:$1|votre}} [[Special:MyPage|page utilisateur]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, traduit depuis $3 - $4',
+	'wikibase-api-no-such-sitelink' => 'Impossible de trouver un tel lien de site.',
 	'wikibase-self-conflict-patched' => 'Votre modification a été intégrée dans la dernière version, écrasant certaines de vos corrections intermédiaires.',
 	'wikibase-conflict-patched' => 'Votre modification a été intégrée dans la dernière version.',
 	'wikibase-restoreold' => 'restaurer',
@@ -6442,7 +6473,10 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-item-summary-wbsetaliases-add' => 'Ajout {{PLURAL:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Retrait {{PLURAL:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Lien vers [$2] ajouté',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Lien ajouté avec des badges à [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Lien vers [$2] modifié',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Badges modifiés pour [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Lien et badges modifiés pour [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Lien vers [$2] supprimé',
 	'wikibase-item-summary-wblinktitles-create' => 'Cet élément créé pour connecter les pages [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Lien de langue ajouté pour connecter les pages [$2↔$3]',
@@ -7273,6 +7307,7 @@ $messages['he'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'למאפיין אחר ($3) כבר יש תווית "$1" שמזוהה עם קוד השפה $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'לשאילתה אחרת ($3) כבר יש תווית "$1" שמזוהה עם קוד השפה $2.',
 	'wikibase-error-label-not-unique-item' => 'לפריט אחר ($3) כבר יש תווית "$1" ותיאור "$4" שמזוהים עם קוד השפה $2.',
+	'wikibase-error-label-no-entityid' => 'התווית הזאת אינה צריכה להיות מזהה ישות תקין.',
 	'special-itembytitle' => 'פריט לפי כותרת',
 	'wikibase-itembytitle-lookup-fieldset' => 'חיפוש פריטים לפי אתר וכותרת',
 	'wikibase-itembytitle-lookup-site' => 'אתר:',
@@ -7288,7 +7323,7 @@ $messages['he'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'תווית:',
 	'wikibase-itemdisambiguation-submit' => 'חיפוש',
 	'wikibase-itemdisambiguation-nothing-found' => 'מצטערים, לא נמצא שום פריט עם התווית הזאת.',
-	'wikibase-itemdisambiguation-search' => 'חיפוש פריט באמצעות [{{fullurl:Special:Search|search=$1}} Special:Search].',
+	'wikibase-itemdisambiguation-search' => 'חיפוש פריט באמצעות [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
 	'wikibase-itemdisambiguation-create' => 'אפשר גם [{{fullurl:Special:NewItem|label=$1}} ליצור את הפריט].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'מצטערים, מזהה השפה שהזנת אינו ידוע למערכת. נא להשתמש במזהה תקין כגון "en".',
 	'wikibase-itemdisambiguation-description' => 'ערכים שמשמשים לחיפוש צריכים להיות עיול טקסט שלם. שפה היא מזהה, כגון "en".',
@@ -7387,6 +7422,7 @@ $messages['he'] = array(
 	'wikibase-mylanguagefallbackchain-text' => 'שרשרת שפות הגיבוי שמציגה לך את תוויות הישות מוצגת להלן.',
 	'wikibase-mylanguagefallbackchain-babel' => 'ניתן לערוך אותה באמצעות שימוש בקוד <nowiki>{{#babel: }}</nowiki> ב[[Special:MyPage|דף המשתמש]] {{GENDER:$1|שלך}}.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 – $2, הומר מ־$3 – $4',
+	'wikibase-api-no-such-sitelink' => 'לא נמצא קישור אתר כזה',
 	'wikibase-self-conflict-patched' => 'העריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה ודרסה כמה ששינויי־הביניים שעשית.',
 	'wikibase-conflict-patched' => 'עריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה.',
 	'wikibase-restoreold' => 'איפוס',
@@ -7414,7 +7450,10 @@ $messages['he'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => 'הוספה של {{PLURAL:$1|כינוי|כינויים}} עבור השפה [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'הסרה של {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'נוסף קישור אל [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'נוסף קישור עם סמל אל [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'הקישור שוּנה אל [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'שונו סמלים עבור [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'שונה קישור וסמלים עבור [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'הוסר קישור אל [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'נוצר הפריט הזה כדי לקשר בין דפים [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'נוסף קישור לשוני כדי לקשר בין דפים [$2↔$3]',
@@ -7870,6 +7909,7 @@ $messages['hsb'] = array(
  * @author Csigabi
  * @author Tgr
  * @author Vivaelcelta
+ * @author Zolo
  */
 $messages['hu'] = array(
 	'wikibase-desc' => 'Strukturált adattár',
@@ -7910,7 +7950,7 @@ $messages['hu'] = array(
 	'wikibase-aliases-label' => 'Más néven:',
 	'wikibase-aliases-input-help-message' => 'Ha ennek a fogalomnak több különböző elnevezése is van, itt megadhatod a további neveket és szinonimákat, hogy azokra keresve is meg lehessen találni.',
 	'wikibase-aliases-empty' => 'Nincs más név megadva.',
-	'wikibase-datatype-label' => 'Adattípus:',
+	'wikibase-datatype-label' => 'Adattípus',
 	'wikibase-claimview-snak-tooltip' => 'Adj meg egy értéket a(z) „$1” tulajdonsághoz. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.',
 	'wikibase-claimview-snak-new-tooltip' => 'Miután kiválasztottál egy tulajdonságot, megadhatod a hozzátartozó értéket. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.',
 	'wikibase-snakview-property-input-placeholder' => 'tulajdonság',
@@ -8029,16 +8069,16 @@ $messages['hu'] = array(
 	'content-model-wikibase-item' => 'Wikibase fogalom',
 	'content-model-wikibase-property' => 'Wikibase tulajdonság',
 	'content-model-wikibase-query' => 'Wikibase lekérdezés',
-	'right-item-override' => 'Fogalmak felülírása',
+	'right-item-override' => 'Fogalmak felülírása', # Fuzzy
 	'right-item-create' => 'Fogalmak létrehozása',
-	'right-item-remove' => 'Fogalmak törlése',
+	'right-item-remove' => 'Fogalmak törlése', # Fuzzy
 	'right-alias-remove' => 'További nevek törlése',
 	'right-sitelink-remove' => 'Wikioldal-kapcsolatok törlése',
 	'right-sitelink-update' => 'Wikioldal-kapcsolatok módosítása',
-	'right-linktitles-update' => 'Wikioldal-kapcsolatok nevének módosítása',
-	'right-label-remove' => 'Címkék törlése',
+	'right-linktitles-update' => 'Wikioldal-kapcsolatok nevének módosítása', # Fuzzy
+	'right-label-remove' => 'Címkék törlése', # Fuzzy
 	'right-label-update' => 'Címkék módosítása',
-	'right-description-remove' => 'Leírások törlése',
+	'right-description-remove' => 'Leírások törlése', # Fuzzy
 	'right-description-update' => 'Leírások módosítása',
 );
 
@@ -8966,6 +9006,7 @@ alla eiginleika og þar að auki gilda gagnagerð.',
  * @author Sannita
  * @author Vituzzu
  * @author Yiyi
+ * @author Zolo
  */
 $messages['it'] = array(
 	'wikibase-desc' => 'Archivio di dati strutturati',
@@ -9014,7 +9055,7 @@ $messages['it'] = array(
 	'wikibase-aliases-label' => 'Anche conosciuto come:',
 	'wikibase-aliases-input-help-message' => 'Se questo insieme di dati è conosciuto con più di un nome, è possibile inserire alias e sinonimi, in modo che possa essere trovato anche tramite i suoi nomi alternativi.',
 	'wikibase-aliases-empty' => 'Nessun alias definito.',
-	'wikibase-datatype-label' => 'Tipo di dato:',
+	'wikibase-datatype-label' => 'Tipo di dato',
 	'wikibase-claimview-snak-tooltip' => 'Inserisci un valore corrispondente alla proprietà chiamata "$1". Se la proprietà non ha alcun valore designato o non è noto il valore effettivo, è possibile scegliere un\'alternativa alla specifica di un valore personalizzato facendo clic sull\'icona accanto alla casella di input del valore.',
 	'wikibase-claimview-snak-new-tooltip' => "Dopo aver specificato una proprietà è possibile inserire un valore corrispondente. Se la proprietà non ha alcun valore designato o non è noto il valore effettivo, è possibile scegliere un'alternativa alla specifica un di valore personalizzato facendo clic sull'icona accanto alla casella di input del valore.",
 	'wikibase-statementview-rank-preferred' => 'Classificato preferito',
@@ -9049,6 +9090,7 @@ Nella cronologia dell'entità verrà registrato il tuo indirizzo IP.",
 	'wikibase-error-label-not-unique-wikibase-property' => 'Un\'altra proprietà ($3) ha già l\'etichetta "$1" associata con il codice lingua $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Un\'altra chiave di ricerca ($3) ha già l\'etichetta "$1" associata con il codice lingua $2.',
 	'wikibase-error-label-not-unique-item' => 'Un altro elemento ($3) ha già l\'etichetta "$1" e la descrizione "$4" associate con il codice lingua $2.',
+	'wikibase-error-label-no-entityid' => "L'etichetta non può essere un ID entità valido.",
 	'special-itembytitle' => 'Elementi per titolo',
 	'wikibase-itembytitle-lookup-fieldset' => 'Ricerca elementi per sito e titolo',
 	'wikibase-itembytitle-lookup-site' => 'Sito:',
@@ -9064,7 +9106,7 @@ Nella cronologia dell'entità verrà registrato il tuo indirizzo IP.",
 	'wikibase-itemdisambiguation-lookup-label' => 'Etichetta:',
 	'wikibase-itemdisambiguation-submit' => 'Ricerca',
 	'wikibase-itemdisambiguation-nothing-found' => 'Non è stato trovato alcun elemento con questa etichetta.',
-	'wikibase-itemdisambiguation-search' => 'Cerca gli elementi usando [{{fullurl:Special:Search|search=$1}} Speciale:Ricerca].',
+	'wikibase-itemdisambiguation-search' => 'Cerca gli elementi usando [{{fullurl:Special:Search|search=$1}} Speciale:Ricerca].', # Fuzzy
 	'wikibase-itemdisambiguation-create' => "È possibile [{{fullurl:Special:NewItem|label=$1}} creare l'elemento].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'L\'identificatore di lingua inserito è sconosciuto al sistema. Usare un identificatore valido, per esempio "en".',
 	'wikibase-itemdisambiguation-description' => 'I valori utilizzati per la ricerca devono comprendere il testo completo dell\'elemento. La lingua è un identificatore, ad esempio "it".',
@@ -9191,7 +9233,10 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Aggiunto|Aggiunti}} alias [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Aggiunto collegamento a [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Aggiunto collegamento con distintivo a [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Modificato collegamento a [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Modificato distintivo per [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Modificato collegamento e distintivo per [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Rimosso collegamento a [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Creato questo elemento per collegare pagine [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Aggiunto un collegamento linguistico per collegare pagine [$2↔$3]',
@@ -9306,6 +9351,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author Shirayuki
  * @author Vogone
  * @author Whym
+ * @author Zolo
  */
 $messages['ja'] = array(
 	'wikibase-desc' => '構造化データのリポジトリ',
@@ -9354,7 +9400,7 @@ $messages['ja'] = array(
 	'wikibase-aliases-label' => '別名:',
 	'wikibase-aliases-input-help-message' => 'このデータセットが複数の名前で知られている場合、別名 (や類義語) として入力することもできます。入力することで、その別名でたどり着けるようになります。',
 	'wikibase-aliases-empty' => '別名は定義されていません。',
-	'wikibase-datatype-label' => 'データの型:',
+	'wikibase-datatype-label' => 'データの型',
 	'wikibase-claimview-snak-tooltip' => '「$1」という名前のプロパティに対する値を入力します。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。',
 	'wikibase-claimview-snak-new-tooltip' => 'プロパティを指定したら、それに対応する値を入力できます。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '個の{{PLURAL:$1|情報源}}',
@@ -9385,6 +9431,7 @@ $messages['ja'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => '言語コード $2 に関連付けられたラベル「$1」を持つ別のプロパティ ($3) が既にあります。',
 	'wikibase-error-label-not-unique-wikibase-query' => '言語コード $2 に関連付けられたラベル「$1」を持つ別のクエリ ($3) が既にあります。',
 	'wikibase-error-label-not-unique-item' => '言語コード $2 に関連付けられたラベル「$1」および説明「$4」を持つ別の項目 ($3) が既にあります。',
+	'wikibase-error-label-no-entityid' => 'ラベルは有効なエンティティ ID にしてください。',
 	'special-itembytitle' => 'ページ名から項目を探す',
 	'wikibase-itembytitle-lookup-fieldset' => 'サイト名やページ名で項目を探す',
 	'wikibase-itembytitle-lookup-site' => 'サイト:',
@@ -9400,7 +9447,7 @@ $messages['ja'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'ラベル:',
 	'wikibase-itemdisambiguation-submit' => '検索',
 	'wikibase-itemdisambiguation-nothing-found' => '申し訳ありませんが、指定したラベルを持つ項目は見つかりませんでした。',
-	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Special:Search] で項目を検索できます。',
+	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Special:Search] で項目を検索できます。', # Fuzzy
 	'wikibase-itemdisambiguation-create' => '[{{fullurl:Special:NewItem|label=$1}} 項目を新規作成]することもできます。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '申し訳ありませんが、指定した言語コードはこのシステムでは不明です。有効な言語コード (「en」など) を指定してください。',
 	'wikibase-itemdisambiguation-description' => '検索に用いる値は名前全体でなければなりません。言語は「en」などのIDを指定してください。',
@@ -9500,6 +9547,7 @@ $messages['ja'] = array(
 	'wikibase-mylanguagefallbackchain-babel' => '<nowiki>{{#babel: }}</nowiki> を{{GENDER:$1|自分の}}[[Special:MyPage|利用者ページ]]に置くことで編集できます。',
 	'wikibase-mylanguagefallbackchain-verbatim-item' => '$1 - $2',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2、変換元 $3 - $4',
+	'wikibase-api-no-such-sitelink' => '指定したサイトリンクが見つかりませんでした',
 	'wikibase-self-conflict-patched' => '編集内容を最新版に反映させたため、あなたの中間の版での変更が上書きされます。',
 	'wikibase-conflict-patched' => 'あなたの編集内容を最新版に反映させました。',
 	'wikibase-restoreold' => '復元',
@@ -9527,7 +9575,10 @@ $messages['ja'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '[$2] の{{PLURAL:$1|別名}}を追加',
 	'wikibase-item-summary-wbsetaliases-remove' => '[$2] の{{PLURAL:$1|別名}}を除去',
 	'wikibase-item-summary-wbsetsitelink-add' => '[$2] へのリンクを追加',
+	'wikibase-item-summary-wbsetsitelink-add-both' => '[$2] にバッジ付きのリンクを追加',
 	'wikibase-item-summary-wbsetsitelink-set' => '[$2] へのリンクを変更',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => '[$2] のバッジを変更',
+	'wikibase-item-summary-wbsetsitelink-set-both' => '[$2] のリンクとバッジを変更',
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] へのリンクを除去',
 	'wikibase-item-summary-wblinktitles-create' => 'ページを接続する項目を作成 [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'ページを接続する言語リンクを追加 [$2↔$3]',
@@ -11081,6 +11132,7 @@ $messages['mk'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго својство ($3).',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго барање ($3).',
 	'wikibase-error-label-not-unique-item' => 'Друг предмет ($3) веќе ги има етикетата „$1“ и описот „$4“ поврзано со јазичниот код $2.',
+	'wikibase-error-label-no-entityid' => 'Етикетата мора да биде важечка назнака на единица.',
 	'special-itembytitle' => 'Предмет по наслов',
 	'wikibase-itembytitle-lookup-fieldset' => 'Пребарување на предмети по вики или наслов',
 	'wikibase-itembytitle-lookup-site' => 'Вики:',
@@ -11096,7 +11148,7 @@ $messages['mk'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Етикета:',
 	'wikibase-itemdisambiguation-submit' => 'Пребарај',
 	'wikibase-itemdisambiguation-nothing-found' => 'Нажалост, не пронајдов ниедна етикета.',
-	'wikibase-itemdisambiguation-search' => 'Пребарајте го предметот со [{{fullurl:Special:Search|search=$1}} Специјална:Пребарување].',
+	'wikibase-itemdisambiguation-search' => 'Пребарајте го предметот со [{{fullurl:Special:Search|search=$1}} Специјална:Пребарување].', # Fuzzy
 	'wikibase-itemdisambiguation-create' => 'Можете да [{{fullurl:Special:NewItem|label=$1}} создадете нов предмет].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Нажалост, укажаниот јазичен код не му е познат на системот. Кодот мора да биде важечки (на пр. „mk“).',
 	'wikibase-itemdisambiguation-description' => 'Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. Јазикот е назнака, како на пр. „mk“.',
@@ -11195,6 +11247,7 @@ $messages['mk'] = array(
 	'wikibase-mylanguagefallbackchain-text' => 'Подолу е прикажан ланецот на резервни јазици што се користи за да ви ги прикаже вашите предметни етикети.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Можете да го измените, ставајќи <nowiki>{{#babel: }}</nowiki> на {{GENDER:$1|вашата}} [[Special:MyPage|корисничка страница]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 — $2, претворено од $3 — $4',
+	'wikibase-api-no-such-sitelink' => 'Не пронајдов таква викиврска',
 	'wikibase-self-conflict-patched' => 'Вашето уредување е прикрпено на последната верзија, презапишувајќи врз некои од вашите меѓувремени промени.',
 	'wikibase-conflict-patched' => 'Вашето уредување е прикрпено на последната верзија.',
 	'wikibase-restoreold' => 'врати',
@@ -11224,7 +11277,10 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Додаден|Додадени}} [$2] {{PLURAL:$1|алијас|алијаси}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Отстранет|Отстранети}} [$2] {{PLURAL:$1|алијас|алијаси}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Додадена врската [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Додадена врска со значки во [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Изменета врската [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Сменети значките за [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Сменети врската и значките за [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Отстранета врската до [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Предметот создаден за поврзување на страниците [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Ставена јазична врска за поврзување на страниците [$2↔$3]',
@@ -11521,6 +11577,7 @@ $messages['mr'] = array(
 	'wikibase-setlabel-label' => 'लेबल:',
 	'special-setdescription' => 'वर्णन नोंदवा',
 	'wikibase-setdescription-label' => 'वर्णन:',
+	'wikibase-api-no-such-sitelink' => 'असे कोणतेही संकेतस्थळ सापडले नाही',
 	'wikibase-item-summary-wbeditentity-update' => 'कलम अद्ययावत केली',
 	'wikibase-item-summary-wbsetreference' => 'संदर्भ नोंदवा',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] चे लेबल बदलले',
@@ -12754,6 +12811,7 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 
 /** Occitan (occitan)
  * @author Cedric31
+ * @author Zolo
  */
 $messages['oc'] = array(
 	'wikibase-desc' => 'Referencial de donadas estructuradas',
@@ -12801,7 +12859,7 @@ $messages['oc'] = array(
 	'wb-special-newitem-new-item-notification' => 'Un novèl element $1 creat e redirigit cap a sa pagina. Retorn a $2.',
 	'wikibase-aliases-label' => 'Aliàs&nbsp;:',
 	'wikibase-aliases-empty' => "Cap d'aliàs pas definit.",
-	'wikibase-datatype-label' => 'Tipe de donadas&nbsp;:',
+	'wikibase-datatype-label' => 'Tipe de donadas',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|font|fonts}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Una font|$1 fonts}} pas encara enregistrada{{PLURAL:$1||s}}',
 	'wikibase-snakview-property-input-placeholder' => 'proprietat',
@@ -12971,7 +13029,6 @@ Vòstra adreça IP serà enregistrada dins l’istoric de las modificacions d'aq
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|qualificador modificat|qualificadors modificats}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|qualificador suprimit|qualificadors suprimits}}',
 	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Referéncia suprimida|Referéncias suprimidas}} per reclamacion',
-	'wikibase-item-summary-wbsetstatementrank' => "Reng de la declaracion modificat de '$3' a '$4'",
 	'wikibase-item-summary-wbmergeitems-from' => "Element fusionat dempuèi '$3'",
 	'wikibase-item-summary-wbmergeitems-to' => "Element fusionat amb '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'Creacion d’una proprietat novèla',
@@ -13438,6 +13495,7 @@ Soa adrëssa IP a sarà argistrà ant la stòria dle modìfiche ëd costa entit�
 	'wikibase-error-label-not-unique-wikibase-property' => "N'àutra propietà ($3) a l'ha già na tichëtta «$1» associà al còdes ëd lenga $2.",
 	'wikibase-error-label-not-unique-wikibase-query' => "N'àutra arcesta ($3) a l'ha già la tichëtta «$1» associà al còdes ëd lenga $2.",
 	'wikibase-error-label-not-unique-item' => "N'àutr element ($3) a l'ha già la tichëtta «$1» e la descrission «$4» associà al còdes ëd lenga $2.",
+	'wikibase-error-label-no-entityid' => "La tichëtta a dev nen esse n'identificativ d'entità vàlid.",
 	'special-itembytitle' => 'Element për tìtol',
 	'wikibase-itembytitle-lookup-fieldset' => "Sërché dj'element për sit e për tìtol",
 	'wikibase-itembytitle-lookup-site' => 'Sit:',
@@ -13453,7 +13511,7 @@ Soa adrëssa IP a sarà argistrà ant la stòria dle modìfiche ëd costa entit�
 	'wikibase-itemdisambiguation-lookup-label' => 'Tichëtta:',
 	'wikibase-itemdisambiguation-submit' => 'Sërca',
 	'wikibase-itemdisambiguation-nothing-found' => "An dëspias, gnun element con costa tichëtta a l'é stàit trovà.",
-	'wikibase-itemdisambiguation-search' => "Arserca dl'element dovrand [{{fullurl:Special:Search|search=$1}} Special:Search].",
+	'wikibase-itemdisambiguation-search' => "Arserca dl'element dovrand [{{fullurl:Special:Search|search=$1}} Special:Search].", # Fuzzy
 	'wikibase-itemdisambiguation-create' => "It peule [{{fullurl:Special:NewItem|label=$1}} creé l'element].",
 	'wikibase-itemdisambiguation-invalid-langcode' => "An dëspias, l'identificator ëd lenga ch'a l'ha fornì a l'é nen conossù dal sistema. Për piasì, ch'a deuvra n'identificator bon, coma «en».",
 	'wikibase-itemdisambiguation-description' => "Ij valor dovrà për serché a devo esse ël test complet. La lenga a l'é n'identificator, coma «en».",
@@ -13586,7 +13644,10 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-item-summary-wbsetaliases-add' => "Giontà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
 	'wikibase-item-summary-wbsetaliases-remove' => "Gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
 	'wikibase-item-summary-wbsetsitelink-add' => 'Giontà na liura a [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Giontà na liura con distintiv a [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Modificà la liura a [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Modificà ij distintiv për [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Modificà liura e distintiv për [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Gavà la liura a [$2]',
 	'wikibase-item-summary-wblinktitles-create' => "Creà st'element për gropé le pàgine [$2↔$3]",
 	'wikibase-item-summary-wblinktitles-connect' => 'Giontà na liura ëd lenga për lijé le pàgine [$2↔$3]',
@@ -13614,9 +13675,11 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-property-summary-wbcreate-new' => 'Creà na propietà neuva',
 	'wikibase-property-summary-wbeditentity-create' => 'Creà na propietà neuva',
 	'wikibase-property-summary-wbeditentity-update' => 'Modificà na proprietà',
-	'wikibase-property-summary-wbeditentity-override' => 'Dzor-ëscrivù na propietà', # Fuzzy
+	'wikibase-property-summary-wbeditentity-override' => 'Na propietà dzorascrivùa',
+	'wikibase-property-summary-wbsetlabel-add' => 'Tichëtta [$2] giontà',
 	'wikibase-property-summary-wbsetlabel-set' => 'Cangià la tichëtta [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Gavà la tichëtta [$2]',
+	'wikibase-property-summary-wbsetdescription-add' => 'Descrission [$2] giontà',
 	'wikibase-property-summary-wbsetdescription-set' => 'Modificà la descrission [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Gavà la descrission [$2]',
 	'wikibase-property-summary-wbsetaliases-set' => "Ampostassion d'{{PLURAL:$1|alternativa|alternative}} [$2]",
@@ -13624,6 +13687,25 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-property-summary-wbsetaliases-add' => "Giontà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
 	'wikibase-property-summary-wbsetaliases-remove' => "Gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
 	'wikibase-property-summary-special-create-property' => 'Creà na propietà [$2] con {{PLURAL:$1|un valor|dij valor}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
+	'wikibase-listdatatypes-wikibase-item-body' => "Liura vers d'àutri element dël proget. Durant l'imission lë spassi nominal \"Element\" su Wikidata a sarà scrutà a l'arserca ëd vos corëspondente. Sòn a consist d'un sol camp d'imission ëd test.
+* schema - part implìssita ëd la Iri-stringa
+* hierarchicalpart – part implìssita ëd la Iri-stringa
+* query – part implìssita ëd la Iri-stringa
+* fragment – part implìssita ëd la Iri-stringa",
+	'wikibase-listdatatypes-commonsmedia-head' => 'Mojen comun',
+	'wikibase-listdatatypes-commonsmedia-body' => "Liura a d'archivi goernà su Wikimedia Commons. Durant l'imission lë spassi nominal «Archivi» su Wikimedia Commons a sarà scrutà a l'arserca ëd vos corëspondente.
+* scheme – part implìssita ëd la Iri-stringa
+* hierarchicalpart – part implìssita ëd la Iri-stringa
+* query – part implìssita ëd la Iri-stringa
+* fragment – part implìssita ëd la Iri-stringa",
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinà globaj',
+	'wikibase-listdatatypes-globe-coordinate-body' => "Dàit literaj për na posission geogràfica smonùa sot forma ëd cobia latitùdin-longitùdin an gms o an gre decimaj për ël còrp celest considerà. 'Me stàndard, ''Tèra'' e peui ''WGS86''. A gionta n'arsolussion e na portà.
+* latitùdin – prima part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura dal N/S butà apress
+* longitùdin – sconda part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura da l' E/W butà apress
+* autëssa (opsional) – valor esplìssit (?) për l'autëssa ansima a 'n pian d'arferiment, për ël glòb \"Tèra\" a sarìa ël glòb d'arferiment \"WGS84\"
+* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"",
+	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'content-model-wikibase-item' => 'Element ëd Wikibase',
 	'content-model-wikibase-property' => 'Propietà ëd Wikibase',
 	'content-model-wikibase-query' => 'Arcesta ëd Wikibase',
@@ -14192,6 +14274,7 @@ $messages['roa-tara'] = array(
  * @author Ole Yves
  * @author Putnik
  * @author ShinePhantom
+ * @author Zolo
  * @author Александр Сигачёв
  * @author Умар
  */
@@ -14242,7 +14325,7 @@ $messages['ru'] = array(
 	'wikibase-aliases-label' => 'Также известен как:',
 	'wikibase-aliases-input-help-message' => 'Если этот набор данных известен под более чем одним названием, вы можете ввести здесь псевдонимы, альтернативные названия и синонимы, чтобы этот элемент можно было найти по его альтернативным именам.',
 	'wikibase-aliases-empty' => 'Альтернативные названия (синонимы) не определены',
-	'wikibase-datatype-label' => 'Тип данных:',
+	'wikibase-datatype-label' => 'Тип данных',
 	'wikibase-claimview-snak-tooltip' => 'Введите значение, соответствующее свойству «$1». Если свойство не имеет значения или оно неизвестно, Вы можете выбрать альтернативу указав пользовательское значение, нажав на значок рядом с полем ввода.',
 	'wikibase-claimview-snak-new-tooltip' => 'После указания свойства можно ввести его значение. Если свойство не имеет значения или текущее значение неизвестно, можно выбрать альтернативу, нажав на значок рядом с полем ввода и выбрав вариант ввода собственного значения.',
 	'wikibase-statementview-rank-preferred' => 'Предпочтительный ранг',
@@ -14292,7 +14375,7 @@ $messages['ru'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Название:',
 	'wikibase-itemdisambiguation-submit' => 'Найти',
 	'wikibase-itemdisambiguation-nothing-found' => 'К сожалению, элемент с таким названием не найден.',
-	'wikibase-itemdisambiguation-search' => 'Искать элемент, используя [{{fullurl:Special:Search|search=$1}} Special:Search].',
+	'wikibase-itemdisambiguation-search' => 'Искать элемент, используя [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
 	'wikibase-itemdisambiguation-create' => 'Вы можете [{{fullurl:Special:NewItem|label=$1}} создать такой элемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Извините, но системе неизвестен введённый вами код языка. Пожалуйста, используйте действительный идентификатор, например «ru».',
 	'wikibase-itemdisambiguation-description' => 'Используемые для поиска значения должны представлять собой полный текст записи. Идентификатором выступает код языка, например «ru».',
@@ -15823,6 +15906,7 @@ $messages['ug-arab'] = array(
  * @author Sodmy
  * @author Steve.rusyn
  * @author SteveR
+ * @author Zolo
  * @author Ата
  */
 $messages['uk'] = array(
@@ -15872,7 +15956,7 @@ $messages['uk'] = array(
 	'wikibase-aliases-label' => 'Додаткові назви:',
 	'wikibase-aliases-input-help-message' => 'Якщо цей набір даних відомий під різними назвами, Ви можете вказати додаткові назви, що полегшить пошук.',
 	'wikibase-aliases-empty' => 'Не визначено жодного синоніма.',
-	'wikibase-datatype-label' => 'Тип даних:',
+	'wikibase-datatype-label' => 'Тип даних',
 	'wikibase-claimview-snak-tooltip' => 'Введіть значення, яке відповідає властивості "$1". Якщо властивість не має значення або воно невідоме, Ви можете вказати звичайне значення, клацнувши по значку біля поля введення.',
 	'wikibase-claimview-snak-new-tooltip' => 'Вибравши властивість, Ви можете ввести відповідне значення. Якщо властивість не має значення або воно невідоме, Ви можете вказати звичайне значення, клацнувши по значку біля поля введення.',
 	'wikibase-statementview-rank-preferred' => 'Пріоритетний ранг',
@@ -15907,6 +15991,7 @@ $messages['uk'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Назву „$1“ для мовного коду $2 вже має інша властивість: $3',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Назву „$1“ для мовного коду $2 вже має інший запит: $3',
 	'wikibase-error-label-not-unique-item' => 'Назву „$1“ і опис „$4“ для мовного коду $2 вже має інший елемент: $3',
+	'wikibase-error-label-no-entityid' => 'Мітка не повинна бути дійсним ідентифікатор сутності.',
 	'special-itembytitle' => 'Елементи за назвою',
 	'wikibase-itembytitle-lookup-fieldset' => 'Шукати елементи за сайтом і назвою',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
@@ -15922,7 +16007,7 @@ $messages['uk'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Назва:',
 	'wikibase-itemdisambiguation-submit' => 'Знайти',
 	'wikibase-itemdisambiguation-nothing-found' => 'Вибачте, елемента з такою назвою не знайдено.',
-	'wikibase-itemdisambiguation-search' => 'Пошук елемента за допомогою [{{fullurl:Special:Search|search=$1}} Special:Search].',
+	'wikibase-itemdisambiguation-search' => 'Пошук елемента за допомогою [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
 	'wikibase-itemdisambiguation-create' => 'Ви можете [{{fullurl:Special:NewItem|label=$1}} створити такий елемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Вибачте, система не знаю введеного ідентифікатора мови. Правильним ідентифікатором є, наприклад, «uk».',
 	'wikibase-itemdisambiguation-description' => 'Значення, що використовуються пошуку, повинні бути повним текстом запису. Ідентифікатором є код мови, наприклад «uk».',
@@ -16029,6 +16114,7 @@ $messages['uk'] = array(
 	'wikibase-mylanguagefallbackchain-text' => 'Нижче показано ланцюжок резервних мов, чинний для вас при відображенні міток сутностей.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Ви можете змінити ланцюжок, розмістивши блок <nowiki>{{#babel:}}</nowiki> на {{GENDER:$1|своїй|своїй}} [[Special:MyPage|сторінці користувача]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1-$2 , перетворені з  $3-$4',
+	'wikibase-api-no-such-sitelink' => 'Неможливо знайти таке посилання на сайт',
 	'wikibase-self-conflict-patched' => 'Ваша правка була поміщена в останню версію, при цьому були перекриті деякі з ваших власних проміжних змін.',
 	'wikibase-conflict-patched' => 'Ваша правка виправлена в останній версії.',
 	'wikibase-restoreold' => 'відновити',
@@ -16057,7 +16143,10 @@ $messages['uk'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => 'Додано [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Вилучено [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Додано посилання на [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Додано посилання із значками до [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Змінено посилання на [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Змінено значки для [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Змінене посилання, яке вказує [$2] і його значки',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Вилучено посилання на [$2]',
 	'wikibase-item-summary-wblinktitles-create' => "Цей об'єкт створено для зв'язку сторінок [$2↔$3]",
 	'wikibase-item-summary-wblinktitles-connect' => "Додано мовні посилання для зв'язку сторінок [$2↔$3]",
@@ -16538,6 +16627,7 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
  * @author Cheers!
  * @author Minh Nguyen
  * @author Vinhtantran
+ * @author Zolo
  * @author පසිඳු කාවින්ද
  */
 $messages['vi'] = array(
@@ -16587,7 +16677,7 @@ $messages['vi'] = array(
 	'wikibase-aliases-label' => 'Còn được gọi:',
 	'wikibase-aliases-input-help-message' => 'Nếu tập hợp dữ liệu này có hơn một tên, bạn có thể nhập các tên và tên đồng nghĩa để cho phép tìm kiếm theo các tên khác.',
 	'wikibase-aliases-empty' => 'Không có định rõ tên khác.',
-	'wikibase-datatype-label' => 'Kiểu dữ liệu:',
+	'wikibase-datatype-label' => 'Kiểu dữ liệu',
 	'wikibase-claimview-snak-tooltip' => 'Hãy nhập một giá trị ứng với thuộc tính có tên “$1”. Nếu giá trị của thuộc tính không được định rõ hoặc nếu không biết giá trị chính xác, bạn có thể bấm hình bên cạnh hộp nhập giá trị thay vì định rõ một giá trị tùy biến.',
 	'wikibase-claimview-snak-new-tooltip' => 'Sau khi định rõ một thuộc tính, bạn có thể nhập giá trị tương ứng. Nếu giá trị của thuộc tính không được định rõ hoặc nếu không biết giá trị chính xác, bạn có thể bấm hình bên cạnh hộp nhập giá trị thay vì định rõ một giá trị tùy biến.',
 	'wikibase-statementview-rank-preferred' => 'Hạng ưa thích',
@@ -16637,7 +16727,7 @@ $messages['vi'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Nhãn:',
 	'wikibase-itemdisambiguation-submit' => 'Tìm kiếm',
 	'wikibase-itemdisambiguation-nothing-found' => 'Rất tiếc, không tìm thấy khoản mục nào với nhãn đó.',
-	'wikibase-itemdisambiguation-search' => 'Tìm kiếm khoản mục dùng [{{fullurl:Special:Search|search=$1}} Đặc biệt:Tìm kiếm].',
+	'wikibase-itemdisambiguation-search' => 'Tìm kiếm khoản mục dùng [{{fullurl:Special:Search|search=$1}} Đặc biệt:Tìm kiếm].', # Fuzzy
 	'wikibase-itemdisambiguation-create' => 'Bạn có thể [{{fullurl:Special:NewItem|label=$1}} tạo khoản mục mới].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Rất tiếc, hệ thống không nhận ra định danh ngôn ngữ mà bạn đã cung cấp. Xin hãy sử dụng một định danh hợp lệ như “en”.',
 	'wikibase-itemdisambiguation-description' => 'Các giá trị truy vấn cần phải có văn bản đầy đủ. Ngôn ngữ là một định danh như “en”.',
@@ -17163,6 +17253,7 @@ $messages['yi'] = array(
  * @author Xiaomingyan
  * @author Yfdyh000
  * @author Zhuyifei1999
+ * @author Zolo
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
@@ -17212,7 +17303,7 @@ $messages['zh-hans'] = array(
 	'wikibase-aliases-label' => '别名：',
 	'wikibase-aliases-input-help-message' => '如果该数据集有一个以上的名称，你可以输入别名和同义词，以使其可以通过其他名称找到。',
 	'wikibase-aliases-empty' => '没有已定义的别名。',
-	'wikibase-datatype-label' => '数据类型：',
+	'wikibase-datatype-label' => '数据类型',
 	'wikibase-claimview-snak-tooltip' => '请输入属性“$1”对应的值。如果该属性没有指定的值或实际值是未知的，你可以通过单击值输入框旁的图标来指定一个自定义值。',
 	'wikibase-claimview-snak-new-tooltip' => '指定一个属性后你可以输入对应的值。如果该属性没有指定的值或实际值是未知的，你可以通过单击值输入框旁的图标来指定一个自定义值。',
 	'wikibase-statementview-rank-preferred' => '首选组别',
@@ -17246,6 +17337,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => '另一个属性（$3）已经使用语言代码$2的标签“$1”。',
 	'wikibase-error-label-not-unique-wikibase-query' => '另一个查询（$3）已经使用语言代码$2的标签“$1”。',
 	'wikibase-error-label-not-unique-item' => '另一个项（$3）已经使用语言代码$2的标签“$1”和说明“$4”。',
+	'wikibase-error-label-no-entityid' => '该标签不是有效的实体ID。',
 	'wikibase-itemlink' => '$1$2',
 	'wikibase-itemlink-id-wrapper' => '（$1）',
 	'wikibase-itemlink-userlang-wrapper' => '（$1：$2）',
@@ -17264,7 +17356,7 @@ $messages['zh-hans'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => '标签：',
 	'wikibase-itemdisambiguation-submit' => '搜索',
 	'wikibase-itemdisambiguation-nothing-found' => '对不起，没有找到使用标签的项。',
-	'wikibase-itemdisambiguation-search' => '通过[{{fullurl:Special:Search|search=$1}} Special:Search]搜索项。',
+	'wikibase-itemdisambiguation-search' => '通过[{{fullurl:Special:Search|search=$1}} Special:Search]搜索项。', # Fuzzy
 	'wikibase-itemdisambiguation-create' => '你可以[{{fullurl:Special:NewItem|label=$1}} 创建本项]。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '对不起，你提供的语言标识符是系统未知的。请使用有效的标识符，例如“zh”。',
 	'wikibase-itemdisambiguation-description' => '用于搜索的值必须是完整的文字条目。语言是一种标识符，例如“zh”。',
@@ -17398,6 +17490,8 @@ $messages['zh-hans'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => '删除[$2]{{PLURAL:$1|别名}}',
 	'wikibase-item-summary-wbsetsitelink-add' => '添加至[$2]的链接',
 	'wikibase-item-summary-wbsetsitelink-set' => '更改至[$2]的链接',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => '更改[$2]徽章',
+	'wikibase-item-summary-wbsetsitelink-set-both' => '更改[$2]链接和徽章',
 	'wikibase-item-summary-wbsetsitelink-remove' => '删除至[$2]的链接',
 	'wikibase-item-summary-wblinktitles-create' => '创建该项以连接页面[$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => '添加语言链接以连接页面[$2↔$3]',
@@ -17526,6 +17620,7 @@ $messages['zh-hans'] = array(
  * @author Simon Shek
  * @author Stevenliuyi
  * @author Tntchn
+ * @author Zolo
  */
 $messages['zh-hant'] = array(
 	'wikibase-desc' => '結構化數據存儲庫',
@@ -17574,7 +17669,7 @@ $messages['zh-hant'] = array(
 	'wikibase-aliases-label' => '亦稱為：',
 	'wikibase-aliases-input-help-message' => '若此數據集有多於一個的名稱，您可以輸入其別名和同義詞，以便通過其他名稱找到此項。',
 	'wikibase-aliases-empty' => '没有已定義的別名。',
-	'wikibase-datatype-label' => '數據類型：',
+	'wikibase-datatype-label' => '數據類型',
 	'wikibase-claimview-snak-tooltip' => '請輸入屬性「$1」對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點擊數值輸入欄旁的圖示以指定自定義數值替代。',
 	'wikibase-claimview-snak-new-tooltip' => '指定屬性後你可以輸入對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點擊數值輸入欄旁的圖示以指定自定義數值替代。',
 	'wikibase-statementview-rank-preferred' => '首選級別',
@@ -17625,7 +17720,7 @@ $messages['zh-hant'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => '標籤：',
 	'wikibase-itemdisambiguation-submit' => '搜尋',
 	'wikibase-itemdisambiguation-nothing-found' => '抱歉，没有找到具有此標籤的項目。',
-	'wikibase-itemdisambiguation-search' => '通過[{{fullurl:Special:Search|search=$1}} Special:Search]搜索項。',
+	'wikibase-itemdisambiguation-search' => '通過[{{fullurl:Special:Search|search=$1}} Special:Search]搜索項。', # Fuzzy
 	'wikibase-itemdisambiguation-create' => '您可以[{{fullurl:Special:NewItem|label=$1}} 創建項目]。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '抱歉，您提供了未知的語言標籤。請使用有效的標籤，如「en」。',
 	'wikibase-itemdisambiguation-description' => '用於搜尋的值必需是完整的文字。語言代碼是一種標籤，如「en」。',
