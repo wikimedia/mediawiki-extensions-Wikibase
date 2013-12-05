@@ -16,6 +16,24 @@
       "revId": "6c41deef3ca31fc4384b549021ebee3f105be7dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_9eb3fce7",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-05T14:36:00Z",
+      "side": 1,
+      "message": "fixed in I0ec0921",
+      "parentUuid": "0ee75395_5e87b414",
+      "revId": "6c41deef3ca31fc4384b549021ebee3f105be7dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
