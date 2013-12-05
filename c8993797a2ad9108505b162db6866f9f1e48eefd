@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_fec1e834",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-05T14:39:10Z",
+      "side": 1,
+      "message": "How about Title::newFromText( $title, WB_NS_ITEM );",
+      "revId": "c8993797a2ad9108505b162db6866f9f1e48eefd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
