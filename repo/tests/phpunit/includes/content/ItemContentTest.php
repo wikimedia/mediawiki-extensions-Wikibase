@@ -172,4 +172,51 @@ class ItemContentTest extends EntityContentTest {
 		);
 	}
 
+	public function dataPageProperties() {
+		$cases = parent::dataPageProperties();
+
+		$cases['links'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array()) ) ),
+			array( 'wb-status' => 'ok', 'wb-claims' => 0, 'wb-sitelinks' => 1 )
+		);
+
+		return $cases;
+	}
+
+	public function providePageProperties() {
+		$cases = parent::providePageProperties();
+
+		$cases['sitelinks'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) ) ),
+			array( 'wb-status' => EntityContent::STATUS_OK, 'wb-claims' => 0, 'wb-sitelinks' => 1 )
+		);
+
+		return $cases;
+	}
+
+	public function provideGetEntityStatus() {
+		$cases = parent::provideGetEntityStatus();
+
+		$cases['sitelinks'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) ) ),
+			EntityContent::STATUS_OK
+		);
+
+		return $cases;
+	}
+
+	public function provideGetEntityPageProperties() {
+		$cases = parent::provideGetEntityPageProperties();
+
+		$cases['sitelinks'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) ) ),
+			array(
+				'wb-status' => EntityContent::STATUS_OK,
+				'wb-claims' => 0,
+				'wb-sitelinks' => 1,
+			)
+		);
+
+		return $cases;
+	}
 }
