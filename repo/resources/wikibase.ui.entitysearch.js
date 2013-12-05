@@ -64,7 +64,12 @@
 					$form.submit();
 				},
 				cssClass: 'wb-entitysearch-suggestions'
-			}
+			},
+			position: $.extend(
+				{},
+				$.wikibase.entityselector.prototype.options.position,
+				{ offset: '-1 2' }
+			)
 		} )
 		.on( 'entityselectoropen', function( event ) {
 			updateSuggestionSpecial();
