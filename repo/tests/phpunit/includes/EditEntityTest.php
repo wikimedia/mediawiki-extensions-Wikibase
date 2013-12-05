@@ -2,32 +2,19 @@
 
 namespace Wikibase\Test;
 
-use \Wikibase\EntityContent;
-use \Wikibase\EditEntity;
-use \Wikibase\ItemContent;
-use \Wikibase\Item;
-use \Status;
+use Status;
+use TestSites;
+use Title;
+use User;
+use WatchAction;
+use Wikibase\EntityContent;
+use Wikibase\EditEntity;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use WikiPage;
 
 /**
- * Test EditEntity.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
- * @since 0.1
+ * @covers Wikibase\EditEntity
  *
  * @ingroup WikibaseRepoTest
  * @ingroup Test
@@ -47,17 +34,16 @@ use \Status;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
- *
  */
 class EditEntityTest extends \MediaWikiTestCase {
 
 	private static $testRevisions = null;
 
 	protected static function getUser( $name ) {
-		$user = \User::newFromName( $name );
+		$user = User::newFromName( $name );
 
 		if ( $user->getId() === 0 ) {
-			$user = \User::createNew( $user->getName() );
+			$user = User::createNew( $user->getName() );
 		}
 
 		return $user;
@@ -107,7 +93,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->userGroups = array( 'user' );
 
 		if ( $wgTitle === null ) {
-			$wgTitle = \Title::newFromText( "Test" );
+			$wgTitle = Title::newFromText( "Test" );
 		}
 
 		$wgOut->setTitle( $wgTitle );
@@ -115,7 +101,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		static $hasTestSites = false;
 
 		if ( !$hasTestSites ) {
-			\TestSites::insertIntoDb();
+			TestSites::insertIntoDb();
 			$hasTestSites = true;
 		}
 	}
@@ -290,7 +276,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertEquals( $baseRevId, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
 
 		// create independent EntityContent instance for the same entity, and modify and save it
-		$page = \WikiPage::factory( $content->getTitle() );
+		$page = WikiPage::factory( $content->getTitle() );
 
 		$user2 = self::getUser( "EditEntityTestUser2" );
 
@@ -328,9 +314,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// EntityContent is abstract so we use the subclass ItemContent
 		// to get a concrete class to instantiate. Still note that our
 		// test target is EntityContent::userWasLastToEdit.
-		$anonUser = \User::newFromId(0);
-		$sysopUser = \User::newFromId(1);
-		$itemContent = \Wikibase\ItemContent::newEmpty();
+		$anonUser = User::newFromId(0);
+		$sysopUser = User::newFromId(1);
+		$itemContent = ItemContent::newEmpty();
 
 		// check for default values, last revision by anon --------------------
 		$itemContent->getItem()->setLabel( 'en', "Test Anon default" );
@@ -476,12 +462,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * Forces the group membership of the given user
 	 *
-	 * @param \User  $user
+	 * @param User $user
 	 * @param array $groups
 	 */
-	protected function setUserGroups( \User $user, array $groups ) {
+	protected function setUserGroups( User $user, array $groups ) {
 		if ( $user->getId() === 0 ) {
-			$user = \User::createNew( $user->getName() );
+			$user = User::createNew( $user->getName() );
 		}
 
 		$remove = array_diff( $user->getGroups(), $groups );
@@ -734,9 +720,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertType( 'object', $title ); // sanity
 
 		if ( $watched ) {
-			\WatchAction::doWatch( $title, $user );
+			WatchAction::doWatch( $title, $user );
 		} else {
-			\WatchAction::doUnwatch( $title, $user );
+			WatchAction::doUnwatch( $title, $user );
 		}
 
 		$edit = new EditEntity( $content, $user );
@@ -774,9 +760,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$title = $content->getTitle();
 
 		if ( $wasWatched ) {
-			\WatchAction::doWatch( $title, $user );
+			WatchAction::doWatch( $title, $user );
 		} else {
-			\WatchAction::doUnwatch( $title, $user );
+			WatchAction::doUnwatch( $title, $user );
 		}
 
 		$edit = new EditEntity( $content, $user );
@@ -829,9 +815,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$this->assertType( 'object', $title ); // sanity
 
 			if ( $watched ) {
-				\WatchAction::doWatch( $title, $user );
+				WatchAction::doWatch( $title, $user );
 			} else {
-				\WatchAction::doUnwatch( $title, $user );
+				WatchAction::doUnwatch( $title, $user );
 			}
 		}
 
@@ -845,7 +831,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		if ( $title && $title->exists() ) {
 			// clean up
-			$page = \WikiPage::factory( $title );
+			$page = WikiPage::factory( $title );
 			$page->doDeleteArticle( "testing" );
 		}
 	}
