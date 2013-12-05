@@ -63,6 +63,13 @@ $messages['de'] = array(
 	'wikibasedatamodel-desc' => 'Komponente, die das Wikibase-Datenmodell definiert',
 );
 
+/** Esperanto (Esperanto)
+ * @author KuboF
+ */
+$messages['eo'] = array(
+	'wikibasedatamodel-desc' => 'Komponanto difinanta datuman modelon de Vikidazo',
+);
+
 /** French (français)
  * @author Gomoko
  */
