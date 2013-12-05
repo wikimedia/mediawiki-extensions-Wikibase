@@ -240,7 +240,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$argLists = array();
 
 		$argLists[] = array( $c, $c[0], 0, $c );
-		$argLists[] = array( $c, $c[0], 1, $c );
+		$argLists[] = array( $c, $c[0], 1, array( $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ) );
 		$argLists[] = array( $c, $c[0], 2, array( $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ) );
 		$argLists[] = array( $c, $c[0], 3, array( $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ) );
 		$argLists[] = array( $c, $c[0], 4, array( $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ) );
@@ -248,23 +248,44 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( $c, $c[0], 6, array( $c[2], $c[3], $c[4], $c[5], $c[1], $c[0] ) );
 
 		$argLists[] = array( $c, $c[1], 0, array( $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ) );
+		$argLists[] = array( $c, $c[1], 1, $c );
+		$argLists[] = array( $c, $c[1], 2, $c );
+		$argLists[] = array( $c, $c[1], 3, array( $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ) ); //
+		$argLists[] = array( $c, $c[1], 4, array( $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ) );
 		$argLists[] = array( $c, $c[1], 5, array( $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ) );
+		$argLists[] = array( $c, $c[1], 6, array( $c[2], $c[3], $c[4], $c[5], $c[0], $c[1] ) );
 
 		$argLists[] = array( $c, $c[2], 0, array( $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ) );
-		$argLists[] = array( $c, $c[2], 4, array( $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ) );
+		$argLists[] = array( $c, $c[2], 1, $c );
+		$argLists[] = array( $c, $c[2], 2, $c );
+		$argLists[] = array( $c, $c[2], 3, array( $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ) );
+		$argLists[] = array( $c, $c[2], 4, array( $c[0], $c[1], $c[3], $c[4], $c[2], $c[5] ) );
 		$argLists[] = array( $c, $c[2], 5, array( $c[0], $c[1], $c[3], $c[4], $c[2], $c[5] ) );
 		$argLists[] = array( $c, $c[2], 6, array( $c[0], $c[1], $c[5], $c[3], $c[4], $c[2] ) );
 
 		$argLists[] = array( $c, $c[3], 0, array( $c[3], $c[2], $c[4], $c[0], $c[1], $c[5] ) );
 		$argLists[] = array( $c, $c[3], 1, array( $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ) );
 		$argLists[] = array( $c, $c[3], 2, array( $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ) );
+		$argLists[] = array( $c, $c[3], 3, $c );
+		$argLists[] = array( $c, $c[3], 4, array( $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ) );
+		$argLists[] = array( $c, $c[3], 5, array( $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ) );
+		$argLists[] = array( $c, $c[3], 6, array( $c[0], $c[1], $c[5], $c[2], $c[4], $c[3] ) );
 
 		$argLists[] = array( $c, $c[4], 0, array( $c[4], $c[2], $c[3], $c[0], $c[1], $c[5] ) );
+		$argLists[] = array( $c, $c[4], 1, array( $c[0], $c[1], $c[4], $c[2], $c[3], $c[5] ) );
 		$argLists[] = array( $c, $c[4], 2, array( $c[0], $c[1], $c[4], $c[2], $c[3], $c[5] ) );
+		$argLists[] = array( $c, $c[4], 3, array( $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ) );
+		$argLists[] = array( $c, $c[4], 4, $c );
+		$argLists[] = array( $c, $c[4], 5, $c );
+		$argLists[] = array( $c, $c[4], 6, array( $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ) );
 
 		$argLists[] = array( $c, $c[5], 0, array( $c[5], $c[0], $c[1], $c[2], $c[3], $c[4] ) );
 		$argLists[] = array( $c, $c[5], 1, array( $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ) );
 		$argLists[] = array( $c, $c[5], 2, array( $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ) );
+		$argLists[] = array( $c, $c[5], 3, $c );
+		$argLists[] = array( $c, $c[5], 4, $c );
+		$argLists[] = array( $c, $c[5], 5, $c );
+		$argLists[] = array( $c, $c[5], 6, $c );
 
 		return $argLists;
 	}

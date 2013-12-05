@@ -213,13 +213,17 @@ class ByPropertyIdArray extends \ArrayObject {
 			throw new OutOfBoundsException( 'Object cannot be moved to ' . $toIndex );
 		}
 
-		$propertyGroup = array_combine( $numericIndices, $this->getByPropertyId( $propertyId ) );
-
-		if( $toIndex > $lastIndex ) {
+		if( $toIndex >= $lastIndex ) {
 			$this->moveObjectToEndOfPropertyGroup( $object );
 		} else {
-			$insertBefore = $propertyGroup[$toIndex];
 			$this->removeObject( $object );
+
+			$propertyGroup = array_combine(
+				$this->getFlatArrayIndices( $propertyId ),
+				$this->getByPropertyId( $propertyId )
+			);
+
+			$insertBefore = $propertyGroup[$toIndex];
 			$this->insertObjectAtIndex( $object, $this->getFlatArrayIndexOfObject( $insertBefore ) );
 		}
 	}
@@ -235,7 +239,10 @@ class ByPropertyIdArray extends \ArrayObject {
 
 		$propertyId = $object->getPropertyId();
 		$propertyIdSerialization = $propertyId->getSerialization();
-		$propertyGroup = $this->getByPropertyId( $propertyId );
+
+		$propertyGroup = in_array( $propertyIdSerialization, $this->getPropertyIds() )
+			? $this->getByPropertyId( $propertyId )
+			: array();
 
 		$propertyGroup[] = $object;
 		$this->byId[$propertyIdSerialization] = $propertyGroup;
@@ -291,6 +298,18 @@ class ByPropertyIdArray extends \ArrayObject {
 		 */
 		$insertBefore = null;
 
+		$oldIndex = $this->getPropertyGroupIndex( $propertyId );
+		$byIdClone = $this->byId;
+
+		// Remove "property group" to calculate the groups new index:
+		unset( $this->byId[$propertyId->getSerialization()] );
+
+		if( $toIndex > $oldIndex ) {
+			// If the group shall be moved towards the bottom, the number of objects within the
+			// group needs to be subtracted from the absolute toIndex:
+			$toIndex -= count( $byIdClone[$propertyId->getSerialization()] );
+		}
+
 		foreach( $this->getPropertyIds() as $pId ) {
 			// Accepting other than the exact index by using <= letting the "property group" "latch"
 			// in the next slot.
@@ -300,26 +319,21 @@ class ByPropertyIdArray extends \ArrayObject {
 			}
 		}
 
-		if( $propertyId->equals( $insertBefore ) ) {
-			return;
-		}
-
-		$clone = $this->byId;
 		$serializedPropertyId = $propertyId->getSerialization();
 		$this->byId = array();
 
-		foreach( $clone as $serializedPId => $objects ) {
+		foreach( $byIdClone as $serializedPId => $objects ) {
 			$pId = new PropertyId( $serializedPId );
 			if( $pId->equals( $propertyId ) ) {
 				continue;
 			} elseif( $pId->equals( $insertBefore ) ) {
-				$this->byId[$serializedPropertyId] = $clone[$serializedPropertyId];
+				$this->byId[$serializedPropertyId] = $byIdClone[$serializedPropertyId];
 			}
 			$this->byId[$serializedPId] = $objects;
 		}
 
 		if( is_null( $insertBefore ) ) {
-			$this->byId[$serializedPropertyId] = $clone[$serializedPropertyId];
+			$this->byId[$serializedPropertyId] = $byIdClone[$serializedPropertyId];
 		}
 
 		$this->exchangeArray( $this->toFlatArray() );
@@ -371,12 +385,11 @@ class ByPropertyIdArray extends \ArrayObject {
 
 		// Determine whether to simply reindex the object within its "property group":
 		$propertyIndices = $this->getFlatArrayIndices( $object->getPropertyId() );
-		$propertyIndices[] = $propertyIndices[count( $propertyIndices ) - 1] + 1;
 
 		if( in_array( $toIndex, $propertyIndices ) ) {
 			$this->moveObjectInPropertyGroup( $object, $toIndex );
 		} else {
-			$edgeIndex = ( $toIndex < $propertyIndices[0] )
+			$edgeIndex = ( $toIndex <= $propertyIndices[0] )
 				? $propertyIndices[0]
 				: $propertyIndices[count( $propertyIndices ) - 1];
 
