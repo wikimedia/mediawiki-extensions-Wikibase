@@ -3,8 +3,12 @@
 namespace Wikibase\Test\Api;
 
 use ApiTestCase;
+use Revision;
+use TestSites;
 use TestUser;
+use UsageException;
 use User;
+use Wikibase\EntityFactory;
 use Wikibase\Settings;
 
 /**
@@ -25,7 +29,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected static $loginUser = null;
 	protected static $token = null;
 
-	public function setUp() {
+	protected function setUp() {
 		global $wgUser;
 		parent::setUp();
 
@@ -45,7 +49,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$wgUser = self::$users['wbeditor']->user;
 
 		if ( !$isSetup ) {
-			\TestSites::insertIntoDb();
+			TestSites::insertIntoDb();
 
 			$this->login();
 
@@ -60,7 +64,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	/**
 	 * Performs a login, if necessary, and returns the resulting session.
 	 */
-	function login( $user = 'wbeditor' ) {
+	protected function login( $user = 'wbeditor' ) {
 		self::doLogin( $user );
 		self::$loginUser = self::$users[ $user ];
 		return self::$loginSession;
@@ -69,7 +73,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	/**
 	 * Gets an entity edit token.
 	 */
-	function getToken( $type = 'edittoken' ) {
+	protected function getToken( $type = 'edittoken' ) {
 		$tokens = self::getTokenList( self::$loginUser );
 		return $tokens[$type];
 	}
@@ -77,23 +81,23 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	/**
 	 *  Appends an edit token to a request
 	 */
-	function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
+	protected function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
 		$params['token'] = $this->getToken();
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
-	function initTestEntities( $handles ){
+	protected function initTestEntities( $handles ) {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
-		foreach( $activeHandles as $handle => $id ){
-			if( array_key_exists( $handle, $activeHandles ) ){
+		foreach( $activeHandles as $handle => $id ) {
+			if( array_key_exists( $handle, $activeHandles ) ) {
 				$params = EntityTestHelper::getEntityClear( $handle );
 				$params['action'] = 'wbeditentity';
 				$this->doApiRequestWithToken( $params );
 			}
 		}
 
-		foreach( $handles as $handle ){
+		foreach( $handles as $handle ) {
 			$params = EntityTestHelper::getEntity( $handle );
 			$params['action'] = 'wbeditentity';
 			list($res,,) = $this->doApiRequestWithToken( $params );
@@ -105,7 +109,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	/**
 	 * Loads an entity from the database (via an API call).
 	 */
-	function loadEntity( $id ) {
+	protected function loadEntity( $id ) {
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
@@ -121,9 +125,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param $params array of params for the api query
 	 * @param $exception array details of the exception to expect (type,code,message)
 	 */
-	public function doTestQueryExceptions( $params, $exception ){
+	public function doTestQueryExceptions( $params, $exception ) {
 		try{
-			if( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ){
+			if( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ) {
 				if ( !self::$usetoken ) {
 					$this->markTestSkipped( "tokens disabled" );
 				}
@@ -133,11 +137,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 			$this->fail( "Failed to throw UsageException" );
 
-		} catch( \UsageException $e ){
-			if( array_key_exists( 'type', $exception ) ){
+		} catch( UsageException $e ){
+			if( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
-			if( array_key_exists( 'code', $exception ) ){
+			if( array_key_exists( 'code', $exception ) ) {
 				$this->assertEquals( $exception['code'], $e->getCodeString() );
 			}
 			if( array_key_exists( 'message', $exception ) ){
@@ -266,9 +270,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			if( ! ( $expectEmptyArrays === false && $expected['claims'] === array() ) ) {
 				$data = self::flattenArray( $actual['claims'], 'mainsnak', 'value', true );
 				$exp = self::flattenArray( $expected['claims'], 'language', 'value', true );
-				for( $i = 0; $i < count( $expected['claims'] ); $i++ ){
+				$count = count( $expected['claims'] );
+
+				for( $i = 0; $i < $count; $i++ ) {
 					$this->assertArrayHasKey( $i, $data['id'] );
-					$this->assertGreaterThanOrEqual( 39 , strlen( $data['id'][$i] ) );
+					$this->assertGreaterThanOrEqual( 39, strlen( $data['id'][$i] ) );
 				}
 				//unset stuff we dont actually want to compare
 				unset( $data['id'] );
@@ -296,7 +302,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param param string $path2 second path element (optional)
 	 * @param param $ ...
 	 */
-	public function assertResultHasKeyInPath( $response ){
+	public function assertResultHasKeyInPath( $response ) {
 		$path = func_get_args();
 		array_shift( $path );
 
@@ -315,21 +321,24 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * Asserts that the given API response has a valid entity type if the result contains an entity
 	 * @param array $response
 	 */
-	public function assertResultHasEntityType( $response ){
-
+	public function assertResultHasEntityType( $response ) {
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {
-				$this->assertTrue( \Wikibase\EntityFactory::singleton()->isEntityType( $response['entity']['type'] ), "Missing valid 'type' in response." );
+				$this->assertTrue(
+					EntityFactory::singleton()->isEntityType( $response['entity']['type'] ),
+					"Missing valid 'type' in response."
+				);
 			}
-		}
-		elseif ( isset( $response['entities'] ) ) {
-			foreach ($response['entities'] as $entity) {
+		} elseif ( isset( $response['entities'] ) ) {
+			foreach ( $response['entities'] as $entity ) {
 				if ( isset( $entity['type'] ) ) {
-					$this->assertTrue( \Wikibase\EntityFactory::singleton()->isEntityType( $entity['type'] ), "Missing valid 'type' in response." );
+					$this->assertTrue(
+						EntityFactory::singleton()->isEntityType( $entity['type'] ),
+						"Missing valid 'type' in response."
+					);
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -353,7 +362,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$regex = "!$r!";
 		}
 
-		$rev = \Revision::newFromId( $revid );
+		$rev = Revision::newFromId( $revid );
 		$this->assertNotNull( $rev, "revision not found: $revid" );
 
 		$comment = $rev->getComment();
