@@ -17,6 +17,7 @@ return call_user_func( function() {
 		'Wikibase\LangLinkHandler' => 'includes/LangLinkHandler.php',
 		'Wikibase\ChangeHandler' => 'includes/ChangeHandler.php',
 		'Wikibase\NamespaceChecker' => 'includes/NamespaceChecker.php',
+		'Wikibase\ReferencedPagesFinder' => 'includes/ReferencedPagesFinder.php',
 		'Wikibase\RepoItemLinkGenerator' => 'includes/RepoItemLinkGenerator.php',
 		'Wikibase\RepoLinker' => 'includes/RepoLinker.php',
 		'Wikibase\Client\WikibaseClient' => 'includes/WikibaseClient.php',
@@ -43,9 +44,12 @@ return call_user_func( function() {
 		'Wikibase\PropertyParserFunctionRenderer' => 'includes/parserhooks/PropertyParserFunctionRenderer.php',
 
 		// includes/recentchanges
-		'Wikibase\ExternalChangesLine' => 'includes/recentchanges/ExternalChangesLine.php',
+		'Wikibase\ChangeLineFormatter' => 'includes/recentchanges/ChangeLineFormatter.php',
+		'Wikibase\ExternalChange' => 'includes/recentchanges/ExternalChange.php',
+		'Wikibase\ExternalChangeFactory' => 'includes/recentchanges/ExternalChangeFactory.php',
 		'Wikibase\ExternalRecentChange' => 'includes/recentchanges/ExternalRecentChange.php',
 		'Wikibase\RecentChangesFilterOptions' => 'includes/recentchanges/RecentChangesFilterOptions.php',
+		'Wikibase\RevisionData' => 'includes/recentchanges/RevisionData.php',
 
 		// includes/specials
 		'Wikibase\Client\Specials\SpecialUnconnectedPages' => 'includes/specials/SpecialUnconnectedPages.php',

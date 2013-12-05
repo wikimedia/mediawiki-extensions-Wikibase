@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase;
 
 use Diff\Diff;
@@ -17,25 +18,7 @@ use Wikibase\Client\WikibaseClient;
  * it should be fed to this service which then takes care handling
  * it.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.1
- *
- * @file
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -100,9 +83,14 @@ class ChangeHandler {
 	protected $entityLookup;
 
 	/**
-	 * @var \Site $site
+	 * @var Site $site
 	 */
 	protected $site;
+
+	/**
+	 * @var string
+	 */
+	protected $siteId;
 
 	/**
 	 * @var NamespaceChecker $namespaceChecker
@@ -151,6 +139,8 @@ class ChangeHandler {
 		}
 
 		$this->site = $localSite;
+		$this->siteId = $localSite->getGlobalId();
+
 		$this->updater = $updater;
 		$this->entityLookup = $entityLookup;
 		$this->entityUsageIndex = $entityUsageIndex;
@@ -549,8 +539,6 @@ class ChangeHandler {
 	/**
 	 * Returns the pages that need some kind of updating given the change.
 	 *
-	 * @todo: determine actions for each page!
-	 *
 	 * @param Change $change
 	 *
 	 * @return Title[] the titles of the pages to update
@@ -558,72 +546,19 @@ class ChangeHandler {
 	public function getPagesToUpdate( Change $change ) {
 		wfProfileIn( __METHOD__ );
 
-		$pagesToUpdate = array();
+		// todo inject!
+		$referencedPagesFinder = new ReferencedPagesFinder(
+			$this->entityUsageIndex,
+			$this->namespaceChecker,
+			$this->siteId,
+			$this->checkPageExistence
+		);
 
-		if ( $change instanceof ItemChange ) {
-			// update local pages connected to a relevant data item.
-
-			$itemId = $change->getEntityId();
-
-			$siteGlobalId = $this->site->getGlobalId();
-
-			$usedOnPages = $this->entityUsageIndex->getEntityUsage( array( $itemId ) );
-			$pagesToUpdate = array_merge( $pagesToUpdate, $usedOnPages );
-
-			// if an item's sitelinks change, update the old and the new target
-			$siteLinkDiff = $change->getSiteLinkDiff();
-
-			if ( isset( $siteLinkDiff[$siteGlobalId] ) ) {
-
-				// $siteLinkDiff changed from containing atomic diffs to
-				// containing map diffs. For B/C, handle both cases.
-				$siteLinkDiffOp = $siteLinkDiff[$siteGlobalId];
-
-				if ( $siteLinkDiffOp instanceof Diff ) {
-					if ( array_key_exists( 'name', $siteLinkDiffOp ) ) {
-						$siteLinkDiffOp = $siteLinkDiffOp['name'];
-					} else {
-						// change to badges only
-						$siteLinkDiffOp = null;
-					}
-				}
-
-				if ( $siteLinkDiffOp === null ) {
-					// do nothing, only badges were  changed
-				}elseif ( $siteLinkDiffOp instanceof DiffOpAdd ) {
-					$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
-				} elseif ( $siteLinkDiffOp instanceof DiffOpRemove ) {
-					$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-				} elseif ( $siteLinkDiffOp instanceof DiffOpChange ) {
-					$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
-					$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-				} else {
-					wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp ) . ")" );
-				}
-			}
-		}
-
-		$pagesToUpdate = array_unique( $pagesToUpdate );
-		$titlesToUpdate = array();
-
-		foreach ( $pagesToUpdate as $page ) {
-			$title = Title::newFromText( $page );
-
-			if ( !$title->exists() && $this->checkPageExistence ) {
-				continue;
-			}
-
-			$ns = $title->getNamespace();
-
-			if ( !is_int( $ns ) || !$this->namespaceChecker->isWikibaseEnabled( $ns ) ) {
-				continue;
-			}
-
-			$titlesToUpdate[] = $title;
-		}
+		$pagesToUpdate = $referencedPagesFinder->getPages( $change );
 
 		wfProfileOut( __METHOD__ );
-		return $titlesToUpdate;
+
+		return $pagesToUpdate;
 	}
 
 	/**
