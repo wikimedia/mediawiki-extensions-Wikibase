@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Entity;
 use Wikibase\EntityContent;
 
 /**
@@ -319,5 +320,43 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$parserOutput = $content->getParserOutput( $title );
 
 		$this->assertInstanceOf( '\ParserOutput', $parserOutput );
+	}
+
+	public function dataPageProperties() {
+		$cases = array();
+
+		$cases['empty'] = array(
+			array(),
+			array( 'wb-status' => 'empty', 'wb-claims' => 0 )
+		);
+
+		$cases['labels'] = array(
+			array( 'label' => array( 'en' => 'Foo' ) ),
+			array( 'wb-status' => 'ok', 'wb-claims' => 0 )
+		);
+
+		$cases['claims'] = array(
+			array( 'claims' => array( array( 'm' => array( 'value', 83, 'string', 'foo' ), 'q' => array(), 'g' => '$testing$' ) ) ),
+			array( 'wb-status' => 'ok', 'wb-claims' => 1 )
+		);
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider dataPageProperties
+	 *
+	 * @param array $entityData
+	 * @param array $expectedProps
+	 */
+	public function testPageProperties( array $entityData, array $expectedProps ) {
+		$content = $this->newFromArray( $entityData );
+
+		$title = \Title::newFromText( 'Foo' );
+		$parserOutput = $content->getParserOutput( $title, null, null, false );
+
+		foreach ( $expectedProps as $name => $value ) {
+			$this->assertEquals( $value, $parserOutput->getProperty( $name ), "page property $name");
+		}
 	}
 }
