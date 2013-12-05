@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_bedc80e6",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsUnitTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-05T15:09:49Z",
+      "side": 1,
+      "message": "The need to do this indicates a design problem with the code under test. Normally I\u0027d advocate for fixing that. This is not possible here though, as this is forced upon us as part of a legacy API we do not control. We of course still need to test if we are using this API correctly, though this can be done through integration  tests, that treat the legacy API as a black box, and thus have minimal binding to it.",
+      "parentUuid": "0ee75395_3e14f09f",
+      "revId": "c43f02b9379ca07e922089e65c9cae2d7bf88d9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_bee920a9",
         "filename": "repo/tests/phpunit/includes/api/MergeItemsUnitTest.php",
         "patchSetId": 3
