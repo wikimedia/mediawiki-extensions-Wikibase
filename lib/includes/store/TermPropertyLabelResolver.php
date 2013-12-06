@@ -76,10 +76,10 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		if ( $cacheKey === null ) {
 			// share cached data between wikis, only vary on language code.
-			$cacheKey = __CLASS__ . '/' . $lang;
+			$cacheKey = __CLASS__;
 		}
 
-		$this->cacheKey = $cacheKey;
+		$this->cacheKey = $cacheKey . '/' . $lang;
 	}
 
 	/**
