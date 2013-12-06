@@ -51,6 +51,28 @@ module StatementPage
     end
   end
 
+  def get_claim_data(item_id, property, value)
+    datatype = property["data"]["datatype"]
+    val = value
+    if datatype == "string"
+      val = get_string_value(value)
+    end
+
+    claim_data = '{"type":"statement","mainsnak":{"snaktype":"value","property":"' +
+        property["id"] + '","datavalue":{"type":"string","value":"' + val + '"}},"id":"' +
+        item_id + '$' + SecureRandom.uuid + '","qualifiers":{},"qualifiers-order":[],"rank":"normal"}'
+
+    return claim_data
+  end
+
+  def get_string_value(value)
+    if value == ""
+      generate_random_string(20)
+    else
+      value
+    end
+  end
+
 =begin
   def wait_for_statement_request_finished
     wait_until do
