@@ -44,7 +44,7 @@ module WikibaseAPI
       entity_data = ActiveSupport::JSON.decode(data)
 
       {"id" => id, "url" => url, "label" => entity_data["labels"]["en"]["value"],
-       "description" => entity_data["descriptions"]["en"]["value"]}
+       "description" => entity_data["descriptions"]["en"]["value"], "data" => entity_data}
     end
 
     # creates new properties by calling wb_create_entity multiple times
@@ -76,6 +76,14 @@ module WikibaseAPI
       end
 
       items
+    end
+
+    def wb_set_claim(claim)
+      form_data = {"action" => "wbsetclaim",
+                   "claim" => claim,
+                   "token" => get_token("edit"),
+                   "summary" => "statement created by selenium test"}
+      make_api_request(form_data)
     end
 
     # removes a sitelink
