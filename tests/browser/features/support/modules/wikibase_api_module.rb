@@ -78,6 +78,18 @@ module WikibaseAPI
       items
     end
 
+    def wb_set_claim(entity_id, claim)
+      #puts entity_id
+      #puts claim
+
+      form_data = {"action" => "wbsetclaim",
+                   "claim" => '{"claims":[' + claim + ']}',
+                   "id" => entity_id,
+                   "token" => get_token("edit"),
+                   "summary" => "statement created by selenium test"}
+      puts make_api_request(form_data)
+    end
+
     # removes a sitelink
     def wb_set_sitelink(entity_identifier, linksite, linktitle)
       form_data = entity_identifier.merge({"action" => "wbsetsitelink", "linksite" => linksite, "linktitle" => linktitle,
