@@ -37,6 +37,20 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.commonsmediatype' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.SuggestedStringValue.js',
+				'jquery.valueview/valueview.experts/experts.CommonsMediaType.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.staticdom',
+				'jquery.valueview.BifidExpert',
+				'jquery.valueview.experts.stringvalue',
+				'jquery.ui.suggester',
+				'mediawiki.util'
+			),
+		),
+
 		// Dependencies required by jQuery.valueview library:
 		'jquery.PurposedCallbacks' => $moduleTemplate + array(
 			'scripts' => array(
