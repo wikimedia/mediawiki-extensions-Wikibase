@@ -191,6 +191,18 @@ class SqlStore implements Store {
 				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
 			}
 
+			// Update from 0.4 to 0.5
+			if ( !$db->indexExists( 'wb_terms', 'term_search' ) ) {
+
+				$termsKeyUpdate = 'UpdateTermIndexes' . $extension;
+
+				$updater->addExtensionIndex(
+					'wb_terms',
+					'term_search',
+					__DIR__ . '/../../../sql/' . $termsKeyUpdate
+				);
+			}
+
 			// Update from 0.1. or 0.2.
 			if ( !$db->tableExists( 'wb_entity_per_page' ) ) {
 
