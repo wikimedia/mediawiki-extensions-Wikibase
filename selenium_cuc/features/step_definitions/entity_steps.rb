@@ -52,4 +52,5 @@ end
 
 When /^I reload the page$/ do
   @browser.refresh
+  on(ItemPage).wait_for_entity_to_load
 end
