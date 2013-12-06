@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_30e534d8",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-06T12:35:35Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be a new test case making sure EditEntity fails when supplied a bad type?",
+      "revId": "f715aeab2f6fcb7fbcf310633d17b07f5e90187a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
