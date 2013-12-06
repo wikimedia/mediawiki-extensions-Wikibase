@@ -264,9 +264,13 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	protected function newPropertyLabelResolver() {
-		$key = $this->cachePrefix . ':TermPropertyLabelResolver';
+		$langCode = $this->language->getCode();
+
+		// cache key needs to be language specific
+		$key = $this->cachePrefix . ':TermPropertyLabelResolver' . '/' . $langCode;
+
 		return new TermPropertyLabelResolver(
-			$this->language->getCode(),
+			$langCode,
 			$this->getTermIndex(),
 			ObjectCache::getInstance( $this->cacheType ),
 			$this->cacheDuration,
