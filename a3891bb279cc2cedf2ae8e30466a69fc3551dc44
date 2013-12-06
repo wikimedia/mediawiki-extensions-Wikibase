@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_904e40c3",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-06T14:08:03Z",
+      "side": 1,
+      "message": "should be: $key \u003d $this-\u003ecachePrefix . \u0027:CachingPropertyInfoStore\u0027;",
+      "revId": "a3891bb279cc2cedf2ae8e30466a69fc3551dc44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
