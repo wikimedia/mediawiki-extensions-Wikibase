@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_90dd20e4",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-06T14:13:53Z",
+      "side": 1,
+      "message": "Should be: new CachingPropertyInfoStore( $table, ObjectCache::getInstance( $this-\u003ecacheType ), $this-\u003ecacheDuration, $key );",
+      "revId": "0ffd73ea55943905b3230ceef1e203220466f563",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
