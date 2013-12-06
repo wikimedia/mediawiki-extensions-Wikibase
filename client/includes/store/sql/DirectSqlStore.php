@@ -327,11 +327,9 @@ class DirectSqlStore implements ClientStore {
 	protected function newPropertyInfoTable() {
 		if ( Settings::get( 'usePropertyInfoTable' ) ) {
 			$table = new PropertyInfoTable( true, $this->repoWiki );
-
-			//TODO: get cache type etc from config
-			//TODO: better version ID from config!
-			$key = $this->repoWiki . '/Wikibase/CachingPropertyInfoStore/' . WBL_VERSION;
-			return new CachingPropertyInfoStore( $table, wfGetMainCache(), 3600, $key );
+			$key = $this->cachePrefix . ':CachingPropertyInfoStore';
+			return new CachingPropertyInfoStore( $table, ObjectCache::getInstance( $this->cacheType ),
+				$this->cacheDuration, $key );
 		} else {
 			// dummy info store
 			return new DummyPropertyInfoStore();
