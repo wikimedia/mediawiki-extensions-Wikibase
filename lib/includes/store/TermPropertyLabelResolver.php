@@ -76,10 +76,10 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		if ( $cacheKey === null ) {
 			// share cached data between wikis, only vary on language code.
-			$cacheKey = __CLASS__ . '/' . $lang;
+			$cacheKey = __CLASS__;
 		}
 
-		$this->cacheKey = $cacheKey;
+		$this->cacheKey = $cacheKey . '/' . $lang;
 	}
 
 	/**
@@ -90,14 +90,10 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 * @return EntityId[] a map of strings from $lables to the corresponding entity ID.
 	 */
 	public function getPropertyIdsForLabels( array $labels, $recache = '' ) {
-		wfDebugLog( __CLASS__, __METHOD__ );
-		wfDebugLog( __CLASS__, var_export( $labels, true ) );
 		$props = $this->getLabelMap( $recache );
 
 		$keys = array_flip( $labels );
 		$idsForLabels = array_intersect_key( $props, $keys );
-
-		wfDebugLog( __CLASS__, var_export( $idsForLabels, true ) );
 
 		return $idsForLabels;
 	}
