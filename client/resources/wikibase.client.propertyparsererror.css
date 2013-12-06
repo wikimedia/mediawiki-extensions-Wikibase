@@ -1,0 +1,6 @@
+/* CSS with the sole purpose to hide property parser
+   function errors, which can be controlled with
+   $wgWBClientSettings['hidePropertyParserError'] */
+.wikibase-property-parser-error {
+	display: none;
+}
