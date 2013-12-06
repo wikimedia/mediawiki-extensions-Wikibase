@@ -517,9 +517,14 @@ final class ClientHooks {
 		if ( !empty( $errors ) ) {
 			foreach ( $errors as $errorMessage ) {
 				$out->addWikiText(
-					'<p class="error wikibase-error">' . $errorMessage . '</p>'
+					'<p class="error wikibase-property-parser-error">' . $errorMessage . '</p>'
 				);
 			}
+		}
+
+		// todo maybe allow this to vary based on anon / logged in userss
+		if ( Settings::get( 'hideParserFunctionErrors' ) ) {
+			$out->addModules( 'wikibase.client.propertyparsererror.css' );
 		}
 
 		return true;
