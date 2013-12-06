@@ -151,7 +151,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$success = $dbw->delete(
 			$this->tableName,
 			$entityIdentifiers,
-			__METHOD__
+			__METHOD__,
+			array( 'IGNORE' )
 		);
 
 		$weightField = array();
@@ -172,7 +173,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 					$entityIdentifiers,
 					$weightField
 				),
-				__METHOD__
+				__METHOD__,
+				array( 'IGNORE' )
 			);
 
 			if ( !$success ) {
