@@ -78,6 +78,21 @@ module WikibaseAPI
       items
     end
 
+    def wb_set_claim(entity_id, claim)
+      property = wb_create
+      form_data = "data" => '{"claims":[{"type":"statement","mainsnak":{"snaktype":"value","property":"P1839","datavalue":{"type":"string","value":"blabla"}}}]}',
+                  "id" => entity_id,
+                  "token" => get_token("edit"),
+
+    end
+
+    # creates statements for a given item
+    def wb_create_statements(item_id, statements)
+      statements.each do |statement|
+        statement_data = '{"id":"","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}'
+      end
+    end
+
     # removes a sitelink
     def wb_set_sitelink(entity_identifier, linksite, linktitle)
       form_data = entity_identifier.merge({"action" => "wbsetsitelink", "linksite" => linksite, "linktitle" => linktitle,
