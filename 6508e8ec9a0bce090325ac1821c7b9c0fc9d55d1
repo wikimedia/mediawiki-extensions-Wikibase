@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_2b0dc5ec",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-06T15:48:18Z",
+      "side": 1,
+      "message": "Documentation needs to be updated",
+      "revId": "6508e8ec9a0bce090325ac1821c7b9c0fc9d55d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ebf6bdd3",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-06T15:48:18Z",
+      "side": 1,
+      "message": "Actually, the $lang parameter could/should be used with all called to wfMessage (and probably also with wfTemplate, somehow), so we use the system messages in the requested language and don\u0027t just grab the user language from global state.",
+      "revId": "6508e8ec9a0bce090325ac1821c7b9c0fc9d55d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
