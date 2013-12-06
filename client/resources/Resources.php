@@ -26,6 +26,9 @@ return call_user_func( function() {
 		'wikibase.client.changeslist.css' => $moduleTemplate + array(
 			'styles' => 'wikibase.client.changeslist.css'
 		),
+		'wikibase.client.propertyparsererror' => $moduleTemplate + array(
+			'styles' => 'wikibase.client.propertyparsererror.css'
+		),
 		'wikibase.client.linkitem.init' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.client.linkitem.init.js'
