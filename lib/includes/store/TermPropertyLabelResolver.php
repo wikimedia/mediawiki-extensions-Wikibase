@@ -121,7 +121,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 		if ( $cached !== false && $cached !== null ) {
 			$this->propertiesByLabel = $cached;
 
-			wfProfileIn( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return $this->propertiesByLabel;
 		}
 
