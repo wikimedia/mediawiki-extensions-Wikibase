@@ -7,7 +7,8 @@
 # basic steps for entities
 
 Given /^I am on an item page$/ do
-  item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
+  item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},
+                "descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   @item_under_test = wb_api.wb_create_entity(item_data, "item")
   on(ItemPage).navigate_to_entity @item_under_test["url"]
@@ -24,6 +25,23 @@ Given /^There are items with the following handles:$/ do |handles|
   @items = wb_api.wb_create_items(handles.raw)
 end
 
+Given /^There are statements with the following properties and values:$/ do |stmts|
+  wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
+  item_id = @item_under_test["id"]
+
+  stmts.raw.each do |statement|
+    if statement[1] == ""
+      statement[1] = generate_random_string(20)
+    end
+    claim_data = '{"type":"statement","mainsnak":{"snaktype":"value","property":"' +
+        @properties[statement[0]]["id"] + '","datavalue":{"type":"string","value":"' + statement[1] + '"}},"id":"' +
+        item_id + '$' + SecureRandom.uuid + '","qualifiers":{},"qualifiers-order":[],"rank":"normal"}'
+    wb_api.wb_set_claim(item_id, claim_data)
+  end
+
+end
+
 Given /^The copyright warning has been dismissed$/ do
   on(ItemPage).set_copyright_ack_cookie
 end
@@ -33,7 +51,8 @@ Given /^Anonymous edit warnings are disabled$/ do
 end
 
 Given /^I am on an item page with empty label and description$/ do
-  item_data = '{"labels":{"en":{"language":"en","value":"' + '' + '"}},"descriptions":{"en":{"language":"en","value":"' + '' + '"}}}'
+  item_data = '{"labels":{"en":{"language":"en","value":"' + '' + '"}},
+                "descriptions":{"en":{"language":"en","value":"' + '' + '"}}}'
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   @item_under_test = wb_api.wb_create_entity(item_data, "item")
   on(ItemPage).navigate_to_entity @item_under_test["url"]
