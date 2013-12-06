@@ -11,6 +11,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 takes different arguments then it did before.
 * WikibaseEntityInsertionUpdate hook was added
 * WikibaseEntityDeletionUpdate hook now gets an EntityContent rather than an EntityDeletionUpdate.
+* The definition of the database fields wb_terms.term_row_id and wb_items_per_site.ips_row_id have been changed to BIGINT for MySQL, to avoid integer overflow on large sites. '''NOTE:''' the column definition is not automatically updated when running update.php. If you expect a large number (hundreds of million) of edits on your wiki, please apply repo/sql/MakeRowIDsBig.sql to your database manually. This is only needed for MySQL (and for PostGres, which however isn't fully supported at the moment).
 
 === Version 0.4 ===
 (not released)
