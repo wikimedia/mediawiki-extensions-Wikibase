@@ -243,6 +243,7 @@ return call_user_func( function() {
 		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/store/TermIndexTest.php',
 		'Wikibase\Test\MockPropertyInfoStore' => 'tests/phpunit/store/MockPropertyInfoStore.php',
 		'Wikibase\Test\MockSiteStore' => 'tests/phpunit/MockSiteStore.php',
+		'Wikibase\Test\MockTermIndex' => 'tests/phpunit/store/MockTermIndex.php',
 
 		'Wikibase\Test\PropertyInfoStoreTestHelper' => 'tests/phpunit/store/PropertyInfoStoreTestHelper.php',
 	);
