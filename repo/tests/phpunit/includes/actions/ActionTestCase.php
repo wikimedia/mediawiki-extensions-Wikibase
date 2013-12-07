@@ -2,36 +2,25 @@
 
 namespace Wikibase\Test;
 
-use User, WebRequest, WikiPage, Action;
-use RequestContext;
+use Action;
+use ApiQueryInfo;
+use Article;
+use Exception;
 use FauxRequest;
+use Language;
 use MediaWikiTestCase;
+use MWException;
 use OutputPage;
+use RequestContext;
 use Status;
-
-use \Wikibase\Item;
-use \Wikibase\ItemContent;
+use Title;
+use User;
+use WebRequest;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use WikiPage;
 
 /**
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  *
@@ -45,6 +34,8 @@ class ActionTestCase extends MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
+		// @fixme use setMwGlobals or better yet design tests / code to not depend on globals!
+
 		$this->savedGlobals = array();
 
 		$this->savedGlobals['wgUser'] = $GLOBALS['wgUser'];
@@ -52,10 +43,7 @@ class ActionTestCase extends MediaWikiTestCase {
 		$this->savedGlobals['wgRequest'] = $GLOBALS['wgRequest'];
 		$this->savedGlobals['wgGroupPermissions'] = $GLOBALS['wgGroupPermissions'];
 
-		global $wgLang;
-		$wgLang = \Language::factory( 'qqx' );
-
-		\ApiQueryInfo::resetTokenCache();
+		ApiQueryInfo::resetTokenCache();
 	}
 
 	public function tearDown() {
@@ -66,7 +54,7 @@ class ActionTestCase extends MediaWikiTestCase {
 			$$k = $v;
 		}
 
-		\ApiQueryInfo::resetTokenCache();
+		ApiQueryInfo::resetTokenCache();
 
 		if ( $this->permissionsChanged ) {
 			// reset rights cache
@@ -161,8 +149,8 @@ class ActionTestCase extends MediaWikiTestCase {
 			$session = $wgRequest->getSessionArray();
 		}
 
-		if ( !( $page instanceof \Article ) ) {
-			$article = new \Article( $page->getTitle() );
+		if ( !( $page instanceof Article ) ) {
+			$article = new Article( $page->getTitle() );
 		} else {
 			$article = $page;
 		}
@@ -186,7 +174,7 @@ class ActionTestCase extends MediaWikiTestCase {
 
 	/**
 	 * Calls the desired action using a fake web request.
-	 * This calls the Show() method on the target action.
+	 * This calls the show() method on the target action.
 	 *
 	 * @param String|\Action $action the action to call; may be an action name or class name
 	 * @param WikiPage  $page the wiki page to call the action on
@@ -195,14 +183,14 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @param array|null $session optional session data
 	 *
 	 * @return OutputPage
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	protected function callAction( $action, WikiPage $page, array $params = null, $post = false, array $session = null ) {
 		if ( is_string( $action ) ) {
 			$action = $this->createAction( $action, $page, $params, $post, $session );
 
 			if ( !$action ) {
-				throw new \MWException( "unknown action: $action" );
+				throw new MWException( "unknown action: $action" );
 			}
 		}
 
@@ -219,7 +207,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	 *
 	 * @return String the token
 	 */
-	protected function getToken( \Title $title, $for = 'edit' ) {
+	protected function getToken( Title $title, $for = 'edit' ) {
 		$func = '\ApiQueryInfo::get' . ucfirst( $for ) . 'Token';
 
 		$token = call_user_func( $func, $title->getArticleID(), $title );
@@ -230,7 +218,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	/**
 	 * Changes wgUser and resets any associated state
 	 *
-	 * @param \User $user the desired user
+	 * @param User $user the desired user
 	 * @param array $session optional session data
 	 */
 	protected function setUser( User $user, array $session = null ) {
@@ -239,7 +227,7 @@ class ActionTestCase extends MediaWikiTestCase {
 
 		if ( $user->getName() != $wgUser->getName() ) {
 			$wgUser = $user;
-			\ApiQueryInfo::resetTokenCache();
+			ApiQueryInfo::resetTokenCache();
 		}
 
 		if ( $session !== null ) {
@@ -259,10 +247,6 @@ class ActionTestCase extends MediaWikiTestCase {
 
 		$itemData = self::makeTestItemData();
 
-		/* @var Item $item */
-		/* @var ItemContent $content */
-		/* @var Status $status */
-
 		foreach ( $itemData as $handle => $revisions ) {
 			$item = self::createTestItem( $handle, $revisions );
 			self::$testItems[$handle] = $item;
@@ -276,12 +260,9 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @param array $revisions
 	 *
 	 * @return Item
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	public static function createTestItem( $handle, array $revisions ) { //@todo: provide this for all kinds of entities.
-		/* @var ItemContent $content */
-		/* @var Item $item */
-
 		$content = null;
 
 		foreach ( $revisions as $item ) {
@@ -295,11 +276,11 @@ class ActionTestCase extends MediaWikiTestCase {
 			}
 
 			if ( !$status->isOK() ) {
-				throw new \MWException( "failed to generate test item" );
+				throw new MWException( "failed to generate test item" );
 			}
 		}
 
-		$page = \WikiPage::factory( $content->getTitle() );
+		$page = WikiPage::factory( $content->getTitle() );
 		$item = $content->getItem();
 
 		$item->revid = $page->getLatest(); //XXX: hack - glue refid to item, so we can compare it later in resetTestItem()
@@ -313,7 +294,6 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @param String $handle
 	 */
 	public static function resetTestItem( $handle ) {
-		/* @var Item $item */
 		$item = self::$testItems[ $handle ];
 
 		// check current data
@@ -337,13 +317,12 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * Deletes and re-creates the given test item.
 	 *
 	 * @param String $handle
-	 * @return \Wikibase\Item
+	 * @return Item
 	 */
 	public static function loadTestItem( $handle ) {
 		$page = static::getTestItemPage( $handle );
-
-		/* @var ItemContent $content */
 		$content = $page->getContent();
+
 		return $content->getItem();
 	}
 
@@ -353,13 +332,13 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @param String $handle the test item's handle
 	 *
 	 * @return Item the item
-	 * @throws \Exception if the handle is not known
+	 * @throws Exception if the handle is not known
 	 */
 	public static function getTestItem( $handle ) {
 		self::initTestItems();
 
 		if ( !isset( self::$testItems[$handle] ) ) {
-			throw new \Exception( "unknown test item: $handle" );
+			throw new Exception( "unknown test item: $handle" );
 		}
 
 		return self::$testItems[$handle];
@@ -370,14 +349,14 @@ class ActionTestCase extends MediaWikiTestCase {
 	 *
 	 * @param String $handle the test item's handle
 	 *
-	 * @return \WikiPage the item's page
-	 * @throws \Exception if the handle is not known
+	 * @return WikiPage the item's page
+	 * @throws Exception if the handle is not known
 	 */
 	public static function getTestItemPage( $handle ) {
 		$item = self::getTestItem( $handle );
 		$content = ItemContent::newFromItem( $item );
 		$title = $content->getTitle();
-		$page = \WikiPage::factory( $title );
+		$page = WikiPage::factory( $title );
 		return $page;
 	}
 }
