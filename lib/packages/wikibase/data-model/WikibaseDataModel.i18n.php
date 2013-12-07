@@ -154,6 +154,13 @@ $messages['ms'] = array(
 	'wikibasedatamodel-desc' => 'Komponen yang menakrifkan model data Wikibase',
 );
 
+/** Dutch (Nederlands)
+ * @author Siebrand
+ */
+$messages['nl'] = array(
+	'wikibasedatamodel-desc' => 'Component dat het datamodel van Wikibase definieert',
+);
+
 /** Occitan (occitan)
  * @author Cedric31
  */
