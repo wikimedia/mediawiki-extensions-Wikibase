@@ -5,13 +5,9 @@ namespace Wikibase\Test;
 use Wikibase\NamespaceUtils;
 
 /**
- * Tests for the Wikibase\Utils class.
+ * @covers Wikibase\NamespaceUtils
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseUtils
@@ -21,7 +17,7 @@ use Wikibase\NamespaceUtils;
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NamespaceUtilsTest extends \MediaWikiTestCase {
+class NamespaceUtilsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetEntityNamespaces() {
 		$this->assertInternalType( 'array', NamespaceUtils::getEntityNamespaces() );

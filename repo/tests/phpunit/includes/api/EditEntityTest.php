@@ -9,7 +9,7 @@ use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
 
 /**
- * Tests for the ApiWikibase class.
+ * @covers Wikibase\Api\EditEntity
  *
  * @since 0.1
  *

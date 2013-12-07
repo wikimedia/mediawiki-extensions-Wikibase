@@ -717,7 +717,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		$title = $content->getTitle();
-		$this->assertType( 'object', $title ); // sanity
+		$this->assertInternalType( 'object', $title ); // sanity
 
 		if ( $watched ) {
 			WatchAction::doWatch( $title, $user );
@@ -731,7 +731,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		if ( $title && $title->exists() ) {
 			// clean up
-			$page = \WikiPage::factory( $title );
+			$page = WikiPage::factory( $title );
 			$page->doDeleteArticle( "testing" );
 		}
 	}
@@ -812,7 +812,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		if ( !$new ) {
 			$title = $content->getTitle();
-			$this->assertType( 'object', $title ); // sanity
+			$this->assertInternalType( 'object', $title ); // sanity
 
 			if ( $watched ) {
 				WatchAction::doWatch( $title, $user );

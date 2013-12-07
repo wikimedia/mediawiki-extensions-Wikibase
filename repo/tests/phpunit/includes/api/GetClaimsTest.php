@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
 use Wikibase\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
@@ -12,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Statement;
 
 /**
- * Unit tests for the Wikibase\ApiGetClaims class.
+ * @covers Wikibase\Api\GetClaims
  *
  * @since 0.3
  *
