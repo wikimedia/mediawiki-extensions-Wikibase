@@ -1,31 +1,23 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
+use DataValues\StringValue;
+use UsageException;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
+use Wikibase\SnakList;
 use Wikibase\Statement;
 
 /**
- * Unit tests for the Wikibase\Api\RemoveQualifiers class.
+ * @covers Wikibase\Api\RemoveQualifiers
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.3
- *
- * @ingroup WikibaseRepoTest
  *
  * @group API
  * @group Database
@@ -48,9 +40,9 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	protected function snakProvider() {
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( 9001 );
-		$snaks[] = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyNoValueSnak( 42 );
+		$snaks[] = new PropertySomeValueSnak( 9001 );
+		$snaks[] = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
@@ -61,19 +53,19 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	protected function statementProvider() {
 		$statements = array();
 
-		$mainSnak = new \Wikibase\PropertyNoValueSnak( 42 );
-		$statement = new \Wikibase\Statement( $mainSnak );
+		$mainSnak = new PropertyNoValueSnak( 42 );
+		$statement = new Statement( $mainSnak );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
-			$snaks = new \Wikibase\SnakList( array( $snak ) );
+			$snaks = new SnakList( array( $snak ) );
 			$statement->setQualifiers( $snaks );
 			$statements[] = $statement;
 		}
 
 		$statement = clone $statement;
-		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
+		$snaks = new SnakList( $this->snakProvider() );
 		$statement->setQualifiers( $snaks );
 		$statements[] = $statement;
 
@@ -82,13 +74,13 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 	public function testRequests() {
 		foreach ( $this->statementProvider() as $statement ) {
-			$item = \Wikibase\Item::newEmpty();
+			$item = Item::newEmpty();
 
 			wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
-			$content = new \Wikibase\ItemContent( $item );
+			$content = new ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
 
-			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
+			$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 			$statement->setGuid( $guidGenerator->newGuid() );
 			$item->addClaim( $statement );
 
@@ -147,13 +139,15 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request should raise an exception' );
-		}
-		catch ( \UsageException $e ) {
+		} catch ( UsageException $e ) {
 			if ( $expectedError === null ) {
 				$this->assertTrue( true, 'Invalid request raised error' );
-			}
-			else {
-				$this->assertEquals( $expectedError, $e->getCodeString(), 'Invalid request raised correct error' );
+			} else {
+				$this->assertEquals(
+					$expectedError,
+					$e->getCodeString(),
+					'Invalid request raised correct error'
+				);
 			}
 		}
 	}
@@ -171,13 +165,17 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid claim guid did not throw an error' );
-		} catch ( \UsageException $e ) {
-			$this->assertEquals( $e->getCodeString(), 'invalid-guid', 'Invalid claim guid raised correct error' );
+		} catch ( UsageException $e ) {
+			$this->assertEquals(
+				$e->getCodeString(),
+				'invalid-guid',
+				'Invalid claim guid raised correct error'
+			);
 		}
 	}
 
 	public function invalidGuidProvider() {
-		$qualifierSnak = new \Wikibase\PropertyValueSnak( 722, new \DataValues\StringValue( 'abc') );
+		$qualifierSnak = new PropertyValueSnak( 722, new StringValue( 'abc') );
 		$hash = $qualifierSnak->getHash();
 
 		return array(

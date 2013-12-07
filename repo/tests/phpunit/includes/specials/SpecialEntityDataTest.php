@@ -2,17 +2,17 @@
 
 namespace Wikibase\Test;
 
-use \Wikibase\Item;
-use \Wikibase\ItemContent;
+use FauxRequest;
+use HttpError;
+use OutputPage;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\Repo\Specials\SpecialEntityData;
 
 /**
  * @covers SpecialEntityData
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Database
  *
@@ -48,8 +48,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	}
 
 	protected function newSpecialPage() {
-		$page = new \Wikibase\Repo\Specials\SpecialEntityData();
-		$page->getContext()->setOutput( new \OutputPage( $page->getContext() ) );
+		$page = new SpecialEntityData();
+		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
 		return $page;
 	}
 
@@ -88,7 +88,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		EntityDataRequestHandlerTest::injectIds( $expRegExp, $item );
 		EntityDataRequestHandlerTest::injectIds( $expHeaders, $item );
 
-		$request = new \FauxRequest( $params );
+		$request = new FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 
 		foreach ( $headers as $name => $value ) {
@@ -96,7 +96,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		}
 
 		try {
-			/* @var \FauxResponse $response */
+			/* @var FauxResponse $response */
 			list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
 
 			$this->assertEquals( $expCode, $response->getStatusCode(), "status code" );
@@ -105,10 +105,10 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			foreach ( $expHeaders as $name => $exp ) {
 				$value = $response->getheader( $name );
 				$this->assertNotNull( $value, "header: $name" );
-				$this->assertType( 'string', $value, "header: $name" );
+				$this->assertInternalType( 'string', $value, "header: $name" );
 				$this->assertRegExp( $exp, $value, "header: $name" );
 			}
-		} catch ( \HttpError $e ) {
+		} catch ( HttpError $e ) {
 			$this->assertEquals( $expCode, $e->getStatusCode(), "status code" );
 			$this->assertRegExp( $expRegExp, $e->getHTML(), "error output" );
 		}

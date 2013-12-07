@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialSetLabel;
+
 /**
- * Tests for the SpecialSetLabel class.
+ * @covers Wikibase\Repo\Specials\SpecialSetLabel
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -24,7 +22,7 @@ namespace Wikibase\Test;
 class SpecialSetLabelTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialSetLabel();
+		return new SpecialSetLabel();
 	}
 
 	public function testExecute() {

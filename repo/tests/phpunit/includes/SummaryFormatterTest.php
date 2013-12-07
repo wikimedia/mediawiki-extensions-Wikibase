@@ -32,7 +32,7 @@ use Wikibase\SummaryFormatter;
  * @author Daniel Kinzler
  *
  */
-class SummaryFormatterTest extends \MediaWikiTestCase {
+class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param DataValue $value

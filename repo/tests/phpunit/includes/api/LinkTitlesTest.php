@@ -5,13 +5,9 @@ namespace Wikibase\Test\Api;
 use ApiTestCase;
 
 /**
- * Tests for setting sitelinks throug from-to-pairs.
+ * @covers Wikibase\Api\LinkTitles
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
