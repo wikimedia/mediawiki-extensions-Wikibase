@@ -1,42 +1,26 @@
 <?php
 
-namespace Wikibase\Repo\Test;
+namespace Wikibase\Test;
 
-use Wikibase\Term;
-use Wikibase\EntityId;
 use Diff\Diff;
 use Diff\DiffOpChange;
+use Status;
+use Wikibase\EntityId;
+use Wikibase\Item;
+use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Term;
 
 /**
- * Tests Wikibase\LabelDescriptionDuplicateDetector.
+ * @covers Wikibase\LabelDescriptionDuplicateDetector
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LabelDescriptionDuplicateDetectorTest extends \MediaWikiTestCase {
+class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase {
 
 	public function conflictProvider() {
 		$argLists = array();
@@ -89,10 +73,10 @@ class LabelDescriptionDuplicateDetectorTest extends \MediaWikiTestCase {
 	public function testGetConflictingTerms( $langCode, $label, $description, $shouldConflict ) {
 		$termCache = new MockTermCache();
 
-		$detector = new \Wikibase\LabelDescriptionDuplicateDetector();
+		$detector = new LabelDescriptionDuplicateDetector();
 
-		$entity = \Wikibase\Item::newEmpty();
-		$entity->setId( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 1 ) );
+		$entity = Item::newEmpty();
+		$entity->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
 
 		$entity->setDescription( $langCode, $description );
 		$entity->setLabel( $langCode, $label );
@@ -102,10 +86,6 @@ class LabelDescriptionDuplicateDetectorTest extends \MediaWikiTestCase {
 		if ( $shouldConflict ) {
 			$this->assertEquals( 2, count( $conflicts ) );
 
-			/**
-			 * @var Term $conflictingLabel
-			 * @var Term $conflictingDescription
-			 */
 			list( $conflictingLabel, $conflictingDescription ) = $conflicts;
 
 			$this->assertEquals( $label, $conflictingLabel->getText() );
@@ -129,18 +109,20 @@ class LabelDescriptionDuplicateDetectorTest extends \MediaWikiTestCase {
 	 * @param Diff|null $labelsDiff
 	 * @param Diff|null $descriptionDiff
 	 */
-	public function testAddLabelDescriptionConflicts( $langCode, $label, $description, $shouldConflict, Diff $labelsDiff = null, Diff $descriptionDiff = null ) {
+	public function testAddLabelDescriptionConflicts( $langCode, $label, $description,
+		$shouldConflict, Diff $labelsDiff = null, Diff $descriptionDiff = null
+	) {
 		$termCache = new MockTermCache();
 
-		$detector = new \Wikibase\LabelDescriptionDuplicateDetector();
+		$detector = new LabelDescriptionDuplicateDetector();
 
-		$entity = \Wikibase\Item::newEmpty();
-		$entity->setId( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 1 ) );
+		$entity = Item::newEmpty();
+		$entity->setId( new EntityId( \Wikibase\Item::ENTITY_TYPE, 1 ) );
 
 		$entity->setDescription( $langCode, $description );
 		$entity->setLabel( $langCode, $label );
 
-		$status = new \Status();
+		$status = new Status();
 
 		$detector->addLabelDescriptionConflicts( $entity, $status, $termCache, $labelsDiff, $descriptionDiff );
 

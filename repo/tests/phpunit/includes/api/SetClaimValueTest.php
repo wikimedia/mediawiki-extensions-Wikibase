@@ -11,8 +11,11 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Entity;
 use Wikibase\Claim;
 use Wikibase\EntityId;
+use Wikibase\Item;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Property;
+use Wikibase\PropertyContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -71,10 +74,10 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getEntities( EntityId $propertyId ) {
-		$property = \Wikibase\Property::newEmpty();
+		$property = Property::newEmpty();
 		$property->setDataTypeId( 'string' );
 
-		$item = \Wikibase\Item::newEmpty();
+		$item = Item::newEmpty();
 
 		return array(
 			$this->addClaimsAndSave( $item, $propertyId ),
@@ -85,8 +88,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	public function testValidRequests() {
 		$argLists = array();
 
-		$property = \Wikibase\Property::newFromType( 'commonsMedia' );
-		$content = new \Wikibase\PropertyContent( $property );
+		$property = Property::newFromType( 'commonsMedia' );
+		$content = new PropertyContent( $property );
 		$content->save( '', null, EDIT_NEW );
 		$property = $content->getEntity();
 

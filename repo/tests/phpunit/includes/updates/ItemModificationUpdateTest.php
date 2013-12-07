@@ -1,17 +1,18 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemModificationUpdate;
-use \Wikibase\ItemContent;
+
+use TestSites;
+use Wikibase\ItemContent;
+use Wikibase\ItemDeletionUpdate;
+use Wikibase\ItemModificationUpdate;
+use Wikibase\StoreFactory;
+use Wikibase\Test\TestItemContents;
 
 /**
- *  Tests for the Wikibase\ItemModificationUpdate class.
+ * @covers Wikibase\ItemModificationUpdate
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -42,8 +43,10 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 
 	public function itemProvider() {
 		return array_map(
-			function( ItemContent $itemContent ) { return array( $itemContent ); },
-			\Wikibase\Test\TestItemContents::getItems()
+			function( ItemContent $itemContent ) {
+				return array( $itemContent );
+			},
+			TestItemContents::getItems()
 		);
 	}
 
@@ -52,8 +55,8 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 	 * @param ItemContent $itemContent
 	 */
 	public function testDoUpdate( ItemContent $itemContent ) {
-		\TestSites::insertIntoDb();
-		$linkLookup = \Wikibase\StoreFactory::getStore()->newSiteLinkCache();
+		TestSites::insertIntoDb();
+		$linkLookup = StoreFactory::getStore()->newSiteLinkCache();
 
 		$itemContent->save( '', null, EDIT_NEW );
 
@@ -72,7 +75,7 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 
 		// TODO: verify terms
 
-		$update = new \Wikibase\ItemDeletionUpdate( $itemContent );
+		$update = new ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
 	}
 

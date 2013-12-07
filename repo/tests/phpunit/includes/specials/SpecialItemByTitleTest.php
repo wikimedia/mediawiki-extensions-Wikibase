@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialItemByTitle;
+
 /**
- * Tests for the SpecialItemByTitle class.
+ * @covers Wikibase\Repo\Specials\SpecialItemByTitle
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -26,7 +24,7 @@ namespace Wikibase\Test;
 class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialItemByTitle();
+		return new SpecialItemByTitle();
 	}
 
 	public function testExecute() {

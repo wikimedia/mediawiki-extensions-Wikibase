@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use Diff\ListDiffer;
@@ -10,30 +11,19 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Snak;
+use Wikibase\SnakList;
+use Wikibase\Statement;
 
 /**
- * Tests for the ClaimSummaryBuilder class.
+ * @covers Wikibase\ClaimSummaryBuilder
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
- *
- * @file
  * @since 0.4
- *
- * @ingroup Wikibase
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -43,17 +33,17 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  */
-class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
+class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return \Wikibase\Snak[]
+	 * @return Snak[]
 	 */
 	protected function snakProvider() {
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( 9001 );
-		$snaks[] = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyNoValueSnak( 42 );
+		$snaks[] = new PropertySomeValueSnak( 9001 );
+		$snaks[] = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
@@ -64,24 +54,24 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	protected function claimProvider() {
 		$statements = array();
 
-		$mainSnak = new \Wikibase\PropertyValueSnak( 112358, new \DataValues\StringValue( "don't panic" ) );
-		$statement = new \Wikibase\Statement( $mainSnak );
+		$mainSnak = new PropertyValueSnak( 112358, new StringValue( "don't panic" ) );
+		$statement = new Statement( $mainSnak );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
-			$snaks = new \Wikibase\SnakList( array( $snak ) );
-			$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+			$snaks = new SnakList( array( $snak ) );
+			$statement->getReferences()->addReference( new Reference( $snaks ) );
 			$statements[] = $statement;
 		}
 
 		$statement = clone $statement;
-		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
-		$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
+		$snaks = new SnakList( $this->snakProvider() );
+		$statement->getReferences()->addReference( new Reference( $snaks ) );
 		$statements[] = $statement;
 
 		/**
-		 * @var \Wikibase\Statement[] $statements
+		 * @var Statement[] $statements
 		 */
 
 		$i = 0;
@@ -90,7 +80,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 			$guid = "Q{$i}\$7{$i}d";
 
 			$statement->setGuid( $guid );
-			$statement->setRank( \Wikibase\Statement::RANK_NORMAL );
+			$statement->setRank( Statement::RANK_NORMAL );
 		}
 
 		return $statements;
@@ -104,7 +94,9 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 
 			//change mainsnak
 			$modifiedClaim = clone $claim;
-			$modifiedClaim->setMainSnak( new \Wikibase\PropertyValueSnak( 112358, new \DataValues\StringValue( "let's panic!!!" ) ) );
+			$modifiedClaim->setMainSnak(
+				new PropertyValueSnak( 112358, new StringValue( "let's panic!!!" ) )
+			);
 			$testCaseArgs[] = $claim;
 			$testCaseArgs[] = $modifiedClaim;
 			$testCaseArgs[] = 'update';
@@ -112,7 +104,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 
 			//change qualifiers
 			$modifiedClaim = clone $claim;
-			$modifiedClaim->setQualifiers( new \Wikibase\SnakList( $this->snakProvider() ) );
+			$modifiedClaim->setQualifiers( new SnakList( $this->snakProvider() ) );
 			$testCaseArgs[] = $claim;
 			$testCaseArgs[] = $modifiedClaim;
 			$testCaseArgs[] = 'update-qualifiers';
@@ -120,7 +112,7 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 
 			//change rank
 			$modifiedClaim = clone $claim;
-			$modifiedClaim->setRank( \Wikibase\Statement::RANK_PREFERRED );
+			$modifiedClaim->setRank( Statement::RANK_PREFERRED );
 			$testCaseArgs[] = $claim;
 			$testCaseArgs[] = $modifiedClaim;
 			$testCaseArgs[] = 'update-rank';
@@ -128,8 +120,10 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 
 			//change mainsnak & qualifiers
 			$modifiedClaim = clone $claim;
-			$modifiedClaim->setMainSnak( new \Wikibase\PropertyValueSnak( 112358, new \DataValues\StringValue( "let's panic!!!" ) ) );
-			$modifiedClaim->setQualifiers( new \Wikibase\SnakList( $this->snakProvider() ) );
+			$modifiedClaim->setMainSnak(
+				new PropertyValueSnak( 112358, new StringValue( "let's panic!!!" ) )
+			);
+			$modifiedClaim->setQualifiers( new SnakList( $this->snakProvider() ) );
 			$testCaseArgs[] = $claim;
 			$testCaseArgs[] = $modifiedClaim;
 			$testCaseArgs[] = 'update-rank';

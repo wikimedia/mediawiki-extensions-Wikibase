@@ -12,7 +12,7 @@ use Wikibase\SiteLinkCache;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers \Wikibase\Api\ItemByTitleHelper
+ * @covers Wikibase\Api\ItemByTitleHelper
  *
  * @since 0.4
  *
@@ -23,7 +23,7 @@ use Wikibase\StringNormalizer;
  * @author Marius Hoch < hoo@online.de >
  * @author Adam Shorland
  */
-class ItemByTitleHelperTest extends \MediaWikiTestCase {
+class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 	public function getSiteStoreMock() {
 		$dummySite = new MediaWikiSite();
@@ -155,7 +155,7 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 		$itemByTitleHelper->getItemIds( $sites, $titles, true );
 	}
 
-	static public function normalizeTitleProvider() {
+	public function normalizeTitleProvider() {
 		return array(
 			array(
 				'foo_bar',
@@ -189,10 +189,10 @@ class ItemByTitleHelperTest extends \MediaWikiTestCase {
 
 		// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
 		// XXX: The Normalized title is passed by via reference to $title...
-		$this->assertEquals( Title::newFromText( $title )->getPrefixedText() , $title );
+		$this->assertEquals( Title::newFromText( $title )->getPrefixedText(), $title );
 	}
 
-	public function testNoSites(){
+	public function testNoSites() {
 		$this->setExpectedException( 'UsageException' );
 
 		$itemByTitleHelper = new ItemByTitleHelper(

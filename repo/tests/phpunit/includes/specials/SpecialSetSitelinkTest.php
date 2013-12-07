@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialSetSiteLink;
+
 /**
- * Tests for the SpecialSetSitelink class.
+ * @covers Wikibase\Repo\Specials\SpecialSetSiteLink
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -24,7 +22,7 @@ namespace Wikibase\Test;
 class SpecialSetSitelinkTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialSetSiteLink();
+		return new SpecialSetSiteLink();
 	}
 
 	public function testExecute() {

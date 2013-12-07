@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialSetAliases;
+
 /**
- * Tests for the SpecialSetAliases class.
+ * @covers Wikibase\Repo\Specials\SpecialSetAliases
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -24,7 +22,7 @@ namespace Wikibase\Test;
 class SpecialSetAliasesTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialSetAliases();
+		return new SpecialSetAliases();
 	}
 
 	public function testExecute() {

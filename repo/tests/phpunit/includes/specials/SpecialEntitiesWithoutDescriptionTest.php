@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription;
+
 /**
- * Tests for the SpecialEntitiesWithoutDescription class.
+ * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -25,7 +23,7 @@ namespace Wikibase\Test;
 class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription();
+		return new SpecialEntitiesWithoutDescription();
 	}
 
 	public function testExecute() {
@@ -36,6 +34,7 @@ class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 				'id' => 'wb-entitieswithoutpage-language',
 				'name' => 'language',
 			) );
+
 		$matchers['submit'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -44,7 +43,6 @@ class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 				'type' => 'submit',
 				'name' => 'submit',
 			) );
-
 
 		list( $output, ) = $this->executeSpecialPage( '' );
 		foreach( $matchers as $key => $matcher ){

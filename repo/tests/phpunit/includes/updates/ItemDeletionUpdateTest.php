@@ -1,32 +1,17 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemDeletionUpdate;
-use \Wikibase\ItemContent;
+
+use DataUpdate;
+use Wikibase\ItemContent;
+use Wikibase\ItemDeletionUpdate;
+use Wikibase\StoreFactory;
+use Wikibase\Test\TestItemContents;
 
 /**
- * Tests for the Wikibase\ItemDeletionUpdate class.
+ * @covers Wikibase\ItemDeletionUpdate
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -48,16 +33,18 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 	//@todo: make this a baseclass to use with all types of entities.
 
 	public function testConstruct() {
-		$update = new ItemDeletionUpdate( \Wikibase\ItemContent::newEmpty() );
+		$update = new ItemDeletionUpdate( ItemContent::newEmpty() );
 		$this->assertInstanceOf( '\Wikibase\ItemDeletionUpdate', $update );
 		$this->assertInstanceOf( '\Wikibase\EntityDeletionUpdate', $update );
-		$this->assertInstanceOf( '\DataUpdate', $update );
+		$this->assertInstanceOf( 'DataUpdate', $update );
 	}
 
 	public function itemProvider() {
 		return array_map(
-			function( ItemContent $itemContent ) { return array( $itemContent ); },
-			\Wikibase\Test\TestItemContents::getItems()
+			function( ItemContent $itemContent ) {
+				return array( $itemContent );
+			},
+			TestItemContents::getItems()
 		);
 	}
 
@@ -72,7 +59,7 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 
 		$id = $itemContent->getItem()->getId()->getNumericId();
 
-		$linkLookup = \Wikibase\StoreFactory::getStore()->newSiteLinkCache();
+		$linkLookup = StoreFactory::getStore()->newSiteLinkCache();
 		$this->assertEquals( 0, $linkLookup->countLinks( array( $id ) ) );
 	}
 
