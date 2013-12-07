@@ -1,6 +1,8 @@
 <?php
+
 namespace Wikibase\Test;
 
+use MWException;
 use User;
 use Wikibase\NamespaceUtils;
 use Wikibase\SiteLink;
@@ -8,28 +10,9 @@ use WikiPage;
 use Title;
 
 /**
- * Tests for blocking of direct editing.
+ * @covers EditEntityAction
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -95,7 +78,7 @@ class EditEntityActionTest extends ActionTestCase {
 		for ( $i = abs($ofs); $i > 0; $i -= 1 ) {
 			$rev = $rev->getPrevious();
 			if ( !$rev ) {
-				throw new \MWException( "Page " . $page->getTitle()->getPrefixedDBkey() . " does not have " . ( abs($ofs) +1 ) . " revisions" );
+				throw new MWException( "Page " . $page->getTitle()->getPrefixedDBkey() . " does not have " . ( abs($ofs) +1 ) . " revisions" );
 			}
 		}
 
