@@ -87,7 +87,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 * Returns a map of labels to EntityIds for all Properties currently defined.
 	 * The information is taking from the cache if possible, and loaded from a TermIndex if not.
 	 *
-	 * @param string $recache Flag, set to 'recache' to fetch fresh data from the database.
+	 * @param string $recache Flag, set to 'recache' to get fresh data from the database.
 	 *
 	 * @return EntityId[]
 	 */
