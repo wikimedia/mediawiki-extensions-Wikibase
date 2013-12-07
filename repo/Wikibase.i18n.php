@@ -1446,31 +1446,31 @@ $messages['af'] = array(
 	'content-model-wikibase-item' => 'Wikibase-item',
 	'content-model-wikibase-property' => 'Wikibase-eienskap',
 	'content-model-wikibase-query' => 'Wikibase-soekopdrag',
-	'right-item-override' => 'Oorskryf items',
+	'right-item-override' => 'Oorskryf items', # Fuzzy
 	'right-item-create' => 'Skep items',
-	'right-item-remove' => 'Skrap items',
-	'right-property-override' => 'Oorskryf eienskappe',
+	'right-item-remove' => 'Skrap items', # Fuzzy
+	'right-property-override' => 'Oorskryf eienskappe', # Fuzzy
 	'right-property-create' => 'Skep eienskappe',
-	'right-property-remove' => 'Skrap eienskappe',
+	'right-property-remove' => 'Skrap eienskappe', # Fuzzy
 	'right-alias-remove' => 'Skrap aliasse',
-	'right-label-remove' => 'Skrap etikette',
+	'right-label-remove' => 'Skrap etikette', # Fuzzy
 	'right-label-update' => 'Wysig etikette',
-	'right-description-remove' => 'Skrap beskrywings',
+	'right-description-remove' => 'Skrap beskrywings', # Fuzzy
 	'right-description-update' => 'Wysig beskrywings',
-	'action-item-override' => 'oorskryf items',
+	'action-item-override' => 'oorskryf items', # Fuzzy
 	'action-item-create' => 'skep items',
-	'action-item-remove' => 'skrap items',
-	'action-property-override' => 'oorskryf eienskappe',
+	'action-item-remove' => 'skrap items', # Fuzzy
+	'action-property-override' => 'oorskryf eienskappe', # Fuzzy
 	'action-property-create' => 'skep eienskappe',
-	'action-property-remove' => 'skrap eienskappe',
+	'action-property-remove' => 'skrap eienskappe', # Fuzzy
 	'action-alias-update' => 'opdateer aliasse',
 	'action-alias-remove' => 'skrap aliasse',
 	'action-sitelink-remove' => 'verwyder webwerfskakels',
 	'action-sitelink-update' => 'opdateer webwerfskakels',
-	'action-linktitles-update' => 'opdateer skakelbeskrywings',
-	'action-label-remove' => 'skrap etikette',
+	'action-linktitles-update' => 'opdateer skakelbeskrywings', # Fuzzy
+	'action-label-remove' => 'skrap etikette', # Fuzzy
 	'action-label-update' => 'wysig etikette',
-	'action-description-remove' => 'skrap beskrywings',
+	'action-description-remove' => 'skrap beskrywings', # Fuzzy
 	'action-description-update' => 'wysig beskrywings',
 );
 
@@ -2072,16 +2072,16 @@ $messages['be'] = array(
 	'content-model-wikibase-item' => 'Элемент рэпазітара Wikibase',
 	'content-model-wikibase-property' => 'Уласцівасць элемента Wikibase',
 	'content-model-wikibase-query' => 'Запыт Wikibase',
-	'right-item-override' => 'перавызначэнне элементаў',
+	'right-item-override' => 'перавызначэнне элементаў', # Fuzzy
 	'right-item-create' => "стварэнне элементаў (аб'ектаў)",
-	'right-item-remove' => "выдаленне элементаў (аб'ектаў)",
+	'right-item-remove' => "выдаленне элементаў (аб'ектаў)", # Fuzzy
 	'right-alias-remove' => 'выдаленне альтэрнатыўных назваў (псеўданімаў, сінонімаў)',
 	'right-sitelink-remove' => 'выдаленне спасылак',
 	'right-sitelink-update' => 'абнаўленне спасылак',
-	'right-linktitles-update' => 'абнаўленне загалоўкаў спасылак',
-	'right-label-remove' => 'выдаленне назваў',
+	'right-linktitles-update' => 'абнаўленне загалоўкаў спасылак', # Fuzzy
+	'right-label-remove' => 'выдаленне назваў', # Fuzzy
 	'right-label-update' => 'абнаўленне назваў',
-	'right-description-remove' => 'выдаленне апісанняў',
+	'right-description-remove' => 'выдаленне апісанняў', # Fuzzy
 	'right-description-update' => 'абнаўленне апісанняў',
 );
 
@@ -2331,34 +2331,34 @@ $messages['be-tarask'] = array(
 	'content-model-wikibase-item' => 'Прадмет у Вікібазе',
 	'content-model-wikibase-property' => 'Уласьцівасьць Wikibase',
 	'content-model-wikibase-query' => 'Запыт Wikibase',
-	'right-item-override' => 'перавызначаць аб’екты',
+	'right-item-override' => 'перавызначаць аб’екты', # Fuzzy
 	'right-item-create' => 'ствараць аб’екты',
-	'right-item-remove' => 'выдаляць аб’екты',
-	'right-property-override' => 'перавызначаць уласьцівасьці',
+	'right-item-remove' => 'выдаляць аб’екты', # Fuzzy
+	'right-property-override' => 'перавызначаць уласьцівасьці', # Fuzzy
 	'right-property-create' => 'ствараць уласьцівасьці',
-	'right-property-remove' => 'выдаляць уласьцівасьці',
+	'right-property-remove' => 'выдаляць уласьцівасьці', # Fuzzy
 	'right-alias-remove' => 'выдаляць псэўданімы',
 	'right-sitelink-remove' => 'выдаляць спасылкі',
 	'right-sitelink-update' => 'абнаўляць спасылкі',
-	'right-linktitles-update' => 'абнаўляць старонкі спасылак',
-	'right-label-remove' => 'выдаляць меткі',
+	'right-linktitles-update' => 'абнаўляць старонкі спасылак', # Fuzzy
+	'right-label-remove' => 'выдаляць меткі', # Fuzzy
 	'right-label-update' => 'абнаўляць меткі',
-	'right-description-remove' => 'выдаляць апісаньні',
+	'right-description-remove' => 'выдаляць апісаньні', # Fuzzy
 	'right-description-update' => 'абнаўляць апісаньні',
-	'action-item-override' => 'перавызначаць аб’екты',
+	'action-item-override' => 'перавызначаць аб’екты', # Fuzzy
 	'action-item-create' => 'ствараць аб’екты',
-	'action-item-remove' => 'выдаляць аб’екты',
-	'action-property-override' => 'перавызначаць уласьцівасьці',
+	'action-item-remove' => 'выдаляць аб’екты', # Fuzzy
+	'action-property-override' => 'перавызначаць уласьцівасьці', # Fuzzy
 	'action-property-create' => 'ствараць уласьцівасьці',
-	'action-property-remove' => 'выдаляць уласьцівасьці',
+	'action-property-remove' => 'выдаляць уласьцівасьці', # Fuzzy
 	'action-alias-update' => 'зьмяняць сынонімы',
 	'action-alias-remove' => 'выдаляць сынонімы',
 	'action-sitelink-remove' => 'выдаляць спасылкі',
 	'action-sitelink-update' => 'зьмяняць спасылкі',
-	'action-linktitles-update' => 'абнаўляць загалоўкі спасылак',
-	'action-label-remove' => 'выдаляць меткі',
+	'action-linktitles-update' => 'абнаўляць загалоўкі спасылак', # Fuzzy
+	'action-label-remove' => 'выдаляць меткі', # Fuzzy
 	'action-label-update' => 'зьмяняць меткі',
-	'action-description-remove' => 'выдаляць апісаньні',
+	'action-description-remove' => 'выдаляць апісаньні', # Fuzzy
 	'action-description-update' => 'зьмяняць апісаньні',
 );
 
@@ -2416,10 +2416,10 @@ $messages['bg'] = array(
 	'content-model-wikibase-item' => 'Обект в Уикиданни',
 	'content-model-wikibase-property' => 'Свойство в Уикиданни',
 	'content-model-wikibase-query' => 'Заявка към Уикиданни',
-	'right-item-override' => 'Презаписване на обекти',
+	'right-item-override' => 'Презаписване на обекти', # Fuzzy
 	'right-item-create' => 'Създаване на обекти',
-	'right-item-remove' => 'Премахване на обекти',
-	'right-description-remove' => 'Премахване на описанията',
+	'right-item-remove' => 'Премахване на обекти', # Fuzzy
+	'right-description-remove' => 'Премахване на описанията', # Fuzzy
 	'right-description-update' => 'Обновяване на описанията',
 );
 
@@ -3416,7 +3416,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'action-description-update' => 'aktualizovat popisy',
 );
 
-/** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
+/** Church Slavic (словѣньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
  * @author ОйЛ
  */
 $messages['cu'] = array(
@@ -3911,6 +3911,7 @@ for at finde ud af, hvad der er sket med det.',
  * @author Nipsky
  * @author Purodha
  * @author Se4598
+ * @author Shirayuki
  * @author Tomabrafix
  * @author Umherirrender
  * @author Vogone
@@ -3964,7 +3965,7 @@ $messages['de'] = array(
 	'wikibase-aliases-label' => 'Auch bekannt als:',
 	'wikibase-aliases-input-help-message' => 'Sofern dieser Datensatz unter mehr als einem bestimmten Namen bekannt ist, kannst du Aliasse und Synonyme eingeben, damit er auch unter seinen alternativen Namen gefunden werden kann.',
 	'wikibase-aliases-empty' => 'Es wurden keine Aliasse definiert.',
-	'wikibase-datatype-label' => 'Datentyp',
+	'wikibase-datatype-label' => 'Datentyp:',
 	'wikibase-claimview-snak-tooltip' => 'Gib einen Wert ein, der der Eigenschaft namens „$1“ entspricht. Falls die Eigenschaft keinen bestimmten Wert hat oder der derzeitige Wert unbekannt ist, kannst du eine Alternative wählen, um einen benutzerdefinierten Wert anzugeben, indem du auf das Symbol neben dem Werteingabekasten klickst.',
 	'wikibase-claimview-snak-new-tooltip' => 'Nach der Festlegung einer Eigenschaft kannst du einen dazugehörigen Wert eingeben. Falls die Eigenschaft keinen bestimmten Wert hat oder der derzeitige Wert unbekannt ist, kannst du eine Alternative wählen, um einen benutzerdefinierten Wert anzugeben, indem du auf das Symbol neben dem Werteingabekasten klickst.',
 	'wikibase-statementview-rank-preferred' => 'Vorrangig',
@@ -4015,7 +4016,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-itemdisambiguation-lookup-label' => 'Bezeichnung:',
 	'wikibase-itemdisambiguation-submit' => 'Suchen',
 	'wikibase-itemdisambiguation-nothing-found' => 'Es wurde leider kein Datenobjekt mit dieser Bezeichnung gefunden.',
-	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Suche nach einem Datenobjekt]', # Fuzzy
+	'wikibase-itemdisambiguation-search' => 'Du kannst [{{fullurl:Special:Search|search=$1}} nach dem Datenobjekt suchen].',
 	'wikibase-itemdisambiguation-create' => 'Du kannst auch [{{fullurl:Special:NewItem|label=$1}} ein Datenobjekt erstellen].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Die angegebene Sprachkennung ist dem System leider nicht bekannt. Bitte verwende eine gültige Kennung, wie bspw. „de“.',
 	'wikibase-itemdisambiguation-description' => 'Die für die Suche genutzten Werte müssen vollständige Texteinträge sein. Sprache ist eine Kennung, z.&nbsp;B. „de“.',
@@ -4532,34 +4533,34 @@ $messages['dsb'] = array(
 	'content-model-wikibase-item' => 'Element z Wikibase',
 	'content-model-wikibase-property' => 'Kakosć Wikibase',
 	'content-model-wikibase-query' => 'Napšašowanje Wikibase',
-	'right-item-override' => 'Elementy pśepisaś',
+	'right-item-override' => 'Elementy pśepisaś', # Fuzzy
 	'right-item-create' => 'Elementy napóraś',
-	'right-item-remove' => 'Elementy wótpóraś',
-	'right-property-override' => 'Kakosći pśepisaś',
+	'right-item-remove' => 'Elementy wótpóraś', # Fuzzy
+	'right-property-override' => 'Kakosći pśepisaś', # Fuzzy
 	'right-property-create' => 'Kakosći napóraś',
-	'right-property-remove' => 'Kakosći wótpóraś',
+	'right-property-remove' => 'Kakosći wótpóraś', # Fuzzy
 	'right-alias-remove' => 'Aliase wótpóraś',
 	'right-sitelink-remove' => 'Sedłowe wótkaze wótpóraś',
 	'right-sitelink-update' => 'Sedłowe wótkaze aktualizěrowaś',
-	'right-linktitles-update' => 'Wótkazowe titele aktualizěrowaś',
-	'right-label-remove' => 'Pomjenjenja wótpóraś',
+	'right-linktitles-update' => 'Wótkazowe titele aktualizěrowaś', # Fuzzy
+	'right-label-remove' => 'Pomjenjenja wótpóraś', # Fuzzy
 	'right-label-update' => 'Pomjenjenja aktualizěrowaś',
-	'right-description-remove' => 'Wopisanja wótpóraś',
+	'right-description-remove' => 'Wopisanja wótpóraś', # Fuzzy
 	'right-description-update' => 'Wopisanja aktualizěrowaś',
-	'action-item-override' => 'elementy pśepisaś',
+	'action-item-override' => 'elementy pśepisaś', # Fuzzy
 	'action-item-create' => 'elementy napóraś',
-	'action-item-remove' => 'elementy wótpóraś',
-	'action-property-override' => 'kakosći pśepisaś',
+	'action-item-remove' => 'elementy wótpóraś', # Fuzzy
+	'action-property-override' => 'kakosći pśepisaś', # Fuzzy
 	'action-property-create' => 'kakosći napóraś',
-	'action-property-remove' => 'kakosći wótpóraś',
+	'action-property-remove' => 'kakosći wótpóraś', # Fuzzy
 	'action-alias-update' => 'aliase aktualizěrowaś',
 	'action-alias-remove' => 'aliase wótpóraś',
 	'action-sitelink-remove' => 'sedłowe wótkaze wótpóraś',
 	'action-sitelink-update' => 'sedłowe wótkaze aktualizěrowaś',
-	'action-linktitles-update' => 'wótkazowe titele aktualizěrowaś',
-	'action-label-remove' => 'pomjenjenja wótpóraś',
+	'action-linktitles-update' => 'wótkazowe titele aktualizěrowaś', # Fuzzy
+	'action-label-remove' => 'pomjenjenja wótpóraś', # Fuzzy
 	'action-label-update' => 'pomjenjenja aktualizěrowaś',
-	'action-description-remove' => 'wopisanja wótpóraś',
+	'action-description-remove' => 'wopisanja wótpóraś', # Fuzzy
 	'action-description-update' => 'wopisanja aktualizěrowaś',
 );
 
@@ -4978,6 +4979,7 @@ por trovi de kie ĝi venis.',
  * @author Mr.Ajedrez
  * @author Ovruni
  * @author Savh
+ * @author Shirayuki
  * @author The Anonymouse
  * @author Vivaelcelta
  * @author Zolo
@@ -5029,7 +5031,7 @@ $messages['es'] = array(
 	'wikibase-aliases-label' => 'Alias y nombres alternativos:',
 	'wikibase-aliases-input-help-message' => 'Si este conjunto de datos es conocido bajo más de un nombre en particular, puede escribir sus alias y sinónimos, para que así pueda ser encontrado por sus nombres alternativos.',
 	'wikibase-aliases-empty' => 'No hay alias definidos.',
-	'wikibase-datatype-label' => 'Tipo de dato',
+	'wikibase-datatype-label' => 'Tipo de dato:',
 	'wikibase-claimview-snak-tooltip' => 'Ingresa un valor correspondiente a la propiedad "$1". Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir una alternativa y especificar un valor personalizado haciendo clic en el icono junto a la caja de entrada del valor.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fuente|fuentes}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Una fuente|$1 fuentes}} aún no se guardó',
@@ -5557,6 +5559,7 @@ $messages['eu'] = array(
  * @author Pouyana
  * @author Reza1615
  * @author Rtemis
+ * @author Shirayuki
  * @author Taha
  * @author Zolo
  * @author ZxxZxxZ
@@ -5609,7 +5612,7 @@ $messages['fa'] = array(
 	'wikibase-aliases-label' => 'نام(های) دیگر:',
 	'wikibase-aliases-input-help-message' => 'اگر این دادگان با بیش از یک نام خاص شناخته می‌شود، می‌توانید نام‌های مستعار و هم‌معنی‌هایش را وارد کنید تا بتوان آن را با نام‌های دیگرش نیز پیدا کرد.',
 	'wikibase-aliases-empty' => 'هیچ نام مستعاری تعریف نشده‌است.',
-	'wikibase-datatype-label' => 'نوع داده',
+	'wikibase-datatype-label' => 'نوع داده:',
 	'wikibase-claimview-snak-tooltip' => 'مقدار مربوط به ویژگی «$1» را وارد کنید. اگر ویژگی فاقد مقدار است یا مقدار کنونی در دسترس نیست، می‌توانید مقدار موازی خود را با کلیک کردن روی دکمهٔ کنار جعبهٔ مقدار وارد کنید.',
 	'wikibase-claimview-snak-new-tooltip' => 'بعد از تعیین یک ویژگی، شما می‌توانید مقدار مربوطه را نیز وارد کنید. اگر ویژگی فاقد مقدار بود یا مقدار در دسترس نبود، شما می‌توانید با کلیک کردن روی دکمهٔ کنار جعبه مقدار، مقدار مورد نظر خود را وارد کنید.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|منبع|منبع}}',
@@ -5916,6 +5919,7 @@ $messages['fa'] = array(
  * @author Nike
  * @author Olli
  * @author Samoasambia
+ * @author Shirayuki
  * @author Silvonen
  * @author Stryn
  * @author VezonThunder
@@ -5969,7 +5973,7 @@ $messages['fi'] = array(
 	'wikibase-aliases-label' => 'Tunnetaan myös nimellä',
 	'wikibase-aliases-input-help-message' => 'Jos tämä datakokonaisuus tunnetaan useammalla kuin yhdellä nimellä, voit lisätä aliaksia ja synonyymejä, jotta sen voi löytää myös muilla nimillään.',
 	'wikibase-aliases-empty' => 'Aliaksia ei määritetty.',
-	'wikibase-datatype-label' => 'Tietotyyppi',
+	'wikibase-datatype-label' => 'Tietotyyppi:',
 	'wikibase-claimview-snak-tooltip' => 'Kirjoita arvo, joka vastaa ominaisuutta "$1". Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
 	'wikibase-claimview-snak-new-tooltip' => 'Määritettyäsi ominaisuuden voit kirjoittaa sitä vastaavan arvon. Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|lähde|lähdettä}}',
@@ -6241,6 +6245,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author Nnemo
  * @author Nodulation
  * @author Peter17
+ * @author Shirayuki
  * @author Tititou36
  * @author Tpt
  * @author Wyz
@@ -6294,7 +6299,7 @@ $messages['fr'] = array(
 	'wikibase-aliases-label' => 'Alias&nbsp;:',
 	'wikibase-aliases-input-help-message' => "Si cet ensemble de données est connu sous plus d'un nom particulier, vous pouvez entrer des alias et des synonymes, afin qu'il puisse être trouvé par ses autres noms.",
 	'wikibase-aliases-empty' => 'Aucun alias défini.',
-	'wikibase-datatype-label' => 'Type de données',
+	'wikibase-datatype-label' => 'Type de données&nbsp;:',
 	'wikibase-claimview-snak-tooltip' => 'Saisissez une valeur correspondant à la propriété appelée « $1 ». Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle n’est pas connue, vous pouvez choisir une alternative pour spécifier une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.',
 	'wikibase-claimview-snak-new-tooltip' => 'Après avoir spécifié une propriété, vous pouvez saisir une valeur correspondante. Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle est inconnue, vous pouvez choisir une alternative en spécifiant une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.',
 	'wikibase-statementview-rank-preferred' => 'Rang privilégié',
@@ -6345,7 +6350,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-itemdisambiguation-lookup-label' => 'Libellé&nbsp;:',
 	'wikibase-itemdisambiguation-submit' => 'Rechercher',
 	'wikibase-itemdisambiguation-nothing-found' => "Désolé, aucun élément avec ce libellé n'a été trouvé.",
-	'wikibase-itemdisambiguation-search' => 'Recherche de l’élément en utilisant [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
+	'wikibase-itemdisambiguation-search' => 'Vous pouvez [{{fullurl:Special:Search|search=$1}} rechercher cet élément].',
 	'wikibase-itemdisambiguation-create' => 'Vous pouvez [{{fullurl:Special:NewItem|label=$1}} créer l’élément].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Le code de langue que vous avez donné n’est pas reconnu par le système, désolé. Veuillez utiliser un code valide, par exemple «&nbsp;en&nbsp;».',
 	'wikibase-itemdisambiguation-description' => 'Les valeurs utilisées pour la recherche doivent être le texte entier. La langue est un identifiant, comme «&nbsp;en&nbsp;».',
@@ -6728,16 +6733,16 @@ $messages['frp'] = array(
 	'content-model-wikibase-item' => 'Piéce de Wikibase',
 	'content-model-wikibase-property' => 'Propriètât de Wikibase',
 	'content-model-wikibase-query' => 'Demanda de Wikibase',
-	'right-item-override' => 'Ècllafar des piéces',
+	'right-item-override' => 'Ècllafar des piéces', # Fuzzy
 	'right-item-create' => 'Fâre des piéces',
-	'right-item-remove' => 'Enlevar des piéces',
+	'right-item-remove' => 'Enlevar des piéces', # Fuzzy
 	'right-alias-remove' => 'Enlevar des aliâs',
 	'right-sitelink-remove' => 'Enlevar des lims de seto',
 	'right-sitelink-update' => 'Betar a jorn des lims de seto',
-	'right-linktitles-update' => 'Betar a jorn des titros de lim',
-	'right-label-remove' => 'Enlevar des lambéls',
+	'right-linktitles-update' => 'Betar a jorn des titros de lim', # Fuzzy
+	'right-label-remove' => 'Enlevar des lambéls', # Fuzzy
 	'right-label-update' => 'Betar a jorn des lambéls',
-	'right-description-remove' => 'Enlevar des dèscripcions',
+	'right-description-remove' => 'Enlevar des dèscripcions', # Fuzzy
 	'right-description-update' => 'Betar a jorn des dèscripcions',
 );
 
@@ -7012,7 +7017,6 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 	'wikibase-item-summary-wbsetqualifier-update' => 'Modifico {{PLURAL:$1|un cualificativo|varios cualificativos}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Elimino {{PLURAL:$1|un cualificativo|varios cualificativos}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Elimino {{PLURAL:$3|unha referencia|varias referencias}} da afirmación',
-	'wikibase-item-summary-wbsetstatementrank' => 'Modifico o rango da afirmación de "$3" a "$4"',
 	'wikibase-item-summary-wbmergeitems-from' => 'Fusiono o elemento desde "$3"',
 	'wikibase-item-summary-wbmergeitems-to' => 'Fusiono o elemento con "$3"',
 	'wikibase-property-summary-wbcreate-new' => 'Creo unha nova propiedade',
@@ -7078,35 +7082,35 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedade de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
-	'right-item-override' => 'Sobrescribir elementos',
+	'right-item-override' => 'Sobrescribir elementos', # Fuzzy
 	'right-item-create' => 'Crear elementos',
-	'right-item-remove' => 'Eliminar elementos',
-	'right-property-override' => 'Sobrescribir propiedades',
+	'right-item-remove' => 'Eliminar elementos', # Fuzzy
+	'right-property-override' => 'Sobrescribir propiedades', # Fuzzy
 	'right-property-create' => 'Crear propiedades',
-	'right-property-remove' => 'Eliminar propiedades',
+	'right-property-remove' => 'Eliminar propiedades', # Fuzzy
 	'right-alias-remove' => 'Eliminar pseudónimos',
 	'right-alias-update' => 'Actualizar pseudónimos',
 	'right-sitelink-remove' => 'Eliminar ligazóns de sitio',
 	'right-sitelink-update' => 'Actualizar ligazóns de sitio',
-	'right-linktitles-update' => 'Actualizar títulos de ligazón',
-	'right-label-remove' => 'Eliminar etiquetas',
+	'right-linktitles-update' => 'Actualizar títulos de ligazón', # Fuzzy
+	'right-label-remove' => 'Eliminar etiquetas', # Fuzzy
 	'right-label-update' => 'Actualizar etiquetas',
-	'right-description-remove' => 'Eliminar descricións',
+	'right-description-remove' => 'Eliminar descricións', # Fuzzy
 	'right-description-update' => 'Actualizar descricións',
-	'action-item-override' => 'sobrescribir elementos',
+	'action-item-override' => 'sobrescribir elementos', # Fuzzy
 	'action-item-create' => 'crear elementos',
-	'action-item-remove' => 'eliminar elementos',
-	'action-property-override' => 'sobrescribir propiedades',
+	'action-item-remove' => 'eliminar elementos', # Fuzzy
+	'action-property-override' => 'sobrescribir propiedades', # Fuzzy
 	'action-property-create' => 'crear propiedades',
-	'action-property-remove' => 'eliminar propiedades',
+	'action-property-remove' => 'eliminar propiedades', # Fuzzy
 	'action-alias-update' => 'actualizar pseudónimos',
 	'action-alias-remove' => 'eliminar pseudónimos',
 	'action-sitelink-remove' => 'eliminar ligazóns de sitio',
 	'action-sitelink-update' => 'actualizar ligazóns de sitio',
-	'action-linktitles-update' => 'actualizar títulos de ligazón',
-	'action-label-remove' => 'eliminar etiquetas',
+	'action-linktitles-update' => 'actualizar títulos de ligazón', # Fuzzy
+	'action-label-remove' => 'eliminar etiquetas', # Fuzzy
 	'action-label-update' => 'actualizar etiquetas',
-	'action-description-remove' => 'eliminar descricións',
+	'action-description-remove' => 'eliminar descricións', # Fuzzy
 	'action-description-update' => 'actualizar descricións',
 );
 
@@ -7214,7 +7218,7 @@ $messages['gu'] = array(
 	'wikibase-listdatatypes-wikibase-item-head' => 'વસ્તુ',
 	'wikibase-listdatatypes-time-head' => 'સમય',
 	'action-item-create' => 'વસ્તુઓ બનાવો',
-	'action-item-remove' => 'વસ્તુઓ દૂર કરો',
+	'action-item-remove' => 'વસ્તુઓ દૂર કરો', # Fuzzy
 );
 
 /** Hebrew (עברית)
@@ -7648,9 +7652,9 @@ $messages['hr'] = array(
 	'wikibase-restoreold' => 'vrati',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Stavka',
 	'wikibase-listdatatypes-time-head' => 'Vrijeme',
-	'right-label-remove' => 'Ukloni oznake',
+	'right-label-remove' => 'Ukloni oznake', # Fuzzy
 	'right-label-update' => 'Ažuriraj oznake',
-	'right-description-remove' => 'Ukloni opise',
+	'right-description-remove' => 'Ukloni opise', # Fuzzy
 	'right-description-update' => 'Ažuriraj opise',
 );
 
@@ -7874,39 +7878,40 @@ $messages['hsb'] = array(
 	'content-model-wikibase-item' => 'Element z Wikibase',
 	'content-model-wikibase-property' => 'Kajkosć Wikibase',
 	'content-model-wikibase-query' => 'Naprašowanje Wikibase',
-	'right-item-override' => 'Elementy přepisać',
+	'right-item-override' => 'Elementy přepisać', # Fuzzy
 	'right-item-create' => 'Elementy wutworić',
-	'right-item-remove' => 'Elementy wotstronić',
-	'right-property-override' => 'Kajkosće přepisać',
+	'right-item-remove' => 'Elementy wotstronić', # Fuzzy
+	'right-property-override' => 'Kajkosće přepisać', # Fuzzy
 	'right-property-create' => 'Kajkosće wutworić',
-	'right-property-remove' => 'Kajkosće wotstronić',
+	'right-property-remove' => 'Kajkosće wotstronić', # Fuzzy
 	'right-alias-remove' => 'Aliasy wotstronić',
 	'right-sitelink-remove' => 'Sydłowe wotkazy wotstronić',
 	'right-sitelink-update' => 'Sydłowe wotkazy aktualizować',
-	'right-linktitles-update' => 'Wotkazowe titule aktualizować',
-	'right-label-remove' => 'Pomjenowanja wotstronić',
+	'right-linktitles-update' => 'Wotkazowe titule aktualizować', # Fuzzy
+	'right-label-remove' => 'Pomjenowanja wotstronić', # Fuzzy
 	'right-label-update' => 'Pomjenowanja aktualizować',
-	'right-description-remove' => 'Wopisanja wotstronić',
+	'right-description-remove' => 'Wopisanja wotstronić', # Fuzzy
 	'right-description-update' => 'Wopisanja aktualizować',
-	'action-item-override' => 'elementy přepisać',
+	'action-item-override' => 'elementy přepisać', # Fuzzy
 	'action-item-create' => 'elementy wutworić',
-	'action-item-remove' => 'elementy wotstronić',
-	'action-property-override' => 'kajkosće přepisać',
+	'action-item-remove' => 'elementy wotstronić', # Fuzzy
+	'action-property-override' => 'kajkosće přepisać', # Fuzzy
 	'action-property-create' => 'kajkosće wutworić',
-	'action-property-remove' => 'kajkosće wotstronić',
+	'action-property-remove' => 'kajkosće wotstronić', # Fuzzy
 	'action-alias-update' => 'aliasy aktualizować',
 	'action-alias-remove' => 'aliasy wotstronić',
 	'action-sitelink-remove' => 'sydłowe wotkazy wotstronić',
 	'action-sitelink-update' => 'sydłowe wotkazy aktualizować',
-	'action-linktitles-update' => 'wotkazowe titule aktualizować',
-	'action-label-remove' => 'pomjenowanja wotstronić',
+	'action-linktitles-update' => 'wotkazowe titule aktualizować', # Fuzzy
+	'action-label-remove' => 'pomjenowanja wotstronić', # Fuzzy
 	'action-label-update' => 'pomjenowanja aktualizować',
-	'action-description-remove' => 'wopisanja wotstronić',
+	'action-description-remove' => 'wopisanja wotstronić', # Fuzzy
 	'action-description-update' => 'wopisanja aktualizować',
 );
 
 /** Hungarian (magyar)
  * @author Csigabi
+ * @author Shirayuki
  * @author Tgr
  * @author Vivaelcelta
  * @author Zolo
@@ -7950,7 +7955,7 @@ $messages['hu'] = array(
 	'wikibase-aliases-label' => 'Más néven:',
 	'wikibase-aliases-input-help-message' => 'Ha ennek a fogalomnak több különböző elnevezése is van, itt megadhatod a további neveket és szinonimákat, hogy azokra keresve is meg lehessen találni.',
 	'wikibase-aliases-empty' => 'Nincs más név megadva.',
-	'wikibase-datatype-label' => 'Adattípus',
+	'wikibase-datatype-label' => 'Adattípus:',
 	'wikibase-claimview-snak-tooltip' => 'Adj meg egy értéket a(z) „$1” tulajdonsághoz. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.',
 	'wikibase-claimview-snak-new-tooltip' => 'Miután kiválasztottál egy tulajdonságot, megadhatod a hozzátartozó értéket. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.',
 	'wikibase-snakview-property-input-placeholder' => 'tulajdonság',
@@ -8378,34 +8383,34 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'content-model-wikibase-item' => 'Item Wikibase',
 	'content-model-wikibase-property' => 'Properti Wikibase',
 	'content-model-wikibase-query' => 'Permintaan Wikibase',
-	'right-item-override' => 'Timpa item',
+	'right-item-override' => 'Timpa item', # Fuzzy
 	'right-item-create' => 'Buat item',
-	'right-item-remove' => 'Hapus item',
-	'right-property-override' => 'Timpa properti',
+	'right-item-remove' => 'Hapus item', # Fuzzy
+	'right-property-override' => 'Timpa properti', # Fuzzy
 	'right-property-create' => 'Buat properti',
-	'right-property-remove' => 'Hapus properti',
+	'right-property-remove' => 'Hapus properti', # Fuzzy
 	'right-alias-remove' => 'Hapus nama lain',
 	'right-sitelink-remove' => 'Hapus interwiki',
 	'right-sitelink-update' => 'Perbarui interwiki',
-	'right-linktitles-update' => 'Perbarui judul pranala',
-	'right-label-remove' => 'Hapus label',
+	'right-linktitles-update' => 'Perbarui judul pranala', # Fuzzy
+	'right-label-remove' => 'Hapus label', # Fuzzy
 	'right-label-update' => 'Perbarui label',
-	'right-description-remove' => 'Hapus deskripsi',
+	'right-description-remove' => 'Hapus deskripsi', # Fuzzy
 	'right-description-update' => 'Perbarui deskripsi',
-	'action-item-override' => 'timpa item',
+	'action-item-override' => 'timpa item', # Fuzzy
 	'action-item-create' => 'buat item',
-	'action-item-remove' => 'hapus item',
-	'action-property-override' => 'timpa properti',
+	'action-item-remove' => 'hapus item', # Fuzzy
+	'action-property-override' => 'timpa properti', # Fuzzy
 	'action-property-create' => 'buat properti',
-	'action-property-remove' => 'hapus properti',
+	'action-property-remove' => 'hapus properti', # Fuzzy
 	'action-alias-update' => 'perbarui properti',
 	'action-alias-remove' => 'hapus nama lain',
 	'action-sitelink-remove' => 'hapus interwiki',
 	'action-sitelink-update' => 'perbarui interwiki',
-	'action-linktitles-update' => 'perbarui judul pranala',
-	'action-label-remove' => 'hapus label',
+	'action-linktitles-update' => 'perbarui judul pranala', # Fuzzy
+	'action-label-remove' => 'hapus label', # Fuzzy
 	'action-label-update' => 'perbarui label',
-	'action-description-remove' => 'hapus deskripsi',
+	'action-description-remove' => 'hapus deskripsi', # Fuzzy
 	'action-description-update' => 'perbarui deskripsi',
 );
 
@@ -8655,7 +8660,6 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Binaliwan ti {{PLURAL:$1|a panangipateg|a panangipatpateg}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Nagikkat ti {{PLURAL:$1|a panangipateg|a panagipatpateg}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Nagikkat ti {{PLURAL:$3|a reperensia|a repreperensia}} manipud ti tunton',
-	'wikibase-item-summary-wbsetstatementrank' => "Binaliwan ti insasao ti ranggo manipud ti '$3' iti '$4'",
 	'wikibase-item-summary-wbmergeitems-from' => "Naitipon ti banag manipud ti '$3'",
 	'wikibase-item-summary-wbmergeitems-to' => "Naitipon ti banag iti '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'Nagpartuat ti baro a tagikua',
@@ -8965,34 +8969,34 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'content-model-wikibase-item' => 'Wikibase hlutur',
 	'content-model-wikibase-property' => 'Wikibase eiginleiki',
 	'content-model-wikibase-query' => 'Wikibase fyrirspurn',
-	'right-item-override' => 'Hunsa hluti',
+	'right-item-override' => 'Hunsa hluti', # Fuzzy
 	'right-item-create' => 'Búa til hluti',
-	'right-item-remove' => 'Fjarlægja hluti',
-	'right-property-override' => 'Hunsa eiginleika',
+	'right-item-remove' => 'Fjarlægja hluti', # Fuzzy
+	'right-property-override' => 'Hunsa eiginleika', # Fuzzy
 	'right-property-create' => 'Búa til eiginleika',
-	'right-property-remove' => 'Fjarlægja eiginleika',
+	'right-property-remove' => 'Fjarlægja eiginleika', # Fuzzy
 	'right-alias-remove' => 'Fjarlægja samnefni',
 	'right-sitelink-remove' => 'Fjarlægja vefsvæðistengla',
 	'right-sitelink-update' => 'Uppfæra vefsvæðistengla',
-	'right-linktitles-update' => 'Uppfæra titla tengla',
-	'right-label-remove' => 'Fjarlægja merkimiða',
+	'right-linktitles-update' => 'Uppfæra titla tengla', # Fuzzy
+	'right-label-remove' => 'Fjarlægja merkimiða', # Fuzzy
 	'right-label-update' => 'Uppfæra merkimiða',
-	'right-description-remove' => 'Fjarlægja lýsingar',
+	'right-description-remove' => 'Fjarlægja lýsingar', # Fuzzy
 	'right-description-update' => 'Uppfæra lýsingar',
-	'action-item-override' => 'hunsa hluti',
+	'action-item-override' => 'hunsa hluti', # Fuzzy
 	'action-item-create' => 'búa til hluti',
-	'action-item-remove' => 'fjarlægja hluti',
-	'action-property-override' => 'hunsa eiginleika',
+	'action-item-remove' => 'fjarlægja hluti', # Fuzzy
+	'action-property-override' => 'hunsa eiginleika', # Fuzzy
 	'action-property-create' => 'búa til eiginleika',
-	'action-property-remove' => 'fjarlægja eiginleika',
+	'action-property-remove' => 'fjarlægja eiginleika', # Fuzzy
 	'action-alias-update' => 'uppfæra samnefni',
 	'action-alias-remove' => 'fjarlægja samnefni',
 	'action-sitelink-remove' => 'fjarlægja vefsíðu tengla',
 	'action-sitelink-update' => 'uppfæra vefsvæðistengla',
-	'action-linktitles-update' => 'Uppfæra titla tengla',
-	'action-label-remove' => 'fjarlægja merkimiða',
+	'action-linktitles-update' => 'Uppfæra titla tengla', # Fuzzy
+	'action-label-remove' => 'fjarlægja merkimiða', # Fuzzy
 	'action-label-update' => 'uppfæra merkimiða',
-	'action-description-remove' => 'fjarlægja lýsingar',
+	'action-description-remove' => 'fjarlægja lýsingar', # Fuzzy
 	'action-description-update' => 'uppfæra lýsingar',
 );
 
@@ -9055,7 +9059,7 @@ $messages['it'] = array(
 	'wikibase-aliases-label' => 'Anche conosciuto come:',
 	'wikibase-aliases-input-help-message' => 'Se questo insieme di dati è conosciuto con più di un nome, è possibile inserire alias e sinonimi, in modo che possa essere trovato anche tramite i suoi nomi alternativi.',
 	'wikibase-aliases-empty' => 'Nessun alias definito.',
-	'wikibase-datatype-label' => 'Tipo di dato',
+	'wikibase-datatype-label' => 'Tipo di dato:',
 	'wikibase-claimview-snak-tooltip' => 'Inserisci un valore corrispondente alla proprietà chiamata "$1". Se la proprietà non ha alcun valore designato o non è noto il valore effettivo, è possibile scegliere un\'alternativa alla specifica di un valore personalizzato facendo clic sull\'icona accanto alla casella di input del valore.',
 	'wikibase-claimview-snak-new-tooltip' => "Dopo aver specificato una proprietà è possibile inserire un valore corrispondente. Se la proprietà non ha alcun valore designato o non è noto il valore effettivo, è possibile scegliere un'alternativa alla specifica un di valore personalizzato facendo clic sull'icona accanto alla casella di input del valore.",
 	'wikibase-statementview-rank-preferred' => 'Classificato preferito',
@@ -9106,7 +9110,7 @@ Nella cronologia dell'entità verrà registrato il tuo indirizzo IP.",
 	'wikibase-itemdisambiguation-lookup-label' => 'Etichetta:',
 	'wikibase-itemdisambiguation-submit' => 'Ricerca',
 	'wikibase-itemdisambiguation-nothing-found' => 'Non è stato trovato alcun elemento con questa etichetta.',
-	'wikibase-itemdisambiguation-search' => 'Cerca gli elementi usando [{{fullurl:Special:Search|search=$1}} Speciale:Ricerca].', # Fuzzy
+	'wikibase-itemdisambiguation-search' => 'Puoi cercare [{{fullurl:Special:Search|search=$1}} questo elemento].',
 	'wikibase-itemdisambiguation-create' => "È possibile [{{fullurl:Special:NewItem|label=$1}} creare l'elemento].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'L\'identificatore di lingua inserito è sconosciuto al sistema. Usare un identificatore valido, per esempio "en".',
 	'wikibase-itemdisambiguation-description' => 'I valori utilizzati per la ricerca devono comprendere il testo completo dell\'elemento. La lingua è un identificatore, ad esempio "it".',
@@ -9400,7 +9404,7 @@ $messages['ja'] = array(
 	'wikibase-aliases-label' => '別名:',
 	'wikibase-aliases-input-help-message' => 'このデータセットが複数の名前で知られている場合、別名 (や類義語) として入力することもできます。入力することで、その別名でたどり着けるようになります。',
 	'wikibase-aliases-empty' => '別名は定義されていません。',
-	'wikibase-datatype-label' => 'データの型',
+	'wikibase-datatype-label' => 'データの型:',
 	'wikibase-claimview-snak-tooltip' => '「$1」という名前のプロパティに対する値を入力します。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。',
 	'wikibase-claimview-snak-new-tooltip' => 'プロパティを指定したら、それに対応する値を入力できます。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '個の{{PLURAL:$1|情報源}}',
@@ -9447,7 +9451,7 @@ $messages['ja'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'ラベル:',
 	'wikibase-itemdisambiguation-submit' => '検索',
 	'wikibase-itemdisambiguation-nothing-found' => '申し訳ありませんが、指定したラベルを持つ項目は見つかりませんでした。',
-	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} Special:Search] で項目を検索できます。', # Fuzzy
+	'wikibase-itemdisambiguation-search' => '[{{fullurl:Special:Search|search=$1}} 項目を検索]することもできます。',
 	'wikibase-itemdisambiguation-create' => '[{{fullurl:Special:NewItem|label=$1}} 項目を新規作成]することもできます。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '申し訳ありませんが、指定した言語コードはこのシステムでは不明です。有効な言語コード (「en」など) を指定してください。',
 	'wikibase-itemdisambiguation-description' => '検索に用いる値は名前全体でなければなりません。言語は「en」などのIDを指定してください。',
@@ -9894,34 +9898,34 @@ $messages['ka'] = array(
 	'content-model-wikibase-item' => 'Wikibase-ის ელემენტი',
 	'content-model-wikibase-property' => 'Wikibase-ის თვისებები',
 	'content-model-wikibase-query' => 'Wikibase-ის მოთხოვნა',
-	'right-item-override' => 'ელემენტების გადაწერა',
+	'right-item-override' => 'ელემენტების გადაწერა', # Fuzzy
 	'right-item-create' => 'ელემენტების შექმნა',
-	'right-item-remove' => 'ელემენტების წაშლა',
-	'right-property-override' => 'თვისებების გადაწერა',
+	'right-item-remove' => 'ელემენტების წაშლა', # Fuzzy
+	'right-property-override' => 'თვისებების გადაწერა', # Fuzzy
 	'right-property-create' => 'თვისებების შექმნა',
-	'right-property-remove' => 'თვისებების წაშლა',
+	'right-property-remove' => 'თვისებების წაშლა', # Fuzzy
 	'right-alias-remove' => 'ფსევდონიმების წაშლა',
 	'right-sitelink-remove' => 'საიტის ბმულების წაშლა',
 	'right-sitelink-update' => 'საიტის ბმულების განახლება',
-	'right-linktitles-update' => 'ბმულების სათაურების განახლება',
-	'right-label-remove' => 'სახელების წაშლა',
+	'right-linktitles-update' => 'ბმულების სათაურების განახლება', # Fuzzy
+	'right-label-remove' => 'სახელების წაშლა', # Fuzzy
 	'right-label-update' => 'სახელების განახლება',
-	'right-description-remove' => 'აღწერების წაშლა',
+	'right-description-remove' => 'აღწერების წაშლა', # Fuzzy
 	'right-description-update' => 'აღწერების განახლება',
-	'action-item-override' => 'ელემენტების გადაწერა',
+	'action-item-override' => 'ელემენტების გადაწერა', # Fuzzy
 	'action-item-create' => 'ელემენტების შექმნა',
-	'action-item-remove' => 'ელემენტების წაშლა',
-	'action-property-override' => 'თვისებების გადაწერა',
+	'action-item-remove' => 'ელემენტების წაშლა', # Fuzzy
+	'action-property-override' => 'თვისებების გადაწერა', # Fuzzy
 	'action-property-create' => 'თვისებების შექმნა',
-	'action-property-remove' => 'თვისებების წაშლა',
+	'action-property-remove' => 'თვისებების წაშლა', # Fuzzy
 	'action-alias-update' => 'ფსევდონიმების განახლება',
 	'action-alias-remove' => 'ფსევდონიმების წაშლა',
 	'action-sitelink-remove' => 'საიტის ბმულების წაშლა',
 	'action-sitelink-update' => 'საიტის ბმულების განახლება',
-	'action-linktitles-update' => 'ბმულების სათაურების განახლება',
-	'action-label-remove' => 'სახელების წაშლა',
+	'action-linktitles-update' => 'ბმულების სათაურების განახლება', # Fuzzy
+	'action-label-remove' => 'სახელების წაშლა', # Fuzzy
 	'action-label-update' => 'სახელების განახლება',
-	'action-description-remove' => 'აღწერების წაშლა',
+	'action-description-remove' => 'აღწერების წაშლა', # Fuzzy
 	'action-description-update' => 'აღწერების განახლება',
 );
 
@@ -10071,8 +10075,8 @@ $messages['ko'] = array(
 	'wikibase-datatype-label' => '데이터 유형:',
 	'wikibase-claimview-snak-tooltip' => '"$1"라는 이름의 속성에 해당하는 값을 입력하세요. 속성이 지정한 값이 없거나 실제 값이 알려져 있지 않으면 값 입력 상자 옆에 있는 아이콘을 클릭하여 사용자 정의 값을 지정하는 대체 값을 선택할 수 있습니다.',
 	'wikibase-claimview-snak-new-tooltip' => '속성을 지정하고 나서 해당하는 값을 입력할 수 있습니다.속성이 지정한 값이 없거나 실제 값이 알려져 있지 않으면 값 입력 상자 옆에 있는 아이콘을 클릭하여 사용자 정의 값을 지정하는 대체 값을 선택할 수 있습니다.',
-	'wikibase-statementview-rankselector-rank-preferred' => '선호하는 등급',
-	'wikibase-statementview-rankselector-rank-normal' => '일반 등급',
+	'wikibase-statementview-rank-preferred' => '선호하는 등급',
+	'wikibase-statementview-rank-normal' => '일반 등급',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|출처}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|출처 한 개|출처 $1개}}를 아직 저장하지 않았습니다',
 	'wikibase-snakview-property-input-placeholder' => '속성',
@@ -10458,12 +10462,12 @@ $messages['ksh'] = array(
 	'wikibase-listdatatypes-time-head' => 'En Uhrzick',
 	'wikibase-listdatatypes-url-head' => 'en <i lang="en">URL</i>',
 	'datatypes-type-url' => '<i lang="en">URL</i>',
-	'right-item-override' => 'Daatesäz övverschriive',
+	'right-item-override' => 'Daatesäz övverschriive', # Fuzzy
 	'right-item-create' => 'Daatesäz aanlääje',
-	'right-item-remove' => 'Daatesäz fott schmiiße',
-	'right-property-override' => 'Eijeschaffte övverschriive',
-	'action-item-override' => 'Daatesäz övverschriive',
-	'action-property-override' => 'Eiejschaffte ze övverschriive',
+	'right-item-remove' => 'Daatesäz fott schmiiße', # Fuzzy
+	'right-property-override' => 'Eijeschaffte övverschriive', # Fuzzy
+	'action-item-override' => 'Daatesäz övverschriive', # Fuzzy
+	'action-property-override' => 'Eiejschaffte ze övverschriive', # Fuzzy
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -10495,11 +10499,11 @@ $messages['ku-latn'] = array(
 	'wikibase-entitieswithoutlabel-label-type' => 'Cure:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'hemû',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Girêdanê li [$2] zêde bike', # Fuzzy
-	'right-linktitles-update' => 'Sernavê girêdanan rojane bike',
-	'right-description-remove' => 'Danasînan jê bibe',
+	'right-linktitles-update' => 'Sernavê girêdanan rojane bike', # Fuzzy
+	'right-description-remove' => 'Danasînan jê bibe', # Fuzzy
 	'right-description-update' => 'Danasînan rojane bike',
-	'action-linktitles-update' => 'sernavên girêdanan rojane bike',
-	'action-description-remove' => 'danasînan jê bibe',
+	'action-linktitles-update' => 'sernavên girêdanan rojane bike', # Fuzzy
+	'action-description-remove' => 'danasînan jê bibe', # Fuzzy
 	'action-description-update' => 'danasînan rojane bike',
 );
 
@@ -10606,6 +10610,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etikett:',
 	'wikibase-itemdisambiguation-submit' => 'Sichen',
 	'wikibase-itemdisambiguation-nothing-found' => 'Pardon, en Element mat där Etikett gouf net fonnt.',
+	'wikibase-itemdisambiguation-search' => 'Dir kënnt nom Element [{{fullurl:Special:Search|$1 sichen}}].',
 	'wikibase-itemdisambiguation-create' => "Dir kënnt [{{fullurl:Special:NewItem|label=$1}} d'Element uleeën].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Pardon, de Sproochecode deen Dir uginn hutt ass dem System net bekannt. Benotzt w.e.g. e valabele Code wéi "lb".',
 	'special-newproperty' => 'Eng nei Eegeschaft uleeën',
@@ -11015,34 +11020,34 @@ $messages['min'] = array(
 	'content-model-wikibase-item' => 'Item Wikibase',
 	'content-model-wikibase-property' => 'Properti Wikibase',
 	'content-model-wikibase-query' => 'Pamintaan Wikibase',
-	'right-item-override' => 'Timpo item',
+	'right-item-override' => 'Timpo item', # Fuzzy
 	'right-item-create' => 'Buek item',
-	'right-item-remove' => 'Hapuih item',
-	'right-property-override' => 'Timpo item',
+	'right-item-remove' => 'Hapuih item', # Fuzzy
+	'right-property-override' => 'Timpo item', # Fuzzy
 	'right-property-create' => 'Buek properti',
-	'right-property-remove' => 'Hapuih properti',
+	'right-property-remove' => 'Hapuih properti', # Fuzzy
 	'right-alias-remove' => 'Hapuih namo lain',
 	'right-sitelink-remove' => 'Hapuih interwiki',
 	'right-sitelink-update' => 'Pabarui interwiki',
-	'right-linktitles-update' => 'Pabarui judul pautan',
-	'right-label-remove' => 'Hapuih label',
+	'right-linktitles-update' => 'Pabarui judul pautan', # Fuzzy
+	'right-label-remove' => 'Hapuih label', # Fuzzy
 	'right-label-update' => 'Pabarui label',
-	'right-description-remove' => 'Hapuih deskripsi',
+	'right-description-remove' => 'Hapuih deskripsi', # Fuzzy
 	'right-description-update' => 'Pabarui deskripsi',
-	'action-item-override' => 'timpo item',
+	'action-item-override' => 'timpo item', # Fuzzy
 	'action-item-create' => 'buek item',
-	'action-item-remove' => 'hapuih item',
-	'action-property-override' => 'timpo properti',
+	'action-item-remove' => 'hapuih item', # Fuzzy
+	'action-property-override' => 'timpo properti', # Fuzzy
 	'action-property-create' => 'buek properti',
-	'action-property-remove' => 'hapuih properti',
+	'action-property-remove' => 'hapuih properti', # Fuzzy
 	'action-alias-update' => 'pabarui namo lain',
 	'action-alias-remove' => 'hapuih namo lain',
 	'action-sitelink-remove' => 'hapuih interwiki',
 	'action-sitelink-update' => 'pabarui interwiki',
-	'action-linktitles-update' => 'pabarui judul pautan',
-	'action-label-remove' => 'hapuih label',
+	'action-linktitles-update' => 'pabarui judul pautan', # Fuzzy
+	'action-label-remove' => 'hapuih label', # Fuzzy
 	'action-label-update' => 'pabarui label',
-	'action-description-remove' => 'hapuih deskripsi',
+	'action-description-remove' => 'hapuih deskripsi', # Fuzzy
 	'action-description-update' => 'pabarui deskripsi',
 );
 
@@ -11538,18 +11543,18 @@ $messages['ml'] = array(
 	'wikibase-listdatatypes-time-head' => 'സമയം',
 	'content-model-wikibase-item' => 'വിക്കിബേസ് ഇനം',
 	'right-item-create' => 'ഇനങ്ങൾ സൃഷ്ടിക്കുക',
-	'right-item-remove' => 'ഇനങ്ങൾ നീക്കം ചെയ്യുക',
+	'right-item-remove' => 'ഇനങ്ങൾ നീക്കം ചെയ്യുക', # Fuzzy
 	'right-sitelink-remove' => 'സൈറ്റ് കണ്ണികൾ നീക്കംചെയ്യുക',
 	'right-sitelink-update' => 'സൈറ്റ് കണ്ണികൾ പുതുക്കുക',
-	'right-linktitles-update' => 'കണ്ണികളുടെ തലക്കെട്ടുകൾ പുതുക്കുക',
-	'right-description-remove' => 'വിവരണങ്ങൾ നീക്കം ചെയ്യുക',
+	'right-linktitles-update' => 'കണ്ണികളുടെ തലക്കെട്ടുകൾ പുതുക്കുക', # Fuzzy
+	'right-description-remove' => 'വിവരണങ്ങൾ നീക്കം ചെയ്യുക', # Fuzzy
 	'right-description-update' => 'വിവരണങ്ങൾ പുതുക്കുക',
 	'action-item-create' => 'ഇനങ്ങൾ സൃഷ്ടിക്കുക',
-	'action-item-remove' => 'ഇനങ്ങൾ നീക്കം ചെയ്യുക',
+	'action-item-remove' => 'ഇനങ്ങൾ നീക്കം ചെയ്യുക', # Fuzzy
 	'action-sitelink-remove' => 'സൈറ്റ് കണ്ണികൾ നീക്കംചെയ്യുക',
 	'action-sitelink-update' => 'സൈറ്റ് കണ്ണികൾ പുതുക്കുക',
-	'action-linktitles-update' => 'കണ്ണികളുടെ തലക്കെട്ടുകൾ പുതുക്കുക',
-	'action-description-remove' => 'വിവരണങ്ങൾ നീക്കം ചെയ്യുക',
+	'action-linktitles-update' => 'കണ്ണികളുടെ തലക്കെട്ടുകൾ പുതുക്കുക', # Fuzzy
+	'action-description-remove' => 'വിവരണങ്ങൾ നീക്കം ചെയ്യുക', # Fuzzy
 	'action-description-update' => 'വിവരണങ്ങൾ പുതുക്കുക',
 );
 
@@ -11907,34 +11912,34 @@ untuk mencari di mana set data itu.',
 	'content-model-wikibase-item' => 'Perkara Wikibase',
 	'content-model-wikibase-property' => 'Sifat Wikibase',
 	'content-model-wikibase-query' => 'Pertanyaan Wikibase',
-	'right-item-override' => 'Mengubah ganti perkara',
+	'right-item-override' => 'Mengubah ganti perkara', # Fuzzy
 	'right-item-create' => 'Mencipta perkara',
-	'right-item-remove' => 'Menggugurkan perkara',
-	'right-property-override' => 'Mengatasi sifat',
+	'right-item-remove' => 'Menggugurkan perkara', # Fuzzy
+	'right-property-override' => 'Mengatasi sifat', # Fuzzy
 	'right-property-create' => 'Mewujudkan sifat',
-	'right-property-remove' => 'Menggugurkan sifat',
+	'right-property-remove' => 'Menggugurkan sifat', # Fuzzy
 	'right-alias-remove' => 'Membuang alias',
 	'right-sitelink-remove' => 'Membuang pautan tapak',
 	'right-sitelink-update' => 'Mengemaskinikan pautan tapak',
-	'right-linktitles-update' => 'Mengemaskinikan tajuk pautan',
-	'right-label-remove' => 'Membuang label',
+	'right-linktitles-update' => 'Mengemaskinikan tajuk pautan', # Fuzzy
+	'right-label-remove' => 'Membuang label', # Fuzzy
 	'right-label-update' => 'Mengemaskinikan label',
-	'right-description-remove' => 'Membuang keterangan',
+	'right-description-remove' => 'Membuang keterangan', # Fuzzy
 	'right-description-update' => 'Mengemaskinikan keterangan',
-	'action-item-override' => 'mengatasi perkara',
+	'action-item-override' => 'mengatasi perkara', # Fuzzy
 	'action-item-create' => 'mewujudkan perkara',
-	'action-item-remove' => 'menggugurkan perkara',
-	'action-property-override' => 'mengatasi sifat',
+	'action-item-remove' => 'menggugurkan perkara', # Fuzzy
+	'action-property-override' => 'mengatasi sifat', # Fuzzy
 	'action-property-create' => 'mewujudkan sifat',
-	'action-property-remove' => 'menggugurkan sifat',
+	'action-property-remove' => 'menggugurkan sifat', # Fuzzy
 	'action-alias-update' => 'mengemaskinikan alias',
 	'action-alias-remove' => 'menggugurkan alias',
 	'action-sitelink-remove' => 'menggugurkan pautan tapak',
 	'action-sitelink-update' => 'mengemaskinikan pautan tapak',
-	'action-linktitles-update' => 'mengemaskinikan tajuk pautan',
-	'action-label-remove' => 'menggugurkan label',
+	'action-linktitles-update' => 'mengemaskinikan tajuk pautan', # Fuzzy
+	'action-label-remove' => 'menggugurkan label', # Fuzzy
 	'action-label-update' => 'mengemaskinikan label',
-	'action-description-remove' => 'menggugurkan keterangan',
+	'action-description-remove' => 'menggugurkan keterangan', # Fuzzy
 	'action-description-update' => 'mengemaskinikan keterangan',
 );
 
@@ -12151,7 +12156,6 @@ for å finne ut hva som har skjedd.',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Endret {{PLURAL:$1|kvalifikator|kvalifikatorer}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Fjernet {{PLURAL:$1|kvalifikator|kvalifikatorer}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Fjernet {{PLURAL:$3|referanse|referanser}} fra påstand',
-	'wikibase-item-summary-wbsetstatementrank' => "Endret rang for påstand fra '$3' til '$4'",
 	'wikibase-item-summary-wbmergeitems-from' => "Flettet element fra '$3'",
 	'wikibase-item-summary-wbmergeitems-to' => "Flettet element inn i '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'Opprettet en ny egenskap',
@@ -12274,6 +12278,9 @@ $messages['nl'] = array(
 	'wikibase-datatype-label' => 'Gegevenstype:',
 	'wikibase-claimview-snak-tooltip' => 'Voer een waarde in die overeenkomt met de eigenschap "$1". Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het icoon naast het invoerveld voor de waarde te klikken.',
 	'wikibase-claimview-snak-new-tooltip' => 'Nadat u een eigenschap hebt opgegeven kunt u een bijbehorende waarde opgeven. Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het icoon naast het invoerveld voor de waarde te klikken.',
+	'wikibase-statementview-rank-preferred' => 'Voorkeursrang',
+	'wikibase-statementview-rank-normal' => 'Normale rang',
+	'wikibase-statementview-rank-deprecated' => 'Afgekeurde rang',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|bron|bronnen}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Eén bron|$1 bronnen}} nog niet opgeslagen',
 	'wikibase-snakview-property-input-placeholder' => 'eigenschap',
@@ -12303,6 +12310,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere eigenschap ($3).',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere zoekopdracht ($3).',
 	'wikibase-error-label-not-unique-item' => 'Een ander item ($3) is al gekoppeld met het label "$1" en de beschrijving "$4" voor de taalcode $2.',
+	'wikibase-error-label-no-entityid' => 'Het label moet geen geldige entiteit-ID zijn.',
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'wikibase-itembytitle-lookup-fieldset' => 'Items zoeken op site en paginanaam',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -12318,6 +12326,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
 	'wikibase-itemdisambiguation-submit' => 'Zoeken',
 	'wikibase-itemdisambiguation-nothing-found' => 'Er zijn geen items gevonden met dat label.',
+	'wikibase-itemdisambiguation-search' => 'U kunt [{{fullurl:Special:Search|search=$1}} zoeken naar het item].',
 	'wikibase-itemdisambiguation-create' => 'U kunt [{{fullurl:Special:NewItem|label=$1}} het item aanmaken].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'De taalidentificatie die u hebt opgegeven is niet bekend in het systeem. Gebruik een geldige taalidentificatie zoals "en".',
 	'wikibase-itemdisambiguation-description' => 'Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. Taal is een identificatie, bijvoorbeeld "en".',
@@ -12356,9 +12365,12 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-setaliases-submit' => 'Aliassen aanmaken',
 	'wikibase-setaliases-warning-remove' => 'Wilt u echt alle aliassen verwijderen van [[$1]]?',
 	'special-setsitelink' => 'Sitekoppeling instellen',
+	'wikibase-setsitelink-introfull' => 'U bent de sitekoppeling van $2 voor [[$1]] aan het instellen.',
 	'wikibase-setsitelink-site' => 'Site-ID:',
 	'wikibase-setsitelink-label' => 'Sitekoppeling:',
 	'wikibase-setsitelink-submit' => 'Sitekoppeling instellen',
+	'wikibase-setsitelink-warning-remove' => 'Wilt u echt de sitekoppeling van [[$1]] verwijderen?',
+	'wikibase-setsitelink-invalid-site' => 'Het site-ID "$1" is onbekend. Gebruik een bestaande site-ID, zoals "enwiki".',
 	'wikibase-setsitelink-add-failed' => 'De sitekoppeling kon niet worden opgeslagen.',
 	'wikibase-setsitelink-remove-failed' => 'De sitekoppeling kon niet worden verwijderd.',
 	'wikibase-setsitelink-not-itemid' => '"$1" is geen geldig item-ID. Sitekoppelingen kunnen alleen worden ingesteld voor items.',
@@ -12389,6 +12401,8 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-listdatatypes-intro' => 'Dit is een lijst met alle gegevenstypen die op dit moment in gebruik zijn in deze wiki:',
 	'wikibase-history-title-with-label' => '$2 ($1): versiegeschiedenis',
 	'wikibase-history-title-without-label' => '$1: versiegeschiedenis',
+	'special-entitieswithoutdescription' => 'Entiteiten zonder beschrijving',
+	'wikibase-entitieswithoutdescription-legend' => 'Lijst van entiteiten zonder beschrijving',
 	'special-entitieswithoutlabel' => 'Entiteiten zonder label',
 	'wikibase-entitieswithoutlabel-legend' => 'Entiteiten zonder label opvragen',
 	'wikibase-entitieswithoutlabel-label-language' => 'Taal:',
@@ -12407,7 +12421,10 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-entitydata-title' => 'Entiteitsgegevens',
 	'wikibase-entitydata-text' => 'Deze pagina biedt een koppelingsinterface naar entiteitswaarden. Geef het entiteits-ID op in de URL via de subpagina-opmaak.',
 	'special-mylanguagefallbackchain' => 'Terugvalketen voor mijn taal',
+	'wikibase-mylanguagefallbackchain-text' => 'De gebruiker terugvalketen voor talen die gebruikt word voor het weergeven van entiteitlabels wordt hieronder weergegeven.',
+	'wikibase-mylanguagefallbackchain-babel' => 'U kunt bewerken voor <nowiki>{{#babel: }}</nowiki> toe te voegen aan {{GENDER:$1|uw}} [[Special:MyPage|gebruikerspagina]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, omgezet van $3 - $4',
+	'wikibase-api-no-such-sitelink' => 'Een dergelijke sitekoppeling kon niet gevonden worden.',
 	'wikibase-self-conflict-patched' => 'Uw bewerking is samengevoegd met de laatste versie, en daarbij zijn enige tussentijdse wijzigingen overschreven.',
 	'wikibase-conflict-patched' => 'Uw bewerking is samengevoegd met de laatste versie.',
 	'wikibase-restoreold' => 'opnieuw instellen',
@@ -12423,6 +12440,8 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbeditentity-update' => 'Item bijgewerkt',
 	'wikibase-item-summary-wbeditentity-override' => 'Item overschreven',
 	'wikibase-item-summary-wbsetreference' => 'Referentie instellen',
+	'wikibase-item-summary-wbsetreference-add' => 'Referentie toegevoegd aan claim',
+	'wikibase-item-summary-wbsetreference-set' => 'Referentie van claim gewijzigd',
 	'wikibase-item-summary-wbsetlabel-add' => 'Label toegevoegd voor [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Label [$2] gewijzigd.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Label [$2] verwijderd',
@@ -12434,7 +12453,10 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] verwijderd',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Koppeling toegevoegd voor [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Koppeling met insignes toegevoegd aan [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Koppeling naar [$2] gewijzigd',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Insignes voor [$2] gewijzigd',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Koppeling en insignes voor [$2] gewijzigd',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Koppeling verwijderd voor [$2]',
 	'wikibase-item-summary-wblinktitles-create' => "Item aangemaakt om pagina's te koppelen [$2↔$3]",
 	'wikibase-item-summary-wblinktitles-connect' => "Taalkoppeling naar gekoppelde pagina's toegevoegd [$2↔$3]",
@@ -12453,13 +12475,20 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Eén referentie|$4 referenties}} van {{PLURAL:$3|één claim|$3 claims}} gewijzigd',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Volgorde van {{PLURAL:$3|één claim|$3 claims}} gewijzigd',
 	'wikibase-item-summary-clientsitelink-update' => 'Pagina hernoemd van [$3] naar [$4]',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Qualifier|Qualifiers}} toegevoegd',
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Qualifier|Qualifiers}} gewijzigd',
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Qualifier|Qualifiers}} verwijderd',
+	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Referentie|Referenties}} van claim verwijderd',
+	'wikibase-item-summary-wbmergeitems-from' => 'Samengevoegd uit "$3"',
 	'wikibase-item-summary-wbmergeitems-to' => 'Item samengevoegd naar "$3"',
 	'wikibase-property-summary-wbcreate-new' => 'Nieuwe eigenschap aangemaakt',
 	'wikibase-property-summary-wbeditentity-create' => 'Nieuwe eigenschap aangemaakt',
 	'wikibase-property-summary-wbeditentity-update' => 'Eigenschap bijgewerkt',
 	'wikibase-property-summary-wbeditentity-override' => 'Eigenschap verwijderd',
+	'wikibase-property-summary-wbsetlabel-add' => 'Label voor [$2] toegevoegd',
 	'wikibase-property-summary-wbsetlabel-set' => 'Label in [$2] gewijzigd',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Label in [$2] verwijderd',
+	'wikibase-property-summary-wbsetdescription-add' => 'Beschrijving voor [$2] toegevoegd',
 	'wikibase-property-summary-wbsetdescription-set' => 'Beschrijving in het [$2] gewijzigd',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Beschrijving in het [$2] verwijderd',
 	'wikibase-property-summary-wbsetaliases-set' => '{{PLURAL:$1|alias|aliassen}} voor [$2] ingesteld',
@@ -12811,6 +12840,7 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 
 /** Occitan (occitan)
  * @author Cedric31
+ * @author Shirayuki
  * @author Zolo
  */
 $messages['oc'] = array(
@@ -12859,7 +12889,7 @@ $messages['oc'] = array(
 	'wb-special-newitem-new-item-notification' => 'Un novèl element $1 creat e redirigit cap a sa pagina. Retorn a $2.',
 	'wikibase-aliases-label' => 'Aliàs&nbsp;:',
 	'wikibase-aliases-empty' => "Cap d'aliàs pas definit.",
-	'wikibase-datatype-label' => 'Tipe de donadas',
+	'wikibase-datatype-label' => 'Tipe de donadas&nbsp;:',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|font|fonts}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Una font|$1 fonts}} pas encara enregistrada{{PLURAL:$1||s}}',
 	'wikibase-snakview-property-input-placeholder' => 'proprietat',
@@ -14013,6 +14043,7 @@ para descobrir o que ocorreu.',
 	'wikibase-item-summary-wbeditentity-create' => 'Criado um novo item',
 	'wikibase-item-summary-wbeditentity-update' => 'Atualizado um item',
 	'wikibase-item-summary-wbeditentity-override' => 'Um item foi sobrescrito',
+	'wikibase-item-summary-wbsetreference-add' => 'Incluída referência para a afirmação',
 	'wikibase-item-summary-wbsetlabel-set' => 'Alterado o rótulo [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removido o rótulo [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Alterada a descrição [$2]',
@@ -14203,9 +14234,9 @@ $messages['ro'] = array(
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1” nu este un cod de limbă valid.',
 	'wikibase-entitieswithoutlabel-invalid-type' => '„$1” nu este un tip de entitate valid.',
 	'wikibase-restoreold' => 'restaurare',
-	'right-label-remove' => 'Elimină etichete',
+	'right-label-remove' => 'Elimină etichete', # Fuzzy
 	'right-label-update' => 'Actualizează etichete',
-	'right-description-remove' => 'Elimină descrieri',
+	'right-description-remove' => 'Elimină descrieri', # Fuzzy
 	'right-description-update' => 'Actualizează descrieri',
 );
 
@@ -14274,6 +14305,7 @@ $messages['roa-tara'] = array(
  * @author Ole Yves
  * @author Putnik
  * @author ShinePhantom
+ * @author Shirayuki
  * @author Zolo
  * @author Александр Сигачёв
  * @author Умар
@@ -14325,7 +14357,7 @@ $messages['ru'] = array(
 	'wikibase-aliases-label' => 'Также известен как:',
 	'wikibase-aliases-input-help-message' => 'Если этот набор данных известен под более чем одним названием, вы можете ввести здесь псевдонимы, альтернативные названия и синонимы, чтобы этот элемент можно было найти по его альтернативным именам.',
 	'wikibase-aliases-empty' => 'Альтернативные названия (синонимы) не определены',
-	'wikibase-datatype-label' => 'Тип данных',
+	'wikibase-datatype-label' => 'Тип данных:',
 	'wikibase-claimview-snak-tooltip' => 'Введите значение, соответствующее свойству «$1». Если свойство не имеет значения или оно неизвестно, Вы можете выбрать альтернативу указав пользовательское значение, нажав на значок рядом с полем ввода.',
 	'wikibase-claimview-snak-new-tooltip' => 'После указания свойства можно ввести его значение. Если свойство не имеет значения или текущее значение неизвестно, можно выбрать альтернативу, нажав на значок рядом с полем ввода и выбрав вариант ввода собственного значения.',
 	'wikibase-statementview-rank-preferred' => 'Предпочтительный ранг',
@@ -14375,7 +14407,7 @@ $messages['ru'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Название:',
 	'wikibase-itemdisambiguation-submit' => 'Найти',
 	'wikibase-itemdisambiguation-nothing-found' => 'К сожалению, элемент с таким названием не найден.',
-	'wikibase-itemdisambiguation-search' => 'Искать элемент, используя [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
+	'wikibase-itemdisambiguation-search' => 'Вы можете [{{fullurl:Special:Search|search=$1}} искать элемент].',
 	'wikibase-itemdisambiguation-create' => 'Вы можете [{{fullurl:Special:NewItem|label=$1}} создать такой элемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Извините, но системе неизвестен введённый вами код языка. Пожалуйста, используйте действительный идентификатор, например «ru».',
 	'wikibase-itemdisambiguation-description' => 'Используемые для поиска значения должны представлять собой полный текст записи. Идентификатором выступает код языка, например «ru».',
@@ -14819,16 +14851,16 @@ da otkrijete gdje je nestao.',
 	'content-model-wikibase-item' => 'Wikibazina stavka',
 	'content-model-wikibase-property' => 'Wikibazino polje',
 	'content-model-wikibase-query' => 'Wikibazin upit',
-	'right-item-override' => 'Preskoči stavke',
+	'right-item-override' => 'Preskoči stavke', # Fuzzy
 	'right-item-create' => 'Stvori stavke',
-	'right-item-remove' => 'Ukloni stavke',
+	'right-item-remove' => 'Ukloni stavke', # Fuzzy
 	'right-alias-remove' => 'Ukloni aliase',
 	'right-sitelink-remove' => 'Ukloni linkove sajta',
 	'right-sitelink-update' => 'Ažurirajte linkove sajta',
-	'right-linktitles-update' => 'Ažurirajte naslove linkova',
-	'right-label-remove' => 'Uklonite oznake',
+	'right-linktitles-update' => 'Ažurirajte naslove linkova', # Fuzzy
+	'right-label-remove' => 'Uklonite oznake', # Fuzzy
 	'right-label-update' => 'Ažurirajte oznake',
-	'right-description-remove' => 'Uklonite opise',
+	'right-description-remove' => 'Uklonite opise', # Fuzzy
 	'right-description-update' => 'Ažurirajte opise',
 );
 
@@ -14954,16 +14986,16 @@ $messages['si'] = array(
 	'content-model-wikibase-item' => 'විකිපාදක අයිතමය',
 	'content-model-wikibase-property' => 'විකිපාදක අයිතිය',
 	'content-model-wikibase-query' => 'විකිපාදක ප්‍රශ්නය',
-	'right-item-override' => 'අයිතමයන් ප්‍රතික්ෂේප කරන්න',
+	'right-item-override' => 'අයිතමයන් ප්‍රතික්ෂේප කරන්න', # Fuzzy
 	'right-item-create' => 'අයිතමයන් තනන්න',
-	'right-item-remove' => 'අයිතමයන් ඉවත් කරන්න',
+	'right-item-remove' => 'අයිතමයන් ඉවත් කරන්න', # Fuzzy
 	'right-alias-remove' => 'අන්වර්ථ නාම ඉවත් කරන්න',
 	'right-sitelink-remove' => 'අඩවි සබැඳියන් ඉවත් කරන්න',
 	'right-sitelink-update' => 'අඩවි සබැඳියන් යාවත්කාලීන කරන්න',
-	'right-linktitles-update' => 'සබැඳි ශීර්ෂයන් යාවත්කාලීන කරන්න',
-	'right-label-remove' => 'ලේබලයන් ඉවත් කරන්න',
+	'right-linktitles-update' => 'සබැඳි ශීර්ෂයන් යාවත්කාලීන කරන්න', # Fuzzy
+	'right-label-remove' => 'ලේබලයන් ඉවත් කරන්න', # Fuzzy
 	'right-label-update' => 'ලේබලයන් යාවත්කාලීන කරන්න',
-	'right-description-remove' => 'විස්තරයන් ඉවත් කරන්න',
+	'right-description-remove' => 'විස්තරයන් ඉවත් කරන්න', # Fuzzy
 	'right-description-update' => 'විස්තරයන් යාවත්කාලීන කරන්න',
 );
 
@@ -15903,6 +15935,7 @@ $messages['ug-arab'] = array(
  * @author Ahonc
  * @author Andriykopanytsia
  * @author Base
+ * @author Shirayuki
  * @author Sodmy
  * @author Steve.rusyn
  * @author SteveR
@@ -15956,7 +15989,7 @@ $messages['uk'] = array(
 	'wikibase-aliases-label' => 'Додаткові назви:',
 	'wikibase-aliases-input-help-message' => 'Якщо цей набір даних відомий під різними назвами, Ви можете вказати додаткові назви, що полегшить пошук.',
 	'wikibase-aliases-empty' => 'Не визначено жодного синоніма.',
-	'wikibase-datatype-label' => 'Тип даних',
+	'wikibase-datatype-label' => 'Тип даних:',
 	'wikibase-claimview-snak-tooltip' => 'Введіть значення, яке відповідає властивості "$1". Якщо властивість не має значення або воно невідоме, Ви можете вказати звичайне значення, клацнувши по значку біля поля введення.',
 	'wikibase-claimview-snak-new-tooltip' => 'Вибравши властивість, Ви можете ввести відповідне значення. Якщо властивість не має значення або воно невідоме, Ви можете вказати звичайне значення, клацнувши по значку біля поля введення.',
 	'wikibase-statementview-rank-preferred' => 'Пріоритетний ранг',
@@ -16592,40 +16625,41 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 	'content-model-wikibase-item' => 'Elemento Wikibase',
 	'content-model-wikibase-property' => 'Proprietà Wikibase',
 	'content-model-wikibase-query' => 'Interogasion Wikibase',
-	'right-item-override' => 'Sovrascrivi elementi',
+	'right-item-override' => 'Sovrascrivi elementi', # Fuzzy
 	'right-item-create' => 'Crea elementi',
-	'right-item-remove' => 'Cava elementi',
-	'right-property-override' => 'Sovrascrivi proprietà',
+	'right-item-remove' => 'Cava elementi', # Fuzzy
+	'right-property-override' => 'Sovrascrivi proprietà', # Fuzzy
 	'right-property-create' => 'Crea proprietà',
-	'right-property-remove' => 'Cava proprietà',
+	'right-property-remove' => 'Cava proprietà', # Fuzzy
 	'right-alias-remove' => 'Cava alias',
 	'right-sitelink-remove' => 'Cavar i colegamenti lenguìsteghi',
 	'right-sitelink-update' => 'Ajornar i colegamenti lenguìsteghi',
-	'right-linktitles-update' => 'Ajornar i titoli dei colegamenti',
-	'right-label-remove' => 'Cavar le etichete',
+	'right-linktitles-update' => 'Ajornar i titoli dei colegamenti', # Fuzzy
+	'right-label-remove' => 'Cavar le etichete', # Fuzzy
 	'right-label-update' => 'Ajornar le etichete',
-	'right-description-remove' => 'Cavar le descrission',
+	'right-description-remove' => 'Cavar le descrission', # Fuzzy
 	'right-description-update' => 'Ajornar le descrission',
-	'action-item-override' => 'sorascrivar elementi',
+	'action-item-override' => 'sorascrivar elementi', # Fuzzy
 	'action-item-create' => 'crear elementi',
-	'action-item-remove' => 'cavar elementi',
-	'action-property-override' => 'sorascrivar le proprietà',
+	'action-item-remove' => 'cavar elementi', # Fuzzy
+	'action-property-override' => 'sorascrivar le proprietà', # Fuzzy
 	'action-property-create' => 'crear le proprietà',
-	'action-property-remove' => 'cavar le proprietà',
+	'action-property-remove' => 'cavar le proprietà', # Fuzzy
 	'action-alias-update' => 'ajornar i alias',
 	'action-alias-remove' => 'cavar i alias',
 	'action-sitelink-remove' => 'cavar i colegamenti lenguìsteghi',
 	'action-sitelink-update' => 'ajornar i colegamenti lenguìsteghi',
-	'action-linktitles-update' => 'ajornar i titoli dei colegamenti',
-	'action-label-remove' => 'cavar le etichete',
+	'action-linktitles-update' => 'ajornar i titoli dei colegamenti', # Fuzzy
+	'action-label-remove' => 'cavar le etichete', # Fuzzy
 	'action-label-update' => 'ajornar le etichete',
-	'action-description-remove' => 'cavar le descrission',
+	'action-description-remove' => 'cavar le descrission', # Fuzzy
 	'action-description-update' => 'ajornar le descrission',
 );
 
 /** Vietnamese (Tiếng Việt)
  * @author Cheers!
  * @author Minh Nguyen
+ * @author Shirayuki
  * @author Vinhtantran
  * @author Zolo
  * @author පසිඳු කාවින්ද
@@ -16677,7 +16711,7 @@ $messages['vi'] = array(
 	'wikibase-aliases-label' => 'Còn được gọi:',
 	'wikibase-aliases-input-help-message' => 'Nếu tập hợp dữ liệu này có hơn một tên, bạn có thể nhập các tên và tên đồng nghĩa để cho phép tìm kiếm theo các tên khác.',
 	'wikibase-aliases-empty' => 'Không có định rõ tên khác.',
-	'wikibase-datatype-label' => 'Kiểu dữ liệu',
+	'wikibase-datatype-label' => 'Kiểu dữ liệu:',
 	'wikibase-claimview-snak-tooltip' => 'Hãy nhập một giá trị ứng với thuộc tính có tên “$1”. Nếu giá trị của thuộc tính không được định rõ hoặc nếu không biết giá trị chính xác, bạn có thể bấm hình bên cạnh hộp nhập giá trị thay vì định rõ một giá trị tùy biến.',
 	'wikibase-claimview-snak-new-tooltip' => 'Sau khi định rõ một thuộc tính, bạn có thể nhập giá trị tương ứng. Nếu giá trị của thuộc tính không được định rõ hoặc nếu không biết giá trị chính xác, bạn có thể bấm hình bên cạnh hộp nhập giá trị thay vì định rõ một giá trị tùy biến.',
 	'wikibase-statementview-rank-preferred' => 'Hạng ưa thích',
@@ -17303,7 +17337,7 @@ $messages['zh-hans'] = array(
 	'wikibase-aliases-label' => '别名：',
 	'wikibase-aliases-input-help-message' => '如果该数据集有一个以上的名称，你可以输入别名和同义词，以使其可以通过其他名称找到。',
 	'wikibase-aliases-empty' => '没有已定义的别名。',
-	'wikibase-datatype-label' => '数据类型',
+	'wikibase-datatype-label' => '数据类型：',
 	'wikibase-claimview-snak-tooltip' => '请输入属性“$1”对应的值。如果该属性没有指定的值或实际值是未知的，你可以通过单击值输入框旁的图标来指定一个自定义值。',
 	'wikibase-claimview-snak-new-tooltip' => '指定一个属性后你可以输入对应的值。如果该属性没有指定的值或实际值是未知的，你可以通过单击值输入框旁的图标来指定一个自定义值。',
 	'wikibase-statementview-rank-preferred' => '首选组别',
@@ -17356,7 +17390,7 @@ $messages['zh-hans'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => '标签：',
 	'wikibase-itemdisambiguation-submit' => '搜索',
 	'wikibase-itemdisambiguation-nothing-found' => '对不起，没有找到使用标签的项。',
-	'wikibase-itemdisambiguation-search' => '通过[{{fullurl:Special:Search|search=$1}} Special:Search]搜索项。', # Fuzzy
+	'wikibase-itemdisambiguation-search' => '您可以[{{fullurl:Special:Search|search=$1}} 为项搜索]。',
 	'wikibase-itemdisambiguation-create' => '你可以[{{fullurl:Special:NewItem|label=$1}} 创建本项]。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '对不起，你提供的语言标识符是系统未知的。请使用有效的标识符，例如“zh”。',
 	'wikibase-itemdisambiguation-description' => '用于搜索的值必须是完整的文字条目。语言是一种标识符，例如“zh”。',
@@ -17462,6 +17496,7 @@ $messages['zh-hans'] = array(
 	'wikibase-mylanguagefallbackchain-text' => '用于为你显示实体标签的语言备选链显示在下面。',
 	'wikibase-mylanguagefallbackchain-babel' => '你可以通过在{{GENDER:$1|你的}}[[Special:MyPage|用户页面]]放置<nowiki>{{#babel: }}</nowiki>编辑它。',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2，更改自$3 - $4',
+	'wikibase-api-no-such-sitelink' => '无法找到此类站点链接',
 	'wikibase-self-conflict-patched' => '你的编辑已被修补至最后版本，覆盖某些你自己的中间更改。',
 	'wikibase-conflict-patched' => '你的编辑已被修补至最后版本。',
 	'wikibase-restoreold' => '恢复',
@@ -17489,6 +17524,7 @@ $messages['zh-hans'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '添加[$2]{{PLURAL:$1|别名}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '删除[$2]{{PLURAL:$1|别名}}',
 	'wikibase-item-summary-wbsetsitelink-add' => '添加至[$2]的链接',
+	'wikibase-item-summary-wbsetsitelink-add-both' => '添加带徽章的链接至[$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => '更改至[$2]的链接',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => '更改[$2]徽章',
 	'wikibase-item-summary-wbsetsitelink-set-both' => '更改[$2]链接和徽章',
@@ -17669,7 +17705,7 @@ $messages['zh-hant'] = array(
 	'wikibase-aliases-label' => '亦稱為：',
 	'wikibase-aliases-input-help-message' => '若此數據集有多於一個的名稱，您可以輸入其別名和同義詞，以便通過其他名稱找到此項。',
 	'wikibase-aliases-empty' => '没有已定義的別名。',
-	'wikibase-datatype-label' => '數據類型',
+	'wikibase-datatype-label' => '數據類型：',
 	'wikibase-claimview-snak-tooltip' => '請輸入屬性「$1」對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點擊數值輸入欄旁的圖示以指定自定義數值替代。',
 	'wikibase-claimview-snak-new-tooltip' => '指定屬性後你可以輸入對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點擊數值輸入欄旁的圖示以指定自定義數值替代。',
 	'wikibase-statementview-rank-preferred' => '首選級別',
@@ -17720,7 +17756,7 @@ $messages['zh-hant'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => '標籤：',
 	'wikibase-itemdisambiguation-submit' => '搜尋',
 	'wikibase-itemdisambiguation-nothing-found' => '抱歉，没有找到具有此標籤的項目。',
-	'wikibase-itemdisambiguation-search' => '通過[{{fullurl:Special:Search|search=$1}} Special:Search]搜索項。', # Fuzzy
+	'wikibase-itemdisambiguation-search' => '您可以[{{fullurl:Special:Search|search=$1}} 為項搜索]。',
 	'wikibase-itemdisambiguation-create' => '您可以[{{fullurl:Special:NewItem|label=$1}} 創建項目]。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '抱歉，您提供了未知的語言標籤。請使用有效的標籤，如「en」。',
 	'wikibase-itemdisambiguation-description' => '用於搜尋的值必需是完整的文字。語言代碼是一種標籤，如「en」。',
