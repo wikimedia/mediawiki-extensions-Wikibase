@@ -1,32 +1,18 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\Item;
+use Wikibase\Settings;
+use Wikibase\StoreFactory;
 use Wikibase\TermSqlIndex;
 use Wikibase\Term;
+use Wikibase\TermSearchKeyBuilder;
 
 /**
- * Tests for the Wikibase\TermSqlIndex class.
+ * @covers Wikibase\TermSearchKeyBuilder
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.2
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -63,18 +49,18 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 	 * @param boolean $matches
 	 */
 	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
-		if ( \Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
+		if ( Settings::get( 'withoutTermSearchKey' ) ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
 		// make term in item
-		$item = \Wikibase\Item::newEmpty();
+		$item = Item::newEmpty();
 		$item->setId( 42 );
 		$item->setLabel( $languageCode, $termText );
 
 		// save term
-		/* @var \Wikibase\TermSqlIndex $termCache */
-		$termCache = \Wikibase\StoreFactory::getStore( 'sqlstore' )->getTermIndex();
+		/* @var TermSqlIndex $termCache */
+		$termCache = StoreFactory::getStore( 'sqlstore' )->getTermIndex();
 		$termCache->clear();
 		$termCache->saveTermsOfEntity( $item );
 
@@ -83,7 +69,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$dbw->update( $termCache->getTableName(), array( 'term_search_key' => '' ), array(), __METHOD__ );
 
 		// rebuild search key
-		$builder = new \Wikibase\TermSearchKeyBuilder( $termCache );
+		$builder = new TermSearchKeyBuilder( $termCache );
 		$builder->setRebuildAll( true );
 		$builder->rebuildSearchKey();
 
@@ -96,7 +82,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 			'caseSensitive' => false,
 		);
 
-		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), Term::TYPE_LABEL, \Wikibase\Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), Term::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 

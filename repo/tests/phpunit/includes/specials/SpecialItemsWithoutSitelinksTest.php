@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks;
+
 /**
- * Tests for the SpecialItemsWithoutSitelinks class.
+ * @covers Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -24,7 +22,7 @@ namespace Wikibase\Test;
 class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks();
+		return new SpecialItemsWithoutSitelinks();
 	}
 
 	public function testExecute() {

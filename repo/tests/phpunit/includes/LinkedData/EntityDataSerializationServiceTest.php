@@ -14,28 +14,7 @@ use Wikibase\Property;
 /**
  * @covers \Wikibase\LinkedData\EntityDataSerializationService
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
- * @group Database
  *
  * @group Wikibase
  * @group WikibaseEntityData
@@ -43,7 +22,7 @@ use Wikibase\Property;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
+class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
@@ -152,25 +131,25 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$this->assertRegExp( $expectedDataRegex, $data, "outpout" );
 	}
 
-	static $apiMimeTypes = array(
+	protected static $apiMimeTypes = array(
 		'application/vnd.php.serialized',
 		'application/json',
 		'text/xml'
 	);
 
-	static $apiExtensions = array(
+	protected static $apiExtensions = array(
 		'php',
 		'json',
 		'xml'
 	);
 
-	static $apiFormats = array(
+	protected static $apiFormats = array(
 		'php',
 		'json',
 		'xml'
 	);
 
-	static $rdfMimeTypes = array(
+	protected static $rdfMimeTypes = array(
 		'application/rdf+xml',
 		'text/n3',
 		'text/rdf+n3',
@@ -179,33 +158,33 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		'application/ntriples',
 	);
 
-	static $rdfExtensions = array(
+	protected static $rdfExtensions = array(
 		'rdf',
 		'n3',
 		'ttl',
 		'nt'
 	);
 
-	static $rdfFormats = array(
+	protected static $rdfFormats = array(
 		'rdfxml',
 		'n3',
 		'turtle',
 		'ntriples'
 	);
 
-	static $badMimeTypes = array(
+	protected static $badMimeTypes = array(
 		'text/html',
 		'text/text',
 		// 'text/plain', // ntriples presents as text/plain!
 	);
 
-	static $badExtensions = array(
+	protected static $badExtensions = array(
 		'html',
 		'text',
 		'txt',
 	);
 
-	static $badFormats = array(
+	protected static $badFormats = array(
 		'html',
 		'text',
 	);
@@ -303,7 +282,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$format = $service->getFormatName( $expected );
 			$actual = $service->getExtension( $format );
 
-			$this->assertType( 'string', $actual, $expected );
+			$this->assertInternalType( 'string', $actual, $expected );
 		}
 
 		foreach ( self::$badFormats as $format ) {
@@ -321,7 +300,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$format = $service->getFormatName( $expected );
 			$actual = $service->getMimeType( $format );
 
-			$this->assertType( 'string', $actual, $expected );
+			$this->assertInternalType( 'string', $actual, $expected );
 		}
 
 		foreach ( self::$badFormats as $format ) {

@@ -1,8 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+
 use ContentHandler;
+use Language;
 use Revision;
+use Title;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
@@ -11,28 +14,9 @@ use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- *  Tests for the Wikibase\EntityHandler class.
+ * @covers Wikibase\EntityHandler
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseEntity
@@ -44,9 +28,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
-	public abstract function getModelId();
+	abstract public function getModelId();
 
-	public abstract function getClassName();
+	abstract public function getClassName();
 
 	/**
 	 * Returns instances of the EntityHandler deriving class.
@@ -99,7 +83,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 * @param \Wikibase\EntityHandler $entityHandler
 	 */
-	public function testGetModelName( EntityHandler $entityHandler )  {
+	public function testGetModelName( EntityHandler $entityHandler ) {
 		$this->assertEquals( $this->getModelId(), $entityHandler->getModelID() );
 		$this->assertInstanceOf( '\ContentHandler', $entityHandler );
 		$this->assertInstanceOf( $this->getClassName(), $entityHandler );
@@ -132,11 +116,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testCanBeUsedOn() {
 		$handler = $this->getHandler();
 
-		$this->assertTrue( $handler->canBeUsedOn( \Title::makeTitle( $handler->getEntityNamespace(), "1234" ) ),
+		$this->assertTrue( $handler->canBeUsedOn( Title::makeTitle( $handler->getEntityNamespace(), "1234" ) ),
 							'It should be possible to create this kind of entity in the respective entity namespace!'
 						);
 
-		$this->assertFalse( $handler->canBeUsedOn( \Title::makeTitle( NS_MEDIAWIKI, "Foo" ) ),
+		$this->assertFalse( $handler->canBeUsedOn( Title::makeTitle( NS_MEDIAWIKI, "Foo" ) ),
 							'It should be impossible to create an entity outside the respective entity namespace!'
 						);
 	}
@@ -145,7 +129,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		global $wgContLang;
 
 		$handler = $this->getHandler();
-		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
+		$title = Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
 
 		//NOTE: currently, this tests whether getPageLanguage will always return the content language, even
 		//      if the user language is different. It's unclear whether this is actually the desired behavior,
@@ -155,13 +139,13 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test fr
-		$this->setMwGlobals( 'wgLang', \Language::factory( "fr" ) );
+		$this->setMwGlobals( 'wgLang', Language::factory( "fr" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test nl
-		$this->setMwGlobals( 'wgLang', \Language::factory( "nl" ) );
-		$this->setMwGlobals( 'wgContLang', \Language::factory( "fr" ) );
+		$this->setMwGlobals( 'wgLang', Language::factory( "nl" ) );
+		$this->setMwGlobals( 'wgContLang', Language::factory( "fr" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 	}
@@ -179,12 +163,12 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 
 		// test fr
-		$this->setMwGlobals( 'wgLang', \Language::factory( "fr" ) );
+		$this->setMwGlobals( 'wgLang', Language::factory( "fr" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 
 		// test nl
-		$this->setMwGlobals( 'wgLang', \Language::factory( "nl" ) );
+		$this->setMwGlobals( 'wgLang', Language::factory( "nl" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 	}

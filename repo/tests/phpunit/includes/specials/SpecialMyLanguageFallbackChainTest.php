@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
+
 /**
- * Tests for the SpecialMyLanguageFallbackChain class.
+ * @covers Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -20,7 +18,7 @@ namespace Wikibase\Test;
 class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain();
+		return new SpecialMyLanguageFallbackChain();
 	}
 
 	public function testExecute() {

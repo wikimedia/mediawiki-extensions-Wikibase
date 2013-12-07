@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialListDatatypes;
+
 /**
- * Tests for the SpecialListDataTypes class.
+ * @covers Wikibase\Repo\Specials\SpecialListDatatypes
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -21,7 +19,7 @@ namespace Wikibase\Test;
 class SpecialListDataTypesTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialListDatatypes();
+		return new SpecialListDatatypes();
 	}
 
 	public function testExecute() {

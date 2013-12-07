@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialNewProperty;
+
 /**
- * Tests for the SpecialNewProperty class.
+ * @covers Wikibase\Repo\Specials\SpecialNewProperty
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -25,7 +23,7 @@ namespace Wikibase\Test;
 class SpecialNewPropertyTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialNewProperty();
+		return new SpecialNewProperty();
 	}
 
 	public function testExecute() {
