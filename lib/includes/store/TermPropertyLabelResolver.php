@@ -51,7 +51,8 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	protected $propertiesByLabel = null;
 
 	/**
-	 * @param string $lang 			The language of the labels to look up (typically, the wiki's content language)
+	 * @param string $lang 			The language of the labels to look up
+	 *								(typically, the wiki's content language)
 	 * @param TermIndex $termIndex	The TermIndex service to look up labels with
 	 * @param BagOStuff $cache		The cache to use for labels (typically from wfGetMainCache())
 	 * @param int $cacheDuration	Number of seconds to keep the cached version for.
@@ -60,7 +61,9 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 *								Should be set to something including the wiki name
 	 *								of the wiki that maintains the properties.
 	 */
-	public function __construct( $lang, TermIndex $termIndex, BagOStuff $cache, $cacheDuration, $cacheKey ) {
+	public function __construct( $lang, TermIndex $termIndex, BagOStuff $cache,
+		$cacheDuration, $cacheKey
+	) {
 		$this->lang = $lang;
 		$this->cache = $cache;
 		$this->termIndex = $termIndex;
@@ -92,8 +95,8 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 *
 	 * @return EntityId[]
 	 */
-	protected function getLabelMap( $recache = '' ) {
-		if ( $this->propertiesByLabel !== null ) {
+	private function getLabelMap( $recache ) {
+		if ( $this->propertiesByLabel !== null && $recache !== 'recache' ) {
 			// in-process cache
 			return $this->propertiesByLabel;
 		}
@@ -102,7 +105,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		$cached = $this->getCachedLabelMap( $recache );
 
-		if ( $cached !== false && $cached !== null ) {
+		if ( is_array( $cached ) ) {
 			$this->propertiesByLabel = $cached;
 
 			wfProfileIn( __METHOD__ );
@@ -119,7 +122,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 	}
 
-	protected function loadProperties() {
+	private function loadProperties() {
 		wfProfileIn( __METHOD__ );
 
 		$termTemplate = new Term( array(
@@ -158,7 +161,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 *
 	 * @return array|false
 	 */
-	protected function getCachedLabelMap( $recache ) {
+	private function getCachedLabelMap( $recache ) {
 		$cached = false;
 
 		if ( $recache !== 'recache' ) {
@@ -177,7 +180,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 *
 	 * @return boolean
 	 */
-	protected function needsRecache( array $propertyIds ) {
+	private function needsRecache( array $propertyIds ) {
 		foreach( $propertyIds as $propertyId ) {
 			if ( !( $propertyId instanceof PropertyId ) ) {
 				return true;
