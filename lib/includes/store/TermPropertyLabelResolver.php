@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-
 class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 	/**
@@ -52,23 +51,16 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	protected $propertiesByLabel = null;
 
 	/**
-	 * @param string      $lang             The language of the labels to look up (typically,
-	 *                                      the wiki's content language)
-	 * @param TermIndex   $termIndex        The TermIndex service to look up labels with
-	 * @param BagOStuff  $cache             The cache to use for labels (typically from wfGetMainCache())
-	 * @param int         $cacheDuration    Number of seconds to keep the cached version for.
-	 *                                      Defaults to 3600 seconds = 1 hour.
-	 * @param string $cacheKey              The cache key to use, auto-generated based on $lang per default.
-	 *                                      Should be set to something including the wiki name
-	 *                                      of the wiki that maintains the properties.
+	 * @param string $lang          The language of the labels to look up (typically, the wiki's content language)
+	 * @param TermIndex $termIndex  The TermIndex service to look up labels with
+	 * @param BagOStuff $cache      The cache to use for labels (typically from wfGetMainCache())
+	 * @param int $cacheDuration    Number of seconds to keep the cached version for.
+	 *                              Defaults to 3600 seconds = 1 hour.
+	 * @param string $cacheKey      The cache key to use, auto-generated based on $lang per default.
+	 *                              Should be set to something including the wiki name
+	 *                              of the wiki that maintains the properties.
 	 */
-	public function __construct(
-		$lang,
-		TermIndex $termIndex,
-		BagOStuff $cache,
-		$cacheDuration,
-		$cacheKey
-	) {
+	public function __construct( $lang, TermIndex $termIndex, BagOStuff $cache, $cacheDuration, $cacheKey ) {
 		$this->lang = $lang;
 		$this->cache = $cache;
 		$this->termIndex = $termIndex;
@@ -78,10 +70,9 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 	/**
 	 * @param string[] $labels the labels
-	 * @param string   $recache Flag, set to 'recache' to discard cached data and fetch fresh data
-	 *                 from the database.
+	 * @param string $recache Flag, set to 'recache' to fetch fresh data from the database.
 	 *
-	 * @return EntityId[] a map of strings from $lables to the corresponding entity ID.
+	 * @return EntityId[] a map of strings from $labels to the corresponding entity ID.
 	 */
 	public function getPropertyIdsForLabels( array $labels, $recache = '' ) {
 		$props = $this->getLabelMap( $recache );
@@ -94,11 +85,9 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 	/**
 	 * Returns a map of labels to EntityIds for all Properties currently defined.
-	 * The information is taking from the cache if possible, and loaded from a TermIndex
-	 * of not.
+	 * The information is taking from the cache if possible, and loaded from a TermIndex if not.
 	 *
-	 * @param string   $recache Flag, set to 'recache' to discard cached data and fetch fresh data
-	 *                 from the database.
+	 * @param string $recache Flag, set to 'recache' to fetch fresh data from the database.
 	 *
 	 * @return EntityId[]
 	 */
@@ -119,7 +108,18 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 			return $this->propertiesByLabel;
 		}
 
-		wfProfileIn( __METHOD__ . '#load' );
+		$this->propertiesByLabel = $this->loadProperties();
+
+		$this->cache->set( $this->cacheKey, $this->propertiesByLabel, $this->cacheDuration );
+
+		wfProfileOut( __METHOD__ );
+
+		return $this->propertiesByLabel;
+
+	}
+
+	protected function loadProperties() {
+		wfProfileIn( __METHOD__ );
 
 		$termTemplate = new Term( array(
 			'termType' => 'label',
@@ -138,20 +138,18 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 			)
 		);
 
-		$this->propertiesByLabel = array();
+		$propertiesByLabel = array();
 
 		foreach ( $terms as $term ) {
 			$label = $term->getText();
 			$id = PropertyId::newFromNumber( $term->getEntityId() );
 
-			$this->propertiesByLabel[$label] = $id;
+			$propertiesByLabel[$label] = $id;
 		}
 
-		$this->cache->set( $this->cacheKey, $this->propertiesByLabel, $this->cacheDuration );
-
-		wfProfileOut( __METHOD__ . '#load' );
 		wfProfileOut( __METHOD__ );
-		return $this->propertiesByLabel;
+
+		return $propertiesByLabel;
 	}
 
 	/**
