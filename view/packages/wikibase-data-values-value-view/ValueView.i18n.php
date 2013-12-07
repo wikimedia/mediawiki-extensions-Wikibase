@@ -202,7 +202,7 @@ $messages['ca'] = array(
 	'valueview-listrotator-auto' => 'auto',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Mormegil
  */
 $messages['cs'] = array(
