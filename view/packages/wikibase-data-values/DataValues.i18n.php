@@ -62,7 +62,7 @@ $messages['be-tarask'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Mormegil
  */
 $messages['cs'] = array(
