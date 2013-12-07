@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Test;
 
 use Article;
@@ -11,7 +12,7 @@ use Wikibase\ItemContent;
 use WikiPage;
 
 /**
- * @covers ContentRetriever
+ * @covers Wikibase\ContentRetriever
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -6,7 +6,7 @@ use \Wikibase\Item;
 use \Wikibase\ItemContent;
 
 /**
- * @covers SpecialEntityData
+ * @covers Wikibase\Repo\Specials\SpecialEntityData
  *
  * @file
  * @since 0.4
