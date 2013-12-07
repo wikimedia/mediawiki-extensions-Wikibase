@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialSetDescription;
+
 /**
- * Tests for the SpecialSetDescription class.
+ * @covers Wikibase\Repo\Specials\SpecialSetDescription
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -24,7 +22,7 @@ namespace Wikibase\Test;
 class SpecialSetDescriptionTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialSetDescription();
+		return new SpecialSetDescription();
 	}
 
 	public function testExecute() {

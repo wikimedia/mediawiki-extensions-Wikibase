@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use DataTypes\DataTypeFactory;
 use EasyRdf_Namespace;
 use MediaWikiSite;
@@ -13,7 +14,7 @@ use Wikibase\Property;
 use Wikibase\RdfSerializer;
 
 /**
- * Tests for the Wikibase\RdfSerializer class.
+ * @covers Wikibase\RdfSerializer
  *
  * @since 0.4
  *

@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel;
+
 /**
- * Tests for the SpecialEntitiesWithoutLabel class.
+ * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -21,7 +19,7 @@ namespace Wikibase\Test;
 class SpecialEntitiesWithoutLabelTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel();
+		return new SpecialEntitiesWithoutLabel();
 	}
 
 	public function testExecute() {
@@ -32,6 +30,7 @@ class SpecialEntitiesWithoutLabelTest extends SpecialPageTestBase {
 				'id' => 'wb-entitieswithoutpage-language',
 				'name' => 'language',
 			) );
+
 		$matchers['submit'] = array(
 			'tag' => 'input',
 			'attributes' => array(

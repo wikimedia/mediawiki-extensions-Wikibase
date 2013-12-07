@@ -29,7 +29,7 @@ use Wikibase\Validators\SnakValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class SnakValidationHelperTest extends \MediaWikiTestCase {
+class SnakValidationHelperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var DataTypeFactory
@@ -49,8 +49,13 @@ class SnakValidationHelperTest extends \MediaWikiTestCase {
 		$lengthValidator = new TestValidator( '/^.{1,10}$/' );
 
 		$this->dataTypeFactory = new DataTypeFactory();
-		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array( $numericValidator, $lengthValidator ) ) );
-		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array( $alphabeticValidator, $lengthValidator ) ) );
+		$this->dataTypeFactory->registerDataType(
+			new DataType( 'numeric', 'string', array( $numericValidator, $lengthValidator ) )
+		);
+
+		$this->dataTypeFactory->registerDataType(
+			new DataType( 'alphabetic', 'string', array( $alphabeticValidator, $lengthValidator ) )
+		);
 
 		$p1 = new PropertyId( 'p1' );
 		$p2 = new PropertyId( 'p2' );

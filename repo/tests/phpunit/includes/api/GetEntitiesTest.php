@@ -3,6 +3,8 @@
 namespace Wikibase\Test\Api;
 
 /**
+ * @covers Wikibase\Api\GetEntities
+ *
  * Test cases are generated using the data provided in the various static arrays below
  * Adding one extra element to any of the arrays (except format) will generate 4 new tests
  *
@@ -297,19 +299,19 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 	private function assertEntityPropsInfo( $entity, $expected ) {
 		$this->assertArrayHasKey( 'pageid', $entity, 'An entity is missing the pageid value' );
-		$this->assertType( 'integer', $entity['pageid'] );
+		$this->assertInternalType( 'integer', $entity['pageid'] );
 		$this->assertGreaterThan( 0, $entity['pageid'] );
 
 		$this->assertArrayHasKey( 'ns', $entity, 'An entity is missing the ns value' );
-		$this->assertType( 'integer', $entity['ns'] );
+		$this->assertInternalType( 'integer', $entity['ns'] );
 		$this->assertGreaterThanOrEqual( 0, $entity['ns'] );
 
 		$this->assertArrayHasKey( 'title', $entity, 'An entity is missing the title value' );
-		$this->assertType( 'string', $entity['title'] );
+		$this->assertInternalType( 'string', $entity['title'] );
 		$this->assertNotEmpty( $entity['title'] );
 
 		$this->assertArrayHasKey( 'lastrevid', $entity, 'An entity is missing the lastrevid value' );
-		$this->assertType( 'integer', $entity['lastrevid'] );
+		$this->assertInternalType( 'integer', $entity['lastrevid'] );
 		$this->assertGreaterThanOrEqual( 0, $entity['lastrevid'] );
 
 		$this->assertArrayHasKey( 'modified', $entity, 'An entity is missing the modified value' );
