@@ -360,9 +360,11 @@ $messages['et'] = array(
 /** Persian (فارسی)
  * @author Alireza
  * @author Ebraminio
+ * @author Reza1615
  * @author Rtemis
  */
 $messages['fa'] = array(
+	'valueview-desc' => 'اجزای رابط کاربر برای نمایش و ویرایش مقادیر داده‌ها',
 	'valueview-expert-advancedadjustments' => 'تنظیم‌های پیشرفته',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'پشتیبانی از مقادیر «$1» فعلاً امکان‌پذیر نیست.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.',
