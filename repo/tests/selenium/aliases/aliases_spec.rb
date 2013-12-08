@@ -25,11 +25,11 @@ describe "Check functionality of add/edit/remove aliases" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
         # check for necessary elements
-        page.aliasesDiv?.should be_true
-        page.aliasesTitle?.should be_true
-        page.aliasesList?.should be_false
-        page.editAliases?.should be_false
-        page.addAliases?.should be_true
+        page.aliases_div?.should be_true
+        page.aliases_title?.should be_true
+        page.aliases_list?.should be_false
+        page.edit_aliases?.should be_false
+        page.add_aliases?.should be_true
       end
     end
   end
@@ -38,46 +38,46 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that adding some aliases work properly" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
-        page.addAliases
-        page.cancelAliases?.should be_true
-        page.saveAliases?.should be_false
-        page.saveAliasesDisabled?.should be_true
-        page.saveAliasesDisabled # Clicking should not trigger any action
-        page.cancelAliases?.should be_true
-        page.addAliases_element.visible?.should be_false
-        page.cancelAliases
-        page.addAliases?.should be_true
+        page.add_aliases
+        page.cancel_aliases?.should be_true
+        page.save_aliases?.should be_false
+        page.save_aliases_disabled?.should be_true
+        page.save_aliases_disabled # Clicking should not trigger any action
+        page.cancel_aliases?.should be_true
+        page.add_aliases_element.visible?.should be_false
+        page.cancel_aliases
+        page.add_aliases?.should be_true
 
         # adding some aliases
-        page.addAliases
+        page.add_aliases
         i = 0;
         while i < NUM_INITIAL_ALIASES do
-          page.aliasesInputEmpty= aliases[i]
+          page.aliases_input_empty= aliases[i]
           i += 1;
         end
-        page.saveAliases?.should be_true
+        page.save_aliases?.should be_true
 
         # cancel the action and check that there are still no aliases
-        page.cancelAliases?.should be_true
-        page.cancelAliases
-        page.addAliases?.should be_true
+        page.cancel_aliases?.should be_true
+        page.cancel_aliases
+        page.add_aliases?.should be_true
 
         # checking behavior of ESC key
-        page.addAliases
-        page.aliasesInputEmpty= generate_random_string(8)
-        page.aliasesInputEmpty_element.send_keys :escape
-        page.addAliases?.should be_true
+        page.add_aliases
+        page.aliases_input_empty= generate_random_string(8)
+        page.aliases_input_empty_element.send_keys :escape
+        page.add_aliases?.should be_true
 
         # again adding the aliases
-        page.addAliases
+        page.add_aliases
         i = 0;
         while i < NUM_INITIAL_ALIASES do
-          page.aliasesInputEmpty= aliases[i]
+          page.aliases_input_empty= aliases[i]
           i += 1;
         end
-        page.saveAliases?.should be_true
+        page.save_aliases?.should be_true
 
-        page.saveAliases
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
@@ -92,17 +92,17 @@ describe "Check functionality of add/edit/remove aliases" do
       on_page(ItemPage) do |page|
         num_current_aliases = page.count_existing_aliases
         page.wait_for_entity_to_load
-        page.editAliases
-        page.aliasesInputEmpty= generate_random_string(8)
-        page.aliasesInputModified_element.send_keys :return
+        page.edit_aliases
+        page.aliases_input_empty= generate_random_string(8)
+        page.aliases_input_modified_element.send_keys :return
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_entity_to_load
         page.count_existing_aliases.should == (num_current_aliases + 1)
-        page.editAliases
-        page.aliasesInputFirstRemove
-        page.saveAliases
+        page.edit_aliases
+        page.aliases_input_first_remove
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
@@ -118,38 +118,38 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_entity_to_load
 
         # check edit aliases mode
-        page.editAliases
-        page.editAliases?.should be_false
-        page.cancelAliases?.should be_true
-        page.aliasesTitle?.should be_true
-        page.aliasesList?.should be_true
-        page.aliasesInputEmpty?.should be_true
+        page.edit_aliases
+        page.edit_aliases?.should be_false
+        page.cancel_aliases?.should be_true
+        page.aliases_title?.should be_true
+        page.aliases_list?.should be_true
+        page.aliases_input_empty?.should be_true
 
         # check functionality of cancel
-        page.cancelAliases
+        page.cancel_aliases
         page.count_existing_aliases.should == NUM_INITIAL_ALIASES
-        page.aliasesDiv?.should be_true
-        page.aliasesTitle?.should be_true
-        page.aliasesList?.should be_true
-        page.editAliases?.should be_true
+        page.aliases_div?.should be_true
+        page.aliases_title?.should be_true
+        page.aliases_list?.should be_true
+        page.edit_aliases?.should be_true
 
         # check functionality of input fields in edit mode
-        page.editAliases
-        page.aliasesInputEmpty?.should be_true
-        page.aliasesInputModified?.should be_false
-        page.aliasesInputEmpty= "new alias"
-        page.aliasesInputEmpty?.should be_true
-        page.aliasesInputModified?.should be_true
-        page.aliasesInputRemove?.should be_true
-        page.saveAliases?.should be_true
-        page.aliasesInputModified_element.clear
-        page.aliasesInputRemove
-        page.aliasesInputModified?.should be_false
-        page.aliasesInputEmpty= "new alias"
-        page.aliasesInputRemove
-        page.aliasesInputEmpty?.should be_true
-        page.aliasesInputModified?.should be_false
-        page.cancelAliases
+        page.edit_aliases
+        page.aliases_input_empty?.should be_true
+        page.aliases_input_modified?.should be_false
+        page.aliases_input_empty= "new alias"
+        page.aliases_input_empty?.should be_true
+        page.aliases_input_modified?.should be_true
+        page.aliases_input_remove?.should be_true
+        page.save_aliases?.should be_true
+        page.aliases_input_modified_element.clear
+        page.aliases_input_remove
+        page.aliases_input_modified?.should be_false
+        page.aliases_input_empty= "new alias"
+        page.aliases_input_remove
+        page.aliases_input_empty?.should be_true
+        page.aliases_input_modified?.should be_false
+        page.cancel_aliases
       end
     end
   end
@@ -161,9 +161,9 @@ describe "Check functionality of add/edit/remove aliases" do
 
         # check functionality of adding aliases
         test_alias = generate_random_string(8)
-        page.editAliases
-        page.aliasesInputEmpty= test_alias
-        page.saveAliases
+        page.edit_aliases
+        page.aliases_input_empty= test_alias
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
@@ -179,14 +179,14 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_entity_to_load
 
         # checking detection of duplicate aliases
-        page.editAliases
-        page.aliasesInputEqual?.should be_false
-        page.aliasesInputEmpty= test_alias
-        page.aliasesInputEqual?.should be_true
-        page.saveAliases?.should be_false
-        page.aliasesInputEmpty= generate_random_string(8)
-        page.saveAliases?.should be_true
-        page.saveAliases
+        page.edit_aliases
+        page.aliases_input_equal?.should be_false
+        page.aliases_input_empty= test_alias
+        page.aliases_input_equal?.should be_true
+        page.save_aliases?.should be_false
+        page.aliases_input_empty= generate_random_string(8)
+        page.save_aliases?.should be_true
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
@@ -202,13 +202,13 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_entity_to_load
 
         # checking functionality of editing aliases
-        page.editAliases
-        page.aliasesInputFirst?.should be_true
+        page.edit_aliases
+        page.aliases_input_first?.should be_true
         #editing an alias by deleting some chars from it
-        page.aliasesInputFirst_element.send_keys :backspace
-        page.aliasesInputFirst_element.send_keys :delete
-        page.aliasesInputFirst_element.send_keys :backspace
-        page.saveAliases
+        page.aliases_input_first_element.send_keys :backspace
+        page.aliases_input_first_element.send_keys :delete
+        page.aliases_input_first_element.send_keys :backspace
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
@@ -226,9 +226,9 @@ describe "Check functionality of add/edit/remove aliases" do
         "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
         "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong";
         page.wait_for_entity_to_load
-        page.editAliases
-        page.aliasesInputEmpty = too_long_string
-        page.saveAliases
+        page.edit_aliases
+        page.aliases_input_empty = too_long_string
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         page.wbErrorDiv?.should be_true
@@ -243,22 +243,22 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_entity_to_load
 
         # checking functionality of removing aliases
-        page.editAliases
-        page.aliasesInputFirstRemove?.should be_true
+        page.edit_aliases
+        page.aliases_input_first_remove?.should be_true
         num_aliases = page.count_existing_aliases
 
         i = 0;
         while i < (num_aliases-1) do
-          page.aliasesInputFirstRemove?.should be_true
-          page.aliasesInputFirstRemove
+          page.aliases_input_first_remove?.should be_true
+          page.aliases_input_first_remove
           i += 1;
         end
-        page.saveAliases
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_entity_to_load
-        page.addAliases?.should be_true
+        page.add_aliases?.should be_true
       end
     end
   end
