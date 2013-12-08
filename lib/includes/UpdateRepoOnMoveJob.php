@@ -75,8 +75,8 @@ class UpdateRepoOnMoveJob extends \Job {
 
 		$params['siteId'] = $globalId;
 		$params['entityId'] = $entityId;
-		$params['oldTitle'] = $oldTitle->getPrefixedDBkey();
-		$params['newTitle'] = $newTitle->getPrefixedDBkey();
+		$params['oldTitle'] = $oldTitle->getPrefixedText();
+		$params['newTitle'] = $newTitle->getPrefixedText();
 		$params['user'] = $user->getName();
 
 		// The Title object isn't really being used but \Job demands it... so we just insert something
