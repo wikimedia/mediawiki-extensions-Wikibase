@@ -10,6 +10,6 @@ class SetAliasesPage < SetEntityPage
   include PageObject
   page_url WIKI_REPO_URL + "Special:SetAliases"
 
-  button(:setAliasesSubmit, :id => "wb-setaliases-submit")
+  button(:set_aliases_submit, :id => "wb-setaliases-submit")
 
 end

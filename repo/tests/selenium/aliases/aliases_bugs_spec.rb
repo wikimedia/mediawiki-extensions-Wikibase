@@ -22,11 +22,11 @@ describe "Check for bugs" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
         # check for necessary elements
-        page.aliasesDiv?.should be_true
-        page.aliasesTitle?.should be_true
-        page.aliasesList?.should be_false
-        page.editAliases?.should be_false
-        page.addAliases?.should be_true
+        page.aliases_div?.should be_true
+        page.aliases_title?.should be_true
+        page.aliases_list?.should be_false
+        page.edit_aliases?.should be_false
+        page.add_aliases?.should be_true
       end
     end
   end
@@ -35,16 +35,16 @@ describe "Check for bugs" do
     it "bug: add-button appearing when it should not" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
-        page.addAliases
-        page.addAliases?.should be_false
-        page.cancelAliases?.should be_true
-        page.cancelAliases
-        page.addAliases?.should be_true
-        page.cancelAliases?.should be_false
-        page.addAliases
-        page.addAliases?.should be_false
-        page.cancelAliases?.should be_true
-        page.cancelAliases
+        page.add_aliases
+        page.add_aliases?.should be_false
+        page.cancel_aliases?.should be_true
+        page.cancel_aliases
+        page.add_aliases?.should be_true
+        page.cancel_aliases?.should be_false
+        page.add_aliases
+        page.add_aliases?.should be_false
+        page.cancel_aliases?.should be_true
+        page.cancel_aliases
       end
     end
   end
@@ -61,9 +61,9 @@ describe "Check for bugs" do
         @browser.refresh
         page.wait_for_entity_to_load
         page.count_existing_aliases.should == 1
-        page.editAliases
-        page.aliasesInputFirstRemove
-        page.saveAliases
+        page.edit_aliases
+        page.aliases_input_firstRemove
+        page.save_aliases
         ajax_wait
         page.wait_for_api_callback
         page.add_aliases(['12345'])
