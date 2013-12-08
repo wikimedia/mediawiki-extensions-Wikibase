@@ -629,7 +629,19 @@ Parameters:
 * $1 - (Unused) language name
 {{Related|Wikibase-input-help-message}}',
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
-	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.',
+	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.
+
+Followed by any one of the following data types:
+* {{msg-mw|Datatypes-type-string}}
+* {{msg-mw|Datatypes-type-quantity}}
+* {{msg-mw|Datatypes-type-monolingual-text}}
+* {{msg-mw|Datatypes-type-multilingual-text}}
+* {{msg-mw|Datatypes-type-number}}
+* {{msg-mw|Datatypes-type-mediawiki-title}}
+* {{msg-mw|Datatypes-type-unknown}}
+* {{msg-mw|Datatypes-type-boolean}}
+* {{msg-mw|Datatypes-type-globe-coordinate}}
+* {{msg-mw|Datatypes-type-time}}',
 	'wikibase-claimview-snak-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata:Glossary#Claim]]).
 
 Parameters:
@@ -2562,6 +2574,7 @@ $messages['bn'] = array(
 	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" কোন বৈধ ভুক্তি নয়।',
 	'special-itemswithoutsitelinks' => 'সাইটলিংক বিহীন আইটেম',
 	'wikibase-entitydata-bad-id' => 'অবৈধ আইডি: $1।',
+	'special-mylanguagefallbackchain' => 'আমার ভাষা ফলব্যাক চেইন',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, $3 - $4 থেকে রূপান্তরিত',
 	'wikibase-restoreold' => 'পুনরুদ্ধার',
 	'wikibase-restore-summary' => '[[Special:Contributions/$2|$2]] কর্তৃক $1-এর সংশোধনটি পুনরুদ্ধার করা হয়েছে',
@@ -2584,6 +2597,7 @@ $messages['bn'] = array(
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2]-এ লিঙ্ক অপসারিত হয়েছে',
 	'wikibase-item-summary-clientsitelink-update' => '[$3] থেকে [$4]-এ পাতা স্থানান্তরিত হয়েছে',
 	'wikibase-item-summary-wbmergeitems-from' => "'$3' থেকে আইটেম একত্রীকরণ করা হয়েছে",
+	'wikibase-item-summary-wbmergeitems-to' => "'$3'-এর সাথে আইটেমটি একত্রীকরণ করা হয়েছে",
 	'wikibase-property-summary-wbcreate-new' => 'নতুন বৈশিষ্ট্য তৈরি হয়েছে',
 	'wikibase-property-summary-wbeditentity-create' => 'নতুন বৈশিষ্ট্য তৈরি হয়েছে',
 	'wikibase-property-summary-wbeditentity-update' => 'বৈশিষ্ট্য হালনাগাদ',
@@ -5116,7 +5130,7 @@ Tu dirección IP quedará registrada en el historial de revisiones de esta entid
 	'wikibase-setsitelink-submit' => 'Definir el enlace de sitio',
 	'wikibase-setsitelink-warning-remove' => '¿Estás {{GENDER:|seguro|segura}} de que quieres eliminar el enlace de sitio de [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Se desconoce el id del sitio "$1". Por favor, utiliza un id de sitio existente, como "eswiki".',
-	'wikibase-setentity-id' => 'ID:',
+	'wikibase-setentity-id' => 'Id.:',
 	'wikibase-setentity-language' => 'Idioma:',
 	'wikibase-setentity-invalid-langcode' => 'El identificador de idioma "$1" es desconocido. Utiliza un identificador de idioma que sea conocido para el sistema, como "es".',
 	'wikibase-setentity-invalid-id' => 'El identificador ID "$1" es desconocido para el sistema. Utiliza un identificador de entidad que sea válido.',
@@ -5125,7 +5139,7 @@ Tu dirección IP quedará registrada en el historial de revisiones de esta entid
 	'wikibase-dispatchstats-no-stats' => 'Actualmente no hay estadísticas disponibles.',
 	'wikibase-dispatchstats-changes' => 'Estadísticas del registro de modificaciones',
 	'wikibase-dispatchstats-stats' => 'Estadísticas de distribución',
-	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-change-id' => 'Id.',
 	'wikibase-dispatchstats-change-timestamp' => 'Fecha y hora',
 	'wikibase-dispatchstats-oldest-change' => 'Más antiguas',
 	'wikibase-dispatchstats-newest-change' => 'Más nuevas',
@@ -7327,7 +7341,7 @@ $messages['he'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'תווית:',
 	'wikibase-itemdisambiguation-submit' => 'חיפוש',
 	'wikibase-itemdisambiguation-nothing-found' => 'מצטערים, לא נמצא שום פריט עם התווית הזאת.',
-	'wikibase-itemdisambiguation-search' => 'חיפוש פריט באמצעות [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
+	'wikibase-itemdisambiguation-search' => 'באפשרותך [{{fullurl:Special:Search|search=$1}} לחפש פריט].',
 	'wikibase-itemdisambiguation-create' => 'אפשר גם [{{fullurl:Special:NewItem|label=$1}} ליצור את הפריט].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'מצטערים, מזהה השפה שהזנת אינו ידוע למערכת. נא להשתמש במזהה תקין כגון "en".',
 	'wikibase-itemdisambiguation-description' => 'ערכים שמשמשים לחיפוש צריכים להיות עיול טקסט שלם. שפה היא מזהה, כגון "en".',
@@ -11153,7 +11167,7 @@ $messages['mk'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Етикета:',
 	'wikibase-itemdisambiguation-submit' => 'Пребарај',
 	'wikibase-itemdisambiguation-nothing-found' => 'Нажалост, не пронајдов ниедна етикета.',
-	'wikibase-itemdisambiguation-search' => 'Пребарајте го предметот со [{{fullurl:Special:Search|search=$1}} Специјална:Пребарување].', # Fuzzy
+	'wikibase-itemdisambiguation-search' => 'Можете да го [{{fullurl:Special:Search|search=$1}} побарате предметот].',
 	'wikibase-itemdisambiguation-create' => 'Можете да [{{fullurl:Special:NewItem|label=$1}} создадете нов предмет].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Нажалост, укажаниот јазичен код не му е познат на системот. Кодот мора да биде важечки (на пр. „mk“).',
 	'wikibase-itemdisambiguation-description' => 'Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. Јазикот е назнака, како на пр. „mk“.',
@@ -12276,8 +12290,8 @@ $messages['nl'] = array(
 	'wikibase-aliases-input-help-message' => 'Als deze gegevensset bekend is onder meer dan één bepaalde naam, dan kunt u aliassen en synoniemen opgeven, zodat die ook gevonden kan worden onder alternatieve namen.',
 	'wikibase-aliases-empty' => 'Er zijn geen aliassen ingesteld.',
 	'wikibase-datatype-label' => 'Gegevenstype:',
-	'wikibase-claimview-snak-tooltip' => 'Voer een waarde in die overeenkomt met de eigenschap "$1". Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het icoon naast het invoerveld voor de waarde te klikken.',
-	'wikibase-claimview-snak-new-tooltip' => 'Nadat u een eigenschap hebt opgegeven kunt u een bijbehorende waarde opgeven. Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het icoon naast het invoerveld voor de waarde te klikken.',
+	'wikibase-claimview-snak-tooltip' => 'Voer een waarde in die overeenkomt met de eigenschap "$1". Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het pictogram naast het invoerveld voor de waarde te klikken.',
+	'wikibase-claimview-snak-new-tooltip' => 'Nadat u een eigenschap hebt opgegeven kunt u een bijbehorende waarde opgeven. Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het pictogram naast het invoerveld voor de waarde te klikken.',
 	'wikibase-statementview-rank-preferred' => 'Voorkeursrang',
 	'wikibase-statementview-rank-normal' => 'Normale rang',
 	'wikibase-statementview-rank-deprecated' => 'Afgekeurde rang',
@@ -12366,6 +12380,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-setaliases-warning-remove' => 'Wilt u echt alle aliassen verwijderen van [[$1]]?',
 	'special-setsitelink' => 'Sitekoppeling instellen',
 	'wikibase-setsitelink-introfull' => 'U bent de sitekoppeling van $2 voor [[$1]] aan het instellen.',
+	'wikibase-setsitelink-intro' => 'Met dit formulier kunt u de sitekoppeling van een entiteit instellen. U moet het ID van de entiteit opgeven (bijvoorbeeld Q23), een site-ID (bijvoorbeeld "nwiki") en de in te stellen sitekoppeling.',
 	'wikibase-setsitelink-site' => 'Site-ID:',
 	'wikibase-setsitelink-label' => 'Sitekoppeling:',
 	'wikibase-setsitelink-submit' => 'Sitekoppeling instellen',
@@ -12509,12 +12524,37 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 * query - impliciet onderdeel van de Iristring
 * fragment - impliciet onderdeel van de Iristring',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Globale coördinaat',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Letterlijke gegevens voor een geografische positie met de notatie als een paar van breedtegraad en lengtegraad in gms of decimale graden voor het gegeven stellaire lichaam. Standaard is "Aarde" en dan "WGS84". Dit voegt een resolutie en afstand toe.
+ * breedtegraad: impliciete eerste deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door het achtervoegsel N/S;
+ * lengtegraad: impliciete tweede deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door achtervoegsel E/W;
+ * hoogte (optioneel) – expliciete (?) waarde voor de hoogte boven een referentievlak, voor de globe "Aarde" is dat de "WGS84" referentieglobe;
+ * globe (optioneel) – expliciete (?) waarde, gegeven als als stellaire lichaam met als standaardwaarde "Aarde" en vervolgens "WGS84".',
 	'wikibase-listdatatypes-quantity-head' => 'Hoeveelheid',
+	'wikibase-listdatatypes-quantity-body' => 'Letterlijk gegevensveld voor een hoeveelheid die gerelateerd is een aan bepaalde goed gedefinieerde eenheid. De werkelijke eenheid wordt ingevoerd in gegevenswaarden die worden ingevoerd.
+* waarde: impliciet deel van de tekenreeks (toewijzing van eenheidvoorvoegsel is onduidelijk);
+* eenheid: impliciet deel van de tekenreeks (toewijzing van eenheidvoorvoegsel is onduidelijk);
+* nauwkeurigheid (optioneel): expliciete gegevenswaarde, heeft dezelfde eenheid als de waarde.',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enkeltalige tekst',
+	'wikibase-listdatatypes-monolingual-text-body' => "Letterlijke gegevensveld voor een tekenreeks die niet wordt vertaald in andere talen. Dit type tekst wordt één keer gedefinieerd en en in alle talen herrgebruikt. Typisch gebruik is voor geografische namen geschreven in de lokale taal, ID's, een chemische formule of een Latijnse wetenschappelijke naam.
+* taal: expliciete waarde voor het identificeren van de taal voor het tekstdeel;
+* waarde: expliciete waarde voor tekenreeks van de taalspecifieke variant.",
 	'wikibase-listdatatypes-multilingual-text-head' => 'Meertalige tekst',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Letterlijke gegevensveld voor een tekenreeks die moet vertaald moet worden in andere talen. Typisch gebruik is een entiteitsnaam die mondiaal relevant is en niet-lokale geschreven vormen heeft. Deze kunnen per taal en schrift verschillen.
+* taal: expliciete waarde voor het identificeren van de taal voor het tekstdeel;
+* waarde: expliciete waarde voor tekenreeks van de taalspecifieke variant.',
 	'wikibase-listdatatypes-string-head' => 'Tekenreeks',
+	'wikibase-listdatatypes-string-body' => "Letterlijke gegevensveld voor een reeks van tekens. Typisch gebruikt voor ID's met een geschreven vorm die niet afhankelijk zijn van de taal van de lezer.
+ * waarde: expliciete waarde voor de taalspecifieke variant van de tekenreeks",
 	'wikibase-listdatatypes-time-head' => 'Tijd',
+	'wikibase-listdatatypes-time-body' => 'Letterlijk gegevensveld voor tijdwaarde. Gegevens als een tijd met enige precisie en grenzen. De tijd wordt intern altijd opgeslagen als de opmaak Proleptisch Gregoriaans, maar kan andere opmaken aannemen tijdens verwerking in opmaak (?).
+* tijd: expliciete waarde voor moment in de tijd, gedefinieerd in ISO8601, het jaar heeft altijd 11 cijfers en de datum is altijd ondertekend, in de opmaak +00000002013-01-01T00:00:00Z;
+* tijdzone: expliciete waarde als een geheel getal. Tijdzonegegevens met een afwijking van UTC in minuten;
+* voor: expliciet geheel getal voor hoeveel eenheden voor de gegeven tijd het kan zijn. De eenheid is opgegeven in "precisie";
+* na: expliciet geheel getal voor hoeveel eenheden na de gegeven tijd het kan zijn. De eenheid is opgegeven in "precisie";
+* precisie: expliciete waarde, gecodeerd als kort geheel getal. De getallen hebben de volgende betekenis: 0: miljard jaar, 1: honderd miljoen jaar, ..., 6: millenium, 7: eeuw, 8: decennium, 9: jaar, 10: maand, 11: dag, 12: uur, 13: minuut, 14: seconde;
+* kalendermodel: expliciete waarde gegeven als URI. Deze identificeert het kalendermodel dat gebruikt moet worden om deze waarde weer te geven.',
 	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => "Letterlijke gegevensveld voor een URL. URL's zijn beperkt tot de protocollen die ook beschikbaar zijn voor externe koppelingen in wikitekst.",
 	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Wikibaseitem',
 	'content-model-wikibase-property' => 'Wikibase-eigenschap',
@@ -13541,7 +13581,7 @@ Soa adrëssa IP a sarà argistrà ant la stòria dle modìfiche ëd costa entit�
 	'wikibase-itemdisambiguation-lookup-label' => 'Tichëtta:',
 	'wikibase-itemdisambiguation-submit' => 'Sërca',
 	'wikibase-itemdisambiguation-nothing-found' => "An dëspias, gnun element con costa tichëtta a l'é stàit trovà.",
-	'wikibase-itemdisambiguation-search' => "Arserca dl'element dovrand [{{fullurl:Special:Search|search=$1}} Special:Search].", # Fuzzy
+	'wikibase-itemdisambiguation-search' => "A peul [{{fullurl:Special:Search|search=$1}} sërché st'element].",
 	'wikibase-itemdisambiguation-create' => "It peule [{{fullurl:Special:NewItem|label=$1}} creé l'element].",
 	'wikibase-itemdisambiguation-invalid-langcode' => "An dëspias, l'identificator ëd lenga ch'a l'ha fornì a l'é nen conossù dal sistema. Për piasì, ch'a deuvra n'identificator bon, coma «en».",
 	'wikibase-itemdisambiguation-description' => "Ij valor dovrà për serché a devo esse ël test complet. La lenga a l'é n'identificator, coma «en».",
@@ -13647,6 +13687,7 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-mylanguagefallbackchain-text' => "La caden-a ëd lenghe d'arserva dovrà për mostreje le tichëtte dj'entità a l'é smonùa sì-sota.",
 	'wikibase-mylanguagefallbackchain-babel' => "A peul modifichela an butand <nowiki>{{#babel: }}</nowiki> su {{GENDER:$1|soa}} [[Special:MyPage|pàgina d'utent]].",
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2 convertì da $3 - $4',
+	'wikibase-api-no-such-sitelink' => 'Impossìbil trové na liura ëd sit përparèj',
 	'wikibase-self-conflict-patched' => "Soa modìfica a l'é stàita anserìa ant l'ùltima version, coatand quaidun dij sò cambi antërmedi.",
 	'wikibase-conflict-patched' => "Soa modìfica a l'é stàita anserìa ant l'ùltima version.",
 	'wikibase-restoreold' => "buté 'me ch'a l'era",
@@ -13736,6 +13777,18 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 * autëssa (opsional) – valor esplìssit (?) për l'autëssa ansima a 'n pian d'arferiment, për ël glòb \"Tèra\" a sarìa ël glòb d'arferiment \"WGS84\"
 * glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"",
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
+	'wikibase-listdatatypes-quantity-body' => "Camp ëd dàit literaj për na quantità ch'a rësguarda na sòrt d'unità bin definìa. L'unità real a va ant ij valor ëd dàit ch'a son anserì.
+* value - part implìssita ëd la stringa (l'aplicassion dël prefiss d'unità a l'é nen ciàira)
+* unit - part implìssita ëd la stringa (l'aplicassion dël còrp standardidà a l'é nen ciàira)
+* accuracy (opsional) - valor ëd dàit esplìssit, con la midema unità dël valor",
+	'wikibase-listdatatypes-monolingual-text-head' => 'Test monolenga',
+	'wikibase-listdatatypes-monolingual-text-body' => "Camp ëd dàit literal për na stringa ch'a l'é nen voltà an d'àutre lenghe. Sta sòrt dë stringa a l'é definìa na vira e dovrà torna an tute le lenghe. N'usagi tìpich a l'é col dij nòm geogràfich ëscrivù ant la lenga local, n'identificativ ëd chèich sòrt, na fórmola chìmica o un nòm sientìfich latin.
+* lenga - valor esplìssit për identifiché la lenga da la part ëd test
+* value - valor esplìssit për la stringa ant la variant ëspessìfica ëd la lenga",
+	'wikibase-listdatatypes-multilingual-text-head' => 'Test multilenga',
+	'wikibase-listdatatypes-multilingual-text-body' => "Camp ëd dàit literal për na stringa ch'a dev esse voltà an d'àutre lenghe. N'usagi tìpich a l'é un nòm d'entità d'anteresse global che a l'ha dle forme scrite nen locaj. A peulo diferì sia ant le lenghe che ant ij sistema dë scritura.
+* language - valor esplìssit për identifiché la lenga da la part Ëd test
+* value - valor esplìssit për la stringa ant la variant ëspessìfica dla lenga",
 	'content-model-wikibase-item' => 'Element ëd Wikibase',
 	'content-model-wikibase-property' => 'Propietà ëd Wikibase',
 	'content-model-wikibase-query' => 'Arcesta ëd Wikibase',
@@ -14513,6 +14566,7 @@ $messages['ru'] = array(
 	'wikibase-mylanguagefallbackchain-text' => 'Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 — $2, преобразованные из $3 — $4',
+	'wikibase-api-no-such-sitelink' => 'Не удалось найти такую ссылку на сайт',
 	'wikibase-self-conflict-patched' => 'Ваша правка была помещена в последнюю версию, при этом были перекрыты некоторые из ваших собственных промежуточных изменений.',
 	'wikibase-conflict-patched' => 'Ваша правка было исправлена в последней версии.',
 	'wikibase-restoreold' => 'восстановить',
@@ -16040,7 +16094,7 @@ $messages['uk'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Назва:',
 	'wikibase-itemdisambiguation-submit' => 'Знайти',
 	'wikibase-itemdisambiguation-nothing-found' => 'Вибачте, елемента з такою назвою не знайдено.',
-	'wikibase-itemdisambiguation-search' => 'Пошук елемента за допомогою [{{fullurl:Special:Search|search=$1}} Special:Search].', # Fuzzy
+	'wikibase-itemdisambiguation-search' => 'Ви можете [{{fullurl:Special:Search|search=$1}} шукати  елемент].',
 	'wikibase-itemdisambiguation-create' => 'Ви можете [{{fullurl:Special:NewItem|label=$1}} створити такий елемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Вибачте, система не знаю введеного ідентифікатора мови. Правильним ідентифікатором є, наприклад, «uk».',
 	'wikibase-itemdisambiguation-description' => 'Значення, що використовуються пошуку, повинні бути повним текстом запису. Ідентифікатором є код мови, наприклад «uk».',
@@ -17869,6 +17923,7 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbsetlabel-add' => '加入[$2]標籤',
 	'wikibase-item-summary-wbsetlabel-set' => '更改[$2]標籤',
 	'wikibase-item-summary-wbsetlabel-remove' => '刪除[$2]標籤',
+	'wikibase-item-summary-wbsetdescription-add' => '加入[$2]說明',
 	'wikibase-item-summary-wbsetdescription-set' => '更改[$2]描述',
 	'wikibase-item-summary-wbsetdescription-remove' => '刪除[$2]描述',
 	'wikibase-item-summary-wbsetaliases-set' => '設置[$2]的{{PLURAL:$1|别名}}',
@@ -17876,7 +17931,10 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '設置[$2]的{{PLURAL:$1|别名}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '移除[$2]的{{PLURAL:$1|别名}}',
 	'wikibase-item-summary-wbsetsitelink-add' => '加入到[$2]的連結',
+	'wikibase-item-summary-wbsetsitelink-add-both' => '已加入帶徽章的連接至[$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => '更改鏈接至[$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => '已為[$2]更新徽章',
+	'wikibase-item-summary-wbsetsitelink-set-both' => '已為[$2]更新連接和徽章',
 	'wikibase-item-summary-wbsetsitelink-remove' => '刪除到[$2]的連接',
 	'wikibase-item-summary-wblinktitles-create' => '創建此項目以連接頁面[$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => '添加語言連結連接頁面[$2↔$3]',
