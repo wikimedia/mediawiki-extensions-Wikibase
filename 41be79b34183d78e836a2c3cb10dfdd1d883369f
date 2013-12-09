@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_19a12df5",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-09T09:35:48Z",
+      "side": 1,
+      "message": "should perhaps validate the type of the array elements",
+      "revId": "41be79b34183d78e836a2c3cb10dfdd1d883369f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
