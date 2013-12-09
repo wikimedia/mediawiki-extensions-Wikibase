@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_99653de0",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-09T09:34:26Z",
+      "side": 1,
+      "message": "Seems like this function should return a Message object, so the caller has control over any message parameters to pass to the message, as well as the output format.",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_595fb513",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-09T09:34:26Z",
+      "side": 1,
+      "message": "Since getMessage() uses -\u003etext(), and $buttonLabel is used as raw HTML, this means the message can contain raw HTML - which is something we generally want to avoid. It would be nicer to get back a Message object here, and call parse() on it.",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_796039cc",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-09T09:34:26Z",
+      "side": 1,
+      "message": "No escaping applies!",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
