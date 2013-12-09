@@ -149,50 +149,19 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 * @param array $languages Which languages to include
 	 */
 	public function addTerms( array &$entityInfo, array $types = null, array $languages = null ) {
-		if ( $types === array() || $languages === array() ) {
+		if ( $entityInfo === array() || $types === array() || $languages === array() ) {
 			// nothing to do
 			return;
 		}
 
 		wfProfileIn( __METHOD__ );
-		$entityIdsByType = $this->getNumericEntityIds( $entityInfo );
-
-		//NOTE: we make one DB query per entity type, so we can take advantage of the
-		//      database index on the term_entity_type field.
-		foreach ( $entityIdsByType as $type => $idsForType ) {
-			$this->collectTermsForEntities( $entityInfo, $type, $idsForType, $types, $languages );
-		}
-
-		if ( $types === null ) {
-			$types = array_keys( self::$termTypeFields );
-		}
-
-		foreach ( $types as $type ) {
-			$this->setDefaultValue( $entityInfo, self::$termTypeFields[$type], array() );
-		}
-
-		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Collects the terms for a number of entities (of the given types, in the given languages)
-	 *
-	 * @param array $entityInfo
-	 * @param $entityType
-	 * @param array $entityIds
-	 * @param array $termTypes
-	 * @param array $languages
-	 */
-	private function collectTermsForEntities( array &$entityInfo, $entityType, array $entityIds, array $termTypes = null, array $languages = null ) {
-		wfProfileIn( __METHOD__ );
 
 		$where = array(
-			'term_entity_type' => $entityType,
-			'term_entity_id' => $entityIds,
+			'term_entity_id' => array_keys( $entityInfo ),
 		);
 
-		if ( $termTypes ) {
-			$where['term_type'] = $termTypes;
+		if ( $types ) {
+			$where['term_type'] = $types;
 		}
 
 		if ( $languages ) {
@@ -203,14 +172,21 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 
 		$res = $dbw->select(
 			$this->termTable,
-			array( 'term_entity_type', 'term_entity_id', 'term_type', 'term_language', 'term_text' ),
+			array( 'term_entity_id', 'term_type', 'term_language', 'term_text' ),
 			$where,
 			__METHOD__
 		);
 
 		$this->injectTerms( $res, $entityInfo );
-
 		$this->releaseConnection( $dbw );
+
+		if ( $types === null ) {
+			$types = array_keys( self::$termTypeFields );
+		}
+
+		foreach ( $types as $type ) {
+			$this->setDefaultValue( $entityInfo, self::$termTypeFields[$type], array() );
+		}
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -227,9 +203,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function injectTerms( $dbResult, array &$entityInfo ) {
 		foreach ( $dbResult as $row ) {
-			// this is deprecated, but I don't see an alternative.
-			$id = new EntityId( $row->term_entity_type, (int)$row->term_entity_id );
-			$key = $id->getPrefixedId();
+			$key = $row->term_entity_id;
 
 			if ( !isset( $entityInfo[$key] ) ) {
 				continue;
@@ -348,6 +322,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 
 		//NOTE: we make one DB query per entity type, so we can take advantage of the
 		//      database index on the epp_entity_type field.
+		//FIXME: don't use epp_entity_type any longer!
 		foreach ( $entityIdsByType as $type => $idsForType ) {
 			$pageIds = $this->getPageIdsForEntities( $type, $idsForType );
 			$missingNumericIds = array_diff( $idsForType, array_keys( $pageIds ) );

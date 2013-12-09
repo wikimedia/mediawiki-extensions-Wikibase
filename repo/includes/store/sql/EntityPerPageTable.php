@@ -33,8 +33,7 @@ class EntityPerPageTable implements EntityPerPage {
 			'wb_entity_per_page',
 			'epp_page_id',
 			array(
-				'epp_entity_id' => $entityContent->getEntity()->getId()->getNumericId(),
-				'epp_entity_type' => $entityContent->getEntity()->getType()
+				'epp_entity_id' => $entityContent->getEntity()->getId()->getSerialization()
 			),
 			__METHOD__
 		);
@@ -45,7 +44,7 @@ class EntityPerPageTable implements EntityPerPage {
 		return $dbw->insert(
 			'wb_entity_per_page',
 			array(
-				'epp_entity_id' => $entityContent->getEntity()->getId()->getNumericId(),
+				'epp_entity_id' => $entityContent->getEntity()->getId()->getSerialization(),
 				'epp_entity_type' => $entityContent->getEntity()->getType(),
 				'epp_page_id' => $entityContent->getTitle()->getArticleID()
 			),
@@ -81,8 +80,7 @@ class EntityPerPageTable implements EntityPerPage {
 		return $dbw->delete(
 			'wb_entity_per_page',
 			array(
-				'epp_entity_id' => $entityId->getNumericId(),
-				'epp_entity_type' => $entityId->getEntityType()
+				'epp_entity_id' => $entityId->getSerialization()
 			),
 			__METHOD__
 		);
@@ -107,11 +105,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return boolean success indicator
 	 */
 	public function rebuild() {
-		// FIXME: class not found!
-		$rebuilder = new EntityPerPageRebuilder();
-		$rebuilder->rebuild( $this );
-
-		return true;
+		throw new \LogicException( "not implemented" );
 	}
 
 	/**
@@ -130,9 +124,9 @@ class EntityPerPageTable implements EntityPerPage {
 	public function getEntitiesWithoutTerm( $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$conditions = array(
-			'term_entity_type IS NULL'
+			'term_entity_id IS NULL'
 		);
-		$joinConditions = 'term_entity_id = epp_entity_id AND term_entity_type = epp_entity_type AND term_type = ' . $dbr->addQuotes( $termType );
+		$joinConditions = 'term_entity_id = epp_entity_id AND term_type = ' . $dbr->addQuotes( $termType );
 
 		if ( $language !== null ) {
 			$joinConditions .= ' AND term_language = ' . $dbr->addQuotes( $language );
@@ -146,7 +140,6 @@ class EntityPerPageTable implements EntityPerPage {
 			array( 'wb_entity_per_page', 'wb_terms' ),
 			array(
 				'entity_id' => 'epp_entity_id',
-				'entity_type' => 'epp_entity_type',
 			),
 			$conditions,
 			__METHOD__,
@@ -166,8 +159,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$idParser = new BasicEntityIdParser();
 
 		foreach ( $rows as $row ) {
-			$id = new EntityId( $row->entity_type, (int)$row->entity_id );
-			$entities[] = $idParser->parse( $id->getSerialization() );
+			$entities[] = $idParser->parse( $row->entity_id );
 		}
 
 		return $entities;
@@ -244,12 +236,12 @@ class EntityPerPageTable implements EntityPerPage {
 		$dbr = wfGetDB( DB_SLAVE );
 		$rows = $dbr->select(
 			'wb_entity_per_page',
-			array( 'epp_entity_id', 'epp_entity_type' ),
+			array( 'epp_entity_id' ),
 			$where,
 			__METHOD__
 		);
 
-		return new DatabaseRowEntityIdIterator( $rows, 'epp_entity_type', 'epp_entity_id' );
+		return new DatabaseRowEntityIdIterator( $rows, 'epp_entity_id', new BasicEntityIdParser() );
 	}
 
 }
