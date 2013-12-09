@@ -118,6 +118,7 @@ $.widget( 'wikibase.linkitem', {
 			}
 
 			self._createDialog();
+			$( '#wbclient-linkItem-site' ).focus();
 		} )
 		.fail( function() {
 			$dialogSpinner.remove();
