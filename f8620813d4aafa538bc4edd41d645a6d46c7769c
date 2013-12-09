@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_eb2c6c47",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-09T13:26:57Z",
+      "side": 1,
+      "message": "if ( $dbType \u003d\u003d\u003d \u0027mysql\u0027 || $dbType \u003d\u003d\u003d \u0027postgres\u0027 )",
+      "revId": "f8620813d4aafa538bc4edd41d645a6d46c7769c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
