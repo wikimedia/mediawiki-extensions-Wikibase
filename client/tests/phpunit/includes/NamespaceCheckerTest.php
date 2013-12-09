@@ -10,6 +10,7 @@ use Wikibase\NamespaceChecker;
  * @since 0.4
  *
  * @group WikibaseClient
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

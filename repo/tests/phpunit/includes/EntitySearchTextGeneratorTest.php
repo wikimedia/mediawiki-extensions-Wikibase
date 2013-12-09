@@ -12,8 +12,9 @@ use Wikibase\Repo\EntitySearchTextGenerator;
  * @file
  * @since 0.5
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
+ * @group WikibaseRepoTest
+ * @group Test
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

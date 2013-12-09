@@ -15,6 +15,7 @@ use Wikibase\NamespaceChecker;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  * @group WikibaseSpecialUnconnectedPages
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >

@@ -23,6 +23,8 @@ use Wikibase\SnakList;
  * @covers Wikibase\Api\ResultBuilder
  * @todo mock and inject serializers to avoid massive expected output?
  *
+ * @group Wikibase
+ *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */

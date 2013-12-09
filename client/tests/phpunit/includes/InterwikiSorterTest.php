@@ -9,6 +9,7 @@ use Wikibase\InterwikiSorter;
  * @since 0.4
  *
  * @group WikibaseClient
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

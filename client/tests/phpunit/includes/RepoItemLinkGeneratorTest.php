@@ -17,6 +17,7 @@ use Wikibase\RepoLinker;
  *
  * @group WikibaseClient
  * @group RepoItemLinkGenerator
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -20,6 +20,7 @@ use Wikibase\RepoLinker;
  * @since 0.5
  *
  * @group WikibaseClient
+ * @group Wikibase
  * @group Database
  * @group medium
  *

@@ -15,6 +15,7 @@ use Wikibase\RepoLinker;
  * @since 0.4
  *
  * @group WikibaseClient
+ * @group Wikibase
  * @group Database
  *
  * @licence GNU GPL v2+

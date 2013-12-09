@@ -17,6 +17,7 @@ use WikiPage;
  * @since 0.5
  *
  * @group WikibaseClient
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

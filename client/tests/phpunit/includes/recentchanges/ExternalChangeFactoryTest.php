@@ -18,6 +18,7 @@ use Wikibase\RevisionData;
  * @group WikibaseClient
  * @group Database
  * @group medium
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

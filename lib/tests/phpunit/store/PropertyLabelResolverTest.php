@@ -13,6 +13,8 @@ use Wikibase\Term;
  *
  * @since 0.4
  *
+ * @group Wikibase
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

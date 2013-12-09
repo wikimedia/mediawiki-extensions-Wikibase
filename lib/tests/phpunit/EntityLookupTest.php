@@ -16,6 +16,8 @@ use Wikibase\Property;
  *
  * @since 0.4
  *
+ * @group Wikibase
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler

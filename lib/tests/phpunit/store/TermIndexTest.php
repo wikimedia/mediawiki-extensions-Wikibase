@@ -15,6 +15,8 @@ use Wikibase\Term;
  *
  * @since 0.1
  *
+ * @group Wikibase
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

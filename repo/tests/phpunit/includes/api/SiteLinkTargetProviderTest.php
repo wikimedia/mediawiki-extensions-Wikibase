@@ -7,6 +7,9 @@ use Wikibase\Api\SiteLinkTargetProvider;
 
 /**
  * @covers Wikibase\Api\SiteLinkTargetProvider
+ *
+ * @group Wikibase
+ *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */

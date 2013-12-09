@@ -15,6 +15,7 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  * @ingroup WikibaseLibTest
  *
  * @group WikibaseLib
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

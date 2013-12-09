@@ -12,8 +12,7 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  * @file
  * @since 0.5
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -29,6 +29,7 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

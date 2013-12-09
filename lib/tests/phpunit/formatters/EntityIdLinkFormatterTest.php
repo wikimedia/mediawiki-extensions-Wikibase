@@ -18,6 +18,7 @@ use Wikibase\Property;
  *
  * @since 0.4
  *
+ * @group Wikibase
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

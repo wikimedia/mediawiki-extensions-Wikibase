@@ -11,8 +11,9 @@ use Wikibase\Settings;
  * @file
  * @since 0.4
  *
- * @ingroup WikibaseClient
- * @ingroup Test
+ * @group WikibaseClient
+ * @group Test
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >

@@ -14,6 +14,7 @@ use Wikibase\LangLinkHandler;
  * @since 0.4
  *
  * @group WikibaseClient
+ * @group Wikibase
  * @group Database
  *        ^--- uses DB indirectly; removed when Title is made not to use the database.
  *

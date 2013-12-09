@@ -15,6 +15,7 @@ use Wikibase\Property;
  *
  * @group WikibaseLib
  * @group WikibaseEntityLookup
+ * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

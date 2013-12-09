@@ -10,8 +10,9 @@ use Wikibase\EntityContent;
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
+ * @group WikibaseRepoTest
+ * @group Wikibase
+ * @group Test
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
