@@ -2,7 +2,10 @@
 
 namespace Wikibase;
 
+use DatabaseBase;
+use DatabaseUpdater;
 use DBQueryError;
+use MWException;
 use ObjectCache;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
@@ -145,114 +148,167 @@ class SqlStore implements Store {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \DatabaseUpdater $updater
+	 * @param DatabaseUpdater $updater
 	 */
-	public function doSchemaUpdate( \DatabaseUpdater $updater ) {
+	public function doSchemaUpdate( DatabaseUpdater $updater ) {
 		$db = $updater->getDB();
-		$type = $db->getType();
 
-		// TODO the following ifs are utterly confusing and need some clean up
-		// i.e. there are code branches that are unreachable, extension adding happens a little
-		// on the start, a little later, etc.
-		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
-			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
+		// Update from 0.1.
+		if ( !$db->tableExists( 'wb_terms' ) ) {
+			$updater->dropTable( 'wb_items_per_site' );
+			$updater->dropTable( 'wb_items' );
+			$updater->dropTable( 'wb_aliases' );
+			$updater->dropTable( 'wb_texts_per_lang' );
 
-			// Update from 0.1.
-			if ( !$db->tableExists( 'wb_terms' ) ) {
-				$updater->dropTable( 'wb_items_per_site' );
-				$updater->dropTable( 'wb_items' );
-				$updater->dropTable( 'wb_aliases' );
-				$updater->dropTable( 'wb_texts_per_lang' );
+			$updater->addExtensionTable(
+				'wb_terms',
+				$this->getUpdateScriptPath( 'Wikibase', $db->getType() )
+			);
 
-				$updater->addExtensionTable(
-					'wb_terms',
-					__DIR__ . '/Wikibase' . $extension
-				);
-
-				$this->rebuild();
-			}
-
-			// Update from 0.1 or 0.2.
-			if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) &&
-				!Settings::get( 'withoutTermSearchKey' ) ) {
-
-				$termsKeyUpdate = 'AddTermsSearchKey' . $extension;
-
-				if ( $type === 'sqlite' ) {
-					$termsKeyUpdate = 'AddTermsSearchKey.sqlite.sql';
-				}
-
-				$updater->addExtensionField(
-					'wb_terms',
-					'term_search_key',
-					__DIR__ . '/' . $termsKeyUpdate
-				);
-
-				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
-			}
-
-			// Update from 0.4 to 0.5
-			if ( !$db->indexExists( 'wb_terms', 'term_search' ) ) {
-
-				$termsKeyUpdate = 'UpdateTermIndexes' . $extension;
-
-				$updater->addExtensionIndex(
-					'wb_terms',
-					'term_search',
-					__DIR__ . '/../../../sql/' . $termsKeyUpdate
-				);
-			}
-
-			// Update from 0.1. or 0.2.
-			if ( !$db->tableExists( 'wb_entity_per_page' ) ) {
-
-				$updater->addExtensionTable(
-					'wb_entity_per_page',
-					__DIR__ . '/AddEntityPerPage' . $extension
-				);
-
-				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
-			}
-
-			// Update from 0.1 or 0.2.
-			if ( !$db->fieldExists( 'wb_terms', 'term_row_id' ) ) {
-				// creates wb_terms.term_row_id
-				// and also wb_item_per_site.ips_row_id.
-
-				$alteredExtension = $extension;
-				if ( $type === 'sqlite' ) {
-					$alteredExtension = '.sqlite' . $alteredExtension;
-				}
-
-				$updater->addExtensionField(
-					'wb_terms',
-					'term_row_id',
-					__DIR__ . '/AddRowIDs' . $alteredExtension
-				);
-			}
-
-			// Update to add weight to wb_terms
-			if ( !$db->fieldExists( 'wb_terms' , 'term_weight' ) ) {
-				// creates wb_terms.wb_weight
-
-				$alteredExtension = $extension;
-				if ( $type === 'sqlite' ) {
-					$alteredExtension = '.sqlite' . $alteredExtension;
-				}
-
-				$updater->addExtensionField(
-					'wb_terms',
-					'term_weight',
-					__DIR__ . '/AddTermsWeight' . $alteredExtension
-				);
-
-			}
+			$this->rebuild();
 		}
-		else {
-			wfWarn( "Database type '$type' is not supported by Wikibase." );
-		}
+
+		$this->updateEntityPerPageTable( $updater, $db );
+		$this->updateTermsTable( $updater, $db );
 
 		PropertyInfoTable::registerDatabaseUpdates( $updater );
+	}
+
+	/**
+	 * Returns the script directory that contains a file with the given name.
+	 *
+	 * @param string $fileName with extension
+	 *
+	 * @throws MWException If the file was not found in any script directory
+	 * @return string The directory that contains the file
+	 */
+	private function getUpdateScriptDir( $fileName ) {
+		$dirs = array(
+			__DIR__,
+			__DIR__ . '/../../../sql'
+		);
+
+		foreach ( $dirs as $dir ) {
+			if ( file_exists( "$dir/$fileName" ) ) {
+				return $dir;
+			}
+		}
+
+		throw new MWException( "Update script not found: $fileName" );
+	}
+
+	/**
+	 * Returns the appropriate script file for use with the given database type.
+	 * Searches for files with type-specific extensions in the script directories,
+	 * falling back to the plain ".sql" extension if no specific script is found.
+	 *
+	 * @param string $name the script's name, without file extension
+	 * @param string $type the database type, as returned by DatabaseBase::getType()
+	 *
+	 * @return string The path to the script file
+	 * @throws MWException If the script was not found in any script directory
+	 */
+	private function getUpdateScriptPath( $name, $type ) {
+		$extensions = array(
+			'sqlite' => 'sqlite.sql',
+			//'postgres' => 'pg.sql', // PG support is broken as of Dec 2013
+			'mysql' => 'mysql.sql',
+		);
+
+		// Find the base directory by looking for a plain ".sql" file.
+		$dir = $this->getUpdateScriptDir( "$name.sql" );
+
+		if ( isset( $extensions[$type] ) ) {
+			$extension = $extensions[$type];
+			$path = "$dir/$name.$extension";
+
+			// if a type-specific file exists, use it
+			if ( file_exists( "$dir/$name.$extension" ) ) {
+				return $path;
+			}
+		} else {
+			throw new MWException( "Database type $type is not supported by Wikibase!" );
+		}
+
+		// we already know that the generic file exists
+		$path = "$dir/$name.sql";
+		return $path;
+	}
+
+	/**
+	 * Applies updates to the wb_entity_per_page table.
+	 *
+	 * @param DatabaseUpdater $updater
+	 * @param DatabaseBase $db
+	 */
+	private function updateEntityPerPageTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+		// Update from 0.1. or 0.2.
+		if ( !$db->tableExists( 'wb_entity_per_page' ) ) {
+
+			$updater->addExtensionTable(
+				'wb_entity_per_page',
+				$this->getUpdateScriptPath( 'AddEntityPerPage', $db->getType() )
+			);
+
+			$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
+		}
+	}
+
+	/**
+	 * Applies updates to the wb_terms table.
+	 *
+	 * @param DatabaseUpdater $updater
+	 * @param DatabaseBase $db
+	 */
+	private function updateTermsTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+
+		// ---- Update from 0.1 or 0.2. ----
+		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) &&
+			!Settings::get( 'withoutTermSearchKey' ) ) {
+
+			$updater->addExtensionField(
+				'wb_terms',
+				'term_search_key',
+				$this->getUpdateScriptPath( 'AddTermsSearchKey', $db->getType() )
+			);
+
+			$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
+		}
+
+		// creates wb_terms.term_row_id
+		// and also wb_item_per_site.ips_row_id.
+		$updater->addExtensionField(
+			'wb_terms',
+			'term_row_id',
+			$this->getUpdateScriptPath( 'AddRowIDs', $db->getType() )
+		);
+
+		// add weight to wb_terms
+		$updater->addExtensionField(
+			'wb_terms',
+			'term_weight',
+			$this->getUpdateScriptPath( 'AddTermsWeight', $db->getType() )
+		);
+
+		// ---- Update from 0.4 ----
+
+		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
+		$dbType = $db->getType();
+		if ( $dbType === 'mysql' || $dbType === 'postgres' ) {
+			// make term_row_id BIGINT
+			$updater->modifyExtensionField(
+				'wb_terms',
+				'term_row_id',
+				$this->getUpdateScriptPath( 'MakeRowIDsBig', $db->getType() )
+			);
+		}
+
+		// updated indexes
+		$updater->addExtensionIndex(
+			'wb_terms',
+			'term_search',
+			$this->getUpdateScriptPath( 'UpdateTermIndexes', $db->getType() )
+		);
 	}
 
 	/**
