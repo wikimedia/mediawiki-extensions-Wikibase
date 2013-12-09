@@ -225,6 +225,7 @@ class GetEntities extends ApiWikibase {
 		$options->setLanguages( $languages );
 		$options->setOption( EntitySerializer::OPT_SORT_ORDER, $params['dir'] );
 		$options->setOption( EntitySerializer::OPT_PARTS, $props );
+		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		return $options;
 	}
 
