@@ -33,7 +33,7 @@ CREATE INDEX /*i*/wb_ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 -- Lookup table for entity terms (ie labels, aliases, descriptions).
 CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
   term_row_id                BIGINT unsigned     NOT NULL PRIMARY KEY AUTO_INCREMENT, -- row ID
-  term_entity_id             INT unsigned        NOT NULL, -- Id of the entity
+  term_entity_id             VARBINARY(255)      NOT NULL, -- Id of the entity
   term_entity_type           VARBINARY(32)       NOT NULL, -- Type of the entity
   term_language              VARBINARY(32)       NOT NULL, -- Language code
   term_type                  VARBINARY(32)       NOT NULL, -- Term type
@@ -43,13 +43,13 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
 ) /*$wgDBTableOptions*/;
 
 -- for TermSqlIndex::getMatchingIDs
-CREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language, term_search_key(12), term_entity_type, term_type, term_text);
+CREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language(32), term_search_key(12), term_entity_type(32), term_type(32), term_text);
 
 -- for TermSqlIndex::getTermsOfEntity and for the join in TermSqlIndex::getMatchingTermCombination
-CREATE INDEX /*i*/term_entity ON /*_*/wb_terms (term_entity_type, term_entity_id, term_type, term_text);
+CREATE INDEX /*i*/term_entity ON /*_*/wb_terms (term_entity_id, term_type(32), term_language(32), term_text);
 
 -- TermSqlIndex::getMatchingTerms with or without given term_text, as well as for TermSqlIndex::getMatchingTermCombination
-CREATE UNIQUE INDEX /*i*/term_identity ON /*_*/wb_terms (term_language, term_type, term_entity_type, term_text, term_entity_id);
+CREATE UNIQUE INDEX /*i*/term_identity ON /*_*/wb_terms (term_language(32), term_type(32), term_entity_type(32), term_text, term_entity_id);
 
 -- Links id+type to page ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_entity_per_page (
