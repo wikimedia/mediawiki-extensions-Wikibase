@@ -3622,6 +3622,9 @@ $messages['da'] = array(
 	'wikibase-datatype-label' => 'Datatype:',
 	'wikibase-claimview-snak-tooltip' => 'Angiv en værdi der svarer til egenskaben med navnet "$1". Hvis egenskaben ikke har en udpeget værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi-inputboksen.',
 	'wikibase-claimview-snak-new-tooltip' => 'Efter angivelse af en egenskab, kan du angive en tilsvarende værdi. Hvis egenskaben ikke har en faktisk værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi-inputboksen.',
+	'wikibase-statementview-rank-preferred' => 'Foretrukne rang',
+	'wikibase-statementview-rank-normal' => 'Normal rang',
+	'wikibase-statementview-rank-deprecated' => 'Forældet rang',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|kilde|kilder}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|En kilde|$1 kilder}} er endnu ikke gemt',
 	'wikibase-snakview-property-input-placeholder' => 'egenskab',
@@ -3651,6 +3654,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for denne enhed.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'En anden egenskab ($3) har allerede etiketten "$1" knyttet til sprogkode $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'En anden forespørgsel ($3) har allerede etiketten "$1" knyttet til sprogkode $2.',
 	'wikibase-error-label-not-unique-item' => 'Et andet emne ($3) har allerede etiketten "$1" og beskrivelsen "$4" knyttet til sprogkode $2.',
+	'wikibase-error-label-no-entityid' => 'Etiketten kan ikke være et gyldigt enheds-id.',
 	'special-itembytitle' => 'Emne efter titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Søg efter emner efter websted og titel',
 	'wikibase-itembytitle-lookup-site' => 'Websted:',
@@ -3666,6 +3670,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for denne enhed.',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiket:',
 	'wikibase-itemdisambiguation-submit' => 'Søg',
 	'wikibase-itemdisambiguation-nothing-found' => 'Beklager, intet emne med denne etiket blev fundet.',
+	'wikibase-itemdisambiguation-search' => 'Du kan [{{fullurl:Special:Search|search=$1}} søge efter emnet].',
 	'wikibase-itemdisambiguation-create' => 'Du kan [{{fullurl:Special:NewItem|label=$1}} oprette emnet].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Det sprog-id, du har angivet er ukendt for systemet. Brug venligst et gyldig id som "da".',
 	'wikibase-itemdisambiguation-description' => 'Værdierne, der bruges til søgning skal være postens komplette tekst. Sprog er et id, som "da".',
@@ -3880,35 +3885,35 @@ for at finde ud af, hvad der er sket med det.',
 	'content-model-wikibase-item' => 'Wikibase-emne',
 	'content-model-wikibase-property' => 'Wikibase-egenskab',
 	'content-model-wikibase-query' => 'Wikibase-forespørgsel',
-	'right-item-override' => 'Overskrive emner', # Fuzzy
+	'right-item-override' => 'Overskrive emner',
 	'right-item-create' => 'Oprette emner',
-	'right-item-remove' => 'Fjerne emner', # Fuzzy
-	'right-property-override' => 'Overskrive egenskaber', # Fuzzy
+	'right-item-remove' => 'Slette emner',
+	'right-property-override' => 'Overskrive egenskaber',
 	'right-property-create' => 'Oprette egenskaber',
-	'right-property-remove' => 'Fjerne egenskaber', # Fuzzy
+	'right-property-remove' => 'Slette egenskaber',
 	'right-alias-remove' => 'Fjerne aliasser',
 	'right-alias-update' => 'Opdatere kaldenavne',
 	'right-sitelink-remove' => 'Fjerne webstedshenvisninger',
 	'right-sitelink-update' => 'Opdatere webstedhenvisninger',
 	'right-linktitles-update' => 'Opdatere henvisningstitler', # Fuzzy
-	'right-label-remove' => 'Fjerne etiketter', # Fuzzy
+	'right-label-remove' => 'Slette etiketter',
 	'right-label-update' => 'Opdate etiketter',
-	'right-description-remove' => 'Fjerne beskrivelser', # Fuzzy
+	'right-description-remove' => 'Slette beskrivelser',
 	'right-description-update' => 'Opdatere beskrivelser',
-	'action-item-override' => 'overskrive emner', # Fuzzy
+	'action-item-override' => 'overskrive emner',
 	'action-item-create' => 'oprette emner',
-	'action-item-remove' => 'fjerne emner', # Fuzzy
-	'action-property-override' => 'overskrive egenskaber', # Fuzzy
+	'action-item-remove' => 'slette emner',
+	'action-property-override' => 'overskrive egenskaber',
 	'action-property-create' => 'oprette egenskaber',
-	'action-property-remove' => 'fjerne egenskaber', # Fuzzy
+	'action-property-remove' => 'slette egenskaber',
 	'action-alias-update' => 'opdatere aliasser',
 	'action-alias-remove' => 'fjerne aliasser',
 	'action-sitelink-remove' => 'fjerne webstedshenvisninger',
 	'action-sitelink-update' => 'opdatere webstedshenvisninger',
 	'action-linktitles-update' => 'opdatere henvisningstitler', # Fuzzy
-	'action-label-remove' => 'fjerne etiketter', # Fuzzy
+	'action-label-remove' => 'slette etiketter',
 	'action-label-update' => 'opdatere etiketter',
-	'action-description-remove' => 'fjerne beskrivelser', # Fuzzy
+	'action-description-remove' => 'slette beskrivelser',
 	'action-description-update' => 'opdatere beskrivelser',
 );
 
@@ -13789,20 +13794,52 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-listdatatypes-multilingual-text-body' => "Camp ëd dàit literal për na stringa ch'a dev esse voltà an d'àutre lenghe. N'usagi tìpich a l'é un nòm d'entità d'anteresse global che a l'ha dle forme scrite nen locaj. A peulo diferì sia ant le lenghe che ant ij sistema dë scritura.
 * language - valor esplìssit për identifiché la lenga da la part Ëd test
 * value - valor esplìssit për la stringa ant la variant ëspessìfica dla lenga",
+	'wikibase-listdatatypes-string-head' => 'Stringa',
+	'wikibase-listdatatypes-string-body' => "Camp ëd dàit literal për na stringa ëd glif. N'usagi tìpich a rësguarda j'identificativ ch'a l'han dle forme scrite ch'a dipendo nen da la lenga o dal letor.
+* value - valor esplìssit për la stringa ant la variant ëspessìfica dla lenga",
+	'wikibase-listdatatypes-time-head' => 'Dàita',
+	'wikibase-listdatatypes-time-body' => "Camp ëd dàit literal për un valor cronométrich. Smonù coma un temp con chèich precision e lìmit. Ël temp a l'é sempe argistrà andrinta ant ël formà gregorian, ma a peul dovré d'àutri formà durant l'anàlisi e la formalisassion.(?)
+* time - valor esplìssit për ël pont ant ël temp, arpresentà conforma a l'ISO8601, con sempe 11 gifre e la dàita sempe sot-signà, ant ël formà +00000002013-01-01T00:00:00Z
+* timezone - valor esplìssit sot forma ëd n'antregh con sign. L'anformassion dla zòna oraria a l'é na diferensa con l'UTC an minute.
+* before - valor antregh esplìssit për ël nùmer d'unità possìbil apress ël temp fornì. L'unità a l'é dàita da la precision.
+* after - valor antregh esplìssit për ël nùmer d'unità possìbil prima dël temp fornì. L'unità a l'é dàita da la precision.
+* precision - valor esplìssit codificà 'me antregh curt. Ij nùmer a l'han cost significà: 0 - miliard d'agn, 1 - senten-a ëd milion d'agn, ..., 6 - milenn, 7 - sécol, 8 - desen-a d'agn, 9 - ann, 10 - mèis, 11 - di, 12 - ora, 13 - minuta, 14 - second.
+* calendarmodel - valor esplìssit smonù sot-forma d'adrëssa an sl'Aragnà. A dsern ël model ëd calendari che a dev esse dovrà pr'ësmon-e ës valor ëd temp.",
+	'wikibase-listdatatypes-url-head' => "Liura an sl'aragnà",
+	'wikibase-listdatatypes-url-body' => "Camp ëd dàit literal për na liura an sl'Aragnà. Le liure a son limità ai protocòj mantnù ëdcò për le liure esterne an wikitest.",
+	'datatypes-type-url' => "Liura an sl'aragnà",
 	'content-model-wikibase-item' => 'Element ëd Wikibase',
 	'content-model-wikibase-property' => 'Propietà ëd Wikibase',
 	'content-model-wikibase-query' => 'Arcesta ëd Wikibase',
-	'right-item-override' => "Dzorascrive j'element", # Fuzzy
+	'right-item-override' => "Dzorascrive j'element",
 	'right-item-create' => "Creé dj'element",
-	'right-item-remove' => "Gavé j'element", # Fuzzy
+	'right-item-remove' => "Scancelé j'element",
+	'right-property-override' => 'Dzorascrive le propietà',
+	'right-property-create' => 'Creé dle propietà',
+	'right-property-remove' => 'Scancelé le propietà',
 	'right-alias-remove' => "Gavé dj'alternative",
+	'right-alias-update' => 'Agiorné ij sobrichet',
 	'right-sitelink-remove' => 'Gavé dle liure ëd sit',
 	'right-sitelink-update' => 'Agiorné dle liure ëd sit',
-	'right-linktitles-update' => 'Agiorné ij tìtoj ëd le liure', # Fuzzy
-	'right-label-remove' => 'Gavé dle tichëtte', # Fuzzy
+	'right-linktitles-update' => 'Pàgine associà',
+	'right-label-remove' => 'Scancelé le tichëtte',
 	'right-label-update' => 'Agiorna le tichëtte',
-	'right-description-remove' => 'Gavé dle descrission', # Fuzzy
+	'right-description-remove' => 'Scancelé le descrission',
 	'right-description-update' => 'Agiorné dle descrission',
+	'action-item-override' => "dzorascrive dj'element",
+	'action-item-create' => "creé dj'element",
+	'action-item-remove' => "eliminé dj'element",
+	'action-property-override' => 'dzorascrive dle propietà',
+	'action-property-create' => 'creé dle propietà',
+	'action-property-remove' => 'eliminé dle propietà',
+	'action-alias-update' => 'agiorné dij sobrichet',
+	'action-alias-remove' => 'eliminé dij sobrichet',
+	'action-sitelink-remove' => 'eliminé dle liure a dij sit',
+	'action-sitelink-update' => 'agiorné dle liure ëd sit',
+	'action-linktitles-update' => 'assocé dle pàgine',
+	'action-label-remove' => 'scancelé dle tichëtte',
+	'action-label-update' => 'agiorné dle tichëtte',
+	'action-description-remove' => 'scancelé dle descrission',
 );
 
 /** Pashto (پښتو)
