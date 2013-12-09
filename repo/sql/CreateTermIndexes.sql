@@ -1,10 +1,4 @@
-
-DROP INDEX /*i*/wb_terms_entity_id ON /*_*/wb_terms;
-DROP INDEX /*i*/wb_terms_entity_type ON /*_*/wb_terms;
-DROP INDEX /*i*/wb_terms_language ON /*_*/wb_terms;
-DROP INDEX /*i*/wb_terms_type ON /*_*/wb_terms;
-DROP INDEX /*i*/wb_terms_text ON /*_*/wb_terms;
-DROP INDEX /*i*/wb_terms_search_key ON /*_*/wb_terms;
+-- creates indexes for wb_terms
 
 -- Indexes and comments below adopted from the suggestions Sean Pringle made
 -- at https://bugzilla.wikimedia.org/show_bug.cgi?id=45529#c10 based on a
