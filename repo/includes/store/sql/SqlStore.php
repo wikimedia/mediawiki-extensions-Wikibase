@@ -291,10 +291,50 @@ class SqlStore implements Store {
 		);
 
 		// ---- Update from 0.4 ----
+		// drop obsolete indexes
+		$updater->dropExtensionIndex(
+			'wb_terms',
+			'wb_terms_entity_id',
+			$this->getUpdateScriptPath( 'DropTermIndexes04', $db->getType() )
+		);
 
-		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
-		if ( $db->getType() !== 'sqlite' ) {
-			// make term_row_id BIGINT
+		// NOTE: mysqli reports field type encoded as an int, see <http://php.net/manual/en/mysqli-result.fetch-field-direct.php#89117>.
+		//       253 is "varchar".
+		$entityIdTypes = array( 'text', 'varchar', 253 );
+
+		if ( !$this->checkFieldType( $db, 'wb_terms', 'term_entity_id', $entityIdTypes ) ) {
+
+			// Drop current indexes, so they don't get in the way when converting.
+			// NOTE: redundant, but only until we can actually check the field type above.
+			$updater->dropExtensionIndex(
+				'wb_terms',
+				'term_search',
+				$this->getUpdateScriptPath( 'DropTermIndexes', $db->getType() )
+			);
+
+			// make term_entity_id a VARCHAR and populate it with prefixed IDs
+			// (recorded in updatelog, so it's only done once)
+			$updater->modifyExtensionField(
+				'wb_terms',
+				'term_entity_id',
+				$this->getUpdateScriptPath( 'MigrateTermEntityId', $db->getType() )
+			);
+
+			// indexes get re-created below
+		}
+
+		// NOTE: mysqli reports field type encoded as an int, see <http://php.net/manual/en/mysqli-result.fetch-field-direct.php#89117>.
+		//       253 is "varchar".
+		$rowIdTypes = array( 'bigint', 8 );
+
+		if ( $db->getType() === 'sqlite' ) {
+			// sqlite's integer type can grow to 8 bytes
+			$rowIdTypes[] = 'integer';
+		}
+
+		if ( !$this->checkFieldType( $db, 'wb_terms', 'term_row_id', $rowIdTypes ) ) {
+
+			// make term_row_id BIGINT (recorded in updatelog, so it's only done once)
 			$updater->modifyExtensionField(
 				'wb_terms',
 				'term_row_id',
@@ -302,12 +342,30 @@ class SqlStore implements Store {
 			);
 		}
 
-		// updated indexes
+		// (re)create missing indexes
 		$updater->addExtensionIndex(
 			'wb_terms',
 			'term_search',
-			$this->getUpdateScriptPath( 'UpdateTermIndexes', $db->getType() )
+			$this->getUpdateScriptPath( 'CreateTermIndexes', $db->getType() )
 		);
+	}
+
+	/**
+	 * Checks the type of a database field against a list of types.
+	 * This hides some of the awkwardness of checking field type.
+	 *
+	 * @param DatabaseBase $db
+	 * @param string $table
+	 * @param string $field
+	 * @param array $types
+	 *
+	 * @return bool true iff the actual type of the field is one of the types listed in $types.
+	 */
+	private function checkFieldType( DatabaseBase $db, $table, $field, $types ) {
+		$fieldInfo = $db->fieldInfo( $table, $field );
+		$fieldType = $fieldInfo ? $fieldInfo->type() : false;
+
+		return in_array( strtolower( $fieldType ), $types );
 	}
 
 	/**
