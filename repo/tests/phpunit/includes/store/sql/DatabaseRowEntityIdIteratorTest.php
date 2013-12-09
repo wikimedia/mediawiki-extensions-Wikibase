@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DatabaseRowEntityIdIterator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\PropertyContent;
 use Wikibase\ItemContent;
@@ -48,8 +49,7 @@ class DatabaseRowEntityIdIteratorTest extends \MediaWikiTestCase {
 			$dbw->insert(
 				'wb_entity_per_page',
 				array(
-					'epp_entity_id' => $id->getNumericId(),
-					'epp_entity_type' => $id->getEntityType(),
+					'epp_entity_id' => $id->getSerialization(),
 					'epp_page_id' => $i,
 				),
 				__METHOD__
@@ -70,12 +70,12 @@ class DatabaseRowEntityIdIteratorTest extends \MediaWikiTestCase {
 
 		$rows = $dbr->select(
 			$table,
-			array( 'epp_entity_type', 'epp_entity_id', ),
+			array( 'epp_entity_id', ),
 			'',
 			__METHOD__
 		);
 
-		$iterator = new DatabaseRowEntityIdIterator( $rows, 'epp_entity_type', 'epp_entity_id' );
+		$iterator = new DatabaseRowEntityIdIterator( $rows, 'epp_entity_id', new BasicEntityIdParser() );
 		return $iterator;
 	}
 

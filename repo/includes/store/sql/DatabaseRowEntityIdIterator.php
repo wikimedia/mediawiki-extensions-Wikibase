@@ -3,8 +3,7 @@
 namespace Wikibase;
 
 use ResultWrapper;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Allows a database result set containing entity IDs to be iterated as EntityId objects.
@@ -22,15 +21,15 @@ class DatabaseRowEntityIdIterator extends ConvertingResultWrapper {
 	protected $idField;
 
 	/**
-	 * @var string
+	 * @var EntityIdParser
 	 */
-	protected $typeField;
+	protected $parser;
 
-	public function __construct( ResultWrapper $rows, $typeField, $idField ) {
+	public function __construct( ResultWrapper $rows, $idField, EntityIdParser $parser ) {
 		parent::__construct( $rows );
 
 		$this->idField = $idField;
-		$this->typeField = $typeField;
+		$this->parser = $parser;
 	}
 
 	/**
@@ -43,23 +42,8 @@ class DatabaseRowEntityIdIterator extends ConvertingResultWrapper {
 	 */
 	protected function convert( $row ) {
 		$idField = $this->idField; //PHP fails
-		$typeField = $this->typeField; //PHP fails
+		$id = $row->$idField;
 
-		$id = (int)$row->$idField;
-		$type = $row->$typeField;
-
-		//TODO: use an EntityIdFactory here
-		switch ( $type ) {
-			case 'item':
-				$entityId = new ItemId( "Q$id" );
-				break;
-			case 'property':
-				$entityId = new PropertyId( "P$id" );
-				break;
-			default:
-				throw new \RuntimeException( "Unknown entity type: $type" );
-		}
-
-		return $entityId;
+		return $this->parser->parse( $id );
 	}
 }
