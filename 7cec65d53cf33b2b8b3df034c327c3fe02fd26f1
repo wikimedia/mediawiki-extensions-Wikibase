@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_b9992173",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-09T11:29:35Z",
+      "side": 1,
+      "message": "doing this the same way as changes list and same way messages are currently handled in entityview, using text(). best to have strings here.  below, we tend to use htmlspecialchars below.\n\nbest not to mess with this in this changeset, which is simply about unused variables in a function.",
+      "parentUuid": "0ee75395_99653de0",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_595fb513",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_597b3523",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-09T11:29:35Z",
+      "side": 1,
+      "message": "this doesn\u0027t change the behavior from what is done currently.",
+      "parentUuid": "0ee75395_595fb513",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_796039cc",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2013-12-09T09:34:26Z",
       "side": 1,
       "message": "No escaping applies!",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_198dad2e",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-09T11:29:35Z",
+      "side": 1,
+      "message": "no change from present",
+      "parentUuid": "0ee75395_796039cc",
       "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
