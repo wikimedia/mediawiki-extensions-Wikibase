@@ -193,6 +193,12 @@ class Term {
 	 * @throws MWException
 	 */
 	public function setEntityId( $id ) {
+		//FIXME: this is a B/C hack. Callers should be modified
+		// to handle prefixed string IDs in a follow-up ASAP.
+		if ( is_string( $id ) ) {
+			$id = (int)preg_replace( '/^[^\d]+/', '', $id );
+		}
+
 		if ( !is_int( $id ) ) {
 			throw new MWException( 'Entity id code can only be an integer' );
 		}
@@ -203,7 +209,7 @@ class Term {
 	/**
 	 * @since 0.2
 	 *
-	 * @return integer|null
+	 * @return string|null
 	 */
 	public function getEntityId() {
 		return array_key_exists( 'entityId', $this->fields ) ? $this->fields['entityId'] : null;

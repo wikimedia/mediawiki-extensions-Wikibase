@@ -34,7 +34,7 @@ CREATE INDEX /*i*/wb_ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 -- NOTE: keep the Wikimedia specific terms.wmf.sql in sync with this!
 CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
   term_row_id                BIGINT unsigned     NOT NULL PRIMARY KEY AUTO_INCREMENT, -- row ID
-  term_entity_id             INT unsigned        NOT NULL, -- Id of the entity
+  term_entity_id             VARBINARY(255)      NOT NULL, -- Id of the entity
   term_entity_type           VARBINARY(32)       NOT NULL, -- Type of the entity
   term_language              VARBINARY(32)       NOT NULL, -- Language code
   term_type                  VARBINARY(32)       NOT NULL, -- Term type
