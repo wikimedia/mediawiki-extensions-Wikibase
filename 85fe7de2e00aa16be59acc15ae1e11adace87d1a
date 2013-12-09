@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_4ba478af",
+        "filename": "repo/includes/store/sql/Wikibase.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-09T13:53:34Z",
+      "side": 1,
+      "message": "should maybe include term_weight... somehow?",
+      "revId": "85fe7de2e00aa16be59acc15ae1e11adace87d1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
