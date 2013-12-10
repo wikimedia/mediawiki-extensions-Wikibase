@@ -5,7 +5,7 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, valueview, GlobeCoordinate, GlobeCoordinateParser ) {
+( function( $, QUnit, valueview, GlobeCoordinate ) {
 	'use strict';
 
 	var testExpert = valueview.tests.testExpert;
@@ -23,8 +23,7 @@
 			unknown: testExpert.basicTestDefinition.rawValues.unknown.concat( [
 				42
 			] )
-		},
-		relatedValueParser: GlobeCoordinateParser
+		}
 	} );
 
-}( jQuery, QUnit, jQuery.valueview, globeCoordinate.GlobeCoordinate, valueParsers.GlobeCoordinateParser ) );
+}( jQuery, QUnit, jQuery.valueview, globeCoordinate.GlobeCoordinate ) );

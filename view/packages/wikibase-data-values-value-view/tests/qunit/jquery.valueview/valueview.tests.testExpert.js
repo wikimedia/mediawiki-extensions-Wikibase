@@ -6,7 +6,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
  jQuery.valueview.tests = jQuery.valueview.tests || {};
- jQuery.valueview.tests.testExpert = ( function( $, QUnit, valueview, Notifier, ValueParser ) {
+ jQuery.valueview.tests.testExpert = ( function( $, QUnit, valueview, Notifier ) {
 
 'use strict';
 
@@ -151,19 +151,6 @@ function testExpert( testDefinition ) {
 
 	} );
 
-	expertCasesTestAndCleanup( 'parser', function( args, assert ) {
-		var valueParser = args.expert.parser();
-
-		assert.ok(
-			valueParser instanceof ValueParser,
-			'parser() returns a value parser instance'
-		);
-		assert.ok(
-			valueParser instanceof testDefinition.relatedValueParser,
-			'parser() returns instance of the expected value parser constructor'
-		);
-	} );
-
 	expertCasesTestAndCleanup( 'valueCharacteristics', function( args, assert ) {
 		var valueCharacteristics = args.expert.valueCharacteristics();
 
@@ -241,9 +228,7 @@ function testExpert( testDefinition ) {
 		$.each( unknownRawValues, function( i, testValue ) {
 			QUnit.stop();
 
-			// Copy expert to not overwrite its raw value while looping when testing an expert using
-			// an asynchronous API based parser:
-			var expert = $.extend( {}, args.expert ),
+			var expert = args.expert,
 				promise = expert.rawValue( testValue );
 
 			assert.ok(
@@ -255,8 +240,6 @@ function testExpert( testDefinition ) {
 				promise.always( function() {
 					QUnit.start();
 
-					// Since experts using an API based parser deal with plain unparsed values, they
-					// return the original instead of the parsed value when calling rawValue().
 					assert.ok(
 						expert.rawValueCompare( expert.rawValue(), testValue )
 							|| isNaN( testValue ) && isNaN( expert.rawValue() ),
@@ -401,12 +384,7 @@ testExpert.basicTestDefinition = {
 			$.noop, // function
 			Number.NaN // NaN
 		]
-	},
-	/**
-	 * Defines what kind of value parser the Expert's parse() function is expected to return.
-	 * @type Function Constructor implementation of valueParsers.ValueParser.
-	 */
-	relatedValueParser: null
+	}
 };
 
  /**
@@ -468,4 +446,4 @@ testExpert.verifyTestDefinition = function( testDefinition ) {
 
 return testExpert; // expose
 
-}( jQuery, QUnit, jQuery.valueview, dataValues.util.Notifier, valueParsers.ValueParser ) );
+}( jQuery, QUnit, jQuery.valueview, dataValues.util.Notifier ) );

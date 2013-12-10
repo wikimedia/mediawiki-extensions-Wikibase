@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
- ( function( $, QUnit, valueview, vp ) {
+ ( function( $, QUnit, valueview ) {
 	'use strict';
 
 	var testExpert = valueview.tests.testExpert;
@@ -20,8 +20,7 @@
 			unknown: testExpert.basicTestDefinition.rawValues.unknown.concat( [
 				1
 			] )
-		},
-		relatedValueParser: vp.QuantityParser
+		}
 	} );
 
-}( jQuery, QUnit, jQuery.valueview, valueParsers ) );
+}( jQuery, QUnit, jQuery.valueview ) );

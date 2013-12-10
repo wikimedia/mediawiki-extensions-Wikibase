@@ -6,7 +6,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, vp, $, vv, GlobeCoordinate, Formatter ) {
+( function( dv, $, vv, GlobeCoordinate, Formatter ) {
 	'use strict';
 
 	/**
@@ -206,13 +206,6 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.parser
-		 */
-		parser: function() {
-			return new vp.GlobeCoordinateParser();
-		},
-
-		/**
 		 * @see jQuery.valueview.Expert.valueCharacteristics
 		 */
 		valueCharacteristics: function() {
@@ -394,4 +387,4 @@
 		return actualPrecision;
 	}
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate, globeCoordinate.Formatter ) );
+}( dataValues, jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate, globeCoordinate.Formatter ) );

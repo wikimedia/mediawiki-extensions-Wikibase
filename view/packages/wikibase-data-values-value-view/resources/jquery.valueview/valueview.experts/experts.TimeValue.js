@@ -5,7 +5,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv ) {
+( function( dv, $, vv ) {
 	'use strict';
 
 	var PARENT = vv.BifidExpert,
@@ -87,4 +87,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, mediaWiki ) );
+}( dataValues, jQuery, jQuery.valueview ) );

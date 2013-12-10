@@ -9,19 +9,12 @@
  * @constructor
  * @extends jQuery.valueview.experts.StringValue
  */
-jQuery.valueview.experts.QuantityType = ( function( dv, vp, $, vv ) {
+jQuery.valueview.experts.QuantityType = ( function( dv, $, vv ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
 
 	return vv.expert( 'quantitytype', PARENT, {
-		/**
-		 * @see Query.valueview.Expert.parser
-		 */
-		parser: function() {
-			return new vp.QuantityParser();
-		},
-
 		/**
 		 * @see jQuery.valueview.Expert._setRawValue
 		 */
@@ -35,4 +28,4 @@ jQuery.valueview.experts.QuantityType = ( function( dv, vp, $, vv ) {
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview ) );
+}( dataValues, jQuery, jQuery.valueview ) );
