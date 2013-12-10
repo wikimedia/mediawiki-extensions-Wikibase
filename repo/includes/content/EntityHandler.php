@@ -175,10 +175,10 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @return bool true
+	 * @return bool false
 	 */
 	public function isParserCacheSupported() {
-		return true;
+		return false;
 	}
 
 	/**

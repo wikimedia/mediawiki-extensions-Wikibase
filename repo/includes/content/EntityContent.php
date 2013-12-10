@@ -124,9 +124,6 @@ abstract class EntityContent extends AbstractContent {
 	 * The actual work of generating a ParserOutput object is done by calling
 	 * EntityView::getParserOutput().
 	 *
-	 * @note: this calls ParserOutput::recordOption( 'userlang' ) to split the cache
-	 * by user language.
-	 *
 	 * @see Content::getParserOutput
 	 *
 	 * @since 0.1
@@ -155,21 +152,13 @@ abstract class EntityContent extends AbstractContent {
 		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		$entityView = EntityView::newForEntityType(
+		return EntityView::newForEntityType(
 			$this->getEntity()->getType(),
 			$snakFormatter,
 			$dataTypeLookup,
 			$entityInfoBuilder,
 			$entityContentFactory
 		);
-
-		$output = $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
-
-		// Since the output depends on the user language, we must make sure
-		// ParserCache::getKey() includes it in the cache key.
-		$output->recordOption( 'userlang' );
-
-		return $output;
 	}
 
 	/**
