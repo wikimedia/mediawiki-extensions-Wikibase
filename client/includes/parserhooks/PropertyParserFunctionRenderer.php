@@ -104,7 +104,7 @@ class PropertyParserFunctionRenderer {
 			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $string ) );
 
 			if ( $propertyIds === null || empty( $propertyIds ) ) {
-				throw new PropertyLabelNotResolvedException( $this->language->getCode(), $string );
+				throw new PropertyLabelNotResolvedException( $string, $this->language->getCode() );
 			}
 
 			$propertyId = $propertyIds[$string];
