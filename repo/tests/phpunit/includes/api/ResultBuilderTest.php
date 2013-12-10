@@ -94,7 +94,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$props = array( 'info' );
 		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q123' ) );
+		$item->setId( new ItemId( 'Q123098' ) );
 		$item->setLabel( 'de', 'foo' );
 		$item->addAliases( 'en', array( 'bar', 'baz' ) );
 		$item->setDescription( 'pt', 'ptDesc' );
@@ -107,11 +107,11 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		//todo
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$expected = array( 'entities' => array( 'Q123' => array(
+		$expected = array( 'entities' => array( 'Q123098' => array(
 			'pageid' => 0,
 			'ns' => 120,
-			'title' => 'Item:Q123',
-			'id' => 'Q123',
+			'title' => 'Item:Q123098',
+			'id' => 'Q123098',
 			'type' => 'item',
 			'lastrevid' => 33,
 			'modified' => '2013-11-26T20:29:23Z',
