@@ -15,7 +15,7 @@ use Wikibase\PropertySomeValueSnak;
 use Wikibase\SnakObject;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpModifyClaim
+ * @covers Wikibase\ChangeOp\ChangeOpClaim
  *
  * @since 0.4
  *

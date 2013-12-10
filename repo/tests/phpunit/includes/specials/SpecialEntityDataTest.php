@@ -10,7 +10,7 @@ use Wikibase\ItemContent;
 use Wikibase\Repo\Specials\SpecialEntityData;
 
 /**
- * @covers SpecialEntityData
+ * @covers Wikibase\Repo\Specials\SpecialEntityData
  *
  * @since 0.4
  *
