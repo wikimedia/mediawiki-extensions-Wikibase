@@ -477,7 +477,8 @@ class EditEntity {
 
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
-			// the edit will apply cleanly.
+			// so just keep the current content as it is.
+			$this->newContent = $this->getCurrentContent()->copy();
 			return true;
 		}
 

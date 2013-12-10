@@ -191,6 +191,18 @@ class EditEntityTest extends \MediaWikiTestCase {
 				false, // expected fix
 				null   // expected data
 			),
+			array( // #6: case VI: patch is empty, keep current (not base)
+				array( // input data
+					'label' => array( 'en' => 'bar', 'de' => 'bar' ),
+				),
+				2,     // base rev index
+				true,  // expected conflict
+				true,  // expected fix
+				array( // expected data
+					'label' => array( 'en' => 'test', 'de' => 'bar' ),
+					'description' => array( 'en' => 'more testing' )
+				)
+			),
 		);
 	}
 
