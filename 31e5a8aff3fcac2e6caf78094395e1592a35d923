@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_30a4fbae",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-10T13:02:03Z",
+      "side": 1,
+      "message": "Is this all intended? It doesnt look very nice in the diff with all of the tabs and I thought we were going to avoid doing this in comments?",
+      "revId": "31e5a8aff3fcac2e6caf78094395e1592a35d923",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
