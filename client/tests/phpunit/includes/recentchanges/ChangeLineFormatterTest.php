@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use ChangesList;
 use ContentHandler;
+use Language;
 use RecentChange;
 use RequestContext;
 use Title;
@@ -36,7 +37,7 @@ class ChangeLineFormatterTest extends MediaWikiTestCase {
 		// these are required because Linker is used in ChangeLineFormatter
 		// @todo eliminate Linker or at least use of Linker in Wikibase :)
 		$this->setMwGlobals( array(
-			'wgLanguageCode' => 'en',
+			'wgLang' => Language::factory( 'en' ),
 			'wgScriptPath' => '',
 			'wgScript' => '/index.php',
 			'wgArticlePath' => '/wiki/$1'
