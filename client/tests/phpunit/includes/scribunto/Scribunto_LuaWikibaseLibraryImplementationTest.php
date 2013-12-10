@@ -44,4 +44,16 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 	public function provideEntity() {
 		return array( array( 'q42' ), array( 'q23' ) );
 	}
+
+	/**
+	 * @dataProvider provideTitle
+	 */
+	public function testGetEntityId( $title ) {
+		$id = $this->getWikibaseLibraryImplementation()->getEntityId( $title );
+		$this->assertInternalType( 'array', $id );
+	}
+
+	public function provideTitle() {
+		return array( array( 'Gold' ), array( 'Silver' ) );
+	}
 }
