@@ -6,6 +6,10 @@
 #
 # basic steps for entities
 
+Given /^I am logged in$/ do
+  visit(RepoLoginPage).login_with(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
+end
+
 Given /^I am on an item page$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
