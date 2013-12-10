@@ -36,7 +36,9 @@ class TermPropertyLabelResolverTest extends PropertyLabelResolverTest {
 		$resolver = new TermPropertyLabelResolver(
 			$lang,
 			new MockTermIndexForPropertyLabelResolverTest( $terms ),
-			new \HashBagOStuff()
+			new \HashBagOStuff(),
+			3600,
+			'testrepo:WBL/0.5alpha'
 		);
 
 		return $resolver;
