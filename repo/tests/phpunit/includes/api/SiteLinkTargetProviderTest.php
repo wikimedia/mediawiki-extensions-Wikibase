@@ -13,7 +13,7 @@ use Wikibase\Api\SiteLinkTargetProvider;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class SiteLinkTargetProviderTest extends \MediaWikiTestCase {
+class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideExpected

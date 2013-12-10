@@ -3,6 +3,11 @@
 namespace Wikibase\Test;
 
 use DataTypes\DataTypeFactory;
+use DerivativeContext;
+use FauxRequest;
+use HttpError;
+use OutputPage;
+use RequestContext;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
@@ -19,28 +24,9 @@ use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\LinkedData\EntityDataRequestHandler
+ * @covers Wikibase\LinkedData\EntityDataRequestHandler
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Database
  *
@@ -53,7 +39,7 @@ use Wikibase\Repo\WikibaseRepo;
 class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var \Title
+	 * @var Title
 	 */
 	protected $interfaceTitle;
 
@@ -206,11 +192,11 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @param $params
 	 * @param $headers
 	 *
-	 * @return \OutputPage
+	 * @return OutputPage
 	 */
 	protected function makeOutputPage( $params, $headers ) {
 		// construct request
-		$request = new \FauxRequest( $params );
+		$request = new FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 
 		foreach ( $headers as $name => $value ) {
@@ -218,13 +204,13 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 
 		// construct Context and OutputPage
-		/* @var \FauxResponse $response */
+		/* @var FauxResponse $response */
 		$response = $request->response();
 
-		$context = new \DerivativeContext( \RequestContext::getMain() );
+		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 
-		$output = new \OutputPage( $context );
+		$output = new OutputPage( $context );
 		$output->setTitle( $this->interfaceTitle );
 		$context->setOutput( $output );
 
@@ -280,10 +266,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			foreach ( $expHeaders as $name => $exp ) {
 				$value = $response->getheader( $name );
 				$this->assertNotNull( $value, "header: $name" );
-				$this->assertType( 'string', $value, "header: $name" );
+				$this->assertInternalType( 'string', $value, "header: $name" );
 				$this->assertRegExp( $exp, $value, "header: $name" );
 			}
-		} catch ( \HttpError $e ) {
+		} catch ( HttpError $e ) {
 			ob_end_clean();
 			$this->assertEquals( $expCode, $e->getStatusCode(), "status code" );
 			$this->assertRegExp( $expRegExp, $e->getHTML(), "error output" );

@@ -23,9 +23,8 @@ use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
-
 /**
- * Unit tests for the Wikibase\Repo\Api\ApSetClaim class.
+ * @covers Wikibase\Api\SetClaim
  *
  * @since 0.4
  *
@@ -119,7 +118,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$statement->setRank( $ranks[array_rand( $ranks )] );
 		$testCases[] = array( $statement );
 
-		return $testCases ;
+		return $testCases;
 	}
 
 	/**

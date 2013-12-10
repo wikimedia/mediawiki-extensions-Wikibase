@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\Specials\SpecialItemDisambiguation;
+
 /**
- * Tests for the SpecialItemDisambiguation class.
+ * @covers Wikibase\Repo\Specials\SpecialItemDisambiguation
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group SpecialPage
@@ -26,7 +24,7 @@ namespace Wikibase\Test;
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \Wikibase\Repo\Specials\SpecialItemDisambiguation();
+		return new SpecialItemDisambiguation();
 	}
 
 	public function testExecute() {

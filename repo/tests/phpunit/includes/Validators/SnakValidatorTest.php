@@ -34,7 +34,7 @@ use Wikibase\Validators\SnakValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class SnakValidatorTest extends \MediaWikiTestCase {
+class SnakValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var DataTypeFactory

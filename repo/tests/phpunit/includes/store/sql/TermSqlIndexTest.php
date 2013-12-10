@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
+use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
 use Wikibase\TermSqlIndex;
@@ -52,7 +53,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	 * @param boolean $matches
 	 */
 	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
-		if ( \Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
+		if ( Settings::get( 'withoutTermSearchKey' ) ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
@@ -63,7 +64,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->clear();
 
-		$item = \Wikibase\Item::newEmpty();
+		$item = Item::newEmpty();
 		$item->setId( 42 );
 
 		$item->setLabel( $languageCode, $termText );
@@ -78,7 +79,7 @@ class TermSqlIndexTest extends TermIndexTest {
 			'caseSensitive' => false,
 		);
 
-		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), Term::TYPE_LABEL, \Wikibase\Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), Term::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 
@@ -108,7 +109,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->clear();
 
-		$item1 = \Wikibase\Item::newEmpty();
+		$item1 = Item::newEmpty();
 		$item1->setId( 42 );
 
 		$item1->setLabel( $languageCode, $termText );
@@ -116,7 +117,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
-		$item2 = \Wikibase\Item::newEmpty();
+		$item2 = Item::newEmpty();
 		$item2->setId( 23 );
 
 		$item2->setLabel( $languageCode, $termText );
@@ -127,7 +128,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item2 );
 
-		$item3 = \Wikibase\Item::newEmpty();
+		$item3 = Item::newEmpty();
 		$item3->setId( 108 );
 
 		$item3->setLabel( $languageCode, $termText );
@@ -144,7 +145,7 @@ class TermSqlIndexTest extends TermIndexTest {
 			'caseSensitive' => false,
 		);
 
-		$obtainedIDs = $termIndex->getMatchingIDs( array( $term ), \Wikibase\Item::ENTITY_TYPE, $options );
+		$obtainedIDs = $termIndex->getMatchingIDs( array( $term ), Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 3 : 0, count( $obtainedIDs ) );
 
