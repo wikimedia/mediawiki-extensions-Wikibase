@@ -55,7 +55,7 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->siteLinkTable = $siteLinkTable;
 		$this->language = $language;
-		$this->siteId;
+		$this->siteId = $siteId;
 	}
 
 
