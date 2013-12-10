@@ -13,4 +13,4 @@ easyrdf/
 
 !.*
 
-selenium_cuc/.idea
+tests/browser/.idea
