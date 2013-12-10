@@ -23,6 +23,7 @@
 
 .ui-suggester-list {
 	padding: 0;
+	position: absolute;
 }
 
 .ui-suggester-list .ui-menu-item a {
