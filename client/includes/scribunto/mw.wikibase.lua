@@ -26,36 +26,79 @@
 local wikibase = {}
 
 function wikibase.setupInterface()
-  local php = mw_interface
-  mw_interface = nil
-  wikibase.getEntity = function ()
-    local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
-    if id == nil then return nil end
-    local entity = php.getEntity( id )
-    return entity
-  end
-  wikibase.label = function ( id )
-    local code = mw.language.getContentLanguage():getCode()
-    if code == nil then return nil end
-    local entity = php.getEntity( id )
-    if entity == nil or entity.labels == nil then return nil end
-    local label = entity.labels[code]
-    if label == nil then return nil end
-    return label.value
-  end
-  wikibase.sitelink = function ( id )
-    local entity = php.getEntity( id )
-    if entity == nil or entity.sitelinks == nil then return nil end
-    local globalSiteId = php.getGlobalSiteId()
-    if globalSiteId == nil then return nil end
-    local sitelink = entity.sitelinks[globalSiteId]
-    if sitelink == nil then return nil end
-    return sitelink.title
-  end
-  mw = mw or {}
-  mw.wikibase = wikibase
-  package.loaded['mw.wikibase'] = wikibase
-  wikibase.setupInterface = nil
+	local php = mw_interface
+	mw_interface = nil
+
+	wikibase.getEntity = function()
+		local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+		if id == nil then return nil end
+		local entity = php.getEntity( id )
+		return entity
+	end
+
+	wikibase.label = function( id )
+		local code = mw.language.getContentLanguage():getCode()
+		if code == nil then return nil end
+		local entity = php.getEntity( id )
+		if entity == nil or entity.labels == nil then return nil end
+		local label = entity.labels[code]
+		if label == nil then return nil end
+		return label.value
+	end
+
+	wikibase.sitelink = function( id )
+		local entity = php.getEntity( id )
+		if entity == nil or entity.sitelinks == nil then return nil end
+		local globalSiteId = php.getGlobalSiteId()
+		if globalSiteId == nil then return nil end
+		local sitelink = entity.sitelinks[globalSiteId]
+		if sitelink == nil then return nil end
+		return sitelink.title
+	end
+
+	wikibase.formattedPropertyValues = function()
+		local entity = wikibase.getEntity()
+		-- Get the keys, i.e. property names
+		local properties = {}
+		local n = 0
+		if entity.claims == nil then return {} end
+		for k, v in pairs( entity.claims ) do
+			n = n + 1
+			properties[n] = k
+		end
+		-- Filter out all properties that don't start with a capital letter
+		local filter = function( func, xs )
+			local table = {}
+			for i, v in pairs( xs ) do
+				if func( v ) then
+					table[i] = v
+				end
+			end
+			return table
+		end
+		local is_capital_property = function( x )
+			return ( string.match( x, '^%u%d+' ) ~= nil )
+		end
+		properties = filter( is_capital_property, properties )
+		-- Build the properties table to be returned
+		n = 0
+		local p = {}
+		for k, v in pairs( properties ) do
+			n = n + 1
+			p[n] = v
+		end
+		properties = p
+		p = {}
+		for i, v in pairs( properties ) do
+			p[v] = { ["label"] = wikibase.label( v ) }
+		end
+		return p
+	end
+
+	mw = mw or {}
+	mw.wikibase = wikibase
+	package.loaded['mw.wikibase'] = wikibase
+	wikibase.setupInterface = nil
 end
 
 return wikibase
