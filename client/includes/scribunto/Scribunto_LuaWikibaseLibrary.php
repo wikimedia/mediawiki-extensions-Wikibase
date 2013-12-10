@@ -1,6 +1,5 @@
 <?php
 
-use Wikibase\Settings;
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
 
@@ -35,7 +34,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			WikibaseClient::getDefaultInstance()->getEntityIdFormatter(), // EntityIdFormatter
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(), // SiteLinkLookup
 			$language, // language
-			Settings::get( 'siteGlobalID' ) // SiteID
+			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' ) // siteId
 		);
 		parent::__construct( $engine );
 	}
@@ -46,7 +45,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @since 0.4
 	 */
 	public function register() {
-		$lib = array( 'getEntity' => array( $this, 'getEntity' ), 'getEntityId' => array( $this, 'getEntityId' ), 'getGlobalSiteId' => array( $this, 'getGlobalSiteId' ) );
+		$lib = array(
+			'getEntity' => array( $this, 'getEntity' ),
+			'getEntityId' => array( $this, 'getEntityId' ),
+			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
+		);
 		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/mw.wikibase.lua', $lib, array() );
 	}
 
