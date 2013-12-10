@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_182b5d79",
+        "filename": "repo/tests/selenium/aliases/aliases_bugs_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-10T19:34:53Z",
+      "side": 1,
+      "message": "This should be:\n\npage.aliases_input_first_remove",
+      "revId": "36a03c207c946b3f4317573f7b9d8fa0ca936c64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
