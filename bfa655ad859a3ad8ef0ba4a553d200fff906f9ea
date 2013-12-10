@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b5b35d95",
+        "filename": "lib/tests/phpunit/MockTermCache.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-10T11:18:50Z",
+      "side": 1,
+      "message": "Introducing this should be done in a separate change. This is not \"cleanup\".",
+      "revId": "bfa655ad859a3ad8ef0ba4a553d200fff906f9ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_95b61984",
+        "filename": "lib/tests/phpunit/MockTermCache.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-10T11:18:50Z",
+      "side": 1,
+      "message": "Please break into separate functions",
+      "revId": "bfa655ad859a3ad8ef0ba4a553d200fff906f9ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
