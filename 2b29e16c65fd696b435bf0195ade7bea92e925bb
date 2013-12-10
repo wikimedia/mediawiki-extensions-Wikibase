@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_92574ccd",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-10T15:40:38Z",
+      "side": 1,
+      "message": "TermPropertyLabelResolverTest currently doesnt pass a Duration or key so should break!",
+      "revId": "2b29e16c65fd696b435bf0195ade7bea92e925bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
