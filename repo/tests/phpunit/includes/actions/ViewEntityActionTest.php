@@ -1,10 +1,13 @@
 <?php
+
 namespace Wikibase\Test;
 
+use Revision;
 use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\NamespaceUtils;
 use Wikibase\Item;
+use Wikibase\ItemContent;
 use Wikibase\EntityId;
 use Wikibase\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -13,28 +16,9 @@ use WikiPage;
 use Title;
 
 /**
- * Tests for viewing entities.
+ * @covers Wikibase\ViewEntityAction
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -53,10 +37,6 @@ use Title;
  * @group medium
  */
 class ViewEntityActionTest extends ActionTestCase {
-
-	public function setup() {
-		parent::setup();
-	}
 
 	public function testActionForPage() {
 		$page = $this->getTestItemPage( "Berlin" );
@@ -114,11 +94,11 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		foreach( $testCases as $case ) {
 			list( $expected, $oldId, $diffValue, $title ) = $case;
-			$page = new \WikiPage( $title );
+			$page = new WikiPage( $title );
 			$viewItemAction = $this->createAction( 'view', $page );
 
 			$revision = $viewItemAction->getDiffRevision( $oldId, $diffValue, $title );
-			$this->assertInstanceOf( '\Revision', $revision );
+			$this->assertInstanceOf( 'Revision', $revision );
 
 			$id = $revision->getId();
 			$this->assertEquals( $expected, $id, 'Retrieved correct diff revision' );
@@ -126,11 +106,11 @@ class ViewEntityActionTest extends ActionTestCase {
 	}
 
 	public function doDiffRevisionEdits() {
-		$item = \Wikibase\Item::newEmpty();
-		$item->setId( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 847 ) );
+		$item = Item::newEmpty();
+		$item->setId( new EntityId( Item::ENTITY_TYPE, 847 ) );
 		$item->setDescription( 'en', 'Largest city in Germany' );
 
-        $content = new \Wikibase\ItemContent( $item );
+		$content = new ItemContent( $item );
 		$status = $content->save( 'create' );
 		assert( $status->isOK() );
 		$revId1 = $content->getWikiPage()->getRevision()->getId();
