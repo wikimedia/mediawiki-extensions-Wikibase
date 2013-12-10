@@ -3579,6 +3579,7 @@ $messages['sl'] = array(
 	'wikibase-property-notfound' => 'Lastnosti $1 ni mogoče najti.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikipodatki',
 	'wikibase-rc-show-wikidata-pref' => 'Pokaži urejanja v Wikipodatkih v zadnjih spremembah',
+	'wikibase-rc-wikibase-edit-title' => 'urejanje Wikipodatkov',
 	'wikibase-watchlist-show-changes-pref' => 'Pokaži urejanja v Wikipodatkih v spisku nadzorov',
 	'wikibase-error-serialize-error' => 'Serializacija podatkov ni uspela.',
 	'special-unconnectedpages' => 'Strani, ki niso povezane z objekti',
@@ -4109,7 +4110,7 @@ $messages['zh-hans'] = array(
 	'wikibase-comment-sitelink-change' => '语言链接从$1更改为$2',
 	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
 	'wikibase-comment-multi' => '$1个更改',
-	'wikibase-dataitem' => '数据项目',
+	'wikibase-dataitem' => '数据项',
 	'wikibase-editlinks' => '编辑链接',
 	'wikibase-editlinkstitle' => '编辑跨语言链接',
 	'wikibase-linkitem-addlinks' => '添加链接',
@@ -4157,6 +4158,7 @@ $messages['zh-hans'] = array(
  * @author Simon Shek
  * @author Stevenliuyi
  * @author Tntchn
+ * @author Yfdyh000
  * @author 乌拉跨氪
  */
 $messages['zh-hant'] = array(
@@ -4191,7 +4193,7 @@ $messages['zh-hant'] = array(
 	'wikibase-linkitem-confirmitem-button' => '確認',
 	'wikibase-linkitem-not-loggedin-title' => '您必須登入。',
 	'wikibase-linkitem-not-loggedin' => '你必需於本維基及[$1 中央數據庫]中登入才可使用此功能。',
-	'wikibase-linkitem-success-link' => '貢面已成功連接，你可以於[$1 中央數據庫]中找到包含此連結的項目。',
+	'wikibase-linkitem-success-link' => '頁面已成功連接，你可以於[$1 中央數據庫]中找到包含此連結的項目。',
 	'wikibase-property-notfound' => '$1屬性未找到。',
 	'wikibase-property-notsupportedyet' => 'Wikibase尚未支援$1屬性。',
 	'wikibase-rc-hide-wikidata' => '$1維基數據',

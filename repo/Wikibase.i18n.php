@@ -6038,6 +6038,7 @@ IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'wikibase-itemdisambiguation-lookup-label' => 'Nimi',
 	'wikibase-itemdisambiguation-submit' => 'Hae',
 	'wikibase-itemdisambiguation-nothing-found' => 'Valitettavasti kohdetta tällä nimellä ei löytynyt.',
+	'wikibase-itemdisambiguation-search' => 'Voit [{{fullurl:Special:Search|search=$1}} etsiä kohdetta].',
 	'wikibase-itemdisambiguation-create' => 'Voit [{{fullurl:Special:NewItem|label=$1}} luoda kohteen].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Valitettavasti järjestelmä ei tunne antamaasi kielitunnistetta. Käytä kelvollista tunnistetta kuten "fi".',
 	'wikibase-itemdisambiguation-description' => 'Hakuun käytettyjen arvojen tulee olla niiden kokonaisia tekstejä. Kieli tarkoittaa tunnusta, kuten "fi".',
@@ -13840,6 +13841,7 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'action-label-remove' => 'scancelé dle tichëtte',
 	'action-label-update' => 'agiorné dle tichëtte',
 	'action-description-remove' => 'scancelé dle descrission',
+	'action-description-update' => 'agiorné dle descrission',
 );
 
 /** Pashto (پښتو)
@@ -17831,6 +17833,7 @@ $messages['zh-hant'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => '另一個特性（$3）已經有標籤「$1」關聯了語言代碼$2。',
 	'wikibase-error-label-not-unique-wikibase-query' => '另一個查詢（$3）已有標籤「$1」關聯了語言代碼$2。',
 	'wikibase-error-label-not-unique-item' => '另一個項目（$3）已有標籤「$1」與描述「$4」關聯了語言代碼$2。',
+	'wikibase-error-label-no-entityid' => '此標籤必須不是一個有效的實體ID。',
 	'wikibase-itemlink-id-wrapper' => '（$1）',
 	'special-itembytitle' => '按標題查找項目',
 	'wikibase-itembytitle-lookup-fieldset' => '按站點及標題搜尋',
@@ -17943,6 +17946,7 @@ $messages['zh-hant'] = array(
 	'special-mylanguagefallbackchain' => '我的語言備用鏈',
 	'wikibase-mylanguagefallbackchain-babel' => '您可通過於{{GENDER:$1|您的}}[[Special:MyPage|用戶頁]]加入<nowiki>{{#babel: }}</nowiki>以編輯。',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1~$2，轉換自$3~$4',
+	'wikibase-api-no-such-sitelink' => '無法找尋此類站點的連接',
 	'wikibase-self-conflict-patched' => '您的編輯已成最新版本，覆蓋了您自己中間做的一些更改。',
 	'wikibase-conflict-patched' => '您的編輯已成最新版本。',
 	'wikibase-restoreold' => '恢復',
