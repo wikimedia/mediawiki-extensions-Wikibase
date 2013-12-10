@@ -370,7 +370,7 @@ abstract class EntityView extends \ContextSource {
 				$label === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
 				wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $prefixedId ) )
-					. $this->getHtmlForEditSection( $entity, $lang, $editUrl )
+					. $this->getHtmlForEditSection( $editUrl )
 			)
 		);
 
@@ -398,7 +398,7 @@ abstract class EntityView extends \ContextSource {
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
-				$this->getHtmlForEditSection( $entity, $lang, $editUrl )
+				$this->getHtmlForEditSection( $editUrl )
 			)
 		);
 
@@ -427,7 +427,7 @@ abstract class EntityView extends \ContextSource {
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$this->getHtmlForEditSection( $entity, $lang, $editUrl, 'span', 'add' )
+				$this->getHtmlForEditSection( $editUrl, 'span', 'add' )
 			);
 		} else {
 			$aliasesHtml = '';
@@ -440,7 +440,7 @@ abstract class EntityView extends \ContextSource {
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $this->getHtmlForEditSection( $entity, $lang, $editUrl )
+				$aliasList . $this->getHtmlForEditSection( $editUrl )
 			);
 		}
 
@@ -526,8 +526,8 @@ abstract class EntityView extends \ContextSource {
 				htmlspecialchars( Utils::fetchLanguageName( $language ) ),
 				htmlspecialchars( $label !== false ? $label : wfMessage( 'wikibase-label-empty' ) ),
 				htmlspecialchars( $description !== false ? $description : wfMessage( 'wikibase-description-empty' ) ),
-				$this->getHtmlForEditSection( $entity, $lang, $editLabelLink ),
-				$this->getHtmlForEditSection( $entity, $lang, $editDescriptionLink ),
+				$this->getHtmlForEditSection( $editLabelLink ),
+				$this->getHtmlForEditSection( $editDescriptionLink ),
 				$label !== false ? '' : 'wb-value-empty',
 				$description !== false ? '' : 'wb-value-empty',
 				$this->getTitle()->getLocalURL() . '?setlang=' . $language
@@ -590,7 +590,7 @@ abstract class EntityView extends \ContextSource {
 				htmlspecialchars( $propertyLabel )
 			);
 
-			$htmlForEditSection = $this->getHtmlForEditSection( $entity, $lang, '', 'span' ); // TODO: add link to SpecialPage
+			$htmlForEditSection = $this->getHtmlForEditSection( '', 'span' ); // TODO: add link to SpecialPage
 
 			$claimHtmlGenerator = new ClaimHtmlGenerator(
 				$this->snakFormatter
@@ -603,7 +603,7 @@ abstract class EntityView extends \ContextSource {
 			$toolbarHtml = wfTemplate( 'wikibase-toolbar',
 				'wb-addtoolbar',
 				// TODO: add link to SpecialPage
-				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' )
+				$this->getHtmlForEditSection( '', 'span', 'add' )
 			);
 
 			$claimsHtml .= wfTemplate( 'wb-claimlistview',
@@ -629,20 +629,18 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.2
 	 *
-	 * @param Entity $entity
-	 * @param \Language $lang
 	 * @param string $url specifies the URL for the button, default is an empty string
 	 * @param string $tag allows to specify the type of the outer node
 	 * @param string $action by default 'edit', for aliases this could also be 'add'
 	 * @param bool $enabled can be set to false to display the button disabled
+	 *
 	 * @return string
 	 */
-	public function getHtmlForEditSection(
-		Entity $entity, Language $lang, $url = '', $tag = 'span', $action = 'edit', $enabled = true
-	) {
+	public function getHtmlForEditSection( $url = '', $tag = 'span', $action = 'edit', $enabled = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
+		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
+		$buttonLabel = $this->getContext()->msg( $key )->text();
 
 		$button = ( $enabled ) ?
 			wfTemplate( 'wikibase-toolbarbutton',
