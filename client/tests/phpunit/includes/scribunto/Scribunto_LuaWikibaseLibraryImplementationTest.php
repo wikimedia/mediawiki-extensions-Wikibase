@@ -7,7 +7,7 @@ use Scribunto_LuaWikibaseLibraryImplementation;
 use Wikibase\Client\WikibaseClient;
 
 /**
- * @covers Scribunto_LuaWikibaseLibraryImplementation
+ * @covers Wikibase\Scribunto_LuaWikibaseLibraryImplementation
  *
  * @since 0.4
  *
@@ -23,11 +23,14 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 	public function getWikibaseLibraryImplementation() {
 		$entityLookup = new MockRepository();
 		$language = new Language( "en" );
+		$siteLinkLookup = $siteLinkLookup = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
+			->disableOriginalConstructor()
+			->getMock();
 		return new Scribunto_LuaWikibaseLibraryImplementation(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(), // EntityIdParser
 			$entityLookup,
 			WikibaseClient::getDefaultInstance()->getEntityIdFormatter(), // EntityIdFormatter
-			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(), // SiteLinkLookup
+			$siteLinkLookup, // SiteLinkLookup
 			$language, // language
 			"enwiki" // siteId
 		);
@@ -43,5 +46,17 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 
 	public function provideEntity() {
 		return array( array( 'q42' ), array( 'q23' ) );
+	}
+
+	/**
+	 * @dataProvider provideTitle
+	 */
+	public function testGetEntityId( $title ) {
+		$id = $this->getWikibaseLibraryImplementation()->getEntityId( $title );
+		$this->assertInternalType( 'array', $id );
+	}
+
+	public function provideTitle() {
+		return array( array( 'Gold' ), array( 'Silver' ) );
 	}
 }
