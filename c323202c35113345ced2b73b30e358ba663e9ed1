@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_f5932202",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-10T19:04:51Z",
+      "side": 1,
+      "message": "No chat in here, please :D",
+      "revId": "c323202c35113345ced2b73b30e358ba663e9ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_75d952f7",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-10T19:04:51Z",
+      "side": 1,
+      "message": "local over here",
+      "revId": "c323202c35113345ced2b73b30e358ba663e9ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_95d056cd",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-10T19:04:51Z",
+      "side": 1,
+      "message": "space",
+      "revId": "c323202c35113345ced2b73b30e358ba663e9ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_15dc46e4",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-10T19:04:51Z",
+      "side": 1,
+      "message": "I\u0027m not a big fan of these one line things... it might aid readability to split these.",
+      "revId": "c323202c35113345ced2b73b30e358ba663e9ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_95e736a7",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-10T19:04:51Z",
+      "side": 1,
+      "message": "This loop could be a function (as it\u0027s also used below)",
+      "revId": "c323202c35113345ced2b73b30e358ba663e9ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f5ec4290",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-10T19:04:51Z",
+      "side": 1,
+      "message": "It would be nice, if you could pack these function declarations on to the top of the code block and divide the code by an empty line.",
+      "revId": "c323202c35113345ced2b73b30e358ba663e9ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
