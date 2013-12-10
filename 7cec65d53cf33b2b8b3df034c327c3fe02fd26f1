@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_7586f5bf",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-10T11:10:04Z",
+      "side": 1,
+      "message": "Even if we keep using -\u003etext(), it should be the caller who decides this. \nAnd we need a way to pass parameters to the message.",
+      "parentUuid": "0ee75395_b9992173",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_595fb513",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "this doesn\u0027t change the behavior from what is done currently.",
       "parentUuid": "0ee75395_595fb513",
+      "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_158b29c5",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-10T11:10:04Z",
+      "side": 1,
+      "message": "True. Perhaps I\u0027ll file a bug about it.\ngetMessage() should still return a Message object, see comment there.",
+      "parentUuid": "0ee75395_597b3523",
       "revId": "7cec65d53cf33b2b8b3df034c327c3fe02fd26f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
