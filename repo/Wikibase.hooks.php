@@ -1082,4 +1082,32 @@ final class RepoHooks {
 
 		return true;
 	}
+
+	/**
+	 * Handler for the ContentModelCanBeUsedOn hook, used to prevent pages of inappropriate type
+	 * to be placed in an entity namespace.
+	 *
+	 * @param string $contentModel
+	 * @param Title $title
+	 * @param bool $ok
+	 *
+	 * @return bool
+	 */
+	public static function onContentModelCanBeUsedOn ( $contentModel, Title $title, &$ok ) {
+		$namespace2entityModels = array_flip( NamespaceUtils::getEntityNamespaces() );
+		$ns = $title->getNamespace();
+
+		// If the namespace is an entity namespace, the content model
+		// must be the model assigned to that namespace.
+		if ( isset( $namespace2entityModels[$ns] ) ) {
+			$nsModel = $namespace2entityModels[$ns];
+
+			if ( $nsModel !== $contentModel ) {
+				$ok = false;
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

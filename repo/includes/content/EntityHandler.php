@@ -160,6 +160,10 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return bool true if $title represents a page in the appropriate entity namespace.
 	 */
 	public function canBeUsedOn( Title $title ) {
+		if ( !parent::canBeUsedOn( $title ) ) {
+			return false;
+		}
+
 		$namespace = $this->getEntityNamespace();
 		return $namespace === $title->getNamespace();
 	}
