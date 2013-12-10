@@ -608,11 +608,11 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			if ( isset( $items[$name] ) ) {
 				// re-use item
-				$item = $items[$name];
+				$item = &$items[$name];
 			} else {
 				// create item
 				$item = Item::newEmpty();
-				$items[$name] = $item;
+				$items[$name] = &$item;
 			}
 
 			$item->setLabel( 'en', $label );

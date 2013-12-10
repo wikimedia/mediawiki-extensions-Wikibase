@@ -53,7 +53,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	 */
 	function testEditItemDirectly() {
 		$content = \Wikibase\ItemContent::newEmpty(); //@todo: do this with all kinds of entities.
-		$content->getItem()->setLabel( "en", "Test" );
+		$content->getItem()->setLabel( "en", "Test me yeah" );
 		$status = $content->save( "testing", null, EDIT_NEW );
 
 		$this->assertTrue( $status->isOK(), $status->getMessage() ); // sanity check
