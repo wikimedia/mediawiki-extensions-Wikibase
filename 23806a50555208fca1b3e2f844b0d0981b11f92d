@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b5a7da07",
+        "filename": "tests/browser/features/delete_item.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-10T17:45:30Z",
+      "side": 1,
+      "message": "please fix whitespace",
+      "revId": "23806a50555208fca1b3e2f844b0d0981b11f92d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_95acd6ec",
+        "filename": "tests/browser/features/delete_item.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-10T17:45:30Z",
+      "side": 1,
+      "message": "please fix whitespace",
+      "revId": "23806a50555208fca1b3e2f844b0d0981b11f92d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f588c277",
+        "filename": "tests/browser/features/step_definitions/delete_item_spec.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-10T17:45:30Z",
+      "side": 1,
+      "message": "spec file should not be moved to step_definitions folder\nthe first step should be running the feature file and pasting generated code in this folder\nname the file delete_item_steps.rb",
+      "revId": "23806a50555208fca1b3e2f844b0d0981b11f92d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
