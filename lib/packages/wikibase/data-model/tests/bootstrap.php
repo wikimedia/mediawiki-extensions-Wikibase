@@ -12,8 +12,12 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-require_once( __DIR__ . '/../WikibaseDataModel.php' );
+echo exec( 'composer update' ) . "\n";
+
+if ( !is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
+	die( 'You need to install this package with Composer before you can run the tests' );
+}
+
+require_once( __DIR__ . '/../vendor/autoload.php' );
 
 require_once( __DIR__ . '/testLoader.php' );
-
-// If something needs to change here, a reflecting change needs to be added to ../dependencies.txt.
