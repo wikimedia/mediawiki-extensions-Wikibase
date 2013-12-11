@@ -9,12 +9,6 @@ PHP implementation of the
 [Wikibase](https://www.mediawiki.org/wiki/Wikibase)
 [Data Model](https://meta.wikimedia.org/wiki/Wikidata/Data_model).
 
-## Requirements
-
-* PHP 5.3 or later
-* [DataValues](https://www.mediawiki.org/wiki/Extension:DataValues) 0.1 or later
-* [Diff](https://github.com/wikimedia/mediawiki-extensions-Diff/blob/master/README.md) 0.7 or later
-
 ## Installation
 
 You can use [Composer](http://getcomposer.org/) to download and install
@@ -38,8 +32,7 @@ Wikibase DataModel 1.0:
 
 Get the Wikibase DataModel code, either via git, or some other means. Also get all dependencies.
 You can find a list of the dependencies in the "require" section of the composer.json file.
-Load all dependencies and the load the Wikibase DataModel library by including its entry point:
-WikibaseDataModel.php.
+The "autoload" section of this file specifies how to load the resources provide by this library.
 
 ## Tests
 
@@ -49,11 +42,11 @@ via TravisCI, as a TravisCI configuration file is also provided in the root dire
 
 ## Authors
 
-Wikibase DataModel has been written by various people from the Wikidata team and the Wikidata
-community.
-
-Most of the code has been written by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw)
+Wikibase DataModel has been written by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw)
 as [Wikimedia Germany](https://wikimedia.de) employee for the [Wikidata project](https://wikidata.org/).
+
+Contributions where also made by [several other people]
+(https://www.ohloh.net/p/wikibasedatamodel/contributors?sort=commits).
 
 ## Links
 
