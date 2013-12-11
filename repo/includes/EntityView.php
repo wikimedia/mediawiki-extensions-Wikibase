@@ -63,6 +63,16 @@ abstract class EntityView extends \ContextSource {
 	protected $languageFallbackChain;
 
 	/**
+	 * @var SectionEditLinkGenerator
+	 */
+	protected $sectionEditLinkGenerator;
+
+	/**
+	 * @var TextInjector
+	 */
+	protected $injector;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -113,20 +123,47 @@ abstract class EntityView extends \ContextSource {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->idParser = $idParser;
 		$this->languageFallbackChain = $languageFallbackChain;
+
+		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
+		$this->injector = new TextInjector();
+	}
+
+	/**
+	 * Resets the placeholders managed by this view
+	 */
+	public function resetPlaceholders() {
+		$this->injector = new TextInjector();
+	}
+
+	/**
+	 * Returns the placeholder map build while generating HTML.
+	 * The map returned here may be used with TextInjector.
+	 *
+	 * @return array string -> array
+	 */
+	public function getPlaceholders() {
+		return $this->injector->getMarkers();
 	}
 
 	/**
 	 * Builds and returns the HTML representing a whole WikibaseEntity.
+	 *
+	 * @note: The HTML returned by this method may contain placeholders. Such placeholders can be
+	 * expanded with the help of TextInjector::inject() calling back to
+	 * EntityViewPlaceholderExpander::getExtraUserLanguages()
+	 * @note: In order to keep the list of placeholders small, this calls resetPlaceholders().
 	 *
 	 * @since 0.1
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
 	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getHtml( EntityRevision $entityRevision, Language $lang = null, $editable = true ) {
 		wfProfileIn( __METHOD__ );
+
+		$this->resetPlaceholders();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		if ( !$lang ) {
@@ -196,19 +233,25 @@ abstract class EntityView extends \ContextSource {
 		wfProfileIn( __METHOD__ );
 
 		$claims = '';
-		$languageTerms = '';
 
 		if ( $entityRevision->getEntity()->getType() === 'item' ) {
 			$claims = $this->getHtmlForClaims( $entityRevision->getEntity(), $lang, $editable );
 		}
 
-		$languageTerms = $this->getHtmlForLanguageTerms( $entityRevision->getEntity(), $lang, $editable );
+		if ( $entityRevision->getEntity()->getId() ) {
+			// Placeholder for a termbox for the present item.
+			// EntityViewPlaceholderExpander must know about the parameters used here.
+			$languageTerms = $this->injector->newMarker( 'termbox', $entityRevision->getEntity()->getId()->getSerialization() );
+		} else {
+			//NOTE: this should only happen during testing
+			$languageTerms = '';
+		}
 
 		$html = wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entityRevision->getEntity(), $lang, $editable ),
 			$this->getHtmlForDescription( $entityRevision->getEntity(), $lang, $editable ),
 			$this->getHtmlForAliases( $entityRevision->getEntity(), $lang, $editable ),
-			$this->getHtmlForToc( $lang ),
+			$this->getHtmlForToc(),
 			$languageTerms,
 			$claims
 		);
@@ -220,16 +263,15 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Builds and returns the html for the toc.
 	 *
-	 * @param Language|null $lang
 	 * @return string
 	 */
-	protected function getHtmlForToc( Language $lang = null ) {
+	protected function getHtmlForToc() {
 		$tocContent = '';
-		$tocSections = $this->getTocSections( $lang );
+		$tocSections = $this->getTocSections();
 
-		if( empty( $tocSections ) ) {
-			return '';
-		}
+		// Placeholder for the TOC entry for the term box (which may or may not be used for a given user).
+		// EntityViewPlaceholderExpander must know about the 'termbox-toc' name.
+		$tocContent .= $this->injector->newMarker( 'termbox-toc' );
 
 		$i = 1;
 
@@ -252,15 +294,10 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Returns the sections that should displayed in the toc.
 	 *
-	 * @param Language|null $lang
 	 * @return array( link target => system message key )
 	 */
-	protected function getTocSections( Language $lang = null ) {
-		if( !is_null( $lang ) && count( $this->getExtraUserLanguages( $lang, $this->getUser() ) ) > 0 ) {
-			return array( 'wb-terms' => 'wikibase-terms' );
-		} else {
-			return array();
-		}
+	protected function getTocSections() {
+		return array();
 	}
 
 	protected function makeParserOptions( ) {
@@ -320,6 +357,7 @@ abstract class EntityView extends \ContextSource {
 		if ( $generateHtml ) {
 			$html = $this->getHtml( $entityRevision, $langCode, $editable );
 			$pout->setText( $html );
+			$pout->setExtensionData( 'wb-placeholders', $this->getPlaceholders() );
 		}
 
 		//@todo: record sitelinks as iwlinks
@@ -448,97 +486,6 @@ abstract class EntityView extends \ContextSource {
 		return $html;
 	}
 
-	/**
-	 * Selects the languages for the terms to display on first try, based on the current user and
-	 * the available languages.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Language $lang
-	 * @param User $user
-	 * @return string[] Selected language codes
-	 */
-	private function getExtraUserLanguages( Language $lang , User $user ) {
-		wfProfileIn( __METHOD__ );
-		$result = array();
-
-		// if the Babel extension is installed, add all languages of the user
-		if ( class_exists( 'Babel' ) && ( ! $user->isAnon() ) ) {
-			$result = \Babel::getUserLanguages( $user );
-			if( $lang !== null ) {
-				$result = array_diff( $result, array( $lang->getCode() ) );
-			}
-		}
-		wfProfileOut( __METHOD__ );
-		return $result;
-	}
-
-	/**
-	 * Builds and returns the HTML representing a WikibaseEntity's collection of terms.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity the entity to render
-	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
-	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 * @return string
-	 */
-	public function getHtmlForLanguageTerms( Entity $entity, \Language $lang, $editable = true ) {
-		$languages = $this->getExtraUserLanguages( $lang, $this->getUser() );
-		if ( count ( $languages ) === 0 ) {
-			return '';
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		$html = $thead = $tbody = '';
-
-		$labels = $entity->getLabels();
-		$descriptions = $entity->getDescriptions();
-
-		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
-
-		$specialLabelPage = \SpecialPageFactory::getPage( "SetLabel" );
-		$specialDescriptionPage = \SpecialPageFactory::getPage( "SetDescription" );
-		$rowNumber = 0;
-		foreach( $languages as $language ) {
-
-			$label = array_key_exists( $language, $labels ) ? $labels[$language] : false;
-			$description = array_key_exists( $language, $descriptions ) ? $descriptions[$language] : false;
-
-			$alternatingClass = ( $rowNumber++ % 2 ) ? 'even' : 'uneven';
-
-			$editLabelLink = $specialLabelPage->getTitle()->getLocalURL()
-				. '/' . $this->getFormattedIdForEntity( $entity ) . '/' . $language;
-
-			// TODO: this if is here just until the SetDescription special page exists and
-			// can be removed then
-			if ( $specialDescriptionPage !== null ) {
-				$editDescriptionLink = $specialDescriptionPage->getTitle()->getLocalURL()
-					. '/' . $this->getFormattedIdForEntity( $entity ) . '/' . $language;
-			} else {
-				$editDescriptionLink = '';
-			}
-
-			$tbody .= wfTemplate( 'wb-term',
-				$language,
-				$alternatingClass,
-				htmlspecialchars( Utils::fetchLanguageName( $language ) ),
-				htmlspecialchars( $label !== false ? $label : wfMessage( 'wikibase-label-empty' ) ),
-				htmlspecialchars( $description !== false ? $description : wfMessage( 'wikibase-description-empty' ) ),
-				$this->getHtmlForEditSection( $editLabelLink ),
-				$this->getHtmlForEditSection( $editDescriptionLink ),
-				$label !== false ? '' : 'wb-value-empty',
-				$description !== false ? '' : 'wb-value-empty',
-				$this->getTitle()->getLocalURL() . '?setlang=' . $language
-			);
-		}
-
-		$html = $html . wfTemplate( 'wb-terms-table', $tbody );
-
-		wfProfileOut( __METHOD__ );
-		return $html;
-	}
 
 	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's claims.
@@ -636,34 +583,11 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @return string
 	 */
-	public function getHtmlForEditSection( $url = '', $tag = 'span', $action = 'edit', $enabled = true ) {
-		wfProfileIn( __METHOD__ );
-
+	protected function getHtmlForEditSection( $url, $tag = 'span', $action = 'edit', $enabled = true ) {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
-		$buttonLabel = $this->getContext()->msg( $key )->text();
+		$msg = $this->getContext()->msg( $key );
 
-		$button = ( $enabled ) ?
-			wfTemplate( 'wikibase-toolbarbutton',
-				$buttonLabel,
-				$url // todo: add link to special page for non-JS editing
-			) :
-			wfTemplate( 'wikibase-toolbarbutton-disabled',
-				$buttonLabel
-			);
-
-		$html = wfTemplate( 'wb-editsection',
-			$tag,
-			wfTemplate( 'wikibase-toolbar',
-				'',
-				wfTemplate( 'wikibase-toolbareditgroup',
-					'',
-					wfTemplate( 'wikibase-toolbar', '', $button )
-				)
-			)
-		);
-
-		wfProfileOut( __METHOD__ );
-		return $html;
+		return $this->sectionEditLinkGenerator->getHtmlForEditSection( $url, $msg, $tag, $enabled );
 	}
 
 	/**
