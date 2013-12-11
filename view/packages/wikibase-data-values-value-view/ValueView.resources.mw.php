@@ -27,6 +27,8 @@ return call_user_func( function() {
 				'mw.ext.valueView.js',
 			),
 			'dependencies' => array(
+				'dataTypes',
+				'dataValues.values',
 				'jquery.valueview',
 				'jquery.valueview.experts.commonsmediatype',
 				'jquery.valueview.experts.globecoordinatevalue',
