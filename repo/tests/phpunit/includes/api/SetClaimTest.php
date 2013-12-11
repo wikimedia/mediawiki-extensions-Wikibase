@@ -44,40 +44,48 @@ use Wikibase\Lib\ClaimGuidGenerator;
  */
 class SetClaimTest extends WikibaseApiTestCase {
 
+	public function setUp() {
+		parent::setUp();
+
+		static $hasProperties = false;
+
+		if ( !$hasProperties ) {
+			// Create the properties once
+			$propertyIds = self::getPropertyIds();
+
+			foreach( $propertyIds as $propertyId ) {
+				$prop = PropertyContent::newEmpty();
+				$prop->getEntity()->setId( $propertyId );
+				$prop->getEntity()->setDataTypeId( 'string' );
+				$prop->save( 'testing' );
+			}
+
+			$hasProperties = true;
+		}
+	}
+
+	/**
+	 * @return PropertyId[]
+	 */
+	protected static function getPropertyIds() {
+		return array(
+			new PropertyId( 'P42' ),
+			new PropertyId( 'P9001' ),
+			new PropertyId( 'P7201010' )
+		);
+	}
+
 	/**
 	 * @return Snak[]
 	 */
 	protected static function snakProvider() {
-		static $hasProperties = false;
-
-		$prop42 = new PropertyId( 'P42' );
-		$prop9001 = new PropertyId( 'P9001' );
-		$prop7201010 = new PropertyId( 'P7201010' );
-
-		if ( !$hasProperties ) {
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop42 );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
-
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop9001 );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
-
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( $prop7201010 );
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'testing' );
-
-			$hasProperties = true;
-		}
+		$ropertyIds = self::getPropertyIds();
 
 		$snaks = array();
 
-		$snaks[] = new PropertyNoValueSnak( $prop42 );
-		$snaks[] = new PropertySomeValueSnak( $prop9001 );
-		$snaks[] = new PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyNoValueSnak( $ropertyIds[0] );
+		$snaks[] = new PropertySomeValueSnak( $ropertyIds[1] );
+		$snaks[] = new PropertyValueSnak( $ropertyIds[2], new \DataValues\StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
