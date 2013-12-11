@@ -2,17 +2,18 @@
 
 namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\Claim;
+use Wikibase\Property;
 
 /**
- * @covers Wikibase\ItemView
+ * @covers Wikibase\PropertyView
  *
  * @since 0.1
  *
  * @group Wikibase
- * @group WikibaseItemView
+ * @group WikibasePropertyView
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -26,10 +27,10 @@ use Wikibase\Claim;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ItemViewTest extends EntityViewTest {
+class PropertyViewTest extends EntityViewTest {
 
 	protected function getEntityViewClass() {
-		return 'Wikibase\ItemView';
+		return 'Wikibase\PropertyView';
 	}
 
 	/**
@@ -39,7 +40,7 @@ class ItemViewTest extends EntityViewTest {
 	 * @return Entity
 	 */
 	protected function makeEntity( EntityId $id, $claims = array() ) {
-		return $this->makeItem( $id, $claims );
+		return $this->makeProperty( $id, 'string', $claims );
 	}
 
 	/**
@@ -50,6 +51,18 @@ class ItemViewTest extends EntityViewTest {
 	 * @return EntityId
 	 */
 	protected function makeEntityId( $n ) {
-		return new ItemId( "Q$n");
+		return new PropertyId( "P$n" );
+	}
+
+	/**
+	 * Prepares the given entity data for comparison with $entity.
+	 * That is, this method should add any extra data from $entity to $entityData.
+	 *
+	 * @param Entity $entity
+	 * @param array $entityData
+	 */
+	protected function prepareEntityData( Entity $entity, array &$entityData ) {
+		/* @var Property $entity */
+		$entityData['datatype'] = $entity->getDataTypeId();
 	}
 }
