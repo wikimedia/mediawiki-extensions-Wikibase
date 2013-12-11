@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_19891c7a",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1188
+      },
+      "writtenOn": "2013-12-11T17:55:10Z",
+      "side": 1,
+      "message": "There should be another end here",
+      "revId": "e120238ca40e2bf65a1ffe005906072c5e2b434e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
