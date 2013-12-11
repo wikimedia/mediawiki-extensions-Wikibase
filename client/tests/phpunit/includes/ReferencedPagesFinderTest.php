@@ -16,6 +16,8 @@ use WikiPage;
  *
  * @since 0.5
  *
+ * @group Database
+ *        ^---- This calls WikiPage::doEditContent in setUp
  * @group WikibaseClient
  * @group Wikibase
  *
