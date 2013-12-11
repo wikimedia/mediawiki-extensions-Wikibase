@@ -283,4 +283,12 @@ class ItemContent extends EntityContent {
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		return $searchTextGenerator->generate( $item );
 	}
+
+	/**
+	 * @see EntityContent::getEntityViewClass
+	 * @return string
+	 */
+	protected function getEntityViewClass() {
+		return 'Wikibase\ItemView';
+	}
 }

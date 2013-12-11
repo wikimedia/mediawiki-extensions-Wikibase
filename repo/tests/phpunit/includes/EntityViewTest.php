@@ -5,8 +5,9 @@ namespace Wikibase\Test;
 use Language;
 use Title;
 use DataValues\StringValue;
-use ValueFormatters\ValueFormatterFactory;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -20,12 +21,12 @@ use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
 
 /**
@@ -44,7 +45,7 @@ use Wikibase\Snak;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
-class EntityViewTest extends \MediaWikiTestCase {
+abstract class EntityViewTest extends \MediaWikiTestCase {
 
 	public function getTitleForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getPrefixedId();
@@ -98,6 +99,16 @@ class EntityViewTest extends \MediaWikiTestCase {
 			throw new \InvalidArgumentException( '$entityType must be a string!' );
 		}
 
+		if ( $context === null ) {
+			$context = new \RequestContext();
+			$context->setLanguage( 'en' );
+		}
+
+		if ( $languageFallbackChain === null ) {
+			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+			$languageFallbackChain = $factory->newFromLanguage( $context->getLanguage() );
+		}
+
 		$mockRepo = new MockRepository();
 
 		$mockRepo->putEntity( $this->makeItem( 'Q33' ) );
@@ -119,18 +130,26 @@ class EntityViewTest extends \MediaWikiTestCase {
 			$entityTitleLookup = $this->getEntityTitleLookupMock();
 		}
 
-		$entityView = EntityView::newForEntityType(
-			$entityType,
-			$this->newSnakFormatterMock(),
+		$idParser = new BasicEntityIdParser();
+
+		$formatterOptions = new FormatterOptions();
+		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
+			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
+		$class = $this->getEntityViewClass();
+		$entityView = new $class(
+			$context,
+			$snakFormatter,
 			$mockRepo,
 			$entityInfoBuilder,
 			$entityTitleLookup,
-			$context,
-			$languageFallbackChain
-		);
+			$idParser,
+			$languageFallbackChain );
 
 		return $entityView;
 	}
+
+	protected abstract function getEntityViewClass();
 
 	/**
 	 * @param Claim[] $claims
@@ -255,7 +274,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$entityRevision = $this->newEntityRevisionForClaims( $claims );
 		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
 
-		$out = $entityView->getParserOutput( $entityRevision, null, false );
+		$out = $entityView->getParserOutput( $entityRevision, true, false );
 		$links = $out->getLinks();
 
 		// convert expected links to link structure
@@ -361,7 +380,7 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$entityRevision = $this->newEntityRevisionForClaims( $claims );
 		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
 
-		$out = $entityView->getParserOutput( $entityRevision, null, false );
+		$out = $entityView->getParserOutput( $entityRevision, true, false );
 		$links = $out->getExternalLinks();
 
 		$expectedLinks = array_values( $expectedLinks );
@@ -403,43 +422,12 @@ class EntityViewTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider providerNewForEntityRevision
-	 */
-	public function testNewForEntityRevision( EntityRevision $entityRevision ) {
-		$dataTypeLookup = new InMemoryDataTypeLookup( array() );
-		$entityInfoBuilder = new MockRepository();
-		$entityTitleLookup = $this->getEntityTitleLookupMock();
-
-		// test whether we get the right EntityView from an EntityRevision
-		$view = EntityView::newForEntityType(
-			$entityRevision->getEntity()->getType(),
-			$this->newSnakFormatterMock(),
-			$dataTypeLookup,
-			$entityInfoBuilder,
-			$entityTitleLookup
-		);
-
-		// test whether we get the right EntityView from an EntityContent
-		$this->assertInstanceOf(
-			EntityView::$typeMap[ $entityRevision->getEntity()->getType() ],
-			$view
-		);
-	}
-
-	public static function providerNewForEntityRevision() {
-		return array(
-			array( new EntityRevision( Item::newEmpty(), 23, '20130102030405' ) ),
-			array( new EntityRevision( Property::newEmpty(), 42, '20130102030405' ) )
-		);
-	}
-
-	/**
 	 * @dataProvider provideRegisterJsConfigVars
 	 */
 	public function testRegisterJsConfigVars( EntityRevision $entityRevision,
-		$context, LanguageFallbackChain $languageFallbackChain, $langCode, $editableView, $expected
+		\IContextSource $context, LanguageFallbackChain $languageFallbackChain, $editableView, $expected
 	) {
-		$this->setMwGlobals( 'wgLang', Language::factory( "en" ) );
+		$this->setMwGlobals( 'wgLang', $context->getLanguage() );
 
 		$entityView = $this->newEntityView(
 			$entityRevision->getEntity()->getType(),
@@ -449,8 +437,8 @@ class EntityViewTest extends \MediaWikiTestCase {
 			$languageFallbackChain
 		);
 
-		$out = new \OutputPage( new \RequestContext() );
-		$entityView->registerJsConfigVars( $out, $entityRevision, $langCode, $editableView );
+		$out = new \OutputPage( $context );
+		$entityView->registerJsConfigVars( $out, $entityRevision, $editableView );
 		$actual = array_intersect_key( $out->mJsConfigVars, $expected );
 
 		ksort( $expected );
@@ -507,7 +495,10 @@ class EntityViewTest extends \MediaWikiTestCase {
 			'de-formal', LanguageFallbackChainFactory::FALLBACK_SELF
 		); // with no fallback
 
-		$argLists[] = array( $revision, null, $languageFallbackChain, 'nl', true, array(
+		$context = new \RequestContext();
+		$context->setLanguage( 'nl' );
+
+		$argLists[] = array( $revision, $context, $languageFallbackChain, true, array(
 			'wbEntityType' => 'item',
 			'wbDataLangName' => 'Nederlands',
 			'wbEntityId' => 'Q22',
