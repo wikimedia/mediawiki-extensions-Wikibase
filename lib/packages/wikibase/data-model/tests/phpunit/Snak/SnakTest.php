@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 
-use DataValues\GlobeCoordinateValue;
-use DataValues\LatLongValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -44,7 +42,6 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 
 		$values[] = new StringValue( 'Ohi there!' );
 		$values[] = new NumberValue( 42 );
-		$values[] = new GlobeCoordinateValue( new LatLongValue( 4.2, 4.2 ), 1 );
 
 		foreach ( $values as $value ) {
 			$snaks[] = new PropertyValueSnak( $id42, $value );
