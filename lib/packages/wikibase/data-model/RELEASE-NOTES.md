@@ -1,19 +1,20 @@
 # Wikibase DataModel release notes
 
-## Version 0.5
+## Version 0.5 (2013-12-11)
 
-Under development.
+Note that this list is incomplete. In particular, not all breaking changes are listed.
 
 #### Additions
 
 * Added ItemId and PropertyId classes.
 * Added BasicEntityIdParser that allows for parsing of serializations of entity ids defined
-  by Wikibase DataModel.
+by Wikibase DataModel.
+* Added ClaimGuid and ClaimGuidParser.
 
 #### Improvements
 
 * EntityId no longer is a DataValue. A new EntityIdValue was added to function as a DataValue
-  representing the identity of an entity.
+representing the identity of an entity.
 
 #### Removals
 
