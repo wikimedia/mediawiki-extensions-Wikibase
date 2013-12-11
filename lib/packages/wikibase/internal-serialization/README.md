@@ -58,3 +58,4 @@ as [Wikimedia Germany](https://wikimedia.de) employee for the [Wikidata project]
 
 * [Wikibase DataModel Serialization on Packagist](https://packagist.org/packages/wikibase/data-model-serialization)
 * [Wikibase DataModel Serialization on TravisCI](https://travis-ci.org/wmde/WikibaseDataModelSerialization)
+* [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
