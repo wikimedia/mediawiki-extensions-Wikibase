@@ -2,18 +2,12 @@
 
 namespace Wikibase\Test;
 
-use Revision;
-use User;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\NamespaceUtils;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\EntityId;
-use Wikibase\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ViewItemAction;
 use WikiPage;
-use Title;
 
 /**
  * @covers Wikibase\ViewEntityAction
@@ -37,6 +31,12 @@ use Title;
  * @group medium
  */
 class ViewEntityActionTest extends ActionTestCase {
+
+	public function setUp() {
+		// NOTE: use a language here for which we actually have labels etc
+		$this->language = 'de';
+		parent::setUp();
+	}
 
 	public function testActionForPage() {
 		$page = $this->getTestItemPage( "Berlin" );
