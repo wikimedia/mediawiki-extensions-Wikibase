@@ -110,35 +110,23 @@ abstract class ViewEntityAction extends \ViewAction {
 			$this->displayMissingEntity();
 		}
 		else {
+			/* @var EntityContent $content */
+
 			$this->getArticle()->getRevisionFetched();
 
 			$this->displayEntityContent( $content );
 
-			$formatterOptions = new FormatterOptions(); //TODO: Language Fallback
-			$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getContext()->getLanguage()->getCode() );
-
-			$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
-								->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
-
-			$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-			$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
-			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
 			$isEditableView = $this->isPlainView();
 
-			$view = EntityView::newForEntityType(
-				$content->getEntity()->getType(),
-				$snakFormatter,
-				$dataTypeLookup,
-				$entityInfoBuilder,
-				$entityContentFactory
-			);
+			// @todo: It would be nice to get the JS config vars from the ParserOutput
+			// also used by displayEntityContent (via the parser cache),
+			// instead of re-generating them here!
+			$view = $content->getEntityView();
 
 			$view->registerJsConfigVars(
 				$this->getOutput(),
 				$content->getEntityRevision(),
-				$this->getLanguage()->getCode(),
-				$isEditableView
+				$isEditableView // not in the parser cache key?!
 			);
 		}
 	}

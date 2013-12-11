@@ -696,75 +696,23 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
-	 * Outputs the given entity to the OutputPage.
-	 *
-	 * @since 0.1
-	 *
-	 * @param EntityRevision       $entityRevision the entity to output
-	 * @param null|\OutputPage    $out the output page to write to. If not given, the local context will be used.
-	 * @param null|\ParserOptions $options parser options to use for rendering. If not given, the local context will be used.
-	 * @param null|\ParserOutput  $pout optional parser object - provide this if you already have a parser options for
-	 *                            this entity, to avoid redundant rendering.
-	 * @return \ParserOutput the parser output, for further processing.
-	 *
-	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
-	 */
-	public function render( EntityRevision $entityRevision, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
-		wfProfileIn( __METHOD__ );
-
-		$isPoutSet = $pout !== null;
-
-		if ( !$out ) {
-			$out = $this->getOutput();
-		}
-
-		if ( !$pout ) {
-			if ( !$options ) {
-				$options = $this->makeParserOptions();
-			}
-
-			$pout = $this->getParserOutput( $entityRevision, $options, true );
-		}
-
-		$langCode = null;
-		if ( $options ) {
-			//XXX: This is deprecated, and in addition it will quite often fail so we need a fallback.
-			$langCode = $options->getTargetLanguage();
-		}
-		if ( !$isPoutSet && is_null( $langCode ) ) {
-			//XXX: This is quite ugly, we don't know that this language is the language that was used to generate the parser output object.
-			$langCode = $this->getLanguage()->getCode();
-		}
-
-		// overwrite page title
-		$out->setPageTitle( $pout->getTitleText() );
-
-		// register JS stuff
-		$editableView = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
-		$this->registerJsConfigVars( $out, $entityRevision, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
-
-		$out->addParserOutput( $pout );
-		wfProfileOut( __METHOD__ );
-		return $pout;
-	}
-
-	/**
 	 * Helper function for registering any JavaScript stuff needed to show the entity.
 	 * @todo Would be much nicer if we could do that via the ResourceLoader Module or via some hook.
+	 * @todo ...or at least stuff this information into ParserOutput, so it would get cached
 	 *
 	 * @since 0.1
 	 *
 	 * @param OutputPage    $out the OutputPage to add to
 	 * @param EntityRevision  $entityRevision the entity for which we want to add the JS config
-	 * @param string         $langCode the language used for showing the entity.
 	 * @param bool           $editableView whether entities on this page should be editable.
 	 *                       This is independent of user permissions.
 	 *
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
-	public function registerJsConfigVars( OutputPage $out, EntityRevision $entityRevision, $langCode, $editableView = false  ) {
+	public function registerJsConfigVars( OutputPage $out, EntityRevision $entityRevision, $editableView = false  ) {
 		wfProfileIn( __METHOD__ );
 
+		$langCode = $this->getLanguage()->getCode();
 		$user = $this->getUser();
 		$entity = $entityRevision->getEntity();
 		$title = $this->entityTitleLookup->getTitleForId( $entityRevision->getEntity()->getId() );
@@ -907,65 +855,5 @@ abstract class EntityView extends \ContextSource {
 				);
 			},
 			$entities );
-	}
-
-	/**
-	 * Returns a new view which is suited for rendering the given entity type
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $type The entity type, e.g. Item::ENTITY_TYPE.
-	 * @param SnakFormatter      $snakFormatter
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param IContextSource|null $context
-	 * @param LanguageFallbackChain|null $languageFallbackChain Overrides any language fallback chain created inside, for testing
-	 *
-	 * @throws \MWException
-	 * @return EntityView
-	 */
-	public static function newForEntityType(
-		$type,
-		SnakFormatter $snakFormatter,
-		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilder $entityInfoBuilder,
-		EntityTitleLookup $entityTitleLookup,
-		IContextSource $context = null,
-		LanguageFallbackChain $languageFallbackChain = null
-	) {
-		if ( !in_array( $type, array_keys( self::$typeMap ) ) ) {
-			throw new MWException( "No entity view known for handling entities of type '$type'" );
-		}
-
-		if ( !$context ) {
-			$context = \RequestContext::getMain();
-		}
-
-		if ( !$languageFallbackChain ) {
-			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
-			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-				$languageFallbackChain = $factory->newFromContextForPageView( $context );
-			} else {
-				# Effectively disables fallback.
-				$languageFallbackChain = $factory->newFromLanguage(
-					$context->getLanguage(), LanguageFallbackChainFactory::FALLBACK_SELF
-				);
-			}
-		}
-
-		$idParser = new BasicEntityIdParser();
-
-		$class = self::$typeMap[ $type ];
-		$instance = new $class(
-			$context,
-			$snakFormatter,
-			$dataTypeLookup,
-			$entityInfoBuilder,
-			$entityTitleLookup,
-			$idParser,
-			$languageFallbackChain );
-
-		return $instance;
 	}
 }

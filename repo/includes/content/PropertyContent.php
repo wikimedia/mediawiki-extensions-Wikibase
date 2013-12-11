@@ -193,4 +193,12 @@ class PropertyContent extends EntityContent {
 			)
 		);
 	}
+
+	/**
+	 * @see EntityContent::getEntityViewClass
+	 * @return string
+	 */
+	protected function getEntityViewClass() {
+		return 'Wikibase\PropertyView';
+	}
 }
