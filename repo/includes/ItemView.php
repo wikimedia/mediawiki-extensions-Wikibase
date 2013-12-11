@@ -36,8 +36,8 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getTocSections
 	 */
-	protected function getTocSections( Language $lang = null ) {
-		$array = parent::getTocSections( $lang );
+	protected function getTocSections() {
+		$array = parent::getTocSections();
 		$array['claims'] = 'wikibase-statements';
 		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
 		foreach( $groups as $group ) {
