@@ -4,15 +4,20 @@ namespace Wikibase;
 
 use AbstractContent;
 use Content;
+use IContextSource;
 use MWException;
 use ParserOptions;
 use ParserOutput;
+use RequestContext;
 use Status;
 use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -25,6 +30,7 @@ use WikiPage;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class EntityContent extends AbstractContent {
 
@@ -141,29 +147,11 @@ abstract class EntityContent extends AbstractContent {
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null,
 		$generateHtml = true
 	) {
-		$formatterOptions = new FormatterOptions(); //TODO: Language Fallback, etc
+		$entityView = $this->getEntityView( null, $options, null );
+		$editable = !$options? true : $options->getEditSection();
 
-		if ( $options !== null ) {
-			$lang = $options->getUserLang(); //XXX: the right language?!
-			$formatterOptions->setOption( ValueFormatter::OPT_LANG, $lang );
-		}
-
-		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
-			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
-
-		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-		$entityView = EntityView::newForEntityType(
-			$this->getEntity()->getType(),
-			$snakFormatter,
-			$dataTypeLookup,
-			$entityInfoBuilder,
-			$entityContentFactory
-		);
-
-		$output = $entityView->getParserOutput( $this->getEntityRevision(), $options, $generateHtml );
+		// generate HTML
+		$output = $entityView->getParserOutput( $this->getEntityRevision(), $editable, $generateHtml );
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
@@ -171,6 +159,112 @@ abstract class EntityContent extends AbstractContent {
 
 		return $output;
 	}
+
+	/**
+	 * Creates an EntityView suitable for rendering the entity.
+	 *
+	 * @note: this uses global state to access the services needed for
+	 * displaying the entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param \IContextSource|null $context
+	 * @param ParserOptions|null $options
+	 * @param LanguageFallbackChain|null $languageFallbackChain
+	 *
+	 * @return EntityView
+	 */
+	public function getEntityView( IContextSource $context = null, ParserOptions $options = null, LanguageFallbackChain $languageFallbackChain = null ) {
+		$lang = null;
+
+		//TODO: cache last used entity view
+
+		if ( $context === null ) {
+			$context = RequestContext::getMain();
+		}
+
+		// determine output language ----
+		$lang = $context->getLanguage()->getCode();
+
+		if ( $options !== null ) {
+			// NOTE: Parser Options language overrides context language!
+			$lang = $options->getUserLang();
+		}
+
+		// make formatter options ----
+		$formatterOptions = new FormatterOptions();
+		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $lang );
+
+		// Force the context's language to be the one specified by the parser options.
+		if ( $context && $context->getLanguage()->getCode() !== $lang ) {
+			$context = clone $context;
+			$context->setLanguage( $lang );
+		}
+
+		// apply language fallback chain ----
+		if ( !$languageFallbackChain ) {
+			// Note: $context already has the correct language set, see above
+			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+
+			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+				// The generated chain should yield a cacheable result
+				$languageFallbackChain = $factory->newFromContextForPageView( $context );
+			} else {
+				// Effectively disables fallback.
+				$languageFallbackChain = $factory->newFromLanguage(
+					$context->getLanguage(), LanguageFallbackChainFactory::FALLBACK_SELF
+				);
+			}
+		}
+
+		$formatterOptions->setOption( 'languages', $languageFallbackChain );
+
+		// get all the necessary services ----
+		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
+			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
+		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
+		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$idParser = new BasicEntityIdParser();
+
+		// construct the instance ----
+		$entityView = $this->newEntityView(
+			$context,
+			$snakFormatter,
+			$dataTypeLookup,
+			$entityInfoBuilder,
+			$entityContentFactory,
+			$idParser,
+			$languageFallbackChain );
+
+		return $entityView;
+	}
+
+	/**
+	 * Instantiates an EntityView.
+	 *
+	 * @see getEntityView()
+	 *
+	 * @param IContextSource $context
+	 * @param SnakFormatter $snakFormatter
+	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdParser $idParser
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 *
+	 * @return EntityView
+	 */
+	protected abstract function newEntityView(
+		IContextSource $context,
+		SnakFormatter $snakFormatter,
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityInfoBuilder $entityInfoBuilder,
+		EntityTitleLookup $entityTitleLookup,
+		EntityIdParser $idParser,
+		LanguageFallbackChain $languageFallbackChain
+	);
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text
@@ -680,4 +774,5 @@ abstract class EntityContent extends AbstractContent {
 
 		return $itemRevision;
 	}
+
 }

@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use DataTypes\DataType;
-use Html, ParserOutput, Title, Language, OutputPage, MediaWikiSite;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -40,13 +39,12 @@ class PropertyView extends EntityView {
 	 * @see EntityView::getInnerHtml
 	 *
 	 * @param EntityRevision $propertyRevision
-	 * @param \Language $lang
 	 * @param bool $editable
 	 *
 	 * @throws \InvalidArgumentException
 	 * @return string
 	 */
-	public function getInnerHtml( EntityRevision $propertyRevision, Language $lang, $editable = true ) {
+	public function getInnerHtml( EntityRevision $propertyRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$property = $propertyRevision->getEntity();
@@ -57,11 +55,10 @@ class PropertyView extends EntityView {
 
 		/* @var Property $property */
 
-		$html = parent::getInnerHtml( $propertyRevision, $lang, $editable );
+		$html = parent::getInnerHtml( $propertyRevision, $editable );
 
 		$html .= $this->getHtmlForDataType(
 			$this->getDataType( $property ),
-			$lang,
 			$editable
 		);
 
@@ -94,15 +91,12 @@ class PropertyView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param DataType $dataType the data type to render
-	 * @param Language $lang the language to use for rendering.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForDataType( DataType $dataType, Language $lang, $editable = true ) {
-		if( $lang === null ) {
-			$lang = $this->getLanguage();
-		}
+	protected function getHtmlForDataType( DataType $dataType, $editable = true ) {
+		$lang = $this->getLanguage();
 
 		return wfTemplate( 'wb-property-datatype',
 			wfMessage( 'wikibase-datatype-label' )->text(),

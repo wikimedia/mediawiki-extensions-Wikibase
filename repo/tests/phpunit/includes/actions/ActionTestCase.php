@@ -28,43 +28,36 @@ use WikiPage;
  */
 class ActionTestCase extends MediaWikiTestCase {
 
-	protected $savedGlobals;
 	protected $permissionsChanged = false;
+
+	/**
+	 * The language to set as the user language.
+	 * 'qqx' is used per default to allow matching against message keys in the output.
+	 *
+	 * @var string
+	 */
+	protected $language = 'qqx';
 
 	public function setUp() {
 		parent::setUp();
 
-		// @fixme use setMwGlobals or better yet design tests / code to not depend on globals!
+		$lang = Language::factory( $this->language );
+		$user = new User();
+		$user->setName( "ActionTestUser" );
+		$user->setId( 123456789 );
 
-		$this->savedGlobals = array();
-
-		$this->savedGlobals['wgUser'] = $GLOBALS['wgUser'];
-		$this->savedGlobals['wgLang'] = $GLOBALS['wgLang'];
-		$this->savedGlobals['wgRequest'] = $GLOBALS['wgRequest'];
-		$this->savedGlobals['wgGroupPermissions'] = $GLOBALS['wgGroupPermissions'];
-
-		global $wgLang;
-		$wgLang = Language::factory( 'qqx' );
+		$this->setMwGlobals( array(
+			'wgUser' => $user,
+			'wgLang' => $lang,
+			'wgRequest' => new FauxRequest(),
+			'wgGroupPermissions' => $GLOBALS['wgGroupPermissions'], // todo: use standard permissions
+		) );
 
 		ApiQueryInfo::resetTokenCache();
 	}
 
 	public function tearDown() {
-		global $wgUser;
-
-		foreach ( $this->savedGlobals as $k => $v ) {
-			global $$k;
-			$$k = $v;
-		}
-
 		ApiQueryInfo::resetTokenCache();
-
-		if ( $this->permissionsChanged ) {
-			// reset rights cache
-			$wgUser->addGroup( "dummy" );
-			$wgUser->removeGroup( "dummy" );
-		}
-
 		parent::tearDown();
 	}
 
