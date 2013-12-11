@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ee75395_b9fa30d8",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-11T18:17:18Z",
+      "side": 1,
+      "message": "the above line should be moved two spaces to the left",
+      "revId": "c968436d65ad24785fcd5ffc808057610fe50538",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_99e3ec31",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-11T18:17:18Z",
+      "side": 1,
+      "message": "the page has to be instantiated in every step, something like this:\n\non(ItemPage).descriptionInputField.should be_true",
+      "revId": "c968436d65ad24785fcd5ffc808057610fe50538",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_39e62040",
         "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
         "patchSetId": 5
@@ -13,6 +47,23 @@
       "writtenOn": "2013-12-11T18:11:21Z",
       "side": 1,
       "message": "Trailing whitespace",
+      "revId": "c968436d65ad24785fcd5ffc808057610fe50538",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d9f5f4ea",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-11T18:17:18Z",
+      "side": 1,
+      "message": "looks like there is leading \"p\" here that should be removed\nalso trailing whitespace should be removed",
       "revId": "c968436d65ad24785fcd5ffc808057610fe50538",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
