@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Language;
 use Title;
 use DataValues\StringValue;
-use ValueFormatters\ValueFormatterFactory;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -147,47 +146,6 @@ class EntityViewTest extends \MediaWikiTestCase {
 		$revision = new EntityRevision( $entity, $revId, $timestamp );
 
 		return $revision;
-	}
-
-	/**
-	 * @dataProvider getHtmlForEditSectionProvider
-	 */
-	public function testGetHtmlForEditSection( $expected, $url, $tag, $action, $enabled, $langCode ) {
-		$entityView = $this->newEntityView( Item::ENTITY_TYPE );
-
-		$context = $entityView->getContext();
-		$context->setLanguage( $langCode );
-		$entityView->setContext( $context );
-
-		$editSectionHtml = $entityView->getHtmlForEditSection( $url, $tag, $action, $enabled );
-		$matcher = array(
-			'tag' => $tag,
-			'class' => 'wb-editsection'
-		);
-
-		$this->assertTag( $matcher, $editSectionHtml, "$action action" );
-		$this->assertRegExp( "/$expected/", $editSectionHtml, "$action button label" );
-	}
-
-	public function getHtmlForEditSectionProvider() {
-		return array(
-			array(
-				wfMessage( 'wikibase-edit' )->inLanguage( 'es' )->text(),
-				'',
-				'div',
-				'edit',
-				true,
-				'es'
-			),
-			array(
-				wfMessage( 'wikibase-add' )->inLanguage( 'de' )->text(),
-				'',
-				'span',
-				'add',
-				true,
-				'de'
-			)
-		);
 	}
 
 	/**
