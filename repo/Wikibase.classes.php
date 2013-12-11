@@ -41,6 +41,7 @@ return call_user_func( function() {
 		'Wikibase\ItemContentDiffView' => 'includes/ItemContentDiffView.php',
 		'Wikibase\ItemDisambiguation' => 'includes/ItemDisambiguation.php',
 		'Wikibase\EntityView' => 'includes/EntityView.php',
+		'Wikibase\EntityViewPlaceholderExpander' => 'includes/EntityViewPlaceholderExpander.php',
 		'Wikibase\ExceptionWithCode' => 'includes/ExceptionWithCode.php',
 		'Wikibase\ItemView' => 'includes/ItemView.php',
 		'Wikibase\LabelDescriptionDuplicateDetector' => 'includes/LabelDescriptionDuplicateDetector.php',
@@ -52,6 +53,12 @@ return call_user_func( function() {
 		'Wikibase\SummaryFormatter' => 'includes/SummaryFormatter.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
 		'Wikibase\ClaimHtmlGenerator' => 'includes/ClaimHtmlGenerator.php',
+		'Wikibase\UserLanguages' => 'includes/UserLanguages.php',
+
+		// includes/view
+		'Wikibase\SectionEditLinkGenerator' => 'includes/view/SectionEditLinkGenerator.php',
+		'Wikibase\TermBoxView' => 'includes/view/TermBoxView.php',
+		'Wikibase\TextInjector' => 'includes/view/TextInjector.php',
 
 		// includes/ChangeOp
 		'Wikibase\ChangeOp\ChangeOps' => 'includes/ChangeOp/ChangeOps.php',

@@ -32,7 +32,7 @@
 	white-space: nowrap;
 }
 
-.wb-entity #toc li.tocsection-1 {
+.wb-entity #toc li:first-child {
 	border-left: none;
 	padding-left: 0;
 }
