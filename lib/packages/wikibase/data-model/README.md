@@ -3,7 +3,6 @@
 [![Latest Stable Version](https://poser.pugx.org/wikibase/data-model/version.png)](https://packagist.org/packages/wikibase/data-model)
 [![Latest Stable Version](https://poser.pugx.org/wikibase/data-model/d/total.png)](https://packagist.org/packages/wikibase/data-model)
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModel.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModel)
-[![Coverage Status](https://coveralls.io/repos/wmde/WikibaseDataModel/badge.png?branch=master)](https://coveralls.io/r/wmde/WikibaseDataModel?branch=master)
 
 PHP implementation of the
 [Wikibase](https://www.mediawiki.org/wiki/Wikibase)
