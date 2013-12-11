@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_c7b62cf6",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-12-11T15:49:31Z",
+      "side": 1,
+      "message": "Below you have inconsistent use of $fromEntityContent and $fromItemContent.\n(the same is for toItem/EntityContent)\nThis should be resolved!",
+      "revId": "715090644c0ba78b3d2ee0fa7e34f4cf54614313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
