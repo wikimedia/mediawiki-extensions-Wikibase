@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_39e62040",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1188
+      },
+      "writtenOn": "2013-12-11T18:11:21Z",
+      "side": 1,
+      "message": "Trailing whitespace",
+      "revId": "c968436d65ad24785fcd5ffc808057610fe50538",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
