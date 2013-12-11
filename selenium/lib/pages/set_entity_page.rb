@@ -9,8 +9,8 @@
 class SetEntityPage < ItemPage
   include PageObject
 
-  text_field(:idField, :id => "wb-setentity-id")
-  text_field(:languageField, :id => "wb-setentity-language")
-  text_field(:valueField, :id => "wb-setentity-value")
+  text_field(:idField, :id => "wb-modifyentity-id")
+  text_field(:languageField, :id => "wb-modifyterm-language")
+  text_field(:valueField, :id => "wb-modifyterm-value")
 
 end

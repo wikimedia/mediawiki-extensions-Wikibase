@@ -37,7 +37,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		$matchers['id'] = array(
 			'tag' => 'input',
 			'attributes' => array(
-				'id' => 'wb-setentity-id',
+				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
 				'name' => 'id',
 			) );
