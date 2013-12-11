@@ -2,8 +2,7 @@
 
 namespace Wikibase;
 
-use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
-use Wikibase\DataModel\SimpleSiteLink;
+use Sites;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -24,11 +23,11 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityRevision $entityRevision, Language $lang, $editable = true ) {
-		$html = parent::getInnerHtml( $entityRevision, $lang, $editable );
+	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+		$html = parent::getInnerHtml( $entityRevision, $editable );
 
 		// add site-links to default entity stuff
-		$html .= $this->getHtmlForSiteLinks( $entityRevision->getEntity(), $lang, $editable );
+		$html .= $this->getHtmlForSiteLinks( $entityRevision->getEntity(), $editable );
 
 		return $html;
 	}
@@ -36,8 +35,8 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getTocSections
 	 */
-	protected function getTocSections( Language $lang = null ) {
-		$array = parent::getTocSections( $lang );
+	protected function getTocSections() {
+		$array = parent::getTocSections();
 		$array['claims'] = 'wikibase-statements';
 		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
 		foreach( $groups as $group ) {
@@ -53,17 +52,16 @@ class ItemView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param Item $item the entity to render
-	 * @param \Language $lang the language to use for rendering.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	public function getHtmlForSiteLinks( Item $item, Language $lang, $editable = true ) {
+	public function getHtmlForSiteLinks( Item $item, $editable = true ) {
 		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
 		$html = '';
 
 		foreach ( $groups as $group ) {
-			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $lang, $editable, $lang );
+			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $editable );
 		}
 
 		return $html;
@@ -76,11 +74,10 @@ class ItemView extends EntityView {
 	 *
 	 * @param Item $item the entity to render
 	 * @param string $group a site group ID
-	 * @param \Language $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForSiteLinkGroup( Item $item, $group, Language $lang, $editable = true ) {
+	public function getHtmlForSiteLinkGroup( Item $item, $group, $editable = true ) {
 		$allSiteLinks = $item->getSimpleSiteLinks();
 
 		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
@@ -89,7 +86,7 @@ class ItemView extends EntityView {
 
 		foreach( $allSiteLinks as $siteLink ) {
 			// FIXME: depracted method usage
-			$site = \Sites::singleton()->getSite( $siteLink->getSiteId() );
+			$site = Sites::singleton()->getSite( $siteLink->getSiteId() );
 
 			if ( $site === null ) {
 				continue;

@@ -3,12 +3,12 @@
 namespace Wikibase\Test;
 
 /**
- * @covers Wikibase\ItemView
+ * @covers Wikibase\PropertyView
  *
  * @since 0.1
  *
  * @group Wikibase
- * @group WikibaseItemView
+ * @group WikibasePropertyView
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -22,9 +22,9 @@ namespace Wikibase\Test;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ItemViewTest extends EntityViewTest {
+class PropertyViewTest extends EntityViewTest {
 
 	protected function getEntityViewClass() {
-		return 'Wikibase\ItemView';
+		return 'Wikibase\PropertyView';
 	}
 }

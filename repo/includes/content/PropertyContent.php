@@ -4,12 +4,14 @@ namespace Wikibase;
 
 use Content;
 use DataUpdate;
-use ParserOptions;
+use IContextSource;
 use ParserOutput;
 use Status;
 use Title;
 use User;
-use ValueFormatters\ValueFormatterFactory;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -191,6 +193,42 @@ class PropertyContent extends EntityContent {
 				new EntityModificationUpdate( $this, $old ),
 				new PropertyInfoUpdate( $this->getProperty(), $infoStore ),
 			)
+		);
+	}
+
+
+	/**
+	 * Instantiates an EntityView.
+	 *
+	 * @see getEntityView()
+	 *
+	 * @param IContextSource $context
+	 * @param SnakFormatter $snakFormatter
+	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdParser $idParser
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 *
+	 * @return EntityView
+	 */
+	protected function newEntityView(
+		IContextSource $context,
+		SnakFormatter $snakFormatter,
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityInfoBuilder $entityInfoBuilder,
+		EntityTitleLookup $entityTitleLookup,
+		EntityIdParser $idParser,
+		LanguageFallbackChain $languageFallbackChain
+	) {
+		return new PropertyView(
+			$context,
+			$snakFormatter,
+			$dataTypeLookup,
+			$entityInfoBuilder,
+			$entityTitleLookup,
+			$idParser,
+			$languageFallbackChain
 		);
 	}
 }
