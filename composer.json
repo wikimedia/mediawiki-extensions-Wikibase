@@ -26,6 +26,10 @@
 	"repositories": [
 		{
 			"type": "vcs",
+			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/WikibaseDataModel.git"
+		},
+		{
+			"type": "vcs",
 			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataValues.git"
 		},
 		{
