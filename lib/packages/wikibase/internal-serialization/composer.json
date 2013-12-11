@@ -30,9 +30,8 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"DataValues\\": "src",
-			"ValueFormatters\\": "src",
-			"ValueParsers\\": "src"
+			"Wikibase\\DataModel\\Serializers": "src/",
+			"Wikibase\\DataModel\\Deserializers": "src/"
 		}
 	}
 }
