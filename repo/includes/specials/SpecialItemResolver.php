@@ -82,27 +82,4 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 		return true;
 	}
 
-	/**
-	 * Displays the item.
-	 *
-	 * @since 0.1
-	 *
-	 * @param ItemContent $itemContent
-	 */
-	protected function displayItem( ItemContent $itemContent ) {
-		$formatterOptions = new FormatterOptions(); //TODO: Language Fallback
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getContext()->getLanguage()->getCode() );
-
-		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
-			->getFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
-
-		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityLoader = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
-		$view = EntityView::newForEntityContent( $itemContent, $snakFormatter, $dataTypeLookup, $entityLoader );
-		$view->render( $itemContent );
-
-		$this->getOutput()->setPageTitle( $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() ) );
-	}
-
 }

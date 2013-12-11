@@ -5,14 +5,16 @@ namespace Wikibase;
 use Content;
 use DatabaseBase;
 use DataUpdate;
+use IContextSource;
 use Message;
-use MWException;
-use ParserOptions;
 use ParserOutput;
 use SiteSQLStore;
 use Status;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\ItemSearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
@@ -282,5 +284,40 @@ class ItemContent extends EntityContent {
 
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		return $searchTextGenerator->generate( $item );
+	}
+
+	/**
+	 * Instantiates an EntityView.
+	 *
+	 * @see getEntityView()
+	 *
+	 * @param IContextSource $context
+	 * @param SnakFormatter $snakFormatter
+	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdParser $idParser
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 *
+	 * @return EntityView
+	 */
+	protected function newEntityView(
+		IContextSource $context,
+		SnakFormatter $snakFormatter,
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityInfoBuilder $entityInfoBuilder,
+		EntityTitleLookup $entityTitleLookup,
+		EntityIdParser $idParser,
+		LanguageFallbackChain $languageFallbackChain
+	) {
+		return new ItemView(
+			$context,
+			$snakFormatter,
+			$dataTypeLookup,
+			$entityInfoBuilder,
+			$entityTitleLookup,
+			$idParser,
+			$languageFallbackChain
+		);
 	}
 }
