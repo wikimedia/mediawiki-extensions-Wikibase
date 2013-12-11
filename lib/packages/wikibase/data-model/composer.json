@@ -7,7 +7,7 @@
 		"DataModel",
 		"Wikidata"
 	],
-	"homepage": "https://www.mediawiki.org/wiki/Extension:WikibaseDataModel",
+	"homepage": "https://github.com/wmde/WikibaseDataModel",
 	"license": "GPL-2.0+",
 	"authors": [
 		{
@@ -18,25 +18,20 @@
 		}
 	],
 	"support": {
-		"issues": "https://bugzilla.wikimedia.org/",
-		"irc": "irc://irc.freenode.net/wikidata",
-		"forum": "https://www.mediawiki.org/wiki/Extension_talk:WikibaseDataModel",
-		"wiki": "https://www.mediawiki.org/wiki/Extension:WikibaseDataModel"
+		"irc": "irc://irc.freenode.net/wikidata"
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataValues.git"
-		}
-	],
 	"require": {
 		"php": ">=5.3.0",
-		"diff/diff": "dev-master",
-		"data-values/data-values": "dev-master"
+		"diff/diff": "~0.9",
+		"data-values/data-values": "~0.1",
+		"data-values/serialization": "~0.1"
 	},
 	"autoload": {
 		"files" : [
 			"WikibaseDataModel.php"
+		],
+		"classmap": [
+			"DataModel/"
 		]
 	}
 }

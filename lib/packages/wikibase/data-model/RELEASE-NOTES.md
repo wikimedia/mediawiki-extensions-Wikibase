@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 0.6 (dev)
+
+
+
 ## Version 0.5 (2013-12-11)
 
 Note that this list is incomplete. In particular, not all breaking changes are listed.
