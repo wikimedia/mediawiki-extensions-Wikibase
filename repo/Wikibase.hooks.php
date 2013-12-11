@@ -16,6 +16,7 @@ use LogEntryBase;
 use MWContentSerializationException;
 use MWException;
 use OutputPage;
+use ParserOutput;
 use RecentChange;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -1029,6 +1030,56 @@ final class RepoHooks {
 				$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
 			}
 		}
+		return true;
+	}
+
+	/**
+	 * Called when pushing meta-info from the ParserOutput into OutputPage.
+	 * Used to transfer the 'wb-placeholders' from ParserOutput to OutputPage.
+	 *
+	 * @param OutputPage $out
+	 * @param ParserOutput $parserOutput
+	 *
+	 * @return bool
+	 */
+	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
+		$placeholders = $parserOutput->getExtensionData( 'wikibase-view-chunks' );
+
+		if ( $placeholders ) {
+			$out->setProperty( 'wikibase-view-chunks', $placeholders );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Called when pushing HTML from the ParserOutput into OutputPage.
+	 * Used to expand any placeholders in the OutputPage's 'wb-placeholders' property
+	 * in the HTML.
+	 *
+	 * @param OutputPage $out
+	 * @param string &$html the HTML to mangle
+	 *
+	 * @return bool
+	 */
+	public static function onOutputPageBeforeHTML( OutputPage $out, &$html ) {
+		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
+
+		if ( $placeholders ) {
+			$injector = new TextInjector( $placeholders );
+
+			$expander = new EntityViewPlaceholderExpander(
+				$out->getTitle(),
+				$out->getUser(),
+				$out->getLanguage(),
+				WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
+				WikibaseRepo::getDefaultInstance()->getEntityLookup(),
+				new UserLanguageLookup( $out->getUser() )
+			);
+
+			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
+		}
+
 		return true;
 	}
 }
