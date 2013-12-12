@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_a3f6758a",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-12T14:51:07Z",
+      "side": 1,
+      "message": "This means the class mentioned here will also need to be treated as legacy API, as we have no control over how it is constructed",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_238ee52b",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 2
@@ -47,6 +64,23 @@
       "writtenOn": "2013-12-12T13:54:29Z",
       "side": 1,
       "message": "use RequestContext",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_83f3719a",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-12T14:51:07Z",
+      "side": 1,
+      "message": "This will fail as soon as we have a view for another type of entity. Real id parser instances should be obtained via the top level factory. And preferably not used in unit tests, where mocks are much more appropriate",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +115,23 @@
       "writtenOn": "2013-12-12T13:54:29Z",
       "side": 1,
       "message": "0.1?",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_63ecedb8",
+        "filename": "repo/tests/phpunit/includes/PropertyViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-12T14:51:07Z",
+      "side": 1,
+      "message": "Code such as this just screams the design is flawed. Typically this occurs where composition, ie the strategy pattern, should be used instead",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
