@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_48fa28b7",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-12T09:01:00Z",
+      "side": 1,
+      "message": "please use ENV[\"WB_REPO_USERNAME\"] and ENV[\"WB_REPO_PASSWORD\"] as credentials to log in.",
+      "revId": "478f8e5c7ce44e37f837e724393ce665c757a5e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
