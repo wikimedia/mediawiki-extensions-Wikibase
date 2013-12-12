@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_038521d4",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-12T15:09:25Z",
+      "side": 1,
+      "message": "This commit is introducing this as a new issue for no good reason. If the fix is in a follow up, fine, but then this commit should not be merged before the follow up is approved as well.",
+      "parentUuid": "0ee75395_832931e3",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_c398596f",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 2
