@@ -774,6 +774,7 @@ $messages['ce'] = array(
 	'wikibase-property-notfound' => 'Свойства «$1» ца карайо',
 	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
 	'wikibase-rc-show-wikidata-pref' => 'Керла нисдаршан могӀамехь гайта Викихаамаш чохь хила хийцамаш',
+	'wikibase-rc-wikibase-edit-title' => 'Викихаамашкахь бина хийцам',
 	'wikibase-watchlist-show-changes-pref' => 'Викихаамаш чохь хийла хийцамаш гайта тергаме могӀам чохь',
 	'wikibase-error-serialize-error' => 'Хаамаш кхочушъ бан тар цаделира.',
 	'special-unconnectedpages' => 'Викихаамаш чохь вовшахтесна йоцу агӀонаш',
@@ -822,6 +823,8 @@ $messages['ckb'] = array(
 	'wikibase-property-notfound' => 'تایبەتمەندیی $1 نەدۆزرایەوە.',
 	'wikibase-rc-hide-wikidata' => 'ویکیدراوە $1',
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
+	'wikibase-rc-wikibase-edit-letter' => 'د',
+	'wikibase-rc-wikibase-edit-title' => 'دەستکاریی ویکیدراوە',
 	'wikibase-watchlist-show-changes-pref' => 'دەستکارییەکانی ویکیدراوە لە پێرستی چاودێرییەکەت نیشان بدە',
 	'wikibase-unconnectedpages-submit' => 'بڕۆ',
 	'wikibase-pageinfo-entity-id' => 'پێناسەی بەندی ویکیدراوە',
@@ -1816,6 +1819,7 @@ $messages['hr'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdi',
 	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
 	'wikibase-rc-show-wikidata-pref' => 'Prikaži Wikidata promjene na popisu nedavnih promjena',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata uređivanje',
 	'wikibase-watchlist-show-changes-pref' => 'Prikaži Wikidata promjene na mom popisu praćenih članaka',
 	'wikibase-pageinfo-entity-id' => 'Oznaka na Wikidati',
 );
@@ -1887,10 +1891,12 @@ $messages['hu'] = array(
 
 /** Armenian (Հայերեն)
  * @author Vadgt
+ * @author Xelgen
  */
 $messages['hy'] = array(
 	'wikibase-editlinks' => 'Փոխել հղումները',
 	'wikibase-linkitem-addlinks' => 'Ստեղծել հղումը',
+	'wikibase-rc-wikibase-edit-title' => 'Վիքիշտեմարանի խմբագրում',
 );
 
 /** Interlingua (interlingua)
@@ -2444,11 +2450,13 @@ $messages['ku-latn'] = array(
 
 /** Latin (Latina)
  * @author Autokrator
+ * @author UV
  */
 $messages['la'] = array(
 	'wikibase-editlinks' => 'Nexus recensere',
 	'wikibase-editlinkstitle' => 'Nexus inter linguas recensere',
 	'wikibase-rc-hide-wikidata' => '$1 Vicidata',
+	'wikibase-rc-wikibase-edit-title' => 'Recensio apud Wikidata',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -3055,6 +3063,8 @@ $messages['nn'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase stør enno ikkje eigenskapstypen for eigenskapen $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
+	'wikibase-rc-wikibase-edit-letter' => 'd',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-endring',
 	'wikibase-watchlist-show-changes-pref' => 'Vis Wikidata-endringar på overvakingslista di',
 	'wikibase-error-serialize-error' => 'Kunne ikkje serialisera data',
 	'wikibase-error-invalid-entity-id' => 'Den oppgjevne ID-en er ukjend for systemet. Bruk ein gild einings-ID.',
@@ -3538,6 +3548,7 @@ $messages['sk'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Musíte byť prihlásený',
 	'wikibase-rc-hide-wikidata' => '$1 Wikiúdaje',
 	'wikibase-rc-show-wikidata-pref' => 'Zobraziť úpravy Wikiúdajov v posledných úpravách',
+	'wikibase-rc-wikibase-edit-title' => 'Úprava Wikiúdajov',
 	'wikibase-watchlist-show-changes-pref' => 'Zobraziť úpravy Wikiúdajov v sledovaných stránkach',
 	'special-unconnectedpages' => 'Stránky bez prepojení',
 	'wikibase-unconnectedpages-legend' => 'Stránky bez prepojení',
@@ -3644,6 +3655,8 @@ $messages['sr-ec'] = array(
 	'wikibase-property-notsupportedyet' => 'Викибаза још не подржава врсту својства за $1 својство.',
 	'wikibase-rc-hide-wikidata' => '$1 Википодатке',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажи измене на Википодацима у скорашњим изменама',
+	'wikibase-rc-wikibase-edit-letter' => 'д',
+	'wikibase-rc-wikibase-edit-title' => 'Измена на Википодацима',
 	'wikibase-watchlist-show-changes-pref' => 'Прикажи измене на Википодацима у списку надгледања',
 	'wikibase-error-serialize-error' => 'Неуспешна серијализација података',
 	'wikibase-error-invalid-entity-id' => 'Унети идентификатор је непознат систему. Молимо унесите важећи ИД.',
