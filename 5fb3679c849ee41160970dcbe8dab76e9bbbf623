@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_c38a99e3",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-12T15:12:38Z",
+      "side": 1,
+      "message": "it\u0027s not introducing the issue.  before we had EntityView::newForEntityType here int he test and that method created $idParser this way\n\nagree not good! I want to see a follow up to improve that",
+      "parentUuid": "0ee75395_038521d4",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_c398596f",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 2
