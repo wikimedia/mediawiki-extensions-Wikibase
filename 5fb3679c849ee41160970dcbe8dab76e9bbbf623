@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_832931e3",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-12T14:58:44Z",
+      "side": 1,
+      "message": "agree, though same can be said for the SnakFormatter and probably LanguageFallbackChain thing also.  follow-up to address these issues would be good.",
+      "parentUuid": "0ee75395_83f3719a",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_c398596f",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 2
@@ -166,6 +184,24 @@
       "writtenOn": "2013-12-12T13:54:29Z",
       "side": 1,
       "message": "use Title",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6322adfd",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-12T14:58:44Z",
+      "side": 1,
+      "message": "oops :)",
+      "parentUuid": "0ee75395_a382f5ff",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
