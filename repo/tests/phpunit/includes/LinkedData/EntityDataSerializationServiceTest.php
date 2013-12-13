@@ -2,14 +2,14 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataTypeFactory;
 use Revision;
-use ValueFormatters\FormatterOptions;
-use Wikibase\Entity;
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityRevision;
 use Wikibase\Item;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
-use Wikibase\Property;
 
 /**
  * @covers \Wikibase\LinkedData\EntityDataSerializationService
@@ -27,41 +27,30 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
-	public static $dataTypes = array(
-		'commonsMedia' => array(
-			'datavalue' => 'string',
-		),
-		'string' => array(
-			'datavalue' => 'string',
-		),
-		'globe-coordinate' => array(
-			'datavalue' => 'globecoordinate',
-		),
-		'quantity' => array(
-			'datavalue' => 'quantity',
-		),
-		'monolingual-text' => array(
-			'datavalue' => 'monolingualtext',
-		),
-		'multilingual-text' => array(
-			'datavalue' => 'multilingualtext',
-		),
-		'time' => array(
-			'datavalue' => 'time',
-		),
-	);
-
 	protected function newService() {
 		$entityLookup = new MockRepository();
-		$dataTypeFactory = new DataTypeFactory( self::$dataTypes );
-		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
+
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
+		$serializerOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
 
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
 			$entityLookup,
-			$dataTypeFactory,
-			$idFormatter
+			$titleLookup,
+			$serializerFactory
 		);
 
 		$service->setFormatWhiteList(
@@ -84,31 +73,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 
 
 	public static function provideGetSerializedData() {
-		$entity = Item::newEmpty();
-		$entity->setId( 23 );
-		$entity->setLabel( 'en', "ACME" );
-
-		$revisions = new Revision( array(
-			'id' => 123,
-			'page' => 23,
-			'user_text' => 'TestUser',
-			'user' => 13,
-			'timestamp' => '20130505010101',
-			'content_model' => CONTENT_MODEL_WIKIBASE_ITEM,
-			'comment' => 'just testing',
-		) );
-
-		//TODO: set up...
-
-		$cases = array();
-
-		$cases[] = array( // #0:
-			'json',       // format
-			$entity,      // entity
-			null,         // revision
-			'!^\{.*ACME!', // output regex
-			'application/json', // mime type
-		);
+		$cases = EntityDataTestProvider::provideGetSerializedData();
 
 		return $cases;
 	}
@@ -119,13 +84,12 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetSerializedData(
 		$format,
-		Entity $entity,
-		Revision $rev = null,
+		EntityRevision $entityRev,
 		$expectedDataRegex,
 		$expectedMimeType
 	) {
 		$service = $this->newService();
-		list( $data, $mimeType ) = $service->getSerializedData( $format, $entity, $rev );
+		list( $data, $mimeType ) = $service->getSerializedData( $format, $entityRev );
 
 		$this->assertEquals( $expectedMimeType, $mimeType );
 		$this->assertRegExp( $expectedDataRegex, $data, "outpout" );

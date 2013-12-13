@@ -8,6 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
 use Wikibase\EntityId;
+use Wikibase\EntityRevision;
 use Wikibase\Item;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\RdfBuilder;
@@ -203,12 +204,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @return RdfBuilder
 	 */
 	protected static function newRdfBuilder() {
-		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
-
 		return new RdfBuilder(
 			self::URI_BASE,
-			self::URI_DATA,
-			$idFormatter
+			self::URI_DATA
 		);
 	}
 

@@ -104,6 +104,10 @@ class ResultBuilder {
 	 * @param string $tag Tag name
 	 */
 	public function addValue( $path, $value, $name, $tag ){
+		//FIXME: This is quite confusing, since $value MUST be an array for this to work in raw mode.
+		//FIXME: The parameters are in a different order as Result::addValue() takes them.
+		//TODO: consider using setIndexedTagName_internal instead, so we can set the tag name on a *path* instead of a value.
+
 		if ( $this->getResult()->getIsRawMode() ) {
 			$this->getResult()->setIndexedTagName( $value, $tag );
 		}
@@ -115,9 +119,9 @@ class ResultBuilder {
 	 *
 	 * @param EntityRevision $entityRevision
 	 * @param SerializationOptions $options
-	 * @param array $props
+	 * @param array|string $props a list of fields to include, or "all"
 	 */
-	public function addEntityRevision( EntityRevision $entityRevision, $options, array $props = array() ) {
+	public function addEntityRevision( EntityRevision $entityRevision, $options, $props = 'all' ) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
 		$record = array();
@@ -127,7 +131,7 @@ class ResultBuilder {
 			$record['id'] = $entityId->getSerialization();
 			$record['type'] = $entityId->getEntityType();
 		} else {
-			if ( in_array( 'info', $props ) ) {
+			if ( $props == 'all' || in_array( 'info', $props ) ) {
 				$title = $this->entityTitleLookup->getTitleForId( $entityId );
 				$record['pageid'] = $title->getArticleID();
 				$record['ns'] = intval( $title->getNamespace() );
@@ -136,8 +140,9 @@ class ResultBuilder {
 				$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
 			}
 
-			$serializerFactory = new SerializerFactory();
-			$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );
+			//FIXME: $props should be used to filter $entitySerialization!
+			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
+			$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $options );
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 			$record = array_merge( $record, $entitySerialization );
@@ -148,7 +153,14 @@ class ResultBuilder {
 		// NOTE see https://bugzilla.wikimedia.org/show_bug.cgi?id=57529
 		$resultName = !$this->getResult()->getIsRawMode() ? $entityId->getSerialization() : null;
 
-		$this->getResult()->addValue( array( 'entities' ), $resultName, $record );
+		//FIXME: we should use $this->addValue(), but that is confused about setIndexedTagName.
+		$path = array( 'entities' );
+
+		$this->getResult()->addValue( $path, $resultName, $record );
+
+		if ( $this->getResult()->getIsRawMode() ) {
+			$this->getResult()->setIndexedTagName_internal( $path, 'entity' );
+		}
 	}
 
 	/**

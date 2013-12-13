@@ -3,6 +3,9 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
+use Wikibase\EntityFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;
@@ -47,24 +50,31 @@ class SpecialEntityData extends SpecialWikibasePage {
 	protected function initDependencies() {
 		global $wgUseSquid, $wgApiFrameOptions;
 
-		// Initialize serialization service.
-		// TODO: use reverse DI facility (global registry/factory)
+		// TODO: move access to global state to the constructor,
+		// and allow services to be overwritten for testing.
 		$repo = WikibaseRepo::getDefaultInstance();
 
-		$entityContentFactory = $repo->getEntityContentFactory();
+		$entityRevisionLookup = $repo->getEntityRevisionLookup();
+		$titleLookup = $repo->getEntityTitleLookup();
 		$entityIdParser = $repo->getEntityIdParser();
-		$entityIdFormatter = $repo->getIdFormatter();
+
+		$serializationOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory(
+			$serializationOptions,
+			$repo->getPropertyDataTypeLookup(),
+			EntityFactory::singleton()
+		);
 
 		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
 			$this->getTitle()->getCanonicalURL() . '/',
-			\Wikibase\StoreFactory::getStore()->getEntityLookup(),
-			$repo->getDataTypeFactory(),
-			$entityIdFormatter
+			$repo->getStore()->getEntityLookup(),
+			$titleLookup,
+			$serializerFactory
 		);
 
-		$maxAge = Settings::get( 'dataSquidMaxage' );
-		$formats = Settings::get( 'entityDataFormats' );
+		$maxAge = $repo->getSettings()->getSetting( 'dataSquidMaxage' );
+		$formats = $repo->getSettings()->getSetting( 'entityDataFormats' );
 		$serializationService->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
@@ -83,15 +93,14 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$uriManager = new EntityDataUriManager(
 			$this->getTitle(),
 			$supportedExtensions,
-			$entityIdFormatter,
-			$entityContentFactory
+			$titleLookup
 		);
 		
 		$this->requestHandler = new EntityDataRequestHandler(
 			$uriManager,
-			$entityContentFactory,
+			$titleLookup,
 			$entityIdParser,
-			$entityIdFormatter,
+			$entityRevisionLookup,
 			$serializationService,
 			$defaultFormat,
 			$maxAge,

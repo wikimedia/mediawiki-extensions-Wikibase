@@ -82,11 +82,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	public function testExecute( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
 		$item = $this->getTestItem();
 
-		EntityDataRequestHandlerTest::injectIds( $subpage, $item );
-		EntityDataRequestHandlerTest::injectIds( $params, $item );
-		EntityDataRequestHandlerTest::injectIds( $headers, $item );
-		EntityDataRequestHandlerTest::injectIds( $expRegExp, $item );
-		EntityDataRequestHandlerTest::injectIds( $expHeaders, $item );
+		....
 
 		$request = new FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
