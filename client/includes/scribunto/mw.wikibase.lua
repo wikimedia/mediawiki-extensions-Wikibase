@@ -56,6 +56,7 @@ function wikibase.setupInterface()
 		return sitelink.title
 	end
 
+<<<<<<< HEAD
 	wikibase.formattedPropertyValues = function()
 		local entity = wikibase.getEntity()
 		-- Get the keys, i.e. property names
@@ -94,6 +95,49 @@ function wikibase.setupInterface()
 		end
 		return p
 	end
+=======
+  wikibase.properties = function ()
+    local entity = {}
+    entity = wikibase.getEntity()
+    -- Get the keys, i.e. property names
+    local properties = {}
+    local n = 0
+    if entity.claims == nil then return {} end
+    for k,v in pairs( entity.claims ) do
+      n = n+1
+      properties[n]=k
+    end
+    -- Filter out all properties that don't start with a capital letter
+    local filter = function( func, xs )
+         local table= {}
+         for i,v in pairs( xs ) do
+             if func( v ) then
+                table[i]=v
+             end
+         end
+         return table
+     end
+     local is_capital_property = function( x )
+        return ( string.match( x, '^%u%d+' ) ~= nil )
+     end
+     properties = filter( is_capital_property, properties )
+     -- Build the properties table to be returned
+     n = 0
+     local p = {}
+     for k,v in pairs( properties ) do
+           n=n+1
+           p[n]=v
+      end
+      properties = p
+      p = {}
+      for i,v in pairs( properties ) do
+        formattedProperty = php.renderForEntityId( php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) ), v )
+        p[v] = { ["value"] = tostring( formattedProperty ), ["label"] = wikibase.label( v ) }
+        -- ["label"] = wikibase.label( v ),
+      end
+      return p
+  end
+>>>>>>> Implementation of snakformatted property table in Lua
 
 	mw = mw or {}
 	mw.wikibase = wikibase
