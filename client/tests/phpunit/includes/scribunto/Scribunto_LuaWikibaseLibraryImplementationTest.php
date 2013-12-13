@@ -2,12 +2,12 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use Scribunto_LuaWikibaseLibraryImplementation;
 use Wikibase\Client\WikibaseClient;
-use \Language;
 
 /**
- * @covers Wikibase\Scribunto_LuaWikibaseLibraryImplementation
+ * @covers Scribunto_LuaWikibaseLibraryImplementation
  *
  * @since 0.4
  *
