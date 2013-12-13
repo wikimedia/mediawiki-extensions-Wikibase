@@ -1,5 +1,5 @@
 #ruby=ruby-2.0.0-p247
-#ruby-gemset=Wikibase-selenium_cuc
+#ruby-gemset=Wikibase
 
 source 'https://rubygems.org'
 
