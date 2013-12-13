@@ -1631,6 +1631,7 @@ La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedá ($3) yá tien la etiqueta "$1" asociada col códigu de llingua $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) yá tien la etiqueta "$1" asociada col códigu de llingua $2.',
 	'wikibase-error-label-not-unique-item' => 'Otru elementu ($3) yá tien la etiqueta "$1" y la descripción "$4" asociaes col códigu de llingua $2.',
+	'wikibase-error-label-no-entityid' => "La etiqueta nun pue ser una id d'entidá válida.",
 	'special-itembytitle' => 'Elementu por títulu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Buscar elementos por sitiu y títulu',
 	'wikibase-itembytitle-lookup-site' => 'Sitiu:',
@@ -1646,7 +1647,7 @@ La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiqueta:',
 	'wikibase-itemdisambiguation-submit' => 'Guetar',
 	'wikibase-itemdisambiguation-nothing-found' => "Sentímoslo, nun s'alcontró nengún elementu con esa etiqueta.",
-	'wikibase-itemdisambiguation-search' => "Buscar l'elementu usando [{{fullurl:Special:Search|search=$1}} Especial:Gueta].", # Fuzzy
+	'wikibase-itemdisambiguation-search' => "Pue [{{fullurl:Special:Search|search=$1}} buscar l'elementu].",
 	'wikibase-itemdisambiguation-create' => "Pue [{{fullurl:Special:NewItem|label=$1}} crear l'elementu].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Sentímoslo, el sistema desconoz l\'identificador de llingua que proporcionó. Use un identificador válidu, como "en".',
 	'wikibase-itemdisambiguation-description' => 'Los valores usaos pa la gueta tienen de ser la entrada de textu completu. La llingua ye un identificador, como "ast".',
@@ -4317,6 +4318,7 @@ $messages['de-formal'] = array(
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
  * @author Gorizon
+ * @author Marmase
  * @author Mirzali
  */
 $messages['diq'] = array(
@@ -4324,10 +4326,11 @@ $messages['diq'] = array(
 	'wikibase-save' => 'star ke',
 	'wikibase-cancel' => 'bıterkne',
 	'wikibase-add' => 'Deke',
+	'wikibase-addreference' => 'Çıme dek',
 	'wikibase-save-inprogress' => 'Starêno...',
 	'wikibase-remove-inprogress' => 'Wedarêno',
 	'wikibase-sitelink-site-edit-placeholder' => 'sita',
-	'wikibase-sitelink-page-edit-placeholder' => 'wesiqe', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'per',
 	'wikibase-remove' => 'wedarne',
 	'wikibase-itembytitle-lookup-site' => 'Sita:',
 	'wikibase-itembytitle-lookup-page' => 'Pele:',
@@ -4338,7 +4341,7 @@ $messages['diq'] = array(
 	'wikibase-newentity-label' => 'Etiket:',
 	'wikibase-newentity-description' => 'Şınasiyen:',
 	'wikibase-newentity-submit' => 'İycad ke',
-	'wikibase-setlabel-label' => 'Etiket', # Fuzzy
+	'wikibase-setlabel-label' => 'Etiket:',
 	'wikibase-modifyentity-id' => 'ID',
 	'wikibase-modifyterm-language' => 'Zıwan:',
 	'wikibase-entitieswithoutlabel-label-language' => 'Zıwan:',
@@ -8490,6 +8493,9 @@ $messages['ilo'] = array(
 	'wikibase-datatype-label' => 'Kita ti datos:',
 	'wikibase-claimview-snak-tooltip' => 'Mangikabil ti maysa a pateg a kapadpada ti tagikua nga agnagan ti "$1". No ti maysa a tagikua ket awan ti nainaganan a pategna wenno di ammo ti agpayso a pateg, mabalinmo ti agpili ti sabali a pananginagan ti naidumduma a pateg babaen ti panagpindut ti ikono a testo idiay kaariping a pagikabilan a kahon ti pateg.',
 	'wikibase-claimview-snak-new-tooltip' => 'Kalpasan ti panaginagan ti maysa a tagikua mabalinmon ti agikabil ti maysa a kapadpadana a pateg. No ti maysa a tagikua ket awan ti nainaganan a pategna wenno di ammo ti agpayso a pateg, mabalinmo ti agpili ti sabali a pananginagan ti naidumduma a pateg babaen ti panagpindut ti ikono a testo idiay kaariping a pagikabilan a kahon ti pateg.',
+	'wikibase-statementview-rank-preferred' => 'Kinaykayat a ranggo',
+	'wikibase-statementview-rank-normal' => 'Kadawyan a ranggo',
+	'wikibase-statementview-rank-deprecated' => 'Naikkaten a ranggo',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|a taudan|a tataudan}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Ti maysa a taudan|Dagiti $1 a taudan}} ket saan pay a naidulin',
 	'wikibase-snakview-property-input-placeholder' => 'tagikua',
@@ -8519,6 +8525,7 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-error-label-not-unique-wikibase-property' => 'Adda ti tagikua ti ($3) nga adda etiketana ti "$1" a mainaig ti pagsasao a kodigo ti $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Adda sabali a panagbiruk ti ($3) nga adda etiketana ti "$1" a mainaig ti pagsasao a kodigo ti $2.',
 	'wikibase-error-label-not-unique-item' => 'Adda sabali a banag ti ($3) nga adda etiketana ti  "$1" ken panagipalpalawag ti "$4" a mainaig ti pagsasao a kodigo ti $2.',
+	'wikibase-error-label-no-entityid' => 'Ti etiketa ket nasken a saan nga umiso nga entidad ti id.',
 	'special-itembytitle' => 'Banag babaen ti titulo',
 	'wikibase-itembytitle-lookup-fieldset' => 'Agbiruk para kadagiti banag babaen ti sitio ken titulo',
 	'wikibase-itembytitle-lookup-site' => 'Sitio:',
@@ -8534,6 +8541,7 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiketa:',
 	'wikibase-itemdisambiguation-submit' => 'Biruken',
 	'wikibase-itemdisambiguation-nothing-found' => 'Pasensia, awan ti banag a nabirukan ti dayta nga etiketa.',
+	'wikibase-itemdisambiguation-search' => 'Mabalinmo ti [{{fullurl:Special:Search|search=$1}} agbiruk para iti daytoy a banag].',
 	'wikibase-itemdisambiguation-create' => 'Mabalinmo ti [{{fullurl:Special:NewItem|label=$1}} agpartuat ti banag].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Pasensia, ti pagsasao a panagilasin nga intedmo ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a panagilasin a kas ti "en".',
 	'wikibase-itemdisambiguation-description' => 'Dagiti pateg a panagbiruk ket nasken a ti kompleto a panagikabil ti testo. Ti pagsasao ket maysa a panagilasin, a kas ti "en".',
@@ -8581,6 +8589,7 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-setsitelink-invalid-site' => 'Ti id ti sitio ti "$1" ket di ammo. Pangngaasi nga agusar ti maysa nga adda nga id ti sitio, a kas iti "enwiki".',
 	'wikibase-setsitelink-add-failed' => 'Ti silpo ti sitio ket saan a maidulin.',
 	'wikibase-setsitelink-remove-failed' => 'Ti silpo ti sitio ket saan a maikkat.',
+	'wikibase-setsitelink-not-itemid' => 'Ti "$1" ket saan nga umiso nga id ti banag. Dagiti silpo ti sitio ket mabalin laeng nga iyasentar para kadagiti banag.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Pagsasao:',
 	'wikibase-modifyentity-invalid-id' => 'Ti ID ti "$1" ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a nakabuklan ti ID.',
@@ -8631,6 +8640,7 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-mylanguagefallbackchain-text' => 'Ti andingay a kawar ti pagsasao a mangidaya kadagiti etiketa ti entidad para kenka ket naipakita dita baba.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Mabalinmo ti agurnos babaen ti panangikabil ti <nowiki>{{#babel: }}</nowiki> idiay {{GENDER:$1|bukodmo}} a [[Special:MyPage|panid ti agar-aramat]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, a pagbaliwen manipud ti $3 - $4',
+	'wikibase-api-no-such-sitelink' => 'Saan a mabirukan ti kasta a silpo ti sitio',
 	'wikibase-self-conflict-patched' => 'Ti inurnosmo  ket natakupan idiay kinaudi a bersion, a nangbalbaliw kadagiti bukodmo a naipakatengngaan a panagbalbaliw.',
 	'wikibase-conflict-patched' => 'Ti inurnosmo ket natakupan idiay kinaudi a bersion.',
 	'wikibase-restoreold' => 'isubli',
@@ -8660,7 +8670,10 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Nagnayon ti [$2] {{PLURAL:$1|a sabali a nagan|a sabali a nagnagan}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Nagikkat ti [$2] {{PLURAL:$1|a sabali a nagan|a sabali a nagnagan}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Nagnayon ti silpo iti [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Nagnayon ti silpo nga addaan kadagiti pagtandaan iti [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Binaliwan ti silpo iti [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Binaliwan dagiti pagtandaan para iti [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Binaliwan ti silpo ken dagiti pagtandaan para iti [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Nagikkat ti silpo iti [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Pinartuat daytoy a banag tapno maikapet dagiti panid ti [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Nagnayon ti maysa a silpo ti pagsasao tapno maikapet ti pampanid [$2↔$3]',
@@ -8749,35 +8762,35 @@ tapno birukem ti napananda.',
 	'content-model-wikibase-item' => 'Wikibase a banag',
 	'content-model-wikibase-property' => 'Wikibase a tagikua',
 	'content-model-wikibase-query' => 'Wikibase a panagbiruk',
-	'right-item-override' => 'Waswasen dagiti banag', # Fuzzy
+	'right-item-override' => 'Suratan manen dagiti banag',
 	'right-item-create' => 'Agpartuat kadagiti banag',
-	'right-item-remove' => 'Agikkat kadagiti banag', # Fuzzy
-	'right-property-override' => 'Waswasen dagiti tagikua', # Fuzzy
+	'right-item-remove' => 'Ikkaten dagiti banag',
+	'right-property-override' => 'Suratan manen dagiti tagikua',
 	'right-property-create' => 'Agpartuat kadagiti tagikua',
-	'right-property-remove' => 'Agikkat kadagiti tagikua', # Fuzzy
+	'right-property-remove' => 'Ikkaten dagiti tagikua',
 	'right-alias-remove' => 'Agikkat kadagiti sabali a nagan',
 	'right-alias-update' => 'Pabaruan dagiti sabali a nagan',
 	'right-sitelink-remove' => 'Ikkaten dagiti silpo ti sitio',
 	'right-sitelink-update' => 'Pabaruen dagiti silpo',
-	'right-linktitles-update' => 'Pabaruen dagiti silpo ti titulo', # Fuzzy
-	'right-label-remove' => 'Ikkaten dagiti etiketa', # Fuzzy
+	'right-linktitles-update' => 'Mainaig a pampanid',
+	'right-label-remove' => 'Borraen dagiti etiketa',
 	'right-label-update' => 'Pabaruen dagiti etiketa',
-	'right-description-remove' => 'Ikkaten dagiti deskripsion', # Fuzzy
+	'right-description-remove' => 'Borraen dagiti deskripsion',
 	'right-description-update' => 'Pabaruen dagiti deskripsion',
-	'action-item-override' => 'waswasen dagiti banag', # Fuzzy
+	'action-item-override' => 'suratan manen dagiti banag',
 	'action-item-create' => 'agpartuat kadagiti banag',
-	'action-item-remove' => 'agikkat kadagiti banag', # Fuzzy
-	'action-property-override' => 'waswasen dagiti tagikua', # Fuzzy
+	'action-item-remove' => 'ikkaten dagiti banag',
+	'action-property-override' => 'suratan manen dagiti tagikua',
 	'action-property-create' => 'agpartuat kadagiti tagikua',
-	'action-property-remove' => 'agikkat kadagiti tagikua', # Fuzzy
+	'action-property-remove' => 'ikkaten dagiti tagikua',
 	'action-alias-update' => 'agpabaro kadagiti tagikua',
 	'action-alias-remove' => 'agikkat kadagiti sabali a nagan',
 	'action-sitelink-remove' => 'agikkat kadagiti silpo ti sitio',
 	'action-sitelink-update' => 'pabaruen dagiti silpo',
-	'action-linktitles-update' => 'pabaruen dagiti silpo ti titulo', # Fuzzy
-	'action-label-remove' => 'ikkaten dagiti etiketa', # Fuzzy
+	'action-linktitles-update' => 'mainaig a pampanid',
+	'action-label-remove' => 'borraen dagiti etiketa',
 	'action-label-update' => 'pabaruen dagiti etiketa',
-	'action-description-remove' => 'ikkaten dagiti deskripsion', # Fuzzy
+	'action-description-remove' => 'borraen dagiti deskripsion',
 	'action-description-update' => 'pabaruen dagiti deskripsion',
 );
 

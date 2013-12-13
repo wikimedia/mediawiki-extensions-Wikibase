@@ -343,6 +343,9 @@ $messages['ast'] = array(
 	'wikibase-deletedentity-query' => 'Consulta desaniciada',
 	'wikibase-diffview-reference' => 'referencia',
 	'wikibase-diffview-rank' => 'rangu',
+	'wikibase-diffview-rank-preferred' => 'Rangu preferíu',
+	'wikibase-diffview-rank-normal' => 'Rangu normal',
+	'wikibase-diffview-rank-deprecated' => 'Rangu anticuáu',
 	'wikibase-diffview-qualifier' => 'calificador',
 	'wikibase-diffview-label' => 'etiqueta',
 	'wikibase-diffview-alias' => 'alcuños',
@@ -986,6 +989,7 @@ $messages['de-formal'] = array(
 
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
+ * @author Marmase
  * @author Mirzali
  */
 $messages['diq'] = array(
@@ -995,6 +999,7 @@ $messages['diq'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-tooltip-error-details' => 'Teferruati',
 	'datatypes-type-wikibase-item' => 'Çêki',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -1744,6 +1749,9 @@ $messages['ilo'] = array(
 	'wikibase-deletedentity-query' => 'Inikkat ti biniruk',
 	'wikibase-diffview-reference' => 'nagibasaran',
 	'wikibase-diffview-rank' => 'ranggo',
+	'wikibase-diffview-rank-preferred' => 'Kinaykayat a ranggo',
+	'wikibase-diffview-rank-normal' => 'Kadawyan a ranggo',
+	'wikibase-diffview-rank-deprecated' => 'Naikkaten a ranggo',
 	'wikibase-diffview-qualifier' => 'kababalin',
 	'wikibase-diffview-label' => 'etiketa',
 	'wikibase-diffview-alias' => 'sabali a nagnagan',
@@ -1765,6 +1773,10 @@ $messages['ilo'] = array(
 	'wikibase-error-ui-link-exists' => 'Saanka a makasilpo ti daytoy a panid gaputa adda ti maysa a banagen a nakasilpo ti daytoy.',
 	'wikibase-error-ui-session-failure' => 'Ti gimongam ket nagpason. Pangngaasi a sumrekka manen.',
 	'wikibase-error-ui-edit-conflict' => 'Adda kasinnupiat a panagurnos. Pangngaasi nga ikarga ken idulin manen.',
+	'wikibase-quantitydetails-amount' => 'Pakadagupan',
+	'wikibase-quantitydetails-upperbound' => 'Akin-ngato a patingga',
+	'wikibase-quantitydetails-lowerbound' => 'Akin-baba a patingga',
+	'wikibase-quantitydetails-unit' => 'Unit',
 	'wikibase-replicationnote' => 'Pangngaasi nga ammuem a mabalin nga agpaut ti adu a minutos aginggana dagiti panagbalbaliw ket makita kadagiti amin a wiki',
 	'wikibase-sitelinks-wikipedia' => 'Pampanid ti Wikipedia a naisilpo iti daytoy a banag',
 	'wikibase-sitelinks-sitename-columnheading' => 'Pagsasao',
@@ -3614,11 +3626,11 @@ $messages['zh-hans'] = array(
 	'wikibase-deletedentity-item' => '删除项',
 	'wikibase-deletedentity-property' => '删除属性',
 	'wikibase-deletedentity-query' => '删除查询',
-	'wikibase-diffview-reference' => '参考文献',
+	'wikibase-diffview-reference' => '参考',
 	'wikibase-diffview-rank' => '等级',
-	'wikibase-diffview-rank-preferred' => '首选组别',
-	'wikibase-diffview-rank-normal' => '普通组别',
-	'wikibase-diffview-rank-deprecated' => '不建议组别',
+	'wikibase-diffview-rank-preferred' => '首选级',
+	'wikibase-diffview-rank-normal' => '普通级',
+	'wikibase-diffview-rank-deprecated' => '弃用级',
 	'wikibase-diffview-qualifier' => '限定符',
 	'wikibase-diffview-label' => '标签',
 	'wikibase-diffview-alias' => '别名',
@@ -3639,7 +3651,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-ui-no-permissions' => '您没有足够的权限执行此操作。',
 	'wikibase-error-ui-link-exists' => '因另一项已链接该页，您不能再链接此页。',
 	'wikibase-error-ui-session-failure' => '您的会话已过期。请重新登录。',
-	'wikibase-error-ui-edit-conflict' => '发生编辑冲突。请重新整理后再保存。',
+	'wikibase-error-ui-edit-conflict' => '发生编辑冲突。请重新加载后再次保存。',
 	'wikibase-quantitydetails-amount' => '总额',
 	'wikibase-quantitydetails-upperbound' => '上限',
 	'wikibase-quantitydetails-lowerbound' => '下限',
@@ -3649,7 +3661,7 @@ $messages['zh-hans'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => '语言',
 	'wikibase-sitelinks-sitename-columnheading-special' => '网站',
 	'wikibase-sitelinks-siteid-columnheading' => '代码',
-	'wikibase-sitelinks-link-columnheading' => '已链接页面',
+	'wikibase-sitelinks-link-columnheading' => '链接的页面',
 	'wikibase-tooltip-error-details' => '详情',
 	'wikibase-undeserializable-value' => '这个值无效以及无法显示。',
 	'wikibase-validator-bad-type' => '$2，预期类型为$1',

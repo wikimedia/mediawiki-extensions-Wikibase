@@ -728,6 +728,7 @@ $messages['ca'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra les modificacions de Wikidata en els canvis recents',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Modificació de Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra les modificacions a Wikidata en la llista de seguiment',
 	'wikibase-error-invalid-entity-id' => "L'ID introduït és desconegut al sistema. Utilitzeu un ID d'entitat vàlid.",
 	'special-unconnectedpages' => 'Pàgines no connectades',
@@ -1357,6 +1358,13 @@ $messages['et'] = array(
 	'wikibase-pageinfo-entity-id-none' => 'Puudub',
 );
 
+/** Basque (euskara)
+ * @author Xabier Armendaritz
+ */
+$messages['eu'] = array(
+	'wikibase-rc-wikibase-edit-title' => 'Aldaketa hau Wikidatan egin da',
+);
+
 /** Persian (فارسی)
  * @author Alireza
  * @author Calak
@@ -1492,6 +1500,7 @@ $messages['fi'] = array(
  * @author Crochet.david
  * @author Gomoko
  * @author Jean-Frédéric
+ * @author Kvardek du
  * @author Linedwell
  * @author Ltrlg
  * @author Peter17
@@ -1536,7 +1545,7 @@ $messages['fr'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
-	'wikibase-rc-wikibase-edit-title' => 'Modification de wikidata',
+	'wikibase-rc-wikibase-edit-title' => 'Modification de Wikidata.',
 	'wikibase-watchlist-show-changes-pref' => 'Voir les modifications de Wikidata dans votre liste de suivi',
 	'wikibase-error-serialize-error' => 'Échec à la sérialisation des données',
 	'wikibase-error-invalid-entity-id' => 'L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.',
@@ -1867,6 +1876,7 @@ $messages['hsb'] = array(
 );
 
 /** Hungarian (magyar)
+ * @author BáthoryPéter
  * @author Tgr
  */
 $messages['hu'] = array(
@@ -1886,6 +1896,7 @@ $messages['hu'] = array(
 	'wikibase-editlinkstitle' => 'Nyelvközi hivatkozások szerkesztése',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata szerkesztések mutatása a friss változtatásokban',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata szerkesztés',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-változások mutatása a figyelőlistádon',
 );
 
@@ -2283,6 +2294,7 @@ $messages['kk-cyrl'] = array(
 	'wikibase-property-notsupportedyet' => 'Уикиқор $1 түріндегі сипаттарды қолдамайды.',
 	'wikibase-rc-hide-wikidata' => '$1 Уикидерек',
 	'wikibase-rc-show-wikidata-pref' => 'Уикидерек өңдемелерін жуықтағы өзгерістерден көрсету',
+	'wikibase-rc-wikibase-edit-title' => 'Уикидерек өңдемесі',
 	'wikibase-watchlist-show-changes-pref' => 'Уикидерек өңдемелерін бақылау тізіміңізден көрсету',
 	'special-unconnectedpages' => 'Беттер даналарға байланыспады',
 	'wikibase-unconnectedpages-legend' => 'Байланыспаған беттер параметрлері',
@@ -2588,7 +2600,7 @@ $messages['lv'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Rādīt labojumos Vikidatos pēdējās izmaiņās',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
-	'wikibase-rc-wikibase-edit-title' => 'Wikidata labojums',
+	'wikibase-rc-wikibase-edit-title' => 'Labojums Vikidatos',
 	'wikibase-watchlist-show-changes-pref' => 'Rādīt labojumus Vikidatos uzraugāmo lapu sarakstā',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" nav derīgs valodas kods.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Tikai lapas ar starpvalodu saitēm',
@@ -3324,7 +3336,7 @@ $messages['qu'] = array(
 $messages['rm'] = array(
 	'wikibase-editlinks' => 'Modifitgar colliaziuns',
 	'wikibase-linkitem-addlinks' => 'Agiunscher colliaziuns',
-	'wikibase-linkitem-input-site' => 'Lingua',
+	'wikibase-linkitem-input-site' => 'Lingua:',
 	'wikibase-linkitem-input-page' => 'Pagina',
 );
 
@@ -3770,6 +3782,14 @@ $messages['te'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'వికీడామా మార్పులను ఇటీవలి మార్పులలో చూపించు',
 );
 
+/** Thai (ไทย)
+ * @author Nullzero
+ */
+$messages['th'] = array(
+	'wikibase-rc-wikibase-edit-letter' => 'ด',
+	'wikibase-rc-wikibase-edit-title' => 'การแก้ไขจากวิกิสนเทศ',
+);
+
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
@@ -3799,6 +3819,7 @@ $messages['tr'] = array(
 	'wikibase-property-notfound' => '$1 özellik bulunamadı.',
 	'wikibase-rc-hide-wikidata' => 'Vikiveri değişikliklerini $1',
 	'wikibase-rc-show-wikidata-pref' => 'Vikiveri düzenlemelerini son değişikliklerde göster',
+	'wikibase-rc-wikibase-edit-title' => 'Vikiveri değişikliği',
 	'wikibase-watchlist-show-changes-pref' => 'İzleme listemde Vikiveri değişikliklerini göster',
 	'special-unconnectedpages' => 'Öğelerine bağlanmamış sayfalar',
 	'wikibase-unconnectedpages-legend' => 'Bağlanmamış sayfa seçenekleri',
@@ -4059,6 +4080,8 @@ $messages['yi'] = array(
 	'wikibase-property-notsupportedyet' => 'וויקיבאזע שטיצט נאך נישט אייגנשאפט טיפ פאר $1 אייגנשאפט.',
 	'wikibase-rc-hide-wikidata' => '$1 וויקידאטן',
 	'wikibase-rc-show-wikidata-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין לעצטע ענדערונגען',
+	'wikibase-rc-wikibase-edit-letter' => 'ד',
+	'wikibase-rc-wikibase-edit-title' => 'וויקידאטן־רעדאקטירונג',
 	'wikibase-watchlist-show-changes-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין אייער אויפפאסונג־ליסטע',
 	'special-unconnectedpages' => 'בלעטער נישט פארבונדן מיט אביעקטן',
 	'wikibase-unconnectedpages-legend' => 'מעגלעכקייטן פאר אומפארבונדענע בלעטער',
@@ -4147,8 +4170,8 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-not-loggedin-title' => '您必须登录',
 	'wikibase-linkitem-not-loggedin' => '您必须在此维基和[$1 中央数据存储库]上登录才能使用此功能。',
 	'wikibase-linkitem-success-link' => '页面已成功链接。您可以在我们的[$1 中央数据库]中找到包含该链接的项。',
-	'wikibase-property-notfound' => '$1属性未找到。',
-	'wikibase-property-notsupportedyet' => 'Wikibase对$1属性不支持属性类型。',
+	'wikibase-property-notfound' => '未找到$1属性。',
+	'wikibase-property-notsupportedyet' => '维基数据库还不支持$1属性的属性类型。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 	'wikibase-rc-wikibase-edit-letter' => '数',
@@ -4158,7 +4181,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
 	'special-unconnectedpages' => '未连接数据项的页面',
 	'wikibase-unconnectedpages-legend' => '未连接页面选项',
-	'wikibase-unconnectedpages-page' => '以该页面开始结果列表：',
+	'wikibase-unconnectedpages-page' => '结果列表的起始页面：',
 	'wikibase-unconnectedpages-submit' => '提交',
 	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
 	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',
