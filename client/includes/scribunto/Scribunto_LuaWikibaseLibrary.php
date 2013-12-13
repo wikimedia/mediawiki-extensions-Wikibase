@@ -29,14 +29,19 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
 		global $wgContLang;
 		$language = $wgContLang;
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
 		$this->wbLibrary = new Scribunto_LuaWikibaseLibraryImplementation(
-			WikibaseClient::getDefaultInstance()->getEntityIdParser(), // EntityIdParser
-			WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup(), // EntityLookup
-			WikibaseClient::getDefaultInstance()->getEntityIdFormatter(), // EntityIdFormatter
-			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(), // SiteLinkLookup
-			$language, // language
-			Settings::get( 'siteGlobalID' ) // SiteID
+			$wikibaseClient->getEntityIdParser(),
+			$wikibaseClient->getEntityLookup(),
+			$wikibaseClient->getEntityIdFormatter(),
+			$wikibaseClient->getSiteLinkTable(),
+			$wikibaseClient->getLanguageFallbackChainFactory(),
+			$language,
+			Utils::getLanguageCodes(),
+			Settings::get( 'siteGlobalID' )
 		);
+
 		parent::__construct( $engine );
 	}
 
@@ -52,7 +57,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
 		);
 
-		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/mw.wikibase.lua', $lib, array() );
+		return $this->getEngine()->registerInterface(
+			dirname( __FILE__ ) . '/mw.wikibase.lua', $lib, array()
+		);
 	}
 
 	/**
