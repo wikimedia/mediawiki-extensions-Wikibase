@@ -259,9 +259,16 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForToc() {
+	public function getHtmlForToc() {
 		$tocContent = '';
 		$tocSections = $this->getTocSections();
+
+		if ( count( $tocSections ) < 2 ) {
+			// Including the marker for the termbox toc entry, there is fewer
+			// 3 sections. MediaWiki core doesn't show a TOC unless there are
+			// at least 3 sections, so we shouldn't either.
+			return '';
+		}
 
 		// Placeholder for the TOC entry for the term box (which may or may not be used for a given user).
 		// EntityViewPlaceholderExpander must know about the 'termbox-toc' name.
