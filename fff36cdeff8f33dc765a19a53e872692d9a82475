@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_748dc2d7",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:53:33Z",
+      "side": 1,
+      "message": "can we call this \"formattedPropertyValues\" or some such?",
+      "revId": "fff36cdeff8f33dc765a19a53e872692d9a82475",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f4e2f296",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:53:33Z",
+      "side": 1,
+      "message": "Eek, mixed whitespace!",
+      "revId": "fff36cdeff8f33dc765a19a53e872692d9a82475",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_3494daea",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:53:33Z",
+      "side": 1,
+      "message": "Indentation seems off here. \nSome blank lines (especially before and after block structures) would be helpful.",
+      "revId": "fff36cdeff8f33dc765a19a53e872692d9a82475",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
