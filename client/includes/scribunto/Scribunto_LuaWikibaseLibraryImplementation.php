@@ -1,7 +1,10 @@
 <?php
 
+use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityLookup;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -10,7 +13,6 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Utils;
-use \Language;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -34,27 +36,38 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 	/* @var SiteLinkLookup */
 	protected $siteLinkTable;
 
+	/* @var LanguageFallbackChainFactory */
+	protected $fallbackChainFactory;
+
 	/* @var Language */
 	protected $language;
+
+	/* @var string[] */
+	protected $languageCodes;
 
 	/* @var mixed */
 	protected $siteId;
 
-
 	/**
 	 * @param EntityIdParser $entityIdParser
 	 */
-	public function __construct( EntityIdParser $entityIdParser,
-								 EntityLookup $entityLookup,
-								 EntityIdFormatter $entityIdFormatter,
-								 SiteLinkLookup $siteLinkTable,
-								 Language $language,
-								 $siteId ) {
+	public function __construct(
+		EntityIdParser $entityIdParser,
+		EntityLookup $entityLookup,
+		EntityIdFormatter $entityIdFormatter,
+		SiteLinkLookup $siteLinkTable,
+		LanguageFallbackChainFactory $fallbackChainFactory,
+		Language $language,
+		$languageCodes,
+		$siteId
+	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->siteLinkTable = $siteLinkTable;
+		$this->fallbackChainFactory = $fallbackChainFactory;
 		$this->language = $language;
+		$this->languageCodes = $languageCodes;
 		$this->siteId = $siteId;
 	}
 
@@ -79,6 +92,13 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 			return array( null );
 		}
 
+		$serializer = $this->getEntitySerializer( $entityObject );
+
+		$entityArr = $serializer->getSerialized( $entityObject );
+		return array( $entityArr );
+	}
+
+	private function getEntitySerializer( Entity $entityObject ) {
 		$opt = new SerializationOptions();
 		$serializerFactory = new SerializerFactory( $opt );
 
@@ -91,8 +111,7 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
 		// so any customized Lua modules can access labels of another entity written in another variant,
 		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
-		$fallbackChainFactory = new LanguageFallbackChainFactory();
-		$chain = $fallbackChainFactory->newFromLanguage(
+		$chain = $this->fallbackChainFactory->newFromLanguage(
 			$this->language,
 			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
@@ -100,10 +119,7 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		// SerializationOptions accepts mixed types of keys happily.
 		$opt->setLanguages( Utils::getLanguageCodes() + array( $this->language->getCode() => $chain ) );
 
-		$serializer = $serializerFactory->newSerializerForObject( $entityObject, $opt );
-
-		$entityArr = $serializer->getSerialized( $entityObject );
-		return array( $entityArr );
+		return $serializerFactory->newSerializerForObject( $entityObject, $opt );
 	}
 
 	/**
@@ -116,21 +132,13 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 	 * @return string|null $id
 	 */
 	public function getEntityId( $pageTitle = null ) {
-		$globalSiteId = $this->getGlobalSiteId();
-		$table = $this->siteLinkTable;
-		if ( $table === null ) {
-			return array( null );
-		}
+		$numericId = $this->siteLinkTable->getItemIdForLink( $this->siteId, $pageTitle );
 
-		$numericId = $table->getItemIdForLink( $globalSiteId, $pageTitle );
 		if ( ! is_int( $numericId ) ) {
 			return array( null );
 		}
 
-		$id = new EntityId( Item::ENTITY_TYPE, $numericId );
-		if ( $id === null ) {
-			return array( null );
-		}
+		$id = ItemId::newFromNumber( $numericId );
 
 		return array( $this->entityIdFormatter->format( $id ) );
 	}
