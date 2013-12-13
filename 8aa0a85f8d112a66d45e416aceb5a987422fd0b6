@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_afa1b392",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-13T16:15:59Z",
+      "side": 1,
+      "message": "This behaviour is only correct for two deriving classes, and wrong for all other ones. Derivatives should not be forced to nullify or substitute behaviour.",
+      "revId": "8aa0a85f8d112a66d45e416aceb5a987422fd0b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
