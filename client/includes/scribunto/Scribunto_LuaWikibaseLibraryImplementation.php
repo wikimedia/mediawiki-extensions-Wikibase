@@ -2,6 +2,9 @@
 
 use Wikibase\Item;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Claims;
+use Wikibase\Entity;
+use Wikibase\Snak;
 use Wikibase\EntityLookup;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -10,7 +13,8 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Utils;
-use \Language;
+use Wikibase\Lib\SnakFormatter;
+
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -40,6 +44,8 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 	/* @var mixed */
 	protected $siteId;
 
+	/* @var SnakFormatter */
+	protected $snaksFormatter;
 
 	/**
 	 * @param EntityIdParser $entityIdParser
@@ -47,6 +53,7 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 	public function __construct( EntityIdParser $entityIdParser,
 								 EntityLookup $entityLookup,
 								 EntityIdFormatter $entityIdFormatter,
+								 SnakFormatter $snakFormatter,
 								 SiteLinkLookup $siteLinkTable,
 								 Language $language,
 								 $siteId ) {
@@ -56,6 +63,7 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->language = $language;
 		$this->siteId = $siteId;
+		$this->snaksFormatter = $snakFormatter;
 	}
 
 
@@ -133,6 +141,73 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		}
 
 		return array( $this->entityIdFormatter->format( $id ) );
+	}
+
+	/**
+	 * Returns such Claims from $entity that have a main Snak for the property that
+	 * is specified by $propertyLabel.
+	 *
+	 * @param Entity $entity The Entity from which to get the clams
+	 * @param string $propertyId A prefixed property ID.
+	 *
+	 * @return Claims The claims for the given property.
+	 */
+	private function getClaimsForProperty( Entity $entity, $propertyId ) {
+		$allClaims = new Claims( $entity->getClaims() );
+
+		$claims = $allClaims->getClaimsForProperty( $propertyId );
+
+		return $claims;
+	}
+
+	/**
+	 * @param Snak[] $snaks
+	 *
+	 * @return string - wikitext format
+	 */
+	private function formatSnakList( $snaks ) {
+		$formattedValues = $this->formatSnaks( $snaks );
+		return $this->language->commaList( $formattedValues );
+	}
+
+	private function formatSnaks( $snaks ) {
+		$strings = array();
+
+		foreach ( $snaks as $snak ) {
+			$strings[] = $this->snaksFormatter->formatSnak( $snak );
+		}
+
+		return $strings;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @param string $propertyLabel
+	 *
+	 * @return Status a status object wrapping a wikitext string
+	 */
+	public function renderForEntityId( $entityId, $propertyId ) {
+		$prefixedEntityId = trim( $entityId );
+		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+		$prefixedPropertyId = trim( $propertyId );
+		$propertyId = $this->entityIdParser->parse( $prefixedPropertyId );
+		$entity = $this->entityLookup->getEntity( $entityId );
+
+		if ( !$entity ) {
+			wfProfileOut( __METHOD__ );
+			return Status::newGood( '' );
+		}
+
+		$claims = $this->getClaimsForProperty( $entity, $propertyId );
+
+		if ( $claims->isEmpty() ) {
+			wfProfileOut( __METHOD__ );
+			return Status::newGood( '' );
+		}
+
+		$snakList = $claims->getMainSnaks();
+		$text = $this->formatSnakList( $snakList, $propertyId );
+		return array( $text );
 	}
 
 	/**

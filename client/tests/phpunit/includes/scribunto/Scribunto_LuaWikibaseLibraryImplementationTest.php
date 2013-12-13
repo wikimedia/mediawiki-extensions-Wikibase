@@ -3,11 +3,10 @@
 namespace Wikibase\Test;
 
 use Scribunto_LuaWikibaseLibraryImplementation;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use \Language;
-use \Site;
-use \Wikibase\DirectSqlStore;
-use \MediaWikiSite;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Scribunto_LuaWikibaseLibraryImplementation
@@ -26,13 +25,15 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 	public function getWikibaseLibraryImplementation() {
 		$entityLookup = new MockRepository();
 		$language = new Language( "en" );
-		$siteLinkLookup = $siteLinkLookup = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
+		$siteLinkLookup = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
 			->disableOriginalConstructor()
 			->getMock();
+		$formatterOptions = new FormatterOptions();
 		return new Scribunto_LuaWikibaseLibraryImplementation(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(), // EntityIdParser
 			$entityLookup,
 			WikibaseClient::getDefaultInstance()->getEntityIdFormatter(), // EntityIdFormatter
+			WikibaseClient::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			$siteLinkLookup, // SiteLinkLookup
 			$language, // language
 			"enwiki" // siteId
