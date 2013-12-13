@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel;
 
 use Hashable;
 use InvalidArgumentException;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Implementation of the References interface.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Entity;
 
 use Diff\Patcher;
 use InvalidArgumentException;

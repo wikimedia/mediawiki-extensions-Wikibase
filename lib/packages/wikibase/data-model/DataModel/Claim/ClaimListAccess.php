@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Claim;
 
 /**
  * Interface for objects that can be accessed as a list of Claim objects.

@@ -2,7 +2,15 @@
 
 ## Version 0.6 (dev)
 
+#### Deprecations
 
+* All classes and interfaces not yet in the Wikibase\DataModel namespace got moved. The old names
+remain as aliases, and should be considered as deprecated.
+
+#### Removals
+
+* Entity::getTerms was removed, as it returned objects of type Term, which is defined by a component
+Wikibase DataModel does not depend upon.
 
 ## Version 0.5 (2013-12-11)
 

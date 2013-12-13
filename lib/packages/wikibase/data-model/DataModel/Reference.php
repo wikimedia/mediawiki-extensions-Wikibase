@@ -1,6 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel;
+
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Interface for objects that represent a single Wikibase reference.

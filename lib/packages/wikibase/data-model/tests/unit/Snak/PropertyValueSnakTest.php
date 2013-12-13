@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyValueSnak;
 
 /**
- * @covers Wikibase\PropertyValueSnak
+ * @covers Wikibase\DataModel\Snak\PropertyValueSnak
  *
  * @file
  * @since 0.1
@@ -44,7 +44,7 @@ class PropertyValueSnakTest extends SnakObjectTest {
 	}
 
 	public function getClass() {
-		return '\Wikibase\PropertyValueSnak';
+		return '\Wikibase\DataModel\Snak\PropertyValueSnak';
 	}
 
 	/**

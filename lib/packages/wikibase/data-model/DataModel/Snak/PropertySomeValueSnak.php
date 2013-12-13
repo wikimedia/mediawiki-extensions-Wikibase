@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Snak;
 
 /**
  * Class representing a property some value snak.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Claim;
 
 /**
  * Interface for objects that contain Claim objects to create an external Claims object.

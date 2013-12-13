@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Michał Łazowik
  */
-class SimpleSiteLink {
+class SiteLink {
 
 	protected $siteId;
 	protected $pageName;

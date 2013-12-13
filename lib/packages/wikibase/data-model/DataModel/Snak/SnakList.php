@@ -1,6 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Snak;
+
+use Wikibase\DataModel\HashArray;
+use Wikibase\DataModel\MapHasher;
+use Wikibase\DataModel\MapValueHasher;
 
 /**
  * Implementation of the Snaks interface.

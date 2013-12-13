@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Entity;
 
 use Diff\Comparer\CallbackComparer;
 use Diff\Differ;
@@ -11,6 +11,10 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use Wikibase\DataModel\Internal\ObjectComparer;
+use Wikibase\DataModel\Claim\ClaimAggregate;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * Represents a single Wikibase entity.
@@ -659,51 +663,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			// FIXME: this only works for Item and Property
 			return array( $id->getEntityType(), $id->getNumericId() );
 		}
-	}
-
-	/**
-	 * Returns all the labels, descriptions and aliases as Term objects.
-	 *
-	 * @since 0.2
-	 *
-	 * @return Term[]
-	 */
-	public function getTerms() {
-		$terms = array();
-
-		foreach ( $this->getDescriptions() as $languageCode => $description ) {
-			$term = new Term();
-
-			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_DESCRIPTION );
-			$term->setText( $description );
-
-			$terms[] = $term;
-		}
-
-		foreach ( $this->getLabels() as $languageCode => $label ) {
-			$term = new Term();
-
-			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_LABEL );
-			$term->setText( $label );
-
-			$terms[] = $term;
-		}
-
-		foreach ( $this->getAllAliases() as $languageCode => $aliases ) {
-			foreach ( $aliases as $alias ) {
-				$term = new Term();
-
-				$term->setLanguage( $languageCode );
-				$term->setType( Term::TYPE_ALIAS );
-				$term->setText( $alias );
-
-				$terms[] = $term;
-			}
-		}
-
-		return $terms;
 	}
 
 	/**

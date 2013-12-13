@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Hashable;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\HashArray;
 
 /**
@@ -95,7 +96,7 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) );
+		$element = new PropertyNoValueSnak( 42 );
 
 		$array->removeElement( $element );
 		$array->removeByElementHash( $element->getHash() );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Snak;
 
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;

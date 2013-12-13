@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Entity;
 
 use DataTypes\DataType;
 use InvalidArgumentException;
