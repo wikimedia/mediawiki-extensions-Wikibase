@@ -8,12 +8,9 @@ use Wikibase\Validators\NumberValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\NumericValidator
+ * @covers Wikibase\Validators\NumberValidator
  *
  * @license GPL 2+
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group WikibaseLib
  * @group Wikibase
