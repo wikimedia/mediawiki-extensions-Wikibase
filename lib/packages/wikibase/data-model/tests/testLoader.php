@@ -3,11 +3,6 @@
 /**
  * Test class autoloader for the Wikibase DataModel component.
  *
- * @since 0.1
- *
- * @file
- * @ingroup DataModel
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -25,6 +20,6 @@ spl_autoload_register( function ( $className ) {
 	);
 
 	if ( array_key_exists( $className, $testClasses ) ) {
-		include_once __DIR__ . '/phpunit/' . $testClasses[$className];
+		include_once __DIR__ . '/unit/' . $testClasses[$className];
 	}
 } );

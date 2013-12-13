@@ -14,7 +14,7 @@
          verbose="true">
     <testsuites>
         <testsuite name="WikibaseDataModel">
-            <directory>tests/phpunit</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <filter>
