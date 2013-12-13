@@ -46,7 +46,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @since 0.4
 	 */
 	public function register() {
-		$lib = array( 'getEntity' => array( $this, 'getEntity' ), 'getEntityId' => array( $this, 'getEntityId' ), 'getGlobalSiteId' => array( $this, 'getGlobalSiteId' ) );
+		$lib = array(
+			'getEntity' => array( $this, 'getEntity' ),
+			'getEntityId' => array( $this, 'getEntityId' ),
+			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
+		);
+
 		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/mw.wikibase.lua', $lib, array() );
 	}
 
