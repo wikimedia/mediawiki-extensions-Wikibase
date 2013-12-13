@@ -318,6 +318,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_2fb5a3cb",
+        "filename": "repo/tests/phpunit/includes/PropertyViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-13T16:20:23Z",
+      "side": 1,
+      "message": "This design issue is not forced upon the test by the code under test. It is coming from the base test case. I do not have a concrete proposal no, as this would require spending quite a lot more time and effort on this then one can expect in a review. I\u0027m not the one solving this item after all. If you cannot figure out what to do yourself, you can ask if someone else can take on the item. So please do not try to use this as an excuse to not solve the issue.",
+      "parentUuid": "0ee75395_94ccc666",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_a382f5ff",
         "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
         "patchSetId": 2
