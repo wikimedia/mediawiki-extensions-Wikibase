@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ee75395_34a85a89",
+        "filename": "tests/browser/features/delete_item.feature",
+        "patchSetId": 8
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "Please use \"Given I am on an item page\" instead. See also my comment in edit_tab.feature",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f4ad5299",
+        "filename": "tests/browser/features/delete_item.feature",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "You do not need this step. The \"I am on an item page\" already ensures that the item has a label and a description.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b41eaa0f",
+        "filename": "tests/browser/features/edit_tab.feature",
+        "patchSetId": 8
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "This step does not create a new item at all.\nBefore you can go to an item page a new item has to be created. There is already a step which is used by all the other tests:\n\"Given I am on an item page\"\nThis steps creates a new item and sends the browser to it, please consider using this step. Then you can remove the \"Given I am on the item page\" step completely.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b4d46a18",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "This is a general step not specific to the delete-item-feature and can be used by other tests too, so please move this step to entity_steps.rb.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_d4ac8eed",
         "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
         "patchSetId": 8
@@ -19,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_94d16628",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "Please remove this step and use the already existing step \"Given I am on an item page\" instead. See entity_steps.rb.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_b4b58a31",
         "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
         "patchSetId": 8
@@ -30,6 +115,23 @@
       "writtenOn": "2013-12-13T09:40:02Z",
       "side": 1,
       "message": "\"given\" steps are always setup, there should be no checking inside them (\"should\")\n\nThis should probably be something like this:\n\nvisit(ItemPage)",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d4b24ef8",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "You do not need this step. See also my comment in delete_item.feature.",
       "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +172,40 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_b49b4a78",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "I\u0027m getting an \"uninitialized constant DeleteItemPage (NameError)\" error because there is no DeleteItemPage yet. You\u0027ll have to copy the /selenium/lib/pages/delete_item_page.rb file from the old tests. You\u0027ll have to check whether that works without adjustments to that file, in especially in the \"delete_item\" method. Could be that you\u0027ll have to adjust this method to correctly construct the URL to the item-deletion-page.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_549e3e67",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "You don\u0027t need this step when implementing it how I described in my comment above.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_54b87e24",
         "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
         "patchSetId": 8
@@ -81,6 +217,23 @@
       "writtenOn": "2013-12-13T09:40:02Z",
       "side": 1,
       "message": "What are you checking here? That the page does not exist? This will probably not work.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_54c75e67",
+        "filename": "tests/browser/features/step_definitions/edit_tab_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "Please remove this step and use the already existing step \"Given I am on an item page\" instead. See entity_steps.rb.",
       "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +274,23 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_74f382d2",
+        "filename": "tests/browser/features/support/pages/repo_login_page.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "For this to work you also need to copy the login PageObject file, which is /selenium/lib/pages/login_page.rb.\n\nUntil this is done, you\u0027ll get an \"uninitialized constant LoginPage (NameError)\" error when running the tests. Are you running the tests locally for you? Please always do so before committing to catch these errors.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_d4836e55",
         "filename": "tests/browser/features/support/pages/repo_login_page.rb",
         "patchSetId": 8
@@ -132,6 +302,24 @@
       "writtenOn": "2013-12-13T09:40:02Z",
       "side": 1,
       "message": "This should be changed to:\n\npage_url \"#{WIKI_REPO_URL}Special:UserLogin\"",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d4bb6edc",
+        "filename": "tests/browser/features/support/pages/repo_login_page.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-13T11:55:32Z",
+      "side": 1,
+      "message": "the constant for the wikidata url is called WIKIDATA_REPO_URL in the new tests.\nSo please use \npage_url \"#{WIKIDATA_REPO_URL}Special:UserLogin\"\nyou can see the names of the constants in config/config.yml.sample",
+      "parentUuid": "0ee75395_d4836e55",
       "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
