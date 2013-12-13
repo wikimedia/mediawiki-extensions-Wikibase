@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_54dcfee4",
+        "filename": "repo/tests/phpunit/includes/actions/EditEntityActionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:49:18Z",
+      "side": 1,
+      "message": "Please use \"static $hasTitles\" so this only happens once.",
+      "revId": "09f6bd0ee1ad1c6d64efbcf8245b29a460dc2c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
