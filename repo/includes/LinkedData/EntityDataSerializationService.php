@@ -2,10 +2,10 @@
 
 namespace Wikibase\LinkedData;
 
-use \DataTypes\DataTypeFactory;
-use Wikibase\Entity;
+use Wikibase\Api\ResultBuilder;
 use Wikibase\EntityLookup;
-use \Wikibase\Lib\EntityIdFormatter;
+use Wikibase\EntityRevision;
+use Wikibase\EntityTitleLookup;
 use \MWException;
 use \EasyRdf_Format;
 use \Revision;
@@ -17,7 +17,6 @@ use \DerivativeContext;
 use \DerivativeRequest;
 use \RequestContext;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\RdfSerializer;
 
@@ -81,16 +80,6 @@ class EntityDataSerializationService {
 	protected $entityLookup = null;
 
 	/**
-	 * @var DataTypeFactory
-	 */
-	protected $dataTypeFactory = null;
-
-	/**
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter = null;
-
-	/**
 	 * @var null|array Associative array from MIME type to format name
 	 * @note: initialized by initFormats()
 	 */
@@ -103,13 +92,24 @@ class EntityDataSerializationService {
 	protected $fileExtensions = null;
 
 	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $entityTitleLookup;
+
+	/**
+	 * @var SerializerFactory
+	 */
+	protected $serializerFactory;
+
+	/**
 	 * Constructor.
 	 *
-	 * @param string            $rdfBaseURI
-	 * @param string            $rdfDataURI
-	 * @param EntityLookup      $entityLookup
-	 * @param DataTypeFactory   $dataTypeFactory
-	 * @param EntityIdFormatter $idFormatter
+	 * @param string $rdfBaseURI
+	 * @param string $rdfDataURI
+	 * @param EntityLookup $entityLookup
+	 *
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param SerializerFactory $serializerFactory
 	 *
 	 * @since    0.4
 	 */
@@ -117,14 +117,14 @@ class EntityDataSerializationService {
 		$rdfBaseURI,
 		$rdfDataURI,
 		EntityLookup $entityLookup,
-		DataTypeFactory $dataTypeFactory,
-		EntityIdFormatter $idFormatter
+		EntityTitleLookup $entityTitleLookup,
+		SerializerFactory $serializerFactory
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
 		$this->rdfDataURI = $rdfDataURI;
 		$this->entityLookup = $entityLookup;
-		$this->dataTypeFactory = $dataTypeFactory;
-		$this->idFormatter = $idFormatter;
+		$this->entityTitleLookup = $entityTitleLookup;
+		$this->serializerFactory = $serializerFactory;
 	}
 
 	/**
@@ -312,7 +312,7 @@ class EntityDataSerializationService {
 			$this->fileExtensions[ $ext ] = $name;
 		}
 
-		if ( \Wikibase\RdfSerializer::isSupported() ) {
+		if ( RdfSerializer::isSupported() ) {
 			$formats = EasyRdf_Format::getFormats();
 
 			/* @var EasyRdf_Format $format */
@@ -345,13 +345,13 @@ class EntityDataSerializationService {
 	 * Output entity data.
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
-	 * @param Entity $entity The entity
+	 * @param EntityRevision $entityRevision The entity
 	 * @param Revision|null $rev The entity's revision
 	 *
 	 * @return array tuple of ( $data, $contentType )
 	 * @throws MWException if the format is not supported
 	 */
-	public function getSerializedData( $format, Entity $entity, Revision $rev = null ) {
+	public function getSerializedData( $format, EntityRevision $entityRevision ) {
 
 		//TODO: handle IfModifiedSince!
 
@@ -373,10 +373,10 @@ class EntityDataSerializationService {
 		}
 
 		if( $serializer instanceof ApiFormatBase ) {
-			$data = $this->apiSerialize( $entity, $serializer, $rev );
+			$data = $this->apiSerialize( $entityRevision, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
 		} else {
-			$data = $serializer->serializeEntity( $entity, $rev );
+			$data = $serializer->serializeEntityRevision( $entityRevision );
 			$contentType = $serializer->getDefaultMimeType();
 		}
 
@@ -484,7 +484,7 @@ class EntityDataSerializationService {
 	 */
 	public function createRdfSerializer( $format ) {
 		//MediaWiki formats
-		$rdfFormat = \Wikibase\RdfSerializer::getFormat( $format );
+		$rdfFormat = RdfSerializer::getFormat( $format );
 
 		if ( !$rdfFormat ) {
 			return null;
@@ -494,9 +494,7 @@ class EntityDataSerializationService {
 			$rdfFormat,
 			$this->rdfBaseURI,
 			$this->rdfDataURI,
-			$this->entityLookup,
-			$this->dataTypeFactory,
-			$this->idFormatter
+			$this->entityLookup
 		);
 
 		return $serializer;
@@ -508,18 +506,17 @@ class EntityDataSerializationService {
 	 * result, if $printer was generated from that same ApiMain module, as
 	 * createApiPrinter() does.
 	 *
-	 * @param Entity $entity The entity to convert ot an ApiResult
+	 * @param EntityRevision $entityRevision The entity to convert ot an ApiResult
 	 * @param ApiFormatBase $printer The output printer that will be used for serialization.
 	 *   Used to provide context for generating the ApiResult, and may also be manipulated
 	 *   to fine-tune the output.
 	 *
 	 * @return ApiResult
 	 */
-	protected function generateApiResult( Entity $entity, ApiFormatBase $printer ) {
+	protected function generateApiResult( EntityRevision $entityRevision, ApiFormatBase $printer ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityKey = 'entity'; //XXX: perhaps better: $entity->getType();
-		$basePath = array();
 
 		$res = $printer->getResult();
 
@@ -528,6 +525,7 @@ class EntityDataSerializationService {
 		$res->reset();
 
 		if ( $printer->getNeedsRawData() ) {
+			// force raw mode, to trigger indexed tag names
 			$res->setRawMode();
 		}
 
@@ -536,18 +534,11 @@ class EntityDataSerializationService {
 			$printer->setRootElement( $entityKey );
 		}
 
-		$serializerFactory = new SerializerFactory();
-		$serializationOptions = new SerializationOptions();
-		$serializationOptions->setIndexTags( $res->getIsRawMode() );
-		$serializationOptions->setOption( EntitySerializer::OPT_PARTS,  $this->fieldsToShow );
-		$serializer =$serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		//TODO: apply language filter/Fallback via options!
+		$options = new SerializationOptions();
 
-		$arr = $serializer->getSerialized( $entity );
-
-		// we want the entity to *be* the result, not *in* the result
-		foreach ( $arr as $key => $value ) {
-			$res->addValue( $basePath, $key, $value );
-		}
+		$resultBuilder = new ResultBuilder( $res, $this->entityTitleLookup, $this->serializerFactory );
+		$resultBuilder->addEntityRevision( $entityRevision, $options );
 
 		wfProfileOut( __METHOD__ );
 		return $res;
@@ -560,34 +551,24 @@ class EntityDataSerializationService {
 	 * representation of data entities. Using the ContentHandler to serialize the entity would
 	 * expose internal implementation details.
 	 *
-	 * @param Entity $entity the entity to output.
+	 * @param EntityRevision $entityRevision the entity to output.
 	 * @param ApiFormatBase $printer the printer to use to generate the output
-	 * @param Revision $revision the entity's revision (optional)
 	 *
 	 * @return string the serialized data
 	 */
-	public function apiSerialize( Entity $entity, ApiFormatBase $printer, Revision $revision = null ) {
+	public function apiSerialize( EntityRevision $entityRevision, ApiFormatBase $printer ) {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat
 		//       counter-intuitive. Basically, the relevant ApiResult object
 		//       is owned by the ApiMain module provided by newApiMain().
 
 		// Pushes $entity into the ApiResult held by the ApiMain module
-		$res = $this->generateApiResult( $entity, $printer );
-
-
-		//XXX: really inject meta-info? where else should we put it?
-		$basePath = array();
-
-		if ( $revision ) {
-			$res->addValue( $basePath , '_revision_', intval( $revision->getId() ) );
-			$res->addValue( $basePath , '_modified_', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
-		}
+		$this->generateApiResult( $entityRevision, $printer );
 
 		$printer->profileIn();
 		$printer->initPrinter( false );
 		$printer->setBufferResult( true );
 
-		// Outputs the ApiResult held by the ApiMain module, which is hopefully the same as $res
+		// Outputs the ApiResult held by the ApiMain module, which is hopefully the one we added the entity data to.
 		//NOTE: this can and will mess with the HTTP response!
 		$printer->execute();
 		$data = $printer->getBuffer();

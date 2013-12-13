@@ -3,10 +3,21 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
+use FauxResponse;
 use HttpError;
 use OutputPage;
+use SpecialPage;
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\LinkedData\EntityDataRequestHandler;
+use Wikibase\LinkedData\EntityDataSerializationService;
+use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
 
 /**
@@ -25,6 +36,9 @@ use Wikibase\Repo\Specials\SpecialEntityData;
  * @author Daniel Kinzler
  */
 class SpecialEntityDataTest extends SpecialPageTestBase {
+
+	const URI_BASE = 'http://acme.test/';
+	const URI_DATA = 'http://data.acme.test/';
 
 	protected function saveItem( Item $item ) {
 		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
@@ -49,8 +63,78 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
 		$page = new SpecialEntityData();
+
+		// why is this needed?
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
+
+		$page->setRequestHandler( $this->newRequestHandler() );
+
 		return $page;
+	}
+
+	protected function newRequestHandler() {
+		$mockRepo = EntityDataTestProvider::getMockRepo();
+
+		$entityRevisionLookup = $mockRepo;
+
+		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
+		$idParser = new EntityIdParser();
+
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		$serializationOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory(
+			$serializationOptions,
+			$dataTypeLookup,
+			EntityFactory::singleton()
+		);
+
+		$serializationService = new EntityDataSerializationService(
+			self::URI_BASE,
+			self::URI_DATA,
+			$mockRepo,
+			$titleLookup,
+			$serializerFactory
+		);
+
+		$maxAge = 60*60;
+		$formats = array( 'json', 'xml', 'rdf', 'n3' );
+		$serializationService->setFormatWhiteList( $formats );
+
+		$defaultFormat = 'rdf';
+		$supportedExtensions = array_combine( $formats, $formats );
+
+		$title = SpecialPage::getTitleFor( 'EntityData' );
+
+		$uriManager = new EntityDataUriManager(
+			$title,
+			$supportedExtensions,
+			$titleLookup
+		);
+
+		$useSquid = false;
+		$apiFrameOptions = 'DENY';
+
+		return new EntityDataRequestHandler(
+			$uriManager,
+			$titleLookup,
+			$idParser,
+			$entityRevisionLookup,
+			$serializationService,
+			$defaultFormat,
+			$maxAge,
+			$useSquid,
+			$apiFrameOptions
+		);
 	}
 
 	public static function provideExecute() {
@@ -80,14 +164,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
 	public function testExecute( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
-		$item = $this->getTestItem();
-
-		EntityDataRequestHandlerTest::injectIds( $subpage, $item );
-		EntityDataRequestHandlerTest::injectIds( $params, $item );
-		EntityDataRequestHandlerTest::injectIds( $headers, $item );
-		EntityDataRequestHandlerTest::injectIds( $expRegExp, $item );
-		EntityDataRequestHandlerTest::injectIds( $expHeaders, $item );
-
 		$request = new FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 

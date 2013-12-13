@@ -2,26 +2,20 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataTypeFactory;
 use DerivativeContext;
 use FauxRequest;
+use FauxResponse;
 use HttpError;
 use OutputPage;
 use RequestContext;
 use Title;
-use ValueFormatters\FormatterOptions;
-use ValueParsers\ParserOptions;
-use Wikibase\Entity;
-use Wikibase\EntityContentFactory;
-use Wikibase\Item;
-use Wikibase\ItemContent;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
-use Wikibase\Property;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\LinkedData\EntityDataRequestHandler
@@ -43,7 +37,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected $interfaceTitle;
 
-	protected $obLevel;
+	/**
+	 * @var int
+	 */
+	private $obLevel;
 
 	public function setUp() {
 		parent::setUp();
@@ -67,47 +64,35 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		parent::tearDown();
 	}
 
-	protected function saveItem( Item $item ) {
-		$content = ItemContent::newFromItem( $item );
-		$content->save( "testing", null, EDIT_NEW );
-	}
-
-	public function getTestItem() {
-		static $item;
-
-		if ( $item === null ) {
-			$item = Item::newEmpty();
-			$item->setLabel( 'en', 'Raarrr' );
-			$this->saveItem( $item );
-		}
-
-		return $item;
-	}
-
 	/**
 	 * @return EntityDataRequestHandler
 	 */
 	protected function newHandler() {
-		$entityLookup = new MockRepository();
-		$dataTypeFactory = new DataTypeFactory( EntityDataSerializationServiceTest::$dataTypes );
+		$entityLookup = EntityDataTestProvider::getMockRepo();
 
-		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
-		$idParser = new EntityIdParser( new ParserOptions() );
+		$idParser = new EntityIdParser();
 
-		$contentFactory = new EntityContentFactory(
-			$idFormatter,
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				CONTENT_MODEL_WIKIBASE_PROPERTY
-			)
-		);
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
+		$serializerOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
 
 		$service = new EntityDataSerializationService(
 			EntityDataSerializationServiceTest::URI_BASE,
 			EntityDataSerializationServiceTest::URI_DATA,
 			$entityLookup,
-			$dataTypeFactory,
-			$idFormatter
+			$titleLookup,
+			$serializerFactory
 		);
 
 		$service->setFormatWhiteList(
@@ -141,51 +126,22 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$uriManager = new EntityDataUriManager(
 			$this->interfaceTitle,
 			$extensions,
-			$idFormatter,
-			$contentFactory
+			$titleLookup
 		);
 
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
-			$contentFactory,
+			$titleLookup,
 			$idParser,
-			$idFormatter,
+			$entityLookup,
 			$service,
 			'json',
 			1800,
 			false,
 			null
 		);
+
 		return $handler;
-	}
-
-	/**
-	 * Substitutes placeholders using the concrete values from the given entity.
-	 * Known placeholders are:
-	 *
-	 *  {testitemid}, {lowertestitemid}, {testitemrev}, {testitemtimestamp}
-	 *
-	 * @param mixed $data The data in which to substitude placeholders.
-	 *        If this is an erray, injectIds is called on all elements recursively.
-	 * @param Entity $entity
-	 *
-	 * @todo: use EntityRevision once we have that
-	 */
-	public static function injectIds( &$data, Entity $entity ) {
-		if ( is_array( $data ) ) {
-			foreach ( $data as $k => &$v ) {
-				self::injectIds( $v, $entity );
-			}
-		} else if ( is_string( $data ) ) {
-			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
-			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
-
-			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-			$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
-
-			$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
-			$data = str_replace( '{testitemtimestamp}', $ts, $data );
-		}
 	}
 
 	/**
@@ -204,9 +160,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 
 		// construct Context and OutputPage
-		/* @var FauxResponse $response */
-		$response = $request->response();
-
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 
@@ -232,17 +185,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
 	public function testHandleRequest( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
-		$item = $this->getTestItem();
-
-		// inject actual ID of test items
-		self::injectIds( $subpage, $item );
-		self::injectIds( $params, $item );
-		self::injectIds( $headers, $item );
-		self::injectIds( $expRegExp, $item );
-		self::injectIds( $expHeaders, $item );
-
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();
+
+		/* @var FauxResponse $response */
 		$response = $request->response();
 
 		// construct handler

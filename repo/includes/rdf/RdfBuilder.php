@@ -3,12 +3,9 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
-use EasyRdf_Format;
 use EasyRdf_Graph;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
-use Revision;
-use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * RDF mapping for wikibase data model.
@@ -59,14 +56,13 @@ class RdfBuilder {
 	protected $entitiesResolved = array();
 
 	/**
-	 * @param string                $baseUri
-	 * @param Lib\EntityIdFormatter $idFormatter
-	 * @param EasyRdf_Graph|null    $graph
+	 * @param string $baseUri
+	 * @param string $dataUri
+	 * @param EasyRdf_Graph|null $graph
 	 */
 	public function __construct(
 		$baseUri,
 		$dataUri,
-		EntityIdFormatter $idFormatter,
 		EasyRdf_Graph $graph = null
 	) {
 		if ( !$graph ) {
@@ -76,7 +72,6 @@ class RdfBuilder {
 		$this->graph = $graph;
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
-		$this->idFormatter = $idFormatter;
 
 		$this->namespaces = array(
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI,
@@ -135,7 +130,7 @@ class RdfBuilder {
 	 * @return string
 	 */
 	public function getEntityQName( $prefix, EntityId $id ) {
-		return $prefix . ':' . ucfirst( $this->idFormatter->format( $id ) );
+		return $prefix . ':' . ucfirst( $id->getSerialization() );
 	}
 
 	/**
@@ -186,7 +181,7 @@ class RdfBuilder {
 	 */
 	public function getDataURL( EntityId $id ) {
 		$base = $this->namespaces[ self::NS_DATA ];
-		$url = $base . ucfirst( $this->idFormatter->format( $id ) );
+		$url = $base . ucfirst( $id->getSerialization() );
 		return $url;
 	}
 
@@ -208,7 +203,7 @@ class RdfBuilder {
 	 * @param EntityId $id
 	 */
 	protected function entityMentioned( EntityId $id ) {
-		$prefixedId = $this->idFormatter->format( $id );
+		$prefixedId = $id->getSerialization();
 
 		if ( !isset( $this->entitiesResolved[$prefixedId] ) ) {
 			$this->entitiesResolved[$prefixedId] = false;
@@ -221,35 +216,44 @@ class RdfBuilder {
 	 * @param EntityId $id
 	 */
 	protected function entityResolved( EntityId $id ) {
-		$prefixedId = $this->idFormatter->format( $id );
+		$prefixedId = $id->getSerialization();
 		$this->entitiesResolved[$prefixedId] = true;
+	}
+
+	/**
+	 * Adds revision information about an entity's revision to the RDF graph.
+	 *
+	 * @param EntityId $entityId
+	 * @param int $revision
+	 * @param string $timestamp in TS_MW format
+	 */
+	public function addEntityRevisionInfo( EntityId $entityId, $revision, $timestamp ) {
+		$dataURL = $this->getDataURL( $entityId );
+		$dataResource = $this->graph->resource( $dataURL );
+
+		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
+		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', new \EasyRdf_Literal( $revision, null, 'xsd:integer' ) );
+		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', new \EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' ) );
+		//TODO: versioned data URI, current-version-of
 	}
 
 	/**
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @param Entity         $entity
-	 * @param \Revision|null $rev
 	 */
-	public function addEntityMetaData( Entity $entity, Revision $rev = null ) {
+	public function addEntityMetaData( Entity $entity ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
 		$dataURL = $this->getDataURL( $entity->getId() );
 
-		$dataResource = $this->graph->resource( $dataURL ); // "this document"
+		$dataResource = $this->graph->resource( $dataURL );
 		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
 		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
 		// TODO: make the license settable
 		$dataResource->addResource( self::NS_CC . ':license', 'http://creativecommons.org/publicdomain/zero/1.0/' );
 
-		if ( $rev ) {
-			$timestamp = wfTimestamp( TS_ISO_8601, $rev->getTimestamp() );
-			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', new \EasyRdf_Literal( $rev->getId(), null, 'xsd:integer' ) );
-			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', new \EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' ) );
-			//TODO: add support for property date types to RDF output
-		}
-
-		//TODO: revision timestamp, revision id, versioned data URI, current-version-of
+		//TODO: add support for property date types to RDF output
 
 		$this->entityResolved( $entity->getId() );
 	}
@@ -469,11 +473,9 @@ class RdfBuilder {
 	 * of the entity.
 	 *
 	 * @param Entity $entity the entity to output.
-	 * @param \Revision $revision for meta data (optional)
 	 */
-	public function addEntity( Entity $entity, \Revision $revision = null ) {
-		$this->addEntityMetaData( $entity, $revision );
-
+	public function addEntity( Entity $entity ) {
+		$this->addEntityMetaData( $entity );
 		$this->addLabels( $entity );
 		$this->addDescriptions( $entity );
 		$this->addAliases( $entity );

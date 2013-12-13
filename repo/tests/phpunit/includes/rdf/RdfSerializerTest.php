@@ -3,14 +3,10 @@
 namespace Wikibase\Test;
 
 use DataTypes\DataTypeFactory;
-use EasyRdf_Namespace;
-use MediaWikiSite;
-use Revision;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
-use Wikibase\Item;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Property;
 use Wikibase\RdfSerializer;
 
 /**
@@ -37,36 +33,26 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		'turtle',
 	);
 
-	protected static $dataTypes = array(
-		'commonsMedia' => array(
-			'datavalue' => 'string',
-		),
-		'string' => array(
-			'datavalue' => 'string',
-		),
-		'globe-coordinate' => array(
-			'datavalue' => 'globecoordinate',
-		),
-		'quantity' => array(
-			'datavalue' => 'quantity',
-		),
-		'monolingual-text' => array(
-			'datavalue' => 'monolingualtext',
-		),
-		'multilingual-text' => array(
-			'datavalue' => 'multilingualtext',
-		),
-		'time' => array(
-			'datavalue' => 'time',
-		),
-	);
-
 	public function setUp() {
 		parent::setUp();
 
 		if ( !RdfSerializer::isSupported() ) {
 			$this->markTestSkipped( "RDF library not found" );
 		}
+	}
+
+	/**
+	 * @return EntityRevision[]
+	 */
+	protected static function getTestEntityRevisions() {
+		$entities = self::getTestEntities();
+		$revisions = array();
+
+		foreach ( $entities as $name => $entity ) {
+			$revisions[$name] = new EntityRevision( $entity, 23, '20130101000000' );
+		}
+
+		return $revisions;
 	}
 
 	/**
@@ -128,8 +114,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	protected static function newRdfSerializer( $formatName ) {
 		$format = RdfSerializer::getFormat( $formatName );
 
-		$dataTypes = new DataTypeFactory( self::$dataTypes );
-		$idSerializer = new EntityIdFormatter( new FormatterOptions() );
 
 		$mockRepo = new MockRepository();
 
@@ -141,9 +125,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			$format,
 			RdfBuilderTest::URI_BASE,
 			RdfBuilderTest::URI_DATA,
-			$mockRepo,
-			$dataTypes,
-			$idSerializer
+			$mockRepo
 		);
 	}
 
@@ -165,24 +147,16 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$this->assertNotNull( $format, $name );
 	}
 
-	public function provideBuildGraphForEntity() {
-		$entities = self::getTestEntities();
+	public function provideBuildGraphForEntityRevision() {
+		$entityRevs = self::getTestEntityRevisions();
 		$graphs = self::getTestGraphs();
-
-		$revision = $this->getMockBuilder( '\Revision' )
-			->disableOriginalConstructor()->getMock();
-		$revision->expects( $this->any() )->method( 'getId' )
-			->will( $this->returnValue( 23 ) );
-		$revision->expects( $this->any() )->method( 'getTimestamp' )
-			->will( $this->returnValue( '20130101000000' ) );
 
 		$cases = array();
 
-		foreach ( $entities as $name => $entity ) {
+		foreach ( $entityRevs as $name => $entityRev ) {
 			if ( array_key_exists( $name, $graphs ) ) {
 				$cases[$name] = array(
-					$entity,
-					$revision,
+					$entityRev,
 					$graphs[$name],
 				);
 			}
@@ -197,13 +171,12 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideBuildGraphForEntity
+	 * @dataProvider provideBuildGraphForEntityRevision
 	 */
-	public function testBuildGraphForEntity( Entity $entity, Revision $revision, \EasyRdf_Graph $expectedGraph ) {
+	public function testBuildGraphForEntityRevision( EntityRevision $entityRevision, \EasyRdf_Graph $expectedGraph ) {
 		$serializer = self::newRdfSerializer( 'rdf' );
 
-		$graph = $serializer->buildGraphForEntity( $entity, $revision );
-		//TODO: meta-info from Revision
+		$graph = $serializer->buildGraphForEntityRevision( $entityRevision );
 
 		foreach ( $expectedGraph->resources() as $rc ) {
 			foreach ( $expectedGraph->properties( $rc ) as $prop ) {
@@ -257,25 +230,17 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function provideSerializeEntity() {
-		$entities = self::getTestEntities();
+	public function provideSerializeEntityRevision() {
+		$entityRevs = self::getTestEntityRevisions();
 		$patterns = self::getTestDataPatterns();
-
-		$revision = $this->getMockBuilder( '\Revision' )
-			->disableOriginalConstructor()->getMock();
-		$revision->expects( $this->any() )->method( 'getId' )
-			->will( $this->returnValue( 23 ) );
-		$revision->expects( $this->any() )->method( 'getTimestamp' )
-			->will( $this->returnValue( '20130101000000' ) );
 
 		$cases = array();
 
-		foreach ( $entities as $name => $entity ) {
+		foreach ( $entityRevs as $name => $entityRev ) {
 			foreach ( self::$formats as $format ) {
 				if ( isset( $patterns[$name][$format] ) ) {
 					$cases["$name/$format"] = array(
-						$entity,
-						$revision,
+						$entityRev,
 						$format,
 						$patterns[$name][$format],
 					);
@@ -287,12 +252,12 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideSerializeEntity
+	 * @dataProvider provideSerializeEntityRevision
 	 */
-	public function testSerializeEntity( Entity $entity, Revision $revision, $format, $regexes ) {
+	public function testSerializeEntityRevision( EntityRevision $entityRevision, $format, $regexes ) {
 		$serializer = self::newRdfSerializer( $format );
 
-		$data = $serializer->serializeEntity( $entity, $revision );
+		$data = $serializer->serializeEntityRevision( $entityRevision );
 
 		foreach ( $regexes as $regex ) {
 			$this->assertRegExp( $regex, $data );

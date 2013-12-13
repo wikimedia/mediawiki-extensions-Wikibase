@@ -3,6 +3,9 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
+use Wikibase\EntityFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;
@@ -29,7 +32,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	/**
 	 * @var EntityDataRequestHandler
 	 */
-	protected $requestHandler;
+	protected $requestHandler = null;
 
 	/**
 	 * Constructor.
@@ -41,30 +44,62 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Initialize members from global context.
-	 * This is poor man's inverse dependency injection.
+	 * Sets the request handler to be used by the special page.
+	 * May be used when a particular instance of EntityDataRequestHandler is already
+	 * known, e.g. during testing.
+	 *
+	 * If no request handler is set using this method, a default handler is created
+	 * on demand by initDependencies().
+	 *
+	 * @param EntityDataRequestHandler $requestHandler
+	 */
+	public function setRequestHandler( EntityDataRequestHandler $requestHandler ) {
+		$this->requestHandler = $requestHandler;
+	}
+
+	/**
+	 * Initialize any un-initialized members from global context.
+	 * In particular, this initializes $this->requestHandler
+	 *
+	 * This is called by
 	 */
 	protected function initDependencies() {
+		if ( $this->requestHandler === null ) {
+			$this->requestHandler = $this->newDefaultRequestHandler();
+		}
+	}
+
+	/**
+	 * Creates a EntityDataRequestHandler based on global defaults.
+	 *
+	 * @return EntityDataRequestHandler
+	 */
+	private function newDefaultRequestHandler() {
 		global $wgUseSquid, $wgApiFrameOptions;
 
-		// Initialize serialization service.
-		// TODO: use reverse DI facility (global registry/factory)
 		$repo = WikibaseRepo::getDefaultInstance();
 
-		$entityContentFactory = $repo->getEntityContentFactory();
+		$entityRevisionLookup = $repo->getEntityRevisionLookup();
+		$titleLookup = $repo->getEntityTitleLookup();
 		$entityIdParser = $repo->getEntityIdParser();
-		$entityIdFormatter = $repo->getIdFormatter();
+
+		$serializationOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory(
+			$serializationOptions,
+			$repo->getPropertyDataTypeLookup(),
+			EntityFactory::singleton()
+		);
 
 		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
 			$this->getTitle()->getCanonicalURL() . '/',
-			\Wikibase\StoreFactory::getStore()->getEntityLookup(),
-			$repo->getDataTypeFactory(),
-			$entityIdFormatter
+			$repo->getStore()->getEntityLookup(),
+			$titleLookup,
+			$serializerFactory
 		);
 
-		$maxAge = Settings::get( 'dataSquidMaxage' );
-		$formats = Settings::get( 'entityDataFormats' );
+		$maxAge = $repo->getSettings()->getSetting( 'dataSquidMaxage' );
+		$formats = $repo->getSettings()->getSetting( 'entityDataFormats' );
 		$serializationService->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
@@ -83,15 +118,14 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$uriManager = new EntityDataUriManager(
 			$this->getTitle(),
 			$supportedExtensions,
-			$entityIdFormatter,
-			$entityContentFactory
+			$titleLookup
 		);
-		
-		$this->requestHandler = new EntityDataRequestHandler(
+
+		return new EntityDataRequestHandler(
 			$uriManager,
-			$entityContentFactory,
+			$titleLookup,
 			$entityIdParser,
-			$entityIdFormatter,
+			$entityRevisionLookup,
 			$serializationService,
 			$defaultFormat,
 			$maxAge,
