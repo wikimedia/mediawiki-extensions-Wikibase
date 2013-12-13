@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_d4ac8eed",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "This could be simplified like this:\n\nvisit(RepoLoginPage).login_with(ENV[\"WB_REPO_USERNAME\"], ENV[\"WB_REPO_PASSWORD\"])",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b4b58a31",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "\"given\" steps are always setup, there should be no checking inside them (\"should\")\n\nThis should probably be something like this:\n\nvisit(ItemPage)",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_94b28645",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "See above comment about \"should\" in \"given\" step.\n\nAlso, this step should probably enter something in descriptionInputField, something like this:\n\non(ItemPage).descriptionInputField \u003d \"something\"",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_74bb8223",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "This step says it will click a button, but instead it visits a page. It should probably be something like this:\n\non(ItemPage).delete_element.click",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_54b87e24",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "What are you checking here? That the page does not exist? This will probably not work.",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_34897a7a",
+        "filename": "tests/browser/features/step_definitions/edit_tab_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "This should probably be something like:\n\nvisit(ItemPage)",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_148e7682",
+        "filename": "tests/browser/features/step_definitions/edit_tab_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "The above three lines should be simplified:\n\non(ItemPage).editTab?.should be_false",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d4836e55",
+        "filename": "tests/browser/features/support/pages/repo_login_page.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-13T09:40:02Z",
+      "side": 1,
+      "message": "This should be changed to:\n\npage_url \"#{WIKI_REPO_URL}Special:UserLogin\"",
+      "revId": "27a0436be1d36fc3d79518ec331d468907b6e1c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
