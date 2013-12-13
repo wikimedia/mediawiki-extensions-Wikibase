@@ -1,7 +1,10 @@
 <?php
 
+use ValueFormatters\FormatterOptions;
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -28,10 +31,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
 		global $wgContLang;
 		$language = $wgContLang;
+		$formatterOptions = new FormatterOptions( array( "language" => $language ) );
 		$this->wbLibrary = new Scribunto_LuaWikibaseLibraryImplementation(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(), // EntityIdParser
 			WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup(), // EntityLookup
 			WikibaseClient::getDefaultInstance()->getEntityIdFormatter(), // EntityIdFormatter
+			WikibaseClient::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ), // SnakFormatter
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(), // SiteLinkLookup
 			$language, // language
 			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' ) // siteId
@@ -48,7 +53,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$lib = array(
 			'getEntity' => array( $this, 'getEntity' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
-			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
+			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' ),
+			'renderForEntityId' => array( $this, 'renderForEntityId' )
 		);
 		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/mw.wikibase.lua', $lib, array() );
 	}
@@ -91,6 +97,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->wbLibrary->getEntityId( $pageTitle );
 	}
 
+	/**
+	 * Wrapper for renderForEntityId in Scribunto_LuaWikibaseLibraryImplementation
+	 *
+	 * @since 0.5
+	 *
+	 */
+	public function renderForEntityId( $entityId, $propertyId ) {
+		return $this->wbLibrary->renderForEntityId( $entityId, $propertyId );
+	}
 	/**
 	 * Wrapper for getGlobalSiteId in Scribunto_LuaWikibaseLibraryImplementation
 	 *
