@@ -8,6 +8,7 @@ use Wikibase\NamespaceUtils;
 use Wikibase\SiteLink;
 use WikiPage;
 use Title;
+use TestSites;
 
 /**
  * @covers EditEntityAction
@@ -41,6 +42,7 @@ class EditEntityActionTest extends ActionTestCase {
 			$user = User::newFromId( 0 );
 			$user->setName( '127.0.0.1' );
 		}
+		TestSites::insertIntoDb();
 
 		$this->setMwGlobals( 'wgUser', $user );
 	}
