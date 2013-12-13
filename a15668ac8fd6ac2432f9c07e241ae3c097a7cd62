@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_94ea86d4",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-13T11:25:33Z",
+      "side": 1,
+      "message": "don\u0027t think the term box stuff belongs mixed together in this class.  it should use the expansion yes",
+      "revId": "a15668ac8fd6ac2432f9c07e241ae3c097a7cd62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_34c17a59",
+        "filename": "repo/tests/phpunit/includes/view/SectionEditLinkGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-13T11:25:33Z",
+      "side": 1,
+      "message": "please put a blank line between namespace and use",
+      "revId": "a15668ac8fd6ac2432f9c07e241ae3c097a7cd62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_54f07ec3",
+        "filename": "repo/tests/phpunit/includes/view/SectionEditLinkGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-13T11:25:33Z",
+      "side": 1,
+      "message": "ahem :)",
+      "revId": "a15668ac8fd6ac2432f9c07e241ae3c097a7cd62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
