@@ -3,11 +3,10 @@
 namespace Wikibase\Test;
 
 use Scribunto_LuaWikibaseLibraryImplementation;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use \Language;
-use \Site;
-use \Wikibase\DirectSqlStore;
-use \MediaWikiSite;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Scribunto_LuaWikibaseLibraryImplementation
@@ -26,13 +25,15 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 	public function getWikibaseLibraryImplementation() {
 		$entityLookup = new MockRepository();
 		$language = new Language( "en" );
-		$siteLinkLookup = $siteLinkLookup = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
+		$siteLinkLookup = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
 			->disableOriginalConstructor()
 			->getMock();
+		$formatterOptions = new FormatterOptions();
 		return new Scribunto_LuaWikibaseLibraryImplementation(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(), // EntityIdParser
 			$entityLookup,
 			WikibaseClient::getDefaultInstance()->getEntityIdFormatter(), // EntityIdFormatter
+			WikibaseClient::getDefaultInstance()->getSnakFormatterFactory()->getSnakFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			$siteLinkLookup, // SiteLinkLookup
 			$language, // language
 			"enwiki" // siteId
@@ -61,5 +62,19 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 
 	public function provideTitle() {
 		return array( array( 'Gold' ), array( 'Silver' ) );
+	}
+
+	/**
+	 * @dataProvider provideEntityIdAndPropertyId
+	 */
+	public function testRenderForEntityId ( $entityId, $propertyId ) {
+		$status = $this->getWikibaseLibraryImplementation()->renderForEntityId( $entityId, $propertyId );
+		$this->assertTrue( $status->isOK() );
+		$text = $status->getValue();
+		$this->assertInternalType( 'string', $text );
+	}
+
+	public function provideEntityIdAndPropertyId () {
+		return array( array( 'q42', 'p15' ), array( 'q23', 'p17' ) );
 	}
 }
