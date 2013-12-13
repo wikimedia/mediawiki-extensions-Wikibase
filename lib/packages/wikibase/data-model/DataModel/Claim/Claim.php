@@ -1,8 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Claim;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Snak\SnakObject;
+use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Class that represents a single Wikibase claim.

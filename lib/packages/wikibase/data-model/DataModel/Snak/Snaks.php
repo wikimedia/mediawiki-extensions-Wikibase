@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Snak;
 
 /**
  * List of Snak objects.

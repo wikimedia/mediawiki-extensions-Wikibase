@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
-use Wikibase\Item;
 
 /**
  * @since 0.5

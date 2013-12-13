@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Claim;
 
 use ArrayObject;
 use Diff\Diff;
@@ -11,7 +11,9 @@ use Diff\DiffOpRemove;
 use Diff\MapDiffer;
 use Hashable;
 use InvalidArgumentException;
+use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak;
 
 /**
  * Implementation of the Claims interface.

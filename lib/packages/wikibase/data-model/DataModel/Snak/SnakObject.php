@@ -1,11 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Snak;
 
 use DataValues\IllegalValueException;
 use DataValues\UnDeserializableValue;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**

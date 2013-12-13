@@ -9,16 +9,16 @@ namespace Tests\Wikibase\DataModel;
 class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider oldClassNameProvider
+	 * @dataProvider oldNameProvider
 	 */
-	public function testClassExists( $className ) {
+	public function testAliasExists( $className ) {
 		$this->assertTrue(
-			class_exists( $className ),
+			class_exists( $className ) || interface_exists( $className ),
 			'Class name "' . $className . '" should still exist as alias'
 		);
 	}
 
-	public function oldClassNameProvider() {
+	public function oldNameProvider() {
 		return array_map(
 			function( $className ) {
 				return array( $className );
@@ -29,6 +29,36 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 				'Wikibase\ReferenceObject',
 				'Wikibase\StatementObject',
 				'Wikibase\ClaimObject',
+
+				'Wikibase\Reference',
+				'Wikibase\ReferenceList',
+				'Wikibase\References',
+				'Wikibase\HashableObjectStorage',
+				'Wikibase\HashArray',
+				'Wikibase\MapHasher',
+				'Wikibase\MapValueHasher',
+				'Wikibase\ByPropertyIdArray',
+				'Wikibase\Claim',
+				'Wikibase\ClaimAggregate',
+				'Wikibase\ClaimListAccess',
+				'Wikibase\Claims',
+				'Wikibase\Statement',
+				'Wikibase\Entity',
+				'Wikibase\Item',
+				'Wikibase\Property',
+				'Wikibase\PropertyNoValueSnak',
+				'Wikibase\PropertySnak',
+				'Wikibase\PropertySomeValueSnak',
+				'Wikibase\PropertyValueSnak',
+				'Wikibase\Snak',
+				'Wikibase\SnakList',
+				'Wikibase\SnakObject',
+				'Wikibase\SnakRole',
+				'Wikibase\Snaks',
+				'Wikibase\ItemDiff',
+				'Wikibase\EntityDiff',
+
+				'Wikibase\DataModel\SimpleSiteLink',
 			)
 		);
 

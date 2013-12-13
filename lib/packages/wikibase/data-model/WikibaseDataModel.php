@@ -14,14 +14,6 @@ if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 
 define( 'WIKIBASE_DATAMODEL_VERSION', '0.6 alpha'  );
 
-// Aliasing of classes that got renamed.
-// For more details, see Aliases.php.
-class_alias( 'Wikibase\Item', 'Wikibase\ItemObject' );
-class_alias( 'Wikibase\Reference', 'Wikibase\ReferenceObject' );
-class_alias( 'Wikibase\Claim', 'Wikibase\ClaimObject' );
-class_alias( 'Wikibase\Statement', 'Wikibase\StatementObject' );
-class_alias( 'Wikibase\DataModel\Entity\EntityId', 'Wikibase\EntityId' );
-
 // Temporary global to migrate away from DataValueFactory::singleton.
 // It should not be used outside this component and should not be used
 // for any code that did not before use DataValueFactory::singleton.
@@ -38,3 +30,41 @@ if ( defined( 'MEDIAWIKI' ) ) {
 		require_once __DIR__ . '/WikibaseDataModel.mw.php';
 	} );
 }
+
+// Aliasing of classes that got renamed.
+// For more details, see Aliases.php.
+class_alias( 'Wikibase\DataModel\Entity\Item', 'Wikibase\ItemObject' );
+class_alias( 'Wikibase\DataModel\Reference', 'Wikibase\ReferenceObject' );
+class_alias( 'Wikibase\DataModel\Claim\Claim', 'Wikibase\ClaimObject' );
+class_alias( 'Wikibase\DataModel\Claim\Statement', 'Wikibase\StatementObject' );
+class_alias( 'Wikibase\DataModel\Entity\EntityId', 'Wikibase\EntityId' );
+
+// Aliases introduced in 0.6
+class_alias( 'Wikibase\DataModel\Reference', 'Wikibase\Reference' );
+class_alias( 'Wikibase\DataModel\References', 'Wikibase\References' );
+class_alias( 'Wikibase\DataModel\ReferenceList', 'Wikibase\ReferenceList' );
+class_alias( 'Wikibase\DataModel\HashableObjectStorage', 'Wikibase\HashableObjectStorage' );
+class_alias( 'Wikibase\DataModel\HashArray', 'Wikibase\HashArray' );
+class_alias( 'Wikibase\DataModel\MapHasher', 'Wikibase\MapHasher' );
+class_alias( 'Wikibase\DataModel\MapValueHasher', 'Wikibase\MapValueHasher' );
+class_alias( 'Wikibase\DataModel\ByPropertyIdArray', 'Wikibase\ByPropertyIdArray' );
+class_alias( 'Wikibase\DataModel\Claim\Claim', 'Wikibase\Claim' );
+class_alias( 'Wikibase\DataModel\Claim\ClaimAggregate', 'Wikibase\ClaimAggregate' );
+class_alias( 'Wikibase\DataModel\Claim\ClaimListAccess', 'Wikibase\ClaimListAccess' );
+class_alias( 'Wikibase\DataModel\Claim\Claims', 'Wikibase\Claims' );
+class_alias( 'Wikibase\DataModel\Claim\Statement', 'Wikibase\Statement' );
+class_alias( 'Wikibase\DataModel\Entity\Entity', 'Wikibase\Entity' );
+class_alias( 'Wikibase\DataModel\Entity\Item', 'Wikibase\Item' );
+class_alias( 'Wikibase\DataModel\Entity\Property', 'Wikibase\Property' );
+class_alias( 'Wikibase\DataModel\Snak\PropertyNoValueSnak', 'Wikibase\PropertyNoValueSnak' );
+class_alias( 'Wikibase\DataModel\Snak\PropertySnak', 'Wikibase\PropertySnak' );
+class_alias( 'Wikibase\DataModel\Snak\PropertySomeValueSnak', 'Wikibase\PropertySomeValueSnak' );
+class_alias( 'Wikibase\DataModel\Snak\PropertyValueSnak', 'Wikibase\PropertyValueSnak' );
+class_alias( 'Wikibase\DataModel\Snak\Snak', 'Wikibase\Snak' );
+class_alias( 'Wikibase\DataModel\Snak\SnakList', 'Wikibase\SnakList' );
+class_alias( 'Wikibase\DataModel\Snak\SnakObject', 'Wikibase\SnakObject' );
+class_alias( 'Wikibase\DataModel\Snak\SnakRole', 'Wikibase\SnakRole' );
+class_alias( 'Wikibase\DataModel\Snak\Snaks', 'Wikibase\Snaks' );
+class_alias( 'Wikibase\DataModel\Entity\ItemDiff', 'Wikibase\ItemDiff' );
+class_alias( 'Wikibase\DataModel\Entity\EntityDiff', 'Wikibase\EntityDiff' );
+class_alias( 'Wikibase\DataModel\SiteLink', 'Wikibase\DataModel\SimpleSiteLink' );
