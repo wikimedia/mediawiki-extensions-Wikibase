@@ -90,7 +90,8 @@ function wikibase.setupInterface()
 		properties = p
 		p = {}
 		for i, v in pairs( properties ) do
-			p[v] = { ["label"] = wikibase.label( v ) }
+			formattedProperty = php.renderForEntityId( php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) ), v )
+			p[v] = { ["value"] = tostring( formattedProperty ), ["label"] = wikibase.label( v ) }
 		end
 		return p
 	end
