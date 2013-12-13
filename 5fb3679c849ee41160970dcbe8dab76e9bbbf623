@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_54e99ea5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_03c64171",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_a3a1d592",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-12-12T13:54:29Z",
       "side": 1,
       "message": "use RequestContext",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b4f6aa8a",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_a3a1d592",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_74eca2b8",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Ok, changed to a proper factory (\"template\") method.",
+      "parentUuid": "0ee75395_a3f6758a",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_238ee52b",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-12-12T13:54:29Z",
       "side": 1,
       "message": "use RequestContext",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_3403ba7b",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_238ee52b",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -141,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_f4f8b27b",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Moved this to a separate function, so it can be overwritten by subclasses. I suppose it\u0027s the right approach to let a test case for a view for a specific entity type also control what parser shall be used for the ids for that entity type.",
+      "parentUuid": "0ee75395_038521d4",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_c398596f",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 2
@@ -152,6 +242,24 @@
       "writtenOn": "2013-12-12T13:54:29Z",
       "side": 1,
       "message": "use RequestContext",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_d4fdae6a",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_c398596f",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -186,6 +294,24 @@
       "writtenOn": "2013-12-12T14:51:07Z",
       "side": 1,
       "message": "Code such as this just screams the design is flawed. Typically this occurs where composition, ie the strategy pattern, should be used instead",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_94ccc666",
+        "filename": "repo/tests/phpunit/includes/PropertyViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "You mean the design of the test, or the design of the EntityView class?\nI can\u0027t see a sensible way to structure the tests differently, not without re-designing EntityView. Do you have a concrete proposal?\n\nP.S.: previously, we had no tests for PropertyView at all.",
+      "parentUuid": "0ee75395_63ecedb8",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -244,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_54d2be01",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_a382f5ff",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_63f3cdd2",
         "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
         "patchSetId": 2
@@ -255,6 +399,24 @@
       "writtenOn": "2013-12-12T13:54:29Z",
       "side": 1,
       "message": "use RequestContext",
+      "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_74d5c2e8",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-13T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_63f3cdd2",
       "revId": "5fb3679c849ee41160970dcbe8dab76e9bbbf623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
