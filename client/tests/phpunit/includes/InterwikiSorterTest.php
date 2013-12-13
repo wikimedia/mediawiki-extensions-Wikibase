@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\InterwikiSorter;
 
 /**
- * @covers Wikibase\InterwikiSorter;
+ * @covers Wikibase\InterwikiSorter
  *
  * @since 0.4
  *
