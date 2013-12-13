@@ -22,9 +22,11 @@ use Wikibase\SnakFactory;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class SnakFactoryTest extends \PHPUnit_Framework_TestCase {
+class SnakFactoryTest extends \MediaWikiTestCase {
 
 	public function setUp() {
+		parent::setUp();
+
 		static $isInitialized = false;
 
 		if ( !class_exists( 'Wikibase\PropertyContent' ) ) {

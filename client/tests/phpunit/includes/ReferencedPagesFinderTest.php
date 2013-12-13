@@ -24,7 +24,7 @@ use WikiPage;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ReferencedPagesFinderTest extends \PHPUnit_Framework_TestCase {
+class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 
 	static protected $titles;
 
