@@ -3,6 +3,8 @@
 PHP implementation of the
 [Wikibase](https://www.mediawiki.org/wiki/Wikibase)
 [Data Model](https://meta.wikimedia.org/wiki/Wikidata/Data_model).
+This implementation depends on a number of standalone PHP libraries (see below),
+though does not depend on either MediaWiki or the Wikibase Repo/Client software.
 
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModel.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModel)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/badges/quality-score.png?s=6e63826e875923969a3b5f9bbd03f79839b835a5)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/)
@@ -11,6 +13,8 @@ PHP implementation of the
 On Packagist:
 [![Latest Stable Version](https://poser.pugx.org/wikibase/data-model/version.png)](https://packagist.org/packages/wikibase/data-model)
 [![Download count](https://poser.pugx.org/wikibase/data-model/d/total.png)](https://packagist.org/packages/wikibase/data-model)
+
+Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 ## Installation
 
@@ -36,6 +40,15 @@ Wikibase DataModel 1.0:
 Get the Wikibase DataModel code, either via git, or some other means. Also get all dependencies.
 You can find a list of the dependencies in the "require" section of the composer.json file.
 The "autoload" section of this file specifies how to load the resources provide by this library.
+
+## Library contents
+
+This library contains domain objects that implement the concepts part of the
+[Wikibase DataModel](https://meta.wikimedia.org/wiki/Wikidata/Data_model).
+This mainly includes simple value objects, though also contains core domain
+logic either bound to such objects or encapsulated as service objects.
+
+TODO
 
 ## Tests
 
