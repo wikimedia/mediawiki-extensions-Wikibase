@@ -463,10 +463,6 @@ return call_user_func( function() {
 				'wikibase.AbstractedRepoApi',
 			),
 			'messages' => array(
-				'wikibase-cancel',
-				'wikibase-edit',
-				'wikibase-save',
-				'wikibase-add',
 				'wikibase-save-inprogress',
 				'wikibase-remove-inprogress',
 				'wikibase-label-edit-placeholder',
@@ -485,7 +481,6 @@ return call_user_func( function() {
 				'wikibase-sitelinks-sitename-columnheading-special',
 				'wikibase-sitelinks-siteid-columnheading',
 				'wikibase-sitelinks-link-columnheading',
-				'wikibase-remove',
 				'wikibase-propertyedittool-full',
 				'wikibase-propertyedittool-counter-pending-tooltip',
 				'wikibase-propertyedittool-counter-entrieslabel',
@@ -875,6 +870,12 @@ return call_user_func( function() {
 				'jquery.ui.widget',
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.wbtooltip',
+			),
+			'messages' => array(
+				'wikibase-cancel',
+				'wikibase-edit',
+				'wikibase-save',
+				'wikibase-remove',
 			),
 		),
 

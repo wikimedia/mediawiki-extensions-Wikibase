@@ -247,7 +247,7 @@
 						content: $message,
 						permanent: true,
 						gravity: gravity,
-						$anchor: toolbar.$btnSave
+						$anchor: toolbar.getButton( 'save' )
 					} );
 
 				$hideMessage.on( 'click', function( event ) {
