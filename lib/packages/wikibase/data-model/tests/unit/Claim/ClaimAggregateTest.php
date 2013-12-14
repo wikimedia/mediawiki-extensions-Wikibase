@@ -38,9 +38,6 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 
 		$aggregates[] = \Wikibase\Property::newEmpty();
 
-		// TODO
-		// $aggregates[] = \Wikibase\Query::newEmpty();
-
 		$argLists = array();
 
 		foreach ( $claims as $i => $claim ) {

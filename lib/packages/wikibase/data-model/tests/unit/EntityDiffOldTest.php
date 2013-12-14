@@ -21,7 +21,6 @@ use Wikibase\Entity;
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  */
-
 abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 	private static function newEntity ( $entityType ) {
@@ -32,11 +31,8 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 			case \Wikibase\Property::ENTITY_TYPE:
 				$entity = \Wikibase\Property::newEmpty();
 				break;
-			case \Wikibase\Query::ENTITY_TYPE:
-				$entity =\Wikibase\Query::newEmpty();
-				break;
 			default:
-				throw new \MWException( "unknown entity type: $entityType" );
+				throw new \RuntimeException( "unknown entity type: $entityType" );
 		}
 
 		return $entity;
