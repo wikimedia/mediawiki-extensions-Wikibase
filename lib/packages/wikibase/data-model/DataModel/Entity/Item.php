@@ -5,7 +5,9 @@ namespace Wikibase\DataModel\Entity;
 use Diff\Patcher;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * Represents a single Wikibase item.
