@@ -17,7 +17,7 @@ class SnakSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenSnak_isSerializerForReturnsTrue() {
-		$snak = $this->getMock( 'Wikibase\Snak' );
+		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
 
 		$serializer = new SnakSerializer();
 
@@ -50,7 +50,7 @@ class SnakSerializerTest extends \PHPUnit_Framework_TestCase {
 			'~=[,,_,,]:3'
 		);
 
-		$snak = $this->getMock( 'Wikibase\Snak' );
+		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
 
 		$snak->expects( $this->once() )
 			->method( 'toArray' )
