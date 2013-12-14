@@ -16,8 +16,6 @@ class SnakSerializer implements Serializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @since 1.0
-	 *
 	 * @param mixed $object
 	 *
 	 * @return array
@@ -40,8 +38,6 @@ class SnakSerializer implements Serializer {
 
 	/**
 	 * @see Serializer::isSerializerFor
-	 *
-	 * @since 1.0
 	 *
 	 * @param mixed $object
 	 *
