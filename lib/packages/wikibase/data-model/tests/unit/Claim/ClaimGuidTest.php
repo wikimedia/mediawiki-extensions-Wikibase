@@ -62,7 +62,7 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testBadConstruction( $entityId, $guid ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$claimGuid = new ClaimGuid( $entityId,$guid );
+		new ClaimGuid( $entityId,$guid );
 	}
 
 	public function provideBadConstruction() {
