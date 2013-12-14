@@ -4,6 +4,10 @@ namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use LogicException;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * @licence GNU GPL v2+
@@ -13,6 +17,12 @@ class SnakDeserializer implements Deserializer {
 
 	private $TYPE_POSITION = 0;
 	private $PROPERTY_ID_POSITION = 1;
+
+	private $dataValueDeserializer;
+
+	public function __construct( Deserializer $dataValueDeserializer ) {
+		$this->dataValueDeserializer = $dataValueDeserializer;
+	}
 
 	/**
 	 * @see Deserializer::isDeserializerFor
@@ -30,7 +40,7 @@ class SnakDeserializer implements Deserializer {
 	}
 
 	private function isSnakType( $value ) {
-		return in_array( $value, array( 'novalue', 'somevalue', 'value' ) );
+		return in_array( $value, array( 'value', 'novalue', 'somevalue' ) );
 	}
 
 	private function isPropertyId( $value ) {
@@ -49,9 +59,47 @@ class SnakDeserializer implements Deserializer {
 	 *
 	 * @return object
 	 * @throws DeserializationException
+	 * @throws LogicException
 	 */
 	public function deserialize( $serialization ) {
-		// TODO
+		if ( !$this->isDeserializerFor( $serialization ) ) {
+			throw new DeserializationException();
+		}
+
+		switch ( $serialization[$this->TYPE_POSITION] ) {
+			case 'value':
+				return $this->newValueSnak( $serialization );
+			case 'novalue':
+				return $this->newNoValueSnak( $serialization );
+			case 'somevalue':
+				return $this->newSomeValueSnak( $serialization );
+			default:
+				throw new LogicException();
+		}
+	}
+
+	private function newNoValueSnak( array $serialization ) {
+		return new PropertyNoValueSnak( $serialization[$this->PROPERTY_ID_POSITION] );
+	}
+
+	private function newSomeValueSnak( array $serialization ) {
+		return new PropertySomeValueSnak( $serialization[$this->PROPERTY_ID_POSITION] );
+	}
+
+	private function newValueSnak( array $serialization ) {
+		return new PropertyValueSnak(
+			$serialization[$this->PROPERTY_ID_POSITION],
+			$this->newDataValue( $serialization[2], $serialization[3] )
+		);
+	}
+
+	private function newDataValue( $type, $value ) {
+		return $this->dataValueDeserializer->deserialize(
+			array(
+				'type' => $type,
+				'value' => $value
+			)
+		);
 	}
 
 }
