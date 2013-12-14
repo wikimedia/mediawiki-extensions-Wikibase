@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Serializers;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\Snak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * @licence GNU GPL v2+
