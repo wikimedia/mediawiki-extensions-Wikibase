@@ -2,17 +2,11 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Snak;
-use Wikibase\SnakObject;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakObject;
 
 /**
  * @covers Wikibase\SnakObject
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseDataModel

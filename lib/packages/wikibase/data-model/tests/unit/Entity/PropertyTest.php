@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Property;
 
 /**
- * @covers Wikibase\Property
- * @covers Wikibase\Entity
+ * @covers Wikibase\DataModel\Entity\Property
+ * @covers Wikibase\DataModel\Entity\Entity
  *
  * @group Wikibase
  * @group WikibaseProperty

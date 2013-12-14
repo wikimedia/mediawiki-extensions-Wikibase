@@ -2,16 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 
 /**
- * @covers Wikibase\Item
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\DataModel\Entity\Item
  *
  * @group Wikibase
  * @group WikibaseItem

@@ -2,16 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\HashableObjectStorage;
+use Wikibase\DataModel\HashableObjectStorage;
 
 /**
- * @covers Wikibase\HashableObjectStorage
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\DataModel\HashableObjectStorage
  *
  * @group Wikibase
  * @group WikibaseLib

@@ -5,19 +5,17 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use ReflectionClass;
 use ReflectionMethod;
-use Wikibase\ByPropertyIdArray;
-use Wikibase\Claim;
+use Wikibase\DataModel\ByPropertyIdArray;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Snak;
-use Wikibase\Statement;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Claim\Statement;
 
 /**
- * @covers Wikibase\ByPropertyIdArray
- *
- * @since 0.2
+ * @covers Wikibase\DataModel\ByPropertyIdArray
  *
  * @group Wikibase
  * @group WikibaseLib

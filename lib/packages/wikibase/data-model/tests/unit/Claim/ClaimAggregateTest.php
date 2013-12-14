@@ -2,17 +2,11 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Claim;
-use Wikibase\ClaimAggregate;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimAggregate;
 
 /**
- * Tests for the Wikibase\ClaimAggregate implementing classes.
- *
- * @file
- * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * Tests for ClaimAggregate implementing classes.
  *
  * @group Wikibase
  * @group WikibaseDataModel

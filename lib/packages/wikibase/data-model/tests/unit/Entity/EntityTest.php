@@ -7,27 +7,21 @@ use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
-use Wikibase\Claim;
-use Wikibase\Claims;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Internal\ObjectComparer;
-use Wikibase\Entity;
-use Wikibase\EntityDiff;
-use Wikibase\EntityId;
-use Wikibase\Item;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
-use Wikibase\Statement;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Claim\Statement;
 
 /**
  * Tests for the Wikibase\Entity deriving classes.
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseDataModel

@@ -3,23 +3,17 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
-use Wikibase\ReferenceList;
-use Wikibase\SnakList;
-use Wikibase\Statement;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Claim\Statement;
 
 /**
- * @covers Wikibase\Statement
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\DataModel\Claim\Statement
  *
  * @group Wikibase
  * @group WikibaseDataModel

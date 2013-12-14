@@ -3,19 +3,13 @@
 namespace Wikibase\Test;
 
 use Hashable;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\Reference;
-use Wikibase\ReferenceList;
-use Wikibase\SnakList;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\ReferenceList
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\DataModel\ReferenceList
  *
  * @group Wikibase
  * @group WikibaseDataModel

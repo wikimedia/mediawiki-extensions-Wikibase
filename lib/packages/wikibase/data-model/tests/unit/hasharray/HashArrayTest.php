@@ -4,16 +4,10 @@ namespace Wikibase\Test;
 
 use Hashable;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\HashArray;
+use Wikibase\DataModel\HashArray;
 
 /**
- * @covers Wikibase\HashArray
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\DataModel\HashArray
  *
  * @group Wikibase
  * @group WikibaseLib
