@@ -909,8 +909,10 @@ $messages['sr-ec'] = array(
 
 /** Swedish (svenska)
  * @author Jopparn
+ * @author Tobulos1
  */
 $messages['sv'] = array(
+	'valueview-desc' => 'UI-komponenter för visning och redigering av datavärden',
 	'valueview-expert-advancedadjustments' => 'avancerade inställningar',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Hantering av "$1"-värden stöds ännu inte.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Hantering av värden för "$1"-datatyper stöds ännu inte.',
