@@ -13,7 +13,7 @@ use Hashable;
 use InvalidArgumentException;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * Implementation of the Claims interface.
