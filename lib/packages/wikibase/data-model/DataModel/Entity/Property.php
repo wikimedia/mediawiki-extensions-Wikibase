@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use DataTypes\DataType;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -21,13 +20,6 @@ use RuntimeException;
 class Property extends Entity {
 
 	const ENTITY_TYPE = 'property';
-
-	/**
-	 * @since 0.2
-	 *
-	 * @var DataType|null
-	 */
-	protected $dataType = null;
 
 	/**
 	 * @since 0.4
