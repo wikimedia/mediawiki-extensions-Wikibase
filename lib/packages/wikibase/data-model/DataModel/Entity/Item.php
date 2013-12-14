@@ -6,7 +6,7 @@ use Diff\Patcher;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Statement;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
@@ -29,7 +29,7 @@ class Item extends Entity {
 	/**
 	 * @since 0.5
 	 *
-	 * @var SimpleSiteLink[]|null
+	 * @var SiteLink[]|null
 	 */
 	protected $siteLinks = null;
 
@@ -38,13 +38,21 @@ class Item extends Entity {
 	 * If there already is a site link with the site id of the provided site link,
 	 * then that one will be overridden by the provided one.
 	 *
-	 * @since 0.4
+	 * @since 0.6
 	 *
-	 * @param SimpleSiteLink $siteLink
+	 * @param SiteLink $siteLink
 	 */
-	public function addSimpleSiteLink( SimpleSiteLink $siteLink ) {
+	public function addSiteLink( SiteLink $siteLink ) {
 		$this->unstubSiteLinks();
 		$this->siteLinks[ $siteLink->getSiteId() ] = $siteLink;
+	}
+
+	/**
+	 * @since 0.4
+	 * @deprecated since 0.6, use addSiteLink instead
+	 */
+	public function addSimpleSiteLink( SiteLink $siteLink ) {
+		$this->addSiteLink( $siteLink );
 	}
 
 	/**
@@ -77,11 +85,11 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @since 0.4
+	 * @since 0.6
 	 *
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 */
-	public function getSimpleSiteLinks() {
+	public function getSiteLinks() {
 		$this->unstubSiteLinks();
 
 		$links = array();
@@ -95,13 +103,36 @@ class Item extends Entity {
 
 	/**
 	 * @since 0.4
+	 * @deprecated since 0.6, use getSiteLinks instead
+	 *
+	 * @return SiteLink[]
+	 */
+	public function getSimpleSiteLinks() {
+		return $this->getSiteLinks();
+	}
+
+	/**
+	 * @since 0.4
+	 * @deprecated since 0.6, use getSiteLink instead
 	 *
 	 * @param string $siteId
 	 *
-	 * @return SimpleSiteLink
+	 * @return SiteLink
 	 * @throws OutOfBoundsException
 	 */
 	public function getSimpleSiteLink( $siteId ) {
+		return $this->getSiteLink( $siteId );
+	}
+
+	/**
+	 * @since 0.6
+	 *
+	 * @param string $siteId
+	 *
+	 * @return SiteLink
+	 * @throws OutOfBoundsException
+	 */
+	public function getSiteLink( $siteId ) {
 		$this->unstubSiteLinks();
 
 		if ( !array_key_exists( $siteId, $this->siteLinks ) ) {
@@ -133,13 +164,13 @@ class Item extends Entity {
 			$this->siteLinks = array();
 
 			foreach ( $this->data['links'] as $siteId => $linkSerialization ) {
-				$this->siteLinks[$siteId] = SimpleSiteLink::newFromArray( $siteId, $linkSerialization );
+				$this->siteLinks[$siteId] = SiteLink::newFromArray( $siteId, $linkSerialization );
 			}
 		}
 	}
 
 	/**
-	 * Returns the SimpleSiteLinks as stubs.
+	 * Returns the SiteLinks as stubs.
 	 *
 	 * @since 0.5
 	 *
@@ -305,7 +336,7 @@ class Item extends Entity {
 				$this->siteLinks = array();
 				foreach ( $links as $siteId => $linkSerialization ) {
 					if ( array_key_exists( 'name', $linkSerialization ) ) {
-						$this->siteLinks[$siteId] = SimpleSiteLink::newFromArray( $siteId, $linkSerialization );
+						$this->siteLinks[$siteId] = SiteLink::newFromArray( $siteId, $linkSerialization );
 					}
 				}
 			}

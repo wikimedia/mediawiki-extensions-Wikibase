@@ -11,6 +11,9 @@ decreased and several design issues have been tackled.
 
 * All classes and interfaces not yet in the Wikibase\DataModel namespace got moved. The old names
 remain as aliases, and should be considered as deprecated.
+* SimpleSiteLink was renamed to SiteLink. The old name remains as deprecated alias.
+* Item::addSimpleSiteLink and Item::getSimpleSiteLinks where renamed to Item::adSiteLink and
+Item::getSiteLinks. The old names remains as deprecated aliases.
 
 #### Removals
 

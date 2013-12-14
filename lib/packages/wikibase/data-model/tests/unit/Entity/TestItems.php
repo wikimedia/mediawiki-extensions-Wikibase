@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Item;
 
 /**
@@ -42,13 +42,13 @@ final class TestItems {
 		$items[] = $item;
 
 		$item = Item::newEmpty();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'spam' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'spam' ) );
 
 		$items[] = $item;
 
 		$item = Item::newEmpty();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'spamz' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'foobar' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'spamz' ) );
+		$item->addSiteLink( new SiteLink( 'dewiki', 'foobar' ) );
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );

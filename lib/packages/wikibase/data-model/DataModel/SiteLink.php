@@ -122,15 +122,15 @@ class SiteLink {
 	 }
 
 	/**
-	 * Constructs a new SimpleSiteLink from an array
-	 * in the same format as SimpleSiteLink::toArray returns.
+	 * Constructs a new SiteLink from an array
+	 * in the same format as SiteLink::toArray returns.
 	 *
 	 * @since 0.5
 	 *
 	 * @param string $siteId
 	 * @param string|array $data
 	 *
-	 * @return SimpleSiteLink
+	 * @return SiteLink
 	 */
 	public static function newFromArray( $siteId, $data ) {
 		if ( is_string( $data ) ) {

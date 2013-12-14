@@ -6,7 +6,7 @@ use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\ItemDiff;
@@ -46,8 +46,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// add link ------------------------------
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$a->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -58,8 +58,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 		);
 
 		$b = $a->copy();
-		$b->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$b->addSiteLink(
+			new SiteLink(
 				'dewiki',
 				'Test',
 				array(
@@ -73,8 +73,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// add badges
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$a->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -84,8 +84,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 		);
 
 		$b = $a->copy();
-		$b->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$b->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -99,8 +99,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// remove badges
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$a->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -111,8 +111,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 		);
 
 		$b = $a->copy();
-		$b->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$b->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -123,8 +123,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// modify badges
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$a->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -135,8 +135,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 		);
 
 		$b = $a->copy();
-		$b->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$b->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -150,8 +150,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// remove link
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$a->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -159,8 +159,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 				)
 			)
 		);
-		$a->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$a->addSiteLink(
+			new SiteLink(
 				'dewiki',
 				'Test',
 				array(
@@ -176,8 +176,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// change link
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$a->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test',
 				array(
@@ -188,8 +188,8 @@ class ItemDiffTest extends EntityDiffOldTest {
 		);
 
 		$b = $a->copy();
-		$b->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$b->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Test!!!',
 				array(
@@ -221,10 +221,10 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
 		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
 
-		$siteLinks = $a->getSimpleSiteLinks() + $b->getSimpleSiteLinks();
+		$siteLinks = $a->getSiteLinks() + $b->getSiteLinks();
 		foreach ($siteLinks as $siteLink) {
-			$aLink = $a->getSimpleSiteLink( $siteLink->getSiteId() );
-			$bLink = $a->getSimpleSiteLink( $siteLink->getSiteId() );
+			$aLink = $a->getSiteLink( $siteLink->getSiteId() );
+			$bLink = $a->getSiteLink( $siteLink->getSiteId() );
 
 			$this->assertEquals( $aLink->getPageName(), $bLink->getPageName() );
 
