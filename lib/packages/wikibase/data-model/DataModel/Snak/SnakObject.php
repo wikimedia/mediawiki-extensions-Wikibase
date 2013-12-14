@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Snak;
 
-use DataValues\IllegalValueException;
 use DataValues\UnDeserializableValue;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;

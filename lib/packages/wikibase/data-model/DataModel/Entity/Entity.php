@@ -8,12 +8,11 @@ use Diff\MapPatcher;
 use Diff\Patcher;
 use InvalidArgumentException;
 use RuntimeException;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimAggregate;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use Wikibase\DataModel\Internal\ObjectComparer;
-use Wikibase\DataModel\Claim\ClaimAggregate;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
