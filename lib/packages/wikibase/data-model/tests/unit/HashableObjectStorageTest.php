@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Hashable;
 use Wikibase\HashableObjectStorage;
 
 /**
