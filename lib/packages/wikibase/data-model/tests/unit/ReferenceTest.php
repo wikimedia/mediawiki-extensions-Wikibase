@@ -4,22 +4,16 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
-use Wikibase\SnakList;
-use Wikibase\Snaks;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Snak\Snaks;
 
 /**
- * @covers Wikibase\Reference
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\DataModel\Reference
  *
  * @group Wikibase
  * @group WikibaseDataModel

@@ -4,16 +4,11 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Item;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\DataModel\Entity\EntityId
- *
- * @since 0.3
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseDataModel

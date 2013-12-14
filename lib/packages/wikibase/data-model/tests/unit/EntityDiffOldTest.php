@@ -2,16 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 
 /**
- * @covers Wikibase\EntityDiff
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * @covers Wikibase\DataModel\Entity\EntityDiff
  *
  * @group Wikibase
  * @group WikibaseLib

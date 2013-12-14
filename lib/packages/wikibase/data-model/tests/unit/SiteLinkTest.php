@@ -9,12 +9,6 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @covers Wikibase\DataModel\SiteLink
  *
- * @file
- * @since 0.4
- *
- * @ingroup WikibaseDataModel
- * @ingroup Test
- *
  * @group Wikibase
  * @group WikibaseDataModel
  *

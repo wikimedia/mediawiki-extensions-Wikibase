@@ -2,16 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ClaimListAccess;
+use Wikibase\DataModel\Claim\ClaimListAccess;
 
 /**
- * Tests for the Wikibase\ClaimListAccess implementing classes.
- *
- * @file
- * @since 0.2
- *
- * @ingroup WikibaseLib
- * @ingroup Test
+ * Tests for the ClaimListAccess implementing classes.
  *
  * @group Wikibase
  * @group WikibaseDataModel

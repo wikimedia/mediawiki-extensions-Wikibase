@@ -6,16 +6,10 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Snak\PropertyValueSnak
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseDataModel

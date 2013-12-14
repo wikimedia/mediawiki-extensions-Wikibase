@@ -2,19 +2,13 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityId;
-use Wikibase\MapValueHasher;
-use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\MapValueHasher;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\MapValueHasher
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseDataModel
- * @ingroup Test
+ * @covers Wikibase\DataModel\MapValueHasher
  *
  * @group Wikibase
  * @group WikibaseDataModel

@@ -3,21 +3,15 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Wikibase\EntityId;
-use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Snak;
-use Wikibase\SnakList;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @covers Wikibase\SnakList
-
- * @since 0.1
- *
- * @group Wikibase
- * @group WikibaseDataModel
- * @group WikibaseSnak
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
