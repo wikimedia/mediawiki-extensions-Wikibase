@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Entity;
 use Diff\Patcher;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**

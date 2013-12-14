@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Entity;
 use DataTypes\DataType;
 use InvalidArgumentException;
 use RuntimeException;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Represents a single Wikibase property.
