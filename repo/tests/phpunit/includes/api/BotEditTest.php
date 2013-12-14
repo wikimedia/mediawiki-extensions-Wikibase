@@ -34,7 +34,6 @@ class BotEditTest extends WikibaseApiTestCase {
 	private static $hasSetup;
 
 	public function setUp() {
-		global $wgUser;
 		parent::setUp();
 
 		if( !isset( self::$hasSetup ) ){
@@ -48,7 +47,6 @@ class BotEditTest extends WikibaseApiTestCase {
 			'api_test_bot@example.com',
 			array( 'bot' )
 		);
-		$wgUser = self::$users['wbbot']->user;
 
 		$this->login( 'wbbot' );
 	}

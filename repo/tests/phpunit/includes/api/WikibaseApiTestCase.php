@@ -30,7 +30,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected static $token = null;
 
 	protected function setUp() {
-		global $wgUser;
 		parent::setUp();
 
 		static $isSetup = false;
@@ -46,7 +45,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			array( 'wbeditor' )
 		);
 
-		$wgUser = self::$users['wbeditor']->user;
+		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->user );
 
 		if ( !$isSetup ) {
 			TestSites::insertIntoDb();

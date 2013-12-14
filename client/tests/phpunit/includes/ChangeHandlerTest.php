@@ -13,7 +13,6 @@ use Wikibase\EntityChange;
 use Wikibase\EntityDiff;
 use Wikibase\ItemUsageIndex;
 use Wikibase\Item;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\ChangeHandler
@@ -762,27 +761,26 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideHandleChanges
 	 */
 	public function testHandleChanges() {
+		global $handleChangeCallCount, $handleChangesCallCount;
 		$changes = func_get_args();
 
-		global $wgHooks;
+		$testHooks = array(
+			'WikibaseHandleChange' => array( function( Change $change ) {
+				global $handleChangeCallCount;
+				$handleChangeCallCount++;
+				return true;
+			} ),
+			'WikibaseHandleChanges' => array( function( array $changes ) {
+				global $handleChangesCallCount;
+				$handleChangesCallCount++;
+				return true;
+			} )
+		);
 
-		$wgHooksOriginal = $wgHooks;
+		$this->mergeMwGlobalArrayValue( 'wgHooks', $testHooks );
 
-		global $handleChangeCallCount, $handleChangesCallCount;
 		$handleChangeCallCount = 0;
 		$handleChangesCallCount = 0;
-
-		$wgHooks['WikibaseHandleChange'] = array( function( Change $change ) {
-			global $handleChangeCallCount;
-			$handleChangeCallCount++;
-			return true;
-		} );
-
-		$wgHooks['WikibaseHandleChanges'] = array( function( array $changes ) {
-			global $handleChangesCallCount;
-			$handleChangesCallCount++;
-			return true;
-		} );
 
 		$changeHandler = $this->getMockBuilder( 'Wikibase\ChangeHandler' )
 			->disableOriginalConstructor()->setMethods( array( 'coalesceChanges', 'handleChange' ) )->getMock();
@@ -798,7 +796,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( count( $changes ), $handleChangeCallCount );
 		$this->assertEquals( 1, $handleChangesCallCount );
 
-		$wgHooks = $wgHooksOriginal;
+		unset( $handleChangeCallCount );
+		unset( $handleChangesCallCount );
 	}
 
 	// ==========================================================================================
