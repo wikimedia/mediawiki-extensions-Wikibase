@@ -48,8 +48,6 @@ This library contains domain objects that implement the concepts part of the
 This mainly includes simple value objects, though also contains core domain
 logic either bound to such objects or encapsulated as service objects.
 
-TODO
-
 ## Tests
 
 This library comes with a set up PHPUnit tests that cover all non-trivial code. You can run these
