@@ -91,9 +91,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider labelProvider
 	 * @param string $languageCode
 	 * @param string $labelText
-	 * @param string $moarText
 	 */
-	public function testGetLabel( $languageCode, $labelText, $moarText = 'ohi there' ) {
+	public function testGetLabel( $languageCode, $labelText ) {
 		$entity = $this->getNewEmpty();
 
 		$this->assertFalse( $entity->getLabel( $languageCode ) );
@@ -107,9 +106,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider labelProvider
 	 * @param string $languageCode
 	 * @param string $labelText
-	 * @param string $moarText
 	 */
-	public function testRemoveLabel( $languageCode, $labelText, $moarText = 'ohi there' ) {
+	public function testRemoveLabel( $languageCode, $labelText ) {
 		$entity = $this->getNewEmpty();
 		$entity->setLabel( $languageCode, $labelText );
 		$entity->removeLabel( $languageCode );
@@ -152,9 +150,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider descriptionProvider
 	 * @param string $languageCode
 	 * @param string $labelText
-	 * @param string $moarText
 	 */
-	public function testGetDescription( $languageCode, $labelText, $moarText = 'ohi there' ) {
+	public function testGetDescription( $languageCode, $labelText ) {
 		$entity = $this->getNewEmpty();
 
 		$this->assertFalse( $entity->getDescription( $languageCode ) );
@@ -168,9 +165,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider descriptionProvider
 	 * @param string $languageCode
 	 * @param string $labelText
-	 * @param string $moarText
 	 */
-	public function testRemoveDescription( $languageCode, $labelText, $moarText = 'ohi there' ) {
+	public function testRemoveDescription( $languageCode, $labelText ) {
 		$entity = $this->getNewEmpty();
 		$entity->setDescription( $languageCode, $labelText );
 		$entity->removeDescription( $languageCode );
