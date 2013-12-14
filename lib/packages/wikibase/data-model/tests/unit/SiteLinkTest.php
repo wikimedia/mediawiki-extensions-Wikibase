@@ -4,10 +4,10 @@ namespace Wikibase\DataModel\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\DataModel\SimpleSiteLink
+ * @covers Wikibase\DataModel\SiteLink
  *
  * @file
  * @since 0.4
@@ -22,10 +22,10 @@ use Wikibase\DataModel\SimpleSiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Michał Łazowik
  */
-class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCanConstruct() {
-		new SimpleSiteLink( 'enwiki', 'Wikidata' );
+		new SiteLink( 'enwiki', 'Wikidata' );
 		$this->assertTrue( true );
 	}
 
@@ -33,7 +33,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider siteIdProvider
 	 */
 	public function testGetSiteId( $siteId ) {
-		$siteLink = new SimpleSiteLink( $siteId, 'Wikidata' );
+		$siteLink = new SiteLink( $siteId, 'Wikidata' );
 		$this->assertEquals( $siteId, $siteLink->getSiteId() );
 	}
 
@@ -52,7 +52,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testCannotConstructWithNonStringSiteId( $invalidSiteId ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new SimpleSiteLink( $invalidSiteId, 'Wikidata' );
+		new SiteLink( $invalidSiteId, 'Wikidata' );
 	}
 
 	public function stuffThatIsNotStringProvider() {
@@ -70,7 +70,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider pageNameProvider
 	 */
 	public function testGetPageName( $pageName ) {
-		$siteLink = new SimpleSiteLink( 'enwiki', $pageName );
+		$siteLink = new SiteLink( 'enwiki', $pageName );
 		$this->assertEquals( $pageName, $siteLink->getPageName() );
 	}
 
@@ -89,14 +89,14 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testCannotConstructWithNonStringPageName( $invalidPageName ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new SimpleSiteLink( 'enwiki', $invalidPageName );
+		new SiteLink( 'enwiki', $invalidPageName );
 	}
 
 	/**
 	 * @dataProvider badgesProvider
 	 */
 	public function testGetBadges( $badges, $expected ) {
-		$siteLink = new SimpleSiteLink( 'enwiki', 'Wikidata', $badges );
+		$siteLink = new SiteLink( 'enwiki', 'Wikidata', $badges );
 		$this->assertEquals( $expected, $siteLink->getBadges() );
 	}
 
@@ -143,7 +143,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testCannotConstructWithNonArrayBadges( $invalidBadges ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new SimpleSiteLink( 'enwiki', 'Wikidata', $invalidBadges );
+		new SiteLink( 'enwiki', 'Wikidata', $invalidBadges );
 	}
 
 	public function stuffThatIsNotArrayProvider() {
@@ -162,7 +162,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testCannotConstructWithInvalidBadges( $invalidBadges ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new SimpleSiteLink( 'enwiki', 'Wikidata', $invalidBadges );
+		new SiteLink( 'enwiki', 'Wikidata', $invalidBadges );
 	}
 
 	public function invalidBadgesProvider() {
@@ -200,13 +200,13 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testNewFromArray( $siteLink, $array ) {
-		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $array ), $siteLink );
+		$this->assertEquals( SiteLink::newFromArray( 'enwiki', $array ), $siteLink );
 	}
 
 	public function newFromArrayProvider() {
 		$argLists = array();
 
-		$siteLink = new SimpleSiteLink(
+		$siteLink = new SiteLink(
 			'enwiki',
 			'Nyan Cat'
 		);
@@ -223,13 +223,13 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testToArrayRoundtrip( $siteLink, $array ) {
 		$this->assertEquals( $siteLink->toArray(), $array );
-		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $siteLink->toArray() ), $siteLink );
+		$this->assertEquals( SiteLink::newFromArray( 'enwiki', $siteLink->toArray() ), $siteLink );
 	}
 
 	public function siteLinkProvider() {
 		$argLists = array();
 
-		$siteLink = new SimpleSiteLink(
+		$siteLink = new SiteLink(
 			'enwiki',
 			'Nyan Cat',
 			array(
@@ -244,7 +244,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		);
 		$argLists[] = array( $siteLink, $array );
 
-		$siteLink = new SimpleSiteLink(
+		$siteLink = new SiteLink(
 			'enwiki',
 			'Nyan Cat'
 		);
@@ -254,7 +254,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		);
 		$argLists[] = array( $siteLink, $array );
 
-		$siteLink = new SimpleSiteLink(
+		$siteLink = new SiteLink(
 			'enwiki',
 			'Nyan Cat',
 			array(
@@ -278,13 +278,13 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider legacySiteLinkProvider
 	 */
 	public function testLegacyArrayConversion( $siteLink, $data ) {
-		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $data ), $siteLink );
+		$this->assertEquals( SiteLink::newFromArray( 'enwiki', $data ), $siteLink );
 	}
 
 	public function legacySiteLinkProvider() {
 		$argLists = array();
 
-		$siteLink = new SimpleSiteLink(
+		$siteLink = new SiteLink(
 			'enwiki',
 			'Nyan Cat'
 		);
@@ -300,7 +300,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testWrongSerialization( $data ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		SimpleSiteLink::newFromArray( 'enwiki', $data );
+		SiteLink::newFromArray( 'enwiki', $data );
 	}
 
 	public function wrongSerializationProvider() {

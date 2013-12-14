@@ -11,7 +11,7 @@ use Wikibase\Claim;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\ItemDiff;
@@ -162,7 +162,7 @@ class ItemTest extends EntityTest {
 		parent::testIsEmpty();
 
 		$item = Item::newEmpty();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Foobar' ) );
 
 		$this->assertFalse( $item->isEmpty() );
 	}
@@ -172,11 +172,11 @@ class ItemTest extends EntityTest {
 
 		$item = $this->getNewEmpty();
 
-		$item->addSimpleSiteLink( new SimpleSiteLink( "enwiki", "Foozzle" ) );
+		$item->addSiteLink( new SiteLink( "enwiki", "Foozzle" ) );
 
 		$item->clear();
 
-		$this->assertEmpty( $item->getSimpleSiteLinks(), "sitelinks" );
+		$this->assertEmpty( $item->getSiteLinks(), "sitelinks" );
 		$this->assertTrue( $item->isEmpty() );
 	}
 
@@ -220,7 +220,7 @@ class ItemTest extends EntityTest {
 		// Addition of a sitelink
 		$entity0 = $this->getNewEmpty();
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
+		$entity1->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
 
 		$expected = new \Wikibase\EntityDiff( array(
 			'links' => new Diff( array(
@@ -235,8 +235,8 @@ class ItemTest extends EntityTest {
 
 		// Addition of badges
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity0->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -245,8 +245,8 @@ class ItemTest extends EntityTest {
 			)
 		);
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity1->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -272,8 +272,8 @@ class ItemTest extends EntityTest {
 		// Addition of a sitelink with badges
 		$entity0 = $this->getNewEmpty();
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity1->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -298,7 +298,7 @@ class ItemTest extends EntityTest {
 
 		// Removal of a sitelink
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
+		$entity0->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
 		$entity1 = $this->getNewEmpty();
 
 		$expected = new \Wikibase\EntityDiff( array(
@@ -314,8 +314,8 @@ class ItemTest extends EntityTest {
 
 		// Removal of badges
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity0->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -325,8 +325,8 @@ class ItemTest extends EntityTest {
 			)
 		);
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity1->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -350,8 +350,8 @@ class ItemTest extends EntityTest {
 
 		// Removal of sitelink with badges
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity0->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -379,8 +379,8 @@ class ItemTest extends EntityTest {
 
 		// Modification of a sitelink
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity0->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -390,8 +390,8 @@ class ItemTest extends EntityTest {
 			)
 		);
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity1->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Foobar',
 				array(
@@ -414,8 +414,8 @@ class ItemTest extends EntityTest {
 
 		// Modification of badges
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity0->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -425,8 +425,8 @@ class ItemTest extends EntityTest {
 			)
 		);
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity1->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -452,8 +452,8 @@ class ItemTest extends EntityTest {
 
 		// Modification of a sitelink and badges
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity0->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -463,8 +463,8 @@ class ItemTest extends EntityTest {
 			)
 		);
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$entity1->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Foobar',
 				array(
@@ -507,8 +507,8 @@ class ItemTest extends EntityTest {
 			), true ),
 		) );
 		$expected = clone $source;
-		$expected->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$expected->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Berlin',
 				array(
@@ -542,8 +542,8 @@ class ItemTest extends EntityTest {
 			), true )
 		) );
 		$expected = $this->getNewEmpty();
-		$expected->addSimpleSiteLink(
-			new SimpleSiteLink(
+		$expected->addSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Foobar',
 				array(
@@ -574,24 +574,24 @@ class ItemTest extends EntityTest {
 		return $argLists;
 	}
 
-	public function testGetSimpleSiteLinkWithNonSetSiteId() {
+	public function testGetSiteLinkWithNonSetSiteId() {
 		$item = Item::newEmpty();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
-		$item->getSimpleSiteLink( 'enwiki' );
+		$item->getSiteLink( 'enwiki' );
 	}
 
 	/**
 	 * @dataProvider simpleSiteLinkProvider
 	 */
-	public function testAddSimpleSiteLink( SimpleSiteLink $siteLink ) {
+	public function testAddSiteLink( SiteLink $siteLink ) {
 		$item = Item::newEmpty();
 
-		$item->addSimpleSiteLink( $siteLink );
+		$item->addSiteLink( $siteLink );
 
 		$this->assertEquals(
 			$siteLink,
-			$item->getSimpleSiteLink( $siteLink->getSiteId() )
+			$item->getSiteLink( $siteLink->getSiteId() )
 		);
 	}
 
@@ -599,7 +599,7 @@ class ItemTest extends EntityTest {
 		$argLists = array();
 
 		$argLists[] = array(
-			new SimpleSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Wikidata',
 				array(
@@ -608,13 +608,13 @@ class ItemTest extends EntityTest {
 			)
 		);
 		$argLists[] = array(
-			new SimpleSiteLink(
+			new SiteLink(
 				'nlwiki',
 				'Wikidata'
 			)
 		);
 		$argLists[] = array(
-			new SimpleSiteLink(
+			new SiteLink(
 				'enwiki',
 				'Nyan!',
 				array(
@@ -624,7 +624,7 @@ class ItemTest extends EntityTest {
 			)
 		);
 		$argLists[] = array(
-			new SimpleSiteLink(
+			new SiteLink(
 				'foo bar',
 				'baz bah',
 				array(
@@ -640,16 +640,16 @@ class ItemTest extends EntityTest {
 	/**
 	 * @dataProvider simpleSiteLinksProvider
 	 */
-	public function testGetSimpleSiteLinks() {
+	public function testGetSiteLinks() {
 		$siteLinks = func_get_args();
 		$item = Item::newEmpty();
 
 		foreach ( $siteLinks as $siteLink ) {
-			$item->addSimpleSiteLink( $siteLink );
+			$item->addSiteLink( $siteLink );
 		}
 
-		$this->assertInternalType( 'array', $item->getSimpleSiteLinks() );
-		$this->assertEquals( $siteLinks, $item->getSimpleSiteLinks() );
+		$this->assertInternalType( 'array', $item->getSiteLinks() );
+		$this->assertEquals( $siteLinks, $item->getSiteLinks() );
 	}
 
 	public function simpleSiteLinksProvider() {
@@ -657,17 +657,17 @@ class ItemTest extends EntityTest {
 
 		$argLists[] = array();
 
-		$argLists[] = array( new SimpleSiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
+		$argLists[] = array( new SiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
 
 		$argLists[] = array(
-			new SimpleSiteLink( 'enwiki', 'Wikidata' ),
-			new SimpleSiteLink( 'nlwiki', 'Wikidata', array( new ItemId( 'Q3' ) ) )
+			new SiteLink( 'enwiki', 'Wikidata' ),
+			new SiteLink( 'nlwiki', 'Wikidata', array( new ItemId( 'Q3' ) ) )
 		);
 
 		$argLists[] = array(
-			new SimpleSiteLink( 'enwiki', 'Wikidata' ),
-			new SimpleSiteLink( 'nlwiki', 'Wikidata' ),
-			new SimpleSiteLink( 'foo bar', 'baz bah', array( new ItemId( 'Q2' ) ) )
+			new SiteLink( 'enwiki', 'Wikidata' ),
+			new SiteLink( 'nlwiki', 'Wikidata' ),
+			new SiteLink( 'foo bar', 'baz bah', array( new ItemId( 'Q2' ) ) )
 		);
 
 		return $argLists;
@@ -675,7 +675,7 @@ class ItemTest extends EntityTest {
 
 	public function testHasLinkToSiteForFalse() {
 		$item = Item::newEmpty();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'ENWIKI', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
+		$item->addSiteLink( new SiteLink( 'ENWIKI', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
 
 		$this->assertFalse( $item->hasLinkToSite( 'enwiki' ) );
 		$this->assertFalse( $item->hasLinkToSite( 'dewiki' ) );
@@ -684,9 +684,9 @@ class ItemTest extends EntityTest {
 
 	public function testHasLinkToSiteForTrue() {
 		$item = Item::newEmpty();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Wikidata' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'foo bar', 'Wikidata' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
+		$item->addSiteLink( new SiteLink( 'dewiki', 'Wikidata' ) );
+		$item->addSiteLink( new SiteLink( 'foo bar', 'Wikidata' ) );
 
 		$this->assertTrue( $item->hasLinkToSite( 'enwiki' ) );
 		$this->assertTrue( $item->hasLinkToSite( 'dewiki' ) );
