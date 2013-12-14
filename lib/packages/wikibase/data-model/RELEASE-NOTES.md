@@ -2,6 +2,11 @@
 
 ## Version 0.6 (dev)
 
+#### Improvements
+
+* Wikibase DataModel now uses the "new" DataValues components. This means binding to other code has
+decreased and several design issues have been tackled.
+
 #### Deprecations
 
 * All classes and interfaces not yet in the Wikibase\DataModel namespace got moved. The old names
