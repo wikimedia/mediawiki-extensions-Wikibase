@@ -693,4 +693,14 @@ class ItemTest extends EntityTest {
 		$this->assertTrue( $item->hasLinkToSite( 'foo bar' ) );
 	}
 
+	public function testNewClaimReturnsStatementWithProvidedMainSnak() {
+		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
+
+		$item = Item::newEmpty();
+		$statement = $item->newClaim( $snak );
+
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Statement', $statement );
+		$this->assertEquals( $snak, $statement->getMainSnak() );
+	}
+
 }
