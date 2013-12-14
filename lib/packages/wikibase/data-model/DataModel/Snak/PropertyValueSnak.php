@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Snak;
 
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
