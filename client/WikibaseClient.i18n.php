@@ -617,6 +617,7 @@ $messages['bn'] = array(
  * @author Fohanno
  * @author Fulup
  * @author VIGNERON
+ * @author Y-M D
  */
 $messages['br'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|kemm|kemm}}', # Fuzzy
@@ -626,6 +627,7 @@ $messages['br'] = array(
 	'wikibase-linkitem-input-site' => 'Yezh :',
 	'wikibase-linkitem-input-page' => 'Pajenn :',
 	'wikibase-linkitem-confirmitem-button' => 'Kadarnaat',
+	'wikibase-rc-wikibase-edit-title' => "Ur c'hemm eus Wikiroadennoù",
 	'special-unconnectedpages' => 'Pajennoù n’int ket liammet gant elfennoù',
 );
 
@@ -945,6 +947,7 @@ $messages['cy'] = array(
 	'wikibase-error-invalid-entity-id' => "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
 	'wikibase-unconnectedpages-submit' => 'Gwneler',
 	'wikibase-unconnectedpages-invalid-language' => 'Nid yw "$1" yn gôd iaith dilys',
+	'wikibase-pageinfo-entity-id' => 'ID yr Eitem Wiciddata',
 	'wikibase-pageinfo-entity-id-none' => 'Dim',
 );
 
@@ -2535,7 +2538,10 @@ $messages['lez'] = array(
  * @author Hugo.arg
  */
 $messages['lt'] = array(
+	'tooltip-t-wikibase' => 'Nuoroda į susietą duomenų saugyklos įrašą',
 	'wikibase-after-page-move' => 'Jūs taip pat galite [$1 atnaujinti] susijusį Vikidatos įrašą, kad perkelto puslapio nuorodos toliau funkcionuotų.',
+	'wikibase-after-page-move-queued' => '[$1 Vikidatos įrašas], susietas su šiuo puslapiu, netrukus bus atnaujintas automatiškai.',
+	'wikibase-comment-add' => 'Vikidatos įrašas sukurtas.',
 	'wikibase-comment-remove' => 'Susietas Vikidatos įrašas panaikintas. Kalbos nuorodos pašalintos.',
 	'wikibase-comment-linked' => 'Vikidatos įrašas buvo susietas su šiuo puslapiu.',
 	'wikibase-comment-unlink' => 'Šis puslapis atsietas nuo Vikidatos įrašo. Kalbinės nuorodos pašalintos.',
@@ -2561,9 +2567,11 @@ $messages['lt'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Patvirtinti',
 	'wikibase-linkitem-not-loggedin-title' => 'Jums reikia būti prisiregistravusiam',
 	'wikibase-linkitem-not-loggedin' => 'Jums reikia būti prisijungusiam šioje wiki ir [$1 centrinėje duomenų saugykloje], kad galėtumėte naudotis šia funkcija.',
+	'wikibase-linkitem-success-link' => 'Puslapiai buvo sėkmingai susieti. Jūs galite rasti įrašą, kuriame sukauptos nuorodos, mūsų [$1 centrinėje duomenų saugykloje].',
 	'wikibase-property-notfound' => '$1 savybė nerasta.',
 	'wikibase-rc-hide-wikidata' => '$1 Vikidatą',
 	'wikibase-rc-show-wikidata-pref' => 'Rodyti pakeitimus Vikidatoje naujausių keitimų puslapyje',
+	'wikibase-rc-wikibase-edit-title' => 'Vikidatos elemento pakeitimas',
 	'wikibase-watchlist-show-changes-pref' => 'Rodyti keitimus Vikidatoje jūsų stebimųjų puslapių sąraše',
 	'wikibase-error-serialize-error' => 'Nepavyko išdėstyti duomenų',
 	'special-unconnectedpages' => 'Puslapiai, nesusieti su įrašais',
@@ -3226,9 +3234,11 @@ $messages['pms'] = array(
  */
 $messages['ps'] = array(
 	'wikibase-after-page-move-queued' => 'د [$1 ويکيډاټا توکی] چې همدې مخ سره اړونده و هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.',
+	'wikibase-rc-wikibase-edit-title' => 'د ويکيډاټا سمون',
 );
 
 /** Portuguese (português)
+ * @author Giro720
  * @author Helder.wiki
  * @author Lijealso
  * @author Luckas
@@ -3252,10 +3262,12 @@ $messages['pt'] = array(
 	'wikibase-editlinkstitle' => 'Editar links interlínguas',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições no Wikidata nas mudanças recentes',
+	'wikibase-rc-wikibase-edit-title' => 'Edição de Wikidata',
 );
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Cainamarques
+ * @author Giro720
  * @author Helder.wiki
  * @author Jaideraf
  * @author OTAVIO1981
@@ -3298,6 +3310,7 @@ $messages['pt-br'] = array(
 	'wikibase-property-notsupportedyet' => 'O WikiBase ainda não suporta o tipo de propriedade para a propriedade $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições do Wikidata nas mudanças recentes',
+	'wikibase-rc-wikibase-edit-title' => 'Edição de Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Mostrar as edições do Wikidata em sua lista de vigiados',
 	'wikibase-error-invalid-entity-id' => 'O ID inserido é desconhecido pelo sistema. Por favor, utilize um ID de entidade válido.',
 	'special-unconnectedpages' => 'Páginas não conectadas a itens',
