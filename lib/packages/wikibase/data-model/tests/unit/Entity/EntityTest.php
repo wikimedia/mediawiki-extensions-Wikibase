@@ -875,7 +875,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 				$references = $claim->getReferences();
 
 				/* @var Reference $ref */
-				foreach ( $qualifiers as $ref ) {
+				foreach ( $references as $ref ) {
 					$refSnaks = $ref->getSnaks();
 
 					foreach ( $refSnaks as $snak ) {
