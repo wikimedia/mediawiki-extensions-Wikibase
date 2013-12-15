@@ -323,6 +323,7 @@ $messages['af'] = array(
 /** Arabic (العربية)
  * @author Abanima
  * @author Ali1
+ * @author Basharh
  * @author OsamaK
  * @author Peadara
  * @author Tarawneh
@@ -360,6 +361,7 @@ $messages['ar'] = array(
 	'wikibase-linkitem-success-link' => 'تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [ $1  مستودعنا المركزي للبيانات].',
 	'wikibase-rc-hide-wikidata' => '$1 ويكيبيانات',
 	'wikibase-rc-show-wikidata-pref' => 'إظهار عمليات تحرير ويكيبيانات في صفحة أحدث التغييرات',
+	'wikibase-rc-wikibase-edit-letter' => 'د',
 );
 
 /** Aramaic (ܐܪܡܝܐ)
@@ -374,6 +376,8 @@ $messages['arc'] = array(
 	'wikibase-linkitem-input-page' => 'ܦܐܬܐ:',
 	'wikibase-linkitem-confirmitem-button' => 'ܫܪܪ',
 	'wikibase-rc-hide-wikidata' => '$1 ܘܝܩܝܓܠܝܬ̈ܐ',
+	'wikibase-rc-wikibase-edit-letter' => 'ܓ',
+	'wikibase-rc-wikibase-edit-title' => 'ܫܘܚܠܦܐ ܕܘܝܩܝܓܠܝܬ̈ܐ',
 	'wikibase-unconnectedpages-submit' => 'ܙܠ',
 );
 
@@ -627,6 +631,7 @@ $messages['br'] = array(
 	'wikibase-linkitem-input-site' => 'Yezh :',
 	'wikibase-linkitem-input-page' => 'Pajenn :',
 	'wikibase-linkitem-confirmitem-button' => 'Kadarnaat',
+	'wikibase-rc-wikibase-edit-letter' => 'R',
 	'wikibase-rc-wikibase-edit-title' => "Ur c'hemm eus Wikiroadennoù",
 	'special-unconnectedpages' => 'Pajennoù n’int ket liammet gant elfennoù',
 );
@@ -668,6 +673,7 @@ $messages['bs'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase trenutno ne podržaje tip za osobinu $1.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Pokaži Wikidata izmjene u nedavnim izmjenama',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata uređivanje',
 	'wikibase-watchlist-show-changes-pref' => 'Prikaži Wikidata izmjene kod vašeg spiska praćenih članaka',
 	'wikibase-error-serialize-error' => 'Neuspješna serijalizacija podataka',
 	'wikibase-error-invalid-entity-id' => 'Unešen ID nije poznat u sistemu. Koristite validan ID.',
@@ -1711,6 +1717,8 @@ $messages['gsw'] = array(
  * @author KartikMistry
  */
 $messages['gu'] = array(
+	'wikibase-rc-wikibase-edit-letter' => 'ડેટા',
+	'wikibase-rc-wikibase-edit-title' => 'વિકિડેટા સંપાદન',
 	'wikibase-unconnectedpages-submit' => 'જાઓ',
 	'wikibase-pageinfo-entity-id-none' => 'કંઇ નહિં',
 );
@@ -2295,7 +2303,7 @@ $messages['kk-cyrl'] = array(
 	'wikibase-linkitem-success-link' => 'Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған элементердегі қамтылған сілтемелерді таба аласыз.',
 	'wikibase-property-notfound' => '$1 сипаты табылмады.',
 	'wikibase-property-notsupportedyet' => 'Уикиқор $1 түріндегі сипаттарды қолдамайды.',
-	'wikibase-rc-hide-wikidata' => '$1 Уикидерек',
+	'wikibase-rc-hide-wikidata' => 'Уикидеректі $1',
 	'wikibase-rc-show-wikidata-pref' => 'Уикидерек өңдемелерін жуықтағы өзгерістерден көрсету',
 	'wikibase-rc-wikibase-edit-title' => 'Уикидерек өңдемесі',
 	'wikibase-watchlist-show-changes-pref' => 'Уикидерек өңдемелерін бақылау тізіміңізден көрсету',
@@ -2970,6 +2978,7 @@ $messages['nds-nl'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase ondersteunt t eigenschapstype veur de eigenschap $1 nog niet.',
 	'wikibase-rc-hide-wikidata' => '$1 wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewarkingen laoten zien in "Leste wiezigingen"',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-bewarking',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidatabewarkingen laoten zien in joew volglieste',
 	'wikibase-error-serialize-error' => 'De gegevens konnen niet eserialiseerd wörden',
 	'wikibase-error-invalid-entity-id' => 't Op-egeven nummer is niet bekend in t systeem. Gebruuk n geldig nummer.',

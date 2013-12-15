@@ -28,6 +28,12 @@ $magicWords['de'] = array(
 	'property' => array( 0, 'eigenschaft' ),
 );
 
+/** Zazaki (Zazaki) */
+$magicWords['diq'] = array(
+	'noexternallanglinks' => array( 0, 'tebergreyzuwaniçıniyo' ),
+	'property' => array( 0, 'nitelıg' ),
+);
+
 /** Esperanto (Esperanto) */
 $magicWords['eo'] = array(
 	'noexternallanglinks' => array( 0, 'neniuligiloalalialingvo' ),
