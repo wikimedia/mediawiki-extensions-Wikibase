@@ -170,13 +170,7 @@ class WikibaseRepo {
 	 * @return DataValueFactory
 	 */
 	public function getDataValueFactory() {
-		$dataValueFactory = new DataValueFactory();
-
-		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
-			$dataValueFactory->registerDataValue( $type, $class );
-		}
-
-		return $dataValueFactory;
+		return DataValueFactory::singleton();
 	}
 
 	/**
@@ -282,7 +276,7 @@ class WikibaseRepo {
 			$snakFactory = new SnakFactory();
 			$dataTypeLookup = $this->getPropertyDataTypeLookup();
 			$dataTypeFactory = $this->getDataTypeFactory();
-			$dataValueFactory = DataValueFactory::singleton();
+			$dataValueFactory = $this->getDataValueFactory();
 
 			$this->snakConstructionService = new SnakConstructionService(
 				$snakFactory,
