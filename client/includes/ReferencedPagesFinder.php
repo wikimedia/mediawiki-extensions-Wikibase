@@ -176,7 +176,7 @@ class ReferencedPagesFinder {
 
 			$ns = $title->getNamespace();
 
-			if ( !is_int( $ns ) || !$this->namespaceChecker->isWikibaseEnabled( $ns ) ) {
+			if ( !$this->namespaceChecker->isWikibaseEnabled( $ns ) ) {
 				continue;
 			}
 

@@ -87,7 +87,7 @@ class RepoItemLinkGenerator {
 			return false;
 		}
 
-		if ( $title->exists() && $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) && $title->exists() ) {
 
 			if ( ! $this->isSuppressed( $noExternalLangLinks ) ) {
 				return true;

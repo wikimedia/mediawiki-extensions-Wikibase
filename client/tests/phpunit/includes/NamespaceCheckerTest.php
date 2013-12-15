@@ -34,7 +34,7 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $excluded, $namespaceChecker->getExcludedNamespaces() );
 	}
 
-	public static function enabledProvider() {
+	public function enabledProvider() {
 		// Edge cases:
 		// * empty "exclude" matches nothing
 		// * empty "include" matches everything
@@ -56,14 +56,28 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider enabledProvider
 	 */
-	public function testIsWikibaseEnabled( $ns, $excluded, $enabled, $expected ) {
+	public function testIsWikibaseEnabled( $namespace, $excluded, $enabled, $expected ) {
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
-		$result = $namespaceChecker->isWikibaseEnabled( $ns );
+		$result = $namespaceChecker->isWikibaseEnabled( $namespace );
 		$this->assertEquals( $expected, $result );
 	}
 
+	/**
+	 * @dataProvider enabledInvalidProvider
+	 */
+	public function testIsWikibaseEnabledInvalid( $namespace, $excluded, $enabled ) {
+		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$namespaceChecker->isWikibaseEnabled( $namespace );
+	}
 
-	public static function wikibaseNamespacesProvider() {
+	public function enabledInvalidProvider() {
+		return array(
+			array( 'Item', array(), array() )
+		);
+	}
+
+	public function wikibaseNamespacesProvider() {
 		// Edge cases:
 		// * empty "exclude" matches nothing
 		// * empty "include" matches everything
