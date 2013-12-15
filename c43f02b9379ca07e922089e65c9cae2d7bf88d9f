@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ee75395_8eeca78f",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsUnitTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:56:36Z",
+      "side": 1,
+      "message": "would be great for some of this generic stuff :)",
+      "revId": "c43f02b9379ca07e922089e65c9cae2d7bf88d9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_5e3a1434",
         "filename": "repo/tests/phpunit/includes/api/MergeItemsUnitTest.php",
         "patchSetId": 3
@@ -66,6 +83,23 @@
       "writtenOn": "2013-12-05T14:46:38Z",
       "side": 1,
       "message": "Why is this static?\n\ntypical naming is fooBarProvider\n\nPlease keep valid and invalid test cases separate. This is part of the general notion that one should have a test case per desired characteristic, not one per method. For an example, see the tests in the DataValues Serialization component. If I now read one of these method names, I know it tests method x, and then need to go try figure out what behaviours it is actually testing.",
+      "revId": "c43f02b9379ca07e922089e65c9cae2d7bf88d9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_eed573bb",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsUnitTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:56:36Z",
+      "side": 1,
+      "message": ":(",
       "revId": "c43f02b9379ca07e922089e65c9cae2d7bf88d9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
