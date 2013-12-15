@@ -5,11 +5,12 @@ composer.phar
 composer.lock
 
 vendor/
-
-selenium/configuration.yml
+extensions/
 
 easyrdf/
 
 !.*
+.idea/
 
+selenium/configuration.yml
 tests/browser/.idea
