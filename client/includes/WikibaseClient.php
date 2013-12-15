@@ -62,12 +62,24 @@ final class WikibaseClient {
 	 */
 	protected $contentLanguage;
 
+	/**
+	 * @var DataTypeFactory
+	 */
 	protected $dataTypeFactory = null;
-	protected $entityIdParser = null;
+
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
 	protected $languageFallbackChainFactory = null;
 
+	/**
+	 * @var boolean
+	 */
 	protected $isInTestMode;
 
+	/**
+	 * @var ClientStore[]
+	 */
 	private $storeInstances = array();
 
 	/**
@@ -76,7 +88,7 @@ final class WikibaseClient {
 	private $stringNormalizer;
 
 	/**
-	 * @var \Site
+	 * @var Site
 	 */
 	private $site = null;
 
@@ -208,7 +220,7 @@ final class WikibaseClient {
 	 *
 	 * @return SnakFormatter
 	 */
-	public function newSnakFormatter( $format = SnakFormatter::FORMAT_PLAIN, FormatterOptions $options = null )  {
+	public function newSnakFormatter( $format = SnakFormatter::FORMAT_PLAIN, FormatterOptions $options )  {
 		return $this->getSnakFormatterFactory()->getSnakFormatter( $format, $options );
 	}
 
