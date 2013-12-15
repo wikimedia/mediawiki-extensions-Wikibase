@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_515d25ef",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-15T14:49:08Z",
+      "side": 1,
+      "message": "assertInternalType( \u0027array\u0027, $var )",
+      "revId": "7718cc48ccffa37ed5bc30d848b2040b111274db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_3162a1a9",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-15T14:49:08Z",
+      "side": 1,
+      "message": "assertKeyExists IIRC",
+      "revId": "7718cc48ccffa37ed5bc30d848b2040b111274db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_f15799cb",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-15T14:49:08Z",
+      "side": 1,
+      "message": "good to see this does not have one test method per production method and that the naming is going in the right direction.\n\nFor this method name an \"s\" is missing though: testGetEntityHandlesParseException.\n\nHow about testGivenInvalidEntityId_ScribuntoExceptionIsThrown? I highly recommend you use such naming, as it helps to turn the tests into an easy to read specification of what the code should do.",
+      "revId": "7718cc48ccffa37ed5bc30d848b2040b111274db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
