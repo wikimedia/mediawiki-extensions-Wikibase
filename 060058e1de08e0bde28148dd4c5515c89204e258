@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_6cb84e25",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "\u0027wikibase\u0027 instead of \u0027wb\u0027",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0e4537b9",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "blank line",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ee457319",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "$uiLanguage would be better, as used below and reduce confusion with $userLanguages\n\nas long as $uiLanguage is well documented in comments, per above, it\u0027s less confusing",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_2ee47b09",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "please make this into two lines of code. right now, it\u0027s excessively long",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0e82d701",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "$args",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8ec02756",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "return $this-\u003eexpandPlaceholder( $name, $args );",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_eec45346",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "line is excessively long",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ce4aafc8",
+        "filename": "repo/includes/UserLanguages.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "hmmm, seeing this in the placeholder class, i thought it represented an array of languages or such value.\n\nmaybe UserLanguagesResolver or something like that. (i hate naming!)",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_4e0e9f92",
+        "filename": "repo/includes/UserLanguages.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "perhaps $user should be passed here.  and maybe call it getLanguageForUser() or something more specific",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ce218ff8",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "blank line after namespace",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ee28d3de",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "no slash",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_2e8a3be4",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "looks odd  should this be count( $languages )?",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6e84c3d8",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "use SpecialPageFactory and then no slash needed",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ee6fb324",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": "agree",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8e66e74c",
+        "filename": "repo/tests/phpunit/includes/view/TextInjectorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:35:55Z",
+      "side": 1,
+      "message": ":)",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
