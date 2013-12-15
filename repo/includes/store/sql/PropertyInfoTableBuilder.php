@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DatabaseBase;
 use MessageReporter;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Utility class for rebuilding the wb_property_info table.
@@ -119,9 +120,9 @@ class PropertyInfoTableBuilder {
 	/**
 	 * Sets the reporter to use for reporting progress.
 	 *
-	 * @param \MessageReporter $reporter
+	 * @param MessageReporter $reporter
 	 */
-	public function setReporter( \MessageReporter $reporter ) {
+	public function setReporter( MessageReporter $reporter ) {
 		$this->reporter = $reporter;
 	}
 
@@ -204,7 +205,7 @@ class PropertyInfoTableBuilder {
 			$c = 0;
 
 			foreach ( $props as $row ) {
-				$id = new EntityId( Property::ENTITY_TYPE, (int)$row->epp_entity_id );
+				$id = PropertyId::newFromNumber( (int)$row->epp_entity_id );
 				$this->updatePropertyInfo( $dbw, $id );
 
 				$rowId = $row->epp_entity_id;
@@ -259,15 +260,10 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \DatabaseBase $dbw the database connection to use
-	 * @param EntityId $id the Property to process
-	 * @throws \InvalidArgumentException
+	 * @param DatabaseBase $dbw the database connection to use
+	 * @param PropertyId $id the Property to process
 	 */
-	protected function updatePropertyInfo( \DatabaseBase $dbw, EntityId $id ) {
-		if ( $id->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new \InvalidArgumentException( 'Property ID expected! ' . $id );
-		}
-
+	protected function updatePropertyInfo( DatabaseBase $dbw, PropertyId $id ) {
 		$property = $this->entityLookup->getEntity( $id );
 
 		assert( $property instanceof Property );
