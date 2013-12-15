@@ -1,0 +1,27 @@
+{
+	"name": "data-values/value-view",
+	"type": "mediawiki-extension",
+	"description": "Provides JS widgets to edit values defined by the DataValues library",
+	"keywords": [
+	],
+	"homepage": "https://www.mediawiki.org/wiki/Extension:ValueView",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Daniel Werner",
+			"homepage": "https://www.mediawiki.org/wiki/User:Danwe"
+		}
+	],
+	"support": {
+		"irc": "irc://irc.freenode.net/wikidata"
+	},
+	"require": {
+		"php": ">=5.3.0",
+		"data-values/javascript": "@dev"
+	},
+	"autoload": {
+		"files": [
+
+		]
+	}
+}
