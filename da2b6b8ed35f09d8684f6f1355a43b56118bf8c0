@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_716389a7",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-15T15:08:34Z",
+      "side": 1,
+      "message": "Why is this public?",
+      "revId": "da2b6b8ed35f09d8684f6f1355a43b56118bf8c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_91660db7",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-15T15:08:34Z",
+      "side": 1,
+      "message": "I thought you disliked using strings such as \u0027item\u0027? In that case, why are you not using constants here?",
+      "revId": "da2b6b8ed35f09d8684f6f1355a43b56118bf8c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_510405c9",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-15T15:08:34Z",
+      "side": 1,
+      "message": "Why is this public? If this is a valid way to interact with the class, then I\u0027d expect an explicit test for it.",
+      "revId": "da2b6b8ed35f09d8684f6f1355a43b56118bf8c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
