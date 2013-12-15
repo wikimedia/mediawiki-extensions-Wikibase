@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_ae1e4bbc",
+        "filename": "client/tests/phpunit/includes/RepoLinkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-15T21:17:19Z",
+      "side": 1,
+      "message": "\"get namespace invalid thow exception\"\n\nMissing an \"s\".\n\nAlso, better to have \"get invalid namespace throws exception\".\n\nBetter yet \"given invalid entity type, get namespace throws exception\"\n\nBy thinking about this I realize the original name is a bit deceptive",
+      "revId": "254dce29c9afb5b12d87319ed1b3f4d313c5f67c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
