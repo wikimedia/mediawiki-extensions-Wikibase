@@ -1,16 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
 
 /**
  * Holds ItemContent objects for testing proposes.
- *
- * @file
- * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -22,12 +19,48 @@ final class TestItemContents {
 	 * @return ItemContent[]
 	 */
 	public static function getItems() {
-		// @codeCoverageIgnoreStart
 		return array_map(
 			'\Wikibase\ItemContent::newFromItem',
-			TestItems::getItems()
+			self::getItemObjects()
 		);
-		// @codeCoverageIgnoreEnd
+	}
+
+	private static function getItemObjects() {
+		$items = array();
+
+		$items[] = Item::newEmpty();
+
+		$item = Item::newEmpty();
+
+		$item->setDescription( 'en', 'foo' );
+		$item->setLabel( 'en', 'bar' );
+
+		$items[] = $item;
+
+		$item = Item::newEmpty();
+
+		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
+
+		$items[] = $item;
+
+		$item = Item::newEmpty();
+		$item->addSiteLink( new SiteLink( 'enwiki', 'spam' ) );
+
+		$items[] = $item;
+
+		$item = Item::newEmpty();
+		$item->addSiteLink( new SiteLink( 'enwiki', 'spamz' ) );
+		$item->addSiteLink( new SiteLink( 'dewiki', 'foobar' ) );
+
+		$item->setDescription( 'en', 'foo' );
+		$item->setLabel( 'en', 'bar' );
+
+		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
+		$item->addAliases( 'de', array( 'foobar', 'spam' ) );
+
+		$items[] = $item;
+
+		return $items;
 	}
 
 }

@@ -73,6 +73,7 @@ return call_user_func( function() {
 		'Wikibase\Utils' => 'includes/Utils.php',
 		'Wikibase\WikibaseDiffOpFactory' => 'includes/WikibaseDiffOpFactory.php',
 		'Wikibase\Lib\WikibaseDataTypeBuilders' => 'includes/WikibaseDataTypeBuilders.php',
+		'DataValues\DataValueFactory' => 'includes/DataValueFactory.php',
 
 		// this should really be in core
 		'MessageReporter' => 'includes/MessageReporter.php',
