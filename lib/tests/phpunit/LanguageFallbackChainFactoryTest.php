@@ -35,40 +35,29 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	}
 
 	private function setupDisabledVariants( $disabledVariants ) {
-		global $wgDisabledVariants, $wgLangObjCacheSize;
-		$originalDisabledVariants = $wgDisabledVariants;
-		$originalLangObjCacheSize = $wgLangObjCacheSize;
-		if ( $disabledVariants ) {
-			$wgDisabledVariants = $disabledVariants;
-		}
-		$wgLangObjCacheSize = 0;
-		return array( $originalDisabledVariants, $originalLangObjCacheSize );
-	}
-
-	private function clearDisabledVariants( $state ) {
-		global $wgDisabledVariants, $wgLangObjCacheSize;
-		list( $wgDisabledVariants, $wgLangObjCacheSize ) = $state;
+		$this->setMwGlobals( array(
+			'wgDisabledVariants' => $disabledVariants,
+			'wgLangObjCacheSize' => 0
+		) );
 	}
 
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = null ) {
-		$state = $this->setupDisabledVariants( $disabledVariants );
+	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = array() ) {
+		$this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode )->getFallbackChain();
-		$this->clearDisabledVariants( $state );
 		$this->assertChainEquals( $expected, $chain );
 	}
 
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = null ) {
-		$state = $this->setupDisabledVariants( $disabledVariants );
+	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = array() ) {
+		$this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguageCode( $lang, $mode )->getFallbackChain();
-		$this->clearDisabledVariants( $state );
 		$this->assertChainEquals( $expected, $chain );
 	}
 
@@ -232,16 +221,15 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected, $disabledVariants = null ) {
+	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected, $disabledVariants = array() ) {
 		if ( $mode !== LanguageFallbackChainFactory::FALLBACK_ALL ) {
 			$this->assertTrue( true );
 			return;
 		}
-		$state = $this->setupDisabledVariants( $disabledVariants );
+		$this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$anon = new \User();
 		$chain = $factory->newFromUserAndLanguageCode( $anon, $lang )->getFallbackChain();
-		$this->clearDisabledVariants( $state );
 		$this->assertChainEquals( $expected, $chain );
 	}
 
