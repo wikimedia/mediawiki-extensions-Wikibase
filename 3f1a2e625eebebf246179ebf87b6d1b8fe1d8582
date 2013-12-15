@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_0e5ad784",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:42:47Z",
+      "side": 1,
+      "message": "namespace",
+      "revId": "3f1a2e625eebebf246179ebf87b6d1b8fe1d8582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ee56935e",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:42:47Z",
+      "side": 1,
+      "message": "namespace",
+      "revId": "3f1a2e625eebebf246179ebf87b6d1b8fe1d8582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ce4f4fc0",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:42:47Z",
+      "side": 1,
+      "message": "we really don\u0027t support postgresql currently and don\u0027t have pg.sql files for all the update stuff.  I would remove that for now.",
+      "revId": "3f1a2e625eebebf246179ebf87b6d1b8fe1d8582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ae4c0bcc",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:42:47Z",
+      "side": 1,
+      "message": "namespace",
+      "revId": "3f1a2e625eebebf246179ebf87b6d1b8fe1d8582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8ec5c70f",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:42:47Z",
+      "side": 1,
+      "message": "namespace (here and in comments)",
+      "revId": "3f1a2e625eebebf246179ebf87b6d1b8fe1d8582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6eca831f",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-15T21:42:47Z",
+      "side": 1,
+      "message": "we don\u0027t really support postgres.   i suggest to remove that for now and not pretend we support postgres here :)   \n\nmaybe sometime i or someone else will find time to add such support, but not a priority currently",
+      "revId": "3f1a2e625eebebf246179ebf87b6d1b8fe1d8582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
