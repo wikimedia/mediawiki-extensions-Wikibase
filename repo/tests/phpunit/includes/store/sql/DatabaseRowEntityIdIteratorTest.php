@@ -24,6 +24,12 @@ use Wikibase\ItemContent;
  */
 class DatabaseRowEntityIdIteratorTest extends \MediaWikiTestCase {
 
+	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
+
+		$this->tablesUsed[] = 'wb_entity_per_page';
+	}
+
 	/**
 	 * @param EntityId[] $entityIds
 	 *
