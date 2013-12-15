@@ -88,7 +88,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		wfProfileIn( __METHOD__ );
 
 		//First check whether there's anything to update
-		$newTerms = $entity->getTerms();
+		$newTerms = $this->getEntityTerms( $entity );
 		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
 
 		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\Term::compare' );
@@ -168,6 +168,52 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		wfProfileOut( __METHOD__ );
 
 		return $success;
+	}
+
+	/**
+	 * TODO: this method belongs in Entity itself. This change can only be made once
+	 * there is a sane Term object in DataModel itself though.
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return Term[]
+	 */
+	public function getEntityTerms( Entity $entity ) {
+		$terms = array();
+
+		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
+			$term = new Term();
+
+			$term->setLanguage( $languageCode );
+			$term->setType( Term::TYPE_DESCRIPTION );
+			$term->setText( $description );
+
+			$terms[] = $term;
+		}
+
+		foreach ( $entity->getLabels() as $languageCode => $label ) {
+			$term = new Term();
+
+			$term->setLanguage( $languageCode );
+			$term->setType( Term::TYPE_LABEL );
+			$term->setText( $label );
+
+			$terms[] = $term;
+		}
+
+		foreach ( $entity->getAllAliases() as $languageCode => $aliases ) {
+			foreach ( $aliases as $alias ) {
+				$term = new Term();
+
+				$term->setLanguage( $languageCode );
+				$term->setType( Term::TYPE_ALIAS );
+				$term->setText( $alias );
+
+				$terms[] = $term;
+			}
+		}
+
+		return $terms;
 	}
 
 
