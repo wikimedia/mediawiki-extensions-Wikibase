@@ -13,8 +13,7 @@
     "license": "GNU GPL v2+",
     "authors": [
         {
-            "name": "The Wikidata team",
-            "role": "Developer"
+            "name": "The Wikidata team"
         }
     ],
 	"support": {
@@ -23,26 +22,24 @@
 		"forum": "https://www.mediawiki.org/wiki/Talk:Wikibase",
 		"wiki": "https://www.mediawiki.org/wiki/Wikibase"
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/WikibaseDataModel.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataValues.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataTypes.git"
-		}
-	],
     "require": {
         "php": ">=5.3.2",
-		"data-values/data-values": "dev-master",
-		"data-values/data-types": "dev-master",
-		"wikibase/data-model": "dev-master",
+		"data-values/data-values": "~0.1",
+		"data-values/common": "~0.1",
+		"data-values/geo": "~0.1",
+		"data-values/number": "~0.2",
+		"data-values/time": "~0.1",
+		"data-values/validators": "~0.1",
+		"data-values/data-types": "~0.1",
+		"data-values/serialization": "~0.1",
+		"data-values/javascript": "~0.1",
+		"data-values/value-view": "~0.1",
+		"wikibase/data-model": "0.6.*@dev",
         "diff/diff": ">=0.9"
     },
-	"minimum-stability" : "dev"
+	"autoload": {
+		"files" : [
+			"Wikibase.composer.php"
+		]
+	}
 }
