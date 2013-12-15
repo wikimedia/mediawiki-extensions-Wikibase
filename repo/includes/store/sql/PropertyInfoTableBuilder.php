@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DatabaseBase;
 use MessageReporter;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Utility class for rebuilding the wb_property_info table.
@@ -204,7 +205,7 @@ class PropertyInfoTableBuilder {
 			$c = 0;
 
 			foreach ( $props as $row ) {
-				$id = new EntityId( Property::ENTITY_TYPE, (int)$row->epp_entity_id );
+				$id = PropertyId::newFromNumber( (int)$row->epp_entity_id );
 				$this->updatePropertyInfo( $dbw, $id );
 
 				$rowId = $row->epp_entity_id;
