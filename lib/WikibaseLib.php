@@ -37,7 +37,7 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1
 
 if ( defined( 'WBL_VERSION' ) ) {
 	// Do not initialize more then once.
-	return;
+	return 1;
 }
 
 define( 'WBL_VERSION', '0.5 alpha'
@@ -49,68 +49,17 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 	include_once( __DIR__ . '/../vendor/autoload.php' );
 }
 
-// Include the WikibaseDataModel component if that hasn't been done yet.
-if ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../WikibaseDataModel/WikibaseDataModel.php' );
-}
-
-// Include the Diff library if that hasn't been done yet.
-if ( !defined( 'Diff_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../Diff/Diff.php' );
-}
-
-// Include the DataValues library if that hasn't been done yet.
-if ( !defined( 'DATAVALUES_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../DataValues/DataValues.php' );
-}
-
-// Include the DataValuesInterfaces library if that hasn't been done yet.
-if ( !defined( 'DATAVALUES_INTERFACES_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../DataValues/DataValuesInterfaces/DataValuesInterfaces.php' );
-}
-
-// Include the DataValuesCommon library if that hasn't been done yet.
-if ( !defined( 'DATAVALUES_COMMON_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../DataValues/DataValuesCommon/DataValuesCommon.php' );
-}
-
-// Include the ValueView library if that hasn't been done yet.
-if ( !defined( 'VALUEVIEW_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../DataValues/ValueView/ValueView.php' );
-}
-
-// Include the ValueView library if Wikibase dependencies are installed via composer.
-if ( !defined( 'VALUEVIEW_VERSION' ) ) {
-	@include_once( __DIR__ . '/../vendor/data-values/data-values/ValueView/ValueView.php' );
-}
-
-// Include the ValueView library if that hasn't been done yet. (e.g. using Wikibase build)
-if ( !defined( 'VALUEVIEW_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../../data-values/data-values/ValueView/ValueView.php' );
-}
-
-// Include the DataTypes library if that hasn't been done yet.
-if ( !defined( 'DataTypes_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../DataTypes/DataTypes.php' );
-}
-
-$dependencies = array(
-	'WIKIBASE_DATAMODEL_VERSION' => 'Wikibase DataModel',
-	'Diff_VERSION' => 'Diff',
-	'DATAVALUES_VERSION' => 'DataValues',
-	'DATAVALUES_INTERFACES_VERSION' => 'DataValuesInterfaces',
-	'DATAVALUES_COMMON_VERSION' => 'DataValuesCommon',
-	'DataTypes_VERSION' => 'DataTypes',
-	'VALUEVIEW_VERSION' => 'ValueView',
+$GLOBALS['evilDataValueMap'] = array_merge(
+	$GLOBALS['evilDataValueMap'],
+	array(
+		'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+		'monolingualtext' => 'DataValues\MonolingualTextValue',
+		'multilingualtext' => 'DataValues\MultilingualTextValue',
+		'quantity' => 'DataValues\QuantityValue',
+		'time' => 'DataValues\TimeValue',
+		'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+	)
 );
-
-foreach ( $dependencies as $constant => $name ) {
-	if ( !defined( $constant ) ) {
-		throw new Exception( 'WikibaseLib depends on the ' . $name . ' extension.' );
-	}
-}
-
-unset( $dependencies );
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgAutoloadClasses, $wgExtensionMessagesFiles, $wgExtensionFunctions;

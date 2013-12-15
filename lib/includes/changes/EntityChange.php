@@ -404,7 +404,8 @@ class EntityChange extends DiffChange {
 		if ( is_array( $data ) && isset( $data['_claimclass_'] ) ) {
 			$class = $data['_claimclass_'];
 
-			if ( $class === 'Wikibase\Claim' || is_subclass_of( $class, 'Wikibase\Claim' ) ) {
+			if ( $class === 'Wikibase\Claim' || $class === 'Wikibase\DataModel\Claim\Claim'
+				|| is_subclass_of( $class, 'Wikibase\Claim' ) ) {
 				unset( $data['_claimclass_'] );
 
 				$claim = call_user_func( array( $class, 'newFromArray' ), $data );

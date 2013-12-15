@@ -418,7 +418,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$lookup->saveTermsOfEntity( $item );
 
 		// check that the stored terms are the ones in the modified items
-		$expectedTerms = $item->getTerms();
+		$expectedTerms = $lookup->getEntityTerms( $item );
 		$actualTerms = $lookup->getTermsOfEntity( $item->getId() );
 
 		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\Term::compare' );
