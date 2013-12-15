@@ -1,0 +1,56 @@
+/**
+ * @since 0.1
+ * @file
+ * @ingroup ValueParsers
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
+( function( vp, dv, $, QUnit ) {
+	'use strict';
+
+	var PARENT = vp.tests.ValueParserTest,
+		constructor = function() {
+		};
+
+	/**
+	 * Constructor for creating a test object holding tests for the NullParser.
+	 *
+	 * @constructor
+	 * @extends dv.tests.ValueParserTest
+	 * @since 0.1
+	 */
+	vp.tests.NullParserTest = vp.util.inherit( PARENT, constructor, {
+
+		/**
+		 * @see vp.tests.ValueParserTest.getObject
+		 */
+		getObject: function() {
+			return vp.NullParser;
+		},
+
+		/**
+		 * @see vp.tests.ValueParserTest.getParseArguments
+		 */
+		getParseArguments: function() {
+			var date = new Date(),
+				list = [ true, false, null ],
+				dataValue = new dv.UnknownValue( 'foo' );
+
+			return [
+				[ dataValue, dataValue ],
+				[ null, null ],
+				[ '42', new dv.UnknownValue( '42' ) ],
+				[ -4.2, new dv.UnknownValue( -4.2 ) ],
+				[ date, new dv.UnknownValue( date ) ],
+				[ list, new dv.UnknownValue( list ) ]
+			];
+		}
+
+	} );
+
+	var test = new vp.tests.NullParserTest();
+
+	test.runTests( 'valueParsers.NullParser' );
+
+}( valueParsers, dataValues, jQuery, QUnit ) );

@@ -22,7 +22,7 @@ return call_user_func( function() {
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/resources',
-		'remoteExtPath' =>  'DataValues/DataValues/resources',
+		'remoteExtPath' =>  'DataValuesJavascript/resources',
 	);
 
 	return array(
