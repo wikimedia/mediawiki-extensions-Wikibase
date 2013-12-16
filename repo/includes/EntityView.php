@@ -766,84 +766,56 @@ abstract class EntityView extends \ContextSource {
 	 * @param bool           $editableView whether entities on this page should be editable.
 	 *                       This is independent of user permissions.
 	 *
-	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
+	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id
+	 *  is in a global JS config variable.
 	 */
-	public function registerJsConfigVars( OutputPage $out, EntityRevision $entityRevision, $langCode, $editableView = false  ) {
+	public function registerJsConfigVars( OutputPage $out, EntityRevision $entityRevision,
+		$langCode, $editableView = false
+	) {
 		wfProfileIn( __METHOD__ );
+
+		$entityViewJsConfig = new EntityViewJsConfig(
+			$this->languageFallbackChain,
+			$this->entityInfoBuilder,
+			$this->idParser,
+			$this->entityTitleLookup
+		);
 
 		$user = $this->getUser();
-		$entity = $entityRevision->getEntity();
-		$title = $this->entityTitleLookup->getTitleForId( $entityRevision->getEntity()->getId() );
 
-		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
-		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $title ) ); //NOTE: deprecated
+		$serializedEntity = $out->getProperty( 'wikibase-entity' );
 
-		// tell JS whether the user can edit
-		$out->addJsConfigVars( 'wbUserCanEdit', $title->userCan( 'edit', $user, false ) ); //TODO: make this a per-entity info
-		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
+		$langCodes = Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain );
 
-		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
-		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
+		if ( $serializedEntity ) {
+			$options = new SerializationOptions();
+			$options->setLanguages( $langCodes );
+			$serializerFactory = new SerializerFactory();
 
-		// entity specific data
-		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
+			$entitySerializer = $serializerFactory->newUnserializerForEntity(
+				$serializedEntity['type'],
+				$options
+			);
 
-		// copyright warning message
-		$out->addJsConfigVars( 'wbCopyright', array(
-			'version' => Utils::getCopyrightMessageVersion(),
-			'messageHtml' => Utils::getCopyrightMessage()->parse(),
-		) );
+			$entity = $entitySerializer->newFromSerialization( $serializedEntity );
+		} else {
+			// fallback in case entity is not cached
+			$entity = $entityRevision->getEntity();
+			$serializedEntity = $this->getSerializedEntity( $entity, $langCodes );
+		}
 
-		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
+		$title = $this->entityTitleLookup->getTitleForId( $entity->getId() );
 
-		// TODO: use injected id formatter
-		$serializationOptions = new SerializationOptions();
-		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array( $langCode => $this->languageFallbackChain ) );
+		$configVars = $entityViewJsConfig->getJsConfigVars( $entityRevision, $entity, $title,
+			$user, $langCode, $editableView );
 
-		$serializerFactory = new SerializerFactory( $serializationOptions );
-		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		foreach( $configVars as $key => $configVar ) {
+			$out->addJsConfigVars( $key, $configVar );
+		}
 
-		$out->addJsConfigVars(
-			'wbEntity',
-			FormatJson::encode( $serializer->getSerialized( $entity ) )
-		);
-
-		// make information about other entities used in this entity available in JavaScript view:
-		$refFinder = new ReferencedEntitiesFinder();
-
-		$usedEntityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
-		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode );
-
-		$out->addJsConfigVars(
-			'wbUsedEntities',
-			FormatJson::encode( $basicEntityInfo )
-		);
+		$out->addJsConfigVars( 'wbEntity', FormatJson::encode( $serializedEntity ) );
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Fetches some basic entity information required for the entity view in JavaScript from a
-	 * set of entity IDs.
-	 * @since 0.4
-	 *
-	 * @param EntityId[] $entityIds
-	 * @param string $langCode For the entity labels which will be included in one language only.
-	 * @return array
-	 */
-	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
-		wfProfileIn( __METHOD__ );
-
-		//TODO: apply language fallback! Restore fallback test case in EntityViewTest::provideRegisterJsConfigVars()
-		$entities = $this->entityInfoBuilder->buildEntityInfo( $entityIds );
-		$this->entityInfoBuilder->removeMissing( $entities );
-		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
-		$this->entityInfoBuilder->addDataTypes( $entities );
-		$revisions = $this->attachRevisionInfo( $entities );
-
-		wfProfileOut( __METHOD__ );
-		return $revisions;
 	}
 
 	/**
@@ -882,37 +854,6 @@ abstract class EntityView extends \ContextSource {
 
 		wfProfileOut( __METHOD__ );
 		return $propertyLabels;
-	}
-
-	/**
-	 * Wraps each record in $entities with revision info, similar to how EntityRevisionSerializer
-	 * does this.
-	 *
-	 * @todo: perhaps move this into EntityInfoBuilder; Note however that it is useful to be
-	 * able to pick which information is actually needed in which context. E.g. we are skipping the
-	 * actual revision ID here, and thereby avoiding any database access.
-	 *
-	 * @param array $entities A list of entity records
-	 *
-	 * @return array A list of revision records
-	 */
-	private function attachRevisionInfo( array $entities ) {
-		$idParser = $this->idParser;
-		$titleLookup = $this->entityTitleLookup;
-
-		return array_map( function( $entity ) use ( $idParser, $titleLookup ) {
-				$id = $idParser->parse( $entity['id'] );
-
-				// If the title lookup needs DB access, we really need a better way to do this!
-				$title = $titleLookup->getTitleForId( $id );
-
-				return array(
-					'content' => $entity,
-					'title' => $title->getPrefixedText(),
-					//'revision' => 0,
-				);
-			},
-			$entities );
 	}
 
 	protected function getSerializedEntity( Entity $entity, array $langCodes ) {
