@@ -343,8 +343,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Changed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Removed {{PLURAL:$1|qualifier|qualifiers}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$3|reference|references}} from claim',
-	'wikibase-item-summary-wbmergeitems-from' => 'Merged item from \'$3\'',
-	'wikibase-item-summary-wbmergeitems-to' => 'Merged item in to \'$3\'',
+	'wikibase-item-summary-wbmergeitems-from' => 'Merged item from "$3"',
+	'wikibase-item-summary-wbmergeitems-to' => 'Merged item in to "$3"',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -404,7 +404,7 @@ to find out where it went.',
 * timezone – explicit value as a signed integer. Timezone information as an offset from UTC in minutes.
 * before – explicit integer value for how many units after the given time it could be. The unit is given by the precision.
 * after – explicit integer value for how many units before the given time it could be. The unit is given by the precision.
-* precision – explicit value encoded in a shortint. The numbers have the following meaning: 0 - billion years, 1 - hundred million years, ..., 6 - millennia, 7 - century, 8 - decade, 9 - year, 10 - month, 11 - day, 12 - hour, 13 - minute, 14 - second.
+* precision – explicit value encoded in a shortint. The numbers have the following meaning: 0 - billion years, 1 - hundred million years, ..., 6 - millennium, 7 - century, 8 - decade, 9 - year, 10 - month, 11 - day, 12 - hour, 13 - minute, 14 - second.
 * calendarmodel – explicit value given as a URI. It will identify the calendar model that should be used to display this time value.',
 	'wikibase-listdatatypes-url-head' => 'URL',
 	'wikibase-listdatatypes-url-body' => 'Literal data field for a URL. URLs are restricted to the protocols also supported for external links in wikitext.',
