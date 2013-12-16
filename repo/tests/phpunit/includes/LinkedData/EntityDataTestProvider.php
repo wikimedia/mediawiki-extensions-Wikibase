@@ -1,6 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityRevision;
+use Wikibase\Item;
 
 /**
  * Provider class for EntityData tests.
@@ -33,6 +36,28 @@ namespace Wikibase\Test;
  */
 class EntityDataTestProvider {
 
+	public static function getEntityRevisions() {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q42' ) );
+		$item->setLabel( 'en', 'Raarrr!' );
+
+		$itemRev = new EntityRevision( $item, 4242, '20131211100908' );
+
+		return array( $itemRev );
+	}
+
+	public static function getMockRepo() {
+		$repo = new MockRepository();
+		$entityRevs = self::getEntityRevisions();
+
+		/* @var EntityRevision $entityRev */
+		foreach ( $entityRevs as $entityRev ) {
+			$repo->putEntity( $entityRev->getEntity(), $entityRev->getRevision(), $entityRev->getTimestamp() );
+		}
+
+		return $repo;
+	}
+
 	public static function provideHandleRequest() {
 		$cases = array();
 
@@ -46,7 +71,7 @@ class EntityDataTestProvider {
 
 		$cases[] = array( // #1: valid item ID
 			'',      // subpage
-			array( 'id' => '{testitemid}', 'format' => 'json' ), // parameters
+			array( 'id' => 'Q42', 'format' => 'json' ), // parameters
 			array(), // headers
 			'!^\{.*Raarrr!', // output regex
 			200,       // http code
@@ -63,8 +88,8 @@ class EntityDataTestProvider {
 		$cases[] = array( // #3: revision ID
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
-				'revision' => '{testitemrev}',
+				'id' => 'Q42',
+				'revision' => '4242',
 				'format' => 'json',
 			),
 			array(), // headers
@@ -75,7 +100,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #4: bad revision ID
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
+				'id' => 'Q42',
 				'revision' => '1231231230',
 				'format' => 'json',
 			),
@@ -87,7 +112,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #5: no format, cause 303 to default format
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
+				'id' => 'Q42',
 			),
 			array(), // headers
 			'!!', // output regex
@@ -100,7 +125,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #6: mime type
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
+				'id' => 'Q42',
 				'format' => 'application/json',
 			),
 			array(), // headers
@@ -114,7 +139,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #7: bad format
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
+				'id' => 'Q42',
 				'format' => 'sdakljflsd',
 			),
 			array(), // headers
@@ -125,7 +150,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #8: xml
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
+				'id' => 'Q42',
 				'format' => 'xml',
 			),
 			array(), // headers
@@ -183,7 +208,7 @@ class EntityDataTestProvider {
 		$cases[] = array(
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
+				'id' => 'Q42',
 				'format' => 'application/json',
 			),
 			array(), // headers
@@ -198,14 +223,14 @@ class EntityDataTestProvider {
 		$cases[] = array(
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
+				'id' => 'Q42',
 				'format' => 'HTML',
 			),
 			array(), // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
-				'Location' => '!{testitemid}$!'
+				'Location' => '!Q42$!'
 			)
 		);
 
@@ -213,15 +238,15 @@ class EntityDataTestProvider {
 		$cases[] = array(
 			'',      // subpage
 			array( // parameters
-				'id' => '{testitemid}',
-				'revision' => '{testitemrev}',
+				'id' => 'Q42',
+				'revision' => '4242',
 				'format' => 'text/html',
 			),
 			array(), // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
-				'Location' => '!{testitemid}(\?|&)oldid={testitemrev}!'
+				'Location' => '!Q42(\?|&)oldid=4242!'
 			)
 		);
 
@@ -229,7 +254,7 @@ class EntityDataTestProvider {
 		$cases[] = array(
 			'',      // subpage
 			array( // parameters
-				'id' => '{lowertestitemid}',
+				'id' => 'q42',
 				'format' => 'application/json',
 			),
 			array(), // headers
@@ -242,19 +267,19 @@ class EntityDataTestProvider {
 
 		// #24: /Q5 does trigger a 303
 		$cases[] = array(
-			'{testitemid}',      // subpage
+			'Q42',      // subpage
 			array(), // parameters
 			array(), // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
-				'Location' => '!/{testitemid}\.[-./\w]+$!'
+				'Location' => '!/Q42\.[-./\w]+$!'
 			)
 		);
 
 		// #25: /Q5.json does not trigger a redirect
 		$cases[] = array(
-			'{testitemid}.json',      // subpage
+			'Q42.json',      // subpage
 			array(),
 			array(), // headers
 			'!!', // output regex
@@ -266,55 +291,55 @@ class EntityDataTestProvider {
 
 		// #26: /q5.json does trigger a 301
 		$cases[] = array(
-			'{lowertestitemid}.JSON',      // subpage
+			'q42.JSON',      // subpage
 			array(), // parameters
 			array(), // headers
 			'!!', // output regex
 			301,  // http code
 			array( // headers
-				'Location' => '!/{testitemid}\.json$!'
+				'Location' => '!/Q42\.json$!'
 			)
 		);
 
 		// #27: /q5:1234.json does trigger a 301 to the correct rev
 		$cases[] = array(
-			'{lowertestitemid}.json',      // subpage
-			array( 'revision' => '{testitemrev}' ), // parameters
+			'q42.json',      // subpage
+			array( 'revision' => '4242' ), // parameters
 			array(), // headers
 			'!!', // output regex
 			301,  // http code
 			array( // headers
-				'Location' => '!{testitemid}\.json[\?&]oldid={testitemrev}!'
+				'Location' => '!Q42\.json[\?&]oldid=4242!'
 			)
 		);
 
 		// #28: /Q5.application/json does trigger a 301
 		$cases[] = array(
-			'{testitemid}.application/json',      // subpage
+			'Q42.application/json',      // subpage
 			array(), // parameters
 			array(), // headers
 			'!!', // output regex
 			301,  // http code
 			array( // headers
-				'Location' => '!{testitemid}\.json!'
+				'Location' => '!Q42\.json!'
 			)
 		);
 
 		// #29: /Q5.html does trigger a 303
 		$cases[] = array(
-			'{testitemid}.html',      // subpage
+			'Q42.html',      // subpage
 			array(), // parameters
 			array(), // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
-				'Location' => '!{testitemid}$!'
+				'Location' => '!Q42$!'
 			)
 		);
 
 		// #30: /Q5.xyz triggers a 415
 		$cases[] = array(
-			'{testitemid}.xyz',      // subpage
+			'Q42.xyz',      // subpage
 			array(),
 			array(), // headers
 			'!!', // output regex
@@ -324,7 +349,7 @@ class EntityDataTestProvider {
 
 		// #31: /Q5 with "Accept: text/foobar" triggers a 406
 		$cases[] = array(
-			'{testitemid}',      // subpage
+			'Q42',      // subpage
 			array(),
 			array( // headers
 				'Accept' => 'text/foobar'
@@ -336,7 +361,7 @@ class EntityDataTestProvider {
 
 		// #32: /Q5 with "Accept: text/html" triggers a 303
 		$cases[] = array(
-			'{testitemid}',      // subpage
+			'Q42',      // subpage
 			array(), // parameters
 			array( // headers
 				'Accept' => 'text/HTML'
@@ -344,13 +369,13 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			array( // headers
-				'Location' => '!{testitemid}$!'
+				'Location' => '!Q42$!'
 			)
 		);
 
 		// #33: /Q5 with "Accept: application/json" triggers a 303
 		$cases[] = array(
-			'{testitemid}',      // subpage
+			'Q42',      // subpage
 			array(), // parameters
 			array( // headers
 				'Accept' => 'application/foobar, application/json'
@@ -358,13 +383,13 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			array( // headers
-				'Location' => '!/{testitemid}.json$!'
+				'Location' => '!/Q42.json$!'
 			)
 		);
 
 		// #34: /Q5 with "Accept: text/html; q=0.5, application/json" uses weights for 303
 		$cases[] = array(
-			'{testitemid}',      // subpage
+			'Q42',      // subpage
 			array(), // parameters
 			array( // headers
 				'Accept' => 'text/html; q=0.5, application/json'
@@ -372,15 +397,15 @@ class EntityDataTestProvider {
 			'!!', // output regex
 			303,  // http code
 			array( // headers
-				'Location' => '!/{testitemid}.json$!'
+				'Location' => '!/Q42.json$!'
 			)
 		);
 
 		// If-Modified-Since handling
 
-		// #35: IMS from the deep bast should return a 200
+		// #35: IMS from the deep bast should return a 200 (revision timestamp is 20131211100908)
 		$cases[] = array(
-			'{testitemid}.xml',	  // subpage
+			'Q42.xml',	  // subpage
 			array(), // parameters
 			array( // headers
 				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' )
@@ -389,12 +414,12 @@ class EntityDataTestProvider {
 			200,  // http code
 		);
 
-		// #36: IMS from now should return a 304
+		// #36: new IMS should return a 304 (revision timestamp is 20131211100908)
 		$cases[] = array(
-			'{testitemid}.json',	  // subpage
+			'Q42.json',	  // subpage
 			array(), // parameters
 			array( // headers
-				'If-Modified-Since' => '{testitemtimestamp}'
+				'If-Modified-Since' => '20131213141516'
 			),
 			'!!', // output regex
 			304,  // http code
@@ -403,4 +428,26 @@ class EntityDataTestProvider {
 		return $cases;
 	}
 
+	public static function provideGetSerializedData() {
+		$cases = array();
+
+		$entityRevisions = self::getEntityRevisions();
+		$entityRev = $entityRevisions[0];
+
+		$cases[] = array( // #0: json
+			'json',      // format
+			$entityRev, // entityRev
+			'!^\{.*Raarrr!', // output regex
+			'application/json',       // expected mime
+		);
+
+		$cases[] = array( // #1: xml
+			'xml',      // format
+			$entityRev, // entityRev
+			'!<entity!', // output regex
+			'text/xml',       // expected mime
+		);
+
+		return $cases;
+	}
 }
