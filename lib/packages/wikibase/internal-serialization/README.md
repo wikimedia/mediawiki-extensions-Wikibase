@@ -3,8 +3,8 @@
 Library containing serializers and deserializers for the data access layer of Wikibase Repo.
 
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseInternalSerialization.png?branch=master)](http://travis-ci.org/wmde/WikibaseInternalSerialization)
-[![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/badges/coverage.png?s=916d21028b031abe2e685192ccef46c6f47ba76a)](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/badges/quality-score.png?s=d56b9477c29f4799b3834c4fbcc3731687feae95)](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
+[![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/badges/coverage.png?s=b65f644a99b93ed3aa1a34e45efbccad798d168c)](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/badges/quality-score.png?s=1cd66e5c545917f947b4b838b7bfdeee9105843e)](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
 
 On [Packagist](https://packagist.org/packages/wikibase/internal-serialization):
 [![Latest Stable Version](https://poser.pugx.org/wikibase/internal-serialization/version.png)](https://packagist.org/packages/wikibase/internal-serialization)
