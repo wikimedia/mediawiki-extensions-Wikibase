@@ -36,9 +36,9 @@ class EntityDataUriManager {
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Title            $interfaceTitle
-	 * @param string[]          $supportedExtensions an associative Array mapping canonical format names to file extensions.
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param \Title               $interfaceTitle
+	 * @param string[]             $supportedExtensions an associative Array mapping canonical format names to file extensions.
+	 * @param EntityTitleLookup    $entityTitleLookup
 	 */
 	public function __construct(
 		Title $interfaceTitle,
@@ -47,7 +47,7 @@ class EntityDataUriManager {
 	) {
 		$this->interfaceTitle = $interfaceTitle;
 		$this->supportedExtensions = $supportedExtensions;
-		$this->entityTitleLookup = $entityTitleLookup; //XXX: needed only for getTitleForId
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -129,7 +129,7 @@ class EntityDataUriManager {
 	public function getDocName( EntityId $id, $format = '' ) {
 		$doc = $id->getSerialization();
 
-		//Note: Use upper case everywhere. EntityIdFormatter should do the right thing.
+		//Note: Use upper case everywhere.
 		$doc = strtoupper( $doc );
 
 		if ( $format !== null && $format !== '' ) {
