@@ -104,15 +104,21 @@ class RdfSerializer {
 	/**
 	 * Generates an RDF graph representing the given entity
 	 *
-	 * @param Entity $entity the entity to output.
-	 * @param \Revision $revision for meta data (optional)
+	 * @param EntityRevision $entityRevision the entity to output.
 	 *
 	 * @return EasyRdf_Graph
 	 */
-	public function buildGraphForEntity( Entity $entity, \Revision $revision = null ) {
+	public function buildGraphForEntityRevision( EntityRevision $entityRevision ) {
 		$builder = $this->newRdfBuilder();
 
-		$builder->addEntity( $entity, $revision );
+		$builder->addEntityRevisionInfo(
+			$entityRevision->getEntity()->getId(),
+			$entityRevision->getRevision(),
+			$entityRevision->getTimestamp()
+		);
+
+		$builder->addEntity( $entityRevision->getEntity() );
+
 		$builder->resolvedMentionedEntities( $this->entityLookup ); //TODO: optional
 
 		$graph = $builder->getGraph();
@@ -138,13 +144,12 @@ class RdfSerializer {
 	 * Returns the serialized entity.
 	 * Shorthand for $this->serializeRdf( $this->buildGraphForEntity( $entity ) ).
 	 *
-	 * @param Entity   $entity   the entity to serialize
-	 * @param \Revision $revision for meta data (optional)
+	 * @param EntityRevision $entityRevision   the entity to serialize
 	 *
 	 * @return string
 	 */
-	public function serializeEntity( Entity $entity, \Revision $revision = null ) {
-		$graph = $this->buildGraphForEntity( $entity, $revision );
+	public function serializeEntityRevision( EntityRevision $entityRevision ) {
+		$graph = $this->buildGraphForEntityRevision( $entityRevision );
 		$data = $this->serializeRdf( $graph );
 		return $data;
 	}

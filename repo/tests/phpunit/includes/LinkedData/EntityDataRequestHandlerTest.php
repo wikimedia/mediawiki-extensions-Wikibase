@@ -23,6 +23,7 @@ use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\Api\EntityTestHelper;
+use Wikibase\WikiPageEntityLookup;
 
 /**
  * @covers Wikibase\LinkedData\EntityDataRequestHandler
@@ -74,7 +75,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @return EntityDataRequestHandler
 	 */
 	protected function newHandler() {
-		$entityLookup = new MockRepository();
+		$entityLookup = new WikiPageEntityLookup();
 
 		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 
@@ -130,12 +131,13 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$contentFactory,
+			$entityLookup,
 			$idParser,
 			$service,
 			'json',
 			1800,
 			false,
-			null
+			'DENY'
 		);
 		return $handler;
 	}
