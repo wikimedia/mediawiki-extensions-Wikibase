@@ -15,7 +15,7 @@ use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Property;
 
 /**
- * @covers Wikibase\LinkedData\EntityUriManager
+ * @covers Wikibase\LinkedData\EntityDataUriManager
  *
  * @since 0.4
  *

@@ -10,7 +10,7 @@ use Title;
 use TestSites;
 
 /**
- * @covers EditEntityAction
+ * @covers Wikibase\EditEntityAction
  *
  * @since 0.1
  *
