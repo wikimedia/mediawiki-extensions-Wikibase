@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
+use FauxResponse;
 use HttpError;
 use OutputPage;
 use Wikibase\Item;

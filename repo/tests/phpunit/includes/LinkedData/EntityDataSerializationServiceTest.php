@@ -2,9 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Revision;
-use ValueFormatters\FormatterOptions;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityRevision;
 use Wikibase\Item;
 use Wikibase\LinkedData\EntityDataSerializationService;
 
@@ -54,18 +53,8 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 
 	public static function provideGetSerializedData() {
 		$entity = Item::newEmpty();
-		$entity->setId( 23 );
+		$entity->setId( new ItemId( 'Q23' ) );
 		$entity->setLabel( 'en', "ACME" );
-
-		$revisions = new Revision( array(
-			'id' => 123,
-			'page' => 23,
-			'user_text' => 'TestUser',
-			'user' => 13,
-			'timestamp' => '20130505010101',
-			'content_model' => CONTENT_MODEL_WIKIBASE_ITEM,
-			'comment' => 'just testing',
-		) );
 
 		//TODO: set up...
 
@@ -73,8 +62,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 
 		$cases[] = array( // #0:
 			'json',       // format
-			$entity,      // entity
-			null,         // revision
+			new EntityRevision( $entity, 123, '20130505010101' ),      // entity
 			'!^\{.*ACME!', // output regex
 			'application/json', // mime type
 		);
@@ -88,13 +76,12 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetSerializedData(
 		$format,
-		Entity $entity,
-		Revision $rev = null,
+		EntityRevision $entityRev,
 		$expectedDataRegex,
 		$expectedMimeType
 	) {
 		$service = $this->newService();
-		list( $data, $mimeType ) = $service->getSerializedData( $format, $entity, $rev );
+		list( $data, $mimeType ) = $service->getSerializedData( $format, $entityRev );
 
 		$this->assertEquals( $expectedMimeType, $mimeType );
 		$this->assertRegExp( $expectedDataRegex, $data, "outpout" );

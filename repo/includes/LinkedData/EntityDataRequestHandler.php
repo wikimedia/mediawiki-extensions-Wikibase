@@ -3,17 +3,17 @@ namespace Wikibase\LinkedData;
 
 use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityContentFactory;
+use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\HttpAcceptNegotiator;
 use Wikibase\HttpAcceptParser;
-use \Wikibase\Lib\EntityIdParser;
-use \Revision;
-use \WebRequest;
-use \WebResponse;
-use \OutputPage;
-use \HttpError;
-use \SquidUpdate;
-use Wikibase\Repo\WikibaseRepo;
+use WebRequest;
+use WebResponse;
+use OutputPage;
+use HttpError;
+use SquidUpdate;
+use Wikibase\Lib\EntityIdParser;
+use Wikibase\StorageException;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
@@ -51,9 +51,14 @@ class EntityDataRequestHandler {
 	protected $entityIdParser;
 
 	/**
-	 * @var EntityContentFactory
+	 * @var EntityRevisionLookup
 	 */
-	protected $entityContentFactory;
+	protected $entityRevisionLookup;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $entityTitleLookup;
 
 	/**
 	 * @var string
@@ -74,7 +79,8 @@ class EntityDataRequestHandler {
 	 * @since 0.4
 	 *
 	 * @param EntityDataUriManager           $uriManager
-	 * @param EntityContentFactory           $entityContentFactory
+	 * @param EntityTitleLookup              $entityTitleLookup
+	 * @param EntityRevisionLookup           $entityRevisionLookup
 	 * @param EntityIdParser                 $entityIdParser
 	 * @param EntityDataSerializationService $serializationService
 	 * @param string                         $defaultFormat
@@ -84,7 +90,8 @@ class EntityDataRequestHandler {
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
-		EntityContentFactory $entityContentFactory,
+		EntityTitleLookup $entityTitleLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		EntityIdParser $entityIdParser,
 		EntityDataSerializationService $serializationService,
 		$defaultFormat,
@@ -93,7 +100,8 @@ class EntityDataRequestHandler {
 		$frameOptionsHeader
 	) {
 		$this->uriManager = $uriManager;
-		$this->entityContentFactory = $entityContentFactory;
+		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->serializationService = $serializationService;
 		$this->defaultFormat = $defaultFormat;
@@ -315,9 +323,9 @@ class EntityDataRequestHandler {
 	}
 
 	/**
-		} else {
-			$title = $this->getDocTitle( $id, $format );
-		}
+	} else {
+	$title = $this->getDocTitle( $id, $format );
+	}
 
 	 * Output entity data.
 	 *
@@ -332,42 +340,18 @@ class EntityDataRequestHandler {
 	public function showData( WebRequest $request, OutputPage $output, $format, EntityId $id, $revision ) {
 
 		$prefixedId = $id->getSerialization();
-		$entity = $this->entityContentFactory->getFromId( $id );
 
-		if ( !$entity ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId"  );
-			throw new \HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
-		}
+		try {
+			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $id, $revision );
 
-		$page = $entity->getWikiPage();
-
-		// TODO: use EntityRevisionLookup to get the entity revision, pending change I762535bda41
-		if ( $revision > 0 ) {
-			// get the desired revision
-			$rev = Revision::newFromId( $revision );
-
-			if ( $rev === null ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision not found: $revision"  );
-				$entity = null;
-			} elseif ( $rev->getPage() !== $page->getId() ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision $revision does not belong to page "
-					. $page->getTitle()->getPrefixedDBkey() );
-				$entity = null;
-			} elseif ( !WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->isEntityContentModel( $rev->getContentModel() ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision has bad model: "
-					. $rev->getContentModel() );
-				$entity = null;
-			} else {
-				$entity = $rev->getContent();
+			if ( $entityRevision === null ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId"  );
+				throw new \HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
 			}
-
-			if ( !$entity ) {
-				//TODO: more specific error message
-				$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
-				throw new \HttpError( 404, $msg->params( $prefixedId, $revision ) );
-			}
-		} else {
-			$rev = $page->getRevision();
+		} catch ( StorageException $ex ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": couold not load: $prefixedId: $ex revision $revision"  );
+			$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
+			throw new \HttpError( 404, $msg->params( $prefixedId, $revision ) );
 		}
 
 		// handle If-Modified-Since
@@ -375,7 +359,7 @@ class EntityDataRequestHandler {
 		if ( $imsHeader !== false ) {
 			$ims = wfTimestamp( TS_MW, $imsHeader );
 
-			if ( $rev->getTimestamp() <= $ims ) {
+			if ( $entityRevision->getTimestamp() <= $ims ) {
 				$response = $output->getRequest()->response();
 				$response->header( 'Status: 304', true, 304 );
 				return;
@@ -383,11 +367,11 @@ class EntityDataRequestHandler {
 		}
 
 		list( $data, $contentType ) = $this->serializationService->getSerializedData(
-			$format, $entity->getEntity(), $rev
+			$format, $entityRevision
 		);
 
 		$output->disable();
-		$this->outputData( $request, $output->getRequest()->response(), $data, $contentType, $rev );
+		$this->outputData( $request, $output->getRequest()->response(), $data, $contentType, $entityRevision->getTimestamp() );
 	}
 
 	/**
@@ -397,9 +381,9 @@ class EntityDataRequestHandler {
 	 * @param WebResponse $response
 	 * @param string      $data        the data to output
 	 * @param string      $contentType the data's mime type
-	 * @param Revision    $revision
+	 * @param string      $lastModified
 	 */
-	public function outputData( WebRequest $request, WebResponse $response, $data, $contentType, Revision $revision = null ) {
+	public function outputData( WebRequest $request, WebResponse $response, $data, $contentType, $lastModified ) {
 		// NOTE: similar code as in RawAction::onView, keep in sync.
 
 		//FIXME: do not cache if revision was requested explicitly!
@@ -414,8 +398,8 @@ class EntityDataRequestHandler {
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
 		$response->header( 'Content-Length: ' . strlen( $data ) );
 
-		if ( $revision ) {
-			$response->header( 'Last-Modified: ' . wfTimestamp( TS_RFC2822, $revision->getTimestamp() ) );
+		if ( $lastModified ) {
+			$response->header( 'Last-Modified: ' . wfTimestamp( TS_RFC2822, $lastModified ) );
 		}
 
 		//Set X-Frame-Options API results (bug 39180)
