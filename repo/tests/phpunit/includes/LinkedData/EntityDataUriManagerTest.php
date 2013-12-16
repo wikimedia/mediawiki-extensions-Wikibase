@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LinkedData\EntityDataUriManager;
 
 /**
- * @covers Wikibase\LinkedData\EntityDataUriManager
+ * @covers Wikibase\LinkedData\EntityUriManager
  *
  * @since 0.4
  *
@@ -34,14 +34,15 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		parent::setUp();
 
 		$this->idParser = new BasicEntityIdParser();
-	}
+
+}
 
 	protected function makeUriManager() {
 		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
-				return $id->getEntityType() . ':' . $id->getSerialization();
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
 
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );

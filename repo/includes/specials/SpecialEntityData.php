@@ -12,6 +12,7 @@ use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
+use Wikibase\Settings;
 
 /**
  * Special page to act as a data endpoint for the linked data web.
@@ -44,10 +45,37 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Initialize members from global context.
-	 * This is poor man's inverse dependency injection.
+	 * Sets the request handler to be used by the special page.
+	 * May be used when a particular instance of EntityDataRequestHandler is already
+	 * known, e.g. during testing.
+	 *
+	 * If no request handler is set using this method, a default handler is created
+	 * on demand by initDependencies().
+	 *
+	 * @param EntityDataRequestHandler $requestHandler
+	 */
+	public function setRequestHandler( EntityDataRequestHandler $requestHandler ) {
+		$this->requestHandler = $requestHandler;
+	}
+
+	/**
+	 * Initialize any un-initialized members from global context.
+	 * In particular, this initializes $this->requestHandler
+	 *
+	 * This is called by
 	 */
 	protected function initDependencies() {
+		if ( $this->requestHandler === null ) {
+			$this->requestHandler = $this->newDefaultRequestHandler();
+		}
+	}
+
+	/**
+	 * Creates a EntityDataRequestHandler based on global defaults.
+	 *
+	 * @return EntityDataRequestHandler
+	 */
+	private function newDefaultRequestHandler() {
 		global $wgUseSquid, $wgApiFrameOptions;
 
 		$repo = WikibaseRepo::getDefaultInstance();
@@ -93,12 +121,12 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$supportedExtensions,
 			$titleLookup
 		);
-		
-		$this->requestHandler = new EntityDataRequestHandler(
+
+		return new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
-			$entityRevisionLookup,
 			$entityIdParser,
+			$entityRevisionLookup,
 			$serializationService,
 			$defaultFormat,
 			$maxAge,
