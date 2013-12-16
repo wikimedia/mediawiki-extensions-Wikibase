@@ -2,12 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Status;
 use TestSites;
 use Title;
 use User;
 use WatchAction;
-use Wikibase\EntityContent;
 use Wikibase\EditEntity;
 use Wikibase\Item;
 use Wikibase\ItemContent;
@@ -85,18 +83,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 	function setUp() {
 		global $wgGroupPermissions;
-		global $wgOut, $wgTitle;
+		global $wgOut;
 
 		parent::setUp();
 
  		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = array( 'user' );
 
-		if ( $wgTitle === null ) {
-			$wgTitle = Title::newFromText( "Test" );
-		}
+		$title = Title::newFromText( "Test" );
+		$this->setMwGlobals( 'wgTitle', $title );
 
-		$wgOut->setTitle( $wgTitle );
+		$wgOut->setTitle( $title );
 
 		static $hasTestSites = false;
 
@@ -465,7 +462,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$token = $user->getEditToken();
 		$edit = new EditEntity( $content, $user );
 
-		$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : 0 ), $token );
+		$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : EDIT_UPDATE ), $token );
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
@@ -632,7 +629,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$content = ItemContent::newFromItem( $item );
 
 			$edit = new EditEntity( $content, $user );
-			$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : 0 ), false );
+			$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : EDIT_UPDATE ), false );
 
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
