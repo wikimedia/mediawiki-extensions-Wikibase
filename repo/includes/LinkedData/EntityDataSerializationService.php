@@ -100,9 +100,9 @@ class EntityDataSerializationService {
 	/**
 	 * Constructor.
 	 *
-	 * @param string            $rdfBaseURI
-	 * @param string            $rdfDataURI
-	 * @param EntityLookup      $entityLookup
+	 * @param string $rdfBaseURI
+	 * @param string $rdfDataURI
+	 * @param EntityLookup $entityLookup
 	 *
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
@@ -342,6 +342,7 @@ class EntityDataSerializationService {
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
 	 * @param EntityRevision $entityRevision The entity
+	 * @param Revision|null $rev The entity's revision
 	 *
 	 * @return array tuple of ( $data, $contentType )
 	 * @throws MWException if the format is not supported
