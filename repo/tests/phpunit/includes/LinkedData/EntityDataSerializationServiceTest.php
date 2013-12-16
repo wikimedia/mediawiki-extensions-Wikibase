@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Revision;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -73,20 +73,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 
 
 	public static function provideGetSerializedData() {
-		$entity = Item::newEmpty();
-		$entity->setId( new ItemId( 'Q23' ) );
-		$entity->setLabel( 'en', "ACME" );
-
-		//TODO: set up...
-
-		$cases = array();
-
-		$cases[] = array( // #0:
-			'json',       // format
-			new EntityRevision( $entity, 123, '20130505010101' ),      // entity
-			'!^\{.*ACME!', // output regex
-			'application/json', // mime type
-		);
+		$cases = EntityDataTestProvider::provideGetSerializedData();
 
 		return $cases;
 	}
