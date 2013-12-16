@@ -2,9 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Item;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
 
 /**
@@ -27,10 +31,27 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	protected function newService() {
 		$entityLookup = new MockRepository();
 
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
+		$serializerOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
+
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
-			$entityLookup
+			$entityLookup,
+			$titleLookup,
+			$serializerFactory
 		);
 
 		$service->setFormatWhiteList(
