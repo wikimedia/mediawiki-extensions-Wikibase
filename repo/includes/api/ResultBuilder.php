@@ -252,9 +252,9 @@ class ResultBuilder {
 	 *
 	 * @param EntityRevision $entityRevision
 	 * @param SerializationOptions|null $options
-	 * @param array $props
+	 * @param array|string $props a list of fields to include, or "all"
 	 */
-	public function addEntityRevision( EntityRevision $entityRevision, SerializationOptions $options = null, array $props = array() ) {
+	public function addEntityRevision( EntityRevision $entityRevision, SerializationOptions $options = null, $props = 'all' ) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
 		$record = array();
@@ -272,7 +272,7 @@ class ResultBuilder {
 			$record['id'] = $entityId->getSerialization();
 			$record['type'] = $entityId->getEntityType();
 		} else {
-			if ( in_array( 'info', $props ) ) {
+			if ( $props == 'all' || in_array( 'info', $props ) ) {
 				$title = $this->entityTitleLookup->getTitleForId( $entityId );
 				$record['pageid'] = $title->getArticleID();
 				$record['ns'] = intval( $title->getNamespace() );
@@ -281,8 +281,9 @@ class ResultBuilder {
 				$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
 			}
 
-			$serializerFactory = new SerializerFactory();
-			$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $serializerOptions );
+			//FIXME: $props should be used to filter $entitySerialization!
+			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
+			$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $options );
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 			$record = array_merge( $record, $entitySerialization );
