@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_17f78ad1",
+        "filename": "selenium/lib/modules/alias_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-16T14:50:31Z",
+      "side": 0,
+      "message": "This element is used in tests/browser/features/step_definitions/aliases_steps.rb\n\nSince you have changed it here, you also need to change it there.\n\nThe same is true for the rest of the elements in this file.",
+      "revId": "24f67ce750328710debc1abc4cbe94d5fa97f150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

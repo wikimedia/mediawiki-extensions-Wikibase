@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b7621ea1",
+        "filename": "selenium/lib/pages/set_aliases_page.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-16T14:50:31Z",
+      "side": 1,
+      "message": "This class is only used in repo/tests/selenium/special/set_entity_spec.rb\n\nTobi, should the class be deleted, since it is not used by anything in tests/browser folder?",
+      "revId": "7bc2a4ab6c005ba903d08a3d6b42dbf5524a1917",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
