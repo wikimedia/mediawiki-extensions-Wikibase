@@ -3,12 +3,14 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
+use Wikibase\EntityFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Settings;
 
 /**
  * Special page to act as a data endpoint for the linked data web.
@@ -29,7 +31,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	/**
 	 * @var EntityDataRequestHandler
 	 */
-	protected $requestHandler;
+	protected $requestHandler = null;
 
 	/**
 	 * Constructor.
@@ -47,23 +49,29 @@ class SpecialEntityData extends SpecialWikibasePage {
 	protected function initDependencies() {
 		global $wgUseSquid, $wgApiFrameOptions;
 
-		// Initialize serialization service.
-		// TODO: use reverse DI facility (global registry/factory)
 		$repo = WikibaseRepo::getDefaultInstance();
-		$entityTitleLookup = $repo->getEntityTitleLookup();
-		$entityRevisionLookup = $repo->getEntityRevisionLookup();
 
-		$entityContentFactory = $repo->getEntityContentFactory();
+		$entityRevisionLookup = $repo->getEntityRevisionLookup();
+		$titleLookup = $repo->getEntityTitleLookup();
 		$entityIdParser = $repo->getEntityIdParser();
+
+		$serializationOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory(
+			$serializationOptions,
+			$repo->getPropertyDataTypeLookup(),
+			EntityFactory::singleton()
+		);
 
 		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
 			$this->getTitle()->getCanonicalURL() . '/',
-			\Wikibase\StoreFactory::getStore()->getEntityLookup()
+			$repo->getStore()->getEntityLookup(),
+			$titleLookup,
+			$serializerFactory
 		);
 
-		$maxAge = Settings::get( 'dataSquidMaxage' );
-		$formats = Settings::get( 'entityDataFormats' );
+		$maxAge = $repo->getSettings()->getSetting( 'dataSquidMaxage' );
+		$formats = $repo->getSettings()->getSetting( 'entityDataFormats' );
 		$serializationService->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
@@ -82,12 +90,12 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$uriManager = new EntityDataUriManager(
 			$this->getTitle(),
 			$supportedExtensions,
-			$entityContentFactory
+			$titleLookup
 		);
 		
 		$this->requestHandler = new EntityDataRequestHandler(
 			$uriManager,
-			$entityTitleLookup,
+			$titleLookup,
 			$entityRevisionLookup,
 			$entityIdParser,
 			$serializationService,

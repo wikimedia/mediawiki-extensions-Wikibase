@@ -9,15 +9,15 @@ use HttpError;
 use OutputPage;
 use RequestContext;
 use Title;
-use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
-use Wikibase\EntityContentFactory;
 use Wikibase\Item;
 use Wikibase\ItemContent;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
@@ -94,19 +94,27 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 
 		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 
-		//TODO: get rid of the dependency on EntityContentFactory!
-		$contentFactory = new EntityContentFactory(
-			new EntityIdFormatter( new FormatterOptions() ),
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				CONTENT_MODEL_WIKIBASE_PROPERTY
-			)
-		);
+		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
+		$serializerOptions = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
 
 		$service = new EntityDataSerializationService(
 			EntityDataSerializationServiceTest::URI_BASE,
 			EntityDataSerializationServiceTest::URI_DATA,
-			$entityLookup
+			$entityLookup,
+			$titleLookup,
+			$serializerFactory
 		);
 
 		$service->setFormatWhiteList(
@@ -140,12 +148,12 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$uriManager = new EntityDataUriManager(
 			$this->interfaceTitle,
 			$extensions,
-			$contentFactory
+			$titleLookup
 		);
 
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
-			$contentFactory,
+			$titleLookup,
 			$entityLookup,
 			$idParser,
 			$service,
