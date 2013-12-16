@@ -1,6 +1,9 @@
 # Wikibase DataModel Serialization
 
 Library containing serializers and deserializers for the Wikibase DataModel.
+The supported formats are limited to public ones, ie those used by a web API.
+Serialization code for private formats, such as the format used by the Wikibase
+Repo data access layer, belongs in other components.
 
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModelSerialization.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModelSerialization)
 [![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/badges/coverage.png?s=916d21028b031abe2e685192ccef46c6f47ba76a)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/)
