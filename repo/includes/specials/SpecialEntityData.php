@@ -50,6 +50,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		// Initialize serialization service.
 		// TODO: use reverse DI facility (global registry/factory)
 		$repo = WikibaseRepo::getDefaultInstance();
+		$entityTitleLookup = $repo->getEntityTitleLookup();
+		$entityRevisionLookup = $repo->getEntityRevisionLookup();
 
 		$entityContentFactory = $repo->getEntityContentFactory();
 		$entityIdParser = $repo->getEntityIdParser();
@@ -85,7 +87,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		
 		$this->requestHandler = new EntityDataRequestHandler(
 			$uriManager,
-			$entityContentFactory,
+			$entityTitleLookup,
+			$entityRevisionLookup,
 			$entityIdParser,
 			$serializationService,
 			$defaultFormat,
