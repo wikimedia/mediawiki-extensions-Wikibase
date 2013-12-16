@@ -42,6 +42,7 @@ return call_user_func( function() {
 		'Wikibase\ItemDisambiguation' => 'includes/ItemDisambiguation.php',
 		'Wikibase\EntityView' => 'includes/EntityView.php',
 		'Wikibase\EntityViewPlaceholderExpander' => 'includes/EntityViewPlaceholderExpander.php',
+		'Wikibase\EntityViewJsConfig' => 'includes/EntityViewJsConfig.php',
 		'Wikibase\ExceptionWithCode' => 'includes/ExceptionWithCode.php',
 		'Wikibase\ItemView' => 'includes/ItemView.php',
 		'Wikibase\LabelDescriptionDuplicateDetector' => 'includes/LabelDescriptionDuplicateDetector.php',
