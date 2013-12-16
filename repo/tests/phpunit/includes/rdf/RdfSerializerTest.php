@@ -2,8 +2,11 @@
 
 namespace Wikibase\Test;
 
+use DataTypes\DataTypeFactory;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\RdfSerializer;
 
 /**

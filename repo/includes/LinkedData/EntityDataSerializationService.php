@@ -5,16 +5,17 @@ namespace Wikibase\LinkedData;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
-use MWException;
-use EasyRdf_Format;
-use ApiFormatBase;
-use ApiMain;
-use ApiResult;
-use ApiFormatXml;
-use DerivativeContext;
-use DerivativeRequest;
-use RequestContext;
 use Wikibase\EntityTitleLookup;
+use \MWException;
+use \EasyRdf_Format;
+use \Revision;
+use \ApiFormatBase;
+use \ApiMain;
+use \ApiResult;
+use \ApiFormatXml;
+use \DerivativeContext;
+use \DerivativeRequest;
+use \RequestContext;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\RdfSerializer;
@@ -100,9 +101,9 @@ class EntityDataSerializationService {
 	/**
 	 * Constructor.
 	 *
-	 * @param string            $rdfBaseURI
-	 * @param string            $rdfDataURI
-	 * @param EntityLookup      $entityLookup
+	 * @param string $rdfBaseURI
+	 * @param string $rdfDataURI
+	 * @param EntityLookup $entityLookup
 	 *
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
@@ -342,6 +343,7 @@ class EntityDataSerializationService {
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
 	 * @param EntityRevision $entityRevision The entity
+	 * @param Revision|null $rev The entity's revision
 	 *
 	 * @return array tuple of ( $data, $contentType )
 	 * @throws MWException if the format is not supported
