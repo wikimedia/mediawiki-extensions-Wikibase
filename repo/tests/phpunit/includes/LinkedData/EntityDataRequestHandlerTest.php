@@ -9,17 +9,12 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\Api\EntityTestHelper;
-use Wikibase\WikiPageEntityLookup;
 
 /**
  * @covers Wikibase\LinkedData\EntityDataRequestHandler
@@ -42,36 +37,38 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected $interfaceTitle;
 
+	/**
+	 * @var int
+	 */
+	private $obLevel;
+
 	public function setUp() {
 		parent::setUp();
 
 		$this->interfaceTitle = Title::newFromText( "Special:EntityDataRequestHandlerTest" );
+
+		$this->obLevel = ob_get_level();
 	}
 
-	protected function saveItem( Item $item ) {
-		$content = ItemContent::newFromItem( $item );
-		$content->save( "testing", null, EDIT_NEW );
-	}
+	public function tearDown() {
+		$obLevel = ob_get_level();
 
-	public function getTestItem() {
-		static $item;
-
-		$prefix = get_class( $this ) . '/';
-
-		if ( $item === null ) {
-			$item = Item::newEmpty();
-			$item->setLabel( 'en', $prefix . 'Raarrr' );
-			$this->saveItem( $item );
+		while ( ob_get_level() > $this->obLevel ) {
+			ob_end_clean();
 		}
 
-		return $item;
+		if ( $obLevel !== $this->obLevel ) {
+			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test.");
+		}
+
+		parent::tearDown();
 	}
 
 	/**
 	 * @return EntityDataRequestHandler
 	 */
 	protected function newHandler() {
-		$entityLookup = new WikiPageEntityLookup();
+		$entityLookup = EntityDataTestProvider::getMockRepo();
 
 		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 
@@ -135,41 +132,16 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
-			$entityLookup,
 			$idParser,
+			$entityLookup,
 			$service,
 			'json',
 			1800,
 			false,
-			'DENY'
+			null
 		);
+
 		return $handler;
-	}
-
-	/**
-	 * Substitutes placeholders using the concrete values from the given entity.
-	 * Known placeholders are:
-	 *
-	 *  {testitemid}, {lowertestitemid}, {testitemrev}, {testitemtimestamp}
-	 *
-	 * @param mixed $data The data in which to substitude placeholders.
-	 *        If this is an erray, injectIds is called on all elements recursively.
-	 * @param Entity $entity
-	 *
-	 * @todo: use EntityRevision once we have that
-	 */
-	public static function injectIds( &$data, Entity $entity ) {
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-		$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
-
-		$idMap = array(
-			'{testitemid}' => strtoupper( $entity->getId()->getPrefixedId() ),
-			'{lowertestitemid}' => strtolower( $entity->getId()->getPrefixedId() ),
-			'{testitemrev}' => $content->getWikiPage()->getLatest(),
-			'{testitemtimestamp}' => $ts,
-		);
-
-		EntityTestHelper::injectIds( $data, $idMap );
 	}
 
 	/**
@@ -188,7 +160,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 
 		// construct Context and OutputPage
-		$context = new RequestContext();
+		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 
 		$output = new OutputPage( $context );
@@ -213,17 +185,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
 	public function testHandleRequest( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
-		$item = $this->getTestItem();
-
-		// inject actual ID of test items
-		self::injectIds( $subpage, $item );
-		self::injectIds( $params, $item );
-		self::injectIds( $headers, $item );
-		self::injectIds( $expRegExp, $item );
-		self::injectIds( $expHeaders, $item );
-
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();
+
+		/* @var FauxResponse $response */
 		$response = $request->response();
 
 		// construct handler
