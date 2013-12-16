@@ -17,12 +17,8 @@ matrix:
       php: 5.4
     - env: DBTYPE=mysql LANG=en
       php: 5.5
-    - env: DBTYPE=postgres LANG=en
-      php: 5.5
   exclude:
     - env: TRAVISASSUMESWRONGSTUFF=FAIL
-  allow_failures:
-    - env: DBTYPE=postgres LANG=en
 
 before_script:
   - bash .travis.sh
