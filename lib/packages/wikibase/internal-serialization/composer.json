@@ -1,7 +1,7 @@
 {
-	"name": "wikibase/data-model-serialization",
+	"name": "wikibase/internal-serialization",
 	"type": "library",
-	"description": "Serializers and deserializers for the Wikibase DataModel",
+	"description": "Library containing serializers and deserializers for the data access layer of Wikibase Repo.",
 	"keywords": [
 		"wikibase",
 		"DataModel",
@@ -10,7 +10,7 @@
 		"deserializers",
 		"wikidata"
 	],
-	"homepage": "https://github.com/wmde/WikibaseDataModelSerialization",
+	"homepage": "https://github.com/wmde/WikibaseInternalSerialization",
 	"license": "GPL-2.0+",
 	"authors": [
 		{

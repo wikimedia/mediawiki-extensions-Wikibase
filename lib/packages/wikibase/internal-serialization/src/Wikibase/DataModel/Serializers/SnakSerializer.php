@@ -8,6 +8,8 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
+ * TODO: modify namespace
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
