@@ -80,8 +80,8 @@ class EntityDataRequestHandler {
 	 *
 	 * @param EntityDataUriManager           $uriManager
 	 * @param EntityTitleLookup              $entityTitleLookup
-	 * @param EntityRevisionLookup           $entityRevisionLookup
 	 * @param EntityIdParser                 $entityIdParser
+	 * @param EntityRevisionLookup           $entityRevisionLookup
 	 * @param EntityDataSerializationService $serializationService
 	 * @param string                         $defaultFormat
 	 * @param int                            $maxAge number of seconds to cache entity data
@@ -91,8 +91,8 @@ class EntityDataRequestHandler {
 	public function __construct(
 		EntityDataUriManager $uriManager,
 		EntityTitleLookup $entityTitleLookup,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityIdParser $entityIdParser,
+		EntityRevisionLookup $entityRevisionLookup,
 		EntityDataSerializationService $serializationService,
 		$defaultFormat,
 		$maxAge,
@@ -101,8 +101,8 @@ class EntityDataRequestHandler {
 	) {
 		$this->uriManager = $uriManager;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->serializationService = $serializationService;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
@@ -323,9 +323,9 @@ class EntityDataRequestHandler {
 	}
 
 	/**
-	} else {
-	$title = $this->getDocTitle( $id, $format );
-	}
+		} else {
+			$title = $this->getDocTitle( $id, $format );
+		}
 
 	 * Output entity data.
 	 *
