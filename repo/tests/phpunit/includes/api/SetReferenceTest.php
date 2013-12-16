@@ -38,18 +38,19 @@ use Wikibase\SnakList;
  */
 class SetReferenceTest extends WikibaseApiTestCase {
 
+	private static $hasProperties;
+
 	public function setUp() {
-		static $hasProperties = false;
-		if ( !$hasProperties ) {
+		parent::setUp();
+
+		if ( !isset( self::$hasProperties ) ) {
 			$this->createProperty( 100 );
 			$this->createProperty( 4200 );
 			$this->createProperty( 4300 );
 			$this->createProperty( 6600 );
 
-			$hasProperties = true;
+			self::$hasProperties = true;
 		}
-
-		parent::setUp();
 	}
 
 	/**
