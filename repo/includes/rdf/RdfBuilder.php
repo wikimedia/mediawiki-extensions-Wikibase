@@ -3,12 +3,10 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
-use EasyRdf_Format;
 use EasyRdf_Graph;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use Revision;
-use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * RDF mapping for wikibase data model.
@@ -66,7 +64,6 @@ class RdfBuilder {
 	public function __construct(
 		$baseUri,
 		$dataUri,
-		EntityIdFormatter $idFormatter,
 		EasyRdf_Graph $graph = null
 	) {
 		if ( !$graph ) {
@@ -76,7 +73,6 @@ class RdfBuilder {
 		$this->graph = $graph;
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
-		$this->idFormatter = $idFormatter;
 
 		$this->namespaces = array(
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI,
@@ -135,7 +131,7 @@ class RdfBuilder {
 	 * @return string
 	 */
 	public function getEntityQName( $prefix, EntityId $id ) {
-		return $prefix . ':' . ucfirst( $this->idFormatter->format( $id ) );
+		return $prefix . ':' . ucfirst( $id->getSerialization() );
 	}
 
 	/**
@@ -186,7 +182,7 @@ class RdfBuilder {
 	 */
 	public function getDataURL( EntityId $id ) {
 		$base = $this->namespaces[ self::NS_DATA ];
-		$url = $base . ucfirst( $this->idFormatter->format( $id ) );
+		$url = $base . ucfirst( $id->getSerialization() );
 		return $url;
 	}
 
@@ -208,7 +204,7 @@ class RdfBuilder {
 	 * @param EntityId $id
 	 */
 	protected function entityMentioned( EntityId $id ) {
-		$prefixedId = $this->idFormatter->format( $id );
+		$prefixedId = $id->getSerialization();
 
 		if ( !isset( $this->entitiesResolved[$prefixedId] ) ) {
 			$this->entitiesResolved[$prefixedId] = false;
@@ -221,7 +217,7 @@ class RdfBuilder {
 	 * @param EntityId $id
 	 */
 	protected function entityResolved( EntityId $id ) {
-		$prefixedId = $this->idFormatter->format( $id );
+		$prefixedId = $id->getSerialization();
 		$this->entitiesResolved[$prefixedId] = true;
 	}
 

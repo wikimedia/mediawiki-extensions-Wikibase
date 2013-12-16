@@ -1,13 +1,9 @@
 <?php
 namespace Wikibase\LinkedData;
 
-use Wikibase\EntityContentFactory;
-use Wikibase\EntityId;
-use Wikibase\Lib\EntityIdParser;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityTitleLookup;
 use Title;
-use OutputPage;
-use SquidUpdate;
 
 /**
  * Manages URIs for the linked data interface
@@ -33,33 +29,25 @@ class EntityDataUriManager {
 	protected $supportedExtensions;
 
 	/**
-	 * @var EntityIdFormatter
+	 * @var EntityTitleLookup
 	 */
-	protected $entityIdFormatter;
-
-	/**
-	 * @var EntityContentFactory
-	 */
-	protected $entityContentFactory;
+	protected $entityTitleLookup;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Title               $interfaceTitle
-	 * @param string[]             $supportedExtensions an associative Array mapping canonical format names to file extensions.
-	 * @param EntityIdFormatter    $entityIdFormatter
-	 * @param EntityContentFactory $entityContentFactory
+	 * @param \Title            $interfaceTitle
+	 * @param string[]          $supportedExtensions an associative Array mapping canonical format names to file extensions.
+	 * @param EntityTitleLookup $entityTitleLookup
 	 */
 	public function __construct(
 		Title $interfaceTitle,
 		$supportedExtensions,
-		EntityIdFormatter $entityIdFormatter,
-		EntityContentFactory $entityContentFactory
+		EntityTitleLookup $entityTitleLookup
 	) {
 		$this->interfaceTitle = $interfaceTitle;
 		$this->supportedExtensions = $supportedExtensions;
-		$this->entityIdFormatter = $entityIdFormatter;
-		$this->entityContentFactory = $entityContentFactory; //XXX: needed only for getTitleForId
+		$this->entityTitleLookup = $entityTitleLookup; //XXX: needed only for getTitleForId
 	}
 
 	/**
@@ -139,7 +127,7 @@ class EntityDataUriManager {
 	 * @return string
 	 */
 	public function getDocName( EntityId $id, $format = '' ) {
-		$doc = $this->entityIdFormatter->format( $id );
+		$doc = $id->getSerialization();
 
 		//Note: Use upper case everywhere. EntityIdFormatter should do the right thing.
 		$doc = strtoupper( $doc );
@@ -168,7 +156,7 @@ class EntityDataUriManager {
 	 */
 	public function getDocTitle( EntityId $id, $format = '' ) {
 		if ( $format === 'html' ) {
-			$title = $this->entityContentFactory->getTitleForId( $id );
+			$title = $this->entityTitleLookup->getTitleForId( $id );
 		} else {
 			$doc = $this->getDocName( $id, $format );
 

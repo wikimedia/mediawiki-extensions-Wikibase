@@ -2,17 +2,11 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataTypeFactory;
 use Title;
-use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
-use Wikibase\EntityContentFactory;
-use Wikibase\Item;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\EntityIdParser;
-use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\LinkedData\EntityDataUriManager
@@ -31,11 +25,6 @@ use Wikibase\Property;
 class EntityDataUriManagerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	protected $idParser;
@@ -43,20 +32,16 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->idFormatter = new EntityIdFormatter( new FormatterOptions() );
-
 		$this->idParser = new EntityIdParser( new ParserOptions() );
-
-}
+	}
 
 	protected function makeUriManager() {
-		$contentFactory = new EntityContentFactory(
-			$this->idFormatter,
-			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
-				CONTENT_MODEL_WIKIBASE_PROPERTY
-			)
-		);
+		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function ( EntityId $id ) {
+				return $id->getEntityType() . ':' . $id->getSerialization();
+			} ) );
 
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 
@@ -68,8 +53,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$uriManager = new EntityDataUriManager(
 			$title,
 			$extensions,
-			$this->idFormatter,
-			$contentFactory
+			$titleLookup
 		);
 
 		return $uriManager;

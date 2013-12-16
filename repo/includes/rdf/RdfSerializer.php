@@ -2,12 +2,9 @@
 
 namespace Wikibase;
 
-use DataTypes\DataTypeFactory;
 use EasyRdf_Exception;
 use EasyRdf_Format;
 use EasyRdf_Graph;
-use EasyRdf_Namespace;
-use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * RDF serialization for wikibase data model.
@@ -20,12 +17,6 @@ use Wikibase\Lib\EntityIdFormatter;
  * @author Daniel Kinzler
  */
 class RdfSerializer {
-
-	/**
-	 * @var DataTypeFactory
-	 * @note: currently unused. keep?
-	 */
-	protected $dataTypeFactory;
 
 	/**
 	 * @var EntityLookup
@@ -42,23 +33,17 @@ class RdfSerializer {
 	 * @param string                $baseUri
 	 * @param string                $dataUri
 	 * @param EntityLookup          $entityLookup
-	 * @param DataTypeFactory       $dataTypeFactory
-	 * @param Lib\EntityIdFormatter $idFormatter
 	 */
 	public function __construct(
 		EasyRdf_Format $format,
 		$baseUri,
 		$dataUri,
-		EntityLookup $entityLookup,
-		DataTypeFactory $dataTypeFactory,
-		EntityIdFormatter $idFormatter
+		EntityLookup $entityLookup
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->format = $format;
 		$this->entityLookup = $entityLookup;
-		$this->dataTypeFactory = $dataTypeFactory;
-		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -110,8 +95,7 @@ class RdfSerializer {
 
 		$builder = new RdfBuilder(
 			$this->baseUri,
-			$this->dataUri,
-			$this->idFormatter
+			$this->dataUri
 		);
 
 		return $builder;

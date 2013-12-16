@@ -2,10 +2,8 @@
 
 namespace Wikibase\LinkedData;
 
-use \DataTypes\DataTypeFactory;
 use Wikibase\Entity;
 use Wikibase\EntityLookup;
-use \Wikibase\Lib\EntityIdFormatter;
 use \MWException;
 use \EasyRdf_Format;
 use \Revision;
@@ -81,16 +79,6 @@ class EntityDataSerializationService {
 	protected $entityLookup = null;
 
 	/**
-	 * @var DataTypeFactory
-	 */
-	protected $dataTypeFactory = null;
-
-	/**
-	 * @var EntityIdFormatter
-	 */
-	protected $idFormatter = null;
-
-	/**
 	 * @var null|array Associative array from MIME type to format name
 	 * @note: initialized by initFormats()
 	 */
@@ -108,23 +96,17 @@ class EntityDataSerializationService {
 	 * @param string            $rdfBaseURI
 	 * @param string            $rdfDataURI
 	 * @param EntityLookup      $entityLookup
-	 * @param DataTypeFactory   $dataTypeFactory
-	 * @param EntityIdFormatter $idFormatter
 	 *
 	 * @since    0.4
 	 */
 	public function __construct(
 		$rdfBaseURI,
 		$rdfDataURI,
-		EntityLookup $entityLookup,
-		DataTypeFactory $dataTypeFactory,
-		EntityIdFormatter $idFormatter
+		EntityLookup $entityLookup
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
 		$this->rdfDataURI = $rdfDataURI;
 		$this->entityLookup = $entityLookup;
-		$this->dataTypeFactory = $dataTypeFactory;
-		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -494,9 +476,7 @@ class EntityDataSerializationService {
 			$rdfFormat,
 			$this->rdfBaseURI,
 			$this->rdfDataURI,
-			$this->entityLookup,
-			$this->dataTypeFactory,
-			$this->idFormatter
+			$this->entityLookup
 		);
 
 		return $serializer;

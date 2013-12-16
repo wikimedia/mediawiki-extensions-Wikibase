@@ -2,14 +2,11 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataTypeFactory;
 use Revision;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
 use Wikibase\Item;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\LinkedData\EntityDataSerializationService;
-use Wikibase\Property;
 
 /**
  * @covers \Wikibase\LinkedData\EntityDataSerializationService
@@ -27,41 +24,13 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
-	public static $dataTypes = array(
-		'commonsMedia' => array(
-			'datavalue' => 'string',
-		),
-		'string' => array(
-			'datavalue' => 'string',
-		),
-		'globe-coordinate' => array(
-			'datavalue' => 'globecoordinate',
-		),
-		'quantity' => array(
-			'datavalue' => 'quantity',
-		),
-		'monolingual-text' => array(
-			'datavalue' => 'monolingualtext',
-		),
-		'multilingual-text' => array(
-			'datavalue' => 'multilingualtext',
-		),
-		'time' => array(
-			'datavalue' => 'time',
-		),
-	);
-
 	protected function newService() {
 		$entityLookup = new MockRepository();
-		$dataTypeFactory = new DataTypeFactory( self::$dataTypes );
-		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
 
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
-			$entityLookup,
-			$dataTypeFactory,
-			$idFormatter
+			$entityLookup
 		);
 
 		$service->setFormatWhiteList(

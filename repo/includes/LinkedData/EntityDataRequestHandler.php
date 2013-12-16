@@ -1,15 +1,12 @@
 <?php
 namespace Wikibase\LinkedData;
 
-use DataTypes\DataTypeFactory;
 use ValueParsers\ParseException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityId;
 use Wikibase\HttpAcceptNegotiator;
 use Wikibase\HttpAcceptParser;
 use \Wikibase\Lib\EntityIdParser;
-use \Wikibase\Lib\EntityIdFormatter;
-use \Title;
 use \Revision;
 use \WebRequest;
 use \WebResponse;
@@ -54,11 +51,6 @@ class EntityDataRequestHandler {
 	protected $entityIdParser;
 
 	/**
-	 * @var EntityIdFormatter
-	 */
-	protected $entityIdFormatter;
-
-	/**
 	 * @var EntityContentFactory
 	 */
 	protected $entityContentFactory;
@@ -84,7 +76,6 @@ class EntityDataRequestHandler {
 	 * @param EntityDataUriManager           $uriManager
 	 * @param EntityContentFactory           $entityContentFactory
 	 * @param EntityIdParser                 $entityIdParser
-	 * @param EntityIdFormatter              $entityIdFormatter
 	 * @param EntityDataSerializationService $serializationService
 	 * @param string                         $defaultFormat
 	 * @param int                            $maxAge number of seconds to cache entity data
@@ -95,7 +86,6 @@ class EntityDataRequestHandler {
 		EntityDataUriManager $uriManager,
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
-		EntityIdFormatter $entityIdFormatter,
 		EntityDataSerializationService $serializationService,
 		$defaultFormat,
 		$maxAge,
@@ -105,7 +95,6 @@ class EntityDataRequestHandler {
 		$this->uriManager = $uriManager;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->entityIdParser = $entityIdParser;
-		$this->entityIdFormatter = $entityIdFormatter;
 		$this->serializationService = $serializationService;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
@@ -342,7 +331,7 @@ class EntityDataRequestHandler {
 	 */
 	public function showData( WebRequest $request, OutputPage $output, $format, EntityId $id, $revision ) {
 
-		$prefixedId = $this->entityIdFormatter->format( $id );
+		$prefixedId = $id->getSerialization();
 		$entity = $this->entityContentFactory->getFromId( $id );
 
 		if ( !$entity ) {

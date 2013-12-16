@@ -2,15 +2,8 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataTypeFactory;
-use EasyRdf_Namespace;
-use MediaWikiSite;
 use Revision;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Property;
 use Wikibase\RdfSerializer;
 
 /**
@@ -35,30 +28,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		'nt',
 		'ntriples',
 		'turtle',
-	);
-
-	protected static $dataTypes = array(
-		'commonsMedia' => array(
-			'datavalue' => 'string',
-		),
-		'string' => array(
-			'datavalue' => 'string',
-		),
-		'globe-coordinate' => array(
-			'datavalue' => 'globecoordinate',
-		),
-		'quantity' => array(
-			'datavalue' => 'quantity',
-		),
-		'monolingual-text' => array(
-			'datavalue' => 'monolingualtext',
-		),
-		'multilingual-text' => array(
-			'datavalue' => 'multilingualtext',
-		),
-		'time' => array(
-			'datavalue' => 'time',
-		),
 	);
 
 	public function setUp() {
@@ -128,9 +97,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	protected static function newRdfSerializer( $formatName ) {
 		$format = RdfSerializer::getFormat( $formatName );
 
-		$dataTypes = new DataTypeFactory( self::$dataTypes );
-		$idSerializer = new EntityIdFormatter( new FormatterOptions() );
-
 		$mockRepo = new MockRepository();
 
 		foreach( self::getTestEntities() as $entity ) {
@@ -141,9 +107,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			$format,
 			RdfBuilderTest::URI_BASE,
 			RdfBuilderTest::URI_DATA,
-			$mockRepo,
-			$dataTypes,
-			$idSerializer
+			$mockRepo
 		);
 	}
 

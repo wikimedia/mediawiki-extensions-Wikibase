@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataTypeFactory;
 use DerivativeContext;
 use FauxRequest;
+use FauxResponse;
 use HttpError;
 use OutputPage;
 use RequestContext;
@@ -20,7 +20,6 @@ use Wikibase\Lib\EntityIdParser;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
-use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -89,13 +88,12 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected function newHandler() {
 		$entityLookup = new MockRepository();
-		$dataTypeFactory = new DataTypeFactory( EntityDataSerializationServiceTest::$dataTypes );
 
-		$idFormatter = new EntityIdFormatter( new FormatterOptions() );
 		$idParser = new EntityIdParser( new ParserOptions() );
 
+		//TODO: get rid of the dependency on EntityContentFactory!
 		$contentFactory = new EntityContentFactory(
-			$idFormatter,
+			new EntityIdFormatter( new FormatterOptions() ),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				CONTENT_MODEL_WIKIBASE_PROPERTY
@@ -105,9 +103,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$service = new EntityDataSerializationService(
 			EntityDataSerializationServiceTest::URI_BASE,
 			EntityDataSerializationServiceTest::URI_DATA,
-			$entityLookup,
-			$dataTypeFactory,
-			$idFormatter
+			$entityLookup
 		);
 
 		$service->setFormatWhiteList(
@@ -141,7 +137,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$uriManager = new EntityDataUriManager(
 			$this->interfaceTitle,
 			$extensions,
-			$idFormatter,
 			$contentFactory
 		);
 
@@ -149,7 +144,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$uriManager,
 			$contentFactory,
 			$idParser,
-			$idFormatter,
 			$service,
 			'json',
 			1800,

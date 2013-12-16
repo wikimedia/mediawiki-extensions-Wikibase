@@ -53,14 +53,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$entityContentFactory = $repo->getEntityContentFactory();
 		$entityIdParser = $repo->getEntityIdParser();
-		$entityIdFormatter = $repo->getIdFormatter();
 
 		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
 			$this->getTitle()->getCanonicalURL() . '/',
-			\Wikibase\StoreFactory::getStore()->getEntityLookup(),
-			$repo->getDataTypeFactory(),
-			$entityIdFormatter
+			\Wikibase\StoreFactory::getStore()->getEntityLookup()
 		);
 
 		$maxAge = Settings::get( 'dataSquidMaxage' );
@@ -83,7 +80,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$uriManager = new EntityDataUriManager(
 			$this->getTitle(),
 			$supportedExtensions,
-			$entityIdFormatter,
 			$entityContentFactory
 		);
 		
@@ -91,7 +87,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$uriManager,
 			$entityContentFactory,
 			$entityIdParser,
-			$entityIdFormatter,
 			$serializationService,
 			$defaultFormat,
 			$maxAge,
