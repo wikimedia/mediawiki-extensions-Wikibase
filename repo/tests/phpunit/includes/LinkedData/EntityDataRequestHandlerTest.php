@@ -9,19 +9,13 @@ use HttpError;
 use OutputPage;
 use RequestContext;
 use Title;
-use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\WikiPageEntityLookup;
 
 /**
  * @covers Wikibase\LinkedData\EntityDataRequestHandler
@@ -43,7 +37,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected $interfaceTitle;
 
-	protected $obLevel;
+	/**
+	 * @var int
+	 */
+	private $obLevel;
 
 	public function setUp() {
 		parent::setUp();
@@ -67,30 +64,13 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		parent::tearDown();
 	}
 
-	protected function saveItem( Item $item ) {
-		$content = ItemContent::newFromItem( $item );
-		$content->save( "testing", null, EDIT_NEW );
-	}
-
-	public function getTestItem() {
-		static $item;
-
-		if ( $item === null ) {
-			$item = Item::newEmpty();
-			$item->setLabel( 'en', 'Raarrr' );
-			$this->saveItem( $item );
-		}
-
-		return $item;
-	}
-
 	/**
 	 * @return EntityDataRequestHandler
 	 */
 	protected function newHandler() {
-		$entityLookup = new WikiPageEntityLookup();
+		$entityLookup = EntityDataTestProvider::getMockRepo();
 
-		$idParser = new EntityIdParser( new ParserOptions() );
+		$idParser = new EntityIdParser();
 
 		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
@@ -152,44 +132,16 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
-			$entityLookup,
 			$idParser,
+			$entityLookup,
 			$service,
 			'json',
 			1800,
 			false,
-			'DENY'
+			null
 		);
+
 		return $handler;
-	}
-
-	/**
-	 * Substitutes placeholders using the concrete values from the given entity.
-	 * Known placeholders are:
-	 *
-	 *  {testitemid}, {lowertestitemid}, {testitemrev}, {testitemtimestamp}
-	 *
-	 * @param mixed $data The data in which to substitude placeholders.
-	 *        If this is an erray, injectIds is called on all elements recursively.
-	 * @param Entity $entity
-	 *
-	 * @todo: use EntityRevision once we have that
-	 */
-	public static function injectIds( &$data, Entity $entity ) {
-		if ( is_array( $data ) ) {
-			foreach ( $data as $k => &$v ) {
-				self::injectIds( $v, $entity );
-			}
-		} else if ( is_string( $data ) ) {
-			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
-			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
-
-			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-			$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
-
-			$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
-			$data = str_replace( '{testitemtimestamp}', $ts, $data );
-		}
 	}
 
 	/**
@@ -208,9 +160,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 
 		// construct Context and OutputPage
-		/* @var FauxResponse $response */
-		$response = $request->response();
-
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 
@@ -236,17 +185,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
 	public function testHandleRequest( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
-		$item = $this->getTestItem();
-
-		// inject actual ID of test items
-		self::injectIds( $subpage, $item );
-		self::injectIds( $params, $item );
-		self::injectIds( $headers, $item );
-		self::injectIds( $expRegExp, $item );
-		self::injectIds( $expHeaders, $item );
-
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();
+
+		/* @var FauxResponse $response */
 		$response = $request->response();
 
 		// construct handler
