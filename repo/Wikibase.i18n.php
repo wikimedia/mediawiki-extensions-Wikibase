@@ -2976,6 +2976,7 @@ $messages['ce'] = array(
 	'wikibase-setsitelink-label' => 'Сайтан тӀе хьажораг:',
 	'wikibase-modifyterm-language' => 'Мотт:',
 	'wikibase-dispatchstats-change-timestamp' => 'Терахь/хан',
+	'wikibase-dispatchstats-oldest-change' => 'Уггар ширанийш',
 	'wikibase-history-title-with-label' => 'Хийцаман истори «$2» ($1)',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мотт:',
 	'wikibase-entitieswithoutlabel-submit' => 'Лаха',
@@ -3461,12 +3462,14 @@ $messages['cu'] = array(
 );
 
 /** Welsh (Cymraeg)
+ * @author Cymrodor
  * @author Lloffiwr
+ * @author Robin Owain
  */
 $messages['cy'] = array(
 	'specialpages-group-wikibaserepo' => 'Cof Wikibase',
 	'wikibase-edit' => 'golygu',
-	'wikibase-save' => 'Cadwer',
+	'wikibase-save' => 'Cadw',
 	'wikibase-cancel' => 'Diddymer',
 	'wikibase-add' => 'ychwanegu',
 	'wikibase-addqualifier' => 'ychwanegu goleddfwr',
@@ -3486,8 +3489,8 @@ $messages['cy'] = array(
 	'wikibase-terms' => 'Mewn ieithoedd eraill',
 	'wikibase-sitelinks-input-help-message' => "Gosod cyswllt at dudalen sy'n perthyn i'r eitem hon.",
 	'wikibase-remove' => 'datgysyllter',
-	'wikibase-move-up' => 'symud gam am lan',
-	'wikibase-move-down' => 'symud gam i lawr',
+	'wikibase-move-up' => 'symud lan',
+	'wikibase-move-down' => 'symud i lawr',
 	'wikibase-undo-title' => 'Gwrthdroi golygiad i "$1"',
 	'wikibase-restore-title' => 'Adfer hen ddiwygiad o "$1"',
 	'wikibase-partial-undo' => "Gellir gwrthdroi'r golygiad hwn yn rhannol yn unig.",
@@ -3523,7 +3526,7 @@ Fe fydd eich cyfeiriad IP yn ymddangos ar hanes golygu'r endid data.",
 	'wikibase-itemdisambiguation-lookup-language' => 'Iaith:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
 	'wikibase-itemdisambiguation-submit' => 'Chwilier',
-	'wikibase-newproperty-datatype' => 'Math y data:',
+	'wikibase-newproperty-datatype' => 'Math o ddata:',
 	'special-newitem' => 'Gwneud eitem newydd',
 	'wikibase-newitem-fieldset' => 'Gwneud eitem newydd',
 	'wikibase-newentity-label' => 'Label:',

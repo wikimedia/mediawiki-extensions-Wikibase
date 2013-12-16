@@ -33,9 +33,21 @@ $specialPageAliases['en'] = array(
 
 /** Arabic (العربية) */
 $specialPageAliases['ar'] = array(
+	'DispatchStats' => array( 'إحصاءات_الوصول' ),
+	'EntityData' => array( 'بيانات_الكيانات' ),
 	'NewItem' => array( 'إنشاء_مدخلة' ),
+	'NewProperty' => array( 'خاصية_جديدة' ),
 	'ItemByTitle' => array( 'المدخلات_بالعنوان' ),
 	'ItemDisambiguation' => array( 'المدخلات_بالعلامة' ),
+	'ListDatatypes' => array( 'عرض_أنواع_البيانات' ),
+	'SetLabel' => array( 'ضبط_العلامة' ),
+	'SetDescription' => array( 'ضبط_الوصف' ),
+	'SetAliases' => array( 'ضبط_الكنى' ),
+	'SetSiteLink' => array( 'ضبط_وصلة_الموقع' ),
+	'EntitiesWithoutLabel' => array( 'الكيانات_بدون_علامة' ),
+	'EntitiesWithoutDescription' => array( 'الكيانات_بدون_وصف' ),
+	'ItemsWithoutSitelinks' => array( 'المدخلات_بدون_وصلات_موقع' ),
+	'MyLanguageFallbackChain' => array( 'سلسلة_رجوع_لغتي' ),
 );
 
 /** Aramaic (ܐܪܡܝܐ) */

@@ -1080,6 +1080,13 @@ $messages['de'] = array(
 	'wikibase-property-render-error' => 'Eigenschaft „$1“ konnte nicht gerendert werden: $2',
 );
 
+/** Swiss High German (Schweizer Hochdeutsch)
+ * @author Filzstift
+ */
+$messages['de-ch'] = array(
+	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den «Letzten Änderungen» anzeigen',
+);
+
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
  * @author Gorizon
@@ -2203,7 +2210,7 @@ $messages['ja'] = array(
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 	'wikibase-rc-wikibase-edit-letter' => 'デ',
-	'wikibase-rc-wikibase-edit-title' => 'ウィキデータの編集です',
+	'wikibase-rc-wikibase-edit-title' => 'ウィキデータの編集',
 	'wikibase-watchlist-show-changes-pref' => 'ウィキデータの編集をウォッチリストに表示',
 	'wikibase-error-serialize-error' => 'データをシリアライズできませんでした。',
 	'wikibase-error-invalid-entity-id' => '入力した ID はシステムに登録されていません。有効なエンティティ ID を使用してください。',
@@ -4179,7 +4186,7 @@ $messages['zh-hans'] = array(
 	'wikibase-editlinks' => '编辑链接',
 	'wikibase-editlinkstitle' => '编辑跨语言链接',
 	'wikibase-linkitem-addlinks' => '添加链接',
-	'wikibase-linkitem-alreadylinked' => '您想要链接的页面已经在中央数据存储库中的一个[$1 项]中，并且已经链接到了本站的$2。一个项只能链接每个站点的一个页面。请选择其他的页面来链接。',
+	'wikibase-linkitem-alreadylinked' => '您想要链接的页面已经在中央数据存储库中的一个[$1 项]中，并且已经链接到了本站的“$2”。一个项只能链接每个站点的一个页面。请选择其他的页面来链接。',
 	'wikibase-linkitem-close' => '关闭对话框并刷新该页面',
 	'wikibase-linkitem-failure' => '在链接页面时出现了一个未知的问题。',
 	'wikibase-linkitem-title' => '链接该页面',
