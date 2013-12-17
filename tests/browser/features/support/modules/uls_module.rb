@@ -9,27 +9,27 @@
 module ULSPage
   include PageObject
   # ULS UI elements
-  a(:ulsOpen, xpath: "//li[@id='pt-uls']/a")
-  text_field(:ulsLanguageFilter, id: "languagefilter")
-  a(:ulsLanguageLink, xpath: "//div[contains(@class, 'uls-language-block')]/ul/li/a")
-  div(:ulsDiv, class: "uls-menu")
+  a(:uls_open, xpath: "//li[@id='pt-uls']/a")
+  text_field(:uls_language_filter, id: "languagefilter")
+  a(:uls_language_link, xpath: "//div[contains(@class, 'uls-language-block')]/ul/li/a")
+  div(:uls_div, class: "uls-menu")
 
-  a(:viewTabLink, xpath: "//li[@id='ca-view']/span/a")
-  a(:recentChangesLink, xpath: "//li[@id='n-recentchanges']/a")
-  a(:specialPageTabLink, xpath: "//li[@id='ca-nstab-special']/span/a")
-  a(:firstResultLink, xpath: "//span[@class='mw-title']/a")
+  a(:view_tab_link, xpath: "//li[@id='ca-view']/span/a")
+  a(:recent_changes_link, xpath: "//li[@id='n-recentchanges']/a")
+  a(:special_page_tab_link, xpath: "//li[@id='ca-nstab-special']/span/a")
+  a(:first_result_link, xpath: "//span[@class='mw-title']/a")
   # ULS
   def uls_switch_language(code, name)
-    if ulsOpen? == false
+    if uls_open? == false
       self.nouls_switch_language(code)
       return
     end
-    if ulsOpen_element.text.downcase != name.downcase
-      ulsOpen
-      self.ulsLanguageFilter_element.when_present
-      self.ulsLanguageFilter= name
+    if uls_open_element.text.downcase != name.downcase
+      uls_open
+      self.uls_language_filter_element.when_present
+      self.uls_language_filter= name
       ajax_wait
-      ulsLanguageLink
+      uls_language_link
     end
   end
 

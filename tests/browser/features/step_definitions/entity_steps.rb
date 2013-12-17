@@ -51,7 +51,7 @@ Given /^The following sitelinks do not exist:$/ do |sitelinks|
 end
 
 Then /^An error message should be displayed$/ do
-  on(ItemPage).wbErrorDiv?.should be_true
+  on(ItemPage).wb_error_div?.should be_true
 end
 
 When /^I reload the page$/ do
