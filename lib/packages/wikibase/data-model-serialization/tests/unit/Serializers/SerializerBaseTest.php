@@ -20,7 +20,7 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider serializable
+	 * @dataProvider serializableProvider
 	 */
 	public function testIsSerializerForReturnsTrue( $serializable ) {
 		$this->assertTrue( $this->buildSerializer()->isSerializerFor( $serializable ) );
@@ -29,17 +29,17 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return mixed[] things that are serialized by the serializer
 	 */
-	public abstract function serializable();
+	public abstract function serializableProvider();
 
 	/**
-	 * @dataProvider nonSerializable
+	 * @dataProvider nonSerializableProvider
 	 */
 	public function testIsSerializerForReturnsFalse( $nonSerializable ) {
 		$this->assertFalse( $this->buildSerializer()->isSerializerFor( $nonSerializable ) );
 	}
 
 	/**
-	 * @dataProvider nonSerializable
+	 * @dataProvider nonSerializableProvider
 	 */
 	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
 		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
@@ -49,5 +49,20 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return mixed[] things that aren't serialized by the serializer
 	 */
-	public abstract function nonSerializable();
+	public abstract function nonSerializableProvider();
+
+	/**
+	 * @dataProvider serializationProvider
+	 */
+	public function testSerialization( $serialization, $object ) {
+		$this->assertEquals(
+			$serialization,
+			$this->buildSerializer()->serialize( $object )
+		);
+	}
+
+	/**
+	 * @return array an array of array( serialization, object to serialize)
+	 */
+	public abstract function serializationProvider();
 }

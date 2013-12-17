@@ -20,7 +20,7 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider deserializable
+	 * @dataProvider deserializableProvider
 	 */
 	public function testIsDeserializerForReturnsTrue( $serializable ) {
 		$this->assertTrue( $this->buildDeserializer()->isDeserializerFor( $serializable ) );
@@ -29,25 +29,40 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return mixed[] things that are deserialized by the deserializer
 	 */
-	public abstract function deserializable();
+	public abstract function deserializableProvider();
 
 	/**
-	 * @dataProvider nonDeserializable
+	 * @dataProvider nonDeserializableProvider
 	 */
 	public function testIsDeserializerForReturnsFalse( $nonSerializable ) {
 		$this->assertFalse( $this->buildDeserializer()->isDeserializerFor( $nonSerializable ) );
 	}
 
 	/**
-	 * @dataProvider nonDeserializable
+	 * @dataProvider nonDeserializableProvider
 	 */
 	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\UnsupportedObjectException' );
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
 		$this->buildDeserializer()->deserialize( $nonSerializable );
 	}
 
 	/**
 	 * @return mixed[] things that aren't deserialized by the deserializer
 	 */
-	public abstract function nonDeserializable();
+	public abstract function nonDeserializableProvider();
+
+	/**
+	 * @dataProvider deserializationProvider
+	 */
+	public function testDeserialization( $object, $serialization ) {
+		$this->assertEquals(
+			$object,
+			$this->buildDeserializer()->deserialize( $serialization )
+		);
+	}
+
+	/**
+	 * @return array an array of array( object deserialized, serialization)
+	 */
+	public abstract function deserializationProvider();
 }
