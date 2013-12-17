@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_89313659",
+        "filename": "tests/browser/features/delete_item.feature",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "Missing documentation, licence, attribution.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_4937ae4a",
+        "filename": "tests/browser/features/edit_tab.feature",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "Missing documentation, licence, attribution.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6936f250",
+        "filename": "tests/browser/features/non_existing_item.feature",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "Missing documentation, licence, attribution.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_a9e87aa3",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "Missing documentation, attribution, license.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6984b2d8",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "There is no \"delete_item\" defined yet. A solution would be to copy over the DeleteItemPage page-object (the file /selenium/lib/pages/delete_item_page.rb) and use the \"delete_item\" method in there. Since how things work has changed a bit for the cucumber tests, you would have to modify the method a bit to get the URL to the deletion-page as a parameter, e.g.\n\ndef delete_item(url)\n    navigate_to(url + \"\u0026action\u003ddelete\")\n    delete\nend\n\nand change the call to the method (this line) accordingly, e.g.\n\non(DeleteItemPage).delete_item(@item_under_test[\"url\"])\n\nThat should work.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8966d64c",
+        "filename": "tests/browser/features/step_definitions/delete_item_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "That will not work this way. I would suggest doing it like that:\n\non(ItemPage) do |page|\n    page.navigate_to_entity @item_under_test[\"url\"]\n    page.entityLabelSpan?.should be_false\n    page.entityDescriptionSpan?.should be_false\nend\n\nThis will navigate to the original item page (which is now deleted) and then check that there are no elements for label and description (that would tell us that the item was actually deleted).",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_293c6a2c",
+        "filename": "tests/browser/features/step_definitions/edit_tab_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "Missing documentation, licence, attribution.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_094526b9",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "Missing documentation, licence, attribution.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_89ec968f",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "Please don\u0027t do checks/assertions in given-steps. For this step it is enough to just do:\n\nvisit_page(NonExistingItemPage)",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_a9f2ba62",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "should be on_page(NonExistingItemPage)",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e98322ab",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "let\u0027s leave the checks for the CreateItemPage out. Just do:\npage.firstHeading.should be_true\npage.firstHeading_element.text.should \u003d\u003d ITEM_NAMESPACE + ITEM_ID_PREFIX + \"xy\"\nThat\u0027s enough for the moment.",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e941e2ac",
+        "filename": "tests/browser/features/support/pages/noexisting_item_page.rb",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T16:50:48Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "774f58c2254c821a32fc17d5159cbf5d8aea2578",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
