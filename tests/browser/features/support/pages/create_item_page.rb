@@ -17,9 +17,9 @@ class CreateItemPage
     if switch_lang
       self.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
     end
-    self.createEntityLabelField = label
-    self.createEntityDescriptionField = description
-    createEntitySubmit
+    self.create_entity_label_field = label
+    self.create_entity_description_field = description
+    create_entity_submit
     wait_for_entity_to_load
     @@item_url = current_url
     query_string = "/" + ITEM_NAMESPACE + ITEM_ID_PREFIX

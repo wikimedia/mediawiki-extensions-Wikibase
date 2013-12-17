@@ -22,45 +22,45 @@ module EntityPage
 
   # ***** ACCESSORS *****
   # label UI
-  h1(:mwFirstHeading, id: "firstHeading")
-  h1(:firstHeading, xpath: "//h1[contains(@class, 'wb-firstHeading')]")
-  h1(:uiPropertyEdittool, class: "wb-ui-propertyedittool")
-  span(:entityLabelSpan, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span")
-  span(:entityIdSpan, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span[contains(@class, 'wb-value-supplement')]")
-  text_field(:labelInputField, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span/input")
-  a(:editLabelLink, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:editLabelLinkDisabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
-  a(:saveLabelLink, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:saveLabelLinkDisabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
-  a(:cancelLabelLink, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:cancelLabelLinkDisabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
+  h1(:mw_first_heading, id: "firstHeading")
+  h1(:first_heading, xpath: "//h1[contains(@class, 'wb-firstHeading')]")
+  h1(:ui_property_edittool, class: "wb-ui-propertyedittool")
+  span(:entity_label_span, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span")
+  span(:entity_id_span, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span[contains(@class, 'wb-value-supplement')]")
+  text_field(:label_input_field, xpath: "//h1[contains(@class, 'wb-firstHeading')]/span/span/input")
+  a(:edit_label_link, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:edit_label_link_disabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
+  a(:save_label_link, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:save_label_link_disabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
+  a(:cancel_label_link, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:cancel_label_link_disabled, css: "h1.wb-firstHeading a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
 
   # description UI
-  span(:entityDescriptionSpan, xpath: "//div[contains(@class, 'wb-ui-descriptionedittool')]/span[contains(@class, 'wb-property-container-value')]/span")
-  text_field(:descriptionInputField, xpath: "//div[contains(@class, 'wb-ui-descriptionedittool')]/span[contains(@class, 'wb-property-container-value')]/span/input")
-  a(:editDescriptionLink, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:editDescriptionLinkDisabled, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
-  a(:saveDescriptionLink, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:saveDescriptionLinkDisabled, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
-  a(:cancelDescriptionLink, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:cancelDescriptionLinkDisabled, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
+  span(:entity_description_span, xpath: "//div[contains(@class, 'wb-ui-descriptionedittool')]/span[contains(@class, 'wb-property-container-value')]/span")
+  text_field(:description_input_field, xpath: "//div[contains(@class, 'wb-ui-descriptionedittool')]/span[contains(@class, 'wb-property-container-value')]/span/input")
+  a(:edit_description_link, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:edit_description_link_disabled, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-editbutton.wikibase-toolbarbutton-disabled")
+  a(:save_description_link, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:save_description_link_disabled, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
+  a(:cancel_description_link, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:cancel_description_link_disabled, css: "div.wb-ui-descriptionedittool a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
 
-  span(:apiCallWaitingMessage, class: "wb-ui-propertyedittool-editablevalue-waitmsg")
+  span(:api_call_waiting_message, class: "wb-ui-propertyedittool-editablevalue-waitmsg")
 
   # edit-tab
-  li(:editTab, id: "ca-edit")
+  li(:edit_tab, id: "ca-edit")
 
   # spinner
-  div(:entitySpinner, xpath: "//div[contains(@class, 'wb-entity-spinner')]")
+  div(:entity_spinner, xpath: "//div[contains(@class, 'wb-entity-spinner')]")
 
   # tooltips & error tooltips
-  div(:wbTooltip, class: "tipsy-inner")
-  div(:wbErrorDiv, class: "wikibase-wbtooltip-error-top-message")
-  div(:wbErrorDetailsDiv, class: "wikibase-wbtooltip-error-details")
-  a(:wbErrorDetailsLink, class: "wikibase-wbtooltip-error-details-link")
+  div(:wb_tooltip, class: "tipsy-inner")
+  div(:wb_error_div, class: "wikibase-wbtooltip-error-top-message")
+  div(:wb_error_details_div, class: "wikibase-wbtooltip-error-details")
+  a(:wb_error_details_link, class: "wikibase-wbtooltip-error-details-link")
 
   # mw notifications
-  div(:mwNotificationContent, xpath: "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
+  div(:mw_notification_content, xpath: "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
 
   # ***** METHODS *****
   def navigate_to_entity url
@@ -70,44 +70,44 @@ module EntityPage
 
   def wait_for_api_callback
     ajax_wait
-    apiCallWaitingMessage_element.when_not_visible
+    api_call_waiting_message_element.when_not_visible
   end
 
   def wait_for_entity_to_load
     wait_until do
-      entitySpinner? == false
+      entity_spinner? == false
     end
   end
 
-  def wait_for_editLabelLink
+  def wait_for_edit_label_link
     wait_until do
-      editLabelLink?
+      edit_label_link?
     end
   end
 
   def change_label(label)
-    if editLabelLink?
-      editLabelLink
+    if edit_label_link?
+      edit_label_link
     end
-    self.labelInputField= label
-    saveLabelLink
+    self.label_input_field= label
+    save_label_link
     ajax_wait
     wait_for_api_callback
   end
 
   def change_description(description)
-    if editDescriptionLink?
-      editDescriptionLink
+    if edit_description_link?
+      edit_description_link
     end
-    self.descriptionInputField= description
-    saveDescriptionLink
+    self.description_input_field= description
+    save_description_link
     ajax_wait
     wait_for_api_callback
   end
 
   def wait_for_mw_notification_shown
     wait_until do
-      mwNotificationContent? == true
+      mw_notification_content? == true
     end
   end
 
