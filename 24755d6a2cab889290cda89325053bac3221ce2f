@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_04ae2b2b",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "Hm, how sure are we that the entity is already in the OutputPage object?",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_a4dbffec",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "Uh, why do we have to unserialize the entity again? This seems quite odd... can\u0027t we use it as-is?",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_84691bf8",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "Under what circumstance is this fallback hit?",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_84ba3b6b",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "Moving the building of the config variables to a separate class is nice, but now it can\u0027t easily take advantage of the info already present in the parser output.",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_24136fba",
+        "filename": "repo/includes/EntityViewJsConfig.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "What does this class do or represent?...",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_44e1d3c9",
+        "filename": "repo/includes/EntityViewJsConfig.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "A quick word about what this does would be nice.",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_c4bde3af",
+        "filename": "repo/tests/phpunit/includes/EntityViewJsConfigTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "Just because of Title?",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_64e057c8",
+        "filename": "repo/tests/phpunit/includes/EntityViewJsConfigTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "We could just use any namespace, right? No need to look up the \"correct\" one, we should not interact with anything \"real\".",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e4c46746",
+        "filename": "repo/tests/phpunit/includes/EntityViewJsConfigTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:39:24Z",
+      "side": 1,
+      "message": "This should check the fields and contents in $configVars. All that nice mocking is wasted if we never check the return value!",
+      "revId": "24755d6a2cab889290cda89325053bac3221ce2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
