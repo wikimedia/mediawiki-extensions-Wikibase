@@ -7,13 +7,13 @@
 # tests for entity selector
 
 When /^I press the ESC key in the entity selector input field$/ do
-  on(ItemPage).entitySelectorInput_element.send_keys :escape
+  on(ItemPage).entity_selector_input_element.send_keys :escape
 end
 
 Then /^Entity selector input element should be there$/ do
-  on(ItemPage).entitySelectorInput?.should be_true
+  on(ItemPage).entity_selector_input?.should be_true
 end
 
 Then /^Entity selector input element should not be there$/ do
-  on(ItemPage).entitySelectorInput?.should be_false
+  on(ItemPage).entity_selector_input?.should be_false
 end
