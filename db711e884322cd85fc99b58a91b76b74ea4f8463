@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_b4aeaa29",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:57:40Z",
+      "side": 1,
+      "message": "blank line missing here",
+      "revId": "db711e884322cd85fc99b58a91b76b74ea4f8463",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_54a19e34",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:57:40Z",
+      "side": 1,
+      "message": "You could check $snakFormatter-\u003egetFormat() \u003d\u003d\u003d SnakFormatter::FORMAT_WIKI to make sure this formatter actually generates wikitext.",
+      "revId": "db711e884322cd85fc99b58a91b76b74ea4f8463",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_74a4a247",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:57:40Z",
+      "side": 1,
+      "message": "render *what* for entity ID? should be called \"renderPropertyValues\", I think. \"For what\" is explicit by the parameters, the name needs to say with this method *does*.",
+      "revId": "db711e884322cd85fc99b58a91b76b74ea4f8463",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_146f96fb",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:57:40Z",
+      "side": 1,
+      "message": "php.getEntityId may return null when used on a page that is not connected to a wikibase item. that should be handled gracefully.",
+      "revId": "db711e884322cd85fc99b58a91b76b74ea4f8463",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_b47d8ab2",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementationTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:57:40Z",
+      "side": 1,
+      "message": "I\u0027d suggest to use mock objects instead of default instances in tests",
+      "revId": "db711e884322cd85fc99b58a91b76b74ea4f8463",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
