@@ -16,6 +16,23 @@
       "revId": "47049d6bf08c1911357deca5f773d56976746bd6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0e576cce",
+        "filename": "tests/browser/features/support/modules/alias_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-17T12:09:25Z",
+      "side": 1,
+      "message": "Since there is now an element in line 15 with the same name, this method should be renamed to populate_aliases. Do not forget to change the code where this method is called.",
+      "revId": "47049d6bf08c1911357deca5f773d56976746bd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
