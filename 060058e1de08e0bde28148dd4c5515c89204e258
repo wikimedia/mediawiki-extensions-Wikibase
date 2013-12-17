@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_4bf1e664",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done, even though we already use the \"wb-\" prefix for user preferences, html ids, etc.",
+      "parentUuid": "0ee75395_6cb84e25",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_0e4537b9",
         "filename": "repo/includes/EntityViewPlaceholderExpander.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-12-15T21:35:55Z",
       "side": 1,
       "message": "blank line",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ebd8baf5",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_0e4537b9",
       "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_cbd5f6bb",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_ee457319",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_2ee47b09",
         "filename": "repo/includes/EntityViewPlaceholderExpander.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-12-15T21:35:55Z",
       "side": 1,
       "message": "please make this into two lines of code. right now, it\u0027s excessively long",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8bdb6eed",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_2ee47b09",
       "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_2bcb4222",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "but $args is not an argument, and ... seems to be the convention: http://stackoverflow.com/questions/5549556/how-to-write-a-doxygen-comment-for-variadic-function-i-e-a-function-with-unde",
+      "parentUuid": "0ee75395_0e82d701",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_8ec02756",
         "filename": "repo/includes/EntityViewPlaceholderExpander.php",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2013-12-15T21:35:55Z",
       "side": 1,
       "message": "return $this-\u003eexpandPlaceholder( $name, $args );",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_0bd07eca",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Having the result in a local variable makes debugging a lot easier.",
+      "parentUuid": "0ee75395_8ec02756",
       "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_6becaa8e",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_eec45346",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_ce4aafc8",
         "filename": "repo/includes/UserLanguages.php",
         "patchSetId": 4
@@ -132,6 +258,24 @@
       "writtenOn": "2013-12-15T21:35:55Z",
       "side": 1,
       "message": "hmmm, seeing this in the placeholder class, i thought it represented an array of languages or such value.\n\nmaybe UserLanguagesResolver or something like that. (i hate naming!)",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_cbfcd63d",
+        "filename": "repo/includes/UserLanguages.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Yes, you are right, it makes more sense to treat this as a service rather than a magic container.",
+      "parentUuid": "0ee75395_ce4aafc8",
       "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_6b938a04",
+        "filename": "repo/includes/UserLanguages.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Yes, again you are right, it makes more sense to treat this as a service rather than a magic container.",
+      "parentUuid": "0ee75395_4e0e9f92",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_ce218ff8",
         "filename": "repo/includes/view/TermBoxView.php",
         "patchSetId": 4
@@ -166,6 +328,24 @@
       "writtenOn": "2013-12-15T21:35:55Z",
       "side": 1,
       "message": "blank line after namespace",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8b048e1b",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_ce218ff8",
       "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_6efdd803",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_ee28d3de",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_2e8a3be4",
         "filename": "repo/includes/view/TermBoxView.php",
         "patchSetId": 4
@@ -200,6 +398,24 @@
       "writtenOn": "2013-12-15T21:35:55Z",
       "side": 1,
       "message": "looks odd  should this be count( $languages )?",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_4e02140e",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee75395_2e8a3be4",
       "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "0ee75395_0e088c29",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "i left this as it was, just factored it out. but you are right, it\u0027s silly and massive overhead for instantiating the special page objects. i have rewritten this bit.",
+      "parentUuid": "0ee75395_6e84c3d8",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ee75395_ee6fb324",
         "filename": "repo/includes/view/TermBoxView.php",
         "patchSetId": 4
@@ -234,6 +468,24 @@
       "writtenOn": "2013-12-15T21:35:55Z",
       "side": 1,
       "message": "agree",
+      "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_ab07521f",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T11:21:35Z",
+      "side": 1,
+      "message": "...but we\u0027d have to fix a number of test cases first.",
+      "parentUuid": "0ee75395_ee6fb324",
       "revId": "060058e1de08e0bde28148dd4c5515c89204e258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
