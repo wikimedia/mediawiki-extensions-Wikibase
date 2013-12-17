@@ -76,21 +76,26 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 		$settings = $this->getRepoSettings();
 
 		return array(
-			array(
-				'',
-				$settings[0],
-				'item'
-			),
-			array(
-				'Property',
-				$settings[1],
-				'property'
-			),
-			array(
-				'Item',
-				$settings[2],
-				'item'
-			)
+			array( '', $settings[0], 'item' ),
+			array( 'Property', $settings[1], 'property' ),
+			array( 'Item', $settings[2], 'item' )
+		);
+	}
+
+	/**
+	 * @dataProvider invalidNamespaceProvider
+	 */
+	public function testGetNamespaceWithInvalid_ThrowsException( array $settings, $entityType ) {
+	 	$repoLinker = $this->getRepoLinkerForSettings( $settings );
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$namespace = $repoLinker->getNamespace( $entityType );
+	}
+
+	public function invalidNamespaceProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array( $settings[0], 'chocolate' )
 		);
 	}
 
@@ -136,6 +141,24 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				'Why? (American band)' )
 		);
 	}
+
+	/**
+	 * @dataProvider getPageUrlInvalidProvider
+	 */
+	public function testGetPageUrlInvalidThrowsException( $settings, $page ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$url = $repoLinker->getPageUrl( $page );
+	}
+
+	public function getPageUrlInvalidProvider() {
+		$settings = $this->getRepoSettings();
+
+		return array(
+			array( $settings[0], array() )
+		);
+	}
+
 	/**
 	 * @dataProvider formatLinkProvider
 	 */
