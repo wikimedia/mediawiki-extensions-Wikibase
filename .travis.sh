@@ -29,12 +29,15 @@ echo "define( 'WB_EXPERIMENTAL_FEATURES', true );" >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/repo/Wikibase.php";' >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
+echo 'require_once __DIR__ . "/extensions/Scribunto/Scribunto.php";' >> LocalSettings.php
 echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
 
 cd extensions/Wikibase
 composer install
-#composer require satooshi/php-coveralls:dev-master
 
-cd ../..
+cd ..
+git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
+
+cd ..
 
 php maintenance/update.php --quick
