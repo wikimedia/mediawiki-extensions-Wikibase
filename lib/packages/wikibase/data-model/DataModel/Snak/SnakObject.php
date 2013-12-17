@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Snak;
 
+use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\UnDeserializableValue;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
@@ -168,8 +169,10 @@ abstract class SnakObject implements Snak {
 		$data[0] = PropertyId::newFromNumber( $data[0] );
 
 		if ( $snakType === 'value' ) {
+			$deserializer = new DataValueDeserializer( $GLOBALS['evilDataValueMap'] );
+
 			try {
-				$value = $GLOBALS['evilDataValueDeserializer']->deserialize( array(
+				$value = $deserializer->deserialize( array(
 					'type' => $data[1],
 					'value' => $data[2],
 				) );
