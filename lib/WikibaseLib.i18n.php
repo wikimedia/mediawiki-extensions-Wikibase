@@ -1606,6 +1606,13 @@ $messages['he'] = array(
 	'version-wikibase' => 'Wikibase',
 );
 
+/** Croatian (hrvatski)
+ * @author MaGa
+ */
+$messages['hr'] = array(
+	'wikibase-replicationnote' => 'Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima.',
+);
+
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */

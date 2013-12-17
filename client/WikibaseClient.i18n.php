@@ -1833,6 +1833,7 @@ $messages['hi'] = array(
  * @author SpeedyGonsales
  */
 $messages['hr'] = array(
+	'wikibase-after-page-move-queued' => '[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.',
 	'wikibase-dataitem' => 'Međuwiki',
 	'wikibase-editlinks' => 'Uredi međuwikije',
 	'wikibase-linkitem-addlinks' => 'Dodaj međuwikije',
@@ -1843,8 +1844,10 @@ $messages['hr'] = array(
 	'wikibase-linkitem-selectlink' => 'Molimo odaberite projekt i stranicu koju želite povezati.',
 	'wikibase-linkitem-input-site' => 'Jezik:',
 	'wikibase-linkitem-input-page' => 'Ime stranice:',
+	'wikibase-linkitem-confirmitem-text' => 'Izabrana stranica već je povezana sa [$1 stavkom u središnjoj bazi podataka]. Molimo Vas, potvrdite da {{PLURAL:$2|je stranica|su stranice}} {{PLURAL:$2|prikazana|prikazane}} ispod {{PLURAL:$2|ona|one}} s {{PLURAL:$2|kojom|kojima}} želite povezati ovu stranicu.',
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdi',
 	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
+	'wikibase-linkitem-success-link' => 'Stranice su uspješno povezane. Ovu stavku s ostalim poveznicama možete pronaći u našoj [$1 središnjoj bazi podataka].',
 	'wikibase-rc-show-wikidata-pref' => 'Prikaži Wikidata promjene na popisu nedavnih promjena',
 	'wikibase-rc-wikibase-edit-title' => 'Wikidata uređivanje',
 	'wikibase-watchlist-show-changes-pref' => 'Prikaži Wikidata promjene na mom popisu praćenih članaka',
