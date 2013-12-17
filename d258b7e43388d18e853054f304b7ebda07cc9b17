@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_4e2fb43a",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T12:18:37Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d258b7e43388d18e853054f304b7ebda07cc9b17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6e2a782c",
+        "filename": "tests/browser/features/support/pages/noexisting_item_page.rb",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-17T12:18:37Z",
+      "side": 1,
+      "message": "please remove this line. it is not needed and this file does not exist.",
+      "revId": "d258b7e43388d18e853054f304b7ebda07cc9b17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
