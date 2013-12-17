@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
-use ContentHandler;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
 use Wikibase\ItemChange;
 use Wikibase\ReferencedPagesFinder;
-use WikiPage;
 
 /**
  * @covers Wikibase\ReferencedPagesFinder
@@ -17,33 +15,15 @@ use WikiPage;
  * @since 0.5
  *
  * @group Database
- *        ^---- This calls WikiPage::doEditContent in setUp
+ *        ^---- This uses Title
  * @group WikibaseClient
  * @group Wikibase
+ * @group ReferencedPagesFinder
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ReferencedPagesFinderTest extends \MediaWikiTestCase {
-
-	static protected $titles;
-
-	public function setUp() {
-		parent::setUp();
-
-		if ( !self::$titles ) {
-			self::$titles = array(
-				Title::newFromText( 'Berlin' ),
-				Title::newFromText( 'Rome' )
-			);
-
-			foreach( self::$titles as $title ) {
-				$content = ContentHandler::makeContent( 'edit page', $title );
-				$page = WikiPage::factory( $title );
-				$page->doEditContent( $content, 'edit page' );
-			}
-		}
-	}
 
 	/**
 	 * @dataProvider getPagesProvider
@@ -63,14 +43,22 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( true ) );
 
-		$referencedPagesFinder = new ReferencedPagesFinder( $itemUsageIndex, $namespaceChecker, 'enwiki' );
+		$referencedPagesFinder = new ReferencedPagesFinder(
+			$itemUsageIndex,
+			$namespaceChecker,
+			'enwiki',
+			false
+		);
 
-		$this->assertEquals( $expected, $referencedPagesFinder->getPages( $change ), $message );
+		$referencedPages = $this->getPrefixedTitles( $referencedPagesFinder->getPages( $change ) );
+		$expectedPages = $this->getPrefixedTitles( $expected );
+
+		$this->assertEquals( $expectedPages, $referencedPages, $message );
 	}
 
 	public function getPagesProvider() {
-		$berlin = Title::newFromText( 'Berlin' );
-		$rome = Title::newFromText( 'Rome' );
+		$berlin = Title::makeTitle( NS_MAIN, 'Berlin' );
+		$rome = Title::makeTitle( NS_MAIN, 'Rome' );
 
 		$cases = array();
 
@@ -207,4 +195,9 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		return $item;
 	}
 
+	private function getPrefixedTitles( array $titles ) {
+		return array_map( function( $title ) {
+			return $title->getPrefixedText();
+		}, $titles );
+	}
 }
