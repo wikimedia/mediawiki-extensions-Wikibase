@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_e9aa0215",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:54:45Z",
+      "side": 1,
+      "message": "docs sais $entityId is an EntityId?",
+      "revId": "543d5b920f4fcca7a504fb6182eb6f7e8ddfaa9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_696ef2ff",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:54:45Z",
+      "side": 1,
+      "message": "This (potentially) loads the entire entity from external storage. for every snak value...",
+      "revId": "543d5b920f4fcca7a504fb6182eb6f7e8ddfaa9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_e979e2c3",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:54:45Z",
+      "side": 1,
+      "message": "the formatting function should take the array structure representing the snak, and return a string. the snak contains all information necessary for formatting.",
+      "revId": "543d5b920f4fcca7a504fb6182eb6f7e8ddfaa9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
