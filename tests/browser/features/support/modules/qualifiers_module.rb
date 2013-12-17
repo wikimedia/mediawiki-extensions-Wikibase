@@ -9,38 +9,38 @@
 module QualifierPage
   include PageObject
   # qualifiers UI elements
-  div(:qualifiersContainer, class: "wb-claim-qualifiers")
-  a(:addQualifier, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[text()='add qualifier']")
-  a(:removeQualifierLine1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
-  a(:removeQualifierLine2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
-  textarea(:qualifierValueInput1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", index: 0)
-  textarea(:qualifierValueInput2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", index: 1)
+  div(:qualifiers_container, class: "wb-claim-qualifiers")
+  a(:add_qualifier, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[text()='add qualifier']")
+  a(:remove_qualifier_line1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
+  a(:remove_qualifier_line2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
+  textarea(:qualifier_value_input1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", index: 0)
+  textarea(:qualifier_value_input2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]//textarea[contains(@class, 'valueview-input')]", index: 1)
 
-  a(:qualifierPropertyLink1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-property-container')]/div/a")
-  a(:qualifierPropertyLink2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-property-container')]/div/a")
-  div(:qualifierProperty1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-property-container')]/div")
-  div(:qualifierProperty2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-property-container')]/div")
-  a(:qualifierValueLink1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  a(:qualifierValueLink2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  div(:qualifierValue1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div")
-  div(:qualifierValue2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div")
+  a(:qualifier_property_link1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-property-container')]/div/a")
+  a(:qualifier_property_link2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-property-container')]/div/a")
+  div(:qualifier_property1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-property-container')]/div")
+  div(:qualifier_property2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-property-container')]/div")
+  a(:qualifier_value_link1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  a(:qualifier_value_link2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  div(:qualifier_value1, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div")
+  div(:qualifier_value2, xpath: "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div")
 
   def wait_for_qualifier_value_box
     wait_until do
-      self.qualifierValueInput1?
+      self.qualifier_value_input1?
     end
   end
 
   def add_qualifier_to_first_claim(property, value)
-    editFirstStatement
-    addQualifier
-    self.entitySelectorInput = property
+    edit_first_statement
+    add_qualifier
+    self.entity_selector_input = property
     ajax_wait
     wait_for_entity_selector_list
     wait_for_qualifier_value_box
-    self.qualifierValueInput1 = value
+    self.qualifier_value_input1 = value
     ajax_wait
-    saveStatement
+    save_statement
     ajax_wait
     wait_for_statement_request_finished
   end
