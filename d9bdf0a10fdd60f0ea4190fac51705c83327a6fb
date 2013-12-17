@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_6955d225",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T16:55:59Z",
+      "side": 1,
+      "message": "In order to later format the snak values, we should actually collect \u0026 keep the snak values here.",
+      "revId": "d9bdf0a10fdd60f0ea4190fac51705c83327a6fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
