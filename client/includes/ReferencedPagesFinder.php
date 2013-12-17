@@ -170,13 +170,13 @@ class ReferencedPagesFinder {
 		foreach ( $pagesToUpdate as $page ) {
 			$title = Title::newFromText( $page );
 
-			if ( !$title->exists() && $this->checkPageExistence ) {
+			if ( $this->checkPageExistence && !$title->exists() ) {
 				continue;
 			}
 
 			$ns = $title->getNamespace();
 
-			if ( !is_int( $ns ) || !$this->namespaceChecker->isWikibaseEnabled( $ns ) ) {
+			if ( !$this->namespaceChecker->isWikibaseEnabled( $ns ) ) {
 				continue;
 			}
 
