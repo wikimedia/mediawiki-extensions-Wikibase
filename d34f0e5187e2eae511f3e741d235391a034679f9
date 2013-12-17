@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_7f3584a2",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-17T18:46:56Z",
+      "side": 1,
+      "message": "I think this usage is deprecated, it should be a FallbackChain object.",
+      "revId": "d34f0e5187e2eae511f3e741d235391a034679f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
