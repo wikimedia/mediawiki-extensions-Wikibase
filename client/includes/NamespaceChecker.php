@@ -1,6 +1,8 @@
 <?php
+
 namespace Wikibase;
 
+use InvalidArgumentException;
 use MWNamespace;
 
 /**
@@ -44,12 +46,12 @@ class NamespaceChecker {
 	 *
 	 * @param int $namespace
 	 *
-	 * @return bool
+	 * @throws InvalidArgumentException
+	 * @return boolean
 	 */
 	public function isWikibaseEnabled( $namespace ) {
-		if( !is_int( $namespace ) ) {
-			wfDebugLog( __CLASS__, __METHOD__ . " expected a namespace ID." );
-			return false;
+		if ( !is_int( $namespace ) ) {
+			throw new InvalidArgumentException( '$namespace is must be an integer' );
 		}
 
 		if ( $this->isExcluded( $namespace ) ) {

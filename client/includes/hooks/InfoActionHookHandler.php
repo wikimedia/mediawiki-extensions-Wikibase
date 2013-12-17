@@ -59,7 +59,7 @@ class InfoActionHookHandler {
 		// Check if wikibase namespace is enabled
 		$title = $context->getTitle();
 
-		if ( $title->exists() && $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) && $title->exists() ) {
 			$pageInfo['header-basic'][] = $this->getPageInfoRow( $context, $title );
 		}
 
