@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_6b882a76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-17T08:36:23Z",
+      "side": 1,
+      "message": "You do not have to specify which files change in the commit message, since that is visible in commit diff.\n\nLooks like you have forgot to commit aliases_steps.rb",
+      "revId": "b9ab12ff668933866105d398563be711f73f6eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
