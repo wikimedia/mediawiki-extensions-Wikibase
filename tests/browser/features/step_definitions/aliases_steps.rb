@@ -41,7 +41,7 @@ When /^I press the RETURN key in the new alias input field$/ do
 end
 
 When /^I enter (.+) as new aliases$/ do |values|
-  on(ItemPage).add_aliases(eval("[#{values}]"))
+  on(ItemPage).populate_aliases(eval("[#{values}]"))
 end
 
 When /^I change the first alias to (.+)$/ do |value|

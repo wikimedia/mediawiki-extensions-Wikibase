@@ -44,7 +44,7 @@ module AliasPage
     count
   end
 
-  def add_aliases(aliases)
+  def populate_aliases(aliases)
     aliases.each do |ali|
       self.aliases_input_empty= ali
     end
