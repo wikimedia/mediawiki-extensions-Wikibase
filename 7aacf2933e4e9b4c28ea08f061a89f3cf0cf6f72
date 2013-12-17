@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_4e8454d8",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-17T13:18:27Z",
+      "side": 1,
+      "message": "keeping \u0027postgres\u0027?  getUpdateScriptPath is not going to work.\n\nand there is no MakeRowIDsBig.pg.sql nor would the mysql schema update for this work in postgres\n\nwhen someone enables support for postgres, then perhaps fine to add this stuff back in, although don\u0027t see the point of an upgrade path from 0.4 when there is no postgresql install schema for Wikibase in 0.4.",
+      "revId": "7aacf2933e4e9b4c28ea08f061a89f3cf0cf6f72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
