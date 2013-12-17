@@ -10,7 +10,7 @@ module AliasPage
   include PageObject
   # aliases UI elements
   div(:aliases_div, class: "wb-aliases")
-  span(:aliasesTitle, class: "wb-aliases-label")
+  span(:aliases_title, class: "wb-aliases-label")
   ul(:aliases_list, class: "wb-aliases-container")
   a(:add_aliases, css: "div.wb-aliases a.wb-ui-propertyedittool-toolbarbutton-addbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:edit_aliases, css: "div.wb-aliases a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
