@@ -17,12 +17,11 @@ define( 'WIKIBASE_DATAMODEL_VERSION', '0.6 alpha'  );
 // Temporary global to migrate away from DataValueFactory::singleton.
 // It should not be used outside this component and should not be used
 // for any code that did not before use DataValueFactory::singleton.
-$GLOBALS['evilDataValueDeserializer'] = new \DataValues\Deserializers\DataValueDeserializer(
-	array(
-		'string' => 'DataValues\StringValue',
-		'number' => 'DataValues\NumberValue',
-		// TODO
-	)
+$GLOBALS['evilDataValueMap'] = array(
+	'boolean' => 'DataValues\BooleanValue',
+	'number' => 'DataValues\NumberValue',
+	'string' => 'DataValues\StringValue',
+	'unknown' => 'DataValues\UnknownValue',
 );
 
 if ( defined( 'MEDIAWIKI' ) ) {
