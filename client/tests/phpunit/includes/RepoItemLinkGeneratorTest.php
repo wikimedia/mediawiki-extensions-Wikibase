@@ -4,8 +4,7 @@ namespace Wikibase\Test;
 
 use Language;
 use Title;
-use ValueParsers\ParserOptions;
-use Wikibase\Lib\EntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\NamespaceChecker;
 use Wikibase\RepoItemLinkGenerator;
 use Wikibase\RepoLinker;
@@ -53,7 +52,7 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	protected function getEntityIdParser() {
-		return new EntityIdParser( new ParserOptions() );
+		return new BasicEntityIdParser();
 	}
 
 	public function getLinksProvider() {

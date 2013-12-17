@@ -73,7 +73,8 @@ class ChangeOpClaim extends ChangeOpBase {
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 
-		$guidValidator = new ClaimGuidValidator();
+		//TODO: inject parser and validator
+		$guidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
 		$guidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 
 		if( $this->claim->getGuid() === null ){

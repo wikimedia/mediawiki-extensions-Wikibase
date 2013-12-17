@@ -10,17 +10,15 @@ use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use ValueParsers\ParserOptions;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Item;
-use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
-use Wikibase\Property;
 
 /**
- * @covers Wikibase\Lib\WikibaseDataTypeBuilders
+ * @covers WikibaseDataTypeBuilders
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -32,7 +30,7 @@ use Wikibase\Property;
 class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newTypeFactory() {
-		$entityIdParser = new EntityIdParser( new ParserOptions() );
+		$entityIdParser = new BasicEntityIdParser();
 
 		$q8 = Item::newEmpty();
 		$q8->setId( new ItemId( 'q8' ) );

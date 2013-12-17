@@ -1,7 +1,9 @@
 <?php
 namespace Wikibase;
 
-use Wikibase\Lib\EntityIdParser;
+use MessageReporter;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * Utility class for rebuilding the wb_entity_per_page table.
@@ -183,7 +185,7 @@ class EntityPerPageBuilder {
 		foreach ( $pages as $pageRow ) {
 			try {
 				$entityId = $this->entityIdParser->parse( $pageRow->page_title );
-			} catch ( \ValueParsers\ParseException $e ) {
+			} catch ( EntityIdParsingException $e ) {
 				wfDebugLog( __CLASS__, __METHOD__ . ': entity id in page row is invalid.' );
 				continue;
 			}
