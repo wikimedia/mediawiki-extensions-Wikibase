@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_5fae3d2c",
+        "filename": "lib/includes/parsers/EntityIdValueParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-17T22:34:01Z",
+      "side": 1,
+      "message": "Now the since tags are misleading",
+      "revId": "1fc27326f0c580777f43fd9abe5d8347a478ffd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
