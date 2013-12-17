@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Entity;
 
 /**
- * Interface for objects that can parse EntityIds
+ * Interface for objects that can parse strings into EntityIds
  *
  * @since 0.5
  *
@@ -17,7 +17,8 @@ interface EntityIdParser {
 	 *
 	 * @param string $entityId
 	 *
-	 * @return mixed
+	 * @return EntityId
+	 * @throws EntityIdParsingException
 	 */
 	public function parse( $entityId );
 
