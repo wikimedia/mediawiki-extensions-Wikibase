@@ -1,5 +1,6 @@
 <?php
 
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Settings;
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
@@ -79,7 +80,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$entityArr = $this->wbLibrary->getEntity( $prefixedEntityId );
 			return $entityArr;
 		}
-		catch ( ParseException $e ) {
+		catch ( EntityIdParsingException $e ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
 		}
 		catch ( \Exception $e ) {

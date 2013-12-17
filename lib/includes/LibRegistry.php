@@ -3,12 +3,11 @@
 namespace Wikibase;
 
 use DataTypes\DataTypeFactory;
-use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdLabelFormatter;
-use Wikibase\Lib\EntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -109,8 +108,8 @@ final class LibRegistry {
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
-		$options = new ParserOptions();
-		return new EntityIdParser( $options );
+		//TODO: make the ID builders configurable
+		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
 	}
 
 	/**

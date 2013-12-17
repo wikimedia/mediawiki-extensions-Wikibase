@@ -3,28 +3,40 @@
 namespace Wikibase\Lib\Test;
 
 use ValueParsers\ParserOptions;
-use Wikibase\DataModel\Entity\EntityId;
+use ValueParsers\Test\StringValueParserTest;
+use ValueParsers\ValueParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\EntityIdValueParser;
 
 /**
- * @covers Wikibase\Lib\EntityIdParser
+ * @covers Wikibase\Lib\EntityIdValueParser
  *
- * @since 0.4
+ * @since 0.5
  *
  * @group ValueParsers
  * @group WikibaseLib
  * @group Wikibase
- * @group EntityIdParserTest
+ * @group EntityIdValueParserTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
+class EntityIdValueParserTest extends StringValueParserTest {
 
 	/**
-	 * @see \ValueParsers\Test\ValueParserTestBase::newParserOptions
+	 * @since 0.1
+	 * @return ValueParser
+	 */
+	protected function getInstance() {
+		$class = $this->getParserClass();
+		return new $class( new BasicEntityIdParser(), $this->newParserOptions() );
+	}
+
+	/**
+	 * @see ValueParserTestBase::newParserOptions
 	 *
 	 * @since 0.4
 	 *
@@ -44,7 +56,7 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 	public function validInputProvider() {
 		$argLists = array();
 
-		$parser = new EntityIdParser( $this->newParserOptions() );
+		$parser = new EntityIdValueParser( new BasicEntityIdParser(), $this->newParserOptions() );
 
 		$valid = array(
 			'q1' => new ItemId( 'q1' ),
@@ -88,7 +100,7 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 	 * @return string
 	 */
 	protected function getParserClass() {
-		return 'Wikibase\Lib\EntityIdParser';
+		return 'Wikibase\Lib\EntityIdValueParser';
 	}
 
 }

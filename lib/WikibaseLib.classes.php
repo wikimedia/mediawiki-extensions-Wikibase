@@ -138,7 +138,7 @@ return call_user_func( function() {
 		'Wikibase\TemplateModule' => 'includes/modules/TemplateModule.php',
 
 		// includes/parsers
-		'Wikibase\Lib\EntityIdParser' => 'includes/parsers/EntityIdParser.php',
+		'Wikibase\Lib\EntityIdValueParser' => 'includes/parsers/EntityIdValueParser.php',
 		'Wikibase\Lib\MediaWikiNumberUnlocalizer' => 'includes/parsers/MediaWikiNumberUnlocalizer.php',
 
 		// includes/specials
@@ -212,7 +212,6 @@ return call_user_func( function() {
 		'Wikibase\Validators\DataFieldValidator' => 'includes/Validators/DataFieldValidator.php',
 		'Wikibase\Validators\DataValueValidator' => 'includes/Validators/DataValueValidator.php',
 		'Wikibase\Validators\EntityExistsValidator' => 'includes/Validators/EntityExistsValidator.php',
-		'Wikibase\Validators\EntityIdValidator' => 'includes/Validators/EntityIdValidator.php',
 		'Wikibase\Validators\NumberValidator' => 'includes/Validators/NumberValidator.php',
 		'Wikibase\Validators\RegexValidator' => 'includes/Validators/RegexValidator.php',
 		'Wikibase\Validators\StringLengthValidator' => 'includes/Validators/StringLengthValidator.php',

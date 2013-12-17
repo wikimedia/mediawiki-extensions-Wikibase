@@ -1,12 +1,12 @@
 <?php
 namespace Wikibase\LinkedData;
 
-use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityContentFactory;
 use Wikibase\HttpAcceptNegotiator;
 use Wikibase\HttpAcceptParser;
-use \Wikibase\Lib\EntityIdParser;
 use \Revision;
 use \WebRequest;
 use \WebResponse;
@@ -179,7 +179,7 @@ class EntityDataRequestHandler {
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
-		} catch ( ParseException $ex ) {
+		} catch ( EntityIdParsingException $ex ) {
 			throw new \HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
 		}
 

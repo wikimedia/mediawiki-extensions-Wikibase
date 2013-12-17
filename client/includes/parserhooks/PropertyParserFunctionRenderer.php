@@ -8,6 +8,7 @@ use Language;
 use Status;
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
@@ -93,7 +94,7 @@ class PropertyParserFunctionRenderer {
 			if ( ! ( $propertyId instanceof PropertyId ) ) {
 				throw new InvalidArgumentException( 'Not a valid property id' );
 			}
-		} catch ( ParseException $ex ) {
+		} catch ( EntityIdParsingException $ex ) {
 			//XXX: It might become useful to give the PropertyLabelResolver a hint as to which
 			//     properties may become relevant during the present request, namely the ones
 			//     used by the Item linked to the current page. This could be done with

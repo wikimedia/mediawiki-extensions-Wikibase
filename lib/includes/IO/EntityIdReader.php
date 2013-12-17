@@ -5,9 +5,9 @@ namespace Wikibase\IO;
 use Disposable;
 use ExceptionHandler;
 use Iterator;
-use ValueParsers\ParseException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * EntityIdReader reads entity IDs from a file, one per line.
@@ -41,7 +41,7 @@ class EntityIdReader implements Iterator, Disposable {
 	 */
 	public function __construct( $fileHandle, $canClose = true, $autoDispose = false ) {
 		$this->reader = new LineReader( $fileHandle, $canClose, $autoDispose );
-		$this->parser = new EntityIdParser(); //TODO: inject?
+		$this->parser = new BasicEntityIdParser(); //FIXME: inject!
 
 		$this->exceptionHandler = new \RethrowingExceptionHandler();
 	}
@@ -69,7 +69,7 @@ class EntityIdReader implements Iterator, Disposable {
 
 		try {
 			$id = $this->parser->parse( $line );
-		} catch ( ParseException $ex ) {
+		} catch ( EntityIdParsingException $ex ) {
 			$this->exceptionHandler->handleException( $ex, 'bad-entity-id', "Failed to parse Entity ID $line" );
 			$id = null;
 		}

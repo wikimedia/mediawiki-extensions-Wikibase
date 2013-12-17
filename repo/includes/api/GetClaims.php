@@ -183,7 +183,7 @@ class GetClaims extends ApiWikibase {
 	}
 
 	protected function getEntityIdFromClaimGuid( $claimGuid ) {
-		$claimGuidValidator = new ClaimGuidValidator();
+		$claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(); //TODO: inject.
 
 		if ( $claimGuidValidator->validateFormat( $claimGuid ) === false ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
