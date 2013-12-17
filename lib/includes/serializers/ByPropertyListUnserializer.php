@@ -2,8 +2,6 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdParser;
 use InvalidArgumentException;
 use OutOfBoundsException;
 
@@ -15,6 +13,7 @@ use OutOfBoundsException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ByPropertyListUnserializer implements Unserializer {
 
@@ -49,24 +48,20 @@ class ByPropertyListUnserializer implements Unserializer {
 	 */
 	public function newFromSerialization( array $serialization ) {
 		$elements = array();
-		$idParser = new EntityIdParser();
 
 		foreach ( $serialization as $propertyId => $byPropId ) {
 			if ( !is_array( $byPropId ) ) {
 				throw new InvalidArgumentException( "Element with key '$propertyId' should be an array, found " . gettype( $byPropId ) );
 			}
 
-			$propertyId = $idParser->parse( $propertyId );
-
 			foreach ( $byPropId as $serializedElement ) {
 				$element = $this->elementUnserializer->newFromSerialization( $serializedElement );
 
-				/** @var PropertyId $elementPropertyId */
-				$elementPropertyId = $element->getPropertyId();
+				$elementPropertyId = $element->getPropertyId()->getSerialization();
 
-				if ( !$elementPropertyId->equals( $propertyId ) ) {
-					throw new OutOfBoundsException( "Element with id '" . $elementPropertyId->getSerialization() .
-					"' found in list with id '" . $propertyId->getSerialization() . "'" );
+				if ( strtoupper( $elementPropertyId ) !== strtoupper( $propertyId ) ) {
+					throw new OutOfBoundsException( "Element with id '" . $elementPropertyId .
+					"' found in list with id '" . $propertyId . "'" );
 				}
 
 				$elements[] = $element;

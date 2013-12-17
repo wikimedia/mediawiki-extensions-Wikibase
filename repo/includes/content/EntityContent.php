@@ -12,8 +12,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterFactory;
-use ValueParsers\ParseException;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -660,7 +659,7 @@ abstract class EntityContent extends AbstractContent {
 					$status->fatal( 'wikibase-error-label-no-entityid' );
 				}
 			}
-			catch ( ParseException $parseException ) {
+			catch ( EntityIdParsingException $parseException ) {
 				// All fine, the parsing did not work, so there is no entity id :)
 			}
 		}

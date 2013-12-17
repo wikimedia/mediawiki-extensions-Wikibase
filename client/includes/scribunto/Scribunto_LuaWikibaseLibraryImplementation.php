@@ -1,16 +1,13 @@
 <?php
 
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityLookup;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Utils;
 

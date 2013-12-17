@@ -5,10 +5,10 @@ namespace Wikibase\Repo;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use ValueFormatters\FormatterOptions;
-use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevisionLookup;
@@ -16,7 +16,6 @@ use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
-use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
@@ -80,6 +79,11 @@ class WikibaseRepo {
 	 * @var ClaimGuidValidator
 	 */
 	private $claimGuidValidator = null;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser = null;
 
 	/**
 	 * @var StringNormalizer
@@ -214,6 +218,9 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
+	 * @deprecated use EntityId::getSerialization() for the canonical representation, or
+	 * go via getValueFormatterFactory() to get a fancy formatter for EntityIds.
+	 *
 	 * @return EntityIdFormatter
 	 */
 	public function getIdFormatter() {
@@ -301,14 +308,19 @@ class WikibaseRepo {
 		return $uri;
 	}
 
+
 	/**
 	 * @since 0.4
 	 *
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
-		$options = new ParserOptions();
-		return new EntityIdParser( $options );
+		if ( $this->entityIdParser === null ) {
+			//TODO: make the ID builders configurable
+			$this->entityIdParser = new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
+		}
+
+		return $this->entityIdParser;
 	}
 
 	/**
@@ -317,17 +329,14 @@ class WikibaseRepo {
 	 * @return ClaimGuidParser
 	 */
 	public function getClaimGuidParser() {
-		$idBuilders = BasicEntityIdParser::getBuilders();
-
-		// TODO: extensions need to be able to add builders.
-
-		$parser = new DispatchingEntityIdParser( $idBuilders );
-
-		return new ClaimGuidParser( $parser );
+		return new ClaimGuidParser( $this->getEntityIdParser() );
 	}
 
 	/**
 	 * @since 0.4
+	 *
+	 * @deprecated use EntityId::getSerialization() for the canonical representation, or
+	 * go via getValueFormatterFactory() to get a fancy formatter for EntityIds.
 	 *
 	 * @return EntityIdFormatter
 	 */
@@ -360,7 +369,7 @@ class WikibaseRepo {
 	 */
 	public function getClaimGuidValidator() {
 		if ( $this->claimGuidValidator === null ) {
-			$this->claimGuidValidator = new ClaimGuidValidator();
+			$this->claimGuidValidator = new ClaimGuidValidator( $this->getEntityIdParser() );
 		}
 
 		return $this->claimGuidValidator;
