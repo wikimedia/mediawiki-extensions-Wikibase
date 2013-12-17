@@ -200,7 +200,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 		$entity = $this->entityFactory->newEmpty( $entityType );
 
 		if ( array_key_exists( 'id', $data ) ) {
-			$idParser = new BasicEntityIdParser();
+			$idParser = new BasicEntityIdParser(); //FIXME: inject!
 			$entityId = $idParser->parse( $data['id'] );
 
 			if ( $entityId->getEntityType() !== $entityType ) {

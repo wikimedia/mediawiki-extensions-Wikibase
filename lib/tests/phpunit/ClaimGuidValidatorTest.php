@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\ClaimGuidValidator;
 
 /**
@@ -17,11 +18,16 @@ use Wikibase\Lib\ClaimGuidValidator;
  */
 class ClaimGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 
+	protected function newClaimGuidValidator() {
+		$entityIdParser = new BasicEntityIdParser();
+		return new ClaimGuidValidator( $entityIdParser );
+	}
+
 	/**
 	 * @dataProvider validateProvider
 	 */
 	public function testValidate( $guid ) {
-		$claimGuidValidator = new ClaimGuidValidator();
+		$claimGuidValidator = $this->newClaimGuidValidator();
 		$isValid = $claimGuidValidator->validate( $guid );
 
 		$this->assertTrue( $isValid, "Assert that claim guid $guid is valid" );
@@ -42,7 +48,7 @@ class ClaimGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validateInvalidProvider
 	 */
 	public function testValidateInvalid( $guid ) {
-		$claimGuidValidator = new ClaimGuidValidator();
+		$claimGuidValidator = $this->newClaimGuidValidator();
 		$isValid = $claimGuidValidator->validate( $guid );
 
 		$this->assertFalse( $isValid, "Assert that claim guid $guid is invalid" );
@@ -70,7 +76,7 @@ class ClaimGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validateProvider
 	 */
 	public function testValidateFormat( $guid ) {
-		$claimGuidValidator = new ClaimGuidValidator();
+		$claimGuidValidator = $this->newClaimGuidValidator();
 		$isValid = $claimGuidValidator->validate( $guid );
 
 		$this->assertTrue( $isValid, "Assert that claim guid $guid has a valid format." );
@@ -80,7 +86,7 @@ class ClaimGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidFormatProvider
 	 */
 	public function  testInvalidFormat( $guid ) {
-		$claimGuidValidator = new ClaimGuidValidator();
+		$claimGuidValidator = $this->newClaimGuidValidator();
 		$isValid = $claimGuidValidator->validate( $guid );
 
 		$this->assertFalse( $isValid, "Assert that claim guid $guid has an invalid format." );
@@ -98,9 +104,7 @@ class ClaimGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validateInvalidPrefixedIdProvider
 	 */
 	public function testValidateInvalidPrefixedId( $guid ) {
-		$claimGuidValidator = new ClaimGuidValidator();
-
-		$this->setExpectedException( 'ValueParsers\ParseException' );
+		$claimGuidValidator = $this->newClaimGuidValidator();
 
 		$isValid = $claimGuidValidator->validate( $guid );
 

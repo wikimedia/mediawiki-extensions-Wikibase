@@ -5,8 +5,8 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use SiteSQLStore;
-use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -109,7 +109,7 @@ class GetEntities extends ApiWikibase {
 			foreach( $params['ids'] as $id ) {
 				try {
 					$ids[] = $entityIdParser->parse( $id );
-				} catch( ParseException $e ) {
+				} catch( EntityIdParsingException $e ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
 				}

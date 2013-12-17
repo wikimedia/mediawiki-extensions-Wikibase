@@ -9,13 +9,14 @@ use SiteSQLStore;
 use SiteStore;
 use Sites;
 use ValueFormatters\FormatterOptions;
-use ValueParsers\ParserOptions;
 use Wikibase\ClientStore;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
-use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
@@ -157,11 +158,15 @@ final class WikibaseClient {
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
-		return new EntityIdParser( new ParserOptions() );
+		//TODO: make the ID builders configurable
+		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
 	}
 
 	/**
 	 * @since 0.4
+	 *
+	 * @deprecated use EntityId::getSerialization() for the canonical representation, or
+	 * go via getValueFormatterFactory() to get a fancy formatter for EntityIds.
 	 *
 	 * @return EntityIdFormatter
 	 */

@@ -11,6 +11,7 @@ use RequestContext;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Item;
@@ -90,7 +91,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	protected function newHandler() {
 		$entityLookup = new MockRepository();
 
-		$idParser = new EntityIdParser( new ParserOptions() );
+		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 
 		//TODO: get rid of the dependency on EntityContentFactory!
 		$contentFactory = new EntityContentFactory(

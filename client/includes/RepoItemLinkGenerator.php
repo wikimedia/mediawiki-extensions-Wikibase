@@ -3,8 +3,7 @@
 namespace Wikibase;
 
 use Title;
-use ValueParsers\ParseException;
-use Wikibase\Lib\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * @since 0.4

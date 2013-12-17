@@ -5,14 +5,13 @@ namespace Wikibase\Test;
 use Language;
 use Scribunto_LuaWikibaseLibraryImplementation;
 use ValueFormatters\FormatterOptions;
-use ValueParsers\ParserOptions;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdParser;
 
 /**
  * @covers Scribunto_LuaWikibaseLibraryImplementation
@@ -50,7 +49,7 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 			);
 
 		return new Scribunto_LuaWikibaseLibraryImplementation(
-			new EntityIdParser( new ParserOptions() ),
+			new BasicEntityIdParser(),
 			$entityLookup ? $entityLookup : new MockRepository(),
 			new EntityIdFormatter( new FormatterOptions() ),
 			$siteLinkTable,

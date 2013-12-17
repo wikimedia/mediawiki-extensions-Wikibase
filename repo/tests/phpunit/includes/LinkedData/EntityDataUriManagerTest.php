@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use Title;
-use ValueParsers\ParserOptions;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LinkedData\EntityDataUriManager;
 
 /**
@@ -33,7 +33,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->idParser = new EntityIdParser( new ParserOptions() );
+		$this->idParser = new BasicEntityIdParser();
 	}
 
 	protected function makeUriManager() {

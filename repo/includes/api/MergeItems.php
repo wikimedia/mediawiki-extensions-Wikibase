@@ -5,9 +5,9 @@ namespace Wikibase\Api;
 use ApiBase;
 use InvalidArgumentException;
 use Status;
-use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
@@ -97,7 +97,7 @@ class MergeItems extends ApiWikibase {
 			$entityId = $entityIdParser->parse( $idString );
 			return $entityContentFactory->getFromId( $entityId );
 		}
-		catch ( ParseException $e ){
+		catch ( EntityIdParsingException $e ){
 			$this->dieUsage( 'You must provide valid ids' , 'param-invalid' );
 		}
 		return null;

@@ -34,7 +34,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetEntityIdParserReturnType() {
 		$returnValue = $this->getDefaultInstance()->getEntityIdParser();
-		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdParser', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
 	}
 
 	public function testGetEntityIdFormatterReturnType() {

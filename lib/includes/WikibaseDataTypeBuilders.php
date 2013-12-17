@@ -4,10 +4,8 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataValues\TimeValue;
-use DataValues\QuantityValue;
-use Parser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityLookup;
-use Wikibase\Item;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
