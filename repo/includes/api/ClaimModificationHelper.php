@@ -10,8 +10,9 @@ use Profiler;
 use Title;
 use UsageException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakConstructionService;
 use ApiBase;
@@ -22,7 +23,6 @@ use Wikibase\Snak;
 use Wikibase\Summary;
 use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidValidator;
-use ValueParsers\ParseException;
 
 /**
  * Helper class for modifying claims
@@ -113,11 +113,7 @@ class ClaimModificationHelper {
 	 * @return bool
 	 */
 	public function validateClaimGuid( $claimGuid ) {
-		try {
-			return $this->claimGuidValidator->validate( $claimGuid );
-		} catch ( ParseException $e ) {
-			$this->throwUsageException( 'Invalid claim guid' , 'invalid-guid' );
-		}
+		return $this->claimGuidValidator->validate( $claimGuid );
 	}
 
 	/**
@@ -193,7 +189,7 @@ class ClaimModificationHelper {
 	public function getEntityIdFromString( $entityIdParam ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $entityIdParam );
-		} catch ( ParseException $parseException ) {
+		} catch ( EntityIdParsingException $parseException ) {
 			$this->throwUsageException( 'Invalid entity ID: ParseException', 'invalid-entity-id' );
 		}
 		/** @var EntityId $entityId */

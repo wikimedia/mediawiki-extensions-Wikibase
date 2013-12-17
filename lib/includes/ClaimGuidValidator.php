@@ -2,8 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Claim\ClaimGuid;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * @since 0.4
@@ -15,6 +16,18 @@ use Wikibase\DataModel\Claim\ClaimGuid;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ClaimGuidValidator {
+
+	/**
+	 * @var EntityIdParser
+	 */
+	protected $entityIdParser;
+
+	/**
+	 * @param EntityIdParser $entityIdParser
+	 */
+	public function __construct( EntityIdParser $entityIdParser ) {
+		$this->entityIdParser = $entityIdParser;
+	}
 
 	/**
 	 * Validates a claim guid
@@ -88,21 +101,17 @@ class ClaimGuidValidator {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $guid
+	 * @param $prefixedId
 	 *
 	 * @return boolean
 	 */
 	protected function validateClaimGuidPrefix( $prefixedId ) {
-		$options = new ParserOptions();
-		$entityIdParser = new EntityIdParser( $options );
-		$entityId = $entityIdParser->parse( $prefixedId );
-
-		if ( ! ( $entityId instanceof \Wikibase\EntityId ) ) {
-			wfDebugLog( __CLASS__, __METHOD__ . ': claim guid is missing an entity id prefix.' );
+		try {
+			$this->entityIdParser->parse( $prefixedId );
+			return true;
+		} catch ( EntityIdParsingException $ex ) {
 			return false;
 		}
-
-		return true;
 	}
 
 }

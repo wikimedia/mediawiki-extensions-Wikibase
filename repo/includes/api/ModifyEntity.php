@@ -10,6 +10,7 @@ use Status;
 use ApiBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemHandler;
@@ -17,8 +18,6 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
-use Wikibase\Utils;
-use ValueParsers\ParseException;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -110,7 +109,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		try{
 			return $entityIdParser->parse( $id );
-		} catch( ParseException $e ){
+		} catch( EntityIdParsingException $e ){
 			$this->dieUsage( "Could not parse {$id}, No entity found", 'no-such-entity-id' );
 		}
 	}
@@ -168,7 +167,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		foreach ( $badgesParams as $badgeSerialization ) {
 			try {
 				$badgeId = $entityIdParser->parse( $badgeSerialization );
-			} catch( ParseException $e ) {
+			} catch( EntityIdParsingException $e ) {
 				$this->dieUsage( "Badges: could not parse '{$badgeSerialization}', the id is invalid", 'no-such-entity-id' );
 			}
 

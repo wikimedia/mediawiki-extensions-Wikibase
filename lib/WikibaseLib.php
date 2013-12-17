@@ -137,7 +137,15 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
 	// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
-	$wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
+	$wgValueParsers['wikibase-entityid'] = function( ValueParsers\ParserOptions $options ) {
+		//TODO: make ID builders configurable.
+		$builders = \Wikibase\DataModel\Entity\BasicEntityIdParser::getBuilders();
+		return new \Wikibase\Lib\EntityIdValueParser(
+			new \Wikibase\DataModel\Entity\DispatchingEntityIdParser( $builders, $options ),
+			$options
+		);
+	};
+
 	$wgValueParsers['quantity'] = function( ValueParsers\ParserOptions $options ) {
 		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer();
 		return new \ValueParsers\QuantityParser(
