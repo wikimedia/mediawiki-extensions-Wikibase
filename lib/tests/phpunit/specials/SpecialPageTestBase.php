@@ -68,6 +68,7 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
+		$context->setLanguage( 'en' );
 
 		$out = new OutputPage( $context );
 		$context->setOutput( $out );
