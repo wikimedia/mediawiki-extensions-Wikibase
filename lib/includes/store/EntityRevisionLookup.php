@@ -10,7 +10,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-interface EntityRevisionLookup {
+interface EntityRevisionLookup extends EntityLookup {
 
 	/**
 	 * Returns the entity revision with the provided id or null if there is no such

@@ -96,13 +96,13 @@ interface Store {
 	public function getEntityLookup();
 
 	/**
-	 * Returns an EntityRevisionLookup
+	 * Returns an EntityStore
 	 *
 	 * @since 0.5
 	 *
-	 * @return EntityRevisionLookup
+	 * @return EntityStore
 	 */
-	public function getEntityRevisionLookup();
+	public function getEntityStore();
 
 	/**
 	 * Returns an EntityInfoBuilder

@@ -44,6 +44,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\EntityRevisionLookup', $returnValue );
 	}
 
+	public function testGetEntityStoreReturnType() {
+		$returnValue = $this->getDefaultInstance()->getEntityStore();
+		$this->assertInstanceOf( 'Wikibase\EntityStore', $returnValue );
+	}
+
 	public function testGetIdFormatterReturnType() {
 		$returnValue = $this->getDefaultInstance()->getIdFormatter();
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdFormatter', $returnValue );

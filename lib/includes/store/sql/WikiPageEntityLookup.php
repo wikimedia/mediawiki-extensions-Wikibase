@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, EntityRevisionLookup {
+class WikiPageEntityLookup extends \DBAccessBase implements EntityCache {
 
 	/**
 	 * The cache type to use for caching entities in memory. Use false to disable caching.
@@ -96,6 +96,34 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 		return $entityRev === null ? null : $entityRev->getEntity();
 	}
 
+	protected function getCache() {
+		return wfGetCache( $this->cacheType );
+	}
+
+	/**
+	 * Purges the given entity from the cache.
+	 *
+	 * @param EntityId $entityId
+	 */
+	public function purgeCachedEntity( EntityID $entityId ) {
+		$key = $this->getEntityCacheKey( $entityId );
+
+		$cache = $this->getCache();
+		$cache->delete( $key );
+	}
+
+	/**
+	 * Updates the given entity in the cache.
+	 *
+	 * @param EntityRevision $entityRev
+	 */
+	public function updateCachedEntity( EntityRevision $entityRev ) {
+		$key = $this->getEntityCacheKey( $entityRev->getEntity()->getId() );
+
+		$cache = $this->getCache();
+		$cache->replace( $key, $entityRev, $this->cacheTimeout );
+	}
+
 	/**
 	 * @since 0.4
 	 * @see   EntityRevisionLookup::getEntityRevision
@@ -123,7 +151,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 
 		if ( $this->cacheType !== false ) {
 			$cacheKey = $this->getEntityCacheKey( $entityId );
-			$cache = wfGetCache( $this->cacheType );
+			$cache = $this->getCache();
 			$cached = $cache->get( $cacheKey );
 
 			//TODO: we may cache a stub without content in hasEntity!
@@ -225,7 +253,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 
 		if ( $this->cacheType !== false ) {
 			$cacheKey = $this->getEntityCacheKey( $entityId );
-			$cache = wfGetCache( $this->cacheType );
+			$cache = $this->getCache();
 			$cached = $cache->get( $cacheKey );
 
 			if ( !( $cached instanceof EntityRevision ) ) {

@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use DatabaseBase;
+use PermissionsError;
+use User;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -13,6 +15,7 @@ use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityStore;
 use Wikibase\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
@@ -28,7 +31,7 @@ use Wikibase\StorageException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLookup, EntityInfoBuilder, PropertyDataTypeLookup {
+class MockRepository implements SiteLinkLookup, EntityStore, EntityInfoBuilder, PropertyDataTypeLookup {
 
 	/**
 	 * Entity id serialization => array of EntityRevision
@@ -44,7 +47,15 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	 */
 	protected $itemByLink = array();
 
+	/**
+	 * @var int
+	 */
 	private $maxId = 0;
+
+	/**
+	 * @var int
+	 */
+	private $maxRev = 0;
 
 	/**
 	 * @see EntityLookup::getEntity
@@ -294,10 +305,11 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 		}
 
 		if ( $revision === 0 ) {
-			$revision = count( $this->entities[$key] ) +1;
+			$revision = $this->maxRev +1;
 		}
 
 		$this->maxId = max( $this->maxId, $entity->getId()->getNumericId() );
+		$this->maxRev = max( $this->maxRev, $revision );
 
 		$rev = new EntityRevision(
 			$entity->copy(), // note: always clone
@@ -711,5 +723,44 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 		}
 
 		return $property->getDataTypeId();
+	}
+
+	/**
+	 * Stores the given Entity.
+	 *
+	 * @param Entity $entity the entity to save.
+	 * @param string $summary ignored
+	 * @param User $user ignored
+	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
+	 * @param int|bool $baseRevId the revision ID $entity is based on. Saving should fail if
+	 * $baseRevId is no longer the current revision.
+	 *
+	 * @see WikiPage::doEditContent
+	 *
+	 * @return EntityRevision
+	 *
+	 * @throws StorageException
+	 * @throws PermissionsError
+	 */
+	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
+		$id = $entity->getId();
+
+		if ( ( $flags & EDIT_NEW ) > 0 && $id && $this->hasEntity( $id ) ) {
+			throw new StorageException( 'Entity already exists: ' . $id->getSerialization() );
+		}
+
+		if ( ( $flags & EDIT_UPDATE ) > 0 && !$this->hasEntity( $id ) ) {
+			throw new StorageException( 'Entity not found for update: ' . $id->getSerialization() );
+		}
+
+		if ( $baseRevId !== false && !$this->hasEntity( $id ) ) {
+			throw new StorageException( 'No base revision found for ' . $id->getSerialization() );
+		}
+
+		if ( $baseRevId !== false && $this->getEntityRevision( $id )->getRevision() !== $baseRevId ) {
+			throw new StorageException( 'Incorrect base revision: ' . $baseRevId );
+		}
+
+		return $this->putEntity( $entity );
 	}
 }
