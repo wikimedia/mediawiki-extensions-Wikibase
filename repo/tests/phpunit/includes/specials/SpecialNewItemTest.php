@@ -56,18 +56,15 @@ class SpecialNewItemTest extends SpecialPageTestBase {
 			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		foreach( $matchers as $key => $matcher ){
+		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
 		list( $output, ) = $this->executeSpecialPage( 'LabelText/DescriptionText' );
-		foreach( $matchers as $key => $matcher ){
-			if( $key === 'label' ){
-				$matcher['attributes']['value'] = 'LabelText';
-			}
-			if( $key === 'description' ){
-				$matcher['attributes']['value'] = 'DescriptionText';
-			}
+		$matchers['label']['attributes']['value'] = 'LabelText';
+		$matchers['description']['attributes']['value'] = 'DescriptionText';
+
+		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
