@@ -199,6 +199,8 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',
 		'Wikibase\Test\EntityViewTest' => 'tests/phpunit/includes/EntityViewTest.php',
 		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/rdf/RdfBuilderTest.php',
+		'Wikibase\Test\SpecialModifyTermTestCase' => 'tests/phpunit/includes/specials/SpecialModifyTermTestCase.php',
+		'Wikibase\Test\TestItemHelper' => 'tests/phpunit/includes/TestItemHelper.php',
 
 		'Wikibase\Test\EntityDataSerializationServiceTest' => 'tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php',
 		'Wikibase\Test\EntityDataRequestHandlerTest' => 'tests/phpunit/includes/LinkedData/EntityDataRequestHandlerTest.php',
