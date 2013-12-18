@@ -175,7 +175,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 		$valueinput = Html::input(
 			'value',
-			$this->getRequest()->getVal( 'value' ),
+			$this->getRequest()->getVal( 'value' ) ? $this->getRequest()->getVal( 'value' ) : $this->value,
 			'text',
 			array(
 				'class' => 'wb-input',
