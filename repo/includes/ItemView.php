@@ -160,7 +160,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					htmlspecialchars( $link->getSite()->getGlobalId() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink, 'td' )
+					$this->getHtmlForEditSection( $editLink, 'td' )
 				);
 
 			} else {
@@ -185,7 +185,7 @@ class ItemView extends EntityView {
 					$escapedSiteId, // displayed site ID
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink . '/' . $escapedSiteId, 'td' ),
+					$this->getHtmlForEditSection( $editLink . '/' . $escapedSiteId, 'td' ),
 					$escapedSiteId // ID used in classes
 				);
 			}
@@ -196,7 +196,7 @@ class ItemView extends EntityView {
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			$this->getHtmlForEditSection( $item, $lang, $editLink, 'td', 'add', !$isFull )
+			$this->getHtmlForEditSection( $editLink, 'td', 'add', !$isFull )
 		);
 
 		$groupName = in_array( $group, $specialGroups ) ? 'special' : $group;
