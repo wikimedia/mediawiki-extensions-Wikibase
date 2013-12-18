@@ -14,9 +14,6 @@ use WikiPage;
 /**
  * @covers Wikibase\EditEntity
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group EditEntity

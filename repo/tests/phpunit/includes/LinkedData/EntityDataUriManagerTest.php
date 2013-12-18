@@ -18,6 +18,7 @@ use Wikibase\LinkedData\EntityDataUriManager;
  *
  * @group Wikibase
  * @group WikibaseEntityData
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

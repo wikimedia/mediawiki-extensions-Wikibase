@@ -21,6 +21,7 @@ use Wikibase\ItemContent;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group WikibaseRepo
  * @group SetSiteLinkTest
  * @group BreakingTheSlownessBarrier
  *

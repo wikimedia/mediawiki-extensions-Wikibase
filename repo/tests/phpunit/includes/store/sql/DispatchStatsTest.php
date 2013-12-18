@@ -11,7 +11,7 @@ use Wikibase\DispatchStats;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseChange
  *
  * @licence GNU GPL v2+

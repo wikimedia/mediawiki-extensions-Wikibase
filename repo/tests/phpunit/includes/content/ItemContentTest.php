@@ -9,11 +9,7 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\ItemContent
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseItem

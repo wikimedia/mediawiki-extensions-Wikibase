@@ -18,6 +18,7 @@ use WikiPage;
  * @author Katie Filbert < aude.wiki@gmail.com >
  *
  * @group Wikibase
+ * @group WikibaseRepo
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.

@@ -10,6 +10,7 @@ use Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks;
  * @since 0.4
  *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *

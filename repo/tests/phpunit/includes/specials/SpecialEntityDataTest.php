@@ -17,6 +17,7 @@ use Wikibase\Repo\Specials\SpecialEntityData;
  * @group Database
  *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
  * @group WikibaseEntityData

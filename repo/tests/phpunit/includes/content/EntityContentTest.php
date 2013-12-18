@@ -7,12 +7,10 @@ use Wikibase\EntityContent;
 /**
  * @covers Wikibase\EntityContent
  *
- * @file
  * @since 0.1
  *
- * @group WikibaseRepoTest
+ * @group WikibaseRepo
  * @group Wikibase
- * @group Test
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

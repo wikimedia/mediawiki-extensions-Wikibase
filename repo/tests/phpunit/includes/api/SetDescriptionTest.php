@@ -26,6 +26,7 @@ namespace Wikibase\Test\Api;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group WikibaseRepo
  * @group SetDescriptionTest
  * @group LanguageAttributeTest
  * @group BreakingTheSlownessBarrier

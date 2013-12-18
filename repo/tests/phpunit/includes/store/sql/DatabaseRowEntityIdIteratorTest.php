@@ -18,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @since 0.5
  *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group WikibaseStore
  * @group Database
  *

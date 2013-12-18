@@ -17,6 +17,7 @@ use Wikibase\PropertyContent;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group WikibaseRepo
  * @group EditEntityTest
  * @group BreakingTheSlownessBarrier
  * @group Database

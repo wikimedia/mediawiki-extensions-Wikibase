@@ -16,6 +16,7 @@ use Wikibase\TermSearchKeyBuilder;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group WikibaseRepo
  * @group WikibaseTerm
  * @group Database
  *

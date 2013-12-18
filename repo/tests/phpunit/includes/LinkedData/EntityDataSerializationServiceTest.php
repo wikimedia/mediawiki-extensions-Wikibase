@@ -15,6 +15,7 @@ use Wikibase\LinkedData\EntityDataSerializationService;
  *
  * @group Wikibase
  * @group WikibaseEntityData
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

@@ -10,6 +10,7 @@ use Wikibase\StoreFactory;
  * @since 0.1
  *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group WikibaseStore
  *
  * @licence GNU GPL v2+

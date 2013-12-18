@@ -21,16 +21,13 @@ use Wikibase\SummaryFormatter;
  *
  * @since 0.5
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group WikibaseSummary
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
- *
  */
 class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 

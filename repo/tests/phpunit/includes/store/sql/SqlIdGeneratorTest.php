@@ -13,6 +13,7 @@ use Wikibase\StoreFactory;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group WikibaseRepo
  * @group Database
  *
  * Some of the tests takes more time, and needs therefor longer time before they can be aborted

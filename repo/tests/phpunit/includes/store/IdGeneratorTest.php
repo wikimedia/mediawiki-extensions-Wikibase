@@ -9,6 +9,7 @@ use Wikibase\StoreFactory;
  * @since 0.1
  *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group WikibaseStore
  * @group Database
  *

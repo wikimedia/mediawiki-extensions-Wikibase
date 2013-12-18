@@ -25,6 +25,8 @@ use Wikibase\SnakList;
  * @todo mock and inject serializers to avoid massive expected output?
  *
  * @group Wikibase
+ * @group WikibaseAPI
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland

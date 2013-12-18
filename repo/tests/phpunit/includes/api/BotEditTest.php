@@ -16,6 +16,7 @@ use Wikibase\NamespaceUtils;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @gorup WikibaseRepo
  * @group BotEditTest
  * @group BreakingTheSlownessBarrier
  * @group Database

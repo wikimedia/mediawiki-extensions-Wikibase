@@ -15,6 +15,7 @@ namespace Wikibase\Test\Api;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group WikibaseRepo
  * @group GetEntitiesTest
  * @group BreakingTheSlownessBarrier
  *

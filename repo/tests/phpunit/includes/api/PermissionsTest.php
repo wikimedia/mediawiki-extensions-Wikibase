@@ -13,10 +13,11 @@ use FormatJson;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
- * 
+ *
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group WikibaseRepo
  * @group PermissionsTest
  * @group BreakingTheSlownessBarrier
  * @group Database
@@ -95,7 +96,6 @@ class PermissionsTest extends PermissionsTestCase {
 			),
 			'permissiondenied' // error
 		);
-
 
 		$permissions[] = array( //6
 			array( // permissions

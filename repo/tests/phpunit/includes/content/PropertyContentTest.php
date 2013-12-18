@@ -9,11 +9,7 @@ use Wikibase\StoreFactory;
 /**
  * @covers Wikibase\PropertyContent
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @group Database
  * @group Wikibase

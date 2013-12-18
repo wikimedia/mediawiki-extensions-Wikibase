@@ -20,7 +20,7 @@ use Title;
 /**
  * @covers Wikibase\Serializers\EntityRevisionSerializer
  *
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseSerialization
  *

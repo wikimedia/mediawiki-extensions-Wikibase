@@ -10,6 +10,7 @@ use Wikibase\NamespaceUtils;
  * @since 0.4
  *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group WikibaseUtils
  *
  * @licence GNU GPL v2+

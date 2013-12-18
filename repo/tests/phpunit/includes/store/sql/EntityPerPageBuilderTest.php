@@ -12,10 +12,8 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\EntityPerPageBuilder
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
  * @group Wikibase
+ * @group WikibaseRepo
  * @group WikibaseStore
  * @group WikibaseEntityPerPage
  * @group Database

@@ -21,6 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseEntityHandler
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

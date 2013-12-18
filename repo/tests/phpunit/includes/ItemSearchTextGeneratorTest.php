@@ -9,10 +9,10 @@ use Wikibase\Repo\ItemSearchTextGenerator;
 /**
  * @covers Wikibase\Repo\ItemSearchTextGenerator
  *
- * @file
  * @since 0.5
  *
  * @group Wikibase
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

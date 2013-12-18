@@ -20,6 +20,7 @@ use Wikibase\WikiPageEntityLookup;
  * @group Wikibase
  * @group WikibaseStore
  * @group WikibasePropertyInfo
+ * @group WikibaseRepo
  * @group Database
  * @group medium
  *

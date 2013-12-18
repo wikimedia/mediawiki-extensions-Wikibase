@@ -9,11 +9,9 @@ use Wikibase\Repo\EntitySearchTextGenerator;
 /**
  * @covers Wikibase\Repo\EntitySearchTextGenerator
  *
- * @file
  * @since 0.5
  *
- * @group WikibaseRepoTest
- * @group Test
+ * @group WikibaseRepo
  * @group Wikibase
  *
  * @licence GNU GPL v2+
