@@ -498,6 +498,12 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $pout ) {
+        // LangLinkHandler used here interferes with any test that parses
+		// something, like a page or a message
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true;
+		}
+
 		$langLinkHandler = new LangLinkHandler(
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
