@@ -37,6 +37,11 @@ $specialPageAliases['fi'] = array(
 	'UnconnectedPages' => array( 'Yhdistämättömät_sivut' ),
 );
 
+/** Hebrew (עברית) */
+$specialPageAliases['he'] = array(
+	'UnconnectedPages' => array( 'דפים_שלא_מקושרים_לפריטים' ),
+);
+
 /** Japanese (日本語) */
 $specialPageAliases['ja'] = array(
 	'UnconnectedPages' => array( '関連付けられていないページ', '関連付けのないページ' ),

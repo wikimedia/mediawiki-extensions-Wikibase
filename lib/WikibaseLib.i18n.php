@@ -3147,6 +3147,7 @@ $messages['sl'] = array(
 	'wikibase-diffview-description' => 'opis',
 	'wikibase-diffview-link' => 'povezave',
 	'wikibase-error-unexpected' => 'Prišlo je do nepričakovane napake.',
+	'wikibase-replicationnote' => 'Spremembe se bodo na vseh wikijih morda prikazale šele po več minutah.',
 	'wikibase-sitelinks-wikipedia' => 'Strani Wikipedije, povezane na ta predmet.',
 	'wikibase-sitelinks-sitename-columnheading' => 'Jezik',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Spletišče',
