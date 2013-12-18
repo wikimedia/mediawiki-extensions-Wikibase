@@ -7,8 +7,6 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -171,15 +169,14 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testSetClaimAtIndex( Claim $claim ) {
 		// Generate an item with some claims:
 		$item = Item::newEmpty();
-		$item->setId( ItemId::newFromNumber( 906054 ) );
-		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
-
 		$claims = new Claims();
 
-		// (Re-)initialize item content with empty claims:
+		// Initialize item content with empty claims:
 		$item->setClaims( $claims );
 		$content = new ItemContent( $item );
 		$content->save( 'setclaimtest', null, EDIT_NEW );
+
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 
 		for( $i = 1; $i <= 3; $i++ ) {
 			$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( $i ) );
