@@ -70,7 +70,7 @@ class RemoveClaims extends ModifyClaim {
 
 		$this->saveChanges( $entityContent, $summary );
 		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addValue( null, $params['claim'], 'claims', 'claim' );
+		$this->getResultBuilder()->setList( null, 'claims', $params['claim'], 'claim' );
 
 		wfProfileOut( __METHOD__ );
 	}
