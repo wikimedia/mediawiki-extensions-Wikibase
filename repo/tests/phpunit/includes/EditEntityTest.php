@@ -45,9 +45,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	protected static function getTestRevisions() {
-		$user = self::getUser( "EditEntityTestUser2" );
-
 		if ( self::$testRevisions === null ) {
+			$user = self::getUser( "EditEntityTestUser2" );
 			$otherUser = self::getUser( "EditEntityTestUser2" );
 
 			$itemContent = ItemContent::newEmpty();
@@ -321,7 +320,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// to get a concrete class to instantiate. Still note that our
 		// test target is EntityContent::userWasLastToEdit.
 		$anonUser = User::newFromId(0);
-		$sysopUser = User::newFromId(1);
+		$anonUser->setName( '127.0.0.1' );
+		$user = self::getUser( "EditEntityTestUser" );
 		$itemContent = ItemContent::newEmpty();
 
 		// check for default values, last revision by anon --------------------
@@ -333,7 +333,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		// check for default values, last revision by sysop --------------------
 		$itemContent->getItem()->setLabel( 'en', "Test SysOp default" );
-		$status = $itemContent->save( 'testedit for sysop', $sysopUser, EDIT_UPDATE );
+		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
 		$this->assertTrue( $status->isGood() );
 		$res = EditEntity::userWasLastToEdit( false, false );
 		$this->assertFalse( $res );
@@ -347,9 +347,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		// check for default values, last revision by sysop --------------------
 		$itemContent->getItem()->setLabel( 'en', "Test SysOp with user" );
-		$status = $itemContent->save( 'testedit for sysop', $sysopUser, EDIT_UPDATE );
+		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
 		$this->assertTrue( $status->isGood() );
-		$res = EditEntity::userWasLastToEdit( $sysopUser->getId(), false );
+		$res = EditEntity::userWasLastToEdit( $user->getId(), false );
 		$this->assertFalse( $res );
 
 		// create an edit and check if the anon user is last to edit --------------------
@@ -361,16 +361,16 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), $lastRevId );
 		$this->assertTrue( $res );
 		// also check that there is a failure if we use the sysop user
-		$res = EditEntity::userWasLastToEdit( $sysopUser->getId(), $lastRevId );
+		$res = EditEntity::userWasLastToEdit( $user->getId(), $lastRevId );
 		$this->assertFalse( $res );
 
 		// create an edit and check if the sysop user is last to edit --------------------
 		$page = $itemContent->getWikiPage();
 		$lastRevId = $page->getRevision()->getId();
 		$itemContent->getItem()->setLabel( 'en', "Test SysOp" );
-		$status = $itemContent->save( 'testedit for sysop', $sysopUser, EDIT_UPDATE );
+		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
 		$this->assertTrue( $status->isGood() );
-		$res = EditEntity::userWasLastToEdit( $sysopUser->getId(), $lastRevId );
+		$res = EditEntity::userWasLastToEdit( $user->getId(), $lastRevId );
 		$this->assertTrue( $res );
 		// also check that there is a failure if we use the anon user
 		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), $lastRevId );
