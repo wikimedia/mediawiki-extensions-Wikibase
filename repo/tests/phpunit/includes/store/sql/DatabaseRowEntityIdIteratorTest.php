@@ -95,12 +95,12 @@ class DatabaseRowEntityIdIteratorTest extends \MediaWikiTestCase {
 	}
 
 	public static function idProvider() {
-		$p10 = new PropertyId( 'P10' );
-		$q30 = new ItemId( 'Q30' );
+		$property = new PropertyId( 'P1089' );
+		$item = new ItemId( 'Q33820' );
 
 		return array(
 			'empty' => array( array() ),
-			'some entities' => array( array( $p10, $q30 ) ),
+			'some entities' => array( array( $property, $item ) ),
 		);
 	}
 }

@@ -105,14 +105,18 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	}
 
 	public static function getEntitiesProvider() {
-		$p10 = new PropertyId( 'P10' );
-		$q30 = new ItemId( 'Q30' );
+		$property1 = new PropertyId( 'P4910' );
+		$property2 = new PropertyId( 'P4911' );
+		$property3 = new PropertyId( 'P4912' );
+
+		$item1 = new ItemId( 'Q2930' );
+		$item2 = new ItemId( 'Q2931' );
 
 		return array(
 			'empty' => array( array(), null, array() ),
-			'some entities' => array( array( $p10, $q30 ), null, array( $p10, $q30 ) ),
-			'just properties' => array( array( $p10, $q30 ), Property::ENTITY_TYPE, array( $p10 ) ),
-			'no matches' => array( array( $p10 ), Item::ENTITY_TYPE, array() ),
+			'some entities' => array( array( $property1, $item1 ), null, array( $property1, $item1 ) ),
+			'just properties' => array( array( $property2, $item2 ), Property::ENTITY_TYPE, array( $property2 ) ),
+			'no matches' => array( array( $property3 ), Item::ENTITY_TYPE, array() ),
 		);
 	}
 }
