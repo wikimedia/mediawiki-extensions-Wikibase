@@ -78,13 +78,23 @@ interface Store {
 	public function getEntityLookup();
 
 	/**
-	 * Returns an EntityRevisionLookup
+	 * Returns an EntityStore
 	 *
 	 * @since 0.5
 	 *
-	 * @return EntityRevisionLookup
+	 * @return EntityStore
 	 */
-	public function getEntityRevisionLookup();
+	public function getEntityStore();
+
+	/**
+	 * Returns an EntityStoreWatcher that should be notified of changes to
+	 * entities, in order to keep any caches updated.
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityStore
+	 */
+	public function getEntityStoreWatcher();
 
 	/**
 	 * Returns an EntityInfoBuilder

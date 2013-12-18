@@ -13,7 +13,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class CachingEntityRevisionLookup implements EntityRevisionLookup {
+class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWatcher {
 
 	/**
 	 * @var EntityRevisionLookup
@@ -199,15 +199,22 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup {
 	}
 
 	/**
-	 * Remove the given entity from the cache.
+	 * Notifies the cache that an entity was updated.
+	 *
+	 * @param EntityRevision $entityRevision
+	 */
+	public function entityUpdated( EntityRevision $entityRevision ) {
+		$key = $this->getCacheKey( $entityRevision->getEntity()->getId() );
+		$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
+	}
+
+	/**
+	 * Notifies the cache that an entity was deleted.
 	 *
 	 * @param EntityId $entityId
 	 */
-	public function purgeEntity( EntityId $entityId ) {
+	public function entityDeleted( EntityId $entityId ) {
 		$key = $this->getCacheKey( $entityId );
 		$this->cache->delete( $key );
-
-		// TODO: if $this->lookup supports purging, purge?
-		// TODO: define and implement some EntityUpdateListener interface
 	}
 }
