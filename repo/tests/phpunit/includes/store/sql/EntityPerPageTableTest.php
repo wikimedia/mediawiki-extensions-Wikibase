@@ -2,12 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\EntityFactory;
 use Wikibase\EntityPerPageTable;
 use Wikibase\Item;
 use Wikibase\Property;
@@ -28,6 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Marius Hoch < hoo@online.de >
  */
 class EntityPerPageTableTest extends \MediaWikiTestCase {
 
@@ -38,28 +33,25 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityId[] $entityIds
+	 * @param Entity[] $entities
 	 *
 	 * @return EntityPerPageTable
 	 */
-	protected function newEntityPerPageTable( array $entityIds ) {
+	protected function newEntityPerPageTable( array $entities ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$table = new EntityPerPageTable();
 		$table->clear();
 
-		/* @var EntityId $id */
-		foreach ( $entityIds as $id ) {
-			$entity = EntityFactory::singleton()->newEmpty( $id->getEntityType() );
-			$entity->setId( $id );
-
+		foreach ( $entities as $entity ) {
 			if ( $entity instanceof Property ) {
 				$entity->setDataTypeId( 'string' );
 			}
 
-			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
+			$content = $wikibaseRepo->getEntityContentFactory()->newFromEntity( $entity );
 			$title = $content->getTitle();
 
-			if ( !$title->exists() ) {
-				$content->save();
+			if ( !$title || !$title->exists() ) {
+				$content->save( 'test', null, EDIT_NEW );
 			}
 
 			$table->addEntityContent( $content );
@@ -95,24 +87,36 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getEntitiesProvider
 	 */
-	public function testGetEntities( $ids, $type, $expected ) {
-		$table = $this->newEntityPerPageTable( $ids );
+	public function testGetEntities( $entities, $type, $expected ) {
+		$table = $this->newEntityPerPageTable( $entities );
 
 		$iterator = $table->getEntities( $type );
 		$actual = iterator_to_array( $iterator );
 
-		$this->assertArrayEquals( $expected, $actual );
+		$expectedIds = array();
+		foreach( $expected as $entity ) {
+			$expectedIds[] = $entity->getId();
+		}
+		$this->assertArrayEquals( $expectedIds, $actual );
 	}
 
 	public static function getEntitiesProvider() {
-		$p10 = new PropertyId( 'P10' );
-		$q30 = new ItemId( 'Q30' );
+		$property = Property::newEmpty();
+		$item = Item::newEmpty();
 
 		return array(
-			'empty' => array( array(), null, array() ),
-			'some entities' => array( array( $p10, $q30 ), null, array( $p10, $q30 ) ),
-			'just properties' => array( array( $p10, $q30 ), Property::ENTITY_TYPE, array( $p10 ) ),
-			'no matches' => array( array( $p10 ), Item::ENTITY_TYPE, array() ),
+			'empty' => array(
+				array(), null, array()
+			),
+			'some entities' => array(
+				array( $property, $item ), null, array( $property, $item )
+			),
+			'just properties' => array(
+				array( $property, $item ), Property::ENTITY_TYPE, array( $property )
+			),
+			'no matches' => array(
+				array( $property ), Item::ENTITY_TYPE, array()
+			),
 		);
 	}
 }
