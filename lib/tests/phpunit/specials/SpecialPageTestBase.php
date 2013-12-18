@@ -53,14 +53,15 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $sub The subpage parameter to call the page with
-	 * @param WebRequest $request Web request that may contain URL parameters, etc
+	 * @param WebRequest|null $request Web request that may contain URL parameters, etc
+	 * @param string|null $language The language code which should be used in the context of this special page
 	 *
 	 * @throws Exception|null
 	 * @return array array( String, \WebResponse ) containing the output generated
 	 *         by the special page.
 	 */
-	protected function executeSpecialPage( $sub = '', WebRequest $request = null ) {
-		if ( !$request ) {
+	protected function executeSpecialPage( $sub = '', WebRequest $request = null, $language = null ) {
+		if ( $request === null ) {
 			$request = new \FauxRequest();
 		}
 
@@ -68,6 +69,9 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
+		if ( $language !== null ) {
+			$context->setLanguage( $language );
+		}
 
 		$out = new OutputPage( $context );
 		$context->setOutput( $out );
