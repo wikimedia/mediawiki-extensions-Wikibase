@@ -24,6 +24,8 @@ use Wikibase\Repo\WikibaseRepo;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @todo: FIXME: change this to use Entity and EntityStore, not EntityContent
+ *
  * @since 0.1
  *
  * @file
@@ -705,8 +707,7 @@ class EditEntity {
 			$summary,
 			$this->getUser(),
 			$flags | EDIT_AUTOSUMMARY,
-			$this->getCurrentRevisionId(), // note: this should be the parent revision, not the true base revision!
-			$this->doesCheckForEditConflicts() ? $this : null
+			$this->doesCheckForEditConflicts() ? $this->getCurrentRevisionId() : false
 		);
 
 		if ( !$editStatus->isOK() ) {
