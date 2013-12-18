@@ -167,36 +167,36 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		// #0: same link ---------
-		$a = new Item( array( 'id' => 1 ) );
+		$a = new Item( array( 'entity' => 'Q1' ) );
 		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 		$a->addSiteLink( new SimpleSiteLink( 'dewiki', 'Foo' ) );
 
-		$b = new Item( array( 'id' => 2 ) );
+		$b = new Item( array( 'entity' => 'Q2' ) );
 		$b->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 		$b->addSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array( array( 'enwiki', 'Foo', 1 ) ) );
 
 		// #1: same site ---------
-		$a = new Item( array( 'id' => 1 ) );
+		$a = new Item( array( 'entity' => 'Q1' ) );
 		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 
-		$b = new Item( array( 'id' => 2 ) );
+		$b = new Item( array( 'entity' => 'Q2' ) );
 		$b->addSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #2: same page ---------
-		$a = new Item( array( 'id' => 1 ) );
+		$a = new Item( array( 'entity' => 'Q1' ) );
 		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 
-		$b = new Item( array( 'id' => 2 ) );
+		$b = new Item( array( 'entity' => 'Q2' ) );
 		$b->addSiteLink( new SimpleSiteLink( 'dewiki', 'Foo' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #3: same item ---------
-		$a = new Item( array( 'id' => 1 ) );
+		$a = new Item( array( 'entity' => 'Q1' ) );
 		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 
 		$cases[] = array( $a, $a, array() );
@@ -217,11 +217,11 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public static function provideGetLinks() {
 		$cases = array();
 
-		$a = new Item( array( 'id' => 1 ) );
+		$a = new Item( array( 'entity' => 'Q1' ) );
 		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 		$a->addSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
 
-		$b = new Item( array( 'id' => 2 ) );
+		$b = new Item( array( 'entity' => 'Q2' ) );
 		$b->addSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ) );
 		$b->addSiteLink( new SimpleSiteLink( 'dewiki', 'Xoo' ) );
 
@@ -357,10 +357,10 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function setupGetEntities() {
-		$one = new Item( array( 'id' => 1, 'label' => array( 'en' => 'one' ) ) );
-		$two = new Item( array( 'id' => 2, 'label' => array( 'en' => 'two' ) ) );
-		$three = new Item( array( 'id' => 3, 'label' => array( 'en' => 'three', 'de' => 'drei' ), 'description' => array( 'en' => 'the third' ) ) );
-		$prop = new Property( array( 'id' => 4, 'label' => array( 'en' => 'property!' ), 'datatype' => 'string' ) );
+		$one = new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one' ) ) );
+		$two = new Item( array( 'entity' => 'Q2', 'label' => array( 'en' => 'two' ) ) );
+		$three = new Item( array( 'entity' => 'Q3', 'label' => array( 'en' => 'three', 'de' => 'drei' ), 'description' => array( 'en' => 'the third' ) ) );
+		$prop = new Property( array( 'entity' => 'P4', 'label' => array( 'en' => 'property!' ), 'datatype' => 'string' ) );
 
 		$this->repo->putEntity( $one, 1001 );
 		$this->repo->putEntity( $two, 1002 );
@@ -439,7 +439,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSiteLinksForItem() {
-		$one = new Item( array( 'id' => 1 ) );
+		$one = new Item( array( 'entity' => 'Q1' ) );
 
 		$one->addSiteLink( new SimpleSiteLink( 'dewiki', 'Xoo' ) );
 		$one->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
@@ -649,5 +649,68 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->repo->removeMissing( $entityInfo );
 
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
+	}
+
+	public function provideSaveEntity() {
+		return array(
+			'fresh' => array(
+				'entity' => new Item( array( 'label' => array( 'en' => 'one' ) ) ),
+				'flags' => EDIT_NEW,
+				'baseRevid' => false,
+			),
+
+			'update' => array(
+				'entity' => new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one', 'it' => 'uno',  ) ) ),
+				'flags' => EDIT_UPDATE,
+				'baseRevid' => 1011,
+			),
+
+			'not fresh' => array(
+				'entity' => new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one' ) ) ),
+				'flags' => EDIT_NEW,
+				'baseRevid' => false,
+				'error' => 'Wikibase\StorageException'
+			),
+
+			'not exists' => array(
+				'entity' => new Item( array( 'entity' => 'Q123', 'label' => array( 'en' => 'one two three', 'de' => 'eins zwei drei' ) ) ),
+				'flags' => EDIT_UPDATE,
+				'baseRevid' => false,
+				'error' => 'Wikibase\StorageException'
+			),
+
+			'bad base' => array(
+				'entity' => new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one', 'de' => 'eins' ) ) ),
+				'flags' => EDIT_UPDATE,
+				'baseRevid' => 1234,
+				'error' => 'Wikibase\StorageException'
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideSaveEntity
+	 */
+	public function testSaveEntity( Entity $entity, $flags, $baseRevId, $error = null ) {
+		$this->setupGetEntities();
+
+		if ( $error !== null ) {
+			$this->setExpectedException( $error );
+		}
+
+		$rev = $this->repo->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
+
+		$this->assertEquals( $entity->getLabels(), $rev->getEntity()->getLabels() );
+		$this->assertEquals( $entity->getLabels(), $this->repo->getEntity( $entity->getId() )->getLabels() );
+	}
+
+	public function testDeleteEntity( ) {
+		$q23 = new ItemId( 'q23' );
+		$item = Item::newEmpty();
+		$item->setId( $q23 );
+		$this->repo->putEntity( $item );
+
+		$this->repo->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );
+		$this->assertFalse( $this->repo->hasEntity( $item->getId() ) );
 	}
 }
