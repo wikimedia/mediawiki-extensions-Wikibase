@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DatabaseBase;
+use User;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -10,7 +11,6 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityInfoBuilder;
-use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\Item;
@@ -20,6 +20,7 @@ use Wikibase\SiteLink;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Property;
 use Wikibase\StorageException;
+use Wikibase\store\EntityStore;
 
 /**
  * Mock repository for use in tests.
@@ -28,7 +29,7 @@ use Wikibase\StorageException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLookup, EntityInfoBuilder, PropertyDataTypeLookup {
+class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLookup, EntityInfoBuilder, PropertyDataTypeLookup {
 
 	/**
 	 * Entity id serialization => array of EntityRevision
@@ -44,7 +45,15 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	 */
 	protected $itemByLink = array();
 
+	/**
+	 * @var int
+	 */
 	private $maxId = 0;
+
+	/**
+	 * @var int
+	 */
+	private $maxRev = 0;
 
 	/**
 	 * @see EntityLookup::getEntity
@@ -294,10 +303,11 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 		}
 
 		if ( $revision === 0 ) {
-			$revision = count( $this->entities[$key] ) +1;
+			$revision = $this->maxRev +1;
 		}
 
 		$this->maxId = max( $this->maxId, $entity->getId()->getNumericId() );
+		$this->maxRev = max( $this->maxRev, $revision );
 
 		$rev = new EntityRevision(
 			$entity->copy(), // note: always clone
@@ -724,5 +734,54 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 		$rev = $this->getEntityRevision( $entityId );
 
 		return $rev === null ? false : $rev->getRevision();
+	}
+
+	/**
+	 * Stores the given Entity.
+	 *
+	 * @param Entity $entity the entity to save.
+	 * @param string $summary ignored
+	 * @param User $user ignored
+	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
+	 * @param int|bool $baseRevId the revision ID $entity is based on. Saving should fail if
+	 * $baseRevId is no longer the current revision.
+	 *
+	 * @see WikiPage::doEditContent
+	 *
+	 * @return EntityRevision
+	 *
+	 * @throws StorageException
+	 */
+	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
+		$id = $entity->getId();
+
+		if ( ( $flags & EDIT_NEW ) > 0 && $id && $this->hasEntity( $id ) ) {
+			throw new StorageException( 'Entity already exists: ' . $id->getSerialization() );
+		}
+
+		if ( ( $flags & EDIT_UPDATE ) > 0 && !$this->hasEntity( $id ) ) {
+			throw new StorageException( 'Entity not found for update: ' . $id->getSerialization() );
+		}
+
+		if ( $baseRevId !== false && !$this->hasEntity( $id ) ) {
+			throw new StorageException( 'No base revision found for ' . $id->getSerialization() );
+		}
+
+		if ( $baseRevId !== false && $this->getEntityRevision( $id )->getRevision() !== $baseRevId ) {
+			throw new StorageException( 'Incorrect base revision: ' . $baseRevId );
+		}
+
+		return $this->putEntity( $entity );
+	}
+
+	/**
+	 * Deletes the given entity in some underlying storage mechanism.
+	 *
+	 * @param EntityId $entityId
+	 * @param string $reason the reason for deletion
+	 * @param User $user
+	 */
+	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
+		$this->removeEntity( $entityId );
 	}
 }
