@@ -1,8 +1,12 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\store;
 
 use BagOStuff;
+use Wikibase\Entity;
+use Wikibase\EntityId;
+use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
 
 /**
  * Implementation of EntityLookup that caches the obtained entities in memory.
@@ -13,7 +17,7 @@ use BagOStuff;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class CachingEntityRevisionLookup implements EntityRevisionLookup {
+class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWatcher {
 
 	/**
 	 * @var EntityRevisionLookup
@@ -51,7 +55,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup {
 	 * @param string $cacheKeyPrefix The key prefix to use for constructing cache keys.
 	 *         Defaults to "wbentity". There should be no reason to change this.
 	 *
-	 * @return \Wikibase\CachingEntityRevisionLookup
+	 * @return \Wikibase\store\CachingEntityRevisionLookup
 	 */
 	public function __construct( EntityRevisionLookup $lookup, BagOStuff $cache, $cacheDuration = 3600, $cacheKeyPrefix = "wbentity" ) {
 		$this->lookup = $lookup;
@@ -91,7 +95,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup {
 	 * will be called on the underlying lookup to check whether the cached revision is
 	 * still the latest. Otherwise, any cached revision will be used if $revision=0.
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 * @param int      $revision The desired revision id, 0 means "current".
 	 *
 	 * @return EntityRevision|null
@@ -137,7 +141,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup {
 	 * @since 0.5
 	 * @see   EntityLookup::getEntity
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 * @param int      $revision The desired revision id, 0 means "current".
 	 *
 	 * @return Entity|null
@@ -154,7 +158,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 *
 	 * @return bool
 	 */
@@ -180,11 +184,11 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup {
 	 * to the underlying lookup. Otherwise, it may return the ID of a cached
 	 * revision.
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 *
 	 * @return int|false
 	 */
-	public function getLatestRevisionId( EntityID $entityId ) {
+	public function getLatestRevisionId( EntityId $entityId ) {
 		if ( !$this->verifyRevision ) {
 			$key = $this->getCacheKey( $entityId );
 			$entityRevision = $this->cache->get( $key );
@@ -198,15 +202,22 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup {
 	}
 
 	/**
-	 * Remove the given entity from the cache.
+	 * Notifies the cache that an entity was updated.
+	 *
+	 * @param EntityRevision $entityRevision
+	 */
+	public function entityUpdated( EntityRevision $entityRevision ) {
+		$key = $this->getCacheKey( $entityRevision->getEntity()->getId() );
+		$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
+	}
+
+	/**
+	 * Notifies the cache that an entity was deleted.
 	 *
 	 * @param EntityId $entityId
 	 */
-	public function purgeEntity( EntityId $entityId ) {
+	public function entityDeleted( EntityId $entityId ) {
 		$key = $this->getCacheKey( $entityId );
 		$this->cache->delete( $key );
-
-		// TODO: if $this->lookup supports purging, purge?
-		// TODO: define and implement some EntityUpdateListener interface
 	}
 }
