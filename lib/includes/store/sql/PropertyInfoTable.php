@@ -6,6 +6,7 @@ use DatabaseUpdater;
 use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\store\CachingEntityRevisionLookup;
 
 /**
  * Class PropertyInfoTable implements PropertyInfoStore on top of an SQL table.
