@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ee75395_cb2a8b2a",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-18T10:28:43Z",
+      "side": 1,
+      "message": "you got me wrong.\nwhat I meant is, change \"on_page(CreateItemPage)\" to \"on_page(NonExistingItemPage)\".\nplease always execute the tests locally before submitting, to  early catch such errors and save time.",
+      "revId": "6be1c3efcc1878ed7dad9d65998400022286dacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_8b200348",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-18T10:28:43Z",
+      "side": 1,
+      "message": "please remove this as I wrote in the previous commit.",
+      "revId": "6be1c3efcc1878ed7dad9d65998400022286dacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_6b25bf55",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-18T10:28:43Z",
+      "side": 1,
+      "message": "please remove this as I wrote in the previous commit.",
+      "revId": "6be1c3efcc1878ed7dad9d65998400022286dacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee75395_cb24cbaf",
+        "filename": "tests/browser/features/support/pages/delete_item_page.rb",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-12-18T10:28:43Z",
+      "side": 1,
+      "message": "inheritance from ItemPage is not needed",
+      "revId": "6be1c3efcc1878ed7dad9d65998400022286dacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
