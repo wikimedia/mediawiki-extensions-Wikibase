@@ -55,18 +55,15 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		foreach( $matchers as $key => $matcher ){
+		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
 		list( $output, ) = $this->executeSpecialPage( 'LangText/LabelText' );
-		foreach( $matchers as $key => $matcher ){
-			if( $key === 'language' ){
-				$matcher['attributes']['value'] = 'LangText';
-			}
-			if( $key === 'label' ){
-				$matcher['attributes']['value'] = 'LabelText';
-			}
+		$matchers['language']['attributes']['value'] = 'LangText';
+		$matchers['label']['attributes']['value'] = 'LabelText';
+
+		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
