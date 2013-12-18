@@ -112,18 +112,28 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$entityContent->getEntity()->setLabel( 'en', 'one' );
 		$status = $entityContent->save( 'create item' );
 		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue( $status->hasMessage( 'edit-gone-missing' ) );
+		$this->assertTrue(
+			$status->hasMessage( 'edit-gone-missing' ),
+			'try to create without flags, edit gone missing'
+		);
 
 		// try to create with EDIT_UPDATE flag
 		$entityContent->getEntity()->setLabel( 'en', 'two' );
 		$status = $entityContent->save( 'create item', null, EDIT_UPDATE );
 		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue( $status->hasMessage( 'edit-gone-missing' ) );
+		$this->assertTrue(
+			$status->hasMessage( 'edit-gone-missing' ),
+			'edit gone missing, try to create with EDIT_UPDATE'
+		);
 
 		// try to create with EDIT_NEW flag
 		$entityContent->getEntity()->setLabel( 'en', 'three' );
 		$status = $entityContent->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), $entityContent->getEntity()->getId()->getPrefixedId() );
+		$this->assertTrue(
+			$status->isOK(),
+			'create with EDIT_NEW flag for ' .
+			$entityContent->getEntity()->getId()->getPrefixedId()
+		);
 
 		// ok, the item exists now in the database.
 
@@ -131,17 +141,23 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$entityContent->getEntity()->setLabel( 'en', 'four' );
 		$status = $entityContent->save( 'create item', null, EDIT_NEW );
 		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue( $status->hasMessage( 'edit-already-exists' ) );
+		$this->assertTrue(
+			$status->hasMessage( 'edit-already-exists' ),
+			'try to save with EDIT_NEW flag, edit already exists'
+		);
 
 		// try to save with EDIT_UPDATE flag
 		$entityContent->getEntity()->setLabel( 'en', 'five' );
 		$status = $entityContent->save( 'create item', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), "save failed" );
+		$this->assertTrue(
+			$status->isOK(),
+			'try to save with EDIT_UPDATE flag, save failed'
+		);
 
 		// try to save without flags
 		$entityContent->getEntity()->setLabel( 'en', 'six' );
 		$status = $entityContent->save( 'create item' );
-		$this->assertTrue( $status->isOK(), "save failed" );
+		$this->assertTrue( $status->isOK(), 'try to save without flags, save failed' );
 	}
 
 	public function testRepeatedSave() {
@@ -152,29 +168,29 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		// create
 		$entityContent->getEntity()->setLabel( 'en', "First" );
 		$status = $entityContent->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), "save failed" );
-		$this->assertTrue( $status->isGood(), $status->getMessage() );
+		$this->assertTrue( $status->isOK(), 'create, save failed, status ok' );
+		$this->assertTrue( $status->isGood(), 'create, status is good' );
 
 		// change
 		$prev_id = $entityContent->getWikiPage()->getLatest();
 		$entityContent->getEntity()->setLabel( 'en', "Second" );
 		$status = $entityContent->save( 'modify item', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), "save failed" );
-		$this->assertTrue( $status->isGood(), $status->getMessage() );
+		$this->assertTrue( $status->isOK(), 'change, status ok' );
+		$this->assertTrue( $status->isGood(), 'change, status good' );
 		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
 
 		// change again
 		$prev_id = $entityContent->getWikiPage()->getLatest();
 		$entityContent->getEntity()->setLabel( 'en', "Third" );
 		$status = $entityContent->save( 'modify item again', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), "save failed" );
-		$this->assertTrue( $status->isGood(), $status->getMessage() );
+		$this->assertTrue( $status->isOK(), 'change again, status ok' );
+		$this->assertTrue( $status->isGood(), 'change again, status good' );
 		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
 
 		// save unchanged
 		$prev_id = $entityContent->getWikiPage()->getLatest();
 		$status = $entityContent->save( 'save unmodified', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), "save failed" );
+		$this->assertTrue( $status->isOK(), 'save unchanged, save failed, status ok' );
 		$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
 	}
 
