@@ -263,7 +263,6 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	protected function getFormElements() {
 		$id = $this->entityContent ?
 			$this->entityContent->getEntity()->getId()->getSerialization() : '';
-
 		return Html::element(
 			'label',
 			array(
