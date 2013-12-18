@@ -46,7 +46,7 @@ class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		foreach( $matchers as $key => $matcher ){
+		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 

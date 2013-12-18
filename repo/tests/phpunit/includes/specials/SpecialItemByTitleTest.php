@@ -54,18 +54,15 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		foreach( $matchers as $key => $matcher ){
+		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 
 		list( $output, ) = $this->executeSpecialPage( 'SiteText/PageText' );
-		foreach( $matchers as $key => $matcher ){
-			if( $key === 'site' ){
-				$matcher['attributes']['value'] = 'SiteText';
-			}
-			if( $key === 'page' ){
-				$matcher['attributes']['value'] = 'PageText';
-			}
+		$matchers['site']['attributes']['value'] = 'SiteText';
+		$matchers['page']['attributes']['value'] = 'PageText';
+
+		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 	}
