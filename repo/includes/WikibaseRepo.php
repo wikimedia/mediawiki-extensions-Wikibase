@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityStore;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
@@ -56,11 +57,6 @@ class WikibaseRepo {
 	private $dataTypeFactory = null;
 
 	/**
-	 * @var EntityIdFormatter|null
-	 */
-	private $idFormatter = null;
-
-	/**
 	 * @var SnakConstructionService|null
 	 */
 	private $snakConstructionService = null;
@@ -96,11 +92,6 @@ class WikibaseRepo {
 	private $snakFormatterFactory;
 
 	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	/**
 	 * @var OutputFormatValueFormatterFactory
 	 */
 	private $valueFormatterFactory;
@@ -109,11 +100,6 @@ class WikibaseRepo {
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -189,6 +175,15 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
+	 * @return EntityStoreWatcher
+	 */
+	public function getEntityStoreWatcher() {
+		return $this->getStore()->getEntityStoreWatcher();
+	}
+
+	/**
+	 * @since 0.5
+	 *
 	 * @return EntityTitleLookup
 	 */
 	public function getEntityTitleLookup() {
@@ -201,11 +196,16 @@ class WikibaseRepo {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup() {
-		if ( $this->entityRevisionLookup === null ) {
-			$this->entityRevisionLookup = StoreFactory::getStore()->getEntityRevisionLookup();
-		}
+		return $this->getStore()->getEntityRevisionLookup();
+	}
 
-		return $this->entityRevisionLookup;
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityStore
+	 */
+	public function getEntityStore() {
+		return $this->getStore()->getEntityStore();
 	}
 
 	/**
@@ -242,11 +242,7 @@ class WikibaseRepo {
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		if ( $this->entityLookup === null ) {
-			$this->entityLookup = StoreFactory::getStore()->getEntityLookup();
-		}
-
-		return $this->entityLookup;
+		return $this->getStore()->getEntityLookup();
 	}
 
 	/**

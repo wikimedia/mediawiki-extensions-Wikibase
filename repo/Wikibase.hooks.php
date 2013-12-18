@@ -226,6 +226,11 @@ final class RepoHooks {
 			 */
 			$newEntity = $article->getContent()->getEntity();
 
+			// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
+			// May be redundant in some cases. Take care not to cause infinite regress.
+			$entityRev = new EntityRevision( $newEntity, $revision->getId(), $revision->getTimestamp() );
+			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+
 			$parent = is_null( $revision->getParentId() )
 				? null : Revision::newFromId( $revision->getParentId() );
 
@@ -285,6 +290,10 @@ final class RepoHooks {
 		 * @var Entity $entity
 		 */
 		$entity = $content->getEntity();
+
+		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
+		// May be redundant in some cases. Take care not to cause infinite regress.
+		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $entity->getId() );
 
 		$change = EntityChange::newFromUpdate( EntityChange::REMOVE, $entity, null, array(
 			'revision_id' => 0, // there's no current revision
