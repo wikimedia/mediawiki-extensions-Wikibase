@@ -26,27 +26,6 @@ use Wikibase\Repo\Specials\SpecialEntityData;
  */
 class SpecialEntityDataTest extends SpecialPageTestBase {
 
-	protected function saveItem( Item $item ) {
-		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
-
-		$content = ItemContent::newFromItem( $item );
-		$content->save( "testing", null, EDIT_NEW );
-	}
-
-	public function getTestItem() {
-		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
-
-		static $item;
-
-		if ( $item === null ) {
-			$item = Item::newEmpty();
-			$item->setLabel( 'en', 'Raarrr' );
-			$this->saveItem( $item );
-		}
-
-		return $item;
-	}
-
 	protected function newSpecialPage() {
 		$page = new SpecialEntityData();
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
@@ -80,7 +59,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
 	public function testExecute( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
-		$item = $this->getTestItem();
+		$item = TestItemHelper::getTestItem();
 
 		EntityDataRequestHandlerTest::injectIds( $subpage, $item );
 		EntityDataRequestHandlerTest::injectIds( $params, $item );

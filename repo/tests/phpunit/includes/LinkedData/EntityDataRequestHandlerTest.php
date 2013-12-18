@@ -66,23 +66,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		parent::tearDown();
 	}
 
-	protected function saveItem( Item $item ) {
-		$content = ItemContent::newFromItem( $item );
-		$content->save( "testing", null, EDIT_NEW );
-	}
-
-	public function getTestItem() {
-		static $item;
-
-		if ( $item === null ) {
-			$item = Item::newEmpty();
-			$item->setLabel( 'en', 'Raarrr' );
-			$this->saveItem( $item );
-		}
-
-		return $item;
-	}
-
 	/**
 	 * @return EntityDataRequestHandler
 	 */
@@ -226,7 +209,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
 	public function testHandleRequest( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
-		$item = $this->getTestItem();
+		$item = TestItemHelper::getTestItem();
 
 		// inject actual ID of test items
 		self::injectIds( $subpage, $item );
