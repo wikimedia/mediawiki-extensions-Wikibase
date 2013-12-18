@@ -367,9 +367,8 @@ class SqlStore implements Store {
 		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
 		//      transient local cache in CachingEntityLoader.
 		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
-		$key = $this->cachePrefix . ':WikiPageEntityLookup';
-		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
-		return new CachingEntityLoader( $lookup );
+		$lookup = $this->getEntityRevisionLookup();
+		return new CachingEntityLoader( $lookup ); //FIXME: EntityStore doesn't know about this decorator!
 	}
 
 	/**
@@ -395,6 +394,7 @@ class SqlStore implements Store {
 	protected function newEntityRevisionLookup() {
 		//TODO: implement CachingEntityLoader based on EntityRevisionLookup instead of
 		//      EntityLookup. Then we can layer an EntityLookup on top of that.
+		//FIXME: figure that out, and integrate with WikiPageEntityStore
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
 		return $lookup;

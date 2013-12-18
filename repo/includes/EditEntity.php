@@ -13,6 +13,8 @@ use Wikibase\Repo\WikibaseRepo;
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
  * permission checks and handling edit conflicts.
  *
+ * @todo: FIXME: change this to use Entity and EntityStore, not EntityContent
+ *
  * @since 0.1
  *
  * @licence GNU GPL v2+
@@ -691,8 +693,7 @@ class EditEntity {
 			$summary,
 			$this->getUser(),
 			$flags | EDIT_AUTOSUMMARY,
-			$this->getCurrentRevisionId(), // note: this should be the parent revision, not the true base revision!
-			$this->doesCheckForEditConflicts() ? $this : null
+			$this->doesCheckForEditConflicts() ? $this->getCurrentRevisionId() : false
 		);
 
 		if ( !$editStatus->isOK() ) {
