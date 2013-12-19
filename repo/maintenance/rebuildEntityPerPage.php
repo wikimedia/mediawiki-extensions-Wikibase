@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase;
+
 use LoggedUpdateMaintenance;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\EntityIdParser;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -12,25 +13,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for rebuilding the items_per_page table.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.3
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
@@ -69,14 +52,20 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 		$entityPerPageTable = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$entityNamespaces = NamespaceUtils::getEntityNamespaces();
 
-		$builder = new EntityPerPageBuilder( $entityPerPageTable, $entityContentFactory, $entityIdParser );
+		$dbw = wfGetDB( DB_MASTER );
+		$pagesFinder = new EntityPerPageBuilderPagesFinder( $dbw, $entityNamespaces, $rebuildAll );
+
+		$builder = new EntityPerPageBuilder(
+			$entityContentFactory,
+			$entityIdParser,
+			$pagesFinder,
+			$entityNamespaces
+		);
+
 		$builder->setReporter( $reporter );
-
-		$builder->setBatchSize( $batchSize );
-		$builder->setRebuildAll( $rebuildAll );
-
-		$builder->rebuild();
+		$builder->rebuild( $entityPerPageTable, $rebuildAll, $batchSize );
 
 		return true;
 	}
