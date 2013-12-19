@@ -7,6 +7,11 @@ if ( defined( 'DATA_VALUES_JAVASCRIPT_VERSION' ) ) {
 
 define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.1 alpha' );
 
+// Include the composer autoloader if it is present.
+if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
+	include_once( __DIR__ . '/vendor/autoload.php' );
+}
+
 $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 	'path' => __DIR__,
 	'name' => 'DataValues Javascript',
