@@ -572,7 +572,7 @@ abstract class EntityView extends \ContextSource {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 
-		$labels = $this->getPropertyLabels( $entity, $languageCode );
+		$propertyLabels = $this->getPropertyLabels( $entity, $languageCode );
 
 		/**
 		 * @var string $claimsHtml
@@ -584,7 +584,9 @@ abstract class EntityView extends \ContextSource {
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
 			$propertyKey = $propertyId->getSerialization();
-			$propertyLabel = isset( $labels[$propertyKey] ) ? $labels[$propertyKey] : $propertyKey;
+			$propertyLabel = isset( $propertyLabels[$propertyKey] )
+				? $propertyLabels[$propertyKey]
+				: $propertyKey;
 			$propertyLink = \Linker::link(
 				$this->entityTitleLookup->getTitleForId( $propertyId ),
 				htmlspecialchars( $propertyLabel )
@@ -593,7 +595,9 @@ abstract class EntityView extends \ContextSource {
 			$htmlForEditSection = $this->getHtmlForEditSection( '', 'span' ); // TODO: add link to SpecialPage
 
 			$claimHtmlGenerator = new ClaimHtmlGenerator(
-				$this->snakFormatter
+				$this->snakFormatter,
+				$this->entityTitleLookup,
+				$propertyLabels
 			);
 
 			foreach( $claims as $claim ) {
