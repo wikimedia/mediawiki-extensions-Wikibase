@@ -1,6 +1,6 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="php/tests/bootstrap.php"
          cacheTokens="false"
          colors="true"
          convertErrorsToExceptions="true"
@@ -13,13 +13,13 @@
          strict="true"
          verbose="true">
     <testsuites>
-        <testsuite name="DataValues">
-            <directory>tests/phpunit</directory>
+        <testsuite name="DataValuesJsApi">
+            <directory>php/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">php/src</directory>
         </whitelist>
     </filter>
 </phpunit>

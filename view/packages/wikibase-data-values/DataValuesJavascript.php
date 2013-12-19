@@ -25,6 +25,8 @@ $GLOBALS['wgResourceModules'] = array_merge(
 	include( __DIR__ . '/js/ValueParsers.resources.mw.php' )
 );
 
+// API module registration
+$GLOBALS['wgAPIModules']['parsevalue'] = 'ValueParsers\ApiParseValue';
 
 /**
  * Hook for registering QUnit test cases.
