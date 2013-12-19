@@ -22,6 +22,7 @@ use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\Api\EntityTestHelper;
 
 /**
  * @covers Wikibase\LinkedData\EntityDataRequestHandler
@@ -170,20 +171,17 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @todo: use EntityRevision once we have that
 	 */
 	public static function injectIds( &$data, Entity $entity ) {
-		if ( is_array( $data ) ) {
-			foreach ( $data as $k => &$v ) {
-				self::injectIds( $v, $entity );
-			}
-		} else if ( is_string( $data ) ) {
-			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
-			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
+		$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
 
-			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-			$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
+		$idMap = array(
+			'{testitemid}' => strtoupper( $entity->getId()->getPrefixedId() ),
+			'{lowertestitemid}' => strtolower( $entity->getId()->getPrefixedId() ),
+			'{testitemrev}' => $content->getWikiPage()->getLatest(),
+			'{testitemtimestamp}' => $ts,
+		);
 
-			$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
-			$data = str_replace( '{testitemtimestamp}', $ts, $data );
-		}
+		EntityTestHelper::injectIds( $data, $idMap );
 	}
 
 	/**

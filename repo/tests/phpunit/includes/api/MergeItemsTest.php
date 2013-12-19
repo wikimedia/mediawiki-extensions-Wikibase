@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EntityId;
 use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
 
@@ -26,22 +27,39 @@ use Wikibase\PropertyContent;
  */
 class MergeItemsTest extends WikibaseApiTestCase {
 
-	private static $hasSetup;
+	private static $hasSetup = false;
+
+	/**
+	 * @var EntityId
+	 */
+	private static $thePropertyId;
+
+	/**
+	 * @var EntityId
+	 */
+	private static $theItemId;
 
 	public function setUp() {
 		parent::setUp();
-		if( !isset( self::$hasSetup ) ){
+
+		if( !self::$hasSetup ){
 			$this->initTestEntities( array( 'Empty', 'Empty2' ) );
 
 			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setId( PropertyId::newFromNumber( 56 ) );
 			$prop->getEntity()->setDataTypeId( 'string' );
-			$prop->save( 'mergeitemstest' );
+			$status = $prop->save( 'mergeitemstest', null, EDIT_NEW );
+
+			$this->assertTrue( $status->isOK(), $status->getWikiText() );
+			self::$thePropertyId = $prop->getEntity()->getId();
+
 			$item = ItemContent::newEmpty();
-			$item->getEntity()->setId( new ItemId( 'q999' ) );
-			$item->save( 'mergeitemstest' );
+			$status = $item->save( 'mergeitemstest', null, EDIT_NEW );
+
+			$this->assertTrue( $status->isOK(), $status->getWikiText() );
+			self::$theItemId = $item->getEntity()->getId();
+
+			self::$hasSetup = true;
 		}
-		self::$hasSetup = true;
 	}
 
 	public static function provideData(){
@@ -128,39 +146,39 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			'sitelink'
 		);
 		$testCases['claimMerge'] = array(
-			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 			array(),
 			array(),
 			array( 'claims' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ),
 		);
 		$testCases['claimMerge'] = array(
-			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
+			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
+			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 			array(),
 			array( 'claims' => array(
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
 		);
 		//Identical claims should not be replaced but duplicated instead
 		$testCases['identicalClaimMerge'] = array(
-			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-			array( 'claims' => array( 'P56' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 			array(),
 			array( 'claims' => array(
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P56', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
+				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
 		);
 		return $testCases;
 	}
@@ -169,6 +187,11 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	 * @dataProvider provideData
 	 */
 	function testMergeRequest( $pre1, $pre2, $expected1, $expected2, $ignoreConflicts = null ){
+		$this->injectIds( $pre1 );
+		$this->injectIds( $pre2 );
+		$this->injectIds( $expected1 );
+		$this->injectIds( $expected2 );
+
 		// -- set up params ---------------------------------
 		$params = array(
 			'action' => 'wbmergeitems',
@@ -222,25 +245,25 @@ class MergeItemsTest extends WikibaseApiTestCase {
 				'p' => array( ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //1 only from id
-				'p' => array( 'fromid' => 'q999' ),
+				'p' => array( 'fromid' => '{item}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //2 only to id
-				'p' => array( 'toid' => 'q999' ),
+				'p' => array( 'toid' => '{item}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //3 toid bad
-				'p' => array( 'fromid' => 'q999', 'toid' => 'ABCDE' ),
+				'p' => array( 'fromid' => '{item}', 'toid' => 'ABCDE' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
 			array( //4 fromid bad
-				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'q999' ),
+				'p' => array( 'fromid' => 'ABCDE', 'toid' => '{item}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
 			array( //5 both same id
-				'p' => array( 'fromid' => 'Q999', 'toid' => 'q999' ),
+				'p' => array( 'fromid' => '{Item}', 'toid' => '{item}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid', 'message' => 'You must provide unique ids' ) ) ),
 			array( //6 from id is property
-				'p' => array( 'fromid' => 'p56', 'toid' => 'q999' ),
+				'p' => array( 'fromid' => '{prop}', 'toid' => '{item}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
 			array( //7 to id is property
-				'p' => array( 'fromid' => 'q999', 'toid' => 'p56' ),
+				'p' => array( 'fromid' => '{item}', 'toid' => '{prop}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
 			array( //8 bad ignoreconficts (GETVALIDID is replaced by a valid id)
 				'p' => array( 'fromid' => 'GETVALIDID', 'toid' => 'GETVALIDID', 'ignoreconflicts' => 'foo' ),
@@ -255,6 +278,9 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	 * @dataProvider provideExceptionParamsData
 	 */
 	public function testMergeItemsParamsExceptions( $params, $expected ){
+		$this->injectIds( $params );
+		$this->injectIds( $expected );
+
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbmergeitems';
 		if( isset( $params['from'] ) && $params['from'] === 'GETVALIDID' ){
@@ -311,4 +337,23 @@ class MergeItemsTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
+	/**
+	 * Applies self::$idMap to all data in the given data structure, recursively.
+	 *
+	 * @param $data
+	 */
+	protected function injectIds( &$data ) {
+		if ( !self::$hasSetup ) {
+			throw new \LogicException( 'setUp() was not yet completed.' );
+		}
+
+		$idMap = array(
+			'{prop}' => lcfirst( self::$thePropertyId->getSerialization() ),
+			'{item}' => lcfirst( self::$theItemId->getSerialization() ),
+			'{Prop}' => ucfirst( self::$thePropertyId->getSerialization() ),
+			'{Item}' => ucfirst( self::$theItemId->getSerialization() ),
+		);
+
+		EntityTestHelper::injectIds( $data, $idMap );
+	}
 }

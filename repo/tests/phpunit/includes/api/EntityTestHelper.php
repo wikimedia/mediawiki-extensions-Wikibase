@@ -354,4 +354,29 @@ class EntityTestHelper {
 		return null;
 	}
 
+
+	/**
+	 * Applies $idMap to all data in the given data structure, recursively.
+	 *
+	 * @param mixed $data
+	 * @param array $idMap
+	 */
+	public static function injectIds( &$data, array &$idMap ) {
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => &$value ) {
+				self::injectIds( $value, $idMap );
+
+				$newKey = $key;
+				self::injectIds( $newKey, $idMap );
+
+				if ( $newKey !== $key ) {
+					$data[$newKey] = $value;
+					unset( $data[$key] );
+				}
+			}
+		} elseif ( is_string( $data ) ) {
+			$data = str_replace( array_keys( $idMap ), array_values( $idMap ), $data );
+		}
+	}
+
 }
