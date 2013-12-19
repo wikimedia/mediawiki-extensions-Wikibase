@@ -44,7 +44,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		return $user;
 	}
 
-	protected static function getTestRevisions() {
+	protected function getTestRevisions() {
 		if ( self::$testRevisions === null ) {
 			$prefix = __CLASS__ . '/';
 
@@ -53,23 +53,27 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			$itemContent = ItemContent::newEmpty();
 			$itemContent->getEntity()->setLabel('en', $prefix. "foo");
-			$itemContent->save( "rev 0", $user, EDIT_NEW );
+			$status = $itemContent->save( "rev 0", $user, EDIT_NEW );
+			$this->assertTrue( $status->isGood(), $status->getWikiText() );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('en', $prefix. "bar");
-			$itemContent->save( "rev 1", $otherUser, EDIT_UPDATE );
+			$status = $itemContent->save( "rev 1", $otherUser, EDIT_UPDATE );
+			$this->assertTrue( $status->isGood(), $status->getWikiText() );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('de', $prefix. "bar");
-			$itemContent->save( "rev 2", $user, EDIT_UPDATE );
+			$status = $itemContent->save( "rev 2", $user, EDIT_UPDATE );
+			$this->assertTrue( $status->isGood(), $status->getWikiText() );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('en', $prefix. "test");
 			$itemContent->getEntity()->setDescription('en', "more testing");
-			$itemContent->save( "rev 3", $user, EDIT_UPDATE );
+			$status = $itemContent->save( "rev 3", $user, EDIT_UPDATE );
+			$this->assertTrue( $status->isGood(), $status->getWikiText() );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 		}
 
@@ -198,7 +202,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$user = self::getUser( 'EntityEditEntityTestHasEditConflictUser' );
 
-		$revisions = self::getTestRevisions();
+		$revisions = $this->getTestRevisions();
 
 		$baseRevisionId = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx]->getId() : null;
 		$revision = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx] : $revisions[ count( $revisions ) -1 ];
@@ -275,7 +279,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// create item
 		$content = ItemContent::newEmpty();
 		$content->getEntity()->setLabel( 'en', $prefix . 'Test' );
-		$content->save( "rev 0", $user, EDIT_NEW );
+		$status = $content->save( "rev 0", $user, EDIT_NEW );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 
 		// begin editing the entity
 		$content->getEntity()->setLabel( 'en', $prefix . 'Trust' );
@@ -293,7 +298,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		/* @var EntityContent $content2 */
 		$content2 = $page->getContent();
 		$content2->getEntity()->setLabel( 'en', $prefix . 'Toast' );
-		$content2->save( 'Trolololo!', $user2, EDIT_UPDATE );
+		$status = $content2->save( 'Trolololo!', $user2, EDIT_UPDATE );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 
 		// now try to save the original edit. The conflict should still be detected
 		$token = $user->getEditToken();
@@ -333,28 +339,28 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// check for default values, last revision by anon --------------------
 		$itemContent->getItem()->setLabel( 'en', $prefix . "Test Anon default" );
 		$status = $itemContent->save( 'testedit for anon', $anonUser, EDIT_NEW );
-		$this->assertTrue( $status->isGood() );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 		$res = EditEntity::userWasLastToEdit( false, false );
 		$this->assertFalse( $res );
 
 		// check for default values, last revision by sysop --------------------
 		$itemContent->getItem()->setLabel( 'en', $prefix . "Test SysOp default" );
 		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood() );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 		$res = EditEntity::userWasLastToEdit( false, false );
 		$this->assertFalse( $res );
 
 		// check for default values, last revision by anon --------------------
 		$itemContent->getItem()->setLabel( 'en', $prefix . "Test Anon with user" );
 		$status = $itemContent->save( 'testedit for anon', $anonUser, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood() );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), false );
 		$this->assertFalse( $res );
 
 		// check for default values, last revision by sysop --------------------
 		$itemContent->getItem()->setLabel( 'en', $prefix . "Test SysOp with user" );
 		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood() );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 		$res = EditEntity::userWasLastToEdit( $user->getId(), false );
 		$this->assertFalse( $res );
 
@@ -363,7 +369,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$lastRevId = $page->getRevision()->getId();
 		$itemContent->getItem()->setLabel( 'en', $prefix . "Test Anon" );
 		$status = $itemContent->save( 'testedit for anon', $anonUser, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood() );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), $lastRevId );
 		$this->assertTrue( $res );
 		// also check that there is a failure if we use the sysop user
@@ -375,7 +381,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$lastRevId = $page->getRevision()->getId();
 		$itemContent->getItem()->setLabel( 'en', $prefix . "Test SysOp" );
 		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood() );
+		$this->assertTrue( $status->isGood(), $status->getWikiText() );
 		$res = EditEntity::userWasLastToEdit( $user->getId(), $lastRevId );
 		$this->assertTrue( $res );
 		// also check that there is a failure if we use the anon user
@@ -420,7 +426,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		if ( $create ) {
 			$content->getItem()->setLabel( 'de', $prefix . 'Test' );
-			$content->save( "testing", null, EDIT_NEW );
+			$status = $content->save( "testing", null, EDIT_NEW );
+			$this->assertTrue( $status->isGood(), $status->getWikiText() );
 		}
 
 		if ( !in_array( $group, $user->getEffectiveGroups() ) ) {
