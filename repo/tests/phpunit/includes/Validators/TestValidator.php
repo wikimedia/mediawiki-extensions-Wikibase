@@ -11,7 +11,6 @@ use ValueValidators\Result;
 use ValueValidators\StringValidator;
 use ValueValidators\ValueValidator;
 use Wikibase\Claim;
-use Wikibase\EntityId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Property;
