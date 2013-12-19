@@ -42,7 +42,7 @@ class EntityContentFactory implements EntityTitleLookup {
 	 *
 	 * @param String $model the content model ID
 	 *
-	 * @return bool True iff $model is an entity content model
+	 * @return bool True if $model is an entity content model
 	 */
 	public function isEntityContentModel( $model ) {
 		return in_array( $model, $this->getEntityContentModels() );
