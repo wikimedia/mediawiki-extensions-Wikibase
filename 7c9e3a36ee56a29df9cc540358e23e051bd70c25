@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_8353f542",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderPagesFinderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-19T21:00:18Z",
+      "side": 1,
+      "message": "$this-\u003edb-\u003emakeList( self::$pagesUsed )",
+      "revId": "7c9e3a36ee56a29df9cc540358e23e051bd70c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
