@@ -337,7 +337,6 @@ class EntityDataSerializationService {
 
 		//TODO: handle IfModifiedSince!
 
-		$serializer = null;
 		$formatName = $this->getFormatName( $format );
 
 		if ( $formatName === null ) {
@@ -520,7 +519,7 @@ class EntityDataSerializationService {
 		$serializationOptions = new SerializationOptions();
 		$serializationOptions->setIndexTags( $res->getIsRawMode() );
 		$serializationOptions->setOption( EntitySerializer::OPT_PARTS,  $this->fieldsToShow );
-		$serializer =$serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 
 		$arr = $serializer->getSerialized( $entity );
 
