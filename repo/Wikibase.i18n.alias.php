@@ -185,6 +185,7 @@ $specialPageAliases['ja'] = array(
 	'SetAliases' => array( '別名の設定' ),
 	'SetSiteLink' => array( 'サイトリンクの設定' ),
 	'EntitiesWithoutLabel' => array( 'ラベルのない実体', 'ラベルのないエンティティ' ),
+	'EntitiesWithoutDescription' => array( '説明のない実体', '説明のないエンティティ' ),
 	'ItemsWithoutSitelinks' => array( 'サイトリンクのない項目' ),
 );
 
