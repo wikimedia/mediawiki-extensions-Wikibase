@@ -7,15 +7,11 @@ matrix:
   include:
     - env: DBTYPE=mysql LANG=de; MW=master; TYPE=coverage
       php: 5.3
-    - env: DBTYPE=mysql LANG=de; MW=master
-      php: 5.4
     - env: DBTYPE=sqlite LANG=de; MW=master
-      php: 5.5
-    - env: DBTYPE=sqlite LANG=en; MW=master
-      php: 5.3
-    - env: DBTYPE=sqlite LANG=en; MW=master
       php: 5.4
     - env: DBTYPE=mysql LANG=en; MW=master
+      php: 5.5
+    - env: DBTYPE=sqlite LANG=en; MW=master
       php: 5.5
   exclude:
     - env: THENEEDFORTHIS=FAIL
