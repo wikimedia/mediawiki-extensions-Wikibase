@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_63fa3175",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-19T20:23:45Z",
+      "side": 1,
+      "message": "What about having the bodies of these loops be their own methods?",
+      "revId": "39300acb9e3b853810e3a885171ad09131d76235",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
