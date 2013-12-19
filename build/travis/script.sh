@@ -2,11 +2,11 @@
 
 set -x
 
-cd ../phase3/extensions/Wikibase
+cd ../phase3/tests/phpunit
 
-if [ "$MW-$DBTYPE" == "master-mysql" ]
+if [ "$TYPE" == "coverage" ]
 then
-	phpunit --coverage-clover ../../extensions/Wikibase/build/logs/clover.xml
+	php phpunit.php --group Wikibase --coverage-clover ../../extensions/Wikibase/build/logs/clover.xml
 else
-	phpunit
+	php phpunit.php --group Wikibase
 fi
