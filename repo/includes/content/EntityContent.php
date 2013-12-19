@@ -555,6 +555,23 @@ abstract class EntityContent extends AbstractContent {
 
 		$this->editEntity = null;
 
+		if ( !$status->isOK() ) {
+			if ( $user === null ) {
+				$user = $GLOBALS['wgUser'];
+			}
+
+			print "\n<<<Save failed: ";
+			print "\nError: " . $status->getWikiText();
+			print "\nUser: #" . $user->getId() . " " . $user->getName();
+			print "\nGroups: "; print_r( $user->getEffectiveGroups() );
+			print "\nGroup Permissions: "; print_r( $GLOBALS["wgGroupPermissions"] );
+			print "\nRevoke Permissions: "; print_r( $GLOBALS["wgRevokePermissions"] );
+			print "\nRestrictions(read): "; print_r( $page->getTitle()->getRestrictions( 'read' ) );
+			print "\nRestrictions(edit): "; print_r( $page->getTitle()->getRestrictions( 'edit' ) );
+			print "\nPermissionErrors(edit): "; print_r( $page->getTitle()->getUserPermissionsErrors( 'edit', $user ) );
+			print "\n>>>";
+		}
+
 		wfProfileOut( __METHOD__ );
 		return $status;
 	}
