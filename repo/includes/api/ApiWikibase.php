@@ -295,6 +295,7 @@ abstract class ApiWikibase extends \ApiBase {
 		}
 
 		if ( $isError ) {
+			print_r( $messages );
 			$res->setElement( $extradata, 'messages', $messages );
 
 			wfProfileOut( __METHOD__ );
