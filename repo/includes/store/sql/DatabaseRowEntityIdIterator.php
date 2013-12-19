@@ -45,8 +45,8 @@ class DatabaseRowEntityIdIterator extends ConvertingResultWrapper {
 		$idField = $this->idField; //PHP fails
 		$typeField = $this->typeField; //PHP fails
 
-		$id = (int)$row->$idField;
-		$type = $row->$typeField;
+		$id = is_array( $row ) ? (int)$row[$idField] : (int)$row->$idField;
+		$type = is_array( $row ) ? $row[$typeField] : $row->$typeField;
 
 		//TODO: use an EntityIdFactory here
 		switch ( $type ) {

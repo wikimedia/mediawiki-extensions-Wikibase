@@ -170,6 +170,7 @@ return call_user_func( function() {
 		'Wikibase\SqlIdGenerator' => 'includes/store/sql/SqlIdGenerator.php',
 		'Wikibase\SqlStore' => 'includes/store/sql/SqlStore.php',
 		'Wikibase\EntityPerPageBuilder' => 'includes/store/sql/EntityPerPageBuilder.php',
+		'Wikibase\EntityPerPageBuilderPagesFinder' => 'includes/store/sql/EntityPerPageBuilderPagesFinder.php',
 		'Wikibase\EntityPerPageTable' => 'includes/store/sql/EntityPerPageTable.php',
 		'Wikibase\DispatchStats' => 'includes/store/sql/DispatchStats.php',
 		'Wikibase\TermSearchKeyBuilder' => 'includes/store/sql/TermSearchKeyBuilder.php',
@@ -205,6 +206,7 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',
 		'Wikibase\Test\EntityViewTest' => 'tests/phpunit/includes/EntityViewTest.php',
+		'Wikibase\Test\MockEntityPerPage' => 'tests/phpunit/includes/store/MockEntityPerPage.php',
 		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/rdf/RdfBuilderTest.php',
 
 		'Wikibase\Test\EntityDataSerializationServiceTest' => 'tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php',
