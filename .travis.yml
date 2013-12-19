@@ -1,31 +1,26 @@
 language: php
 
 env:
-  - TRAVISASSUMESWRONGSTUFF=FAIL
+  - THENEEDFORTHIS=FAIL
 
 matrix:
   include:
-    - env: DBTYPE=mysql LANG=de
+    - env: DBTYPE=mysql LANG=de; MW=master
       php: 5.3
-    - env: DBTYPE=mysql LANG=de
+    - env: DBTYPE=sqlite LANG=de; MW=master
       php: 5.4
-    - env: DBTYPE=sqlite LANG=de
+    - env: DBTYPE=mysql LANG=en; MW=master
       php: 5.5
-    - env: DBTYPE=sqlite LANG=en
-      php: 5.3
-    - env: DBTYPE=sqlite LANG=en
-      php: 5.4
-    - env: DBTYPE=mysql LANG=en
+    - env: DBTYPE=sqlite LANG=en; MW=master
       php: 5.5
   exclude:
-    - env: TRAVISASSUMESWRONGSTUFF=FAIL
+    - env: THENEEDFORTHIS=FAIL
 
-before_script:
-  - bash .travis.sh
+before_script: bash ./build/travis/before_script.sh
 
-script:
-  - cd ../phase3/tests/phpunit
-  - ./phpunit.php --group Wikibase --log-tap php://stdout --exclude-group WikibaseAPI
+script: bash ./build/travis/script.sh
+
+after_success: bash ./build/travis/after_success.sh
 
 notifications:
   email:

@@ -4,7 +4,6 @@
 composer.phar
 composer.lock
 
-build/
 vendor/
 
 selenium/configuration.yml
