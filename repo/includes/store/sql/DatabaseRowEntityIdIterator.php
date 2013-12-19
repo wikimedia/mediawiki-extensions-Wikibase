@@ -36,7 +36,8 @@ class DatabaseRowEntityIdIterator extends ConvertingResultWrapper {
 	/**
 	 * Converts a database row into the desired representation.
 	 *
-	 * @param object $row An object representing the raw database row, as returned by ResultWrapper::current().
+	 * @param object|array $row An object representing the raw database row,
+	 *   as returned by ResultWrapper::current() or in array format.
 	 *
 	 * @throws \RuntimeException
 	 * @return EntityId
@@ -45,8 +46,8 @@ class DatabaseRowEntityIdIterator extends ConvertingResultWrapper {
 		$idField = $this->idField; //PHP fails
 		$typeField = $this->typeField; //PHP fails
 
-		$id = (int)$row->$idField;
-		$type = $row->$typeField;
+		$id = is_array( $row ) ? (int)$row[$idField] : (int)$row->$idField;
+		$type = is_array( $row ) ? $row[$typeField] : $row->$typeField;
 
 		//TODO: use an EntityIdFactory here
 		switch ( $type ) {

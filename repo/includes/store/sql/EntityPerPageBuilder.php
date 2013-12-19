@@ -1,32 +1,18 @@
 <?php
+
 namespace Wikibase;
 
+use DatabaseBase;
 use MessageReporter;
+use ResultWrapper;
+use Revision;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * Utility class for rebuilding the wb_entity_per_page table.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
- *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -34,140 +20,94 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 class EntityPerPageBuilder {
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var EntityPerPage $entityPerPageTable
-	 */
-	protected $entityPerPageTable;
-
-	/**
-	 * @since 0.4
-	 *
 	 * @var EntityContentFactory $entityContentFactory
 	 */
-	protected $entityContentFactory;
+	private $entityContentFactory;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var EntityIdParser $entityIdParser
 	 */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/**
-	 * @since 0.4
-	 *
+	 * @var EntityPerPageBuilderPagesFinder $pagesFinder
+	 */
+	private $pagesFinder;
+
+	/**
+	 * @var string[] $entityNamespaces
+	 */
+	private $entityNamespaces;
+
+	/**
 	 * @var MessageReporter $reporter
 	 */
-	protected $reporter;
+	private $reporter;
 
 	/**
-	 * The batch size, giving the number of rows to be updated in each database transaction.
-	 *
 	 * @var int
 	 */
-	protected $batchSize = 100;
+	private $lastPageSeen;
 
 	/**
-	 * Rebuild the entire table
-	 *
-	 * @var boolean
+	 * @param EntityContentFactory $entityContentFactory
+	 * @param EntityIdParser $entityIdParser
+	 * @param EntityPerPageBuilderPagesFinder $pagesFinder
+	 * @param string[] $entityNamespaces
 	 */
-	protected $rebuildAll = false;
-
-	/**
-	 * @param EntityPerPage $entityPerPageTable
-
-	 */
-	public function __construct( EntityPerPage $entityPerPageTable, EntityContentFactory $entityContentFactory,
-		EntityIdParser $entityIdParser ) {
-		$this->entityPerPageTable = $entityPerPageTable;
+	public function __construct( EntityContentFactory $entityContentFactory,
+		EntityIdParser $entityIdParser, EntityPerPageBuilderPagesFinder $pagesFinder,
+		array $entityNamespaces
+	) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->entityIdParser = $entityIdParser;
+		$this->pagesFinder = $pagesFinder;
+		$this->entityNamespaces = $entityNamespaces;
 	}
 
 	/**
-	 * @param int $batchSize
-	 */
-	public function setBatchSize( $batchSize ) {
-		$this->batchSize = $batchSize;
-	}
-
-	/**
-	 * @since 0.4
+	 * Sets the reporter to use for reporting progress.
 	 *
-	 * @param boolean $rebuildAll
+	 * @param MessageReporter $reporter
 	 */
-	public function setRebuildAll( $rebuildAll ) {
-		$this->rebuildAll = $rebuildAll;
-	}
-
-	/**
-	 * Sets the reporter to use for reporting preogress.
-	 *
-	 * @param \MessageReporter $reporter
-	 */
-	public function setReporter( \MessageReporter $reporter ) {
+	public function setReporter( MessageReporter $reporter ) {
 		$this->reporter = $reporter;
 	}
 
 	/**
-	 * @since 0.4
+	 * @param EntityPerPage $entityPerPage
+	 * @param boolean $rebuildAll
+	 * @param int $batchSize - optional, default is 100
+	 *
+	 * @return EntityPerPage
 	 */
-	public function rebuild() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$lastPageSeen = 0;
+	public function rebuild( EntityPerPage $entityPerPage, $rebuildAll, $batchSize = 100 ) {
+		$this->lastPageSeen = 0;
 		$numPages = 1;
 
 		$this->report( 'Start rebuild...' );
 
 		while ( $numPages > 0 ) {
-			$this->waitForSlaves( $dbw );
+			$this->waitForSlaves();
 
-			$pages = $dbw->select(
-				array( 'page', 'wb_entity_per_page' ),
-				array( 'page_title', 'page_id' ),
-				$this->getQueryConds( $lastPageSeen ),
-				__METHOD__,
-				array( 'LIMIT' => $this->batchSize, 'ORDER BY' => 'page_id' ),
-				array( 'wb_entity_per_page' => array( 'LEFT JOIN', 'page_id = epp_page_id' ) )
-			);
-
+			$pageSeenBefore = $this->lastPageSeen;
+			$pages = $this->pagesFinder->getPages( $this->lastPageSeen, $batchSize );
 			$numPages = $pages->numRows();
 
 			if ( $numPages > 0 ) {
-				$lastPageSeen = $this->rebuildPages( $pages );
+				$entityPerPage = $this->rebuildPages( $entityPerPage, $pages, $rebuildAll );
 
-				$this->report( "Processed $numPages pages up to $lastPageSeen." );
+				$this->report( "Processed $numPages pages up to {$this->lastPageSeen}." );
+			}
+
+			if ( $this->lastPageSeen === $pageSeenBefore ) {
+				break;
 			}
 		}
 
 		$this->report( "Rebuild done." );
 
-		return true;
-	}
-
-	/**
-	 * Construct query conditions
-	 *
-	 * @since 0.4
-	 *
-	 * @param int $lastPageSeen
-	 *
-	 * @return array
-	 */
-	protected function getQueryConds( $lastPageSeen ) {
-		$conds = array(
-			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
-			'page_id > ' . $lastPageSeen
-		);
-
-		if ( $this->rebuildAll === false ) {
-			$conds[] = 'epp_page_id IS NULL';
-		}
-
-		return $conds;
+		return $entityPerPage;
 	}
 
 	/**
@@ -175,37 +115,52 @@ class EntityPerPageBuilder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \ResultWrapper $pages
+	 * @param EntityPerPage $entityPerPage
+	 * @param ResultWrapper $pages
+	 * @param boolean $rebuildAll
 	 *
 	 * @return int
 	 */
-	protected function rebuildPages( $pages ) {
-		$lastPageSeen = 0;
+	protected function rebuildPages( EntityPerPage $entityPerPage, ResultWrapper $pages, $rebuildAll ) {
+		while( $pageRow = $pages->fetchRow() ) {
+			$this->lastPageSeen = $pageRow['page_id'];
 
-		foreach ( $pages as $pageRow ) {
-			try {
-				$entityId = $this->entityIdParser->parse( $pageRow->page_title );
-			} catch ( EntityIdParsingException $e ) {
-				wfDebugLog( __CLASS__, __METHOD__ . ': entity id in page row is invalid.' );
+			if ( !$this->isEntityPage( $pageRow ) ) {
+				$this->report( "Skipped " . $pageRow['page_title'] . ": not entity content" );
 				continue;
 			}
 
-			$entityContent = $this->entityContentFactory->getFromId( $entityId, \Revision::RAW );
+			$entityId = $this->entityIdParser->parse( $pageRow['page_title'] );
+			$entityContent = $this->entityContentFactory->getFromId( $entityId, Revision::RAW );
 
-			if ( $this->rebuildAll === true ) {
-				$this->entityPerPageTable->deleteEntity( $entityId );
+			if ( $rebuildAll === true ) {
+				$entityPerPage->deleteEntityById( $entityId );
 			}
 
 			if ( $entityContent !== null ) {
-				$this->entityPerPageTable->addEntityContent( $entityContent );
+				$entityPerPage->addEntityContent( $entityContent );
 			} else {
-				$this->entityPerPageTable->removeEntity( $entityId );
+				$entityPerPage->removeEntity( $entityId );
 			}
-
-			$lastPageSeen = $pageRow->page_id;
 		}
 
-		return $lastPageSeen;
+		return $entityPerPage;
+	}
+
+	/**
+	 * @param array $pageRow
+	 *
+	 * @return boolean
+	 */
+	private function isEntityPage( array $pageRow ) {
+		$contentModel = $pageRow['page_content_model'];
+		$entityContentModels = $this->entityContentFactory->getEntityContentModels();
+
+		if ( $contentModel !== null && !in_array( $contentModel, $entityContentModels ) ) {
+			return false;
+		}
+
+		return in_array( $pageRow['page_namespace'], $this->entityNamespaces );
 	}
 
 	/**
