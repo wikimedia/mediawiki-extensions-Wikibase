@@ -49,23 +49,24 @@ class PropertyContentTest extends EntityContentTest {
 
 	public function testLabelUniquenessRestriction() {
 		StoreFactory::getStore()->getTermIndex()->clear();
+		$prefix = get_class( $this ) . '/';
 
 		$propertyContent = PropertyContent::newEmpty();
-		$propertyContent->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
-		$propertyContent->getProperty()->setLabel( 'de', 'testLabelUniquenessRestriction' );
+		$propertyContent->getProperty()->setLabel( 'en', $prefix . 'testLabelUniquenessRestriction' );
+		$propertyContent->getProperty()->setLabel( 'de', $prefix . 'testLabelUniquenessRestriction' );
 		$propertyContent->getProperty()->setDataTypeId( 'wikibase-item' );
 
 		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );
 
 		$propertyContent1 = PropertyContent::newEmpty();
-		$propertyContent1->getProperty()->setLabel( 'nl', 'testLabelUniquenessRestriction' );
+		$propertyContent1->getProperty()->setLabel( 'nl', $prefix . 'testLabelUniquenessRestriction' );
 		$propertyContent1->getProperty()->setDataTypeId( 'wikibase-item' );
 
 		$status = $propertyContent1->save( 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );
 
-		$propertyContent1->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
+		$propertyContent1->getProperty()->setLabel( 'en', $prefix . 'testLabelUniquenessRestriction' );
 
 		$status = $propertyContent1->save( 'save property' );
 		$this->assertFalse( $status->isOK(), "saving a property with duplicate label+lang should not work" );
@@ -74,16 +75,17 @@ class PropertyContentTest extends EntityContentTest {
 
 	public function testLabelEntityIdRestriction() {
 		StoreFactory::getStore()->getTermIndex()->clear();
+		$prefix = get_class( $this ) . '/';
 
 		$propertyContent = PropertyContent::newEmpty();
-		$propertyContent->getProperty()->setLabel( 'en', 'testLabelEntityIdRestriction' );
+		$propertyContent->getProperty()->setLabel( 'en', $prefix . 'testLabelEntityIdRestriction' );
 		$propertyContent->getProperty()->setDataTypeId( 'wikibase-item' );
 
 		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );
 
 		// save a property
-		$propertyContent->getProperty()->setLabel( 'de', 'testLabelEntityIdRestriction' );
+		$propertyContent->getProperty()->setLabel( 'de', $prefix . 'testLabelEntityIdRestriction' );
 
 		$status = $propertyContent->save( 'save property' );
 		$this->assertTrue( $status->isOK(), "saving a property should work" );

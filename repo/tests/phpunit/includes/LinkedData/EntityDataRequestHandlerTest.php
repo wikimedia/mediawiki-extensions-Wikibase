@@ -76,9 +76,11 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	public function getTestItem() {
 		static $item;
 
+		$prefix = get_class( $this ) . '/';
+
 		if ( $item === null ) {
 			$item = Item::newEmpty();
-			$item->setLabel( 'en', 'Raarrr' );
+			$item->setLabel( 'en', $prefix . 'Raarrr' );
 			$this->saveItem( $item );
 		}
 
