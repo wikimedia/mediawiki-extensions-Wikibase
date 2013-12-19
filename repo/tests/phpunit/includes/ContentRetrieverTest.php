@@ -2,11 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Article;
 use Revision;
-use WebRequest;
 use Wikibase\ContentRetriever;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use WikiPage;
@@ -62,7 +59,6 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 
 	private function getContentCases() {
 		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q848' ) );
 
 		$descriptions = array(
 			'Largest city in Germany',
@@ -71,6 +67,7 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 		);
 
 		$content = new ItemContent( $item );
+		$content->save( 'test', null, EDIT_NEW );
 		$title = $content->getTitle();
 		$page = WikiPage::factory( $title );
 
