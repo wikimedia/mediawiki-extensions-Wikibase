@@ -334,21 +334,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 * @param $data
 	 */
 	protected function injectIds( &$data ) {
-		if ( is_array( $data ) ) {
-			foreach ( $data as $key => &$value ) {
-				$this->injectIds( $value );
-
-				$newKey = $key;
-				$this->injectIds( $newKey );
-
-				if ( $newKey !== $key ) {
-					$data[$newKey] = $value;
-					unset( $data[$key] );
-				}
-			}
-		} elseif ( is_string( $data ) ) {
-			$data = str_replace( array_keys( self::$idMap ), array_values( self::$idMap ), $data );
-		}
+		EntityTestHelper::injectIds( $data, self::$idMap );
 	}
 
 	/**

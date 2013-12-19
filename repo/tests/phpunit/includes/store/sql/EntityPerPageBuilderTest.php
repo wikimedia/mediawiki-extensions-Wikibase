@@ -91,9 +91,11 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$labels = array( 'Berlin', 'New York City', 'Tokyo', 'Jakarta', 'Nairobi',
 			'Rome', 'Cairo', 'Santiago', 'Sydney', 'Toronto' );
 
+		$prefix = get_class( $this ) . '/';
+
 		foreach( $labels as $label ) {
 			$itemContent = \Wikibase\ItemContent::newEmpty();
-			$itemContent->getEntity()->setLabel( 'en', $label );
+			$itemContent->getEntity()->setLabel( 'en', $prefix . $label );
 			$itemContent->save( "added an item", $user, EDIT_NEW );
 		}
 	}

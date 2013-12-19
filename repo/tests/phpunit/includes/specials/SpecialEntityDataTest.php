@@ -37,11 +37,12 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	public function getTestItem() {
 		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
 
+		$prefix = get_class( $this ) . '/';
 		static $item;
 
 		if ( $item === null ) {
 			$item = Item::newEmpty();
-			$item->setLabel( 'en', 'Raarrr' );
+			$item->setLabel( 'en', $prefix . 'Raarrr' );
 			$this->saveItem( $item );
 		}
 

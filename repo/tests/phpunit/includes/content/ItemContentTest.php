@@ -58,26 +58,27 @@ class ItemContentTest extends EntityContentTest {
 		}
 
 		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
+		$prefix = get_class( $this ) . '/';
 
 		$content = ItemContent::newEmpty();
-		$content->getItem()->setLabel( 'en', 'label' );
-		$content->getItem()->setDescription( 'en', 'description' );
+		$content->getItem()->setLabel( 'en', $prefix . 'label' );
+		$content->getItem()->setDescription( 'en', $prefix . 'description' );
 
-		$content->getItem()->setLabel( 'de', 'label' );
-		$content->getItem()->setDescription( 'de', 'description' );
+		$content->getItem()->setLabel( 'de', $prefix . 'label' );
+		$content->getItem()->setDescription( 'de', $prefix . 'description' );
 
 		$status = $content->save( 'create item', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "item creation should work" );
 
 		$content1 = ItemContent::newEmpty();
-		$content1->getItem()->setLabel( 'nl', 'label' );
-		$content1->getItem()->setDescription( 'nl', 'description' );
+		$content1->getItem()->setLabel( 'nl', $prefix . 'label' );
+		$content1->getItem()->setDescription( 'nl', $prefix . 'description' );
 
 		$status = $content1->save( 'create item', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "item creation should work" );
 
-		$content1->getItem()->setLabel( 'en', 'label' );
-		$content1->getItem()->setDescription( 'en', 'description' );
+		$content1->getItem()->setLabel( 'en', $prefix . 'label' );
+		$content1->getItem()->setDescription( 'en', $prefix . 'description' );
 
 		$editEntity = new \Wikibase\EditEntity( $content1, null, $content1->getTitle()->getLatestRevID() );
 		$status = $editEntity->attemptSave( 'save item', EDIT_UPDATE, false );
@@ -110,7 +111,9 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	public function siteLinkConflictProvider() {
-		$siteLink = new SimpleSiteLink( 'eswiki', 'Pelecanus' );
+		$prefix = get_class( $this ) . '/';
+
+		$siteLink = new SimpleSiteLink( 'eswiki', $prefix . 'Pelecanus' );
 
 		return array(
 			array(
@@ -208,8 +211,8 @@ class ItemContentTest extends EntityContentTest {
 		$itemContent->getEntity()->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
 
 		return array(
-			array( $itemContent, '/^cake$/' ),
-			array( $itemContent, '/^Berlin$/' )
+			array( $itemContent, '!^cake$!' ),
+			array( $itemContent, '!^Berlin$!' )
 		);
 	}
 

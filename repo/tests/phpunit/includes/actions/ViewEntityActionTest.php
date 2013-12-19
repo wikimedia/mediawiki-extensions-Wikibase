@@ -108,21 +108,20 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function doDiffRevisionEdits() {
 		$item = Item::newEmpty();
-		$item->setId( new EntityId( Item::ENTITY_TYPE, 847 ) );
 		$item->setDescription( 'en', 'Largest city in Germany' );
 
 		$content = new ItemContent( $item );
-		$status = $content->save( 'create' );
+		$status = $content->save( 'create', null, EDIT_NEW );
 		assert( $status->isOK() );
 		$revId1 = $content->getWikiPage()->getRevision()->getId();
 
 		$content->getEntity()->setDescription( 'en', 'Capital of Germany' );
-		$status = $content->save( 'update' );
+		$status = $content->save( 'update', null, EDIT_UPDATE );
 		assert( $status->isOK() );
 		$revId2 = $content->getWikiPage()->getRevision()->getId();
 
 		$content->getEntity()->setDescription( 'en', 'City in Germany' );
-		$status = $content->save( 'update' );
+		$status = $content->save( 'update', null, EDIT_UPDATE );
 		assert( $status->isOK() );
 		$revId3 = $content->getWikiPage()->getRevision()->getId();
 

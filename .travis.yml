@@ -25,7 +25,7 @@ before_script:
 
 script:
   - cd ../phase3/tests/phpunit
-  - ./phpunit.php --group Wikibase
+  - ./phpunit.php --group Wikibase --log-tap php://stdout --exclude-group WikibaseAPI
 
 notifications:
   email:
