@@ -19,9 +19,9 @@ php maintenance/install.php --dbtype $DBTYPE --dbuser root --dbname its_a_mw --d
 
 cd extensions
 
-cp -r $originalDirectory Maps
+cp -r $originalDirectory DataValuesJavascript
 
-cd Maps
+cd DataValuesJavascript
 composer install
 
 cd ../..

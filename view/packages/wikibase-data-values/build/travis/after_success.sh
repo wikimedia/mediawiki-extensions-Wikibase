@@ -4,7 +4,7 @@ set -x
 
 if [ "$MW-$DBTYPE" == "master-mysql" ]
 then
-	cd ../../extensions/Maps
+	cd ../../extensions/DataValuesJavascript
 	composer require satooshi/php-coveralls:dev-master
 	php vendor/bin/coveralls -v
 fi
