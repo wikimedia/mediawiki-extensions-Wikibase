@@ -2,223 +2,146 @@
 
 namespace Wikibase\Test;
 
-use Language;
-use RuntimeException;
-use Wikibase\SettingsArray;
-use Wikibase\StoreFactory;
+use FakeResultWrapper;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\EntityContentFactory;
 use Wikibase\EntityPerPageBuilder;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\EntityPerPageBuilderPagesFinder;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\Property;
+use Wikibase\PropertyContent;
+use Wikibase\Test\MockEntityPerPage;
 
 /**
  * @covers Wikibase\EntityPerPageBuilder
+ *
+ * @todo cover all of the code paths and build options
  *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseStore
  * @group WikibaseEntityPerPage
- * @group Database
- *
- * @group medium
+ * @group EntityPerPageBuilder
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityPerPageBuilderTest extends \MediaWikiTestCase {
+class EntityPerPageBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	protected $entityPerPageTable;
-
-	protected $entityPerPageRows;
-
-	/**
-	 * @var WikibaseRepo
-	 */
-	protected $wikibaseRepo;
-
-	public function setUp() {
-		parent::setUp();
-
-		$this->wikibaseRepo = new WikibaseRepo( $this->getTestSettings() );
-
-		$this->entityPerPageTable = $this->wikibaseRepo->getStore()->newEntityPerPage();
-
-		$this->clearTables();
-		$this->addItems();
-
-		assert( $this->countPages() === 10 );
-
-		$this->entityPerPageRows = $this->getEntityPerPageData();
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @return \User
-	 */
-	protected function getUser() {
-		$user = \User::newFromName( 'zombie1' );
-
-		if ( $user->getId() === 0 ) {
-			$user = \User::createNew( $user->getName() );
-		}
-
-		return $user;
-	}
-
-	protected function getTestSettings() {
-		$settings = new SettingsArray( array(
-			'entityNamespaces' => array(
-				'wikibase-item' => 0,
-				'wikibase-property' => 102
-			)
-		) );
-
-		return $settings;
-	}
-
-	protected function clearTables() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$dbw->delete( 'page', array( "1" ) );
-		$this->entityPerPageTable->clear();
-
-		assert( $this->countPages() === 0 );
-		assert( $this->countEntityPerPageRows() === 0 );
-	}
-
-	protected function addItems() {
-		$user = $this->getUser();
-
-		$labels = array( 'Berlin', 'New York City', 'Tokyo', 'Jakarta', 'Nairobi',
-			'Rome', 'Cairo', 'Santiago', 'Sydney', 'Toronto' );
-
-		$prefix = get_class( $this ) . '/';
-
-		foreach( $labels as $label ) {
-			$itemContent = \Wikibase\ItemContent::newEmpty();
-			$itemContent->getEntity()->setLabel( 'en', $prefix . $label );
-			$itemContent->save( "added an item", $user, EDIT_NEW );
-		}
-	}
-
-	protected function partialClearEntityPerPageTable( $pageId ) {
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->delete( 'wb_entity_per_page', array( 'epp_page_id > ' . $pageId ) );
-	}
-
-	/**
-	 * @return int
-	 * @throws RuntimeException
-	 */
-	protected function getPageIdForPartialClear() {
-		$dbw = wfGetDB( DB_MASTER );
-		$pageRow = $dbw->select(
-			'page',
-			'page_id',
-			array(),
-			__METHOD__,
-			array(
-				'LIMIT' =>  1,
-				'OFFSET' => 5,
-				'ORDER BY' => ' page_id ASC'
-			)
+	public function testRebuild() {
+		$entityPerPageBuilder = new EntityPerPageBuilder(
+			$this->getEntityContentFactory(),
+			new BasicEntityIdParser(),
+			$this->getPagesFinder(),
+			$this->getEntityNamespaces()
 		);
 
-		foreach( $pageRow as $row ) {
-			return (int)$row->page_id;
-		}
+		$entityPerPage = new MockEntityPerPage();
+		$entityPerPage = $entityPerPageBuilder->rebuild( $entityPerPage, true );
 
-		throw new RuntimeException( 'Expected at least one result' );
+		$entities = $entityPerPage->getEntities();
+
+		$entityIds = array_map( function( $entity ) {
+			return $entity->getId()->getSerialization();
+		}, $entities );
+
+		$expected = array( 'Q150', 'Q151', 'P97', 'P98', 'Q152' );
+
+		$this->assertEquals( $expected, $entityIds );
 	}
 
-	/**
-	 * @since 0.4
-	 *
-	 * @return int
-	 */
-	protected function countPages() {
-		$dbw = wfGetDB( DB_MASTER );
-		$pages = $dbw->select( 'page', array( 'page_id' ), array(), __METHOD__ );
+	private function getEntityContentFactory() {
+		$entityContentFactory = $this->getMockBuilder( 'Wikibase\EntityContentFactory' )
+			->disableOriginalConstructor()
+			->getMock();
 
-		return $pages->numRows();
+		$entityContentFactory->expects( $this->any() )
+			->method( 'getFromId' )
+			->will( $this->returnCallback( function( $entityId ) {
+					$contentModel = 'wikibase-' . $entityId->getEntityType();
+
+					switch( $contentModel ) {
+						case CONTENT_MODEL_WIKIBASE_ITEM:
+							$item = Item::newEmpty();
+							$item->setId( $entityId );
+							return new ItemContent( $item );
+						case CONTENT_MODEL_WIKIBASE_PROPERTY:
+							$property = Property::newEmpty();
+							$property->setId( $entityId );
+							return new PropertyContent( $property );
+						default;
+							// @fixme support all entity types
+							throw new InvalidArgumentException( 'unknown entity type' );
+					}
+				} )
+			);
+
+		$entityContentFactory->expects( $this->any() )
+			->method( 'getEntityContentModels' )
+			->will( $this->returnValue( array(
+					Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
+			 		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
+			 	) )
+			);
+
+		return $entityContentFactory;
 	}
 
-	/**
-	 * @since 0.4
-	 *
-	 * @return int
-	 */
-	protected function countEntityPerPageRows() {
-		$dbw = wfGetDB( DB_MASTER );
-		$eppRows = $dbw->select( 'wb_entity_per_page', array( 'epp_entity_id' ), array(), __METHOD__ );
+	private function getPagesFinder() {
+		$pagesFinder = $this->getMockBuilder( 'Wikibase\EntityPerPageBuilderPagesFinder' )
+			->disableOriginalConstructor()
+			->getMock();
 
-		return $eppRows->numRows();
+		$pagesFinder->expects( $this->any() )
+			->method( 'getPages' )
+			->will( $this->returnCallback( function( $startAfter, $batchSize ) {
+					$pages = array(
+						array(
+							'page_id' => 0,
+							'page_title' => 'Q150',
+							'page_namespace' => 0,
+							'page_content_model' => null
+						),
+						array(
+							'page_id' => 1,
+							'page_title' => 'Q151',
+							'page_namespace' => 0,
+							'page_content_model' => null
+						),
+						array(
+							'page_id' => 2,
+							'page_title' => 'P97',
+							'page_namespace' => 102,
+							'page_content_model' => null
+						),
+						array(
+							'page_id' => 3,
+							'page_title' => 'P98',
+							'page_namespace' => 102,
+							'page_content_model' => null
+						),
+						array(
+							'page_id' => 4,
+							'page_title' => 'Q152',
+							'page_namespace' => 0,
+							'page_content_model' => null
+						)
+					);
+
+					return new FakeResultWrapper( $pages );
+				} )
+			);
+
+		return $pagesFinder;
 	}
 
-	/**
-	 * @since 0.4
-	 *
-	 * @return array
-	 */
-	protected function getEntityPerPageData() {
-		$dbw = wfGetDB( DB_MASTER );
-		$rows = $dbw->select( 'wb_entity_per_page', array( 'epp_entity_id', 'epp_page_id' ), array(), __METHOD__ );
-
-		$pages = array();
-
-		foreach ( $rows as $row ) {
-			$pages[] = array( 'page_id' => $row->epp_page_id, 'entity_id' => $row->epp_entity_id );
-		}
-
-		return $pages;
-	}
-
-	public function testRebuildAll() {
-		$this->entityPerPageTable->clear();
-
-		assert( $this->countEntityPerPageRows() === 0 );
-
-		$builder = new EntityPerPageBuilder(
-			$this->entityPerPageTable,
-			$this->wikibaseRepo->getEntityContentFactory(),
-			$this->wikibaseRepo->getEntityIdParser()
+	private function getEntityNamespaces() {
+		return array(
+			'wikibase-item' => 0,
+			'wikibase-property' => 102
 		);
-
-		$builder->setRebuildAll( true );
-		$builder->rebuild();
-
-		$this->assertEquals( $this->countEntityPerPageRows(), 10 );
-
-		$dbw = wfGetDB( DB_MASTER );
-
-		foreach( $this->entityPerPageRows as $row ) {
-			$res = $dbw->selectRow( 'wb_entity_per_page', array( 'epp_entity_id', 'epp_page_id' ),
-				array( 'epp_page_id' => $row['page_id'] ), __METHOD__ );
-			$this->assertEquals( $res->epp_entity_id, $row['entity_id'] );
-		}
 	}
 
-	public function testRebuildPartial() {
-		$pageId = $this->getPageIdForPartialClear();
-		$this->partialClearEntityPerPageTable( $pageId );
-
-		assert( $this->countEntityPerPageRows() === 6 );
-
-		$builder = new EntityPerPageBuilder(
-			$this->entityPerPageTable,
-			$this->wikibaseRepo->getEntityContentFactory(),
-			$this->wikibaseRepo->getEntityIdParser()
-		);
-
-		$builder->rebuild();
-
-		$this->assertEquals( 10, $this->countEntityPerPageRows() );
-
-		$dbw = wfGetDB( DB_MASTER );
-
-		foreach( $this->entityPerPageRows as $row ) {
-			$res = $dbw->selectRow( 'wb_entity_per_page', array( 'epp_entity_id', 'epp_page_id' ),
-				array( 'epp_page_id' => $row['page_id'] ), __METHOD__ );
-			$this->assertEquals( $res->epp_entity_id, $row['entity_id'] );
-		}
-	}
 }
