@@ -237,7 +237,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$content = $this->newEmpty();
 
 		if ( $create ) {
-			$content->getEntity()->setLabel( 'de', get_class( $this ) );
+			$label = get_class( $this ) . '/' . $group . '/' . implode( ', ', $permissions );
+			$content->getEntity()->setLabel( 'de', $label );
 			$content->save( "testing", null, EDIT_NEW );
 		}
 
