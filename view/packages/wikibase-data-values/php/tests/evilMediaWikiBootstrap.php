@@ -6,7 +6,7 @@ global $IP;
 $IP = getenv( 'MW_INSTALL_PATH' );
 
 if ( $IP === false ) {
-	$IP = dirname( __FILE__ ) . '/../../..';
+	$IP = dirname( __FILE__ ) . '/../../../..';
 }
 
 $self = 'foobar';
