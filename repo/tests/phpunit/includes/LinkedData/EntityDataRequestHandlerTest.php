@@ -45,28 +45,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected $interfaceTitle;
 
-	protected $obLevel;
-
 	public function setUp() {
 		parent::setUp();
 
 		$this->interfaceTitle = Title::newFromText( "Special:EntityDataRequestHandlerTest" );
-
-		$this->obLevel = ob_get_level();
-	}
-
-	public function tearDown() {
-		$obLevel = ob_get_level();
-
-		while ( ob_get_level() > $this->obLevel ) {
-			ob_end_clean();
-		}
-
-		if ( $obLevel !== $this->obLevel ) {
-			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test.");
-		}
-
-		parent::tearDown();
 	}
 
 	protected function saveItem( Item $item ) {
@@ -200,10 +182,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 
 		// construct Context and OutputPage
-		/* @var FauxResponse $response */
-		$response = $request->response();
-
-		$context = new DerivativeContext( RequestContext::getMain() );
+		$context = new RequestContext();
 		$context->setRequest( $request );
 
 		$output = new OutputPage( $context );
