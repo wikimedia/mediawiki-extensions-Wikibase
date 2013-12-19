@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_f6184625",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "Perhaps the logic in this method could be factored into a separate class, so the API module and this page could share it?",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_3627ce61",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "This block should go into a separate method.",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_161cca17",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "The \"edit, save and check\" code here is the same as above. Factor into a separate method and re-use.",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_16f5eac7",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "So this is the actual BUG: this should call $toEditEntity, not $fromEditEntity again.",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_9628da33",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "Use isOK(), not isGood(). In case the item was not modified, isGood() will be false but isOK() will be true. In such a case, just show the warnings and proceeded.\n\nExample case: both items have the same label in some language. The label is then removed from the fromItem, but not added to the toItem, which may loead to a \"not modified\" warning, wven though the merge was successful (though trivial, as indicated by the warnings).",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_d61542eb",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "Perhaps just provide a link to the appropriate undo action below the error message. That should be simple, and is transparent. Automagic stuff is suspect.",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_d6fe62ab",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "There is no indication here for which item the saving failed. There should be.",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_762d5641",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-12-19T10:40:36Z",
+      "side": 1,
+      "message": "hm, i don\u0027t like this much. I\u0027d rather have a message saying that the merge was successful, with a link to the merged item, and a link to the respective diff. Perhaps also have links to the old (from) item.",
+      "revId": "34f427e5679b8c2c74c6b319cb6b961e0c7a79ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
