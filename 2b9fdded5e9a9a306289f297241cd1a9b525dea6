@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_0a193a27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-12-19T14:02:58Z",
+      "side": 1,
+      "message": "Could you please use this commit message?\n\nhttps://gerrit.wikimedia.org/r/#/c/100209/7..12//COMMIT_MSG",
+      "revId": "2b9fdded5e9a9a306289f297241cd1a9b525dea6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
