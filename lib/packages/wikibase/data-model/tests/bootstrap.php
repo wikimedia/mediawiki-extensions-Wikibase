@@ -3,16 +3,18 @@
 /**
  * PHPUnit test bootstrap file for the Wikibase DataModel component.
  *
- * @since 0.1
- *
- * @file
- * @ingroup DataModel
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-echo exec( 'composer update' ) . "\n";
+if ( php_sapi_name() !== 'cli' ) {
+	die( 'Not an entry point' );
+}
+
+$pwd = exec( 'pwd' );
+chdir( __DIR__ . '/..' );
+echo passthru( 'composer update' ) . "\n";
+chdir( $pwd );
 
 if ( !is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
 	die( 'You need to install this package with Composer before you can run the tests' );
