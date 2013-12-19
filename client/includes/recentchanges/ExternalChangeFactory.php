@@ -7,7 +7,6 @@ use RecentChange;
 use UnexpectedValueException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\EntityIdParser;
 
 /**
  * @since 0.5
