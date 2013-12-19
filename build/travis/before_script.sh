@@ -19,6 +19,8 @@ php maintenance/install.php --dbtype $DBTYPE --dbuser root --dbname its_a_mw --d
 
 cd extensions
 
+git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
+
 cp -r $originalDirectory Wikibase
 
 cd Wikibase
@@ -36,6 +38,7 @@ echo "define( 'WB_EXPERIMENTAL_FEATURES', true );" >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/repo/Wikibase.php";' >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
 echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
+echo 'require_once __DIR__ . "/extensions/Scribunto/Scribunto.php";' >> LocalSettings.php
 echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
 
 php maintenance/update.php --quick
