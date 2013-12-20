@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Language;
 use RequestContext;
-use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\NamespaceChecker;
@@ -18,13 +17,12 @@ use Wikibase\SiteLinkTable;
  *
  * @group WikibaseClient
  * @group InfoActionHookHandler
- * @group Database
  * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class InfoActionHookHandlerTest extends \MediaWikiTestCase {
+class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider handleProvider
@@ -117,12 +115,21 @@ class InfoActionHookHandlerTest extends \MediaWikiTestCase {
 	 * @return IContextSource
 	 */
 	private function getContext() {
-		$title = Title::newFromText(
-			'Cat',
-			$this->getDefaultWikitextNS()
-		);
+		$title = $this->getMockBuilder( 'Title' )
+			->disableOriginalConstructor()
+			->getMock();
 
-		$title->resetArticleID( 538 );
+		$title->expects( $this->any() )
+			->method( 'exists' )
+			->will( $this->returnValue( true ) );
+
+		$title->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( NS_MAIN ) );
+
+		$title->expects( $this->any() )
+			->method( 'getFullText' )
+			->will( $this->returnValue( 'Cat' ) );
 
 		$context = new RequestContext();
 		$context->setTitle( $title );
