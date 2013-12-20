@@ -2,6 +2,6 @@
 
 set -x
 
-cd ../phase3/extensions/DataValuesJavascript
+cd ../phase3/tests/phpunit
 
-phpunit
+php phpunit.php -c ../../extensions/DataValuesJavascript/phpunit.xml.dist
