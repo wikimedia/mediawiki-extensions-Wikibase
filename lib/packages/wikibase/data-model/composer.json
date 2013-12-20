@@ -35,8 +35,8 @@
 		"files" : [
 			"WikibaseDataModel.php"
 		],
-		"classmap": [
-			"DataModel/"
-		]
+		"psr-0": {
+			"Wikibase\\DataModel\\": "src/"
+		}
 	}
 }
