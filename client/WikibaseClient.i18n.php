@@ -1094,12 +1094,25 @@ $messages['de-ch'] = array(
  * @author Mirzali
  */
 $messages['diq'] = array(
+	'specialpages-group-wikibaseclient' => 'Wastera Wikidata',
+	'wikibase-comment-add' => 'Objeya Wikidatay vıraziye.',
+	'wikibase-comment-remove' => 'Eleqeyın onjey Wikidatay besterneya. Gırey zıwani hewadeya.',
+	'wikibase-comment-linked' => 'Linka objey Wikidata debye na per.',
+	'wikibase-comment-update' => 'Yew vırnayışé WikiData',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|vurnayış|vurnayışi}}',
 	'wikibase-dataitem' => 'Leteyé Wikimalumati',
 	'wikibase-editlinks' => 'Gırey bıvurne',
 	'wikibase-linkitem-input-site' => 'Zıwan:',
 	'wikibase-linkitem-input-page' => 'Pele:',
+	'wikibase-linkitem-confirmitem-button' => 'Tesdiq',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vırnayışané wikimalumati vırnayışan de peyénan de  bıasne',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Vırnayışé Wikidata',
+	'wikibase-watchlist-show-changes-pref' => 'Listada temaşan de  vurnayışane Wikimalumati bıasne',
+	'wikibase-unconnectedpages-submit' => 'Şo',
+	'wikibase-pageinfo-entity-id' => 'Wikidata Obje ID',
+	'wikibase-pageinfo-entity-id-none' => 'Çıniyo',
 );
 
 /** Lower Sorbian (dolnoserbski)
