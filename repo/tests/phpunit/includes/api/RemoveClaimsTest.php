@@ -2,8 +2,17 @@
 
 namespace Wikibase\Test\Api;
 
+use DataValues\StringValue;
 use Wikibase\Entity;
 use Wikibase\Claim;
+use Wikibase\Claims;
+use Wikibase\Item;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Property;
+use Wikibase\PropertyContent;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -26,6 +35,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class RemoveClaimsTest extends WikibaseApiTestCase {
 
+	private static $propertyId;
+
 	/**
 	 * @param Entity $entity
 	 *
@@ -35,16 +46,21 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
 		$content->save( '', null, EDIT_NEW );
 
+		if ( !isset( self::$propertyId ) ) {
+			self::$propertyId = $this->getNewProperty( 'string' )->getId();
+		}
+
 		/** @var $claims Claim[] */
-		$claims[0] = $entity->newClaim(  new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claims[1] = $entity->newClaim(  new \Wikibase\PropertyNoValueSnak( 1 ) );
-		$claims[2] = $entity->newClaim(  new \Wikibase\PropertySomeValueSnak( 42 ) );
-		$claims[3] = $entity->newClaim(  new \Wikibase\PropertyValueSnak(
-			$this->getNewProperty( 'string' )->getId(),
-			new \DataValues\StringValue( 'o_O' ) ) );
+		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( self::$propertyId ) );
+		$claims[1] = $entity->newClaim( new PropertyNoValueSnak( self::$propertyId ) );
+		$claims[2] = $entity->newClaim( new PropertySomeValueSnak( self::$propertyId ) );
+		$claims[3] = $entity->newClaim(
+			new PropertyValueSnak( self::$propertyId, new StringValue( 'o_O' ) )
+		);
 
 		foreach( $claims as $key => $claim ){
-			$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-56A1-1111-AF13-A3290BCD9CL' . $key );
+			$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
+			$claim->setGuid( $guidGenerator->newGuid() );
 			$entity->addClaim( $claim );
 		}
 
@@ -54,11 +70,11 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	}
 
 	public function entityProvider() {
-		$property = \Wikibase\Property::newEmpty();
+		$property = Property::newEmpty();
 		$property->setDataTypeId( 'string' );
 
 		return array(
-			$this->addClaimsAndSave( \Wikibase\Item::newEmpty() ),
+			$this->addClaimsAndSave( Item::newEmpty() ),
 			$this->addClaimsAndSave( $property ),
 		);
 	}
@@ -85,11 +101,11 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			$this->makeTheRequest( array( $claim->getGuid() ) );
 
 			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-			$obtainedClaims = new \Wikibase\Claims( $content->getEntity()->getClaims() );
+			$obtainedClaims = new Claims( $content->getEntity()->getClaims() );
 
 			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $claim->getGuid() ) );
 
-			$currentClaims = new \Wikibase\Claims( $claims );
+			$currentClaims = new Claims( $claims );
 
 			$this->assertTrue( $obtainedClaims->getHash() === $currentClaims->getHash() );
 		}
@@ -162,8 +178,8 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @param string $type
 	 */
 	protected function getNewProperty( $type ) {
-		$property = \Wikibase\Property::newFromType( $type );
-		$content = new \Wikibase\PropertyContent( $property );
+		$property = Property::newFromType( $type );
+		$content = new PropertyContent( $property );
 		$content->save( '', null, EDIT_NEW );
 
 		return $content->getEntity();
