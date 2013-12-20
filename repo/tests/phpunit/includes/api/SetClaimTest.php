@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
+use DataValues\StringValue;
 use FormatJson;
 use Wikibase\Claim;
 use Wikibase\Claims;
@@ -42,53 +43,43 @@ use Wikibase\Lib\ClaimGuidGenerator;
  */
 class SetClaimTest extends WikibaseApiTestCase {
 
-	public function setUp() {
-		parent::setUp();
+	private static $propertyIds;
 
-		static $hasProperties = false;
+	private function getPropertyIds() {
+		if ( !self::$propertyIds ) {
+			self::$propertyIds = array();
 
-		if ( !$hasProperties ) {
-			// Create the properties once
-			$propertyIds = self::getPropertyIds();
+			for( $i = 0; $i < 4; $i++ ) {
+				$propertyContent = PropertyContent::newEmpty();
+				$propertyId = PropertyId::newFromNumber( $propertyContent->grabFreshId() );
 
-			foreach( $propertyIds as $propertyId ) {
-				$prop = PropertyContent::newEmpty();
-				$prop->getEntity()->setId( $propertyId );
-				$prop->getEntity()->setDataTypeId( 'string' );
-				$prop->save( 'testing' );
+				$propertyContent->getEntity()->setId( $propertyId );
+				$propertyContent->getEntity()->setDataTypeId( 'string' );
+				$propertyContent->save( 'testing' );
+
+				self::$propertyIds[] = $propertyId;
 			}
-
-			$hasProperties = true;
 		}
-	}
 
-	/**
-	 * @return PropertyId[]
-	 */
-	protected static function getPropertyIds() {
-		return array(
-			new PropertyId( 'P42' ),
-			new PropertyId( 'P9001' ),
-			new PropertyId( 'P7201010' )
-		);
+		return self::$propertyIds;
 	}
 
 	/**
 	 * @return Snak[]
 	 */
-	protected static function snakProvider() {
-		$propertyIds = self::getPropertyIds();
-
+	protected function getSnaks() {
 		$snaks = array();
+
+		$propertyIds = $this->getPropertyIds();
 
 		$snaks[] = new PropertyNoValueSnak( $propertyIds[0] );
 		$snaks[] = new PropertySomeValueSnak( $propertyIds[1] );
-		$snaks[] = new PropertyValueSnak( $propertyIds[2], new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyValueSnak( $propertyIds[2], new StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
 
-	public static function provideClaims() {
+	public function provideClaims() {
 		$testCases = array();
 
 		$ranks = array(
@@ -97,7 +88,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			Statement::RANK_PREFERRED
 		);
 
-		$snaks = self::snakProvider();
+		$snaks = $this->getSnaks();
 		$mainSnak = $snaks[0];
 		$statement = new Statement( $mainSnak );
 		$statement->setRank( $ranks[array_rand( $ranks )] );
@@ -112,15 +103,16 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 
 		$statement = clone $statement;
-		$snaks = new SnakList( self::snakProvider() );
-		$statement->getReferences()->addReference( new Reference( $snaks ) );
+		$snaks = $this->getSnaks();
+		$snakList = new SnakList( $snaks );
+
+		$statement->getReferences()->addReference( new Reference( $snakList ) );
 		$statement->setRank( $ranks[array_rand( $ranks )] );
 		$testCases[] = array( $statement );
 
 		$statement = clone $statement;
-		$snaks = new SnakList( self::snakProvider() );
-		$statement->setQualifiers( $snaks );
-		$statement->getReferences()->addReference( new Reference( $snaks ) );
+		$statement->setQualifiers( $snakList );
+		$statement->getReferences()->addReference( new Reference( $snakList ) );
 		$statement->setRank( $ranks[array_rand( $ranks )] );
 		$testCases[] = array( $statement );
 
@@ -156,7 +148,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$this->makeRequest( $serializedClaim, $item->getId(), 1, 'reorder qualifiers' );
 		}
 
-		$claim = new Statement( new PropertyNoValueSnak( 9001 ) );
+		$propertyIds = $this->getPropertyIds();
+		$claim = new Statement( new PropertyNoValueSnak( $propertyIds[1] ) );
 		$claim->setGuid( $guid );
 
 		// Update request
