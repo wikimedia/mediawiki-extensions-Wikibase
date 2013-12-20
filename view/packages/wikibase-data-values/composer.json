@@ -26,6 +26,9 @@
 		"issues": "https://bugzilla.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
+	"require": {
+		"data-values/interfaces": "~0.1"
+	},
 	"autoload": {
 		"files" : [
 			"DataValuesJavascript.php"

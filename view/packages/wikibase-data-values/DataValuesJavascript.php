@@ -34,6 +34,11 @@ $GLOBALS['wgResourceModules'] = array_merge(
 $GLOBALS['wgAPIModules']['parsevalue'] = 'ValueParsers\ApiParseValue';
 
 /**
+ * @deprecated since 0.1 This is a global registry that provides no control over object lifecycle
+ */
+$GLOBALS['wgValueParsers'] = array();
+
+/**
  * Hook for registering QUnit test cases.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
  * @since 0.1
