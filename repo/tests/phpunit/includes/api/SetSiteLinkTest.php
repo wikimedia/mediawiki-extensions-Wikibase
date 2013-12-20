@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 
 /**
@@ -17,6 +15,7 @@ use Wikibase\ItemContent;
  * @author Adam Shorland
  * @author Michał Łazowik
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  *
  * @group API
  * @group Wikibase
@@ -38,11 +37,16 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
+	/* @var ItemId */
+	private static $gaItemId;
+	/* @var ItemId */
+	private static $faItemId;
+
 	public static function provideData() {
 		return array(
 			array( //0 set new link using id
-				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'leipzig', 'badges' => 'Q42|Q149' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Leipzig', 'badges' => array( 'Q42', 'Q149' ) ) ) ) ),
+				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'leipzig', 'badges' => '{gaItem}|{faItem}' ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Leipzig', 'badges' => array( '{gaItem}', '{faItem}' ) ) ) ) ),
 			array( //1 set new link using sitelink
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => 'berlin' ),
 				'e' => array( 'value' => array( 'nowiki' => array( 'title' => 'Berlin', 'badges' => array() ) ), 'indb' => 5 ) ),
@@ -59,23 +63,23 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => '' ),
 				'e' => array( 'value' => array(), 'indb' => 4 ) ),
 			array( //6 add badges to existing sitelink
-				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => 'Q149|Q42' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( 'Q149', 'Q42' ) ) ), 'indb' => 4 ) ),
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => '{faItem}|{gaItem}' ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{faItem}', '{gaItem}' ) ) ), 'indb' => 4 ) ),
 			array( //7 add duplicate badges to existing sitelink
-				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => 'Q42|q149|Q149|Q42' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( 'Q42', 'Q149' ) ) ), 'indb' => 4 ) ),
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => '{gaItem}|{gaItem}|{faItem}|{gaItem}' ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'indb' => 4 ) ),
 			array( //8 no change
-				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => 'Q42|Q149' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( 'Q42', 'Q149' ) ) ), 'warning' => 'edit-no-change', 'indb' => 4 ) ),
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => '{gaItem}|{faItem}' ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'warning' => 'edit-no-change', 'indb' => 4 ) ),
 			array( //9 change only title, badges should be intact
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin_Two' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin Two', 'badges' => array( 'Q42', 'Q149' ) ) ), 'indb' => 4 ) ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin Two', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'indb' => 4 ) ),
 			array( //10 change both title and badges
-				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin Two', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => 'Q42' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( 'Q42' ) ) ), 'indb' => 4 ) ),
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin Two', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => '{gaItem}' ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{gaItem}' ) ) ), 'indb' => 4 ) ),
 			array( //11 change only badges, title intact
-				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'badges' => 'Q42|Q149' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( 'Q42', 'Q149' ) ) ), 'indb' => 4 ) ),
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'badges' => '{gaItem}|{faItem}' ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'indb' => 4 ) ),
 			array( //12 set new link using id (without badges)
 				'p' => array( 'handle' => 'Berlin', 'linksite' => 'svwiki', 'linktitle' => 'Berlin' ),
 				'e' => array( 'value' => array( 'svwiki' => array( 'title' => 'Berlin', 'badges' => array() ) ), 'indb' => 5 ) ),
@@ -106,16 +110,16 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'enwiktionary', 'linktitle' => 'Berlin' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
 			array( //6 bad badge id
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'abc|Q149' ),
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'abc|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
 			array( //7 badge id is not an item id
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'P2|Q149' ),
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'P2|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
 			array( //8 badge item does not exist
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'Q99999|Q149' ),
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'Q99999|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
 			array( //9 no sitelink - cannot change badges
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'badges' => 'Q42|Q149' ),
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'badges' => '{gaItem}|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
 		);
 	}
@@ -123,21 +127,42 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	public function setup() {
 		parent::setup();
 
-		$GA = new ItemId( "Q42" );
-		$FA = new ItemId( "Q149" );
-
 		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'Leipzig', 'Berlin' ) );
 
 			$badge = ItemContent::newEmpty();
-			$badge->getEntity()->setId( $GA );
-			$badge->save( 'SetSiteLinkTestQ42' );
+			$status = $badge->save( 'SetSiteLinkTestGA', null, EDIT_NEW );
+			$this->assertTrue( $status->isOK() );
+			self::$gaItemId = $badge->getEntity()->getId();
 
 			$badge = ItemContent::newEmpty();
-			$badge->getEntity()->setId( $FA );
-			$badge->save( 'SetSiteLinkTestQ149' );
+			$status = $badge->save( 'SetSiteLinkTestFA', null, EDIT_NEW );
+			$this->assertTrue( $status->isOK() );
+			self::$faItemId = $badge->getEntity()->getId();
 		}
 		self::$hasSetup = true;
+	}
+
+	/**
+	 * Replace badge item id placeholders in expected results
+	 *
+	 * @param array $value
+	 * @return array
+	 */
+	private function expectionPlaceholder( $value ) {
+		foreach( $value as &$site ) {
+			if ( !isset( $site['badges'] ) ) {
+					continue;
+			}
+			foreach( $site['badges'] as &$dummy ) {
+				if ( $dummy === '{gaItem}' ) {
+					$dummy = self::$gaItemId->getPrefixedId();
+				} elseif ( $dummy === '{faItem}' ) {
+					$dummy = self::$faItemId->getPrefixedId();
+				}
+			}
+		}
+		return $value;
 	}
 
 	/**
@@ -151,11 +176,25 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		}
 		$params['action'] = 'wbsetsitelink';
 
+		// Replace the placeholder item ids in the API params
+		if ( isset( $params['badges'] ) ) {
+			$params['badges'] = str_replace(
+				array( '{gaItem}', '{faItem}' ),
+				array( self::$gaItemId->getPrefixedId(), self::$faItemId->getPrefixedId() ),
+				$params['badges']
+			);
+		}
+
 		// -- do the request --------------------------------------------------
 		list( $result, , ) = $this->doApiRequestWithToken( $params );
 
 		//@todo all of the below is very similar to the code in ModifyTermTestCase
 		//This might be able to go in the same place
+
+		// Replace the placeholder item ids in the expected results... this sucks
+		if ( is_array( $expected['value'] ) ) {
+			$expected['value'] = $this->expectionPlaceholder( $expected['value'] );
+		}
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -244,6 +283,16 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	public function testSetSiteLinkExceptions( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbsetsitelink';
+
+		// Replace the placeholder item ids in the API params
+		if ( isset( $params['badges'] ) ) {
+			$params['badges'] = str_replace(
+				array( '{gaItem}', '{faItem}' ),
+				array( self::$gaItemId->getPrefixedId(), self::$faItemId->getPrefixedId() ),
+				$params['badges']
+			);
+		}
+
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 }
