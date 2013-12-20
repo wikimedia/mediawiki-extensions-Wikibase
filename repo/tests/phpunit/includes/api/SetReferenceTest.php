@@ -5,6 +5,7 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -38,29 +39,24 @@ use Wikibase\SnakList;
  */
 class SetReferenceTest extends WikibaseApiTestCase {
 
-	public function setUp() {
-		static $hasProperties = false;
-		if ( !$hasProperties ) {
-			$this->createProperty( 100 );
-			$this->createProperty( 4200 );
-			$this->createProperty( 4300 );
-			$this->createProperty( 6600 );
+	private static $propertyIds;
 
-			$hasProperties = true;
+	public static function setUpBeforeClass() {
+		parent::setUpBeforeClass();
+
+		self::$propertyIds = array();
+
+		for ( $i = 0; $i < 4; $i++ ) {
+			$propertyContent = PropertyContent::newEmpty();
+			$propertyContent->getEntity()->setDataTypeId( 'string' );
+
+			$propertyId = PropertyId::newFromNumber( $propertyContent->grabFreshId() );
+			$propertyContent->getEntity()->setId( $propertyId );
+
+			$propertyContent->save( 'testing' );
+
+			self::$propertyIds[] = $propertyId;
 		}
-
-		parent::setUp();
-	}
-
-	/**
-	 * @param int $id
-	 * @param string $dataTypeId
-	 */
-	public function createProperty( $id, $dataTypeId = 'string' ) {
-		$prop = PropertyContent::newEmpty();
-		$prop->getEntity()->setId( $id );
-		$prop->getEntity()->setDataTypeId( $dataTypeId );
-		$prop->save( 'testing' );
 	}
 
 	// TODO: clean this up so more of the input space can easily be tested
@@ -71,7 +67,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$content = new ItemContent( $item );
 		$content->save( '', null, EDIT_NEW );
 
-		$statement = $item->newClaim( new PropertyNoValueSnak( 4200 ) );
+		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
 		$statement->setGuid( $item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P' );
 
 		$reference = new Reference( new SnakList(
@@ -87,7 +83,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$referenceHash = $reference->getHash();
 
 		$reference = new Reference( new SnakList(
-			array( new PropertyNoValueSnak( 4200 ) )
+			array( new PropertyNoValueSnak( self::$propertyIds[1] ) )
 		) );
 
 		$serializedReference = $this->makeValidRequest(
@@ -107,8 +103,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$reference = new Reference( new SnakList(
 			array(
-				new PropertyNoValueSnak( 4200 ),
-				new PropertyNoValueSnak( 4300 ),
+				new PropertyNoValueSnak( self::$propertyIds[0] ),
+				new PropertyNoValueSnak( self::$propertyIds[1] ),
 			)
 		) );
 
@@ -139,7 +135,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$content->save( '', null, EDIT_NEW );
 
 		// Create a statement to act upon:
-		$statement = $item->newClaim( new PropertyNoValueSnak( 4200 ) );
+		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
 		$statement->setGuid(
 			$item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
 		);
@@ -148,7 +144,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$content->save( '' );
 
-		$reference = new Reference( new SnakList( array( new PropertySomeValueSnak( 9999 ) ) ) );
+		$snak = new PropertySomeValueSnak( new PropertyId( 'P23728525' ) );
+		$reference = new Reference( new SnakList( array( $snak ) ) );
 
 		$this->makeInvalidRequest( $statement->getGuid(), null, $reference, 'invalid-snak-value' );
 	}
@@ -159,16 +156,16 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$content->save( '', null, EDIT_NEW );
 
 		// Create a statement to act upon:
-		$statement = $item->newClaim( new PropertyNoValueSnak( 4200 ) );
+		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
 		$statement->setGuid(
 			$item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
 		);
 
 		// Pre-fill statement with three references:
 		$references = array(
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 4200 ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 4300 ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( 6600 ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[0] ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[1] ) ) ) ),
+			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[2] ) ) ) ),
 		);
 
 		foreach( $references as $reference ) {
@@ -328,10 +325,13 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidClaimProvider() {
-		$snak = new PropertyValueSnak( 4200, new StringValue( 'abc') );
+		$propertyContent = PropertyContent::newEmpty();
+		$invalidId = PropertyId::newFromNumber( $propertyContent->grabFreshId() );
+
+		$snak = new PropertyValueSnak( $invalidId, new StringValue( 'abc') );
 		$snakHash = $snak->getHash();
 
-		$reference = new PropertyValueSnak( 4200, new StringValue( 'def' ) );
+		$reference = new PropertyValueSnak( $invalidId, new StringValue( 'def' ) );
 		$refHash = $reference->getHash();
 
 		return array(
