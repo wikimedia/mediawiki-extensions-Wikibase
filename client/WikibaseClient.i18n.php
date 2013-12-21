@@ -308,6 +308,8 @@ $messages['af'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase ondersteun nog nie die eienskapstipe vir die eienskap $1 nie.',
 	'wikibase-rc-hide-wikidata' => '$1 wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Wys Wikidata-wysigings in onlangse wysigings',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-wysiging',
 	'wikibase-watchlist-show-changes-pref' => 'Wys Wikidata-wysigings in u dophoulys',
 	'wikibase-error-invalid-entity-id' => "Die opgegewe ID is nie in die stelsel nie. Gebruik 'n geldig entiteit-ID.",
 	'special-unconnectedpages' => 'Bladsye wat nie aan items gekoppel is nie',
@@ -2287,11 +2289,11 @@ $messages['ka'] = array(
 	'wikibase-error-invalid-entity-id' => 'მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.',
 	'special-unconnectedpages' => 'ელემენტებთან დაუკავშირებელი გვერდები',
 	'wikibase-unconnectedpages-legend' => 'დაუკავშირებელი გვერდების პარამეტრები',
-	'wikibase-unconnectedpages-page' => 'გვერდის დასაწყისი:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'სიის შედეგების დაწყება გვერდით:',
 	'wikibase-unconnectedpages-submit' => 'მიდი',
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ არ არის ენის სწორი კოდი.',
 	'wikibase-unconnectedpages-iwdata-label' => 'მხოლოდ ენათშორისი ბმულების მქონე გვერდები',
-	'wikibase-unconnectedpages-format-row' => '($1 ენათშორისი ბმული გვერდზე)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)',
 );
 
 /** Kazakh (Cyrillic script) (қазақша (кирил)‎)

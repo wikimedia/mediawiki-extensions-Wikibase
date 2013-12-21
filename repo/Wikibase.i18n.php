@@ -4347,9 +4347,9 @@ $messages['diq'] = array(
 	'wikibase-statements' => 'İfadey',
 	'wikibase-terms' => 'Zıwananê binan de',
 	'wikibase-remove' => 'wedarne',
-	'wikibase-move-up' => 'A cor fi',
-	'wikibase-move-down' => 'A cer fi',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => '($1 {{PLURAL:$1|çıme|çımey}})',
+	'wikibase-move-up' => 'bere cor',
+	'wikibase-move-down' => 'bere cêr',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|çıme|çımey}}',
 	'wikibase-itembytitle-lookup-site' => 'Sita:',
 	'wikibase-itembytitle-lookup-page' => 'Pele:',
 	'wikibase-itembytitle-submit' => 'Cı geyre',
@@ -4360,10 +4360,10 @@ $messages['diq'] = array(
 	'wikibase-newentity-description' => 'Şınasiyen:',
 	'wikibase-newentity-submit' => 'İycad ke',
 	'wikibase-setlabel-label' => 'Etiket:',
-	'wikibase-setdescription-label' => 'Şınasiyen:',
-	'wikibase-setaliases-label' => 'Namey bini:',
-	'wikibase-setsitelink-site' => "ID'a sita:",
-	'wikibase-setsitelink-label' => 'Linka sita:',
+	'wikibase-setdescription-label' => 'Şınasiye:',
+	'wikibase-setaliases-label' => 'Nameyê bini:',
+	'wikibase-setsitelink-site' => 'Kamiya sita:',
+	'wikibase-setsitelink-label' => 'Gıreyê sita:',
 	'wikibase-modifyentity-id' => 'ID',
 	'wikibase-modifyterm-language' => 'Zıwan:',
 	'wikibase-dispatchstats-change-id' => 'ID',
@@ -4374,7 +4374,7 @@ $messages['diq'] = array(
 	'wikibase-dispatchstats-pos' => 'Pozisyon',
 	'wikibase-dispatchstats-lag-num' => 'Vınderde',
 	'wikibase-dispatchstats-lag-time' => 'Biya',
-	'wikibase-dispatchstats-touched' => 'Veyeya',
+	'wikibase-dispatchstats-touched' => 'Bi xırabe',
 	'wikibase-dispatchstats-large-lag' => '(zaf gırdo)',
 	'wikibase-dispatchstats-freshest' => 'Tewr tezey',
 	'wikibase-dispatchstats-stalest' => 'Tewr kehani',
@@ -6820,6 +6820,16 @@ $messages['frr'] = array(
 * hierarchicalpart – hiart tu't Iri-tiakenkeed.
 * query – hiart tu't Iri-tiakenkeed.
 * fragment – hiart tu't Iri-tiakenkeed.",
+);
+
+/** Western Frisian (Frysk)
+ * @author Kening Aldgilles
+ */
+$messages['fy'] = array(
+	'wikibase-edit' => 'bewurkje',
+	'wikibase-save' => 'fêstlizze',
+	'wikibase-cancel' => 'ôfbrekke',
+	'wikibase-add' => 'tafoegje',
 );
 
 /** Irish (Gaeilge)
@@ -9795,7 +9805,7 @@ $messages['ka'] = array(
 	'wikibase-description-empty' => 'აღწერა ჯერ არ არის განსაზღვრული',
 	'wikibase-description-edit-placeholder' => 'აღწერის მითითება',
 	'wikibase-sitelink-site-edit-placeholder' => 'ვებ-გვერდი',
-	'wikibase-sitelink-page-edit-placeholder' => 'სტატია', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'გვერდი',
 	'wikibase-alias-edit-placeholder' => 'ფსევდონიმის შეყვანა',
 	'wikibase-label-input-help-message' => 'დაამატეთ ამ მონაცემთა ნაკრების სათაური შემდეგ ენაზე: $1.',
 	'wikibase-description-input-help-message' => 'დაამატეთ მოკლე აღწერა შემდეგ ენაზე: $1.',
@@ -9863,7 +9873,7 @@ $messages['ka'] = array(
 	'wikibase-newproperty-summary' => 'დარწმუნდით, რომ უკვე არ არსებობს მსგავსი თვისება!<br />თქვენ უნდა მიუთითოთ [[Help:Label|სახელი]] და [[Help:Description|აღწერა]] ყველა ახალი თვისებისათვის და დამატებით — დააყენოთ თვისების დასაშვები ტიპი.',
 	'wikibase-newproperty-fieldset' => 'ახალი თვისების შექმნა',
 	'wikibase-newproperty-datatype' => 'მონაცემის ტიპი:',
-	'wikibase-newproperty-invalid-datatype' => 'მითითებულია მონაცემთა დაუშვებელი ტიპი', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'მითითებულია მონაცემთა არასწორი ტიპი.',
 	'special-newitem' => 'ახალი ელემენტის შექმნა',
 	'wikibase-newitem-summary' => 'დარწმუნდით, რომ [[Special:ItemByTitle|უკვე არ არსებობს მსგავსი ელემენტი]]!<br />თქვენ უნდა დააყენოთ [[Help:Label|სახელი]] და [[Help:Description|აღწერა]] ყველა ახალი ელემენტისათვის.',
 	'wikibase-newitem-fieldset' => 'ახალი ელემენტის შექმნა',
@@ -9936,7 +9946,7 @@ $messages['ka'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'დაემატა და წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'დაემატა [$2] {{PLURAL:$1|ფსევდონიმი}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
-	'wikibase-item-summary-wbsetsitelink-add' => 'დაემატა ბმული [$2]-ზე', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-add' => 'დაემატა ბმული [$2]-ზე',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'წაიშალა ბმული [$2]-ზე',
 	'wikibase-item-summary-wblinktitles-create' => 'ეს ელემენტი შექმნილია გვერდების დასაკავშირებლად [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'დაკავშირებულ გვერდებზე დაემატა ენის ბმულები [$2↔$3]',
@@ -9951,7 +9961,7 @@ $messages['ka'] = array(
 	'wikibase-item-summary-wbremoveclaims-remove' => 'წაიშალა {{PLURAL:$1|განცხადება}}',
 	'wikibase-property-summary-wbeditentity-create' => 'შექმნილია ახალი თვისება',
 	'wikibase-property-summary-wbeditentity-update' => 'თვისება განახლებულია',
-	'wikibase-property-summary-wbeditentity-override' => 'არსებული თვისება გადაკეტილია', # Fuzzy
+	'wikibase-property-summary-wbeditentity-override' => 'თვისების მნიშვნელობა გასუფთავებულია',
 	'wikibase-property-summary-wbsetlabel-set' => 'შეცვლილია [$2] სახელი',
 	'wikibase-property-summary-wbsetlabel-remove' => 'წაშლილია [$2] სახელი',
 	'wikibase-property-summary-wbsetdescription-set' => 'შეცვლილია [$2] აღწერა',
@@ -9972,34 +9982,34 @@ $messages['ka'] = array(
 	'content-model-wikibase-item' => 'Wikibase-ის ელემენტი',
 	'content-model-wikibase-property' => 'Wikibase-ის თვისებები',
 	'content-model-wikibase-query' => 'Wikibase-ის მოთხოვნა',
-	'right-item-override' => 'ელემენტების გადაწერა', # Fuzzy
+	'right-item-override' => 'ელემენტების გადაწერა',
 	'right-item-create' => 'ელემენტების შექმნა',
-	'right-item-remove' => 'ელემენტების წაშლა', # Fuzzy
-	'right-property-override' => 'თვისებების გადაწერა', # Fuzzy
+	'right-item-remove' => 'ელემენტების წაშლა',
+	'right-property-override' => 'თვისებების გადაწერა',
 	'right-property-create' => 'თვისებების შექმნა',
-	'right-property-remove' => 'თვისებების წაშლა', # Fuzzy
+	'right-property-remove' => 'თვისებების წაშლა',
 	'right-alias-remove' => 'ფსევდონიმების წაშლა',
 	'right-sitelink-remove' => 'საიტის ბმულების წაშლა',
 	'right-sitelink-update' => 'საიტის ბმულების განახლება',
-	'right-linktitles-update' => 'ბმულების სათაურების განახლება', # Fuzzy
-	'right-label-remove' => 'სახელების წაშლა', # Fuzzy
+	'right-linktitles-update' => 'გვერდების დაკავშირება',
+	'right-label-remove' => 'სახელების წაშლა',
 	'right-label-update' => 'სახელების განახლება',
-	'right-description-remove' => 'აღწერების წაშლა', # Fuzzy
+	'right-description-remove' => 'აღწერების წაშლა',
 	'right-description-update' => 'აღწერების განახლება',
-	'action-item-override' => 'ელემენტების გადაწერა', # Fuzzy
+	'action-item-override' => 'ელემენტების გადაწერა',
 	'action-item-create' => 'ელემენტების შექმნა',
-	'action-item-remove' => 'ელემენტების წაშლა', # Fuzzy
-	'action-property-override' => 'თვისებების გადაწერა', # Fuzzy
+	'action-item-remove' => 'ელემენტების წაშლა',
+	'action-property-override' => 'თვისებების გადაწერა',
 	'action-property-create' => 'თვისებების შექმნა',
-	'action-property-remove' => 'თვისებების წაშლა', # Fuzzy
+	'action-property-remove' => 'თვისებების წაშლა',
 	'action-alias-update' => 'ფსევდონიმების განახლება',
 	'action-alias-remove' => 'ფსევდონიმების წაშლა',
 	'action-sitelink-remove' => 'საიტის ბმულების წაშლა',
 	'action-sitelink-update' => 'საიტის ბმულების განახლება',
-	'action-linktitles-update' => 'ბმულების სათაურების განახლება', # Fuzzy
-	'action-label-remove' => 'სახელების წაშლა', # Fuzzy
+	'action-linktitles-update' => 'გვერდების დაკავშირება',
+	'action-label-remove' => 'სახელების წაშლა',
 	'action-label-update' => 'სახელების განახლება',
-	'action-description-remove' => 'აღწერების წაშლა', # Fuzzy
+	'action-description-remove' => 'აღწერების წაშლა',
 	'action-description-update' => 'აღწერების განახლება',
 );
 
@@ -15254,6 +15264,7 @@ $messages['sk'] = array(
 );
 
 /** Slovenian (slovenščina)
+ * @author Dbc334
  * @author Eleassar
  */
 $messages['sl'] = array(
@@ -15295,7 +15306,7 @@ $messages['sl'] = array(
 	'wikibase-undo-firstrev' => 'Ustvaritve strani ni mogoče razveljaviti',
 	'wikibase-undo-nocontent' => 'Ne morem naložiti vsebine redakcije $2 strani $1',
 	'wikibase-propertyedittool-full' => 'Seznam vrednosti je popoln.',
-	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ena vrednost|$1 vrednosti|$1 vrednosti|$1 vrednosti}} še {{PLURAL:$1|ni shranjena|nista shranjeni|niso shranjene|ni shranjenih}}.', # Fuzzy
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ena vrednost|$1 vrednosti}} še {{PLURAL:$1|ni shranjena|nista shranjeni|niso shranjene|ni shranjenih}}.',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|vnos|vnosa|vnosi|vnosov}}',
 	'wikibase-sitelinksedittool-full' => 'Povezave na strani so za vsa znana spletišča že podane.',
 	'wikibase-disambiguation-title' => 'Razločitev za »$1«',
@@ -15331,7 +15342,7 @@ V povzetku urejanja tega predmeta bo shranjen vaš IP-naslov.',
 	'wikibase-blockeduser-tooltip-message' => 'Nimate dovoljenja za urejanje, saj je vaše uporabniško ime ali IP-naslov blokiran.',
 	'wikibase-move-error' => 'Strani v imenskem prostoru podatkov ne morete prestavljati, prav tako tudi ne morete strani prestavljati vanj.',
 	'wikibase-warning-constraint-violation-length' => 'Za jezikovno kodo »$1« je aktivirana omejitev dolžine.',
-	'wikibase-error-constraint-violation-label' => 'Za {{PLURAL:$1|oznako|oznaki|oznake}} »$3« pri {{PLURAL:$1|jezikovni kodi|jezikovnih kodah|jezikovnih kodah}} »$2« {{PLURAL:$1|je določena omejitev dolžine|sta določeni omejtvi dolžine|so določene omejitve dolžine}}.', # Fuzzy
+	'wikibase-error-constraint-violation-label' => 'Za {{PLURAL:$1|oznako|oznaki|oznake}} »$3« pri {{PLURAL:$1|jezikovni kodi|jezikovnih kodah}} »$2« {{PLURAL:$1|je določena omejitev dolžine|sta določeni omejtvi dolžine|so določene omejitve dolžine}}.',
 	'special-itembytitle' => 'Predmet po naslovu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Iskanje predmetov po spletišču in naslovu',
 	'wikibase-itembytitle-lookup-site' => 'Spletišče:',
