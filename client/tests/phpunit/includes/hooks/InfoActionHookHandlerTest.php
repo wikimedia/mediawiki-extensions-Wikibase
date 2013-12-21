@@ -2,13 +2,9 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use RequestContext;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\NamespaceChecker;
-use Wikibase\RepoLinker;
-use Wikibase\SiteLinkTable;
 
 /**
  * @covers Wikibase\Client\Hooks\InfoActionHookHandler
@@ -48,12 +44,16 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 					)
 				)
 			),
-			$context, array(), true, new ItemId( 'Q4' ),
+			$context, array( 'header-basic' => array() ), true, new ItemId( 'Q4' ),
 			'item id link'
 		);
 
 		$cases[] = array(
-			array(), $context, array(), false, new ItemId( 'Q4' ),
+			array( 'header-basic' => array() ),
+			$context,
+			array( 'header-basic' => array() ),
+			false,
+			new ItemId( 'Q4' ),
 			'namespace does not have wikibase enabled'
 		);
 
@@ -66,7 +66,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 					)
 				)
 			),
-			$context, array(), true, false,
+			$context, array( 'header-basic' => array() ), true, false,
 			'page is not connected to an item'
 		);
 
