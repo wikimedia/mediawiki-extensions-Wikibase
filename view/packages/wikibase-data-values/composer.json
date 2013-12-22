@@ -27,6 +27,7 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
+		"composer/installers": ">=1.0.1",
 		"data-values/interfaces": "~0.1",
 		"data-values/data-types": "~0.1.0"
 	},
