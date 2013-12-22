@@ -287,7 +287,7 @@ $specialPageAliases['vi'] = array(
 	'SetSiteLink' => array( 'Đặt_liên_kết_dịch_vụ' ),
 	'EntitiesWithoutLabel' => array( 'Thực_thể_không_nhãn' ),
 	'EntitiesWithoutDescription' => array( 'Thực_thể_không_miêu_tả' ),
-	'ItemsWithoutSitelinks' => array( 'Khoản_mục_không_có_liên_kết_site' ),
+	'ItemsWithoutSitelinks' => array( 'Khoản_mục_không_có_liên_kết_dịch_vụ', 'Khoản_mục_không_có_liên_kết_site' ),
 	'MyLanguageFallbackChain' => array( 'Chuỗi_ngôn_ngữ_thay_thế_của_tôi' ),
 );
 
