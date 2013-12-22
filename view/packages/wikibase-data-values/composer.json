@@ -27,7 +27,8 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"data-values/interfaces": "~0.1"
+		"data-values/interfaces": "~0.1",
+		"data-values/data-types": "~0.1.0"
 	},
 	"autoload": {
 		"files" : [
