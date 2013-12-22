@@ -17,7 +17,7 @@ return call_user_func( function() {
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/resources',
-		'remoteExtPath' =>  'DataValuesJavascript/resources',
+		'remoteExtPath' =>  '../vendor/data-values/javascript/resources',
 	);
 
 	$mwVvResources = array(

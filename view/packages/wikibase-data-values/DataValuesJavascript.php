@@ -53,7 +53,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
 	$ownModules = include( __DIR__ . '/DataValues.tests.qunit.php' );
 	$ownModulesTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  'DataValuesJavascript',
+		'remoteExtPath' =>  '../vendor/data-values/javascript',
 	);
 	foreach( $ownModules as $ownModuleName => $ownModule ) {
 		$testModules['qunit'][ $ownModuleName ] = $ownModule + $ownModulesTemplate;

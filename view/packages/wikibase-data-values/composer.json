@@ -1,6 +1,5 @@
 {
 	"name": "data-values/javascript",
-	"type": "mediawiki-extension",
 	"description": "DataValues implementation in Javascript",
 	"keywords": [
 		"datavalues",
