@@ -23,6 +23,9 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 	),
 );
 
+// TODO
+$GLOBALS['wgDataValuesJavascriptPath'] = '../vendor/data-values/javascript';
+
 // Resource Loader module registration
 $GLOBALS['wgResourceModules'] = array_merge(
 	$GLOBALS['wgResourceModules'],
@@ -53,7 +56,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
 	$ownModules = include( __DIR__ . '/DataValues.tests.qunit.php' );
 	$ownModulesTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  '../vendor/data-values/javascript',
+		'remoteExtPath' => '../vendor/data-values/javascript',
 	);
 	foreach( $ownModules as $ownModuleName => $ownModule ) {
 		$testModules['qunit'][ $ownModuleName ] = $ownModule + $ownModulesTemplate;
@@ -74,7 +77,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
 	// @codeCoverageIgnoreStart
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/js/tests/ValueParsers',
-		'remoteExtPath' => 'DataValuesJavascript/js/tests/ValueParsers',
+		'remoteExtPath' => '../vendor/data-values/javascript/js/tests/ValueParsers',
 	);
 
 	$testModules['qunit']['ext.valueParsers.tests'] = $moduleTemplate + array(

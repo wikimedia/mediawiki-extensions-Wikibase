@@ -12,7 +12,7 @@ return call_user_func( function() {
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/src/ValueParsers/',
-		'remoteExtPath' =>  '../vendor/data-values/javascript/js/src/ValueParsers',
+		'remoteExtPath' => '../vendor/data-values/javascript/js/src/ValueParsers',
 	);
 
 	$mwVpResources = array(

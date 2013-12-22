@@ -17,7 +17,7 @@
 return call_user_func( function() {
 
 	// base path from package root:
-	$bp = 'tests/qunit';
+	$bp = 'tests';
 
 	return array(
 		'dataValues.tests' => array(

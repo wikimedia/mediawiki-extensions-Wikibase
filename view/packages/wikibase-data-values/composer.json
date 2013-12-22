@@ -28,7 +28,7 @@
 	"require": {
 		"composer/installers": ">=1.0.1",
 		"data-values/interfaces": "~0.1",
-		"data-values/data-types": "~0.1.0"
+		"data-values/data-types": "dev-master"
 	},
 	"autoload": {
 		"files" : [
