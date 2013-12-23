@@ -18,6 +18,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @covers Wikibase\DataModel\Deserializers\SnakDeserializer
  *
  * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */
 class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
