@@ -1,11 +1,12 @@
 # Wikibase DataModel release notes
 
-## Version 0.6 (dev)
+## Version 0.6 (2013-12-23)
 
 #### Improvements
 
 * Wikibase DataModel now uses the "new" DataValues components. This means binding to other code has
 decreased and several design issues have been tackled.
+* Wikibase DataModel is now PSR-0 compliant.
 
 #### Deprecations
 
