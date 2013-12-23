@@ -37,7 +37,6 @@
 		"wikibase/data-model": "0.6.*@dev",
         "diff/diff": ">=0.9"
     },
-	"minimum-stability": "dev",
 	"autoload": {
 		"files" : [
 			"Wikibase.composer.php"

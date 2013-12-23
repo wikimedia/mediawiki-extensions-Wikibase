@@ -5,6 +5,7 @@ composer.phar
 composer.lock
 
 vendor/
+extensions/
 
 easyrdf/
 
