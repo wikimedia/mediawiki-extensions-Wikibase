@@ -3,11 +3,6 @@
 /**
  * MediaWiki setup for the "ValueView" extension.
  *
- * @since 0.1
- *
- * @file
- * @ingroup ValueView
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */

@@ -12,11 +12,6 @@
  * - jQuery.time.timeinput
  * - jQuery.ui.toggler
  *
- * @since 0.1
- *
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *

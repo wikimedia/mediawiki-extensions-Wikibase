@@ -4,11 +4,6 @@
  * When included this returns an array with all qunit test module definitions. Given file patchs
  * are relative to the package's root.
  *
- * @since 0.1
- *
- * @file
- * @ingroup ValueView
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *

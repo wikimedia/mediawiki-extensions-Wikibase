@@ -4,11 +4,6 @@
  * When included this returns an array with all modules introduced by the "valueview" jQuery
  * extension.
  *
- * @since 0.1
- *
- * @file
- * @ingroup ValueView
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
