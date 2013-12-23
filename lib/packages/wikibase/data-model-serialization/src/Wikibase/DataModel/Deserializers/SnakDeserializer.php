@@ -86,11 +86,11 @@ class SnakDeserializer implements Deserializer {
 	}
 
 	private function newNoValueSnak( array $serialization ) {
-		return new PropertyNoValueSnak($this->parsePropertyId( $serialization['property'] ));
+		return new PropertyNoValueSnak( $this->parsePropertyId( $serialization['property'] ) );
 	}
 
 	private function newSomeValueSnak( array $serialization ) {
-		return new PropertySomeValueSnak($this->parsePropertyId( $serialization['property'] ));
+		return new PropertySomeValueSnak( $this->parsePropertyId( $serialization['property'] ) );
 	}
 
 	private function newValueSnak( array $serialization ) {
