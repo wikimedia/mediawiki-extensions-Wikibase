@@ -32,8 +32,8 @@
 		"data-values/validators": "~0.1",
 		"data-values/data-types": "~0.1",
 		"data-values/serialization": "~0.1",
-		"data-values/javascript": "@dev",
-		"data-values/value-view": "@dev",
+		"data-values/javascript": "~0.1",
+		"data-values/value-view": "~0.1",
 		"wikibase/data-model": "0.6.*@dev",
         "diff/diff": ">=0.9"
     },
