@@ -922,6 +922,8 @@ $messages['cu'] = array(
 	'wikibase-editlinks' => 'исправи съвѧꙁи',
 	'wikibase-linkitem-input-site' => 'ѩꙁꙑкъ :',
 	'wikibase-rc-hide-wikidata' => '$1 Викисъводъ',
+	'wikibase-rc-wikibase-edit-letter' => 'в҃с',
+	'wikibase-rc-wikibase-edit-title' => 'Викисъводѣ мѣна',
 );
 
 /** Welsh (Cymraeg)
@@ -1127,7 +1129,7 @@ $messages['dsb'] = array(
 	'wikibase-comment-linked' => 'Element Wikidata jo se z toś tym bokom zwězał.',
 	'wikibase-comment-unlink' => 'Zwisk boka z elementom Wikidata jo se wópórał. Mjazyrěcne wótkaze wótpórane.',
 	'wikibase-comment-restore' => 'Pśirědowany element Wikidata jo wótnowjony. Mjazyrěcne wótkaze wótnowjone.',
-	'wikibase-comment-update' => 'Mjazyrěcne wótkaze su se zaktualizěrowali.', # Fuzzy
+	'wikibase-comment-update' => 'Element Wikidata jo se změnił',
 	'wikibase-comment-sitelink-add' => 'Mjazyrěcny wótkaz pśidany: $1',
 	'wikibase-comment-sitelink-change' => 'Mjazyrěcny wótkaz změnjony wót $1 do $2',
 	'wikibase-comment-sitelink-remove' => 'Mjazyrěcny wótkaz wótpórany: $1',
@@ -1143,7 +1145,7 @@ $messages['dsb'] = array(
 	'wikibase-linkitem-selectlink' => 'Pšosym wubjeŕ sedło a bok, kótarejž coš z toś tom bokom zwězaś.',
 	'wikibase-linkitem-input-site' => 'Rěc:',
 	'wikibase-linkitem-input-page' => 'Bok:',
-	'wikibase-linkitem-confirmitem-text' => 'Bok, kótaryž sy wubrał, jo južo z [$1 elementom w našom centralnem datowem repozitoriumje] zwězany. Pšosym wobkšuś, až slědujuce boki su te, kótarež coš z toś tym bokom zwězaś.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Bok, kótaryž sy wubrał, jo južo z [$1 elementom w našom centralnem datowem repozitoriju] zwězany. Pšosym wobkšuś, až {{PLURAL:$2|slědujucy bok|slědujucej boka|slědujuce boki}} {{PLURAL:$2|jo ten, kótaryž|stej tej, kótarejž|su te, kótarež}} coš z toś tym bokom zwězaś.',
 	'wikibase-linkitem-confirmitem-button' => 'Wobkšuśiś',
 	'wikibase-linkitem-not-loggedin-title' => 'Musyš pśizjawjony byś',
 	'wikibase-linkitem-not-loggedin' => 'Musyš w toś tom wikiju a w [$1 centralnem datowem repozitoriumje] pśizjawjony byś, aby toś tu funkciju wužywał.',
