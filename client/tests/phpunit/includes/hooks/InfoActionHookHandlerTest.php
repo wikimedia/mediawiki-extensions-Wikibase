@@ -39,7 +39,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'header-basic' => array(
 					array(
-						$context->msg( 'wikibase-pageinfo-entity-id' ),
+						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
 						'https://www.wikidata.org/wiki/Q4'
 					)
 				)
@@ -61,8 +61,8 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'header-basic' => array(
 					array(
-						$context->msg( 'wikibase-pageinfo-entity-id' ),
-						$context->msg( 'wikibase-pageinfo-entity-id-none' )
+						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
+						$context->msg( 'wikibase-pageinfo-entity-id-none' )->escaped()
 					)
 				)
 			),
