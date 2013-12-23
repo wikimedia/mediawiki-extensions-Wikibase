@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_c7bd7765",
+        "filename": "client/tests/phpunit/includes/hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-23T18:46:44Z",
+      "side": 1,
+      "message": "for purpose of the tests, this works but the tests in some way can serve as example.  \n\nWhen InfoAction gets the message object, it does $msg-\u003eescaped()\n\nI think escaped() would be better here also.",
+      "revId": "b37d4dbab487330f02546b29e90a293ba97cd7d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
