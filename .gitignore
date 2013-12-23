@@ -6,10 +6,10 @@ composer.lock
 
 vendor/
 
-selenium/configuration.yml
-
 easyrdf/
 
 !.*
+.idea/
 
+selenium/configuration.yml
 tests/browser/.idea
