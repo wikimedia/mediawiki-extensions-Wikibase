@@ -5,6 +5,7 @@ namespace Wikibase;
 use DatabaseBase;
 use MessageReporter;
 use Wikibase\DataModel\Entity\PropertyId;
+use MWException;
 
 /**
  * Utility class for rebuilding the wb_property_info table.
@@ -257,6 +258,7 @@ class PropertyInfoTableBuilder {
 	 * provide to the constructor.
 	 *
 	 * @see Wikibase\PropertyInfoUpdate
+	 * @throws MWException
 	 *
 	 * @since 0.4
 	 *
@@ -266,7 +268,11 @@ class PropertyInfoTableBuilder {
 	protected function updatePropertyInfo( DatabaseBase $dbw, PropertyId $id ) {
 		$property = $this->entityLookup->getEntity( $id );
 
-		assert( $property instanceof Property );
+		if( !$property instanceof Property ) {
+			throw new MWException(
+				"EntityLookup didn't return a Property for id " . $id->getPrefixedId()
+			);
+		}
 
 		$update = new PropertyInfoUpdate( $property, $this->table );
 		$update->doUpdate();
