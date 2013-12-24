@@ -40,8 +40,9 @@ echo "PropertyInfoUpdate-doUpdate-1\n";
 echo "PropertyInfoUpdate-doUpdate-3\n";
 		if ( $oldInfo !== $info ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': property info for ' . $id . ' changed, updating' );
-			echo "PropertyInfoUpdate-doUpdate-setPropertyInfo\n";
+			echo "PropertyInfoUpdate-doUpdate-setPropertyInfo-0\n";
 			$this->store->setPropertyInfo( $id, $info );
+			echo "PropertyInfoUpdate-doUpdate-setPropertyInfo-1\n";
 		} else {
 			echo "PropertyInfoUpdate-doUpdate-notSetPropertyInfo\n";
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': property info for ' . $id . ' didn\'t change, skipping update' );
