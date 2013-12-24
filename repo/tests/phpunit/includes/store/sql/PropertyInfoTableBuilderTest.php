@@ -64,7 +64,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 	public function testRebuildPropertyInfo() {
 		$properties = self::initProperties();
 		$propertyIds = array_keys( $properties );
-
+echo -1;
 		$entityLookup = new WikiPageEntityLookup( false, false );
 		$table = new PropertyInfoTable( false );
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
@@ -73,7 +73,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		// rebuild all ----
 		$builder->setFromId( 0 );
 		$builder->setRebuildAll( true );
-
+echo 0;
 		$builder->rebuildPropertyInfo();
 
 		foreach ( $properties as $id => $expected ) {
@@ -84,13 +84,13 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		// make table incomplete ----
 		$propId1 = new PropertyId( $propertyIds[0] );
 		$table->removePropertyInfo( $propId1 );
-
+echo 1;
 		// rebuild from offset, with no effect ----
 		$builder->setFromId( $propId1->getNumericId() +1 );
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();
-
+echo 2;
 		$info = $table->getPropertyInfo( $propId1 );
 		$this->assertNull( $info, "rebuild missing from offset should have skipped this" );
 
@@ -99,7 +99,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();
-
+echo 3;
 		$info = $table->getPropertyInfo( $propId1 );
 		$this->assertNull( $info, "rebuild all from offset should have skipped this" );
 
@@ -108,7 +108,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();
-
+echo 4;
 		foreach ( $properties as $propId => $expected ) {
 			$info = $table->getPropertyInfo( new PropertyId( $propId ) );
 			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $propId" );
@@ -117,7 +117,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		// rebuild again ----
 		$builder->setFromId( 0 );
 		$builder->setRebuildAll( false );
-
+echo 5;
 		$c = $builder->rebuildPropertyInfo();
 		$this->assertEquals( 0, $c, "Thre should be nothing left to rebuild" );
 	}
