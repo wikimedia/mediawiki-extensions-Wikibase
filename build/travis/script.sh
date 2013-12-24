@@ -8,5 +8,5 @@ if [ "$TYPE" == "coverage" ]
 then
 	php phpunit.php --group Wikibase --coverage-clover ../../extensions/Wikibase/build/logs/clover.xml
 else
-	php phpunit.php --group Wikibase
+	php phpunit.php --group Wikibase --debug
 fi
