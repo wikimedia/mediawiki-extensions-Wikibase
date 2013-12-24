@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_066a3c12",
+        "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-12-24T19:37:42Z",
+      "side": 1,
+      "message": "if( !( $property instanceof Property ) ) {\n\nelse it looks wrong. I guess it is not wrong, but with that spacing it looks that way",
+      "revId": "7ef790cc3ce56a0bc413ed307c8d0a9e92175f5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
