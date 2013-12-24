@@ -75,7 +75,7 @@ echo -.5;
 		$builder->setRebuildAll( true );
 echo 0;
 		$builder->rebuildPropertyInfo();
-
+echo .25;
 		foreach ( $properties as $id => $expected ) {
 			$info = $table->getPropertyInfo( new PropertyId( $id ) );
 			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $id" );
