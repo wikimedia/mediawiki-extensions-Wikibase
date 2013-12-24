@@ -61,7 +61,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		return $properties;
 	}
 
-	public function testRebuildPropertyInfo() {
+	public function testRebuildPropertyInfo() {error_reporting(-1);ini_set( 'display_errors', 'stderr' );
 		$properties = self::initProperties();
 		$propertyIds = array_keys( $properties );
 echo -1;
