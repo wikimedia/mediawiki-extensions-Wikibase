@@ -120,6 +120,8 @@ echo 4.5;
 echo 5;
 		$c = $builder->rebuildPropertyInfo();
 		$this->assertEquals( 0, $c, "Thre should be nothing left to rebuild" );
+		// As we only care for php(unit) crashes
+		$this->markTestSkipped();
 	}
 
 }
