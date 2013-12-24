@@ -69,7 +69,7 @@ echo -1;
 		$table = new PropertyInfoTable( false );
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
 		$builder->setBatchSize( 3 );
-
+echo -.5;
 		// rebuild all ----
 		$builder->setFromId( 0 );
 		$builder->setRebuildAll( true );
@@ -80,7 +80,7 @@ echo 0;
 			$info = $table->getPropertyInfo( new PropertyId( $id ) );
 			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $id" );
 		}
-
+echo 0.5;
 		// make table incomplete ----
 		$propId1 = new PropertyId( $propertyIds[0] );
 		$table->removePropertyInfo( $propId1 );
@@ -88,7 +88,7 @@ echo 1;
 		// rebuild from offset, with no effect ----
 		$builder->setFromId( $propId1->getNumericId() +1 );
 		$builder->setRebuildAll( false );
-
+echo 1.5;
 		$builder->rebuildPropertyInfo();
 echo 2;
 		$info = $table->getPropertyInfo( $propId1 );
@@ -97,12 +97,12 @@ echo 2;
 		// rebuild all from offset, with no effect ----
 		$builder->setFromId( $propId1->getNumericId() +1 );
 		$builder->setRebuildAll( false );
-
+echo 2.5;
 		$builder->rebuildPropertyInfo();
 echo 3;
 		$info = $table->getPropertyInfo( $propId1 );
 		$this->assertNull( $info, "rebuild all from offset should have skipped this" );
-
+echo 3.5;
 		// rebuild missing  ----
 		$builder->setFromId( 0 );
 		$builder->setRebuildAll( false );
@@ -113,7 +113,7 @@ echo 4;
 			$info = $table->getPropertyInfo( new PropertyId( $propId ) );
 			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $propId" );
 		}
-
+echo 4.5;
 		// rebuild again ----
 		$builder->setFromId( 0 );
 		$builder->setRebuildAll( false );
