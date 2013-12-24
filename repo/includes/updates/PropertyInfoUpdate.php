@@ -20,8 +20,17 @@ class PropertyInfoUpdate extends \DataUpdate {
 	 * @param PropertyInfoStore $store
 	 */
 	public function __construct( Property $property, PropertyInfoStore $store ) {
+		$cry = false;
+		foreach( debug_backtrace() as $step ) {
+			if ( $step['function'] == 'testRebuildPropertyInfo' ) {
+				$cry = true;
+				break;
+			}
+		}
+		if ( $cry ) echo "PropertyInfoUpdate-__construct-0\n";
 		$this->property = $property;
 		$this->store = $store;
+		if ( $cry ) echo "PropertyInfoUpdate-__construct-1\n";
 	}
 
 	/**
