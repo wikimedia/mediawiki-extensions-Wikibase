@@ -146,7 +146,7 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @since 0.4
 	 */
-	public function rebuildPropertyInfo() {
+	public function rebuildPropertyInfo() {echo 'rebuildPropertyInfo-0';
 		$dbw = $this->table->getWriteConnection();
 
 		$rowId = $this->fromId -1;
@@ -169,12 +169,12 @@ class PropertyInfoTableBuilder {
 				)
 			);
 		}
-
+echo 'rebuildPropertyInfo-1';
 		while ( true ) {
 			// Make sure we are not running too far ahead of the slaves,
 			// as that would cause the site to be rendered read only.
 			$this->waitForSlaves( $dbw );
-
+echo 'rebuildPropertyInfo-while-0';
 			if ( $this->useTransactions ) {
 				$dbw->begin();
 			}
@@ -203,7 +203,7 @@ class PropertyInfoTableBuilder {
 			);
 
 			$c = 0;
-
+echo 'rebuildPropertyInfo-while-1';
 			foreach ( $props as $row ) {
 				$id = PropertyId::newFromNumber( (int)$row->epp_entity_id );
 				$this->updatePropertyInfo( $dbw, $id );
@@ -218,13 +218,13 @@ class PropertyInfoTableBuilder {
 
 			$this->report( "Updated $c properties, up to ID $rowId." );
 			$total += $c;
-
+echo 'rebuildPropertyInfo-while-2';
 			if ( $c < $this->batchSize ) {
 				// we are done.
 				break;
 			}
 		}
-
+echo 'rebuildPropertyInfo-2';
 		return $total;
 	}
 
