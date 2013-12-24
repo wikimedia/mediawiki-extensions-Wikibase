@@ -8,6 +8,10 @@ matrix:
     - env: DBTYPE=mysql LANG=de; MW=master
       php: 5.3
     - env: DBTYPE=sqlite LANG=de; MW=master
+      php: 5.3
+    - env: DBTYPE=sqlite LANG=de; MW=master
+      php: 5.4
+    - env: DBTYPE=mysql LANG=de; MW=master
       php: 5.4
     - env: DBTYPE=mysql LANG=en; MW=master
       php: 5.5
