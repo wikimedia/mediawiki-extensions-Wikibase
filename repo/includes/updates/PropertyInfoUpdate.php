@@ -30,7 +30,7 @@ class PropertyInfoUpdate extends \DataUpdate {
 	function doUpdate() {
 		$cry = false;
 		foreach( debug_backtrace() as $step ) {
-			if ( $step['function'] = 'testRebuildPropertyInfo' ) {
+			if ( $step['function'] == 'testRebuildPropertyInfo' ) {
 				$cry = true;
 				break;
 			}
