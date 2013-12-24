@@ -267,7 +267,9 @@ echo "rebuildPropertyInfo-2\n";
 		echo "updatePropertyInfo-0\n";
 		$property = $this->entityLookup->getEntity( $id );
 
-		assert( $property instanceof Property );
+		if( !$property instanceof Property ) {
+			throw new \MWException( 'Damn damn damn' );
+		}
 echo "updatePropertyInfo-1\n";
 		$update = new PropertyInfoUpdate( $property, $this->table );
 		echo "updatePropertyInfo-2\n";
