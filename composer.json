@@ -44,10 +44,5 @@
 		"wikibase/data-model": "dev-master",
         "diff/diff": ">=0.9"
     },
-	"minimum-stability" : "dev",
-	"autoload": {
-		"files" : [
-			"Wikibase.composer.php"
-		]
-	}
+	"minimum-stability" : "dev"
 }
