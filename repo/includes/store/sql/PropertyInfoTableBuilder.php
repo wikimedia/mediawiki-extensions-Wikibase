@@ -268,7 +268,7 @@ echo "rebuildPropertyInfo-2\n";
 		$property = $this->entityLookup->getEntity( $id );
 
 		if( !$property instanceof Property ) {
-			throw new \MWException( 'Damn damn damn' );
+			throw new \MWException( $id->getPrefixedId() . " is not a Property!" );
 		}
 echo "updatePropertyInfo-1\n";
 		$update = new PropertyInfoUpdate( $property, $this->table );
