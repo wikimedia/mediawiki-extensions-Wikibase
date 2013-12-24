@@ -270,8 +270,9 @@ echo "rebuildPropertyInfo-2\n";
 		assert( $property instanceof Property );
 echo "updatePropertyInfo-1\n";
 		$update = new PropertyInfoUpdate( $property, $this->table );
-		$update->doUpdate();
 		echo "updatePropertyInfo-2\n";
+		$update->doUpdate();
+		echo "updatePropertyInfo-3\n";
 	}
 
 	/**
