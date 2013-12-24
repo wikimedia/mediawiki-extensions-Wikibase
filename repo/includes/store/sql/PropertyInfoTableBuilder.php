@@ -146,7 +146,7 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @since 0.4
 	 */
-	public function rebuildPropertyInfo() {
+	public function rebuildPropertyInfo() {echo "rebuildPropertyInfo-0\n";
 		$dbw = $this->table->getWriteConnection();
 
 		$rowId = $this->fromId -1;
@@ -169,12 +169,12 @@ class PropertyInfoTableBuilder {
 				)
 			);
 		}
-
+echo "rebuildPropertyInfo-1\n";
 		while ( true ) {
 			// Make sure we are not running too far ahead of the slaves,
 			// as that would cause the site to be rendered read only.
 			$this->waitForSlaves( $dbw );
-
+echo "rebuildPropertyInfo-while-0\n";
 			if ( $this->useTransactions ) {
 				$dbw->begin();
 			}
@@ -203,7 +203,7 @@ class PropertyInfoTableBuilder {
 			);
 
 			$c = 0;
-
+echo "rebuildPropertyInfo-while-1\n";
 			foreach ( $props as $row ) {
 				$id = PropertyId::newFromNumber( (int)$row->epp_entity_id );
 				$this->updatePropertyInfo( $dbw, $id );
@@ -211,20 +211,20 @@ class PropertyInfoTableBuilder {
 				$rowId = $row->epp_entity_id;
 				$c+= 1;
 			}
-
+echo "rebuildPropertyInfo-while-2\n";
 			if ( $this->useTransactions ) {
 				$dbw->commit();
 			}
 
 			$this->report( "Updated $c properties, up to ID $rowId." );
 			$total += $c;
-
+echo "rebuildPropertyInfo-while-3\n";
 			if ( $c < $this->batchSize ) {
 				// we are done.
 				break;
 			}
 		}
-
+echo "rebuildPropertyInfo-2\n";
 		return $total;
 	}
 
@@ -264,12 +264,17 @@ class PropertyInfoTableBuilder {
 	 * @param PropertyId $id the Property to process
 	 */
 	protected function updatePropertyInfo( DatabaseBase $dbw, PropertyId $id ) {
+		echo "updatePropertyInfo-0\n";
 		$property = $this->entityLookup->getEntity( $id );
 
-		assert( $property instanceof Property );
-
+		if( !$property instanceof Property ) {
+			throw new \MWException( $id->getPrefixedId() . " is not a Property!" );
+		}
+echo "updatePropertyInfo-1\n";
 		$update = new PropertyInfoUpdate( $property, $this->table );
+		echo "updatePropertyInfo-2\n";
 		$update->doUpdate();
+		echo "updatePropertyInfo-3\n";
 	}
 
 	/**
