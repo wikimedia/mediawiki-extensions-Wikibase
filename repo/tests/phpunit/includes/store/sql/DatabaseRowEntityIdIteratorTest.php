@@ -4,13 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\DatabaseRowEntityIdIterator;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\EntityFactory;
-use Wikibase\Property;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\PropertyContent;
+use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\DatabaseRowEntityIdIterator
@@ -79,9 +74,16 @@ class DatabaseRowEntityIdIteratorTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider idProvider
+	 * @dataProvider entityProvider
 	 */
-	public function testIteration( $ids ) {
+	public function testIteration( $entityContents ) {
+		$ids = array();
+
+		foreach( $entityContents as $entityContent ) {
+			$entityContent->save( 'foo', null, EDIT_NEW );
+			$ids[] = $entityContent->getEntity()->getId();
+		}
+
 		$iterator = $this->newDatabaseRowEntityIdIterator( $ids );
 
 		if ( empty( $ids ) ) {
@@ -94,13 +96,15 @@ class DatabaseRowEntityIdIteratorTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public static function idProvider() {
-		$p10 = new PropertyId( 'P10' );
-		$q30 = new ItemId( 'Q30' );
+	public static function entityProvider() {
+		$property = PropertyContent::newEmpty();
+		$property->getProperty()->setDataTypeId( 'string' );
+
+		$item = ItemContent::newEmpty();
 
 		return array(
 			'empty' => array( array() ),
-			'some entities' => array( array( $p10, $q30 ) ),
+			'some entities' => array( array( $property, $item ) ),
 		);
 	}
 }
