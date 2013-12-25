@@ -528,6 +528,7 @@ $messages['bg'] = array(
 /** Bengali (বাংলা)
  * @author Aftab1995
  * @author Bellayet
+ * @author Gitartha.bordoloi
  * @author Leemon2010
  */
 $messages['bn'] = array(
@@ -2855,7 +2856,7 @@ $messages['ps'] = array(
  */
 $messages['pt'] = array(
 	'wikibase-lib-desc' => 'Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client',
-	'wikibase-entity-item' => 'elemento',
+	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'propriedade',
 	'wikibase-entity-query' => 'consulta',
 	'wikibase-deletedentity-item' => 'Elemento eliminado',
@@ -2885,7 +2886,7 @@ $messages['pt'] = array(
 	'wikibase-error-ui-session-failure' => 'A sua sessão expirou. Entre novamente na sua conta.',
 	'wikibase-error-ui-edit-conflict' => 'Conflito de edição. Por favor, recarregue a página e guarde novamente os dados.',
 	'wikibase-quantitydetails-unit' => 'Unidade',
-	'wikibase-sitelinks-wikipedia' => 'Páginas na Wikipédia com ligação a este elemento',
+	'wikibase-sitelinks-wikipedia' => 'Páginas na Wikipédia com ligação a este item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Sítio',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
@@ -3117,6 +3118,14 @@ $messages['ru'] = array(
  */
 $messages['scn'] = array(
 	'wikibase-replicationnote' => 'Putìssiru siri nicissari devirsi minuti prima la li canci sunu visìbbili supra tutti li wiki',
+);
+
+/** Samogitian (žemaitėška)
+ * @author Hugo.arg
+ */
+$messages['sgs'] = array(
+	'wikibase-replicationnote' => 'Toriekėt galvuo, kū gal praētė kelets mėnotiu pakuol keitėmā pataps regėmė visūsė wiki.',
+	'wikibase-sitelinks-link-columnheading' => 'Sojongts straipsnis',
 );
 
 /** Sinhala (සිංහල)

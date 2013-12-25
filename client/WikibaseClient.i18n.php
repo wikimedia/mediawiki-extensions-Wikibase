@@ -215,6 +215,7 @@ Parameters:
 );
 
 /** Achinese (Acèh)
+ * @author Ayie7791
  * @author Si Gam Acèh
  */
 $messages['ace'] = array(
@@ -238,7 +239,7 @@ $messages['ace'] = array(
 	'wikibase-editlinkstitle' => 'Andam peunawôt interwiki',
 	'wikibase-linkitem-addlinks' => 'Tamah peunawôt',
 	'wikibase-linkitem-alreadylinked' => "Laman nyang keuneuk neupupawôt ka teukaw'èt ngön [$1 item] bak pusat data kamoë nyang mupawôt u $2 bak teumpat nyoë. Tiëp item cuman jeuët na saboh laman tiëp teumpat nyang teukaw'èt. Neutulông piléh laman la'én keu neupupawôt.",
-	'wikibase-linkitem-close' => 'Tôp ngön peuhah ulang laman.',
+	'wikibase-linkitem-close' => 'Tôp ngön peuhah keulayi laman.',
 	'wikibase-linkitem-failure' => "Na seunalah nyang hana geutupeuë 'oh keuneuk pupawôt laman.",
 	'wikibase-linkitem-title' => 'Pupawôt ngön laman',
 	'wikibase-linkitem-linkpage' => 'Pupawôt ngön laman',
@@ -759,6 +760,7 @@ $messages['ce'] = array(
 	'specialpages-group-wikibaseclient' => 'Викихаамашан клиент',
 	'wikibase-after-page-move' => 'Викихаамашчохь [$1 карлаяккха] хьой цӀе хийцина агӀона хьажораг.',
 	'wikibase-after-page-move-queued' => 'ХӀара агӀо чохь йолу [$1 Викихаамаш чур элемент] ша карлаяьккина хила мега.',
+	'wikibase-comment-add' => 'Викихаамашкахь элемент кхоьллина.',
 	'wikibase-comment-linked' => 'Викихаамашан элемент хӀокху агӀонах тесна.',
 	'wikibase-comment-update' => 'Викихаамашан элемент хийцина',
 	'wikibase-comment-sitelink-add' => 'Юкъарвики-хьажораг тӀетоьхна: $1',
@@ -1536,6 +1538,7 @@ $messages['fi'] = array(
  * @author Kvardek du
  * @author Linedwell
  * @author Ltrlg
+ * @author Orlodrim
  * @author Peter17
  * @author Sherbrooke
  * @author Wyz
@@ -1578,7 +1581,7 @@ $messages['fr'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
-	'wikibase-rc-wikibase-edit-title' => 'Modification de [[:d:Wikidata:Accueil_principal|Wikidata]].', # Fuzzy
+	'wikibase-rc-wikibase-edit-title' => 'Modification de Wikidata.',
 	'wikibase-watchlist-show-changes-pref' => 'Voir les modifications de Wikidata dans votre liste de suivi',
 	'wikibase-error-serialize-error' => 'Échec à la sérialisation des données',
 	'wikibase-error-invalid-entity-id' => 'L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.',
@@ -3281,24 +3284,41 @@ $messages['ps'] = array(
  * @author Malafaya
  * @author OTAVIO1981
  * @author SandroHc
+ * @author Vitorvicentevalente
  */
 $messages['pt'] = array(
 	'wikibase-client-desc' => 'Cliente para a extensão Wikibase',
-	'wikibase-after-page-move' => 'Também pode [$1 atualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
+	'wikibase-after-page-move' => 'Também pode [$1 actualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
 	'wikibase-after-page-move-queued' => 'O [$1 item do Wikidata] associado a esta página será atualizado automaticamente em breve.',
 	'wikibase-comment-remove' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
 	'wikibase-comment-linked' => 'Um item do Wikidata foi ligado a esta página.',
-	'wikibase-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para outros idiomas foram removidos.',
-	'wikibase-comment-restore' => 'O item associado no Wikidata foi restaurado. Foram restaurados os links para outros idiomas.',
+	'wikibase-comment-unlink' => 'A ligação desta página foi retirada do item do Wikidata. As ligações para outros idiomas foram removidas.',
+	'wikibase-comment-restore' => 'O item associado no Wikidata foi restaurado. Foram restauradas as ligações para outros idiomas.',
 	'wikibase-comment-update' => 'Item Wikidata alterado',
-	'wikibase-comment-sitelink-add' => 'Link de idioma adicionado:$1',
-	'wikibase-comment-sitelink-change' => 'Link de idioma alterado de  $1 para $2',
-	'wikibase-comment-sitelink-remove' => 'Link de idioma removido: $1',
-	'wikibase-editlinks' => 'Editar links',
-	'wikibase-editlinkstitle' => 'Editar links interlínguas',
+	'wikibase-comment-sitelink-add' => 'Ligação de idioma adicionada: $1',
+	'wikibase-comment-sitelink-change' => 'Ligação de idioma alterada de $1 para $2',
+	'wikibase-comment-sitelink-remove' => 'Ligação de idioma removida: $1',
+	'wikibase-editlinks' => 'Editar ligações',
+	'wikibase-editlinkstitle' => 'Editar ligações interlínguas',
+	'wikibase-linkitem-addlinks' => 'Adicionar ligações',
+	'wikibase-linkitem-close' => 'Fechar caixa de diálogo e recarregar a página',
+	'wikibase-linkitem-failure' => 'Ocorreu um erro desconhecido enquanto tentava ligar a determinada página.',
+	'wikibase-linkitem-title' => 'Ligação com página',
+	'wikibase-linkitem-linkpage' => 'Ligação com página',
+	'wikibase-linkitem-input-site' => 'Idioma:',
+	'wikibase-linkitem-input-page' => 'Página:',
+	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
+	'wikibase-linkitem-not-loggedin-title' => 'Necessita de estar autenticado',
+	'wikibase-property-notfound' => 'Propriedade não encontrada: $1',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições no Wikidata nas mudanças recentes',
 	'wikibase-rc-wikibase-edit-title' => 'Edição de Wikidata',
+	'wikibase-watchlist-show-changes-pref' => 'Mostras as edições no Wikidata na sua lista de vigiados',
+	'special-unconnectedpages' => 'Páginas não ligadas a itens',
+	'wikibase-unconnectedpages-submit' => 'Ir',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" não é um código de idioma válido.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Apenas páginas com ligações interlínguas',
+	'wikibase-pageinfo-entity-id-none' => 'Nenhuma',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -3558,6 +3578,24 @@ $messages['scn'] = array(
 	'wikibase-pageinfo-entity-id' => 'ID elimentu Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Nuddu',
 	'wikibase-property-render-error' => 'Sfallìu a rènniri la prupritati $1: $2',
+);
+
+/** Samogitian (žemaitėška)
+ * @author Hugo.arg
+ */
+$messages['sgs'] = array(
+	'wikibase-dataitem' => 'Doumenū īrašos',
+	'wikibase-editlinks' => 'Keistė nūruodas',
+	'wikibase-editlinkstitle' => 'Keistė terpkalbėnes nūruodas',
+	'wikibase-linkitem-close' => 'Ožvertė ton longa ė poslapi perkrautė',
+	'wikibase-linkitem-title' => 'Sojongtė so poslapio',
+	'wikibase-linkitem-linkpage' => 'Sojongtė so poslapio',
+	'wikibase-linkitem-selectlink' => 'Pasėrinkat prašuom svetaine ė poslapi, so katrās nuorat šion poslapi sojongtė.',
+	'wikibase-linkitem-confirmitem-text' => 'Tamstas pasėrinkts poslapis sojongts so [$1 īrašo mūsa centrėnėm doumenū skladė] jau īr. Ožtvėrtėnkat, prašuom, ku {{PLURAL:$2|poslapis|poslapio|poslapē}}, katrėi išruodītė apačiuo, īr čīstā {{PLURAL:$2|šėts|šėto|šėtėi}}, so katrās ton poslapi sojongtė nuorat.',
+	'wikibase-linkitem-confirmitem-button' => 'Patvirtėnt',
+	'wikibase-linkitem-success-link' => 'Poslapē bova poikē sojongtė. Tamsta galat rastō īraša, katram sudietas nūoruodas mūsa [$1 centrėnė doumenū skladuo].',
+	'wikibase-rc-wikibase-edit-title' => 'Vikidatas elemėnta pakeitėms',
+	'wikibase-pageinfo-entity-id-none' => 'Nie',
 );
 
 /** Sinhala (සිංහල)
