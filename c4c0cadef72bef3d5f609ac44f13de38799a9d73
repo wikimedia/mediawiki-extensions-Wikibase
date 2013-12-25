@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_0cab7b87",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-25T13:02:21Z",
+      "side": 1,
+      "message": "could",
+      "revId": "c4c0cadef72bef3d5f609ac44f13de38799a9d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_ccb473e7",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-12-25T13:02:21Z",
+      "side": 1,
+      "message": "might be nicer to call getTimestamp() once and then use local variable here and below in $this-\u003eoutputData\n\nthe way you do is fine also and not worth a -1 imho :)",
+      "revId": "c4c0cadef72bef3d5f609ac44f13de38799a9d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
