@@ -16,6 +16,24 @@
       "revId": "7ef790cc3ce56a0bc413ed307c8d0a9e92175f5e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_d1a09040",
+        "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-25T00:50:42Z",
+      "side": 1,
+      "message": "It works this way as instanceof has a higher precedence... I will change it though, if you like it better (I\u0027m not a fan of superfluous brackets, but if it makes code more obvious...)",
+      "parentUuid": "eeebdf60_066a3c12",
+      "revId": "7ef790cc3ce56a0bc413ed307c8d0a9e92175f5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
