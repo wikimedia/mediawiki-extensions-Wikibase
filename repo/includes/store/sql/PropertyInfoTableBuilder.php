@@ -257,6 +257,7 @@ class PropertyInfoTableBuilder {
 	 * provide to the constructor.
 	 *
 	 * @see Wikibase\PropertyInfoUpdate
+	 * @throws \RuntimeException
 	 *
 	 * @since 0.4
 	 *
@@ -266,7 +267,11 @@ class PropertyInfoTableBuilder {
 	protected function updatePropertyInfo( DatabaseBase $dbw, PropertyId $id ) {
 		$property = $this->entityLookup->getEntity( $id );
 
-		assert( $property instanceof Property );
+		if( !$property instanceof Property ) {
+			throw new \RuntimeException(
+				"EntityLookup didn't return a Property for id " . $id->getPrefixedId()
+			);
+		}
 
 		$update = new PropertyInfoUpdate( $property, $this->table );
 		$update->doUpdate();
