@@ -59,7 +59,7 @@ class SnakSerializer implements Serializer {
 	}
 
 	private function getSerialized( Snak $snak ) {
-		$serialization = array (
+		$serialization = array(
 			'snaktype' => $snak->getType(),
 			'property' => $snak->getPropertyId()->getPrefixedId()
 		);
