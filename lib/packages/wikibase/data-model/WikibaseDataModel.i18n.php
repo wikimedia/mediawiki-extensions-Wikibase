@@ -189,6 +189,13 @@ $messages['pl'] = array(
 	'wikibasedatamodel-desc' => 'Komponent definiujący model danych Wikibase',
 );
 
+/** Romanian (română)
+ * @author Minisarm
+ */
+$messages['ro'] = array(
+	'wikibasedatamodel-desc' => 'Componentă care definește modelul de date al Wikibase',
+);
+
 /** tarandíne (tarandíne)
  * @author Joetaras
  */
