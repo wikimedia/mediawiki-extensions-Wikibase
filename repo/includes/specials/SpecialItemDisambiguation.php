@@ -127,7 +127,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				'form',
 				array(
 					'method' => 'get',
-					'action' => $this->getTitle()->getFullUrl(),
+					'action' => $this->getPageTitle()->getFullUrl(),
 					'name' => 'itemdisambiguation',
 					'id' => 'wb-itemdisambiguation-form1'
 				)

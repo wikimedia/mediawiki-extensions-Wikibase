@@ -113,7 +113,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				'form',
 				array(
 					'method' => 'get',
-					'action' => $this->getTitle()->getFullUrl(),
+					'action' => $this->getPageTitle()->getFullUrl(),
 					'name' => 'itembytitle',
 					'id' => 'wb-itembytitle-form1'
 				)

@@ -56,7 +56,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
-			$this->getTitle()->getCanonicalURL() . '/',
+			$this->getPageTitle()->getCanonicalURL() . '/',
 			\Wikibase\StoreFactory::getStore()->getEntityLookup()
 		);
 
@@ -78,7 +78,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		}
 
 		$uriManager = new EntityDataUriManager(
-			$this->getTitle(),
+			$this->getPageTitle(),
 			$supportedExtensions,
 			$entityContentFactory
 		);
