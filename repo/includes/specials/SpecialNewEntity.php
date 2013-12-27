@@ -250,7 +250,7 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 					'form',
 					array(
 						'method' => 'post',
-						'action' => $this->getTitle()->getFullUrl(),
+						'action' => $this->getPageTitle()->getFullUrl(),
 						'name' => 'newentity',
 						'id' => 'mw-newentity-form1',
 						'class' => 'wb-form'

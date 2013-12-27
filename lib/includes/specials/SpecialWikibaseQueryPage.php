@@ -191,7 +191,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @return Title
 	 */
 	protected function getTitleForNavigation() {
-		return $this->getTitle();
+		return $this->getPageTitle();
 	}
 
 }

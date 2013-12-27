@@ -212,7 +212,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 				'form',
 				array(
 					'method' => 'post',
-					'action' => $this->getTitle()->getFullUrl(),
+					'action' => $this->getPageTitle()->getFullUrl(),
 					'name' => strtolower( $this->getName() ),
 					'id' => 'wb-' . strtolower( $this->getName() ) . '-form1',
 					'class' => 'wb-form'

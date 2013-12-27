@@ -140,14 +140,14 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			Html::openElement(
 				'form',
 				array(
-					'action' => $this->getTitle()->getLocalURL(),
+					'action' => $this->getPageTitle()->getLocalURL(),
 					'name' => 'entitieswithoutpage',
 					'id' => 'wb-entitieswithoutpage-form'
 				)
 			) .
 			Html::input (
 				'title',
-				$this->getTitle()->getPrefixedText(),
+				$this->getPageTitle()->getPrefixedText(),
 				'hidden',
 				array()
 			) .
@@ -213,7 +213,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	protected function getTitleForNavigation() {
-		return $this->getTitle( $this->language . '/' . $this->type );
+		return $this->getPageTitle( $this->language . '/' . $this->type );
 	}
 
 	/**

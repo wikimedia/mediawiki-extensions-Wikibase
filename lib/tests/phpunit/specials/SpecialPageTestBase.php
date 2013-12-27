@@ -75,7 +75,7 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 		$page = $this->newSpecialPage();
 		$page->setContext( $context );
 
-		$out->setTitle( $page->getTitle() );
+		$out->setTitle( $page->getPageTitle() );
 
 		ob_start();
 

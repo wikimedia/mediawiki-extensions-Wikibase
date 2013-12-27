@@ -90,7 +90,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 		$out .= Html::openElement(
 			'form',
 			array(
-				'action' => $this->getTitle()->getLocalURL(),
+				'action' => $this->getPageTitle()->getLocalURL(),
 				'name' => 'unconnectedpages',
 				'id' => 'wbc-unconnectedpages-form'
 			)
@@ -275,7 +275,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	protected function getTitleForNavigation() {
-		return $this->getTitle( $this->startPage );
+		return $this->getPageTitle( $this->startPage );
 	}
 
 }
