@@ -388,6 +388,7 @@ $messages['arc'] = array(
  * @author Gitartha.bordoloi
  */
 $messages['as'] = array(
+	'wikibase-dataitem' => "ৱিকিডে'টা পৃষ্ঠা",
 	'wikibase-rc-wikibase-edit-title' => "ৱিকিডে'টা সম্পাদনা",
 );
 
@@ -3295,8 +3296,11 @@ $messages['ps'] = array(
  */
 $messages['pt'] = array(
 	'wikibase-client-desc' => 'Cliente para a extensão Wikibase',
+	'specialpages-group-wikibaseclient' => 'Cliente Wikidata',
+	'tooltip-t-wikibase' => 'Ligação para o item de repositório de dados conectado',
 	'wikibase-after-page-move' => 'Também pode [$1 actualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
 	'wikibase-after-page-move-queued' => 'O [$1 item do Wikidata] associado a esta página será atualizado automaticamente em breve.',
+	'wikibase-comment-add' => 'Um item foi criado no Wikidata.',
 	'wikibase-comment-remove' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
 	'wikibase-comment-linked' => 'Um item do Wikidata foi ligado a esta página.',
 	'wikibase-comment-unlink' => 'A ligação desta página foi retirada do item do Wikidata. As ligações para outros idiomas foram removidas.',
@@ -3305,26 +3309,33 @@ $messages['pt'] = array(
 	'wikibase-comment-sitelink-add' => 'Ligação de idioma adicionada: $1',
 	'wikibase-comment-sitelink-change' => 'Ligação de idioma alterada de $1 para $2',
 	'wikibase-comment-sitelink-remove' => 'Ligação de idioma removida: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|alteração|alterações}}',
+	'wikibase-dataitem' => 'Dados de item',
 	'wikibase-editlinks' => 'Editar ligações',
 	'wikibase-editlinkstitle' => 'Editar ligações interlínguas',
 	'wikibase-linkitem-addlinks' => 'Adicionar ligações',
+	'wikibase-linkitem-alreadylinked' => 'A página que pretende ligar já está vinculado a um  [$1 item] no repositório central de dados, cujo liga $2 neste sítio. Os itens só podem possuir uma página por cada sítio anexado. Por favor, escolha uma página diferente para vincular.',
 	'wikibase-linkitem-close' => 'Fechar caixa de diálogo e recarregar a página',
 	'wikibase-linkitem-failure' => 'Ocorreu um erro desconhecido enquanto tentava ligar a determinada página.',
 	'wikibase-linkitem-title' => 'Ligação com página',
 	'wikibase-linkitem-linkpage' => 'Ligação com página',
+	'wikibase-linkitem-selectlink' => 'Por favor, seleccione um sítio e página que deseje ligar com esta página.',
 	'wikibase-linkitem-input-site' => 'Idioma:',
 	'wikibase-linkitem-input-page' => 'Página:',
 	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
 	'wikibase-linkitem-not-loggedin-title' => 'Necessita de estar autenticado',
 	'wikibase-property-notfound' => 'Propriedade não encontrada: $1',
+	'wikibase-property-notsupportedyet' => 'A Wikibase não suporta o tipo de propriedade para $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições no Wikidata nas mudanças recentes',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Edição de Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Mostras as edições no Wikidata na sua lista de vigiados',
 	'special-unconnectedpages' => 'Páginas não ligadas a itens',
 	'wikibase-unconnectedpages-submit' => 'Ir',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" não é um código de idioma válido.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Apenas páginas com ligações interlínguas',
+	'wikibase-pageinfo-entity-id' => 'ID de item do Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Nenhuma',
 );
 

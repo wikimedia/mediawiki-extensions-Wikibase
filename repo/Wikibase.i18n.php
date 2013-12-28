@@ -1546,6 +1546,13 @@ $messages['arc'] = array(
 	'wikibase-modifyterm-language' => 'ܠܫܢܐ:',
 );
 
+/** Assamese (অসমীয়া)
+ * @author Gitartha.bordoloi
+ */
+$messages['as'] = array(
+	'wikibase-itemdisambiguation-submit' => 'সন্ধান কৰক',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -18181,7 +18188,7 @@ $messages['zh-hant'] = array(
 	'wikibase-setdescription-warning-remove' => '您真的要移除[[$1]]的描述嗎？',
 	'special-setaliases' => '設置別名',
 	'wikibase-setaliases-introfull' => '您正在以$2為[[$1]]設置別名。各別名之間以<code>|</code>字符分隔。',
-	'wikibase-setaliases-intro' => '此表格允許你設置一個實體的別名。你必須提供實體的ID（例如Q23）、一個語言代碼（例如en）以及別名。各別名之間以<code>|</code>分隔。', # Fuzzy
+	'wikibase-setaliases-intro' => "此表格允許您設置一個實體的別名。你需要提供實體ID（如Q23）、一個語言代碼（例如''zh''）以及別名。各別名之間以管道字元（<code>|</code>）分隔。",
 	'wikibase-setaliases-label' => '別名：',
 	'wikibase-setaliases-submit' => '設置別名',
 	'wikibase-setaliases-warning-remove' => '您真的要移除[[$1]]所有的別名嗎？',
@@ -18223,6 +18230,8 @@ $messages['zh-hant'] = array(
 	'wikibase-listdatatypes-intro' => '此列表為目前安裝中使用的所有數據類型：',
 	'wikibase-history-title-with-label' => '「$2」($1)的歷史記錄',
 	'wikibase-history-title-without-label' => '($1)的歷史記錄',
+	'special-entitieswithoutdescription' => '無說明實體',
+	'wikibase-entitieswithoutdescription-legend' => '獲取無說明實體列表',
 	'special-entitieswithoutlabel' => '沒有標籤的實體',
 	'wikibase-entitieswithoutlabel-legend' => '獲取沒有標籤的實體的列表',
 	'wikibase-entitieswithoutlabel-label-language' => '語言：',
