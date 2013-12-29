@@ -168,7 +168,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				)->parse()
 			)
 			. Html::input( 'language', $this->language, 'hidden' )
-			. Html::input( 'id', $this->entityContent->getTitle()->getText(), 'hidden' )
+			. Html::input( 'id', $this->entityContent->getEntity()->getId()->getSerialization(), 'hidden' )
 			. Html::input( 'remove', 'remove', 'hidden' )
 			. $valueinput;
 		}

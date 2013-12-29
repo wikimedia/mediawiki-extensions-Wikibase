@@ -189,7 +189,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				)->parse()
 			)
 			. Html::input( 'site', $this->site, 'hidden' )
-			. Html::input( 'id', $this->entityContent->getTitle()->getText(), 'hidden' )
+			. Html::input( 'id', $this->getEntity()->getId()->getSerialization(), 'hidden' )
 			. Html::input( 'remove', 'remove', 'hidden' )
 			. $pageinput;
 		}
