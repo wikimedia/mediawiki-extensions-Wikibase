@@ -261,7 +261,9 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 * @return string
 	 */
 	protected function getFormElements() {
-		$id = $this->entityContent ? $this->entityContent->getTitle()->getText() : '';
+		$id = $this->entityContent ?
+			$this->entityContent->getEntity()->getId()->getSerialization() : '';
+
 		return Html::element(
 			'label',
 			array(
@@ -272,7 +274,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		)
 		. Html::input(
 			'id',
-			$this->getRequest()->getVal( 'id' ),
+			$id,
 			'text',
 			array(
 				'class' => 'wb-input',
