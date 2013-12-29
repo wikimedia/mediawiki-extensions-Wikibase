@@ -272,7 +272,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		)
 		. Html::input(
 			'id',
-			$this->getRequest()->getVal( 'id' ),
+			$id,
 			'text',
 			array(
 				'class' => 'wb-input',
