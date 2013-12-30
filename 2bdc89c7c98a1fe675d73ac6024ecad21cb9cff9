@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_948543a2",
+        "filename": "repo/includes/store/sql/DatabaseRowEntityIdIterator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-30T08:02:14Z",
+      "side": 1,
+      "message": "can also be an array (per below changes)",
+      "revId": "2bdc89c7c98a1fe675d73ac6024ecad21cb9cff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_7482bf98",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-30T08:02:14Z",
+      "side": 1,
+      "message": "Doc ($rebuildAll and $batchSize)",
+      "revId": "2bdc89c7c98a1fe675d73ac6024ecad21cb9cff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_544fbb97",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-30T08:02:14Z",
+      "side": 1,
+      "message": "doc for $pageRwo",
+      "revId": "2bdc89c7c98a1fe675d73ac6024ecad21cb9cff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_3454372a",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilderPagesFinder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-30T08:02:14Z",
+      "side": 1,
+      "message": "A slave DB is enough, while $dbw suggest we need a master (doesn\u0027t matter that a master is more sane in the executing context, it is not *needed*)",
+      "revId": "2bdc89c7c98a1fe675d73ac6024ecad21cb9cff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_f44daf9c",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderPagesFinderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-30T08:02:14Z",
+      "side": 1,
+      "message": "assertContains ?!",
+      "revId": "2bdc89c7c98a1fe675d73ac6024ecad21cb9cff9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
