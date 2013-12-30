@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_b45f2744",
+        "filename": "repo/tests/phpunit/includes/TestItemHelper.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-12-30T08:04:46Z",
+      "side": 1,
+      "message": "This doesn\u0027t really work if you want more than one item...",
+      "revId": "3dd5c96e2198ab14d260b2d0670b9f36e10dade0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
