@@ -265,23 +265,13 @@ HTML;
 	$templates['wb-term'] =
 <<<HTML
 <tr class="wb-terms-label wb-terms-$1 $2">
-	<td class="wb-terms-language wb-terms-language-$1" rowspan="2">
-		<a href="$10">$3</a> <!-- language name -->
-	</td>
-	<td class="wb-terms-label wb-terms-label-$1 wb-value wb-value-lang-$1 $8">
-		$4 <!-- label -->
-	</td>
-	<td class="wb-editsection">
-		$6 <!-- label toolbar -->
-	</td>
+	<td class="wb-terms-language wb-terms-language-$1" rowspan="2"><a href="$10">$3</a><!-- language name --></td>
+	<td class="wb-terms-label wb-terms-label-$1 wb-value wb-value-lang-$1 $8">$4<!-- label --></td>
+	<td class="wb-editsection">$6<!-- label toolbar --></td>
 </tr>
 <tr class="wb-terms-description wb-terms-$1 $2">
-	<td class="wb-terms-description wb-terms-description-$1 wb-value wb-value-lang-$1 $9">
-		$5 <!-- description -->
-	</td>
-	<td class="wb-editsection">
-		$7 <!-- description toolbar -->
-	</td>
+	<td class="wb-terms-description wb-terms-description-$1 wb-value wb-value-lang-$1 $9">$5<!-- description --></td>
+	<td class="wb-editsection">$7<!-- description toolbar --></td>
 </tr>
 HTML;
 
@@ -329,9 +319,7 @@ HTML;
 <tr class="wb-sitelinks-$8 $2">
 	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$8" lang="$1" dir="auto">$3</td>
 	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$8">$4</td>
-	<td class="wb-sitelinks-link wb-sitelinks-link-$8" lang="$1">
-		<a href="$5" hreflang="$1" dir="auto">$6</a>
-	</td>
+	<td class="wb-sitelinks-link wb-sitelinks-link-$8" lang="$1"><a href="$5" hreflang="$1" dir="auto">$6</a></td>
 	$7
 </tr>
 HTML;
