@@ -2520,6 +2520,14 @@ $messages['la'] = array(
 	'wikibase-rc-wikibase-edit-title' => 'Recensio apud Wikidata',
 );
 
+/** Ladino (Ladino)
+ * @author Menachem.Moreira
+ */
+$messages['lad'] = array(
+	'wikibase-linkitem-input-site' => 'Lengua:',
+	'wikibase-linkitem-input-page' => 'Pajina:',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Les Meloures
  * @author Robby
@@ -3171,10 +3179,10 @@ $messages['pl'] = array(
 	'wikibase-after-page-move-queued' => 'Powiązany z tą stroną [$1 element Wikidanych] zostanie wkrótce automatycznie zaktualizowany.',
 	'wikibase-comment-add' => 'Utworzono element Wikidanych.',
 	'wikibase-comment-remove' => 'Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.',
-	'wikibase-comment-linked' => 'Element Wikidanych został powiązany z tą stroną.',
+	'wikibase-comment-linked' => 'Z tą stroną powiązano element Wikidanych',
 	'wikibase-comment-unlink' => 'Zostało zerwane powiązanie elementu Wikidanych z tą stroną. Linki do innych wersji językowych usunięte.',
 	'wikibase-comment-restore' => 'Powiązany element Wikidanych odtworzony. Linki do innych wersji językowych przywrócone.',
-	'wikibase-comment-update' => 'Element Wikidanych zmieniony',
+	'wikibase-comment-update' => 'Zmieniono element Wikidanych',
 	'wikibase-comment-sitelink-add' => 'Dodano link interwiki: $1',
 	'wikibase-comment-sitelink-change' => 'Zmieniono link interwiki z $1 na $2',
 	'wikibase-comment-sitelink-remove' => 'Usunięto link interwiki: $1',
@@ -3623,9 +3631,11 @@ $messages['scn'] = array(
  * @author Hugo.arg
  */
 $messages['sgs'] = array(
+	'wikibase-after-page-move-queued' => '[$1 Vikidatas īrašos], sojongts so ton poslapio, tūjaus bus atnaujints autuomatėškā.',
 	'wikibase-dataitem' => 'Doumenū īrašos',
 	'wikibase-editlinks' => 'Keistė nūruodas',
 	'wikibase-editlinkstitle' => 'Keistė terpkalbėnes nūruodas',
+	'wikibase-linkitem-addlinks' => 'Pridietė nūruodas',
 	'wikibase-linkitem-close' => 'Ožvertė ton longa ė poslapi perkrautė',
 	'wikibase-linkitem-title' => 'Sojongtė so poslapio',
 	'wikibase-linkitem-linkpage' => 'Sojongtė so poslapio',

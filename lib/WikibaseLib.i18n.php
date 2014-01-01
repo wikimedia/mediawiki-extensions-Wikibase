@@ -2184,6 +2184,13 @@ $messages['ky'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 );
 
+/** Ladino (Ladino)
+ * @author Menachem.Moreira
+ */
+$messages['lad'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Lengua',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  * @author Soued031
@@ -2534,6 +2541,9 @@ $messages['nb'] = array(
 	'wikibase-deletedentity-query' => 'Slettet spørring',
 	'wikibase-diffview-reference' => 'referanse',
 	'wikibase-diffview-rank' => 'rang',
+	'wikibase-diffview-rank-preferred' => 'Foretrukket rang',
+	'wikibase-diffview-rank-normal' => 'Normal rang',
+	'wikibase-diffview-rank-deprecated' => 'Foreldet rang',
 	'wikibase-diffview-qualifier' => 'kvalifikator',
 	'wikibase-diffview-label' => 'etikett',
 	'wikibase-diffview-alias' => 'kallenavn',
@@ -2555,6 +2565,10 @@ $messages['nb'] = array(
 	'wikibase-error-ui-link-exists' => 'Du kan ikke lenke til denne siden fordi et annet element lenker allerede til den.',
 	'wikibase-error-ui-session-failure' => 'Din arbeidsøkt er avsluttet, logg inn på nytt om du vil fortsette.',
 	'wikibase-error-ui-edit-conflict' => 'Det er påvist en redigeringskonflikt. Kopier dine endringer, last siden på nytt, endre og lagre på nytt.',
+	'wikibase-quantitydetails-amount' => 'Mengde',
+	'wikibase-quantitydetails-upperbound' => 'Øvre grense',
+	'wikibase-quantitydetails-lowerbound' => 'Nedre grense',
+	'wikibase-quantitydetails-unit' => 'Enhet',
 	'wikibase-replicationnote' => 'Vær oppmerksom på at det kan ta flere minutter før endringene er synlig på alle wikier',
 	'wikibase-sitelinks-wikipedia' => 'Wikipediasider lenket til dette elementet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
@@ -2579,6 +2593,7 @@ $messages['nb'] = array(
 	'wikibase-validator-bad-url-scheme' => 'Ustøttet URL-skjema: $1',
 	'wikibase-validator-bad-http-url' => 'Feilformatert HTTP-URL: $1',
 	'wikibase-validator-bad-mailto-url' => 'Ugyldig mailto-URL: $1',
+	'wikibase-validator-unknown-unit' => 'Ukjent enhet: $1',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Commons mediafil',
 	'version-wikibase' => 'Wikibase',
