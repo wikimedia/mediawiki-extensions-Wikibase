@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Specials;
 
 use Html;
 use SpecialPage;
+use Wikibase\CopyrightMessage;
+use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
 
@@ -98,11 +100,16 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	 * @since 0.4
 	 */
 	public function showCopyrightMessage() {
+		$copyrightMessage = new CopyrightMessage( $this->getContext()->getLanguage() );
+
+		$rightsUrl = Settings::get( 'datalicenseurl' );
+		$rightsText = Settings::get( 'datalicensetext' );
+
 		$this->getOutput()->addHTML(
 			Html::rawElement(
 				'div',
 				array(),
-				Utils::getCopyrightMessage()->parse()
+				$copyrightMessage->getMessage( $rightsUrl, $rightsText )
 			)
 		);
 	}
