@@ -54,12 +54,25 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected $badges;
 
 	/**
-	 * Constructor
-	 *
+	 * @var string
+	 */
+	protected $rightsUrl;
+
+	/**
+	 * @var string
+	 */
+	protected $rightsText;
+
+	/**
 	 * @since 0.4
 	 */
 	public function __construct() {
 		parent::__construct( 'SetSiteLink' );
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+
+		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
+		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 	}
 
 	/**
@@ -136,9 +149,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		// paste message directly into the HTML output in this method.
 
 		$request = $this->getRequest();
+
 		// has to be checked before modifying but is no error
 		if ( $this->entityContent === null || !$this->isValidSiteId( $this->site ) || !$request->wasPosted() ) {
-			$this->showCopyrightMessage();
+			$this->addCopyrightText();
 
 			return false;
 		}
@@ -168,6 +182,18 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		return $summary;
+	}
+
+	protected function addCopyrightText() {
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$this->rightsUrl,
+			$this->rightsText
+		);
+
+		$html = $copyrightView->getHtml( $this->getLanguage() );
+
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
@@ -211,7 +237,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		// Experimental setting of badges on the special page
 		// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
 		// @todo when removing from experimental update i18n wikibase-setsitelink-intro
-		//       @see https://gerrit.wikimedia.org/r/#/c/94939/13/repo/Wikibase.i18n.php
+		//	   @see https://gerrit.wikimedia.org/r/#/c/94939/13/repo/Wikibase.i18n.php
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$pageinput .= Html::element( 'br' )
 			. Html::element(

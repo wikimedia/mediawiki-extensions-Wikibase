@@ -80,6 +80,14 @@ return call_user_func( function() {
 			// hardcoded internal handling
 			'html',
 		),
+
+		'dataLicenseUrl' => function() {
+			return $GLOBALS['wgRightsUrl'];
+		},
+
+		'dataLicenseText' => function() {
+			return $GLOBALS['wgRightsText'];
+		},
 	);
 
 	return $defaults;
