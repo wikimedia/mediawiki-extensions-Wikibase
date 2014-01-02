@@ -69,6 +69,16 @@ abstract class EntityView extends \ContextSource {
 	protected $injector;
 
 	/**
+	 * @var string
+	 */
+	protected $rightsUrl;
+
+	/**
+	 * @var string
+	 */
+	protected $rightsText;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -94,6 +104,8 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param string $rightsUrl
+	 * @param string $rightsText
 	 *
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
 	 *
@@ -106,7 +118,9 @@ abstract class EntityView extends \ContextSource {
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
-		LanguageFallbackChain $languageFallbackChain
+		LanguageFallbackChain $languageFallbackChain,
+		$rightsUrl = null,
+		$rightsText = null
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -124,6 +138,9 @@ abstract class EntityView extends \ContextSource {
 
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->injector = new TextInjector();
+
+		$this->rightsUrl = $rightsUrl !== null ? $rightsUrl : Settings::get( 'datalicenseurl' );
+		$this->rightsText = $rightsText !== null ? $rightsText : Settings::get( 'datalicensetext' );
 	}
 
 	/**
@@ -626,10 +643,15 @@ abstract class EntityView extends \ContextSource {
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
+		$copyrightMessage = new CopyrightMessage( $this->getLanguage() );
+
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyright', array(
-			'version' => Utils::getCopyrightMessageVersion(),
-			'messageHtml' => Utils::getCopyrightMessage()->parse(),
+			'version' => $copyrightMessage->getVersion(),
+			'messageHtml' => $copyrightMessage->getMessage(
+				$this->rightsUrl,
+				$this->rightsText
+			)
 		) );
 
 		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
