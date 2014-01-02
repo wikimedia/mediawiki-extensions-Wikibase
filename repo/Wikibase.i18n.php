@@ -91,7 +91,6 @@ $messages['en'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'unknown value',
 	'wikibase-snakview-snaktypeselector-novalue' => 'no value',
 	'wikibase-shortcopyrightwarning' => 'By clicking "$1", you agree to the [[$2|terms of use]], and you irrevocably agree to release your contribution under the $3.',
-	'wikibase-shortcopyrightwarning-version' => 'wikibase-1', # do not translate or duplicate this message to other languages
 	'wikibase-copyrighttooltip-acknowledge' => 'I accept these terms for my future edits. Do not show this message again.',
 
 	'wikibase-entityselector-more' => 'more',
