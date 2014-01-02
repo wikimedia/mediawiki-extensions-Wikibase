@@ -11,10 +11,11 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
+	global $wgExtensionAssetsPath;
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  'Wikibase/repo/resources',
+		'remoteExtPath' => str_replace( $wgExtensionAssetsPath, '', __DIR__ ),
 		'position' => 'top' // reducing the time between DOM construction and JS initialisation
 	);
 

@@ -15,10 +15,11 @@ use \Wikibase\LibRegistry;
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
+	global $wgExtensionAssetsPath;
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  'Wikibase/lib/resources',
+		'remoteExtPath' => str_replace( $wgExtensionAssetsPath, '', __DIR__ ),
 	);
 
 	$modules = array(

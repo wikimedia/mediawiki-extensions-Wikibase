@@ -59,9 +59,11 @@ final class LibHooks {
 	 * @return boolean
 	 */
 	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
+		global $wgExtensionAssetsPath;
+
 		$moduleBase = array(
 			'localBasePath' => __DIR__,
-			'remoteExtPath' => 'Wikibase/lib',
+			'remoteExtPath' => str_replace( $wgExtensionAssetsPath, '', __DIR__ ),
 		);
 
 		// TODO: Split into test modules per QUnit module.

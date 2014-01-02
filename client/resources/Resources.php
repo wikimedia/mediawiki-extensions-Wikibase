@@ -1,10 +1,11 @@
 <?php
 
 return call_user_func( function() {
+	global $wgExtensionAssetsPath;
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => 'Wikibase/client/resources'
+		'remoteExtPath' => str_replace( $wgExtensionAssetsPath, '', __DIR__ )
 	);
 
 	return array(
