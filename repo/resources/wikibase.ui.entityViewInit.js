@@ -278,7 +278,9 @@
 
 				// destroy tooltip after edit mode gets closed again:
 				$( wb ).one( 'stopItemPageEditMode', function( event ) {
-					$messageAnchor.data( 'wbtooltip' ).degrade( true );
+					if( $messageAnchor.data( 'wbtooltip' ) !== undefined ) {
+						$messageAnchor.data( 'wbtooltip' ).degrade( true );
+					}
 				} );
 			}
 		} );

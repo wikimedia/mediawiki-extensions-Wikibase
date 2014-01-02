@@ -14,6 +14,7 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -69,6 +70,16 @@ abstract class EntityView extends \ContextSource {
 	protected $injector;
 
 	/**
+	 * @var string
+	 */
+	protected $rightsUrl;
+
+	/**
+	 * @var string
+	 */
+	protected $rightsText;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -94,6 +105,8 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param string $rightsUrl
+	 * @param string $rightsText
 	 *
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
 	 *
@@ -106,7 +119,9 @@ abstract class EntityView extends \ContextSource {
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
-		LanguageFallbackChain $languageFallbackChain
+		LanguageFallbackChain $languageFallbackChain,
+		$rightsUrl = null,
+		$rightsText = null
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -124,6 +139,10 @@ abstract class EntityView extends \ContextSource {
 
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->injector = new TextInjector();
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$this->rightsUrl = $rightsUrl !== null ? $rightsUrl : $settings->get( 'dataRightsUrl' );
+		$this->rightsText = $rightsText !== null ? $rightsText : $settings->get( 'dataRightsText' );
 	}
 
 	/**
@@ -637,10 +656,17 @@ abstract class EntityView extends \ContextSource {
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
+		$copyrightMessageBuilder = new CopyrightMessageBuilder();
+		$copyrightMessage = $copyrightMessageBuilder->build(
+			$this->rightsUrl,
+			$this->rightsText,
+			$this->getLanguage()
+		);
+
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyright', array(
-			'version' => Utils::getCopyrightMessageVersion(),
-			'messageHtml' => Utils::getCopyrightMessage()->parse(),
+			'version' => $this->getContext()->msg( 'wikibase-shortcopyrightwarning-version' )->parse(),
+			'messageHtml' => $copyrightMessage->inLanguage( $this->getLanguage() )->parse()
 		) );
 
 		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
