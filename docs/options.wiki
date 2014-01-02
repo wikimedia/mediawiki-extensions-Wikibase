@@ -40,13 +40,15 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
               'commonsMedia',
           )
 </poem>
-;changesAsJson: Use JSON to represent changes in the database. This is true per default, and there is no reason to set it to false, except for compatibility with very old clinet side code.
+;changesAsJson: Use JSON to represent changes in the database. This is true per default, and there is no reason to set it to false, except for compatibility with very old client side code.
 
 == Repository Settings ==
 
 === Basic Settings ===
 
 ;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
+;dataRightsUrl: Url to link to license for data contents. Defaults to $wgRightsUrl setting.
+;dataRightsText: Text for data license link. Defaults to $wgRightsText setting.
 
 === Expert Settings ===
 ;apiInDebug: Put Wikibase API into debug mode. Boolean, default is false. '''Deprecated'''.

@@ -291,35 +291,4 @@ final class Utils {
 		return $pidfile;
 	}
 
-	/**
-	 * Returns an appropriate copyright message containing a link to the wiki's copyright policy.
-	 *
-	 * @since 0.4
-	 *
-	 * @return \Message
-	 */
-	public static function getCopyrightMessage() {
-		global $wgRightsUrl, $wgRightsText;
-
-		$rightsWarningMessage = wfMessage( 'wikibase-shortcopyrightwarning',
-			wfMessage( 'wikibase-save' )->inContentLanguage()->text(),
-			wfMessage( 'copyrightpage' )->inContentLanguage()->text(),
-			"[$wgRightsUrl $wgRightsText]"
-		);
-
-		return $rightsWarningMessage;
-	}
-
-	/**
-	 * Returns a string indicating which version of the copyright message is being used when
-	 * calling getCopyrightMessage.
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public static function getCopyrightMessageVersion() {
-		return wfMessage( 'wikibase-shortcopyrightwarning-version' )->text();
-	}
-
 }

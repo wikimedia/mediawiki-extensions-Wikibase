@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Specials;
 use Html;
 use SpecialPage;
 use Wikibase\StringNormalizer;
-use Wikibase\Utils;
 
 /**
  * Base for special pages of the Wikibase extension,
@@ -90,21 +89,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Adds the "copyright info message" to the HTML output.
-	 *
-	 * @since 0.4
-	 */
-	public function showCopyrightMessage() {
-		$this->getOutput()->addHTML(
-			Html::rawElement(
-				'div',
-				array(),
-				Utils::getCopyrightMessage()->parse()
-			)
-		);
 	}
 
 }
