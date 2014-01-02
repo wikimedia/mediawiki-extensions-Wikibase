@@ -11,10 +11,9 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  'Wikibase/repo/resources',
+		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
 		'position' => 'top' // reducing the time between DOM construction and JS initialisation
 	);
 

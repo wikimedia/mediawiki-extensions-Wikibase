@@ -61,7 +61,7 @@ final class LibHooks {
 	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
 		$moduleBase = array(
 			'localBasePath' => __DIR__,
-			'remoteExtPath' => 'Wikibase/lib',
+			'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
 		);
 
 		// TODO: Split into test modules per QUnit module.

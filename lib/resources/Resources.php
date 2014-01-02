@@ -15,10 +15,9 @@ use \Wikibase\LibRegistry;
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  'Wikibase/lib/resources',
+		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
 	);
 
 	$modules = array(
