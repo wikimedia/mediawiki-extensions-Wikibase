@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_56a8cd1c",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-02T23:15:23Z",
+      "side": 1,
+      "message": "Not that this line of code was touched in this patch, but I would prefer to get the id from the entity instead of assume $id \u003d\u003d\u003d $title.\n\nIn the future, it might not be the case (e.g. when used to handle commons metadata) that $title \u003d\u003d\u003d $id.\n\n$this-\u003eentityContent-\u003egetEntity()-\u003egetId()-\u003egetSerialization()\n\n(that could be split up into more lines of code for readability, etc)",
+      "revId": "00ec053bcf7f85e02f5f3888905164b1eacc745c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
