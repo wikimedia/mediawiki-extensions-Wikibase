@@ -42,6 +42,15 @@ return call_user_func( function() {
 		// but only once the client can cope with the JSON form of the change.
 		'changesAsJson' => true,
 
+		// data license url
+		'dataLicenseUrl' => function() {
+			return $GLOBALS['wgRightsUrl'];
+		},
+
+		'dataLicenseText' => function() {
+			return $GLOBALS['wgRightsText'];
+		},
+
 		// list of logical database names of local client wikis.
 		// may contain mappings from site-id to db-name.
 		'localClientDatabases' => array(),

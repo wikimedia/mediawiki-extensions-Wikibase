@@ -292,34 +292,27 @@ final class Utils {
 	}
 
 	/**
-	 * Returns an appropriate copyright message containing a link to the wiki's copyright policy.
-	 *
 	 * @since 0.4
+	 * @deprecated since 0.5, use CopyrightMessage::getMessage()
 	 *
 	 * @return \Message
 	 */
 	public static function getCopyrightMessage() {
 		global $wgRightsUrl, $wgRightsText;
 
-		$rightsWarningMessage = wfMessage( 'wikibase-shortcopyrightwarning',
-			wfMessage( 'wikibase-save' )->inContentLanguage()->text(),
-			wfMessage( 'copyrightpage' )->inContentLanguage()->text(),
-			"[$wgRightsUrl $wgRightsText]"
-		);
-
-		return $rightsWarningMessage;
+		$copyrightMessage = new CopyrightMessage();
+		return $copyrightMessage->getMessage( $wgRightsUrl, $wgRightsText );
 	}
 
 	/**
-	 * Returns a string indicating which version of the copyright message is being used when
-	 * calling getCopyrightMessage.
-	 *
 	 * @since 0.4
+	 * @deprecated since 0.5, use CopyrightMessage::getVersion()
 	 *
 	 * @return string
 	 */
 	public static function getCopyrightMessageVersion() {
-		return wfMessage( 'wikibase-shortcopyrightwarning-version' )->text();
+		$copyrightMessage = new CopyrightMessage();
+		return $copyrightMessage->getVersion();
 	}
 
 }
