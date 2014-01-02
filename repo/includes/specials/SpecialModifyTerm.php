@@ -4,8 +4,10 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Language;
-use Wikibase\Summary;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\CopyrightMessageBuilder;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
@@ -36,8 +38,16 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	protected $value;
 
 	/**
-	 * Constructor.
-	 *
+	 * @var string
+	 */
+	protected $rightsUrl;
+
+	/**
+	 * @var string
+	 */
+	protected $rightsText;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
@@ -45,6 +55,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 */
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+
+		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
+		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 	}
 
 	/**
@@ -91,7 +106,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		// FIXME: This method is supposed to modify the entity and not alter the output. Do not
 		// paste message directly into the HTML output in this method.
 		if ( $this->entityContent === null || !$this->isValidLanguageCode( $this->language ) || !$request->wasPosted() ) {
-			$this->showCopyrightMessage();
+			$this->addCopyrightText();
 
 			return false;
 		}
@@ -116,6 +131,21 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 
 		return $summary;
+	}
+
+	/**
+	 * @todo could factor this out into a special page form builder and renderer
+	 */
+	protected function addCopyrightText() {
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$this->rightsUrl,
+			$this->rightsText
+		);
+
+		$html = $copyrightView->getHtml( $this->getLanguage() );
+
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
