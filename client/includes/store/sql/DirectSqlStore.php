@@ -8,7 +8,7 @@ use ObjectCache;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
- * database via MediaWiki's foreign wiki mechanism as implemented by LBFactory_multi.
+ * database via MediaWiki's foreign wiki mechanism as implemented by LBFactoryMulti.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
