@@ -20,6 +20,7 @@ return call_user_func( function() {
 		// includes
 		'Wikibase\ChangeNotifier' => 'includes/ChangeNotifier.php',
 		'Wikibase\ChangeNotificationJob' => 'includes/ChangeNotificationJob.php',
+		'Wikibase\CopyrightMessage' => 'includes/CopyrightMessage.php',
 		'Wikibase\UpdateRepoOnMoveJob' => 'includes/UpdateRepoOnMoveJob.php',
 		'Wikibase\ChangesTable' => 'includes/ChangesTable.php',
 		'Wikibase\DiffOpValueFormatter' => 'includes/DiffOpValueFormatter.php',
