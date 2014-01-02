@@ -40,7 +40,9 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
               'commonsMedia',
           )
 </poem>
-;changesAsJson: Use JSON to represent changes in the database. This is true per default, and there is no reason to set it to false, except for compatibility with very old clinet side code.
+;changesAsJson: Use JSON to represent changes in the database. This is true per default, and there is no reason to set it to false, except for compatibility with very old client side code.
+;dataLicenseUrl: Url to link to license for data contents. Defaults to $wgRightsUrl setting.
+;dataLicenseText: Text for data license link. Defaults to $wgRightsText setting.
 
 == Repository Settings ==
 
