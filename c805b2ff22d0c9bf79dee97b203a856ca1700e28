@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_b8ddc819",
+        "filename": "lib/includes/CopyrightMessage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-02T20:19:03Z",
+      "side": 1,
+      "message": "@param doc missing",
+      "revId": "c805b2ff22d0c9bf79dee97b203a856ca1700e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_983a0432",
+        "filename": "lib/tests/phpunit/CopyrightMessageTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-02T20:19:03Z",
+      "side": 1,
+      "message": "Yay for making assumptions on $wgNoFollowLinks (and related... yes MW sucks)",
+      "revId": "c805b2ff22d0c9bf79dee97b203a856ca1700e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
