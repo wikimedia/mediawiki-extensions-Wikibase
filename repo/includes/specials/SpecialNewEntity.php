@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Status;
 use UserBlockedError;
+use Wikibase\CopyrightMessageBuilder;
 use Wikibase\EditEntity;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
@@ -46,8 +47,16 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	protected $summaryFormatter;
 
 	/**
-	 * Constructor.
-	 *
+	 * @var string
+	 */
+	protected $rightsUrl;
+
+	/**
+	 * @var string
+	 */
+	protected $rightsText;
+
+	/**
 	 * @param $name String: name of the special page, as seen in links and URLs
 	 * @param $restriction String: user right required, 'createpage' per default.
 	 *
@@ -58,6 +67,11 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 
 		// TODO: find a way to inject this
 		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+
+		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
+		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 	}
 
 	/**
@@ -243,7 +257,7 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	 * @param string $additionalHtml initial value for the description input box
 	 */
 	public function createForm( $legend = null, $additionalHtml = '' ) {
-		$this->showCopyrightMessage();
+		$this->addCopyrightText();
 
 		$this->getOutput()->addHTML(
 				Html::openElement(
@@ -282,6 +296,21 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 				. Html::closeElement( 'fieldset' )
 				. Html::closeElement( 'form' )
 		);
+	}
+
+	/**
+	 * @todo could factor this out into a special page form builder and renderer
+	 */
+	protected function addCopyrightText() {
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$this->rightsUrl,
+			$this->rightsText
+		);
+
+		$html = $copyrightView->getHtml( $this->getLanguage() );
+
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**

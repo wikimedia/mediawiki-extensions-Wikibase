@@ -16,6 +16,7 @@ return call_user_func( function() {
 		// includes
 		'Wikibase\ClaimSummaryBuilder' => 'includes/ClaimSummaryBuilder.php',
 		'Wikibase\ContentRetriever' => 'includes/ContentRetriever.php',
+		'Wikibase\CopyrightMessageBuilder' => 'includes/CopyrightMessageBuilder.php',
 		'Wikibase\DataTypeSelector' => 'includes/DataTypeSelector.php',
 		'Wikibase\EditEntity' => 'includes/EditEntity.php',
 		'Wikibase\EntityContentDiffView' => 'includes/EntityContentDiffView.php',
@@ -120,6 +121,7 @@ return call_user_func( function() {
 		'Wikibase\RdfSerializer' => 'includes/rdf/RdfSerializer.php',
 
 		// includes/specials
+		'Wikibase\Repo\Specials\SpecialPageCopyrightView' => 'includes/specials/SpecialPageCopyrightView.php',
 		'Wikibase\Repo\Specials\SpecialNewEntity' => 'includes/specials/SpecialNewEntity.php',
 		'Wikibase\Repo\Specials\SpecialNewItem' => 'includes/specials/SpecialNewItem.php',
 		'Wikibase\Repo\Specials\SpecialNewProperty' => 'includes/specials/SpecialNewProperty.php',
