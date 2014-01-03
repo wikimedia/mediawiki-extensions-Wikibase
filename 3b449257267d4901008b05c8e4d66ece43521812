@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_8743bd66",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-03T15:31:21Z",
+      "side": 1,
+      "message": "The day people the Law of Demeter was to much to bother with :D",
+      "revId": "3b449257267d4901008b05c8e4d66ece43521812",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
