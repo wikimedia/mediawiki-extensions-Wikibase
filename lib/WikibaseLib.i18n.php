@@ -3153,8 +3153,8 @@ $messages['ru'] = array(
 	'wikibase-tooltip-error-details' => 'Подробности',
 	'wikibase-undeserializable-value' => 'Значение является недопустимым и не может быть отображено.',
 	'wikibase-validator-bad-type' => '$2 вместо $1',
-	'wikibase-validator-too-long' => 'Длина должна быть не более чем $1 {{PLURAL:$1|символ|символа|символов}}',
-	'wikibase-validator-too-short' => 'Длина должна быть не менее чем $1 {{PLURAL:$1|символ|символа|символов}}',
+	'wikibase-validator-too-long' => 'Длина должна быть не более чем $1 {{PLURAL:$1|символ|символов|символа}}', # Fuzzy
+	'wikibase-validator-too-short' => 'Длина должна быть не менее чем $1 {{PLURAL:$1|символ|символов|символа}}', # Fuzzy
 	'wikibase-validator-too-high' => 'Вне диапазона, должно быть не больше, чем $1',
 	'wikibase-validator-too-low' => 'Вне диапазона, должно быть не меньше, чем $1',
 	'wikibase-validator-malformed-value' => 'Неверно введены данные: $1',
@@ -3287,8 +3287,8 @@ $messages['sr-ec'] = array(
 	'wikibase-sitelinks-link-columnheading' => 'Повезани чланак',
 	'wikibase-tooltip-error-details' => 'Детаљи',
 	'wikibase-validator-bad-type' => '$2 уместо $1',
-	'wikibase-validator-too-long' => 'Не сме бити дуже од {{PLURAL:$1|једног знака|$1 знакова}}',
-	'wikibase-validator-too-short' => 'Мора бити најмање {{PLURAL:$1|један знак|$1 знакова}} дуго',
+	'wikibase-validator-too-long' => 'Не сме бити дуже од {{PLURAL:$1|1=једног знака|$1 знакова}}', # Fuzzy
+	'wikibase-validator-too-short' => 'Мора бити најмање {{PLURAL:$1|1=један знак|$1 знакова}} дуго', # Fuzzy
 	'wikibase-validator-malformed-value' => 'Неисправан унос: $1',
 	'wikibase-validator-bad-entity-id' => 'Неисправан идентификатор: $1',
 	'wikibase-validator-bad-entity-type' => 'Неочекивана врста ентитета $1',

@@ -524,7 +524,7 @@ $messages['be-tarask'] = array(
 	'wikibase-linkitem-selectlink' => 'Выберыце сайт і старонку, зь якімі вы хочаце злучыць гэтую старонку.',
 	'wikibase-linkitem-input-site' => 'Мова:',
 	'wikibase-linkitem-input-page' => 'Старонка:',
-	'wikibase-linkitem-confirmitem-text' => 'Старонка, якую вы выбралі, ужо далучаная да [$1 аб’екта ў цэнтральным рэпазыторыі]. Пацьвердзіце, калі ласка, што {{PLURAL:$2|паказаная ніжэй старонка ёсьць той, зь якой|паказаныя ніжэй старонкі ёсьць тымі, зь якімі}} вы хочаце злучыць гэтую старонку.',
+	'wikibase-linkitem-confirmitem-text' => 'Старонка, якую вы выбралі, ужо далучаная да [$1 аб’екта ў цэнтральным рэпазыторыі]. Пацьвердзіце, калі ласка, што {{PLURAL:$2|1=паказаная ніжэй старонка ёсьць той, зь якой|паказаныя ніжэй старонкі ёсьць тымі, зь якімі}} вы хочаце злучыць гэтую старонку.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Пацьвердзіць',
 	'wikibase-linkitem-not-loggedin-title' => 'Вы мусіце ўвайсьці ў сыстэму',
 	'wikibase-linkitem-not-loggedin' => 'Для карыстаньня гэтай функцыяй вы мусіце ўвайсьці ў гэтую вікі і [$1 цэнтральны рэпазыторый].',
@@ -774,7 +774,7 @@ $messages['ce'] = array(
 	'wikibase-comment-sitelink-add' => 'Юкъарвики-хьажораг тӀетоьхна: $1',
 	'wikibase-comment-sitelink-change' => 'Юкъарвики-хьажораг хийцина $1 оцу $2',
 	'wikibase-comment-sitelink-remove' => 'Юкъарвики-хьажораг дӀаяьккхина: $1',
-	'wikibase-comment-multi' => '$1 {{PLURAL:$1|хийцам|хийцамаш}}',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|1=хийцам|хийцамаш}}', # Fuzzy
 	'wikibase-dataitem' => 'Хаамашан элемент',
 	'wikibase-editlinks' => 'Хьажорагаш нисъяр',
 	'wikibase-editlinkstitle' => 'Меттанийн юкъара хьажорагаш нисъяр',
@@ -805,7 +805,7 @@ $messages['ce'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — меттан код нийса яц.',
 	'wikibase-unconnectedpages-page-warning' => 'И агӀона цӀе хӀокху дехарца лело йиш яц цундела тӀецалоцу.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Гуче яха вовшахтесна йолу агӀонаш',
-	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|хьажораг|хьажорагаш}} ю)',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|1=хьажораг|хьажорагаш}} ю)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'Викихаамаш чур элиментан ID',
 	'wikibase-pageinfo-entity-id-none' => 'ХӀумма цаоьшу',
 	'wikibase-property-render-error' => 'свойства «$1»: $2 гучуйоккхуш гӀалат ду',
@@ -2431,7 +2431,7 @@ $messages['krc'] = array(
 	'wikibase-comment-sitelink-add' => 'Интервики-джибериу къошулду: $1.',
 	'wikibase-comment-sitelink-change' => '$1 интервики-джибериу $2 бла ауушулду',
 	'wikibase-comment-sitelink-remove' => 'Интервики-джибериу кетерилди: $1.',
-	'wikibase-comment-multi' => '$1 {{PLURAL:$1|тюрлениу|тюрлениу}}', # Fuzzy
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|1=тюрлениу|тюрлениу}}', # Fuzzy
 	'wikibase-dataitem' => 'Билги элемент',
 	'wikibase-editlinks' => 'Джибериулени тюрлендир',
 	'wikibase-editlinkstitle' => 'Тилле арасы джибериулени тюрлендириу',
@@ -3514,6 +3514,7 @@ $messages['roa-tara'] = array(
  * @author Agilight
  * @author Ignatus
  * @author Kaganer
+ * @author NBS
  * @author Okras
  * @author Ole Yves
  * @author Putnik
@@ -3535,7 +3536,7 @@ $messages['ru'] = array(
 	'wikibase-comment-sitelink-add' => 'Интервики-ссылка добавлена: $1.',
 	'wikibase-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
-	'wikibase-comment-multi' => '$1 {{PLURAL:$1|изменение|изменения|изменений}}',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|изменение|изменений|изменения}}', # Fuzzy
 	'wikibase-dataitem' => 'Элемент данных',
 	'wikibase-editlinks' => 'Править ссылки',
 	'wikibase-editlinkstitle' => 'Править межъязыковые ссылки',
@@ -3548,7 +3549,7 @@ $messages['ru'] = array(
 	'wikibase-linkitem-selectlink' => 'Пожалуйста, выберите сайт и страницу, на которую вы хотите поставить ссылку отсюда.',
 	'wikibase-linkitem-input-site' => 'Язык:',
 	'wikibase-linkitem-input-page' => 'Страница:',
-	'wikibase-linkitem-confirmitem-text' => 'Выбранная вами страница уже сопоставлена с [$1 элементом нашего центрального репозитория данных]. Пожалуйста, подтвердите, что {{PLURAL:$2|на нижеуказанной странице|среди перечисленных ниже страниц}} есть {{PLURAL:$2|та|те}}, на {{PLURAL:$2|которую|которые}} вы хотели поставить ссылку отсюда.',
+	'wikibase-linkitem-confirmitem-text' => 'Выбранная вами страница уже сопоставлена с [$1 элементом нашего центрального репозитория данных]. Пожалуйста, подтвердите, что вы хотите связать её {{PLURAL:$2|1=с указанной ниже страницей|со всеми указанными ниже страницами}}.',
 	'wikibase-linkitem-confirmitem-button' => 'Подтвердить',
 	'wikibase-linkitem-not-loggedin-title' => 'Вы должны авторизоваться',
 	'wikibase-linkitem-not-loggedin' => 'Чтобы воспользоваться этой функцией, вы должны быть авторизованы в этой вики и в [$1 центральном репозитории данных].',
@@ -3569,7 +3570,7 @@ $messages['ru'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — неправильный код языка.',
 	'wikibase-unconnectedpages-page-warning' => 'Это название страницы не может быть использовано в данном запросе и игнорируется.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Только страницы с межъязыковыми ссылками:',
-	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|межъязыковая ссылка|межъязыковые ссылки|межъязыковых ссылок}} на странице)',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|межъязыковая ссылка|межъязыковых ссылок|межъязыковые ссылки}} на странице)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'Идентификатор элемента в Викиданных',
 	'wikibase-pageinfo-entity-id-none' => 'отсутствует',
 	'wikibase-property-render-error' => 'Ошибка раскрытия свойства «$1»: $2',
@@ -3797,7 +3798,7 @@ $messages['sr-ec'] = array(
 	'wikibase-linkitem-selectlink' => 'Изаберите сајт и страницу са којом желите да повежете ову страницу.',
 	'wikibase-linkitem-input-site' => 'Језик:',
 	'wikibase-linkitem-input-page' => 'Страница:',
-	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ придружена [$1 ставци на нашој централној бази података]. Молимо вас потврдите да {{PLURAL:$2|је страница|су странице}} испод {{PLURAL:$2|приказана|приказане}} {{PLURAL:$2|она коју|оне које}} желите да повежете са овом страницом.',
+	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ придружена [$1 ставци на нашој централној бази података]. Молимо вас потврдите да {{PLURAL:$2|1=је страница|су странице}} испод {{PLURAL:$2|1=приказана|приказане}} {{PLURAL:$2|1=она коју|оне које}} желите да повежете са овом страницом.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Потврди',
 	'wikibase-linkitem-not-loggedin-title' => 'Морате бити пријављени',
 	'wikibase-linkitem-not-loggedin' => 'Морате бити пријављени на овом вики-сајту и на [$1 главном складишту података] како бисте користили ову могућност.',
@@ -3818,7 +3819,7 @@ $messages['sr-ec'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ није исправан код за језик.',
 	'wikibase-unconnectedpages-page-warning' => 'Наслов странице не може се користи за упит и биће игнорисан.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Само странице са међујезичким везама',
-	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|међујезичка веза|међујезичких веза}} на страници)',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|1=међујезичка веза|међујезичких веза}} на страници)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'ИД ставке на Википодацима',
 	'wikibase-pageinfo-entity-id-none' => 'Нема',
 );
@@ -4007,7 +4008,7 @@ $messages['uk'] = array(
 	'wikibase-linkitem-selectlink' => "Виберіть сайт і сторінку, яку треба прив'язати до активної сторінки.",
 	'wikibase-linkitem-input-site' => 'Мова:',
 	'wikibase-linkitem-input-page' => 'Сторінка:',
-	'wikibase-linkitem-confirmitem-text' => 'Обрана сторінка вже пов’язана з [$1 елементом центрального сховища даних]. Підтвердіть, що {{PLURAL:$2|наведена далі сторінка|наведені далі сторінки}} треба прив’язати до цієї сторінки.',
+	'wikibase-linkitem-confirmitem-text' => "Обрана сторінка вже пов'язана з [$1 елементом центрального сховища даних]. Підтвердіть, що {{PLURAL:$2|1=наведена далі сторінка|наведені далі сторінки}} треба прив'язати до цієї сторінки.",
 	'wikibase-linkitem-confirmitem-button' => 'Підтвердити',
 	'wikibase-linkitem-not-loggedin-title' => 'Вам необхідно увійти в систему',
 	'wikibase-linkitem-not-loggedin' => 'Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.',

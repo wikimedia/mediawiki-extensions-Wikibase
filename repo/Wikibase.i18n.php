@@ -2140,7 +2140,7 @@ $messages['be-tarask'] = array(
 	'wikibase-undo-title' => 'Скасаваньне праўкі «$1»',
 	'wikibase-restore-title' => 'Аднаўленьне старой вэрсіі «$1»',
 	'wikibase-partial-undo' => 'Гэтае рэдагаваньне можа быць часткова скасаванае.',
-	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|зьмена была прапушчаная|былі прапушчаныя|было прапушчана}}, бо {{PLURAL:$1|адпаведнае значэньне|адпаведныя значэньні}} былі зьмененыя пасьля.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|зьмена была прапушчаная|былі прапушчаныя|было прапушчана}}, бо {{PLURAL:$1|1=адпаведнае значэньне|адпаведныя значэньні}} былі зьмененыя пасьля.', # Fuzzy
 	'wikibase-empty-undo' => 'Няма чаго скасоўваць.',
 	'wikibase-undo-revision-error' => 'Памылка скасаваньня',
 	'wikibase-undo-samerev' => 'Немагчыма скасаваць: тая ж вэрсія пазначаная як базавая і мэтавая.',
@@ -2303,29 +2303,29 @@ $messages['be-tarask'] = array(
 	'wikibase-item-summary-wbsetdescription-add' => 'Дададзенае апісаньне для [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Зьмененае апісаньне для [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Выдаленае апісаньне для [$2]',
-	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|Вызначаны псэўданім|Вызначаныя псэўданімы}} на [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|1=Вызначаны псэўданім|Вызначаныя псэўданімы}} на [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Даданыя й выдаленыя {{PLURAL:$1|псэўданімы}} на [$2]',
-	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Дададзены сынонім|Дададзеныя сынонімы}} для [$2]',
-	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Выдалены псэўданім|Выдаленыя псэўданімы}} на [$2]',
+	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|1=Дададзены сынонім|Дададзеныя сынонімы}} для [$2]', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|1=Выдалены псэўданім|Выдаленыя псэўданімы}} на [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-add' => 'Дададзеная спасылка на [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Зьмененая спасылка на [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Выдаленая спасылка на [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Аб’ект створаны для злучэньня старонак [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Дададзеная моўная спасылка для злучэньня старонак [$2↔$3]',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
-	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
-	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|Вызначанае значэньне|Вызначаныя значэньні}} сьцьверджаньня',
-	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Выдаленае сьцьверджаньне|Выдаленыя сьцьверджаньні}}',
-	'wikibase-item-summary-special-create-item' => 'Створаны аб’ект [$2] са {{PLURAL:$1|значэньнем|значэньнямі}}',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|1=Вызначанае значэньне|Вызначаныя значэньні}} сьцьверджаньня', # Fuzzy
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|1=Выдаленае сьцьверджаньне|Выдаленыя сьцьверджаньні}}', # Fuzzy
+	'wikibase-item-summary-special-create-item' => 'Створаны аб’ект [$2] са {{PLURAL:$1|1=значэньнем|значэньнямі}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-create' => 'Створана сьцьверджаньне',
-	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|Выдаленае сьцьверджаньне|Выдаленыя сьцьверджаньні}}',
-	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|Зьмененае сьцьверджаньне|Зьмененыя сьцьверджаньні}}',
-	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
-	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Зьменены $4 кваліфікатар|Зьмененыя $4 кваліфікатары|Зьмененыя $4 кваліфікатараў}} у {{PLURAL:$3|сьцьверджаньні|сьцьверджаньнях}}',
-	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Зьмененая $4 крыніца|Зьмененыя $4 крыніцы|Зьмененыя $4 крыніц}} у {{PLURAL:$3|сьцьверджаньні|сьцьверджаньнях}}',
-	'wikibase-item-summary-wbsetclaim-update-rank' => 'Зьменены ранг {{PLURAL:$3|сьцьверджаньня|сьцьверджаньняў}}',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|1=Выдаленае сьцьверджаньне|Выдаленыя сьцьверджаньні}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|1=Зьмененае сьцьверджаньне|Зьмененыя сьцьверджаньні}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Зьменены $4 кваліфікатар|Зьмененыя $4 кваліфікатары|Зьмененыя $4 кваліфікатараў}} у {{PLURAL:$3|1=сьцьверджаньні|сьцьверджаньнях}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Зьмененая $4 крыніца|Зьмененыя $4 крыніцы|Зьмененыя $4 крыніц}} у {{PLURAL:$3|1=сьцьверджаньні|сьцьверджаньнях}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Зьменены ранг {{PLURAL:$3|1=сьцьверджаньня|сьцьверджаньняў}}', # Fuzzy
 	'wikibase-item-summary-clientsitelink-update' => 'Старонка перанесеная з [$3] у [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Створаная новая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-create' => 'Створаная новая ўласьцівасьць',
@@ -2337,7 +2337,7 @@ $messages['be-tarask'] = array(
 	'wikibase-property-summary-wbsetdescription-add' => 'Дададзенае апісаньне [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Зьмененае апісаньне на [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Выдаленае апісаньне на [$2]',
-	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Дададзены сынонім|Дададзеныя сынонімы}} для [$2]',
+	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|1=Дададзены сынонім|Дададзеныя сынонімы}} для [$2]', # Fuzzy
 	'wikibase-listdatatypes-wikibase-item-head' => 'Аб’ект',
 	'wikibase-listdatatypes-commonsmedia-head' => 'мэдыяфайл зь Вікісховішча',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Геаграфічныя каардынаты',
@@ -2956,11 +2956,11 @@ $messages['ce'] = array(
 	'wikibase-sitelinks-add' => 'Сайтан агӀона тӀе тӀетоха хьажораг',
 	'wikibase-remove' => 'дӀаяккха',
 	'wikibase-empty-undo' => 'Эцахь хӀума яц кхузахь билгаляккха',
-	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|дӀаяздар|дӀаяздарш}}',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|1=дӀаяздар|дӀаяздарш}}', # Fuzzy
 	'wikibase-aliases-label' => 'Кхин:',
 	'wikibase-datatype-label' => 'Хаамашан тайп:',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|хьост|хьосташ}}',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Цхьаъ хьост Ӏалашйина яц|$1 хьост Ӏалашйина яц|$1 хьосташ Ӏалашйина яц}}',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|1=хьост|хьосташ}}', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Цхьаъ хьост Ӏалашйина яц|$1 хьосташ Ӏалашйина яц|$1 хьост Ӏалашйина яц}}', # Fuzzy
 	'wikibase-snakview-variations-somevalue-label' => 'маьӀна хууш дац',
 	'wikibase-snakview-variations-novalue-label' => 'маьӀна цакарийна',
 	'wikibase-snakview-snaktypeselector-value' => 'шийн маьӀна',
@@ -3006,13 +3006,13 @@ $messages['ce'] = array(
 	'wikibase-item-summary-wbsetsitelink-add' => 'ХӀокхуна [$2] тӀетоьхна хьажораг',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Хийцина хьажораг → [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'ТӀера [$2] хьажораг дӀаяьккхина',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Кхоьллина дехар|Кхоьллина дехар}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Кхоьллина дехар|Кхоьллина дехарш}}',
-	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Кхоьллина дехар|Кхоьллина дехарш}}',
-	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|ДӀадаьккхина дехар|ДӀадаьхина дехарш}}',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|1=Кхоьллина дехар|Кхоьллина дехар}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|1=Кхоьллина дехар|Кхоьллина дехарш}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|1=Кхоьллина дехар|Кхоьллина дехарш}}', # Fuzzy
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|1=ДӀадаьккхина дехар|ДӀадаьхина дехарш}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-create' => 'Кхоьллина дехар',
-	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|ДӀадаьккхина дехар|ДӀадаьхина дехарш}}',
-	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|Кхоьллина дехар|Кхоьллина дехарш}}',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|1=ДӀадаьккхина дехар|ДӀадаьхина дехарш}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|1=Кхоьллина дехар|Кхоьллина дехарш}}', # Fuzzy
 	'wikibase-item-summary-clientsitelink-update' => 'АгӀо кхечухьа яьккхина (цӀе хийцина) [$3] → [$4]',
 	'wikibase-property-summary-wbsetlabel-set' => 'Хийцина билгало [$2]',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Глобальни координаташ',
@@ -3843,7 +3843,7 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Oprettede {{PLURAL:$1|en påstand|påstande}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Oprettede {{PLURAL:$1|en påstand|påstande}}',
 	'wikibase-item-summary-wbcreateclaim' => 'Oprettede {{PLURAL:$1|en påstand|påstande}}',
-	'wikibase-item-summary-wbsetclaimvalue' => 'Satte {{PLURAL:$1|en værdi|værdier}} for påstand',
+	'wikibase-item-summary-wbsetclaimvalue' => 'Angav {{PLURAL:$1|en værdi|værdier}} for påstand',
 	'wikibase-item-summary-wbremoveclaims' => 'Fjernede {{PLURAL:$1|en påstand|påstande}}',
 	'wikibase-item-summary-special-create-item' => 'Oprettede et emne for [$2] med {{PLURAL:$1|en værdi|værdier}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Oprettede påstand',
@@ -14795,7 +14795,7 @@ $messages['ru'] = array(
 	'wikibase-undo-title' => 'Отмена редактирования для «$1»',
 	'wikibase-restore-title' => 'Восстановление старой версии для «$1»',
 	'wikibase-partial-undo' => 'Правка может быть частично отменена.',
-	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|изменение было пропущено|изменения были пропущены|изменений было пропущено}}, поскольку с тех пор {{PLURAL:$1|соответствующее значение снова изменилось|соответствующие значения снова изменились}}.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|изменение было пропущено|изменений было пропущено|изменения были пропущены}}, поскольку с тех пор {{PLURAL:$1|1=соответствующее значение снова изменилось|соответствующие значения снова изменились}}.', # Fuzzy
 	'wikibase-empty-undo' => 'Там нет ничего, что можно было бы здесь отменить.',
 	'wikibase-undo-revision-error' => 'Отменить не удалось',
 	'wikibase-undo-samerev' => 'Отмена невозможна, так как в качестве исходной и целевой версий указаны версии с идентичным содержанием.',
@@ -14803,8 +14803,8 @@ $messages['ru'] = array(
 	'wikibase-undo-firstrev' => 'Создание страницы отменить невозможно',
 	'wikibase-undo-nocontent' => 'Не удается загрузить содержимое версии $2 страницы «$1»',
 	'wikibase-propertyedittool-full' => 'Список значений уже полон.',
-	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ещё не сохранено одно значение|Несохранённых значений: $1}}',
-	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|запись|записи|записей}}',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|1=Ещё не сохранено одно значение|Несохранённых значений: $1}}', # Fuzzy
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|запись|записей|записи}}', # Fuzzy
 	'wikibase-sitelinksedittool-full' => 'Ссылки на страницы уже заданы для всех известных сайтов.',
 	'wikibase-disambiguation-title' => 'Разрешение неоднозначности для «$1»',
 	'wb-special-newitem-new-item-notification' => 'Новый элемент «$1» создан и перенаправлен на его страницу. Вернуться к «$2».',
@@ -14817,8 +14817,8 @@ $messages['ru'] = array(
 	'wikibase-statementview-rank-preferred' => 'Предпочтительный ранг',
 	'wikibase-statementview-rank-normal' => 'Нормальный ранг',
 	'wikibase-statementview-rank-deprecated' => 'Нерекомендуемый ранг',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|источник|источника|источников}}',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Один источник ещё не сохранён|$1 источник ещё не сохранён|$1 источника ещё не сохранены|$1 источников ещё не сохранёно}}',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|источник|источников|источника}}', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Один источник ещё не сохранён|$1 источник ещё не сохранён|$1 источника ещё не сохранены|$1 источников ещё не сохранёно}}', # Fuzzy
 	'wikibase-snakview-property-input-placeholder' => 'свойство',
 	'wikibase-snakview-unsupportedsnaktype' => 'Соединитель (снэк) типа «$1». Обработка этого класса соединителей пока не поддерживается.',
 	'wikibase-snakview-choosesnaktype' => 'Выберите тип значения.',
@@ -14839,9 +14839,9 @@ $messages['ru'] = array(
 	'wikibase-blockeduser-tooltip-message' => 'У вас нет прав на редактирование, так как ваша учётная запись или IP-адрес были заблокированы.',
 	'wikibase-move-error' => 'Вы не можете переименовывать страницы, находящиеся в пространстве имён данных, или перемещать страницы в это пространство имён.',
 	'wikibase-warning-constraint-violation-length' => 'Сработало ограничение длины для языка с кодом «$1».',
-	'wikibase-error-constraint-violation-label' => 'У {{PLURAL:$1|метки (названии)|меток (названиях)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
-	'wikibase-error-constraint-violation-description' => 'У {{PLURAL:$1|описания|описаний}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
-	'wikibase-error-constraint-violation-aliases' => 'У {{PLURAL:$1|альтернативного названия (синонима)|альтернативных названий (синонимов)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
+	'wikibase-error-constraint-violation-label' => 'У {{PLURAL:$1|1=метки (названии)|меток (названиях)}} «$3» {{PLURAL:$1|1=обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|1=версии с кодом языка|в версиях с кодами языков}} «$2».', # Fuzzy
+	'wikibase-error-constraint-violation-description' => 'У {{PLURAL:$1|1=описания|описаний}} «$3» {{PLURAL:$1|1=обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|1=версии с кодом языка|в версиях с кодами языков}} «$2».', # Fuzzy
+	'wikibase-error-constraint-violation-aliases' => 'У {{PLURAL:$1|1=альтернативного названия (синонима)|альтернативных названий (синонимов)}} «$3» {{PLURAL:$1|1=обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|1=версии с кодом языка|в версиях с кодами языков}} «$2».', # Fuzzy
 	'wikibase-error-sitelink-already-used' => 'Ссылка на сайт [$1 $2] уже включена в другой элемент — [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому свойству ($3).',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому запросу ($3).',
@@ -14991,34 +14991,34 @@ $messages['ru'] = array(
 	'wikibase-item-summary-wbsetdescription-add' => 'Добавлено описание [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Изменено описание [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Удалено описание [$2]',
-	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|Задано|Заданы}} доп. назв. ({{PLURAL:$1|синоним|синонимы}}) [$2]',
-	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Добавлено или удалено|Добавлены или удалены}} доп. назв. ({{PLURAL:$1|синоним|синонимы}}) [$2]',
-	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Добавлено|Добавлены}} доп. назв. ({{PLURAL:$1|синоним|синонимы}}) [$2]',
-	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Удалено|Удалены}} доп. назв. ({{PLURAL:$1|синоним|синонимы}}) [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|1=Задано|Заданы}} доп. назв. ({{PLURAL:$1|1=синоним|синонимы}}) [$2]', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|1=Добавлено или удалено|Добавлены или удалены}} доп. назв. ({{PLURAL:$1|1=синоним|синонимы}}) [$2]', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|1=Добавлено|Добавлены}} доп. назв. ({{PLURAL:$1|1=синоним|синонимы}}) [$2]', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|1=Удалено|Удалены}} доп. назв. ({{PLURAL:$1|1=синоним|синонимы}}) [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-add' => 'Добавлена ссылка на [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Изменена ссылка на [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Удалена ссылка на [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Этот элемент создан для связи страниц [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Добавлены языковые ссылки на связанные страницы [$2↔$3]',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Создано заявление|Созданы заявления}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Создано заявление|Созданы заявления}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Создано заявление|Созданы заявления}}',
-	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Создано заявление|Созданы заявления}}',
-	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|Определено значение для заявление|Определены значения для заявлений}}',
-	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Удалено заявление|Удалены заявления}}',
-	'wikibase-item-summary-special-create-item' => 'Создан элемент [$2] со {{PLURAL:$1|значением|значениями}}',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|1=Создано заявление|Созданы заявления}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|1=Создано заявление|Созданы заявления}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|1=Создано заявление|Созданы заявления}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|1=Создано заявление|Созданы заявления}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|1=Определено значение для заявление|Определены значения для заявлений}}', # Fuzzy
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|1=Удалено заявление|Удалены заявления}}', # Fuzzy
+	'wikibase-item-summary-special-create-item' => 'Создан элемент [$2] со {{PLURAL:$1|1=значением|значениями}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-create' => 'Создано заявление',
-	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|Удалено заявление|Удалены заявления}}',
-	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|Изменено заявление|Изменены заявления}}',
-	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|Создано заявление|Созданы заявления}}',
-	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Изменён $4 квалификатор|Изменено $4 квалификатора|Изменено $4 квалификаторов}} в {{PLURAL:$3|заявлении|заявлениях}}',
-	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Изменён $4 источник|Изменено $4 источника|Изменено $4 источников}} в {{PLURAL:$3|заявлении|заявлениях}}',
-	'wikibase-item-summary-wbsetclaim-update-rank' => 'Изменён ранг {{PLURAL:$3|заявления|заявлений}}',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|1=Удалено заявление|Удалены заявления}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|1=Изменено заявление|Изменены заявления}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|1=Создано заявление|Созданы заявления}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Изменён $4 квалификатор|Изменено $4 квалификаторов|Изменено $4 квалификатора}} в {{PLURAL:$3|1=заявлении|заявлениях}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Изменён $4 источник|Изменено $4 источников|Изменено $4 источника}} в {{PLURAL:$3|1=заявлении|заявлениях}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Изменён ранг {{PLURAL:$3|1=заявления|заявлений}}', # Fuzzy
 	'wikibase-item-summary-clientsitelink-update' => 'Страница перемещена (переименована) из [$3] в [$4]',
-	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Добавлен квалификатор|Добавлены квалификаторы}}',
-	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Изменён квалификатор|Изменены квалификаторы}}',
-	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Удалён квалификатор|Удалены квалификаторы}}',
-	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|Удалена ссылка|Удалены ссылки}} из заявления',
+	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|1=Добавлен квалификатор|Добавлены квалификаторы}}', # Fuzzy
+	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|1=Изменён квалификатор|Изменены квалификаторы}}', # Fuzzy
+	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|1=Удалён квалификатор|Удалены квалификаторы}}', # Fuzzy
+	'wikibase-item-summary-wbremovereferences-remove' => '{{PLURAL:$3|1=Удалена ссылка|Удалены ссылки}} из заявления', # Fuzzy
 	'wikibase-item-summary-wbmergeitems-from' => "Объединённый элемент из '$3'",
 	'wikibase-item-summary-wbmergeitems-to' => "Объединённый элемент в '$3'",
 	'wikibase-property-summary-wbcreate-new' => 'Создано новое свойство',
@@ -15031,11 +15031,11 @@ $messages['ru'] = array(
 	'wikibase-property-summary-wbsetdescription-add' => 'Добавлено описание [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Изменено описание [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Убрано описание [$2]',
-	'wikibase-property-summary-wbsetaliases-set' => '{{PLURAL:$1|Задано|Заданы}} доп. {{PLURAL:$1|название|названия}} ({{PLURAL:$1|синоним|синонимы}}) [$2]',
-	'wikibase-property-summary-wbsetaliases-add-remove' => 'Добавле{{PLURAL:$1|но и убрано|ны и убраны}} [$2] альт. {{PLURAL:$1|название|названия|названий}}',
-	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Добавлено|Добавлены}} доп. {{PLURAL:$1|название|названия}} ({{PLURAL:$1|синоним|синонимы}}) [$2]',
-	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Удалено|Удалены}} доп. {{PLURAL:$1|название|названия}} ({{PLURAL:$1|синоним|синонимы}}) [$2]',
-	'wikibase-property-summary-special-create-property' => 'Создано свойство [$2] со {{PLURAL:$1|значением|значениями}}',
+	'wikibase-property-summary-wbsetaliases-set' => '{{PLURAL:$1|1=Задано|Заданы}} доп. {{PLURAL:$1|1=название|названия}} ({{PLURAL:$1|1=синоним|синонимы}}) [$2]', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Добавле{{PLURAL:$1|1=но и убрано|ны и убраны}} [$2] альт. {{PLURAL:$1|название|названий|названия}}', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|1=Добавлено|Добавлены}} доп. {{PLURAL:$1|1=название|названия}} ({{PLURAL:$1|1=синоним|синонимы}}) [$2]', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|1=Удалено|Удалены}} доп. {{PLURAL:$1|1=название|названия}} ({{PLURAL:$1|1=синоним|синонимы}}) [$2]', # Fuzzy
+	'wikibase-property-summary-special-create-property' => 'Создано свойство [$2] со {{PLURAL:$1|1=значением|значениями}}', # Fuzzy
 	'wikibase-listdatatypes-wikibase-item-head' => 'Элемент',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Ссылка на другие элементы в проекте. При вводе будет производиться поиск похожих записей в пространстве имён Викиданных <code>Item:</code>. Состоит из одного текстового поля ввода.
 * scheme — неявно задаваемая часть строки IRI
@@ -15631,8 +15631,8 @@ $messages['sr-ec'] = array(
 	'wikibase-undo-revision-error' => 'Поништавање није успело',
 	'wikibase-undo-firstrev' => 'Не може се поништити прављење странице',
 	'wikibase-propertyedittool-full' => 'Списак вредности је потпун.',
-	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Једна вредност|$1 вредности}} још није сачувано',
-	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|унос|уноса}}',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|1=Једна вредност|$1 вредности}} још није сачувано', # Fuzzy
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|1=унос|уноса}}', # Fuzzy
 	'wikibase-sitelinksedittool-full' => 'Везе до страница су већ постављене за све познате сајтове.',
 	'wikibase-disambiguation-title' => 'Вишезначност за „$1“',
 	'wb-special-newitem-new-item-notification' => 'Нова ставка $1 је направљена и преусмерена на ову страницу. Повратак на $2.',
@@ -15641,8 +15641,8 @@ $messages['sr-ec'] = array(
 	'wikibase-aliases-empty' => 'Ниједан псеудоним није дефинисан.',
 	'wikibase-datatype-label' => 'Врста податка:',
 	'wikibase-claimview-snak-new-tooltip' => 'После навођења својства можете унети одговарајућу вредност. Ако својство нема одређену вредност или тачна вредност није позната, уместо навођења прилагођене вредности можете изабрати алтернативне вредности кликом на икону поред поља за унос вредности.',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|извор|извора}}',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Један извор|$1 извора}} није {{PLURAL:$1|сачуван|сачувано}}',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|1=извор|извора}}', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|1=Један извор|$1 извора}} није {{PLURAL:$1|1=сачуван|сачувано}}', # Fuzzy
 	'wikibase-snakview-property-input-placeholder' => 'својство',
 	'wikibase-snakview-choosesnaktype' => 'Изаберите врсту вредности.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Вредност није у складу са дефиницијом својства.',
@@ -15764,29 +15764,29 @@ $messages['sr-ec'] = array(
 	'wikibase-item-summary-wbsetdescription-add' => 'Додат [$2] опис',
 	'wikibase-item-summary-wbsetdescription-set' => 'Измењен [$2] опис',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Уклоњен [$2] опис',
-	'wikibase-item-summary-wbsetaliases-set' => 'Постављено [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Додато и уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
-	'wikibase-item-summary-wbsetaliases-add' => 'Додато [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
-	'wikibase-item-summary-wbsetaliases-remove' => 'Уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
+	'wikibase-item-summary-wbsetaliases-set' => 'Постављено [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Додато и уклоњено [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-add' => 'Додато [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-remove' => 'Уклоњено [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-add' => 'Додата веза ка [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Измењена веза ка [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Уклоњена веза ка [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Направљена ставка како би повезала странице [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Повезано [$2↔$3] {{PLURAL:$1|страна|$1 страна}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
-	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
-	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|Постављена тврдња|Постављено $1 тврдњи}}',
-	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Уклоњена тврдња|Уклоњено $1 тврдњи}}',
-	'wikibase-item-summary-special-create-item' => 'Направљена [$2] ставка са {{PLURAL:$1|вредношћу|вредностима}}',
+	'wikibase-item-summary-wblinktitles-connect' => 'Повезано [$2↔$3] {{PLURAL:$1|1=страна|$1 страна}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|1=Направљена тврдња|Направљено $1 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|1=Направљена тврдња|Направљено $1 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|1=Направљена тврдња|Направљено $1 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|1=Направљена тврдња|Направљено $1 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|1=Постављена тврдња|Постављено $1 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|1=Уклоњена тврдња|Уклоњено $1 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-special-create-item' => 'Направљена [$2] ставка са {{PLURAL:$1|1=вредношћу|вредностима}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-create' => 'Направљена тврдња',
-	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|Уклоњена тврдња|Уклоњено $1 тврдњи}}',
-	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|Измењена тврдња|Измењено $3 тврдњи}}',
-	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|Направљена тврдња|Направљено $3 тврдњи}}',
-	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Измењен квалификатор|Измењено $4 квалификатора}} на {{PLURAL:$3|тврдњу|тврдњи}}',
-	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Измењена референца|Измењено $4 референци}} на {{PLURAL:$3|тврдњу|тврдњи}}',
-	'wikibase-item-summary-wbsetclaim-update-rank' => 'Промењен ранг {{PLURAL:$3|тврдњи|тврдњама}}',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|1=Уклоњена тврдња|Уклоњено $1 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|1=Измењена тврдња|Измењено $3 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|1=Направљена тврдња|Направљено $3 тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|1=Измењен квалификатор|Измењено $4 квалификатора}} на {{PLURAL:$3|1=тврдњу|тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|1=Измењена референца|Измењено $4 референци}} на {{PLURAL:$3|1=тврдњу|тврдњи}}', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Промењен ранг {{PLURAL:$3|1=тврдњи|тврдњама}}', # Fuzzy
 	'wikibase-item-summary-clientsitelink-update' => 'Страница премештена са [$3] на [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Направљено ново својство',
 	'wikibase-property-summary-wbeditentity-create' => 'Направљено ново својство',
@@ -15796,11 +15796,11 @@ $messages['sr-ec'] = array(
 	'wikibase-property-summary-wbsetlabel-remove' => 'Уклоњен [$2] назив',
 	'wikibase-property-summary-wbsetdescription-set' => 'Уклоњен [$2] опис',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Уклоњен [$2] опис',
-	'wikibase-property-summary-wbsetaliases-set' => 'Постављено [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
-	'wikibase-property-summary-wbsetaliases-add-remove' => 'Додато и уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
-	'wikibase-property-summary-wbsetaliases-add' => 'Додато [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
-	'wikibase-property-summary-wbsetaliases-remove' => 'Уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
-	'wikibase-property-summary-special-create-property' => 'Направљено [$2] својство са {{PLURAL:$1|вредношћу|вредностима}}',
+	'wikibase-property-summary-wbsetaliases-set' => 'Постављено [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Додато и уклоњено [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-add' => 'Додато [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-remove' => 'Уклоњено [$2] {{PLURAL:$1|1=псеудоним|псеудонима}}', # Fuzzy
+	'wikibase-property-summary-special-create-property' => 'Направљено [$2] својство са {{PLURAL:$1|1=вредношћу|вредностима}}', # Fuzzy
 	'wikibase-listdatatypes-wikibase-item-head' => 'Ставка',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Датотека са Оставе',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Координате',
@@ -16481,9 +16481,9 @@ $messages['uk'] = array(
 	'wikibase-blockeduser-tooltip-message' => "Вам не дозволено редагувати, бо Ваше ім'я користувача, або IP-адресу заблоковано.",
 	'wikibase-move-error' => 'Ви не можете заносити сторінки у простір даних, ані виносити сторінки з нього.',
 	'wikibase-warning-constraint-violation-length' => 'Для мовного коду «$1» спрацювало обмеження довжини.',
-	'wikibase-error-constraint-violation-label' => 'Виявлено назви («$3») із {{PLURAL:$1|мовним кодом|мовними кодами}} «$2», що порушують обмеження.',
-	'wikibase-error-constraint-violation-description' => 'Виявлено описи («$3») із {{PLURAL:$1|мовним кодом|мовними кодами}} «$2», що порушують обмеження.',
-	'wikibase-error-constraint-violation-aliases' => 'Виявлено додаткові назви («$3») із {{PLURAL:$1|мовним кодом|мовними кодами}} «$2», що порушують обмеження.',
+	'wikibase-error-constraint-violation-label' => 'Виявлено {{PLURAL:$1|1=порушення обмеження|порушення обмежень}} для {{PLURAL:$1|назви|назв}} "$3" у {{PLURAL:$1|мовному коді|мовних кодах}} "$2".',
+	'wikibase-error-constraint-violation-description' => 'Виявлено порушення {{PLURAL:$1|1=обмеження|обмежень}} для {{PLURAL:$1|опису|описів}} "$3" у {{PLURAL:$1|мовному коді|мовних кодах}} "$2".',
+	'wikibase-error-constraint-violation-aliases' => 'Виявлено порушення {{PLURAL:$1|1=обмеження|обмежень}} для  {{PLURAL:$1|додаткової назви|додаткових назв}} "$3" у  {{PLURAL:$1|мовному коді|мовних кодах}} "$2".',
 	'wikibase-error-sitelink-already-used' => 'Посилання сайту [$1 $2] вже включено в інший елемент, [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Назву „$1“ для мовного коду $2 вже має інша властивість: $3',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Назву „$1“ для мовного коду $2 вже має інший запит: $3',
@@ -16653,14 +16653,14 @@ $messages['uk'] = array(
 	'wikibase-item-summary-wbcreateclaim' => 'Створено {{PLURAL:$1|твердження}}',
 	'wikibase-item-summary-wbsetclaimvalue' => 'Задано {{PLURAL:$1|значення твердження|значення тверджень|значень тверджень}}',
 	'wikibase-item-summary-wbremoveclaims' => 'Вилучено {{PLURAL:$1|твердження}}',
-	'wikibase-item-summary-special-create-item' => 'Створено елемент [$2] із {{PLURAL:$1|значенням|значеннями}}',
+	'wikibase-item-summary-special-create-item' => 'Створено елемент [$2] із {{PLURAL:$1|1=значенням|значеннями}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Створено твердження',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Вилучено {{PLURAL:$1|вимогу|вимоги|вимог}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'Змінено {{PLURAL:$3|твердження}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'Створено {{PLURAL:$3|вимогу|вимоги|вимог}}',
-	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Змінено {{PLURAL:$4|один визначник|$4 визначники|$4 визначників|$4 визначника}} у {{PLURAL:$3|вимозі|вимогах}}',
-	'wikibase-item-summary-wbsetclaim-update-references' => 'Змінено {{PLURAL:$4|одне посилання|$4 посилання|$4 посилань|$4 посилання}} у {{PLURAL:$3|вимозі|вимогах}}',
-	'wikibase-item-summary-wbsetclaim-update-rank' => 'Змінено ранг {{PLURAL:$3|вимоги|вимог}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Змінено {{PLURAL:$4|один визначник|$4 визначники|$4 визначників|$4 визначника}} у {{PLURAL:$3|1=вимозі|вимогах}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => 'Змінено {{PLURAL:$4|одне посилання|$4 посилання|$4 посилань|$4 посилання}} у {{PLURAL:$3|1=вимозі|вимогах}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Змінено ранг {{PLURAL:$3|1=вимоги|вимог}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Сторінку пересунуто з [$3] на [$4]',
 	'wikibase-item-summary-wbsetqualifier-add' => 'Додано {{PLURAL:$1|визначник|визначники|визначників}}',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Змінено {{PLURAL:$1|визначник|визначники|визначників}}',
@@ -16682,7 +16682,7 @@ $messages['uk'] = array(
 	'wikibase-property-summary-wbsetaliases-add-remove' => 'Додано або вилучено [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
 	'wikibase-property-summary-wbsetaliases-add' => 'Додано [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Вилучено [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
-	'wikibase-property-summary-special-create-property' => 'Створено властивість для [$2] із {{PLURAL:$1|значенням|значеннями}}',
+	'wikibase-property-summary-special-create-property' => 'Створено властивість для [$2] із {{PLURAL:$1|1=значенням|значеннями}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Елемент',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Посилання на інші елементи у проекті. При введенні буде проводитися пошук схожих записів в просторі імен Вікіданих <code>Item:</code>. Складається з одного текстового поля.
 * scheme - неявно задана частина рядка IRI
@@ -17844,7 +17844,7 @@ $messages['zh-hans'] = array(
 	'wikibase-itemlink' => '$1$2',
 	'wikibase-itemlink-id-wrapper' => '（$1）',
 	'wikibase-itemlink-userlang-wrapper' => '（$1：$2）',
-	'special-itembytitle' => '项（按标题）',
+	'special-itembytitle' => '按标题查找项',
 	'wikibase-itembytitle-lookup-fieldset' => '按网站和标题搜索项',
 	'wikibase-itembytitle-lookup-site' => '网站：',
 	'wikibase-itembytitle-lookup-page' => '页面：',
