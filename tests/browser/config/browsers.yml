@@ -16,12 +16,12 @@ chrome_mac:
 firefox_linux:
   name: firefox
   platform: Linux
-  version: 23
+  version: 25
 
 firefox_win:
   name: firefox
   platform: Windows 7
-  version: 23
+  version: 25
 
 firefox_mac:
   name: firefox
