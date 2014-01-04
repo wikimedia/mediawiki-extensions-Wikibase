@@ -2,9 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
 
@@ -24,6 +22,8 @@ use Wikibase\PropertyContent;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ *
+ * @todo somehow test the undo feature if one edit is bad!
  */
 class MergeItemsTest extends WikibaseApiTestCase {
 
