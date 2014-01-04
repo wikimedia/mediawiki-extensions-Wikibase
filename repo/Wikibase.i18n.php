@@ -345,6 +345,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Removed {{PLURAL:$3|reference|references}} from claim',
 	'wikibase-item-summary-wbmergeitems-from' => 'Merged item from "$3"',
 	'wikibase-item-summary-wbmergeitems-to' => 'Merged item in to "$3"',
+	'wikibase-item-summary-wbmergeitems-undo' => 'Undid part of failed merge',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -1170,6 +1171,7 @@ Parameters:
 * $1 - (Unused)
 * $2 - (Unused)
 * $3 - the item id of the item being merged to',
+	'wikibase-item-summary-wbmergeitems-undo' => 'Automatic edit summary when part of a merge of two items is reverted due to the merge itself failing.',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',

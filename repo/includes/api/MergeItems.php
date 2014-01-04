@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
@@ -55,6 +56,9 @@ class MergeItems extends ApiWikibase {
 
 		$ignoreConflicts = $this->getIgnoreConflicts( $params );
 
+		$startingToEntityContent = clone $toEntityContent;
+		$startingFromEntityContent = clone $fromEntityContent;
+
 		/**
 		 * @var ItemContent $fromEntityContent
 		 * @var ItemContent $toEntityContent
@@ -74,7 +78,20 @@ class MergeItems extends ApiWikibase {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->attemptSaveMerge( $fromEntityContent, $toEntityContent, $params );
+		$mergeSuccess = $this->attemptSaveMerge( $fromEntityContent, $toEntityContent, $params );
+
+		if( !$mergeSuccess ) {
+			$this->getResultBuilder()->markSuccess( 0 );
+
+			$undoSummary = $this->getSummary( 'undo', $toEntityContent->getItem()->getId(), $params );
+			$undoStatus = $this->attemptSaveEntity(
+				$startingFromEntityContent,
+				$this->formatSummary( $undoSummary )
+			);
+
+			$this->handleSaveStatus( $undoStatus );
+			$this->getResultBuilder()->addRevisionIdFromStatusToResult( $undoStatus, 'undo' );
+		}
 	}
 
 	protected function getIgnoreConflicts( $params ) {
@@ -128,20 +145,28 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @param $direction
-	 * @param $getId
-	 * @param $params
+	 * @param string $typeOfEdit
+	 * @param EntityId $id
+	 * @param array $params
+	 *
 	 * @return Summary
 	 */
-	private function getSummary( $direction, $getId, $params ) {
+	private function getSummary( $typeOfEdit, EntityId $id, array $params ) {
 		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-		$summary = new Summary( $this->getModuleName(), $direction, null, array( $entityIdFormatter->format( $getId ) ) );
+		$summary = new Summary( $this->getModuleName(), $typeOfEdit, null, array( $entityIdFormatter->format( $id ) ) );
 		if ( !is_null( $params['summary'] ) ) {
 			$summary->setUserSummary( $params['summary'] );
 		}
 		return $summary;
 	}
 
+	/**
+	 * @param ItemContent $fromItemContent
+	 * @param ItemContent $toItemContent
+	 * @param array $params
+	 *
+	 * @return bool success of the merge
+	 */
 	private function attemptSaveMerge( ItemContent $fromItemContent, ItemContent $toItemContent, $params ) {
 		$toSummary = $this->getSummary( 'to', $toItemContent->getItem()->getId(), $params );
 
@@ -163,11 +188,15 @@ class MergeItems extends ApiWikibase {
 			$this->handleSaveStatus( $toStatus );
 			$this->addEntityToOutput( $toItemContent, $toStatus, 'to' );
 
-			$this->getResultBuilder()->markSuccess( 1 );
+			if( $toStatus->isGood() ) {
+				$this->getResultBuilder()->markSuccess( 1 );
+			} else {
+				return false;
+			}
 		} else {
-			//todo if the second result is not a success we should probably undo the first change
-			$this->getResultBuilder()->markSuccess( 0 );
+			return false;
 		}
+		return true;
 	}
 
 	/**
