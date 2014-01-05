@@ -56,6 +56,9 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		array( //2 title, 1 site should return 2 entities
 			'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin|London' ),
 			'e' => array( 'count' => 2 ) ),
+		array( //2 sites, 1 title should return 1 entity
+			'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo' ),
+			'e' => array( 'count' => 1 ) ),
 		array( //2 sites and 2 titles should return the two entities
 			'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|London' ),
 			'e' => array( 'count' => 2 ) ),
@@ -412,8 +415,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			array( //8 normalization fails with 2 sites and 2 titles
 				'p' => array( 'sites' => 'enwiki|dewiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'params-illegal' ) ) ),
-			array( //9 Must request one site or an equal number of sites and titles
-				'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo' ),
+			array( //9 must request one site, one title, or an equal number of sites and titles
+				'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|Berlin|London' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'params-illegal' ) ) ),
 		);
 	}

@@ -192,6 +192,9 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( Title::newFromText( $title )->getPrefixedText(), $title );
 	}
 
+	/**
+	 * Make sure the request fails if no sites are provided
+	 */
 	public function testNoSites() {
 		$this->setExpectedException( 'UsageException' );
 
@@ -203,6 +206,22 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$itemByTitleHelper->getItemIds( array( ), array( 'barfoo' ), false );
+	}
+	
+	/**
+	 * Make sure the request fails if no titles are provided
+	 */
+	public function testNoTitles() {
+		$this->setExpectedException( 'UsageException' );
+
+		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getResultBuilderMock(),
+			$this->getSiteLinkCacheMock( 123 ),
+			$this->getSiteStoreMock(),
+			new StringNormalizer()
+		);
+
+		$itemByTitleHelper->getItemIds( array( 'enwiki' ), array( ), false );
 	}
 
 }
