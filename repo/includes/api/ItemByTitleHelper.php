@@ -82,9 +82,9 @@ class ItemByTitleHelper {
 		}
 
 		// Restrict the crazy combinations of sites and titles that can be used
-		if( $numSites !== 1 && $numSites !== $numTitles  ) {
+		if ( $numSites !== 1 && $numTitles !== 1 && $numSites !== $numTitles ) {
 			$this->throwUsageException(
-				'Must request one site or an equal number of sites and titles',
+				'Must request one site, one title, or an equal number of sites and titles',
 				'params-illegal'
 			);
 		}
