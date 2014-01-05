@@ -1290,6 +1290,7 @@ $messages['eo'] = array(
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author DJ Nietzsche
  * @author Dalton2
  * @author Fitoschido
  * @author Gustronico
@@ -1329,7 +1330,7 @@ $messages['es'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
 	'wikibase-linkitem-not-loggedin-title' => 'Necesita haberse identificado',
 	'wikibase-linkitem-not-loggedin' => 'Necesita haberse identificado en esta wiki y en el [$1 central data repository], para usar esta función.',
-	'wikibase-linkitem-success-link' => 'Se han enlazado las páginas correctamente. Puedes encontrar encontrar el elemento que contiene los enlaces en el [$1 depósito central de datos].',
+	'wikibase-linkitem-success-link' => 'Se han enlazado las páginas correctamente. Puedes encontrar el elemento que contiene los enlaces en el [$1 depósito central de datos].',
 	'wikibase-property-notfound' => 'No se encuentra la propiedad "$1"',
 	'wikibase-property-notsupportedyet' => 'Wikibase aún no soporta el tipo de propiedad de la propiedad "$1".',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
