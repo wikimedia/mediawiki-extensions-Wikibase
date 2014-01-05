@@ -73,6 +73,14 @@ class ItemByTitleHelper {
 		$numSites = count( $sites );
 		$numTitles = count( $titles );
 
+		// Make sure the arrays of sites and titles are not empty
+		if ( $numSites === 0 || $numTitles === 0 ) {
+			$this->throwUsageException(
+				'Must request one site, one title, or an equal number of sites and titles',
+				'param-missing'
+			);
+		}
+
 		if ( $normalize && max( $numSites, $numTitles ) > 1 ) {
 			// For performance reasons we only do this if the user asked for it and only for one title!
 			$this->throwUsageException(
@@ -82,9 +90,9 @@ class ItemByTitleHelper {
 		}
 
 		// Restrict the crazy combinations of sites and titles that can be used
-		if( $numSites !== 1 && $numSites !== $numTitles  ) {
+		if ( $numSites !== 1 && $numTitles !== 1 && $numSites !== $numTitles ) {
 			$this->throwUsageException(
-				'Must request one site or an equal number of sites and titles',
+				'Must request one site, one title, or an equal number of sites and titles',
 				'params-illegal'
 			);
 		}

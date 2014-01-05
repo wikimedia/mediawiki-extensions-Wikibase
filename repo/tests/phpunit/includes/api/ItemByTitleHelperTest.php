@@ -192,7 +192,27 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( Title::newFromText( $title )->getPrefixedText(), $title );
 	}
 
-	public function testNoSites() {
+	public function notEnoughInputProvider() {
+		return array(
+			array(
+				// Request with no sites
+				array( ),
+				array( 'barfoo' ),
+				false
+			),
+			array(
+				// Request with no titles
+				array( 'enwiki' ),
+				array( ),
+				false
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider notEnoughInputProvider
+	 */
+	public function testNotEnoughInput( $sites, $titles, $normalize ) {
 		$this->setExpectedException( 'UsageException' );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
@@ -202,7 +222,6 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 			new StringNormalizer()
 		);
 
-		$itemByTitleHelper->getItemIds( array( ), array( 'barfoo' ), false );
+		$itemByTitleHelper->getItemIds( $sites, $titles, $normalize );
 	}
-
 }
