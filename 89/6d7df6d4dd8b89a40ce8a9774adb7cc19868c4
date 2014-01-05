@@ -1,0 +1,8 @@
+Verified+1: jenkins-bot
+Code-Review+2: L10n-bot <l10n-bot@translatewiki.net>
+Verified+2: L10n-bot <l10n-bot@translatewiki.net>
+Submitted-by: L10n-bot <l10n-bot@translatewiki.net>
+Submitted-at: Sun, 05 Jan 2014 20:15:52 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/105608
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
