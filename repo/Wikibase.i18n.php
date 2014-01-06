@@ -478,6 +478,7 @@ to find out where it went.',
  * @author Raymond
  * @author Shirayuki
  * @author Siebrand
+ * @author Stryn
  * @author ZxxZxxZ
  * @author 아라
  */
@@ -1051,7 +1052,7 @@ See also:
 	'wikibase-api-no-such-entity-link' => '!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-reference' => '!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-site' => '!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-sitelink' => '!!DO NOT TRANSLATE!! Could not find such a sitelink, this could be to the user entering the wrong data',
+	'wikibase-api-no-such-sitelink' => 'Could not find such a sitelink, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-statement' => '!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data',
 	'wikibase-api-not-a-statement' => '!!DO NOT TRANSLATE!! The passed parameter is Not a statement when a statement is expected',
 	'wikibase-api-not-an-item' => '!!DO NOT TRANSLATE!! The passed parameter is Not an item when an item is expected (the passed parameter may infact be a property)',
@@ -1761,6 +1762,7 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-mylanguagefallbackchain-text' => "La cadena predeterminada de llingua que s'usa p'amosa-y les etiquetes apaez abaxo.",
 	'wikibase-mylanguagefallbackchain-babel' => "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|so}} [[Special:MyPage|páxina d'usuariu]].",
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, convertíu del $3 - $4',
+	'wikibase-api-no-such-sitelink' => 'Nun se pudo alcontrar esi enllaz a un sitiu',
 	'wikibase-self-conflict-patched' => 'La so edición parcheóse na última versión, sobreescribiendo dalgún de los sos cambios intermedios.',
 	'wikibase-conflict-patched' => 'La so edición parcheóse na última versión.',
 	'wikibase-restoreold' => 'restaurar',
@@ -1788,7 +1790,10 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Añadíu un alcuñu|Añadíos alcuños}} en [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Desaniciáu un alcuñu|Desaniciaos alcuños}} en [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Amestáu enllaz a [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Amestáu enllaz con insinies a [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Camudáu enllaz a [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Cambiaes les insinies pa [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Cambiáu enllaz ya insinies pa [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Desaniciáu un enllaz a [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Creáu esti elementu pa coneutar les páxines [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => "Amestáu un enllaz d'idioma pa coneutar les páxines [$2↔$3]",
@@ -4909,6 +4914,9 @@ $messages['eo'] = array(
 	'wikibase-aliases-input-help-message' => 'Se ĉi tiu datumaro estas konata per pli ol unu nomo, vi povas enigi kromnomojn kaj sinonimojn, tiel ke ĝi povu esti trovata per ties alternativaj nomoj.',
 	'wikibase-aliases-empty' => 'Neniu kromnomo difinita',
 	'wikibase-datatype-label' => 'Datumtipo',
+	'wikibase-statementview-rank-preferred' => 'Preferata rango',
+	'wikibase-statementview-rank-normal' => 'Normala rango',
+	'wikibase-statementview-rank-deprecated' => 'Malpreferata rango',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fonto|fontoj}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Unu fonto|$1 fontoj}} ankoraŭ ne konservita{{PLURAL:$1||j}}',
 	'wikibase-snakview-property-input-placeholder' => 'atributo',
@@ -4918,6 +4926,7 @@ $messages['eo'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'propra valoro',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'nekonata valoro',
 	'wikibase-snakview-snaktypeselector-novalue' => 'sen valoro',
+	'wikibase-shortcopyrightwarning' => 'Klakante al "$1" vi akceptas la [[$2|kondiĉojn de uzado]] kaj vi nerevokeble akceptas liberigi vian kontribuon laŭ $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Mi akceptas tiujn ĉi kondiĉojn por miaj estontaj redaktoj. Ne plu montru tiun ĉi mesaĝon.',
 	'wikibase-entityselector-more' => 'pli',
 	'wikibase-anonymouseditwarning' => 'Averto: Vi ne estas ensalutinta.
@@ -6067,6 +6076,9 @@ $messages['fi'] = array(
 	'wikibase-datatype-label' => 'Tietotyyppi:',
 	'wikibase-claimview-snak-tooltip' => 'Kirjoita arvo, joka vastaa ominaisuutta "$1". Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
 	'wikibase-claimview-snak-new-tooltip' => 'Määritettyäsi ominaisuuden voit kirjoittaa sitä vastaavan arvon. Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
+	'wikibase-statementview-rank-preferred' => 'Suosittu asema',
+	'wikibase-statementview-rank-normal' => 'Tavallinen asema',
+	'wikibase-statementview-rank-deprecated' => 'Vanhentunut asema',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|lähde|lähdettä}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Lähdettä|$1 lähdettä}} ei ole vielä tallennettu',
 	'wikibase-snakview-property-input-placeholder' => 'ominaisuus',
@@ -6206,6 +6218,7 @@ IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'special-mylanguagefallbackchain' => 'Varakieliketjuni',
 	'wikibase-mylanguagefallbackchain-text' => 'Varakieliketjua käytetään näyttämään aiheiden nimet sinulle seuraavasti.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> {{GENDER:$1|sinun}} [[Special:MyPage|käyttäjäsivullesi]].',
+	'wikibase-api-no-such-sitelink' => 'Tällaista sivustolinkkiä ei löytynyt',
 	'wikibase-restoreold' => 'palauta',
 	'wikibase-restore-summary' => 'Käyttäjän [[Special:Contributions/$2|$2]] tekemän muokkauksen $1 palautus',
 	'wikibase-no-direct-editing' => 'Sivun lähdekoodin muokkaaminen on poistettu käytöstä nimiavaruudessa $1',
@@ -7330,6 +7343,7 @@ $messages['gu'] = array(
  * @author Inkbug
  * @author חיים
  * @author ערן
+ * @author פוילישער
  */
 $messages['he'] = array(
 	'wikibase-desc' => 'מאגר נתונים מובנה',
@@ -12795,7 +12809,7 @@ $messages['nn'] = array(
 	'wikibase-undo-firstrev' => 'Kan ikkje angra opprettinga av sida',
 	'wikibase-propertyedittool-full' => 'Lista av verdiar er no komplett.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Éin verdi|$1 verdiar}} er ikkje lagra enno.',
-	'wikibase-propertyedittool-counter-entrieslabel' => '({{Plural:$1|éi oppføring|$1 oppføringar}})',
+	'wikibase-propertyedittool-counter-entrieslabel' => '({{PLURAL:$1|éi oppføring|$1 oppføringar}})',
 	'wikibase-sitelinksedittool-full' => 'Det er ikkje fleire nettstader tilgjengelege',
 	'wikibase-disambiguation-title' => 'Alternativ for «$1»',
 	'wb-special-newitem-new-item-notification' => 'Nytt datasett «$1» er oppretta og sendt vidare til sida. Attende til $2.',
@@ -16232,7 +16246,7 @@ $messages['te'] = array(
 	'wikibase-cancel' => 'రద్దుచేయి',
 	'wikibase-add' => 'చేర్చు',
 	'wikibase-sitelink-site-edit-placeholder' => 'సైటు',
-	'wikibase-sitelink-page-edit-placeholder' => 'వ్యాసం', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'పుట',
 	'wikibase-remove' => 'తొలగించు',
 	'wikibase-itembytitle-submit' => 'వెతుకు',
 	'wikibase-itemdisambiguation-lookup-language' => 'భాష:',
