@@ -102,6 +102,24 @@
       "revId": "51ad5084989a5140612b9aece83831c7454104fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_af53216d",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T17:56:08Z",
+      "side": 1,
+      "message": "We have to bump the cache epoch for the next deployment anyway, in order to enable per-language parser cache keys. So, yes.",
+      "parentUuid": "eeebdf60_243f3885",
+      "revId": "51ad5084989a5140612b9aece83831c7454104fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
