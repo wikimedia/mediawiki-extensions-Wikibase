@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_afa7a14b",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T18:03:59Z",
+      "side": 1,
+      "message": "I still think this should be in EntityViewConfigRegistry, not here.",
+      "revId": "bce43d9c6416a3f7b3626d9fe421483a69701188",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_cfa8a51f",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T18:03:59Z",
+      "side": 1,
+      "message": "Tabs :)",
+      "revId": "bce43d9c6416a3f7b3626d9fe421483a69701188",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_8fa29d39",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T18:03:59Z",
+      "side": 1,
+      "message": "Should be done in the OutputPageParserOutput hook. We *could* double check here and generate and add the config vars here, and log a warning. That would be a fail safe against odd situations during transition, but shouldn\u0027t be the rule.",
+      "revId": "bce43d9c6416a3f7b3626d9fe421483a69701188",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
