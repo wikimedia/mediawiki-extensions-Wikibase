@@ -1102,16 +1102,17 @@ $messages['de-ch'] = array(
 );
 
 /** Zazaki (Zazaki)
+ * @author Asmen
  * @author Erdemaslancan
  * @author Gorizon
  * @author Marmase
  * @author Mirzali
  */
 $messages['diq'] = array(
-	'specialpages-group-wikibaseclient' => 'Wastera Wikidata',
-	'wikibase-comment-add' => 'Objeya Wikidatay vıraziye.',
-	'wikibase-comment-remove' => 'Eleqeyın onjey Wikidatay besterneya. Gırey zıwani hewadeya.',
-	'wikibase-comment-linked' => 'Linka objey Wikidata debye na per.',
+	'specialpages-group-wikibaseclient' => 'Mışteriyê Wikidata',
+	'wikibase-comment-add' => 'Yew objey Wikidata vıraziyao.',
+	'wikibase-comment-remove' => 'Objey Wikidatao elaqedar esterd. Gırey zıwanan dardi we.',
+	'wikibase-comment-linked' => 'Yew objey Wikidata na pele ra gırê dao.',
 	'wikibase-comment-update' => 'Yew vırnayışé WikiData',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|vurnayış|vurnayışi}}',
 	'wikibase-dataitem' => 'Leteyé Wikimalumati',
@@ -1123,7 +1124,7 @@ $messages['diq'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Vırnayışané wikimalumati vırnayışan de peyénan de  bıasne',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Vırnayışé Wikidata',
-	'wikibase-watchlist-show-changes-pref' => 'Listada temaşan de  vurnayışane Wikimalumati bıasne',
+	'wikibase-watchlist-show-changes-pref' => 'Lista xoya seyrkerdışi de vırnayışanê Wikidata bımocne',
 	'wikibase-unconnectedpages-submit' => 'Şo',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Obje ID',
 	'wikibase-pageinfo-entity-id-none' => 'Çıniyo',
@@ -3837,6 +3838,8 @@ $messages['sr-el'] = array(
 	'wikibase-linkitem-addlinks' => 'Dodaj veze',
 	'wikibase-rc-hide-wikidata' => '$1 Vikipodatke',
 	'wikibase-rc-show-wikidata-pref' => 'Prikaži izmene na Vikipodacima u skorašnjim izmenama',
+	'wikibase-rc-wikibase-edit-letter' => 'd',
+	'wikibase-rc-wikibase-edit-title' => 'Izmena na Vikipodacima',
 	'wikibase-pageinfo-entity-id' => 'ID stavke na Vikipodacima',
 );
 
@@ -4191,6 +4194,7 @@ $messages['yi'] = array(
 	'tooltip-t-wikibase' => 'לינק צו פארבונדענעם דאטן־רעפאזיטאריום אביעקט',
 	'wikibase-after-page-move' => 'איר קענט אויך [$1 דערהיינטיקן] דעם אסאציאירטן וויקידאטן־עלעמענט כדי אויסהאלטן שפראכלינקען אויפן באוועגטן בלאט.',
 	'wikibase-after-page-move-queued' => 'דער [$1 וויקידאטן אביעקט] אסאציאירט מיט דעם דאזיקן בלאט וועט ווערן באלד דערהיינטיקט אויטאמאטיש.',
+	'wikibase-comment-add' => "מ'האט געשאפן א וויקידאטן־אביעקט.",
 	'wikibase-comment-remove' => 'אסאציאירטער וויקידאטן־עלעמענט אויסגעמעקט. שפראכלינקען אראפגענומען.',
 	'wikibase-comment-linked' => "מ'האט פארלינקט א וויקידאטן איינס צו דעם בלאט",
 	'wikibase-comment-unlink' => 'מען האט אויפגעלינקט דעם בלאט פון וויקידאטן־אביעקט. שפראכלינקען אראפגענומען.',

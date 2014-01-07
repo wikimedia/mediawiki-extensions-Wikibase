@@ -4418,6 +4418,7 @@ $messages['diq'] = array(
 );
 
 /** Lower Sorbian (dolnoserbski)
+ * @author Derbeth
  * @author Michawiki
  */
 $messages['dsb'] = array(
@@ -4450,7 +4451,7 @@ $messages['dsb'] = array(
 	'wikibase-partial-undo' => 'Toś ta změna dajo se pó źělach anulěrowaś.',
 	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|změna jo se wuwóstajiła|změnje stej se wuwóstajiłej|změny su se wuwóstajili|změnow jo se wuwóstajiło}}, dokulaž {{PLURAL:$1|wótpowědna gódnota jo se změniła|wótpowědnej gódnośe stej se změniłej|wótpowědne gódnoty su se změnili|wótpowědne změny su se změnili}} wót togo casa.',
 	'wikibase-empty-undo' => 'Njedajo nic, což dajo se anulěrowaś.',
-	'wikibase-undo-revision-error' => 'Anulěrowanje jo se njeraźiło',
+	'wikibase-undo-revision-error' => 'Anulěrowanje njejo se raźiło',
 	'wikibase-undo-samerev' => 'Změna njedajo se anulěrowaś, dokulaž wuchadna wersija jo identiska z celoweju wersiju.',
 	'wikibase-undo-badpage' => 'Wopacna wersija: Wersija $2 njesłuša k [[$1]].',
 	'wikibase-undo-firstrev' => 'Napóranje boka njedajo se anulěrowaś',
@@ -14832,7 +14833,7 @@ $messages['ru'] = array(
 	'wikibase-statementview-rank-normal' => 'Нормальный ранг',
 	'wikibase-statementview-rank-deprecated' => 'Нерекомендуемый ранг',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|источник|источников|источника}}', # Fuzzy
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Один источник ещё не сохранён|$1 источник ещё не сохранён|$1 источника ещё не сохранены|$1 источников ещё не сохранёно}}', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|$1 источник ещё не сохранён|$1 источников ещё не сохранёны|$1 источника ещё не сохранены|1=Источник ещё не сохранён}}',
 	'wikibase-snakview-property-input-placeholder' => 'свойство',
 	'wikibase-snakview-unsupportedsnaktype' => 'Соединитель (снэк) типа «$1». Обработка этого класса соединителей пока не поддерживается.',
 	'wikibase-snakview-choosesnaktype' => 'Выберите тип значения.',
