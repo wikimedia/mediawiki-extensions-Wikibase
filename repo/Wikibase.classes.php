@@ -32,7 +32,6 @@ return call_user_func( function() {
 		'Wikibase\RepoHooks' => 'Wikibase.hooks.php',
 
 		// includes
-		'Wikibase\ClaimSaver' => 'includes/ClaimSaver.php',
 		'Wikibase\ClaimSummaryBuilder' => 'includes/ClaimSummaryBuilder.php',
 		'Wikibase\ContentRetriever' => 'includes/ContentRetriever.php',
 		'Wikibase\DataTypeSelector' => 'includes/DataTypeSelector.php',
