@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_4fbdb562",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T18:04:12Z",
+      "side": 1,
+      "message": "We should set the actual JS config vars here (directly or indirectly). If they are in the ParserOutput, they should be in the OutputPage. I see no reason not to do that.",
+      "revId": "a6e293e21225b72f2c9c0302a0226f10b9add9dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
