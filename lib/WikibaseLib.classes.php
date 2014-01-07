@@ -233,7 +233,6 @@ return call_user_func( function() {
 		'Wikibase\Test\SerializerBaseTest' => 'tests/phpunit/serializers/SerializerBaseTest.php',
 		'Wikibase\Test\EntitySerializerBaseTest' => 'tests/phpunit/serializers/EntitySerializerBaseTest.php',
 		'Wikibase\Test\EntityTestCase' => 'tests/phpunit/entity/EntityTestCase.php',
-		'Wikibase\Lib\Test\Serializers\UnserializerBaseTest' => 'tests/phpunit/serializers/UnserializerBaseTest.php',
 		'Wikibase\Test\MockPropertyLabelResolver' => 'tests/phpunit/MockPropertyLabelResolver.php',
 		'Wikibase\Test\PropertyLabelResolverTest' => 'tests/phpunit/store/PropertyLabelResolverTest.php',
 		'Wikibase\Test\MockRepository' => 'tests/phpunit/MockRepository.php',
