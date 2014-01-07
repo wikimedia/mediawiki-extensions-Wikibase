@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_04fc34d4",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T12:58:55Z",
+      "side": 1,
+      "message": "Why have this as a member? Seems to me that there\u0027s only one place where this is really used. Having this as a member makes the information flow a bit odd.",
+      "revId": "51ad5084989a5140612b9aece83831c7454104fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_24f978e6",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T12:58:55Z",
+      "side": 1,
+      "message": "I\u0027d construct and use the EntityViewConfigRegistry here.",
+      "revId": "51ad5084989a5140612b9aece83831c7454104fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_44f23c04",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T12:58:55Z",
+      "side": 1,
+      "message": "This method should probably be in the ConfigRegistry, not here. Ideally, we wouldn\u0027t need an EntityView when viewing cached pages.",
+      "revId": "51ad5084989a5140612b9aece83831c7454104fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_64ef801c",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T12:58:55Z",
+      "side": 1,
+      "message": "Tabs!",
+      "revId": "51ad5084989a5140612b9aece83831c7454104fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_64d66056",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-07T12:58:55Z",
+      "side": 1,
+      "message": "I\u0027m confused - shouldn\u0027t we just register the JS variables in the OutputPageParserOutput hook? Why have this strange conditional here, what use cases does it cover?",
+      "revId": "51ad5084989a5140612b9aece83831c7454104fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
