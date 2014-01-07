@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_49bdb562",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-07T10:59:36Z",
+      "side": 1,
+      "message": "?",
+      "revId": "bb5ac0ae0a3f68c05997834248c4b59771698cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_69bab96e",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-07T10:59:36Z",
+      "side": 1,
+      "message": "huh, reintroduced the typo?  is this the correct patchset?",
+      "revId": "bb5ac0ae0a3f68c05997834248c4b59771698cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
