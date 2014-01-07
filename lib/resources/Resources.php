@@ -96,6 +96,28 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.QuantityFormatter' => $moduleTemplate + array(
+			'scripts' => array(
+				'formatters/QuantityFormatter.js',
+			),
+			'dependencies' => array(
+				'valueFormatters.util',
+				'wikibase.formattersBase',
+				'wikibase.ApiBasedValueFormatter',
+			),
+		),
+
+		'wikibase.formatters' => $moduleTemplate + array(
+			'scripts' => array(
+				'formatters/wikibase.formatters.register.js',
+			),
+			'dependencies' => array(
+				'dataValues.values',
+				'mw.ext.valueFormatters',
+				'wikibase.QuantityFormatter',
+			),
+		),
+
 		'wikibase.dataTypes' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.dataTypes/wikibase.dataTypes.js',
@@ -751,7 +773,10 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'mw.ext.valueView',
+				'mw.ext.valueFormatters',
 				'mw.ext.valueParsers',
+				'wikibase.formatters',
+				'wikibase.parsers',
 			),
 		),
 
@@ -765,7 +790,6 @@ return call_user_func( function() {
 				'jquery.valueview.BifidExpert',
 				'jquery.valueview.experts.staticdom',
 				'jquery.valueview.experts.wikibase',
-				'wikibase.parsers',
 				'jquery.eachchange',
 				'jquery.inputAutoExpand',
 				'wikibase.utilities',
