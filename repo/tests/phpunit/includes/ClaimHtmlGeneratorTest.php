@@ -11,7 +11,10 @@ use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
+use Wikibase\ReferenceList;
 use Wikibase\SnakList;
+use Wikibase\Statement;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator
@@ -107,6 +110,20 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 				new SnakList( array(
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) ),
 				) )
+			),
+			'/a snak!.*a snak!/s'
+		);
+
+		$testCases[] = array(
+			$snakFormatter,
+			$entityTitleLookupMock,
+			array(),
+			new Statement(
+				new PropertySomeValueSnak( 42 ),
+				new SnakList(),
+				new ReferenceList( array( new Reference( new SnakList( array (
+					new PropertyValueSnak( 50, new StringValue( 'second snak' ) )
+				) ) ) ) )
 			),
 			'/a snak!.*a snak!/s'
 		);
