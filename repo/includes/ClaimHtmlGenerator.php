@@ -14,8 +14,7 @@ use Wikibase\Lib\SnakFormatter;
  * @since 0.4
  * @licence GNU GPL v2+
  *
- * @author H. Snater < mediawiki at snater.com >
- * @author Daniel Werner
+ * @author H. Snater < mediawiki@snater.com >
  * @author Pragunbhutani
  * @author Katie Filbert < aude.wiki@gmail.com>
  */
@@ -29,28 +28,51 @@ class ClaimHtmlGenerator {
 	protected $snakFormatter;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var EntityTitleLookup
+	 */
+	protected $entityTitleLookup;
+
+	/**
+	 * Array of property labels indexed by serialized property ids
+	 * @since 0.5
+	 *
+	 * @var string[]
+	 */
+	protected $propertyLabels;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param SnakFormatter $snakFormatter
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param string[] $propertyLabels
 	 */
-	public function __construct( SnakFormatter $snakFormatter ) {
+	public function __construct(
+		SnakFormatter $snakFormatter,
+		EntityTitleLookup $entityTitleLookup,
+		$propertyLabels = array()
+	) {
 		$this->snakFormatter = $snakFormatter;
+		$this->entityTitleLookup = $entityTitleLookup;
+		$this->propertyLabels = $propertyLabels;
 	}
 
 	/**
 	 * Returns the Html for the main Snak.
 	 *
-	 * @param DataValue $value
+	 * @param string $formattedValue
 	 * @return string
 	 */
-	protected function getMainSnakHtml( $value ) {
+	protected function getMainSnakHtml( $formattedValue ) {
 		$mainSnakHtml = wfTemplate( 'wb-snak',
 			'wb-mainsnak',
 			'', // Link to property. NOTE: we don't display this ever (instead, we generate it on
 				// Claim group level) If this was a public function, this should be generated
 				// anyhow since important when displaying a Claim on its own.
 			'', // type selector, JS only
-			( $value === '' ) ? '&nbsp;' : $value
+			( $formattedValue === '' ) ? '&nbsp;' : $formattedValue
 		);
 
 		return $mainSnakHtml;
@@ -66,21 +88,12 @@ class ClaimHtmlGenerator {
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim(
-		Claim $claim,
-		$editSectionHtml = null
-	) {
+	public function getHtmlForClaim( Claim $claim, $editSectionHtml = null ) {
 		wfProfileIn( __METHOD__ );
 
-		try {
-			$snakValueHtml = $this->snakFormatter->formatSnak( $claim->getMainSnak() );
-		} catch ( FormattingException $ex ) {
-			$snakValueHtml = '?'; // XXX: perhaps show error message?
-		} catch ( PropertyNotFoundException $ex ) {
-			$snakValueHtml = '?'; // XXX: perhaps show error message?
-		}
-
-		$mainSnakHtml = $this->getMainSnakHtml( $snakValueHtml );
+		$mainSnakHtml = $this->getMainSnakHtml(
+			$this->getFormattedSnakValue( $claim->getMainSnak() )
+		);
 
 		$rankHtml = '';
 
@@ -100,7 +113,7 @@ class ClaimHtmlGenerator {
 			$rankHtml,
 			$claim->getGuid(),
 			$mainSnakHtml,
-			'', // TODO: Qualifiers
+			$this->getHtmlForQualifiers( $claim->getQualifiers() ),
 			$editSectionHtml,
 			'', // TODO: References heading
 			'' // TODO: References
@@ -108,5 +121,93 @@ class ClaimHtmlGenerator {
 
 		wfProfileOut( __METHOD__ );
 		return $claimHtml;
+	}
+
+	/**
+	 * Generates and returns the HTML representing a claim's qualifiers.
+	 *
+	 * @param Snaks $qualifiers
+	 * @return string
+	 */
+	protected function getHtmlForQualifiers( Snaks $qualifiers ) {
+		$qualifiersByProperty = new ByPropertyIdArray( $qualifiers );
+		$qualifiersByProperty->buildIndex();
+
+		$snaklistviewsHtml = '';
+
+		foreach( $qualifiersByProperty->getPropertyIds() as $propertyId ) {
+			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
+				$qualifiersByProperty->getByPropertyId( $propertyId )
+			);
+		}
+
+		return wfTemplate( 'wb-listview',
+			$snaklistviewsHtml
+		);
+	}
+
+	/**
+	 * Generates the HTML for a list of snaks.
+	 *
+	 * @param Snak[] $snaks
+	 * @return string
+	 */
+	protected function getSnaklistviewHtml( $snaks ) {
+		$snaksHtml = '';
+		$i = 0;
+
+		foreach( $snaks as $snak ) {
+			$snaksHtml .= $this->getSnakHtml( $snak, ( $i++ === 0 ) );
+		}
+
+		return wfTemplate(
+			'wb-snaklistview',
+			$snaksHtml
+		);
+	}
+
+	/**
+	 * Generates the HTML for a single snak.
+	 *
+	 * @param Snak $snak
+	 * @param boolean $showPropertyLink
+	 * @return string
+	 */
+	protected function getSnakHtml( $snak, $showPropertyLink = false ) {
+		$propertyLink = '';
+
+		if( $showPropertyLink ) {
+			$propertyId = $snak->getPropertyId();
+			$propertyKey = $propertyId->getSerialization();
+			$propertyLabel = isset( $this->propertyLabels[$propertyKey] )
+				? $this->propertyLabels[$propertyKey]
+				: $propertyKey;
+			$propertyLink = \Linker::link(
+				$this->entityTitleLookup->getTitleForId( $propertyId ),
+				htmlspecialchars( $propertyLabel )
+			);
+		}
+
+		return wfTemplate( 'wb-snak',
+			'wb-snakview',
+			// Display property link only once for snaks featuring the same property:
+			$propertyLink,
+			'',
+			( $snak->getType() === 'value' ) ? $this->getFormattedSnakValue( $snak ) : ''
+		);
+	}
+
+	/**
+	 * @param Snak $snak
+	 * @return string
+	 */
+	protected function getFormattedSnakValue( $snak ) {
+		try {
+			return $this->snakFormatter->formatSnak( $snak );
+		} catch ( FormattingException $ex ) {
+			return '?'; // XXX: perhaps show error message?
+		} catch ( PropertyNotFoundException $ex ) {
+			return '?'; // XXX: perhaps show error message?
+		}
 	}
 }
