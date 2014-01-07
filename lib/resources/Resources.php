@@ -60,6 +60,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'mw.ext.valueParsers',
 				'mw.ext.valueView',
+				'valueParsers',
 				'wikibase.EntityIdParser',
 			),
 		),
@@ -71,6 +72,27 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'valueParsers.ValueParser',
 				'wikibase.datamodel',
+			),
+		),
+
+		'wikibase.formattersBase' => $moduleTemplate + array(
+			'scripts' => array(
+				'formatters/wikibase.formatters.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+			),
+		),
+
+		'wikibase.ApiBasedValueFormatter' => $moduleTemplate + array(
+			'scripts' => array(
+				'formatters/wikibase.formatters.api.js',
+				'formatters/ApiBasedValueFormatter.js',
+			),
+			'dependencies' => array(
+				'valueFormatters.ValueFormatter',
+				'valueFormatters.util',
+				'wikibase.formattersBase',
 			),
 		),
 
