@@ -33,6 +33,23 @@
       "revId": "b6e352c38bbbc119a943aaea7e83419ac4961fc2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_e9f6c9d3",
+        "filename": "repo/tests/phpunit/includes/PropertyViewTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-07T09:00:55Z",
+      "side": 1,
+      "message": "Rather use assertSame with empty string... (yay for PHP\u0027s bad habits)",
+      "revId": "b6e352c38bbbc119a943aaea7e83419ac4961fc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
