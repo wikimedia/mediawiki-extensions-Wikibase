@@ -12,12 +12,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityRevision;
 use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SnakList;
 
 /**
@@ -33,12 +32,18 @@ use Wikibase\SnakList;
  */
 class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 
-	protected function getDefaultResult(){
+	protected function getDefaultResult( $indexedMode = false ){
 		$apiMain =  $this->getMockBuilder( 'ApiMain' )->disableOriginalConstructor()->getMockForAbstractClass();
-		return new ApiResult( $apiMain );
+		$result = new ApiResult( $apiMain );
+
+		if ( $indexedMode ) {
+			$result->setRawMode();
+		}
+
+		return $result;
 	}
 
-	protected function getResultBuilder( $result ){
+	protected function getResultBuilder( $result, $options = null ){
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -57,10 +62,21 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 			->method( 'getTitleForId' )
 			->will(  $this->returnValue( $mockTitle ) );
 
-		return new ResultBuilder(
+		$serializerFactory = new SerializerFactory();
+
+		$builder = new ResultBuilder(
 			$result,
-			$mockEntityTitleLookup
+			$mockEntityTitleLookup,
+			$serializerFactory
 		);
+
+		if ( is_array( $options ) ) {
+			$builder->getOptions()->setOptions( $options );
+		} elseif ( $options instanceof SerializationOptions ) {
+			$builder->getOptions()->merge( $options );
+		}
+
+		return $builder;
 	}
 
 	public function testCanConstruct(){
@@ -527,5 +543,225 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$resultBuilder->addRevisionIdFromStatusToResult( $mockStatus, 'entity' );
 
 		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function provideSetList() {
+		return array(
+			'null path' => array( null, 'foo', array(), 'letter', false, array( 'foo' => array() ) ),
+
+			'empty path' => array( array(), 'foo', array( 'x', 'y' ), 'letter', false,
+				array(
+					'foo' => array( 'x', 'y' )
+			) ),
+
+			'string path' => array( 'ROOT', 'foo', array( 'x', 'y' ), 'letter', false,
+				array(
+					'ROOT' => array(
+						'foo' => array( 'x', 'y' ) )
+				) ),
+
+			'actual path' => array( array( 'one', 'two' ), 'foo', array( 'X' => 'x', 'Y' => 'y' ), 'letter', false,
+				array(
+					'one' => array(
+						'two' => array(
+							'foo' => array( 'X' => 'x', 'Y' => 'y' ) ) )
+				) ),
+
+			'indexed' => array( 'ROOT', 'foo', array( 'X' => 'x', 'Y' => 'y' ), 'letter', true,
+				array(
+					'ROOT' => array(
+						'foo' => array( 'x', 'y', '_element' => 'letter' ) )
+				) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideSetList
+	 */
+	public function testSetList( $path, $name, array $values, $tag, $indexed, $expected ) {
+		$result = $this->getDefaultResult( $indexed );
+		$builder = $this->getResultBuilder( $result );
+
+		$builder->setList( $path, $name, $values, $tag );
+		$this->assertResultStructure( $expected, $result->getData() );
+	}
+
+	public function provideSetList_InvalidArgument() {
+		return array(
+			'null name' => array( 'ROOT', null, array( 10, 20 ), 'Q' ),
+			'int name' => array( 'ROOT', 6, array( 10, 20 ), 'Q' ),
+			'array name' => array( 'ROOT', array( 'x' ), array( 10, 20 ), 'Q' ),
+
+			'null tag' => array( 'ROOT', 'foo', array( 10, 20 ), null ),
+			'int tag' => array( 'ROOT', 'foo', array( 10, 20 ), 6 ),
+			'array tag' => array( 'ROOT', 'foo', array( 10, 20 ), array( 'x' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideSetList_InvalidArgument
+	 */
+	public function testSetList_InvalidArgument( $path, $name, array $values, $tag ) {
+		$result = $this->getDefaultResult();
+		$builder = $this->getResultBuilder( $result );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$builder->setList( $path, $name, $values, $tag );
+	}
+
+	public function provideSetValue() {
+		return array(
+			'null path' => array( null, 'foo', 'value', false, array( 'foo' => 'value' ) ),
+
+			'empty path' => array( array(), 'foo', 'value', false,
+				array(
+					'foo' => 'value'
+				) ),
+
+			'string path' => array( 'ROOT', 'foo', 'value', false,
+				array(
+					'ROOT' => array( 'foo' => 'value' )
+				) ),
+
+			'actual path' => array( array( 'one', 'two' ), 'foo', array( 'X' => 'x', 'Y' => 'y' ), true,
+				array(
+					'one' => array(
+						'two' => array(
+							'foo' => array( 'X' => 'x', 'Y' => 'y' ) ) )
+				) ),
+
+			'indexed' => array( 'ROOT', 'foo', 'value', true,
+				array(
+					'ROOT' => array( 'foo' => 'value' )
+				) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideSetValue
+	 */
+	public function testSetValue( $path, $name, $value, $indexed, $expected ) {
+		$result = $this->getDefaultResult( $indexed );
+		$builder = $this->getResultBuilder( $result );
+
+		$builder->setValue( $path, $name, $value );
+		$this->assertResultStructure( $expected, $result->getData() );
+	}
+
+	public function provideSetValue_InvalidArgument() {
+		return array(
+			'null name' => array( 'ROOT', null, 'X' ),
+			'int name' => array( 'ROOT', 6, 'X' ),
+			'array name' => array( 'ROOT', array( 'x' ), 'X' ),
+
+			'list value' => array( 'ROOT', 'foo', array( 10, 20 ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideSetValue_InvalidArgument
+	 */
+	public function testSetValue_InvalidArgument( $path, $name, $value ) {
+		$result = $this->getDefaultResult();
+		$builder = $this->getResultBuilder( $result );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$builder->setValue( $path, $name, $value );
+	}
+
+	public function provideAppendValue() {
+		return array(
+			'null path' => array( null, null, 'value', 'letter', false, array( 'value' ) ),
+
+			'empty path' => array( array(), null, 'value', 'letter', false,
+				array( 'value' )
+			),
+
+			'string path' => array( 'ROOT', null, 'value', 'letter', false,
+				array(
+					'ROOT' => array( 'value' )
+				) ),
+
+			'actual path' => array( array( 'one', 'two' ), null, array( 'X' => 'x', 'Y' => 'y' ), 'letter', false,
+				array(
+					'one' => array(
+						'two' => array( array( 'X' => 'x', 'Y' => 'y' ) ) )
+				) ),
+
+
+			'int key' => array( 'ROOT', -2, 'value', 'letter', false,
+				array(
+					'ROOT' => array( -2 => 'value' )
+				) ),
+
+			'string key' => array( 'ROOT', 'Q7', 'value', 'letter', false,
+				array(
+					'ROOT' => array( 'Q7' => 'value' )
+				) ),
+
+
+			'null key indexed' => array( 'ROOT', null, 'value', 'letter', true,
+				array(
+					'ROOT' => array( 'value', '_element' => 'letter' )
+				) ),
+
+			'int key indexed' => array( 'ROOT', -2, 'value', 'letter', true,
+				array(
+					'ROOT' => array( 'value', '_element' => 'letter' )
+				) ),
+
+			'string key indexed' => array( 'ROOT', 'Q7', 'value', 'letter', true,
+				array(
+					'ROOT' => array( 'value', '_element' => 'letter' )
+				) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideAppendValue
+	 */
+	public function testAppendValue( $path, $key, $value, $tag, $indexed, $expected ) {
+		$result = $this->getDefaultResult( $indexed );
+		$builder = $this->getResultBuilder( $result );
+
+		$builder->appendValue( $path, $key, $value, $tag );
+		$this->assertResultStructure( $expected, $result->getData() );
+	}
+
+	public function provideAppendValue_InvalidArgument() {
+		return array(
+			'list value' => array( 'ROOT', null, array( 1, 2, 3 ), 'Q' ),
+			'array key' => array( 'ROOT', array( 'x' ), 'value', 'Q' ),
+
+			'null tag' => array( 'ROOT', 'foo', 'value', null ),
+			'int tag' => array( 'ROOT', 'foo', 'value', 6 ),
+			'array tag' => array( 'ROOT', 'foo', 'value', array( 'x' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideAppendValue_InvalidArgument
+	 */
+	public function testAppendValue_InvalidArgument( $path, $key, $value, $tag ) {
+		$result = $this->getDefaultResult();
+		$builder = $this->getResultBuilder( $result );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$builder->appendValue( $path, $key, $value, $tag );
+	}
+
+	protected function assertResultStructure( $expected, $actual, $path = null ) {
+		foreach ( $expected as $key => $value ) {
+			$this->assertArrayHasKey( $key, $actual, $path );
+
+			if ( is_array( $value ) ) {
+				$this->assertInternalType( 'array', $actual[$key], $path );
+
+				$subKey = $path === null ? $key : $path . '/' . $key;
+				$this->assertResultStructure( $value, $actual[$key], $subKey );
+			} else {
+				$this->assertEquals( $value, $actual[$key] );
+			}
+		}
 	}
 }
