@@ -96,6 +96,8 @@ class ClaimHtmlGenerator {
 		);
 
 		$rankHtml = '';
+		$referencesHeading = '';
+		$referencesHtml = '';
 
 		if( is_a( $claim, 'Wikibase\Statement' ) ) {
 			$serializedRank = ClaimSerializer::serializeRank( $claim->getRank() );
@@ -104,6 +106,15 @@ class ClaimHtmlGenerator {
 				'wb-rankselector-' . $serializedRank,
 				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
 			);
+
+			$referenceList = $claim->getReferences();
+
+			$referencesHeading = wfMessage(
+				'wikibase-statementview-referencesheading-pendingcountersubject',
+				count( $referenceList )
+			)->text();
+
+			$referencesHtml = $this->getHtmlForReferences( $claim->getReferences() );
 		}
 
 		// @todo: Use 'wb-claim' or 'wb-statement' template accordingly
@@ -115,8 +126,8 @@ class ClaimHtmlGenerator {
 			$mainSnakHtml,
 			$this->getHtmlForQualifiers( $claim->getQualifiers() ),
 			$editSectionHtml,
-			'', // TODO: References heading
-			'' // TODO: References
+			$referencesHeading,
+			$referencesHtml
 		);
 
 		wfProfileOut( __METHOD__ );
@@ -142,6 +153,52 @@ class ClaimHtmlGenerator {
 		}
 
 		return wfTemplate( 'wb-listview',
+			$snaklistviewsHtml
+		);
+	}
+
+	/**
+	 * Generates the HTML for a ReferenceList object.
+	 *
+	 * @param ReferenceList $referenceList
+	 * @return string
+	 */
+	protected function getHtmlForReferences( ReferenceList $referenceList ) {
+		$referencesHtml = '';
+
+		foreach( $referenceList as $reference ) {
+			$referencesHtml .= $this->getHtmlForReference( $reference );
+		}
+
+		if( $referencesHtml !== '' ) {
+			$referencesHtml = wfTemplate( 'wb-listview',
+				$referencesHtml
+			);
+		}
+
+		return $referencesHtml;
+	}
+
+	/**
+	 * Generates the HTML for a Reference object.
+	 *
+	 * @param Reference $reference
+	 * @return string
+	 */
+	protected function getHtmlForReference( $reference ) {
+		$referenceSnaksByProperty = new ByPropertyIdArray( $reference->getSnaks() );
+		$referenceSnaksByProperty->buildIndex();
+
+		$snaklistviewsHtml = '';
+
+		foreach( $referenceSnaksByProperty->getPropertyIds() as $propertyId ) {
+			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
+				$referenceSnaksByProperty->getByPropertyId( $propertyId )
+			);
+		}
+
+		return wfTemplate( 'wb-referenceview',
+			'wb-referenceview-' . $reference->getHash(),
 			$snaklistviewsHtml
 		);
 	}
