@@ -148,7 +148,7 @@ HTML;
 
 	$templates['wb-referenceview'] =
 <<<HTML
-<div>
+<div class="wb-referenceview">
 	<div class="wb-referenceview-heading"></div>
 	$1<!-- [0,*] wb-snaklistview -->
 </div>
@@ -157,7 +157,7 @@ HTML;
 
 	$templates['wb-listview'] =
 <<<HTML
-<div>$1</div>
+<div class="wb-listview">$1</div>
 HTML;
 
 	$templates['wb-snaklistview'] =

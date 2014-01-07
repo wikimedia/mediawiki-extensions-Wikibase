@@ -751,6 +751,10 @@ div.wb-claimlistview div.wb-editsection {
 
 /***** REFERENCES *****/
 
+.wb-statement-reference-heading {
+	padding-top: 0.5em;
+}
+
 .wb-statement-references-heading, .wb-statement-references {
 	padding-left: 17em;
 	clear: both;
