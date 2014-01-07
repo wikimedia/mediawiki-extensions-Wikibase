@@ -16,6 +16,24 @@
       "revId": "a6e293e21225b72f2c9c0302a0226f10b9add9dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_2f41515f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-07T18:49:37Z",
+      "side": 1,
+      "message": "then unavailable to the skin or other use cases?  or have them use the js vars for unrelated use cases?",
+      "parentUuid": "eeebdf60_4fbdb562",
+      "revId": "a6e293e21225b72f2c9c0302a0226f10b9add9dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
