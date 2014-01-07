@@ -84,6 +84,24 @@
       "revId": "51ad5084989a5140612b9aece83831c7454104fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_243f3885",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-07T13:01:56Z",
+      "side": 1,
+      "message": "if configvars is not in parser cache and thus not passed to output page, then what to do?  \n\ndo we bump the cache epoch thing to ensure that? having these config vars missing would be icky and problematic",
+      "parentUuid": "eeebdf60_64d66056",
+      "revId": "51ad5084989a5140612b9aece83831c7454104fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
