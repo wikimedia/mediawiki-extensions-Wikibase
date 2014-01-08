@@ -5,7 +5,7 @@ if ( defined( 'DATA_VALUES_JAVASCRIPT_VERSION' ) ) {
 	return 1;
 }
 
-define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.1' );
+define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.1.1' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
@@ -27,7 +27,8 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 $GLOBALS['wgResourceModules'] = array_merge(
 	$GLOBALS['wgResourceModules'],
 	include( __DIR__ . '/DataValues.resources.mw.php' ),
-	include( __DIR__ . '/js/ValueParsers.resources.mw.php' )
+	include( __DIR__ . '/js/ValueParsers.resources.mw.php' ),
+	include( __DIR__ . '/js/ValueFormatters.resources.mw.php' )
 );
 
 // API module registration
@@ -60,7 +61,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
 	}
 	return true;
 };
-//var_dump($GLOBALS['IP']);var_dump(__DIR__);var_dump(substr( __DIR__, strlen( $GLOBALS['IP'] ) ));var_dump('/../..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/js/tests/ValueParsers');exit;
+
 /**
  * Hook to add QUnit test cases.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
@@ -110,6 +111,61 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
 			),
 			'dependencies' => array(
 				'ext.valueParsers.tests',
+			),
+		);
+
+	return true;
+	// @codeCoverageIgnoreEnd
+};
+
+/**
+ * Adding valueFormatters QUnit tests.
+ * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+ * @since 0.1
+ *
+ * @param array &$testModules
+ * @param \ResourceLoader &$resourceLoader
+ * @return boolean
+ */
+$wgHooks['ResourceLoaderTestModules'][] = function(
+	array &$testModules,
+	\ResourceLoader &$resourceLoader
+) {
+	// @codeCoverageIgnoreStart
+	$moduleTemplate = array(
+		'localBasePath' => __DIR__ . '/js/tests/ValueFormatters',
+		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/js/tests/ValueFormatters',
+	);
+
+	$testModules['qunit']['ext.valueFormatters.tests'] = $moduleTemplate + array(
+			'scripts' => array(
+				'ValueFormatter.tests.js',
+			),
+			'dependencies' => array(
+				'valueFormatters',
+				'valueFormatters.ValueFormatter',
+			),
+		);
+
+	$testModules['qunit']['ext.valueFormatters.factory'] = $moduleTemplate + array(
+			'scripts' => array(
+				'ValueFormatterFactory.tests.js',
+			),
+			'dependencies' => array(
+				'qunit.parameterize',
+				'valueFormatters.factory',
+				'valueFormatters.formatters',
+			),
+		);
+
+	$testModules['qunit']['ext.valueFormatters.formatters'] = $moduleTemplate + array(
+			'scripts' => array(
+				'formatters/NullFormatter.tests.js',
+				'formatters/StringFormatter.tests.js',
+			),
+			'dependencies' => array(
+				'ext.valueFormatters.tests',
+				'valueFormatters.formatters',
 			),
 		);
 
