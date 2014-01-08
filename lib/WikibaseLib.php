@@ -62,8 +62,8 @@ $GLOBALS['evilDataValueMap'] = array_merge(
 );
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgAutoloadClasses, $wgExtensionMessagesFiles, $wgExtensionFunctions;
-	global $wgValueParsers, $wgDataValues, $wgJobClasses, $wgHooks, $wgResourceModules, $wgValueFormatters;
+	global $wgExtensionCredits, $wgAutoloadClasses, $wgExtensionMessagesFiles;
+	global $wgValueParsers, $wgJobClasses, $wgHooks, $wgResourceModules;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -102,7 +102,13 @@ call_user_func( function() {
 			$options );
 	};
 
-	$wgDataValues['wikibase-entityid'] = 'Wikibase\DataModel\Entity\EntityIdValue';
+	$wgValueParsers['bool'] = 'ValueParsers\BoolParser';
+	$wgValueParsers['float'] = 'ValueParsers\FloatParser';
+	$wgValueParsers['globecoordinate'] = 'ValueParsers\GlobeCoordinateParser';
+	$wgValueParsers['int'] = 'ValueParsers\IntParser';
+	$wgValueParsers['null'] = 'ValueParsers\NullParser';
+	$wgValueParsers['decimal'] = 'ValueParsers\DecimalParser';
+
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
 
@@ -167,8 +173,6 @@ call_user_func( function() {
 
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
-
-	$wgValueFormatters['wikibase-entityid'] = 'Wikibase\Lib\EntityIdFormatter';
 
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 		include_once( __DIR__ . '/config/WikibaseLib.experimental.php' );
