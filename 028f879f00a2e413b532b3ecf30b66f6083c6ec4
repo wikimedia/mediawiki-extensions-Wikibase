@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_12e6b1ac",
+        "filename": "lib/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-08T15:30:17Z",
+      "side": 1,
+      "message": "This file needs \u0027wikibase.store.FetchedContent\u0027",
+      "revId": "028f879f00a2e413b532b3ecf30b66f6083c6ec4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
