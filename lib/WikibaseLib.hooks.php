@@ -126,7 +126,7 @@ final class LibHooks {
 				'wikibase',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.parsers',
-				'wikibase.store',
+				'wikibase.store.FetchedContent',
 				'wikibase.utilities',
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.utilities.GuidGenerator',

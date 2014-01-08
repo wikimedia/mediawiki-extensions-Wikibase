@@ -197,12 +197,10 @@ return call_user_func( function() {
 
 		'wikibase.store' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.store/store.js',
-				'wikibase.store/store.FetchedContent.js',
+				'wikibase.store/store.js'
 			),
 			'dependencies' => array(
-				'wikibase',
-				'mediawiki.Title',
+				'wikibase'
 			)
 		),
 
@@ -600,7 +598,7 @@ return call_user_func( function() {
 				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
 				'wikibase.AbstractedRepoApi',
-				'wikibase.store', // required for getting datatype from entityselector selected property
+				'wikibase.store.FetchedContent', // required for getting datatype from entityselector selected property
 				'mediawiki.legacy.shared',
 				'jquery.ui.position',
 				'jquery.ui.TemplatedWidget',
