@@ -81,11 +81,7 @@ $.widget( 'wikibase.linkitem', {
 		globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
 		namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
 		repoArticlePath: mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ),
-		langLinkSiteGroup:
-			mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup
-			// Fallback to the site group of the current site in case .langLinkSiteGroup isn't yet
-			// in the cache:
-			|| wb.getSite( mw.config.get( 'wbCurrentSite' ).globalSiteId ).getGroup()
+		langLinkSiteGroup: mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup
 	},
 
 	/**
