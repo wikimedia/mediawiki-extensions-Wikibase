@@ -5,7 +5,7 @@ namespace Wikibase;
 use ResourceLoaderModule;
 use ResourceLoaderContext;
 use MediaWikiSite;
-use Sites;
+use SiteSQLStore;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -32,14 +32,11 @@ class SiteModule extends ResourceLoaderModule {
 		/**
 		 * @var MediaWikiSite $site
 		 */
-		$site = Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
+		$site = SiteSQLStore::newInstance()->getSite( Settings::get( 'siteGlobalID' ) );
 
 		$currentSite = array();
 		if ( $site ) {
-			$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
 			$currentSite = array(
-				'shortName' => $languageName,
-				'name' => $languageName,
 				'globalSiteId' => $site->getGlobalId(),
 				'languageCode' => $site->getLanguageCode(),
 				'langLinkSiteGroup' => WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
