@@ -157,7 +157,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 					$entityIdentifiers,
 					$weightField
 				),
-				__METHOD__
+				__METHOD__,
+				array( 'IGNORE' )
 			);
 
 			if ( !$success ) {
@@ -257,7 +258,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 					$termIdentifiers,
 					$entityIdentifiers
 				),
-				__METHOD__
+				__METHOD__,
+				array( 'IGNORE' )
 			);
 
 			if ( !$success ) {

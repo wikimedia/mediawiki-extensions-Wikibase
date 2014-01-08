@@ -9,6 +9,7 @@ use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Settings;
+use Wikibase\StoreFactory;
 
 /**
  * Special page to act as a data endpoint for the linked data web.
@@ -50,6 +51,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		// Initialize serialization service.
 		// TODO: use reverse DI facility (global registry/factory)
 		$repo = WikibaseRepo::getDefaultInstance();
+		$entityTitleLookup = $repo->getEntityTitleLookup();
+		$entityRevisionLookup = $repo->getEntityRevisionLookup();
 
 		$entityContentFactory = $repo->getEntityContentFactory();
 		$entityIdParser = $repo->getEntityIdParser();
@@ -57,7 +60,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
 			$this->getPageTitle()->getCanonicalURL() . '/',
-			\Wikibase\StoreFactory::getStore()->getEntityLookup()
+			StoreFactory::getStore()->getEntityLookup()
 		);
 
 		$maxAge = Settings::get( 'dataSquidMaxage' );
@@ -85,7 +88,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		
 		$this->requestHandler = new EntityDataRequestHandler(
 			$uriManager,
-			$entityContentFactory,
+			$entityTitleLookup,
+			$entityRevisionLookup,
 			$entityIdParser,
 			$serializationService,
 			$defaultFormat,

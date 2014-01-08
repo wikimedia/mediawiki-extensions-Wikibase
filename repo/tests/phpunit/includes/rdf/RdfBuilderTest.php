@@ -2,11 +2,15 @@
 
 namespace Wikibase\Test;
 
+use DateTime;
+use EasyRdf_Graph;
 use EasyRdf_Literal;
 use EasyRdf_Namespace;
-use Wikibase\DataModel\Entity\EntityId;
+use EasyRdf_Resource;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
+use Wikibase\EntityId;
+use Wikibase\EntityRevision;
 use Wikibase\Item;
 use Wikibase\RdfBuilder;
 
@@ -77,14 +81,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param \Wikibase\EntityId $entityId
+	 * @param EntityId $entityId
 	 * @param array $entityProps
 	 * @param array $dataProps
 	 *
-	 * @return \EasyRdf_Graph
+	 * @return EasyRdf_Graph
 	 */
 	protected static function makeEntityGraph( EntityId $entityId, $entityProps, $dataProps ) {
-		$graph = new \EasyRdf_Graph();
+		$graph = new EasyRdf_Graph();
 
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object
 
@@ -100,11 +104,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param \EasyRdf_Graph    $graph
-	 * @param \EasyRdf_Resource $resources
-	 * @param array  $properties
+	 * @param EasyRdf_Graph $graph
+	 * @param EasyRdf_Resource $resource
+	 * @param array $properties
 	 */
-	protected static function addProperties( \EasyRdf_Graph $graph, \EasyRdf_Resource $resource, $properties ) {
+	protected static function addProperties( EasyRdf_Graph $graph, EasyRdf_Resource $resource, $properties ) {
 		foreach ( $properties as $prop => $values ) {
 			if ( !is_array( $values ) ) {
 				$values = array( $values );
@@ -121,7 +125,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return \EasyRdf_Graph[]|null
+	 * @return EasyRdf_Graph[]|null
 	 */
 	public static function getTestGraphs() {
 		static $graphs = array();
@@ -151,9 +155,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
 				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['empty']->getId() ),
-				//'schema:version' => new \EasyRdf_Literal( 23, null, 'xsd:integer' ),
-				'schema:version' => new \EasyRdf_Literal_Integer( 23 ),
-				'schema:dateModified' => new \EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
+				'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
+				'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
 			)
 		);
 
@@ -162,32 +165,33 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array(
 				'rdf:type' => $builder->getEntityTypeQName( Item::ENTITY_TYPE ),
 				'rdfs:label' => array(
-					new \EasyRdf_Literal( 'Berlin', 'en' ),
-					new \EasyRdf_Literal( 'Берлин', 'ru' )
+					new EasyRdf_Literal( 'Berlin', 'en' ),
+					new EasyRdf_Literal( 'Берлин', 'ru' )
 				),
 				'skos:prefLabel' => array(
-					new \EasyRdf_Literal( 'Berlin', 'en' ),
-					new \EasyRdf_Literal( 'Берлин', 'ru' )
+					new EasyRdf_Literal( 'Berlin', 'en' ),
+					new EasyRdf_Literal( 'Берлин', 'ru' )
 				),
 				'schema:name' => array(
-					new \EasyRdf_Literal( 'Berlin', 'en' ),
-					new \EasyRdf_Literal( 'Берлин', 'ru' )
+					new EasyRdf_Literal( 'Berlin', 'en' ),
+					new EasyRdf_Literal( 'Берлин', 'ru' )
 				),
 				'schema:description' => array(
-					new \EasyRdf_Literal( 'German city', 'en' ),
-					new \EasyRdf_Literal( 'столица и одновременно земля Германии', 'ru' )
+					new EasyRdf_Literal( 'German city', 'en' ),
+					new EasyRdf_Literal( 'столица и одновременно земля Германии', 'ru' )
 				),
 				'skos:altLabel' => array(
-					new \EasyRdf_Literal( 'Berlin, Germany', 'en' ),
-					new \EasyRdf_Literal( 'Land Berlin', 'en' ),
-					new \EasyRdf_Literal( 'Berlin', 'ru' )
+					new EasyRdf_Literal( 'Berlin, Germany', 'en' ),
+					new EasyRdf_Literal( 'Land Berlin', 'en' ),
+					new EasyRdf_Literal( 'Berlin', 'ru' )
 				),
 			),
+
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
 				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['terms']->getId() ),
-				'schema:version' => new \EasyRdf_Literal( 23, null, 'xsd:integer' ),
-				'schema:dateModified' => new \EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
+				'schema:version' => new EasyRdf_Literal( 23, null, 'xsd:integer' ),
+				'schema:dateModified' => new EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
 			)
 		);
 
@@ -213,18 +217,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$cases = array();
 
-		$revision = $this->getMockBuilder( '\Revision' )
-			->disableOriginalConstructor()->getMock();
-		$revision->expects( $this->any() )->method( 'getId' )
-			->will( $this->returnValue( 23 ) );
-		$revision->expects( $this->any() )->method( 'getTimestamp' )
-			->will( $this->returnValue( '20130101000000' ) );
-
 		foreach ( $entities as $name => $entity ) {
 			if ( array_key_exists( $name, $graphs ) ) {
 				$cases[] = array(
-					$entity,
-					$revision,
+					new EntityRevision( $entity, 23, '20130101000000' ),
 					$graphs[$name],
 				);
 			}
@@ -241,10 +237,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( Entity $entity, \Revision $revision, \EasyRdf_Graph $expectedGraph ) {
+	public function testAddEntity( EntityRevision $entityRevision, EasyRdf_Graph $expectedGraph ) {
 		$builder = $this->newRdfBuilder();
 
-		$builder->addEntity( $entity, $revision );
+		$builder->addEntity( $entityRevision->getEntity() );
+		$builder->addEntityRevisionInfo( $entityRevision->getEntity()->getId(), $entityRevision->getRevision(), $entityRevision->getTimestamp() );
 		$graph = $builder->getGraph();
 
 		foreach ( $expectedGraph->resources() as $rc ) {
@@ -273,12 +270,12 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public static function rdf2string( $obj ) {
-		if ( $obj instanceof \EasyRdf_Resource ) {
+		if ( $obj instanceof EasyRdf_Resource ) {
 			return '<' . $obj->getUri() . '>';
-		} elseif ( $obj instanceof \EasyRdf_Literal ) {
+		} elseif ( $obj instanceof EasyRdf_Literal ) {
 			$value = $obj->getValue();
 
-			if ( $value instanceof \DateTime ) {
+			if ( $value instanceof DateTime ) {
 				$value = wfTimestamp( TS_ISO_8601, $value->getTimestamp() );
 			}
 

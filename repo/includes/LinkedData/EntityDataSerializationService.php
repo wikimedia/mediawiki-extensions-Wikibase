@@ -4,16 +4,16 @@ namespace Wikibase\LinkedData;
 
 use Wikibase\Entity;
 use Wikibase\EntityLookup;
-use \MWException;
-use \EasyRdf_Format;
-use \Revision;
-use \ApiFormatBase;
-use \ApiMain;
-use \ApiResult;
-use \ApiFormatXml;
-use \DerivativeContext;
-use \DerivativeRequest;
-use \RequestContext;
+use MWException;
+use EasyRdf_Format;
+use ApiFormatBase;
+use ApiMain;
+use ApiResult;
+use ApiFormatXml;
+use DerivativeContext;
+use DerivativeRequest;
+use RequestContext;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -29,9 +29,6 @@ use Wikibase\RdfSerializer;
  * For RDF output, this relies on the RdfSerializer class.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -327,13 +324,12 @@ class EntityDataSerializationService {
 	 * Output entity data.
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
-	 * @param Entity $entity The entity
-	 * @param Revision|null $rev The entity's revision
+	 * @param EntityRevision $entityRevision The entity
 	 *
 	 * @return array tuple of ( $data, $contentType )
 	 * @throws MWException if the format is not supported
 	 */
-	public function getSerializedData( $format, Entity $entity, Revision $rev = null ) {
+	public function getSerializedData( $format, EntityRevision $entityRevision ) {
 
 		//TODO: handle IfModifiedSince!
 
@@ -354,10 +350,10 @@ class EntityDataSerializationService {
 		}
 
 		if( $serializer instanceof ApiFormatBase ) {
-			$data = $this->apiSerialize( $entity, $serializer, $rev );
+			$data = $this->apiSerialize( $entityRevision, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
 		} else {
-			$data = $serializer->serializeEntity( $entity, $rev );
+			$data = $serializer->serializeEntityRevision( $entityRevision );
 			$contentType = $serializer->getDefaultMimeType();
 		}
 
@@ -539,28 +535,25 @@ class EntityDataSerializationService {
 	 * representation of data entities. Using the ContentHandler to serialize the entity would
 	 * expose internal implementation details.
 	 *
-	 * @param Entity $entity the entity to output.
+	 * @param EntityRevision $entityRevision the entity to output.
 	 * @param ApiFormatBase $printer the printer to use to generate the output
-	 * @param Revision $revision the entity's revision (optional)
 	 *
 	 * @return string the serialized data
 	 */
-	public function apiSerialize( Entity $entity, ApiFormatBase $printer, Revision $revision = null ) {
+	public function apiSerialize( EntityRevision $entityRevision, ApiFormatBase $printer ) {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat
 		//       counter-intuitive. Basically, the relevant ApiResult object
 		//       is owned by the ApiMain module provided by newApiMain().
 
 		// Pushes $entity into the ApiResult held by the ApiMain module
-		$res = $this->generateApiResult( $entity, $printer );
+		$res = $this->generateApiResult( $entityRevision->getEntity(), $printer );
 
 
 		//XXX: really inject meta-info? where else should we put it?
 		$basePath = array();
 
-		if ( $revision ) {
-			$res->addValue( $basePath , '_revision_', intval( $revision->getId() ) );
-			$res->addValue( $basePath , '_modified_', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
-		}
+		$res->addValue( $basePath , '_revision_', intval( $entityRevision->getRevision() ) );
+		$res->addValue( $basePath , '_modified_', wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() ) );
 
 		$printer->profileIn();
 		$printer->initPrinter( false );

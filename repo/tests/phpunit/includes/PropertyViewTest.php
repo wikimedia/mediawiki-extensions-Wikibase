@@ -10,7 +10,7 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\PropertyView
  *
- * @since 0.1
+ * @since 0.5
  *
  * @group Wikibase
  * @group WikibasePropertyView
@@ -64,5 +64,12 @@ class PropertyViewTest extends EntityViewTest {
 	protected function prepareEntityData( Entity $entity, array &$entityData ) {
 		/* @var Property $entity */
 		$entityData['datatype'] = $entity->getDataTypeId();
+	}
+
+	public function testGetHtmlForToc() {
+		$entityView = $this->newEntityView( Property::ENTITY_TYPE );
+		$toc = $entityView->getHtmlForToc();
+
+		$this->assertSame( '', $toc, "properties should currently not have a TOC" );
 	}
 }
