@@ -15,6 +15,15 @@ jQuery.valueview.experts.QuantityType = ( function( dv, $, vv ) {
 	var PARENT = vv.experts.StringValue;
 
 	return vv.expert( 'quantitytype', PARENT, {
+
+		/**
+		 * Current raw value.
+		 * @type {string}
+		 * @TODO Evaluate whether caching the raw value in an attribute is the proper way to
+		 * retrieve the current raw value and move mechanism to jQuery.valueview.Expert.
+		 */
+		_rawValue: null,
+
 		/**
 		 * @see jQuery.valueview.Expert._setRawValue
 		 */
@@ -25,6 +34,25 @@ jQuery.valueview.experts.QuantityType = ( function( dv, $, vv ) {
 				rawValue = null;
 			}
 			this._newValue = rawValue;
+			this._rawValue = rawValue;
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert._getRawValue
+		 */
+		_getRawValue: function() {
+			return ( this._viewState.isInEditMode() ) ? this.$input.val() : this._rawValue;
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert.draw
+		 * @TODO Remove drawing non-edit mode state from the expert (see bug 56259)
+		 */
+		draw: function() {
+			PARENT.prototype.draw.call( this );
+			if( !this._viewState.isInEditMode() ) {
+				this.$input.val( this._viewState.getFormattedValue() || '' );
+			}
 		}
 	} );
 
