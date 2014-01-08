@@ -4,15 +4,15 @@ namespace Wikibase\LinkedData;
 
 use Wikibase\Entity;
 use Wikibase\EntityLookup;
-use \MWException;
-use \EasyRdf_Format;
-use \ApiFormatBase;
-use \ApiMain;
-use \ApiResult;
-use \ApiFormatXml;
-use \DerivativeContext;
-use \DerivativeRequest;
-use \RequestContext;
+use MWException;
+use EasyRdf_Format;
+use ApiFormatBase;
+use ApiMain;
+use ApiResult;
+use ApiFormatXml;
+use DerivativeContext;
+use DerivativeRequest;
+use RequestContext;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
@@ -29,9 +29,6 @@ use Wikibase\RdfSerializer;
  * For RDF output, this relies on the RdfSerializer class.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
