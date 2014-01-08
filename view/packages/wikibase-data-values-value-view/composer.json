@@ -17,7 +17,7 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"data-values/javascript": "dev-port"
+		"data-values/javascript": "~0.1.1"
 	},
 	"autoload": {
 		"files": [
