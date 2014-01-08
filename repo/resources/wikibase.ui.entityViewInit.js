@@ -16,7 +16,8 @@
 	'use strict';
 	/* jshint nonew: false */
 
-	$( document ).ready( function() {
+	mw.hook( 'wikipage.content' ).add( function() {
+		// TODO: Remove global DOM adjustments
 		// remove HTML edit links with links to special pages
 		// for site-links we don't want to remove the table cell representing the edit section
 		$( 'td.wb-editsection' ).empty();
@@ -25,6 +26,12 @@
 
 		// remove all infos about empty values which are displayed in non-JS
 		$( '.wb-value-empty' ).empty().removeClass( 'wb-value-empty' );
+
+		// Since the DOM is altered for the property edit tools to property initialize, the
+		// following hook informs about these operations having finished.
+		// TODO: This hook is not supposed to be permanent. Remove it as soon as no more global DOM
+		// adjustments are necessary.
+		mw.hook( 'wikibase.domready' ).fire();
 
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
@@ -57,45 +64,7 @@
 			}
 		} );
 
-		var termsValueTools = [];
-
-		$( 'tr.wb-terms-label, tr.wb-terms-description' ).each( function() {
-			var $termsRow = $( this ),
-				editTool = wb.ui.PropertyEditTool[
-					$termsRow.hasClass( 'wb-terms-label' )
-						? 'EditableLabel'
-						: 'EditableDescription'
-				],
-				$toolbar = mw.template( 'wikibase-toolbar', '', '' ).toolbar(),
-				toolbar = $toolbar.data( 'toolbar' ),
-				$editGroup = mw.template( 'wikibase-toolbareditgroup', '', '' ).toolbareditgroup();
-
-			toolbar.addElement( $editGroup );
-			toolbar.$editGroup = $editGroup; // TODO: EditableLabel should not assume that this is set
-
-			termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
-		} );
-
 		if( mw.config.get( 'wbEntity' ) !== null ) {
-			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
-				usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) ),
-				unserializerFactory = new wb.serialization.SerializerFactory(),
-				entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
-
-			// unserializer for fetched content whose content is a wb.Entity:
-			var fetchedEntityUnserializer = unserializerFactory.newUnserializerFor(
-				wb.store.FetchedContent, {
-					contentUnserializer: entityUnserializer
-				}
-			);
-
-			wb.entity = entityUnserializer.unserialize( entityJSON );
-			entityJSON = null;
-
-			$.each( usedEntitiesJSON, function( id, fetchedEntityJSON ) {
-				wb.fetchedEntities[ id ] = fetchedEntityUnserializer.unserialize( fetchedEntityJSON );
-			} );
-
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
 			$( '.wb-aliases-empty' )
@@ -214,18 +183,6 @@
 		}
 
 		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
-			// disable language terms table's editable value or mark it as the active one if it is
-			// the one being edited by the user and therefore the origin of the event
-			$.each( termsValueTools, function( i, termValueTool ) {
-				if ( !( origin instanceof wb.ui.PropertyEditTool.EditableValue )
-					|| origin.getSubject() !== termValueTool.getSubject()
-				) {
-					termValueTool.disable();
-				} else if ( origin && origin.getSubject() === termValueTool.getSubject() ) {
-					$( 'table.wb-terms' ).addClass( 'wb-edit' );
-				}
-			} );
-
 			// Display anonymous user edit warning:
 			if ( mw.user && mw.user.isAnon()
 				&& $.find( '.mw-notification-content' ).length === 0
@@ -326,13 +283,6 @@
 					$messageAnchor.data( 'wbtooltip' ).degrade( true );
 				} );
 			}
-		} );
-
-		$( wb ).on( 'stopItemPageEditMode', function( event ) {
-			$( 'table.wb-terms' ).removeClass( 'wb-edit' );
-			$.each( termsValueTools, function( i, termValueTool ) {
-				termValueTool.enable();
-			} );
 		} );
 
 		// remove loading spinner after JavaScript has kicked in

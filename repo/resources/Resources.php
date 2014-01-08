@@ -23,17 +23,16 @@ return call_user_func( function() {
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
 			),
 			'dependencies' => array(
+				'mediawiki.api',
 				'mediawiki.user',
 				'wikibase.ui.PropertyEditTool',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.wbtooltip',
-				'wikibase.datamodel',
-				'jquery.json',
 				'jquery.cookie',
-				'wikibase.serialization.entities',
-				'wikibase.serialization.fetchedcontent',
-				'jquery.wikibase.claimgrouplabelscroll'
+				'jquery.wikibase.claimgrouplabelscroll',
+				'wikibase.ui.entityInit',
+				'wikibase.ui.termBoxInit',
 			),
 			'messages' => array(
 				'wikibase-statements',
@@ -43,6 +42,39 @@ return call_user_func( function() {
 				'wikibase-entity-property',
 				'wikibase-restrictionedit-tooltip-message',
 				'wikibase-blockeduser-tooltip-message',
+			)
+		),
+
+		'wikibase.ui.entityInit' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.ui.entityInit.js',
+			),
+			'dependencies' => array(
+				'jquery.json',
+				'wikibase',
+				'wikibase.datamodel',
+				'wikibase.serialization',
+				'wikibase.serialization.entities',
+				'wikibase.serialization.fetchedcontent',
+				'wikibase.store.FetchedContent',
+			),
+		),
+
+		'wikibase.ui.termBoxInit' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.ui.termBoxInit.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbar',
+				'jquery.wikibase.toolbareditgroup',
+				'mediawiki.Title',
+				'wikibase',
+				'wikibase.templates',
+				'wikibase.ui.entityInit',
+				'wikibase.ui.PropertyEditTool',
+			),
+			'messages' => array(
+				'wikibase-terms',
 			)
 		),
 
@@ -111,6 +143,8 @@ return call_user_func( function() {
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
+		$modules['wikibase.ui.termBoxInit']['dependencies'][] = 'ext.uls.displaysettings';
+		$modules['wikibase.ui.termBoxInit']['dependencies'][] = 'jquery.uls.data';
 		$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'jquery.uls.data';
 		$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'jquery.uls.data';
 	}
