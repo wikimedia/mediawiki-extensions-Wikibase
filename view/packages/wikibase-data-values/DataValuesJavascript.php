@@ -5,7 +5,7 @@ if ( defined( 'DATA_VALUES_JAVASCRIPT_VERSION' ) ) {
 	return 1;
 }
 
-define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.1.1' );
+define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.1.1.1' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
@@ -127,7 +127,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
  * @param \ResourceLoader &$resourceLoader
  * @return boolean
  */
-$wgHooks['ResourceLoaderTestModules'][] = function(
+$GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	array &$testModules,
 	\ResourceLoader &$resourceLoader
 ) {
