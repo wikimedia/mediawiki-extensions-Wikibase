@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\LinkedData;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -19,9 +20,6 @@ use Wikibase\StorageException;
  * Request handler implementing a linked data interface for Wikibase entities.
  *
  * @since 0.4
- *
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -366,7 +364,12 @@ class EntityDataRequestHandler {
 		);
 
 		$output->disable();
-		$this->outputData( $request, $output->getRequest()->response(), $data, $contentType, $entityRevision->getTimestamp() );
+		$this->outputData(
+			$request,
+			$output->getRequest()->response(),
+			$data, $contentType,
+			$entityRevision->getTimestamp()
+		);
 	}
 
 	/**

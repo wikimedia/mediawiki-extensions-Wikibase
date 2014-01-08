@@ -2,10 +2,13 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\Entity\EntityId;
 use DataValues\DataValue;
 use EasyRdf_Graph;
+use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
+use Sites;
 
 /**
  * RDF mapping for wikibase data model.
@@ -232,8 +235,14 @@ class RdfBuilder {
 		$dataResource = $this->graph->resource( $dataURL );
 
 		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', new \EasyRdf_Literal( $revision, null, 'xsd:integer' ) );
-		$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', new \EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' ) );
+		$dataResource->addLiteral(
+			self::NS_SCHEMA_ORG . ':version',
+			new EasyRdf_Literal( $revision, null, 'xsd:integer' )
+		);
+		$dataResource->addLiteral(
+			self::NS_SCHEMA_ORG . ':dateModified',
+			new EasyRdf_Literal( $timestamp, null, 'xsd:dateTime' )
+		);
 		//TODO: versioned data URI, current-version-of
 	}
 
@@ -323,7 +332,7 @@ class RdfBuilder {
 
 		foreach ( $item->getSimpleSiteLinks() as $link ) {
 			// FIXME: deprecated method usage
-			$link = new SiteLink( \Sites::singleton()->getSite( $link->getSiteId() ), $link->getPageName() );
+			$link = new SiteLink( Sites::singleton()->getSite( $link->getSiteId() ), $link->getPageName() );
 
 			$languageCode = $link->getSite()->getLanguageCode();
 
@@ -382,7 +391,6 @@ class RdfBuilder {
 			wfDebug( __METHOD__ . ": Unsupported snak type: " . get_class( $snak ) );
 		}
 	}
-
 
 	/**
 	 * Returns a resource representing the given claim.

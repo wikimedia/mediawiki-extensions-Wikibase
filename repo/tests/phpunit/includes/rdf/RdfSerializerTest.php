@@ -107,7 +107,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		return $patterns;
 	}
 
-
 	protected static function newRdfSerializer( $formatName ) {
 		$format = RdfSerializer::getFormat( $formatName );
 

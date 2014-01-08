@@ -2,22 +2,18 @@
 
 namespace Wikibase\Test;
 
-use DerivativeContext;
 use FauxRequest;
-use FauxResponse;
 use HttpError;
 use OutputPage;
 use RequestContext;
 use Title;
 use ValueFormatters\FormatterOptions;
-use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdParser;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataUriManager;
