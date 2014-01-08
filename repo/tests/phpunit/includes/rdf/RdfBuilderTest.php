@@ -4,9 +4,10 @@ namespace Wikibase\Test;
 
 use EasyRdf_Literal;
 use EasyRdf_Namespace;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
+use Wikibase\EntityId;
+use Wikibase\EntityRevision;
 use Wikibase\Item;
 use Wikibase\RdfBuilder;
 
@@ -151,8 +152,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
 				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['empty']->getId() ),
-				//'schema:version' => new \EasyRdf_Literal( 23, null, 'xsd:integer' ),
-				'schema:version' => new \EasyRdf_Literal_Integer( 23 ),
+				'schema:version' => new \EasyRdf_Literal( 23, null, 'xsd:integer' ),
 				'schema:dateModified' => new \EasyRdf_Literal( '2013-01-01T00:00:00Z', null, 'xsd:dateTime' ),
 			)
 		);
@@ -183,6 +183,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 					new \EasyRdf_Literal( 'Berlin', 'ru' )
 				),
 			),
+
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
 				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['terms']->getId() ),
@@ -213,18 +214,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$cases = array();
 
-		$revision = $this->getMockBuilder( '\Revision' )
-			->disableOriginalConstructor()->getMock();
-		$revision->expects( $this->any() )->method( 'getId' )
-			->will( $this->returnValue( 23 ) );
-		$revision->expects( $this->any() )->method( 'getTimestamp' )
-			->will( $this->returnValue( '20130101000000' ) );
-
 		foreach ( $entities as $name => $entity ) {
 			if ( array_key_exists( $name, $graphs ) ) {
 				$cases[] = array(
-					$entity,
-					$revision,
+					new EntityRevision( $entity, 23, '20130101000000' ),
 					$graphs[$name],
 				);
 			}
@@ -241,10 +234,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( Entity $entity, \Revision $revision, \EasyRdf_Graph $expectedGraph ) {
+	public function testAddEntity( EntityRevision $entityRevision, \EasyRdf_Graph $expectedGraph ) {
 		$builder = $this->newRdfBuilder();
 
-		$builder->addEntity( $entity, $revision );
+		$builder->addEntity( $entityRevision->getEntity() );
+		$builder->addEntityRevisionInfo( $entityRevision->getEntity()->getId(), $entityRevision->getRevision(), $entityRevision->getTimestamp() );
 		$graph = $builder->getGraph();
 
 		foreach ( $expectedGraph->resources() as $rc ) {
