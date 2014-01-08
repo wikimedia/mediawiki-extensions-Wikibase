@@ -61,6 +61,15 @@
 		},
 
 		/**
+		 * Returns the related valueview's current formatted value.
+		 * @see jQuery.valueview.getFormattedValue
+		 * @since 0.1
+		 */
+		getFormattedValue: function() {
+			return this._view.getFormattedValue();
+		},
+
+		/**
 		 * Returns the options or a specific option of the related view. Does not allow to set any
 		 * option.
 		 * @see jQuery.Widget.option

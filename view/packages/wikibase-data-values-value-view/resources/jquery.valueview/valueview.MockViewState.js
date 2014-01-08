@@ -46,6 +46,13 @@ jQuery.valueview.MockViewState = ( function( $, inherit, ViewState ) {
 		},
 
 		/**
+		 * @see jQuery.valueview.ViewState.getFormattedValue
+		 */
+		getFormattedValue: function() {
+			return this._view.getFormattedValue;
+		},
+
+		/**
 		 * @see jQuery.valueview.ViewState.option
 		 */
 		option: function( key ) {
