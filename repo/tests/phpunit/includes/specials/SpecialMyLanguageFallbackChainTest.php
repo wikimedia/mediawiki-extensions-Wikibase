@@ -24,6 +24,7 @@ class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
 	public function testExecute() {
 		list( $output, ) = $this->executeSpecialPage( '' );
+		var_dump( $output );
 		$this->assertTrue( strpos( $output, 'en - ' ) !== false );
 	}
 
