@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_c90f77e3",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-09T11:32:53Z",
+      "side": 1,
+      "message": "\"iff\" was intentional: https://en.wikipedia.org/wiki/Iff",
+      "revId": "ab30c5de3f7270528454afda5d697c21af6d583f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_69006baf",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-09T11:32:53Z",
+      "side": 1,
+      "message": "Why do we need this? It\u0027s the job ob the finder to only return entity pages. \nThat way, we also wouldn\u0027t need to know about entityNamespaces in this class.",
+      "revId": "ab30c5de3f7270528454afda5d697c21af6d583f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_c95897ff",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilderPagesFinder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-09T11:32:53Z",
+      "side": 1,
+      "message": "The name seems overly specific. This queries the list of entity pages, so perhaps EntityPageQuery would be a good name.",
+      "revId": "ab30c5de3f7270528454afda5d697c21af6d583f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_290383c3",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilderPagesFinder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-09T11:32:53Z",
+      "side": 1,
+      "message": "Having a database connection as a member should generally be avoided, since it makes connection pooling and re-use impossible (important when accessing information on multiple wikis). Instead, have the database (wiki) name as a member (and perhaps also the server id, i.e. DB_SLAVE or DB_MASTER), and get a connection for that wiki on demand.\n\nFor short lived objects this is not terribly important, so it can be ignored here. But please keep it in mind for the general case.",
+      "revId": "ab30c5de3f7270528454afda5d697c21af6d583f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_494da73e",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilderPagesFinder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-09T11:32:53Z",
+      "side": 1,
+      "message": "that\u0027s int[].",
+      "revId": "ab30c5de3f7270528454afda5d697c21af6d583f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_e9559bc6",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilderPagesFinder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-09T11:32:53Z",
+      "side": 1,
+      "message": "perhaps hint array for $entityNamespaces",
+      "revId": "ab30c5de3f7270528454afda5d697c21af6d583f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
