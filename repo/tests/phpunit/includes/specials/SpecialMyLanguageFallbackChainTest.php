@@ -23,8 +23,12 @@ class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
+		global $wgLanguageCode;
 		list( $output, ) = $this->executeSpecialPage( '' );
-		$this->assertTrue( strpos( $output, 'en - ' ) !== false );
+
+		$expectedString = $wgLanguageCode . ' - ';
+		$this->assertInternalType( 'integer', stripos( $output, $expectedString ),
+			"Cannot find '$expectedString' in the list of fallback languages in '$output'." );
 	}
 
 }
