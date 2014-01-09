@@ -279,7 +279,22 @@ function testExpert( testDefinition ) {
 			'Viewport node is not empty after draw()'
 		);
 	} );
-	expertCasesMemberCallTest( 'focus' );
+
+	 expertCasesTestAndCleanup( 'focus', function( args, assert ) {
+		 try {
+			 args.expert.focus();
+		 } catch (e) {
+			 // Firefox does not support focusing elements that are not visible.
+			 assert.equal( e.name, 'NS_ERROR_FAILURE' );
+			 assert.equal( e.result, 0x80004005 );
+			 return;
+		 }
+		 assert.ok(
+			 true,
+			 'focus() has been called'
+		 );
+	 } );
+
 	expertCasesMemberCallTest( 'blur' );
 
 	// Separate test for change notification:

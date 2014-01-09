@@ -67,10 +67,13 @@
 		var positions = [ 0, 1, 4, 9, 9999, 'start', 'end', -1, -3, -9999 ];
 
 		$.each( positions, function( i, pos ) {
+			// Put element in DOM, since Firefox expects this
+			$( 'body' ).append( params.elem );
 			assert.ok(
 				params.elem.focusAt( pos ),
 				'focusAt takes "' + pos + '" as a valid position for the element'
 			);
+			params.elem.remove();
 		} );
 	} );
 
@@ -95,10 +98,14 @@
 			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
 		}
 
-		assert.ok(
-			elem.focusAt( 0 ),
-			'Can call focusAt on element not in DOM yet'
-		);
+		try {
+			elem.focusAt( 0 );
+		} catch (e) {
+			// Firefox does not support focusing elements that are not visible.
+			assert.equal( e.name, 'NS_ERROR_FAILURE' );
+			assert.equal( e.result, 0x80004005 );
+			return;
+		}
 
 		$( ':focus' ).blur();
 		elem.appendTo( $dom );
