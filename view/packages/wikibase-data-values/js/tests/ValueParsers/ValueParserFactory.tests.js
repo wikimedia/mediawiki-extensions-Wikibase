@@ -5,8 +5,6 @@
 ( function( $, QUnit, dt, dv, vp ) {
 	'use strict';
 
-	var ParserFactory = valueParsers.ValueParserFactory;
-
 	/**
 	 * Returns a descriptive string to be used as id when registering a ValueParser in a
 	 * ValueParserFactory.
@@ -29,22 +27,22 @@
 		BoolValue = dv.BoolValue,
 		stringType = new dt.DataType( 'somestringtype', StringValue ),
 		numberType = new dt.DataType( 'somenumbertype', dv.NumberValue ),
-		stringParser = vp.StringParser,
-		boolParser = vp.BoolParser;
+		StringParser = vp.StringParser,
+		BoolParser = vp.BoolParser;
 
 	QUnit.module( 'valueParsers.ValueParserFactory' );
 
 	QUnit.test( 'Constructor', function( assert ) {
-		var parserFactory = new ParserFactory();
+		var parserFactory = new vp.ValueParserFactory();
 
 		assert.ok(
-			parserFactory instanceof ParserFactory,
+			parserFactory instanceof vp.ValueParserFactory,
 			'Instantiated ValueParserFactory.'
 		);
 	} );
 
 	QUnit.test( 'Error handling', function( assert ) {
-		var parserFactory = new ParserFactory();
+		var parserFactory = new vp.ValueParserFactory();
 
 		assert.throws(
 			function() {
@@ -55,18 +53,42 @@
 
 		assert.throws(
 			function() {
-				parserFactory.register( 'invalid', stringParser );
+				parserFactory.register( 'invalid', StringParser );
 			},
 			'Failed trying to register a parser with an invalid purpose.'
 		);
 
-		parserFactory.registerParser( StringValue.TYPE, stringParser );
+		parserFactory.registerParser( StringValue.TYPE, StringParser );
 
 		assert.throws(
 			function() {
 				parserFactory.getParser( StringValue );
 			},
 			'Failed trying to get a parser with an invalid purpose.'
+		);
+	} );
+
+	QUnit.test( 'Return default parser on getParser()', function( assert ) {
+		var parserFactory = new vp.ValueParserFactory( BoolParser );
+
+		assert.equal(
+			parserFactory.getParser( StringValue.TYPE ),
+			BoolParser,
+			'Returning default parser if no parser is registered for a specific data value.'
+		);
+
+		parserFactory.registerParser( StringValue.TYPE, StringParser );
+
+		assert.equal(
+			parserFactory.getParser( StringValue.TYPE ),
+			StringParser,
+			'Returning specific parser if a parser is registered for a specific data value.'
+		);
+
+		assert.equal(
+			parserFactory.getParser( BoolValue.TYPE ),
+			BoolParser,
+			'Still returning default parser if no parser is registered for a specific data value.'
 		);
 	} );
 
@@ -89,11 +111,11 @@
 			title: 'Factory with parser for string DataValue which is also suitable for string '
 				+ 'DataType',
 			register: [
-				[ StringValue.TYPE, stringParser ]
+				[ StringValue.TYPE, StringParser ]
 			],
 			expect: [
-				[ StringValue.TYPE, stringParser ],
-				[ stringType, stringParser ], // data type uses value type
+				[ StringValue.TYPE, StringParser ],
+				[ stringType, StringParser ], // data type uses value type
 				[ BoolValue.TYPE, null ],
 				[ numberType, null ]
 			]
@@ -102,35 +124,35 @@
 			title: 'Factory for string DataType. String DataValue can\'t use this potentially more '
 				+ 'specialized parser',
 			register: [
-				[ stringType, stringParser ]
+				[ stringType, StringParser ]
 			],
 			expect: [
 				[ StringValue.TYPE, null ],
-				[ stringType, stringParser ]
+				[ stringType, StringParser ]
 			]
 		},
 		{
 			title: 'Factory with two parsers: For DataValue and for DataType using that DataValue '
 				+ 'type',
 			register: [
-				[ StringValue.TYPE, stringParser ],
-				[ stringType, stringParser ]
+				[ StringValue.TYPE, StringParser ],
+				[ stringType, StringParser ]
 			],
 			expect: [
-				[ StringValue.TYPE, stringParser ],
-				[ stringType, stringParser ],
+				[ StringValue.TYPE, StringParser ],
+				[ stringType, StringParser ],
 				[ BoolValue.TYPE, null ]
 			]
 		},
 		{
 			title: 'Factory with two parsers for two different DataValue types',
 			register: [
-				[ StringValue.TYPE, stringParser ],
-				[ BoolValue.TYPE, boolParser ]
+				[ StringValue.TYPE, StringParser ],
+				[ BoolValue.TYPE, BoolParser ]
 			],
 			expect: [
-				[ StringValue.TYPE, stringParser ],
-				[ BoolValue.TYPE, boolParser ],
+				[ StringValue.TYPE, StringParser ],
+				[ BoolValue.TYPE, BoolParser ],
 				[ numberType, null ]
 			]
 		}
@@ -150,7 +172,7 @@
 	 *        constructor and a ValueParser which is expected to be registered for it.
 	 */
 	function valueParserFactoryRegistrationTest( assert, toRegister, toExpect  ) {
-		var parserFactory = new ParserFactory();
+		var parserFactory = new vp.ValueParserFactory();
 
 		// Register ValueParsers as per definition:
 		$.each( toRegister, function( i, registerPair ) {
