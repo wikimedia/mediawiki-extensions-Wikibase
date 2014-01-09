@@ -22,9 +22,9 @@
 	vp.tests.GlobeCoordinateParserTest = vp.util.inherit( PARENT, {
 
 		/**
-		 * @see vp.tests.ValueParserTest.getObject
+		 * @see vp.tests.ValueParserTest.getConstructor
 		 */
-		getObject: function() {
+		getConstructor: function() {
 			return vp.GlobeCoordinateParser;
 		},
 

@@ -14,9 +14,9 @@ valueParsers.tests.QuantityParserTest = ( function(
 	var PARENT = ValueParserTest;
 	var QuantityParserTest = inherit( PARENT, {
 		/**
-		 * @see vp.tests.ValueParserTest.getObject
+		 * @see vp.tests.ValueParserTest.getConstructor
 		 */
-		getObject: function() {
+		getConstructor: function() {
 			return QuantityParser;
 		},
 

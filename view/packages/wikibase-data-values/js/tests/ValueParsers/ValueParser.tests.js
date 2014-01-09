@@ -1,11 +1,9 @@
 /**
- * @file
- * @ingroup DataValues
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, $, QUnit, undefined ) {
+( function( vp, dv, $, QUnit ) {
 	'use strict';
 
 	vp.tests = {};
@@ -30,34 +28,34 @@
 		getParseArguments: vp.util.abstractMember,
 
 		/**
-		 * Returns the ValueParser object to be tested (ie vp.IntParser).
+		 * Returns the ValueParser constructor to be tested.
 		 *
 		 * @since 0.1
 		 *
-		 * @return vp.ValueParser
+		 * @return {Function}
 		 */
-		getObject: vp.util.abstractMember,
+		getConstructor: vp.util.abstractMember,
 
 		/**
-		 * Returns the dataValue object to be tested (ie dv.StringValue).
+		 * Returns the ValueParser instance to be tested.
 		 *
 		 * @since 0.1
 		 *
 		 * @param {Array} constructorArguments
 		 *
-		 * @return vp.ValueParser
+		 * @return {valueParsers.ValueParser}
 		 */
 		getInstance: function( constructorArguments ) {
 			constructorArguments = constructorArguments || this.getDefaultConstructorArgs();
 
 			var
 				self = this,
-				ValueParserInstance = function( constructorArguments ) {
-					self.getObject().apply( this, constructorArguments );
+				ValueParserConstructor = function( constructorArguments ) {
+					self.getConstructor().apply( this, constructorArguments );
 				};
 
-			ValueParserInstance.prototype = this.getObject().prototype;
-			return new ValueParserInstance( constructorArguments );
+			ValueParserConstructor.prototype = this.getConstructor().prototype;
+			return new ValueParserConstructor( constructorArguments );
 		},
 
 		getDefaultConstructorArgs: function() {
@@ -111,9 +109,6 @@
 						: '';
 
 				var request = parser.parse( parseInput )
-					.always( function() {
-						//QUnit.start();
-					} )
 					.done( function( dataValue ) {
 						// promise resolved, so no error has occured
 						assert.ok( true, 'parsing succeeded' );
