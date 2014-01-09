@@ -1121,7 +1121,7 @@ $messages['diq'] = array(
 	'wikibase-linkitem-input-page' => 'Pele:',
 	'wikibase-linkitem-confirmitem-button' => 'Tesdiq',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
-	'wikibase-rc-show-wikidata-pref' => 'Vırnayışané wikimalumati vırnayışan de peyénan de  bıasne',
+	'wikibase-rc-show-wikidata-pref' => 'Vurnayışanê wikimelumati vurnayışanê peyênan de  bımocne',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Vırnayışé Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Lista xoya seyrkerdışi de vırnayışanê Wikidata bımocne',
@@ -1927,6 +1927,7 @@ $messages['hsb'] = array(
 );
 
 /** Hungarian (magyar)
+ * @author Bináris
  * @author BáthoryPéter
  * @author Tgr
  */
@@ -1947,7 +1948,7 @@ $messages['hu'] = array(
 	'wikibase-editlinkstitle' => 'Nyelvközi hivatkozások szerkesztése',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata szerkesztések mutatása a friss változtatásokban',
-	'wikibase-rc-wikibase-edit-title' => 'Wikidata szerkesztés',
+	'wikibase-rc-wikibase-edit-title' => 'Wikidata-szerkesztés',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-változások mutatása a figyelőlistádon',
 );
 
