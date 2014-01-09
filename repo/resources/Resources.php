@@ -33,6 +33,7 @@ return call_user_func( function() {
 				'jquery.wikibase.claimgrouplabelscroll',
 				'wikibase.ui.initEntity',
 				'wikibase.ui.initTermBox',
+				'wikibase.ui.scrapeFormattedValues',
 			),
 			'messages' => array(
 				'wikibase-statements',
@@ -77,6 +78,16 @@ return call_user_func( function() {
 				'wikibase-terms',
 			)
 		),
+
+		'wikibase.ui.scrapeFormattedValues' => $moduleTemplate + array(
+				'scripts' => array(
+					'wikibase.ui.scrapeFormattedValues.js',
+				),
+				'dependencies' => array(
+					'wikibase',
+					'wikibase.ui.initEntity',
+				),
+			),
 
 		'wikibase.ui.entitysearch' => $moduleTemplate + array(
 			'scripts' => array(
