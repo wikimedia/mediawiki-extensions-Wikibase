@@ -10,7 +10,7 @@
  *            been changed to.
  *
  * @dependency jQuery.ui.Widget
- * @dependency jQuery.eachchange
+ * @dependency jQuery.event.special.eachchange
  * @dependency time.Time
  */
 ( function( $, Time ) {
@@ -39,7 +39,7 @@
 
 			this.element.addClass( this.widgetName );
 
-			this.element.eachchange( function( event, oldValue ) {
+			this.element.on( 'eachchange', function( event, oldValue ) {
 				var value;
 
 				try {

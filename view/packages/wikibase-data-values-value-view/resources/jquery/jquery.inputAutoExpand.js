@@ -102,8 +102,7 @@
 
 		this._nodeName = element.nodeName;
 
-		this.$input
-		.eachchange( function( event, oldValue ) {
+		this.$input.on( 'eachchange', function( event, oldValue ) {
 			if ( self._options.suppressNewLine ) {
 				self.$input.val( self.$input.val().replace( /\r?\n/g, '' ) );
 			}

@@ -40,6 +40,7 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.experts/experts.CommonsMediaType.js',
 			),
 			'dependencies' => array(
+				'jquery.event.special.eachchange',
 				'jquery.valueview.experts.staticdom',
 				'jquery.valueview.BifidExpert',
 				'jquery.valueview.experts.stringvalue',
@@ -74,9 +75,9 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.eachchange' => $moduleTemplate + array(
+		'jquery.event.special.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery/jquery.eachchange.js'
+				'jquery/jquery.event.special.eachchange.js'
 			),
 			'dependencies' => array(
 				'jquery.client'
@@ -88,7 +89,7 @@ return call_user_func( function() {
 				'jquery/jquery.inputAutoExpand.js',
 			),
 			'dependencies' => array(
-				'jquery.eachchange'
+				'jquery.event.special.eachchange'
 			)
 		),
 
@@ -123,7 +124,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'time.js'
 			),
 		),
@@ -136,7 +137,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.inputextender.css',
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.ui.position',
 				'jquery.ui.widget',
 				'jquery.animateWithEvent',

@@ -6,7 +6,7 @@
  *
  * External dependencies:
  * - jQuery 1.8
- * - jQuery.eachchange
+ * - jQuery.event.special.eachchange
  * - jQuery.inputAutoExpand
  * - jQuery.ui.suggester
  * - jQuery.time.timeinput
@@ -179,7 +179,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.inputAutoExpand',
 				'jquery.fn.focusAt',
 			),
@@ -190,6 +190,7 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.experts/experts.GlobeCoordinateInput.js',
 			),
 			'dependencies' => array(
+				'jquery.event.special.eachchange',
 				'jquery.valueview.experts',
 				'jquery.fn.focusAt',
 				'jquery.ui.inputextender',
@@ -224,6 +225,7 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.experts/experts.TimeInput.css',
 			),
 			'dependencies' => array(
+				'jquery.event.special.eachchange',
 				'jquery.valueview.experts',
 				'jquery.fn.focusAt',
 				'jquery.time.timeinput',

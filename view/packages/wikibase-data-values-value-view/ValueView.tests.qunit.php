@@ -46,12 +46,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.eachchange.tests' => array(
+		'jquery.event.special.eachchange.tests' => array(
 			'scripts' => array(
-				"$bp/jquery/jquery.eachchange.tests.js",
+				"$bp/jquery/jquery.event.special.eachchange.tests.js",
 			),
 			'dependencies' => array(
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 			),
 		),
 
