@@ -29,7 +29,7 @@
 			[ '$foo' ],
 			[ '_foo' ],
 			[ 'foo' ],
-			[ 'foo42' ],
+			[ 'foo42' ]
 		],
 		function( constructorName ) {
 			this.equal(
@@ -48,7 +48,7 @@
 			[ 'function()xxx(){};', 'functionxxx' ],
 			[ 'xyz;${]123', 'xyz$123' ],
 			[ ';a;1;$;b;_;', 'a1$b_' ],
-			[ 'a1$b2c3d4;', 'a1$b2c3d4' ],
+			[ 'a1$b2c3d4;', 'a1$b2c3d4' ]
 		],
 		function( constructorName, expectedName ) {
 			this.equal(

@@ -52,7 +52,7 @@ QUnit.cases = ( function( QUnit ) {
 			);
 		};
 
-		var iterateTestCases = function(methodName, title, expected, callback) {
+		var iterateTestCases = function( methodName, title, expected, callback ) {
 			if ( !testCases ) {
 				return;
 			}
@@ -62,7 +62,7 @@ QUnit.cases = ( function( QUnit ) {
 				expected = null;
 			}
 
-			var testTestCases = QUnit.is( "function", testCases )
+			var testTestCases = QUnit.is( 'function', testCases )
 				? testCases()
 				: testCases;
 
@@ -71,7 +71,7 @@ QUnit.cases = ( function( QUnit ) {
 
 				var testCaseTitle = title;
 				if( testTestCase.title ) {
-					testCaseTitle += "[" + testTestCase.title + "]";
+					testCaseTitle += '[' + testTestCase.title + ']';
 				}
 
 				createTest( methodName, testCaseTitle, expected, callback, testTestCase );
@@ -79,13 +79,13 @@ QUnit.cases = ( function( QUnit ) {
 		};
 
 		return {
-			test : function(title, expected, callback) {
-				iterateTestCases("test", title, expected, callback);
+			test : function( title, expected, callback ) {
+				iterateTestCases( 'test', title, expected, callback );
 				return this;
 			},
 
-			asyncTest : function(title, expected, callback) {
-				iterateTestCases("asyncTest", title, expected, callback);
+			asyncTest : function( title, expected, callback ) {
+				iterateTestCases( 'asyncTest', title, expected, callback );
 				return this;
 			}
 		};
