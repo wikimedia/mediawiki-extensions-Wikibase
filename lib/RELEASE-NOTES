@@ -3,6 +3,11 @@ These are the release notes for the WikibaseLib extension.
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:WikibaseLib
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=lib/RELEASE-NOTES
 
+=== Version 0.5 ===
+
+; schma changes
+
+* wb_terms.term_entity_id now contains prefixed id strings. Set useNumericIdsInTermsTable=false to keep using the old schema.
 
 
 === Version 0.4 ===

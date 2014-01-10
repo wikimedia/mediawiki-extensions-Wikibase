@@ -302,7 +302,8 @@ class SqlStore implements Store {
 		//       253 is "varchar".
 		$entityIdTypes = array( 'text', 'varchar', 253 );
 
-		if ( !$this->checkFieldType( $db, 'wb_terms', 'term_entity_id', $entityIdTypes ) ) {
+		if ( !Settings::get( 'useNumericIdsInTermsTable' )
+			&& !$this->checkFieldType( $db, 'wb_terms', 'term_entity_id', $entityIdTypes ) ) {
 
 			// Drop current indexes, so they don't get in the way when converting.
 			// NOTE: redundant, but only until we can actually check the field type above.
