@@ -89,6 +89,11 @@ return call_user_func( function() {
 		// (depending on the database's inner working).
 		'withoutTermWeight' => false,
 
+		// Use numeric ids in the term_entity_id field. This allows support for the
+		// legacy db schema for sites that can not easily roll out schema changes
+		// on large tables.
+		'useNumericIdsInTermsTable' => false,
+
 		'changeHandlers' => array(
 			'wikibase-item~add' => 'Wikibase\ItemChange',
 			'wikibase-property~add' => 'Wikibase\EntityChange',

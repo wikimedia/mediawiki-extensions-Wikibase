@@ -67,6 +67,8 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		$this->termTable = 'wb_terms';
 		$this->propertyInfoTable = 'wb_property_info';
 		$this->entityPerPageTable = 'wb_entity_per_page';
+
+		$this->useNumericIdsInTermsTable = Settings::get( 'useNumericIdsInTermsTable' );
 	}
 
 	/**
@@ -101,7 +103,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		$ids = array();
 
 		foreach ( $entityInfo as $prefixedId => $entityRecord ) {
-			//TODO: we could avoid constructing EntityId objects be taking them, from
+			//TODO: we could avoid constructing EntityId objects be taking them from
 			//      a magic field in $entityRecord, e.g. $entityRecord['__entityId'] or some such.
 
 			/* @var EntityId $id */
@@ -155,11 +157,18 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		}
 
 		wfProfileIn( __METHOD__ );
+
 		$entityIdsByType = $this->getNumericEntityIds( $entityInfo );
 
 		//NOTE: we make one DB query per entity type, so we can take advantage of the
 		//      database index on the term_entity_type field.
+		//TODO: once we use prefixed IDs, we no longer need to split by entity type.
 		foreach ( $entityIdsByType as $type => $idsForType ) {
+			if ( !$this->useNumericIdsInTermsTable ) {
+				// $idsForType is a map serializedId -> numericId
+				$idsForType = array_keys( $idsForType );
+			}
+
 			$this->collectTermsForEntities( $entityInfo, $type, $idsForType, $types, $languages );
 		}
 
@@ -187,9 +196,12 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		wfProfileIn( __METHOD__ );
 
 		$where = array(
-			'term_entity_type' => $entityType,
 			'term_entity_id' => $entityIds,
 		);
+
+		if ( $this->useNumericIdsInTermsTable ) {
+			$where['term_entity_type'] = $entityType;
+		}
 
 		if ( $termTypes ) {
 			$where['term_type'] = $termTypes;
@@ -227,9 +239,13 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function injectTerms( $dbResult, array &$entityInfo ) {
 		foreach ( $dbResult as $row ) {
-			// this is deprecated, but I don't see an alternative.
-			$id = new EntityId( $row->term_entity_type, (int)$row->term_entity_id );
-			$key = $id->getPrefixedId();
+			if ( $this->useNumericIdsInTermsTable ) {
+				// this is deprecated, but I don't see an alternative.
+				$entityId = new EntityId( $row->term_entity_type, (int)$row->term_entity_id );
+				$key = $entityId->getSerialization();
+			} else {
+				$key = $row->term_entity_id;
+			}
 
 			if ( !isset( $entityInfo[$key] ) ) {
 				continue;
