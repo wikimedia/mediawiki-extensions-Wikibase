@@ -884,7 +884,8 @@ The special page allows the user to set a site link for an item.',
 	'wikibase-setsitelink-intro' => 'A short text at the top of the page that allows users to set the site link of an item, explaining the form.',
 	'wikibase-setsitelink-site' => 'Label for the input field to type the site id to set the site link to.',
 	'wikibase-setsitelink-label' => 'Label for the input field to type the site link to set the item to.',
-	'wikibase-setsitelink-badges' => 'Label for the input field to type the badges to set the item to.',
+	'wikibase-setsitelink-badges' => 'Label for the input field to type the badges to set the item to.
+{{Identical|Badge}}',
 	'wikibase-setsitelink-submit' => 'Label for the button that activates the action.',
 	'wikibase-setsitelink-warning-remove' => 'A warning message to ask the user if he wants to remove the site link.
 
@@ -9669,6 +9670,7 @@ $messages['ja'] = array(
 	'wikibase-setsitelink-intro' => 'このフォームでは、項目のサイトリンクを設定できます。項目の ID (Q23 など)、サイト ID ("jawiki" など)、設定するサイトリンクを入力する必要があります。',
 	'wikibase-setsitelink-site' => 'サイト ID:',
 	'wikibase-setsitelink-label' => 'サイトリンク:',
+	'wikibase-setsitelink-badges' => 'バッジ:',
 	'wikibase-setsitelink-submit' => 'サイトリンクを設定',
 	'wikibase-setsitelink-warning-remove' => '[[$1]] のサイトリンクを本当に除去しますか?',
 	'wikibase-setsitelink-invalid-site' => 'サイト ID「$1」は不明です。既存のサイト ID (「jawiki」など) を使用してください。',
