@@ -50,7 +50,14 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 				'id' => 'wb-setsitelink-page',
 				'class' => 'wb-input',
 				'name' => 'page',
-		) ),
+			) ),
+		'badges' => array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wb-setsitelink-badges',
+				'class' => 'wb-input',
+				'name' => 'badges',
+			) ),
 		'submit' => array(
 			'tag' => 'input',
 			'attributes' => array(
