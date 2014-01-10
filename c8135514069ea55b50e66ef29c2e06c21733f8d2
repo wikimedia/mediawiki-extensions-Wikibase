@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cef0db4e_2963f53c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-10T17:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cef0db4e_c97a49e7",
+      "revId": "c8135514069ea55b50e66ef29c2e06c21733f8d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cef0db4e_a97705fd",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-10T17:35:22Z",
       "side": 1,
       "message": "this will always show, while badges support wont (it\u0027s experimental now)",
+      "revId": "c8135514069ea55b50e66ef29c2e06c21733f8d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_495e397d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-10T17:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cef0db4e_a97705fd",
       "revId": "c8135514069ea55b50e66ef29c2e06c21733f8d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
