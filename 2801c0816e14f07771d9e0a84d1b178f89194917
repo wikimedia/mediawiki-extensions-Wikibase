@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cef0db4e_6306bcd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-10T10:52:33Z",
+      "side": 1,
+      "message": "no chat in here, just tell what the current version changes",
+      "revId": "2801c0816e14f07771d9e0a84d1b178f89194917",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
