@@ -238,9 +238,11 @@ class JsonDumpGenerator {
 	private function idMatchesShard( EntityId $id ) {
 		$hash = sha1( $id->getSerialization() );
 		$n = (int)hexdec( substr( $hash, 0, 8 ) ); // 4 bytes of the hash
+		if( $n < 0 ) {
+			$n = -$n;
+		}
 		$n = $n % $this->shardingFactor; // modulo number of shards
-
-		return $n == $this->shard;
+		return $n === $this->shard;
 	}
 
 	private function idMatchesType( EntityId $id ) {
