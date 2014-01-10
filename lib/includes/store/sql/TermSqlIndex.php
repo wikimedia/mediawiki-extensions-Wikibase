@@ -120,6 +120,57 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
+	 * Returns an array with the database table fields for identifying the given entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param DataModel\Entity\EntityId $entityId
+	 *
+	 * @return array
+	 */
+	protected function getEntityIdFields( EntityId $entityId ) {
+		if ( $this->useNumericIds() ) {
+			$entityIdFields = array(
+				'term_entity_id' => $entityId->getNumericId(),
+				'term_entity_type' => $entityId->getEntityType()
+			);
+		} else {
+			$entityIdFields = array(
+				'term_entity_id' => $entityId->getSerialization(),
+			);
+		}
+
+		return $entityIdFields;
+	}
+
+	/**
+	 * Returns an array with the database table fields for the given entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return array
+	 */
+	protected function getEntityFields( Entity $entity ) {
+		$entityId = $entity->getId();
+
+		if ( $this->useNumericIds() ) {
+			$entityFields = array(
+				'term_entity_id' => $entityId->getNumericId(),
+				'term_entity_type' => $entityId->getEntityType()
+			);
+		} else {
+			$entityFields = array(
+				'term_entity_id' => $entityId->getSerialization(),
+				'term_entity_type' => $entityId->getEntityType()
+			);
+		}
+
+		return $entityFields;
+	}
+
+	/**
 	 * Internal callback for inserting a list of terms.
 	 *
 	 * @note: this is public only because it acts as a callback, there should be no
@@ -136,11 +187,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	public function insertTermsInternal( Entity $entity, $terms, DatabaseBase $dbw ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityFields = array(
-			'term_entity_id' => $entity->getId()->getSerialization(),
-			'term_entity_type' => $entity->getType()
-		);
-
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": inserting terms for " . $entity->getId()->getPrefixedId() );
 
 		$weightField = array();
@@ -154,7 +200,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 				$this->tableName,
 				array_merge(
 					$this->getTermFields( $term ),
-					$entityFields,
+					$this->getEntityFields( $entity ),
 					$weightField
 				),
 				__METHOD__,
@@ -238,10 +284,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
-		$entityIdentifiers = array(
-			'term_entity_id' => $entity->getId()->getSerialization()
-		);
-
 		$uniqueKeyFields = array( 'term_entity_id', 'term_language', 'term_type', 'term_text' );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": deleting terms for " . $entity->getId()->getPrefixedId() );
@@ -255,7 +297,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 				$this->tableName,
 				array_merge(
 					$termIdentifiers,
-					$entityIdentifiers
+					$this->getEntityIdFields( $entity->getId() )
 				),
 				__METHOD__,
 				array( 'IGNORE' )
@@ -331,9 +373,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$success = $dbw->delete(
 			$this->tableName,
-			array(
-				'term_entity_id' => $entity->getId()->getSerialization()
-			),
+			$this->getEntityIdFields( $entity->getId() ),
 			__METHOD__
 		);
 
@@ -356,10 +396,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	public function getTermsOfEntity( EntityId $id ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityIdentifiers = array(
-			'term_entity_id' => $id->getSerialization()
-		);
-
 		$fields = array(
 			'term_language',
 			'term_type',
@@ -371,7 +407,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$res = $dbr->select(
 			$this->tableName,
 			$fields,
-			$entityIdentifiers,
+			$this->getEntityIdFields( $id ),
 			__METHOD__
 		);
 
@@ -419,7 +455,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 					. " does not refer to an entity of type $entityType." );
 			}
 
-			$entityIds[] = $id->getSerialization();
+			// hackish: we shouldn't need to know which field to use.
+			$idFields = $this->getEntityIdFields( $id );
+			$entityIds[] = $idFields['term_entity_id'];
 		}
 
 		$entityIdentifiers['term_entity_id'] = $entityIds;
@@ -735,12 +773,20 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$this->releaseConnection( $dbr );
 
-		// turn strings into entity ids
+		// convert result to EntityId objects
 		$result = array();
-		$idParser = new BasicEntityIdParser();
 
-		foreach ( $ids as $id ) {
-			$result[] = $idParser->parse( $id );
+		if ( $this->useNumericIds() ) {
+			foreach ( $ids as $id ) {
+				//TODO: we need an EntityIdFactory or some such
+				$result[] = new EntityId( $entityType, (int)$id );
+			}
+		} else {
+			$idParser = new BasicEntityIdParser();
+
+			foreach ( $ids as $id ) {
+				$result[] = $idParser->parse( $id );
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -945,7 +991,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			$combinationConds = $this->termsToConditions( $termList, $termType, $entityType, true );
 
 			if ( $excludeId !== null ) {
-				$combinationConds[] = 'terms0.term_entity_id <> ' . $dbr->addQuotes( $excludeId->getSerialization() );
+				$entityIdFields = $this->getEntityIdFields( $excludeId );
+
+				foreach ( $entityIdFields as $field => $value ) {
+					$combinationConds[] = 'terms0.' . $field . ' <> ' . $dbr->addQuotes( $value );
+				}
 			}
 
 			$conditions[] = implode( ' AND ', $combinationConds );
@@ -1094,5 +1144,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 */
 	public function supportsWeight() {
 		return !Settings::get( 'withoutTermWeight' );
+	}
+
+	/**
+	 * @param $dbr
+	 * @return mixed
+	 */
+	public function useNumericIds() {
+		return Settings::get( 'useNumericIdsInTermsTable' );
 	}
 }

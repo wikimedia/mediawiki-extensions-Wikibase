@@ -101,7 +101,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		$ids = array();
 
 		foreach ( $entityInfo as $prefixedId => $entityRecord ) {
-			//TODO: we could avoid constructing EntityId objects be taking them, from
+			//TODO: we could avoid constructing EntityId objects be taking them from
 			//      a magic field in $entityRecord, e.g. $entityRecord['__entityId'] or some such.
 
 			/* @var EntityId $id */
@@ -155,11 +155,19 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		}
 
 		wfProfileIn( __METHOD__ );
+
 		$entityIdsByType = $this->getNumericEntityIds( $entityInfo );
+		$useSerializedIds = !Settings::get( 'useNumericIdsInTermsTable' );
 
 		//NOTE: we make one DB query per entity type, so we can take advantage of the
 		//      database index on the term_entity_type field.
+		//TODO: once we use prefixed IDs, we no longer need to split by entity type.
 		foreach ( $entityIdsByType as $type => $idsForType ) {
+			if ( $useSerializedIds ) {
+				// $idsForType is a map serializedId -> numericId
+				$idsForType = array_keys( $idsForType );
+			}
+
 			$this->collectTermsForEntities( $entityInfo, $type, $idsForType, $types, $languages );
 		}
 
