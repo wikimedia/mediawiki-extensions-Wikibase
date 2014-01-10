@@ -49,6 +49,10 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 	include_once( __DIR__ . '/../vendor/autoload.php' );
 }
 
+if( !array_key_exists( 'evilDataValueMap', $GLOBALS ) ) {
+	$GLOBALS['evilDataValueMap'] = array();
+}
+
 $GLOBALS['evilDataValueMap'] = array_merge(
 	$GLOBALS['evilDataValueMap'],
 	array(
