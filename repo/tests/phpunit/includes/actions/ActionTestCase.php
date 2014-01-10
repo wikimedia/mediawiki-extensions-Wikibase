@@ -12,13 +12,12 @@ use MediaWikiTestCase;
 use MWException;
 use OutputPage;
 use RequestContext;
-use Status;
 use Title;
 use User;
-use WebRequest;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use WikiPage;
+use TestSites;
 
 /**
  * @licence GNU GPL v2+
@@ -40,6 +39,11 @@ class ActionTestCase extends MediaWikiTestCase {
 
 	public function setUp() {
 		parent::setUp();
+
+		static $setUp = false;
+		if ( !$setUp ) {
+			TestSites::insertIntoDb();
+		}
 
 		$lang = Language::factory( $this->language );
 		$user = new User();
