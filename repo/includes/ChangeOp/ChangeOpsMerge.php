@@ -3,6 +3,9 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Reference;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
@@ -115,7 +118,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateClaimsChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ){
+		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ) {
 			$this->fromChangeOps->add( new ChangeOpMainSnak(
 				$fromClaim->getGuid(),
 				null,
@@ -124,12 +127,61 @@ class ChangeOpsMerge {
 
 			$toClaim = clone $fromClaim;
 			$toClaim->setGuid( null );
+			$hasClaimMoved = false;
 
-			$this->toChangeOps->add( new ChangeOpClaim(
-				$toClaim ,
-				new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+			if( $toClaim instanceof Statement ) {
+				$hasClaimMoved = $this->generateReferencesChangeOps( $toClaim );
+			}
+
+			if( !$hasClaimMoved ) {
+				$this->toChangeOps->add( new ChangeOpClaim(
+					$toClaim ,
+					new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+				) );
+			}
+		}
+	}
+
+	/**
+	 * @param Statement $fromStatement
+	 *
+	 * @return bool Have we added a changeop for merging references?
+	 */
+	private function generateReferencesChangeOps( $fromStatement ) {
+		/** @var $claim Claim */
+		foreach( $this->toItemContent->getItem()->getClaims() as $claim ) {
+			$fromHash = $this->getMainSnakAndQualifierHash( $fromStatement );
+			$toHash = $this->getMainSnakAndQualifierHash( $claim );
+			if( $toHash === $fromHash ) {
+				$this->generateReferencesChangeOpsForStatement( $fromStatement, $claim->getGuid() );
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param Statement $statement statement to take references from
+	 * @param string $claimGuid claim guid to add the references to
+	 */
+	private function generateReferencesChangeOpsForStatement( Statement $statement, $claimGuid ) {
+		/** @var $reference Reference */
+		foreach ( $statement->getReferences() as $reference ) {
+			$this->toChangeOps->add( new ChangeOpReference(
+				$claimGuid,
+				$reference,
+				'' // empty hash will create a new reference
 			) );
 		}
+	}
+
+	/**
+	 * @param Statement $statement
+	 *
+	 * @return string combined hash of the Mainsnak and Qualifiers
+	 */
+	private function getMainSnakAndQualifierHash( Statement $statement ) {
+		return $statement->getMainSnak()->getHash() . $statement->getQualifiers()->getHash();
 	}
 
 }
