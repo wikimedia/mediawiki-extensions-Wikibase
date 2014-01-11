@@ -2,9 +2,9 @@
 
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Settings;
-use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Utils;
+use Wikibase\Client\Scribunto\LuaLibraryImplementation;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -17,7 +17,7 @@ use Wikibase\Utils;
 
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
-	/* @var Scribunto_LuaWikibaseLibraryImplementation */
+	/* @var Wikibase\Client\LuaLibraryImplementation */
 	protected $wbLibrary;
 
 	/**
@@ -31,9 +31,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
 		global $wgContLang;
 		$language = $wgContLang;
+
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$this->wbLibrary = new Scribunto_LuaWikibaseLibraryImplementation(
+		$this->wbLibrary = new LuaLibraryImplementation(
 			$wikibaseClient->getEntityIdParser(),
 			$wikibaseClient->getStore()->getEntityLookup(),
 			$wikibaseClient->getEntityIdFormatter(),
@@ -56,11 +57,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$lib = array(
 			'getEntity' => array( $this, 'getEntity' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
-			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
+			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' ),
+			'renderSnakForEntityId' => array( $this, 'renderSnakForEntityId' )
 		);
 
 		return $this->getEngine()->registerInterface(
-			dirname( __FILE__ ) . '/mw.wikibase.lua', $lib, array()
+			__DIR__ . '/mw.wikibase.lua', $lib, array()
 		);
 	}
 
@@ -70,14 +72,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @since 0.5
 	 *
 	 * @param string $prefixedEntityId
+	 * @param bool $legacyStyle Whether to return a legacy style entity
 	 *
 	 * @throws ScribuntoException
-	 * @return array $entityArr
+	 * @return array
 	 */
-	public function getEntity( $prefixedEntityId = null ) {
+	public function getEntity( $prefixedEntityId = null, $legacyStyle = true ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
+		$this->checkType( 'getEntity', 2, $legacyStyle, 'boolean' );
 		try {
-			$entityArr = $this->wbLibrary->getEntity( $prefixedEntityId );
+			$entityArr = $this->wbLibrary->getEntity( $prefixedEntityId, $legacyStyle );
 			return $entityArr;
 		}
 		catch ( EntityIdParsingException $e ) {
