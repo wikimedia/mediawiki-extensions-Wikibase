@@ -55,7 +55,7 @@ class ChangeOpReference extends ChangeOpBase {
 	 *
 	 * @param string $claimGuid
 	 * @param Reference|null $reference
-	 * @param string $referenceHash
+	 * @param string $referenceHash (if empty '' a new reference will be created)
 	 * @param int|null $index
 	 *
 	 * @throws \InvalidArgumentException
