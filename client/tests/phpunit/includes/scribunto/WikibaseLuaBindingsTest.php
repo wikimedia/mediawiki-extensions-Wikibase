@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
-use Scribunto_LuaWikibaseLibraryImplementation;
+use Wikibase\Test\MockRepository;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -12,26 +12,30 @@ use Wikibase\EntityLookup;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 
 /**
- * @covers Scribunto_LuaWikibaseLibraryImplementation
+ * @covers Wikibase\Client\Scribunto\WikibaseLuaBindings
  *
  * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseScribunto
- * @group Scribunto_LuaWikibaseLibraryImplementationTest
  *
  * @licence GNU GPL v2+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_TestCase {
+class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructor() {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
-		$this->assertInstanceOf( 'Scribunto_LuaWikibaseLibraryImplementation', $wikibaseLibrary );
+		$this->assertInstanceOf(
+			'Wikibase\Client\Scribunto\WikibaseLuaBindings',
+			$wikibaseLibrary
+		);
 	}
 
 	private function getWikibaseLibraryImplementation( EntityLookup $entityLookup = null ) {
@@ -48,7 +52,7 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 				} )
 			);
 
-		return new Scribunto_LuaWikibaseLibraryImplementation(
+		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
 			$entityLookup ? $entityLookup : new MockRepository(),
 			new EntityIdFormatter( new FormatterOptions() ),
@@ -113,4 +117,39 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 		return $item;
 	}
 
+	/**
+	 * @dataProvider provideZeroIndexedArray
+	 */
+	public function testZeroIndexArray ( $array, $expected ) {
+		$this->getWikibaseLibraryImplementation()->renumber( $array );
+		$this->assertSame( $expected, $array );
+	}
+
+	public function provideZeroIndexedArray() {
+		return array(
+			array(
+				array( 'nyancat' => array( 0 => 'nyan', 1 => 'cat' ) ),
+				array( 'nyancat' => array( 1 => 'nyan', 2 => 'cat' ) )
+			),
+			array(
+				array( array( 'a', 'b' ) ),
+				array( array( 1 => 'a', 2 => 'b' ) )
+			),
+			array(
+				// Nested arrays
+				array( array( 'a', 'b', array( 'c', 'd' ) ) ),
+				array( array( 1 => 'a', 2 => 'b', 3 => array( 1 => 'c', 2 => 'd' ) ) )
+			),
+			array(
+				// Already 1-based
+				array( array( 1 => 'a', 4 => 'c', 3 => 'b' ) ),
+				array( array( 1 => 'a', 4 => 'c', 3 => 'b' ) )
+			),
+			array(
+				// Associative array
+				array( array( 'foo' => 'bar', 1337 => 'Wikidata' ) ),
+				array( array( 'foo' => 'bar', 1337 => 'Wikidata' ) )
+			),
+		);
+	}
 }
