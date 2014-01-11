@@ -283,6 +283,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 				unset( $data['id'] );
 				unset( $data['hash'] );
 				unset( $data['qualifiers-order'] );
+				unset( $data['snaks-order'] );
 				$this->assertArrayEquals( $exp, $data, false, true );
 			}
 		}
