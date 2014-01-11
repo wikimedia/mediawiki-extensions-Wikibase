@@ -2,7 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
-use Wikibase\EntityId;
+use LogicException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
 
@@ -165,18 +166,43 @@ class MergeItemsTest extends WikibaseApiTestCase {
 				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
 				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
 		);
-		//Identical claims should not be replaced but duplicated instead
-		$testCases['identicalClaimMerge'] = array(
-			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-			array(),
-			array( 'claims' => array(
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
+		//Identical claims (mainsnak and qualifiers) should merge references
+		$testCases['identicalClaimMergeReferences'] = array(
+			array( 'claims' =>
+				array( '{Prop}' =>
+					array( array( 'mainsnak' =>
+						array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' =>
+							array( 'value' => 'imastring', 'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal',
+						'references' => array(
+							array( 'snaks' => array( '{Prop}' => array(
+								array( 'snaktype' => 'value',
+									'property' => '{Prop}',
+									'datavalue' => array( 'value' => 'imastring', 'type' => 'string' )
+			) ) ) ) ) ) ) ) ),
+			array( 'claims' =>
+				array( '{Prop}' =>
+					array( array( 'mainsnak' =>
+						array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' =>
+							array( 'value' => 'imastring', 'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal'
+			) ) ) ),
+			array(), //empty
+			array( 'claims' =>
+				array( '{Prop}' =>
+					array( array( 'mainsnak' =>
+						array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' =>
+							array( 'value' => 'imastring', 'type' => 'string' ) ),
+						'type' => 'statement',
+						'rank' => 'normal',
+						'references' => array(
+							array( 'snaks' => array( '{Prop}' => array(
+								array( 'snaktype' => 'value',
+									'property' => '{Prop}',
+									'datavalue' => array( 'value' => 'imastring', 'type' => 'string' )
+			) ) ) ) ) ) ) ) ),
 		);
 		return $testCases;
 	}
@@ -184,11 +210,11 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	function testMergeRequest( $pre1, $pre2, $expected1, $expected2, $ignoreConflicts = null ){
+	function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $ignoreConflicts = null ){
 		$this->injectIds( $pre1 );
 		$this->injectIds( $pre2 );
-		$this->injectIds( $expected1 );
-		$this->injectIds( $expected2 );
+		$this->injectIds( $expectedFrom );
+		$this->injectIds( $expectedTo );
 
 		// -- set up params ---------------------------------
 		$params = array(
@@ -227,8 +253,10 @@ class MergeItemsTest extends WikibaseApiTestCase {
 		$this->assertGreaterThan( 0, $result['to']['lastrevid'] );
 
 		// -- check the items --------------------------------------------
-		$this->assertEntityEquals( $expected1, $this->loadEntity( $result['from']['id'] ) );
-		$this->assertEntityEquals( $expected2, $this->loadEntity( $result['to']['id'] ) );
+		$actualFrom = $this->loadEntity( $result['from']['id'] );
+		$this->assertEntityEquals( $expectedFrom, $actualFrom );
+		$actualTo = $this->loadEntity( $result['to']['id'] );
+		$this->assertEntityEquals( $expectedTo, $actualTo );
 
 		// -- check the edit summaries --------------------------------------------
 		$this->assertRevisionSummary( array( 'wbmergeitems' ), $result['from']['lastrevid'] );
@@ -339,10 +367,12 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	 * Applies self::$idMap to all data in the given data structure, recursively.
 	 *
 	 * @param $data
+	 *
+	 * @throws LogicException
 	 */
 	protected function injectIds( &$data ) {
 		if ( !self::$hasSetup ) {
-			throw new \LogicException( 'setUp() was not yet completed.' );
+			throw new LogicException( 'setUp() was not yet completed.' );
 		}
 
 		$idMap = array(
