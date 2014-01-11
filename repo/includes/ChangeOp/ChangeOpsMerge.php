@@ -3,6 +3,9 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Reference;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
@@ -115,7 +118,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateClaimsChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ){
+		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ) {
 			$this->fromChangeOps->add( new ChangeOpMainSnak(
 				$fromClaim->getGuid(),
 				null,
@@ -124,10 +127,60 @@ class ChangeOpsMerge {
 
 			$toClaim = clone $fromClaim;
 			$toClaim->setGuid( null );
+			$toMergeToClaim = false;
 
-			$this->toChangeOps->add( new ChangeOpClaim(
-				$toClaim ,
-				new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+			if( $toClaim instanceof Statement ) {
+				$toMergeToClaim = $this->findClaimToMergeReferencesTo( $toClaim );
+			}
+
+			if( $toMergeToClaim ) {
+				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim->getGuid() );
+			} else {
+				$this->toChangeOps->add( new ChangeOpClaim(
+					$toClaim,
+					new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+				) );
+			}
+		}
+	}
+
+	/**
+	 * @param Statement $fromStatement
+	 *
+	 * @return Claim|bool Claim to merge reference into or false
+	 */
+	private function findClaimToMergeReferencesTo( $fromStatement ) {
+		/** @var $claim Claim */
+		foreach( $this->toItemContent->getItem()->getClaims() as $claim ) {
+			$fromHash = $this->getMainSnakAndQualifierHash( $fromStatement );
+			$toHash = $this->getMainSnakAndQualifierHash( $claim );
+			if( $toHash === $fromHash ) {
+				return $claim;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param Statement $statement
+	 *
+	 * @return string combined hash of the Mainsnak and Qualifiers
+	 */
+	private function getMainSnakAndQualifierHash( Statement $statement ) {
+		return $statement->getMainSnak()->getHash() . $statement->getQualifiers()->getHash();
+	}
+
+	/**
+	 * @param Statement $statement statement to take references from
+	 * @param string $claimGuid claim guid to add the references to
+	 */
+	private function generateReferencesChangeOps( Statement $statement, $claimGuid ) {
+		/** @var $reference Reference */
+		foreach ( $statement->getReferences() as $reference ) {
+			$this->toChangeOps->add( new ChangeOpReference(
+				$claimGuid,
+				$reference,
+				'' // empty hash will create a new reference
 			) );
 		}
 	}
