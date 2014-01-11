@@ -1,15 +1,18 @@
 <?php
 
+namespace Wikibase\Client\Scribunto;
+
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Entity;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityLookup;
-use Wikibase\SiteLinkLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\SiteLinkLookup;
+use Wikibase\EntityLookup;
+use Wikibase\Entity;
 use Wikibase\Utils;
+use Language;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -18,8 +21,9 @@ use Wikibase\Utils;
  *
  * @licence GNU GPL v2+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
+ * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseLibraryImplementation {
+final class LuaLibraryImplementation {
 
 	/* @var EntityIdParser */
 	protected $entityIdParser;
@@ -42,7 +46,7 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 	/* @var string[] */
 	protected $languageCodes;
 
-	/* @var mixed */
+	/* @var string */
 	protected $siteId;
 
 	/**
@@ -68,6 +72,25 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		$this->siteId = $siteId;
 	}
 
+	/**
+	 * Recursively renumber a serialized array in place, so it is indexed at 1, not 0.
+	 * Just like Lua wants it.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$entityArr
+	 */
+	public function renumber( &$entityArr ) {
+		foreach( $entityArr as &$value ) {
+			if ( !is_array( $value ) ) {
+				continue;
+			}
+			if ( array_key_exists( 0, $value ) ) {
+				$value = array_combine( range( 1, count( $value ) ), array_values( $value ) );
+			}
+			$this->renumber( $value );
+		}
+	}
 
 	/**
 	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
@@ -75,10 +98,11 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 	 * @since 0.5
 	 *
 	 * @param string $prefixedEntityId
+	 * @param bool $legacyStyle Whether to return a legacy style entity
 	 *
 	 * @return array $entityArr
 	 */
-	public function getEntity( $prefixedEntityId = null ) {
+	public function getEntity( $prefixedEntityId = null, $legacyStyle = false ) {
 		$prefixedEntityId = trim( $prefixedEntityId );
 
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
@@ -89,13 +113,27 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 			return array( null );
 		}
 
-		$serializer = $this->getEntitySerializer( $entityObject );
+		$serializer = $this->getEntitySerializer( $entityObject, $legacyStyle );
 
 		$entityArr = $serializer->getSerialized( $entityObject );
+
+		if ( !$legacyStyle ) {
+			// Renumber the entity as Lua uses 1-based array indexing
+			$this->renumber( $entityArr );
+		}
+
 		return array( $entityArr );
 	}
 
-	private function getEntitySerializer( Entity $entityObject ) {
+	/**
+	 * @since 0.5
+	 *
+	 * @param Entity $entityObject
+	 * @param bool $lowerCaseIds Whether to also use lower case ids
+	 *
+	 * @return Serializer
+	 */
+	private function getEntitySerializer( Entity $entityObject, $lowerCaseIds ) {
 		$opt = new SerializationOptions();
 		$serializerFactory = new SerializerFactory( $opt );
 
@@ -103,7 +141,9 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 		// twice, once with a lower case key and once with an upper case key.
 		// This is a B/C hack to allow existing lua code to use hardcoded IDs
 		// in both lower (legacy) and upper case.
-		$opt->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
+		if ( $lowerCaseIds ) {
+			$opt->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
+		}
 
 		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
 		// so any customized Lua modules can access labels of another entity written in another variant,
@@ -147,6 +187,7 @@ class Scribunto_LuaWikibaseLibraryImplementation {
 	 *
 	 * @since 0.5
 	 *
+	 * @return array
 	 */
 	public function getGlobalSiteId() {
 		return array( $this->siteId );
