@@ -62,7 +62,7 @@ return call_user_func( function() {
 
 		// includes/scribunto
 		'Scribunto_LuaWikibaseLibrary' => 'includes/scribunto/Scribunto_LuaWikibaseLibrary.php',
-		'Scribunto_LuaWikibaseLibraryImplementation' => 'includes/scribunto/Scribunto_LuaWikibaseLibraryImplementation.php',
+		'Wikibase\Client\Scribunto\LuaLibraryImplementation' => 'includes/scribunto/LuaLibraryImplementation.php',
 
 		// test
 		'Wikibase\Test\MockPageUpdater' => 'tests/phpunit/MockPageUpdater.php'

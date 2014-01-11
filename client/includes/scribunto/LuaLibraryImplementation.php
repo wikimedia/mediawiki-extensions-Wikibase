@@ -1,0 +1,195 @@
+<?php
+
+namespace Wikibase\Client\Scribunto;
+
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\SiteLinkLookup;
+use Wikibase\EntityLookup;
+use Wikibase\Entity;
+use Wikibase\Utils;
+use Language;
+
+/**
+ * Actual implementations of the functions to access Wikibase through the Scribunto extension
+ *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
+ * @author Jens Ohlig < jens.ohlig@wikimedia.de >
+ * @author Marius Hoch < hoo@online.de >
+ */
+final class LuaLibraryImplementation {
+
+	/* @var EntityIdParser */
+	protected $entityIdParser;
+
+	/* @var EntityLookup */
+	protected $entityLookup;
+
+	/* @var EntityIdFormatter */
+	protected $entityIdFormatter;
+
+	/* @var SiteLinkLookup */
+	protected $siteLinkTable;
+
+	/* @var LanguageFallbackChainFactory */
+	protected $fallbackChainFactory;
+
+	/* @var Language */
+	protected $language;
+
+	/* @var string[] */
+	protected $languageCodes;
+
+	/* @var string */
+	protected $siteId;
+
+	/**
+	 * @param EntityIdParser $entityIdParser
+	 */
+	public function __construct(
+		EntityIdParser $entityIdParser,
+		EntityLookup $entityLookup,
+		EntityIdFormatter $entityIdFormatter,
+		SiteLinkLookup $siteLinkTable,
+		LanguageFallbackChainFactory $fallbackChainFactory,
+		Language $language,
+		$languageCodes,
+		$siteId
+	) {
+		$this->entityIdParser = $entityIdParser;
+		$this->entityLookup = $entityLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
+		$this->siteLinkTable = $siteLinkTable;
+		$this->fallbackChainFactory = $fallbackChainFactory;
+		$this->language = $language;
+		$this->languageCodes = $languageCodes;
+		$this->siteId = $siteId;
+	}
+
+	/**
+	 * Recursively renumber a serialized array in place, so it is indexed at 1, not 0.
+	 * Just like Lua wants it.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$entityArr
+	 */
+	public function renumber( &$entityArr ) {
+		foreach( $entityArr as &$value ) {
+			if ( !is_array( $value ) ) {
+				continue;
+			}
+			if ( array_key_exists( 0, $value ) ) {
+				$value = array_combine( range( 1, count( $value ) ), array_values( $value ) );
+			}
+			$this->renumber( $value );
+		}
+	}
+
+	/**
+	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $prefixedEntityId
+	 * @param bool $legacyStyle Whether to return a legacy style entity
+	 *
+	 * @return array $entityArr
+	 */
+	public function getEntity( $prefixedEntityId = null, $legacyStyle = false ) {
+		$prefixedEntityId = trim( $prefixedEntityId );
+
+		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+
+		$entityObject = $this->entityLookup->getEntity( $entityId );
+
+		if ( $entityObject === null ) {
+			return array( null );
+		}
+
+		$serializer = $this->getEntitySerializer( $entityObject, $legacyStyle );
+
+		$entityArr = $serializer->getSerialized( $entityObject );
+
+		if ( !$legacyStyle ) {
+			// Renumber the entity as Lua uses 1-based array indexing
+			$this->renumber( $entityArr );
+		}
+
+		return array( $entityArr );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param Entity $entityObject
+	 * @param bool $lowerCaseIds Whether to also use lower case ids
+	 *
+	 * @return Serializer
+	 */
+	private function getEntitySerializer( Entity $entityObject, $lowerCaseIds ) {
+		$opt = new SerializationOptions();
+		$serializerFactory = new SerializerFactory( $opt );
+
+		// Using "ID_KEYS_BOTH" here means that all lists of Snaks or Claims will be listed
+		// twice, once with a lower case key and once with an upper case key.
+		// This is a B/C hack to allow existing lua code to use hardcoded IDs
+		// in both lower (legacy) and upper case.
+		if ( $lowerCaseIds ) {
+			$opt->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
+		}
+
+		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
+		// so any customized Lua modules can access labels of another entity written in another variant,
+		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
+		$chain = $this->fallbackChainFactory->newFromLanguage(
+			$this->language,
+			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+		);
+
+		// SerializationOptions accepts mixed types of keys happily.
+		$opt->setLanguages( Utils::getLanguageCodes() + array( $this->language->getCode() => $chain ) );
+
+		return $serializerFactory->newSerializerForObject( $entityObject, $opt );
+	}
+
+	/**
+	 * Get entity id from page title.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $pageTitle
+	 *
+	 * @return string|null $id
+	 */
+	public function getEntityId( $pageTitle = null ) {
+		$numericId = $this->siteLinkTable->getItemIdForLink( $this->siteId, $pageTitle );
+
+		if ( ! is_int( $numericId ) ) {
+			return array( null );
+		}
+
+		$id = ItemId::newFromNumber( $numericId );
+
+		return array( $this->entityIdFormatter->format( $id ) );
+	}
+
+	/**
+	 * Get global site ID (e.g. "enwiki")
+	 * This is basically a helper function.
+	 * I can see this becoming part of mw.site in the Scribunto extension.
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function getGlobalSiteId() {
+		return array( $this->siteId );
+	}
+}
