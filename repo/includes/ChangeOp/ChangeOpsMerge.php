@@ -3,6 +3,9 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Reference;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
@@ -115,7 +118,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateClaimsChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ){
+		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ) {
 			$this->fromChangeOps->add( new ChangeOpMainSnak(
 				$fromClaim->getGuid(),
 				null,
@@ -124,12 +127,44 @@ class ChangeOpsMerge {
 
 			$toClaim = clone $fromClaim;
 			$toClaim->setGuid( null );
+			$claimMoved = false;
 
-			$this->toChangeOps->add( new ChangeOpClaim(
-				$toClaim ,
-				new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
-			) );
+			if( $toClaim instanceof Statement ) {
+				$claimMoved = $this->getReferenceChangeOps( $toClaim );
+			}
+
+			if( !$claimMoved ) {
+				$this->toChangeOps->add( new ChangeOpClaim(
+					$toClaim ,
+					new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+				) );
+			}
 		}
+	}
+
+	/**
+	 * @param Statement $fromStatement
+	 *
+	 * @return bool Could be more the references?
+	 */
+	private function getReferenceChangeOps( $fromStatement ) {
+		/** @var $claim Claim */
+		foreach( $this->toItemContent->getItem()->getClaims() as $claim ) {
+			$fromHash = $fromStatement->getMainSnak()->getHash() . $fromStatement->getQualifiers()->getHash();
+			$toHash = $claim->getMainSnak()->getHash() . $claim->getQualifiers()->getHash();
+			if( $toHash === $fromHash ) {
+				/** @var $reference Reference */
+				foreach ( $fromStatement->getReferences() as $reference ) {
+					$this->toChangeOps->add( new ChangeOpReference(
+						$claim->getGuid(),
+						$reference,
+						'' // empty hash will create a new reference
+					) );
+				}
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
