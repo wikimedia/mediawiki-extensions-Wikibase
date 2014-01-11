@@ -1320,7 +1320,7 @@ $messages['es'] = array(
 	'wikibase-editlinkstitle' => 'Editar enlaces de interlengua',
 	'wikibase-linkitem-addlinks' => 'Añadir enlace',
 	'wikibase-linkitem-alreadylinked' => 'La página que quieres enlazar con esta, ya está enlazada a un [$1 elemento] en el repositorio de datos central que une a $2 en este sitio. Los elementos sólo pueden tener una sola página por sitio enlazado. Por favor, elije una página diferente para enlazarlo.',
-	'wikibase-linkitem-close' => 'Cierre el cuadro de dialogo y recargue la página',
+	'wikibase-linkitem-close' => 'Cerrar y recargar la página',
 	'wikibase-linkitem-failure' => 'Se produjo un error desconocido al intentar enlazar la página dada.',
 	'wikibase-linkitem-title' => 'Enlazar las páginas',
 	'wikibase-linkitem-linkpage' => 'Enlazar las páginas',
@@ -2453,6 +2453,8 @@ $messages['krc'] = array(
 	'wikibase-linkitem-success-link' => 'Бу бет тыйыншлы байламлы этилди. Джибериулени тутхан элементни [$1 билгилени ара репозиторийинде] табаргъа боллукъсуз.',
 	'wikibase-rc-hide-wikidata' => 'Викибилгилени $1',
 	'wikibase-rc-show-wikidata-pref' => 'Викибилгилени тюрлениулерин джангы тюрлениулени тизмесинде кёргюз',
+	'wikibase-rc-wikibase-edit-letter' => 'вб',
+	'wikibase-rc-wikibase-edit-title' => 'Викибилги бла байламлы тюрлениу',
 );
 
 /** Colognian (Ripoarisch)
@@ -3918,13 +3920,18 @@ $messages['ta'] = array(
 );
 
 /** Telugu (తెలుగు)
+ * @author Arjunaraoc
  * @author Veeven
  */
 $messages['te'] = array(
+	'wikibase-dataitem' => 'దత్తాంశం(వికీడేటా)',
 	'wikibase-editlinks' => 'లంకెలను మార్చు',
+	'wikibase-editlinkstitle' => 'భాషాలింకులను మార్చు',
 	'wikibase-linkitem-addlinks' => 'లంకెలను చేర్చండి',
 	'wikibase-rc-hide-wikidata' => 'వికీడాటాను $1',
-	'wikibase-rc-show-wikidata-pref' => 'వికీడామా మార్పులను ఇటీవలి మార్పులలో చూపించు',
+	'wikibase-rc-show-wikidata-pref' => 'వికీడేటా మార్పులను ఇటీవలి మార్పులలో చూపించు',
+	'wikibase-rc-wikibase-edit-letter' => 'ద',
+	'wikibase-rc-wikibase-edit-title' => 'వికీడేటా సవరణ',
 );
 
 /** Thai (ไทย)
@@ -4064,7 +4071,7 @@ $messages['uz'] = array(
 	'wikibase-linkitem-confirmitem-text' => 'Siz tanlagan sahifa [$1 markazlashtirilgan maʼlumotlar repozitoriyimizning bandi] bilan bogʻlandi. Iltimos, quyida koʻrsatilgan sahifalar orasida ushbu sahifaga bogʻlanishi keraklari borligini tasdiqlang.', # Fuzzy
 	'wikibase-linkitem-success-link' => 'Sahifalar bogʻlandi. Bogʻlamalar toʻplami saqlanadigan bandni [$1 markazlashtirilgan maʼlumot repozitoriyimizda] topishingiz mumkin.',
 	'wikibase-rc-hide-wikidata' => 'Vikimaʼlumotlarga oid tahrirlarni $1',
-	'wikibase-rc-wikibase-edit-title' => '[[Vikimaʼlumotlar]]ga oid tahrir',
+	'wikibase-rc-wikibase-edit-title' => 'Vikimaʼlumotlarga oid tahrir',
 );
 
 /** vèneto (vèneto)

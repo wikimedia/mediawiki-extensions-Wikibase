@@ -4132,9 +4132,11 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-setsitelink-intro' => 'Dieses Formular ermöglicht dir die Festlegung des Websitelinks eines Objektes. Du musst die Objektkennung (z.&nbsp;B. „Q23“), eine Websitekennung (z.&nbsp;B. „dewiki“) und den Websitelink angeben.',
 	'wikibase-setsitelink-site' => 'Websitekennung:',
 	'wikibase-setsitelink-label' => 'Websitelink:',
+	'wikibase-setsitelink-badges' => 'Auszeichnungen:',
 	'wikibase-setsitelink-submit' => 'Den Websitelink festlegen',
 	'wikibase-setsitelink-warning-remove' => 'Möchtest du den Websitelink von [[$1]] wirklich entfernen?',
 	'wikibase-setsitelink-invalid-site' => 'Die Websitekennung „$1“ ist unbekannt. Bitte verwende eine vorhandene Kennung, wie „dewiki“.',
+	'wikibase-setsitelink-not-item' => 'Die Kennung $1 gehört zu keinem Objekt.',
 	'wikibase-setsitelink-add-failed' => 'Der Websitelink konnte nicht gespeichert werden.',
 	'wikibase-setsitelink-remove-failed' => 'Der Websitelink konnte nicht entfernt werden.',
 	'wikibase-setsitelink-not-itemid' => '„$1“ ist keine gültige Objektkennung. Websitelinks können nur für Datenobjekte festgelegt werden.',
@@ -8228,7 +8230,7 @@ $messages['ia'] = array(
 	'wikibase-label-edit-placeholder' => 'scribe etiquetta',
 	'wikibase-description-edit-placeholder' => 'scribe description',
 	'wikibase-sitelink-site-edit-placeholder' => 'sito',
-	'wikibase-sitelink-page-edit-placeholder' => 'articulo', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'pagina',
 	'wikibase-alias-edit-placeholder' => 'scribe un alias',
 	'wikibase-label-input-help-message' => 'Entra le titulo de iste insimul de datos in $1.',
 	'wikibase-description-input-help-message' => 'Entra un curte description in $1.',
@@ -8245,14 +8247,15 @@ $messages['ia'] = array(
 	'wikibase-aliases-input-help-message' => 'Si iste gruppo de datos es cognoscite per plus de un particular nomine, tu pote specificar aliases e synonymos, a fin que illo pote esser trovate per su nomines alternative.',
 	'wikibase-aliases-empty' => 'Nulle alias definite.',
 	'wikibase-move-error' => 'Tu non pote renominar paginas que es in le spatio de nomines de datos, e tu non pote displaciar paginas a in illo.',
-	'wikibase-error-sitelink-already-used' => 'Le ligamine de sito [$1 $2] es jam usate per le elemento con ID $3.', # Fuzzy
-	'special-itembytitle' => 'Objecto per titulo', # Fuzzy
-	'special-itemdisambiguation' => 'Objecto per etiquetta', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Le ligamine de sito [$1 $2] es jam includite in un altere elemento, [[$3]].',
+	'special-itembytitle' => 'Elemento per titulo',
+	'special-itemdisambiguation' => 'Disambiguation de elementos',
 	'special-newitem' => 'Crear un nove objecto',
 	'wikibase-restoreold' => 'reinitialisar',
 );
 
 /** Indonesian (Bahasa Indonesia)
+ * @author Bennylin
  * @author Farras
  * @author Iwan Novirion
  * @author පසිඳු කාවින්ද
@@ -8436,7 +8439,7 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'wikibase-restoreold' => 'kembalikan',
 	'wikibase-restore-summary' => 'Mengembalikan revisi $1 oleh [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Penyuntingan langsung dinonaktifkan di ruang nama $1',
-	'wikibase-noentity' => 'Data ini tidak ada. Anda bisa <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}}cari log terkait]</span> untuk mengetahui kemana perginya.',
+	'wikibase-noentity' => 'Data ini tidak ada. Anda bisa <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}}cari log terkait]</span> untuk mengetahui apabila artikel tersebut pernah dihapus.',
 	'wikibase-noentity-createone' => 'Anda juga dapat [[$1|membuat yang baru]].',
 	'wikibase-item-summary-wbsetitem' => 'Membuat item baru',
 	'wikibase-item-summary-wbcreate-new' => 'Membuat item baru',
@@ -11389,9 +11392,11 @@ $messages['mk'] = array(
 	'wikibase-setsitelink-intro' => 'Овој образец ви овозможува да зададете викиврска на предмет. Ќе треба да ја наведете назнаката на предметот (на пр. Q23), назнаката на викито (на пр. „mkwiki“) и викиврската што ја задавате.',
 	'wikibase-setsitelink-site' => 'Викиназнака:',
 	'wikibase-setsitelink-label' => 'Викиврска:',
+	'wikibase-setsitelink-badges' => 'Значки:',
 	'wikibase-setsitelink-submit' => 'Задај викиврска',
 	'wikibase-setsitelink-warning-remove' => 'Дали навистина сакате да ја отстраните викиврската од [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Викиназнаката „$1“ е непозната. Употребете постоечка, како на пр. „mkwiki“.',
+	'wikibase-setsitelink-not-item' => 'Назнаката „$1“ не му принадлежи на овој предмет.',
 	'wikibase-setsitelink-add-failed' => 'Не можав да ја зачувам викиврската.',
 	'wikibase-setsitelink-remove-failed' => 'Не можев да ја отстранам викиврската.',
 	'wikibase-setsitelink-not-itemid' => '„$1“ не претставува важечка назнака на предмет. Викиврски можат да се задаваат само за предмети.',
@@ -12858,7 +12863,7 @@ $messages['nn'] = array(
 	'wikibase-undo-samerev' => 'Kan ikkje angra, den same versjonen var oppgjeven for byrjing og ende',
 	'wikibase-undo-badpage' => 'Ubrukeleg versjon: versjon $2 høyrer ikkje til [[$1]].',
 	'wikibase-undo-firstrev' => 'Kan ikkje angra opprettinga av sida',
-	'wikibase-propertyedittool-full' => 'Lista av verdiar er no komplett.',
+	'wikibase-propertyedittool-full' => 'Lista over verdiar er komplett',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Éin verdi|$1 verdiar}} er ikkje lagra enno.',
 	'wikibase-propertyedittool-counter-entrieslabel' => '({{PLURAL:$1|éi oppføring|$1 oppføringar}})',
 	'wikibase-sitelinksedittool-full' => 'Det er ikkje fleire nettstader tilgjengelege',
@@ -15928,6 +15933,7 @@ $messages['sr-el'] = array(
  * @author Jopparn
  * @author Littledogboy
  * @author Lokal Profil
+ * @author Rippitippi
  * @author Vivaelcelta
  * @author WikiPhoenix
  */
@@ -16184,7 +16190,7 @@ för att ta reda på var den tog vägen.',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Tog bort {{PLURAL:$1|kvalifikator|kvalifikatorer}}',
 	'wikibase-item-summary-wbremovereferences-remove' => 'Tog bort {{PLURAL:$3|källa|källor}} från påstående',
 	'wikibase-item-summary-wbmergeitems-from' => 'Slå samman objekt från "$3"',
-	'wikibase-item-summary-wbmergeitems-to' => 'Slå samman objekt in till "$3"',
+	'wikibase-item-summary-wbmergeitems-to' => 'Slå samman objekt med "$3"',
 	'wikibase-property-summary-wbcreate-new' => 'Skapade en ny egenskap',
 	'wikibase-property-summary-wbeditentity-create' => 'Skapade en ny egenskap',
 	'wikibase-property-summary-wbeditentity-update' => 'Uppdaterade en egenskap',
@@ -17968,9 +17974,11 @@ $messages['zh-hans'] = array(
 	'wikibase-setsitelink-intro' => '该表格允许你设置实体的网站链接。你需要提供实体的ID（如Q23）、网站ID（如“zhwiki”）和要设置的网站链接。',
 	'wikibase-setsitelink-site' => '网站ID：',
 	'wikibase-setsitelink-label' => '网站链接：',
+	'wikibase-setsitelink-badges' => '徽章：',
 	'wikibase-setsitelink-submit' => '设置网站链接',
 	'wikibase-setsitelink-warning-remove' => '你真的想要删除[[$1]]的网站链接吗？',
 	'wikibase-setsitelink-invalid-site' => '网站ID“$1”未知。请使用现存的网站ID，例如“zhwiki”。',
+	'wikibase-setsitelink-not-item' => 'ID $1 不属于任何项目。',
 	'wikibase-setsitelink-add-failed' => '该网站链接无法保存。',
 	'wikibase-setsitelink-remove-failed' => '该网站链接无法删除。',
 	'wikibase-setsitelink-not-itemid' => '“$1”不是一个有效的项编号。仅可以对有效项设置网站链接。',
@@ -18335,9 +18343,11 @@ $messages['zh-hant'] = array(
 	'wikibase-setsitelink-intro' => '此表格容許您設置一個實體的標籤。您需要提供實體的ID（例如Q23），維基項目ID（如enwiki）及維基項目連結以設置。',
 	'wikibase-setsitelink-site' => '維基項目ID：',
 	'wikibase-setsitelink-label' => '維基項目連結：',
+	'wikibase-setsitelink-badges' => '徽章：',
 	'wikibase-setsitelink-submit' => '設置維基項目連結',
 	'wikibase-setsitelink-warning-remove' => '您真的要移除[[$1]]的維基項目連結？',
 	'wikibase-setsitelink-invalid-site' => '維基項目ID$1為未知。請使用一个存在的維基項目ID，如enwiki。',
+	'wikibase-setsitelink-not-item' => 'ID$1不屬於任何項。',
 	'wikibase-setsitelink-add-failed' => '無法儲存該網站連結。',
 	'wikibase-setsitelink-remove-failed' => '無法移除該網站連結。',
 	'wikibase-setsitelink-not-itemid' => "''$1''並非一個有效項ID。僅可為項設置站點連接。",
