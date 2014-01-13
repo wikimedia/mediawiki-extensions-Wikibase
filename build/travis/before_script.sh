@@ -24,7 +24,7 @@ git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --
 cp -r $originalDirectory Wikibase
 
 cd Wikibase
-composer install
+composer install --prefer-source
 
 cd ../..
 
