@@ -9,14 +9,12 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Entity;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
-use Wikibase\StorageException;
 
 /**
  * @covers Wikibase\Dumpers\JsonDumpGenerator
@@ -89,6 +87,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param EntityId[] $ids
+	 * @param array $missingIds
 	 *
 	 * @return JsonDumpGenerator
 	 */
