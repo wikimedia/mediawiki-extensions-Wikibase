@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_82009c6e",
+        "filename": "repo/includes/ChangeOp/ChangeOpReference.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-13T10:39:19Z",
+      "side": 1,
+      "message": "Potentially, If this is done then we should also do this for all other change ops!",
+      "parentUuid": "aef5673e_22bd50d2",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_a2c84078",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_6205987c",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-13T10:39:19Z",
+      "side": 1,
+      "message": "Indeed it does not. This should probably be generate instead of get",
+      "parentUuid": "aef5673e_a2c84078",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_62aa3884",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-01-13T09:27:01Z",
       "side": 1,
       "message": "Is this about re-ordering, or about merging references? I\u0027m confused now....",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_02436cb7",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-13T10:39:19Z",
+      "side": 1,
+      "message": "merging references! $claimMoved is simply a flag indicating if the claim has already moved from the old item to the new item.\nAs if we have merged references across then we don\u0027t need to worry about moving the claim.\nBut if we couldn\u0027t find a claim to move the references to we must copy the whole claim across",
+      "parentUuid": "aef5673e_62aa3884",
       "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_e23f681f",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-13T10:39:19Z",
+      "side": 1,
+      "message": "willdo",
+      "parentUuid": "aef5673e_02d24c2c",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_c2cb4474",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 3
@@ -98,6 +170,24 @@
       "writtenOn": "2014-01-13T09:27:01Z",
       "side": 1,
       "message": "Eek, side-effects in a methods that has a getXXX name? Rather surprising, please rename. \"build\", \"calculate\", \"generate\", \"add\", \"collect\"...",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_c24c64e7",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-13T10:39:19Z",
+      "side": 1,
+      "message": "as above, will rename generate to keep things consistent",
+      "parentUuid": "aef5673e_c2cb4474",
       "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
