@@ -23,11 +23,8 @@ use Wikibase\Item;
  */
 class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
-	protected function newExpander() {
+	protected function newExpander( $user ) {
 		$title = new Title( 'EntityViewPlaceholderExpanderTest-DummyTitleForLocalUrls' );
-
-		$user = new User();
-		$user->setName( 'EntityViewPlaceholderExpanderTest-DummyUser' );
 
 		$language = Language::factory( 'en' );
 
@@ -70,8 +67,20 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		);
 	}
 
+	private function newUser( $isAnon ) {
+		$user = $this->getMockBuilder( '\User' )
+			->disableOriginalConstructor()
+			->getMock();
+		$user->expects( $this->any() )
+			->method( 'isAnon' )
+			->will( $this->returnValue( $isAnon ) );
+		$user->setName( 'EntityViewPlaceholderExpanderTest-DummyUser' );
+
+		return $user;
+	}
+
 	public function testGetHtmlForPlaceholder() {
-		$expander = $this->newExpander();
+		$expander = $this->newExpander( $this->newUser( false ) );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox-toc' );
 		$this->assertInternalType( 'string', $html );
@@ -81,7 +90,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	}
 
 	public function testRenderTermBoxTocEntry() {
-		$expander = $this->newExpander();
+		$expander = $this->newExpander( $this->newUser( false ) );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
@@ -91,7 +100,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	}
 
 	public function renderTermBox() {
-		$expander = $this->newExpander();
+		$expander = $this->newExpander( $this->newUser( false ) );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
@@ -102,6 +111,14 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 		$this->assertNotRegExp( '/Moskow/', $html );
 		$this->assertNotRegExp( '/Capitol/', $html );
+	}
+
+	public function testGetExtraUserLanguages() {
+		$expander = $this->newExpander( $this->newUser( true ) );
+		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
+
+		$expander = $this->newExpander( $this->newUser( false ) );
+		$this->assertArrayEquals( array( 'de', 'en', 'ru' ), $expander->getExtraUserLanguages() );
 	}
 
 }
