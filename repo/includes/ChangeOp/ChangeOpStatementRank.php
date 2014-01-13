@@ -40,7 +40,6 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	 *
 	 * @param string $claimGuid
 	 * @param integer $rank
-	 * @param EntityIdFormatter $idFormatter
 	 *
 	 * @throws InvalidArgumentException
 	 */

@@ -7,6 +7,7 @@ use Title;
 use User;
 use WatchAction;
 use Wikibase\EditEntity;
+use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use WikiPage;

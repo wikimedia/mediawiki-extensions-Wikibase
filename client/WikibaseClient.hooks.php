@@ -15,6 +15,7 @@ use RecentChange;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
+use SpecialWatchlist;
 use SplFileInfo;
 use Sites;
 use Skin;

@@ -10,6 +10,7 @@ use DifferenceEngine;
 use Html;
 use Linker;
 use ParserOptions;
+use ParserOutput;
 use Revision;
 use SiteSQLStore;
 use ValueFormatters\FormatterOptions;
