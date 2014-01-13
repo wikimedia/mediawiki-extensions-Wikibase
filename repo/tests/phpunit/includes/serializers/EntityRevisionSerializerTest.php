@@ -8,13 +8,10 @@ use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Property;
 use Wikibase\Serializers\EntityRevisionSerializationOptions;
 use Wikibase\Serializers\EntityRevisionSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\LanguageFallbackChainFactory;
 use Title;
 
 /**

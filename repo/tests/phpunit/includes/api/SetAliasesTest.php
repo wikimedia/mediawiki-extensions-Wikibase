@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
-
 /**
  * @covers Wikibase\Api\SetAliases
  *

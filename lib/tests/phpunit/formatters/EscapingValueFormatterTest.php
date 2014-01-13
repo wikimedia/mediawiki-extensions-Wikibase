@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Test;
 use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EscapingValueFormatter;
 
 /**

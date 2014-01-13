@@ -3,10 +3,7 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use Wikibase\Claims;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Entity;
-use Wikibase\EntityFactory;
 
 /**
  * Serializer for entities, dispatching to the appropriate serializer for each entity type.

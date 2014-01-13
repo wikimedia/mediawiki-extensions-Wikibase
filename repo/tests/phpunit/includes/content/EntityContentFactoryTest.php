@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;

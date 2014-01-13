@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 use InvalidArgumentException;
-use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 

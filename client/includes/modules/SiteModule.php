@@ -5,7 +5,6 @@ namespace Wikibase;
 use ResourceLoaderModule;
 use ResourceLoaderContext;
 use MediaWikiSite;
-use Site;
 use Sites;
 use Wikibase\Client\WikibaseClient;
 

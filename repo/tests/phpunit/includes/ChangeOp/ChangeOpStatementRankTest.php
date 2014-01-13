@@ -2,13 +2,11 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
 use Wikibase\Entity;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
 
 /**

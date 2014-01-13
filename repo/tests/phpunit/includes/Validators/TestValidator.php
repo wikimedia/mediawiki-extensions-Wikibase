@@ -10,21 +10,6 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\StringValidator;
 use ValueValidators\ValueValidator;
-use Wikibase\Claim;
-use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
-use Wikibase\ReferenceList;
-use Wikibase\References;
-use Wikibase\Snak;
-use Wikibase\SnakList;
-use Wikibase\Statement;
-use Wikibase\Validators\DataValueValidator;
-use Wikibase\Validators\SnakValidator;
 
 /**
  * A simple validator for use in unit tests.

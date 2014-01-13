@@ -8,7 +8,6 @@ use Title;
 use WikiPage;
 use Revision;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Factory for EntityContent objects.

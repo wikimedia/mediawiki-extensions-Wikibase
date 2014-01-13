@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Message;
 
 /**
  * Helper for injecting text by substituting placeholders.

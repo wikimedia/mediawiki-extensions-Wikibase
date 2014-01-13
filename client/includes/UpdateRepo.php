@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Wikibase\Client\WikibaseClient;
+
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**

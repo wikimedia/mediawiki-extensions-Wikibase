@@ -7,7 +7,6 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Title;
-use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Interface for change handling. Whenever a change is detected,

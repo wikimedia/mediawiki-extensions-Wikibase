@@ -5,7 +5,6 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use Wikibase\Claims;
 use Wikibase\Entity;
-use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;

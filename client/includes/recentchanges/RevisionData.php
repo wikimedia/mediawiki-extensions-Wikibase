@@ -2,8 +2,6 @@
 
 namespace Wikibase;
 
-use Wikibase\Client\WikibaseClient;
-
 /**
  * Represents an revision on a site
  *

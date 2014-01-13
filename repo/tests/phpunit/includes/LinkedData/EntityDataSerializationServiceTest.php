@@ -2,11 +2,9 @@
 
 namespace Wikibase\Test;
 
-use Revision;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
-use Wikibase\Item;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataSerializationService;

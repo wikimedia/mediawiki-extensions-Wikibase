@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use Html;
 use InvalidArgumentException;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @since 0.2

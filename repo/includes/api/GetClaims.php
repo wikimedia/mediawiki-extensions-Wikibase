@@ -3,13 +3,9 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Entity;
-use Wikibase\EntityContentFactory;
 use Wikibase\Claims;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;

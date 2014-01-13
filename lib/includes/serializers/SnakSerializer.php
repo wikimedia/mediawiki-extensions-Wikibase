@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Serializers;
 
 use DataValues\DataValueFactory;
 use InvalidArgumentException;
-use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;

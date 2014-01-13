@@ -2,8 +2,6 @@
 
 namespace Wikibase;
 
-use MWException;
-
 /**
  * Represents a revision of a Wikibase entity.
  *

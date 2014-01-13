@@ -5,7 +5,6 @@ namespace Wikibase\Test\Api;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Revision;
-use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Entity;

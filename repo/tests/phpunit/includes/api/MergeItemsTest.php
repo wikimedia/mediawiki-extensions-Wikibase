@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityId;
 use Wikibase\ItemContent;
 use Wikibase\PropertyContent;

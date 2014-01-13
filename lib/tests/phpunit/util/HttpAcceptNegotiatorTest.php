@@ -3,8 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\HttpAcceptNegotiator;
-use Wikibase\Item;
-use Wikibase\Term;
 
 /**
  * @covers Wikibase\HttpAcceptNegotiator

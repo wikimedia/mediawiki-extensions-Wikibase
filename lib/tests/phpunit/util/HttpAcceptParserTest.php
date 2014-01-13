@@ -3,8 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\HttpAcceptParser;
-use Wikibase\Item;
-use Wikibase\Term;
 
 /**
  * @covers Wikibase\HttpAcceptParser

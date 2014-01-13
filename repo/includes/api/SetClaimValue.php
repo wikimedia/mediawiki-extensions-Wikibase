@@ -6,7 +6,6 @@ use ApiBase;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.

@@ -6,7 +6,6 @@ use ApiBase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Utils;
 

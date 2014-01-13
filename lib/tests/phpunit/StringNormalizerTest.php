@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\StringNormalizer;
-use Wikibase\Utils;
 
 /**
  * @covers Wikibase\StringNormalizer

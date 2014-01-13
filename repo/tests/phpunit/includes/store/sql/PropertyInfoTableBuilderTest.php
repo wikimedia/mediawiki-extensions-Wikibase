@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use RuntimeException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyInfoTable;

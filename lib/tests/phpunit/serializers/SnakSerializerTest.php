@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\SnakSerializer;

@@ -5,12 +5,8 @@ namespace Wikibase\Test;
 use Exception;
 use Wikibase\Entity;
 use Wikibase\EntityId;
-use Wikibase\Item;
-use Wikibase\Property;
 use Wikibase\Term;
 use Wikibase\TermIndex;
-use Wikibase\PropertyLabelResolver;
-use Wikibase\TermPropertyLabelResolver;
 
 /**
  * Mock implementation of TermIndex.

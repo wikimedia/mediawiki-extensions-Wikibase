@@ -11,8 +11,6 @@ use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StoreFactory;
-use Wikibase\Settings;
 
 /**
  * Special page to act as a data endpoint for the linked data web.

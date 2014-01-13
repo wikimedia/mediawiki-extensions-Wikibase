@@ -5,7 +5,6 @@ namespace Wikibase\Test\Validators;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use Wikibase\Validators\NumberValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * @covers Wikibase\Validators\NumberValidator

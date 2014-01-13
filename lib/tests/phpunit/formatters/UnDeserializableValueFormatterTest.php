@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Lib\Test;
 
-use Message;
 use DataValues\UnDeserializableValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
