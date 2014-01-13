@@ -3,9 +3,10 @@
 namespace Wikibase\Test;
 
 use Title;
-use Scribunto_LuaWikibaseLibrary;
+use Scribunto_LuaWikibaseEntityLibrary;
 use Scribunto;
 use Wikibase\Settings;
+use Language;
 
 /**
  * @covers Scribunto_LuaWikibaseLibrary
@@ -18,9 +19,23 @@ use Wikibase\Settings;
  * @group Wikibase
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseLibraryTest extends \MediaWikiTestCase {
+class Scribunto_LuaWikibaseEntityLibraryTest extends \Scribunto_LuaEngineTestBase {
+	protected static $moduleName = 'LuaWikibaseEntityLibraryTests';
+
+	function getTestModules() {
+		return parent::getTestModules() + array(
+			'LuaWikibaseEntityLibraryTests' => __DIR__ . '/LuaWikibaseEntityLibraryTests.lua',
+		);
+	}
+
+	/** @dataProvider provideLuaData */
+	function testLua( $key = null, $testName = null, $expected = null ) {
+		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
+
+		parent::testLua( $key, $testName, $expected );
+	}
 
 	protected function setUp() {
 		parent::setUp();
@@ -36,8 +51,8 @@ class Scribunto_LuaWikibaseLibraryTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
 		$engine = Scribunto::newDefaultEngine( array() );
-		$luaWikibaseLibrary = new Scribunto_LuaWikibaseLibrary( $engine );
-		$this->assertInstanceOf( 'Scribunto_LuaWikibaseLibrary', $luaWikibaseLibrary );
+		$luaWikibaseLibrary = new Scribunto_LuaWikibaseEntityLibrary( $engine );
+		$this->assertInstanceOf( 'Scribunto_LuaWikibaseEntityLibrary', $luaWikibaseLibrary );
 	}
 
 	public function testRegister() {
@@ -45,35 +60,17 @@ class Scribunto_LuaWikibaseLibraryTest extends \MediaWikiTestCase {
 		$package = $luaWikibaseLibrary->register();
 
 		$this->assertInternalType( 'array', $package );
-		$this->assertArrayHasKey( 'setupInterface', $package );
+		$this->assertArrayHasKey( 'create', $package );
 		$this->assertInstanceOf(
 			'Scribunto_LuaStandaloneInterpreterFunction',
-			$package['setupInterface']
+			$package['create']
 		);
-	}
-
-	public function testGetEntity() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entity = $luaWikibaseLibrary->getEntity( 'Q888' );
-		$this->assertEquals( array( null ), $entity );
-	}
-
-	public function testGivenInvalidEntityId_ScribuntoExceptionIsThrown() {
-		$this->setExpectedException( 'ScribuntoException' );
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( 'X888' );
-	}
-
-	public function testGetEntityId() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
-		$this->assertEquals( array( null ), $entityId );
 	}
 
 	public function testGetGlobalSiteId() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$expected = array( Settings::get( 'siteGlobalID' ) );
-		$this->assertEquals( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
+		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
 	}
 
 	private function newScribuntoLuaWikibaseLibrary() {
@@ -82,7 +79,7 @@ class Scribunto_LuaWikibaseLibraryTest extends \MediaWikiTestCase {
 		) );
 		$engine->load();
 
-		return new Scribunto_LuaWikibaseLibrary( $engine );
+		return new Scribunto_LuaWikibaseEntityLibrary( $engine );
 	}
 
 }
