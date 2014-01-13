@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_a5060a22",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T15:32:51Z",
+      "side": 1,
+      "message": "Why is $hasClaimMoved set to \"Have we added a changeop for merging references?\" What does merging references have to do with \"moving\"?",
+      "revId": "59b0356142682d5f386b27905f40bf44528ab62d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
