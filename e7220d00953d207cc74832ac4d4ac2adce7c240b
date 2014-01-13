@@ -52,6 +52,24 @@
       "revId": "e7220d00953d207cc74832ac4d4ac2adce7c240b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_e56ad27d",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-13T12:53:25Z",
+      "side": 1,
+      "message": "Should be more readable in the new patchset",
+      "parentUuid": "aef5673e_a54dea41",
+      "revId": "e7220d00953d207cc74832ac4d4ac2adce7c240b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
