@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_022a4cd7",
+        "filename": "client/includes/scribunto/LuaLibraryImplementation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T10:49:55Z",
+      "side": 1,
+      "message": "This sounds like a library implementing Lua. How about \"WikibaseLuaBindings\"?",
+      "revId": "1904bcf4c93c22413e490e9299f8c390ed53bfa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_628238cf",
+        "filename": "client/includes/scribunto/LuaLibraryImplementation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T10:49:55Z",
+      "side": 1,
+      "message": "Should explain what this means. From looking at the code, it means zero-indexed, and including entries lower-case ids, right? When is this mode used, and when isn\u0027t it? What\u0027s the migration path for wikis with legacy code?",
+      "revId": "1904bcf4c93c22413e490e9299f8c390ed53bfa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_c22344ff",
+        "filename": "client/includes/scribunto/LuaLibraryImplementation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T10:49:55Z",
+      "side": 1,
+      "message": "That doesn`t seem correct: return array( $entityArr ) isn\u0027t the same as return $entityArr; What structure should be expected from the array that is returned here?",
+      "revId": "1904bcf4c93c22413e490e9299f8c390ed53bfa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
