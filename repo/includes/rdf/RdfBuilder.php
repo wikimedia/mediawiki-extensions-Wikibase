@@ -329,7 +329,7 @@ class RdfBuilder {
 	public function addSiteLinks( Item $item ) {
 		$entityResource = $this->getEntityResource( $item->getId() );
 
-		foreach ( $item->getSimpleSiteLinks() as $link ) {
+		foreach ( $item->getSiteLinks() as $link ) {
 			// FIXME: deprecated method usage
 			$link = new SiteLink( Sites::singleton()->getSite( $link->getSiteId() ), $link->getPageName() );
 

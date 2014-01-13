@@ -141,7 +141,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
 		$newLinks = array();
 
-		foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
+		foreach ( $item->getSiteLinks() as $siteLink ) {
 			$newLinks[$siteLink->getSiteId()] = $siteLink->getPageName();
 		}
 
@@ -235,7 +235,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 
 		$numId = $item->getId()->getNumericId();
 
-		foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
+		foreach ( $item->getSiteLinks() as $siteLink ) {
 			$key = $siteLink->getSiteId() . ':' . $siteLink->getPageName();
 			$this->itemByLink[$key] = $numId;
 		}
@@ -388,7 +388,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 			 */
 			$entity = $this->getEntity( $id );
 
-			foreach ( $entity->getSimpleSiteLinks() as $link ) {
+			foreach ( $entity->getSiteLinks() as $link ) {
 				if ( $this->linkMatches( $entity, $link, $itemIds, $siteIds, $pageNames ) ) {
 					$links[] = array(
 						$link->getSiteId(),
@@ -484,7 +484,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 		$entity = $this->getEntity( $itemId );
 
 		if ( $entity instanceof Item ) {
-			return $entity->getSimpleSiteLinks();
+			return $entity->getSiteLinks();
 		}
 
 		// FIXME: throw InvalidArgumentException rather then failing silently

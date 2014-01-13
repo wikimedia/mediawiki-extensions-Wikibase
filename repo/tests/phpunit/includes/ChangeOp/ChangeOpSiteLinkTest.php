@@ -134,7 +134,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			$expectedSiteLinks,
-			$entity->getSimpleSiteLinks()
+			$entity->getSiteLinks()
 		);
 	}
 

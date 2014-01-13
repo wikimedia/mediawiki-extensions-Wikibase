@@ -21,7 +21,7 @@ class ItemSearchTextGenerator {
 		$entitySearchTextGenerator = new EntitySearchTextGenerator();
 		$text = $entitySearchTextGenerator->generate( $item );
 
-		$siteLinks = $item->getSimpleSiteLinks();
+		$siteLinks = $item->getSiteLinks();
 		$text .= $this->getSiteLinksText( $siteLinks );
 
 		return $text;

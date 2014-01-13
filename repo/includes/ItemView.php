@@ -78,7 +78,7 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinkGroup( Item $item, $group, $editable = true ) {
-		$allSiteLinks = $item->getSimpleSiteLinks();
+		$allSiteLinks = $item->getSiteLinks();
 
 		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
 

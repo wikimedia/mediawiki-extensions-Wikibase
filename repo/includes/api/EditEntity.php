@@ -499,7 +499,7 @@ class EditEntity extends ModifyEntity {
 		$this->getResultBuilder()->addAliases( $entity->getAllAliases(), 'entity' );
 
 		if ( $entity instanceof Item ) {
-			$this->getResultBuilder()->addSiteLinks( $entity->getSimpleSiteLinks(), 'entity' );
+			$this->getResultBuilder()->addSiteLinks( $entity->getSiteLinks(), 'entity' );
 		}
 
 		$this->getResultBuilder()->addClaims( $entity->getClaims(), 'entity' );

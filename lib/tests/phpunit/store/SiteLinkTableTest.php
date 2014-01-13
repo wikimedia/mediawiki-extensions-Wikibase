@@ -91,7 +91,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 
 		// check that the update worked correctly
 		$actualLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
-		$expectedLinks = $item->getSimpleSiteLinks();
+		$expectedLinks = $item->getSiteLinks();
 
 		$missingLinks = array_udiff( $expectedLinks, $actualLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
 		$extraLinks =   array_udiff( $actualLinks, $expectedLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
@@ -108,7 +108,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		$siteLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
 
 		$this->assertEquals(
-			$item->getSimpleSiteLinks(),
+			$item->getSiteLinks(),
 			$siteLinks
 		);
 	}
@@ -118,7 +118,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGetEntityIdForSiteLink( Item $item ) {
-		$siteLinks = $item->getSimpleSiteLinks();
+		$siteLinks = $item->getSiteLinks();
 
 		foreach( $siteLinks as $siteLink ) {
 			$this->assertEquals(
@@ -134,7 +134,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 */
 	public function testCountLinks( Item $item ) {
 		$this->assertEquals(
-			count( $item->getSimpleSiteLinks() ),
+			count( $item->getSiteLinks() ),
 			$this->siteLinkTable->countLinks( array( $item->getId()->getNumericId() ) )
 		);
 	}

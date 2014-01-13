@@ -118,7 +118,7 @@ class UpdateRepoOnMoveJob extends \Job {
 	 */
 	protected function getSimpleSiteLink( $item, $globalId ) {
 		try {
-			return $item->getSimpleSiteLink( $globalId );
+			return $item->getSiteLink( $globalId );
 		} catch( \OutOfBoundsException $e ) {
 			return null;
 		}

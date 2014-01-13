@@ -101,7 +101,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateSitelinksChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getSimpleSiteLinks() as $simpleSiteLink ){
+		foreach( $this->fromItemContent->getItem()->getSiteLinks() as $simpleSiteLink ){
 			$siteId = $simpleSiteLink->getSiteId();
 			if( !$this->toItemContent->getItem()->hasLinkToSite( $siteId ) ){
 				$this->fromChangeOps->add( new ChangeOpSiteLink( $siteId, null ) );
