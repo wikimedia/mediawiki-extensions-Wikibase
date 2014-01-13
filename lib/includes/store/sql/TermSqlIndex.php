@@ -288,7 +288,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 */
 	protected function getWeight( Entity $entity ) {
 		if ( $entity instanceof Item ) {
-			return count( $entity->getSimpleSiteLinks() ) / 1000.0;
+			return count( $entity->getSiteLinks() ) / 1000.0;
 		}
 		return 0.0;
 	}

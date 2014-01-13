@@ -122,7 +122,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 		if ( ( $this->pageName === null && $this->badges === null ) || $this->pageName === '' ) {
 			if ( $entity->hasLinkToSite( $this->siteId ) ) {
-				$this->updateSummary( $summary, 'remove', $this->siteId, $entity->getSimpleSiteLink( $this->siteId )->getPageName() );
+				$this->updateSummary( $summary, 'remove', $this->siteId, $entity->getSiteLink( $this->siteId )->getPageName() );
 				$entity->removeSiteLink( $this->siteId );
 			} else {
 				//TODO: throw error, or ignore silently?
@@ -133,7 +133,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			if ( $this->pageName === null ) {
 				// If page name is not set (but badges are) make sure that it remains intact
 				if ( $entity->hasLinkToSite( $this->siteId ) ) {
-					$pageName = $entity->getSimpleSiteLink( $this->siteId )->getPageName();
+					$pageName = $entity->getSiteLink( $this->siteId )->getPageName();
 				} else {
 					throw new InvalidArgumentException( 'The sitelink does not exist' );
 				}
@@ -145,7 +145,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			if ( $this->badges === null ) {
 				// If badges are not set in the change make sure that they remain intact
 				if ( $entity->hasLinkToSite( $this->siteId ) ) {
-					$badges = $entity->getSimpleSiteLink( $this->siteId )->getBadges();
+					$badges = $entity->getSiteLink( $this->siteId )->getBadges();
 				} else {
 					$badges = array();
 				}

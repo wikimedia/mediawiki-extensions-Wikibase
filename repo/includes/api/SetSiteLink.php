@@ -80,14 +80,14 @@ class SetSiteLink extends ModifyEntity {
 
 		if ( $this->shouldRemove( $params ) ) {
 			if ( $item->hasLinkToSite( $linksite ) ) {
-				$link = $item->getSimpleSiteLink( $linksite );
+				$link = $item->getSiteLink( $linksite );
 				$this->getChangeOp( $params )->apply( $item, $summary );
 				$this->getResultBuilder()->addSiteLinks( array( $link ), 'entity', array( 'removed' ) );
 			}
 		} else {
 			if ( isset( $params['linktitle'] ) || $item->hasLinkToSite( $linksite ) ) {
 				$this->getChangeOp( $params )->apply( $item, $summary );
-				$link = $item->getSimpleSiteLink( $linksite );
+				$link = $item->getSiteLink( $linksite );
 				$this->getResultBuilder()->addSiteLinks( array( $link ), 'entity', array( 'url' ) );
 			} else {
 				wfProfileOut( __METHOD__ );

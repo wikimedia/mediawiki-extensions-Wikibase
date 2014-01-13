@@ -75,7 +75,7 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 
 		if ( in_array( 'sitelinks', $parts ) ) {
 			$siteLinkSerializer = new SiteLinkSerializer( $this->options, $this->siteStore );
-			$siteLinks = $item->getSimpleSiteLinks();
+			$siteLinks = $item->getSiteLinks();
 			$serialization['sitelinks'] = $siteLinkSerializer->getSerialized( $siteLinks );
 		}
 

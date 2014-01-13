@@ -87,7 +87,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		wfProfileIn( __METHOD__ );
 
 		//First check whether there's anything to update
-		$newLinks = $item->getSimpleSiteLinks();
+		$newLinks = $item->getSiteLinks();
 		$oldLinks = $this->getSiteLinksForItem( $item->getId() );
 
 		$linksToInsert = array_udiff( $newLinks, $oldLinks, array( $this, 'compareSiteLinks' ) );
@@ -292,7 +292,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
 		wfProfileIn( __METHOD__ );
 
-		$links = $item->getSimpleSiteLinks();
+		$links = $item->getSiteLinks();
 
 		if ( $links === array() ) {
 			wfProfileOut( __METHOD__ );
