@@ -62,7 +62,9 @@ return call_user_func( function() {
 
 		// includes/scribunto
 		'Scribunto_LuaWikibaseLibrary' => 'includes/scribunto/Scribunto_LuaWikibaseLibrary.php',
+		'Scribunto_LuaWikibaseEntityLibrary' => 'includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php',
 		'Wikibase\Client\Scribunto\WikibaseLuaBindings' => 'includes/scribunto/WikibaseLuaBindings.php',
+		'Wikibase\Client\Scribunto\WikibaseLuaEntityBindings' => 'includes/scribunto/WikibaseLuaEntityBindings.php',
 
 		// test
 		'Wikibase\Test\MockPageUpdater' => 'tests/phpunit/MockPageUpdater.php'
