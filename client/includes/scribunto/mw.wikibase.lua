@@ -1,61 +1,90 @@
 --[[
-    Registers and defines functions to access Wikibase through the Scribunto extension
-    Provides Lua setupInterface
+	Registers and defines functions to access Wikibase through the Scribunto extension
+	Provides Lua setupInterface
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+	@since 0.4
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-    http://www.gnu.org/copyleft/gpl.html
-
-    @since 0.4
-
-    @licence GNU GPL v2+
-    @author Jens Ohlig < jens.ohlig@wikimedia.de >
+	@licence GNU GPL v2+
+	@author Jens Ohlig < jens.ohlig@wikimedia.de >
+	@author Marius Hoch < hoo@online.de >
 ]]
 
 local wikibase = {}
 
 function wikibase.setupInterface()
-  local php = mw_interface
-  mw_interface = nil
-  wikibase.getEntity = function ()
-    local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
-    if id == nil then return nil end
-    local entity = php.getEntity( id )
-    return entity
-  end
-  wikibase.label = function ( id )
-    local code = mw.language.getContentLanguage():getCode()
-    if code == nil then return nil end
-    local entity = php.getEntity( id )
-    if entity == nil or entity.labels == nil then return nil end
-    local label = entity.labels[code]
-    if label == nil then return nil end
-    return label.value
-  end
-  wikibase.sitelink = function ( id )
-    local entity = php.getEntity( id )
-    if entity == nil or entity.sitelinks == nil then return nil end
-    local globalSiteId = php.getGlobalSiteId()
-    if globalSiteId == nil then return nil end
-    local sitelink = entity.sitelinks[globalSiteId]
-    if sitelink == nil then return nil end
-    return sitelink.title
-  end
-  mw = mw or {}
-  mw.wikibase = wikibase
-  package.loaded['mw.wikibase'] = wikibase
-  wikibase.setupInterface = nil
+	local php = mw_interface
+	mw_interface = nil
+
+	-- Caching variable for the wikibase.entity object belonging to the current page
+	local entity = false
+
+	local getEntityObject = function( id )
+		local entity = php.getEntity( id )
+		if type( entity ) ~= 'table' then
+			return nil
+		end
+
+		return wikibase.entity.create( entity )
+	end
+
+	-- @DEPRECATED, uses a legacy plain Lua table holding the entity
+	wikibase.getEntity = function()
+		local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+
+		if id == nil then
+			return nil
+		end
+
+		return php.getEntity( id, true )
+	end
+
+	-- Get the mw.wikibase.entity object for the current page
+	wikibase.getEntityObject = function()
+		if entity ~= false then
+			return entity
+		end
+
+		local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+
+		if id == nil then
+			entity = nil
+		else
+			entity = getEntityObject( id )
+		end
+
+		return entity
+	end
+
+	-- Get the label for the given entity id (in content language)
+	--
+	-- @param id
+	wikibase.label = function( id )
+		local entity = getEntityObject( id )
+
+		if entity == nil then
+			return nil
+		end
+
+		return entity:getLabel()
+	end
+
+	-- Get the local sitelink title for the given entity id (if one exists)
+	--
+	-- @param id
+	wikibase.sitelink = function( id )
+		local entity = getEntityObject( id )
+
+		if entity == nil then
+			return nil
+		end
+
+		return entity:getSitelink()
+	end
+
+	mw = mw or {}
+	mw.wikibase = wikibase
+	package.loaded['mw.wikibase'] = wikibase
+	wikibase.setupInterface = nil
 end
 
 return wikibase
