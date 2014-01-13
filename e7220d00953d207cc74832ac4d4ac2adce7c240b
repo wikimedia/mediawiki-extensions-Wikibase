@@ -34,6 +34,24 @@
       "revId": "e7220d00953d207cc74832ac4d4ac2adce7c240b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_a54dea41",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T12:50:32Z",
+      "side": 1,
+      "message": "Ah, but not by injectIds(), like the other %stuff%. Kind of confusing...",
+      "parentUuid": "aef5673e_05b3764d",
+      "revId": "e7220d00953d207cc74832ac4d4ac2adce7c240b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
