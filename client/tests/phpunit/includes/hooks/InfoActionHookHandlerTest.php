@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use IContextSource;
 use RequestContext;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\DataModel\Entity\ItemId;

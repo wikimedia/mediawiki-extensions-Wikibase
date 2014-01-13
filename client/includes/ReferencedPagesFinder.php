@@ -7,6 +7,7 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Title;
+use UnexpectedValueException;
 
 /**
  * Interface for change handling. Whenever a change is detected,

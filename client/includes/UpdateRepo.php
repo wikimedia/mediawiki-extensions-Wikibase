@@ -2,7 +2,8 @@
 
 namespace Wikibase;
 
-use Wikibase\DataModel\SimpleSiteLink;
+use Title;
+use User;
 
 /**
  * Provides logic to update the repo after certain changes have been
@@ -21,12 +22,12 @@ abstract class UpdateRepo {
 	protected $repoDB;
 
 	/**
-	 * @var \User
+	 * @var User
 	 */
 	protected $user;
 
 	/**
-	 * @var \SiteLinkLookup
+	 * @var SiteLinkLookup
 	 */
 	protected $siteLinkLookup;
 
@@ -36,16 +37,16 @@ abstract class UpdateRepo {
 	protected $siteId;
 
 	/**
-	 * @var \Title
+	 * @var Title
 	 */
 	protected $title;
 
 	/**
 	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param \User $user
+	 * @param User $user
 	 * @param string $siteId Global id of the client wiki
-	 * @param \Title $title Title in the client that has been changed
+	 * @param Title $title Title in the client that has been changed
 	 */
 	public function __construct( $repoDB, $siteLinkLookup, $user, $siteId, $title ) {
 		$this->repoDB = $repoDB;

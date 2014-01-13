@@ -100,7 +100,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @param ItemId[] $badges
 	 * @param ItemId $badge
 	 *
-	 * @return booelan
+	 * @return boolean
 	 */
 	private function containsBadge( array $badges, ItemId $badge ) {
 		foreach ( $badges as $other ) {

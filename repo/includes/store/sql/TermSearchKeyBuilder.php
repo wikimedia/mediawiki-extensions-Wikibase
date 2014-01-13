@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase;
+
 use DatabaseBase;
+use MessageReporter;
 
 /**
  * Utility class for rebuilding the term_search_key field.
@@ -106,9 +108,9 @@ class TermSearchKeyBuilder {
 	/**
 	 * Sets the reporter to use for reporting preogress.
 	 *
-	 * @param \MessageReporter $reporter
+	 * @param MessageReporter $reporter
 	 */
-	public function setReporter( \MessageReporter $reporter ) {
+	public function setReporter( MessageReporter $reporter ) {
 		$this->reporter = $reporter;
 	}
 
