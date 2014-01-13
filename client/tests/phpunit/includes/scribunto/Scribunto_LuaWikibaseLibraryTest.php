@@ -16,7 +16,6 @@ use Wikibase\Settings;
  * @group WikibaseIntegration
  * @group WikibaseClient
  * @group Wikibase
- * @group Database
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -59,7 +58,13 @@ class Scribunto_LuaWikibaseLibraryTest extends \MediaWikiTestCase {
 		$this->assertEquals( array( null ), $entity );
 	}
 
-	public function testGivenInvalidEntityId_ScribuntoExceptionIsThrown() {
+	public function testGetEntityInvalidIdType() {
+		$this->setExpectedException( 'ScribuntoException' );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->getEntity( array() );
+	}
+
+	public function testGetEntityInvalidEntityId() {
 		$this->setExpectedException( 'ScribuntoException' );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$luaWikibaseLibrary->getEntity( 'X888' );
