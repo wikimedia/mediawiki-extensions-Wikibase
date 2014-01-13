@@ -29,9 +29,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @since 0.3
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Katie Filbert < aude.wiki@gmail.com >

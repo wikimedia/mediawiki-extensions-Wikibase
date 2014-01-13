@@ -27,9 +27,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */

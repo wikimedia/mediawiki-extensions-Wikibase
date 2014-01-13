@@ -21,8 +21,6 @@ use Maintenance;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @file
- * @ingroup Maintenance
  */
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
@@ -30,7 +28,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Prune the Wikibase changes table to a maximum number of entries.
  *
- * @ingroup Maintenance
  */
 class PruneChanges extends Maintenance {
 

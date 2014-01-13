@@ -24,7 +24,6 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 1.21
- * @file
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -62,7 +61,6 @@ interface MessageReporter {
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 1.21
- * @file
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -144,7 +142,6 @@ class ObservableMessageReporter implements MessageReporter {
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 1.21
- * @file
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

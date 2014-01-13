@@ -25,9 +25,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

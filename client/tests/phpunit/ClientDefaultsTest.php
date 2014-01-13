@@ -19,10 +19,6 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @license GPL 2+
- * @file
- *
- * @ingroup WikibaseClient
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseClient

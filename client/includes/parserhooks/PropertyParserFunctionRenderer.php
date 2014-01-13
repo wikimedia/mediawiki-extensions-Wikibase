@@ -18,9 +18,6 @@ use Wikibase\Lib\SnakFormatter;
  *
  * @since 0.5
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

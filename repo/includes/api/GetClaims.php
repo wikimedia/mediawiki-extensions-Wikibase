@@ -19,9 +19,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.3
  *
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

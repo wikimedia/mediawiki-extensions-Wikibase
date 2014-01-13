@@ -16,9 +16,6 @@ use Wikibase\SiteLinkCommentCreator;
  *
  * @since 0.5
  *
- * @ingroup WikibaseClient
- * @ingroup Test
- *
  * @group Wikibase
  * @group WikibaseClient
  *

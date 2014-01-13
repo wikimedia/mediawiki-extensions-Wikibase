@@ -3,8 +3,6 @@
  * entry point for initializing edit tools for editing entities on entity pages.
  *
  * @since 0.1
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >

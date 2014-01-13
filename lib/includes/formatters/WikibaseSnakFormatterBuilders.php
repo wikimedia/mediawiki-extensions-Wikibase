@@ -12,9 +12,6 @@ use ValueFormatters\ValueFormatter;
  *
  * @since 0.5
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

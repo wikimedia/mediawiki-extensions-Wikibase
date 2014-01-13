@@ -27,8 +27,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @since 0.5
  *
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

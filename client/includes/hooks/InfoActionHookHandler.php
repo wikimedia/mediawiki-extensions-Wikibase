@@ -13,9 +13,6 @@ use Wikibase\SiteLinkLookup;
 /**
  * @since 0.5
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

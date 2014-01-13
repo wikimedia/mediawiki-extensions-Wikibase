@@ -26,9 +26,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler

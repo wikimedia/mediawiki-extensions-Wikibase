@@ -12,8 +12,6 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  *
  * @since 0.5
  *
- * @ingroup WikibaseLibTest
- *
  * @group WikibaseLib
  * @group Wikibase
  *

@@ -6,9 +6,6 @@
  * Support					https://www.mediawiki.org/wiki/Extension_talk:Wikibase_Client
  * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=tree;f=client
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  */
 
@@ -16,7 +13,6 @@
  * This documentation group collects source code files belonging to Wikibase Client.
  *
  * @defgroup WikibaseClient Wikibase Client
- * @ingroup Wikibase
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {

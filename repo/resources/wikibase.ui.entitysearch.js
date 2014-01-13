@@ -1,9 +1,6 @@
 /**
  * Replacing the native MediaWiki search suggestions with Wikibase's entity selector widget.
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @license GNU GPL v2+
  * @author Jens Ohlig
  * @author H. Snater < mediawiki@snater.com >

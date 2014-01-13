@@ -22,10 +22,6 @@ use Wikibase\Utils;
  *
  * @since 0.2
  *
- * @file
- * @ingroup WikibaseRepo
- * @ingroup API
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
