@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 
 /**

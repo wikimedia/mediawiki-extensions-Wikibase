@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;

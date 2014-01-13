@@ -11,6 +11,8 @@
 namespace Wikibase;
 
 
+use MWException;
+
 class ChunkCache implements ChunkAccess {
 
 	/**

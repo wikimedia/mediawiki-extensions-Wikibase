@@ -2,6 +2,12 @@
 
 namespace Wikibase;
 
+use CentralAuthUser;
+use Job;
+use JobQueueGroup;
+use RuntimeException;
+use Title;
+use User;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
@@ -21,12 +27,12 @@ abstract class UpdateRepo {
 	protected $repoDB;
 
 	/**
-	 * @var \User
+	 * @var User
 	 */
 	protected $user;
 
 	/**
-	 * @var \SiteLinkLookup
+	 * @var SiteLinkLookup
 	 */
 	protected $siteLinkLookup;
 
@@ -36,16 +42,16 @@ abstract class UpdateRepo {
 	protected $siteId;
 
 	/**
-	 * @var \Title
+	 * @var Title
 	 */
 	protected $title;
 
 	/**
 	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param \User $user
+	 * @param User $user
 	 * @param string $siteId Global id of the client wiki
-	 * @param \Title $title Title in the client that has been changed
+	 * @param Title $title Title in the client that has been changed
 	 */
 	public function __construct( $repoDB, $siteLinkLookup, $user, $siteId, $title ) {
 		$this->repoDB = $repoDB;
@@ -82,7 +88,7 @@ abstract class UpdateRepo {
 			return false;
 		}
 
-		$caUser = \CentralAuthUser::getInstance( $this->user );
+		$caUser = CentralAuthUser::getInstance( $this->user );
 		if ( !$caUser || !$caUser->exists() ) {
 			// The current user doesn't have a central account
 			return false;
@@ -101,11 +107,11 @@ abstract class UpdateRepo {
 	/**
 	 * Inject the current job into the job queue of the repo
 	 *
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
 	 *
-	 * @param \JobQueueGroup $jobQueueGroup
+	 * @param JobQueueGroup $jobQueueGroup
 	 */
-	public function injectJob( \JobQueueGroup $jobQueueGroup ) {
+	public function injectJob( JobQueueGroup $jobQueueGroup ) {
 		wfProfileIn( __METHOD__ );
 
 		$job = $this->createJob();
@@ -116,7 +122,7 @@ abstract class UpdateRepo {
 
 		if ( !$ok ) {
 			wfProfileOut( __METHOD__ );
-			throw new \RuntimeException( "Failed to push job to job queue" );
+			throw new RuntimeException( "Failed to push job to job queue" );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -125,7 +131,7 @@ abstract class UpdateRepo {
 	/**
 	 * Returns a new job for updating the repo.
 	 *
-	 * @return \Job
+	 * @return Job
 	 */
 	abstract public function createJob();
 }

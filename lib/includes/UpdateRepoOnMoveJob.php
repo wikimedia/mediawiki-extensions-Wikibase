@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use User;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -184,10 +185,10 @@ class UpdateRepoOnMoveJob extends \Job {
 	 * Update the given item with the given sitelink
 	 *
 	 * @param ItemContent $itemContent
-	 * @param Wikibase\DataModel\SimpleSiteLink $siteLink
+	 * @param SiteLink $siteLink
 	 * @param EditEntity $editEntity
 	 * @param Summary $summary
-	 * @param \User $user User who we'll attribute the update to
+	 * @param User $user User who we'll attribute the update to
 	 *
 	 * @return bool Whether something changed
 	 */

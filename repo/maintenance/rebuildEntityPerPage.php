@@ -1,9 +1,9 @@
 <?php
 
 namespace Wikibase;
+
 use LoggedUpdateMaintenance;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\EntityIdParser;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
