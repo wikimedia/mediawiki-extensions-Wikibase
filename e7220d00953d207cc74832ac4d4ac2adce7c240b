@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_859f86b9",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T12:29:39Z",
+      "side": 1,
+      "message": "is %BadClearBaserevid% actually defined anywhere? shouldn\u0027t this just be 1861238674?",
+      "revId": "e7220d00953d207cc74832ac4d4ac2adce7c240b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
