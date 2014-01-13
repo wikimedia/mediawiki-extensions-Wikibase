@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_22bd50d2",
+        "filename": "repo/includes/ChangeOp/ChangeOpReference.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T09:27:01Z",
+      "side": 1,
+      "message": "Maybe that should be a separate ChangeOp class, instead of a \"mode\"? Just a though...",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_a2c84078",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T09:27:01Z",
+      "side": 1,
+      "message": "getReferenceChangeOps() doesn\u0027t return the reference ChangeOps?",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_62aa3884",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T09:27:01Z",
+      "side": 1,
+      "message": "Is this about re-ordering, or about merging references? I\u0027m confused now....",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_e2ce4886",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T09:27:01Z",
+      "side": 1,
+      "message": "Could be more the clear?",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_02d24c2c",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T09:27:01Z",
+      "side": 1,
+      "message": "Please factor into a separate function",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_c2cb4474",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-13T09:27:01Z",
+      "side": 1,
+      "message": "Eek, side-effects in a methods that has a getXXX name? Rather surprising, please rename. \"build\", \"calculate\", \"generate\", \"add\", \"collect\"...",
+      "revId": "ccba5cff9f651391a92f9abb95d4287c3f03dfe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
