@@ -41,7 +41,6 @@ use Wikibase\Repo\WikibaseRepo;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.4
- * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

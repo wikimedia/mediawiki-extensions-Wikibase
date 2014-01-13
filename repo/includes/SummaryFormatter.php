@@ -17,8 +17,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.5
  *
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  *
  * @author John Erling Blad

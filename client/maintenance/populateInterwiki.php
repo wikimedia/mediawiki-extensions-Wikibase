@@ -9,9 +9,6 @@ use Http, FormatJSON, Maintenance, Exception;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

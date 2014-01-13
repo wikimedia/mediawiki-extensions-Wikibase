@@ -47,11 +47,7 @@ use Wikibase\Validators\SnakValidator;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @file
  * @since 0.4
- *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

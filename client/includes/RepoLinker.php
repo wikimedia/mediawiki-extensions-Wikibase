@@ -9,9 +9,6 @@ use Wikibase\Client\WikibaseClient;
 /**
  * @since 0.2
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

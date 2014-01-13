@@ -25,9 +25,6 @@ use ApiBase;
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseClient
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

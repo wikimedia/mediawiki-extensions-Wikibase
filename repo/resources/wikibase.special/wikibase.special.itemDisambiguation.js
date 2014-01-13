@@ -2,8 +2,6 @@
  * JavaScript for 'wikibase' extension special page 'ItemDisambiguation'
  *
  * @since 0.1
- * @file
- * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Jens Ohlig

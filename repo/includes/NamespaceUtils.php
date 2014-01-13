@@ -22,9 +22,6 @@ namespace Wikibase;
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher

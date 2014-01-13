@@ -19,9 +19,6 @@
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

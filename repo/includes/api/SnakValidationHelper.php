@@ -17,9 +17,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  *
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

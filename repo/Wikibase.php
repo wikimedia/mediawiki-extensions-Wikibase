@@ -7,9 +7,6 @@
  * Support					https://www.mediawiki.org/wiki/Extension_talk:Wikibase
  * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner at wikimedia.de >
@@ -20,14 +17,12 @@
  * This documentation group collects source code files belonging to Wikibase Repository.
  *
  * @defgroup WikibaseRepo Wikibase Repo
- * @ingroup Wikibase
  */
 
 /**
  * This documentation group collects source code files with tests for Wikibase Repository.
  *
  * @defgroup WikibaseRepoTest Tests for Wikibase Repo
- * @ingroup WikibaseRepo
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {

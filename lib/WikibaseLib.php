@@ -7,9 +7,6 @@
  * Support					https://www.mediawiki.org/wiki/Extension_talk:WikibaseLib
  * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikibaseLib.git
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -24,7 +21,6 @@
  * This documentation group collects source code files belonging to WikibaseLib.
  *
  * @defgroup WikibaseLib WikibaseLib
- * @ingroup Wikibase
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {

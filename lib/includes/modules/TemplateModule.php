@@ -10,9 +10,6 @@ use ResourceLoaderFileModule, ResourceLoaderContext;
  *
  * @since 0.2
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
  */

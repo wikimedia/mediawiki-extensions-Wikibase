@@ -26,9 +26,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

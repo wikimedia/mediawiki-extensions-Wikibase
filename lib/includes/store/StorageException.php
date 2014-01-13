@@ -19,7 +19,6 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @license GPL 2+
- * @file
  *
  * @author Daniel Kinzler
  */

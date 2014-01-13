@@ -17,11 +17,7 @@ use Wikibase\Item;
 /**
  * @covers Wikibase\ChangeHandler
  *
- * @file
  * @since 0.1
- *
- * @ingroup WikibaseLib
- * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseClient

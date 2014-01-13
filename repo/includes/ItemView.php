@@ -11,9 +11,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseRepo
- *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner

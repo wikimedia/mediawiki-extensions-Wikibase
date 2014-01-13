@@ -8,7 +8,6 @@ use Wikibase\Settings;
 /**
  * @covers Wikibase\UpdateRepoOnMove
  *
- * @file
  * @since 0.4
  *
  * @group WikibaseClient

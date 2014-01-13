@@ -13,8 +13,6 @@ use MWException;
  *
  * @since 0.3
  *
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler

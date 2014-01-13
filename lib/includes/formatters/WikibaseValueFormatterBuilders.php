@@ -16,9 +16,6 @@ use Wikibase\LanguageFallbackChainFactory;
  *
  * @since 0.5
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
