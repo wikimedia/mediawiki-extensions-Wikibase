@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_253e7a27",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-13T14:32:29Z",
+      "side": 1,
+      "message": "Class \u0027Wikibase\\SimpleSiteLink\u0027 not found\n\nhttp://dpaste.com/1549224/\n\nthen the tests exit.\n\nput use Wikibase\\DataModel\\SiteLink at the top and use SiteLink here and then the tests are happy.",
+      "revId": "1e929c73054c508aaac8004c243eb9f632fc8849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
