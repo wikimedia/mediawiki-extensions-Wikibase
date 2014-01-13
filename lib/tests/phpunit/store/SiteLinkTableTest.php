@@ -53,7 +53,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		);
 
 		foreach( $sitelinks as $site => $page ) {
-			$item->addSimpleSiteLink( new SimpleSiteLink( $site, $page ) );
+			$item->addSiteLink( new SimpleSiteLink( $site, $page ) );
 		}
 
 		$items[] = $item;
@@ -76,16 +76,16 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		// save initial links
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'q177' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'svwiki', 'Börk' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'svwiki', 'Börk' ) );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 
 		// modify links, and save again
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'FooK' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'FooK' ) );
 		$item->removeSiteLink( 'dewiki' );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'nlwiki', 'GrooK' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'nlwiki', 'GrooK' ) );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 

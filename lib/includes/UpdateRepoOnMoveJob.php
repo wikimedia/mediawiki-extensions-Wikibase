@@ -212,7 +212,7 @@ class UpdateRepoOnMoveJob extends \Job {
 	public function doUpdateSiteLink( $itemContent, $siteLink, $editEntity, $summary, $user ) {
 		$item = $itemContent->getItem();
 
-		$item->addSimpleSiteLink( $siteLink );
+		$item->addSiteLink( $siteLink );
 
 		//NOTE: Temporary hack to avoid more dependency mess.
 		//      The Right Thing would be to use a SummaryFormatter.

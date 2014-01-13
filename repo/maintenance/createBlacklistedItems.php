@@ -83,7 +83,7 @@ class CreatedBlacklistedItems extends \Maintenance {
 
 			$item->setId( $id );
 			$item->setLabel( 'en', $name );
-			$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', $name ) );
+			$item->addSiteLink( new SimpleSiteLink( 'enwiki', $name ) );
 
 			$itemContent = ItemContent::newFromItem( $item );
 			$itemContent->save( 'Import' );

@@ -78,7 +78,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	protected function getConnectDiff() {
 		$item = $this->getNewItem();
 		$item2 = $item->copy();
-		$item2->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item2->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
 
@@ -87,7 +87,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getUnlinkDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$item2 = $item->copy();
 		$item2->removeSiteLink( 'enwiki', 'Japan' );
@@ -99,10 +99,10 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getLinkChangeDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$item2 = $item->copy();
-		$item2->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Tokyo' ) );
+		$item2->addSiteLink( new SimpleSiteLink( 'enwiki', 'Tokyo' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
 
@@ -119,10 +119,10 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getBadgeChangeDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$item2 = $item->copy();
-		$item2->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) ) );
+		$item2->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
 
@@ -131,10 +131,10 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getAddLinkDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$item2 = $item->copy();
-		$item2->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
+		$item2->addSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
 
@@ -143,11 +143,11 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getAddMultipleLinksDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$item2 = $item->copy();
-		$item2->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
-		$item2->addSimpleSiteLink( new SimpleSiteLink( 'frwiki', 'Japan' ) );
+		$item2->addSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
+		$item2->addSiteLink( new SimpleSiteLink( 'frwiki', 'Japan' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
 
@@ -156,8 +156,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getRemoveLinkDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
 
 		$item2 = $item->copy();
 		$item2->removeSiteLink( 'dewiki', 'Japan' );
@@ -169,11 +169,11 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getChangeLinkDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'dewiki', 'Japan' ) );
 
 		$item2 = $item->copy();
-		$item2->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Tokyo' ) );
+		$item2->addSiteLink( new SimpleSiteLink( 'dewiki', 'Tokyo' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
 
@@ -182,7 +182,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getDeleteDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::REMOVE, $item, null );
 
@@ -191,7 +191,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	protected function getRestoreDiff() {
 		$item = $this->getNewItem();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Japan' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::RESTORE, null, $item );
 

@@ -83,10 +83,10 @@ class LinkTitles extends ApiWikibase {
 			// create new item
 			$itemContent = ItemContent::newEmpty();
 			$toLink = new SimpleSiteLink( $toSite->getGlobalId(), $toPage );
-			$itemContent->getItem()->addSimpleSiteLink( $toLink );
+			$itemContent->getItem()->addSiteLink( $toLink );
 			$return[] = $toLink;
 			$fromLink = new SimpleSiteLink( $fromSite->getGlobalId(), $fromPage );
-			$itemContent->getItem()->addSimpleSiteLink( $fromLink );
+			$itemContent->getItem()->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 
 			$flags |= EDIT_NEW;
@@ -97,7 +97,7 @@ class LinkTitles extends ApiWikibase {
 			/** @var ItemContent $itemContent */
 			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $toId ) );
 			$fromLink = new SimpleSiteLink( $fromSite->getGlobalId(), $fromPage );
-			$itemContent->getItem()->addSimpleSiteLink( $fromLink );
+			$itemContent->getItem()->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 			$summary->setAction( 'connect' );
 		}
@@ -106,7 +106,7 @@ class LinkTitles extends ApiWikibase {
 			/** @var ItemContent $itemContent */
 			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $fromId ) );
 			$toLink = new SimpleSiteLink( $toSite->getGlobalId(), $toPage );
-			$itemContent->getItem()->addSimpleSiteLink( $toLink );
+			$itemContent->getItem()->addSiteLink( $toLink );
 			$return[] = $toLink;
 			$summary->setAction( 'connect' );
 		}

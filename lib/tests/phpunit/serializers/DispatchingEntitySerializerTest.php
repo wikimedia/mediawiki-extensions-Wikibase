@@ -76,7 +76,7 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 	protected function getItemInstance() {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q17' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'test', 'Foo' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'test', 'Foo' ) );
 
 		return $item;
 	}

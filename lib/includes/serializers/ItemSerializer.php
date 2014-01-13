@@ -100,7 +100,7 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 			$siteLinks = $siteLinkSerializer->newFromSerialization( $data['sitelinks'] );
 
 			foreach( $siteLinks as $siteLink ) {
-				$item->addSimpleSiteLink( $siteLink );
+				$item->addSiteLink( $siteLink );
 			}
 		}
 

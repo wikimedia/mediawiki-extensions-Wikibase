@@ -1145,7 +1145,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 						$siteIdentifier = $siteId;
 					}
 
-					$entity->addSimpleSiteLink( new SimpleSiteLink( $siteIdentifier, $page ) );
+					$entity->addSiteLink( new SimpleSiteLink( $siteIdentifier, $page ) );
 				}
 			} else {
 				$entity = $v;

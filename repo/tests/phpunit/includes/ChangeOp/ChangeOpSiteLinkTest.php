@@ -60,7 +60,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 
 		foreach ( $existingSiteLinks as $siteLink ) {
-			$item->addSimpleSiteLink( $siteLink );
+			$item->addSiteLink( $siteLink );
 		}
 
 		$args = array();
@@ -150,7 +150,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 
 		foreach ( $existingSiteLinks as $siteLink ) {
-			$item->addSimpleSiteLink( $siteLink );
+			$item->addSiteLink( $siteLink );
 		}
 
 		$args = array();

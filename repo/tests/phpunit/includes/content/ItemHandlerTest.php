@@ -47,7 +47,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		 * @var ItemContent $content
 		 */
 		$content = clone $contents[1][0];
-		$content->getItem()->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
+		$content->getItem()->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
 		$contents[] = array( $content );
 
 		return $contents;

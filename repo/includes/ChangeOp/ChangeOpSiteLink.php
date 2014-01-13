@@ -164,7 +164,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
 
-			$entity->addSimpleSiteLink( new SimpleSiteLink( $this->siteId, $pageName, $badges ) );
+			$entity->addSiteLink( new SimpleSiteLink( $this->siteId, $pageName, $badges ) );
 		}
 
 		return true;
