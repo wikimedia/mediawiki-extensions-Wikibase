@@ -2,11 +2,9 @@
 
 namespace Wikibase\Test;
 
-use DataUpdate;
 use Wikibase\ItemContent;
 use Wikibase\ItemDeletionUpdate;
 use Wikibase\StoreFactory;
-use Wikibase\Test\TestItemContents;
 
 /**
  * @covers Wikibase\ItemDeletionUpdate

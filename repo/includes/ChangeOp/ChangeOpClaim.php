@@ -8,7 +8,6 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 

@@ -8,7 +8,6 @@ use MWContentSerializationException;
 use MWException;
 use Revision;
 use Title;
-use WikiPage;
 
 /**
  * Base handler class for Wikibase\Entity content classes.

@@ -7,9 +7,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\EntityIdLabelFormatter;
-use Wikibase\Item;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\Lib\EntityIdFormatter

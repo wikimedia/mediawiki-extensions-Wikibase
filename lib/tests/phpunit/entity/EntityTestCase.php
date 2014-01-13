@@ -2,10 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityFactory;
 use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\Property;
 use Wikibase\Query;
 
 /**

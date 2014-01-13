@@ -7,10 +7,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\Item;
-use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\ItemSerializer;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 

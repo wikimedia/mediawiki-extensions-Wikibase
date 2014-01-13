@@ -2,11 +2,8 @@
 
 namespace Wikibase;
 
-use RequestContext;
 use Title;
-use User;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Content handler for Wikibase items.

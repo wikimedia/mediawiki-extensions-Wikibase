@@ -12,7 +12,6 @@ use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
-use Wikibase\SnakObject;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpClaim

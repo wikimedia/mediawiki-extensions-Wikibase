@@ -7,7 +7,6 @@ use OutOfBoundsException;
 use SiteStore;
 use Wikibase\Claim;
 use Wikibase\Claims;
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;

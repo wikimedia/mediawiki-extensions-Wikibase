@@ -3,10 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\CachingEntityLoader;
-use Wikibase\Item;
 use Wikibase\Query;
 use Wikibase\EntityLookup;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\CachingEntityLoader

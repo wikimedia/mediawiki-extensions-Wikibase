@@ -2,10 +2,8 @@
 
 namespace Wikibase;
 
-use MWException;
 use ParserOutput;
 use SiteStore;
-use Sites;
 use Site;
 use Title;
 use Wikibase\DataModel\SimpleSiteLink;

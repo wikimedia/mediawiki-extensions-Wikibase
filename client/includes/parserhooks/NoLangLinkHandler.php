@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Wikibase\LangLinkHandler;
+
 use Wikibase\Client\WikibaseClient;
 
 /**

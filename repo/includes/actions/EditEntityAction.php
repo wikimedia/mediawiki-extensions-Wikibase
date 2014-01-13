@@ -10,7 +10,6 @@ use Linker;
 use MWException;
 use Page;
 use SiteSQLStore;
-use Skin;
 use Status;
 use Revision;
 use ValueFormatters\FormatterOptions;

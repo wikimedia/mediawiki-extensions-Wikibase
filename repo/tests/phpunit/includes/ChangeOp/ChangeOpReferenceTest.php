@@ -7,8 +7,6 @@ use Wikibase\Claims;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\Entity;
 use Wikibase\ItemContent;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\Reference;
 use Wikibase\SnakList;

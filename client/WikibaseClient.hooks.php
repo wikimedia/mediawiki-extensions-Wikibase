@@ -6,7 +6,6 @@ use ChangesList;
 use FormOptions;
 use IContextSource;
 use JobQueueGroup;
-use Linker;
 use MovePageForm;
 use OutputPage;
 use Parser;
@@ -17,7 +16,6 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 use SplFileInfo;
-use SiteSQLStore;
 use Sites;
 use Skin;
 use SpecialRecentChanges;
@@ -28,7 +26,6 @@ use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.

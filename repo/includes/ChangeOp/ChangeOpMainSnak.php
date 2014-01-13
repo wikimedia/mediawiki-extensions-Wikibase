@@ -4,9 +4,9 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\PropertyValueSnak;
 use Wikibase\Claims;
 use Wikibase\Entity;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Snak;
 use Wikibase\Summary;
 

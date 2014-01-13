@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use FormatJson;
 use Wikibase\Claim;
 use Wikibase\Claims;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\PropertyContent;
 use Wikibase\Lib\Serializers\SerializerFactory;

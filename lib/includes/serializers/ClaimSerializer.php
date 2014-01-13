@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\Snak;
 use Wikibase\SnakList;

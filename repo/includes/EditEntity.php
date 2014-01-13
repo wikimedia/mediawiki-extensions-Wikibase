@@ -2,7 +2,11 @@
 
 namespace Wikibase;
 
-use Status, Revision, User, WikiPage, Title, WebRequest, OutputPage;
+use Status;
+use Revision;
+use User;
+use WikiPage;
+use Title;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

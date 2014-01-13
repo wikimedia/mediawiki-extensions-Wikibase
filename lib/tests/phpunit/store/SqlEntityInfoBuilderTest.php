@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\Item;
 use Wikibase\SqlEntityInfoBuilder;

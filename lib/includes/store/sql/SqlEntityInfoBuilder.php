@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use ResultWrapper;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 

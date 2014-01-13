@@ -6,7 +6,6 @@ use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
-use Wikibase\Claim;
 
 /**
  * A CompositeValidator uses a list of sub-validators to validate the data.

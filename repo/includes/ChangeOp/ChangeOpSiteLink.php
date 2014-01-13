@@ -2,7 +2,6 @@
 
 namespace Wikibase\ChangeOp;
 
-use Site;
 use InvalidArgumentException;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\DataModel\Entity\ItemId;

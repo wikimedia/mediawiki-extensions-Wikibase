@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataValues\IriValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;

@@ -7,10 +7,6 @@ use DataValues\DataValue;
 use DataValues\IllegalValueException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\CachingEntityLoader;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Settings;
-use Wikibase\WikiPageEntityLookup;
 
 /**
  * Provides a string representation for a DataValue given its associated DataType.

@@ -4,11 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\EntityView;
-use Wikibase\ItemContent;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base for special pages that resolve certain arguments to an item.

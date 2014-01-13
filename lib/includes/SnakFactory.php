@@ -6,7 +6,6 @@ use DataValues\DataValue;
 use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
-use MWException;
 
 /**
  * Factory for creating new snaks.

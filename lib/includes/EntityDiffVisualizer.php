@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use IContextSource;
-use Html;
 use MWException;
 use Diff\Diff;
 use Diff\DiffOp;

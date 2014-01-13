@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Site;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;

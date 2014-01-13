@@ -2,15 +2,12 @@
 
 namespace Wikibase\Test;
 
-use Exception;
 use HashBagOStuff;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Entity;
-use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
+use Wikibase\PropertyLabelResolver;
 use Wikibase\Term;
-use Wikibase\TermIndex;
 use Wikibase\TermPropertyLabelResolver;
 
 /**

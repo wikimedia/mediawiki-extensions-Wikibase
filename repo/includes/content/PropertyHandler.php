@@ -2,9 +2,6 @@
 
 namespace Wikibase;
 
-use ParserOutput;
-use Title;
-
 /**
  * Content handler for Wikibase items.
  *

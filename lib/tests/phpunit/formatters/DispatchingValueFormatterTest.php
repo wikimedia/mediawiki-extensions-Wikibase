@@ -7,7 +7,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DispatchingValueFormatter;
 
 /**

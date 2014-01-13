@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Test;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 
 /**

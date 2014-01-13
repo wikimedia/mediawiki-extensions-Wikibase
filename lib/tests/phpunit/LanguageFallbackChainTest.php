@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**

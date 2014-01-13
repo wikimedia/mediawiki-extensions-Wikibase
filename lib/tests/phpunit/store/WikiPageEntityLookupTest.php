@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
