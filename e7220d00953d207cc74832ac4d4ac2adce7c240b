@@ -16,6 +16,24 @@
       "revId": "e7220d00953d207cc74832ac4d4ac2adce7c240b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_05b3764d",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-13T12:32:11Z",
+      "side": 1,
+      "message": "It is replaced on line 516\n\n$params[\u0027baserevid\u0027] \u003d $result[\u0027entity\u0027][\u0027lastrevid\u0027];",
+      "parentUuid": "aef5673e_859f86b9",
+      "revId": "e7220d00953d207cc74832ac4d4ac2adce7c240b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
