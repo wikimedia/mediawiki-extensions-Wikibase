@@ -155,7 +155,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 
 		$itemWithBadge = $this->getEmptyItem();
 		$badges = array( new ItemId( 'Q34' ) );
-		$itemWithBadge->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Rome', $badges  ) );
+		$itemWithBadge->addSiteLink( new SimpleSiteLink( 'enwiki', 'Rome', $badges  ) );
 
 		$cases[] = array(
 			array(),
@@ -180,7 +180,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$item = $this->getEmptyItem();
 
 		foreach( $links as $siteId => $page ) {
-			$item->addSimpleSiteLink(
+			$item->addSiteLink(
 				new SimpleSiteLink( $siteId, $page )
 			);
 		}

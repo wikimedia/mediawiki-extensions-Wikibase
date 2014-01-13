@@ -128,7 +128,7 @@ class importInterlang extends Maintenance {
 			$label = preg_replace( '/ *\(.*\)$/u', '', $name );
 
 			$item->setLabel( $lang, $label );
-			$item->addSimpleSiteLink( new SimpleSiteLink( $lang . 'wiki',  $name ) );
+			$item->addSiteLink( new SimpleSiteLink( $lang . 'wiki',  $name ) );
 		}
 
 		$content = \Wikibase\ItemContent::newFromItem( $item );

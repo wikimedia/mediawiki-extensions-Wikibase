@@ -91,14 +91,14 @@ class ItemContentTest extends EntityContentTest {
 	 */
 	public function testSiteLinkConflict( SimpleSiteLink $siteLink, $expected ) {
 		$content = ItemContent::newEmpty();
-		$content->getItem()->addSimpleSiteLink( $siteLink );
+		$content->getItem()->addSiteLink( $siteLink );
 
 		$status = $content->save( 'add item', null, EDIT_NEW );
 
 		$this->assertTrue( $status->isOK(), 'item creation succeeded' );
 
 		$content1 = ItemContent::newEmpty();
-		$content1->getItem()->addSimpleSiteLink( $siteLink );
+		$content1->getItem()->addSiteLink( $siteLink );
 
 		$status = $content1->save( 'add item', null, EDIT_NEW );
 
@@ -208,7 +208,7 @@ class ItemContentTest extends EntityContentTest {
 	public function getTextForSearchIndexProvider() {
 		$itemContent = $this->newEmpty();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
-		$itemContent->getEntity()->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
+		$itemContent->getEntity()->addSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
 
 		return array(
 			array( $itemContent, '!^cake$!' ),

@@ -107,8 +107,8 @@ class Scribunto_LuaWikibaseLibraryImplementationTest extends \PHPUnit_Framework_
 		$item->setId( $itemId );
 		$item->setLabel( 'en', 'Beer' );
 		$item->setDescription( 'en', 'yummy beverage' );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Beer' ) );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Bier' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Beer' ) );
+		$item->addSiteLink( new SimpleSiteLink( 'dewiki', 'Bier' ) );
 
 		return $item;
 	}

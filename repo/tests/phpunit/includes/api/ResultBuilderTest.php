@@ -139,7 +139,7 @@ class ResultBuilderTest extends PHPUnit_Framework_TestCase {
 		$item->addAliases( 'en', array( 'bar', 'baz' ) );
 		$item->setDescription( 'pt', 'ptDesc' );
 		$item->setDescription( 'pl', 'plDesc' );
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
+		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
 		$claim = new Claim( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
 		$claim->setGuid( 'imaguid' );
 		$item->addClaim( $claim );

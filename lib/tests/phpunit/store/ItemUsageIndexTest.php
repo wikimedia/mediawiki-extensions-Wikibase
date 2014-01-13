@@ -34,7 +34,7 @@ class ItemUsageIndexTest extends \MediaWikiTestCase {
 		$item->setId( $id );
 
 		foreach ( $links as $siteId => $page ) {
-			$item->addSimpleSiteLink( new SimpleSiteLink( $siteId, $page ) );
+			$item->addSiteLink( new SimpleSiteLink( $siteId, $page ) );
 		}
 
 		return $item;
