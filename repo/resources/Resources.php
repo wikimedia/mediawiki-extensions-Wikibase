@@ -35,6 +35,8 @@ return call_user_func( function() {
 				'wikibase.ui.initEntity',
 				'wikibase.ui.initTermBox',
 				'wikibase.ui.scrapeFormattedValues',
+				'wikibase.store.EntityStore',
+				'wikibase.seedEntityStoreFromMwConfig'
 			),
 			'messages' => array(
 				'wikibase-statements',
@@ -57,8 +59,6 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.serialization',
 				'wikibase.serialization.entities',
-				'wikibase.serialization.fetchedcontent',
-				'wikibase.store.FetchedContent',
 			),
 		),
 
