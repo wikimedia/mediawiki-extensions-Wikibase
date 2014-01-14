@@ -151,6 +151,15 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['jquery.wikibase.claimview.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.claimview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimview'
+			),
+		);
+
 		$testModules['qunit']['jquery.wikibase.listview.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.listview.tests.js',
