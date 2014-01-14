@@ -40,6 +40,10 @@ Get the title the entity is linked with in the current Wiki. If <code>globalSite
 <code>entity:getProperties()</code><br>
 Get a table with all property ids attached to the item.
 
+=== mw.wikibase.entity:formatPropertyValues ===
+<code>entity:formatPropertyValues( propertyId )</code><br>
+Get the formatted value of the claims with the given property id.
+
 === mw.wikibase.entity.create ===
 <code>mw.wikibase.entity.create( data )</code><br>
 Creates a new <code>mw.wikibase.entity</code> object for the given entity data table. This function is only used for internal calls in the current state of the Lua integration.
