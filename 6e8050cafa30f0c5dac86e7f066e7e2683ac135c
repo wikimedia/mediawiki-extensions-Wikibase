@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_7e3ac8e5",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-14T18:25:59Z",
+      "side": 1,
+      "message": "A simpler and more streight forward external name would be good. How about \"formatPropertyValues\"?",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_5e3f04d4",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-14T18:25:59Z",
+      "side": 1,
+      "message": "We can\u0027t really accept an arbitrary entity ID here at the moment, only \"this page\u0027s\" entity. How is that enforced?\n\nAlso - this should really be a member of the entity object, no?",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_3e44406e",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-14T18:25:59Z",
+      "side": 1,
+      "message": "The lookup already does caching, no need to implement it here.",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
