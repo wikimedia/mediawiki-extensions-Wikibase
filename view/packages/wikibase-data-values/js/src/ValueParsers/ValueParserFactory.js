@@ -44,10 +44,15 @@
 		 * @param {Function} Parser
 		 * @param {string} dataTypeId
 		 *
+		 * @throws {Error} if no data type id is specified.
 		 * @throws {Error} if a parser for the specified dataType object is registered already.
 		 */
 		registerDataTypeParser: function( Parser, dataTypeId ) {
 			assertIsValueParserConstructor( Parser );
+
+			if( dataTypeId === undefined ) {
+				throw new Error( 'No proper data type id provided to register the parser for' );
+			}
 
 			if( this._parsersForDataTypes[dataTypeId] ) {
 				throw new Error( 'Parser for DataType "' + dataTypeId + '" is registered already' );
@@ -63,10 +68,15 @@
 		 * @param {Function} Parser
 		 * @param {string} dataValueType
 		 *
+		 * @throws {Error} if no data value type is specified.
 		 * @throws {Error} if a parser for the specified DataValue type is registered already.
 		 */
 		registerDataValueParser: function( Parser, dataValueType ) {
 			assertIsValueParserConstructor( Parser );
+
+			if( dataValueType === undefined ) {
+				throw new Error( 'No proper data value type provided to register the parser for' );
+			}
 
 			if( this._parsersForDataValueTypes[dataValueType] ) {
 				throw new Error( 'Parser for DataValue type "' + dataValueType + '" is registered '

@@ -49,6 +49,10 @@
 		registerDataTypeFormatter: function( Formatter, dataTypeId ) {
 			assertIsValueFormatterConstructor( Formatter );
 
+			if( dataTypeId === undefined ) {
+				throw new Error( 'No proper data type id provided to register the formatter for' );
+			}
+
 			if( this._formattersForDataTypes[dataTypeId] ) {
 				throw new Error( 'Formatter for DataType "' + dataTypeId + '" is registered '
 					+ 'already' );
@@ -64,10 +68,16 @@
 		 * @param {Function} Formatter
 		 * @param {string} dataValueType
 		 *
+		 * @throws {Error} if no data type id is specified.
 		 * @throws {Error} if a formatter for the specified DataValue type is registered already.
 		 */
 		registerDataValueFormatter: function( Formatter, dataValueType ) {
 			assertIsValueFormatterConstructor( Formatter );
+
+			if( dataValueType === undefined ) {
+				throw new Error( 'No proper data value type provided to register the formatter '
+					+ 'for' );
+			}
 
 			if( this._formattersForDataValueTypes[dataValueType] ) {
 				throw new Error( 'Formatter for DataValue type "' + dataValueType + '" is '
@@ -86,6 +96,7 @@
 		 * @param {string} [dataTypeId]
 		 * @return {Function|null}
 		 *
+		 * @throws {Error} if no data value type is specified.
 		 * @throws {Error} if no proper purpose is provided to retrieve a formatter.
 		 */
 		getFormatter: function( dataValueType, dataTypeId ) {
