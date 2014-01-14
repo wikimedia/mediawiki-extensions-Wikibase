@@ -104,6 +104,27 @@ methodtable.getProperties = function( entity )
 	return properties
 end
 
+-- Get the formatted value of the claims with the given property id
+--
+-- @param propertyId
+methodtable.formatPropertyValues = function( entity, propertyId )
+	local formatted = php.formatPropertyValues(
+		entity.id,
+		propertyId
+	)
+
+	local label = mw.wikibase.label( propertyId )
+	if label == nil then
+		-- Make the label fallback on the entity id for convenience/ consistency
+		label = entity.id
+	end
+
+	return {
+		value = formatted,
+		label = label
+	}
+end
+
 mw.wikibase.entity = entity
 package.loaded['mw.wikibase.entity'] = entity
 mw_interface = nil
