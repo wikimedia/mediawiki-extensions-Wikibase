@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb, $ ) {
+( function( wb, util, $ ) {
 	'use strict';
 
 	var MODULE = wb.serialization;
@@ -37,7 +37,7 @@
 		 *
 		 * @param {Object} serialization
 		 */
-		unserialize: wb.utilities.abstractFunction,
+		unserialize: util.abstractFunction,
 
 		/**
 		 * Sets the unserializer's options without just keeping a reference to the given object.
@@ -63,4 +63,4 @@
 		}
 	} );
 
-}( wikibase, jQuery ) );
+}( wikibase, util, jQuery ) );
