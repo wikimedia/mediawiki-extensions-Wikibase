@@ -6,6 +6,7 @@ use Title;
 use Scribunto_LuaWikibaseEntityLibrary;
 use Scribunto;
 use Wikibase\Settings;
+use Language;
 
 /**
  * @covers Scribunto_LuaWikibaseLibrary
@@ -20,7 +21,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseEntityLibraryTest extends \MediaWikiTestCase {
+class Scribunto_LuaWikibaseEntityLibraryTest extends \Scribunto_LuaEngineTestBase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -56,6 +57,14 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends \MediaWikiTestCase {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$expected = array( Settings::get( 'siteGlobalID' ) );
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
+	}
+
+	public function testFormatPropertyValues() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$this->assertSame(
+			array( '' ),
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536' )
+		);
 	}
 
 	private function newScribuntoLuaWikibaseLibrary() {
