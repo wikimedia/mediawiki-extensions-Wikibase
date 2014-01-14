@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_0155a152",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T22:48:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_61058d13",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_5e3f04d4",
         "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 1
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "Didn\u0027t know... nice",
       "parentUuid": "aef5673e_3e44406e",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_81ef7182",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T22:48:05Z",
+      "side": 1,
+      "message": "Added a comment in follow up (per IRC discussion)",
+      "parentUuid": "aef5673e_010c813c",
       "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
