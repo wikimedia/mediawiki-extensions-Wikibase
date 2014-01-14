@@ -43,17 +43,4 @@ interface EntityLookup {
 	 */
 	public function hasEntity( EntityID $entityId );
 
-	/**
-	 * Fetches the entities with provided ids and returns them.
-	 * The result array contains the prefixed entity ids as keys.
-	 * The values are either an Entity or null, if there is no entity with the associated id.
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityID[] $entityIds
-	 *
-	 * @return Entity|null[]
-	 */
-	public function getEntities( array $entityIds );
-
 }

@@ -10,7 +10,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-interface EntityRevisionLookup {
+interface EntityRevisionLookup extends EntityLookup {
 
 	/**
 	 * Returns the entity revision with the provided id or null if there is no such
@@ -20,11 +20,20 @@ interface EntityRevisionLookup {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityID $entityId
-	 * @param int $revision The desired revision id, 0 means "current".
+	 * @param EntityId $entityId
+	 * @param int $revisionId The desired revision id, 0 means "current".
 	 *
 	 * @return EntityRevision|null
 	 * @throw StorageException
 	 */
-	public function getEntityRevision( EntityID $entityId, $revision = 0 );
+	public function getEntityRevision( EntityId $entityId, $revisionId = 0 );
+
+	/**
+	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return int|false
+	 */
+	public function getLatestRevisionId( EntityId $entityId );
 }
