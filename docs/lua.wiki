@@ -66,6 +66,15 @@ An example call might look like this:
 entity:getProperties() -- Returns a table like: { "P123", "P1337" }
 </source>
 
+=== mw.wikibase.entity:formatPropertyValues ===
+<code>entity:formatPropertyValues( propertyId )</code><br>
+Get the formatted value of the claims with the given property id.
+
+An example call might look like this:
+<source lang="lua">
+entity:formatPropertyValues( 'P12' ) -- Returns a table like: { value = "Formatted claim value", label = "Label of the Property" }
+</source>
+
 === mw.wikibase.entity.create ===
 <code>mw.wikibase.entity.create( data )</code><br>
 Creates a new <code>mw.wikibase.entity</code> object for the given entity data table. This function is only used for internal calls in the current state of the Lua integration.
