@@ -3,6 +3,14 @@
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
 
+if ( !class_exists( 'SitesBuilder' ) ) {
+	require_once __DIR__ . '/../includes/sites/SitesBuilder.php';
+}
+
+if ( !class_exists( 'SiteMatrixParser' ) ) {
+	require_once __DIR__ . '/../includes/sites/SiteMatrixParser.php';
+}
+
 /**
  * Maintenance script for populating the Sites table from another wiki that runs the
  * SiteMatrix extension.
