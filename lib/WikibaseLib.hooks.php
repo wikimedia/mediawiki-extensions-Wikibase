@@ -71,8 +71,6 @@ final class LibHooks {
 				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
 
-				'tests/qunit/parsers/EntityIdParser.tests.js',
-
 				'tests/qunit/wikibase.dataTypes/wikibase.dataTypes.tests.js',
 
 				'tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js',
@@ -137,9 +135,10 @@ final class LibHooks {
 				'jquery.wikibase.entityselector',
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbareditgroup',
-				'jquery.nativeEventHandler',
+				'jquery.NativeEventHandler',
 				'jquery.client',
 				'jquery.eachchange',
+				'util.inherit',
 			)
 		);
 
@@ -214,10 +213,54 @@ final class LibHooks {
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'ext.valueFormatters.tests',
+				'valueFormatters.tests',
+				'util.inherit',
 				'valueFormatters',
 				'wikibase.tests.qunit.testrunner',
 				'wikibase.QuantityFormatter',
+			),
+		);
+
+		$testModules['qunit']['wikibase.parsers.EntityIdParser.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/parsers/EntityIdParser.tests.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'valueParsers.tests',
+				'wikibase.datamodel',
+				'wikibase.EntityIdParser',
+				'wikibase.tests.qunit.testrunner',
+			),
+		);
+
+		$testModules['qunit']['wikibase.parsers.GlobeCoordinateParser.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/parsers/GlobeCoordinateParser.tests.js',
+			),
+			'dependencies' => array(
+				'dataValues.values',
+				'globeCoordinate.js',
+				'util.inherit',
+				'valueParsers.tests',
+				'wikibase.GlobeCoordinateParser',
+				'wikibase.tests.qunit.testrunner',
+			),
+		);
+
+		$testModules['qunit']['wikibase.parsers.QuantityParser.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/parsers/QuantityParser.tests.js',
+			),
+			'dependencies' => array(
+				'dataValues.values',
+				'util.inherit',
+				'valueParsers.tests',
+				'wikibase.QuantityParser',
+				'wikibase.tests.qunit.testrunner',
 			),
 		);
 
