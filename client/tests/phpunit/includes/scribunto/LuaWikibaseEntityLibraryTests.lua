@@ -58,6 +58,10 @@ local function testGetProperties()
 	return getNewTestItem():getProperties()
 end
 
+local function testFormatPropertyValues( propertyId )
+	return getNewTestItem():formatPropertyValues( propertyId )
+end
+
 -- Tests
 local tests = {
 	{ name = 'mw.wikibase.entity exists', func = testExists, type='ToString',
@@ -104,6 +108,10 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.getProperties', func = testGetProperties,
 	  expect = { { 'P4321', 'P321' } }
+	},
+	{ name = 'mw.wikibase.entity.formatPropertyValues', func = testFormatPropertyValues,
+	  args = { function() end },
+	  expect = "bad argument #1 to 'formatPropertyValues' (string expected, got function)"
 	}
 }
 
