@@ -38,32 +38,6 @@
 		_formattersForDataValueTypes: null,
 
 		/**
-		 * Registers a formatter.
-		 * @since 0.1
-		 *
-		 * @param {Function} Formatter ValueFormatter constructor.
-		 * @param {string} dataValueType
-		 * @param {string} [dataTypeId]
-		 *
-		 * @throws {Error} if the formatter constructor is invalid.
-		 * @throws {Error} no proper purpose is provided.
-		 */
-		registerFormatter: function( Formatter, dataValueType, dataTypeId ) {
-			if( !$.isFunction( Formatter ) ) {
-				throw new Error( 'Invalid ValueFormatter constructor' );
-			}
-
-			if( typeof dataTypeId === 'string' ) {
-				this._registerDataTypeFormatter( Formatter, dataTypeId );
-			} else if( typeof dataValueType === 'string' ) {
-				this._registerDataValueFormatter( Formatter, dataValueType );
-			} else {
-				throw new Error( 'No sufficient purpose provided what to register the formatter '
-					+ 'for' );
-			}
-		},
-
-		/**
 		 * Registers a formatter for a certain data type.
 		 * @since 0.1
 		 *
@@ -72,7 +46,7 @@
 		 *
 		 * @throws {Error} if a formatter for the specified dataType object is registered already.
 		 */
-		_registerDataTypeFormatter: function( Formatter, dataTypeId ) {
+		registerDataTypeFormatter: function( Formatter, dataTypeId ) {
 			assertIsValueFormatterConstructor( Formatter );
 
 			if( this._formattersForDataTypes[dataTypeId] ) {
@@ -92,7 +66,7 @@
 		 *
 		 * @throws {Error} if a formatter for the specified DataValue type is registered already.
 		 */
-		_registerDataValueFormatter: function( Formatter, dataValueType ) {
+		registerDataValueFormatter: function( Formatter, dataValueType ) {
 			assertIsValueFormatterConstructor( Formatter );
 
 			if( this._formattersForDataValueTypes[dataValueType] ) {

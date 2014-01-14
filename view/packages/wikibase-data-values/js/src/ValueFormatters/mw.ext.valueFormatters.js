@@ -11,7 +11,7 @@
 
 	var valueFormatterProvider = new vf.ValueFormatterFactory( vf.NullFormatter );
 
-	valueFormatterProvider.registerFormatter(
+	valueFormatterProvider.registerDataValueFormatter(
 		vf.StringFormatter,
 		dv.StringValue.TYPE
 	);

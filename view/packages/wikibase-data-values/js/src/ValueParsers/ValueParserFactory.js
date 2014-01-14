@@ -38,31 +38,6 @@
 		_parsersForDataValueTypes: null,
 
 		/**
-		 * Registers a parser.
-		 * @since 0.1
-		 *
-		 * @param {Function} Parser ValueParser constructor.
-		 * @param {string} dataValueType
-		 * @param {string} [dataTypeId]
-		 *
-		 * @throws {Error} if the parser constructor is invalid.
-		 * @throws {Error} no proper purpose is provided.
-		 */
-		registerParser: function( Parser, dataValueType, dataTypeId ) {
-			if( !$.isFunction( Parser ) ) {
-				throw new Error( 'Invalid ValueParser constructor' );
-			}
-
-			if( typeof dataTypeId === 'string' ) {
-				this._registerDataTypeParser( Parser, dataTypeId );
-			} else if( typeof dataValueType === 'string' ) {
-				this._registerDataValueParser( Parser, dataValueType );
-			} else {
-				throw new Error( 'No sufficient purpose to register the parser for provided' );
-			}
-		},
-
-		/**
 		 * Registers a parser for a certain data type.
 		 * @since 0.1
 		 *
@@ -71,7 +46,7 @@
 		 *
 		 * @throws {Error} if a parser for the specified dataType object is registered already.
 		 */
-		_registerDataTypeParser: function( Parser, dataTypeId ) {
+		registerDataTypeParser: function( Parser, dataTypeId ) {
 			assertIsValueParserConstructor( Parser );
 
 			if( this._parsersForDataTypes[dataTypeId] ) {
@@ -90,7 +65,7 @@
 		 *
 		 * @throws {Error} if a parser for the specified DataValue type is registered already.
 		 */
-		_registerDataValueParser: function( Parser, dataValueType ) {
+		registerDataValueParser: function( Parser, dataValueType ) {
 			assertIsValueParserConstructor( Parser );
 
 			if( this._parsersForDataValueTypes[dataValueType] ) {

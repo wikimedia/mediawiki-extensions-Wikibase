@@ -50,28 +50,55 @@
 		);
 	} );
 
-	QUnit.test( 'Error handling', function( assert ) {
+	QUnit.test( 'registerDataTypeFormatter(): Error handling', function( assert ) {
 		var formatterFactory = new vf.ValueFormatterFactory();
 
 		assert.throws(
 			function() {
-				formatterFactory.registerFormatter( 'invalid', StringValue );
+				formatterFactory.registerDataTypeFormatter( 'invalid', stringType.getId() );
 			},
 			'Failed trying to register an invalid formatter constructor.'
 		);
 
 		assert.throws(
 			function() {
-				formatterFactory.register( StringFormatter, 'invalid' );
+				formatterFactory.registerDataTypeFormatter( StringFormatter, 'invalid' );
 			},
 			'Failed trying to register a formatter with an invalid purpose.'
 		);
 
-		formatterFactory.registerFormatter( StringFormatter, StringValue.TYPE );
+		formatterFactory.registerDataTypeFormatter( StringFormatter, stringType.getId() );
 
 		assert.throws(
 			function() {
-				formatterFactory.getFormatter( StringValue );
+				formatterFactory.getFormatter( stringType.getId() );
+			},
+			'Failed trying to get a formatter with an invalid purpose.'
+		);
+	} );
+
+	QUnit.test( 'registerDataValueFormatter(): Error handling', function( assert ) {
+		var formatterFactory = new vf.ValueFormatterFactory();
+
+		assert.throws(
+			function() {
+				formatterFactory.registerDataValueFormatter( 'invalid', StringValue.TYPE );
+			},
+			'Failed trying to register an invalid formatter constructor.'
+		);
+
+		assert.throws(
+			function() {
+				formatterFactory.registerDataValueFormatter( StringFormatter, 'invalid' );
+			},
+			'Failed trying to register a formatter with an invalid purpose.'
+		);
+
+		formatterFactory.registerDataValueFormatter( StringFormatter, StringValue.TYPE );
+
+		assert.throws(
+			function() {
+				formatterFactory.getFormatter( StringValue.TYPE );
 			},
 			'Failed trying to get a formatter with an invalid purpose.'
 		);
@@ -86,7 +113,13 @@
 			'Returning default formatter if no formatter is registered for a specific data value.'
 		);
 
-		formatterFactory.registerFormatter( StringFormatter, StringValue.TYPE );
+		assert.equal(
+			formatterFactory.getFormatter( stringType.getDataValueType(), stringType.getId() ),
+			NullFormatter,
+			'Returning default formatter if no formatter is registered for a specific data type.'
+		);
+
+		formatterFactory.registerDataValueFormatter( StringFormatter, StringValue.TYPE );
 
 		assert.equal(
 			formatterFactory.getFormatter( StringValue.TYPE ),
@@ -99,6 +132,13 @@
 			NullFormatter,
 			'Still returning default formatter if no formatter is registered for a specific data '
 				+ 'value.'
+		);
+
+		assert.equal(
+			formatterFactory.getFormatter( numberType.getDataValueType(), numberType.getId()  ),
+			NullFormatter,
+			'Still returning default formatter if no formatter is registered for a specific data '
+				+ 'type.'
 		);
 	} );
 
@@ -175,7 +215,8 @@
 	 * @param {QUnit.assert} assert
 	 * @param {Array[]} toRegister Array containing arrays where each one tells a
 	 *        ValueFormatterFactory what formatters to register. The inner array has to consist out
-	 *        of two objects as ValueFormatterFactory.registerFormatter would take them.
+	 *        of two objects, a formatter constructor and a DataValue constructor or a DataTypeMock
+	 *        object.
 	 * @param {Array[]} toExpect Array containing arrays where each one states one expected
 	 *        condition of the ValueFormatterFactory after registration of what is given in the
 	 *        first parameter. Each inner array should contain a data type, data value or data value
@@ -190,13 +231,9 @@
 				Formatter = registerPair[1];
 
 			if( purpose instanceof DataTypeMock ) {
-				formatterFactory.registerFormatter(
-					Formatter,
-					purpose.getDataValueType(),
-					purpose.getId()
-				);
+				formatterFactory.registerDataTypeFormatter( Formatter, purpose.getId() );
 			} else {
-				formatterFactory.registerFormatter( Formatter, purpose.TYPE );
+				formatterFactory.registerDataValueFormatter( Formatter, purpose.TYPE );
 			}
 
 			assert.ok(
@@ -230,8 +267,11 @@
 
 	QUnit
 	.cases( valueFormatterFactoryRegistrationTestCases )
-		.test( 'registerFormatter() & getFormatter() ', function( params, assert ) {
-			valueFormatterFactoryRegistrationTest( assert, params.register, params.expect );
-		} );
+		.test(
+			'registerDataTypeFormatter() / registerDataValueFormatter() & getFormatter() ',
+			function( params, assert ) {
+				valueFormatterFactoryRegistrationTest( assert, params.register, params.expect );
+			}
+		);
 
 }( jQuery, QUnit, dataValues, valueFormatters ) );
