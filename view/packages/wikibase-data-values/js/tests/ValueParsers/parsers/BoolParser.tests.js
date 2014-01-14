@@ -23,9 +23,9 @@
 	vp.tests.BoolParserTest = vp.util.inherit( PARENT, constructor, {
 
 		/**
-		 * @see vp.tests.ValueParserTest.getObject
+		 * @see vp.tests.ValueParserTest.getConstructor
 		 */
-		getObject: function() {
+		getConstructor: function() {
 			return vp.BoolParser;
 		},
 

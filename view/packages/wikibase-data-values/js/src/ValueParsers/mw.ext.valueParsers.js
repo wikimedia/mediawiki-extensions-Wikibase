@@ -35,9 +35,9 @@
 	 * Object representing the MediaWiki "ValueParsers" extension.
 	 * @since 0.1
 	 */
-	mw.ext.valueParsers = new ( function MwExtValueView() {
+	mw.ext.valueParsers = new ( function MwExtValueParsers() {
 		/**
-		 * Value parser provider holding all value parsers available in global MediaWiki context.
+		 * Value parser provider containing all value parsers available in global MediaWiki context.
 		 * @since 0.1
 		 *
 		 * @type {valueParsers.ValueParserFactory}
