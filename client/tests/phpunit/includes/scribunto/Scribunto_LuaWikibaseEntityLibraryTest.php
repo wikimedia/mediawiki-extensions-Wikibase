@@ -73,6 +73,14 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends \Scribunto_LuaEngineTestBas
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
 	}
 
+	public function testFormatPropertyValues() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$this->assertSame(
+			array( '' ),
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536' )
+		);
+	}
+
 	private function newScribuntoLuaWikibaseLibrary() {
 		$engine = Scribunto::newDefaultEngine( array(
 			'title' => Title::newFromText( 'Whatever' )
