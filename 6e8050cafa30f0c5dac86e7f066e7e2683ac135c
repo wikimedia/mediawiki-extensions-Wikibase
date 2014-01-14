@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_61058d13",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T18:31:38Z",
+      "side": 1,
+      "message": "that sounds better, yes",
+      "parentUuid": "aef5673e_7e3ac8e5",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_5e3f04d4",
         "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_81009105",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T18:31:38Z",
+      "side": 1,
+      "message": "That\u0027s taken care of: The first parameter will always be filed by the mw.wikibase.entity object you\u0027re working on ... and you can (atm) only get an mw.wikibase.entity object for the page you\u0027re on.\n\nAnd it actually is a member of mw.wikibase.entity in Lua, but that can\u0027t be mirrored in PHP 1:1",
+      "parentUuid": "aef5673e_5e3f04d4",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_3e44406e",
         "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-01-14T18:25:59Z",
       "side": 1,
       "message": "The lookup already does caching, no need to implement it here.",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_010c813c",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T18:31:38Z",
+      "side": 1,
+      "message": "Didn\u0027t know... nice",
+      "parentUuid": "aef5673e_3e44406e",
       "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
