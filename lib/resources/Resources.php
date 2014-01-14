@@ -214,6 +214,31 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.store.EntityStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.store/store.EntityStore.js',
+			),
+			'dependencies' => array(
+				'jquery.json',
+				'mediawiki.Title',
+				'wikibase.store',
+				'wikibase.AbstractedRepoApi',
+				'wikibase.store.FetchedContent'
+			)
+		),
+
+		'wikibase.seedEntityStoreFromMwConfig' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.seedEntityStoreFromMwConfig.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'wikibase.serialization.fetchedcontent',
+				'wikibase.serialization.entities',
+				'wikibase.datamodel'
+			)
+		),
+
 		'wikibase.AbstractedRepoApi' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RepoApi/wikibase.AbstractedRepoApi.js',
@@ -597,8 +622,6 @@ return call_user_func( function() {
 				'jquery.nativeEventHandler',
 				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
-				'wikibase.AbstractedRepoApi',
-				'wikibase.store.FetchedContent', // required for getting datatype from entityselector selected property
 				'mediawiki.legacy.shared',
 				'jquery.ui.position',
 				'jquery.ui.TemplatedWidget',
@@ -791,7 +814,6 @@ return call_user_func( function() {
 				'jquery.eachchange',
 				'jquery.inputAutoExpand',
 				'wikibase.utilities',
-				'wikibase.store.FetchedContent'
 			),
 			'messages' => array(
 				'wikibase-entity-item',
