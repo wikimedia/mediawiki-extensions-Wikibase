@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\CachingEntityLoader;
+use Wikibase\CachingEntityRevisionLookup;
 use Wikibase\Query;
 use Wikibase\EntityLookup;
 
@@ -18,7 +18,9 @@ use Wikibase\EntityLookup;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class CachingEntityLoaderTest extends EntityLookupTest {
+class CachingEntityRevisionLookupTest extends EntityLookupTest {
+
+	//FIXME: make a generic EntityRevisionLookupTest
 
 	/**
 	 * @see EntityLookupTest::newEntityLoader()
@@ -32,7 +34,7 @@ class CachingEntityLoaderTest extends EntityLookupTest {
 			$mock->putEntity( $entity, $rev );
 		}
 
-		return new CachingEntityLoader( $mock );
+		return new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
 	}
 
 }

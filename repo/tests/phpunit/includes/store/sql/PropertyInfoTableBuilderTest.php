@@ -64,7 +64,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$properties = self::initProperties();
 		$propertyIds = array_keys( $properties );
 
-		$entityLookup = new WikiPageEntityLookup( false, false );
+		$entityLookup = new WikiPageEntityLookup( false );
 		$table = new PropertyInfoTable( false );
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
 		$builder->setBatchSize( 3 );

@@ -83,6 +83,7 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 
 		$table = new PropertyInfoTable( false );
 		$entityLookup = new WikiPageEntityLookup( false );
+		$entityLookup = new CachingEntityRevisionLookup( $entityLookup, new \HashBagOStuff() );
 
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
 		$builder->setReporter( $reporter );

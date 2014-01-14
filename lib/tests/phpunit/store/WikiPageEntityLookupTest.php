@@ -52,7 +52,7 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 			}
 		}
 
-		return new WikiPageEntityLookup( false, CACHE_DB );
+		return new WikiPageEntityLookup( false );
 	}
 
 	protected static function storeTestEntity( Entity $entity ) {
