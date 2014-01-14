@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "aef5673e_4be62815",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-14T11:07:37Z",
+      "side": 1,
+      "message": "That name seems odd, and the function doesn\u0027t seem to exist!",
+      "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_8b2d5044",
         "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
         "patchSetId": 8
