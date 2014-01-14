@@ -100,6 +100,7 @@ return call_user_func( function() {
 		'Wikibase\Api\ResultBuilder' => 'includes/api/ResultBuilder.php',
 		'Wikibase\Api\SiteLinkTargetProvider' => 'includes/api/SiteLinkTargetProvider.php',
 		'Wikibase\Api\FormatSnakValue' => 'includes/api/FormatSnakValue.php',
+		'Wikibase\Api\ParseValue' => 'includes/api/ParseValue.php',
 
 		// includes/serializers
 		'Wikibase\Serializers\EntityRevisionSerializer' => 'includes/serializers/EntityRevisionSerializer.php',

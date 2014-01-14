@@ -41,6 +41,11 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
 }
 
+/**
+ * @deprecated since 0.5 This is a global registry that provides no control over object lifecycle
+ */
+$GLOBALS['wgValueParsers'] = array();
+
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
 	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
@@ -115,10 +120,11 @@ call_user_func( function() {
 	$wgAPIModules['wbsetreference'] 					= 'Wikibase\Api\SetReference';
 	$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 	$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
-	$wgAPIModules['wbremovequalifiers']                 = 'Wikibase\Api\RemoveQualifiers';
-	$wgAPIModules['wbsetqualifier']                     = 'Wikibase\Api\SetQualifier';
-	$wgAPIModules['wbmergeitems']                       = 'Wikibase\Api\MergeItems';
-	$wgAPIModules['wbformatvalue']                      = 'Wikibase\Api\FormatSnakValue';
+	$wgAPIModules['wbremovequalifiers']					= 'Wikibase\Api\RemoveQualifiers';
+	$wgAPIModules['wbsetqualifier']						= 'Wikibase\Api\SetQualifier';
+	$wgAPIModules['wbmergeitems']						= 'Wikibase\Api\MergeItems';
+	$wgAPIModules['wbformatvalue']						= 'Wikibase\Api\FormatSnakValue';
+	$wgAPIModules['wbparsevalue']						= 'Wikibase\Api\ParseValue';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';
