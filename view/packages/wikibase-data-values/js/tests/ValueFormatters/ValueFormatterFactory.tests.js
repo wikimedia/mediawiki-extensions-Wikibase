@@ -2,27 +2,40 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, dt, dv, vf ) {
+( function( $, QUnit, dv, vf ) {
 	'use strict';
+
+	var DataTypeMock = function( dataTypeId, DataValue ) {
+		this._dataTypeId = dataTypeId;
+		this._dataValueType = DataValue.TYPE;
+	};
+	$.extend( DataTypeMock.prototype, {
+		getId: function() {
+			return this._dataTypeId;
+		},
+		getDataValueType: function() {
+			return this._dataValueType;
+		}
+	} );
 
 	/**
 	 * Returns a descriptive string to be used as id when registering a ValueFormatter in a
 	 * ValueFormatterFactory.
 	 *
-	 * @param {dataTypes.DataType|string} purpose
+	 * @param {DataTypeMock|Function} purpose
 	 * @return {string}
 	 */
 	function getTypeInfo( purpose ) {
-		if( purpose instanceof dt.DataType ) {
+		if( purpose instanceof DataTypeMock ) {
 			return 'DataType with data value type "' + purpose.getDataValueType() + '"';
 		}
-		return 'constructor for DataValue of type "' + purpose + '"';
+		return 'constructor for DataValue of type "' + purpose.TYPE + '"';
 	}
 
 	var StringValue = dv.StringValue,
 		UnknownValue = dv.UnknownValue,
-		stringType = new dt.DataType( 'somestringtype', StringValue ),
-		numberType = new dt.DataType( 'somenumbertype', dv.NumberValue ),
+		stringType = new DataTypeMock( 'somestringtype', StringValue ),
+		numberType = new DataTypeMock( 'somenumbertype', dv.NumberValue ),
 		StringFormatter = vf.StringFormatter,
 		NullFormatter = vf.NullFormatter;
 
@@ -42,19 +55,19 @@
 
 		assert.throws(
 			function() {
-				formatterFactory.registerFormatter( StringValue.TYPE, 'invalid' );
+				formatterFactory.registerFormatter( 'invalid', StringValue );
 			},
 			'Failed trying to register an invalid formatter constructor.'
 		);
 
 		assert.throws(
 			function() {
-				formatterFactory.register( 'invalid', StringFormatter );
+				formatterFactory.register( StringFormatter, 'invalid' );
 			},
 			'Failed trying to register a formatter with an invalid purpose.'
 		);
 
-		formatterFactory.registerFormatter( StringValue.TYPE, StringFormatter );
+		formatterFactory.registerFormatter( StringFormatter, StringValue.TYPE );
 
 		assert.throws(
 			function() {
@@ -73,7 +86,7 @@
 			'Returning default formatter if no formatter is registered for a specific data value.'
 		);
 
-		formatterFactory.registerFormatter( StringValue.TYPE, StringFormatter );
+		formatterFactory.registerFormatter( StringFormatter, StringValue.TYPE );
 
 		assert.equal(
 			formatterFactory.getFormatter( StringValue.TYPE ),
@@ -100,7 +113,7 @@
 			title: 'Empty ValueFormatterFactory',
 			register: [],
 			expect: [
-				[ StringValue.TYPE, null ],
+				[ StringValue, null ],
 				[ stringType, null ]
 			]
 		},
@@ -108,12 +121,12 @@
 			title: 'Factory with formatter for string DataValue which is also suitable for string '
 				+ 'DataType',
 			register: [
-				[ StringValue.TYPE, StringFormatter ]
+				[ StringValue, StringFormatter ]
 			],
 			expect: [
-				[ StringValue.TYPE, StringFormatter ],
+				[ StringValue, StringFormatter ],
 				[ stringType, StringFormatter ], // data type uses value type
-				[ UnknownValue.TYPE, null ],
+				[ UnknownValue, null ],
 				[ numberType, null ]
 			]
 		},
@@ -124,7 +137,7 @@
 				[ stringType, StringFormatter ]
 			],
 			expect: [
-				[ StringValue.TYPE, null ],
+				[ StringValue, null ],
 				[ stringType, StringFormatter ]
 			]
 		},
@@ -132,24 +145,24 @@
 			title: 'Factory with two formatters: For DataValue and for DataType using that '
 				+ 'DataValue type',
 			register: [
-				[ StringValue.TYPE, StringFormatter ],
+				[ StringValue, StringFormatter ],
 				[ stringType, StringFormatter ]
 			],
 			expect: [
-				[ StringValue.TYPE, StringFormatter ],
+				[ StringValue, StringFormatter ],
 				[ stringType, StringFormatter ],
-				[ UnknownValue.TYPE, null ]
+				[ UnknownValue, null ]
 			]
 		},
 		{
 			title: 'Factory with two formatters for two different DataValue types',
 			register: [
-				[ StringValue.TYPE, StringFormatter ],
-				[ UnknownValue.TYPE, NullFormatter ]
+				[ StringValue, StringFormatter ],
+				[ UnknownValue, NullFormatter ]
 			],
 			expect: [
-				[ StringValue.TYPE, StringFormatter ],
-				[ UnknownValue.TYPE, NullFormatter ],
+				[ StringValue, StringFormatter ],
+				[ UnknownValue, NullFormatter ],
 				[ numberType, null ]
 			]
 		}
@@ -174,9 +187,17 @@
 		// Register ValueFormatters as per definition:
 		$.each( toRegister, function( i, registerPair ) {
 			var purpose = registerPair[0],
-				formatter = registerPair[1];
+				Formatter = registerPair[1];
 
-			formatterFactory.registerFormatter( purpose, formatter );
+			if( purpose instanceof DataTypeMock ) {
+				formatterFactory.registerFormatter(
+					Formatter,
+					purpose.getDataValueType(),
+					purpose.getId()
+				);
+			} else {
+				formatterFactory.registerFormatter( Formatter, purpose.TYPE );
+			}
 
 			assert.ok(
 				true,
@@ -187,13 +208,22 @@
 		// Check for expected conditions:
 		$.each( toExpect, function( i, expectPair ) {
 			var purpose = expectPair[0],
-				formatter = expectPair[1];
+				Formatter = expectPair[1],
+				RetrievedFormatter;
+
+			if( purpose instanceof DataTypeMock ) {
+				RetrievedFormatter = formatterFactory.getFormatter(
+					purpose.getDataValueType(), purpose.getId()
+				);
+			} else {
+				RetrievedFormatter = formatterFactory.getFormatter( purpose.TYPE );
+			}
 
 			assert.strictEqual(
-				formatterFactory.getFormatter( purpose ),
-				formatter,
+				RetrievedFormatter,
+				Formatter,
 				'Requesting formatter for ' + getTypeInfo( purpose ) +
-					( formatter !== null ? ' returns expected formatter' : ' returns null' )
+					( Formatter !== null ? ' returns expected formatter' : ' returns null' )
 			);
 		} );
 	}
@@ -204,4 +234,4 @@
 			valueFormatterFactoryRegistrationTest( assert, params.register, params.expect );
 		} );
 
-}( jQuery, QUnit, dataTypes, dataValues, valueFormatters ) );
+}( jQuery, QUnit, dataValues, valueFormatters ) );

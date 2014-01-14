@@ -44,7 +44,6 @@ return call_user_func( function() {
 				'ValueParserFactory.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'valueParsers',
 			),
 		),

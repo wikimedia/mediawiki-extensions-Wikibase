@@ -12,23 +12,23 @@
 	var valueParserProvider = new vp.ValueParserFactory( vp.NullParser );
 
 	valueParserProvider.registerParser(
-		dv.GlobeCoordinateValue.TYPE,
-		vp.GlobeCoordinateParser
+		vp.GlobeCoordinateParser,
+		dv.GlobeCoordinateValue.TYPE
 	);
 
 	valueParserProvider.registerParser(
-		dv.QuantityValue.TYPE,
-		vp.QuantityParser
+		vp.QuantityParser,
+		dv.QuantityValue.TYPE
 	);
 
 	valueParserProvider.registerParser(
-		dv.StringValue.TYPE,
-		vp.StringParser
+		vp.StringParser,
+		dv.StringValue.TYPE
 	);
 
 	valueParserProvider.registerParser(
-		dv.TimeValue.TYPE,
-		vp.TimeParser
+		vp.TimeParser,
+		dv.TimeValue.TYPE
 	);
 
 	/**

@@ -2,33 +2,42 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, dt, dv, vp ) {
+( function( $, QUnit, dv, vp ) {
 	'use strict';
+
+	var DataTypeMock = function( dataTypeId, DataValue ) {
+		this._dataTypeId = dataTypeId;
+		this._dataValueType = DataValue.TYPE;
+	};
+	$.extend( DataTypeMock.prototype, {
+		getId: function() {
+			return this._dataTypeId;
+		},
+		getDataValueType: function() {
+			return this._dataValueType;
+		}
+	} );
 
 	/**
 	 * Returns a descriptive string to be used as id when registering a ValueParser in a
 	 * ValueParserFactory.
 	 *
-	 * @param {dataTypes.DataType|dataValues.DataValue|Function} purpose
+	 * @param {DataTypeMock|Function} purpose
 	 * @return {string}
 	 */
 	function getTypeInfo( purpose ) {
-		if( purpose instanceof dt.DataType ) {
+		if( purpose instanceof DataTypeMock ) {
 			return 'DataType with data value type "' + purpose.getDataValueType() + '"';
 		}
-		if( purpose instanceof dv.DataValue ) {
-			return 'DataValue instance of type "' + purpose.getType() + '"';
-		}
-		// DataValue constructor:
 		return 'constructor for DataValue of type "' + purpose.TYPE + '"';
 	}
 
 	var StringValue = dv.StringValue,
 		BoolValue = dv.BoolValue,
-		stringType = new dt.DataType( 'somestringtype', StringValue ),
-		numberType = new dt.DataType( 'somenumbertype', dv.NumberValue ),
-		StringParser = vp.StringParser,
-		BoolParser = vp.BoolParser;
+		stringType = new DataTypeMock( 'somestringtype', StringValue ),
+		numberType = new DataTypeMock( 'somenumbertype', dv.NumberValue ),
+		stringParser = vp.StringParser,
+		boolParser = vp.BoolParser;
 
 	QUnit.module( 'valueParsers.ValueParserFactory' );
 
@@ -46,49 +55,25 @@
 
 		assert.throws(
 			function() {
-				parserFactory.registerParser( StringValue.TYPE, 'invalid' );
+				parserFactory.registerParser( 'invalid', StringValue.TYPE );
 			},
 			'Failed trying to register an invalid parser constructor.'
 		);
 
 		assert.throws(
 			function() {
-				parserFactory.register( 'invalid', StringParser );
+				parserFactory.register( stringParser, 'invalid' );
 			},
 			'Failed trying to register a parser with an invalid purpose.'
 		);
 
-		parserFactory.registerParser( StringValue.TYPE, StringParser );
+		parserFactory.registerParser( stringParser, StringValue.TYPE );
 
 		assert.throws(
 			function() {
 				parserFactory.getParser( StringValue );
 			},
 			'Failed trying to get a parser with an invalid purpose.'
-		);
-	} );
-
-	QUnit.test( 'Return default parser on getParser()', function( assert ) {
-		var parserFactory = new vp.ValueParserFactory( BoolParser );
-
-		assert.equal(
-			parserFactory.getParser( StringValue.TYPE ),
-			BoolParser,
-			'Returning default parser if no parser is registered for a specific data value.'
-		);
-
-		parserFactory.registerParser( StringValue.TYPE, StringParser );
-
-		assert.equal(
-			parserFactory.getParser( StringValue.TYPE ),
-			StringParser,
-			'Returning specific parser if a parser is registered for a specific data value.'
-		);
-
-		assert.equal(
-			parserFactory.getParser( BoolValue.TYPE ),
-			BoolParser,
-			'Still returning default parser if no parser is registered for a specific data value.'
 		);
 	} );
 
@@ -103,7 +88,7 @@
 			title: 'Empty ValueParserFactory',
 			register: [],
 			expect: [
-				[ StringValue.TYPE, null ],
+				[ StringValue, null ],
 				[ stringType, null ]
 			]
 		},
@@ -111,12 +96,12 @@
 			title: 'Factory with parser for string DataValue which is also suitable for string '
 				+ 'DataType',
 			register: [
-				[ StringValue.TYPE, StringParser ]
+				[ StringValue, stringParser ]
 			],
 			expect: [
-				[ StringValue.TYPE, StringParser ],
-				[ stringType, StringParser ], // data type uses value type
-				[ BoolValue.TYPE, null ],
+				[ StringValue, stringParser ],
+				[ stringType, stringParser ], // data type uses value type
+				[ BoolValue, null ],
 				[ numberType, null ]
 			]
 		},
@@ -124,35 +109,35 @@
 			title: 'Factory for string DataType. String DataValue can\'t use this potentially more '
 				+ 'specialized parser',
 			register: [
-				[ stringType, StringParser ]
+				[ stringType, stringParser ]
 			],
 			expect: [
-				[ StringValue.TYPE, null ],
-				[ stringType, StringParser ]
+				[ StringValue, null ],
+				[ stringType, stringParser ]
 			]
 		},
 		{
 			title: 'Factory with two parsers: For DataValue and for DataType using that DataValue '
 				+ 'type',
 			register: [
-				[ StringValue.TYPE, StringParser ],
-				[ stringType, StringParser ]
+				[ StringValue, stringParser ],
+				[ stringType, stringParser ]
 			],
 			expect: [
-				[ StringValue.TYPE, StringParser ],
-				[ stringType, StringParser ],
-				[ BoolValue.TYPE, null ]
+				[ StringValue, stringParser ],
+				[ stringType, stringParser ],
+				[ BoolValue, null ]
 			]
 		},
 		{
 			title: 'Factory with two parsers for two different DataValue types',
 			register: [
-				[ StringValue.TYPE, StringParser ],
-				[ BoolValue.TYPE, BoolParser ]
+				[ StringValue, stringParser ],
+				[ BoolValue, boolParser ]
 			],
 			expect: [
-				[ StringValue.TYPE, StringParser ],
-				[ BoolValue.TYPE, BoolParser ],
+				[ StringValue, stringParser ],
+				[ BoolValue, boolParser ],
 				[ numberType, null ]
 			]
 		}
@@ -177,9 +162,13 @@
 		// Register ValueParsers as per definition:
 		$.each( toRegister, function( i, registerPair ) {
 			var purpose = registerPair[0],
-				parser = registerPair[1];
+				Parser = registerPair[1];
 
-			parserFactory.registerParser( purpose, parser );
+			if( purpose instanceof DataTypeMock ) {
+				parserFactory.registerParser( Parser, purpose.getDataValueType(), purpose.getId() );
+			} else {
+				parserFactory.registerParser( Parser, purpose.TYPE );
+			}
 
 			assert.ok(
 				true,
@@ -190,13 +179,22 @@
 		// Check for expected conditions:
 		$.each( toExpect, function( i, expectPair ) {
 			var purpose = expectPair[0],
-				parser = expectPair[1];
+				Parser = expectPair[1],
+				RetrievedParser;
+
+			if( purpose instanceof DataTypeMock ) {
+				RetrievedParser = parserFactory.getParser(
+					purpose.getDataValueType(), purpose.getId()
+				);
+			} else {
+				RetrievedParser = parserFactory.getParser( purpose.TYPE );
+			}
 
 			assert.strictEqual(
-				parserFactory.getParser( purpose ),
-				parser,
+				RetrievedParser,
+				Parser,
 				'Requesting parser for ' + getTypeInfo( purpose ) +
-					( parser !== null ? ' returns expected parser' : ' returns null' )
+					( Parser !== null ? ' returns expected parser' : ' returns null' )
 			);
 		} );
 	}
@@ -207,4 +205,4 @@
 			valueParserFactoryRegistrationTest( assert, params.register, params.expect );
 		} );
 
-}( jQuery, QUnit, dataTypes, dataValues, valueParsers ) );
+}( jQuery, QUnit, dataValues, valueParsers ) );

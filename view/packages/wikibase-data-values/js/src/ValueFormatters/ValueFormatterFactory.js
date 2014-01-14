@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, vf, dt ) {
+( function( $, vf ) {
 	'use strict';
 
 	/**
@@ -41,21 +41,22 @@
 		 * Registers a formatter.
 		 * @since 0.1
 		 *
-		 * @param {dataTypes.DataType|string} purpose DataType object or DataValue type.
 		 * @param {Function} Formatter ValueFormatter constructor.
+		 * @param {string} dataValueType
+		 * @param {string} [dataTypeId]
 		 *
 		 * @throws {Error} if the formatter constructor is invalid.
 		 * @throws {Error} no proper purpose is provided.
 		 */
-		registerFormatter: function( purpose, Formatter ) {
+		registerFormatter: function( Formatter, dataValueType, dataTypeId ) {
 			if( !$.isFunction( Formatter ) ) {
 				throw new Error( 'Invalid ValueFormatter constructor' );
 			}
 
-			if( purpose instanceof dt.DataType ) {
-				this._registerDataTypeFormatter( purpose, Formatter );
-			} else if( typeof purpose === 'string' ) {
-				this._registerDataValueFormatter( purpose, Formatter );
+			if( typeof dataTypeId === 'string' ) {
+				this._registerDataTypeFormatter( Formatter, dataTypeId );
+			} else if( typeof dataValueType === 'string' ) {
+				this._registerDataValueFormatter( Formatter, dataValueType );
 			} else {
 				throw new Error( 'No sufficient purpose provided what to register the formatter '
 					+ 'for' );
@@ -66,32 +67,32 @@
 		 * Registers a formatter for a certain data type.
 		 * @since 0.1
 		 *
-		 * @param {dataTypes.DataType} dataType
 		 * @param {Function} Formatter
+		 * @param {string} dataTypeId
 		 *
 		 * @throws {Error} if a formatter for the specified dataType object is registered already.
 		 */
-		_registerDataTypeFormatter: function( dataType, Formatter ) {
+		_registerDataTypeFormatter: function( Formatter, dataTypeId ) {
 			assertIsValueFormatterConstructor( Formatter );
 
-			if( this._formattersForDataTypes[dataType.getId()] ) {
-				throw new Error( 'Formatter for DataType "' + dataType.getId() + '" is registered '
+			if( this._formattersForDataTypes[dataTypeId] ) {
+				throw new Error( 'Formatter for DataType "' + dataTypeId + '" is registered '
 					+ 'already' );
 			}
 
-			this._formattersForDataTypes[dataType.getId()] = Formatter;
+			this._formattersForDataTypes[dataTypeId] = Formatter;
 		},
 
 		/**
 		 * Registers a formatter for a certain data value type.
 		 * @since 0.1
 		 *
-		 * @param {string} dataValueType
 		 * @param {Function} Formatter
+		 * @param {string} dataValueType
 		 *
 		 * @throws {Error} if a formatter for the specified DataValue type is registered already.
 		 */
-		_registerDataValueFormatter: function( dataValueType, Formatter ) {
+		_registerDataValueFormatter: function( Formatter, dataValueType ) {
 			assertIsValueFormatterConstructor( Formatter );
 
 			if( this._formattersForDataValueTypes[dataValueType] ) {
@@ -107,32 +108,23 @@
 		 * default formatter if no ValueFormatter is registered for that purpose.
 		 * @since 0.1
 		 *
-		 * @param {dataTypes.DataType|string} purpose DataType object or DataValue type.
+		 * @param {string} dataValueType
+		 * @param {string} [dataTypeId]
 		 * @return {Function|null}
 		 *
 		 * @throws {Error} if no proper purpose is provided to retrieve a formatter.
 		 */
-		getFormatter: function( purpose ) {
-			var dataValueType,
-				dataTypeId,
-				formatter;
+		getFormatter: function( dataValueType, dataTypeId ) {
+			var formatter;
 
-			if( purpose instanceof dataTypes.DataType ) {
-				dataValueType = purpose.getDataValueType();
-				dataTypeId = purpose.getId();
-			} else if( typeof purpose === 'string' ) {
-				dataValueType = purpose;
-			} else {
-				throw new Error( 'No sufficient purpose provided for choosing a formatter' );
-			}
-
-			if( dataTypeId ) {
+			if( typeof dataTypeId === 'string' ) {
 				formatter = this._formattersForDataTypes[dataTypeId];
 			}
 
-			if( !formatter ) {
-				// No formatter for specified data type or only DataValue provided.
+			if( !formatter && typeof dataValueType === 'string' ) {
 				formatter = this._formattersForDataValueTypes[dataValueType];
+			} else if( !formatter ) {
+				throw new Error( 'No sufficient purpose provided for choosing a formatter' );
 			}
 
 			return formatter || this._DefaultFormatter;
@@ -149,4 +141,4 @@
 		}
 	}
 
-}( jQuery, valueFormatters, dataTypes ) );
+}( jQuery, valueFormatters ) );
