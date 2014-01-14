@@ -179,7 +179,7 @@ return call_user_func( function() {
 		'Wikibase\CachingPropertyInfoStore' => 'includes/store/CachingPropertyInfoStore.php',
 
 		// includes/store/sql
-		'Wikibase\CachingEntityLoader' => 'includes/store/sql/CachingEntityLoader.php',
+		'Wikibase\CachingEntityRevisionLookup' => 'includes/store/sql/CachingEntityRevisionLookup.php',
 		'Wikibase\SiteLinkTable' => 'includes/store/sql/SiteLinkTable.php',
 		'Wikibase\WikiPageEntityLookup' => 'includes/store/sql/WikiPageEntityLookup.php',
 		'Wikibase\TermSqlIndex' => 'includes/store/sql/TermSqlIndex.php',
@@ -219,6 +219,7 @@ return call_user_func( function() {
 		'Wikibase\Test\MockPropertyLabelResolver' => 'tests/phpunit/MockPropertyLabelResolver.php',
 		'Wikibase\Test\MockRepository' => 'tests/phpunit/MockRepository.php',
 		'Wikibase\Test\EntityLookupTest' => 'tests/phpunit/EntityLookupTest.php',
+		'Wikibase\Test\EntityRevisionLookupTest' => 'tests/phpunit/EntityRevisionLookupTest.php',
 		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php',
 		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/store/TermIndexTest.php',
 		'Wikibase\Test\MockPropertyInfoStore' => 'tests/phpunit/store/MockPropertyInfoStore.php',

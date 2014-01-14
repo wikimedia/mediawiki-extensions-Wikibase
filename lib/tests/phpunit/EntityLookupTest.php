@@ -3,13 +3,12 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\Query;
 use Wikibase\EntityLookup;
-use Wikibase\Property;
+use Wikibase\EntityRevision;
 
 /**
  * Base class for testing EntityLookup implementations
@@ -25,45 +24,51 @@ use Wikibase\Property;
 abstract class EntityLookupTest extends EntityTestCase {
 
 	/**
-	 * @param Entity[] $entities
+	 * @param EntityRevision[] $entities
 	 *
 	 * @todo: Support for multiple revisions per entity.
 	 *        Needs a way to return the revision IDs.
 	 *
 	 * @return EntityLookup
 	 */
-	protected abstract function newEntityLoader( array $entities );
+	protected abstract function newEntityLookup( array $entities );
 
 	/**
-	 * @return Entity[]
+	 * @note: not really needed for testing EntityLookup, mut makes it easier to
+	 * set up tests for EntityRevisionLookup implementation in a consistent way.
+	 *
+	 * @return EntityRevision[]
 	 */
-	protected function getTestEntities() {
+	protected function getTestRevisions() {
 		static $entities = null;
 
 		if ( $entities === null ) {
 			$item = Item::newEmpty();
 			$item->setId( 42 );
 
-			$entities[11] = $item;
+			$entities[11] = new EntityRevision( $item, 11, '20130101001100' );
 
 			$item = $item->copy();
 			$item->setLabel( 'en', "Foo" );
 
-			$entities[12] = $item;
+			$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
 
 			$prop = Property::newEmpty();
 			$prop->setId( 753 );
 			$prop->setDataTypeId( "string" );
 
-			$entities[13] = $prop;
+			$entities[13] = new EntityRevision( $prop, 13, '20130101001300' );
 		}
 
 		return $entities;
 	}
 
-	protected function getLookup() {
-		$entities = $this->getTestEntities();
-		$lookup = $this->newEntityLoader( $entities );
+	/**
+	 * @return EntityLookup
+	 */
+	protected function getEntityLookup() {
+		$entities = $this->getTestRevisions();
+		$lookup = $this->newEntityLookup( $entities );
 
 		return $lookup;
 	}
@@ -115,7 +120,7 @@ abstract class EntityLookupTest extends EntityTestCase {
 
 		$revision = $this->resolveLogicalRevision( $revision );
 
-		$lookup = $this->getLookup();
+		$lookup = $this->getEntityLookup();
 		$entity = $lookup->getEntity( $id, $revision );
 
 		if ( $shouldExist == true ) {
@@ -157,7 +162,7 @@ abstract class EntityLookupTest extends EntityTestCase {
 	 * @param bool $expected
 	 */
 	public function testHasEntity( EntityId $id, $expected ) {
-		$lookup = $this->getLookup();
+		$lookup = $this->getEntityLookup();
 		$result = $lookup->hasEntity( $id );
 
 		$this->assertEquals( $expected, $result );
@@ -169,53 +174,6 @@ abstract class EntityLookupTest extends EntityTestCase {
 		} else {
 			$this->assertNull( $entity );
 		}
-	}
-
-	public static function provideGetEntities() {
-		return array(
-			array( // #0
-				array(),
-				array(),
-				array( new ItemId( 'Q42' ) ),
-				array( 'Q42' => new ItemId( 'Q42' ) ),
-			),
-			array( // #1
-				array( new ItemId( 'Q42' ), new ItemId( 'Q33' ) ),
-				array( 'Q42' => new ItemId( 'Q42' ), 'Q33' => null ),
-				array( new ItemId( 'Q42' ), new PropertyId( 'P753' ), new PropertyId( 'P777' ) ),
-				array( 'Q42' => new ItemId( 'Q42' ), 'P753' => new PropertyId( 'P753' ), 'P777' => null ),
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetEntities
-	 *
-	 * @note check two batches to make sure overlapping batches don't confuse caching.
-	 */
-	public function testGetEntities( $batch1, $expected1, $batch2, $expected2 ) {
-		$lookup = $this->getLookup();
-
-		// check first batch
-		$entities1 = $lookup->getEntities( $batch1 );
-		$ids1 = $this->getIdsOfEntities( $entities1 );
-
-		$this->assertArrayEquals( $expected1, $ids1, false, true );
-
-		// check second batch
-		$entities2 = $lookup->getEntities( $batch2 );
-		$ids2 = $this->getIdsOfEntities( $entities2 );
-
-		$this->assertArrayEquals( $expected2, $ids2, false, true );
-	}
-
-	protected function getIdsOfEntities( array $entities ) {
-		return array_map(
-			function( $entity ) {
-				return $entity == null ? null : $entity->getId();
-			},
-			$entities
-		);
 	}
 
 }
