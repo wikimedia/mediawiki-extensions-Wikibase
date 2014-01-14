@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_4b15089c",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimview.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-14T13:25:18Z",
+      "side": 1,
+      "message": "should not be @file or @ingroup in comments any more :)",
+      "revId": "c7c425d2fb958cb844cbb886483af07681d15c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
