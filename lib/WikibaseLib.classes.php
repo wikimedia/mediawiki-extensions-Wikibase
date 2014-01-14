@@ -179,7 +179,7 @@ return call_user_func( function() {
 		'Wikibase\CachingPropertyInfoStore' => 'includes/store/CachingPropertyInfoStore.php',
 
 		// includes/store/sql
-		'Wikibase\CachingEntityLoader' => 'includes/store/sql/CachingEntityLoader.php',
+		'Wikibase\CachingEntityLoader' => 'includes/store/sql/CachingEntityRevisionLookuponLookup.php',
 		'Wikibase\SiteLinkTable' => 'includes/store/sql/SiteLinkTable.php',
 		'Wikibase\WikiPageEntityLookup' => 'includes/store/sql/WikiPageEntityLookup.php',
 		'Wikibase\TermSqlIndex' => 'includes/store/sql/TermSqlIndex.php',

@@ -190,15 +190,15 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * Create a new EntityLookup
 	 *
-	 * @return CachingEntityLoader
+	 * @return CachingEntityRevisionLookup
 	 */
 	protected function newEntityLookup() {
 		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
-		//      transient local cache in CachingEntityLoader.
+		//      transient local cache in CachingEntityRevisionLookup.
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 		$lookup = new WikiPageEntityLookup( $this->repoWiki, $this->cacheType, $this->cacheDuration, $key );
-		return new CachingEntityLoader( $lookup );
+		return new CachingEntityRevisionLookup( $lookup );
 	}
 
 	/**

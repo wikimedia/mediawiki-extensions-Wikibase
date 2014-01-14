@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\CachingEntityLoader;
+use Wikibase\CachingEntityRevisionLookup;
 use Wikibase\Query;
 use Wikibase\EntityLookup;
 
@@ -32,7 +32,7 @@ class CachingEntityLoaderTest extends EntityLookupTest {
 			$mock->putEntity( $entity, $rev );
 		}
 
-		return new CachingEntityLoader( $mock );
+		return new CachingEntityRevisionLookup( $mock );
 	}
 
 }
