@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_013361f4",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-14T18:34:02Z",
+      "side": 1,
+      "message": "ok, thanks for the explanation. i\u0027m still blurry on how the binding works.",
+      "parentUuid": "aef5673e_81009105",
+      "revId": "6e8050cafa30f0c5dac86e7f066e7e2683ac135c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_3e44406e",
         "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
         "patchSetId": 1
