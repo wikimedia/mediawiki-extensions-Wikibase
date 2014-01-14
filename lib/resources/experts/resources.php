@@ -42,11 +42,9 @@ return call_user_func( function() {
 				'jquery.valueview.Expert',
 				'jquery.valueview.experts.StringValue',
 				'jquery.wikibase.entityselector',
-				'mediawiki.Title',
 				'mediawiki.util',
 				'wikibase',
 				'wikibase.datamodel',
-				'wikibase.store.FetchedContent',
 			),
 		),
 
@@ -60,9 +58,7 @@ return call_user_func( function() {
 				'jquery.valueview.BifidExpert',
 				'jquery.valueview.experts.StaticDom',
 				'wikibase',
-				'wikibase.datamodel',
 				'wikibase.experts.EntityIdInput',
-				'wikibase.utilities',
 			),
 		),
 
