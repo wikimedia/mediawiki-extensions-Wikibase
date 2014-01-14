@@ -33,6 +33,8 @@ return call_user_func( function() {
 				'jquery.wikibase.claimgrouplabelscroll',
 				'wikibase.ui.initEntity',
 				'wikibase.ui.initTermBox',
+				'wikibase.store.EntityStore',
+				'wikibase.seedEntityStoreFromMwConfig'
 			),
 			'messages' => array(
 				'wikibase-statements',
@@ -55,8 +57,6 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.serialization',
 				'wikibase.serialization.entities',
-				'wikibase.serialization.fetchedcontent',
-				'wikibase.store.FetchedContent',
 			),
 		),
 

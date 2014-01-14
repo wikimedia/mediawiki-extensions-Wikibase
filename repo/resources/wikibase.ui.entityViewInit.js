@@ -102,10 +102,14 @@
 			// the entity node (see FIXME below).
 			$claims.toolbarcontroller( toolbarControllerConfig ); // BUILD TOOLBARS
 
+			var entityStore = new wb.store.EntityStore();
+			wb.seedEntityStoreFromMwConfig( entityStore );
+
 			// FIXME: Initializing entityview on $claims leads to the claim section inserted as
 			// child of $claims. It should be direct child of ".wb-entity".
 			$claims.entityview( {
-				value: wb.entity
+				value: wb.entity,
+				entityStore: entityStore
 			} ).appendTo( $claimsParent );
 
 			// add 'wb-claim' id to entity page's Claims heading:
