@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_debf94a6",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T17:09:38Z",
+      "side": 1,
+      "message": "Testing leftover, probably... Done",
+      "parentUuid": "aef5673e_4be62815",
+      "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_8b2d5044",
         "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-14T11:05:38Z",
       "side": 1,
       "message": "why final?",
+      "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_1ecdfc62",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T17:09:38Z",
+      "side": 1,
+      "message": "Wanted to make it clear that this shouldn\u0027t be reused... but I guess that doesn\u0027t matter to much after all... removed",
+      "parentUuid": "aef5673e_8b2d5044",
       "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_beea909a",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T17:09:38Z",
+      "side": 1,
+      "message": "Sounds better yes... done",
+      "parentUuid": "aef5673e_4b274860",
+      "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_2b1c0418",
         "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
         "patchSetId": 8
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_fec93856",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T17:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_2b1c0418",
+      "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_abd7f427",
         "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
         "patchSetId": 8
@@ -81,6 +153,24 @@
       "writtenOn": "2014-01-14T11:05:38Z",
       "side": 1,
       "message": "Please include test cases for associative arrays, and arrays that are already 1-based, but have their entries not in ascending order. Bother should be left alone be renumber.",
+      "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_fef01890",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-14T17:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_abd7f427",
       "revId": "5ad1e729c6e0c739c1f4925b04f2f391aa1ce390",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
