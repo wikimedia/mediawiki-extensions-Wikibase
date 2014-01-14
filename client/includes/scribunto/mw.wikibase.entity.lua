@@ -104,6 +104,18 @@ methodtable.getProperties = function( entity )
 	return properties
 end
 
+methodtable.formatPropertyValues = function( entity, propertyId )
+	local formatted = php.formatPropertyValues(
+		entity.id,
+		propertyId
+	)
+
+	return {
+		value = formatted,
+		label = mw.wikibase.label( propertyId )
+	}
+end
+
 mw.wikibase.entity = entity
 package.loaded['mw.wikibase.entity'] = entity
 mw_interface = nil

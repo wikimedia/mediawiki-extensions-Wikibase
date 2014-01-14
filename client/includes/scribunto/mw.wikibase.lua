@@ -54,7 +54,7 @@ function wikibase.setupInterface()
 			return entity
 		end
 
-		local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+		local id = php.getEntityId( tostring( 'Berlin' ) )
 
 		if id == nil then
 			entity = nil
