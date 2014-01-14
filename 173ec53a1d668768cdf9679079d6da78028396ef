@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_25d2fad5",
+        "filename": "repo/resources/wikibase.ui.scrapeFormattedValues.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-01-14T14:49:15Z",
+      "side": 1,
+      "message": "can we put the two \"inner eachs\" in to their own method?",
+      "revId": "173ec53a1d668768cdf9679079d6da78028396ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
