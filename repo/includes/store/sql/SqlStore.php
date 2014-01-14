@@ -22,11 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
 class SqlStore implements Store {
 
 	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup = null;
-
-	/**
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup = null;
@@ -345,31 +340,14 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::getEntityLookup
+	 * @see SqlStore::getEntityRevisionLookup
 	 *
 	 * @since 0.4
 	 *
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		if ( !$this->entityLookup ) {
-			$this->entityLookup = $this->newEntityLookup();
-		}
-
-		return $this->entityLookup;
-	}
-
-	/**
-	 * Creates a new EntityLookup
-	 *
-	 * @return EntityLookup
-	 */
-	protected function newEntityLookup() {
-		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
-		//      transient local cache in CachingEntityLoader.
-		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
-		$key = $this->cachePrefix . ':WikiPageEntityLookup';
-		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
-		return new CachingEntityLoader( $lookup );
+		return $this->getEntityRevisionLookup();
 	}
 
 	/**
@@ -393,10 +371,25 @@ class SqlStore implements Store {
 	 * @return EntityRevisionLookup
 	 */
 	protected function newEntityRevisionLookup() {
-		//TODO: implement CachingEntityLoader based on EntityRevisionLookup instead of
-		//      EntityLookup. Then we can layer an EntityLookup on top of that.
+		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
-		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
+
+		$lookup = new WikiPageEntityLookup( false );
+
+		//FIXME: once we have the EntityStore in place, the local cache should get purged automatically
+		//       even while testing. So when we have EntityStore, remove this conditional.
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			// Lower caching layer using persistent cache (e.g. memcached).
+			// We need to verify the revision ID against the database to avoid stale data.
+			$lookup = new CachingEntityRevisionLookup( $lookup, wfGetCache( $this->cacheType ), $this->cacheDuration, $key );
+			$lookup->setVerifyRevision( true );
+
+			// Top caching layer using an in-process hash.
+			// No need to verify the revision ID, we'll ignore updates that happen during the request.
+			$lookup = new CachingEntityRevisionLookup( $lookup, new \HashBagOStuff() );
+			$lookup->setVerifyRevision( false );
+		}
+
 		return $lookup;
 	}
 
