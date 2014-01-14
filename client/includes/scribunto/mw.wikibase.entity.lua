@@ -94,6 +94,18 @@ methodtable.getProperties = function( entity )
 	return properties
 end
 
+methodtable.renderClaims = function( entity, propertyId )
+	formattedProperty = php.renderClaimsByPropertyId(
+		entity.id,
+		propertyId
+	)
+
+	return {
+		value = formattedProperty,
+		label = mw.wikibase.label( propertyId )
+	}
+end
+
 mw.wikibase.entity = entity
 package.loaded['mw.wikibase.entity'] = entity
 mw_interface = nil
