@@ -165,7 +165,12 @@ final class LibHooks {
 				'tests/qunit/jquery.wikibase/jquery.wikibase.claimview.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimview'
+				'jquery.wikibase.claimview',
+				'wikibase.store.EntityStore',
+				'wikibase.datamodel',
+				'wikibase.store.FetchedContent',
+				'dataValues.values',
+				'mediawiki.Title'
 			),
 		);
 
@@ -203,6 +208,10 @@ final class LibHooks {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.snaklistview',
+				'wikibase.store.EntityStore',
+				'wikibase.store.FetchedContent',
+				'wikibase.datamodel',
+				'mediawiki.Title'
 			),
 		);
 
@@ -212,6 +221,26 @@ final class LibHooks {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.wbtooltip',
+			),
+		);
+
+		$testModules['qunit']['wikibase.compileEntityStoreFromMwConfig.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/wikibase.compileEntityStoreFromMwConfig.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.compileEntityStoreFromMwConfig',
+				'wikibase.tests.qunit.testrunner'
+			),
+		);
+
+		$testModules['qunit']['wikibase.store.EntityStore.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/wikibase.store/store.EntityStore.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.store.EntityStore',
+				'wikibase.tests.qunit.testrunner'
 			),
 		);
 
