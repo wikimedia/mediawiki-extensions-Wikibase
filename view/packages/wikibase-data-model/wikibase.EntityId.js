@@ -1,9 +1,8 @@
 /**
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( wb, dv ) {
+( function( wb, dv, util ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
@@ -29,7 +28,7 @@
 		this._numericId = numericId;
 	};
 
-	wb.EntityId = dv.util.inherit( 'WbEntityId', PARENT, constructor, {
+	wb.EntityId = util.inherit( 'WbEntityId', PARENT, constructor, {
 
 		/**
 		 * @type String
@@ -154,4 +153,4 @@ wb.EntityId.TYPE = 'wikibase-entityid';
 
 dv.registerDataValue( wb.EntityId );
 
-}( wikibase, dataValues ) );
+}( wikibase, dataValues, util ) );

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( wb, dv ) {
+( function( wb, dv, util ) {
 'use strict';
 
 var PARENT = wb.Snak,
@@ -24,7 +24,7 @@ var PARENT = wb.Snak,
  * @param {string} propertyId
  * @param {dv.DataValue} value
  */
-var SELF = wb.PropertyValueSnak = wb.utilities.inherit( 'WbPropertyValueSnak', PARENT, constructor, {
+var SELF = wb.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak', PARENT, constructor, {
 	/**
 	 * @type dv.DataValue
 	 */
@@ -84,4 +84,4 @@ var SELF = wb.PropertyValueSnak = wb.utilities.inherit( 'WbPropertyValueSnak', P
  */
 SELF.TYPE = 'value';
 
-}( wikibase, dataValues ) );
+}( wikibase, dataValues, util ) );

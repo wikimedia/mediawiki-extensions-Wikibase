@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb ) {
+( function( wb, util ) {
 'use strict';
 
 var PARENT = wb.Snak;
@@ -16,7 +16,7 @@ var PARENT = wb.Snak;
  *
  * @param {Number} propertyId
  */
-var SELF = wb.PropertyNoValueSnak = wb.utilities.inherit( 'WbPropertyNoValueSnak', PARENT, {} );
+var SELF = wb.PropertyNoValueSnak = util.inherit( 'WbPropertyNoValueSnak', PARENT, {} );
 
 /**
  * @see wb.Snak.TYPE
@@ -24,4 +24,4 @@ var SELF = wb.PropertyNoValueSnak = wb.utilities.inherit( 'WbPropertyNoValueSnak
  */
 SELF.TYPE = 'novalue';
 
-}( wikibase ) );
+}( wikibase, util ) );
