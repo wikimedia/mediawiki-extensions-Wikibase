@@ -30,13 +30,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends \Scribunto_LuaEngineTestBas
 		);
 	}
 
-	/** @dataProvider provideLuaData */
-	function testLua( $key = null, $testName = null, $expected = null ) {
-		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
-
-		parent::testLua( $key, $testName, $expected );
-	}
-
 	protected function setUp() {
 		parent::setUp();
 
@@ -47,6 +40,8 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends \Scribunto_LuaEngineTestBas
 		if ( !class_exists( 'Scribunto_LuaStandaloneEngine' ) ) {
 			$this->markTestSkipped( 'test requires Scribunto' );
 		}
+
+		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
 	}
 
 	public function testConstructor() {
@@ -71,6 +66,20 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends \Scribunto_LuaEngineTestBas
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$expected = array( Settings::get( 'siteGlobalID' ) );
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
+	}
+
+	public function testFormatPropertyValues() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$this->assertSame(
+			array( '' ),
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536' )
+		);
+	}
+
+	public function testFormatPropertyValuesInvalidPropertyId() {
+		$this->setExpectedException( 'ScribuntoException' );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->formatPropertyValues( 'Q1', '$invalidEntityId€' );
 	}
 
 	private function newScribuntoLuaWikibaseLibrary() {
