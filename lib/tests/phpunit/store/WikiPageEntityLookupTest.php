@@ -2,9 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Entity;
-use Wikibase\EntityLookup;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\WikiPageEntityLookup;
@@ -22,7 +21,7 @@ use Wikibase\WikiPageEntityLookup;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikipageEntityLookupTest extends EntityLookupTest {
+class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 
 	/**
 	 * @var EntityRevision[]
@@ -35,24 +34,6 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 		}
 
 		parent::setUp();
-	}
-
-	/**
-	 * @see EntityLookupTest::newEntityLoader()
-	 *
-	 * @return EntityLookup
-	 */
-	protected function newEntityLoader( array $entities ) {
-		// make sure all test entities are in the database.
-		/* @var Entity $entity */
-		foreach ( $entities as $logicalRev => $entity ) {
-			if ( !isset( self::$testEntities[$logicalRev] ) ) {
-				$rev = self::storeTestEntity( $entity );
-				self::$testEntities[$logicalRev] = $rev;
-			}
-		}
-
-		return new WikiPageEntityLookup( false, CACHE_DB );
 	}
 
 	protected static function storeTestEntity( Entity $entity ) {
@@ -79,48 +60,34 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 		);
 	}
 
+	/**
+	 * @see EntityRevisionLookupTest::newEntityRevisionLookup(newEntityLookup
+	 *
+	 * @param EntityRevision[] $entitieswiki
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	protected function newEntityRevisionLookup( array $entities ) {
+		// make sure all test entities are in the database.
+		/* @var EntityRevision $entityRev */
+		foreach ( $entities as $entityRev ) {
+			$logicalRev = $entityRev->getRevision();
+
+			if ( !isset( self::$testEntities[$logicalRev] ) ) {
+				$rev = self::storeTestEntity( $entityRev->getEntity() );
+				self::$testEntities[$logicalRev] = $rev;
+			}
+		}
+
+		return new WikiPageEntityLookup( false );
+	}
+
 	protected function resolveLogicalRevision( $revision ) {
 		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
 			$revision = self::$testEntities[$revision]->getRevision();
 		}
 
 		return $revision;
-	}
-
-	/**
-	 * @dataProvider provideGetEntity
-	 *
-	 * @param EntityId $id The entity to get
-	 * @param bool|int $revision The revision to get (or null)
-	 * @param bool|int $shouldExist
-	 * @param string|null $expectException
-	 */
-	public function testGetEntityRevision( EntityId $id, $revision, $shouldExist, $expectException = null ) {
-		if ( $expectException !== null ) {
-			$this->setExpectedException( $expectException );
-		}
-
-		$revision = $this->resolveLogicalRevision( $revision );
-
-		/**
-		 * @var WikiPageEntityLookup $lookup
-		 */
-		$lookup = $this->getLookup();
-		$entityRev = $lookup->getEntityRevision( $id, $revision );
-
-		if ( $shouldExist ) {
-			$this->assertNotNull( $entityRev, "ID " . $id->__toString() );
-			$this->assertEquals(
-				$id,
-				$entityRev->getEntity()->getId()
-			);
-
-			if ( $revision > 0 ) {
-				$this->assertEquals( $revision, $entityRev->getRevision() );
-			}
-		} else {
-			$this->assertNull( $entityRev, "ID " . $id->__toString() );
-		}
 	}
 
 }
