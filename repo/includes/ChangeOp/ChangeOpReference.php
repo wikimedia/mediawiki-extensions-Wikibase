@@ -69,12 +69,12 @@ class ChangeOpReference extends ChangeOpBase {
 			throw new InvalidArgumentException( '$referenceHash needs to be a string' );
 		}
 
-		if ( !( $reference instanceof Reference ) && !is_null( $reference ) ) {
-			throw new InvalidArgumentException( '$reference needs to be an instance of Reference or null' );
+		if ( $referenceHash === '' ) {
+			throw new InvalidArgumentException( '$referenceHash needs to be set' );
 		}
 
-		if ( $referenceHash === '' && $reference === null ) {
-			throw new InvalidArgumentException( 'Either $referenceHash or $reference needs to be set' );
+		if ( !( $reference instanceof Reference ) ) {
+			throw new InvalidArgumentException( '$reference needs to be an instance of Reference' );
 		}
 
 		if( !is_null( $index ) && !is_integer( $index ) ) {
@@ -89,7 +89,6 @@ class ChangeOpReference extends ChangeOpBase {
 
 	/**
 	 * @see ChangeOp::apply()
-	 * - the reference gets removed when $referenceHash is set and $reference is not set
 	 * - a new reference gets added when $referenceHash is empty and $reference is set
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
 	 */
@@ -111,11 +110,7 @@ class ChangeOpReference extends ChangeOpBase {
 		if ( $this->referenceHash === '' ) {
 			$this->addReference( $references, $summary );
 		} else {
-			if ( $this->reference != null ) {
-				$this->setReference( $references, $summary );
-			} else {
-				$this->removeReference( $references, $summary );
-			}
+			$this->setReference( $references, $summary );
 		}
 
 		if ( $summary !== null ) {
@@ -173,25 +168,6 @@ class ChangeOpReference extends ChangeOpBase {
 		$references->removeReferenceHash( $this->referenceHash );
 		$references->addReference( $this->reference, $this->index );
 		$this->updateSummary( $summary, 'set' );
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param References $references
-	 * @param Summary $summary
-	 *
-	 * @throws ChangeOpException
-	 */
-	protected function removeReference( References $references, Summary $summary = null ) {
-		if ( !$references->hasReferenceHash( $this->referenceHash ) ) {
-			throw new ChangeOpException( "Reference with hash $this->referenceHash does not exist" );
-		}
-		$references->removeReferenceHash( $this->referenceHash );
-		$this->updateSummary( $summary, 'remove' );
-		if ( $summary !== null ) {
-			$summary->addAutoCommentArgs( 1 ); //atomic edit, only one reference changed
-		}
 	}
 
 	/**

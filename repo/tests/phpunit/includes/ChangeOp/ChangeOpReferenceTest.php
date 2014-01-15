@@ -156,45 +156,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedIndex, $references->indexOf( $newReference ) );
 	}
 
-	public function changeOpRemoveProvider() {
-		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
-
-		$item = $this->provideNewItemWithClaim( 'q345', $snak );
-		$claims = $item->getClaims();
-		/** @var Statement $claim */
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
-		$snaks = new SnakList();
-		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$newReference = new Reference( $snaks );
-		$references = $claim->getReferences();
-		$references->addReference( $newReference );
-		$claim->setReferences( $references );
-		$item->setClaims( new Claims( $claims ) );
-		$referenceHash = $newReference->getHash();
-		$changeOp = new ChangeOpReference( $claimGuid, null, $referenceHash );
-		$args[] = array ( $item, $changeOp, $referenceHash );
-
-		return $args;
-	}
-
-	/**
-	 * @dataProvider changeOpRemoveProvider
-	 *
-	 * @param Entity $item
-	 * @param ChangeOpReference $changeOp
-	 * @param string $referenceHash
-	 */
-	public function testApplyRemoveReference( $item, $changeOp, $referenceHash ) {
-		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = $item->getClaims();
-		/** @var Statement $claim */
-		$claim = reset( $claims );
-		$references = $claim->getReferences();
-		$this->assertFalse( $references->hasReferenceHash( $referenceHash ), "Reference still exists" );
-	}
-
 	public function changeOpSetProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
