@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\ObjectComparer;
-use Wikibase\Item;
 use Wikibase\ItemContent;
 
 /**

@@ -40,6 +40,11 @@ class ChangeOpsMerge {
 		$this->ignoreConflicts = $ignoreConflicts;
 	}
 
+	/**
+	 * @param array $ignoreConflicts can contain strings 'label', 'description', 'sitelink'
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	private function assertValidIgnoreConflictValues( $ignoreConflicts ) {
 		if( !is_array( $ignoreConflicts ) ){
 			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );

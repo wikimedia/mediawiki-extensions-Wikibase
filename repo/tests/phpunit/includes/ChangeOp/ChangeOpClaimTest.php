@@ -3,15 +3,15 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpClaim;
-use Wikibase\Claim;
-use Wikibase\Claims;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Entity;
-use Wikibase\Item;
 use InvalidArgumentException;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpClaim

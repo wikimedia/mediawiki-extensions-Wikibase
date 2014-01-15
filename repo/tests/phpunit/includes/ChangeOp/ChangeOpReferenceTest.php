@@ -2,15 +2,19 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use LogicException;
-use Wikibase\Claims;
 use Wikibase\ChangeOp\ChangeOpReference;
-use Wikibase\Entity;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\ItemContent;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\Reference;
-use Wikibase\SnakList;
 use InvalidArgumentException;
+use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpReference
@@ -28,10 +32,10 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
 		$snaks = new SnakList();
-		$snaks[] = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 		$validReference = new Reference( $snaks );
 		$validReferenceHash = $validReference->getHash();
 
@@ -58,7 +62,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpAddProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
@@ -66,7 +70,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
 		$snaks = new SnakList();
-		$snaks[] = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
+		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$newReference = new Reference( $snaks );
 		$changeOp = new ChangeOpReference( $claimGuid, $newReference, '' );
 		$referenceHash = $newReference->getHash();
@@ -85,6 +89,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyAddNewReference( $item, $changeOp, $referenceHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$claims = $item->getClaims();
+		/** @var Statement $claim */
 		$claim = reset( $claims );
 		$references = $claim->getReferences();
 		$this->assertTrue( $references->hasReferenceHash( $referenceHash ), "No reference with expected hash" );
@@ -96,6 +101,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$claims = $item->getClaims();
+		/** @var Statement $claim */
 		$claim = reset( $claims );
 
 		$references = array(
@@ -144,21 +150,23 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$this->assertTrue( $changeOp->apply( $item ), 'Applying the ChangeOp did not return true' );
 		$claims = new Claims( $item->getClaims() );
+		/** @var Statement $claim */
 		$claim = reset( $claims );
 		$references = $claim->getReferences();
 		$this->assertEquals( $expectedIndex, $references->indexOf( $newReference ) );
 	}
 
 	public function changeOpRemoveProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
+		/** @var Statement $claim */
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
 		$snaks = new SnakList();
-		$snaks[] = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
+		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$newReference = new Reference( $snaks );
 		$references = $claim->getReferences();
 		$references->addReference( $newReference );
@@ -181,21 +189,23 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyRemoveReference( $item, $changeOp, $referenceHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$claims = $item->getClaims();
+		/** @var Statement $claim */
 		$claim = reset( $claims );
 		$references = $claim->getReferences();
 		$this->assertFalse( $references->hasReferenceHash( $referenceHash ), "Reference still exists" );
 	}
 
 	public function changeOpSetProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$claims = $item->getClaims();
+		/** @var Statement $claim */
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
 		$snaks = new SnakList();
-		$snaks[] = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
+		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$newReference = new Reference( $snaks );
 		$references = $claim->getReferences();
 		$references->addReference( $newReference );
@@ -203,7 +213,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$item->setClaims( new Claims( $claims ) );
 		$referenceHash = $newReference->getHash();
 		$snaks = new SnakList();
-		$snaks[] = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedQualifier' ) );
+		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
 		$changedReference = new Reference( $snaks );
 		$changeOp = new ChangeOpReference( $claimGuid, $changedReference, $referenceHash );
 		$args[] = array ( $item, $changeOp, $changedReference->getHash() );
@@ -213,6 +223,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 
+		/** @var Reference[] $references */
 		$references = array(
 			new Reference( new SnakList( array( new PropertyNoValueSnak( 1 ) ) ) ),
 			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
@@ -245,6 +256,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	public function testApplySetReference( $item, $changeOp, $referenceHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$claims = new Claims( $item->getClaims() );
+		/** @var Statement $claim */
 		$claim = reset( $claims );
 		$references = $claim->getReferences();
 		$this->assertTrue( $references->hasReferenceHash( $referenceHash ), "No reference with expected hash" );

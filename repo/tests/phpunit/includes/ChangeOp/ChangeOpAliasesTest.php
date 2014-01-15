@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpAliases;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
 
@@ -38,7 +38,7 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $action
 	 */
 	public function testInvalidConstruct( $language, $aliases, $action ) {
-		$changeOpLabel = new ChangeOpAliases( $language, $aliases, $action );
+		new ChangeOpAliases( $language, $aliases, $action );
 	}
 
 	public function changeOpAliasesProvider() {

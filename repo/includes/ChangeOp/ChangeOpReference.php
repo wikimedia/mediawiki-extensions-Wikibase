@@ -3,12 +3,12 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\Claims;
-use Wikibase\Entity;
-use Wikibase\Reference;
-use Wikibase\References;
-use Wikibase\Snak;
-use Wikibase\Statement;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\References;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Summary;
 
 /**
@@ -58,7 +58,7 @@ class ChangeOpReference extends ChangeOpBase {
 	 * @param string $referenceHash
 	 * @param int|null $index
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $claimGuid, $reference, $referenceHash, $index = null ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
@@ -187,7 +187,6 @@ class ChangeOpReference extends ChangeOpBase {
 		if ( !$references->hasReferenceHash( $this->referenceHash ) ) {
 			throw new ChangeOpException( "Reference with hash $this->referenceHash does not exist" );
 		}
-		$removedReference = $references->getReference( $this->referenceHash );
 		$references->removeReferenceHash( $this->referenceHash );
 		$this->updateSummary( $summary, 'remove' );
 		if ( $summary !== null ) {

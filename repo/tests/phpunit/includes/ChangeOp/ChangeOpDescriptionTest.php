@@ -26,7 +26,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct() {
-		$changeOpDescription = new ChangeOpDescription( 42, 'myOld' );
+		new ChangeOpDescription( 42, 'myOld' );
 	}
 
 	public function changeOpDescriptionProvider() {

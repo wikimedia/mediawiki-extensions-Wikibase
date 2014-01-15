@@ -3,10 +3,12 @@
 namespace Wikibase\Test;
 
 use DataValues\DataValue;
+use DataValues\StringValue;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\Claims;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
-use Wikibase\Entity;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
@@ -29,9 +31,9 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
 		$validGuidGenerator = new ClaimGuidGenerator( $item->getId() );
-		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
-		$validSnak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
 		$args = array();
 		$args[] = array( 123, $validSnak, $validGuidGenerator );
@@ -49,22 +51,22 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $claimGuid, $snak, $guidGenerator ) {
-		$ChangeOpMainSnak = new ChangeOpMainSnak( $claimGuid, $snak, $guidGenerator );
+		new ChangeOpMainSnak( $claimGuid, $snak, $guidGenerator );
 	}
 
 	public function changeOpProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
-		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newSnak' ) );
+		$newSnak = new PropertyValueSnak( 78462378, new StringValue( 'newSnak' ) );
 		$claimGuid = '';
 		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
 		$item = $this->provideNewItemWithClaim( 'q234', $snak );
-		$newSnak = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedSnak' ) );
+		$newSnak = new PropertyValueSnak( 78462378, new StringValue( 'changedSnak' ) );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
@@ -102,8 +104,8 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideChangeOps() {
-		$snak = new \Wikibase\PropertyValueSnak( 67573284, new \DataValues\StringValue( 'test' ) );
-		$newSnak = new \Wikibase\PropertyValueSnak( 12651236, new \DataValues\StringValue( 'newww' ) );
+		$snak = new PropertyValueSnak( 67573284, new StringValue( 'test' ) );
+		$newSnak = new PropertyValueSnak( 12651236, new StringValue( 'newww' ) );
 		$item = $this->provideNewItemWithClaim( 'q777', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
