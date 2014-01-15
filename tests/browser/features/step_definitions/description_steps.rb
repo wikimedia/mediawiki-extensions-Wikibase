@@ -7,35 +7,35 @@
 # tests for item description
 
 When /^I click the description edit button$/ do
-  on(ItemPage).editDescriptionLink
+  on(ItemPage).edit_description_link
 end
 
 When /^I press the ESC key in the description input field$/ do
-  on(ItemPage).descriptionInputField_element.send_keys :escape
+  on(ItemPage).description_input_field_element.send_keys :escape
 end
 
 When /^I press the RETURN key in the description input field$/ do
   on(ItemPage) do |page|
-    page.descriptionInputField_element.send_keys :return
+    page.description_input_field_element.send_keys :return
     page.wait_for_api_callback
   end
 end
 
 When /^I click the description cancel button$/ do
-  on(ItemPage).cancelDescriptionLink
+  on(ItemPage).cancel_description_link
 end
 
 When /^I click the description save button$/ do
   on(ItemPage) do |page|
-    page.saveDescriptionLink
+    page.save_description_link
     page.wait_for_api_callback
   end
 end
 
 When /^I enter "(.+)" as description$/ do |value|
   on(ItemPage) do |page|
-    page.descriptionInputField_element.clear
-    page.descriptionInputField = value
+    page.description_input_field_element.clear
+    page.description_input_field = value
   end
 end
 
@@ -44,56 +44,56 @@ When /^I enter a long string as description$/ do
 end
 
 Then /^Description edit button should be there$/ do
-  on(ItemPage).editDescriptionLink?.should be_true
+  on(ItemPage).edit_description_link?.should be_true
 end
 
 Then /^Description edit button should not be there$/ do
-  on(ItemPage).editDescriptionLink?.should be_false
+  on(ItemPage).edit_description_link?.should be_false
 end
 
 Then /^Description input element should be there$/ do
-  on(ItemPage).descriptionInputField?.should be_true
+  on(ItemPage).description_input_field?.should be_true
 end
 
 Then /^Description input element should not be there$/ do
-  on(ItemPage).descriptionInputField?.should be_false
+  on(ItemPage).description_input_field?.should be_false
 end
 
 Then /^Description input element should contain original description$/ do
-  on(ItemPage).descriptionInputField.should == @item_under_test["description"]
+  on(ItemPage).description_input_field.should == @item_under_test["description"]
 end
 
 Then /^Description input element should be empty$/ do
-  on(ItemPage).descriptionInputField.should == ""
+  on(ItemPage).description_input_field.should == ""
 end
 
 Then /^Description cancel button should be there$/ do
-  on(ItemPage).cancelDescriptionLink?.should be_true
+  on(ItemPage).cancel_description_link?.should be_true
 end
 
 Then /^Description cancel button should not be there$/ do
-  on(ItemPage).cancelDescriptionLink?.should be_false
+  on(ItemPage).cancel_description_link?.should be_false
 end
 
 Then /^Description save button should be there$/ do
-  on(ItemPage).saveDescriptionLink?.should be_true
+  on(ItemPage).save_description_link?.should be_true
 end
 
 Then /^Description save button should not be there$/ do
-  on(ItemPage).saveDescriptionLink?.should be_false
+  on(ItemPage).save_description_link?.should be_false
 end
 
 Then /^Original description should be displayed$/ do
   on(ItemPage) do |page|
-    page.firstHeading.should be_true
-    page.entityDescriptionSpan.should be_true
-    page.entityDescriptionSpan.should == @item_under_test["description"]
+    page.first_heading.should be_true
+    page.entity_description_span.should be_true
+    page.entity_description_span.should == @item_under_test["description"]
   end
 end
 
 Then /^(.+) should be displayed as description$/ do |value|
   on(ItemPage) do |page|
-    page.entityDescriptionSpan.should be_true
-    page.entityDescriptionSpan.should == value
+    page.entity_description_span.should be_true
+    page.entity_description_span.should == value
   end
 end
