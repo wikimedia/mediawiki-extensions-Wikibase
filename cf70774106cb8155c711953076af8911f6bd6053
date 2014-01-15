@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "aef5673e_74ff8463",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "wikibase.datamodel, wb.store.FetchedContent, dataValues.values and mediawiki.Title dependencies.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_b434ec47",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "mw.Title dependency.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_147b98ec",
+        "filename": "lib/resources/Resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Dependency for $.evalJSON and mw.Title.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_54d7e0c4",
+        "filename": "lib/resources/jquery.valueview.experts.wikibase/experts.wikibase.EntityIdValue.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Please add the new parameter to the function documentation.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_315fce46",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Option should be documented and added to the options object above (same for other files the option is introduced).",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_f158465b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Why not use self.option( \u0027entityStore\u0027 )? (same for other files the option is introduced)",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_115cca4d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Documentation needs update.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_91e45aa5",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
         "patchSetId": 2
@@ -30,6 +149,143 @@
       "writtenOn": "2014-01-15T11:41:44Z",
       "side": 1,
       "message": "again lots more indenting!",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_748b0421",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Value.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Agree. Some functionality should probably be factored out into separate functions.",
+      "parentUuid": "aef5673e_71e9d67a",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_f476f438",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Value.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Please add some more comment why those line are necessary.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d48bf019",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Variation.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Please document new parameter above.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_f4a5d49b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Variation.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Please add the attribute to the prototype extension below.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_743e6428",
+        "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "\"seed\" does not seem to be the perfect expression. Probably, something like \"feedEntityStoreFromMwConfig\" or \"parseMwConfigToEntityStore\" would be a better choice.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d4d9b02d",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Please add @since tag to public functions.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_144dd8e0",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.snaklistview.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Might deserve a short comment why the entity store needs to be filled.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_7415449c",
+        "filename": "lib/tests/qunit/wikibase.store/store.EntityStore.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-01-15T16:48:35Z",
+      "side": 1,
+      "message": "Would be nice to have some vertical spacing adding some blank lines in that code block.",
       "revId": "cf70774106cb8155c711953076af8911f6bd6053",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
