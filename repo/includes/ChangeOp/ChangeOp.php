@@ -2,7 +2,7 @@
 
 namespace Wikibase\ChangeOp;
 
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
 /**

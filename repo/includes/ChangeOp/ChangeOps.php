@@ -3,7 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
 /**

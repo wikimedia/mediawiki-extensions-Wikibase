@@ -2,11 +2,14 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Claims;
+use DataValues\StringValue;
 use Wikibase\ChangeOp\ChangeOpQualifier;
-use Wikibase\Entity;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
+use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpQualifier
@@ -24,9 +27,9 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
-		$validSnak = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 		$validSnakHash = $validSnak->getHash();
 
 		$args = array();
@@ -51,14 +54,14 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpAddProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
-		$newQualifier = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
+		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '' );
 		$snakHash = $newQualifier->getHash();
 		$args[] = array ( $item, $changeOp, $snakHash );
@@ -82,14 +85,14 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpRemoveProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
-		$newQualifier = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
+		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$qualifiers = $claim->getQualifiers();
 		$qualifiers->addSnak( $newQualifier );
 		$claim->setQualifiers( $qualifiers );
@@ -117,20 +120,20 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpSetProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
-		$newQualifier = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'newQualifier' ) );
+		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$qualifiers = $claim->getQualifiers();
 		$qualifiers->addSnak( $newQualifier );
 		$claim->setQualifiers( $qualifiers );
 		$item->setClaims( new Claims( $claims ) );
 		$snakHash = $newQualifier->getHash();
-		$changedQualifier = new \Wikibase\PropertyValueSnak( 78462378, new \DataValues\StringValue( 'changedQualifier' ) );
+		$changedQualifier = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
 		$changeOp = new ChangeOpQualifier( $claimGuid, $changedQualifier, $snakHash );
 		$args[] = array ( $item, $changeOp, $changedQualifier->getHash() );
 

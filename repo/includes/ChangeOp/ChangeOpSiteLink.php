@@ -3,10 +3,10 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Entity;
-use Wikibase\Item;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Summary;
 
 /**
@@ -46,6 +46,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @param string $siteId
 	 * @param string|null $pageName Null in case the link with the provided siteId should be removed
+	 * @param array|null $badges
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -163,7 +164,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
 
-			$entity->addSiteLink( new SimpleSiteLink( $this->siteId, $pageName, $badges ) );
+			$entity->addSiteLink( new SiteLink( $this->siteId, $pageName, $badges ) );
 		}
 
 		return true;
