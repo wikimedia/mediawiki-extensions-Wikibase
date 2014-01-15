@@ -26,7 +26,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct() {
-		$changeOpLabel = new ChangeOpLabel( 42, 'myNew' );
+		new ChangeOpLabel( 42, 'myNew' );
 	}
 
 	public function changeOpLabelProvider() {

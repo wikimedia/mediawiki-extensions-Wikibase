@@ -3,10 +3,10 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\ByPropertyIdArray;
-use Wikibase\Claim;
-use Wikibase\Claims;
-use Wikibase\Entity;
+use Wikibase\DataModel\ByPropertyIdArray;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;

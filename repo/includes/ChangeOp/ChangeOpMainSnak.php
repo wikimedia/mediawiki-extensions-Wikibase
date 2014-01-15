@@ -3,11 +3,10 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Claims;
-use Wikibase\Entity;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Snak;
 use Wikibase\Summary;
 
 /**
@@ -40,9 +39,9 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 *
 	 * @param string $claimGuid
 	 * @param Snak|null $snak
-	 * @param EntityIdFormatter $idFormatter
 	 * @param ClaimGuidGenerator $guidGenerator
-	 * @throws \InvalidArgumentException
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $claimGuid, $snak, ClaimGuidGenerator $guidGenerator ) {
 		if ( !is_string( $claimGuid ) ) {
@@ -62,6 +61,9 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		$this->guidGenerator = $guidGenerator;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getClaimGuid() {
 		return $this->claimGuid;
 	}
