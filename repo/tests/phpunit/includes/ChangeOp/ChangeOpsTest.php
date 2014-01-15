@@ -125,7 +125,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException  \Wikibase\ChangeOp\ChangeOpException
+	 * @expectedException \Wikibase\ChangeOp\ChangeOpException
 	 */
 	public function testInvalidApply() {
 		$item = ItemContent::newEmpty();

@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Item;
 use InvalidArgumentException;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
@@ -47,9 +47,9 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpSiteLinkProvider() {
-		$deSiteLink = new SimpleSiteLink( 'dewiki', 'Berlin' );
-		$enSiteLink = new SimpleSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
-		$plSiteLink = new SimpleSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
+		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
+		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
+		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
 		$existingSiteLinks = array(
 			$deSiteLink,
@@ -84,7 +84,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			new ChangeOpSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) ),
 			array(
 				$deSiteLink,
-				new SimpleSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
+				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
 			)
 		);
 
@@ -94,7 +94,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			new ChangeOpSiteLink( 'plwiki', 'Test' ),
 			array(
 				$deSiteLink,
-				new SimpleSiteLink( 'plwiki', 'Test', array( new ItemId( 'Q42' ) ) )
+				new SiteLink( 'plwiki', 'Test', array( new ItemId( 'Q42' ) ) )
 			)
 		);
 
@@ -104,7 +104,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'Q149' ) ) ),
 			array(
 				$deSiteLink,
-				new SimpleSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q149' ) ) )
+				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q149' ) ) )
 			)
 		);
 
@@ -114,7 +114,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ) ),
 			array(
 				$deSiteLink,
-				new SimpleSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
+				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
 			)
 		);
 
@@ -126,7 +126,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param Item $entity
 	 * @param ChangeOpSiteLink $changeOpSiteLink
-	 * @param SimpleSiteLink[] $expectedSiteLinks
+	 * @param SiteLink[] $expectedSiteLinks
 	 */
 	public function testApply( Item $entity, ChangeOpSiteLink $changeOpSiteLink, array $expectedSiteLinks ) {
 		$changeOpSiteLink->apply( $entity );
@@ -138,8 +138,8 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidChangeOpSiteLinkProvider() {
-		$deSiteLink = new SimpleSiteLink( 'dewiki', 'Berlin' );
-		$plSiteLink = new SimpleSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
+		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
+		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
 		$existingSiteLinks = array(
 			$deSiteLink,

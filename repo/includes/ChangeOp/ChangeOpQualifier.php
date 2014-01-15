@@ -3,10 +3,10 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\Claims;
-use Wikibase\Entity;
-use Wikibase\Snak;
-use Wikibase\Snaks;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\Summary;
 
 /**

@@ -2,11 +2,13 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Claims;
+use DataValues\StringValue;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
-use Wikibase\Entity;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\ItemContent;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\ClaimGuidGenerator;
 use InvalidArgumentException;
 
 /**
@@ -25,7 +27,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 		$validClaimGuid = $guidGenerator->newGuid();
 		$validRank = 1;
 
@@ -42,12 +44,11 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $claimGuid, $rank ) {
-		$ChangeOpStatementRank = new ChangeOpStatementRank( $claimGuid, $rank );
+		new ChangeOpStatementRank( $claimGuid, $rank );
 	}
 
 	public function changeOpProvider() {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-		$snak = new \Wikibase\PropertyValueSnak( 2754236, new \DataValues\StringValue( 'test' ) );
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
