@@ -11,24 +11,24 @@
 
 	var valueParserProvider = new vp.ValueParserFactory( vp.NullParser );
 
-	valueParserProvider.registerParser(
-		dv.GlobeCoordinateValue.TYPE,
-		vp.GlobeCoordinateParser
+	valueParserProvider.registerDataValueParser(
+		vp.GlobeCoordinateParser,
+		dv.GlobeCoordinateValue.TYPE
 	);
 
-	valueParserProvider.registerParser(
-		dv.QuantityValue.TYPE,
-		vp.QuantityParser
+	valueParserProvider.registerDataValueParser(
+		vp.QuantityParser,
+		dv.QuantityValue.TYPE
 	);
 
-	valueParserProvider.registerParser(
-		dv.StringValue.TYPE,
-		vp.StringParser
+	valueParserProvider.registerDataValueParser(
+		vp.StringParser,
+		dv.StringValue.TYPE
 	);
 
-	valueParserProvider.registerParser(
-		dv.TimeValue.TYPE,
-		vp.TimeParser
+	valueParserProvider.registerDataValueParser(
+		vp.TimeParser,
+		dv.TimeValue.TYPE
 	);
 
 	/**

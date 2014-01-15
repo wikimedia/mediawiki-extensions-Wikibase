@@ -28,7 +28,6 @@
 
 	// Globals
 	"predef": [
-		"dataTypes", // TODO: Remove dataTypes dependency
 		"dataValues",
 		"globeCoordinate",
 		"jQuery",

@@ -27,8 +27,7 @@
 	},
 	"require": {
 		"composer/installers": ">=1.0.1",
-		"data-values/interfaces": "~0.1",
-		"data-values/data-types": "0.*,>=0.1.1"
+		"data-values/interfaces": "~0.1"
 	},
 	"autoload": {
 		"files" : [

@@ -40,7 +40,6 @@ return call_user_func( function() {
 				'ValueFormatterFactory.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'valueFormatters',
 			),
 		),

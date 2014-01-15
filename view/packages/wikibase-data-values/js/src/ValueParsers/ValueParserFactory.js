@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, vp, dt ) {
+( function( $, vp ) {
 	'use strict';
 
 	/**
@@ -38,60 +38,45 @@
 		_parsersForDataValueTypes: null,
 
 		/**
-		 * Registers a parser.
-		 * @since 0.1
-		 *
-		 * @param {dataTypes.DataType|string} purpose DataType object or DataValue type.
-		 * @param {Function} Parser ValueParser constructor.
-		 *
-		 * @throws {Error} if the parser constructor is invalid.
-		 * @throws {Error} no proper purpose is provided.
-		 */
-		registerParser: function( purpose, Parser ) {
-			if( !$.isFunction( Parser ) ) {
-				throw new Error( 'Invalid ValueParser constructor' );
-			}
-
-			if( purpose instanceof dt.DataType ) {
-				this._registerDataTypeParser( purpose, Parser );
-			} else if( typeof purpose === 'string' ) {
-				this._registerDataValueParser( purpose, Parser );
-			} else {
-				throw new Error( 'No sufficient purpose provided what to register the parser for' );
-			}
-		},
-
-		/**
 		 * Registers a parser for a certain data type.
 		 * @since 0.1
 		 *
-		 * @param {dataTypes.DataType} dataType
 		 * @param {Function} Parser
+		 * @param {string} dataTypeId
 		 *
+		 * @throws {Error} if no data type id is specified.
 		 * @throws {Error} if a parser for the specified dataType object is registered already.
 		 */
-		_registerDataTypeParser: function( dataType, Parser ) {
+		registerDataTypeParser: function( Parser, dataTypeId ) {
 			assertIsValueParserConstructor( Parser );
 
-			if( this._parsersForDataTypes[dataType.getId()] ) {
-				throw new Error( 'Parser for DataType "' + dataType.getId() + '" is registered '
-					+ 'already' );
+			if( dataTypeId === undefined ) {
+				throw new Error( 'No proper data type id provided to register the parser for' );
 			}
 
-			this._parsersForDataTypes[dataType.getId()] = Parser;
+			if( this._parsersForDataTypes[dataTypeId] ) {
+				throw new Error( 'Parser for DataType "' + dataTypeId + '" is registered already' );
+			}
+
+			this._parsersForDataTypes[dataTypeId] = Parser;
 		},
 
 		/**
 		 * Registers a parser for a certain data value type.
 		 * @since 0.1
 		 *
-		 * @param {string} dataValueType
 		 * @param {Function} Parser
+		 * @param {string} dataValueType
 		 *
+		 * @throws {Error} if no data value type is specified.
 		 * @throws {Error} if a parser for the specified DataValue type is registered already.
 		 */
-		_registerDataValueParser: function( dataValueType, Parser ) {
+		registerDataValueParser: function( Parser, dataValueType ) {
 			assertIsValueParserConstructor( Parser );
+
+			if( dataValueType === undefined ) {
+				throw new Error( 'No proper data value type provided to register the parser for' );
+			}
 
 			if( this._parsersForDataValueTypes[dataValueType] ) {
 				throw new Error( 'Parser for DataValue type "' + dataValueType + '" is registered '
@@ -106,32 +91,23 @@
 		 * parser if no ValueParser is registered for that purpose.
 		 * @since 0.1
 		 *
-		 * @param {dataTypes.DataType|string} purpose DataType object or DataValue type.
+		 * @param {string} dataValueType
+		 * @param {string} [dataTypeId]
 		 * @return {Function|null}
 		 *
 		 * @throws {Error} if no proper purpose is provided to retrieve a parser.
 		 */
-		getParser: function( purpose ) {
-			var dataValueType,
-				dataTypeId,
-				parser;
+		getParser: function( dataValueType, dataTypeId ) {
+			var parser;
 
-			if( purpose instanceof dataTypes.DataType ) {
-				dataValueType = purpose.getDataValueType();
-				dataTypeId = purpose.getId();
-			} else if( typeof purpose === 'string' ) {
-				dataValueType = purpose;
-			} else {
-				throw new Error( 'No sufficient purpose provided for choosing a parser' );
-			}
-
-			if( dataTypeId ) {
+			if( typeof dataTypeId === 'string' ) {
 				parser = this._parsersForDataTypes[dataTypeId];
 			}
 
-			if( !parser ) {
-				// No parser for specified data type or only DataValue provided.
+			if( !parser && typeof dataValueType === 'string' ) {
 				parser = this._parsersForDataValueTypes[dataValueType];
+			} else if( !parser ) {
+				throw new Error( 'No sufficient purpose provided for choosing a parser' );
 			}
 
 			return parser || this._DefaultParser;
@@ -148,4 +124,4 @@
 		}
 	}
 
-}( jQuery, valueParsers, dataTypes ) );
+}( jQuery, valueParsers ) );
