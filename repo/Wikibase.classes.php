@@ -54,6 +54,7 @@ return call_user_func( function() {
 		'Wikibase\ChangeOp\ChangeOpClaim' => 'includes/ChangeOp/ChangeOpClaim.php',
 		'Wikibase\ChangeOp\ChangeOpQualifier' => 'includes/ChangeOp/ChangeOpQualifier.php',
 		'Wikibase\ChangeOp\ChangeOpReference' => 'includes/ChangeOp/ChangeOpReference.php',
+		'Wikibase\ChangeOp\ChangeOpReferenceRemove' => 'includes/ChangeOp/ChangeOpReferenceRemove.php',
 		'Wikibase\ChangeOp\ChangeOpStatementRank' => 'includes/ChangeOp/ChangeOpStatementRank.php',
 		'Wikibase\ChangeOp\ChangeOpException' => 'includes/ChangeOp/ChangeOpException.php',
 
