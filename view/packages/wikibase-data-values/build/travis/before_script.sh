@@ -22,7 +22,7 @@ cd extensions
 cp -r $originalDirectory DataValuesJavascript
 
 cd DataValuesJavascript
-composer install
+composer install --prefer-source
 
 cd ../..
 
