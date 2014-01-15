@@ -15,11 +15,6 @@ TODO: remove dependency on ApiParserValue from the JS so ApiParseValue
 can be removed. ApiParseValue is the only PHP class in this package and
 is the only thing that depends on the DataValues PHP components.
 
-TODO: remove dependency on dataTypes.DataType from the JS, so the
-data-values/data-types package is no longer required. Right now
-only a few lines in ValueParserFactory.js are binding to this for
-no good reason.
-
 TODO: write high level description and documentation in this README file.
 
 TODO: make tests runnable without needing MW and a browser
