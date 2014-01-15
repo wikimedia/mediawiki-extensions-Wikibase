@@ -2142,6 +2142,7 @@ $messages['is'] = array(
 
 /** Italian (italiano)
  * @author Beta16
+ * @author Candalua
  * @author Gianfranco
  * @author Gloria sah
  * @author Raoli
@@ -3564,7 +3565,7 @@ $messages['ru'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Викиданные',
 	'wikibase-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
 	'wikibase-rc-wikibase-edit-letter' => 'д',
-	'wikibase-rc-wikibase-edit-title' => 'Это изменение связанного элемента Викиданных',
+	'wikibase-rc-wikibase-edit-title' => 'правка Викиданных',
 	'wikibase-watchlist-show-changes-pref' => 'Показать изменения в Викиданных в списке наблюдения',
 	'wikibase-error-serialize-error' => 'Не удалось сериализовать данные.',
 	'wikibase-error-invalid-entity-id' => 'Введённый идентификатор не известен системе. Используйте один из действующих идентификаторов сущностей.',
@@ -3938,6 +3939,7 @@ $messages['te'] = array(
  * @author Nullzero
  */
 $messages['th'] = array(
+	'wikibase-editlinks' => 'แก้ไขลิงก์ข้ามภาษา',
 	'wikibase-rc-wikibase-edit-letter' => 'ด',
 	'wikibase-rc-wikibase-edit-title' => 'การแก้ไขจากวิกิสนเทศ',
 );
@@ -4111,6 +4113,7 @@ $messages['vec'] = array(
 	'wikibase-property-notsupportedyet' => "Wikibase no'l suporta gnancora el tipo de proprietà par la proprietà $1.",
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche de Wikidata tra i ultimi canbiamenti',
+	'wikibase-rc-wikibase-edit-title' => 'Modifica su Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche de Wikidata sui osservati speciali',
 	'wikibase-error-invalid-entity-id' => "L'ID specificà el xe sconossùo al sistema. Dòpara un ID de entità valido.",
 	'special-unconnectedpages' => 'Pagine mia colegà ai elementi',
