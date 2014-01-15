@@ -676,8 +676,19 @@
 		 * @return {valueParsers.ValueParser}
 		 */
 		_instantiateParser: function( additionalParserOptions ) {
-			var Parser = this.options.valueParserProvider.getParser( this._getPurpose() ),
-				parserOptions = $.extend(
+			var purpose = this._getPurpose(),
+				Parser;
+
+			if( purpose instanceof dt.DataType ) {
+				Parser = this.options.valueParserProvider.getParser(
+					purpose.getDataValueType(),
+					purpose.getId()
+				);
+			} else {
+				Parser = this.options.valueParserProvider.getParser( purpose );
+			}
+
+			var parserOptions = $.extend(
 					{},
 					Parser.prototype.getOptions(),
 					additionalParserOptions || {}
@@ -725,12 +736,23 @@
 		 * @return {valueFormatters.ValueFormatter}
 		 */
 		_instantiateFormatter: function( additionalFormatterOptions ) {
-			var Formatter = this.options.valueFormatterProvider.getFormatter( this._getPurpose() ),
-				formatterOptions = $.extend(
-					{},
-					Formatter.prototype.getOptions(),
-					additionalFormatterOptions || {}
+			var purpose = this._getPurpose(),
+				Formatter;
+
+			if( purpose instanceof dt.DataType ) {
+				Formatter = this.options.valueFormatterProvider.getFormatter(
+					purpose.getDataValueType(),
+					purpose.getId()
 				);
+			} else {
+				Formatter = this.options.valueFormatterProvider.getFormatter( purpose );
+			}
+
+			var formatterOptions = $.extend(
+				{},
+				Formatter.prototype.getOptions(),
+				additionalFormatterOptions || {}
+			);
 
 			return new Formatter( formatterOptions );
 		},
