@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_f1c84679",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-15T09:56:28Z",
+      "side": 1,
+      "message": "eww space :D",
+      "revId": "22b4bb5c2e59dc410dbbf2b63464f3ece1e1d3f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
