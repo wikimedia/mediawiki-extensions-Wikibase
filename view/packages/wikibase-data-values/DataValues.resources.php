@@ -69,7 +69,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'dataValues.util.js',
 				'dataValues.util.inherit.js',
-				'dataValues.util.Notify.js',
 			),
 			'dependencies' => array(
 				'dataValues',

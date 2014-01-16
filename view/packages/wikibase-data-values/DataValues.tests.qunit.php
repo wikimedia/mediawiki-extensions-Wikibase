@@ -63,7 +63,6 @@ return call_user_func( function() {
 				"$bp/util.inherit/inherit.testWithDifferentArguments.js",
 				"$bp/util.inherit/inherit.testConstructorNames.js",
 				"$bp/util.inherit/inherit.testGeneratedConstructorNames.js",
-				"$bp/dataValues.util.Notifier.tests.js",
 			),
 			'dependencies' => array(
 				'dataValues.util',
