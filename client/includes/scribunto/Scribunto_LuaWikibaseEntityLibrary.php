@@ -4,7 +4,6 @@ use Wikibase\Client\WikibaseClient;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
-use InvalidArgumentException;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
