@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_9ad22ad4",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-16T14:05:20Z",
+      "side": 1,
+      "message": "mh... these functions are basically static code... to be consistent with Scribunto and to retain b/c we should leave them like this.",
+      "parentUuid": "aef5673e_9ab10adf",
+      "revId": "7f61adbafab271ded8d085db0027c813d9153acf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_5aca624b",
         "filename": "docs/lua.wiki",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-16T13:22:39Z",
       "side": 1,
       "message": "Examples would be nice and helpful, especially on what is expected in the parameters for mw.wikibase.label or mw.wikibase.entity.create (i.e. what is an item ID? what is data?)",
+      "revId": "7f61adbafab271ded8d085db0027c813d9153acf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_1ade1adf",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-16T14:05:20Z",
+      "side": 1,
+      "message": "I will extend the doc a bit, but not for entity.create... it\u0027s only here because I wanted to have a documentation for everything, it\u0027s not really meant to be called / used by users. If we change that one day (which we might) I\u0027m going to move it up and extend its description",
+      "parentUuid": "aef5673e_5aca624b",
       "revId": "7f61adbafab271ded8d085db0027c813d9153acf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
