@@ -67,7 +67,9 @@ return call_user_func( function() {
 		'Wikibase\Client\Scribunto\WikibaseLuaEntityBindings' => 'includes/scribunto/WikibaseLuaEntityBindings.php',
 
 		// test
-		'Wikibase\Test\MockPageUpdater' => 'tests/phpunit/MockPageUpdater.php'
+		'Wikibase\Test\MockPageUpdater' => 'tests/phpunit/MockPageUpdater.php',
+		'Wikibase\Client\Scribunto\Test\WikibaseLuaIntegrationTestHelper' => 'tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php',
+		'Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase' => 'tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php'
 
 	);
 
