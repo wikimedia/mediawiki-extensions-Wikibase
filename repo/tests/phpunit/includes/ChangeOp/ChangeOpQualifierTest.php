@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\ChangeOp\ChangeOpQualifier;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -50,7 +51,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $claimGuid, $snak, $snakHash ) {
-		$ChangeOpQualifier = new ChangeOpQualifier( $claimGuid, $snak, $snakHash );
+		new ChangeOpQualifier( $claimGuid, $snak, $snakHash );
 	}
 
 	public function changeOpAddProvider() {
@@ -79,44 +80,10 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyAddNewQualifier( $item, $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$claims = new Claims( $item->getClaims() );
+		/** @var Claim $claim */
 		$claim = reset( $claims );
 		$qualifiers = $claim->getQualifiers();
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), "No qualifier with expected hash" );
-	}
-
-	public function changeOpRemoveProvider() {
-		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
-
-		$item = $this->provideNewItemWithClaim( 'q345', $snak );
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
-		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$qualifiers = $claim->getQualifiers();
-		$qualifiers->addSnak( $newQualifier );
-		$claim->setQualifiers( $qualifiers );
-		$item->setClaims( new Claims( $claims ) );
-		$snakHash = $newQualifier->getHash();
-		$changeOp = new ChangeOpQualifier( $claimGuid, null, $snakHash );
-		$args[] = array ( $item, $changeOp, $snakHash );
-
-		return $args;
-	}
-
-	/**
-	 * @dataProvider changeOpRemoveProvider
-	 *
-	 * @param Entity $item
-	 * @param ChangeOpQualifier $changeOp
-	 * @param string $snakHash
-	 */
-	public function testApplyRemoveQualifier( $item, $changeOp, $snakHash ) {
-		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = new Claims( $item->getClaims() );
-		$claim = reset( $claims );
-		$qualifiers = $claim->getQualifiers();
-		$this->assertFalse( $qualifiers->hasSnakHash( $snakHash ), "Qualifier still exists" );
 	}
 
 	public function changeOpSetProvider() {
@@ -125,6 +92,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 		$item = $this->provideNewItemWithClaim( 'q123', $snak );
 		$claims = $item->getClaims();
+		/** @var Claim $claim */
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
@@ -150,6 +118,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	public function testApplySetQualifier( $item, $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$claims = new Claims( $item->getClaims() );
+		/** @var Claim $claim */
 		$claim = reset( $claims );
 		$qualifiers = $claim->getQualifiers();
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), "No qualifier with expected hash" );

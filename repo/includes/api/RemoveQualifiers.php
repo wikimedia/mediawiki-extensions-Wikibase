@@ -4,10 +4,10 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\Claim;
-use Wikibase\ChangeOp\ChangeOpQualifier;
+use Wikibase\ChangeOp\ChangeOpQualifierRemove;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\DataModel\Claim\Claim;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -81,7 +81,7 @@ class RemoveQualifiers extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = new ChangeOpQualifier( $claimGuid, null, $qualifierHash );
+			$changeOps[] = new ChangeOpQualifierRemove( $claimGuid, $qualifierHash );
 		}
 
 		return $changeOps;
