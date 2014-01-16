@@ -64,13 +64,17 @@
 	var elemsCases = QUnit.cases( elemsCasesData );
 
 	elemsCases.test( 'Focusing with valid parameter', function( params, assert ) {
-		var positions = [ 0, 1, 4, 9, 9999, 'start', 'end', -1, -3, -9999 ];
+		var $dom = getDomInsertionTestViewport(),
+			positions = [ 0, 1, 4, 9, 9999, 'start', 'end', -1, -3, -9999 ];
 
 		$.each( positions, function( i, pos ) {
+			// Put element in DOM, since Firefox expects this
+			$dom.append( params.elem );
 			assert.ok(
 				params.elem.focusAt( pos ),
 				'focusAt takes "' + pos + '" as a valid position for the element'
 			);
+			params.elem.remove();
 		} );
 	} );
 
@@ -95,10 +99,18 @@
 			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
 		}
 
-		assert.ok(
-			elem.focusAt( 0 ),
-			'Can call focusAt on element not in DOM yet'
-		);
+		try {
+			assert.ok(
+				elem.focusAt( 0 ),
+				'Can call focusAt on element not in DOM yet.'
+			);
+		} catch( e ) {
+			assert.ok(
+				e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
+				'Unable to focus since browser requires element to be in the DOM.'
+			);
+			return;
+		}
 
 		$( ':focus' ).blur();
 		elem.appendTo( $dom );

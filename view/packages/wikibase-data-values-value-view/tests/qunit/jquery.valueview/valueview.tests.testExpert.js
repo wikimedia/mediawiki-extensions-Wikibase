@@ -279,7 +279,23 @@ function testExpert( testDefinition ) {
 			'Viewport node is not empty after draw()'
 		);
 	} );
-	expertCasesMemberCallTest( 'focus' );
+
+	expertCasesTestAndCleanup( 'focus', function( args, assert ) {
+		try {
+			args.expert.focus();
+		} catch( e ) {
+			assert.ok(
+				e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
+				'Unable to focus since browser requires element to be in the DOM.'
+			);
+			return;
+		}
+		assert.ok(
+			true,
+			'focus() has been called.'
+		);
+	} );
+
 	expertCasesMemberCallTest( 'blur' );
 
 	// Separate test for change notification:
