@@ -60,18 +60,11 @@
 			'Failed trying to register an invalid formatter constructor.'
 		);
 
-		assert.throws(
-			function() {
-				formatterFactory.registerDataTypeFormatter( StringFormatter, 'invalid' );
-			},
-			'Failed trying to register a formatter with an invalid purpose.'
-		);
-
 		formatterFactory.registerDataTypeFormatter( StringFormatter, stringType.getId() );
 
 		assert.throws(
 			function() {
-				formatterFactory.getFormatter( stringType.getId() );
+				formatterFactory.getFormatter( stringType );
 			},
 			'Failed trying to get a formatter with an invalid purpose.'
 		);
@@ -87,18 +80,11 @@
 			'Failed trying to register an invalid formatter constructor.'
 		);
 
-		assert.throws(
-			function() {
-				formatterFactory.registerDataValueFormatter( StringFormatter, 'invalid' );
-			},
-			'Failed trying to register a formatter with an invalid purpose.'
-		);
-
 		formatterFactory.registerDataValueFormatter( StringFormatter, StringValue.TYPE );
 
 		assert.throws(
 			function() {
-				formatterFactory.getFormatter( StringValue.TYPE );
+				formatterFactory.getFormatter( StringValue );
 			},
 			'Failed trying to get a formatter with an invalid purpose.'
 		);
