@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_ddd9cc84",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-16T15:20:14Z",
+      "side": 1,
+      "message": "please document the type, and the expected contents/structure of the array.",
+      "revId": "b8f7b1a5a38211051488d794ef6db1ee1513db3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
