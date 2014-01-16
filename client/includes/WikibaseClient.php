@@ -194,10 +194,6 @@ final class WikibaseClient {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		if ( $this->inTestMode ) {
-			return new MockRepository();
-		}
-
 		return $this->getStore()->getEntityLookup();
 	}
 

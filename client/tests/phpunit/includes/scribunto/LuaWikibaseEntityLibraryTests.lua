@@ -1,12 +1,11 @@
 --[[
-	Unit tests for the mw.wikibase.entity module
+	Unit and integration tests for the mw.wikibase.entity module
 
 	@license GNU GPL v2+
 	@author Marius Hoch < hoo@online.de >
 ]]
 
 local testframework = require 'Module:TestFramework'
-local render = mw.wikibase.entity
 
 -- A test item (the structure isn't complete... but good enough for tests)
 local testItem = {
@@ -37,7 +36,7 @@ local getNewTestItem = function()
 	return mw.wikibase.entity.create( testItem )
 end
 
--- Tests
+-- Unit Tests
 
 local function testExists()
 	return type( mw.wikibase.entity )
@@ -63,8 +62,30 @@ local function testFormatPropertyValues( propertyId )
 	return getNewTestItem():formatPropertyValues( propertyId )
 end
 
--- Tests
+-- Integration tests
+
+local function integrationTestGetPropertiesCount()
+	return #( mw.wikibase.getEntityObject():getProperties() )
+end
+
+local function integrationTestGetLabel( langCode )
+	return mw.wikibase.getEntityObject():getLabel( langCode )
+end
+
+local function integrationTestGetSitelink( globalSiteId )
+	return mw.wikibase.getEntityObject():getSitelink( globalSiteId )
+end
+
+local function integrationTestFormatPropertyValues()
+	local entity = mw.wikibase.getEntityObject()
+	local propertyId = entity:getProperties()[1]
+
+	return mw.wikibase.getEntityObject():formatPropertyValues( propertyId )
+end
+
 local tests = {
+	-- Unit Tests
+
 	{ name = 'mw.wikibase.entity exists', func = testExists, type='ToString',
 	  expect = { 'table' }
 	},
@@ -113,7 +134,30 @@ local tests = {
 	{ name = 'mw.wikibase.entity.formatPropertyValues', func = testFormatPropertyValues,
 	  args = { function() end },
 	  expect = "bad argument #1 to 'formatPropertyValues' (string expected, got function)"
-	}
+	},
+
+	-- Integration tests
+
+	{ name = 'mw.wikibase.entity.getLabel integration 1', func = integrationTestGetLabel, type='ToString',
+	  expect = { 'Lua Test Item' }
+	},
+	{ name = 'mw.wikibase.entity.getLabel integration 2', func = integrationTestGetLabel, type='ToString',
+	  args = { 'en' },
+	  expect = { 'Test all the code paths' }
+	},
+	{ name = 'mw.wikibase.entity.getSitelink integration 1', func = integrationTestGetSitelink, type='ToString',
+	  expect = { 'WikibaseClientLuaTest' }
+	},
+	{ name = 'mw.wikibase.entity.getSitelink integration 2', func = integrationTestGetSitelink, type='ToString',
+	  args = { 'fooSiteId' },
+	  expect = { 'FooBarFoo' }
+	},
+	{ name = 'mw.wikibase.entity.getProperties integration', func = integrationTestGetPropertiesCount,
+	  expect = { 1 }
+	},
+	{ name = 'mw.wikibase.entity.formatPropertyValues integration', func = integrationTestFormatPropertyValues,-- type='ToString',
+	  expect = { { label = 'LuaTestProperty', value = 'Lua :)' } }
+	},
 }
 
 return testframework.getTestProvider( tests )

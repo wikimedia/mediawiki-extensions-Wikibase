@@ -2,11 +2,11 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
 use Title;
 use Scribunto_LuaWikibaseEntityLibrary;
 use Scribunto;
 use Wikibase\Settings;
-use Language;
 
 /**
  * @covers Scribunto_LuaWikibaseLibrary
@@ -21,27 +21,13 @@ use Language;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseEntityLibraryTest extends \Scribunto_LuaEngineTestBase {
+class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibraryTestCase {
 	protected static $moduleName = 'LuaWikibaseEntityLibraryTests';
 
 	function getTestModules() {
 		return parent::getTestModules() + array(
 			'LuaWikibaseEntityLibraryTests' => __DIR__ . '/LuaWikibaseEntityLibraryTests.lua',
 		);
-	}
-
-	protected function setUp() {
-		parent::setUp();
-
-		if ( !defined( 'WB_VERSION' ) ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
-		}
-
-		if ( !class_exists( 'Scribunto_LuaStandaloneEngine' ) ) {
-			$this->markTestSkipped( 'test requires Scribunto' );
-		}
-
-		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
 	}
 
 	public function testConstructor() {
