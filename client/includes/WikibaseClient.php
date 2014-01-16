@@ -30,7 +30,6 @@ use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
-use Wikibase\Test\MockRepository;
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -73,11 +72,6 @@ final class WikibaseClient {
 	protected $languageFallbackChainFactory = null;
 
 	/**
-	 * @var boolean
-	 */
-	protected $isInTestMode;
-
-	/**
 	 * @var ClientStore[]
 	 */
 	private $storeInstances = array();
@@ -117,15 +111,13 @@ final class WikibaseClient {
 	 *
 	 * @param SettingsArray $settings
 	 * @param Language      $contentLanguage
-	 * @param               $inTestMode
 	 * @param SiteStore $siteStore
 	 */
-	public function __construct( SettingsArray $settings, Language $contentLanguage, $inTestMode = false,
+	public function __construct( SettingsArray $settings, Language $contentLanguage,
 		SiteStore $siteStore = null
 	) {
 		$this->contentLanguage = $contentLanguage;
 		$this->settings = $settings;
-		$this->inTestMode = $inTestMode;
 		$this->siteStore = $siteStore;
 	}
 
@@ -194,10 +186,6 @@ final class WikibaseClient {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		if ( $this->inTestMode ) {
-			return new MockRepository();
-		}
-
 		return $this->getStore()->getEntityLookup();
 	}
 
@@ -348,10 +336,7 @@ final class WikibaseClient {
 	protected static function newInstance() {
 		global $wgContLang;
 
-		return new self(
-			Settings::singleton(),
-			$wgContLang,
-			defined( 'MW_PHPUNIT_TEST' ) );
+		return new self( Settings::singleton(), $wgContLang );
 	}
 
 	/**
