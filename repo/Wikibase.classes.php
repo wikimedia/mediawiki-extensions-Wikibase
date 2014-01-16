@@ -53,6 +53,7 @@ return call_user_func( function() {
 		'Wikibase\ChangeOp\ChangeOpMainSnak' => 'includes/ChangeOp/ChangeOpMainSnak.php',
 		'Wikibase\ChangeOp\ChangeOpClaim' => 'includes/ChangeOp/ChangeOpClaim.php',
 		'Wikibase\ChangeOp\ChangeOpQualifier' => 'includes/ChangeOp/ChangeOpQualifier.php',
+		'Wikibase\ChangeOp\ChangeOpQualifierRemove' => 'includes/ChangeOp/ChangeOpQualifierRemove.php',
 		'Wikibase\ChangeOp\ChangeOpReference' => 'includes/ChangeOp/ChangeOpReference.php',
 		'Wikibase\ChangeOp\ChangeOpStatementRank' => 'includes/ChangeOp/ChangeOpStatementRank.php',
 		'Wikibase\ChangeOp\ChangeOpException' => 'includes/ChangeOp/ChangeOpException.php',
