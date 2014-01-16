@@ -77,6 +77,7 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.css',
 			),
 			'dependencies' => array(
+				'dataValues.DataValue',
 				'jquery.ui.widget',
 				'jquery.valueview.base',
 				'jquery.valueview.ViewState',
@@ -84,8 +85,10 @@ return call_user_func( function() {
 				'jquery.valueview.experts.unsupportedvalue', // for displaying unsupported values
 				'jquery.valueview.experts.emptyvalue', // for displaying empty values
 				// NOTE: don't add further experts here unless they are required by the valueview
-			    // widget directly. All experts are supposed to be loaded separately, by demand and
+				// widget directly. All experts are supposed to be loaded separately, by demand and
 				// by the controller requiring them.
+				'util.Notifier',
+				'valueParsers.ValueParser',
 			),
 		),
 
@@ -102,6 +105,7 @@ return call_user_func( function() {
 				'dataValues.util',
 				'dataValues.values',
 				'dataTypes',
+				'util.Notifier',
 			),
 		),
 
@@ -298,7 +302,13 @@ return call_user_func( function() {
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),
-		)
+		),
+
+		'util.Notifier' => $moduleTemplate + array(
+			'scripts' => array(
+				'../lib/util.Notifier.js',
+			),
+		),
 
 	);
 
