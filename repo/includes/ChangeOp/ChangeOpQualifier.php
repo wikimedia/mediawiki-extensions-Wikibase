@@ -59,12 +59,8 @@ class ChangeOpQualifier extends ChangeOpBase {
 			throw new InvalidArgumentException( '$snakHash needs to be a string' );
 		}
 
-		if ( !( $snak instanceof Snak ) && !is_null( $snak ) ) {
-			throw new InvalidArgumentException( '$snak needs to be an instance of Snak or null' );
-		}
-
-		if ( $snakHash === '' && $snak === null ) {
-			throw new InvalidArgumentException( 'Either $snakHash or $snak needs to be set' );
+		if ( !( $snak instanceof Snak ) ) {
+			throw new InvalidArgumentException( '$snak needs to be an instance of Snak' );
 		}
 
 		$this->claimGuid = $claimGuid;
@@ -74,7 +70,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 
 	/**
 	 * @see ChangeOp::apply()
-	 * - the qualifier gets removed when $snakHash is set and $snak is not set
 	 * - a new qualifier gets added when $snakHash is empty and $snak is set
 	 * - the qualifier gets set to $snak when $snakHash and $snak are set
 	 */
@@ -91,11 +86,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 		if ( $this->snakHash === '' ) {
 			$this->addQualifier( $qualifiers, $summary );
 		} else {
-			if ( $this->snak != null ) {
-				$this->setQualifier( $qualifiers, $summary );
-			} else {
-				$this->removeQualifier( $qualifiers, $summary );
-			}
+			$this->setQualifier( $qualifiers, $summary );
 		}
 
 		$claim->setQualifiers( $qualifiers );
@@ -139,23 +130,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 		$qualifiers->removeSnakHash( $this->snakHash );
 		$qualifiers->addSnak( $this->snak );
 		$this->updateSummary( $summary, 'update', '', $this->getSnakSummaryArgs( $this->snak ) );
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Snaks $qualifiers
-	 * @param Summary $summary
-	 *
-	 * @throws ChangeOpException
-	 */
-	protected function removeQualifier( Snaks $qualifiers, Summary $summary = null ) {
-		if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
-			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
-		}
-		$removedQualifier = $qualifiers->getSnak( $this->snakHash );
-		$qualifiers->removeSnakHash( $this->snakHash );
-		$this->updateSummary( $summary, 'remove', '', $this->getSnakSummaryArgs( $removedQualifier ) );
 	}
 
 	/**
