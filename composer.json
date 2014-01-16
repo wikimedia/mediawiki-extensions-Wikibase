@@ -46,6 +46,9 @@
 			"client/includes/",
 			"client/WikibaseClient.hooks.php",
 			"client/tests/phpunit/MockPageUpdater.php",
+			"client/tests/phpunit/MockClientStore.php",
+			"client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestItemSetUpHelper.php",
+			"client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
 
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
