@@ -99,7 +99,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
 	public function testGetLangLinkSiteGroup( $expected, $settings, $siteStore ) {
-		$client = new WikibaseClient( $settings, Language::factory( 'en' ), true, $siteStore );
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), $siteStore );
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
 	}
 
