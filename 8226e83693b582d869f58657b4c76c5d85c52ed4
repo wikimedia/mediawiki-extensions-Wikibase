@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_9dfc64d7",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2014-01-16T15:12:14Z",
+      "side": 1,
+      "message": "Neat! I like it!",
+      "revId": "8226e83693b582d869f58657b4c76c5d85c52ed4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
