@@ -157,6 +157,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts',
 				'jquery.valueview.MockViewState',
 				'qunit.parameterize',
+				'util.Notifier',
 			),
 		),
 
@@ -231,6 +232,15 @@ return call_user_func( function() {
 				'jquery.util.getscrollbarwidth',
 			),
 		),
+
+		'util.Notifier.tests' => array(
+			'scripts' => array(
+				"$bp/lib/util.Notifier.tests.js",
+			),
+			'dependencies' => array(
+				'util.Notifier',
+			),
+		)
 
 	);
 

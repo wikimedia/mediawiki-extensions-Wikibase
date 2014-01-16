@@ -446,4 +446,4 @@ testExpert.verifyTestDefinition = function( testDefinition ) {
 
 return testExpert; // expose
 
-}( jQuery, QUnit, jQuery.valueview, dataValues.util.Notifier ) );
+}( jQuery, QUnit, jQuery.valueview, util.Notifier ) );

@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, dt, vp, $ ) {
+( function( dv, dt, vp, util, $ ) {
 	'use strict';
 
 	var PARENT = $.Widget;
@@ -800,12 +800,12 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @return dataValues.util.Notifier
+		 * @return {util.Notifier}
 		 */
 		viewNotifier: function() {
 			var self = this;
 
-			return new dv.util.Notifier( {
+			return new util.Notifier( {
 				change: function() {
 					if( !self._expert ) {
 						// someone notified about change while there couldn't have been one since there
@@ -846,4 +846,4 @@
 		}
 	} );
 
-}( dataValues, dataTypes, valueParsers, jQuery ) );
+}( dataValues, dataTypes, valueParsers, util, jQuery ) );

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, $, vv ) {
+( function( dv, $, vv, util ) {
 	'use strict';
 
 	/**
@@ -59,7 +59,7 @@
 	 *
 	 * @param {HTMLElement|jQuery} viewPortNode
 	 * @param {jQuery.valueview.ViewState} relatedViewState
-	 * @param {dv.util.Notifier} [valueViewNotifier] Required so the expert can notify the valueview
+	 * @param {util.Notifier} [valueViewNotifier] Required so the expert can notify the valueview
 	 *        about certain events. The following notification keys can be used:
 	 *        - change: will be sent when raw value displayed by the expert changes. Either by a
 	 *                  user action or by calling the rawValue() method. First parameter is a
@@ -79,9 +79,9 @@
 		}
 
 		if( !valueViewNotifier ) {
-			valueViewNotifier = dv.util.Notifier();
+			valueViewNotifier = util.Notifier();
 		}
-		else if( !( valueViewNotifier instanceof dv.util.Notifier ) ) {
+		else if( !( valueViewNotifier instanceof util.Notifier ) ) {
 			throw new Error( 'No Notifier object was provided to the valueview expert' );
 		}
 
@@ -134,7 +134,7 @@
 
 		/**
 		 * Object for publishing changes to the outside.
-		 * @type dv.util.Notifier
+		 * @type util.Notifier
 		 */
 		_viewNotifier: null,
 
@@ -354,4 +354,4 @@
 		blur: function() {}
 	};
 
-}( dataValues, jQuery, jQuery.valueview ) );
+}( dataValues, jQuery, jQuery.valueview, util ) );
