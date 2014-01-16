@@ -16,6 +16,23 @@
       "revId": "7f61adbafab271ded8d085db0027c813d9153acf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_5aca624b",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2014-01-16T13:22:39Z",
+      "side": 1,
+      "message": "Examples would be nice and helpful, especially on what is expected in the parameters for mw.wikibase.label or mw.wikibase.entity.create (i.e. what is an item ID? what is data?)",
+      "revId": "7f61adbafab271ded8d085db0027c813d9153acf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
