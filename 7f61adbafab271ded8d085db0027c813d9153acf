@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_9ab10adf",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2014-01-16T13:14:27Z",
+      "side": 1,
+      "message": "How about converting this to the methodtable/metatable style you introduced in mw.wikibase.entity? I like it, it\u0027s clever and readable and consistency is a good thing.",
+      "revId": "7f61adbafab271ded8d085db0027c813d9153acf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
