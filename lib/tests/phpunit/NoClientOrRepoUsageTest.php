@@ -23,7 +23,7 @@ class NoClientOrRepoUsageTest extends \PHPUnit_Framework_TestCase {
 	public function testNoClientUsage() {
 		// Increasing this allowance is forbidden
 		$this->assertStringNotInLib( 'WikibaseClient' . '::', 3 );
-		$this->assertStringNotInLib( 'Wikibase\\Client\\', 5 );
+		$this->assertStringNotInLib( 'Wikibase\\Client\\', 3 );
 	}
 
 	public function assertStringNotInLib( $string, $maxAllowance = 0 ) {
