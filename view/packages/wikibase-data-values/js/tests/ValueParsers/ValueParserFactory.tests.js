@@ -60,18 +60,11 @@
 			'Failed trying to register an invalid parser constructor.'
 		);
 
-		assert.throws(
-			function() {
-				parserFactory.registerDataTypeParser( StringParser, 'invalid' );
-			},
-			'Failed trying to register a parser with an invalid purpose.'
-		);
-
 		parserFactory.registerDataTypeParser( StringParser, stringType.getId() );
 
 		assert.throws(
 			function() {
-				parserFactory.getParser( StringValue );
+				parserFactory.getParser( stringType );
 			},
 			'Failed trying to get a parser with an invalid purpose.'
 		);
@@ -85,13 +78,6 @@
 				parserFactory.registerDataValueParser( 'invalid', StringValue.TYPE );
 			},
 			'Failed trying to register an invalid parser constructor.'
-		);
-
-		assert.throws(
-			function() {
-				parserFactory.registerDataValueParser( StringParser, 'invalid' );
-			},
-			'Failed trying to register a parser with an invalid purpose.'
 		);
 
 		parserFactory.registerDataValueParser( StringParser, StringValue.TYPE );

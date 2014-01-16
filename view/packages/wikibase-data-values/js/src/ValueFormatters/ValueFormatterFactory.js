@@ -121,7 +121,7 @@
 	 * @throws {Error} if the provided argument is not a valueFormatters.ValueFormatter constructor.
 	 */
 	function assertIsValueFormatterConstructor( Formatter ) {
-		if( !$.isFunction( Formatter ) && Formatter.prototype instanceof vf.ValueFormatter ) {
+		if( !( $.isFunction( Formatter ) && Formatter.prototype instanceof vf.ValueFormatter ) ) {
 			throw new Error( 'Invalid ValueFormatter constructor' );
 		}
 	}
