@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -12,6 +13,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpClaim
@@ -26,24 +29,42 @@ use Wikibase\Lib\ClaimGuidGenerator;
  */
 class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
-	public function invalidConstructorProvider() {
-		$validGuidGenerator = new ClaimGuidGenerator( new ItemId( 'q42' ) );
+	public function getValidClaim() {
+		return new Claim( new PropertyNoValueSnak( 7 ) );
+	}
 
-		$args = array();
-		$args[] = array( array(), $validGuidGenerator );
+	public function getValidGuidGenerator() {
+		return new ClaimGuidGenerator( new ItemId( 'q42' ) );
+	}
 
-		return $args;
+	public function getValidGuidValidator() {
+		return WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
+	}
+
+	public function getValidGuidParser() {
+		return WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+	}
+
+	public function invalidIndexProvider() {
+		return array(
+			array( 'foo' ),
+			array( array() ),
+			array( $this->getValidClaim() ),
+		);
 	}
 
 	/**
-	 * @dataProvider invalidConstructorProvider
+	 * @dataProvider invalidIndexProvider
 	 * @expectedException InvalidArgumentException
-	 *
-	 * @param Claim $claim
-	 * @param ClaimGuidGenerator $guidGenerator
 	 */
-	public function testInvalidConstruct( $claim, $guidGenerator ) {
-		new ChangeOpClaim( $claim, $guidGenerator );
+	public function testConstructionWithInvalidIndex( $invalidIndex ) {
+		new ChangeOpClaim(
+			$this->getValidClaim(),
+			$this->getValidGuidGenerator(),
+			$this->getValidGuidValidator(),
+			$this->getValidGuidParser(),
+			$invalidIndex
+		);
 	}
 
 	public function provideTestApply() {
@@ -124,6 +145,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$changeOpClaim = new ChangeOpClaim(
 			$claim,
 			new ClaimGuidGenerator( $entity->getId() ),
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(), //@todo mock me!
+			WikibaseRepo::getDefaultInstance()->getClaimGuidParser(), //@todo mock me!
 			$index
 		);
 		$changeOpClaim->apply( $entity );

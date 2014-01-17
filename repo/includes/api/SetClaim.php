@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -17,7 +18,9 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\EntityContent;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -30,6 +33,19 @@ use Wikibase\Summary;
  * @author Adam Shorland
  */
 class SetClaim extends ModifyClaim {
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var ClaimGuidValidator
+	 */
+	private $claimGuidValidator;
+
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -58,6 +74,8 @@ class SetClaim extends ModifyClaim {
 		$changeop = new ChangeOpClaim(
 			$claim,
 			new ClaimGuidGenerator( $guid->getEntityId() ),
+			$this->claimGuidValidator,
+			$this->claimGuidParser,
 			( isset( $params['index'] ) ? $params['index'] : null )
 		);
 		try{
