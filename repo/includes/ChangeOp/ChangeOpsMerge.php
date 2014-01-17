@@ -121,11 +121,7 @@ class ChangeOpsMerge {
 
 	private function generateClaimsChangeOps() {
 		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ){
-			$this->fromChangeOps->add( new ChangeOpMainSnak(
-				$fromClaim->getGuid(),
-				null,
-				new ClaimGuidGenerator( $this->fromItemContent->getItem()->getId() )
-			) );
+			$this->fromChangeOps->add( new ChangeOpClaimRemove( $fromClaim->getGuid() ) );
 
 			$toClaim = clone $fromClaim;
 			$toClaim->setGuid( null );

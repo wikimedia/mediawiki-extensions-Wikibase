@@ -4,13 +4,12 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpException;
 
 /**
@@ -118,10 +117,9 @@ class RemoveClaims extends ModifyClaim {
 	 */
 	protected function getChangeOps( array $params ) {
 		$changeOps = array();
-		$guidGenerator = new ClaimGuidGenerator( $this->getEntityId( $params ) );
 
 		foreach ( $params['claim'] as $guid ) {
-			$changeOps[] = new ChangeOpMainSnak( $guid, null, $guidGenerator );
+			$changeOps[] = new ChangeOpClaimRemove( $guid );
 		}
 
 		return $changeOps;

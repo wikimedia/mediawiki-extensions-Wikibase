@@ -74,14 +74,6 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$expected = $newSnak->getDataValue();
 		$args[] = array ( $item, $changeOp, $expected );
 
-		$item = $this->provideNewItemWithClaim( 'q345', $snak );
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
-		$changeOp = new ChangeOpMainSnak( $claimGuid, null, new ClaimGuidGenerator( $item->getId() ) );
-		$expected = null;
-		$args[] = array ( $item, $changeOp, $expected );
-
 		return $args;
 	}
 
@@ -113,7 +105,6 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 
 		$args[] = array ( new ChangeOpMainSnak( $claimGuid, $newSnak, $guidGenerator ) );
-		$args[] = array ( new ChangeOpMainSnak( $claimGuid, null, $guidGenerator ) );
 
 		return $args;
 	}
