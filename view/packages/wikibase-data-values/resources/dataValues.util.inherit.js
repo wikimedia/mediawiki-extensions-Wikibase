@@ -59,18 +59,22 @@
 	 * Helper for prototypical inheritance.
 	 * @since 0.1
 	 *
-	 * @param {string} name (optional) The name of the new constructor. This is handy for debugging
-	 *        purposes since instances of the constructor might be displayed under that name.
+	 * @param {string|Function} [name] The name of the new constructor. This is handy for debugging
+	 *        purposes since instances of the constructor might be displayed under that name. If a
+	 *        function is provided, it is assumed to be the constructor to be used for the prototype
+	 *        chain (see "base" argument).
 	 * @param {Function} base Constructor which will be used for the prototype chain. This function
 	 *        will not be the constructor returned by the function but will be called by it.
-	 * @param {Function} [constructor] for overwriting base constructor. Can be omitted.
-	 * @param {Object} [members] properties overwriting or extending those of the base.
+	 * @param {Function|Object} [constructor] Constructor to overwriting the base constructor with.
+	 *        If not of type "function", the argument is assumed to be an object with new prototype
+	 *        members (see "members" argument)
+	 * @param {Object} [members] Properties overwriting or extending those of the base.
 	 * @return {Function} Constructor of the new, extended type.
 	 *
 	 * @throws {Error} in case a malicious function name is given or a reserved word is used
 	 */
 	util.inherit = function( name, base, constructor, members ) {
-		// the name is optional
+		// name is optional
 		if( typeof name !== 'string' ) {
 			members = constructor; constructor = base; base = name; name = false;
 		}
@@ -82,7 +86,6 @@
 			if( typeof constructor === 'function' ) {
 				members = {};
 			} else {
-				// No parameters but base given.
 				members = constructor || {};
 				constructor = false;
 			}
@@ -118,6 +121,7 @@
 
 	/**
 	 * Throw a kind of meaningful error whenever the function should be overwritten when inherited.
+	 * @since 0.1
 	 *
 	 * @throws {Error} when called.
 	 *
