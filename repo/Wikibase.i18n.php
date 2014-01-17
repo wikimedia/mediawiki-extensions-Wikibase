@@ -11441,7 +11441,7 @@ $messages['mk'] = array(
 	'wikibase-dispatchstats-median' => 'Средно',
 	'wikibase-dispatchstats-average' => 'Просечно',
 	'special-listdatatypes' => 'Список на сите податочни типови на располагање',
-	'wikibase-listdatatypes-intro' => 'Ова е список на сите податочни типови што моментално се користат во оваа инсталација:',
+	'wikibase-listdatatypes-intro' => 'Ова е список на сите податочни типови што моментално се користат во оваа воспоставка:',
 	'wikibase-history-title-with-label' => 'Историја на ревизиите на „$2“ ($1)',
 	'wikibase-history-title-without-label' => 'Историја на измените на ($1)',
 	'special-entitieswithoutdescription' => 'Единици без опис',
@@ -16228,6 +16228,11 @@ för att ta reda på var den tog vägen.',
 	'wikibase-property-summary-special-create-property' => 'Skapade en egenskap för [$2] med {{PLURAL:$1|värde|värden}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Objekt',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Länk till filer som lagras på Wikimedia Commons. Under inmatningen kommer "Fil"-namnrymden på Commons att genomsökas för matchande poster.
+* scheme – implicit del av Iri-strängen
+* hierarchicalpart – implicit del av Iri-strängen
+* query – implicit del av Iri-strängen
+* fragment – implicit del av Iri-strängen',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Globkoordinat',
 	'wikibase-listdatatypes-quantity-head' => 'Kvantitet',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enspråkig text',
