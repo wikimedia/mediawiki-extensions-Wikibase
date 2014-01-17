@@ -1,12 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, $, QUnit, undefined ) {
+( function( vp, dv, util ) {
 	'use strict';
 
 	var PARENT = vp.tests.ValueParserTest;
@@ -18,7 +14,7 @@
 	 * @extends dv.tests.ValueParserTest
 	 * @since 0.1
 	 */
-	vp.tests.StringParserTest = vp.util.inherit( PARENT, {
+	vp.tests.StringParserTest = util.inherit( PARENT, {
 
 		/**
 		 * @see vp.tests.ValueParserTest.getConstructor
@@ -45,4 +41,4 @@
 
 	test.runTests( 'valueParsers.StringParser' );
 
-}( valueParsers, dataValues, jQuery, QUnit ) );
+}( valueParsers, dataValues, util ) );

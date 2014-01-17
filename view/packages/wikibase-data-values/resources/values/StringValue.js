@@ -1,13 +1,9 @@
 /**
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
- *
  * @author Daniel Werner
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $ ) {
+( function( dv, util ) {
 'use strict';
 
 var PARENT = dv.DataValue,
@@ -27,7 +23,7 @@ var PARENT = dv.DataValue,
  *
  * @param {string} value
  */
-dv.StringValue = dv.util.inherit( 'DvStringValue', PARENT, constructor, {
+dv.StringValue = util.inherit( 'DvStringValue', PARENT, constructor, {
 
 	/**
 	 * @see dv.DataValue.getSortKey
@@ -91,4 +87,4 @@ dv.StringValue.TYPE = 'string';
 
 dv.registerDataValue( dv.StringValue );
 
-}( dataValues, jQuery ) );
+}( dataValues, util ) );

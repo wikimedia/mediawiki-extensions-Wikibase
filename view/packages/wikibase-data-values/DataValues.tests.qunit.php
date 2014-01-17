@@ -54,18 +54,18 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.DataValue.tests',
-				'dataValues.values'
+				'dataValues.values',
+				'util.inherit',
 			),
 		),
 
-		'dataValues.util.tests' => array(
+		'util.inherit.tests' => array(
 			'scripts' => array(
-				"$bp/util.inherit/inherit.testWithDifferentArguments.js",
-				"$bp/util.inherit/inherit.testConstructorNames.js",
-				"$bp/util.inherit/inherit.testGeneratedConstructorNames.js",
+				"$bp/lib/util/util.inherit.tests.js",
 			),
 			'dependencies' => array(
-				'dataValues.util',
+				'jquery',
+				'util.inherit',
 			),
 		),
 

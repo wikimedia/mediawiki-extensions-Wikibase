@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
- *
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, $ ) {
+( function( dv, util, $ ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -40,7 +36,7 @@
 	 * @param {Error} unserializeError The error thrown during the attempt to unserialize the given
 	 *        structure.
 	 */
-	var SELF = dv.UnUnserializableValue = dv.util.inherit( 'DvUnUnserializableValue', PARENT, constructor, {
+	var SELF = dv.UnUnserializableValue = util.inherit( 'DvUnUnserializableValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
@@ -133,4 +129,4 @@
 	//  rather than being constructed by some factory or builder.
 	//dv.registerDataValue( SELF );
 
-}( dataValues, jQuery ) );
+}( dataValues, util, jQuery ) );

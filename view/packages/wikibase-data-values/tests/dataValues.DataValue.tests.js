@@ -1,10 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, QUnit ) {
+( function( dv, util, $, QUnit ) {
 	'use strict';
 
 	dv.tests = {};
@@ -26,7 +24,7 @@
 		 *
 		 * @return array
 		 */
-		getConstructorArguments: dv.util.abstractMember,
+		getConstructorArguments: util.abstractMember,
 
 		/**
 		 * Returns the dataValue constructor to be tested (ie dv.StringValue).
@@ -35,7 +33,7 @@
 		 *
 		 * @return Function
 		 */
-		getConstructor: dv.util.abstractMember,
+		getConstructor: util.abstractMember,
 
 		/**
 		 * Returns the dataValue object to be tested (ie dv.StringValue).
@@ -291,4 +289,4 @@
 		};
 	};
 
-}( dataValues, jQuery, QUnit ) );
+}( dataValues, util, jQuery, QUnit ) );

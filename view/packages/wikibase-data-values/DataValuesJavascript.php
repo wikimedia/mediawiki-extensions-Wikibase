@@ -111,6 +111,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
 			),
 			'dependencies' => array(
 				'ext.valueParsers.tests',
+				'util.inherit',
 			),
 		);
 
@@ -165,6 +166,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 			),
 			'dependencies' => array(
 				'ext.valueFormatters.tests',
+				'util.inherit',
 				'valueFormatters.formatters',
 			),
 		);

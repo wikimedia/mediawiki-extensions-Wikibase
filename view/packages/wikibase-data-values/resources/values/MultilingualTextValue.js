@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
- * @licence GNU GPL v2+
- *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, $ ) {
+( function( dv, util ) {
 'use strict';
 
 var PARENT = dv.DataValue,
@@ -25,7 +21,7 @@ var PARENT = dv.DataValue,
  *
  * @param {dv.MonolingualTextValue[]} monoLingualValues
  */
-dv.MultilingualTextValue = dv.util.inherit( 'DvMultilingualTextValue', PARENT, constructor, {
+dv.MultilingualTextValue = util.inherit( 'DvMultilingualTextValue', PARENT, constructor, {
 
 	/**
 	 * @see dv.DataValue.getSortKey
@@ -111,4 +107,4 @@ dv.MultilingualTextValue.TYPE = 'multilingualtext';
 
 dv.registerDataValue( dv.MultilingualTextValue );
 
-}( dataValues, jQuery ) );
+}( dataValues, util ) );

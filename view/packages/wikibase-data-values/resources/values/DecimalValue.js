@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-dataValues.DecimalValue = ( function( inherit, dv, $ ) {
+dataValues.DecimalValue = ( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
@@ -111,7 +111,7 @@ dataValues.DecimalValue = ( function( inherit, dv, $ ) {
 		return string;
 	}
 
-	var DecimalValue = inherit( 'DvDecimalValue', PARENT, constructor, {
+	var DecimalValue = util.inherit( 'DvDecimalValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
@@ -174,6 +174,6 @@ dataValues.DecimalValue = ( function( inherit, dv, $ ) {
 
 	return DecimalValue;
 
-}( dataValues.util.inherit, dataValues, jQuery ) );
+}( dataValues, util ) );
 
 dataValues.registerDataValue( dataValues.DecimalValue );

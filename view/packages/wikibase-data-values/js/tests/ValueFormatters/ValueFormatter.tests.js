@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, vf ) {
+( function( $, QUnit, vf, util ) {
 	'use strict';
 
 	vf.tests = {};
@@ -23,7 +23,7 @@
 		 *
 		 * @return {*[]}
 		 */
-		getFormatArguments: vf.util.abstractMember,
+		getFormatArguments: util.abstractMember,
 
 		/**
 		 * Returns the ValueFormatter constructor to be tested.
@@ -31,7 +31,7 @@
 		 *
 		 * @return {Function}
 		 */
-		getConstructor: vf.util.abstractMember,
+		getConstructor: util.abstractMember,
 
 		/**
 		 * Returns the ValueFormatter instance to be tested.
@@ -161,4 +161,4 @@
 
 	};
 
-}( jQuery, QUnit, valueFormatters ) );
+}( jQuery, QUnit, valueFormatters, util ) );

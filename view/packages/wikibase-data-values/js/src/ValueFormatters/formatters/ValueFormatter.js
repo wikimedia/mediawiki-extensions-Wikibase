@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, vf ) {
+( function( $, vf, util ) {
 	'use strict';
 
 	/**
@@ -54,8 +54,8 @@
 		 *         - {string|null} Formatted DataValue.
 		 *         - {dataValues.DataValue|null} DataValue object that has been formatted.
 		 */
-		format: vf.util.abstractMember
+		format: util.abstractMember
 
 	} );
 
-}( jQuery, valueFormatters ) );
+}( jQuery, valueFormatters, util ) );

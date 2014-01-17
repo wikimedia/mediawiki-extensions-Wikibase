@@ -1,12 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, QUnit ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -18,7 +14,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.BoolValueTest = dv.util.inherit( PARENT, {
+	dv.tests.BoolValueTest = util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getConstructor
@@ -43,4 +39,4 @@
 
 	test.runTests( 'dataValues.BoolValue' );
 
-}( dataValues, jQuery, QUnit ) );
+}( dataValues, util ) );

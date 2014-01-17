@@ -3,7 +3,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, $, QUnit ) {
+( function( vp, dv, $, QUnit, util ) {
 	'use strict';
 
 	vp.tests = {};
@@ -25,7 +25,7 @@
 		 *
 		 * @return array
 		 */
-		getParseArguments: vp.util.abstractMember,
+		getParseArguments: util.abstractMember,
 
 		/**
 		 * Returns the ValueParser constructor to be tested.
@@ -34,7 +34,7 @@
 		 *
 		 * @return {Function}
 		 */
-		getConstructor: vp.util.abstractMember,
+		getConstructor: util.abstractMember,
 
 		/**
 		 * Returns the ValueParser instance to be tested.
@@ -140,4 +140,4 @@
 
 	};
 
-}( valueParsers, dataValues, jQuery, QUnit ) );
+}( valueParsers, dataValues, jQuery, QUnit, util ) );

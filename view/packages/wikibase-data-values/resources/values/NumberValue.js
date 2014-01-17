@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
- *
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( dv, $ ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -24,7 +20,7 @@
 	 *
 	 * @param {Number} value
 	 */
-	dv.NumberValue = dv.util.inherit( 'DvNumberValue', PARENT, constructor, {
+	dv.NumberValue = util.inherit( 'DvNumberValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
@@ -77,4 +73,4 @@
 	// make this data value available in the factory:
 	dv.registerDataValue( dv.NumberValue );
 
-}( dataValues, jQuery ) );
+}( dataValues, util ) );

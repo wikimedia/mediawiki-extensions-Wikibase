@@ -3,7 +3,7 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-dataValues.QuantityValue = ( function( inherit, dv ) {
+dataValues.QuantityValue = ( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
@@ -47,7 +47,7 @@ dataValues.QuantityValue = ( function( inherit, dv ) {
 		this._upperBound = upperBound;
 	};
 
-	var QuantityValue = inherit( 'DvQuantityValue', PARENT, constructor, {
+	var QuantityValue = util.inherit( 'DvQuantityValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
@@ -166,6 +166,6 @@ dataValues.QuantityValue = ( function( inherit, dv ) {
 
 	return QuantityValue;
 
-}( dataValues.util.inherit, dataValues ) );
+}( dataValues, util ) );
 
 dataValues.registerDataValue( dataValues.QuantityValue );

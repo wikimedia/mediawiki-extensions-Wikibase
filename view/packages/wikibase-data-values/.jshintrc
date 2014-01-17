@@ -35,6 +35,7 @@
 		"QUnit",
 		"valueFormatters",
 		"valueParsers",
-		"time"
+		"time",
+		"util"
 	]
 }

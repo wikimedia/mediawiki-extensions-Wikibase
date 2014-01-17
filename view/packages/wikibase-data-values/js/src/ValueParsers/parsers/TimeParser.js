@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
- *
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, $, Time ) {
+( function( vp, dv, $, util ) {
 	'use strict';
 
 	var PARENT = vp.ValueParser;
@@ -18,7 +14,7 @@
 	 * @extends vp.ValueParser
 	 * @since 0.1
 	 */
-	vp.TimeParser = dv.util.inherit( PARENT, {
+	vp.TimeParser = util.inherit( PARENT, {
 		/**
 		 * @see vp.ValueParser.parse
 		 * @since 0.1
@@ -32,4 +28,4 @@
 		}
 	} );
 
-}( valueParsers, dataValues, jQuery, time.Time ) );
+}( valueParsers, dataValues, jQuery, util ) );

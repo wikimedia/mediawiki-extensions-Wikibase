@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, vf ) {
+( function( $, vf, util ) {
 	'use strict';
 
 	var PARENT = vf.ValueFormatter;
@@ -13,7 +13,7 @@
 	 * @extends valueFormatters.ValueFormatter
 	 * @since 0.1
 	 */
-	vf.StringFormatter = vf.util.inherit( PARENT, {
+	vf.StringFormatter = util.inherit( PARENT, {
 		/**
 		 * @see valueFormatters.ValueFormatter.format
 		 * @since 0.1
@@ -30,4 +30,4 @@
 		}
 	} );
 
-}( jQuery, valueFormatters ) );
+}( jQuery, valueFormatters, util ) );

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( vf, dv ) {
+( function( vf, dv, util ) {
 	'use strict';
 
 	var PARENT = vf.tests.ValueFormatterTest;
@@ -14,7 +14,7 @@
 	 * @extends valueFormatters.tests.ValueFormatterTest
 	 * @since 0.1
 	 */
-	vf.tests.StringFormatterTest = vf.util.inherit( PARENT, {
+	vf.tests.StringFormatterTest = util.inherit( PARENT, {
 
 		/**
 		 * @see valueFormatters.tests.ValueFormatterTest.getObject
@@ -41,4 +41,4 @@
 
 	test.runTests( 'valueFormatters.StringFormatter' );
 
-}( valueFormatters, dataValues ) );
+}( valueFormatters, dataValues, util ) );

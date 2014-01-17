@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, $, QUnit ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -14,7 +14,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.DecimalValueTest = dv.util.inherit( PARENT, {
+	dv.tests.DecimalValueTest = util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getConstructor
@@ -52,4 +52,4 @@
 
 	test.runTests( 'dataValues.DecimalValueTest' );
 
-}( dataValues, jQuery, QUnit ) );
+}( dataValues, util ) );

@@ -31,7 +31,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'valueFormatters',
-				'valueFormatters.util',
 			),
 		),
 
@@ -51,19 +50,10 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.values',
+				'util.inherit',
 				'valueFormatters.ValueFormatter',
 			),
 		),
-
-		'valueFormatters.util' => $moduleTemplate + array(
-				'scripts' => array(
-					'valueFormatters.util.js',
-				),
-				'dependencies' => array(
-					'dataValues.util',
-					'valueFormatters',
-				),
-			),
 
 	);
 

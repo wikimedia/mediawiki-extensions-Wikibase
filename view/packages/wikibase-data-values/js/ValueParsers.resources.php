@@ -34,8 +34,8 @@ return call_user_func( function() {
 				'parsers/ApiBasedValueParser.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'valueParsers',
-				'valueParsers.util',
 			),
 		),
 
@@ -60,20 +60,11 @@ return call_user_func( function() {
 				'parsers/NullParser.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'valueParsers.ValueParser',
 				'valueParsers.api',
 				'globeCoordinate.js', // required by GlobeCoordinateParser
 				'time.js', // required by TimeParser
-			),
-		),
-
-		'valueParsers.util' => $moduleTemplate + array(
-			'scripts' => array(
-				'valueParsers.util.js',
-			),
-			'dependencies' => array(
-				'dataValues.util',
-				'valueParsers',
 			),
 		),
 

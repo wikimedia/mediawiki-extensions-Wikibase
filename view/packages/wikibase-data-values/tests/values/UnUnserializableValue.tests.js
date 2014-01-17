@@ -1,12 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, $, QUnit ) {
+( function( dv, util, $ ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -18,7 +14,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.UnUnserializableValueTest = dv.util.inherit( PARENT, {
+	dv.tests.UnUnserializableValueTest = util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getConstructor
@@ -42,7 +38,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @param {QUnit} assert
+		 * @param {Function} assert
 		 */
 		testGetStructure: function( assert ) {
 			var instances = this.getInstances(),
@@ -98,4 +94,4 @@
 
 	test.runTests( 'dataValues.UnUnserializableValue' );
 
-}( dataValues, jQuery, QUnit ) );
+}( dataValues, util, jQuery ) );

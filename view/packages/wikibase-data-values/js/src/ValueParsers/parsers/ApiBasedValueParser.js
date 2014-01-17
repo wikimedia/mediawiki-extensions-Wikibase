@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
- *
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, $ ) {
+( function( vp, dv, $, util ) {
 	'use strict';
 
 	var PARENT = vp.ValueParser;
@@ -20,7 +16,7 @@
 	 * @abstract
 	 * @since 0.1
 	 */
-	vp.ApiBasedValueParser = dv.util.inherit( 'VpApiBasedValueParser', PARENT, {
+	vp.ApiBasedValueParser = util.inherit( 'VpApiBasedValueParser', PARENT, {
 		/**
 		 * The key of the related API parser.
 		 * @type String
@@ -51,4 +47,4 @@
 
 	} );
 
-}( valueParsers, dataValues, jQuery ) );
+}( valueParsers, dataValues, jQuery, util ) );
