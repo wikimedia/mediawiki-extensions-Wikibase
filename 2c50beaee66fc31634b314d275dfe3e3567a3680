@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_9f71f4df",
+        "filename": "repo/includes/ChangeOp/ChangeOpReferenceRemove.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-17T12:04:25Z",
+      "side": 1,
+      "message": "In my opinion its just easier on the eyes while navigating around\n\nFor example in a list ordered alphabetically all of the CHangeOps to do with References will be grouped together when named like this.\n\nI dont mind either way really :)",
+      "parentUuid": "aef5673e_df289c34",
+      "revId": "2c50beaee66fc31634b314d275dfe3e3567a3680",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_9f22144f",
         "filename": "repo/includes/ChangeOp/ChangeOpReferenceRemove.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-17T10:27:36Z",
       "side": 1,
       "message": "...and not empty?",
+      "revId": "2c50beaee66fc31634b314d275dfe3e3567a3680",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_5fac8c32",
+        "filename": "repo/includes/ChangeOp/ChangeOpReferenceRemove.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-17T12:04:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_9f22144f",
       "revId": "2c50beaee66fc31634b314d275dfe3e3567a3680",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
