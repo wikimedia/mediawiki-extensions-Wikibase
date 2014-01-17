@@ -5,10 +5,11 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
 
 /**
@@ -38,6 +39,20 @@ class ChangeOpClaim extends ChangeOpBase {
 	/**
 	 * @since 0.5
 	 *
+	 * @var ClaimGuidValidator
+	 */
+	private $guidValidator;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var ClaimGuidParser
+	 */
+	private $guidParser;
+
+	/**
+	 * @since 0.5
+	 *
 	 * @var int|null
 	 */
 	protected $index;
@@ -45,11 +60,13 @@ class ChangeOpClaim extends ChangeOpBase {
 	/**
 	 * @param Claim $claim
 	 * @param ClaimGuidGenerator $guidGenerator
+	 * @param ClaimGuidValidator $guidValidator
+	 * @param ClaimGuidParser $guidParser
 	 * @param int|null $index
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claim, $guidGenerator, $index = null ) {
+	public function __construct( $claim, $guidGenerator, $guidValidator, $guidParser, $index = null ) {
 		if ( !$claim instanceof Claim ) {
 			throw new InvalidArgumentException( '$claim needs to be an instance of Claim' );
 		}
@@ -58,12 +75,22 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new InvalidArgumentException( '$guidGenerator needs to be an instance of ClaimGuidGenerator' );
 		}
 
+		if( !$guidValidator instanceof ClaimGuidValidator ){
+			throw new InvalidArgumentException( '$guidValidator needs to be an instance of ClaimGuidValidator' );
+		}
+
+		if( !$guidParser instanceof ClaimGuidParser ){
+			throw new InvalidArgumentException( '$guidParser needs to be an instance of ClaimGuidParser' );
+		}
+
 		if( !is_null( $index ) && !is_integer( $index ) ) {
 			throw new InvalidArgumentException( '$index needs to be null or an integer value' );
 		}
 
 		$this->claim = $claim;
 		$this->guidGenerator = $guidGenerator;
+		$this->guidValidator = $guidValidator;
+		$this->guidParser = $guidParser;
 		$this->index = $index;
 	}
 
@@ -72,16 +99,12 @@ class ChangeOpClaim extends ChangeOpBase {
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 
-		//TODO: inject parser and validator
-		$guidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
-		$guidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
-
 		if( $this->claim->getGuid() === null ){
 			$this->claim->setGuid( $this->guidGenerator->newGuid() );
 		}
-		$guid = $guidParser->parse( $this->claim->getGuid() );
+		$guid = $this->guidParser->parse( $this->claim->getGuid() );
 
-		if ( $guidValidator->validate( $guid->getSerialization() ) === false ) {
+		if ( $this->guidValidator->validate( $guid->getSerialization() ) === false ) {
 			throw new ChangeOpException( "Claim does not have a valid GUID" );
 		} else if ( !$entity->getId()->equals( $guid->getEntityId() ) ){
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
