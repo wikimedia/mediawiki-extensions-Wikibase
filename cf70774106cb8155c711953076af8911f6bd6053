@@ -326,6 +326,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_1fbde416",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T09:20:11Z",
+      "side": 1,
+      "message": "See Bug 56246 for details about (2) from above. Solving that bug should require a lot more thought than this one.",
+      "parentUuid": "aef5673e_3f3308f5",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_d4d9b02d",
         "filename": "lib/resources/wikibase.store/store.EntityStore.js",
         "patchSetId": 2
@@ -422,6 +440,23 @@
       "writtenOn": "2014-01-15T16:48:35Z",
       "side": 1,
       "message": "Would be nice to have some vertical spacing adding some blank lines in that code block.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_bf8b9871",
+        "filename": "lib/tests/qunit/wikibase.store/store.EntityStore.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T09:20:11Z",
+      "side": 1,
+      "message": "Do not use QUnit.expect, instead, give 2 as asyncTest() argument.",
       "revId": "cf70774106cb8155c711953076af8911f6bd6053",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
