@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_3e82e997",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-17T18:11:09Z",
+      "side": 1,
+      "message": "We already have $numSites and $numTitles around, might be better to use these",
+      "revId": "a0b48eae7e012bc7de4efe45199c67e98529dd3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_be76f9d3",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-17T18:11:09Z",
+      "side": 1,
+      "message": "Trailing space :(",
+      "revId": "a0b48eae7e012bc7de4efe45199c67e98529dd3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_1e4f2599",
+        "filename": "repo/tests/phpunit/includes/api/ItemByTitleHelperTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-17T18:11:09Z",
+      "side": 1,
+      "message": "Trailing space :(",
+      "revId": "a0b48eae7e012bc7de4efe45199c67e98529dd3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_fe536141",
+        "filename": "repo/tests/phpunit/includes/api/ItemByTitleHelperTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-17T18:11:09Z",
+      "side": 1,
+      "message": "These two tests could be combined into a testNotEnoughInput (or so) with a @dataprovider",
+      "revId": "a0b48eae7e012bc7de4efe45199c67e98529dd3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
