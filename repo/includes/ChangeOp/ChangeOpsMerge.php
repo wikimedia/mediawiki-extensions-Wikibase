@@ -4,10 +4,13 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -23,6 +26,15 @@ class ChangeOpsMerge {
 	private $toChangeOps;
 	/** @var array */
 	private $ignoreConflicts;
+
+	/**
+	 * @var ClaimGuidValidator
+	 */
+	private $claimGuidValidator;
+	/**
+	 * @var ClaimGuidParser
+	 */
+	private $claimGuidParser;
 
 	/**
 	 * @param ItemContent $fromItemContent
@@ -41,6 +53,10 @@ class ChangeOpsMerge {
 		$this->toChangeOps = new ChangeOps();
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 		$this->ignoreConflicts = $ignoreConflicts;
+
+		//@todo inject me
+		$this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
+		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 	}
 
 	/**
@@ -137,9 +153,11 @@ class ChangeOpsMerge {
 			if( $toMergeToClaim ) {
 				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim->getGuid() );
 			} else {
-				$this->toChangeOps->add( new ChangeOpClaim(
-					$toClaim,
-					new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+			$this->toChangeOps->add( new ChangeOpClaim(
+				$toClaim,
+				new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() ),
+				$this->claimGuidValidator,
+				$this->claimGuidParser
 				) );
 			}
 		}
