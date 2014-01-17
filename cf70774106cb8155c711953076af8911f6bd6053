@@ -121,6 +121,23 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_3f61c8d0",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:59:48Z",
+      "side": 1,
+      "message": "Please don\u0027t use \"then\", just use \"done\", \"fail\" and \"progress\". They are more expressive when reading the code and are used throughout the codebase already.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_91e45aa5",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
         "patchSetId": 2
