@@ -52,6 +52,7 @@ return call_user_func( function() {
 		'Wikibase\ChangeOp\ChangeOpSiteLink' => 'includes/ChangeOp/ChangeOpSiteLink.php',
 		'Wikibase\ChangeOp\ChangeOpMainSnak' => 'includes/ChangeOp/ChangeOpMainSnak.php',
 		'Wikibase\ChangeOp\ChangeOpClaim' => 'includes/ChangeOp/ChangeOpClaim.php',
+		'Wikibase\ChangeOp\ChangeOpClaimRemove' => 'includes/ChangeOp/ChangeOpClaimRemove.php',
 		'Wikibase\ChangeOp\ChangeOpQualifier' => 'includes/ChangeOp/ChangeOpQualifier.php',
 		'Wikibase\ChangeOp\ChangeOpReference' => 'includes/ChangeOp/ChangeOpReference.php',
 		'Wikibase\ChangeOp\ChangeOpStatementRank' => 'includes/ChangeOp/ChangeOpStatementRank.php',

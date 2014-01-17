@@ -48,12 +48,8 @@ class ChangeOpMainSnak extends ChangeOpBase {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string' );
 		}
 
-		if ( !( $snak instanceof Snak ) && !is_null( $snak ) ) {
-			throw new InvalidArgumentException( '$snak needs to be an instance of Snak or null' );
-		}
-
-		if ( $claimGuid === '' && $snak === null ) {
-			throw new InvalidArgumentException( 'Either $claimGuid or $snak needs to be set' );
+		if ( !( $snak instanceof Snak ) ) {
+			throw new InvalidArgumentException( '$snak needs to be an instance of Snak' );
 		}
 
 		$this->claimGuid = $claimGuid;
@@ -70,7 +66,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 
 	/**
 	 * @see ChangeOp::apply()
-	 * - the claim gets removed when $claimGuid is set and $snak is not set
 	 * - a new claim with $snak as mainsnak gets added when $claimGuid is empty and $snak is set
 	 * - the claim's mainsnak gets set to $snak when $claimGuid and $snak are set
 	 */
@@ -80,11 +75,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		if ( is_null( $this->claimGuid ) || empty( $this->claimGuid ) ) {
 			$this->addClaim( $entity, $claims, $summary );
 		} else {
-			if ( $this->snak === null ) {
-				$this->removeClaim( $claims, $summary );
-			} else {
-				$this->setClaim( $claims, $summary );
-			}
+			$this->setClaim( $claims, $summary );
 		}
 
 		$entity->setClaims( $claims );

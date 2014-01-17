@@ -13,6 +13,7 @@ use Title;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOpClaim;
+use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpLabel;
@@ -417,12 +418,12 @@ class EditEntity extends ModifyEntity {
 		if( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ){
 			foreach( $claims as $subClaims ){
 				$changeOps = array_merge( $changeOps,
-					$this->getRemoveClaimsChangeOps( $subClaims, $guidGenerator ),
+					$this->getRemoveClaimsChangeOps( $subClaims ),
 					$this->getModifyClaimsChangeOps( $subClaims, $guidGenerator ) );
 			}
 		} else {
 			$changeOps = array_merge( $changeOps,
-				$this->getRemoveClaimsChangeOps( $claims, $guidGenerator ),
+				$this->getRemoveClaimsChangeOps( $claims ),
 				$this->getModifyClaimsChangeOps( $claims, $guidGenerator ) );
 		}
 
@@ -454,11 +455,7 @@ class EditEntity extends ModifyEntity {
 				/**	 @var $claim Claim  */
 
 				if( array_key_exists( 'id', $claimArray ) ){
-					$opsToReturn[] = new ChangeOpMainSnak(
-						$claim->getGuid(),
-						null,
-						$guidGenerator
-					);
+					$opsToReturn[] = new ChangeOpClaimRemove( $claim->getGuid() );
 				}
 				$opsToReturn[] = new ChangeOpClaim( $claim, $guidGenerator );
 			}
@@ -468,20 +465,17 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * Get changeops that remove all claims that have the 'remove' key in the array
+	 *
 	 * @param array $claims array of serialized claims
-	 * @param ClaimGuidGenerator $guidGenerator
+	 *
 	 * @return ChangeOp[]
 	 */
-	private function getRemoveClaimsChangeOps( $claims, $guidGenerator ) {
+	private function getRemoveClaimsChangeOps( $claims ) {
 		$opsToReturn = array();
 		foreach ( $claims as $claimArray ) {
 			if( array_key_exists( 'remove', $claimArray ) ){
 				if( array_key_exists( 'id', $claimArray ) ){
-					$opsToReturn[] = new ChangeOpMainSnak(
-						$claimArray['id'],
-						null,
-						$guidGenerator
-					);
+					$opsToReturn[] = new ChangeOpClaimRemove( $claimArray['id'] );
 				} else {
 					$this->dieUsage( 'Cannot remove a claim with no GUID', 'invalid-claim' );
 				}
