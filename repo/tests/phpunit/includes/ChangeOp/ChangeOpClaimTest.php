@@ -4,6 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuid;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -12,6 +14,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpClaim
@@ -26,24 +30,68 @@ use Wikibase\Lib\ClaimGuidGenerator;
  */
 class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
-	public function invalidConstructorProvider() {
-		$validGuidGenerator = new ClaimGuidGenerator( new ItemId( 'q42' ) );
+	public function getValidClaim() {
+		return new Claim( new PropertyNoValueSnak( 7 ) );
+	}
 
-		$args = array();
-		$args[] = array( array(), $validGuidGenerator );
+	public function getValidGuidGenerator( ItemId $itemId ) {
+		return new ClaimGuidGenerator( $itemId );
+	}
 
-		return $args;
+	private function getMockGuidValidator() {
+		$mock = $this->getMockBuilder( '\Wikibase\Lib\ClaimGuidValidator' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'validate' )
+			->will( $this->returnValue( true ) );
+		$mock->expects( $this->any() )
+			->method( 'validateFormat' )
+			->will( $this->returnValue( true ) );
+		return $mock;
+	}
+
+	private function getMockGuidParser( ItemId $itemId ) {
+		$mockClaimGuid = $this->getMockBuilder( 'Wikibase\DataModel\Claim\ClaimGuid' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mockClaimGuid->expects( $this->any() )
+			->method( 'getSerialization' )
+			->will( $this->returnValue( 'theValidatorIsMockedSoMeh! :D' ) );
+		$mockClaimGuid->expects( $this->any() )
+			->method( 'getEntityId' )
+			->will( $this->returnValue( $itemId ) );
+
+		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Claim\ClaimGuidParser' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'parse' )
+			->will( $this->returnValue( $mockClaimGuid ) );
+		return $mock;
+	}
+
+	public function invalidIndexProvider() {
+		return array(
+			array( 'foo' ),
+			array( array() ),
+			array( $this->getValidClaim() ),
+		);
 	}
 
 	/**
-	 * @dataProvider invalidConstructorProvider
+	 * @dataProvider invalidIndexProvider
 	 * @expectedException InvalidArgumentException
-	 *
-	 * @param Claim $claim
-	 * @param ClaimGuidGenerator $guidGenerator
 	 */
-	public function testInvalidConstruct( $claim, $guidGenerator ) {
-		new ChangeOpClaim( $claim, $guidGenerator );
+	public function testConstructionWithInvalidIndex( $invalidIndex ) {
+		$itemId = new ItemId( 'q42' );
+		new ChangeOpClaim(
+			$this->getValidClaim(),
+			$this->getValidGuidGenerator( $itemId),
+			$this->getMockGuidValidator(),
+			$this->getMockGuidParser( $itemId ),
+			$invalidIndex
+		);
 	}
 
 	public function provideTestApply() {
@@ -124,6 +172,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$changeOpClaim = new ChangeOpClaim(
 			$claim,
 			new ClaimGuidGenerator( $entity->getId() ),
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(), //@todo mock me!
+			WikibaseRepo::getDefaultInstance()->getClaimGuidParser(), //@todo mock me!
 			$index
 		);
 		$changeOpClaim->apply( $entity );

@@ -4,14 +4,17 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
-use Wikibase\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\SiteLinkCache;
 use Wikibase\Term;
+use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -25,12 +28,30 @@ class ChangeOpsMerge {
 	private $toItem;
 	private $fromChangeOps;
 	private $toChangeOps;
-	/** @var array */
+
+	/**
+	 * @var array
+	 */
 	private $ignoreConflicts;
-	/** @var LabelDescriptionDuplicateDetector */
+
+	/**
+	 * @var LabelDescriptionDuplicateDetector
+	 */
 	private $labelDescriptionDuplicateDetector;
-	/** @var SitelinkCache */
+
+	/**
+	 * @var SitelinkCache
+	 */
 	private $sitelinkCache;
+
+	/**
+	 * @var ClaimGuidValidator
+	 */
+	private $claimGuidValidator;
+	/**
+	 * @var ClaimGuidParser
+	 */
+	private $claimGuidParser;
 
 	/**
 	 * @param Item $fromItem
@@ -47,14 +68,19 @@ class ChangeOpsMerge {
 		SitelinkCache $sitelinkCache,
 		$ignoreConflicts = array()
 	) {
+		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
+
 		$this->fromItem = $fromItem;
 		$this->toItem = $toItem;
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
-		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 		$this->ignoreConflicts = $ignoreConflicts;
 		$this->labelDescriptionDuplicateDetector = $labelDescriptionDuplicateDetector;
 		$this->sitelinkCache = $sitelinkCache;
+
+		//@todo inject me
+		$this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
+		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 	}
 
 	/**
@@ -152,9 +178,11 @@ class ChangeOpsMerge {
 			if( $toMergeToClaim ) {
 				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim->getGuid() );
 			} else {
-				$this->toChangeOps->add( new ChangeOpClaim(
-					$toClaim,
-					new ClaimGuidGenerator( $this->toItem->getId() )
+			$this->toChangeOps->add( new ChangeOpClaim(
+				$toClaim,
+				new ClaimGuidGenerator( $this->toItem->getId() ),
+				$this->claimGuidValidator,
+				$this->claimGuidParser
 				) );
 			}
 		}
