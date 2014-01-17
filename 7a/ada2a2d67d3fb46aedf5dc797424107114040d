@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: WikidataJenkins <wikidata-services@wikimedia.org>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.org>
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 17 Jan 2014 11:21:47 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/108028
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
