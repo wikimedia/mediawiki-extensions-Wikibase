@@ -224,6 +224,23 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_84b76d81",
+        "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:42:03Z",
+      "side": 1,
+      "message": "Missing documentation for \"entityStore\" parameter",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_743e6428",
         "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
         "patchSetId": 2
@@ -241,6 +258,57 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_c4bd7565",
+        "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:42:03Z",
+      "side": 1,
+      "message": "This construct seems overly complex. The function does not get publicly exposed and you are just calling it to build a function which will return the same value over and over (the unserialize function).\nSo why not just build that unserialize function and put it in a local \"unserialize\" variable and get rid of two or three levels of indentation here.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_64ac6933",
+        "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:42:03Z",
+      "side": 1,
+      "message": "I would prefer if you would inject the MW config as a parameter. This way the function is properly designed for clean testing since you can just create a fake MW config instance and inject it here rather than using evil globals in your test and code.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_3f3308f5",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:42:03Z",
+      "side": 1,
+      "message": "Looks like a step into the right direction.\n\nThough, at least in widgets I would prefer the term \"entityLookup\" instead of \"entityStore\".\nIn the places the object is used, it currently is and should only be used as a lookup.\nThe new store constructor should basically explicitly implement a lookup interface.\nDepending on where you want to go with this, you might also want to rename this to \"Lookup\" rather than \"Store\".\n\nKeep in mind that in the *view widgets you are dealing with two things:\n1. LOOKUP for displaying other entities information such as links to a property or the label of an entity used in a property-value snak.\n2. You want to STORE information about parts of an entity, basically the part your *view widget is dedicated to.\n\nThe two are not necessarily related. There should not be a \"master\" class/option to handle both cases within the widgets.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_d4d9b02d",
         "filename": "lib/resources/wikibase.store/store.EntityStore.js",
         "patchSetId": 2
@@ -252,6 +320,57 @@
       "writtenOn": "2014-01-15T16:48:35Z",
       "side": 1,
       "message": "Please add @since tag to public functions.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_9f53341a",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:42:03Z",
+      "side": 1,
+      "message": "Please also document the resolve callback of the promise.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_bf4ef870",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:42:03Z",
+      "side": 1,
+      "message": "Some issues.\n1. As described below, this lookup should deal with Entity rather than FetchedContent.\n2. Entities given via mw.config should not be seeded into an instance directly, instead, use a cache which itself implements the same interface as the lookup using the cache.\nSo you can have an EntityFromFetchedEntitiesLookup, an EntityFromMwApiLookup and an EntityMixedLookupsLookup which is taking several lookup instances and checking each one of them one after the other.\nThere might be different approaches, the whole caching/mw.config thing might not be that trivial.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_bf003805",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2014-01-17T08:42:03Z",
+      "side": 1,
+      "message": "This lookup/store should not deal with FetchedContent but with Entity only.\nOne of the reasons you need the whole FetchedContent thing right now is that you need the title when generating links to entity pages in the widgets.\n\nAll of the widgets should preferrably not even know about mw.Title tough. Think about reusing the widgets on some other site which is replecating Wikidatas entities and displays them in a non-MW environment.\nSo what you could do is to define an interface for something like an EntityRefLookup and have a MW specific implementation of that injected into your widgets for creating the links to the entity pages.\nThis lookup will also require access to the FetchedEntities, so you could inject and share the same object with the EntityFromFetchedEntitiesLookup instance mentioned in the comment above.\n\nAn alternative would be to get rid of FetchedContent and instead separate the mw.config variable into something fed to the Entity lookup and another thing fed to the entity reference lookup.\nSooner or later you might also have to deal with revision IDs, so not sure about the best approach right now.",
       "revId": "cf70774106cb8155c711953076af8911f6bd6053",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
