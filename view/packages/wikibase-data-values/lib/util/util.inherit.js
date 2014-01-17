@@ -3,7 +3,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-var util = util || {};
+this.util = util || {};
 
 ( function( util ) {
 	'use strict';
