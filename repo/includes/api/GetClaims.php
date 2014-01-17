@@ -50,7 +50,7 @@ class GetClaims extends ApiWikibase {
 		}
 
 		if( $params['ungroupedlist'] ) {
-			$this->resultBuilder->getSerializationOptions()
+			$this->getResultBuilder()->getOptions()
 				->setOption(
 					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
 					array()
