@@ -8,6 +8,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Entity;
 use Wikibase\Claims;
 use Wikibase\Claim;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -17,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
 class GetClaims extends ApiWikibase {
 
@@ -45,6 +47,14 @@ class GetClaims extends ApiWikibase {
 
 		if ( !$entity ) {
 			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity' );
+		}
+
+		if( $params['ungroupedlist'] ) {
+			$this->resultBuilder->getSerializationOptions()
+				->setOption(
+					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
+					array()
+				);
 		}
 
 		$claims = $this->getClaims( $entity, $claimGuid );
@@ -106,7 +116,7 @@ class GetClaims extends ApiWikibase {
 
 		$claims = array();
 
-		/** @var \Wikibase\Claim $claim */
+		/** @var Claim $claim */
 		foreach ( $claimsList as $claim ) {
 			if ( $this->claimMatchesFilters( $claim ) ) {
 				$claims[] = $claim;
@@ -214,6 +224,10 @@ class GetClaims extends ApiWikibase {
 				),
 				ApiBase::PARAM_DFLT => 'references',
 			),
+			'ungroupedlist' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
 		);
 	}
 
@@ -231,6 +245,7 @@ class GetClaims extends ApiWikibase {
 			'claim' => 'A GUID identifying the claim. Required unless entity is provided. The GUID is the globally unique identifier for a claim, e.g. "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F".',
 			'rank' => 'Optional filter to return only the claims that have the specified rank',
 			'props' => 'Some parts of the claim are returned optionally. This parameter controls which ones are returned.',
+			'ungroupedlist' => 'Do not group snaks by property id',
 		);
 	}
 
@@ -256,10 +271,14 @@ class GetClaims extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			"api.php?action=wbgetclaims&entity=Q42" => "Get claims for item with ID Q42",
-			"api.php?action=wbgetclaims&entity=Q42&property=P2" => "Get claims for item with ID Q42 and property with ID P2",
-			"api.php?action=wbgetclaims&entity=Q42&rank=normal" => "Get claims for item with ID Q42 that are ranked as normal",
-			'api.php?action=wbgetclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => 'Get claim with GUID of Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F',
+			"api.php?action=wbgetclaims&entity=Q42" =>
+				"Get claims for item with ID Q42",
+			"api.php?action=wbgetclaims&entity=Q42&property=P2" =>
+				"Get claims for item with ID Q42 and property with ID P2",
+			"api.php?action=wbgetclaims&entity=Q42&rank=normal" =>
+				"Get claims for item with ID Q42 that are ranked as normal",
+			'api.php?action=wbgetclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' =>
+				'Get claim with GUID of Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F',
 		);
 	}
 
