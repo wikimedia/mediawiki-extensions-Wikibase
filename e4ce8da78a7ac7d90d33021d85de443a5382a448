@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_dfbe5cd1",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-17T10:35:54Z",
+      "side": 1,
+      "message": "Briefly explain what this does: \"finds a claim in the target entity with the same main snak and qualifiers as the given $fromStatement\"",
+      "revId": "e4ce8da78a7ac7d90d33021d85de443a5382a448",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_fff120c9",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-17T10:35:54Z",
+      "side": 1,
+      "message": "how about \"findMatchingClaim\" or \"findEquivalentClaim\"? For the function that does the search, the intention of merging references isn\u0027t relevant.",
+      "revId": "e4ce8da78a7ac7d90d33021d85de443a5382a448",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_bfc39860",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-17T10:35:54Z",
+      "side": 1,
+      "message": "\"getClaimHash\"? It\u0027s the hash that represents the actual claim (that is, main snak + qualifiers). Perhaps \"getQualifiedClaimHash\", to make things obvious.",
+      "revId": "e4ce8da78a7ac7d90d33021d85de443a5382a448",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
