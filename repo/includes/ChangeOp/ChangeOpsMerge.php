@@ -5,6 +5,7 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
@@ -131,8 +132,10 @@ class ChangeOpsMerge {
 			$toClaim->setGuid( null );
 
 			$this->toChangeOps->add( new ChangeOpClaim(
-				$toClaim ,
-				new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+				$toClaim,
+				new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() ),
+				WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(), //@todo inject me in the constructor!
+				WikibaseRepo::getDefaultInstance()->getClaimGuidParser() //@todo inject me in the constructor!
 			) );
 		}
 	}

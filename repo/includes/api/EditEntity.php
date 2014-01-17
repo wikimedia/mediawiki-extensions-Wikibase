@@ -20,11 +20,13 @@ use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
@@ -205,7 +207,9 @@ class EditEntity extends ModifyEntity {
 			$changeOps->add(
 				$this->getClaimsChangeOps(
 					$data['claims'],
-					new ClaimGuidGenerator( $entity->getId() )
+					new ClaimGuidGenerator( $entity->getId() ),
+					WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
+					WikibaseRepo::getDefaultInstance()->getClaimGuidParser()
 				)
 			);
 		}
@@ -405,9 +409,11 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @param array $claims
 	 * @param ClaimGuidGenerator $guidGenerator
+	 * @param ClaimGuidValidator $guidValidator
+	 * @param ClaimGuidParser $guidParser
 	 * @return ChangeOpClaim[]
 	 */
-	protected function getClaimsChangeOps( $claims, $guidGenerator ) {
+	protected function getClaimsChangeOps( $claims, $guidGenerator, $guidValidator, $guidParser ) {
 		if ( !is_array( $claims ) ) {
 			$this->dieUsage( "List of claims must be an array", 'not-recognized-array' );
 		}
@@ -417,13 +423,13 @@ class EditEntity extends ModifyEntity {
 		if( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ){
 			foreach( $claims as $subClaims ){
 				$changeOps = array_merge( $changeOps,
-					$this->getRemoveClaimsChangeOps( $subClaims, $guidGenerator ),
-					$this->getModifyClaimsChangeOps( $subClaims, $guidGenerator ) );
+					$this->getRemoveClaimsChangeOps( $subClaims, $guidGenerator , $guidValidator, $guidParser ),
+					$this->getModifyClaimsChangeOps( $subClaims, $guidGenerator , $guidValidator, $guidParser ) );
 			}
 		} else {
 			$changeOps = array_merge( $changeOps,
-				$this->getRemoveClaimsChangeOps( $claims, $guidGenerator ),
-				$this->getModifyClaimsChangeOps( $claims, $guidGenerator ) );
+				$this->getRemoveClaimsChangeOps( $claims, $guidGenerator , $guidValidator, $guidParser ),
+				$this->getModifyClaimsChangeOps( $claims, $guidGenerator , $guidValidator, $guidParser ) );
 		}
 
 		return $changeOps;
@@ -432,9 +438,12 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @param array $claims array of serialized claims
 	 * @param ClaimGuidGenerator $guidGenerator
+	 * @param ClaimGuidValidator $guidValidator
+	 * @param ClaimGuidParser $guidParser
+	 *
 	 * @return ChangeOp[]
 	 */
-	private function getModifyClaimsChangeOps( $claims, $guidGenerator ){
+	private function getModifyClaimsChangeOps( $claims, $guidGenerator, $guidValidator, $guidParser ){
 		$opsToReturn = array();
 
 		$serializerFactory = new SerializerFactory();
@@ -460,7 +469,7 @@ class EditEntity extends ModifyEntity {
 						$guidGenerator
 					);
 				}
-				$opsToReturn[] = new ChangeOpClaim( $claim, $guidGenerator );
+				$opsToReturn[] = new ChangeOpClaim( $claim, $guidGenerator, $guidValidator, $guidParser );
 			}
 		}
 		return $opsToReturn;
