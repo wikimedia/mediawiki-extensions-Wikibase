@@ -10213,6 +10213,7 @@ IP-мекенжайыңыз бұл  $1 түзету тарихында жазы�
  * @author ChongDae
  * @author Hym411
  * @author Kwj2772
+ * @author Priviet
  * @author 아라
  */
 $messages['ko'] = array(
@@ -10443,7 +10444,10 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-item-summary-wbsetaliases-add' => '[$2] {{PLURAL:$1|별칭}}을 추가함',
 	'wikibase-item-summary-wbsetaliases-remove' => '[$2] {{PLURAL:$1|별칭}}을 제거함',
 	'wikibase-item-summary-wbsetsitelink-add' => '[$2]에 링크를 추가함',
+	'wikibase-item-summary-wbsetsitelink-add-both' => '[$2]에 배지로 추가된 링크',
 	'wikibase-item-summary-wbsetsitelink-set' => '[$2]로 링크를 바꿈',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => '[$2]를 가리키는 링크용를 위해 변경된 배지',
+	'wikibase-item-summary-wbsetsitelink-set-both' => '[$2]를 가리키는 링크를 위해 변경된 링크와 배지',
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2]에서 링크를 제거함',
 	'wikibase-item-summary-wblinktitles-create' => '[$2↔$3] 문서를 연결하는 이 항목을 만듦',
 	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] 문서를 연결하는 언어 링크를 추가함',
