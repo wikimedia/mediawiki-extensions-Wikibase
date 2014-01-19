@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use InvalidArgumentException;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Settings;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
@@ -24,6 +25,15 @@ use Wikibase\DataModel\SiteLink;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
+
+	public function setUp() {
+		parent::setUp();
+
+		Settings::singleton()->setSetting( 'badgeItems', array(
+			'Q42' => '',
+			'Q149' => '',
+		) );
+	}
 
 	/**
 	 * @dataProvider invalidConstructorProvider
@@ -42,6 +52,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( 'plwiki', 'Warszawa', array( 'FA', 'GA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q42' ), 'FA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new PropertyId( 'P42' ) ) );
+		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q32' ) ) );
 
 		return $argLists;
 	}
