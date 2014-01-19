@@ -100,6 +100,7 @@ class PropertyParserFunction {
 	public function getRenderer( Language $language ) {
 		wfProfileIn( __METHOD__ );
 
+		// @TODO: Inject depedencies
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$errorFormatter = new ParserErrorMessageFormatter( $language );
 
