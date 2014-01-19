@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "aef5673e_b0ebc2da",
+        "filename": "client/includes/scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-01-19T01:21:45Z",
+      "side": 1,
+      "message": "* WikibaseLuaEntityBindings",
+      "revId": "8226e83693b582d869f58657b4c76c5d85c52ed4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_d0b773d2",
         "filename": "client/tests/phpunit/includes/scribunto/LuaWikibaseEntityLibraryTests.lua",
         "patchSetId": 11
