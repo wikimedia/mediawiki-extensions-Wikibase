@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
+use Wikibase\Settings;
 
 /**
  * @covers Wikibase\Api\SetSiteLink
@@ -40,6 +41,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	private static $gaItemId;
 	/* @var ItemId */
 	private static $faItemId;
+	/* @var ItemId */
+	private static $otherItemId;
 
 	public static function provideData() {
 		return array(
@@ -117,7 +120,10 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			array( //8 badge item does not exist
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'Q99999|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
-			array( //9 no sitelink - cannot change badges
+			array( //9 badge id is not specified
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => '{faItem}|{otherItem}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-badge' ) ) ),
+			array( //10 no sitelink - cannot change badges
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'badges' => '{gaItem}|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
 		);
@@ -138,6 +144,17 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$status = $badge->save( 'SetSiteLinkTestFA', null, EDIT_NEW );
 			$this->assertTrue( $status->isOK() );
 			self::$faItemId = $badge->getEntity()->getId();
+
+			$badge = ItemContent::newEmpty();
+			$status = $badge->save( 'SetSiteLinkTestOther', null, EDIT_NEW );
+			$this->assertTrue( $status->isOK() );
+			self::$otherItemId = $badge->getEntity()->getId();
+
+			Settings::singleton()->setSetting( 'badgeItems', array(
+				self::$gaItemId->getPrefixedId() => '',
+				self::$faItemId->getPrefixedId() => '',
+				'Q99999' => '', // Just in case we have a wrong config
+			) );
 		}
 		self::$hasSetup = true;
 	}
@@ -158,6 +175,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					$dummy = self::$gaItemId->getPrefixedId();
 				} elseif ( $dummy === '{faItem}' ) {
 					$dummy = self::$faItemId->getPrefixedId();
+				} elseif ( $dummy === '{otherItem}' ) {
+					$dummy = self::$otherItemId->getPrefixedId();
 				}
 			}
 		}
@@ -178,8 +197,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		// Replace the placeholder item ids in the API params
 		if ( isset( $params['badges'] ) ) {
 			$params['badges'] = str_replace(
-				array( '{gaItem}', '{faItem}' ),
-				array( self::$gaItemId->getPrefixedId(), self::$faItemId->getPrefixedId() ),
+				array( '{gaItem}', '{faItem}', '{otherItem}' ),
+				array( self::$gaItemId->getPrefixedId(), self::$faItemId->getPrefixedId(), self::$otherItemId->getPrefixedId() ),
 				$params['badges']
 			);
 		}
@@ -286,8 +305,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		// Replace the placeholder item ids in the API params
 		if ( isset( $params['badges'] ) ) {
 			$params['badges'] = str_replace(
-				array( '{gaItem}', '{faItem}' ),
-				array( self::$gaItemId->getPrefixedId(), self::$faItemId->getPrefixedId() ),
+				array( '{gaItem}', '{faItem}', '{otherItem}' ),
+				array( self::$gaItemId->getPrefixedId(), self::$faItemId->getPrefixedId(), self::$otherItemId->getPrefixedId() ),
 				$params['badges']
 			);
 		}

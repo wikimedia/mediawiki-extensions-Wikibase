@@ -185,6 +185,7 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-setsitelink-warning-remove' => 'Do you really want to remove the site link of [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'The site id "$1" is unknown. Please use an existing site id, such as "enwiki".',
 	'wikibase-setsitelink-not-item' => 'The id $1 does not belong to an item.',
+	'wikibase-setsitelink-not-badge' => 'The item $1 is not a badge.',
 	'wikibase-setsitelink-add-failed' => 'The site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'The site link could not be removed.',
 	'wikibase-setsitelink-not-itemid' => '"$1" is not a valid item id. Site links can only be set for items.',
@@ -902,6 +903,10 @@ Parameters:
 
 Parameters:
 * $1 - the invalid id',
+	'wikibase-setsitelink-not-badge' => 'Response informing that the given item is not specified to be used as a badge.
+
+Parameters:
+* $1 - the invalid item\'s id',
 	'wikibase-setsitelink-add-failed' => 'Error message when the site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'Error message when the site link could not be removed.',
 	'wikibase-setsitelink-not-itemid' => 'Error message when an entity id, other than item id, is entered. The message advises users that the id is invalid and only items have site links.

@@ -15,6 +15,8 @@ use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Summary;
+use Wikibase\Settings;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -394,6 +396,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 			if ( !( $badgeId instanceof ItemId ) ) {
 				$status->fatal( 'wikibase-setsitelink-not-item', $badgeId->getPrefixedId() );
+				return false;
+			}
+
+			if ( !in_array( $badgeId->getPrefixedId(), array_keys( Settings::get( 'badgeItems' ) ) ) ) {
+				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
 				return false;
 			}
 

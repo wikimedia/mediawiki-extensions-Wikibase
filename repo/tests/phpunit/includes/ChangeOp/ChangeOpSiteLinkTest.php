@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use InvalidArgumentException;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Settings;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
@@ -23,15 +24,17 @@ use Wikibase\DataModel\SiteLink;
  */
 class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @dataProvider invalidConstructorProvider
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testConstructorWithInvalidArguments( $siteId, $linkPage, $badges = null ) {
-		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
+	private function applySettings() {
+		// Allow some badges for testing
+		Settings::singleton()->setSetting( 'badgeItems', array(
+			'Q42' => '',
+			'Q149' => '',
+		) );
 	}
 
 	public function invalidConstructorProvider() {
+		$this->applySettings();
+
 		$argLists = array();
 
 		$argLists[] = array( 'enwiki', 1234 );
@@ -40,11 +43,22 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( 'plwiki', 'Warszawa', array( 'FA', 'GA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q42' ), 'FA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new PropertyId( 'P42' ) ) );
+		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q32' ) ) );
 
 		return $argLists;
 	}
 
+	/**
+	 * @dataProvider invalidConstructorProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testConstructorWithInvalidArguments( $siteId, $linkPage, $badges = null ) {
+		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
+	}
+
 	public function changeOpSiteLinkProvider() {
+		$this->applySettings();
+
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
@@ -136,6 +150,8 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidChangeOpSiteLinkProvider() {
+		$this->applySettings();
+
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
