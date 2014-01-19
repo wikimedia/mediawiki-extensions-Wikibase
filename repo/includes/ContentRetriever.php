@@ -46,7 +46,8 @@ class ContentRetriever {
 			$revision = Revision::newFromTitle( $title, $oldId );
 		}
 
-		return $revision !== null ? $revision->getContent() : null;
+		return $revision !== null ?
+			$revision->getContent( Revision::FOR_THIS_USER ) : null;
 	}
 
 	/**
