@@ -27,6 +27,19 @@ use Wikibase\SettingsArray;
  */
 class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
+	public function setUp() {
+		// If WikibaseClient can't find a ClientStore it will throw an exception
+		// in WikibaseClient::getStore
+		if (
+			!Settings::get( 'defaultClientStore' ) &&
+			Settings::get( 'repoDatabase' ) === null
+		) {
+			$this->markTestSkipped(
+				'WikibaseClientTest needs WikibaseClient to be able to construct a ClientStore'
+			);
+		}
+	}
+
 	public function testGetDataTypeFactoryReturnType() {
 		$returnValue = $this->getDefaultInstance()->getDataTypeFactory();
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );

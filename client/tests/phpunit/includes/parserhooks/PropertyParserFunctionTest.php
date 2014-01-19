@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\PropertyParserFunction;
+use Wikibase\Settings;
 
 /**
  * @covers Wikibase\PropertyParserFunction
@@ -18,6 +19,20 @@ use Wikibase\PropertyParserFunction;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
+
+	public function setUp() {
+		// If WikibaseClient can't find a ClientStore it will throw an exception
+		// in WikibaseClient::getStore.
+		// Needed as PropertyParserFunction::getRenderer uses global state.
+		if (
+			!Settings::get( 'defaultClientStore' ) &&
+			Settings::get( 'repoDatabase' ) === null
+		) {
+			$this->markTestSkipped(
+				'PropertyParserFunctionTest needs WikibaseClient to be able to construct a ClientStore'
+			);
+		}
+	}
 
 	public function getPropertyParserFunction( $parser, $entityId ) {
 		$entityLookup = new MockRepository();
