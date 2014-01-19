@@ -4245,7 +4245,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Einen Qualifikator|$4 Qualifikatoren}} {{PLURAL:$3|einer Aussage|von Aussagen}} geändert',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Eine Referenz|$4 Referenzen}} {{PLURAL:$3|einer Aussage|von Aussagen}} geändert',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Den Rang der {{PLURAL:$3|Aussage|Aussagen}} geändert',
-	'wikibase-item-summary-clientsitelink-update' => 'Seite verschoben von [$3] nach [$4]',
+	'wikibase-item-summary-clientsitelink-update' => 'Seite von [$3] nach [$4] verschoben',
 	'wikibase-item-summary-wbsetqualifier-add' => '{{PLURAL:$1|Qualifikator|Qualifikatoren}} hinzugefügt',
 	'wikibase-item-summary-wbsetqualifier-update' => '{{PLURAL:$1|Qualifikator|Qualifikatoren}} geändert',
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|Qualifikator|Qualifikatoren}} entfernt',
@@ -5540,6 +5540,7 @@ Sinu IP-aadress talletatakse olemi ajaloos.',
 	'wikibase-entitydata-bad-id' => 'Vigane identifikaator: $1.',
 	'wikibase-entitydata-unsupported-format' => 'See liides ei toeta andmevormingut $1.',
 	'wikibase-entitydata-title' => 'Olemi andmed',
+	'wikibase-api-no-such-sitelink' => 'Sellist võrgukohalinki ei õnnestu leida.',
 	'wikibase-restoreold' => 'ennista',
 	'wikibase-restore-summary' => 'Kasutaja [[Special:Contributions/$2|$2]] redaktsioon $1 taastatud.',
 	'wikibase-noentity-createone' => 'Saad ka [[$1|uue luua]].',
@@ -10980,10 +10981,21 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'action-sitelink-remove' => 'Website-Linken ewechhuelen',
 	'action-sitelink-update' => 'Website-Linken aktualiséieren',
 	'action-linktitles-update' => 'Säiten associéieren',
-	'action-label-remove' => 'Etiketten läschen',
+	'action-label-remove' => 'Etikette läschen',
 	'action-label-update' => 'Etiketten aktualiséieren',
 	'action-description-remove' => 'Beschreiwungen läschen',
 	'action-description-update' => 'Beschreiwungen aktualiséieren',
+);
+
+/** لوری (لوری)
+ * @author Bonevarluri
+ */
+$messages['lrc'] = array(
+	'wikibase-anonymouseditwarning' => 'زنئار:شما وامین نیومایته.
+نشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.',
+	'wikibase-dispatchstats-changes' => 'آماریا آلشت دئن پهرستنومه',
+	'wikibase-dispatchstats-lag-time' => 'پتی وار',
+	'wikibase-listdatatypes-commonsmedia-head' => 'پرنمون یا رسانه',
 );
 
 /** Lithuanian (lietuvių)
@@ -11838,7 +11850,7 @@ $messages['ms'] = array(
 	'wikibase-description-empty' => 'Keterangan belum dinyatakan.',
 	'wikibase-description-edit-placeholder' => 'taipkan keterangan',
 	'wikibase-sitelink-site-edit-placeholder' => 'tapak',
-	'wikibase-sitelink-page-edit-placeholder' => 'rencana', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'halaman',
 	'wikibase-alias-edit-placeholder' => 'taipkan nama lain',
 	'wikibase-label-input-help-message' => 'Taipkan tajuk set data ini di $1.',
 	'wikibase-description-input-help-message' => 'Taipkan keterangan ringkas di $1.',

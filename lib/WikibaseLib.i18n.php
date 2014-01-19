@@ -1226,6 +1226,7 @@ $messages['et'] = array(
 	'wikibase-error-ui-link-exists' => 'Sellele leheküljele ei saa linkida, sest teine üksus juba lingib sellele.',
 	'wikibase-error-ui-session-failure' => 'Seanss on aegunud. Palun logi uuesti sisse.',
 	'wikibase-error-ui-edit-conflict' => 'Esines redigeerimiskonflikt. Palun värskenda lehekülge ja salvesta uuesti.',
+	'wikibase-quantitydetails-unit' => 'Ühik',
 	'wikibase-replicationnote' => 'Palun pane tähele, et võib kuluda mitu minutit, enne kui muudatused on kõigis vikides nähtavad.',
 	'wikibase-sitelinks-wikipedia' => 'Sellele üksusele viitavad Vikipeedia-leheküljed',
 	'wikibase-sitelinks-sitename-columnheading' => 'Keel',
@@ -1244,6 +1245,7 @@ $messages['et'] = array(
 	'wikibase-validator-no-such-property' => 'Omadust $1 ei leidu',
 	'wikibase-validator-bad-value' => 'Lubamatu väärtus: $1',
 	'wikibase-validator-bad-value-type' => 'Vigane väärtuse tüüp $1, oodatav $2',
+	'wikibase-validator-unknown-unit' => 'Tundmatu ühik: $1',
 	'datatypes-type-wikibase-item' => 'Üksus',
 	'datatypes-type-commonsMedia' => 'Commonsi meediafail',
 	'version-wikibase' => 'Vikibaas',
@@ -2272,6 +2274,14 @@ $messages['lb'] = array(
 	'version-wikibase' => 'Wikibase',
 );
 
+/** لوری (لوری)
+ * @author Bonevarluri
+ */
+$messages['lrc'] = array(
+	'wikibase-error-ui-session-failure' => 'نشستگه شما تموم بیه. لطفن دواره بیایت وامین.',
+	'datatypes-type-commonsMedia' => 'فایل پرنمون رسانه',
+);
+
 /** Lithuanian (lietuvių)
  * @author Eitvys200
  * @author Hugo.arg
@@ -2541,7 +2551,7 @@ $messages['ms'] = array(
 	'wikibase-sitelinks-wikipedia' => 'Halaman Wikipedia yang berpaut dengan perkara ini',
 	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
-	'wikibase-sitelinks-link-columnheading' => 'Rencana terpaut', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'Halaman terpaut',
 	'wikibase-tooltip-error-details' => 'Butiran',
 	'wikibase-validator-bad-type' => '$2, bukan $1',
 	'wikibase-validator-too-long' => 'Mesti tidak melebihi $1 aksara',

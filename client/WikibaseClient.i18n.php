@@ -2594,6 +2594,13 @@ $messages['lez'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Викималуматар',
 );
 
+/** لوری (لوری)
+ * @author Bonevarluri
+ */
+$messages['lrc'] = array(
+	'wikibase-linkitem-not-loggedin-title' => 'شما با بیایت وامین',
+);
+
 /** Lithuanian (lietuvių)
  * @author Hugo.arg
  */
