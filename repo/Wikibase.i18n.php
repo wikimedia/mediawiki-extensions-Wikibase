@@ -183,6 +183,7 @@ Your IP address will be recorded in the edit history of this entity.",
 	'wikibase-setsitelink-warning-remove' => 'Do you really want to remove the site link of [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'The site id "$1" is unknown. Please use an existing site id, such as "enwiki".',
 	'wikibase-setsitelink-not-item' => 'The id $1 does not belong to an item.',
+	'wikibase-setsitelink-not-badge' => 'The id $1 is not specified to be a badge.',
 	'wikibase-setsitelink-add-failed' => 'The site link could not be saved.',
 	'wikibase-setsitelink-remove-failed' => 'The site link could not be removed.',
 	'wikibase-setsitelink-not-itemid' => '"$1" is not a valid item id. Site links can only be set for items.',
@@ -896,6 +897,10 @@ Parameters:
 Parameters:
 * $1 - the invalid id',
 	'wikibase-setsitelink-not-item' => 'Response informing that the given id does not belong to an item.
+
+Parameters:
+* $1 - the invalid id',
+	'wikibase-setsitelink-not-item' => 'Response informing that the given id is not specified to be used as a badge.
 
 Parameters:
 * $1 - the invalid id',
