@@ -175,6 +175,10 @@ abstract class ModifyEntity extends ApiWikibase {
 				$this->dieUsage( "Badges: entity with id '{$badgeSerialization}' is not an item", 'not-item' );
 			}
 
+			if ( !in_array( $badgeId->getPrefixedId(), array_keys( Settings::get( 'badgeItems' ) ) ) ) {
+				$this->dieUsage( "Badges: item '{$badgeSerialization}' is not a badge", 'not-badge' );
+			}
+
 			$itemTitle = $entityContentFactory->getTitleForId( $badgeId, Revision::FOR_THIS_USER );
 
 			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {

@@ -39,6 +39,9 @@ return call_user_func( function() {
 
 		'specialSiteLinkGroups' => array(),
 
+		// items allowed to be used as badges
+		'badgeItems' => array(),
+
 		// local by default. Set to something LBFactory understands.
 		'changesDatabase' => false,
 
