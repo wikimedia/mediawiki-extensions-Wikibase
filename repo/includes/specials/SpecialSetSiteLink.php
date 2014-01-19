@@ -14,6 +14,7 @@ use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
+use Wikibase\Settings;
 use Wikibase\Repo\WikibaseRepo;
 use ValueParsers\ParseException;
 
@@ -365,6 +366,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 			if ( !( $badgeId instanceof ItemId ) ) {
 				$status->fatal( 'wikibase-setsitelink-not-item', $badgeId->getPrefixedId() );
+				return false;
+			}
+
+			if ( !in_array( $badgeId->getPrefixedId(), array_keys( Settings::get( 'badgeItems' ) ) ) ) {
+				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
 				return false;
 			}
 
