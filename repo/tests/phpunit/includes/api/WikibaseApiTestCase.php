@@ -280,6 +280,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 					$this->assertArrayHasKey( 'id', $data );
 				}
 				unset( $exp['id'] );
+				unset( $exp['datatype'] );
+				unset( $data['datatype'] );
 				unset( $data['id'] );
 				unset( $data['hash'] );
 				unset( $data['qualifiers-order'] );

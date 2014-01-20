@@ -531,7 +531,11 @@ class EntityDataSerializationService {
 		//TODO: apply language filter/Fallback via options!
 		$options = new SerializationOptions();
 
-		$resultBuilder = new ResultBuilder( $res, $this->entityTitleLookup, $this->serializerFactory );
+		$resultBuilder = new ResultBuilder(
+			$res,
+			$this->entityTitleLookup,
+			$this->serializerFactory
+		);
 		$resultBuilder->addEntityRevision( $entityRevision, $options );
 
 		wfProfileOut( __METHOD__ );
