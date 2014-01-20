@@ -33,7 +33,6 @@ return call_user_func( function() {
 		'valueParsers.ValueParser' => $moduleTemplate + array(
 			'scripts' => array(
 				'parsers/ValueParser.js',
-				'parsers/ApiBasedValueParser.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
@@ -44,10 +43,8 @@ return call_user_func( function() {
 		'valueParsers.parsers' => $moduleTemplate + array(
 			'scripts' => array(
 				'parsers/BoolParser.js',
-				'parsers/GlobeCoordinateParser.js',
 				'parsers/FloatParser.js',
 				'parsers/IntParser.js',
-				'parsers/QuantityParser.js',
 				'parsers/NullParser.js',
 				'parsers/StringParser.js',
 				'parsers/TimeParser.js',
@@ -55,20 +52,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'valueParsers.ValueParser',
-				'valueParsers.api',
-				'globeCoordinate.js', // required by GlobeCoordinateParser
 				'time.js', // required by TimeParser
-			),
-		),
-
-		'valueParsers.api' => $moduleTemplate + array(
-			'scripts' => array(
-				'valueParsers.Api.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'jquery.json',
-				'valueParsers',
 			),
 		),
 

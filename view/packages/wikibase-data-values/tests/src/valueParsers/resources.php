@@ -38,12 +38,10 @@ return call_user_func( function() {
 		'valueParsers.parsers.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'parsers/BoolParser.tests.js',
-				'parsers/GlobeCoordinateParser.tests.js',
 				'parsers/FloatParser.tests.js',
 				'parsers/IntParser.tests.js',
 				'parsers/StringParser.tests.js',
 				'parsers/TimeParser.tests.js',
-				'parsers/QuantityParser.tests.js',
 				'parsers/NullParser.tests.js',
 			),
 			'dependencies' => array(
