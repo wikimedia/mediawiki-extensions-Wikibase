@@ -37,3 +37,4 @@
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js
+./tests/browser/vendor/
