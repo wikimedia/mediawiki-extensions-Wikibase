@@ -42,9 +42,13 @@
 			"Wikibase.composer.php"
 		],
 		"classmap": [
-			"client/includes",
+			"client/includes/",
 			"client/WikibaseClient.hooks.php",
-			"client/tests/phpunit/MockPageUpdater.php"
+			"client/tests/phpunit/MockPageUpdater.php",
+
+			"lib/includes/",
+			"lib/WikibaseLib.hooks.php",
+			"lib/tests/phpunit/"
 		]
 	}
 }

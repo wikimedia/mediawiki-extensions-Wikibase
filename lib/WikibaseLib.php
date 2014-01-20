@@ -32,7 +32,7 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1
 }
 
 if ( defined( 'WBL_VERSION' ) ) {
-	// Do not initialize more then once.
+	// Do not initialize more than once.
 	return 1;
 }
 
@@ -62,7 +62,7 @@ $GLOBALS['evilDataValueMap'] = array_merge(
 );
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgAutoloadClasses, $wgExtensionMessagesFiles;
+	global $wgExtensionCredits, $wgExtensionMessagesFiles;
 	global $wgValueParsers, $wgJobClasses, $wgHooks, $wgResourceModules;
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -75,10 +75,6 @@ call_user_func( function() {
 		'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
 		'descriptionmsg' => 'wikibase-lib-desc'
 	);
-
-	foreach ( include( __DIR__ . '/WikibaseLib.classes.php' ) as $class => $file ) {
-		$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-	}
 
 	define( 'SUMMARY_MAX_LENGTH', 250 );
 
