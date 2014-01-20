@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_931c431a",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T21:42:29Z",
+      "side": 1,
+      "message": "so far for the Law of Demeter",
+      "revId": "09d18729e402ca7fe5733247fc37f4f0316f07c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_7319bf26",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T21:42:29Z",
+      "side": 1,
+      "message": "Would be nice if the body of this loop could at least be reduced to some high level method calls",
+      "revId": "09d18729e402ca7fe5733247fc37f4f0316f07c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
