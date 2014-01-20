@@ -34,6 +34,24 @@
       "revId": "cf388bc4a6f4e886db6a230030fb00e7d7c02d2c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_fd8b5e19",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceRemoveTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-20T17:26:17Z",
+      "side": 1,
+      "message": "Addressed in https://gerrit.wikimedia.org/r/108495",
+      "parentUuid": "aef5673e_fd011eba",
+      "revId": "cf388bc4a6f4e886db6a230030fb00e7d7c02d2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
