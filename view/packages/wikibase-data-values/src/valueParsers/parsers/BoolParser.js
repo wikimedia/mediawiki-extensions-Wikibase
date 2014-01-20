@@ -1,24 +1,56 @@
 /**
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
-( function( vp, dv, util ) {
+( function( vp, dv, util, $ ) {
 	'use strict';
 
-	var PARENT = vp.ApiBasedValueParser;
+	var PARENT = vp.ValueParser;
 
 	/**
-	 * Constructor for string to boolean parsers.
+	 * Constructor for string-to-BoolValue parsers.
 	 *
 	 * @constructor
-	 * @extends vp.ApiBasedValueParser
+	 * @extends valueParsers.ValueParser
 	 * @since 0.1
 	 */
 	vp.BoolParser = util.inherit( PARENT, {
 		/**
-		 * @see ApiBasedValueParser.API_VALUE_PARSER_ID
+		 * @see valueParsers.ValueParser.parse
+		 * @since 0.1
+		 *
+		 * @param {string} rawValue
+		 * @return jQuery.Promise
 		 */
-		API_VALUE_PARSER_ID: 'bool'
+		parse: function( rawValue ) {
+			var deferred = $.Deferred(),
+				lowerCaseRawValue = rawValue.toLowerCase();
+
+			for( var value in this.constructor.values ) {
+				if( value === lowerCaseRawValue ) {
+					deferred.resolve( new dv.BoolValue( this.constructor.values[value] ) );
+					break;
+				}
+			}
+
+			if( deferred.state() === 'pending' ) {
+				// TODO: Clearly define reject() behaviour / parameters returned by reject()
+				deferred.reject( 'BoolParser: Unable to parse "' + rawValue + '"' );
+			}
+
+			return deferred.promise();
+		}
 	} );
 
-}( valueParsers, dataValues, util ) );
+	vp.BoolParser.values = {
+		'yes': true,
+		'on': true,
+		'1': true,
+		'true': true,
+		'no': false,
+		'off': false,
+		'0': false,
+		'false': false
+	};
+
+}( valueParsers, dataValues, util, jQuery ) );

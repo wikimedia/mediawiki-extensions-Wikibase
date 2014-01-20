@@ -1,24 +1,41 @@
 /**
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
-( function( vp, dv, util ) {
+( function( vp, dv, util, $ ) {
 	'use strict';
 
-	var PARENT = vp.ApiBasedValueParser;
+	var PARENT = vp.ValueParser;
 
 	/**
-	 * Constructor for string to integer parsers.
+	 * Constructor for string-to-float parsers.
 	 *
 	 * @constructor
-	 * @extends vp.ApiBasedValueParser
+	 * @extends valueParsers.ValueParser
 	 * @since 0.1
 	 */
 	vp.IntParser = util.inherit( PARENT, {
 		/**
-		 * @see ApiBasedValueParser.API_VALUE_PARSER_ID
+		 * @see valueParsers.ValueParser.parse
+		 * @since 0.1
+		 *
+		 * @param {string} rawValue
+		 * @return jQuery.Promise
 		 */
-		API_VALUE_PARSER_ID: 'int'
+		parse: function( rawValue ) {
+			var deferred = $.Deferred();
+
+			// TODO: Localization, option to set integer base
+			if( /^(-)?\d+$/.test( rawValue ) ) {
+				deferred.resolve( new dv.NumberValue( parseInt( rawValue, 10 ) ) );
+			}
+
+			if( deferred.state() === 'pending' ) {
+				deferred.reject( 'InParser: Unable to parse "' + rawValue + '"' );
+			}
+
+			return deferred.promise();
+		}
 	} );
 
-}( valueParsers, dataValues, util ) );
+}( valueParsers, dataValues, util, jQuery ) );

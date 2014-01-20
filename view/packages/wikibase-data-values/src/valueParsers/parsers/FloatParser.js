@@ -1,24 +1,41 @@
 /**
  * @licence GNU GPL v2+
- * @author Daniel Werner < danweetz@web.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
-( function( vp, dv, util ) {
+( function( vp, dv, util, $ ) {
 	'use strict';
 
-	var PARENT = vp.ApiBasedValueParser;
+	var PARENT = vp.ValueParser;
 
 	/**
-	 * Constructor for string to number parsers.
+	 * Constructor for string-to-float parsers.
 	 *
 	 * @constructor
-	 * @extends vp.ApiBasedValueParser
+	 * @extends valueParsers.ValueParser
 	 * @since 0.1
 	 */
 	vp.FloatParser = util.inherit( PARENT, {
 		/**
-		 * @see ApiBasedValueParser.API_VALUE_PARSER_ID
+		 * @see valueParsers.ValueParser.parse
+		 * @since 0.1
+		 *
+		 * @param {string} rawValue
+		 * @return jQuery.Promise
 		 */
-		API_VALUE_PARSER_ID: 'float'
+		parse: function( rawValue ) {
+			var deferred = $.Deferred();
+
+			// TODO: Localization
+			if( !isNaN( parseFloat( rawValue ) ) && isFinite( rawValue ) ) {
+				deferred.resolve( new dv.NumberValue( parseFloat( rawValue ) ) );
+			}
+
+			if( deferred.state() === 'pending' ) {
+				deferred.reject( 'FloatParser: Unable to parse "' + rawValue + '"' );
+			}
+
+			return deferred.promise();
+		}
 	} );
 
-}( valueParsers, dataValues, util ) );
+}( valueParsers, dataValues, util, jQuery ) );
