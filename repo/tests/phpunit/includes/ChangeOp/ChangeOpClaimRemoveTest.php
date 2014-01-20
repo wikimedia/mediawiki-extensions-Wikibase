@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
@@ -22,6 +23,27 @@ use Wikibase\ItemContent;
  */
 
 class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
+
+	public function invalidConstructorProvider() {
+		$args = array();
+		$args[] = array( array( 'foo' ) );
+		$args[] = array( '' );
+		return $args;
+	}
+
+	/**
+	 * @dataProvider invalidConstructorProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidConstruct( $claimGuid ) {
+		new ChangeOpClaimRemove( $claimGuid );
+	}
+
+	public function testGetClaimGuid() {
+		$claimguid = 'foobar';
+		$changeop = new ChangeOpClaimRemove( $claimguid );
+		$this->assertEquals( $claimguid, $changeop->getClaimGuid() );
+	}
 
 	public function changeOpProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
