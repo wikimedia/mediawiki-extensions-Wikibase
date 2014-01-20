@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_f305cf7d",
+        "filename": "lib/includes/serializers/ClaimSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:04:12Z",
+      "side": 1,
+      "message": "-1 for this issue",
+      "parentUuid": "aef5673e_93cd6365",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_33d457ec",
         "filename": "lib/includes/serializers/SerializationOptions.php",
         "patchSetId": 3
