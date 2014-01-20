@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_5d6b6a82",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceRemoveTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-01-20T12:18:51Z",
+      "side": 1,
+      "message": "Why check the first claim? This seems brittle, it\u0027s not documented anywhere.\nOn a related note, there should be a test case for multiple claims having the same reference (with the same hash). This is a pretty common case, and needs testing.",
+      "revId": "cf388bc4a6f4e886db6a230030fb00e7d7c02d2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
