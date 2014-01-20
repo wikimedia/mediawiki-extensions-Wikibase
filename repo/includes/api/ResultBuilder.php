@@ -283,7 +283,7 @@ class ResultBuilder {
 
 			//FIXME: $props should be used to filter $entitySerialization!
 			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
-			$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $options );
+			$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $serializerOptions );
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 			$record = array_merge( $record, $entitySerialization );

@@ -141,6 +141,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
 		$claim = new Claim( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
 		$claim->setGuid( 'imaguid' );
+		$qualifiers = new SnakList();
+		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$claim->setQualifiers( $qualifiers );
 		$item->addClaim( $claim );
 
 		//todo
@@ -190,7 +193,19 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'snaktype' => 'somevalue',
 							'property' => 'P65'
 						),
-						'type' => 'claim'
+						'type' => 'claim',
+						'qualifiers' => array(
+							'P65' => array(
+								array(
+									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
+									'snaktype' => 'somevalue',
+									'property' => 'P65',
+								)
+							),
+						),
+						'qualifiers-order' => array(
+							'P65'
+						),
 					)
 				),
 			),

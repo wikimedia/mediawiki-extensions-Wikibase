@@ -399,6 +399,7 @@ Time values are given as a map with the following fields:
         "qualifiers": {
           "P580": [
             {
+              "hash": "sssde3541cc531fa54adcaffebde6bef28g6hgjd",
               "snaktype": "value",
               "property": "P580",
               "datavalue": {
@@ -416,6 +417,7 @@ Time values are given as a map with the following fields:
           ],
           "P582": [
             {
+              "hash": "f803e3541cc531fa54n7a9ffebde6bef28d87ddv",
               "snaktype": "value",
               "property": "P582",
               "datavalue": {
@@ -799,6 +801,7 @@ Below is an example of a complete entity represented in JSON.
         "qualifiers": {
           "P580": [
             {
+              "hash": "rrrrww541cc531fa54adcaffebde6bef28d7uu7f",
               "snaktype": "value",
               "property": "P580",
               "datavalue": {
@@ -816,6 +819,7 @@ Below is an example of a complete entity represented in JSON.
           ],
           "P582": [
             {
+              "hash": "qwerqwrqwrqwq1fa54adcaffebde6bef28d87d32",
               "snaktype": "value",
               "property": "P582",
               "datavalue": {
@@ -851,6 +855,7 @@ Below is an example of a complete entity represented in JSON.
         "qualifiers": {
           "P580": [
             {
+              "hash": "d103e3541cc531fa54adcaffebdeqweqweqeqweq",
               "snaktype": "value",
               "property": "P580",
               "datavalue": {
@@ -868,6 +873,7 @@ Below is an example of a complete entity represented in JSON.
           ],
           "P582": [
             {
+              "hash": "d103e3541ccasdasdsadasdasdas6bef28d87d32",
               "snaktype": "value",
               "property": "P582",
               "datavalue": {
