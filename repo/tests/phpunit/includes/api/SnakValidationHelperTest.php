@@ -5,18 +5,18 @@ namespace Wikibase\Test;
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
-use Wikibase\ReferenceList;
-use Wikibase\Snak;
-use Wikibase\SnakList;
-use Wikibase\Statement;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\Validators\SnakValidator;
 
 /**

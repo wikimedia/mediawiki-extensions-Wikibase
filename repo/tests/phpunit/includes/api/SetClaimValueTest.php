@@ -7,13 +7,13 @@ use DataValues\StringValue;
 use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Entity;
-use Wikibase\Claim;
-use Wikibase\EntityId;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\PropertyContent;
 use Wikibase\Repo\WikibaseRepo;
 

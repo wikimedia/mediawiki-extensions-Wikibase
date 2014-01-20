@@ -3,16 +3,16 @@
 namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
-use Wikibase\Entity;
-use Wikibase\Claim;
-use Wikibase\Claims;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\PropertyContent;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

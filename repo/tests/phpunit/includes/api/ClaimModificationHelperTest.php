@@ -8,10 +8,10 @@ use Wikibase\Api\CreateClaim;
 use ApiMain;
 use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\SnakValidationHelper;
-use Wikibase\PropertyValueSnak;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ItemContent;
-use Wikibase\Claims;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
