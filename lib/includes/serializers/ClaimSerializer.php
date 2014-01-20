@@ -110,14 +110,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['mainsnak'] = $this->snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
-			$listSerializer = new ByPropertyListSerializer( 'qualifiers', $this->snakSerializer, $this->options );
-		} else {
-			$listSerializer = new ListSerializer( 'qualifiers', $this->snakSerializer, $this->options );
-		}
-
-		$qualifiers = $listSerializer->getSerialized( $claim->getQualifiers() );
-
+		$qualifiers = $this->getQualifiersSerialization( $claim );
 		if ( $qualifiers !== array() ) {
 			$serialization['qualifiers'] = $qualifiers;
 
@@ -155,6 +148,41 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		}
 
 		return $serialization;
+	}
+
+	/**
+	 * @param Claim $claim
+	 *
+	 * @return array serialization
+	 */
+	private function getQualifiersSerialization( $claim ) {
+		$initialOptWithHash = $this->snakSerializer->getOptions()->getOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH );
+		$this->snakSerializer->getOptions()->setOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH, true );
+
+		$listSerializer = $this->getListSerializer();
+
+		$qualifiers = $listSerializer->getSerialized( $claim->getQualifiers() );
+		$this->snakSerializer->getOptions()->setOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH, $initialOptWithHash );
+		return $qualifiers;
+	}
+
+	/**
+	 * @return ByPropertyListSerializer|ListSerializer
+	 */
+	private function getListSerializer() {
+		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+			return new ByPropertyListSerializer(
+				'qualifiers',
+				$this->snakSerializer,
+				$this->options
+			);
+		} else {
+			return new ListSerializer(
+				'qualifiers',
+				$this->snakSerializer,
+				$this->options
+			);
+		}
 	}
 
 	/**
