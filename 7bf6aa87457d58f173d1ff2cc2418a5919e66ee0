@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_93cd6365",
+        "filename": "lib/includes/serializers/ClaimSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:03:40Z",
+      "side": 1,
+      "message": "All above green stuff belongs in a getListSerializer method",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_33d457ec",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:03:40Z",
+      "side": 1,
+      "message": "ugh. In the base class? This design is so wrong :)\n\nLets please put effort into the new datamodel serialization code rather than further tangling things up inside of this spagethi\n\n(rant, non-blocker)",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_b3e867b0",
+        "filename": "lib/tests/phpunit/serializers/ClaimSerializerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:03:40Z",
+      "side": 1,
+      "message": "why did you expand these? This test is about serialization of claims, not of snaks. Ideally it does not break when the snak serialization stuff is modified.",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
