@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_f396eff2",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaimRemove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:28:06Z",
+      "side": 1,
+      "message": "You can have these two lines \n\n$removedSnak \u003d $claims-\u003egetClaimWithGuid( $this-\u003eclaimGuid )-\u003egetMainSnak();\n\n$this-\u003eupdateSummary( $summary, \u0027remove\u0027, \u0027\u0027, $this-\u003egetClaimSummaryArgs( $removedSnak ) );\n\nin their own method. Then it is more obvious they go together - now they are separated. Also some mixup of abstraction now",
+      "revId": "e1c4ddc4b86d9879ba1b247be03a6742479a0224",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d39beb19",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimRemoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:28:06Z",
+      "side": 1,
+      "message": "newline?",
+      "revId": "e1c4ddc4b86d9879ba1b247be03a6742479a0224",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
