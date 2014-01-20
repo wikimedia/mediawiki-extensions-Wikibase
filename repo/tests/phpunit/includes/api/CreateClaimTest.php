@@ -3,11 +3,11 @@
 namespace Wikibase\Test\Api;
 
 use UsageException;
-use Wikibase\Claims;
-use Wikibase\Entity;
-use Wikibase\Item;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
-use Wikibase\Property;
 use Wikibase\PropertyContent;
 use Wikibase\Repo\WikibaseRepo;
 

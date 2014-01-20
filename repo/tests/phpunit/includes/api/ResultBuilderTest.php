@@ -5,18 +5,18 @@ namespace Wikibase\Test\Api;
 use ApiResult;
 use DataValues\StringValue;
 use Wikibase\Api\ResultBuilder;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityRevision;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
-use Wikibase\SnakList;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @covers Wikibase\Api\ResultBuilder

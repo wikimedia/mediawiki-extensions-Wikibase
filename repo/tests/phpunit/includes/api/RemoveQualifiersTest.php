@@ -4,15 +4,15 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use UsageException;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Snak;
-use Wikibase\SnakList;
-use Wikibase\Statement;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Claim\Statement;
 
 /**
  * @covers Wikibase\Api\RemoveQualifiers
@@ -35,7 +35,7 @@ use Wikibase\Statement;
 class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 	/**
-	 * @return Snak[]
+	 * @return Snak
 	 */
 	protected function snakProvider() {
 		$snaks = array();

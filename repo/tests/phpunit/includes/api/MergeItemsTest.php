@@ -183,7 +183,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 										'value' => 'imastring',
 										'type' => 'string'
 									)
-			) ) ) ) ) ) ) ) ),
+								) ) ) ) ) ) ) ) ),
 			array( 'claims' =>
 				array( '{Prop}' =>
 					array( array( 'mainsnak' =>
@@ -191,7 +191,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 							array( 'value' => 'imastring', 'type' => 'string' ) ),
 						'type' => 'statement',
 						'rank' => 'normal'
-			) ) ) ),
+					) ) ) ),
 			array(), //empty
 			array( 'claims' =>
 				array( '{Prop}' =>
@@ -209,7 +209,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 										'type' => 'string',
 										'snaks-order' => '{Prop}'
 									)
-			) ) ) ) ) ) ) ) ),
+								) ) ) ) ) ) ) ) ),
 		);
 		return $testCases;
 	}
