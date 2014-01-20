@@ -8,6 +8,8 @@
 // wgEnableWikibaseRepo - defaults to true
 // wgEnableWikibaseClient - defaults to true
 
+require_once __DIR__ . '/lib/WikibaseLib.php';
+
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
 	require_once __DIR__ . '/repo/Wikibase.php';
 }
