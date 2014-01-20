@@ -5543,6 +5543,8 @@ Sinu IP-aadress talletatakse olemi ajaloos.',
 	'wikibase-api-no-such-sitelink' => 'Sellist võrgukohalinki ei õnnestu leida.',
 	'wikibase-restoreold' => 'ennista',
 	'wikibase-restore-summary' => 'Kasutaja [[Special:Contributions/$2|$2]] redaktsioon $1 taastatud.',
+	'wikibase-noentity' => 'Andmestikku pole olemas. Saad
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} otsida seotud logidest]</span>, kuhu see kadus.',
 	'wikibase-noentity-createone' => 'Saad ka [[$1|uue luua]].',
 	'wikibase-item-summary-wbsetitem' => 'Loodud uus üksus',
 	'wikibase-item-summary-wbcreate-new' => 'Loodud uus üksus',
@@ -10991,10 +10993,15 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
  * @author Bonevarluri
  */
 $messages['lrc'] = array(
+	'wikibase-terms' => 'د زونيا هنی',
 	'wikibase-anonymouseditwarning' => 'زنئار:شما وامین نیومایته.
 نشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.',
+	'wikibase-modifyterm-language' => 'زون:',
 	'wikibase-dispatchstats-changes' => 'آماریا آلشت دئن پهرستنومه',
 	'wikibase-dispatchstats-lag-time' => 'پتی وار',
+	'wikibase-entitieswithoutlabel-label-language' => 'زون:',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" کد زون معتوری نئ.',
+	'special-mylanguagefallbackchain' => 'زنجیر زون دماگر مه',
 	'wikibase-listdatatypes-commonsmedia-head' => 'پرنمون یا رسانه',
 );
 
@@ -15014,6 +15021,7 @@ $messages['ru'] = array(
 	'wikibase-setsitelink-submit' => 'Задать ссылку на сайт',
 	'wikibase-setsitelink-warning-remove' => 'Вы действительно хотите удалить ссылку на сайт для [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Неизвестный идентификатор сайта «$1». Пожалуйста, используйте один из существующих идентификаторов сайта, например «enwiki».',
+	'wikibase-setsitelink-not-item' => 'Идентификатор $1 не принадлежит к элементу.',
 	'wikibase-setsitelink-add-failed' => 'Не удаётся сохранить ссылку на сайт.',
 	'wikibase-setsitelink-remove-failed' => 'Не удаётся удалить ссылку на сайт.',
 	'wikibase-setsitelink-not-itemid' => '«$1» не является правильным идентификатором элемента. Ссылки на статьи можно задать только для элементов.',
@@ -17961,7 +17969,7 @@ $messages['zh-hans'] = array(
 	'wikibase-itemlink' => '$1$2',
 	'wikibase-itemlink-id-wrapper' => '（$1）',
 	'wikibase-itemlink-userlang-wrapper' => '（$1：$2）',
-	'special-itembytitle' => '按标题查找项',
+	'special-itembytitle' => '按标题搜索项',
 	'wikibase-itembytitle-lookup-fieldset' => '按网站和标题搜索项',
 	'wikibase-itembytitle-lookup-site' => '网站：',
 	'wikibase-itembytitle-lookup-page' => '页面：',

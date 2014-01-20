@@ -2598,7 +2598,11 @@ $messages['lez'] = array(
  * @author Bonevarluri
  */
 $messages['lrc'] = array(
+	'wikibase-comment-sitelink-add' => 'هوم پیوند زون اضاف بیه:$1',
+	'wikibase-comment-sitelink-remove' => 'هوم پیوند زون ورداشته بیه:$1',
+	'wikibase-linkitem-input-site' => 'زون:',
 	'wikibase-linkitem-not-loggedin-title' => 'شما با بیایت وامین',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" کد زون معتوری نئ.',
 );
 
 /** Lithuanian (lietuvių)
@@ -3947,6 +3951,7 @@ $messages['te'] = array(
  */
 $messages['th'] = array(
 	'wikibase-editlinks' => 'แก้ไขลิงก์ข้ามภาษา',
+	'wikibase-linkitem-addlinks' => 'เพิ่มลิงก์ข้ามภาษา',
 	'wikibase-rc-wikibase-edit-letter' => 'ด',
 	'wikibase-rc-wikibase-edit-title' => 'การแก้ไขจากวิกิสนเทศ',
 );

@@ -1240,11 +1240,16 @@ $messages['et'] = array(
 	'wikibase-validator-too-short' => 'Peab olema vähemalt {{PLURAL:$1|ühe|$1}} märgi pikkune.',
 	'wikibase-validator-too-high' => 'Pole vahemikus, ei tohi olla suurem kui $1.',
 	'wikibase-validator-too-low' => 'Pole vahemikus, ei tohi olla väiksem kui $1.',
+	'wikibase-validator-malformed-value' => 'Rikutud sisend: $1',
+	'wikibase-validator-bad-entity-id' => 'Rikutud identifikaator: $1',
 	'wikibase-validator-bad-entity-type' => 'Ootamatu olemitüüp $1',
 	'wikibase-validator-no-such-entity' => 'Olemit $1 ei leidu',
 	'wikibase-validator-no-such-property' => 'Omadust $1 ei leidu',
 	'wikibase-validator-bad-value' => 'Lubamatu väärtus: $1',
 	'wikibase-validator-bad-value-type' => 'Vigane väärtuse tüüp $1, oodatav $2',
+	'wikibase-validator-bad-url' => 'Rikutud internetiaadress: $1',
+	'wikibase-validator-bad-http-url' => 'Rikutud HTTP-internetiaadress: $1',
+	'wikibase-validator-bad-mailto-url' => "Rikutud ''mailto''-internetiaadress: $1",
 	'wikibase-validator-unknown-unit' => 'Tundmatu ühik: $1',
 	'datatypes-type-wikibase-item' => 'Üksus',
 	'datatypes-type-commonsMedia' => 'Commonsi meediafail',
@@ -2279,6 +2284,7 @@ $messages['lb'] = array(
  */
 $messages['lrc'] = array(
 	'wikibase-error-ui-session-failure' => 'نشستگه شما تموم بیه. لطفن دواره بیایت وامین.',
+	'wikibase-sitelinks-sitename-columnheading' => 'زون',
 	'datatypes-type-commonsMedia' => 'فایل پرنمون رسانه',
 );
 
