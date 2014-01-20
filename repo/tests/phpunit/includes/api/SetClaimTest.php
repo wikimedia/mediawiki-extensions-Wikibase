@@ -4,20 +4,22 @@ namespace Wikibase\Test\Api;
 
 use DataValues\StringValue;
 use FormatJson;
-use Wikibase\Claim;
-use Wikibase\Claims;
+use Revision;
+use UsageException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\PropertyContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Statement;
-use Wikibase\Reference;
-use Wikibase\Snak;
-use Wikibase\SnakList;
-use Wikibase\PropertyValueSnak;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
@@ -120,6 +122,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testAddClaim() {
 		$claims = $this->getClaims();
 
+		/** @var Claim[] $claims */
 		foreach( $claims as $claim ) {
 			$item = Item::newEmpty();
 			$content = new ItemContent( $item );
@@ -181,6 +184,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		// Add new claim at index 2:
 		$guid = $guidGenerator->newGuid();
+		/** @var Claim $claim */
 		foreach( $this->getClaims() as $claim ) {
 			$claim->setGuid( $guid );
 
@@ -194,13 +198,15 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @param $claimCount
 	 * @param $requestLabel string a label to identify requests that are made in errors
 	 * @param int|null $index
+	 * @param int|null $baserevid
 	 */
 	protected function makeRequest(
 		$claim,
 		EntityId $entityId,
 		$claimCount,
 		$requestLabel,
-		$index = null
+		$index = null,
+		$baserevid = null
 	) {
 		$serializerFactory = new SerializerFactory();
 
@@ -220,6 +226,10 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		if( !is_null( $index ) ) {
 			$params['index'] = $index;
+		}
+
+		if( !is_null( $baserevid ) ) {
+			$params['baserevid'] = $baserevid;
 		}
 
 		$this->makeValidRequest( $params );
@@ -251,6 +261,42 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 
 		return $resultArray;
+	}
+
+	/**
+	 * @see Bug 58394 - "specified index out of bounds" issue when moving a statement
+	 * @expectedException UsageException
+	 * @expectedExceptionMessage Failed to apply changeOp: Can not add claim at given index :
+	 */
+	public function testBug58394SpecifiedIndexOutOfBounds() {
+		// Initialize item content with empty claims:
+		$item = Item::newEmpty();
+		$claims = new Claims();
+		$item->setClaims( $claims );
+		$content = new ItemContent( $item );
+		$content->save( 'setclaimtest', null, EDIT_NEW );
+
+		// Generate a single claim:
+		$itemId = $content->getItem()->getId();
+		$guidGenerator = new ClaimGuidGenerator( $itemId );
+		$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( 1 ) );
+		$preexistingClaim->setGuid( $guidGenerator->newGuid() );
+		$claims->addClaim( $preexistingClaim );
+
+		// Save the single claim
+		$item->setClaims( $claims );
+		$content = new ItemContent( $item );
+		$status = $content->save( 'setclaimtest', null, EDIT_UPDATE );
+
+		// Get the baserevid
+		$statusValue = $status->getValue();
+		/** @var Revision $revision */
+		$revision = $statusValue['revision'];
+
+		// Add new claim at index 3 using the baserevid and a different property id
+		$newClaim = $item->newClaim( new PropertyNoValueSnak( 2 ) );
+		$newClaim->setGuid( $guidGenerator->newGuid() );
+		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getId() );
 	}
 
 }
