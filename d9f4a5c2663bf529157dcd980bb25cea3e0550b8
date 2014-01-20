@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_537a3b20",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T21:55:30Z",
+      "side": 1,
+      "message": "Please put the body of this catch into its own method",
+      "revId": "d9f4a5c2663bf529157dcd980bb25cea3e0550b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
