@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_33c9f77b",
+        "filename": "repo/includes/ChangeOp/ChangeOpQualifierRemove.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T21:46:11Z",
+      "side": 1,
+      "message": "given this is a new class, that cannot be correct. protected method, so just drop...",
+      "revId": "607f7b3f321b20878dfb18cfd4d79dcaae0382b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
