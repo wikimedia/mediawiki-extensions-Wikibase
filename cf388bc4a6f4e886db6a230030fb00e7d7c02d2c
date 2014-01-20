@@ -16,6 +16,24 @@
       "revId": "cf388bc4a6f4e886db6a230030fb00e7d7c02d2c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_fd011eba",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceRemoveTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-20T12:26:55Z",
+      "side": 1,
+      "message": "Will address both of these comments in a follow up!",
+      "parentUuid": "aef5673e_5d6b6a82",
+      "revId": "cf388bc4a6f4e886db6a230030fb00e7d7c02d2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
