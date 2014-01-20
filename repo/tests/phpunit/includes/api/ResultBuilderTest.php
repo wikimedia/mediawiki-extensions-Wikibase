@@ -60,9 +60,20 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$mockEntityTitleLookup = $this->getMock( '\Wikibase\EntityTitleLookup' );
 		$mockEntityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will(  $this->returnValue( $mockTitle ) );
+			->will( $this->returnValue( $mockTitle ) );
 
-		$serializerFactory = new SerializerFactory();
+		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\Lib\PropertyDataTypeLookup' );
+		$mockPropertyDataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnCallback( function( $propertyId ) {
+				return 'DtIdFor_' . $propertyId;
+			} ) );
+
+		// @todo inject EntityFactory and SiteStore
+		$serializerFactory = new SerializerFactory(
+			null, //no serialization options
+			$mockPropertyDataTypeLookup
+		);
 
 		$builder = new ResultBuilder(
 			$result,
@@ -235,6 +246,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 										'value' => 'string!',
 										'type' => 'string',
 									),
+									'datatype' => 'DtIdFor_P65',
 								),
 							),
 						),
@@ -457,6 +469,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 										'value' => 'stringVal',
 										'type' => 'string',
 									),
+									'datatype' => 'DtIdFor_P12',
 								),
 								'type' => 'claim',
 							)
@@ -486,6 +499,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'value' => 'stringVal',
 						'type' => 'string',
 					),
+					'datatype' => 'DtIdFor_P12',
 				),
 				'type' => 'claim',
 			),
@@ -513,6 +527,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 								'value' => 'stringVal',
 								'type' => 'string',
 							),
+							'datatype' => 'DtIdFor_P12',
 						)
 					),
 				),
