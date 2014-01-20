@@ -1,0 +1,15 @@
+<phpunit bootstrap="tests/bootstrap.php"
+         colors="true"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Wikibase">
+            <directory>repo/tests/phpunit</directory>
+            <directory>lib/tests/phpunit</directory>
+            <directory>client/tests/phpunit</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
