@@ -14,3 +14,4 @@ easyrdf/
 
 selenium/configuration.yml
 tests/browser/.idea
+tests/browser/config/config.yml
