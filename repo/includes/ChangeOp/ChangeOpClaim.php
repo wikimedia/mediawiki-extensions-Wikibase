@@ -101,8 +101,15 @@ class ChangeOpClaim extends ChangeOpBase {
 			try{
 				$indexedClaimList->addObjectAtIndex( $this->claim, $this->index );
 			}
-			catch( OutOfBoundsException $e ){
-				throw new ChangeOpException( "Can not add claim at given index : ". $this->index );
+			catch( OutOfBoundsException $e ) {
+				if( $this->index < 0 ) {
+					throw new ChangeOpException( 'Can not add claim at given index : '. $this->index );
+				} else {
+					// XXX: hack below to retry adding the object at a new index
+					// If we fail with the user supplied index and the index is greater than 0
+					// presume the user wants to have the index at the end of the list
+					$this->addObjectAtEndOfList( $indexedClaimList );
+				}
 			}
 
 		} else {
@@ -126,5 +133,14 @@ class ChangeOpClaim extends ChangeOpBase {
 		$entity->setClaims( $claims );
 
 		return true;
+	}
+
+	/**
+	 * @see Bug 58394
+	 * @param ByPropertyIdArray $indexedClaimList
+	 */
+	private function addObjectAtEndOfList( $indexedClaimList ) {
+		$newIndex = $indexedClaimList->count() + 1;
+		$indexedClaimList->addObjectAtIndex( $this->claim, $newIndex );
 	}
 }
