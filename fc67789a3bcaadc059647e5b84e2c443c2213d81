@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_73f1bf91",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:09:11Z",
+      "side": 1,
+      "message": "This name is bad, it reflects only the else branch. Suggest you move out the if else to where this method is called. (You could create a new method to hold it if you want ofc.)",
+      "revId": "fc67789a3bcaadc059647e5b84e2c443c2213d81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_53eebbb2",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:09:11Z",
+      "side": 1,
+      "message": "In what cases does this actually occur?",
+      "revId": "fc67789a3bcaadc059647e5b84e2c443c2213d81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
