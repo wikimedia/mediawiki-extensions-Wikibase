@@ -1,13 +1,5 @@
 <?php
 /**
- * Definition of ResourceLoader modules of the ValueParsers extension.
- * When included this returns an array with all the modules introduced by ValueParsers.
- *
- * @since 0.1
- *
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
@@ -17,14 +9,24 @@
 return call_user_func( function() {
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__ . '/src/ValueParsers',
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/src/ValueParsers',
+		'localBasePath' => __DIR__ . '/src/valueParsers',
+		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
 	);
 
 	return array(
+
 		'valueParsers' => $moduleTemplate + array(
 			'scripts' => array(
 				'valueParsers.js',
+			),
+		),
+
+		'valueParsers.factory' => $moduleTemplate + array(
+			'scripts' => array(
+				'ValueParserFactory.js',
+			),
+			'dependencies' => array(
+				'valueParsers',
 			),
 		),
 
@@ -39,25 +41,16 @@ return call_user_func( function() {
 			),
 		),
 
-		'valueParsers.factory' => $moduleTemplate + array(
-			'scripts' => array(
-				'ValueParserFactory.js',
-			),
-			'dependencies' => array(
-				'valueParsers',
-			),
-		),
-
 		'valueParsers.parsers' => $moduleTemplate + array(
 			'scripts' => array(
 				'parsers/BoolParser.js',
 				'parsers/GlobeCoordinateParser.js',
 				'parsers/FloatParser.js',
 				'parsers/IntParser.js',
-				'parsers/StringParser.js',
-				'parsers/TimeParser.js',
 				'parsers/QuantityParser.js',
 				'parsers/NullParser.js',
+				'parsers/StringParser.js',
+				'parsers/TimeParser.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
@@ -73,12 +66,12 @@ return call_user_func( function() {
 				'valueParsers.Api.js',
 			),
 			'dependencies' => array(
-				'valueParsers',
 				'dataValues.values',
 				'jquery.json',
+				'valueParsers',
 			),
 		),
+
 	);
 
 } );
-// @codeCoverageIgnoreEnd
