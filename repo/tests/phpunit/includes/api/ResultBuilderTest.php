@@ -6,17 +6,18 @@ use ApiResult;
 use DataValues\StringValue;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\EntityRevision;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\EntityRevision;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
  * @covers Wikibase\Api\ResultBuilder
@@ -134,19 +135,34 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$props = array( 'info' );
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q123098' ) );
+
+		//Basic
 		$item->setLabel( 'de', 'foo' );
+		$item->setLabel( 'zh_classical', 'Longer Label' );
 		$item->addAliases( 'en', array( 'bar', 'baz' ) );
+		$item->addAliases( 'zh', array( '????????' ) );
 		$item->setDescription( 'pt', 'ptDesc' );
-		$item->setDescription( 'pl', 'plDesc' );
-		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
-		$claim = new Claim( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$item->setDescription( 'pl', 'Longer Description For An Item' );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
+		$item->addSiteLink( new SiteLink( 'zh_classicalwiki', 'User:Addshore', array() ) );
+
+		$claim = $item->newClaim( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
 		$claim->setGuid( 'imaguid' );
+
 		$qualifiers = new SnakList();
 		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$qualifiers->addSnak( new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'string!' ) ) );
 		$claim->setQualifiers( $qualifiers );
+
+		$references = new ReferenceList();
+		$referenceSnaks = new SnakList();
+		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P68' ) ) );
+		$references->addReference( new Reference( $referenceSnaks ) );
+		$claim->setReferences( $references );
+
 		$item->addClaim( $claim );
 
-		//todo
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
 		$expected = array( 'entities' => array( 'Q123098' => array(
@@ -167,7 +183,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'language' => 'en',
 						'value' => 'baz'
 					)
-				)
+				),
+				'zh' => array(
+					array(
+						'language' => 'zh',
+						'value' => '????????',
+					),
+				),
 			),
 			'descriptions' => array(
 				'pt' => array(
@@ -176,13 +198,17 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				),
 				'pl' => array(
 					'language' => 'pl',
-					'value' => 'plDesc'
+					'value' => 'Longer Description For An Item'
 				),
 			),
 			'labels' => array(
 				'de' => array(
 					'language' => 'de',
 					'value' => 'foo'
+				),
+				'zh_classical' => array(
+					'language' => 'zh_classical',
+					'value' => 'Longer Label'
 				),
 			),
 			'claims' => array(
@@ -193,18 +219,50 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'snaktype' => 'somevalue',
 							'property' => 'P65'
 						),
-						'type' => 'claim',
+						'type' => 'statement',
 						'qualifiers' => array(
 							'P65' => array(
 								array(
 									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
 									'snaktype' => 'somevalue',
 									'property' => 'P65',
-								)
+								),
+								array(
+									'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
+									'snaktype' => 'value',
+									'property' => 'P65',
+									'datavalue' => array(
+										'value' => 'string!',
+										'type' => 'string',
+									),
+								),
 							),
 						),
+						'rank' => 'normal',
 						'qualifiers-order' => array(
 							'P65'
+						),
+						'references' => array(
+							array(
+								'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
+								'snaks' => array(
+									'P65' => array(
+										array(
+											'snaktype' => 'somevalue',
+											'property' => 'P65'
+										)
+									),
+									'P68' => array(
+										array(
+											'snaktype' => 'somevalue',
+											'property' => 'P68'
+										)
+									),
+								),
+								'snaks-order' => array(
+									'P65', 'P68'
+								)
+							),
 						),
 					)
 				),
@@ -214,6 +272,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'badges' => array( 'Q333' )
+				),
+				'zh_classicalwiki' => array(
+					'site' => 'zh_classicalwiki',
+					'title' => 'User:Addshore',
+					'badges' => array( )
 				),
 			),
 		) ) );
@@ -347,7 +410,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddSiteLinks(){
 		$result = $this->getDefaultResult();
-		$sitelinks = array( new SimpleSiteLink( 'enwiki', 'User:Addshore' ), new SimpleSiteLink( 'dewikivoyage', 'Berlin' ) );
+		$sitelinks = array( new SiteLink( 'enwiki', 'User:Addshore' ), new SiteLink( 'dewikivoyage', 'Berlin' ) );
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
