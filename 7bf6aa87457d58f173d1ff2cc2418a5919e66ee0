@@ -86,6 +86,24 @@
       "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d339ab3f",
+        "filename": "lib/tests/phpunit/serializers/ClaimSerializerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:11:02Z",
+      "side": 1,
+      "message": "$claimSerializer \u003d new SnakSerializer();\n\nLooks like the name was just wrong  (and still is)",
+      "parentUuid": "aef5673e_b3ff4762",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
