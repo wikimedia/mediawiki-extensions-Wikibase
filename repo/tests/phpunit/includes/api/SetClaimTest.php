@@ -265,8 +265,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	/**
 	 * @see Bug 58394 - "specified index out of bounds" issue when moving a statement
-	 * @expectedException UsageException
-	 * @expectedExceptionMessage Failed to apply changeOp: Can not create claim at given index
+	 * @note A hack is  in place in ChangeOpClaim to allow this
 	 */
 	public function testBug58394SpecifiedIndexOutOfBounds() {
 		// Initialize item content with empty claims:
