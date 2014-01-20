@@ -40,6 +40,11 @@
 	"autoload": {
 		"files" : [
 			"Wikibase.composer.php"
+		],
+		"classmap": [
+			"client/includes",
+			"client/WikibaseClient.hooks.php",
+			"client/tests/phpunit/MockPageUpdater.php"
 		]
 	}
 }
