@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_db80af4d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-20T10:51:06Z",
+      "side": 1,
+      "message": "I just used _entityStore as a shortcut; I don\u0027t really care about either way.",
+      "parentUuid": "aef5673e_f158465b",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_115cca4d",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplistview.js",
         "patchSetId": 2
@@ -149,6 +167,24 @@
       "writtenOn": "2014-01-15T11:41:44Z",
       "side": 1,
       "message": "yet another layer of indenting has been added, it would be great to try and split this large method up into a few smaller ones!",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_fbf25302",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-20T10:51:06Z",
+      "side": 1,
+      "message": "I\u0027ll address this in a different change in order to keep this one at least somewhat manageable, ok?",
+      "parentUuid": "aef5673e_91e45aa5",
       "revId": "cf70774106cb8155c711953076af8911f6bd6053",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -292,6 +328,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_5b513fdc",
+        "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-20T10:51:06Z",
+      "side": 1,
+      "message": "The current approach reduces load in case this module is required but not used. I think that\u0027s a reasonable goal considering our performance issues. We might even extend this to only construct the unserializer if the mwConfig actually contains entities.",
+      "parentUuid": "aef5673e_c4bd7565",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_64ac6933",
         "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
         "patchSetId": 2
@@ -303,6 +357,23 @@
       "writtenOn": "2014-01-17T08:42:03Z",
       "side": 1,
       "message": "I would prefer if you would inject the MW config as a parameter. This way the function is properly designed for clean testing since you can just create a fake MW config instance and inject it here rather than using evil globals in your test and code.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_3b4e7b3d",
+        "filename": "lib/resources/wikibase.seedEntityStoreFromMwConfig.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-20T10:51:06Z",
+      "side": 1,
+      "message": "I copied that code from your change and did not spend too much time thinking about the scope of this module. Anyway, what exactly would you pass? The config var name, the mwConfig object or the actual config value?",
       "revId": "cf70774106cb8155c711953076af8911f6bd6053",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -457,6 +528,24 @@
       "writtenOn": "2014-01-17T09:20:11Z",
       "side": 1,
       "message": "Do not use QUnit.expect, instead, give 2 as asyncTest() argument.",
+      "revId": "cf70774106cb8155c711953076af8911f6bd6053",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_9b6ea792",
+        "filename": "lib/tests/qunit/wikibase.store/store.EntityStore.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-20T10:51:06Z",
+      "side": 1,
+      "message": "QUnit documentation (https://api.qunitjs.com/asyncTest/) says: »This method used to have an optional second argument called expected. This argument is deprecated and its usage will start throwing errors in 2.0.0. If you\u0027re using it, use expect() instead.«",
+      "parentUuid": "aef5673e_bf8b9871",
       "revId": "cf70774106cb8155c711953076af8911f6bd6053",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
