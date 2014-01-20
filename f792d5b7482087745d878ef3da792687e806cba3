@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_d371abde",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:34:29Z",
+      "side": 1,
+      "message": "huh what - why are we not using type hints here? To have exceptions rather than errors? I don\u0027t think that applies here, since such violations tends to not occur during runtime.",
+      "revId": "f792d5b7482087745d878ef3da792687e806cba3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
