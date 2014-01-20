@@ -65,6 +65,13 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 
 		$serialization = array();
 
+		if( $this->options->hasOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH )
+			&& $this->options->getOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH )
+			&& method_exists( $snak, 'getHash' )
+		) {
+			$serialization['hash'] = $snak->getHash();
+		}
+
 		$serialization['snaktype'] = $snak->getType();
 
 		$serialization['property'] = $snak->getPropertyId()->getPrefixedId();
