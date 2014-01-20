@@ -104,6 +104,24 @@
       "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_934323b6",
+        "filename": "lib/tests/phpunit/serializers/ClaimSerializerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:15:51Z",
+      "side": 1,
+      "message": "Well, the option is not set, so ofc it does not output the hashes. Which is fine - as this is not the responsibility of the class under test (ClaimSerializer). The hashes should be tested in the test class for the SnakSerializer.",
+      "parentUuid": "aef5673e_d339ab3f",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
