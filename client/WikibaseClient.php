@@ -20,7 +20,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 if ( defined( 'WBC_VERSION' ) ) {
-	// Do not initialize more then once.
+	// Do not initialize more than once.
 	return;
 }
 
@@ -43,7 +43,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
+	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
 	global $wgWBClientStores, $wgWBClientSettings, $wgRecentChangesFlags;
 
@@ -65,10 +65,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php';
 	$wgExtensionMessagesFiles['Wikibaseclientalias']	= $dir . 'WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
-
-	foreach ( include( __DIR__ . '/WikibaseClient.classes.php' ) as $class => $file ) {
-		$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-	}
 
 	// Hooks
 	$wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
