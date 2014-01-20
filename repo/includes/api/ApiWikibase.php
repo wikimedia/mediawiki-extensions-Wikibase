@@ -5,11 +5,14 @@ namespace Wikibase\Api;
 use Message;
 use MessageCache;
 use Revision;
+use SiteSQLStore;
 use Title;
 use User;
 use Status;
 use ApiBase;
 use Wikibase\EntityContent;
+use Wikibase\EntityFactory;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
@@ -48,8 +51,20 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	public function getResultBuilder() {
 		if( !isset( $this->resultBuilder ) ) {
+
 			$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-			$this->resultBuilder = new ResultBuilder( $this->getResult(), $entityTitleLookup );
+
+			$serializerFactory = new SerializerFactory(
+				null,
+				WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+				EntityFactory::singleton()
+			);
+
+			$this->resultBuilder = new ResultBuilder(
+				$this->getResult(),
+				$entityTitleLookup,
+				$serializerFactory
+			);
 		}
 		return $this->resultBuilder;
 	}
