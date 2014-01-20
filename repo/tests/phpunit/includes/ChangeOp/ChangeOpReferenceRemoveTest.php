@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpReferenceRemove;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
@@ -25,6 +26,22 @@ use Wikibase\ItemContent;
  * @author Adam Shorland
  */
 class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
+
+	public function invalidConstructorProvider() {
+		$args = array();
+		$args[] = array( '', '' );
+		$args[] = array( '', 'foo' );
+		$args[] = array( 'foo', '' );
+		return $args;
+	}
+
+	/**
+	 * @dataProvider invalidConstructorProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidConstruct( $claimGuid, $referenceHash ) {
+		new ChangeOpReferenceRemove( $claimGuid, $referenceHash );
+	}
 
 	public function changeOpRemoveProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
