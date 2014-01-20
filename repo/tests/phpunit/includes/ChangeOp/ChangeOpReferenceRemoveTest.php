@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpReferenceRemove;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
@@ -26,6 +27,22 @@ use Wikibase\ItemContent;
  */
 class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 
+	public function invalidConstructorProvider() {
+		$args = array();
+		$args[] = array( '', '' );
+		$args[] = array( '', 'foo' );
+		$args[] = array( 'foo', '' );
+		return $args;
+	}
+
+	/**
+	 * @dataProvider invalidConstructorProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidConstruct( $claimGuid, $referenceHash ) {
+		new ChangeOpReferenceRemove( $claimGuid, $referenceHash );
+	}
+
 	public function changeOpRemoveProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
@@ -44,7 +61,24 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		$item->setClaims( new Claims( $claims ) );
 		$referenceHash = $newReference->getHash();
 		$changeOp = new ChangeOpReferenceRemove( $claimGuid, $referenceHash );
-		$args[] = array ( $item, $changeOp, $referenceHash );
+		$args[ 'Removing a single reference' ] = array ( $item, $changeOp, $referenceHash );
+
+		$item = $this->provideNewItemWithClaim( 'q346', $snak );
+		$claims = $item->getClaims();
+		/** @var Statement $claim */
+		$claim = reset( $claims );
+		$claimGuid = $claim->getGuid();
+		$snaks = new SnakList();
+		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
+		$newReference = new Reference( $snaks );
+		$references = $claim->getReferences();
+		$references->addReference( $newReference );
+		$references->addReference( $newReference );
+		$claim->setReferences( $references );
+		$item->setClaims( new Claims( $claims ) );
+		$referenceHash = $newReference->getHash();
+		$changeOp = new ChangeOpReferenceRemove( $claimGuid, $referenceHash );
+		$args[ 'Removing references that have the same hash' ] = array ( $item, $changeOp, $referenceHash );
 
 		return $args;
 	}
@@ -59,6 +93,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyRemoveReference( $item, $changeOp, $referenceHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$claims = $item->getClaims();
+		$this->assertCount( 1, $claims, 'More than one claim returned on item...' );
 		/** @var Statement $claim */
 		$claim = reset( $claims );
 		$references = $claim->getReferences();
