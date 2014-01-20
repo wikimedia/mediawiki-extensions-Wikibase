@@ -33,6 +33,24 @@
       "revId": "fc67789a3bcaadc059647e5b84e2c443c2213d81",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_b315079f",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-20T22:16:37Z",
+      "side": 1,
+      "message": "left this in as if an exception does get thrown we still want to present a nice error through the api",
+      "parentUuid": "aef5673e_53eebbb2",
+      "revId": "fc67789a3bcaadc059647e5b84e2c443c2213d81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
