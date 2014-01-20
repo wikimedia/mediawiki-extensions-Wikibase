@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
- *
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, $, Time ) {
+( function( dv, util, $, Time ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -26,7 +22,7 @@
 	 *
 	 * @param {String} value
 	 */
-	var SELF = dv.TimeValue = dv.util.inherit( 'DvTimeValue', PARENT, constructor, {
+	var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
@@ -129,4 +125,4 @@
 
 	dv.registerDataValue( SELF );
 
-}( dataValues, jQuery, time.Time ) );
+}( dataValues, util, jQuery, time.Time ) );

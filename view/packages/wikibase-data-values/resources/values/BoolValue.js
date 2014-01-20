@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
- *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $ ) {
+( function( dv, util ) {
 'use strict';
 
 var PARENT = dv.DataValue,
@@ -26,7 +22,7 @@ var PARENT = dv.DataValue,
  *
  * @param {boolean} value
  */
-dv.BoolValue = dv.util.inherit( 'DvBoolValue', PARENT, constructor, {
+dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, constructor, {
 
 	/**
 	 * @see dv.DataValue.getSortKey
@@ -84,4 +80,4 @@ dv.BoolValue.TYPE = 'boolean';
 
 dv.registerDataValue( dv.BoolValue );
 
-}( dataValues, jQuery ) );
+}( dataValues, util ) );

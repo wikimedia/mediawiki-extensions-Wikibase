@@ -1,12 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, $, QUnit, GlobeCoordinate ) {
+( function( dv, util, GlobeCoordinate ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -18,7 +14,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.GlobeCoordinateValueTest = dv.util.inherit( PARENT, {
+	dv.tests.GlobeCoordinateValueTest = util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getConstructor
@@ -43,4 +39,4 @@
 
 	test.runTests( 'dataValues.GlobeCoordinateValue' );
 
-}( dataValues, jQuery, QUnit, globeCoordinate.GlobeCoordinate ) );
+}( dataValues, util, globeCoordinate.GlobeCoordinate ) );

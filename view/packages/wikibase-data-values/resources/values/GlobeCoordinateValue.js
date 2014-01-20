@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
- *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, $, GlobeCoordinate ) {
+( function( dv, util, GlobeCoordinate ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -28,7 +24,7 @@
 	 *
 	 * @param {globeCoordinate.GlobeCoordinate} value
 	 */
-	var SELF = dv.GlobeCoordinateValue = dv.util.inherit( 'DvGlobeCoordinateValue', PARENT, constructor, {
+	var SELF = dv.GlobeCoordinateValue = util.inherit( 'DvGlobeCoordinateValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
@@ -103,4 +99,4 @@
 
 	dv.registerDataValue( SELF );
 
-}( dataValues, jQuery, globeCoordinate.GlobeCoordinate ) );
+}( dataValues, util, globeCoordinate.GlobeCoordinate ) );

@@ -38,7 +38,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues',
-				'dataValues.util',
+				'util.inherit',
 			),
 		),
 
@@ -60,20 +60,18 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
+				'util.inherit',
 				'globeCoordinate.js', // required by GlobeCoordinateValue
 				'time.js' // required by TimeValue
 			),
 		),
 
-		'dataValues.util' => $moduleTemplate + array(
+		'util.inherit' => $moduleTemplate + array(
 			'scripts' => array(
-				'dataValues.util.js',
-				'dataValues.util.inherit.js',
-			),
-			'dependencies' => array(
-				'dataValues',
+				'../lib/util/util.inherit.js',
 			),
 		),
+
 	);
 
 } );

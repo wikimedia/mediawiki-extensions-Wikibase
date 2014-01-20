@@ -2,6 +2,9 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
+
+this.util = util || {};
+
 ( function( util ) {
 	'use strict';
 
@@ -60,11 +63,14 @@
 	 * @since 0.1
 	 *
 	 * @param {string|Function} [name] The name of the new constructor. This is handy for debugging
-	 *        purposes since instances of the constructor might be displayed under that name. If a
-	 *        function is provided, it is assumed to be the constructor to be used for the prototype
-	 *        chain (see "base" argument).
-	 * @param {Function} base Constructor which will be used for the prototype chain. This function
-	 *        will not be the constructor returned by the function but will be called by it.
+	 *        purposes since instances of the constructor might be displayed under that name.
+	 *        If a function is provided, it is assumed to be the constructor to be used for the
+	 *        prototype chain (see "base" argument).
+	 * @param {Function|Object} base Constructor which will be used for the prototype chain. This
+	 *        function will not be the constructor returned by the function but will be called by
+	 *        it.
+	 *        If not of type "function", the argument is assumed to be an object with new
+	 *        prototype members (see "members" argument)
 	 * @param {Function|Object} [constructor] Constructor to overwriting the base constructor with.
 	 *        If not of type "function", the argument is assumed to be an object with new prototype
 	 *        members (see "members" argument)
@@ -128,11 +134,11 @@
 	 * @example:
 	 * SomethingAbstract.prototype = {
 	 *     someFunc: function( a, b ) { doSomething() },
-	 *     someAbstractFunc: dataValues.util.abstractFunction
+	 *     someAbstractFunc: util.abstractFunction
 	 * };
 	 */
 	util.abstractMember = function() {
 		throw new Error( 'Call to undefined abstract function' );
 	};
 
-}( dataValues.util ) );
+}( util ) );

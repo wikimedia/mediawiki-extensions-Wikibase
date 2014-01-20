@@ -1,10 +1,8 @@
 /**
- * @file
- * @ingroup ValueParsers
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( vp, $ ) {
+( function( vp, $, util ) {
 	'use strict';
 
 	/**
@@ -58,8 +56,8 @@
 		 * @return $.Promise In the resolved callbacks the first parameter will be the parsed
 		 *         DataValue object or null for an empty value.
 		 */
-		parse: vp.util.abstractMember
+		parse: util.abstractMember
 
 	} );
 
-}( valueParsers, jQuery ) );
+}( valueParsers, jQuery, util ) );

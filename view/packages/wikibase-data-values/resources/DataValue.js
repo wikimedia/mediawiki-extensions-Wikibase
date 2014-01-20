@@ -1,10 +1,8 @@
 /**
- * @file
- * @ingroup DataValues
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( dv, $ ) {
+( function( dv, $, util ) {
 'use strict';
 
 /**
@@ -37,7 +35,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @return {*}
 	 */
-	getValue: dv.util.abstractMember,
+	getValue: util.abstractMember,
 
 	/**
 	 * Returns a key that can be used for sorting the data value.
@@ -50,7 +48,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @return string|number
 	 */
-	getSortKey: dv.util.abstractMember,
+	getSortKey: util.abstractMember,
 
 	/**
 	 * Returns a simple JSON structure representing this data value.
@@ -59,7 +57,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @return *
 	 */
-	toJSON: dv.util.abstractMember,
+	toJSON: util.abstractMember,
 
 	/**
 	 * Returns whether this value equals some other given value.
@@ -70,7 +68,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @return boolean
 	 */
-	equals: dv.util.abstractMember,
+	equals: util.abstractMember,
 
 	/**
 	 * Returns the type identifier for this data value.
@@ -84,4 +82,4 @@ $.extend( SELF.prototype, {
 	}
 } );
 
-}( dataValues, jQuery ) );
+}( dataValues, jQuery, util ) );

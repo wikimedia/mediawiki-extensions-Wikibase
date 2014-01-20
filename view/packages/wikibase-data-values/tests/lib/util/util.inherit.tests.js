@@ -79,4 +79,4 @@
 		}
 	);
 
-}( dataValues.util.inherit, jQuery, QUnit ) );
+}( util.inherit, jQuery, QUnit ) );

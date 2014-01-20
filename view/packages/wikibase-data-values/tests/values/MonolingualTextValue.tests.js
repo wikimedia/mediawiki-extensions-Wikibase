@@ -1,12 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, QUnit ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -18,7 +14,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.MonolingualTextValueTest = dv.util.inherit( PARENT, {
+	dv.tests.MonolingualTextValueTest = util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getConstructor
@@ -39,16 +35,12 @@
 		},
 
 		/**
-		 * Tests the getText function.
-		 *
-		 * @param {QUnit} assert
+		 * @see dataValues.tests.DataValueTest.createGetterTest
 		 */
 		testGetText: PARENT.createGetterTest( 1, 'getText' ),
 
 		/**
-		 * Tests the getText function.
-		 *
-		 * @param {QUnit} assert
+		 * @see dataValues.tests.DataValuesTest.createGetterTest
 		 */
 		testGetLanguageCode: PARENT.createGetterTest( 0, 'getLanguageCode' )
 
@@ -58,4 +50,4 @@
 
 	test.runTests( 'dataValues.MonolingualTextValue' );
 
-}( dataValues, jQuery, QUnit ) );
+}( dataValues, util ) );

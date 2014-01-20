@@ -1,18 +1,14 @@
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
- *
- * Constructor for creating a test object holding tests for the QuantityParser data value parser.
- *
- * @since 0.1
  */
 valueParsers.tests.QuantityParserTest = ( function(
-	inherit, ValueParserTest, DecimalValue, QuantityValue, QuantityParser, $
+	ValueParserTest, DecimalValue, QuantityValue, QuantityParser, util
 ) {
 	'use strict';
 
 	var PARENT = ValueParserTest;
-	var QuantityParserTest = inherit( PARENT, {
+	var QuantityParserTest = util.inherit( PARENT, {
 		/**
 		 * @see vp.tests.ValueParserTest.getConstructor
 		 */
@@ -96,10 +92,9 @@ valueParsers.tests.QuantityParserTest = ( function(
 	return QuantityParserTest;
 
 }(
-	valueParsers.util.inherit,
 	valueParsers.tests.ValueParserTest,
 	dataValues.DecimalValue,
 	dataValues.QuantityValue,
 	valueParsers.QuantityParser,
-	jQuery
+	util
 ) );

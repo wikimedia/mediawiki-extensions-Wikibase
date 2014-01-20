@@ -1,12 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( vp, dv, $, QUnit ) {
+( function( vp, dv, util ) {
 	'use strict';
 
 	var PARENT = vp.tests.ValueParserTest,
@@ -20,7 +16,7 @@
 	 * @extends dv.tests.ValueParserTest
 	 * @since 0.1
 	 */
-	vp.tests.NullParserTest = vp.util.inherit( PARENT, constructor, {
+	vp.tests.NullParserTest = util.inherit( PARENT, constructor, {
 
 		/**
 		 * @see vp.tests.ValueParserTest.getConstructor
@@ -53,4 +49,4 @@
 
 	test.runTests( 'valueParsers.NullParser' );
 
-}( valueParsers, dataValues, jQuery, QUnit ) );
+}( valueParsers, dataValues, util ) );

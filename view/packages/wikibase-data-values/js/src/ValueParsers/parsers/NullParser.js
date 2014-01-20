@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
- *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( mw, vp, dv, $ ) {
+( function( mw, vp, dv, $, util ) {
 	'use strict';
 
 	var PARENT = vp.ValueParser,
@@ -21,7 +17,7 @@
 	 * @extends vp.ValueParser
 	 * @since 0.1
 	 */
-	vp.NullParser = dv.util.inherit( PARENT, constructor, {
+	vp.NullParser = util.inherit( PARENT, constructor, {
 
 		/**
 		 * @see vp.ValueParser.parse
@@ -45,4 +41,4 @@
 
 	} );
 
-}( mediaWiki, valueParsers, dataValues, jQuery ) );
+}( mediaWiki, valueParsers, dataValues, jQuery, util ) );

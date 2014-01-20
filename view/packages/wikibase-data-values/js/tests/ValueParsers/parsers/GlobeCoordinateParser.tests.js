@@ -1,13 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
- *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( vp, dv, $, QUnit, GlobeCoordinate ) {
+( function( vp, dv, GlobeCoordinate, util ) {
 	'use strict';
 
 	var PARENT = vp.tests.ValueParserTest;
@@ -19,7 +14,7 @@
 	 * @extends dv.tests.ValueParserTest
 	 * @since 0.1
 	 */
-	vp.tests.GlobeCoordinateParserTest = vp.util.inherit( PARENT, {
+	vp.tests.GlobeCoordinateParserTest = util.inherit( PARENT, {
 
 		/**
 		 * @see vp.tests.ValueParserTest.getConstructor
@@ -50,4 +45,4 @@
 
 	test.runTests( 'valueParsers.GlobeCoordinateParser' );
 
-}( valueParsers, dataValues, jQuery, QUnit, globeCoordinate.GlobeCoordinate ) );
+}( valueParsers, dataValues, globeCoordinate.GlobeCoordinate, util ) );

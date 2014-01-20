@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, vf, dv ) {
+( function( $, vf, dv, util ) {
 	'use strict';
 
 	var PARENT = vf.ValueFormatter;
@@ -19,7 +19,7 @@
 	 * @extends valueFormatters.ValueFormatter
 	 * @since 0.1
 	 */
-	vf.NullFormatter = vf.util.inherit( PARENT, function() {}, {
+	vf.NullFormatter = util.inherit( PARENT, function() {}, {
 		/**
 		 * @see valueFormatters.ValueFormatter.format
 		 */
@@ -45,4 +45,4 @@
 
 	} );
 
-}( jQuery, valueFormatters, dataValues ) );
+}( jQuery, valueFormatters, dataValues, util ) );

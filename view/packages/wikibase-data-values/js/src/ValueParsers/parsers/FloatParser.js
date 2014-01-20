@@ -1,12 +1,8 @@
 /**
- * @file
- * @ingroup ValueParsers
- *
  * @licence GNU GPL v2+
- *
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, $, undefined ) {
+( function( vp, dv, util ) {
 	'use strict';
 
 	var PARENT = vp.ApiBasedValueParser;
@@ -18,11 +14,11 @@
 	 * @extends vp.ApiBasedValueParser
 	 * @since 0.1
 	 */
-	vp.FloatParser = dv.util.inherit( PARENT, {
+	vp.FloatParser = util.inherit( PARENT, {
 		/**
 		 * @see ApiBasedValueParser.API_VALUE_PARSER_ID
 		 */
 		API_VALUE_PARSER_ID: 'float'
 	} );
 
-}( valueParsers, dataValues, jQuery ) );
+}( valueParsers, dataValues, util ) );

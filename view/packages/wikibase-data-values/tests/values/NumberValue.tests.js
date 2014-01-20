@@ -1,12 +1,8 @@
 /**
- * @since 0.1
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( dv, $, QUnit ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -18,7 +14,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.NumberValueTest = dv.util.inherit( PARENT,  {
+	dv.tests.NumberValueTest = util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getConstructor
@@ -46,4 +42,4 @@
 
 	test.runTests( 'dataValues.NumberValue' );
 
-}( dataValues, jQuery, QUnit ) );
+}( dataValues, util ) );
