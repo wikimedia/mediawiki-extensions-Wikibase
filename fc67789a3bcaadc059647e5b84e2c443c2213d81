@@ -51,6 +51,24 @@
       "revId": "fc67789a3bcaadc059647e5b84e2c443c2213d81",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_937b23bd",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T22:40:01Z",
+      "side": 1,
+      "message": "If the error condition cannot actually occur, which seems to be the case, then we should not have a try catch for it. That is misleading dead code.",
+      "parentUuid": "aef5673e_b315079f",
+      "revId": "fc67789a3bcaadc059647e5b84e2c443c2213d81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
