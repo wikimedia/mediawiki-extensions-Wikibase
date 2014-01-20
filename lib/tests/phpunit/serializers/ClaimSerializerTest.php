@@ -113,11 +113,23 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'mainsnak' => $claimSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
 				'qualifiers' => array(
 					'P42' => array(
-						$claimSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
-						$claimSerializer->getSerialized( new PropertySomeValueSnak( $id ) ),
+						array(
+							'hash' => '5c33520fbfb522444868b4168a35d4b919370018',
+							'snaktype' => 'novalue',
+							'property' => 'P42',
+						),
+						array(
+							'hash' => '1c5c4a30999292cd6592a7a6530322d095fc62d4',
+							'snaktype' => 'somevalue',
+							'property' => 'P42',
+						),
 					),
 					'P1' => array(
-						$claimSerializer->getSerialized( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ),
+						array(
+							'hash' => '2d7ef41c913ec99eb249645e154e77670090db68',
+							'snaktype' => 'novalue',
+							'property' => 'P1',
+						),
 					),
 				),
 				'qualifiers-order' => array( 'P42', 'P1' ),
@@ -134,9 +146,21 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'id' => $claim->getGuid(),
 				'mainsnak' => $claimSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
 				'qualifiers' => array(
-					$claimSerializer->getSerialized( new PropertyNoValueSnak( $id ) ),
-					$claimSerializer->getSerialized( new PropertySomeValueSnak( $id ) ),
-					$claimSerializer->getSerialized( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ),
+					array(
+						'hash' => '5c33520fbfb522444868b4168a35d4b919370018',
+						'snaktype' => 'novalue',
+						'property' => 'P42',
+					),
+					array(
+						'hash' => '1c5c4a30999292cd6592a7a6530322d095fc62d4',
+						'snaktype' => 'somevalue',
+						'property' => 'P42',
+					),
+					array(
+						'hash' => '2d7ef41c913ec99eb249645e154e77670090db68',
+						'snaktype' => 'novalue',
+						'property' => 'P1',
+					),
 				),
 				'qualifiers-order' => array( 'P42', 'P1' ),
 				'type' => 'claim',

@@ -110,13 +110,25 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['mainsnak'] = $this->snakSerializer->getSerialized( $claim->getMainSnak() );
 
+		$initialOptWithHash = $this->snakSerializer->getOptions()->getOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH );
+		$this->snakSerializer->getOptions()->setOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH, true );
+
 		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
-			$listSerializer = new ByPropertyListSerializer( 'qualifiers', $this->snakSerializer, $this->options );
+			$listSerializer = new ByPropertyListSerializer(
+				'qualifiers',
+				$this->snakSerializer,
+				$this->options
+			);
 		} else {
-			$listSerializer = new ListSerializer( 'qualifiers', $this->snakSerializer, $this->options );
+			$listSerializer = new ListSerializer(
+				'qualifiers',
+				$this->snakSerializer,
+				$this->options
+			);
 		}
 
 		$qualifiers = $listSerializer->getSerialized( $claim->getQualifiers() );
+		$this->snakSerializer->getOptions()->setOption( SerializationOptions::OPT_SERIALIZE_SNAKS_WITH_HASH, $initialOptWithHash );
 
 		if ( $qualifiers !== array() ) {
 			$serialization['qualifiers'] = $qualifiers;
