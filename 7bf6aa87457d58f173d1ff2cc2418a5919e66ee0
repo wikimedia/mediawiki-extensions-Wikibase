@@ -122,6 +122,24 @@
       "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_33de97df",
+        "filename": "lib/tests/phpunit/serializers/ClaimSerializerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-20T22:23:10Z",
+      "side": 1,
+      "message": "Indeed, but the ClaimSerializer we are testing does return the qualifiers with the hashes.\nWhat do you suggest? Go back to using the snakserializer but pass in the options?",
+      "parentUuid": "aef5673e_934323b6",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
