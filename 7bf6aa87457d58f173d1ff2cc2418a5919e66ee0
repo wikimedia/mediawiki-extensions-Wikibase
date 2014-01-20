@@ -140,6 +140,24 @@
       "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_93620305",
+        "filename": "lib/tests/phpunit/serializers/ClaimSerializerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-20T23:37:29Z",
+      "side": 1,
+      "message": "I suggest leaving this test unchanged, and testing the hash option in the test for the class it resides in.\n\nYou said there was a problem with this test - I\u0027m not seeing what it is. Looks like in both the setup and the assertion phases, it is using a SnakSerializer with the option not set - so this should yield the same result. What am I missing?",
+      "parentUuid": "aef5673e_33de97df",
+      "revId": "7bf6aa87457d58f173d1ff2cc2418a5919e66ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
