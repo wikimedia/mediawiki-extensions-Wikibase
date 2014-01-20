@@ -63,7 +63,7 @@ class SetClaim extends ModifyClaim {
 		try{
 			$changeop->apply( $entity );
 		} catch( ChangeOpException $exception ){
-			$this->dieUsage( 'Failed to apply changeOp:' . $exception->getMessage(), 'save-failed' );
+			$this->dieUsage( 'Failed to apply changeOp: ' . $exception->getMessage(), 'save-failed' );
 		}
 
 		$this->saveChanges( $entityContent, $summary );
