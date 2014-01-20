@@ -57,19 +57,14 @@ class ResultBuilder {
 	 * @param SerializerFactory $serializerFactory
 	 *
 	 * @throws InvalidArgumentException
-	 * @todo require SerializerFactory
 	 */
 	public function __construct(
 		$result,
 		EntityTitleLookup $entityTitleLookup,
-		SerializerFactory $serializerFactory = null
+		SerializerFactory $serializerFactory
 	) {
 		if( !$result instanceof ApiResult ){
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
-		}
-
-		if ( $serializerFactory === null ) {
-			$serializerFactory = new SerializerFactory();
 		}
 
 		$this->result = $result;
