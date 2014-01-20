@@ -70,6 +70,9 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 
 			if ( $expectedError !== null ) {
 				$this->fail( 'API call should have failed with a permission error!' );
+			} else {
+				// the below is to avoid the tests being marked incomplete
+				$this->assertTrue( true );
 			}
 		} catch ( UsageException $ex ) {
 			if ( $expectedError !== true ) {
