@@ -3,7 +3,6 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
@@ -98,12 +97,7 @@ class ChangeOpClaim extends ChangeOpBase {
 			$indexedClaimList = new ByPropertyIdArray( $entityClaims );
 			$indexedClaimList->buildIndex();
 
-			try{
-				$indexedClaimList->addObjectAtIndex( $this->claim, $this->index );
-			}
-			catch( OutOfBoundsException $e ){
-				throw new ChangeOpException( "Can not add claim at given index : ". $this->index );
-			}
+			$indexedClaimList->addObjectAtIndex( $this->claim, $this->index );
 
 		} else {
 			// Altering an existing claim.
