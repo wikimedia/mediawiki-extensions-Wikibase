@@ -1206,6 +1206,10 @@ $messages['et'] = array(
 	'wikibase-deletedentity-property' => 'Kustutatud omadus',
 	'wikibase-deletedentity-query' => 'Kustutatud päring',
 	'wikibase-diffview-reference' => 'viide',
+	'wikibase-diffview-rank' => 'järk',
+	'wikibase-diffview-rank-preferred' => 'Eelisjärk',
+	'wikibase-diffview-rank-normal' => 'Tavajärk',
+	'wikibase-diffview-rank-deprecated' => 'Igandjärk',
 	'wikibase-diffview-label' => 'silt',
 	'wikibase-diffview-alias' => 'rööpkujud',
 	'wikibase-diffview-description' => 'kirjeldus',
@@ -3335,8 +3339,8 @@ $messages['sr-ec'] = array(
 	'wikibase-sitelinks-link-columnheading' => 'Повезани чланак',
 	'wikibase-tooltip-error-details' => 'Детаљи',
 	'wikibase-validator-bad-type' => '$2 уместо $1',
-	'wikibase-validator-too-long' => 'Не сме бити дуже од {{PLURAL:$1|1=једног знака|$1 знакова}}', # Fuzzy
-	'wikibase-validator-too-short' => 'Мора бити најмање {{PLURAL:$1|1=један знак|$1 знакова}} дуго', # Fuzzy
+	'wikibase-validator-too-long' => 'Не сме бити дуже од {{PLURAL:$1|једног знака|$1 знакова}}',
+	'wikibase-validator-too-short' => 'Мора бити најмање {{PLURAL:$1|један знак|$1 знакова}} дуго',
 	'wikibase-validator-malformed-value' => 'Неисправан унос: $1',
 	'wikibase-validator-bad-entity-id' => 'Неисправан идентификатор: $1',
 	'wikibase-validator-bad-entity-type' => 'Неочекивана врста ентитета $1',

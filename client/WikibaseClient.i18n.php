@@ -3815,7 +3815,7 @@ $messages['sr-ec'] = array(
 	'wikibase-linkitem-selectlink' => 'Изаберите сајт и страницу са којом желите да повежете ову страницу.',
 	'wikibase-linkitem-input-site' => 'Језик:',
 	'wikibase-linkitem-input-page' => 'Страница:',
-	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ придружена [$1 ставци на нашој централној бази података]. Молимо вас потврдите да {{PLURAL:$2|1=је страница|су странице}} испод {{PLURAL:$2|1=приказана|приказане}} {{PLURAL:$2|1=она коју|оне које}} желите да повежете са овом страницом.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ придружена [$1 ставци на нашој централној бази података]. Молимо вас потврдите да {{PLURAL:$2|је страница|су странице}} испод {{PLURAL:$2|приказана|приказане}} {{PLURAL:$2|она коју|оне које}} желите да повежете са овом страницом.',
 	'wikibase-linkitem-confirmitem-button' => 'Потврди',
 	'wikibase-linkitem-not-loggedin-title' => 'Морате бити пријављени',
 	'wikibase-linkitem-not-loggedin' => 'Морате бити пријављени на овом вики-сајту и на [$1 главном складишту података] како бисте користили ову могућност.',
@@ -3836,7 +3836,7 @@ $messages['sr-ec'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ није исправан код за језик.',
 	'wikibase-unconnectedpages-page-warning' => 'Наслов странице не може се користи за упит и биће игнорисан.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Само странице са међујезичким везама',
-	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|1=међујезичка веза|међујезичких веза}} на страници)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|међујезичка веза|међујезичких веза}} на страници)',
 	'wikibase-pageinfo-entity-id' => 'ИД ставке на Википодацима',
 	'wikibase-pageinfo-entity-id-none' => 'Нема',
 );
