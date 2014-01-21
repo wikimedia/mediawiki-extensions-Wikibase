@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_b094d88e",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-21T18:47:26Z",
+      "side": 1,
+      "message": "\"ClientStore mock\"\n\nThat part if already told by the name\n\n\"for use in Lua integration tests\"\n\nWhy just for lua integration tests? How about creating a general one that has a note that not everything has been stubbed out? Now this class is linked to its users in a rather weird way.",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_508c6c89",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-21T18:47:26Z",
+      "side": 1,
+      "message": "One class per file please. Esp no classes that are used elsewhere in files with a different name. Makes them hard to find.",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_f0b3804a",
         "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
         "patchSetId": 7
