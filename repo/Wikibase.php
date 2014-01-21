@@ -1,28 +1,7 @@
 <?php
 
 /**
- * Initialization file for the Wikibase extension.
- *
- * Documentation:	 		https://www.mediawiki.org/wiki/Extension:Wikibase
- * Support					https://www.mediawiki.org/wiki/Extension_talk:Wikibase
- * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
- *
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner < daniel.werner at wikimedia.de >
- * @author Daniel Kinzler
- */
-
-/**
- * This documentation group collects source code files belonging to Wikibase Repository.
- *
- * @defgroup WikibaseRepo Wikibase Repo
- */
-
-/**
- * This documentation group collects source code files with tests for Wikibase Repository.
- *
- * @defgroup WikibaseRepoTest Tests for Wikibase Repo
+ * Entry point for the Wikibase Repository extension.
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -30,8 +9,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 if ( defined( 'WB_VERSION' ) ) {
-	// Do not initialize more then once.
-	return;
+	// Do not initialize more than once.
+	return 1;
 }
 
 define( 'WB_VERSION', '0.5 alpha'
