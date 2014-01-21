@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_6919d026",
+        "filename": "lib/tests/phpunit/serializers/ClaimSerializerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-21T13:20:27Z",
+      "side": 1,
+      "message": "The Claim serializer specifically sets the option for all qualifiers, no matter if the option is passed in or not.\nSo this test will always return the qualifiers with hashes.\nHence leaving the test in the state it was in before means the test will fail as the claim serializer will return the qualifiers with hashes but the snak serializer with no options will not.",
+      "revId": "206e33cd79237dd80f7f827bb3cff602df4f8b1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
