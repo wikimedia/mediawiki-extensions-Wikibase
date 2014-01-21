@@ -16,6 +16,24 @@
       "revId": "206e33cd79237dd80f7f827bb3cff602df4f8b1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_96e8ac0c",
+        "filename": "lib/tests/phpunit/serializers/ClaimSerializerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-21T21:41:46Z",
+      "side": 1,
+      "message": "Ah, I see. In that case, I\u0027d set the option in the snak serializer.",
+      "parentUuid": "aef5673e_6919d026",
+      "revId": "206e33cd79237dd80f7f827bb3cff602df4f8b1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
