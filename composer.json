@@ -48,7 +48,12 @@
 
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
-			"lib/tests/phpunit/"
+			"lib/tests/phpunit/",
+
+			"repo/includes/",
+			"repo/maintenance/",
+			"repo/tests/phpunit/",
+			"repo/Wikibase.hooks.php"
 		]
 	}
 }

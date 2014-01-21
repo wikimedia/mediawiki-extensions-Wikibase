@@ -51,7 +51,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgAutoloadClasses, $wgGroupPermissions, $wgExtensionMessagesFiles;
+	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles;
 	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks, $wgContentHandlers;
 	global $wgWBStores, $wgWBRepoSettings, $wgResourceModules;
 
@@ -69,11 +69,6 @@ call_user_func( function() {
 	// constants
 	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
-
-	// Autoloading
-	foreach ( include( __DIR__ . '/Wikibase.classes.php' ) as $class => $file ) {
-		$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-	}
 
 	// rights
 	// names should be according to other naming scheme
