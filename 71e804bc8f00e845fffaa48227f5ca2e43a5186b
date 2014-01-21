@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_f03dc0b9",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-21T18:43:48Z",
+      "side": 1,
+      "message": "It is bad practice to have code outside of the class in files that define classes. Also, one ought to be able to prevent this class from being loaded in cases where it cannot be used anyway.",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_f0b3804a",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-21T18:43:48Z",
+      "side": 1,
+      "message": "A proper name please. This one tells me it is about things related to the lua integration tests. That can be many things. This makes it hard to understand, harder to review and very prone to code rot.",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
