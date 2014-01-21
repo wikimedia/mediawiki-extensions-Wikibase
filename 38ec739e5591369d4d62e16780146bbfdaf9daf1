@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_b624d008",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-21T22:39:40Z",
+      "side": 1,
+      "message": "Please do not add config to lib. If it is needed in both client and repo, add it in both.",
+      "revId": "38ec739e5591369d4d62e16780146bbfdaf9daf1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
