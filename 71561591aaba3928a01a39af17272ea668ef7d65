@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_16437c18",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-21T21:48:01Z",
+      "side": 1,
+      "message": "This has been highly deprecated for what? A year? Please do not introduce new usages. This commit just adds a pile more technical debt.",
+      "revId": "71561591aaba3928a01a39af17272ea668ef7d65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
