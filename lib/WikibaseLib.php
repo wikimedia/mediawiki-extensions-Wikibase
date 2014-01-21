@@ -1,26 +1,7 @@
 <?php
 
 /**
- * Initialization file for the WikibaseLib extension.
- *
- * Documentation:	 		https://www.mediawiki.org/wiki/Extension:WikibaseLib
- * Support					https://www.mediawiki.org/wiki/Extension_talk:WikibaseLib
- * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikibaseLib.git
- *
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
-
-/**
- * This documentation group collects source code files belonging to Wikibase.
- *
- * @defgroup Wikibase Wikibase
- */
-
-/**
- * This documentation group collects source code files belonging to WikibaseLib.
- *
- * @defgroup WikibaseLib WikibaseLib
+ * Entry point for the WikibaseLib extension.
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
