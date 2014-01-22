@@ -21,11 +21,7 @@
 			var msgParts = msg.match( /(\d{1,}) failure/ ),
 				failures = parseInt( msgParts[1], 10 );
 
-			if( failures > 0 ) {
-				phantom.exit( 1 );
-			} else {
-				phantom.exit( 0 );
-			}
+			phantom.exit( failures > 0 ? 1 : 0 );
 		}
 	};
 
