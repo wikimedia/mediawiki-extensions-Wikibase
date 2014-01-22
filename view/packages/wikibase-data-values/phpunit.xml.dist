@@ -1,6 +1,6 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="phpunit.bootstrap.php"
+         bootstrap="bootstrap.php"
          cacheTokens="false"
          colors="true"
          convertErrorsToExceptions="true"
@@ -12,4 +12,9 @@
          stopOnSkipped="false"
          strict="true"
          verbose="true">
+    <testsuites>
+        <testsuite name="DataValuesJs">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
