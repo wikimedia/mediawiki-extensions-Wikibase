@@ -26,15 +26,11 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"composer/installers": ">=1.0.1",
-		"data-values/interfaces": "~0.1"
+		"composer/installers": ">=1.0.1"
 	},
 	"autoload": {
 		"files" : [
 			"DataValuesJavascript.php"
-		],
-		"classmap": [
-			"php/src/"
 		]
 	}
 }

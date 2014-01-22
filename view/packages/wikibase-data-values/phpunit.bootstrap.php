@@ -5,8 +5,8 @@ if ( php_sapi_name() !== 'cli' ) {
 }
 
 $pwd = exec( 'pwd' );
-chdir( __DIR__ . '/../..' );
+chdir( __DIR__ );
 passthru( 'composer update' );
 chdir( $pwd );
 
-require_once( __DIR__ . '/../../vendor/autoload.php' );
+require_once( __DIR__ . '/vendor/autoload.php' );
