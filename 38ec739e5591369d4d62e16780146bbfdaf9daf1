@@ -16,6 +16,24 @@
       "revId": "38ec739e5591369d4d62e16780146bbfdaf9daf1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_fef4a1cd",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-01-22T15:53:00Z",
+      "side": 1,
+      "message": "May I ask the reason for your proposal? As far as I can see here are lots of other config variables, too. In my opinion \u0027badgeItems\u0027 is a config variable like \u0027urlSchemes\u0027 so why can the latter one stay here while the first one has to be removed?",
+      "parentUuid": "aef5673e_b624d008",
+      "revId": "38ec739e5591369d4d62e16780146bbfdaf9daf1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
