@@ -5,6 +5,7 @@ if ( php_sapi_name() !== 'cli' ) {
 }
 
 $pwd = exec( 'pwd' );
+chdir( __DIR__ );
 passthru( 'composer update' );
 chdir( $pwd );
 
