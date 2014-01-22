@@ -11,13 +11,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Technical debt
 
-TODO: remove dependency on ApiParserValue from the JS so ApiParseValue
-can be removed. ApiParseValue is the only PHP class in this package and
-is the only thing that depends on the DataValues PHP components.
-
 TODO: write high level description and documentation in this README file.
-
-TODO: make tests runnable without needing MW and a browser
 
 TODO: have tests run on CI
 

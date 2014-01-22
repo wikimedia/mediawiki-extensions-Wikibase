@@ -34,14 +34,6 @@ $GLOBALS['wgResourceModules'] = array_merge(
 	include( __DIR__ . '/src/valueFormatters/resources.mw.php' )
 );
 
-// API module registration
-$GLOBALS['wgAPIModules']['parsevalue'] = 'ValueParsers\ApiParseValue';
-
-/**
- * @deprecated since 0.1 This is a global registry that provides no control over object lifecycle
- */
-$GLOBALS['wgValueParsers'] = array();
-
 /**
  * Register QUnit test base classes used by test modules in dependent components.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
