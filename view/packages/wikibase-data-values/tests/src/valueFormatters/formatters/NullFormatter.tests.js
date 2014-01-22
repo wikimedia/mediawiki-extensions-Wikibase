@@ -2,8 +2,19 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( vf, dv, util ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'valueFormatters',
+	'dataValues',
+	'util.inherit',
+	'valueFormatters.tests',
+	'valueFormatters.NullFormatter',
+	'dataValues.UnknownValue'
+];
+
+define( DEPS, function( vf, dv, util ) {
 
 	var PARENT = vf.tests.ValueFormatterTest,
 		constructor = function() {
@@ -48,4 +59,6 @@
 
 	test.runTests( 'valueFormatters.NullFormatter' );
 
-}( valueFormatters, dataValues, util ) );
+} );
+
+}( define ) );

@@ -2,8 +2,24 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, dv, vp ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'valueParsers',
+	'dataValues',
+	'jquery',
+	'qunit',
+	'dataValues.NumberValue',
+	'dataValues.StringValue',
+	'dataValues.UnknownValue',
+	'valueParsers.NullParser',
+	'valueParsers.StringParser',
+	'valueParsers.ValueParserFactory',
+	'qunit.parameterize'
+];
+
+define( DEPS, function( vp, dv, $, QUnit ) {
 
 	var DataTypeMock = function( dataTypeId, DataValue ) {
 		this._dataTypeId = dataTypeId;
@@ -257,4 +273,6 @@
 			}
 		);
 
-}( jQuery, QUnit, dataValues, valueParsers ) );
+} );
+
+}( define ) );

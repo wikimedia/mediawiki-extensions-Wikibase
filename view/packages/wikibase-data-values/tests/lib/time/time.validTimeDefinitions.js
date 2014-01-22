@@ -4,22 +4,22 @@
  * time definition equal to the ones given here. This is particularly useful for testing purposes.
  * The definition assumes that the settings "daybeforemonth" is set to true.
  *
- * @since 0.1
- * @file
- * @ingroup Time.js
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-time.validTimeDefinitions = ( function( time ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = ['time', 'time.Time'];
+
+define( DEPS, function( time ) {
 
 	var Time = time.Time,
 		PRECISION = Time.PRECISION,
 		G = Time.CALENDAR.GREGORIAN,
 		J = Time.CALENDAR.JULIAN;
 
-	return {
+	time.validTimeDefinitions = {
 		'45 BC': {
 			calendarname: G,
 			year: -44,
@@ -202,4 +202,6 @@ time.validTimeDefinitions = ( function( time ) {
 		}
 	};
 
-}( time ) );
+} );
+
+}( define ) );

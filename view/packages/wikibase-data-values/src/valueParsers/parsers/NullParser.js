@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( mw, vp, dv, $, util ) {
+( function( vp, dv, $, util ) {
 	'use strict';
 
 	var PARENT = vp.ValueParser,
@@ -41,4 +41,4 @@
 
 	} );
 
-}( mediaWiki, valueParsers, dataValues, jQuery, util ) );
+}( valueParsers, dataValues, jQuery, util ) );

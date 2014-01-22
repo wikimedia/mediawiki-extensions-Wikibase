@@ -1,13 +1,20 @@
 /**
- * @since 0.1
- * @file
- * @ingroup Time.js
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( QUnit, $, time ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'time',
+	'jquery',
+	'qunit',
+	'time.Time',
+	'time.validTimeDefinitions',
+	'time.Time.validate'
+];
+
+define( DEPS, function( time, $, QUnit ) {
 
 	var Time = time.Time,
 		validTimeDefinitions = time.validTimeDefinitions;
@@ -106,4 +113,6 @@
 		time.settings.daybeforemonth = dbmStateBefore; // reset state of evil global setting
 	} );
 
-}( QUnit, jQuery, time ) );
+} );
+
+}( define ) );

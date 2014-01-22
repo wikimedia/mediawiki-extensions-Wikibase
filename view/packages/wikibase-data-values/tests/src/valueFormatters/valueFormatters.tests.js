@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, vf, util ) {
+( function( vf, util, $, QUnit ) {
 	'use strict';
 
 	vf.tests = {};
@@ -161,4 +161,4 @@
 
 	};
 
-}( jQuery, QUnit, valueFormatters, util ) );
+}( valueFormatters, util, jQuery, QUnit ) );

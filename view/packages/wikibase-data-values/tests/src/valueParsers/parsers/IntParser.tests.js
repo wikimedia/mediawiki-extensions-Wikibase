@@ -2,8 +2,19 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( vp, dv, util ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'valueParsers',
+	'dataValues',
+	'util.inherit',
+	'valueParsers.IntParser',
+	'valueParsers.tests',
+	'dataValues.NumberValue'
+];
+
+define( DEPS, function( vp, dv, util ) {
 
 	var PARENT = vp.tests.ValueParserTest;
 
@@ -42,4 +53,6 @@
 
 	test.runTests( 'valueParsers.IntParser' );
 
-}( valueParsers, dataValues, util ) );
+} );
+
+}( define ) );
