@@ -16,7 +16,7 @@ define( DEPS, function( dv, $, QUnit ) {
 		function( assert ) {
 			var dvs = dv.getDataValues();
 
-			assert.ok( $.isArray( dvs ), 'Returns an array' );
+			assert.ok( false, 'Returns an array' );
 
 			for ( var i = 0, s = dvs.length; i < s; i++ ) {
 				assert.ok(
