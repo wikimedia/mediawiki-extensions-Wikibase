@@ -5,9 +5,7 @@
 ( function( vp, dv, util ) {
 	'use strict';
 
-	var PARENT = vp.tests.ValueParserTest,
-		constructor = function() {
-		};
+	var PARENT = vp.tests.ValueParserTest;
 
 	/**
 	 * Constructor for creating a test object holding tests for the IntParser.
@@ -16,7 +14,7 @@
 	 * @extends dv.tests.ValueParserTest
 	 * @since 0.1
 	 */
-	vp.tests.IntParserTest = util.inherit( PARENT, constructor, {
+	vp.tests.IntParserTest = util.inherit( PARENT, {
 
 		/**
 		 * @see vp.tests.ValueParserTest.getConstructor

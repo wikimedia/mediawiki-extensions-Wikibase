@@ -1,31 +1,20 @@
 <?php
 /**
- * Definition of "DataValues" resourceloader modules.
- * When included this returns an array with all modules introduced by the "DataValues" JavaScript
- * module.
- *
- * External dependencies:
- * - jQuery 1.8
- * - time.js
- *
- * @since 0.1
- *
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  *
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__ . '/resources',
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/resources',
+		'localBasePath' => __DIR__,
+		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
 	);
 
 	return array(
+
 		'dataValues' => $moduleTemplate + array(
 			'scripts' => array(
 				'dataValues.js',
@@ -66,13 +55,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'util.inherit' => $moduleTemplate + array(
-			'scripts' => array(
-				'../lib/util/util.inherit.js',
-			),
-		),
-
 	);
 
 } );
-// @codeCoverageIgnoreEnd

@@ -12,16 +12,6 @@
 	var valueParserProvider = new vp.ValueParserFactory( vp.NullParser );
 
 	valueParserProvider.registerDataValueParser(
-		vp.GlobeCoordinateParser,
-		dv.GlobeCoordinateValue.TYPE
-	);
-
-	valueParserProvider.registerDataValueParser(
-		vp.QuantityParser,
-		dv.QuantityValue.TYPE
-	);
-
-	valueParserProvider.registerDataValueParser(
 		vp.StringParser,
 		dv.StringValue.TYPE
 	);

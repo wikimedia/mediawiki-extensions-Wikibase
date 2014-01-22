@@ -1,9 +1,5 @@
 <?php
 /**
- * Definition of "ValueFormatters" ResourceLoader modules to be used when run as MediaWiki
- * extension.
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
@@ -12,8 +8,8 @@
 return call_user_func( function() {
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__ . '/src/ValueFormatters/',
-		'remoteExtPath' =>  '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/src/ValueFormatters',
+		'localBasePath' => __DIR__,
+		'remoteExtPath' =>  '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
 	);
 
 	$mwVfResources = array(
@@ -32,5 +28,5 @@ return call_user_func( function() {
 	);
 
 	// Return ValueFormatter's native resources plus those required by the MW extension:
-	return $mwVfResources + include( __DIR__ . '/ValueFormatters.resources.php' );
+	return $mwVfResources + include( __DIR__ . '/resources.php' );
 } );

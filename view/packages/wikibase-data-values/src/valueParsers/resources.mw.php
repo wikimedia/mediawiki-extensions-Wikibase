@@ -1,8 +1,5 @@
 <?php
 /**
- * Definition of "ValueParser" ResourceLoader modules to be used when run as MediaWiki extension.
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
@@ -11,8 +8,8 @@
 return call_user_func( function() {
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__ . '/src/ValueParsers/',
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/src/ValueParsers',
+		'localBasePath' => __DIR__,
+		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
 	);
 
 	$mwVpResources = array(
@@ -31,5 +28,5 @@ return call_user_func( function() {
 	);
 
 	// Return ValueParser's native resources plus those required by the MW extension:
-	return $mwVpResources + include( __DIR__ . '/ValueParsers.resources.php' );
+	return $mwVpResources + include( __DIR__ . '/resources.php' );
 } );
