@@ -1,0 +1,25 @@
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="php/tests/bootstrap.php"
+         cacheTokens="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         strict="true"
+         verbose="true">
+    <testsuites>
+        <testsuite name="DataValuesJsApi">
+            <directory>php/tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">php/src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
