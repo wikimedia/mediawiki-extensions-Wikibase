@@ -2,6 +2,6 @@
 
 set -x
 
-cd ../phase3/tests/phpunit
+cd tests
 
-php phpunit.php -c ../../extensions/DataValuesJavascript/phpunit.xml.dist
+phantomjs runTests.phantom.js

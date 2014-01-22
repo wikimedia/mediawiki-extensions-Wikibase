@@ -21,11 +21,7 @@
 			var msgParts = msg.match( /(\d{1,}) failure/ ),
 				failures = parseInt( msgParts[1], 10 );
 
-			if( failures > 0 ) {
-				phantom.exit( 1 );
-			}
-
-			phantom.exit( 0 );
+			phantom.exit( failures > 0 ? 1 : 0 );
 		}
 	};
 
@@ -34,9 +30,9 @@
 			console.error( 'Network connection error: ' + status );
 			phantom.exit( 1 );
 		} else {
-				// Set a timeout on the test running, otherwise tests with async problems will hang
-				// forever.
-				setTimeout( function() {
+			// Set a timeout on the test running, otherwise tests with async problems will hang
+			// forever.
+			setTimeout( function() {
 				console.error( 'The specified timeout of ' + TIMEOUT + ' seconds has expired.' );
 				phantom.exit( 1 );
 			}, TIMEOUT * 1000 );
