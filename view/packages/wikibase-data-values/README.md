@@ -13,7 +13,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 TODO: write high level description and documentation in this README file.
 
-TODO: have tests run on CI
+TODO: unify lib and src directories
 
 ## Release notes
 
