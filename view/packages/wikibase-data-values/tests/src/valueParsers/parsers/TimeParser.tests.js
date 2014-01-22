@@ -2,8 +2,20 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, Time, util ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'valueParsers',
+	'dataValues',
+	'time.Time',
+	'util.inherit',
+	'valueParsers.TimeParser',
+	'valueParsers.tests',
+	'dataValues.TimeValue'
+];
+
+define( DEPS, function( vp, dv, Time, util ) {
 
 	var PARENT = vp.tests.ValueParserTest;
 
@@ -39,4 +51,6 @@
 
 	test.runTests( 'valueParsers.TimeParser' );
 
-}( valueParsers, dataValues, time.Time, util ) );
+} );
+
+}( define ) );

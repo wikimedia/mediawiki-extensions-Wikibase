@@ -1,13 +1,19 @@
 /**
- * @since 0.1
- * @file
- * @ingroup Time.js
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( QUnit, $, Time, validTimeDefinitions ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'time.Time',
+	'jquery',
+	'qunit',
+	'time.Time.validate',
+	'time.validTimeDefinitions'
+];
+
+define( DEPS, function( Time, $, QUnit ) {
 
 	QUnit.module( 'time.js: time.Time.newFromIso8601()' );
 
@@ -37,7 +43,7 @@
 	QUnit.test( 'newFromIso8601 by random valid iso8601 strings', function( assert ) {
 		var isoStrings = [];
 
-		$.each( validTimeDefinitions, function( name, definition ) {
+		$.each( time.validTimeDefinitions, function( name, definition ) {
 			var time = new Time( definition );
 			isoStrings.push( time.iso8601() );
 		} );
@@ -126,4 +132,6 @@
 
 	} );
 
-}( QUnit, jQuery, time.Time, time.validTimeDefinitions ) );
+} );
+
+}( define ) );

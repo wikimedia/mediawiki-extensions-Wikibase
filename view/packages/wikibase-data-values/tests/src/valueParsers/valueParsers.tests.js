@@ -3,7 +3,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, $, QUnit, util ) {
+( function( vp, dv, util, $, QUnit ) {
 	'use strict';
 
 	vp.tests = {};
@@ -140,4 +140,4 @@
 
 	};
 
-}( valueParsers, dataValues, jQuery, QUnit, util ) );
+}( valueParsers, dataValues, util, jQuery, QUnit ) );

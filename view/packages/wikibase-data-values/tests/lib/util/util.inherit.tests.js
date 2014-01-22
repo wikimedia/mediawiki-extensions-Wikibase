@@ -1,17 +1,20 @@
 /**
- * @since 0.1
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function( inherit, $, QUnit ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = ['util.inherit', 'qunit'];
+
+define( DEPS, function( util, QUnit ) {
 
 	var namedFunction = function namedFunction() {};
 	if( namedFunction.name !== 'namedFunction' ) {
 		return; // Named functions are not supported by environment, so skip this test.
 	}
 
-	QUnit.module( 'dataValues.util.inherit constructor names' );
+	QUnit.module( 'util.inherit constructor names' );
 
 	function inheritConstructorNameTest( description, testArguments, test ) {
 		QUnit.test( description, function( assert ) {
@@ -33,7 +36,7 @@
 		],
 		function( constructorName ) {
 			this.equal(
-				inherit( constructorName, Object ).name,
+				util.inherit( constructorName, Object ).name,
 				constructorName,
 				'inherit( \'' + constructorName + '\', ... ); creates constructor named as "' +
 					constructorName + '".'
@@ -52,7 +55,7 @@
 		],
 		function( constructorName, expectedName ) {
 			this.equal(
-				inherit( constructorName, Object ).name,
+				util.inherit( constructorName, Object ).name,
 				expectedName,
 				'inherit( \'' + constructorName + '\', ... ); will use "' + expectedName +
 					'" as name.'
@@ -71,7 +74,7 @@
 		function( constructorName ) {
 			this.throws(
 				function() {
-					inherit( constructorName, Object );
+					util.inherit( constructorName, Object );
 				},
 				'inherit( \'' + constructorName + '\', ... ); will throw an error because of ' +
 					'illegal constructor name.'
@@ -79,4 +82,6 @@
 		}
 	);
 
-}( util.inherit, jQuery, QUnit ) );
+} );
+
+}( define ) );

@@ -36,6 +36,10 @@
 		"valueFormatters",
 		"valueParsers",
 		"time",
-		"util"
+		"util",
+		// require.js globals:
+		"require",
+		"requirejs",
+		"define"
 	]
 }

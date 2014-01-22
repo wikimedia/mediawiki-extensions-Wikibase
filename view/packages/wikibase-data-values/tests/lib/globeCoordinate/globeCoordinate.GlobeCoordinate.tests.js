@@ -1,13 +1,13 @@
 /**
- * @since 0.1
- * @file
- * @ingroup globeCoordinate.js
- *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( QUnit, $, globeCoordinate ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = ['globeCoordinate', 'jquery', 'qunit', 'globeCoordinate.GlobeCoordinate'];
+
+define( DEPS, function( globeCoordinate, $, QUnit ) {
 
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
@@ -139,4 +139,6 @@
 
 	} );
 
-}( QUnit, jQuery, globeCoordinate ) );
+} );
+
+}( define ) );

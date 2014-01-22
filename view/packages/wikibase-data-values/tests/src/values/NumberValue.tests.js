@@ -2,8 +2,17 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( dv, util ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'dataValues',
+	'util.inherit',
+	'dataValues.DataValue.tests',
+	'dataValues.NumberValue'
+];
+
+define( DEPS, function( dv, util ) {
 
 	var PARENT = dv.tests.DataValueTest;
 
@@ -42,4 +51,6 @@
 
 	test.runTests( 'dataValues.NumberValue' );
 
-}( dataValues, util ) );
+} );
+
+}( define ) );

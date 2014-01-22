@@ -1,13 +1,19 @@
 /**
- * @since 0.1
- * @file
- * @ingroup Time.js
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( QUnit, $, Time, validTimeDefinitions ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'time.Time',
+	'jquery',
+	'qunit',
+	'time.validTimeDefinitions',
+	'time.Time.validate'
+];
+
+define( DEPS, function( Time, $, QUnit ) {
 
 	var PRECISION = Time.PRECISION,
 		G = Time.CALENDAR.GREGORIAN,
@@ -16,7 +22,7 @@
 	QUnit.module( 'time.js: time.Time.validate()' );
 
 	QUnit.test( 'validating valid time definitions', function( assert ) {
-		$.each( validTimeDefinitions, function( name, timeDefinition ) {
+		$.each( time.validTimeDefinitions, function( name, timeDefinition ) {
 			var valid = true;
 			try {
 				Time.validate( timeDefinition ); // throws an error if failure
@@ -155,4 +161,6 @@
 		} );
 	} );
 
-}( QUnit, jQuery, time.Time, time.validTimeDefinitions ) );
+} );
+
+}( define ) );

@@ -43,7 +43,7 @@ $GLOBALS['wgAPIModules']['parsevalue'] = 'ValueParsers\ApiParseValue';
 $GLOBALS['wgValueParsers'] = array();
 
 /**
- * Hook for registering QUnit test cases.
+ * Register QUnit test base classes used by test modules in dependent components.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
  * @since 0.1
  *
@@ -55,13 +55,35 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	array &$testModules,
 	\ResourceLoader &$resourceLoader
 ) {
-	$testModules['qunit'] = array_merge(
-		$testModules['qunit'],
-		include( __DIR__ . '/tests/lib/resources.php' ),
-		include( __DIR__ . '/tests/src/resources.php' ),
-		include( __DIR__ . '/tests/src/valueFormatters/resources.php' ),
-		include( __DIR__ . '/tests/src/valueParsers/resources.php' )
+
+	$moduleTemplate = array(
+		'localBasePath' => __DIR__ . '/test',
+		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/tests',
 	);
+
+	$testModuleTemplates = array(
+
+		'valueFormatters.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'src/valueFormatters/valueFormatters.tests.js',
+			),
+			'dependencies' => array(
+				'valueFormatters',
+			),
+		),
+
+		'valueParsers.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'src/valueParsers/valueParsers.tests.js',
+			),
+			'dependencies' => array(
+				'valueParsers.parsers',
+			),
+		),
+
+	);
+
+	$testModules['qunit'] = array_merge( $testModules['qunit'], $testModuleTemplates );
 
 	return true;
 };

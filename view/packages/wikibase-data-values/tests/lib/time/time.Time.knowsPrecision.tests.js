@@ -1,13 +1,13 @@
 /**
- * @since 0.1
- * @file
- * @ingroup Time.js
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( QUnit, jQuery, Time ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = ['time.Time', 'jquery', 'qunit'];
+
+define( DEPS, function( Time, $, QUnit ) {
 
 	QUnit.module( 'Time.js: time.Time.knowsPrecision' );
 
@@ -41,4 +41,6 @@
 		);
 	} );
 
-}( QUnit, jQuery, time.Time ) );
+} );
+
+}( define ) );

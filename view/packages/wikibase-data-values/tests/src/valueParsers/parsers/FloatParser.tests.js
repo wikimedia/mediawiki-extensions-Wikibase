@@ -2,8 +2,19 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( vp, dv, util ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'valueParsers',
+	'dataValues',
+	'util.inherit',
+	'valueParsers.FloatParser',
+	'valueParsers.tests',
+	'dataValues.NumberValue'
+];
+
+define( DEPS, function( vp, dv, util ) {
 
 	var PARENT = vp.tests.ValueParserTest;
 
@@ -44,4 +55,6 @@
 
 	test.runTests( 'valueParsers.FloatParser' );
 
-}( valueParsers, dataValues, util ) );
+} );
+
+}( define ) );

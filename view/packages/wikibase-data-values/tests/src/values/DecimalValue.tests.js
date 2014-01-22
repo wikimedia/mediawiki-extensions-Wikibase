@@ -2,8 +2,17 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, util ) {
-	'use strict';
+( function( define ) {
+'use strict';
+
+var DEPS = [
+	'dataValues',
+	'util.inherit',
+	'dataValues.DataValue.tests',
+	'dataValues.DecimalValue'
+];
+
+define( DEPS, function( dv, util ) {
 
 	var PARENT = dv.tests.DataValueTest;
 
@@ -52,4 +61,6 @@
 
 	test.runTests( 'dataValues.DecimalValueTest' );
 
-}( dataValues, util ) );
+} );
+
+}( define ) );
