@@ -7,9 +7,6 @@ namespace Wikibase\DataModel\Internal;
  *
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
