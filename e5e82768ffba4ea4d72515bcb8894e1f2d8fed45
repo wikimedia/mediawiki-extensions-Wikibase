@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_18f4fd82",
+        "filename": "tests/browser/features/support/modules/statement_module.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-01-23T16:43:33Z",
+      "side": 1,
+      "message": "There can be several divs with the same class, one after the other. I want to specify in the caller (the steps-file) what specific div I want to address. I\u0027m doing that by giving the index which is then used in the selector inside the nth-child method. But it seems both attempts (line 31 and line 32) do not work. Any idea?",
+      "revId": "e5e82768ffba4ea4d72515bcb8894e1f2d8fed45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
