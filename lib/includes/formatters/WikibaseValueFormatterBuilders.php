@@ -76,7 +76,7 @@ class WikibaseValueFormatterBuilders {
 		// Falls back to plain text formatters (plus escaping).
 		SnakFormatter::FORMAT_HTML => array(
 			'PT:url' => 'Wikibase\Lib\HtmlUrlFormatter',
-			//'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter', // TODO
+			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
 			//'PT:wikibase-item' => 'Wikibase\Lib\ItemLinkFormatter', // TODO
 		),
 
