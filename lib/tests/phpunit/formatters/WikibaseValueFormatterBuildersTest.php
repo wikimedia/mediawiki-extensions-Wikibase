@@ -59,13 +59,13 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider buildDispatchingValueFormatterProvider
 	 * @covers WikibaseValueFormatterBuilders::buildDispatchingValueFormatter
 	 */
-	public function testBuildDispatchingValueFormatter( $format, $options, $snak, $expected ) {
+	public function testBuildDispatchingValueFormatter( $format, $options, $snak, $expected, $dataType = null ) {
 		$builders = $this->newBuilders( '-/-', new ItemId( 'Q5' ) );
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		$formatter = $builders->buildDispatchingValueFormatter( $factory, $format, $options );
 
-		$text = $formatter->formatValue( $snak );
+		$text = $formatter->formatValue( $snak, $dataType );
 		$this->assertEquals( $expected, $text );
 	}
 
@@ -114,6 +114,13 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				$optionsDe,
 				QuantityValue::newFromNumber( '+123456.789' ),
 				'123.456,789'
+			),
+			'commons link' => array(
+				SnakFormatter::FORMAT_HTML,
+				$options,
+				new StringValue( 'example.jpg' ),
+				'<a class="extiw" href="//commons.wikimedia.org/wiki/File:example.jpg">example.jpg</a>',
+				'commonsMedia'
 			),
 		);
 	}
