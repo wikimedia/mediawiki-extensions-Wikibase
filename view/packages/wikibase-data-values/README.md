@@ -9,11 +9,9 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 [![Latest Stable Version](https://poser.pugx.org/data-values/javascript/version.png)](https://packagist.org/packages/data-values/javascript)
 [![Download count](https://poser.pugx.org/data-values/javascript/d/total.png)](https://packagist.org/packages/data-values/javascript)
 
-## Technical debt
+## TODOs
 
-TODO: write high level description and documentation in this README file.
-
-TODO: unify lib and src directories
+* Write high level description and documentation in this README file.
 
 ## Release notes
 
@@ -21,7 +19,8 @@ TODO: unify lib and src directories
 
 ##### Breaking changes
 
-* Renamed dataValues.util.inherit to util.inherit
+* #8 Removed dataValues.util.Notifier
+* #10 Renamed dataValues.util.inherit to util.inherit
 * #13 Removed vp.GlobeCoordinateParser and vp.QuantityParser
 * #15 Removed the ParseValue API module
 
