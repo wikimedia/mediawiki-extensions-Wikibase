@@ -662,6 +662,7 @@ $messages['ca'] = array(
  * @author Умар
  */
 $messages['ce'] = array(
+	'wikibase-lib-desc' => 'Wikibase а Wikibase Client а массо функцеш',
 	'wikibase-entity-item' => 'элемент',
 	'wikibase-entity-property' => 'свойство',
 	'wikibase-entity-query' => 'жоп деха',
@@ -921,6 +922,7 @@ $messages['da'] = array(
  * @author Kghbln
  * @author Metalhead64
  * @author Se4598
+ * @author TMg
  */
 $messages['de'] = array(
 	'wikibase-lib-desc' => 'Stellt dem Repositorium strukturierter Daten Funktionen bereit',
@@ -961,7 +963,7 @@ $messages['de'] = array(
 	'wikibase-quantitydetails-lowerbound' => 'Untergrenze',
 	'wikibase-quantitydetails-unit' => 'Einheit',
 	'wikibase-replicationnote' => 'Bitte bedenke, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.',
-	'wikibase-sitelinks-wikipedia' => 'Wikipedia-Seiten, die mit diesem Objekt verlinkt sind',
+	'wikibase-sitelinks-wikipedia' => 'Wikipedia-Seiten zu diesem Objekt',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprache',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Website',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
@@ -3125,11 +3127,13 @@ $messages['roa-tara'] = array(
 	'wikibase-error-ui-link-exists' => "Non ge puè collegà a sta pàgene purcé 'n'otra vôsce già jè collegate a jedde.",
 	'wikibase-error-ui-session-failure' => "'A sessiona toje ha scadute. Pe piacere tràse arrete.",
 	'wikibase-error-ui-edit-conflict' => "Stè 'nu conflitte de versione. Pe piacere recareche e reggistre arrete.",
+	'wikibase-quantitydetails-unit' => 'Aunità',
 	'wikibase-replicationnote' => "Pe piacere te 'mbormame ca ponne passà diverse minute fine ca le cangiaminde ponne essere 'ndrucate sus a tutte le uicchi",
 	'wikibase-sitelinks-wikipedia' => 'Le pàggene Uicchipèdie ca sò collegate a sta vôsce',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lènghe',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'Site',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codece',
-	'wikibase-sitelinks-link-columnheading' => 'Vôsce collegate', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'Pàgene collegate',
 	'wikibase-tooltip-error-details' => 'Dettaglie',
 	'wikibase-validator-bad-type' => '$2 invece de $1',
 	'wikibase-validator-too-long' => "Onna essere luènghe no cchiù de {{PLURAL:$1|'nu carattere|$1 carattere}}",
@@ -3452,6 +3456,9 @@ $messages['ta'] = array(
  * @author Veeven
  */
 $messages['te'] = array(
+	'wikibase-diffview-alias' => 'మారుపేర్లు',
+	'wikibase-diffview-description' => 'వివరణ',
+	'wikibase-diffview-link' => 'లంకెలు',
 	'wikibase-sitelinks-sitename-columnheading' => 'భాష',
 	'wikibase-tooltip-error-details' => 'వివరాలు',
 );

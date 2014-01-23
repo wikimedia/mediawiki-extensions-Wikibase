@@ -393,6 +393,7 @@ $messages['as'] = array(
 );
 
 /** Asturian (asturianu)
+ * @author Edinwiki
  * @author Xuacu
  */
 $messages['ast'] = array(
@@ -653,12 +654,12 @@ $messages['br'] = array(
  */
 $messages['bs'] = array(
 	'wikibase-client-desc' => 'Klijent za proširenje Wikibaza',
-	'specialpages-group-wikibaseclient' => 'Wikidata klijent',
-	'wikibase-after-page-move' => 'Možete također [$1 ažurirati] asociranu Wikidata stavku za održavanje jezičnih veza na premještenoj stranici.',
-	'wikibase-comment-remove' => 'Asocirana Wikidata stavka je izbrisana. Jezične veze su uklonjene.',
-	'wikibase-comment-linked' => 'Neka Wikidata stavka je povezana prema ovoj stranici.',
-	'wikibase-comment-unlink' => 'Ova stranica je odvojena od Wikidata stavke. Jezične veze su uklonjene.',
-	'wikibase-comment-restore' => 'Asocirana Wikidata stavka je vraćena. Jezične veze su sada isto vraćene.',
+	'specialpages-group-wikibaseclient' => 'Klijent Wikipodataka',
+	'wikibase-after-page-move' => 'Možete također [$1 ažurirati] asociranu stavku Wikipodataka za održavanje jezičnih veza na premještenoj stranici.',
+	'wikibase-comment-remove' => 'Asocirana stavka Wikipodataka je izbrisana. Jezične veze su uklonjene.',
+	'wikibase-comment-linked' => 'Neka stavka Wikipodataka je povezana prema ovoj stranici.',
+	'wikibase-comment-unlink' => 'Ova stranica je odvojena od stavke sa Wikipodataka. Jezične veze su uklonjene.',
+	'wikibase-comment-restore' => 'Asocirana stavka Wikipodataka je vraćena. Jezične veze su sada isto vraćene.',
 	'wikibase-comment-update' => 'Jezične veze su ažurirane.',
 	'wikibase-comment-sitelink-add' => 'Jezična veza dodana: $1',
 	'wikibase-comment-sitelink-change' => 'Jezična veza izmjenjena sa $1 u $2',
@@ -682,10 +683,10 @@ $messages['bs'] = array(
 	'wikibase-linkitem-success-link' => 'Stranice su uspješno povezane. Možete pronaći ovu stavku koja sadrži ove poveznice u našom [$1 centralnom skladištu podataka].',
 	'wikibase-property-notfound' => 'Osobina $1 nije pronađena.',
 	'wikibase-property-notsupportedyet' => 'Wikibase trenutno ne podržaje tip za osobinu $1.',
-	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
-	'wikibase-rc-show-wikidata-pref' => 'Pokaži Wikidata izmjene u nedavnim izmjenama',
-	'wikibase-rc-wikibase-edit-title' => 'Wikidata uređivanje',
-	'wikibase-watchlist-show-changes-pref' => 'Prikaži Wikidata izmjene kod vašeg spiska praćenih članaka',
+	'wikibase-rc-hide-wikidata' => '$1 Wikipodaci',
+	'wikibase-rc-show-wikidata-pref' => 'Pokaži izmjene Wikipodataka u nedavnim izmjenama',
+	'wikibase-rc-wikibase-edit-title' => 'Uređivanje Wikipodataka',
+	'wikibase-watchlist-show-changes-pref' => 'Prikaži izmjene Wikipodataka kod vašeg spiska praćenih članaka',
 	'wikibase-error-serialize-error' => 'Neuspješna serijalizacija podataka',
 	'wikibase-error-invalid-entity-id' => 'Unešen ID nije poznat u sistemu. Koristite validan ID.',
 	'special-unconnectedpages' => 'Stranice koje nisu povezane sa stavkama',
@@ -696,13 +697,14 @@ $messages['bs'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Nije moguće koristiti ovaj naslov stranice u pretrazi i zato će biti ignorisano.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Samo stranice sa međuwiki vezama.',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|međuwiki veza|međuwiki veze|međuwiki veza}} na stranici)',
-	'wikibase-pageinfo-entity-id' => 'Wikidata ID stavke',
+	'wikibase-pageinfo-entity-id' => 'ID stavke Wikipodataka',
 	'wikibase-pageinfo-entity-id-none' => 'Ništa',
 	'wikibase-property-render-error' => 'Neizvršeno izražavanje osobine $1: $2',
 );
 
 /** Catalan (català)
  * @author Arnaugir
+ * @author Edinwiki
  * @author Grondin
  * @author Papapep
  * @author Paucabot
@@ -2869,14 +2871,40 @@ $messages['ml'] = array(
  * @author संतोष दहिवळ
  */
 $messages['mr'] = array(
+	'specialpages-group-wikibaseclient' => 'विकिडाटा ग्राहक',
+	'tooltip-t-wikibase' => 'माहिती भांडारात जोडलेल्या कलमाचा दुवा',
+	'wikibase-comment-add' => 'एक विकिडाटा कलम तयार करण्यात आला आहे.',
 	'wikibase-comment-linked' => 'या पानाला विकिडाटातील कलम दुवा जोडला.',
 	'wikibase-comment-update' => 'विकिडाटा कलम बदलली',
 	'wikibase-comment-sitelink-add' => 'भाषा दुवा जोडला: $1',
 	'wikibase-comment-sitelink-change' => 'भाषा दुवा बदलला $1 पासून $2 कडे',
 	'wikibase-comment-sitelink-remove' => 'भाषा दुवा काढला: $1',
+	'wikibase-dataitem' => 'विकिडाटा कलम',
+	'wikibase-editlinks' => 'दुवे संपादा',
+	'wikibase-editlinkstitle' => 'आंररभाषिक दुवे संपादा',
+	'wikibase-linkitem-addlinks' => 'दुवे जोडा',
+	'wikibase-linkitem-title' => 'पानास जोडा',
+	'wikibase-linkitem-linkpage' => 'पानास जोडा',
+	'wikibase-linkitem-selectlink' => 'या पानाचा दुवा जोडण्यास, कृपया संकेतस्थळ व त्यावरील पान निवडा.',
+	'wikibase-linkitem-input-site' => 'भाषा:',
+	'wikibase-linkitem-input-page' => 'पान:',
+	'wikibase-linkitem-confirmitem-button' => 'निश्चित करा',
+	'wikibase-linkitem-not-loggedin-title' => 'आपण सनोंद-प्रवेशित असावयास हवे',
+	'wikibase-linkitem-not-loggedin' => 'हा तोंडवळा वापरण्यास आपण, या विकिवर व  [$1 केंद्रिय माहिती भांडारात] सनोंद प्रवेशित असावयास हवे.',
+	'wikibase-linkitem-success-link' => 'हे पान यशस्वीरित्या जोडल्या गेलेले आहे.या कलमास आपण या दुव्यांसह आमच्या [$1 केंद्रिय माहिती भांडारात] बघू शकता.',
+	'wikibase-property-notfound' => '$1 गुणघर्म सापडला नाही.',
 	'wikibase-rc-hide-wikidata' => 'विकिडाटा $1',
 	'wikibase-rc-show-wikidata-pref' => 'विकिडाटा संपादने अलीकडील बदल मध्ये दाखवा',
+	'wikibase-rc-wikibase-edit-letter' => 'वि.डा.',
 	'wikibase-rc-wikibase-edit-title' => 'विकिडाटाचे संपादन',
+	'wikibase-watchlist-show-changes-pref' => 'आपल्या पहाऱ्याच्या यादीत विकिडाटा संपादने दाखवा',
+	'special-unconnectedpages' => 'विकिडाटा कलमांना न जोडल्या गेलेली पाने',
+	'wikibase-unconnectedpages-submit' => 'जा',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" हा वैध भाषासंकेत नाही.',
+	'wikibase-unconnectedpages-iwdata-label' => 'फक्त ती पाने ज्यांना आंतरभाषिक दुवे आहेत',
+	'wikibase-unconnectedpages-format-row' => '($1 या पानावरील{{PLURAL:$1|आंतरभाषिक दुवा|आंतरभाषिक दुवे}})',
+	'wikibase-pageinfo-entity-id' => 'विकिडाटा कलमाची ओळखण',
+	'wikibase-pageinfo-entity-id-none' => 'काहीही नाही',
 );
 
 /** Malay (Bahasa Melayu)
@@ -3936,14 +3964,21 @@ $messages['ta'] = array(
  * @author Veeven
  */
 $messages['te'] = array(
+	'wikibase-comment-sitelink-add' => 'భాష లంకెను చేర్చారు: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|మార్పు|మార్పులు}}',
 	'wikibase-dataitem' => 'దత్తాంశం(వికీడేటా)',
 	'wikibase-editlinks' => 'లంకెలను మార్చు',
 	'wikibase-editlinkstitle' => 'భాషాలింకులను మార్చు',
 	'wikibase-linkitem-addlinks' => 'లంకెలను చేర్చండి',
+	'wikibase-linkitem-input-site' => 'భాష:',
+	'wikibase-linkitem-input-page' => 'పేజీ:',
+	'wikibase-linkitem-confirmitem-button' => 'నిర్థారించండి',
 	'wikibase-rc-hide-wikidata' => 'వికీడాటాను $1',
 	'wikibase-rc-show-wikidata-pref' => 'వికీడేటా మార్పులను ఇటీవలి మార్పులలో చూపించు',
 	'wikibase-rc-wikibase-edit-letter' => 'ద',
 	'wikibase-rc-wikibase-edit-title' => 'వికీడేటా సవరణ',
+	'wikibase-unconnectedpages-submit' => 'వెళ్ళు',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" అనేది సరైన భాషా సంకేతం కాదు.',
 );
 
 /** Thai (ไทย)
