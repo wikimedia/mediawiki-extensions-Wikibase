@@ -108,7 +108,7 @@ Then /^Statement value input element should not be there$/ do
 end
 
 Then /^Statement name should be the label of (.+)$/ do |handle|
-  on(ItemPage).statement1_name.should == @properties[handle]["label"]
+  on(ItemPage).statement_name(1).should == @properties[handle]["label"]
 end
 
 Then /^Statement string value should be (.+)$/ do |value|
