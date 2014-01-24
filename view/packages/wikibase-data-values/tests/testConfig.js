@@ -8,7 +8,11 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-var testConfig = ( function() {
+
+/* global tests */
+this.tests = this.tests || {};
+
+tests.config = ( function() {
 	'use strict';
 
 	return {
@@ -147,7 +151,7 @@ var testConfig = ( function() {
 			},
 			'time.Time': {
 				exports: 'time.Time',
-				deps: ['time', 'time.Parser']
+				deps: ['time', 'jquery', 'time.Parser']
 			},
 			'time.Time.validate': {
 				exports: 'time.Time.validate',
@@ -280,3 +284,22 @@ var testConfig = ( function() {
 	};
 
 } )();
+
+/**
+ * Array of all QUnit test modules.
+ * @type {string[]}
+ */
+tests.modules = ( function( tests ) {
+	'use strict';
+
+	var modules = [];
+
+	for( var module in tests.config.paths ) {
+		if( /\.tests$/.test( module ) ) {
+			modules.unshift( module );
+		}
+	}
+
+	return modules;
+
+}( tests ) );

@@ -14,6 +14,20 @@ then.
 <div id="qunit"></div>
 <div id="qunit-fixture"></div>
 <script src="./testConfig.js"></script>
-<script data-main="testInit" src="../lib/require/require.js"></script>
+<script src="../lib/tests/tests.TestRunner.js"></script>
+<script src="../lib/require/require.js"></script>
+<script>
+( function( require, tests ) {
+	'use strict';
+
+	require.config( tests.config );
+
+	require( tests.TestRunner.filterTestModules( tests.modules ), function() {
+		QUnit.load();
+		QUnit.start();
+	} );
+
+} )( require, tests );
+</script>
 </body>
 </html>
