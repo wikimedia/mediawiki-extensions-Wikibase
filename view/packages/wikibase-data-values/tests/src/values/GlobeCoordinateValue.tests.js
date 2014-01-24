@@ -14,7 +14,6 @@ var DEPS = [
 ];
 
 define( DEPS, function( dv, util, GlobeCoordinate ) {
-	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
 
