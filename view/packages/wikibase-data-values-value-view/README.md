@@ -31,6 +31,12 @@ can be found under resources/jQuery.valueview.
 
 ## Release notes
 
+### 0.2 (dev)
+
+#### Enhancements
+
+* #6 Added util.Notifier
+
 ### 0.1 (2013-12-23)
 
 Initial release.
