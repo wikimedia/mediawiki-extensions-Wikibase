@@ -65,6 +65,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.ViewState',
+				'util.inherit',
 			),
 		),
 
@@ -102,9 +103,9 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview.MessageProvider',
 				'jquery.valueview.base',
-				'dataValues.util',
 				'dataValues.values',
 				'dataTypes',
+				'util.inherit',
 				'util.Notifier',
 			),
 		),
@@ -124,6 +125,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts',
+				'util.inherit',
 			),
 		),
 

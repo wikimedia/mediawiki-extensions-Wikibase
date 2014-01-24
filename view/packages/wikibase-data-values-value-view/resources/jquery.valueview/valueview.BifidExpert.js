@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-jQuery.valueview.BifidExpert = ( function( dv, $, Expert ) {
+jQuery.valueview.BifidExpert = ( function( dv, $, Expert, util ) {
 	'use strict';
 
 	var PARENT = Expert;
@@ -21,7 +21,7 @@ jQuery.valueview.BifidExpert = ( function( dv, $, Expert ) {
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	return dv.util.inherit( PARENT, {
+	return util.inherit( PARENT, {
 		/**
 		 * Constructor for the valueview expert responsible during static mode.
 		 * @type Function
@@ -167,4 +167,4 @@ jQuery.valueview.BifidExpert = ( function( dv, $, Expert ) {
 		}
 	} );
 
-}( dataValues, jQuery, jQuery.valueview.Expert ) );
+}( dataValues, jQuery, jQuery.valueview.Expert, util ) );

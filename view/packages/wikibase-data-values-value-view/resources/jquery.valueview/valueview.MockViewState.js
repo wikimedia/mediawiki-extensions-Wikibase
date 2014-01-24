@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-jQuery.valueview.MockViewState = ( function( $, inherit, ViewState ) {
+jQuery.valueview.MockViewState = ( function( $, ViewState, util ) {
 	'use strict';
 
 	/**
@@ -18,7 +18,7 @@ jQuery.valueview.MockViewState = ( function( $, inherit, ViewState ) {
 	 *        "value" and "options". This will just keep a reference to the object, so changing the
 	 *        object from the outside will also update the ViewState's functions return values.
 	 */
-	return inherit( 'ValueviewMockViewState', ViewState, function ( definition ) {
+	return util.inherit( 'ValueviewMockViewState', ViewState, function ( definition ) {
 		if( definition !== undefined && !$.isPlainObject( definition ) ) {
 			throw new Error( 'Given definition needs to be a plain object' );
 		}
@@ -60,4 +60,4 @@ jQuery.valueview.MockViewState = ( function( $, inherit, ViewState ) {
 		}
 	} );
 
-}( jQuery, dataValues.util.inherit, jQuery.valueview.ViewState ) );
+}( jQuery, jQuery.valueview.ViewState, util ) );
