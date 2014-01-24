@@ -51,7 +51,7 @@ Feature: Edit label
       | click the label cancel button |
       | press the ESC key in the label input field |
 
-  @save_label @modify_entity
+  @save_label @modify_entity @smoke
   Scenario Outline: Save label
     When I click the label edit button
       And I enter "MODIFIED LABEL" as label

@@ -58,7 +58,7 @@ Feature: Creating statements
       And Entity selector input element should be there
       And Statement value input element should be there
 
-  @ui_only @repo_login
+  @ui_only @repo_login @smoke
   Scenario: Select a property and enter a statement value
     Given There are properties with the following handles and datatypes:
       | stringprop | string |
