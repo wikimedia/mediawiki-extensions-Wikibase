@@ -1,5 +1,5 @@
 /**
- * PhantomJS testrunner.
+ * PhantomJS test runner.
  * PhantomJS will exit with an error code if one ore more tests fail.
  *
  * @licence GNU GPL v2+
@@ -12,16 +12,14 @@
 	var URL = './runTests.html',
 		TIMEOUT = 30;
 
-	var page = require( 'webpage' ).create();
+	var page = require( 'webpage' ).create(),
+		TestRunner = require( '../lib/tests/tests.TestRunner.phantom' ).tests.TestRunner.phantom,
+		testRunner = new TestRunner();
 
 	page.onConsoleMessage = function( msg ) {
-		console.log( msg );
-
-		if( msg.indexOf( 'TEST END' ) === 0 ) {
-			var msgParts = msg.match( /(\d{1,}) failure/ ),
-				failures = parseInt( msgParts[1], 10 );
-
-			phantom.exit( failures > 0 ? 1 : 0 );
+		var failed = testRunner.onConsoleMessage( msg );
+		if( failed !== undefined ) {
+			phantom.exit( failed ? 1 : 0 );
 		}
 	};
 

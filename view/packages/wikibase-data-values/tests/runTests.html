@@ -1,11 +1,5 @@
 <!--
 Main entrance point for running QUnit tests.
-Accessing this file will run all QUnit tests one after another by simply adding iframes to the body
-node. Loading the tests in iframes ensures that only the necessary dependencies are loaded for the
-individual tests.
-
-@licence GNU GPL v2+
-@author: H. Snater < mediawiki@snater.com >
 -->
 <!DOCTYPE html>
 <html>
@@ -14,69 +8,20 @@ individual tests.
 	<title>QUnit tests</title>
 </head>
 <body>
-
 <script src="./testConfig.js"></script>
-<script src="../lib/jquery/jquery.js"></script>
-
+<script src="../lib/tests/tests.TestRunner.js"></script>
 <script>
-	$( document ).ready( function() {
-		var queue = [],
-		currentModule,
-		$iFrame,
-		globalFailures = 0;
+( function( window, tests ) {
+	window.onload = function() {
 
-		/**
-		 * Triggers running a test by adding an iframe to the body element. Within the iframe, only
-		 * the required dependencies to run the test are loaded.
-		 * @param {string} module
-		 */
-		function triggerTest( module ) {
-			currentModule = module;
+		var testRunner = new tests.TestRunner( {
+			queue: tests.modules,
+			testRunner: './testRunner.html'
+		} );
 
-			$iFrame = $( '<iframe/>' )
-			.attr( 'id', 'testFrame' + module.replace( /\./g, '-' ) )
-			.attr( 'src', './testRunner.html?testModule=' + module )
-			.attr( 'style', 'width:100%;' );
-
-			$( 'body' ).append( $iFrame );
-		}
-
-		for( var module in testConfig.paths ) {
-			if( /\.tests$/.test( module ) ) {
-				queue.unshift( module );
-			}
-		}
-
-		console.log( 'TEST START' );
-
-		triggerTest( queue.pop() );
-
-		var testInterval = setInterval( function() {
-			var $failed = $iFrame.contents().find( '#qunit-testresult .failed' );
-
-			if( $failed.length > 0 ) {
-				// Test has finished.
-
-				var localFailures = parseInt( $failed.text() );
-
-				if( localFailures === 0 ) {
-					console.log( currentModule + ': passed' );
-				} else {
-					console.error( currentModule + ': FAILED (' + localFailures + ' failures)' );
-					globalFailures += localFailures;
-				}
-
-				if( queue.length === 0 ) {
-					clearInterval( testInterval );
-					console.log( 'TEST END (' + globalFailures + ' failure(s))' );
-				} else {
-					triggerTest( queue.pop() );
-				}
-			}
-		}, 100 );
-
-	} );
+		testRunner.start();
+	};
+}( window, tests ) );
 </script>
-
 </body>
 </html>
