@@ -34,7 +34,7 @@
 		}
 
 		// do actual inheritance from base and apply custom definition:
-		var Expert = dv.util.inherit(
+		var Expert = util.inherit(
 			'ValueviewExpert_' + name,
 			base,
 			$.extend( expertDefinition, {
@@ -271,7 +271,7 @@
 		 * @return {*|null} Returns null for an empty value. Otherwise, depending on the expert, any
 		 *         kind of value representing the user's input in its most basic form
 		 */
-		_getRawValue: dv.util.abstractMember,
+		_getRawValue: util.abstractMember,
 
 		/**
 		 * Setter called by rawValue. Does not have the responsibility to call draw() for actually
@@ -284,7 +284,7 @@
 		 * @since 0.1
 		 * @abstract
 		 */
-		_setRawValue: dv.util.abstractMember,
+		_setRawValue: util.abstractMember,
 
 		/**
 		 * Returns whether two given raw values can be considered equal or whether one given raw
@@ -337,7 +337,7 @@
 		 * @since 0.1
 		 * @abstract
 		 */
-		draw: dv.util.abstractMember,
+		draw: util.abstractMember,
 
 		/**
 		 * Will set the focus if there is some focusable input elements.

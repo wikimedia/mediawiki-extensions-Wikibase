@@ -17,7 +17,7 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"data-values/javascript": "~0.1.1",
+		"data-values/javascript": "~0.2.0",
 		"data-values/data-types": "0.*,>=0.1.1"
 	},
 	"autoload": {
