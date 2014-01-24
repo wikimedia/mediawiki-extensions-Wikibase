@@ -15,7 +15,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
-### 0.2 (dev)
+### 0.2
 
 ##### Breaking changes
 
@@ -28,6 +28,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 * #14 Decoupled the QUnit tests from the MediaWiki resource loader
 * #16 Have the tests run on TravisCI using PhantomJS
+* #18 Provided QUnit test runner using requireJS
 
 ### 0.1 (2013-12-23)
 
