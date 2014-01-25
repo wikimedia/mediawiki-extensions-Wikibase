@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_6cb7b982",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-25T12:59:08Z",
+      "side": 1,
+      "message": "you add Wikibase\\Entity but it is not needed anywhere!",
+      "revId": "9ba2f0cb17678bcb691e2c502a4e69aaa9c15db1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
