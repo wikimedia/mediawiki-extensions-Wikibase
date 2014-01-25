@@ -33,8 +33,10 @@ $messages['en'] = array(
 	'wikibase-remove-inprogress' => 'Removing…',
 	'wikibase-label-empty' => 'No label defined yet',
 	'wikibase-label-edit-placeholder' => 'enter label',
+	'wikibase-label-edit-placeholder-language-aware' => 'enter label in $1',
 	'wikibase-description-empty' => 'No description defined yet',
 	'wikibase-description-edit-placeholder' => 'enter description',
+	'wikibase-description-edit-placeholder-language-aware' => 'enter description in $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'page',
 	'wikibase-alias-edit-placeholder' => 'enter an alias',
@@ -517,9 +519,11 @@ This is a generic placeholder message used while a remove is in progress, and re
 	'wikibase-label-empty' => "Placeholder message displayed instead of the item's label in case no label has been specified yet. This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
+	'wikibase-label-edit-placeholder-language-aware' => 'Like wikibase-label-edit-placeholder, but language ($1) aware. {{Related|wikibase-label-edit-placeholder}}',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].',
+	'wikibase-description-edit-placeholder-language-aware' => 'Like wikibase-description-edit-placeholder, but language ($1) aware. {{Related|wikibase-description-edit-placeholder}}',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
 This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[d:Wikidata:Glossary#sitelink|sitelink]].
 {{Identical|Site}}',
