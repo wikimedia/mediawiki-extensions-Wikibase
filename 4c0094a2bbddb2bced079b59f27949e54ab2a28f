@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_6ca0d93e",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-25T12:54:39Z",
+      "side": 1,
+      "message": "would probably be good to be consistent and use the @todo tag!\n(same below)",
+      "revId": "4c0094a2bbddb2bced079b59f27949e54ab2a28f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_0c8f15d3",
+        "filename": "lib/tests/phpunit/formatters/CommonsLinkFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-25T12:54:39Z",
+      "side": 1,
+      "message": "dont need @since in a test!",
+      "revId": "4c0094a2bbddb2bced079b59f27949e54ab2a28f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
