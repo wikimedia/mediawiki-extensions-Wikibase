@@ -2905,6 +2905,7 @@ $messages['mr'] = array(
 	'wikibase-linkitem-selectlink' => 'या पानाचा दुवा जोडण्यास, कृपया संकेतस्थळ व त्यावरील पान निवडा.',
 	'wikibase-linkitem-input-site' => 'भाषा:',
 	'wikibase-linkitem-input-page' => 'पान:',
+	'wikibase-linkitem-confirmitem-text' => 'आपण निवडलेले पान हे  [केंद्रिय माहिती भंडारातील $1 कलमाशी] पूर्वीच जोडल्या गेले आहे. कृपया खाली दर्शविलेल्या {{PLURAL:$2|पानाची|पानांची}} निश्चिती करा,ती या पानास जोडण्यासाठी असलेली {{PLURAL:$2|एक|एकाधिक}} {{PLURAL:$2|आहे|आहेत}}.',
 	'wikibase-linkitem-confirmitem-button' => 'निश्चित करा',
 	'wikibase-linkitem-not-loggedin-title' => 'आपण सनोंद-प्रवेशित असावयास हवे',
 	'wikibase-linkitem-not-loggedin' => 'हा तोंडवळा वापरण्यास आपण, या विकिवर व  [$1 केंद्रिय माहिती भांडारात] सनोंद प्रवेशित असावयास हवे.',
@@ -2913,13 +2914,14 @@ $messages['mr'] = array(
 	'wikibase-property-notsupportedyet' => 'विकिबेसवर अद्याप $1 गुणधर्मासाठी गुणधर्म प्रकार सहाय्यीभूत नाही.',
 	'wikibase-rc-hide-wikidata' => 'विकिडाटा $1',
 	'wikibase-rc-show-wikidata-pref' => 'विकिडाटा संपादने अलीकडील बदल मध्ये दाखवा',
-	'wikibase-rc-wikibase-edit-letter' => 'वि.डा.',
+	'wikibase-rc-wikibase-edit-letter' => 'डा',
 	'wikibase-rc-wikibase-edit-title' => 'विकिडाटाचे संपादन',
 	'wikibase-watchlist-show-changes-pref' => 'आपल्या पहाऱ्याच्या यादीत विकिडाटा संपादने दाखवा',
 	'wikibase-error-serialize-error' => 'कलमांची मालिका लावण्यात अयशस्वी.',
 	'wikibase-error-invalid-entity-id' => 'आपण टाकलेली ओळखण प्रणालीसाठी अनोळखी आहे. कृपया वैध व अस्तित्वात असलेली ओळखण टाका.',
 	'special-unconnectedpages' => 'विकिडाटा कलमांना न जोडल्या गेलेली पाने',
 	'wikibase-unconnectedpages-legend' => 'न जोडलेल्या पानांचे पर्याय',
+	'wikibase-unconnectedpages-page' => 'निकालयादीची पानासहित सुरुवात करा:',
 	'wikibase-unconnectedpages-submit' => 'जा',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" हा वैध भाषासंकेत नाही.',
 	'wikibase-unconnectedpages-page-warning' => 'हा लेखमथळा पृच्छेसाठी वापरल्या जाउ शकत नाही म्हणून दुर्लक्षिल्या जात आहे.',
@@ -2927,6 +2929,7 @@ $messages['mr'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 या पानावरील{{PLURAL:$1|आंतरभाषिक दुवा|आंतरभाषिक दुवे}})',
 	'wikibase-pageinfo-entity-id' => 'विकिडाटा कलमाची ओळखण',
 	'wikibase-pageinfo-entity-id-none' => 'काहीही नाही',
+	'wikibase-property-render-error' => '$1 गुणधर्म देण्यास अयशस्वी:$2',
 );
 
 /** Malay (Bahasa Melayu)

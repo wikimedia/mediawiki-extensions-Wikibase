@@ -1502,6 +1502,7 @@ $messages['af'] = array(
 /** Arabic (العربية)
  * @author Aude
  * @author Calak
+ * @author Kaganer
  * @author Majid KSA
  * @author Meno25
  * @author OsamaK
@@ -1518,6 +1519,7 @@ $messages['ar'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'موقع',
 	'wikibase-sitelink-page-edit-placeholder' => 'مقال', # Fuzzy
 	'wikibase-statements' => 'بيانات',
+	'wikibase-terms' => 'بلغات أخرى',
 	'wikibase-remove' => 'ألغ',
 	'wikibase-undo-revision-error' => 'فشل عملية الرجوع',
 	'wikibase-propertyedittool-full' => 'قائمة القيم اكتملت',
@@ -1561,9 +1563,11 @@ $messages['arc'] = array(
 
 /** Assamese (অসমীয়া)
  * @author Gitartha.bordoloi
+ * @author Psneog
  */
 $messages['as'] = array(
 	'wikibase-itemdisambiguation-submit' => 'সন্ধান কৰক',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'ভৌগোলিক স্থানাংক',
 );
 
 /** Asturian (asturianu)
@@ -10177,6 +10181,7 @@ $messages['ka'] = array(
  * @author Arystanbek
  */
 $messages['kk-cyrl'] = array(
+	'specialpages-group-wikibaserepo' => 'Уикибаза қоймасы',
 	'wikibase-edit' => 'өңдеу',
 	'wikibase-save' => 'сақтау',
 	'wikibase-cancel' => 'болдырмау',
@@ -10187,7 +10192,7 @@ $messages['kk-cyrl'] = array(
 	'wikibase-remove-inprogress' => 'Алынып тасталуда...',
 	'wikibase-description-edit-placeholder' => 'сипаттама енгізу',
 	'wikibase-sitelink-site-edit-placeholder' => 'сайт',
-	'wikibase-sitelink-page-edit-placeholder' => 'мақала', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'бет',
 	'wikibase-alias-edit-placeholder' => 'бүркеншік ат енгізу',
 	'wikibase-description-input-help-message' => '$1 тілінде қысқаша сиптатама енгізу',
 	'wikibase-terms' => 'Басқа тілдерде',
@@ -11853,26 +11858,120 @@ $messages['ml'] = array(
  * @author संतोष दहिवळ
  */
 $messages['mr'] = array(
-	'wikibase-label-edit-placeholder' => 'लेबल लावा',
+	'wikibase-desc' => 'संरचित माहिती भंडार',
+	'specialpages-group-wikibaserepo' => 'विकिबेस भंडार',
+	'wikibase-edit' => 'संपादन करा',
+	'wikibase-save' => 'जतन करा',
+	'wikibase-cancel' => 'रद्द करा',
+	'wikibase-add' => 'जोडा',
+	'wikibase-addqualifier' => 'अधिविशेषक जोडा',
+	'wikibase-addreference' => 'स्रोत जोडा',
+	'wikibase-save-inprogress' => 'जतन करीत आहे...',
+	'wikibase-remove-inprogress' => 'हटवित आहे...',
+	'wikibase-label-empty' => 'अद्याप कोणतेही लेबल व्याख्यिकृत नाही',
+	'wikibase-label-edit-placeholder' => 'लेबल टाका',
+	'wikibase-label-edit-placeholder-language-aware' => '$1 मध्ये सारणी टाका',
+	'wikibase-description-empty' => 'अद्याप कोणतेही वर्णन व्याख्यिकृत नाही',
+	'wikibase-description-edit-placeholder' => 'वर्णन टाका',
+	'wikibase-description-edit-placeholder-language-aware' => '$1 मध्ये वर्णन टाका',
+	'wikibase-sitelink-site-edit-placeholder' => 'संकेतस्थळ',
+	'wikibase-sitelink-page-edit-placeholder' => 'पान',
+	'wikibase-alias-edit-placeholder' => 'पर्याय जोडा',
+	'wikibase-label-input-help-message' => '$1 मध्ये या माहितीसंचाचे शीर्षक टाका.',
+	'wikibase-description-input-help-message' => '$1 मध्ये याचे थोडक्यात वर्णन टाका.',
+	'wikibase-statements' => 'विधाने',
 	'wikibase-terms' => 'इतर भाषांत',
+	'wikibase-sitelinks-add' => 'संकेतस्थळ दुव्यास एक दुवा जोडा',
+	'wikibase-sitelinks-empty' => 'या कलमासाठी अद्याप संकेतस्थळ दुवा नाही.',
+	'wikibase-sitelinks-input-help-message' => 'या कलमाशी संबंधित पानास दुवा स्थापा.',
+	'wikibase-remove' => 'हटवा',
+	'wikibase-move-up' => 'वर हलवा',
+	'wikibase-move-down' => 'खाली हलवा',
+	'wikibase-undo-title' => '"$1" चे संपादन पुनर्स्थापित करीत आहे',
+	'wikibase-restore-title' => '"$1" ची जूनी आवृत्ती पुनर्स्थापित करीत आहे',
+	'wikibase-partial-undo' => 'या संपादनाच्या एका भागाचे पुनर्स्थापन शक्य.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|बदल}} वगळण्यात आले कारण तेंव्हापासून {{PLURAL:$1|ज्याचीत्याची किंमत बदलली आहे|
+ज्याच्यात्याच्या किंमती बदलल्या आहेत}}.',
+	'wikibase-empty-undo' => 'येथे पुनर्स्थापनेसारखे काहीही नाही.',
+	'wikibase-undo-revision-error' => 'पुनर्स्थापन अयशस्वी',
+	'wikibase-undo-samerev' => 'पुनर्स्थापन करू शकत नाही.मूळ पुनर्स्थापनासाठी व लक्ष्य पुनर्स्थापनासाठी एकच आवृत्ती दिलेली आहे.',
+	'wikibase-undo-badpage' => 'वाईट आवृत्ती:आवृत्ती $2 ही [[$1]] अंतर्गत नाही.',
+	'wikibase-undo-firstrev' => 'या पानाची निर्मिती थांबवू शकत नाही',
+	'wikibase-propertyedittool-full' => 'किंमतींची यादी पूर्ण आहे.',
+	'wikibase-sitelinksedittool-full' => 'पानांचे दुवे सर्व ज्ञात संकेतस्थळांशी पूर्वीच स्थापलेले आहेत.',
+	'wikibase-disambiguation-title' => '"$1" साठी निःसंदिग्धीकरण',
+	'wb-special-newitem-new-item-notification' => 'नविन कलम $1 तयार करण्यात येउन त्याचे पानाशी पुनर्निर्देशन करण्यात आले.$2 कडे परत जा.',
 	'wikibase-aliases-label' => 'या नावानेही ओळखले जाते:',
+	'wikibase-aliases-input-help-message' => 'एखाद्या विशेष नावापेक्षा जास्त  नावांनी हा कलमसंच ओळखला जात असेल तर आपण पर्यायी व समानार्थी नावे टाकू शकता, ज्याने तो इतर नावांनी शोधल्या जाउ शकेल.',
+	'wikibase-aliases-empty' => 'पर्यायांची व्याख्या नाही.',
+	'wikibase-datatype-label' => 'कलम प्रकार:',
+	'wikibase-statementview-rank-preferred' => 'आवडलेले पद',
+	'wikibase-statementview-rank-normal' => 'सामान्य पद',
+	'wikibase-statementview-rank-deprecated' => 'नापसंत श्रेणी',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|स्रोत}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|एक स्रोत|$1 स्रोत}} अद्याप जतन केले नाही',
+	'wikibase-snakview-property-input-placeholder' => 'गुणधर्म',
+	'wikibase-snakview-choosesnaktype' => 'किंमतीचा प्रकार निवडा.',
+	'wikibase-snakview-variations-somevalue-label' => 'अनोळखी किंमत',
+	'wikibase-snakview-variations-novalue-label' => 'किंमत टाकलेली नाही',
+	'wikibase-snakview-snaktypeselector-value' => 'पारंपारिक किंमत',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'अनोळखी किंमत',
+	'wikibase-snakview-snaktypeselector-novalue' => 'किंमत टाकलेली नाही',
+	'wikibase-shortcopyrightwarning' => '"$1" टिचकण्याने,आपण [[$2|वापरण्याच्या शर्ती]]मान्य करीत आहात व आपण न परतवण्याजोग्या मान्यतेने, $3 अंतर्गत आपल्या योगदानाचे विमोचन करीत आहात.',
+	'wikibase-copyrighttooltip-acknowledge' => 'भविष्यातील संपादनांसाठी या शर्तींचा मी स्वीकार करतो.हा संदेश कृपया पुन्हा दाखवु नका.',
 	'wikibase-entityselector-more' => 'आणखी',
 	'wikibase-anonymouseditwarning' => 'ईशारा:आपण सनोंद-प्रवेशित नाहीत.आपला अंकपत्ता याच्या संपादनाच्या इतिहासात नोंदला जाईल.',
+	'wikibase-restrictionedit-tooltip-message' => 'हे पान सुरक्षीत आहे.संपादनास परवानगी नाही.',
+	'wikibase-blockeduser-tooltip-message' => 'आपणास संपादनाची परवानगी नाही कारण आपले सदस्यनाव किंवा अंकपत्ता प्रतिबंधीत करण्यात आलेला आहे.',
+	'wikibase-move-error' => 'माहिती नामविश्वात असलेली पाने आपण स्थानांतरीत करू शकत नाही व त्यात आपण (इतर) पाने स्थानांतरीत करू शकत नाही.',
+	'wikibase-warning-constraint-violation-length' => '"$1" मधील भाषासंकेताकरीता लांबीबंधन चेतविल्या गेले आहे.',
 	'special-itembytitle' => 'शीर्षकानुसार कलम',
+	'wikibase-itembytitle-lookup-site' => 'संकेतस्थळ:',
+	'wikibase-itembytitle-lookup-page' => 'पान:',
+	'wikibase-itembytitle-submit' => 'शोधा',
+	'special-itemdisambiguation' => 'कलमाचे निःसंदिग्धीकरण',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'भाषा आणि लेबलनुसार कलम शोध',
 	'wikibase-itemdisambiguation-lookup-language' => 'भाषा:',
 	'wikibase-itemdisambiguation-lookup-label' => 'लेबल:',
 	'wikibase-itemdisambiguation-submit' => 'शोध',
+	'wikibase-itemdisambiguation-nothing-found' => 'माफ करा, या लेबलची कोणतीही कलम सापडली नाही.',
+	'special-newproperty' => 'नविन गुणधर्म तयार करा',
+	'wikibase-newproperty-fieldset' => 'नविन गुणधर्म तयार करा',
+	'wikibase-newproperty-datatype' => 'कलम प्रकार:',
 	'special-newitem' => 'नवीन कलम तयार करा',
 	'wikibase-newitem-fieldset' => 'नवीन कलम तयार करा',
+	'wikibase-newitem-site' => 'दुवा दिलेल्या प्रथम पृष्ठाचे संकेतस्थळ',
+	'wikibase-newitem-page' => 'दुवा दिलेल्या प्रथम पृष्ठाचे नाव',
+	'wikibase-newitem-no-external-page' => 'सुसंगत संकेतस्थळावर नमूद लेख सापडला नाही.',
+	'wikibase-newitem-add-sitelink-failed' => 'संकेतस्थळ दुवा जतन करता आला नाही.',
+	'wikibase-newitem-not-recognized-siteid' => 'दिलेली खूणओळख मान्यताप्राप्त नाही.',
 	'wikibase-newentity-label' => 'लेबल:',
 	'wikibase-newentity-description' => 'वर्णन:',
 	'wikibase-newentity-submit' => 'बनवा',
+	'special-setlabel' => 'लेबल स्थापा',
 	'wikibase-setlabel-label' => 'लेबल:',
-	'special-setdescription' => 'वर्णन नोंदवा',
+	'wikibase-setlabel-submit' => 'लेबल स्थापा',
+	'special-setdescription' => 'वर्णन टाका',
 	'wikibase-setdescription-label' => 'वर्णन:',
+	'wikibase-setdescription-submit' => 'वर्णन टाका',
+	'special-setaliases' => 'पर्याय टाका',
+	'wikibase-setaliases-label' => 'पर्याय:',
+	'wikibase-setaliases-submit' => 'पर्याय टाका',
+	'wikibase-setsitelink-badges' => 'बिल्ले:',
+	'wikibase-modifyterm-language' => 'भाषा:',
+	'wikibase-dispatchstats-change-timestamp' => 'वेळशिक्का',
+	'wikibase-entitieswithoutlabel-label-language' => 'भाषा:',
+	'wikibase-entitieswithoutlabel-label-type' => 'प्रकार:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'सर्व',
+	'wikibase-entitieswithoutlabel-submit' => 'शोधा',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" हा वैध भाषासंकेत नाही.',
 	'wikibase-api-no-such-sitelink' => 'असे कोणतेही संकेतस्थळ सापडले नाही',
+	'wikibase-item-summary-wbsetitem' => 'नविन कलम तयार केली',
+	'wikibase-item-summary-wbcreate-new' => 'नविन कलम तयार केली',
+	'wikibase-item-summary-wbeditentity' => 'नविन कलम तयार केली',
+	'wikibase-item-summary-wbeditentity-create' => 'नविन कलम तयार केली',
 	'wikibase-item-summary-wbeditentity-update' => 'कलम अद्ययावत केली',
+	'wikibase-item-summary-wbeditentity-override' => 'कलम हटविली',
 	'wikibase-item-summary-wbsetreference' => 'संदर्भ नोंदवा',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] चे लेबल बदलले',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] चे लेबल काढले',
@@ -11886,6 +11985,24 @@ $messages['mr'] = array(
 	'wikibase-item-summary-wbremovequalifiers-remove' => '{{PLURAL:$1|क्वालिफायर|क्वालिफायर्स}} हटविले',
 	'wikibase-listdatatypes-wikibase-item-head' => 'कलम',
 	'right-alias-remove' => 'टोपण नाव काढा',
+	'right-label-remove' => 'लेबल खोडा',
+	'right-label-update' => 'लेबल अद्यतन करा',
+	'right-description-remove' => 'वर्णन खोडा',
+	'right-description-update' => 'वर्णन अद्यतन करा',
+	'action-item-override' => 'कलमांवर पुनर्लेखन करा',
+	'action-item-create' => 'कलम तयार करा',
+	'action-property-override' => 'गुणधर्मावर पुनर्लेखन करा',
+	'action-property-create' => 'गुणधर्म तयार करा',
+	'action-property-remove' => 'गुणधर्म वगळा',
+	'action-alias-update' => 'पर्याय अद्यतन करा',
+	'action-alias-remove' => 'पर्याय हटवा',
+	'action-sitelink-remove' => 'संकेतस्थळ दुवे हटवा',
+	'action-sitelink-update' => 'संकेतस्थळ दुवे अद्यतन करा',
+	'action-linktitles-update' => 'संलग्न पाने',
+	'action-label-remove' => 'लेबल खोडा',
+	'action-label-update' => 'लेबल अद्यतन करा',
+	'action-description-remove' => 'वर्णन खोडा',
+	'action-description-update' => 'वर्णन अद्यतन करा',
 );
 
 /** Malay (Bahasa Melayu)
@@ -15283,6 +15400,7 @@ $messages['ru'] = array(
 );
 
 /** Serbo-Croatian (srpskohrvatski / српскохрватски)
+ * @author Kolega2357
  * @author OC Ripper
  */
 $messages['sh'] = array(
@@ -15483,6 +15601,7 @@ da otkrijete gdje je nestao.',
 	'right-label-update' => 'Ažurirajte oznake',
 	'right-description-remove' => 'Uklonite opise', # Fuzzy
 	'right-description-update' => 'Ažurirajte opise',
+	'action-alias-remove' => 'uklanjate pseudonime',
 );
 
 /** Sinhala (සිංහල)
@@ -16952,6 +17071,7 @@ $messages['uk'] = array(
 );
 
 /** Urdu (اردو)
+ * @author Kaganer
  * @author Noor2020
  * @author පසිඳු කාවින්ද
  */
@@ -16966,6 +17086,7 @@ $messages['ur'] = array(
 	'wikibase-description-edit-placeholder' => 'تفصیل درج کریں',
 	'wikibase-sitelink-site-edit-placeholder' => 'ویب سائٹ',
 	'wikibase-sitelink-page-edit-placeholder' => 'مضمون', # Fuzzy
+	'wikibase-terms' => 'دیگر زبانوں میں',
 	'wikibase-remove' => 'حذف کریں',
 	'wikibase-blockeduser-tooltip-message' => 'آپ کو تدوین کی اجازت نہیں ہے کیونکہ آپ کا صارف نام یا IP پتا معطل ہے  ۔',
 	'wikibase-itembytitle-lookup-site' => 'ویب سائٹ:',
