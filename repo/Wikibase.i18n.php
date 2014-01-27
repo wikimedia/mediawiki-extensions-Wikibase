@@ -19,6 +19,7 @@ $messages = array();
  * @author Anja Jentzsch
  * @author Daniel Werner
  * @author Michał Łazowik
+ * @author Adam Shorland
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -454,9 +455,18 @@ to find out where it went.',
 	'action-label-update' => 'update labels',
 	'action-description-remove' => 'erase descriptions',
 	'action-description-update' => 'update descriptions',
+
+	// TimeFormats
+	'wikibase-time-precision-Gannum' => 'in $1 billion years',
+	'wikibase-time-precision-Mannum' => 'in $1 million years',
+	'wikibase-time-precision-annum' => 'in $1 years',
+	'wikibase-time-precision-millennium' => '$1.millennium',
+	'wikibase-time-precision-century' => '$1.century',
+	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** Message documentation (Message documentation)
+ * @author Adam Shorland
  * @author AS
  * @author Amire80
  * @author Aude
