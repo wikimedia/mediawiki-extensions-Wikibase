@@ -5,8 +5,6 @@ namespace Wikibase\Test\Api;
 use OutOfBoundsException;
 
 /**
- * @since 0.4
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler

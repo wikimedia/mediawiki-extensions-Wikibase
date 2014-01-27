@@ -20,8 +20,6 @@ use Wikibase\LinkedData\EntityDataUriManager;
 /**
  * @covers Wikibase\LinkedData\EntityDataRequestHandler
  *
- * @since 0.4
- *
  * @group Database
  *
  * @group Wikibase

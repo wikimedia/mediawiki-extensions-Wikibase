@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
-use Diff\ListDiffer;
 use Wikibase\ClaimDiffer;
 use Wikibase\Claim;
 use Wikibase\Claims;
@@ -20,8 +19,6 @@ use Wikibase\Statement;
 
 /**
  * @covers Wikibase\ClaimSummaryBuilder
- *
- * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseRepo

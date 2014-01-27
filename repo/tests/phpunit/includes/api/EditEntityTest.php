@@ -8,8 +8,6 @@ use Wikibase\PropertyContent;
 /**
  * @covers Wikibase\Api\EditEntity
  *
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Michal Lazowik

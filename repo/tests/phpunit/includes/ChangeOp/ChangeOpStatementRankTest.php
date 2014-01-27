@@ -14,8 +14,6 @@ use InvalidArgumentException;
 /**
  * @covers Wikibase\ChangeOp\ChangeOpStatementRank
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

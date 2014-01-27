@@ -17,8 +17,6 @@ use Wikibase\DataModel\Claim\Statement;
 /**
  * @covers Wikibase\Api\RemoveQualifiers
  *
- * @since 0.3
- *
  * @group API
  * @group Database
  * @group Wikibase

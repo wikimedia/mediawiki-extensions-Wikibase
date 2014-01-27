@@ -9,8 +9,6 @@ use Wikibase\Item;
 /**
  * Provider class for EntityData tests.
  *
- * @since 0.4
- *
  * @group Wikibase
  *
  * @licence GNU GPL v2+

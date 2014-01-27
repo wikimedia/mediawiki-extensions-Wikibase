@@ -11,8 +11,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

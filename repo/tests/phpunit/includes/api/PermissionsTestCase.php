@@ -9,8 +9,6 @@ use Wikibase\Test\PermissionsHelper;
 /**
  * Base class for permissions tests
  *
- * @since 0.5
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  * @author Adam Shorland

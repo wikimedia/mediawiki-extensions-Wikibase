@@ -10,8 +10,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\ItemContentDiffView
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  *

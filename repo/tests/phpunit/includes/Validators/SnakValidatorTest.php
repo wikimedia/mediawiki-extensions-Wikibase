@@ -26,8 +26,6 @@ use Wikibase\Validators\SnakValidator;
 /**
  * @covers Wikibase\Validators\SnakValidator
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseValidators

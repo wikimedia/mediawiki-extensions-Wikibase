@@ -2,13 +2,9 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataType;
-use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
-use DataValues\StringValue;
 use ValueValidators\Error;
 use ValueValidators\Result;
-use ValueValidators\StringValidator;
 use ValueValidators\ValueValidator;
 
 /**

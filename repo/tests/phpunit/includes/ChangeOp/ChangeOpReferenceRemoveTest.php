@@ -16,8 +16,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\ChangeOp\ChangeOpReferenceRemove
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

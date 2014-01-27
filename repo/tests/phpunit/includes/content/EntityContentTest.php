@@ -14,8 +14,6 @@ use Wikibase\LanguageWithConversion;
 /**
  * @covers Wikibase\EntityContent
  *
- * @since 0.1
- *
  * @group WikibaseRepo
  * @group Wikibase
  *
@@ -60,15 +58,11 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return string
 	 */
 	protected abstract function getContentClass();
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param array $data
 	 *
 	 * @return EntityContent
@@ -79,8 +73,6 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return EntityContent
 	 */
 	protected function newEmpty() {

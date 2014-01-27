@@ -20,8 +20,6 @@ use UsageException;
 /**
  * @covers Wikibase\Api\SetQualifier
  *
- * @since 0.3
- *
  * @group API
  * @group Database
  * @group Wikibase

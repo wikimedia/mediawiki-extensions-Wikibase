@@ -7,8 +7,6 @@ use Wikibase\StoreFactory;
 /**
  * @covers Wikibase\StoreFactory
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseStore

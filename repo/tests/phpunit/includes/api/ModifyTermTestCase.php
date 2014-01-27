@@ -5,8 +5,6 @@ namespace Wikibase\Test\Api;
 /**
  * Test case for language attributes API modules.
  *
- * @since 0.4
- *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */

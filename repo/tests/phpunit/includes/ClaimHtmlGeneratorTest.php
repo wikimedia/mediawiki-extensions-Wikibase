@@ -19,8 +19,6 @@ use Wikibase\Statement;
 /**
  * @covers Wikibase\ClaimHtmlGenerator
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  *

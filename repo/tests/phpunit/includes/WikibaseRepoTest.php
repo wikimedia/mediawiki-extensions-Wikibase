@@ -7,8 +7,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\Repo\WikibaseRepo
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseRepoTest

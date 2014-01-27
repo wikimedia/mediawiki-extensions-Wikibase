@@ -12,8 +12,6 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialSetSiteLink;
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetSiteLink
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage

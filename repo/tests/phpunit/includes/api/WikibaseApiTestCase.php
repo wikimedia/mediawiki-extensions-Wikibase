@@ -13,7 +13,6 @@ use Wikibase\Settings;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
- * @since 0.1
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler

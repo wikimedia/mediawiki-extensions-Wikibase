@@ -12,8 +12,6 @@ use TestSites;
 /**
  * @covers Wikibase\EditEntityAction
  *
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  *
@@ -22,13 +20,7 @@ use TestSites;
  * @group WikibaseAction
  * @group WikibaseRepo
  *
- * The database group has as a side effect that temporal database tables are created. This makes
- * it possible to test without poisoning a production database.
  * @group Database
- *
- * Some of the tests takes more time, and needs therefor longer time before they can be aborted
- * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
- * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
 class EditEntityActionTest extends ActionTestCase {

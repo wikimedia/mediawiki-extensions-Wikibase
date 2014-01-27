@@ -50,8 +50,6 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return \User
 	 */
 	protected function getUser() {
@@ -131,8 +129,6 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return int
 	 */
 	protected function countPages() {
@@ -143,8 +139,6 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return int
 	 */
 	protected function countEntityPerPageRows() {
@@ -155,8 +149,6 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return array
 	 */
 	protected function getEntityPerPageData() {

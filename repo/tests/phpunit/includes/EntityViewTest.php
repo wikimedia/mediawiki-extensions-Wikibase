@@ -35,8 +35,6 @@ use Wikibase\Snak;
 /**
  * @covers Wikibase\EntityView
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group EntityView

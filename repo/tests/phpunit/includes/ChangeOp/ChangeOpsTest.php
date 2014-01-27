@@ -13,8 +13,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\ChangeOp\ChangeOps
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

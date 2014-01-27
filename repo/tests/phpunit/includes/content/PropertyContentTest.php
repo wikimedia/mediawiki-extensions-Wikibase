@@ -3,13 +3,10 @@
 namespace Wikibase\Test;
 
 use Wikibase\PropertyContent;
-use Wikibase\EntityContent;
 use Wikibase\StoreFactory;
 
 /**
  * @covers Wikibase\PropertyContent
- *
- * @since 0.1
  *
  * @group Database
  * @group Wikibase
@@ -24,10 +21,6 @@ class PropertyContentTest extends EntityContentTest {
 
 	/**
 	 * @see EntityContentTest::getContentClass
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
 	 */
 	protected function getContentClass() {
 		return '\Wikibase\PropertyContent';
@@ -35,10 +28,6 @@ class PropertyContentTest extends EntityContentTest {
 
 	/**
 	 * @see EntityContentTest::newEmpty
-	 *
-	 * @since 0.2
-	 *
-	 * @return EntityContent
 	 */
 	protected function newEmpty() {
 		$content = PropertyContent::newEmpty();

@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialItemByTitle;
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemByTitle
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage

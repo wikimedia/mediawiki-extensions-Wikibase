@@ -11,8 +11,6 @@ use Wikibase\Lib\SnakFormatter;
 /**
  * @covers Wikibase\Api\FormatSnakValue
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo

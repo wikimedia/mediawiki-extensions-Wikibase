@@ -9,8 +9,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\ItemContent
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseItem
  * @group WikibaseRepo
@@ -39,10 +37,6 @@ class ItemContentTest extends EntityContentTest {
 
 	/**
 	 * @see EntityContentTest::getContentClass
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
 	 */
 	protected function getContentClass() {
 		return '\Wikibase\ItemContent';

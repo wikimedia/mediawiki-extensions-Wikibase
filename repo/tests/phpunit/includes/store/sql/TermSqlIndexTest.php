@@ -12,8 +12,6 @@ use Wikibase\TermSqlIndex;
 /**
  * @covers Wikibase\TermSqlIndex
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseStore

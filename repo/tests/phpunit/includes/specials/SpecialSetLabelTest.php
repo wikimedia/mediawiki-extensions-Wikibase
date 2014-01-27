@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialSetLabel;
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetLabel
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage

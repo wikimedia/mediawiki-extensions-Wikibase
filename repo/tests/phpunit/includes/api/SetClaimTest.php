@@ -5,7 +5,6 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use Revision;
-use UsageException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
@@ -25,8 +24,6 @@ use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
  * @covers Wikibase\Api\SetClaim
- *
- * @since 0.4
  *
  * @group API
  * @group Database

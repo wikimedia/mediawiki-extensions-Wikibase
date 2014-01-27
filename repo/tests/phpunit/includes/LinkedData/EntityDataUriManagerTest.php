@@ -11,8 +11,6 @@ use Wikibase\LinkedData\EntityDataUriManager;
 /**
  * @covers Wikibase\LinkedData\EntityUriManager
  *
- * @since 0.4
- *
  * @group Database
  * ^--- just because Title is a mess
  *

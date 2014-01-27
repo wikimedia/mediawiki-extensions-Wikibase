@@ -19,8 +19,6 @@ use Wikibase\SummaryFormatter;
 /**
  * @covers Wikibase\SummaryFormatter
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseSummary

@@ -14,8 +14,6 @@ use Wikibase\StringNormalizer;
 /**
  * @covers Wikibase\Api\ItemByTitleHelper
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseAPI
  *

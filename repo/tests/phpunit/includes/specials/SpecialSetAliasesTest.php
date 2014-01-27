@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialSetAliases;
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetAliases
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage
