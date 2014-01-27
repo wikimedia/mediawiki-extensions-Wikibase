@@ -59,9 +59,10 @@ final class LibHooks {
 	 * @return boolean
 	 */
 	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
+		$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
 		$moduleBase = array(
 			'localBasePath' => __DIR__,
-			'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
+			'remoteExtPath' => $remoteExtPathParts[1],
 		);
 
 		// TODO: Split into test modules per QUnit module.
