@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_53f255e0",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "done need @since here",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f3284134",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "done need @since in this protected method (only in public))",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_9327bd5f",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d30665d1",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "Instead of adding these lines here could you please add them to \nWikibase.experimental.php\nThis way the page will be available on sites with EXPERIMENTAL turned on such as test sites but we can keep it off wikidata.org until more work is done!",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f3d72127",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need @since here either",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_33f589b6",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "Please use \\Wikibase\\DataModel\\Entity\\EntityId here instead",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_93e69d12",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "SummaryFormatter is not used",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_13f28dcd",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f3be01d1",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d3c30560",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_93bd7dd4",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_73d2f12d",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d390a548",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "there is lots of indenting here! would be great to factor this out a bit.\nCould probably split into:\n$this-\u003eremoveContentFromOldItem\nand\n$this-\u003emoveContentToNewItem\n\nAt the very least",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_53cff582",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_33cc698c",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_13c96d7b",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f3a5e1b2",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d3aae581",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_b3af5991",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "dont need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_5396d550",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "done need since (should only be on public methods)",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f38cc13c",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "not needed since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d391c553",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "not needed since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_b3863917",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T20:20:36Z",
+      "side": 1,
+      "message": "done need since",
+      "revId": "bc6d45ba389a4a3fdee6fd0a4ca04b74cca6120c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
