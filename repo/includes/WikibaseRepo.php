@@ -329,18 +329,6 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
-	 * @deprecated use EntityId::getSerialization() for the canonical representation, or
-	 * go via getValueFormatterFactory() to get a fancy formatter for EntityIds.
-	 *
-	 * @return EntityIdFormatter
-	 */
-	public function getEntityIdFormatter() {
-		return $this->getIdFormatter();
-	}
-
-	/**
-	 * @since 0.4
-	 *
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
