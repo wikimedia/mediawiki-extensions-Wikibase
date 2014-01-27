@@ -211,22 +211,6 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
-	 * @deprecated use EntityId::getSerialization() for the canonical representation, or
-	 * go via getValueFormatterFactory() to get a fancy formatter for EntityIds.
-	 *
-	 * @return EntityIdFormatter
-	 */
-	public function getIdFormatter() {
-		if ( $this->idFormatter === null ) {
-			$this->idFormatter = new EntityIdFormatter( new FormatterOptions() );
-		}
-
-		return $this->idFormatter;
-	}
-
-	/**
-	 * @since 0.4
-	 *
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getPropertyDataTypeLookup() {
