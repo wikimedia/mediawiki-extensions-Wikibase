@@ -29,22 +29,10 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetEntityContentModels( array $contentModelIds ) {
 		$factory = new EntityContentFactory(
-			$this->newMockIdFormatter(),
 			$contentModelIds
 		);
 
 		$this->assertEquals( $contentModelIds, $factory->getEntityContentModels() );
-	}
-
-	protected function newMockIdFormatter() {
-		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
-			->disableOriginalConstructor()->getMock();
-
-		$idFormatter->expects( $this->any() )
-			->method( 'format' )
-			->will( $this->returnValue( 'Nyan' ) );
-
-		return $idFormatter;
 	}
 
 	public function contentModelsProvider() {
@@ -70,7 +58,6 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newFactory() {
 		return new EntityContentFactory(
-			$this->newMockIdFormatter(),
 			array( 42, 1337, 9001 )
 		);
 	}
@@ -78,9 +65,9 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetTitleForId() {
 		$factory = $this->newFactory();
 
-		$title = $factory->getTitleForId( new ItemId( 'q42' ) );
+		$title = $factory->getTitleForId( new ItemId( 'Q42' ) );
 
-		$this->assertEquals( 'Nyan', $title->getText() );
+		$this->assertEquals( 'Q42', $title->getText() );
 	}
 
 	public function testGetWikiPageForId() {

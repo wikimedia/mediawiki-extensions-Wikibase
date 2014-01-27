@@ -182,7 +182,6 @@ class WikibaseRepo {
 		$entityNamespaces = $this->settings->getSetting( 'entityNamespaces' );
 
 		return new EntityContentFactory(
-			$this->getIdFormatter(),
 			is_array( $entityNamespaces ) ? array_keys( $entityNamespaces ) : array()
 		);
 	}
