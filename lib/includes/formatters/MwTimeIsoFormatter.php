@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use DataValues\TimeValue;
 use Language;
+use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeIsoFormatter;
 use ValueFormatters\ValueFormatter;
@@ -126,59 +127,40 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	 * @return string the formatted year
 	 */
 	private function formatYear( $fullYear, $precision ) {
-		$beforeYear = '';
-		$afterYear = '';
-
-		//todo i18n below
 		switch( $precision ) {
 			case TimeValue::PRECISION_Ga:
 				$fullYear = round( $fullYear, -9 );
 				$fullYear = substr( $fullYear, 0, -9 );
-				$beforeYear = 'in ';
-				$afterYear = ' billion years';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-Gannum', $fullYear );
 			case TimeValue::PRECISION_100Ma:
 				$fullYear = round( $fullYear, -8 );
 				$fullYear = substr( $fullYear, 0, -6 );
-				$beforeYear = 'in ';
-				$afterYear = ' million years';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-Mannum', $fullYear );
 			case TimeValue::PRECISION_10Ma:
 				$fullYear = round( $fullYear, -7 );
 				$fullYear = substr( $fullYear, 0, -6 );
-				$beforeYear = 'in ';
-				$afterYear = ' million years';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-Mannum', $fullYear );
 			case TimeValue::PRECISION_Ma:
 				$fullYear = round( $fullYear, -6 );
 				$fullYear = substr( $fullYear, 0, -6 );
-				$beforeYear = 'in ';
-				$afterYear = ' million years';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-Mannum', $fullYear );
 			case TimeValue::PRECISION_100ka:
 				$fullYear = round( $fullYear, -5 );
-				$beforeYear = 'in ';
-				$afterYear = ' years';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-annum', $fullYear );
 			case TimeValue::PRECISION_10ka:
 				$fullYear = round( $fullYear, -4 );
-				$beforeYear = 'in ';
-				$afterYear = ' years';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-annum', $fullYear );
 			case TimeValue::PRECISION_ka:
 				$fullYear = round( $fullYear, -3 );
 				$fullYear = substr( $fullYear, 0, -3 );
-				$afterYear = '.millennium';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-millennium', $fullYear );
 			case TimeValue::PRECISION_100a:
 				$fullYear = round( $fullYear, -2 );
 				$fullYear = substr( $fullYear, 0, -2 );
-				$afterYear = '.century';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-century', $fullYear );
 			case TimeValue::PRECISION_10a:
 				$fullYear = round( $fullYear, -1 );
-				$afterYear = 's';
-				break;
+				return $this->getMessage( 'wikibase-time-precision-10annum', $fullYear );
 			default:
 				//If not one of the above make sure the year have at least 4 digits
 				$fullYear = ltrim( $fullYear, '0' );
@@ -186,9 +168,24 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 				if( $fullYearLength < 4 ) {
 					$fullYear = str_repeat( '0', 4 - $fullYearLength ) . $fullYear;
 				}
-				break;
+				//only add separators if there are more than 4 digits
+				if( strlen( $fullYear ) > 4 ) {
+					$fullYear = $this->language->formatNum( $fullYear );
+				}
+				return $fullYear;
 		}
-		return $beforeYear . $fullYear . $afterYear;
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $fullYear
+	 * @return String
+	 */
+	private function getMessage( $key, $fullYear ) {
+		$message = new Message( $key );
+		$message->inLanguage( $this->language );
+		$message->numParams( array( $fullYear ) );
+		return $message->text();
 	}
 
 }
