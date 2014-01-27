@@ -39,7 +39,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	}
 
 	/**
- 	 * @see ValueFormatter::format
+	 * @see ValueFormatter::format
 	 */
 	public function format( $value ) {
 		return $this->formatDate(
