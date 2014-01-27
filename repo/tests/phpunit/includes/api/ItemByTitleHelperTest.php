@@ -74,10 +74,8 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetEntityIdsSuccess() {
-		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-
 		$expectedEntityId = new ItemId( 'Q123' );
-		$expectedEntityId = $entityIdFormatter->format( $expectedEntityId );
+		$expectedEntityId = $expectedEntityId->getSerialization();
 
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),
