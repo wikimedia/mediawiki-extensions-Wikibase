@@ -89,15 +89,9 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 * @throws InvalidArgumentException
 	 */
 	public function format( $value ) {
-		if ( $value instanceof EntityIdValue ) {
-			$value = $value->getEntityId();
-		}
+		$value = $this->unwrapEntityId( $value );
 
-		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
-		}
-
-		if ( $this->getOption( self::OPT_RESOLVE_ID )  ) {
+		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
 			$label = $this->lookupItemLabel( $value );
 		} else {
 			$label = false;
@@ -118,6 +112,28 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 
 		assert( is_string( $label ) );
 		return $label;
+	}
+
+	/**
+	 * Unwrap an EntityId value which might be wrapped in an EntityIdValue
+	 *
+	 * @param EntityId|EntityIdValue $value The value to format
+	 *
+	 * @return EntityId
+	 *
+	 * @throws InvalidArgumentException
+	 */
+
+	protected function unwrapEntityId( $value ) {
+		if ( $value instanceof EntityIdValue ) {
+			$value = $value->getEntityId();
+		}
+
+		if ( !( $value instanceof EntityId ) ) {
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
+		}
+
+		return $value;
 	}
 
 	/**
