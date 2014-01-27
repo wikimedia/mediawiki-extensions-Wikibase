@@ -55,13 +55,17 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testValidRequest() {
+		/**
+		 * @var Entity $entity
+		 * @var Property $property
+		 */
 		list( $entity, $property ) = self::getNewEntityAndProperty();
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $this->getFormattedIdForEntity( $entity ),
+			'entity' => $entity->getId()->getSerialization(),
 			'snaktype' => 'value',
-			'property' => $this->getFormattedIdForEntity( $property ),
+			'property' => $property->getId()->getSerialization(),
 			'value' => '"Foo.png"',
 		);
 
@@ -75,7 +79,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
 		}
 
-		$this->assertStringStartsWith( $this->getFormattedIdForEntity( $entity ) , $claim['id'] );
+		$this->assertStringStartsWith( $entity->getId()->getSerialization() , $claim['id'] );
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
@@ -202,14 +206,18 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	 * @param array $params
 	 */
 	public function testInvalidRequest( $errorCode, array $params ) {
+		/**
+		 * @var Entity $entity
+		 * @var Property $property
+		 */
 		list( $entity, $property ) = self::getEntityAndPropertyForInvalid();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
-			$params['entity'] = $this->getFormattedIdForEntity( $entity );
+			$params['entity'] = $entity->getId()->getSerialization();
 		}
 
 		if ( array_key_exists( 'property', $params ) && $params['property'] === '-' ) {
-			$params['property'] = $this->getFormattedIdForEntity( $property );
+			$params['property'] = $property->getId()->getSerialization();
 		}
 
 		try {
@@ -228,19 +236,18 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		$this->assertFalse( $entityContent->getEntity()->hasClaims() );
 	}
 
-	protected function getFormattedIdForEntity( Entity $entity ) {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-		return $idFormatter->format( $entity->getId() );
-	}
-
 	public function testMultipleRequests() {
+		/**
+		 * @var Entity $entity
+		 * @var Property $property
+		 */
 		list( $entity, $property ) = self::getNewEntityAndProperty();
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $this->getFormattedIdForEntity( $entity ),
+			'entity' => $entity->getId()->getSerialization(),
 			'snaktype' => 'value',
-			'property' => $this->getFormattedIdForEntity( $property ),
+			'property' => $property->getId()->getSerialization(),
 			'value' => '"Foo.png"',
 		);
 
@@ -254,9 +261,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $this->getFormattedIdForEntity( $entity ),
+			'entity' => $entity->getId()->getSerialization(),
 			'snaktype' => 'value',
-			'property' => $this->getFormattedIdForEntity( $property ),
+			'property' => $property->getId()->getSerialization(),
 			'value' => '"Bar.jpg"',
 			'baserevid' => $revId
 		);
