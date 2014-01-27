@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use Title;
 use WikiPage;
 use Revision;
-use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * Factory for EntityContent objects.
@@ -25,11 +24,9 @@ class EntityContentFactory implements EntityTitleLookup {
 		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
 	);
 
-	protected $idFormatter;
 	protected $contentModelIds;
 
-	public function __construct( EntityIdFormatter $idFormatter, array $contentModelIds ) {
-		$this->idFormatter = $idFormatter;
+	public function __construct( array $contentModelIds ) {
 		$this->contentModelIds = $contentModelIds;
 	}
 
@@ -124,7 +121,7 @@ class EntityContentFactory implements EntityTitleLookup {
 	 */
 	public function getTitleForId( EntityId $id ) {
 		return Title::newFromText(
-			$this->idFormatter->format( $id ),
+			$id->getSerialization(),
 			NamespaceUtils::getEntityNamespace( self::$typeMap[$id->getEntityType()] )
 		);
 	}
