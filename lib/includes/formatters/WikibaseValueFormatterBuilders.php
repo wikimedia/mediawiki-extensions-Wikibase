@@ -77,7 +77,7 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_HTML => array(
 			'PT:url' => 'Wikibase\Lib\HtmlUrlFormatter',
 			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
-			//'PT:wikibase-item' => 'Wikibase\Lib\ItemLinkFormatter', // TODO
+			'PT:wikibase-item' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdHtmlLinkFormatter' ),
 		),
 
 		// Formatters to use for HTML widgets.
@@ -307,7 +307,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getWikiTextFormatters( FormatterOptions $options, array $skip = array() ) {
-		$wikiFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_WIKI, $options );
+		$wikiFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_WIKI, $options, $skip );
 		$plainFormatters = $this->getPlainTextFormatters( $options, array_merge( $skip, array_keys( $wikiFormatters ) ) );
 
 		$wikiFormatters = array_merge(
@@ -330,7 +330,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getHtmlFormatters( FormatterOptions $options, array $skip = array() ) {
-		$htmlFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML, $options );
+		$htmlFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML, $options, $skip );
 		$plainFormatters = $this->getPlainTextFormatters( $options, array_merge( $skip, array_keys( $htmlFormatters ) ) );
 
 		$htmlFormatters = array_merge(
@@ -354,7 +354,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getWidgetFormatters( FormatterOptions $options, array $skip = array() ) {
-		$widgetFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML_WIDGET, $options );
+		$widgetFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML_WIDGET, $options, $skip );
 		$htmlFormatters = $this->getHtmlFormatters( $options, array_merge( $skip, array_keys( $widgetFormatters ) ) );
 
 		$widgetFormatters = array_merge(
@@ -378,7 +378,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getDiffFormatters( FormatterOptions $options, array $skip = array() ) {
-		$diffFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML_DIFF, $options );
+		$diffFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML_DIFF, $options, $skip );
 		$htmlFormatters = $this->getHtmlFormatters( $options, array_merge( $skip, array_keys( $diffFormatters ) ) );
 
 		$diffFormatters = array_merge(
@@ -461,6 +461,19 @@ class WikibaseValueFormatterBuilders {
 	 */
 	protected static function newEntityIdFormatter( FormatterOptions $options, $builders ) {
 		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+	}
+
+	/**
+	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
+	 * Used to inject services into the EntityIdHtmlLinkFormatter.
+	 *
+	 * @param FormatterOptions $options
+	 * @param WikibaseValueFormatterBuilders $builders
+	 *
+	 * @return EntityIdHtmlLinkFormatter
+	 */
+	protected static function newEntityIdHtmlLinkFormatter( FormatterOptions $options, $builders ) {
+		return new EntityIdHtmlLinkFormatter( $options, $builders->entityLookup );
 	}
 
 	/**
