@@ -15,13 +15,17 @@ module StatementPage
   # statements UI elements
   a(:add_statement, css: "div.wb-claimlistview a.wb-addtoolbar-addbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:add_statement_disabled, css: "div.wb-claimlistview a.wb-addtoolbar-addbutton.wikibase-toolbarbutton-disabled")
-  a(:save_statement, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:save_statement_disabled, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
-  a(:cancel_statement, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
-  a(:cancel_statement_disabled, css: ".wb-claimlistview div.listview-item.wb-new a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
+  a(:save_statement, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-savebutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:save_statement_disabled, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
+  a(:cancel_statement, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
+  a(:cancel_statement_disabled, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
+  a(:edit_statement1_claim1, css: ".wb-claimlistview:nth-child(1) div.listview-item:nth-child(1) a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
   textarea(:statement_value_input, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'valueview-input')]")
   span(:statement_help_field, :css => "div.wb-claimlistview span.mw-help-field-hint")
   text_field(:statement_value_input_field, class: "valueview-input")
+  div(:statement1_name, :css => ".wb-claimlistview:nth-child(1) div.wb-claim-name")
+  div(:statement1_claim1_value, :css => ".wb-claimlistview:nth-child(1) div.wb-claimview:nth-child(1) div.wb-claim-mainsnak div.wb-snak-value-container div.wb-snak-value")
+  div(:claim_edit_mode, :css => ".wb-claim-section div.wb-edit")
 
   #a(:add_claim_to_first_statement, css: "div.wb-claimlistview:nth-child(1) > span.wb-addtoolbar a:not(.wikibase-toolbarbutton-disabled)")
   #a(:edit_first_statement, css: "span.wb-edittoolbar > span > span > span.wikibase-toolbareditgroup-innoneditmode > span > a:not(.wikibase-toolbarbutton-disabled):nth-child(1)")
@@ -51,13 +55,20 @@ module StatementPage
     end
   end
 
-=begin
+  def get_statement_string_value
+    edit_statement1_claim1
+    value = statement_value_input_field
+    cancel_statement
+    return value
+  end
+
   def wait_for_statement_request_finished
     wait_until do
       self.claim_edit_mode? == false
     end
   end
 
+=begin
   def add_statement(property_label, statement_value)
     add_statement
     self.entity_selector_input = property_label
