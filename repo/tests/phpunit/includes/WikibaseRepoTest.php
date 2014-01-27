@@ -97,11 +97,6 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\ClaimGuidParser', $returnValue );
 	}
 
-	public function testGetEntityIdFormatterReturnType() {
-		$returnValue = $this->getDefaultInstance()->getEntityIdFormatter();
-		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdFormatter', $returnValue );
-	}
-
 	public function testGetLanguageFallbackChainFactory() {
 		$returnValue = $this->getDefaultInstance()->getLanguageFallbackChainFactory();
 		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChainFactory', $returnValue );
