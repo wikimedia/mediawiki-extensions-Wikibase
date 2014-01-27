@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_469a94be",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T16:08:04Z",
+      "side": 1,
+      "message": "EntityIdLabelFormatter is not used in here",
+      "revId": "7a2390d5b9b31cba3df974091287bb6b846482fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_86809c4c",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T16:08:04Z",
+      "side": 1,
+      "message": "not sure what happened to the indenting here!\neww spaces instead of tabs and not enough!",
+      "revId": "7a2390d5b9b31cba3df974091287bb6b846482fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_26978895",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-27T16:08:04Z",
+      "side": 1,
+      "message": "Does this need to be public? Right now protected would be fine! If so you can also remove the @since",
+      "revId": "7a2390d5b9b31cba3df974091287bb6b846482fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
