@@ -79,6 +79,12 @@ class FormatSnakValueTest extends \ApiTestCase {
 				null,
 				'@^http://acme\.test$@' ),
 
+			array( new StringValue( 'example.jpg' ),
+				'commonsMedia',
+				SnakFormatter::FORMAT_HTML,
+				null,
+				'@commons\.wikimedia\.org\/wiki\/File:example\.jpg@' ),
+
 			//TODO: test HTML output
 		);
 	}
