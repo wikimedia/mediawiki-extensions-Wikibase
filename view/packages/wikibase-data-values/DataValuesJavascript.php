@@ -47,10 +47,11 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	array &$testModules,
 	\ResourceLoader &$resourceLoader
 ) {
+	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/test',
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/tests',
+		'remoteExtPath' => $resourceExtPathParts[1] . '/tests',
 	);
 
 	$testModuleTemplates = array(
