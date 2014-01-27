@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, $, vv ) {
+( function( vv ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -62,4 +62,4 @@
 		}
 	} );
 
-}( dataValues, jQuery, jQuery.valueview ) );
+}( jQuery.valueview ) );

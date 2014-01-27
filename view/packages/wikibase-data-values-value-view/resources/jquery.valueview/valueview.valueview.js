@@ -708,9 +708,14 @@
 		_formatValue: function( dataValue ) {
 			var self = this,
 				deferred = $.Deferred(),
-				valueFormatter = this._instantiateFormatter( this._expert.valueCharacteristics() );
+				valueFormatter = this._instantiateFormatter( this._expert.valueCharacteristics() ),
+				purpose = this._getPurpose();
 
-			valueFormatter.format( dataValue )
+			if( typeof purpose !== 'string' ) {
+				purpose = purpose.getId();
+			}
+
+			valueFormatter.format( dataValue, purpose, 'text/html' )
 				.done( function( formattedValue, formattedDataValue ) {
 					if( dataValue === formattedDataValue ) {
 						deferred.resolve( formattedValue );

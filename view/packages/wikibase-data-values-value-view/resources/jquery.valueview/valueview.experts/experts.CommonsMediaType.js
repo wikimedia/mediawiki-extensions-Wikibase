@@ -1,21 +1,9 @@
 /**
- * @file
- * @ingroup ValueView
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, $, vv, wikiUrlencode ) {
+( function( vv ) {
 	'use strict';
-
-	/**
-	 * Returns an url to a certain file on commons.
-	 *
-	 * @param {string} file
-	 * @returns string
-	 */
-	function commonsUrl( file ) {
-		return location.protocol + '//commons.wikimedia.org/wiki/File:' + wikiUrlencode( file );
-	}
 
 	var PARENT = vv.BifidExpert,
 		editableExpert = vv.experts.SuggestedStringValue;
@@ -69,13 +57,10 @@
 			 * @param {jQuery.valueview.MessageProvider} messageProvider
 			 */
 			domBuilder: function( currentRawValue, viewState, messageProvider ) {
-				return $( '<a/>', {
-					text: currentRawValue,
-					href: commonsUrl( currentRawValue )
-				} );
+				return viewState.getFormattedValue();
 			},
 			baseExpert: editableExpert
 		}
 	} );
 
-}( dataValues, jQuery, jQuery.valueview, mw.util.wikiUrlencode ) );
+}( jQuery.valueview ) );
