@@ -10,8 +10,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\DatabaseRowEntityIdIterator
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseStore

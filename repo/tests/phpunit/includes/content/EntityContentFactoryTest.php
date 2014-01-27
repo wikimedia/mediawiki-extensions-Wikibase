@@ -12,8 +12,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\EntityContentFactory
  *
- * @since 0.2
- *
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseContent

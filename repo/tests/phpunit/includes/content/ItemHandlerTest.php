@@ -8,8 +8,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\ItemHandler
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseItem

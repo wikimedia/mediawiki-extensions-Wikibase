@@ -15,7 +15,6 @@ use Wikibase\ItemContent;
 final class TestItemContents {
 
 	/**
-	 * @since 0.1
 	 * @return ItemContent[]
 	 */
 	public static function getItems() {

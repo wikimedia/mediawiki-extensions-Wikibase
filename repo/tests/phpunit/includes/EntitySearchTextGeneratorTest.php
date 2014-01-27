@@ -9,8 +9,6 @@ use Wikibase\Repo\EntitySearchTextGenerator;
 /**
  * @covers Wikibase\Repo\EntitySearchTextGenerator
  *
- * @since 0.5
- *
  * @group WikibaseRepo
  * @group Wikibase
  *

@@ -19,8 +19,6 @@ use Wikibase\DataModel\Snak\SnakList;
 /**
  * @covers Wikibase\Api\SetReference
  *
- * @since 0.3
- *
  * @group API
  * @group Database
  * @group Wikibase

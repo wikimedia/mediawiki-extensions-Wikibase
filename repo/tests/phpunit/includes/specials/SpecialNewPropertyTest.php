@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialNewProperty;
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewProperty
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage

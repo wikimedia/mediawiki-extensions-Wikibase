@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialSetDescription;
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetDescription
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage

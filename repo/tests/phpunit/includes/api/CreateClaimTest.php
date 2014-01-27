@@ -14,8 +14,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\Api\CreateClaim
  *
- * @since 0.3
- *
  * @group API
  * @group Database
  * @group Wikibase

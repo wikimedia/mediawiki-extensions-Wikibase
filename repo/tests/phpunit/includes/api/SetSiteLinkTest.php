@@ -8,8 +8,6 @@ use Wikibase\ItemContent;
 /**
  * @covers Wikibase\Api\SetSiteLink
  *
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler

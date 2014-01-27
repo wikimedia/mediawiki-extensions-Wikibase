@@ -9,8 +9,6 @@ use FormatJson;
  *
  * This file produce errors if run standalone.
  *
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  *

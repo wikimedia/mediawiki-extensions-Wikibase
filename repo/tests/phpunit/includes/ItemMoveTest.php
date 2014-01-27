@@ -11,8 +11,6 @@ use WikitextContent;
 /**
  * Tests prevention of moving pages in and out of the data NS.
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseItem
  * @group WikibaseRepo

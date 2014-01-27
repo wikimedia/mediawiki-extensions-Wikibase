@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 use Language;
 use Title;
-use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityViewPlaceholderExpander;
 use Wikibase\Item;
@@ -11,8 +10,6 @@ use Wikibase\Item;
 
 /**
  * @covers Wikibase\EntityViewPlaceholderExpander
- *
- * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseRepo

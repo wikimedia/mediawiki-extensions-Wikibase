@@ -16,8 +16,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\EntityHandler
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseEntityHandler

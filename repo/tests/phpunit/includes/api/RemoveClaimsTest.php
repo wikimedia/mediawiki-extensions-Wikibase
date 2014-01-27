@@ -17,8 +17,6 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\RemoveClaims
-
- * @since 0.3
  *
  * @group API
  * @group Database

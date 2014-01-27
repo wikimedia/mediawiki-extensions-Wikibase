@@ -24,7 +24,6 @@ use Title;
  * @group Database
  *        ^--- Needed because we use Title objects.
  *
- * @since 0.5
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Daniel Kinzler
@@ -33,8 +32,6 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::getClass
-	 *
-	 * @since 0.5
 	 *
 	 * @return string
 	 */
@@ -63,8 +60,6 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 	/**
 	 * @see SerializerBaseTest::SerializerObject
 	 *
-	 * @since 0.2
-	 *
 	 * @return EntityRevisionSerializer
 	 */
 	protected function getInstance() {
@@ -73,8 +68,6 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::validProvider
-	 *
-	 * @since 0.5
 	 *
 	 * @return array
 	 */
@@ -109,9 +102,6 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 		return $validArgs;
 	}
 
-	/**
-	 * @since 0.5
-	 */
 	public function testNewForFrontendStore() {
 		$titleLookup = $this->getTitleLookupMock();
 

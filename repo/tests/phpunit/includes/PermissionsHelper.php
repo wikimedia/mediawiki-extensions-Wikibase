@@ -3,8 +3,6 @@
 namespace Wikibase\Test;
 
 /**
- * @since 0.4
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Adam Shorland

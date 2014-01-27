@@ -15,8 +15,6 @@ use Wikibase\Lib\ClaimGuidGenerator;
 /**
  * @covers Wikibase\ChangeOp\ChangeOpQualifier
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

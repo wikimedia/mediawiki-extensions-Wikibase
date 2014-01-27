@@ -7,8 +7,6 @@ use Wikibase\PropertyContent;
 /**
  * @covers Wikibase\PropertyHandler
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseProperty

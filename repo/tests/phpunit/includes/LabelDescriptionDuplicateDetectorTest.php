@@ -13,8 +13,6 @@ use Wikibase\Term;
 /**
  * @covers Wikibase\LabelDescriptionDuplicateDetector
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  *

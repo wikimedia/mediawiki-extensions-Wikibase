@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemDisambiguation
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage

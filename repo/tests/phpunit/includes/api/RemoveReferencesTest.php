@@ -18,8 +18,6 @@ use Wikibase\DataModel\Claim\Statement;
 /**
  * @covers Wikibase\Api\RemoveReferences
  *
- * @since 0.3
- *
  * @group API
  * @group Database
  * @group Wikibase

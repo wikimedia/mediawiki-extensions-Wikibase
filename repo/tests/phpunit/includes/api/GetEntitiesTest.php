@@ -12,7 +12,6 @@ use Wikibase\Lib\Serializers\SerializerFactory;
  * Test cases are generated using the data provided in the various static arrays below
  * Adding one extra element to any of the arrays (except format) will generate 4 new tests
  *
- * @since 0.1
  * @licence GNU GPL v2+
  * @author Adam Shorland
  *

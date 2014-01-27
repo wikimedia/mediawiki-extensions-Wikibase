@@ -10,8 +10,6 @@ use Wikibase\PropertyContent;
 /**
  * @covers Wikibase\Api\MergeItems
  *
- * @since 0.5
- *
  * @group API
  * @group Database
  * @group Wikibase

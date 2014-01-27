@@ -11,8 +11,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\EntityPerPageTable
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseStore

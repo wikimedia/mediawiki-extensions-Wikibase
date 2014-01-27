@@ -7,8 +7,6 @@ use Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel;
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutLabel
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group SpecialPage

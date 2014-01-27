@@ -23,8 +23,6 @@ use Wikibase\Repo\Specials\SpecialEntityData;
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntityData
  *
- * @since 0.4
- *
  * @group Database
  *
  * @group Wikibase

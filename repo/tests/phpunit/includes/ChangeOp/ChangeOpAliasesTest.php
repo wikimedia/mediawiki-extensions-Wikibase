@@ -10,8 +10,6 @@ use InvalidArgumentException;
 /**
  * @covers Wikibase\ChangeOp\ChangeOpAliases
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

@@ -12,8 +12,6 @@ use Wikibase\LinkedData\EntityDataSerializationService;
 /**
  * @covers \Wikibase\LinkedData\EntityDataSerializationService
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseEntityData
  * @group WikibaseRepo

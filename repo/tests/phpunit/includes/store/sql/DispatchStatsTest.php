@@ -7,8 +7,6 @@ use Wikibase\DispatchStats;
 /**
  * @covers Wikibase\DispatchStats
  *
- * @since 0.4
- *
  * @group Database
  * @group Wikibase
  * @group WikibaseRepo

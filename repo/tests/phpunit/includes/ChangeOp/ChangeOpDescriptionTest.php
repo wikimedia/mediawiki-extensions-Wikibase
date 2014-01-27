@@ -11,8 +11,6 @@ use Wikibase\Summary;
 /**
  * @covers Wikibase\ChangeOp\ChangeOpDescription
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp

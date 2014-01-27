@@ -2,16 +2,12 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataTypeFactory;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\RdfSerializer;
 
 /**
  * @covers Wikibase\RdfSerializer
- *
- * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseRepo

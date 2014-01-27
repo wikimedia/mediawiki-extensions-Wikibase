@@ -7,8 +7,6 @@ use Wikibase\NamespaceUtils;
 /**
  * @covers Wikibase\NamespaceUtils
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseUtils
