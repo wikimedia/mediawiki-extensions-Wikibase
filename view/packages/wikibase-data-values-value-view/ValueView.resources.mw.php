@@ -36,15 +36,22 @@ return call_user_func( function() {
 
 		'jquery.valueview.experts.commonsmediatype' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview/valueview.experts/experts.SuggestedStringValue.js',
 				'jquery.valueview/valueview.experts/experts.CommonsMediaType.js',
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts.staticdom',
 				'jquery.valueview.BifidExpert',
+				'jquery.valueview.experts.suggestedstringvalue'
+			),
+		),
+
+		'jquery.valueview.experts.suggestedstringvalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.SuggestedStringValue.js',
+			),
+			'dependencies' => array(
 				'jquery.valueview.experts.stringvalue',
-				'jquery.ui.suggester',
-				'mediawiki.util'
+				'jquery.ui.suggester'
 			),
 		),
 
