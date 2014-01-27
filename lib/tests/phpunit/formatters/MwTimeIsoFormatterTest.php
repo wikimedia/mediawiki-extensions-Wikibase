@@ -10,8 +10,6 @@ use Wikibase\Lib\MwTimeIsoFormatter;
 /**
  * @covers ValueFormatters\TimeFormatter
  *
- * @since 0.4
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
@@ -25,8 +23,6 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Returns an array of test parameters.
-	 *
-	 * @since 0.4
 	 *
 	 * @return array
 	 */
@@ -68,12 +64,80 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 				'+12342222013-07-16T00:10:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-
-			//The below still return the full timestamp
-			'+00000002013-07-16T00:00:00Z' => array(
-				'+00000002013-07-16T00:00:00Z',
+			//stepping through precisions
+			'12345678910s' => array(
+				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10a,
 			),
+			'12345678920s' => array(
+				'+12345678919-01-01T01:01:01Z',
+				TimeValue::PRECISION_10a,
+			),
+			'123456789.century' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100a,
+			),
+			'123456790.century' => array(
+				'+12345678992-01-01T01:01:01Z',
+				TimeValue::PRECISION_100a,
+			),
+			'12345678.millennium' => array(
+				'+12345678112-01-01T01:01:01Z',
+				TimeValue::PRECISION_ka,
+			),
+			'12345679.millennium' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_ka,
+			),
+			'in 12345670000 years' => array(
+				'+12345671912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10ka,
+			),
+			'in 12345680000 years' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10ka,
+			),
+			'in 12345600000 years' => array(
+				'+12345618912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100ka,
+			),
+			'in 12345700000 years' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100ka,
+			),
+			'in 12345 million years' => array(
+				'+12345178912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ma,
+			),
+			'in 12346 million years' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ma,
+			),
+			'in 12340 million years' => array(
+				'+12341678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10Ma,
+			),
+			'in 12350 million years' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10Ma,
+			),
+			'in 12300 million years' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100Ma,
+			),
+			'in 12400 million years' => array(
+				'+12375678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100Ma,
+			),
+			'in 12 billion years' => array(
+				'+12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ga,
+			),
+			'in 13 billion years' => array(
+				'+12545678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ga,
+			),
+			//The below still return the full timestamp
 			'-00000000001-01-01T00:00:00Z' => array(
 				'-00000000001-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
@@ -91,8 +155,6 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider formatDateProvider
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $expected
 	 * @param string $extendedIsoString
