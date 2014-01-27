@@ -6,6 +6,8 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -82,6 +84,13 @@ class FormatSnakValueTest extends \ApiTestCase {
 				SnakFormatter::FORMAT_HTML,
 				null,
 				'@commons\.wikimedia\.org\/wiki\/File:example\.jpg@' ),
+
+			// FIXME: This test uses the production environment, but it should have its own mock data
+			array( new EntityIdValue( new ItemId( 'Q200000' ) ),
+				'wikibase-item',
+				SnakFormatter::FORMAT_HTML,
+				null,
+				'@^<a href=".*index\.php/Q200000">.*</a>$@' ),
 
 			//TODO: test HTML output
 		);
