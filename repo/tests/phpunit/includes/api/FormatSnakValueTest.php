@@ -85,6 +85,12 @@ class FormatSnakValueTest extends \ApiTestCase {
 				null,
 				'@commons\.wikimedia\.org\/wiki\/File:example\.jpg@' ),
 
+			array( new StringValue( 'Q2' ),
+				'wikibase-entityid',
+				SnakFormatter::FORMAT_HTML,
+				null,
+				'@^<a href="index\.php/Q2">Q2</a>$@' ),
+
 			//TODO: test HTML output
 		);
 	}

@@ -97,11 +97,17 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				new StringValue( 'I <3 Wikibase & stuff' ),
 				'I &lt;3 Wikibase &amp; stuff'
 			),
-			'widget item label (with entity lookup)' => array(
-				SnakFormatter::FORMAT_HTML_WIDGET,
+			'plain item label (with entity lookup)' => array(
+				SnakFormatter::FORMAT_PLAIN,
 				$options,
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'Label for Q5' // compare mock object created in newBuilders()
+			),
+			'widget item link (with entity lookup)' => array(
+				SnakFormatter::FORMAT_HTML_WIDGET,
+				$options,
+				new EntityIdValue( new ItemId( 'Q5' ) ),
+				'<a href="/index.php/Q5">Label for Q5</a>' // compare mock object created in newBuilders()
 			),
 			'diff <url>' => array(
 				SnakFormatter::FORMAT_HTML_DIFF,
