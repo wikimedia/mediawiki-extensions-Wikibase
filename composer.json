@@ -30,10 +30,10 @@
 		"data-values/number": "~0.2",
 		"data-values/time": "~0.1",
 		"data-values/validators": "~0.1",
-		"data-values/data-types": "~0.1",
+		"data-values/data-types": "dev-0.1.1-mw1.23wmf11",
 		"data-values/serialization": "~0.1",
-		"data-values/javascript": "0.*,>=0.1.1.1",
-		"data-values/value-view": "0.*,>=0.1.1",
+		"data-values/javascript": "dev-0.1.1.1-mw1.23wmf11",
+		"data-values/value-view": "dev-0.1.1-mw1.23wmf11",
 		"wikibase/data-model": "0.6.*",
         "diff/diff": ">=0.9"
     },
