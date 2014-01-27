@@ -4,7 +4,6 @@ namespace Wikibase\Lib;
 
 use Message;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
 /**

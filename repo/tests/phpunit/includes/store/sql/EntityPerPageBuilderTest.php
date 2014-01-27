@@ -2,10 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use RuntimeException;
 use Wikibase\SettingsArray;
-use Wikibase\StoreFactory;
 use Wikibase\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
 

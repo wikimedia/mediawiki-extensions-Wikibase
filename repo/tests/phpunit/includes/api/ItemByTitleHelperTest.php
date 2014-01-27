@@ -7,7 +7,6 @@ use Title;
 use Wikibase\Api\ItemByTitleHelper;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SiteLinkCache;
 use Wikibase\StringNormalizer;
 

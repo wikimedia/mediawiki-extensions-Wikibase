@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators;
 
-use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;

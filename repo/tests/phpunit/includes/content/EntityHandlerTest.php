@@ -7,7 +7,6 @@ use Language;
 use Revision;
 use Title;
 use Wikibase\Entity;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
 use Wikibase\EntityContent;

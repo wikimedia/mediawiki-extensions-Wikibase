@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use DataTypes\DataTypeFactory;
-use ValueParsers\ParserOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;

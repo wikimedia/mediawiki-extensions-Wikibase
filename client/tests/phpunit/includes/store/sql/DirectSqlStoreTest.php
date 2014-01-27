@@ -5,9 +5,7 @@ namespace Wikibase\Test;
 use Language;
 use MediaWikiSite;
 use Site;
-use TestSites;
 use Wikibase\DirectSqlStore;
-use Wikibase\Settings;
 
 /**
  * @covers Wikibase\DirectSqlStore

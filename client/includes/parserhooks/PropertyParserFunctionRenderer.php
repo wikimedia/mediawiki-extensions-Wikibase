@@ -2,11 +2,9 @@
 
 namespace Wikibase;
 
-use Exception;
 use InvalidArgumentException;
 use Language;
 use Status;
-use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;

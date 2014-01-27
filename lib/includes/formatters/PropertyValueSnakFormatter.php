@@ -2,7 +2,6 @@
 namespace Wikibase\Lib;
 use DataValues\DataValue;
 use InvalidArgumentException;
-use ValueFormatters\ValueFormatter;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 

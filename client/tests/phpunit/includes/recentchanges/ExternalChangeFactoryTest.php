@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use RecentChange;
 use MediaWikiTestCase;
-use ValueParsers\ParserOptions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ExternalChange;
 use Wikibase\ExternalChangeFactory;

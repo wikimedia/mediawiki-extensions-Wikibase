@@ -2,11 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use DataTypes\DataType;
 use DataValues\DataValue;
-use DataValues\IllegalValueException;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 
 /**
  * Provides a string representation for a DataValue given its associated DataType.

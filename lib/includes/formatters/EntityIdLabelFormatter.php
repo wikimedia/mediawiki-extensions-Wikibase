@@ -5,7 +5,6 @@ namespace Wikibase\Lib;
 use InvalidArgumentException;
 use RuntimeException;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatterBase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\EntityLookup;

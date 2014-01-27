@@ -2,7 +2,6 @@
 
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Settings;
-use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Utils;
 

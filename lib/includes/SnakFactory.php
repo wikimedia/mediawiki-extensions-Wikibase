@@ -3,8 +3,6 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
-use DataValues\DataValueFactory;
-use DataValues\IllegalValueException;
 use InvalidArgumentException;
 
 /**

@@ -3,14 +3,10 @@
 namespace Wikibase\Test;
 
 use ChangesList;
-use ContentHandler;
 use Language;
 use RecentChange;
 use RequestContext;
-use Title;
-use WikiPage;
 use MediaWikiTestCase;
-use ValueParsers\ParserOptions;
 use Wikibase\ChangeLineFormatter;
 use Wikibase\ExternalChangeFactory;
 use Wikibase\RepoLinker;

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Specials;
 
-use Html;
 use SpecialPage;
 use Wikibase\StringNormalizer;
 

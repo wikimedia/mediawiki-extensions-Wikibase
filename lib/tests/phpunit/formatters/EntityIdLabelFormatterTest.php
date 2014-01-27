@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter

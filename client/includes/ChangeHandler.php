@@ -2,10 +2,6 @@
 
 namespace Wikibase;
 
-use Diff\Diff;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
 use MWException;
 use Site;
 use SiteList;

@@ -4,11 +4,9 @@ namespace Wikibase\Test;
 
 use DataValues\DataValue;
 use Language;
-use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;

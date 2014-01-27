@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Sanitizer, UtfNormal, Language, SiteList, SiteSQLStore;
+
+use Language;
+use SiteSQLStore;
 
 /**
  * Utility functions for Wikibase.
