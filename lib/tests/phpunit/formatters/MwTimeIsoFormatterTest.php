@@ -40,7 +40,7 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 				'+00000000001-01-14T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 			),
-			'1 January 10000' => array(
+			'1 January 10,000' => array(
 				'+00000010000-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 			),
@@ -56,76 +56,76 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 				'+00000000013-07-16T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			'2222013' => array(
+			'2,222,013' => array(
 				'+00002222013-07-16T00:10:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			'12342222013' => array(
+			'12,342,222,013' => array(
 				'+12342222013-07-16T00:10:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
 			//stepping through precisions
-			'12345678910s' => array(
+			'12,345,678,910s' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10a,
 			),
-			'12345678920s' => array(
+			'12,345,678,920s' => array(
 				'+12345678919-01-01T01:01:01Z',
 				TimeValue::PRECISION_10a,
 			),
-			'123456789.century' => array(
+			'123,456,789. century' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100a,
 			),
-			'123456790.century' => array(
+			'123,456,790. century' => array(
 				'+12345678992-01-01T01:01:01Z',
 				TimeValue::PRECISION_100a,
 			),
-			'12345678.millennium' => array(
+			'12,345,678. millennium' => array(
 				'+12345678112-01-01T01:01:01Z',
 				TimeValue::PRECISION_ka,
 			),
-			'12345679.millennium' => array(
+			'12,345,679. millennium' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_ka,
 			),
-			'in 12345670000 years' => array(
+			'in 12,345,670,000 years' => array(
 				'+12345671912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10ka,
 			),
-			'in 12345680000 years' => array(
+			'in 12,345,680,000 years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10ka,
 			),
-			'in 12345600000 years' => array(
+			'in 12,345,600,000 years' => array(
 				'+12345618912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100ka,
 			),
-			'in 12345700000 years' => array(
+			'in 12,345,700,000 years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100ka,
 			),
-			'in 12345 million years' => array(
+			'in 12,345 million years' => array(
 				'+12345178912-01-01T01:01:01Z',
 				TimeValue::PRECISION_Ma,
 			),
-			'in 12346 million years' => array(
+			'in 12,346 million years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_Ma,
 			),
-			'in 12340 million years' => array(
+			'in 12,340 million years' => array(
 				'+12341678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10Ma,
 			),
-			'in 12350 million years' => array(
+			'in 12,350 million years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10Ma,
 			),
-			'in 12300 million years' => array(
+			'in 12,300 million years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100Ma,
 			),
-			'in 12400 million years' => array(
+			'in 12,400 million years' => array(
 				'+12375678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100Ma,
 			),
@@ -137,7 +137,7 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 				'+12545678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_Ga,
 			),
-			//The below still return the full timestamp
+			//The below should still return the full timestamp as we can not yet format
 			'-00000000001-01-01T00:00:00Z' => array(
 				'-00000000001-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
