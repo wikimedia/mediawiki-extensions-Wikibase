@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_46d2942d",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-27T16:22:18Z",
+      "side": 1,
+      "message": "\"year to format\"\n\nDo not add value. Same for\n\n\"precision to use when formatting\"",
+      "revId": "0c4f9ef42c56e530cd8c5c7816a8ed1f961a231d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
