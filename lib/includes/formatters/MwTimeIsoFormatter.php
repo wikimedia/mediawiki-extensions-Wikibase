@@ -10,7 +10,6 @@ use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
 /**
- *
  * @since 0.4
  *
  * @licence GNU GPL v2+
@@ -67,8 +66,8 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 		$regexSuccess = preg_match( '/^(\+|\-)(\d{7})?(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/',
 			$extendedIsoTimestamp, $matches );
 
-		//TODO: format values with - or more precise than a year
-		if( !$regexSuccess || $matches[1] === '-' || $precision < TimeValue::PRECISION_YEAR ) {
+		//TODO: format values with -
+		if( !$regexSuccess || $matches[1] === '-') {
 			return $extendedIsoTimestamp;
 		}
 
@@ -80,8 +79,6 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 			$this->language->getDefaultDateFormat()
 		);
 
-		// TODO: Implement more sophisticated replace algorithm since characters may be escaped
-		//  or, even better, find a way to avoid having to do replacements.
 		if( $precision < TimeValue::PRECISION_DAY ) {
 			// Remove day placeholder:
 			$dateFormat = preg_replace( '/((x\w{1})?(j|t)|d)/', '', $dateFormat );
@@ -100,15 +97,72 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 			return $extendedIsoTimestamp;
 		}
 
-		//todo optional trimming through options?
 		$fullYear = $matches[2] . $matches[3];
-		$fullYear = ltrim( $fullYear, '0' );
-		$fullYearLength = strlen( $fullYear );
-		if( $fullYearLength < 4 ) {
-			$fullYear = str_repeat( '0', 4 - $fullYearLength ) . $fullYear;
+		$beforeYear = '';
+		$afterYear = '';
+
+		//todo i18n below
+		switch( $precision ) {
+			case TimeValue::PRECISION_Ga:
+				$fullYear = round( $fullYear, -9 );
+				$fullYear = substr( $fullYear, 0, -9 );
+				$beforeYear = 'in ';
+				$afterYear = ' billion years';
+				break;
+			case TimeValue::PRECISION_100Ma:
+				$fullYear = round( $fullYear, -8 );
+				$fullYear = substr( $fullYear, 0, -6 );
+				$beforeYear = 'in ';
+				$afterYear = ' million years';
+				break;
+			case TimeValue::PRECISION_10Ma:
+				$fullYear = round( $fullYear, -7 );
+				$fullYear = substr( $fullYear, 0, -6 );
+				$beforeYear = 'in ';
+				$afterYear = ' million years';
+				break;
+			case TimeValue::PRECISION_Ma:
+				$fullYear = round( $fullYear, -6 );
+				$fullYear = substr( $fullYear, 0, -6 );
+				$beforeYear = 'in ';
+				$afterYear = ' million years';
+				break;
+			case TimeValue::PRECISION_100ka:
+				$fullYear = round( $fullYear, -5 );
+				$beforeYear = 'in ';
+				$afterYear = ' years';
+				break;
+			case TimeValue::PRECISION_10ka:
+				$fullYear = round( $fullYear, -4 );
+				$beforeYear = 'in ';
+				$afterYear = ' years';
+				break;
+			case TimeValue::PRECISION_ka:
+				$fullYear = round( $fullYear, -3 );
+				$fullYear = substr( $fullYear, 0, -3 );
+				$afterYear = '.millennium';
+				break;
+			case TimeValue::PRECISION_100a:
+				$fullYear = round( $fullYear, -2 );
+				$fullYear = substr( $fullYear, 0, -2 );
+				$afterYear = '.century';
+				break;
+			case TimeValue::PRECISION_10a:
+				$fullYear = round( $fullYear, -1 );
+				$afterYear = 's';
+				break;
+			default:
+				//If not one of the above make sure the year have at least 4 digits
+				$fullYear = ltrim( $fullYear, '0' );
+				$fullYearLength = strlen( $fullYear );
+				if( $fullYearLength < 4 ) {
+					$fullYear = str_repeat( '0', 4 - $fullYearLength ) . $fullYear;
+				}
+				break;
 		}
 
-		$localisedDate = str_replace( $matches[3], $fullYear, $localisedDate );
+		$yearString = $beforeYear . $fullYear . $afterYear;
+		$localisedDate = str_replace( $matches[3], $yearString , $localisedDate );
 
 		return $localisedDate;
 	}
