@@ -11,9 +11,10 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
+	$remoteExtPathParts = explode( '\extensions\\', __DIR__, 2 );
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
+		'remoteExtPath' => $remoteExtPathParts[1],
 		'position' => 'top' // reducing the time between DOM construction and JS initialisation
 	);
 
