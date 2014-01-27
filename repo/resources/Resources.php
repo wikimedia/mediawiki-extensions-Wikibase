@@ -13,7 +13,7 @@
 return call_user_func( function() {
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
+		'remoteExtPath' => end( explode( '\extensions\\', __DIR__, 2 ) ),
 		'position' => 'top' // reducing the time between DOM construction and JS initialisation
 	);
 
