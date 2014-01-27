@@ -151,14 +151,12 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	protected function makeSetQualifierRequest( $statementGuid, $snakhash, Snak $qualifier, EntityId $entityId ) {
-		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-
 		$params = array(
 			'action' => 'wbsetqualifier',
 			'claim' => $statementGuid,
 			'snakhash' => $snakhash,
 			'snaktype' => $qualifier->getType(),
-			'property' => $entityIdFormatter->format( $qualifier->getPropertyId() ),
+			'property' => $qualifier->getPropertyId()->getSerialization(),
 		);
 
 		if ( $qualifier instanceof PropertyValueSnak ) {

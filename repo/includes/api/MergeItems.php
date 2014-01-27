@@ -8,6 +8,7 @@ use Status;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
@@ -128,14 +129,13 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @param $direction
-	 * @param $getId
-	 * @param $params
+	 * @param string $direction either 'from' or 'to'
+	 * @param ItemId $getId
+	 * @param array $params
 	 * @return Summary
 	 */
 	private function getSummary( $direction, $getId, $params ) {
-		$entityIdFormatter = WikibaseRepo::getDefaultInstance()->getEntityIdFormatter();
-		$summary = new Summary( $this->getModuleName(), $direction, null, array( $entityIdFormatter->format( $getId ) ) );
+		$summary = new Summary( $this->getModuleName(), $direction, null, array( $getId->getSerialization() ) );
 		if ( !is_null( $params['summary'] ) ) {
 			$summary->setUserSummary( $params['summary'] );
 		}
