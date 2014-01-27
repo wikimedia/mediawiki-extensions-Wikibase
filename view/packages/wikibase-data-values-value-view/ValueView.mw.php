@@ -39,9 +39,10 @@ $wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \Resou
 	// Register jQuery.valueview QUnit tests. Take the predefined test definitions and make them
 	// suitable for registration with MediaWiki's resource loader.
 	$ownModules = include( __DIR__ . '/ValueView.tests.qunit.php' );
+	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
 	$ownModulesTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
+		'remoteExtPath' =>  $remoteExtPathParts[1],
 	);
 	foreach( $ownModules as $ownModuleName => $ownModule ) {
 		$testModules['qunit'][ $ownModuleName ] = $ownModule + $ownModulesTemplate;
