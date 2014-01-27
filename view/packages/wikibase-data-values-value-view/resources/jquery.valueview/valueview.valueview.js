@@ -609,9 +609,8 @@
 
 			if( rawValue === null || rawValue instanceof dv.DataValue ) {
 				this.__lastUpdateValue = undefined;
-				this._value = rawValue;
 				self._trigger( 'afterparse' );
-				deferred.resolve();
+				deferred.resolve(rawValue);
 				return deferred.promise();
 			}
 
