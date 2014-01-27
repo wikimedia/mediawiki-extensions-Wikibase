@@ -264,7 +264,6 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-invalid-list' => 'Invalid list', # Do not translate
 	'wikibase-api-invalid-property-id' => 'Invalid propertyid', # Do not translate
 	'wikibase-api-invalid-entity-id' => 'Invalid entityid', # Do not translate
-	'wikibase-api-invalid-snak' => 'Invalid snak', # Do not translate
 	'wikibase-api-no-common-iten' => 'There is no common item', # Do not translate
 	'wikibase-api-no-data' => 'No data to operate on', # Do not translate
 	'wikibase-api-no-external-page' => 'The external client site did not provide page information', # Do not translate
