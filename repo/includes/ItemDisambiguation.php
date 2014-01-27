@@ -55,19 +55,18 @@ class ItemDisambiguation extends \ContextSource {
 		$userLang = $this->getLanguage()->getCode();
 		$searchLang = $this->langCode;
 
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					function( ItemContent $itemContent ) use ( $userLang, $searchLang, $idFormatter ) {
+					function( ItemContent $itemContent ) use ( $userLang, $searchLang ) {
 
 						$userLabel = $itemContent->getItem()->getLabel( $userLang );
 						$searchLabel = $itemContent->getItem()->getLabel( $searchLang );
 
 						// link to the item. The text is the label in the user's language, or the ID if no label exists
 						$idLabel = \Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-							. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( $idFormatter->format( $itemContent->getEntity()->getId() ) )->escaped()
+							. wfMessage( 'wikibase-itemlink-id-wrapper' )->params(
+								$itemContent->getEntity()->getId()->getSerialization() )->escaped()
 							. \Html::closeElement( 'span' );
 						$result =
 							\Linker::link(

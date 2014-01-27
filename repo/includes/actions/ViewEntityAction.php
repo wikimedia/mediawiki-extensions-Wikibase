@@ -200,8 +200,7 @@ abstract class ViewEntityAction extends \ViewAction {
 		if ( $labelData ) {
 			$labelText = $labelData['value'];
 		} else {
-			$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-			$labelText = strtoupper( $idPrefixer->format( $content->getEntity()->getId() ) );
+			$labelText = strtoupper( $content->getEntity()->getId()->getSerialization() );
 		}
 
 		// Create and set the title.
