@@ -11,9 +11,10 @@
  */
 return call_user_func( function() {
 
+	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/resources',
-		'remoteExtPath' =>  '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/resources',
+		'remoteExtPath' =>  $remoteExtPathParts[1] . '/resources',
 	);
 
 	$mwVvResources = array(
