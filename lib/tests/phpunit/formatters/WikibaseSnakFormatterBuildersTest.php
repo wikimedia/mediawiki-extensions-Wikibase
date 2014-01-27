@@ -135,8 +135,8 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				new PropertyValueSnak( 7, new StringValue( 'I <3 Wikibase' ) ),
 				'I &lt;3 Wikibase'
 			),
-			'widget item label (with entity lookup)' => array(
-				SnakFormatter::FORMAT_HTML_WIDGET,
+			'plain item label (with entity lookup)' => array(
+				SnakFormatter::FORMAT_PLAIN,
 				$options,
 				'wikibase-item',
 				new PropertyValueSnak( 7, new EntityIdValue( new ItemId( 'Q5' ) ) ),
