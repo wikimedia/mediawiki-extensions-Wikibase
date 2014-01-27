@@ -23,9 +23,13 @@ module StatementPage
   textarea(:statement_value_input, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'valueview-input')]")
   span(:statement_help_field, :css => "div.wb-claimlistview span.mw-help-field-hint")
   text_field(:statement_value_input_field, class: "valueview-input")
-  div(:statement1_name, :css => ".wb-claimlistview:nth-child(1) div.wb-claim-name")
+  #div(:statement1_name, :css => ".wb-claimlistview:nth-child(1) div.wb-claim-name")
   div(:statement1_claim1_value, :css => ".wb-claimlistview:nth-child(1) div.wb-claimview:nth-child(1) div.wb-claim-mainsnak div.wb-snak-value-container div.wb-snak-value")
   div(:claim_edit_mode, :css => ".wb-claim-section div.wb-edit")
+
+  def statement_name_element(index)
+    @browser.element(css: ".wb-claimlistview:nth-child(#{index}) div.wb-claim-name")
+  end
 
   #a(:add_claim_to_first_statement, css: "div.wb-claimlistview:nth-child(1) > span.wb-addtoolbar a:not(.wikibase-toolbarbutton-disabled)")
   #a(:edit_first_statement, css: "span.wb-edittoolbar > span > span > span.wikibase-toolbareditgroup-innoneditmode > span > a:not(.wikibase-toolbarbutton-disabled):nth-child(1)")
