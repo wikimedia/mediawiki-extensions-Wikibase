@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_666fd0c1",
+        "filename": "repo/includes/actions/HistoryEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-27T15:57:52Z",
+      "side": 1,
+      "message": "ucfirst can be dropped. This might also avoid problems with future id types.",
+      "revId": "38be9228e0c8d655cf111ce11bcead89602c276e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_4664d4e1",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-27T15:57:52Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "38be9228e0c8d655cf111ce11bcead89602c276e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
