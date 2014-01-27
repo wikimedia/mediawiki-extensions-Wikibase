@@ -88,7 +88,7 @@ class GetClaimsTest extends \ApiTestCase {
 		foreach ( $entities as $entity ) {
 			$params = array(
 				'action' => 'wbgetclaims',
-				'entity' => $this->getFormattedIdForEntity( $entity ),
+				'entity' => $entity->getId()->getSerialization(),
 			);
 
 			$argLists[] = array( $params, $entity->getClaims(), true );
@@ -110,7 +110,7 @@ class GetClaimsTest extends \ApiTestCase {
 			foreach ( array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ) as $rank ) {
 				$params = array(
 					'action' => 'wbgetclaims',
-					'entity' => $this->getFormattedIdForEntity( $entity ),
+					'entity' => $entity->getId()->getSerialization(),
 					'rank' => ClaimSerializer::serializeRank( $rank ),
 				);
 
@@ -127,11 +127,6 @@ class GetClaimsTest extends \ApiTestCase {
 		}
 
 		return $argLists;
-	}
-
-	protected function getFormattedIdForEntity( Entity $entity ) {
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-		return $idFormatter->format( $entity->getId() );
 	}
 
 	public function testValidRequests() {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase;
 
 use Wikibase\Repo\WikibaseRepo;
@@ -82,19 +83,18 @@ class HistoryEntityAction extends \HistoryAction {
 			$labelText = null;
 		}
 
-		$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-		$prefixedId = ucfirst( $idPrefixer->format( $entity->getId() ) );
+		$idSerialization = $entity->getId()->getSerialization();
 
 		if ( isset( $labelText ) ) {
 			// Escaping HTML characters in order to retain original label that may contain HTML
 			// characters. This prevents having characters evaluated or stripped via
 			// OutputPage::setPageTitle:
 			return $this->msg( 'wikibase-history-title-with-label' )
-				->rawParams( $prefixedId, htmlspecialchars( $labelText ) )->text();
+				->rawParams( $idSerialization, htmlspecialchars( $labelText ) )->text();
 		}
 		else {
 			return $this->msg( 'wikibase-history-title-without-label' )
-				->rawParams( $prefixedId )->text();
+				->rawParams( $idSerialization )->text();
 		}
 	}
 }

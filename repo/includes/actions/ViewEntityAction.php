@@ -1,11 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Language, Article, \ValueFormatters\ValueFormatterFactory;
+
+use Article;
 use Revision;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -200,8 +198,7 @@ abstract class ViewEntityAction extends \ViewAction {
 		if ( $labelData ) {
 			$labelText = $labelData['value'];
 		} else {
-			$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-			$labelText = strtoupper( $idPrefixer->format( $content->getEntity()->getId() ) );
+			$labelText = $content->getEntity()->getId()->getSerialization();
 		}
 
 		// Create and set the title.
