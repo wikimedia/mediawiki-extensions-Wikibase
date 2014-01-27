@@ -2,7 +2,6 @@
 
 namespace ValueFormatters\Test;
 
-use DataValues\TimeValue;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\MwTimeIsoFormatter;
@@ -19,7 +18,6 @@ use Wikibase\Lib\MwTimeIsoFormatter;
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
- * @author Adam Shorland
  */
 class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 
@@ -34,49 +32,35 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 		$tests = array(
 			'16 July 2013' => array(
 				'+00000002013-07-16T00:00:00Z',
-				TimeValue::PRECISION_DAY,
+				11,
 			),
 			'1 January 0000' => array(
 				'+00000000000-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
+				11,
 			),
 			'14 January 0001' => array(
 				'+00000000001-01-14T00:00:00Z',
-				TimeValue::PRECISION_DAY,
+				11,
 			),
-			'1 January 10000' => array(
+			'+00000010000-01-01T00:00:00Z' => array(
 				'+00000010000-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-			),
-			'July 2013' => array(
-				'+00000002013-07-16T00:00:00Z',
-				TimeValue::PRECISION_MONTH,
-			),
-			'2013' => array(
-				'+00000002013-07-16T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-			),
-			'0013' => array(
-				'+00000000013-07-16T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-			),
-			'2222013' => array(
-				'+00002222013-07-16T00:10:00Z',
-				TimeValue::PRECISION_YEAR,
-			),
-			'12342222013' => array(
-				'+12342222013-07-16T00:10:00Z',
-				TimeValue::PRECISION_YEAR,
-			),
-
-			//The below still return the full timestamp
-			'+00000002013-07-16T00:00:00Z' => array(
-				'+00000002013-07-16T00:00:00Z',
-				TimeValue::PRECISION_10a,
+				11,
 			),
 			'-00000000001-01-01T00:00:00Z' => array(
 				'-00000000001-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
+				11,
+			),
+			'July 2013' => array(
+				'+00000002013-07-16T00:00:00Z',
+				10,
+			),
+			'2013' => array(
+				'+00000002013-07-16T00:00:00Z',
+				9,
+			),
+			'+00000002013-07-16T00:00:00Z' => array(
+				'+00000002013-07-16T00:00:00Z',
+				8,
 			),
 		);
 
