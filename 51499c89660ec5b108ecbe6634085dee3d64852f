@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_b3b879e3",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-27T20:16:38Z",
+      "side": 1,
+      "message": "You need two comments in this block - a sign you probably want to make nice dedicated methods",
+      "revId": "51499c89660ec5b108ecbe6634085dee3d64852f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_93b45de6",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-27T20:16:38Z",
+      "side": 1,
+      "message": "Does this mean my tests will now fail if my wiki uses \".\" as thousand separator? If so, than this should be fixed.",
+      "revId": "51499c89660ec5b108ecbe6634085dee3d64852f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
