@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_006ec893",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-28T09:15:58Z",
+      "side": 1,
+      "message": "Yes, it is.",
+      "parentUuid": "8efa632e_469a94be",
+      "revId": "7a2390d5b9b31cba3df974091287bb6b846482fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_86809c4c",
         "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_8001b8bb",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-28T09:15:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efa632e_86809c4c",
+      "revId": "7a2390d5b9b31cba3df974091287bb6b846482fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_26978895",
         "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-01-27T16:08:04Z",
       "side": 1,
       "message": "Does this need to be public? Right now protected would be fine! If so you can also remove the @since",
+      "revId": "7a2390d5b9b31cba3df974091287bb6b846482fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_c01580eb",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-28T09:15:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efa632e_26978895",
       "revId": "7a2390d5b9b31cba3df974091287bb6b846482fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
