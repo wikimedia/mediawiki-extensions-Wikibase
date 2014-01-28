@@ -1,3 +1,0 @@
-[submodule "content/easyRdf"]
-	path = contrib/easyRdf
-	url = https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase/easyrdf.git
