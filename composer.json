@@ -1,29 +1,29 @@
 {
-    "name": "wikibase/wikibase",
-    "type": "mediawiki-extension",
-    "description": "Structured data repository for MediaWiki",
-    "keywords": [
+	"name": "wikibase/wikibase",
+	"type": "mediawiki-extension",
+	"description": "Structured data repository for MediaWiki",
+	"keywords": [
 		"wikibase",
 		"wikidata",
 		"wikibaselib",
 		"wikibaseclient",
 		"wikibaserepo"
 	],
-    "homepage": "https://www.mediawiki.org/wiki/Wikibase",
-    "license": "GNU GPL v2+",
-    "authors": [
-        {
-            "name": "The Wikidata team"
-        }
-    ],
+	"homepage": "https://www.mediawiki.org/wiki/Wikibase",
+	"license": "GNU GPL v2+",
+	"authors": [
+		{
+			"name": "The Wikidata team"
+		}
+	],
 	"support": {
 		"issues": "https://bugzilla.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata",
 		"forum": "https://www.mediawiki.org/wiki/Talk:Wikibase",
 		"wiki": "https://www.mediawiki.org/wiki/Wikibase"
 	},
-    "require": {
-        "php": ">=5.3.2",
+	"require": {
+		"php": ">=5.3.2",
 		"data-values/data-values": "~0.1",
 		"data-values/common": "~0.1",
 		"data-values/geo": "~0.1",
