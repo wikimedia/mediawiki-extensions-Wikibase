@@ -160,6 +160,15 @@ return call_user_func( function() {
 		),
 
 
+		'util.MessageProvider.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'util/util.MessageProvider.tests.js',
+			),
+			'dependencies' => array(
+				'util.MessageProvider',
+			),
+		),
+
 		'util.Notifier.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'util/util.Notifier.tests.js',

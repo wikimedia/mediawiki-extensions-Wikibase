@@ -106,8 +106,8 @@ jQuery.valueview = jQuery.valueview || {};
 		this._options = $.extend( ( !this._options ) ? {} : this._options, options || {} );
 
 		var defaultMessages = this._options.messages || {},
-			mediaWiki = this._options.mediaWiki || null;
-		this._messageProvider = new vv.MessageProvider( defaultMessages, mediaWiki );
+			msgGetter = this._options.mediaWiki ? this._options.mediaWiki.msg : null;
+		this._messageProvider = new util.MessageProvider( defaultMessages, msgGetter );
 
 		this._init();
 	};
@@ -148,7 +148,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Message provider used to fetch messages from mediaWiki if available.
-		 * @type {jQuery.valueview.MessageProvider}
+		 * @type {util.MessageProvider}
 		 */
 		_messageProvider: null,
 

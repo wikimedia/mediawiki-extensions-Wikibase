@@ -31,15 +31,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.MessageProvider.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.valueview.MessageProvider.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.valueview.MessageProvider',
-			),
-		),
-
 		'jquery.valueview.preview.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.preview.tests.js',
