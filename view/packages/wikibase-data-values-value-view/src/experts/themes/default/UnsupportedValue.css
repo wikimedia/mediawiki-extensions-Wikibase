@@ -1,0 +1,9 @@
+/**
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < danweetz@web.de >
+ */
+
+.valueview-expert-unsupportedvalue {
+	color: gray;
+	font-style: italic;
+}
