@@ -31,15 +31,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.preview.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.valueview.preview.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.valueview.preview',
-			),
-		),
-
 		'jquery.valueview.tests.MockViewState' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.tests.MockViewState.js',

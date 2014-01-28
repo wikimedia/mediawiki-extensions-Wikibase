@@ -101,9 +101,10 @@ return call_user_func( function() {
 				'jquery.time/jquery.time.timeinput.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'jquery.ui.widget',
 				'jquery.eachchange',
-				'time.js'
+				'time.js',
 			),
 		),
 
@@ -139,6 +140,19 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'valueview-listrotator-auto',
+			),
+		),
+
+		'jquery.ui.preview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.preview.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.preview.css',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.ui.widget',
 			),
 		),
 

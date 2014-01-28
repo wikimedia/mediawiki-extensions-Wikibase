@@ -72,26 +72,6 @@ return call_user_func( function() {
 			),
 		),
 
-		// FIXME: Remove MediaWiki dependency
-		// TODO: Move to jquery.ui.preview
-		'jquery.valueview.preview' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.valueview.preview.js',
-			),
-			'styles' => array(
-				'jquery.valueview.preview.css',
-			),
-			'dependencies' => array(
-				'jquery.ui.widget',
-				'mediawiki',
-				'mediawiki.legacy.shared',
-			),
-			'messages' => array(
-				'valueview-preview-label',
-				'valueview-preview-novalue',
-			),
-		),
-
 		// The actual valueview widget:
 		'jquery.valueview.valueview' => $moduleTemplate + array(
 			'scripts' => array(

@@ -7,10 +7,10 @@
 	'use strict';
 
 	/**
-	 * Factory for creating a valueview preview widget suitable for testing.
+	 * Factory for creating a preview widget suitable for testing.
 	 *
 	 * @param {Object} [options]
-	 * @return {jQuery.valueview.preview}
+	 * @return {jQuery.ui.preview}
 	 */
 	var newTestPreview = function( options ) {
 		if( !options ) {
@@ -25,7 +25,7 @@
 		return $div.data( 'preview' );
 	};
 
-	QUnit.module( 'jquery.valueview.preview', {
+	QUnit.module( 'jquery.ui.preview', {
 		teardown: function() {
 			$( '.test_preview' ).each( function( i, node ) {
 				if( $( node ).data( 'preview' ) ) {
@@ -86,7 +86,7 @@
 		);
 
 		assert.ok(
-			preview.$value.children( 'span' ).first().hasClass( 'mw-small-spinner' ),
+			preview.$value.children( 'span' ).first().hasClass( 'small-spinner' ),
 			'Applied spinner css class.'
 		);
 

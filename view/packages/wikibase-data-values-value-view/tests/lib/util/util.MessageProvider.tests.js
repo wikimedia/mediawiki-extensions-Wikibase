@@ -6,14 +6,24 @@
 ( function( QUnit, util ) {
 	'use strict';
 
+	var messages = {
+			'messageProviderTestMessage1': 'message1',
+			'messageProviderTestMessage2': 'message2'
+		},
+		mockMessageRegistry = {
+			'messageProviderTestMessage1': 'messageStore1',
+			'messageStoreTestMessage2': 'messageStore2'
+		},
+		mockMessageGetter = function( key ) {
+			return mockMessageRegistry[key];
+		};
+
 	QUnit.module( 'util.MessageProvider' );
 
-	QUnit.test( 'Basic message management', function( assert ) {
-		var messages = {
-				'messageProviderTestMessage1': 'message1',
-				'messageProviderTestMessage2': 'message2'
-			},
-			messageProvider = new util.MessageProvider( messages );
+	QUnit.test( 'getMessage(): Use default messages', function( assert ) {
+		var messageProvider = new util.MessageProvider( {
+				defaultMessages: messages
+			} );
 
 		assert.equal(
 			messageProvider.getMessage( 'messageProviderTestMessage2' ),
@@ -21,16 +31,64 @@
 			'Fetched default message.'
 		);
 
-		if( mediaWiki !== undefined && mediaWiki.msg ) {
-			messageProvider = new util.MessageProvider( messages, mediaWiki.msg );
+		assert.strictEqual(
+			messageProvider.getMessage( 'doesNotExist' ),
+			null,
+			'Returning "null" if message cannot be found.'
+		);
+	} );
 
-			assert.equal(
-				messageProvider.getMessage( 'messageProviderTestMessage2' ),
-				'<messageProviderTestMessage2>',
-				'Fetched message from mediaWiki context.'
-			);
-		}
+	QUnit.test( 'getMessage(): Use message getter', function( assert ) {
+		var messageProvider = new util.MessageProvider( {
+				messageGetter: mockMessageGetter
+			} );
 
+		assert.equal(
+			messageProvider.getMessage( 'messageProviderTestMessage1' ),
+			'messageStore1',
+			'Fetched message via message getter.'
+		);
+
+		assert.strictEqual(
+			messageProvider.getMessage( 'doesNotExist' ),
+			null,
+			'Returning "null" if message cannot be found.'
+		);
+
+		messageProvider = new util.MessageProvider( {
+			defaultMessages: messages,
+			messageGetter: mockMessageGetter
+		} );
+
+		assert.equal(
+			messageProvider.getMessage( 'messageProviderTestMessage1' ),
+			'messageStore1',
+			'Fetched message via message getter while having a default message with the same key.'
+		);
+
+		assert.equal(
+			messageProvider.getMessage( 'messageProviderTestMessage2' ),
+			'message2',
+			'Returning default message if message cannot be retrieved via message getter.'
+		);
+	} );
+
+	QUnit.test( 'setDefaultMessages()', function( assert ) {
+		var messageProvider = new util.MessageProvider();
+
+		assert.strictEqual(
+			messageProvider.getMessage( 'messageProviderTestMessage1' ),
+			null,
+			'Instantiated a message provider without default messages.'
+		);
+
+		messageProvider.setDefaultMessages( messages );
+
+		assert.equal(
+			messageProvider.getMessage( 'messageProviderTestMessage1' ),
+			'message1',
+			'Returning default message after setting default messages.'
+		);
 	} );
 
 }( QUnit, util ) );
