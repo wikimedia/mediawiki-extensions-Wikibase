@@ -162,7 +162,7 @@ return call_user_func( function() {
 
 		'util.Notifier.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'lib/util.Notifier.tests.js',
+				'util/util.Notifier.tests.js',
 			),
 			'dependencies' => array(
 				'util.Notifier',
