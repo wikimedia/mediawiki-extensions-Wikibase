@@ -91,6 +91,8 @@ return call_user_func( function() {
 				'formatters/ApiBasedValueFormatter.js',
 			),
 			'dependencies' => array(
+				'mediawiki.api',
+				'dataTypes',
 				'valueFormatters.ValueFormatter',
 				'valueFormatters.util',
 				'wikibase.formattersBase',
