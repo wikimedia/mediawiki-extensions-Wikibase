@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_11d29c2c",
+        "filename": "lib/resources/wikibase.dataTypes/wikibase.dataTypes.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-28T17:37:48Z",
+      "side": 1,
+      "message": "interesting extra tab!",
+      "revId": "4212c0998c18b2a80620ce35deda7f4f44c6bc3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
