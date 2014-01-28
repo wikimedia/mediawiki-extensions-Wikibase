@@ -16,6 +16,24 @@
       "revId": "8aabacbb5c4e59a0d679a902a8b27263dc336aef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_e343e613",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-28T11:23:33Z",
+      "side": 1,
+      "message": "This is the current format presented by the JS UI in wikibase / wikidata and thus the period is currently presented and should still be presented once we switch from the frontend JS formatters to the backend PHP formatters.\nWill do message docs!",
+      "parentUuid": "6ef7ef47_c3934aa5",
+      "revId": "8aabacbb5c4e59a0d679a902a8b27263dc336aef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
