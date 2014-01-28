@@ -54,6 +54,9 @@
 			"repo/maintenance/",
 			"repo/tests/phpunit/",
 			"repo/Wikibase.hooks.php"
-		]
+		],
+		"psr-0": {
+			"EasyRdf_": "contrib/easyRdf/"
+		}
 	}
 }
