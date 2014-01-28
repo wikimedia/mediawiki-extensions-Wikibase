@@ -80,9 +80,11 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 			if ( $this->dataTypeLookup !== null ) {
 				$propertyId = $snak->getPropertyId();
 				try {
-					$serialization['datatype'] = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+					$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+					$serialization['datatype'] = $dataType;
 				} catch ( PropertyNotFoundException $ex ) {
 					wfDebugLog( __CLASS__, __FUNCTION__ . ': Property not found: ' . $propertyId->getSerialization() );
+					$serialization['datatype'] = 'bad';
 					//XXX: shall we set $serialization['datatype'] = 'bad' ??
 				}
 			}
