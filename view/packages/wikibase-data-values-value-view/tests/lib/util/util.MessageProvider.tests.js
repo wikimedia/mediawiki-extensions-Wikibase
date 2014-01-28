@@ -3,26 +3,26 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( QUnit, valueview ) {
+( function( QUnit, util ) {
 	'use strict';
 
-	QUnit.module( 'jquery.valueview.MessageProvider' );
+	QUnit.module( 'util.MessageProvider' );
 
 	QUnit.test( 'Basic message management', function( assert ) {
 		var messages = {
 				'messageProviderTestMessage1': 'message1',
 				'messageProviderTestMessage2': 'message2'
 			},
-			messageProvider = new valueview.MessageProvider( messages );
+			messageProvider = new util.MessageProvider( messages );
 
 		assert.equal(
 			messageProvider.getMessage( 'messageProviderTestMessage2' ),
 			'message2',
-			'Fetched message out of mediaWiki context.'
+			'Fetched default message.'
 		);
 
-		if( typeof mediaWiki !== 'undefined' && mediaWiki.msg ) {
-			messageProvider = new jQuery.valueview.MessageProvider( messages, mediaWiki );
+		if( mediaWiki !== undefined && mediaWiki.msg ) {
+			messageProvider = new util.MessageProvider( messages, mediaWiki.msg );
 
 			assert.equal(
 				messageProvider.getMessage( 'messageProviderTestMessage2' ),
@@ -33,4 +33,4 @@
 
 	} );
 
-}( QUnit, jQuery.valueview ) );
+}( QUnit, util ) );

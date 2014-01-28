@@ -40,7 +40,7 @@
 			/**
 			 * @param {time.Time|null} currentRawValue
 			 * @param {jQuery.valueview.ViewState} viewState
-			 * @param {jQuery.valueview.MessageProvider} messageProvider
+			 * @param {util.MessageProvider} messageProvider
 			 */
 			domBuilder: function( currentRawValue, viewState, messageProvider ) {
 				var $node = $( '<span/>' );

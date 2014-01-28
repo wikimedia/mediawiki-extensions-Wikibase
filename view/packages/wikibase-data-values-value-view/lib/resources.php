@@ -193,6 +193,12 @@ return call_user_func( function() {
 		),
 
 
+		'util.MessageProvider' => $moduleTemplate + array(
+			'scripts' => array(
+				'util/util.MessageProvider.js',
+			),
+		),
+
 		'util.Notifier' => $moduleTemplate + array(
 			'scripts' => array(
 				'util/util.Notifier.js',

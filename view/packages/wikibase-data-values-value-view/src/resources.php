@@ -47,7 +47,7 @@ return call_user_func( function() {
 				'dataValues.DataValue',
 				'jquery',
 				'util.inherit',
-				'jquery.valueview.MessageProvider',
+				'util.MessageProvider',
 				'util.Notifier',
 			),
 		),
@@ -69,13 +69,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-			),
-		),
-
-		// TODO: Move to util.MessageProvider
-		'jquery.valueview.MessageProvider' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.valueview.MessageProvider.js',
 			),
 		),
 
