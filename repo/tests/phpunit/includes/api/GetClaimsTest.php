@@ -17,6 +17,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Api\GetClaims
@@ -86,7 +87,7 @@ class GetClaimsTest extends \ApiTestCase {
 		foreach ( $entities as $entity ) {
 			$params = array(
 				'action' => 'wbgetclaims',
-				'entity' => $entity->getId()->getSerialization(),
+				'entity' => $entity->getId()->getSerialization()
 			);
 
 			$argLists[] = array( $params, $entity->getClaims(), true );
@@ -148,7 +149,20 @@ class GetClaimsTest extends \ApiTestCase {
 		if( !$groupedByProperty ) {
 			$options->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
 		}
-		$serializerFactory = new SerializerFactory();
+
+		$dataTypeLookup = $this->getMockBuilder( 'Wikibase\Lib\PropertyInfoDataTypeLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		$serializerFactory = new SerializerFactory(
+			null,
+			$dataTypeLookup
+		);
+
 		$serializer = $serializerFactory->newSerializerForObject( $claims );
 		$serializer->setOptions( $options );
 		$expected = $serializer->getSerialized( $claims );
