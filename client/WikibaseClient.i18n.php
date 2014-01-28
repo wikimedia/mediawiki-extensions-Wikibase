@@ -2611,6 +2611,7 @@ $messages['lrc'] = array(
 	'wikibase-comment-sitelink-remove' => 'هوم پیوند زون ورداشته بیه:$1',
 	'wikibase-linkitem-input-site' => 'زون:',
 	'wikibase-linkitem-not-loggedin-title' => 'شما با بیایت وامین',
+	'wikibase-unconnectedpages-submit' => 'رو',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" کد زون معتوری نئ.',
 );
 
