@@ -113,7 +113,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.inputextender.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.inputextender.css',
+				'jquery.ui/jquery.ui.inputextender.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -129,7 +129,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.listrotator.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.listrotator.css',
+				'jquery.ui/jquery.ui.listrotator.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -147,7 +147,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.suggester.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.suggester.css',
+				'jquery.ui/jquery.ui.suggester.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -164,7 +164,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.toggler.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.toggler.css',
+				'jquery.ui/jquery.ui.toggler.css',
 			),
 			'dependencies' => array(
 				'jquery',

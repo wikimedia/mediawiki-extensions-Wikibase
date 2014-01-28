@@ -79,7 +79,7 @@ return call_user_func( function() {
 				'jquery.valueview.preview.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.valueview.preview.css',
+				'jquery.valueview.preview.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
@@ -98,7 +98,7 @@ return call_user_func( function() {
 				'jquery.valueview.valueview.js',
 			),
 			'styles' => array(
-				'themes/default/jquery.valueview.valueview.css',
+				'jquery.valueview.valueview.css',
 			),
 			'dependencies' => array(
 				'dataTypes',
