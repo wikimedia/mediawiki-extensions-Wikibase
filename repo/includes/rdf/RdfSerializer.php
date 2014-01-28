@@ -47,30 +47,17 @@ class RdfSerializer {
 	}
 
 	/**
-	 * Checks whether the necessary libraries for RDF serialization are installed.
-	 */
-	public static function isSupported() {
-		return RdfBuilder::isSupported();
-	}
-
-	/**
 	 * Returns an EasyRdf_Format object for the given format name.
 	 * The name may be a MIME type or a file extension (or a format URI
 	 * or canonical name).
 	 *
-	 * If no format is found for $name, or EasyRdf is not installed,
-	 * this method returns null.
+	 * If no format is found for $name, this method returns null.
 	 *
 	 * @param string $name the name (file extension, mime type) of the desired format.
 	 *
 	 * @return EasyRdf_Format|null the format object, or null if not found.
 	 */
 	public static function getFormat( $name ) {
-		if ( !self::isSupported() ) {
-			wfDebug( __METHOD__ . ": EasyRdf not found\n" );
-			return null;
-		}
-
 		try {
 			$format = EasyRdf_Format::getFormat( $name );
 			return $format;

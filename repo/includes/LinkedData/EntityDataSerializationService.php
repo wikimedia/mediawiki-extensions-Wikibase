@@ -308,31 +308,29 @@ class EntityDataSerializationService {
 			$this->fileExtensions[ $ext ] = $name;
 		}
 
-		if ( RdfSerializer::isSupported() ) {
-			$formats = EasyRdf_Format::getFormats();
+		$formats = EasyRdf_Format::getFormats();
 
-			/* @var EasyRdf_Format $format */
-			foreach ( $formats as $format ) {
-				$name = $format->getName();
+		/* @var EasyRdf_Format $format */
+		foreach ( $formats as $format ) {
+			$name = $format->getName();
 
-				// check whitelist, and don't override API formats
-				if ( ( $this->formatWhiteList !== null
-						&& !in_array( $name, $this->formatWhiteList ) )
-					|| in_array( $name, $this->mimeTypes )
-					|| in_array( $name, $this->fileExtensions )) {
-					continue;
-				}
+			// check whitelist, and don't override API formats
+			if ( ( $this->formatWhiteList !== null
+					&& !in_array( $name, $this->formatWhiteList ) )
+				|| in_array( $name, $this->mimeTypes )
+				|| in_array( $name, $this->fileExtensions )) {
+				continue;
+			}
 
-				// use all mime types. to improve content negotiation
-				foreach ( array_keys( $format->getMimeTypes() ) as $mime ) {
-					$this->mimeTypes[ $mime ] = $name;
-				}
+			// use all mime types. to improve content negotiation
+			foreach ( array_keys( $format->getMimeTypes() ) as $mime ) {
+				$this->mimeTypes[ $mime ] = $name;
+			}
 
-				// use only one file extension, to keep purging simple
-				if ( $format->getExtensions() && $format->getDefaultExtension() ) {
-					$ext = $format->getDefaultExtension();
-					$this->fileExtensions[ $ext ] = $name;
-				}
+			// use only one file extension, to keep purging simple
+			if ( $format->getExtensions() && $format->getDefaultExtension() ) {
+				$ext = $format->getDefaultExtension();
+				$this->fileExtensions[ $ext ] = $name;
 			}
 		}
 	}
@@ -575,13 +573,5 @@ class EntityDataSerializationService {
 		$printer->profileOut();
 
 		return $data;
-	}
-
-	/**
-	 * Returns true iff RDF output is supported.
-	 * @return bool
-	 */
-	public function isRdfSupported() {
-		return RdfSerializer::isSupported();
 	}
 }

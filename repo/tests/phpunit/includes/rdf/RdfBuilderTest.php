@@ -29,14 +29,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
-	public function setUp() {
-		parent::setUp();
-
-		if ( !RdfBuilder::isSupported() ) {
-			$this->markTestSkipped( "RDF library not found" );
-		}
-	}
-
 	/**
 	 * @return Entity[]
 	 */
@@ -130,11 +122,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		if ( !empty( $graphs ) ) {
 			return $graphs;
-		}
-
-		if ( !RdfBuilder::isSupported() ) {
-			// test will be skipped anyway
-			return array();
 		}
 
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object

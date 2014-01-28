@@ -415,12 +415,4 @@ class EntityDataRequestHandler {
 
 		// exit normally here, keeping all levels of output buffering.
 	}
-
-	/**
-	 * Returns true iff RDF output is supported.
-	 * @return bool
-	 */
-	public function isRdfSupported() {
-		return $this->serializationService->isRdfSupported();
-	}
 }

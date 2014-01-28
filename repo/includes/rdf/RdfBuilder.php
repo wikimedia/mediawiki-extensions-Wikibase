@@ -94,14 +94,6 @@ class RdfBuilder {
 	}
 
 	/**
-	 * Checks whether the necessary libraries for RDF serialization are installed.
-	 */
-	public static function isSupported() {
-		// check that the submodule is present
-		return class_exists( 'EasyRdf_Graph' );
-	}
-
-	/**
 	 * Returns the builder's graph
 	 *
 	 * @return EasyRdf_Graph

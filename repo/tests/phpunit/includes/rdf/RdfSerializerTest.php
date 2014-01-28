@@ -28,14 +28,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		'turtle',
 	);
 
-	public function setUp() {
-		parent::setUp();
-
-		if ( !RdfSerializer::isSupported() ) {
-			$this->markTestSkipped( "RDF library not found" );
-		}
-	}
-
 	/**
 	 * @return EntityRevision[]
 	 */
