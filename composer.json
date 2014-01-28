@@ -35,7 +35,8 @@
 		"data-values/javascript": "0.*,>=0.1.1.1",
 		"data-values/value-view": "0.*,>=0.1.1",
 		"wikibase/data-model": "0.6.*",
-        "diff/diff": ">=0.9"
+        "diff/diff": ">=0.9",
+				"wikibase/easyrdf_lite": "*"
     },
 	"autoload": {
 		"files" : [
@@ -54,9 +55,6 @@
 			"repo/maintenance/",
 			"repo/tests/phpunit/",
 			"repo/Wikibase.hooks.php"
-		],
-		"psr-0": {
-			"EasyRdf_": "contrib/easyRdf/"
-		}
+		]
 	}
 }
