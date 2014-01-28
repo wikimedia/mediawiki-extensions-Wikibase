@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_c3934aa5",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-01-28T11:19:11Z",
+      "side": 1,
+      "message": "* Message documentation is missing for all added strings.\n* What is the period for?",
+      "revId": "8aabacbb5c4e59a0d679a902a8b27263dc336aef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
