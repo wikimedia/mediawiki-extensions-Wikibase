@@ -11,7 +11,7 @@ return call_user_func( function() {
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => $resourceExtPathParts[1],
+		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
 	$mwVpResources = array(
