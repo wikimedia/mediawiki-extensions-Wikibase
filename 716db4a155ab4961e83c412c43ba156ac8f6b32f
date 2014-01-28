@@ -34,6 +34,24 @@
       "revId": "716db4a155ab4961e83c412c43ba156ac8f6b32f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_0347f223",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-28T11:23:31Z",
+      "side": 1,
+      "message": "What would JS do?",
+      "parentUuid": "6ef7ef47_6338f69b",
+      "revId": "716db4a155ab4961e83c412c43ba156ac8f6b32f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
