@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_c3f46abc",
+        "filename": "repo/config/Wikibase.experimental.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-28T11:49:27Z",
+      "side": 1,
+      "message": "probably dont need so many tabs here!",
+      "revId": "9d599fc2255dadb1cd7776567d8dc4d2b879a73d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_43b85ae2",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-28T11:49:27Z",
+      "side": 1,
+      "message": "You should add a use for EntityContent as you use it below in saveEntity",
+      "revId": "9d599fc2255dadb1cd7776567d8dc4d2b879a73d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_83be62d0",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-28T11:49:27Z",
+      "side": 1,
+      "message": "WikibaseRepo::getDefaultInstance()-\u003egetEntityIdFormatter() no longer exists.\nPlease just use $id-\u003egetSerialization()",
+      "revId": "9d599fc2255dadb1cd7776567d8dc4d2b879a73d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
