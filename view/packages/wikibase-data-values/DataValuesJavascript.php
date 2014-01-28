@@ -51,7 +51,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/test',
-		'remoteExtPath' => $resourceExtPathParts[1] . '/tests',
+		'remoteExtPath' => $remoteExtPathParts[1] . '/tests',
 	);
 
 	$testModuleTemplates = array(
