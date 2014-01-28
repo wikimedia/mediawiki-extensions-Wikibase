@@ -129,6 +129,10 @@ return call_user_func( function() {
 				'wikibase',
 				'dataTypes',
 				'mw.config.values.wbDataTypes',
+				'mw.ext.valueView',
+				'jquery.valueview.experts',
+				'jquery.valueview.experts.urltype',
+				'jquery.valueview.experts.commonsmediatype',
 			),
 		),
 
