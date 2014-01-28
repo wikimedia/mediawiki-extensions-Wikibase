@@ -1,33 +1,81 @@
 # ValueView
 
-ValueView introduces the jQuery.ui.widget based front-end component jquery.valueview which
-allows to display and edit data values defined by the DataValues library.
+ValueView introduces the <code>jQuery.valueview</code> widget which may be used to display and edit data values (DataValue objects defined in the DataValues library and supported via the DataValuesJavaScript package). The valueview widget and its resources may be extended to support custom custom data value implementations.
 
 ## Components
 
-When loading the jquery.valueview resource loader definition, the following components
-introduced by this extension will be available:
+### jQuery.valueview (jQuery.valueview.valueview)
 
-### jquery.valueview
+<code>jQuery.valueview.valueview</code> may be used to display and edit data values. It can be instantiated via the widget's bridge <code>jQuery.valueview</code>.
 
-Widget for displaying and editing data values.
+### jQuery.valueview.Expert
 
-### mediaWiki.ext.valueView
+Experts are widgets that deal with data values. An expert may provide the functionality to display and/or edit a specific data value type or data values suitable for a certain data type. <code>jQuery.valueview.Expert</code> is the base constructor for such experts.
 
-Object representing the "ValueView" MediaWiki extension.
-When loaded, this will hook ''jQuery.valueview'' up to some of its basic
-formatters by overwriting jQuery.valueview.valueview.prototype.options.expertProvider
+### jQuery.valueview.BifidExpert
 
+<code>jQuery.valueview.BifidExpert</code> is an abstract definition of an expert whose responsibilities are shared by two experts - one expert for edit and one for view mode.
 
-### jquery.valueview
+### jQuery.valueview.ExpertFactory
 
-@see resources/jquery.valueview/README
+Experts are managed by <code>jQuery.valueview.ExpertFactory</code> instance which provides its experts to <code>jQuery.valueview</code>.
 
-### Dependencies
+### jQuery.valueview.ViewState
 
-See ValueView.resources.mw.php for dependencies of this library. These dependencies are
-shipped as part of the MediaWiki extension while the core jQuery.valueview component
-can be found under resources/jQuery.valueview.
+<code>jQuery.valueview.ViewState</code> links experts and <code>jQuery.valueview</code> in form of a facade that allows experts to observe certain aspects of <code>jQuery.valueview</code>.
+
+## Usage
+
+When using <code>jQuery.valueview</code> for handling a data value of some sort, a <code>jQuery.valueview.ExpertFactory</code> with knowledge about an expert dedicated to the used data value type is required and can be set up as follows:
+
+```javascript
+var dv = dataValues;
+var vv = jQuery.valueview;
+var experts = new vv.ExpertFactory();
+
+// Consider this a data value using the "string" data value type internally:
+var urlDataType = dataTypes.getDataType( 'url' );
+
+experts.registerExpert( dv.StringValue, vv.experts.StringValue );
+
+console.log(
+  experts.getExpert( new dv.StringValue( 'foo' ) ) === experts.getExpert( urlDataType )
+);
+// true because "url" data type's data value type is "string"; The string expert will be used as fallback.
+
+experts.registerExpert( urlDataType, vv.experts.UrlType );
+
+console.log(
+  experts.getExpert( new dv.StringValue( 'foo' ) ) === experts.getExpert( urlDataType )
+);
+// false because we now have a dedicated expert registered for the "url" data type.
+```
+
+The <code>jQuery.valueview.ExpertFactory</code> can now be injected into a new <code>jQuery.valueview</code> which will then be able to present string data values.
+
+```javascript
+var $subject = $( '<div/>' ).appendTo( $( 'body' ).empty() );
+
+$subject.valueview( {
+  expertProvider: experts,
+  value: new dv.StringValue( 'text' )
+} );
+
+var valueView = $subject.data( 'valueview' );
+```
+
+Having created a <code>jQuery.valueview</code> displaying *text*, <code>valueView.\<memberFn\></code>
+will now allow invoking member functions. For example:
+* Emptying the view: <code>valueView.value( null );</code>
+* Allowing the user to edit the value: <code>valueView.startEditing();</code>
+* Stopping the user from editing the value: <code>valueView.stopEditing();</code>
+* Returning the current value: <code>valueView.value();</code>
+
+Setting the view to a data value it cannot handle because of lacking a suitable expert will result in a proper error notification being displayed. Calling <code>.value()</code> will still return the value but the user can neither see nor edit the value.
+
+## Running as MediaWiki extension
+
+<code>mediaWiki.ext.valueView</code> may be used to initialize ValueView as MediaWiki extension. Loading <code>mediaWiki.ext.valueView</code> will initialize and fill a <code>jQuery.valueview.ExpertFactory</code> which is issued to <code>jQuery.valueview</code> as default expert provider. Consequently, no custom experts for basic data values and data types need to be registered and <code>jQuery.valueview</code> may be used without passing a custom <code>jQuery.ExpertFactory</code>.
 
 ## Release notes
 

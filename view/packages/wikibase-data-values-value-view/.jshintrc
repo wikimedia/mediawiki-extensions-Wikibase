@@ -29,9 +29,11 @@
 	// Globals
 	"predef": [
 		"dataValues",
+		"globeCoordinate",
 		"jQuery",
 		"mediaWiki",
 		"QUnit",
+		"time",
 		"util"
 	]
 }

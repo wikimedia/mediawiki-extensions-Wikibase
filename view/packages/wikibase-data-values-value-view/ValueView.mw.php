@@ -1,10 +1,10 @@
 <?php
-
 /**
  * MediaWiki setup for the "ValueView" extension.
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -18,7 +18,8 @@ $wgExtensionCredits['datavalues'][] = array(
 	'name' => 'ValueView',
 	'version' => VALUEVIEW_VERSION,
 	'author' => array(
-		'[https://www.mediawiki.org/wiki/User:Danwe Daniel Werner]'
+		'[https://www.mediawiki.org/wiki/User:Danwe Daniel Werner]',
+		'[http://www.snater.com H. Snater]',
 	),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:ValueView',
 	'descriptionmsg' => 'valueview-desc',
@@ -27,7 +28,7 @@ $wgExtensionCredits['datavalues'][] = array(
 $wgExtensionMessagesFiles['ValueView'] = __DIR__ . '/ValueView.i18n.php';
 
 /**
- * Hook for registering QUnit test cases.
+ * Register QUnit test cases.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
  * @since 0.1
  *
@@ -35,23 +36,21 @@ $wgExtensionMessagesFiles['ValueView'] = __DIR__ . '/ValueView.i18n.php';
  * @param \ResourceLoader &$resourceLoader
  * @return boolean
  */
-$wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \ResourceLoader &$resourceLoader ) {
-	// Register jQuery.valueview QUnit tests. Take the predefined test definitions and make them
-	// suitable for registration with MediaWiki's resource loader.
-	$ownModules = include( __DIR__ . '/ValueView.tests.qunit.php' );
-	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
-	$ownModulesTemplate = array(
-		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  $remoteExtPathParts[1],
+$wgHooks['ResourceLoaderTestModules'][] = function(
+	array &$testModules,
+	\ResourceLoader &$resourceLoader
+) {
+	$testModules['qunit'] = array_merge(
+		$testModules['qunit'],
+		include( __DIR__ . '/tests/lib/resources.php' ),
+		include( __DIR__ . '/tests/src/resources.php' )
 	);
-	foreach( $ownModules as $ownModuleName => $ownModule ) {
-		$testModules['qunit'][ $ownModuleName ] = $ownModule + $ownModulesTemplate;
-	}
 	return true;
 };
 
-// Resource Loader module registration
+// Register Resource Loader modules:
 $wgResourceModules = array_merge(
 	$wgResourceModules,
-	include( __DIR__ . '/ValueView.resources.mw.php' )
+	include( __DIR__ . '/lib/resources.php' ),
+	include( __DIR__ . '/src/resources.php' )
 );
