@@ -159,10 +159,8 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 			$this->assertTrue( in_array( $type, $types), $type );
 		}
 
-		if ( $service->isRdfSupported() ) {
-			foreach ( self::$rdfMimeTypes as $type ) {
-				$this->assertTrue( in_array( $type, $types), $type );
-			}
+		foreach ( self::$rdfMimeTypes as $type ) {
+			$this->assertTrue( in_array( $type, $types), $type );
 		}
 
 		foreach ( self::$badMimeTypes as $type ) {
@@ -179,10 +177,8 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 			$this->assertTrue( in_array( $type, $types), $type );
 		}
 
-		if ( $service->isRdfSupported() ) {
-			foreach ( self::$rdfExtensions as $type ) {
-				$this->assertTrue( in_array( $type, $types), $type );
-			}
+		foreach ( self::$rdfExtensions as $type ) {
+			$this->assertTrue( in_array( $type, $types), $type );
 		}
 
 		foreach ( self::$badExtensions as $type ) {
@@ -199,10 +195,8 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 			$this->assertTrue( in_array( $type, $types), $type );
 		}
 
-		if ( $service->isRdfSupported() ) {
-			foreach ( self::$rdfFormats as $type ) {
-				$this->assertTrue( in_array( $type, $types), $type );
-			}
+		foreach ( self::$rdfFormats as $type ) {
+			$this->assertTrue( in_array( $type, $types), $type );
 		}
 
 		foreach ( self::$badFormats as $type ) {
