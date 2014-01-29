@@ -125,6 +125,8 @@ return call_user_func( function() {
 				'formatters/wikibase.formatters.api.js',
 			),
 			'dependencies' => array(
+				'mediawiki.api',
+				'dataTypes',
 				'wikibase',
 			),
 		),
