@@ -88,19 +88,19 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 * Renamed $.nativeEventHandler to $.NativeEventHandler
 * Moved $.valueview.MockViewState to $.valueview.tests.MockViewState
 * Corrected several MediaWiki resource loader module names (and some file names):
-  * $.fn.focusAt -> $.focusAt
-	* $.valueview.experts.commonsmediatype -> $.valueview.experts.CommonsMediaType
-	* $.valueview.experts.emptyvalue -> $.valueview.experts.EmptyValue
-	* $.valueview.experts.globecoordinateinput -> $.valueview.experts.GlobeCoordinateInput
-	* $.valueview.experts.globecoordinatevalue -> $.valueview.experts.GlobeCoordinateValue
-	* $.valueview.experts.mock -> $.valueview.experts.Mock
-  * $.valueview.experts.quantitytype -> $.valueview.experts.QuantityType
-  * $.valueview.experts.staticdom -> $.valueview.experts.StaticDom
-  * $.valueview.experts.stringvalue -> $.valueview.experts.StringValue
-  * $.valueview.experts.timeinput -> $.valueview.experts.TimeInput
-	* $.valueview.experts.timevalue -> $.valueview.experts.TimeValue
-	* $.valueview.experts.unsupportedvalue -> $.valueview.experts.UnsupportedValue
-	* $.valueview.experts.urltype -> $.valueview.experts.UrlType
+ * $.fn.focusAt -> $.focusAt
+ * $.valueview.experts.commonsmediatype -> $.valueview.experts.CommonsMediaType
+ * $.valueview.experts.emptyvalue -> $.valueview.experts.EmptyValue
+ * $.valueview.experts.globecoordinateinput -> $.valueview.experts.GlobeCoordinateInput
+ * $.valueview.experts.globecoordinatevalue -> $.valueview.experts.GlobeCoordinateValue
+ * $.valueview.experts.mock -> $.valueview.experts.Mock
+ * $.valueview.experts.quantitytype -> $.valueview.experts.QuantityType
+ * $.valueview.experts.staticdom -> $.valueview.experts.StaticDom
+ * $.valueview.experts.stringvalue -> $.valueview.experts.StringValue
+ * $.valueview.experts.timeinput -> $.valueview.experts.TimeInput
+ * $.valueview.experts.timevalue -> $.valueview.experts.TimeValue
+ * $.valueview.experts.unsupportedvalue -> $.valueview.experts.UnsupportedValue
+ * $.valueview.experts.urltype -> $.valueview.experts.UrlType
 * Added $.valueview.experts.SuggestedStringValue as a separate resource loader module
 * $.valueview.experts.CommonsMediaType does not format on its own, but relies on value formatters.
 
