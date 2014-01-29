@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimAggregate;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Tests for ClaimAggregate implementing classes.
@@ -21,10 +22,10 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 		$claims = array();
 
 		$claims[] = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak(
-			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
+			new EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
 		) );
 		$claims[] = new \Wikibase\Claim( new \Wikibase\PropertyValueSnak(
-			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 23 ),
+			new EntityId( \Wikibase\Property::ENTITY_TYPE, 23 ),
 			new \DataValues\StringValue( 'ohi' )
 		) );
 
@@ -67,7 +68,7 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 		$unmodifiedClaims = clone $obtainedClaims;
 
 		$qualifiers = new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak(
-			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 10 ),
+			new EntityId( \Wikibase\Property::ENTITY_TYPE, 10 ),
 			new \DataValues\StringValue( 'ohi' )
 		) ) );
 
