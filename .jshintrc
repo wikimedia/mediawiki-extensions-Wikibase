@@ -34,8 +34,10 @@
 		"wikibase",
 		"dataValues",
 		"dataTypes",
+		"util",
 		"valueFormatters",
 		"valueParsers",
+		"globeCoordinate",
 		"time"
 	]
 }
