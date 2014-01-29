@@ -157,6 +157,7 @@ return call_user_func( function() {
 				'dataValues.values',
 				'mw.ext.valueFormatters',
 				'wikibase.ApiBasedValueFormatter',
+				'wikibase.datamodel',
 				'wikibase.dataTypes',
 			),
 		),
@@ -869,7 +870,6 @@ return call_user_func( function() {
 				'jquery.eachchange',
 				'jquery.inputautoexpand',
 				'wikibase.utilities',
-				'wikibase.store.FetchedContent'
 			),
 			'messages' => array(
 				'wikibase-entity-item',
