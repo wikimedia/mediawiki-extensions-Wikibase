@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_2b6197d0",
+        "filename": "lib/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-29T22:14:59Z",
+      "side": 1,
+      "message": "You did not update the docs here.\n\nWhat is this outputType?",
+      "revId": "3425b8a943baf016d48504ee50413d69a4bfb176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_eb5a8f21",
+        "filename": "lib/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-29T22:14:59Z",
+      "side": 1,
+      "message": "If you put the two arguments passed to the first function on their own lines, this is a lot easier to read",
+      "revId": "3425b8a943baf016d48504ee50413d69a4bfb176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
