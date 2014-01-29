@@ -63,7 +63,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ReferenceList $array
+	 * @param ReferenceList $array
 	 */
 	public function testHasReference( ReferenceList $array ) {
 		/**
@@ -81,7 +81,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	public function testHasReferenceMore() {
 		$list = new ReferenceList();
 
-		$reference = new Reference( new \Wikibase\SnakList( array( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$reference = new Reference( new SnakList( array( new PropertyNoValueSnak( 42 ) ) ) );
 		$sameReference = unserialize( serialize( $reference ) );
 
 		$list->addReference( $reference );
@@ -95,7 +95,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ReferenceList $array
+	 * @param ReferenceList $array
 	 */
 	public function testRemoveReference( ReferenceList $array ) {
 		$elementCount = count( $array );
@@ -124,7 +124,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ReferenceList $array
+	 * @param ReferenceList $array
 	 */
 	public function testAddReference( ReferenceList $array ) {
 		// Append object to the end:
@@ -183,7 +183,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $array, 'toArray should return array' );
 
 		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
-			$copy = \Wikibase\ReferenceList::newFromArray( $data );
+			$copy = ReferenceList::newFromArray( $data );
 
 			$this->assertInstanceOf( '\Wikibase\References', $copy, 'newFromArray should return object implementing Snak' );
 
@@ -194,7 +194,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ReferenceList $array
+	 * @param ReferenceList $array
 	 */
 	public function testEquals( ReferenceList $array ) {
 		$this->assertTrue( $array->equals( $array ) );
@@ -204,7 +204,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ReferenceList $array
+	 * @param ReferenceList $array
 	 */
 	public function testGetHash( ReferenceList $array ) {
 		$this->assertInternalType( 'string', $array->getValueHash() );

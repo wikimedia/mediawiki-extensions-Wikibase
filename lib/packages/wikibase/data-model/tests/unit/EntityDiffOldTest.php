@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\DataModel\Entity\EntityDiff
@@ -19,11 +21,11 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 	private static function newEntity ( $entityType ) {
 		switch ( $entityType ) {
-			case \Wikibase\Item::ENTITY_TYPE:
-				$entity = \Wikibase\Item::newEmpty();
+			case Item::ENTITY_TYPE:
+				$entity = Item::newEmpty();
 				break;
-			case \Wikibase\Property::ENTITY_TYPE:
-				$entity = \Wikibase\Property::newEmpty();
+			case Property::ENTITY_TYPE:
+				$entity = Property::newEmpty();
 				break;
 			default:
 				throw new \RuntimeException( "unknown entity type: $entityType" );
@@ -143,7 +145,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$cases = array();
 
 		// #0: adding a label where there was none before
-		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( Item::ENTITY_TYPE );
 		$current = $base;
 
 		$new = $base->copy();
@@ -157,7 +159,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		// #1: adding an alias where there was none before
-		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( Item::ENTITY_TYPE );
 		$current = $base;
 
 		$new = $base->copy();
@@ -171,7 +173,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		// #2: adding an alias where there already was one before
-		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( Item::ENTITY_TYPE );
 		$base->addAliases( 'en', array( 'Foo' ) );
 		$current = $base;
 
@@ -186,7 +188,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		// #3: adding an alias where there already was one in another language
-		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( Item::ENTITY_TYPE );
 		$base->addAliases( 'en', array( 'Foo' ) );
 		$current = $base;
 

@@ -2,7 +2,14 @@
 
 namespace Wikibase\Test;
 
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Entity\EntityDiff
@@ -23,19 +30,19 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 		$fields = array( 'aliases', 'label', 'description', 'claim' );
 
 		foreach ( $fields as $field ) {
-			$argLists[] = array( array( $field => new \Diff\Diff( array() ) ), true );
+			$argLists[] = array( array( $field => new Diff( array() ) ), true );
 		}
 
 		$diffOps = array();
 
 		foreach ( $fields as $field ) {
-			$diffOps[$field] = new \Diff\Diff( array() );
+			$diffOps[$field] = new Diff( array() );
 		}
 
 		$argLists[] = array( $diffOps, true );
 
 		foreach ( $fields as $field ) {
-			$argLists[] = array( array( $field => new \Diff\Diff( array( new \Diff\DiffOpAdd( 42 ) ) ) ), false );
+			$argLists[] = array( array( $field => new Diff( array( new DiffOpAdd( 42 ) ) ) ), false );
 		}
 
 		return $argLists;
@@ -48,7 +55,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 	 * @param boolean $isEmpty
 	 */
 	public function testIsEmpty( array $diffOps, $isEmpty ) {
-		$diff = new \Wikibase\EntityDiff( $diffOps );
+		$diff = new EntityDiff( $diffOps );
 		$this->assertEquals( $isEmpty, $diff->isEmpty() );
 	}
 
@@ -56,36 +63,36 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 		$diffs = array();
 
 		$diffOps = array(
-			'label' => new \Diff\Diff( array(
-				'en' => new \Diff\DiffOpAdd( 'foobar' ),
-				'de' => new \Diff\DiffOpRemove( 'onoez' ),
-				'nl' => new \Diff\DiffOpChange( 'foo', 'bar' ),
+			'label' => new Diff( array(
+				'en' => new DiffOpAdd( 'foobar' ),
+				'de' => new DiffOpRemove( 'onoez' ),
+				'nl' => new DiffOpChange( 'foo', 'bar' ),
 			), true )
 		);
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$diffOps['description'] = new \Diff\Diff( array(
-			'en' => new \Diff\DiffOpAdd( 'foobar' ),
-			'de' => new \Diff\DiffOpRemove( 'onoez' ),
-			'nl' => new \Diff\DiffOpChange( 'foo', 'bar' ),
+		$diffOps['description'] = new Diff( array(
+			'en' => new DiffOpAdd( 'foobar' ),
+			'de' => new DiffOpRemove( 'onoez' ),
+			'nl' => new DiffOpChange( 'foo', 'bar' ),
 		), true );
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$diffOps['aliases'] = new \Diff\Diff( array(
-			'en' => new \Diff\Diff( array( new \Diff\DiffOpAdd( 'foobar' ), new \Diff\DiffOpRemove( 'onoez' ) ), false ),
-			'de' => new \Diff\Diff( array( new \Diff\DiffOpRemove( 'foo' ) ), false ),
+		$diffOps['aliases'] = new Diff( array(
+			'en' => new Diff( array( new DiffOpAdd( 'foobar' ), new DiffOpRemove( 'onoez' ) ), false ),
+			'de' => new Diff( array( new DiffOpRemove( 'foo' ) ), false ),
 		), true );
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$claim = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'EntityDiffTest$foo' );
 
-		$claims = new \Wikibase\Claims( array( $claim ) );
+		$claims = new Claims( array( $claim ) );
 
-		$diffOps['claim'] = $claims->getDiff( new \Wikibase\Claims() );
+		$diffOps['claim'] = $claims->getDiff( new Claims() );
 
 		$diffs[] = new EntityDiff( $diffOps );
 
@@ -108,9 +115,9 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $diff->isAssociative() );
 
 		foreach ( $diff as $diffOp ) {
-			$this->assertTrue( $diffOp instanceof \Diff\DiffOpAdd || $diffOp instanceof \Diff\DiffOpRemove );
+			$this->assertTrue( $diffOp instanceof DiffOpAdd || $diffOp instanceof DiffOpRemove );
 
-			$claim = $diffOp instanceof \Diff\DiffOpAdd ? $diffOp->getNewValue() : $diffOp->getOldValue();
+			$claim = $diffOp instanceof DiffOpAdd ? $diffOp->getNewValue() : $diffOp->getOldValue();
 			$this->assertInstanceOf( '\Wikibase\Claim', $claim );
 		}
 	}

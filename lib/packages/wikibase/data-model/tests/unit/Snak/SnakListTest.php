@@ -5,13 +5,14 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\SnakList
+ * @covers Wikibase\DataModel\Snak\SnakList
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -30,20 +31,20 @@ class SnakListTest extends HashArrayTest {
 	 * @see GenericArrayObjectTest::elementInstancesProvider
 	 */
 	public function elementInstancesProvider() {
-		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$id42 = new PropertyId( 'P42' );
 
 		$argLists = array();
 
 		$argLists[] = array( array( new PropertyNoValueSnak( $id42 ) ) );
-		$argLists[] = array( array( new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 9001 ) ) ) );
+		$argLists[] = array( array( new PropertyNoValueSnak( new PropertyId( 'P9001' ) ) ) );
 		$argLists[] = array( array( new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ) );
 
 		return $argLists;
 	}
 
 	public function constructorProvider() {
-		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
-		$id9001 = new EntityId( Property::ENTITY_TYPE, 9001 );
+		$id42 = new PropertyId( 'P42' );
+		$id9001 = new PropertyId( 'P9001' );
 
 		return array(
 			array(),
@@ -108,7 +109,7 @@ class SnakListTest extends HashArrayTest {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) );
+		$element = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
 
 		$array->removeSnak( $element );
 		$array->removeSnakHash( $element->getHash() );
@@ -164,9 +165,9 @@ class SnakListTest extends HashArrayTest {
 	public function orderByPropertyProvider() {
 		$class = $this->getInstanceClass();
 
-		$id1 = new EntityId( Property::ENTITY_TYPE, 1 );
-		$id2 = new EntityId( Property::ENTITY_TYPE, 2 );
-		$id3 = new EntityId( Property::ENTITY_TYPE, 3 );
+		$id1 = new PropertyId( 'P1' );
+		$id2 = new PropertyId( 'P2' );
+		$id3 = new PropertyId( 'P3' );
 
 		/**
 		 * List of test data containing snaks to initialize SnakList objects. The first list of

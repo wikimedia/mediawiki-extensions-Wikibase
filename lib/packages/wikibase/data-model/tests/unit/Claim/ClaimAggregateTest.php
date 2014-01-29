@@ -2,8 +2,16 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimAggregate;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Tests for ClaimAggregate implementing classes.
@@ -20,17 +28,17 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 	public function ClaimTestProvider() {
 		$claims = array();
 
-		$claims[] = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak(
-			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
+		$claims[] = new Claim( new PropertyNoValueSnak(
+			new PropertyId( 'P42' )
 		) );
-		$claims[] = new \Wikibase\Claim( new \Wikibase\PropertyValueSnak(
-			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 23 ),
-			new \DataValues\StringValue( 'ohi' )
+		$claims[] = new Claim( new PropertyValueSnak(
+			new PropertyId( 'P23' ),
+			new StringValue( 'ohi' )
 		) );
 
 		$aggregates = array();
 
-		$aggregates[] = \Wikibase\Property::newEmpty();
+		$aggregates[] = Property::newEmpty();
 
 		$argLists = array();
 
@@ -59,16 +67,16 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $claims
 	 */
 	public function testAllOfTheStuff( ClaimAggregate $aggregate, array $claims ) {
-		$obtainedClaims = new \Wikibase\Claims( $aggregate->getClaims() );
+		$obtainedClaims = new Claims( $aggregate->getClaims() );
 		$this->assertInstanceOf( '\Wikibase\Claims', $obtainedClaims );
 
 		// Below code tests if the Claims in the ClaimAggregate indeed do not get modified.
 
 		$unmodifiedClaims = clone $obtainedClaims;
 
-		$qualifiers = new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak(
-			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 10 ),
-			new \DataValues\StringValue( 'ohi' )
+		$qualifiers = new SnakList( array( new PropertyValueSnak(
+			new PropertyId( 'P10' ),
+			new StringValue( 'ohi' )
 		) ) );
 
 		/**
@@ -82,7 +90,7 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 			$obtainedClaims->addClaim( $claim );
 		}
 
-		$freshlyObtained = new \Wikibase\Claims( $aggregate->getClaims() );
+		$freshlyObtained = new Claims( $aggregate->getClaims() );
 
 		$this->assertEquals(
 			iterator_to_array( $unmodifiedClaims ),

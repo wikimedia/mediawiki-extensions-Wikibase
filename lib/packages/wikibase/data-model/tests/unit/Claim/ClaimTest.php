@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -29,7 +30,7 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
-		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$id42 = new PropertyId( 'P42' );
 
 		$argLists[] = array( new PropertyNoValueSnak( $id42 ) );
 
@@ -39,8 +40,8 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 			new PropertyNoValueSnak( $id42 ),
 			new SnakList( array(
 				new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-				new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
-				new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 2 ) )
+				new PropertySomeValueSnak( new PropertyId( 'P1' ) ),
+				new PropertyNoValueSnak( new PropertyId( 'P2' ) )
 			) )
 		);
 
@@ -61,8 +62,8 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorProvider
 	 *
-	 * @param \Wikibase\Snak $snak
-	 * @param null|\Wikibase\Snaks $qualifiers
+	 * @param Snak $snak
+	 * @param null|Snaks $qualifiers
 	 */
 	public function testConstructor( Snak $snak, Snaks $qualifiers = null ) {
 		$claim = new Claim( $snak, $qualifiers );
@@ -83,15 +84,15 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetMainSnak() {
-		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$id42 = new PropertyId( 'P42' );
 
 		$claim = new Claim( new PropertyNoValueSnak( $id42 ) );
 
-		$snak = new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 41 ) );
+		$snak = new PropertyNoValueSnak( new PropertyId( 'P41' ) );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new PropertyValueSnak( new EntityId( Property::ENTITY_TYPE, 43 ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak( new PropertyId( 'P43' ), new StringValue( 'a' ) );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
@@ -101,7 +102,7 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetQualifiers() {
-		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$id42 = new PropertyId( 'P42' );
 
 		$claim = new Claim( new PropertyNoValueSnak( $id42 ) );
 
@@ -115,8 +116,8 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$qualifiers = new SnakList( array(
 			new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 2 ) ),
-			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 3 ) )
+			new PropertySomeValueSnak( new PropertyId( 'P2' ) ),
+			new PropertyNoValueSnak( new PropertyId( 'P3' ) )
 		) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );

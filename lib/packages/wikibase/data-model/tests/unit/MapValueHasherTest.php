@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\MapValueHasher;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -27,10 +28,10 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 		$hasher = new MapValueHasher();
 
 		$map0 = array(
-			'foo' => new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
-			'bar' => new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 2 ) ),
-			42 => new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
-			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 9001 ) ),
+			'foo' => new PropertyNoValueSnak( new PropertyId( 'P1' ) ),
+			'bar' => new PropertyNoValueSnak( new PropertyId( 'P2' ) ),
+			42 => new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
+			new PropertyNoValueSnak( new PropertyId( 'P9001' ) ),
 		);
 
 		$hash = $hasher->hash( $map0 );
@@ -50,7 +51,7 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotEquals( $hash, $hasher->hash( $map2 ) );
 
 		$map3 = $map0;
-		$map3['foo'] = new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 5 ) );
+		$map3['foo'] = new PropertyNoValueSnak( new PropertyId( 'P5' ) );
 
 		$this->assertNotEquals( $hash, $hasher->hash( $map3 ) );
 	}
