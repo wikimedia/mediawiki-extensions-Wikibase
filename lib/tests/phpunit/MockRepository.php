@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;

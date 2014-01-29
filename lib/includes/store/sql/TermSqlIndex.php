@@ -8,6 +8,7 @@ use Iterator;
 use MWException;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Term lookup cache.

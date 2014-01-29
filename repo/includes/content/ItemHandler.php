@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Title;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Content handler for Wikibase items.

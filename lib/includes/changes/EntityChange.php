@@ -5,6 +5,7 @@ namespace Wikibase;
 use MWException;
 use RecentChange;
 use User;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Represents a change for an entity; to be extended by various change subtypes

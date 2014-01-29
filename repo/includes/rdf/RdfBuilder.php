@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
+use Wikibase\DataModel\Entity\EntityId;
 use EasyRdf_Graph;
 use EasyRdf_Literal;
 use EasyRdf_Namespace;

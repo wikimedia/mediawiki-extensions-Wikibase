@@ -5,6 +5,7 @@ namespace Wikibase;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Class EntityInfoBuilder implementation relying on database access.

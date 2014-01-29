@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\RepoLinker;
 
 /**

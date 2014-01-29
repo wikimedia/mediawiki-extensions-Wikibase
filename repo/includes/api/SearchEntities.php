@@ -89,7 +89,7 @@ class SearchEntities extends ApiBase {
 		$limit = $params['limit'] + $params['continue'] + 1;
 		$ids = array();
 		// Gets exact match for the search term as an id if it can be found
-		$entityId = \Wikibase\EntityId::newFromPrefixedId( $params['search'] );
+		$entityId = EntityId::newFromPrefixedId( $params['search'] );
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		if ( $entityId ) {
 			$page = $entityContentFactory->getWikiPageForId( $entityId );

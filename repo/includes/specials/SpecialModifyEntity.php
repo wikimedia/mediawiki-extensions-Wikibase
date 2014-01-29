@@ -7,7 +7,7 @@ use RuntimeException;
 use UserBlockedError;
 use UserInputException;
 use Wikibase\EditEntity;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;

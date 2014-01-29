@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Title;
 use WikiPage;
 use Revision;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Factory for EntityContent objects.
