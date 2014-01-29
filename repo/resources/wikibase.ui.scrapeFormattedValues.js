@@ -17,7 +17,8 @@
 
 	var DATA_VALUE_TYPES_TO_SCRAPE = [
 		'quantity',
-		'string'
+		'string',
+		'wikibase-entityid'
 	];
 
 	mw.hook( 'wikipage.content' ).add( function() {
