@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_3fff9a64",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-29T11:23:26Z",
+      "side": 1,
+      "message": "instead of this use please use (use Wikibase\\Item;)\nWikibase\\DataModel\\Entity\\Item",
+      "revId": "caff9d3139d0966a8fb3377b5f6b2a300f384382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_5ffa6674",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-29T11:23:26Z",
+      "side": 1,
+      "message": "newFromPrefixedId is deprecated\nplease use new ItemId( \u0027Q42\u0027 ) instead",
+      "revId": "caff9d3139d0966a8fb3377b5f6b2a300f384382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_bfd3aa04",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-29T11:23:26Z",
+      "side": 1,
+      "message": "need to add a use for ItemContent at the top of the file!",
+      "revId": "caff9d3139d0966a8fb3377b5f6b2a300f384382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
