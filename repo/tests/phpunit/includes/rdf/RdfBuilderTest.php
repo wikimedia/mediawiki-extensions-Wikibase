@@ -9,7 +9,7 @@ use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 use Wikibase\Item;
 use Wikibase\RdfBuilder;

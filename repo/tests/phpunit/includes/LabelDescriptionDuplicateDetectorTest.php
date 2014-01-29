@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Diff\Diff;
 use Diff\DiffOpChange;
 use Status;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Term;

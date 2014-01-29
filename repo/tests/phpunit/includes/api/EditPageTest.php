@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -53,7 +54,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	function testEditTextInItemNamespace() {
 		global $wgContentHandlerUseDB;
 
-		$id = new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 1234567 );
+		$id = new EntityId( \Wikibase\Item::ENTITY_TYPE, 1234567 );
 		$page = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
 
 		$text = "hallo welt";

@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
