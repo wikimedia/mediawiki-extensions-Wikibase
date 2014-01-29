@@ -81,6 +81,8 @@ return call_user_func( function() {
 				'formatters/wikibase.formatters.js',
 			),
 			'dependencies' => array(
+				'mediawiki.api',
+				'dataTypes',
 				'wikibase',
 			),
 		),
