@@ -237,6 +237,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	protected function moveObjectToEndOfPropertyGroup( $object ) {
 		$this->removeObject( $object );
 
+		/** @var PropertyId $propertyId */
 		$propertyId = $object->getPropertyId();
 		$propertyIdSerialization = $propertyId->getSerialization();
 
@@ -451,6 +452,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @throws OutOfBoundsException
 	 */
 	protected function addObjectToPropertyGroup( $object, $index = null ) {
+		/** @var PropertyId $propertyId */
 		$propertyId = $object->getPropertyId();
 		$validIndices = $this->getFlatArrayIndices( $propertyId );
 

@@ -658,6 +658,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 		}
 		else {
 			// FIXME: this only works for Item and Property
+			/** @var ItemId|PropertyId $id */
 			return array( $id->getEntityType(), $id->getNumericId() );
 		}
 	}
@@ -668,6 +669,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @since 0.3
 	 *
 	 * @param Claim $claim
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function addClaim( Claim $claim ) {
 		if ( $claim->getGuid() === null ) {

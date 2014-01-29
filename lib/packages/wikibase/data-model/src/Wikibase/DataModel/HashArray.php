@@ -356,6 +356,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 			$offsets = (array)$offsets;
 
 			foreach ( $offsets as $offset ) {
+				/** @var Hashable[] $this */
 				if ( $this[$offset]->getHash() !== $hash ) {
 					return false;
 				}

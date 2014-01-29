@@ -202,6 +202,7 @@ class Claim implements \Hashable, \Serializable {
 		$mainSnak = SnakObject::newFromArray( $data['m'] );
 		$qualifiers = SnakList::newFromArray( $data['q'] );
 
+		/** @var Claim $claim */
 		$claim = new static( $mainSnak, $qualifiers );
 		$claim->setGuid( $data['g'] );
 

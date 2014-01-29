@@ -127,6 +127,7 @@ class SiteLink {
 	 * @param string $siteId
 	 * @param string|array $data
 	 *
+	 * @throws InvalidArgumentException
 	 * @return SiteLink
 	 */
 	public static function newFromArray( $siteId, $data ) {
