@@ -21,7 +21,7 @@
 	 *  Those extensions would also require registration, this should probably be done by introducing
 	 *  a more complex format for registering an expert plus extensions to an expert factory.
 	 */
-	vv.experts.SuggestedStringValue = vv.expert( 'suggestedstringvalue', PARENT, {
+	vv.experts.SuggestedStringValue = vv.expert( 'SuggestedStringValue', PARENT, {
 		/**
 		 * @see Query.valueview.experts.StringValue._init
 		 */

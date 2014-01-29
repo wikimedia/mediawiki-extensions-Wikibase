@@ -16,7 +16,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.EmptyValue = vv.expert( 'emptyvalue', {
+	vv.experts.EmptyValue = vv.expert( 'EmptyValue', {
 		/**
 		 * Options.
 		 * @type {Object}

@@ -18,7 +18,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.experts.BifidExpert
 	 */
-	vv.experts.GlobeCoordinateValue = vv.expert( 'globecoordinatevalue', PARENT, {
+	vv.experts.GlobeCoordinateValue = vv.expert( 'GlobeCoordinateValue', PARENT, {
 		/**
 		 * @see jQuery.valueview.BifidExpert._editableExpert
 		 */

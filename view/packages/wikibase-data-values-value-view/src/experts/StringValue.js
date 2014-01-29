@@ -15,7 +15,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.StringValue = vv.expert( 'stringvalue', {
+	vv.experts.StringValue = vv.expert( 'StringValue', {
 		/**
 		 * The nodes of the input element. The input element will be used to display the value
 		 * during edit mode as well as during non-edit mode.

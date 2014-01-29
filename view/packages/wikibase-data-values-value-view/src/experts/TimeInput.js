@@ -23,7 +23,7 @@
 	 *         mediaWiki message keys since these will be picked when in MediaWiki environment and
 	 *         the mediaWiki JavaScript object has been passed to the expert constructor.
 	 */
-	vv.experts.TimeInput = vv.expert( 'timeinput', PARENT, {
+	vv.experts.TimeInput = vv.expert( 'TimeInput', PARENT, {
 
 		/**
 		 * Default options

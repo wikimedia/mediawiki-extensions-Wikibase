@@ -21,7 +21,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.GlobeCoordinateInput = vv.expert( 'globecoordinateinput', PARENT, {
+	vv.experts.GlobeCoordinateInput = vv.expert( 'GlobeCoordinateInput', PARENT, {
 		/**
 		 * Options.
 		 * @type {Object}

@@ -33,7 +33,7 @@
 	 * TODO: the "baseExpert" function is conceptually not that nice. It is required because the
 	 *  a static DOM expert doesn't need to know what kind of values it handles.
 	 */
-	vv.experts.StaticDom = vv.expert( 'staticdom', PARENT, {
+	vv.experts.StaticDom = vv.expert( 'StaticDom', PARENT, {
 		/**
 		 * Current value.
 		 * @type {*}
