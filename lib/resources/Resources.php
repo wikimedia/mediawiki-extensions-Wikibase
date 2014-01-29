@@ -166,6 +166,7 @@ return call_user_func( function() {
 				'dataValues.values',
 				'mw.ext.valueFormatters',
 				'wikibase.QuantityFormatter',
+				'wikibase.datamodel'
 			),
 		),
 
@@ -876,7 +877,6 @@ return call_user_func( function() {
 				'jquery.eachchange',
 				'jquery.inputautoexpand',
 				'wikibase.utilities',
-				'wikibase.store.FetchedContent'
 			),
 			'messages' => array(
 				'wikibase-entity-item',
