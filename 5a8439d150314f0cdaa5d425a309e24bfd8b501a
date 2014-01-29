@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_1f361ee5",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-29T08:50:43Z",
+      "side": 1,
+      "message": "Well, can this happen, or can\u0027t it happen?",
+      "revId": "5a8439d150314f0cdaa5d425a309e24bfd8b501a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
