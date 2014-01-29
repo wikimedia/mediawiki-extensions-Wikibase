@@ -26,8 +26,17 @@ return call_user_func( function() {
 				'dataTypes',
 				'dataValues.values',
 				'jquery.valueview.ExpertFactory',
-				'jquery.valueview.experts.Mock',
+				'jquery.valueview.tests.MockExpert',
 				'qunit.parameterize',
+			),
+		),
+
+		'jquery.valueview.tests.MockExpert' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview.tests.MockExpert.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.Expert',
 			),
 		),
 

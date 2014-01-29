@@ -2,6 +2,8 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
+jQuery.valueview.tests = jQuery.valueview.tests || {};
+
 ( function( vv ) {
 	'use strict';
 
@@ -16,7 +18,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.Mock = vv.expert( 'mock', PARENT, {
+	vv.tests.MockExpert = vv.expert( 'Mock', PARENT, {
 		/**
 		 * Current value.
 		 * @type {*}

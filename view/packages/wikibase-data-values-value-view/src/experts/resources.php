@@ -87,16 +87,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.experts.Mock' => $moduleTemplate + array( // mock expert for tests
-			'scripts' => array(
-				'Mock.js',
-			),
-			'dependencies' => array(
-				'jquery.valueview.experts',
-				'jquery.valueview.Expert',
-			),
-		),
-
 		'jquery.valueview.experts.QuantityType' => $moduleTemplate + array(
 			'scripts' => array(
 				'QuantityType.js',

@@ -10,7 +10,7 @@
 		dt = dataTypes,
 		vv = $.valueview,
 		ExpertFactory = vv.ExpertFactory,
-		MockExpertBase = vv.experts.Mock;
+		MockExpertBase = vv.tests.MockExpert;
 
 	/**
 	 * Returns a descriptive string about a valid expert base object (a DataType object, a
