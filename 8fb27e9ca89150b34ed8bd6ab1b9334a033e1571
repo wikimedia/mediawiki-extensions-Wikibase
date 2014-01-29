@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_7f008204",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-01-29T08:47:24Z",
+      "side": 1,
+      "message": "It\u0027s separators.",
+      "revId": "8fb27e9ca89150b34ed8bd6ab1b9334a033e1571",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
