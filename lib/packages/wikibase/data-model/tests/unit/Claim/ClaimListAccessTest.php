@@ -8,6 +8,7 @@ use Wikibase\DataModel\Claim\ClaimListAccess;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -27,10 +28,10 @@ class ClaimListAccessTest extends \PHPUnit_Framework_TestCase {
 		$claims = array();
 
 		$claims[] = new Claim( new PropertyNoValueSnak(
-			new EntityId( Property::ENTITY_TYPE, 42 )
+			new PropertyId( 'P42' )
 		) );
 		$claims[] = new Claim( new PropertyValueSnak(
-			new EntityId( Property::ENTITY_TYPE, 23 ),
+			new PropertyId( 'P23' ),
 			new StringValue( 'ohi' )
 		) );
 

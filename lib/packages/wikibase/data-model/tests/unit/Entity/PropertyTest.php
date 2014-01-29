@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Wikibase\DataModel\Entity\Property
@@ -81,7 +82,7 @@ class PropertyTest extends EntityTest {
 
 	public function testWhenIdSetWithEntityId_GetIdReturnsPropertyId() {
 		$property = Property::newFromType( 'string' );
-		$property->setId( new EntityId( 'property', 42 ) );
+		$property->setId( new PropertyId( 'P42' ) );
 
 		$this->assertHasCorrectIdType( $property );
 	}
