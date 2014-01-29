@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 
@@ -46,7 +47,7 @@ class PropertyTest extends EntityTest {
 	 *
 	 * @param array $data
 	 *
-	 * @return \Wikibase\Entity
+	 * @return Entity
 	 */
 	protected function getNewFromArray( array $data ) {
 		return Property::newFromArray( $data );

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\SnakList
+ * @covers Wikibase\DataModel\Snak\SnakList
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

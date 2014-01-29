@@ -2,7 +2,10 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Entity\EntityDiff
@@ -48,7 +51,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 	 * @param boolean $isEmpty
 	 */
 	public function testIsEmpty( array $diffOps, $isEmpty ) {
-		$diff = new \Wikibase\EntityDiff( $diffOps );
+		$diff = new EntityDiff( $diffOps );
 		$this->assertEquals( $isEmpty, $diff->isEmpty() );
 	}
 
@@ -80,12 +83,12 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$claim = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'EntityDiffTest$foo' );
 
-		$claims = new \Wikibase\Claims( array( $claim ) );
+		$claims = new Claims( array( $claim ) );
 
-		$diffOps['claim'] = $claims->getDiff( new \Wikibase\Claims() );
+		$diffOps['claim'] = $claims->getDiff( new Claims() );
 
 		$diffs[] = new EntityDiff( $diffOps );
 

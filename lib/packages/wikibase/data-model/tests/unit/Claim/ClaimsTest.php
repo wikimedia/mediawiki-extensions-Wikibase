@@ -580,8 +580,8 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getDiffProvider
 	 *
-	 * @param \Wikibase\Claims $source
-	 * @param \Wikibase\Claims $target
+	 * @param Claims $source
+	 * @param Claims $target
 	 * @param Diff $expected
 	 * @param string $message
 	 */

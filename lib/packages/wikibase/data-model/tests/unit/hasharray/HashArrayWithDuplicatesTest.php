@@ -41,7 +41,7 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\HashArray $array
+	 * @param HashArray $array
 	 */
 	public function testAddElement( HashArray $array ) {
 		$elementCount = $array->count();
@@ -62,7 +62,7 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\HashArray $array
+	 * @param HashArray $array
 	 */
 	public function testRemoveDuplicates( HashArray $array ) {
 		$count = count( $array );
@@ -89,7 +89,7 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\HashArray $array
+	 * @param HashArray $array
 	 */
 	public function testGetHash( HashArray $array ) {
 		$hash = $array->getHash();
@@ -114,7 +114,7 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\HashArray $array
+	 * @param HashArray $array
 	 */
 	public function testIndicesAreUpToDate( HashArray $array ) {
 		$this->assertInternalType( 'boolean', $array->indicesAreUpToDate() );

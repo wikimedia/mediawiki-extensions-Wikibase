@@ -70,7 +70,7 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider snakListProvider
 	 *
-	 * @param \Wikibase\Snaks $snaks
+	 * @param Snaks $snaks
 	 */
 	public function testConstructor( Snaks $snaks ) {
 		$omnomnomReference = new Reference( $snaks );

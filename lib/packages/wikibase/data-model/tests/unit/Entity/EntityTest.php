@@ -457,7 +457,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Wikibase\Entity::equals
+	 * @covers Wikibase\DataModel\Entity\Entity::equals
 	 * @covers Wikibase\DataModel\Internal\ObjectComparer::dataEquals
 	 *
 	 * @dataProvider provideEquals

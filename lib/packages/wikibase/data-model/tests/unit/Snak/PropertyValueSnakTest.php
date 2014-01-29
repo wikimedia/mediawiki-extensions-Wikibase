@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -53,7 +54,7 @@ class PropertyValueSnakTest extends SnakObjectTest {
 	public function newFromPropertyValueProvider() {
 		$argLists = array();
 
-		$property = \Wikibase\Property::newFromType( 'wikibase-item' );
+		$property = Property::newFromType( 'wikibase-item' );
 		$property->setId( 852645 );
 
 		$argLists[] = array( clone $property, new ItemId( 'Q42' ) );

@@ -2,8 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimListAccess;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * Tests for the ClaimListAccess implementing classes.
@@ -20,17 +25,17 @@ class ClaimListAccessTest extends \PHPUnit_Framework_TestCase {
 	public function claimTestProvider() {
 		$claims = array();
 
-		$claims[] = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak(
-			new EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
+		$claims[] = new Claim( new PropertyNoValueSnak(
+			new EntityId( Property::ENTITY_TYPE, 42 )
 		) );
-		$claims[] = new \Wikibase\Claim( new \Wikibase\PropertyValueSnak(
-			new EntityId( \Wikibase\Property::ENTITY_TYPE, 23 ),
+		$claims[] = new Claim( new PropertyValueSnak(
+			new EntityId( Property::ENTITY_TYPE, 23 ),
 			new \DataValues\StringValue( 'ohi' )
 		) );
 
 		$lists = array();
 
-		$lists[] = new \Wikibase\Claims();
+		$lists[] = new Claims();
 
 		$argLists = array();
 

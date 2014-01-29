@@ -61,8 +61,8 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorProvider
 	 *
-	 * @param \Wikibase\Snak $snak
-	 * @param null|\Wikibase\Snaks $qualifiers
+	 * @param Snak $snak
+	 * @param null|Snaks $qualifiers
 	 */
 	public function testConstructor( Snak $snak, Snaks $qualifiers = null ) {
 		$claim = new Claim( $snak, $qualifiers );
