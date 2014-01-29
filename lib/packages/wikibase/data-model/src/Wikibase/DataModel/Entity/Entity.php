@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Entity;
 
 use Diff\Comparer\CallbackComparer;
 use Diff\Differ;
+use Diff\MapDiffer;
 use Diff\MapPatcher;
 use Diff\Patcher;
 use InvalidArgumentException;
@@ -780,7 +781,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 		}
 
 		if ( $differ === null ) {
-			$differ = new \Diff\MapDiffer( true );
+			$differ = new MapDiffer( true );
 		}
 
 		$oldEntity = $this->entityToDiffArray( $this );

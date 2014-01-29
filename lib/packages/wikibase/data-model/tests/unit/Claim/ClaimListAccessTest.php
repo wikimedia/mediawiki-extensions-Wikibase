@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimListAccess;
 use Wikibase\DataModel\Claim\Claims;
@@ -30,7 +31,7 @@ class ClaimListAccessTest extends \PHPUnit_Framework_TestCase {
 		) );
 		$claims[] = new Claim( new PropertyValueSnak(
 			new EntityId( Property::ENTITY_TYPE, 23 ),
-			new \DataValues\StringValue( 'ohi' )
+			new StringValue( 'ohi' )
 		) );
 
 		$lists = array();

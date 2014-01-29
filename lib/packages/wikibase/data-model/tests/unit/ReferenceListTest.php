@@ -183,7 +183,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $array, 'toArray should return array' );
 
 		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
-			$copy = \Wikibase\ReferenceList::newFromArray( $data );
+			$copy = ReferenceList::newFromArray( $data );
 
 			$this->assertInstanceOf( '\Wikibase\References', $copy, 'newFromArray should return object implementing Snak' );
 

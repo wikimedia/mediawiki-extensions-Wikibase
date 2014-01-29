@@ -66,7 +66,7 @@ class PropertyValueSnakTest extends SnakObjectTest {
 
 		$property->setDataTypeId( 'commonsMedia' );
 
-		$argLists[] = array( clone $property, new \DataValues\StringValue( 'https://commons.wikimedia.org/wiki/Wikidata' ) );
+		$argLists[] = array( clone $property, new StringValue( 'https://commons.wikimedia.org/wiki/Wikidata' ) );
 
 		return $argLists;
 	}
