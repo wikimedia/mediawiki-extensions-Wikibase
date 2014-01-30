@@ -5,9 +5,12 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\ItemContent;
+use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\StoreFactory;
 
 /**
  * @since 0.5
@@ -23,16 +26,20 @@ class ChangeOpsMerge {
 	private $toChangeOps;
 	/** @var array */
 	private $ignoreConflicts;
+	/** @var  LabelDescriptionDuplicateDetector */
+	private $labelDescriptionDuplicateDetector;
 
 	/**
 	 * @param ItemContent $fromItemContent
 	 * @param ItemContent $toItemContent
+	 * @param $labelDescriptionDuplicateDetector
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
 	 */
 	public function __construct(
 		ItemContent $fromItemContent,
 		ItemContent $toItemContent,
+		$labelDescriptionDuplicateDetector,
 		$ignoreConflicts = array()
 	) {
 		$this->fromItemContent = $fromItemContent;
@@ -41,6 +48,7 @@ class ChangeOpsMerge {
 		$this->toChangeOps = new ChangeOps();
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 		$this->ignoreConflicts = $ignoreConflicts;
+		$this->labelDescriptionDuplicateDetector = $labelDescriptionDuplicateDetector;
 	}
 
 	/**
@@ -63,6 +71,7 @@ class ChangeOpsMerge {
 		$this->generateChangeOps();
 		$this->fromChangeOps->apply( $this->fromItemContent->getItem() );
 		$this->toChangeOps->apply( $this->toItemContent->getItem() );
+		$this->throwExceptionIfItemsCantBeSaved();
 	}
 
 	private function generateChangeOps() {
@@ -185,6 +194,33 @@ class ChangeOpsMerge {
 				$reference,
 				''
 			) );
+		}
+	}
+
+	/**
+	 * Throws an exception if it would not be possible to save the second item
+	 * @throws ChangeOpException
+	 */
+	private function throwExceptionIfItemsCantBeSaved() {
+		$conflictingTerms = $this->labelDescriptionDuplicateDetector->getConflictingTerms(
+			$this->toItemContent->getItem(),
+			StoreFactory::getStore()->getTermIndex()
+		);
+		if( $conflictingTerms !== array() ) {
+			$conflictString = '';
+			foreach( $conflictingTerms as $term ) {
+				$itemId = ItemId::newFromNumber( $term->getEntityId() );
+				if( !$itemId->equals( $this->fromItemContent->getItem()->getId() ) ) {
+					$conflictString .= '(' .
+						$itemId->getSerialization() . ' => ' .
+						$term->getLanguage() . ' => ' .
+						$term->getType() . ' => ' .
+						$term->getText() . ')';
+				}
+			}
+			if( $conflictString !== '' ) {
+				throw new ChangeOpException( 'Item being merged to has conflicting terms: ' . $conflictString );
+			}
 		}
 	}
 
