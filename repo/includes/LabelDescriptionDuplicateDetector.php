@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Status;
 use Diff\Diff;
 
@@ -11,8 +12,21 @@ use Diff\Diff;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
 class LabelDescriptionDuplicateDetector {
+
+	/**
+	 * @var TermCombinationMatchFinder
+	 */
+	private $termCache;
+
+	/**
+	 * @param TermCombinationMatchFinder $termCache
+	 */
+	public function __construct( TermCombinationMatchFinder $termCache ) {
+		$this->termCache = $termCache;
+	}
 
 	/**
 	 * Looks for label+description violations in the provided Entity using
@@ -23,11 +37,12 @@ class LabelDescriptionDuplicateDetector {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param TermCombinationMatchFinder $termCache
+	 *
+	 * @internal param \Wikibase\TermCombinationMatchFinder $termCache
 	 *
 	 * @return Term[]
 	 */
-	public function getConflictingTerms( Entity $entity, TermCombinationMatchFinder $termCache ) {
+	public function getConflictingTerms( Entity $entity ) {
 		$terms = array();
 
 		foreach ( $entity->getLabels() as $langCode => $labelText ) {
@@ -54,7 +69,7 @@ class LabelDescriptionDuplicateDetector {
 			return array();
 		}
 
-		$foundTerms = $termCache->getMatchingTermCombination(
+		$foundTerms = $this->termCache->getMatchingTermCombination(
 			$terms,
 			null,
 			$entity->getType(),
@@ -74,14 +89,12 @@ class LabelDescriptionDuplicateDetector {
 	 *
 	 * @param Entity $entity The Entity for which to check if it has any non-unique label+description pairs
 	 * @param Status $status The status to which to add an error if there is a violation
-	 * @param TermCombinationMatchFinder $termCache The TermIndex to use for conflict detection
 	 * @param Diff|null $labelsDiff
 	 * @param Diff|null $descriptionDiff
 	 */
-	public function addLabelDescriptionConflicts( Entity $entity, Status $status, TermCombinationMatchFinder $termCache,
-												  Diff $labelsDiff = null, Diff $descriptionDiff = null ) {
+	public function addLabelDescriptionConflicts( Entity $entity, Status $status, Diff $labelsDiff = null, Diff $descriptionDiff = null ) {
 
-		$foundTerms = $this->getConflictingTerms( $entity, $termCache );
+		$foundTerms = $this->getConflictingTerms( $entity );
 
 		if ( !empty( $foundTerms ) ) {
 			/**
