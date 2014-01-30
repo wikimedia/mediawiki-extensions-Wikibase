@@ -7,7 +7,7 @@ jQuery.valueview.experts.QuantityType = ( function( dv, vv ) {
 
 	var PARENT = vv.experts.StringValue;
 
-	return vv.expert( 'quantitytype', PARENT, {
+	return vv.expert( 'QuantityType', PARENT, {
 
 		/**
 		 * Current raw value.

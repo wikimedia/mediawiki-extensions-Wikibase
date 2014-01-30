@@ -17,7 +17,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.UnsupportedValue = vv.expert( 'unsupportedvalue', {
+	vv.experts.UnsupportedValue = vv.expert( 'UnsupportedValue', {
 		/**
 		 * Options.
 		 * @type {Object}

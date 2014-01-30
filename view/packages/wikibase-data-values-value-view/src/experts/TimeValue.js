@@ -17,7 +17,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.experts.BifidExpert
 	 */
-	vv.experts.TimeValue = vv.expert( 'timevalue', PARENT, {
+	vv.experts.TimeValue = vv.expert( 'TimeValue', PARENT, {
 		/**
 		 * @see jQuery.valueview.BifidExpert._editableExpert
 		 */

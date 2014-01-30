@@ -17,7 +17,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.experts.BifidExpert
 	 */
-	vv.experts.UrlType = vv.expert( 'urltype', PARENT, {
+	vv.experts.UrlType = vv.expert( 'UrlType', PARENT, {
 		/**
 		 * @see jQuery.valueview.BifidExpert._editableExpert
 		 */
