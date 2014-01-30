@@ -128,6 +128,7 @@ call_user_func( function() {
 	$wgSpecialPages['DispatchStats']					= 'Wikibase\Repo\Specials\SpecialDispatchStats';
 	$wgSpecialPages['EntityData'] 						= 'Wikibase\Repo\Specials\SpecialEntityData';
 	$wgSpecialPages['MyLanguageFallbackChain'] 			= 'Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain';
+	$wgSpecialPages['MergeItems'] 						= 'Wikibase\Repo\Specials\SpecialMergeItems';
 
 	// Special page groups
 	$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
@@ -145,6 +146,7 @@ call_user_func( function() {
 	$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
 	$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
 	$wgSpecialPageGroups['MyLanguageFallbackChain'] 	= 'wikibaserepo';
+	$wgSpecialPageGroups['MergeItems'] 					= 'wikibaserepo';
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';

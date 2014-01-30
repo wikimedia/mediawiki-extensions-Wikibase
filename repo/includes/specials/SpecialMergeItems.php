@@ -184,9 +184,6 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 			$toStatus = $this->saveEntity( $this->toItemContent, $fromSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
 			if ( !$toStatus->isOK() ) {
-				// Bug: 55960
-				// TODO: if the second result is not a success we should probably undo the first change
-				//       another option is to show an undo link so that the users can undo the action themselves
 				$this->showErrorHTML( $toStatus->getMessage() );
 			} else {
 				// Everything went well so redirect to the merged item
