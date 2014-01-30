@@ -15,7 +15,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
-### 0.2.1 (dev)
+### 0.3 (dev)
 
 #### Breaking changes
 
@@ -25,14 +25,14 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ### 0.2 (2014-01-24)
 
-##### Breaking changes
+#### Breaking changes
 
 * #8 Removed dataValues.util.Notifier
 * #10 Renamed dataValues.util.inherit to util.inherit
 * #13 Removed vp.GlobeCoordinateParser and vp.QuantityParser
 * #15 Removed the ParseValue API module
 
-##### Enhancements
+#### Enhancements
 
 * #14 Decoupled the QUnit tests from the MediaWiki resource loader
 * #16 Have the tests run on TravisCI using PhantomJS
