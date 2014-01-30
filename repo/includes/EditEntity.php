@@ -767,14 +767,12 @@ class EditEntity {
 			// caused by the edit. This can be improved by only looking for
 			// those conflicts that can be caused by the edit.
 
-			$termViolationDetector = new LabelDescriptionDuplicateDetector();
+			$termViolationDetector = new LabelDescriptionDuplicateDetector(
+				StoreFactory::getStore()->getTermIndex()
+			);
 
 			$termViolationDetector->addLabelDescriptionConflicts(
-				$entity,
-				$this->status,
-				StoreFactory::getStore()->getTermIndex(),
-				$entityDiff === null ? null : $entityDiff->getLabelsDiff(),
-				$entityDiff === null ? null : $entityDiff->getDescriptionsDiff()
+				$entity, $this->status, $entityDiff === null ? null : $entityDiff->getLabelsDiff(), $entityDiff === null ? null : $entityDiff->getDescriptionsDiff()
 			);
 		}
 

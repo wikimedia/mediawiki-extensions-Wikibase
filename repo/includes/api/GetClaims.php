@@ -22,9 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetClaims extends ApiWikibase {
 
-	// TODO: rights
-	// TODO: conflict detection
-
 	/**
 	 * @see \ApiBase::execute
 	 *
@@ -32,9 +29,6 @@ class GetClaims extends ApiWikibase {
 	 */
 	public function execute() {
 		wfProfileIn( __METHOD__ );
-
-		//@todo validate
-		//@todo check permissions
 
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
