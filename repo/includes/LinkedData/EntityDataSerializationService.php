@@ -523,13 +523,14 @@ class EntityDataSerializationService {
 			$res->setRawMode();
 		}
 
+		//TODO: apply language filter/Fallback via options!
+		$options = new SerializationOptions();
+
 		if ( $printer instanceof ApiFormatXml ) {
+			$options->setIndexTags( true );
 			// XXX: hack to force the top level element's name
 			$printer->setRootElement( $entityKey );
 		}
-
-		//TODO: apply language filter/Fallback via options!
-		$options = new SerializationOptions();
 
 		$resultBuilder = new ResultBuilder( $res, $this->entityTitleLookup, $this->serializerFactory );
 		$resultBuilder->addEntityRevision( $entityRevision, $options );
