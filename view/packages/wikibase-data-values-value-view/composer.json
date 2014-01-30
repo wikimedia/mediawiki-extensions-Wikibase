@@ -10,6 +10,10 @@
 		{
 			"name": "Daniel Werner",
 			"homepage": "https://www.mediawiki.org/wiki/User:Danwe"
+		},
+		{
+			"name": "H. Snater",
+			"homepage": "http://www.snater.com"
 		}
 	],
 	"support": {
@@ -17,7 +21,7 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"data-values/javascript": "~0.2.0",
+		"data-values/javascript": "~0.3.0",
 		"data-values/data-types": "0.*,>=0.1.1"
 	},
 	"autoload": {
