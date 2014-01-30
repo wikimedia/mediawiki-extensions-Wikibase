@@ -176,7 +176,6 @@ class MergeItems extends ApiWikibase {
 
 			$this->getResultBuilder()->markSuccess( 1 );
 		} else {
-			//todo if the second result is not a success we should probably undo the first change
 			$this->getResultBuilder()->markSuccess( 0 );
 		}
 	}
