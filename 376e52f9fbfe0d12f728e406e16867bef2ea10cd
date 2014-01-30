@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ef7ef47_e04d0641",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-30T18:58:47Z",
+      "side": 1,
+      "message": "Not Wikibase\\Repo\\Api?",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_206bee83",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-30T18:58:47Z",
+      "side": 1,
+      "message": "Please access the settings via the repo thing (it has a getSettings). Settings (defined by Lib) is highly deprecated.",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_8080824c",
         "filename": "repo/includes/api/GetSites.php",
         "patchSetId": 1
