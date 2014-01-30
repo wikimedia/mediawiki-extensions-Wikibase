@@ -226,6 +226,23 @@
       "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_80e1a2fd",
+        "filename": "repo/tests/phpunit/includes/api/GetSitesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-30T19:01:54Z",
+      "side": 1,
+      "message": "eek :)",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
