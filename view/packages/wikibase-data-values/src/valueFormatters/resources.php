@@ -6,7 +6,9 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+	$remoteExtPathParts = explode(
+		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
+	);
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
@@ -14,6 +16,19 @@ return call_user_func( function() {
 	);
 
 	return array(
+
+		'mw.ext.valueFormatters' => $moduleTemplate + array(
+			'scripts' => array(
+				'mw.ext.valueFormatters.js',
+			),
+			'dependencies' => array(
+				'dataValues.values',
+				'valueFormatters',
+				'valueFormatters.formatters',
+				'valueFormatters.ValueFormatterFactory',
+				'mw.ext.valueView',
+			),
+		),
 
 		'valueFormatters' => $moduleTemplate + array(
 			'scripts' => array(

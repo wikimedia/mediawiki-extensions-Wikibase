@@ -29,9 +29,7 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 $GLOBALS['wgResourceModules'] = array_merge(
 	$GLOBALS['wgResourceModules'],
 	include( __DIR__ . '/lib/resources.php' ),
-	include( __DIR__ . '/src/resources.mw.php' ),
-	include( __DIR__ . '/src/valueParsers/resources.mw.php' ),
-	include( __DIR__ . '/src/valueFormatters/resources.mw.php' )
+	include( __DIR__ . '/src/resources.php' )
 );
 
 /**
@@ -47,7 +45,9 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	array &$testModules,
 	\ResourceLoader &$resourceLoader
 ) {
-	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+	$remoteExtPathParts = explode(
+		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
+	);
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/test',

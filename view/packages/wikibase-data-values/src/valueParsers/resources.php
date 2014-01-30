@@ -7,7 +7,9 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+	$remoteExtPathParts = explode(
+		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
+	);
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/src/valueParsers',
@@ -15,6 +17,19 @@ return call_user_func( function() {
 	);
 
 	return array(
+
+		'mw.ext.valueParsers' => $moduleTemplate + array(
+			'scripts' => array(
+				'mw.ext.valueParsers.js',
+			),
+			'dependencies' => array(
+				'dataValues.values',
+				'valueParsers',
+				'valueParsers.parsers',
+				'valueParsers.ValueParserFactory',
+				'mw.ext.valueView',
+			),
+		),
 
 		'valueParsers' => $moduleTemplate + array(
 			'scripts' => array(
