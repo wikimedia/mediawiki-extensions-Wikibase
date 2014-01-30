@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_85e3f4d3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-30T18:01:54Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "fbe3641c042c672d610d8f6b58348604d3952746",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_05d7e4f3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-30T18:01:54Z",
+      "side": 1,
+      "message": "Incorrect location. This should go right before the thing that is expected to throw the exception.\n\nAlso note that the message here, at least if my memory serves me right, is the thing PHPUnit will show on assert failure. It won\u0027t actually check the exception message. This should be easy to verify or disprove.",
+      "revId": "fbe3641c042c672d610d8f6b58348604d3952746",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_e5d3d803",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-30T18:01:54Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "fbe3641c042c672d610d8f6b58348604d3952746",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
