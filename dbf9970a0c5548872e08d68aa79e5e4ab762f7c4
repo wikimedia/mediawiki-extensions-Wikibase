@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_d4aacf81",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-01-30T20:16:16Z",
+      "side": 1,
+      "message": "eww :D",
+      "revId": "dbf9970a0c5548872e08d68aa79e5e4ab762f7c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
