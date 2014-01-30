@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_005112dd",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-30T18:57:49Z",
+      "side": 1,
+      "message": "mediawiki (not wikibase)",
+      "parentUuid": "6ef7ef47_8080824c",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_a08b7e71",
         "filename": "repo/includes/api/GetSites.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-30T18:55:23Z",
       "side": 1,
       "message": "Wikibase*",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_c05a0af9",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-30T18:57:49Z",
+      "side": 1,
+      "message": "don\u0027t make it wikibase specific please :)",
+      "parentUuid": "6ef7ef47_a08b7e71",
       "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
