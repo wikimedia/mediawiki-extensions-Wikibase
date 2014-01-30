@@ -528,6 +528,7 @@ class EntityDataSerializationService {
 
 		//TODO: apply language filter/Fallback via options!
 		$options = new SerializationOptions();
+		$options->setIndexTags( true );
 
 		$resultBuilder = new ResultBuilder(
 			$res,
