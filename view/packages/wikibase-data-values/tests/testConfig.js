@@ -159,11 +159,10 @@ tests.config = ( function() {
 			},
 
 			dataValues: {
-				exports: 'dataValues',
-				deps: ['jquery']
+				exports: 'dataValues'
 			},
 			'dataValues.DataValue': {
-				deps: ['dataValues', 'util.inherit']
+				deps: ['dataValues', 'jquery', 'util.inherit']
 			},
 
 			'dataValues.BoolValue': {
