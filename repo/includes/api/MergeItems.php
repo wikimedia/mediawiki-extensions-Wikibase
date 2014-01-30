@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -64,6 +65,7 @@ class MergeItems extends ApiWikibase {
 			$changeOps = new ChangeOpsMerge(
 				$fromEntityContent,
 				$toEntityContent,
+				new LabelDescriptionDuplicateDetector(),
 				$ignoreConflicts
 			);
 			$changeOps->apply();
@@ -74,6 +76,8 @@ class MergeItems extends ApiWikibase {
 		catch( ChangeOpException $e ) {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
+
+
 
 		$this->attemptSaveMerge( $fromEntityContent, $toEntityContent, $params );
 	}

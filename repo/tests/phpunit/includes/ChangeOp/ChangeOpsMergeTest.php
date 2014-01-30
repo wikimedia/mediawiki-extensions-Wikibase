@@ -7,6 +7,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\ObjectComparer;
 use Wikibase\ItemContent;
+use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Term;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -20,11 +22,24 @@ use Wikibase\ItemContent;
  */
 class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 
+	public function getMockLabelDescriptionDuplicateDetector( $callTimes, $returnValue = array() ) {
+		$mock = $this->getMock( '\Wikibase\LabelDescriptionDuplicateDetector' );
+		$mock->expects( $this->exactly( $callTimes ) )
+			->method( 'getConflictingTerms' )
+			->will(  $this->returnValue( $returnValue ) );
+		return $mock;
+	}
+
 	/**
 	 * @dataProvider provideValidConstruction
 	 */
 	public function testCanConstruct( $from, $to, $ignoreConflicts ) {
-		$changeOps = new ChangeOpsMerge( $from, $to, $ignoreConflicts );
+		$changeOps = new ChangeOpsMerge(
+			$from,
+			$to,
+			$this->getMockLabelDescriptionDuplicateDetector( 0 ),
+			$ignoreConflicts
+		);
 		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
 
@@ -45,7 +60,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidIgnoreConflicts( $from, $to, $ignoreConflicts ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new ChangeOpsMerge( $from, $to, $ignoreConflicts );
+		new ChangeOpsMerge( $from, $to, $this->getMockLabelDescriptionDuplicateDetector( 0 ), $ignoreConflicts );
 	}
 
 	public static function provideInvalidConstruction(){
@@ -72,7 +87,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	public function testCanApply( $fromData, $toData, $expectedFromData, $expectedToData, $ignoreConflicts = array() ) {
 		$from = self::getItemContent( 'Q111', $fromData );
 		$to = self::getItemContent( 'Q222', $toData );
-		$changeOps = new ChangeOpsMerge( $from, $to, $ignoreConflicts );
+		$changeOps = new ChangeOpsMerge(
+			$from,
+			$to,
+			$this->getMockLabelDescriptionDuplicateDetector( 1 ),
+			$ignoreConflicts
+		);
 
 		$this->assertTrue( $from->getEntity()->equals( new Item( $fromData ) ), 'FromItem was not filled correctly' );
 		$this->assertTrue( $to->getEntity()->equals( new Item( $toData ) ), 'ToItem was not filled correctly' );
@@ -279,6 +299,42 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			array( 'label', 'description', 'sitelink' )
 		);
 		return $testCases;
+	}
+
+	public function getMockTerm( $entityId, $language, $type, $text ) {
+		$mock = $this->getMock( '\Wikibase\Term' );
+		$mock->expects( $this->once() )
+			->method( 'getEntityId' )
+			->will( $this->returnValue( $entityId ) );
+		$mock->expects( $this->once() )
+			->method( 'getLanguage' )
+			->will( $this->returnValue( $language ) );
+		$mock->expects( $this->once() )
+			->method( 'getType' )
+			->will( $this->returnValue( $type ) );
+		$mock->expects( $this->once() )
+			->method( 'getText' )
+			->will( $this->returnValue( $text ) );
+		return $mock;
+	}
+
+	public function testExceptionthrownWhenLabelDescriptionDuplicatesDetected() {
+		$this->setExpectedException(
+			'\Wikibase\ChangeOp\ChangeOpException',
+			'Item being merged to has conflicting terms: (Q23id => imalang => imatype => foog text)'
+		);
+
+		$conflicts = array( $this->getMockTerm( 'Q23id', 'imalang', 'imatype', 'foog text' ) );
+		$from = self::getItemContent( 'Q111', array() );
+		$to = self::getItemContent( 'Q222', array() );
+		$changeOps = new ChangeOpsMerge(
+			$from,
+			$to,
+			$this->getMockLabelDescriptionDuplicateDetector( 1, $conflicts ),
+			array()
+		);
+
+		$changeOps->apply();
 	}
 
 }
