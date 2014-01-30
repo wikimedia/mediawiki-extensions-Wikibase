@@ -11,7 +11,9 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 use Wikibase\Summary;
 
 /**
@@ -55,6 +57,8 @@ class MergeItems extends ApiWikibase {
 		}
 
 		$ignoreConflicts = $this->getIgnoreConflicts( $params );
+		$sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 
 		/**
 		 * @var ItemContent $fromEntityContent
@@ -64,6 +68,10 @@ class MergeItems extends ApiWikibase {
 			$changeOps = new ChangeOpsMerge(
 				$fromEntityContent,
 				$toEntityContent,
+				new LabelDescriptionDuplicateDetector(
+					$termIndex
+				),
+				$sitelinkCache,
 				$ignoreConflicts
 			);
 			$changeOps->apply();
