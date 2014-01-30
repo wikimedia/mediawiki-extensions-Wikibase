@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_e0fbc6b8",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-01-30T19:01:05Z",
+      "side": 1,
+      "message": "this can be an api parameter. then it can be more general and does not depend on settings nor wikibase :)",
+      "parentUuid": "6ef7ef47_800be2d8",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_8080824c",
         "filename": "repo/includes/api/GetSites.php",
         "patchSetId": 1
