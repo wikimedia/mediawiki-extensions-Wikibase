@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_8080824c",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2014-01-30T18:55:23Z",
+      "side": 1,
+      "message": "Wikibase*",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_a08b7e71",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2014-01-30T18:55:23Z",
+      "side": 1,
+      "message": "Wikibase*",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_e0b9862a",
+        "filename": "repo/includes/api/GetSites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2014-01-30T18:55:23Z",
+      "side": 1,
+      "message": "Newline at end of file",
+      "revId": "376e52f9fbfe0d12f728e406e16867bef2ea10cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
