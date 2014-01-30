@@ -21,9 +21,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * Parser options.
-		 * Option name: option value.
-		 *
-		 * @since 0.1
+		 * @type {Object}
 		 */
 		_options: {},
 
@@ -32,7 +30,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @returns Object
+		 * @return {Object}
 		 */
 		getOptions: function() {
 			return $.extend( {}, this._options );

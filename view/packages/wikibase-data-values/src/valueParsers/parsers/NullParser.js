@@ -14,17 +14,17 @@
 	 * In those cases, the value given to the parse function will be the parse result.
 	 *
 	 * @constructor
-	 * @extends vp.ValueParser
+	 * @extends valueParsers.ValueParser
 	 * @since 0.1
 	 */
 	vp.NullParser = util.inherit( PARENT, constructor, {
 
 		/**
-		 * @see vp.ValueParser.parse
+		 * @see valueParsers.ValueParser.parse
 		 *
 		 * @since 0.1
 		 *
-		 * @param {String} rawValue
+		 * @param {string} rawValue
 		 *
 		 * @return $.Promise
 		 */

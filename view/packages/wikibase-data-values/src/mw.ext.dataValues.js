@@ -2,8 +2,6 @@
  * Entrypoint for MediaWiki "DataValues" extension JavaScript code. Adds an extension object to the
  * global MediaWiki object and does configuration on "DataValues"  or its dependencies.
  *
- * @file
- * @ingroup ValueView
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
