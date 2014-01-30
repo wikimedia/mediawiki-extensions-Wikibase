@@ -99,6 +99,7 @@ call_user_func( function() {
 	$wgAPIModules['wbmergeitems']						= 'Wikibase\Api\MergeItems';
 	$wgAPIModules['wbformatvalue']						= 'Wikibase\Api\FormatSnakValue';
 	$wgAPIModules['wbparsevalue']						= 'Wikibase\Api\ParseValue';
+	$wgAPIModules['wbgetsites']							= 'Wikibase\Api\GetSites';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';
