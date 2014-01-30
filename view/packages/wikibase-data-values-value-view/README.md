@@ -79,11 +79,12 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 
 ## Release notes
 
-### 0.2.1 (dev)
+### 0.2.1 (2014-01-30)
 
 #### Enhancements
 
 * Adapted changes of data-values/javascript version 0.3.
+* Renamed jQuery.valueview.preview to jQuery.ui.preview
 
 ### 0.2 (2014-01-29)
 
