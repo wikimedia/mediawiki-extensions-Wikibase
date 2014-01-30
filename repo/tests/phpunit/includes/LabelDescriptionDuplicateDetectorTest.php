@@ -8,7 +8,6 @@ use Status;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Term;
 
 /**
  * @covers Wikibase\LabelDescriptionDuplicateDetector
@@ -70,9 +69,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	 * @param $shouldConflict
 	 */
 	public function testGetConflictingTerms( $langCode, $label, $description, $shouldConflict ) {
-		$termCache = new MockTermCache();
-
-		$detector = new LabelDescriptionDuplicateDetector();
+		$detector = new LabelDescriptionDuplicateDetector( new MockTermCache() );
 
 		$entity = Item::newEmpty();
 		$entity->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
@@ -80,7 +77,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$entity->setDescription( $langCode, $description );
 		$entity->setLabel( $langCode, $label );
 
-		$conflicts = $detector->getConflictingTerms( $entity, $termCache );
+		$conflicts = $detector->getConflictingTerms( $entity );
 
 		if ( $shouldConflict ) {
 			$this->assertEquals( 2, count( $conflicts ) );
@@ -113,105 +110,19 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	) {
 		$termCache = new MockTermCache();
 
-		$detector = new LabelDescriptionDuplicateDetector();
+		$detector = new LabelDescriptionDuplicateDetector( $termCache );
 
 		$entity = Item::newEmpty();
-		$entity->setId( new EntityId( \Wikibase\Item::ENTITY_TYPE, 1 ) );
+		$entity->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
 
 		$entity->setDescription( $langCode, $description );
 		$entity->setLabel( $langCode, $label );
 
 		$status = new Status();
 
-		$detector->addLabelDescriptionConflicts( $entity, $status, $termCache, $labelsDiff, $descriptionDiff );
+		$detector->addLabelDescriptionConflicts( $entity, $status, $labelsDiff, $descriptionDiff );
 
 		$this->assertEquals( $shouldConflict, !$status->isOK() );
-	}
-
-}
-
-class MockTermCache implements \Wikibase\TermCombinationMatchFinder {
-
-	/**
-	 * @var Term[]
-	 */
-	protected $terms;
-
-	public function __construct() {
-		$terms = array();
-
-		$terms[] = new \Wikibase\Term( array(
-			'termType' => Term::TYPE_LABEL,
-			'termLanguage' => 'en',
-			'entityId' => 42,
-			'entityType' => \Wikibase\Item::ENTITY_TYPE,
-			'termText' => 'label-en',
-		) );
-
-		$terms[] = new \Wikibase\Term( array(
-			'termType' => Term::TYPE_LABEL,
-			'termLanguage' => 'de',
-			'entityId' => 42,
-			'entityType' => \Wikibase\Item::ENTITY_TYPE,
-			'termText' => 'label-de',
-		) );
-
-		$terms[] = new \Wikibase\Term( array(
-			'termType' => Term::TYPE_DESCRIPTION,
-			'termLanguage' => 'en',
-			'entityId' => 42,
-			'entityType' => \Wikibase\Item::ENTITY_TYPE,
-			'termText' => 'description-en',
-		) );
-
-		$this->terms = $terms;
-	}
-
-	/**
-	 * @see \Wikibase\TermCombinationMatchFinder::getMatchingTermCombination
-	 *
-	 * @param array $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
-	 * @param EntityId|null $excludeId
-	 *
-	 * @return array
-	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
-		/**
-		 * @var Term[] $termPair
-		 * @var Term[] $matchingTerms
-		 */
-		foreach ( $terms as $termPair ) {
-			$matchingTerms = array();
-
-			$id = null;
-			$type = null;
-
-			foreach ( $termPair as $term ) {
-				foreach ( $this->terms as $storedTerm ) {
-					if ( $term->getText() === $storedTerm->getText()
-						&& $term->getLanguage() === $storedTerm->getLanguage()
-						&& $term->getType() === $storedTerm->getType() ) {
-
-						if ( $id === null ) {
-							$id = $term->getEntityId();
-							$type = $term->getEntityType();
-							$matchingTerms[] = $term;
-						}
-						elseif ( $id === $term->getEntityId() && $type === $term->getEntityType() ) {
-							$matchingTerms[] = $term;
-						}
-					}
-				}
-			}
-
-			if ( count( $matchingTerms ) === count( $termPair ) ) {
-				return $matchingTerms;
-			}
-		}
-
-		return array();
 	}
 
 }
