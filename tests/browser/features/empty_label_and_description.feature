@@ -27,7 +27,7 @@ Feature: Empty label and description behaviour
     Then Description cancel button should be there
       And Description save button should be there
 
-  @ui_only
+  @ui_only @smoke
   Scenario: Description UI behaves correctly when description is empty
     When I enter "NEW DESCRIPTION" as description
       And I click the description cancel button

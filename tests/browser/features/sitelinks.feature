@@ -102,7 +102,7 @@ Feature: Edit sitelinks
       | click the sitelink cancel button |
       | press the ESC key in the pagename input field |
 
-  @save_sitelink @modify_entity
+  @save_sitelink @modify_entity @smoke
   Scenario Outline: Save sitelink
     Given The following sitelinks do not exist:
       | enwiki | Asia |

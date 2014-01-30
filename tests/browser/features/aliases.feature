@@ -89,7 +89,7 @@ Feature: Edit aliases
       | click the aliases save button |
       | press the RETURN key in the new alias input field |
 
-  @save_aliases @modify_entity
+  @save_aliases @modify_entity @smoke
   Scenario: Save multiple aliases
     When I click the aliases add button
       And I enter "alias1", "alias2", "alias3" as new aliases
