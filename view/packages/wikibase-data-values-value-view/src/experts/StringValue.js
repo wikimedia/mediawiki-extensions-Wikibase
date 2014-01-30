@@ -41,7 +41,7 @@
 				'type': 'text'
 			} )
 			.appendTo( this.$viewPort )
-			.eachchange( function() {
+			.on( 'eachchange', function() {
 				notifier.notify( 'change' );
 			} );
 		},

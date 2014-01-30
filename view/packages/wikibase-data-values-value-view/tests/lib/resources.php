@@ -56,15 +56,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.eachchange.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.eachchange.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.eachchange',
-			),
-		),
-
 		'jquery.focusAt.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.focusAt.tests.js',
@@ -90,6 +81,16 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.PurposedCallbacks',
+			),
+		),
+
+
+		'jquery.event.special.eachchange.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.event/jquery.event.special.eachchange.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.event.special.eachchange',
 			),
 		),
 

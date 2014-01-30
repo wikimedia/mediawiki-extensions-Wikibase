@@ -48,16 +48,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.eachchange' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.eachchange.js'
-			),
-			'dependencies' => array(
-				'jquery',
-				'jquery.client',
-			),
-		),
-
 		'jquery.focusAt' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.focusAt.js',
@@ -73,7 +63,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 			),
 		),
 
@@ -96,6 +86,17 @@ return call_user_func( function() {
 		),
 
 
+		'jquery.event.special.eachchange' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.event/jquery.event.special.eachchange.js'
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.client',
+			),
+		),
+
+
 		'jquery.time.timeinput' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.time/jquery.time.timeinput.js',
@@ -103,7 +104,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery',
 				'jquery.ui.widget',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'time.js',
 			),
 		),
@@ -119,7 +120,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery',
 				'jquery.animateWithEvent',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.ui.position',
 				'jquery.ui.widget',
 			),
