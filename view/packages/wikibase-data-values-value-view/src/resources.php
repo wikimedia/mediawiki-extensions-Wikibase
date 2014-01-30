@@ -117,6 +117,8 @@ return call_user_func( function() {
 				'jquery.valueview.experts.UrlType',
 				'jquery.valueview.ExpertFactory',
 				'mediawiki',
+				'mw.ext.valueFormatters',
+				'mw.ext.valueParsers',
 			),
 		),
 
