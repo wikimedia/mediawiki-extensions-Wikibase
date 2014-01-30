@@ -15,6 +15,13 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.2.1 (dev)
+
+#### Breaking changes
+
+* Renamed "valueFormatters.factory" Resource Loader module to "valueFormatters.ValueFormatterFactory"
+* Renamed "valueParsers.factory" Resource Loader module to "valueParsers.ValueParserFactory"
+
 ### 0.2 (2014-01-24)
 
 ##### Breaking changes

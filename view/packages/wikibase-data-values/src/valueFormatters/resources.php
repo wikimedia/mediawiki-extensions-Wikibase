@@ -21,18 +21,18 @@ return call_user_func( function() {
 			),
 		),
 
-		'valueFormatters.factory' => $moduleTemplate + array(
+		'valueFormatters.ValueFormatter' => $moduleTemplate + array(
 			'scripts' => array(
-				'ValueFormatterFactory.js',
+				'formatters/ValueFormatter.js',
 			),
 			'dependencies' => array(
 				'valueFormatters',
 			),
 		),
 
-		'valueFormatters.ValueFormatter' => $moduleTemplate + array(
+		'valueFormatters.ValueFormatterFactory' => $moduleTemplate + array(
 			'scripts' => array(
-				'formatters/ValueFormatter.js',
+				'ValueFormatterFactory.js',
 			),
 			'dependencies' => array(
 				'valueFormatters',

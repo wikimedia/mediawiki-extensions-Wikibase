@@ -23,7 +23,7 @@ return call_user_func( function() {
 				'dataValues.values',
 				'valueParsers',
 				'valueParsers.parsers',
-				'valueParsers.factory',
+				'valueParsers.ValueParserFactory',
 				'mw.ext.valueView',
 			),
 		),

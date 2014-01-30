@@ -22,21 +22,21 @@ return call_user_func( function() {
 			),
 		),
 
-		'valueParsers.factory' => $moduleTemplate + array(
-			'scripts' => array(
-				'ValueParserFactory.js',
-			),
-			'dependencies' => array(
-				'valueParsers',
-			),
-		),
-
 		'valueParsers.ValueParser' => $moduleTemplate + array(
 			'scripts' => array(
 				'parsers/ValueParser.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
+				'valueParsers',
+			),
+		),
+
+		'valueParsers.ValueParserFactory' => $moduleTemplate + array(
+			'scripts' => array(
+				'ValueParserFactory.js',
+			),
+			'dependencies' => array(
 				'valueParsers',
 			),
 		),

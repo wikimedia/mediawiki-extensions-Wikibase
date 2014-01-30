@@ -22,7 +22,7 @@ return call_user_func( function() {
 				'dataValues.values',
 				'valueFormatters',
 				'valueFormatters.formatters',
-				'valueFormatters.factory',
+				'valueFormatters.ValueFormatterFactory',
 				'mw.ext.valueView',
 			),
 		),
