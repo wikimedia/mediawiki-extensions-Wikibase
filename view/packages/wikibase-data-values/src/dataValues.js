@@ -8,7 +8,7 @@
  * @since 0.1
  * @type Object
  */
-this.dataValues = new( function Dv( $ ) {
+this.dataValues = new( function Dv() {
 	'use strict';
 
 	var dvs = [];
@@ -91,6 +91,6 @@ this.dataValues = new( function Dv( $ ) {
 		dvs[dataValueConstructor.TYPE] = dataValueConstructor;
 	};
 
-} )( jQuery );
+	return this;
 
-window.dataValues = dataValues; // global alias
+} )();

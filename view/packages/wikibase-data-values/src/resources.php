@@ -30,6 +30,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues',
+				'jquery',
 				'util.inherit',
 			),
 		),
@@ -52,9 +53,10 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
-				'util.inherit',
 				'globeCoordinate.js', // required by GlobeCoordinateValue
-				'time.js' // required by TimeValue
+				'jquery',
+				'time.js', // required by TimeValue
+				'util.inherit',
 			),
 		),
 
@@ -65,6 +67,9 @@ return call_user_func( function() {
 			'dependencies' => array(
 				// load all values. TODO: this is bad but the system is not as advanced as ValueView yet.
 				'dataValues.values',
+				'jquery',
+				'mediawiki',
+				'time.js',
 			),
 			'messages' => array(
 				'jan', 'january',

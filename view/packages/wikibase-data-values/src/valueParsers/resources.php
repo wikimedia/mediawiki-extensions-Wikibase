@@ -24,6 +24,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.values',
+				'mediawiki',
 				'valueParsers',
 				'valueParsers.parsers',
 				'valueParsers.ValueParserFactory',
@@ -41,6 +42,7 @@ return call_user_func( function() {
 				'parsers/ValueParser.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'util.inherit',
 				'valueParsers',
 			),
@@ -51,6 +53,7 @@ return call_user_func( function() {
 				'ValueParserFactory.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'valueParsers',
 			),
 		),
@@ -65,9 +68,11 @@ return call_user_func( function() {
 				'parsers/TimeParser.js',
 			),
 			'dependencies' => array(
+				'dataValues.values',
+				'jquery',
+				'time.js', // required by TimeParser
 				'util.inherit',
 				'valueParsers.ValueParser',
-				'time.js', // required by TimeParser
 			),
 		),
 
