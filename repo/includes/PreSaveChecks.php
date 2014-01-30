@@ -58,12 +58,13 @@ class PreSaveChecks {
 			// caused by the edit. This can be improved by only looking for
 			// those conflicts that can be caused by the edit.
 
-			$termViolationDetector = new LabelDescriptionDuplicateDetector();
+			$termViolationDetector = new LabelDescriptionDuplicateDetector(
+				$this->termIndex
+			);
 
 			$termViolationDetector->addLabelDescriptionConflicts(
 				$entity,
 				$status,
-				$this->termIndex,
 				$entityDiff === null ? null : $entityDiff->getLabelsDiff(),
 				$entityDiff === null ? null : $entityDiff->getDescriptionsDiff()
 			);

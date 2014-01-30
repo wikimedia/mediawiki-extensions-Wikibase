@@ -10,6 +10,9 @@ use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 use Wikibase\Summary;
 use Wikibase\DataModel\Entity\EntityId;
 use Status;
@@ -140,10 +143,16 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 		if ( $this->fromItemContent === null || $this->toItemContent === null ) {
 			return false;
 		}
+		$sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		try {
 			$changeOps = new ChangeOpsMerge(
 				$this->fromItemContent,
 				$this->toItemContent,
+				new LabelDescriptionDuplicateDetector(
+					$termIndex
+				),
+				$sitelinkCache,
 				$this->ignoreConflicts
 			);
 			$changeOps->apply();
