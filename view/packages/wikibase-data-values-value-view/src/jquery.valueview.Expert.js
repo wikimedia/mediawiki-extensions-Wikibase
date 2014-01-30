@@ -107,7 +107,10 @@ jQuery.valueview = jQuery.valueview || {};
 
 		var defaultMessages = this._options.messages || {},
 			msgGetter = this._options.mediaWiki ? this._options.mediaWiki.msg : null;
-		this._messageProvider = new util.MessageProvider( defaultMessages, msgGetter );
+		this._messageProvider = new util.MessageProvider( {
+			defaultMessage: defaultMessages,
+			messageGetter: msgGetter
+		} );
 
 		this._init();
 	};

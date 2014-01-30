@@ -101,9 +101,10 @@ return call_user_func( function() {
 				'jquery.time/jquery.time.timeinput.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'jquery.ui.widget',
 				'jquery.eachchange',
-				'time.js'
+				'time.js',
 			),
 		),
 
@@ -113,7 +114,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.inputextender.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.inputextender.css',
+				'jquery.ui/jquery.ui.inputextender.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -129,7 +130,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.listrotator.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.listrotator.css',
+				'jquery.ui/jquery.ui.listrotator.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -142,12 +143,25 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.preview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.preview.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.preview.css',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.ui.widget',
+			),
+		),
+
 		'jquery.ui.suggester' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.suggester.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.suggester.css',
+				'jquery.ui/jquery.ui.suggester.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -164,7 +178,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.toggler.js',
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.toggler.css',
+				'jquery.ui/jquery.ui.toggler.css',
 			),
 			'dependencies' => array(
 				'jquery',

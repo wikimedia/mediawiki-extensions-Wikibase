@@ -122,6 +122,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.preview.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.preview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.preview',
+			),
+		),
+
 		'jquery.ui.suggester.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.suggester.tests.js',

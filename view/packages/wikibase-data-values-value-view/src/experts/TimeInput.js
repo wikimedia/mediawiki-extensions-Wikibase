@@ -54,7 +54,7 @@
 
 		/**
 		 * The preview widget.
-		 * @type {jQuery.valueview.preview}
+		 * @type {jQuery.ui.preview}
 		 */
 		preview: null,
 
@@ -244,7 +244,18 @@
 			)
 			.hide();
 
-			var $preview = $( '<div/>' ).preview( { $input: this.$input } );
+			var messageProvider = null;
+			if( mediaWiki && mediaWiki.msg && util && util.MessageProvider ) {
+				messageProvider = new util.MessageProvider( {
+					messageGetter: mediaWiki.msg,
+					prefix: 'valueview-preview-'
+				} );
+			}
+
+			var $preview = $( '<div/>' ).preview( {
+				$input: this.$input,
+				messageProvider: messageProvider
+			} );
 			this.preview = $preview.data( 'preview' );
 
 			// Append everything since the following actions require the fully initialized DOM.

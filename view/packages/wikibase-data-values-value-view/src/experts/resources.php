@@ -37,7 +37,7 @@ return call_user_func( function() {
 				'EmptyValue.js',
 			),
 			'styles' => array(
-				'themes/default/EmptyValue.css',
+				'EmptyValue.css',
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts',
@@ -57,9 +57,10 @@ return call_user_func( function() {
 				'jquery',
 				'jquery.focusAt',
 				'jquery.ui.inputextender',
+				'jquery.ui.preview',
 				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
-				'jquery.valueview.preview',
+				'util.MessageProvider',
 			),
 			'messages' => array(
 				'valueview-expert-globecoordinateinput-precision',
@@ -73,7 +74,7 @@ return call_user_func( function() {
 				'GlobeCoordinateValue.js',
 			),
 			'styles' => array(
-				'themes/default/GlobeCoordinateInput.css',
+				'GlobeCoordinateInput.css',
 			),
 			'dependencies' => array(
 				'globeCoordinate.js',
@@ -147,7 +148,7 @@ return call_user_func( function() {
 				'TimeInput.js',
 			),
 			'styles' => array(
-				'themes/default/TimeInput.css',
+				'TimeInput.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -155,11 +156,12 @@ return call_user_func( function() {
 				'jquery.time.timeinput',
 				'jquery.ui.inputextender',
 				'jquery.ui.listrotator',
+				'jquery.ui.preview',
 				'jquery.ui.toggler',
 				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
-				'jquery.valueview.preview',
 				'time.js',
+				'util.MessageProvider',
 			),
 			'messages' => array(
 				'valueview-expert-advancedadjustments',
@@ -179,7 +181,7 @@ return call_user_func( function() {
 				'TimeValue.js',
 			),
 			'styles' => array(
-				'themes/default/TimeValue.css',
+				'TimeValue.css',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -199,7 +201,7 @@ return call_user_func( function() {
 				'UnsupportedValue.js',
 			),
 			'styles' => array(
-				'themes/default/UnsupportedValue.css',
+				'UnsupportedValue.css',
 			),
 			'dependencies' => array(
 				'dataTypes',

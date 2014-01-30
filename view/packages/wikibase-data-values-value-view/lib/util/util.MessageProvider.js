@@ -10,17 +10,22 @@ util.MessageProvider = ( function() {
 	/**
 	 * Providing messages using specified default messages or a function provided.
 	 *
-	 * @param {Object} defaultMessages Messages to use if no message getter function is provided or
-	 *                 the getter does not return a message. The keys the messages are indexed with
-	 *                 are passed to the message getter.
-	 * @param {Function} [messageGetter] Function to retrieve a message from. The function receives
-	 *                   the message key as first argument and and array containing the message
-	 *                   parameters as second argument.
+	 * @param {Object} options Object that may contain the following key-value pairs:
+	 *                 - {Object} defaultMessages
+	 *                   Messages to use if no message getter function is provided or the getter
+	 *                   does not return a message. The keys the messages are indexed with are
+	 *                   passed to the message getter.
+	 *                 - {Function} messageGetter
+	 *                   Function to retrieve a message from. The function receives the message key
+	 *                   as first argument and and array containing the message parameters as second
+	 *                   argument.
+	 *                 - {string} prefix
+	 *                   String the message key should be prefixed with when querying the message
+	 *                   getter function.
 	 * @constructor
 	 */
-	function MessageProvider( defaultMessages, messageGetter ) {
-		this._defaultMessages = defaultMessages;
-		this._messageGetter = messageGetter || null;
+	function MessageProvider( options ) {
+		this._options = options || {};
 	}
 
 	MessageProvider.prototype = {
@@ -29,12 +34,7 @@ util.MessageProvider = ( function() {
 		/**
 		 * @type {Object}
 		 */
-		_defaultMessages: null,
-
-		/**
-		 * @type {Function|null}
-		 */
-		_messageGetter: null,
+		_options: null,
 
 		/**
 		 * Tries to get a message via the message getter. If the getter is not set or no message is
@@ -48,17 +48,30 @@ util.MessageProvider = ( function() {
 		getMessage: function( key, params ) {
 			params = params || [];
 
-			var message = null;
+			var o = this._options,
+				message = null;
 
-			if( this._messageGetter ) {
-				message = this._messageGetter( key, params );
+			if( o.messageGetter ) {
+				if( o.prefix ) {
+					key = o.prefix + key;
+				}
+				message = o.messageGetter( key, params );
 			}
 
-			if( !message && this._defaultMessages && this._defaultMessages[key] ) {
-				message = this._defaultMessages[key];
+			if( !message && o.defaultMessages && o.defaultMessages[key] ) {
+				message = o.defaultMessages[key];
 			}
 
 			return message || null;
+		},
+
+		/**
+		 * Sets the default messages.
+		 *
+		 * @param {Object} messages
+		 */
+		setDefaultMessages: function( messages ) {
+			this._options.defaultMessages = messages;
 		}
 
 	};

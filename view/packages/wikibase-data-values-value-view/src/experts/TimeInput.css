@@ -29,12 +29,12 @@
 	background: none;
 }
 
-/* TODO: Put style into more generic place along with moving the preview out of the TimeInput expert */
-.ui-inputextender-extension .valueview-preview {
+/* TODO: Move general preview styles to a more generic place */
+.ui-inputextender-extension .ui-preview {
 	margin-top: 0;
 	width: 100%;
 }
-.valueview-preview-value {
+.ui-inputextender-extension .ui-preview-value {
 	margin-top: 0.2em;
 	font-size: 150%;
 	font-weight: bold;

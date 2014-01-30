@@ -1,5 +1,6 @@
 /**
- * Valueview preview widget
+ * Preview widget whose visible content may be switched between a spinner animation and a value.
+ * If the value to be set is empty, the widget will display an appropriate message.
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
@@ -7,19 +8,27 @@
  * @option {jQuery} [$input] Input element node. If specified, the preview will not be updated when
  *         the input element is cleared, e.g. if the input will be hidden, it is not necessary to
  *         update the value.
+ *
+ * @option {Object} [messages] Default messages to use.
+ *
+ * @option {util.MessageProvider} [messageProvider] Message provider to fetch messages from instead
+ *         of using the default messages.
  */
-// TODO: Get rid of mediaWiki dependency
-( function( $, mw ) {
+( function( $ ) {
 	'use strict';
 
-	$.widget( 'valueview.preview', {
+	$.widget( 'ui.preview', {
 
 		/**
-		 * Additional options.
 		 * @type {Object}
 		 */
 		options: {
-			$input: null
+			$input: null,
+			messages: {
+				'label': 'will be displayed as:',
+				'novalue': 'no valid value recognized'
+			},
+			messageProvider: null
 		},
 
 		/**
@@ -32,12 +41,16 @@
 		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
+			if( this.options.messageProvider ) {
+				this.options.messageProvider.setDefaultMessages( this.options.messages );
+			}
+
 			this.element
 			.addClass( this.widgetBaseClass )
 			.append(
 				$( '<div/>' )
 				.addClass( this.widgetBaseClass + '-label' )
-				.text( mw.msg( 'valueview-preview-label' ) )
+				.text( this._getMessage( 'label' ) )
 			);
 
 			this.$value = $( '<div/>' )
@@ -75,7 +88,7 @@
 			if( value === null ) {
 				this.$value
 				.addClass( this.widgetBaseClass + '-novalue' )
-				.text( mw.msg( 'valueview-preview-novalue' ) );
+				.text( this._getMessage( 'novalue' ) );
 			} else {
 				this.$value
 				.removeClass( this.widgetBaseClass + '-novalue' )
@@ -87,9 +100,22 @@
 		 * Shows a spinner symbol instead of any preview.
 		 */
 		showSpinner: function() {
-			this.$value.empty().append( $( '<span/>' ).addClass( 'mw-small-spinner' ) );
+			this.$value.empty().append( $( '<span/>' ).addClass( 'small-spinner' ) );
+		},
+
+		/**
+		 * Either retrieves a message from the message provider (if set) or returns the default
+		 * message.
+		 *
+		 * @param {string} key
+		 * @return {string|null}
+		 */
+		_getMessage: function( key ) {
+			return this.options.messageProvider
+				? this.options.messageProvider.getMessage( key )
+				: this.options.messages[key];
 		}
 
 	} );
 
-} )( jQuery, mediaWiki );
+} )( jQuery );
