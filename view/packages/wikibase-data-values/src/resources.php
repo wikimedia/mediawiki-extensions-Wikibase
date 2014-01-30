@@ -7,14 +7,16 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+	$remoteExtPathParts = explode(
+		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
+	);
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
-	return array(
+	$modules = array(
 
 		'dataValues' => $moduleTemplate + array(
 			'scripts' => array(
@@ -28,6 +30,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues',
+				'jquery',
 				'util.inherit',
 			),
 		),
@@ -50,12 +53,48 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
-				'util.inherit',
 				'globeCoordinate.js', // required by GlobeCoordinateValue
-				'time.js' // required by TimeValue
+				'jquery',
+				'time.js', // required by TimeValue
+				'util.inherit',
 			),
 		),
 
+		'mw.ext.dataValues' => $moduleTemplate + array(
+			'scripts' => array(
+				'mw.ext.dataValues.js',
+			),
+			'dependencies' => array(
+				// load all values. TODO: this is bad but the system is not as advanced as ValueView yet.
+				'dataValues.values',
+				'jquery',
+				'mediawiki',
+				'time.js',
+			),
+			'messages' => array(
+				'jan', 'january',
+				'feb', 'february',
+				'mar', 'march',
+				'apr', 'april',
+				'may', 'may_long',
+				'jun', 'june',
+				'jul', 'july',
+				'aug', 'august',
+				'sep', 'september',
+				'oct', 'october',
+				'nov', 'november',
+				'dec', 'december',
+			)
+		),
+
 	);
+
+	$modules = array_merge(
+		$modules,
+		include( __DIR__ . '/valueFormatters/resources.php' ),
+		include( __DIR__ . '/valueParsers/resources.php' )
+	);
+
+	return $modules;
 
 } );

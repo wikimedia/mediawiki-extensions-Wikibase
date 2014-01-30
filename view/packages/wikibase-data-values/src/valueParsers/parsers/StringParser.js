@@ -11,15 +11,15 @@
 	 * Constructor for string parsers.
 	 *
 	 * @constructor
-	 * @extends vp.ValueParser
+	 * @extends valueParsers.ValueParser
 	 * @since 0.1
 	 */
 	vp.StringParser = util.inherit( PARENT, {
 		/**
-		 * @see vp.ValueParser.parse
+		 * @see valueParsers.ValueParser.parse
 		 * @since 0.1
 		 *
-		 * @param {String} rawValue
+		 * @param {string} rawValue
 		 * @return $.Promise
 		 */
 		parse: function( rawValue ) {

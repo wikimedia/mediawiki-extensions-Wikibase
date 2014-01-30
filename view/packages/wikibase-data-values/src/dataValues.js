@@ -1,10 +1,4 @@
 /**
- * JavaScript for 'DataValues' extension
- * @see https://www.mediawiki.org/wiki/Extension:DataValues
- *
- * @file
- * @ingroup DataValues
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -14,7 +8,7 @@
  * @since 0.1
  * @type Object
  */
-this.dataValues = new( function Dv( $ ) {
+this.dataValues = new( function Dv() {
 	'use strict';
 
 	var dvs = [];
@@ -97,6 +91,6 @@ this.dataValues = new( function Dv( $ ) {
 		dvs[dataValueConstructor.TYPE] = dataValueConstructor;
 	};
 
-} )( jQuery );
+	return this;
 
-window.dataValues = dataValues; // global alias
+} )();

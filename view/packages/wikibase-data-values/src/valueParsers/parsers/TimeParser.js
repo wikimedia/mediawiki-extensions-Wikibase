@@ -11,12 +11,12 @@
 	 * Constructor for time parsers.
 	 *
 	 * @constructor
-	 * @extends vp.ValueParser
+	 * @extends valueParsers.ValueParser
 	 * @since 0.1
 	 */
 	vp.TimeParser = util.inherit( PARENT, {
 		/**
-		 * @see vp.ValueParser.parse
+		 * @see valueParsers.ValueParser.parse
 		 * @since 0.1
 		 *
 		 * @param {time.Time} time

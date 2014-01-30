@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, dv, vf, vv ) {
+( function( mw, dv, vf ) {
 	'use strict';
 
 	mw.ext = mw.ext || {};
@@ -31,10 +31,4 @@
 		this.valueFormatterProvider = valueFormatterProvider;
 	} )();
 
-	// 'valueFormatterProvider' is a required option in the original jQuery.valueview widget
-	// implementation. However, if valueFormatters is used in MediaWiki context, then the option
-	// should not be required anymore and default to the ValueFormatterFactory object set in
-	// mw.ext.valueFormatters.
-	vv.prototype.options.valueFormatterProvider = valueFormatterProvider;
-
-}( mediaWiki, dataValues, valueFormatters, jQuery.valueview ) );
+}( mediaWiki, dataValues, valueFormatters ) );

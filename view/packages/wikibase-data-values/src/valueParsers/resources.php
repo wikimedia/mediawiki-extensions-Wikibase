@@ -7,7 +7,9 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+	$remoteExtPathParts = explode(
+		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
+	);
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/src/valueParsers',
@@ -16,18 +18,22 @@ return call_user_func( function() {
 
 	return array(
 
-		'valueParsers' => $moduleTemplate + array(
+		'mw.ext.valueParsers' => $moduleTemplate + array(
 			'scripts' => array(
-				'valueParsers.js',
+				'mw.ext.valueParsers.js',
+			),
+			'dependencies' => array(
+				'dataValues.values',
+				'mediawiki',
+				'valueParsers',
+				'valueParsers.parsers',
+				'valueParsers.ValueParserFactory',
 			),
 		),
 
-		'valueParsers.factory' => $moduleTemplate + array(
+		'valueParsers' => $moduleTemplate + array(
 			'scripts' => array(
-				'ValueParserFactory.js',
-			),
-			'dependencies' => array(
-				'valueParsers',
+				'valueParsers.js',
 			),
 		),
 
@@ -36,7 +42,18 @@ return call_user_func( function() {
 				'parsers/ValueParser.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'util.inherit',
+				'valueParsers',
+			),
+		),
+
+		'valueParsers.ValueParserFactory' => $moduleTemplate + array(
+			'scripts' => array(
+				'ValueParserFactory.js',
+			),
+			'dependencies' => array(
+				'jquery',
 				'valueParsers',
 			),
 		),
@@ -51,9 +68,11 @@ return call_user_func( function() {
 				'parsers/TimeParser.js',
 			),
 			'dependencies' => array(
+				'dataValues.values',
+				'jquery',
+				'time.js', // required by TimeParser
 				'util.inherit',
 				'valueParsers.ValueParser',
-				'time.js', // required by TimeParser
 			),
 		),
 
