@@ -69,9 +69,12 @@
 		this.expertProvider = expertProvider;
 	} )();
 
-	// 'expertProvider' is a required option in the original jQuery.valueview widget implementation.
-	// If valueview is used in MediaWiki context, then the option should not be required anymore and
-	// defaults to the ExpertFactory object set in mw.ext.valueview.expertProvider.
+	// "expertProvider", "valueParserProvider" and "valueFormatterProvider" are required options of
+	// the jQuery.valueview widget.
+	// If valueview is used in MediaWiki context, these option should not be required anymore and
+	// default to the automatically generated providers.
 	vv.prototype.options.expertProvider = expertProvider;
+	vv.prototype.options.valueParserProvider = mw.ext.valueParsers.valueParserProvider;
+	vv.prototype.options.valueFormatterProvider = mw.ext.valueFormatters.valueFormatterProvider;
 
 }( mediaWiki, dataValues, dataTypes, jQuery, jQuery.valueview ) );

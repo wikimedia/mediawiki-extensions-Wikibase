@@ -79,6 +79,12 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 
 ## Release notes
 
+### 0.2.1 (dev)
+
+#### Enhancements
+
+* Adapted changes of data-values/javascript version 0.2.1.
+
 ### 0.2 (2014-01-29)
 
 #### Refactorings
