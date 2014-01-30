@@ -25,6 +25,7 @@ return call_user_func( function() {
 				'jquery.valueview.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'jquery.valueview.valueview',
 			),
 		),
@@ -34,6 +35,7 @@ return call_user_func( function() {
 				'jquery.valueview.BifidExpert.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'jquery.valueview.Expert',
 				'util.inherit',
 			),
@@ -58,8 +60,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-				'dataTypes',
-				'dataValues.DataValue',
 			),
 		),
 
@@ -81,23 +81,25 @@ return call_user_func( function() {
 				'jquery.valueview.valueview.css',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'dataValues.DataValue',
+				'jquery',
 				'jquery.ui.widget',
 				'jquery.valueview.ViewState',
 				'jquery.valueview.ExpertFactory',
-				'jquery.valueview.experts.UnsupportedValue',
 				'jquery.valueview.experts.EmptyValue',
-				// NOTE: Do not add additional experts here unless they are directly required by the
-				// valueview widget. All experts are supposed to be loaded via the expert provider
-				// passed to the widget.
+				'jquery.valueview.experts.UnsupportedValue',
 				'util.Notifier',
+				'valueFormatters.ValueFormatterFactory',
+				'valueParsers.ValueParserFactory',
 			),
 		),
 
 		'jquery.valueview.ViewState' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.ViewState.js',
+			),
+			'dependencies' => array(
+				'jquery',
 			),
 		),
 
@@ -106,15 +108,12 @@ return call_user_func( function() {
 				'mw.ext.valueView.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'dataValues.values',
 				'jquery.valueview',
-				'jquery.valueview.experts.CommonsMediaType',
 				'jquery.valueview.experts.GlobeCoordinateValue',
 				'jquery.valueview.experts.QuantityType',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.experts.TimeValue',
-				'jquery.valueview.experts.UrlType',
 				'jquery.valueview.ExpertFactory',
 				'mediawiki',
 				'mw.ext.valueFormatters',

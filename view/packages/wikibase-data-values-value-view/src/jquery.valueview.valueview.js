@@ -1,10 +1,9 @@
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
-// TODO: Get rid of dataTypes dependency
-/* global dataTypes */
-( function( dv, dt, util, $ ) {
+( function( dv, util, $, vf, vp ) {
 'use strict';
 
 var PARENT = $.Widget;
@@ -33,45 +32,53 @@ function expertProxy( fnName ) {
  * @extends jQuery.Widget
  * @since 0.1
  *
- * @option expertProvider {jQuery.valueview.ExpertFactory} (required) Used to determine an expert
+ * @option {jQuery.valueview.ExpertFactory} expertProvider Used to determine an expert
  *         strategy depending on the data value type or the data type the valueview should handle.
  *         The valueview will be able to handle all data value types and data types the given
  *         provider has experts registered for.
  *
- * @option valueParserProvider {valueParsers.valueParserFactory} (required) Factory providing the
+ * @option {valueParsers.valueParserFactory} valueParserProvider Factory providing the
  *         parsers that values may be parsed with.
  *
- * @option valueFormatterProvider {valueFormatters.valueFormatterFactory} (required) Factory
+ * @option {valueFormatters.valueFormatterFactory} valueFormatterProvider Factory
  *         providing the formatters which value may be formatted with.
  *
- * @option on {dataTypes.DataType|Function|null} If this option is not null, then the widget will
- *         choose an expert (jQuery.valueview.Expert), a parser (valueParsers.ValueParser) and a
- *         formatter (valueFormatters.ValueFormatter) based on the provided purpose. The purpose may
- *         be a data type (dataTypes.DataType instance) or a data value (dataValues.DataValue
- *         constructor).
- *         When setting the valueview's value to a data value that is not valid against the given
- *         data (value) type, a note that it is not suitable for the widget's current definition
- *         will be displayed.
- *         If the "on" option is null, expert, parser and formatter will be chosen on the widget's
- *         current value. Consequently, if the value itself is null, the widget will not be able to
- *         offer any input for new values.
+ * @option {string|null} [dataTypeId] If set, an expert (jQuery.valueview.Expert), a parser
+ *         (valueParsers.ValueParser) and a formatter (valueFormatters.ValueFormatter) will be
+ *         determined from the provided factories according to the specified data type id.
+ *         When setting the valueview's value to a data value that is not valid against the data
+ *         type referenced by the data type id, a note that the value is not suitable for the
+ *         widget's current definition will be displayed.
+ *         If the "dataTypeId" option is null, expert, parser and formatter will be determined using
+ *         the "dataValueType" option.
  *         Default: null
  *
- * @option value {dataValues.DataValue|null} The data value this view should represent initially.
+ * @option {string|null} [dataValueType] If set while the "dataTypeId" option is "null", a parser
+ *         (valueParsers.ValueParser) and a formatter (valueFormatters.ValueFormatter) will be
+ *         determined from the provided factories according to the specified data value type.
+ *         When setting the valueview's value to a data value that is not valid against the data
+ *         value referenced by the data value type, a note that the value is not suitable for the
+ *         widget's current definition will be displayed.
+ *         If the "dataValueType" option as well as the "dataTypeId" option is null, expert, parser
+ *         and formatter will be determined using the widget's current value. Consequently, if the
+ *         value itself is null, the widget will not be able to offer any input for new values.
+ *         Default: null
+ *
+ * @option {dataValues.DataValue|null} [value] The data value this view should represent initially.
  *         If omitted, an empty view will be served, ready to take some input by the user. The value
  *         can also be overwritten later, by using the value() function.
  *         Default: null
  *
- * @option autoStartEditing {boolean} Whether or not view should go into edit mode by its own upon
+ * @option {boolean} [autoStartEditing] Whether or not view should go into edit mode by its own upon
  *         initialization if its initial value is empty.
  *         Default: true
  *
- * @option parseDelay {number} Time milliseconds that the parser should wait before parsing. A delay
+ * @option {number} [parseDelay] Time milliseconds that the parser should wait before parsing. A delay
  *         is useful to limit the number of API request that are outdated when returning because the
  *         input has changed in the meantime.
  *         Default: 300
  *
- * @option mediaWiki {Object} mediaWiki JavaScript object that may be used in MediaWiki environment.
+ * @option {Object} mediaWiki mediaWiki JavaScript object that may be used in MediaWiki environment.
  *         Default: null
  *
  * @event change: Triggered when the widget's value is updated.
@@ -143,7 +150,8 @@ $.widget( 'valueview.valueview', PARENT, {
 		expertProvider: null,
 		valueParserProvider: null,
 		valueFormatterProvider: null,
-		on: null,
+		dataTypeId: null,
+		dataValueType: null,
 		value: null,
 		autoStartEditing: false,
 		parseDelay: 300,
@@ -211,7 +219,8 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		switch( key ) {
 			case 'expertProvider':
-			case 'on': // TODO: make this work properly and test
+			case 'dataTypeId': // TODO: make this work properly and test
+			case 'dataValueType':
 				this._updateExpert();
 				break;
 			case 'value':
@@ -410,36 +419,29 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Will update the expert responsible for handling the value type of the current value. If there
-	 * is no value set currently (empty value) then the expert will be chosen based on the "on"
-	 * option of the valueview widget. This will be an expert suitable for creating a data value
-	 * as desired by the "on" option.
+	 * is no value set currently (empty value), the expert will be chosen based on the "dataTypeId"
+	 * or "dataValueType" option of the valueview widget.
 	 * @since 0.1
 	 */
 	_updateExpert: function() {
-		var expertProvider = this.options.expertProvider;
-
-		if( !( expertProvider instanceof $.valueview.ExpertFactory ) ) {
+		if( !( this.options.expertProvider instanceof $.valueview.ExpertFactory ) ) {
 			throw new Error( 'No ExpertProvider set in valueview\'s "expertProvider" option' );
 		}
 
-		// Get an expert suitable for widget's definition or the current value:
-		var expertHint = this.options.on || this._value,
-			NewExpert;
-
-		if( expertHint ) {
-			NewExpert = expertProvider.getExpert( expertHint );
-		} else {
-			// no hint, so no value is set, so just empty
+		var dataValueType = this._determineDataValueType(),
 			NewExpert = $.valueview.experts.EmptyValue;
+
+		if( dataValueType || this.options.dataTypeId ) {
+			NewExpert = this.options.expertProvider.getExpert(
+				dataValueType,
+				this.options.dataTypeId
+			) || $.valueview.experts.UnsupportedValue;
 		}
 
-		if( !NewExpert ) {
-			NewExpert = $.valueview.experts.UnsupportedValue;
-		}
-
-		if( this._expert && NewExpert
+		if(
+			this._expert && NewExpert
 			&& this._expert.constructor === NewExpert.prototype.constructor
-			) {
+		) {
 			return; // fully compatible expert
 		}
 
@@ -667,23 +669,18 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Instantiates a parser adequate to the "on" option or the current value.
-	 *
 	 * @param {Object} [additionalParserOptions]
 	 * @return {valueParsers.ValueParser}
 	 */
 	_instantiateParser: function( additionalParserOptions ) {
-		var purpose = this._getPurpose(),
-			Parser;
-
-		if( purpose instanceof dt.DataType ) {
-			Parser = this.options.valueParserProvider.getParser(
-				purpose.getDataValueType(),
-				purpose.getId()
-			);
-		} else {
-			Parser = this.options.valueParserProvider.getParser( purpose );
+		if( !( this.options.valueParserProvider instanceof vp.ValueParserFactory ) ) {
+			throw new Error( 'No value parser provider in valueview\'s options specified' );
 		}
+
+		var Parser = this.options.valueParserProvider.getParser(
+			this._determineDataValueType(),
+			this.options.dataTypeId
+		);
 
 		var parserOptions = $.extend(
 				{},
@@ -706,13 +703,9 @@ $.widget( 'valueview.valueview', PARENT, {
 		var self = this,
 			deferred = $.Deferred(),
 			valueFormatter = this._instantiateFormatter( this._expert.valueCharacteristics() ),
-			purpose = this._getPurpose();
+			dataTypeId = this.options.dataTypeId || null;
 
-		if( typeof purpose !== 'string' ) {
-			purpose = purpose.getId();
-		}
-
-		valueFormatter.format( dataValue, purpose, 'text/html' )
+		valueFormatter.format( dataValue, dataTypeId, 'text/html' )
 			.done( function( formattedValue, formattedDataValue ) {
 				if( dataValue === formattedDataValue ) {
 					deferred.resolve( formattedValue );
@@ -732,23 +725,18 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Instantiates a formatter adequate to the "on" option or the current value.
-	 *
 	 * @param {Object} [additionalFormatterOptions]
 	 * @return {valueFormatters.ValueFormatter}
 	 */
 	_instantiateFormatter: function( additionalFormatterOptions ) {
-		var purpose = this._getPurpose(),
-			Formatter;
-
-		if( purpose instanceof dt.DataType ) {
-			Formatter = this.options.valueFormatterProvider.getFormatter(
-				purpose.getDataValueType(),
-				purpose.getId()
-			);
-		} else {
-			Formatter = this.options.valueFormatterProvider.getFormatter( purpose );
+		if( !( this.options.valueFormatterProvider instanceof vf.ValueFormatterFactory ) ) {
+			throw new Error( 'No value formatter provider in valueview\'s options specified' );
 		}
+
+		var Formatter = this.options.valueFormatterProvider.getFormatter(
+			this._determineDataValueType(),
+			this.options.dataTypeId
+		);
 
 		var formatterOptions = $.extend(
 			{},
@@ -760,27 +748,13 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Tries to figure out the purpose of this valueview. The purpose - either a DataType instance
-	 * or a DataValue type string - may be used to retrieve a parser or a formatter.
-	 *
-	 * @return {dataTypes.DataType|string}
-	 *
-	 * @throws {Error} if no proper purpose could be determined.
+	 * @return {string|null}
 	 */
-	_getPurpose: function() {
-		var purpose = this.options.on;
-
-		if( purpose instanceof dv.DataValue ) {
-			purpose = purpose.getType();
-		} else if( !purpose && this._value instanceof dv.DataValue ) {
-			purpose = this._value.getType();
-		}
-
-		if( !purpose ) {
-			throw new Error( 'No adequate information to figure out a purpose' );
-		}
-
-		return purpose;
+	_determineDataValueType: function() {
+		var value = this.value();
+		return ( !this.options.dataValueType && value )
+			? value.getType()
+			: this.options.dataValueType;
 	},
 
 	/**
@@ -846,4 +820,4 @@ $.widget( 'valueview.valueview', PARENT, {
 	}
 } );
 
-}( dataValues, dataTypes, util, jQuery ) );
+}( dataValues, util, jQuery, valueFormatters, valueParsers ) );

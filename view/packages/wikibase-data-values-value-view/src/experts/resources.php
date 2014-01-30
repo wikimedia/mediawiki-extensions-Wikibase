@@ -194,8 +194,7 @@ return call_user_func( function() {
 				'UnsupportedValue.css',
 			),
 			'dependencies' => array(
-				'dataTypes',
-				'dataValues.DataValue',
+				'jquery',
 				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 			),

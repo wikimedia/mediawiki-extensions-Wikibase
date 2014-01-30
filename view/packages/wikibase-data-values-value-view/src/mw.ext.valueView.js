@@ -1,70 +1,47 @@
 /**
- * Entrypoint for MediaWiki "ValueView" extension JavaScript code. Adds an extension object to the
- * global MediaWiki object and does some configuration on the "valueview" jQuery module.
+ * Entrypoint for MediaWiki "ValueView" extension JavaScript code.
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
-/* global dataTypes */
-( function( mw, dv, dt, $, vv ) {
+( function( mw, dv, vv ) {
 	'use strict';
 
 	mw.ext = mw.ext || {};
 
-	var expertProvider = new vv.ExpertFactory();
+	var expertProvider = new vv.ExpertFactory( vv.experts.UnsupportedValue );
 
-	// Register valueview experts available by default:
-	expertProvider.registerExpert(
-		dv.StringValue,
-		vv.experts.StringValue
+	expertProvider.registerDataValueExpert(
+		vv.experts.StringValue,
+		dv.StringValue.TYPE
 	);
 
-	expertProvider.registerExpert(
-		dv.GlobeCoordinateValue,
-		vv.experts.GlobeCoordinateValue
+	expertProvider.registerDataValueExpert(
+		vv.experts.GlobeCoordinateValue,
+		dv.GlobeCoordinateValue.TYPE
 	);
 
-	expertProvider.registerExpert(
-		dv.QuantityValue,
-		vv.experts.QuantityType
+	expertProvider.registerDataValueExpert(
+		vv.experts.QuantityType,
+		dv.QuantityValue.TYPE
 	);
 
-	expertProvider.registerExpert(
-		dv.TimeValue,
-		vv.experts.TimeValue
+	expertProvider.registerDataValueExpert(
+		vv.experts.TimeValue,
+		dv.TimeValue.TYPE
 	);
-
-	// Experts for values for certain data types:
-	// Those data types might not be defined, so check for them first.
-	var commonsMediaType = dt.getDataType( 'commonsMedia' );
-	if( commonsMediaType ) {
-		expertProvider.registerExpert(
-			commonsMediaType,
-			vv.experts.CommonsMediaType
-		);
-	}
-
-	var urlType = dt.getDataType( 'url' );
-	if( urlType ) {
-		expertProvider.registerExpert(
-			urlType,
-			vv.experts.UrlType
-		);
-	}
 
 	/**
-	 * Object representing the MeidaWiki "ValueView" extension.
-	 *
+	 * Object representing the MediaWiki "ValueView" extension.
 	 * @since 0.1
 	 */
 	mw.ext.valueView = new ( function MwExtValueView() {
 		/**
-		 * Expert provider holding all jQuery.valueview experts globally available in MediaWiki
-		 * context.
-		 *
+		 * Expert provider containing all jQuery.valueview experts available in MediaWiki context.
 		 * @since 0.1
 		 *
-		 * @type jQuery.valueview.ExpertFactory
+		 * @type {jQuery.valueview.ExpertFactory}
 		 */
 		this.expertProvider = expertProvider;
 	} )();
@@ -77,4 +54,4 @@
 	vv.prototype.options.valueParserProvider = mw.ext.valueParsers.valueParserProvider;
 	vv.prototype.options.valueFormatterProvider = mw.ext.valueFormatters.valueFormatterProvider;
 
-}( mediaWiki, dataValues, dataTypes, jQuery, jQuery.valueview ) );
+}( mediaWiki, dataValues, jQuery.valueview ) );

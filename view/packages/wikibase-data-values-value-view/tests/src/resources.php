@@ -23,7 +23,6 @@ return call_user_func( function() {
 				'jquery.valueview.ExpertFactory.tests.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'dataValues.values',
 				'jquery.valueview.ExpertFactory',
 				'jquery.valueview.tests.MockExpert',

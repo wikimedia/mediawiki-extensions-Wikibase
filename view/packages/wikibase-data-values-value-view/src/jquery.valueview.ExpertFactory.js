@@ -1,235 +1,130 @@
 /**
- * Factory for creating jQuery.valueview.Expert instances suitable for handling data values of a
- * specific data value type or for handling data values suitable for a certain data type.
- *
- * Experts can be registered for generic handling of a certain data value type or for handling of
- * data values suitable for a given data type.
- * EXAMPLE:
- *  The String data value could be handled by a StringExpert, so this expert would be used when
- *  asking for "getExpert( stringValue )". An url data type which is internally using string values
- *  to represent URLs would now automatically work with that same StringExpert when asking for
- *  "getExpert( urlDataType )". Displaying the value via the expert would result into the URL being
- *  formatted as a string. As a solution for rendering the URL as a link, an UrlExpert could be
- *  created and registered for the URL data type explicitly.
- *
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
-// TODO: Get rid of dataTypes dependency
-/* global dataTypes */
 
 jQuery.valueview = jQuery.valueview || {};
 
-jQuery.valueview.ExpertFactory = ( function( DataValue, dt, $ ) {
+( function( $ ) {
 	'use strict';
 
-	var SELF = function ValueviewExpertFactory() {
+	/**
+	 * Factory managing jQuery.valueview.Expert instances
+	 * @constructor
+	 * @since 0.1
+	 *
+	 * @param {Function} [DefaultExpert] Constructor of a default expert that shall be returned when
+	 *        no expert is registered for a specific purpose.
+	 */
+	var SELF = $.valueview.ExpertFactory = function ValueviewExpertFactory( DefaultExpert ) {
+		this._DefaultExpert = DefaultExpert || null;
 		this._expertsForDataValueTypes = {};
 		this._expertsForDataTypes = {};
 	};
 
-	SELF.prototype = {
+	$.extend( SELF.prototype, {
 		/**
-		 * Map from DataValue types to widgets responsible for the type.
-		 * @type Object
+		 * Default expert constructor to be returned when no expert is registered for a specific
+		 * purpose.
+		 * @type {Function|null}
+		 */
+		_DefaultExpert: null,
+
+		/**
+		 * @type {Object}
 		 */
 		_expertsForDataValueTypes: null,
 
 		/**
-		 * Map from DataType IDs to widgets responsible for the type. This overrules the valueViews
-		 * if $.valueview receives a DataType in its 'on' option and the type can be found in here.
-		 * If there is no Expert for the given DataType, the Expert for the DataType's data value
-		 * type will be used instead.
-		 * @type Object
+		 * @type {Object}
 		 */
 		_expertsForDataTypes: null,
 
 		/**
-		 * Registers a valueview expert for displaying values suitable for a certain data type or
-		 * of a certain data value type.
+		 * Registers a valueview expert for displaying data values suitable for a certain data type.
+		 * @since 0.1
 		 *
-		 * @param {dataTypes.DataType|Function} expertPurpose Can be either a DataType instance or a
-		 *        DataValue constructor.
-		 * @param {Function} expert Constructor of the expert
+		 * @param {Function} Expert
+		 * @param {string} dataTypeId
+		 *
+		 * @throws {Error} if no data type id is specified.
+		 * @throws {Error} if an expert for the specified data type id is registered already.
 		 */
-		registerExpert: function( expertPurpose, expert ) {
-			if( expertPurpose instanceof dt.DataType ) {
-				this.registerDataTypeExpert( expertPurpose, expert );
+		registerDataTypeExpert: function( Expert, dataTypeId ) {
+			assertIsExpertConstructor( Expert );
+
+			if( dataTypeId === undefined ) {
+				throw new Error( 'No proper data type id provided to register the expert for' );
 			}
-			else if (
-				$.isFunction( expertPurpose ) // DataValue constructor
-				&& expertPurpose.prototype instanceof DataValue
-				&& expertPurpose.TYPE
-			) {
-				this.registerDataValueExpert( expertPurpose.TYPE, expert );
+
+			if( this._expertsForDataTypes[dataTypeId] ) {
+				throw new Error( 'Expert for data type "' + dataTypeId + '" is registered already' );
 			}
-			else {
-				throw new Error( 'No sufficient indicator provided what to register the expert for. ' );
-			}
+
+			this._expertsForDataTypes[dataTypeId] = Expert;
 		},
 
 		/**
 		 * Registers a valueview expert for displaying values of a certain data value type.
-		 *
 		 * @since 0.1
 		 *
-		 * @param {Function|string} dataValueType Either a DataValue constructor or its type.
-		 * @param {Function} expert Constructor of the expert
+		 * @param {Function} Expert
+		 * @param {string} dataValueType
+		 *
+		 * @throws {Error} if no data value type is specified.
+		 * @throws {Error} if an expert for the specified DataValue type is registered already.
 		 */
-		registerDataValueExpert: function( dataValueType, expert ) {
-			if( typeof dataValueType !== 'string' ) {
-				throw new Error( 'the data value type is expected to be a string' );
+		registerDataValueExpert: function( Expert, dataValueType ) {
+			assertIsExpertConstructor( Expert );
+
+			if( dataValueType === undefined ) {
+				throw new Error( 'No proper data value type provided to register the expert for' );
 			}
-			if( !$.isFunction( expert ) ) {
-				throw new Error( 'No expert constructor given for data value type "'
-					+ dataValueType + '"' );
+
+			if( this._expertsForDataValueTypes[dataValueType] ) {
+				throw new Error( 'Expert for data value type "' + dataValueType + '" is registered '
+					+ 'already' );
 			}
-			this._expertsForDataValueTypes[ dataValueType ] = expert;
+
+			this._expertsForDataValueTypes[dataValueType] = Expert;
 		},
 
 		/**
-		 * Registers a valueview expert for displaying data values suitable for a certain data type.
+		 * Returns the expert registered for a data type (if a data type expert is registered and
+		 * a data type id is specified) or the expert registered for a data value type. If no expert
+		 * is registered regarding the specified parameters, "null" is returned.
 		 *
-		 * @since 0.1
+		 * @param {string} dataValueType
+		 * @param {string} [dataTypeId]
+		 * @return {Function|null}
 		 *
-		 * @param {dt.DataType|string} dataType
-		 * @param {Function} expert Constructor of the expert
+		 * @throws {Error} if no proper parameters have been specified.
 		 */
-		registerDataTypeExpert: function( dataType, expert ) {
-			var dataTypeId;
+		getExpert: function( dataValueType, dataTypeId ) {
+			var expert;
 
-			if( dataType instanceof dt.DataType ) {
-				dataTypeId = dataType.getId();
-			}
-			else if( typeof dataType === 'string' ) {
-				dataTypeId = dataType;
-			} else {
-				throw new Error( 'data type ID (as string) or dataTypes.DataType instance expected' );
-			}
-			if( !$.isFunction( expert ) ) {
-				throw new Error( 'No expert constructor given for data type "' + dataTypeId + '"' );
-			}
-			this._expertsForDataTypes[ dataTypeId ] = expert;
-		},
-
-		/**
-		 * Returns all data value types which can be represented by the valueview widget since there
-		 * is an Expert constructor for presenting them.
-		 *
-		 * @since 0.1
-		 *
-		 * @return string[]
-		 */
-		getCoveredDataValueTypes: function() {
-			var dvType,
-				types = [];
-
-			for( dvType in this._expertsForDataValueTypes ) {
-				types.push( dvType );
-			}
-			return types;
-		},
-
-		/**
-		 * Returns all data types which can be represented by the valueview widget since there is an
-		 * Expert constructor for representing a value suitable for the specific data type or there
-		 * is an Expert constructor which can handle values of the the data type's data value type.
-		 *
-		 * @since 0.1
-		 *
-		 * @return string[]
-		 */
-		getCoveredDataTypes: function() {
-			var types = [],
-				dataTypeExperts = this._expertsForDataTypes,
-				dataValueExperts = this._expertsForDataValueTypes;
-
-			$.each( dt.getDataTypeIds(), function( i, dtType ) {
-				if( dataTypeExperts.hasOwnProperty( dtType )
-					|| dataValueExperts.hasOwnProperty(
-							dt.getDataType( dtType ).getDataValueType()
-						)
-				) {
-					types.push( dtType );
-				}
-			} );
-			return types;
-		},
-
-		/**
-		 * Returns whether there is a suitable expert constructor for representing a certain
-		 * kind of value within a jQuery.valueview.
-		 *
-		 * @since 0.1
-		 *
-		 * @param {dataTypes.DataType|dataValues.DataValue|Function} onTheBasisOf
-		 * @return boolean
-		 */
-		hasExpertFor: function( onTheBasisOf ) {
-			return !!this.getExpert( onTheBasisOf );
-		},
-
-		/**
-		 * Will return the most suitable valueview Expert based on a given hint.
-		 *
-		 * @param {dataTypes.DataType|dataValues.DataValue|Function} onTheBasisOf
-		 * @return {jQuery.valueview.Expert|null} null if there is no Expert available
-		 *
-		 * @throws {Error} if no sufficient first parameter is given.
-		 */
-		getExpert: function( onTheBasisOf ) {
-			var valueType,
-				dataTypeId,
-				expert;
-
-			if( onTheBasisOf instanceof DataValue ) {
-				valueType = onTheBasisOf.getType();
-			}
-			else if( onTheBasisOf instanceof dt.DataType ) {
-				valueType = onTheBasisOf.getDataValueType();
-				dataTypeId = onTheBasisOf.getId();
-			}
-			else if (
-				$.isFunction( onTheBasisOf ) // DataValue constructor
-				&& onTheBasisOf.prototype instanceof DataValue
-				&& onTheBasisOf.TYPE
-			) {
-				valueType = onTheBasisOf.TYPE;
-			}
-			else {
-				throw new Error( 'No sufficient indicator provided for choosing a valueview view widget' );
+			if( typeof dataTypeId === 'string' ) {
+				expert = this._expertsForDataTypes[dataTypeId];
 			}
 
-			if( dataTypeId ) {
-				// try to get a view designed for this specific DataType
-				expert = this._expertsForDataTypes[ dataTypeId ];
-			}
-			if( !expert ) {
-				// no view for specific data type or only DataValue given, so get the view based on
-				// given DataValue's type or on given DataType's data value type:
-				expert = this._expertsForDataValueTypes[ valueType ];
+			if( !expert && typeof dataValueType === 'string' ) {
+				expert = this._expertsForDataValueTypes[dataValueType];
+			} else if( !expert ) {
+				throw new Error( 'No sufficient purpose provided for choosing an expert' );
 			}
 
-			return expert || null;
-		},
-
-		/**
-		 * Returns the expert required by a valueview for representing a certain kind of data value
-		 * or data type. Expects a data value or data type for choosing the relevant expert.
-		 *
-		 * @since 0.1
-		 *
-		 * @param {dataTypes.DataType|dataValues.DataValue|Function} onTheBasisOf
-		 * @param {jQuery} $expertViewPort
-		 * @param {jQuery.valueview.ViewState} viewState
-		 * @return jQuery.valueview.Expert|null
-		 */
-		newExpert: function( onTheBasisOf, $expertViewPort, viewState ) {
-			var Expert = this.getExpert( onTheBasisOf );
-			return Expert ? new Expert( $expertViewPort, viewState ) : null;
+			return expert || this._DefaultExpert;
 		}
-	};
+	} );
 
-	return SELF;
+	/**
+	 * @param {Function} Expert
+	 * @throws {Error} if the provided argument is not a jQuery.valueview.Expert constructor.
+	 */
+	function assertIsExpertConstructor( Expert ) {
+		if( !( $.isFunction( Expert ) && Expert.prototype instanceof $.valueview.Expert ) ) {
+			throw new Error( 'Invalid jQuery.valueview.Expert constructor' );
+		}
+	}
 
-}( dataValues.DataValue, dataTypes, jQuery ) );
+}( jQuery ) );
