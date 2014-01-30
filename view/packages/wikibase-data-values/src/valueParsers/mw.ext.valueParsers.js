@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, dv, vp, vv ) {
+( function( mw, dv, vp ) {
 	'use strict';
 
 	mw.ext = mw.ext || {};
@@ -35,10 +35,4 @@
 		this.valueParserProvider = valueParserProvider;
 	} )();
 
-	// 'valueParserProvider' is a required option in the original jQuery.valueview widget
-	// implementation. However, if valueParsers is used in MediaWiki context, then the option should
-	// not be required anymore and default to the ValueParserFactory object set in
-	// mw.ext.valueParsers.
-	vv.prototype.options.valueParserProvider = valueParserProvider;
-
-}( mediaWiki, dataValues, valueParsers, jQuery.valueview ) );
+}( mediaWiki, dataValues, valueParsers ) );

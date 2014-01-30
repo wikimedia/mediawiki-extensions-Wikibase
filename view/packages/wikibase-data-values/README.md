@@ -21,6 +21,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 * Renamed "valueFormatters.factory" Resource Loader module to "valueFormatters.ValueFormatterFactory"
 * Renamed "valueParsers.factory" Resource Loader module to "valueParsers.ValueParserFactory"
+* Removed ValueView dependency from "mw.ext.valueFormatters" module and "mw.ext.valueParsers" module.
 
 ### 0.2 (2014-01-24)
 

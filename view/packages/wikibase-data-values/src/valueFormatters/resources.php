@@ -26,7 +26,6 @@ return call_user_func( function() {
 				'valueFormatters',
 				'valueFormatters.formatters',
 				'valueFormatters.ValueFormatterFactory',
-				'mw.ext.valueView',
 			),
 		),
 

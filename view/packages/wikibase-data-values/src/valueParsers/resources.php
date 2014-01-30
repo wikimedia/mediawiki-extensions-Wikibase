@@ -27,7 +27,6 @@ return call_user_func( function() {
 				'valueParsers',
 				'valueParsers.parsers',
 				'valueParsers.ValueParserFactory',
-				'mw.ext.valueView',
 			),
 		),
 
