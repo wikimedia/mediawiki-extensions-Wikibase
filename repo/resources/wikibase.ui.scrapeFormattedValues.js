@@ -39,7 +39,7 @@
 
 			$.each( claim.getQualifiers().getGroupedSnakLists(), function( j, snakList ) {
 				snakList.each( function( k, snak ) {
-					if( snak.getValue().getType() === 'quantity' ) {
+					if( snak.getType() === 'value' && snak.getValue().getType() === 'quantity' ) {
 						$claim = $claim || getClaimNode( claim.getGuid() );
 						$qualifierValues = $qualifierValues || getQualifierValueNodes( $claim );
 
@@ -52,7 +52,7 @@
 			$.each( claim.getReferences(), function( j, reference ) {
 				$.each( reference.getSnaks().getGroupedSnakLists(), function( j, snakList ) {
 					snakList.each( function( k, snak ) {
-						if( snak.getValue().getType() === 'quantity' ) {
+						if( snak.getType() === 'value' && snak.getValue().getType() === 'quantity' ) {
 							$referenceValues
 								= $referenceValues || getReferenceValueNodes( reference.getHash() );
 
