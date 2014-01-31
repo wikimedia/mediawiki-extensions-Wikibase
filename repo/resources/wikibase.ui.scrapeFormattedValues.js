@@ -24,13 +24,13 @@
 		wb.__formattedValues = {};
 		$.each( wb.entity.getClaims(), function( i, claim ) {
 			var $claim = null,
-				mainSnakDataValue = claim.getMainSnak().getValue(),
+				mainSnak = claim.getMainSnak(),
 				$qualifierValues = null,
 				iQualifiers = 0,
 				$referenceValues = null,
 				iReferences = 0;
 
-			if( mainSnakDataValue.getType() === 'quantity' ) {
+			if( mainSnak.getType() === 'value' && mainSnak.getValue().getType() === 'quantity' ) {
 				$claim = getClaimNode( claim.getGuid() );
 
 				wb.__formattedValues[JSON.stringify( claim.getMainSnak().getValue().toJSON() )]
