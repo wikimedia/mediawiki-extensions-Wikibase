@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use Tests\Wikibase\DataModel\Unserializers\DeserializerBaseTest;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -104,5 +105,25 @@ class SnakDeserializerTest extends DeserializerBaseTest {
 				)
 			),
 		);
+	}
+
+	public function testParsePropertyIdCatchesEntityIdParsingException() {
+		$mockEntityIdParser = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
+		$mockEntityIdParser->expects( $this->once() )
+			->method( 'parse' )
+			->will( $this->throwException( new EntityIdParsingException() ) );
+
+		$deserializer = new SnakDeserializer(
+			new DataValueDeserializer( array (
+				'string' => 'DataValues\StringValue',
+			) ),
+			$mockEntityIdParser
+		);
+
+		$this->setExpectedException( '\Deserializers\Exceptions\InvalidAttributeException' );
+		$deserializer->deserialize( array(
+			'snaktype' => 'novalue',
+			'property' => 'FooBar'
+		) );
 	}
 }
