@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_19a98878",
+        "filename": "lib/resources/formatters/wikibase.formatters.register.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-01-31T21:49:11Z",
+      "side": 1,
+      "message": "So you are getting the DataType by id to then just obtain its id? Why not just use the id?",
+      "revId": "3ecc16f5c6194740ee50bef50ffbcf9e8e8719ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
