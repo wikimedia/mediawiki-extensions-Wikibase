@@ -19,7 +19,15 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 class ClaimSerializerTest extends SerializerBaseTest {
 
 	public function buildSerializer() {
-		return new ClaimSerializer( new SnakSerializer( new DataValueSerializer() ) );
+		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$snakSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnValue( array(
+				'snaktype' => 'novalue',
+				'property' => "P42"
+			) ) );
+
+		return new ClaimSerializer( $snakSerializerMock );
 	}
 
 	public function serializableProvider() {
