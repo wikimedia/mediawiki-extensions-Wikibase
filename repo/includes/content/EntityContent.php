@@ -175,8 +175,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return EntityView
 	 */
 	public function getEntityView( IContextSource $context = null, ParserOptions $options = null, LanguageFallbackChain $languageFallbackChain = null ) {
-		$lang = null;
-
 		//TODO: cache last used entity view
 
 		if ( $context === null ) {
