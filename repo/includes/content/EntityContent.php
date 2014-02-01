@@ -175,8 +175,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return EntityView
 	 */
 	public function getEntityView( IContextSource $context = null, ParserOptions $options = null, LanguageFallbackChain $languageFallbackChain = null ) {
-		$lang = null;
-
 		//TODO: cache last used entity view
 
 		if ( $context === null ) {
@@ -628,6 +626,12 @@ abstract class EntityContent extends AbstractContent {
 		$page->clear();
 		$page->clearPreparedEdit();
 
+		// Insane workaround to make sure Wikipage isn't saving to the ParserCache
+		// without letting us pass in our options. Bug: 60715
+		global $wgEnableParserCache;
+		$enableParserCache = $wgEnableParserCache;
+		$wgEnableParserCache = false;
+
 		$status = $page->doEditContent(
 			$this,
 			$summary,
@@ -635,6 +639,7 @@ abstract class EntityContent extends AbstractContent {
 			$baseRevId,
 			$user
 		);
+		$wgEnableParserCache = $enableParserCache;
 
 		if( $status->isGood() && isset ( $status->value['new'] ) && $status->value['new'] ) {
 			StoreFactory::getStore()->newEntityPerPage()->addEntityContent( $this );
