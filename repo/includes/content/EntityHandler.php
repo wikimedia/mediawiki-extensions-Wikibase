@@ -52,6 +52,23 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * @see ContentHandler::makeParserOptions
+	 *
+	 * @since 0.5
+	 *
+	 * @param IContextSource|User|string $context
+	 *
+	 * @return ParserOptions
+	 */
+	public function makeParserOptions( $context ) {
+		$options = parent::makeParserOptions( $context );
+
+		// Split our ParserCache by user language
+		$options->getUserLangObj();
+		return $options;
+	}
+
+	/**
 	 * Creates a Content object for the given Entity object.
 	 *
 	 * @since 0.4
