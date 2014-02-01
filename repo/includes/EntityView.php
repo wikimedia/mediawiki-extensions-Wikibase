@@ -356,7 +356,7 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		if ( $generateHtml ) {
-			$html = $this->getHtml( $entityRevision, $this->getLanguage(), $editable );
+			$html = $this->getHtml( $entityRevision, $editable );
 			$pout->setText( $html );
 			$pout->setExtensionData( 'wikibase-view-chunks', $this->getPlaceholders() );
 		}
