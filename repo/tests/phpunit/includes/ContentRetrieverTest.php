@@ -7,6 +7,7 @@ use Wikibase\ContentRetriever;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use WikiPage;
+use TestSites;
 
 /**
  * @covers Wikibase\ContentRetriever
@@ -27,6 +28,16 @@ use WikiPage;
  * @group medium
  */
 class ContentRetrieverTest extends \MediaWikiTestCase {
+
+	public function setUp() {
+		parent::setUp();
+		static $setUp = false;
+
+		if ( !$setUp ) {
+			TestSites::insertIntoDb();
+			$setUp = true;
+		}
+	}
 
 	public function testGetContentForRequest() {
 		$cases = $this->getContentCases();

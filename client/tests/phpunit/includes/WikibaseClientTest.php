@@ -10,6 +10,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
+use TestSites;
 
 /**
  * @covers Wikibase\Client\WikibaseClient
@@ -26,6 +27,16 @@ use Wikibase\SettingsArray;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
+
+	public function setUp() {
+		parent::setUp();
+		static $setUp = false;
+
+		if ( !$setUp ) {
+			TestSites::insertIntoDb();
+			$setUp = true;
+		}
+	}
 
 	public function testGetDataTypeFactoryReturnType() {
 		$returnValue = $this->getDefaultInstance()->getDataTypeFactory();

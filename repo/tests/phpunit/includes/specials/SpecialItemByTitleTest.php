@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Repo\Specials\SpecialItemByTitle;
+use TestSites;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemByTitle
@@ -21,6 +22,16 @@ use Wikibase\Repo\Specials\SpecialItemByTitle;
  * @author Adam Shorland
  */
 class SpecialItemByTitleTest extends SpecialPageTestBase {
+
+	public function setUp() {
+		parent::setUp();
+		static $setUp = false;
+
+		if ( !$setUp ) {
+			TestSites::insertIntoDb();
+			$setUp = true;
+		}
+	}
 
 	protected function newSpecialPage() {
 		return new SpecialItemByTitle();
