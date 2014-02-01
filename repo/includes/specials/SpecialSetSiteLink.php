@@ -124,13 +124,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialWikibaseRepoPage::parseEntityId()
-	 */
-	protected function parseEntityId( $rawId ) {
-		return $this->parseItemId( $rawId );
-	}
-
-	/**
 	 * @see SpecialModifyEntity::modifyEntity()
 	 *
 	 * @since 0.4
