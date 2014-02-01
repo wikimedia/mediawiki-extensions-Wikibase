@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_75bd2c16",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-01T23:29:36Z",
+      "side": 1,
+      "message": "you just want array( $badgeId )",
+      "revId": "14e06ba84c2cca6ee24040b3d749e1250c6d39bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_d5ae40e4",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-01T23:29:36Z",
+      "side": 1,
+      "message": "Better work with something else then pass by reference over here...",
+      "revId": "14e06ba84c2cca6ee24040b3d749e1250c6d39bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_35a0c4f0",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-01T23:29:36Z",
+      "side": 1,
+      "message": "This should be a new tests (\u003d\u003e new function)",
+      "revId": "14e06ba84c2cca6ee24040b3d749e1250c6d39bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_15a5c800",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-01T23:29:36Z",
+      "side": 1,
+      "message": "This should be a new tests (\u003d\u003e new function)",
+      "revId": "14e06ba84c2cca6ee24040b3d749e1250c6d39bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
