@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_b564d4e2",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-01T23:06:05Z",
+      "side": 1,
+      "message": "Yikes, Settings... isn\u0027t there a better way?",
+      "revId": "c25b1b27fd2ec2419c8181f0fd304b501f05b1e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_d56f60bf",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-01T23:06:05Z",
+      "side": 1,
+      "message": "not known in this scope",
+      "revId": "c25b1b27fd2ec2419c8181f0fd304b501f05b1e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
