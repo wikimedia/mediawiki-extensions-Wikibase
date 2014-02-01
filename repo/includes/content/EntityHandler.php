@@ -8,6 +8,7 @@ use MWContentSerializationException;
 use MWException;
 use Revision;
 use Title;
+use RequestContext;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
@@ -49,6 +50,29 @@ abstract class EntityHandler extends ContentHandler {
 	public function makeEmptyContent() {
 		$contentClass = $this->getContentClass();
 		return $contentClass::newEmpty();
+	}
+
+	/**
+	 * @see ContentHandler::makeParserOptions
+	 *
+	 * @since 0.5
+	 *
+	 * @param IContextSource|User|string $context
+	 *
+	 * @return ParserOptions
+	 */
+	public function makeParserOptions( $context ) {
+		if ( $context === 'canonical' ) {
+			// There are no "canonical" ParserOptions for Wikibase,
+			// as everything is User-language dependent
+			$context = RequestContext::getMain();
+		}
+
+		$options = parent::makeParserOptions( $context );
+
+		// Split our ParserCache by user language
+		$options->getUserLangObj();
+		return $options;
 	}
 
 	/**
