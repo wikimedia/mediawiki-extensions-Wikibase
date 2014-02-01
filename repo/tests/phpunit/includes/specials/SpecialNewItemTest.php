@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Repo\Specials\SpecialNewItem;
+use TestSites;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewItem
@@ -21,6 +22,16 @@ use Wikibase\Repo\Specials\SpecialNewItem;
  * @author Adam Shorland
  */
 class SpecialNewItemTest extends SpecialPageTestBase {
+
+	public function setUp() {
+		parent::setUp();
+		static $setUp = false;
+
+		if ( !$setUp ) {
+			TestSites::insertIntoDb();
+			$setUp = true;
+		}
+	}
 
 	protected function newSpecialPage() {
 		return new SpecialNewItem();
