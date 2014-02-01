@@ -1212,6 +1212,7 @@ $messages['et'] = array(
 	'wikibase-diffview-rank-preferred' => 'Eelisjärk',
 	'wikibase-diffview-rank-normal' => 'Tavajärk',
 	'wikibase-diffview-rank-deprecated' => 'Igandjärk',
+	'wikibase-diffview-qualifier' => 'näitaja',
 	'wikibase-diffview-label' => 'silt',
 	'wikibase-diffview-alias' => 'rööpkujud',
 	'wikibase-diffview-description' => 'kirjeldus',
@@ -1526,7 +1527,7 @@ $messages['gl'] = array(
 	'wikibase-diffview-alias' => 'pseudónimos',
 	'wikibase-diffview-description' => 'descrición',
 	'wikibase-diffview-link' => 'ligazóns',
-	'wikibase-error-unexpected' => 'Houbo un erro inesperado.',
+	'wikibase-error-unexpected' => 'Produciuse un erro inesperado.',
 	'wikibase-error-save-generic' => 'Houbo un erro ao levar a cabo o gardado, polo que non se puideron completar os cambios.',
 	'wikibase-error-remove-generic' => 'Houbo un erro ao levar a cabo a eliminación, polo que non se puideron completar os cambios.',
 	'wikibase-error-save-connection' => 'Houbo un erro na conexión ao levar a cabo o gardado, polo que non se puideron completar os cambios. Comprobe a súa conexión á internet.',
@@ -2300,6 +2301,7 @@ $messages['lb'] = array(
 $messages['lrc'] = array(
 	'wikibase-error-ui-session-failure' => 'نشستگه شما تموم بیه. لطفن دواره بیایت وامین.',
 	'wikibase-sitelinks-sitename-columnheading' => 'زون',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'سیلجا',
 	'datatypes-type-commonsMedia' => 'فایل پرنمون رسانه',
 );
 

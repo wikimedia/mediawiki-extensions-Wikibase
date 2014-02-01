@@ -363,7 +363,7 @@ $messages['ar'] = array(
 	'wikibase-linkitem-not-loggedin' => 'لاستخدام هذه الميزة لا بد من تسجيل الدخول على هذه الويكي وعلى [$1 مستودع البيانات المركزي].',
 	'wikibase-linkitem-success-link' => 'تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [ $1  مستودعنا المركزي للبيانات].',
 	'wikibase-rc-hide-wikidata' => '$1 ويكيبيانات',
-	'wikibase-rc-show-wikidata-pref' => 'إظهار عمليات تحرير ويكيبيانات في صفحة أحدث التغييرات',
+	'wikibase-rc-show-wikidata-pref' => 'إظهار تعديلات ويكي بيانات في صفحة أحدث التغييرات',
 	'wikibase-rc-wikibase-edit-letter' => 'د',
 );
 
@@ -706,6 +706,7 @@ $messages['bs'] = array(
  * @author Arnaugir
  * @author Edinwiki
  * @author Grondin
+ * @author McDutchie
  * @author Papapep
  * @author Paucabot
  * @author Qllach
@@ -717,7 +718,7 @@ $messages['ca'] = array(
 	'wikibase-client-desc' => "Client per l'extensió Wikibase",
 	'specialpages-group-wikibaseclient' => 'Client de Wikidata',
 	'wikibase-after-page-move' => "També podeu [$1 actualitzar] l'element associat de Wikidata per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
-	'wikibase-after-page-move-queued' => "L'[element $1 de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
+	'wikibase-after-page-move-queued' => "L'[$1 element de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
 	'wikibase-comment-remove' => 'Element associat de Wikidata eliminat. Enllaços de llengua suprimits.',
 	'wikibase-comment-linked' => "S'ha enllaçat un element de Wikidata a aquesta pàgina.",
 	'wikibase-comment-unlink' => "S'ha desvinculat aquesta pàgina de l'element Wikidata. Suprimits els enllaços de llengua.",
@@ -1976,8 +1977,39 @@ $messages['hy'] = array(
  */
 $messages['ia'] = array(
 	'wikibase-client-desc' => 'Cliente pro le extension Wikibase',
+	'specialpages-group-wikibaseclient' => 'Cliente Wikidata',
+	'tooltip-t-wikibase' => 'Ligamine a un elemento in le repositorio de datos connectite',
+	'wikibase-after-page-move' => 'Tu pote anque [$1 actualisar] le elemento Wikidata associate pro mantener le ligamines de lingua in le pagina renominate.',
+	'wikibase-after-page-move-queued' => 'Le [$1 elemento Wikidata] associate a iste pagina essera tosto actualisate automaticamente.',
+	'wikibase-comment-add' => 'Un elemento Wikidata ha essite create.',
+	'wikibase-comment-remove' => 'Le elemento Wikidata associate ha essite delite. Le ligamines de lingua ha essite removite.',
+	'wikibase-comment-linked' => 'Un elemento Wikidata ha essite ligate a iste pagina.',
+	'wikibase-comment-unlink' => 'Iste pagina ha essite disligate ab le elemento Wikidata. Le ligamines de lingua ha essite removite.',
+	'wikibase-comment-restore' => 'Le deletion del elemento Wikidata associate ha essite disfacite. Le ligamines de lingua ha essite restaurate.',
+	'wikibase-comment-update' => 'Elemento Wikidata modificate',
+	'wikibase-comment-sitelink-add' => 'Ligamine de lingua addite: $1',
+	'wikibase-comment-sitelink-change' => 'Ligamine de lingua cambiate de $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Ligamine de lingua removite: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|cambiamento|cambiamentos}}',
+	'wikibase-dataitem' => 'Elemento de datos',
 	'wikibase-editlinks' => 'Modificar ligamines',
 	'wikibase-editlinkstitle' => 'Modificar ligamines a altere linguas',
+	'wikibase-linkitem-addlinks' => 'Adder ligamines',
+	'wikibase-linkitem-alreadylinked' => 'Le pagina que tu voleva ligar es jam attachate a un [$1 elemento] in le repositorio central de datos que liga a $2 in iste sito. Elementos pote solmente haber un pagina attachate per sito. Per favor elige un altere pagina pro ligar.',
+	'wikibase-linkitem-close' => 'Clauder dialogo e recargar pagina',
+	'wikibase-linkitem-failure' => 'Un error incognite ha occurrite durante le tentativa de ligar le pagina indicate.',
+	'wikibase-linkitem-title' => 'Ligar pagina',
+	'wikibase-linkitem-linkpage' => 'Ligar pagina',
+	'wikibase-linkitem-selectlink' => 'Per favor selige un sito e un pagina al qual ligar iste pagina.',
+	'wikibase-linkitem-input-site' => 'Lingua:',
+	'wikibase-linkitem-input-page' => 'Pagina:',
+	'wikibase-linkitem-confirmitem-text' => 'Le pagina que tu ha eligite es jam associate a un [$1 elemento in nostre repositorio central de datos]. Per favor confirma que le {{PLURAL:$2|pagina|paginas}} monstrate hic infra es {{PLURAL:$2|illo|illos}} que tu vole ligar a iste pagina.',
+	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
+	'wikibase-linkitem-not-loggedin-title' => 'Tu debe aperir session',
+	'wikibase-linkitem-not-loggedin' => 'Tu debe aperir session in iste wiki e in le [$1 repositorio central de datos] pro usar iste function.',
+	'wikibase-linkitem-success-link' => 'Le paginas ha essite ligate con successo. Le elemento continente le ligamines se trova in nostre [$1 repositorio central de datos].',
+	'wikibase-property-notfound' => 'Proprietate $1 non trovate.',
+	'wikibase-property-notsupportedyet' => 'Wikibase non supporta ancora le typo de proprietate pro le proprietate $1.',
 );
 
 /** Indonesian (Bahasa Indonesia)
@@ -2609,8 +2641,10 @@ $messages['lez'] = array(
 $messages['lrc'] = array(
 	'wikibase-comment-sitelink-add' => 'هوم پیوند زون اضاف بیه:$1',
 	'wikibase-comment-sitelink-remove' => 'هوم پیوند زون ورداشته بیه:$1',
+	'wikibase-linkitem-selectlink' => 'لطفن یه گل سیلجا و بلگه که شما میهایت د ای بلگه هوم پیوند با انتخاو بکید.',
 	'wikibase-linkitem-input-site' => 'زون:',
 	'wikibase-linkitem-not-loggedin-title' => 'شما با بیایت وامین',
+	'wikibase-unconnectedpages-page' => 'نوم گه نتیجه نه وا بلگه شرو کو',
 	'wikibase-unconnectedpages-submit' => 'رو',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" کد زون معتوری نئ.',
 );
@@ -3745,6 +3779,7 @@ $messages['sk'] = array(
 	'tooltip-t-wikibase' => 'Odkaz na prepojenú položku dátového úložiska',
 	'wikibase-after-page-move' => 'Môžete tiež [$1 aktualizovať] súvisiacu položku Wikiúdajov, aby na presunutej stránke zostali odkazy na iné jazyky.',
 	'wikibase-after-page-move-queued' => 'Súvisiaca [$1 položka Wikiúdajov] bude zakrátko automaticky aktualizovaná.',
+	'wikibase-comment-add' => 'Položka Wikiúdajov bola vytvorená.',
 	'wikibase-comment-remove' => 'Súvisiaca položka Wikiúdajov bola vymazaná. Medzijazykové odkazy odstránené.',
 	'wikibase-comment-linked' => 'Stránka bola prepojená s položkou Wikiúdajov.',
 	'wikibase-comment-unlink' => 'Stránka bola odpojená od položky Wikiúdajov. Medzijazykové odkazy odstránené.',
@@ -3758,6 +3793,7 @@ $messages['sk'] = array(
 	'wikibase-editlinks' => 'Upraviť odkazy',
 	'wikibase-editlinkstitle' => 'Upraviť medzijazykové odkazy',
 	'wikibase-linkitem-addlinks' => 'Pridať odkazy',
+	'wikibase-linkitem-close' => 'Zavrieť dialóg a obnoviť stránku',
 	'wikibase-linkitem-title' => 'Prepojiť so stránkou',
 	'wikibase-linkitem-linkpage' => 'Prepojiť so stránkou',
 	'wikibase-linkitem-selectlink' => 'Zvoľte prosím jazyk a stránku, s ktorou chcete túto stránku prepojiť.',
@@ -3766,6 +3802,7 @@ $messages['sk'] = array(
 	'wikibase-linkitem-confirmitem-text' => 'Zvolená stránka je už prepojená s [$1 položkou v našom centrálnom úložisku]. Potvrďte prosím, že dolu {{PLURAL:$2|uvedená stránka je tá, s ktorou|uvedené stránky sú tie, s ktorými}} chcete túto stránku prepojiť.',
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdiť',
 	'wikibase-linkitem-not-loggedin-title' => 'Musíte byť prihlásený',
+	'wikibase-linkitem-success-link' => 'Stránky boli úspešne prepojené. Položku s odkazmi nájdete v [$1 centrálnom dátovom úložisku].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikiúdaje',
 	'wikibase-rc-show-wikidata-pref' => 'Zobraziť úpravy Wikiúdajov v posledných úpravách',
 	'wikibase-rc-wikibase-edit-title' => 'Úprava Wikiúdajov',
