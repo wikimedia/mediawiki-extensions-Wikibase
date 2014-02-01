@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_aa7b4fbc",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-01T21:04:02Z",
+      "side": 1,
+      "message": "This comment should explain why and how calling the getter has that effect. The workings are a bit arcane, let\u0027s leave some hints for the ones who come ofter us :)",
+      "revId": "00397087c41d3cef3749220ff59e3b5a99e96860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
