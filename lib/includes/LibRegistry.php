@@ -86,16 +86,6 @@ final class LibRegistry {
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @return EntityIdParser
-	 */
-	public function getEntityIdParser() {
-		//TODO: make the ID builders configurable
-		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
-	}
-
-	/**
 	 * Returns a new instance constructed from global settings.
 	 *
 	 * @since 0.4
