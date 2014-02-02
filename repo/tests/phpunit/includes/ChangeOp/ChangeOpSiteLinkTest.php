@@ -43,7 +43,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( 'plwiki', 'Warszawa', array( 'FA', 'GA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q42' ), 'FA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new PropertyId( 'P42' ) ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q32' ) ) );
+		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q3552127832535' ) ) );
 
 		return $argLists;
 	}
