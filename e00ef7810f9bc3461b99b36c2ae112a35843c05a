@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_35920401",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-02-02T07:29:10Z",
+      "side": 1,
+      "message": "A comment would be nice at this point as the name isn\u0027t really intuitive. Maybe the settings should be mentioned.",
+      "revId": "e00ef7810f9bc3461b99b36c2ae112a35843c05a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_159708f1",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-02-02T07:29:10Z",
+      "side": 1,
+      "message": "Huh? badgeId suddenly is if type ItemId? Has to be the serialization of it. I don\u0027t think splitting this two functions is the way to go here.",
+      "revId": "e00ef7810f9bc3461b99b36c2ae112a35843c05a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_55f5904b",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-02-02T07:29:10Z",
+      "side": 1,
+      "message": "I don\u0027t think this its needed because every test has to change the settings anyhow if it depends on it. However it doesn\u0027t harm to have this here, just a bit too complicated.",
+      "revId": "e00ef7810f9bc3461b99b36c2ae112a35843c05a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
