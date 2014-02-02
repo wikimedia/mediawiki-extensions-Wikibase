@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_bbf4c384",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-02T21:57:37Z",
+      "side": 1,
+      "message": "FFS. This class is deprecated. Please stop introducing new usages. You can get the repo settings from the top level repo factory",
+      "revId": "98a80118b22135638d2457731c0c8d5e46582cc4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
