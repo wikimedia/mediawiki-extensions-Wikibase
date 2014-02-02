@@ -12,35 +12,62 @@ use SplFileInfo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NoClientOrRepoUsageTest extends \PHPUnit_Framework_TestCase {
+class NoBadDependencyUsageTest extends \PHPUnit_Framework_TestCase {
 
-	public function testNoRepoUsage() {
+	public function testNoRepoUsageInLib() {
 		// Increasing this allowance is forbidden
 		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 4 );
 		$this->assertStringNotInLib( 'Wikibase\\Repo\\', 4 );
 	}
 
-	public function testNoClientUsage() {
+	public function testNoClientUsageInLib() {
 		// Increasing this allowance is forbidden
 		$this->assertStringNotInLib( 'WikibaseClient' . '::', 3 );
 		$this->assertStringNotInLib( 'Wikibase\\Client\\', 3 );
 	}
 
-	public function assertStringNotInLib( $string, $maxAllowance = 0 ) {
-		$dirs = array(
-			__DIR__ . '/../../'
+	public function testNoSettingsUsageOutsideLib() {
+		// Increasing this allowance is forbidden
+		$this->assertStringNotInRepo( 'Settings::', 21 );
+		$this->assertStringNotInClient( 'Settings::', 16 );
+	}
+
+	private function assertStringNotInLib( $string, $maxAllowance ) {
+		$this->assertStringNotInDir(
+			$string,
+			__DIR__ . '/../../',
+			$maxAllowance
 		);
+	}
+	private function assertStringNotInClient( $string, $maxAllowance ) {
+		$this->assertStringNotInDir(
+			$string,
+			__DIR__ . '/../../../client/',
+			$maxAllowance
+		);
+	}
+
+	private function assertStringNotInRepo( $string, $maxAllowance ) {
+		$this->assertStringNotInDir(
+			$string,
+			__DIR__ . '/../../../repo/',
+			$maxAllowance
+		);
+	}
+
+	private function assertStringNotInDir( $string, $dirs, $maxAllowance ) {
+		$dirs = (array)$dirs;
 
 		foreach ( $dirs as $dir ) {
 			$this->assertLessThanOrEqual(
 				$maxAllowance,
 				$this->countStringInDir( $string, $dir ),
-				'You are not allowed to use Repo or Client code in Lib!'
+				'You are not allowed to use ' . $string . ' in this component'
 			);
 		}
 	}
 
-	public function countStringInDir( $string, $dir ) {
+	private function countStringInDir( $string, $dir ) {
 		$count = 0;
 		$directoryIterator = new RecursiveDirectoryIterator( $dir );
 
