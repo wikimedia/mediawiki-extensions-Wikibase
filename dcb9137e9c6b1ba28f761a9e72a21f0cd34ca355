@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_fb87ebda",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-02T22:19:32Z",
+      "side": 1,
+      "message": "you should really not alter this permanently (set it back in tear down). Tests shouldn\u0027t permanently alter settings!",
+      "revId": "dcb9137e9c6b1ba28f761a9e72a21f0cd34ca355",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
