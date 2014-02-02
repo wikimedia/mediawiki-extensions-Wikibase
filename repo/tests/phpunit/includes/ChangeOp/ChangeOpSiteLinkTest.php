@@ -6,9 +6,9 @@ use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use InvalidArgumentException;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Settings;
+use Wikibase\Repo\WikibaseRepo;
+use InvalidArgumentException;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
@@ -26,7 +26,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	private function applySettings() {
 		// Allow some badges for testing
-		Settings::singleton()->setSetting( 'badgeItems', array(
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 			'Q42' => '',
 			'Q149' => '',
 		) );

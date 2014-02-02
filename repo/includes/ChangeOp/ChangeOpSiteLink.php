@@ -3,12 +3,12 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Summary;
-use Wikibase\Settings;
 
 /**
  * Class for sitelink change operation
@@ -69,7 +69,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				if ( !( $badge instanceof ItemId ) ) {
 					throw new InvalidArgumentException( '$badges need to be an array of ItemIds or null' );
 				}
-				if ( !in_array( $badge->getPrefixedId(), array_keys( Settings::get( 'badgeItems' ) ) ) ) {
+				if ( !array_key_exists( $badge->getPrefixedId(), WikibaseRepo::getDefaultInstance()->getSettings()->get( 'badgeItems' ) ) ) {
 					throw new InvalidArgumentException( 'Only items specified in the config can be badges' );
 				}
 			}

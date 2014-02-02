@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
-use Wikibase\Settings;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\SetSiteLink
@@ -150,7 +150,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$this->assertTrue( $status->isOK() );
 			self::$otherItemId = $badge->getEntity()->getId();
 
-			Settings::singleton()->setSetting( 'badgeItems', array(
+			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 				self::$gaItemId->getPrefixedId() => '',
 				self::$faItemId->getPrefixedId() => '',
 				'Q99999' => '', // Just in case we have a wrong config

@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 
 use Wikibase\ItemContent;
 use Wikibase\PropertyContent;
-use Wikibase\Settings;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\EditEntity
@@ -56,7 +56,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$this->assertTrue( $badge->save( 'EditEntityTestQ32', null, EDIT_NEW )->isOK() );
 			self::$idMap['%Q32%'] = $badge->getEntity()->getId()->getSerialization();
 
-			Settings::singleton()->setSetting( 'badgeItems', array(
+			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 				self::$idMap['%Q42%'] => '',
 				self::$idMap['%Q149%'] => '',
 				'Q99999' => '', // Just in case we have a wrong config
