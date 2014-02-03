@@ -38,10 +38,7 @@
 		 */
 		_staticExpertOptions: {
 			domBuilder: function( currentRawValue, viewState ) {
-				return $( '<a/>', {
-					text: currentRawValue,
-					href: currentRawValue
-				} );
+				return viewState.getFormattedValue();
 			},
 			baseExpert: editableExpert
 		}
