@@ -3,10 +3,10 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# feature definition for statements tests
+# feature definition for string type statements tests
 
 @wikidata.beta.wmflabs.org
-Feature: Creating statements
+Feature: Creating statements of type string
 
   Background:
     Given I am on an item page
@@ -19,7 +19,7 @@ Feature: Creating statements
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
-      And I enter <value> as string statement value
+      And I enter the string <value> as statement value
       And I <save>
     Then Statement add button should be there
       And Statement cancel button should not be there
@@ -41,7 +41,7 @@ Feature: Creating statements
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
-      And I enter it's a string as string statement value
+      And I enter the string it's a string as statement value
       And I click the statement save button
       And I reload the page
     Then Statement add button should be there
