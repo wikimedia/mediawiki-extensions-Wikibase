@@ -12,7 +12,7 @@ return call_user_func( function() {
 	);
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__ . '/src/valueParsers',
+		'localBasePath' => __DIR__,
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
