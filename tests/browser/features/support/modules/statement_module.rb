@@ -20,9 +20,8 @@ module StatementPage
   a(:cancel_statement, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:cancel_statement_disabled, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
   textarea(:statement_value_input, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'valueview-input')]")
-  textarea(:statement_value, xpath: "//div[contains(@class, 'wb-claimlistview')]//textarea[contains(@class, 'valueview-input')]")
   span(:statement_help_field, :css => "div.wb-claimlistview span.mw-help-field-hint")
-  text_field(:statement_value_input_field, class: "valueview-input")
+  textarea(:statement_value_input_field, class: "valueview-input")
   div(:claim_edit_mode, :css => ".wb-claim-section div.wb-edit")
 
   #a(:add_claim_to_first_statement, css: "div.wb-claimlistview:nth-child(1) > span.wb-addtoolbar a:not(.wikibase-toolbarbutton-disabled)")
@@ -33,12 +32,6 @@ module StatementPage
   #div(:statement2Name, xpath: "//div[contains(@class, 'wb-claimlistview')][2]//div[contains(@class, 'wb-claim-name')]")
   #a(:statement1Link, xpath: "//div[contains(@class, 'wb-claimlistview')][1]//div[contains(@class, 'wb-claim-name')]/a")
   #a(:statement2Link, xpath: "//div[contains(@class, 'wb-claimlistview')][2]//div[contains(@class, 'wb-claim-name')]/a")
-  #element(:statement1Claim_value1, :a, xpath: "//div[contains(@class, 'wb-claimlistview')][1]//div[contains(@class, 'wb-claimview')][1]//div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  #element(:statement1Claim_value2, :a, xpath: "//div[contains(@class, 'wb-claimlistview')][1]//div[contains(@class, 'wb-claimview')][2]//div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  #element(:statement1Claim_value3, :a, xpath: "//div[contains(@class, 'wb-claimlistview')][1]//div[contains(@class, 'wb-claimview')][3]//div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  #element(:statement2Claim_value1, :a, xpath: "//div[contains(@class, 'wb-claimlistview')][2]//div[contains(@class, 'wb-claimview')][1]//div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  #element(:statement2Claim_value2, :a, xpath: "//div[contains(@class, 'wb-claimlistview')][2]//div[contains(@class, 'wb-claimview')][2]//div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  #element(:statement2Claim_value3, :a, xpath: "//div[contains(@class, 'wb-claimlistview')][2]//div[contains(@class, 'wb-claimview')][3]//div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
   #span(:statement1Claim_value1Nolink, xpath: "//div[contains(@class, 'wb-claimlistview')][1]//div[contains(@class, 'wb-claimview')][1]//div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/span")
   #span(:snaktype_selector_icon, xpath: "//div[contains(@class, 'wb-snak-typeselector')]/span[contains(@class, 'wb-snaktypeselector')]")
   #a(:snaktype_selector_value, xpath: "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-value')]/a")
@@ -52,6 +45,10 @@ module StatementPage
 
   def statement_string_value_element(group_index, claim_index)
     @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//textarea[contains(@class, 'valueview-input')]")
+  end
+
+  def statement_value_element(group_index, claim_index)
+    @browser.element(css: ".wb-claimlistview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) div.wb-snak-value a")
   end
 
   def edit_claim(group_index, claim_index)
