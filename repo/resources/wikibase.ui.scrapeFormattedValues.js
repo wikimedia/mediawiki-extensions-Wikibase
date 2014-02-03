@@ -1,8 +1,7 @@
 /**
  * Scrape initial formatted value from static HTML.
- * By intention, only formatted values of the Quantity data value are scraped. Instead of adding
- * additional flexibility to the scraping mechanism, front-end widgets should be initialized
- * properly on the static HTML rendering this file and its resource loader module obsolete.
+ * This is supposed to be temporary solution only. Front-end widgets should be initialized properly
+ * on the static HTML rendering this file and its resource loader module obsolete.
  * @since 0.5
  * @licence GNU GPL v2+
  *
@@ -16,6 +15,7 @@
 	// re-constructing the DOM in JavaScript.
 
 	var DATA_VALUE_TYPES_TO_SCRAPE = [
+		'globecoordinate',
 		'quantity',
 		'string',
 		'wikibase-entityid'
