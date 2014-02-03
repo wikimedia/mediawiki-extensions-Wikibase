@@ -37,8 +37,16 @@ When /^I enter (.+) in the property input field$/ do |value|
   end
 end
 
-When /^I enter (.+) as string statement value$/ do |value|
+When /^I enter the string (.+) as statement value$/ do |value|
   on(ItemPage).statement_value_input_field = value
+end
+
+When /^I enter the label of the item with handle (.+) as statement value$/ do |handle|
+  on(ItemPage) do |page|
+    page.statement_value_input_field_element.clear
+    page.statement_value_input_field = @items[handle]["label"]
+    page.ajax_wait
+  end
 end
 
 When /^I enter a too long string as statement value$/ do
@@ -113,4 +121,8 @@ end
 
 Then /^Statement string value of claim (.+) in group (.+) should be (.+)$/ do |claim_index, group_index, value|
   on(ItemPage).statement_string_value_element(group_index, claim_index).attribute_value("value").should == value
+end
+
+Then /^Statement value of claim (.+) in group (.+) should be the label of the item with handle (.+)$/ do |claim_index, group_index, handle|
+  on(ItemPage).statement_value_element(group_index, claim_index).text.should == @items[handle]["label"]
 end
