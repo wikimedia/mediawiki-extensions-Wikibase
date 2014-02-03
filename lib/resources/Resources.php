@@ -1,6 +1,10 @@
 <?php
 
-use \Wikibase\LibRegistry;
+use DataTypes\DataTypeFactory;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\WikibaseDataTypeBuilders;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Settings;
 
 /**
  * File for Wikibase resourceloader modules.
@@ -183,7 +187,30 @@ return call_user_func( function() {
 		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
 			'class' => 'DataTypes\DataTypesModule',
 			'datatypefactory' => function() {
-				return LibRegistry::getDefaultInstance()->getDataTypeFactory();
+				// TODO: extreme uglynes here! Get rid of this method!
+				if ( defined( 'WB_VERSION' ) ) { // repo mode
+					$repo = WikibaseRepo::getDefaultInstance();
+					$entityIdParser = $repo->getEntityIdParser();
+					$entityLookup = $repo->getEntityLookup();
+				} elseif ( defined( 'WBC_VERSION' ) ) { // client mode
+					$client = WikibaseClient::getDefaultInstance();
+					$entityIdParser = $client->getEntityIdParser();
+					$entityLookup = $client->getStore()->getEntityLookup();
+				} else {
+					throw new \RuntimeException( "Neither repo nor client found!" );
+				}
+
+				$settings = Settings::singleton();
+
+				$urlSchemes = $settings->getSetting( 'urlSchemes' );
+				$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes );
+
+				$typeBuilderSpecs = array_intersect_key(
+					$builders->getDataTypeBuilders(),
+					array_flip( $settings->getSetting( 'dataTypes' ) )
+				);
+
+				return new DataTypeFactory( $typeBuilderSpecs );
 			},
 			'datatypesconfigvarname' => 'wbDataTypes',
 		),
