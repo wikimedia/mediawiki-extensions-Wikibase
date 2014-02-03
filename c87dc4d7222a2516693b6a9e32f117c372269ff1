@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_8d6428e3",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Value.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-02-03T15:08:47Z",
+      "side": 1,
+      "message": "That needs to be sorted out properly. Adding a claim as well as displaying an existing claim featuring an item property results in JavaScript errors.",
+      "revId": "c87dc4d7222a2516693b6a9e32f117c372269ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
