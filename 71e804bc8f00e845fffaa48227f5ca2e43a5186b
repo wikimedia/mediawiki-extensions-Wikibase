@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_796bde82",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-03T22:26:31Z",
+      "side": 1,
+      "message": "There\u0027s no other way, as previously discussed on IRC",
+      "parentUuid": "aef5673e_f03dc0b9",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_b094d88e",
         "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-21T18:47:26Z",
       "side": 1,
       "message": "\"ClientStore mock\"\n\nThat part if already told by the name\n\n\"for use in Lua integration tests\"\n\nWhy just for lua integration tests? How about creating a general one that has a note that not everything has been stubbed out? Now this class is linked to its users in a rather weird way.",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_79975e94",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-03T22:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_b094d88e",
       "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_5994a28d",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-03T22:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_508c6c89",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_f0b3804a",
         "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
         "patchSetId": 7
@@ -64,6 +118,24 @@
       "writtenOn": "2014-01-21T18:43:48Z",
       "side": 1,
       "message": "A proper name please. This one tells me it is about things related to the lua integration tests. That can be many things. This makes it hard to understand, harder to review and very prone to code rot.",
+      "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_59682284",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-03T22:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_f0b3804a",
       "revId": "71e804bc8f00e845fffaa48227f5ca2e43a5186b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
