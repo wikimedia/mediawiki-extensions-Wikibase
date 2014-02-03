@@ -15,6 +15,12 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.3.1 (2014-02-03)
+
+#### Bugfixes
+
+* Fixed valueParsers ResourceLoader module definition template.
+
 ### 0.3 (2014-01-30)
 
 #### Breaking changes
