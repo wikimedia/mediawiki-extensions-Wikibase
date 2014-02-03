@@ -23,11 +23,19 @@ return call_user_func( function() {
 				'jquery.valueview.ExpertFactory.tests.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'dataValues.values',
 				'jquery.valueview.ExpertFactory',
 				'jquery.valueview.tests.MockExpert',
 				'qunit.parameterize',
+			),
+		),
+
+		'jquery.valueview.tests.MockExpert' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview.tests.MockExpert.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.Expert',
 			),
 		),
 

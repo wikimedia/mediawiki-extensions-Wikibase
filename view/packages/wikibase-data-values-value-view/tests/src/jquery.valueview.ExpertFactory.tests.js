@@ -1,33 +1,38 @@
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( $, QUnit, dataValues, dataTypes ) {
+( function( $, dv, QUnit ) {
 	'use strict';
 
-	var dv = dataValues,
-		dt = dataTypes,
-		vv = $.valueview,
-		ExpertFactory = vv.ExpertFactory,
-		MockExpertBase = vv.tests.MockExpert;
+	var vv = $.valueview;
+
+	var DataTypeMock = function( dataTypeId, DataValue ) {
+		this._dataTypeId = dataTypeId;
+		this._dataValueType = DataValue.TYPE;
+	};
+	$.extend( DataTypeMock.prototype, {
+		getId: function() {
+			return this._dataTypeId;
+		},
+		getDataValueType: function() {
+			return this._dataValueType;
+		}
+	} );
 
 	/**
-	 * Returns a descriptive string about a valid expert base object (a DataType object, a
-	 * DataValue object or a DataValue constructor).
+	 * Returns a descriptive string to be used as id when registering an expert in an ExpertFactory.
 	 *
-	 * @param {dataTypes.DataType|dataValues.DataValue|Function} expertBasis
-	 * @returns {string}
+	 * @param {DataTypeMock|Function} purpose
+	 * @return {string}
 	 */
-	function expertBasisInfo( expertBasis ) {
-		if( expertBasis instanceof dt.DataType ) {
-			return 'DataType with data value type "' + expertBasis.getDataValueType() + '"';
+	function getTypeInfo( purpose ) {
+		if( purpose instanceof DataTypeMock ) {
+			return 'DataType with data value type "' + purpose.getDataValueType() + '"';
 		}
-		if( expertBasis instanceof dv.DataValue ) {
-			return 'DataValue instance of type "' + expertBasis.getType() + '"';
-		}
-		// DataValue constructor:
-		return 'constructor for DataValue of type "' + expertBasis.TYPE + '"';
+		return 'constructor for DataValue of type "' + purpose.TYPE + '"';
 	}
 
 	/**
@@ -40,130 +45,164 @@
 	function newMockExpertConstructor( mockExpertId ) {
 		return vv.expert(
 			'mockexpert' + mockExpertId, // name
-			MockExpertBase, // base
+			vv.tests.MockExpert, // base
 			{} // definition
 		);
 	}
 
 	var StringValue = dv.StringValue,
-		BoolValue = dv.BoolValue,
-		stringDataType = new dt.DataType( 'somestringtype', StringValue ),
-		numberDataType = new dt.DataType( 'somenumbertype', dv.NumberValue ),
+		UnknownValue = dv.UnknownValue,
+		stringType = new DataTypeMock( 'somestringtype', StringValue ),
+		numberType = new DataTypeMock( 'somenumbertype', dv.NumberValue ),
 		MockExpertForStringValue = newMockExpertConstructor( 'ForStringValue' ),
-		MockExpertForBoolValue = newMockExpertConstructor( 'ForBoolValue' ),
-		MockExpertForStringDataType = newMockExpertConstructor( 'ForStringDataType' );
+		MockExpertForStringDataType = newMockExpertConstructor( 'ForStringDataType' ),
+		MockExpertForUnsupportedValue = newMockExpertConstructor( 'ForUnsupportedValue' );
 
 	QUnit.module( 'jquery.valueview.ExpertFactory' );
 
-	QUnit.test( 'constructor', function( assert ) {
-		var expertFactory = new ExpertFactory();
+	QUnit.test( 'Constructor', function( assert ) {
+		var expertFactory = new vv.ExpertFactory();
 
 		assert.ok(
-			expertFactory instanceof ExpertFactory,
-			'New ExpertFactory instance created'
-		);
-
-		assert.ok(
-			expertFactory.getCoveredDataValueTypes().length === 0,
-			'Initially, new ExpertFactory has registered no experts for any data value type'
-		);
-
-		assert.ok(
-			expertFactory.getCoveredDataTypes().length === 0,
-			'Initially, new ExpertFactory has registered no experts for any data type'
+			expertFactory instanceof vv.ExpertFactory,
+			'Instantiated ExpertFactory.'
 		);
 	} );
 
-	QUnit.test( 'test getCoveredDataValueTypes', function( assert ) {
-		var expertFactory = new ExpertFactory();
+	QUnit.test( 'registerDataTypeExpert(): Error handling', function( assert ) {
+		var expertFactory = new vv.ExpertFactory();
 
-		// Register two experts for data values:
-		expertFactory.registerExpert( StringValue, MockExpertForStringValue );
-		expertFactory.registerExpert( BoolValue, MockExpertForBoolValue );
-
-		// Register one data type expert, shouldn't make any difference:
-		expertFactory.registerExpert( stringDataType, MockExpertForBoolValue );
-
-		assert.ok(
-			expertFactory.hasExpertFor( BoolValue ),
-			'Expert registered for another data value type'
+		assert.throws(
+			function() {
+				expertFactory.registerDataTypeExpert( 'invalid', stringType.getId() );
+			},
+			'Failed trying to register an invalid expert constructor.'
 		);
 
-		var coveredDvTypes = expertFactory.getCoveredDataValueTypes();
+		expertFactory.registerDataTypeExpert( MockExpertForStringDataType, stringType.getId() );
+
+		assert.throws(
+			function() {
+				expertFactory.getExpert( stringType );
+			},
+			'Failed trying to get an expert with an invalid purpose.'
+		);
+	} );
+
+	QUnit.test( 'registerDataValueExpert(): Error handling', function( assert ) {
+		var expertFactory = new vv.ExpertFactory();
+
+		assert.throws(
+			function() {
+				expertFactory.registerDataValueExpert( 'invalid', StringValue.TYPE );
+			},
+			'Failed trying to register an invalid expert constructor.'
+		);
+
+		expertFactory.registerDataValueExpert( MockExpertForStringValue, StringValue.TYPE );
+
+		assert.throws(
+			function() {
+				expertFactory.getExpert( StringValue );
+			},
+			'Failed trying to get an expert with an invalid purpose.'
+		);
+	} );
+
+	QUnit.test( 'Return default expert constructor on getExpert()', function( assert ) {
+		var expertFactory = new vv.ExpertFactory( MockExpertForUnsupportedValue );
 
 		assert.equal(
-			coveredDvTypes.length,
-			2,
-			'There are experts registered for exactly two data value types'
+			expertFactory.getExpert( StringValue.TYPE ),
+			MockExpertForUnsupportedValue,
+			'Returning default expert if no expert is registered for a specific data value.'
 		);
 
-		assert.ok(
-			$.inArray( StringValue.TYPE, coveredDvTypes ) !== -1
-				&& $.inArray( BoolValue.TYPE, coveredDvTypes ) !== -1,
-			'Both registered data value types are returned by getCoveredDataValueTypes()'
+		assert.equal(
+			expertFactory.getExpert( stringType.getDataValueType(), stringType.getId() ),
+			MockExpertForUnsupportedValue,
+			'Returning default if no expert is registered for a specific data type.'
+		);
+
+		expertFactory.registerDataValueExpert( MockExpertForStringValue, StringValue.TYPE );
+
+		assert.equal(
+			expertFactory.getExpert( StringValue.TYPE ),
+			MockExpertForStringValue,
+			'Returning specific expert if an expert is registered for a specific data value.'
+		);
+
+		assert.equal(
+			expertFactory.getExpert( UnknownValue.TYPE ),
+			MockExpertForUnsupportedValue,
+			'Still returning default expert if no expert is registered for a specific data value.'
+		);
+
+		assert.equal(
+			expertFactory.getExpert( numberType.getDataValueType(), numberType.getId() ),
+			MockExpertForUnsupportedValue,
+			'Still returning default expert if no expert is registered for a specific data type.'
 		);
 	} );
 
-	// tests for registration of experts:
+	// Tests for registration of experts:
 
 	/**
-	 * Array of test definitions as provider for "expertFactoryRegistrationTest" plus one "descr"
-	 * field for each test.
-	 *
+	 * Array of test definitions as provider for "expertFactoryRegistrationTest".
 	 * @type {Object[]}
 	 */
 	var expertFactoryRegistrationTestCases = [
 		{
-			title: 'empty ExpertFactory',
+			title: 'Empty factory',
 			register: [],
 			expect: [
 				[ StringValue, null ],
-				[ stringDataType, null ]
+				[ stringType, null ]
 			]
 		}, {
-			title: 'ExpertFactory with expert for string value, expert also suitable for string type',
+			title: 'Factory with expert for string DataValue which is also suitable for string '
+				+ 'DataType',
 			register: [
 				[ StringValue, MockExpertForStringValue ]
 			],
 			expect: [
 				[ StringValue, MockExpertForStringValue ],
-				[ new StringValue( 'foo' ), MockExpertForStringValue ],
-				[ stringDataType, MockExpertForStringValue ], // data type uses value type
-				[ BoolValue, null ],
-				[ new BoolValue( true ), null ],
-				[ numberDataType, null ]
+				[ stringType, MockExpertForStringValue ], // data type uses value type
+				[ UnknownValue, null ],
+				[ numberType, null ]
 			]
 		}, {
-			title: 'ExpertFactory for string data type. String value can\'t use this potentially more specialized expert',
+			title: 'Factory for string DataType. String value can\'t use this potentially more '
+				+ 'specialized expert',
 			register: [
-				[ stringDataType, MockExpertForStringDataType ]
+				[ stringType, MockExpertForStringDataType ]
 			],
 			expect: [
 				[ StringValue, null ],
-				[ new StringValue( 'foo' ), null ],
-				[ stringDataType, MockExpertForStringDataType ]
+				[ stringType, MockExpertForStringDataType ]
 			]
 		}, {
-			title: 'ExpertFactory with two experts: For data value and for data type using that data value type',
+			title: 'Factory with two experts: For DataValue and for DataType using that DataValue '
+				+ 'type',
 			register: [
 				[ StringValue, MockExpertForStringValue ],
-				[ stringDataType, MockExpertForStringDataType ]
+				[ stringType, MockExpertForStringDataType ]
 			],
 			expect: [
 				[ StringValue, MockExpertForStringValue ],
-				[ stringDataType, MockExpertForStringDataType ],
-				[ BoolValue, null ]
+				[ stringType, MockExpertForStringDataType ],
+				[ UnknownValue, null ]
 			]
 		}, {
-			title: 'ExpertFactory with two experts for two different data value types',
+			title: 'Factory with two experts for two different DataValue types',
 			register: [
 				[ StringValue, MockExpertForStringValue ],
-				[ BoolValue, MockExpertForBoolValue ]
+				[ UnknownValue, MockExpertForUnsupportedValue ]
 			],
 			expect: [
 				[ StringValue, MockExpertForStringValue ],
-				[ BoolValue, MockExpertForBoolValue ],
-				[ numberDataType, null ]
+				[ UnknownValue, MockExpertForUnsupportedValue ],
+				[ numberType, null ]
 			]
 		}
 	];
@@ -172,62 +211,64 @@
 	 * Test for registration of experts to ExpertFactory and expected conditions afterwards.
 	 *
 	 * @param {QUnit.assert} assert
-	 * @param {Array[]} toRegister Array containing arrays where each one tells a ExpertFactory what
-	 *        experts to register. The inner array has to consist out of two objects as
-	 *        ExpertFactory.registerExpert would take them.
-	 * @param {Array[]} toExpect Array containing arrays where each one states one expected
-	 *        condition of the ExpertFactory after registration of what is given in the first
-	 *        parameter. Each inner array should contain a data type, data value or data value
-	 *        constructor and an expert which is expected to be registered for it.
+	 * @param {Array[]} toRegister Array containing arrays each telling an ExpertFactory what
+	 *        experts to register. The inner array has to consist out of two objects, an Expert
+	 *        constructor and a DataValue constructor or a DataTypeMock object.
+	 * @param {Array[]} toExpect Array containing arrays each one stating one expected condition
+	 *        of the ExpertFactory after registration of what is given in the first
+	 *        parameter. Each inner array should contain a DataTypeMock object or a DataValue
+	 *        constructor and an Expert constructor which is expected to be registered for it.
 	 */
 	function expertFactoryRegistrationTest( assert, toRegister, toExpect  ) {
-		var expertFactory = new ExpertFactory();
+		var expertFactory = new vv.ExpertFactory();
 
-		assert.ok(
-			expertFactory instanceof ExpertFactory,
-			'New expert factory created'
-		);
-
-		// register experts as per definition:
+		// Register experts as per definition:
 		$.each( toRegister, function( i, registerPair ) {
-			var expertBasis = registerPair[0],
-				expert = registerPair[1];
+			var purpose = registerPair[0],
+				Expert = registerPair[1];
 
-			expertFactory.registerExpert( expertBasis, expert );
+			if( purpose instanceof DataTypeMock ) {
+				expertFactory.registerDataTypeExpert( Expert, purpose.getId() );
+			} else {
+				expertFactory.registerDataValueExpert( Expert, purpose.TYPE );
+			}
 
 			assert.ok(
 				true,
-				'Expert registered for ' + expertBasisInfo( expertBasis )
+				'Registered expert for ' + getTypeInfo( purpose )
 			);
 		} );
 
-		// check for expected conditions:
+		// Check for expected conditions:
 		$.each( toExpect, function( i, expectPair ) {
-			var expertBasis = expectPair[0],
-				expectedExpert = expectPair[1],
-				expertBasisInfoMsg = expertBasisInfo( expertBasis );
+			var purpose = expectPair[0],
+				Expert = expectPair[1],
+				RetrievedExpert;
+
+			if( purpose instanceof DataTypeMock ) {
+				RetrievedExpert = expertFactory.getExpert(
+					purpose.getDataValueType(), purpose.getId()
+				);
+			} else {
+				RetrievedExpert = expertFactory.getExpert( purpose.TYPE );
+			}
 
 			assert.strictEqual(
-				expertFactory.hasExpertFor( expertBasis ),
-				expectedExpert !== null,
-				'Expert factory has ' + ( expectedExpert !== null ? '' : ' no' )
-					+ ' expert for' + expertBasisInfoMsg
-			);
-
-			assert.strictEqual(
-				expertFactory.getExpert( expertBasis ),
-				expectedExpert,
-				'Requesting expert for ' + expertBasisInfoMsg +
-					( expectedExpert !== null ? ' returns expected expert' : ' returns null' )
+				RetrievedExpert,
+				Expert,
+				'Requesting expert for ' + getTypeInfo( purpose ) +
+					( Expert !== null ? ' returns expected expert' : ' returns null' )
 			);
 		} );
 	}
 
-	// Run defined tests on expertFactoryRegistrationTest:
 	QUnit
 	.cases( expertFactoryRegistrationTestCases )
-		.test( 'experts registration', function( params, assert ) {
-			expertFactoryRegistrationTest( assert, params.register, params.expect );
-		} );
+		.test(
+			'registerDataTypeExpert()/registerDataValueExpert() & getExpert()',
+			function( params, assert ) {
+				expertFactoryRegistrationTest( assert, params.register, params.expect );
+			}
+		);
 
-}( jQuery, QUnit, dataValues, dataTypes ) );
+}( jQuery, dataValues, QUnit ) );

@@ -2,8 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-/* global dataTypes */
-( function( dv, dt, vv ) {
+( function( vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -11,7 +10,6 @@
 	/**
 	 * Valueview expert for displaying (or rather not displaying) a data value not supported by the
 	 * valueview UI because there is not specialised expert devoted to that data value type.
-	 *
 	 * @since 0.1
 	 *
 	 * @constructor
@@ -19,7 +17,6 @@
 	 */
 	vv.experts.UnsupportedValue = vv.expert( 'UnsupportedValue', {
 		/**
-		 * Options.
 		 * @type {Object}
 		 */
 		_options: {
@@ -33,7 +30,7 @@
 
 		/**
 		 * The current value.
-		 * @type dv.DataValue|null
+		 * @type {dv.DataValue|null}
 		 */
 		_value: null,
 
@@ -63,30 +60,30 @@
 		 * @see jQuery.valueview.Expert.draw
 		 */
 		draw: function() {
-			// This expert just says whatever value currently set in the valueview, or, whatever
-			// kind of value should be handled by the view, is actually not supported.
+			// This expert just displays a message that whatever value currently set in the
+			// valueview or whatever kind of value should be handled by the view is not supported.
 
-			// So, get the data thingy (data type or data value type) that is not supported:
-			var unsupportedIndicator = this._viewState.value() || this._viewState.option( 'on' ),
+			var value = this._viewState.value(),
+				unsupportedIndicator,
 				unsupportedMsg;
 
-			if( unsupportedIndicator instanceof dt.DataType ) {
-				// no expert for values of that data type or the data type's data value type
+			if( !value && this._viewState.option( 'dataTypeId' ) ) {
+				unsupportedIndicator = this._viewState.option( 'dataTypeId' );
 				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatatype',
-					unsupportedIndicator.getLabel()
+					unsupportedIndicator
 				);
 				// NOTE: Of course, this also implies that the data value type is unsupported but
 				//  the message is actually more detailed than that.
-			}
-			else if( unsupportedIndicator instanceof dv.DataValue ) {
-				// no expert for the value's value type
+			} else if( value || this._viewState.option( 'dataValueType' ) ) {
+				var dataValueType = ( value )
+					? value.getType()
+					: this._viewState.option( 'dataValueType');
 				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatavalue',
-					unsupportedIndicator.getType()
+					dataValueType
 				);
-			}
-			else {
+			} else {
 				// Empty value set in view, but not even ability to display that as a value.
 				// This case doesn't make much sense but defined against paranoia.
 				unsupportedMsg = '';
@@ -96,4 +93,4 @@
 		}
 	} );
 
-}( dataValues, dataTypes, jQuery.valueview ) );
+}( jQuery.valueview ) );
