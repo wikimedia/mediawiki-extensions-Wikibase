@@ -19,6 +19,7 @@ $messages = array();
  * @author Anja Jentzsch
  * @author Daniel Werner
  * @author Michał Łazowik
+ * @author Adam Shorland
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -459,9 +460,18 @@ to find out where it went.',
 	'action-label-update' => 'update labels',
 	'action-description-remove' => 'erase descriptions',
 	'action-description-update' => 'update descriptions',
+
+	// TimeFormats
+	'wikibase-time-precision-Gannum' => 'in $1 billion years',
+	'wikibase-time-precision-Mannum' => 'in $1 million years',
+	'wikibase-time-precision-annum' => 'in $1 years',
+	'wikibase-time-precision-millennium' => '$1. millennium',
+	'wikibase-time-precision-century' => '$1. century',
+	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** Message documentation (Message documentation)
+ * @author Adam Shorland
  * @author AS
  * @author Amire80
  * @author Aude
@@ -1348,6 +1358,12 @@ Right to set and alter [[d:Wikidata:Glossary#Description|descriptions]] of [[d:W
 	'action-label-update' => '{{doc-action|label-update}}',
 	'action-description-remove' => '{{doc-action|description-remove}}',
 	'action-description-update' => '{{doc-action|description-update}}',
+	'wikibase-time-precision-Gannum' => 'Used to indicate a timespan in $1 number of billions of years',
+	'wikibase-time-precision-Mannum' => 'Used to indicate a timespan in $1 number of millions of years',
+	'wikibase-time-precision-annum' => 'Used to indicate a timespan in $1 number of years',
+	'wikibase-time-precision-millennium' => 'Used to indicate a timespan in $1 number of millennium',
+	'wikibase-time-precision-century' => 'Used to indicate a timespan in $1 number of centuries',
+	'wikibase-time-precision-10annum' => 'Used to indicate a timespan in $1 number of 10s of years',
 );
 
 /** Achinese (Acèh)
