@@ -145,7 +145,7 @@ class MultiLangConstraintDetector {
 					}
 				);
 				$langValues = $wgLang->semicolonList( $langValues );
-				// Give grep a chance to find the usages: wikibase-error-constraint-violation-label,
+				// Messages: wikibase-error-constraint-violation-label,
 				// wikibase-error-constraint-violation-description, wikibase-error-constraint-violation-aliases
 				$status->fatal(
 					'wikibase-error-constraint-violation-' . $section,

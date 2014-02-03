@@ -102,6 +102,8 @@ class ClaimHtmlGenerator {
 		if( is_a( $claim, 'Wikibase\Statement' ) ) {
 			$serializedRank = ClaimSerializer::serializeRank( $claim->getRank() );
 
+			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
+			// wikibase-statementview-rank-deprecated
 			$rankHtml = wfTemplate( 'wb-rankselector',
 				'wb-rankselector-' . $serializedRank,
 				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()

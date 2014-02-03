@@ -47,6 +47,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 * @return String
 	 */
 	public function getDescription() {
+		// Message: special-mylanguagefallbackchain
 		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
 	}
 

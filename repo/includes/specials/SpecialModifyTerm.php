@@ -114,6 +114,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		// to provide removing after posting the full form
 		if ( $request->getVal( 'remove' ) === null && $this->value === '' ) {
 			$this->showErrorHTML(
+				// Messages: wikibase-setlabel-warning-remove, wikibase-setdescription-warning-remove,
+				// wikibase-setaliases-warning-remove
 				$this->msg(
 					'wikibase-' . strtolower( $this->getName() ) . '-warning-remove',
 					$this->entityContent->getTitle()->getText()
@@ -191,6 +193,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return Html::rawElement(
 				'p',
 				array(),
+				// Messages: wikibase-setlabel-introfull, wikibase-setdescription-introfull,
+				// wikibase-setaliases-introfull
 				$this->msg(
 					'wikibase-' . strtolower( $this->getName() ) . '-introfull',
 					$this->entityContent->getTitle()->getPrefixedText(),
@@ -206,6 +210,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return Html::rawElement(
 				'p',
 				array(),
+				// Messages: wikibase-setlabel-intro, wikibase-setdescription-intro,
+				// wikibase-setaliases-intro
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
 			)
 			. parent::getFormElements()
@@ -233,6 +239,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 					'for' => 'wb-modifyterm-value',
 					'class' => 'wb-label'
 				),
+				// Messages: wikibase-setlabel-label, wikibase-setdescription-label,
+				// wikibase-setaliases-label
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text()
 			)
 			. $valueinput;
