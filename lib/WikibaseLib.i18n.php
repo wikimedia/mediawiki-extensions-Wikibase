@@ -1067,7 +1067,12 @@ $messages['dsb'] = array(
 $messages['el'] = array(
 	'wikibase-entity-item' => 'αντικείμενο',
 	'wikibase-entity-property' => 'ιδιότητα',
+	'wikibase-entity-query' => 'ερώτημα',
+	'wikibase-deletedentity-item' => 'Διαγραμμένο αντικείμενο',
+	'wikibase-deletedentity-property' => 'Διαγραμμένη ιδιότητα',
+	'wikibase-deletedentity-query' => 'Διαγραμμένο ερώτημα',
 	'wikibase-diffview-reference' => 'πηγή',
+	'wikibase-diffview-qualifier' => 'προσδιοριστής',
 	'wikibase-diffview-label' => 'ετικέτα',
 	'wikibase-diffview-description' => 'περιγραφή',
 	'wikibase-diffview-link' => 'σύνδεσμοι',
@@ -1086,16 +1091,28 @@ $messages['el'] = array(
 	'wikibase-error-ui-link-exists' => 'Δεν μπορείτε να συνδέσετε αυτή τη σελίδα επειδή ένα άλλο αντικείμενο ήδη συνδέει σε αυτό.',
 	'wikibase-error-ui-session-failure' => 'Η συνεδρία σας έχει λήξει. Παρακαλώ συνδεθείτε ξανά.',
 	'wikibase-error-ui-edit-conflict' => 'Υπάρχει σύγκρουση επεξεργασίας. Παρακαλούμε  φορτώσετε εκ νέου και αποθηκεύστε ξανά.',
+	'wikibase-quantitydetails-upperbound' => 'Άνωτατο όριο',
+	'wikibase-quantitydetails-lowerbound' => 'Κατώτερο όριο',
+	'wikibase-quantitydetails-unit' => 'Μονάδα',
 	'wikibase-replicationnote' => 'Παρακαλώ να λάβετε υπόψη ότι έως ότου οι αλλαγές γίνουν ορατές σε όλα τα wiki μπορεί να περάσουν μερικά λεπτά.',
 	'wikibase-sitelinks-wikipedia' => 'Σελίδες της Βικιπαίδειας που συνδέονται με αυτό το αντικείμενο',
 	'wikibase-sitelinks-sitename-columnheading' => 'Γλώσσα',
 	'wikibase-sitelinks-siteid-columnheading' => 'Κωδικός',
-	'wikibase-sitelinks-link-columnheading' => 'Σελίδες που συνδέονται', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'Σελίδες που συνδέονται',
 	'wikibase-tooltip-error-details' => 'Λεπτομέρειες',
+	'wikibase-undeserializable-value' => 'Η τιμή δεν είναι έγκυρη και δεν μπορεί να εμφανιστεί.',
 	'wikibase-validator-bad-type' => '$2 αντί για $1',
 	'wikibase-validator-too-short' => 'Πρέπει να οι χαρακτήρες να είναι τουλάχιστον  {{PLURAL:$1|ένας|$1}}',
+	'wikibase-validator-malformed-value' => 'Ακατάλληλη εισαγωγή: $1',
+	'wikibase-validator-bad-entity-id' => 'Ακατάλληλο αναγνωριστικό:$1',
+	'wikibase-validator-bad-entity-type' => 'Απροσδόκητη τύπος οντότητας $1',
 	'wikibase-validator-no-such-entity' => 'το $1 δεν βρέθηκε',
 	'wikibase-validator-no-such-property' => 'Η ιδιότητα $1  δεν βρέθηκε',
+	'wikibase-validator-bad-value-type' => 'Εσφαλμένη τιμή τύπου  $1 , με την αναμενόμενη$2',
+	'wikibase-validator-bad-url' => 'Εσφαλμένη διεύθυνση URL: $1',
+	'wikibase-validator-bad-url-scheme' => 'Μη υποστηριζόμενο σύστημα URL:$1',
+	'wikibase-validator-bad-http-url' => 'Ακατάλληλο HTTP URL: $1',
+	'wikibase-validator-unknown-unit' => 'Άγνωστη μονάδα: $1',
 	'datatypes-type-wikibase-item' => 'Αντικείμενο',
 	'datatypes-type-commonsMedia' => 'αρχείο πολυμέσων των Commons',
 	'version-wikibase' => 'Wikibase',
@@ -1272,6 +1289,7 @@ $messages['eu'] = array(
 
 /** Persian (فارسی)
  * @author Alireza
+ * @author Armin1392
  * @author Calak
  * @author Dalba
  * @author Ebraminio
@@ -1290,6 +1308,9 @@ $messages['fa'] = array(
 	'wikibase-deletedentity-query' => 'جستار حذف‌شده',
 	'wikibase-diffview-reference' => 'منبع',
 	'wikibase-diffview-rank' => 'رتبه',
+	'wikibase-diffview-rank-preferred' => 'رتبهٔ مورد نظر',
+	'wikibase-diffview-rank-normal' => 'رتبهٔ عادی',
+	'wikibase-diffview-rank-deprecated' => 'رتبهٔ بد',
 	'wikibase-diffview-qualifier' => 'گستره‌نما',
 	'wikibase-diffview-label' => 'برچسب',
 	'wikibase-diffview-alias' => 'نام‌های دیگر',
@@ -1312,6 +1333,8 @@ $messages['fa'] = array(
 	'wikibase-error-ui-session-failure' => 'نشست شما منقضی شده‌است. لطفاً دوباره به سامانه وارد شوید.',
 	'wikibase-error-ui-edit-conflict' => 'تعارض ویرایشی رخ داده است. خواهشمندیم از نو بارگذاری و ذخیره کنید.',
 	'wikibase-quantitydetails-amount' => 'مبلغ',
+	'wikibase-quantitydetails-upperbound' => 'حد بالا',
+	'wikibase-quantitydetails-lowerbound' => 'حد پایین',
 	'wikibase-quantitydetails-unit' => 'واحد',
 	'wikibase-replicationnote' => 'لطفا توجه کنید چند دقیقه زمان لازم است تا تغییرات در همهٔ ویکی‌ها قابل مشاهده باشد.',
 	'wikibase-sitelinks-wikipedia' => 'صفحه‌های ویکی‌پدیا که به این آیتم پیوند دارند',
@@ -1337,6 +1360,7 @@ $messages['fa'] = array(
 	'wikibase-validator-bad-url-scheme' => 'یوآرال پوشش داده نشده: $1',
 	'wikibase-validator-bad-http-url' => 'یوآرال HTTP ناقص: $1',
 	'wikibase-validator-bad-mailto-url' => 'یوآرال رایانامۀ ناقص: $1',
+	'wikibase-validator-unknown-unit' => 'واحد ناشناخته: $1',
 	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
 	'version-wikibase' => 'ویکی‌بیس',

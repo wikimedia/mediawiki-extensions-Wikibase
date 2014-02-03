@@ -471,8 +471,8 @@ to find out where it went.',
 );
 
 /** Message documentation (Message documentation)
- * @author Adam Shorland
  * @author AS
+ * @author Adam Shorland
  * @author Amire80
  * @author Aude
  * @author Beta16
@@ -1698,7 +1698,7 @@ La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) yá tien la etiqueta "$1" asociada col códigu de llingua $2.',
 	'wikibase-error-label-not-unique-item' => 'Otru elementu ($3) yá tien la etiqueta "$1" y la descripción "$4" asociaes col códigu de llingua $2.',
 	'wikibase-error-label-no-entityid' => "La etiqueta nun pue ser una id d'entidá válida.",
-	'wikibase-wikibaserepopage-not-itemid' => '"$1" nun ye una id d\'elementu válida. Los enllaces a sitios web namái puen configurase pa elementos.', # Fuzzy
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" nun ye una id d\'elementu válida.',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'L\'identificador de llingua "$1" ye desconocíu. Por favor, use un identificador de llingua conocíu pol sistema, como "ast".',
 	'wikibase-wikibaserepopage-invalid-id' => 'La ID "$1" ye desconocida pal sistema. Por favor, use una ID d\'entidá válida.',
 	'special-itembytitle' => 'Elementu por títulu',
@@ -1764,10 +1764,16 @@ La direición IP quedará rexistrada nel historial d'ediciones d'esta entidá.",
 	'wikibase-setsitelink-warning-remove' => "¿Realmente quier desaniciar l'enllaz de sitiu de [[$1]]?",
 	'wikibase-setsitelink-invalid-site' => 'La id del sitiu "$1" ye desconocida. Por favor, use una id de sitiu esistente, como "astwiki".',
 	'wikibase-setsitelink-not-item' => 'La id $1 nun pertenez a nengún elementu.',
+	'wikibase-setsitelink-not-badge' => "L'elementu $1 nun ye una insinia.",
 	'wikibase-setsitelink-add-failed' => "L'enllaz del sitiu nun pudo guardase.",
 	'wikibase-setsitelink-remove-failed' => "L'enllaz del sitiu nun pudo desaniciase.",
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Llingua:',
+	'special-mergeitems' => 'Fusionar dos elementos',
+	'wikibase-mergeitems-intro' => "Si fusiona dos elementos, toles etiquetes, descripciones, alcuños, enllaces web y declaraciones moveránse d'un elementu al otru.",
+	'wikibase-mergeitems-fromid' => "La id dende la qu'hai que fusionar",
+	'wikibase-mergeitems-toid' => 'La id destín de la fusión',
+	'wikibase-mergeitems-submit' => 'Fusionar los elementos',
 	'special-dispatchstats' => 'Camudar les estadístiques de distribución',
 	'wikibase-dispatchstats-intro' => "Esta páxina ufre estadístiques tocante a la distribución de cambios a los clientes.
 Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l cambiu tea distribuíu nesa wiki, y la cola de trabayos d'esa wiki tenga procesada esa notificación.
@@ -3223,6 +3229,7 @@ $messages['ckb'] = array(
  * @author Matěj Suchánek
  * @author Mormegil
  * @author Paxt
+ * @author Utar
  * @author Vks
  * @author Vogone
  */
@@ -3305,7 +3312,7 @@ Vaše IP adresa bude zobrazena v historii této entity.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Štítek „$1“ pro jazykový kód $2 již má jiná vlastnost ($3).',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Štítek „$1“ pro jazykový kód $2 již má jiný dotaz ($3).',
 	'wikibase-error-label-not-unique-item' => 'Štítek „$1“ a popis „$4“ pro jazykový kód $2 již má jiná položka ($3).',
-	'wikibase-wikibaserepopage-not-itemid' => '"$1" není platný identifikátor položky',
+	'wikibase-wikibaserepopage-not-itemid' => '„$1“ není platný identifikátor položky',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'Neznámý identifikátor jazyka „$1“. Použijte identifikátor jazyka, který systém zná, například „en“.',
 	'special-itembytitle' => 'Položky podle názvu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Vyhledat položky podle projektu a názvu',
@@ -3365,7 +3372,7 @@ Vaše IP adresa bude zobrazena v historii této entity.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Jazyk:',
 	'special-mergeitems' => 'Sloučit dvě položky',
-	'wikibase-mergeitems-intro' => 'Pokud slučujete dvě položky, všechny štítky, popisy, jména, vnořené odkazy a prohlášení budou přesunuty z jedné položky do druhé.',
+	'wikibase-mergeitems-intro' => 'Pokud slučujete dvě položky, všechny štítky, popisy, aliasy, odkazy na články a výroky budou přesunuty z jedné položky do druhé.',
 	'wikibase-mergeitems-fromid' => 'Identifikátor objektu, odkud se má slučovat',
 	'wikibase-mergeitems-toid' => 'Identifikátor objektu, kam se má slučovat',
 	'wikibase-mergeitems-submit' => 'Sloučit položky',
@@ -4418,6 +4425,11 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'action-label-update' => 'Bezeichnungen zu aktualisieren',
 	'action-description-remove' => 'Beschreibungen zu löschen',
 	'action-description-update' => 'Beschreibungen zu aktualisieren',
+	'wikibase-time-precision-Gannum' => 'in $1 Milliarden Jahren',
+	'wikibase-time-precision-Mannum' => 'in $1 Millionen Jahren',
+	'wikibase-time-precision-annum' => 'in $1 Jahren',
+	'wikibase-time-precision-millennium' => '$1. Jahrtausend',
+	'wikibase-time-precision-century' => '$1. Jahrhundert',
 );
 
 /** German (formal address) (Deutsch (Sie-Form)‎)
@@ -4753,6 +4765,7 @@ $messages['dsb'] = array(
  * @author Xaris333
  */
 $messages['el'] = array(
+	'wikibase-desc' => 'Αποθετήριο δομημένων δεδομένων',
 	'specialpages-group-wikibaserepo' => 'Wikibase αποθετήριο',
 	'wikibase-edit' => 'επεξεργασία',
 	'wikibase-save' => 'αποθήκευση',
@@ -4764,8 +4777,10 @@ $messages['el'] = array(
 	'wikibase-remove-inprogress' => 'Αφαιρείται...',
 	'wikibase-label-empty' => 'Δεν έχει ορισθεί ακόμη ετικέτα',
 	'wikibase-label-edit-placeholder' => 'προσθέστε ετικέτα',
+	'wikibase-label-edit-placeholder-language-aware' => 'Εισαγάγετε ετικέτα στο $1',
 	'wikibase-description-empty' => 'Δεν ορίστηκε ακόμα περιγραφή',
 	'wikibase-description-edit-placeholder' => 'προσθέστε περιγραφή',
+	'wikibase-description-edit-placeholder-language-aware' => 'προσθέστε περιγραφή στο $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'τοποθεσία',
 	'wikibase-sitelink-page-edit-placeholder' => 'σελίδα',
 	'wikibase-alias-edit-placeholder' => 'Πληκτρολογήστε μια εναλλακτική ονομασία',
@@ -4801,6 +4816,8 @@ $messages['el'] = array(
 	'wikibase-datatype-label' => 'Τύπος δεδομένων:',
 	'wikibase-claimview-snak-tooltip' => 'Εισαγάγετε μια τιμή που αντιστοιχεί στην ιδιότητα που ονομάζεται "$1". Εάν η ιδιότητα δεν έχει καθορισμένη τιμή ή η πραγματική τιμή δεν είναι γνωστή, μπορείτε να επιλέξετε μια εναλλακτική λύση για να καθορίσετε μια προσαρμοσμένη τιμή κάνοντας κλικ στο εικονίδιο δίπλα στο πλαίσιο τιμή εισόδου.',
 	'wikibase-claimview-snak-new-tooltip' => 'Αφού καθορίσετε μια ιδιότητα, μπορείτε να εισαγάγετε μια αντίστοιχη τιμή. Εάν η ιδιότητα δεν έχει καθορισμένη τιμή ή η πραγματική τιμή δεν είναι γνωστή, μπορείτε να επιλέξετε μια εναλλακτική λύση για να καθορίσετε μια προσαρμοσμένη τιμή κάνοντας κλικ στο εικονίδιο δίπλα στο πλαίσιο τιμή εισόδου.',
+	'wikibase-statementview-rank-preferred' => 'Προτιμώμενη βαθμίδα',
+	'wikibase-statementview-rank-normal' => 'Κανονική βαθμίδα',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|πηγή|πηγές}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|μία πηγή|$1 πηγές}} δεν έχουν ακόμη αποθηκευτεί',
 	'wikibase-snakview-property-input-placeholder' => 'ιδιότητα',
@@ -4815,15 +4832,19 @@ $messages['el'] = array(
 	'wikibase-shortcopyrightwarning' => 'Κάνοντας κλικ στο "$1", συμφωνείτε με τους [[$2|όρους χρήσης]], και συμφωνείτε αμετάκλητα να θέσετε την συνεισφορά σας υπό το $3 .',
 	'wikibase-copyrighttooltip-acknowledge' => 'Αποδέχομαι τους όρους αυτούς και για τις επεξεργασίες που θα κάνω στο μέλλον. Να μην εμφανιστεί ξανά αυτό το μήνυμα.',
 	'wikibase-entityselector-more' => 'περισσότερα',
-	'wikibase-anonymouseditwarning' => 'Προειδοποίηση: Δεν έχετε συνδεθεί. Η διεύθυνση IP σας θα καταγραφεί στο ιστορικό επεξεργασίας της σελίδας $1.', # Fuzzy
+	'wikibase-anonymouseditwarning' => 'Προειδοποίηση: Δεν έχετε συνδεθεί. Η διεύθυνση IP σας θα καταγραφεί στο ιστορικό επεξεργασίας αυτής της σελίδας.',
 	'wikibase-restrictionedit-tooltip-message' => 'Αυτή η σελίδα προστατεύεται.Δεν επιτρέπονται επεξεργασίες.',
 	'wikibase-blockeduser-tooltip-message' => 'Δεν μπορείτε να προβείτε σε επεξεργασία γιατί το όνομα χρήστη ή η διεύθυνση IP που χρησιμοποιείτε έχει υποστεί φραγή.',
 	'wikibase-move-error' => 'Δεν μπορείτε να μετακινήσετε σελίδες από και προς τον ονοματοχώρο δεδομένων.',
+	'wikibase-warning-constraint-violation-length' => 'Ενεργοποιήθηκε κάποιος περιορισμός του μήκους χαρακτήρων για κωδικό γλώσσας " $1 ".',
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|Υπάρχει παραβίαση περιορισμού|Υπάρχουν παραβιάσεις περιορισμών}} {{PLURAL:$1|στην ετικέτα|στις ετικέτες}} "$3"  {{PLURAL:$1|στον κωδικό γλώσσας|στους κωδικούς γλώσσας}} "$2".',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|Υπάρχει παραβίαση περιορισμού|Υπάρχουν παραβιάσεις περιορισμών}} {{PLURAL:$1|της περιγραφής |των περιγραφών}} "$3" {{PLURAL:$1|στον κωδικό γλώσσας|στους κωδικούς γλώσσας}} "$2".',
-	'wikibase-error-sitelink-already-used' => 'Ο σύνδεσμος [$1 $2] χρησιμοποιείται από το αντικείμενο [[$3]].', # Fuzzy
-	'wikibase-error-label-not-unique-wikibase-property' => 'Μια άλλη ιδιότητα ( $3 ) έχει ήδη ετικέτα " $1 " που συνδέονται με κωδικό γλώσσας $2', # Fuzzy
-	'wikibase-error-label-not-unique-item' => 'Ένα άλλο αντικείμενο ($3) που έχει συσχετιστεί με τον κωδικό γλώσσας $2 έχει ήδη ετικέτα "$1" και περιγραφή "$4"', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Ο σύνδεσμος [$1 $2] χρησιμοποιείται ήδη από το αντικείμενο [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Μια άλλη ιδιότητα ( $3 ) έχει ήδη ετικέτα " $1 " που συνδέεται με τον κωδικό γλώσσας $2',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Ένα άλλο ερώτημα ($3) έχει ήδη ετικέτα "$1" που συνδέεται με κωδικό γλώσσας  $2 .',
+	'wikibase-error-label-not-unique-item' => 'Ένα άλλο αντικείμενο ($3) έχει ήδη ετικέτα "$1" και περιγραφή "$4" που συνδέονται με κωδικό γλώσσας  $2 .',
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" δεν είναι έγκυρος κωδικός αντικειμένου',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Το αναγνωριστικό γλώσσας "$1" που δώσατε δεν αναγνωρίσθηκε από το σύστημα. Παρακαλώ χρησιμοποιήστε ένα έγκυρο αναγνωριστικό όπως το "en".',
 	'special-itembytitle' => 'Αντικείμενα ανά τίτλο',
 	'wikibase-itembytitle-lookup-page' => 'Σελίδα:',
 	'wikibase-itembytitle-submit' => 'Αναζήτηση',
@@ -4839,7 +4860,7 @@ $messages['el'] = array(
 	'special-newproperty' => 'Δημιουργήστε μια νέα ιδιότητα',
 	'wikibase-newproperty-fieldset' => 'Δημιουργήστε μια νέα ιδιότητα',
 	'wikibase-newproperty-datatype' => 'Τύπος δεδομένων:',
-	'wikibase-newproperty-invalid-datatype' => 'Ορίσθηκε άκυρος τύπος δεδομένων', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'Ορίσθηκε άκυρος τύπος δεδομένων',
 	'special-newitem' => 'Δημιουργία νέου αντικείμενου',
 	'wikibase-newitem-summary' => 'Βεβαιωθείτε πως [[Special:ItemByTitle|ελέγξατε ότι το αντικείμενο δεν υπάρχει ήδη]]!<br /> Θα πρέπει να προσθέσετε [[Help:Label|ετικέτα]] και [[Help:Description|περιγραφή]] για κάθε νέο αντικείμενο που δημιουργείτε.',
 	'wikibase-newitem-fieldset' => 'Δημιουργήστε ένα νέο αντικείμενο.',
@@ -4858,7 +4879,8 @@ $messages['el'] = array(
 	'wikibase-setdescription-submit' => 'Προσθέστε μια περιγραφή',
 	'wikibase-setdescription-warning-remove' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε την περιγραφή του [[$1]];',
 	'wikibase-modifyterm-language' => 'Γλώσσα:',
-	'wikibase-modifyterm-invalid-langcode' => 'Το αναγνωριστικό γλώσσας "$1" που δώσατε δεν αναγνωρίσθηκε από το σύστημα. Παρακαλώ χρησιμοποιήστε ένα έγκυρο αναγνωριστικό όπως το "en".',
+	'special-mergeitems' => 'Συγχώνευση δύο αντικειμένων',
+	'wikibase-mergeitems-submit' => 'Συγχώνευση αντικειμένων',
 	'wikibase-dispatchstats-oldest-change' => 'Παλαιότερο',
 	'wikibase-dispatchstats-newest-change' => 'Νεότερο',
 	'wikibase-entitieswithoutlabel-label-language' => 'Γλώσσα:',
@@ -5799,6 +5821,7 @@ $messages['eu'] = array(
 /** Persian (فارسی)
  * @author A.R.Rostamzade
  * @author Alireza
+ * @author Armin1392
  * @author Calak
  * @author Dalba
  * @author Ebraminio
@@ -5829,8 +5852,10 @@ $messages['fa'] = array(
 	'wikibase-remove-inprogress' => 'در حال حذف‌کردن...',
 	'wikibase-label-empty' => 'هنوز نامی تعریف نشده‌است.',
 	'wikibase-label-edit-placeholder' => 'واردکردن نام',
+	'wikibase-label-edit-placeholder-language-aware' => 'برچسب را در $1 وارد کنید',
 	'wikibase-description-empty' => 'هنوز توضیحاتی تعریف نشده‌است.',
 	'wikibase-description-edit-placeholder' => 'واردکردن توضیحات',
+	'wikibase-description-edit-placeholder-language-aware' => 'توصیف را در $1 وارد کنید',
 	'wikibase-sitelink-site-edit-placeholder' => 'وب‌گاه',
 	'wikibase-sitelink-page-edit-placeholder' => 'صفحه',
 	'wikibase-alias-edit-placeholder' => 'واردکردن نام مستعار',
@@ -5866,6 +5891,7 @@ $messages['fa'] = array(
 	'wikibase-datatype-label' => 'نوع داده:',
 	'wikibase-claimview-snak-tooltip' => 'مقدار مربوط به ویژگی «$1» را وارد کنید. اگر ویژگی فاقد مقدار است یا مقدار کنونی در دسترس نیست، می‌توانید مقدار موازی خود را با کلیک کردن روی دکمهٔ کنار جعبهٔ مقدار وارد کنید.',
 	'wikibase-claimview-snak-new-tooltip' => 'بعد از تعیین یک ویژگی، شما می‌توانید مقدار مربوطه را نیز وارد کنید. اگر ویژگی فاقد مقدار بود یا مقدار در دسترس نبود، شما می‌توانید با کلیک کردن روی دکمهٔ کنار جعبه مقدار، مقدار مورد نظر خود را وارد کنید.',
+	'wikibase-statementview-rank-preferred' => 'رتبهٔ مورد نظر',
 	'wikibase-statementview-rank-normal' => 'رتبه عادی',
 	'wikibase-statementview-rank-deprecated' => 'مرتبه بد',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|منبع|منبع}}',
@@ -5897,6 +5923,10 @@ $messages['fa'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'خصوصیت دیگری ($3) از قبل دارای نام «$1» مربوط به کد زبان $2 است',
 	'wikibase-error-label-not-unique-wikibase-query' => 'کوئری دیگری ($3) از قبل دارای نام "$1" مربوط به کد زبان $2 است',
 	'wikibase-error-label-not-unique-item' => 'آیتم دیگری ($3) از قبل دارای نام «$1» و توضیحات «$4» مربوط به کد زبان «$2» است',
+	'wikibase-error-label-no-entityid' => 'برچسب نباید شناسهٔ نهاد معتبر باشد.',
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" یک شناسهٔ مورد معتبر نیست.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'شناسهٔ زبان «$1» ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است (مثل «en») استفاده کنید.',
+	'wikibase-wikibaserepopage-invalid-id' => 'شناسهٔ «$1» برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
 	'special-itembytitle' => 'آیتم بر پایهٔ عنوان',
 	'wikibase-itembytitle-lookup-fieldset' => 'جستجوی آیتم‌ها بر پایهٔ وب‌گاه و عنوان',
 	'wikibase-itembytitle-lookup-site' => 'وب‌گاه:',
@@ -5955,16 +5985,20 @@ $messages['fa'] = array(
 	'wikibase-setsitelink-intro' => 'این فرم به شما امکان ثبت پیوند تارنمای یک موجودی را می‌دهد. شما باید شناسه موجودی (برای نمونه، Q23)، یک شناسه تارنما (برای نمونه، "fawiki") و پیوند تارنما را برای ثبت فراهم کنید.',
 	'wikibase-setsitelink-site' => 'شناسه تارنما:',
 	'wikibase-setsitelink-label' => 'پیوند تارنما:',
+	'wikibase-setsitelink-badges' => 'نشان‌ها:',
 	'wikibase-setsitelink-submit' => 'ثبت پیوند تارنما',
 	'wikibase-setsitelink-warning-remove' => 'مطمئنید که می‌خواهید پیوند تارنمای [[$1]] را حذف کنید؟',
 	'wikibase-setsitelink-invalid-site' => 'شناسه تارنمای «$1» نامعلوم است. خواهشمند است از یک شناسه موجود بهره گیرید، چیزی همچون «fawiki».',
+	'wikibase-setsitelink-not-item' => 'شناسهٔ $1 متعلق به یک مورد نیست.',
+	'wikibase-setsitelink-not-badge' => 'مورد $1 یک نشان نیست.',
 	'wikibase-setsitelink-add-failed' => 'نشانی وبگاه ذخیره نمی‌شود.',
 	'wikibase-setsitelink-remove-failed' => 'لینک سایت را نمی توان حذف کرد.',
-	'wikibase-setsitelink-not-itemid' => '"$1" شناسه ای نامناسب برای این مورد است.می توانید فقط از پیوند سایت ها برای این مورد استفاده نمایید.',
 	'wikibase-modifyentity-id' => 'شناسه:',
 	'wikibase-modifyterm-language' => 'زبان:',
-	'wikibase-modifyentity-invalid-id' => 'شناسهٔ «$1» برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
-	'wikibase-modifyterm-invalid-langcode' => 'شناسهٔ زبان «$1» ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است (مثل «en») استفاده کنید.',
+	'special-mergeitems' => 'ادغام دو مورد',
+	'wikibase-mergeitems-fromid' => 'شناسه برای ادغام از',
+	'wikibase-mergeitems-toid' => 'شناسه برای ادغام به',
+	'wikibase-mergeitems-submit' => 'ادغام موارد',
 	'special-dispatchstats' => 'آمار تغییرات فرستادن‌ها',
 	'wikibase-dispatchstats-intro' => 'این صفحه آمار در مورد ارسال تغییرات به مشتری را فراهم می کند.
 هنگامی که تغییرات ارسال شد کاربران ویکی، از تغییرات در {{SITENAME}}  مطلع شود و صف کار بر روی آن ویکی اطلاع‌رسانی را پردازش می‌کند.
@@ -6047,7 +6081,10 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => 'افزودن {{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'حذف {{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'پیوند مشخص‌کنندهٔ وب‌گاه [$2] افزوده شد',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'لینک اضافه شده با نشان‌ها به [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'پیوند به [$2] تغییر یافت',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'تغییر نشان‌ها برای [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'تغییر لینک و نشان‌ها برای [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'حذف پیوند مشخص‌کنندهٔ وب‌گاه [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'ساخت این آیتم برای پیوند صفحه های [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'افزودن یک پیوند زبانی برای ارتباط صفحه های [$2↔$3]',
@@ -6681,6 +6718,11 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-setsitelink-remove-failed' => 'Le site de lien n’a pas pu être supprimé.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Langue :',
+	'special-mergeitems' => 'Fusionner les deux éléments',
+	'wikibase-mergeitems-intro' => 'Si vous fusionnez deux éléments, tous les libellés, descriptions, alias, liens de site et déclarations seront déplacés d’un élément vers l’autre.',
+	'wikibase-mergeitems-fromid' => 'L’id à partir duquel fusionner',
+	'wikibase-mergeitems-toid' => 'L’id vers lequel fusionner',
+	'wikibase-mergeitems-submit' => 'Fusionner les éléments',
 	'special-dispatchstats' => 'Statistiques de répartition des changements',
 	'wikibase-dispatchstats-intro' => 'Cette page fournit des statistiques à propos de la répartition des changements entre les clients.',
 	'wikibase-dispatchstats-no-stats' => "Il n'y a actuellement aucune statistique disponible.",
@@ -10497,7 +10539,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-error-label-not-unique-wikibase-query' => '다른 쿼리($3)은 이미 $2 언어 코드와 관련된 "$1" 레이블이 있습니다.',
 	'wikibase-error-label-not-unique-item' => '다른 항목($3)은 이미 $2 언어 코드와 관련된 "$1" 레이블과 "$4" 설명이 있습니다.',
 	'wikibase-error-label-no-entityid' => '레이블은 유효한 항목 id가 아니어야 합니다.',
-	'wikibase-wikibaserepopage-not-itemid' => '"$1"은 유효한 항목 ID가 아닙니다. 사이트링크는 항목에만 설정할 수 있습니다.', # Fuzzy
+	'wikibase-wikibaserepopage-not-itemid' => '"$1"은 유효한 항목 ID가 아닙니다.',
 	'wikibase-wikibaserepopage-invalid-langcode' => '"$1" 언어 식별자를 알 수 없습니다. "ko"와 같은 시스템에 알려진 언어 식별자를 사용하세요.',
 	'wikibase-wikibaserepopage-invalid-id' => '"$1" ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.',
 	'special-itembytitle' => '제목별 항목',
@@ -10563,10 +10605,16 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-setsitelink-warning-remove' => '[[$1]]의 사이트 링크를 제거하겠습니까?',
 	'wikibase-setsitelink-invalid-site' => '"$1" 사이트 id를 알 수 없습니다. "kowiki"와 같은 기존 사이트 id를 사용하세요.',
 	'wikibase-setsitelink-not-item' => 'ID $1은 항목에 속하지 않습니다.',
+	'wikibase-setsitelink-not-badge' => '$1 항목은 뱃지가 아닙니다.',
 	'wikibase-setsitelink-add-failed' => '사이트 링크를 저장할 수 없습니다.',
 	'wikibase-setsitelink-remove-failed' => '사이트 링크를 제거할 수 없습니다.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => '언어:',
+	'special-mergeitems' => '두 항목을 병합',
+	'wikibase-mergeitems-intro' => '두 항목을 병합하면 모든 레이블, 설명, 별명, 사이트링크, 내용이 한 항목에서 다른 항목으로 옮겨집니다.',
+	'wikibase-mergeitems-fromid' => '합병되는 문서의 id',
+	'wikibase-mergeitems-toid' => '합병할 문서의 id',
+	'wikibase-mergeitems-submit' => '항목 합병',
 	'special-dispatchstats' => '편집 전송 통계',
 	'wikibase-dispatchstats-intro' => '이 문서는 변경 사항을 클라이언트에 전송하는 것에 관한 통계를 제공합니다.',
 	'wikibase-dispatchstats-no-stats' => '현재 사용할 수 있는 통계가 없습니다.',
@@ -11012,6 +11060,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Eng aner Eegeschaft ($3) huet schonn d\'Etikett "$1" associéiert mam Sproochcode $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Eng aner Ufro ($3) huet schonn d\'Etikett "$1" associéiert mam Sproochcode $2.',
 	'wikibase-error-label-not-unique-item' => 'En anert Element ($3) huet schonn d\'Etikett "$1" an d\'Beschreiwung "$4" associéiert mam Sproochecode $2.',
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" ass keng valabel ID vun engem Element.',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'De Sproochcode "$1" ass onbekannt. Benotzt w.e.g. e Sproochcode deen dem System bekannt ass, wéi z. Bsp. "en".',
 	'wikibase-wikibaserepopage-invalid-id' => 'D\'ID "$1" ass am System net bekannt. Benotzt w.e.g. en valabel ID vun der Entitéit.',
 	'special-itembytitle' => 'Element no Titel',
@@ -11072,6 +11121,8 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Sprooch:',
 	'special-mergeitems' => 'Zwee Elementer zesummeleeën',
+	'wikibase-mergeitems-intro' => 'Wann Dir zwee Elementer zesummeleet da ginn all Etiketten, Aliasen, Linken op Siten an Declaratioun vun engem op deen Anere geréckelt.',
+	'wikibase-mergeitems-toid' => "D'ID op déi zesummegeluecht gëtt",
 	'wikibase-mergeitems-submit' => 'Elementer zesummeleeën',
 	'wikibase-dispatchstats-no-stats' => 'Et sinn elo keng Statistiken disponibel.',
 	'wikibase-dispatchstats-stats' => 'Statistike vun der Verbreedung',
@@ -11199,9 +11250,11 @@ $messages['lrc'] = array(
 	'wikibase-move-up' => 'رئتن بالا',
 	'wikibase-move-down' => 'رو وه هار',
 	'wikibase-propertyedittool-full' => 'نوم گه انازه یا کامل بیه',
+	'wikibase-copyrighttooltip-acknowledge' => 'مه ای قانونا نه سی ویرایشتیا نهایی م قوول کردم.دواره ای پیغوم نشو نئیه',
 	'wikibase-anonymouseditwarning' => 'زنئار:شما وامین نیومایته.
 نشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.',
 	'wikibase-itembytitle-lookup-fieldset' => 'قلمیا نه سی سیلجا و نوم ون مئن جوری کو',
+	'wikibase-itembytitle-lookup-site' => 'سیلجا:',
 	'wikibase-newitem-site' => 'سیلجا اولین بلگه هوم پیوند بیه',
 	'special-setsitelink' => 'یه گل هوم پیوند سیلجا بنیت',
 	'wikibase-setsitelink-label' => 'هوم پیوند سیلجا:',
@@ -11797,7 +11850,7 @@ $messages['mk'] = array(
 * барање (''query'') – содржан дел од Iri-низата
 * делче (''fragment'') – содржан дел од Iri-низата",
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медиумска содржина од Ризницата',
-	'wikibase-listdatatypes-commonsmedia-body' => "Врска до податотеки складирани на Заедничката Ризница. При внесување на нешто во именскиот простор „Податотека“ (File), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
+	'wikibase-listdatatypes-commonsmedia-body' => "Врска до податотеки складирани на Ризницата. При внесување на нешто во именскиот простор „Податотека“ (File), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
 * шема (''scheme'') – содржан дел од Iri-низата
 * хиерархиски дел (''hierarchicalpart'') – содржан дел од Iri-низата
 * барање (''query'') – содржан дел од Iri-низата
