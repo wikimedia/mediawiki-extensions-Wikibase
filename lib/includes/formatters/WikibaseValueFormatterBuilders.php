@@ -5,6 +5,8 @@ namespace Wikibase\Lib;
 use Language;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\GeoCoordinateFormatter;
+use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityLookup;
@@ -58,7 +60,7 @@ class WikibaseValueFormatterBuilders {
 		// formatters to use for plain text output
 		SnakFormatter::FORMAT_PLAIN => array(
 			'VT:string' => 'ValueFormatters\StringFormatter',
-			'VT:globecoordinate' => 'ValueFormatters\GlobeCoordinateFormatter',
+			'VT:globecoordinate' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newGlobeCoordinateFormatter' ),
 			'VT:quantity' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newQuantityFormatter' ),
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
 			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdFormatter' ),
