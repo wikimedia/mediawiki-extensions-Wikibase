@@ -79,7 +79,6 @@
  *        (3) {Object} Detailed error information.
  *
  * @dependency jquery.autocompletestring
- * @dependency jquery.eachchange
  * @dependency jquery.ui.autocomplete
  * @dependency jquery.util.adaptlettercase
  * @dependency jquery.util.getscrollbarwidth

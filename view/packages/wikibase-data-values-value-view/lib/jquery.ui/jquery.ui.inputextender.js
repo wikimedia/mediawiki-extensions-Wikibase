@@ -41,8 +41,8 @@
  *
  * @dependency jQuery
  * @dependency jQuery.Widget
- * @dependency jQuery.eachchange
  * @dependency jQuery.animateWithEvent
+ * @dependency jQuery.event.special.eachchange
  * @dependency jQuery.ui.position
  */
 ( function( $ ) {
@@ -181,7 +181,7 @@
 			} );
 
 			if( this.options.hideWhenInputEmpty ) {
-				this.element.eachchange( function( event, oldValue ) {
+				this.element.on( 'eachchange', function( event, oldValue ) {
 					if( self.element.val() === '' ) {
 						self.hideExtension();
 					} else if ( oldValue === '' ) {

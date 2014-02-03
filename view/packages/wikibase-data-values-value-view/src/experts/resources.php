@@ -114,7 +114,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-				'jquery.eachchange',
+				'jquery.event.special.eachchange',
 				'jquery.focusAt',
 				'jquery.inputautoexpand',
 				'jquery.valueview.experts',

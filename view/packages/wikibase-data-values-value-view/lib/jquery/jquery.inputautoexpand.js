@@ -44,7 +44,7 @@
  * @option eventNamespace {string} Namespace used for the events the plugin attaches handlers to.
  *         Default: 'inputautoexpand'
  *
- * @dependency jquery.eachchange
+ * @dependency jquery.event.special.eachchange
  */
 ( function( $ ) {
 	'use strict';
@@ -102,8 +102,7 @@
 
 		this._nodeName = element.nodeName;
 
-		this.$input
-		.eachchange( function( event, oldValue ) {
+		this.$input.on( 'eachchange', function( event, oldValue ) {
 			if ( self._options.suppressNewLine ) {
 				self.$input.val( self.$input.val().replace( /\r?\n/g, '' ) );
 			}

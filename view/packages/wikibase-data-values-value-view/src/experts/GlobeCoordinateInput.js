@@ -89,7 +89,7 @@
 				},
 				contentAnimationEvents: 'toggleranimation'
 			} )
-			.eachchange( function( event, oldValue ) {
+			.on( 'eachchange', function( event, oldValue ) {
 				self._viewNotifier.notify( 'change' );
 			} );
 		},
