@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_ed75ec93",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-03T15:08:40Z",
+      "side": 1,
+      "message": "I think this message needs PLURAL",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_cd6a30b1",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-03T15:08:40Z",
+      "side": 1,
+      "message": "I think this message needs PLURAL",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_ad6fe4bf",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-03T15:08:40Z",
+      "side": 1,
+      "message": "I think this message needs PLURAL",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_6d61dccf",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-03T15:08:40Z",
+      "side": 1,
+      "message": "Unsure if PLURAL is needed. What is a typical value of $1?",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
