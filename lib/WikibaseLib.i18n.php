@@ -13,6 +13,7 @@ $messages = array();
 
 /** English
  * @author Jeroen De Dauw
+ * @author Adam Shorland
  */
 $messages['en'] = array(
 	'wikibase-lib-desc' => 'Holds common functionality for the Wikibase and Wikibase Client extensions',
@@ -80,6 +81,21 @@ $messages['en'] = array(
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
 	'version-wikibase' => 'Wikibase',
+
+	// TimeFormats
+	'wikibase-time-precision-Gannum' => 'in $1 billion years',
+	'wikibase-time-precision-Mannum' => 'in $1 million years',
+	'wikibase-time-precision-annum' => 'in $1 years',
+	'wikibase-time-precision-millennium' => '$1. millennium',
+	'wikibase-time-precision-century' => '$1. century',
+	'wikibase-time-precision-10annum' => '$1s',
+
+	'wikibase-time-precision-BCE-Gannum' => '$1 billion years ago',
+	'wikibase-time-precision-BCE-Mannum' => '$1 million years ago',
+	'wikibase-time-precision-BCE-annum' => '$1 years ago',
+	'wikibase-time-precision-BCE-millennium' => '$1. millennium BCE',
+	'wikibase-time-precision-BCE-century' => '$1. century BCE',
+	'wikibase-time-precision-BCE-10annum' => '$1s BCE',
 );
 
 /** Message documentation (Message documentation)
@@ -269,6 +285,32 @@ Parameters:
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
+
+	'wikibase-time-precision-Gannum' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 1 billion of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-Mannum' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 1 million of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-annum' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 10000 years to 100000 years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-millennium' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 1000 years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-century' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 100 years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-10annum' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 10 years
+{{Related|Wikibase-time-precision}}',
+
+	'wikibase-time-precision-BCE-Gannum' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 1 billion of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-BCE-Mannum' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 1 million of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-BCE-annum' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 10000 years to 100000 years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-BCE-millennium' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 1000 years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-BCE-century' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 100 years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-BCE-10annum' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 10 years
+{{Related|Wikibase-time-precision}}',
 );
 
 /** Afrikaans (Afrikaans)
