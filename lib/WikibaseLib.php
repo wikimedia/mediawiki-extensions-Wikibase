@@ -85,6 +85,7 @@ call_user_func( function() {
 	$wgValueParsers['int'] = 'ValueParsers\IntParser';
 	$wgValueParsers['null'] = 'ValueParsers\NullParser';
 	$wgValueParsers['decimal'] = 'ValueParsers\DecimalParser';
+	$wgValueParsers['time'] = 'Wikibase\Lib\Parsers\TimeParser';
 
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
