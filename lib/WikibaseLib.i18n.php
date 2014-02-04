@@ -13,6 +13,7 @@ $messages = array();
 
 /** English
  * @author Jeroen De Dauw
+ * @author Adam Shorland
  */
 $messages['en'] = array(
 	'wikibase-lib-desc' => 'Holds common functionality for the Wikibase and Wikibase Client extensions',
@@ -80,6 +81,14 @@ $messages['en'] = array(
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
 	'version-wikibase' => 'Wikibase',
+
+	// TimeFormats
+	'wikibase-time-precision-Gannum' => 'in $1 billion years',
+	'wikibase-time-precision-Mannum' => 'in $1 million years',
+	'wikibase-time-precision-annum' => 'in $1 years',
+	'wikibase-time-precision-millennium' => '$1. millennium',
+	'wikibase-time-precision-century' => '$1. century',
+	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** Message documentation (Message documentation)
@@ -269,6 +278,19 @@ Parameters:
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
+
+	'wikibase-time-precision-Gannum' => 'Used to indicate a timespan in $1 number of billions of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-Mannum' => 'Used to indicate a timespan in $1 number of millions of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-annum' => 'Used to indicate a timespan in $1 number of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-millennium' => 'Used to indicate a timespan in $1 number of millennium
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-century' => 'Used to indicate a timespan in $1 number of centuries
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-10annum' => 'Used to indicate a timespan in $1 number of 10s of years
+{{Related|Wikibase-time-precision}}',
 );
 
 /** Afrikaans (Afrikaans)
