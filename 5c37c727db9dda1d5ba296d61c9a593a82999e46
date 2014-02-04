@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_2f72a3e2",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-04T11:10:18Z",
+      "side": 1,
+      "message": "This would be:\nIn 1 billion years\nnot\nIn 1 billion year\nnot sure whats best on the i18n front here",
+      "parentUuid": "6ef7ef47_ed75ec93",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_cd6a30b1",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-02-03T15:08:40Z",
       "side": 1,
       "message": "I think this message needs PLURAL",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_0f77e7d2",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-04T11:10:18Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "6ef7ef47_cd6a30b1",
       "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_af8593a1",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-04T11:10:18Z",
+      "side": 1,
+      "message": "Will always be plural\ni.e.\nin 12,345,670,000 years\nin 70,000 years",
+      "parentUuid": "6ef7ef47_ad6fe4bf",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_6d61dccf",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-02-03T15:08:40Z",
       "side": 1,
       "message": "Unsure if PLURAL is needed. What is a typical value of $1?",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_8f59b75f",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-04T11:10:18Z",
+      "side": 1,
+      "message": "this will always be a value above 10\ni.e.\n10s\n20s\n123,990s",
+      "parentUuid": "6ef7ef47_6d61dccf",
       "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
