@@ -1977,6 +1977,12 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'action-label-update' => 'anovar etiquetes',
 	'action-description-remove' => 'borrar descripciones',
 	'action-description-update' => 'anovar descripciones',
+	'wikibase-time-precision-Gannum' => "en $1 miles de millones d'años",
+	'wikibase-time-precision-Mannum' => "en $1 millones d'años",
+	'wikibase-time-precision-annum' => 'en $1 años',
+	'wikibase-time-precision-millennium' => '$1. mileniu',
+	'wikibase-time-precision-century' => '$1. sieglu',
+	'wikibase-time-precision-10annum' => '$1 décaes',
 );
 
 /** Azerbaijani (azərbaycanca)
@@ -3060,8 +3066,11 @@ $messages['ce'] = array(
 	'wikibase-setlabel-submit' => 'Язъе цӀе',
 	'wikibase-setdescription-label' => 'Цуьнах лаьцна:',
 	'wikibase-setdescription-submit' => 'ДӀаязде цуьнах лаьцна',
+	'wikibase-setaliases-submit' => 'Язъе харц цӀерш',
 	'wikibase-setsitelink-label' => 'Сайтан тӀе хьажораг:',
 	'wikibase-modifyterm-language' => 'Мотт:',
+	'special-mergeitems' => 'Цхьаьнатоха шиъ элемент',
+	'wikibase-mergeitems-submit' => 'Цхьаьнатоха элементаш',
 	'wikibase-dispatchstats-change-timestamp' => 'Терахь/хан',
 	'wikibase-dispatchstats-oldest-change' => 'Уггар ширанийш',
 	'wikibase-history-title-with-label' => 'Хийцаман истори «$2» ($1)',
@@ -3089,6 +3098,7 @@ $messages['ce'] = array(
 	'wikibase-item-summary-clientsitelink-update' => 'АгӀо кхечухьа яьккхина (цӀе хийцина) [$3] → [$4]',
 	'wikibase-property-summary-wbsetlabel-set' => 'Хийцина билгало [$2]',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Глобальни координаташ',
+	'wikibase-listdatatypes-string-head' => 'МогӀа',
 	'wikibase-listdatatypes-time-head' => 'Хан',
 	'right-item-remove' => 'элементаш дӀаяхар',
 	'right-property-remove' => 'башхалонаш дӀаяхар',
@@ -4079,10 +4089,10 @@ $messages['de'] = array(
 	'wikibase-addreference' => 'Quelle hinzufügen',
 	'wikibase-save-inprogress' => 'Speichere …',
 	'wikibase-remove-inprogress' => 'Entferne …',
-	'wikibase-label-empty' => 'Bislang wurde noch keine Bezeichnung angegeben.',
+	'wikibase-label-empty' => 'Noch keine Bezeichnung angegeben',
 	'wikibase-label-edit-placeholder' => 'Bezeichnung eingeben',
 	'wikibase-label-edit-placeholder-language-aware' => 'Bezeichnung auf $1 eingeben',
-	'wikibase-description-empty' => 'Bislang wurde noch keine Beschreibung angegeben.',
+	'wikibase-description-empty' => 'Noch keine Beschreibung angegeben',
 	'wikibase-description-edit-placeholder' => 'Beschreibung eingeben',
 	'wikibase-description-edit-placeholder-language-aware' => 'Beschreibung auf $1 eingeben',
 	'wikibase-sitelink-site-edit-placeholder' => 'Website',
@@ -4430,6 +4440,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-time-precision-annum' => 'in $1 Jahren',
 	'wikibase-time-precision-millennium' => '$1. Jahrtausend',
 	'wikibase-time-precision-century' => '$1. Jahrhundert',
+	'wikibase-time-precision-10annum' => '$1 Jahrzehnte',
 );
 
 /** German (formal address) (Deutsch (Sie-Form)‎)
@@ -6921,6 +6932,12 @@ ffirmation ajoutée}}',
 	'action-label-update' => 'mettre à jour des libellés',
 	'action-description-remove' => 'effacer des descriptions',
 	'action-description-update' => 'mettre à jour des descriptions',
+	'wikibase-time-precision-Gannum' => 'dans $1 milliards d’années',
+	'wikibase-time-precision-Mannum' => 'dans $1 millions d’années',
+	'wikibase-time-precision-annum' => 'dans $1 années',
+	'wikibase-time-precision-millennium' => '$1. millénaire',
+	'wikibase-time-precision-century' => '$1. siècle',
+	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** Franco-Provençal (arpetan)
@@ -9770,6 +9787,12 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'action-label-update' => 'aggiornare le etichette',
 	'action-description-remove' => 'cancellare le descrizioni',
 	'action-description-update' => 'aggiornare le descrizioni',
+	'wikibase-time-precision-Gannum' => '$1 miliardi di anni',
+	'wikibase-time-precision-Mannum' => '$1 milioni di anni',
+	'wikibase-time-precision-annum' => '$1 anni',
+	'wikibase-time-precision-millennium' => '$1 millenni',
+	'wikibase-time-precision-century' => '$1 secoli',
+	'wikibase-time-precision-10annum' => 'anni $1',
 );
 
 /** Japanese (日本語)
@@ -11238,6 +11261,10 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'action-label-update' => 'Etiketten aktualiséieren',
 	'action-description-remove' => 'Beschreiwungen läschen',
 	'action-description-update' => 'Beschreiwungen aktualiséieren',
+	'wikibase-time-precision-Gannum' => 'a(n) $1 Milliarde Joren',
+	'wikibase-time-precision-annum' => 'a(n) $1 Joer',
+	'wikibase-time-precision-millennium' => '$1. Joerdausend',
+	'wikibase-time-precision-century' => '$1. Joerhonnert',
 );
 
 /** لوری (لوری)
@@ -11921,6 +11948,12 @@ $messages['mk'] = array(
 	'action-label-update' => 'поднова на етикети',
 	'action-description-remove' => 'бришење на описи',
 	'action-description-update' => 'поднова на описи',
+	'wikibase-time-precision-Gannum' => 'за $1 милијарди години',
+	'wikibase-time-precision-Mannum' => 'за $1 милиони години',
+	'wikibase-time-precision-annum' => 'за $1 години',
+	'wikibase-time-precision-millennium' => '$1. илјадалетие',
+	'wikibase-time-precision-century' => '$1. век',
+	'wikibase-time-precision-10annum' => '$1 децении',
 );
 
 /** Malayalam (മലയാളം)
@@ -14509,6 +14542,12 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'action-label-update' => 'agiorné dle tichëtte',
 	'action-description-remove' => 'scancelé dle descrission',
 	'action-description-update' => 'agiorné dle descrission',
+	'wikibase-time-precision-Gannum' => "da-sì $1 miliard d'agn",
+	'wikibase-time-precision-Mannum' => "da-sì $1 milion d'agn",
+	'wikibase-time-precision-annum' => 'da-sì $1 agn',
+	'wikibase-time-precision-millennium' => "$1. milen-a d'agn",
+	'wikibase-time-precision-century' => '$1. sécol',
+	'wikibase-time-precision-10annum' => "$1 desen-e d'agn",
 );
 
 /** Pashto (پښتو)
@@ -17322,6 +17361,12 @@ $messages['uk'] = array(
 	'action-label-update' => 'оновлення назв',
 	'action-description-remove' => 'знищити описи',
 	'action-description-update' => 'оновлення описів',
+	'wikibase-time-precision-Gannum' => 'у $1 млрд. років',
+	'wikibase-time-precision-Mannum' => 'у $1 мільйон років',
+	'wikibase-time-precision-annum' => 'у $1 років',
+	'wikibase-time-precision-millennium' => '$1. тисячоліття',
+	'wikibase-time-precision-century' => '$1. століття',
+	'wikibase-time-precision-10annum' => '$1 десятиріччя',
 );
 
 /** Urdu (اردو)
@@ -18057,6 +18102,12 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'action-label-update' => 'cập nhật nhãn',
 	'action-description-remove' => 'xóa lời miêu tả',
 	'action-description-update' => 'cập nhật lời miêu tả',
+	'wikibase-time-precision-Gannum' => 'cách đây $1 tỷ năm',
+	'wikibase-time-precision-Mannum' => 'cách đây $1 triệu năm',
+	'wikibase-time-precision-annum' => 'cách đây $1 năm',
+	'wikibase-time-precision-millennium' => 'thiên niên kỷ $1',
+	'wikibase-time-precision-century' => 'thế kỷ $1',
+	'wikibase-time-precision-10annum' => 'thập niên $1',
 );
 
 /** Volapük (Volapük)
