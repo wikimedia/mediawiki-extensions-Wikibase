@@ -3,7 +3,7 @@
  * @author Daniel Werner < danweetz@web.de >
  */
 
-.valueview-expert-emptyvalue {
+.valueview-expert-EmptyValue {
 	color: gray;
 	font-style: italic;
 }

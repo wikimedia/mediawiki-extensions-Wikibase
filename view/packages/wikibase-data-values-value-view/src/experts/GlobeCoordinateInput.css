@@ -3,11 +3,11 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-.valueview-expert-globecoordinateinput-input {
+.valueview-expert-GlobeCoordinateInput-input {
 	width: 100%;
 }
 
-.ui-inputextender-extension .valueview-expert-globecoordinateinput-advancedtoggler {
+.ui-inputextender-extension .valueview-expert-GlobeCoordinateInput-advancedtoggler {
 	border: none;
 	background: none;
 	margin-top: 0.5em;
