@@ -38,6 +38,8 @@
 		"diff/diff": ">=0.9",
 		"wikibase/easyrdf_lite": "*"
 	},
+	"require-dev": {
+	},
 	"autoload": {
 		"files" : [
 			"Wikibase.composer.php"
