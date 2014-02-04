@@ -461,14 +461,6 @@ to find out where it went.',
 	'action-label-update' => 'update labels',
 	'action-description-remove' => 'erase descriptions',
 	'action-description-update' => 'update descriptions',
-
-	// TimeFormats
-	'wikibase-time-precision-Gannum' => 'in $1 billion years',
-	'wikibase-time-precision-Mannum' => 'in $1 million years',
-	'wikibase-time-precision-annum' => 'in $1 years',
-	'wikibase-time-precision-millennium' => '$1. millennium',
-	'wikibase-time-precision-century' => '$1. century',
-	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** Message documentation (Message documentation)
@@ -1351,18 +1343,6 @@ Right to set and alter [[d:Wikidata:Glossary#Description|descriptions]] of [[d:W
 	'action-label-update' => '{{doc-action|label-update}}',
 	'action-description-remove' => '{{doc-action|description-remove}}',
 	'action-description-update' => '{{doc-action|description-update}}',
-	'wikibase-time-precision-Gannum' => 'Used to indicate a timespan in $1 number of billions of years
-{{Related|Wikibase-time-precision}}',
-	'wikibase-time-precision-Mannum' => 'Used to indicate a timespan in $1 number of millions of years
-{{Related|Wikibase-time-precision}}',
-	'wikibase-time-precision-annum' => 'Used to indicate a timespan in $1 number of years
-{{Related|Wikibase-time-precision}}',
-	'wikibase-time-precision-millennium' => 'Used to indicate a timespan in $1 number of millennium
-{{Related|Wikibase-time-precision}}',
-	'wikibase-time-precision-century' => 'Used to indicate a timespan in $1 number of centuries
-{{Related|Wikibase-time-precision}}',
-	'wikibase-time-precision-10annum' => 'Used to indicate a timespan in $1 number of 10s of years
-{{Related|Wikibase-time-precision}}',
 );
 
 /** Achinese (Acèh)
