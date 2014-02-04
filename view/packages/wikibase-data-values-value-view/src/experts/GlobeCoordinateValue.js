@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, vv, GlobeCoordinate ) {
+( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.BifidExpert,
@@ -48,4 +48,4 @@
 		}
 	} );
 
-}( jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate ) );
+}( jQuery, jQuery.valueview ) );
