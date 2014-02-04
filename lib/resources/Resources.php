@@ -163,8 +163,10 @@ return call_user_func( function() {
 				'formatters/wikibase.formatters.register.js',
 			),
 			'dependencies' => array(
+				'dataTypes',
 				'dataValues.values',
 				'mw.ext.valueFormatters',
+				'wikibase.dataTypes',
 				'wikibase.QuantityFormatter',
 			),
 		),
@@ -690,6 +692,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.experts.CommonsMediaType',
 				'jquery.valueview.experts.wikibase.entityidvalue',
+				'wikibase.formatters',
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
