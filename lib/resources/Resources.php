@@ -148,16 +148,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.QuantityFormatter' => $moduleTemplate + array(
-			'scripts' => array(
-				'formatters/QuantityFormatter.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueFormatter',
-			),
-		),
-
 		'wikibase.formatters' => $moduleTemplate + array(
 			'scripts' => array(
 				'formatters/wikibase.formatters.register.js',
@@ -166,8 +156,8 @@ return call_user_func( function() {
 				'dataTypes',
 				'dataValues.values',
 				'mw.ext.valueFormatters',
+				'wikibase.ApiBasedValueFormatter',
 				'wikibase.dataTypes',
-				'wikibase.QuantityFormatter',
 			),
 		),
 
