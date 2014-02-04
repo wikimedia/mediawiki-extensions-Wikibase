@@ -6,7 +6,12 @@
 	'use strict';
 
 	/**
-	 * Globe coordinate formatter.
+	 * Globe coordinate formatter
+	 *
+	 * We need this for rawValueCompare because it is synchronous.
+	 *
+	 * @todo Replace this with a call to ValueView::_formatValue
+	 *
 	 * @type {globeCoordinate.Formatter}
 	 */
 	var formatter = new Formatter();
@@ -253,7 +258,7 @@
 		 */
 		_setRawValue: function( rawValue ) {
 			if( rawValue instanceof GlobeCoordinate ) {
-				rawValue = formatter.format( rawValue );
+				rawValue = $( '<span/>' ).html( this.viewState().getFormattedValue() ).text();
 			}
 			else if( typeof rawValue !== 'string' ) {
 				rawValue = null;
@@ -325,7 +330,7 @@
 
 			// Update preview:
 			if( considerInputExtender ) {
-				this.preview.update( geoValue && formatter.format( geoValue.getValue() ) );
+				this.preview.update( $( '<span />').html( this.viewState().getFormattedValue() ).text() );
 			}
 		},
 
