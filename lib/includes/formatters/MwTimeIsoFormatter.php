@@ -16,6 +16,8 @@ use ValueFormatters\ValueFormatterBase;
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Adam Shorland
+ *
+ * @todo move me to DataValues-time
  */
 class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter {
 
@@ -68,13 +70,13 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 		$regexSuccess = preg_match( '/^(\+|\-)((\d{7})?(\d{4}))-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/',
 			$extendedIsoTimestamp, $matches );
 
-		//TODO: format values with -
-		if( !$regexSuccess || $matches[1] === '-') {
+		if( !$regexSuccess ) {
 			return $extendedIsoTimestamp;
 		}
+		$isBCE = ( $matches[1] === '-' );
 
 		// Positive 4-digit year allows using Language object.
-		$fourDigitYearTimestamp = str_replace( '+' . $matches[3], '', $extendedIsoTimestamp );
+		$fourDigitYearTimestamp = str_replace( $matches[1] . $matches[3], '', $extendedIsoTimestamp );
 		$timestamp = wfTimestamp( TS_MW, $fourDigitYearTimestamp );
 
 		$localisedDate = $this->language->sprintfDate(
@@ -90,7 +92,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 
 		$localisedDate = str_replace(
 			$matches[4],
-			$this->formatYear( $matches[2], $precision ),
+			$this->formatYear( $matches[2], $precision, $isBCE ),
 			$localisedDate
 		);
 
@@ -123,54 +125,56 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	/**
 	 * @param string $fullYear
 	 * @param integer $precision
+	 * @param bool $isBCE
 	 *
 	 * @return string the formatted year
 	 */
-	private function formatYear( $fullYear, $precision ) {
+	private function formatYear( $fullYear, $precision, $isBCE ) {
+		if( $isBCE ) {
+			$msgPrefix = 'wikibase-time-precision-BCE';
+		} else {
+			$msgPrefix = 'wikibase-time-precision';
+		}
+
 		switch( $precision ) {
 			case TimeValue::PRECISION_Ga:
 				$fullYear = round( $fullYear, -9 );
 				$fullYear = substr( $fullYear, 0, -9 );
-				return $this->getMessage( 'wikibase-time-precision-Gannum', $fullYear );
+				return $this->getMessage( $msgPrefix . '-Gannum', $fullYear );
 			case TimeValue::PRECISION_100Ma:
 				$fullYear = round( $fullYear, -8 );
 				$fullYear = substr( $fullYear, 0, -6 );
-				return $this->getMessage( 'wikibase-time-precision-Mannum', $fullYear );
+				return $this->getMessage( $msgPrefix . '-Mannum', $fullYear );
 			case TimeValue::PRECISION_10Ma:
 				$fullYear = round( $fullYear, -7 );
 				$fullYear = substr( $fullYear, 0, -6 );
-				return $this->getMessage( 'wikibase-time-precision-Mannum', $fullYear );
+				return $this->getMessage( $msgPrefix . '-Mannum', $fullYear );
 			case TimeValue::PRECISION_Ma:
 				$fullYear = round( $fullYear, -6 );
 				$fullYear = substr( $fullYear, 0, -6 );
-				return $this->getMessage( 'wikibase-time-precision-Mannum', $fullYear );
+				return $this->getMessage( $msgPrefix . '-Mannum', $fullYear );
 			case TimeValue::PRECISION_100ka:
 				$fullYear = round( $fullYear, -5 );
-				return $this->getMessage( 'wikibase-time-precision-annum', $fullYear );
+				return $this->getMessage( $msgPrefix . '-annum', $fullYear );
 			case TimeValue::PRECISION_10ka:
 				$fullYear = round( $fullYear, -4 );
-				return $this->getMessage( 'wikibase-time-precision-annum', $fullYear );
+				return $this->getMessage( $msgPrefix . '-annum', $fullYear );
 			case TimeValue::PRECISION_ka:
 				$fullYear = round( $fullYear, -3 );
 				$fullYear = substr( $fullYear, 0, -3 );
-				return $this->getMessage( 'wikibase-time-precision-millennium', $fullYear );
+				return $this->getMessage( $msgPrefix . '-millennium', $fullYear );
 			case TimeValue::PRECISION_100a:
 				$fullYear = round( $fullYear, -2 );
 				$fullYear = substr( $fullYear, 0, -2 );
-				return $this->getMessage( 'wikibase-time-precision-century', $fullYear );
+				return $this->getMessage( $msgPrefix . '-century', $fullYear );
 			case TimeValue::PRECISION_10a:
 				$fullYear = round( $fullYear, -1 );
-				return $this->getMessage( 'wikibase-time-precision-10annum', $fullYear );
+				return $this->getMessage( $msgPrefix . '-10annum', $fullYear );
 			default:
 				//If not one of the above make sure the year have at least 4 digits
 				$fullYear = ltrim( $fullYear, '0' );
-				$fullYearLength = strlen( $fullYear );
-				if( $fullYearLength < 4 ) {
-					$fullYear = str_repeat( '0', 4 - $fullYearLength ) . $fullYear;
-				}
-				//only add separators if there are more than 4 digits
-				if( strlen( $fullYear ) > 4 ) {
-					$fullYear = $this->language->formatNum( $fullYear );
+				if( $isBCE ) {
+					$fullYear .= ' BCE';
 				}
 				return $fullYear;
 		}
@@ -185,9 +189,10 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 		$message = new Message( $key );
 		//FIXME: as the frontend can not parse the translated precisions we only want to present the ENGLISH for now
 		//once the frontend is using backend parsers we can switch the translation on
+		//See the fix me in: MwTimeIsoParser::reconvertOutputString
 		//$message->inLanguage( $this->language );
 		$message->inLanguage( new Language() );
-		$message->numParams( array( $fullYear ) );
+		$message->params( array( $fullYear ) );
 		return $message->text();
 	}
 

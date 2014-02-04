@@ -32,15 +32,11 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 				'+00000002013-07-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 			),
-			'1 January 0000' => array(
-				'+00000000000-01-01T00:00:00Z',
-				TimeValue::PRECISION_DAY,
-			),
-			'14 January 0001' => array(
+			'14 January 1' => array(
 				'+00000000001-01-14T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 			),
-			'1 January 10,000' => array(
+			'1 January 10000' => array(
 				'+00000010000-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 			),
@@ -52,80 +48,80 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 				'+00000002013-07-16T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			'0013' => array(
+			'13' => array(
 				'+00000000013-07-16T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			'2,222,013' => array(
+			'2222013' => array(
 				'+00002222013-07-16T00:10:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			'12,342,222,013' => array(
+			'12342222013' => array(
 				'+12342222013-07-16T00:10:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
 			//stepping through precisions
-			'12,345,678,910s' => array(
+			'12345678910s' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10a,
 			),
-			'12,345,678,920s' => array(
+			'12345678920s' => array(
 				'+12345678919-01-01T01:01:01Z',
 				TimeValue::PRECISION_10a,
 			),
-			'123,456,789. century' => array(
+			'123456789. century' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100a,
 			),
-			'123,456,790. century' => array(
+			'123456790. century' => array(
 				'+12345678992-01-01T01:01:01Z',
 				TimeValue::PRECISION_100a,
 			),
-			'12,345,678. millennium' => array(
+			'12345678. millennium' => array(
 				'+12345678112-01-01T01:01:01Z',
 				TimeValue::PRECISION_ka,
 			),
-			'12,345,679. millennium' => array(
+			'12345679. millennium' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_ka,
 			),
-			'in 12,345,670,000 years' => array(
+			'in 12345670000 years' => array(
 				'+12345671912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10ka,
 			),
-			'in 12,345,680,000 years' => array(
+			'in 12345680000 years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10ka,
 			),
-			'in 12,345,600,000 years' => array(
+			'in 12345600000 years' => array(
 				'+12345618912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100ka,
 			),
-			'in 12,345,700,000 years' => array(
+			'in 12345700000 years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100ka,
 			),
-			'in 12,345 million years' => array(
+			'in 12345 million years' => array(
 				'+12345178912-01-01T01:01:01Z',
 				TimeValue::PRECISION_Ma,
 			),
-			'in 12,346 million years' => array(
+			'in 12346 million years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_Ma,
 			),
-			'in 12,340 million years' => array(
+			'in 12340 million years' => array(
 				'+12341678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10Ma,
 			),
-			'in 12,350 million years' => array(
+			'in 12350 million years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10Ma,
 			),
-			'in 12,300 million years' => array(
+			'in 12300 million years' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100Ma,
 			),
-			'in 12,400 million years' => array(
+			'in 12400 million years' => array(
 				'+12375678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_100Ma,
 			),
@@ -137,10 +133,111 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 				'+12545678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_Ga,
 			),
-			//The below should still return the full timestamp as we can not yet format
-			'-00000000001-01-01T00:00:00Z' => array(
-				'-00000000001-01-01T00:00:00Z',
+
+			'16 July 2013 BCE' => array(
+				'-00000002013-07-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+			),
+			'14 January 1 BCE' => array(
+				'-00000000001-01-14T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+			),
+			'1 January 10000 BCE' => array(
+				'-00000010000-01-01T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+			),
+			'July 2013 BCE' => array(
+				'-00000002013-07-16T00:00:00Z',
+				TimeValue::PRECISION_MONTH,
+			),
+			'2013 BCE' => array(
+				'-00000002013-07-16T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'13 BCE' => array(
+				'-00000000013-07-16T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'2222013 BCE' => array(
+				'-00002222013-07-16T00:10:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'12342222013 BCE' => array(
+				'-12342222013-07-16T00:10:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			//stepping through precisions
+			'12345678910s BCE' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10a,
+			),
+			'12345678920s BCE' => array(
+				'-12345678919-01-01T01:01:01Z',
+				TimeValue::PRECISION_10a,
+			),
+			'123456789. century BCE' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100a,
+			),
+			'123456790. century BCE' => array(
+				'-12345678992-01-01T01:01:01Z',
+				TimeValue::PRECISION_100a,
+			),
+			'12345678. millennium BCE' => array(
+				'-12345678112-01-01T01:01:01Z',
+				TimeValue::PRECISION_ka,
+			),
+			'12345679. millennium BCE' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_ka,
+			),
+			'12345670000 years ago' => array(
+				'-12345671912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10ka,
+			),
+			'12345680000 years ago' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10ka,
+			),
+			'12345600000 years ago' => array(
+				'-12345618912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100ka,
+			),
+			'12345700000 years ago' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100ka,
+			),
+			'12345 million years ago' => array(
+				'-12345178912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ma,
+			),
+			'12346 million years ago' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ma,
+			),
+			'12340 million years ago' => array(
+				'-12341678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10Ma,
+			),
+			'12350 million years ago' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_10Ma,
+			),
+			'12300 million years ago' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100Ma,
+			),
+			'12400 million years ago' => array(
+				'-12375678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_100Ma,
+			),
+			'12 billion years ago' => array(
+				'-12345678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ga,
+			),
+			'13 billion years ago' => array(
+				'-12545678912-01-01T01:01:01Z',
+				TimeValue::PRECISION_Ga,
 			),
 		);
 
