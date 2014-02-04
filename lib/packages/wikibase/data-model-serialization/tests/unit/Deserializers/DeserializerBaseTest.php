@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wikibase\DataModel\Unserializers;
+namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 

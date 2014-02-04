@@ -2,7 +2,6 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Tests\Wikibase\DataModel\Unserializers\DeserializerBaseTest;
 use Wikibase\DataModel\Deserializers\SnaksDeserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
