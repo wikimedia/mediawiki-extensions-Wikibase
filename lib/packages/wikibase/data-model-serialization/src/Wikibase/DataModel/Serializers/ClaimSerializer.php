@@ -99,7 +99,7 @@ class ClaimSerializer implements Serializer {
 	private function addQualifiersToSerialization( Claim $claim, &$serialization ) {
 		$qualifiers = $claim->getQualifiers();
 
-		if( $qualifiers->count() !== 0 ) {
+		if ( $qualifiers->count() !== 0 ) {
 			$serialization['qualifiers'] = $this->snaksSerializer->serialize( $qualifiers );
 		}
 	}
