@@ -39,6 +39,9 @@ return call_user_func( function() {
 		'allowDataTransclusion' => true,
 		'enableSiteLinkWidget' => true,
 		'propagateChangesToRepo' => true,
+		// array of badges that should be displayed. If a sitelink has two or more badges listed here,
+		// we will use the one that comes first in the list.
+		'displayBadges' => array(),
 
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
