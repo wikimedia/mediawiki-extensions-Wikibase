@@ -4,7 +4,6 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
-use Tests\Wikibase\DataModel\Unserializers\DeserializerBaseTest;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
