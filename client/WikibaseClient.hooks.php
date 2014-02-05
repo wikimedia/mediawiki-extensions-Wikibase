@@ -25,6 +25,7 @@ use Title;
 use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\LanguageLinkBadgeHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\WikibaseClient;
 
@@ -392,6 +393,38 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Add badges to the language links.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$languageLink
+	 * @param Title $languageLinkTitle
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+		wfProfileIn( __METHOD__ );
+
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$entityLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup();
+
+		$languageLinkBadgeHandler = new LanguageLinkBadgeHandler(
+			Settings::get( 'siteGlobalID' ),
+			$siteLinkLookup,
+			$entityLookup
+		);
+
+		$badges = $languageLinkBadgeHandler->getBadges( $title, $languageLinkTitle );
+		foreach ( $badges as $badge ) {
+			$languageLink['class'] .= " badge-$badge";
+		}
+
+		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
 	 * Add Wikibase item link in toolbox
 	 *
 	 * @since 0.4
@@ -399,7 +432,7 @@ final class ClientHooks {
 	 * @param QuickTemplate &$sk
 	 * @param array &$toolbox
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onBaseTemplateToolbox( QuickTemplate &$sk, &$toolbox ) {
 		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
