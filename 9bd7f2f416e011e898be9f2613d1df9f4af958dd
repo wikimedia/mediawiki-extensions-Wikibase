@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_ae190c29",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T16:37:45Z",
+      "side": 1,
+      "message": "missing docs for new parameters",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_4ed84858",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T16:37:45Z",
+      "side": 1,
+      "message": "could just use new ItemId( $entityId )",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_2eddfc47",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T16:37:45Z",
+      "side": 1,
+      "message": "could just use new PropertyId( $propertyId )",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_0ee24000",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T16:37:45Z",
+      "side": 1,
+      "message": "Why does this have to be an array?",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_eee6f412",
+        "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 19
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T16:37:45Z",
+      "side": 1,
+      "message": "if no label is set in the local language, will this return nil? We\u0027d probably want to use the property ID as a fallback here.",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_ceeb38da",
+        "filename": "client/tests/phpunit/includes/scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T16:37:45Z",
+      "side": 1,
+      "message": "Would be good to also test some cases where this actually works...",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_6ef2e4ce",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T16:37:45Z",
+      "side": 1,
+      "message": "I\u0027d like to see a test where there actually *are* claims.",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
