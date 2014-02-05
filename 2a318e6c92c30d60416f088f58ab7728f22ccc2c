@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_82686185",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-05T22:11:53Z",
+      "side": 1,
+      "message": "use WikibaseClient::getDefaultInstance()-\u003egetSettings()-\u003egetSetting",
+      "revId": "2a318e6c92c30d60416f088f58ab7728f22ccc2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_425b79fd",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-05T22:11:53Z",
+      "side": 1,
+      "message": "the purpose of the hook handler is to not have this in here...",
+      "revId": "2a318e6c92c30d60416f088f58ab7728f22ccc2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
