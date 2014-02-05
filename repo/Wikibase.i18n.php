@@ -9231,6 +9231,8 @@ Vistfang þitt skráist í breytingaskrá einingarinnar.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Önnur fyrirspurn ($3) hefur þegar merkimiðan „$1” tengdan við tungumálakóðann $2.',
 	'wikibase-error-label-not-unique-item' => 'Annar hlutur ($3) hefur þegar merkimiðann „$1” og lýsinguna „$4” tengdan við tungumálakóðann $2.',
 	'wikibase-error-label-no-entityid' => 'Merkimiðinn má ekki vera gilt auðkenni einkennis.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Tungumálakóðinn "$1" þekkist ekki. Vinsamlegast notaðu þekktan tungumálakóða, eins og "en".',
+	'wikibase-wikibaserepopage-invalid-id' => 'Auðkennið "$1" þekkist ekki. Vinsamlegast notaðu gilt auðkenni.',
 	'special-itembytitle' => 'Hlutur eftir titli',
 	'wikibase-itembytitle-lookup-fieldset' => 'Leita eftir hlutum eftir vefsíðu og titli',
 	'wikibase-itembytitle-lookup-site' => 'Vefsíða:',
@@ -9294,8 +9296,6 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-setsitelink-remove-failed' => 'Fjarlæging vefsvæðistengilsins mistókst.',
 	'wikibase-modifyentity-id' => 'Auðkenni:',
 	'wikibase-modifyterm-language' => 'Tungumál:',
-	'wikibase-modifyentity-invalid-id' => 'Auðkennið "$1" þekkist ekki. Vinsamlegast notaðu gilt auðkenni.',
-	'wikibase-modifyterm-invalid-langcode' => 'Tungumálakóðinn "$1" þekkist ekki. Vinsamlegast notaðu þekktan tungumálakóða, eins og "en".',
 	'special-listdatatypes' => 'Listi yfir allar gagnagerðir',
 	'wikibase-listdatatypes-intro' => 'Þetta er listi yfir allar gagnagerðir sem eru í notkun í augnablikinu:',
 	'wikibase-history-title-with-label' => 'Breytingarskrá „$2” ($1)',
@@ -9360,8 +9360,8 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Fjarlægði {{PLURAL:$1|fullyrðingu|fullyrðingar}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'Breytti {{PLURAL:$3|fullyrðingu|fullyrðingum}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'Bjó til {{PLURAL:$3|fullyrðingu|fullyrðingar}}',
-	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Breytti {{PLURAL:$4|einum sérgreini|$4 sérgreinum}} í {{PLURAL:$3|fullyrðingu|fullyrðingum}}',
-	'wikibase-item-summary-wbsetclaim-update-references' => 'Breytti {{PLURAL:$4|einni heimild|$4 heimildum}} í {{PLURAL:$3|fullyrðingu|fullyrðingum}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Breytti $4 {{PLURAL:$4|sérgreini|sérgreinum}} í {{PLURAL:$3|fullyrðingu|fullyrðingum}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => 'Breytti $4 {{PLURAL:$4|heimild|heimildum}} í {{PLURAL:$3|fullyrðingu|fullyrðingum}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Síða færð frá [$3] til [$4]',
 	'wikibase-item-summary-wbmergeitems-from' => 'Flutti færslur frá „$3“',
 	'wikibase-item-summary-wbmergeitems-to' => 'Sameinaði hlut við „$3“.',
@@ -11282,7 +11282,10 @@ $messages['lrc'] = array(
 نشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.',
 	'wikibase-itembytitle-lookup-fieldset' => 'قلمیا نه سی سیلجا و نوم ون مئن جوری کو',
 	'wikibase-itembytitle-lookup-site' => 'سیلجا:',
+	'wikibase-itembytitle-submit' => 'پی جوری',
+	'wikibase-itemdisambiguation-submit' => 'پی جوری',
 	'wikibase-newitem-site' => 'سیلجا اولین بلگه هوم پیوند بیه',
+	'wikibase-newitem-page' => 'نوم اولین بلگه هوم پیوند بیه',
 	'special-setsitelink' => 'یه گل هوم پیوند سیلجا بنیت',
 	'wikibase-setsitelink-label' => 'هوم پیوند سیلجا:',
 	'wikibase-setsitelink-submit' => 'یه گل هوم پیوند سیلجا بنیت',
@@ -11302,6 +11305,8 @@ $messages['lrc'] = array(
 	'wikibase-listdatatypes-time-head' => 'وخت',
 	'right-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
 	'action-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
+	'wikibase-time-precision-Gannum' => 'د $1 بیلیون سال',
+	'wikibase-time-precision-annum' => 'د سالیا $1',
 );
 
 /** Lithuanian (lietuvių)
@@ -15264,7 +15269,7 @@ $messages['roa-tara'] = array(
 	'wikibase-description-empty' => 'Nisciuna descrizione angore definite',
 	'wikibase-description-edit-placeholder' => "mitte 'a descrizione",
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
-	'wikibase-sitelink-page-edit-placeholder' => 'vôsce', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'vôsce',
 	'wikibase-alias-edit-placeholder' => "mitte 'n'alias",
 	'wikibase-label-input-help-message' => "Mitte 'u titole de stu 'nzieme de date jndr'à $1.",
 	'wikibase-description-input-help-message' => "Mitte 'na descrizione piccenne jndr'à $1.",
@@ -15299,6 +15304,7 @@ $messages['roa-tara'] = array(
 	'wikibase-setlabel-label' => 'Etichette:',
 	'wikibase-setlabel-submit' => "'Mboste l'etichette",
 	'special-setdescription' => "'Mboste 'na descrizione",
+	'wikibase-time-precision-century' => '$1. sechele',
 );
 
 /** Russian (русский)
@@ -15675,6 +15681,12 @@ $messages['ru'] = array(
 	'action-label-update' => 'обновление названий (меток)',
 	'action-description-remove' => 'стирание описаний',
 	'action-description-update' => 'обновление описаний',
+	'wikibase-time-precision-Gannum' => 'в $1 миллиард{{PLURAL:$1||ов|а}} лет',
+	'wikibase-time-precision-Mannum' => 'в $1 миллион{{PLURAL:$1||ов|а}} лет',
+	'wikibase-time-precision-annum' => 'в $1 {{PLURAL:$1|год|лет|года}}',
+	'wikibase-time-precision-millennium' => 'в $1 тысячелети{{PLURAL:$1|е|й|я}}',
+	'wikibase-time-precision-century' => 'в $1 век{{PLURAL:$1||ов|а}}',
+	'wikibase-time-precision-10annum' => 'в $1 десятилети{{PLURAL:$1|е|й|я}}',
 );
 
 /** Serbo-Croatian (srpskohrvatski / српскохрватски)

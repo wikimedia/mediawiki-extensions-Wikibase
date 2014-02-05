@@ -3533,6 +3533,9 @@ $messages['qu'] = array(
 	'wikibase-linkitem-input-site' => 'Rimay:',
 	'wikibase-linkitem-input-page' => "P'anqa:",
 	'wikibase-linkitem-confirmitem-text' => "Akllasqayki p'anqaqa [$1 chawpi willañiqintinpi huk qallawawan] t'inkisqañam. Ama hina kaspa, takyachiy, kay qatiq {{PLURAL:$2|p'anqata|p'anqakunata}} chiqapta kayllapi {{PLURAL:$2|p'anqawan|p'anqakunawan}} t'inkiyta munanki, chayta.",
+	'wikibase-linkitem-confirmitem-button' => 'Takyachiy',
+	'wikibase-linkitem-not-loggedin-title' => 'Yaykunaykim tiyan',
+	'wikibase-linkitem-not-loggedin' => "Kay wikipi [$1 chawpi willa hallch'apipas] yaykunaykim tiyan kayta ruranaykipaq.",
 	'wikibase-linkitem-success-link' => "P'anqakunaqa aypalla t'inkinakusqañam. T'inkikunayuq kaq qallawata [$1 chawpi willañiqintinpim] tariyta atinki.",
 );
 
@@ -4189,7 +4192,9 @@ $messages['uz'] = array(
 	'wikibase-linkitem-confirmitem-text' => 'Siz tanlagan sahifa [$1 markazlashtirilgan maʼlumotlar repozitoriyimizning bandi] bilan bogʻlandi. Iltimos, quyida koʻrsatilgan sahifalar orasida ushbu sahifaga bogʻlanishi keraklari borligini tasdiqlang.', # Fuzzy
 	'wikibase-linkitem-success-link' => 'Sahifalar bogʻlandi. Bogʻlamalar toʻplami saqlanadigan bandni [$1 markazlashtirilgan maʼlumot repozitoriyimizda] topishingiz mumkin.',
 	'wikibase-rc-hide-wikidata' => 'Vikimaʼlumotlarga oid tahrirlarni $1',
+	'wikibase-rc-show-wikidata-pref' => 'Yangi oʻzgarishlar roʻyxatida Vikimaʼlumotlarga oid tahrirlarni koʻrsatish',
 	'wikibase-rc-wikibase-edit-title' => 'Vikimaʼlumotlarga oid tahrir',
+	'wikibase-watchlist-show-changes-pref' => 'Vikimaʼlumotlarga oid tahrirlar kuzatuv roʻyxatimda koʻrsatilsin',
 );
 
 /** vèneto (vèneto)
