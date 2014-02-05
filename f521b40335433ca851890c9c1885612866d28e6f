@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_22be2d61",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-05T23:04:28Z",
+      "side": 1,
+      "message": "still don\u0027t think this belongs here",
+      "revId": "f521b40335433ca851890c9c1885612866d28e6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_42b93977",
+        "filename": "client/tests/phpunit/includes/hooks/LanguageLinkBadgeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-02-05T23:04:28Z",
+      "side": 1,
+      "message": "which purpose does this serve? And why do you call it in such obscure places?",
+      "revId": "f521b40335433ca851890c9c1885612866d28e6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
