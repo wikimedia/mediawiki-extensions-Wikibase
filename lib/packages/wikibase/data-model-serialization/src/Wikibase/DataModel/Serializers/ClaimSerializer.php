@@ -28,10 +28,17 @@ class ClaimSerializer implements Serializer {
 	private $snakSerializer;
 
 	/**
-	 * @param Serializer $snakSerializer
+	 * @var Serializer
 	 */
-	public function __construct( Serializer $snakSerializer ) {
+	private $snaksSerializer;
+
+	/**
+	 * @param Serializer $snakSerializer
+	 * @param Serializer $snaksSerializer
+	 */
+	public function __construct( Serializer $snakSerializer, Serializer $snaksSerializer ) {
 		$this->snakSerializer = $snakSerializer;
+		$this->snaksSerializer = $snaksSerializer;
 	}
 
 	/**
@@ -69,6 +76,7 @@ class ClaimSerializer implements Serializer {
 			'mainsnak' => $this->snakSerializer->serialize( $claim->getMainSnak() ),
 			'type' => $claim instanceof Statement ? 'statement' : 'claim'
 		);
+		$this->addQualifiersToSerialization( $claim, $serialization );
 		$this->addGuidToSerialization( $claim, $serialization );
 		$this->addRankToSerialization( $claim, $serialization );
 
@@ -85,6 +93,14 @@ class ClaimSerializer implements Serializer {
 	private function addRankToSerialization( Claim $claim, array &$serialization ) {
 		if ( $claim instanceof Statement ) {
 			$serialization['rank'] = $this->rankLabels[$claim->getRank()];
+		}
+	}
+
+	private function addQualifiersToSerialization( Claim $claim, &$serialization ) {
+		$qualifiers = $claim->getQualifiers();
+
+		if ( $qualifiers->count() !== 0 ) {
+			$serialization['qualifiers'] = $this->snaksSerializer->serialize( $qualifiers );
 		}
 	}
 }

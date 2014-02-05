@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ClaimSerializer
@@ -27,7 +28,19 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'property' => "P42"
 			) ) );
 
-		return new ClaimSerializer( $snakSerializerMock );
+		$snaksSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$snaksSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnValue( array(
+				'P42' => array(
+					array(
+						'snaktype' => 'novalue',
+						'property' => 'P42'
+					)
+				)
+			) ) );
+
+		return new ClaimSerializer( $snakSerializerMock, $snaksSerializerMock );
 	}
 
 	public function serializableProvider() {
@@ -105,6 +118,44 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				),
 				'type' => 'statement',
 				'rank' => 'preferred'
+			),
+			$claim
+		);
+
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setQualifiers( new SnakList( array() ) );
+		$serializations[] = array(
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => "P42"
+				),
+				'type' => 'statement',
+				'rank' => 'normal'
+			),
+			$claim
+		);
+
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setQualifiers( new SnakList( array(
+			new PropertyNoValueSnak( 42 )
+		) ) );
+		$serializations[] = array(
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => "P42"
+				),
+				'qualifiers' => array(
+					'P42' => array(
+						array(
+							'snaktype' => 'novalue',
+							'property' => 'P42'
+						)
+					)
+				),
+				'type' => 'statement',
+				'rank' => 'normal'
 			),
 			$claim
 		);
