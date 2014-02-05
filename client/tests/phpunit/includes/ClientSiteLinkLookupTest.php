@@ -59,27 +59,71 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideGetSiteLinks
 	 */
 	public function testGetSiteLinks( $expected, $localSiteId, Title $title, $message ) {
-		$ClientSiteLinkLookup = $this->getClientSiteLinkLookup( $localSiteId );
+		$clientSiteLinkLookup = $this->getClientSiteLinkLookup( $localSiteId );
 
 		$this->assertEquals(
 			$expected,
-			$ClientSiteLinkLookup->getSiteLinks( $title ),
+			$clientSiteLinkLookup->getSiteLinks( $title ),
 			$message
 		);
 	}
 
 	public function provideGetSiteLinks() {
-		$sitelinks = array(
-			new SiteLink( 'dewiki', 'Foo de', array( new ItemId( 'Q3' ) ) ),
-			new SiteLink( 'enwiki', 'Foo en', array( new ItemId( 'Q4' ), new ItemId( 'Q123' ) ) ),
-			new SiteLink( 'srwiki', 'Foo sr' ),
-			new SiteLink( 'dewiktionary', 'Foo de word' ),
-			new SiteLink( 'enwiktionary', 'Foo en word' )
-		);
+		$item = new Item( self::$itemData[1] );
+		$sitelinks = $item->getSiteLinks();
 
 		return array(
 			array( $sitelinks, 'dewiki', Title::newFromText( 'Foo de' ), 'from dewiki title' ),
 			array( $sitelinks, 'enwiktionary', Title::newFromText( 'Foo en word' ), 'from enwiktionary title' ),
+			array( array(), 'enwiki', Title::newFromText( 'Bar en' ), 'from nonexisting title' ),
+			array( array(), 'barwiki', Title::newFromText( 'Foo bar' ), 'from nonexisting site' ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetSiteLink
+	 */
+	public function testGetSiteLink( $expected, $localSiteId, Title $title, $site, $message ) {
+		$clientSiteLinkLookup = $this->getClientSiteLinkLookup( $localSiteId );
+
+		$this->assertEquals(
+			$expected,
+			$clientSiteLinkLookup->getSiteLink( $title, $site ),
+			$message
+		);
+	}
+
+	public function provideGetSiteLink() {
+		$item = new Item( self::$itemData[1] );
+
+		return array(
+			array( $item->getSiteLink( 'enwiki' ), 'dewiki', Title::newFromText( 'Foo de' ), 'enwiki', 'enwiki from dewiki title' ),
+			array( $item->getSiteLink( 'dewiktionary' ), 'enwiktionary', Title::newFromText( 'Foo en word' ), 'dewiktionary', 'dewiktionary from enwiktionary title' ),
+			array( null, 'enwiki', Title::newFromText( 'Bar en' ), 'dewiki', 'from nonexisting title' ),
+			array( null, 'barwiki', Title::newFromText( 'Foo bar' ), 'enwiki', 'from nonexisting site' ),
+			array( null, 'dewiki', Title::newFromText( 'Foo de' ), 'frwiki', 'nonexisting site from dewiki title' ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetItem
+	 */
+	public function testGetItem( $expected, $localSiteId, Title $title, $message ) {
+		$clientSiteLinkLookup = $this->getClientSiteLinkLookup( $localSiteId );
+
+		$this->assertEquals(
+			$expected,
+			$clientSiteLinkLookup->getItem( $title ),
+			$message
+		);
+	}
+
+	public function provideGetItem() {
+		$item = new Item( self::$itemData[1] );
+
+		return array(
+			array( $item, 'dewiki', Title::newFromText( 'Foo de' ), 'from dewiki title' ),
+			array( $item, 'enwiktionary', Title::newFromText( 'Foo en word' ), 'from enwiktionary title' ),
 			array( array(), 'enwiki', Title::newFromText( 'Bar en' ), 'from nonexisting title' ),
 			array( array(), 'barwiki', Title::newFromText( 'Foo bar' ), 'from nonexisting site' ),
 		);

@@ -44,8 +44,8 @@ class ClientSiteLinkLookup {
 	}
 
 	/**
-	 * Finds the corresponding item on the repository and
-	 * returns the item's site links including badges.
+	 * Finds the corresponding item on the repository and returns
+	 * all the item's site links including badges.
 	 *
 	 * @since 0.5
 	 *
@@ -54,6 +54,42 @@ class ClientSiteLinkLookup {
 	 * @return SiteLink[]
 	 */
 	public function getSiteLinks( Title $title ) {
+		$item = $this->getItem( $title );
+		if ( $item === null ) {
+			return array();
+		}
+		return $item->getSiteLinks();
+	}
+
+	/**
+	 * Finds the corresponding item on the repository and returns
+	 * the item's site link for the given site including badges.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Title $title
+	 * @param string $site
+	 *
+	 * @return SiteLink
+	 */
+	public function getSiteLink( Title $title, $site ) {
+		$item = $this->getItem( $title );
+		if ( $item === null || !$item->hasLinkToSite( $site ) ) {
+			return null;
+		}
+		return $item->getSiteLink( $site );
+	}
+
+	/**
+	 * Finds the corresponding item on the repository.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Title $title
+	 *
+	 * @return Item
+	 */
+	public function getItem( Title $title ) {
 		$siteLink = new SiteLink( $this->localSiteId, $title->getText() );
 		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
 
@@ -61,11 +97,7 @@ class ClientSiteLinkLookup {
 			return array();
 		}
 
-		$item = $this->entityLookup->getEntity( $itemId );
-		if ( $item === null ) {
-			return array();
-		}
-		return $item->getSiteLinks();
+		return $this->entityLookup->getEntity( $itemId );
 	}
 
 }
