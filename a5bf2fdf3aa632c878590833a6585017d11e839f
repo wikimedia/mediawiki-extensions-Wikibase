@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_8eee50b0",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 18
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-05T17:15:48Z",
+      "side": 1,
+      "message": "This seems to return nil for an unknown reason during testing. I wasn\u0027t able to figure out why.",
+      "revId": "a5bf2fdf3aa632c878590833a6585017d11e839f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
