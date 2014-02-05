@@ -25,6 +25,7 @@ use Title;
 use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\LanguageLinkBadgeHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\WikibaseClient;
 
@@ -41,6 +42,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 final class ClientHooks {
 
@@ -152,6 +154,7 @@ final class ClientHooks {
 	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
 		Title &$newTitle ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
 		$repoLinker = $wikibaseClient->newRepoLinker();
 
@@ -401,6 +404,48 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Add badges to the language links.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$languageLink
+	 * @param Title $languageLinkTitle
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+		wfProfileIn( __METHOD__ );
+
+		global $wgLang;
+
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$entityLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup();
+		$sites = SiteSQLStore::newInstance()->getSites();
+		$displayBadges = $settings->getSetting( 'displayBadges' );
+
+		if ( !is_array( $displayBadges ) ) {
+			$displayBadges = array();
+		}
+
+		$languageLinkBadgeDisplay = new LanguageLinkBadgeDisplay(
+			$settings->getSetting( 'siteGlobalID' ),
+			$siteLinkLookup,
+			$entityLookup,
+			$sites,
+			array_keys( $displayBadges ),
+			$wgLang->getCode()
+		);
+
+		$languageLinkBadgeDisplay->assignBadges( $title, $languageLinkTitle, $languageLink );
+
+		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
 	 * Add Wikibase item link in toolbox
 	 *
 	 * @since 0.4
@@ -408,7 +453,7 @@ final class ClientHooks {
 	 * @param QuickTemplate &$sk
 	 * @param array &$toolbox
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onBaseTemplateToolbox( QuickTemplate &$sk, &$toolbox ) {
 		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
@@ -494,9 +539,22 @@ final class ClientHooks {
 			}
 		}
 
+		$displayBadges = $settings->getSetting( 'displayBadges' );
+
+		if ( is_array( $displayBadges ) ) {
+			$badgesCss = '';
+			foreach ( $displayBadges as $badge => $icon ) {
+				// also removes quotation marks and brackets from $icon
+				$icon = urlencode( $icon );
+				$badgesCss .= ".badges-$badge { list-style-image: url( '$icon' ); }\n";
+			}
+			$out->addInlineStyle( $badgesCss );
+		}
+
 		wfProfileOut( __METHOD__ );
 		return true;
 	}
+
 
 	/**
 	 * Add output page property if repo links are suppressed, and property for item id
