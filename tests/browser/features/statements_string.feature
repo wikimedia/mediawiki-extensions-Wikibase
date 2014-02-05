@@ -26,9 +26,9 @@ Feature: Creating statements
       And Statement save button should not be there
       And Entity selector input element should not be there
       And Statement value input element should not be there
-      And Statement edit button should be there
-      And Statement name should be the label of stringprop
-      And Statement string value should be <value>
+      And Statement edit button for claim 1 in group 1 should be there
+      And Statement name of group 1 should be the label of stringprop
+      And Statement string value of claim 1 in group 1 should be <value>
 
   Examples:
     | value                               | save                                                    |
@@ -49,9 +49,9 @@ Feature: Creating statements
       And Statement save button should not be there
       And Entity selector input element should not be there
       And Statement value input element should not be there
-      And Statement edit button should be there
-      And Statement name should be the label of stringprop
-      And Statement string value should be it's a string
+      And Statement edit button for claim 1 in group 1 should be there
+      And Statement name of group 1 should be the label of stringprop
+      And Statement string value of claim 1 in group 1 should be it's a string
 
   @repo_login @modify_entity
   Scenario: Adding a statement of type string with a too long string

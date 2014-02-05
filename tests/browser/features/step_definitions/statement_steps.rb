@@ -75,8 +75,8 @@ Then /^Statement add button should be disabled$/ do
   end
 end
 
-Then /^Statement edit button should be there$/ do
-  on(ItemPage).edit_statement1_claim1?.should be_true
+Then /^Statement edit button for claim (.+) in group (.+) should be there$/ do |claim_index, group_index|
+  on(ItemPage).edit_claim_element(group_index, claim_index).exists?.should be_true
 end
 
 Then /^Statement save button should be there$/ do
@@ -110,10 +110,10 @@ Then /^Statement value input element should not be there$/ do
   on(ItemPage).statement_value_input?.should be_false
 end
 
-Then /^Statement name should be the label of (.+)$/ do |handle|
-  on(ItemPage).statement1_name.should == @properties[handle]["label"]
+Then /^Statement name of group (.+) should be the label of (.+)$/ do |group_index, handle|
+  on(ItemPage).statement_name_element(group_index).text.should == @properties[handle]["label"]
 end
 
-Then /^Statement string value should be (.+)$/ do |value|
-  on(ItemPage).get_statement_string_value.should == value
+Then /^Statement string value of claim (.+) in group (.+) should be (.+)$/ do |claim_index, group_index, value|
+  on(ItemPage).statement_string_value_element(group_index, claim_index).attribute_value("value").should == value
 end

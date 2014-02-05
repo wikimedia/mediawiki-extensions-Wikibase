@@ -19,18 +19,15 @@ module StatementPage
   a(:save_statement_disabled, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-savebutton.wikibase-toolbarbutton-disabled")
   a(:cancel_statement, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-cancelbutton:not(.wikibase-toolbarbutton-disabled)")
   a(:cancel_statement_disabled, css: ".wb-claimlistview div.listview-item a.wikibase-toolbareditgroup-cancelbutton.wikibase-toolbarbutton-disabled")
-  a(:edit_statement1_claim1, css: ".wb-claimlistview:nth-child(1) div.listview-item:nth-child(1) a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
   textarea(:statement_value_input, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'valueview-input')]")
+  textarea(:statement_value, xpath: "//div[contains(@class, 'wb-claimlistview')]//textarea[contains(@class, 'valueview-input')]")
   span(:statement_help_field, :css => "div.wb-claimlistview span.mw-help-field-hint")
   text_field(:statement_value_input_field, class: "valueview-input")
-  div(:statement1_name, :css => ".wb-claimlistview:nth-child(1) div.wb-claim-name")
-  div(:statement1_claim1_value, :css => ".wb-claimlistview:nth-child(1) div.wb-claimview:nth-child(1) div.wb-claim-mainsnak div.wb-snak-value-container div.wb-snak-value")
   div(:claim_edit_mode, :css => ".wb-claim-section div.wb-edit")
 
   #a(:add_claim_to_first_statement, css: "div.wb-claimlistview:nth-child(1) > span.wb-addtoolbar a:not(.wikibase-toolbarbutton-disabled)")
   #a(:edit_first_statement, css: "span.wb-edittoolbar > span > span > span.wikibase-toolbareditgroup-innoneditmode > span > a:not(.wikibase-toolbarbutton-disabled):nth-child(1)")
   #a(:remove_claim_button,	xpath: "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wikibase-toolbareditgroup-ineditmode')]/span/a[not(contains(@class, 'wikibase-toolbarbutton-disabled'))][text()='remove']")
-
   #div(:claim_edit_mode, xpath: "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-edit')]")
   #div(:statement1Name, xpath: "//div[contains(@class, 'wb-claimlistview')][1]//div[contains(@class, 'wb-claim-name')]")
   #div(:statement2Name, xpath: "//div[contains(@class, 'wb-claimlistview')][2]//div[contains(@class, 'wb-claim-name')]")
@@ -49,17 +46,26 @@ module StatementPage
   #a(:snaktype_selector_novalue, xpath: "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-novalue')]/a")
   #span(:preview_spinner, class: "mw-small-spinner")
 
+  def statement_name_element(group_index)
+    @browser.element(css: ".wb-claimlistview:nth-child(#{group_index}) div.wb-claim-name")
+  end
+
+  def statement_string_value_element(group_index, claim_index)
+    @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//textarea[contains(@class, 'valueview-input')]")
+  end
+
+  def edit_claim(group_index, claim_index)
+    edit_claim_element(group_index, claim_index).click
+  end
+
+  def edit_claim_element(group_index, claim_index)
+    @browser.element(css: ".wb-claimlistview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) a.wikibase-toolbareditgroup-editbutton:not(.wikibase-toolbarbutton-disabled)")
+  end
+
   def wait_for_property_value_box
     wait_until do
       self.statement_value_input? || self.statement_value_input_field?
     end
-  end
-
-  def get_statement_string_value
-    edit_statement1_claim1
-    value = statement_value_input_field
-    cancel_statement
-    return value
   end
 
   def wait_for_statement_request_finished
