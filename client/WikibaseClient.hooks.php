@@ -25,6 +25,7 @@ use Title;
 use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\LanguageLinkBadgeHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\WikibaseClient;
 
@@ -41,6 +42,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 final class ClientHooks {
 
@@ -353,10 +355,12 @@ final class ClientHooks {
 			return true;
 		}
 
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
 		$langLinkHandler = new LangLinkHandler(
-			Settings::get( 'siteGlobalID' ),
-			Settings::get( 'namespaces' ),
-			Settings::get( 'excludeNamespaces' ),
+			$settings->get( 'siteGlobalID' ),
+			$settings->get( 'namespaces' ),
+			$settings->get( 'excludeNamespaces' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
 			Sites::singleton(),
 			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
@@ -375,17 +379,59 @@ final class ClientHooks {
 			wfWarn( 'Failed to add repo links: ' . $e->getMessage() );
 		}
 
-		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
+		if ( $useRepoLinks || $settings->get( 'alwaysSort' ) ) {
 			// sort links
 			$interwikiSorter = new InterwikiSorter(
-				Settings::get( 'sort' ),
-				Settings::get( 'interwikiSortOrders' ),
-				Settings::get( 'sortPrepend' )
+				$settings->get( 'sort' ),
+				$settings->get( 'interwikiSortOrders' ),
+				$settings->get( 'sortPrepend' )
 			);
 			$interwikiLinks = $parserOutput->getLanguageLinks();
 			$sortedLinks = $interwikiSorter->sortLinks( $interwikiLinks );
 			$parserOutput->setLanguageLinks( $sortedLinks );
 		}
+
+		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Add badges to the language links.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$languageLink
+	 * @param Title $languageLinkTitle
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+		wfProfileIn( __METHOD__ );
+
+		global $wgLang;
+
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$entityLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup();
+		$sitestore = new SiteSQLStore();
+		$displayBadges = $settings->get( 'displayBadges' );
+
+		if ( !is_array( $displayBadges ) ) {
+			$displayBadges = array();
+		}
+
+		$languageLinkBadgeHandler = new LanguageLinkBadgeHandler(
+			$settings->get( 'siteGlobalID' ),
+			$siteLinkLookup,
+			$entityLookup,
+			$sitestore,
+			array_keys( $displayBadges ),
+			$wgLang->getCode()
+		);
+
+		$languageLinkBadgeHandler->assignBadges( $title, $languageLinkTitle, $languageLink );
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -399,7 +445,7 @@ final class ClientHooks {
 	 * @param QuickTemplate &$sk
 	 * @param array &$toolbox
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onBaseTemplateToolbox( QuickTemplate &$sk, &$toolbox ) {
 		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
@@ -457,10 +503,11 @@ final class ClientHooks {
 
 		$title = $out->getTitle();
 		$user = $skin->getContext()->getUser();
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		$namespaceChecker = new NamespaceChecker(
-			Settings::get( 'excludeNamespaces' ),
-			Settings::get( 'namespaces' )
+			$settings->get( 'excludeNamespaces' ),
+			$settings->get( 'namespaces' )
 		);
 
 		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
@@ -473,12 +520,20 @@ final class ClientHooks {
 				// (as that only runs after the element initially appeared).
 				$out->addModules( 'wikibase.client.nolanglinks' );
 
-				if ( Settings::get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
+				if ( $settings->get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
 					// Add the JavaScript which lazy-loads the link item widget
 					// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 					$out->addModules( 'wikibase.client.linkitem.init' );
 				}
 			}
+		}
+
+		if ( is_array( $settings->get( 'displayBadges' ) ) ) {
+			$badgesCss = '';
+			foreach ( $settings->get( 'displayBadges' ) as $badge => $icon ) {
+				$badgesCss .= ".badges-$badge { list-style-image: url( '$icon' ); }";
+			}
+			$out->addInlineStyle( $badgesCss );
 		}
 
 		wfProfileOut( __METHOD__ );

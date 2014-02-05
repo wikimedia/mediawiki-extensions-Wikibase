@@ -39,6 +39,11 @@ return call_user_func( function() {
 		'allowDataTransclusion' => true,
 		'enableSiteLinkWidget' => true,
 		'propagateChangesToRepo' => true,
+		// array of badges that should be displayed
+		// If a sitelink has two or more badges listed here, we will use the one that
+		// comes last in the list. The array has to consist of item ids pointing to
+		// icon urls, like array( 'Q123' => 'http://example.com/icon.png' )
+		'displayBadges' => array(),
 
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
