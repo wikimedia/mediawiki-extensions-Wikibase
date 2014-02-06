@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @since 1.0
