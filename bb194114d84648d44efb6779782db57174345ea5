@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_c987a965",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-06T13:48:38Z",
+      "side": 1,
+      "message": "As far as I know you could simply skip this line. With no parameter values given the resulting text will still contain the $1 placeholder. Explode on \u0027$1\u0027 then.",
+      "revId": "bb194114d84648d44efb6779782db57174345ea5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
