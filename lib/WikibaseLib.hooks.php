@@ -206,21 +206,6 @@ final class LibHooks {
 			),
 		);
 
-		$testModules['qunit']['wikibase.formatters.QuantityFormatter.tests'] = $moduleBase + array(
-			'scripts' => array(
-				'tests/qunit/wikibase.tests.js', // TODO: Move to own module along with testrunner dependency
-				'tests/qunit/formatters/QuantityFormatter.tests.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'valueFormatters.tests',
-				'util.inherit',
-				'valueFormatters',
-				'wikibase.tests.qunit.testrunner',
-				'wikibase.QuantityFormatter',
-			),
-		);
-
 		$testModules['qunit']['wikibase.parsers.EntityIdParser.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
