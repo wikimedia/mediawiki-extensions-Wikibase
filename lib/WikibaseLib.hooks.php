@@ -121,6 +121,7 @@ final class LibHooks {
 				'tests/qunit/jquery.wikibase/toolbar/toolbareditgroup.tests.js',
 			),
 			'dependencies' => array(
+				'test.mediawiki.qunit.testrunner',
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
 				'wikibase.AbstractedRepoApi',
@@ -203,21 +204,6 @@ final class LibHooks {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.wbtooltip',
-			),
-		);
-
-		$testModules['qunit']['wikibase.formatters.QuantityFormatter.tests'] = $moduleBase + array(
-			'scripts' => array(
-				'tests/qunit/wikibase.tests.js', // TODO: Move to own module along with testrunner dependency
-				'tests/qunit/formatters/QuantityFormatter.tests.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'valueFormatters.tests',
-				'util.inherit',
-				'valueFormatters',
-				'wikibase.tests.qunit.testrunner',
-				'wikibase.QuantityFormatter',
 			),
 		);
 
