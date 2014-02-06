@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_9b39ebf1",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-06T09:45:26Z",
+      "side": 1,
+      "message": "A lot of languages have 3 and more plural forms, see https://www.mediawiki.org/wiki/I18n#Be_aware_of_PLURAL_use_on_all_numbers",
+      "parentUuid": "6ef7ef47_2f72a3e2",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_cd6a30b1",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 6
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "same as above",
       "parentUuid": "6ef7ef47_cd6a30b1",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_7b405f5b",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-06T09:45:26Z",
+      "side": 1,
+      "message": "See above",
+      "parentUuid": "6ef7ef47_0f77e7d2",
       "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_5b436367",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-06T09:45:26Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "6ef7ef47_af8593a1",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_6d61dccf",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 6
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "this will always be a value above 10\ni.e.\n10s\n20s\n123,990s",
       "parentUuid": "6ef7ef47_6d61dccf",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_3b2ad78f",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-02-06T09:45:26Z",
+      "side": 1,
+      "message": "See above.\n\nCan you give me an example sentence? I am unsure how to translate it into German. Thanks.",
+      "parentUuid": "6ef7ef47_8f59b75f",
       "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
