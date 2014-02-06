@@ -15,6 +15,12 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.3.2 (dev)
+
+#### Bugfixes
+
+* Fixed definitions of ResourceLoader test modules.
+
 ### 0.3.1 (2014-02-03)
 
 #### Bugfixes

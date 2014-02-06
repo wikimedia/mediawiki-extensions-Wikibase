@@ -7,7 +7,7 @@ if ( defined( 'DATA_VALUES_JAVASCRIPT_VERSION' ) ) {
 	return 1;
 }
 
-define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.3.1' );
+define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.3.2 alpha' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
@@ -50,7 +50,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	);
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__ . '/test',
+		'localBasePath' => __DIR__ . '/tests',
 		'remoteExtPath' => $remoteExtPathParts[1] . '/tests',
 	);
 
@@ -61,6 +61,10 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 				'src/valueFormatters/valueFormatters.tests.js',
 			),
 			'dependencies' => array(
+				'dataValues.DataValue',
+				'jquery',
+				'jquery.qunit',
+				'util.inherit',
 				'valueFormatters',
 			),
 		),
@@ -70,7 +74,11 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 				'src/valueParsers/valueParsers.tests.js',
 			),
 			'dependencies' => array(
-				'valueParsers.parsers',
+				'dataValues.DataValue',
+				'jquery',
+				'jquery.qunit',
+				'util.inherit',
+				'valueParsers',
 			),
 		),
 
