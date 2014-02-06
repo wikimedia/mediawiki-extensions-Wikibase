@@ -217,7 +217,6 @@ final class LibHooks {
 				'util.inherit',
 				'valueFormatters',
 				'wikibase.tests.qunit.testrunner',
-				'wikibase.QuantityFormatter',
 			),
 		);
 
@@ -246,20 +245,6 @@ final class LibHooks {
 				'util.inherit',
 				'valueParsers.tests',
 				'wikibase.GlobeCoordinateParser',
-				'wikibase.tests.qunit.testrunner',
-			),
-		);
-
-		$testModules['qunit']['wikibase.parsers.QuantityParser.tests'] = $moduleBase + array(
-			'scripts' => array(
-				'tests/qunit/wikibase.tests.js',
-				'tests/qunit/parsers/QuantityParser.tests.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'util.inherit',
-				'valueParsers.tests',
-				'wikibase.QuantityParser',
 				'wikibase.tests.qunit.testrunner',
 			),
 		);
