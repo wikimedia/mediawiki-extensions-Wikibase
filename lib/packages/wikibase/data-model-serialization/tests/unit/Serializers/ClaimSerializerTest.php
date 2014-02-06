@@ -2,12 +2,10 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
-use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 

@@ -4,7 +4,6 @@ namespace Tests\Wikibase\DataModel\Serializers;
 
 use Wikibase\DataModel\Serializers\SnaksSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
