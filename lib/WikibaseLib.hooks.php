@@ -65,6 +65,15 @@ final class LibHooks {
 			'remoteExtPath' => $remoteExtPathParts[1],
 		);
 
+		$testModules['qunit']['wikibase.tests.qunit.testrunner'] = $moduleBase + array(
+			'scripts' => 'tests/qunit/data/testrunner.js',
+			'dependencies' => array(
+				'test.mediawiki.qunit.testrunner',
+				'wikibase',
+			),
+			'position' => 'top'
+		);
+
 		// TODO: Split into test modules per QUnit module.
 		$testModules['qunit']['wikibase.tests'] = $moduleBase + array(
 			'scripts' => array(
@@ -203,21 +212,6 @@ final class LibHooks {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.wbtooltip',
-			),
-		);
-
-		$testModules['qunit']['wikibase.formatters.QuantityFormatter.tests'] = $moduleBase + array(
-			'scripts' => array(
-				'tests/qunit/wikibase.tests.js', // TODO: Move to own module along with testrunner dependency
-				'tests/qunit/formatters/QuantityFormatter.tests.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'valueFormatters.tests',
-				'util.inherit',
-				'valueFormatters',
-				'wikibase.tests.qunit.testrunner',
-				'wikibase.QuantityFormatter',
 			),
 		);
 
