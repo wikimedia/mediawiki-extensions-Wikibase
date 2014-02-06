@@ -156,9 +156,9 @@ return call_user_func( function() {
 
 	if ( defined( 'ULS_VERSION' ) ) {
 		$modules['wikibase.ui.initTermBox']['dependencies'][] = 'ext.uls.displaysettings';
-		$modules['wikibase.ui.initTermBox']['dependencies'][] = 'jquery.uls.data';
-		$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'jquery.uls.data';
-		$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'jquery.uls.data';
+		$modules['wikibase.ui.initTermBox']['dependencies'][] = 'ext.uls.mediawiki';
+		$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'ext.uls.mediawiki';
+		$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'ext.uls.mediawiki';
 	}
 
 	return $modules;

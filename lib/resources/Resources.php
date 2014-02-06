@@ -904,9 +904,9 @@ return call_user_func( function() {
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
-		$modules['wikibase']['dependencies'][] = 'jquery.uls.data';
-		$modules['wikibase.sites']['dependencies'] = array( 'jquery.uls.data' );
-		$modules['wikibase.ui.PropertyEditTool']['dependencies'][] = 'jquery.uls.data';
+		$modules['wikibase']['dependencies'][] = 'ext.uls.mediawiki';
+		$modules['wikibase.sites']['dependencies'] = array( 'ext.uls.mediawiki' );
+		$modules['wikibase.ui.PropertyEditTool']['dependencies'][] = 'ext.uls.mediawiki';
 	}
 
 	return $modules;
