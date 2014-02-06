@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_3b11b75f",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-06T09:48:00Z",
+      "side": 1,
+      "message": "Will make changes to the i18n stuff for these keys very soon once we have had a short discussion within the team",
+      "parentUuid": "6ef7ef47_9b39ebf1",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_cd6a30b1",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 6
@@ -208,6 +226,24 @@
       "side": 1,
       "message": "See above.\n\nCan you give me an example sentence? I am unsure how to translate it into German. Thanks.",
       "parentUuid": "6ef7ef47_8f59b75f",
+      "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_bb1dc77a",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-06T09:48:00Z",
+      "side": 1,
+      "message": "In english I gather this would be.\n\nIn the 90s in the 50s etc.",
+      "parentUuid": "6ef7ef47_3b2ad78f",
       "revId": "5c37c727db9dda1d5ba296d61c9a593a82999e46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
