@@ -81,7 +81,7 @@ class ClaimDeserializer implements Deserializer {
 		$this->setGuidFromSerialization( $serialization, $claim );
 		$this->setQualifiersFromSerialization( $serialization, $claim );
 
-		if( $serialization['type'] === 'statement' ) {
+		if ( $serialization['type'] === 'statement' ) {
 			$this->setRankFromSerialization( $serialization, $claim );
 		}
 
@@ -89,19 +89,19 @@ class ClaimDeserializer implements Deserializer {
 	}
 
 	public function setGuidFromSerialization( array &$serialization, Claim $claim ) {
-		if( !array_key_exists( 'id', $serialization ) ) {
+		if ( !array_key_exists( 'id', $serialization ) ) {
 			return;
 		}
 
-		if( !is_string($serialization['id'] ) ) {
-			throw new DeserializationException( 'The id ' . $serialization['id'] . ' is not a valid GUID.' );
+		if ( !is_string( $serialization['id'] ) ) {
+			throw new DeserializationException('The id ' . $serialization['id'] . ' is not a valid GUID.');
 		}
 
 		$claim->setGuid( $serialization['id'] );
 	}
 
 	public function setQualifiersFromSerialization( array &$serialization, Claim $claim ) {
-		if( !array_key_exists( 'qualifiers', $serialization ) ) {
+		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return;
 		}
 
@@ -109,12 +109,12 @@ class ClaimDeserializer implements Deserializer {
 	}
 
 	public function setRankFromSerialization( array &$serialization, Statement $statement ) {
-		if( !array_key_exists( 'rank', $serialization ) ) {
+		if ( !array_key_exists( 'rank', $serialization ) ) {
 			return;
 		}
 
-		if( !array_key_exists( $serialization['rank'], $this->rankIds ) ) {
-			throw new DeserializationException( 'The rank ' . $serialization['rank'] . ' is not a valid rank.' );
+		if ( !array_key_exists( $serialization['rank'], $this->rankIds ) ) {
+			throw new DeserializationException('The rank ' . $serialization['rank'] . ' is not a valid rank.');
 		}
 
 		$statement->setRank( $this->rankIds[$serialization['rank']] );
@@ -126,10 +126,9 @@ class ClaimDeserializer implements Deserializer {
 		}
 
 		if ( !$this->hasCorrectType( $serialization ) ) {
-			throw new UnsupportedTypeException( $serialization['type'] );
+			throw new UnsupportedTypeException($serialization['type']);
 		}
 	}
-
 
 	protected function requireAttribute( array $array, $attributeName ) {
 		if ( !array_key_exists( $attributeName, $array ) ) {
