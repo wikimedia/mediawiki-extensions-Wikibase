@@ -9,7 +9,7 @@
 # setup & bootstrapping
 
 # before all
-require "mediawiki/selenium"
+require "mediawiki_selenium"
 
 require "net/http"
 require "active_support/all"
