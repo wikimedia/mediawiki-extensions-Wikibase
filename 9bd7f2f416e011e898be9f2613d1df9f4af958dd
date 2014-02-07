@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_f7d23b00",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-07T12:01:27Z",
+      "side": 1,
+      "message": "that would be nicer, yes. push the ugliness up the stack!",
+      "parentUuid": "6ef7ef47_95909c4f",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_eee6f412",
         "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
         "patchSetId": 19
@@ -177,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_97fbf776",
+        "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 19
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-07T12:01:27Z",
+      "side": 1,
+      "message": "No, since there we want to be able to detect whether a label has been set, so we can implement a fallback in Lua. Here the label is a convenience, so let\u0027s make it convenient.",
+      "parentUuid": "6ef7ef47_b58dd838",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef7ef47_ceeb38da",
         "filename": "client/tests/phpunit/includes/scribunto/LuaWikibaseEntityLibraryTests.lua",
         "patchSetId": 19
@@ -206,6 +242,24 @@
       "side": 1,
       "message": "the integration test follow-up (https://gerrit.wikimedia.org/r/108298) has these",
       "parentUuid": "6ef7ef47_ceeb38da",
+      "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_77fe2b68",
+        "filename": "client/tests/phpunit/includes/scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-07T12:01:27Z",
+      "side": 1,
+      "message": "why does that require an integration test? can\u0027t we unit-test the \"good\" case too?",
+      "parentUuid": "6ef7ef47_95c2dc5b",
       "revId": "9bd7f2f416e011e898be9f2613d1df9f4af958dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
