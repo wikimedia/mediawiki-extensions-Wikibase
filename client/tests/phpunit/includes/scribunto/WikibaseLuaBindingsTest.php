@@ -71,7 +71,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$prefixedId = $entity->getId()->getSerialization();
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
 		$entityArr = $wikibaseLibrary->getEntity( $prefixedId );
-		$actual = is_array( $entityArr[0] ) ? array_keys( $entityArr[0] ) : array();
+		$actual = is_array( $entityArr ) ? array_keys( $entityArr ) : array();
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -93,18 +93,18 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function testGetEntityId() {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
 		$itemId = $wikibaseLibrary->getEntityId( 'Rome' );
-		$this->assertEquals( array( 'Q33' ), $itemId );
+		$this->assertEquals( 'Q33' , $itemId );
 
 		$itemId = $wikibaseLibrary->getEntityId( 'Barcelona' );
-		$this->assertEquals( array( null ), $itemId );
+		$this->assertSame( null, $itemId );
 	}
 
 	public function testGetGlobalSiteId() {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
-		$this->assertEquals( array( 'enwiki' ), $wikibaseLibrary->getGlobalSiteId() );
+		$this->assertEquals( 'enwiki', $wikibaseLibrary->getGlobalSiteId() );
 	}
 
-	public function getItem() {
+	protected function getItem() {
 		$itemId = new ItemId( 'Q666' );
 
 		$item = Item::newEmpty();

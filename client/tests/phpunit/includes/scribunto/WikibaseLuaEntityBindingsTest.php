@@ -101,7 +101,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
 		$ret = $wikibaseLibrary->formatPropertyValues( 'Q1', 'P123456' );
 
-		$this->assertSame( array( 'Snak snak snak' ), $ret );
+		$this->assertSame( 'Snak snak snak', $ret );
 	}
 
 	public function testFormatPropertyValuesNoEntity() {
@@ -110,11 +110,11 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
 		$ret = $wikibaseLibrary->formatPropertyValues( 'Q1', 'P123456' );
 
-		$this->assertSame( array( '' ), $ret );
+		$this->assertSame( '', $ret );
 	}
 
 	public function testGetGlobalSiteId() {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
-		$this->assertEquals( array( 'enwiki' ), $wikibaseLibrary->getGlobalSiteId() );
+		$this->assertEquals( 'enwiki', $wikibaseLibrary->getGlobalSiteId() );
 	}
 }

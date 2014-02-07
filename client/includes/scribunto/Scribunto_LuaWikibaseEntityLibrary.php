@@ -69,9 +69,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @since 0.5
 	 *
+	 * @return array
 	 */
 	public function getGlobalSiteId() {
-		return $this->wbLibrary->getGlobalSiteId();
+		return array( $this->wbLibrary->getGlobalSiteId() );
 	}
 
 	/**
@@ -92,7 +93,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		// as they only gave one parameter themselves)
 		$this->checkType( 'formatPropertyValues', 1, $propertyId, 'string' );
 		try {
-			return $this->wbLibrary->formatPropertyValues( $entityId, $propertyId );
+			return array( $this->wbLibrary->formatPropertyValues( $entityId, $propertyId ) );
 		} catch ( InvalidArgumentException $e ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
 		}

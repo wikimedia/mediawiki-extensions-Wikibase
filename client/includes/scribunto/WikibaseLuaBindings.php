@@ -109,7 +109,7 @@ class WikibaseLuaBindings {
 		$entityObject = $this->entityLookup->getEntity( $entityId );
 
 		if ( $entityObject === null ) {
-			return array( null );
+			return null;
 		}
 
 		$serializer = $this->getEntitySerializer( $entityObject, $legacyStyle );
@@ -121,7 +121,7 @@ class WikibaseLuaBindings {
 			$this->renumber( $entityArr );
 		}
 
-		return array( $entityArr );
+		return $entityArr;
 	}
 
 	/**
@@ -171,12 +171,12 @@ class WikibaseLuaBindings {
 		$numericId = $this->siteLinkTable->getItemIdForLink( $this->siteId, $pageTitle );
 
 		if ( ! is_int( $numericId ) ) {
-			return array( null );
+			return null;
 		}
 
 		$id = ItemId::newFromNumber( $numericId );
 
-		return array( $this->entityIdFormatter->format( $id ) );
+		return $this->entityIdFormatter->format( $id );
 	}
 
 	/**
@@ -186,9 +186,9 @@ class WikibaseLuaBindings {
 	 *
 	 * @since 0.5
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public function getGlobalSiteId() {
-		return array( $this->siteId );
+		return $this->siteId;
 	}
 }
