@@ -118,7 +118,7 @@ module WikibaseAPI
       form_data.merge!("format" => "json")
       http_send(@wiki_url, form_data, @headers.merge({:cookies => @cookies})) do |response, &block|
         # Check response for errors and return JSON
-        raise MediaWiki::Exception.new "Bad response: #{response}" unless response.code >= 200 and response.code < 300
+        raise WBException::Exception.new "Bad response: #{response}" unless response.code >= 200 and response.code < 300
         json_resp = get_response(response.dup)
         if form_data["action"] == "login"
           login_result = json_resp["login"]["result"]
