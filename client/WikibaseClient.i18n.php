@@ -496,6 +496,7 @@ $messages['be'] = array(
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
+ * @author Zedlik
  */
 $messages['be-tarask'] = array(
 	'wikibase-client-desc' => 'Кліент для пашырэньня Wikibase',
@@ -518,7 +519,7 @@ $messages['be-tarask'] = array(
 	'wikibase-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 	'wikibase-linkitem-addlinks' => 'Дадаць спасылкі',
 	'wikibase-linkitem-alreadylinked' => 'Старонку, якую вы хочаце злучыць, ужо далучаная да [$1 аб’екта] ў цэнтральным рэпазыторыі, які спасылаецца на $2 на гэтым сайце. Аб’екты могуць мець толькі па адной старонцы з аднаго сайту. Выберыце, калі ласка, інушю старонку.',
-	'wikibase-linkitem-close' => 'Зачыніць дыялёгі і абнавіць старонку',
+	'wikibase-linkitem-close' => 'Закрыць дыялёгі і абнавіць старонку',
 	'wikibase-linkitem-failure' => 'Пры далучэньні старонкі ўзьнікла невядомая памылка.',
 	'wikibase-linkitem-title' => 'Злучэньне са старонкай',
 	'wikibase-linkitem-linkpage' => 'Злучыць са старонкай',

@@ -1358,12 +1358,18 @@ Right to set and alter [[d:Wikidata:Glossary#Description|descriptions]] of [[d:W
 	'action-label-update' => '{{doc-action|label-update}}',
 	'action-description-remove' => '{{doc-action|description-remove}}',
 	'action-description-update' => '{{doc-action|description-update}}',
-	'wikibase-time-precision-Gannum' => 'Used to indicate a timespan in $1 number of billions of years',
-	'wikibase-time-precision-Mannum' => 'Used to indicate a timespan in $1 number of millions of years',
-	'wikibase-time-precision-annum' => 'Used to indicate a timespan in $1 number of years',
-	'wikibase-time-precision-millennium' => 'Used to indicate a timespan in $1 number of millennium',
-	'wikibase-time-precision-century' => 'Used to indicate a timespan in $1 number of centuries',
-	'wikibase-time-precision-10annum' => 'Used to indicate a timespan in $1 number of 10s of years',
+	'wikibase-time-precision-Gannum' => 'Used to indicate a timespan in $1 number of billions of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-Mannum' => 'Used to indicate a timespan in $1 number of millions of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-annum' => 'Used to indicate a timespan in $1 number of years
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-millennium' => 'Used to indicate a timespan in $1 number of millennium
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-century' => 'Used to indicate a timespan in $1 number of centuries
+{{Related|Wikibase-time-precision}}',
+	'wikibase-time-precision-10annum' => 'Used to indicate a timespan in $1 number of 10s of years
+{{Related|Wikibase-time-precision}}',
 );
 
 /** Achinese (Acèh)
@@ -4062,6 +4068,12 @@ for at finde ud af, hvad der er sket med det.',
 	'action-label-update' => 'opdatere etiketter',
 	'action-description-remove' => 'slette beskrivelser',
 	'action-description-update' => 'opdatere beskrivelser',
+	'wikibase-time-precision-Gannum' => 'i $1 milliarder år',
+	'wikibase-time-precision-Mannum' => 'i $1 millioner år',
+	'wikibase-time-precision-annum' => 'i $1 år',
+	'wikibase-time-precision-millennium' => '$1. årtusind',
+	'wikibase-time-precision-century' => '$1. århundrede',
+	'wikibase-time-precision-10annum' => '$1. årti',
 );
 
 /** German (Deutsch)
@@ -6550,6 +6562,9 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'action-label-update' => 'päivittää nimiä',
 	'action-description-remove' => 'tyhjentää kuvauksia',
 	'action-description-update' => 'päivittää kuvauksia',
+	'wikibase-time-precision-millennium' => '$1. vuosituhat',
+	'wikibase-time-precision-century' => '$1. vuosisata',
+	'wikibase-time-precision-10annum' => '$1. vuosikymmen',
 );
 
 /** French (français)
@@ -7485,6 +7500,12 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 	'action-label-update' => 'actualizar etiquetas',
 	'action-description-remove' => 'eliminar descricións',
 	'action-description-update' => 'actualizar descricións',
+	'wikibase-time-precision-Gannum' => 'en $1 mil millóns de anos',
+	'wikibase-time-precision-Mannum' => 'en $1 millóns de anos',
+	'wikibase-time-precision-annum' => 'en $1 anos',
+	'wikibase-time-precision-millennium' => 'milenio $1',
+	'wikibase-time-precision-century' => 'século $1',
+	'wikibase-time-precision-10annum' => 'anos $1',
 );
 
 /** Swiss German (Alemannisch)
@@ -13055,6 +13076,9 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere zoekopdracht ($3).',
 	'wikibase-error-label-not-unique-item' => 'Een ander item ($3) is al gekoppeld met het label "$1" en de beschrijving "$4" voor de taalcode $2.',
 	'wikibase-error-label-no-entityid' => 'Het label moet geen geldige entiteit-ID zijn.',
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" is geen geldig item-ID.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'De taalcode "$1" is niet bekend. Gebruik een taalcode die bekend is in het systeem, zoals "en".',
+	'wikibase-wikibaserepopage-invalid-id' => 'Het ID is "$1" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'wikibase-itembytitle-lookup-fieldset' => 'Items zoeken op site en paginanaam',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -13113,16 +13137,21 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-setsitelink-intro' => 'Met dit formulier kunt u de sitekoppeling van een entiteit instellen. U moet het ID van de entiteit opgeven (bijvoorbeeld Q23), een site-ID (bijvoorbeeld "nwiki") en de in te stellen sitekoppeling.',
 	'wikibase-setsitelink-site' => 'Site-ID:',
 	'wikibase-setsitelink-label' => 'Sitekoppeling:',
+	'wikibase-setsitelink-badges' => 'Speldjes',
 	'wikibase-setsitelink-submit' => 'Sitekoppeling instellen',
 	'wikibase-setsitelink-warning-remove' => 'Wilt u echt de sitekoppeling van [[$1]] verwijderen?',
 	'wikibase-setsitelink-invalid-site' => 'Het site-ID "$1" is onbekend. Gebruik een bestaande site-ID, zoals "enwiki".',
+	'wikibase-setsitelink-not-item' => 'Het nummer $1 hoort niet bij een item.',
+	'wikibase-setsitelink-not-badge' => 'Het item $1 is geen speldje.',
 	'wikibase-setsitelink-add-failed' => 'De sitekoppeling kon niet worden opgeslagen.',
 	'wikibase-setsitelink-remove-failed' => 'De sitekoppeling kon niet worden verwijderd.',
-	'wikibase-setsitelink-not-itemid' => '"$1" is geen geldig item-ID. Sitekoppelingen kunnen alleen worden ingesteld voor items.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Taal:',
-	'wikibase-modifyentity-invalid-id' => 'Het ID is "$1" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
-	'wikibase-modifyterm-invalid-langcode' => 'De taalcode "$1" is niet bekend. Gebruik een taalcode die bekend is in het systeem, zoals "en".',
+	'special-mergeitems' => 'Twee items samenvoegen',
+	'wikibase-mergeitems-intro' => 'Wanneer u twee items samenvoegt worden alle labels, beschrijvingen, aliassen, sitekoppelingen en verklaringen verplaatst van het ene item naar het andere.',
+	'wikibase-mergeitems-fromid' => 'Het itemnummer waarvan samen te voegen',
+	'wikibase-mergeitems-toid' => 'Het itemnummer waarnaar samen te voegen',
+	'wikibase-mergeitems-submit' => 'Items samenvoegen',
 	'special-dispatchstats' => 'Statistieken over wijzigingenverwerking',
 	'wikibase-dispatchstats-intro' => 'Op deze pagina worden statistieken over wijzigingenverwerking naar de clients weergegeven.',
 	'wikibase-dispatchstats-no-stats' => 'Er zijn momenteel geen statistieken beschikbaar.',
@@ -14612,6 +14641,7 @@ $messages['ps'] = array(
 /** Portuguese (português)
  * @author Hamilton Abreu
  * @author Helder.wiki
+ * @author Imperadeiro98
  * @author Malafaya
  * @author MisterSanderson
  * @author SandroHc
@@ -14689,6 +14719,9 @@ O seu endereço de IP será gravado no histórico de edições desta entidade.',
 	'wikibase-blockeduser-tooltip-message' => 'Não possui permissões para editar porque o seu nome de utilizador ou endereço IP foi bloqueado.',
 	'wikibase-error-sitelink-already-used' => 'A ligação do sítio [$1 $2] já está incluída em outro item, [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Uma outra propriedade ($3) já possui a etiqueta "$1" associada com o código de idioma $2.',
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" não é o ID de um item válido.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'O identificador de idioma "$1" é desconhecido. Por favor, utilize um identificador de idioma reconhecido pelo sistema, como "pt".',
+	'wikibase-wikibaserepopage-invalid-id' => 'O identificador "$1" não é conhecido pelo sistema. Utilize um identificador válido.',
 	'special-itembytitle' => 'Item por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Procurar itens por sítio e título',
 	'wikibase-itembytitle-lookup-site' => 'Sítio:',
@@ -14746,11 +14779,8 @@ Por favor, utilize um válido, como "en".',
 	'wikibase-setsitelink-invalid-site' => 'O ID de sítio "$1" é desconhecido. Por favor, utilize um identificador de sítio existente, como "ptwiki".',
 	'wikibase-setsitelink-add-failed' => 'A ligação de sítio não pôde ser guardada.',
 	'wikibase-setsitelink-remove-failed' => 'A ligação de sítio não pôde ser removida.',
-	'wikibase-setsitelink-not-itemid' => '"$1" não é um ID de item válido. Ligações de sítios só podem ser atribuídos a itens.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Idioma:',
-	'wikibase-modifyentity-invalid-id' => 'O identificador "$1" não é conhecido pelo sistema. Utilize um identificador válido.',
-	'wikibase-modifyterm-invalid-langcode' => 'O identificador de idioma "$1" é desconhecido. Por favor, utilize um identificador de idioma reconhecido pelo sistema, como "pt".',
 	'wikibase-dispatchstats-no-stats' => 'Não existem estatísticas disponíveis actualmente.',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => 'Data e hora',
@@ -14799,6 +14829,10 @@ para descobrir o que lhe sucedeu.',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
 	'wikibase-listdatatypes-quantity-head' => 'Quantidade',
 	'wikibase-listdatatypes-time-head' => 'Tempo',
+	'wikibase-time-precision-Gannum' => 'em  $1  biliões de anos',
+	'wikibase-time-precision-Mannum' => 'em $1 milhões de anos',
+	'wikibase-time-precision-annum' => 'em $1 anos',
+	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -18049,7 +18083,7 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'wikibase-item-summary-wbsetclaim-create' => 'Tạo {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Đã thay đổi {{PLURAL:$4|một từ hạn định|$4 từ hạn định}} cho {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Đã thay đổi {{PLURAL:$4|một tham chiếu|$4 tham chiếu}} đến {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
-	'wikibase-item-summary-wbsetclaim-update-rank' => 'Đã thay đổi thứ tự của {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Đã thay đổi hạng của {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Trang được di chuyển từ [$3] đến [$4]',
 	'wikibase-item-summary-wbsetqualifier-add' => 'Đã thêm {{PLURAL:$1|từ hạn định|các từ hạn định}}',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Đã thay đổi {{PLURAL:$1|từ hạn định|các từ hạn định}}',

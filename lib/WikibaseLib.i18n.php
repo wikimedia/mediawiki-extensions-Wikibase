@@ -439,6 +439,7 @@ $messages['be'] = array(
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
+ * @author Zedlik
  */
 $messages['be-tarask'] = array(
 	'wikibase-lib-desc' => 'Утрымлівае агульны функцыянал пашырэньняў Wikibase і Wikibase Client.',
@@ -471,7 +472,7 @@ $messages['be-tarask'] = array(
 	'wikibase-error-ui-link-exists' => 'Вы ня можаце спаслацца на гэтую старонку, бо іншы аб’ект ужо на яе спасылаецца.',
 	'wikibase-error-ui-session-failure' => 'Вашая сэсія скончылася. Увайдзіце ў сыстэму зноў, калі ласка.',
 	'wikibase-error-ui-edit-conflict' => 'Адбыўся канфлікт рэдагаваньня. Абнавіце старонку і захавайце зноў, калі ласка.',
-	'wikibase-replicationnote' => 'Будзьце ласкавыя заўважыць, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.',
+	'wikibase-replicationnote' => 'Калі ласка заўважце, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.',
 	'wikibase-sitelinks-wikipedia' => 'Старонкі Вікіпэдыі, далучаныя да гэтага аб’екта',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
@@ -3352,6 +3353,13 @@ $messages['si'] = array(
 	'wikibase-tooltip-error-details' => 'විස්තර',
 	'datatypes-type-wikibase-item' => 'අයිතමය',
 	'datatypes-type-commonsMedia' => 'කොමන්ස් මාධ්‍ය ගොනුව',
+);
+
+/** Slovak (slovenčina)
+ * @author Teslaton
+ */
+$messages['sk'] = array(
+	'wikibase-replicationnote' => 'Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki.',
 );
 
 /** Slovenian (slovenščina)
