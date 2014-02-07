@@ -1,7 +1,6 @@
 <?php
 
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Settings;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Utils;
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
@@ -81,7 +80,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'getEntity', 2, $legacyStyle, 'boolean' );
 		try {
 			$entityArr = $this->wbLibrary->getEntity( $prefixedEntityId, $legacyStyle );
-			return $entityArr;
+			return array( $entityArr );
 		}
 		catch ( EntityIdParsingException $e ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
@@ -102,7 +101,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		return $this->wbLibrary->getEntityId( $pageTitle );
+		return array( $this->wbLibrary->getEntityId( $pageTitle ) );
 	}
 
 	/**
@@ -112,6 +111,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 */
 	public function getGlobalSiteId() {
-		return $this->wbLibrary->getGlobalSiteId();
+		return array( $this->wbLibrary->getGlobalSiteId() );
 	}
 }

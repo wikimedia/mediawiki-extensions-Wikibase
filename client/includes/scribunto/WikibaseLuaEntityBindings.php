@@ -121,7 +121,7 @@ class WikibaseLuaEntityBindings {
 	 * @param string $entityId
 	 * @param string $propertyId
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public function formatPropertyValues( $entityId, $propertyId ) {
 		$entityId = new ItemId( $entityId );
@@ -130,17 +130,17 @@ class WikibaseLuaEntityBindings {
 		$entity = $this->getEntity( $entityId );
 
 		if ( !$entity ) {
-			return array( '' );
+			return '';
 		}
 
 		$claims = $this->getClaimsForProperty( $entity, $propertyId );
 
 		if ( $claims->isEmpty() ) {
-			return array( '' );
+			return '';
 		}
 
 		$snakList = $claims->getMainSnaks();
-		return array( $this->formatSnakList( $snakList ) );
+		return $this->formatSnakList( $snakList );
 	}
 
 	/**
@@ -150,9 +150,9 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @since 0.5
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public function getGlobalSiteId() {
-		return array( $this->siteId );
+		return $this->siteId;
 	}
 }
