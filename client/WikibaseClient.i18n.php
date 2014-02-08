@@ -327,6 +327,7 @@ $messages['af'] = array(
  * @author Abanima
  * @author Ali1
  * @author Basharh
+ * @author Meno25
  * @author OsamaK
  * @author Peadara
  * @author Tarawneh
@@ -340,7 +341,7 @@ $messages['ar'] = array(
 	'wikibase-comment-linked' => 'تم ربط عنصر ويكيبيانات مع هذه الصفحة.',
 	'wikibase-comment-unlink' => 'تم فصل ارتباط هذه الصفحة من البند ويكيبيانات. تم إزالة روابط اللغة.',
 	'wikibase-comment-restore' => 'تم استرجاع بند ويكيبيانات المرتبط. روابط اللغة أعيدت.',
-	'wikibase-comment-update' => 'روابط اللغة حُدثت.', # Fuzzy
+	'wikibase-comment-update' => 'مدخلة ويكي بيانات تم تغييرها',
 	'wikibase-comment-sitelink-add' => 'وصلة اللغة المُضافة:$1',
 	'wikibase-comment-sitelink-change' => 'تم تعديل وصلة اللغة من $1 إلى $2',
 	'wikibase-comment-sitelink-remove' => 'وصلة اللغة المُلغاة:$1',

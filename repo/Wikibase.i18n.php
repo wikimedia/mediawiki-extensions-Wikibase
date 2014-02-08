@@ -1563,7 +1563,7 @@ $messages['ar'] = array(
 	'wikibase-save-inprogress' => 'يحفظ...',
 	'wikibase-remove-inprogress' => 'يزيل...',
 	'wikibase-sitelink-site-edit-placeholder' => 'موقع',
-	'wikibase-sitelink-page-edit-placeholder' => 'مقال', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'صفحة',
 	'wikibase-statements' => 'بيانات',
 	'wikibase-terms' => 'بلغات أخرى',
 	'wikibase-remove' => 'ألغ',
@@ -1583,7 +1583,7 @@ $messages['ar'] = array(
 	'special-newproperty' => 'إنشاء خاصية جديدة',
 	'wikibase-newproperty-fieldset' => 'أنشئ خاصية جديدة',
 	'wikibase-newproperty-datatype' => 'نوع البيانات:',
-	'wikibase-newproperty-invalid-datatype' => 'تم تحديد نوع بيانات غير صالح', # Fuzzy
+	'wikibase-newproperty-invalid-datatype' => 'نوع بيانات غير صحيح تم تحديده.',
 	'special-newitem' => 'إنشاء عنصر جديد',
 	'wikibase-newitem-fieldset' => 'أنشئ عنصر جديد',
 	'wikibase-newentity-description' => 'الوصف:',
@@ -11180,6 +11180,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-modifyterm-language' => 'Sprooch:',
 	'special-mergeitems' => 'Zwee Elementer zesummeleeën',
 	'wikibase-mergeitems-intro' => 'Wann Dir zwee Elementer zesummeleet da ginn all Etiketten, Aliasen, Linken op Siten an Declaratioun vun engem op deen Anere geréckelt.',
+	'wikibase-mergeitems-fromid' => "D'ID vun där zesummegeluecht gëtt",
 	'wikibase-mergeitems-toid' => "D'ID op déi zesummegeluecht gëtt",
 	'wikibase-mergeitems-submit' => 'Elementer zesummeleeën',
 	'wikibase-dispatchstats-no-stats' => 'Et sinn elo keng Statistiken disponibel.',
@@ -11301,10 +11302,12 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-time-precision-annum' => 'a(n) $1 Joer',
 	'wikibase-time-precision-millennium' => '$1. Joerdausend',
 	'wikibase-time-precision-century' => '$1. Joerhonnert',
+	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** لوری (لوری)
  * @author Bonevarluri
+ * @author Mogoeilor
  */
 $messages['lrc'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'سیلجا',
@@ -11342,6 +11345,7 @@ $messages['lrc'] = array(
 	'right-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
 	'action-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
 	'wikibase-time-precision-Gannum' => 'د $1 بیلیون سال',
+	'wikibase-time-precision-Mannum' => 'د $1 میلیون سال',
 	'wikibase-time-precision-annum' => 'د سالیا $1',
 );
 
@@ -17343,7 +17347,7 @@ $messages['uk'] = array(
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Змінено {{PLURAL:$4|один визначник|$4 визначники|$4 визначників|$4 визначника}} у {{PLURAL:$3|1=вимозі|вимогах}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Змінено {{PLURAL:$4|одне посилання|$4 посилання|$4 посилань|$4 посилання}} у {{PLURAL:$3|1=вимозі|вимогах}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Змінено ранг {{PLURAL:$3|1=вимоги|вимог}}',
-	'wikibase-item-summary-clientsitelink-update' => 'Сторінку пересунуто з [$3] на [$4]',
+	'wikibase-item-summary-clientsitelink-update' => 'Сторінку перейменовано з [$3] на [$4]',
 	'wikibase-item-summary-wbsetqualifier-add' => 'Додано {{PLURAL:$1|визначник|визначники|визначників}}',
 	'wikibase-item-summary-wbsetqualifier-update' => 'Змінено {{PLURAL:$1|визначник|визначники|визначників}}',
 	'wikibase-item-summary-wbremovequalifiers-remove' => 'Вилучено {{PLURAL:$1|визначник|визначники|визначників}}',
