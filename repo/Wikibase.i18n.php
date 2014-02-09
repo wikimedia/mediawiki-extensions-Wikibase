@@ -5567,6 +5567,9 @@ $messages['et'] = array(
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Üks allikas|$1 allikat}} on veel salvestamata.',
 	'wikibase-snakview-property-input-placeholder' => 'omadus',
 	'wikibase-snakview-choosesnaktype' => 'Vali väärtuse tüüp.',
+	'wikibase-snakview-variation-datavaluetypemismatch' => 'Väärtus ei sobi omaduse määratlusega.',
+	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Väärtuse andmeväärtuse tüüp "$1" ei vasta omaduse andmetüübi andmeväärtuse tüübile "$2".',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Kustutatud omadusele pole võimalik määrata uut väärtust.',
 	'wikibase-snakview-variations-somevalue-label' => 'tundmatu väärtus',
 	'wikibase-snakview-variations-novalue-label' => 'väärtus puudub',
 	'wikibase-snakview-snaktypeselector-value' => 'kohandatud väärtus',
@@ -5593,6 +5596,7 @@ Sinu IP-aadress talletatakse olemi ajaloos.',
 	'wikibase-itembytitle-lookup-site' => 'Võrgukoht:',
 	'wikibase-itembytitle-lookup-page' => 'Lehekülg:',
 	'wikibase-itembytitle-submit' => 'Otsi',
+	'wikibase-itembytitle-nothing-found' => 'Eelneva otsinguga ei leitud ühtegi üksust. Palun kitsenda päringut nii, et see vastaks paremini välisele leheküljele.',
 	'wikibase-itembytitle-invalid-site' => 'Eelneva päringu abil ei õnnestunud otsida. Palun kasuta sobivat võrgukoha identifikaatorit.',
 	'wikibase-itembytitle-description' => 'Võrgukohale vastab identifikaatorikood, nt "enwiki".',
 	'wikibase-itembytitle-create' => 'Saad üksuse ka [{{fullurl:Special:NewItem|site=$1&page=$2}} luua].',
@@ -5605,6 +5609,7 @@ Sinu IP-aadress talletatakse olemi ajaloos.',
 	'wikibase-itemdisambiguation-search' => 'Saad [{{fullurl:Special:Search|search=$1}} üksust otsida].',
 	'wikibase-itemdisambiguation-create' => 'Saad [{{fullurl:Special:NewItem|label=$1}} üksuse luua].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Keeleidentifikaator, mille ära tõid, on kahjuks süsteemis tundmatu. Palun kasuta sobivat keeleidentifikaatorit nagu "et".',
+	'wikibase-itemdisambiguation-description' => 'Otsingus kasutatav väärtus peab olema täielikult tekstisisend. Keel on identifikaator, näiteks "et".',
 	'special-newproperty' => 'Uue omaduse loomine',
 	'wikibase-newproperty-summary' => 'Kontrolli kindlasti, ega omadus juba olemas pole!<br />Kõigi uute omaduste juurde tuleks lisada [[Help:Label|silt]] ja [[Help:Description|kirjeldus]] ning lisaks ka sobiv omaduse tüüp.',
 	'wikibase-newproperty-fieldset' => 'Uue omaduse loomine',
@@ -6580,6 +6585,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author Hello71
  * @author Jean-Frédéric
  * @author Jitrixis
+ * @author Laddo
  * @author Linedwell
  * @author Ltrlg
  * @author Metroitendo
@@ -6643,7 +6649,7 @@ $messages['fr'] = array(
 	'wikibase-aliases-label' => 'Alias&nbsp;:',
 	'wikibase-aliases-input-help-message' => "Si cet ensemble de données est connu sous plus d'un nom particulier, vous pouvez entrer des alias et des synonymes, afin qu'il puisse être trouvé par ses autres noms.",
 	'wikibase-aliases-empty' => 'Aucun alias défini.',
-	'wikibase-datatype-label' => 'Type de données&nbsp;:',
+	'wikibase-datatype-label' => 'Type de données:',
 	'wikibase-claimview-snak-tooltip' => 'Saisissez une valeur correspondant à la propriété appelée « $1 ». Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle n’est pas connue, vous pouvez choisir une alternative pour spécifier une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.',
 	'wikibase-claimview-snak-new-tooltip' => 'Après avoir spécifié une propriété, vous pouvez saisir une valeur correspondante. Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle est inconnue, vous pouvez choisir une alternative en spécifiant une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.',
 	'wikibase-statementview-rank-preferred' => 'Rang privilégié',
@@ -6704,7 +6710,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'special-newproperty' => 'Créer une nouvelle propriété',
 	'wikibase-newproperty-summary' => 'Assurez-vous que [[Special:PropertyDisambiguation|la propriété n’existe pas déjà]] !<br />Vous devriez créer un [[Help:Label|libellé]] et une [[Help:Description|description]] pour toutes les nouvelles propriétés, ainsi qu’un type de propriété valide.',
 	'wikibase-newproperty-fieldset' => 'Créer une nouvelle propriété',
-	'wikibase-newproperty-datatype' => 'Type de données&nbsp;:',
+	'wikibase-newproperty-datatype' => 'Type de données:',
 	'wikibase-newproperty-invalid-datatype' => 'Type de données spécifié non valide.',
 	'special-newitem' => 'Créer un nouvel élément',
 	'wikibase-newitem-summary' => 'Assurez-vous que [[Special:ItemByTitle|l’élément n’existe pas déjà]] !<br />Vous devriez créer un [[Help:Label/fr|libellé]] et une [[Help:Description/fr|description]] pour tous les nouveaux éléments.',
@@ -12673,6 +12679,18 @@ $messages['myv'] = array(
 	'wikibase-modifyterm-language' => 'Келесь:',
 	'wikibase-entitieswithoutlabel-label-language' => 'Келесь:',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» аволь стандартонь келень код.',
+);
+
+/** Neapolitan (Napulitano)
+ * @author Chelin
+ */
+$messages['nap'] = array(
+	'wikibase-time-precision-Gannum' => "$1 miliarde 'e anne",
+	'wikibase-time-precision-Mannum' => "$1 milione 'e anne",
+	'wikibase-time-precision-annum' => '$1 anne',
+	'wikibase-time-precision-millennium' => '$1 millenne',
+	'wikibase-time-precision-century' => '$1 secule',
+	'wikibase-time-precision-10annum' => 'anne $1',
 );
 
 /** Norwegian Bokmål (norsk bokmål)

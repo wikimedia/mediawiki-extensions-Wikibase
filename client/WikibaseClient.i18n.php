@@ -719,8 +719,10 @@ $messages['bs'] = array(
 $messages['ca'] = array(
 	'wikibase-client-desc' => "Client per l'extensió Wikibase",
 	'specialpages-group-wikibaseclient' => 'Client de Wikidata',
+	'tooltip-t-wikibase' => "Enllaç a l'element del repositori de dades connectades",
 	'wikibase-after-page-move' => "També podeu [$1 actualitzar] l'element associat de Wikidata per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
 	'wikibase-after-page-move-queued' => "L'[$1 element de Wikidata] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
+	'wikibase-comment-add' => "S'ha creat un element de Wikidata.",
 	'wikibase-comment-remove' => 'Element associat de Wikidata eliminat. Enllaços de llengua suprimits.',
 	'wikibase-comment-linked' => "S'ha enllaçat un element de Wikidata a aquesta pàgina.",
 	'wikibase-comment-unlink' => "S'ha desvinculat aquesta pàgina de l'element Wikidata. Suprimits els enllaços de llengua.",
@@ -754,6 +756,7 @@ $messages['ca'] = array(
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Modificació de Wikidata',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra les modificacions a Wikidata en la llista de seguiment',
+	'wikibase-error-serialize-error' => "No s'han pogut serialitzar les dades.",
 	'wikibase-error-invalid-entity-id' => "L'ID introduït és desconegut al sistema. Utilitzeu un ID d'entitat vàlid.",
 	'special-unconnectedpages' => 'Pàgines no connectades',
 	'wikibase-unconnectedpages-legend' => 'Opcions de pàgines no connectades',
@@ -763,6 +766,9 @@ $messages['ca'] = array(
 	'wikibase-unconnectedpages-page-warning' => "El títol de pàgina no s'ha pogut utilitzar per a la consulta i s'ha ignorat.",
 	'wikibase-unconnectedpages-iwdata-label' => 'Només pàgines amb enllaços entre llengües',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|enllaç entre llengües|enllaços entre llengües}} a la pàgina)',
+	'wikibase-pageinfo-entity-id' => "ID de l'element de Wikidata",
+	'wikibase-pageinfo-entity-id-none' => 'Cap',
+	'wikibase-property-render-error' => "No s'ha pogut representar la propietat $1: $2",
 );
 
 /** Chechen (нохчийн)
