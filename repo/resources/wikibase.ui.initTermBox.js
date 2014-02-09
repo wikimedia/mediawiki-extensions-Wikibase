@@ -125,7 +125,9 @@
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
 			var languageCode = languageCodes[i],
-				alternatingClass = ( rowNumber++ % 2 ) ? 'even' : 'uneven';
+				alternatingClass = ( rowNumber++ % 2 ) ? 'even' : 'uneven',
+				// getUrl( ..., params ) did not existed in MediaWiki 1.21.0
+				url = title.getUrl();
 
 			$tbody.append( mw.template( 'wb-term',
 				languageCode,
@@ -137,7 +139,8 @@
 				'',
 				'',
 				'',
-				title.getUrl() + '?setlang=' + languageCode
+				url + ( url.indexOf( '?' ) !== -1 ? '&' : '?' )
+					+ $.param( { setlang: languageCode } )
 			) );
 		}
 
