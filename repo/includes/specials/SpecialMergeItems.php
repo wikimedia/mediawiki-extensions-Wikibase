@@ -269,6 +269,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 			. Html::element(
 				'legend',
 				array( 'class' => 'wb-legend' ),
+				// Message: special-mergeitems
 				$this->msg( 'special-' . strtolower( $this->getName() ) )->text()
 			)
 		);
@@ -280,6 +281,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 		$this->getOutput()->addHTML(
 			Html::input(
 				'wikibase-' . strtolower( $this->getName() ) . '-submit',
+				// Message: wikibase-mergeitems-submit
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-submit' )->text(),
 				'submit',
 				array(
@@ -306,6 +308,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 		return Html::rawElement(
 			'p',
 			array(),
+			// Message: wikibase-mergeitems-intro
 			$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
 		)
 		. Html::element(

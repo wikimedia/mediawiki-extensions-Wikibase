@@ -193,6 +193,8 @@ class EntityChange extends DiffChange {
 		if ( $comment !== null ) {
 			$this->comment = $comment;
 		} else {
+			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
+			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
 			$this->comment = 'wikibase-comment-' . $this->getAction();
 		}
 	}

@@ -224,6 +224,8 @@ class ClaimDifferenceVisualizer {
 			$rank = ClaimSerializer::serializeRank( $rank );
 		}
 
+		// Messages: wikibase-diffview-rank-preferred, wikibase-diffview-rank-normal,
+		// wikibase-diffview-rank-deprecated
 		$msg = wfMessage( 'wikibase-diffview-rank-' . $rank );
 		return $msg->inLanguage( $this->langCode )->parse();
 	}

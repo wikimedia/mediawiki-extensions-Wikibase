@@ -719,8 +719,7 @@ abstract class EntityContent extends AbstractContent {
 		 */
 		foreach ( $foundLabels as $foundLabel ) {
 			if ( $foundLabel->getEntityId() !== $entity->getId()->getNumericId() ) {
-				// Give grep a chance to find the usages:
-				// wikibase-error-label-not-unique-wikibase-property,
+				// Messages: wikibase-error-label-not-unique-wikibase-property,
 				// wikibase-error-label-not-unique-wikibase-query
 				$status->fatal(
 					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
