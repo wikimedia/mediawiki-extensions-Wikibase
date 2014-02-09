@@ -137,7 +137,7 @@
 				'',
 				'',
 				'',
-				title.getUrl() + '?setlang=' + languageCode
+				title.getUrl( { setlang: languageCode } )
 			) );
 		}
 
