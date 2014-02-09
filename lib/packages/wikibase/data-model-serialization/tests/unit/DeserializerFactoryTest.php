@@ -16,13 +16,17 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new DeserializerFactory( new DataValueDeserializer(), new BasicEntityIdParser() );
 	}
 
-
-	public function testNewReferencesDeserializer() {
-		$this->assertTrue( $this->buildDeserializerFactory()->newReferencesDeserializer()->isDeserializerFor(
+	public function testNewClaimsDeserializer() {
+		$this->assertTrue( $this->buildDeserializerFactory()->newClaimsDeserializer()->isDeserializerFor(
 			array(
-				array(
-					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-					'snaks' => array()
+				'P42' => array(
+					array(
+						'mainsnak' => array(
+							'snaktype' => 'novalue',
+							'property' => 'P42'
+						),
+						'type' => 'claim'
+					)
 				)
 			)
 		) );
@@ -36,6 +40,17 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 					'property' => 'P42'
 				),
 				'type' => 'claim'
+			)
+		) );
+	}
+
+	public function testNewReferencesDeserializer() {
+		$this->assertTrue( $this->buildDeserializerFactory()->newReferencesDeserializer()->isDeserializerFor(
+			array(
+				array(
+					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+					'snaks' => array()
+				)
 			)
 		) );
 	}
