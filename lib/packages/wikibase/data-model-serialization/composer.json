@@ -30,8 +30,8 @@
 		"data-values/serialization": "0.1"
 	},
 	"autoload": {
-		"psr-0": {
-			"Wikibase\\DataModel": "src/"
+		"psr-4": {
+			"Wikibase\\DataModel\\": "src/"
 		}
 	}
 }
