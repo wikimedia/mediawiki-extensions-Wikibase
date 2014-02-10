@@ -77,7 +77,9 @@ class ClaimDeserializer implements Deserializer {
 
 	private function getDeserialized( array $serialization ) {
 		$mainSnak = $this->snakDeserializer->deserialize( $serialization['mainsnak'] );
-		$claim = ( $serialization['type'] === 'statement' ) ? new Statement( $mainSnak ) : new Claim( $mainSnak );
+
+		$claim = $serialization['type'] === 'statement' ? new Statement( $mainSnak ) : new Claim( $mainSnak );
+
 		$this->setGuidFromSerialization( $serialization, $claim );
 		$this->setQualifiersFromSerialization( $serialization, $claim );
 
@@ -94,7 +96,7 @@ class ClaimDeserializer implements Deserializer {
 		}
 
 		if ( !is_string( $serialization['id'] ) ) {
-			throw new DeserializationException('The id ' . $serialization['id'] . ' is not a valid GUID.');
+			throw new DeserializationException( 'The id ' . $serialization['id'] . ' is not a valid GUID.' );
 		}
 
 		$claim->setGuid( $serialization['id'] );
@@ -114,7 +116,7 @@ class ClaimDeserializer implements Deserializer {
 		}
 
 		if ( !array_key_exists( $serialization['rank'], $this->rankIds ) ) {
-			throw new DeserializationException('The rank ' . $serialization['rank'] . ' is not a valid rank.');
+			throw new DeserializationException( 'The rank ' . $serialization['rank'] . ' is not a valid rank.' );
 		}
 
 		$statement->setRank( $this->rankIds[$serialization['rank']] );
@@ -126,7 +128,7 @@ class ClaimDeserializer implements Deserializer {
 		}
 
 		if ( !$this->hasCorrectType( $serialization ) ) {
-			throw new UnsupportedTypeException($serialization['type']);
+			throw new UnsupportedTypeException( $serialization['type'] );
 		}
 	}
 
