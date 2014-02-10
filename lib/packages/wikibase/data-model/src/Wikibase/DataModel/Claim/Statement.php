@@ -30,9 +30,9 @@ class Statement extends Claim {
 	/**
 	 * @since 0.1
 	 *
-	 * @var integer, element of the Statement::RANK_ enum
+	 * @var integer, element of the Claim::RANK_ enum
 	 */
-	protected $rank = Statement::RANK_NORMAL;
+	protected $rank = self::RANK_NORMAL;
 
 	/**
 	 * @since 0.1
@@ -78,7 +78,7 @@ class Statement extends Claim {
 	 * @throws InvalidArgumentException
 	 */
 	public function setRank( $rank ) {
-		$ranks = array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED );
+		$ranks = array( self::RANK_DEPRECATED, self::RANK_NORMAL, self::RANK_PREFERRED );
 
 		if ( !in_array( $rank, $ranks, true ) ) {
 			throw new InvalidArgumentException( 'Invalid rank specified for statement: ' . var_export( $rank, true ) );
