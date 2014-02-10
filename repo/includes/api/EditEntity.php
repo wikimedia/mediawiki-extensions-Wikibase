@@ -17,7 +17,6 @@ use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpLabel;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\DataModel\Claim\Claim;
@@ -78,13 +77,12 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-		$type = $entityContent->getEntity()->getType();
 		$exists = $entityContent->getTitle()->exists();
-		if( !$exists ){
+		if( !$exists ) {
 			$permissions[] = 'createpage';
-			$permissions[] = $type . '-create';
-		} else {
-			$permissions[] = $type . '-override';
+			if( $entityContent->getEntity()->getType() === 'property'  ) {
+				$permissions[] = 'property-create';
+			}
 		}
 		return $permissions;
 	}

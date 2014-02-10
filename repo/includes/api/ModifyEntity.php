@@ -63,7 +63,6 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-
 		$permissions[] = 'edit';
 		return $permissions;
 	}
@@ -344,6 +343,13 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @see ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::mustBePosted
+	 */
+	public function mustBePosted() {
 		return true;
 	}
 

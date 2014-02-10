@@ -3,14 +3,9 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use RuntimeException;
-use UserBlockedError;
 use UserInputException;
 use Wikibase\EditEntity;
-use Wikibase\EntityId;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\SummaryFormatter;
 
 /**
  * Abstract special page for modifying Wikibase entity.
