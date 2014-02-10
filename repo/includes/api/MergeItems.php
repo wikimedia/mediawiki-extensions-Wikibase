@@ -262,4 +262,11 @@ class MergeItems extends ApiWikibase {
 		return true;
 	}
 
+	/**
+	 * @see ApiBase::mustBePosted
+	 */
+	public function mustBePosted() {
+		return true;
+	}
+
 }

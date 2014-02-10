@@ -3,9 +3,14 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use InvalidArgumentException;
 use Language;
+use PermissionsError;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\CopyrightMessageBuilder;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Utils;
@@ -111,6 +116,13 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return false;
 		}
 
+		try{
+			$this->checkTermChangePermissions( $this->entityContent->getEntity() );
+		} catch( PermissionsError $e ) {
+			$this->showErrorHTML( $this->msg( 'permissionserrors' ) . ': ' . $e->permission );
+			return false;
+		}
+
 		// to provide removing after posting the full form
 		if ( $request->getVal( 'remove' ) === null && $this->value === '' ) {
 			$this->showErrorHTML(
@@ -133,6 +145,26 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 
 		return $summary;
+	}
+
+	/**
+	 * @param Entity $entity
+	 *
+	 * @throws PermissionsError
+	 * @throws InvalidArgumentException
+	 */
+	protected function checkTermChangePermissions( Entity $entity ) {
+		if( $entity instanceof Item ) {
+			$type = 'item';
+		} else if ( $entity instanceof Property ) {
+			$type = 'property';
+		} else {
+			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );
+		}
+		$restriction = $type . '-term';
+		if ( !$this->getUser()->isAllowed( $restriction ) ) {
+			throw new PermissionsError( $restriction );
+		}
 	}
 
 	/**
