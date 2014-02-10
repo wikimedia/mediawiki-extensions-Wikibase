@@ -1,21 +1,27 @@
-.wbc-editpage {
+.wb-langlinks-link {
 	list-style: none none;
 	text-align: right;
 	padding-right: .5em !important;
+	line-height: 1.125em;
+	font-size: 0.75em;
+	float: right;
 }
 
-.wbc-editpage > a {
+.wbc-editpage > a,
+.wb-langlinks-link > a {
 	padding-left: 11px;
 	background: no-repeat left center;
 }
 
-.wbc-editpage > a:link, .wbc-editpage > a:visited {
+.wbc-editpage > a:link, .wbc-editpage > a:visited,
+.wb-langlinks-link > a:link, .wb-langlinks-link > a:visited {
 	/* @embed */
 	background-image: url(images/WBC-Asset-Pencil.png);
 	color: #797979 !important;
 }
 
-.wbc-editpage > a:hover {
+.wbc-editpage > a:hover,
+.wb-langlinks-link > a:hover {
 	/* @embed */
 	background-image: url(images/WBC-Asset-Pencil-Hover.png);
 	color: #0645AD !important;
