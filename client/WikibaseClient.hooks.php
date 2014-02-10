@@ -2,6 +2,7 @@
 namespace Wikibase;
 
 use Action;
+use BaseTemplate;
 use ChangesList;
 use FormOptions;
 use IContextSource;
@@ -24,6 +25,8 @@ use StripState;
 use Title;
 use UnexpectedValueException;
 use User;
+use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
+use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\WikibaseClient;
@@ -431,26 +434,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Add the connected item prefixed id as a JS config variable, for gadgets etc.
-	 *
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
-	 *
-	 * @since 0.4
-	 *
-	 * @return bool
-	 */
-	public static function onBeforePageDisplayAddJsConfig( OutputPage &$out, Skin &$skin ) {
-		$prefixedId = $out->getProperty( 'wikibase_item' );
-
-		if ( $prefixedId !== null ) {
-			$out->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
-		}
-
-		return true;
-	}
-
-	/**
 	 * Adds css for the edit links sidebar link or JS to create a new item
 	 * or to link with an existing one.
 	 *
@@ -463,38 +446,19 @@ final class ClientHooks {
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		wfProfileIn( __METHOD__ );
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
-		$title = $out->getTitle();
-		$user = $skin->getContext()->getUser();
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		$namespaceChecker = new NamespaceChecker(
 			$settings->getSetting( 'excludeNamespaces' ),
 			$settings->getSetting( 'namespaces' )
 		);
 
-		if ( !$namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$out->addModules( 'wikibase.client.init' );
-		$actionName = Action::getActionName( $skin->getContext() );
-
-		if ( !$out->getLanguageLinks() && $actionName === 'view' && $title->exists() ) {
-			// Module with the sole purpose to hide #p-lang
-			// Needed as we can't do that in the regular CSS nor in JavaScript
-			// (as that only runs after the element initially appeared).
-			$out->addModules( 'wikibase.client.nolanglinks' );
-
-			if ( $settings->getSetting( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
-				// Add the JavaScript which lazy-loads the link item widget
-				// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
-				$out->addModules( 'wikibase.client.linkitem.init' );
-			}
-		}
+		$handler = new BeforePageDisplayHandler( $settings, $namespaceChecker );
+		$out = $handler->handle( $out, $skin );
 
 		wfProfileOut( __METHOD__ );
+
 		return true;
 	}
 
@@ -570,7 +534,7 @@ final class ClientHooks {
 
 		$siteGroup = $wikibaseClient->getSiteGroup();
 
-		$editLinkInjector = new RepoItemLinkGenerator(
+		$langLinkGenerator = new RepoItemLinkGenerator(
 			$namespaceChecker,
 			$repoLinker,
 			$entityIdParser,
@@ -585,10 +549,15 @@ final class ClientHooks {
 		$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
 		$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
 
-		$editLink = $editLinkInjector->getLink( $title, $action, $isAnon, $noExternalLangLinks, $prefixedId );
+		$editLink = $langLinkGenerator->getLink( $title, $action, $isAnon, $noExternalLangLinks, $prefixedId );
 
-		if ( is_array( $editLink ) ) {
-			$template->data['language_urls'][] = $editLink;
+		// there will be no link in some situations, like add links widget disabled
+		if ( $editLink ) {
+			$template->set( 'wbeditlanglinks', $editLink );
+		}
+
+		if ( $template->get( 'language_urls' ) === false && $title->exists() ) {
+			$template->set( 'language_urls', array() );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -796,5 +765,21 @@ final class ClientHooks {
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	/**
+	 * @param BaseTemplate $skinTemplate
+	 * @param string $name
+	 * @param string &$html
+	 *
+	 * @return boolean
+	 */
+	public static function onBaseTemplateAfterPortlet( BaseTemplate $skinTemplate, $name, &$html ) {
+		$handler = new BaseTemplateAfterPortletHandler();
+		$link = $handler->handle( $skinTemplate, $name );
+
+		if ( $link ) {
+			$html .= $link;
+		}
 	}
 }
