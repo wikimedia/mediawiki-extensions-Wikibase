@@ -9,7 +9,6 @@ use TestUser;
 use UsageException;
 use User;
 use Wikibase\EntityFactory;
-use Wikibase\Settings;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
@@ -20,10 +19,6 @@ use Wikibase\Settings;
  */
 abstract class WikibaseApiTestCase extends ApiTestCase {
 
-	protected static $usepost;
-	protected static $usetoken;
-	protected static $userights;
-
 	protected static $loginSession = null;
 	protected static $loginUser = null;
 	protected static $token = null;
@@ -32,10 +27,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		parent::setUp();
 
 		static $isSetup = false;
-
-		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 
 		ApiTestCase::$users['wbeditor'] = new TestUser(
 			'Apitesteditor',
@@ -126,9 +117,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	public function doTestQueryExceptions( $params, $exception ) {
 		try{
 			if( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ) {
-				if ( !self::$usetoken ) {
-					$this->markTestSkipped( "tokens disabled" );
-				}
 				$this->doApiRequest( $params );
 			} else {
 				$this->doApiRequestWithToken( $params );
