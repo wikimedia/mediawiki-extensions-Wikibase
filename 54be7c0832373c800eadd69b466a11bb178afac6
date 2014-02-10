@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_000b0d27",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-10T22:13:56Z",
+      "side": 1,
+      "message": "Scary to see this kind of checks happen in different places of our presentation layer... Likely we will miss something like this. (Does not affect this commit)",
+      "revId": "54be7c0832373c800eadd69b466a11bb178afac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_c02be576",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-10T22:13:56Z",
+      "side": 1,
+      "message": "Duplication with ModifyEntity and possibly other places. Plus this is a huge OCP violation. If we start using query entities, we will have a problem on all these places. If you can put this into its own class and use that at all these places, even if it is a silly class, still reduces the stuff we will need to poke at later.",
+      "revId": "54be7c0832373c800eadd69b466a11bb178afac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
