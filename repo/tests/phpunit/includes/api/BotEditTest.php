@@ -51,25 +51,6 @@ class BotEditTest extends WikibaseApiTestCase {
 		$this->login( 'wbbot' );
 	}
 
-	/**
-	 * This initiates a cascade that fails if there are no
-	 * production-like environment
-	 *
-	 * WARNING: This should always be run before any other tests that depend on it...
-	 */
-	public function testTokensAndRights() {
-		// check if there is a production-like environment available
-		if ( !parent::$usetoken || !parent::$userights ) {
-			$this->markTestSkipped(
-				"The current setup does not include use of tokens or user rights"
-			);
-		}
-		// make sure execution pass through at least one assertion
-		else {
-			$this->assertTrue( true, "Make phpunit happy" );
-		}
-	}
-
 	public static function provideData() {
 		return array(
 			array(//0
@@ -114,7 +95,6 @@ class BotEditTest extends WikibaseApiTestCase {
 
 	/**
 	 * @dataProvider provideData
-	 * @depends testTokensAndRights
 	 */
 	public function testBotEdits( $params, $expected ) {
 		// -- do the request --------------------------------------------------
