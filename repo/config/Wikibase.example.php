@@ -87,38 +87,14 @@ $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUER
 // user can edit everything. An other interesting alternative is to let the anonymous user
 // do everything except creating items and properties and setting rank.
 // First block sets all rights for anonymous to false, that is they have no rights.
-$wgGroupPermissions['*']['item-override']	= false;
-$wgGroupPermissions['*']['item-create']		= false;
-$wgGroupPermissions['*']['item-remove']		= false;
-$wgGroupPermissions['*']['item-merge']		= false;
-$wgGroupPermissions['*']['property-override']	= false;
+$wgGroupPermissions['*']['item-term']			= false;
+$wgGroupPermissions['*']['item-merge']			= false;
+$wgGroupPermissions['*']['property-term']		= false;
 $wgGroupPermissions['*']['property-create']		= false;
-$wgGroupPermissions['*']['property-remove']		= false;
-$wgGroupPermissions['*']['alias-update']	= false;
-$wgGroupPermissions['*']['alias-remove']	= false;
-$wgGroupPermissions['*']['sitelink-remove']	= false;
-$wgGroupPermissions['*']['sitelink-update']	= false;
-$wgGroupPermissions['*']['linktitles-update']	= false;
-$wgGroupPermissions['*']['label-remove']	= false;
-$wgGroupPermissions['*']['label-update']	= false;
-$wgGroupPermissions['*']['description-remove']	= false;
-$wgGroupPermissions['*']['description-update']	= false;
 // Second block sets all rights for anonymous to true, that is they hold the rights.
-$wgGroupPermissions['user']['item-override']	= true;
-$wgGroupPermissions['user']['item-create']		= true;
-$wgGroupPermissions['user']['item-remove']		= true;
-$wgGroupPermissions['user']['item-merge']		= true;
-$wgGroupPermissions['user']['property-override']	= true;
+$wgGroupPermissions['user']['item-term']			= true;
+$wgGroupPermissions['user']['item-merge']			= true;
+$wgGroupPermissions['user']['property-term']		= true;
 $wgGroupPermissions['user']['property-create']		= true;
-$wgGroupPermissions['user']['property-remove']		= true;
-$wgGroupPermissions['user']['alias-update']	= true;
-$wgGroupPermissions['user']['alias-remove']	= true;
-$wgGroupPermissions['user']['sitelink-remove']	= true;
-$wgGroupPermissions['user']['sitelink-update']	= true;
-$wgGroupPermissions['user']['linktitles-update']	= true;
-$wgGroupPermissions['user']['label-remove']	= true;
-$wgGroupPermissions['user']['label-update']	= true;
-$wgGroupPermissions['user']['description-remove']	= true;
-$wgGroupPermissions['user']['description-update']	= true;
 
 */

@@ -7,6 +7,7 @@ use DataValues\DataValue;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
+use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 

@@ -76,13 +76,12 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-		$type = $entityContent->getEntity()->getType();
 		$exists = $entityContent->getTitle()->exists();
-		if( !$exists ){
+		if( !$exists ) {
 			$permissions[] = 'createpage';
-			$permissions[] = $type . '-create';
-		} else {
-			$permissions[] = $type . '-override';
+			if( $entityContent->getEntity()->getType() === 'property'  ) {
+				$permissions[] = 'property-create';
+			}
 		}
 		return $permissions;
 	}
