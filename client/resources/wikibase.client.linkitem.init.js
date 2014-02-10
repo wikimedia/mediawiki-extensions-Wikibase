@@ -58,7 +58,7 @@
 			// This will fail horribly w/o CORS support on WMF-like setups (different domains for repo and client)
 			return;
 		}
-		$( '.wbc-editpage' ).eq( 0 )
+		$( '.wb-langlinks-link-add' ).eq( 0 )
 		.empty()
 		.append(
 			$( '<a>' )
