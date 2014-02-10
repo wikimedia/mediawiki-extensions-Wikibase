@@ -2,6 +2,7 @@
 namespace Wikibase;
 
 use Action;
+use BaseTemplate;
 use ChangesList;
 use FormOptions;
 use IContextSource;
@@ -478,10 +479,14 @@ final class ClientHooks {
 			return true;
 		}
 
-		$out->addModules( 'wikibase.client.init' );
+		// styles are not appropriate for cologne blue and should leave styling up to other skins, if exist
+		if ( in_array( $skin->getSkinName(), array( 'vector', 'monobook', 'modern' ) ) ) {
+			$out->addModules( 'wikibase.client.init' );
+		}
+
 		$actionName = Action::getActionName( $skin->getContext() );
 
-		if ( !$out->getLanguageLinks() && $actionName === 'view' && $title->exists() ) {
+		if ( !$out->getProperty( 'noexternallanglinks' ) && $actionName === 'view' && $title->exists() ) {
 			// Module with the sole purpose to hide #p-lang
 			// Needed as we can't do that in the regular CSS nor in JavaScript
 			// (as that only runs after the element initially appeared).
@@ -588,7 +593,12 @@ final class ClientHooks {
 		$editLink = $editLinkInjector->getLink( $title, $action, $isAnon, $noExternalLangLinks, $prefixedId );
 
 		if ( is_array( $editLink ) ) {
-			$template->data['language_urls'][] = $editLink;
+			$template->set( 'wbeditlanglinks', $editLink );
+		}
+
+		// displays "other languages" section
+		if ( $template->get( 'language_urls' ) === false ) {
+			$template->set( 'language_urls', array() );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -795,6 +805,35 @@ final class ClientHooks {
 		}
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * @param BaseTemplate $skinTemplate
+	 * @param string $name
+	 * @param string &$html
+	 *
+	 * @return boolean
+	 */
+	public static function onBaseTemplateAfterPortlet( BaseTemplate $skinTemplate, $name, &$html ) {
+		if ( $name === 'lang' ) {
+			$editLink = $skinTemplate->get( 'wbeditlanglinks' );
+
+			if ( $editLink ) {
+				$html = '<span class="wb-langlinks-' . $editLink['action']  . ' wb-langlinks-link"><a';
+
+				unset( $editLink['action'] );
+
+				foreach( $editLink as $key => $value ) {
+					if ( $key !== 'text' ) {
+						$html .= " $key='$value'";
+					}
+				}
+
+				$html .='>' . $editLink['text'] . '</a></span>';
+			}
+		}
+
 		return true;
 	}
 }
