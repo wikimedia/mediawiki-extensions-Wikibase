@@ -34,22 +34,23 @@
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
 			var labelEditTool = new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] ),
-				editableLabel = labelEditTool.getValues( true )[0]; // [0] will always be set
+				editableLabel = labelEditTool.getValues( true )[0], // [0] will always be set
+				fn = function( event, origin ) {
+					// Limit the global stopItemPageEditMode event to that element
+					if ( event.type !== 'stopItemPageEditMode' || origin === editableLabel ) {
+						var title = editableLabel.isEmpty()
+							? mw.config.get( 'wgTitle' )
+							: editableLabel.getValue()[0];
 
-			// make sure we update the 'title' tag of the page when label changes
-			editableLabel.on( 'afterStopEditing', function() {
-				var value;
+						// update 'title' tag
+						$( 'title' ).text( mw.msg( 'pagetitle', title ) );
+					}
+				};
 
-				if( editableLabel.isEmpty() ) {
-					value = mw.config.get( 'wgTitle' );
-				} else {
-					value = editableLabel.getValue()[0];
-				}
-				value += ' - ' + mw.config.get( 'wgSiteName' );
-
-				// update 'title' tag
-				$( 'html title' ).text( value );
-			} );
+			editableLabel.getSubject().on( 'eachchange', fn );
+			// Can't use afterStopEditing because it does not fire on cancel
+			// but this is needed to reset the title
+			$( wb ).on( 'stopItemPageEditMode', fn );
 		}
 
 		// add an edit tool for all properties in the data view:
@@ -233,9 +234,7 @@
 						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
 					} ).appendTo( $message );
 
-				var gravity = ( options && options.wbCopyrightWarningGravity )
-					? options.wbCopyrightWarningGravity
-					: 'nw';
+				var gravity = ( options && options.wbCopyrightWarningGravity ) || 'nw';
 
 				// Tooltip gets its own anchor since other elements might have their own tooltip.
 				// we don't even have to add this new toolbar element to the toolbar, we only use it
@@ -277,11 +276,43 @@
 				$messageAnchor.data( 'wbtooltip' ).show();
 
 				// destroy tooltip after edit mode gets closed again:
-				$( wb ).one( 'stopItemPageEditMode', function( event ) {
+				$( wb ).one( 'stopItemPageEditMode', function( event, origin ) {
 					if( $messageAnchor.data( 'wbtooltip' ) !== undefined ) {
 						$messageAnchor.data( 'wbtooltip' ).degrade( true );
 					}
 				} );
+			}
+		} );
+
+		// Check if the watch link (star in the Vector skin) needs to be updated after an edit
+		$( wb ).on( 'stopItemPageEditMode', function( event, origin, options ) {
+			// Skip if the save parameter explicitly is false, the module isn't loaded
+			// or the user does not have "watch by default" enabled anyway
+			if ( ( !options || options.save !== false ) &&
+				mw.page && mw.page.watch && mw.page.watch.updateWatchLink &&
+				mw.user.options.get( 'watchdefault' ) ) {
+				// All four supported skins are using the same ID, the other selectors
+				// in mediawiki.page.watch.ajax.js are undocumented and probably legacy stuff
+				var $link = $( '#ca-watch a' );
+				// Skip if the page is already watched and there is no "watch this page" link
+				// The exposed function may have failed in older versions if no link was found
+				if ( $link.length ) {
+					mw.page.watch.updateWatchLink( $link, 'watch', 'loading' );
+					var api = new mw.Api();
+					var pageid = mw.config.get( 'wgArticleId' );
+					api.get( {
+						'action': 'query',
+						'prop': 'info',
+						'inprop': 'watched',
+						'pageids': pageid
+					} ).done( function( data ) {
+						var watched = data.query && data.query.pages[pageid] &&
+							data.query.pages[pageid].watched !== undefined;
+						mw.page.watch.updateWatchLink( $link, watched ? 'unwatch' : 'watch' );
+					} ).fail( function() {
+						mw.page.watch.updateWatchLink( $link, 'watch' );
+					} );
+				}
 			}
 		} );
 

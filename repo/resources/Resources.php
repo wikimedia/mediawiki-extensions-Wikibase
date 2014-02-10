@@ -37,6 +37,7 @@ return call_user_func( function() {
 				'wikibase.ui.scrapeFormattedValues',
 			),
 			'messages' => array(
+				'pagetitle',
 				'wikibase-statements',
 				'wikibase-copyrighttooltip-acknowledge',
 				'wikibase-anonymouseditwarning',
