@@ -5,6 +5,7 @@ namespace Tests\Wikibase\DataModel;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -22,6 +23,12 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewClaimSerializer() {
 		$this->assertTrue( $this->buildSerializerFactory()->newClaimSerializer()->isSerializerFor(
 			new Claim( new PropertyNoValueSnak( 42 ) )
+		) );
+	}
+
+	public function testNewReferencesSerializer() {
+		$this->assertTrue( $this->buildSerializerFactory()->newReferencesSerializer()->isSerializerFor(
+			new ReferenceList()
 		) );
 	}
 

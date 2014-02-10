@@ -5,6 +5,7 @@ namespace Wikibase\DataModel;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
+use Wikibase\DataModel\Serializers\ReferencesSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\SnaksSerializer;
 
@@ -37,6 +38,15 @@ class SerializerFactory {
 	 */
 	public function newClaimSerializer() {
 		return new ClaimSerializer( $this->newSnakSerializer(), $this->newSnaksSerializer() );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize References objects.
+	 *
+	 * @return Serializer
+	 */
+	public function newReferencesSerializer() {
+		return new ReferencesSerializer( $this->newReferenceSerializer() );
 	}
 
 	/**

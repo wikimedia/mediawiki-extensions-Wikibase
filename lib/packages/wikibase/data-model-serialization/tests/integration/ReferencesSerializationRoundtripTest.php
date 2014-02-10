@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
 use Wikibase\DataModel\Deserializers\ReferencesDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
@@ -12,6 +13,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\References;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\ReferencesSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
@@ -24,7 +26,6 @@ use Wikibase\DataModel\Snak\SnakList;
  * @covers Wikibase\DataModel\Deserializers\ReferencesDeserializer
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */
 class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
@@ -32,18 +33,16 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider referencesProvider
 	 */
-	public function testReferenceSerializationRoundtrips( References $reference ) {
-		$serializer = new ReferencesSerializer( new ReferenceSerializer(
-			new SnaksSerializer( new SnakSerializer( new DataValueSerializer() ) )
-		) );
-		$deserializer = new ReferencesDeserializer( new ReferenceDeserializer( new SnaksDeserializer( new SnakDeserializer(
+	public function testReferenceSerializationRoundtrips( References $references ) {
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(),
 			new BasicEntityIdParser()
-		) ) ) );
+		);
 
-		$serialization = $serializer->serialize( $reference );
-		$newReferences = $deserializer->deserialize( $serialization );
-		$this->assertEquals( $reference, $newReferences );
+		$serialization = $serializerFactory->newReferencesSerializer()->serialize( $references );
+		$newReferences = $deserializerFactory->newReferencesDeserializer()->deserialize( $serialization );
+		$this->assertEquals( $references, $newReferences );
 	}
 
 	public function referencesProvider() {

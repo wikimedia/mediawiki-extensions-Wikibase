@@ -4,6 +4,7 @@ namespace Wikibase\DataModel;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
+use Wikibase\DataModel\Deserializers\ReferencesDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnaksDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -35,6 +36,15 @@ class DeserializerFactory {
 	public function __construct( Deserializer $dataValueDeserializer, EntityIdParser $entityIdParser ) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->entityIdParser = $entityIdParser;
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize References objects.
+	 *
+	 * @return Deserializer
+	 */
+	public function newReferencesDeserializer() {
+		return new ReferencesDeserializer( $this->newReferenceDeserializer() );
 	}
 
 	/**
