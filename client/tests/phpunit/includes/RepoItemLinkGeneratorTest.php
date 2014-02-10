@@ -58,12 +58,14 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 		$href = 'http://www.example.com/wiki/Q9000#sitelinks-wikipedia';
 
 		$addLinksLink = array(
+			'action' => 'add',
 			'text' => '',
 			'id' => 'wbc-linkToItem',
 			'class' => 'wbc-editpage wbc-nolanglinks'
 		);
 
 		$editLinksLink = array(
+			'action' => 'edit',
 			'href' => $href,
 			'text' => 'Edit links',
 			'title' => 'Edit interlanguage links',
