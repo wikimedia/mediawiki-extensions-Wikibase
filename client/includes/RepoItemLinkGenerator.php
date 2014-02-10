@@ -122,6 +122,7 @@ class RepoItemLinkGenerator {
 		$fragment = '#sitelinks-' . htmlspecialchars( $this->siteGroup, ENT_QUOTES );
 
 		$link = array(
+			'action' => 'edit',
 			'href' => $this->repoLinker->getEntityUrl( $entityId ) . $fragment,
 			'text' => wfMessage( 'wikibase-editlinks' )->text(),
 			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
@@ -140,6 +141,7 @@ class RepoItemLinkGenerator {
 	 */
 	protected function getAddLinksLink() {
 		$link = array(
+			'action' => 'add',
 			'text' => '',
 			'id' => 'wbc-linkToItem',
 			'class' => 'wbc-editpage wbc-nolanglinks',

@@ -10,7 +10,11 @@ return call_user_func( function() {
 	return array(
 		'wikibase.client.init' => $moduleTemplate + array(
 			'position' => 'top',
-			'styles' => 'wikibase.client.css',
+			'skinStyles' => array(
+				'modern' => 'wikibase.client.css',
+				'monobook' => 'wikibase.client.css',
+				'vector' => 'wikibase.client.css',
+			),
 		),
 		'wikibase.client.nolanglinks' => $moduleTemplate + array(
 			'position' => 'top',
