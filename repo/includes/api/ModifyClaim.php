@@ -84,9 +84,15 @@ abstract class ModifyClaim extends ApiWikibase {
 
 	/**
 	 * @see ApiBase::isWriteMode
-	 * @return bool true
 	 */
 	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::mustBePosted
+	 */
+	public function mustBePosted() {
 		return true;
 	}
 
@@ -112,7 +118,6 @@ abstract class ModifyClaim extends ApiWikibase {
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-
 		$permissions[] = 'edit';
 		return $permissions;
 	}

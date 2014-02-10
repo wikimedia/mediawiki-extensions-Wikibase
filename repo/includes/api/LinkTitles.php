@@ -47,7 +47,7 @@ class LinkTitles extends ApiWikibase {
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-		$permissions[] = 'linktitles-update';
+		$permissions[] = 'edit';
 		return $permissions;
 	}
 
@@ -208,6 +208,13 @@ class LinkTitles extends ApiWikibase {
 	 * @see \ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::mustBePosted
+	 */
+	public function mustBePosted() {
 		return true;
 	}
 

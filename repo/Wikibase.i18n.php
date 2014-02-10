@@ -429,38 +429,10 @@ to find out where it went.',
 	'content-model-wikibase-query' => 'Wikibase query',
 
 	// User rights
-	'right-item-override' => 'Overwrite items',
-	'right-item-create' => 'Create items',
-	'right-item-remove' => 'Delete items',
-	'right-property-override' => 'Overwrite properties',
+	'right-item-term' => 'Change item terms',
+	'right-item-merge' => 'Merge items',
+	'right-property-term' => 'Change property terms',
 	'right-property-create' => 'Create properties',
-	'right-property-remove' => 'Delete properties',
-	'right-alias-remove' => 'Remove aliases',
-	'right-alias-update' => 'Update aliases',
-	'right-sitelink-remove' => 'Remove site links',
-	'right-sitelink-update' => 'Update site links',
-	'right-linktitles-update' => 'Associate pages',
-	'right-label-remove' => 'Erase labels',
-	'right-label-update' => 'Update labels',
-	'right-description-remove' => 'Erase descriptions',
-	'right-description-update' => 'Update descriptions',
-
-	// User actions
-	'action-item-override' => 'overwrite items',
-	'action-item-create' => 'create items',
-	'action-item-remove' => 'delete items',
-	'action-property-override' => 'overwrite properties',
-	'action-property-create' => 'create properties',
-	'action-property-remove' => 'delete properties',
-	'action-alias-update' => 'update aliases',
-	'action-alias-remove' => 'remove aliases',
-	'action-sitelink-remove' => 'remove site links',
-	'action-sitelink-update' => 'update site links',
-	'action-linktitles-update' => 'associate pages',
-	'action-label-remove' => 'erase labels',
-	'action-label-update' => 'update labels',
-	'action-description-remove' => 'erase descriptions',
-	'action-description-update' => 'update descriptions',
 
 	// TimeFormats
 	'wikibase-time-precision-Gannum' => 'in $1 billion years',
@@ -1302,55 +1274,14 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-property' => 'The name for Wikibase property content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-query' => 'The name for Wikibase query content model, used when describing what type of content a page contains.',
-	'right-item-override' => '{{doc-right|item-override}}
-Right to alter the contents of [[d:Wikidata:Glossary#Item|items]].',
-	'right-item-create' => '{{doc-right|item-create}}
-Right to create new [[d:Wikidata:Glossary#Item|items]].',
-	'right-item-remove' => '{{doc-right|item-remove}}
-Right to delete [[d:Wikidata:Glossary#Item|items]].
-{{Identical|Delete item}}',
-	'right-property-override' => '{{doc-right|property-override}}
-Right to alter the contents of [[d:Wikidata:Glossary#Property|properties]].',
 	'right-property-create' => '{{doc-right|property-create}}
 Right to create new [[d:Wikidata:Glossary#Property|properties]].',
-	'right-property-remove' => '{{doc-right|property-remove}}
-Right to delete [[d:Wikidata:Glossary#Property|properties]].
-{{Identical|Delete property}}',
-	'right-alias-remove' => '{{doc-right|alias-remove}}
-Right to remove [[d:Wikidata:Glossary#Aliases|aliases]] from [[d:Wikidata:Glossary#Entity|entities]].',
-	'right-alias-update' => '{{doc-right|alias-update}}
-Right to add new [[d:Wikidata:Glossary#Aliases|aliases]] to [[d:Wikidata:Glossary#Entity|entities]] and to alter existing ones.',
-	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}
-Right to remove [[d:Wikidata:Glossary#Sitelink|sitelinks]] from [[d:Wikidata:Glossary#Item|items]].',
-	'right-sitelink-update' => '{{doc-right|sitelink-update}}
-Right to add [[d:Wikidata:Glossary#Sitelinks|sitelinks]] to [[d:Wikidata:Glossary#Item|items]] and to alter existing ones.',
-	'right-linktitles-update' => '{{doc-right|linktitles-update}}
-Right to associate two [[d:Wikidata:Glossary#Page|pages]] on two different [[d:Wikidata:Glossary#Site|sites]] with [[d:Wikidata:Glossary#Item|items]].',
-	'right-label-remove' => '{{doc-right|label-remove}}
-Right to erase [[d:Wikidata:Glossary#Label|labels]] of [[d:Wikidata:Glossary#Entity|entities]].',
-	'right-label-update' => '{{doc-right|label-update}}
-Right to set and alter [[d:Wikidata:Glossary#Label|labels]] of [[d:Wikidata:Glossary#Entity|entities]].',
-	'right-description-remove' => '{{doc-right|description-remove}}
-Right to erase [[d:Wikidata:Glossary#Description|descriptions]] of [[d:Wikidata:Glossary#Entity|entities]].',
-	'right-description-update' => '{{doc-right|description-update}}
-Right to set and alter [[d:Wikidata:Glossary#Description|descriptions]] of [[d:Wikidata:Glossary#Entity|entities]].',
-	'action-item-override' => '{{doc-action|item-override}}',
-	'action-item-create' => '{{doc-action|item-create}}',
-	'action-item-remove' => '{{doc-action|item-remove}}
-{{Identical|Delete item}}',
-	'action-property-override' => '{{doc-action|property-override}}',
-	'action-property-create' => '{{doc-action|property-create}}',
-	'action-property-remove' => '{{doc-action|property-remove}}
-{{Identical|Delete property}}',
-	'action-alias-update' => '{{doc-action|alias-update}}',
-	'action-alias-remove' => '{{doc-action|alias-remove}}',
-	'action-sitelink-remove' => '{{doc-action|sitelink-remove}}',
-	'action-sitelink-update' => '{{doc-action|sitelink-update}}',
-	'action-linktitles-update' => '{{doc-action|linktitles-update}}',
-	'action-label-remove' => '{{doc-action|label-remove}}',
-	'action-label-update' => '{{doc-action|label-update}}',
-	'action-description-remove' => '{{doc-action|description-remove}}',
-	'action-description-update' => '{{doc-action|description-update}}',
+	'right-item-merge' => '{{doc-right|item-merge}}
+Right to alter the contents of [[d:Wikidata:Glossary#Item|items]].',
+	'right-item-term' => '{{doc-right|item-term}}
+Right to alter the [[d:Wikidata:Glossary#Term|terms]] of [[d:Wikidata:Glossary#Item|items]].',
+	'right-property-term' => '{{doc-right|property-term}}
+Right to alter the [[d:Wikidata:Glossary#Term|terms]] of [[d:Wikidata:Glossary#Item|items]].',
 	'wikibase-time-precision-Gannum' => 'Used to indicate a timespan in $1 number of billions of years
 {{Related|Wikibase-time-precision}}',
 	'wikibase-time-precision-Mannum' => 'Used to indicate a timespan in $1 number of millions of years
