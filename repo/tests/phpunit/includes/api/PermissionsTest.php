@@ -68,13 +68,8 @@ class PermissionsTest extends PermissionsTestCase {
 		) );
 	}
 
-	public function provideGetEntitiesPermissions() {
-		$permissions = $this->provideReadPermissions();
-		return $permissions;
-	}
-
 	/**
-	 * @dataProvider provideGetEntitiesPermissions
+	 * @dataProvider provideReadPermissions
 	 */
 	public function testGetEntities( $permissions, $expectedError ) {
 		$params = array(
@@ -84,7 +79,7 @@ class PermissionsTest extends PermissionsTestCase {
 		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
-	public function provideCreateItemPermissions() {
+	public function provideCreateEntityPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( //5
@@ -95,19 +90,11 @@ class PermissionsTest extends PermissionsTestCase {
 			'permissiondenied' // error
 		);
 
-		$permissions[] = array( //6
-			array( // permissions
-				'*'    => array( 'item-create' => false ),
-				'user' => array( 'item-create' => false )
-			),
-			'permissiondenied' // error
-		);
-
 		return $permissions;
 	}
 
 	/**
-	 * @dataProvider provideCreateItemPermissions
+	 * @dataProvider provideCreateEntityPermissions
 	 */
 	public function testCreateItem( $permissions, $expectedError ) {
 		$itemData = array(
@@ -122,40 +109,13 @@ class PermissionsTest extends PermissionsTestCase {
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
-	public function provideSetSiteLinkPermissions() {
-		$permissions = $this->provideEditPermissions();
-
-		$permissions[] = array( #5
-			array( # permissions
-				'*'    => array( 'sitelink-update' => false ),
-				'user' => array( 'sitelink-update' => false )
-			),
-			'permissiondenied' # error
-		);
-
-		return $permissions;
-	}
-
-	/**
-	 * @dataProvider provideSetSiteLinkPermissions
-	 */
-	public function testSetSiteLink( $permissions, $expectedError ) {
-		$params = array(
-			'id' => EntityTestHelper::getId( 'Oslo' ),
-			'linksite' => 'enwiki',
-			'linktitle' => 'Oslo',
-		);
-
-		$this->doPermissionsTest( 'wbsetsitelink', $params, $permissions, $expectedError );
-	}
-
-	public function provideSetLabelPermissions() {
+	public function provideCreatePropertyPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( //5
 			array( // permissions
-				'*'    => array( 'label-update' => false ),
-				'user' => array( 'label-update' => false )
+				'*'    => array( 'property-create' => false ),
+				'user' => array( 'property-create' => false )
 			),
 			'permissiondenied' // error
 		);
@@ -164,7 +124,38 @@ class PermissionsTest extends PermissionsTestCase {
 	}
 
 	/**
-	 * @dataProvider provideSetLabelPermissions
+	 * @dataProvider provideCreatePropertyPermissions
+	 */
+	public function testCreateProperty( $permissions, $expectedError ) {
+		$itemData = array(
+			'labels' => array("en" => array( "language" => 'en', "value" => 'Testttttttt' ) ),
+			'datatype' => 'string',
+		);
+
+		$params = array(
+			'data' => FormatJson::encode( $itemData ),
+			'new' => 'property',
+		);
+
+		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
+	}
+
+	public function provideItemTermPermissions() {
+		$permissions = $this->provideEditPermissions();
+
+		$permissions[] = array( //5
+			array( // permissions
+				'*'    => array( 'item-term' => false ),
+				'user' => array( 'item-term' => false )
+			),
+			'permissiondenied' // error
+		);
+
+		return $permissions;
+	}
+
+	/**
+	 * @dataProvider provideItemTermPermissions
 	 */
 	public function testSetLabel( $permissions, $expectedError ) {
 		$params = array(
@@ -176,22 +167,8 @@ class PermissionsTest extends PermissionsTestCase {
 		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError );
 	}
 
-	public function provideSetDescriptionPermissions() {
-		$permissions = $this->provideEditPermissions();
-
-		$permissions[] = array( //5
-			array( // permissions
-				'*'    => array( 'description-update' => false ),
-				'user' => array( 'description-update' => false )
-			),
-			'permissiondenied' // error
-		);
-
-		return $permissions;
-	}
-
 	/**
-	 * @dataProvider provideSetDescriptionPermissions
+	 * @dataProvider provideItemTermPermissions
 	 */
 	public function testSetDescription( $permissions, $expectedError ) {
 		$params = array(

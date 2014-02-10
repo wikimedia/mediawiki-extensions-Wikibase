@@ -40,16 +40,6 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::getRequiredPermissions()
-	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-
-		$permissions[] = 'sitelink-' . ( $this->shouldRemove( $params ) ? 'remove' : 'update' );
-		return $permissions;
-	}
-
-	/**
 	 * @see ModifyEntity::getEntityContentFromApiParams
 	 */
 	protected function getEntityContentFromApiParams( array $params ) {
