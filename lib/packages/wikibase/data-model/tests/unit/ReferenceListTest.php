@@ -20,17 +20,11 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
-	public function getInstanceClass() {
-		return '\Wikibase\ReferenceList';
-	}
-
 	public function instanceProvider() {
-		$class = $this->getInstanceClass();
-
 		$instances = array();
 
 		foreach ( $this->getConstructorArg() as $arg ) {
-			$instances[] = array( new $class( $arg ) );
+			$instances[] = array( new ReferenceList( $arg ) );
 		}
 
 		return $instances;
@@ -52,20 +46,17 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function referenceListProvider() {
-		$class = $this->getInstanceClass();
-
-		return array(
-			array( new $class( $this->getElementInstances() ) )
-		);
-	}
-
 	/**
 	 * @dataProvider instanceProvider
 	 *
 	 * @param ReferenceList $array
 	 */
 	public function testHasReferenceBeforeRemoveButNotAfter( ReferenceList $array ) {
+		if ( $array->count() === 0 ) {
+			$this->assertTrue( true );
+			return;
+		}
+
 		/**
 		 * @var Reference $hashable
 		 */
@@ -157,7 +148,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider referenceListProvider
+	 * @dataProvider instanceProvider
 	 *
 	 * @param ReferenceList $array
 	 */
@@ -204,9 +195,16 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param ReferenceList $array
 	 */
-	public function testGetHash( ReferenceList $array ) {
+	public function testGetHashReturnsString( ReferenceList $array ) {
 		$this->assertInternalType( 'string', $array->getValueHash() );
+	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param ReferenceList $array
+	 */
+	public function testGetHashValueIsTheSameForClone( ReferenceList $array ) {
 		$copy = ReferenceList::newFromArray( $array->toArray() );
 		$this->assertEquals( $array->getValueHash(), $copy->getValueHash() );
 	}
