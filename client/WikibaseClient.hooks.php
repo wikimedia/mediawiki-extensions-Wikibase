@@ -2,6 +2,7 @@
 namespace Wikibase;
 
 use Action;
+use BaseTemplate;
 use ChangesList;
 use FormOptions;
 use IContextSource;
@@ -24,6 +25,7 @@ use StripState;
 use Title;
 use UnexpectedValueException;
 use User;
+use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\WikibaseClient;
@@ -478,10 +480,14 @@ final class ClientHooks {
 			return true;
 		}
 
-		$out->addModules( 'wikibase.client.init' );
+		// styles are not appropriate for cologne blue and should leave styling up to other skins, if exist
+		if ( in_array( $skin->getSkinName(), array( 'vector', 'monobook', 'modern' ) ) ) {
+			$out->addModules( 'wikibase.client.init' );
+		}
+
 		$actionName = Action::getActionName( $skin->getContext() );
 
-		if ( !$out->getLanguageLinks() && $actionName === 'view' && $title->exists() ) {
+		if ( !$out->getProperty( 'noexternallanglinks' ) && $actionName === 'view' && $title->exists() ) {
 			// Module with the sole purpose to hide #p-lang
 			// Needed as we can't do that in the regular CSS nor in JavaScript
 			// (as that only runs after the element initially appeared).
@@ -570,7 +576,7 @@ final class ClientHooks {
 
 		$siteGroup = $wikibaseClient->getSiteGroup();
 
-		$editLinkInjector = new RepoItemLinkGenerator(
+		$langLinkGenerator = new RepoItemLinkGenerator(
 			$namespaceChecker,
 			$repoLinker,
 			$entityIdParser,
@@ -585,10 +591,16 @@ final class ClientHooks {
 		$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
 		$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
 
-		$editLink = $editLinkInjector->getLink( $title, $action, $isAnon, $noExternalLangLinks, $prefixedId );
+		$editLink = $langLinkGenerator->getLink( $title, $action, $isAnon, $noExternalLangLinks, $prefixedId );
 
-		if ( is_array( $editLink ) ) {
-			$template->data['language_urls'][] = $editLink;
+		// there will be no link in some situations, like add links widget disabled
+		if ( $editLink ) {
+			$template->set( 'wbeditlanglinks', $editLink );
+		}
+
+		// displays "other languages" section
+		if ( $template->get( 'language_urls' ) === false ) {
+			$template->set( 'language_urls', array() );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -796,5 +808,21 @@ final class ClientHooks {
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	/**
+	 * @param BaseTemplate $skinTemplate
+	 * @param string $name
+	 * @param string &$html
+	 *
+	 * @return boolean
+	 */
+	public static function onBaseTemplateAfterPortlet( BaseTemplate $skinTemplate, $name, &$html ) {
+		$handler = new BaseTemplateAfterPortletHandler();
+		$link = $handler->handle( $skinTemplate, $name );
+
+		if ( $link ) {
+			$html = $link;
+		}
 	}
 }
