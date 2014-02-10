@@ -4,11 +4,9 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
-use Wikibase\DataModel\Deserializers\SnakDeserializer;
-use Wikibase\DataModel\Deserializers\SnaksDeserializer;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Serializers\SnakSerializer;
-use Wikibase\DataModel\Serializers\SnaksSerializer;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -28,14 +26,14 @@ class SnaksSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider snaksProvider
 	 */
 	public function testSnakSerializationRoundtrips( Snaks $snak ) {
-		$serializer = new SnaksSerializer( new SnakSerializer( new DataValueSerializer() ) );
-		$deserializer = new SnaksDeserializer( new SnakDeserializer(
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(),
 			new BasicEntityIdParser()
-		) );
+		);
 
-		$serialization = $serializer->serialize( $snak );
-		$newSnaks = $deserializer->deserialize( $serialization );
+		$serialization = $serializerFactory->newSnaksSerializer()->serialize( $snak );
+		$newSnaks = $deserializerFactory->newSnaksDeserializer()->deserialize( $serialization );
 		$this->assertEquals( $snak, $newSnaks );
 	}
 
