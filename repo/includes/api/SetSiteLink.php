@@ -167,7 +167,7 @@ class SetSiteLink extends ModifyEntity {
 		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
 
 		// Experimental setting of badges in api
-		// @todo remove experimental once JS UI is in place, (also remove the experimental examples below)
+		// @todo remove experimental once JS UI is in place, (also remove the experimental examples below and TESTS)
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$experimentalParams = array(
 				'badges' => array(
@@ -206,7 +206,7 @@ class SetSiteLink extends ModifyEntity {
 	public function getParamDescription() {
 
 		// Experimental setting of badges in api
-		// @todo remove experimental once JS UI is in place, (also remove the experimental examples below)
+		// @todo remove experimental once JS UI is in place, (also remove the experimental examples below and tests)
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$experimentalParams = array(
 				'badges' => 'The IDs of items to be set as badges. They will replace the current ones. If this parameter is not set, the badges will not be changed',
@@ -245,7 +245,7 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	protected function getExamples() {
 		// Experimental setting of badges in api
-		// @todo remove experimental once JS UI is in place, (also remove the experimental examples below)
+		// @todo remove experimental once JS UI is in place, (also remove the experimental tests)
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 
 			$experimentalExamples = array(

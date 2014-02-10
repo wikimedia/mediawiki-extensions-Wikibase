@@ -45,10 +45,12 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	private static $otherItemId;
 
 	public static function provideData() {
-		return array(
+		$badgesCases1 =  array(
 			array( //0 set new link using id
 				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'leipzig', 'badges' => '{gaItem}|{faItem}' ),
 				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Leipzig', 'badges' => array( '{gaItem}', '{faItem}' ) ) ) ) ),
+		);
+		$basicCases = array(
 			array( //1 set new link using sitelink
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => 'berlin' ),
 				'e' => array( 'value' => array( 'nowiki' => array( 'title' => 'Berlin', 'badges' => array() ) ), 'indb' => 5 ) ),
@@ -64,6 +66,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			array( //5 remove link using sitelink
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'nowiki', 'linktitle' => '' ),
 				'e' => array( 'value' => array(), 'indb' => 4 ) ),
+		);
+		$badgesCases2 = array(
 			array( //6 add badges to existing sitelink
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => '{faItem}|{gaItem}' ),
 				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{faItem}', '{gaItem}' ) ) ), 'indb' => 4 ) ),
@@ -89,10 +93,18 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'p' => array( 'handle' => 'Berlin', 'linksite' => 'svwiki' ),
 				'e' => array( 'value' => array(), 'indb' => 4 ) ),
 		);
+
+		// Experimental tests for setting of badges in api
+		// @todo remove experimental once enabled remove this and return all cases
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			return array_merge( $badgesCases1, $basicCases, $badgesCases2 );
+		} else {
+			return $basicCases;
+		}
 	}
 
 	public static function provideExceptionData() {
-		return array(
+		$basicCases = array(
 			array( //0 badtoken
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'linktitle' => 'testSetLiteLinkWithNoToken' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
@@ -111,6 +123,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			array( //5 testSetLiteLinkWithBadTargetSite
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'enwiktionary', 'linktitle' => 'Berlin' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
+		);
+		$badgesCases = array(
 			array( //6 bad badge id
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'abc|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
@@ -127,6 +141,14 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'badges' => '{gaItem}|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
 		);
+
+		// Experimental tests for setting of badges in api
+		// @todo remove experimental once enabled remove this and return all cases
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			return array_merge( $basicCases, $badgesCases );
+		} else {
+			return $basicCases;
+		}
 	}
 
 	public function setup() {
