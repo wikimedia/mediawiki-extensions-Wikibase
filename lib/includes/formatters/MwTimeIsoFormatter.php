@@ -183,7 +183,10 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	 */
 	private function getMessage( $key, $fullYear ) {
 		$message = new Message( $key );
-		$message->inLanguage( $this->language );
+		//FIXME: as the frontend can not parse the translated precisions we only want to present the ENGLISH for now
+		//once the frontend is using backend parsers we can switch the translation on
+		//$message->inLanguage( $this->language );
+		$message->inLanguage( new Language() );
 		$message->numParams( array( $fullYear ) );
 		return $message->text();
 	}
