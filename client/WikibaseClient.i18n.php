@@ -326,6 +326,7 @@ $messages['af'] = array(
 /** Arabic (العربية)
  * @author Abanima
  * @author Ali1
+ * @author Asaifm
  * @author Basharh
  * @author Meno25
  * @author OsamaK
@@ -366,6 +367,7 @@ $messages['ar'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 ويكيبيانات',
 	'wikibase-rc-show-wikidata-pref' => 'إظهار تعديلات ويكي بيانات في صفحة أحدث التغييرات',
 	'wikibase-rc-wikibase-edit-letter' => 'د',
+	'wikibase-unconnectedpages-submit' => 'اذهب',
 );
 
 /** Aramaic (ܐܪܡܝܐ)
@@ -2651,6 +2653,7 @@ $messages['lez'] = array(
  */
 $messages['lrc'] = array(
 	'wikibase-comment-sitelink-add' => 'هوم پیوند زون اضاف بیه:$1',
+	'wikibase-comment-sitelink-change' => 'هوم پیوند زون د $1 تا $2 آلشت بی',
 	'wikibase-comment-sitelink-remove' => 'هوم پیوند زون ورداشته بیه:$1',
 	'wikibase-linkitem-selectlink' => 'لطفن یه گل سیلجا و بلگه که شما میهایت د ای بلگه هوم پیوند با انتخاو بکید.',
 	'wikibase-linkitem-input-site' => 'زون:',

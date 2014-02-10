@@ -1921,7 +1921,7 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 * latitude – primera parte implícita (float, dms, dm, dd) de la cadena de coordenaes; la direición dase o col signu del prefixu o col sufixu N/S
 * longitude – segunda parte implícita (float, dms, dm, dd) de la cadena de coordenaes; la direición dase o col signu del prefixu o col sufixu E/W
 * altitude (opcional) – valor esplícitu (?) pa l\'altura sobre un planu de referencia; pal globu "Tierra" esti sedría\'l globu de referencia "WGS84"
-* globe (opcional) – valor de datos explícitu (?), dau como un cuerpu estelar que de mou predetermináu ye "Tierra" y llueu "WGS84"',
+* globe (opcional) – valor de datos explícitu (?), dau como un cuerpu estelar que de mou predetermináu ye "Tierra" y llueu "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Cantidá',
 	'wikibase-listdatatypes-quantity-body' => "Campu de datos lliteral pa una cantidá rellacionada con alguna clase d'unidá bien definida. La unidá concreta va nos valores de datos introducíos.
 * value – parte implícita de la cadena (el mapéu del prefixu d'unidá nun ta claru)
@@ -4006,7 +4006,7 @@ for at finde ud af, hvad der er sket med det.',
 * breddegrad – implicit første del (float, dms, dm, dd) af koordinatstrengen, retning er enten givet ved fortegn eller ved efterstillet N/S
 * længdegrad – implicit anden del (float, dms, dm, dd) af koordinatstrengen, retning er enten givet ved fortegn eller ved efterstillet E/W
 * højde (valgfrit) – eksplicit (?) værdi for højden over en referenceplanet, for kloden "jorden" ville det være "WGS84"-referencekloden
-* globe (valgfri) – eksplicit (?) dataværdi, givet som himmellegeme der som standard er sat til "Jorden" og derefter "WGS84"',
+* globe (valgfri) – eksplicit (?) dataværdi, givet som himmellegeme der som standard er sat til "Jorden" og derefter "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Kvantitet',
 	'wikibase-listdatatypes-quantity-body' => 'Bogstaveligt datafelt for en kvantitet, der relaterer sig til en veldefineret enhed. Den faktiske enhed indgår i de dataværdier, der indtastes.
 * værdi – implicit del af strengen (mapping af enhedspræfiks er uklart)
@@ -4391,7 +4391,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 * latitude – impliziter erster Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „N/S“ angegeben.
 * longitude – impliziter zweiter Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „O/W“ angegeben.
 * altitude (optional) – ausdrücklicher (?) Wert für die Höhe über einer Bezugsebene. Für den Globus „Erde“ ist der Bezugsglobus „WGS84“.
-* globe (optional) – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.',
+* globe (optional) – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Menge',
 	'wikibase-listdatatypes-quantity-body' => 'Literales Datenfeld für eine Menge, die sich auf eine Art klar definierte Einheit bezieht. Die tatsächliche Einheit geht in die Datenwerte, die eingegeben werden.
 * value – impliziter Teil der Zeichenkette (Mapping des Einheitspräfixes ist unklar).
@@ -6174,7 +6174,7 @@ $messages['fa'] = array(
 * عرض جغرافیایی - بخش اول مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (شمالی/جنوبی) مشخص می شود
 * طول جغرافیایی - بخش دوم مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (خاوری/باختریی) مشخص می شود
 * ارتفاع(اختیاری) - مقدار مشخص(؟)ارتفاع از سطح مرجع، برای کره "زمین" که کره مرجع آن "WGS84" است
-* کره(اختیاری) - مقداری مشخص(؟)که بر حسب جسم آسمانی تعیین شده، به صورت پیشفرض کره "زمین" و "WGS84" است',
+* کره(اختیاری) - مقداری مشخص(؟)که بر حسب جسم آسمانی تعیین شده، به صورت پیشفرض کره "زمین" و "WGS84" است', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'کمیت',
 	'wikibase-listdatatypes-quantity-body' => 'داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
 * مقدار - بخشی نامعلوم از رشته(اندازه گیری شده با پیشوندی نامعلوم)
@@ -6897,7 +6897,7 @@ ffirmation ajoutée}}',
 * latitude — première partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe ou par le N/S en suffixe
 * longitude – seconde partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe soit par le E/W en suffixe
 * altitude (facultatif) – valeur explicite (?) pour l’élévation au-dessus d’un plan de référence, pour le globe "Terre" ce serait le globe de référence "WGS84"
-* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"',
+* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Quantité',
 	'wikibase-listdatatypes-quantity-body' => 'Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.
 * value — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
@@ -7444,7 +7444,7 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 * latitude – primeira parte implícita (float, dms, dm, dd) da cadea de coordenadas; a dirección achégase mediante o signo en prefixo ou o sufixo N/S
 * longitude – segunda parte implícita (float, dms, dm, dd) da cadea de coordenadas; a dirección achégase mediante o signo en prefixo ou o sufixo E/W
 * altitude (opcional) – valor explícito (?) para a altura sobre un plano de referencia; para o globo "Terra" sería o globo de referencia "WGS84"
-* globe (opcional) – valor de datos explícito (?), dado como un corpo estelar; por defecto, é "Terra" e logo "WGS84"',
+* globe (opcional) – valor de datos explícito (?), dado como un corpo estelar; por defecto, é "Terra" e logo "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Cantidade',
 	'wikibase-listdatatypes-quantity-body' => 'Campo de datos literal para unha cantidade relacionada con algún tipo de unidade ben definida. A unidade real vai nos valores de datos introducidos.
 * value – parte implícita da cadea de texto (o mapeamento do prefixo da unidade non está claro)
@@ -9758,7 +9758,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 * latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
 * longitudine – implicito seconda parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti E/W
 * altitudine (facoltativo) – valore esplicito (?) per l\'altezza sopra un piano di riferimento, per il pianeta "Terra" dovrebbe essere il globo di riferimento "WGS84"
-* pianeta (facoltativo) – valore esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"',
+* pianeta (facoltativo) – valore esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Campo dati letterale per una quantità relativa ad un'unità ben definita. L'unità usata è uno dei dati inseriti.
 * valore - valore implicito della stringa (mappatura del prefisso dell'unità non è chiara)
@@ -10805,7 +10805,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 * latitude – 좌표 문자열의 첫 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 N/S로 주어집니다
 * longitude – 좌표 문자열의 두 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 E/W로 주어집니다
 * altitude (선택 사항) – 주어진 참조면에서의 높이를 나타낸 명시적인(?) 값으로, "지구" 타원체에 대해서는 "WGS84" 참조 타원체가 사용됩니다
-* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다',
+* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '수량',
 	'wikibase-listdatatypes-quantity-body' => '어떤 명확하게 정의된 단위에 결합된 양을 나타내는 리터럴 데이터 필드입니다. 실제 단위는 입력된 데이터 값에 포함되어 있습니다.
 * value – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
@@ -11333,13 +11333,16 @@ $messages['lrc'] = array(
 	'special-setsitelink' => 'یه گل هوم پیوند سیلجا بنیت',
 	'wikibase-setsitelink-label' => 'هوم پیوند سیلجا:',
 	'wikibase-setsitelink-submit' => 'یه گل هوم پیوند سیلجا بنیت',
+	'wikibase-setsitelink-warning-remove' => 'آیا شما میهایت هوم پیوند سیل جا[[$1]] نه جا وه جا بکید؟',
 	'wikibase-setsitelink-add-failed' => 'چنو هوم پیوند سیلجایی نبوئه ذخیره با',
+	'wikibase-setsitelink-remove-failed' => 'چنو هوم پیوند سیلجایی نبوئه جا وه جا بوئه.',
 	'wikibase-modifyterm-language' => 'زون:',
 	'wikibase-dispatchstats-changes' => 'آماریا آلشت دئن پهرستنومه',
 	'wikibase-dispatchstats-change-timestamp' => 'چسب ون وخت',
 	'wikibase-dispatchstats-site-id' => 'سیلجا',
 	'wikibase-dispatchstats-lag-time' => 'پتی وار',
 	'wikibase-entitieswithoutlabel-label-language' => 'زون:',
+	'wikibase-entitieswithoutlabel-submit' => 'فهمسن،جسن',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" کد زون معتوری نئ.',
 	'special-itemswithoutsitelinks' => 'قلمیایی که هوم پیوندسیلجا نارن',
 	'special-mylanguagefallbackchain' => 'زنجیر زون دماگر مه',
@@ -11348,7 +11351,9 @@ $messages['lrc'] = array(
 	'wikibase-listdatatypes-commonsmedia-head' => 'پرنمون یا رسانه',
 	'wikibase-listdatatypes-time-head' => 'وخت',
 	'right-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
+	'right-sitelink-update' => 'روزآمد کردن هوم پیوندیا سیل جا',
 	'action-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
+	'action-sitelink-update' => 'روزآمد کردن هوم پیوندیا سیل جا',
 	'wikibase-time-precision-Gannum' => 'د $1 بیلیون سال',
 	'wikibase-time-precision-Mannum' => 'د $1 میلیون سال',
 	'wikibase-time-precision-annum' => 'د سالیا $1',
@@ -11937,7 +11942,7 @@ $messages['mk'] = array(
 * географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) од координатната низа, правецот е зададен со претставка-симбол или со наставка N/S
 * географска должина (''longitude'') – поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
 * висина (''altitude'') [незадолжително] – искажана (?) вредност за висината над подјовната рамнина; за глобусот „Земја“ тоа е појдовниот глобус „WGS84“
-* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“",
+* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“", # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Количина',
 	'wikibase-listdatatypes-quantity-body' => "Дословно податочно поле за количина што се однесува на некој вид на добро утврдена единица. Самата единица оди во податочната вредност што се внесува.
 * вредност (''value'') – содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
@@ -12601,7 +12606,7 @@ untuk mencari di mana set data itu.',
 * latitude – bahagian pertama tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran N/S
 * longitude – bahagian kedua tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran E/W
 * altitude (pilihan) – nilai tersurat (?) untuk ketinggian di atas satah rujukan, untuk glob "Earth" yang menjadi glob rujukan "WGS84"
-* globe (pilihan) – nilai data tersurat (?), diberikan sebagai jasad cakerawala yang berpangkal pada "Earth" diikuti oleh "WGS84"',
+* globe (pilihan) – nilai data tersurat (?), diberikan sebagai jasad cakerawala yang berpangkal pada "Earth" diikuti oleh "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Kuantiti',
 	'wikibase-listdatatypes-quantity-body' => 'Medan data harfiah untuk kuantiti yang berkenaan dengan suatu jenis unit yang tertentu. Unit sebenar memasuki nilai data yang dimasukkan.
 * nilai – bahagian tersirat dalam rentetan (pemetaan awalan unit tidak jelas)
@@ -13308,7 +13313,7 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
  * breedtegraad: impliciete eerste deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door het achtervoegsel N/S;
  * lengtegraad: impliciete tweede deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door achtervoegsel E/W;
  * hoogte (optioneel) – expliciete (?) waarde voor de hoogte boven een referentievlak, voor de globe "Aarde" is dat de "WGS84" referentieglobe;
- * globe (optioneel) – expliciete (?) waarde, gegeven als als stellaire lichaam met als standaardwaarde "Aarde" en vervolgens "WGS84".',
+ * globe (optioneel) – expliciete (?) waarde, gegeven als als stellaire lichaam met als standaardwaarde "Aarde" en vervolgens "WGS84".', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Hoeveelheid',
 	'wikibase-listdatatypes-quantity-body' => 'Letterlijk gegevensveld voor een hoeveelheid die gerelateerd is een aan bepaalde goed gedefinieerde eenheid. De werkelijke eenheid wordt ingevoerd in gegevenswaarden die worden ingevoerd.
 * waarde: impliciet deel van de tekenreeks (toewijzing van eenheidvoorvoegsel is onduidelijk);
@@ -14565,7 +14570,7 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 * latitùdin – prima part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura dal N/S butà apress
 * longitùdin – sconda part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura da l' E/W butà apress
 * autëssa (opsional) – valor esplìssit (?) për l'autëssa ansima a 'n pian d'arferiment, për ël glòb \"Tèra\" a sarìa ël glòb d'arferiment \"WGS84\"
-* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"",
+* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"", # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Camp ëd dàit literaj për na quantità ch'a rësguarda na sòrt d'unità bin definìa. L'unità real a va ant ij valor ëd dàit ch'a son anserì.
 * value - part implìssita ëd la stringa (l'aplicassion dël prefiss d'unità a l'é nen ciàira)
@@ -15711,7 +15716,7 @@ $messages['ru'] = array(
 * latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S
 * longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W
 * altitude (необяз.) — явно задаваемое (?) значение для высоты над плоскостью отсчёта, для планеты «Земля» это будет глобус «WGS84».
-* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»',
+* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Количество',
 	'wikibase-listdatatypes-quantity-body' => 'Строковое поле для ввода количества, выраженного в некоторых вполне определённых единицах. Конкретные единицы указаны во вводимых значениях данных.
 * value — неявная часть строки (обработка префикса единицы непонятна)
@@ -17403,7 +17408,7 @@ $messages['uk'] = array(
 * latitude - неявно задана перша частина рядка координат (float, dms, dm, dd), напрямок задається префіксом або постфиксом N/S (широта)
 * longituge - неявно задана друга частина рядка координат (float, dms, dm, dd), напрямок задається префіксом або постфіксом E/W (довгота)
 * altitude (необов'язкове) - явно задане (?) значення для висоти над площиною відліку, для планети «Земля» це буде глобус «WGS84».
-* globe (необов'язкове) - явно задане (?) значення даних, у вигляді посилання на небесне тіло, яке за замовчуванням є «Землею», а потім «WGS84»",
+* globe (необов'язкове) - явно задане (?) значення даних, у вигляді посилання на небесне тіло, яке за замовчуванням є «Землею», а потім «WGS84»", # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Кількість',
 	'wikibase-listdatatypes-quantity-body' => "Рядкове поле для введення кількості, вираженої в деяких цілком певних одиницях. Конкретні одиниці вказані у введених значеннях даних.
 * value - неявна частина рядка (обробка префікса одиниці незрозуміла)
@@ -18144,7 +18149,7 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 * latitude – phần đầu tiên ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
 * longitude – phần thứ hai ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
 * altitude (tùy chọn) – giá trị hiện (?) của cao độ trên mặt phẳng tham khảo; thí dụ trên địa cầu “Earth” thì mặt phẳng tham khảo là “WGS84”
-* globe (tùy chọn) – giá trị dữ liệu hiện (?) được định rõ là thiên thể; mặc định là “Earth” và “WGS84”',
+* globe (tùy chọn) – giá trị dữ liệu hiện (?) được định rõ là thiên thể; mặc định là “Earth” và “WGS84”', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Số lượng',
 	'wikibase-listdatatypes-quantity-body' => 'Trường dữ liệu trực tiếp cho số lượng có liên quan đến một đơn vị xác định nào đó. Đơn vị dứt khoát được bao gồm trong các giá trị dữ liệu được nhập.
 * value – phần ẩn của chuỗi (tương quan đến tiền tố đơn vị không rõ)
@@ -18790,7 +18795,7 @@ $messages['zh-hans'] = array(
 *纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供
 *经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供
 *高度（可选）——距离参考平面的一个精确数值，“地球”將以“WGS84”作为参考
-*星球（可选）——精确值，默认指向“地球”，其次為“WGS84”',
+*星球（可选）——精确值，默认指向“地球”，其次為“WGS84”', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '一些精确定义单位的数值的原始暑假字段。实际单位也输入到数据中。
 *值－－字符的隐藏部分（单位不明）
@@ -19166,7 +19171,7 @@ $messages['zh-hant'] = array(
 *緯度——隱藏的地理位置字串第一部分，包含float、dms、dm及dd，方向由前綴符號或後綴N或S提供
 *經度——隱藏的地理位置字串第二部分，包含float、dms、dm及dd，方向由前綴符號或後綴E或W提供
 *高度（可選）——距離參考平面的一個精確數值，「Earth」將以「WGS84」作為參考
-*星球（可選）——精確數值，預設指向「Earth」，其次為「WGS84」',
+*星球（可選）——精確數值，預設指向「Earth」，其次為「WGS84」', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '數量',
 	'wikibase-listdatatypes-quantity-body' => '一些精確定義單位之數值的原始數據字段。實際單位亦輸入到數據中。
 *數值－－字串的隱藏部分（單位不明）

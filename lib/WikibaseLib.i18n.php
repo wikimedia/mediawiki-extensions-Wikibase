@@ -304,6 +304,7 @@ $messages['af'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Asaifm
  * @author زكريا
  * @author مشعل الحربي
  */
@@ -328,7 +329,12 @@ $messages['ar'] = array(
 	'wikibase-error-save-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحفظ.',
 	'wikibase-error-remove-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحذف.',
 	'wikibase-replicationnote' => 'قد يلزم وقت لتظهر التعديلات في جميع الويكيات.',
+	'wikibase-sitelinks-sitename-columnheading' => 'اللغة',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'الموقع',
+	'wikibase-tooltip-error-details' => 'التفاصيل',
+	'wikibase-validator-bad-type' => '$2 عوضاً عن $1',
 	'wikibase-validator-unknown-unit' => 'وحدة غير معروفة: $1',
+	'datatypes-type-wikibase-item' => 'عنصر',
 );
 
 /** Asturian (asturianu)
