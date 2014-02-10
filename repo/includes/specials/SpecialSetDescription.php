@@ -21,7 +21,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetDescription', 'description-update' );
+		parent::__construct( 'SetDescription' );
 	}
 
 	/**

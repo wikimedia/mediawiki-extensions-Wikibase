@@ -5,7 +5,6 @@ namespace Wikibase\Api;
 use Message;
 use MessageCache;
 use Revision;
-use SiteSQLStore;
 use Title;
 use User;
 use Status;
@@ -113,6 +112,13 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
+	 * @see ApiBase::isReadMode
+	 */
+	public function isReadMode() {
+		return true;
+	}
+
+	/**
 	 * @see ApiBase::getVersion
 	 *
 	 * @since 0.4
@@ -140,9 +146,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @return Status the check's result
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = array( 'read' );
-
-		return $permissions;
+		return array();
 	}
 
 	/**
@@ -507,4 +511,5 @@ abstract class ApiWikibase extends \ApiBase {
 		$formatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 		return $formatter->formatSummary( $summary );
 	}
+
 }

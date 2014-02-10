@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use LogicException;
 use MWException;
 use OutOfBoundsException;
+use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 

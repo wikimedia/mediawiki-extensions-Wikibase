@@ -20,7 +20,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetAliases', 'alias-update' );
+		parent::__construct( 'SetAliases' );
 	}
 
 	/**

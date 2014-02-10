@@ -21,7 +21,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetLabel', 'label-update' );
+		parent::__construct( 'SetLabel' );
 	}
 
 	/**

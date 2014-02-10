@@ -19,18 +19,6 @@ use Wikibase\ChangeOp\ChangeOpDescription;
 class SetDescription extends ModifyTerm {
 
 	/**
-	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
-	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-
-		$permissions[] = ( isset( $params['value'] ) && 0<strlen( $params['value'] ) )
-			? 'description-update'
-			: 'description-remove';
-		return $permissions;
-	}
-
-	/**
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
