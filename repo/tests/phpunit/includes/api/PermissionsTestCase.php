@@ -59,10 +59,6 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		PermissionsHelper::applyPermissions( $permissions );
 
 		try {
-			if ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens', false ) ) {
-				$params[ 'token' ] = $wgUser->getEditToken();
-			}
-
 			$params[ 'action' ] = $action;
 			$this->doApiRequest( $params, null, false, $wgUser );
 
