@@ -233,6 +233,13 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
+	 * @see ApiBase::getHelpUrls()
+	 */
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbformatvalue';
+	}
+
+	/**
 	 * @see ApiBase::getExamples
 	 *
 	 * @since 0.1
