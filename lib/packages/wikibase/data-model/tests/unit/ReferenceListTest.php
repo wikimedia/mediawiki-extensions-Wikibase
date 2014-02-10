@@ -65,7 +65,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param ReferenceList $array
 	 */
-	public function testHasReference( ReferenceList $array ) {
+	public function testHasReferenceBeforeRemoveButNotAfter( ReferenceList $array ) {
 		/**
 		 * @var Reference $hashable
 		 */
@@ -74,11 +74,9 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 			$array->removeReference( $hashable );
 			$this->assertFalse( $array->hasReference( $hashable ) );
 		}
-
-		$this->assertTrue( true );
 	}
 
-	public function testHasReferenceMore() {
+	public function testGivenCloneOfReferenceInList_hasReferenceReturnsTrue() {
 		$list = new ReferenceList();
 
 		$reference = new Reference( new SnakList( array( new PropertyNoValueSnak( 42 ) ) ) );
