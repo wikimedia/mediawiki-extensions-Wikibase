@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Status;
-use UserBlockedError;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\EditEntity;
 use Wikibase\EntityContent;

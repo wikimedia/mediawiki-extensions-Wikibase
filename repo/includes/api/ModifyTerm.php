@@ -3,6 +3,10 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\EntityContent;
 use Wikibase\Summary;
 use Wikibase\Utils;
 
@@ -37,6 +41,23 @@ abstract class ModifyTerm extends ModifyEntity {
 		$summary->setLanguage( $params['language'] );
 
 		return $summary;
+	}
+
+	/**
+	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 */
+	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entityContent, $params );
+		$entity = $entityContent->getEntity();
+		if( $entity instanceof Item ) {
+			$type = 'item';
+		} else if ( $entity instanceof Property ) {
+			$type = 'property';
+		} else {
+			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );
+		}
+		$permissions[] = $type . '-term';
+		return $permissions;
 	}
 
 	/**
