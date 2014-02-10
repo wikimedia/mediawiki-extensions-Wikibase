@@ -6,7 +6,7 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\Statement;
+use Wikibase\DataModel\Claim\Statement;
 
 /**
  * @since 1.0

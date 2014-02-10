@@ -31,8 +31,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"Wikibase\\DataModel\\Serializers": "src/",
-			"Wikibase\\DataModel\\Deserializers": "src/"
+			"Wikibase\\DataModel": "src/"
 		}
 	}
 }
