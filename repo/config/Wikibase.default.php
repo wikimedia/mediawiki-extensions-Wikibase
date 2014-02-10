@@ -15,17 +15,6 @@ return call_user_func( function() {
 	global $wgSquidMaxage;
 
 	$defaults = array(
-
-		// Set API in debug mode
-		// do not turn on in production!
-		'apiInDebug' => false,
-
-		// Additional settings for API when debugging is on to
-		// facilitate testing.
-		'apiDebugWithPost' => false,
-		'apiDebugWithRights' => false,
-		'apiDebugWithTokens' => false,
-
 		'defaultStore' => 'sqlstore',
 
 		'idBlacklist' => array(

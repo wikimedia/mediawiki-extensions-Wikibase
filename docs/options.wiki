@@ -51,10 +51,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;dataRightsText: Text for data license link. Defaults to $wgRightsText setting.
 
 === Expert Settings ===
-;apiInDebug: Put Wikibase API into debug mode. Boolean, default is false. '''Deprecated'''.
-;apiDebugWithPost: Allow GET requests to Wikibase API modules that would normally require POST. Boolean, default is false. '''Deprecated'''.
-;apiDebugWithRights: Bypass permission checks for Wikibase API modules. Boolean, default is false. '''Deprecated'''.
-;apiDebugWithTokens: Bypass token checks for Wikibase API modules. Boolean, default is false. '''Deprecated'''.
 ;defaultStore: The storage engine to use for storing entities. Default: 'sqlstore'. The is currently no alternative.
 ;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities. '''Note:''' this may change in the future to allow separate blacklists for different kinds of entities.
 ;withoutTermSearchKey: Allow the terms table to work without the term_search_key field, for sites that can not easily roll out schema changes on large tables. This means that all searches will use exact matching (depending on the database's collation). Default: <code>false</code>. This is only needed for compatibility with old database layouts.
