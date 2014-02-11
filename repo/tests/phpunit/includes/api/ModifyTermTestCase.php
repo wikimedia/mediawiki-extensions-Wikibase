@@ -30,13 +30,13 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			// -- Test valid sequence -----------------------------
 			array( //0
 				'p' => array( 'language' => 'en', 'value' => '' ),
-				'e' => array( 'warning' => 'edit-no-change' ) ),
+				'e' => array() ),
 			array( //1
 				'p' => array( 'language' => 'en', 'value' => 'Value' ),
 				'e' => array( 'value' => array( 'en' => 'Value' ) ) ),
 			array( //2
 				'p' => array( 'language' => 'en', 'value' => 'Value' ),
-				'e' => array( 'value' => array( 'en' => 'Value' ), 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'value' => array( 'en' => 'Value' ) ) ),
 			array( //3
 				'p' => array( 'language' => 'en', 'value' => 'Another Value', 'summary' => 'Test summary!' ),
 				'e' => array( 'value' => array( 'en' => 'Another Value' ) ) ),

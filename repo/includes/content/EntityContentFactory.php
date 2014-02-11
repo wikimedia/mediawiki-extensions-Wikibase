@@ -122,8 +122,21 @@ class EntityContentFactory implements EntityTitleLookup {
 	public function getTitleForId( EntityId $id ) {
 		return Title::newFromText(
 			$id->getSerialization(),
-			NamespaceUtils::getEntityNamespace( self::$typeMap[$id->getEntityType()] )
+			$this->getNamespaceForType( $id->getEntityType() )
 		);
+	}
+
+	/**
+	 * Determines what namespace is suitable for the given type of entities.
+	 *
+	 * @since 0.5
+	 *
+	 * @param int $type
+	 *
+	 * @return int
+	 */
+	public function getNamespaceForType( $type ) {
+		return NamespaceUtils::getEntityNamespace( self::$typeMap[$type] );
 	}
 
 	/**
