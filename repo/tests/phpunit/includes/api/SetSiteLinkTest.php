@@ -76,7 +76,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'indb' => 4 ) ),
 			array( //8 no change
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin', 'badges' => '{gaItem}|{faItem}' ),
-				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'warning' => 'edit-no-change', 'indb' => 4 ) ),
+				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'indb' => 4 ) ),
 			array( //9 change only title, badges should be intact
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'dewiki', 'linktitle' => 'Berlin_Two' ),
 				'e' => array( 'value' => array( 'dewiki' => array( 'title' => 'Berlin Two', 'badges' => array( '{gaItem}', '{faItem}' ) ) ), 'indb' => 4 ) ),
