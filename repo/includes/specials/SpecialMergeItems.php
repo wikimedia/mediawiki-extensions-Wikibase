@@ -165,14 +165,14 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	protected function saveChanges() {
 		// remove the content from the "from" item
 		$toSummary = $this->getSummary( 'to', $this->toItemContent->getItem()->getId() );
-		$fromStatus = $this->saveEntity( $this->fromItemContent, $toSummary );
+		$fromStatus = $this->saveEntity( $this->fromItemContent, $toSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
 		if ( !$fromStatus->isOK() ) {
 			$this->showErrorHTML( $fromStatus->getMessage() );
 		} else {
 			// add the content to the "to" item
 			$fromSummary = $this->getSummary( 'from', $this->fromItemContent->getItem()->getId() );
-			$toStatus = $this->saveEntity( $this->toItemContent, $fromSummary );
+			$toStatus = $this->saveEntity( $this->toItemContent, $fromSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
 			if ( !$toStatus->isOK() ) {
 				// Bug: 55960
@@ -207,31 +207,6 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 			array( $id->getSerialization() )
 		);
 		return $summary;
-	}
-
-	/**
-	 * Saves the entity content using the given summary.
-	 *
-	 * @param EntityContent $entityContent
-	 * @param Summary $summary
-	 *
-	 * @return Status
-	 */
-	protected function saveEntity( EntityContent $entityContent, Summary $summary ) {
-		$editEntity = new EditEntity(
-			$entityContent,
-			$this->getUser(),
-			false,
-			$this->getContext()
-		);
-
-		$status = $editEntity->attemptSave(
-			$this->summaryFormatter->formatSummary( $summary ),
-			EDIT_UPDATE,
-			$this->getRequest()->getVal( 'wpEditToken' )
-		);
-
-		return $status;
 	}
 
 	/**

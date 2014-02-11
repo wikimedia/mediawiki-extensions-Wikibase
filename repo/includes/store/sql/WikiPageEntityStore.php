@@ -72,25 +72,31 @@ class WikiPageEntityStore implements EntityStore {
 		$status = $content->save( $summary, $user, $flags, $baseRevId );
 
 		if ( !$status->isOK() ) {
-			$messageKeys = array_map( function( array $error ) {
-				return $error[0];
-			}, $status->getErrorsArray() );
-
-			//TODO: nicer error! Can we keep the status somehow? Can we make an ErrorPageError sensibly?
-			throw new StorageException( implode( ', ', $messageKeys ) );
+			throw new StorageException( $status );
 		}
 
 		// As per convention defined by WikiPage, the new revision ID is in the status value:
 		$value = $status->getValue();
 
 		/* @var Revision $revision */
-		$revision = isset( $value['revision'] ) ? $value['revision'] : null;
+		$revision = $value['revision']; //NOTE: EntityContent makes sure this is always set.
 
 		$rev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
 
-		$this->dispatcher->dispatch( 'entityChanged', $entity, $revision->getId() );
+		$this->dispatcher->dispatch( 'entityUpdated', $rev );
 
 		return $rev;
+	}
+
+	/**
+	 * @see EntityTitleLookup::getTitleForId
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return \Title|null
+	 */
+	public function getTitleForId( EntityId $entityId ) {
+		return $this->contentFactory->getTitleForId( $entityId );
 	}
 
 	/**
@@ -103,7 +109,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws StorageException
 	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
-		$title = $this->contentFactory->getTitleForId( $entityId );
+		$title = $this->getTitleForId( $entityId );
 
 		$page = new \WikiPage( $title );
 		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
@@ -113,5 +119,94 @@ class WikiPageEntityStore implements EntityStore {
 		}
 
 		$this->dispatcher->dispatch( 'entityDeleted', $entityId );
+	}
+
+	/**
+	 * Check if no edits were made by other users since the given revision.
+	 * This makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * @see EditPage::userWasLastToEdit()
+	 *
+	 * @param User $user the user
+	 * @param EntityId $id the entity to check (ignored by this implementation)
+	 * @param int $lastRevId the revision the user supplied
+	 *
+	 * @return bool
+	 */
+	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId ) {
+		wfProfileIn( __METHOD__ );
+
+		$revision = Revision::newFromId( $lastRevId );
+		if ( !$revision ) {
+			wfProfileOut( __METHOD__ );
+			return false;
+		}
+
+		$pageId = intval( $revision->getPage() );
+
+		// Scan through the revision table
+		$dbw = wfGetDB( DB_MASTER );
+		$res = $dbw->select( 'revision',
+			'rev_user',
+			array(
+				'rev_page' => $pageId,
+				'rev_id > ' . intval( $lastRevId )
+				. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
+				'rev_user != ' . intval( $user->getId() )
+				. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),
+			),
+			__METHOD__,
+			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 )
+		);
+
+		wfProfileOut( __METHOD__ );
+		return $res->current() === false; // return true if query had no match
+	}
+
+	/**
+	 * Watches or unwatches the entity.
+	 *
+	 * @param User $user
+	 * @param EntityId $id the entity to watch
+	 * @param bool $watch whether to watch or unwatch the page.
+	 *
+	 * @throws \MWException
+	 * @return void
+	 *
+	 * @note keep in sync with logic in EditPage
+	 */
+	public function updateWatchlist( User $user, EntityId $id, $watch ) {
+		$title = $this->getTitleForId( $id );
+
+		if ( $user->isLoggedIn() && $title && ( $watch != $user->isWatched( $title ) ) ) {
+			$fname = __METHOD__;
+
+			// Do this in its own transaction to reduce contention...
+			$dbw = wfGetDB( DB_MASTER );
+			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
+				$dbw->begin( $fname );
+				if ( $watch ) {
+					\WatchAction::doWatch( $title, $user );
+				} else {
+					\WatchAction::doUnwatch( $title, $user );
+				}
+				$dbw->commit( $fname );
+			} );
+		}
+	}
+
+	/**
+	 * Determines whether the given user is watching the given item
+	 *
+	 * @todo: move this to a separate service
+	 *
+	 * @param User $user
+	 * @param EntityId $id the entity to watch
+	 *
+	 * @return bool
+	 */
+	public function isWatching( User $user, EntityId $id ) {
+		$title = $this->getTitleForId( $id );
+		return ( $title && $user->isWatched( $title ) );
 	}
 }
