@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_ff425bb1",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-02-11T11:26:06Z",
+      "side": 1,
+      "message": "Line seems to be too long.",
+      "revId": "7c5bc6549378a4f0fd167bd974778fefd761d1a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_df3f9f1f",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-02-11T11:26:06Z",
+      "side": 1,
+      "message": "Line seems to be too long.",
+      "revId": "7c5bc6549378a4f0fd167bd974778fefd761d1a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7f164bae",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-02-11T11:26:06Z",
+      "side": 1,
+      "message": "Since save is always false in this branch, just using false would be more straightforward.\nAlso, this seems to alter the signature of the stopItemPageEditMode event, right?",
+      "revId": "7c5bc6549378a4f0fd167bd974778fefd761d1a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
