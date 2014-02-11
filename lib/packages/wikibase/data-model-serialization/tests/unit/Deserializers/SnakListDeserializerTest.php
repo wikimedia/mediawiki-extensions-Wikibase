@@ -2,17 +2,17 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Wikibase\DataModel\Deserializers\SnaksDeserializer;
+use Wikibase\DataModel\Deserializers\SnakListDeserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\SnaksDeserializer
+ * @covers Wikibase\DataModel\Deserializers\SnakListDeserializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SnaksDeserializerTest extends DeserializerBaseTest {
+class SnakListDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
 		$snakDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -32,7 +32,7 @@ class SnaksDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( true ) );
 
-		return new SnaksDeserializer( $snakDeserializerMock );
+		return new SnakListDeserializer( $snakDeserializerMock );
 	}
 
 	public function deserializableProvider() {
