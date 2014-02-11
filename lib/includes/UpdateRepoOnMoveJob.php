@@ -80,6 +80,33 @@ class UpdateRepoOnMoveJob extends \Job {
 	}
 
 	/**
+	 * Get an EntityContentFactory object
+	 *
+	 * @return EntityTitleLookup
+	 */
+	protected function getEntityTitleLookup() {
+		return WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+	}
+
+	/**
+	 * Get an EntityContentFactory object
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	protected function getEntityRevisionLookup() {
+		return WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
+	}
+
+	/**
+	 * Get an EntityContentFactory object
+	 *
+	 * @return EntityStore
+	 */
+	protected function getEntityStore() {
+		return WikibaseRepo::getDefaultInstance()->getEntityStore();
+	}
+
+	/**
 	 * Get a Site object for a global id
 	 *
 	 * @param string $globalId
@@ -142,19 +169,16 @@ class UpdateRepoOnMoveJob extends \Job {
 	public function updateSiteLink( $siteId, $entityId, $oldPage, $newPage, $user ) {
 		wfProfileIn( __METHOD__ );
 
-		$itemContent = $this->getEntityContentFactory()->getFromId( $entityId );
-		if ( !$itemContent ) {
+		$item = $this->getEntityRevisionLookup()->getEntity( $entityId );
+		if ( !$item ) {
 			// The entity assigned with the moved page can't be found
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": entity with id " . $entityId->getPrefixedId() . " not found" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
-		$editEntity = new EditEntity( $itemContent, $user, true );
-
 		$site = $this->getSite( $siteId );
 
-		$item = $itemContent->getItem();
 		$oldSiteLink = $this->getSimpleSiteLink( $item, $siteId );
 		if ( !$oldSiteLink || $oldSiteLink->getPageName() !== $oldPage ) {
 			// Probably something changed since the job has been inserted
@@ -178,24 +202,29 @@ class UpdateRepoOnMoveJob extends \Job {
 
 		$summary = $this->getSummary( $siteId, $oldPage, $newPage );
 
-		return $this->doUpdateSiteLink( $itemContent, $siteLink, $editEntity, $summary, $user );
+		return $this->doUpdateSiteLink( $item, $siteLink, $summary, $user );
 	}
 
 	/**
 	 * Update the given item with the given sitelink
 	 *
-	 * @param ItemContent $itemContent
+	 * @param Item $item
 	 * @param SiteLink $siteLink
-	 * @param EditEntity $editEntity
 	 * @param Summary $summary
 	 * @param User $user User who we'll attribute the update to
 	 *
 	 * @return bool Whether something changed
 	 */
-	public function doUpdateSiteLink( $itemContent, $siteLink, $editEntity, $summary, $user ) {
-		$item = $itemContent->getItem();
-
+	public function doUpdateSiteLink( $item, $siteLink, $summary, $user ) {
 		$item->addSiteLink( $siteLink );
+
+		$editEntity = new EditEntity(
+			$this->getEntityTitleLookup(),
+			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityStore(),
+			$item,
+			$user,
+			true );
 
 		//NOTE: Temporary hack to avoid more dependency mess.
 		//      The Right Thing would be to use a SummaryFormatter.
@@ -210,7 +239,7 @@ class UpdateRepoOnMoveJob extends \Job {
 			EDIT_UPDATE,
 			false,
 			// Don't (un)watch any pages here, as the user didn't explicitly kick this off
-			$user->isWatched( $itemContent->getTitle() )
+			$this->getEntityStore()->isWatching( $user, $item->getid() )
 		);
 
 		wfProfileOut( __METHOD__ );

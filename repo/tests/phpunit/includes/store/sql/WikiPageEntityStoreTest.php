@@ -2,14 +2,15 @@
 
 namespace Wikibase\Test;
 
-use ValueFormatters\FormatterOptions;
-use Wikibase\Entity;
+use User;
+use WatchAction;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityStore;
-use Wikibase\Item;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Property;
 use Wikibase\WikiPageEntityLookup;
 use Wikibase\WikiPageEntityStore;
 
@@ -110,5 +111,85 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( $error );
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
+	}
+
+	public function testUserWasLastToEdit() {
+		/* @var WikiPageEntityStore $store */
+		/* @var EntityRevisionLookup $lookup */
+		list( $store, $lookup ) = $this->createStoreAndLookup();
+
+		$anonUser = User::newFromId(0);
+		$anonUser->setName( '127.0.0.1' );
+		$user = User::newFromName( "EditEntityTestUser" );
+		$item = Item::newEmpty();
+
+		// check for default values, last revision by anon --------------------
+		$item->setLabel( 'en', "Test Anon default" );
+		$store->saveEntity( $item, 'testing', $anonUser, EDIT_NEW );
+		$itemId = $item->getId();
+
+		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
+		$this->assertFalse( $res );
+
+		// check for default values, last revision by sysop --------------------
+		$item->setLabel( 'en', "Test SysOp default" );
+		$store->saveEntity( $item, 'Test SysOp default', $user, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
+		$this->assertFalse( $res );
+
+		// check for default values, last revision by anon --------------------
+		$item->setLabel( 'en', "Test Anon with user" );
+		$store->saveEntity( $item, 'Test Anon with user', $anonUser, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
+		$this->assertFalse( $res );
+
+		// check for default values, last revision by sysop --------------------
+		$item->setLabel( 'en', "Test SysOp with user" );
+		$store->saveEntity( $item, 'Test SysOp with user', $user, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $user, $itemId, false );
+		$this->assertFalse( $res );
+
+		// create an edit and check if the anon user is last to edit --------------------
+		$lastRevId = $lookup->getLatestRevisionId( $itemId );
+		$item->setLabel( 'en', "Test Anon" );
+		$store->saveEntity( $item, 'Test Anon', $anonUser, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
+		$this->assertTrue( $res );
+		// also check that there is a failure if we use the sysop user
+		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
+		$this->assertFalse( $res );
+
+		// create an edit and check if the sysop user is last to edit --------------------
+		$lastRevId = $lookup->getLatestRevisionId( $itemId );
+		$item->setLabel( 'en', "Test SysOp" );
+		$store->saveEntity( $item, 'Test SysOp', $user, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
+		$this->assertTrue( $res );
+
+		// also check that there is a failure if we use the anon user
+		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
+		$this->assertFalse( $res );
+	}
+
+	public function testUpdateWatchlist() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+
+		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
+
+		if ( $user->getId() === 0 ) {
+			$user->addToDatabase();
+		}
+
+		$item = Item::newEmpty();
+		$store->saveEntity( $item, 'testing', $user, EDIT_NEW );
+
+		$itemId = $item->getId();
+
+		$store->updateWatchlist( $user, $itemId, true );
+		$this->assertTrue( $store->isWatching( $user, $itemId ) );
+
+		$store->updateWatchlist( $user, $itemId, false );
+		$this->assertFalse( $store->isWatching( $user, $itemId ) );
 	}
 }

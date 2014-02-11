@@ -39,7 +39,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			// -- Test valid sequence -----------------------------
 			array( //0
 				'p' => array( 'language' => 'en', 'set' => '' ),
-				'e' => array( 'warning' => 'edit-no-change' ) ),
+				'e' => array( ) ),
 			array( //1
 				'p' => array( 'language' => 'en', 'set' => 'Foo' ),
 				'e' => array( 'value' => array( 'en' => array( 'Foo' ) ) ) ),
@@ -51,7 +51,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ) ) ),
 			array( //4
 				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ), 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ) ) ),
 			array( //5
 				'p' => array( 'language' => 'en', 'add' => 'Foo|Spam' ),
 				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam' ) ) ) ),
@@ -63,7 +63,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
 			array( //8
 				'p' => array( 'language' => 'de', 'set' => '' ),
-				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ), 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
 			array( //9
 				'p' => array( 'language' => 'de', 'set' => 'hiya' ),
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya' ) ) ) ),

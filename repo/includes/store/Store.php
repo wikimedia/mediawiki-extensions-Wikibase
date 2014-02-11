@@ -78,6 +78,17 @@ interface Store {
 	public function getEntityLookup();
 
 	/**
+	 * Returns an EntityLookup
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	public function getEntityRevisionLookup( $uncached = '' );
+
+	/**
 	 * Returns an EntityStore
 	 *
 	 * @since 0.5

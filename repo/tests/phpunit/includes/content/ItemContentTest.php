@@ -43,44 +43,6 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
-	 * Test label and description uniqueness restriction
-	 */
-	public function testLabelAndDescriptionUniquenessRestriction() {
-		if ( wfGetDB( DB_SLAVE )->getType() === 'mysql' ) {
-			$this->assertTrue( (bool)'MySQL fails' );
-			return;
-		}
-
-		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
-		$prefix = get_class( $this ) . '/';
-
-		$content = ItemContent::newEmpty();
-		$content->getItem()->setLabel( 'en', $prefix . 'label' );
-		$content->getItem()->setDescription( 'en', $prefix . 'description' );
-
-		$content->getItem()->setLabel( 'de', $prefix . 'label' );
-		$content->getItem()->setDescription( 'de', $prefix . 'description' );
-
-		$status = $content->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), "item creation should work" );
-
-		$content1 = ItemContent::newEmpty();
-		$content1->getItem()->setLabel( 'nl', $prefix . 'label' );
-		$content1->getItem()->setDescription( 'nl', $prefix . 'description' );
-
-		$status = $content1->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), "item creation should work" );
-
-		$content1->getItem()->setLabel( 'en', $prefix . 'label' );
-		$content1->getItem()->setDescription( 'en', $prefix . 'description' );
-
-		$editEntity = new \Wikibase\EditEntity( $content1, null, $content1->getTitle()->getLatestRevID() );
-		$status = $editEntity->attemptSave( 'save item', EDIT_UPDATE, false );
-		$this->assertFalse( $status->isOK(), "saving an item with duplicate lang+label+description should not work" );
-		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-item' ) );
-	}
-
-	/**
 	 * @dataProvider siteLinkConflictProvider
 	 */
 	public function testSiteLinkConflict( SimpleSiteLink $siteLink, $expected ) {

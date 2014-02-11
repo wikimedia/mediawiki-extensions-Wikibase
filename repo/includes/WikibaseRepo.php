@@ -198,10 +198,12 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
+	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup() {
-		return $this->getStore()->getEntityRevisionLookup();
+	public function getEntityRevisionLookup( $uncached = '' ) {
+		return $this->getStore()->getEntityRevisionLookup( $uncached );
 	}
 
 	/**

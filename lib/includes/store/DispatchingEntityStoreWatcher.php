@@ -10,7 +10,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements  EntityStoreWatcher {
+class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements EntityStoreWatcher {
 
 	function __construct() {
 		parent::__construct( 'Wikibase\EntityStoreWatcher' );
