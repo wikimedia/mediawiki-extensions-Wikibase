@@ -133,6 +133,8 @@ class ItemContent extends EntityContent {
 	 *
 	 * @since 0.1
 	 *
+	 * @todo: move this logic to EditEntity (or PreSaveChecks or...)
+	 *
 	 * @param Status $status
 	 * @param \DatabaseBase|null $db The database object to use (optional).
 	 *        If conflict checking is performed as part of a save operation,
