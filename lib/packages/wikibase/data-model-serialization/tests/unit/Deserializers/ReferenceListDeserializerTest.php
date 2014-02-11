@@ -8,7 +8,7 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\References;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\ReferencesDeserializer
+ * @covers Wikibase\DataModel\Deserializers\ReferenceListDeserializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
