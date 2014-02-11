@@ -10,7 +10,7 @@ use Wikibase\DataModel\ReferenceList;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ReferencesDeserializer implements Deserializer {
+class ReferenceListDeserializer implements Deserializer {
 
 	/**
 	 * @var Deserializer

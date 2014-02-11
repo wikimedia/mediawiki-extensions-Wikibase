@@ -4,7 +4,7 @@ namespace Wikibase\DataModel;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
-use Wikibase\DataModel\Deserializers\ReferencesDeserializer;
+use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnaksDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -44,7 +44,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newReferencesDeserializer() {
-		return new ReferencesDeserializer( $this->newReferenceDeserializer() );
+		return new ReferenceListDeserializer( $this->newReferenceDeserializer() );
 	}
 
 	/**

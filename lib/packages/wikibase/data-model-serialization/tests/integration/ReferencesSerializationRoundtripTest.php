@@ -6,7 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
-use Wikibase\DataModel\Deserializers\ReferencesDeserializer;
+use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnaksDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -42,7 +42,7 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		$serialization = $serializerFactory->newReferencesSerializer()->serialize( $references );
 		$newReferences = $deserializerFactory->newReferencesDeserializer()->deserialize( $serialization );
-		$this->assertEquals( $references, $newReferences );
+		$this->assertReferencesEquals( $references, $newReferences );
 	}
 
 	public function referencesProvider() {
@@ -66,5 +66,13 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 				) )
 			),
 		);
+	}
+
+	/**
+	 * @param References $expected
+	 * @param References $actual
+	 */
+	public function assertReferencesEquals( References $expected, References $actual ) {
+		$this->assertTrue( $actual->equals( $expected ), 'The two References are different' );
 	}
 }

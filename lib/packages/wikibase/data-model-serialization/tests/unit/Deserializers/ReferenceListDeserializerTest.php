@@ -2,9 +2,10 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Wikibase\DataModel\Deserializers\ReferencesDeserializer;
+use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\References;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\ReferencesDeserializer
@@ -12,7 +13,7 @@ use Wikibase\DataModel\ReferenceList;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ReferencesDeserializerTest extends DeserializerBaseTest {
+class ReferenceListDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
 		$referenceDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -32,7 +33,7 @@ class ReferencesDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( true ) );
 
-		return new ReferencesDeserializer( $referenceDeserializerMock );
+		return new ReferenceListDeserializer( $referenceDeserializerMock );
 	}
 
 	public function deserializableProvider() {
@@ -71,6 +72,16 @@ class ReferencesDeserializerTest extends DeserializerBaseTest {
 		);
 	}
 
+	/**
+	 * @dataProvider deserializationProvider
+	 */
+	public function testDeserialization( $object, $serialization ) {
+		$this->assertReferencesEquals(
+			$object,
+			$this->buildDeserializer()->deserialize( $serialization )
+		);
+	}
+
 	public function deserializationProvider() {
 		return array(
 			array(
@@ -89,5 +100,13 @@ class ReferencesDeserializerTest extends DeserializerBaseTest {
 				)
 			),
 		);
+	}
+
+	/**
+	 * @param References $expected
+	 * @param References $actual
+	 */
+	public function assertReferencesEquals( References $expected, References $actual ) {
+		$this->assertTrue( $actual->equals( $expected ), 'The two References are different' );
 	}
 }
