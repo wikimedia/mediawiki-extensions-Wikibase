@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Status;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handles the submit action for Wikibase entities.
@@ -92,6 +93,11 @@ class SubmitEntityAction extends EditEntityAction {
 		$edit = false;
 		$token = $this->getRequest()->getText( 'wpEditToken' );
 
+		//TODO: allow injection/override!
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
+		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		if ( $newerRevision->getId() == $latestRevision->getId() ) { // restore
 			$summary = $req->getText( 'wpSummary' );
 
@@ -105,7 +111,15 @@ class SubmitEntityAction extends EditEntityAction {
 			} else {
 				// make the old content the new content.
 				// NOTE: conflict detection is not needed for a plain restore, it's not based on anything.
-				$edit = new EditEntity( $olderContent, $this->getUser(), false, $this->getContext() );
+				$edit = new EditEntity(
+					$entityTitleLookup,
+					$entityRevisionLookup,
+					$entityStore,
+					$olderContent->getEntity(),
+					$this->getUser(),
+					false,
+					$this->getContext() );
+
 				$status = $edit->attemptSave( $summary, 0, $token );
 			}
 		} else { // undo
@@ -124,7 +138,15 @@ class SubmitEntityAction extends EditEntityAction {
 
 				//NOTE: use latest revision as base revision - we are saving patched content
 				//      based on the latest revision.
-				$edit = new EditEntity( $latestContent, $this->getUser(), $latestRevision->getId(), $this->getContext() );
+				$edit = new EditEntity(
+					$entityTitleLookup,
+					$entityRevisionLookup,
+					$entityStore,
+					$latestContent->getEntity(),
+					$this->getUser(),
+					$latestRevision->getId(),
+					$this->getContext() );
+
 				$status = $edit->attemptSave( $summary, 0, $token );
 			}
 		}

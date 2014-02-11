@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DatabaseBase;
+use Status;
 use User;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
@@ -68,7 +69,7 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	public function getEntity( EntityId $entityId, $revision = 0 ) {
 		$rev = $this->getEntityRevision( $entityId, $revision );
 
-		return $rev === null ? null : $rev->getEntity();
+		return $rev === null ? null : $rev->getEntity()->copy();
 	}
 
 	/**
@@ -273,12 +274,13 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 * ID is given, the entity with the highest revision ID is considered the current one.
 	 *
 	 * @param Entity $entity
-	 * @param int              $revision
-	 * @param int|string       $timestamp
+	 * @param int $revision
+	 * @param int|string $timestamp
+	 * @param User|string|null $user
 	 *
 	 * @return EntityRevision
 	 */
-	public function putEntity( Entity $entity, $revision = 0, $timestamp = 0 ) {
+	public function putEntity( Entity $entity, $revision = 0, $timestamp = 0, $user = null ) {
 		if ( $entity->getId() === null ) {
 			//NOTE: assign ID to original object, not clone
 			$entity->setId( $this->maxId +1 );
@@ -314,6 +316,15 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 			$revision,
 			wfTimestamp( TS_MW, $timestamp )
 		);
+
+		if ( $user !== null ) {
+			if ( is_object( $user ) ) {
+				$user = $user->getName();
+			}
+
+			// just glue the user on here...
+			$rev->user = $user;
+		}
 
 		$this->entities[$key][$revision] = $rev;
 		ksort( $this->entities[$key] );
@@ -755,23 +766,30 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
 		$id = $entity->getId();
 
+		$status = Status::newGood();
+
 		if ( ( $flags & EDIT_NEW ) > 0 && $id && $this->hasEntity( $id ) ) {
-			throw new StorageException( 'Entity already exists: ' . $id->getSerialization() );
+			$status->fatal( 'edit-already-exists' );
 		}
 
 		if ( ( $flags & EDIT_UPDATE ) > 0 && !$this->hasEntity( $id ) ) {
-			throw new StorageException( 'Entity not found for update: ' . $id->getSerialization() );
+			$status->fatal( 'edit-gone-missing' );
 		}
 
 		if ( $baseRevId !== false && !$this->hasEntity( $id ) ) {
+			//TODO: find correct message key to use with status??
 			throw new StorageException( 'No base revision found for ' . $id->getSerialization() );
 		}
 
 		if ( $baseRevId !== false && $this->getEntityRevision( $id )->getRevision() !== $baseRevId ) {
-			throw new StorageException( 'Incorrect base revision: ' . $baseRevId );
+			$status->fatal( 'edit-conflict' );
 		}
 
-		return $this->putEntity( $entity );
+		if ( !$status->isOK() ) {
+			throw new StorageException( $status );
+		}
+
+		return $this->putEntity( $entity, 0, 0, $user );
 	}
 
 	/**
@@ -783,5 +801,66 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
 		$this->removeEntity( $entityId );
+	}
+
+	/**
+	 * Check if no edits were made by other users since the given revision.
+	 * This makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * @see EditPage::userWasLastToEdit()
+	 *
+	 * @param User $user the user
+	 * @param EntityId $id the entity to check
+	 * @param int $lastRevId the revision to check from
+	 *
+	 * @return bool
+	 */
+	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId ) {
+		$key = $id->getPrefixedId();
+		if ( !isset( $this->entities[$key] ) ) {
+			return false;
+		}
+
+		foreach ( $this->entities[$key] as $rev ) {
+			if ( $rev->getRevision() >= $lastRevId ) {
+				if ( isset( $rev->user ) && $rev->user !== $user->getName() ) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	protected $watchlist = array();
+
+	/**
+	 * Watches or unwatches the entity.
+	 *
+	 * @param User $user
+	 * @param EntityId $id the entity to watch
+	 * @param bool $watch whether to watch or unwatch the page.
+	 *
+	 * @throws \MWException
+	 * @return void
+	 */
+	public function updateWatchlist( User $user, EntityId $id, $watch ) {
+		if ( $watch ) {
+			$this->watchlist[ $user->getName() ][ $id->getSerialization() ] = true;
+		} else {
+			unset( $this->watchlist[ $user->getName() ][ $id->getSerialization() ] );
+		}
+	}
+
+	/**
+	 * Determines whether the given user is watching the given item
+	 *
+	 * @param User $user
+	 * @param EntityId $id the entity to watch
+	 *
+	 * @return bool
+	 */
+	public function isWatching( User $user, EntityId $id ) {
+		return isset( $this->watchlist[ $user->getName() ][ $id->getSerialization() ] );
 	}
 }

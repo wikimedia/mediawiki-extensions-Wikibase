@@ -477,7 +477,19 @@ abstract class ApiWikibase extends \ApiBase {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 
-		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
+		//TODO: allow injection/override!
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
+		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$editEntity = new EditEntity(
+			$entityTitleLookup,
+			$entityRevisionLookup,
+			$entityStore,
+			$content->getEntity(), //TODO: refactor API modules to not use EntityContent at all!
+			$user,
+			$baseRevisionId,
+			$this->getContext() );
 
 		if ( !$this->needsToken() ) {
 			// false disabled the token check
