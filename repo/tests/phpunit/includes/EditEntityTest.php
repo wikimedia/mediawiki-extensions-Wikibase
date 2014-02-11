@@ -2,15 +2,14 @@
 
 namespace Wikibase\Test;
 
-use TestSites;
+use Status;
 use Title;
 use User;
-use WatchAction;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntity;
-use Wikibase\EntityContent;
-use Wikibase\Item;
-use Wikibase\ItemContent;
-use WikiPage;
 
 /**
  * @covers Wikibase\EditEntity
@@ -19,21 +18,16 @@ use WikiPage;
  * @group WikibaseRepo
  * @group EditEntity
  *
- * The database group has as a side effect that temporal database tables are created. This makes
- * it possible to test without poisoning a production database.
  * @group Database
- *
- * Some of the tests takes more time, and needs therefor longer time before they can be aborted
- * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
- * that hold the first tests in a pending state awaiting access to the database.
- * @group medium
+ *        ^--- needed just because we are using Title objects.
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
 class EditEntityTest extends \MediaWikiTestCase {
 
-	private static $testRevisions = null;
+	protected $permissions;
+	protected $userGroups;
 
 	protected static function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -45,65 +39,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 		return $user;
 	}
 
-	protected function getTestRevisions() {
-		if ( self::$testRevisions === null ) {
-			$prefix = __CLASS__ . '/';
-
-			$user = self::getUser( "EditEntityTestUser2" );
-			$otherUser = self::getUser( "EditEntityTestUser2" );
-
-			$itemContent = ItemContent::newEmpty();
-			$itemContent->getEntity()->setLabel('en', $prefix. "foo");
-			$status = $itemContent->save( "rev 0", $user, EDIT_NEW );
-			$this->assertTrue( $status->isGood(), $status->getWikiText() );
-			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
-
-			$itemContent = $itemContent->copy();
-			$itemContent->getEntity()->setLabel('en', $prefix. "bar");
-			$status = $itemContent->save( "rev 1", $otherUser, EDIT_UPDATE );
-			$this->assertTrue( $status->isGood(), $status->getWikiText() );
-			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
-
-			$itemContent = $itemContent->copy();
-			$itemContent->getEntity()->setLabel('de', $prefix. "bar");
-			$status = $itemContent->save( "rev 2", $user, EDIT_UPDATE );
-			$this->assertTrue( $status->isGood(), $status->getWikiText() );
-			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
-
-			$itemContent = $itemContent->copy();
-			$itemContent->getEntity()->setLabel('en', $prefix. "test");
-			$itemContent->getEntity()->setDescription('en', "more testing");
-			$status = $itemContent->save( "rev 3", $user, EDIT_UPDATE );
-			$this->assertTrue( $status->isGood(), $status->getWikiText() );
-			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
-		}
-
-		return self::$testRevisions;
-	}
-
-	protected $permissions;
-	protected $userGroups;
-
 	function setUp() {
 		global $wgGroupPermissions;
-		global $wgOut;
 
 		parent::setUp();
 
- 		$this->permissions = $wgGroupPermissions;
+		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = array( 'user' );
-
-		$title = Title::newFromText( "Test" );
-		$this->setMwGlobals( 'wgTitle', $title );
-
-		$wgOut->setTitle( $title );
-
-		static $hasTestSites = false;
-
-		if ( !$hasTestSites ) {
-			TestSites::insertIntoDb();
-			$hasTestSites = true;
-		}
 	}
 
 	function tearDown() {
@@ -112,6 +54,79 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$wgGroupPermissions = $this->permissions;
 
 		parent::tearDown();
+	}
+
+	/**
+	 * @param MockRepository $repo
+	 * @param Entity $entity
+	 * @param User $user
+	 * @param $baseRevId
+	 *
+	 * @return EditEntity
+	 */
+	protected function makeEditEntity( MockRepository $repo, Entity $entity, User $user = null, $baseRevId = false ) {
+		$context = new \RequestContext();
+		$context->setRequest( new \FauxRequest() );
+
+		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function ( EntityId $id ) {
+				return Title::makeTitle( NS_MAIN, $id->getEntityType() . '/' . $id->getSerialization() );
+			}));
+
+		$titleLookup->expects( $this->any() )
+			->method( 'getNamespaceForType' )
+			->will( $this->returnValue( NS_MAIN ) );
+
+		$checks = $this->getMockBuilder( 'Wikibase\PreSaveChecks' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$checks->expects( $this->any() )
+			->method( 'applyPreSaveChecks' )
+			->will( $this->returnValue( Status::newGood() ) );
+
+		if ( !$user ) {
+			$user = User::newFromName( 'EditEntityTestUser' );
+		}
+
+		$edit = new EditEntity( $titleLookup, $repo, $repo, $entity, $user, $baseRevId, $context );
+		$edit->setPreSafeChecks( $checks );
+
+		return $edit;
+	}
+
+	/**
+	 * @return MockRepository
+	 */
+	protected function makeMockRepo() {
+		$repo = new MockRepository();
+
+		$user = self::getUser( 'EditEntityTestUser1' );
+		$otherUser = self::getUser( 'EditEntityTestUser2' );
+
+		/* @var Item $item */
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q17' ) );
+		$item->setLabel('en', 'foo' );
+		$repo->putEntity( $item, 10, 0, $user );
+
+		$item = $item->copy();
+		$item->setLabel( 'en', 'bar' );
+		$repo->putEntity( $item, 11, 0, $otherUser );
+
+		$item = $item->copy();
+		$item->setLabel( 'de', 'bar' );
+		$repo->putEntity( $item, 12, 0, $user );
+
+		$item = $item->copy();
+		$item->setLabel('en', 'test' );
+		$item->setDescription( 'en', 'more testing' );
+		$repo->putEntity( $item, 13, 0, $user );
+
+		return $repo;
 	}
 
 	public function provideHasEditConflict() {
@@ -123,71 +138,69 @@ class EditEntityTest extends \MediaWikiTestCase {
 		 * #3: label: array( 'en' => 'test', 'de' => 'bar' ), description: array( 'en' => 'more testing' );
 		*/
 
-		$prefix = get_class( $this ) . '/';
-
 		return array(
 			array( // #0: case I: no base rev given.
 				null,  // input data
-				null,  // base rev index
+				0,  // base rev
 				false, // expected conflict
 				false, // expected fix
 			),
 			array( // #1: case II: base rev == current
 				null,  // input data
-				3,     // base rev index
+				13,     // base rev
 				false, // expected conflict
 				false, // expected fix
 			),
 			array( // #2: case IIIa: user was last to edit
 				array( // input data
-					'label' => array( 'de' => $prefix. 'yarrr' ),
+					'label' => array( 'de' => 'yarrr' ),
 				),
-				2,     // base rev index
+				12,     // base rev
 				true,  // expected conflict
 				true,  // expected fix
 				array( // expected data
-					'label' => array( 'en' => $prefix. 'test', 'de' => $prefix. 'yarrr' ),
+					'label' => array( 'en' => 'test', 'de' => 'yarrr' ),
 				)
 			),
 			array( // #3: case IIIb: user was last to edit, but intoduces a new operand
 				array( // input data
-					'label' => array( 'de' => $prefix. 'yarrr' ),
+					'label' => array( 'de' => 'yarrr' ),
 				),
-				1,     // base rev index
+				11,     // base rev
 				true,  // expected conflict
 				false, // expected failure, diff operand change
 				null
 			),
 			array( // #4: case IV: patch applied
 				array( // input data
-					'label' => array( 'nl' => $prefix. 'test', 'fr' => $prefix. 'frrrrtt' ),
+					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt' ),
 				),
-				0,     // base rev index
+				10,     // base rev
 				true,  // expected conflict
 				true,  // expected fix
 				array( // expected data
-					'label' => array( 'de' => $prefix. 'bar', 'en' => $prefix. 'test',
-					                  'nl' => $prefix. 'test', 'fr' => $prefix. 'frrrrtt' ),
+					'label' => array( 'de' => 'bar', 'en' => 'test',
+					                  'nl' => 'test', 'fr' => 'frrrrtt' ),
 				)
 			),
 			array( // #5: case V: patch failed, expect a conflict
 				array( // input data
-					'label' => array( 'nl' => $prefix. 'test', 'de' => $prefix. 'bar' ),
+					'label' => array( 'nl' => 'test', 'de' => 'bar' ),
 				),
-				0,     // base rev index
+				10,     // base rev
 				true,  // expected conflict
 				false, // expected fix
 				null   // expected data
 			),
 			array( // #6: case VI: patch is empty, keep current (not base)
 				array( // input data
-					'label' => array( 'en' => $prefix. 'bar', 'de' => $prefix. 'bar' ),
+					'label' => array( 'en' => 'bar', 'de' => 'bar' ),
 				),
-				2,     // base rev index
+				12,     // base rev
 				true,  // expected conflict
 				true,  // expected fix
 				array( // expected data
-					'label' => array( 'en' => $prefix. 'test', 'de' => $prefix. 'bar' ),
+					'label' => array( 'en' => 'test', 'de' => 'bar' ),
 					'description' => array( 'en' => 'more testing' )
 				)
 			),
@@ -197,18 +210,15 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideHasEditConflict
 	 */
-	public function testHasEditConflict( $inputData, $baseRevisionIdx, $expectedConflict, $expectedFix, array $expectedData = null ) {
-		/* @var $content \Wikibase\EntityContent */
-		/* @var $revision \Revision */
+	public function testHasEditConflict( $inputData, $baseRevisionId, $expectedConflict, $expectedFix, array $expectedData = null ) {
+		$repo = $this->makeMockRepo();
 
-		$user = self::getUser( 'EntityEditEntityTestHasEditConflictUser' );
+		$entityId = new ItemId( 'Q17' );
+		$revision = $repo->getEntityRevision( $entityId, $baseRevisionId );
+		$entity = $revision->getEntity( $entityId );
 
-		$revisions = $this->getTestRevisions();
-
-		$baseRevisionId = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx]->getId() : null;
-		$revision = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx] : $revisions[ count( $revisions ) -1 ];
-		$content = $revision->getContent();
-		$entity = $content->getEntity();
+		// NOTE: the user name must be the one used in makeMockRepo()
+		$user = self::getUser( 'EditEntityTestUser1' );
 
 		// change entity ----------------------------------
 		if ( $inputData === null ) {
@@ -234,7 +244,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		// save entity ----------------------------------
-		$editEntity = new EditEntity( $content, $user, $baseRevisionId );
+		$editEntity = $this->makeEditEntity( $repo, $entity, $user, $baseRevisionId );
 
 		$conflict = $editEntity->hasEditConflict();
 		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
@@ -244,17 +254,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expectedFix, $fixed, 'fixEditConflict()' );
 		}
 
-		/*
-		 * //TODO: make EditEntity report errors without saving content!
-		$expectedFailure = ( $expectedConflict && !$expectedFix );
-
-		$this->assertEquals( $expectedFailure, $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ), 'hasError()' );
-		$this->assertEquals( $expectedFailure, $editEntity->showErrorPage(), 'showErrorPage' );
-		$this->assertNotEquals( $expectedFailure, $editEntity->getStatus()->isOK(), 'isOK()' );
-		*/
-
 		if ( $expectedData !== null ) {
-			$data = $editEntity->getNewContent()->getEntity()->toArray();
+			$data = $editEntity->getNewEntity()->toArray();
 
 			foreach ( $expectedData as $key => $expectedValue ) {
 				$actualValue = $data[$key];
@@ -274,39 +275,37 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAttemptSaveWithLateConflict
 	 */
 	public function testAttemptSaveWithLateConflict( $baseRevId, $expectedConflict ) {
-		$user = self::getUser( "EditEntityTestUser" );
-		$prefix = get_class( $this ) . '/';
+		$repo = $this->makeMockRepo();
+
+		$user = self::getUser( 'EditEntityTestUser' );
 
 		// create item
-		$content = ItemContent::newEmpty();
-		$content->getEntity()->setLabel( 'en', $prefix . 'Test' );
-		$status = $content->save( "rev 0", $user, EDIT_NEW );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
+		$entity = Item::newEmpty();
+		$entity->setLabel( 'en', 'Test' );
+
+		$repo->putEntity( $entity, 0, 0, $user );
 
 		// begin editing the entity
-		$content->getEntity()->setLabel( 'en', $prefix . 'Trust' );
+		$entity = $entity->copy();
+		$entity->setLabel( 'en', 'Trust' );
 
-		$editEntity = new EditEntity( $content, $user, $baseRevId );
-		$editEntity->getCurrentRevision(); // make sure EditEntity has page and revision
+		$editEntity = $this->makeEditEntity( $repo,  $entity, $user, $baseRevId );
+		$editEntity->getLatestRevision(); // make sure EditEntity has page and revision
 
-		$this->assertEquals( $baseRevId, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
+		$this->assertEquals( $baseRevId !== false, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
 
-		// create independent EntityContent instance for the same entity, and modify and save it
-		$page = WikiPage::factory( $content->getTitle() );
-
+		// create independent Entity instance for the same entity, and modify and save it
+		$entity2 = $entity->copy();
 		$user2 = self::getUser( "EditEntityTestUser2" );
 
-		/* @var EntityContent $content2 */
-		$content2 = $page->getContent();
-		$content2->getEntity()->setLabel( 'en', $prefix . 'Toast' );
-		$status = $content2->save( 'Trolololo!', $user2, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
+		$entity2->setLabel( 'en', 'Toast' );
+		$repo->putEntity( $entity2, 0, 0, $user2 );
 
 		// now try to save the original edit. The conflict should still be detected
 		$token = $user->getEditToken();
 		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE, $token );
 
-		$id = $content->getEntity()->getId()->__toString();
+		$id = $entity->getId()->__toString();
 
 		if ( $status->isOK() ) {
 			$statusMessage = "Status ($id): OK";
@@ -325,69 +324,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $expectedConflict, $editEntity->showErrorPage(),
 			"If and only if there was an error, an error page should be shown.\n$statusMessage" );
-	}
-
-	public function testUserWasLastToEdit() {
-		// EntityContent is abstract so we use the subclass ItemContent
-		// to get a concrete class to instantiate. Still note that our
-		// test target is EntityContent::userWasLastToEdit.
-		$anonUser = User::newFromId(0);
-		$anonUser->setName( '127.0.0.1' );
-		$user = self::getUser( "EditEntityTestUser" );
-		$itemContent = ItemContent::newEmpty();
-		$prefix = get_class( $this ) . '/';
-
-		// check for default values, last revision by anon --------------------
-		$itemContent->getItem()->setLabel( 'en', $prefix . "Test Anon default" );
-		$status = $itemContent->save( 'testedit for anon', $anonUser, EDIT_NEW );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
-		$res = EditEntity::userWasLastToEdit( false, false );
-		$this->assertFalse( $res );
-
-		// check for default values, last revision by sysop --------------------
-		$itemContent->getItem()->setLabel( 'en', $prefix . "Test SysOp default" );
-		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
-		$res = EditEntity::userWasLastToEdit( false, false );
-		$this->assertFalse( $res );
-
-		// check for default values, last revision by anon --------------------
-		$itemContent->getItem()->setLabel( 'en', $prefix . "Test Anon with user" );
-		$status = $itemContent->save( 'testedit for anon', $anonUser, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
-		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), false );
-		$this->assertFalse( $res );
-
-		// check for default values, last revision by sysop --------------------
-		$itemContent->getItem()->setLabel( 'en', $prefix . "Test SysOp with user" );
-		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
-		$res = EditEntity::userWasLastToEdit( $user->getId(), false );
-		$this->assertFalse( $res );
-
-		// create an edit and check if the anon user is last to edit --------------------
-		$page = $itemContent->getWikiPage();
-		$lastRevId = $page->getRevision()->getId();
-		$itemContent->getItem()->setLabel( 'en', $prefix . "Test Anon" );
-		$status = $itemContent->save( 'testedit for anon', $anonUser, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
-		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), $lastRevId );
-		$this->assertTrue( $res );
-		// also check that there is a failure if we use the sysop user
-		$res = EditEntity::userWasLastToEdit( $user->getId(), $lastRevId );
-		$this->assertFalse( $res );
-
-		// create an edit and check if the sysop user is last to edit --------------------
-		$page = $itemContent->getWikiPage();
-		$lastRevId = $page->getRevision()->getId();
-		$itemContent->getItem()->setLabel( 'en', $prefix . "Test SysOp" );
-		$status = $itemContent->save( 'testedit for sysop', $user, EDIT_UPDATE );
-		$this->assertTrue( $status->isGood(), $status->getWikiText() );
-		$res = EditEntity::userWasLastToEdit( $user->getId(), $lastRevId );
-		$this->assertTrue( $res );
-		// also check that there is a failure if we use the anon user
-		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), $lastRevId );
-		$this->assertFalse( $res );
 	}
 
 	public function dataCheckEditPermissions() {
@@ -419,16 +355,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function prepareItemForPermissionCheck( $group, $permissions, $create ) {
+	protected function prepareItemForPermissionCheck( MockRepository $repo, $group, $permissions, $create ) {
 		$user = self::getUser( "EditEntityTestUser" );
 
-		$content = ItemContent::newEmpty();
-		$prefix = get_class( $this ) . '/';
+		$item = Item::newEmpty();
 
 		if ( $create ) {
-			$content->getItem()->setLabel( 'de', $prefix . 'Test' );
-			$status = $content->save( "testing", null, EDIT_NEW );
-			$this->assertTrue( $status->isGood(), $status->getWikiText() );
+			$item->setLabel( 'de', 'Test' );
+			$repo->putEntity( $item, 0, 0, $user );
 		}
 
 		if ( !in_array( $group, $user->getEffectiveGroups() ) ) {
@@ -443,20 +377,20 @@ class EditEntityTest extends \MediaWikiTestCase {
 			) );
 		}
 
-		return $content;
+		return $item;
 	}
 
 	/**
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testCheckEditPermissions( $group, $permissions, $create, $expectedOK ) {
-		$prefix = get_class( $this ) . '/';
+		$repo = $this->makeMockRepo();
 
-		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
-		$content->getItem()->setLabel( 'xx', $prefix . 'Foo' . '/' . __FUNCTION__ );
+		$item = $this->prepareItemForPermissionCheck( $repo, $group, $permissions, $create );
+		$item->setLabel( 'xx', 'Foo' . '/' . __FUNCTION__ );
 
 		$user = self::getUser( "EditEntityTestUser" );
-		$edit = new EditEntity( $content, $user );
+		$edit = $this->makeEditEntity( $repo, $item, $user );
 
 		$edit->checkEditPermissions();
 
@@ -468,16 +402,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testAttemptSavePermissions( $group, $permissions, $create, $expectedOK ) {
-		$prefix = get_class( $this ) . '/';
+		$repo = $this->makeMockRepo();
+
 		$user = self::getUser( "EditEntityTestUser" );
 
-		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
-		$content->getItem()->setLabel( 'xx', $prefix . 'Foo' . '/' . __FUNCTION__ );
+		$item = $this->prepareItemForPermissionCheck( $repo, $group, $permissions, $create );
+		$item->setLabel( 'xx', 'Foo' . '/' . __FUNCTION__ );
 
 		$token = $user->getEditToken();
-		$edit = new EditEntity( $content, $user );
+		$edit = $this->makeEditEntity( $repo, $item, $user );
 
-		$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : EDIT_UPDATE ), $token );
+		$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), $token );
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
@@ -609,6 +544,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataAttemptSaveRateLimit
 	 */
 	public function testAttemptSaveRateLimit( $limits, $groups, $edits ) {
+		$repo = $this->makeMockRepo();
+
 		$this->setMwGlobals(
 			'wgRateLimits',
 			$limits
@@ -620,10 +557,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 			new \HashBagOStuff()
 		);
 
-		$user = \User::newFromName( "UserForTestAttemptSaveRateLimit" );
+		$user = self::getUser( "UserForTestAttemptSaveRateLimit" );
 		$this->setUserGroups( $user, $groups );
 
-		$prefix = get_class( $this ) . '/';
 		$items = array();
 
 		foreach ( $edits as $e ) {
@@ -640,12 +576,10 @@ class EditEntityTest extends \MediaWikiTestCase {
 				$items[$name] = $item;
 			}
 
-			$item->setLabel( 'en', $prefix . $label );
+			$item->setLabel( 'en', $label );
 
-			$content = ItemContent::newFromItem( $item );
-
-			$edit = new EditEntity( $content, $user );
-			$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : EDIT_UPDATE ), false );
+			$edit = $this->makeEditEntity( $repo, $item, $user );
+			$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), false );
 
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
@@ -677,10 +611,11 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideIsTokenOk
 	 */
 	public function testIsTokenOk( $token, $shouldWork ) {
+		$repo = $this->makeMockRepo();
 		$user = self::getUser( "EditEntityTestUser" );
 
-		$content = ItemContent::newEmpty();
-		$edit = new EditEntity( $content, $user );
+		$item = Item::newEmpty();
+		$edit = $this->makeEditEntity( $repo, $item, $user );
 
 		// check valid token --------------------
 		if ( $token === true ) {
@@ -693,111 +628,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
 		$this->assertNotEquals( $shouldWork, $edit->showErrorPage() );
 	}
-
-	public static function provideGetWatchDefault() {
-		// $watchdefault, $watchcreations, $new, $watched, $expected
-
-		return array(
-			array( false, false, false, false, false ),
-			array( false, false, false, true,  true ),
-			array( false, false, true,  false, false ),
-			//array( false, false, true,  true,  true ), // can't happen, a new pages is never watched
-
-			array( false, true,  false, false, false ),
-			array( false, true,  false, true,  true ),
-			array( false, true,  true,  false, true ),
-			//array( false, true,  true,  true,  true ), // can't happen, a new pages is never watched
-
-			array( true,  false, false, false, true ),
-			array( true,  false, false, true,  true ),
-			array( true,  false, true,  false, true ),
-			//array( true,  false, true,  true,  true ), // can't happen, a new pages is never watched
-
-			array( true,  true,  false, false, true ),
-			array( true,  true,  false, true,  true ),
-			array( true,  true,  true,  false, true ),
-			//array( true,  true,  true,  true,  true ), // can't happen, a new pages is never watched
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetWatchDefault
-	 */
-	public function testGetWatchDefault( $watchdefault, $watchcreations, $new, $watched, $expected ) {
-		$prefix = get_class( $this ) . '/';
-		$user = self::getUser( "EditEntityTestUser2" );
-
-		$user->setOption( 'watchdefault', $watchdefault );
-		$user->setOption( 'watchcreations', $watchcreations );
-
-		$item = Item::newEmpty();
-		$item->setLabel( "en", $prefix . "Test" );
-
-		if ( $new ) {
-			$item->setId( 33224477 );
-			$content = ItemContent::newFromItem( $item );
-		} else {
-			$content = ItemContent::newFromItem( $item );
-			$stats = $content->save( "testing", null, EDIT_NEW );
-			$this->assertTrue( $stats->isOK(), "failed to save" ); // sanity
-		}
-
-		$title = $content->getTitle();
-		$this->assertInternalType( 'object', $title ); // sanity
-
-		if ( $watched ) {
-			WatchAction::doWatch( $title, $user );
-		} else {
-			WatchAction::doUnwatch( $title, $user );
-		}
-
-		$edit = new EditEntity( $content, $user );
-		$watch = $edit->getWatchDefault();
-		$this->assertEquals( $expected, $watch, "getWatchDefault" );
-
-		if ( $title && $title->exists() ) {
-			// clean up
-			$page = WikiPage::factory( $title );
-			$page->doDeleteArticle( "testing" );
-		}
-	}
-
-	public static function provideUpdateWatchlist() {
-		// $wasWatched, $watch, $expected
-
-		return array(
-			array( false, false, false ),
-			array( false, true,  true ),
-			array( true,  false, false ),
-			array( true,  true,  true ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideUpdateWatchlist
-	 */
-	public function testUpdateWatchlist( $wasWatched, $watch, $expected ) {
-		$prefix = get_class( $this ) . '/';
-		$user = self::getUser( "EditEntityTestUser2" );
-
-		$content = ItemContent::newEmpty();
-		$content->getEntity()->setLabel( "en", $prefix . "Test" );
-		$content->getEntity()->setId( 33224477 );
-
-		$title = $content->getTitle();
-
-		if ( $wasWatched ) {
-			WatchAction::doWatch( $title, $user );
-		} else {
-			WatchAction::doUnwatch( $title, $user );
-		}
-
-		$edit = new EditEntity( $content, $user );
-		$edit->updateWatchlist( $watch );
-
-		$this->assertEquals( $expected, $user->isWatched( $title ) );
-	}
-
 
 	public static function provideAttemptSaveWatch() {
 		// $watchdefault, $watchcreations, $new, $watched, $watch, $expected
@@ -821,46 +651,30 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAttemptSaveWatch
 	 */
 	public function testAttemptSaveWatch( $watchdefault, $watchcreations, $new, $watched, $watch, $expected ) {
-		$prefix = get_class( $this ) . '/';
+		$repo = $this->makeMockRepo();
+
 		$user = self::getUser( "EditEntityTestUser2" );
+
+		if ( $user->getId() === 0 ) {
+			$user->addToDatabase();
+		}
 
 		$user->setOption( 'watchdefault', $watchdefault );
 		$user->setOption( 'watchcreations', $watchcreations );
 
 		$item = Item::newEmpty();
-		$item->setLabel( "en", $prefix . "Test" );
-
-		if ( $new ) {
-			$content = ItemContent::newFromItem( $item );
-		} else {
-			$content = ItemContent::newFromItem( $item );
-			$stats = $content->save( "testing", null, EDIT_NEW );
-			$this->assertTrue( $stats->isOK(), "failed to save" ); // sanity
-		}
+		$item->setLabel( "en", "Test" );
 
 		if ( !$new ) {
-			$title = $content->getTitle();
-			$this->assertInternalType( 'object', $title ); // sanity
-
-			if ( $watched ) {
-				WatchAction::doWatch( $title, $user );
-			} else {
-				WatchAction::doUnwatch( $title, $user );
-			}
+			$repo->putEntity( $item ) ;
+			$repo->updateWatchlist( $user, $item->getId(), $watched );
 		}
 
-		$edit = new EditEntity( $content, $user );
+		$edit = $this->makeEditEntity( $repo, $item, $user );
 		$status = $edit->attemptSave( "testing", $new ? EDIT_NEW : EDIT_UPDATE, false, $watch );
 
 		$this->assertTrue( $status->isOK(), "edit failed: " . $status->getWikiText() ); // sanity
 
-		$title = $content->getTitle();
-		$this->assertEquals( $expected, $user->isWatched( $title ), "watched" );
-
-		if ( $title && $title->exists() ) {
-			// clean up
-			$page = WikiPage::factory( $title );
-			$page->doDeleteArticle( "testing" );
-		}
+		$this->assertEquals( $expected, $repo->isWatching( $user, $item->getId() ), "watched" );
 	}
 }
