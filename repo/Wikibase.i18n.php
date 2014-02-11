@@ -1545,6 +1545,7 @@ $messages['af'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Asaifm
  * @author Aude
  * @author Calak
  * @author Kaganer
@@ -1555,17 +1556,33 @@ $messages['af'] = array(
  * @author زكريا
  */
 $messages['ar'] = array(
+	'specialpages-group-wikibaserepo' => 'مستودع قاعدة ويكي',
 	'wikibase-edit' => 'عدل',
 	'wikibase-save' => 'حفظ',
 	'wikibase-cancel' => 'إلغاء',
 	'wikibase-add' => 'أضف',
+	'wikibase-addreference' => 'إضافة مصدر',
 	'wikibase-save-inprogress' => 'يحفظ...',
 	'wikibase-remove-inprogress' => 'يزيل...',
+	'wikibase-label-empty' => 'ليس هناك تعريف إلى الآن',
+	'wikibase-label-edit-placeholder' => 'أدخل تعريف',
+	'wikibase-label-edit-placeholder-language-aware' => 'أدخل تعريف في $1',
+	'wikibase-description-empty' => 'لم يتم توفير وصف بعد',
+	'wikibase-description-edit-placeholder' => 'أدخل وصف',
+	'wikibase-description-edit-placeholder-language-aware' => 'أدخل وصف في $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'موقع',
 	'wikibase-sitelink-page-edit-placeholder' => 'صفحة',
+	'wikibase-alias-edit-placeholder' => 'أدخل كنية',
+	'wikibase-label-input-help-message' => 'أدخل عنوان لمجموعة البيانات الموجودة في $1.',
+	'wikibase-description-input-help-message' => 'أدخل وصف مقتضب في $1.',
 	'wikibase-statements' => 'بيانات',
 	'wikibase-terms' => 'بلغات أخرى',
 	'wikibase-remove' => 'ألغ',
+	'wikibase-move-up' => 'تحريك للأعلى',
+	'wikibase-move-down' => 'تحريك للأسفل',
+	'wikibase-undo-title' => 'الرجوع عن التعديل إلى "$1"',
+	'wikibase-restore-title' => 'استعادة نسخة قديمة من "$1"',
+	'wikibase-partial-undo' => 'يمكن التراجع عن هذا التعديل جزئياً.',
 	'wikibase-undo-revision-error' => 'فشل عملية الرجوع',
 	'wikibase-propertyedittool-full' => 'قائمة القيم اكتملت',
 	'wikibase-aliases-label' => 'تعرف أيضا باسم:',
@@ -4390,8 +4407,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literale Daten für eine geografische Position, die als Breitengrad-Längengrad-Paar in GMS oder Dezimalgrad für den Sternenkörper angegeben ist. Standards sind „Erde“, anschließend „WGS84“. Es wird eine Auflösung und ein Bereich hinzugefügt.
 * latitude – impliziter erster Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „N/S“ angegeben.
 * longitude – impliziter zweiter Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „O/W“ angegeben.
-* altitude (optional) – ausdrücklicher (?) Wert für die Höhe über einer Bezugsebene. Für den Globus „Erde“ ist der Bezugsglobus „WGS84“.
-* globe (optional) – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.', # Fuzzy
+* globe (optional) – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.',
 	'wikibase-listdatatypes-quantity-head' => 'Menge',
 	'wikibase-listdatatypes-quantity-body' => 'Literales Datenfeld für eine Menge, die sich auf eine Art klar definierte Einheit bezieht. Die tatsächliche Einheit geht in die Datenwerte, die eingegeben werden.
 * value – impliziter Teil der Zeichenkette (Mapping des Einheitspräfixes ist unklar).
@@ -6896,8 +6912,7 @@ ffirmation ajoutée}}',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Données littérales pour une position géographique donnée sous forme de paire latitude-longitude en GMS ou en degrés décimaux pour le corps céleste concerné. Par défaut, "Terre" puis "WGS84". Cela ajoute une résolution et une portée.
 * latitude — première partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe ou par le N/S en suffixe
 * longitude – seconde partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe soit par le E/W en suffixe
-* altitude (facultatif) – valeur explicite (?) pour l’élévation au-dessus d’un plan de référence, pour le globe "Terre" ce serait le globe de référence "WGS84"
-* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"', # Fuzzy
+* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantité',
 	'wikibase-listdatatypes-quantity-body' => 'Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.
 * value — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
@@ -7923,7 +7938,6 @@ $messages['he'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי, בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
 * latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף.
 * longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף.
-* altitude (לא חובה) ערך מפורש (?) לגובה על משטח הייחוס, עבור כדור הארץ (Earth) זה גלובוס הייחוס "WGS84"
 * globe (לא חובה) ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84',
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
 	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
@@ -10120,7 +10134,6 @@ $messages['ja'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。「地球」それから「WGS84」が既定となっており、分解能と範囲が指定されます。
 * latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N または S で指定されます
 * longitude – 座標文字列の2番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の E または W で指定されます
-* altitude (省略可) – ある参考面からの高さを表した明示 (?) の値。地球については「WGS84」準拠楕円体が使われる
 * globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
@@ -11941,8 +11954,7 @@ $messages['mk'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава резолуција и опсег.
 * географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) од координатната низа, правецот е зададен со претставка-симбол или со наставка N/S
 * географска должина (''longitude'') – поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
-* висина (''altitude'') [незадолжително] – искажана (?) вредност за висината над подјовната рамнина; за глобусот „Земја“ тоа е појдовниот глобус „WGS84“
-* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“", # Fuzzy
+* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“",
 	'wikibase-listdatatypes-quantity-head' => 'Количина',
 	'wikibase-listdatatypes-quantity-body' => "Дословно податочно поле за количина што се однесува на некој вид на добро утврдена единица. Самата единица оди во податочната вредност што се внесува.
 * вредност (''value'') – содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
@@ -12715,8 +12727,10 @@ $messages['nb'] = array(
 	'wikibase-remove-inprogress' => 'Fjerner…',
 	'wikibase-label-empty' => 'Ingen etikett definert',
 	'wikibase-label-edit-placeholder' => 'lag etikett',
+	'wikibase-label-edit-placeholder-language-aware' => 'legg inn etikett i $1',
 	'wikibase-description-empty' => 'Ingen beskrivelse definert',
 	'wikibase-description-edit-placeholder' => 'lag beskrivelse',
+	'wikibase-description-edit-placeholder-language-aware' => 'legg inn beskrivelse i $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'nettsted',
 	'wikibase-sitelink-page-edit-placeholder' => 'side',
 	'wikibase-alias-edit-placeholder' => 'lag kallenavn',
@@ -12785,6 +12799,9 @@ IP-adressen din vil bli lagret i redigeringshistorikken.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Et annet søk ($3) har allerede etiketten «$1» knyttet til språkkoden $2.',
 	'wikibase-error-label-not-unique-item' => 'Et annet element ($3) har allerede etiketten «$1» og beskrivelsen «$4» knyttet til språkkoden $2.',
 	'wikibase-error-label-no-entityid' => 'Etiketten kan ikke være et gyldig element-id.',
+	'wikibase-wikibaserepopage-not-itemid' => '«$1» er ikke en gyldig element-ID.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Språkkoden «$1» er ukjent. Vennligst bruk en språkkode som kan gjenkjennes av systemet, slik som «nb».',
+	'wikibase-wikibaserepopage-invalid-id' => 'Entiteten «$1» er ukjent, sjekk om den har riktig form.',
 	'special-itembytitle' => 'Element fra tittel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Søk etter element med nettstedidentifikator og tittel',
 	'wikibase-itembytitle-lookup-site' => 'Nettsted:',
@@ -12843,17 +12860,34 @@ IP-adressen din vil bli lagret i redigeringshistorikken.',
 	'wikibase-setsitelink-intro' => 'Dette skjemaet lar deg angi nettstedlenken til et element. Du må angi id-en til et element (f.eks. Q23), et nettsted-ID (f.eks. «nowiki») og den ønskede lenken.',
 	'wikibase-setsitelink-site' => 'Nettsted-ID:',
 	'wikibase-setsitelink-label' => 'Nettstedlenke:',
+	'wikibase-setsitelink-badges' => 'Emblemer:',
 	'wikibase-setsitelink-submit' => 'Lagre nettstedlenke',
 	'wikibase-setsitelink-warning-remove' => 'Vil du virkelig fjerne nettstedlenken for [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Nettsted-IDen «$1» er ukjent. Du må bruke en eksisterende nettsted-ID, som f.eks. «nowiki».',
+	'wikibase-setsitelink-not-item' => 'Id $1 hører ikke til et element.',
+	'wikibase-setsitelink-not-badge' => 'Elementet $1 er ikke et emblem.',
 	'wikibase-setsitelink-add-failed' => 'Nettstedlenken kunne ikke lagres.',
 	'wikibase-setsitelink-remove-failed' => 'Nettstedlenken kunne ikke fjernes.',
-	'wikibase-setsitelink-not-itemid' => '«$1» er ikke et gyldig element-ID. Nettstedlenker kan kun angis for elementer.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Språk:',
-	'wikibase-modifyentity-invalid-id' => 'Entiteten «$1» er ukjent, sjekk om den har riktig form.',
-	'wikibase-modifyterm-invalid-langcode' => 'Språkkoden «$1» er ukjent. Vennligst bruk en språkkode som kan gjenkjennes av systemet, slik som «nb».',
+	'special-mergeitems' => 'Fletter to elementer',
+	'wikibase-mergeitems-intro' => 'Hvis du fletter to elementer, vil alle etiketter, beskrivelser, aliaser og utsagn bli flyttet fra det ene elementet over til det andre.',
+	'wikibase-mergeitems-fromid' => 'Id-en det flettes fra',
+	'wikibase-mergeitems-toid' => 'Id-en det flettes til',
+	'wikibase-mergeitems-submit' => 'Flett elementer',
 	'special-dispatchstats' => 'Statistikk for utsendte endringer.',
+	'wikibase-dispatchstats-intro' => 'Denne siden fremskaffer statistikk som sendes til klientene.
+En klientwiki informeres om en endring på {{SITENAME}} straks endringen er blitt sendt til den wikien og sendingen er blitt hentet fra jobbkøen og kjørt.
+* [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]] viser antallet og datoene for det eldste og det yngste elementet som i øyeblikket befinner seg i køen.
+* [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] gir informasjon om den mest og den minst forsinkede klientwikien samt en med midlere forsinkelse. For hver wiki blir følgende informasjon gitt:
+** "{{int:wikibase-dispatchstats-site-id}}" er intern ID for klientwikien.
+** "{{int:wikibase-dispatchstats-pos}}" er ID for den siste endringen sendt til wikien.
+** "{{int:wikibase-dispatchstats-lag-num}}" er antall endringer som ikke enda er sendt til wikien.
+** "{{int:wikibase-dispatchstats-lag-time}}" er tiden mellom siste endring sendt til wikien og siste endring gjort på {{SITENAME}}.
+** "{{int:wikibase-dispatchstats-touched}}" er tidspunktet da den siste gruppen av endringer ble sendt til wikien.',
+	'wikibase-dispatchstats-no-stats' => 'Det er for øyeblikket ingen tilgjengelig statistikk.',
+	'wikibase-dispatchstats-changes' => 'Endringloggstatistikk',
+	'wikibase-dispatchstats-stats' => 'Avsendingsstatistikk',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => 'Tidsstempel',
 	'wikibase-dispatchstats-oldest-change' => 'Eldste',
@@ -12881,6 +12915,7 @@ IP-adressen din vil bli lagret i redigeringshistorikken.',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'alle',
 	'wikibase-entitieswithoutlabel-submit' => 'Søk',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» er ikke en gyldig språkkode.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '«$1» er en ugyldig entitetstype',
 	'special-itemswithoutsitelinks' => 'Elementer uten nettstedlenker',
 	'special-entitydata' => 'Entity data',
 	'wikibase-entitydata-not-found' => 'Ingen entitet med IDen $1 ble funnet.',
@@ -12924,7 +12959,12 @@ for å finne ut hva som har skjedd.',
 	'wikibase-item-summary-wbsetaliases-add' => 'La til [$2] {{PLURAL:$1|kallenavn}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Fjernet [$2] {{PLURAL:$1|kallenavn}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'La til lenke til [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'La til lenke med emblemer til [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Endret lenke til [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Endret emblemer for [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Endret lenke og emblemer for $2',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjernet lenke til [$2]',
+	'wikibase-item-summary-wblinktitles-create' => 'Opprettet dette elementet for å knytte til sidene [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'La til språklenke for å koble sidene [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Opprettet {{PLURAL:$1|en påstand|påstander}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Opprettet {{PLURAL:$1|en påstand|påstander}}',
@@ -14041,6 +14081,8 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Inna właściwość ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Inne zapytanie ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2.',
 	'wikibase-error-label-not-unique-item' => 'Inny element ($3) ma już etykietę "$1" i opis "$4" powiązaną z językiem o kodzie $2.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Identyfikator języka „$1” jest nieznany. Użyj identyfikatora języka, który jest znany w systemie, na przykład „pl”.',
+	'wikibase-wikibaserepopage-invalid-id' => 'Identyfikator „$1” jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.',
 	'special-itembytitle' => 'Element według tytułu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Wyszukiwanie elementów według witryny i tytułu',
 	'wikibase-itembytitle-lookup-site' => 'Witryna:',
@@ -14097,8 +14139,6 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-setsitelink-intro' => 'Ten formularz pozwala na dodanie linku do strony w danym elemencie. Należy podać identyfikator (np. Q23), kod języka (np. „plwiki”) oraz tytuł strony, którą chcesz dodać.',
 	'wikibase-modifyentity-id' => 'Identyfikator:',
 	'wikibase-modifyterm-language' => 'Język:',
-	'wikibase-modifyentity-invalid-id' => 'Identyfikator „$1” jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.',
-	'wikibase-modifyterm-invalid-langcode' => 'Identyfikator języka „$1” jest nieznany. Użyj identyfikatora języka, który jest znany w systemie, na przykład „pl”.',
 	'special-dispatchstats' => 'Statystyki wysyłki zmian',
 	'wikibase-dispatchstats-intro' => 'Ta strona zawiera statystyki dotyczące wysyłki zmian do klientów.
 Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy zmiana została wysłane do tej wiki, a kolejka zadań na tej wiki przetworzyła to powiadomienie.
@@ -14261,6 +14301,8 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'action-label-update' => 'aktualizacji etykiet',
 	'action-description-remove' => 'kasowania opisów',
 	'action-description-update' => 'aktualizacji opisów',
+	'wikibase-time-precision-Gannum' => 'w $1 mld lat',
+	'wikibase-time-precision-Mannum' => 'w $1 mln lat',
 );
 
 /** Piedmontese (Piemontèis)
@@ -14724,6 +14766,8 @@ $messages['pt'] = array(
 	'wikibase-datatype-label' => 'Tipo de dados:',
 	'wikibase-claimview-snak-tooltip' => 'Insira um valor correspondente à propriedade denominada "$1". Se a propriedade não tem nenhum valor designado, ou o valor real não é conhecido, pode escolher uma alternativa para especificar um valor personalizado ao clicar no ícone ao lado da caixa de entrada de valor.',
 	'wikibase-claimview-snak-new-tooltip' => 'Depois de especificar uma propriedade, pode inserir um valor correspondente. Se a propriedade não tem nenhum valor designado, ou o valor real não é conhecido, pode escolher uma alternativa para especificar um valor personalizado ao clicar no ícone ao lado da caixa de entrada de valor.',
+	'wikibase-statementview-rank-preferred' => 'Classificação prefererida',
+	'wikibase-statementview-rank-deprecated' => 'Classificação obsoleta',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fonte|fontes}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Uma fonte não gravada|$1 fontes não gravadas}} ainda',
 	'wikibase-snakview-property-input-placeholder' => 'propriedade',
@@ -14852,6 +14896,7 @@ para descobrir o que lhe sucedeu.',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Criou {{PLURAL:$1|uma alegação|alegações}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Criou {{PLURAL:$1|uma alegação|alegações}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Criou {{PLURAL:$1|uma alegação|alegações}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Alterou a classificação de {{PLURAL:$3|alegação|alegações}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
 	'wikibase-listdatatypes-quantity-head' => 'Quantidade',
 	'wikibase-listdatatypes-time-head' => 'Tempo',
@@ -14919,6 +14964,8 @@ $messages['pt-br'] = array(
 	'wikibase-datatype-label' => 'Tipo de dados:',
 	'wikibase-claimview-snak-tooltip' => 'Insira um valor correspondente à propriedade "$1". Se a propriedade não possui valor designado ou o atual valor não for conhecido você pode, alternativamente, especificar um valor personalizado clicando no ícone próximo à caixa de entrada de valores.',
 	'wikibase-claimview-snak-new-tooltip' => 'Depois de especificar uma propriedade, você pode inserir um valor relacionado. Se a propriedade não possui valor designado ou o valor atual não for conhecido você pode, alternativamente, especificar um valor personalizado clicando no ícone próximo à caixa de entrada de valores.',
+	'wikibase-statementview-rank-preferred' => 'Classificação prefererida',
+	'wikibase-statementview-rank-deprecated' => 'Classificação obsoleta',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fonte|fontes}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Uma fonte ainda não salva|$1 fontes ainda não salvas}}',
 	'wikibase-snakview-property-input-placeholder' => 'propriedade',
@@ -14939,6 +14986,8 @@ $messages['pt-br'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propriedade ($3) já possui o rótulo "$1" associado com o código de idioma $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Outra consulta ($3) já possui o rótulo "$1" associado com o código de idioma $2.',
 	'wikibase-error-label-not-unique-item' => 'Outro item ($3) já possui o rótulo "$1" e a descrição "$4" associados com o código de idioma $2.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'O identificador de idioma "$1" é desconhecido. Utilize um identificador de idioma reconhecido pelo sistema, tal como "en".',
+	'wikibase-wikibaserepopage-invalid-id' => 'O ID "$1" não foi reconhecido pelo sistema. Utilize um ID válido para a entidade.',
 	'special-itembytitle' => 'Item por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Pesquisar itens por site e título',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -14983,8 +15032,6 @@ $messages['pt-br'] = array(
 	'wikibase-setaliases-submit' => 'Adicionar nomes alternativos',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Idioma:',
-	'wikibase-modifyentity-invalid-id' => 'O ID "$1" não foi reconhecido pelo sistema. Utilize um ID válido para a entidade.',
-	'wikibase-modifyterm-invalid-langcode' => 'O identificador de idioma "$1" é desconhecido. Utilize um identificador de idioma reconhecido pelo sistema, tal como "en".',
 	'special-dispatchstats' => 'Alterar envio de estatísticas',
 	'wikibase-dispatchstats-no-stats' => 'Neste momento não existem estatísticas disponíveis.',
 	'wikibase-dispatchstats-changes' => 'Altere as estatísticas de log',
@@ -15055,6 +15102,7 @@ para descobrir o que ocorreu.',
 	'wikibase-item-summary-special-create-item' => 'Criou um item com {{PLURAL:$1|um valor [$2]|valores [$2]}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Criada a afirmação',
 	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$1|Removida uma afirmação|Removidas afirmações}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Alterou a classificação de {{PLURAL:$3|alegação|alegações}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Criada uma nova propriedade',
 	'wikibase-property-summary-wbeditentity-update' => 'Uma propriedade foi atualizada',
 	'wikibase-property-summary-wbeditentity-override' => 'Limpou uma propriedade',
@@ -18791,11 +18839,10 @@ $messages['zh-hans'] = array(
 *查询 – IRI字符串的含蓄部分
 *片断 – IRI字符串的含蓄部分',
 	'wikibase-listdatatypes-globe-coordinate-head' => '地球坐标',
-	'wikibase-listdatatypes-globe-coordinate-body' => '由dms或十进制经纬度度指定的地理位置的原始数据代码。默认为“地球”其次是“WGS84”。其加入一解析度及范围。
-*纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供
-*经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供
-*高度（可选）——距离参考平面的一个精确数值，“地球”將以“WGS84”作为参考
-*星球（可选）——精确值，默认指向“地球”，其次為“WGS84”', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十进制经纬度度指定的地理位置的原始数据代码。默认为“地球”其次是“WGS84”。其加入一解析度及范围。
+* 纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供
+* 经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供
+* 星球（可选）——精确值，默认指向“地球”，其次为“WGS84”',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '一些精确定义单位的数值的原始暑假字段。实际单位也输入到数据中。
 *值－－字符的隐藏部分（单位不明）
@@ -19167,11 +19214,10 @@ $messages['zh-hant'] = array(
 *查詢——IRI串的非明示部分
 *片——IRI串的非明示部分',
 	'wikibase-listdatatypes-globe-coordinate-head' => '地理座標',
-	'wikibase-listdatatypes-globe-coordinate-body' => '由dms或十進制經緯度指定的地理位置的原始數據字段。預設為「Earth」甚次為「WGS84」。其加入一解像度及範圍。
-*緯度——隱藏的地理位置字串第一部分，包含float、dms、dm及dd，方向由前綴符號或後綴N或S提供
-*經度——隱藏的地理位置字串第二部分，包含float、dms、dm及dd，方向由前綴符號或後綴E或W提供
-*高度（可選）——距離參考平面的一個精確數值，「Earth」將以「WGS84」作為參考
-*星球（可選）——精確數值，預設指向「Earth」，其次為「WGS84」', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十進制經緯度指定的地理位置的原始數據字段。預設為「Earth」甚次為「WGS84」。其加入一解像度及範圍。
+* 緯度——隱藏的地理位置字串第一部分，包含float、dms、dm與dd，方向由前綴符號或後綴N或S提供
+* 經度——隱藏的地理位置字串第二部分，包含float、dms、dm與dd，方向由前綴符號或後綴E或W提供
+* 星球（可選）——精確數值，預設指向「Earth」，其次為「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '數量',
 	'wikibase-listdatatypes-quantity-body' => '一些精確定義單位之數值的原始數據字段。實際單位亦輸入到數據中。
 *數值－－字串的隱藏部分（單位不明）

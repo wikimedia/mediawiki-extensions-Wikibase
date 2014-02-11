@@ -335,6 +335,7 @@ $messages['ar'] = array(
 	'wikibase-validator-bad-type' => '$2 عوضاً عن $1',
 	'wikibase-validator-unknown-unit' => 'وحدة غير معروفة: $1',
 	'datatypes-type-wikibase-item' => 'عنصر',
+	'version-wikibase' => 'قاعدة ويكي',
 );
 
 /** Asturian (asturianu)
