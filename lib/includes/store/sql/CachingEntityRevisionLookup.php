@@ -210,7 +210,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 			$key = $this->getCacheKey( $entityId );
 			$entityRevision = $this->cache->get( $key );
 
-			if ( $entityRevision !== false ) {
+			if ( $entityRevision ) {
 				return $entityRevision->getRevision();
 			}
 		}

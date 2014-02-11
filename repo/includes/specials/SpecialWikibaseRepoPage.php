@@ -3,12 +3,15 @@
 namespace Wikibase\Repo\Specials;
 
 use RuntimeException;
+use Status;
 use UserInputException;
+use Wikibase\EditEntity;
 use Wikibase\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\EntityContent;
+use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -109,5 +112,39 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		}
 
 		return $entityContent;
+	}
+
+	/**
+	 * Saves the entity content using the given summary.
+	 *
+	 * @param EntityContent $entityContent
+	 * @param Summary $summary
+	 * @param string $token
+	 *
+	 * @return Status
+	 */
+	protected function saveEntity( EntityContent $entityContent, Summary $summary, $token ) {
+		//TODO: allow injection/override!
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
+		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$editEntity = new EditEntity(
+			$entityTitleLookup,
+			$entityRevisionLookup,
+			$entityStore,
+			$entityContent->getEntity(), //TODO: refactor special pages to not use EntityContent!
+			$this->getUser(),
+			false, //XXX: need conflict detection??
+			$this->getContext()
+		);
+
+		$status = $editEntity->attemptSave(
+			$this->summaryFormatter->formatSummary( $summary ),
+			EDIT_UPDATE,
+			$token
+		);
+
+		return $status;
 	}
 }
