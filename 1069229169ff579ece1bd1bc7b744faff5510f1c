@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_a2e71a3b",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbareditgroup.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-02-11T12:05:22Z",
+      "side": 1,
+      "message": "I don\u0027t like the buttonName parameters for these functions. They should not include $ or btn afaik, e. g.:\n\n  this.getButton( \u0027edit\u0027 )",
+      "revId": "1069229169ff579ece1bd1bc7b744faff5510f1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
