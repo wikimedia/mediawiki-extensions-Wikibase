@@ -47,8 +47,10 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 	}
 
 	protected function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null ) {
-		global $wgUser;
+		global $wgUser, $wgGroupPermissions;
 
+		$this->setMwGlobals( 'wgUser', clone $wgUser );
+		$this->setMwGlobals( 'wgGroupPermissions', $wgGroupPermissions );
 		PermissionsHelper::applyPermissions( $permissions );
 
 		try {

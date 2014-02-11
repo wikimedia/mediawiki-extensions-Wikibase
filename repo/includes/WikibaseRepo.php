@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevisionLookup;
-use Wikibase\EntityStore;
+use Wikibase\store\EntityStore;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
@@ -193,10 +193,12 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
+	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup() {
-		return $this->getStore()->getEntityRevisionLookup();
+	public function getEntityRevisionLookup( $uncached = '' ) {
+		return $this->getStore()->getEntityRevisionLookup( $uncached );
 	}
 
 	/**
