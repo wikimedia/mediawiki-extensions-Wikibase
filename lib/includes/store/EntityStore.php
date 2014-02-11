@@ -50,4 +50,43 @@ interface EntityStore {
 	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user );
 
+	/**
+	 * Check if no edits were made by other users since the given revision.
+	 * This makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * @see EditPage::userWasLastToEdit()
+	 *
+	 * @param User $user the user
+	 * @param EntityId $id the entity to check
+	 * @param int $lastRevId the revision to check from
+	 *
+	 * @return bool
+	 */
+	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId );
+
+	/**
+	 * Watches or unwatches the entity.
+	 *
+	 * @todo: move this to a separate service
+	 *
+	 * @param User $user
+	 * @param EntityId $id the entity to watch
+	 * @param bool $watch whether to watch or unwatch the page.
+	 *
+	 * @throws \MWException
+	 * @return void
+	 */
+	public function updateWatchlist( User $user, EntityId $id, $watch );
+
+	/**
+	 * Determines whether the given user is watching the given item
+	 *
+	 * @todo: move this to a separate service
+	 *
+	 * @param User $user
+	 * @param EntityId $id the entity to watch
+	 *
+	 * @return bool
+	 */
+	public function isWatching( User $user, EntityId $id );
 }

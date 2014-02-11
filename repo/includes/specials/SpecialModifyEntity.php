@@ -71,16 +71,10 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$this->setForm();
 		}
 		else {
-			// TODO: need conflict detection??
-			$editEntity = new EditEntity( $this->entityContent, $this->getUser(), false, $this->getContext() );
-			$editEntity->attemptSave(
-				$this->summaryFormatter->formatSummary( $summary ),
-				EDIT_UPDATE,
-				$this->getRequest()->getVal( 'wpEditToken' )
-			);
+			$status = $this->saveEntity( $this->entityContent, $summary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
-			if ( !$editEntity->isSuccess() && $editEntity->getStatus()->getErrorsArray() ) {
-				$errors = $editEntity->getStatus()->getErrorsArray();
+			if ( !$status->isOK() && $status->getErrorsArray() ) {
+				$errors = $status->getErrorsArray();
 				$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
 				$this->setForm();
 			}

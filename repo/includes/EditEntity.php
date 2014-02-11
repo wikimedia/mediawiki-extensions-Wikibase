@@ -2,76 +2,92 @@
 
 namespace Wikibase;
 
+use IContextSource;
 use Status;
-use Revision;
 use User;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\store\EntityStore;
 use WikiPage;
 use Title;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
  * permission checks and handling edit conflicts.
  *
- * @todo: FIXME: change this to use Entity and EntityStore, not EntityContent
- *
  * @since 0.1
  *
- * @licence GNU GPL v2+
+ * @licence GNU GPL v2+permiss
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
 class EditEntity {
 
 	/**
-	 * The modified entity we are trying to save
-	 *
-	 * @since 0.1
-	 * @var EntityContent
+	 * @var EntityRevisionLookup
 	 */
-	protected $newContent = null;
+	protected $entityLookup;
 
 	/**
-	 * @since 0.1
-	 * @var Revision
+	 * @var EntityTitleLookup
+	 */
+	protected $titleLookup;
+
+	/**
+	 * @var EntityStore
+	 */
+	protected $entityStore;
+
+	/**
+	 * @var PreSaveChecks
+	 */
+	protected $preSaveChecks = null;
+
+	/**
+	 * The modified entity we are trying to save
+	 *
+	 * @var Entity
+	 */
+	protected $newEntity = null;
+
+	/**
+	 * @var EntityRevision
 	 */
 	protected $baseRev = null;
 
 	/**
-	 * @since 0.1
 	 * @var int
 	 */
 	protected $baseRevId = null;
 
 	/**
-	 * @since 0.1
-	 * @var Revision
+	 * @var EntityRevision
 	 */
-	protected $currentRev = null;
+	protected $latestRev = null;
 
 	/**
-	 * @since 0.1
 	 * @var int
 	 */
-	protected $currentRevId = null;
+	protected $latestRevId = null;
 
 	/**
-	 * @since 0.1
-	 * @var WikiPage
-	 */
-	protected $page = null;
-
-	/**
-	 * @since 0.1
 	 * @var Status
 	 */
 	protected $status = null;
 
 	/**
-	 * @since 0.1
 	 * @var User
 	 */
 	protected $user = null;
+
+	/**
+	 * @var Title
+	 */
+	protected $title = null;
+
+	/**
+	 * @var IContextSource
+	 */
+	protected $context = null;
 
 	/**
 	 * Bit field for error types, using the EditEntity::XXX_ERROR constants
@@ -136,21 +152,32 @@ class EditEntity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent   $newContent the new entity content
-	 * @param User|null       $user       the user performing the edit (defaults to $wgUser)
-	 * @param int|boolean     $baseRevId  the base revision ID for conflict checking.
-	 *                                    Defaults to false, disabling conflict checks.
-	 *                                  `true` can be used to set the base revision to the current revision:
-	 *                                    This will detect "late" edit conflicts, i.e. someone squeezing in an edit
-	 *                                    just before the actual database transaction for saving beings.
-	 *                                    The empty string and 0 are both treated as `false`, disabling conflict checks.
-	 * @param \IContextSource $context the context source to use while processing the edit; defaults
-	 *                        to \RequestContext::getMain().
+	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityRevisionLookup $entityLookup
+	 * @param EntityStore $entityStore
+	 * @param Entity $newEntity the new entity object
+	 * @param User $user the user performing the edit
+	 * @param int|boolean $baseRevId the base revision ID for conflict checking.
+	 *        Defaults to false, disabling conflict checks.
+	 *        `true` can be used to set the base revision to the current revision:
+	 *        This will detect "late" edit conflicts, i.e. someone squeezing in an edit
+	 *        just before the actual database transaction for saving beings.
+	 *        The empty string and 0 are both treated as `false`, disabling conflict checks.
+	 * @param IContextSource $context the context source to use while processing the edit; defaults
+	 *        to \RequestContext::getMain().
+	 *
+	 * @internal param \Wikibase\EntityStore $store
 	 */
-	public function __construct( EntityContent $newContent, \User $user = null, $baseRevId = false,
-			\IContextSource $context = null ) {
-
-		$this->newContent = $newContent;
+	public function __construct(
+		EntityTitleLookup $titleLookup,
+		EntityRevisionLookup $entityLookup,
+		EntityStore $entityStore,
+		Entity $newEntity,
+		User $user,
+		$baseRevId = false,
+		IContextSource $context = null
+	) {
+		$this->newEntity = $newEntity;
 
 		if ( is_string( $baseRevId ) ) {
 			$baseRevId = intval( $baseRevId );
@@ -171,50 +198,100 @@ class EditEntity {
 		}
 
 		$this->context = $context;
+
+		$this->titleLookup = $titleLookup;
+		$this->entityLookup = $entityLookup;
+		$this->entityStore = $entityStore;
+	}
+
+
+	/**
+	 * Sets the pre-safe checks to apply
+	 *
+	 * @param PreSaveChecks $preSaveChecks
+	 */
+	public function setPreSafeChecks( PreSaveChecks $preSaveChecks ) {
+		$this->preSaveChecks = $preSaveChecks;
+	}
+
+
+	/**
+	 * Returns the new entity object to be saved. May be different from the entity supplied
+	 * to the constructor in case the entity was patched to resolve edit conflicts.
+	 *
+	 * @return Entity
+	 */
+	public function getNewEntity() {
+		return $this->newEntity;
 	}
 
 	/**
-	 * Returns the new entity content to be saved. May be different from the content supplied to the constructor in
-	 * case the content was patched to resolve edit conflicts.
+	 * Returns the ID of the entity that is being edited.
 	 *
-	 * @return EntityContent
+	 * @return EntityId
 	 */
-	public function getNewContent() {
-		return $this->newContent;
+	public function getEntityId() {
+		return $this->getNewEntity()->getId();
 	}
 
 	/**
-	 * Returns the current revision of the entity's page.
-	 * Shorthand for $this->getPage()->getRevision().
+	 * Returns the Title of the page holding the entity that is being edited.
 	 *
-	 * @return Revision
+	 * @return Title|null
 	 */
-	public function getCurrentRevision() {
+	public function getTitle() {
 		if ( $this->isNew() ) {
 			return null;
 		}
 
-		if ( $this->currentRev === null ) {
+		if ( $this->title === null ) {
+			$this->title = $this->titleLookup->getTitleForId( $this->getEntityId() );
+		}
+
+		return $this->title;
+	}
+
+	/**
+	 * Returns the current revision of the entity.
+	 *
+	 * @return EntityRevision|null
+	 */
+	public function getLatestRevision() {
+		if ( $this->isNew() ) {
+			return null;
+		}
+
+		wfProfileIn( __METHOD__ );
+		if ( $this->latestRev === null ) {
 			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
-			$this->currentRev = $this->getPage()->getRevision();
+			$this->latestRev = $this->entityLookup->getEntityRevision( $this->getEntityId() );
 		}
 
-		return $this->currentRev;
+		wfProfileOut( __METHOD__ );
+		return $this->latestRev;
 	}
 
-
 	/**
-	 * Returns the current content of the entity's page.
-	 * Shorthand for $this->getPage()->getContent().
+	 * Returns the current revision ID.
 	 *
-	 * @return EntityContent
+	 * @return int
 	 */
-	public function getCurrentContent() {
+	public function getLatestRevisionId() {
 		if ( $this->isNew() ) {
-			return null;
+			return 0;
 		}
 
-		return $this->getPage()->getContent();
+		wfProfileIn( __METHOD__ );
+		if ( $this->latestRevId === null ) {
+			if ( $this->latestRev !== null ) {
+				$this->latestRevId = $this->latestRev->getRevision();
+			} else {
+				$this->latestRevId = $this->entityLookup->getLatestRevisionId( $this->getEntityId() );
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $this->latestRevId;
 	}
 
 	/**
@@ -223,83 +300,26 @@ class EditEntity {
 	 * @return User
 	 */
 	public function getUser() {
-		global $wgUser;
-
-		if ( $this->user === null ) {
-			$this->user = $wgUser;
-		}
-
 		return $this->user;
-	}
-
-	/**
-	 * Returns the WikiPage to be edited.
-	 * Shorthand for $this->getNewContent()->getWikiPage().
-	 *
-	 * @return WikiPage
-	 */
-	public function getPage() {
-		if ( $this->isNew() ) {
-			return null;
-		}
-
-		if ( $this->page === null ) {
-			$this->page = $this->getNewContent()->getWikiPage();
-		}
-
-		return $this->page;
-	}
-
-	/**
-	 * Returns the Title of the page to be edited.
-	 * Shorthand for $this->getPage()->getTitle().
-	 *
-	 * @return Title|bool
-	 */
-	public function getTitle() {
-		if ( $this->isNew() ) {
-			return false;
-		}
-
-		return $this->newContent->getTitle();
 	}
 
 	/**
 	 * Returns whether the new content is new, that is, does not have an ID yet and thus no title, page or revisions.
 	 */
 	public function isNew() {
-		return $this->newContent->isNew();
-	}
-
-	/**
-	 * Returns the current revision ID.
-	 * Shorthand for $this->getPage()->getLatest().
-	 *
-	 * @return int
-	 */
-	public function getCurrentRevisionId() {
-		if ( $this->isNew() ) {
-			return 0;
-		}
-
-		if ( $this->currentRevId === null ) {
-			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
-			$this->currentRevId = $this->getPage()->getLatest();
-		}
-
-		return $this->currentRevId;
+		return $this->newEntity->getId() === null;
 	}
 
 	/**
 	 * Returns the base revision ID.
 	 * If no base revision was supplied to the constructor, this will return false.
-	 * In the trivial non-conflicting case, this will be the same as $this->getCurrentRevisionId().
+	 * In the trivial non-conflicting case, this will be the same as $this->getLatestRevisionId().
 	 *
 	 * @return int|boolean
 	 */
 	public function getBaseRevisionId() {
 		if ( $this->baseRevId === null || $this->baseRevId === true ) {
-			$this->baseRevId = $this->getCurrentRevisionId();
+			$this->baseRevId = $this->getLatestRevisionId();
 		}
 
 		return $this->baseRevId;
@@ -308,44 +328,36 @@ class EditEntity {
 	/**
 	 * Returns the edits base revision.
 	 * If no base revision was supplied to the constructor, this will return null.
-	 * In the trivial non-conflicting case, this will be the same as $this->getCurrentRevision().
+	 * In the trivial non-conflicting case, this will be the same as $this->getLatestRevision().
 	 *
-	 * @return Revision|null
+	 * @return EntityRevision|null
 	 * @throws \MWException
 	 */
 	public function getBaseRevision() {
 		wfProfileIn( __METHOD__ );
 
 		if ( $this->baseRev === null ) {
-			$id = $this->getBaseRevisionId();
+			$baseRevId = $this->getBaseRevisionId();
 
-			if ( $id === false ) {
+			if ( $baseRevId === false ) {
+				wfProfileOut( __METHOD__ );
 				return null;
-			} else if ( $id === $this->getCurrentRevisionId() ) {
-				$this->baseRev = $this->getCurrentRevision();
+			} else if ( $baseRevId === $this->getLatestRevisionId() ) {
+				$this->baseRev = $this->getLatestRevision();
 			} else {
-				$this->baseRev = Revision::newFromId( $id );
-				if ( $this->baseRev === false ) {
+				$entityId = $this->getEntityId();
+				$this->baseRev = $this->entityLookup->getEntityRevision( $entityId, $baseRevId );
+
+				if ( $this->baseRev === null ) {
 					wfProfileOut( __METHOD__ );
-					throw new \MWException( 'base revision ID: ' . $id );
+					throw new \MWException( 'Base revision ID not found: rev ' . $baseRevId
+						. ' of ' . $entityId->getSerialization() );
 				}
 			}
 		}
 
 		wfProfileOut( __METHOD__ );
 		return $this->baseRev;
-	}
-
-	/**
-	 * Returns the content of the base revision.
-	 * If no base revision was supplied to the constructor, this will return null.
-	 * Shorthand for $this->getBaseRevision()->getContent()
-	 *
-	 * @return EntityContent|null
-	 */
-	public function getBaseContent() {
-		$rev = $this->getBaseRevision();
-		return $rev == null ? null : $rev->getContent();
 	}
 
 	/**
@@ -383,12 +395,12 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns the Revision created by attemptSave(), if it was successful.
+	 * Returns the revision created by attemptSave(), if it was successful.
 	 * If attemptSave() has not yet been called or failed, null is returned.
 	 *
 	 * @since 0.3
 	 *
-	 * @return Revision|null
+	 * @return EntityRevision|null
 	 */
 	public function getNewRevision() {
 		if ( $this->errorType > 0 || !$this->status || !$this->status->isOK() ) {
@@ -438,7 +450,7 @@ class EditEntity {
 			return false;
 		}
 
-		if ( $this->getBaseRevisionId() == $this->getCurrentRevisionId() ) {
+		if ( $this->getBaseRevisionId() == $this->getLatestRevisionId() ) {
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
@@ -449,39 +461,39 @@ class EditEntity {
 
 	/**
 	 * Attempts to fix an edit conflict by patching the intended change into the current revision after
-	 * checking for conflicts. This modifies $this->newContent but does not write anything to the
+	 * checking for conflicts. This modifies $this->newEntity but does not write anything to the
 	 * database. Saving of the new content may still fail.
 	 *
 	 * @return bool True if the conflict could be resolved, false otherwise
 	 */
 	public function fixEditConflict() {
-		$base = $this->getBaseContent();
-		$current = $this->getCurrentContent();
-		$new = $this->getNewContent();
+		$baseRev = $this->getBaseRevision();
+		$latestRev = $this->getLatestRevision();
+		$new = $this->getNewEntity();
 
 		// calculate patch against base revision
-		//FIXME: can $current or $base be null?!
-		$patch = $base->getEntity()->getDiff( $new->getEntity() ); // diff from base to new
+		//XXX: can $current or $base be null?!
+		$patch = $baseRev->getEntity()->getDiff( $new ); // diff from base to new
 
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
 			// so just keep the current content as it is.
-			$this->newContent = $this->getCurrentContent()->copy();
+			$this->newEntity = $latestRev->getEntity()->copy();
 			return true;
 		}
 
 		// apply the patch( base -> new ) to the current revision.
-		$patchedCurrent = $current->getEntity()->copy();
-		$patchedCurrent->patch( $patch );
+		$patchedLatest = $latestRev->getEntity()->copy();
+		$patchedLatest->patch( $patch );
 
 		// detect conflicts against current revision
-		$cleanPatch = $current->getEntity()->getDiff( $patchedCurrent );
+		$cleanPatch = $latestRev->getEntity()->getDiff( $patchedLatest );
 
 		$conflicts = $patch->count() - $cleanPatch->count();
 
 		if ( $conflicts > 0 ) {
 			// patch doesn't apply cleanly
-			if ( self::userWasLastToEdit( $this->getUser()->getId(), $this->getBaseRevisionId() ) ) {
+			if ( $this->userWasLastToEdit( $this->getUser(), $this->getEntityId(), $this->getBaseRevisionId() ) ) {
 				// it's a self-conflict
 				if ( $cleanPatch->count() === 0 ) {
 					// patch collapsed, possibly because of diff operation change from base to current
@@ -501,10 +513,36 @@ class EditEntity {
 			$this->status->warning( 'wikibase-conflict-patched' );
 		}
 
-		// create a new entity and tuck it away
-		$this->newContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $patchedCurrent );
+		// remember the patched entity as the actual new entity to save
+		$this->newEntity = $patchedLatest;
 
 		return true;
+	}
+
+	/**
+	 * Check if no edits were made by other users since the given revision.
+	 * This makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * @param User $user
+	 * @param EntityId $entityId
+	 * @param int|bool $lastRevId
+	 *
+	 * @return bool
+	 */
+	protected function userWasLastToEdit( User $user = null, EntityId $entityId = null, $lastRevId = false ) {
+		if ( $user === null ) {
+			return false;
+		}
+
+		if ( $entityId === null ) {
+			return false;
+		}
+
+		if ( $lastRevId === false ) {
+			return false;
+		}
+
+		return $this->entityStore->userWasLastToEdit( $user, $entityId, $lastRevId );
 	}
 
 	/**
@@ -526,7 +564,7 @@ class EditEntity {
 		wfProfileIn( __METHOD__ );
 
 		foreach ( $this->requiredPermissions as $action ) {
-			$permissionStatus = $this->newContent->checkPermission( $action, $this->getUser() );
+			$permissionStatus = $this->checkPermission( $action );
 
 			$this->status->merge( $permissionStatus );
 
@@ -537,6 +575,53 @@ class EditEntity {
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Checks whether the user can perform the given action.
+	 *
+	 * @param String    $permission         the permission to check
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May
+	 *                                      be set to false for non-critical checks.
+	 *
+	 * @todo: move this to a separate service
+	 *
+	 * @return Status a status object representing the check's result.
+	 */
+	public function checkPermission( $permission, $doExpensiveQueries = true ) {
+
+		wfProfileIn( __METHOD__ );
+
+		$user = $this->user;
+
+		$title = $this->getTitle();
+		$errors = null;
+
+		if ( !$title ) {
+			$ns = $this->titleLookup->getNamespaceForType( $this->getNewEntity()->getType() );
+			$title = Title::makeTitleSafe( $ns, '/' );
+
+			if ( $permission == 'edit' ) {
+				// when checking for edit rights on an item that doesn't yet exists, check create rights first.
+
+				$errors = $title->getUserPermissionsErrors( 'createpage', $user, $doExpensiveQueries );
+			}
+		}
+
+		if ( empty( $errors ) ) {
+			// only do this if we don't already have errors from an earlier check, to avoid redundant messages
+			$errors = $title->getUserPermissionsErrors( $permission, $user, $doExpensiveQueries );
+		}
+
+		$status = Status::newGood();
+
+		foreach ( $errors as $error ) {
+			call_user_func_array( array( $status, 'error'), $error );
+			$status->setResult( false );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $status;
 	}
 
 	/**
@@ -642,8 +727,8 @@ class EditEntity {
 		//NOTE: Make sure the current revision is loaded and cached.
 		//      Would happen on demand anyway, but we want a well-defined point at which "current" is frozen
 		//      to a specific revision, just before the first check for edit conflicts.
-		$this->getCurrentRevision();
-		$this->getCurrentRevisionId();
+		$this->getLatestRevision();
+		$this->getLatestRevisionId();
 
 		$this->applyPreSaveChecks(); // modifies $this->status
 
@@ -658,29 +743,7 @@ class EditEntity {
 			return $this->status;
 		}
 
-		if ( !$this->isNew() ) {
-			$context = clone $this->context;
-
-			$context->setTitle( $this->getTitle() );
-			$context->setWikiPage( $this->getPage() );
-		} else {
-			$context = $this->context;
-		}
-
-		// Run edit filter hooks
-		$filterStatus = Status::newGood();
-		if ( !wfRunHooks( 'EditFilterMergedContent',
-			array( $context, $this->newContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
-
-			# Error messages etc. were handled inside the hook.
-			$filterStatus->setResult( false, $filterStatus->getValue() );
-		}
-
-		if ( !$filterStatus->isOK() ) {
-			$this->errorType |= self::FILTERED;
-		}
-
-		$this->status->merge( $filterStatus );
+		$this->runEditFilterHooks( $summary );
 
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
@@ -689,14 +752,24 @@ class EditEntity {
 			return $this->status;
 		}
 
-		$editStatus = $this->newContent->save(
-			$summary,
-			$this->getUser(),
-			$flags | EDIT_AUTOSUMMARY,
-			$this->doesCheckForEditConflicts() ? $this->getCurrentRevisionId() : false
-		);
+		try {
+			$entityRevision = $this->entityStore->saveEntity(
+				$this->newEntity,
+				$summary,
+				$this->getUser(),
+				$flags | EDIT_AUTOSUMMARY,
+				$this->doesCheckForEditConflicts() ? $this->getLatestRevisionId() : false
+			);
 
-		if ( !$editStatus->isOK() ) {
+			$editStatus = Status::newGood( array( 'revision' => $entityRevision ) );
+		} catch ( StorageException $ex ) {
+			$editStatus = $ex->getStatus();
+
+			if ( $editStatus === null ) {
+				// XXX: perhaps internalerror_info isn't the best, but we need some generic error message.
+				$editStatus = Status::newFatal( 'internalerror_info', $ex->getMessage() );
+			}
+
 			$this->errorType |= self::SAVE_ERROR;
 		}
 
@@ -715,6 +788,42 @@ class EditEntity {
 		return $this->status;
 	}
 
+	/**
+	 * Call EditFilterMergedContent hook
+	 *
+	 * @param string $summary
+	 *
+	 * @todo: move the implementation elsewhere, it depends on WikiPage.
+	 */
+	protected function runEditFilterHooks( $summary ) {
+		//TODO: short out if no handler is registered for EditFilterMergedContent?
+
+		if ( !$this->isNew() ) {
+			$context = clone $this->context;
+
+			$title = $this->getTitle();
+			$context->setTitle( $title );
+			$context->setWikiPage( new WikiPage( $title ) );
+		} else {
+			$context = $this->context;
+		}
+
+		// Run edit filter hooks
+		$filterStatus = Status::newGood();
+		if ( !wfRunHooks( 'EditFilterMergedContent',
+			array( $context, $this->newEntity, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
+
+			# Error messages etc. were handled inside the hook.
+			$filterStatus->setResult( false, $filterStatus->getValue() );
+		}
+
+		if ( !$filterStatus->isOK() ) {
+			$this->errorType |= self::FILTERED;
+		}
+
+		$this->status->merge( $filterStatus );
+	}
+
 	protected function applyPreSaveChecks() {
 		if ( $this->hasEditConflict() ) {
 			if ( !$this->fixEditConflict() ) {
@@ -729,57 +838,35 @@ class EditEntity {
 		/**
 		 * @var Entity $entity
 		 */
-		$entity = $this->newContent->getEntity();
+		$entity = $this->getNewEntity();
+		$baseRev = $this->getBaseRevision();
+		$base = $baseRev === null ? null : $baseRev->getEntity();
 
-		$entityDiff = null;
-
-		if ( $this->getBaseContent() instanceof EntityContent ) {
+		$checks = $this->getPreSaveChecks();
+		if ( $checks ) {
 			//XXX: havn't we calculated this diff already?
-			$entityDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
-		}
-		//XXX: ...else diff against an empty item?...
+			$entityDiff = $base === null ? null : $entity->getDiff( $base );
 
-		$multilangViolationDetector = new MultiLangConstraintDetector();
-		$multilangViolationDetector->addConstraintChecks(
-			$entity,
-			$this->status,
-			$entityDiff
-		);
-
-		if ( !$this->status->isOk() ) {
-			return $this->status;
-		}
-
-		// TODO: the below logic is Item specific, so would be good if this got handled
-		// using composition or polymorphism.
-
-		if ( $entity->getType() !== Item::ENTITY_TYPE ) {
-			return $this->status;
-		}
-
-		$dbw = wfGetDB( DB_MASTER );
-
-		// Do not run this when running test using MySQL as self joins fail on temporary tables.
-		if ( !defined( 'MW_PHPUNIT_TEST' )
-			|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
-			|| $dbw->getType() !== 'mysql' ) {
-
-			// The below looks for all conflicts and then removes the ones not
-			// caused by the edit. This can be improved by only looking for
-			// those conflicts that can be caused by the edit.
-
-			$termViolationDetector = new LabelDescriptionDuplicateDetector();
-
-			$termViolationDetector->addLabelDescriptionConflicts(
-				$entity,
-				$this->status,
-				StoreFactory::getStore()->getTermIndex(),
-				$entityDiff === null ? null : $entityDiff->getLabelsDiff(),
-				$entityDiff === null ? null : $entityDiff->getDescriptionsDiff()
-			);
+			$status = $checks->applyPreSaveChecks( $entity, $entityDiff );
+			$this->status->merge( $status );
 		}
 
 		return $this->status;
+	}
+
+	/**
+	 * @return PreSaveChecks
+	 */
+	protected function getPreSaveChecks() {
+		// XXX: the pre-save checks were ripped out as a quick & dirty measure.
+		// The logic for enforcing constraints is pending a redesign.
+		if ( !$this->preSaveChecks ) {
+			// eek, global state
+			$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+			$this->preSaveChecks = new PreSaveChecks( $termIndex );
+		}
+
+		return $this->preSaveChecks;
 	}
 
 	/**
@@ -789,81 +876,6 @@ class EditEntity {
 	 */
 	public function doesCheckForEditConflicts() {
 		return $this->getBaseRevisionId() !== false;
-	}
-
-	/**
-	 * Check if no edits were made by other users since the given revision. Limit to 50 revisions for the
-	 * sake of performance.
-	 *
-	 * This makes the assumption that revision ids are monotonically increasing, and also neglects the fact
-	 * that conflicts are not only with the user himself.
-	 *
-	 * Note that this is a variation over the same idea that is used in EditPage::userWasLastToEdit() but
-	 * with the difference that this one is using the revision and not the timestamp.
-	 *
-	 * TODO: Change this into an instance level member and store the ids for later lookup.
-	 * Use those ids for full lookup of the content and create applicable diffs and check if they are empty.
-	 *
-	 * @param int|bool $userId the users numeric identifier
-	 * @param int|bool $lastRevId the revision the user supplied (or false)
-	 *
-	 * @return bool
-	 */
-	public static function userWasLastToEdit( $userId = false, $lastRevId = false ) {
-		wfProfileIn( __METHOD__ );
-
-		// If the lastRevId is missing then skip all further test and give false.
-		// Note that without a revision id it will not be possible to do patching.
-		if ( $lastRevId === false ) {
-			wfProfileOut( __METHOD__ );
-			return false;
-		}
-		else {
-			$revision = \Revision::newFromId( $lastRevId );
-			if ( !isset( $revision ) ) {
-				wfProfileOut( __METHOD__ );
-				return false;
-			}
-		}
-
-		// If the userId is missing then skip all further test and give false.
-		// It is only the user id that is used later on.
-		if ( $userId === false ) {
-			wfProfileOut( __METHOD__ );
-			return false;
-		}
-		else {
-			$user = \User::newFromId( $userId );
-			if ( !isset( $user ) ) {
-				wfProfileOut( __METHOD__ );
-				return false;
-			}
-		}
-
-		// If the title is missing then skip all further test and give false.
-		// There must be a title so we can get an article id
-		$title = $revision->getTitle();
-		if ( $title === null ) {
-			wfProfileOut( __METHOD__ );
-			return false;
-		}
-
-		// Scan through the revision table
-		$dbw = wfGetDB( DB_MASTER );
-		$res = $dbw->select( 'revision',
-			'rev_user',
-			array(
-				'rev_page' => $title->getArticleID(),
-				'rev_id > ' . intval( $lastRevId )
-					. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
-				'rev_user != ' . intval( $userId )
-					. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),
-			),
-			__METHOD__,
-			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 )
-		);
-		wfProfileOut( __METHOD__ );
-		return $res->current() === false; // return true if query had no match
 	}
 
 	/**
@@ -934,28 +946,25 @@ class EditEntity {
 	 *
 	 * @note: keep in sync with logic in EditPage
 	 */
-	public function getWatchDefault() {
+	protected function getWatchDefault() {
 		$user = $this->getUser();
-		$title = $this->getTitle();
-
-		if ( $title && !$title->exists() ) {
-			$title = false;
-		}
 
 		if ( $user->getOption( 'watchdefault' ) ) {
 			// Watch all edits
 			return true;
-		} elseif ( $user->getOption( 'watchcreations' ) && !$title ) {
+		} elseif ( $user->getOption( 'watchcreations' ) && $this->isNew() ) {
 			// Watch creations
 			return true;
 		}
 
 		// keep current state
-		return $title !== false && $user->isWatched( $title );
+		return !$this->isNew() && $this->entityStore->isWatching( $user, $this->getEntityId() );
 	}
 
 	/**
 	 * Watches or unwatches the entity.
+	 *
+	 * @todo: move to separate service
 	 *
 	 * @param bool $watch whether to watch or unwatch the page.
 	 *
@@ -970,20 +979,6 @@ class EditEntity {
 			throw new \MWException( "Title not yet known!" );
 		}
 
-		if ( $user->isLoggedIn() && $watch != $user->isWatched( $title ) ) {
-			$fname = __METHOD__;
-
-			// Do this in its own transaction to reduce contention...
-			$dbw = wfGetDB( DB_MASTER );
-			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
-				$dbw->begin( $fname );
-				if ( $watch ) {
-					\WatchAction::doWatch( $title, $user );
-				} else {
-					\WatchAction::doUnwatch( $title, $user );
-				}
-				$dbw->commit( $fname );
-			} );
-		}
+		$this->entityStore->updateWatchlist( $user, $this->getEntityId(), $watch );
 	}
 }

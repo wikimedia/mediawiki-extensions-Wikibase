@@ -31,4 +31,15 @@ interface EntityTitleLookup {
 	 */
 	public function getTitleForId( EntityId $id );
 
+	/**
+	 * Determines what namespace is suitable for the given type of entities.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $type the entity type to look up, as returned by Entity::getType()
+	 *
+	 * @return int the namespace ID for this type
+	 */
+	public function getNamespaceForType( $type );
+
 }
