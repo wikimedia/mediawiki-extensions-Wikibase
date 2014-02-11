@@ -30,13 +30,13 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			// -- Test valid sequence -----------------------------
 			array( //0
 				'p' => array( 'language' => 'en', 'value' => '' ),
-				'e' => array( 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'edit-no-change' => true ) ),
 			array( //1
 				'p' => array( 'language' => 'en', 'value' => 'Value' ),
 				'e' => array( 'value' => array( 'en' => 'Value' ) ) ),
 			array( //2
 				'p' => array( 'language' => 'en', 'value' => 'Value' ),
-				'e' => array( 'value' => array( 'en' => 'Value' ), 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'value' => array( 'en' => 'Value' ), 'edit-no-change'  => true ) ),
 			array( //3
 				'p' => array( 'language' => 'en', 'value' => 'Another Value', 'summary' => 'Test summary!' ),
 				'e' => array( 'value' => array( 'en' => 'Another Value' ) ) ),
@@ -112,7 +112,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		}
 
 		// -- check the edit summary --------------------------------------------
-		if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
+		if ( empty( $expected['edit-no-change'] ) ) {
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
 			if( array_key_exists( 'summary', $params) ){
 				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
