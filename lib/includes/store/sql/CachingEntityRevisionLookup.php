@@ -124,10 +124,14 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 			wfProfileIn( __METHOD__ . '#miss' );
 			$entityRevision = $this->lookup->getEntityRevision( $entityId, $revision );
 
-			if ( $isLatest ) {
-				$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
+			if ( $entityRevision ) {
+				if ( $isLatest ) {
+					$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
+				} else {
+					$this->cache->add( $key, $entityRevision, $this->cacheTimeout );
+				}
 			} else {
-				$this->cache->add( $key, $entityRevision, $this->cacheTimeout );
+				//TODO: negative caching??
 			}
 
 			wfProfileOut( __METHOD__ . '#miss' );
@@ -193,7 +197,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 			$key = $this->getCacheKey( $entityId );
 			$entityRevision = $this->cache->get( $key );
 
-			if ( $entityRevision !== false ) {
+			if ( $entityRevision ) {
 				return $entityRevision->getRevision();
 			}
 		}

@@ -39,7 +39,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			// -- Test valid sequence -----------------------------
 			array( //0
 				'p' => array( 'language' => 'en', 'set' => '' ),
-				'e' => array( 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'edit-no-change'  => true ) ),
 			array( //1
 				'p' => array( 'language' => 'en', 'set' => 'Foo' ),
 				'e' => array( 'value' => array( 'en' => array( 'Foo' ) ) ) ),
@@ -51,7 +51,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ) ) ),
 			array( //4
 				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ), 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ), 'edit-no-change'  => true ) ),
 			array( //5
 				'p' => array( 'language' => 'en', 'add' => 'Foo|Spam' ),
 				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam' ) ) ) ),
@@ -63,7 +63,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
 			array( //8
 				'p' => array( 'language' => 'de', 'set' => '' ),
-				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ), 'warning' => 'edit-no-change' ) ),
+				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ), 'edit-no-change'  => true ) ),
 			array( //9
 				'p' => array( 'language' => 'de', 'set' => 'hiya' ),
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya' ) ) ) ),
@@ -126,7 +126,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		}
 
 		// -- check the edit summary --------------------------------------------
-		if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
+		if( empty( $expected['edit-no-change'] ) ){
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
 			if( array_key_exists( 'summary', $params) ){
 				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -82,6 +83,11 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\Item', $item, "Entity " . $itemId );
 		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
 		$this->assertEquals( 'bar', $item->getLabel( 'de' ) );
+
+		// test we can't mess with entities in the repo
+		$item->setLabel( 'en', 'STRANGE' );
+		$item = $this->repo->getEntity( $itemId );
+		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
 
 		// test item by rev id
 		$item = $this->repo->getEntity( $itemId, 23 );
@@ -702,6 +708,11 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $entity->getLabels(), $rev->getEntity()->getLabels() );
 		$this->assertEquals( $entity->getLabels(), $this->repo->getEntity( $entity->getId() )->getLabels() );
+
+		// test we can't mess with entities in the repo
+		$entity->setLabel( 'en', 'STRANGE' );
+		$entity = $this->repo->getEntity( $entity->getId() );
+		$this->assertNotEquals( 'STRANGE', $entity->getLabel( 'en' ) );
 	}
 
 	public function testDeleteEntity( ) {
@@ -712,5 +723,50 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$this->repo->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );
 		$this->assertFalse( $this->repo->hasEntity( $item->getId() ) );
+	}
+
+	public function testUpdateWatchlist() {
+		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
+
+		$item = Item::newEmpty();
+		$this->repo->saveEntity( $item, 'testing', $user, EDIT_NEW );
+		$itemId = $item->getId();
+
+		$this->repo->updateWatchlist( $user, $itemId, true );
+		$this->assertTrue(  $this->repo->isWatching( $user, $itemId ) );
+
+		$this->repo->updateWatchlist( $user, $itemId, false );
+		$this->assertFalse(  $this->repo->isWatching( $user, $itemId ) );
+	}
+
+	public function testUserWasLastToEdit() {
+		$user1 = User::newFromName( "WikiPageEntityStoreTestUserWasLastToEdit1" );
+		$user2 = User::newFromName( "WikiPageEntityStoreTestUserWasLastToEdit2" );
+
+		// initial revision
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'one' );
+		$rev1 = $this->repo->saveEntity( $item, 'testing 1', $user1, EDIT_NEW );
+		$itemId = $item->getId();
+
+		$this->assertTrue( $this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'user was first and last to edit' );
+		$this->assertFalse( $this->repo->userWasLastToEdit( $user2, $itemId, $rev1->getRevision() ), 'user has not edited yet' );
+
+		// second edit by another user
+		$item = $item->copy();
+		$item->setLabel( 'en', 'two' );
+		$rev2 = $this->repo->saveEntity( $item, 'testing 2', $user2, EDIT_UPDATE );
+
+		$this->assertFalse( $this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'original user was no longer last to edit' );
+		$this->assertTrue( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevision() ), 'second user has just edited' );
+
+		// subsequent edit by the original user
+		$item = $item->copy();
+		$item->setLabel( 'en', 'three' );
+		$rev3 = $this->repo->saveEntity( $item, 'testing 3', $user1, EDIT_UPDATE );
+
+		$this->assertFalse( $this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevision() ), 'another user had edited at some point' );
+		$this->assertTrue( $this->repo->userWasLastToEdit( $user1, $itemId, $rev3->getRevision() ), 'original user was last to edit' );
+		$this->assertFalse( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevision() ), 'other user was no longer last to edit' );
 	}
 }
