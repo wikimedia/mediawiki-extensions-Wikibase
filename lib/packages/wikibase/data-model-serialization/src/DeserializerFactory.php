@@ -6,7 +6,7 @@ use Deserializers\Deserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
-use Wikibase\DataModel\Deserializers\SnaksDeserializer;
+use Wikibase\DataModel\Deserializers\SnakListDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -62,7 +62,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newSnaksDeserializer() {
-		return new SnaksDeserializer( $this->newSnakDeserializer() );
+		return new SnakListDeserializer( $this->newSnakDeserializer() );
 	}
 
 	/**
