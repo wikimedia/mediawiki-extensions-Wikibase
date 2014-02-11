@@ -109,18 +109,14 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$summary = new Summary( 'wbeditentity', 'create' );
 					$summary->setLanguage( $this->getLanguage()->getCode() );
 					$summary->addAutoSummaryArgs( $this->label, $this->description );
-					$editEntity = new EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
-					$editEntity->attemptSave(
-						$this->summaryFormatter->formatSummary( $summary ),
-						EDIT_AUTOSUMMARY|EDIT_NEW,
-						$this->getRequest()->getVal( 'token' )
-					);
+
+					$status = $this->saveEntity( $entityContent, $summary, $this->getRequest()->getVal( 'token' ) );
 
 					$out = $this->getOutput();
 
-					if ( !$editEntity->isSuccess() ) {
+					if ( !$status->isOK() ) {
 						$out->addHTML( '<div class="error">' );
-						$out->addWikiText( $editEntity->getStatus()->getWikiText() );
+						$out->addWikiText( $status->getWikiText() );
 						$out->addHTML( '</div>' );
 					} elseif ( $entityContent !== null ) {
 						$entityUrl = $entityContent->getTitle()->getFullUrl();

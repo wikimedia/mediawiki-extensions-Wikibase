@@ -32,6 +32,11 @@ class SqlStore implements Store {
 	private $entityRevisionLookup = null;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $rawEntityRevisionLookup = null;
+
+	/**
 	 * @var EntityStore
 	 */
 	private $entityStore = null;
@@ -410,26 +415,33 @@ class SqlStore implements Store {
 	 *
 	 * @since 0.4
 	 *
+	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup() {
+	public function getEntityRevisionLookup( $uncached = '' ) {
 		if ( !$this->entityRevisionLookup ) {
-			$this->entityRevisionLookup = $this->newEntityRevisionLookup();
+			list( $this->rawEntityRevisionLookup, $this->entityRevisionLookup ) = $this->newEntityRevisionLookup();
 		}
 
-		return $this->entityRevisionLookup;
+		if ( $uncached === 'uncached' ) {
+			return $this->rawEntityRevisionLookup;
+		} else {
+			return $this->entityRevisionLookup;
+		}
 	}
 
 	/**
-	 * Creates a new EntityRevisionLookup
+	 * Creates a new EntityRevisionLookup(s).
+	 * This returns a pair of lookup services, one being the raw uncached lookup, the other being the cached lookup.
 	 *
-	 * @return EntityRevisionLookup
+	 * @return array ( WikiPageEntityLookup, CachingEntityRevisionLookup )
 	 */
 	protected function newEntityRevisionLookup() {
 		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$lookup = new WikiPageEntityLookup( false );
+		$lookup = $rawLookup = new WikiPageEntityLookup( false );
 
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.
@@ -447,7 +459,7 @@ class SqlStore implements Store {
 		$lookup->setVerifyRevision( false );
 		$dispatcher->registerWatcher( $lookup ); // we know it's a WikiPageEntityStore
 
-		return $lookup;
+		return array( $rawLookup, $lookup );
 	}
 
 	/**
