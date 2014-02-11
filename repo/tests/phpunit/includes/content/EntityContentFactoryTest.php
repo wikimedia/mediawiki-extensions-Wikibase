@@ -68,6 +68,15 @@ class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'Q42', $title->getText() );
 	}
 
+	public function testGetNamespaceForType() {
+		$factory = $this->newFactory();
+		$id = new ItemId( 'Q42' );
+
+		$ns = $factory->getNamespaceForType( $id->getEntityType() );
+
+		$this->assertGreaterThanOrEqual( 0, $ns, 'namespace' );
+	}
+
 	public function testGetWikiPageForId() {
 		$entityId = new ItemId( 'q42' );
 
