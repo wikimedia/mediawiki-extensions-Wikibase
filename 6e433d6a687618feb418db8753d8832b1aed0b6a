@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_6610ffad",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-12T15:52:30Z",
+      "side": 1,
+      "message": "we could use a type hint for WikibaseValueFormatterBuilders below",
+      "revId": "6e433d6a687618feb418db8753d8832b1aed0b6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
