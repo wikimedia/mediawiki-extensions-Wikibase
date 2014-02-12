@@ -98,7 +98,76 @@ module WikibaseAPI
       return true
     end
 
+    def wb_search_entities(search, language, type)
+      form_data = {"action" => "wbsearchentities", "search" => search, "language" => language, "type" => type}
+      resp = make_api_request(form_data)
+    end
+
+    def create_entity_and_properties(serialization)
+      serialization['properties'].each do |oldId, prop|
+        if prop['description'] and prop['description']['en']['value']
+          search = prop['description']['en']['value']
+        else
+          search = prop['labels']['en']['value']
+        end
+        resp = wb_search_entities(search, "en", "property")
+        resp['search'].reject! do |foundProp|
+          foundProp['label'] != prop['labels']['en']['value']
+        end
+        if resp['search'][0]
+          id = resp['search'][0]['id']
+        else
+          savedProp = create_entity(prop, "property")
+          id = savedProp['id']
+        end
+
+        serialization['entity']['claims'].each do |claim|
+          if claim['mainsnak']['property'] == oldId
+            claim['mainsnak']['property'] = id
+          end
+          if claim['qualifiers']
+            claim['qualifiers'].each do |qualifier|
+              if qualifier['property'] == oldId
+                qualifier['property'] = id
+              end
+            end
+          end
+          if claim['qualifiers-order']
+            claim['qualifiers-order'].map! do |pId|
+              if pId == oldId then id else pId end
+            end
+          end
+          if claim['references']
+            claim['references'].each do |reference|
+              reference['snaks'].each do |snak|
+                if snak['property'] == oldId
+                  snak['property'] = id
+                end
+              end
+              reference['snaks-order'].map! do |pId|
+                if pId == oldId then id else pId end
+              end
+            end
+          end
+        end
+        return create_entity(items['entity'], "item")
+      end
+    end
+
     private
+
+    def create_entity(entity, type)
+      sitelinks = []
+      if entity['sitelinks']
+        sitelinks = entity['sitelinks']
+        entity.delete('sitelinks')
+      end
+      storedEntity = wb_create_entity(JSON.generate(entity), type)
+      sitelinks.each do |k, sitelink|
+        wb_api.wb_set_sitelink({'id' => storedEntity['id']}, sitelink['title'], sitelink['site'])
+      end
+      storedEntity
+    end
 
     # Fetch token (type "delete", "edit", "email", "import", "move", "protect")
     def get_token(type)
