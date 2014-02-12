@@ -8,7 +8,7 @@
 Feature: Delete item
 
 Scenario: Delete item
-  Given I am logged in
+  Given I am logged in to the repo
     And I am on an item page
   When I click the item delete button
   Then Page should be deleted

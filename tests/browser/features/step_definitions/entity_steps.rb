@@ -6,7 +6,7 @@
 #
 # basic steps for entities
 
-Given /^I am logged in$/ do
+Given /^I am logged in to the repo$/ do
   visit(RepoLoginPage).login_with(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
 end
 
