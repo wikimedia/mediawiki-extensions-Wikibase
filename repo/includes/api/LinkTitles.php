@@ -14,7 +14,7 @@ use Wikibase\StoreFactory;
 use Wikibase\Summary;
 
 /**
- * API module to associate two pages on two different sites with a Wikibase item .
+ * API module to associate two pages on two different sites with a Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -42,7 +42,6 @@ class LinkTitles extends ApiWikibase {
 		$permissions[] = 'linktitles-update';
 		return $permissions;
 	}
-
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -74,7 +73,9 @@ class LinkTitles extends ApiWikibase {
 		$itemContent = null;
 
 		$summary = new Summary( $this->getModuleName() );
-		$summary->addAutoSummaryArgs( $fromSite->getGlobalId() . ":$fromPage", $toSite->getGlobalId() . ":$toPage" );
+		$summary->addAutoSummaryArgs(
+			$fromSite->getGlobalId() . ':' . $fromPage,
+			$toSite->getGlobalId() . ':' . $toPage );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
