@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_c6c8f379",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T15:10:06Z",
+      "side": 1,
+      "message": "I would make this dependent on an environment variable. e.g.\n\nif ENV[\"BROWSER_TIMEOUT\"]\n  client \u003d Selenium::WebDriver::Remote::Http::Default.new\n  client.timeout \u003d ENV[\"BROWSER_TIMEOUT\"]\n\n  .... etc...\n\nBy doing so, one could specify the timeout by doing\nexport BROWSER_TIMEOUT\u003d600",
+      "revId": "d5baddb9df87eeaf2aa5205529f27ff54ced80f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_66afdf92",
+        "filename": "tests/browser/features/support/modules/wikibase_api_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T15:10:06Z",
+      "side": 1,
+      "message": "I would just call it create_entity, it does not necessarily have to be a big one.",
+      "revId": "d5baddb9df87eeaf2aa5205529f27ff54ced80f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
