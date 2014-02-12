@@ -50,6 +50,24 @@
       "revId": "7c5bc6549378a4f0fd167bd974778fefd761d1a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_23f42983",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-12T11:11:54Z",
+      "side": 1,
+      "message": "It adds an additional boolean parameter, yes. Using the variable instead of a constant value seems more failproof to me. \"false\" does not tell you what this parameter does, \"save\" does.",
+      "parentUuid": "4e04eb01_7f164bae",
+      "revId": "7c5bc6549378a4f0fd167bd974778fefd761d1a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
