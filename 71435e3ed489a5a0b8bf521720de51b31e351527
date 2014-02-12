@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_46586335",
+        "filename": "tests/browser/data/serialize_italy.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "This file should not be inside the tests folder. It can be useful for other usecases too, so I would suggest to put it into /repo/maintenance/. This should be done in a separate changeset.",
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_864e6b71",
+        "filename": "tests/browser/data/serialize_italy.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "Please provide the entityId as a parameter to the script.",
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a649676c",
+        "filename": "tests/browser/features/performance_test.feature",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "Please remove the beta-tag as this would mean the test gets executed during our daily test run. I would suggest adding a tag special tag like e.g. @performance if there will be more performance related test cases. If we just have this single feature you could also just not add any tag at all.",
+      "range": {
+        "startLine": 7,
+        "startChar": 15,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e6464f54",
+        "filename": "tests/browser/features/performance_test.feature",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "I would make this scenario more general:\n\nScenario Outline: Showing a huge page\n  Given I am on page \u003cpagename\u003e\n  Then check loading time of that page\n\n  Examples:\n  | pagename |\n  | Italy |",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c6435342",
+        "filename": "tests/browser/features/performance_test.feature",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "Please rename to e.g.\nThen check loading time of that page",
+      "range": {
+        "startLine": 12,
+        "startChar": 7,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_666a3fb3",
+        "filename": "tests/browser/features/step_definitions/performance_test_steps.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "Ruby conventions: snake_case for method names. e.g. create_big_entity\n\nThis method as well as most of the stuff in the Given-step should be moved to the page-object, e.g. entity_module.rb. Step definitions should generally not have more than ~4 lines of code.",
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_86754b95",
+        "filename": "tests/browser/features/step_definitions/performance_test_steps.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "Doind the suggested changes in the feature file, this needs to be changed too:\n\nGiven(/^I am on page (.+)$/) do |pagename|\n\nAll hardcoded \"italy\" in this method should then become \"pagename\".",
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a67047a4",
+        "filename": "tests/browser/features/step_definitions/performance_test_steps.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-12T13:32:28Z",
+      "side": 1,
+      "message": "The web driver related stuff should go into env.rb. We could overwrite the local_browser method from the mediawiki-selenium gem in our env.rb and provide additional parameters to set timeouts, etc..",
+      "revId": "71435e3ed489a5a0b8bf521720de51b31e351527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
