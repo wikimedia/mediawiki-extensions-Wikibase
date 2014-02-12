@@ -98,6 +98,11 @@ module WikibaseAPI
       return true
     end
 
+    def wb_search_entities(search, language, type)
+      form_data = {"action" => "wbsearchentities", "search" => search, "language" => language, "type" => type}
+      resp = make_api_request(form_data)
+    end
+
     private
 
     # Fetch token (type "delete", "edit", "email", "import", "move", "protect")
