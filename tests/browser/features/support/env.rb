@@ -32,18 +32,78 @@ def sauce_browser(test_name, language)
     browser_label = browsers["firefox_linux"]
   end
 
-  caps = Selenium::WebDriver::Remote::Capabilities.send(browser_label["name"])
+  require "selenium/webdriver/remote/http/persistent" # http_client
+  client = Selenium::WebDriver::Remote::Http::Persistent.new
+
+  if ENV["BROWSER_TIMEOUT"] && browser_label['name'] == 'firefox'
+    timeout = ENV["BROWSER_TIMEOUT"].to_i
+    client.timeout = timeout
+  end
+
+  if browser_label['name'] == 'firefox'
+    profile = Selenium::WebDriver::Firefox::Profile.new
+    if timeout
+      profile["dom.max_script_run_time"] = timeout
+    end
+    profile['intl.accept_languages'] = language
+    caps = Selenium::WebDriver::Remote::Capabilities.firefox(:firefox_profile => profile)
+  elsif browser_label['name'] == 'chrome'
+    profile = Selenium::WebDriver::Chrome::Profile.new
+    profile['intl.accept_languages'] = language
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome('chrome.profile' => profile.as_json['zip'])
+  else
+    caps = Selenium::WebDriver::Remote::Capabilities.send(browser_label['name'])
+  end
+
   caps.platform = browser_label["platform"]
   caps.version = browser_label["version"]
   caps[:name] = "#{test_name} #{ENV["JOB_NAME"]}"
 
-  require "selenium/webdriver/remote/http/persistent" # http_client
   browser = Watir::Browser.new(
       :remote,
-      http_client: Selenium::WebDriver::Remote::Http::Persistent.new,
+      http_client: client,
       url: "http://#{ENV["SAUCE_ONDEMAND_USERNAME"]}:#{ENV["SAUCE_ONDEMAND_ACCESS_KEY"]}@ondemand.saucelabs.com:80/wd/hub",
       desired_capabilities: caps)
 
+  browser
+end
+
+def local_browser(language)
+  if ENV["BROWSER_LABEL"]
+    browser_label = ENV["BROWSER_LABEL"].to_sym
+  else
+    browser_label = :firefox
+  end
+
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  profile = Selenium::WebDriver::Firefox::Profile.new
+
+	if ENV["BROWSER_TIMEOUT"] && browser_label == :firefox
+	  timeout = ENV["BROWSER_TIMEOUT"].to_i
+	  client.timeout = timeout
+    profile["dom.max_script_run_time"] = timeout
+	end
+
+  if language == "default"
+    browser = Watir::Browser.new browser_label, :http_client => client, :profile => profile
+  else
+    if browser_label == :firefox
+      profile["intl.accept_languages"] = language
+      browser = Watir::Browser.new browser_label, :profile => profile, :http_client => client
+    elsif browser_label == :chrome
+      profile = Selenium::WebDriver::Chrome::Profile.new
+      profile["intl.accept_languages"] = language
+      browser = Watir::Browser.new browser_label, :profile => profile, :http_client => client
+    elsif browser_label == :phantomjs
+      capabilities = Selenium::WebDriver::Remote::Capabilities.phantomjs
+      capabilities["phantomjs.page.customHeaders.Accept-Language"] = language
+      browser = Watir::Browser.new browser_label, desired_capabilities: capabilities, :http_client => client
+    else
+      raise "Changing default language is currently supported only for Chrome, Firefox and PhantomJS!"
+    end
+  end
+
+  browser.window.resize_to 1280, 1024
   browser
 end
 
