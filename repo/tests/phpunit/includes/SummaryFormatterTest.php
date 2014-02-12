@@ -195,14 +195,14 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 	public static function provideToStringArgs() {
 		return array(
 			array( array(), array(), '/* foobar:0| */' ),
-			array( array( '' ), array( 'This is a test…' ), '/* foobar:1|| */This is a test…' ),
-			array( array( 'one' ), array( 'This is a test…' ), '/* foobar:1||one */This is a test…' ),
-			array( array( 'one', 'two' ), array( 'This is a test…' ), '/* foobar:1||one|two */This is a test…' ),
-			array( array( 'one', 'two', 'three' ), array( 'This is a test…' ), '/* foobar:1||one|two|three */This is a test…' ),
-			array( array( 'one', 'two', 'three', '…' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|… */This is a test…' ),
-			array( array( 'one', 'two', 'three', '<>' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|<> */This is a test…' ),
-			array( array( 'one', 'two', 'three', '&lt;&gt;' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|&lt;&gt; */This is a test…' ),
-			array( array(), array( str_repeat( 'a', 2*SUMMARY_MAX_LENGTH ) ), '/* foobar:1| */' . str_repeat( 'a', SUMMARY_MAX_LENGTH-18 ) . '...' ),
+			array( array( '' ), array( 'This is a test…' ), '/* foobar:1|| */ This is a test…' ),
+			array( array( 'one' ), array( 'This is a test…' ), '/* foobar:1||one */ This is a test…' ),
+			array( array( 'one', 'two' ), array( 'This is a test…' ), '/* foobar:1||one|two */ This is a test…' ),
+			array( array( 'one', 'two', 'three' ), array( 'This is a test…' ), '/* foobar:1||one|two|three */ This is a test…' ),
+			array( array( 'one', 'two', 'three', '…' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|… */ This is a test…' ),
+			array( array( 'one', 'two', 'three', '<>' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|<> */ This is a test…' ),
+			array( array( 'one', 'two', 'three', '&lt;&gt;' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|&lt;&gt; */ This is a test…' ),
+			array( array(), array( str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ), '/* foobar:1| */ ' . str_repeat( 'a', SUMMARY_MAX_LENGTH - 19 ) . '...' ),
 		);
 	}
 
@@ -272,7 +272,7 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 				array( 'x', 'y' ),
 				array( 'A', 'B'),
 				null,
-				'/* summarytest-testing:2|nl|x|y */A, B'
+				'/* summarytest-testing:2|nl|x|y */ A, B'
 			),
 			array( // #4
 				'summarytest',
@@ -281,7 +281,7 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 				null,
 				array( 'A', 'B' ),
 				null,
-				'/* summarytest:2| */A, B'
+				'/* summarytest:2| */ A, B'
 			),
 			array( // #5
 				'summarytest',
@@ -290,7 +290,7 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 				array( 'x', 'y' ),
 				array( 'A', 'B'),
 				'can I haz world domination?',
-				'/* summarytest-testing:2|nl|x|y */can I haz world domination?'
+				'/* summarytest-testing:2|nl|x|y */ can I haz world domination?'
 				),
 			array( // #6
 				'summarytest',
@@ -299,7 +299,7 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 				null,
 				null,
 				'can I haz world domination?',
-				'/* summarytest:0| */can I haz world domination?'
+				'/* summarytest:0| */ can I haz world domination?'
 				),
 			array( // #7
 				'summarytest',
@@ -308,7 +308,7 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 				array( 'x', array( 1, 2, 3 ) ),
 				array( 'A', array( 1, 2, 3 ) ),
 				null,
-				'/* summarytest-testing:2|nl|x|1, 2, 3 */A, 1, 2, 3'
+				'/* summarytest-testing:2|nl|x|1, 2, 3 */ A, 1, 2, 3'
 			),
 			array( // #8
 				'summarytest',
@@ -317,7 +317,7 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 				array( 'x', array( "foo" => 1, "bar" => 2 ) ),
 				array( 'A', array( "foo" => 1, "bar" => 2 ) ),
 				null,
-				'/* summarytest-testing:2|nl|x|foo: 1, bar: 2 */A, foo: 1, bar: 2'
+				'/* summarytest-testing:2|nl|x|foo: 1, bar: 2 */ A, foo: 1, bar: 2'
 			),
 		);
 	}

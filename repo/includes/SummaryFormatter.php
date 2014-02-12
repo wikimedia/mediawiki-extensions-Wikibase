@@ -234,10 +234,14 @@ class SummaryFormatter {
 		$comment = $normalizer->trimToNFC( $comment );
 		$summary = $normalizer->trimToNFC( $summary );
 		$mergedString = '';
-		if ( $comment !== '' ) {
-			$mergedString .=  "/* $comment */";
+		if ( !empty( $comment ) ) {
+			$mergedString .=  '/* ' . $comment . ' */';
 		}
-		if ( $summary !== "" ) {
+		if ( !empty( $summary ) ) {
+			if ( !empty( $mergedString ) ) {
+				// Having a space after the comment is commonly known from section edits
+				$mergedString .= ' ';
+			}
 			$mergedString .= $this->language->truncate( $summary, $length - strlen( $mergedString ) );
 		}
 
