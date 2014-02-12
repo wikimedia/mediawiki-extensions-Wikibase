@@ -47,6 +47,45 @@ def sauce_browser(test_name, language)
   browser
 end
 
+def local_browser(language)
+  if ENV["BROWSER_LABEL"]
+    browser_label = ENV["BROWSER_LABEL"].to_sym
+  else
+    browser_label = :firefox
+  end
+
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.timeout = 600 # seconds – default is 60
+
+	if browser_label == :firefox
+		profile = Selenium::WebDriver::Firefox::Profile.new
+		profile["dom.max_script_run_time"] = 600
+		profile["dom.max_chrome_script_run_time"] = 600
+	end
+
+  if language == "default"
+    browser = Watir::Browser.new browser_label, :http_client => client, :profile => profile
+  else
+    if browser_label == :firefox
+      profile["intl.accept_languages"] = language
+      browser = Watir::Browser.new browser_label, :profile => profile, :http_client => client
+    elsif browser_label == :chrome
+      profile = Selenium::WebDriver::Chrome::Profile.new
+      profile["intl.accept_languages"] = language
+      browser = Watir::Browser.new browser_label, :profile => profile, :http_client => client
+    elsif browser_label == :phantomjs
+      capabilities = Selenium::WebDriver::Remote::Capabilities.phantomjs
+      capabilities["phantomjs.page.customHeaders.Accept-Language"] = language
+      browser = Watir::Browser.new browser_label, desired_capabilities: capabilities, :http_client => client
+    else
+      raise "Changing default language is currently supported only for Chrome, Firefox and PhantomJS!"
+    end
+  end
+
+  browser.window.resize_to 1280, 1024
+  browser
+end
+
 Before("@repo_login") do
   abort("WB_REPO_USERNAME environment variable is not defined! Please export a value for that variable before proceeding.") unless ENV["WB_REPO_USERNAME"]
   abort("WB_REPO_PASSWORD environment variable is not defined! Please export a value for that variable before proceeding.") unless ENV["WB_REPO_PASSWORD"]
