@@ -1847,6 +1847,7 @@ $messages['he'] = array(
 
 /** Hindi (हिन्दी)
  * @author Bill william compton
+ * @author Siddhartha Ghai
  */
 $messages['hi'] = array(
 	'wikibase-client-desc' => 'विकिबेस एक्सटेंशन के लिए क्लाइन्ट',
@@ -1876,7 +1877,7 @@ $messages['hi'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'आप को लॉग इन होने की आवश्यकता है',
 	'wikibase-linkitem-not-loggedin' => 'इस सुविधा के उपयोग के लिए आपका इस विकि और [$1 केन्द्रीय डेटा रिपोज़िटरी] पर लॉग इन होना आवश्यक है।',
 	'wikibase-linkitem-success-link' => 'पृष्ठ सफलतापूर्वक जुड़ गया है। आप कड़ियाँ युक्त आइटम को हमारी [$1 केन्द्रीय डेटा रिपोज़िटरी] में पा सकते हैं।',
-	'wikibase-rc-hide-wikidata' => '$1विकिडेटा',
+	'wikibase-rc-hide-wikidata' => 'विकिडेटा $1',
 	'wikibase-rc-show-wikidata-pref' => 'विकिडेटा संपादनो को हाल के परिवर्तनों में दिखाएँ',
 );
 
@@ -2835,7 +2836,7 @@ $messages['mk'] = array(
 	'wikibase-linkitem-title' => 'Сврзување со страница',
 	'wikibase-linkitem-linkpage' => 'Сврзи со страницата',
 	'wikibase-linkitem-selectlink' => 'Одберете вики и страница што сакате да ја сврзете.',
-	'wikibase-linkitem-input-site' => 'Јазици:',
+	'wikibase-linkitem-input-site' => 'Јазик:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-confirmitem-text' => 'Избраната страница е веќе поврзана со [$1 единица во нашето централно складиште]. Потврдете дека {{PLURAL:$2|долуприкажаната страница|долуприкажаните страници}} {{PLURAL:$2|е|се}} {{PLURAL:$2|таа|тие}} што сакате да ги сврзете со страницава.',
 	'wikibase-linkitem-confirmitem-button' => 'Потврди',

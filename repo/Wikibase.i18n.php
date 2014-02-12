@@ -13003,12 +13003,48 @@ for å finne ut hva som har skjedd.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernet [$2] {{PLURAL:$1|kallenavn}}',
 	'wikibase-property-summary-special-create-property' => 'Opprettet en [$2] egenskap med {{PLURAL:$1|verdi|verdiene}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
+	'wikibase-listdatatypes-wikibase-item-body' => "Lenk til andre elementer i prosjektet. Under innlegging vil ''Element''-navnerommet gjennomsøkes for like forekomster. Det består av et enkelt tekstfelt.
+* oppsett – implisitt del av Iri-strengen
+* hierarkisk del – implisitt del av Iri-strengen
+* spørring – implisitt del av Iri-strengen
+* fragment – implisitt del av Iri-strengen",
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-medium',
+	'wikibase-listdatatypes-commonsmedia-body' => "Lenk til filer lagret i Wikimedia Commons. Under innlegging vil ''Fil''-navnerommet gjennomsøkes for like forekomster. Det består av et enkelt tekstfelt.
+* oppsett – implisitt del av Iri-streng
+* hierarkisk del – implisitt del av Iri-streng
+* spørring – implisitt del av Iri-streng
+* fragment – implisitt del av Iri-streng",
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinat',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Data for geografisk posisjon gitt som et par av breddegrad og lengdegrad i gms eller desimale grader for gitt himmellegeme. Standard er "Jorden" og så "WGS84". Det legges til oppløsning og verdiområde.
+* breddegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset N/S
+* lengdegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset E/W
+* globe (valgfri) – eksplisitt (?) dataverdi, gitt som himmellegeme der standard er "Jorden" og så "WGS84"',
+	'wikibase-listdatatypes-quantity-head' => 'Størrelse',
+	'wikibase-listdatatypes-quantity-body' => 'Datafelt for størrelse med tilhørende predefinert enhet. Den faktiske enheten inngår i dataverdiene som legges inn.
+* verdi – implisitt del av strengen (mapping til enhetsprefiks er uklar)
+* unit – implisitt del av strengen (mapping til standardiseringorgan er uklar)
+* nøyaktighet (valgfri) – eksplisit dataverdi,  har samme enhet som verdien',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Enspråklig tekst',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Bokstavelig datafelt for streng som ikke er oversatt til andre språk. Denne typen streng defineres en gang og gjenbrukes av alle språk. Typisk bruk er geografiske navn skrevet i det lokale språk, en identifikator, en kjemisk formel eller et latinbasert vitenskapelig navn.
+* språk – eksplisitt verdi for å identifisere språket for tekstdelen
+* verdi – eksplisitt verdi for den språkspesifikke strengen',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Flerspråklig tekst',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Bokstavelig datafelt for streng som må oversettes til andre språk. Typisk bruk er elementnavn av global interesse som har ikke-lokale skrevne former. Disse kan variere både mellom språk og skriftsystemer.
+* språk – eksplisitt verdi for å identifisere språket for tekstdelen
+* verdi – eksplisitt verdi for den språkspesifikke strengen',
 	'wikibase-listdatatypes-string-head' => 'Streng',
 	'wikibase-listdatatypes-string-body' => 'Bokstavelig datafelt for en streng av tegn. Typisk bruk er identifikatorer som har en skriftlig form som ikke skal oversettes.
 * verdi – eksplisitt verdi for den språkspesifikke variantstrengen',
 	'wikibase-listdatatypes-time-head' => 'Tid',
+	'wikibase-listdatatypes-time-body' => 'Bokstavelig datafelt for en tidsverdi. Gitt som tid med et viss presisjon og grenseverdier. Tiden lagres internt som det gregorianske formatet ev. ekstrapolert bakover i tid før formatet ble innført. Det kan imidlertid brukes andre formater under avlesing og formatering
+* tid – eksplisitt verdi for et tidspunkt, representert som ISO8601, året alltid som 11 sifre og datoen alltid med fortegn, i formatet +00000002013-01-01T00:00:00Z
+* tidssone – eksplisitt verdi som et heltall med fortegn som angir avviket fra UTC i minutter.
+* før – eksplisitt heltall for antall enheter etter angitt tid som gjelder. Enheten er gitt av presisjonen.
+* etter – eksplisitt heltall for antall enheter før angitt tid som gjelder. Enheten er gitt av presisjonen.
+* presisjon –  eksplisitt verdi angitt som en shortint. Tallene fortolkes slik: 0 - milliarder år, 1 - hundre millioner år, ..., 6 - årtusen, 7 - århundre, 8 - tiår, 9 - år, 10 - måned, 11 - dag, 12 - time, 13 - minutt, 14 - sekund.
+* kalendermodell – eksplisitt verdi angitt som en URI. Den angir kalendermodellen som skal brukes for å vise aktuell tidsverdi.',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Bokstavelig felt for en URL. URL-er er begrenset til protokollene som også støttes av eksterne lenker i wikitekst.',
 	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Wikibase element',
 	'content-model-wikibase-property' => 'Wikibase egenskap',
@@ -13043,6 +13079,12 @@ for å finne ut hva som har skjedd.',
 	'action-label-update' => 'oppdater etiketter',
 	'action-description-remove' => 'slett beskrivelser',
 	'action-description-update' => 'oppdater beskrivelser',
+	'wikibase-time-precision-Gannum' => 'i $1 milliarder år',
+	'wikibase-time-precision-Mannum' => 'i $1 millioner år',
+	'wikibase-time-precision-annum' => 'i $1 år',
+	'wikibase-time-precision-millennium' => '$1. årtusen',
+	'wikibase-time-precision-century' => '$1. århundre',
+	'wikibase-time-precision-10annum' => '$1-årene',
 );
 
 /** Dutch (Nederlands)
@@ -13991,6 +14033,81 @@ Vòstra adreça IP serà enregistrada dins l’istoric de las modificacions d'aq
  */
 $messages['or'] = array(
 	'wikibase-remove' => 'ବାହାର କରିବା',
+);
+
+/** Punjabi (ਪੰਜਾਬੀ)
+ * @author Babanwalia
+ */
+$messages['pa'] = array(
+	'specialpages-group-wikibaserepo' => 'ਵਿਕੀਬੇਸ ਦਾ ਖ਼ਜ਼ਾਨਾ',
+	'wikibase-edit' => 'ਸੋਧੋ',
+	'wikibase-save' => 'ਸਾਂਭੋ',
+	'wikibase-cancel' => 'ਰੱਦ ਕਰੋ',
+	'wikibase-add' => 'ਜੋੜੋ',
+	'wikibase-addqualifier' => 'ਵਿਸ਼ੇਸ਼ਕ ਜੋੜੋ',
+	'wikibase-addreference' => 'ਸਰੋਤ ਜੋੜੋ',
+	'wikibase-save-inprogress' => 'ਸਾਂਭਿਆ ਜਾ ਰਿਹਾ ਹੈ...',
+	'wikibase-remove-inprogress' => 'ਹਟਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...',
+	'wikibase-label-empty' => 'ਅਜੇ ਕੋਈ ਚੇਪੀ ਨਹੀਂ ਦਿੱਤੀ ਗਈ',
+	'wikibase-label-edit-placeholder' => 'ਚੇਪੀ ਭਰੋ',
+	'wikibase-label-edit-placeholder-language-aware' => '$1 ਵਿਚ ਚੇਪੀ ਭਰੋ',
+	'wikibase-description-empty' => 'ਅਜੇ ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ',
+	'wikibase-description-edit-placeholder' => 'ਵੇਰਵਾ ਭਰੋ',
+	'wikibase-description-edit-placeholder-language-aware' => '$1 ਵਿਚ ਵੇਰਵਾ ਭਰੋ',
+	'wikibase-sitelink-site-edit-placeholder' => 'ਸਾਈਟ',
+	'wikibase-sitelink-page-edit-placeholder' => 'ਸਫ਼ਾ',
+	'wikibase-alias-edit-placeholder' => 'ਕੋਈ ਉਰਫ਼ ਭਰੋ',
+	'wikibase-description-input-help-message' => '$1 ਵਿਚ ਕੋਈ ਛੋਟਾ ਵੇਰਵਾ ਭਰੋ',
+	'wikibase-statements' => 'ਬਿਆਨ',
+	'wikibase-terms' => 'ਹੋਰ ਭਾਸ਼ਾਵਾਂ ਵਿਚ',
+	'wikibase-remove' => 'ਹਟਾਓ',
+	'wikibase-move-up' => 'ਉਤਾਂਹ ਘੱਲੋ',
+	'wikibase-move-down' => 'ਹੇਠਾਂ ਘੱਲੋ',
+	'wikibase-undo-title' => '"$1" ਦੀ ਸੋਧ ਨਕਾਰੀ ਜਾ ਰਹੀ ਹੈ',
+	'wikibase-itembytitle-lookup-site' => 'ਸਾਈਟ:',
+	'wikibase-itembytitle-lookup-page' => 'ਸਫ਼ਾ:',
+	'wikibase-itembytitle-submit' => 'ਭਾਲ਼',
+	'wikibase-itemdisambiguation-lookup-language' => 'ਭਾਸ਼ਾ:',
+	'wikibase-itemdisambiguation-lookup-label' => 'ਚੇਪੀ:',
+	'wikibase-itemdisambiguation-submit' => 'ਭਾਲ਼',
+	'wikibase-itemdisambiguation-nothing-found' => 'ਅਫ਼ਸੋਸ, ਇਸ ਚੇਪੀ ਵਾਲ਼ੀ ਕੋਈ ਮੱਦ ਨਹੀਂ ਲੱਭੀ।',
+	'wikibase-newitem-fieldset' => 'ਕੋਈ ਨਵੀਂ ਮੱਦ ਬਣਾਓ',
+	'wikibase-newentity-label' => 'ਚੇਪੀ:',
+	'wikibase-newentity-description' => 'ਵੇਰਵਾ:',
+	'wikibase-newentity-submit' => 'ਬਣਾਓ',
+	'wikibase-modifyterm-language' => 'ਭਾਸ਼ਾ:',
+	'special-mergeitems' => 'ਦੋ ਮੱਦਾਂ ਰਲ਼ਾਓ',
+	'wikibase-dispatchstats-oldest-change' => 'ਸਭ ਤੋਂ ਪੁਰਾਣਾ',
+	'wikibase-dispatchstats-newest-change' => 'ਸਭ ਤੋਂ ਨਵਾਂ',
+	'wikibase-dispatchstats-site-id' => 'ਸਾਈਟ',
+	'wikibase-dispatchstats-large-lag' => '(ਬਹੁਤ ਵੱਡਾ)',
+	'wikibase-dispatchstats-freshest' => 'ਸਭ ਤੋਂ ਤਾਜ਼ਾ',
+	'wikibase-dispatchstats-stalest' => 'ਸਭ ਤੋਂ ਬੇਹਾ',
+	'wikibase-dispatchstats-median' => 'ਦਰਮਿਆਨੀ',
+	'wikibase-dispatchstats-average' => 'ਔਸਤ',
+	'wikibase-entitieswithoutlabel-label-language' => 'ਭਾਸ਼ਾ:',
+	'wikibase-entitieswithoutlabel-label-type' => 'ਕਿਸਮ:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'ਸਾਰੇ',
+	'wikibase-entitieswithoutlabel-submit' => 'ਲੱਭੋ',
+	'wikibase-item-summary-wbsetitem' => 'ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ',
+	'wikibase-item-summary-wbcreate-new' => 'ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ',
+	'wikibase-item-summary-wbeditentity' => 'ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ',
+	'wikibase-item-summary-wbeditentity-create' => 'ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ',
+	'wikibase-item-summary-wbeditentity-update' => 'ਇੱਕ ਮੱਦ ਨਵੀਂ ਕੀਤੀ ਗਈ',
+	'wikibase-item-summary-wbeditentity-override' => 'ਇੱਕ ਮੱਦ ਸਾਫ਼ ਕੀਤੀ ਗਈ',
+	'wikibase-listdatatypes-time-head' => 'ਵਕਤ',
+	'right-item-create' => 'ਮੱਦਾਂ ਬਣਾਓ',
+	'right-item-remove' => 'ਮੱਦਾਂ ਮਿਟਾਓ',
+	'right-label-remove' => 'ਚੇਪੀਆਂ ਮਿਟਾਓ',
+	'right-label-update' => 'ਚੇਪੀਆਂ ਨਵੀਆਂ ਕਰੋ',
+	'right-description-remove' => 'ਵੇਰਵੇ ਮਿਟਾਓ',
+	'right-description-update' => 'ਵੇਰਵੇ ਨਵੇਂ ਕਰੋ',
+	'action-item-create' => 'ਮੱਦਾਂ ਬਣਾਓ',
+	'action-item-remove' => 'ਮੱਦਾਂ ਮਿਟਾਓ',
+	'action-label-remove' => 'ਚੇਪੀਆਂ ਮਿਟਾਓ',
+	'action-label-update' => 'ਚੇਪੀਆਂ ਨਵੀਆਂ ਕਰੋ',
+	'action-description-remove' => 'ਵੇਰਵੇ ਮਿਟਾਓ',
+	'action-description-update' => 'ਵੇਰਵੇ ਨਵੇਂ ਕਰੋ',
 );
 
 /** Polish (polski)
