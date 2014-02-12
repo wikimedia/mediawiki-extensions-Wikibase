@@ -33,12 +33,18 @@ class ClaimDeserializer implements Deserializer {
 	private $snaksDeserializer;
 
 	/**
+	 * @var Deserializer
+	 */
+	private $referencesDeserializer;
+
+	/**
 	 * @param Deserializer $snakDeserializer
 	 * @param Deserializer $snaksDeserializer
 	 */
-	public function __construct( Deserializer $snakDeserializer, Deserializer $snaksDeserializer ) {
+	public function __construct( Deserializer $snakDeserializer, Deserializer $snaksDeserializer, Deserializer $referencesDeserializer ) {
 		$this->snakDeserializer = $snakDeserializer;
 		$this->snaksDeserializer = $snaksDeserializer;
+		$this->referencesDeserializer = $referencesDeserializer;
 	}
 
 	/**
@@ -85,6 +91,7 @@ class ClaimDeserializer implements Deserializer {
 
 		if ( $serialization['type'] === 'statement' ) {
 			$this->setRankFromSerialization( $serialization, $claim );
+			$this->setReferencesFromSerialization( $serialization, $claim );
 		}
 
 		return $claim;
@@ -120,6 +127,14 @@ class ClaimDeserializer implements Deserializer {
 		}
 
 		$statement->setRank( $this->rankIds[$serialization['rank']] );
+	}
+
+	public function setReferencesFromSerialization( array &$serialization, Statement $statement ) {
+		if ( !array_key_exists( 'references', $serialization ) ) {
+			return;
+		}
+
+		$statement->setReferences( $this->referencesDeserializer->deserialize( $serialization['references'] ) );
 	}
 
 	private function assertCanDeserialize( $serialization ) {

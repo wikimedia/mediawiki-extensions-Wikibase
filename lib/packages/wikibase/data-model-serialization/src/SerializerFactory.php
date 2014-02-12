@@ -47,7 +47,7 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newClaimSerializer() {
-		return new ClaimSerializer( $this->newSnakSerializer(), $this->newSnaksSerializer() );
+		return new ClaimSerializer( $this->newSnakSerializer(), $this->newSnaksSerializer(), $this->newReferencesSerializer() );
 	}
 
 	/**

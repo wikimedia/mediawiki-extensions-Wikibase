@@ -33,12 +33,19 @@ class ClaimSerializer implements Serializer {
 	private $snaksSerializer;
 
 	/**
+	 * @var Serializer
+	 */
+	private $referencesSerializer;
+
+	/**
 	 * @param Serializer $snakSerializer
 	 * @param Serializer $snaksSerializer
+	 * @param Serializer $referencesSerializer
 	 */
-	public function __construct( Serializer $snakSerializer, Serializer $snaksSerializer ) {
+	public function __construct( Serializer $snakSerializer, Serializer $snaksSerializer, Serializer $referencesSerializer ) {
 		$this->snakSerializer = $snakSerializer;
 		$this->snaksSerializer = $snaksSerializer;
+		$this->referencesSerializer = $referencesSerializer;
 	}
 
 	/**
@@ -78,7 +85,11 @@ class ClaimSerializer implements Serializer {
 		);
 		$this->addQualifiersToSerialization( $claim, $serialization );
 		$this->addGuidToSerialization( $claim, $serialization );
-		$this->addRankToSerialization( $claim, $serialization );
+
+		if ( $claim instanceof Statement ) {
+			$this->addRankToSerialization( $claim, $serialization );
+			$this->addReferencesToSerialization( $claim, $serialization );
+		}
 
 		return $serialization;
 	}
@@ -91,8 +102,14 @@ class ClaimSerializer implements Serializer {
 	}
 
 	private function addRankToSerialization( Claim $claim, array &$serialization ) {
-		if ( $claim instanceof Statement ) {
-			$serialization['rank'] = $this->rankLabels[$claim->getRank()];
+		$serialization['rank'] = $this->rankLabels[$claim->getRank()];
+	}
+
+	private function addReferencesToSerialization( Statement $claim, array &$serialization ) {
+		$references = $claim->getReferences();
+
+		if ( $references->count() != 0 ) {
+			$serialization['references'] = $this->referencesSerializer->serialize( $claim->getReferences() );
 		}
 	}
 

@@ -55,7 +55,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newClaimDeserializer() {
-		return new ClaimDeserializer( $this->newSnakDeserializer(), $this->newSnaksDeserializer() );
+		return new ClaimDeserializer( $this->newSnakDeserializer(), $this->newSnaksDeserializer(), $this->newReferencesDeserializer() );
 	}
 
 	/**
