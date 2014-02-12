@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_6687dfdd",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-12T16:02:39Z",
+      "side": 1,
+      "message": "indeed, is we are aiming for 100 char long lines this line counts as 105 \u003e.\u003e",
+      "parentUuid": "4e04eb01_df3f9f1f",
+      "revId": "7c5bc6549378a4f0fd167bd974778fefd761d1a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_7f164bae",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
         "patchSetId": 1
