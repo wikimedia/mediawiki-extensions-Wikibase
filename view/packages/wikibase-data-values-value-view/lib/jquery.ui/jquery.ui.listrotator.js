@@ -15,7 +15,7 @@
  *
  * @option {Object} [menu] Options for the jQuery.menu widget used as drop-down menu:
  *         {Object} [menu.position] Default object passed to jQuery.ui.position when positioning the
- *         menu.
+ *         menu. Positions will be flipped if isRtl option returns "true".
  *
  * @option {Object} [animation] Object containing parameters used for the rotation animation.
  *         {string[]} [margins] Defines how far the sections should be shifted when animating the
@@ -28,6 +28,9 @@
  * @option {boolean} [deferInit] Whether to defer initializing the section widths until initWidths()
  *         is called "manually".
  *         Default: false
+ *
+ * @option {boolean|Function} [isRTL] Whether widget is used in an RTL context.
+ *         Default: function() { return $( 'body' ).hasClass( 'rtl' ); }
  *
  * @event auto: Triggered when "auto" options is selected.
  *        (1) {jQuery.Event}
@@ -71,13 +74,6 @@
 	}
 
 	/**
-	 * Caches whether the widget is used in a rtl context. This, however, depends on using an "rtl"
-	 * class on the document body like it is done in MediaWiki.
-	 * @type {boolean}
-	 */
-	var isRtl = $( 'body' ).hasClass( 'rtl' );
-
-	/**
 	 * Measures the maximum width of a container according to a list of strings. The width is
 	 * determined by the widest string.
 	 *
@@ -104,8 +100,8 @@
 			values: [],
 			menu: {
 				position: {
-					my: ( isRtl ) ? 'right top' : 'left top',
-					at: ( isRtl ) ? 'right bottom' : 'left bottom',
+					my: 'left top',
+					at: 'left bottom',
 					collision: 'none'
 				}
 			},
@@ -116,6 +112,9 @@
 			deferInit: false,
 			messages: {
 				'auto': mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
+			},
+			isRtl: function() {
+				return $( 'body' ).hasClass( 'rtl' );
 			}
 		},
 
@@ -164,7 +163,7 @@
 				iconClasses = ['ui-icon ui-icon-triangle-1-w', 'ui-icon ui-icon-triangle-1-e'];
 
 			// Flip triangle arrows in rtl context:
-			if ( isRtl ) {
+			if ( this._isRtl() ) {
 				iconClasses.reverse();
 			}
 
@@ -503,7 +502,7 @@
 				margins.reverse();
 			}
 
-			if ( isRtl ) {
+			if ( this._isRtl() ) {
 				margins.reverse();
 			}
 
@@ -533,6 +532,17 @@
 					duration: this.options.animation.duration
 				}
 			);
+		},
+
+		/**
+		 * Returns whether in RTL context.
+		 *
+		 * @return {boolean}
+		 */
+		_isRtl: function() {
+			return ( $.isFunction( this.options.isRtl ) )
+				? this.options.isRtl()
+				: this.options.isRtl;
 		},
 
 		/**
@@ -573,9 +583,21 @@
 		_showMenu: function() {
 			this.$menu.slideDown( this.options.animation.duration );
 
+			function flip( string ) {
+				var segments = $.map( string.split( ' ' ), function( segment ) {
+					return ( segment.indexOf( 'left' ) !== -1 )
+						? segment.replace( 'left', 'right' )
+						: segment.replace( 'right', 'left' );
+				} );
+				return segments.join( ' ' );
+			}
+
 			this.$menu.position( $.extend( {
 				of: this.$curr
-			}, this.options.menu.position ) );
+			}, {
+				my: flip( this.options.menu.position.my ),
+				at: flip( this.options.menu.position.at )
+			} ) );
 
 			this.activate();
 		},

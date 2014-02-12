@@ -87,7 +87,13 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 
 ## Release notes
 
-### 0.3 (dev)
+### 0.3.1 (dev)
+
+#### Enhancements
+
+* Added "isRtl" option to jQuery.ui.listrotator.
+
+### 0.3 (2014-02-04)
 
 #### Enhancements
 
