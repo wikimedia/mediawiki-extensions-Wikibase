@@ -182,7 +182,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		}
 
 		$value = $this->getPropertyValueFormatter()->format( $value );
-		return '/* wbsetclaimvalue:1| */' . $property . ': ' . $value;
+		return '/* wbsetclaimvalue:1| */ ' . $property . ': ' . $value;
 	}
 
 	/**

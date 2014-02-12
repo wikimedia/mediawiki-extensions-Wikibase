@@ -74,7 +74,13 @@ class LinkTitles extends ApiWikibase {
 		$itemContent = null;
 
 		$summary = new Summary( $this->getModuleName() );
-		$summary->addAutoSummaryArgs( $fromSite->getGlobalId() . ":$fromPage", $toSite->getGlobalId() . ":$toPage" );
+		// From SummaryFormatter: "the first argument is always the number of summary arguments
+		// [...] the second one is always the language code".
+		$summary->setLanguage( $fromSite->getGlobalId() );
+		// The second language code becomes the third argument.
+		$summary->addAutoCommentArgs( $toSite->getGlobalId() );
+		$summary->addAutoSummaryArgs( $fromSite->getGlobalId() . ':' . $fromPage,
+			$toSite->getGlobalId() . ':' . $toPage );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
