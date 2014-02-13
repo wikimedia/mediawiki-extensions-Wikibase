@@ -14,10 +14,13 @@
 	"license": "GPL-2.0+",
 	"authors": [
 		{
+			"name": "Thomas PT",
+			"homepage": "https://github.com/Tpt"
+		},
+		{
 			"name": "Jeroen De Dauw",
 			"email": "jeroendedauw@gmail.com",
-			"homepage": "http://jeroendedauw.com",
-			"role": "Developer"
+			"homepage": "http://jeroendedauw.com"
 		}
 	],
 	"support": {
