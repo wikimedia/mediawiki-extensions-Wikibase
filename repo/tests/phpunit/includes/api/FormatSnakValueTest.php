@@ -24,6 +24,14 @@ use Wikibase\Lib\SnakFormatter;
  */
 class FormatSnakValueTest extends \ApiTestCase {
 
+	protected function setUp() {
+		parent::setUp();
+
+		$this->setMwGlobals( array(
+			'wgArticlePath' => '/wiki/$1'
+		) );
+	}
+
 	public function provideApiRequest() {
 		$november11 = new TimeValue( '+2013-11-11T01:02:03Z',
 			1 * 60 * 60, 0, 0,
@@ -90,7 +98,7 @@ class FormatSnakValueTest extends \ApiTestCase {
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'@^<a href=".*index\.php/Q200000">.*</a>$@' ),
+				'@^<a href=".*wiki/Q200000">.*</a>$@' ),
 
 			//TODO: test HTML output
 		);
