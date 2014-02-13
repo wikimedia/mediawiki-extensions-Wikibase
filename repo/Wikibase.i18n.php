@@ -10818,7 +10818,8 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 * latitude – 좌표 문자열의 첫 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 N/S로 주어집니다
 * longitude – 좌표 문자열의 두 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 E/W로 주어집니다
 * altitude (선택 사항) – 주어진 참조면에서의 높이를 나타낸 명시적인(?) 값으로, "지구" 타원체에 대해서는 "WGS84" 참조 타원체가 사용됩니다
-* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다', # Fuzzy
+* 고도 (선택 사항) - 참조 평면에 대한 높이의 명시적인(?) 값으로, "WGS84" 참조 구체인 "지구" 구체에 해당합니다.
+* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다',
 	'wikibase-listdatatypes-quantity-head' => '수량',
 	'wikibase-listdatatypes-quantity-body' => '어떤 명확하게 정의된 단위에 결합된 양을 나타내는 리터럴 데이터 필드입니다. 실제 단위는 입력된 데이터 값에 포함되어 있습니다.
 * value – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
@@ -10879,6 +10880,12 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'action-label-update' => '레이블 업데이트',
 	'action-description-remove' => '설명 지우기',
 	'action-description-update' => '설명 업데이트',
+	'wikibase-time-precision-Gannum' => '$1십억 년 동안',
+	'wikibase-time-precision-Mannum' => '$1백만 년 동안',
+	'wikibase-time-precision-annum' => '$1년 동안',
+	'wikibase-time-precision-millennium' => '$1. 천년',
+	'wikibase-time-precision-century' => '$1. 세기',
+	'wikibase-time-precision-10annum' => '$1',
 );
 
 /** Krio (Krio)
@@ -12799,7 +12806,7 @@ IP-adressen din vil bli lagret i redigeringshistorikken.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Et annet søk ($3) har allerede etiketten «$1» knyttet til språkkoden $2.',
 	'wikibase-error-label-not-unique-item' => 'Et annet element ($3) har allerede etiketten «$1» og beskrivelsen «$4» knyttet til språkkoden $2.',
 	'wikibase-error-label-no-entityid' => 'Etiketten kan ikke være et gyldig element-id.',
-	'wikibase-wikibaserepopage-not-itemid' => '«$1» er ikke en gyldig element-ID.',
+	'wikibase-wikibaserepopage-not-itemid' => '«$1» er ikke et gyldig element-ID.',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'Språkkoden «$1» er ukjent. Vennligst bruk en språkkode som kan gjenkjennes av systemet, slik som «nb».',
 	'wikibase-wikibaserepopage-invalid-id' => 'Entiteten «$1» er ukjent, sjekk om den har riktig form.',
 	'special-itembytitle' => 'Element fra tittel',
@@ -16786,7 +16793,7 @@ Din IP-adress kommer att sparas i historiken för denna enhet.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'En annan fråga ($3) redan har etikett "$1" associerat med språkkoden $2.',
 	'wikibase-error-label-not-unique-item' => 'Ett annat objekt ($3) har redan etiketten "$1" och beskrivningen "$4" associerat med språkkoden $2.',
 	'wikibase-error-label-no-entityid' => 'Etiketten behöver inte vara ett giltigt enhets-ID.',
-	'wikibase-wikibaserepopage-not-itemid' => '"$1" är inte ett giltigt objekt-ID. Webbplatslänkar kan endast anges för objekt.', # Fuzzy
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" är inte ett giltigt objekt-ID.',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'Språkidentifieraren "$1" är okänd. Var god använd en språkidentifierare som känns igen av systemet, t.ex. "en".',
 	'wikibase-wikibaserepopage-invalid-id' => 'ID:et "$1" är okänt för systemet. Var god använd ett giltigt enhets-ID.',
 	'special-itembytitle' => 'Objekt efter titel',
@@ -17023,6 +17030,8 @@ för att ta reda på var den tog vägen.',
 	'action-label-update' => 'uppdatera etiketter',
 	'action-description-remove' => 'radera beskrivningar',
 	'action-description-update' => 'uppdatera beskrivningar',
+	'wikibase-time-precision-Gannum' => 'i $1 miljarder år',
+	'wikibase-time-precision-annum' => 'i $1 år',
 );
 
 /** Tamil (தமிழ்)
