@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_ce8c853d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-13T12:54:13Z",
+      "side": 1,
+      "message": "The bug number should be in the following format to auto link from bugzilla and mark as patch in review.\n\nBug: 47213\nChange-Id: I8bed80355706455d779a7235f998ff6ce75c06b9",
+      "revId": "008d5be8bdbadbdce33f110d6808917cd85f32d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
