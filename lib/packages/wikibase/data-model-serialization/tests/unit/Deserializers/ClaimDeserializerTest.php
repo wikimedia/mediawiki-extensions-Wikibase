@@ -5,6 +5,7 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
@@ -59,7 +60,18 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( true ) );
 
-		return new ClaimDeserializer( $snakDeserializerMock, $snaksDeserializerMock );
+
+		$referencesDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$referencesDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( array() ) )
+			->will( $this->returnValue( new ReferenceList() ) );
+		$referencesDeserializerMock->expects( $this->any() )
+			->method( 'isDeserializerFor' )
+			->with( $this->equalTo( array() ) )
+			->will( $this->returnValue( true ) );
+
+		return new ClaimDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
 	}
 
 	public function deserializableProvider() {
@@ -191,6 +203,21 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 						)
 					)
 				),
+				'type' => 'statement',
+				'rank' => 'normal'
+			)
+		);
+
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setReferences( new ReferenceList() );
+		$serializations[] = array(
+			$claim,
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => "P42"
+				),
+				'references' => array(),
 				'type' => 'statement',
 				'rank' => 'normal'
 			)
