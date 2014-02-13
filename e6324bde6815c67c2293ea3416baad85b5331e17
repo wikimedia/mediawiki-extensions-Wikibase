@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_6e15719c",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-13T13:37:29Z",
+      "side": 1,
+      "message": "here you call setLanguage which expects a language code string, you actually pass it a globalSiteId string. These seems rather odd!\n\nThe same happens below where you say the second language code becomes the third argument but again pass in a siteId!",
+      "revId": "e6324bde6815c67c2293ea3416baad85b5331e17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
