@@ -390,7 +390,7 @@ to find out where it went.',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal data for a geographical position given as a latitude-longitude pair in gms or decimal degrees for the given stellar body. Defaults to "Earth" and then "WGS84". It adds a resolution and range.
 * latitude – implicit first part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed N/S
 * longitude – implicit second part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed E/W
-* globe (optional) – explicit (?) data value, given as stellar body that defaults to "Earth" and then "WGS84"',
+* globe – explicit (?) data value, given as stellar body that defaults to "Earth" and then "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantity',
 	'wikibase-listdatatypes-quantity-body' => 'Literal data field for a quantity that relates to some kind of well-defined unit. The actual unit goes in the data values that is entered.
 * value – implicit part of the string (mapping of unit prefix is unclear)
