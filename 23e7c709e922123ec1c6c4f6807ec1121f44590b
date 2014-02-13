@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_ee818193",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-13T17:27:40Z",
+      "side": 0,
+      "message": "sure we want to get rid of this? (i suppose createpage covers this, and might be ok)",
+      "revId": "23e7c709e922123ec1c6c4f6807ec1121f44590b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_ae537942",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-13T17:27:40Z",
+      "side": 0,
+      "message": "possible we may want specific rights for labels in the future (e.g. protect a high-profile label that appears in wikipedia).\n\nwe could re-add it later, though.",
+      "revId": "23e7c709e922123ec1c6c4f6807ec1121f44590b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

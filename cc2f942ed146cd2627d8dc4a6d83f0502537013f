@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_8e71dddf",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-13T17:27:40Z",
+      "side": 1,
+      "message": "\u0027terms\u0027 is confusing to the end user. at minimum, please say \"labels, descriptions, aliases\" in parenthesis",
+      "revId": "cc2f942ed146cd2627d8dc4a6d83f0502537013f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3127c80f",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-13T17:27:40Z",
+      "side": 1,
+      "message": "item-merge?",
+      "revId": "cc2f942ed146cd2627d8dc4a6d83f0502537013f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1124cc06",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-13T17:27:40Z",
+      "side": 1,
+      "message": "item-merge?",
+      "revId": "cc2f942ed146cd2627d8dc4a6d83f0502537013f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_ae3a59e2",
+        "filename": "repo/includes/api/ModifyTerm.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-13T17:27:40Z",
+      "side": 1,
+      "message": "might be problematic when we have query entities, though we\u0027ll need to fix such assumptions in numerous places in our code",
+      "revId": "cc2f942ed146cd2627d8dc4a6d83f0502537013f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_8e3f9dd3",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-13T17:27:40Z",
+      "side": 1,
+      "message": "wow, how did this work before?",
+      "revId": "cc2f942ed146cd2627d8dc4a6d83f0502537013f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
