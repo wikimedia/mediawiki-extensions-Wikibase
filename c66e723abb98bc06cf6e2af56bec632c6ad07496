@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_dd20b5f4",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:42:40Z",
+      "side": 1,
+      "message": "Hmmm... seems like adding yet another responsibility to this class. I\u0027m still vague on what this thing is actually supposed to do, so don\u0027t know if this is actually bad.",
+      "revId": "c66e723abb98bc06cf6e2af56bec632c6ad07496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9d346d48",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:42:40Z",
+      "side": 1,
+      "message": "How about putting the body of the foreach into its own method?",
+      "revId": "c66e723abb98bc06cf6e2af56bec632c6ad07496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7d39a13d",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:42:40Z",
+      "side": 1,
+      "message": "same",
+      "revId": "c66e723abb98bc06cf6e2af56bec632c6ad07496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
