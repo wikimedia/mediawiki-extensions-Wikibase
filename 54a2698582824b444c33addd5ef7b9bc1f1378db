@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_5d214599",
+        "filename": "lib/includes/store/DispatchingEntityStoreWatcher.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "Comments don\u0027t add a lot of value and are not proper sentences",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_ae69391f",
         "filename": "lib/includes/util/GenericEventDispatcher.php",
         "patchSetId": 6
@@ -70,6 +87,40 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_5d6f05c1",
+        "filename": "lib/tests/phpunit/store/CachingEntityRevisionLookupTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "Please create methods that test one specific behavior, not big ones that test the full contract of a method. This test is hard to read due to bad method name, to many stuff, mixed abstraction levels and violation of \"arrange act assert\".",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3d6439e1",
+        "filename": "lib/tests/phpunit/store/CachingEntityRevisionLookupTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "duplication",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_2e552953",
         "filename": "lib/tests/phpunit/util/GenericEventDispatcherTest.php",
         "patchSetId": 6
@@ -81,6 +132,57 @@
       "writtenOn": "2014-02-13T13:52:18Z",
       "side": 1,
       "message": "dont really need the @since",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3d3679e5",
+        "filename": "lib/tests/phpunit/util/GenericEventDispatcherTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "empty line",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1d33bdf4",
+        "filename": "lib/tests/phpunit/util/GenericEventDispatcherTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "Not testing the passed args",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_bd49696c",
+        "filename": "lib/tests/phpunit/util/GenericEventDispatcherTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "There was an is_subclass_of in there which I\u0027m not sure works with interfaces. This test does not verify this.",
       "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +257,57 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_dd5af521",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "clutter comment",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_ddb9d52a",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "Missing capitalization and punctuation",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3db3194e",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "??",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_2ed409be",
         "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityStoreTest.php",
         "patchSetId": 6
@@ -183,6 +336,23 @@
       "writtenOn": "2014-02-13T13:52:18Z",
       "side": 1,
       "message": "double new line",
+      "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3de1d929",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:24:03Z",
+      "side": 1,
+      "message": "same thing here, again writing one big test method per production method and violating \"arrange act assert\".",
       "revId": "54a2698582824b444c33addd5ef7b9bc1f1378db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
