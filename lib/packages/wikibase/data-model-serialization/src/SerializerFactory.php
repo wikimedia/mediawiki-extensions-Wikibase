@@ -4,6 +4,7 @@ namespace Wikibase\DataModel;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
+use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\ReferencesSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
@@ -29,6 +30,15 @@ class SerializerFactory {
 	 */
 	public function __construct( Serializer $dataValueSerializer ) {
 		$this->dataValueSerializer = $dataValueSerializer;
+	}
+
+	/**
+	 * Returns a Serializer that can serialize Claims objects.
+	 *
+	 * @return Serializer
+	 */
+	public function newClaimsSerializer() {
+		return new ClaimsSerializer( $this->newClaimSerializer() );
 	}
 
 	/**

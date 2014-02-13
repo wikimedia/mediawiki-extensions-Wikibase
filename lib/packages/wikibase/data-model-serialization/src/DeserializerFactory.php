@@ -4,6 +4,7 @@ namespace Wikibase\DataModel;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
+use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
@@ -39,13 +40,13 @@ class DeserializerFactory {
 		$this->entityIdParser = $entityIdParser;
 	}
 
-	/**
-	 * Returns a Deserializer that can deserialize References objects.
+	/*
+	 * Returns a Deserializer that can deserialize Claims objects.
 	 *
 	 * @return Deserializer
 	 */
-	public function newReferencesDeserializer() {
-		return new ReferenceListDeserializer( $this->newReferenceDeserializer() );
+	public function newClaimsDeserializer() {
+		return new ClaimsDeserializer( $this->newClaimDeserializer() );
 	}
 
 	/*
@@ -55,6 +56,15 @@ class DeserializerFactory {
 	 */
 	public function newClaimDeserializer() {
 		return new ClaimDeserializer( $this->newSnakDeserializer(), $this->newSnaksDeserializer() );
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize References objects.
+	 *
+	 * @return Deserializer
+	 */
+	public function newReferencesDeserializer() {
+		return new ReferenceListDeserializer( $this->newReferenceDeserializer() );
 	}
 
 	/**
