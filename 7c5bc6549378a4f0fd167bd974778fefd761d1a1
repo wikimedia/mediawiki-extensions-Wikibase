@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e04eb01_ee9f4161",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-13T12:54:20Z",
+      "side": 1,
+      "message": "The bug number should be just above the ChangeID with no new line in the following format to auto link from bugzilla and mark as patch in review.\n\nBug: 58534\nChange-Id: I8bed80355706455d779a7235f998ff6ce75c06b9",
+      "revId": "7c5bc6549378a4f0fd167bd974778fefd761d1a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_ff425bb1",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityview.js",
         "patchSetId": 1
