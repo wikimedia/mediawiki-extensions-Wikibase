@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_7dcd2134",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-13T22:48:28Z",
+      "side": 1,
+      "message": "if you factor out the predicate to its own method, you can make the intention clear without having a comment",
+      "revId": "0eea7a7bc43e19e496a3715d168334458b5324b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
