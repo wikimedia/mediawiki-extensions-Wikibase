@@ -24,7 +24,7 @@ use Wikibase\Statement;
  * @covers Wikibase\ClaimDifferenceVisualizer
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseClaim
  *
  * @licence GNU GPL v2+
