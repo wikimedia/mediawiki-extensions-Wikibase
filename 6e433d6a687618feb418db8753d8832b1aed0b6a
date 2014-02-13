@@ -16,6 +16,24 @@
       "revId": "6e433d6a687618feb418db8753d8832b1aed0b6a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_aea49905",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-02-13T11:27:49Z",
+      "side": 1,
+      "message": "The other factory methods don\u0027t have it; you sure we can do that or might there be any issue?",
+      "parentUuid": "4e04eb01_6610ffad",
+      "revId": "6e433d6a687618feb418db8753d8832b1aed0b6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
