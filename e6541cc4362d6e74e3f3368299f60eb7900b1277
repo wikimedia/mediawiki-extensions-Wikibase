@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_d53ac9e3",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "In my opinion we should stick to a format that does \u0027\u0027\u0027not\u0027\u0027\u0027 force any leading zeros.\nAlso you are missing negative years here.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_95444170",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "Is the \u0027foo\u0027 a todo?",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5526b9ca",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "Please make this \u003c\u003d 12 instead of \u003c 13. I think this would be less confusing.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_35332d0c",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "Please make this \u003c\u003d 12 instead of \u003c 13. I think this would be less confusing.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_780f6c34",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "Could you please add a short description what this regex is supposed to do?\nIf it\u0027s supposed to parse month names in foreign languages you should add tests for e.g. \"März\" (German March) since I\u0027m not sure if the \\w catches the German umlauts.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f51ca57e",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "This is not really checking for integer values since it allows \".\", \"0.123\", \",,,,\" and such. At least rename this to \"isFormattedNumber\" (without \"get\") to make it fit the existing \"parseFormattedNumber\".",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_951b2182",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "\u003c\u003d 12 please.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7510955b",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "\u003c\u003d 12 please.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_550d9940",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "$month \u003d sprintf( \"%02d\", $month );\nor simply remove this and use the proposed sprintf below.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_350a0d2a",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "return $timeParser-\u003eparse( sprintf( \u0027+%d-%02d-00T00:00:00Z\u0027, $year, $month ) );",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_15071121",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "$value \u003d intval( $value );\nreturn $value \u003e\u003d 1 \u0026\u0026 $value \u003c\u003d 12;",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_580cb03d",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "Probably should be /^(\\d+)$/",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3819e47e",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-14T11:49:06Z",
+      "side": 1,
+      "message": "\u003c\u003d 12 please.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
