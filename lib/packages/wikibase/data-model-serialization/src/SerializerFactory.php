@@ -7,6 +7,7 @@ use Wikibase\DataModel\Serializers\ClaimSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\ReferencesSerializer;
+use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\SnaksSerializer;
 
@@ -30,6 +31,15 @@ class SerializerFactory {
 	 */
 	public function __construct( Serializer $dataValueSerializer ) {
 		$this->dataValueSerializer = $dataValueSerializer;
+	}
+
+	/**
+	 * Returns a Serializer that can serialize SiteLink objects.
+	 *
+	 * @return Serializer
+	 */
+	public function newSiteLinkSerializer() {
+		return new SiteLinkSerializer();
 	}
 
 	/**
