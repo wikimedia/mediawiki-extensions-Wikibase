@@ -20,7 +20,7 @@ use Wikibase\Property;
  * @covers Wikibase\Dumpers\JsonDumpGenerator
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group JsonDump
  *
  * @license GPL 2+
