@@ -3278,8 +3278,10 @@ $messages['cs'] = array(
 	'wikibase-remove-inprogress' => 'Odstraňuji…',
 	'wikibase-label-empty' => 'Štítek zatím nebyl definován',
 	'wikibase-label-edit-placeholder' => 'vložte štítek',
+	'wikibase-label-edit-placeholder-language-aware' => 'zadejte štítek v jazyce $1',
 	'wikibase-description-empty' => 'Popis není dosud definován',
 	'wikibase-description-edit-placeholder' => 'zadejte popis',
+	'wikibase-description-edit-placeholder-language-aware' => 'zadejte popis v jazyce $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'projekt',
 	'wikibase-sitelink-page-edit-placeholder' => 'stránka',
 	'wikibase-alias-edit-placeholder' => 'zadejte alias',
@@ -3319,6 +3321,9 @@ $messages['cs'] = array(
 	'wikibase-datatype-label' => 'Datový typ:',
 	'wikibase-claimview-snak-tooltip' => 'Zadejte hodnotu odpovídající vlastnosti jménem „$1“. Pokud vlastnost nemá žádnou určenou hodnotu nebo není hodnota známa, můžete si místo jejího zadání vybrat alternativu kliknutím na ikonu vedle kolonky pro zadání hodnoty.',
 	'wikibase-claimview-snak-new-tooltip' => 'Po určení vlastnosti můžete zadat příslušnou hodnotu. Pokud vlastnost nemá žádnou určenou hodnotu nebo není hodnota známa, můžete si místo jejího zadání vybrat alternativu kliknutím na ikonu vedle kolonky pro zadání hodnoty.',
+	'wikibase-statementview-rank-preferred' => 'Preferované postavení',
+	'wikibase-statementview-rank-normal' => 'Normální postavení',
+	'wikibase-statementview-rank-deprecated' => 'Zavržené postavení',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|zdroj|zdroje|zdrojů}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Jeden zdroj zatím nebyl uložen|$1 zdroje zatím nebyly uloženy|$1 zdrojů zatím nebylo uloženo}}',
 	'wikibase-snakview-property-input-placeholder' => 'vlastnost',
@@ -3567,6 +3572,11 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'action-label-update' => 'aktualizovat štítky',
 	'action-description-remove' => 'mazat popisy',
 	'action-description-update' => 'aktualizovat popisy',
+	'wikibase-time-precision-Gannum' => 'za $1 {{PLURAL:$1|miliardu|miliardy|miliard}} let',
+	'wikibase-time-precision-Mannum' => 'za $1 {{PLURAL:$1|milion|miliony|milionů}} let',
+	'wikibase-time-precision-annum' => 'za $1 {{PLURAL:$1|rok|roky|let}}',
+	'wikibase-time-precision-millennium' => '$1. tisíciletí',
+	'wikibase-time-precision-century' => '$1. století',
 );
 
 /** Church Slavic (словѣньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
@@ -4407,7 +4417,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literale Daten für eine geografische Position, die als Breitengrad-Längengrad-Paar in GMS oder Dezimalgrad für den Sternenkörper angegeben ist. Standards sind „Erde“, anschließend „WGS84“. Es wird eine Auflösung und ein Bereich hinzugefügt.
 * latitude – impliziter erster Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „N/S“ angegeben.
 * longitude – impliziter zweiter Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „O/W“ angegeben.
-* globe (optional) – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.',
+* globe – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.',
 	'wikibase-listdatatypes-quantity-head' => 'Menge',
 	'wikibase-listdatatypes-quantity-body' => 'Literales Datenfeld für eine Menge, die sich auf eine Art klar definierte Einheit bezieht. Die tatsächliche Einheit geht in die Datenwerte, die eingegeben werden.
 * value – impliziter Teil der Zeichenkette (Mapping des Einheitspräfixes ist unklar).
@@ -6912,7 +6922,7 @@ ffirmation ajoutée}}',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Données littérales pour une position géographique donnée sous forme de paire latitude-longitude en GMS ou en degrés décimaux pour le corps céleste concerné. Par défaut, "Terre" puis "WGS84". Cela ajoute une résolution et une portée.
 * latitude — première partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe ou par le N/S en suffixe
 * longitude – seconde partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe soit par le E/W en suffixe
-* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"',
+* globe – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantité',
 	'wikibase-listdatatypes-quantity-body' => 'Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.
 * value — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
@@ -7938,7 +7948,7 @@ $messages['he'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי, בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
 * latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף.
 * longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף.
-* globe (לא חובה) ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84',
+* globe (לא חובה) ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
 	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
 * value – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
@@ -10134,7 +10144,7 @@ $messages['ja'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。「地球」それから「WGS84」が既定となっており、分解能と範囲が指定されます。
 * latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N または S で指定されます
 * longitude – 座標文字列の2番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の E または W で指定されます
-* globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
+* globe – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
 * value – 文字列の非明示部分 (単位接頭辞の対応付けは不明瞭です)
@@ -10819,7 +10829,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 * longitude – 좌표 문자열의 두 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 E/W로 주어집니다
 * altitude (선택 사항) – 주어진 참조면에서의 높이를 나타낸 명시적인(?) 값으로, "지구" 타원체에 대해서는 "WGS84" 참조 타원체가 사용됩니다
 * 고도 (선택 사항) - 참조 평면에 대한 높이의 명시적인(?) 값으로, "WGS84" 참조 구체인 "지구" 구체에 해당합니다.
-* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다',
+* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '수량',
 	'wikibase-listdatatypes-quantity-body' => '어떤 명확하게 정의된 단위에 결합된 양을 나타내는 리터럴 데이터 필드입니다. 실제 단위는 입력된 데이터 값에 포함되어 있습니다.
 * value – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
@@ -11961,7 +11971,7 @@ $messages['mk'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава резолуција и опсег.
 * географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) од координатната низа, правецот е зададен со претставка-симбол или со наставка N/S
 * географска должина (''longitude'') – поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
-* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“",
+* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“", # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Количина',
 	'wikibase-listdatatypes-quantity-body' => "Дословно податочно поле за количина што се однесува на некој вид на добро утврдена единица. Самата единица оди во податочната вредност што се внесува.
 * вредност (''value'') – содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
@@ -13025,7 +13035,7 @@ for å finne ut hva som har skjedd.',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Data for geografisk posisjon gitt som et par av breddegrad og lengdegrad i gms eller desimale grader for gitt himmellegeme. Standard er "Jorden" og så "WGS84". Det legges til oppløsning og verdiområde.
 * breddegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset N/S
 * lengdegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset E/W
-* globe (valgfri) – eksplisitt (?) dataverdi, gitt som himmellegeme der standard er "Jorden" og så "WGS84"',
+* globe (valgfri) – eksplisitt (?) dataverdi, gitt som himmellegeme der standard er "Jorden" og så "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Størrelse',
 	'wikibase-listdatatypes-quantity-body' => 'Datafelt for størrelse med tilhørende predefinert enhet. Den faktiske enheten inngår i dataverdiene som legges inn.
 * verdi – implisitt del av strengen (mapping til enhetsprefiks er uklar)
@@ -17031,7 +17041,11 @@ för att ta reda på var den tog vägen.',
 	'action-description-remove' => 'radera beskrivningar',
 	'action-description-update' => 'uppdatera beskrivningar',
 	'wikibase-time-precision-Gannum' => 'i $1 miljarder år',
+	'wikibase-time-precision-Mannum' => 'i $1 miljoner år',
 	'wikibase-time-precision-annum' => 'i $1 år',
+	'wikibase-time-precision-millennium' => '$1. årtusende',
+	'wikibase-time-precision-century' => '$1. århundrade',
+	'wikibase-time-precision-10annum' => '$1 årtionde',
 );
 
 /** Tamil (தமிழ்)
@@ -18968,7 +18982,7 @@ $messages['zh-hans'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十进制经纬度度指定的地理位置的原始数据代码。默认为“地球”其次是“WGS84”。其加入一解析度及范围。
 * 纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供
 * 经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供
-* 星球（可选）——精确值，默认指向“地球”，其次为“WGS84”',
+* 星球——精确值，默认指向“地球”，其次为“WGS84”',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '一些精确定义单位的数值的原始暑假字段。实际单位也输入到数据中。
 *值－－字符的隐藏部分（单位不明）
@@ -19343,7 +19357,7 @@ $messages['zh-hant'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十進制經緯度指定的地理位置的原始數據字段。預設為「Earth」甚次為「WGS84」。其加入一解像度及範圍。
 * 緯度——隱藏的地理位置字串第一部分，包含float、dms、dm與dd，方向由前綴符號或後綴N或S提供
 * 經度——隱藏的地理位置字串第二部分，包含float、dms、dm與dd，方向由前綴符號或後綴E或W提供
-* 星球（可選）——精確數值，預設指向「Earth」，其次為「WGS84」',
+* 星球——精確數值，預設指向「Earth」，其次為「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '數量',
 	'wikibase-listdatatypes-quantity-body' => '一些精確定義單位之數值的原始數據字段。實際單位亦輸入到數據中。
 *數值－－字串的隱藏部分（單位不明）
