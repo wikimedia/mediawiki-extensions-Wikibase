@@ -5,6 +5,7 @@ namespace Wikibase\DataModel;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
+use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
@@ -47,7 +48,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newSiteLinkDeserializer() {
-		return new SiteLinkDeserializer( $this->entityIdParser );
+		return new SiteLinkDeserializer( $this->newEntityIdDeserializer() );
 	}
 
 	/*
@@ -101,6 +102,15 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newSnakDeserializer() {
-		return new SnakDeserializer( $this->dataValueDeserializer, $this->entityIdParser );
+		return new SnakDeserializer( $this->dataValueDeserializer, $this->newEntityIdDeserializer() );
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize EntityId objects.
+	 *
+	 * @return Deserializer
+	 */
+	public function newEntityIdDeserializer() {
+		return new EntityIdDeserializer( $this->entityIdParser );
 	}
 }
