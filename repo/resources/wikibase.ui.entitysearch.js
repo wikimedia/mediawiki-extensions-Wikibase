@@ -51,11 +51,14 @@
 			url: mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '/api.php',
 			emulateSearchBox: true,
 			customListItem: {
-				content: $( '<div/>' ).addClass( 'suggestions-special' )
-					.append( $( '<div/>' ).addClass( 'special-label ' ).text(
-						mw.msg( 'searchsuggest-containing' ) )
-					)
-					.append( $( '<div/>' ).addClass( 'special-query' )
+				content: $( '<div>' )
+					.addClass( 'suggestions-special' )
+					.append(
+						$( '<div>' )
+							.addClass( 'special-label' )
+							.text( mw.msg( 'searchsuggest-containing' ) ),
+						$( '<div>' )
+							.addClass( 'special-query' )
 				),
 				action: function( event, entityselector ) {
 					$form.submit();
