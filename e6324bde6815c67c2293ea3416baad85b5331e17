@@ -34,6 +34,24 @@
       "revId": "e6324bde6815c67c2293ea3416baad85b5331e17",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7843ecb6",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-14T14:18:30Z",
+      "side": 1,
+      "message": "Guys, you are right, but the way summaries are presently used, the seconds comment arg is used for language in some messages and for site id in others. it\u0027s really a matter of renaming the function, but i have no idea what to.",
+      "parentUuid": "4e04eb01_fd7a51e6",
+      "revId": "e6324bde6815c67c2293ea3416baad85b5331e17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
