@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_586150cf",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "As far as I am aware the DateTime object can not parse negative years. Or if it can we are indeed not using it.\n\nAlso the format here gets passed into another parser in DataValues, this should probably be the place to check for the leading zeros and either force or not force them.\n\nAs far as I recall the parse doesn\u0027t force them so we can indeed remove this adding of 0s here!",
+      "parentUuid": "4e04eb01_d53ac9e3",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_95444170",
         "filename": "lib/includes/parsers/MWTimeIsoParser.php",
         "patchSetId": 24
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_385e8418",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "Yes! nice spot!",
+      "parentUuid": "4e04eb01_95444170",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_5526b9ca",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 24
@@ -47,6 +83,24 @@
       "writtenOn": "2014-02-14T11:49:06Z",
       "side": 1,
       "message": "Please make this \u003c\u003d 12 instead of \u003c 13. I think this would be less confusing.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_58b0303e",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "willdo",
+      "parentUuid": "4e04eb01_5526b9ca",
       "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_f89ffcb7",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "Indeed that could be an issue! will check",
+      "parentUuid": "4e04eb01_780f6c34",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_f51ca57e",
         "filename": "lib/includes/parsers/YearMonthTimeParser.php",
         "patchSetId": 24
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_b8a974de",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "indeed get is totally wrong and yes there is a better name and I will rename it!",
+      "parentUuid": "4e04eb01_f51ca57e",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_951b2182",
         "filename": "lib/includes/parsers/YearMonthTimeParser.php",
         "patchSetId": 24
@@ -115,6 +205,24 @@
       "writtenOn": "2014-02-14T11:49:06Z",
       "side": 1,
       "message": "\u003c\u003d 12 please.",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_98aeb8e3",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "again, willdo",
+      "parentUuid": "4e04eb01_951b2182",
       "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -206,6 +314,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_d88b2071",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "yes, especially as I have the trim above",
+      "parentUuid": "4e04eb01_580cb03d",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_3819e47e",
         "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
         "patchSetId": 24
@@ -223,6 +349,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_b880544c",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "willdo",
+      "parentUuid": "4e04eb01_3819e47e",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_d8a44007",
         "filename": "lib/tests/phpunit/parsers/YearMonthTimeParserTest.php",
         "patchSetId": 24
@@ -234,6 +378,24 @@
       "writtenOn": "2014-02-14T12:04:31Z",
       "side": 1,
       "message": "?",
+      "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_789accbe",
+        "filename": "lib/tests/phpunit/parsers/YearMonthTimeParserTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-14T12:07:01Z",
+      "side": 1,
+      "message": "eww!",
+      "parentUuid": "4e04eb01_d8a44007",
       "revId": "e6541cc4362d6e74e3f3368299f60eb7900b1277",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
