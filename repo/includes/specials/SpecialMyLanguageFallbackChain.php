@@ -58,7 +58,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 */
 	public function setContext( $context ) {
 		$this->chain = null;
-		return parent::setContext( $context );
+		parent::setContext( $context );
 	}
 
 	/**
