@@ -8,6 +8,7 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
@@ -19,6 +20,12 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function buildSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer() );
+	}
+
+	public function testNewSiteLinkSerializer() {
+		$this->assertTrue( $this->buildSerializerFactory()->newSiteLinkSerializer()->isSerializerFor(
+			new SiteLink( 'enwiki', 'Nyan Cat' )
+		) );
 	}
 
 	public function testNewClaimsSerializer() {
