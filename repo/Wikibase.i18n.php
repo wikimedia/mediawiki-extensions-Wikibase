@@ -7948,7 +7948,7 @@ $messages['he'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי, בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
 * latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף.
 * longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף.
-* globe (לא חובה) ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84', # Fuzzy
+* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84',
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
 	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
 * value – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
@@ -10829,7 +10829,7 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 * longitude – 좌표 문자열의 두 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 E/W로 주어집니다
 * altitude (선택 사항) – 주어진 참조면에서의 높이를 나타낸 명시적인(?) 값으로, "지구" 타원체에 대해서는 "WGS84" 참조 타원체가 사용됩니다
 * 고도 (선택 사항) - 참조 평면에 대한 높이의 명시적인(?) 값으로, "WGS84" 참조 구체인 "지구" 구체에 해당합니다.
-* globe (선택 사항) – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다', # Fuzzy
+* globe – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다',
 	'wikibase-listdatatypes-quantity-head' => '수량',
 	'wikibase-listdatatypes-quantity-body' => '어떤 명확하게 정의된 단위에 결합된 양을 나타내는 리터럴 데이터 필드입니다. 실제 단위는 입력된 데이터 값에 포함되어 있습니다.
 * value – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
@@ -11971,7 +11971,7 @@ $messages['mk'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава резолуција и опсег.
 * географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) од координатната низа, правецот е зададен со претставка-симбол или со наставка N/S
 * географска должина (''longitude'') – поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
-* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“", # Fuzzy
+* глобус (''globe'') [оптимално] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“",
 	'wikibase-listdatatypes-quantity-head' => 'Количина',
 	'wikibase-listdatatypes-quantity-body' => "Дословно податочно поле за количина што се однесува на некој вид на добро утврдена единица. Самата единица оди во податочната вредност што се внесува.
 * вредност (''value'') – содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
@@ -14437,6 +14437,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'action-description-update' => 'aktualizacji opisów',
 	'wikibase-time-precision-Gannum' => 'w $1 mld lat',
 	'wikibase-time-precision-Mannum' => 'w $1 mln lat',
+	'wikibase-time-precision-century' => '$1. wiek',
 );
 
 /** Piedmontese (Piemontèis)
@@ -14745,8 +14746,8 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-listdatatypes-globe-coordinate-body' => "Dàit literaj për na posission geogràfica smonùa sot forma ëd cobia latitùdin-longitùdin an gms o an gre decimaj për ël còrp celest considerà. 'Me stàndard, ''Tèra'' e peui ''WGS86''. A gionta n'arsolussion e na portà.
 * latitùdin – prima part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura dal N/S butà apress
 * longitùdin – sconda part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura da l' E/W butà apress
-* autëssa (opsional) – valor esplìssit (?) për l'autëssa ansima a 'n pian d'arferiment, për ël glòb \"Tèra\" a sarìa ël glòb d'arferiment \"WGS84\"
-* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"", # Fuzzy
+* glòb – valor ëd dàit esplìssit (?) dàit coma ël còrp ësteilar che për ëstàndard a l'é la \"Tèra\" e peui \"WGS84\"
+* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"",
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Camp ëd dàit literaj për na quantità ch'a rësguarda na sòrt d'unità bin definìa. L'unità real a va ant ij valor ëd dàit ch'a son anserì.
 * value - part implìssita ëd la stringa (l'aplicassion dël prefiss d'unità a l'é nen ciàira)
@@ -16869,6 +16870,7 @@ Din IP-adress kommer att sparas i historiken för denna enhet.',
 	'wikibase-setsitelink-warning-remove' => 'Vill du verkligen ta bort webbplatslänken för [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Webbplats-ID "$1" är okänt. Var god använd ett befintligt webbplats-ID, som "enwiki".',
 	'wikibase-setsitelink-not-item' => 'ID $1 tillhör inte till ett objekt.',
+	'wikibase-setsitelink-not-badge' => 'Objektet $1 är inte ett emblem.',
 	'wikibase-setsitelink-add-failed' => 'Webbplatslänken kunde inte sparas.',
 	'wikibase-setsitelink-remove-failed' => 'Webbplatslänken kunde inte tas bort.',
 	'wikibase-modifyentity-id' => 'ID:',
@@ -16952,7 +16954,10 @@ för att ta reda på var den tog vägen.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Lade till {{PLURAL:$1|alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Tog bort {{PLURAL:$1|alias}} [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Lade till länk till [$2]',
+	'wikibase-item-summary-wbsetsitelink-add-both' => 'Lade till länk med emblem till [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Ändrade länk till [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Ändrade emblem för [$2]',
+	'wikibase-item-summary-wbsetsitelink-set-both' => 'Ändrade länk och emblem för [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Tog bort länk till [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Skapade detta objekt för att ansluta sidorna [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Lade till en språklänk för att ansluta sidorna [$2↔$3]',

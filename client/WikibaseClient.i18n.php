@@ -1137,6 +1137,7 @@ $messages['diq'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|vurnayış|vurnayışi}}',
 	'wikibase-dataitem' => 'Leteyé Wikimalumati',
 	'wikibase-editlinks' => 'Gırey bıvurne',
+	'wikibase-linkitem-addlinks' => 'Gre dek',
 	'wikibase-linkitem-input-site' => 'Zıwan:',
 	'wikibase-linkitem-input-page' => 'Pele:',
 	'wikibase-linkitem-confirmitem-button' => 'Tesdiq',
