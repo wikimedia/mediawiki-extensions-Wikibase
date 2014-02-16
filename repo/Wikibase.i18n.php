@@ -6262,6 +6262,12 @@ $messages['fa'] = array(
 	'action-label-update' => 'به روز کردن برچسب ها',
 	'action-description-remove' => 'پاک‌کردن توضیحات',
 	'action-description-update' => 'به روز رسانی توضیحات',
+	'wikibase-time-precision-Gannum' => 'در $1 میلیارد سال',
+	'wikibase-time-precision-Mannum' => 'در $1 میلیون سال',
+	'wikibase-time-precision-annum' => 'در $1 سال',
+	'wikibase-time-precision-millennium' => '$1. هزاره',
+	'wikibase-time-precision-century' => '$1. قرن',
+	'wikibase-time-precision-10annum' => '$1 ثانیه',
 );
 
 /** Finnish (suomi)
@@ -12786,7 +12792,7 @@ $messages['nb'] = array(
 	'wikibase-statementview-rank-preferred' => 'Foretrukket rang',
 	'wikibase-statementview-rank-normal' => 'Normal rang',
 	'wikibase-statementview-rank-deprecated' => 'Foreldet rang',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|Kilde|Kilder}}',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|kilde|kilder}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|En kilde|$1 kilder}} er ennå ikke lagret',
 	'wikibase-snakview-property-input-placeholder' => 'egenskap',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak av typen «$1». Behandling av denne typen Snak er ennå ikke støttet.',
@@ -13035,7 +13041,7 @@ for å finne ut hva som har skjedd.',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Data for geografisk posisjon gitt som et par av breddegrad og lengdegrad i gms eller desimale grader for gitt himmellegeme. Standard er "Jorden" og så "WGS84". Det legges til oppløsning og verdiområde.
 * breddegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset N/S
 * lengdegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset E/W
-* globe (valgfri) – eksplisitt (?) dataverdi, gitt som himmellegeme der standard er "Jorden" og så "WGS84"', # Fuzzy
+* globe (valgfri) – eksplisitt (?) dataverdi, gitt som himmellegeme der standard er "Jorden" og så "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Størrelse',
 	'wikibase-listdatatypes-quantity-body' => 'Datafelt for størrelse med tilhørende predefinert enhet. Den faktiske enheten inngår i dataverdiene som legges inn.
 * verdi – implisitt del av strengen (mapping til enhetsprefiks er uklar)
