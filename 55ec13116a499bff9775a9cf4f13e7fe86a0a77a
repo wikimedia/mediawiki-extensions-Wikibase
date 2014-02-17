@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e04eb01_6f30b9e5",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T14:13:02Z",
+      "side": 1,
+      "message": "If this validates the string representation of the GUID, shouldn\u0027t that be done by the GuidParser already?",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_853308c0",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 5
@@ -13,6 +30,24 @@
       "writtenOn": "2014-02-11T16:31:59Z",
       "side": 1,
       "message": "Hmm. I\u0027ve seen people do this a lot, with a fixme comment next to it. Not seen much resolving of those. So this strikes me as, \"I\u0027m doing it knowingly wrong now under the presence I will fix it later\".\n\nAlso, injecting more things is... well, this class already has 6 fields...\n\nProbably good to wrap the construction of ChangeOpClaim. This code here has no interest in that ChangeOpClaim needs the services now obtained via global state. This construction task really falls outside of the responsibility of this class.",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_4f2dfd8a",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T14:13:02Z",
+      "side": 1,
+      "message": "So, you would inject a builder for ChangeOpClaim objects?",
+      "parentUuid": "4e04eb01_853308c0",
       "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -100,6 +135,24 @@
       "side": 1,
       "message": "Indeed.\n\nThough don\u0027t do this to begin with - push the construction responsibility to outside of the class... Putting it in the constructor does not magically make everything fine as some people seem to think. It still retains the main problems.",
       "parentUuid": "4e04eb01_ff9edb58",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2f4ab15f",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T14:13:02Z",
+      "side": 1,
+      "message": "Doing it in the constructor is better than doing it inline. Pushing it further up the stack would be better still. Whether it can and should be done immediately depends on the concrete case; let\u0027s try to keep our patches small.\n\nAccessing global state in the constructor in order to get service instances seems OK in general if we don\u0027t control the construction of the object. That\u0027s not the case here, though.",
+      "parentUuid": "4e04eb01_453d008a",
       "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
