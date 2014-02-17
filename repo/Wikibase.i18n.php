@@ -1875,8 +1875,8 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Cambiaes les insinies pa [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Cambiáu enllaz ya insinies pa [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Desaniciáu un enllaz a [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Creáu esti elementu pa coneutar les páxines [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => "Amestáu un enllaz d'idioma pa coneutar les páxines [$2↔$3]",
+	'wikibase-item-summary-wblinktitles-create' => 'Creáu esti elementu pa coneutar les páxines',
+	'wikibase-item-summary-wblinktitles-connect' => "Amestáu un enllaz d'idioma pa coneutar les páxines",
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Creada una afirmación|Creaes afirmaciones}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Creada una afirmación|Creaes afirmaciones}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Creada una afirmación|Creaes afirmaciones}}',
@@ -2077,6 +2077,8 @@ $messages['be'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Назва «$1», звязаная з кодам мовы «$2», ужо прысвоена іншай уласцівасці ($3)', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Назва «$1», звязаная з кодам мовы «$2», ужо прысвоена іншаму запыту ($3)', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Назва «$1» і апісанне «$4», звязаныя з кодам мовы «$2», ужо прысвоены іншаму элементу ($3)', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце адзін з вядомых сістэме моўных кодаў, напрыклад «en».',
+	'wikibase-wikibaserepopage-invalid-id' => 'Сістэме невядомы ідэнтыфікатар «$1». Калі ласка, выкарыстоўвайце адзін з існых ідэнтыфікатараў.',
 	'special-itembytitle' => 'Элементы паводле назвы', # Fuzzy
 	'wikibase-itembytitle-lookup-fieldset' => 'Шукаць элементы паводле праекта і назвы',
 	'wikibase-itembytitle-lookup-site' => 'Праект:',
@@ -2120,8 +2122,6 @@ $messages['be'] = array(
 	'wikibase-setaliases-submit' => 'Задаць псеўданімы',
 	'wikibase-modifyentity-id' => 'Ідэнтыфікатар',
 	'wikibase-modifyterm-language' => 'Мова',
-	'wikibase-modifyentity-invalid-id' => 'Сістэме невядомы ідэнтыфікатар «$1». Калі ласка, выкарыстоўвайце адзін з існых ідэнтыфікатараў.',
-	'wikibase-modifyterm-invalid-langcode' => 'Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце адзін з вядомых сістэме моўных кодаў, напрыклад «en».',
 	'wikibase-dispatchstats-change-timestamp' => 'Дата/час',
 	'wikibase-dispatchstats-oldest-change' => 'Самыя старыя',
 	'special-listdatatypes' => 'Спіс усіх даступных тыпаў дадзеных',
@@ -2165,7 +2165,7 @@ $messages['be'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Выдалена|Выдалены}} дад. {{PLURAL:$1|назва|назвы}} [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Дададзена спасылка на праект [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Выдалена спасылка на праект [$2]', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => 'Усталявана сувязь са {{PLURAL:$1|старонкай|старонкамі}} [$2↔$3]', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => 'Усталявана сувязь са {{PLURAL:$1|старонкай|старонкамі}}', # Fuzzy
 	'wikibase-item-summary-special-create-item' => 'Створаны элемент [$2] са {{PLURAL:$1|значэннем|значэннямі}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Створана заява',
 	'wikibase-property-summary-wbeditentity-create' => 'Створана новая ўласцівасць',
@@ -2273,6 +2273,7 @@ $messages['be-tarask'] = array(
 	'wikibase-warning-constraint-violation-length' => 'Для моўнага коду «$1» спрацавала абмежаваньне даўжыні.',
 	'wikibase-error-sitelink-already-used' => 'Спасылка [$1 $2] ужо ўключаная ў іншы аб’ект, [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Іншая ўласьцівасьць ($3) ужо мае метку «$1» для моўнага коду $2', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».',
 	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'wikibase-itembytitle-lookup-fieldset' => 'Пошук аб’ектаў паводле сайту і назвы',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
@@ -2328,7 +2329,6 @@ $messages['be-tarask'] = array(
 	'wikibase-setsitelink-remove-failed' => 'Не ўдалося выдаліць спасылку на сайт.',
 	'wikibase-modifyentity-id' => 'Ідэнтыфікатар:',
 	'wikibase-modifyterm-language' => 'Мова:',
-	'wikibase-modifyterm-invalid-langcode' => 'Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».',
 	'special-dispatchstats' => 'Статыстыка рассыланьня зьменаў',
 	'wikibase-dispatchstats-intro' => 'Гэтая старонка адлюстроўвае статыстыку рассыланьня зьменаў кліентам.
 Кліенцкай вікі паведамляецца пра зьмену ў {{GRAMMAR:месны|{{SITENAME}}}}, як толькі зьмена была туды дасланая і апрацаваная чаргой заданьняў той вікі.
@@ -2401,8 +2401,8 @@ $messages['be-tarask'] = array(
 	'wikibase-item-summary-wbsetsitelink-add' => 'Дададзеная спасылка на [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Зьмененая спасылка на [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Выдаленая спасылка на [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Аб’ект створаны для злучэньня старонак [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Дададзеная моўная спасылка для злучэньня старонак [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Аб’ект створаны для злучэньня старонак',
+	'wikibase-item-summary-wblinktitles-connect' => 'Дададзеная моўная спасылка для злучэньня старонак',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|1=Створанае сьцверджаньне|Створаныя сьцверджаньні}}', # Fuzzy
@@ -3484,8 +3484,8 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-item-summary-wbsetsitelink-add' => 'Přidán odkaz na [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Změněn odkaz na [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Odstraněn odkaz na [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Položka založena k propojení stránek [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Přidán jazykový odkaz k propojení stránek [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Položka založena k propojení stránek',
+	'wikibase-item-summary-wblinktitles-connect' => 'Přidán jazykový odkaz k propojení stránek',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}',
@@ -3970,8 +3970,8 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Ændrede emblemer for [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Ændrede link og emblemer for [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjernede henvisning for [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Oprettede dette element for at forbinde siderne [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Tilknyttede en sproghenvisning for at forbinde siderne [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Oprettede dette element for at forbinde siderne',
+	'wikibase-item-summary-wblinktitles-connect' => 'Tilknyttede en sproghenvisning for at forbinde siderne',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Oprettede {{PLURAL:$1|en påstand|påstande}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Oprettede {{PLURAL:$1|en påstand|påstande}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Oprettede {{PLURAL:$1|en påstand|påstande}}',
@@ -4355,8 +4355,8 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Auszeichnungen für [$2] geändert',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Link und Auszeichnungen für [$2] geändert',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Link zu [$2] entfernt',
-	'wikibase-item-summary-wblinktitles-create' => 'Dieses Objekt erstellt, um Seiten zu verbinden [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Einen Sprachlink hinzugefügt, um Seiten zu verbinden [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Dieses Objekt erstellt, um Seiten zu verbinden',
+	'wikibase-item-summary-wblinktitles-connect' => 'Einen Sprachlink hinzugefügt, um Seiten zu verbinden',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Eine Aussage|Aussagen}} erstellt',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Eine Aussage|Aussagen}} erstellt',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Eine Aussage|Aussagen}} erstellt',
@@ -4644,6 +4644,8 @@ $messages['dsb'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Druga kakosć ($3) ma južo pomjenjenje "$1" z rěcnym kodom $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Druge napšašowanje ($3) ma južo pomjenjenje "$1" z rěcnym kodom $2.',
 	'wikibase-error-label-not-unique-item' => 'Drugi element ($3) ma južo pomjenjenje "$1" a wopisanje "$4" z rěcnym kodom $2.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Rěcny identifikator "$1" jo njeznaty. Pšosym wužyj rěcny identifikator, kótaryž znajo system, kaž na pś. "dsb".',
+	'wikibase-wikibaserepopage-invalid-id' => 'ID "$1" jo systemoju njeznaty. Pšosym wužyj płaśiwy ID.',
 	'special-itembytitle' => 'Element pó titelu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Elementy pó sedle a titelu pytaś',
 	'wikibase-itembytitle-lookup-site' => 'Sedło:',
@@ -4698,8 +4700,6 @@ $messages['dsb'] = array(
 	'wikibase-setaliases-warning-remove' => 'Coš napšawdu wšykne aliase z [[$1]] wótpóraś?',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Rěc:',
-	'wikibase-modifyentity-invalid-id' => 'ID "$1" jo systemoju njeznaty. Pšosym wužyj płaśiwy ID.',
-	'wikibase-modifyterm-invalid-langcode' => 'Rěcny identifikator "$1" jo njeznaty. Pšosym wužyj rěcny identifikator, kótaryž znajo system, kaž na pś. "dsb".',
 	'special-listdatatypes' => 'Lisćina wšych k dispoziciji stojecych datowych typow',
 	'wikibase-listdatatypes-intro' => 'To jo lisćina wšych datowych typow, kótarež wužywaju se tuchylu w toś tej instalaciji:',
 	'wikibase-history-title-with-label' => 'Wersijowa historija "$2" ($1)',
@@ -4741,8 +4741,8 @@ $messages['dsb'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias jo|Aliasa stej|Aliase su}} se za [$2] {{PLURAL:$1|wótpórał|wótpórałej|wótpórali}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Jo wótkaz k [$2] pśidał',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Jo wótkaz k [$2] wótpórał',
-	'wikibase-item-summary-wblinktitles-create' => 'Jo toś ten element wótpórał, aby boki zwězał [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Jo mjazyrěcne wótkaze pśidał, aby boki zwězał [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Jo toś ten element wótpórał, aby boki zwězał',
+	'wikibase-item-summary-wblinktitles-connect' => 'Jo mjazyrěcne wótkaze pśidał, aby boki zwězał',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Twarźenje jo se napórało|Twarźeni stej se napórałej|Twarźenja su se napórali}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Twarźenje jo se napórało|Twarźeni stej se napórałej|Twarźenja su se napórali}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Twarźenje jo se napórało|Twarźeni stej se napórałej|Twarźenja su se napórali}}',
@@ -5099,6 +5099,8 @@ Via adreso IP estos konservita en la redakta historio de tiu ĉi aĵo.',
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
 	'wikibase-itemlink-title' => '$1 | $2',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Lingvokodo "$1" estas nekonata. Bonvolu uzi lingvokodon konatan de la sistemo kia "eo".',
+	'wikibase-wikibaserepopage-invalid-id' => 'La identigilo "$1" estas nekonata de la sistemo. Bonvolu uzi validan  identigilon.',
 	'special-itembytitle' => 'Ero laŭ titolo',
 	'wikibase-itembytitle-lookup-fieldset' => 'Priserĉu erojn laŭ retejo kaj titolo',
 	'wikibase-itembytitle-lookup-site' => 'Retejo:',
@@ -5147,8 +5149,6 @@ Via adreso IP estos konservita en la redakta historio de tiu ĉi aĵo.',
 	'wikibase-setsitelink-remove-failed' => 'La reteja ligilo ne povis esti konservita.',
 	'wikibase-modifyentity-id' => 'Identigilo:',
 	'wikibase-modifyterm-language' => 'Lingvo:',
-	'wikibase-modifyentity-invalid-id' => 'La identigilo "$1" estas nekonata de la sistemo. Bonvolu uzi validan  identigilon.',
-	'wikibase-modifyterm-invalid-langcode' => 'Lingvokodo "$1" estas nekonata. Bonvolu uzi lingvokodon konatan de la sistemo kia "eo".',
 	'wikibase-dispatchstats-change-id' => 'Identigo',
 	'wikibase-dispatchstats-change-timestamp' => 'Tempindiko',
 	'wikibase-dispatchstats-oldest-change' => 'Plej malnova',
@@ -5191,8 +5191,8 @@ por trovi de kie ĝi venis.',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Aldonita ligilo al [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Ŝanĝita ligilo liganta al [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Forigita ligilo de [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Kreita ero por interkonekti paĝojn [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Aldonita lingva ligilo por konekti paĝojn [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Kreita ero por interkonekti paĝojn',
+	'wikibase-item-summary-wblinktitles-connect' => 'Aldonita lingva ligilo por konekti paĝojn',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Kreis {{PLURAL:$1|deklaron|deklarojn}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Kreis {{PLURAL:$1|deklaron|deklarojn}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Kreis {{PLURAL:$1|deklaron|deklarojn}}',
@@ -5443,8 +5443,8 @@ Tu dirección IP quedará registrada en el historial de revisiones de esta entid
 	'wikibase-item-summary-wbsetaliases-remove' => 'Eliminando {{PLURAL:$1|el alias|los alias}} de [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Se añadió un enlace a [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Se eliminó el enlace a [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Se creó este elemento para conectar las páginas [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Se añadió un enlace lingüístico para conectar las páginas [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Se creó este elemento para conectar las páginas',
+	'wikibase-item-summary-wblinktitles-connect' => 'Se añadió un enlace lingüístico para conectar las páginas',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Se {{PLURAL:$1|creó una afirmación|crearon afirmaciones}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Se {{PLURAL:$1|creó una afirmación|crearon afirmaciones}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Se {{PLURAL:$1|creó una afirmación|crearon afirmaciones}}',
@@ -5763,8 +5763,8 @@ Klientvikit teavitatakse muudatusest võrgukohas {{SITENAME}}, kui muudatus on s
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Muudetud [$2]-märgistused',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Muudetud [$2]-link märgistustega',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Eemaldatud [$2]-link',
-	'wikibase-item-summary-wblinktitles-create' => 'Üksus loodud, et ühendada lehekülgi [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Keelelink lisatud, et ühendada lehekülgi [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Üksus loodud, et ühendada lehekülgi',
+	'wikibase-item-summary-wblinktitles-connect' => 'Keelelink lisatud, et ühendada lehekülgi',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Loodud {{PLURAL:$1|väide|väited}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Loodud {{PLURAL:$1|väide|väited}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Loodud {{PLURAL:$1|väide|väited}}',
@@ -6137,8 +6137,8 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'تغییر نشان‌ها برای [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'تغییر لینک و نشان‌ها برای [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'حذف پیوند مشخص‌کنندهٔ وب‌گاه [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'ساخت این آیتم برای پیوند صفحه های [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'افزودن یک پیوند زبانی برای ارتباط صفحه های [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'ساخت این آیتم برای پیوند صفحه های',
+	'wikibase-item-summary-wblinktitles-connect' => 'افزودن یک پیوند زبانی برای ارتباط صفحه های',
 	'wikibase-item-summary-wbcreateclaim-value' => 'ایجاد {{PLURAL:$1|یک ادعا|ادعا}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'ایجاد {{PLURAL:$1|یک ادعای بدون مقدار|ادعاهای بدون مقدار}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'ایجاد {{PLURAL:$1|یک ادعای چندمقداری|ادعاهای چندمقداری}}',
@@ -6509,8 +6509,8 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetsitelink-add' => '[$2]-linkki lisättiin',
 	'wikibase-item-summary-wbsetsitelink-set' => '[$2]-linkki muutettiin',
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2]-linkki poistettiin',
-	'wikibase-item-summary-wblinktitles-create' => 'Kohde luotu yhdistämään sivut [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Lisättiin kielilinkki yhdistämään sivuja [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Kohde luotu yhdistämään sivut',
+	'wikibase-item-summary-wblinktitles-connect' => 'Lisättiin kielilinkki yhdistämään sivuja',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Väite|Väitteitä}} luotu',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Väite|Väitteitä}} luotu',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Väite|Väitteitä}} luotu',
@@ -6864,8 +6864,8 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Badges modifiés pour [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Lien et badges modifiés pour [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Lien vers [$2] supprimé',
-	'wikibase-item-summary-wblinktitles-create' => 'Cet élément créé pour connecter les pages [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Lien de langue ajouté pour connecter les pages [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Cet élément créé pour connecter les pages',
+	'wikibase-item-summary-wblinktitles-connect' => 'Lien de langue ajouté pour connecter les pages',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Affirmation ajoutée|Affirmations ajoutées}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Valeur spéciale «&nbsp;aucune valeur&nbsp;» ajoutée|Valeurs spéciales «&nbsp;aucune valeur&nbsp;» ajoutées}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Affirmation ajoutée : «&nbsp;valeur inconnue&nbsp;»|A
@@ -7035,6 +7035,8 @@ $messages['frp'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'N’ôtra propriètât ($3) at ja lo lambél « $1 » associyê u code lengoua $2', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'N’ôtra demanda ($3) at ja lo lambél « $1 » associyê u code lengoua $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Un ôtr’èlèment ($3) at ja lo lambél « $1 » et la dèscripcion « $4 » associyês u code lengoua $2', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Lo code lengoua « $1 » est encognu. Volyéd empleyér un code lengoua cognu du sistèmo, per ègzemplo « frp ».',
+	'wikibase-wikibaserepopage-invalid-id' => 'Lo numerô « $1 » est encognu du sistèmo. Volyéd empleyér un numerô d’entitât valido.',
 	'special-itembytitle' => 'Èlèment per titro', # Fuzzy
 	'wikibase-itembytitle-lookup-fieldset' => 'Rechèrche d’èlèments per seto et titro',
 	'wikibase-itembytitle-lookup-site' => 'Seto :',
@@ -7065,8 +7067,6 @@ $messages['frp'] = array(
 	'wikibase-setlabel-submit' => 'Dèfenir lo lambél',
 	'wikibase-modifyentity-id' => 'Numerô',
 	'wikibase-modifyterm-language' => 'Lengoua',
-	'wikibase-modifyentity-invalid-id' => 'Lo numerô « $1 » est encognu du sistèmo. Volyéd empleyér un numerô d’entitât valido.',
-	'wikibase-modifyterm-invalid-langcode' => 'Lo code lengoua « $1 » est encognu. Volyéd empleyér un code lengoua cognu du sistèmo, per ègzemplo « frp ».',
 	'special-listdatatypes' => 'Lista de tôs los tipos de donâs disponiblos',
 	'wikibase-listdatatypes-intro' => 'O est na lista de tôs los tipos de donâs en cors d’usâjo sur cet’enstalacion :',
 	'wikibase-history-title-with-label' => 'Historico de les vèrsions de « $2 » ($1)',
@@ -7099,7 +7099,7 @@ $messages['frp'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => 'Retrèt {{PLURAL:$1|d’un aliâs|d’aliâs}} [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Lim spècifico u seto [$2] apondu', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Lim spècifico u seto [$2] enlevâ', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] {{PLURAL:$1|pâge branchiêye|pâges branchiêyes}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => '{{PLURAL:$1|pâge branchiêye|pâges branchiêyes}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Na valor revendicâye fêta|Valors revendicâyes fêtes}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Na revendicacion sen valor fêta|Revendicacions sen valor fêtes}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Na revendicacion d’una sé-quinta valor fêta|Revendicacions d’una sé-quinta valor fêtes}}', # Fuzzy
@@ -7412,8 +7412,8 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Cambio as insignias de [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Cambio a ligazón e as insignias de [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Elimino a ligazón a [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Creo este elemento para conectar as páxinas [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Engado unha ligazón lingüística para conectar as páxinas [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Creo este elemento para conectar as páxinas',
+	'wikibase-item-summary-wblinktitles-connect' => 'Engado unha ligazón lingüística para conectar as páxinas',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Creo {{PLURAL:$1|unha afirmación|varias afirmacións}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Creo {{PLURAL:$1|unha afirmación|varias afirmacións}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Creo {{PLURAL:$1|unha afirmación|varias afirmacións}}',
@@ -7892,8 +7892,8 @@ $messages['he'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'שונו סמלים עבור [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'שונה קישור וסמלים עבור [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'הוסר קישור אל [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'נוצר הפריט הזה כדי לקשר בין דפים [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'נוסף קישור לשוני כדי לקשר בין דפים [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'נוצר הפריט הזה כדי לקשר בין דפים',
+	'wikibase-item-summary-wblinktitles-connect' => 'נוסף קישור לשוני כדי לקשר בין דפים',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|נוצרה טענה|נוצרו טענות}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|נוצרה טענה|נוצרו טענות}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|טענה|נוצרו טענות}}',
@@ -8168,6 +8168,8 @@ $messages['hsb'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Druha kajkosć ($3) ma hižo pomjenowanje "$1" z rěčnym kodom $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Druhe naprašowanje ($3) ma hižo pomjenowanje "$1" z rěčnym kodom $2.',
 	'wikibase-error-label-not-unique-item' => 'Druhi element ($3) ma hižo woznamjenjenje "$1" a wopisanje "$4" z rěčnym kodom $2.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Rěčny identifikator "$1" je njeznaty. Prošu wužij rěčny identifikator, kotryž system znaje, kaž na př. "hsb".',
+	'wikibase-wikibaserepopage-invalid-id' => 'ID "$1" je systemej njeznaty. Prošu wužij płaćiwy ID.',
 	'special-itembytitle' => 'Element po titulu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Za elementami po sydle a titulu pytać',
 	'wikibase-itembytitle-lookup-site' => 'Sydło:',
@@ -8222,8 +8224,6 @@ $messages['hsb'] = array(
 	'wikibase-setaliases-warning-remove' => 'Chceš woprawdźe wšě aliasy z [[$1]] wotstronić?',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Rěč:',
-	'wikibase-modifyentity-invalid-id' => 'ID "$1" je systemej njeznaty. Prošu wužij płaćiwy ID.',
-	'wikibase-modifyterm-invalid-langcode' => 'Rěčny identifikator "$1" je njeznaty. Prošu wužij rěčny identifikator, kotryž system znaje, kaž na př. "hsb".',
 	'special-listdatatypes' => 'Lisćina wšěch k dispoziciji stejacych datowych typow',
 	'wikibase-listdatatypes-intro' => 'To je lisćina wšěch datowych typow, kotrež so w tutej instalaciji tuchwilu wužiwaja:',
 	'wikibase-history-title-with-label' => 'Wersijowa historija "$2" ($1)',
@@ -8265,8 +8265,8 @@ $messages['hsb'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => 'Wotstroni {{PLURAL:$1|alias|aliasaj|aliasy}} za [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Přida wotkaz k [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Wotstroni wotkaz z [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Wutwori tutón element, zo by stronje zwjazał [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Přida mjezyrěčne wotkazy, zo by stronje zwjazał [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Wutwori tutón element, zo by stronje zwjazał',
+	'wikibase-item-summary-wblinktitles-connect' => 'Přida mjezyrěčne wotkazy, zo by stronje zwjazał',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Wutwori {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Wutwori {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Wutwori {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}',
@@ -8411,6 +8411,8 @@ $messages['hu'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Egy másik tulajdonság ($3) már használja a(z) „$1” címkét a(z) $2 kódú nyelven.', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Egy másik lekérdezés ($3) már használja a(z) „$1” címkét a(z) $2 kódú nyelven.', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Egy másik fogalom ($3) már használja a(z) „$1” címkét és a(z) „$4” leírást a(z) $2 kódú nyelven.', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Ismeretlen nyelvkód: „$1”. Adj meg a rendszer által ismert nyelvkódot (például: „hu”).',
+	'wikibase-wikibaserepopage-invalid-id' => 'Ismeretlen azonosító: „$1”. Adj meg egy létező azonosítót.',
 	'special-itembytitle' => 'Fogalom cím szerint', # Fuzzy
 	'wikibase-itembytitle-lookup-fieldset' => 'Fogalom keresése wiki és cím alapján',
 	'wikibase-itembytitle-lookup-site' => 'Wiki:',
@@ -8448,8 +8450,6 @@ $messages['hu'] = array(
 	'wikibase-setlabel-submit' => 'Címke megadása',
 	'wikibase-modifyentity-id' => 'Azonosító',
 	'wikibase-modifyterm-language' => 'Nyelv',
-	'wikibase-modifyentity-invalid-id' => 'Ismeretlen azonosító: „$1”. Adj meg egy létező azonosítót.',
-	'wikibase-modifyterm-invalid-langcode' => 'Ismeretlen nyelvkód: „$1”. Adj meg a rendszer által ismert nyelvkódot (például: „hu”).',
 	'special-listdatatypes' => 'Az összes rendelkezésre álló adattípus listája',
 	'wikibase-listdatatypes-intro' => 'Az összes olyan adattípus listája, amik fel lettek telepítve:',
 	'wikibase-history-title-with-label' => '„$2” ($1) laptörténete',
@@ -8486,7 +8486,7 @@ $messages['hu'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => '[$2] további {{PLURAL:$1|név|nevek}} törlése',
 	'wikibase-item-summary-wbsetsitelink-add' => '[$2] wiki-kapcsolat hozzáadása', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] wiki-kapcsolat eltávolítása', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => '{{PLURAL:$1|Lap|Lapok}} összekötése [$2↔$3]', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => '{{PLURAL:$1|Lap|Lapok}} összekötése', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-value' => 'Értéket tartalmazó {{PLURAL:$1|állítás|állítások}} hozzáadása', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Érték nélküli {{PLURAL:$1|állítás|állítások}} hozzáadása', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Bizonytalan értéket tartalmazó {{PLURAL:$1|állítás|állítások}} hozzáadása', # Fuzzy
@@ -8643,6 +8643,8 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'wikibase-itemlink-id-wrapper' => '($1)',
 	'wikibase-itemlink-userlang-wrapper' => '&nbsp;($1: $2)',
 	'wikibase-itemlink-title' => '$1 | $2',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Kode bahasa "$1" tidak diketahui. Gunakan kode bahasa yang dikenal sistem, misalnya "en".',
+	'wikibase-wikibaserepopage-invalid-id' => 'ID "$1" tidak dikenali sistem. Mohon gunakan entitas ID yang valid.',
 	'special-itembytitle' => 'Cari item',
 	'wikibase-itembytitle-lookup-fieldset' => 'Cari item menurut wiki dan judul',
 	'wikibase-itembytitle-lookup-site' => 'Wiki:',
@@ -8697,8 +8699,6 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'wikibase-setaliases-warning-remove' => 'Apakah Anda ingin menghapus semua nama lain [[$1]]?',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Bahasa:',
-	'wikibase-modifyentity-invalid-id' => 'ID "$1" tidak dikenali sistem. Mohon gunakan entitas ID yang valid.',
-	'wikibase-modifyterm-invalid-langcode' => 'Kode bahasa "$1" tidak diketahui. Gunakan kode bahasa yang dikenal sistem, misalnya "en".',
 	'special-dispatchstats' => 'Perubahan pengiriman statistik',
 	'wikibase-dispatchstats-intro' => 'Halaman ini menyediakan statistik tentang perubahan pengiriman kepada klien.',
 	'wikibase-dispatchstats-no-stats' => 'Saat ini tidak ada statistik yang tersedia.',
@@ -8761,8 +8761,8 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'wikibase-item-summary-wbsetaliases-remove' => 'Hapus [$2] {{PLURAL:$1|nama lain}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Tambahkan interwiki ke [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Hapus interwiki pada [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Buat item ini untuk menghubungkan halaman [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Tambahkan interwiki untuk menghubungkan halaman [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Buat item ini untuk menghubungkan halaman',
+	'wikibase-item-summary-wblinktitles-connect' => 'Tambahkan interwiki untuk menghubungkan halaman',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Buat {{PLURAL:$1|klaim}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Buat {{PLURAL:$1|klaim}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Buat {{PLURAL:$1|klaim}}',
@@ -8933,6 +8933,9 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-error-label-not-unique-wikibase-query' => 'Adda sabali a panagbiruk ti ($3) nga adda etiketana ti "$1" a mainaig ti pagsasao a kodigo ti $2.',
 	'wikibase-error-label-not-unique-item' => 'Adda sabali a banag ti ($3) nga adda etiketana ti  "$1" ken panagipalpalawag ti "$4" a mainaig ti pagsasao a kodigo ti $2.',
 	'wikibase-error-label-no-entityid' => 'Ti etiketa ket nasken a saan nga umiso nga entidad ti id.',
+	'wikibase-wikibaserepopage-not-itemid' => 'Ti "$1" ket saan nga umiso nga id ti banag. Dagiti silpo ti sitio ket mabalin laeng nga iyasentar para kadagiti banag.', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Ti panagilasin ti pagsasao ti "$1" ket di ammo. Pangngaasi nga agusar ti panagilasin ti pagsasao nga ammo ti sistema, a kas ti "en".',
+	'wikibase-wikibaserepopage-invalid-id' => 'Ti ID ti "$1" ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a nakabuklan ti ID.',
 	'special-itembytitle' => 'Banag babaen ti titulo',
 	'wikibase-itembytitle-lookup-fieldset' => 'Agbiruk para kadagiti banag babaen ti sitio ken titulo',
 	'wikibase-itembytitle-lookup-site' => 'Sitio:',
@@ -8996,11 +8999,8 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-setsitelink-invalid-site' => 'Ti id ti sitio ti "$1" ket di ammo. Pangngaasi nga agusar ti maysa nga adda nga id ti sitio, a kas iti "enwiki".',
 	'wikibase-setsitelink-add-failed' => 'Ti silpo ti sitio ket saan a maidulin.',
 	'wikibase-setsitelink-remove-failed' => 'Ti silpo ti sitio ket saan a maikkat.',
-	'wikibase-setsitelink-not-itemid' => 'Ti "$1" ket saan nga umiso nga id ti banag. Dagiti silpo ti sitio ket mabalin laeng nga iyasentar para kadagiti banag.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Pagsasao:',
-	'wikibase-modifyentity-invalid-id' => 'Ti ID ti "$1" ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a nakabuklan ti ID.',
-	'wikibase-modifyterm-invalid-langcode' => 'Ti panagilasin ti pagsasao ti "$1" ket di ammo. Pangngaasi nga agusar ti panagilasin ti pagsasao nga ammo ti sistema, a kas ti "en".',
 	'special-dispatchstats' => 'Baliwan dagiti naipaw-it nga estadistika',
 	'wikibase-dispatchstats-intro' => 'Daytoy a panid ket agited kadagiti estadistika a maipanggep ti panagbaliw a panangipaw-it kadagiti kliente.',
 	'wikibase-dispatchstats-no-stats' => 'Awan dagiti agdama nga estadistika ti magun-od.',
@@ -9082,8 +9082,8 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Binaliwan dagiti pagtandaan para iti [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Binaliwan ti silpo ken dagiti pagtandaan para iti [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Nagikkat ti silpo iti [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Pinartuat daytoy a banag tapno maikapet dagiti panid ti [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Nagnayon ti maysa a silpo ti pagsasao tapno maikapet ti pampanid [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Pinartuat daytoy a banag tapno maikapet dagiti panid ti',
+	'wikibase-item-summary-wblinktitles-connect' => 'Nagnayon ti maysa a silpo ti pagsasao tapno maikapet ti pampanid',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Nagpartuat {{PLURAL:$1|ti maysa a panagtunton|kadagiti panagtunton}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Nagpartuat {{PLURAL:$1|ti maysa a panagtunton|kadagiti a panagtunton}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Nagpartuat {{PLURAL:$1|ti a panagtunton|kadagiti a panagtunton}}',
@@ -9137,7 +9137,7 @@ tapno birukem ti napananda.',
 * latitud – naipaltiing a nalawag nga umuna a paset (tumpaw, dms, dm, dd) iti kuerdas ti nagsasabtan, ti turong ket mabalin a maited babaen ti senial wenno babaen ti kalpasan a nasimpa a N/S
 * longitud – naipaltiing a nalawag a maikadua a paset (tumpaw, dms, dm, dd) iti kuerdas ti nagsasabtan, ti turong ket mabalin a maited babaen ti senial wenno babaen ti kalpasan a nasimpa a E/W
 * kangato (saan a nasken a pilien) – nalawag (?) pateg para iti kangato ti maysa a naituon a katimbengan , para iti globo a "Daga" nga isunto ti "WGS84" a reperensi a globo
-* globo (saan a nasken a pilien) – nalawag (?) pateg ti datos, maited a kas nainlangitan a bagi a kasisigud iti "Daga" ken kalpasanna iti "WGS84"',
+* globo (saan a nasken a pilien) – nalawag (?) pateg ti datos, maited a kas nainlangitan a bagi a kasisigud iti "Daga" ken kalpasanna iti "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Kaadu',
 	'wikibase-listdatatypes-quantity-body' => 'Literal a pagikabilan ti datos para iti maysa a kaadu a maikabagian ti sumagmamano a kitat iti nasayaat a nailawlawagan a paset. Ti pudno a paset ket mapan kadagiti pateg ti datos a naikabil.
 * pateg – naipaltiing a nalawag apaset iti kuerdas (panagimapa iti paset a pasaruno ket saan a nalawag)
@@ -9401,8 +9401,8 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Breytti merkjum fyrir [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Breytti tengli og merkjum fyrir [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjarlægði tengil [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Bjó til þennan hlut til að tengja síðurnar [$2 og $3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Bætti við tungumálatengli til að tengja síðurnar [$2 og $3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Bjó til þennan hlut til að tengja síðurnar',
+	'wikibase-item-summary-wblinktitles-connect' => 'Bætti við tungumálatengli til að tengja síðurnar', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-value' => 'Bjó til {{PLURAL:$1|fullyrðingu|fullyrðingar}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Bjó til {{PLURAL:$1|fullyrðingu|fullyrðingar}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Bjó til {{PLURAL:$1|fyrirspurn|fyrirspurnir}}',
@@ -9725,8 +9725,8 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Modificato distintivo per [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Modificato collegamento e distintivo per [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Rimosso collegamento a [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Creato questo elemento per collegare pagine [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Aggiunto un collegamento linguistico per collegare pagine [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Creato questo elemento per collegare pagine',
+	'wikibase-item-summary-wblinktitles-connect' => 'Aggiunto un collegamento linguistico per collegare pagine',
 	'wikibase-item-summary-wbcreateclaim-value' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
 	'wikibase-item-summary-wbcreateclaim-novalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
@@ -9779,8 +9779,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Campo dati letterale per una posizione geografica indicata come latitudine-longitudine in gms o gradi decimali per il corpo stellare indicato. I valori predefiniti sono "Terra" e "WGS84". Aggiunge risoluzione e intervallo di valori.
 * latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
 * longitudine – implicito seconda parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti E/W
-* altitudine (facoltativo) – valore esplicito (?) per l\'altezza sopra un piano di riferimento, per il pianeta "Terra" dovrebbe essere il globo di riferimento "WGS84"
-* pianeta (facoltativo) – valore esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"', # Fuzzy
+* pianeta – valore dati esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Campo dati letterale per una quantità relativa ad un'unità ben definita. L'unità usata è uno dei dati inseriti.
 * valore - valore implicito della stringa (mappatura del prefisso dell'unità non è chiara)
@@ -10088,8 +10087,8 @@ $messages['ja'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => '[$2] のバッジを変更',
 	'wikibase-item-summary-wbsetsitelink-set-both' => '[$2] のリンクとバッジを変更',
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] へのリンクを除去',
-	'wikibase-item-summary-wblinktitles-create' => 'ページを接続する項目を作成 [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'ページを接続する言語リンクを追加 [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'ページを接続する項目を作成',
+	'wikibase-item-summary-wblinktitles-connect' => 'ページを接続する言語リンクを追加',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|主張}}を作成',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|主張}}を作成',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|主張}}を作成',
@@ -10270,6 +10269,7 @@ $messages['ka'] = array(
 	'wikibase-blockeduser-tooltip-message' => 'თქვენთვის რედაქტირება დაბლოკილია.', # Fuzzy
 	'wikibase-move-error' => 'თქვენ არ შეგიძლიათ გვერდების გადატანა, რომლებიც მდებარეობს მონაცემების სახელთა სივრცეში და თქვენ არ შეგიძლიათ გვერდების მასში გადატანა.',
 	'wikibase-error-sitelink-already-used' => 'საიტის ბმულს [$1 $2] უკვე იყენებს ელემენტი [[$3]].', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'ენის კოდი „$1“ უცნობია. გთხოვთ, გამოიყენოთ სისტემისთვის ცნობილი ერთ-ერთი ენის კოდი, მაგალითად „ka“.',
 	'special-itembytitle' => 'ელემენტი სათაურის მიხედვით',
 	'wikibase-itembytitle-lookup-fieldset' => 'ელემენტების ძიება საიტისა და სახელწოდების მიხედვით',
 	'wikibase-itembytitle-lookup-site' => 'ვებ-გვერდი:',
@@ -10320,7 +10320,6 @@ $messages['ka'] = array(
 	'wikibase-setaliases-warning-remove' => 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ყველა ფსევდონიმი [[$1]]-თვის?',
 	'wikibase-modifyentity-id' => 'იდენტიფიკატორი:',
 	'wikibase-modifyterm-language' => 'ენა:',
-	'wikibase-modifyterm-invalid-langcode' => 'ენის კოდი „$1“ უცნობია. გთხოვთ, გამოიყენოთ სისტემისთვის ცნობილი ერთ-ერთი ენის კოდი, მაგალითად „ka“.',
 	'wikibase-dispatchstats-no-stats' => 'ამჟამად სტატისტიკური მონაცემები არ არის ხელმისაწვდომი.',
 	'wikibase-dispatchstats-changes' => 'ცვლილებების ჟურნალის სტატისტიკა',
 	'wikibase-dispatchstats-stats' => 'დაგზავნის სტატისტიკა',
@@ -10367,8 +10366,8 @@ $messages['ka'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => 'წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'დაემატა ბმული [$2]-ზე',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'წაიშალა ბმული [$2]-ზე',
-	'wikibase-item-summary-wblinktitles-create' => 'ეს ელემენტი შექმნილია გვერდების დასაკავშირებლად [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'დაკავშირებულ გვერდებზე დაემატა ენის ბმულები [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'ეს ელემენტი შექმნილია გვერდების დასაკავშირებლად',
+	'wikibase-item-summary-wblinktitles-connect' => 'დაკავშირებულ გვერდებზე დაემატა ენის ბმულები',
 	'wikibase-item-summary-wbcreateclaim-value' => 'შეიქმნა {{PLURAL:$1|განცხადება}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'შეიქმნა {{PLURAL:$1|განცხადება}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'შეიქმნა {{PLURAL:$1|განცხადება}}',
@@ -10771,8 +10770,8 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => '[$2]를 가리키는 링크용를 위해 변경된 배지',
 	'wikibase-item-summary-wbsetsitelink-set-both' => '[$2]를 가리키는 링크를 위해 변경된 링크와 배지',
 	'wikibase-item-summary-wbsetsitelink-remove' => '[$2]에서 링크를 제거함',
-	'wikibase-item-summary-wblinktitles-create' => '[$2↔$3] 문서를 연결하는 이 항목을 만듦',
-	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] 문서를 연결하는 언어 링크를 추가함',
+	'wikibase-item-summary-wblinktitles-create' => '문서를 연결하는 이 항목을 만듦',
+	'wikibase-item-summary-wblinktitles-connect' => '문서를 연결하는 언어 링크를 추가함',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|서술}}을 만듦',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|서술}}을 만듦',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|서술}}을 만듦',
@@ -10987,7 +10986,7 @@ $messages['ksh'] = array(
 	'wikibase-item-summary-wbeditentity-override' => 'Dä Daatesaz övverschrevve.',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Hät ene Lengk obb_et [$2] derbeijedonn:', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Hät ene Lengk obb_et [$2] erußjenumme:',
-	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] &mdash; {{PLURAL:$1|Sigg|Sigge|kein Sigge}} verbonge', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => '{{PLURAL:$1|Sigg|Sigge|kein Sigge}} verbonge', # Fuzzy
 	'wikibase-property-summary-wbeditentity-create' => 'En neu Eijeschaff aanjelaat',
 	'wikibase-property-summary-wbeditentity-update' => 'En Eijeschaff obb ene neue Schtand jebraat',
 	'wikibase-property-summary-wbeditentity-override' => 'En Eijeschaff ußjetuusch', # Fuzzy
@@ -11272,7 +11271,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Huet e Link op [$2] derbäigesat',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Huet de Link op [$2] geännert',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Huet e Link op [$2] ewechgeholl',
-	'wikibase-item-summary-wblinktitles-connect' => "Huet ee Sproochlink derbäigesat fir d'Säiten [$2↔$3] ze verbannen",
+	'wikibase-item-summary-wblinktitles-connect' => "Huet ee Sproochlink derbäigesat fir d'Säiten ze verbannen",
 	'wikibase-item-summary-special-create-item' => 'Huet en Element op [$2] ugeluecht mat {{PLURAL:$1|dem Wäert|de Wäerter}}',
 	'wikibase-item-summary-clientsitelink-update' => 'Säit geréckelt vu(n) [$3] op [$4]',
 	'wikibase-item-summary-wbmergeitems-from' => "Element vu(n) '$3' fusionéiert",
@@ -11523,7 +11522,7 @@ $messages['lv'] = array(
 	'wikibase-item-summary-wbsetlabel-set' => 'Izmainīja [$2] nosaukumu',
 	'wikibase-item-summary-wbsetdescription-set' => 'Izmainīja [$2] aprakstu',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Nodzēsa [$2] aprakstu',
-	'wikibase-item-summary-wblinktitles-connect' => 'Pievienoja valodas saiti, lai savienotu lapas [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Pievienoja valodas saiti, lai savienotu lapas',
 	'wikibase-property-summary-wbsetlabel-set' => 'Izmainīja [$2] nosaukumu',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Nodzēsa [$2] nosaukumu',
 	'wikibase-property-summary-wbsetdescription-set' => 'Izmainīja [$2] aprakstu',
@@ -11915,8 +11914,8 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Сменети значките за [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Сменети врската и значките за [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Отстранета врската до [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Предметот создаден за поврзување на страниците [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Ставена јазична врска за поврзување на страниците [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Предметот создаден за поврзување на страниците',
+	'wikibase-item-summary-wblinktitles-connect' => 'Ставена јазична врска за поврзување на страниците',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Создадено тврдење|Создадени тврдења}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Создадено тврдење|Создадени тврдења}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Создадено тврдење|Создадени тврдења}}',
@@ -12582,8 +12581,8 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Menambahkan pautan pada [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Mengubah pautan kepada [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Membuang pautan dari [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Mewujudkan perkara ini untuk menyambungkan halaman [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Menambahkan pautan bahasa untuk menyambungkan halaman [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Mewujudkan perkara ini untuk menyambungkan halaman',
+	'wikibase-item-summary-wblinktitles-connect' => 'Menambahkan pautan bahasa untuk menyambungkan halaman',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Mencipta {{PLURAL:$1|satu tuntutan|tuntutan-tuntutan}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Mencipta {{PLURAL:$1|satu tuntutan|tuntutan-tuntutan}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Mencipta {{PLURAL:$1|satu tuntutan|tuntutan-tuntutan}}',
@@ -12979,8 +12978,8 @@ for å finne ut hva som har skjedd.',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Endret emblemer for [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Endret lenke og emblemer for $2',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjernet lenke til [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Opprettet dette elementet for å knytte til sidene [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'La til språklenke for å koble sidene [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Opprettet dette elementet for å knytte til sidene',
+	'wikibase-item-summary-wblinktitles-connect' => 'La til språklenke for å koble sidene',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Opprettet {{PLURAL:$1|en påstand|påstander}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Opprettet {{PLURAL:$1|en påstand|påstander}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Opprettet {{PLURAL:$1|en påstand|påstander}}',
@@ -13018,17 +13017,17 @@ for å finne ut hva som har skjedd.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernet [$2] {{PLURAL:$1|kallenavn}}',
 	'wikibase-property-summary-special-create-property' => 'Opprettet en [$2] egenskap med {{PLURAL:$1|verdi|verdiene}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
-	'wikibase-listdatatypes-wikibase-item-body' => "Lenk til andre elementer i prosjektet. Under innlegging vil ''Element''-navnerommet gjennomsøkes for like forekomster. Det består av et enkelt tekstfelt.
+	'wikibase-listdatatypes-wikibase-item-body' => 'Lenke til andre elementer i prosjektet. Under innlegging vil «Element»-navnerommet gjennomsøkes for like forekomster. Det består av et enkelt tekstfelt.
 * oppsett – implisitt del av Iri-strengen
 * hierarkisk del – implisitt del av Iri-strengen
 * spørring – implisitt del av Iri-strengen
-* fragment – implisitt del av Iri-strengen",
+* fragment – implisitt del av Iri-strengen',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-medium',
-	'wikibase-listdatatypes-commonsmedia-body' => "Lenk til filer lagret i Wikimedia Commons. Under innlegging vil ''Fil''-navnerommet gjennomsøkes for like forekomster. Det består av et enkelt tekstfelt.
-* oppsett – implisitt del av Iri-streng
-* hierarkisk del – implisitt del av Iri-streng
-* spørring – implisitt del av Iri-streng
-* fragment – implisitt del av Iri-streng",
+	'wikibase-listdatatypes-commonsmedia-body' => 'Lenke til filer lagret i Wikimedia Commons. Under innlegging vil «Fil»-navnerommet på Commons gjennomsøkes for matchende poster.
+* scheme – implisitt del av Iri-streng
+* hierarchicalpart – implisitt del av Iri-streng
+* query – implisitt del av Iri-streng
+* fragment – implisitt del av Iri-streng',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Data for geografisk posisjon gitt som et par av breddegrad og lengdegrad i gms eller desimale grader for gitt himmellegeme. Standard er "Jorden" og så "WGS84". Det legges til oppløsning og verdiområde.
 * breddegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset N/S
@@ -13355,8 +13354,8 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Insignes voor [$2] gewijzigd',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Koppeling en insignes voor [$2] gewijzigd',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Koppeling verwijderd voor [$2]',
-	'wikibase-item-summary-wblinktitles-create' => "Item aangemaakt om pagina's te koppelen [$2↔$3]",
-	'wikibase-item-summary-wblinktitles-connect' => "Taalkoppeling naar gekoppelde pagina's toegevoegd [$2↔$3]",
+	'wikibase-item-summary-wblinktitles-create' => "Item aangemaakt om pagina's te koppelen",
+	'wikibase-item-summary-wblinktitles-connect' => "Taalkoppeling naar gekoppelde pagina's toegevoegd",
 	'wikibase-item-summary-wbcreateclaim-value' => 'Claim{{PLURAL:$1||s}} aangemaakt',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Claim{{PLURAL:$1||s}} aangemaakt',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Claim{{PLURAL:$1||s}} aangemaakt',
@@ -13546,6 +13545,8 @@ IP-adressa di vert lagra i endringshistorikken til denne eininga.",
 	'wikibase-error-label-not-unique-wikibase-property' => 'Ein annan eigenskap ($3) har alt merkelappen «$1» for språkkoden $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Eit anna søk ($3) har alt merkelappen «$1» for språkkoden $2.',
 	'wikibase-error-label-not-unique-item' => 'Eit anna datasett ($3) har alt merkelappen «$1» og skildringa «$4» for språkkoden $2.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Språkkjennemerket «$1» er ukjent. Gjer vel å nytta eit kjennemerke som systemet kjenner, slik som «nn».',
+	'wikibase-wikibaserepopage-invalid-id' => 'ID-en «$1» er ukjend for systemet. Bruk ein gild einings-ID.',
 	'special-itembytitle' => 'Datasett frå tittel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Søk etter datasett etter nettstad og tittel',
 	'wikibase-itembytitle-lookup-site' => 'Nettstad:',
@@ -13607,8 +13608,6 @@ IP-adressa di vert lagra i endringshistorikken til denne eininga.",
 	'wikibase-setsitelink-remove-failed' => 'Nettstadlenkja kunne ikkje fjernast.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Språk:',
-	'wikibase-modifyentity-invalid-id' => 'ID-en «$1» er ukjend for systemet. Bruk ein gild einings-ID.',
-	'wikibase-modifyterm-invalid-langcode' => 'Språkkjennemerket «$1» er ukjent. Gjer vel å nytta eit kjennemerke som systemet kjenner, slik som «nn».',
 	'special-dispatchstats' => 'Statistikk for sending av endringar',
 	'wikibase-dispatchstats-intro' => 'Denne sida gjev statistikk for sending av endringar til klientane.
 Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endringa er send til denne wikien og jobbkøen hans har handsama meldinga.
@@ -13688,8 +13687,8 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 	'wikibase-item-summary-wbsetsitelink-add' => 'La til lenkje til [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Endra lenkje til [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjerna lenkje til [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Oppretta datasettet for å kopla saman sidene [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'La til ei språklenkje for å kopla sidene [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Oppretta datasettet for å kopla saman sidene',
+	'wikibase-item-summary-wblinktitles-connect' => 'La til ei språklenkje for å kopla sidene',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Oppretta {{PLURAL:$1|ein påstand|påstandar}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Oppretta {{PLURAL:$1|ein påstand|påstandar}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Oppretta {{PLURAL:$1|ein påstand|påstandar}}',
@@ -13835,6 +13834,7 @@ Vòstra adreça IP serà enregistrada dins l’istoric de las modificacions d'aq
 	'wikibase-error-sitelink-already-used' => 'Lo ligam del site [$1 $2] es ja inclús dins un autre objècte, [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Una autra proprietat ($3) a ja un libellat « $1 » associat al còde de lenga $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Una autra requèsta ($3) a ja lo libellat « $1 » associat al còde de lenga $2.',
+	'wikibase-wikibaserepopage-invalid-id' => 'L’ID « $1 » es desconegut del sistèma. Utilizatz un ID d’entitat valid.',
 	'special-itembytitle' => 'Element per títol',
 	'wikibase-itembytitle-lookup-fieldset' => 'Recercar dels elements per site e per títol',
 	'wikibase-itembytitle-lookup-site' => 'Site&nbsp;:&nbsp;',
@@ -13887,7 +13887,6 @@ Vòstra adreça IP serà enregistrada dins l’istoric de las modificacions d'aq
 	'wikibase-setsitelink-remove-failed' => 'Lo ligam del site a pas pogut èsser suprimit.',
 	'wikibase-modifyentity-id' => 'ID :',
 	'wikibase-modifyterm-language' => 'Lenga :',
-	'wikibase-modifyentity-invalid-id' => 'L’ID « $1 » es desconegut del sistèma. Utilizatz un ID d’entitat valid.',
 	'special-dispatchstats' => 'Estatisticas de reparticion dels cambiaments',
 	'wikibase-dispatchstats-no-stats' => "Actualament, i a pas cap d'estatistica disponibla.",
 	'wikibase-dispatchstats-changes' => 'Estatisticas del jornal dels cambiaments',
@@ -13960,8 +13959,8 @@ Vòstra adreça IP serà enregistrada dins l’istoric de las modificacions d'aq
 	'wikibase-item-summary-wbsetsitelink-add' => 'Ligam cap a [$2] apondut',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Ligam cap a [$2] modificat',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Ligam cap a [$2] suprimit',
-	'wikibase-item-summary-wblinktitles-create' => 'Aqueste element creat per connectar las paginas [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Ligam de lenga apondut per connectar las paginas [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Aqueste element creat per connectar las paginas',
+	'wikibase-item-summary-wblinktitles-connect' => 'Ligam de lenga apondut per connectar las paginas',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Afirmacion aponduda|Afirmacions apondudas}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Afirmacion aponduda|Afirmacions apondudas}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Afirmacion aponduda|Afirmacions apondudas}}',
@@ -14151,8 +14150,10 @@ $messages['pl'] = array(
 	'wikibase-remove-inprogress' => 'Usuwanie...',
 	'wikibase-label-empty' => 'Etykieta nie została jeszcze podana',
 	'wikibase-label-edit-placeholder' => 'podaj etykietę',
+	'wikibase-label-edit-placeholder-language-aware' => 'podaj etykietę w $1',
 	'wikibase-description-empty' => 'Opis nie został jeszcze podany',
 	'wikibase-description-edit-placeholder' => 'podaj opis',
+	'wikibase-description-edit-placeholder-language-aware' => 'podaj opis w $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'witryna',
 	'wikibase-sitelink-page-edit-placeholder' => 'strona',
 	'wikibase-alias-edit-placeholder' => 'podaj alternatywną nazwę',
@@ -14188,6 +14189,9 @@ $messages['pl'] = array(
 	'wikibase-datatype-label' => 'Typ danych:',
 	'wikibase-claimview-snak-tooltip' => 'Podaj wartość odpowiadającą właściwości o nazwie „$1”. Jeśli nie istnieje żadna wartość dla tej właściwości albo rzeczywista wartość nie jest znana, to zamiast podawania wartości można wybrać alternatywną możliwość klikając na ikonę obok pola wprowadzania wartości.',
 	'wikibase-claimview-snak-new-tooltip' => 'Po określeniu właściwości można podać odpowiadającą jej wartość. Jeśli nie istnieje żadna wartość dla tej właściwości albo rzeczywista wartość nie jest znana, to zamiast podawania wartości można wybrać alternatywną możliwość klikając na ikonę obok pola wprowadzania wartości.',
+	'wikibase-statementview-rank-preferred' => 'Ranga preferowana',
+	'wikibase-statementview-rank-normal' => 'Ranga zwykła',
+	'wikibase-statementview-rank-deprecated' => 'Ranga nieaktualna',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|źródło|źródła|źródeł}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Jeszcze nie zapisano {{PLURAL:$1|jednego źródła|$1 źródeł}}',
 	'wikibase-snakview-property-input-placeholder' => 'właściwość',
@@ -14271,6 +14275,7 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-setsitelink-intro' => 'Ten formularz pozwala na dodanie linku do strony w danym elemencie. Należy podać identyfikator (np. Q23), kod języka (np. „plwiki”) oraz tytuł strony, którą chcesz dodać.',
 	'wikibase-modifyentity-id' => 'Identyfikator:',
 	'wikibase-modifyterm-language' => 'Język:',
+	'special-mergeitems' => 'Łączenie dwóch elementów',
 	'special-dispatchstats' => 'Statystyki wysyłki zmian',
 	'wikibase-dispatchstats-intro' => 'Ta strona zawiera statystyki dotyczące wysyłki zmian do klientów.
 Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy zmiana została wysłane do tej wiki, a kolejka zadań na tej wiki przetworzyła to powiadomienie.
@@ -14345,8 +14350,8 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'wikibase-item-summary-wbsetsitelink-add' => 'Dodano link do [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Zmieniono link do [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Usunięto link do [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Utworzono ten element, aby połączyć strony [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Dodano odnośnik, aby powiązać strony [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Utworzono ten element, aby połączyć strony',
+	'wikibase-item-summary-wblinktitles-connect' => 'Dodano odnośnik, aby powiązać strony',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Utworzono {{PLURAL:$1|stwierdzenie|stwierdzenia}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Utworzono {{PLURAL:$1|stwierdzenie|stwierdzenia}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Utworzono {{PLURAL:$1|stwierdzenie|stwierdzenia}}',
@@ -14435,6 +14440,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'action-description-update' => 'aktualizacji opisów',
 	'wikibase-time-precision-Gannum' => 'w $1 mld lat',
 	'wikibase-time-precision-Mannum' => 'w $1 mln lat',
+	'wikibase-time-precision-millennium' => '$1. tysiąclecie',
 	'wikibase-time-precision-century' => '$1. wiek',
 );
 
@@ -14690,8 +14696,8 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Modificà ij distintiv për [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Modificà liura e distintiv për [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Gavà la liura a [$2]',
-	'wikibase-item-summary-wblinktitles-create' => "Creà st'element për gropé le pàgine [$2↔$3]",
-	'wikibase-item-summary-wblinktitles-connect' => 'Giontà na liura ëd lenga për lijé le pàgine [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => "Creà st'element për gropé le pàgine",
+	'wikibase-item-summary-wblinktitles-connect' => 'Giontà na liura ëd lenga për lijé le pàgine',
 	'wikibase-item-summary-wbcreateclaim-value' => "Creà {{PLURAL:$1|n'arvendicassion|d'arvendicassion}}",
 	'wikibase-item-summary-wbcreateclaim-novalue' => "Creà {{PLURAL:$1|n'afermassion|d'afermassion}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => "Creà {{PLURAL:$1|n'arvendicassion|d'arvendicassion}}",
@@ -15025,7 +15031,7 @@ para descobrir o que lhe sucedeu.',
 	'wikibase-item-summary-wbeditentity-update' => 'Item actualizado',
 	'wikibase-item-summary-wbsetreference' => 'Definir uma fonte',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Ligação alterada para [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Criou este item para ligar as páginas [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Criou este item para ligar as páginas',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Criou {{PLURAL:$1|uma alegação|alegações}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Criou {{PLURAL:$1|uma alegação|alegações}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Criou {{PLURAL:$1|uma alegação|alegações}}',
@@ -15224,8 +15230,8 @@ para descobrir o que ocorreu.',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Adicionado link para [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Link alterado para [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removido link para [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Criado este item para conectar as páginas [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Adicionado um link de idioma para conectar as páginas [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Criado este item para conectar as páginas',
+	'wikibase-item-summary-wblinktitles-connect' => 'Adicionado um link de idioma para conectar as páginas',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Uma afirmação foi criada|Afirmações foram criadas}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Uma afirmação foi criada|Afirmações foram criadas}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Uma afirmação foi criada|Afirmações foram criadas}}',
@@ -15379,6 +15385,8 @@ Adresa dumnevoastră IP va fi memorată în istoricul modificărilor al acestei 
 	'wikibase-warning-constraint-violation-length' => 'O limitare de lungime a fost declanșată pentru codul de limbă „$1”.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'O altă proprietate ($3) are deja eticheta „$1” asociată cu codul de limbă $2.',
 	'wikibase-error-label-no-entityid' => 'Eticheta nu trebuie să fie un ID de entitate valid.',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Identificatorul de limbă „$1” nu este cunoscut. Utilizați un identificator de limbă recunoscut de sistem, cum ar fi „en”.',
+	'wikibase-wikibaserepopage-invalid-id' => 'ID-ul „$1” nu este recunoscut de sistem. Utilizați un ID de entitate valid.',
 	'special-itembytitle' => 'Element după titlu',
 	'wikibase-itembytitle-lookup-fieldset' => 'Căutare elemente după site și titlu',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -15434,8 +15442,6 @@ Adresa dumnevoastră IP va fi memorată în istoricul modificărilor al acestei 
 	'wikibase-setsitelink-site' => 'ID site:',
 	'wikibase-modifyentity-id' => 'Identificator:',
 	'wikibase-modifyterm-language' => 'Limbă:',
-	'wikibase-modifyentity-invalid-id' => 'ID-ul „$1” nu este recunoscut de sistem. Utilizați un ID de entitate valid.',
-	'wikibase-modifyterm-invalid-langcode' => 'Identificatorul de limbă „$1” nu este cunoscut. Utilizați un identificator de limbă recunoscut de sistem, cum ar fi „en”.',
 	'wikibase-dispatchstats-no-stats' => 'În acest moment nu există statistici disponibile.',
 	'wikibase-dispatchstats-changes' => 'Statistici jurnal modificări',
 	'wikibase-dispatchstats-stats' => 'Statistici notificare',
@@ -15481,7 +15487,7 @@ Adresa dumnevoastră IP va fi memorată în istoricul modificărilor al acestei 
 	'wikibase-item-summary-wbsetdescription-add' => 'Adăugat descriere în [$2]',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Adăugat și eliminat {{PLURAL:$1|alias|aliasuri}} în [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Adăugat legătură către [$2]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Adăugat o legătură linguală pentru a conecta paginile [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Adăugat o legătură linguală pentru a conecta paginile',
 	'wikibase-item-summary-wbsetqualifier-add' => 'Adăugat {{PLURAL:$1|calificativ|calificative}}',
 	'wikibase-property-summary-wbsetlabel-add' => 'Adăugat etichetă în [$2]',
 	'wikibase-property-summary-wbsetdescription-add' => 'Adăugat descriere în [$2]',
@@ -15842,8 +15848,8 @@ $messages['ru'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Изменены значки для [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Изменены ссылка и значки для [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Удалена ссылка на [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Этот элемент создан для связи страниц [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Добавлены языковые ссылки на связанные страницы [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Этот элемент создан для связи страниц',
+	'wikibase-item-summary-wblinktitles-connect' => 'Добавлены языковые ссылки на связанные страницы',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|1=Создано заявление|Созданы заявления}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|1=Создано заявление|Созданы заявления}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|1=Создано заявление|Созданы заявления}}',
@@ -15896,8 +15902,7 @@ $messages['ru'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Символьное поле данных о географическом положении для определённого небесного тела, задаваемые в виде пары «широта—долгота» в формате «градусы минуты секунды» (°ʹʺ) или в десятичном формате. По умолчанию это «Земля», а затем «WGS84». Добавляет разрешение и диапазон.
 * latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S
 * longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W
-* altitude (необяз.) — явно задаваемое (?) значение для высоты над плоскостью отсчёта, для планеты «Земля» это будет глобус «WGS84».
-* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»', # Fuzzy
+* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»',
 	'wikibase-listdatatypes-quantity-head' => 'Количество',
 	'wikibase-listdatatypes-quantity-body' => 'Строковое поле для ввода количества, выраженного в некоторых вполне определённых единицах. Конкретные единицы указаны во вводимых значениях данных.
 * value — неявная часть строки (обработка префикса единицы непонятна)
@@ -16134,7 +16139,7 @@ da otkrijete gdje je nestao.',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Uklonjen [$2] {{PLURAL:$1|alias|aliasi}}',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Dodan specifičan [$2] link za sajt', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Uklonjen specifičan [$2] link za sajt', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => 'Povezane [$2↔$3] {{PLURAL:$1|stranica|stranice}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => 'Povezane {{PLURAL:$1|stranica|stranice}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Stvorena|Stvorene}} {{PLURAL:$1|izjava|izjave}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Stvorena|Stvorene}} {{PLURAL:$1|izjava|izjave}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Stvorena|Stvorene}} {{PLURAL:$1|izjava|izjave}}',
@@ -16273,7 +16278,7 @@ $messages['si'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|අන්වර්ථ නාම}} [$2] ඉවත් කරන ලදී',
 	'wikibase-item-summary-wbsetsitelink-add' => 'අඩවි-විශේෂී [$2] සබැඳිය එක් කරන ලදී', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'අඩවි-විශේෂී [$2] සබැඳිය ඉවත් කරන ලදී', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => 'සම්බන්ධයි [$2↔$3] {{PLURAL:$1|පිටු}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => 'සම්බන්ධයි {{PLURAL:$1|පිටු}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-value' => 'තනන ලදී {{PLURAL:$1|a value claim|value claims}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'තනන ලදී {{PLURAL:$1|a novalue claim|novalue claims}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'තනන ලදී {{PLURAL:$1|a somevalue claim|somevalue claims}}', # Fuzzy
@@ -16514,6 +16519,8 @@ $messages['sr-ec'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Друго својство ($3) већ има назив „$1“ повезан са језичким кодом $2', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'Други упит ($3) већ има назив „$1“ повезан са језичким кодом $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'Друга ставка ($3) већ има назив „$1“ и опис „$4“ повезан са језичким кодом $2', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'Језички идентификатор „$1“ је непознат. Молимо користите језичке идентификаторе познате систему, као што је „sr“',
+	'wikibase-wikibaserepopage-invalid-id' => 'Идентификатор „$1“ је непознат систему. Молимо унесите важећи ИД.',
 	'special-itembytitle' => 'Ставке према називима',
 	'wikibase-itembytitle-lookup-fieldset' => 'Претрага ставки према сајту и називу',
 	'wikibase-itembytitle-lookup-site' => 'Сајт:',
@@ -16557,8 +16564,6 @@ $messages['sr-ec'] = array(
 	'wikibase-setaliases-warning-remove' => 'Да ли заиста желите да уклоните све псеудониме за [[$1]]?',
 	'wikibase-modifyentity-id' => 'ИД:',
 	'wikibase-modifyterm-language' => 'Језик:',
-	'wikibase-modifyentity-invalid-id' => 'Идентификатор „$1“ је непознат систему. Молимо унесите важећи ИД.',
-	'wikibase-modifyterm-invalid-langcode' => 'Језички идентификатор „$1“ је непознат. Молимо користите језичке идентификаторе познате систему, као што је „sr“',
 	'special-dispatchstats' => 'Статистика дневника отпрема',
 	'wikibase-dispatchstats-no-stats' => 'Тренутно нема расположивих статистика.',
 	'wikibase-dispatchstats-changes' => 'Статистика дневника промена',
@@ -16623,8 +16628,8 @@ $messages['sr-ec'] = array(
 	'wikibase-item-summary-wbsetsitelink-add' => 'Додата веза ка [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Измењена веза ка [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Уклоњена веза ка [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Направљена ставка како би повезала странице [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Повезано [$2↔$3] {{PLURAL:$1|страна|странице}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-create' => 'Направљена ставка како би повезала странице',
+	'wikibase-item-summary-wblinktitles-connect' => 'Повезано {{PLURAL:$1|страна|странице}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
@@ -16873,6 +16878,11 @@ Din IP-adress kommer att sparas i historiken för denna enhet.',
 	'wikibase-setsitelink-remove-failed' => 'Webbplatslänken kunde inte tas bort.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Språk:',
+	'special-mergeitems' => 'Sammanfoga två objekt',
+	'wikibase-mergeitems-intro' => 'Om du sammanfogar två objekt kommer alla etiketter, beskrivningar, webbplatslänkar och uttalanden att flyttas från det ena objektet till det andra.',
+	'wikibase-mergeitems-fromid' => 'Id att sammanfoga från',
+	'wikibase-mergeitems-toid' => 'Id att sammanfoga till',
+	'wikibase-mergeitems-submit' => 'Sammanfoga objekt',
 	'special-dispatchstats' => 'Statistik för utsända ändringar',
 	'wikibase-dispatchstats-intro' => 'Denna sida ger statistik för ändringar som sänds ut till klienterna.
 En klientwiki informeras om en ändring på {{SITENAME}} så snart ändringen har skickats till den wikin och jobbkön där har behandlat notifikationen.
@@ -16885,6 +16895,7 @@ En klientwiki informeras om en ändring på {{SITENAME}} så snart ändringen ha
 ** "{{int:wikibase-dispatchstats-touched}}" är tiden då den senaste gruppen med ändringar skickades till wikin.',
 	'wikibase-dispatchstats-no-stats' => 'Det finns ingen tillgänglig statistik för närvarande.',
 	'wikibase-dispatchstats-changes' => 'Ändra loggstatistik',
+	'wikibase-dispatchstats-stats' => 'Sändningsstatistik',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => 'Tidsstämpel',
 	'wikibase-dispatchstats-oldest-change' => 'Äldsta',
@@ -16921,7 +16932,9 @@ En klientwiki informeras om en ändring på {{SITENAME}} så snart ändringen ha
 	'wikibase-entitydata-bad-id' => 'Ogiltigt ID: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Dataformatet $1 stöds inte av detta gränssnitt.',
 	'wikibase-entitydata-title' => 'Enhetsdata',
+	'wikibase-entitydata-text' => 'Denna sida innehåller ett gränssnitt för länkad data för entitetsvärden. Ange entitets-id i URL:en med hjälp av undersidesyntax.',
 	'special-mylanguagefallbackchain' => 'Min språktillbakafallskedja',
+	'wikibase-mylanguagefallbackchain-text' => 'Nedan visas kedjan språktillbakafallskedjan som används för att visa dig entitetsetiketter.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Du kan redigera den genom att lägga in <nowiki>{{#babel: }}</nowiki> på {{GENDER:$1|din}} [[Special:MyPage|användarsida]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, konverterade från $3 - $4',
 	'wikibase-api-no-such-sitelink' => 'Kunde inte hitta en sådan webbplatslänk',
@@ -16957,8 +16970,8 @@ för att ta reda på var den tog vägen.',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Ändrade emblem för [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Ändrade länk och emblem för [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Tog bort länk till [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Skapade detta objekt för att ansluta sidorna [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Lade till en språklänk för att ansluta sidorna [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Skapade detta objekt för att ansluta sidorna',
+	'wikibase-item-summary-wblinktitles-connect' => 'Lade till en språklänk för att ansluta sidorna',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Skapade {{PLURAL:$1|ett anspråk|anspråk}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Skapade {{PLURAL:$1|ett anspråk|anspråk}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Skapade {{PLURAL:$1|ett anspråk|anspråk}}',
@@ -16996,6 +17009,11 @@ för att ta reda på var den tog vägen.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Tog bort {{PLURAL:$1|alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Skapade en egenskap för [$2] med {{PLURAL:$1|värde|värden}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Objekt',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Länk till andra objekt på projektet. Under inmatningen kommer "Objekt"-namnrymden på Wikidata att genomsökas för matchande poster. Den består av ett enda textinmatningsfält.
+* scheme – implicit del av Iri-strängen
+* hierarchicalpart – implicit del av Iri-strängen
+* query – implicit del av Iri-strängen
+* fragment – implicit del av Iri-strängen',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Länk till filer som lagras på Wikimedia Commons. Under inmatningen kommer "Fil"-namnrymden på Commons att genomsökas för matchande poster.
 * scheme – implicit del av Iri-strängen
@@ -17544,8 +17562,8 @@ $messages['uk'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Змінено значки для [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Змінене посилання, яке вказує [$2] і його значки',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Вилучено посилання на [$2]',
-	'wikibase-item-summary-wblinktitles-create' => "Цей об'єкт створено для зв'язку сторінок [$2↔$3]",
-	'wikibase-item-summary-wblinktitles-connect' => "Додано мовні посилання для зв'язку сторінок [$2↔$3]",
+	'wikibase-item-summary-wblinktitles-create' => "Цей об'єкт створено для зв'язку сторінок",
+	'wikibase-item-summary-wblinktitles-connect' => "Додано мовні посилання для зв'язку сторінок",
 	'wikibase-item-summary-wbcreateclaim-value' => 'Створено {{PLURAL:$1|твердження}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Створено {{PLURAL:$1|твердження}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Створено {{PLURAL:$1|твердження}}',
@@ -17801,6 +17819,8 @@ In te la cronologia de $1 vegnarà registrà el to indiriso IP.', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'N\'altra proprietà ($3) la ga zà l\'eticheta "$1" asocià col còdese lengua $2', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-query' => 'N\'altra riserca ($3) la ga zà l\'eticheta "$1" asocià col còdese lengua $2', # Fuzzy
 	'wikibase-error-label-not-unique-item' => 'N\'altro elemento ($3) el ga zà l\'eticheta "$1" e la descrision "$4" asocià col còdese lengua $2', # Fuzzy
+	'wikibase-wikibaserepopage-invalid-langcode' => 'L\'identificador de lingua "$1" el xe sconosùo. Dòpara un identificador de lengua conosùo al sistema, par esenpio "vec".',
+	'wikibase-wikibaserepopage-invalid-id' => 'L\'ID "$1" el xe sconossùo al sistema. Dòpara un ID de entità valido.',
 	'special-itembytitle' => 'Elementi par titolo',
 	'wikibase-itembytitle-lookup-fieldset' => 'Serca elementi par sito e titolo',
 	'wikibase-itembytitle-lookup-site' => 'Sito:',
@@ -17855,8 +17875,6 @@ In te la cronologia de $1 vegnarà registrà el to indiriso IP.', # Fuzzy
 	'wikibase-setaliases-warning-remove' => 'Vuto dal bon cavar tuti i alias de [[$1]]?',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Lengua:',
-	'wikibase-modifyentity-invalid-id' => 'L\'ID "$1" el xe sconossùo al sistema. Dòpara un ID de entità valido.',
-	'wikibase-modifyterm-invalid-langcode' => 'L\'identificador de lingua "$1" el xe sconosùo. Dòpara un identificador de lengua conosùo al sistema, par esenpio "vec".',
 	'special-dispatchstats' => 'Statistiche propagasion modifiche',
 	'wikibase-dispatchstats-intro' => 'Sta pagina la fornise le statistiche su la propagasion de le modifiche ai client.
 Na wiki client la xe notificà de un canbiamento su {{SITENAME}} apena chel canbiamento el xe stà propagà su chela wiki, e la coa de laoro su chela wiki la gà procesà la notifica.
@@ -17928,8 +17946,8 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 	'wikibase-item-summary-wbsetaliases-remove' => 'Cavà {{PLURAL:$1|alias}} [$2]',
 	'wikibase-item-summary-wbsetsitelink-add' => 'Zontà colegamento a [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Cavà colegamento a [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Creà sto elemento par colegar pagine [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Zontà un colegamento lenguìstego par colegar pagine [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Creà sto elemento par colegar pagine',
+	'wikibase-item-summary-wblinktitles-connect' => 'Zontà un colegamento lenguìstego par colegar pagine',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Creà {{PLURAL:$1|na afermasion|dele afermasion}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Creà {{PLURAL:$1|na afermasion|dele afermasion}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Creà {{PLURAL:$1|na afermasion|dele afermasion}}',
@@ -18285,8 +18303,8 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Đã thay dấu hiệu cho [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Đã thay đổi liên kết và dấu hình cho [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Đã loại bỏ liên kết khỏi [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Đã tạo khoản mục này để kết nốt các trang [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Đã thêm liên kết ngôn ngữ để kết nối các trang [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Đã tạo khoản mục này để kết nốt các trang',
+	'wikibase-item-summary-wblinktitles-connect' => 'Đã thêm liên kết ngôn ngữ để kết nối các trang',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Đã tạo {{PLURAL:$1|lời khẳng định|các lời khẳng định}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Đã tạo {{PLURAL:$1|lời khẳng định|các lời khẳng định}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Đã tạo {{PLURAL:$1|lời khẳng định|các lời khẳng định}}',
@@ -18506,6 +18524,8 @@ $messages['yi'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'אן אנדער אייגנשאפט ($3) האט שוין די באצייכענונג "$1" אסאציאירט מיט שפראך קאד $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'אן אנדער פראגע ($3) האט שוין די באצייכענונג "$1" אסאציאירט מיט שפראך קאד $2.',
 	'wikibase-error-label-not-unique-item' => 'אן אנדער דאטנאביעקט ($3) האט שויך די באצייכענונג "$1" און באשרייבונג "$4" אסאציאירט מיט שפראך קאד $2',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'דער שפראכקאד "$1" איז אומבאקאנט. ביטע ניצט א גילטיקן שפראכקאד, למשל "yi".',
+	'wikibase-wikibaserepopage-invalid-id' => 'דער ID "$1" איז אומבאוואוסט צו דער סיסטען. זײַט אזוי גוט ניצט א גילטיקן אידענטיפיצירער.',
 	'special-itembytitle' => 'דאטנאביעקט לויט טיטל',
 	'wikibase-itembytitle-lookup-fieldset' => 'זוכן דאטנאביעקטן לויט וועבזײַטל און טיטל',
 	'wikibase-itembytitle-lookup-site' => 'וועבזײַטל:',
@@ -18551,8 +18571,6 @@ $messages['yi'] = array(
 	'wikibase-setsitelink-introfull' => 'איר שטעלט דעם וועבזייטל לינק פון $2 פֿאר [[$1]].',
 	'wikibase-modifyentity-id' => 'אידענטיפֿיצירער',
 	'wikibase-modifyterm-language' => 'שפראַך:',
-	'wikibase-modifyentity-invalid-id' => 'דער ID "$1" איז אומבאוואוסט צו דער סיסטען. זײַט אזוי גוט ניצט א גילטיקן אידענטיפיצירער.',
-	'wikibase-modifyterm-invalid-langcode' => 'דער שפראכקאד "$1" איז אומבאקאנט. ביטע ניצט א גילטיקן שפראכקאד, למשל "yi".',
 	'special-dispatchstats' => 'ענדערן פֿארשפרייטן סטאטיסטיק',
 	'wikibase-dispatchstats-no-stats' => 'אצינד זענען נישט פֿאראן קיין סטאטיסטיק.',
 	'wikibase-dispatchstats-changes' => 'ענדערן לאגבוך סטאטיסטיק',
@@ -18610,8 +18628,8 @@ $messages['yi'] = array(
 	'wikibase-item-summary-wbsetsitelink-add' => 'צוגעשטעלט לינק צו [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'לינק צו [$2] געענדערט',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'אראפגענומען לינק צו [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'געשאפן דעם אביעקט צו פארבינדן בלעטער [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'צוגעלייגט א שפראך לינק צו פארבינדן [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'געשאפן דעם אביעקט צו פארבינדן בלעטער',
+	'wikibase-item-summary-wblinktitles-connect' => 'צוגעלייגט א שפראך לינק צו פארבינדן',
 	'wikibase-item-summary-wbcreateclaim-value' => 'געשאפן {{PLURAL:$1|א טענה|טענות}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'געשאפן {{PLURAL:$1|א טענה|טענות}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'געשאפן {{PLURAL:$1|א טענה|טענות}}',
@@ -18931,8 +18949,8 @@ $messages['zh-hans'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => '更改[$2]徽章',
 	'wikibase-item-summary-wbsetsitelink-set-both' => '更改[$2]链接和徽章',
 	'wikibase-item-summary-wbsetsitelink-remove' => '删除至[$2]的链接',
-	'wikibase-item-summary-wblinktitles-create' => '创建该项以连接页面[$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => '添加语言链接以连接页面[$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => '创建该项以连接页面', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => '添加语言链接以连接页面',
 	'wikibase-item-summary-wbcreateclaim-value' => '创建{{PLURAL:$1|声称}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '创建{{PLURAL:$1|声称}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '创建{{PLURAL:$1|声称}}',
@@ -19306,8 +19324,8 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbsetsitelink-set-badges' => '已為[$2]更新徽章',
 	'wikibase-item-summary-wbsetsitelink-set-both' => '已為[$2]更新連接和徽章',
 	'wikibase-item-summary-wbsetsitelink-remove' => '刪除到[$2]的連接',
-	'wikibase-item-summary-wblinktitles-create' => '創建此項目以連接頁面[$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => '添加語言連結連接頁面[$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => '創建此項目以連接頁面',
+	'wikibase-item-summary-wblinktitles-connect' => '添加語言連結連接頁面',
 	'wikibase-item-summary-wbcreateclaim-value' => '已創建{{PLURAL:$1|聲稱}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '已創建{{PLURAL:$1|聲稱}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '已創建{{PLURAL:$1|聲稱}}',
