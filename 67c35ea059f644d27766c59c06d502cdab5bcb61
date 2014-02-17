@@ -2,6 +2,210 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e04eb01_34b9e478",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "\"in\" implies future - how about dates in the past? Actually, most of these large dates are going to be in the past, right?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_14bee860",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "would be nicer to do the composition in the constructor. Hardcoded composition is fine for now, but having it in the constructor makes it easier to implement injection/overriding.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b4acd433",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Would also be nicer to do this in the constructor, so we can more easily switch from injecting an opaque settings object to injecting individual settings.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_94a9d823",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "This does some internal parsing, I presume?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_54a3503f",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "...and then we serialize, and parse again? Please add comments explaining why we need this, and what exactly happens in each step.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3468c4f1",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Isn\u0027t the \"TimeIso\" stuff supposed to be for the internal, normalized, ISO formatted time string, and oblivious of things like precision?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_146dc801",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Since this maps numeric IDs to message key suffixes, please give the keys explicitly. This is not a list.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d47640d5",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "This seems odd. Why not make reconvertOutputString just throw an excpetion for bad values? I\u0027d suggest to refactor this so the outer loop from reconvertOutputString is handled here, and reconvertOutputString is renamed to something like reconvertOutputStringWithPrecision.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9478b8c0",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Just make a map for that last param, instead of a switch statement?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_54823098",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Please move composition to the constructor.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1454a829",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "short out if $from \u003d\u003d $to?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b4629404",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Let\u0027s hope the string doesn\u0027t contain other text, so the \"aug\" in \"augmentation\" doesn\u0027t get replaced... could use a preg_replace to make sure we only replace whole words.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_b47bb4bc",
         "filename": "lib/includes/parsers/YearMonthTimeParser.php",
         "patchSetId": 25
@@ -13,6 +217,244 @@
       "writtenOn": "2014-02-17T13:39:22Z",
       "side": 1,
       "message": "Not a real problem but please try to avoid \\pL and use the more generic and probably better to understand \\p{L} instead.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_945f9844",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Please include the original string in the error message.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_745c0c4f",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "This pattern actually depends on $this-\u003elang, no?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5459105c",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "the name is far too generic for what this function does. How about getYearAndMonth or some such?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_143b88e9",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "$a and $b are not guranteed to be valid, since isFormattedNumber() will return true for strings like \"....\". This must be handled here (or this function must require valid ints, and we have to check before calling it).",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5430f0fb",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be nicer to build a list of names/aliases for each month, then just finding the list that contains $month?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_341d6479",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Composition should be done in the constructor.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_142268b1",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Day 0? Is that legal in an ISO date?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_940d5844",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "\"0\" is not a valid year. \"-5\" is a valid year.",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b410545c",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "as before...",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d41be080",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "as before...",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f416dc59",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "as before...",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_740acc2a",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "Please test:\na) years BC (negative years)\nb) years with more than four digits.\nc) expected errors for dates like 20/20/20, etc",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_0f013508",
+        "filename": "lib/tests/phpunit/parsers/TimeParserTest.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "please test large years, and years BC",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_ef05e914",
+        "filename": "lib/tests/phpunit/parsers/YearTimeParserTest.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T13:56:31Z",
+      "side": 1,
+      "message": "BC?",
       "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
