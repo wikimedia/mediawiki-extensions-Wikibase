@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_cf58ed37",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-17T14:54:15Z",
+      "side": 1,
+      "message": "We have a discussion item on the board for just this.\nCurrently I am just trying to replicate what the JS is currently doing to avoid any appearance change to users until  we decide what we actually want to do\n\nSee one of my comments on PS15 where I remove my own -2",
+      "parentUuid": "4e04eb01_34b9e478",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_14bee860",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 25
