@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_74c08c2f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "With I6ad61cca7 merged, we no longer need this: JsConfigVars get transferred from the ParserOutput to the OutputPage automatically.",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_94c3183d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "With I6ad61cca7 merged, we no longer need this, see above.",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_34da0422",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "Why two handlers for the same hook? Is there a conceptual reason for the separation?",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b4c6144d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "Since I6ad61cca7 was merged, we can just use $pout-\u003eaddJsConfigVars here.",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_14df0812",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "Is this related to the JS config var change somehow, or did it just slip in?...",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d4e880b1",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "Note that this fallback chain must not be user-specific, but based only on the current UI language. That seems to be the case (see EntityContent::getEntityView), but it should be double checked and explicitly documented.\n\nIf we want to support user-specific fallback in the entity view, we will have to include content in all languages for the main entity and all referenced entities, and apply the filtering/fallback later (when putting HTML into the OutputPage).\n\nThat approach is more flexible, but requires a lot more data in the ParserOutput, and thus in the cache. It would probably  be sensinble to cache it separately, since it is a) large and b) independent of UI language.\n\nFor now, I suggest to use a filter purely based on the UI language (with fallback), and leave user-specific (babel-based) fallback for later.",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_54d470ec",
+        "filename": "repo/includes/EntityViewConfigBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "Indent??",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f4ac9c86",
+        "filename": "repo/includes/OutputPageConfigRegister.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "Please state briefly what this class represents.",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_54bd90ac",
+        "filename": "repo/includes/OutputPageConfigRegister.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "With I6ad61cca7 merged, it seems the only thing left to do here is to register the user specific variables; $configVars isn\u0027t needed any more. The function and class should be renamed accordingly.",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d4b1a0dd",
+        "filename": "repo/includes/OutputPageConfigRegister.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:57:32Z",
+      "side": 1,
+      "message": "addJsConfigVars() can be called with an assoc array as the only parameter. No need to loop here.",
+      "revId": "b169ebef46d84ec6bd83d964af8a80ca198d51e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
