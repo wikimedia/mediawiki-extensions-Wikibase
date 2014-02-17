@@ -24,37 +24,26 @@
 	/**
 	 * Whether page is rendered in rtl context. This, however, depends on the css class "rtl"
 	 * being assigned to the body element.
-	 * @type {null}
+	 * @type {boolean|null}
 	 */
-	var IS_RTL = null;
-
-	/**
-	 * CSS class for toggle elements icons.
-	 * @type {String} 'ui-icon-triangle-1-e' or 'ui-icon-triangle-1-w'
-	 */
-	var CLS_TOGGLE_HIDDEN = 'ui-icon-triangle-1-e',
-		CLS_TOGGLE_VISIBLE = 'ui-icon-triangle-1-s';
+	var isRtl;
 
 	/**
 	 * Whether the user client supports CSS3 transformation.
-	 * @type boolean
+	 * @type {boolean|null}
 	 */
 	var browserSupportsTransform;
 
 	$( document ).ready( function() {
-		IS_RTL = $( 'body' ).hasClass( 'rtl' );
-
-		if( IS_RTL ) {
-			CLS_TOGGLE_HIDDEN = 'ui-icon-triangle-1-w';
-		}
+		// have to wait for document to be loaded for this, otherwise 'rtl' might not yet be there!
+		isRtl = $( 'body' ).hasClass( 'rtl' );
 
 		// Check for support of transformation (see https://gist.github.com/1031421)
-		var img = (new Image()).style;
-		browserSupportsTransform = 'transition' in img // general
-			|| 'msTransform' in img
-			|| 'webkitTransition' in img; // Webkit
+		var style = new Image().style;
+		browserSupportsTransform = 'transform' in style // general
+			|| 'msTransform' in style
+			|| 'webkitTransform' in style; // Webkit
 	} );
-
 
 	$.widget( 'ui.toggler', {
 
@@ -110,6 +99,7 @@
 					// Change toggle icon to reflect current state of toggle subject visibility:
 					self._reflectVisibilityOnToggleIcon( true );
 
+					// AnimateWithEvent( animationPurpose, animationProperties, options, startCallback )
 					self.options.$subject.stop().animateWithEvent(
 						'togglerstatetransition',
 						'slideToggle',
@@ -147,22 +137,25 @@
 		 * @param {boolean} [inverted]
 		 */
 		_reflectVisibilityOnToggleIcon: function( inverted ) {
+			var iconClass = 'ui-icon-triangle-1-',
+				dir = ( isRtl === undefined ? $( 'body' ).hasClass( 'rtl' ) : isRtl ) ? 'w' : 'e',
 			// Don't use is( ':visible' ) which would be misleading if element not yet in DOM!
-			var makeVisible = this.options.$subject.css( 'display' ) !== 'none';
+				visible = this.options.$subject.css( 'display' ) !== 'none';
 			if( inverted ) {
-				makeVisible = !makeVisible;
+				visible = !visible;
 			}
-			// Add classes displaying rotated icon. If CSS3 transform is available, use it:
-			this.$toggleIcon.removeClass( CLS_TOGGLE_HIDDEN + ' ' + CLS_TOGGLE_VISIBLE + ' '
-				+ this.widgetBaseClass + '-icon3dtrans' );
 
+			this.$toggleIcon.removeClass( iconClass + 'e ' + iconClass + 's ' + iconClass + 'w '
+				+ this.widgetBaseClass + '-icon3dtrans' );
+			// Add classes displaying rotated icon. If CSS3 transform is available, use it:
 			if( !browserSupportsTransform ) {
-				this.$toggleIcon.addClass( makeVisible ? CLS_TOGGLE_VISIBLE : CLS_TOGGLE_HIDDEN );
+				this.$toggleIcon.addClass( iconClass + ( visible ? 's' : dir ) );
 			} else {
-				this.$toggleIcon.addClass(
-					this.widgetBaseClass + '-icon3dtrans ' + CLS_TOGGLE_VISIBLE );
+				this.$toggleIcon.addClass( iconClass + 's '
+					+ this.widgetBaseClass + '-icon3dtrans' );
 			}
-			this.element[ makeVisible ? 'removeClass' : 'addClass' ](
+
+			this.element[ visible ? 'removeClass' : 'addClass' ](
 				this.widgetBaseClass + '-toggle-collapsed' );
 		},
 
