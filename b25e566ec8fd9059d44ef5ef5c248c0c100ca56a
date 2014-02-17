@@ -16,6 +16,24 @@
       "revId": "b25e566ec8fd9059d44ef5ef5c248c0c100ca56a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b4d734c4",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-17T12:33:54Z",
+      "side": 1,
+      "message": "I know this doesn\u0027t matter at all but I consider variables inside strings confusing and try to avoid them for a few years now. It\u0027s hard to read if you don\u0027t have a very good syntax highlighter.",
+      "parentUuid": "4e04eb01_348c4432",
+      "revId": "b25e566ec8fd9059d44ef5ef5c248c0c100ca56a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
