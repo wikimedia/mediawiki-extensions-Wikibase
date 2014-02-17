@@ -2,13 +2,9 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\PropertySerializer;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Serializers\PropertySerializer
@@ -16,30 +12,10 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class PropertySerializerTest extends SerializerBaseTest {
+class PropertySerializerTest extends EntitySerializerBaseTest {
 
 	public function buildSerializer() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
-
-		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$claimsSerializerMock->expects( $this->any() )
-			->method( 'serialize' )
-			->with( $this->equalTo( new Claims( array( $claim ) ) ) )
-			->will( $this->returnValue( array(
-				'P42' => array(
-					array(
-						'mainsnak' => array(
-							'snaktype' => 'novalue',
-							'property' => 'P42'
-						),
-						'type' => 'statement',
-						'rank' => 'normal'
-					)
-				)
-			) ) );
-
-		return new PropertySerializer( $claimsSerializerMock );
+		return new PropertySerializer( $this->getClaimsSerializerMock() );
 	}
 
 	public function serializableProvider() {
@@ -64,56 +40,16 @@ class PropertySerializerTest extends SerializerBaseTest {
 		);
 	}
 
-	public function serializationProvider() {
-		$provider = array();
-
+	protected function buildEmptyEntity() {
 		$property = Property::newEmpty();
 		$property->setDataTypeId( 'string' );
-		$provider[] = array(
-			array(
-				'type' => 'property',
-				'datatype' => 'string'
-			),
-			$property
-		);
+		return $property;
+	}
 
-		$property = Property::newEmpty();
-		$property->setDataTypeId( 'string' );
-		$property->setId( new PropertyId( 'P42' ) );
-		$provider[] = array(
-			array(
-				'type' => 'property',
-				'datatype' => 'string',
-				'id' => 'P42'
-			),
-			$property
+	protected function buildEmptyEntitySerialization() {
+		return array(
+			'type' => 'property',
+			'datatype' => 'string'
 		);
-
-		$property = Property::newEmpty();
-		$property->setDataTypeId( 'string' );
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
-		$property->setClaims( new Claims( array( $claim ) ) );
-		$provider[] = array(
-			array(
-				'type' => 'property',
-				'datatype' => 'string',
-				'claims' => array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
-								'snaktype' => 'novalue',
-								'property' => 'P42'
-							),
-							'type' => 'statement',
-							'rank' => 'normal'
-						)
-					)
-				)
-			),
-			$property
-		);
-
-		return $provider;
 	}
 }

@@ -15,13 +15,6 @@ use Wikibase\DataModel\Entity\Property;
 class PropertySerializer extends EntitySerializer {
 
 	/**
-	 * @param Serializer $claimsSerializer
-	 */
-	public function __construct( Serializer $claimsSerializer ) {
-		parent::__construct( $claimsSerializer );
-	}
-
-	/**
 	 * @see Serializer::isSerializerFor
 	 *
 	 * @param mixed $object
