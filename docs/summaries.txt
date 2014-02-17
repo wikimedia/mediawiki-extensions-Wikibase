@@ -28,8 +28,8 @@ message when needed. The second argument, if present, is a language code.
 /* wbsetaliases-remove:1|lang */ values...
 /* wbsetaliases-add:1|lang */ values...
 
-/* wblinktitles-create:2 */ fromSite:fromPage|toSite:toPage
-/* wblinktitles-connect:2 */ fromSite:fromPage|toSite:toPage
+/* wblinktitles-create:2| */ fromSite:fromPage, toSite:toPage
+/* wblinktitles-connect:2| */ fromSite:fromPage, toSite:toPage
 
 /* wbsetclaimvalue:1 */ p123
 /* wbremoveclaims:n */ props...

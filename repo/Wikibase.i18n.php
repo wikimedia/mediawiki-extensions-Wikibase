@@ -332,8 +332,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetsitelink-set-badges' => 'Changed badges for [$2]',
 	'wikibase-item-summary-wbsetsitelink-set-both' => 'Changed link and badges for [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed link to [$2]',
-	'wikibase-item-summary-wblinktitles-create' => 'Created this item to connect pages [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Added a language link to connect pages [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-create' => 'Created this item to connect pages',
+	'wikibase-item-summary-wblinktitles-connect' => 'Added a language link to connect pages',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
@@ -1158,18 +1158,10 @@ Parameters:
 	'wikibase-item-summary-wbsetsitelink-remove' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when removing a language link from a Wikidata item (page). Such a summary could appear in English as "Removed link to [itwiki]".}}',
 	'wikibase-item-summary-wblinktitles-create' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s) by creating a new data item.}}
 
-This module generates a slightly different summary (autocomment) than the other ones.
-
-Parameters:
-* $1 - the site code for the from-page
-* $2 - the site code for the to-page',
+This module generates a slightly different summary (autocomment) than the other ones.',
 	'wikibase-item-summary-wblinktitles-connect' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s).}}
 
-This module generates a slightly different summary (autocomment) than the other ones.
-
-Parameters:
-* $1 - the site code for the from-page
-* $2 - the site code for the to-page',
+This module generates a slightly different summary (autocomment) than the other ones.',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties. This is a LEGACY value, needed for old log entries!}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value. This is a LEGACY value, needed for old log entries!}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value. This is a LEGACY value, needed for old log entries!}}',
