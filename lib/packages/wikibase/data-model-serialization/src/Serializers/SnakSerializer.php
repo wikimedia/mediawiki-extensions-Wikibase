@@ -61,7 +61,7 @@ class SnakSerializer implements Serializer {
 	private function getSerialized( Snak $snak ) {
 		$serialization = array(
 			'snaktype' => $snak->getType(),
-			'property' => $snak->getPropertyId()->serialize()
+			'property' => $snak->getPropertyId()->getSerialization()
 		);
 
 		if ( $snak instanceof PropertyValueSnak ) {
