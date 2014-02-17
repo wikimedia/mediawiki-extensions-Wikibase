@@ -1,0 +1,9 @@
+Code-Review+1: Jeroen De Dauw <jeroendedauw@gmail.com>
+Verified+2: jenkins-bot
+Code-Review+2: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 17 Feb 2014 13:23:56 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/112473
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
