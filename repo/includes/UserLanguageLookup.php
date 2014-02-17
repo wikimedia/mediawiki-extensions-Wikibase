@@ -39,9 +39,12 @@ class UserLanguageLookup {
 
 		// if the Babel extension is installed, grab the languages from the user's babel box
 		if ( class_exists( 'Babel' ) && ( !$user->isAnon() ) ) {
-			$languages = array_merge( $languages, \Babel::getUserLanguages( $user ) );
+			$minLevel = 1;
+			$languages = array_merge( $languages, \Babel::getUserLanguages( $user, $minLevel ) );
 		}
 
+		// TODO: There needs to be a way to distinguish between users with and without a Babel box,
+		// see wikibase.ui.initTermBox.js.
 		$languages = array_diff( $languages, $skip );
 		$languages = array_unique( $languages );
 

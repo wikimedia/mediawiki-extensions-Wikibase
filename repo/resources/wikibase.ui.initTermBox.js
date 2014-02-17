@@ -14,6 +14,9 @@
 			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
 			ulsIsDefined = mw.uls !== undefined && $.uls !== undefined && $.uls.data !== undefined;
 
+		// TODO: This shouldn't be done if the user does have a Babel box with a single language
+		// that's skipped.
+		// TODO: Try to refactor and split this into methods.
 		if( $termBoxRows.length === 0 && ulsIsDefined ) {
 			// No term box present; Ask ULS to provide languages and generate plain HTML:
 			var languageCodes = mw.uls.getFrequentLanguageList(),
@@ -27,6 +30,7 @@
 			}
 
 			var $sectionHeading = addTermBoxSection();
+			// TODO: Constants 1 and 4 aren't described at all, try to refactor this.
 			$sectionHeading.after( renderTermBox( title, wb.entity, languageCodes.slice( 1, 4 ) ) );
 
 			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' );
