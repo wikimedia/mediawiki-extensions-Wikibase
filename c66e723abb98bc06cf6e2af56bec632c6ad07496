@@ -19,6 +19,74 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_af0fe132",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T14:03:42Z",
+      "side": 1,
+      "message": "Missing type hints.\nIdeally, we would be injecting a list of conflict detectors/validators/constraints or whatever.",
+      "revId": "c66e723abb98bc06cf6e2af56bec632c6ad07496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_8f0c253f",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T14:03:42Z",
+      "side": 1,
+      "message": "how about checkContraints()?",
+      "revId": "c66e723abb98bc06cf6e2af56bec632c6ad07496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_4f161d4f",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T14:03:42Z",
+      "side": 1,
+      "message": "eek, please inject! The duplicate detector should be refactored to require the term index in the constructor, then we could just inject the detector into the change op, instead of this mess.",
+      "revId": "c66e723abb98bc06cf6e2af56bec632c6ad07496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2f23d1a7",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T14:03:42Z",
+      "side": 1,
+      "message": "No separator, if we have both kinds of conflicts?",
+      "revId": "c66e723abb98bc06cf6e2af56bec632c6ad07496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_9d346d48",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 5
