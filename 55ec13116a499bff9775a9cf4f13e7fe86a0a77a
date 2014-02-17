@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_aff48184",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-17T16:47:57Z",
+      "side": 1,
+      "message": "Good catch. The GUID should not be able to be constructed when it is invalid, so this should indeed not be needed after parsing. Looks like the GUID class got added after the validator, and did not steal all validation code yet. If the regex it contains gets move dthe the GUID class, then this line turns out to be redundant as expected",
+      "parentUuid": "4e04eb01_6f30b9e5",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_853308c0",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "So, you would inject a builder for ChangeOpClaim objects?",
       "parentUuid": "4e04eb01_853308c0",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2f307152",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-17T16:47:57Z",
+      "side": 1,
+      "message": "A factory",
+      "parentUuid": "4e04eb01_4f2dfd8a",
       "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "Doing it in the constructor is better than doing it inline. Pushing it further up the stack would be better still. Whether it can and should be done immediately depends on the concrete case; let\u0027s try to keep our patches small.\n\nAccessing global state in the constructor in order to get service instances seems OK in general if we don\u0027t control the construction of the object. That\u0027s not the case here, though.",
       "parentUuid": "4e04eb01_453d008a",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_cf158d9e",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-17T16:47:57Z",
+      "side": 1,
+      "message": "\u003e Accessing global state in the constructor in order to get service instances seems OK in general if we don\u0027t control the construction of the object.\n\nThat if part is very important, and I\u0027m happy you are adding it now. We have had a lot of code written doing this disregarding that if part.\n\n\u003e That\u0027s not the case here, though.\n\nWell, that is what I thought, yet now after checking this due to your comment I see that is wrong. So do ignore my original comment here.\n\nThe real issue here then is that we got a pile of stuff in this API subclass that should not be in it, though this is not related to the commit, and thus should not be fixed in it.",
+      "parentUuid": "4e04eb01_2f4ab15f",
       "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
