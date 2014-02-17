@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_348c4432",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-17T10:12:19Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "b25e566ec8fd9059d44ef5ef5c248c0c100ca56a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
