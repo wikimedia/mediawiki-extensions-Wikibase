@@ -67,14 +67,7 @@
 		 * @see jQuery.valueview.Expert._getRawValue
 		 */
 		_getRawValue: function() {
-			var value = this._newValue !== false ? this._newValue : this.$input.val();
-
-			// TODO: should be left to parser to decide whether an empty string or just a space
-			//  is considered an empty value or what it is.
-			if( $.trim( value ) === '' ) {
-				return null;
-			}
-			return value;
+			return this._newValue === false ? this.$input.val() : this._newValue;
 		},
 
 		/**
