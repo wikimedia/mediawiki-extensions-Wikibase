@@ -58,18 +58,16 @@ class LangLinkHandler {
 	/**
 	 * Constructs a new LangLinkHandler using the given service instances.
 	 *
-	 * @param string $siteId            The global site ID for the local wiki
-	 * @param array $namespaces        The list of namespaces for which language links should be handled.
-	 * @param array $excludeNamespaces List of namespaces to exclude language links
-	 * @param SiteLinkLookup $siteLinkLookup   A site link lookup service
-	 * @param SiteStore      $sites             A site definition lookup service
-	 * @param string         $siteGroup         The ID of the site group to use for showing language links.
+	 * @param string $siteId The global site ID for the local wiki
+	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
+	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
+	 * @param SiteStore $sites A site definition lookup service
+	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
-	public function __construct( $siteId, array $namespaces, array $excludeNamespaces,
+	public function __construct( $siteId, NamespaceChecker $namespaceChecker,
 			SiteLinkLookup $siteLinkLookup, SiteStore $sites, $siteGroup ) {
 		$this->siteId = $siteId;
-		$this->namespaces = $namespaces;
-		$this->excludeNamespaces = $excludeNamespaces;
+		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->sites = $sites;
 		$this->siteGroup = $siteGroup;
@@ -122,13 +120,8 @@ class LangLinkHandler {
 	public function useRepoLinks( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
-		$namespaceChecker = new NamespaceChecker(
-			$this->excludeNamespaces,
-			$this->namespaces
-		);
-
 		// use repoLinks in only the namespaces specified in settings
-		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) === true ) {
+		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) === true ) {
 			$nel = self::getNoExternalLangLinks( $out );
 
 			if( in_array( '*', $nel ) ) {
