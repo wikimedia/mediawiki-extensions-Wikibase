@@ -99,7 +99,6 @@
 					// Change toggle icon to reflect current state of toggle subject visibility:
 					self._reflectVisibilityOnToggleIcon( true );
 
-					// AnimateWithEvent( animationPurpose, animationProperties, options, startCallback )
 					self.options.$subject.stop().animateWithEvent(
 						'togglerstatetransition',
 						'slideToggle',
