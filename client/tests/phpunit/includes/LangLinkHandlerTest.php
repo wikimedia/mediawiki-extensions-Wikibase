@@ -7,6 +7,7 @@ use ParserOutput;
 use Title;
 use Wikibase\Item;
 use Wikibase\LangLinkHandler;
+use Wikibase\NamespaceChecker;
 
 /**
  * @covers Wikibase\LangLinkHandler
@@ -69,8 +70,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		$this->langLinkHandler = new LangLinkHandler(
 			'srwiki',
-			array(),
-			array( NS_TALK ),
+			new NamespaceChecker( array( NS_TALK ), array() ),
 			$this->mockRepo,
 			$sites,
 			'wikipedia'
