@@ -13,6 +13,7 @@ use Wikibase\Client\WikibaseClient;
  *
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class NoLangLinkHandler {
 
@@ -28,6 +29,16 @@ class NoLangLinkHandler {
 	public static function handle( &$parser ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
+
+		$namespaceChecker = new NamespaceChecker(
+			$settings->getSetting( 'excludeNamespaces' ),
+			$settings->getSetting( 'namespaces' )
+		);
+
+		if ( !$namespaceChecker->isWikibaseEnabled( $parser->getTitle()->getNamespace() ) ) {
+			// shorten out
+			return '';
+		}
 
 		$langLinkHandler = new LangLinkHandler(
 			$settings->getSetting( 'siteGlobalID' ),

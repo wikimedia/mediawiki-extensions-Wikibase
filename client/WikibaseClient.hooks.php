@@ -47,6 +47,53 @@ use Wikibase\Client\WikibaseClient;
 final class ClientHooks {
 
 	/**
+	 * @return NamespaceChecker
+	 */
+	protected static function getNamespaceChecker() {
+		static $checker = null;
+
+		if ( !$checker ) {
+			$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+			$checker = new NamespaceChecker(
+				$settings->getSetting( 'excludeNamespaces' ),
+				$settings->getSetting( 'namespaces' )
+			);
+		}
+
+		return $checker;
+	}
+
+	/**
+	 * Checks whether wikibase is enabled on the given namespace
+	 *
+	 * @param int $ns
+	 *
+	 * @return bool
+	 */
+	protected static function isWikibaseEnabled( $ns ) {
+		return self::getNamespaceChecker()->isWikibaseEnabled( $ns );
+	}
+
+	protected static function getLangLinkHandler() {
+		static $langLinkHandler = null;
+
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		if ( !$langLinkHandler ) {
+			$langLinkHandler = new LangLinkHandler(
+				$settings->getSetting( 'siteGlobalID' ),
+				self::getNamespaceChecker(),
+				WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
+				Sites::singleton(),
+				WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
+			);
+		}
+
+		return $langLinkHandler;
+	}
+
+	/**
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
@@ -348,6 +395,11 @@ final class ClientHooks {
 			return true;
 		}
 
+		if ( !self::isWikibaseEnabled( $parser->getTitle()->getNamespace() ) ) {
+			// shorten out
+			return true;
+		}
+
 		wfProfileIn( __METHOD__ );
 
 		// @todo split up the multiple responsibilities here and in lang link handler
@@ -470,10 +522,7 @@ final class ClientHooks {
 		$title = $out->getTitle();
 		$user = $skin->getContext()->getUser();
 
-		$namespaceChecker = new NamespaceChecker(
-			$settings->getSetting( 'excludeNamespaces' ),
-			$settings->getSetting( 'namespaces' )
-		);
+		$namespaceChecker = self::getNamespaceChecker();
 
 		if ( !$namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			wfProfileOut( __METHOD__ );
@@ -511,16 +560,12 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $pout ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+		if ( !self::isWikibaseEnabled( $out->getTitle()->getNamespace() ) ) {
+			// shorten out
+			return true;
+		}
 
-		$langLinkHandler = new LangLinkHandler(
-			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'namespaces' ),
-			$settings->getSetting( 'excludeNamespaces' ),
-			$wikibaseClient->getStore()->getSiteLinkTable(),
-			Sites::singleton(),
-			$wikibaseClient->getLangLinkSiteGroup() );
+		$langLinkHandler = self::getLangLinkHandler();
 
 		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );
 
@@ -558,14 +603,16 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( Skin &$skin, QuickTemplate &$template ) {
-		wfProfileIn( __METHOD__ );
+		$title = $skin->getContext()->getTitle();
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
-		$namespaceChecker = new NamespaceChecker(
-			$settings->getSetting( 'excludeNamespaces' ),
-			$settings->getSetting( 'namespaces' )
-		);
+		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
+			// shorten out
+			return true;
+		}
+
+		wfProfileIn( __METHOD__ );
 
 		$repoLinker = $wikibaseClient->newRepoLinker();
 		$entityIdParser = $wikibaseClient->getEntityIdParser();
@@ -573,7 +620,7 @@ final class ClientHooks {
 		$siteGroup = $wikibaseClient->getSiteGroup();
 
 		$editLinkInjector = new RepoItemLinkGenerator(
-			$namespaceChecker,
+			self::getNamespaceChecker(),
 			$repoLinker,
 			$entityIdParser,
 			$settings->getSetting( 'enableSiteLinkWidget' ),
@@ -581,7 +628,6 @@ final class ClientHooks {
 		);
 
 		$action = Action::getActionName( $skin->getContext() );
-		$title = $skin->getContext()->getTitle();
 
 		$isAnon = ! $skin->getContext()->getUser()->isLoggedIn();
 		$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
@@ -733,10 +779,12 @@ final class ClientHooks {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
-		$namespaceChecker = new NamespaceChecker(
-			$settings->getSetting( 'excludeNamespaces' ),
-			$settings->getSetting( 'namespaces' )
-		);
+		$namespaceChecker = self::getNamespaceChecker();
+
+		if ( !$namespaceChecker->isWikibaseEnabled( $context->getTitle()->getNamespace() ) ) {
+			// shorten out
+			return true;
+		}
 
 		$infoActionHookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
@@ -766,6 +814,13 @@ final class ClientHooks {
 	 */
 	public static function onTitleMoveComplete( Title $oldTitle, Title $newTitle, User $user,
 		$pageId, $redirectId ) {
+
+		if ( !self::isWikibaseEnabled( $oldTitle->getNamespace() )
+			&& !self::isWikibaseEnabled( $newTitle->getNamespace() ) ) {
+			// shorten out
+			return true;
+		}
+
 		wfProfileIn( __METHOD__ );
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
