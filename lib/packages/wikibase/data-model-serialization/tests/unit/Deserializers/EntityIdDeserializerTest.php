@@ -3,9 +3,8 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\EntityIdDeserializer
@@ -16,16 +15,19 @@ use Wikibase\DataModel\Entity\PropertyId;
 class EntityIdDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
-		return new EntityIdDeserializer( new BasicEntityIdParser() );
+		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
+		$entityIdParserMock->expects( $this->any() )
+			->method( 'parse' )
+			->with( $this->equalTo( 'Q42' ) )
+			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+
+		return new EntityIdDeserializer( $entityIdParserMock );
 	}
 
 	public function deserializableProvider() {
 		return array(
 			array(
-				'q42'
-			),
-			array(
-				'p43'
+				'Q42'
 			),
 		);
 	}
@@ -38,11 +40,6 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 			array(
 				array()
 			),
-			array(
-				array(
-					'id' => 'P10'
-				)
-			),
 		);
 	}
 
@@ -52,33 +49,27 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 				new ItemId( 'Q42' ),
 				'Q42'
 			),
-			array(
-				new ItemId( 'Q42' ),
-				'q42'
-			),
-			array(
-				new PropertyId( 'P42' ),
-				'P42'
-			),
 		);
 	}
 
-	/**
-	 * @dataProvider entityIdParsingExceptionProvider
-	 */
-	public function testEntityIdParsingException( $serialization ) {
+	public function testIsDeserializerForWithEntityIdParsingException() {
+		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
+		$entityIdParserMock->expects( $this->any() )
+			->method( 'parse' )
+			->will( $this->throwException( new EntityIdParsingException() ) );
+		$entityIdDeserializer = new EntityIdDeserializer( $entityIdParserMock );
+
+		$this->assertFalse( $entityIdDeserializer->isDeserializerFor( 'test' ) );
+	}
+
+	public function testDeserializeWithEntityIdParsingException() {
+		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
+		$entityIdParserMock->expects( $this->any() )
+			->method( 'parse' )
+			->will( $this->throwException( new EntityIdParsingException() ) );
+		$entityIdDeserializer = new EntityIdDeserializer( $entityIdParserMock );
+
 		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
-		$this->buildDeserializer()->deserialize( $serialization );
-	}
-
-	public function entityIdParsingExceptionProvider() {
-		return array(
-			array(
-				'test'
-			),
-			array(
-				'qp42'
-			),
-		);
+		$entityIdDeserializer->deserialize( 'test' );
 	}
 }
