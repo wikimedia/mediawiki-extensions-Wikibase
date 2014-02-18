@@ -71,7 +71,6 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		return array(
 			array( 'foo', array( "page_title >= 'Foo'", "page_namespace = 0", 'page_namespace IN (0)' ) ),
 			array( ':foo', array( "page_title >= 'Foo'", "page_namespace = 0", 'page_namespace IN (0)' ) ),
-			array( 'en:foo', array( "page_title >= 'En:foo'", "page_namespace = 0", 'page_namespace IN (0)' ) ),
 			array( 'user:foo', array( "page_title >= 'Foo'", "page_namespace = 2", 'page_namespace IN (0)' ) ),
 			array( 'user talk:foo', array( "page_title >= 'Foo'", "page_namespace = 3", 'page_namespace IN (0)' ) ),
 		);
