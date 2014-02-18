@@ -650,9 +650,6 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbUserCanEdit', $title->userCan( 'edit', $user, false ) ); //TODO: make this a per-entity info
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
-		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
-		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
-
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
@@ -668,9 +665,6 @@ abstract class EntityView extends \ContextSource {
 			'version' => $this->getContext()->msg( 'wikibase-shortcopyrightwarning-version' )->parse(),
 			'messageHtml' => $copyrightMessage->inLanguage( $this->getLanguage() )->parse()
 		) );
-
-		$experimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-		$out->addJsConfigVars( 'wbExperimentalFeatures', $experimental );
 
 		// TODO: use injected id formatter
 		$serializationOptions = new SerializationOptions();

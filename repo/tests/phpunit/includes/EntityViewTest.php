@@ -483,8 +483,6 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 		); // with fallback to German
 
 		$argLists[] = array( $revision, $entityLoader, null, $languageFallbackChain, 'fr', true, array(
-			'wbEntityType' => 'item',
-			'wbDataLangName' => 'français',
 			'wbEntityId' => 'Q27449',
 			'wbEntity' => '{"id":"Q27449","type":"item","labels":{"de":{"language":"de","value":"foo"},"fr":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":"EntityViewTest$1","mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":27498},"type":"wikibase-entityid"}},"type":"claim"}]}}',
 			'wbUsedEntities' => '{"P11":{"content":{"id":"P11","type":"property"},"title":"property:P11"},"Q27498":{"content":{"id":"Q27498","type":"item","labels":{"fr":{"language":"de","value":"bar"}}},"title":"' . $titleText . '"}}',
@@ -586,8 +584,6 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 		$this->prepareEntityData( $entity, $entityData );
 
 		$argLists[] = array( $revision, $context, $languageFallbackChain, true, array(
-			'wbEntityType' => 'item',
-			'wbDataLangName' => 'Nederlands',
 			'wbEntityId' => $entity->getId()->getSerialization(),
 			'wbEntity' => json_encode( $entityData ),
 			'wbUsedEntities' => json_encode( array(
