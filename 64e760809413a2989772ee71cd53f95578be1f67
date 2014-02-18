@@ -16,6 +16,24 @@
       "revId": "64e760809413a2989772ee71cd53f95578be1f67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2a073c21",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-18T16:24:56Z",
+      "side": 0,
+      "message": "done",
+      "parentUuid": "4e04eb01_c771f1de",
+      "revId": "64e760809413a2989772ee71cd53f95578be1f67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
