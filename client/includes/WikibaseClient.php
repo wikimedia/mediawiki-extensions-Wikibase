@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityLookup;
+use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
@@ -27,6 +28,7 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\NamespaceChecker;
 use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -106,6 +108,17 @@ final class WikibaseClient {
 	 * @var SiteStore
 	 */
 	private $siteStore;
+
+	/**
+	 * @var LangLinkHandler
+	 */
+	private $langLinkHandler = null;
+
+	/**
+	 * @var NamespaceChecker
+	 */
+	private $namespaceChecker = null;
+
 
 	/**
 	 * @since 0.4
@@ -513,5 +526,42 @@ final class WikibaseClient {
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		return $factory;
+	}
+
+	/**
+	 * @return NamespaceChecker
+	 */
+	public function getNamespaceChecker() {
+
+		if ( !$this->namespaceChecker ) {
+			$settings = $this->getSettings();
+
+			$this->namespaceChecker = new NamespaceChecker(
+				$settings->getSetting( 'excludeNamespaces' ),
+				$settings->getSetting( 'namespaces' )
+			);
+		}
+
+		return $this->namespaceChecker;
+	}
+
+	/**
+	 * @return LangLinkHandler
+	 */
+	public function getLangLinkHandler() {
+
+		$settings =$this->getSettings();
+
+		if ( !$this->langLinkHandler ) {
+			$this->langLinkHandler = new LangLinkHandler(
+				$settings->getSetting( 'siteGlobalID' ),
+				self::getNamespaceChecker(),
+				$this->getStore()->getSiteLinkTable(),
+				Sites::singleton(),
+				$this->getLangLinkSiteGroup()
+			);
+		}
+
+		return $this->langLinkHandler;
 	}
 }
