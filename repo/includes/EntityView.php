@@ -650,8 +650,8 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbUserCanEdit', $title->userCan( 'edit', $user, false ) ); //TODO: make this a per-entity info
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
+		// used by gadgets in wikidata
 		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
-		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
