@@ -275,7 +275,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		// Generate a single claim:
 		$itemId = $content->getItem()->getId();
 		$guidGenerator = new ClaimGuidGenerator( $itemId );
-		$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( 1 ) );
+		$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[1] ) );
 		$preexistingClaim->setGuid( $guidGenerator->newGuid() );
 		$claims->addClaim( $preexistingClaim );
 
@@ -290,7 +290,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$revision = $statusValue['revision'];
 
 		// Add new claim at index 3 using the baserevid and a different property id
-		$newClaim = $item->newClaim( new PropertyNoValueSnak( 2 ) );
+		$newClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[2] ) );
 		$newClaim->setGuid( $guidGenerator->newGuid() );
 		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getId() );
 	}
