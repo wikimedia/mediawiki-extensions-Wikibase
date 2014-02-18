@@ -12,10 +12,12 @@ use Wikibase\DataModel\Serializers\PropertySerializer;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class PropertySerializerTest extends EntitySerializerBaseTest {
+class PropertySerializerTest extends SerializerBaseTest {
 
 	public function buildSerializer() {
-		return new PropertySerializer( $this->getClaimsSerializerMock() );
+		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
+
+		return new PropertySerializer( $claimsSerializerMock );
 	}
 
 	public function serializableProvider() {
@@ -40,16 +42,18 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 		);
 	}
 
-	protected function buildEmptyEntity() {
+	public function serializationProvider() {
 		$property = Property::newEmpty();
 		$property->setDataTypeId( 'string' );
-		return $property;
-	}
 
-	protected function buildEmptyEntitySerialization() {
 		return array(
-			'type' => 'property',
-			'datatype' => 'string'
+			array(
+				array(
+					'type' => 'property',
+					'datatype' => 'string'
+				),
+				$property
+			),
 		);
 	}
 }

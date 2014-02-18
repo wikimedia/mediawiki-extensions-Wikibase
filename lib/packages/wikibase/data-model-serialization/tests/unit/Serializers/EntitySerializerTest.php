@@ -4,8 +4,8 @@ namespace Tests\Wikibase\DataModel\Serializers;
 
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
@@ -14,9 +14,9 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-abstract class EntitySerializerBaseTest extends SerializerBaseTest {
+class EntitySerializerTest extends SerializerBaseTest {
 
-	protected function getClaimsSerializerMock() {
+	public function buildSerializer() {
 		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 
@@ -37,42 +37,66 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 				)
 			) ) );
 
-		return $claimsSerializerMock;
+		$entitySerializerMock = $this->getMockForAbstractClass(
+			'\Wikibase\DataModel\Serializers\EntitySerializer',
+			array( $claimsSerializerMock )
+		);
+		$entitySerializerMock->expects( $this->any() )
+			->method( 'getSpecificSerialization' )
+			->will( $this->returnValue( array() ) );
+
+		return $entitySerializerMock;
 	}
 
-	/**
-	 * @return Entity
-	 */
-	protected abstract function buildEmptyEntity();
+	public function serializableProvider() {
+		return array(
+			array(
+				Item::newEmpty()
+			),
+		);
+	}
 
-	/**
-	 * @return array
-	 */
-	protected abstract function buildEmptyEntitySerialization();
+	public function nonSerializableProvider() {
+		return array(
+			array(
+				5
+			),
+			array(
+				array()
+			),
+			array(
+				new PropertyNoValueSnak( 42 )
+			),
+		);
+	}
 
 	public function serializationProvider() {
 		$provider = array(
 			array(
-				$this->buildEmptyEntitySerialization(),
-				$this->buildEmptyEntity()
-			)
+				array(
+					'type' => 'item'
+				),
+				Item::newEmpty()
+			),
 		);
 
-		$entity = $this->buildEmptyEntity();
-		$entity->setId( new PropertyId( 'P42' ) );
+		$entity = Item::newEmpty();
+		$entity->setId( new ItemId( 'Q42' ) );
 		$provider[] = array(
 			array(
-				'id' => 'P42'
-			) + $this->buildEmptyEntitySerialization(),
+				'type' => 'item',
+				'id' => 'Q42'
+			),
 			$entity
 		);
 
-		$entity = $this->buildEmptyEntity();
+		$entity = Item::newEmpty();
 		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 		$entity->setClaims( new Claims( array( $claim ) ) );
 		$provider[] = array(
 			array(
+				'type' => 'item',
 				'claims' => array(
 					'P42' => array(
 						array(
@@ -85,7 +109,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 						)
 					)
 				)
-			) + $this->buildEmptyEntitySerialization(),
+			),
 			$entity
 		);
 
