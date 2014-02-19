@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_ec6ccc07",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T12:00:07Z",
+      "side": 1,
+      "message": "In theroy the options can be changed even after object construction thus this should probably remain here?\nOtherwise if options get changed this would then have the wrong output",
+      "parentUuid": "4e04eb01_b4acd433",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_94a9d823",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 25
@@ -236,6 +254,24 @@
       "writtenOn": "2014-02-17T13:56:31Z",
       "side": 1,
       "message": "short out if $from \u003d\u003d $to?",
+      "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_cc48f08e",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T12:00:07Z",
+      "side": 1,
+      "message": "This is effectively done above in the unlocalize method",
+      "parentUuid": "4e04eb01_1454a829",
       "revId": "67c35ea059f644d27766c59c06d502cdab5bcb61",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
