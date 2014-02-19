@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_f2b3824a",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "you should add an @since for this file as well a description of the script as a whole",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d23ac6bf",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "you seem to be mixing indenting with spaces and indenting with tabs",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_12af0ee2",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "you should probably mention this dumps in the external json format rather than the internal one",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d2b08640",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "I dont think we gain anything by using finalSetup here.\nWe may as well just create our own private method and call this from the top of our execute method",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_52a596ff",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "you dynamically declare mApiUrl here; this should be added to the class",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_32aa0ad2",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "instead of doing this check here just call $this-\u003egetOption( \u0027apiUrl\u0027, \"http://www.wikidata.org/w/api.php\" );",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_72a092f1",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "indenting is again odd here",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b2bdfa18",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "again here we are defining $this-\u003eproperties on the fly, add it to the class or just pass it around within the execute method",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_12702e9f",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "passing in a callback to this function is just ugly! Refactoring time? :\u003e\nAlso refactoring this would reduce the amount of indenting here and the general complexity of execute.",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_925b1e26",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "\"{$this-\u003emApiUrl}?action\u003dwbgetentities\u0026ids\u003d$entityId\u0026format\u003d\njson\" would be cleaner",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_72877267",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "After decoding we should check that the request was actually a success / has not errored / actually returns our entity before doing anything!",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b25e1a16",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T13:03:06Z",
+      "side": 1,
+      "message": "passing by reference and changing the value is also eww",
+      "revId": "664be333a13cdd4702adb7a4ff383eb5d76ee0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
