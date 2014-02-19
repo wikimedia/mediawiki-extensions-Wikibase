@@ -34,6 +34,23 @@
       "revId": "64e760809413a2989772ee71cd53f95578be1f67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_72b3f2e8",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2014-02-19T14:59:07Z",
+      "side": 0,
+      "message": "wbEntityType is currently used in some gadgets in Wikidata.",
+      "revId": "64e760809413a2989772ee71cd53f95578be1f67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
