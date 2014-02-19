@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_72d53247",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-19T13:33:21Z",
+      "side": 1,
+      "message": "This is marked as deprecated. Is there a way to avoid this here?",
+      "revId": "17e1f7ea72e19304e38e0eb3c8544209c1d6adfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f2c822ac",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-19T13:33:21Z",
+      "side": 1,
+      "message": "Please add a check if the setting really is an array and not null, false, \"0\" or something like that.",
+      "revId": "17e1f7ea72e19304e38e0eb3c8544209c1d6adfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_32cfaab7",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-19T13:33:21Z",
+      "side": 1,
+      "message": "Please add if ( !empty( $settings-\u003eget( \u0027displayBadges\u0027 ) ) ) { ... to avoid runtime errors if somebody puts null, false or \"0\" in the setting or unsets it.",
+      "revId": "17e1f7ea72e19304e38e0eb3c8544209c1d6adfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d2c52692",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-19T13:33:21Z",
+      "side": 1,
+      "message": "Comment should briefly describe the format.",
+      "revId": "17e1f7ea72e19304e38e0eb3c8544209c1d6adfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_924e7e3b",
+        "filename": "client/includes/hooks/LanguageLinkBadgeHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-19T13:33:21Z",
+      "side": 1,
+      "message": "Having two siteId here is very confusing. I suggest renaming most of the variables to something like localSiteId and languageLinkSiteId.",
+      "revId": "17e1f7ea72e19304e38e0eb3c8544209c1d6adfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
