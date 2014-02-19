@@ -94,4 +94,10 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 			)
 		) );
 	}
+
+	public function testNewEntityIdDeserializer() {
+		$this->assertTrue( $this->buildDeserializerFactory()->newEntityIdDeserializer()->isDeserializerFor(
+			'Q42'
+		) );
+	}
 }

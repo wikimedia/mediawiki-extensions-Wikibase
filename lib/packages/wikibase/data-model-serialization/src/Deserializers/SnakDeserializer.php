@@ -8,8 +8,7 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -27,17 +26,17 @@ class SnakDeserializer implements Deserializer {
 	private $dataValueDeserializer;
 
 	/**
-	 * @var EntityIdParser
+	 * @var Deserializer
 	 */
-	private $entityIdParser;
+	private $entityIdDeserializer;
 
 	/**
 	 * @param Deserializer $dataValueDeserializer
-	 * @param EntityIdParser $entityIdParser
+	 * @param Deserializer $entityIdParser
 	 */
-	public function __construct( Deserializer $dataValueDeserializer, EntityIdParser $entityIdParser ) {
+	public function __construct( Deserializer $dataValueDeserializer, Deserializer $entityIdDeserializer ) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
-		$this->entityIdParser = $entityIdParser;
+		$this->entityIdDeserializer = $entityIdDeserializer;
 	}
 
 	/**
@@ -86,33 +85,34 @@ class SnakDeserializer implements Deserializer {
 	}
 
 	private function newNoValueSnak( array $serialization ) {
-		return new PropertyNoValueSnak( $this->parsePropertyId( $serialization['property'] ) );
+		return new PropertyNoValueSnak( $this->deserializePropertyId( $serialization['property'] ) );
 	}
 
 	private function newSomeValueSnak( array $serialization ) {
-		return new PropertySomeValueSnak( $this->parsePropertyId( $serialization['property'] ) );
+		return new PropertySomeValueSnak( $this->deserializePropertyId( $serialization['property'] ) );
 	}
 
 	private function newValueSnak( array $serialization ) {
 		$this->requireAttribute( $serialization, 'datavalue' );
 
 		return new PropertyValueSnak(
-			$this->parsePropertyId( $serialization['property'] ),
+			$this->deserializePropertyId( $serialization['property'] ),
 			$this->dataValueDeserializer->deserialize( $serialization['datavalue'] )
 		);
 	}
 
-	private function parsePropertyId( $propertyId ) {
-		try {
-			return $this->entityIdParser->parse( $propertyId );
-		} catch ( EntityIdParsingException $e ) {
+	private function deserializePropertyId( $serialization ) {
+		$propertyId = $this->entityIdDeserializer->deserialize( $serialization );
+
+		if ( !( $propertyId instanceof PropertyId ) ) {
 			throw new InvalidAttributeException(
 				'property',
-				$propertyId,
-				"'$propertyId' is not a valid property ID",
-				$e
+				$serialization,
+				"'$serialization' is not a valid property ID"
 			);
 		}
+
+		return $propertyId;
 	}
 
 	private function assertCanDeserialize( $serialization ) {

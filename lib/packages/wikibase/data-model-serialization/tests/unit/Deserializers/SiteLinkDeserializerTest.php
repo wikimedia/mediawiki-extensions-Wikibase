@@ -3,9 +3,8 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -17,7 +16,13 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
-		return new SiteLinkDeserializer( new BasicEntityIdParser() );
+		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( 'Q42' ) )
+			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+
+		return new SiteLinkDeserializer( $entityIdDeserializerMock );
 	}
 
 	public function deserializableProvider() {
@@ -40,13 +45,6 @@ class SiteLinkDeserializerTest extends DeserializerBaseTest {
 					'site' => 'enwiki',
 					'title' => 'Nyan Cat',
 					'badges' => array( 'Q42' )
-				)
-			),
-			array(
-				array(
-					'site' => 'frwikisource',
-					'title' => 'Nyan Cat',
-					'badges' => array( 'Q42', 'Q43' )
 				)
 			),
 		);
@@ -98,26 +96,22 @@ class SiteLinkDeserializerTest extends DeserializerBaseTest {
 					'badges' => array( 'Q42' )
 				)
 			),
-			array(
-				new SiteLink( 'frwikisource', 'Nyan Cat', array(
-					new ItemId( 'Q42' ),
-					new ItemId( 'q43' )
-				) ),
-				array(
-					'site' => 'frwikisource',
-					'title' => 'Nyan Cat',
-					'badges' => array( 'Q42', 'Q43' )
-				)
-			),
 		);
 	}
 
-	public function testParseItemIdCatchesEntityIdParsingException() {
+	public function testDeserializeItemIdFilterPropertyId() {
+		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( 'P42' ) )
+			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
+		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
+
 		$this->setExpectedException( '\Deserializers\Exceptions\InvalidAttributeException' );
-		$this->buildDeserializer()->deserialize( array(
+		$deserializer->deserialize( array(
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
-			'badges' => array( 'd43' )
+			'badges' => array( 'P42' )
 		) );
 	}
 }

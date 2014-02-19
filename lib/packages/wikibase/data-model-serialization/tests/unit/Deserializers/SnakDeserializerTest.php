@@ -5,8 +5,8 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -20,11 +20,17 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 class SnakDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
+		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( 'P42' ) )
+			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
+
 		return new SnakDeserializer(
 			new DataValueDeserializer( array (
 				'string' => 'DataValues\StringValue',
 			) ),
-			new BasicEntityIdParser()
+			$entityIdDeserializerMock
 		);
 	}
 
@@ -106,23 +112,18 @@ class SnakDeserializerTest extends DeserializerBaseTest {
 		);
 	}
 
-	public function testParsePropertyIdCatchesEntityIdParsingException() {
-		$mockEntityIdParser = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
-		$mockEntityIdParser->expects( $this->once() )
-			->method( 'parse' )
-			->will( $this->throwException( new EntityIdParsingException() ) );
-
-		$deserializer = new SnakDeserializer(
-			new DataValueDeserializer( array (
-				'string' => 'DataValues\StringValue',
-			) ),
-			$mockEntityIdParser
-		);
+	public function testDeserializePropertyIdFilterItemId() {
+		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( 'Q42' ) )
+			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+		$deserializer = new SnakDeserializer( new DataValueDeserializer(), $entityIdDeserializerMock );
 
 		$this->setExpectedException( '\Deserializers\Exceptions\InvalidAttributeException' );
 		$deserializer->deserialize( array(
-			'snaktype' => 'novalue',
-			'property' => 'FooBar'
+			'snaktype' => 'somevalue',
+			'property' => 'Q42'
 		) );
 	}
 }

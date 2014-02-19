@@ -6,8 +6,7 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -17,15 +16,15 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkDeserializer implements Deserializer {
 
 	/**
-	 * @var EntityIdParser
+	 * @var Deserializer
 	 */
-	private $entityIdParser;
+	private $entityIdDeserializer;
 
 	/**
-	 * @param EntityIdParser $entityIdParser
+	 * @param Deserializer $entityIdDeserializer
 	 */
-	public function __construct( EntityIdParser $entityIdParser ) {
-		$this->entityIdParser = $entityIdParser;
+	public function __construct( Deserializer $entityIdDeserializer ) {
+		$this->entityIdDeserializer = $entityIdDeserializer;
 	}
 
 	/**
@@ -71,22 +70,23 @@ class SiteLinkDeserializer implements Deserializer {
 
 		$badges = array();
 		foreach( $serialization['badges'] as $badgeSerialization ) {
-			$badges[] = $this->parseItemId( $badgeSerialization );
+			$badges[] = $this->deserializeItemId( $badgeSerialization );
 		}
 		return $badges;
 	}
 
-	private function parseItemId( $itemId ) {
-		try {
-			return $this->entityIdParser->parse( $itemId );
-		} catch ( EntityIdParsingException $e ) {
+	private function deserializeItemId( $serialization ) {
+		$itemId = $this->entityIdDeserializer->deserialize( $serialization );
+
+		if ( !( $itemId instanceof ItemId ) ) {
 			throw new InvalidAttributeException(
 				'badges',
-				$itemId,
-				"'$itemId' is not a valid item ID",
-				$e
+				$serialization,
+				"'$serialization' is not a valid item ID"
 			);
 		}
+
+		return $itemId;
 	}
 
 	private function assertBadgesIsArray( $serialization ) {
