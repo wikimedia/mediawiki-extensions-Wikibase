@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_35f8b4e1",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T17:53:11Z",
+      "side": 1,
+      "message": "we don\u0027t generally use this notation in wikibase, I guess EntityId[] is currently prefered.\nAlso not sure this comment adds much value to the code, perhaps just rename is $entityIds instead",
+      "revId": "39039fda6d5b16cf517623a600add2a0eaadc0e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_95e8a80c",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T17:53:11Z",
+      "side": 1,
+      "message": "getNumericId is not guaranteed to exist for all EntityIds but is present for Item and Property Ids.\nWe should really try and get rid of this at some point but I wouldn\u0027t block this due to that as this call existed before your change.",
+      "revId": "39039fda6d5b16cf517623a600add2a0eaadc0e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f5c80cac",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-19T17:53:11Z",
+      "side": 1,
+      "message": "could be better to use the constants here\nTerm::TYPE_LABEL etc.",
+      "revId": "39039fda6d5b16cf517623a600add2a0eaadc0e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
