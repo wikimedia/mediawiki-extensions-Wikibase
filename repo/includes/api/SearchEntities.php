@@ -25,6 +25,7 @@ use Wikibase\Utils;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Thiemo Mättig < thiemo.maettig@wikimedia.de >
  */
 class SearchEntities extends ApiBase {
 
@@ -84,13 +85,15 @@ class SearchEntities extends ApiBase {
 	private function getSearchEntries( $params ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		// Gets exact matches. If there are not enough exact matches, it gets prefixed matches
 		// TODO: This is a work around for the broken code - it should be fixed
 		$limit = $params['limit'] + $params['continue'] + 1;
 		$ids = array();
+
 		// Gets exact match for the search term as an id if it can be found
 		$entityId = \Wikibase\EntityId::newFromPrefixedId( $params['search'] );
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		if ( $entityId ) {
 			$page = $entityContentFactory->getWikiPageForId( $entityId );
 			if ( $page->exists() ) {
@@ -102,63 +105,74 @@ class SearchEntities extends ApiBase {
 		}
 
 		// If still space, then merge in exact matches
-		if ( count( $ids ) < $limit ) {
-			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, false ) );
+		$space = $limit - count( $ids );
+		if ( $space > 0 ) {
+			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $space, false ) );
 			$ids = array_unique( $ids );
 		}
 
 		// If still space, then merge in prefix matches
-		if ( count( $ids ) < $limit ) {
-			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, true ) );
+		$space = $limit - count( $ids );
+		if ( $space > 0 ) {
+			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $space, true ) );
 			$ids = array_unique( $ids );
 		}
 
 		// reduce any overflow
-		$ids = array_slice ( $ids, 0, $limit );
+		$ids = array_slice( $ids, 0, $limit );
 
-		// Find all the remaining terms for the given entities
-		$terms = StoreFactory::getStore()->getTermIndex()->getTermsOfEntities( $ids, $params['type'], $params['language'] );
-
+		/**
+		 * @var [EntityId] $entries
+		 */
 		$entries = array();
 
 		/**
 		 * @var EntityId $id
 		 */
 		foreach ( $ids as $id ) {
-			$entry = array();
+			$entries[ $id->getNumericId() ] = array(
+				'id' => $id->getPrefixedId(),
+				'url' => $entityContentFactory->getTitleForId( $id )->getFullUrl()
+			);
+		}
 
-			$entry['id'] = $id->getPrefixedId();
-			$entry['url'] = $entityContentFactory->getTitleForId( $id )->getFullUrl();
+		// Find all the remaining terms for the given entities
+		$terms = StoreFactory::getStore()->getTermIndex()->getTermsOfEntities( $ids, $params['type'], $params['language'] );
+		$aliasPattern = '/^' . preg_quote( $params['search'], '/' ) . '/i';
 
-			$aliases = array();
-			foreach ( $terms as $term ) {
-				if ( $term->getEntityId() === $id->getNumericId() ) {
-					if ( $term->getType() === 'label' ) {
-						$entry['label'] = $term->getText();
-					}
-					if ( $term->getType() === 'description' ) {
-						$entry['description'] = $term->getText();
-					}
-					if ( $term->getType() === 'alias' ) {
-						// Only include matching aliases
-						// TODO This needs to be rethought when a different search engine is used
-						if ( preg_match( "/^" . preg_quote( $params['search'], '/' ) . "/i", $term->getText() ) !== 0 ) {
-							$aliases[] = $term->getText();
+		foreach ( $terms as $term ) {
+			$numericId = $term->getEntityId();
+			if ( !isset( $entries[ $numericId ] ) ) {
+				continue;
+			}
+
+			$entry = $entries[$numericId];
+
+			switch ( $term->getType() ) {
+				case 'label':
+					$entry['label'] = $term->getText();
+					break;
+				case 'description':
+					$entry['description'] = $term->getText();
+					break;
+				case 'alias':
+					// Only include matching aliases
+					// TODO: This needs to be rethought when a different search engine is used
+					if ( preg_match( $aliasPattern, $term->getText() ) ) {
+						if ( !isset( $entry['aliases'] ) ) {
+							$entry['aliases'] = array();
+							$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
 						}
+						$entry['aliases'][] = $term->getText();
 					}
-				}
+					break;
 			}
 
-			if ( count( $aliases ) > 0 ) {
-				$entry['aliases'] = $aliases;
-				$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
-			}
-
-			$entries[] = $entry;
+			$entries[$numericId] = $entry;
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $entries;
+		return array_values( $entries );
 	}
 
 	/**
