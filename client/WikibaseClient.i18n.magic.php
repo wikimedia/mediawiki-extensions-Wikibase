@@ -22,6 +22,12 @@ $magicWords['ar'] = array(
 	'property' => array( 0, 'خاصية' ),
 );
 
+/** Egyptian Spoken Arabic (مصرى) */
+$magicWords['arz'] = array(
+	'noexternallanglinks' => array( 0, 'من_غير_وصلات_لغه_خارجيه' ),
+	'property' => array( 0, 'خاصيه' ),
+);
+
 /** German (Deutsch) */
 $magicWords['de'] = array(
 	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
@@ -128,6 +134,7 @@ $magicWords['yi'] = array(
 
 /** Simplified Chinese (中文（简体）‎) */
 $magicWords['zh-hans'] = array(
+	'noexternallanglinks' => array( 0, '无外部语言连接' ),
 	'property' => array( 0, '属性' ),
 );
 

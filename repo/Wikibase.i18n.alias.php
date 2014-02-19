@@ -56,6 +56,25 @@ $specialPageAliases['arc'] = array(
 	'NewProperty' => array( 'ܕܝܠܝܘ̈ܬܐ_ܚܕ̈ܬܬܐ' ),
 );
 
+/** Egyptian Spoken Arabic (مصرى) */
+$specialPageAliases['arz'] = array(
+	'DispatchStats' => array( 'احصاءات_الوصول' ),
+	'EntityData' => array( 'بيانات_الكيانات' ),
+	'NewItem' => array( 'عمل_مدخله' ),
+	'NewProperty' => array( 'خاصيه_جديده' ),
+	'ItemByTitle' => array( 'المدخلات_بالعنوان' ),
+	'ItemDisambiguation' => array( 'المدخلات_بالعلامه' ),
+	'ListDatatypes' => array( 'عرض_انواع_البيانات' ),
+	'SetLabel' => array( 'ضبط_العلامه' ),
+	'SetDescription' => array( 'ضبط_الوصف' ),
+	'SetAliases' => array( 'ضبط_الالياس' ),
+	'SetSiteLink' => array( 'ضبط-وصله_الموقع' ),
+	'EntitiesWithoutLabel' => array( 'الكيانات_من_غير_علامه' ),
+	'EntitiesWithoutDescription' => array( 'الكيانات_من_غير_وصف' ),
+	'ItemsWithoutSitelinks' => array( 'المدخلات_من_غير_وصلات_موقع' ),
+	'MyLanguageFallbackChain' => array( 'سلسله_رجوع_اللغه_بتاعتى' ),
+);
+
 /** буряад (буряад) */
 $specialPageAliases['bxr'] = array(
 	'NewItem' => array( 'Зүйл_үүсхэхэ' ),
@@ -95,6 +114,7 @@ $specialPageAliases['de'] = array(
 	'SetDescription' => array( 'Beschreibung_festlegen' ),
 	'SetAliases' => array( 'Aliasse_festlegen' ),
 	'SetSiteLink' => array( 'Websitelink_festlegen' ),
+	'MergeItems' => array( 'Objekte_zusammenführen' ),
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),
 	'EntitiesWithoutDescription' => array( 'Objekte_ohne_Beschreibung' ),
 	'ItemsWithoutSitelinks' => array( 'Objekte_ohne_Websitelinks' ),
@@ -286,6 +306,7 @@ $specialPageAliases['vi'] = array(
 	'SetDescription' => array( 'Đặt_miêu_tả', 'Đặt_mô_tả' ),
 	'SetAliases' => array( 'Đặt_tên_khác' ),
 	'SetSiteLink' => array( 'Đặt_liên_kết_dịch_vụ' ),
+	'MergeItems' => array( 'Hợp_nhất_khoản_mục', 'Gộp_khoản_mục' ),
 	'EntitiesWithoutLabel' => array( 'Thực_thể_không_nhãn' ),
 	'EntitiesWithoutDescription' => array( 'Thực_thể_không_miêu_tả' ),
 	'ItemsWithoutSitelinks' => array( 'Khoản_mục_không_có_liên_kết_dịch_vụ', 'Khoản_mục_không_có_liên_kết_site' ),
@@ -305,6 +326,7 @@ $specialPageAliases['zh-hans'] = array(
 	'SetDescription' => array( '设置说明' ),
 	'SetAliases' => array( '设置别名' ),
 	'SetSiteLink' => array( '设置网站链接' ),
+	'MergeItems' => array( '合并项' ),
 	'EntitiesWithoutLabel' => array( '无标签实体' ),
 	'EntitiesWithoutDescription' => array( '无说明实体' ),
 	'ItemsWithoutSitelinks' => array( '无网站链接项' ),
@@ -323,6 +345,10 @@ $specialPageAliases['zh-hant'] = array(
 	'SetLabel' => array( '設置標籤' ),
 	'SetDescription' => array( '設置描述' ),
 	'SetAliases' => array( '設置別名' ),
+	'SetSiteLink' => array( '設定站點連接' ),
+	'MergeItems' => array( '合併項' ),
 	'EntitiesWithoutLabel' => array( '沒有標籤的實體' ),
+	'EntitiesWithoutDescription' => array( '無類型實體' ),
 	'ItemsWithoutSitelinks' => array( '沒有條目連結的項目' ),
+	'MyLanguageFallbackChain' => array( '我的備用語言鏈' ),
 );

@@ -17,6 +17,16 @@ $specialPageAliases['en'] = array(
 	'UnconnectedPages' => array( 'UnconnectedPages', 'WithoutConnection', 'WithoutSitelinks' ),
 );
 
+/** Arabic (العربية) */
+$specialPageAliases['ar'] = array(
+	'UnconnectedPages' => array( 'صفحات_غير_متصلة', 'بدون_اتصال', 'بدون_وصلات_موقع' ),
+);
+
+/** Egyptian Spoken Arabic (مصرى) */
+$specialPageAliases['arz'] = array(
+	'UnconnectedPages' => array( 'صفحات_مش_متوصله', 'من_غير_وصله', 'من_غير_وصلات_موقع' ),
+);
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'UnconnectedPages' => array( 'Nicht_verbundene_Seiten' ),
@@ -79,5 +89,10 @@ $specialPageAliases['vi'] = array(
 
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = array(
-	'UnconnectedPages' => array( '未连接页面' ),
+	'UnconnectedPages' => array( '未连接页面', '无连接页面', '无站点连接' ),
+);
+
+/** Traditional Chinese (中文（繁體）‎) */
+$specialPageAliases['zh-hant'] = array(
+	'UnconnectedPages' => array( '無連接頁面', '失去連接', '失去站點連接' ),
 );

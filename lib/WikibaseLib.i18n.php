@@ -1773,6 +1773,13 @@ $messages['hu'] = array(
 	'datatypes-type-commonsMedia' => 'Commons médiafájl',
 );
 
+/** Armenian (Հայերեն)
+ * @author Xelgen
+ */
+$messages['hy'] = array(
+	'datatypes-type-commonsMedia' => 'Տեսաձայնային նիշք Վիքիպահեստում',
+);
+
 /** Interlingua (interlingua)
  * @author McDutchie
  */
@@ -3045,11 +3052,14 @@ $messages['pt'] = array(
 	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'propriedade',
 	'wikibase-entity-query' => 'consulta',
-	'wikibase-deletedentity-item' => 'Elemento eliminado',
+	'wikibase-deletedentity-item' => 'Item eliminado',
 	'wikibase-deletedentity-property' => 'Propriedade eliminada',
 	'wikibase-deletedentity-query' => 'Consulta eliminada',
 	'wikibase-diffview-reference' => 'referência',
 	'wikibase-diffview-rank' => 'posição',
+	'wikibase-diffview-rank-preferred' => 'Classificação preferencial',
+	'wikibase-diffview-rank-normal' => 'Classificação normal',
+	'wikibase-diffview-rank-deprecated' => 'Classificação obsoleta',
 	'wikibase-diffview-qualifier' => 'qualificador',
 	'wikibase-diffview-label' => 'etiqueta',
 	'wikibase-diffview-alias' => 'Nomes alternativos',
@@ -3072,6 +3082,7 @@ $messages['pt'] = array(
 	'wikibase-error-ui-session-failure' => 'A sua sessão expirou. Entre novamente na sua conta.',
 	'wikibase-error-ui-edit-conflict' => 'Conflito de edição. Por favor, recarregue a página e guarde novamente os dados.',
 	'wikibase-quantitydetails-unit' => 'Unidade',
+	'wikibase-replicationnote' => 'Por favor, saiba que pode levar vários minutos até que as mudanças são visíveis em todos as wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Páginas na Wikipédia com ligação a este item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Sítio',
