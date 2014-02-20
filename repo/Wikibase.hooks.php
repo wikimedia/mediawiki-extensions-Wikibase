@@ -1079,17 +1079,23 @@ final class RepoHooks {
 
 		if ( $placeholders ) {
 			$injector = new TextInjector( $placeholders );
-
+			$userLanguageLookup = new UserLanguageLookup( $out->getUser() );
 			$expander = new EntityViewPlaceholderExpander(
 				$out->getTitle(),
 				$out->getUser(),
 				$out->getLanguage(),
 				WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 				WikibaseRepo::getDefaultInstance()->getEntityLookup(),
-				new UserLanguageLookup( $out->getUser() )
+				$userLanguageLookup
 			);
 
 			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
+
+			// Depending code can't rely on the variable to be defined anyway
+			if ( $userLanguageLookup->hasSpecifiedAlternativeLanguages() ) {
+				$out->addJsConfigVars( 'wbUserLanguages',
+					$userLanguageLookup->getUserSpecifiedLanguages() );
+			}
 		}
 
 		return true;
