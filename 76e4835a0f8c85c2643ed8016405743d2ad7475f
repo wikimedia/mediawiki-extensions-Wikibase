@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_fc15909d",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-20T15:31:47Z",
+      "side": 1,
+      "message": "more like termFields",
+      "revId": "76e4835a0f8c85c2643ed8016405743d2ad7475f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7c2180f5",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-20T15:31:47Z",
+      "side": 1,
+      "message": "$this? Why are you passing in $this_ then?",
+      "revId": "76e4835a0f8c85c2643ed8016405743d2ad7475f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
