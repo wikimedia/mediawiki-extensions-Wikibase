@@ -18,28 +18,76 @@ use User;
 class UserLanguageLookup {
 
 	/**
+	 * @var User
+	 */
+	private $user;
+
+	/**
+	 * Local caching since calling the Babel extension may be expensive
+	 *
+	 * @var string[]|null
+	 */
+	private $userLanguages;
+
+	/**
+	 * @param User $user the current user
+	 */
+	public function __construct( User $user ) {
+		$this->setUser( $user );
+	}
+
+	/**
+	 * @return User the current user
+	 */
+	public function getUser() {
+		return $this->user;
+	}
+
+	/**
+	 * @param User $user the current user
+	 */
+	public function setUser( User $user ) {
+		$this->user = $user;
+	}
+
+	/**
+	 * @return string[] List of language codes in the users Babel box
+	 */
+	public function getUserLanguages() {
+		// Lazy initialisation
+		if ( $this->userLanguages === null ) {
+			// if the Babel extension is installed, grab the languages from the user's babel box
+			if ( class_exists( 'Babel' ) && !$this->user->isAnon() ) {
+				$this->userLanguages = \Babel::getUserLanguages( $this->user );
+			}
+			else {
+				$this->userLanguages = array();
+			}
+		}
+		return $this->userLanguages;
+	}
+
+	/**
 	 * Returns the languages desired by the user, in order of preference.
 	 *
-	 * @param User $user
 	 * @param array $skip a list of language codes to skip.
 	 *
 	 * @return string[] a list of language codes
 	 */
-	public function getUserLanguages( User $user, $skip = array() ) {
+	public function getExtraUserLanguages( $skip = array() ) {
 		wfProfileIn( __METHOD__ );
 
 		$languages = array();
 
 		// start with the user's UI language
-		$userLanguage = $user->getOption( 'language' );
-
+		$userLanguage = $this->user->getOption( 'language' );
 		if ( $userLanguage !== null ) {
 			$languages[] = $userLanguage;
 		}
 
-		// if the Babel extension is installed, grab the languages from the user's babel box
-		if ( class_exists( 'Babel' ) && ( !$user->isAnon() ) ) {
-			$languages = array_merge( $languages, \Babel::getUserLanguages( $user ) );
+		$userLanguages = $this->getUserLanguages();
+		if ( !empty( $userLanguages ) ) {
+			$languages = array_merge( $languages, $userLanguages );
 		}
 
 		$languages = array_diff( $languages, $skip );
