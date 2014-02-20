@@ -132,7 +132,11 @@ class EntityPerPageTable implements EntityPerPage {
 		$conditions = array(
 			'term_entity_type IS NULL'
 		);
-		$joinConditions = 'term_entity_id = epp_entity_id AND term_entity_type = epp_entity_type AND term_type = ' . $dbr->addQuotes( $termType );
+
+		$termEntityIdField = Settings::get( 'useNumericIdsInTermsTable' ) ? 'term_entity_id' : 'term_full_entity_id';
+
+		$joinConditions = $termEntityIdField .
+			' = epp_entity_id AND term_entity_type = epp_entity_type AND term_type = ' . $dbr->addQuotes( $termType );
 
 		if ( $language !== null ) {
 			$joinConditions .= ' AND term_language = ' . $dbr->addQuotes( $language );

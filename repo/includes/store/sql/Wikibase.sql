@@ -34,7 +34,7 @@ CREATE INDEX /*i*/wb_ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 -- NOTE: keep the Wikimedia specific terms.wmf.sql in sync with this!
 CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
   term_row_id                BIGINT unsigned     NOT NULL PRIMARY KEY AUTO_INCREMENT, -- row ID
-  term_entity_id             VARBINARY(255)      NOT NULL, -- Id of the entity
+  term_full_entity_id        VARBINARY(255)      NOT NULL, -- Id of the entity
   term_entity_type           VARBINARY(32)       NOT NULL, -- Type of the entity
   term_language              VARBINARY(32)       NOT NULL, -- Language code
   term_type                  VARBINARY(32)       NOT NULL, -- Term type
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
 -- live analysis of queries on wikidata.org in January 2014.
 -- NOTE: keep these in sync with UpdateTermIndexes.sql
 
--- Some wb_terms queries use term_entity_id=N which is good selectivity.
-CREATE INDEX /*i*/term_entity ON /*_*/wb_terms (term_entity_id);
+-- Some wb_terms queries use term_full_entity_id=N which is good selectivity.
+CREATE INDEX /*i*/term_entity ON /*_*/wb_terms (term_full_entity_id);
 
 -- When any wb_terms query includes a search on term_text greater than
 -- four or five leading characters a simple index on term_text and
@@ -61,7 +61,7 @@ CREATE INDEX /*i*/term_text ON /*_*/wb_terms (term_text, term_language);
 CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_language);
 
 -- This index has good selectivity while still allowing ICP for short string values.
-CREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language, term_entity_id, term_type, term_search_key(16));
+CREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language, term_full_entity_id, term_type, term_search_key(16));
 
 
 -- Links id+type to page ids.

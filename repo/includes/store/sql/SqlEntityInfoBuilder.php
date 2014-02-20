@@ -47,6 +47,9 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	protected $idParser;
 
+	private $useNumericIdsInTermsTable;
+	private $termEntityIdField;
+
 	/**
 	 * @param DataModel\Entity\EntityIdParser $idParser
 	 * @param string|bool $wiki The wiki's database to connect to.
@@ -68,6 +71,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		$this->entityPerPageTable = 'wb_entity_per_page';
 
 		$this->useNumericIdsInTermsTable = Settings::get( 'useNumericIdsInTermsTable' );
+		$this->termEntityIdField = $this->useNumericIdsInTermsTable ? 'term_entity_id' : 'term_full_entity_id';
 	}
 
 	/**
@@ -195,7 +199,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		wfProfileIn( __METHOD__ );
 
 		$where = array(
-			'term_entity_id' => $entityIds,
+			$this->termEntityIdField => $entityIds,
 		);
 
 		if ( $this->useNumericIdsInTermsTable ) {
@@ -214,7 +218,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 
 		$res = $dbw->select(
 			$this->termTable,
-			array( 'term_entity_type', 'term_entity_id', 'term_type', 'term_language', 'term_text' ),
+			array( 'term_entity_type', $this->termEntityIdField, 'term_type', 'term_language', 'term_text' ),
 			$where,
 			__METHOD__
 		);
@@ -238,12 +242,13 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function injectTerms( $dbResult, array &$entityInfo ) {
 		foreach ( $dbResult as $row ) {
+			$rowArray = (array)$row;
 			if ( $this->useNumericIdsInTermsTable ) {
 				// this is deprecated, but I don't see an alternative.
-				$entityId = new EntityId( $row->term_entity_type, (int)$row->term_entity_id );
+				$entityId = new EntityId( $row->term_entity_type, (int)$rowArray[$this->termEntityIdField] );
 				$key = $entityId->getSerialization();
 			} else {
-				$key = $row->term_entity_id;
+				$key = $rowArray[$this->termEntityIdField];
 			}
 
 			if ( !isset( $entityInfo[$key] ) ) {
