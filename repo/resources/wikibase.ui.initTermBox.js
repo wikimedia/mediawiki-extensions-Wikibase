@@ -12,17 +12,19 @@
 	mw.hook( 'wikibase.domready' ).add( function() {
 		var termsValueTools = [],
 			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
-			ulsIsDefined = mw.uls !== undefined && $.uls !== undefined && $.uls.data !== undefined;
+			userLanguages = mw.config.get( 'wbUserLanguages' ),
+			isUlsDefined = mw.uls !== undefined && $.uls !== undefined && $.uls.data !== undefined;
 
-		if( $termBoxRows.length === 0 && ulsIsDefined ) {
-			// No term box present; Ask ULS to provide languages and generate plain HTML:
+		// Skip if having no extra languages is what the user wants
+		if( !$termBoxRows.length && !userLanguages && isUlsDefined ) {
+			// No term box present; Ask ULS to provide languages and generate plain HTML
 			var languageCodes = mw.uls.getFrequentLanguageList(),
 				title = new mw.Title(
 					mw.config.get( 'wgTitle' ),
 					mw.config.get( 'wgNamespaceNumber' )
 				);
 
-			if( languageCodes.length === 0 ) {
+			if( !languageCodes.length ) {
 				return;
 			}
 
@@ -43,7 +45,7 @@
 
 			toolbar.addElement( $editGroup );
 
-			// TODO: EditableLabel should not assume that this is set:
+			// TODO: EditableLabel should not assume that this is set
 			toolbar.$editGroup = $editGroup;
 
 			termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
@@ -51,7 +53,7 @@
 
 		$( wb )
 		.on( 'startItemPageEditMode', function( event, origin, options ) {
-			// disable language terms table's editable value or mark it as the active one if it is
+			// Disable language terms table's editable value or mark it as the active one if it is
 			// the one being edited by the user and therefore the origin of the event
 			$.each( termsValueTools, function( i, termValueTool ) {
 				if(
@@ -81,13 +83,13 @@
 			$toc = $( '#toc' ),
 			$precedingNode;
 
-		if( $toc.length > 0 ) {
+		if( $toc.length ) {
 			$toc
 			.children( 'ul' ).prepend(
-				$( '<li/>' )
+				$( '<li>' )
 				.addClass( 'toclevel-1' )
 				.append(
-					$( '<a/>' )
+					$( '<a>' )
 					.attr( 'href', '#wb-terms' )
 					.text( mw.msg( 'wikibase-terms' ) )
 				)
@@ -120,12 +122,11 @@
 		}
 		var labels = entity.getLabels(),
 			descriptions = entity.getDescriptions(),
-			rowNumber = 0,
-			$tbody = $( '<tbody/>' );
+			$tbody = $( '<tbody>' );
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
 			var languageCode = languageCodes[i],
-				alternatingClass = ( rowNumber++ % 2 ) ? 'even' : 'uneven',
+				alternatingClass = i % 2 ? 'even' : 'uneven',
 				url = title.getUrl();
 
 			$tbody.append( mw.template( 'wb-term',
