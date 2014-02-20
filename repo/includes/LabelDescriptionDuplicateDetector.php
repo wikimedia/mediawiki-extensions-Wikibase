@@ -93,11 +93,17 @@ class LabelDescriptionDuplicateDetector {
 			if ( ( $labelsDiff === null && $descriptionDiff === null )
 				|| $this->languageAffectedByDiff( $label->getLanguage(), $labelsDiff, $descriptionDiff ) ) {
 
+				// TODO: Shouldn't this be a method in Term?
+				$numericId = $label->getEntityIdInt();
+				$id = $numericId !== null
+					? new EntityId( $label->getEntityType(), $numericId )
+					: null;
+
 				$status->fatal(
 					'wikibase-error-label-not-unique-item',
 					$label->getText(),
 					$label->getLanguage(),
-					$label->getEntityId(),
+					$id !== null ? $id : '',
 					$description->getText()
 				);
 			}

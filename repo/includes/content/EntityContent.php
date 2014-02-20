@@ -718,14 +718,17 @@ abstract class EntityContent extends AbstractContent {
 		 * @var Term $foundLabel
 		 */
 		foreach ( $foundLabels as $foundLabel ) {
-			if ( $foundLabel->getEntityId() !== $entity->getId()->getNumericId() ) {
+			// TODO: Shouldn't this be a method in Term?
+			$id = new EntityId( $foundLabel->getEntityType(), $foundLabel->getEntityIdInt() );
+
+			if ( !$id->equals( $entity->getId() ) ) {
 				// Messages: wikibase-error-label-not-unique-wikibase-property,
 				// wikibase-error-label-not-unique-wikibase-query
 				$status->fatal(
 					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
 					$foundLabel->getText(),
 					$foundLabel->getLanguage(),
-					$foundLabel->getEntityId()
+					$id
 				);
 			}
 		}

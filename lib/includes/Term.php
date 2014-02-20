@@ -56,7 +56,7 @@ class Term {
 					$this->setLanguage( $value );
 					break;
 				case 'entityId':
-					$this->setEntityId( $value );
+					$this->setEntityIdInt( $value );
 					break;
 				case 'entityType':
 					$this->setEntityType( $value );
@@ -169,12 +169,13 @@ class Term {
 
 	/**
 	 * @since 0.2
+	 * @deprecated 24.feb.2014
 	 *
 	 * @param integer $id
 	 *
 	 * @throws MWException
 	 */
-	public function setEntityId( $id ) {
+	public function setEntityIdInt( $id ) {
 		if ( !is_int( $id ) ) {
 			throw new MWException( 'Entity id code can only be an integer' );
 		}
@@ -184,11 +185,20 @@ class Term {
 
 	/**
 	 * @since 0.2
+	 * @deprecated 24.feb.2014
 	 *
 	 * @return integer|null
 	 */
-	public function getEntityId() {
+	public function getEntityIdInt() {
 		return array_key_exists( 'entityId', $this->fields ) ? $this->fields['entityId'] : null;
+	}
+
+	/**
+	 * @since 0.5
+	 * @return EntityId
+	 */
+	public function getEntityId() {
+		return new EntityId( $this->getEntityType(), $this->getEntityIdInt() );
 	}
 
 	/**
