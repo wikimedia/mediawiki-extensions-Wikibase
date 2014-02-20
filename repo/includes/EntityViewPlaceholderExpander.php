@@ -68,8 +68,7 @@ class EntityViewPlaceholderExpander {
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
-	 *
-	 * @param Lib\EntityIdParser $idParser
+	 * @param EntityIdParser $idParser
 	 * @param EntityLookup $entityLookup
 	 * @param UserLanguageLookup|null $userLanguageLookup
 	 */
@@ -105,7 +104,7 @@ class EntityViewPlaceholderExpander {
 			} else {
 				// ignore current interface language
 				$skip = array( $this->uiLanguage->getCode() );
-				$this->extraLanguages = $this->userLanguageLookup->getUserLanguages( $this->user, $skip );
+				$this->extraLanguages = $this->userLanguageLookup->getExtraUserLanguages( $skip );
 			}
 		}
 

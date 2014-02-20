@@ -22,13 +22,13 @@ class UserLanguagesTest extends \PHPUnit_Framework_TestCase {
 		$user->setName( 'UserLanguagesTest-TestUser' );
 		$user->setOption( 'language', 'de' );
 
-		$userLanguages = new UserLanguageLookup();
+		$userLanguages = new UserLanguageLookup( $user );
 
 		//TODO: we really want to test grabbing languages from the Babel extension,
 		//      but how can we test that?
 
-		$this->assertContains( 'de', $userLanguages->getUserLanguages( $user ) );
-		$this->assertNotContains( 'de', $userLanguages->getUserLanguages( $user, array( 'de' ) ) );
+		$this->assertContains( 'de', $userLanguages->getExtraUserLanguages() );
+		$this->assertNotContains( 'de', $userLanguages->getExtraUserLanguages( array( 'de' ) ) );
 	}
 
 }
