@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use User;
 use Wikibase\UserLanguageLookup;
 
@@ -13,22 +14,77 @@ use Wikibase\UserLanguageLookup;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class UserLanguagesTest extends \PHPUnit_Framework_TestCase {
 
-	public function testGetUserLanguages() {
+	/**
+	 * @param string $subject
+	 *
+	 * @return string[]
+	 */
+	private function split( $subject ) {
+		return empty( $subject ) ? array() : explode( '|', $subject );
+	}
+
+	/**
+	 * TODO: We really want to test grabbing languages from the Babel extension,
+	 * but how can we test that?
+	 *
+	 * @dataProvider provider
+	 *
+	 * @param string $usersLanguage
+	 * @param string $babelLanguages
+	 * @param string $allExpected
+	 * @param string $expectedWithoutDe
+	 * @param string $expectedWithoutEn
+	 */
+	public function testGetUserLanguages( $usersLanguage, $babelLanguages, $allExpected,
+		$expectedWithoutDe, $expectedWithoutEn ) {
+		$babelLanguages    = $this->split( $babelLanguages );
+		$allExpected       = $this->split( $allExpected );
+		$expectedWithoutDe = $this->split( $expectedWithoutDe );
+		$expectedWithoutEn = $this->split( $expectedWithoutEn );
+		$hasSpecified      = !empty( $babelLanguages );
+
+		$message = $usersLanguage . ' width {{#babel:' . implode( '|', $babelLanguages ) .
+			'}} in assert #';
 
 		$user = new User();
+		// Required to not be anonymous
+		$user->setId( 1 );
 		$user->setName( 'UserLanguagesTest-TestUser' );
-		$user->setOption( 'language', 'de' );
+		$user->setOption( 'language', $usersLanguage );
+		// Not a real option, just to manipulate the double class
+		$user->setOption( 'babelLanguages', $babelLanguages );
+		$userLanguageLookup = new UserLanguageLookupDouble( $user );
 
-		$userLanguages = new UserLanguageLookup();
+		$this->assertEquals( $allExpected, array_values(
+			$userLanguageLookup->getAllUserLanguages( $user ) ), $message . '1' );
+		$this->assertEquals( $expectedWithoutDe, array_values(
+			$userLanguageLookup->getExtraUserLanguages( $user, array( 'de' ) ) ), $message . '2' );
+		$this->assertEquals( $expectedWithoutEn, array_values(
+			$userLanguageLookup->getExtraUserLanguages( $user, array( 'en' ) ) ), $message . '3' );
+		$this->assertEquals( $hasSpecified,
+			$userLanguageLookup->hasSpecifiedAlternativeLanguages( $user ), $message . '4' );
+		$this->assertEquals( $babelLanguages,
+			$userLanguageLookup->getUserSpecifiedLanguages( $user ), $message . '5' );
+	}
 
-		//TODO: we really want to test grabbing languages from the Babel extension,
-		//      but how can we test that?
-
-		$this->assertContains( 'de', $userLanguages->getUserLanguages( $user ) );
-		$this->assertNotContains( 'de', $userLanguages->getUserLanguages( $user, array( 'de' ) ) );
+	public function provider() {
+		return array(
+			// 1. Language from the users settings
+			// 2. List of languages from the users babel box
+			// 3. Expected collection of all languages
+			// 4. Expected extra languages excluding de
+			// 5. Expected extra languages excluding en
+			array( 'de', '',         'de',       '',      'de'    ),
+			array( 'de', 'en',       'de|en',    'en',    'de'    ),
+			array( 'de', 'de|en|fr', 'de|en|fr', 'en|fr', 'de|fr' ),
+			array( 'en', '',         'en',       'en',    ''      ),
+			array( 'en', 'en',       'en',       'en',    ''      ),
+			array( 'en', 'de|en|fr', 'en|de|fr', 'en|fr', 'de|fr' )
+		);
 	}
 
 }
