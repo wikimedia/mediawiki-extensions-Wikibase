@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Language;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
@@ -51,7 +52,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			->getMock();
 
 		$userLanguages->expects( $this->any() )
-			->method( 'getUserLanguages' )
+			->method( 'getExtraUserLanguages' )
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
 		return new EntityViewPlaceholderExpander(
@@ -92,7 +93,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
 		$html = $expander->renderTermBoxTocEntry( new ItemId( 'Q23' ) );
-
+		$this->assertNotNull( $html );
 		$this->assertRegExp( '/#wb-terms/', $html );
 	}
 

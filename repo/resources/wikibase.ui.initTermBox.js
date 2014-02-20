@@ -12,9 +12,11 @@
 	mw.hook( 'wikibase.domready' ).add( function() {
 		var termsValueTools = [],
 			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
+			userLanguages = mw.config.get( 'wbUserLanguages' ),
 			ulsIsDefined = mw.uls !== undefined && $.uls !== undefined && $.uls.data !== undefined;
 
-		if( $termBoxRows.length === 0 && ulsIsDefined ) {
+		// Skip if having no extra languages is what the user wants
+		if( !$termBoxRows.length && !userLanguages && ulsIsDefined ) {
 			// No term box present; Ask ULS to provide languages and generate plain HTML:
 			var languageCodes = mw.uls.getFrequentLanguageList(),
 				title = new mw.Title(
