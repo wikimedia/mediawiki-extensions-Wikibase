@@ -185,8 +185,8 @@ class MockTermCache implements \Wikibase\TermCombinationMatchFinder {
 		foreach ( $terms as $termPair ) {
 			$matchingTerms = array();
 
-			$id = null;
 			$type = null;
+			$numericId = null;
 
 			foreach ( $termPair as $term ) {
 				foreach ( $this->terms as $storedTerm ) {
@@ -194,12 +194,12 @@ class MockTermCache implements \Wikibase\TermCombinationMatchFinder {
 						&& $term->getLanguage() === $storedTerm->getLanguage()
 						&& $term->getType() === $storedTerm->getType() ) {
 
-						if ( $id === null ) {
-							$id = $term->getEntityId();
+						if ( $numericId === null ) {
 							$type = $term->getEntityType();
+							$numericId = $term->getNumericId();
 							$matchingTerms[] = $term;
 						}
-						elseif ( $id === $term->getEntityId() && $type === $term->getEntityType() ) {
+						elseif ( $type === $term->getEntityType() && $numericId === $term->getNumericId() ) {
 							$matchingTerms[] = $term;
 						}
 					}

@@ -132,9 +132,8 @@ class SearchEntities extends ApiBase {
 		$entries = array();
 
 		foreach ( $ids as $id ) {
-			// FIXME: Change this to the actual ID if the Term class stops returning integers.
-			$numericId = $id->getNumericId();
-			$entries[ $numericId ] = array(
+			$key = $id->getSerialization();
+			$entries[ $key ] = array(
 				'id' => $id->getPrefixedId(),
 				'url' => $entityContentFactory->getTitleForId( $id )->getFullUrl()
 			);
@@ -146,13 +145,12 @@ class SearchEntities extends ApiBase {
 		$aliasPattern = '/^' . preg_quote( $params['search'], '/' ) . '/i';
 
 		foreach ( $terms as $term ) {
-			// FIXME: Change this to the actual ID if the Term class stops returning integers.
-			$numericId = $term->getEntityId();
-			if ( !isset( $entries[ $numericId ] ) ) {
+			$key = $term->getEntityId()->getSerialization();
+			if ( !isset( $entries[$key] ) ) {
 				continue;
 			}
 
-			$entry = $entries[$numericId];
+			$entry = $entries[$key];
 
 			switch ( $term->getType() ) {
 				case Term::TYPE_LABEL:
@@ -173,7 +171,7 @@ class SearchEntities extends ApiBase {
 					break;
 			}
 
-			$entries[$numericId] = $entry;
+			$entries[$key] = $entry;
 		}
 
 		$entries = array_values( $entries );

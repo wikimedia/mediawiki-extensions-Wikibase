@@ -181,7 +181,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		 * @var Term $expected
 		 */
 		foreach ( $actual as $term ) {
-			$id = $term->getEntityId();
+			$id = $term->getNumericId();
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
@@ -262,7 +262,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		 * @var Term $expected
 		 */
 		foreach ( $actual as $term ) {
-			$id = $term->getEntityId();
+			$id = $term->getNumericId();
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
@@ -470,7 +470,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		 * @var Term $expected
 		 */
 		foreach ( $actual as $term ) {
-			$id = $term->getEntityId();
+			$id = $term->getNumericId();
 
 			$this->assertEquals( $id0, $id );
 
