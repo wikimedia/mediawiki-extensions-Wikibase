@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_5cd5a446",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-20T14:15:24Z",
+      "side": 1,
+      "message": "this switch could be split into its own method to increase readability and reduce the indenting here. Something such as getEntryFromTerm thus it could be reduced to\n$entries[$numericId] \u003d $this-\u003egetEntryFromTerm( $term )\n\nOther than that this generally looks good. The only other way to improve this further would be to refactor Term-\u003egetEntityId to actually return an entity id..",
+      "revId": "566cbf69a365b9c9d7954e0fb57e57b7df163b11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
