@@ -8,7 +8,7 @@
 
 class NonExistingItemPage
   include PageObject
-  page_url WIKIDATA_REPO_URL + ITEM_NAMESPACE + ITEM_ID_PREFIX + "xy"
+  page_url ENV["WIKIDATA_REPO_URL"] + ENV["ITEM_NAMESPACE"] + ENV["ITEM_ID_PREFIX"] + "xy"
 
   span(:first_heading, :xpath => "//h1[@id='firstHeading']/span")
   link(:special_log_link, :css => "div#mw-content-text > div > p > span > a:nth-child(1)")

@@ -10,29 +10,17 @@
 
 module URL
   def self.client_url(name)
-    if ENV["WIKIDATA_CLIENT_URL"]
-      url = ENV["WIKIDATA_CLIENT_URL"]
-    else
-      url = WIKIDATA_CLIENT_URL
-    end
+    url = ENV["WIKIDATA_CLIENT_URL"]
     "#{url}#{name}"
   end
 
   def self.repo_url(name)
-    if ENV["WIKIDATA_REPO_URL"]
-      url = ENV["WIKIDATA_REPO_URL"]
-    else
-      url = WIKIDATA_REPO_URL
-    end
+    url = ENV["WIKIDATA_REPO_URL"]
     "#{url}#{name}"
   end
 
   def self.repo_api()
-    if ENV["WIKIDATA_REPO_URL"]
-      url = ENV["WIKIDATA_REPO_API"]
-    else
-      url = WIKIDATA_REPO_API
-    end
+    url = ENV["WIKIDATA_REPO_API"]
     "#{url}"
   end
 end
