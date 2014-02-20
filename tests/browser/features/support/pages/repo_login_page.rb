@@ -9,6 +9,6 @@
 class RepoLoginPage < LoginPage
   include PageObject
 
-  page_url "#{WIKIDATA_REPO_URL}Special:UserLogin"
+  page_url URL.repo_url("Special:UserLogin")
 
 end

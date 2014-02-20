@@ -40,7 +40,7 @@ module WikibaseAPI
       check_wb_api_success(resp)
 
       id = resp["entity"]["id"]
-      url = URL.repo_url(ITEM_NAMESPACE + id + "?setlang=" + LANGUAGE_CODE)
+      url = URL.repo_url(ENV["ITEM_NAMESPACE"] + id + "?setlang=" + ENV["LANGUAGE_CODE"])
       entity_data = ActiveSupport::JSON.decode(data)
 
       {"id" => id, "url" => url, "label" => entity_data["labels"]["en"]["value"],
