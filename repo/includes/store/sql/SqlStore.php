@@ -302,8 +302,7 @@ class SqlStore implements Store {
 		//       253 is "varchar".
 		$entityIdTypes = array( 'text', 'varchar', 253 );
 
-		if ( !Settings::get( 'useNumericIdsInTermsTable' )
-			&& !$this->checkFieldType( $db, 'wb_terms', 'term_entity_id', $entityIdTypes ) ) {
+		if ( !Settings::get( 'useNumericIdsInTermsTable' ) ) {
 
 			// Drop current indexes, so they don't get in the way when converting.
 			// NOTE: redundant, but only until we can actually check the field type above.
@@ -315,12 +314,19 @@ class SqlStore implements Store {
 
 			// make term_entity_id a VARCHAR and populate it with prefixed IDs
 			// (recorded in updatelog, so it's only done once)
-			$updater->modifyExtensionField(
+			$updater->addExtensionField(
 				'wb_terms',
-				'term_entity_id',
+				'term_full_entity_id',
 				$this->getUpdateScriptPath( 'MigrateTermEntityId', $db->getType() )
 			);
 
+			if ( $db->getType() === 'mysql' ) {
+				$updater->dropExtensionField(
+					'wb_terms',
+					'term_entity_id',
+					$this->getUpdateScriptPath( 'DropObsoleteEntityidFieldInTermsTable', $db->getType() )
+				);
+			}
 			// indexes get re-created below
 		}
 
