@@ -17,7 +17,9 @@ require "require_all"
 
 config = YAML.load_file("config/config.yml")
 config.each do |k, v|
-  eval("#{k} = '#{v}'")
+  if !ENV["#{k}"]
+    ENV["#{k}"] = "#{v}"
+  end
 end
 
 require_all "features/support/modules"
