@@ -142,7 +142,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		foreach ( $terms as $term ) {
 			$label = $term->getText();
-			$id = PropertyId::newFromNumber( $term->getEntityId() );
+			$id = PropertyId::newFromNumber( $term->getNumericId() );
 
 			$propertiesByLabel[$label] = $id;
 		}
