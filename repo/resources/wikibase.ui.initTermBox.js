@@ -125,7 +125,8 @@
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
 			var languageCode = languageCodes[i],
-				alternatingClass = ( rowNumber++ % 2 ) ? 'even' : 'uneven';
+				alternatingClass = ( rowNumber++ % 2 ) ? 'even' : 'uneven',
+				url = title.getUrl();
 
 			$tbody.append( mw.template( 'wb-term',
 				languageCode,
@@ -137,7 +138,11 @@
 				'',
 				'',
 				'',
-				title.getUrl() + '?setlang=' + languageCode
+				// FIXME: Change this to
+				// title.getUrl( { setlang: languageCode } )
+				// when Wikibase minimum MediaWiki version is 1.23.
+				url + ( url.indexOf( '?' ) !== -1 ? '&' : '?' )
+					+ $.param( { setlang: languageCode } )
 			) );
 		}
 
