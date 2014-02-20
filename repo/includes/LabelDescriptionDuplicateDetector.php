@@ -97,7 +97,7 @@ class LabelDescriptionDuplicateDetector {
 					'wikibase-error-label-not-unique-item',
 					$label->getText(),
 					$label->getLanguage(),
-					$label->getEntityId(),
+					$label->getNumericId(),
 					$description->getText()
 				);
 			}

@@ -195,11 +195,11 @@ class MockTermCache implements \Wikibase\TermCombinationMatchFinder {
 						&& $term->getType() === $storedTerm->getType() ) {
 
 						if ( $id === null ) {
-							$id = $term->getEntityId();
+							$id = $term->getNumericId();
 							$type = $term->getEntityType();
 							$matchingTerms[] = $term;
 						}
-						elseif ( $id === $term->getEntityId() && $type === $term->getEntityType() ) {
+						elseif ( $id === $term->getNumericId() && $type === $term->getEntityType() ) {
 							$matchingTerms[] = $term;
 						}
 					}
