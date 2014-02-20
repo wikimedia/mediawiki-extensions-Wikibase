@@ -65,8 +65,8 @@ class MockTermCache implements \Wikibase\TermCombinationMatchFinder {
 		foreach ( $terms as $termPair ) {
 			$matchingTerms = array();
 
+			/** @var EntityId $id */
 			$id = null;
-			$type = null;
 
 			foreach ( $termPair as $term ) {
 				foreach ( $this->terms as $storedTerm ) {
@@ -76,10 +76,9 @@ class MockTermCache implements \Wikibase\TermCombinationMatchFinder {
 
 						if ( $id === null ) {
 							$id = $term->getEntityId();
-							$type = $term->getEntityType();
 							$matchingTerms[] = $term;
 						}
-						elseif ( $id === $term->getEntityId() && $type === $term->getEntityType() ) {
+						elseif ( $id->equals( $term->getEntityId() ) ) {
 							$matchingTerms[] = $term;
 						}
 					}

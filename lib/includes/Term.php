@@ -56,7 +56,7 @@ class Term {
 					$this->setLanguage( $value );
 					break;
 				case 'entityId':
-					$this->setEntityId( $value );
+					$this->setNumericId( $value );
 					break;
 				case 'entityType':
 					$this->setEntityType( $value );
@@ -74,16 +74,16 @@ class Term {
 	/**
 	 * @since 0.2
 	 *
-	 * @param string $type
+	 * @param string $termType
 	 *
 	 * @throws MWException
 	 */
-	public function setType( $type ) {
-		if ( !in_array( $type, array( self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ), true ) ) {
+	public function setType( $termType ) {
+		if ( !in_array( $termType, array( self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ), true ) ) {
 			throw new MWException( 'Invalid term type provided' );
 		}
 
-		$this->fields['termType'] = $type;
+		$this->fields['termType'] = $termType;
 	}
 
 	/**
@@ -146,16 +146,16 @@ class Term {
 	/**
 	 * @since 0.2
 	 *
-	 * @param string $type
+	 * @param string $entityType
 	 *
 	 * @throws MWException
 	 */
-	public function setEntityType( $type ) {
-		if ( !is_string( $type ) ) {
+	public function setEntityType( $entityType ) {
+		if ( !is_string( $entityType ) ) {
 			throw new MWException( 'Entity type code can only be a string' );
 		}
 
-		$this->fields['entityType'] = $type;
+		$this->fields['entityType'] = $entityType;
 	}
 
 	/**
@@ -169,14 +169,15 @@ class Term {
 
 	/**
 	 * @since 0.2
+	 * @deprecated Please avoid using this.
 	 *
-	 * @param integer $id
+	 * @param int $id
 	 *
 	 * @throws MWException
 	 */
-	public function setEntityId( $id ) {
+	public function setNumericId( $id ) {
 		if ( !is_int( $id ) ) {
-			throw new MWException( 'Entity id code can only be an integer' );
+			throw new MWException( 'Numeric ID can only be an integer' );
 		}
 
 		$this->fields['entityId'] = $id;
@@ -184,11 +185,14 @@ class Term {
 
 	/**
 	 * @since 0.2
-	 *
-	 * @return integer|null
+	 * @return EntityId|null
 	 */
 	public function getEntityId() {
-		return array_key_exists( 'entityId', $this->fields ) ? $this->fields['entityId'] : null;
+		$entityType = $this->getEntityType();
+		$numericId = array_key_exists( 'entityId', $this->fields ) ? $this->fields['entityId'] : null;
+		return $entityType !== null && $numericId !== null
+			? new EntityId( $entityType, $numericId )
+			: null;
 	}
 
 	/**
@@ -249,4 +253,5 @@ class Term {
 
 		return 0;
 	}
+
 }
