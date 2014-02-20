@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\Settings;
-use Wikibase\TermIndex;
-use Wikibase\Item;
 use Wikibase\Term;
+use Wikibase\TermIndex;
 
 /**
  * Base class for tests for calsses implementing Wikibase\TermIndex.
@@ -136,14 +136,14 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$item0 = Item::newEmpty();
 		$item0->setId( new ItemId( 'Q10' ) );
-		$id0 = $item0->getId()->getNumericId();
+		$id0 = $item0->getId()->getSerialization();
 
 		$item0->setLabel( 'en', 'getmatchingterms-0' );
 		$lookup->saveTermsOfEntity( $item0 );
 
 		$item1 = Item::newEmpty();
 		$item1->setId( new ItemId( 'Q11' )  );
-		$id1 = $item1->getId()->getNumericId();
+		$id1 = $item1->getId()->getSerialization();
 
 		$item1->setLabel( 'nl', 'getmatchingterms-1' );
 		$item1->setLabel( 'de', 'GeTMAtchingterms-2' );
@@ -172,7 +172,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		 * @var Term $expected
 		 */
 		foreach ( $actual as $term ) {
-			$id = $term->getEntityId();
+			$id = $term->getEntityId()->getSerialization();
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
@@ -194,13 +194,13 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item0 = Item::newEmpty();
 		$item0->setLabel( 'en', 'prefix' );
 		$item0->setId( new ItemId( 'Q10' ) );
-		$id0 = $item0->getId()->getNumericId();
+		$id0 = $item0->getId()->getSerialization();
 		$lookup->saveTermsOfEntity( $item0 );
 
 		$item1 = Item::newEmpty();
 		$item1->setLabel( 'nl', 'postfix' );
 		$item1->setId( new ItemId( 'Q11' ) );
-		$id1 = $item1->getId()->getNumericId();
+		$id1 = $item1->getId()->getSerialization();
 		$lookup->saveTermsOfEntity( $item1 );
 
 		/** @var Term[] $terms */
@@ -248,7 +248,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		 * @var Term $expected
 		 */
 		foreach ( $actual as $term ) {
-			$id = $term->getEntityId();
+			$id = $term->getEntityId()->getSerialization();
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
@@ -429,7 +429,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item0->setDescription( 'de', 'joinedterms-d0' );
 
 		$item0->setId( new ItemId( 'Q10' ) );
-		$id0 = $item0->getId()->getNumericId();
+		$id0 = $item0->getId()->getSerialization();
 		$lookup->saveTermsOfEntity( $item0 );
 
 		$terms = array(
@@ -455,7 +455,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		 * @var Term $expected
 		 */
 		foreach ( $actual as $term ) {
-			$id = $term->getEntityId();
+			$id = $term->getEntityId()->getSerialization();
 
 			$this->assertEquals( $id0, $id );
 
