@@ -41,6 +41,7 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 		$useNumericIdsInTermsTable = Settings::get( 'useNumericIdsInTermsTable' );
 		$p = $useNumericIdsInTermsTable ? '' : 'P';
 		$q = $useNumericIdsInTermsTable ? '' : 'Q';
+		$entityIdField = $useNumericIdsInTermsTable ? 'term_entity_id' : 'term_full_entity_id';
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';
@@ -48,7 +49,7 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 		$this->insertRows(
 			'wb_terms',
-			array( 'term_entity_type', 'term_entity_id', 'term_type', 'term_language', 'term_text', 'term_search_key' ),
+			array( 'term_entity_type', $entityIdField, 'term_type', 'term_language', 'term_text', 'term_search_key' ),
 			array(
 				array( Item::ENTITY_TYPE, $q . 1, 'label', 'en', 'label:Q1/en', '-/-' ),
 				array( Item::ENTITY_TYPE, $q . 1, 'label', 'de', 'label:Q1/de', '-/-' ),
