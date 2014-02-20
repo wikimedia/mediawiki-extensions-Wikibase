@@ -108,8 +108,8 @@
 				value: wb.entity
 			} ).appendTo( $claimsParent );
 
-			// add 'wb-claim' id to entity page's Claims heading:
-			$( '.wb-claimlist' )
+			// This is here to be sure there is never a duplicate id
+			$( '.wb-claimgrouplistview' )
 				.prev( '.wb-section-heading' )
 				.first()
 				.attr( 'id', 'claims' );
