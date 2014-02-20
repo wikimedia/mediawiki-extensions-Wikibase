@@ -12298,6 +12298,9 @@ $messages['mr'] = array(
 	'wikibase-setaliases-submit' => 'पर्याय टाका',
 	'wikibase-setsitelink-badges' => 'बिल्ले:',
 	'wikibase-modifyterm-language' => 'भाषा:',
+	'special-mergeitems' => 'दोन बाबी एकत्रित करा',
+	'wikibase-mergeitems-intro' => 'जर आपण दोन बाबी एकत्र करीत असाल तर, सर्व लेबल, वर्णने, पर्याय, संकेतस्थळ दुवे व निवेदने एका बाबीवरून दुसऱ्यास स्थानांतरीत होतील.',
+	'wikibase-mergeitems-submit' => 'बाबी एकत्रित करा',
 	'wikibase-dispatchstats-change-timestamp' => 'वेळशिक्का',
 	'wikibase-entitieswithoutlabel-label-language' => 'भाषा:',
 	'wikibase-entitieswithoutlabel-label-type' => 'प्रकार:',
@@ -16037,6 +16040,34 @@ $messages['ru'] = array(
 	'wikibase-time-precision-10annum' => 'в $1 десятилети{{PLURAL:$1|е|й|я}}',
 );
 
+/** Scots (Scots)
+ * @author John Reid
+ */
+$messages['sco'] = array(
+	'wikibase-wikibaserepopage-not-itemid' => '"$1" isna ae valid item id.',
+	'wikibase-setlabel-submit' => 'Set the label',
+	'wikibase-setdescription-submit' => 'Set descreeption',
+	'wikibase-setaliases-submit' => 'Set aliases',
+	'wikibase-setsitelink-not-badge' => 'The item $1 isna ae badge.',
+	'special-mergeitems' => 'Merge twa eitems',
+	'wikibase-mergeitems-intro' => 'Gif ye merge twa eitems, aw labels, descreeptions, aliases, sitelinks an statements will be muived fae yin eitem til the ither.',
+	'wikibase-mergeitems-fromid' => 'The id tae merge fae',
+	'wikibase-mergeitems-toid' => 'The id tae merge til',
+	'wikibase-mergeitems-submit' => 'Merge eitems',
+	'wikibase-item-summary-wblinktitles-create' => 'Creatit this item fer tae connect pages',
+	'wikibase-item-summary-wblinktitles-connect' => 'Added ae leid link fer tae connect pages',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal data fer ae geographical poseetion gi\'en as ae latitude-longitude pair in gms or decimal degrees fer the gi\'en stellar bodie. Defaults til "Earth" an than "WGS84". It adds ae resolution an range.
+* latitude – impleecit first pairt (float, dms, dm, dd) o the coordinate string, direction is either gi\'en bi ae prefixed sign or bi postfixed N/S
+* longitude – impleecit seicont pairt (float, dms, dm, dd) o the coordinate string, direction is either gi\'en bi ae prefixed sign or bi postfixed E/W
+* globe – expleecit (?) data value, gi\'en as stellar body that defaults til "Earth" and then "WGS84"',
+	'wikibase-time-precision-Gannum' => 'in $1 billion year',
+	'wikibase-time-precision-Mannum' => 'in $1 million year',
+	'wikibase-time-precision-annum' => 'in $1 year',
+	'wikibase-time-precision-millennium' => '$1. millennium',
+	'wikibase-time-precision-century' => '$1. yearhunner',
+	'wikibase-time-precision-10annum' => '$1s',
+);
+
 /** Serbo-Croatian (srpskohrvatski / српскохрватски)
  * @author Kolega2357
  * @author OC Ripper
@@ -17204,6 +17235,7 @@ $messages['ta'] = array(
 );
 
 /** Telugu (తెలుగు)
+ * @author Ravichandra
  * @author Veeven
  */
 $messages['te'] = array(
@@ -17225,9 +17257,14 @@ $messages['te'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'భాష:',
 	'wikibase-itemdisambiguation-submit' => 'వెతుకు',
 	'wikibase-newentity-description' => 'వివరణ:',
+	'wikibase-setlabel-submit' => 'చీటీ అతికించు',
 	'wikibase-setdescription-label' => 'వివరణ:',
+	'wikibase-setdescription-submit' => 'వివరణను ఇవ్వండి',
 	'wikibase-setaliases-label' => 'మారుపేర్లు:',
+	'wikibase-setaliases-submit' => 'మారుపేర్లు ఇవ్వండి',
 	'wikibase-modifyterm-language' => 'భాష',
+	'special-mergeitems' => 'రెండు అంశాలను కలుపు',
+	'wikibase-mergeitems-submit' => 'అంశాలను కలుపు',
 	'wikibase-entitieswithoutlabel-label-language' => 'భాష:',
 	'wikibase-entitieswithoutlabel-label-type' => 'రకం:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'అన్నీ',
