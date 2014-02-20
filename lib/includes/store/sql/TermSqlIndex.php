@@ -46,13 +46,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		'term_type' => 'termType',
 		'term_language' => 'termLanguage',
 		'term_text' => 'termText',
-		'term_entity_id' => 'entityId',
 	);
+
+	private $entityIdField;
 
 	/**
 	 * Constructor.
 	 *
-	 * @since    0.4
+	 * @since 0.4
 	 *
 	 * @param StringNormalizer $stringNormalizer
 	 * @param string|bool      $wikiDb
@@ -61,6 +62,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		parent::__construct( $wikiDb );
 		$this->stringNormalizer = $stringNormalizer;
 		$this->tableName = 'wb_terms';
+
+		$this->entityIdField = $this->useNumericIds() ? 'term_entity_id' : 'term_full_entity_id';
+		$this->termFieldMap[$this->entityIdField] = 'entityId';
 	}
 
 	/**
@@ -131,12 +135,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	protected function getEntityIdFields( EntityId $entityId ) {
 		if ( $this->useNumericIds() ) {
 			$entityIdFields = array(
-				'term_entity_id' => $entityId->getNumericId(),
+				$this->entityIdField => $entityId->getNumericId(),
 				'term_entity_type' => $entityId->getEntityType()
 			);
 		} else {
 			$entityIdFields = array(
-				'term_entity_id' => $entityId->getSerialization(),
+				$this->entityIdField => $entityId->getSerialization(),
 			);
 		}
 
@@ -157,12 +161,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		if ( $this->useNumericIds() ) {
 			$termFields = array(
-				'term_entity_id' => $entityId->getNumericId(),
+				$this->entityIdField => $entityId->getNumericId(),
 				'term_entity_type' => $entityId->getEntityType()
 			);
 		} else {
 			$termFields = array(
-				'term_entity_id' => $entityId->getSerialization(),
+				$this->entityIdField => $entityId->getSerialization(),
 				'term_entity_type' => $entityId->getEntityType()
 			);
 		}
@@ -284,7 +288,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
-		$uniqueKeyFields = array( 'term_entity_id', 'term_language', 'term_type', 'term_text' );
+		$uniqueKeyFields = array( $this->entityIdField, 'term_language', 'term_type', 'term_text' );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": deleting terms for " . $entity->getId()->getPrefixedId() );
 
@@ -457,13 +461,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 			// hackish: we shouldn't need to know which field to use.
 			$idFields = $this->getEntityIdFields( $id );
-			$entityIds[] = $idFields['term_entity_id'];
+			$entityIds[] = $idFields[$this->entityIdField];
 		}
 
-		$entityIdentifiers['term_entity_id'] = $entityIds;
+		$entityIdentifiers[$this->entityIdField] = $entityIds;
 
 		$fields = array(
-			'term_entity_id',
+			$this->entityIdField,
 			'term_entity_type',
 			'term_language',
 			'term_type',
@@ -546,7 +550,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$result = $dbr->selectRow(
 			$this->tableName,
 			array(
-				'term_entity_id',
+				$this->entityIdField,
 			),
 			$conditions,
 			__METHOD__
@@ -610,14 +614,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			$joinConds['terms1'] = array(
 				'LEFT OUTER JOIN',
 				array(
-					'terms0.term_entity_id=terms1.term_entity_id',
+					'terms0.' . $this->entityIdField . '=terms1.' . $this->entityIdField,
 				)
 			);
 		}
 
 		$entities = $db->select(
 			$tables,
-			array( 'terms0.term_entity_id', 'terms0.term_entity_type' ),
+			array( 'terms0.' . $this->entityIdField, 'terms0.term_entity_type' ),
 			$conds,
 			__METHOD__,
 			array( 'DISTINCT' ),
@@ -718,7 +722,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$dbr = $this->getReadDb();
 
-		$selectionFields = array( 'term_entity_id' );
+		$selectionFields = array( $this->entityIdField );
 
 		$hasWeight = $this->supportsWeight();
 
@@ -749,8 +753,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		if ( $hasWeight ) {
 			$weights = array();
 			foreach ( $obtainedIDs as $obtainedID ) {
-				$id = $obtainedID->term_entity_id;
-				$weights[$id] = floatval( $obtainedID->term_weight );
+				$obtainedID = (array)$obtainedID;
+				$id = $obtainedID[$this->entityIdField];
+				$weights[$id] = floatval( $obtainedID['term_weight'] );
 			}
 
 			// this is a post-search sorting by weight. This allows us to not require an additional
@@ -767,7 +772,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		} else {
 			$ids = array();
 			foreach ( $obtainedIDs as $obtainedID ) {
-				$ids[] = $obtainedID->term_entity_id;
+				$obtainedID = (array)$obtainedID;
+				$ids[] = $obtainedID[$this->entityIdField];
 			}
 		}
 
@@ -1016,7 +1022,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 				$joinConds[$tableName] = array(
 					'INNER JOIN',
 					array(
-						'terms0.term_entity_id=' . $tableName . '.term_entity_id'
+						'terms0.' . $this->entityIdField . '=' . $tableName . '.' . $this->entityIdField
 					)
 				);
 			}
