@@ -32,7 +32,7 @@ class SnakDeserializer implements Deserializer {
 
 	/**
 	 * @param Deserializer $dataValueDeserializer
-	 * @param Deserializer $entityIdParser
+	 * @param Deserializer $entityIdDeserializer
 	 */
 	public function __construct( Deserializer $dataValueDeserializer, Deserializer $entityIdDeserializer ) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
