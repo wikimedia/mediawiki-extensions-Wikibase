@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use HashBagOStuff;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyLabelResolver;
@@ -133,8 +133,8 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 					'Zwei'
 				),
 				array(  // expected
-					'Eins' => new PropertyId( 'P1' ),
-					'Zwei' => new PropertyId( 'P2' ),
+					'Eins' => EntityId::newFromPrefixedId( 'P1' ),
+					'Zwei' => EntityId::newFromPrefixedId( 'P2' ),
 				)
 			),
 			array( // #2
@@ -145,7 +145,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 					'Vier'
 				),
 				array(  // expected
-					'Drei' => new PropertyId( 'P3' ),
+					'Drei' => EntityId::newFromPrefixedId( 'P3' ),
 				)
 			),
 			array( // #3
@@ -167,7 +167,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 					'Four'
 				),
 				array(  // expected
-					'One' => new PropertyId( 'P1' ),
+					'One' => EntityId::newFromPrefixedId( 'P1' ),
 				)
 			),
 		);
