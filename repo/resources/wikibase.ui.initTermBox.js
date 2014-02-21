@@ -50,7 +50,7 @@
 		} );
 
 		$( wb )
-		.on( 'startItemPageEditMode', function( event, origin, options ) {
+		.on( 'startItemPageEditMode', function( event, origin ) {
 			// disable language terms table's editable value or mark it as the active one if it is
 			// the one being edited by the user and therefore the origin of the event
 			$.each( termsValueTools, function( i, termValueTool ) {
@@ -64,7 +64,7 @@
 				}
 			} );
 		} )
-		.on( 'stopItemPageEditMode', function( event ) {
+		.on( 'stopItemPageEditMode', function( event, origin ) {
 			$( 'table.wb-terms' ).removeClass( 'wb-edit' );
 			$.each( termsValueTools, function( i, termValueTool ) {
 				termValueTool.enable();
