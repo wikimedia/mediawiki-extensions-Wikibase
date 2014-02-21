@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_3ab41133",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-21T17:48:00Z",
+      "side": 1,
+      "message": "Can we please implement this in Terms.php right away..?",
+      "range": {
+        "startLine": 187,
+        "startChar": 18,
+        "endLine": 187,
+        "endChar": 50
+      },
+      "revId": "72c404df68356adb1500d323c2826c091ef8ad1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
