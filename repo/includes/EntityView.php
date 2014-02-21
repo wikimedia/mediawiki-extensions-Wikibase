@@ -611,14 +611,15 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		if ( $entity->getId() ) {
-			$id = $this->getFormattedIdForEntity( $entity );
+			$subpage = $this->getFormattedIdForEntity( $entity );
 		} else {
-			$id = ''; // can't skip this, that would confuse the order of parameters!
+			$subpage = ''; // can't skip this, that would confuse the order of parameters!
 		}
 
-		return $specialpage->getPageTitle()->getLocalURL()
-				. '/' . wfUrlencode( $id )
-				. ( $lang === null ? '' : '/' . wfUrlencode( $lang->getCode() ) );
+		if ( $lang !== null ) {
+			$subpage .= '/' . $lang->getCode();
+		}
+		return $specialpage->getPageTitle( $subpage )->getLocalURL();
 	}
 
 	/**
