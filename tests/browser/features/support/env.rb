@@ -82,6 +82,7 @@ def local_browser(language)
 	  timeout = ENV["BROWSER_TIMEOUT"].to_i
 	  client.timeout = timeout
     profile["dom.max_script_run_time"] = timeout
+    profile["dom.max_chrome_script_run_time"] = timeout
 	end
 
   if language == "default"
