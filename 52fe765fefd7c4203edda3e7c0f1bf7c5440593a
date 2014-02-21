@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_d7050618",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-21T17:24:22Z",
+      "side": 1,
+      "message": "I think newFromFile() is not what\u0027s needed here. It tries to parse namespaces and interwiki prefixes. But the value is not allowed to have any prefixes, isn\u0027t it? I think makeTitle() is needed, possibly makeTitleSafe().",
+      "revId": "52fe765fefd7c4203edda3e7c0f1bf7c5440593a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d72e26a0",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-21T17:24:22Z",
+      "side": 1,
+      "message": "The hard coded \u0027File:\u0027 namespace feels like it doesn\u0027t belong here. Why not go ahead and use Title::makeTitle( NS_FILE, $fileName )?",
+      "revId": "52fe765fefd7c4203edda3e7c0f1bf7c5440593a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
