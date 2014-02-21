@@ -25,9 +25,29 @@ class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				new StringValue( 'example.jpg' ),
+				new StringValue( 'example.jpg' ), // Lower-case file name
 				$options,
-				'@<a .*href="//commons.wikimedia.org/wiki/File:example.jpg".*>.*example.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*Example.jpg.*</a>@'
+			),
+			array(
+				new StringValue( 'Example.jpg' ),
+				$options,
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*Example.jpg.*</a>@'
+			),
+			array(
+				new StringValue( 'Example space.jpg' ),
+				$options,
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_space.jpg".*>.*Example space.jpg.*</a>@'
+			),
+			array(
+				new StringValue( 'Example_underscore.jpg' ),
+				$options,
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_underscore.jpg".*>.*Example underscore.jpg.*</a>@'
+			),
+			array(
+				new StringValue( 'Example+plus.jpg' ),
+				$options,
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example%2Bplus.jpg".*>.*Example\+plus.jpg.*</a>@'
 			),
 		);
 	}
