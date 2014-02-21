@@ -18,7 +18,7 @@ use Wikibase\DataModel\Claim\Statement;
  * @covers Wikibase\DataModel\ByPropertyIdArray
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseDataModel
  * @group ByPropertyIdArrayTest
  *
  * @licence GNU GPL v2+

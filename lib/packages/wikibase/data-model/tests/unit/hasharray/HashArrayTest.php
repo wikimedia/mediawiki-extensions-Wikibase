@@ -10,7 +10,7 @@ use Wikibase\DataModel\HashArray;
  * @covers Wikibase\DataModel\HashArray
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseDataModel
  * @group HashArray
  *
  * @licence GNU GPL v2+

@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @covers Wikibase\DataModel\Entity\EntityDiff
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseDataModel
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

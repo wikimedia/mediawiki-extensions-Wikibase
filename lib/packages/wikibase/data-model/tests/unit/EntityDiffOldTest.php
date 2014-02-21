@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Property;
  * @covers Wikibase\DataModel\Entity\EntityDiff
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseDataModel
  * @group WikibaseDiff
  *
  * @licence GNU GPL v2+

@@ -8,7 +8,7 @@ use Wikibase\DataModel\HashableObjectStorage;
  * @covers Wikibase\DataModel\HashableObjectStorage
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseDataModel
  * @group HashableObjectStorageTest
  *
  * @licence GNU GPL v2+
