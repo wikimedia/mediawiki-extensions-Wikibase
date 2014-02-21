@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_9752de3d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-21T16:36:54Z",
+      "side": 1,
+      "message": "This actually encoded everything twice. I think that was the sole reason to move that stuff into a parameter, to not care about the encoding any more. ;-)",
+      "revId": "bde26ceb1d67079a971ed7480e991d2c28905c90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
