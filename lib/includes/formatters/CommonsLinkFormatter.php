@@ -5,6 +5,7 @@ namespace Wikibase\Lib;
 use DataValues\StringValue;
 use Html;
 use InvalidArgumentException;
+use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -49,9 +50,12 @@ class CommonsLinkFormatter implements ValueFormatter {
 		}
 
 		$fileName = $value->getValue();
+		$title = Title::newFromText( $fileName );
 
-		$attributes = array_merge( $this->attributes, array( 'href' => '//commons.wikimedia.org/wiki/' . wfUrlencode( 'File:' . $fileName ) ) );
-		$html = Html::element( 'a', $attributes, $fileName );
+		$attributes = array_merge( $this->attributes, array(
+			'href' => '//commons.wikimedia.org/wiki/' . 'File:' . $title->getPartialURL()
+		) );
+		$html = Html::element( 'a', $attributes, $title->getText() );
 
 		return $html;
 	}
