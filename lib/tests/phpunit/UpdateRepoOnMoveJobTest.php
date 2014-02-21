@@ -65,9 +65,6 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$this->assertEquals( $moveData['user'], $params['user'] );
 	}
 
-	/**
-	 * @group WikibaseRepoTest
-	 */
 	public function testGetSummary() {
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( 'Wikibase\Summary is only available on repo' );

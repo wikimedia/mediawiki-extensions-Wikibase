@@ -15,7 +15,7 @@ use Wikibase\SqlEntityInfoBuilder;
  * @since 0.4
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseStore
  * @group WikibasePropertyInfo
  * @group Database
@@ -32,10 +32,6 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 	public function setUp() {
 		parent::setUp();
-
-		if ( !defined( 'WB_VERSION' ) ) {
-			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local wb_terms and wb_property_info tables." );
-		}
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';

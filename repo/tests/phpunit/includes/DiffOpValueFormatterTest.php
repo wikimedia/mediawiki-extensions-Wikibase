@@ -8,7 +8,7 @@ use Wikibase\DiffOpValueFormatter;
  * @covers Wikibase\DiffOpValueFormatter
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseClaim
  *
  * @licence GNU GPL v2+
