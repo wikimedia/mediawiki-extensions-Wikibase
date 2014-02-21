@@ -616,9 +616,8 @@ abstract class EntityView extends \ContextSource {
 			$id = ''; // can't skip this, that would confuse the order of parameters!
 		}
 
-		return $specialpage->getPageTitle()->getLocalURL()
-				. '/' . wfUrlencode( $id )
-				. ( $lang === null ? '' : '/' . wfUrlencode( $lang->getCode() ) );
+		$subpage = wfUrlencode( $id ) . ( $lang === null ? '' : '/' . wfUrlencode( $lang->getCode() ) );
+		return $specialpage->getPageTitle( $subpage )->getLocalURL();
 	}
 
 	/**
