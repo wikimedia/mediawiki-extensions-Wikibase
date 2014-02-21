@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Legoktm <legoktm.wikipedia@gmail.com>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 21 Feb 2014 23:12:47 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/114893
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
