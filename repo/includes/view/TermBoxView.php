@@ -94,7 +94,7 @@ class TermBoxView {
 				$this->sectionEditLinkGenerator->getHtmlForEditSection( $editDescriptionLink, $this->msg( 'wikibase-edit' ), 'span', $editable ),
 				$label !== false ? '' : 'wb-value-empty',
 				$description !== false ? '' : 'wb-value-empty',
-				$title->getLocalURL() . '?setlang=' . $language
+				$title->getLocalURL( array( 'setlang' => $language ) )
 			);
 		}
 
