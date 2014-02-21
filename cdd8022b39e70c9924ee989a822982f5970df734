@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_f7ffe2a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-02-21T13:23:10Z",
+      "side": 1,
+      "message": "-\u003etable of content\n\nalso the commit msg is a bit confusing: it should be more like: \"Anchor id for the claims-section used by the TOC was missing\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "cdd8022b39e70c9924ee989a822982f5970df734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
