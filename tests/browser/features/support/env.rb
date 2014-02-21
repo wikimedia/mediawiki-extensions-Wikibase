@@ -44,6 +44,7 @@ def sauce_browser(test_name, language)
     profile = Selenium::WebDriver::Firefox::Profile.new
     if timeout
       profile["dom.max_script_run_time"] = timeout
+      profile["dom.max_chrome_script_run_time"] = timeout
     end
     profile['intl.accept_languages'] = language
     caps = Selenium::WebDriver::Remote::Capabilities.firefox(:firefox_profile => profile)
@@ -82,6 +83,7 @@ def local_browser(language)
 	  timeout = ENV["BROWSER_TIMEOUT"].to_i
 	  client.timeout = timeout
     profile["dom.max_script_run_time"] = timeout
+    profile["dom.max_chrome_script_run_time"] = timeout
 	end
 
   if language == "default"
