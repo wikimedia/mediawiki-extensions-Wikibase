@@ -19,7 +19,7 @@ use Wikibase\DataModel\Claim\Statement;
 class ClaimDeserializer implements Deserializer {
 
 	private $rankIds = array(
-		'depreciated' => Statement::RANK_DEPRECATED,
+		'deprecated' => Statement::RANK_DEPRECATED,
 		'normal' => Statement::RANK_NORMAL,
 		'preferred' => Statement::RANK_PREFERRED
 	);
@@ -39,10 +39,6 @@ class ClaimDeserializer implements Deserializer {
 	 */
 	private $referencesDeserializer;
 
-	/**
-	 * @param Deserializer $snakDeserializer
-	 * @param Deserializer $snaksDeserializer
-	 */
 	public function __construct( Deserializer $snakDeserializer, Deserializer $snaksDeserializer, Deserializer $referencesDeserializer ) {
 		$this->snakDeserializer = $snakDeserializer;
 		$this->snaksDeserializer = $snaksDeserializer;
@@ -99,7 +95,7 @@ class ClaimDeserializer implements Deserializer {
 		return $claim;
 	}
 
-	public function setGuidFromSerialization( array &$serialization, Claim $claim ) {
+	private function setGuidFromSerialization( array &$serialization, Claim $claim ) {
 		if ( !array_key_exists( 'id', $serialization ) ) {
 			return;
 		}
@@ -111,7 +107,7 @@ class ClaimDeserializer implements Deserializer {
 		$claim->setGuid( $serialization['id'] );
 	}
 
-	public function setQualifiersFromSerialization( array &$serialization, Claim $claim ) {
+	private function setQualifiersFromSerialization( array &$serialization, Claim $claim ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return;
 		}
@@ -119,7 +115,7 @@ class ClaimDeserializer implements Deserializer {
 		$claim->setQualifiers( $this->snaksDeserializer->deserialize( $serialization['qualifiers'] ) );
 	}
 
-	public function setRankFromSerialization( array &$serialization, Statement $statement ) {
+	private function setRankFromSerialization( array &$serialization, Statement $statement ) {
 		if ( !array_key_exists( 'rank', $serialization ) ) {
 			return;
 		}
@@ -131,7 +127,7 @@ class ClaimDeserializer implements Deserializer {
 		$statement->setRank( $this->rankIds[$serialization['rank']] );
 	}
 
-	public function setReferencesFromSerialization( array &$serialization, Statement $statement ) {
+	private function setReferencesFromSerialization( array &$serialization, Statement $statement ) {
 		if ( !array_key_exists( 'references', $serialization ) ) {
 			return;
 		}

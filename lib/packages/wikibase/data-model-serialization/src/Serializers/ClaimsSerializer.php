@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Serializers;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 
 /**
@@ -60,6 +61,9 @@ class ClaimsSerializer implements Serializer {
 	private function getSerialized( Claims $claims ) {
 		$serialization = array();
 
+		/**
+		 * @var Claim $claim
+		 */
 		foreach( $claims as $claim ) {
 			$serialization[$claim->getMainSnak()->getPropertyId()->getPrefixedId()][] = $this->claimSerializer->serialize( $claim );
 		}

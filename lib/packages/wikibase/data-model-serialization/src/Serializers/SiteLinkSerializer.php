@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Serializers;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -53,6 +54,11 @@ class SiteLinkSerializer implements Serializer {
 		);
 	}
 
+	/**
+	 * @param ItemId[] $badges
+	 *
+	 * @return string[]
+	 */
 	private function serializeBadges( array $badges ) {
 		$serialization = array();
 
