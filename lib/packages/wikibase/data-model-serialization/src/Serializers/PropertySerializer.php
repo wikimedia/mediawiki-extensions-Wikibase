@@ -2,12 +2,11 @@
 
 namespace Wikibase\DataModel\Serializers;
 
-use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Property;
 
 /**
- * @since 1.0
+ * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

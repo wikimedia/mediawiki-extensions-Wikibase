@@ -14,6 +14,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
+ * @since 0.1
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
@@ -32,7 +34,7 @@ class SnakDeserializer implements Deserializer {
 
 	/**
 	 * @param Deserializer $dataValueDeserializer
-	 * @param Deserializer $entityIdParser
+	 * @param Deserializer $entityIdDeserializer
 	 */
 	public function __construct( Deserializer $dataValueDeserializer, Deserializer $entityIdDeserializer ) {
 		$this->dataValueDeserializer = $dataValueDeserializer;

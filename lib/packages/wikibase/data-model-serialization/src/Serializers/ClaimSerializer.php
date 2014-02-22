@@ -9,7 +9,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 
 /**
- * @since 1.0
+ * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

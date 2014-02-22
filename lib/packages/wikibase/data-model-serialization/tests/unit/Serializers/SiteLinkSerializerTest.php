@@ -2,8 +2,6 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use DataValues\Serializers\DataValueSerializer;
-use DataValues\StringValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\SiteLink;

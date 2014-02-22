@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * @covers Wikibase\DataModel\Serializers\SnaksSerializer
- * @covers Wikibase\DataModel\Deserializers\SnaksDeserializer
+ * @covers Wikibase\DataModel\Deserializers\SnakListDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

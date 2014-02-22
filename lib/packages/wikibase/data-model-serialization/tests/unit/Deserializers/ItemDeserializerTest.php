@@ -3,9 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Deserializers\ItemDeserializer;
-use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**

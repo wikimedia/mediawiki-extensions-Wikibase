@@ -7,7 +7,7 @@ use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Reference;
 
 /**
- * @since 1.0
+ * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
