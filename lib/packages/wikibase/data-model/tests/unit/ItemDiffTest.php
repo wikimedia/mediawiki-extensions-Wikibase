@@ -15,9 +15,8 @@ use Wikibase\DataModel\Entity\ItemDiff;
  * @covers Wikibase\DataModel\Entity\ItemDiff
  *
  * @group Wikibase
- * @group WikibaseLib
- * @group WikibaseDiff
  * @group WikibaseDataModel
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
