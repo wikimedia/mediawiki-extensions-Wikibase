@@ -4,8 +4,6 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SiteLink;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\PropertyDeserializer

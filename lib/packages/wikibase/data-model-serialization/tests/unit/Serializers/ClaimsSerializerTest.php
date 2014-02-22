@@ -3,8 +3,8 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**

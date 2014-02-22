@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
-use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\Item;
 
 /**
