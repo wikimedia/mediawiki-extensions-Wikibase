@@ -75,4 +75,5 @@ Daniel Kinzler and Jeroen De Dauw.
 
 * [Wikibase DataModel on Packagist](https://packagist.org/packages/wikibase/data-model)
 * [Wikibase DataModel on Ohloh](https://www.ohloh.net/p/wikibasedatamodel/)
-* [TravisCI build status](https://travis-ci.org/wmde/WikibaseDataModel)
+* [Wikibase DataModel on TravisCI](https://travis-ci.org/wmde/WikibaseDataModel)
+* [Wikibase DataModel on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel)
