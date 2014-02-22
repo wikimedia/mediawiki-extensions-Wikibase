@@ -17,7 +17,7 @@ use Wikibase\DataModel\Claim\Statement;
 class ClaimSerializer implements Serializer {
 
 	private $rankLabels = array(
-		Statement::RANK_DEPRECATED => 'depreciated',
+		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
 		Statement::RANK_PREFERRED => 'preferred'
 	);

@@ -19,7 +19,7 @@ use Wikibase\DataModel\Claim\Statement;
 class ClaimDeserializer implements Deserializer {
 
 	private $rankIds = array(
-		'depreciated' => Statement::RANK_DEPRECATED,
+		'deprecated' => Statement::RANK_DEPRECATED,
 		'normal' => Statement::RANK_NORMAL,
 		'preferred' => Statement::RANK_PREFERRED
 	);
