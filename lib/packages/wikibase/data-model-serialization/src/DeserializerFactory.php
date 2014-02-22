@@ -3,9 +3,12 @@
 namespace Wikibase\DataModel;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchingDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
+use Wikibase\DataModel\Deserializers\ItemDeserializer;
+use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
@@ -40,6 +43,18 @@ class DeserializerFactory {
 	public function __construct( Deserializer $dataValueDeserializer, EntityIdParser $entityIdParser ) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->entityIdParser = $entityIdParser;
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize Entity objects.
+	 *
+	 * @return Deserializer
+	 */
+	public function newEntityDeserializer() {
+		return new DispatchingDeserializer( array(
+			new ItemDeserializer( $this->newEntityIdDeserializer(), $this->newClaimsDeserializer(), $this->newSiteLinkDeserializer() ),
+			new PropertyDeserializer( $this->newEntityIdDeserializer(), $this->newClaimsDeserializer() )
+		) );
 	}
 
 	/**
