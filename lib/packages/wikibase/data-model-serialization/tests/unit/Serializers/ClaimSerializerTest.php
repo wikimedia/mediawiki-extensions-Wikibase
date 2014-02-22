@@ -133,6 +133,20 @@ class ClaimSerializerTest extends SerializerBaseTest {
 		);
 
 		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setRank( Claim::RANK_DEPRECATED );
+		$serializations[] = array(
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'P42'
+				),
+				'type' => 'statement',
+				'rank' => 'deprecated'
+			),
+			$claim
+		);
+
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim->setQualifiers( new SnakList( array() ) );
 		$serializations[] = array(
 			array(

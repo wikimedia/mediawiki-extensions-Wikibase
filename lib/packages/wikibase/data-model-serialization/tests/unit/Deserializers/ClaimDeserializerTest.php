@@ -26,13 +26,6 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 					'property' => 'P42'
 			) ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
-		$snakDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array(
-					'snaktype' => 'novalue',
-					'property' => 'P42'
-			) ) )
-			->will( $this->returnValue( true ) );
 
 		$snaksDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$snaksDeserializerMock->expects( $this->any() )
@@ -48,17 +41,6 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			->will( $this->returnValue( new SnakList( array(
 				new PropertyNoValueSnak( 42 )
 			) ) ) );
-		$snaksDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array(
-				'P42' => array(
-					array(
-						'snaktype' => 'novalue',
-						'property' => 'P42'
-					)
-				)
-			) ) )
-			->will( $this->returnValue( true ) );
 
 
 		$referencesDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -66,10 +48,6 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			->method( 'deserialize' )
 			->with( $this->equalTo( array() ) )
 			->will( $this->returnValue( new ReferenceList() ) );
-		$referencesDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array() ) )
-			->will( $this->returnValue( true ) );
 
 		return new ClaimDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
 	}
@@ -171,6 +149,20 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setRank( Claim::RANK_DEPRECATED );
+		$serializations[] = array(
+			$claim,
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'P42'
+				),
+				'type' => 'statement',
+				'rank' => 'deprecated'
+			)
+		);
+
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim->setQualifiers( new SnakList( array() ) );
 		$serializations[] = array(
 			$claim,
@@ -224,5 +216,43 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 		);
 
 		return $serializations;
+	}
+
+	/**
+	 * @dataProvider invalidDeserializationProvider
+	 */
+	public function testInvalidSerialization( $serialization ) {
+		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
+		$this->buildDeserializer()->deserialize( $serialization );
+	}
+
+	public function invalidDeserializationProvider() {
+		return array(
+			array(
+				array(
+					'type' => 'claim'
+				)
+			),
+			array(
+				array(
+					'id' => 42,
+					'mainsnak' => array(
+						'snaktype' => 'novalue',
+						'property' => 'P42'
+					),
+					'type' => 'claim'
+				)
+			),
+			array(
+				array(
+					'mainsnak' => array(
+						'snaktype' => 'novalue',
+						'property' => 'P42'
+					),
+					'type' => 'statement',
+					'rank' => 'nyan-cat'
+				)
+			),
+		);
 	}
 }
