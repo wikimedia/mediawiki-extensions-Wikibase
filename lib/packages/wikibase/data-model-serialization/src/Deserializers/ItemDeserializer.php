@@ -45,9 +45,6 @@ class ItemDeserializer extends EntityDeserializer {
 		$this->assertAttributeIsArray( $serialization, 'sitelinks' );
 
 		foreach( $serialization['sitelinks'] as $sitelinkSerialization ) {
-			if ( !$this->siteLinkDeserializer->isDeserializerFor( $sitelinkSerialization ) ) {
-				throw new DeserializationException( "Invalid site link provided" );
-			}
 			$item->addSiteLink( $this->siteLinkDeserializer->deserialize( $sitelinkSerialization ) );
 		}
 	}
