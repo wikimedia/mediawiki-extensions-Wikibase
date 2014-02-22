@@ -82,8 +82,7 @@ class SiteLinkDeserializerTest extends DeserializerBaseTest {
 				new SiteLink( 'enwiki', 'Nyan Cat' ),
 				array(
 					'site' => 'enwiki',
-					'title' => 'Nyan Cat',
-					'badges' => array()
+					'title' => 'Nyan Cat'
 				)
 			),
 			array(
@@ -112,6 +111,18 @@ class SiteLinkDeserializerTest extends DeserializerBaseTest {
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
 			'badges' => array( 'P42' )
+		) );
+	}
+
+	public function testAssertBadgesIsArray() {
+		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
+
+		$this->setExpectedException( '\Deserializers\Exceptions\InvalidAttributeException' );
+		$deserializer->deserialize( array(
+			'site' => 'frwikisource',
+			'title' => 'Nyan Cat',
+			'badges' => 'Q42'
 		) );
 	}
 }
