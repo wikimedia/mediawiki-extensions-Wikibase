@@ -24,11 +24,13 @@ dependency on `wikibase/data-model-serialization` to your project's `composer.js
 Here is a minimal example of a `composer.json` file that just defines a dependency on
 version 1.0 of this package:
 
-    {
-        "require": {
-            "wikibase/data-model-serialization": "1.0.*"
-        }
-    }
+```json
+{
+	"require": {
+		"wikibase/data-model-serialization": "1.0.*"
+	}
+}
+```
 
 ### Manual
 
@@ -56,7 +58,7 @@ an instance of Serializers\Serializer.
 
 Construct an instance of the deserializer or serializer you need via the appropriate factory.
 
-```
+```php
 use Wikibase\DataModel\DeserializerFactory;
 
 $deserializerFactory = new DeserializerFactory( /* ... */ );
@@ -65,21 +67,20 @@ $entityDeserializer = $deserializerFactory->newEntityDeserializer();
 
 The use the deserialize or serialize method.
 
-```
+```php
 $entity = $entityDeserializer->deserialize( $myEntitySerialization );
 ```
 
 In case of deserialization, guarding against failures is good practice.
 So it is typically better to use the slightly more verbose try-catch approach.
 
-```
+```php
 try {
 	$entity = $entityDeserializer->deserialize( $myEntitySerialization );
 }
 catch ( DeserializationException $ex ) {
 	// Handling of the exception
 }
-
 ```
 
 ## Tests
