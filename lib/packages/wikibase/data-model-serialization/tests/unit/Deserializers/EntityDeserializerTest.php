@@ -100,6 +100,79 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
+
+		$entity = Item::newEmpty();
+		$entity->setLabels( array(
+			'en' => 'Nyan Cat',
+			'fr' => 'Nyan Cat'
+		) );
+		$provider[] = array(
+			$entity,
+			array(
+				'type' => 'item',
+				'labels' => array(
+					'en' => array(
+						'language' => 'en',
+						'value' => 'Nyan Cat'
+					),
+					'fr' => array(
+						'language' => 'fr',
+						'value' => 'Nyan Cat'
+					)
+				)
+			)
+		);
+
+		$entity = Item::newEmpty();
+		$entity->setDescriptions( array(
+			'en' => 'A Nyan Cat',
+			'fr' => 'A Nyan Cat'
+		) );
+		$provider[] = array(
+			$entity,
+			array(
+				'type' => 'item',
+				'descriptions' => array(
+					'en' => array(
+						'language' => 'en',
+						'value' => 'A Nyan Cat'
+					),
+					'fr' => array(
+						'language' => 'fr',
+						'value' => 'A Nyan Cat'
+					)
+				)
+			)
+		);
+
+		$entity = Item::newEmpty();
+		$entity->setAliases( 'en', array( 'Cat', 'My cat' ) );
+		$entity->setAliases( 'fr', array( 'Cat' ) );
+		$provider[] = array(
+			$entity,
+			array(
+				'type' => 'item',
+				'aliases' => array(
+					'en' => array(
+						array(
+							'language' => 'en',
+							'value' => 'Cat'
+						),
+						array(
+							'language' => 'en',
+							'value' => 'My cat'
+						)
+					),
+					'fr' => array(
+						array(
+							'language' => 'fr',
+							'value' => 'Cat'
+						)
+					)
+				)
+			)
+		);
+
 		$entity = Item::newEmpty();
 		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
