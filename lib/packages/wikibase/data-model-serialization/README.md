@@ -97,7 +97,7 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
-### 0.1 (dev)
+### 0.1 (2014-02-22)
 
 Initial release with these features:
 
