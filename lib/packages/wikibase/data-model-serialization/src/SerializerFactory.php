@@ -2,9 +2,12 @@
 
 namespace Wikibase\DataModel;
 
+use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
+use Wikibase\DataModel\Serializers\ItemSerializer;
+use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\ReferencesSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
@@ -31,6 +34,18 @@ class SerializerFactory {
 	 */
 	public function __construct( Serializer $dataValueSerializer ) {
 		$this->dataValueSerializer = $dataValueSerializer;
+	}
+
+	/**
+	 * Returns a Serializer that can serialize Entity objects.
+	 *
+	 * @return Serializer
+	 */
+	public function newEntitySerializer() {
+		return new DispatchingSerializer( array(
+			new ItemSerializer( $this->newClaimsSerializer(), $this->newSiteLinkSerializer() ),
+			new PropertySerializer( $this->newClaimsSerializer() ),
+		) );
 	}
 
 	/**

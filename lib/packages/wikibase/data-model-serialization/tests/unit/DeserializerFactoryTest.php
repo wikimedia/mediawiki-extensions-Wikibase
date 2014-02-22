@@ -16,6 +16,19 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new DeserializerFactory( new DataValueDeserializer(), new BasicEntityIdParser() );
 	}
 
+	public function testNewEntityDeserializer() {
+		$this->assertTrue( $this->buildDeserializerFactory()->newEntityDeserializer()->isDeserializerFor(
+			array(
+				'type' => 'item'
+			)
+		) );
+		$this->assertTrue( $this->buildDeserializerFactory()->newEntityDeserializer()->isDeserializerFor(
+			array(
+				'type' => 'property'
+			)
+		) );
+	}
+
 	public function testNewSiteLinkDeserializer() {
 		$this->assertTrue( $this->buildDeserializerFactory()->newSiteLinkDeserializer()->isDeserializerFor(
 			array(

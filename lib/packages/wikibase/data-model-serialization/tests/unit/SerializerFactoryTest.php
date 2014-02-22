@@ -5,6 +5,8 @@ namespace Tests\Wikibase\DataModel;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
@@ -20,6 +22,15 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function buildSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer() );
+	}
+
+	public function testNewEntitySerializer() {
+		$this->assertTrue( $this->buildSerializerFactory()->newEntitySerializer()->isSerializerFor(
+			Item::newEmpty()
+		) );
+		$this->assertTrue( $this->buildSerializerFactory()->newEntitySerializer()->isSerializerFor(
+			Property::newEmpty()
+		) );
 	}
 
 	public function testNewSiteLinkSerializer() {
