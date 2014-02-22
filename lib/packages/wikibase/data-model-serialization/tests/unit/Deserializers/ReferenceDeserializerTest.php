@@ -21,11 +21,6 @@ class ReferenceDeserializerTest extends DeserializerBaseTest {
 			->with( $this->equalTo( array() ) )
 			->will( $this->returnValue( new SnakList() ) );
 
-		$snaksDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array() ) )
-			->will( $this->returnValue( true ) );
-
 		return new ReferenceDeserializer( $snaksDeserializerMock );
 	}
 
