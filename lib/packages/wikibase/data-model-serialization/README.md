@@ -110,4 +110,9 @@ Initial release with these features:
 * [Wikibase DataModel Serialization on Packagist](https://packagist.org/packages/wikibase/data-model-serialization)
 * [Wikibase DataModel Serialization on TravisCI](https://travis-ci.org/wmde/WikibaseDataModelSerialization)
 * [Wikibase DataModel Serialization on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/)
+* [Wikibase DataModel Serialization on Ohloh](https://www.ohloh.net/p/WikibaseDataModelSerialization)
+
+## See also 
+
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
+* [Ask Serialization](https://github.com/wmde/AskSerialization)
