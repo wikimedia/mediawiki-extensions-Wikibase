@@ -319,8 +319,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidClaimProvider() {
-		$propertyContent = PropertyContent::newEmpty();
-		$invalidId = PropertyId::newFromNumber( $propertyContent->grabFreshId() );
+		$invalidId = new PropertyId( 'P347894353458984658' );
 
 		$snak = new PropertyValueSnak( $invalidId, new StringValue( 'abc') );
 		$snakHash = $snak->getHash();
