@@ -103,8 +103,10 @@ class ChangeHandler {
 			ItemUsageIndex $entityUsageIndex = null,
 			Site $localSite = null,
 			SiteList $sites = null) {
-
 		wfProfileIn( __METHOD__ );
+
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
 
 		if ( $sites === null ) {
 			$sites = Sites::singleton()->getSites();
@@ -117,16 +119,16 @@ class ChangeHandler {
 		}
 
 		if ( !$entityLookup ) {
-			$entityLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup();
+			$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		}
 
 		if ( !$entityUsageIndex ) {
-			$entityUsageIndex = WikibaseClient::getDefaultInstance()->getStore()->getItemUsageIndex();
+			$entityUsageIndex = $wikibaseClient->getStore()->getItemUsageIndex();
 		}
 
 		if ( !$localSite ) {
 			//XXX: DB lookup in a constructor, ugh
-			$siteGlobalId = Settings::get( 'siteGlobalID' );
+			$siteGlobalId = $settings->getSetting( 'siteGlobalID' );
 			$localSite = $this->sites->getSite( $siteGlobalId );
 
 			if ( $localSite === null ) {
@@ -143,15 +145,15 @@ class ChangeHandler {
 
 		// TODO: allow these to be passed in as parameters!
 		$this->setNamespaces(
-			Settings::get( 'namespaces' ),
-			Settings::get( 'excludeNamespaces' )
+			$settings->getSetting( 'namespaces' ),
+			$settings->getSetting( 'excludeNamespaces' )
 		);
 
-		$this->injectRC = Settings::get( 'injectRecentChanges' );
+		$this->injectRC = $settings->getSetting( 'injectRecentChanges' );
 
 		$this->mirrorUpdater = null;
 
-		$this->dataTransclusionAllowed = Settings::get( 'allowDataTransclusion' );
+		$this->dataTransclusionAllowed = $settings->getSetting( 'allowDataTransclusion' );
 		$this->actionMask = 0xFFFF; //TODO: use changeHanderActions setting
 
 		wfProfileOut( __METHOD__ );

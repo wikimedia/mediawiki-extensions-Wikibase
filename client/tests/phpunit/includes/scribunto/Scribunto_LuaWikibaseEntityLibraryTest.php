@@ -6,7 +6,7 @@ use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
 use Title;
 use Scribunto_LuaWikibaseEntityLibrary;
 use Scribunto;
-use Wikibase\Settings;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Scribunto_LuaWikibaseEntityLibrary
@@ -50,7 +50,9 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 	public function testGetGlobalSiteId() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$expected = array( Settings::get( 'siteGlobalID' ) );
+		$expected = array(
+			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
+		);
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
 	}
 

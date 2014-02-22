@@ -9,7 +9,7 @@ use MWException;
 use Title;
 use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
 use Wikibase\NamespaceChecker;
-use Wikibase\Settings;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * List client pages that is not connected to repository items.
@@ -162,10 +162,12 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 * @return \Wikibase\NamespaceChecker
 	 */
 	public function getNamespaceChecker() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
 		if ( $this->namespaceChecker === null ) {
 			$this->namespaceChecker = new NamespaceChecker(
-				Settings::get( 'excludeNamespaces' ),
-				Settings::get( 'namespaces' )
+				$settings->getSetting( 'excludeNamespaces' ),
+				$settings->getSetting( 'namespaces' )
 			);
 		}
 		return $this->namespaceChecker;

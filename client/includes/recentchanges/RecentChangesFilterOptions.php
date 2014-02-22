@@ -25,7 +25,8 @@ class RecentChangesFilterOptions {
 	 * @return bool
 	 */
 	protected function isDisabled() {
-		$rcSetting = Settings::get( 'showExternalRecentChanges' );
+		$rcSetting = WikibaseClient::getDefaultInstance()->getSettings()
+			->getSetting( 'showExternalRecentChanges' );
 
 		// sanity check for the setting
 		if ( !is_bool( $rcSetting ) ) {

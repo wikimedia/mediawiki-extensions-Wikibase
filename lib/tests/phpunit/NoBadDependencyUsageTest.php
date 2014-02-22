@@ -29,7 +29,7 @@ class NoBadDependencyUsageTest extends \PHPUnit_Framework_TestCase {
 	public function testNoSettingsUsageOutsideLib() {
 		// Increasing this allowance is forbidden
 		$this->assertStringNotInRepo( 'Settings::', 21 );
-		$this->assertStringNotInClient( 'Settings::', 16 );
+		$this->assertStringNotInClient( 'Settings::', 3 );
 	}
 
 	private function assertStringNotInLib( $string, $maxAllowance ) {

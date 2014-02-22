@@ -229,9 +229,10 @@ class PropertyParserFunction {
 	public static function render( Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
-		$siteId = Settings::get( 'siteGlobalID' );
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
 
-		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
 		$entityId = $siteLinkLookup->getEntityIdForSiteLink( //FIXME: method not in the interface
 			new SimpleSiteLink( $siteId, $parser->getTitle()->getFullText() )
 		);
@@ -241,8 +242,6 @@ class PropertyParserFunction {
 			wfProfileOut( __METHOD__ );
 			return '';
 		}
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();

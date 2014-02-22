@@ -63,7 +63,7 @@ class NamespaceChecker {
 
 	/**
 	 * Check if the namespace is excluded by settings for having wikibase links, etc.
-	 * based on Settings::get( 'excludeNamespaces' )
+	 * based on the 'excludeNamespaces' setting.
 	 *
 	 * @since 0.4
 	 *
@@ -76,7 +76,7 @@ class NamespaceChecker {
 	}
 
 	/**
-	 * Check if namespace is enabled for Wikibase, based on Settings::get( 'namespaces' ).
+	 * Check if namespace is enabled for Wikibase, based on the 'namespaces' setting.
 	 *
 	 * Note: If no list of enabled namespaces is configured, all namespaces are considered
 	 * to be enabled for Wikibase.

@@ -151,12 +151,13 @@ final class ClientHooks {
 	 */
 	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
 		Title &$newTitle ) {
-		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
-		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		$repoLinker = $wikibaseClient->newRepoLinker();
 
 		$movePageNotice = new MovePageNotice(
 			$siteLinkLookup,
-			Settings::get( 'siteGlobalID' ),
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
 			$repoLinker
 		);
 
@@ -182,7 +183,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
-		if ( $engine == 'lua' && Settings::get( 'allowDataTransclusion' ) === true ) {
+		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
+		if ( $engine == 'lua' && $allowDataTransclusion === true ) {
 			$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
 			$extraLibraries['mw.wikibase.entity'] = 'Scribunto_LuaWikibaseEntityLibrary';
 		}
@@ -239,7 +241,10 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		if ( $rc->getAttribute( 'rc_type' ) == RC_EXTERNAL ) {
-			$changeFactory = new ExternalChangeFactory( Settings::get( 'repoSiteId' ) );
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$changeFactory = new ExternalChangeFactory(
+				$wikibaseClient->getSettings()->getSetting( 'repoSiteId' )
+			);
 
 			try {
 				$externalChange = $changeFactory->newFromRecentChange( $rc );
@@ -255,7 +260,7 @@ final class ClientHooks {
 			$formatter = new ChangeLineFormatter(
 				$changesList->getUser(),
 				$changesList->getLanguage(),
-				WikibaseClient::getDefaultInstance()->newRepoLinker()
+				$wikibaseClient->newRepoLinker()
 			);
 
 			$flag = $changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' );
@@ -354,13 +359,16 @@ final class ClientHooks {
 			return true;
 		}
 
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
 		$langLinkHandler = new LangLinkHandler(
-			Settings::get( 'siteGlobalID' ),
-			Settings::get( 'namespaces' ),
-			Settings::get( 'excludeNamespaces' ),
-			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'namespaces' ),
+			$settings->getSetting( 'excludeNamespaces' ),
+			$wikibaseClient->getStore()->getSiteLinkTable(),
 			Sites::singleton(),
-			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
+			$wikibaseClient->getLangLinkSiteGroup()
 		);
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
@@ -376,12 +384,12 @@ final class ClientHooks {
 			wfWarn( 'Failed to add repo links: ' . $e->getMessage() );
 		}
 
-		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
+		if ( $useRepoLinks || $settings->getSetting( 'alwaysSort' ) ) {
 			// sort links
 			$interwikiSorter = new InterwikiSorter(
-				Settings::get( 'sort' ),
-				Settings::get( 'interwikiSortOrders' ),
-				Settings::get( 'sortPrepend' )
+				$settings->getSetting( 'sort' ),
+				$settings->getSetting( 'interwikiSortOrders' ),
+				$settings->getSetting( 'sortPrepend' )
 			);
 			$interwikiLinks = $parserOutput->getLanguageLinks();
 			$sortedLinks = $interwikiSorter->sortLinks( $interwikiLinks );
@@ -455,30 +463,34 @@ final class ClientHooks {
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		wfProfileIn( __METHOD__ );
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		$title = $out->getTitle();
 		$user = $skin->getContext()->getUser();
 
 		$namespaceChecker = new NamespaceChecker(
-			Settings::get( 'excludeNamespaces' ),
-			Settings::get( 'namespaces' )
+			$settings->getSetting( 'excludeNamespaces' ),
+			$settings->getSetting( 'namespaces' )
 		);
 
-		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			$out->addModules( 'wikibase.client.init' );
-			$actionName = Action::getActionName( $skin->getContext() );
+		if ( !$namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
 
-			if ( !$out->getLanguageLinks() && $actionName === 'view' && $title->exists() ) {
-				// Module with the sole purpose to hide #p-lang
-				// Needed as we can't do that in the regular CSS nor in JavaScript
-				// (as that only runs after the element initially appeared).
-				$out->addModules( 'wikibase.client.nolanglinks' );
+		$out->addModules( 'wikibase.client.init' );
+		$actionName = Action::getActionName( $skin->getContext() );
 
-				if ( Settings::get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
-					// Add the JavaScript which lazy-loads the link item widget
-					// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
-					$out->addModules( 'wikibase.client.linkitem.init' );
-				}
+		if ( !$out->getLanguageLinks() && $actionName === 'view' && $title->exists() ) {
+			// Module with the sole purpose to hide #p-lang
+			// Needed as we can't do that in the regular CSS nor in JavaScript
+			// (as that only runs after the element initially appeared).
+			$out->addModules( 'wikibase.client.nolanglinks' );
+
+			if ( $settings->getSetting( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
+				// Add the JavaScript which lazy-loads the link item widget
+				// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
+				$out->addModules( 'wikibase.client.linkitem.init' );
 			}
 		}
 
@@ -497,13 +509,16 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $pout ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
 		$langLinkHandler = new LangLinkHandler(
-			Settings::get( 'siteGlobalID' ),
-			Settings::get( 'namespaces' ),
-			Settings::get( 'excludeNamespaces' ),
-			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'namespaces' ),
+			$settings->getSetting( 'excludeNamespaces' ),
+			$wikibaseClient->getStore()->getSiteLinkTable(),
 			Sites::singleton(),
-			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup() );
+			$wikibaseClient->getLangLinkSiteGroup() );
 
 		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );
 
@@ -542,22 +557,24 @@ final class ClientHooks {
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( Skin &$skin, QuickTemplate &$template ) {
 		wfProfileIn( __METHOD__ );
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
 
 		$namespaceChecker = new NamespaceChecker(
-			Settings::get( 'excludeNamespaces' ),
-			Settings::get( 'namespaces' )
+			$settings->getSetting( 'excludeNamespaces' ),
+			$settings->getSetting( 'namespaces' )
 		);
 
-		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
-		$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+		$repoLinker = $wikibaseClient->newRepoLinker();
+		$entityIdParser = $wikibaseClient->getEntityIdParser();
 
-		$siteGroup = WikibaseClient::getDefaultInstance()->getSiteGroup();
+		$siteGroup = $wikibaseClient->getSiteGroup();
 
 		$editLinkInjector = new RepoItemLinkGenerator(
 			$namespaceChecker,
 			$repoLinker,
 			$entityIdParser,
-			Settings::get( 'enableSiteLinkWidget' ),
+			$settings->getSetting( 'enableSiteLinkWidget' ),
 			$siteGroup
 		);
 
@@ -633,8 +650,9 @@ final class ClientHooks {
 	 */
 	public static function onParserFirstCallInit( Parser &$parser ) {
 		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::handle', SFH_NO_HASH );
+		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
 
-		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
+		if ( $allowDataTransclusion === true ) {
 			$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParserFunction', 'render' ) );
 		}
 
@@ -694,16 +712,19 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
 		$namespaceChecker = new NamespaceChecker(
-			Settings::get( 'excludeNamespaces' ),
-			Settings::get( 'namespaces' )
+			$settings->getSetting( 'excludeNamespaces' ),
+			$settings->getSetting( 'namespaces' )
 		);
 
 		$infoActionHookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
-			WikibaseClient::getDefaultInstance()->newRepoLinker(),
-			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
-			Settings::get( 'siteGlobalID' )
+			$wikibaseClient->newRepoLinker(),
+			$wikibaseClient->getStore()->getSiteLinkTable(),
+			$settings->getSetting( 'siteGlobalID' )
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
@@ -729,13 +750,16 @@ final class ClientHooks {
 		$pageId, $redirectId ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( Settings::get( 'propagateChangesToRepo' ) !== true ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
+		if ( $settings->getSetting( 'propagateChangesToRepo' ) !== true ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
-		$repoDB = Settings::get( 'repoDatabase' );
-		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$repoDB =$settings->getSetting( 'repoDatabase' );
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
 		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
 
 		if ( !$jobQueueGroup ) {
@@ -748,7 +772,7 @@ final class ClientHooks {
 			$repoDB,
 			$siteLinkLookup,
 			$user,
-			Settings::get( 'siteGlobalID' ),
+			$settings->getSetting( 'siteGlobalID' ),
 			$oldTitle,
 			$newTitle
 		);

@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use ApiBase;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Provides url and path information for the associated Wikibase repo
@@ -27,7 +28,7 @@ class ApiClientInfo extends \ApiQueryBase {
 		parent::__construct( $api, $moduleName, 'wb' );
 
 		// @todo inject this instead of using singleton here
-		$this->settings = Settings::singleton();
+		$this->settings = WikibaseClient::getDefaultInstance()->getSettings();
 	}
 
 	/**

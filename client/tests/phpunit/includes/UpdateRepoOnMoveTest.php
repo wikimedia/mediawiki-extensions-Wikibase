@@ -3,7 +3,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\UpdateRepoOnMove;
-use Wikibase\Settings;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Wikibase\UpdateRepoOnMove
@@ -38,11 +38,14 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 				->method( 'getEntityIdForSiteLink' )
 				->will( $this->returnValue( $entityId ) );
 
+			$siteId = WikibaseClient::getDefaultInstance()->getSettings()
+				->getSetting( 'siteGlobalID' );
+
 			$ret = array(
 				'repoDB' => wfWikiID(),
 				'siteLinkLookup' => $siteLinkLookupMock,
 				'user' => \User::newFromName( 'RandomUserWhichDoesntExist' ),
-				'siteId' => Settings::get( 'siteGlobalID' ),
+				'siteId' => $siteId,
 				'oldTitle' => \Title::newFromText( 'ThisOneDoesntExist' ),
 				'newTitle' => \Title::newFromText( 'Bar' )
 			);

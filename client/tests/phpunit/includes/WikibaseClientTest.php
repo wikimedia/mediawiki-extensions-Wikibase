@@ -106,11 +106,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function getLangLinkSiteGroupProvider() {
 		$siteStore = $this->getMockSiteStore();
 
-		$settings = clone Settings::singleton();
+		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', null );
 
-		$settings2 = clone Settings::singleton();
+		$settings2 = clone $settings;
 		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings2->setSetting( 'languageLinkSiteGroup', 'wikivoyage' );
 
@@ -143,11 +143,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getSiteGroupProvider() {
-		$settings = clone Settings::singleton();
+		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'siteGroup', null );
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 
-		$settings2 = clone Settings::singleton();
+		$settings2 = clone $settings;
 		$settings2->setSetting( 'siteGroup', 'wikivoyage' );
 		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
 

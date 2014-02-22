@@ -1173,7 +1173,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideUpdatePages() {
-		$rc = \Wikibase\Settings::get( 'injectRecentChanges' );
+		$rc = WikibaseClient::getDefaultInstance()->getSettings()
+				->getSetting( 'injectRecentChanges' );
 
 		$pto = self::provideGetPagesToUpdate();
 

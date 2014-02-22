@@ -26,13 +26,16 @@ class NoLangLinkHandler {
 	 * @return string
 	 */
 	public static function handle( &$parser ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
 		$langLinkHandler = new LangLinkHandler(
-			Settings::get( 'siteGlobalID' ),
-			Settings::get( 'namespaces' ),
-			Settings::get( 'excludeNamespaces' ),
-			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'namespaces' ),
+			$settings->getSetting( 'excludeNamespaces' ),
+			$wikibaseClient->getStore()->getSiteLinkTable(),
 			\Sites::singleton(),
-			WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
+			$wikibaseClient->getLangLinkSiteGroup()
 		);
 
 		$langs = func_get_args();

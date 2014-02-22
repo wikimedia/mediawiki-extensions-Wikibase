@@ -29,17 +29,20 @@ class SiteModule extends ResourceLoaderModule {
 	 * @return string
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
 		/**
 		 * @var MediaWikiSite $site
 		 */
-		$site = SiteSQLStore::newInstance()->getSite( Settings::get( 'siteGlobalID' ) );
+		$site = SiteSQLStore::newInstance()->getSite( $siteId );
 
 		$currentSite = array();
 		if ( $site ) {
 			$currentSite = array(
 				'globalSiteId' => $site->getGlobalId(),
 				'languageCode' => $site->getLanguageCode(),
-				'langLinkSiteGroup' => WikibaseClient::getDefaultInstance()->getLangLinkSiteGroup()
+				'langLinkSiteGroup' => $wikibaseClient->getLangLinkSiteGroup()
 			);
 		}
 

@@ -10,7 +10,6 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 
 use Title;
 use Language;
-use Wikibase\Settings;
 use Wikibase\Client\WikibaseClient;
 
 /**

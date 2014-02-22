@@ -86,7 +86,6 @@ class DirectSqlStore implements ClientStore {
 		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
 
-		//NOTE: once I59e8423c is in, we no longer need the singleton.
 		$settings = Settings::singleton();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
@@ -139,9 +138,11 @@ class DirectSqlStore implements ClientStore {
 	 * @return null|\Site
 	 */
 	private function getSite() {
-		//FIXME: inject the site or at least the settings!
+		// @FIXME: inject the site
 		if ( $this->site === null ) {
-			$this->site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
+			$this->site = \Sites::singleton()->getSite(
+				WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
+			);
 		}
 
 		return $this->site;
