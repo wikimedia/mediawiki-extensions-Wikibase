@@ -78,3 +78,7 @@ Daniel Kinzler and Jeroen De Dauw.
 * [Wikibase DataModel on Ohloh](https://www.ohloh.net/p/wikibasedatamodel/)
 * [Wikibase DataModel on TravisCI](https://travis-ci.org/wmde/WikibaseDataModel)
 * [Wikibase DataModel on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel)
+ 
+## See also
+
+* [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization)
