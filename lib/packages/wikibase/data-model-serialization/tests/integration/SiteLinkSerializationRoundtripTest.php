@@ -11,9 +11,6 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\DataModel\Serializers\SiteLinkSerializer
- * @covers Wikibase\DataModel\Deserializers\SiteLinkDeserializer
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */

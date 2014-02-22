@@ -13,9 +13,6 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Serializers\ClaimsSerializer
- * @covers Wikibase\DataModel\Deserializers\ClaimsDeserializer
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
