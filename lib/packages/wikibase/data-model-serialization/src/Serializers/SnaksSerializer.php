@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Serializers;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
@@ -60,6 +61,9 @@ class SnaksSerializer implements Serializer {
 	private function getSerialized( Snaks $snaks ) {
 		$serialization = array();
 
+		/**
+		 * @var Snak $snak
+		 */
 		foreach( $snaks as $snak ) {
 			$serialization[$snak->getPropertyId()->getPrefixedId()][] = $this->snakSerializer->serialize( $snak );
 		}
