@@ -32,7 +32,15 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
+class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->setMwGlobals( array(
+			'wgArticlePath' => '/wiki/$1'
+		) );
+	}
 
 	/**
 	 * @param string $propertyType The property data type to use for all properties.
@@ -107,7 +115,7 @@ class WikibaseValueFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				SnakFormatter::FORMAT_HTML_WIDGET,
 				$options,
 				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@^<a href=".*/index.php/Q5">Label for Q5</a>$@', // compare mock object created in newBuilders()
+				'@^<a href=".*/wiki/Q5">Label for Q5</a>$@', // compare mock object created in newBuilders()
 				'wikibase-item'
 			),
 			'diff <url>' => array(
