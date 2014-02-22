@@ -26,6 +26,7 @@ use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\OtherProjectsSidebarGenerator;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -592,6 +593,39 @@ final class ClientHooks {
 		}
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Displays a sidebar section for other project links.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Skin $skin
+	 * @param array $bar
+	 *
+	 * @return bool
+	 */
+	public static function onSkinBuildSidebar( Skin $skin, &$bar ) {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$siteIdsToOutput = $settings->getSetting( 'otherProjetsLinks' );
+		if ( count( $siteIdsToOutput ) === 0 ) {
+			return true;
+		}
+
+		$generator = new OtherProjectsSidebarGenerator(
+			$settings->getSetting( 'siteGlobalID' ),
+			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
+			Sites::singleton(),
+			$siteIdsToOutput
+		);
+
+		$otherProjectsSidebar = $generator->buildProjectLinkSidebar( $skin->getContext()->getTitle() );
+		if ( count( $otherProjectsSidebar ) !== 0 ) {
+			$bar['wb-other-projects'] = $otherProjectsSidebar;
+		}
+
 		return true;
 	}
 
