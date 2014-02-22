@@ -17,13 +17,6 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Serializers\EntitySerializer
- * @covers Wikibase\DataModel\Deserializers\EntityDeserializer
- * @covers Wikibase\DataModel\Serializers\ItemSerializer
- * @covers Wikibase\DataModel\Deserializers\ItemDeserializer
- * @covers Wikibase\DataModel\Serializers\PropertySerializer
- * @covers Wikibase\DataModel\Deserializers\PropertyDeserializer
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */

@@ -14,9 +14,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Serializers\ReferencesSerializer
- * @covers Wikibase\DataModel\Deserializers\ReferenceListDeserializer
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
