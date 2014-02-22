@@ -7,6 +7,8 @@ use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Claim\Claims;
 
 /**
+ * @since 0.1
+ *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Serializers\SnaksSerializer;
 /**
  * Factory for constructing Serializer objects that can serialize WikibaseDataModel objects.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

@@ -8,7 +8,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
- * @since 1.0
+ * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
