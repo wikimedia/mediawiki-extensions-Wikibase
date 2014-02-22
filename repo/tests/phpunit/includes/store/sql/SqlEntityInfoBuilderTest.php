@@ -92,7 +92,15 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 		$dbw = wfGetDB( DB_MASTER );
 
 		foreach ( $rows as $row ) {
-			$dbw->insert( $table, array_combine( $fields, $row ), __METHOD__ );
+			$dbw->insert(
+				$table,
+				array_combine( $fields, $row ),
+				__METHOD__,
+				// Just ignore insertation errors... if similar data already is in the DB
+				// it's probably good enough for the tests (as this is only testing for UNIQUE
+				// fields anyway).
+				array( 'IGNORE' )
+			);
 		}
 	}
 
