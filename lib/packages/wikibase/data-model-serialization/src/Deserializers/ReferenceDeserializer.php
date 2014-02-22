@@ -38,9 +38,7 @@ class ReferenceDeserializer implements Deserializer {
 	}
 
 	private function isValidSerialization( $serialization ) {
-		return is_array( $serialization ) &&
-			array_key_exists( 'snaks', $serialization ) &&
-			$this->snaksDeserializer->isDeserializerFor( $serialization['snaks'] );
+		return is_array( $serialization ) && array_key_exists( 'snaks', $serialization );
 	}
 
 	/**
