@@ -39,10 +39,6 @@ class ClaimDeserializer implements Deserializer {
 	 */
 	private $referencesDeserializer;
 
-	/**
-	 * @param Deserializer $snakDeserializer
-	 * @param Deserializer $snaksDeserializer
-	 */
 	public function __construct( Deserializer $snakDeserializer, Deserializer $snaksDeserializer, Deserializer $referencesDeserializer ) {
 		$this->snakDeserializer = $snakDeserializer;
 		$this->snaksDeserializer = $snaksDeserializer;
