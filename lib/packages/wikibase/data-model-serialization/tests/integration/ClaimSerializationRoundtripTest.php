@@ -53,6 +53,10 @@ class ClaimSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$claims[] = array( $claim );
 
 		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setRank( Claim::RANK_DEPRECATED );
+		$claims[] = array( $claim );
+
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim->setQualifiers( new SnakList( array() ) );
 		$claims[] = array( $claim );
 
