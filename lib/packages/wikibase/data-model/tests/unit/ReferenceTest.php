@@ -3,8 +3,6 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -54,10 +52,22 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 		$references[] = new Reference();
 
-		$references[] = new Reference( new SnakList( array( new PropertyValueSnak(
-			new PropertyId( 'P1' ),
-			new StringValue( 'a' )
-		) ) ) );
+		$references[] = new Reference( new SnakList( array(
+			new PropertyValueSnak(
+				new PropertyId( 'P1' ),
+				new StringValue( 'a' )
+			)
+		) ) );
+
+		$references[] = new Reference( new SnakList( array(
+			new PropertyValueSnak(
+				new PropertyId( 'P1' ),
+				new StringValue( 'a' )
+			),
+			new PropertySomeValueSnak(
+				new PropertyId( 'P2' )
+			)
+		) ) );
 
 		$argLists = array();
 
@@ -84,9 +94,23 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetHash( Reference $reference ) {
-		$this->assertEquals( $reference->getHash(), $reference->getHash() );
+	public function testGetHashReturnsString( Reference $reference ) {
 		$this->assertInternalType( 'string', $reference->getHash() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetHashIsStable( Reference $reference ) {
+		$this->assertEquals( $reference->getHash(), $reference->getHash() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetHashIsTheSameForInstanceWithSameValue( Reference $reference ) {
+		$newRef = unserialize( serialize( $reference ) );
+		$this->assertEquals( $newRef->getHash(), $reference->getHash() );
 	}
 
 	/**
