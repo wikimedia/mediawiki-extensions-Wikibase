@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_ee1f0bb9",
+        "filename": "client/includes/hooks/LanguageLinkBadgeHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-02-22T18:29:41Z",
+      "side": 1,
+      "message": "Please do not conflate languages and sites, they are disjoint concepts. $siteId seems to be the appropriate var name",
+      "revId": "deef66eb401210ddb287be7169603a6e59b0ce03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
