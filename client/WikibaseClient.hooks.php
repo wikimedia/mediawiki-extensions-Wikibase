@@ -20,6 +20,7 @@ use RuntimeException;
 use SpecialWatchlist;
 use SplFileInfo;
 use Sites;
+use SiteSQLStore;
 use Skin;
 use SpecialRecentChanges;
 use StripState;
@@ -28,6 +29,7 @@ use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -594,6 +596,39 @@ final class ClientHooks {
 		}
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Displays a sidebar section for other project links.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Skin $skin
+	 * @param array $bar
+	 *
+	 * @return bool
+	 */
+	public static function onSkinBuildSidebar( Skin $skin, &$bar ) {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$siteIdsToOutput = $settings->getSetting( 'otherProjectsLinks' );
+		if ( count( $siteIdsToOutput ) === 0 ) {
+			return true;
+		}
+
+		$generator = new OtherProjectsSidebarGenerator(
+			$settings->getSetting( 'siteGlobalID' ),
+			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
+			SiteSQLStore::newInstance(),
+			$siteIdsToOutput
+		);
+
+		$otherProjectsSidebar = $generator->buildProjectLinkSidebar( $skin->getContext()->getTitle() );
+		if ( count( $otherProjectsSidebar ) !== 0 ) {
+			$bar['wikibase-otherprojects'] = $otherProjectsSidebar;
+		}
+
 		return true;
 	}
 
