@@ -99,7 +99,7 @@ class ClaimDeserializer implements Deserializer {
 		return $claim;
 	}
 
-	public function setGuidFromSerialization( array &$serialization, Claim $claim ) {
+	private function setGuidFromSerialization( array &$serialization, Claim $claim ) {
 		if ( !array_key_exists( 'id', $serialization ) ) {
 			return;
 		}
@@ -111,7 +111,7 @@ class ClaimDeserializer implements Deserializer {
 		$claim->setGuid( $serialization['id'] );
 	}
 
-	public function setQualifiersFromSerialization( array &$serialization, Claim $claim ) {
+	private function setQualifiersFromSerialization( array &$serialization, Claim $claim ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return;
 		}
@@ -119,7 +119,7 @@ class ClaimDeserializer implements Deserializer {
 		$claim->setQualifiers( $this->snaksDeserializer->deserialize( $serialization['qualifiers'] ) );
 	}
 
-	public function setRankFromSerialization( array &$serialization, Statement $statement ) {
+	private function setRankFromSerialization( array &$serialization, Statement $statement ) {
 		if ( !array_key_exists( 'rank', $serialization ) ) {
 			return;
 		}
@@ -131,7 +131,7 @@ class ClaimDeserializer implements Deserializer {
 		$statement->setRank( $this->rankIds[$serialization['rank']] );
 	}
 
-	public function setReferencesFromSerialization( array &$serialization, Statement $statement ) {
+	private function setReferencesFromSerialization( array &$serialization, Statement $statement ) {
 		if ( !array_key_exists( 'references', $serialization ) ) {
 			return;
 		}
