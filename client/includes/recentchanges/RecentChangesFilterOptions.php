@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Wikibase\Client\WikibaseClient;
 
 /**
  *
@@ -44,6 +45,7 @@ class RecentChangesFilterOptions {
 	 * @return bool
 	 */
 	protected function hideWikibase() {
+		// @TODO: Remve naming inconsistency (hideWikibase <> hideWikidata)
 		if ( isset( $this->opts['hidewikidata'] ) && $this->opts['hidewikidata'] === true ) {
 			return true;
 		}
@@ -54,7 +56,7 @@ class RecentChangesFilterOptions {
 	 * Is the enhanced changes format used?
 	 *
 	 * @note this is temporary and we will support enhanced changes in the near future
- 	 *
+	 *
 	 * @since 0.4
 	 *
 	 * @return bool
