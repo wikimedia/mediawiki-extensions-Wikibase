@@ -115,8 +115,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'P42'
 				),
-				'type' => 'statement',
-				'rank' => 'normal'
+				'type' => 'statement'
 			)
 		);
 
@@ -145,6 +144,20 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 				),
 				'type' => 'statement',
 				'rank' => 'preferred'
+			)
+		);
+
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setRank( Claim::RANK_NORMAL );
+		$serializations[] = array(
+			$claim,
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'P42'
+				),
+				'type' => 'statement',
+				'rank' => 'normal'
 			)
 		);
 

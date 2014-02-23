@@ -198,4 +198,25 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 
 		return $provider;
 	}
+
+	/**
+	 * @dataProvider invalidDeserializationProvider
+	 */
+	public function testInvalidSerialization( $serialization ) {
+		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
+		$this->buildDeserializer()->deserialize( $serialization );
+	}
+
+	public function invalidDeserializationProvider() {
+		return array(
+			array(
+				array(
+					'type' => 'item',
+					'aliases' => array(
+						'en' => 'Cat'
+					)
+				)
+			),
+		);
+	}
 }
