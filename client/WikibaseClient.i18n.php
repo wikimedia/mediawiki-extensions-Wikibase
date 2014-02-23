@@ -2320,6 +2320,7 @@ $messages['ja'] = array(
 
 /** Georgian (ქართული)
  * @author David1010
+ * @author Tokoko
  */
 $messages['ka'] = array(
 	'wikibase-client-desc' => 'ვიკიბაზის გაფართოების კლიენტი',
@@ -2347,7 +2348,7 @@ $messages['ka'] = array(
 	'wikibase-linkitem-selectlink' => 'გთხოვთ, აირჩიოთ საიტი და გვერდი, რომელზეც გსურთ აქედან ბმულის გაკეთება.',
 	'wikibase-linkitem-input-site' => 'ენა:',
 	'wikibase-linkitem-input-page' => 'გვერდი:',
-	'wikibase-linkitem-confirmitem-text' => 'თქვენ მიერ არჩეული გვერდი უკვე დაკავშირებულია [$1 ჩვენი მონაცემების ცენტრალური რეპოზიტორიის ელემენტთან]. გთხოვთ, დაადასტუროთ, რომ ქვემოთ ნაჩვენებ გვერდებს შორის არის ის, რომელზეც გსურთ ბმულის გაკეთება აქედან.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'თქვენ მიერ არჩეული გვერდი უკვე დაკავშირებულია [$1 ჩვენი მონაცემების ცენტრალური რეპოზიტორიის ელემენტთან]. გთხოვთ, დაადასტუროთ, რომ ქვემოთ ნაჩვენები {{PLURAL:$2|გვერდი|გვერდები}} არის ის, რომელთანაც გსურთ ამ გვერდის დაკავშირება.',
 	'wikibase-linkitem-confirmitem-button' => 'დადასტურება',
 	'wikibase-linkitem-not-loggedin-title' => 'თქვენ უნდა გაიაროთ ავტორიზაცია',
 	'wikibase-linkitem-not-loggedin' => 'ამ ფუნქციის გამოყენებისათვის, თქვენ უნდა გაიაროთ ავტორიზაცია ამ ვიკისა და [$1 მონაცემების ცენტრალურ რეპოზიტორიაში].',
@@ -2367,6 +2368,7 @@ $messages['ka'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ არ არის ენის სწორი კოდი.',
 	'wikibase-unconnectedpages-iwdata-label' => 'მხოლოდ ენათშორისი ბმულების მქონე გვერდები',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)',
+	'wikibase-pageinfo-entity-id-none' => 'არაფერი',
 );
 
 /** Kazakh (Cyrillic script) (қазақша (кирил)‎)

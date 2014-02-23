@@ -2114,15 +2114,18 @@ $messages['ja'] = array(
 
 /** Georgian (ქართული)
  * @author David1010
+ * @author Tokoko
  */
 $messages['ka'] = array(
 	'wikibase-lib-desc' => 'ვიკიბაზისა და ვიკიბაზის კლიენტის გაფართოებების საერთო ფუნქციები',
 	'wikibase-entity-item' => 'ელემენტი',
 	'wikibase-entity-property' => 'თვისება',
 	'wikibase-entity-query' => 'მოთხოვნა',
+	'wikibase-deletedentity-item' => 'წაშლილი ელემენტი',
 	'wikibase-diffview-reference' => 'მინიშნება',
 	'wikibase-diffview-rank' => 'ადგილი',
 	'wikibase-diffview-qualifier' => 'შესარჩევი',
+	'wikibase-diffview-link' => 'ბმულები',
 	'wikibase-error-unexpected' => 'მოხდა გაუთვალისწინებელი შეცდომა.',
 	'wikibase-error-save-generic' => 'შენახვის მცდელობისას მოხდა შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.',
 	'wikibase-error-remove-generic' => 'წაშლის მცდელობისას მოხდა შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.',
@@ -2140,9 +2143,11 @@ $messages['ka'] = array(
 	'wikibase-error-ui-edit-conflict' => 'რედაქტირების კონფლიქტი. გადატვირთეთ და თავიდან შეინახეთ.',
 	'wikibase-replicationnote' => 'გთხოვთ, მიაქციოთ ყურადღება, რომ შეიძლება გავიდეს რამდენიმე წუთი, სანამ ცვლილებები ხილული გახდება ყველა ვიკი-პროექტში',
 	'wikibase-sitelinks-sitename-columnheading' => 'ენა',
+	'wikibase-sitelinks-sitename-columnheading-special' => 'საიტი',
 	'wikibase-sitelinks-siteid-columnheading' => 'კოდი',
 	'wikibase-sitelinks-link-columnheading' => 'დაკავშირებული გვერდი',
 	'wikibase-tooltip-error-details' => 'დეტალები',
+	'wikibase-validator-no-such-entity' => '$1 არ მოიძებნა',
 	'datatypes-type-wikibase-item' => 'ელემენტი',
 	'datatypes-type-commonsMedia' => 'მედიაფაილი ვიკისაწყობში',
 );
@@ -3084,7 +3089,7 @@ $messages['pt'] = array(
 	'wikibase-quantitydetails-unit' => 'Unidade',
 	'wikibase-replicationnote' => 'Por favor, saiba que pode levar vários minutos até que as mudanças são visíveis em todos as wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Páginas na Wikipédia com ligação a este item',
-	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
+	'wikibase-sitelinks-sitename-columnheading' => 'Língua',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'Sítio',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
 	'wikibase-sitelinks-link-columnheading' => 'Página associada',

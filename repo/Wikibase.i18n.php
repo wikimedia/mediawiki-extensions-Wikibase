@@ -6266,6 +6266,7 @@ $messages['fa'] = array(
 /** Finnish (suomi)
  * @author Beluga
  * @author Crt
+ * @author Elseweyr
  * @author Nedergard
  * @author Nike
  * @author Olli
@@ -6426,7 +6427,7 @@ IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'wikibase-setsitelink-submit' => 'Aseta sivustolinkki',
 	'wikibase-setsitelink-warning-remove' => 'Haluatko todella poistaa sivustolinkin aiheesta [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Sivustotunniste "$1" on tuntematon. Käytä toimivaa sivustotunnistetta, kuten "fiwiki".',
-	'wikibase-setsitelink-not-item' => 'Tunniste $1 ei kuulu kohteeseen.',
+	'wikibase-setsitelink-not-item' => 'Tunniste $1 ei kuulu mihinkään kohteeseen.',
 	'wikibase-setsitelink-not-badge' => 'Kohde $1 ei ole merkki.',
 	'wikibase-setsitelink-add-failed' => 'Sivustolinkkiä ei voitu tallentaa.',
 	'wikibase-setsitelink-remove-failed' => 'Sivustolinkkiä ei voitu poistaa.',
@@ -10207,6 +10208,7 @@ $messages['ja'] = array(
 
 /** Georgian (ქართული)
  * @author David1010
+ * @author Tokoko
  */
 $messages['ka'] = array(
 	'wikibase-desc' => 'სტრუქტურირებული მონაცემების საცავი',
@@ -10234,6 +10236,8 @@ $messages['ka'] = array(
 	'wikibase-sitelinks-empty' => 'საიტის არცერთ გვერდს არ აქვს აქ ბმული.',
 	'wikibase-sitelinks-input-help-message' => 'ამ ელემენტთან დაკავშირებულ გვერდზე ბმულის დაყენება.',
 	'wikibase-remove' => 'წაშლა',
+	'wikibase-move-up' => 'ზემოთ გადატანა',
+	'wikibase-move-down' => 'ქვემოთ გადატანა',
 	'wikibase-undo-title' => 'რედაქტირების გაუქმება „$1“-თვის',
 	'wikibase-restore-title' => 'ძველი ვერსიის აღდგენა „$1“-თვის',
 	'wikibase-partial-undo' => 'ცვლილება შესაძლებელია ნაწილობრივ გაუქმდეს.',
@@ -10265,11 +10269,11 @@ $messages['ka'] = array(
 	'wikibase-shortcopyrightwarning' => 'ღილაკზე „$1“ დაწკაპუნებით, თქვენ ეთანხმებით [[$2|გამოყენების პირობებს]] და თქვენ შეუქცევადად ეთანხმებით თქვენი წვლილის გამოქვეყნებას შემდეგი პირობით $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'მე ვეთანხმები ამ პირობებს ჩემი მომავალი რედაქტირებებისათვის. აღარ მაჩვენოთ ეს შეტყობინება.',
 	'wikibase-entityselector-more' => 'მეტი',
-	'wikibase-anonymouseditwarning' => 'გაფრთხილება: თქვენ არ ხართ შესული სისტემაში. თქვენი IP მისამართი ჩაიწერება ამ გვერდის რედაქტირების ისტორიაში $1.', # Fuzzy
+	'wikibase-anonymouseditwarning' => 'გაფრთხილება: თქვენ არ ხართ შესული სისტემაში. თქვენი IP მისამართი ჩაიწერება ამ გვერდის რედაქტირების ისტორიაში.',
 	'wikibase-restrictionedit-tooltip-message' => 'ეს გვერდი დაცულია. მისი რედაქტირება დაუშვებელია.',
-	'wikibase-blockeduser-tooltip-message' => 'თქვენთვის რედაქტირება დაბლოკილია.', # Fuzzy
+	'wikibase-blockeduser-tooltip-message' => 'თქვენთვის რედაქტირება დაბლოკილია.',
 	'wikibase-move-error' => 'თქვენ არ შეგიძლიათ გვერდების გადატანა, რომლებიც მდებარეობს მონაცემების სახელთა სივრცეში და თქვენ არ შეგიძლიათ გვერდების მასში გადატანა.',
-	'wikibase-error-sitelink-already-used' => 'საიტის ბმულს [$1 $2] უკვე იყენებს ელემენტი [[$3]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'საიტის ბმულს [$1 $2] უკვე იყენებს ელემენტი [[$3]].',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'ენის კოდი „$1“ უცნობია. გთხოვთ, გამოიყენოთ სისტემისთვის ცნობილი ერთ-ერთი ენის კოდი, მაგალითად „ka“.',
 	'special-itembytitle' => 'ელემენტი სათაურის მიხედვით',
 	'wikibase-itembytitle-lookup-fieldset' => 'ელემენტების ძიება საიტისა და სახელწოდების მიხედვით',
@@ -10321,6 +10325,7 @@ $messages['ka'] = array(
 	'wikibase-setaliases-warning-remove' => 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ყველა ფსევდონიმი [[$1]]-თვის?',
 	'wikibase-modifyentity-id' => 'იდენტიფიკატორი:',
 	'wikibase-modifyterm-language' => 'ენა:',
+	'wikibase-mergeitems-submit' => 'ელემენტების შერწყმა',
 	'wikibase-dispatchstats-no-stats' => 'ამჟამად სტატისტიკური მონაცემები არ არის ხელმისაწვდომი.',
 	'wikibase-dispatchstats-changes' => 'ცვლილებების ჟურნალის სტატისტიკა',
 	'wikibase-dispatchstats-stats' => 'დაგზავნის სტატისტიკა',
@@ -10354,6 +10359,7 @@ $messages['ka'] = array(
 რათა გაიგოთ სად წავიდა ის.',
 	'wikibase-noentity-createone' => 'თქვენ აგრეთვე შეგიძლიათ [[$1|შექმნათ ის]].',
 	'wikibase-item-summary-wbsetitem' => 'შექმნილია ახალი ელემენტი',
+	'wikibase-item-summary-wbcreate-new' => 'ახალი ელემენტის შექმნა',
 	'wikibase-item-summary-wbeditentity' => 'შექმნილია ახალი ელემენტი',
 	'wikibase-item-summary-wbeditentity-create' => 'შექმნილია ახალი ელემენტი',
 	'wikibase-item-summary-wbeditentity-update' => 'ელემენტი განახლებულია',
@@ -10398,6 +10404,8 @@ $messages['ka'] = array(
 	'wikibase-listdatatypes-multilingual-text-head' => 'მრავალენოვანი ტექსტი',
 	'wikibase-listdatatypes-string-head' => 'ველი',
 	'wikibase-listdatatypes-time-head' => 'დრო',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-item' => 'Wikibase-ის ელემენტი',
 	'content-model-wikibase-property' => 'Wikibase-ის თვისებები',
 	'content-model-wikibase-query' => 'Wikibase-ის მოთხოვნა',
@@ -10430,6 +10438,12 @@ $messages['ka'] = array(
 	'action-label-update' => 'სახელების განახლება',
 	'action-description-remove' => 'აღწერების წაშლა',
 	'action-description-update' => 'აღწერების განახლება',
+	'wikibase-time-precision-Gannum' => '$1 მილიარდ წელიწადში',
+	'wikibase-time-precision-Mannum' => '$1 მილიონ წელიწადში',
+	'wikibase-time-precision-annum' => '$1 წელიწადში',
+	'wikibase-time-precision-millennium' => 'მე-$1 ათასწლეული',
+	'wikibase-time-precision-century' => 'მე-$1 საუკუნე',
+	'wikibase-time-precision-10annum' => '$1 წმ',
 );
 
 /** Kazakh (Cyrillic script) (қазақша (кирил)‎)
@@ -11879,6 +11893,7 @@ $messages['mk'] = array(
 	'special-mylanguagefallbackchain' => 'Мој ланец на резервни јазици',
 	'wikibase-mylanguagefallbackchain-text' => 'Подолу е прикажан ланецот на резервни јазици што се користи за да ви ги прикаже вашите предметни етикети.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Можете да го измените, ставајќи <nowiki>{{#babel: }}</nowiki> на {{GENDER:$1|вашата}} [[Special:MyPage|корисничка страница]].',
+	'wikibase-mylanguagefallbackchain-verbatim-item' => '$1 — $2',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 — $2, претворено од $3 — $4',
 	'wikibase-api-no-such-sitelink' => 'Не пронајдов таква викиврска',
 	'wikibase-self-conflict-patched' => 'Вашето уредување е прикрпено на последната верзија, презапишувајќи врз некои од вашите меѓувремени промени.',
@@ -12824,7 +12839,7 @@ IP-adressen din vil bli lagret i redigeringshistorikken.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Et annet søk ($3) har allerede etiketten «$1» knyttet til språkkoden $2.',
 	'wikibase-error-label-not-unique-item' => 'Et annet element ($3) har allerede etiketten «$1» og beskrivelsen «$4» knyttet til språkkoden $2.',
 	'wikibase-error-label-no-entityid' => 'Etiketten kan ikke være et gyldig element-id.',
-	'wikibase-wikibaserepopage-not-itemid' => '«$1» er ikke et gyldig element-ID.',
+	'wikibase-wikibaserepopage-not-itemid' => '«$1» er ikke en gyldig element-ID.',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'Språkkoden «$1» er ukjent. Vennligst bruk en språkkode som kan gjenkjennes av systemet, slik som «nb».',
 	'wikibase-wikibaserepopage-invalid-id' => 'Entiteten «$1» er ukjent, sjekk om den har riktig form.',
 	'special-itembytitle' => 'Element fra tittel',
@@ -13113,6 +13128,7 @@ for å finne ut hva som har skjedd.',
 );
 
 /** Dutch (Nederlands)
+ * @author Arent
  * @author Breghtje
  * @author Flightmare
  * @author Konovalov
@@ -13270,12 +13286,12 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-setsitelink-intro' => 'Met dit formulier kunt u de sitekoppeling van een entiteit instellen. U moet het ID van de entiteit opgeven (bijvoorbeeld Q23), een site-ID (bijvoorbeeld "nwiki") en de in te stellen sitekoppeling.',
 	'wikibase-setsitelink-site' => 'Site-ID:',
 	'wikibase-setsitelink-label' => 'Sitekoppeling:',
-	'wikibase-setsitelink-badges' => 'Speldjes',
+	'wikibase-setsitelink-badges' => 'Badges',
 	'wikibase-setsitelink-submit' => 'Sitekoppeling instellen',
 	'wikibase-setsitelink-warning-remove' => 'Wilt u echt de sitekoppeling van [[$1]] verwijderen?',
 	'wikibase-setsitelink-invalid-site' => 'Het site-ID "$1" is onbekend. Gebruik een bestaande site-ID, zoals "enwiki".',
 	'wikibase-setsitelink-not-item' => 'Het nummer $1 hoort niet bij een item.',
-	'wikibase-setsitelink-not-badge' => 'Het item $1 is geen speldje.',
+	'wikibase-setsitelink-not-badge' => 'Het item $1 is geen badge.',
 	'wikibase-setsitelink-add-failed' => 'De sitekoppeling kon niet worden opgeslagen.',
 	'wikibase-setsitelink-remove-failed' => 'De sitekoppeling kon niet worden verwijderd.',
 	'wikibase-modifyentity-id' => 'ID:',
@@ -14287,6 +14303,7 @@ W historii edycji tej encji zostanie zapisany Twój adres IP.',
 	'wikibase-modifyentity-id' => 'Identyfikator:',
 	'wikibase-modifyterm-language' => 'Język:',
 	'special-mergeitems' => 'Łączenie dwóch elementów',
+	'wikibase-mergeitems-submit' => 'Połącz elementy',
 	'special-dispatchstats' => 'Statystyki wysyłki zmian',
 	'wikibase-dispatchstats-intro' => 'Ta strona zawiera statystyki dotyczące wysyłki zmian do klientów.
 Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy zmiana została wysłane do tej wiki, a kolejka zadań na tej wiki przetworzyła to powiadomienie.
@@ -15105,7 +15122,7 @@ para descobrir o que lhe sucedeu.',
 	'action-label-remove' => 'apagar rótulos',
 	'action-label-update' => 'actualizar rótulos',
 	'action-description-remove' => 'apagar descrições',
-	'action-description-update' => 'actualizar descrições',
+	'action-description-update' => 'atualizar descrições',
 	'wikibase-time-precision-Gannum' => 'em  $1  biliões de anos',
 	'wikibase-time-precision-Mannum' => 'em $1 milhões de anos',
 	'wikibase-time-precision-annum' => 'em $1 anos',
@@ -18484,8 +18501,7 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Dữ liệu trực tiếp cho một địa điểm vĩ độ–kinh độ dưới dạng độ-phút-giây hoặc độ thập phân cho thiên thể. Mặc định là “Earth” và “WGS84”. Nó thêm độ phân giải và dãy.
 * latitude – phần đầu tiên ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
 * longitude – phần thứ hai ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
-* altitude (tùy chọn) – giá trị hiện (?) của cao độ trên mặt phẳng tham khảo; thí dụ trên địa cầu “Earth” thì mặt phẳng tham khảo là “WGS84”
-* globe (tùy chọn) – giá trị dữ liệu hiện (?) được định rõ là thiên thể; mặc định là “Earth” và “WGS84”', # Fuzzy
+* globe – giá trị dữ liệu hiện (?) được định rõ là thiên thể; mặc định là “Earth” và “WGS84”',
 	'wikibase-listdatatypes-quantity-head' => 'Số lượng',
 	'wikibase-listdatatypes-quantity-body' => 'Trường dữ liệu trực tiếp cho số lượng có liên quan đến một đơn vị xác định nào đó. Đơn vị dứt khoát được bao gồm trong các giá trị dữ liệu được nhập.
 * value – phần ẩn của chuỗi (tương quan đến tiền tố đơn vị không rõ)

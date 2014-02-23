@@ -240,8 +240,11 @@ $specialPageAliases['lb'] = array(
 	'SetLabel' => array( 'Etiquette_festleeën' ),
 	'SetDescription' => array( 'Beschreiwung_festleeën' ),
 	'SetAliases' => array( 'Aliase_festleeën' ),
+	'MergeItems' => array( 'Elementer_fusionéieren' ),
 	'EntitiesWithoutLabel' => array( 'Elementer_ouni_Etiquette' ),
+	'EntitiesWithoutDescription' => array( 'Elementer_ouni_Beschreiwung' ),
 	'ItemsWithoutSitelinks' => array( 'Elementer_ouni_Weblinken' ),
+	'MyLanguageFallbackChain' => array( 'Meng_Ersatzsproochketten' ),
 );
 
 /** Macedonian (македонски) */
