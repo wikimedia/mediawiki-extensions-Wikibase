@@ -112,6 +112,30 @@ class SnakDeserializerTest extends DeserializerBaseTest {
 		);
 	}
 
+	/**
+	 * @dataProvider invalidDeserializationProvider
+	 */
+	public function testInvalidSerialization( $serialization ) {
+		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
+		$this->buildDeserializer()->deserialize( $serialization );
+	}
+
+	public function invalidDeserializationProvider() {
+		return array(
+			array(
+				array(
+					'snaktype' => 'somevalue'
+				)
+			),
+			array(
+				array(
+					'snaktype' => 'value',
+					'property' => 'P42'
+				)
+			),
+		);
+	}
+
 	public function testDeserializePropertyIdFilterItemId() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$entityIdDeserializerMock->expects( $this->any() )
