@@ -20,7 +20,7 @@ use Wikibase\LangLinkHandler;
  */
 class LangLinkHandlerTest extends \MediaWikiTestCase {
 
-	/* @var MockRepository $langLinkHandler */
+	/* @var MockRepository $mockRepo */
 	protected $mockRepo;
 
 	/* @var LangLinkHandler $langLinkHandler */
