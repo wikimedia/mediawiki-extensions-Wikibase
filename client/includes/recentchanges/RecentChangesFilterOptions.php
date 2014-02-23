@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Wikibase\Client\WikibaseClient;
 
 /**
  *
@@ -54,7 +55,7 @@ class RecentChangesFilterOptions {
 	 * Is the enhanced changes format used?
 	 *
 	 * @note this is temporary and we will support enhanced changes in the near future
- 	 *
+	 *
 	 * @since 0.4
 	 *
 	 * @return bool
