@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_09f6b1c2",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-02-23T09:37:10Z",
+      "side": 1,
+      "message": "Ok, so this should be moved into the handler class? Then should I also pass the $languageLink array by reference?",
+      "parentUuid": "4e04eb01_0e7c77e1",
+      "revId": "deef66eb401210ddb287be7169603a6e59b0ce03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_ae68e319",
         "filename": "client/includes/hooks/LanguageLinkBadgeHandler.php",
         "patchSetId": 14
@@ -81,6 +99,24 @@
       "writtenOn": "2014-02-22T18:52:10Z",
       "side": 1,
       "message": "Please give this thing a clear name that tells you what this class is responsible for (more specifically than \"something with language link badges\")\n\nLooking at this more it seems the cohesion of this class is very low because it is doing different things. In other words, the methods ought to be grouped differently.\n\nFor instance, getSiteLink, which is public (yet only used from within the class and the test...), needs several collaborators not needed by anything else in the class. These are siteLinkLookup and localSiteId. While in the end all that the rest of the class needs is a lookup of site link by title and siteid. There already is an interface for that, which you can make a new implementation off.\n\nThe two public methods used from the production code are getBadges and getTitle. They do not seem to have anything in common, apart from both needing an EntityLookup. That is not a reason to stuff them in the same class.",
+      "revId": "deef66eb401210ddb287be7169603a6e59b0ce03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_29e72d0f",
+        "filename": "client/includes/hooks/LanguageLinkBadgeHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-02-23T09:37:10Z",
+      "side": 1,
+      "message": "Hi, thanks for your comments and suggestions. I have done questions about them. First I don\u0027t know which interface you refer to. Second I understand your concerns but I don\u0027t know what exactly can ne improved. Should I create separate classes? Thanks for your help.",
+      "parentUuid": "4e04eb01_8e8887ed",
       "revId": "deef66eb401210ddb287be7169603a6e59b0ce03",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
