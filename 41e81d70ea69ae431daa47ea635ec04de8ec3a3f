@@ -155,6 +155,23 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_34dd3d74",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-24T12:02:45Z",
+      "side": 1,
+      "message": "shows up red in phpstorm, the interface uses \tuse Wikibase\\DataModel\\Entity\\EntityId but this uses  use Wikibase\\EntityId  (we could fix this though :) )",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_57e8d676",
         "filename": "lib/includes/util/GenericEventDispatcher.php",
         "patchSetId": 10
