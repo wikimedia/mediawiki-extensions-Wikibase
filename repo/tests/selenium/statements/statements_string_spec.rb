@@ -81,6 +81,7 @@ describe "Check string statements UI" do
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
         page.statementValueInput = string_value_toolong
+        ajax_wait
         page.saveStatement
         ajax_wait
         page.wbErrorDiv?.should be_true

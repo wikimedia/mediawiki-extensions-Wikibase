@@ -38,7 +38,9 @@ end
 
 cm_statement_value = "Vespa_crabro_head_01.jpg"
 cm_qualifier_value = "Blason_CH_Canton_Valais_3D.svg"
+cm_qualifier_value_expected = "Blason CH Canton Valais 3D.svg"
 cm_qualifier_value_changed = "BlueFeather.jpg"
+cm_qualifier_value_changed_expected = "BlueFeather.jpg"
 
 describe "Check qualifiers UI" do
   before :all do
@@ -179,6 +181,7 @@ describe "Check qualifiers UI" do
         page.entitySelectorInput2?.should be_false
         page.qualifierValueInput1?.should be_true
         page.qualifierValueInput1.should == cm_qualifier_value
+        ajax_wait
         page.saveStatement?.should be_true
         page.cancelStatement?.should be_true
 
@@ -311,7 +314,7 @@ describe "Check qualifiers UI" do
         page.qualifierProperty2.should == properties_cm[1]["label"]
         page.qualifierPropertyLink2?.should be_true
         page.qualifierValue2?.should be_true
-        page.qualifierValue2.should == cm_qualifier_value
+        page.qualifierValue2.should == cm_qualifier_value_expected
         page.qualifierValueLink2?.should be_true
         @browser.refresh
         page.wait_for_entity_to_load
@@ -325,7 +328,7 @@ describe "Check qualifiers UI" do
         page.qualifierProperty2.should == properties_cm[1]["label"]
         page.qualifierPropertyLink2?.should be_true
         page.qualifierValue2?.should be_true
-        page.qualifierValue2.should == cm_qualifier_value
+        page.qualifierValue2.should == cm_qualifier_value_expected
         page.qualifierValueLink2?.should be_true
 
         page.editFirstStatement?.should be_true
@@ -352,7 +355,7 @@ describe "Check qualifiers UI" do
         page.qualifierProperty2.should == properties_cm[1]["label"]
         page.qualifierPropertyLink2?.should be_true
         page.qualifierValue2?.should be_true
-        page.qualifierValue2.should == cm_qualifier_value_changed
+        page.qualifierValue2.should == cm_qualifier_value_changed_expected
         page.qualifierValueLink2?.should be_true
         @browser.refresh
         page.wait_for_entity_to_load
@@ -366,7 +369,7 @@ describe "Check qualifiers UI" do
         page.qualifierProperty2.should == properties_cm[1]["label"]
         page.qualifierPropertyLink2?.should be_true
         page.qualifierValue2?.should be_true
-        page.qualifierValue2.should == cm_qualifier_value_changed
+        page.qualifierValue2.should == cm_qualifier_value_changed_expected
         page.qualifierValueLink2?.should be_true
       end
     end

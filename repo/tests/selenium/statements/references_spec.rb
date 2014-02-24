@@ -38,9 +38,13 @@ end
 
 cm_statement_value = "Louisiana 462.svg"
 cm_reference_value = "Lousiana Red Kammgarn.jpg"
+cm_reference_value_expected = "Lousiana Red Kammgarn.jpg"
 cm_reference_value2 = "Nyan.jpg"
+cm_reference_value2_expected = "Nyan.jpg"
 cm_reference_value_changed = "Denkmal.png"
+cm_reference_value_changed_expected = "Denkmal.png"
 cm_reference_value_changed2 = "Dynamite-5.svg"
+cm_reference_value_changed2_expected = "Dynamite-5.svg"
 
 describe "Check references UI" do
   before :all do
@@ -117,6 +121,7 @@ describe "Check references UI" do
         page.removeReferenceLine1?.should be_false
         random_ref_value = generate_random_string(10)
         page.referenceValueInput = random_ref_value
+        ajax_wait
         page.saveReference?.should be_true
         page.cancelReference?.should be_true
         page.addReferenceLine?.should be_true
@@ -147,6 +152,7 @@ describe "Check references UI" do
         page.wait_for_reference_value_box
         page.referenceValueInput_element.clear
         page.referenceValueInput = generate_random_string(10)
+        ajax_wait
         page.saveReference?.should be_true
         page.addReferenceLine?.should be_true
         page.cancelReference?.should be_true
@@ -181,19 +187,20 @@ describe "Check references UI" do
         page.wait_for_entity_selector_list
         page.wait_for_reference_value_box
         page.referenceValueInput = cm_reference_value
+        ajax_wait
         page.saveReference?.should be_true
         page.saveReference
         ajax_wait
         page.wait_for_statement_request_finished
         page.reference1Property.should == properties_cm[1]["label"]
-        page.reference1Value.should == cm_reference_value
+        page.reference1Value.should == cm_reference_value_expected
         page.reference1ValueLink
-        page.articleTitle.include?("File:" + cm_reference_value).should be_true
+        page.articleTitle.include?("File:" + cm_reference_value_expected).should be_true
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.toggle_reference_section
         page.reference1Property.should == properties_cm[1]["label"]
-        page.reference1Value.should == cm_reference_value
+        page.reference1Value.should == cm_reference_value_expected
         page.reference1PropertyLink
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == properties_cm[1]["label"]
@@ -201,7 +208,7 @@ describe "Check references UI" do
         page.wait_for_entity_to_load
         page.toggle_reference_section
         page.reference1ValueLink
-        page.articleTitle.include?("File:" + cm_reference_value).should be_true
+        page.articleTitle.include?("File:" + cm_reference_value_expected).should be_true
       end
     end
 
@@ -220,6 +227,7 @@ describe "Check references UI" do
         page.referenceValueInput.should == cm_reference_value
         page.referenceValueInput_element.clear
         page.referenceValueInput = cm_reference_value_changed
+        ajax_wait
         page.saveReference?.should be_true
         page.removeReference?.should be_true
         page.cancelReference?.should be_true
@@ -229,33 +237,35 @@ describe "Check references UI" do
         ajax_wait
         page.wait_for_statement_request_finished
         page.reference1Property.should == properties_cm[1]["label"]
-        page.reference1Value.should == cm_reference_value_changed
+        page.reference1Value.should == cm_reference_value_changed_expected
 
         # try to edit the reference twice in a row
         page.editReference1
         page.referenceValueInput_element.clear
         page.referenceValueInput = cm_reference_value
+        ajax_wait
         page.saveReference
         ajax_wait
         page.wait_for_statement_request_finished
         page.reference1Property.should == properties_cm[1]["label"]
-        page.reference1Value.should == cm_reference_value
+        page.reference1Value.should == cm_reference_value_expected
         page.editReference1
         page.referenceValueInput_element.clear
         page.referenceValueInput = cm_reference_value_changed
+        ajax_wait
         page.saveReference
         ajax_wait
         page.wait_for_statement_request_finished
         page.reference1Property.should == properties_cm[1]["label"]
-        page.reference1Value.should == cm_reference_value_changed
+        page.reference1Value.should == cm_reference_value_changed_expected
 
         page.reference1ValueLink
-        page.articleTitle.include?("File:" + cm_reference_value_changed).should be_true
+        page.articleTitle.include?("File:" + cm_reference_value_changed_expected).should be_true
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.toggle_reference_section
         page.reference1Property.should == properties_cm[1]["label"]
-        page.reference1Value.should == cm_reference_value_changed
+        page.reference1Value.should == cm_reference_value_changed_expected
       end
     end
 
@@ -293,6 +303,7 @@ describe "Check references UI" do
         page.wait_for_entity_selector_list
         page.wait_for_reference_value_box
         page.referenceValueInput = cm_reference_value
+        ajax_wait
         page.saveReference?.should be_true
         page.addReferenceLine?.should be_true
         page.addReferenceLine
@@ -306,22 +317,23 @@ describe "Check references UI" do
         page.referenceValueInput?.should be_true
         page.referenceValueInput2?.should be_true
         page.referenceValueInput2 = cm_reference_value2
+        ajax_wait
         page.saveReference?.should be_true
         page.saveReference
         ajax_wait
         page.wait_for_statement_request_finished
         page.reference1Property.should == properties_cm[0]["label"]
-        page.reference1Value.should == cm_reference_value
+        page.reference1Value.should == cm_reference_value_expected
         page.reference1Property2.should == properties_cm[1]["label"]
-        page.reference1Value2.should == cm_reference_value2
+        page.reference1Value2.should == cm_reference_value2_expected
 
         page.reference1ValueLink
-        page.articleTitle.include?("File:" + cm_reference_value).should be_true
+        page.articleTitle.include?("File:" + cm_reference_value_expected).should be_true
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.toggle_reference_section
         page.reference1ValueLink2
-        page.articleTitle.include?("File:" + cm_reference_value2).should be_true
+        page.articleTitle.include?("File:" + cm_reference_value2_expected).should be_true
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.toggle_reference_section
@@ -339,9 +351,9 @@ describe "Check references UI" do
         page.wait_for_entity_to_load
         page.toggle_reference_section
         page.reference1Property.should == properties_cm[0]["label"]
-        page.reference1Value.should == cm_reference_value
+        page.reference1Value.should == cm_reference_value_expected
         page.reference1Property2.should == properties_cm[1]["label"]
-        page.reference1Value2.should == cm_reference_value2
+        page.reference1Value2.should == cm_reference_value2_expected
       end
     end
 
@@ -377,27 +389,29 @@ describe "Check references UI" do
         page.referenceValueInput_element.clear
         page.referenceValueInput2_element.clear
         page.referenceValueInput = cm_reference_value_changed
+        ajax_wait
         page.referenceValueInput2 = cm_reference_value_changed2
+        ajax_wait
         page.saveReference?.should be_true
         page.saveReference
         ajax_wait
         page.wait_for_statement_request_finished
 
         page.reference1ValueLink
-        page.articleTitle.include?("File:" + cm_reference_value_changed).should be_true
+        page.articleTitle.include?("File:" + cm_reference_value_changed_expected).should be_true
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.toggle_reference_section
         page.reference1ValueLink2
-        page.articleTitle.include?("File:" + cm_reference_value_changed2).should be_true
+        page.articleTitle.include?("File:" + cm_reference_value_changed2_expected).should be_true
 
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.toggle_reference_section
         page.reference1Property.should == properties_cm[0]["label"]
-        page.reference1Value.should == cm_reference_value_changed
+        page.reference1Value.should == cm_reference_value_changed_expected
         page.reference1Property2.should == properties_cm[1]["label"]
-        page.reference1Value2.should == cm_reference_value_changed2
+        page.reference1Value2.should == cm_reference_value_changed2_expected
       end
     end
 
