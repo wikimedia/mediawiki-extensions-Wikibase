@@ -37,7 +37,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles;
 	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks, $wgContentHandlers;
-	global $wgWBStores, $wgWBRepoSettings, $wgResourceModules;
+	global $wgWBStores, $wgWBRepoSettings, $wgResourceModules, $wgValueParsers;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -77,6 +77,30 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['Wikibase'] 				= __DIR__ . '/Wikibase.i18n.php';
 	$wgExtensionMessagesFiles['WikibaseAlias'] 			= __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';
+
+	// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
+	$wgValueParsers['wikibase-entityid'] = function( ValueParsers\ParserOptions $options ) {
+		//TODO: make ID builders configurable.
+		$builders = \Wikibase\DataModel\Entity\BasicEntityIdParser::getBuilders();
+		return new \Wikibase\Lib\EntityIdValueParser(
+			new \Wikibase\DataModel\Entity\DispatchingEntityIdParser( $builders, $options ),
+			$options
+		);
+	};
+
+	$wgValueParsers['quantity'] = function( ValueParsers\ParserOptions $options ) {
+		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer();
+		return new \ValueParsers\QuantityParser(
+			new \ValueParsers\DecimalParser( $options, $unlocalizer ),
+			$options );
+	};
+
+	$wgValueParsers['bool'] = 'ValueParsers\BoolParser';
+	$wgValueParsers['float'] = 'ValueParsers\FloatParser';
+	$wgValueParsers['globecoordinate'] = 'ValueParsers\GlobeCoordinateParser';
+	$wgValueParsers['int'] = 'ValueParsers\IntParser';
+	$wgValueParsers['null'] = 'ValueParsers\NullParser';
+	$wgValueParsers['decimal'] = 'ValueParsers\DecimalParser';
 
 	// API module registration
 	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
