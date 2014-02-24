@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Unique Id generator implemented using an SQL table.
@@ -114,7 +115,10 @@ class SqlIdGenerator implements IdGenerator {
 			throw new \MWException( 'Could not generate a reliably unique ID.' );
 		}
 
-		if ( in_array( $id, Settings::get( 'idBlacklist' ) ) ) {
+		$idBlacklist = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'idBlacklist' );
+
+		if ( in_array( $id, $idBlacklist ) ) {
 			$id = $this->generateNewId( $type );
 		}
 

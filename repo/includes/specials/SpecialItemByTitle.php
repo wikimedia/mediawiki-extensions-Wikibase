@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Site;
 use Wikibase\ItemHandler;
-use Wikibase\Settings;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing items by providing the identifier of a site and the title
@@ -62,8 +62,12 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 			$itemHandler = new ItemHandler();
 			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
+
+			$normalizeItemByTitlePageNames = WikibaseRepo::getDefaultInstance()->
+				getSettings()->getSetting( 'normalizeItemByTitlePageNames' );
+
 			// Do we have an item content, and if not can we try harder?
-			if ( $itemContent === null && Settings::get( 'normalizeItemByTitlePageNames' ) === true ) {
+			if ( $itemContent === null && $normalizeItemByTitlePageNames === true ) {
 				// Try harder by requesting normalization on the external site
 				$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
@@ -94,7 +98,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 */
 	protected function switchForm( $siteId, $page ) {
 
-		$groups = Settings::get( 'siteLinkGroups' );
+		$groups = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'siteLinkGroups' );
 		$sites = \SiteSQLStore::newInstance()->getSites();
 
 		if ( $sites->hasSite( $siteId ) ) {

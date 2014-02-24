@@ -62,8 +62,7 @@ class SqlStore implements Store {
 	private $cacheDuration;
 
 	public function __construct() {
-		//NOTE: once I59e8423c is in, we no longer need the singleton.
-		$settings = Settings::singleton();
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
@@ -261,10 +260,11 @@ class SqlStore implements Store {
 	 * @param DatabaseBase $db
 	 */
 	private function updateTermsTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'withoutTermSearchKey' );
 
 		// ---- Update from 0.1 or 0.2. ----
-		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) &&
-			!Settings::get( 'withoutTermSearchKey' ) ) {
+		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) && !$withoutTermSearchKey ) {
 
 			$updater->addExtensionField(
 				'wb_terms',
@@ -448,7 +448,10 @@ class SqlStore implements Store {
 	 * @return PropertyInfoTable
 	 */
 	protected function newPropertyInfoTable() {
-		if ( Settings::get( 'usePropertyInfoTable' ) ) {
+		$usePropertyInfoTable = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'usePropertyInfoTable' );
+
+		if ( $usePropertyInfoTable ) {
 			$table = new PropertyInfoTable( false );
 			$key = $this->cachePrefix . ':CachingPropertyInfoStore';
 			return new CachingPropertyInfoStore( $table, ObjectCache::getInstance( $this->cacheType ),

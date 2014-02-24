@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\IdGenerator;
-use Wikibase\Settings;
 use Wikibase\StoreFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\SqlIdGenerator
@@ -26,9 +26,11 @@ class SqlIdGeneratorTest extends \MediaWikiTestCase {
 		 * @var IdGenerator $clone
 		 */
 		$generator = StoreFactory::getStore( 'sqlstore' )->newIdGenerator();
+		$idBlacklist = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'idBlacklist' );
 
 		for ( $i = 0; $i < 45; ++$i ) {
-			$this->assertFalse( in_array( $generator->getNewId( 'blacklisttest' ), Settings::get( 'idBlacklist' ) ) );
+			$this->assertFalse( in_array( $generator->getNewId( 'blacklisttest' ), $idBlacklist ) );
 		}
 	}
 

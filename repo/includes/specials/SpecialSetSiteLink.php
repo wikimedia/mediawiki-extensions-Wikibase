@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Summary;
-use Wikibase\Settings;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -381,7 +380,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				return false;
 			}
 
-			if ( !in_array( $badgeId->getPrefixedId(), array_keys( Settings::get( 'badgeItems' ) ) ) ) {
+			$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()
+					->getSetting( 'badgeItems' );
+
+			if ( !in_array( $badgeId->getPrefixedId(), array_keys( $badgeItems ) ) ) {
 				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
 				return false;
 			}

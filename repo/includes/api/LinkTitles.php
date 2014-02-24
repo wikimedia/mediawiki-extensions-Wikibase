@@ -9,7 +9,6 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Settings;
 use Wikibase\StoreFactory;
 use Wikibase\Summary;
 
@@ -29,9 +28,18 @@ class LinkTitles extends ApiWikibase {
 	 */
 	private $siteLinkTargetProvider;
 
+	/**
+	 * @since 0.5
+	 *
+	 * @var array
+	 */
+	protected $siteLinkGroups;
+
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'siteLinkGroups' );
 	}
 
 	/**
@@ -55,7 +63,7 @@ class LinkTitles extends ApiWikibase {
 		$this->validateParameters( $params );
 
 		// Sites are already tested through allowed params ;)
-		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
+		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		$fromSite = $sites->getSite( $params['fromsite'] );
 		$toSite = $sites->getSite( $params['tosite'] );
 
@@ -211,7 +219,7 @@ class LinkTitles extends ApiWikibase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
+		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array_merge( parent::getAllowedParams(), array(
 			'tosite' => array(
 				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),

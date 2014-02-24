@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Utility functions for Wikibase namespaces.
@@ -22,7 +23,8 @@ final class NamespaceUtils {
 	 * @return array [ content model id (string) -> namespace id (integer) ]
 	 */
 	public static function getEntityNamespaces() {
-		$namespaces = Settings::get( 'entityNamespaces' );
+		$namespaces = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'entityNamespaces' );
 
 		if ( !is_array( $namespaces ) ) {
 			return array();

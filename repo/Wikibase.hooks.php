@@ -7,7 +7,6 @@ use ApiEditPage;
 use Content;
 use ContentHandler;
 use DatabaseUpdater;
-use EditPage;
 use HistoryPager;
 use Html;
 use Language;
@@ -77,7 +76,8 @@ final class RepoHooks {
 		wfProfileIn( __METHOD__ );
 		global $wgNamespaceContentModels;
 
-		$namespaces = Settings::get( 'entityNamespaces' );
+		$namespaces = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'entityNamespaces' );
 
 		if ( empty( $namespaces ) ) {
 			wfProfileOut( __METHOD__ );
@@ -137,7 +137,10 @@ final class RepoHooks {
 			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
 		}
 
-		if ( Settings::get( 'defaultStore' ) === 'sqlstore' ) {
+		$defaultStore = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'defaultStore' );
+
+		if ( $defaultStore === 'sqlstore' ) {
 			/**
 			 * @var SQLStore $store
 			 */
