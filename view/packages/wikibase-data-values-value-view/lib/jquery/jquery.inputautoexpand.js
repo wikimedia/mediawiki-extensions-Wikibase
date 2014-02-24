@@ -423,8 +423,7 @@
 					top: '-9999px',
 					left: '-9999px',
 					right: 'auto',
-					bottom: 'auto',
-					wordWrap: 'break-word'
+					bottom: 'auto'
 				} );
 		}
 
@@ -464,7 +463,8 @@
 			'textTransform',
 			'wordSpacing',
 			'textIndent',
-			'overflowY'
+			'overflowY',
+			'wordWrap'
 		];
 
 		for( var i = 0; i < stylesToCopy.length; i++ ) {
@@ -474,8 +474,7 @@
 		// styles not being influenced by copying styles
 		$to.css( {
 			overflow: 'hidden',
-			overflowY: 'hidden',
-			wordWrap: 'break-word'
+			overflowY: 'hidden'
 		} );
 	}
 
