@@ -74,6 +74,24 @@
       "revId": "52fe765fefd7c4203edda3e7c0f1bf7c5440593a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_512a1b90",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T11:06:16Z",
+      "side": 1,
+      "message": "Oh, right. How is this done when using InstantCommons? Should this feature rely on that? Should we ignore this for now, merge this and start an other patch to get rid of the \u0027File:\u0027 constant?",
+      "parentUuid": "4e04eb01_11a493ae",
+      "revId": "52fe765fefd7c4203edda3e7c0f1bf7c5440593a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
