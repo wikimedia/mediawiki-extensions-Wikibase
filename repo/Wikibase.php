@@ -27,7 +27,7 @@ $GLOBALS['wgValueParsers'] = array();
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
-	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+	include_once( __DIR__ . '/../lib/WikibaseLib.php' );
 }
 
 if ( !defined( 'WBL_VERSION' ) ) {
