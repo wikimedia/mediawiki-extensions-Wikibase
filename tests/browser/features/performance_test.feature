@@ -4,6 +4,7 @@
 #
 # testing loading time of huge entities
 
+@performance_testing
 Feature: High performance
 
   Background:

@@ -76,6 +76,8 @@ module SitelinkPage
       self.site_id_input_field = sitelink[0]
       self.page_input_field_element.when_visible
       self.page_input_field = sitelink[1]
+      # remove additional characters sometimes suggested by the suggester
+      self.page_input_field_element.send_keys :delete
       save_sitelink_link
       wait_for_api_callback
     end
