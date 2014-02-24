@@ -15,7 +15,7 @@
 	// re-constructing the DOM in JavaScript.
 
 	var DATA_VALUE_TYPES_TO_SCRAPE = [
-		'globecoordinate',
+//		'globecoordinate',
 		'quantity',
 		'string',
 		'wikibase-entityid'
