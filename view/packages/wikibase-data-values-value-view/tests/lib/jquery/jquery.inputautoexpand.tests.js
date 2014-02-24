@@ -190,6 +190,7 @@
 		// Init plugin before measuring the initial height since the plugin will shrink the textarea
 		// to one line first:
 		$textarea.inputautoexpand( { expandWidth: false, expandHeight: true } );
+		$textarea.css( 'word-wrap', 'normal' );
 
 		var initialHeight = Math.ceil( $textarea.height() ),
 			previousHeight,
