@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Api;
 
 use UsageException;
-use Wikibase\Settings;
 use Wikibase\Test\PermissionsHelper;
 
 /**
@@ -31,7 +30,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		self::$hasSetup = true;
 
 		$this->permissions = $wgGroupPermissions;
-		$this->old_user = $wgUser;
+		$this->old_user = clone $wgUser;
 	}
 
 	protected function tearDown() {
@@ -44,12 +43,6 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 			$wgUser = $this->old_user;
 		}
 
-		if ( $wgUser ) { // should not be null, but sometimes, it is
-			// reset rights cache
-			$wgUser->addGroup( "dummy" );
-			$wgUser->removeGroup( "dummy" );
-		}
-
 		parent::tearDown();
 	}
 
@@ -59,12 +52,8 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		PermissionsHelper::applyPermissions( $permissions );
 
 		try {
-			if ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens', false ) ) {
-				$params[ 'token' ] = $wgUser->getEditToken();
-			}
-
 			$params[ 'action' ] = $action;
-			$this->doApiRequest( $params, null, false, $wgUser );
+			$this->doApiRequestWithToken( $params, null, $wgUser );
 
 			if ( $expectedError !== null ) {
 				$this->fail( 'API call should have failed with a permission error!' );

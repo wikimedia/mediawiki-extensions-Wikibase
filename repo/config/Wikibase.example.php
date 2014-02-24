@@ -48,12 +48,6 @@ call_user_func( function() {
 	// Tell MediaWIki to search the item namespace
 	$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
 
-	// More things to play with
-	$wgWBRepoSettings['apiInDebug'] = false;
-	$wgWBRepoSettings['apiInTest'] = false;
-	$wgWBRepoSettings['apiWithRights'] = true;
-	$wgWBRepoSettings['apiWithTokens'] = true;
-
 	$wgGroupPermissions['wbeditor']['item-set'] = true;
 
 	$wgWBRepoSettings['normalizeItemByTitlePageNames'] = true;
