@@ -75,12 +75,24 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 
 		foreach( $descriptions as $description ) {
 			$content->getEntity()->setDescription( 'en', $description );
-			$page->doEditContent( $content, 'edit description' );
+			$status = $page->doEditContent( $content, 'edit description' );
+			$this->assertTrue( $status->isGood(), 'status' );
 			$revIds[] = $page->getLatest();
+
+			/**
+			 * @var ItemContent $content
+			 */
+			$content = Revision::newFromId( $revIds[count( $revIds ) - 1] )->getContent();
+			$this->assertEquals( $description, $content->getEntity()->getDescription( 'en' ), 'description' );
 		}
 
+		/**
+		 * @var ItemContent $content2
+		 * @var ItemContent $content3
+		 */
 		$content2 = Revision::newFromId( $revIds[1] )->getContent();
 		$content3 = Revision::newFromId( $revIds[2] )->getContent();
+		$this->assertEquals( $descriptions[2], $content3->getEntity()->getDescription( 'en' ), 'revisions' );
 
 		return array(
 			array( $content3, $revIds[0], array( 'diff' => '0', 'oldid' => $revIds[0] ), $title, 'diff=0' ),
@@ -88,8 +100,11 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 			array( $content2, $revIds[0], array( 'diff' => 'next', 'oldid' => $revIds[0] ), $title, 'diff=next' ),
 			array( $content2, $revIds[1], array( 'diff' => 'prev', 'oldid' => $revIds[1] ), $title, 'diff=prev' ),
 			array( $content3, $revIds[1], array( 'diff' => 'cur', 'oldid' => $revIds[1] ), $title, 'diff=cur' ),
+			array( $content3, $revIds[1], array( 'diff' => 'c', 'oldid' => $revIds[1] ), $title, 'diff=c' ),
+			array( $content3, $revIds[1], array( 'diff' => '0', 'oldid' => $revIds[1] ), $title, 'diff=0' ),
+			array( $content3, $revIds[1], array( 'diff' => '', 'oldid' => $revIds[1] ), $title, 'diff=' ),
 			array( $content3, $revIds[2], array(), $title, 'no query params' ),
-			array( null, $revIds[1], array( 'diff' => 'kitten', 'oldid' => $revIds[0] ), $title, 'diff=kitten' )
+			array( null, $revIds[1], array( 'diff' => '-1', 'oldid' => $revIds[0] ), $title, 'diff=-1' )
 		);
 	}
 
