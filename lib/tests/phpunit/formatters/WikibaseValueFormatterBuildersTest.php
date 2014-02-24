@@ -133,8 +133,8 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			'commons link' => array(
 				SnakFormatter::FORMAT_HTML,
 				$options,
-				new StringValue( 'example.jpg' ),
-				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:example\\.jpg">example\\.jpg</a>$@',
+				new StringValue( 'Example.jpg' ),
+				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
 			),
 		);

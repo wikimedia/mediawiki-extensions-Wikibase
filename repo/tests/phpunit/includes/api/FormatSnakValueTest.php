@@ -91,7 +91,7 @@ class FormatSnakValueTest extends \ApiTestCase {
 				'commonsMedia',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'@commons\.wikimedia\.org\/wiki\/File:example\.jpg@' ),
+				'@commons\.wikimedia\.org\/wiki\/File:Example\.jpg@' ),
 
 			// FIXME: This test uses the production environment, but it should have its own mock data
 			array( new EntityIdValue( new ItemId( 'Q200000' ) ),
