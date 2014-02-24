@@ -34,6 +34,24 @@
       "revId": "3f9d6fd0a3b2a46f09649f371142e6505ef9e31a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b1203fa9",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-24T11:11:55Z",
+      "side": 1,
+      "message": "yes ;p",
+      "parentUuid": "4e04eb01_9cc20c87",
+      "revId": "3f9d6fd0a3b2a46f09649f371142e6505ef9e31a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
