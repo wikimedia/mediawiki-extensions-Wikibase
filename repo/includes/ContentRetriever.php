@@ -5,7 +5,6 @@ namespace Wikibase;
 use Article;
 use Content;
 use Revision;
-use Title;
 use WebRequest;
 
 /**
@@ -18,6 +17,7 @@ use WebRequest;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig < thiemo.maettig@wikimedia.de >
  */
 class ContentRetriever {
 
@@ -30,20 +30,18 @@ class ContentRetriever {
 	 * @todo split out the get revision id stuff, add tests and see if
 	 * any core code can be shared here
 	 *
-	 * @param Article $article
-	 * @param Title $title
 	 * @param WebRequest $request
+	 * @param Article $article
 	 *
 	 * @return Content|null
 	 */
-	public function getContentForRequest( Article $article, Title $title, WebRequest $request ) {
-		$queryValues = $request->getQueryValues();
-		$oldId = $article->getOldID();
+	public function getContentForRequest( WebRequest $request, Article $article ) {
+		$revision = $article->getRevisionFetched();
 
-		if ( array_key_exists( 'diff', $queryValues ) ) {
-			$revision = $this->getDiffRevision( $oldId, $queryValues['diff'] );
-		} else {
-			$revision = Revision::newFromTitle( $title, $oldId );
+		if ( $request->getCheck( 'diff' ) ) {
+			$oldId = $revision->getId();
+			$diffValue = $request->getVal( 'diff' );
+			$revision = $this->resolveDiffRevision( $oldId, $diffValue, $article );
 		}
 
 		return $revision !== null ?
@@ -56,53 +54,39 @@ class ContentRetriever {
 	 * @since 0.5
 	 *
 	 * @param int $oldId
-	 * @param string|int $diffValue
+	 * @param int|string $diffValue
+	 * @param Article $article
 	 *
 	 * @return Revision|null
 	 */
-	public function getDiffRevision( $oldId, $diffValue ) {
-		if ( $this->isSpecialDiffParam( $diffValue ) ) {
-			return $this->resolveDiffRevision( $oldId, $diffValue );
+	protected function resolveDiffRevision( $oldId, $diffValue, Article $article )
+	{
+		$newid = $this->resolveNewid( $oldId, $diffValue, $article );
+
+		if ( !$newid ) {
+			$newid = $article->getTitle()->getLatestRevID();
 		}
 
-		if ( is_numeric( $diffValue ) ) {
-			$revId = (int)$diffValue;
-			return Revision::newFromId( $revId );
-		}
-
-		// uses default handling for revision not found
-		// @todo error handling could be improved!
-		return null;
+		return Revision::newFromId( $newid );
 	}
 
 	/**
-	 * @param mixed $diffValue
+	 * Get the revision ID specified in the diff parameter or prev/next revision of oldid
 	 *
-	 * @return boolean
-	 */
-	protected function isSpecialDiffParam( $diffValue ) {
-		return in_array( $diffValue, array( 'prev', 'next', 'cur', '0' ), true );
-	}
-
-	/**
-	 * For non-revision ids in the diff request param, get the correct revision
+	 * @since 0.5
 	 *
 	 * @param int $oldId
-	 * @param string|int $diffValue
+	 * @param int|string $diffValue
+	 * @param Article $article
 	 *
-	 * @return Revision
+	 * @return Bool|int
 	 */
-	protected function resolveDiffRevision( $oldId, $diffValue ) {
-		$oldIdRev = Revision::newFromId( $oldId );
-
-		if ( $diffValue === 0 || $diffValue === 'cur' ) {
-			$curId = $oldIdRev->getTitle()->getLatestRevID();
-			return Revision::newFromId( $curId );
-		} elseif ( $diffValue === 'next' ) {
-			return $oldIdRev->getNext();
-		}
-
-		return $oldIdRev;
+	protected function resolveNewid( $oldId, $diffValue, Article $article )
+	{
+		$contentHandler = $article->getRevisionFetched()->getContentHandler();
+		$context = $article->getContext();
+		$differenceEngine = $contentHandler->createDifferenceEngine( $context, $oldId, $diffValue );
+		return $differenceEngine->getNewid();
 	}
 
 }

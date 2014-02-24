@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Revision;
+use Title;
 use Wikibase\ContentRetriever;
 use Wikibase\Item;
 use Wikibase\ItemContent;
@@ -28,30 +29,125 @@ use WikiPage;
  */
 class ContentRetrieverTest extends \MediaWikiTestCase {
 
+	/**
+	 * @param int $oldId
+	 * @param Revision $revision
+	 * @param Title $title
+	 *
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getArticleMock( $oldId, Revision $revision, Title $title )
+	{
+		$context = $this->getContextMock( $title );
+		$page = $this->getPageMock( $revision );
+
+		$article = $this->getMockBuilder( 'Article' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$article->expects( $this->any() )
+			->method( 'getContext' )
+			->will( $this->returnValue( $context ) );
+
+		$article->expects( $this->any() )
+			->method( 'getOldID' )
+			->will( $this->returnValue( $oldId ) );
+
+		$article->expects( $this->any() )
+			->method( 'getPage' )
+			->will( $this->returnValue( $page ) );
+
+		$article->expects( $this->any() )
+			->method( 'getRevisionFetched' )
+			->will( $this->returnValue( $revision ) );
+
+		$article->expects( $this->any() )
+			->method( 'getTitle' )
+			->will( $this->returnValue( $title ) );
+
+		return $article;
+	}
+
+	/**
+	 * @param Title $title
+	 *
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getContextMock( Title $title )
+	{
+		$context = $this->getMockBuilder( 'IContextSource' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$context->expects( $this->any() )
+			->method( 'getLanguage' )
+			->will( $this->returnValue( $title->getPageLanguage() ) );
+
+		$context->expects( $this->any() )
+			->method( 'getTitle' )
+			->will( $this->returnValue( $title ) );
+
+		return $context;
+	}
+
+	/**
+	 * @param Revision $revision
+	 *
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getPageMock( Revision $revision )
+	{
+		$page = $this->getMockBuilder( 'WikiPage' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$page->expects( $this->any() )
+			->method( 'getContentHandler' )
+			->will( $this->returnValue( $revision->getContentHandler() ) );
+
+		return $page;
+	}
+
+	/**
+	 * @param array $queryParams
+	 *
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getRequestMock( array $queryParams )
+	{
+		$request = $this->getMockBuilder( 'WebRequest' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$request->expects( $this->any() )
+			->method( 'getCheck' )
+			->will( $this->returnValue( isset( $queryParams['diff'] ) ) );
+
+		$request->expects( $this->any() )
+			->method( 'getQueryValues' )
+			->will( $this->returnValue( $queryParams ) );
+
+		$request->expects( $this->any() )
+			->method( 'getVal' )
+			->will( $this->returnValue( isset( $queryParams['diff'] ) ? $queryParams['diff'] : null ) );
+
+		return $request;
+	}
+
 	public function testGetContentForRequest() {
 		$cases = $this->getContentCases();
 
 		foreach( $cases as $case ) {
+			/** @var Title $title */
 			list( $expected, $oldId, $queryParams, $title, $message ) = $case;
 
-			$article = $this->getMockBuilder( 'Article' )
-				->disableOriginalConstructor()
-				->getMock();
+			$revision = Revision::newFromId( $oldId );
 
-			$article->expects( $this->any() )
-				->method( 'getOldID' )
-				->will( $this->returnValue( $oldId ) );
-
-			$request = $this->getMockBuilder( 'WebRequest' )
-				->disableOriginalConstructor()
-				->getMock();
-
-			$request->expects( $this->any() )
-				->method( 'getQueryValues' )
-				->will( $this->returnValue( $queryParams ) );
+			$request = $this->getRequestMock( $queryParams );
+			$article = $this->getArticleMock( $oldId, $revision, $title );
 
 			$contentRetriever = new ContentRetriever();
-			$content = $contentRetriever->getContentForRequest( $article, $title, $request );
+			$content = $contentRetriever->getContentForRequest( $request, $article );
 
 			$this->assertEquals( $expected, $content, $message );
 		}
@@ -77,10 +173,18 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 			$content->getEntity()->setDescription( 'en', $description );
 			$page->doEditContent( $content, 'edit description' );
 			$revIds[] = $page->getLatest();
+
+			/** @var ItemContent $content */
+			$content = Revision::newFromId( $revIds[count( $revIds ) - 1] )->getContent();
 		}
 
+		/**
+		 * @var ItemContent $content2
+		 * @var ItemContent $content3
+		 */
 		$content2 = Revision::newFromId( $revIds[1] )->getContent();
 		$content3 = Revision::newFromId( $revIds[2] )->getContent();
+		$this->assertNotEquals( $content2, $content3, 'Setup failed' );
 
 		return array(
 			array( $content3, $revIds[0], array( 'diff' => '0', 'oldid' => $revIds[0] ), $title, 'diff=0' ),
@@ -88,8 +192,11 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 			array( $content2, $revIds[0], array( 'diff' => 'next', 'oldid' => $revIds[0] ), $title, 'diff=next' ),
 			array( $content2, $revIds[1], array( 'diff' => 'prev', 'oldid' => $revIds[1] ), $title, 'diff=prev' ),
 			array( $content3, $revIds[1], array( 'diff' => 'cur', 'oldid' => $revIds[1] ), $title, 'diff=cur' ),
+			array( $content3, $revIds[1], array( 'diff' => 'c', 'oldid' => $revIds[1] ), $title, 'diff=c' ),
+			array( $content3, $revIds[1], array( 'diff' => '0', 'oldid' => $revIds[1] ), $title, 'diff=0' ),
+			array( $content3, $revIds[1], array( 'diff' => '', 'oldid' => $revIds[1] ), $title, 'diff=' ),
 			array( $content3, $revIds[2], array(), $title, 'no query params' ),
-			array( null, $revIds[1], array( 'diff' => 'kitten', 'oldid' => $revIds[0] ), $title, 'diff=kitten' )
+			array( null, $revIds[1], array( 'diff' => '-1', 'oldid' => $revIds[0] ), $title, 'diff=-1' )
 		);
 	}
 
