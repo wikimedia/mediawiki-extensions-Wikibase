@@ -12,7 +12,7 @@ item_label = generate_random_string(10)
 item_description = generate_random_string(20)
 prop_label = generate_random_string(10)
 prop_description = generate_random_string(20)
-prop_datatype = "Geographic coordinate"
+prop_datatype = "Geographic coordinates"
 not_recognized = "no valid value recognized"
 # utf8 code for ° sign: \u00B0
 coordinate_values = Array.new

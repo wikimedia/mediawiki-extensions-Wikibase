@@ -84,6 +84,7 @@ module StatementPage
     addClaimToFirstStatement
     self.wait_for_property_value_box
     self.statementValueInput = statement_value
+    ajax_wait
     saveStatement
     ajax_wait
     self.wait_for_statement_request_finished

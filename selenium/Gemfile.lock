@@ -10,6 +10,7 @@ GEM
     faker (1.2.0)
       i18n (~> 0.5)
     ffi (1.9.3)
+    ffi (1.9.3-x86-mingw32)
     i18n (0.6.9)
     multi_json (1.8.2)
     page-object (0.9.4)
@@ -42,6 +43,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   page-object

@@ -36,8 +36,8 @@ while count < num_props_item do
   count = count + 1
 end
 
-statement_value = generate_random_string(10) + '.jpg'
-statement_value_changed = generate_random_string(10) + '.jpg'
+statement_value = 'C' + generate_random_string(10) + '.jpg'
+statement_value_changed = 'C' + generate_random_string(10) + '.jpg'
 
 describe "Check statements UI" do
   before :all do
@@ -134,6 +134,7 @@ describe "Check statements UI" do
         page.statementValueInput?.should be_true
         page.saveStatement?.should be_false
         page.statementValueInput = statement_value
+        ajax_wait
         page.saveStatement?.should be_true
         page.cancelStatement
         page.addStatement?.should be_true
@@ -156,6 +157,7 @@ describe "Check statements UI" do
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
         page.statementValueInput = statement_value
+        ajax_wait
         page.saveStatement
         ajax_wait
         page.wbErrorDiv?.should be_true
@@ -249,6 +251,7 @@ describe "Check statements UI" do
         ajax_wait
         page.statementValueInput?.should be_true
         page.statementValueInput = statement_value
+        ajax_wait
         page.statementValueInput_element.send_keys :return
         ajax_wait
         page.wait_for_statement_request_finished
@@ -262,7 +265,7 @@ describe "Check statements UI" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
-        values = [generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg']
+        values = ['C' + generate_random_string(10) + '.jpg', 'C' + generate_random_string(10) + '.jpg', 'C' + generate_random_string(10) + '.jpg']
         page.add_statement(properties_cm[0]["label"], values[0])
         page.statement1Name.should == properties_cm[0]["label"]
         page.statement1ClaimValue1.should == values[0]
@@ -314,9 +317,10 @@ describe "Check statements UI" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
-        statement1_values = [generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg']
-        statement2_values = [generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg']
+        statement1_values = ['C' + generate_random_string(10) + '.jpg', 'C' + generate_random_string(10) + '.jpg']
+        statement2_values = ['C' + generate_random_string(10) + '.jpg', 'C' + generate_random_string(10) + '.jpg']
         page.add_statement(properties_cm[0]["label"], statement1_values[0])
+        ajax_wait
         page.statement1Name.should == properties_cm[0]["label"]
         page.statement1ClaimValue1.should == statement1_values[0]
         page.add_statement(properties_cm[1]["label"], statement2_values[0])
@@ -352,8 +356,10 @@ describe "Check statements UI" do
         page.statementValueInput_element.clear
         page.saveStatement?.should be_false
         page.statementValueInput = statement_value_changed
+        ajax_wait
         page.saveStatement?.should be_true
         page.cancelStatement
+        ajax_wait
         page.statement1Name?.should be_true
         page.statement1ClaimValue1?.should be_true
         page.addStatement?.should be_true
@@ -371,6 +377,7 @@ describe "Check statements UI" do
         page.editFirstStatement
         page.statementValueInput_element.clear
         page.statementValueInput = statement_value_changed
+        ajax_wait
         page.saveStatement
         ajax_wait
         page.wait_for_statement_request_finished
