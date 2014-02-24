@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_d7dce6e7",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "store? (lowercase?)",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_17d36ed8",
+        "filename": "lib/includes/store/CompositeBagOStuff.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "prefer blank line between namespace and \"use\"",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_57d1f6ce",
+        "filename": "lib/includes/store/CompositeBagOStuff.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "be more descriptive about what this class does",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f14da7c8",
+        "filename": "lib/includes/store/CompositeBagOStuff.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "after digging around core, i find \"cas\" \u003d \"check and set\".  maybe a comment here explaining \"cas\" would be helpful.",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_91ce6330",
+        "filename": "lib/includes/store/CompositeBagOStuff.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "comment is helpful",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_97c77e15",
+        "filename": "lib/includes/store/CompositeBagOStuff.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "\"cas\" really!? (though see this comes from core)",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_77ce3233",
+        "filename": "lib/includes/store/CompositeBagOStuff.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "?",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_77e5129f",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "for?",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b7eb9a76",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "think this should be Store, though might want to rename the \"store\" directory accordingly",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_57e8d676",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-24T10:17:37Z",
+      "side": 1,
+      "message": "would prefer Util",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
