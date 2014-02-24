@@ -3,6 +3,7 @@
 namespace Wikibase\Dumpers;
 
 use ExceptionHandler;
+use InvalidArgumentException;
 use MessageReporter;
 use MWException;
 use NullMessageReporter;
@@ -75,14 +76,14 @@ class JsonDumpGenerator {
 
 	/**
 	 * @param resource $out
-	 * @param \Wikibase\EntityLookup $lookup
+	 * @param EntityLookup $lookup
 	 * @param Serializer $entitySerializer
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $out, EntityLookup $lookup, Serializer $entitySerializer ) {
 		if ( !is_resource( $out ) ) {
-			throw new \InvalidArgumentException( '$out must be a file handle!' );
+			throw new InvalidArgumentException( '$out must be a file handle!' );
 		}
 
 		$this->out = $out;
@@ -126,14 +127,14 @@ class JsonDumpGenerator {
 	}
 
 	/**
-	 * @param \ExceptionHandler $exceptionHandler
+	 * @param ExceptionHandler $exceptionHandler
 	 */
 	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 
 	/**
-	 * @return \ExceptionHandler
+	 * @return ExceptionHandler
 	 */
 	public function getExceptionHandler() {
 		return $this->exceptionHandler;
@@ -148,19 +149,19 @@ class JsonDumpGenerator {
 	 * @param int $shardingFactor
 	 * @param int $shard
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setShardingFilter( $shardingFactor, $shard ) {
 		if ( !is_int( $shardingFactor ) || $shardingFactor < 1 ) {
-			throw new \InvalidArgumentException( '$shardingFactor must be an integer > 0' );
+			throw new InvalidArgumentException( '$shardingFactor must be an integer > 0' );
 		}
 
 		if ( !is_int( $shard ) || $shard < 0 ) {
-			throw new \InvalidArgumentException( '$shard must be an integer >= 0' );
+			throw new InvalidArgumentException( '$shard must be an integer >= 0' );
 		}
 
 		if ( $shard >= $shardingFactor ) {
-			throw new \InvalidArgumentException( '$shard must be smaller than $shardingFactor' );
+			throw new InvalidArgumentException( '$shard must be smaller than $shardingFactor' );
 		}
 
 		$this->shardingFactor = $shardingFactor;
@@ -172,7 +173,7 @@ class JsonDumpGenerator {
 	 *
 	 * @param string|null $type The desired type (use null for any type).
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setEntityTypeFilter( $type ) {
 		$this->entityType = $type;
@@ -256,7 +257,7 @@ class JsonDumpGenerator {
 	 * @param $data
 	 *
 	 * @return string
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	public function encode( $data ) {
 		$json = json_encode( $data, $this->jsonFlags );
