@@ -61,48 +61,20 @@ class ContentRetriever {
 	 * @return Revision|null
 	 */
 	public function getDiffRevision( $oldId, $diffValue ) {
-		if ( $this->isSpecialDiffParam( $diffValue ) ) {
-			return $this->resolveDiffRevision( $oldId, $diffValue );
+		$oldRevision = Revision::newFromId( $oldId );
+
+		if ( $diffValue === 'prev' ) {
+			return $oldRevision;
+		} else if ( $diffValue === 'next' ) {
+			return $oldRevision->getNext();
 		}
 
-		if ( is_numeric( $diffValue ) ) {
-			$revId = (int)$diffValue;
-			return Revision::newFromId( $revId );
+		// All remaining non-numeric values including 'cur' become 0, see DifferenceEngine
+		$revId = intval( $diffValue );
+		if ( $revId === 0 ) {
+			$revId = $oldRevision->getTitle()->getLatestRevID();
 		}
-
-		// uses default handling for revision not found
-		// @todo error handling could be improved!
-		return null;
-	}
-
-	/**
-	 * @param mixed $diffValue
-	 *
-	 * @return boolean
-	 */
-	protected function isSpecialDiffParam( $diffValue ) {
-		return in_array( $diffValue, array( 'prev', 'next', 'cur', '0' ), true );
-	}
-
-	/**
-	 * For non-revision ids in the diff request param, get the correct revision
-	 *
-	 * @param int $oldId
-	 * @param string|int $diffValue
-	 *
-	 * @return Revision
-	 */
-	protected function resolveDiffRevision( $oldId, $diffValue ) {
-		$oldIdRev = Revision::newFromId( $oldId );
-
-		if ( $diffValue === 0 || $diffValue === 'cur' ) {
-			$curId = $oldIdRev->getTitle()->getLatestRevID();
-			return Revision::newFromId( $curId );
-		} elseif ( $diffValue === 'next' ) {
-			return $oldIdRev->getNext();
-		}
-
-		return $oldIdRev;
+		return Revision::newFromId( $revId );
 	}
 
 }
