@@ -6,7 +6,6 @@ use Wikibase\ChangeOp\ChangeOpSiteLink;
 use ApiBase;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
-use Wikibase\Settings;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -114,7 +113,7 @@ class SetSiteLink extends ModifyEntity {
 			return new ChangeOpSiteLink( $linksite );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
-			$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
+			$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 			$site = $sites->getSite( $linksite );
 
 			if ( $site === false ) {
@@ -164,7 +163,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
+		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		// Experimental setting of badges in api
 		// @todo remove experimental once JS UI is in place, (also remove the experimental examples below and TESTS)

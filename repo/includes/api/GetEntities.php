@@ -12,7 +12,6 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
 use Wikibase\StoreFactory;
@@ -45,12 +44,21 @@ class GetEntities extends ApiWikibase {
 	 */
 	private $siteLinkTargetProvider;
 
+	/**
+	 * @since 0.5
+	 *
+	 * @var array
+	 */
+	protected $siteLinkGroups;
+
 	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
-		$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
+		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
 	}
 
 	/**
@@ -242,7 +250,7 @@ class GetEntities extends ApiWikibase {
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
+		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(
 				ApiBase::PARAM_TYPE => 'string',

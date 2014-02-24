@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Factory for obtaining a store instance.
@@ -26,8 +27,11 @@ class StoreFactory {
 	public static function getStore( $store = false, $reset = 'no' ) {
 		global $wgWBStores;
 		static $instances = array();
+		$defaultStore = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'defaultStore' );
 
-		$store = $store === false || !array_key_exists( $store, $wgWBStores ) ? Settings::get( 'defaultStore' ) : $store;
+		$store = $store === false || !array_key_exists( $store, $wgWBStores ) ?
+				$defaultStore : $store;
 
 		if ( $reset !== true && $reset !== 'reset'
 			&& isset( $instances[$store] ) ) {

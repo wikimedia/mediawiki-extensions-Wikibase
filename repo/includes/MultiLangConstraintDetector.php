@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Status;
 use Diff\Diff;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Detector for multilang constraint violations.
@@ -70,11 +71,12 @@ class MultiLangConstraintDetector {
 	 */
 	public function addConstraintChecks( Entity $entity, Status $status, EntityDiff $diff = null, array $limits = null ) {
 		global $wgLang;
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 
-		$truncateLength = Settings::get( 'multilang-truncate-length' );
+		$truncateLength = $settings->getSetting( 'multilang-truncate-length' );
 
 		if ( !isset( $limits ) ) {
-			$limits = Settings::get( 'multilang-limits' );
+			$limits = $settings->getSetting( 'multilang-limits' );
 		}
 
 		$diffs = array(

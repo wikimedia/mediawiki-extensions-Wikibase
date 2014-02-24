@@ -4,10 +4,10 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
-use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
 use Wikibase\TermSqlIndex;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\TermSqlIndex
@@ -48,7 +48,10 @@ class TermSqlIndexTest extends TermIndexTest {
 	 * @param boolean $matches
 	 */
 	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
-		if ( Settings::get( 'withoutTermSearchKey' ) ) {
+		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'withoutTermSearchKey' );
+
+		if ( $withoutTermSearchKey ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
