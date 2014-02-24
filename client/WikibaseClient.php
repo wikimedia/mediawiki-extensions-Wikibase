@@ -35,7 +35,7 @@ define( 'WBC_DIR', __DIR__ );
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
 if ( !defined( 'WBL_VERSION' ) ) {
-	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+	include_once( __DIR__ . '/../lib/WikibaseLib.php' );
 }
 
 if ( !defined( 'WBL_VERSION' ) ) {
