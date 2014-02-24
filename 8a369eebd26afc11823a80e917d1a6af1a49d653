@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_4fc2763a",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "Currently \"12/11\" will become November 2012 but should - in my opinion - become December 2011. I suggest to rewrite these two if. Basically:\n1. if $a can not be month and $b can be month then use $a as year and $b as month.\n2. if $a can be month then use $b as year and $a as month.\nTests:\n12/12 \u003d December 2012\n12/11 \u003d December 2011\n11/12 \u003d November 2012\n13/12 \u003d December 2013\n12/13 \u003d December 2013\n13/13 \u003d fail",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2fc16a33",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "Either I\u0027m confused or this doesn\u0027t make much sense at them moment. canBeMonth() currently checks for numbers only. Why compare numbers with months names?",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_8fe75edf",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "1. /^(\\+|\\-)?(\\d+)$/ can be simplified to /^[+-]?(\\d+)$/\n2. The $matches array is currently not used.\n3. /^(\\d+) ?BC$/ should be at least /^(\\d+)\\s*BC$/i\n4. It\u0027s possible to combine the two to /^([+-]?)(\\d+)(\\s*BC)?$/i and the use the matches array to check if $matches[1] \u003d\u003d\u003d \u0027-\u0027 or !empty( $matches[3] ).\n5. \"BC\" needs to be localized (maybe in a later patch). In German it\u0027s \"v. Chr.\" for example.",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_af11fab2",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "In my opinion using $year[0] is fine.",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_6f2bf2db",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "No \u003d\u003d\u003d?",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2fd84a21",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "Not nice to have this regex twice in stringParse() and here.",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_ef302255",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "This is the same or at least very similar regex for the third time. In my opinion this is a redundancy that should be avoided.",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_ef65c242",
+        "filename": "lib/tests/phpunit/parsers/YearMonthTimeParserTest.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "Add:\n\u002712/12\u0027 \u003d\u003e \u00272012-12\u0027\n\u002712/11\u0027 \u003d\u003e \u00272011-12\u0027\n\u002711/12\u0027 \u003d\u003e \u00272012-11\u0027\n\u00270/1999\u0027 \u003d\u003e ?\n\u00271999/0\u0027 \u003d\u003e ? (not sure, but from what I remember we decided these should be valid at this point)",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_6f72d211",
+        "filename": "lib/tests/phpunit/parsers/YearMonthTimeParserTest.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "Add:\n\u002713/13\u0027\n\u002713/1999\u0027\n\u00271999/13\u0027",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_8fe87e78",
+        "filename": "lib/tests/phpunit/parsers/YearTimeParserTest.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-24T17:00:21Z",
+      "side": 1,
+      "message": "1. Add \"101bc\" lower cased. I don\u0027t see a reason why this shouldn\u0027t be parsed.\n2. Need to add the German \"101 v. Chr.\" and most probably many other localisations. Maybe not in this patch. At least add it as a TODO comment.",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
