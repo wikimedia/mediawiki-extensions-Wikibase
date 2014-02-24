@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_711ab77f",
+        "filename": "client/includes/SiteLinkProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-24T11:14:20Z",
+      "side": 1,
+      "message": "missing\n\nuse Site;\nuse SiteStore;\nuse Title;\nuse Wikibase\\DataModel\\SiteLink;",
+      "revId": "00c3a0c3f5de5903e91911f584f91eddb52b45c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
