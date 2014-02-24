@@ -1920,13 +1920,13 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 *scheme – parte implícita de la cadena Iri
 *hierarchicalpart – parte implícita de la cadena Iri
 *query – parte implícita de la cadena Iri
-*fragment – parte implícita de la cadena Iri',
+*fragment – parte implícita de la cadena Iri', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Multimedia de Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Enllaz a ficheros guardaos en Wikimedia Commons. Demientres la entrada, guetaráse nel espaciu de nomes "File" de Commons pa buscar entraes que coincidan.
 *scheme – parte implícita de la cadena Iri
 *hierarchicalpart – parte implícita de la cadena Iri
 *query – parte implícita de la cadena Iri
-*fragment – parte implícita de la cadena Iri',
+*fragment – parte implícita de la cadena Iri', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenada del globu',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Datos lliterales pa una posición xeográfica dada como un par llatitú-llonxitú en gms o en graos decimales pal cuerpu estelar dau. De mou predetermináu ye "Tierra" y llueu "WGS84". Añade una resolución y un rangu.
 * latitude – primera parte implícita (float, dms, dm, dd) de la cadena de coordenaes; la direición dase o col signu del prefixu o col sufixu N/S
@@ -1937,7 +1937,7 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-listdatatypes-quantity-body' => "Campu de datos lliteral pa una cantidá rellacionada con alguna clase d'unidá bien definida. La unidá concreta va nos valores de datos introducíos.
 * value – parte implícita de la cadena (el mapéu del prefixu d'unidá nun ta claru)
 * unit – parte implícita de la cadena (el mapéu del organismu estandarizador nun ta claru)
-* accuracy (opcional) – valor de datos explícitu; tien la mesma unidá que'l valor",
+* accuracy (opcional) – valor de datos explícitu; tien la mesma unidá que'l valor", # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testu monollingüe',
 	'wikibase-listdatatypes-monolingual-text-body' => "Campu de datos lliteral pa una cadena que nun se traduz a otros idiomes. Esti tipu de cadena defínese una vez y reutilízase'n tolos idiomes. L'usu típicu ye pa los nomes xeográficos escritos na llingua llocal, un identificador d'algún tipu, una fórmula química o un nome científicu en llatín.
 * language – valor esplícitu pa identificar la llingua de la parte de testu
@@ -4016,13 +4016,13 @@ for at finde ud af, hvad der er sket med det.',
 * ordning – implicit del af Iri-streng
 * hierarkisk del – implicit del af Iri-streng
 * forespørgsel – implicit del af Iri-streng
-* fragment – implicit del af Iri-streng',
+* fragment – implicit del af Iri-streng', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons medier',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Henvisning til filer gemt på Wikimedia Commons. Ved indgang vil "Fil"-navnerummet på Commons blive eftersøgt for tilsvarende poster.
 * ordning – implicit del af Iri-streng
 * hierarkisk del – implicit del af Iri-streng
 * forespørgsel – implicit del af Iri-streng
-* fragment – implicit del af Iri-streng',
+* fragment – implicit del af Iri-streng', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Kuglekoordinat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Bogstavelige data for en geografisk position givet som et breddegrad-længdegrad-par i dms eller decimale grader for det angivne himmellegeme. Standard er "Jorden" og derefter "WGS84". Det tilføjer en opløsning og område.
 * breddegrad – implicit første del (float, dms, dm, dd) af koordinatstrengen, retning er enten givet ved fortegn eller ved efterstillet N/S
@@ -4033,7 +4033,7 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-listdatatypes-quantity-body' => 'Bogstaveligt datafelt for en kvantitet, der relaterer sig til en veldefineret enhed. Den faktiske enhed indgår i de dataværdier, der indtastes.
 * værdi – implicit del af strengen (mapping af enhedspræfiks er uklart)
 * enhed – implicit del af strengen (mapping til standardiseringsorgan er uklart)
-* nøjagtighed (valgfri) – eksplicit dataværdi, har den samme enhed som værdien',
+* nøjagtighed (valgfri) – eksplicit dataværdi, har den samme enhed som værdien', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Tekst på ét sprog',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Bogstaveligt datafelt for en streng der ikke er oversat til andre sprog. Denne type streng er defineret en gang og bliver herefter genbrugt på alle sprog. Typisk brug er geografiske navne skrevet på lokalsproget, et id af en eller anden slags, en kemisk formel eller et videnskabeligt latinsk navn.
 * sprog – eksplicit værdi for at identificere sproget for tekstdelen
@@ -4401,23 +4401,23 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 * scheme – impliziter Teil der Iri-Zeichenkette.
 * hierarchicalpart – impliziter Teil der Iri-Zeichenkette.
 * query – impliziter Teil der Iri-Zeichenkette.
-* fragment – impliziter Teil der Iri-Zeichenkette.',
+* fragment – impliziter Teil der Iri-Zeichenkette.', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mediendatei auf Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Link zu Dateien, die auf Wikimedia Commons gespeichert sind. Es wird der „Datei“-Namensraum auf Commons für passende Einträge durchsucht.
 * scheme – impliziter Teil der Iri-Zeichenkette.
 * hierarchicalpart – impliziter Teil der Iri-Zeichenkette.
 * query – impliziter Teil der Iri-Zeichenkette.
-* fragment – impliziter Teil der Iri-Zeichenkette.',
+* fragment – impliziter Teil der Iri-Zeichenkette.', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinate',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literale Daten für eine geografische Position, die als Breitengrad-Längengrad-Paar in GMS oder Dezimalgrad für den Sternenkörper angegeben ist. Standards sind „Erde“, anschließend „WGS84“. Es wird eine Auflösung und ein Bereich hinzugefügt.
 * latitude – impliziter erster Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „N/S“ angegeben.
 * longitude – impliziter zweiter Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „O/W“ angegeben.
-* globe – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.',
+* globe – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Menge',
 	'wikibase-listdatatypes-quantity-body' => 'Literales Datenfeld für eine Menge, die sich auf eine Art klar definierte Einheit bezieht. Die tatsächliche Einheit geht in die Datenwerte, die eingegeben werden.
 * value – impliziter Teil der Zeichenkette (Mapping des Einheitspräfixes ist unklar).
 * unit – impliziter Teil der Zeichenkette (Mapping zum Standardisieren des Körpers ist unklar).
-* accuracy (optional) – ausdrücklicher Datenwert. Hat die gleiche Einheit wie der Wert.',
+* accuracy (optional) – ausdrücklicher Datenwert. Hat die gleiche Einheit wie der Wert.', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Einsprachiger Text',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literales Datenfeld für eine Zeichenkette, die nicht in andere Sprachen übersetzt ist. Diese Art von Zeichenkette ist einmal definiert und wird auf allen Sprachen verwendet. Typische Verwendung sind geografische Namen, die in der lokalen Sprache geschrieben sind, eine Kennung gleicher Art, eine chemische Formel oder ein lateinischer wissenschaftlicher Name.
 * language – ausdrücklicher Wert zur Identifizierung der Sprache für den Textabschnitt.
@@ -5476,13 +5476,13 @@ Tu dirección IP quedará registrada en el historial de revisiones de esta entid
 *scheme - parte implícita de la cadena de texto IRI
 *hierarchicalpart - parte implícita de la cadena de texto IRI
 *query - parte implícita de la cadena de texto IRI
-*fragment - parte implícita de la cadena de texto IRI',
+*fragment - parte implícita de la cadena de texto IRI', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Archivos multimedia de Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Enlace hacia archivos de Wikimedia Commons. Durante la entrada, se realizará una búsqueda en el espacio de nombres "Archivo" de Commons para buscar entradas coincidentes.
 *scheme - parte implícita de la cadena de texto IRI
 *hierarchicalpart - parte implícita de la cadena de texto IRI
 *query - parte implícita de la cadena de texto IRI
-*fragment - parte implícita de la cadena de texto IRI',
+*fragment - parte implícita de la cadena de texto IRI', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenadas geográficas',
 	'wikibase-listdatatypes-quantity-head' => 'Cantidad',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Texto monolingüe',
@@ -6183,13 +6183,13 @@ $messages['fa'] = array(
 * شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
 * کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
-* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
+* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'رسانه‌های ویکی‌انبار',
 	'wikibase-listdatatypes-commonsmedia-body' => 'به فایل های موجود در ویکی انبار پیوند بدهید. هنگامی که در حال واردکردن نام فایل هستید، ویکی‌انبار به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
 * شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
 * کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
-* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
+* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'مختصات جغرافیایی',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود.
 * عرض جغرافیایی - بخش اول مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (شمالی/جنوبی) مشخص می شود
@@ -6200,7 +6200,7 @@ $messages['fa'] = array(
 	'wikibase-listdatatypes-quantity-body' => 'داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
 * مقدار - بخشی نامعلوم از رشته(اندازه گیری شده با پیشوندی نامعلوم)
 * یکا - بخشی نامعلوم از رشته(اندازه گیری شده با جسمی غیر استاندارد)
-* دقت(اختیاری) - مقداری معلوم(مشخص) که یکای آن همان یکای مقدار است',
+* دقت(اختیاری) - مقداری معلوم(مشخص) که یکای آن همان یکای مقدار است', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'متن تک‌زبانه',
 	'wikibase-listdatatypes-monolingual-text-body' => 'داده حروفی به صورت رشته ای که در زبان های دیگر واژه جدیدی برای آن ابداع نشده باشد. این نوع داده رشته ای فقط یک بار تعریف شده و در تمام زبان ها از همان تعریف استفاده می شود. نمونه های بارز این نوع رشته، نام های جغرافیایی هستند که با یک زبان محلی نوشته می شوند و نام های شناسه ای که به یک فرمول شیمیایی یا نام علمی لاتین اختصاص داده می شوند.
 * زبان - مقداری مشخص برای شناساندن متن
@@ -6913,23 +6913,23 @@ ffirmation ajoutée}}',
 * scheme — partie implicite de Iri-string
 * hierarchicalpart — partie implicite de Iri-string
 * query — partie implicite de Iri-string
-* fragment — partie implicite de Iri-string',
+* fragment — partie implicite de Iri-string', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Médias communs',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Lien vers des fichiers hébergés sur Wikimedia Commons. Lors de la saisie, l’espace de noms « Fichier » de Wikimedia Commons sera scruté à la recherche des entrées correspondantes.
 * scheme — partie implicite de Iri-string
 * hierarchicalpart — partie implicite de Iri-string
 * query — partie implicite de Iri-string
-* fragment — partie implicite de Iri-string',
+* fragment — partie implicite de Iri-string', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordonnées du globe',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Données littérales pour une position géographique donnée sous forme de paire latitude-longitude en GMS ou en degrés décimaux pour le corps céleste concerné. Par défaut, "Terre" puis "WGS84". Cela ajoute une résolution et une portée.
 * latitude — première partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe ou par le N/S en suffixe
 * longitude – seconde partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe soit par le E/W en suffixe
-* globe – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"',
+* globe – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Quantité',
 	'wikibase-listdatatypes-quantity-body' => 'Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.
 * value — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
 * unit — partie implicite de la chaîne (l’application du corps standardisé n’est pas claire)
-* accuracy (facultatif) — valeur de donnée explicite, ayant la même unité que la valeur',
+* accuracy (facultatif) — valeur de donnée explicite, ayant la même unité que la valeur', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Texte monolingue',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Champ de donnée littéral pour une chaîne qui n’est pas traduite dans d’autres langues. Ce type de chaîne est défini une fois et réutilisé dans toutes les langues. Une utilisation typique concerne les noms géographiques écrits dans la langue locale, un identifiant de type quelconque, une formule chimique ou un nom scientifique latin.
 * langue — valeur explicite pour identifier la langue de la partie texte
@@ -7459,13 +7459,13 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 * scheme – parte implícita da cadea de texto IRI
 * hierarchicalpart – parte implícita da cadea de texto IRI
 * query – parte implícita da cadea de texto IRI
-* fragment – parte implícita da cadea de texto IRI',
+* fragment – parte implícita da cadea de texto IRI', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Ficheiro multimedia de Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Ligazón cara a ficheiros da Wikimedia Commons. Durante a entrada, realizarase unha procura no espazo de nomes "Ficheiro" de Commons para buscar entradas coincidentes.
 * scheme – parte implícita da cadea de texto IRI
 * hierarchicalpart – parte implícita da cadea de texto IRI
 * query – parte implícita da cadea de texto IRI
-* fragment – parte implícita da cadea de texto IRI',
+* fragment – parte implícita da cadea de texto IRI', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenadas do globo',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Datos literais para unha posición xeográfica dada como un par latitude-lonxitude en GMS ou graos decimais do corpo estelar especificado. Por defecto, é "Terra" e logo "WGS84". Engade unha resolución e un rango.
 * latitude – primeira parte implícita (float, dms, dm, dd) da cadea de coordenadas; a dirección achégase mediante o signo en prefixo ou o sufixo N/S
@@ -7476,7 +7476,7 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 	'wikibase-listdatatypes-quantity-body' => 'Campo de datos literal para unha cantidade relacionada con algún tipo de unidade ben definida. A unidade real vai nos valores de datos introducidos.
 * value – parte implícita da cadea de texto (o mapeamento do prefixo da unidade non está claro)
 * unit – parte implícita da cadea de texto (o mapeamento ao corpo estandarizante non está claro)
-* accuracy (opcional) – valor de datos explícito; ten a mesma unidade que o valor',
+* accuracy (opcional) – valor de datos explícito; ten a mesma unidade que o valor', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Texto monolingüe',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Campo de datos literal para unha cadea de caracteres que non está traducida a outras linguas. Este tipo de cadea de caracteres defínese unha vez e reutilízase en todas as linguas. O uso típico é nos nomes xeográficos escritos na lingua local, nos identificadores dalgún tipo, nas fórmulas químicas ou nos nomes científicos en latín.
 * language – valor explícito para identificar a lingua da parte de texto
@@ -7939,23 +7939,23 @@ $messages['he'] = array(
 * scheme – חלק מתוך מחרוזת קישור בתסדיר IRI
 * hierarchicalpart – חלק מתוך מחרוזת קישור בתסדיר IRI
 * query – חלק מתוך מחרוזת קישור בתסדיר IRI
-* fragment – חלק מתוך מחרוזת קישור בתסדיר IRI',
+* fragment – חלק מתוך מחרוזת קישור בתסדיר IRI', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'מדיה בוויקישיתוף',
 	'wikibase-listdatatypes-commonsmedia-body' => 'קישור לקבצים שמאוחסנים בוויקישיתוף. בעת ההזנה ייערך חיפוש עיולים מתאימים במרחב קובץ (File) בוויקישיתוף.
 * scheme – חלק מתוך מחרוזת קישור בתסדיר IRI
 * hierarchicalpart – חלק מתוך מחרוזת קישור בתסדיר IRI
 * query – חלק מתוך מחרוזת קישור בתסדיר IRI
-* fragment – חלק מתוך מחרוזת קישור בתסדיר IRI',
+* fragment – חלק מתוך מחרוזת קישור בתסדיר IRI', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'נקודת ציון של גלובוס',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי, בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
 * latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף.
 * longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף.
-* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84',
+* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
 	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
 * value – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
 * unit – חלק משתמע של המחרוזת (מיפוי לגוף התקינה אינו ברור)
-* accuracy (לא חובה) – ערך נתונים מפורש, באותה יחידה כמו הערך',
+* accuracy (לא חובה) – ערך נתונים מפורש, באותה יחידה כמו הערך', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'טקסט חד־לשוני',
 	'wikibase-listdatatypes-monolingual-text-body' => 'שדה נתונים מפורש למחרוזת שאינה מתורגמת לשפות אחרות. הסוג הזה של המחרוזת מוגדר פעם אחת ומשמש בכל השפות. שימוש אופייני הוא שם גאוגרפי שכתוב בשפה המקומית, מזהה מסוג כלשהו, נוסחה כימית, או שם מדעי בלטינית.
 * language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
@@ -8297,7 +8297,7 @@ $messages['hsb'] = array(
 	'wikibase-listdatatypes-quantity-body' => 'Literalne datowe polo za mnóstwo, kotrež so na někajku družinu jasnje definowaneje jednotki poćahuje. Poprawna jednotka dźe do datowych hódnotow, kotrež so zapodawaja.
 * value (hótnota) - implicitny dźěl znamješkoweho rjećazka (zwobraznjenje prefiksa jednotki je njejasne)
 * unit (jednotka) - implicitny dźěl znamješkoweho rjećazka (zwobraznjenje za standardizowanje ćělesa je njejasne)
-* accuracy (dokładnosć, opcionalny) - eksplicitna datowa hódnota, ma samsnu jednotku kaž hódnota',
+* accuracy (dokładnosć, opcionalny) - eksplicitna datowa hódnota, ma samsnu jednotku kaž hódnota', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Jednorěčny tekst',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literalne datowe polo za znamješkowy rjećazk, kotryž njeje do druhich rěčow přełoženy. Tutón typ znamješkoweho rjećazka so jónu definuje a wužiwa so po wšě rěče. Typiske wužiće su geografiske mjena napisane w lokalnej rěči, identifikator někajkeje družiny, chemiske formle abo łaćosnke wědomostne mjena.
 * language - eksplicitna hódnota za identifikowanje rěče za tekstowy dźěl
@@ -8799,13 +8799,13 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
  * skema-bagian implisit dari Iri-string
  * hierarchicalpart-bagian implisit dari Iri-string
  * permintaan-bagian implisit dari Iri-string
- * kepingan-bagian implisit dari Iri-string',
+ * kepingan-bagian implisit dari Iri-string', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Media Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Kaitan ke berkas di Commons. Pada saat entri nama ruang "Berkas" di Commons akan mencari entri yang cocok.
  * skema-bagian implisit dari Iri-string
  * hierarchicalpart-bagian implisit dari Iri-string
  * permintaan-bagian implisit dari Iri-string
- * kepingan-bagian implisit dari Iri-string',
+ * kepingan-bagian implisit dari Iri-string', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinat geografis', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Data harfiah untuk posisi geografis yang diberikan sebagai sepasang lintang-bujur dalam gms atau desimal derajat untuk bagian planet tertentu. Baku untuk "Bumi" dan kemudian "WGS84". Menambahkan sebuah resolusi dan rentang.
  * lintang-implisit bagian pertama (float, dms, dm, dd) dari string koordinat, arah baik diberikan oleh awalan atau akhiran U/S
@@ -9129,13 +9129,13 @@ tapno birukem ti napananda.',
 * pamay-an – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * panagsasaruno a paset – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * panagsukisok – naipaltiing a nalawag a paset iti Iri-a kuerdas
-* pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas',
+* pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Midia ti Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Silpo dagiti papeles a naipenpen idiay Wikimedia Commons. Agbirukto para kadagiti maipada a naikabkabil iti las-ud ti panangikabil ti nagan a lugar ti "Papeles" idiay Commons.
 * pamay-an – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * panagsasaruno a paset – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * panagsukisok – naipaltiing a nalawag a paset iti Iri-a kuerdas
-* pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas',
+* pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Nagsasabtan ti globo',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal a datos para iti heograpiko a puesto a naited a kas maysa a paris ti latitud-longitud iti gms wenno dagiti desimal a degrado para iti naited a nainlangitan a bagi. Kasisigud iti "Daga" ken kalpasanna iti "WGS84". Agnayon ti maysa a resolusion ken sakup.
 * latitud – naipaltiing a nalawag nga umuna a paset (tumpaw, dms, dm, dd) iti kuerdas ti nagsasabtan, ti turong ket mabalin a maited babaen ti senial wenno babaen ti kalpasan a nasimpa a N/S
@@ -9146,7 +9146,7 @@ tapno birukem ti napananda.',
 	'wikibase-listdatatypes-quantity-body' => 'Literal a pagikabilan ti datos para iti maysa a kaadu a maikabagian ti sumagmamano a kitat iti nasayaat a nailawlawagan a paset. Ti pudno a paset ket mapan kadagiti pateg ti datos a naikabil.
 * pateg – naipaltiing a nalawag apaset iti kuerdas (panagimapa iti paset a pasaruno ket saan a nalawag)
 * paset – naipaltiing a nalawag a paset iti kuerdas (panagimapa ti panangalagad a bagi ket saan a nalawag)
-* kinagpayso (saan anasken a pilien) – nalawag a pateg ti datos, adda iti kapadpadana paset a kas iti pateg',
+* kinagpayso (saan anasken a pilien) – nalawag a pateg ti datos, adda iti kapadpadana paset a kas iti pateg', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo ti maymaysa pagsasao',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas a saan a naipatarus kadagiti sabali a pagsasao. Daytoy a kita ti kuerdas ket naminsan a naipalpalawag ken mausar manen kadagiti ballasiw ti amin a pagsasao. Ti kadawyan a panag-usar ket dagiti heograpiko a nagnagan a naisurat iti lokal a pagsasao, ti kasla maysa a pananginagan a kita, ti maysa a pormula ti kimiko wenno maysa a sientipiko a nagan iti Latin.
 * pagsasao – nalawag a pateg para iti pananginagan ti pagsasao para iti testo a paset
@@ -9772,23 +9772,23 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 * schema - implicito, da parte dell'Iri-string
 * hierarchicalpart - implicito, da parte dell'Iri-string
 * query - implicito, da parte dell'Iri-string
-* frammento - implicito, da parte dell'Iri-string",
+* frammento - implicito, da parte dell'Iri-string", # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'File multimediale su Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => "Collega a file memorizzati su Wikimedia Commons. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"File\" di Commons.
 * schema - implicito, da parte dell'Iri-string
 * hierarchicalpart - implicito, da parte dell'Iri-string
 * query - implicito, da parte dell'Iri-string
-* frammento - implicito, da parte dell'Iri-string",
+* frammento - implicito, da parte dell'Iri-string", # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinate geografiche',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Campo dati letterale per una posizione geografica indicata come latitudine-longitudine in gms o gradi decimali per il corpo stellare indicato. I valori predefiniti sono "Terra" e "WGS84". Aggiunge risoluzione e intervallo di valori.
 * latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
 * longitudine – implicito seconda parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti E/W
-* pianeta – valore dati esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"',
+* pianeta – valore dati esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Campo dati letterale per una quantità relativa ad un'unità ben definita. L'unità usata è uno dei dati inseriti.
 * valore - valore implicito della stringa (mappatura del prefisso dell'unità non è chiara)
 * unità - valore implicito della stringa (mappatura del corpo standard non è chiara)
-* precisione (facoltativo) - valore esplicito, ha la stessa unità del valore",
+* precisione (facoltativo) - valore esplicito, ha la stessa unità del valore", # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo monolingua',
 	'wikibase-listdatatypes-monolingual-text-body' => "Campo dati letterale per una stringa che non è tradotta in altre lingue. Questo tipo di stringa è definita una volta e riutilizzata per tutte le lingue. L'uso tipico è per i nomi geografici, scritti nella lingua locale, o per un identificatore di qualche tipo, una formula chimica o un nome scientifico in latino.
  * lingua – valore esplicito per identificare la lingua della parte testuale
@@ -10134,23 +10134,23 @@ $messages['ja'] = array(
 * scheme - IRI文字列の非明示部分
 * hierarchicalpart - IRI文字列の非明示部分
 * query - IRI文字列の非明示部分
-* fragment - IRI文字列の非明示部分',
+* fragment - IRI文字列の非明示部分', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'コモンズのメディア',
 	'wikibase-listdatatypes-commonsmedia-body' => 'ウィキメディア・コモンズで保管されているファイルへのリンク。入力時にコモンズのファイル名前空間に一致するものがないか検索されます。
 * scheme - IRI文字列の非明示部分
 * hierarchicalpart - IRI文字列の非明示部分
 * query - IRI文字列の非明示部分
-* fragment - IRI文字列の非明示部分',
+* fragment - IRI文字列の非明示部分', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => '座標',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。「地球」それから「WGS84」が既定となっており、分解能と範囲が指定されます。
 * latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N または S で指定されます
 * longitude – 座標文字列の2番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の E または W で指定されます
-* globe – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
+* globe – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
 * value – 文字列の非明示部分 (単位接頭辞の対応付けは不明瞭です)
 * unit – 文字列の非明示部分 (標準化団体への対応付けは不明瞭です)
-* accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値',
+* accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => '単一言語のテキスト',
 	'wikibase-listdatatypes-monolingual-text-body' => '他の言語に翻訳されない文字列のリテラルデータ。この種の文字列は一度定義されると、すべての言語にわたって再利用されます。典型的な用途としては、地元の言語で表記した地名、何らかの識別子、化学式、ラテン語の学名などがあります。
 * language - テキスト (text) 部分の言語を識別するための明示の値
@@ -10830,25 +10830,25 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 * scheme – IRI 문자열의 명시적이지 않은 부분
 * hierarchicalpart – IRI 문자열의 명시적이지 않은 부분
 * query – IRI 문자열의 명시적이지 않은 부분
-* fragment – IRI 문자열의 명시적이지 않은 부분',
+* fragment – IRI 문자열의 명시적이지 않은 부분', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => '공용 미디어',
 	'wikibase-listdatatypes-commonsmedia-body' => '위키미디어 공용에서 저장된 파일의 링크입니다. 입력할 때 공용의 "파일" 이름공간과 일치하는 항목을 검색합니다.
 * scheme – IRI 문자열의 명시적이지 않은 부분
 * hierarchicalpart – IRI 문자열의 명시적이지 않은 부분
 * query – IRI 문자열의 명시적이지 않은 부분
-* fragment – IRI 문자열의 명시적이지 않은 부분',
+* fragment – IRI 문자열의 명시적이지 않은 부분', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => '지리 좌표',
 	'wikibase-listdatatypes-globe-coordinate-body' => '주어진 별의 지리 좌표를 위도 경도 쌍으로 도분초 또는 소수 형식으로 지정된 리터럴 데이터입니다. "지구"와 "WGS84"이 기본값이 되고, 해상도와 범위가 추가됩니다.
 * latitude – 좌표 문자열의 첫 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 N/S로 주어집니다
 * longitude – 좌표 문자열의 두 번째 명시적이지 않은 부분(float, dms, dm, dd)에서 방향은 선행 부호 또는 후행 E/W로 주어집니다
 * altitude (선택 사항) – 주어진 참조면에서의 높이를 나타낸 명시적인(?) 값으로, "지구" 타원체에 대해서는 "WGS84" 참조 타원체가 사용됩니다
 * 고도 (선택 사항) - 참조 평면에 대한 높이의 명시적인(?) 값으로, "WGS84" 참조 구체인 "지구" 구체에 해당합니다.
-* globe – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다',
+* globe – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '수량',
 	'wikibase-listdatatypes-quantity-body' => '어떤 명확하게 정의된 단위에 결합된 양을 나타내는 리터럴 데이터 필드입니다. 실제 단위는 입력된 데이터 값에 포함되어 있습니다.
 * value – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
 * unit – 문자열의 명시적이지 않은 부분 (표준화 단체로의 매핑은 명확하지 않습니다)
-* accuracy (선택 사항) – value와 같은 단위를 가진 명시적인 데이터 값',
+* accuracy (선택 사항) – value와 같은 단위를 가진 명시적인 데이터 값', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => '단일 언어 텍스트',
 	'wikibase-listdatatypes-monolingual-text-body' => '다른 언어로 번역되지 않는 문자열의 리터럴 데이터 필드입니다. 이런 종류의 문자열은 한 번 정의되어 모든 언어에 걸쳐 사용됩니다. 일반적으로 원어로 된 지명이나 특정한 항목의 식별자, 화학식, 라틴어 학명에 주로 사용됩니다.
 * language – 텍스트 부분에 대해 언어를 구별하는 명시적인 값
@@ -11975,23 +11975,23 @@ $messages['mk'] = array(
 * шема (''scheme'') – содржан дел од Iri-низата
 * хиерархиски дел (''hierarchicalpart'') – содржан дел од Iri-низата
 * барање (''query'') – содржан дел од Iri-низата
-* делче (''fragment'') – содржан дел од Iri-низата",
+* делче (''fragment'') – содржан дел од Iri-низата", # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медиумска содржина од Ризницата',
 	'wikibase-listdatatypes-commonsmedia-body' => "Врска до податотеки складирани на Ризницата. При внесување на нешто во именскиот простор „Податотека“ (File), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
 * шема (''scheme'') – содржан дел од Iri-низата
 * хиерархиски дел (''hierarchicalpart'') – содржан дел од Iri-низата
 * барање (''query'') – содржан дел од Iri-низата
-* делче (''fragment'') – содржан дел од Iri-низата",
+* делче (''fragment'') – содржан дел од Iri-низата", # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Координата',
 	'wikibase-listdatatypes-globe-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава резолуција и опсег.
 * географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) од координатната низа, правецот е зададен со претставка-симбол или со наставка N/S
 * географска должина (''longitude'') – поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
-* глобус (''globe'') [оптимално] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“",
+* глобус (''globe'') [оптимално] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“", # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Количина',
 	'wikibase-listdatatypes-quantity-body' => "Дословно податочно поле за количина што се однесува на некој вид на добро утврдена единица. Самата единица оди во податочната вредност што се внесува.
 * вредност (''value'') – содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
 * единица (''unit'') – содржан дел од низата (пресликувањето во стандардизација на телото е нејасно)
-* точност (''accuracy'') [незадолжително] – изречена податочна вредност; има иста единица како вредноста",
+* точност (''accuracy'') [незадолжително] – изречена податочна вредност; има иста единица како вредноста", # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Еднојазичен текст',
 	'wikibase-listdatatypes-monolingual-text-body' => "Дословно податочно поле за низа што не се преведува на други јазици. Ваквата низа се задава еднаш и се користи кај сите јазици. Типичен пример би биле географските називи напишани на локалниот јазик, некаква назнака, хемиска формула или латинско научно име.
 * јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
@@ -12648,13 +12648,13 @@ untuk mencari di mana set data itu.',
 * scheme (skema) – bahagian tersirat Iri-string
 * hierarchicalpart (bahagian tatatingkat) – bahagian tersirat Iri-string
 * query (pertanyaan) – bahagian tersirat Iri-string
-* fragment (serpihan) – bahagian tersirat Iri-string',
+* fragment (serpihan) – bahagian tersirat Iri-string', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Media Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Pautan ke fail-fail yang disimpan di Wikimedia Commons. Ketika dimasukkan, ruang nama "File" di Commons akan diperiksa untuk entri-entri yang berpadanan.
 * scheme (skema) – bahagian tersirat Iri-string
 * hierarchicalpart (bahagian tatatingkat) – bahagian tersirat Iri-string
 * query (pertanyaan) – bahagian tersirat Iri-string
-* fragment (serpihan) – bahagian tersirat Iri-string',
+* fragment (serpihan) – bahagian tersirat Iri-string', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinat glob',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Data literal untuk kedudukan geografi yang diberikan sebagai pasangan latitud-longitud dalam gms atau darjah perpuluhan untuk jasad cakerawala yang tertentu. Nilai asalnya "Earth" diikuti "WGS84". Ia menambahkan leraian dan julat.
 * latitude – bahagian pertama tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran N/S
@@ -12665,7 +12665,7 @@ untuk mencari di mana set data itu.',
 	'wikibase-listdatatypes-quantity-body' => 'Medan data harfiah untuk kuantiti yang berkenaan dengan suatu jenis unit yang tertentu. Unit sebenar memasuki nilai data yang dimasukkan.
 * nilai – bahagian tersirat dalam rentetan (pemetaan awalan unit tidak jelas)
 * unit – bahagian tersirat dalam rentetan (pemetaan pada jasad piawai tidak jelas)
-* ketepatan (tidak wajib) – nilai data tersurat, sama unit dengan nilai',
+* ketepatan (tidak wajib) – nilai data tersurat, sama unit dengan nilai', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Teks satu bahasa',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Medan data literal untuk rentetan yang tidak diterjemahkan kepada bahasa lain. Jenis rentetan ini ditakrifkan sekali dan digunakan merentas semua bahasa. Contoh kegunaan: nama geografi yang ditulis dalam bahasa tempatan, suatu pengecam, rumus kimia atau nama sains dalam bahasa Latin.
 *language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
@@ -13049,23 +13049,23 @@ for å finne ut hva som har skjedd.',
 * oppsett – implisitt del av Iri-strengen
 * hierarkisk del – implisitt del av Iri-strengen
 * spørring – implisitt del av Iri-strengen
-* fragment – implisitt del av Iri-strengen',
+* fragment – implisitt del av Iri-strengen', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-medium',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Lenke til filer lagret i Wikimedia Commons. Under innlegging vil «Fil»-navnerommet på Commons gjennomsøkes for matchende poster.
 * scheme – implisitt del av Iri-streng
 * hierarchicalpart – implisitt del av Iri-streng
 * query – implisitt del av Iri-streng
-* fragment – implisitt del av Iri-streng',
+* fragment – implisitt del av Iri-streng', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Data for geografisk posisjon gitt som et par av breddegrad og lengdegrad i gms eller desimale grader for gitt himmellegeme. Standard er "Jorden" og så "WGS84". Det legges til oppløsning og verdiområde.
 * breddegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset N/S
 * lengdegrad – implisitt første del (float, dms, dm, dd) av koordinatstrengen, retning er enten gitt med prefikset tegn eller med postfikset E/W
-* globe (valgfri) – eksplisitt (?) dataverdi, gitt som himmellegeme der standard er "Jorden" og så "WGS84"',
+* globe (valgfri) – eksplisitt (?) dataverdi, gitt som himmellegeme der standard er "Jorden" og så "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Størrelse',
 	'wikibase-listdatatypes-quantity-body' => 'Datafelt for størrelse med tilhørende predefinert enhet. Den faktiske enheten inngår i dataverdiene som legges inn.
 * verdi – implisitt del av strengen (mapping til enhetsprefiks er uklar)
 * unit – implisitt del av strengen (mapping til standardiseringorgan er uklar)
-* nøyaktighet (valgfri) – eksplisit dataverdi,  har samme enhet som verdien',
+* nøyaktighet (valgfri) – eksplisit dataverdi,  har samme enhet som verdien', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enspråklig tekst',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Bokstavelig datafelt for streng som ikke er oversatt til andre språk. Denne typen streng defineres en gang og gjenbrukes av alle språk. Typisk bruk er geografiske navn skrevet i det lokale språk, en identifikator, en kjemisk formel eller et latinbasert vitenskapelig navn.
 * språk – eksplisitt verdi for å identifisere språket for tekstdelen
@@ -13426,13 +13426,13 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 * scheme – impliciet onderdeel van de Iri-tekst
 * hierarchicalpart – impliciet onderdeel van de Iri-tekst
 * query – impliciet onderdeel van de Iri-tekst
-* fragment – impliciet onderdeel van de Iri-tekst',
+* fragment – impliciet onderdeel van de Iri-tekst', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Koppeling naar bestanden die zijn opgeslagen op Wikimedia Commons. Tijdens de invoer wordt de naamruimte "File" op Commons doorzocht voor overeenkomende bestanden.
 * scheme - impliciet onderdeel van de Iristring
 * hierarchicalpart  - impliciet onderdeel van de Iristring
 * query - impliciet onderdeel van de Iristring
-* fragment - impliciet onderdeel van de Iristring',
+* fragment - impliciet onderdeel van de Iristring', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Globale coördinaat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Letterlijke gegevens voor een geografische positie met de notatie als een paar van breedtegraad en lengtegraad in gms of decimale graden voor het gegeven stellaire lichaam. Standaard is "Aarde" en dan "WGS84". Dit voegt een resolutie en afstand toe.
  * breedtegraad: impliciete eerste deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door het achtervoegsel N/S;
@@ -13443,7 +13443,7 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-listdatatypes-quantity-body' => 'Letterlijk gegevensveld voor een hoeveelheid die gerelateerd is een aan bepaalde goed gedefinieerde eenheid. De werkelijke eenheid wordt ingevoerd in gegevenswaarden die worden ingevoerd.
 * waarde: impliciet deel van de tekenreeks (toewijzing van eenheidvoorvoegsel is onduidelijk);
 * eenheid: impliciet deel van de tekenreeks (toewijzing van eenheidvoorvoegsel is onduidelijk);
-* nauwkeurigheid (optioneel): expliciete gegevenswaarde, heeft dezelfde eenheid als de waarde.',
+* nauwkeurigheid (optioneel): expliciete gegevenswaarde, heeft dezelfde eenheid als de waarde.', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enkeltalige tekst',
 	'wikibase-listdatatypes-monolingual-text-body' => "Letterlijke gegevensveld voor een tekenreeks die niet wordt vertaald in andere talen. Dit type tekst wordt één keer gedefinieerd en en in alle talen herrgebruikt. Typisch gebruik is voor geografische namen geschreven in de lokale taal, ID's, een chemische formule of een Latijnse wetenschappelijke naam.
 * taal: expliciete waarde voor het identificeren van de taal voor het tekstdeel;
@@ -14420,13 +14420,13 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 * schemat – niejawna część łańcucha IRI
 * część hierarchiczna – niejawna część łańcucha IRI
 * zapytanie – niejawna część łańcucha IRI
-* fragment – niejawna część łańcucha IRI',
+* fragment – niejawna część łańcucha IRI', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Plik multimedialny z Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Odwołuje się do plików przechowywanych na Wikimedia Commons. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „File” na Commons, aby odnaleźć pasujące wpisy.
 * schemat – niejawna część łańcucha IRI
 * część hierarchiczna – niejawna część łańcucha IRI
 * zapytanie – niejawna część łańcucha IRI
-* fragment – niejawna część łańcucha IRI',
+* fragment – niejawna część łańcucha IRI', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Współrzędne geograficzne',
 	'wikibase-listdatatypes-quantity-head' => 'Ilość',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Tekst jednojęzyczny',
@@ -14769,24 +14769,24 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 * schema - part implìssita ëd la Iri-stringa
 * hierarchicalpart – part implìssita ëd la Iri-stringa
 * query – part implìssita ëd la Iri-stringa
-* fragment – part implìssita ëd la Iri-stringa",
+* fragment – part implìssita ëd la Iri-stringa", # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mojen comun',
 	'wikibase-listdatatypes-commonsmedia-body' => "Liura a d'archivi goernà su Wikimedia Commons. Durant l'imission lë spassi nominal «Archivi» su Wikimedia Commons a sarà scrutà a l'arserca ëd vos corëspondente.
 * scheme – part implìssita ëd la Iri-stringa
 * hierarchicalpart – part implìssita ëd la Iri-stringa
 * query – part implìssita ëd la Iri-stringa
-* fragment – part implìssita ëd la Iri-stringa",
+* fragment – part implìssita ëd la Iri-stringa", # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinà globaj',
 	'wikibase-listdatatypes-globe-coordinate-body' => "Dàit literaj për na posission geogràfica smonùa sot forma ëd cobia latitùdin-longitùdin an gms o an gre decimaj për ël còrp celest considerà. 'Me stàndard, ''Tèra'' e peui ''WGS86''. A gionta n'arsolussion e na portà.
 * latitùdin – prima part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura dal N/S butà apress
 * longitùdin – sconda part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura da l' E/W butà apress
 * glòb – valor ëd dàit esplìssit (?) dàit coma ël còrp ësteilar che për ëstàndard a l'é la \"Tèra\" e peui \"WGS84\"
-* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"",
+* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"", # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Camp ëd dàit literaj për na quantità ch'a rësguarda na sòrt d'unità bin definìa. L'unità real a va ant ij valor ëd dàit ch'a son anserì.
 * value - part implìssita ëd la stringa (l'aplicassion dël prefiss d'unità a l'é nen ciàira)
 * unit - part implìssita ëd la stringa (l'aplicassion dël còrp standardidà a l'é nen ciàira)
-* accuracy (opsional) - valor ëd dàit esplìssit, con la midema unità dël valor",
+* accuracy (opsional) - valor ëd dàit esplìssit, con la midema unità dël valor", # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Test monolenga',
 	'wikibase-listdatatypes-monolingual-text-body' => "Camp ëd dàit literal për na stringa ch'a l'é nen voltà an d'àutre lenghe. Sta sòrt dë stringa a l'é definìa na vira e dovrà torna an tute le lenghe. N'usagi tìpich a l'é col dij nòm geogràfich ëscrivù ant la lenga local, n'identificativ ëd chèich sòrt, na fórmola chìmica o un nòm sientìfich latin.
 * lenga - valor esplìssit për identifiché la lenga da la part ëd test
@@ -15979,23 +15979,23 @@ $messages['ru'] = array(
 * scheme — неявно задаваемая часть строки IRI
 * hierarchicalpart — неявно задаваемая часть строки IRI
 * query — неявно задаваемая часть строки IRI
-* fragment — неявно задаваемая часть строки IRI',
+* fragment — неявно задаваемая часть строки IRI', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медиафайл с Викисклада',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Ссылка на файлы, хранящиеся на Викискладе. Во время ввода будет производиться поиск по пространству имён <code>File:</code> на Викискладе.
 * scheme — неявно задаваемая часть строки IRI
 * hierarchicalpart — неявно задаваемая часть строки IRI
 * query — неявно задаваемая часть строки IRI
-* fragment — неявно задаваемая часть строки IRI',
+* fragment — неявно задаваемая часть строки IRI', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Глобальные координаты',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Символьное поле данных о географическом положении для определённого небесного тела, задаваемые в виде пары «широта—долгота» в формате «градусы минуты секунды» (°ʹʺ) или в десятичном формате. По умолчанию это «Земля», а затем «WGS84». Добавляет разрешение и диапазон.
 * latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S
 * longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W
-* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»',
+* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Количество',
 	'wikibase-listdatatypes-quantity-body' => 'Строковое поле для ввода количества, выраженного в некоторых вполне определённых единицах. Конкретные единицы указаны во вводимых значениях данных.
 * value — неявная часть строки (обработка префикса единицы непонятна)
 * unit — неявная часть строки (связь с эталоном непонятна)
-* accuracy (необяз.) — явное значение, выраженное в тех же единицах, что и value',
+* accuracy (необяз.) — явное значение, выраженное в тех же единицах, что и value', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Моноязычный текст',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Символьное поле данных для строки, не переводимой на другие языки. Строки этого типа определяются один раз и используются одинаково для всех языков. Обычно используется для географических названий на местном языке, идентификаторов какого-либо типа, химических формул или латинских научных названий.
 * language — явно задаваемое значение для определения языка текстовой части
@@ -16078,7 +16078,7 @@ $messages['sco'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal data fer ae geographical poseetion gi\'en as ae latitude-longitude pair in gms or decimal degrees fer the gi\'en stellar bodie. Defaults til "Earth" an than "WGS84". It adds ae resolution an range.
 * latitude – impleecit first pairt (float, dms, dm, dd) o the coordinate string, direction is either gi\'en bi ae prefixed sign or bi postfixed N/S
 * longitude – impleecit seicont pairt (float, dms, dm, dd) o the coordinate string, direction is either gi\'en bi ae prefixed sign or bi postfixed E/W
-* globe – expleecit (?) data value, gi\'en as stellar body that defaults til "Earth" and then "WGS84"',
+* globe – expleecit (?) data value, gi\'en as stellar body that defaults til "Earth" and then "WGS84"', # Fuzzy
 	'wikibase-time-precision-Gannum' => 'in $1 billion year',
 	'wikibase-time-precision-Mannum' => 'in $1 million year',
 	'wikibase-time-precision-annum' => 'in $1 year',
@@ -16781,7 +16781,7 @@ $messages['sr-ec'] = array(
 	'wikibase-listdatatypes-quantity-body' => 'Дословно поље података за количину која се односи на неку врсту прецизно дефинисане јединице. Стварна јединица иде у вредности података који се уписују.
 * вредност - имплицитни део ниске (мапирање префикса јединице је нејасно)
 * јединица - имплицитно део ниске (мапирање стандардизационог телу је нејасно)
-* тачност (необавезно) - експлицитна вредност податка, има исту јединицу као вредност',
+* тачност (необавезно) - експлицитна вредност податка, има исту јединицу као вредност', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Једнојезички текст',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Вишејезички текст',
 	'wikibase-listdatatypes-string-head' => 'Текстуални низ',
@@ -17129,23 +17129,23 @@ för att ta reda på var den tog vägen.',
 * scheme – implicit del av Iri-strängen
 * hierarchicalpart – implicit del av Iri-strängen
 * query – implicit del av Iri-strängen
-* fragment – implicit del av Iri-strängen',
+* fragment – implicit del av Iri-strängen', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Länk till filer som lagras på Wikimedia Commons. Under inmatningen kommer "Fil"-namnrymden på Commons att genomsökas för matchande poster.
 * scheme – implicit del av Iri-strängen
 * hierarchicalpart – implicit del av Iri-strängen
 * query – implicit del av Iri-strängen
-* fragment – implicit del av Iri-strängen',
+* fragment – implicit del av Iri-strängen', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Globkoordinat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Litteral data för en geografisk position angivet som ett latitud-longitud-par i gms eller decimalgrader för den angivna himlakroppen. Standardvärde är "Jorden" och sedan "WGS84". Upplösning och intervall läggs till.
 * latitude – implicit första del (float, dms, dm, dd) av koordinatsträngen, riktning ges antingen genom prefixtecken eller N/S-suffix
 * longitud – implicit andra del (float, dms, dm, dd) av koordinatsträngen, riktning ges antingen genom prefixtecken eller E/W-suffix
-* globe – explicit (?) datavärde, angiven som himlakropp. Standardvärde är "Jorden" och sedan "WGS84".',
+* globe – explicit (?) datavärde, angiven som himlakropp. Standardvärde är "Jorden" och sedan "WGS84".', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Kvantitet',
 	'wikibase-listdatatypes-quantity-body' => 'Litteralt datafält för en kvantitet som är kopplad till någon form av väldefinierad enhet. Den faktiska enheten ingår i de datavärde som anges.
 * value – implicit del av strängen (mappning av enhetsprefix är oklart)
 * unit – implicit del av strängen (mappning mot ett standardiseringsorgan är oklart)
-* accuracy (valfri) – explicit datavärde, har samma enhet som värdet',
+* accuracy (valfri) – explicit datavärde, har samma enhet som värdet', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enspråkig text',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Litteralt datafält för en sträng som inte är översatt till andra språk. Denna typ av sträng definieras en gång och används sedan på alla språk. Typisk användning är geografiska namn skrivna på det lokala språket, en identifierare av något slag, en kemisk formel eller ett vetenskapligt namn på latin.
 * language – explicit värde för att identifiera språket för textdelen
@@ -17751,13 +17751,13 @@ $messages['uk'] = array(
 * scheme - неявно задана частина рядка IRI
 * hierarchicalpart - неявно задана частина рядка IRI
 * query - неявно задана частина рядка IRI
-* fragment - неявно задана частина рядка IRI',
+* fragment - неявно задана частина рядка IRI', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медіа-файл з Вікісховища',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Посилання на файли, які зберігаються на Вікісховищі. Під час введення буде проводитися пошук по простору імен <code>File:</code> на Вікісховищі.
 * scheme - неявно задана частина рядка IRI
 * hierarchicalpart - неявно задана частина рядка IRI
 * query - неявно задана частина рядка IRI
-* fragment - неявно задана частина рядка IRI',
+* fragment - неявно задана частина рядка IRI', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Географічні координати',
 	'wikibase-listdatatypes-globe-coordinate-body' => "Символьні дані про географічне положення для певного небесного тіла, що задаються у вигляді пари «широта-довгота» у форматі «градуси хвилини секунди» (°ʹʺ) або в десятковому форматі. За замовчуванням це «Земля», а потім «WGS84». Це додає дозвіл і діапазон.
 * latitude - неявно задана перша частина рядка координат (float, dms, dm, dd), напрямок задається префіксом або постфиксом N/S (широта)
@@ -17768,7 +17768,7 @@ $messages['uk'] = array(
 	'wikibase-listdatatypes-quantity-body' => "Рядкове поле для введення кількості, вираженої в деяких цілком певних одиницях. Конкретні одиниці вказані у введених значеннях даних.
 * value - неявна частина рядка (обробка префікса одиниці незрозуміла)
 * unit - неявна частина рядка (зв'язок з еталоном незрозумілий)
-* accuracy (необов'язково) - явне значення, виражене в тих же одиницях, що й value",
+* accuracy (необов'язково) - явне значення, виражене в тих же одиницях, що й value", # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Одномовний текст',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Символьне поле даних для рядка, який не перекладається на інші мови. Рядки цього типу визначаються і використовуються однаково для всіх мов. Зазвичай використовується для географічних назв на місцевій мові, ідентифікаторів будь-якого типу, хімічних формул або латинських наукових назв.
 * language - явно задане значення для визначення мови текстової частини
@@ -18126,13 +18126,13 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 * schema - inplicito, da parte de l'Iri-string
 * hierarchicalpart - inplicito, da parte de l'Iri-string
 * query - inplicito, da parte de l'Iri-string
-* framento - inplicito, da parte de l'Iri-string",
+* framento - inplicito, da parte de l'Iri-string", # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'File multimedial su Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => "Colega a file memorizà su Wikimedia Commons. Durante l'inserimento vegnarà sercà i elementi corispondenti 'ntel namespace \"File\" de Commons.
 * schema - inplicito, da parte de l'Iri-string
 * hierarchicalpart - inplicito, da parte de l'Iri-string
 * query - inplicito, da parte de l'Iri-string
-* framento - inplicito, da parte de l'Iri-string",
+* framento - inplicito, da parte de l'Iri-string", # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinate giogràfeghe', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Dati leterali par na posizion giografica data come na còpia latitudine-longitudine in GMS o gradi desimali par el corpo stelare in question. El default xe "Tera" e dopo "WGS84". Ghe xonta na risolusion e un intervalo.
 * latitudine – prima parte inplicita (float, dms, dm, dd) de la stringa de coordinate, la diresion la xe data da un segno prefiso o da un N/S postfiso
@@ -18143,7 +18143,7 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 	'wikibase-listdatatypes-quantity-body' => "Canpo dato leterale par na quantità che se riferise a calche tipo de unità ben definìa. L'unità la va in tei valori che xe inserii.
 * valor – parte inplicita de la stringa (la corispondensa col prefiso de l'unità no xe ciara)
 * unità – parte inplicita de la stringa (la corispondensa col corpo standardizà no xe ciara)
-* acuratesa (opsional) – valor esplicito, el ga la stessa unità del valor",
+* acuratesa (opsional) – valor esplicito, el ga la stessa unità del valor", # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo monolengua',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Canpo dato leterale par na stringa che no xe tradota in altre lengue. Sto tipo de stringa el xe definìo na olta sola e riusà in tute le lengue. Tipici usi i xe nomi giogràfeghi scriti in te la lengua locale, un identificativo de calche tipo, na formula chìmega o un nome sientìfego latin.
 * lengua – valor esplicito par identifegar la lengua par la parte de testo
@@ -18492,23 +18492,23 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 * scheme – phần ẩn của chuỗi IRI
 * hierarchicalpart – phần ẩn của chuỗi IRI
 * query – phần ẩn của chuỗi IRI
-* fragment – phần ẩn của chuỗi IRI',
+* fragment – phần ẩn của chuỗi IRI', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => 'Phương tiện Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Liên kết đến tập tin được lưu tại Wikimedia Commons. Không gian tên “File” tại Commons sẽ được tìm cho mục phù hợp khi nhập văn bản.
 * scheme – phần ẩn của chuỗi IRI
 * hierarchicalpart – phần ẩn của chuỗi IRI
 * query – phần ẩn của chuỗi IRI
-* fragment – phần ẩn của chuỗi IRI',
+* fragment – phần ẩn của chuỗi IRI', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Tọa độ địa lý',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Dữ liệu trực tiếp cho một địa điểm vĩ độ–kinh độ dưới dạng độ-phút-giây hoặc độ thập phân cho thiên thể. Mặc định là “Earth” và “WGS84”. Nó thêm độ phân giải và dãy.
 * latitude – phần đầu tiên ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
 * longitude – phần thứ hai ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
-* globe – giá trị dữ liệu hiện (?) được định rõ là thiên thể; mặc định là “Earth” và “WGS84”',
+* globe – giá trị dữ liệu hiện (?) được định rõ là thiên thể; mặc định là “Earth” và “WGS84”', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Số lượng',
 	'wikibase-listdatatypes-quantity-body' => 'Trường dữ liệu trực tiếp cho số lượng có liên quan đến một đơn vị xác định nào đó. Đơn vị dứt khoát được bao gồm trong các giá trị dữ liệu được nhập.
 * value – phần ẩn của chuỗi (tương quan đến tiền tố đơn vị không rõ)
 * unit – phần ẩn của chuỗi (tương quan đến cơ quan tiêu chuẩn không rõ)
-* accuracy (tùy chọn) – giá trị dữ liệu hiện; có cùng đơn vị với value',
+* accuracy (tùy chọn) – giá trị dữ liệu hiện; có cùng đơn vị với value', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => 'Văn bản đơn ngữ',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Trường dữ liệu trực tiếp cho chuỗi không được dịch ra ngôn ngữ khác. Kiểu chuỗi này được định rõ một lần rồi được sử dụng lại trong mọi ngôn ngữ. Thí dụ địa danh trong ngôn ngữ địa phương, các định danh nào đó, công thức hóa học, hoặc tên khoa học Latinh.
 * language – giá trị hiện định rõ ngôn ngữ của phần text
@@ -19137,23 +19137,23 @@ $messages['zh-hans'] = array(
 *计划 – IRI字符串的含蓄部分
 *层次部件 – IRI字符串的含蓄部分
 *查询 – IRI字符串的含蓄部分
-*片断 – IRI字符串的含蓄部分',
+*片断 – IRI字符串的含蓄部分', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => '共享资源媒体文件',
 	'wikibase-listdatatypes-commonsmedia-body' => '储存在维基共享资源的文件的链接。输入期间，会搜索共享资源“File”（文件）名字空间中的匹配条目。
 *计划 – IRI字符串的含蓄部分
 *层次部件 – IRI字符串的含蓄部分
 *查询 – IRI字符串的含蓄部分
-*片断 – IRI字符串的含蓄部分',
+*片断 – IRI字符串的含蓄部分', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => '地球坐标',
 	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十进制经纬度度指定的地理位置的原始数据代码。默认为“地球”其次是“WGS84”。其加入一解析度及范围。
 * 纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供
 * 经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供
-* 星球——精确值，默认指向“地球”，其次为“WGS84”',
+* 星球——精确值，默认指向“地球”，其次为“WGS84”', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '一些精确定义单位的数值的原始暑假字段。实际单位也输入到数据中。
 *值－－字符的隐藏部分（单位不明）
 *单位－－字符的隐藏部分（实际实体不明）
-*精度（可选）－－精确值，与数值单位相同',
+*精度（可选）－－精确值，与数值单位相同', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => '单语文本',
 	'wikibase-listdatatypes-monolingual-text-body' => '不能译为其他语言的一个串的原始数据字段。该类型的串一经定义就可在所有语言中使用。典型的是用于当地语言书写的地名、某种标识符、化学方程式或拉丁科学名称。
 *语言——标定文本部分语言的明确的值
@@ -19512,23 +19512,23 @@ $messages['zh-hant'] = array(
 *協議——IRI串的非明示部分
 *階層部分——IRI串的非明示部分
 *查詢——IRI串的非明示部分
-*片——IRI串的非明示部分',
+*片——IRI串的非明示部分', # Fuzzy
 	'wikibase-listdatatypes-commonsmedia-head' => '共享媒體',
 	'wikibase-listdatatypes-commonsmedia-body' => '存儲在維基共享資源上的文件的鏈接。輸入時會在共享資源「檔案」名字空間搜索匹配條目。
 *協議——IRI串的非明示部分
 *階層部分——IRI串的非明示部分
 *查詢——IRI串的非明示部分
-*片——IRI串的非明示部分',
+*片——IRI串的非明示部分', # Fuzzy
 	'wikibase-listdatatypes-globe-coordinate-head' => '地理座標',
 	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十進制經緯度指定的地理位置的原始數據字段。預設為「Earth」甚次為「WGS84」。其加入一解像度及範圍。
 * 緯度——隱藏的地理位置字串第一部分，包含float、dms、dm與dd，方向由前綴符號或後綴N或S提供
 * 經度——隱藏的地理位置字串第二部分，包含float、dms、dm與dd，方向由前綴符號或後綴E或W提供
-* 星球——精確數值，預設指向「Earth」，其次為「WGS84」',
+* 星球——精確數值，預設指向「Earth」，其次為「WGS84」', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '數量',
 	'wikibase-listdatatypes-quantity-body' => '一些精確定義單位之數值的原始數據字段。實際單位亦輸入到數據中。
 *數值－－字串的隱藏部分（單位不明）
 *單位－－字串的隱藏部分（實際實體不明）
-*精確度（可選）－－精確數值，與數值有同一單位',
+*精確度（可選）－－精確數值，與數值有同一單位', # Fuzzy
 	'wikibase-listdatatypes-monolingual-text-head' => '單語言文本',
 	'wikibase-listdatatypes-monolingual-text-body' => '不能譯為其他語言的一個字串的原始數據字段。該類型的字串一經定義就可在所有語言中使用。典型的是用於當地語言書寫的地名、某種標識符、化學方程式或拉丁科學名稱。
 *語言——標定文本部分語言的明確的數值
