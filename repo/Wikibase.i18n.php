@@ -375,38 +375,39 @@ to find out where it went.',
 
 	// datatype descriptions
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. During entry the "Item" namespace on Wikidata will be searched for matching entries. It consists of a single text entry field.
-* scheme – implicit part of the Iri-string
-* hierarchicalpart – implicit part of the Iri-string
-* query – implicit part of the Iri-string
-* fragment – implicit part of the Iri-string',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. During entry the "Item" namespace on Wikidata will be searched for matching entries. It consists of a single text entry field.',
+
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Link to files stored at Wikimedia Commons. During entry the "File" namespace on Commons will be searched for matching entries.
-* scheme – implicit part of the Iri-string
-* hierarchicalpart – implicit part of the Iri-string
-* query – implicit part of the Iri-string
-* fragment – implicit part of the Iri-string',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Link to files stored at Wikimedia Commons. During entry the "File" namespace on Commons will be searched for matching entries.',
+
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Globe coordinate',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal data for a geographical position given as a latitude-longitude pair in gms or decimal degrees for the given stellar body. Defaults to "Earth" and then "WGS84". It adds a resolution and range.
 * latitude – implicit first part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed N/S
 * longitude – implicit second part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed E/W
-* globe – explicit (?) data value, given as stellar body that defaults to "Earth" and then "WGS84"',
+* globe – explicit (?) data value, given as stellar body that defaults to Earth  "http://www.wikidata.org/entity/Q2"
+* precision - numeric precision of the coordinate',
+
 	'wikibase-listdatatypes-quantity-head' => 'Quantity',
 	'wikibase-listdatatypes-quantity-body' => 'Literal data field for a quantity that relates to some kind of well-defined unit. The actual unit goes in the data values that is entered.
-* value – implicit part of the string (mapping of unit prefix is unclear)
-* unit – implicit part of the string (mapping to standardizing body is unclear)
-* accuracy (optional) – explicit data value, has the same unit as the value',
+* amount – implicit part of the string (mapping of unit prefix is unclear)
+* unit – implicit part of the string that defaults to "1" (mapping to standardizing body is unclear)
+* upperbound - quantity\'s upper bound
+* lowerbound - quantity\'s lower bound',
+
 	'wikibase-listdatatypes-monolingual-text-head' => 'Monolingual text',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literal data field for a string that is not translated into other languages. This type of string is defined once and reused across all languages. Typical use is a geographical names written in the local language, an identifier of some kind, a chemical formula or a Latin scientific name.
 * language – explicit value for identifying the language for the text part
 * value – explicit value for the language specific variant string',
+
 	'wikibase-listdatatypes-multilingual-text-head' => 'Multilingual text',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Literal data field for a string that must be translated into other languages. Typical use is an entity name of global interest that has non-local written forms. Those can differ both in languages and script systems.
 * language – explicit value for identifying the language for the text part
 * value – explicit value for the language specific variant string',
+
 	'wikibase-listdatatypes-string-head' => 'String',
 	'wikibase-listdatatypes-string-body' => 'Literal data field for a string of glyphs. Typical use are identifiers that have written forms which do not depend on the language of the reader.
 * value – explicit value for the language specific variant string',
+
 	'wikibase-listdatatypes-time-head' => 'Time',
 	'wikibase-listdatatypes-time-body' => 'Literal data field for a time value. Given as a time with some precision and boundaries. The time is always saved internally in the Proleptic Gregorian format, but can use other formats during parsing and formatting.(?)
 * time – explicit value for point in time, represented per ISO8601, the year always having 11 digits and the date always being signed, in the format +00000002013-01-01T00:00:00Z
@@ -415,6 +416,7 @@ to find out where it went.',
 * after – explicit integer value for how many units before the given time it could be. The unit is given by the precision.
 * precision – explicit value encoded in a shortint. The numbers have the following meaning: 0 - billion years, 1 - hundred million years, ..., 6 - millennium, 7 - century, 8 - decade, 9 - year, 10 - month, 11 - day, 12 - hour, 13 - minute, 14 - second.
 * calendarmodel – explicit value given as a URI. It will identify the calendar model that should be used to display this time value.',
+
 	'wikibase-listdatatypes-url-head' => 'URL',
 	'wikibase-listdatatypes-url-body' => 'Literal data field for a URL. URLs are restricted to the protocols also supported for external links in wikitext.',
 
