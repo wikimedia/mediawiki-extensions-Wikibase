@@ -15,7 +15,8 @@
 	// re-constructing the DOM in JavaScript.
 
 	var DATA_VALUE_TYPES_TO_SCRAPE = [
-		'globecoordinate',
+		// backend coordinate formatter is not ready, as of 24 Feb 2014
+		// 'globecoordinate',
 		'quantity',
 		'string',
 		'wikibase-entityid'
