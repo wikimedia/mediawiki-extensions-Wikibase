@@ -81,22 +81,6 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->assertEquals( 404, $response->getStatusCode(), "response code" );
 	}
 
-	public function testGetDiffRevision() {
-		$testCases = $this->doDiffRevisionEdits();
-
-		foreach( $testCases as $case ) {
-			list( $expected, $oldId, $diffValue, $title ) = $case;
-			$page = new WikiPage( $title );
-			$viewItemAction = $this->createAction( 'view', $page );
-
-			$revision = $viewItemAction->getDiffRevision( $oldId, $diffValue, $title );
-			$this->assertInstanceOf( 'Revision', $revision );
-
-			$id = $revision->getId();
-			$this->assertEquals( $expected, $id, 'Retrieved correct diff revision' );
-		}
-	}
-
 	public function doDiffRevisionEdits() {
 		$item = Item::newEmpty();
 		$item->setDescription( 'en', 'Largest city in Germany' );
