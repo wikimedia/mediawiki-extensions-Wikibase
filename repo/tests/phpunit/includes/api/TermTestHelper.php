@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
-use Wikibase\Settings;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @licence GNU GPL v2+
@@ -13,7 +13,8 @@ class TermTestHelper {
 
 	public static function makeOverlyLongString( $text = "Test", $length = null ) {
 		if ( $length === null ) {
-			$limits = Settings::get( 'multilang-limits' );
+			$limits = WikibaseRepo::getDefaultInstance()->
+				getSettings()->getSetting( 'multilang-limits' );
 			$length = $limits['length'];
 		}
 

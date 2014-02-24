@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Settings;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 
@@ -41,11 +40,20 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $siteLinkTargetProvider;
 
+	/**
+	 * @since 0.5
+	 *
+	 * @var array
+	 */
+	protected $siteLinkGroups;
+
 	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'siteLinkGroups' );
 	}
 
 	/**
@@ -175,7 +183,10 @@ abstract class ModifyEntity extends ApiWikibase {
 				$this->dieUsage( "Badges: entity with id '{$badgeSerialization}' is not an item", 'not-item' );
 			}
 
-			if ( !in_array( $badgeId->getPrefixedId(), array_keys( Settings::get( 'badgeItems' ) ) ) ) {
+			$badgeItems = WikibaseRepo::getDefaultInstance()->
+				getSettings()->getSetting( 'badgeItems' );
+
+			if ( !in_array( $badgeId->getPrefixedId(), array_keys( $badgeItems ) ) ) {
 				$this->dieUsage( "Badges: item '{$badgeSerialization}' is not a badge", 'not-badge' );
 			}
 
@@ -372,7 +383,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return array the allowed params
 	 */
 	public function getAllowedParamsForSiteLink() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
+		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array(
 			'site' => array(
 				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),

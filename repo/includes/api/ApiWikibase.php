@@ -5,7 +5,6 @@ namespace Wikibase\Api;
 use Message;
 use MessageCache;
 use Revision;
-use SiteSQLStore;
 use Title;
 use User;
 use Status;

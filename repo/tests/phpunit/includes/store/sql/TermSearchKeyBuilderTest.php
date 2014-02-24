@@ -3,11 +3,10 @@
 namespace Wikibase\Test;
 
 use Wikibase\Item;
-use Wikibase\Settings;
 use Wikibase\StoreFactory;
-use Wikibase\TermSqlIndex;
 use Wikibase\Term;
 use Wikibase\TermSearchKeyBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\TermSearchKeyBuilder
@@ -46,7 +45,10 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 	 * @param boolean $matches
 	 */
 	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
-		if ( Settings::get( 'withoutTermSearchKey' ) ) {
+		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'withoutTermSearchKey' );
+
+		if ( $withoutTermSearchKey ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 

@@ -17,7 +17,6 @@ use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpLabel;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\DataModel\Claim\Claim;
@@ -30,7 +29,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Settings;
 use Wikibase\Summary;
 use Wikibase\Utils;
 use WikiPage;
@@ -374,7 +372,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "List of sitelinks must be an array", 'not-recognized-array' );
 		}
 
-		$sites = $this->siteLinkTargetProvider->getSiteList( Settings::get( 'siteLinkGroups' ) );
+		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		foreach ( $siteLinks as $siteId => $arg ) {
 			$this->checkSiteLinks( $arg, $siteId, $sites );
