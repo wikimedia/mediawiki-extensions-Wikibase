@@ -99,9 +99,8 @@ abstract class ViewEntityAction extends \ViewAction {
 	public function show() {
 		$contentRetriever = new ContentRetriever();
 		$content = $contentRetriever->getContentForRequest(
-			$this->getArticle(),
-			$this->getTitle(),
-			$this->getRequest()
+			$this->getRequest(),
+			$this->getArticle()
 		);
 
 		if ( is_null( $content ) ) {
@@ -147,9 +146,8 @@ abstract class ViewEntityAction extends \ViewAction {
 
 		$contentRetriever = new ContentRetriever();
 		$content = $contentRetriever->getContentForRequest(
-			$this->getArticle(),
-			$this->getTitle(),
-			$this->getRequest()
+			$this->getRequest(),
+			$this->getArticle()
 		);
 
 		if ( !( $content instanceof EntityContent ) ) {
@@ -158,7 +156,7 @@ abstract class ViewEntityAction extends \ViewAction {
 			return false;
 		}
 
-		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
+		if ( $this->getRequest()->getCheck( 'diff' ) ) {
 			// showing a diff
 			return false;
 		}
@@ -202,7 +200,7 @@ abstract class ViewEntityAction extends \ViewAction {
 		}
 
 		// Create and set the title.
-		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
+		if ( $this->getRequest()->getCheck( 'diff' ) ) {
 			// Escaping HTML characters in order to retain original label that may contain HTML
 			// characters. This prevents having characters evaluated or stripped via
 			// OutputPage::setPageTitle:
@@ -253,7 +251,7 @@ abstract class ViewEntityAction extends \ViewAction {
 		if ( $wgSend404Code ) {
 			// If there's no backing content, send a 404 Not Found
 			// for better machine handling of broken links.
-			$this->getContext()->getRequest()->response()->header( "HTTP/1.1 404 Not Found" );
+			$this->getRequest()->response()->header( "HTTP/1.1 404 Not Found" );
 		}
 
 		$hookResult = wfRunHooks( 'BeforeDisplayNoArticleText', array( $this ) );
