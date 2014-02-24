@@ -99,7 +99,6 @@
 				'class': this.uiBaseClass + '-input valueview-input'
 			} )
 			.appendTo( this.$viewPort )
-			.timeinput( { mediaWiki: this._options.mediaWiki } )
 			.inputextender( {
 				initCallback: function( $extension ) {
 					self._initInputExtender( $extension );
@@ -117,6 +116,7 @@
 				},
 				contentAnimationEvents: 'toggleranimation'
 			} )
+			.timeinput( { mediaWiki: this._options.mediaWiki } )
 			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
 				if( self.$input.data( 'inputextender' ).extensionIsActive() ) {
 					self._updateCalendarHint( value );
