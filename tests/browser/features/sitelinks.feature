@@ -5,6 +5,7 @@
 #
 # feature definition for item sitelinks tests
 
+@wikidata.beta.wmflabs.org
 Feature: Edit sitelinks
 
   Background:
@@ -118,7 +119,7 @@ Feature: Edit sitelinks
       | press the RETURN key in the pagename input field |
 
   @save_sitelink @modify_entity
-  Scenario Outline: Save sitelink & reload
+  Scenario Outline: Save sitelink and reload
     Given The following sitelinks do not exist:
       | enwiki | Asia |
     When I click the sitelink add button
