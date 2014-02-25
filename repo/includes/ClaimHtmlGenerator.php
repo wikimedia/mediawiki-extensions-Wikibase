@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
@@ -259,16 +260,36 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
+	 * @fixme handle errors more consistently as done in JS UI
+	 *
 	 * @param Snak $snak
 	 * @return string
 	 */
 	protected function getFormattedSnakValue( $snak ) {
 		try {
-			return $this->snakFormatter->formatSnak( $snak );
+			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {
-			return '?'; // XXX: perhaps show error message?
+			return $this->getInvalidSnakMessage();
 		} catch ( PropertyNotFoundException $ex ) {
-			return '?'; // XXX: perhaps show error message?
+			return $this->getPropertyNotFoundMessage();
+		} catch ( InvalidArgumentException $ex ) {
+			return $this->getInvalidSnakMessage();
 		}
+
+		return $formattedSnak;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getInvalidSnakMessage() {
+		return wfMessage( 'wikibase-snakformat-invalid-value' )->parse();
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getPropertyNotFoundMessage() {
+		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
 	}
 }
