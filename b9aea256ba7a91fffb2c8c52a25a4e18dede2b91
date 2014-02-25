@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_15623437",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-25T19:35:20Z",
+      "side": 1,
+      "message": "Would be nice to pass the exception, or the string returned by $ex-\u003egetMessage(), so it can be included in the error report.\nIt\u0027s true that exposing internals is bad, but it seems unlikely that these error messages would expose implementation details. Instead, I\u0027d hope they would provide information about how the snak is invalid.",
+      "revId": "b9aea256ba7a91fffb2c8c52a25a4e18dede2b91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f558e88d",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-25T19:35:20Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "b9aea256ba7a91fffb2c8c52a25a4e18dede2b91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d553ac6d",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-25T19:35:20Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "b9aea256ba7a91fffb2c8c52a25a4e18dede2b91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
