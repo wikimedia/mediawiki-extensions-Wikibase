@@ -3122,6 +3122,10 @@ $messages['ce'] = array(
 	'right-sitelink-remove' => 'сайташан тӀе йолу хьажораш дӀаяхар',
 	'action-item-remove' => 'элементаш дӀаяхар',
 	'action-property-remove' => 'башхалонаш дӀаяхар',
+	'wikibase-time-precision-Gannum' => '$1 миллиард шо',
+	'wikibase-time-precision-annum' => '$1 {{PLURAL:$1|шо|шераш}}',
+	'wikibase-time-precision-millennium' => '$1 бӀешараш',
+	'wikibase-time-precision-century' => '$1 {{PLURAL:$1||бӀешо|бӀешараш}}',
 );
 
 /** Sorani Kurdish (کوردی)
@@ -4397,27 +4401,21 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias|Aliasse}} für [$2] entfernt',
 	'wikibase-property-summary-special-create-property' => 'Eigenschaft für [$2] mit {{PLURAL:$1|Wert|Werten}} erstellt',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Datenobjekt',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Link zu anderen Objekten im Projekt. Es wird der „Objekt“-Namensraum auf Wikidata für passende Einträge durchsucht. Er besteht aus einem einfachen Texteintragsfeld.
-* scheme – impliziter Teil der Iri-Zeichenkette.
-* hierarchicalpart – impliziter Teil der Iri-Zeichenkette.
-* query – impliziter Teil der Iri-Zeichenkette.
-* fragment – impliziter Teil der Iri-Zeichenkette.', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link zu anderen Objekten im Projekt. Es wird der „Objekt“-Namensraum auf Wikidata für passende Einträge durchsucht. Er besteht aus einem einfachen Texteintragsfeld.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mediendatei auf Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Link zu Dateien, die auf Wikimedia Commons gespeichert sind. Es wird der „Datei“-Namensraum auf Commons für passende Einträge durchsucht.
-* scheme – impliziter Teil der Iri-Zeichenkette.
-* hierarchicalpart – impliziter Teil der Iri-Zeichenkette.
-* query – impliziter Teil der Iri-Zeichenkette.
-* fragment – impliziter Teil der Iri-Zeichenkette.', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Link zu Dateien, die auf Wikimedia Commons gespeichert sind. Es wird der „Datei“-Namensraum auf Commons für passende Einträge durchsucht.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinate',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literale Daten für eine geografische Position, die als Breitengrad-Längengrad-Paar in GMS oder Dezimalgrad für den Sternenkörper angegeben ist. Standards sind „Erde“, anschließend „WGS84“. Es wird eine Auflösung und ein Bereich hinzugefügt.
 * latitude – impliziter erster Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „N/S“ angegeben.
 * longitude – impliziter zweiter Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „O/W“ angegeben.
-* globe – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.', # Fuzzy
+* globe – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper, dessen Standards auf Erde sind "http://www.wikidata.org/entity/Q2"
+* precision – numerische Genauigkeit der Koordinate',
 	'wikibase-listdatatypes-quantity-head' => 'Menge',
 	'wikibase-listdatatypes-quantity-body' => 'Literales Datenfeld für eine Menge, die sich auf eine Art klar definierte Einheit bezieht. Die tatsächliche Einheit geht in die Datenwerte, die eingegeben werden.
-* value – impliziter Teil der Zeichenkette (Mapping des Einheitspräfixes ist unklar).
-* unit – impliziter Teil der Zeichenkette (Mapping zum Standardisieren des Körpers ist unklar).
-* accuracy (optional) – ausdrücklicher Datenwert. Hat die gleiche Einheit wie der Wert.', # Fuzzy
+* amount – impliziter Teil der Zeichenkette (Mapping des Einheitspräfixes ist unklar).
+* unit – impliziter Teil der Zeichenkette, dessen Standards auf „1“ sind (Mapping zum Standardisieren des Körpers ist unklar).
+* upperbound – Obergrenze der Menge
+* lowerbound – Untergrenze der Menge',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Einsprachiger Text',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literales Datenfeld für eine Zeichenkette, die nicht in andere Sprachen übersetzt ist. Diese Art von Zeichenkette ist einmal definiert und wird auf allen Sprachen verwendet. Typische Verwendung sind geografische Namen, die in der lokalen Sprache geschrieben sind, eine Kennung gleicher Art, eine chemische Formel oder ein lateinischer wissenschaftlicher Name.
 * language – ausdrücklicher Wert zur Identifizierung der Sprache für den Textabschnitt.
@@ -6909,27 +6907,19 @@ ffirmation ajoutée}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Retrait {{PLURAL:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Propriété [$2] créée avec {{PLURAL:$1|une valeur|des valeurs}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Élément',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Lien vers d’autres éléments du projet. Lors de la saisie, l’espace de noms "Élément" sur Wikidata sera scruté à la recherche des entrées correspondantes. Cela consiste en un simple champ de saisie de texte.
-* scheme — partie implicite de Iri-string
-* hierarchicalpart — partie implicite de Iri-string
-* query — partie implicite de Iri-string
-* fragment — partie implicite de Iri-string', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Lien vers d’autres éléments du projet. Lors de la saisie, l’espace de noms « Élément » sur Wikidata sera scruté à la recherche des entrées correspondantes. Cela consiste en un simple champ de saisie de texte.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Médias communs',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Lien vers des fichiers hébergés sur Wikimedia Commons. Lors de la saisie, l’espace de noms « Fichier » de Wikimedia Commons sera scruté à la recherche des entrées correspondantes.
-* scheme — partie implicite de Iri-string
-* hierarchicalpart — partie implicite de Iri-string
-* query — partie implicite de Iri-string
-* fragment — partie implicite de Iri-string', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Lien vers des fichiers hébergés sur Wikimedia Commons. Lors de la saisie, l’espace de noms « Fichier » de Wikimedia Commons sera scruté à la recherche des entrées correspondantes.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordonnées du globe',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Données littérales pour une position géographique donnée sous forme de paire latitude-longitude en GMS ou en degrés décimaux pour le corps céleste concerné. Par défaut, "Terre" puis "WGS84". Cela ajoute une résolution et une portée.
 * latitude — première partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe ou par le N/S en suffixe
 * longitude – seconde partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe soit par le E/W en suffixe
-* globe – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"', # Fuzzy
+* globe – valeur de donnée explicite (?), fournissant le corps céleste, par défaut Terre "http://www.wikidata.org/entity/Q2"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantité',
 	'wikibase-listdatatypes-quantity-body' => 'Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.
-* value — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
-* unit — partie implicite de la chaîne (l’application du corps standardisé n’est pas claire)
-* accuracy (facultatif) — valeur de donnée explicite, ayant la même unité que la valeur', # Fuzzy
+* montant — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
+* unité — partie implicite de la chaîne, « 1 » par défaut (l’application du corps standardisé n’est pas claire)
+* majorant — majorant de la quantité',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Texte monolingue',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Champ de donnée littéral pour une chaîne qui n’est pas traduite dans d’autres langues. Ce type de chaîne est défini une fois et réutilisé dans toutes les langues. Une utilisation typique concerne les noms géographiques écrits dans la langue locale, un identifiant de type quelconque, une formule chimique ou un nom scientifique latin.
 * langue — valeur explicite pour identifier la langue de la partie texte
@@ -7652,6 +7642,7 @@ $messages['gu'] = array(
  * @author ExampleTomer
  * @author Guycn1
  * @author Inkbug
+ * @author Yona b
  * @author חיים
  * @author ערן
  * @author פוילישער
@@ -7935,27 +7926,21 @@ $messages['he'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => 'הסרת {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
 	'wikibase-property-summary-special-create-property' => 'נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'פריט',
-	'wikibase-listdatatypes-wikibase-item-body' => 'קישור לפריטים אחרים במיזם. בעת ההזנה ייערך חיפוש של עיולים מתאימים במרחב הפריטים בוויקינתונים. הוא מכיל שדה טקסט אחד.
-* scheme – חלק מתוך מחרוזת קישור בתסדיר IRI
-* hierarchicalpart – חלק מתוך מחרוזת קישור בתסדיר IRI
-* query – חלק מתוך מחרוזת קישור בתסדיר IRI
-* fragment – חלק מתוך מחרוזת קישור בתסדיר IRI', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'קישור לפריטים אחרים במיזם. בעת ההזנה ייערך חיפוש של עיולים מתאימים במרחב הפריטים בוויקינתונים. הוא מכיל שדה טקסט אחד.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'מדיה בוויקישיתוף',
-	'wikibase-listdatatypes-commonsmedia-body' => 'קישור לקבצים שמאוחסנים בוויקישיתוף. בעת ההזנה ייערך חיפוש עיולים מתאימים במרחב קובץ (File) בוויקישיתוף.
-* scheme – חלק מתוך מחרוזת קישור בתסדיר IRI
-* hierarchicalpart – חלק מתוך מחרוזת קישור בתסדיר IRI
-* query – חלק מתוך מחרוזת קישור בתסדיר IRI
-* fragment – חלק מתוך מחרוזת קישור בתסדיר IRI', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'קישור לקבצים שמאוחסנים בוויקישיתוף. בעת ההזנה ייערך חיפוש עיולים מתאימים במרחב קובץ (File) בוויקישיתוף.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'נקודת ציון של גלובוס',
-	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי, בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
-* latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף.
-* longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף.
-* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
+* latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף
+* longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף
+* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "Earth" )"כדור הארץ"), "http://www.wikidata.org/entity/Q2"
+* precision – הדיוק המספרי של נקודת הציון', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
 	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
-* value – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
-* unit – חלק משתמע של המחרוזת (מיפוי לגוף התקינה אינו ברור)
-* accuracy (לא חובה) – ערך נתונים מפורש, באותה יחידה כמו הערך', # Fuzzy
+* amount – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
+* unit – חלק משתמע של המחרוזת, בררת המחדל – "1" (מיפוי לגוף התקינה אינו ברור)
+* upperbound – הגבול העליון של הכמות
+* lowerbound – הגבול התחתון של הכמות',
 	'wikibase-listdatatypes-monolingual-text-head' => 'טקסט חד־לשוני',
 	'wikibase-listdatatypes-monolingual-text-body' => 'שדה נתונים מפורש למחרוזת שאינה מתורגמת לשפות אחרות. הסוג הזה של המחרוזת מוגדר פעם אחת ומשמש בכל השפות. שימוש אופייני הוא שם גאוגרפי שכתוב בשפה המקומית, מזהה מסוג כלשהו, נוסחה כימית, או שם מדעי בלטינית.
 * language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
@@ -8011,6 +7996,12 @@ $messages['he'] = array(
 	'action-label-update' => 'לעדכן תוויות',
 	'action-description-remove' => 'למחוק תיאורים',
 	'action-description-update' => 'לעדכן תיאורים',
+	'wikibase-time-precision-Gannum' => 'ב־$1 מיליארד שנים',
+	'wikibase-time-precision-Mannum' => 'ב־$1 מיליון שנים',
+	'wikibase-time-precision-annum' => 'ב־$1 שנים',
+	'wikibase-time-precision-millennium' => '$1 מילניומים',
+	'wikibase-time-precision-century' => '$1. מאות',
+	'wikibase-time-precision-10annum' => '$1 עשורים',
 );
 
 /** Hindi (हिन्दी)
@@ -9768,17 +9759,9 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creata una proprietà [$2] con {{PLURAL:$1|valore|valori}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
-	'wikibase-listdatatypes-wikibase-item-body' => "Collega ad altri elementi nel progetto. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"Item\" di Wikidata. Consiste in un unico campo di testo:
-* schema - implicito, da parte dell'Iri-string
-* hierarchicalpart - implicito, da parte dell'Iri-string
-* query - implicito, da parte dell'Iri-string
-* frammento - implicito, da parte dell'Iri-string", # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Collega ad altri elementi nel progetto. Durante l\'inserimento verranno cercati gli elementi corrispondenti nel namespace "Item" di Wikidata. Consiste in un unico campo di testo.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'File multimediale su Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => "Collega a file memorizzati su Wikimedia Commons. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"File\" di Commons.
-* schema - implicito, da parte dell'Iri-string
-* hierarchicalpart - implicito, da parte dell'Iri-string
-* query - implicito, da parte dell'Iri-string
-* frammento - implicito, da parte dell'Iri-string", # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Collega a file memorizzati su Wikimedia Commons. Durante l\'inserimento verranno cercati gli elementi corrispondenti nel namespace "File" di Commons.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinate geografiche',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Campo dati letterale per una posizione geografica indicata come latitudine-longitudine in gms o gradi decimali per il corpo stellare indicato. I valori predefiniti sono "Terra" e "WGS84". Aggiunge risoluzione e intervallo di valori.
 * latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
@@ -10130,17 +10113,9 @@ $messages['ja'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => '[$2] の{{PLURAL:$1|別名}}を除去',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] プロパティを作成',
 	'wikibase-listdatatypes-wikibase-item-head' => '項目',
-	'wikibase-listdatatypes-wikibase-item-body' => 'プロジェクト内の他の項目へのリンク。入力時にウィキデータの項目用名前空間に一致するものがないか検索されます。テキスト入力欄1個で構成されます。
-* scheme - IRI文字列の非明示部分
-* hierarchicalpart - IRI文字列の非明示部分
-* query - IRI文字列の非明示部分
-* fragment - IRI文字列の非明示部分', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'プロジェクト内の他の項目へのリンク。入力時にウィキデータの項目用名前空間に一致するものがないか検索されます。テキスト入力欄1個で構成されます。',
 	'wikibase-listdatatypes-commonsmedia-head' => 'コモンズのメディア',
-	'wikibase-listdatatypes-commonsmedia-body' => 'ウィキメディア・コモンズで保管されているファイルへのリンク。入力時にコモンズのファイル名前空間に一致するものがないか検索されます。
-* scheme - IRI文字列の非明示部分
-* hierarchicalpart - IRI文字列の非明示部分
-* query - IRI文字列の非明示部分
-* fragment - IRI文字列の非明示部分', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'ウィキメディア・コモンズで保管されているファイルへのリンク。入力時にコモンズのファイル名前空間に一致するものがないか検索されます。',
 	'wikibase-listdatatypes-globe-coordinate-head' => '座標',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。「地球」それから「WGS84」が既定となっており、分解能と範囲が指定されます。
 * latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N または S で指定されます
@@ -10327,6 +10302,7 @@ $messages['ka'] = array(
 	'wikibase-setaliases-warning-remove' => 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ყველა ფსევდონიმი [[$1]]-თვის?',
 	'wikibase-modifyentity-id' => 'იდენტიფიკატორი:',
 	'wikibase-modifyterm-language' => 'ენა:',
+	'special-mergeitems' => 'ორი ელემენტის შერწყმა',
 	'wikibase-mergeitems-submit' => 'ელემენტების შერწყმა',
 	'wikibase-dispatchstats-no-stats' => 'ამჟამად სტატისტიკური მონაცემები არ არის ხელმისაწვდომი.',
 	'wikibase-dispatchstats-changes' => 'ცვლილებების ჟურნალის სტატისტიკა',
@@ -11971,27 +11947,21 @@ $messages['mk'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Отстранет алијас|Отстранети алијаси}} на [$2]',
 	'wikibase-property-summary-special-create-property' => 'Создадено својство за [$2] со {{PLURAL:$1|вредноста|вредностите}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Предмет',
-	'wikibase-listdatatypes-wikibase-item-body' => "Врска до други предмети во проектот. При внесување на нешто во именскиот простор „Предмет“ (Item), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
-* шема (''scheme'') – содржан дел од Iri-низата
-* хиерархиски дел (''hierarchicalpart'') – содржан дел од Iri-низата
-* барање (''query'') – содржан дел од Iri-низата
-* делче (''fragment'') – содржан дел од Iri-низата", # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Врска до други предмети во проектот. При внесување на нешто во именскиот простор „Предмет“ (Item), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медиумска содржина од Ризницата',
-	'wikibase-listdatatypes-commonsmedia-body' => "Врска до податотеки складирани на Ризницата. При внесување на нешто во именскиот простор „Податотека“ (File), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
-* шема (''scheme'') – содржан дел од Iri-низата
-* хиерархиски дел (''hierarchicalpart'') – содржан дел од Iri-низата
-* барање (''query'') – содржан дел од Iri-низата
-* делче (''fragment'') – содржан дел од Iri-низата", # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Врска до податотеки складирани на Ризницата. При внесување на нешто во именскиот простор „Податотека“ (File), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Координата',
 	'wikibase-listdatatypes-globe-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава резолуција и опсег.
 * географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) од координатната низа, правецот е зададен со претставка-симбол или со наставка N/S
-* географска должина (''longitude'') – поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
-* глобус (''globe'') [оптимално] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“", # Fuzzy
+* географска должина (''longitude'') — поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
+* глобус (''globe'') [оптимално] — искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ „http://www.wikidata.org/entity/Q2“
+* прецизност — numeric precision of the coordinate",
 	'wikibase-listdatatypes-quantity-head' => 'Количина',
 	'wikibase-listdatatypes-quantity-body' => "Дословно податочно поле за количина што се однесува на некој вид на добро утврдена единица. Самата единица оди во податочната вредност што се внесува.
-* вредност (''value'') – содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
-* единица (''unit'') – содржан дел од низата (пресликувањето во стандардизација на телото е нејасно)
-* точност (''accuracy'') [незадолжително] – изречена податочна вредност; има иста единица како вредноста", # Fuzzy
+* износ (''amount'') — содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
+* единица (''unit'') — содржан дел од низата (по основно: „1“; пресликувањето во стандардизација на телото е нејасно)
+* горна граница (''upperbound'') — горна граница на количеството
+* долна граница (''lowerbound'') — долна граница на количеството",
 	'wikibase-listdatatypes-monolingual-text-head' => 'Еднојазичен текст',
 	'wikibase-listdatatypes-monolingual-text-body' => "Дословно податочно поле за низа што не се преведува на други јазици. Ваквата низа се задава еднаш и се користи кај сите јазици. Типичен пример би биле географските називи напишани на локалниот јазик, некаква назнака, хемиска формула или латинско научно име.
 * јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
@@ -15975,27 +15945,21 @@ $messages['ru'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|1=Удалено|Удалены}} доп. назв. ({{PLURAL:$1|1=синоним|синонимы}}) [$2]',
 	'wikibase-property-summary-special-create-property' => 'Создано свойство [$2] со {{PLURAL:$1|1=значением|значениями}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Элемент',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Ссылка на другие элементы в проекте. При вводе будет производиться поиск похожих записей в пространстве имён Викиданных <code>Item:</code>. Состоит из одного текстового поля ввода.
-* scheme — неявно задаваемая часть строки IRI
-* hierarchicalpart — неявно задаваемая часть строки IRI
-* query — неявно задаваемая часть строки IRI
-* fragment — неявно задаваемая часть строки IRI', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Ссылка на другие элементы в проекте. При вводе будет производиться поиск похожих записей в пространстве имён Викиданных «Item». Состоит из одного текстового поля ввода.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медиафайл с Викисклада',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Ссылка на файлы, хранящиеся на Викискладе. Во время ввода будет производиться поиск по пространству имён <code>File:</code> на Викискладе.
-* scheme — неявно задаваемая часть строки IRI
-* hierarchicalpart — неявно задаваемая часть строки IRI
-* query — неявно задаваемая часть строки IRI
-* fragment — неявно задаваемая часть строки IRI', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Ссылка на файлы, хранящиеся на Викискладе. Во время ввода будет производиться поиск по пространству имён «File» на Викискладе.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Глобальные координаты',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Символьное поле данных о географическом положении для определённого небесного тела, задаваемые в виде пары «широта—долгота» в формате «градусы минуты секунды» (°ʹʺ) или в десятичном формате. По умолчанию это «Земля», а затем «WGS84». Добавляет разрешение и диапазон.
 * latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S
 * longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W
-* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»', # Fuzzy
+* globe — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является Землёй («http://www.wikidata.org/entity/Q2»)
+ * точность — точность координат',
 	'wikibase-listdatatypes-quantity-head' => 'Количество',
 	'wikibase-listdatatypes-quantity-body' => 'Строковое поле для ввода количества, выраженного в некоторых вполне определённых единицах. Конкретные единицы указаны во вводимых значениях данных.
-* value — неявная часть строки (обработка префикса единицы непонятна)
-* unit — неявная часть строки (связь с эталоном непонятна)
-* accuracy (необяз.) — явное значение, выраженное в тех же единицах, что и value', # Fuzzy
+* amount — неявная часть строки (обработка префикса единицы непонятна)
+* unit — неявная часть строки, по умолчанию — «1» (связь с эталоном непонятна)
+* upperbound — верхняя граница количества
+* lowerbound — нижняя граница количества',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Моноязычный текст',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Символьное поле данных для строки, не переводимой на другие языки. Строки этого типа определяются один раз и используются одинаково для всех языков. Обычно используется для географических названий на местном языке, идентификаторов какого-либо типа, химических формул или латинских научных названий.
 * language — явно задаваемое значение для определения языка текстовой части
@@ -19133,27 +19097,22 @@ $messages['zh-hans'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => '删除[$2]{{PLURAL:$1|别名}}',
 	'wikibase-property-summary-special-create-property' => '创建有{{PLURAL:$1|值}}的[$2]属性',
 	'wikibase-listdatatypes-wikibase-item-head' => '项',
-	'wikibase-listdatatypes-wikibase-item-body' => '至该项目其他项的链接。输入期间，会搜索维基数据“项”（Item）名字空间中的匹配条目。它由单文本输入字段组成。
-*计划 – IRI字符串的含蓄部分
-*层次部件 – IRI字符串的含蓄部分
-*查询 – IRI字符串的含蓄部分
-*片断 – IRI字符串的含蓄部分', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => '至该项目其他项的链接。输入期间，会搜索维基数据“项”（Item）名字空间中的匹配条目。它由单文本输入字段组成。',
 	'wikibase-listdatatypes-commonsmedia-head' => '共享资源媒体文件',
-	'wikibase-listdatatypes-commonsmedia-body' => '储存在维基共享资源的文件的链接。输入期间，会搜索共享资源“File”（文件）名字空间中的匹配条目。
-*计划 – IRI字符串的含蓄部分
-*层次部件 – IRI字符串的含蓄部分
-*查询 – IRI字符串的含蓄部分
-*片断 – IRI字符串的含蓄部分', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => '储存在维基共享资源的文件的链接。输入期间，会搜索共享资源“File”（文件）名字空间中的匹配条目。',
 	'wikibase-listdatatypes-globe-coordinate-head' => '地球坐标',
 	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十进制经纬度度指定的地理位置的原始数据代码。默认为“地球”其次是“WGS84”。其加入一解析度及范围。
 * 纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供
 * 经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供
-* 星球——精确值，默认指向“地球”，其次为“WGS84”', # Fuzzy
+* 星球——精确值，默认指向“地球”，其次为“WGS84”
+“http://www.wikidata.org/entity/Q2”
+* 精度——数值化的坐标精度',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => '一些精确定义单位的数值的原始暑假字段。实际单位也输入到数据中。
-*值－－字符的隐藏部分（单位不明）
-*单位－－字符的隐藏部分（实际实体不明）
-*精度（可选）－－精确值，与数值单位相同', # Fuzzy
+* 数额——字符串的暗示部分（单位未知）
+* 单位——默认为“1”字符串的暗示部分（实体未知）
+* 上限——量的最高界限
+* 下限——量的最低界限',
 	'wikibase-listdatatypes-monolingual-text-head' => '单语文本',
 	'wikibase-listdatatypes-monolingual-text-body' => '不能译为其他语言的一个串的原始数据字段。该类型的串一经定义就可在所有语言中使用。典型的是用于当地语言书写的地名、某种标识符、化学方程式或拉丁科学名称。
 *语言——标定文本部分语言的明确的值
@@ -19508,27 +19467,22 @@ $messages['zh-hant'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => '刪除[$2]{{PLURAL:$1|别名}}',
 	'wikibase-property-summary-special-create-property' => '創建含{{PLURAL:$1|數值}}的[$2]屬性',
 	'wikibase-listdatatypes-wikibase-item-head' => '項目',
-	'wikibase-listdatatypes-wikibase-item-body' => '在這個項目上至其他項的鏈接。輸入時會在維基數據「項目」名字空間搜索匹配條目。它由單個文本輸入字段構成。
-*協議——IRI串的非明示部分
-*階層部分——IRI串的非明示部分
-*查詢——IRI串的非明示部分
-*片——IRI串的非明示部分', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => '在這個項目上至其他項的鏈接。輸入時會在維基數據「項目」名字空間搜索匹配條目。它由單個文本輸入字段構成。',
 	'wikibase-listdatatypes-commonsmedia-head' => '共享媒體',
-	'wikibase-listdatatypes-commonsmedia-body' => '存儲在維基共享資源上的文件的鏈接。輸入時會在共享資源「檔案」名字空間搜索匹配條目。
-*協議——IRI串的非明示部分
-*階層部分——IRI串的非明示部分
-*查詢——IRI串的非明示部分
-*片——IRI串的非明示部分', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => '存儲在維基共享資源上的文件的鏈接。輸入時會在共享資源「檔案」名字空間搜索匹配條目。',
 	'wikibase-listdatatypes-globe-coordinate-head' => '地理座標',
 	'wikibase-listdatatypes-globe-coordinate-body' => '由gms或十進制經緯度指定的地理位置的原始數據字段。預設為「Earth」甚次為「WGS84」。其加入一解像度及範圍。
 * 緯度——隱藏的地理位置字串第一部分，包含float、dms、dm與dd，方向由前綴符號或後綴N或S提供
 * 經度——隱藏的地理位置字串第二部分，包含float、dms、dm與dd，方向由前綴符號或後綴E或W提供
-* 星球——精確數值，預設指向「Earth」，其次為「WGS84」', # Fuzzy
+* 星球——精確數值，預設指向「Earth」，其次為「WGS84」
+「http://www.wikidata.org/entity/Q2」
+* 精確度——數位化坐標精確度',
 	'wikibase-listdatatypes-quantity-head' => '數量',
 	'wikibase-listdatatypes-quantity-body' => '一些精確定義單位之數值的原始數據字段。實際單位亦輸入到數據中。
-*數值－－字串的隱藏部分（單位不明）
-*單位－－字串的隱藏部分（實際實體不明）
-*精確度（可選）－－精確數值，與數值有同一單位', # Fuzzy
+* 數值——字串的隱藏部分（單位不明）
+* 單位——字串的隱藏部分（實際實體不明）
+* 最高值——量最高界線
+* 最低值——量最低界線',
 	'wikibase-listdatatypes-monolingual-text-head' => '單語言文本',
 	'wikibase-listdatatypes-monolingual-text-body' => '不能譯為其他語言的一個字串的原始數據字段。該類型的字串一經定義就可在所有語言中使用。典型的是用於當地語言書寫的地名、某種標識符、化學方程式或拉丁科學名稱。
 *語言——標定文本部分語言的明確的數值

@@ -391,6 +391,7 @@ $messages['arc'] = array(
  * @author Gitartha.bordoloi
  */
 $messages['as'] = array(
+	'wikibase-after-page-move-queued' => "এই পৃষ্ঠাৰ লগত সংযুক্ত [$1 ৱিকিডে'টা ভুক্তি] সোনকালেই স্বয়ংক্ৰিয়ভাৱে নবীকৰণ কৰা হ'ব।",
 	'wikibase-dataitem' => "ৱিকিডে'টা পৃষ্ঠা",
 	'wikibase-rc-wikibase-edit-title' => "ৱিকিডে'টা সম্পাদনা",
 );
@@ -2025,6 +2026,24 @@ $messages['ia'] = array(
 	'wikibase-linkitem-success-link' => 'Le paginas ha essite ligate con successo. Le elemento continente le ligamines se trova in nostre [$1 repositorio central de datos].',
 	'wikibase-property-notfound' => 'Proprietate $1 non trovate.',
 	'wikibase-property-notsupportedyet' => 'Wikibase non supporta ancora le typo de proprietate pro le proprietate $1.',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Monstrar modificationes de Wikidata in le modificationes recente',
+	'wikibase-rc-wikibase-edit-letter' => 'D',
+	'wikibase-rc-wikibase-edit-title' => 'Modification de Wikidata',
+	'wikibase-watchlist-show-changes-pref' => 'Monstrar le modificationes de Wikidata in tu observatorio',
+	'wikibase-error-serialize-error' => 'Non ha potite serialisar le datos.',
+	'wikibase-error-invalid-entity-id' => 'Le ID specificate es incognite pro le systema. Per favor usa un ID de entitate valide.',
+	'special-unconnectedpages' => 'Paginas non connectite a elementos',
+	'wikibase-unconnectedpages-legend' => 'Optiones pro paginas non connectite',
+	'wikibase-unconnectedpages-page' => 'Initiar lista de resultatos con pagina:',
+	'wikibase-unconnectedpages-submit' => 'Va',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" non es un codice de lingua valide.',
+	'wikibase-unconnectedpages-page-warning' => 'Le titulo del pagina non pote esser usate pro le consulta e es ignorate.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Solmente paginas con ligamines inter linguas',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|ligamine|ligamines}} inter linguas in le pagina)',
+	'wikibase-pageinfo-entity-id' => 'ID de elemento de Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Nulle',
+	'wikibase-property-render-error' => 'Non ha potite generar le proprietate $1: $2',
 );
 
 /** Indonesian (Bahasa Indonesia)
@@ -2368,6 +2387,7 @@ $messages['ka'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ არ არის ენის სწორი კოდი.',
 	'wikibase-unconnectedpages-iwdata-label' => 'მხოლოდ ენათშორისი ბმულების მქონე გვერდები',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)',
+	'wikibase-pageinfo-entity-id' => 'ვიკიმონაცემების ელემენტის ID',
 	'wikibase-pageinfo-entity-id-none' => 'არაფერი',
 );
 
