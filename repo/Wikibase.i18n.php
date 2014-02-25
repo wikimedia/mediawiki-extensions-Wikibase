@@ -93,6 +93,8 @@ $messages['en'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'custom value',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'unknown value',
 	'wikibase-snakview-snaktypeselector-novalue' => 'no value',
+	'wikibase-snakformat-invalid-value' => 'Invalid value.',
+	'wikibase-snakformat-propertynotfound' => 'Property not found.',
 	'wikibase-shortcopyrightwarning' => 'By clicking "$1", you agree to the [[$2|terms of use]], and you irrevocably agree to release your contribution under the $3.',
 	'wikibase-shortcopyrightwarning-version' => 'wikibase-1', # do not translate or duplicate this message to other languages
 	'wikibase-copyrighttooltip-acknowledge' => 'I accept these terms for my future edits. Do not show this message again.',
@@ -670,6 +672,8 @@ Parameters:
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
 	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
 	'wikibase-snakview-snaktypeselector-novalue' => "A short descriptive title of a no-value snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
+	'wikibase-snakformat-invalid-value' => 'Error message displayed on item page for property value that has an invalid or mismatching property type and cannot be displayed.',
+	'wikibase-snakformat-propertynotfound' => 'Error message displayed on item page for snak with a property that cannot be found.',
 	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button.
 
 Parameters:
