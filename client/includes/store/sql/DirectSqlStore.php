@@ -5,7 +5,7 @@ namespace Wikibase;
 use Language;
 use Site;
 use ObjectCache;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -87,7 +87,7 @@ class DirectSqlStore implements ClientStore {
 		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
@@ -313,7 +313,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyInfoTable
 	 */
 	protected function newPropertyInfoTable() {
-		$usePropertyInfoTable = WikibaseRepo::getDefaultInstance()
+		$usePropertyInfoTable = WikibaseClient::getDefaultInstance()
 			->getSettings()->getSetting( 'usePropertyInfoTable' );
 
 		if ( $usePropertyInfoTable ) {
