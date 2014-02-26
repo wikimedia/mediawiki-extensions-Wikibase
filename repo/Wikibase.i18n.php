@@ -1916,28 +1916,21 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Desaniciáu un alcuñu|Desaniciaos alcuños}} en [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creada una propiedá con {{PLURAL:$1|un valor|valores}} en [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elementu',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Enllaz a otros elementos del proyeutu. Demientres la entrada, guetaráse nel espaciu de nomes "Item" de Wikidata pa buscar entraes que coincidan. Consiste nun únicu campu d\'entrada de testu.
-*scheme – parte implícita de la cadena Iri
-*hierarchicalpart – parte implícita de la cadena Iri
-*query – parte implícita de la cadena Iri
-*fragment – parte implícita de la cadena Iri', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Enllaz a otros elementos del proyeutu. Demientres la entrada, guetaráse nel espaciu de nomes "Item" de Wikidata pa buscar entraes que coincidan. Consiste nun únicu campu d\'entrada de testu.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Multimedia de Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Enllaz a ficheros guardaos en Wikimedia Commons. Demientres la entrada, guetaráse nel espaciu de nomes "File" de Commons pa buscar entraes que coincidan.
-*scheme – parte implícita de la cadena Iri
-*hierarchicalpart – parte implícita de la cadena Iri
-*query – parte implícita de la cadena Iri
-*fragment – parte implícita de la cadena Iri', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Enllaz a ficheros guardaos en Wikimedia Commons. Demientres la entrada, guetaráse nel espaciu de nomes "File" de Commons pa buscar entraes que coincidan.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenada del globu',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Datos lliterales pa una posición xeográfica dada como un par llatitú-llonxitú en gms o en graos decimales pal cuerpu estelar dau. De mou predetermináu ye "Tierra" y llueu "WGS84". Añade una resolución y un rangu.
 * latitude – primera parte implícita (float, dms, dm, dd) de la cadena de coordenaes; la direición dase o col signu del prefixu o col sufixu N/S
 * longitude – segunda parte implícita (float, dms, dm, dd) de la cadena de coordenaes; la direición dase o col signu del prefixu o col sufixu E/W
-* altitude (opcional) – valor esplícitu (?) pa l\'altura sobre un planu de referencia; pal globu "Tierra" esti sedría\'l globu de referencia "WGS84"
-* globe (opcional) – valor de datos explícitu (?), dau como un cuerpu estelar que de mou predetermináu ye "Tierra" y llueu "WGS84"', # Fuzzy
+* globe – valor de datos explícitu (?), dau como un cuerpu estelar que de mou predetermináu ye "Tierra" "http://www.wikidata.org/entity/Q2"
+* precision - precisión numbérica de la coordenada',
 	'wikibase-listdatatypes-quantity-head' => 'Cantidá',
 	'wikibase-listdatatypes-quantity-body' => "Campu de datos lliteral pa una cantidá rellacionada con alguna clase d'unidá bien definida. La unidá concreta va nos valores de datos introducíos.
-* value – parte implícita de la cadena (el mapéu del prefixu d'unidá nun ta claru)
-* unit – parte implícita de la cadena (el mapéu del organismu estandarizador nun ta claru)
-* accuracy (opcional) – valor de datos explícitu; tien la mesma unidá que'l valor", # Fuzzy
+* amount – parte implícita de la cadena (el mapéu del prefixu d'unidá nun ta claru)
+* unit – parte implícita de la cadena que de mou predetermináu ye «1» (el mapéu al organismu estandarizador nun ta claru)
+* upperbound - llende superior de la cantidá
+* lowerbound - llende inferior de la cantidá",
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testu monollingüe',
 	'wikibase-listdatatypes-monolingual-text-body' => "Campu de datos lliteral pa una cadena que nun se traduz a otros idiomes. Esti tipu de cadena defínese una vez y reutilízase'n tolos idiomes. L'usu típicu ye pa los nomes xeográficos escritos na llingua llocal, un identificador d'algún tipu, una fórmula química o un nome científicu en llatín.
 * language – valor esplícitu pa identificar la llingua de la parte de testu
@@ -5014,9 +5007,10 @@ $messages['en-ca'] = array(
 $messages['en-gb'] = array(
 	'wikibase-newitem-not-recognized-siteid' => 'The supplied site identifier was not recognised.',
 	'wikibase-listdatatypes-quantity-body' => 'Literal data field for a quantity that relates to some kind of well-defined unit. The actual unit goes in the data values that is entered.
-* value – implicit part of the string (mapping of unit prefix is unclear)
-* unit – implicit part of the string (mapping to standardising body is unclear)
-* accuracy (optional) – explicit data value, has the same unit as the value',
+* amount – implicit part of the string (mapping of unit prefix is unclear)
+* unit – implicit part of the string that defaults to "1" (mapping to standardising body is unclear)
+* upperbound - quantity\'s upper bound
+* lowerbound - quantity\'s lower bound',
 );
 
 /** Esperanto (Esperanto)
@@ -8007,6 +8001,7 @@ $messages['he'] = array(
 /** Hindi (हिन्दी)
  * @author Pooja 1810
  * @author Siddhartha Ghai
+ * @author Vivek Rai
  */
 $messages['hi'] = array(
 	'wikibase-edit' => 'संपादन',
@@ -8026,6 +8021,10 @@ $messages['hi'] = array(
 	'wikibase-itembytitle-submit' => 'खोजे',
 	'wikibase-itemdisambiguation-submit' => 'खहोजे',
 	'special-newitem' => 'एक नया सामान बानाए',
+	'wikibase-item-summary-wblinktitles-create' => 'पन्नों से कनेक्ट करने के लिए इस आइटम बनाया',
+	'wikibase-item-summary-wblinktitles-connect' => 'पन्नों से कनेक्ट करने के लिए एक भाषा लिंक जोड़े',
+	'wikibase-listdatatypes-wikibase-item-body' => 'इस परियोजना में अन्य मदों के लिए लिंक। प्रविष्टि के दौरान Wikidata के "आइटम" नाम स्थान को मेल खाती प्रविष्टियों के लिए खोजा जाएगा। यह एक एकल पाठ प्रविष्टि क्षेत्र होते हैं।',
+	'wikibase-listdatatypes-commonsmedia-body' => 'विकिमीडिया कॉमन्स पर संग्रहीत फ़ाइलों के लिए लिंक। प्रविष्टि के दौरान मेल खाती प्रविष्टियां "फ़ाइल" नामस्थान कॉमन्स पर खोजी जाएँगी।',
 );
 
 /** Croatian (hrvatski)
@@ -8858,22 +8857,24 @@ $messages['ilo'] = array(
 	'wikibase-remove-inprogress' => 'Agik-ikkat…',
 	'wikibase-label-empty' => 'Awan pay ti etiketa a naipalawag',
 	'wikibase-label-edit-placeholder' => 'ikabil ti etiketa',
-	'wikibase-description-empty' => 'Awan pay ti deskripsion a naipalawag',
+	'wikibase-label-edit-placeholder-language-aware' => 'ikabil ti etiketa iti $1',
+	'wikibase-description-empty' => 'Awan pay ti naipalawag a deskripsion',
 	'wikibase-description-edit-placeholder' => 'ikabil ti deskripsion',
+	'wikibase-description-edit-placeholder-language-aware' => 'ikabil ti deskripsion iti $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'panid',
 	'wikibase-alias-edit-placeholder' => 'agikabil ti sabali a nagan',
 	'wikibase-label-input-help-message' => 'Ikabil ti titulo ti daytoy nga agasmang ti datos ti $1.',
 	'wikibase-description-input-help-message' => 'Agikabil ti ababa a deskripsion ti $1.',
 	'wikibase-statements' => 'Insasao',
-	'wikibase-terms' => 'Kadagiti sabali a pagsasao',
+	'wikibase-terms' => 'Iti sabali a sasao',
 	'wikibase-sitelinks-add' => 'agnayon ti silpo iti maysa a silpo ti sitio',
 	'wikibase-sitelinks-empty' => 'Awan pay ti sitio a silpo para iti daytoy a banag.',
 	'wikibase-sitelinks-input-help-message' => 'Idisso ti silpo iti maysa a panid a mainaig ti daytoy a banag.',
 	'wikibase-remove' => 'ikkaten',
 	'wikibase-move-up' => 'agpangato',
 	'wikibase-move-down' => 'agpababa',
-	'wikibase-undo-title' => 'Agibabbabawi ti panagurnos iti "$1"',
+	'wikibase-undo-title' => 'Agibabbabawi ti panag-urnos iti "$1"',
 	'wikibase-restore-title' => 'Agisubsubli ti daan a panagbaliw ti "$1"',
 	'wikibase-partial-undo' => 'Daytoy a panagurnos ket mabalin laeng ti bassit a panagibabawi.',
 	'wikibase-omitted-undo-ops' => '{{PLURAL:$1|Ti panangibaliw a|Dagiti panagibaliw a}} $1 ket naikkaten gapu ti mainaig a {{PLURAL:$1|pateg|patpateg}} ket nagbaliw  manen manipud idin.',
@@ -8889,7 +8890,7 @@ $messages['ilo'] = array(
 	'wikibase-sitelinksedittool-full' => 'Dagiti silpo ti pampanid ket naidisson para kadagiti amin a sitio.',
 	'wikibase-disambiguation-title' => 'Panangipalpalawag para iti "$1"',
 	'wb-special-newitem-new-item-notification' => 'Baro a banag ti $1 ti napartuat ken naibaw-ing ti panidna. Agsubli idiay $2.',
-	'wikibase-aliases-label' => 'Naamammoan pay a kas ti:',
+	'wikibase-aliases-label' => 'Ammo pay a kas ti:',
 	'wikibase-aliases-input-help-message' => 'No ti agasmang ti datos ket naamammoan ti adadu ngem maysa a naisangsangayan a nagan, mabalinmo ti agikabil kadagiti sabali a nagan wenno sinonimo, tapno mabirukan babaen kadagiti sabsabali a naganna.',
 	'wikibase-aliases-empty' => 'Awan dagiti sabali a nagan a naipalawag.',
 	'wikibase-datatype-label' => 'Kita ti datos:',
@@ -8928,7 +8929,7 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-error-label-not-unique-wikibase-query' => 'Adda sabali a panagbiruk ti ($3) nga adda etiketana ti "$1" a mainaig ti pagsasao a kodigo ti $2.',
 	'wikibase-error-label-not-unique-item' => 'Adda sabali a banag ti ($3) nga adda etiketana ti  "$1" ken panagipalpalawag ti "$4" a mainaig ti pagsasao a kodigo ti $2.',
 	'wikibase-error-label-no-entityid' => 'Ti etiketa ket nasken a saan nga umiso nga entidad ti id.',
-	'wikibase-wikibaserepopage-not-itemid' => 'Ti "$1" ket saan nga umiso nga id ti banag. Dagiti silpo ti sitio ket mabalin laeng nga iyasentar para kadagiti banag.', # Fuzzy
+	'wikibase-wikibaserepopage-not-itemid' => 'Ti "$1" ken saan a husto nga id ti banag.',
 	'wikibase-wikibaserepopage-invalid-langcode' => 'Ti panagilasin ti pagsasao ti "$1" ket di ammo. Pangngaasi nga agusar ti panagilasin ti pagsasao nga ammo ti sistema, a kas ti "en".',
 	'wikibase-wikibaserepopage-invalid-id' => 'Ti ID ti "$1" ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a nakabuklan ti ID.',
 	'special-itembytitle' => 'Banag babaen ti titulo',
@@ -8989,13 +8990,21 @@ Ti IP a pagtaengam ket mairehistonto iti pakasaritaan ti panagurnos iti daytoy n
 	'wikibase-setsitelink-intro' => 'Daytoy a porma ket mangpalubos kaniama agidisso ti silpo ti sitio iti maysa nga entidad. Nasken a mangitedka ti ID ti entidad ti (a kas iti Q23), id ti sitio (a kas iti "enwiki") ken ti silpo ti sitio a pangidissuam.',
 	'wikibase-setsitelink-site' => 'Id ti sitio:',
 	'wikibase-setsitelink-label' => 'Silpo ti sitio:',
+	'wikibase-setsitelink-badges' => 'Dagiti usong:',
 	'wikibase-setsitelink-submit' => 'Idisso ti silpo ti sitio',
 	'wikibase-setsitelink-warning-remove' => 'Agpayso kadi a kayatmo nga ikkaten ti silpo ti sitio ti [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Ti id ti sitio ti "$1" ket di ammo. Pangngaasi nga agusar ti maysa nga adda nga id ti sitio, a kas iti "enwiki".',
+	'wikibase-setsitelink-not-item' => 'Ti id ti $1 ket saan a maitagikua iti maysa a banag.',
+	'wikibase-setsitelink-not-badge' => 'Ti banag ti $1 ket saan nga usong.',
 	'wikibase-setsitelink-add-failed' => 'Ti silpo ti sitio ket saan a maidulin.',
 	'wikibase-setsitelink-remove-failed' => 'Ti silpo ti sitio ket saan a maikkat.',
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Pagsasao:',
+	'special-mergeitems' => 'Pagtiponen ti dua a banbanag',
+	'wikibase-mergeitems-intro' => 'No pagtiponem ti dua a banbanag, amin dagiti etiketa, deskripsion, sabali a nagan, silpo ti sitio ken insasao ket maiyalisto manipud ti maysa a banag iti sabali.',
+	'wikibase-mergeitems-fromid' => 'Ti id a nakaitiponan',
+	'wikibase-mergeitems-toid' => 'Ti idi a pangitiponan',
+	'wikibase-mergeitems-submit' => 'Itipon ti banbanag',
 	'special-dispatchstats' => 'Baliwan dagiti naipaw-it nga estadistika',
 	'wikibase-dispatchstats-intro' => 'Daytoy a panid ket agited kadagiti estadistika a maipanggep ti panagbaliw a panangipaw-it kadagiti kliente.',
 	'wikibase-dispatchstats-no-stats' => 'Awan dagiti agdama nga estadistika ti magun-od.',
@@ -9120,24 +9129,21 @@ tapno birukem ti napananda.',
 * pamay-an – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * panagsasaruno a paset – naipaltiing a nalawag a paset iti Iri-a kuerdas
 * panagsukisok – naipaltiing a nalawag a paset iti Iri-a kuerdas
-* pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas', # Fuzzy
+* pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Midia ti Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Silpo dagiti papeles a naipenpen idiay Wikimedia Commons. Agbirukto para kadagiti maipada a naikabkabil iti las-ud ti panangikabil ti nagan a lugar ti "Papeles" idiay Commons.
-* pamay-an – naipaltiing a nalawag a paset iti Iri-a kuerdas
-* panagsasaruno a paset – naipaltiing a nalawag a paset iti Iri-a kuerdas
-* panagsukisok – naipaltiing a nalawag a paset iti Iri-a kuerdas
-* pirgis – naipaltiing a nalawag a paset iti Iri-a kuerdas', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Silpo dagiti papeles a naipenpen idiay Wikimedia Commons. Agbirukto para kadagiti maipada a naikabkabil iti las-ud ti panangikabil ti nagan a lugar ti "Papeles" idiay Commons.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Nagsasabtan ti globo',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal a datos para iti heograpiko a puesto a naited a kas maysa a paris ti latitud-longitud iti gms wenno dagiti desimal a degrado para iti naited a nainlangitan a bagi. Kasisigud iti "Daga" ken kalpasanna iti "WGS84". Agnayon ti maysa a resolusion ken sakup.
 * latitud – naipaltiing a nalawag nga umuna a paset (tumpaw, dms, dm, dd) iti kuerdas ti nagsasabtan, ti turong ket mabalin a maited babaen ti senial wenno babaen ti kalpasan a nasimpa a N/S
 * longitud – naipaltiing a nalawag a maikadua a paset (tumpaw, dms, dm, dd) iti kuerdas ti nagsasabtan, ti turong ket mabalin a maited babaen ti senial wenno babaen ti kalpasan a nasimpa a E/W
-* kangato (saan a nasken a pilien) – nalawag (?) pateg para iti kangato ti maysa a naituon a katimbengan , para iti globo a "Daga" nga isunto ti "WGS84" a reperensi a globo
-* globo (saan a nasken a pilien) – nalawag (?) pateg ti datos, maited a kas nainlangitan a bagi a kasisigud iti "Daga" ken kalpasanna iti "WGS84"', # Fuzzy
+* globo – nalawag (?) pateg ti datos, maited a kas nainlangitan a bagi a kasisigud iti Daga "http://www.wikidata.org/entity/Q2"
+* presision - numeriko a presision iti nagsasabtan',
 	'wikibase-listdatatypes-quantity-head' => 'Kaadu',
 	'wikibase-listdatatypes-quantity-body' => 'Literal a pagikabilan ti datos para iti maysa a kaadu a maikabagian ti sumagmamano a kitat iti nasayaat a nailawlawagan a paset. Ti pudno a paset ket mapan kadagiti pateg ti datos a naikabil.
-* pateg – naipaltiing a nalawag apaset iti kuerdas (panagimapa iti paset a pasaruno ket saan a nalawag)
+* kaadu – naipaltiing a nalawag apaset iti kuerdas a kasisigud iti "1" (panagimapa iti paset a pasaruno ket saan a nalawag)
 * paset – naipaltiing a nalawag a paset iti kuerdas (panagimapa ti panangalagad a bagi ket saan a nalawag)
-* kinagpayso (saan anasken a pilien) – nalawag a pateg ti datos, adda iti kapadpadana paset a kas iti pateg', # Fuzzy
+* akin-ngato a patingga - ti akin-ngato a patingga ti kaadu
+* akin-baba a patingga - ti akin-baba a patingga ti kaadu',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo ti maymaysa pagsasao',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literal a pagikabilan ti datos para iti maysa a kuerdas a saan a naipatarus kadagiti sabali a pagsasao. Daytoy a kita ti kuerdas ket naminsan a naipalpalawag ken mausar manen kadagiti ballasiw ti amin a pagsasao. Ti kadawyan a panag-usar ket dagiti heograpiko a nagnagan a naisurat iti lokal a pagsasao, ti kasla maysa a pananginagan a kita, ti maysa a pormula ti kimiko wenno maysa a sientipiko a nagan iti Latin.
 * pagsasao – nalawag a pateg para iti pananginagan ti pagsasao para iti testo a paset
@@ -9194,6 +9200,12 @@ tapno birukem ti napananda.',
 	'action-label-update' => 'pabaruen dagiti etiketa',
 	'action-description-remove' => 'borraen dagiti deskripsion',
 	'action-description-update' => 'pabaruen dagiti deskripsion',
+	'wikibase-time-precision-Gannum' => 'iti $1 bilion a tawtawen',
+	'wikibase-time-precision-Mannum' => 'iti $1 riwriw a tawtawen',
+	'wikibase-time-precision-annum' => 'iti $1 a tawtawen',
+	'wikibase-time-precision-millennium' => '$1. milenio',
+	'wikibase-time-precision-century' => '$1. siglo',
+	'wikibase-time-precision-10annum' => '$1 a tawtawen',
 );
 
 /** Icelandic (íslenska)
@@ -10822,9 +10834,9 @@ IP 주소가 이 개체의 편집 역사에 남게 됩니다.',
 * globe – 별을 나타내는 명시적인(?) 데이터 값으로, "지구"와 "WGS84"가 기본값입니다', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '수량',
 	'wikibase-listdatatypes-quantity-body' => '어떤 명확하게 정의된 단위에 결합된 양을 나타내는 리터럴 데이터 필드입니다. 실제 단위는 입력된 데이터 값에 포함되어 있습니다.
-* value – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
-* unit – 문자열의 명시적이지 않은 부분 (표준화 단체로의 매핑은 명확하지 않습니다)
-* accuracy (선택 사항) – value와 같은 단위를 가진 명시적인 데이터 값', # Fuzzy
+*  amount – 문자열의 명시적이지 않은 부분 (단위 접두어의 매핑은 명확하지 않습니다)
+* unit – 기본 값은 1이며, 문자열의 명시적이지 않은 부분 (표준화 단체로의 매핑은 명확하지 않습니다)
+* upperbound – 수량의 상한선입니다.',
 	'wikibase-listdatatypes-monolingual-text-head' => '단일 언어 텍스트',
 	'wikibase-listdatatypes-monolingual-text-body' => '다른 언어로 번역되지 않는 문자열의 리터럴 데이터 필드입니다. 이런 종류의 문자열은 한 번 정의되어 모든 언어에 걸쳐 사용됩니다. 일반적으로 원어로 된 지명이나 특정한 항목의 식별자, 화학식, 라틴어 학명에 주로 사용됩니다.
 * language – 텍스트 부분에 대해 언어를 구별하는 명시적인 값
@@ -16039,10 +16051,18 @@ $messages['sco'] = array(
 	'wikibase-mergeitems-submit' => 'Merge eitems',
 	'wikibase-item-summary-wblinktitles-create' => 'Creatit this item fer tae connect pages',
 	'wikibase-item-summary-wblinktitles-connect' => 'Added ae leid link fer tae connect pages',
-	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal data fer ae geographical poseetion gi\'en as ae latitude-longitude pair in gms or decimal degrees fer the gi\'en stellar bodie. Defaults til "Earth" an than "WGS84". It adds ae resolution an range.
-* latitude – impleecit first pairt (float, dms, dm, dd) o the coordinate string, direction is either gi\'en bi ae prefixed sign or bi postfixed N/S
-* longitude – impleecit seicont pairt (float, dms, dm, dd) o the coordinate string, direction is either gi\'en bi ae prefixed sign or bi postfixed E/W
-* globe – expleecit (?) data value, gi\'en as stellar body that defaults til "Earth" and then "WGS84"', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link til ither eitems at the project. During entrie the "Eitem" namespace oan Wikidata will be raked fer matchin entries. It conseests o ae single tex entrie field.',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Link til files stored at Wikimedia Commyns. During entrie the "File" namespace oan Commyns will be raked fer matchin entries.',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal data fer ae geographical poseetion gien aes ae latitude-longitude pair in gms or decimal degrees fer the gien stellair bodie. Defauts til "Earth" an then "WGS84". It adds ae resolution an range.
+* latitude – impleecit first pairt (float, dms, dm, dd) o the coordinate strin, direction is either gien bi prefixed sign or bi postfixed N/S
+* longitude – impleecit seicont pairt (float, dms, dm, dd) o the coordinate strin, direction is either gien bi prefixed sign or b postfixed E/W
+* globe – expleecit (?) data value, gien aes stellair bodie that defauts til the Yird  "http://www.wikidata.org/entity/Q2"
+* precesion - numeric preceesion o the coordinate',
+	'wikibase-listdatatypes-quantity-body' => 'Literal data field fer aen amoont that relates til some kyn o weel-defined unit. The actual unit gaes in the data values that ar entered.
+* amoont – impleecit pairt o the string (mappin o unit prefix is onclear)
+* unit – impleecit pairt o the string that defauts til "1" (mappin til staundairdizin bodie is onclear)
+* upperboond - amoont\'s upper boond
+* lowerboond - amoont\'s lower boond',
 	'wikibase-time-precision-Gannum' => 'in $1 billion year',
 	'wikibase-time-precision-Mannum' => 'in $1 million year',
 	'wikibase-time-precision-annum' => 'in $1 year',
@@ -16535,6 +16555,7 @@ V povzetku urejanja tega predmeta bo shranjen vaš IP-naslov.',
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Milicevic01
+ * @author Rancher
  * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
@@ -16709,7 +16730,7 @@ $messages['sr-ec'] = array(
 	'wikibase-item-summary-wbsetsitelink-set' => 'Измењена веза ка [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Уклоњена веза ка [$2]',
 	'wikibase-item-summary-wblinktitles-create' => 'Направљена ставка како би повезала странице',
-	'wikibase-item-summary-wblinktitles-connect' => 'Повезано {{PLURAL:$1|страна|странице}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => 'Додата језичка веза за повезивање страница',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Направљена тврдња|Направљено $1 тврдњи}}',
@@ -16857,6 +16878,7 @@ $messages['sv'] = array(
 	'wikibase-claimview-snak-new-tooltip' => 'Efter du har angivit en egenskap kan du ange ett motsvarande värde. Om egenskapen inte har några angivna värden eller det riktiga värdet är okänt kan du välja ett alternativ för att ange ett anpassat värde genom att klicka på ikonen bredvid värdets textruta.',
 	'wikibase-statementview-rank-preferred' => 'Föredragen rang',
 	'wikibase-statementview-rank-normal' => 'Normal rang',
+	'wikibase-statementview-rank-deprecated' => 'Orekommenderad rang',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|källa|källor}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|En källa|$1 källor}} har ännu inte sparats',
 	'wikibase-snakview-property-input-placeholder' => 'egenskap',
@@ -17018,6 +17040,7 @@ En klientwiki informeras om en ändring på {{SITENAME}} så snart ändringen ha
 	'wikibase-mylanguagefallbackchain-babel' => 'Du kan redigera den genom att lägga in <nowiki>{{#babel: }}</nowiki> på {{GENDER:$1|din}} [[Special:MyPage|användarsida]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, konverterade från $3 - $4',
 	'wikibase-api-no-such-sitelink' => 'Kunde inte hitta en sådan webbplatslänk',
+	'wikibase-self-conflict-patched' => 'Din redigering integrerades med den senaste versionen, vilket har åsidosatt några av dina egna mellanliggande ändringar.',
 	'wikibase-conflict-patched' => 'Din redigering lappades i den senaste versionen.',
 	'wikibase-restoreold' => 'återställ',
 	'wikibase-restore-summary' => 'Återställ versionen $1 av [[Special:Contributions/$2|$2]]',
@@ -17089,27 +17112,21 @@ för att ta reda på var den tog vägen.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Tog bort {{PLURAL:$1|alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Skapade en egenskap för [$2] med {{PLURAL:$1|värde|värden}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Objekt',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Länk till andra objekt på projektet. Under inmatningen kommer "Objekt"-namnrymden på Wikidata att genomsökas för matchande poster. Den består av ett enda textinmatningsfält.
-* scheme – implicit del av Iri-strängen
-* hierarchicalpart – implicit del av Iri-strängen
-* query – implicit del av Iri-strängen
-* fragment – implicit del av Iri-strängen', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Länk till andra objekt på projektet. Under inmatningen kommer "Objekt"-namnrymden på Wikidata att genomsökas för matchande poster. Den består av ett enda textinmatningsfält.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Länk till filer som lagras på Wikimedia Commons. Under inmatningen kommer "Fil"-namnrymden på Commons att genomsökas för matchande poster.
-* scheme – implicit del av Iri-strängen
-* hierarchicalpart – implicit del av Iri-strängen
-* query – implicit del av Iri-strängen
-* fragment – implicit del av Iri-strängen', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Länk till filer som lagras på Wikimedia Commons. Under inmatningen kommer "Fil"-namnrymden på Commons att genomsökas för matchande poster.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Globkoordinat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Litteral data för en geografisk position angivet som ett latitud-longitud-par i gms eller decimalgrader för den angivna himlakroppen. Standardvärde är "Jorden" och sedan "WGS84". Upplösning och intervall läggs till.
 * latitude – implicit första del (float, dms, dm, dd) av koordinatsträngen, riktning ges antingen genom prefixtecken eller N/S-suffix
 * longitud – implicit andra del (float, dms, dm, dd) av koordinatsträngen, riktning ges antingen genom prefixtecken eller E/W-suffix
-* globe – explicit (?) datavärde, angiven som himlakropp. Standardvärde är "Jorden" och sedan "WGS84".', # Fuzzy
+* globe – explicit (?) datavärde, angiven som himlakropp. Standardvärde är Jorden "http://www.wikidata.org/entity/Q2"
+* precision – numerisk precision av koordinaten',
 	'wikibase-listdatatypes-quantity-head' => 'Kvantitet',
 	'wikibase-listdatatypes-quantity-body' => 'Litteralt datafält för en kvantitet som är kopplad till någon form av väldefinierad enhet. Den faktiska enheten ingår i de datavärde som anges.
-* value – implicit del av strängen (mappning av enhetsprefix är oklart)
-* unit – implicit del av strängen (mappning mot ett standardiseringsorgan är oklart)
-* accuracy (valfri) – explicit datavärde, har samma enhet som värdet', # Fuzzy
+* amount – implicit del av strängen (mappning av enhetsprefix är oklart)
+* unit – implicit del av strängen med standardvärde "1" (mappning mot ett standardiseringsorgan är oklart)
+* upperbound – kvantitetens övre gräns
+* lowerbound – kvantitetens undre gräns',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enspråkig text',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Litteralt datafält för en sträng som inte är översatt till andra språk. Denna typ av sträng definieras en gång och används sedan på alla språk. Typisk användning är geografiska namn skrivna på det lokala språket, en identifierare av något slag, en kemisk formel eller ett vetenskapligt namn på latin.
 * language – explicit värde för att identifiera språket för textdelen
