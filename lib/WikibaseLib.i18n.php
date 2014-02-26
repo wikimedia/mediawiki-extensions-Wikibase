@@ -3534,6 +3534,7 @@ $messages['sv'] = array(
 	'wikibase-diffview-rank' => 'rang',
 	'wikibase-diffview-rank-preferred' => 'Föredragen rang',
 	'wikibase-diffview-rank-normal' => 'Normal rang',
+	'wikibase-diffview-rank-deprecated' => 'Orekommenderad rang',
 	'wikibase-diffview-qualifier' => 'kvalifikator',
 	'wikibase-diffview-label' => 'etikett',
 	'wikibase-diffview-alias' => 'alias',
