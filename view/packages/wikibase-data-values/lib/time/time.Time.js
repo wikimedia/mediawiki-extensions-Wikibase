@@ -252,7 +252,7 @@ time.Time = ( function( time, $ ) {
 	 * @throws {Error} If the input string is invalid.
 	 */
 	Time.newFromIso8601 = function( iso8601String, precision ) {
-		var year, month, day;
+		var year, month, day, timeObj;
 
 		try{
 			year = parseInt(
@@ -260,7 +260,7 @@ time.Time = ( function( time, $ ) {
 				10
 			);
 			month = parseInt(
-				iso8601String.match( /(?:[1-9]|1[012])(?=\-\d+T)/ )[0],
+				iso8601String.match( /(?:0?\d|1[012])(?=\-\d+T)/ )[0],
 				10
 			);
 			day = parseInt(
@@ -271,13 +271,21 @@ time.Time = ( function( time, $ ) {
 			throw new Error( 'Unprocessable iso8601 string given' );
 		}
 
-		return new Time( {
+		timeObj = {
 			year: year,
-			month: month,
-			day: day,
 			precision: precision !== undefined ? precision : Time.PRECISION.DAY,
 			calendarname: Time.CALENDAR.GREGORIAN
-		} );
+		};
+
+		if( month !== 0 ) {
+			timeObj.month = month;
+		}
+
+		if( day !== 0 ) {
+			timeObj.day = day;
+		}
+
+		return new Time( timeObj );
 	};
 
 	/**
