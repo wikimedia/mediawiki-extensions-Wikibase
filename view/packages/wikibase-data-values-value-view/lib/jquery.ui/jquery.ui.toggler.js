@@ -148,7 +148,7 @@
 			this.$toggleIcon.removeClass( iconClass + 'e ' + iconClass + 's ' + iconClass + 'w '
 				+ this.widgetBaseClass + '-icon3dtrans' );
 			// Add classes displaying rotated icon. If CSS3 transform is available, use it:
-			if( !browserSupportsTransform ) {
+			if( !browserSupportsTransform || !$.speed().duration ) {
 				this.$toggleIcon.addClass( iconClass + ( visible ? 's' : dir ) );
 			} else {
 				this.$toggleIcon.addClass( iconClass + 's '

@@ -107,7 +107,7 @@
 			},
 			animation: {
 				margins: ['-15px', '15px'],
-				duration: 150
+				duration: 150 //TODO: Fixed values can't be changed nor turned off
 			},
 			deferInit: false,
 			messages: {
@@ -581,7 +581,7 @@
 		 * Shows the drop-down menu.
 		 */
 		_showMenu: function() {
-			this.$menu.slideDown( this.options.animation.duration );
+			this.$menu.show();
 
 			function flip( string ) {
 				var segments = $.map( string.split( ' ' ), function( segment ) {
@@ -606,7 +606,7 @@
 		 * Hides the drop-down menu.
 		 */
 		_hideMenu: function() {
-			this.$menu.slideUp( this.options.animation.duration );
+			this.$menu.hide();
 			this.activate();
 		},
 
