@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, vv ) {
+( function( vv ) {
 	'use strict';
 
 	var PARENT = vv.BifidExpert,
@@ -39,7 +39,7 @@
 			/**
 			 * @param {globeCoordinate.GlobeCoordinate|string|null} currentRawValue
 			 * @param {jQuery.valueview.ViewState} viewState
-			 * @param {jQuery.valueview.MessageProvider} messageProvider
+			 * @param {util.MessageProvider} messageProvider
 			 */
 			domBuilder: function( currentRawValue, viewState, messageProvider ) {
 				return viewState.getFormattedValue();
@@ -48,4 +48,4 @@
 		}
 	} );
 
-}( jQuery, jQuery.valueview ) );
+}( jQuery.valueview ) );
