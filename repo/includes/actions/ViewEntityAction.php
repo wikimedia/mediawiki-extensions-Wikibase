@@ -50,23 +50,6 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
-	 * Get the revision specified in the diff parameter or prev/next revision of oldid
-	 *
-	 * @since 0.4
-	 * @deprecated since 0.5
-	 * use ContentRetriever::getDiffRevision
-	 *
-	 * @param int $oldId
-	 * @param string|int $diffValue
-	 *
-	 * @return Revision|null
-	 */
-	public function getDiffRevision( $oldId, $diffValue ) {
-		$contentRetriever = new ContentRetriever();
-		return $contentRetriever->getDiffRevision( $oldId, $diffValue );
-	}
-
-	/**
 	 * @see Action::getName()
 	 *
 	 * @since 0.1
