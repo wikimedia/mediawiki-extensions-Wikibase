@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_a64fd596",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "Replace (\\+|\\-) with [+-]. Use (?:...) for brackets that aren\u0027t needed as a match. Wait, didn\u0027t I wrote this recently?",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_0677a9d0",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "$fourDigitYearTimestamp \u003d substr( $extendedIsoTimestamp, strlen( 1 + $matches[3] ) );",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_464c919f",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "Replace all this with\n$fullYear \u003d sprintf( \u0027%04d%s\u0027, $fullYear, $isBCE ? \u0027 BCE\u0027 : \u0027\u0027 );",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_46437167",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "Some languages aren\u0027t strict about casing. This parser will fail in such cases. Also I assume there is no language where the same word (with different casing) is used for two different months. In my opinion it\u0027s sane to use strcmp().",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_062569bc",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "strcmp().",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a61d957a",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "No need to escape most characters inside of [...] brackets. [+-] works fine.",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_060c4944",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "No need to make the \\s*? ungreedy, the greedy \\s* is fine.",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_21104f52",
+        "filename": "lib/resources/parsers/TimeParser.js",
+        "patchSetId": 37
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "I don\u0027t think so. ;-)",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_81ff23fc",
+        "filename": "lib/resources/parsers/TimeParser.js",
+        "patchSetId": 37
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "Oups. Quantity?",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_611d3766",
+        "filename": "lib/tests/phpunit/parsers/YearMonthTimeParserTest.php",
+        "patchSetId": 37
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-26T19:02:26Z",
+      "side": 1,
+      "message": "Would be great if we could support \u0027january 1999\u0027 lowercased for the lazy users. ;-) I\u0027m pretty sure this is safe to do.",
+      "revId": "92bd815db4138b55c68070ded3a965922dfc9d23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
