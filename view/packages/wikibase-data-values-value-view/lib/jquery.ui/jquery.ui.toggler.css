@@ -5,11 +5,11 @@
  */
 
 .ui-toggler {
+	background: none;
+	border: 0;
 	display: block;
 	margin-top: .5em;
 	white-space: nowrap;
-	border: none;
-	background: none;
 }
 .ui-toggler .ui-toggler-icon,
 .ui-toggler .ui-toggler-label {
@@ -17,15 +17,12 @@
 	vertical-align: middle;
 }
 .ui-toggler .ui-toggler-icon3dtrans {
-	-webkit-transition: .25s ease-out;
-	transition: .25s ease-out;
+	-webkit-transition: transform .2s ease-out;
+	transition: transform .2s ease-out;
 }
 
 /* rotate toggle icon in ltr languages */
 .ui-toggler.ui-toggler-toggle-collapsed .ui-toggler-icon3dtrans {
-	-webkit-transition: .25s ease-out;
-	transition: .25s ease-out;
-
 	-webkit-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
 	transform: rotate(-90deg);
