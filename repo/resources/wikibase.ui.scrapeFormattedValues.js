@@ -50,8 +50,9 @@
 						$qualifierValues = $qualifierValues || getQualifierValueNodes( $claim );
 
 						wb.__formattedValues[JSON.stringify( snak.getValue().toJSON() )]
-							= $qualifierValues.eq( iQualifiers++ ).html();
+							= $qualifierValues.eq( iQualifiers ).html();
 					}
+					iQualifiers++;
 				} );
 			} );
 
@@ -63,8 +64,9 @@
 								= $referenceValues || getReferenceValueNodes( reference.getHash() );
 
 							wb.__formattedValues[JSON.stringify( snak.getValue().toJSON() )]
-								= $referenceValues.eq( iReferences++ ).html();
+								= $referenceValues.eq( iReferences ).html();
 						}
+						iReferences++;
 					} );
 				} );
 
