@@ -143,7 +143,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery',
 				'jquery.focusAt',
-				'jquery.time.timeinput',
 				'jquery.ui.inputextender',
 				'jquery.ui.listrotator',
 				'jquery.ui.preview',
@@ -161,6 +160,8 @@ return call_user_func( function() {
 				'valueview-expert-timeinput-calendarhint-switch-gregorian',
 				'valueview-expert-timeinput-calendarhint-switch-julian',
 				'valueview-expert-timeinput-precision',
+				'valueview-expert-timevalue-calendar-gregorian',
+				'valueview-expert-timevalue-calendar-julian',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),
@@ -170,20 +171,13 @@ return call_user_func( function() {
 			'scripts' => array(
 				'TimeValue.js',
 			),
-			'styles' => array(
-				'TimeValue.css',
-			),
 			'dependencies' => array(
 				'jquery',
 				'jquery.valueview.BifidExpert',
 				'jquery.valueview.experts.StaticDom',
 				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.experts',
-			),
-			'messages' => array(
-				'valueview-expert-timevalue-calendar-gregorian',
-				'valueview-expert-timevalue-calendar-julian',
-			),
+			)
 		),
 
 		'jquery.valueview.experts.UnsupportedValue' => $moduleTemplate + array(

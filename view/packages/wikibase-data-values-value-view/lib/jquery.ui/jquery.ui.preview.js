@@ -92,7 +92,7 @@
 			} else {
 				this.$value
 				.removeClass( this.widgetBaseClass + '-novalue' )
-				.text( value );
+				.html( value );
 			}
 		},
 

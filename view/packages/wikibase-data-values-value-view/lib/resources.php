@@ -97,19 +97,6 @@ return call_user_func( function() {
 		),
 
 
-		'jquery.time.timeinput' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.time/jquery.time.timeinput.js',
-			),
-			'dependencies' => array(
-				'jquery',
-				'jquery.ui.widget',
-				'jquery.event.special.eachchange',
-				'time.js',
-			),
-		),
-
-
 		'jquery.ui.inputextender' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.inputextender.js',
