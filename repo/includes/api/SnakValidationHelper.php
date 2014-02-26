@@ -5,9 +5,9 @@ namespace Wikibase\Api;
 use ApiBase;
 use DataTypes\DataTypeFactory;
 use Status;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Snak;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 

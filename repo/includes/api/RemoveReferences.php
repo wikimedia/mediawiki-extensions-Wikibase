@@ -5,9 +5,9 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpReferenceRemove;
-use Wikibase\Statement;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\DataModel\Claim\Statement;
 
 /**
  * API module for removing one or more references of the same statement.

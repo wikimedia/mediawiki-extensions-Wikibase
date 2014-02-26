@@ -9,19 +9,19 @@ use OutOfBoundsException;
 use Profiler;
 use Title;
 use UsageException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakConstructionService;
 use ApiBase;
-use Wikibase\Claim;
-use Wikibase\Claims;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Snak;
 use Wikibase\Summary;
-use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidValidator;
 
 /**
@@ -215,13 +215,14 @@ class ClaimModificationHelper {
 	}
 
 	/**
-	 * @param $messgae
+	 * @param $message
 	 * @param $code
+	 *
 	 * @throws UsageException
 	 */
-	private function throwUsageException( $messgae, $code ) {
+	private function throwUsageException( $message, $code ) {
 		Profiler::instance()->close();
-		throw new UsageException( $messgae, $code );
+		throw new UsageException( $message, $code );
 	}
 
 }

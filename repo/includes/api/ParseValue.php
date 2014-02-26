@@ -6,7 +6,6 @@ use ApiBase;
 use DataValues\DataValue;
 use InvalidArgumentException;
 use LogicException;
-use MWException;
 use OutOfBoundsException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
