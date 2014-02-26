@@ -1,5 +1,9 @@
 <?php
- /**
+
+namespace Wikibase;
+
+/**
+ * Resolves property labels (which are unique per language) into entity IDs.
  *
  * Copyright © 24.04.13 by the authors listed below.
  *
@@ -7,17 +11,6 @@
  *
  * @author daniel
  */
-
-
-namespace Wikibase;
-
-
-/**
- * Resolves property labels (which are unique per language) into entity IDs.
- *
- * @package Wikibase
- */
-
 interface PropertyLabelResolver {
 
 	/**
