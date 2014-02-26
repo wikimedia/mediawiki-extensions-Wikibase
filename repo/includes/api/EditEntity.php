@@ -768,20 +768,27 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function getExamples() {
 		return array(
+			// Creating new entites
 			'api.php?action=wbeditentity&new=item&data={}'
-			=> 'Create a new empty item, returns extended with the item structure',
-			'api.php?action=wbeditentity&clear=true&id=Q42&data={}'
-			=> 'Clear item with id Q42',
+			=> 'Create a new empty item, return full entity structure',
 			'api.php?action=wbeditentity&new=item&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
 			=> 'Create a new item and set labels for de and en',
 			'api.php?action=wbeditentity&new=property&data={"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}'
 			=> 'Create a new property containing the json data, returns extended with the item structure',
+			// Clearing entities
+			'api.php?action=wbeditentity&clear=true&id=Q42&data={}'
+			=> 'Clear all data from entity with id Q42',
+			'api.php?action=wbeditentity&clear=true&id=Q42&data={"labels":{"en":{"language":"en","value":"en-value"}}}'
+			=> 'Clear all data from entity with id Q42 and set a label for en',
+			// Setting stuff
 			'api.php?action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
 			=> 'Sets sitelink for nowiki, overwriting it if it already exists',
+			'api.php?action=wbeditentity&id=Q42&data={"descriptions":{"no":{"site":"no","title":"no Description Here"}}}'
+			=> 'Sets description for no, overwriting it if it already exists',
 			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}'
 			=> 'Creates a new claim on the item for the property P56 and a value of "ExampleString"',
 			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
-			=> 'Removes the claims from the item with the guids q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F and q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X',
+			=> 'Removes the claims from the item with the guids Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F and Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X',
 			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ChangedString","type":"string"}},"type":"statement","rank":"normal"}]}'
 			=> 'Sets the claim with the GUID to the value of the claim',
 		);
