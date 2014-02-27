@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_c6142147",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T16:19:47Z",
+      "side": 1,
+      "message": "probably okay since this is done already, but I think $revision would suffice instead of $article",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1bab7bd6",
+        "filename": "repo/tests/phpunit/includes/ContentRetrieverTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T16:19:47Z",
+      "side": 1,
+      "message": "don\u0027t think we should phpunit assertions when generating the test cases\n\nmaybe just throw an exception? (or perhaps php assert is okay here, though it has some issues) or maybe the check is not needed at all.",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_fbad6fe8",
+        "filename": "repo/tests/phpunit/includes/ContentRetrieverTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T16:19:47Z",
+      "side": 1,
+      "message": "don\u0027t think we should use assertTrue here",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_dbb4f335",
+        "filename": "repo/tests/phpunit/includes/ContentRetrieverTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T16:19:47Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9bbe6b12",
+        "filename": "repo/tests/phpunit/includes/ContentRetrieverTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T16:19:47Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
