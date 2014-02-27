@@ -32,9 +32,7 @@
 			var $claim = null,
 				mainSnak = claim.getMainSnak(),
 				$qualifierValues = null,
-				iQualifiers = 0,
-				$referenceValues = null,
-				iReferences = 0;
+				iQualifiers = 0;
 
 			if( mainSnak.getType() === 'value' && isSnakToScrape( mainSnak ) ) {
 				$claim = getClaimNode( claim.getGuid() );
@@ -57,6 +55,9 @@
 			} );
 
 			$.each( claim.getReferences(), function( j, reference ) {
+				var $referenceValues = null,
+					iReferences = 0;
+
 				$.each( reference.getSnaks().getGroupedSnakLists(), function( j, snakList ) {
 					snakList.each( function( k, snak ) {
 						if( snak.getType() === 'value' && isSnakToScrape( snak ) ) {
