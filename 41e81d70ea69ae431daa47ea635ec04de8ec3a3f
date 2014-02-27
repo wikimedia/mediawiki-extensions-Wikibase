@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_07bd5cd1",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:50:37Z",
+      "side": 1,
+      "message": "That\u0027s consistent with the directory name. Don\u0027t want to mess with directory names just now.",
+      "parentUuid": "4e04eb01_d7dce6e7",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e7d3902e",
+        "filename": "lib/includes/store/CompositeBagOStuff.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:50:37Z",
+      "side": 1,
+      "message": "Oops, this class is no longer needed and should have been deleted.",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_17d36ed8",
         "filename": "lib/includes/store/CompositeBagOStuff.php",
         "patchSetId": 10
@@ -138,6 +173,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_078b1c21",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:50:37Z",
+      "side": 1,
+      "message": "never mind, it\u0027s meaningless now :)",
+      "parentUuid": "4e04eb01_77e5129f",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_b7eb9a76",
         "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
         "patchSetId": 10
@@ -149,6 +202,24 @@
       "writtenOn": "2014-02-24T10:17:37Z",
       "side": 1,
       "message": "think this should be Store, though might want to rename the \"store\" directory accordingly",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_07b43ce3",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:50:37Z",
+      "side": 1,
+      "message": "Yea. Not in this change. I think we should fix namespaces in one fell swoop.",
+      "parentUuid": "4e04eb01_b7eb9a76",
       "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -183,6 +254,24 @@
       "writtenOn": "2014-02-24T10:17:37Z",
       "side": 1,
       "message": "would prefer Util",
+      "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c139a4cc",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:50:37Z",
+      "side": 1,
+      "message": "This is consistent with the directory name. Renaming directories is... more fun than I want to have with this patch.",
+      "parentUuid": "4e04eb01_57e8d676",
       "revId": "41e81d70ea69ae431daa47ea635ec04de8ec3a3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
