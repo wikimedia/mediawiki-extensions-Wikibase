@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_e7ecb0f4",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:37:41Z",
+      "side": 1,
+      "message": "IS this still important/relevant? Can\u0027t we use the fallback per default?",
+      "revId": "1a6ed9b1a287830a40338054f22ec7ed8e23f149",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_67d9c05b",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:37:41Z",
+      "side": 1,
+      "message": "indent!",
+      "revId": "1a6ed9b1a287830a40338054f22ec7ed8e23f149",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c7e7740c",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:37:41Z",
+      "side": 1,
+      "message": "should probably be in an else-block, for readability.",
+      "revId": "1a6ed9b1a287830a40338054f22ec7ed8e23f149",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a7f6a8c0",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T19:37:41Z",
+      "side": 1,
+      "message": "Tabs inside the line... ick.",
+      "revId": "1a6ed9b1a287830a40338054f22ec7ed8e23f149",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
