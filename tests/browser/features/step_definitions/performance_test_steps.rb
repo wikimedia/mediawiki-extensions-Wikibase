@@ -5,24 +5,23 @@
 #
 # steps for the performance test
 
-data_file_map = {
-  'Italy' => 'data/italy.json'
-}
+items_under_test = {}
 
-item_under_test = nil
-
-Given(/^Entity (.+) exists$/) do |pagename|
+Given(/^Entity (.+) defined in (.+) exists$/) do |pagename, data_file|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
 
   item_under_test = wb_api.wb_search_entities(pagename, "en", "item")['search'][0]
   if !item_under_test
-    items = JSON.parse( IO.read( data_file_map[pagename] ) )
+    items = JSON.parse( IO.read( data_file ) )
     item_under_test = wb_api.create_entity_and_properties(items)
   end
+  items_under_test[pagename] = item_under_test
 end
 
-Then(/^get loading time of huge item page$/) do
-  on(ItemPage).navigate_to item_under_test["url"]
-  on(ItemPage).wait_for_entity_to_load
+Then(/^get loading time of (.+)$/) do |pagename|
+  on(ItemPage) do |page|
+    page.navigate_to items_under_test[pagename]["url"]
+    page.wait_for_entity_to_load
+  end
 end
