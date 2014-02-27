@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_9ea419b1",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "can the cache be provided as a parameter? instead of wfGetCache here",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3e918552",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "nitpick: generally prefer consistency with the slash (there\u0027s a slash here, but not above in @var BagOStuff)",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5e7fb1dd",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "$revisionId",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_be7c751c",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "if ( $isLatest \u0026\u0026 $this-\u003everifyRevision )\n\nalso I initially thought $this-\u003everifyRevision was a method and missing (). it sounds like a method name.  as a variable, maybe $shouldVerifyRevision or something (starts with a verb) that is less confusing.",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7e202df2",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "this returns revision id, right?  I would rename $revision to $revisionId.",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_be9b5567",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "this should go in it\u0027s own method, especially if it\u0027s big enough to have \u0027#miss\u0027",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_dece215f",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "$wikiPageEntityLookup (so it\u0027s slightly less confusing)",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7ed38d05",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "$cachingEntityLookup",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5e66914f",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "spelling error not introduced in this change, but it\u0027s \"accelerator\"",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9ee2d99a",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "ick, so much inheritance",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_de598191",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "generally prefer the test method to be at the top of the class",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7e4eedc5",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "i would put the provide method after this.\n\nwhat the test is doing is actually the more important thing and best not to make people scroll to the bottom to see this",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_bed355d6",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T12:23:08Z",
+      "side": 1,
+      "message": "huh?  why can\u0027t this be resolved in the provider instead?",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
