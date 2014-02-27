@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_611890d8",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-27T14:38:14Z",
+      "side": 1,
+      "message": "If you need the match from (\\+|\\-) make it ([+-]). It may not look like a big change and it isn\u0027t, but it will make the regex a tiny little bit faster.",
+      "revId": "1fea48f567e84fae73fa40237a7db5033ab00527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c16d242f",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-27T14:38:14Z",
+      "side": 1,
+      "message": "$fourDigitYearTimestamp \u003d substr( $extendedIsoTimestamp, strlen( 1 + $matches[3] ) );",
+      "revId": "1fea48f567e84fae73fa40237a7db5033ab00527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_218968f0",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-27T14:38:14Z",
+      "side": 1,
+      "message": "This doesn\u0027t feel right. Could you please add a lonely \"0\" to the test cases? (Which will be stripped to an empty string and fail.) Maybe replace this line with strval( intval( $fullYear ) ) or sprintf( \"%d\", $fullYear ) or something like that?",
+      "revId": "1fea48f567e84fae73fa40237a7db5033ab00527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
