@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_bef0f58e",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Perhaps give some explanation of what we do here (user specific config wars, such as user permissions; \"volatile\" config vars, such as the copyright message).",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_fefe7d65",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Perhaps explain why we can and want to skip this while testing.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3e34e545",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "nice!",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_fe3d5d2a",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Indent!",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1e1249b6",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Perhaps do this in the static entry point, so we can short out before initializing the handler object and all its dependencies.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9e253906",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "This needs graceful handling for missing, empty or broken wbEntityId.\nAs a fallback, we could look up the entityId using the entityTitleLookup (but that should probably trigger a wfWarn).",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_be6d952f",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Needs to be handled gracefully, see above.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3e1bc5d5",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Perhaps this should be a static helper in the Hooks class, then we could check this and short out earlier, before initializing all the services.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3e69851d",
+        "filename": "repo/includes/OutputPageJsConfigBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "When called from OutputPageJsConfigHookHandler, we already know the page Title. Do we really need the lookup here?",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7e770dfe",
+        "filename": "repo/includes/OutputPageJsConfigBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Perhaps put a note here that this is called for every page view, and should thus avoid DB access and other heavy lifting.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3ec86524",
+        "filename": "repo/includes/OutputPageJsConfigBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "This may involve DB access (it doesn\u0027t at the moment, but it may in the future). When called from OutputPageJsConfigHookHandler, we already know the page Title - could we just pass it on?",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_ded861f6",
+        "filename": "repo/includes/OutputPageJsConfigBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "I\u0027d prefer static composition to be done in the constructor, where it is obvious. But not a big deal.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7eddcde0",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Needs a unit test. Also, I\u0027d prefer a more specific name, like EntityParserOutputBuilder.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3eef4584",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "As per the type hint below, this can\u0027t be null.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5eec518e",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "$this-\u003econtext is not declared. It doesn\u0027t seem to be used either, can we get rid of it?",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1ee6c9ac",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "not declared.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_fee8bd78",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Megamoth needs splitting...",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_de8621be",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Please check whether this is still true, I feel we have dragged this comment through three refactorings.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5eba116e",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Uh, the injector is created by the constructor... how and when is anything ever registered with it? Won\u0027t it just always be empty? Have you verified the \"other languages\" box still works with this change?",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3ebd0564",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "Please provide a synopsis and explain the difference to OutputPageJsConfigBuilder (same there). It\u0027s easy to confuse the two.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7ea26d3c",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "This should come from the constructor - creating a factory on the fly is extremely icky. (Did I write this code?...)",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5e69f1f4",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "No, that would fragment the parser cache too much. The fallback chain for a given UI language is always the same. If we want to apply user-specific fallback, we have to use a different strategy: \n\nWe would cache labels \u0026 descriptions of the \"main\" entity and all referenced entities, for all languages, under a separate cache key for every page (because it\u0027s independent of user language). We would then filter that data on page output, and inject the filtered version into the JS config vars.\n\nI suggest to do this later, and rely on the UI language only for now.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3e6ce504",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:03:00Z",
+      "side": 1,
+      "message": "It should be made clear that this is the fallback for the UI language, not user-specific.",
+      "revId": "3a7e7d82e5948c9af3688fe1e94438fec52035c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
