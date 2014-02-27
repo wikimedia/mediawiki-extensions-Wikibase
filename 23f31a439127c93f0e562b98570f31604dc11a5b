@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_010aec23",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_3e918552",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_5e7fb1dd",
         "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
         "patchSetId": 8
@@ -47,6 +65,24 @@
       "writtenOn": "2014-02-27T12:23:08Z",
       "side": 1,
       "message": "$revisionId",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e1102055",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_5e7fb1dd",
       "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_c10be424",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_7e202df2",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_be9b5567",
         "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
         "patchSetId": 8
@@ -98,6 +152,24 @@
       "writtenOn": "2014-02-27T12:23:08Z",
       "side": 1,
       "message": "this should go in it\u0027s own method, especially if it\u0027s big enough to have \u0027#miss\u0027",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a11a1871",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_be9b5567",
       "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_4100f403",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_dece215f",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_7ed38d05",
         "filename": "lib/includes/store/sql/PropertyInfoTable.php",
         "patchSetId": 8
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_61fd3004",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_7ed38d05",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_5e66914f",
         "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
         "patchSetId": 8
@@ -149,6 +257,24 @@
       "writtenOn": "2014-02-27T12:23:08Z",
       "side": 1,
       "message": "spelling error not introduced in this change, but it\u0027s \"accelerator\"",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7e06ed24",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_5e66914f",
       "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_de118160",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "i generally prefer the provider to be before the test method, so the data flow is aligned with the reading flow. And I like to have utility method at the top, so stuff is declared before it\u0027s used.",
+      "parentUuid": "4e04eb01_de598191",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_7e4eedc5",
         "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
         "patchSetId": 8
@@ -217,6 +361,24 @@
       "writtenOn": "2014-02-27T12:23:08Z",
       "side": 1,
       "message": "huh?  why can\u0027t this be resolved in the provider instead?",
+      "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9e0bf92c",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T12:44:57Z",
+      "side": 1,
+      "message": "Because the provider is run before the \"fake\" database overlay is in place. So we have to jump a few hoops and initialize our fake entries in the DB from the actual test method, and then substitute the IDs. Fun.",
+      "parentUuid": "4e04eb01_bed355d6",
       "revId": "23f31a439127c93f0e562b98570f31604dc11a5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
