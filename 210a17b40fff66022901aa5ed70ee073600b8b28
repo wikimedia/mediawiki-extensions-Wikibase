@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_32fc146e",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T22:12:38Z",
+      "side": 1,
+      "message": "what\u0027s wrong with \"decade\"? And why is it mapped to 0, not 1?",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_72185cd8",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T22:12:38Z",
+      "side": 1,
+      "message": "This is still wrong. A formatted number may contain other characters, depending on the language.",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f22b4cd9",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T22:12:38Z",
+      "side": 1,
+      "message": "Hm, what will parseFormattedNumber return for a string like \"5.....\"? Will it be the original string? or \"5\"? Or 5? Or false? or what?",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_924e48c3",
+        "filename": "lib/tests/phpunit/parsers/TimeParserTest.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T22:12:38Z",
+      "side": 1,
+      "message": "Please also test \"1200AD\"",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_52c8c024",
+        "filename": "lib/tests/phpunit/parsers/YearTimeParserTest.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T22:12:38Z",
+      "side": 1,
+      "message": "Again: allow explicit \"AD\"",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
