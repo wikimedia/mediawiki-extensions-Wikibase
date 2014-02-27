@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_81b95c2b",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T13:13:55Z",
+      "side": 1,
+      "message": "doesn\u0027t this throw StorageException (in some situations)?",
+      "revId": "2fbfc6965712a31eb5740e5832342fb1bf1160dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a195788b",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-27T13:13:55Z",
+      "side": 1,
+      "message": "doesn\u0027t this throw StorageException (in some situations)?  (document it?)",
+      "revId": "2fbfc6965712a31eb5740e5832342fb1bf1160dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
