@@ -8,7 +8,13 @@
 Feature: High performance
 
   Background:
-    Given Entity Italy exists
+    Given Entity Italy defined in data/q38.json exists
+    Given Entity Douglas Adams defined in data/q42.json exists
 
-  Scenario: Loading a huge entity
-    Then get loading time of huge item page
+  Scenario Outline: Loading a huge entity
+    Then get loading time of page <page>
+
+    Examples:
+    | page |
+    | Italy |
+    | Douglas Adams |
