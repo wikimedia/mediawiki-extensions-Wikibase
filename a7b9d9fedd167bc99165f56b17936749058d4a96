@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_cc18bb25",
+        "filename": "repo/includes/ContentRetriever.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-27T16:34:18Z",
+      "side": 1,
+      "message": "I tried hard to get rid of $article and use the $revision as a parameter instead. That\u0027s why my code looks like this. But I found no replacement for $article-\u003egetContext() which is required below.",
+      "parentUuid": "4e04eb01_c6142147",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_1bab7bd6",
         "filename": "repo/tests/phpunit/includes/ContentRetrieverTest.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-02-27T16:19:47Z",
       "side": 1,
       "message": "don\u0027t think we should phpunit assertions when generating the test cases\n\nmaybe just throw an exception? (or perhaps php assert is okay here, though it has some issues) or maybe the check is not needed at all.",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_6cd9a75b",
+        "filename": "repo/tests/phpunit/includes/ContentRetrieverTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-27T16:34:18Z",
+      "side": 1,
+      "message": "I had a problem here with that line failing sometimes and wanted to make sure I get a useful message when this happens. I guess it\u0027s superfluous since the next assertion will fail anyway.",
+      "parentUuid": "4e04eb01_1bab7bd6",
       "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +117,24 @@
       "writtenOn": "2014-02-27T16:19:47Z",
       "side": 1,
       "message": "idem",
+      "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_0ce6a313",
+        "filename": "repo/tests/phpunit/includes/ContentRetrieverTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-27T16:34:18Z",
+      "side": 1,
+      "message": "This is actually important since this was the reason the tests never failed before even if they should. This makes sure the test setup is correct. I agree that it\u0027s confusing to do assertions that don\u0027t actually belong to the test. But I don\u0027t know what to do instead?",
+      "parentUuid": "4e04eb01_9bbe6b12",
       "revId": "a7b9d9fedd167bc99165f56b17936749058d4a96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
