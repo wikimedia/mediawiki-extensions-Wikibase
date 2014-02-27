@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_927768fd",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T22:14:34Z",
+      "side": 1,
+      "message": "Should also accept \"AD\".",
+      "revId": "13b1f4d9bdb7d4309b2a28c94fa8df64eb9c2f54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d254d058",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-27T22:14:34Z",
+      "side": 1,
+      "message": "\"AD\" should be acceptable too.",
+      "revId": "13b1f4d9bdb7d4309b2a28c94fa8df64eb9c2f54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
