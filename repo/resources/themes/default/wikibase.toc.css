@@ -3,6 +3,7 @@
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author T. Mättig < thiemo.maettig@wikimedia.de >
  */
 
 .wb-entity #toc {
@@ -20,19 +21,23 @@
 
 .wb-entity #toc ul {
 	float: left;
-	margin: 0;
-	padding: 0.4em 10px;
+	margin: 0 0 0 -.5em;
+	padding: .4em 10px;
 }
 
 .wb-entity #toc li {
-	border-left: 1px solid #c9c9c9;
+	border-right: 1px solid #c9c9c9;
 	float: left;
-	margin-bottom: 0;
-	padding: 0 0.5em;
+	margin: 0;
+	padding: 0 .5em;
 	white-space: nowrap;
 }
 
-.wb-entity #toc li:first-child {
-	border-left: none;
-	padding-left: 0;
+.wb-entity #toc li:last-child {
+	border-right: 0;
+}
+
+/* FIXME: Very specific selector to temporary overrule VectorBeta extension */
+#content .wb-entity #toc {
+	margin-top: 1.8em;
 }
