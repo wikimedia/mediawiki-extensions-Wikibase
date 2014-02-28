@@ -52,7 +52,7 @@
 		 */
 		_staticExpertOptions: {
 			/**
-			 * @param {time.Time|null} currentRawValue
+			 * @param {string|null} currentRawValue
 			 * @param {jQuery.valueview.ViewState} viewState
 			 * @param {jQuery.valueview.MessageProvider} messageProvider
 			 */
