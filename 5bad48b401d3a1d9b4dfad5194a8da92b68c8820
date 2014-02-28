@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e04eb01_53fd5f03",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T16:34:42Z",
+      "side": 1,
+      "message": "ideally there shouldn\u0027t be a space between the comment block and class start",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_58f45e50",
         "filename": "repo/maintenance/serializeItem.php",
         "patchSetId": 3
