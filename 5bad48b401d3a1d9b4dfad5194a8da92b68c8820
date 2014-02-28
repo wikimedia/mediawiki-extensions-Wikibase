@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_58f45e50",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "Maybe it would be nicer to write this as a JSON string, then parse it? Would probably be more readable and more compact.",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1896d6f3",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "This is rather strange. A maintenance script would generally access the local wiki, and wouldn\u0027t use the API. If called without --apiUrl, I would expect this to fetch an item from the local wiki, not from wikidata.org.\n\nIt seems to me that this is realyl a client script, not a maintenance script...",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d89f4e05",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "that name tells me nothing. What does that method actually do?",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_18bdb663",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "$this-\u003eproperties is populated as a side-effect of handleObject? Hidden data flow is bad... might be OK here, but needs to be documented.",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b8ada230",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "missing documentation.",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_58a21e3c",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "Nneeds documentation. And a better name.",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_386992f6",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "please document",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d8750eca",
+        "filename": "repo/maintenance/serializeItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:08:35Z",
+      "side": 1,
+      "message": "Please document. That name is very generic - what does \"handle\" mean, what\u0027s the interpretation of the \"array\"? What does this thing *do*?",
+      "revId": "5bad48b401d3a1d9b4dfad5194a8da92b68c8820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
