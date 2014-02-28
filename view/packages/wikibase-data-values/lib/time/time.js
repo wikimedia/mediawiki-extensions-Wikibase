@@ -189,7 +189,7 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 		if( year === 0 ) {
 			return '1 ' + settings.bce[0];
 		}
-		return year;
+		return String( year );
 	};
 
 	var writeMonth = function( month ) {
@@ -197,7 +197,7 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 	};
 
 	var writeDay = function( day ) {
-		return day;
+		return String( day );
 	};
 
 	var precisionText = function( acc ) {
