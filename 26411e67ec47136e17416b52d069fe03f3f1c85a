@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_98e7860d",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-28T14:46:34Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this use the same casing as in \"wgSitename\" with a lowercase \"n\"?",
+      "revId": "26411e67ec47136e17416b52d069fe03f3f1c85a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
