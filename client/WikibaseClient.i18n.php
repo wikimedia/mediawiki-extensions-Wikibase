@@ -55,6 +55,8 @@ $messages['en'] = array(
 	'wikibase-property-notfound' => '$1 property not found.',
 	'wikibase-property-notsupportedyet' => 'Wikibase does not yet support property type for $1 property.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Hide',
+	'wikibase-rc-hide-wikidata-show' => 'Show',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Wikidata edit',
@@ -164,7 +166,19 @@ Parameters:
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 
 Parameters:
-* $1 - a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
+* $1 - a link with the text {{msg-mw|wikibase-rc-hide-wikidata-show}} or {{msg-mw|wikibase-rc-hide-wikidata-hide}}',
+    'wikibase-rc-hide-wikidata-hide' => '{{doc-actionlink}}
+Option text in [[Special:RecentChanges]] in conjunction with {{msg-mw|wikibase-rc-hide-wikidata}}.
+
+See also:
+* {{msg-mw|wikibase-rc-hide-wikidata-show}}
+{{Identical|Hide}}',
+    'wikibase-rc-hide-wikidata-show' => '{{doc-actionlink}}
+Option text in [[Special:RecentChanges]] in conjunction with {{msg-mw|wikibase-rc-hide-wikidata}}.
+
+See also:
+* {{msg-mw|wikibase-rc-hide-wikidata-hide}}
+{{Identical|Show}}',
 	'wikibase-rc-show-wikidata-pref' => 'Option in the recent changes section of preferences to show wikibase changes by default in recent changes.',
 	'wikibase-rc-wikibase-edit-letter' => "Very short form of \"'''wikidata edit'''\". Used in [[Special:RecentChanges]] and [[Special:Watchlist]].
 
