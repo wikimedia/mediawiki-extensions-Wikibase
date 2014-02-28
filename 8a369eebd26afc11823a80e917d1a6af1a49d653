@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_6f208ba8",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:48:39Z",
+      "side": 1,
+      "message": "done and tests added",
+      "parentUuid": "4e04eb01_4fc2763a",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_2fc16a33",
         "filename": "lib/includes/parsers/YearMonthTimeParser.php",
         "patchSetId": 30
@@ -30,6 +48,24 @@
       "writtenOn": "2014-02-24T17:00:21Z",
       "side": 1,
       "message": "Either I\u0027m confused or this doesn\u0027t make much sense at them moment. canBeMonth() currently checks for numbers only. Why compare numbers with months names?",
+      "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_8f1d177b",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:48:39Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "4e04eb01_2fc16a33",
       "revId": "8a369eebd26afc11823a80e917d1a6af1a49d653",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
