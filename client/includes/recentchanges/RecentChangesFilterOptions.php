@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+
+use FormOptions;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -14,7 +16,7 @@ class RecentChangesFilterOptions {
 
 	protected $opts;
 
-	public function __construct( \FormOptions $opts ) {
+	public function __construct( FormOptions $opts ) {
 		$this->opts = $opts;
 	}
 
@@ -38,18 +40,19 @@ class RecentChangesFilterOptions {
 	}
 
 	/**
-	 * Is hidewikidata filter selected?
+	 * Is hidewikibase filter selected?
 	 *
 	 * @since 0.4
 	 *
 	 * @return bool
 	 */
 	protected function hideWikibase() {
-		// @TODO: Remve naming inconsistency (hideWikibase <> hideWikidata)
-		if ( isset( $this->opts['hidewikidata'] ) && $this->opts['hidewikidata'] === true ) {
-			return true;
-		}
-		return false;
+		// backwards compat
+		$hideWikidata = isset( $this->opts['hidewikidata'] ) && $this->opts['hidewikidata'] === true;
+
+		$hideWikibase = isset( $this->opts['hidewikibase'] ) && $this->opts['hidewikibase'] === true;
+
+		return ( $hideWikibase || $hideWikidata );
 	}
 
 	/**
