@@ -34,6 +34,24 @@
       "revId": "26411e67ec47136e17416b52d069fe03f3f1c85a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_987c261d",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-02-28T14:51:45Z",
+      "side": 1,
+      "message": "But \"repoSitename\" is camel case. ;-) Sorry, but I consider consistency betweeg \"wgSitename\" and \"repoSitename\" more important.",
+      "parentUuid": "4e04eb01_b89a4273",
+      "revId": "26411e67ec47136e17416b52d069fe03f3f1c85a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
