@@ -8,9 +8,9 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\SnakList;
-use Wikibase\Statement;
-use Wikibase\Reference;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**

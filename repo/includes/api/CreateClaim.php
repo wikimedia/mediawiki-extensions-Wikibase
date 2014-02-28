@@ -3,9 +3,9 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Claims;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpException;
 

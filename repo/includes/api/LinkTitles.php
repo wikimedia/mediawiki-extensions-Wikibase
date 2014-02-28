@@ -5,7 +5,7 @@ namespace Wikibase\Api;
 use ApiBase, Status;
 use SiteSQLStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
@@ -91,10 +91,10 @@ class LinkTitles extends ApiWikibase {
 		if ( !$fromId && !$toId ) {
 			// create new item
 			$itemContent = ItemContent::newEmpty();
-			$toLink = new SimpleSiteLink( $toSite->getGlobalId(), $toPage );
+			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$itemContent->getItem()->addSiteLink( $toLink );
 			$return[] = $toLink;
-			$fromLink = new SimpleSiteLink( $fromSite->getGlobalId(), $fromPage );
+			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$itemContent->getItem()->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 
@@ -105,7 +105,7 @@ class LinkTitles extends ApiWikibase {
 			// reuse to-site's item
 			/** @var ItemContent $itemContent */
 			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $toId ) );
-			$fromLink = new SimpleSiteLink( $fromSite->getGlobalId(), $fromPage );
+			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$itemContent->getItem()->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 			$summary->setAction( 'connect' );
@@ -114,7 +114,7 @@ class LinkTitles extends ApiWikibase {
 			// reuse from-site's item
 			/** @var ItemContent $itemContent */
 			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $fromId ) );
-			$toLink = new SimpleSiteLink( $toSite->getGlobalId(), $toPage );
+			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$itemContent->getItem()->addSiteLink( $toLink );
 			$return[] = $toLink;
 			$summary->setAction( 'connect' );

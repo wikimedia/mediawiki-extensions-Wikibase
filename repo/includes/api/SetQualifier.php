@@ -3,7 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\ChangeOp\ChangeOpQualifier;
 use Wikibase\ChangeOp\ChangeOpException;
