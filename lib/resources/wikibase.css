@@ -99,11 +99,10 @@ h2.wb-section-heading {
 
 /* basically, a row in the grid layout */
 .wb-value-row {
-	width: 100%;
-	max-width: 65em;
-	position: relative; /* make absolute positioned toolbar align to the right edge */
-	font-size: 100%; /* font size needs to be set since it influences max-widh property */
 	float: left; /* make row to take the dimensions of its containing blocks avoiding clipping */
+	font-size: 100%; /* font size needs to be set since it influences positioning */
+	position: relative; /* make absolute positioned toolbar align to the right edge */
+	width: 100%;
 }
 
 /* toolbar container */
@@ -229,6 +228,11 @@ label and its toolbar */
 .wb-firstHeading .wikibase-toolbar .wikibase-toolbarlabel /* tooltip */ {
 	font-size: 100%;
 	margin-bottom: 0; /* even out border of label container in view mode */
+}
+
+/* FIXME: Very specific selector to temporary overrule VectorBeta extension */
+#content .wb-firstHeading {
+	font-size: 100%;
 }
 
 /********** /LABEL **********/
