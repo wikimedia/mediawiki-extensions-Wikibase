@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_f85faa75",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "A ChangeOp is, in my mind, a value object. Giving it access to services seems odd. On the other hand, I like the idea of letting the ChangeOp define which constraints should be enforced on specific changes. \n\nJeroen said he wanted to come up with a design for when and how to enforce which constraints. Would be good to get input from him on this.",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1869361d",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "I think constraint checking should not be a part of \"apply\". ChangeOp should offer a separate function for this. Maybe not even for checking, but for declaring what constraints should apply.",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b8592292",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "Better get the store from WikibaseRepo; better yet, inject it in the constructor.\nNote that this conflicts with Ieb3be710c6.",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d862ae36",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "why turn this into a monster-line?",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_38c5120e",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "Eeeek, more global state.",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_584e9ec5",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "Don\u0027t use the global singleton. Really, don\u0027t.",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f8ce8a30",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "*eek*",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_18c81624",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:52:52Z",
+      "side": 1,
+      "message": "*cry*",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
