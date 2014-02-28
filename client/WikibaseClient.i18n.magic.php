@@ -14,6 +14,7 @@ $magicWords = array();
 $magicWords['en'] = array(
 	'noexternallanglinks' => array( 0, 'noexternallanglinks' ),
 	'property' => array( 0, 'property' ),
+	'reponame' => array( 0, 'reponame' ),
 );
 
 /** Arabic (العربية) */
