@@ -4,10 +4,11 @@ namespace Wikibase;
 
 use DBQueryError;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
- * database server. This class also supports memcached (or accellerator) based caching
+ * database server. This class also supports memcached (or accelerator) based caching
  * of entities.
  *
  * @since 0.3
@@ -15,70 +16,22 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, EntityRevisionLookup {
+class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup {
 
 	/**
-	 * The cache type to use for caching entities in memory. Use false to disable caching.
-	 * Note that only the latest revision of an entity is cached.
+	 * @var EntityIdParser
+	 */
+	protected $idParser;
+
+	/**
+	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 *
-	 * @var string $cacheType
 	 */
-	protected $cacheType;
-
-	/**
-	 * The key prefix to use when caching entities in memory.
-	 *
-	 * @var $cacheKeyPrefix
-	 */
-	protected $cacheKeyPrefix;
-
-	/**
-	 * @var int $cacheTimeout
-	 */
-	protected $cacheTimeout;
-
-	/**
-	 * @param String|bool $wiki           The name of thw wiki database to use, in a form
-	 *                                    that wfGetLB() understands. Use false to indicate the local wiki.
-	 * @param bool|int|null $cacheType      The cache type ID for the cache to use for
-	 *                                    caching entities in memory. Defaults to $wgMainCacheType.
-	 *                                    Set it to false to disable caching, or specify a different
-	 *                                    cache type using the CACHE_XXX constants. Set to false to
-	 *                                    disable caching.
-	 *                                    Note that the $wiki parameter determines the cache compartment,
-	 *                                    so multiple wikis loading entities from the same repository
-	 *                                    will share the cache.
-	 * @param int          $cacheDuration Cache duration in seconds.
-	 * @param string      $cacheKeyPrefix The key prefix to use for constructing cache keys.
-	 *                                    Defaults to "wbentity". There should be no reason to change this.
-	 *
-	 * @return \Wikibase\WikiPageEntityLookup
-	 */
-	public function __construct( $wiki = false, $cacheType = null, $cacheDuration = 3600, $cacheKeyPrefix = "wbentity" ) {
+	public function __construct( $wiki = false ) {
 		parent::__construct( $wiki );
 
-		if ( $cacheType === null ) {
-			$cacheType = $GLOBALS[ 'wgMainCacheType' ];
-		}
-
-		$this->cacheType = $cacheType;
-		$this->cacheKeyPrefix = $cacheKeyPrefix;
-		$this->cacheTimeout = $cacheDuration;
-	}
-
-	/**
-	 * Returns a cache key suitable for the given entity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return String
-	 */
-	protected function getEntityCacheKey( EntityId $entityId ) {
-		$cacheKey = $this->cacheKeyPrefix
-				. ':' . $entityId->getEntityType()
-				. ':' . $entityId->getNumericId();
-
-		return $cacheKey;
+		// TODO: migrate table away from using a numeric field so we no longer need this!
+		$this->idParser = new BasicEntityIdParser();
 	}
 
 	/**
@@ -116,51 +69,9 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			$revision = 0;
 		}
 
-		$cache = null;
-		$cacheKey = false;
-		$cachedEntityRev = null;
-		$cachedRev = false;
-
-		if ( $this->cacheType !== false ) {
-			$cacheKey = $this->getEntityCacheKey( $entityId );
-			$cache = wfGetCache( $this->cacheType );
-			$cached = $cache->get( $cacheKey );
-
-			//TODO: we may cache a stub without content in hasEntity!
-
-			if ( !( $cached instanceof EntityRevision ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found something strange in the cache for (key $cacheKey)." );
-				$cached = false;
-			}
-
-			if ( $cached ) {
-				//TODO: purge this cache when entities get deleted!
-
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found entity in cache (key $cacheKey)" );
-				$cachedEntityRev = $cached;
-				$cachedRev = $cachedEntityRev->getRevision();
-
-				if ( $revision === $cachedRev ) {
-					wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev)" );
-					wfProfileOut( __METHOD__ );
-					return $cachedEntityRev;
-				}
-
-				// NOTE: if $revision is false, we first check whether the cached
-				// revision is still the latest.
-			}
-		}
-
-		$row = $this->selectRevisionRow( $entityId, $revision );
+		$row = $this->selectRevisionRow( $entityId, $revision, true );
 
 		if ( $row ) {
-
-			if ( $cachedRev !== false && intval( $row->rev_id ) === intval( $cachedRev ) ) {
-				// the revision we loaded is the cached one, use the cached entity
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev is latest)" );
-				wfProfileOut( __METHOD__ );
-				return $cachedEntityRev;
-			}
 
 			$entityRev = $this->loadEntity( $entityId->getEntityType(), $row );
 
@@ -187,23 +98,6 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			throw new StorageException( "No such revision found for $entityId: $revision" );
 		}
 
-		// cacheable if it's the latest revision.
-		if ( $cache && $row && $entityRev
-			&& $row->page_latest === $row->rev_id ) {
-
-			if ( $cachedRev !== false ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Updating cached version of " . $entityId );
-				$cache->replace( $cacheKey, $entityRev, $this->cacheTimeout );
-			} else {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Adding cached version of " . $entityId );
-				$cache->add( $cacheKey, $entityRev, $this->cacheTimeout );
-			}
-		} else if ( $cachedRev !== false ) {
-			// no longer the latest version
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Removing cached version of " . $entityId );
-			$cache->delete( $cacheKey );
-		}
-
 		wfProfileOut( __METHOD__ );
 		return $entityRev;
 	}
@@ -218,44 +112,28 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 	 * @throws StorageException
 	 */
 	public function hasEntity( EntityID $entityId ) {
-		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Checking existance of entity " . $entityId );
+		$row = $this->selectPageRow( $entityId );
 
-		$cache = null;
-
-		if ( $this->cacheType !== false ) {
-			$cacheKey = $this->getEntityCacheKey( $entityId );
-			$cache = wfGetCache( $this->cacheType );
-			$cached = $cache->get( $cacheKey );
-
-			if ( !( $cached instanceof EntityRevision ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found something strange in the cache for (key $cacheKey)." );
-				$cached = false;
-			}
-
-			if ( $cached ) {
-				// If it'S cached, we consider it existing
-				//TODO: actually purge this cache when entities get deleted!
-				wfProfileOut( __METHOD__ );
-				return true;
-			}
-		}
-
-		$row = $this->selectRevisionRow( $entityId );
-
-		if ( $row ) {
-			//TODO: cache this!
-			wfProfileOut( __METHOD__ );
-			return true;
-		} else {
-			//TODO: negative caching?
-			wfProfileOut( __METHOD__ );
-			return false;
-		}
+		return ( $row !== null );
 	}
 
 	/**
-	 * Selects revision information from the page and revision tables.
+	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
+	 *
+	 * @since 0.6
+	 *
+	 * @param EntityID $entityId
+	 *
+	 * @return int|false
+	 */
+	public function getLatestRevisionId( EntityID $entityId ) {
+		$row = $this->selectPageRow( $entityId );
+
+		return $row === null ? false : $row->page_latest;
+	}
+
+	/**
+	 * Selects revision information from the page, revision, and text tables.
 	 *
 	 * @since 0.4
 	 *
@@ -301,7 +179,6 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			// entity to page mapping
 			$tables[] = 'wb_entity_per_page';
 
-			// TODO: migrate table away from using a numeric field
 			$entityId = $this->getProperEntityId( $entityId );
 
 			// pick entity by id
@@ -340,30 +217,69 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 		}
 	}
 
-	protected function getProperEntityId( EntityId $id ) {
-		$parser = new BasicEntityIdParser();
-		return $parser->parse( $id->getSerialization() );
-	}
-
 	/**
-	 * @see EntityLookup::getEntities
+	 * Selects page information from the page table.
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityID[] $entityIds
+	 * @param EntityID $entityId The entity to query the DB for.
 	 *
-	 * @return Entity|null[]
+	 * @throws \DBQueryError If the query fails.
+	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	public function getEntities( array $entityIds ) {
-		$entities = array();
+	protected function selectPageRow( EntityID $entityId ) {
+		wfProfileIn( __METHOD__ );
+		$db = $this->getConnection( DB_READ );
 
-		// TODO: we really want batch lookup here :)
-		foreach ( $entityIds as $entityId ) {
+		$tables = array(
+			'page',
+			'wb_entity_per_page',
+		);
 
-			$entities[$entityId->getSerialization()] = $this->getEntity( $entityId );
+		$where = array();
+		$join = array();
+		$opt = array();
+
+		$entityId = $this->getProperEntityId( $entityId );
+
+		// pick entity by id
+		$where['epp_entity_id'] = $entityId->getNumericId();
+		$where['epp_entity_type'] = $entityId->getEntityType();
+
+		// pick page via epp_page_id
+		$join['page'] = array( 'INNER JOIN', 'epp_page_id=page_id' );
+
+		$res = $db->select( $tables, '*', $where, __METHOD__, $opt, $join );
+
+		if ( !$res ) {
+			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
+			$error = $db->lastError();
+			$errno = $db->lastErrno();
+
+			wfProfileOut( __METHOD__ );
+			throw new DBQueryError( $db, $error, $errno, '', __METHOD__ );
 		}
 
-		return $entities;
+		$this->releaseConnection( $db );
+
+		if ( $row = $res->fetchObject() ) {
+			wfProfileOut( __METHOD__ );
+			return $row;
+		} else {
+			wfProfileOut( __METHOD__ );
+			return null;
+		}
+	}
+
+	/**
+	 * @todo: migrate table away from using a numeric field & get rid of this function
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return mixed
+	 */
+	protected function getProperEntityId( EntityId $id ) {
+		return $this->idParser->parse( $id->getSerialization() );
 	}
 
 	/**

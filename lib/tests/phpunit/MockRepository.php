@@ -530,7 +530,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 			$labels = $entity->getLabels( array( $langCode) );
 
 			if ( empty( $labels ) ) {
-					continue;
+				continue;
 			}
 
 			$label = reset( $labels );
@@ -711,5 +711,18 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 		}
 
 		return $property->getDataTypeId();
+	}
+
+	/**
+	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
+	 *
+	 * @param EntityID $entityId
+	 *
+	 * @return int|false
+	 */
+	public function getLatestRevisionId( EntityId $entityId ) {
+		$rev = $this->getEntityRevision( $entityId );
+
+		return $rev === null ? false : $rev->getRevision();
 	}
 }
