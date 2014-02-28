@@ -16,7 +16,7 @@ use Wikibase\SettingsArray;
  */
 
 return call_user_func( function() {
-	global $wgLanguageCode, $wgDBname;
+	global $wgLanguageCode, $wgDBname, $wgSitename;
 
 	$defaults = array(
 		'namespaces' => array(), // by default, include all namespaces; deprecated as of 0.4
@@ -177,6 +177,13 @@ return call_user_func( function() {
 	$defaults['thisWikiIsTheRepo'] = function ( SettingsArray $settings ) {
 		// determine whether the repo extension is present
 		return defined( 'WB_VERSION' );
+	};
+
+	$defaults['repoSiteName'] = function ( SettingsArray $settings ) {
+		// This uses $wgSitename if this wiki is the repo.  Otherwise, set this to
+		// either an i18n message key and the message will be used, if it exists.
+		// If repo site name does not need translation, then set this as a string.
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgSitename'] : 'Wikidata';
 	};
 
 	$defaults['repoUrl'] = function ( SettingsArray $settings ) {
