@@ -120,7 +120,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	/**
 	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
 	 *
-	 * @since 0.6
+	 * @since 0.5
 	 *
 	 * @param EntityID $entityId
 	 *
