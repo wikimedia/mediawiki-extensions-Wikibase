@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_f588d3ed",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:39:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_611890d8",
+      "revId": "1fea48f567e84fae73fa40237a7db5033ab00527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_c16d242f",
         "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
         "patchSetId": 41
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_d58b97e6",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:39:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_c16d242f",
+      "revId": "1fea48f567e84fae73fa40237a7db5033ab00527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_218968f0",
         "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
         "patchSetId": 41
@@ -47,6 +83,24 @@
       "writtenOn": "2014-02-27T14:38:14Z",
       "side": 1,
       "message": "This doesn\u0027t feel right. Could you please add a lonely \"0\" to the test cases? (Which will be stripped to an empty string and fail.) Maybe replace this line with strval( intval( $fullYear ) ) or sprintf( \"%d\", $fullYear ) or something like that?",
+      "revId": "1fea48f567e84fae73fa40237a7db5033ab00527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b5724b0e",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:39:27Z",
+      "side": 1,
+      "message": "dates with a 0 year should not be parsed and thus should not be formatted",
+      "parentUuid": "4e04eb01_218968f0",
       "revId": "1fea48f567e84fae73fa40237a7db5033ab00527",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
