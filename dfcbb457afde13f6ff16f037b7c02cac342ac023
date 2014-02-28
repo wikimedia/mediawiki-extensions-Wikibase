@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_38d9925c",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T15:10:04Z",
+      "side": 1,
+      "message": "the formatter will not format this as it is not a recognised format. We require 11 digit years.\n\nAll the same I have added a change",
+      "parentUuid": "4e04eb01_184ed672",
+      "revId": "dfcbb457afde13f6ff16f037b7c02cac342ac023",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_f8544a03",
         "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
         "patchSetId": 43
@@ -30,6 +48,24 @@
       "writtenOn": "2014-02-28T13:57:23Z",
       "side": 1,
       "message": "This will make the code return even more broken things like \"+-12-31\" which isn\u0027t better than returning \"+0-12-31\".\nPlease ass \"+0-12-31T00:00:00Z\" as a test.",
+      "revId": "dfcbb457afde13f6ff16f037b7c02cac342ac023",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_18dc964a",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T15:10:04Z",
+      "side": 1,
+      "message": "this formatter should not format values with a 0 date so I have added a check above",
+      "parentUuid": "4e04eb01_f8544a03",
       "revId": "dfcbb457afde13f6ff16f037b7c02cac342ac023",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_f887aa12",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T15:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_d8574e04",
+      "revId": "dfcbb457afde13f6ff16f037b7c02cac342ac023",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_f8aa0ad0",
         "filename": "lib/tests/phpunit/parsers/YearTimeParserTest.php",
         "patchSetId": 43
@@ -64,6 +118,24 @@
       "writtenOn": "2014-02-28T13:57:23Z",
       "side": 1,
       "message": "I found this in time.js. Would be nice to add tests for all these.\nsettings.bce \u003d [\u0027BCE\u0027, \u0027BC\u0027, \u0027B.C.\u0027, \u0027before Common Era\u0027, \u0027before Christ\u0027];\nsettings.ace \u003d [\u0027CE\u0027, \u0027AD\u0027, \u0027A.D.\u0027, \u0027Anno Domini\u0027, \u0027Common Era\u0027];",
+      "revId": "dfcbb457afde13f6ff16f037b7c02cac342ac023",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_98c2e637",
+        "filename": "lib/tests/phpunit/parsers/YearTimeParserTest.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T15:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_f8aa0ad0",
       "revId": "dfcbb457afde13f6ff16f037b7c02cac342ac023",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
