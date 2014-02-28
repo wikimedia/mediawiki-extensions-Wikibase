@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_f811eab1",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 45
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:43:13Z",
+      "side": 1,
+      "message": "So, if these options are set, they are used as overrides, not defaults, and the time string is expected to be valid/matching these options? That seems a strong assumption...",
+      "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b82b62da",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 45
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:43:13Z",
+      "side": 1,
+      "message": "Again, if these options are set, the parsing behavior is completely different? If find this quite strange and confusing. Why do it this way?",
+      "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_98266610",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 45
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:43:13Z",
+      "side": 1,
+      "message": "Perhaps use regular expressions here?",
+      "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5820def1",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 45
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T15:43:13Z",
+      "side": 1,
+      "message": "\"Anno Domini\" is used as a prefix, while \"AD\" is used as a suffix...",
+      "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
