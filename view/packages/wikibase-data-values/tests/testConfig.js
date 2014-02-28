@@ -73,6 +73,7 @@ tests.config = ( function() {
 			'globeCoordinate.Formatter.tests': 'tests/lib/globeCoordinate/globeCoordinate.Formatter.tests',
 			'globeCoordinate.GlobeCoordinate.tests': 'tests/lib/globeCoordinate/globeCoordinate.GlobeCoordinate.tests',
 
+			'time.tests': 'tests/lib/time/time.tests',
 			'time.validTimeDefinitions': 'tests/lib/time/time.validTimeDefinitions',
 			'time.Parser.tests': 'tests/lib/time/time.Parser.tests',
 			'time.Time.knowsPrecision.tests': 'tests/lib/time/time.Time.knowsPrecision.tests',
