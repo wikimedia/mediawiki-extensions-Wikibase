@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_1569ff1c",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:51:35Z",
+      "side": 1,
+      "message": "as for the format key it does not require any 0s to be trimmed.\nAlso it is 10annum to be consistent with the naming of the precision constant.",
+      "parentUuid": "4e04eb01_32fc146e",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_72185cd8",
         "filename": "lib/includes/parsers/YearMonthTimeParser.php",
         "patchSetId": 28
@@ -30,6 +48,24 @@
       "writtenOn": "2014-02-27T22:12:38Z",
       "side": 1,
       "message": "This is still wrong. A formatted number may contain other characters, depending on the language.",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f55fb375",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:51:35Z",
+      "side": 1,
+      "message": "In the newer patch sets we are no longer using formatted numbers and this has changed.",
+      "parentUuid": "4e04eb01_72185cd8",
       "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_d5627736",
+        "filename": "lib/includes/parsers/YearMonthTimeParser.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:51:35Z",
+      "side": 1,
+      "message": "As above this has changed in the newer patchsets",
+      "parentUuid": "4e04eb01_f22b4cd9",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_924e48c3",
         "filename": "lib/tests/phpunit/parsers/TimeParserTest.php",
         "patchSetId": 28
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_b5592b92",
+        "filename": "lib/tests/phpunit/parsers/TimeParserTest.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:51:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_924e48c3",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_52c8c024",
         "filename": "lib/tests/phpunit/parsers/YearTimeParserTest.php",
         "patchSetId": 28
@@ -81,6 +153,24 @@
       "writtenOn": "2014-02-27T22:12:38Z",
       "side": 1,
       "message": "Again: allow explicit \"AD\"",
+      "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9554ef57",
+        "filename": "lib/tests/phpunit/parsers/YearTimeParserTest.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-02-28T12:51:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_52c8c024",
       "revId": "210a17b40fff66022901aa5ed70ee073600b8b28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
