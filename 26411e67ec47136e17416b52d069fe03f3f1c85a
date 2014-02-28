@@ -52,6 +52,24 @@
       "revId": "26411e67ec47136e17416b52d069fe03f3f1c85a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_18901645",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-28T14:54:02Z",
+      "side": 1,
+      "message": "\"site name\" is not a single word.  in camel case, it is siteName or repoSiteName.",
+      "parentUuid": "4e04eb01_987c261d",
+      "revId": "26411e67ec47136e17416b52d069fe03f3f1c85a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
