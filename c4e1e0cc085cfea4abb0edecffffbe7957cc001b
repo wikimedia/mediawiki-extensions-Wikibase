@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_38ecf28d",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-02-28T16:01:46Z",
+      "side": 1,
+      "message": "Uh, what\u0027s term_full_entity_id, and why do we want it? When not using numeric IDs, term_entity_id should be a string that contains the full ID, right?",
+      "revId": "c4e1e0cc085cfea4abb0edecffffbe7957cc001b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
