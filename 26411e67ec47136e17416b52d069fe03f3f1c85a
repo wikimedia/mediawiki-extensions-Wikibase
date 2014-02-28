@@ -16,6 +16,24 @@
       "revId": "26411e67ec47136e17416b52d069fe03f3f1c85a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b89a4273",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-02-28T14:48:47Z",
+      "side": 1,
+      "message": "we could though think it\u0027s better to be consistent how we do things here (camel case)",
+      "parentUuid": "4e04eb01_98e7860d",
+      "revId": "26411e67ec47136e17416b52d069fe03f3f1c85a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
