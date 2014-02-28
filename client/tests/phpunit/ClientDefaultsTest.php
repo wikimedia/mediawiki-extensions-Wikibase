@@ -1,25 +1,17 @@
 <?php
- /**
- *
+
+namespace Wikibase\Test;
+
+use Wikibase\SettingsArray;
+
+/**
  * Copyright © 02.07.13 by the authors listed below.
- *
  * @license GPL 2+
  *
  * @group Wikibase
  * @group WikibaseClient
  *
  * @author Daniel Kinzler
- */
-
-
-namespace Wikibase\Test;
-
-
-use Wikibase\SettingsArray;
-
-/**
- * Class ClientDefaultsTest
- * @package Wikibase\Test
  */
 class ClientDefaultsTest extends \MediaWikiTestCase {
 

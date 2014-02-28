@@ -1,26 +1,19 @@
 <?php
- /**
- *
- * Copyright © 03.07.13 by the authors listed below.
- *
- * @license GPL 2+
- *
- * @author Daniel Kinzler
- * @author John Erling Blad < jeblad@gmail.com >
- */
-
 
 namespace Wikibase;
-
 
 use UtfNormal;
 
 /**
  * StringNormalizer provides several methods for normalizing strings.
  *
+ * Copyright © 03.07.13 by the authors listed below.
+ *
+ * @license GPL 2+
  * @since 0.4
  *
- * @package Wikibase
+ * @author Daniel Kinzler
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 class StringNormalizer {
 
