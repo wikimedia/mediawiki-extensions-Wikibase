@@ -85,7 +85,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$item2->setId( new ItemId( 'Q9999' ) );
 
 		return array(
-			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks' ), $item, $entityLookup ),
+			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $entityLookup ),
 			array( array(), $item2, $entityLookup )
 		);
 	}

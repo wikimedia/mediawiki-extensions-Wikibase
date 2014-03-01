@@ -116,9 +116,13 @@ class WikibaseLuaBindings {
 
 		$entityArr = $serializer->getSerialized( $entityObject );
 
-		if ( !$legacyStyle ) {
+		if ( $legacyStyle ) {
+			// Mark the output as Legacy so that we can easily distinguish the styles in Lua
+			$entityArr['schemaVersion'] = 1;
+		} else {
 			// Renumber the entity as Lua uses 1-based array indexing
 			$this->renumber( $entityArr );
+			$entityArr['schemaVersion'] = 2;
 		}
 
 		return $entityArr;

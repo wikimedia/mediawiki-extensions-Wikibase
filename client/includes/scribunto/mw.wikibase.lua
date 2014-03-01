@@ -19,7 +19,7 @@ function wikibase.setupInterface()
 	local entity = false
 
 	local getEntityObject = function( id )
-		local entity = php.getEntity( id )
+		local entity = php.getEntity( id, false )
 		if type( entity ) ~= 'table' then
 			return nil
 		end

@@ -10,6 +10,7 @@ local testframework = require 'Module:TestFramework'
 -- A test item (the structure isn't complete... but good enough for tests)
 local testItem = {
 	id = "Q123",
+	schemaVersion = 2,
 	claims = {
 		P321 = {},
 		P4321 = {}
@@ -30,6 +31,10 @@ local testItem = {
 			title = 'Русский'
 		}
 	}
+}
+-- A legacy test "item"
+local testItemLegacy = {
+	schemaVersion = 1
 }
 
 local getNewTestItem = function()
@@ -89,9 +94,9 @@ local tests = {
 	{ name = 'mw.wikibase.entity exists', func = testExists, type='ToString',
 	  expect = { 'table' }
 	},
-	{ name = 'mw.wikibase.entity.create 1', func = testCreate, type='ToString',
+	{ name = 'mw.wikibase.entity.create 1', func = testCreate,
 	  args = { {} },
-	  expect = { {} }
+	  expect = 'The entity data must be a table obtained via mw.wikibase.getEntityObject'
 	},
 	{ name = 'mw.wikibase.entity.create 2', func = testCreate, type='ToString',
 	  args = { testItem },
@@ -99,7 +104,11 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.create 2', func = testCreate, type='ToString',
 	  args = { nil },
-	  expect = 'The entity data must be a table'
+	  expect = 'The entity data must be a table obtained via mw.wikibase.getEntityObject'
+	},
+	{ name = 'mw.wikibase.entity.create 3', func = testCreate, type='ToString',
+	  args = { testItemLegacy },
+	  expect = 'mw.wikibase.entity must not be constructed using legacy data'
 	},
 	{ name = 'mw.wikibase.entity.getLabel 1', func = testGetLabel, type='ToString',
 	  args = { 'de' },
