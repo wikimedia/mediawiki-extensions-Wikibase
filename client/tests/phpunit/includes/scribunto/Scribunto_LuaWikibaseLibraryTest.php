@@ -49,20 +49,20 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	public function testGetEntity() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entity = $luaWikibaseLibrary->getEntity( 'Q888' );
+		$entity = $luaWikibaseLibrary->getEntity( 'Q888', false );
 		$this->assertEquals( array( null ), $entity );
 	}
 
 	public function testGetEntityInvalidIdType() {
 		$this->setExpectedException( 'ScribuntoException' );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( array() );
+		$luaWikibaseLibrary->getEntity( array(), false );
 	}
 
 	public function testGetEntityInvalidEntityId() {
 		$this->setExpectedException( 'ScribuntoException' );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( 'X888' );
+		$luaWikibaseLibrary->getEntity( 'X888', false );
 	}
 
 	public function testGetEntityId() {

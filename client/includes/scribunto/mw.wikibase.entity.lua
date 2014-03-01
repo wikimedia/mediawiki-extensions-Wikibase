@@ -24,8 +24,12 @@ end
 --
 -- @param data
 entity.create = function( data )
-	if type( data ) ~= 'table' then
-		error( 'The entity data must be a table' )
+	if type( data ) ~= 'table' or type( data.schemaVersion ) ~= 'number' then
+		error( 'The entity data must be a table obtained via mw.wikibase.getEntityObject' )
+	end
+
+	if data.schemaVersion < 2 then
+		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
 
 	local entity = data
@@ -95,10 +99,8 @@ methodtable.getProperties = function( entity )
 
 	local n = 0
 	for k, v in pairs( entity.claims ) do
-		if string.match( k, '^%u%d+' ) ~= nil then
-			n = n + 1
-			properties[n] = k
-		end
+		n = n + 1
+		properties[n] = k
 	end
 
 	return properties

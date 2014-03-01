@@ -75,7 +75,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @throws ScribuntoException
 	 * @return array
 	 */
-	public function getEntity( $prefixedEntityId = null, $legacyStyle = true ) {
+	public function getEntity( $prefixedEntityId, $legacyStyle ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 		$this->checkType( 'getEntity', 2, $legacyStyle, 'boolean' );
 		try {
