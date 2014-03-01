@@ -31,6 +31,10 @@ local testItem = {
 		}
 	}
 }
+-- A test "item" with the legacy flag set
+local testItemLegacy = {
+	isLegacy = true
+}
 
 local getNewTestItem = function()
 	return mw.wikibase.entity.create( testItem )
@@ -100,6 +104,10 @@ local tests = {
 	{ name = 'mw.wikibase.entity.create 2', func = testCreate, type='ToString',
 	  args = { nil },
 	  expect = 'The entity data must be a table'
+	},
+	{ name = 'mw.wikibase.entity.create 3', func = testCreate, type='ToString',
+	  args = { testItemLegacy },
+	  expect = 'mw.wikibase.entity must not be constructed using legacy data'
 	},
 	{ name = 'mw.wikibase.entity.getLabel 1', func = testGetLabel, type='ToString',
 	  args = { 'de' },

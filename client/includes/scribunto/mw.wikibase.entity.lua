@@ -28,6 +28,10 @@ entity.create = function( data )
 		error( 'The entity data must be a table' )
 	end
 
+	if data.isLegacy == true then
+		error( 'mw.wikibase.entity must not be constructed using legacy data' )
+	end
+
 	local entity = data
 	setmetatable( entity, metatable )
 
@@ -95,10 +99,8 @@ methodtable.getProperties = function( entity )
 
 	local n = 0
 	for k, v in pairs( entity.claims ) do
-		if string.match( k, '^%u%d+' ) ~= nil then
-			n = n + 1
-			properties[n] = k
-		end
+		n = n + 1
+		properties[n] = k
 	end
 
 	return properties

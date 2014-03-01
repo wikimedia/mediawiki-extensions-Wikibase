@@ -119,6 +119,9 @@ class WikibaseLuaBindings {
 		if ( !$legacyStyle ) {
 			// Renumber the entity as Lua uses 1-based array indexing
 			$this->renumber( $entityArr );
+		} else {
+			// Mark the output as Legacy so that we can easily distinguish the styles in Lua
+			$entityArr['isLegacy'] = true;
 		}
 
 		return $entityArr;
