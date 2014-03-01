@@ -13,6 +13,10 @@ local function testGetEntityType()
 	return type( mw.wikibase.getEntity() )
 end
 
+local function testGetEntityLegacyFlag()
+	return mw.wikibase.getEntity().isLegacy
+end
+
 local function testGetEntityObjectType()
 	return type( mw.wikibase.getEntityObject() )
 end
@@ -32,6 +36,9 @@ local tests = {
 
 	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }
+	},
+	{ name = 'mw.wikibase.getEntity (legacy flag)', func = testGetEntityLegacyFlag,
+	  expect = { true }
 	},
 	{ name = 'mw.wikibase.getEntityObject (type)', func = testGetEntityObjectType, type='ToString',
 	  expect = { 'table' }
