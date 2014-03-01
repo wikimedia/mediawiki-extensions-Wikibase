@@ -95,10 +95,8 @@ methodtable.getProperties = function( entity )
 
 	local n = 0
 	for k, v in pairs( entity.claims ) do
-		if string.match( k, '^%u%d+' ) ~= nil then
-			n = n + 1
-			properties[n] = k
-		end
+		n = n + 1
+		properties[n] = k
 	end
 
 	return properties
