@@ -69,6 +69,7 @@ $specialPageAliases['arz'] = array(
 	'SetDescription' => array( 'ضبط_الوصف' ),
 	'SetAliases' => array( 'ضبط_الالياس' ),
 	'SetSiteLink' => array( 'ضبط-وصله_الموقع' ),
+	'MergeItems' => array( 'دمج_مدخلات' ),
 	'EntitiesWithoutLabel' => array( 'الكيانات_من_غير_علامه' ),
 	'EntitiesWithoutDescription' => array( 'الكيانات_من_غير_وصف' ),
 	'ItemsWithoutSitelinks' => array( 'المدخلات_من_غير_وصلات_موقع' ),

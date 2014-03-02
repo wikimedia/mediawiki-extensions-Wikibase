@@ -305,6 +305,7 @@ $messages['af'] = array(
 
 /** Arabic (العربية)
  * @author Asaifm
+ * @author Meno25
  * @author زكريا
  * @author مشعل الحربي
  */
@@ -332,7 +333,7 @@ $messages['ar'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'اللغة',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'الموقع',
 	'wikibase-tooltip-error-details' => 'التفاصيل',
-	'wikibase-validator-bad-type' => '$2 عوضاً عن $1',
+	'wikibase-validator-bad-type' => '$2 عوضا عن $1',
 	'wikibase-validator-unknown-unit' => 'وحدة غير معروفة: $1',
 	'datatypes-type-wikibase-item' => 'عنصر',
 	'version-wikibase' => 'قاعدة ويكي',
@@ -740,6 +741,9 @@ $messages['cs'] = array(
 	'wikibase-deletedentity-query' => 'Smazaný dotaz',
 	'wikibase-diffview-reference' => 'reference',
 	'wikibase-diffview-rank' => 'hodnocení',
+	'wikibase-diffview-rank-preferred' => 'Preferované postavení',
+	'wikibase-diffview-rank-normal' => 'Normální postavení',
+	'wikibase-diffview-rank-deprecated' => 'Zavržené postavení',
 	'wikibase-diffview-qualifier' => 'vymezení',
 	'wikibase-diffview-label' => 'štítek',
 	'wikibase-diffview-alias' => 'aliasy',
@@ -761,6 +765,10 @@ $messages['cs'] = array(
 	'wikibase-error-ui-link-exists' => 'Na tuto stránku nemůžete odkázat, protože na ni již odkazuje jiná položka.',
 	'wikibase-error-ui-session-failure' => 'Platnost vaší relace skončila. Prosíme, přihlaste se znovu.',
 	'wikibase-error-ui-edit-conflict' => 'Nastal editační konflikt. Prosím obnovte stránku a uložte ji znovu.',
+	'wikibase-quantitydetails-amount' => 'Množství',
+	'wikibase-quantitydetails-upperbound' => 'Horní mez',
+	'wikibase-quantitydetails-lowerbound' => 'Dolní mez',
+	'wikibase-quantitydetails-unit' => 'Jednotka',
 	'wikibase-replicationnote' => 'Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to pár minut trvat.',
 	'wikibase-sitelinks-wikipedia' => 'Stránky Wikipedie provázané s touto položkou',
 	'wikibase-sitelinks-sitename-columnheading' => 'Jazyk',
@@ -2525,6 +2533,7 @@ $messages['mk'] = array(
 
 /** Malayalam (മലയാളം)
  * @author Praveenp
+ * @author Vssun
  */
 $messages['ml'] = array(
 	'wikibase-lib-desc' => 'വിക്കിബേസിനും വിക്കിബേസ് ക്ലയന്റ് അനുബന്ധങ്ങൾക്കുമുള്ള പൊതു പ്രവർത്തനരീതി',
@@ -2536,6 +2545,9 @@ $messages['ml'] = array(
 	'wikibase-deletedentity-query' => 'മായ്ക്കപ്പെട്ട ക്വറി',
 	'wikibase-diffview-reference' => 'അവലംബം',
 	'wikibase-diffview-rank' => 'റാങ്ക്',
+	'wikibase-diffview-rank-preferred' => 'ഉദ്ദേശിക്കുന്ന റാങ്ക്',
+	'wikibase-diffview-rank-normal' => 'സാധാരണ റാങ്ക്',
+	'wikibase-diffview-rank-deprecated' => 'ഒഴിവാക്കിയ റാങ്ക്',
 	'wikibase-diffview-qualifier' => 'യോഗ്യതാപരിശോധിനി',
 	'wikibase-diffview-label' => 'തലക്കുറി',
 	'wikibase-diffview-alias' => 'അപരനാമങ്ങൾ',
@@ -2561,7 +2573,7 @@ $messages['ml'] = array(
 	'wikibase-quantitydetails-upperbound' => 'ഉയർന്ന പരിധി',
 	'wikibase-quantitydetails-lowerbound' => 'താഴ്ന് പരിധി',
 	'wikibase-quantitydetails-unit' => 'ഏകകം',
-	'wikibase-replicationnote' => 'മാറ്റങ്ങൾ എല്ലാ വിക്കികളിലും പ്രത്യക്ഷപ്പെടാൻ കുറച്ച് മിനിറ്റുകൾ എടുത്തേയ്ക്കും എന്നത് പ്രത്യേകം ശ്രദ്ധിക്കുക',
+	'wikibase-replicationnote' => 'മാറ്റങ്ങൾ എല്ലാ വിക്കികളിലും പ്രത്യക്ഷപ്പെടാൻ കുറച്ച് മിനിറ്റുകൾ എടുത്തേക്കും എന്നത് പ്രത്യേകം ശ്രദ്ധിക്കുക',
 	'wikibase-sitelinks-wikipedia' => 'ഈ ഇനവുമായി കണ്ണിചേർത്തിരിക്കുന്ന വിക്കിപീഡിയ താളുകൾ',
 	'wikibase-sitelinks-sitename-columnheading' => 'ഭാഷ',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'സൈറ്റ്',

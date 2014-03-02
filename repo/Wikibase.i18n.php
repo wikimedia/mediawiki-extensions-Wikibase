@@ -2594,6 +2594,8 @@ $messages['bn'] = array(
 	'wikibase-restrictionedit-tooltip-message' => 'এই পাতাটি সুরক্ষিত আছে। সম্পাদনার অনুমতি নেই।',
 	'wikibase-blockeduser-tooltip-message' => 'আপনার সম্পাদনা করার অনুমতি নেই কারণ আপনার ব্যবহারকারী নাম অথবা আইপি ঠিকানা ব্লক করা হয়েছে।',
 	'wikibase-error-sitelink-already-used' => 'অন্য আইটেম [[$3]]-এ ইতিমধ্যেই অন্তর্ভুক্ত সাইট লিংক [$1 $2] ব্যবহৃত হয়েছে।',
+	'wikibase-wikibaserepopage-invalid-langcode' => 'ভাষা শনাক্তকারী "$1" অজানা। সিস্টেমের জন্য পরিচিত এমন একটি ভাষা শনাক্তকারী ব্যবহার করুন, যেমন "bn"।',
+	'wikibase-wikibaserepopage-invalid-id' => 'আইডি "$1" সিস্টেমে অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।',
 	'special-itembytitle' => 'শিরোনাম অনুযায়ী আইটেম',
 	'wikibase-itembytitle-lookup-fieldset' => 'সাইট এবং শিরোনাম অনুযায়ী আইটেমের জন্য অনুসন্ধান',
 	'wikibase-itembytitle-lookup-site' => 'সাইট:',
@@ -2639,8 +2641,6 @@ $messages['bn'] = array(
 	'wikibase-setsitelink-remove-failed' => 'সাইট লিঙ্ক মুছে ফেলা যাবে না।',
 	'wikibase-modifyentity-id' => 'আইডি:',
 	'wikibase-modifyterm-language' => 'ভাষা:',
-	'wikibase-modifyentity-invalid-id' => 'আইডি "$1" সিস্টেমে অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।',
-	'wikibase-modifyterm-invalid-langcode' => 'ভাষা শনাক্তকারী "$1" অজানা। সিস্টেমের জন্য পরিচিত এমন একটি ভাষা শনাক্তকারী ব্যবহার করুন, যেমন "bn"।',
 	'special-dispatchstats' => 'ডিসপ্যাচ পরিসংখ্যান পরিবর্তন',
 	'wikibase-dispatchstats-no-stats' => 'বর্তমানে কোন পরিসংখ্যান প্রাপ্তিসাধ্য নয়।',
 	'wikibase-dispatchstats-changes' => 'লগ পরিসংখ্যান পরবর্তন',
@@ -2736,6 +2736,8 @@ $messages['bn'] = array(
 	'action-label-update' => 'লেবেল হালনাগাদ',
 	'action-description-remove' => 'বিবরণ মুছুন',
 	'action-description-update' => 'বিবরণ হালনাগাদ',
+	'wikibase-time-precision-annum' => '$1 বছরে',
+	'wikibase-time-precision-10annum' => '$1',
 );
 
 /** Breton (brezhoneg)
@@ -2872,8 +2874,10 @@ $messages['ca'] = array(
 	'wikibase-remove-inprogress' => "S'està suprimint…",
 	'wikibase-label-empty' => "Encara no s'ha definit cap etiqueta.",
 	'wikibase-label-edit-placeholder' => 'introduïu una etiqueta',
+	'wikibase-label-edit-placeholder-language-aware' => 'introduïu una etiqueta en $1',
 	'wikibase-description-empty' => "Encara no s'ha definit cap descripció.",
 	'wikibase-description-edit-placeholder' => 'introduïu una descripció',
+	'wikibase-description-edit-placeholder-language-aware' => 'introduïu una descripció en $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'lloc',
 	'wikibase-sitelink-page-edit-placeholder' => 'pàgina',
 	'wikibase-alias-edit-placeholder' => 'introduïu un àlies',
@@ -2930,6 +2934,8 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'wikibase-error-label-not-unique-wikibase-property' => 'Una altra propietat ($3) ja té l\'etiqueta "$1" associada amb el codi d\'idioma $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Una altra consulta ($3) ja té l\'etiqueta "$1" associada amb el codi d\'idioma $2.',
 	'wikibase-error-label-not-unique-item' => 'Una altre element ($3) ja té l\'etiqueta "$1" i la descripció "$4" associada amb el codi d\'idioma $2.',
+	'wikibase-wikibaserepopage-invalid-langcode' => "L'identificador de llengua «$1» és desconegut. Utilitzeu un identificador de llengua conegut en el sistema, com «ca».",
+	'wikibase-wikibaserepopage-invalid-id' => "L'ID «$1» és desconeguda al sistema. Utilitzeu un ID d'entitat vàlid.",
 	'special-itembytitle' => 'Element per títol',
 	'wikibase-itembytitle-lookup-fieldset' => 'Cerca elements per lloc i títol',
 	'wikibase-itembytitle-lookup-site' => 'Lloc:',
@@ -2944,6 +2950,7 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'wikibase-itemdisambiguation-submit' => 'Cerca',
 	'wikibase-itemdisambiguation-nothing-found' => "No s'ha trobat cap element amb l'etiqueta indicada.",
 	'wikibase-itemdisambiguation-create' => "Podeu [{{fullurl:Special:NewItem|label=$1}} crear l'element].",
+	'wikibase-itemdisambiguation-invalid-langcode' => "L'identificador de llengua proporcionat és desconegut al sistema. Utilitzeu un identificador vàlid, com «en».",
 	'special-newproperty' => 'Crea una propietat nova',
 	'wikibase-newproperty-summary' => "Assegureu-vos de comprovar si la propietat ja existeix!<br />Per a tota propietat nova cal crear una [[Help:Label|etiqueta]] i una [[Help:Description|descripció]], a més d'un tipus de propietat vàlid.",
 	'wikibase-newproperty-fieldset' => 'Crea una propietat nova',
@@ -4009,28 +4016,21 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernede {{PLURAL:$1|alias|aliasser}} for [$2]',
 	'wikibase-property-summary-special-create-property' => 'Oprettede en egenskab for [$2] med {{PLURAL:$1|en værdi|værdier}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Emne',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Henvisning til andre emner på projektet. Ved indgang bliver emnenavnerummet på Wikidata eftersøgt for tilsvarende poster. Den består af et enkelt tekstfelt.
-* ordning – implicit del af Iri-streng
-* hierarkisk del – implicit del af Iri-streng
-* forespørgsel – implicit del af Iri-streng
-* fragment – implicit del af Iri-streng', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Henvisning til andre emner på projektet. Ved indtastning bliver emnenavnerummet på Wikidata gennemsøgt for tilsvarende poster. Den består af et enkelt tekstfelt.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons medier',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Henvisning til filer gemt på Wikimedia Commons. Ved indgang vil "Fil"-navnerummet på Commons blive eftersøgt for tilsvarende poster.
-* ordning – implicit del af Iri-streng
-* hierarkisk del – implicit del af Iri-streng
-* forespørgsel – implicit del af Iri-streng
-* fragment – implicit del af Iri-streng', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Henvisning til filer gemt på Wikimedia Commons. Ved indtastning vil "Fil"-navnerummet på Commons blive gennemsøgt for tilsvarende poster.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Kuglekoordinat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Bogstavelige data for en geografisk position givet som et breddegrad-længdegrad-par i dms eller decimale grader for det angivne himmellegeme. Standard er "Jorden" og derefter "WGS84". Det tilføjer en opløsning og område.
 * breddegrad – implicit første del (float, dms, dm, dd) af koordinatstrengen, retning er enten givet ved fortegn eller ved efterstillet N/S
 * længdegrad – implicit anden del (float, dms, dm, dd) af koordinatstrengen, retning er enten givet ved fortegn eller ved efterstillet E/W
-* højde (valgfrit) – eksplicit (?) værdi for højden over en referenceplanet, for kloden "jorden" ville det være "WGS84"-referencekloden
-* globe (valgfri) – eksplicit (?) dataværdi, givet som himmellegeme der som standard er sat til "Jorden" og derefter "WGS84"', # Fuzzy
+* globe – eksplicit (?) dataværdi, givet som himmellegeme der som standard er sat til Jorden "http://www.wikidata.org/entity/Q2"
+* præcision - numerisk præcision af koordinaten',
 	'wikibase-listdatatypes-quantity-head' => 'Kvantitet',
 	'wikibase-listdatatypes-quantity-body' => 'Bogstaveligt datafelt for en kvantitet, der relaterer sig til en veldefineret enhed. Den faktiske enhed indgår i de dataværdier, der indtastes.
-* værdi – implicit del af strengen (mapping af enhedspræfiks er uklart)
-* enhed – implicit del af strengen (mapping til standardiseringsorgan er uklart)
-* nøjagtighed (valgfri) – eksplicit dataværdi, har den samme enhed som værdien', # Fuzzy
+* mængde – implicit del af strengen (mapping af enhedspræfiks er uklart)
+* enhed – implicit del af strengen, der som standard er "1" (mapping til standardiseringsorgan er uklart)
+* øvregrænse - mængdens øvre grænse
+* nedregrænse - mængdens nedre grænse',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Tekst på ét sprog',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Bogstaveligt datafelt for en streng der ikke er oversat til andre sprog. Denne type streng er defineret en gang og bliver herefter genbrugt på alle sprog. Typisk brug er geografiske navne skrevet på lokalsproget, et id af en eller anden slags, en kemisk formel eller et videnskabeligt latinsk navn.
 * sprog – eksplicit værdi for at identificere sproget for tekstdelen
@@ -4508,7 +4508,7 @@ $messages['de-formal'] = array(
 $messages['diq'] = array(
 	'wikibase-edit' => 'bıvurne',
 	'wikibase-save' => 'qeyd ke',
-	'wikibase-cancel' => 'bıterkne',
+	'wikibase-cancel' => 'bıtexelne',
 	'wikibase-add' => 'Deke',
 	'wikibase-addreference' => 'Çıme dek',
 	'wikibase-save-inprogress' => 'Starêno...',
@@ -5246,8 +5246,10 @@ $messages['es'] = array(
 	'wikibase-remove-inprogress' => 'Eliminando...',
 	'wikibase-label-empty' => 'No se ha definido ninguna etiqueta todavía.',
 	'wikibase-label-edit-placeholder' => 'introducir la etiqueta',
+	'wikibase-label-edit-placeholder-language-aware' => 'escribe una etiqueta en $1',
 	'wikibase-description-empty' => 'No se ha definido ninguna descripción todavía.',
 	'wikibase-description-edit-placeholder' => 'introducir una descripción',
+	'wikibase-description-edit-placeholder-language-aware' => 'escribe una descripción en  $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'página',
 	'wikibase-alias-edit-placeholder' => 'introduce un alias',
@@ -7172,10 +7174,10 @@ $messages['gl'] = array(
 	'wikibase-remove-inprogress' => 'Eliminando...',
 	'wikibase-label-empty' => 'Aínda non hai ningunha etiqueta definida.',
 	'wikibase-label-edit-placeholder' => 'escriba unha etiqueta',
-	'wikibase-label-edit-placeholder-language-aware' => 'escriba unha etiqueta en $1',
+	'wikibase-label-edit-placeholder-language-aware' => 'escribe unha etiqueta en $1',
 	'wikibase-description-empty' => 'Aínda non hai ningunha descrición definida.',
 	'wikibase-description-edit-placeholder' => 'escriba unha descrición',
-	'wikibase-description-edit-placeholder-language-aware' => 'escriba unha descrición en $1',
+	'wikibase-description-edit-placeholder-language-aware' => 'escribe unha descrición en $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'páxina',
 	'wikibase-alias-edit-placeholder' => 'escriba un pseudónimo',
@@ -9483,6 +9485,7 @@ alla eiginleika og þar að auki gilda gagnagerð.',
  * @author Darth Kule
  * @author F. Cosoleto
  * @author Gianfranco
+ * @author Maria victoria
  * @author Nemo bis
  * @author Raoli
  * @author Rosh
@@ -9771,19 +9774,22 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creata una proprietà [$2] con {{PLURAL:$1|valore|valori}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Collega ad altri elementi nel progetto. Durante l\'inserimento verranno cercati gli elementi corrispondenti nel namespace "Item" di Wikidata. Consiste in un unico campo di testo.',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link a altri oggetti nel progetto. Durante l\'immissione del "Elemento" spazio-nomi su Wikidata si cerccheranno le voci corrispondenti. Esso è composto di un testo singolo  per campo di immissione .',
 	'wikibase-listdatatypes-commonsmedia-head' => 'File multimediale su Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Collega a file memorizzati su Wikimedia Commons. Durante l\'inserimento verranno cercati gli elementi corrispondenti nel namespace "File" di Commons.',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Link a file archiviati in Wikimedia Commons. Durante l\'immissione del namespace "File" su Commons cercato voci corrispondenti.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinate geografiche',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Campo dati letterale per una posizione geografica indicata come latitudine-longitudine in gms o gradi decimali per il corpo stellare indicato. I valori predefiniti sono "Terra" e "WGS84". Aggiunge risoluzione e intervallo di valori.
 * latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
 * longitudine – implicito seconda parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti E/W
-* pianeta – valore dati esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"', # Fuzzy
+* pianeta – valore dati esplicito (?), indicato come corpo stellare che ha come valore predefinito la Terra "http://www.wikidata.org/entity/Q2"
+* precisione - precisione numerica delle coordinate',
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Campo dati letterale per una quantità relativa ad un'unità ben definita. L'unità usata è uno dei dati inseriti.
-* valore - valore implicito della stringa (mappatura del prefisso dell'unità non è chiara)
-* unità - valore implicito della stringa (mappatura del corpo standard non è chiara)
-* precisione (facoltativo) - valore esplicito, ha la stessa unità del valore", # Fuzzy
+* quantità - valore implicito della stringa (mappatura del prefisso dell'unità non è chiara)
+* unità - valore implicito della stringa, predefinito a 1 (mappatura del corpo standard non è chiara)
+* precisione (facoltativo) - valore esplicito, ha la stessa unità del valore
+* limite superiore - valore massimo della quantità
+* limite inferiore - valore minimo della quantità",
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo monolingua',
 	'wikibase-listdatatypes-monolingual-text-body' => "Campo dati letterale per una stringa che non è tradotta in altre lingue. Questo tipo di stringa è definita una volta e riutilizzata per tutte le lingue. L'uso tipico è per i nomi geografici, scritti nella lingua locale, o per un identificatore di qualche tipo, una formula chimica o un nome scientifico in latino.
  * lingua – valore esplicito per identificare la lingua della parte testuale
@@ -10312,6 +10318,7 @@ $messages['ka'] = array(
 	'wikibase-setaliases-label' => 'ფსევდონიმები:',
 	'wikibase-setaliases-submit' => 'ფსევდონიმების დაყენება',
 	'wikibase-setaliases-warning-remove' => 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ყველა ფსევდონიმი [[$1]]-თვის?',
+	'wikibase-setsitelink-not-item' => 'id $1 არ ეკუთვნის არცერთ ელემენტს',
 	'wikibase-modifyentity-id' => 'იდენტიფიკატორი:',
 	'wikibase-modifyterm-language' => 'ენა:',
 	'special-mergeitems' => 'ორი ელემენტის შერწყმა',
@@ -10341,6 +10348,7 @@ $messages['ka'] = array(
 	'wikibase-entitieswithoutlabel-label-type' => 'ტიპი:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'ყველა',
 	'wikibase-entitieswithoutlabel-submit' => 'ძიება',
+	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ არ არის ენის სწორი კოდი.',
 	'special-itemswithoutsitelinks' => 'ელემენტები საიტის ბმულების გარეშე',
 	'wikibase-restoreold' => 'აღდგენა',
 	'wikibase-restore-summary' => 'მომხმარებელმა [[Special:Contributions/$2|$2]] აღადგინა ვერსია $1',
@@ -10374,6 +10382,7 @@ $messages['ka'] = array(
 	'wikibase-item-summary-special-create-item' => 'შეიქმნა ელემენტი [$2] {{PLURAL:$1|მნიშვნელობით}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'შეიქმნა განცხადება',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'წაიშალა {{PLURAL:$1|განცხადება}}',
+	'wikibase-property-summary-wbcreate-new' => 'შეიქმნა ახალი თვისება',
 	'wikibase-property-summary-wbeditentity-create' => 'შექმნილია ახალი თვისება',
 	'wikibase-property-summary-wbeditentity-update' => 'თვისება განახლებულია',
 	'wikibase-property-summary-wbeditentity-override' => 'თვისების მნიშვნელობა გასუფთავებულია',
@@ -11539,6 +11548,13 @@ $messages['lv'] = array(
 	'right-description-update' => 'Mainīt aprakstus',
 );
 
+/** Malagasy (Malagasy)
+ * @author Jagwar
+ */
+$messages['mg'] = array(
+	'wikibase-item-summary-wblinktitles-connect' => 'Nanampy rohim-piteny hampifandray pejy',
+);
+
 /** Minangkabau (Baso Minangkabau)
  * @author Iwan Novirion
  * @author Shirayuki
@@ -11963,7 +11979,7 @@ $messages['mk'] = array(
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медиумска содржина од Ризницата',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Врска до податотеки складирани на Ризницата. При внесување на нешто во именскиот простор „Податотека“ (File), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Координата',
-	'wikibase-listdatatypes-globe-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава резолуција и опсег.
+	'wikibase-listdatatypes-globe-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава разложеност и опсег.
 * географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) од координатната низа, правецот е зададен со претставка-симбол или со наставка N/S
 * географска должина (''longitude'') — поздразбран втор дел (float, dms, dm, dd) правецот е зададен со претставка-симбол или со наставка E/W
 * глобус (''globe'') [оптимално] — искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ „http://www.wikidata.org/entity/Q2“
@@ -14402,7 +14418,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 * schemat – niejawna część łańcucha IRI
 * część hierarchiczna – niejawna część łańcucha IRI
 * zapytanie – niejawna część łańcucha IRI
-* fragment – niejawna część łańcucha IRI', # Fuzzy
+* fragment – niejawna część łańcucha IRI',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Plik multimedialny z Commons',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Odwołuje się do plików przechowywanych na Wikimedia Commons. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „File” na Commons, aby odnaleźć pasujące wpisy.
 * schemat – niejawna część łańcucha IRI
@@ -14747,28 +14763,21 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-property-summary-wbsetaliases-remove' => "Gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
 	'wikibase-property-summary-special-create-property' => 'Creà na propietà [$2] con {{PLURAL:$1|un valor|dij valor}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
-	'wikibase-listdatatypes-wikibase-item-body' => "Liura vers d'àutri element dël proget. Durant l'imission lë spassi nominal \"Element\" su Wikidata a sarà scrutà a l'arserca ëd vos corëspondente. Sòn a consist d'un sol camp d'imission ëd test.
-* schema - part implìssita ëd la Iri-stringa
-* hierarchicalpart – part implìssita ëd la Iri-stringa
-* query – part implìssita ëd la Iri-stringa
-* fragment – part implìssita ëd la Iri-stringa", # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => "Liura vers d'àutri element dël proget. Durant l'imission lë spassi nominal «Element» su Wikidata a sarà scrutà a l'arserca ëd vos corëspondente. Sòn a consist d'un sol camp d'imission ëd test.",
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mojen comun',
-	'wikibase-listdatatypes-commonsmedia-body' => "Liura a d'archivi goernà su Wikimedia Commons. Durant l'imission lë spassi nominal «Archivi» su Wikimedia Commons a sarà scrutà a l'arserca ëd vos corëspondente.
-* scheme – part implìssita ëd la Iri-stringa
-* hierarchicalpart – part implìssita ëd la Iri-stringa
-* query – part implìssita ëd la Iri-stringa
-* fragment – part implìssita ëd la Iri-stringa", # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => "Liura a d'archivi goernà su Wikimedia Commons. Durant l'imission lë spassi nominal «Archivi» su Wikimedia Commons a sarà scrutà a l'arserca ëd vos corëspondente.",
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinà globaj',
 	'wikibase-listdatatypes-globe-coordinate-body' => "Dàit literaj për na posission geogràfica smonùa sot forma ëd cobia latitùdin-longitùdin an gms o an gre decimaj për ël còrp celest considerà. 'Me stàndard, ''Tèra'' e peui ''WGS86''. A gionta n'arsolussion e na portà.
 * latitùdin – prima part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura dal N/S butà apress
 * longitùdin – sconda part implìssita (float, dms, dm, dd) ëd la stringa dle coordinà, la diression a l'é dàita o bin dal sign 'me prefiss opura da l' E/W butà apress
-* glòb – valor ëd dàit esplìssit (?) dàit coma ël còrp ësteilar che për ëstàndard a l'é la \"Tèra\" e peui \"WGS84\"
-* glòb (opsional) – valor ëd dàit esplìssit (?), ch'a smon ël còrp celest, 'me stàndard \"Tèra\" e apress \"WGS84\"", # Fuzzy
+* glòb – valor ëd dàit esplìssit (?) dàit coma ël còrp ësteilar che për ëstàndard a l'é la Tèra \"http://www.wikidata.org/entity/Q2\"
+* precision - precision numérica ëd la coordinà",
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Camp ëd dàit literaj për na quantità ch'a rësguarda na sòrt d'unità bin definìa. L'unità real a va ant ij valor ëd dàit ch'a son anserì.
-* value - part implìssita ëd la stringa (l'aplicassion dël prefiss d'unità a l'é nen ciàira)
-* unit - part implìssita ëd la stringa (l'aplicassion dël còrp standardidà a l'é nen ciàira)
-* accuracy (opsional) - valor ëd dàit esplìssit, con la midema unità dël valor", # Fuzzy
+* montant - part implìssita ëd la stringa (l'aplicassion dël prefiss d'unità a l'é nen ciàira)
+* unit - part implìssita ëd la stringa dont ël valor predefinì a l'é «1»(l'aplicassion dël còrp standardidà a l'é nen ciàira)
+* magiorant - magiorant ëd la quantità
+* minorant - minorant ëd la quantità",
 	'wikibase-listdatatypes-monolingual-text-head' => 'Test monolenga',
 	'wikibase-listdatatypes-monolingual-text-body' => "Camp ëd dàit literal për na stringa ch'a l'é nen voltà an d'àutre lenghe. Sta sòrt dë stringa a l'é definìa na vira e dovrà torna an tute le lenghe. N'usagi tìpich a l'é col dij nòm geogràfich ëscrivù ant la lenga local, n'identificativ ëd chèich sòrt, na fórmola chìmica o un nòm sientìfich latin.
 * lenga - valor esplìssit për identifiché la lenga da la part ëd test
@@ -16277,6 +16286,7 @@ da otkrijete gdje je nestao.',
 );
 
 /** Sinhala (සිංහල)
+ * @author Sahan.ssw
  * @author Singhalawap
  * @author පසිඳු කාවින්ද
  */
@@ -16378,7 +16388,7 @@ $messages['si'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|අන්වර්ථ නාම}} [$2] ඉවත් කරන ලදී',
 	'wikibase-item-summary-wbsetsitelink-add' => 'අඩවි-විශේෂී [$2] සබැඳිය එක් කරන ලදී', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'අඩවි-විශේෂී [$2] සබැඳිය ඉවත් කරන ලදී', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => 'සම්බන්ධයි {{PLURAL:$1|පිටු}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => 'පිටු සම්බන්ධ කිරීම සඳහා භාෂා ඈඳනයක් එක් කර ඇත.',
 	'wikibase-item-summary-wbcreateclaim-value' => 'තනන ලදී {{PLURAL:$1|a value claim|value claims}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'තනන ලදී {{PLURAL:$1|a novalue claim|novalue claims}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'තනන ලදී {{PLURAL:$1|a somevalue claim|somevalue claims}}', # Fuzzy
@@ -17235,6 +17245,7 @@ $messages['ta'] = array(
 );
 
 /** Telugu (తెలుగు)
+ * @author Chaduvari
  * @author Ravichandra
  * @author Veeven
  */
@@ -17263,8 +17274,8 @@ $messages['te'] = array(
 	'wikibase-setaliases-label' => 'మారుపేర్లు:',
 	'wikibase-setaliases-submit' => 'మారుపేర్లు ఇవ్వండి',
 	'wikibase-modifyterm-language' => 'భాష',
-	'special-mergeitems' => 'రెండు అంశాలను కలుపు',
-	'wikibase-mergeitems-submit' => 'అంశాలను కలుపు',
+	'special-mergeitems' => 'రెండు అంశాల విలీనం',
+	'wikibase-mergeitems-submit' => 'అంశాలను విలీనం చెయ్యి',
 	'wikibase-entitieswithoutlabel-label-language' => 'భాష:',
 	'wikibase-entitieswithoutlabel-label-type' => 'రకం:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'అన్నీ',
@@ -17728,28 +17739,21 @@ $messages['uk'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => 'Вилучено [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
 	'wikibase-property-summary-special-create-property' => 'Створено властивість для [$2] із {{PLURAL:$1|1=значенням|значеннями}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Елемент',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Посилання на інші елементи у проекті. При введенні буде проводитися пошук схожих записів в просторі імен Вікіданих <code>Item:</code>. Складається з одного текстового поля.
-* scheme - неявно задана частина рядка IRI
-* hierarchicalpart - неявно задана частина рядка IRI
-* query - неявно задана частина рядка IRI
-* fragment - неявно задана частина рядка IRI', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Посилання на інші елементи у проекті. При введенні буде проводитися пошук схожих записів в просторі імен Вікіданих <code>Item:</code>. Складається з одного текстового поля.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медіа-файл з Вікісховища',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Посилання на файли, які зберігаються на Вікісховищі. Під час введення буде проводитися пошук по простору імен <code>File:</code> на Вікісховищі.
-* scheme - неявно задана частина рядка IRI
-* hierarchicalpart - неявно задана частина рядка IRI
-* query - неявно задана частина рядка IRI
-* fragment - неявно задана частина рядка IRI', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Посилання на файли, які зберігаються на Вікісховищі. Під час введення буде проводитися пошук по простору імен <code>File:</code> на Вікісховищі.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Географічні координати',
-	'wikibase-listdatatypes-globe-coordinate-body' => "Символьні дані про географічне положення для певного небесного тіла, що задаються у вигляді пари «широта-довгота» у форматі «градуси хвилини секунди» (°ʹʺ) або в десятковому форматі. За замовчуванням це «Земля», а потім «WGS84». Це додає дозвіл і діапазон.
-* latitude - неявно задана перша частина рядка координат (float, dms, dm, dd), напрямок задається префіксом або постфиксом N/S (широта)
-* longituge - неявно задана друга частина рядка координат (float, dms, dm, dd), напрямок задається префіксом або постфіксом E/W (довгота)
-* altitude (необов'язкове) - явно задане (?) значення для висоти над площиною відліку, для планети «Земля» це буде глобус «WGS84».
-* globe (необов'язкове) - явно задане (?) значення даних, у вигляді посилання на небесне тіло, яке за замовчуванням є «Землею», а потім «WGS84»", # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Символьне поле даних про географічне положення для певного небесного тіла, що задаються у вигляді пари «широта-довгота» у форматі «градуси хвилини секунди» (°ʹʺ) або в десятковому форматі. Типово - це «Земля», а потім «WGS84». Додає роздільну здатність і діапазон.
+* latitude - неявно задана перша частина рядка координат (float, dms, dm, dd), напрямок задається префіксом або постфіксом N/S
+* longitude - неявно задана друга частина рядка координат (float, dms, dm, dd), напрямок задається префіксом або постфіксом E/W
+* globe - явно задане (?) значення даних, у вигляді посилання на небесне тіло, яке типово є Землею («http://www.wikidata.org/entity/Q2»)
+* точність - точність координат',
 	'wikibase-listdatatypes-quantity-head' => 'Кількість',
-	'wikibase-listdatatypes-quantity-body' => "Рядкове поле для введення кількості, вираженої в деяких цілком певних одиницях. Конкретні одиниці вказані у введених значеннях даних.
-* value - неявна частина рядка (обробка префікса одиниці незрозуміла)
-* unit - неявна частина рядка (зв'язок з еталоном незрозумілий)
-* accuracy (необов'язково) - явне значення, виражене в тих же одиницях, що й value", # Fuzzy
+	'wikibase-listdatatypes-quantity-body' => "Символьне поле для введення кількості, заданої у цілком певних одиницях. Конкретні одиниці вказані у введених значеннях даних.
+* amount - неявна частина рядка (обробка префікса одиниці незрозуміла)
+* unit - неявна частина рядка, типово - «1» (зв'язок з еталоном незрозумілий)
+* upperbound - верхня межа кількості
+* lowerbound - нижня межа кількості",
 	'wikibase-listdatatypes-monolingual-text-head' => 'Одномовний текст',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Символьне поле даних для рядка, який не перекладається на інші мови. Рядки цього типу визначаються і використовуються однаково для всіх мов. Зазвичай використовується для географічних назв на місцевій мові, ідентифікаторів будь-якого типу, хімічних формул або латинських наукових назв.
 * language - явно задане значення для визначення мови текстової частини
@@ -18594,6 +18598,7 @@ $messages['yi'] = array(
 	'wikibase-label-edit-placeholder' => 'אריינגעבן באצייכענונג',
 	'wikibase-description-empty' => 'קיין שילדערונג נאך נישט דעפֿינירט',
 	'wikibase-description-edit-placeholder' => 'ארײַנגעבן באשרײַבונג',
+	'wikibase-description-edit-placeholder-language-aware' => 'אײַנגעבן שילדערונג אין $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'וועבארט',
 	'wikibase-sitelink-page-edit-placeholder' => 'בלאט',
 	'wikibase-alias-edit-placeholder' => 'ארײַנגעבן אליאס',
@@ -18839,10 +18844,10 @@ $messages['zh-hans'] = array(
 	'wikibase-remove-inprogress' => '正在删除…',
 	'wikibase-label-empty' => '标签尚未定义',
 	'wikibase-label-edit-placeholder' => '请输入标签',
-	'wikibase-label-edit-placeholder-language-aware' => '在$1中输入标签',
+	'wikibase-label-edit-placeholder-language-aware' => '输入$1标签',
 	'wikibase-description-empty' => '说明尚未定义',
 	'wikibase-description-edit-placeholder' => '请输入说明',
-	'wikibase-description-edit-placeholder-language-aware' => '在$1中输入描述',
+	'wikibase-description-edit-placeholder-language-aware' => '输入$1说明',
 	'wikibase-sitelink-site-edit-placeholder' => '网站',
 	'wikibase-sitelink-page-edit-placeholder' => '页面',
 	'wikibase-alias-edit-placeholder' => '请输入别名',
