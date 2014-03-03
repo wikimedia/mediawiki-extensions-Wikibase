@@ -1,0 +1,9 @@
+Verified+2: jenkins-bot
+Code-Review+2: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Verified+2: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 03 Mar 2014 16:55:18 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/116495
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/mw1.23-wmf15
