@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_39062d24",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T14:18:15Z",
+      "side": 1,
+      "message": "unset( $options[\u0027rcshowwikidata\u0027] )?",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c409a030",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T14:18:15Z",
+      "side": 1,
+      "message": "should probably be wbreponame. \"repo\" is rather generic.",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2424c4ac",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T14:18:15Z",
+      "side": 1,
+      "message": "thisWikiIsTheRepo? Really? isn\u0027t this covered by repoDatabaseName \u003d\u003d\u003d false.",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_843278ed",
+        "filename": "client/includes/recentchanges/RecentChangesFilterOptions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T14:18:15Z",
+      "side": 1,
+      "message": "Is this related to the MagicWord change?",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
