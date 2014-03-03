@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_39206df1",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T12:17:39Z",
+      "side": 1,
+      "message": "Not really related to this change but will see if I can give it a poke...",
+      "parentUuid": "4e04eb01_aff48184",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_853308c0",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 5
@@ -90,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_992b01db",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T12:17:39Z",
+      "side": 1,
+      "message": "Jeroen, this change is a step of exactly what you are saying people are not doing! Before this change this global state is simply within the apply method of the ChangeOP, this change is moving the todo up a level and out of ChangeOpClaim.\nIndeed we could have a changeOp factory!",
+      "parentUuid": "4e04eb01_2f307152",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_5f902f46",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 5
@@ -101,6 +137,24 @@
       "writtenOn": "2014-02-11T09:39:51Z",
       "side": 1,
       "message": "You seem to have messed up the indentation. Also, the line seems to be too long.",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7926f512",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T12:17:39Z",
+      "side": 1,
+      "message": "indenting looks fine to me, will fix the line lengths..",
+      "parentUuid": "4e04eb01_5f902f46",
       "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
