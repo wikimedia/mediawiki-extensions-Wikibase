@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_e406dc1f",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "use Wikibase\\DataModel\\Entity\\Entity\nuse Wikibase\\DataModel\\Entity\\EntityId",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_641acc74",
+        "filename": "lib/includes/store/EntityStoreWatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "use Wikibase\\DataModel\\Entity\\EntityId",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_24fde404",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "per my comment in PS10 this should use Wikibase\\DataModel\\Entity\\EntityId\nAlso use Wikibase\\DataModel\\Entity\\Entity",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_042788b2",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "mixed? Looking below this looks to always be an int?",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e41dbc67",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "unregisters using the key? As above the key returned by registerWatcher always seems to be an int, but bellow we check for object / array?\nAm I missing something?",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a437b4df",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "primitive value? Could we not just say object / array",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_6431ace8",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "use Wikibase\\DataModel\\Entity\\EntityId;\nuse Wikibase\\DataModel\\Entity\\Entity;",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_044e6872",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T14:20:25Z",
+      "side": 1,
+      "message": "use Wikibase\\DataModel\\Entity\\Entity;\nuse Wikibase\\DataModel\\Entity\\Property;\nuse Wikibase\\DataModel\\Entity\\Item;\ne.t.c",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
