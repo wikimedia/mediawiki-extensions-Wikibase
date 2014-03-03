@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_6469ac87",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T15:45:35Z",
+      "side": 1,
+      "message": "The Problem is: implementations that are in the Wikibase namespace cannot use Wikibase\\DataModel\\Entity\\Entity, because Entity is already defined in that namespace. \n\nWe can use the correct class here and accept that PHPStorm marks the implementation\u0027s signature as an error. Or fix all that mess in one fell swoop, in a separate commit...",
+      "parentUuid": "4e04eb01_e406dc1f",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_641acc74",
         "filename": "lib/includes/store/EntityStoreWatcher.php",
         "patchSetId": 16
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_446470ae",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T15:45:35Z",
+      "side": 1,
+      "message": "But the caller should never know or care. We should be free to change this to anything we like later.",
+      "parentUuid": "4e04eb01_042788b2",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_e41dbc67",
         "filename": "lib/includes/util/GenericEventDispatcher.php",
         "patchSetId": 16
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_e40c9cf2",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T15:45:35Z",
+      "side": 1,
+      "message": "The check for object/array is there to catch the common mistake of trying to unregister the listener itself, instead of the key.",
+      "parentUuid": "4e04eb01_e41dbc67",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_a437b4df",
         "filename": "lib/includes/util/GenericEventDispatcher.php",
         "patchSetId": 16
@@ -98,6 +152,24 @@
       "writtenOn": "2014-03-03T14:20:25Z",
       "side": 1,
       "message": "primitive value? Could we not just say object / array",
+      "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2403a4c3",
+        "filename": "lib/includes/util/GenericEventDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T15:45:35Z",
+      "side": 1,
+      "message": "The key must (currently) NOT be an object or array.",
+      "parentUuid": "4e04eb01_a437b4df",
       "revId": "92b4a52d2a5406c59fdc42c852fe68b70e40f7f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
