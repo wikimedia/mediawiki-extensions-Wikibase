@@ -104,6 +104,24 @@
       "revId": "6b46772ddb525f96ce4db6ed00a129d0923d576b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_644e4cdf",
+        "filename": "client/includes/scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T16:40:15Z",
+      "side": 1,
+      "message": "Then it should be checked, and fail.",
+      "parentUuid": "4e04eb01_e496dc41",
+      "revId": "6b46772ddb525f96ce4db6ed00a129d0923d576b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
