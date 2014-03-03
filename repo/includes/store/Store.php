@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use Wikibase\store\EntityStore;
+use Wikibase\store\EntityStoreWatcher;
 
 /**
  * Store interface. All interaction with store Wikibase does on top
@@ -85,6 +87,25 @@ interface Store {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup();
+
+	/**
+	 * Returns an EntityStore
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityStore
+	 */
+	public function getEntityStore();
+
+	/**
+	 * Returns an EntityStoreWatcher that should be notified of changes to
+	 * entities, in order to keep any caches updated.
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityStoreWatcher
+	 */
+	public function getEntityStoreWatcher();
 
 	/**
 	 * Returns an EntityInfoBuilder

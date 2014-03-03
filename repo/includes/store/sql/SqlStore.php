@@ -9,6 +9,11 @@ use MWException;
 use ObjectCache;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\store\CachingEntityRevisionLookup;
+use Wikibase\store\DispatchingEntityStoreWatcher;
+use Wikibase\store\EntityStore;
+use Wikibase\store\EntityStoreWatcher;
+use Wikibase\store\WikiPageEntityStore;
 
 /**
  * Implementation of the store interface using an SQL backend via MediaWiki's
@@ -25,6 +30,16 @@ class SqlStore implements Store {
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup = null;
+
+	/**
+	 * @var EntityStore
+	 */
+	private $entityStore = null;
+
+	/**
+	 * @var DispatchingEntityStoreWatcher
+	 */
+	private $entityStoreWatcher = null;
 
 	/**
 	 * @var EntityInfoBuilder
@@ -351,6 +366,46 @@ class SqlStore implements Store {
 	}
 
 	/**
+	 * @see Store::getEntityStoreWatcher
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityStoreWatcher
+	 */
+	public function getEntityStoreWatcher() {
+		if ( !$this->entityStoreWatcher ) {
+			$this->entityStoreWatcher = new DispatchingEntityStoreWatcher();
+		}
+
+		return $this->entityStoreWatcher;
+	}
+
+	/**
+	 * @see Store::getEntityStore
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityStore
+	 */
+	public function getEntityStore() {
+		if ( !$this->entityStore ) {
+			$this->entityStore = $this->newEntityStore();
+		}
+
+		return $this->entityStore;
+	}
+
+	/**
+	 * @return WikiPageEntityStore
+	 */
+	protected function newEntityStore() {
+		$store = new WikiPageEntityStore( WikibaseRepo::getDefaultInstance()->getEntityContentFactory() );
+		$store->registerWatcher( $this->getEntityStoreWatcher() );
+		return $store;
+	}
+
+
+	/**
 	 * @see Store::getEntityRevisionLookup
 	 *
 	 * @since 0.4
@@ -376,19 +431,21 @@ class SqlStore implements Store {
 
 		$lookup = new WikiPageEntityLookup( false );
 
-		//FIXME: once we have the EntityStore in place, the local cache should get purged automatically
-		//       even while testing. So when we have EntityStore, remove this conditional.
-		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			// Lower caching layer using persistent cache (e.g. memcached).
-			// We need to verify the revision ID against the database to avoid stale data.
-			$lookup = new CachingEntityRevisionLookup( $lookup, wfGetCache( $this->cacheType ), $this->cacheDuration, $key );
-			$lookup->setVerifyRevision( true );
+		// Maintain a list of watchers to be notified of changes to any entities,
+		// in order to update caches.
+		$dispatcher = $this->getEntityStoreWatcher();
 
-			// Top caching layer using an in-process hash.
-			// No need to verify the revision ID, we'll ignore updates that happen during the request.
-			$lookup = new CachingEntityRevisionLookup( $lookup, new \HashBagOStuff() );
-			$lookup->setVerifyRevision( false );
-		}
+		// Lower caching layer using persistent cache (e.g. memcached).
+		// We need to verify the revision ID against the database to avoid stale data.
+		$lookup = new CachingEntityRevisionLookup( $lookup, wfGetCache( $this->cacheType ), $this->cacheDuration, $key );
+		$lookup->setVerifyRevision( true );
+		$dispatcher->registerWatcher( $lookup ); // we know it's a WikiPageEntityStore
+
+		// Top caching layer using an in-process hash.
+		// No need to verify the revision ID, we'll ignore updates that happen during the request.
+		$lookup = new CachingEntityRevisionLookup( $lookup, new \HashBagOStuff() );
+		$lookup->setVerifyRevision( false );
+		$dispatcher->registerWatcher( $lookup ); // we know it's a WikiPageEntityStore
 
 		return $lookup;
 	}

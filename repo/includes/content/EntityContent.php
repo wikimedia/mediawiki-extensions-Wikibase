@@ -35,10 +35,14 @@ use WikiPage;
 abstract class EntityContent extends AbstractContent {
 
 	/**
-	 * @since 0.1
-	 * @var EditEntity|bool
+	 * Ugly hack for checking the base revision during the database
+	 * transaction that updates the entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @var int|bool
 	 */
-	protected $editEntity = null;
+	protected $baseRevisionForSaving = false;
 
 	/**
 	 * Checks if this EntityContent is valid for saving.
@@ -53,17 +57,6 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Returns the EditEntity for the item or false if there is none.
-	 *
-	 * @since 0.1
-	 *
-	 * @return EditEntity|bool
-	 */
-	public function getEditEntity() {
-		return $this->editEntity;
 	}
 
 	/**
@@ -580,9 +573,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @param integer    $flags flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
 	 *
 	 * @param int|bool   $baseRevId
-	 * @param EditEntity $editEntity
 	 *
 	 * @see WikiPage::doEditContent
+	 *
+	 * @todo: move logic into WikiPageEntityStore and make this method a deprecated adapter.
 	 *
 	 * @return \Status Success indicator, like the one returned by WikiPage::doEditContent().
 	 */
@@ -590,8 +584,7 @@ abstract class EntityContent extends AbstractContent {
 		$summary = '',
 		User $user = null,
 		$flags = 0,
-		$baseRevId = false,
-		EditEntity $editEntity = null
+		$baseRevId = false
 	) {
 		wfProfileIn( __METHOD__ );
 
@@ -612,7 +605,7 @@ abstract class EntityContent extends AbstractContent {
 		//XXX: very ugly and brittle hack to pass info to prepareSave so we can check inside a db transaction
 		//     whether an edit has occurred after EditEntity checked for conflicts. If we had nested
 		//     database transactions, we could simply check here.
-		$this->editEntity = $editEntity;
+		$this->baseRevisionForSaving = $baseRevId;
 
 		// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clearPreparedEdit
 		//       may cause the old content to be loaded from the database again. This may be
@@ -645,7 +638,7 @@ abstract class EntityContent extends AbstractContent {
 			$status->value['revision'] = $page->getRevision();
 		}
 
-		$this->editEntity = null;
+		$this->baseRevisionForSaving = false;
 
 		wfProfileOut( __METHOD__ );
 		return $status;
@@ -671,11 +664,11 @@ abstract class EntityContent extends AbstractContent {
 			return $status;
 		}
 
-		// If editEntity is set, check whether the current revision is still what
-		// the EditEntity thought it was.
+		// If baseRevisionForSaving is set, check whether the current revision is still what
+		// the caller of save() thought it was.
 		// If it isn't, then someone managed to squeeze in an edit after we checked for conflicts.
-		if ( $this->editEntity !== null && $page->getRevision() !== null ) {
-			if ( $page->getRevision()->getId() !== $this->editEntity->getCurrentRevisionId() ) {
+		if ( $this->baseRevisionForSaving !== false && $page->getRevision() !== null ) {
+			if ( $page->getRevision()->getId() !== $this->baseRevisionForSaving ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ': encountered late edit conflict: '
 					. 'current revision changed after regular conflict check.' );
 				$status->fatal('edit-conflict');
