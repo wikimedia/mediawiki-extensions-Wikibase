@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_d9ad0982",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 45
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T11:50:41Z",
+      "side": 1,
+      "message": "As far as I can tell this is the only way to pass the precision in from the UI when using the auto input expander (or whatever it is called).\nIf we have these options we can construct the TimeValue ourselves, if not it has to be passed into another parser to be able to parse the precision etc.",
+      "parentUuid": "4e04eb01_b82b62da",
+      "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_98266610",
         "filename": "lib/includes/parsers/YearTimeParser.php",
         "patchSetId": 45
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_39a50d9b",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 45
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T11:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_98266610",
+      "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_5820def1",
         "filename": "lib/includes/parsers/YearTimeParser.php",
         "patchSetId": 45
@@ -64,6 +100,24 @@
       "writtenOn": "2014-02-28T15:43:13Z",
       "side": 1,
       "message": "\"Anno Domini\" is used as a prefix, while \"AD\" is used as a suffix...",
+      "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_19b491ce",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 45
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-03T11:50:41Z",
+      "side": 1,
+      "message": "The current JS doesn\u0027t parse dates such as Anno Domini 445 so I will not add this yet, could of course be done in a patch further down the line",
+      "parentUuid": "4e04eb01_5820def1",
       "revId": "f0263f20072134b0d68ad9750c11d4c5663e9646",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
