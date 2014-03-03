@@ -826,6 +826,7 @@ $messages['ce'] = array(
 	'wikibase-property-notfound' => 'Свойства «$1» ца карайо',
 	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
 	'wikibase-rc-hide-wikidata-hide' => 'Къайлабаха',
+	'wikibase-rc-hide-wikidata-show' => 'Гайта',
 	'wikibase-rc-show-wikidata-pref' => 'Керла нисдаршан могӀамехь гайта Викихаамаш чохь хила хийцамаш',
 	'wikibase-rc-wikibase-edit-title' => 'Викихаамашкахь бина хийцам',
 	'wikibase-watchlist-show-changes-pref' => 'Викихаамаш чохь хийла хийцамаш гайта тергаме могӀам чохь',
@@ -1276,8 +1277,6 @@ $messages['el'] = array(
  * @author Shirayuki
  */
 $messages['en-gb'] = array(
-	'wikibase-rc-hide-wikidata-hide' => 'Slėpti',
-	'wikibase-rc-hide-wikidata-show' => 'Rodyti',
 	'wikibase-error-serialize-error' => 'Failed to serialise data',
 );
 
@@ -1637,6 +1636,8 @@ $messages['fr'] = array(
 	'wikibase-property-notfound' => 'Propriété $1 non trouvée.',
 	'wikibase-property-notsupportedyet' => 'Wikibase ne supporte pas encore de type de propriété pour la propriété $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Masquer',
+	'wikibase-rc-hide-wikidata-show' => 'Afficher',
 	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Modification de Wikidata.',
@@ -2050,6 +2051,8 @@ $messages['ia'] = array(
 	'wikibase-property-notfound' => 'Proprietate $1 non trovate.',
 	'wikibase-property-notsupportedyet' => 'Wikibase non supporta ancora le typo de proprietate pro le proprietate $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Celar',
+	'wikibase-rc-hide-wikidata-show' => 'Monstrar',
 	'wikibase-rc-show-wikidata-pref' => 'Monstrar modificationes de Wikidata in le modificationes recente',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Modification de Wikidata',
@@ -2282,6 +2285,8 @@ $messages['it'] = array(
 	'wikibase-property-notfound' => 'Proprietà $1 non trovata.',
 	'wikibase-property-notsupportedyet' => 'Wikibase non supporta ancora il tipo di proprietà per la proprietà $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Nascondi',
+	'wikibase-rc-hide-wikidata-show' => 'Mostra',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Questa è una modifica su Wikidata',
@@ -2341,6 +2346,8 @@ $messages['ja'] = array(
 	'wikibase-property-notfound' => 'プロパティ $1 が見つかりません。',
 	'wikibase-property-notsupportedyet' => 'ウィキベースはプロパティ「$1」のプロパティ種別にまだ対応していません。',
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
+	'wikibase-rc-hide-wikidata-hide' => '非表示',
+	'wikibase-rc-hide-wikidata-show' => '表示',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 	'wikibase-rc-wikibase-edit-letter' => 'デ',
 	'wikibase-rc-wikibase-edit-title' => 'ウィキデータの編集',
@@ -2894,6 +2901,8 @@ $messages['mk'] = array(
 	'wikibase-property-notfound' => 'Својството „$1“ не е пронајдено.',
 	'wikibase-property-notsupportedyet' => 'Викибазата сè уште не поддржува својства од типот „$1“.',
 	'wikibase-rc-hide-wikidata' => '$1 Википодатоци',
+	'wikibase-rc-hide-wikidata-hide' => 'Скриј',
+	'wikibase-rc-hide-wikidata-show' => 'Прикажи',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
 	'wikibase-rc-wikibase-edit-letter' => 'ВП',
 	'wikibase-rc-wikibase-edit-title' => 'Уредување на Википодатоците',
@@ -3741,6 +3750,7 @@ $messages['ru'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase пока не поддерживает тип свойства «$1».',
 	'wikibase-rc-hide-wikidata' => '$1 Викиданные',
 	'wikibase-rc-hide-wikidata-hide' => 'Скрыть',
+	'wikibase-rc-hide-wikidata-show' => 'Показать',
 	'wikibase-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
 	'wikibase-rc-wikibase-edit-letter' => 'д',
 	'wikibase-rc-wikibase-edit-title' => 'Правка Викиданных',
@@ -3833,6 +3843,7 @@ $messages['sgs'] = array(
 );
 
 /** Sinhala (සිංහල)
+ * @author Sahan.ssw
  * @author පසිඳු කාවින්ද
  */
 $messages['si'] = array(
@@ -3844,6 +3855,7 @@ $messages['si'] = array(
 	'wikibase-editlinks' => 'සබැඳි සංස්කරණය කරන්න',
 	'wikibase-editlinkstitle' => 'අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න',
 	'wikibase-rc-hide-wikidata' => '$1 විකිදත්ත',
+	'wikibase-rc-hide-wikidata-hide' => 'සඟවන්න',
 	'wikibase-rc-show-wikidata-pref' => 'මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න',
 );
 
@@ -4524,6 +4536,8 @@ $messages['zh-hans'] = array(
 	'wikibase-property-notfound' => '未找到$1属性。',
 	'wikibase-property-notsupportedyet' => '维基数据库还不支持$1属性的属性类型。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
+	'wikibase-rc-hide-wikidata-hide' => '隐藏',
+	'wikibase-rc-hide-wikidata-show' => '显示',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 	'wikibase-rc-wikibase-edit-letter' => '数',
 	'wikibase-rc-wikibase-edit-title' => '维基数据编辑',
@@ -4591,6 +4605,8 @@ $messages['zh-hant'] = array(
 	'wikibase-property-notfound' => '$1屬性未找到。',
 	'wikibase-property-notsupportedyet' => 'Wikibase尚未支援$1屬性。',
 	'wikibase-rc-hide-wikidata' => '$1維基數據',
+	'wikibase-rc-hide-wikidata-hide' => '隱藏',
+	'wikibase-rc-hide-wikidata-show' => '顯示',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中顯示維基數據的編輯',
 	'wikibase-rc-wikibase-edit-letter' => '編',
 	'wikibase-rc-wikibase-edit-title' => '維基數據編輯',

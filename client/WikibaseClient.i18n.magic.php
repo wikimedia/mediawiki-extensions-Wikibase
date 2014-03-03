@@ -68,6 +68,12 @@ $magicWords['fr'] = array(
 	'property' => array( 0, 'propriété' ),
 );
 
+/** Hindi (हिन्दी) */
+$magicWords['hi'] = array(
+	'noexternallanglinks' => array( 0, 'कोई_अंतरविकी_कड़ियाँ_नहीं', 'कोई_अंतरविकि_कड़ियाँ_नहीं' ),
+	'property' => array( 0, 'गुण' ),
+);
+
 /** Korean (한국어) */
 $magicWords['ko'] = array(
 	'noexternallanglinks' => array( 0, '바깥언어링크없음', '바깥언어고리없음' ),

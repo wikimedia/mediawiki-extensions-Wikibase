@@ -9774,9 +9774,9 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creata una proprietà [$2] con {{PLURAL:$1|valore|valori}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Link a altri oggetti nel progetto. Durante l\'immissione del "Elemento" spazio-nomi su Wikidata si cerccheranno le voci corrispondenti. Esso è composto di un testo singolo  per campo di immissione .',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Collega ad altri elementi nel progetto. Durante l\'inserimento verranno cercati gli elementi corrispondenti nel namespace "Item" di Wikidata. Consiste in un unico campo di testo.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'File multimediale su Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Link a file archiviati in Wikimedia Commons. Durante l\'immissione del namespace "File" su Commons cercato voci corrispondenti.',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Collega a file archiviati su Wikimedia Commons. Durante l\'inserimento verranno cercati gli elementi corrispondenti nel namespace "File" di Commons.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinate geografiche',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Campo dati letterale per una posizione geografica indicata come latitudine-longitudine in gms o gradi decimali per il corpo stellare indicato. I valori predefiniti sono "Terra" e "WGS84". Aggiunge risoluzione e intervallo di valori.
 * latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
