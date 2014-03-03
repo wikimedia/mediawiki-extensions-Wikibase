@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_d9174955",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 2354,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-03T14:06:51Z",
+      "side": 1,
+      "message": "The Translatewiki folks don\u0027t like use to provide languages other than en and qqq with the original commit. Not sure why...",
+      "revId": "fb3d7ab42f114d5df8173fcdb8bcb354401ad90b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
