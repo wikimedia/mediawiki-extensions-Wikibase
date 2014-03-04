@@ -35,7 +35,7 @@
 		"files" : [
 			"WikibaseDataModel.php"
 		],
-		"psr-0": {
+		"psr-4": {
 			"Wikibase\\DataModel\\": "src/"
 		}
 	}

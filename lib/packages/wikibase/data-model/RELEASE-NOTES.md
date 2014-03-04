@@ -6,6 +6,10 @@
 
 * The PHPUnit bootstrap file now works again on Windows
 
+#### Improvements
+
+* Changed class loading from PSR-0 to PSR-4
+
 ## Version 0.6 (2013-12-23)
 
 #### Improvements
