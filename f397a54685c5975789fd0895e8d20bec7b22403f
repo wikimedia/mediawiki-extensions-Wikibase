@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_bbad8a82",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T17:38:01Z",
+      "side": 1,
+      "message": "\u0027ISO timestamp\u0027 lowercased (not really sure, probably ask our native speakers).",
+      "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_dbddf618",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T17:38:01Z",
+      "side": 1,
+      "message": "I\u0027m still confused by our discussion. If this is intended then the description below should explain why this is called \u0027Amount\u0027.",
+      "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_bbe46adc",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T17:38:01Z",
+      "side": 1,
+      "message": "See comment above.",
+      "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7bcee260",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T17:38:01Z",
+      "side": 1,
+      "message": "I know there are many reasons why this is good practice (like in the function below). But in this specific case I find $html \u003d Html::openElement( ... ) easier to read.",
+      "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
