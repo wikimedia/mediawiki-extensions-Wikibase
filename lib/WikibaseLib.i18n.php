@@ -59,6 +59,10 @@ $messages['en'] = array(
 	'wikibase-timedetails-precision' => 'Precision',
 	'wikibase-timedetails-before' => 'Before',
 	'wikibase-timedetails-after' => 'After',
+	'wikibase-globedetails-longitude' => 'Longitude',
+	'wikibase-globedetails-latitude' => 'Latitude',
+	'wikibase-globedetails-precision' => 'Precision',
+	'wikibase-globedetails-globe' => 'Globe',
 	'wikibase-replicationnote' => 'Please notice that it can take several minutes until the changes are visible on all wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Wikipedia pages linked to this item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
@@ -173,6 +177,10 @@ Note that the default message says the user shall "reload and save", but after a
 	'wikibase-timedetails-precision' => 'Label used for the "precision" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-timedetails-before' => 'Label used for the "before" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-timedetails-after' => 'Label used for the "after" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-globedetails-longitude' => 'Label used for the "longitude" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-globedetails-latitude' => 'Label used for the "latitude" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-globedetails-precision' => 'Label used for the "precision" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-globedetails-globe' => 'Label used for the "globe" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.
 Preceded by message {{msg-mw|Wikibase-linkitem-success-link}}',
 	'wikibase-sitelinks-wikipedia' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
