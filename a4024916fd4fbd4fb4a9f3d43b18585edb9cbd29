@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_e026c1b4",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:15Z",
+      "side": 1,
+      "message": "add a use EntityStore!",
+      "revId": "a4024916fd4fbd4fb4a9f3d43b18585edb9cbd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_80101d54",
+        "filename": "lib/includes/store/StorageException.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:15Z",
+      "side": 1,
+      "message": "well this all looks a bit ugly and wrong ;p",
+      "revId": "a4024916fd4fbd4fb4a9f3d43b18585edb9cbd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_00240dac",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:15Z",
+      "side": 1,
+      "message": "might be nicer to have a id( $user instanceof User ) here instead of just making sure it is an object!",
+      "revId": "a4024916fd4fbd4fb4a9f3d43b18585edb9cbd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e0748198",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:15Z",
+      "side": 1,
+      "message": "string not String",
+      "revId": "a4024916fd4fbd4fb4a9f3d43b18585edb9cbd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_0072cdab",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:15Z",
+      "side": 1,
+      "message": "ugly extra newline ;p",
+      "revId": "a4024916fd4fbd4fb4a9f3d43b18585edb9cbd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_405fb513",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:15Z",
+      "side": 1,
+      "message": "do we really need to say we return nothing in phpdoc?",
+      "revId": "a4024916fd4fbd4fb4a9f3d43b18585edb9cbd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
