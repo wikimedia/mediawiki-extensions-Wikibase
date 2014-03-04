@@ -68,7 +68,8 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'commonsMedia', new StringValue( 'Foo/bar.jpg' ), false, 'illegal character: slash' ),
 			array( 'commonsMedia', new StringValue( 'Foo\bar.jpg' ), false, 'illegal character: backslash' ),
 			array( 'commonsMedia', new StringValue( 'Äöü.jpg' ), true, 'Unicode support' ),
-			array( 'commonsMedia', new StringValue( ' Foo.jpg ' ), false, 'Untrimmed input is forbidden' ),
+			array( 'commonsMedia', new StringValue( ' Foo.jpg' ), false, 'media name with leading space' ),
+			array( 'commonsMedia', new StringValue( 'Foo.jpg ' ), false, 'media name with trailing space' ),
 
 			//string
 			array( 'string', 'Foo', false, 'StringValue expected, string supplied' ),
@@ -78,7 +79,8 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'string', new StringValue( 'Äöü' ), true, 'Unicode support' ),
 			array( 'string', new StringValue( str_repeat('x', 390) ), true, 'long, but not too long' ),
 			array( 'string', new StringValue( str_repeat('x', 401) ), false, 'too long' ),
-			array( 'string', new StringValue( ' Foo ' ), false, 'Untrimmed' ),
+			array( 'string', new StringValue( ' Foo' ), false, 'string with leading space' ),
+			array( 'string', new StringValue( 'Foo ' ), false, 'string with trailing space' ),
 
 			//time
 			array( 'time', 'Foo', false, 'TimeValue expected, string supplied' ),
@@ -153,6 +155,9 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'url', new StringValue( 'javascript:alert("evil")' ), false, 'JavaScript URL' ),
 			array( 'url', new StringValue( 'http://' ), false, 'bad http URL' ),
 			array( 'url', new StringValue( 'http://' . str_repeat('x', 505) ), false, 'URL too long' ),
+
+			array( 'url', new StringValue( ' http://acme.com' ), false, 'URL with leading space' ),
+			array( 'url', new StringValue( 'http://acme.com ' ), false, 'URL with trailing space' ),
 		);
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
