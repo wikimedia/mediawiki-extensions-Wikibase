@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_5bafa6de",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T16:53:11Z",
+      "side": 1,
+      "message": "I guess this should have the $uncached parameter.",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_bbaa2acf",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T16:53:11Z",
+      "side": 1,
+      "message": "The method doesn\u0027t have a parameter.\nAnd shouldn\u0027t this be a constant?",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1bb91e29",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T16:53:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be at the top of the class? Style guide wise? I\u0027m not sure if this is in our style guide.",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_db8a966d",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T16:53:11Z",
+      "side": 1,
+      "message": "When does this throw an exception?",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7b9b82c1",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T16:53:11Z",
+      "side": 1,
+      "message": "Is this intentional?",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9bd2ce5b",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T16:53:11Z",
+      "side": 1,
+      "message": "I saw this \"XXX:\" on other places. Does it mean something?",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5bc44694",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T16:53:11Z",
+      "side": 1,
+      "message": "Why not put all three in a single if ( ... || ... || ... )? In my opinion this is easier to read, but you know, I\u0027m not always right. ;-)",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
