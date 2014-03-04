@@ -1882,7 +1882,7 @@ $messages['hi'] = array(
 	'wikibase-comment-linked' => 'विकिडेटा आइटम इस पृष्ठ के साथ जोड़ा गया।',
 	'wikibase-comment-unlink' => 'इस पृष्ठ को विकिडेटा आइटम से हटा दिया गया। भाषा कड़ियाँ हटाईं।',
 	'wikibase-comment-restore' => 'सम्बन्धित विकिडेटा आइटम अनष्ट किया गया। भाषा कड़ियाँ बहाल हुईं।',
-	'wikibase-comment-update' => 'भाषा कड़ियाँ अद्यतन हुईं।', # Fuzzy
+	'wikibase-comment-update' => 'विकिडाटा आइटम परिवर्तित',
 	'wikibase-comment-sitelink-add' => 'भाषा कड़ी जोड़ी: $1',
 	'wikibase-comment-sitelink-change' => 'भाषा कड़ी $1 से $2 में बदल दी गई',
 	'wikibase-comment-sitelink-remove' => 'भाषा कड़ी हटा दी: $1',
@@ -2470,6 +2470,7 @@ $messages['kk-cyrl'] = array(
 
 /** Korean (한국어)
  * @author ChongDae
+ * @author Hym411
  * @author Kwj2772
  * @author 아라
  */
@@ -2509,6 +2510,8 @@ $messages['ko'] = array(
 	'wikibase-property-notfound' => '$1 속성이 없습니다.',
 	'wikibase-property-notsupportedyet' => '위키베이스에서 $1 속성에 대한 유형을 지원하지 않습니다.',
 	'wikibase-rc-hide-wikidata' => '위키데이터를 $1',
+	'wikibase-rc-hide-wikidata-hide' => '숨기기',
+	'wikibase-rc-hide-wikidata-show' => '보이기',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
 	'wikibase-rc-wikibase-edit-letter' => '데',
 	'wikibase-rc-wikibase-edit-title' => '위키데이터 편집',
@@ -2962,6 +2965,8 @@ $messages['ml'] = array(
 	'wikibase-property-notfound' => '$1 എന്ന ഗുണം കണ്ടെത്താനായില്ല.',
 	'wikibase-property-notsupportedyet' => 'വിക്കിബേസിൽ ഇതുവരെ $1 തരത്തിലുള്ള ഗുണം പിന്തുണയ്ക്കുന്നില്ല.',
 	'wikibase-rc-hide-wikidata' => 'വിക്കിഡേറ്റ $1',
+	'wikibase-rc-hide-wikidata-hide' => 'മറയ്ക്കുക',
+	'wikibase-rc-hide-wikidata-show' => 'പ്രദർശിപ്പിക്കുക',
 	'wikibase-rc-show-wikidata-pref' => 'സമീപകാല മാറ്റങ്ങളിൽ വിക്കിഡേറ്റാ തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക',
 	'wikibase-rc-wikibase-edit-letter' => '(ഡേ.)',
 	'wikibase-rc-wikibase-edit-title' => 'വിക്കിഡേറ്റ തിരുത്ത്',
@@ -3222,6 +3227,7 @@ $messages['nds-nl'] = array(
  * @author Multichill
  * @author Servien
  * @author Siebrand
+ * @author Sjoerddebruin
  */
 $messages['nl'] = array(
 	'wikibase-client-desc' => 'Client voor de uitbreiding Wikibase',
@@ -3259,6 +3265,8 @@ $messages['nl'] = array(
 	'wikibase-property-notfound' => 'Eigenschap $1 niet gevonden.',
 	'wikibase-property-notsupportedyet' => 'Wikibase ondersteunt het eigenschapstype voor de eigenschap $1 nog niet.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-hide-wikidata-hide' => 'Verbergen',
+	'wikibase-rc-hide-wikidata-show' => 'Weergeven',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Wikidatabewerking',
@@ -3281,27 +3289,28 @@ $messages['nl'] = array(
 /** Norwegian Nynorsk (norsk nynorsk)
  * @author Jeblad
  * @author Njardarlogar
+ * @author Roarjo
  */
 $messages['nn'] = array(
 	'wikibase-client-desc' => 'Klient for Wikibase-utvidinga',
 	'specialpages-group-wikibaseclient' => 'Wikidata-klient',
-	'tooltip-t-wikibase' => 'Lenkje til tilknytt datasett',
-	'wikibase-after-page-move' => 'Du kan òg [$1 oppdatera] det tilknytte Wikidata-settet for å halda språklenkjene på den flytte sida ved like.',
-	'wikibase-after-page-move-queued' => '[$1 Datasettet på Wikidata] som er knytt til sida vil snart verta automatisk oppdatert.',
-	'wikibase-comment-remove' => 'Tilknytt Wikidata-sett sletta. Språklenkjer fjerna.',
-	'wikibase-comment-linked' => 'Eit Wikidata-sett har vorte lenkja til sida.',
-	'wikibase-comment-unlink' => 'Lenkinga til sida har vorte fjerna frå Wikidata-settet. Språklenkjer fjerna.',
-	'wikibase-comment-restore' => 'Tilknytt Wikidata-sett attoppretta. Språklenkjer lagde inn att.',
-	'wikibase-comment-update' => 'Wikidata-datasett vart endra',
+	'tooltip-t-wikibase' => 'Lenkje til tilknytt element',
+	'wikibase-after-page-move' => 'Du kan òg [$1 oppdatera] det tilknytte Wikidata-elementet for å halda språklenkjene på den flytte sida ved like.',
+	'wikibase-after-page-move-queued' => '[$1 Wikidata-elementet] som er knytt til sida vil snart verta automatisk oppdatert.',
+	'wikibase-comment-remove' => 'Tilknytt Wikidata-element er sletta. Språklenkjer er fjerna.',
+	'wikibase-comment-linked' => 'Eit Wikidata-element har vorte lenkja til sida.',
+	'wikibase-comment-unlink' => 'Lenkinga til sida har vorte fjerna frå Wikidata-elementet. Språklenkjer er fjerna.',
+	'wikibase-comment-restore' => 'Tilknytt Wikidata-element attoppretta. Språklenkjer lagde inn att.',
+	'wikibase-comment-update' => 'Wikidata-elementet vart endra',
 	'wikibase-comment-sitelink-add' => 'Språklenkje lagd til: $1',
 	'wikibase-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
 	'wikibase-comment-multi' => '{{PLURAL:$1|éi endring|$1 endringar}}',
-	'wikibase-dataitem' => 'Datasett',
+	'wikibase-dataitem' => 'Dataelement',
 	'wikibase-editlinks' => 'Endra lenkjer',
 	'wikibase-editlinkstitle' => 'Endra mellomspråklege lenkjer',
 	'wikibase-linkitem-addlinks' => 'Legg til lenkjer',
-	'wikibase-linkitem-alreadylinked' => 'Sida du ynskte å lenkja med er alt knytt til eit [$1 datasett] på det sentrale datalageret som lenkjer til $2 på denne nettstaden. Datasett kan berre ha tilknytt éi side per nettstad. Vel ei anna side å lenkja med.',
+	'wikibase-linkitem-alreadylinked' => 'Sida du ynskte å lenkja med er alt knytt til eit [$1 datasett] på det sentrale datalageret som lenkjer til $2 på denne nettstaden. Elementet kan berre ha tilknytt éi side per nettstad. Vel ei anna side å lenkja med.',
 	'wikibase-linkitem-close' => 'Lat att dialog og last sida på nytt',
 	'wikibase-linkitem-failure' => 'Ein ukjend feil oppstod under lenkinga av sida.',
 	'wikibase-linkitem-title' => 'Lenk til side',
@@ -3309,11 +3318,11 @@ $messages['nn'] = array(
 	'wikibase-linkitem-selectlink' => 'Vel ein nettstad og ei side du ynskjer å lenkja til denne sida.',
 	'wikibase-linkitem-input-site' => 'Språk:',
 	'wikibase-linkitem-input-page' => 'Side:',
-	'wikibase-linkitem-confirmitem-text' => 'Sida du valde er alt knytt til eit [$1 datasett på det sentrale datalageret vårt]. Stadfest at {{PLURAL:$2|sida vist|sidene viste}} under er {{PLURAL:$2|den|dei}} du ynskjer at skal lenkjast til denne sida.',
+	'wikibase-linkitem-confirmitem-text' => 'Sida du valde er alt knytt til eit [$1 element på det sentrale datalageret vårt]. Stadfest at {{PLURAL:$2|sida vist|sidene viste}} under er {{PLURAL:$2|den|dei}} du ynskjer at skal lenkjast til denne sida.',
 	'wikibase-linkitem-confirmitem-button' => 'Stadfest',
 	'wikibase-linkitem-not-loggedin-title' => 'Du lyt vera innlogga',
 	'wikibase-linkitem-not-loggedin' => 'Du lyt vera innlogga på denne wikien og på det [$1 sentrale datalageret] for å nytta denne funksjonen.',
-	'wikibase-linkitem-success-link' => 'Sidene vart lenkja til kvarandre. Du kan finna objektet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
+	'wikibase-linkitem-success-link' => 'Sidene vart lenkja til kvarandre. Du kan finna elementet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
 	'wikibase-property-notfound' => 'Eigenskapen $1 vart ikkje funnen.',
 	'wikibase-property-notsupportedyet' => 'Wikibase stør enno ikkje eigenskapstypen for eigenskapen $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
@@ -3323,7 +3332,7 @@ $messages['nn'] = array(
 	'wikibase-watchlist-show-changes-pref' => 'Vis Wikidata-endringar på overvakingslista di',
 	'wikibase-error-serialize-error' => 'Kunne ikkje serialisera data',
 	'wikibase-error-invalid-entity-id' => 'Den oppgjevne ID-en er ukjend for systemet. Bruk ein gild einings-ID.',
-	'special-unconnectedpages' => 'Sider som ikkje er kopla til datasett',
+	'special-unconnectedpages' => 'Sider som ikkje er kopla til element',
 	'wikibase-unconnectedpages-legend' => 'Val for ukopla sider',
 	'wikibase-unconnectedpages-page' => 'Byrja resultatlista med denne sida:',
 	'wikibase-unconnectedpages-submit' => 'Gå',
@@ -3331,7 +3340,7 @@ $messages['nn'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Sidetittelen kunne ikkje brukast med spørjinga og er ignorert.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Berre sider med mellomspråklege lenkjer',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|mellomspråkleg lenkje|mellomspråklege lenkjer}} på sida)',
-	'wikibase-pageinfo-entity-id' => 'Datasett-ID hjå Wikidata',
+	'wikibase-pageinfo-entity-id' => 'ID for Wikidata-element',
 	'wikibase-pageinfo-entity-id-none' => 'Ingen',
 	'wikibase-property-render-error' => 'Kunne ikkje visa eigenskapen $1: $2',
 );
@@ -3820,6 +3829,14 @@ $messages['scn'] = array(
 	'wikibase-pageinfo-entity-id' => 'ID elimentu Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Nuddu',
 	'wikibase-property-render-error' => 'Sfallìu a rènniri la prupritati $1: $2',
+);
+
+/** Scots (Scots)
+ * @author John Reid
+ */
+$messages['sco'] = array(
+	'wikibase-rc-hide-wikidata-hide' => 'Skauk',
+	'wikibase-rc-hide-wikidata-show' => 'Shaw',
 );
 
 /** Samogitian (žemaitėška)
