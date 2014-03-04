@@ -89,6 +89,7 @@ class WikibaseValueFormatterBuilders {
 		// Falls back to HTML display formatters.
 		SnakFormatter::FORMAT_HTML_DIFF => array(
 			'PT:quantity' => 'Wikibase\Lib\QuantityDetailsFormatter',
+			'PT:time' => 'Wikibase\Lib\TimeDetailsFormatter',
 		),
 	);
 
