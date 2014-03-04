@@ -11,5 +11,8 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	// TODO
+	public function testTodo() {
+		$this->assertTrue( (boolean)'TODO' );
+	}
 
 }
