@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wikibase\DataModel\Deserializers;
+namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use DataValues\StringValue;
 use Deserializers\Deserializer;
