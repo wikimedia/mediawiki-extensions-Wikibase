@@ -52,6 +52,13 @@ $messages['en'] = array(
 	'wikibase-quantitydetails-upperbound' => 'Upper bound',
 	'wikibase-quantitydetails-lowerbound' => 'Lower bound',
 	'wikibase-quantitydetails-unit' => 'Unit',
+	'wikibase-timedetails-time' => 'Time',
+	'wikibase-timedetails-isotime' => 'ISO Timestamp',
+	'wikibase-timedetails-timezone' => 'Timezone',
+	'wikibase-timedetails-calendar' => 'Calendar',
+	'wikibase-timedetails-precision' => 'Precision',
+	'wikibase-timedetails-before' => 'Before',
+	'wikibase-timedetails-after' => 'After',
 	'wikibase-replicationnote' => 'Please notice that it can take several minutes until the changes are visible on all wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Wikipedia pages linked to this item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
@@ -159,6 +166,13 @@ Note that the default message says the user shall "reload and save", but after a
 	'wikibase-quantitydetails-lowerbound' => 'Label used for the "lower bound" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.',
 	'wikibase-quantitydetails-unit' => 'Label used for the "unit" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.
 {{Identical|Unit}}',
+	'wikibase-timedetails-time' => 'Label used for the rendered version of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-timedetails-isotime' => 'Label used for the "isotime" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-timedetails-timezone' => 'Label used for the "timezone" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-timedetails-calendar' => 'Label used for the "calendar" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-timedetails-precision' => 'Label used for the "precision" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-timedetails-before' => 'Label used for the "before" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-timedetails-after' => 'Label used for the "after" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.
 Preceded by message {{msg-mw|Wikibase-linkitem-success-link}}',
 	'wikibase-sitelinks-wikipedia' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
