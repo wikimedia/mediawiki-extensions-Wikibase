@@ -36,7 +36,7 @@
 		"data-values/value-view": "~0.3.3",
 		"wikibase/data-model": "~0.6.0",
 		"diff/diff": ">=0.9",
-		"wikibase/easyrdf_lite": "*"
+		"wikibase/easyrdf_lite": "~0.8.1"
 	},
 	"autoload": {
 		"files" : [
