@@ -2,12 +2,8 @@
 
 ## Version 0.7 (dev)
 
-#### Bug fixes
-
+* Added TypedSnak value object
 * The PHPUnit bootstrap file now works again on Windows
-
-#### Improvements
-
 * Changed class loading from PSR-0 to PSR-4
 
 ## Version 0.6 (2013-12-23)
