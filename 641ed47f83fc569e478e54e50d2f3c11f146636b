@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_db33b65d",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T17:48:28Z",
+      "side": 1,
+      "message": "\u0027Precision\u0027 uppercase?",
+      "revId": "641ed47f83fc569e478e54e50d2f3c11f146636b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9b3d2e2c",
+        "filename": "lib/includes/formatters/GlobeCoordinateDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-04T17:48:28Z",
+      "side": 1,
+      "message": "Personally, I would remove this (see other change set).",
+      "revId": "641ed47f83fc569e478e54e50d2f3c11f146636b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
