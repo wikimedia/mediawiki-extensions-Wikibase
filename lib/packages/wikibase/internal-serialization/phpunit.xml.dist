@@ -13,7 +13,7 @@
          strict="true"
          verbose="true">
     <testsuites>
-        <testsuite name="DataModelSerialization">
+        <testsuite name="WikibaseInternalSerialization">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
