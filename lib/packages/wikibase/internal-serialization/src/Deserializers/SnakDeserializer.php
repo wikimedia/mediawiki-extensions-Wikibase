@@ -30,7 +30,7 @@ class SnakDeserializer implements Deserializer {
 	 * @return boolean
 	 */
 	public function isDeserializerFor( $serialization ) {
-		// TODO: Implement isDeserializerFor() method.
+		return false;
 	}
 
 }
