@@ -2,9 +2,14 @@
 
 namespace Wikibase\InternalSerialization\Deserializers;
 
+use DataValues\DataValue;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Exception;
+use LogicException;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
@@ -13,14 +18,46 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class SnakDeserializer implements Deserializer {
 
+	private $dataValueDeserializer;
+
+	public function __construct( Deserializer $dataValueDeserializer ) {
+		$this->dataValueDeserializer = $dataValueDeserializer;
+	}
+
 	/**
 	 * @param mixed $serialization
 	 *
 	 * @return Snak
 	 * @throws DeserializationException
+	 * @throws LogicException
 	 */
 	public function deserialize( $serialization ) {
-		// TODO: Implement deserialize() method.
+		$this->assertStructureIsValid( $serialization );
+
+		switch ( $serialization[0] ) {
+			case 'novalue':
+				return new PropertyNoValueSnak( $serialization[1] );
+			case 'somevalue':
+				return new PropertySomeValueSnak( $serialization[1] );
+			case 'value':
+				return $this->deserializeValueSnak( $serialization );
+		}
+
+		throw new LogicException();
+	}
+
+	private function deserializeValueSnak( array $serialization ) {
+		$dataValue = $this->dataValueDeserializer->deserialize(
+			array(
+				'type' => $serialization[2],
+				'value' => $serialization[3],
+			)
+		);
+
+		/**
+		 * @var DataValue $dataValue
+		 */
+		return new PropertyValueSnak( $serialization[1], $dataValue );
 	}
 
 	/**

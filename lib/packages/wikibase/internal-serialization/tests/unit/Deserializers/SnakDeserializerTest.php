@@ -2,7 +2,11 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use DataValues\StringValue;
 use Deserializers\Deserializer;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
 
 /**
@@ -19,7 +23,14 @@ class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$this->deserializer = new SnakDeserializer();
+		$dataValueDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+
+		$dataValueDeserializer->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( array( 'type' => 'string', 'value' => 'foo' ) ) )
+			->will( $this->returnValue( new StringValue( 'foo' ) ) );
+
+		$this->deserializer = new SnakDeserializer( $dataValueDeserializer );
 	}
 
 	public function invalidSerializationProvider() {
@@ -60,13 +71,53 @@ class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertCanDeserialize( array(
 			'value',
 			42,
-			'data-value-type',
-			'data-value-value'
+			'spam',
+			'spam'
 		) );
 	}
 
 	private function assertCanDeserialize( $serialization ) {
 		$this->assertTrue( $this->deserializer->isDeserializerFor( $serialization ) );
+	}
+
+	/**
+	 * @dataProvider invalidSerializationProvider
+	 */
+	public function testGivenInvalidSerialization_deserializeThrowsException( $serialization ) {
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->deserializer->deserialize( $serialization );
+	}
+
+	public function testNoValueSnakDeserialization() {
+		$this->assertEquals(
+			new PropertyNoValueSnak( 42 ),
+			$this->deserializer->deserialize( array(
+				'novalue',
+				42,
+			) )
+		);
+	}
+
+	public function testSomeValueSnakDeserialization() {
+		$this->assertEquals(
+			new PropertySomeValueSnak( 42 ),
+			$this->deserializer->deserialize( array(
+				'somevalue',
+				42,
+			) )
+		);
+	}
+
+	public function testValueSnakDeserialization() {
+		$this->assertEquals(
+			new PropertyValueSnak( 42, new StringValue( 'foo' ) ),
+			$this->deserializer->deserialize( array(
+				'value',
+				42,
+				'string',
+				'foo'
+			) )
+		);
 	}
 
 }
