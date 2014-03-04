@@ -32,5 +32,10 @@
 		"psr-4": {
 			"Wikibase\\InternalSerialization\\": "src/"
 		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
 	}
 }

@@ -50,7 +50,7 @@ as [Wikimedia Germany](https://wikimedia.de) employee for the [Wikidata project]
 
 ## Release notes
 
-### 0.1 (dev)
+### 1.0 (dev)
 
 * 
 
