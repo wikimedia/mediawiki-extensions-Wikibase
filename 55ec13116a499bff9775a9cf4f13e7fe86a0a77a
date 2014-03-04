@@ -144,6 +144,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_65d3e3d7",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-04T09:38:40Z",
+      "side": 1,
+      "message": "Ok, I\u0027m fine with this in this commit. I\u0027d have moved it further up right away to eliminate the problem, rather than moving it with this intermediate step. Thought you are right it is a step in the correct direction.",
+      "parentUuid": "4e04eb01_796dd52c",
+      "revId": "55ec13116a499bff9775a9cf4f13e7fe86a0a77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_5f902f46",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 5
