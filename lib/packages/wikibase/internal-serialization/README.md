@@ -56,6 +56,11 @@ as [Wikimedia Germany](https://wikimedia.de) employee for the [Wikidata project]
 
 ## Links
 
-* [Wikibase DataModel Serialization on Packagist](https://packagist.org/packages/wikibase/internal-serialization)
-* [Wikibase DataModel Serialization on TravisCI](https://travis-ci.org/wmde/WikibaseInternalSerialization)
+* [Wikibase InternalSerialization on Packagist](https://packagist.org/packages/wikibase/internal-serialization)
+* [Wikibase InternalSerialization on TravisCI](https://travis-ci.org/wmde/WikibaseInternalSerialization)
+
+## See also
+
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
+* [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization)
+* [Ask Serialization](https://github.com/wmde/AskSerialization)
