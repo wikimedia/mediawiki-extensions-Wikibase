@@ -112,10 +112,6 @@ namespace Wikibase {
 	/**
 	 * @deprecated since 0.6, use the base class instead.
 	 */
-	interface PropertySnak extends \Wikibase\DataModel\Snak\PropertySnak {}
-	/**
-	 * @deprecated since 0.6, use the base class instead.
-	 */
 	class PropertySomeValueSnak extends \Wikibase\DataModel\Snak\PropertySomeValueSnak {}
 	/**
 	 * @deprecated since 0.6, use the base class instead.
