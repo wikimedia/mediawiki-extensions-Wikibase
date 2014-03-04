@@ -1,5 +1,11 @@
 # Wikibase DataModel release notes
 
+## Version 0.7 (dev)
+
+#### Bug fixes
+
+* The PHPUnit bootstrap file now works again on Windows
+
 ## Version 0.6 (2013-12-23)
 
 #### Improvements
