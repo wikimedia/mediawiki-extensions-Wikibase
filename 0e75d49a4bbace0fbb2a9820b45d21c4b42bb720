@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_d4ee191f",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:48Z",
+      "side": 1,
+      "message": "+use EntityStore",
+      "revId": "0e75d49a4bbace0fbb2a9820b45d21c4b42bb720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_94f891e3",
+        "filename": "lib/includes/store/StorageException.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-04T11:52:48Z",
+      "side": 1,
+      "message": "could we sort out the comments in this file to use a single class block? :)",
+      "revId": "0e75d49a4bbace0fbb2a9820b45d21c4b42bb720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
