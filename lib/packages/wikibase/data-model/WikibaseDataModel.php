@@ -56,7 +56,6 @@ class_alias( 'Wikibase\DataModel\Entity\Entity', 'Wikibase\Entity' );
 class_alias( 'Wikibase\DataModel\Entity\Item', 'Wikibase\Item' );
 class_alias( 'Wikibase\DataModel\Entity\Property', 'Wikibase\Property' );
 class_alias( 'Wikibase\DataModel\Snak\PropertyNoValueSnak', 'Wikibase\PropertyNoValueSnak' );
-class_alias( 'Wikibase\DataModel\Snak\PropertySnak', 'Wikibase\PropertySnak' );
 class_alias( 'Wikibase\DataModel\Snak\PropertySomeValueSnak', 'Wikibase\PropertySomeValueSnak' );
 class_alias( 'Wikibase\DataModel\Snak\PropertyValueSnak', 'Wikibase\PropertyValueSnak' );
 class_alias( 'Wikibase\DataModel\Snak\Snak', 'Wikibase\Snak' );

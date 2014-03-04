@@ -5,6 +5,7 @@
 * Added TypedSnak value object
 * The PHPUnit bootstrap file now works again on Windows
 * Changed class loading from PSR-0 to PSR-4
+* Removed PropertySnak interface
 
 ## Version 0.6 (2013-12-23)
 

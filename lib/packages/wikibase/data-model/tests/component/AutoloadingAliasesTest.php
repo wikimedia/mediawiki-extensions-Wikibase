@@ -47,7 +47,6 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 				'Wikibase\Item',
 				'Wikibase\Property',
 				'Wikibase\PropertyNoValueSnak',
-				'Wikibase\PropertySnak',
 				'Wikibase\PropertySomeValueSnak',
 				'Wikibase\PropertyValueSnak',
 				'Wikibase\Snak',
