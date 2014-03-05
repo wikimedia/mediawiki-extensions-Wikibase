@@ -98,10 +98,10 @@ class SiteLink {
 	}
 
 	/**
-	 * Returns an array representing the claim.
-	 * Roundtrips with Claim::newFromArray
+	 * Returns an array representing the SiteLink, without the siteid.
 	 *
 	 * @since 0.5
+	 * @deprecated
 	 *
 	 * @return array
 	 */
@@ -119,10 +119,8 @@ class SiteLink {
 	 }
 
 	/**
-	 * Constructs a new SiteLink from an array
-	 * in the same format as SiteLink::toArray returns.
-	 *
 	 * @since 0.5
+	 * @deprecated
 	 *
 	 * @param string $siteId
 	 * @param string|array $data
@@ -154,6 +152,7 @@ class SiteLink {
 
 	/**
 	 * @since 0.5
+	 * @deprecated
 	 *
 	 * @param array $data
 	 *
