@@ -46,6 +46,9 @@ class SiteLinkList implements IteratorAggregate, Countable {
 
 	/**
 	 * @see IteratorAggregate::getIterator
+	 *
+	 * Returns a Traversable of SiteLink in which the keys are the site ids.
+	 *
 	 * @return Traversable|SiteLink[]
 	 */
 	public function getIterator() {

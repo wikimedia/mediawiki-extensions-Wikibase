@@ -108,4 +108,21 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetIteratorReturnsTraversableWithSiteIdKeys() {
+		$list = new SiteLinkList( array(
+			new SiteLink( 'first', 'one' ),
+			new SiteLink( 'second', 'two' ),
+			new SiteLink( 'third', 'tree' ),
+		) );
+
+		$this->assertEquals(
+			array(
+				'first' => new SiteLink( 'first', 'one' ),
+				'second' => new SiteLink( 'second', 'two' ),
+				'third' => new SiteLink( 'third', 'tree' ),
+			),
+			iterator_to_array( $list )
+		);
+	}
+
 }
