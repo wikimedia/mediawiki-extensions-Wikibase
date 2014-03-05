@@ -40,6 +40,74 @@
       "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_869b8e78",
+        "filename": "lib/includes/formatters/MediaWikiNumberLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T18:10:25Z",
+      "side": 1,
+      "message": "I\u0027m still very confused by this architecture. Why have an interface with the generic name \"Localizer\" that is in a \"number\" namespace (that can\u0027t be seen when looking at \"use ValueFormatters\\Localizer\" in this file) and can localize numbers only?\nSame for the Unlocalizer.",
+      "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e6db727a",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T18:10:25Z",
+      "side": 1,
+      "message": "I don\u0027t see a reason to not use \\d here. Or even better \\p{N}. Needs a bit of refactoring to not have it quoted by the preg_quote() below.",
+      "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_66c7629a",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T18:10:25Z",
+      "side": 1,
+      "message": "What\u0027s the reason for this?\nOr, why not allow all spaces (\\s or possibly \\p{Space}) instead of \\u0020 only?",
+      "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a640ca0a",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T18:10:25Z",
+      "side": 1,
+      "message": "Add math minus (\\u2212).\nPossibly use one of \\p{Math...} (not exactly sure, needs investigation and lots of test cases).",
+      "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
