@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_75aeea2c",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T11:32:16Z",
+      "side": 1,
+      "message": "dont need \nuse ValueFormatters\\Test\\MwTimeIsoFormatterTest;\nuse ValueFormatters\\TimeFormatter;",
+      "revId": "63d1ac7e065d58831ade94272b251871e8175450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_55abee19",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T11:32:16Z",
+      "side": 1,
+      "message": "i can has be private too?",
+      "revId": "63d1ac7e065d58831ade94272b251871e8175450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_35a4e246",
+        "filename": "lib/tests/phpunit/formatters/TimeDetailsFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T11:32:16Z",
+      "side": 1,
+      "message": "dont really need since",
+      "revId": "63d1ac7e065d58831ade94272b251871e8175450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
