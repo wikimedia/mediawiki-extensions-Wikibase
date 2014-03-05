@@ -25,8 +25,9 @@
 .ui-entityselector-list .ui-entityselector-aliases {
 	display: block;
 	overflow: hidden;
-	white-space: nowrap;
+	-o-text-overflow: ellipsis; /* Opera 9 to 10 */
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .ui-entityselector-list .ui-entityselector-section-container {
