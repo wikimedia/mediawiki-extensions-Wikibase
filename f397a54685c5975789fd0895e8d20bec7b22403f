@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_81701870",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T19:30:53Z",
+      "side": 1,
+      "message": "well, it\u0027s kind of a title, so i used title clase...",
+      "parentUuid": "4e04eb01_bbad8a82",
+      "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_dbddf618",
         "filename": "lib/WikibaseLib.i18n.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-04T17:38:01Z",
       "side": 1,
       "message": "I\u0027m still confused by our discussion. If this is intended then the description below should explain why this is called \u0027Amount\u0027.",
+      "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c152a0dd",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T19:30:53Z",
+      "side": 1,
+      "message": "it\u0027S not, it\u0027S a copy\u0026paste mistake :)",
+      "parentUuid": "4e04eb01_dbddf618",
       "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
