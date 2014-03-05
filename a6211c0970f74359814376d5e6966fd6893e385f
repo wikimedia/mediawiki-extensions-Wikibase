@@ -34,6 +34,24 @@
       "revId": "a6211c0970f74359814376d5e6966fd6893e385f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e0deba43",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-05T13:32:57Z",
+      "side": 1,
+      "message": "what about returning an empty array already now?",
+      "parentUuid": "4e04eb01_40668eb9",
+      "revId": "a6211c0970f74359814376d5e6966fd6893e385f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
