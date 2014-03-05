@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_7b2c9bf2",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-05T17:17:58Z",
+      "side": 1,
+      "message": "just set it already to ~0.3.0. and please remove the comment. that\u0027s not valid json :)",
+      "range": {
+        "startLine": 30,
+        "startChar": 31,
+        "endLine": 30,
+        "endChar": 33
+      },
+      "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
