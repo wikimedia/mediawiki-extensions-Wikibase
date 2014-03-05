@@ -537,7 +537,8 @@ class WikibaseValueFormatterBuilders {
 	 */
 	protected static function newQuantityFormatter( FormatterOptions $options, $builders ) {
 		//TODO: use a builder for this DecimalFormatter
-		$localizer = new MediaWikiNumberLocalizer();
+		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
+		$localizer = new MediaWikiNumberLocalizer( $language );
 		$decimalFormatter = new DecimalFormatter( $options, $localizer );
 		return new QuantityFormatter( $decimalFormatter, $options );
 	}

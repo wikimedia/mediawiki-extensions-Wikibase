@@ -1,4 +1,5 @@
 <?php
+use ValueParsers\ValueParser;
 
 /**
  * Entry point for the Wikibase Repository extension.
@@ -77,10 +78,9 @@ call_user_func( function() {
 	};
 
 	$wgValueParsers['quantity'] = function( ValueParsers\ParserOptions $options ) {
-		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer();
-		return new \ValueParsers\QuantityParser(
-			new \ValueParsers\DecimalParser( $options, $unlocalizer ),
-			$options );
+		$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
+		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language);
+		return new \ValueParsers\QuantityParser( $options, $unlocalizer );
 	};
 
 	$wgValueParsers['bool'] = 'ValueParsers\BoolParser';
