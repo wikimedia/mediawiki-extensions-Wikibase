@@ -11,11 +11,6 @@
 
 	var valueFormatterProvider = new vf.ValueFormatterFactory( vf.NullFormatter );
 
-	valueFormatterProvider.registerDataValueFormatter(
-		vf.StringFormatter,
-		dv.StringValue.TYPE
-	);
-
 	/**
 	 * Object representing the MediaWiki "ValueFormatters" extension.
 	 * @since 0.1

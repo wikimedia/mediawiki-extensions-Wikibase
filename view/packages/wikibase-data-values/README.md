@@ -15,7 +15,13 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
-### 0.3.2 (dev)
+### 0.4.0 (dev)
+
+#### Breaking changes
+
+* mw.ext.valueFormatters does not register valueFormatters.StringFormatter anymore
+
+### 0.3.2 (???)
 
 #### Bugfixes
 
