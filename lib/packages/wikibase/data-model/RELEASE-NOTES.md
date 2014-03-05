@@ -2,12 +2,21 @@
 
 ## Version 0.7 (dev)
 
+#### Improvements
+
 * Added TypedSnak value object
+* Added SiteLinkList value object
 * The PHPUnit bootstrap file now works again on Windows
 * Changed class loading from PSR-0 to PSR-4
-* Removed PropertySnak interface
+
+#### Deprecations
+
 * Deprecated SiteLink::toArray(), SiteLink::newFromArray(), SiteLink::getBadgesFromArray()
-* Added SiteLinkList value object
+
+#### Removals
+
+* Removed PropertySnak interface
+* Claims::getObjectType removed
 
 ## Version 0.6 (2013-12-23)
 
