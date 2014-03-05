@@ -60,23 +60,6 @@ class SnakDeserializer implements Deserializer {
 		return new PropertyValueSnak( $serialization[1], $dataValue );
 	}
 
-	/**
-	 * @since 1.0
-	 *
-	 * @param mixed $serialization
-	 *
-	 * @return boolean
-	 */
-	public function isDeserializerFor( $serialization ) {
-		try {
-			$this->assertStructureIsValid( $serialization );
-			return true;
-		}
-		catch ( Exception $e ) {
-			return false;
-		}
-	}
-
 	private function assertStructureIsValid( $serialization ) {
 		if ( !is_array( $serialization ) || $serialization === array() ) {
 			throw new DeserializationException( 'Serialization should be a non-empty array' );
