@@ -67,7 +67,7 @@
 		 * @see jQuery.valueview.Expert._getRawValue
 		 */
 		_getRawValue: function() {
-			return this._newValue === false ? this.$input.val() : this._newValue;
+			return ( this._newValue === false ? this.$input.val() : this._newValue ) || null;
 		},
 
 		/**
