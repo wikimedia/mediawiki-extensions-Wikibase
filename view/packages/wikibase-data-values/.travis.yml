@@ -11,3 +11,5 @@ notifications:
       - "chat.freenode.net#wikidata"
     on_success: never
     on_failure: always
+    template:
+      - "%{repository}/%{branch}/%{commit} : %{author} %{message} %{build_url}"
