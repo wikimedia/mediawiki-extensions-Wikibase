@@ -2,19 +2,15 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'time',
+define( [
+	'time/time',
 	'jquery',
 	'qunit',
-	'time.Time',
-	'time.validTimeDefinitions',
-	'time.Time.validate'
-];
-
-define( DEPS, function( time, $, QUnit ) {
+	'time/time.Time',
+	'tests/lib/time/time.validTimeDefinitions',
+	'time/time.Time.validate'
+], function( time, $, QUnit ) {
+	'use strict';
 
 	var Time = time.Time,
 		validTimeDefinitions = time.validTimeDefinitions;
@@ -114,5 +110,3 @@ define( DEPS, function( time, $, QUnit ) {
 	} );
 
 } );
-
-}( define ) );

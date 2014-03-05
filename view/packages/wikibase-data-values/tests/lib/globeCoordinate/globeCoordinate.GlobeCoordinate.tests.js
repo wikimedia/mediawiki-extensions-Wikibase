@@ -2,12 +2,13 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = ['globeCoordinate', 'jquery', 'qunit', 'globeCoordinate.GlobeCoordinate'];
-
-define( DEPS, function( globeCoordinate, $, QUnit ) {
+define( [
+	'globeCoordinate/globeCoordinate',
+	'jquery',
+	'qunit',
+	'globeCoordinate/globeCoordinate.GlobeCoordinate'
+], function( globeCoordinate, $, QUnit ) {
+	'use strict';
 
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
@@ -140,5 +141,3 @@ define( DEPS, function( globeCoordinate, $, QUnit ) {
 	} );
 
 } );
-
-}( define ) );

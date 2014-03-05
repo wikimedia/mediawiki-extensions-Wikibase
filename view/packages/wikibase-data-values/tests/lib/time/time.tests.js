@@ -2,16 +2,8 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'time',
-	'jquery',
-	'qunit',
-];
-
-define( DEPS, function( time, $, QUnit ) {
+define( ['time/time', 'jquery', 'qunit'], function( time, $, QUnit ) {
+	'use strict';
 
 	QUnit.module( 'Time.js: time' );
 
@@ -61,5 +53,3 @@ define( DEPS, function( time, $, QUnit ) {
 		} );
 	} );
 } );
-
-}( define ) );

@@ -2,12 +2,8 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = ['util.inherit', 'qunit'];
-
-define( DEPS, function( util, QUnit ) {
+define( ['util/util.inherit', 'qunit'], function( util, QUnit ) {
+	'use strict';
 
 	var namedFunction = function namedFunction() {};
 	if( namedFunction.name !== 'namedFunction' ) {
@@ -83,5 +79,3 @@ define( DEPS, function( util, QUnit ) {
 	);
 
 } );
-
-}( define ) );

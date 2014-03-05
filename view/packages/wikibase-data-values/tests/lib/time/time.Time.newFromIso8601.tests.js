@@ -2,18 +2,14 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'time.Time',
+define( [
+	'time/time.Time',
 	'jquery',
 	'qunit',
-	'time.Time.validate',
-	'time.validTimeDefinitions'
-];
-
-define( DEPS, function( Time, $, QUnit ) {
+	'time/time.Time.validate',
+	'tests/lib/time/time.validTimeDefinitions'
+], function( Time, $, QUnit ) {
+	'use strict';
 
 	QUnit.module( 'time.js: time.Time.newFromIso8601()' );
 
@@ -133,5 +129,3 @@ define( DEPS, function( Time, $, QUnit ) {
 	} );
 
 } );
-
-}( define ) );

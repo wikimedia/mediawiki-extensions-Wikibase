@@ -2,18 +2,14 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'dataValues',
-	'util.inherit',
-	'globeCoordinate.GlobeCoordinate',
-	'dataValues.DataValue.tests',
-	'dataValues.GlobeCoordinateValue'
-];
-
-define( DEPS, function( dv, util, GlobeCoordinate ) {
+define( [
+	'dataValues/dataValues',
+	'util/util.inherit',
+	'globeCoordinate/globeCoordinate.GlobeCoordinate',
+	'tests/src/dataValues.DataValue.tests',
+	'values/GlobeCoordinateValue'
+], function( dv, util, GlobeCoordinate ) {
+	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
 
@@ -50,5 +46,3 @@ define( DEPS, function( dv, util, GlobeCoordinate ) {
 	test.runTests( 'dataValues.GlobeCoordinateValue' );
 
 } );
-
-}( define ) );

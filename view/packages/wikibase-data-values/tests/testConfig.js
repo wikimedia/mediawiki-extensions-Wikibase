@@ -22,100 +22,21 @@ tests.config = ( function() {
 			qunit: 'lib/qunit/qunit',
 			'qunit.parameterize': 'lib/qunit.parameterize/qunit.parameterize',
 
-			'util.inherit': 'lib/util/util.inherit',
+			'util': 'lib/util',
 
-			'globeCoordinate': 'lib/globeCoordinate/globeCoordinate',
-			'globeCoordinate.Formatter': 'lib/globeCoordinate/globeCoordinate.Formatter',
-			'globeCoordinate.GlobeCoordinate': 'lib/globeCoordinate/globeCoordinate.GlobeCoordinate',
+			'globeCoordinate': 'lib/globeCoordinate',
+			'time': 'lib/time',
 
-			'time': 'lib/time/time',
-			'time.Parser': 'lib/time/time.Parser',
-			'time.Time': 'lib/time/time.Time',
-			'time.Time.validate': 'lib/time/time.Time.validate',
+			'dataValues': 'src',
+			'values': 'src/values',
 
-			'dataValues': 'src/dataValues',
-			'dataValues.DataValue': 'src/DataValue',
+			'valueFormatters': 'src/valueFormatters',
+			'formatters': 'src/valueFormatters/formatters',
 
-			'dataValues.BoolValue': 'src/values/BoolValue',
-			'dataValues.DecimalValue': 'src/values/DecimalValue',
-			'dataValues.GlobeCoordinateValue': 'src/values/GlobeCoordinateValue',
-			'dataValues.MonolingualTextValue': 'src/values/MonolingualTextValue',
-			'dataValues.MultilingualTextValue': 'src/values/MultilingualTextValue',
-			'dataValues.StringValue': 'src/values/StringValue',
-			'dataValues.NumberValue': 'src/values/NumberValue',
-			'dataValues.TimeValue': 'src/values/TimeValue',
-			'dataValues.QuantityValue': 'src/values/QuantityValue',
-			'dataValues.UnknownValue': 'src/values/UnknownValue',
-			'dataValues.UnUnserializableValue': 'src/values/UnUnserializableValue',
-
-			'valueFormatters': 'src/valueFormatters/valueFormatters',
-			'valueFormatters.ValueFormatterFactory': 'src/valueFormatters/ValueFormatterFactory',
-
-			'valueFormatters.NullFormatter': 'src/valueFormatters/formatters/NullFormatter',
-			'valueFormatters.StringFormatter': 'src/valueFormatters/formatters/StringFormatter',
-			'valueFormatters.ValueFormatter': 'src/valueFormatters/formatters/ValueFormatter',
-
-			'valueParsers': 'src/valueParsers/valueParsers',
-			'valueParsers.ValueParserFactory': 'src/valueParsers/ValueParserFactory',
-
-			'valueParsers.BoolParser': 'src/valueParsers/parsers/BoolParser',
-			'valueParsers.FloatParser': 'src/valueParsers/parsers/FloatParser',
-			'valueParsers.IntParser': 'src/valueParsers/parsers/IntParser',
-			'valueParsers.NullParser': 'src/valueParsers/parsers/NullParser',
-			'valueParsers.StringParser': 'src/valueParsers/parsers/StringParser',
-			'valueParsers.TimeParser': 'src/valueParsers/parsers/TimeParser',
-			'valueParsers.ValueParser': 'src/valueParsers/parsers/ValueParser',
-
-
-			'util.inherit.tests': 'tests/lib/util/util.inherit.tests',
-
-			'globeCoordinate.tests': 'tests/lib/globeCoordinate/globeCoordinate.tests',
-			'globeCoordinate.Formatter.tests': 'tests/lib/globeCoordinate/globeCoordinate.Formatter.tests',
-			'globeCoordinate.GlobeCoordinate.tests': 'tests/lib/globeCoordinate/globeCoordinate.GlobeCoordinate.tests',
-
-			'time.tests': 'tests/lib/time/time.tests',
-			'time.validTimeDefinitions': 'tests/lib/time/time.validTimeDefinitions',
-			'time.Parser.tests': 'tests/lib/time/time.Parser.tests',
-			'time.Time.knowsPrecision.tests': 'tests/lib/time/time.Time.knowsPrecision.tests',
-			'time.Time.maxPrecision.tests': 'tests/lib/time/time.Time.maxPrecision.tests',
-			'time.Time.minPrecision.tests': 'tests/lib/time/time.Time.minPrecision.tests',
-			'time.Time.newFromIso8601.tests': 'tests/lib/time/time.Time.newFromIso8601.tests',
-			'time.Time.tests': 'tests/lib/time/time.Time.tests',
-			'time.Time.validate.tests': 'tests/lib/time/time.Time.validate.tests',
-
-			'dataValues.tests': 'tests/src/dataValues.tests',
-			'dataValues.DataValue.tests': 'tests/src/dataValues.DataValue.tests',
-
-			'BoolValue.tests': 'tests/src/values/BoolValue.tests',
-			'DecimalValue.tests': 'tests/src/values/DecimalValue.tests',
-			'GlobeCoordinateValue.tests': 'tests/src/values/GlobeCoordinateValue.tests',
-			'MonolingualTextValue.tests': 'tests/src/values/MonolingualTextValue.tests',
-			'MultilingualTextValue.tests': 'tests/src/values/MultilingualTextValue.tests',
-			'StringValue.tests': 'tests/src/values/StringValue.tests',
-			'NumberValue.tests': 'tests/src/values/NumberValue.tests',
-			'TimeValue.tests': 'tests/src/values/TimeValue.tests',
-			'QuantityValue.tests': 'tests/src/values/QuantityValue.tests',
-			'UnknownValue.tests': 'tests/src/values/UnknownValue.tests',
-			'UnUnserializableValue.tests': 'tests/src/values/UnUnserializableValue.tests',
-
-			'valueFormatters.tests': 'tests/src/valueFormatters/valueFormatters.tests',
-			'valueFormatters.ValueFormatterFactory.tests': 'tests/src/valueFormatters/ValueFormatterFactory.tests',
-
-			'valueFormatters.NullFormatter.tests': 'tests/src/valueFormatters/formatters/NullFormatter.tests',
-			'valueFormatters.StringFormatter.tests': 'tests/src/valueFormatters/formatters/StringFormatter.tests',
-
-			'valueParsers.tests': 'tests/src/valueParsers/valueParsers.tests',
-			'valueParsers.ValueParserFactory.tests': 'tests/src/valueParsers/ValueParserFactory.tests',
-
-			'valueParsers.NullParser.tests': 'tests/src/valueParsers/parsers/NullParser.tests',
-			'valueParsers.StringParser.tests': 'tests/src/valueParsers/parsers/StringParser.tests',
-			'valueParsers.TimeParser.tests': 'tests/src/valueParsers/parsers/TimeParser.tests'
-
+			'valueParsers': 'src/valueParsers',
+			'parsers': 'src/valueParsers/parsers'
 		},
 		shim: {
-			jquery: {
-				exports: 'jQuery'
-			},
 			qunit: {
 				exports: 'QUnit',
 				init: function() {
@@ -124,162 +45,192 @@ tests.config = ( function() {
 				}
 			},
 			'qunit.parameterize': {
-				exports: 'QUnit.cases'
+				exports: 'QUnit.cases',
+				deps: ['qunit']
 			},
 
-			'util.inherit': {
+			'util/util.inherit': {
 				exports: 'util'
 			},
 
-			'globeCoordinate': {
+			'globeCoordinate/globeCoordinate': {
 				exports: 'globeCoordinate'
 			},
-			'globeCoordinate.GlobeCoordinate': {
+			'globeCoordinate/globeCoordinate.GlobeCoordinate': {
 				exports: 'globeCoordinate.GlobeCoordinate',
-				deps: ['globeCoordinate']
+				deps: ['globeCoordinate/globeCoordinate']
 			},
-			'globeCoordinate.Formatter': {
+			'globeCoordinate/globeCoordinate.Formatter': {
 				exports: 'globeCoordinate.Formatter',
-				deps: ['globeCoordinate']
+				deps: ['globeCoordinate/globeCoordinate']
 			},
 
-			'time': {
+			'time/time': {
 				exports: 'time'
 			},
-			'time.Parser': {
+			'time/time.Parser': {
 				exports: 'time.Parser',
-				deps: ['time']
+				deps: ['time/time']
 			},
-			'time.Time': {
+			'time/time.Time': {
 				exports: 'time.Time',
-				deps: ['time', 'jquery', 'time.Parser']
+				deps: ['time/time', 'jquery', 'time/time.Parser']
 			},
-			'time.Time.validate': {
+			'time/time.Time.validate': {
 				exports: 'time.Time.validate',
-				deps: ['time.Time']
+				deps: ['time/time.Time']
 			},
 
-			dataValues: {
+			'dataValues/dataValues': {
 				exports: 'dataValues'
 			},
-			'dataValues.DataValue': {
-				deps: ['dataValues', 'jquery', 'util.inherit']
-			},
+			'dataValues/DataValue': ['dataValues/dataValues', 'jquery', 'util/util.inherit'],
 
-			'dataValues.BoolValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.DecimalValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.GlobeCoordinateValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit',
-					'globeCoordinate.GlobeCoordinate', 'globeCoordinate.Formatter']
-			},
-			'dataValues.MonolingualTextValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.MultilingualTextValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.StringValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.NumberValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.TimeValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit',
-					'time.Parser', 'time.Time', 'time.Time.validate']
-			},
-			'dataValues.QuantityValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.UnknownValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
-			'dataValues.UnUnserializableValue': {
-				deps: ['dataValues', 'jquery', 'dataValues.DataValue', 'util.inherit']
-			},
+			'values/BoolValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/DecimalValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/GlobeCoordinateValue': [
+				'dataValues/dataValues',
+				'jquery',
+				'dataValues/DataValue',
+				'util/util.inherit',
+				'globeCoordinate/globeCoordinate.GlobeCoordinate',
+				'globeCoordinate/globeCoordinate.Formatter'
+			],
+			'values/MonolingualTextValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/MultilingualTextValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/StringValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/NumberValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/TimeValue': [
+				'dataValues/dataValues',
+				'jquery',
+				'dataValues/DataValue',
+				'util/util.inherit',
+				'time/time.Parser', 'time/time.Time', 'time/time.Time.validate'
+			],
+			'values/QuantityValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/UnknownValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
+			'values/UnUnserializableValue': [
+				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
+			],
 
-			'valueFormatters': {
+			'valueFormatters/valueFormatters': {
 				exports: 'valueFormatters'
 			},
-			'valueFormatters.ValueFormatterFactory': {
+			'valueFormatters/ValueFormatterFactory': {
 				exports: 'valueFormatters.ValueFormatterFactory',
-				deps: ['valueFormatters', 'jquery']
+				deps: ['valueFormatters/valueFormatters', 'jquery']
 			},
 
-			'valueFormatters.NullFormatter': {
-				deps: ['valueFormatters', 'util.inherit', 'jquery', 'dataValues',
-					'valueFormatters.ValueFormatter', 'dataValues.DataValue',
-					'dataValues.UnknownValue']
-			},
-			'valueFormatters.StringFormatter': {
-				deps: ['valueFormatters', 'util.inherit', 'jquery', 'valueFormatters.ValueFormatter']
-			},
-			'valueFormatters.ValueFormatter': {
-				deps: ['valueFormatters', 'util.inherit', 'jquery']
-			},
+			'formatters/NullFormatter': [
+				'valueFormatters/valueFormatters',
+				'util/util.inherit',
+				'jquery',
+				'dataValues/dataValues',
+				'formatters/ValueFormatter',
+				'dataValues/DataValue',
+				'values/UnknownValue'
+			],
+			'formatters/StringFormatter': [
+				'valueFormatters/valueFormatters',
+				'util/util.inherit',
+				'jquery',
+				'formatters/ValueFormatter'
+			],
+			'formatters/ValueFormatter': [
+				'valueFormatters/valueFormatters', 'util/util.inherit', 'jquery'
+			],
 
-			'valueParsers': {
+			'valueParsers/valueParsers': {
 				exports: 'valueParsers'
 			},
-			'valueParsers.util': {
-				exports: 'valueParsers.util',
-				deps: ['valueParsers', 'dataValues', 'util.inherit', 'jquery']
-			},
-			'valueParsers.ValueParserFactory': {
+			'valueParsers/ValueParserFactory': {
 				exports: 'valueParsers.ValueParserFactory',
-				deps: ['valueParsers', 'jquery']
+				deps: ['valueParsers/valueParsers', 'jquery']
 			},
 
-			'valueParsers.BoolParser': {
-				deps: ['valueParsers', 'dataValues', 'util.inherit', 'jquery',
-					'valueParsers.ValueParser', 'dataValues.BoolValue']
-			},
-			'valueParsers.NullParser': {
-				deps: ['valueParsers', 'dataValues', 'util.inherit', 'jquery',
-					'valueParsers.ValueParser', 'dataValues.UnknownValue']
-			},
-			'valueParsers.StringParser': {
-				deps: ['valueParsers', 'dataValues', 'util.inherit', 'jquery',
-					'valueParsers.ValueParser', 'dataValues.StringValue']
-			},
-			'valueParsers.TimeParser': {
-				deps: ['valueParsers', 'dataValues', 'util.inherit', 'jquery',
-					'valueParsers.ValueParser', 'dataValues.TimeValue']
-			},
-			'valueParsers.ValueParser': {
-				'deps': ['valueParsers', 'util.inherit', 'jquery']
-			},
+			'parsers/BoolParser': [
+				'valueParsers/valueParsers',
+				'dataValues/dataValues',
+				'util/util.inherit',
+				'jquery',
+				'parsers/ValueParser',
+				'values/BoolValue'
+			],
+			'parsers/NullParser': [
+				'valueParsers/valueParsers',
+				'dataValues/dataValues',
+				'util/util.inherit',
+				'jquery',
+				'parsers/ValueParser',
+				'values/UnknownValue'
+			],
+			'parsers/StringParser': [
+				'valueParsers/valueParsers',
+				'dataValues/dataValues',
+				'util/util.inherit',
+				'jquery',
+				'parsers/ValueParser',
+				'values/StringValue'
+			],
+			'parsers/TimeParser': [
+				'valueParsers/valueParsers',
+				'dataValues/dataValues',
+				'util/util.inherit',
+				'jquery',
+				'parsers/ValueParser',
+				'values/TimeValue'
+			],
+			'parsers/ValueParser': ['valueParsers/valueParsers', 'util/util.inherit', 'jquery'],
 
 			// TODO: These tests should not require any specific DataValue constructor but rather
 			// use mocks. Properly define the module after removing the dependencies:
-			'dataValues.tests': {
-				deps: ['jquery', 'dataValues', 'qunit',
-					'dataValues.BoolValue',
-					'dataValues.DecimalValue',
-					'dataValues.GlobeCoordinateValue',
-					'dataValues.MonolingualTextValue',
-					'dataValues.MultilingualTextValue',
-					'dataValues.StringValue',
-					'dataValues.NumberValue',
-					'dataValues.TimeValue',
-					'dataValues.QuantityValue',
-					'dataValues.UnknownValue',
-					'dataValues.UnUnserializableValue'
-				]
-			},
+			'dataValues.tests': [
+				'jquery', 'dataValues/dataValues', 'qunit',
+				'values/BoolValue',
+				'values/DecimalValue',
+				'values/GlobeCoordinateValue',
+				'values/MonolingualTextValue',
+				'values/MultilingualTextValue',
+				'values/StringValue',
+				'values/NumberValue',
+				'values/TimeValue',
+				'values/QuantityValue',
+				'values/UnknownValue',
+				'values/UnUnserializableValue'
+			],
 
 			// Shim test modules that external components depend on:
-			'valueParsers.tests': {
-				deps: ['valueParsers', 'dataValues', 'util.inherit', 'jquery', 'qunit']
-			},
+			'tests/src/valueParsers/valueParsers.tests': [
+				'valueParsers/valueParsers',
+				'dataValues/dataValues',
+				'util/util.inherit',
+				'jquery',
+				'qunit'
+			],
 
-			'valueFormatters.tests': {
-				deps: ['valueFormatters', 'dataValues', 'util.inherit', 'jquery', 'qunit']
-			}
+			'tests/src/valueFormatters/valueFormatters.tests': [
+				'valueFormatters/valueFormatters',
+				'dataValues/dataValues',
+				'util/util.inherit',
+				'jquery',
+				'qunit'
+			]
 		}
 	};
 
@@ -289,17 +240,44 @@ tests.config = ( function() {
  * Array of all QUnit test modules.
  * @type {string[]}
  */
-tests.modules = ( function( tests ) {
-	'use strict';
+tests.modules = [
+	'tests/lib/util/util.inherit.tests',
+	'tests/lib/globeCoordinate/globeCoordinate.tests',
+	'tests/lib/globeCoordinate/globeCoordinate.Formatter.tests',
+	'tests/lib/globeCoordinate/globeCoordinate.GlobeCoordinate.tests',
 
-	var modules = [];
+	'tests/lib/time/time.Parser.tests',
+	'tests/lib/time/time.Time.knowsPrecision.tests',
+	'tests/lib/time/time.Time.maxPrecision.tests',
+	'tests/lib/time/time.Time.minPrecision.tests',
+	'tests/lib/time/time.Time.newFromIso8601.tests',
+	'tests/lib/time/time.Time.tests',
+	'tests/lib/time/time.Time.validate.tests',
 
-	for( var module in tests.config.paths ) {
-		if( /\.tests$/.test( module ) ) {
-			modules.unshift( module );
-		}
-	}
+	'tests/src/dataValues.tests',
 
-	return modules;
+	'tests/src/values/BoolValue.tests',
+	'tests/src/values/DecimalValue.tests',
+	'tests/src/values/GlobeCoordinateValue.tests',
+	'tests/src/values/MonolingualTextValue.tests',
+	'tests/src/values/MultilingualTextValue.tests',
+	'tests/src/values/StringValue.tests',
+	'tests/src/values/NumberValue.tests',
+	'tests/src/values/TimeValue.tests',
+	'tests/src/values/QuantityValue.tests',
+	'tests/src/values/UnknownValue.tests',
+	'tests/src/values/UnUnserializableValue.tests',
 
-}( tests ) );
+	'tests/src/valueFormatters/valueFormatters.tests',
+	'tests/src/valueFormatters/ValueFormatterFactory.tests',
+
+	'tests/src/valueFormatters/formatters/NullFormatter.tests',
+	'tests/src/valueFormatters/formatters/StringFormatter.tests',
+
+	'tests/src/valueParsers/valueParsers.tests',
+	'tests/src/valueParsers/ValueParserFactory.tests',
+
+	'tests/src/valueParsers/parsers/NullParser.tests',
+	'tests/src/valueParsers/parsers/StringParser.tests',
+	'tests/src/valueParsers/parsers/TimeParser.tests'
+];

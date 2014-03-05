@@ -2,18 +2,14 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'dataValues',
-	'util.inherit',
-	'time.Time',
-	'dataValues.DataValue.tests',
-	'dataValues.TimeValue'
-];
-
-define( DEPS, function( dv, util, Time ) {
+define( [
+	'dataValues/dataValues',
+	'util/util.inherit',
+	'time/time.Time',
+	'tests/src/dataValues.DataValue.tests',
+	'values/TimeValue'
+], function( dv, util, Time ) {
+	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
 
@@ -51,5 +47,3 @@ define( DEPS, function( dv, util, Time ) {
 	test.runTests( 'dataValues.TimeValue' );
 
 } );
-
-}( define ) );

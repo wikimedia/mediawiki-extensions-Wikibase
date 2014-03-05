@@ -2,12 +2,12 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = ['globeCoordinate', 'jquery', 'qunit'];
-
-define( DEPS, function( globeCoordinate, $, QUnit ) {
+define( [
+	'globeCoordinate/globeCoordinate',
+	'jquery',
+	'qunit'
+], function( globeCoordinate, $, QUnit ) {
+	'use strict';
 
 	/**
 	 * Values that are used in combination with the "precisions" object.
@@ -211,5 +211,3 @@ define( DEPS, function( globeCoordinate, $, QUnit ) {
 	} );
 
 } );
-
-}( define ) );

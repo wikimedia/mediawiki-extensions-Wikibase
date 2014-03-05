@@ -2,18 +2,14 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'dataValues',
-	'util.inherit',
+define( [
+	'dataValues/dataValues',
+	'util/util.inherit',
 	'jquery',
-	'dataValues.DataValue.tests',
-	'dataValues.UnUnserializableValue'
-];
-
-define( DEPS, function( dv, util, $ ) {
+	'tests/src/dataValues.DataValue.tests',
+	'values/UnUnserializableValue'
+], function( dv, util, $ ) {
+	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
 
@@ -105,5 +101,3 @@ define( DEPS, function( dv, util, $ ) {
 	test.runTests( 'dataValues.UnUnserializableValue' );
 
 } );
-
-}( define ) );
