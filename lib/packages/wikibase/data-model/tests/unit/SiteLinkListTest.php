@@ -125,4 +125,28 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGivenNonString_getBySiteIdThrowsException() {
+		$list = new SiteLinkList( array() );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$list->getBySiteId( 32202 );
+	}
+
+	public function testGivenUnknownSiteId_getBySiteIdThrowsException() {
+		$link = new SiteLink( 'first', 'one' );
+
+		$list = new SiteLinkList( array( $link ) );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$list->getBySiteId( 'foo' );
+	}
+
+	public function testGivenKnownSiteId_getBySiteIdReturnsSiteLink() {
+		$link = new SiteLink( 'first', 'one' );
+
+		$list = new SiteLinkList( array( $link ) );
+
+		$this->assertEquals( $link, $list->getBySiteId( 'first' ) );
+	}
+
 }

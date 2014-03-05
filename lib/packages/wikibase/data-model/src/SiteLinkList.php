@@ -6,6 +6,7 @@ use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
+use OutOfBoundsException;
 use Traversable;
 
 /**
@@ -61,6 +62,23 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 */
 	public function count() {
 		return count( $this->siteLinks );
+	}
+
+	/**
+	 * @param string $siteId
+	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
+	 */
+	public function getBySiteId( $siteId ) {
+		if ( !is_string( $siteId ) ) {
+			throw new InvalidArgumentException( '$siteId should be a string' );
+		}
+
+		if ( !array_key_exists( $siteId, $this->siteLinks ) ) {
+			throw new OutOfBoundsException( 'No SiteLink with site id: ' . $siteId  );
+		}
+
+		return $this->siteLinks[$siteId];
 	}
 
 }
