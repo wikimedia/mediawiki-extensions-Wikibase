@@ -55,17 +55,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	}
 
 	/**
-	 * @see GenericArrayObject::getObjectType
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getObjectType() {
-		return '\Wikibase\Claim';
-	}
-
-	/**
 	 * @since 0.5
 	 *
 	 * @param string $guid
