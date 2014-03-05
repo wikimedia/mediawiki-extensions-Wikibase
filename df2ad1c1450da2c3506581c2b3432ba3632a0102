@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_b5991224",
+        "filename": "lib/includes/formatters/GlobeCoordinateDetailsFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T11:22:17Z",
+      "side": 1,
+      "message": "dont need:\n\nuse NumberFormatter;\nuse ValueFormatters\\DecimalFormatter;",
+      "revId": "df2ad1c1450da2c3506581c2b3432ba3632a0102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d5981e21",
+        "filename": "lib/includes/formatters/GlobeCoordinateDetailsFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T11:22:17Z",
+      "side": 1,
+      "message": "I can be private? :)",
+      "revId": "df2ad1c1450da2c3506581c2b3432ba3632a0102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_75870abb",
+        "filename": "lib/tests/phpunit/formatters/GlobeCoordinateDetailsFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T11:22:17Z",
+      "side": 1,
+      "message": "dont need \nuse ValueFormatters\\GlobeCoordinateFormatter;",
+      "revId": "df2ad1c1450da2c3506581c2b3432ba3632a0102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_55840eb4",
+        "filename": "lib/tests/phpunit/formatters/GlobeCoordinateDetailsFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T11:22:17Z",
+      "side": 1,
+      "message": "dont really need the since",
+      "revId": "df2ad1c1450da2c3506581c2b3432ba3632a0102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
