@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_a69e8a08",
+        "filename": "client/includes/SiteLinkProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T18:50:22Z",
+      "side": 1,
+      "message": "might as well make this method private and get rid of the @since tag",
+      "revId": "ae594e6a05e1004f1009c774c37e67a59c1aff5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e6981221",
+        "filename": "client/includes/SiteLinkProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T18:50:22Z",
+      "side": 1,
+      "message": "bool? ?",
+      "revId": "ae594e6a05e1004f1009c774c37e67a59c1aff5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
