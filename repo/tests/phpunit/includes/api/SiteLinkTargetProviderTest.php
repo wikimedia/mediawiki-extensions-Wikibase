@@ -70,6 +70,9 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		$mockSite->expects( $this->any() )
 			->method( 'getGlobalId' )
 			->will( $this->returnValue( $globalId ) );
+		$mockSite->expects( $this->any() )
+			->method( 'getNavigationIds' )
+			->will( $this->returnValue( array() ) );
 		return $mockSite;
 	}
 
