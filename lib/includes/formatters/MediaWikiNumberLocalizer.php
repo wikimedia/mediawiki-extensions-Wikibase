@@ -18,21 +18,29 @@ use ValueFormatters\Localizer;
 class MediaWikiNumberLocalizer implements Localizer {
 
 	/**
+	 * @var Language
+	 */
+	protected $language;
+
+	/**
+	 * @param Language $language
+	 */
+	public function __construct( Language $language ) {
+		$this->language = $language;
+	}
+
+	/**
 	 * @see Localizer::localize()
 	 *
 	 * @since 0.5
 	 *
 	 * @param string $number a numeric string
-	 * @param string $language a language code
-	 * @param FormatterOptions $options
 	 *
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	public function localize( $number, $language, FormatterOptions $options ) {
-		$language = Language::factory( $language );
-
-		$localiezdNumber = $language->formatNum( $number );
+	public function localizeNumber( $number ) {
+		$localiezdNumber = $this->language->formatNum( $number );
 		return $localiezdNumber;
 	}
 }
