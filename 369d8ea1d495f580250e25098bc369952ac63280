@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_b3836756",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:37:32Z",
+      "side": 1,
+      "message": "These should be in member fields or accessed through getters, passing them around as parameters seems odd. I guess setts and getters with lazy initialization would be best for an API module: will use global state per default, initialize late, and allow overriding of services for testing.",
+      "revId": "369d8ea1d495f580250e25098bc369952ac63280",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_53e9c30e",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:37:32Z",
+      "side": 1,
+      "message": "Probably fine, though lazy initialization in a getter would perhaps be nicer.",
+      "revId": "369d8ea1d495f580250e25098bc369952ac63280",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d3ccb3c2",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:37:32Z",
+      "side": 1,
+      "message": "use a mock?",
+      "revId": "369d8ea1d495f580250e25098bc369952ac63280",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b3d1275a",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:37:32Z",
+      "side": 1,
+      "message": "use a mock?",
+      "revId": "369d8ea1d495f580250e25098bc369952ac63280",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
