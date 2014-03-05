@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_f63afd92",
+        "filename": "client/includes/SiteLinkProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T21:26:11Z",
+      "side": 1,
+      "message": "Hm, \"provider\" is very generic, and if used specifically, has a different meaning. It\u0027s really a lookup, but using a different perspective than SiteLinkLookup. ClientSiteLinkLookup, perhaps?",
+      "revId": "2c88a44d66aa1e0797fa6a6ba9be02bd1143c71f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b6259558",
+        "filename": "client/includes/SiteLinkProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T21:26:11Z",
+      "side": 1,
+      "message": "Naw, we should just always load the entity and get the site links from that. The reason is that the target entity will usually already be cached locally (because it\u0027s the entity linked to the page we are looking at), while getSiteLinksForItem() will do a database lookup every time (which is bad, since we might do it on every page view).",
+      "revId": "2c88a44d66aa1e0797fa6a6ba9be02bd1143c71f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
