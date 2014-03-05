@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_c0f5feea",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-05T12:52:42Z",
+      "side": 1,
+      "message": "I am confused by this hasSpecifiedAlternativeLanguages always returns a bool, thus $userLanguages is always going to be defined here..\nThen you add the js config var wbUserLanguages with this as the value that sounds wrong, it doesn\u0027t sound like wbUserLanguages should be a bool?",
+      "revId": "a6211c0970f74359814376d5e6966fd6893e385f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
