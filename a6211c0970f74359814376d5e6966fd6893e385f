@@ -16,6 +16,24 @@
       "revId": "a6211c0970f74359814376d5e6966fd6893e385f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_40668eb9",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T13:16:38Z",
+      "side": 1,
+      "message": "What the comment means: User scripts and gadgets can\u0027t rely on that variable. It will not be avalliable on all pages in all namespaces anyway.\n\nI wanted a generic name. Currently this is a bool but it could be an array of languages in the future. Since an empty array is false in JS (and, in this case, does have the exact same meaning) such a change would be possible without breaking the related (and probably cached) JS.\n\nYou think this is a bad idea? What\u0027s better?",
+      "parentUuid": "4e04eb01_c0f5feea",
+      "revId": "a6211c0970f74359814376d5e6966fd6893e385f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
