@@ -2,7 +2,11 @@
 
 namespace Wikibase\DataModel;
 
+use ArrayIterator;
+use Countable;
 use InvalidArgumentException;
+use IteratorAggregate;
+use Traversable;
 
 /**
  * Immutable collection of SiteLink objects.
@@ -12,7 +16,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkList implements \Iterator {
+class SiteLinkList implements IteratorAggregate, Countable {
 
 	private $siteLinks;
 
@@ -33,24 +37,20 @@ class SiteLinkList implements \Iterator {
 		}
 	}
 
-	public function current() {
-		// TODO: Implement current() method.
+	/**
+	 * @see IteratorAggregate::getIterator
+	 * @return Traversable|SiteLink[]
+	 */
+	public function getIterator() {
+		return new ArrayIterator( $this->siteLinks );
 	}
 
-	public function next() {
-		// TODO: Implement next() method.
-	}
-
-	public function key() {
-		// TODO: Implement key() method.
-	}
-
-	public function valid() {
-		// TODO: Implement valid() method.
-	}
-
-	public function rewind() {
-		// TODO: Implement rewind() method.
+	/**
+	 * @see Countable::count
+	 * @return int
+	 */
+	public function count() {
+		return count( $this->siteLinks );
 	}
 
 }

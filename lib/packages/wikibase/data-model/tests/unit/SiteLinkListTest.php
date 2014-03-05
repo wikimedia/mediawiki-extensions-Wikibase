@@ -45,6 +45,37 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider siteLinkArrayProvider
+	 */
+	public function testInputRoundtripsUsingIteratorToArray( array $siteLinkArray ) {
+		$list = new SiteLinkList( $siteLinkArray );
+		$this->assertEquals( $siteLinkArray, iterator_to_array( $list ) );
+	}
+
+	public function siteLinkArrayProvider() {
+		return array(
+			array(
+				array(
+				)
+			),
+
+			array(
+				array(
+					new SiteLink( 'foo', 'bar' )
+				)
+			),
+
+			array(
+				array(
+					new SiteLink( 'foo', 'bar' ),
+					new SiteLink( 'baz', 'bah' ),
+					new SiteLink( 'hax', 'bar' ),
+				)
+			),
+		);
+	}
+
 	public function testEmptyCollectionHasZeroSize() {
 		$list = new SiteLinkList( array() );
 		$this->assertCount( 0, $list );
