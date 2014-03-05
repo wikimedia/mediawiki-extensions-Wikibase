@@ -87,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_801ed60f",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T13:37:57Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be protected? It\u0027s only used in applyPreSaveChecks() which is protected.",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_9bd2ce5b",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 13
@@ -122,6 +139,23 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_a0bb12dd",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T13:37:57Z",
+      "side": 1,
+      "message": "Since you renamed $base and $current (now $baseRev and $latestRev) you should edit or remove this comment. I still find it more confusing than helpful. The answer is yes, both are explicitelly allowed to be null (but obviously never are when the code is executed).",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_5bc44694",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 13
@@ -133,6 +167,23 @@
       "writtenOn": "2014-03-04T16:53:11Z",
       "side": 1,
       "message": "Why not put all three in a single if ( ... || ... || ... )? In my opinion this is easier to read, but you know, I\u0027m not always right. ;-)",
+      "revId": "3e59f893492576774527fbc07e463b727998e2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_60d18a25",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-05T13:37:57Z",
+      "side": 1,
+      "message": "You renamed \"Current\" to \"Latest\".",
       "revId": "3e59f893492576774527fbc07e463b727998e2c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
