@@ -6,6 +6,7 @@
 * The PHPUnit bootstrap file now works again on Windows
 * Changed class loading from PSR-0 to PSR-4
 * Removed PropertySnak interface
+* Deprecated SiteLink::toArray(), SiteLink::newFromArray(), SiteLink::getBadgesFromArray()
 
 ## Version 0.6 (2013-12-23)
 
