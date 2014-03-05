@@ -22,16 +22,6 @@ class SiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->deserializer = new SiteLinkListDeserializer();
 	}
 
-	/**
-	 * @dataProvider invalidSerializationProvider
-	 */
-	public function testGivenInvalidSerialization_isDeserializerForReturnsFalse( $serialization ) {
-		$this->assertFalse(
-			$this->deserializer->isDeserializerFor( $serialization ),
-			'Should not be able to deserialize invalid serializations'
-		);
-	}
-
 	public function invalidSerializationProvider() {
 		return array(
 			array( null ),
@@ -61,13 +51,6 @@ class SiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testEmptyListDeserialization() {
 		$list = $this->deserializer->deserialize( array() );
 		$this->assertInstanceOf( 'Wikibase\DataModel\SiteLinkList', $list );
-	}
-
-	/**
-	 * @dataProvider serializationProvider
-	 */
-	public function testGivenValidSerialization_isDeserializerForReturnsTrue( array $serialization ) {
-		$this->assertTrue( $this->deserializer->isDeserializerFor( $serialization ) );
 	}
 
 	public function serializationProvider() {

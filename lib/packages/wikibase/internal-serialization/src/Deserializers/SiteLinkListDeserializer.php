@@ -27,23 +27,6 @@ class SiteLinkListDeserializer implements Deserializer {
 		return new SiteLinkList( array() );
 	}
 
-	/**
-	 * @since 1.0
-	 *
-	 * @param mixed $serialization
-	 *
-	 * @return boolean
-	 */
-	public function isDeserializerFor( $serialization ) {
-		try {
-			$this->assertStructureIsValid( $serialization );
-			return true;
-		}
-		catch ( Exception $e ) {
-			return false;
-		}
-	}
-
 	private function assertStructureIsValid( $serialization ) {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'SiteLink list serializations should be arrays' );
