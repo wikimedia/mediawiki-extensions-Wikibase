@@ -6,6 +6,8 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Exception;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 
@@ -24,7 +26,7 @@ class SiteLinkListDeserializer implements Deserializer {
 	public function deserialize( $serialization ) {
 		$this->assertStructureIsValid( $serialization );
 
-		return new SiteLinkList( array() );
+		return $this->getDeserialized( $serialization );
 	}
 
 	private function assertStructureIsValid( $serialization ) {
@@ -62,6 +64,48 @@ class SiteLinkListDeserializer implements Deserializer {
 		if ( !array_key_exists( 'badges', $arrayElement ) ) {
 			throw new MissingAttributeException( 'badges' );
 		}
+	}
+
+	private function getDeserialized( array $siteLinkArray ) {
+		$siteLinks = array();
+
+		foreach ( $siteLinkArray as $siteId => $siteLinkData ) {
+			$siteLinks[] = $this->newSiteLinkFromSerialization( $siteId, $siteLinkData );
+		}
+
+		return new SiteLinkList( $siteLinks );
+	}
+
+	private function newSiteLinkFromSerialization( $siteId, $siteLinkData ) {
+		try {
+			return $this->tryNewSiteLinkFromSerialization( $siteId, $siteLinkData );
+		}
+		catch ( InvalidArgumentException $ex ) {
+			throw new DeserializationException( $ex->getMessage(), $ex );
+		}
+	}
+
+	private function tryNewSiteLinkFromSerialization( $siteId, $siteLinkData ) {
+		if ( is_array( $siteLinkData ) ) {
+			$pageName = $siteLinkData['name'];
+			$badges = $this->getDeserializedBadges( $siteLinkData['badges'] );
+		}
+		else {
+			$pageName = $siteLinkData;
+			$badges = array();
+		}
+
+		return new SiteLink( $siteId, $pageName, $badges );
+	}
+
+	private function getDeserializedBadges( array $badgesSerialization ) {
+		$badges = array();
+
+		foreach ( $badgesSerialization as $badgeSerialization ) {
+			$badges[] = new ItemId( $badgeSerialization );
+		}
+
+		return $badges;
 	}
 
 }

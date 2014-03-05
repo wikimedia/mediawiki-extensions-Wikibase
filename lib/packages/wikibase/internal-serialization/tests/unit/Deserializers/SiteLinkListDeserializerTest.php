@@ -3,6 +3,9 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer;
 
 /**
@@ -36,7 +39,8 @@ class SiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 			array( array( 'foo' => array( 'name' => 'baz' ) ) ),
 			array( array( 'foo' => array( 'badges' => array() ) ) ),
 
-			// TODO: invalid badges
+			array( array( 'foo' => array( 'name' => 'baz', 'badges' => array( 42 ) ) ) ),
+			array( array( 'foo' => array( 'name' => 'baz', 'badges' => array( 'Q42', 'Q42' ) ) ) ),
 		);
 	}
 
@@ -87,6 +91,32 @@ class SiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	// TODO: test deserialize
+	/**
+	 * @dataProvider serializationProvider
+	 */
+	public function testGivenValidSerialization_deserializeReturnsSiteLinkList( $serialization ) {
+		$siteLinkList = $this->deserializer->deserialize( $serialization );
+		$this->assertInstanceOf( 'Wikibase\DataModel\SiteLinkList', $siteLinkList );
+	}
+
+	public function testDeserialization() {
+		$this->assertEquals(
+			new SiteLinkList(
+				array(
+					new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ), new ItemId( 'Q1337' ) ) ),
+					new SiteLink( 'bar', 'baz' )
+				)
+			),
+			$this->deserializer->deserialize(
+				array(
+					'foo' => array(
+						'name' => 'bar',
+						'badges' => array( 'Q42', 'Q1337' ),
+					),
+					'bar' => 'baz'
+				)
+			)
+		);
+	}
 
 }
