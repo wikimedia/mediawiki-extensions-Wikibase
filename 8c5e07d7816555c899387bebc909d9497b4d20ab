@@ -22,6 +22,24 @@
       "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3ba4d346",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T17:30:44Z",
+      "side": 1,
+      "message": "ha, silly me :P",
+      "parentUuid": "4e04eb01_7b2c9bf2",
+      "revId": "8c5e07d7816555c899387bebc909d9497b4d20ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
