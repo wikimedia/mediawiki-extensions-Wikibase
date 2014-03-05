@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_b357e7cc",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:55:35Z",
+      "side": 1,
+      "message": "But isn\u0027t it a good idea anyway to just always set that variable? What\u0027s the problem with doing that?",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f32faf38",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:55:35Z",
+      "side": 1,
+      "message": "Providing the user in the constructor means this class is neither a service, nor a value object. Controller-like objects like this can be useful, but I have learned to be suspicious of them.",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_339e3767",
+        "filename": "repo/tests/phpunit/includes/UserLanguageLookupDouble.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:55:35Z",
+      "side": 1,
+      "message": "Why not just use a mock object?",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f3920f4e",
+        "filename": "repo/tests/phpunit/includes/UserLanguagesTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-05T20:55:35Z",
+      "side": 1,
+      "message": "why do we need this? can\u0027t we just use explode? why should $subject ever be empty but not \u0027\u0027?",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
