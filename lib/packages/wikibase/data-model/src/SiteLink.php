@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * Class representing a link to another site.
+ * Value object representing a link to another site.
  *
  * @since 0.4
  *
