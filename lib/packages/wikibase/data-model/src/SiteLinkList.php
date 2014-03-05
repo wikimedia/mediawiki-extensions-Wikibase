@@ -10,6 +10,8 @@ use Traversable;
 
 /**
  * Immutable collection of SiteLink objects.
+ * SiteLink objects can be accessed by site id.
+ * Only one SiteLink per site id can exist in the collection.
  *
  * @since 0.7
  *
@@ -18,23 +20,28 @@ use Traversable;
  */
 class SiteLinkList implements IteratorAggregate, Countable {
 
-	private $siteLinks;
+	private $siteLinks = array();
 
 	/**
 	 * @param SiteLink[] $siteLinks
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $siteLinks ) {
-		$this->assertAreSiteLinks( $siteLinks );
-		$this->siteLinks = $siteLinks;
-	}
-
-	private function assertAreSiteLinks( array $siteLinks ) {
 		foreach ( $siteLinks as $siteLink ) {
 			if ( !( $siteLink instanceof SiteLink ) ) {
 				throw new InvalidArgumentException( 'SiteLinkList only accepts SiteLink objects' );
 			}
+
+			$this->addSiteLink( $siteLink );
 		}
+	}
+
+	private function addSiteLink( SiteLink $link ) {
+		if ( array_key_exists( $link->getSiteId(), $this->siteLinks ) ) {
+			throw new InvalidArgumentException( 'Duplicate site id: ' . $link->getSiteId() );
+		}
+
+		$this->siteLinks[$link->getSiteId()] = $link;
 	}
 
 	/**

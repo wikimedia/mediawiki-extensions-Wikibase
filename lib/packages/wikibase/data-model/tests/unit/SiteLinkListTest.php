@@ -50,7 +50,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInputRoundtripsUsingIteratorToArray( array $siteLinkArray ) {
 		$list = new SiteLinkList( $siteLinkArray );
-		$this->assertEquals( $siteLinkArray, iterator_to_array( $list ) );
+		$this->assertEquals( $siteLinkArray, array_values( iterator_to_array( $list ) ) );
 	}
 
 	public function siteLinkArrayProvider() {
@@ -79,6 +79,33 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	public function testEmptyCollectionHasZeroSize() {
 		$list = new SiteLinkList( array() );
 		$this->assertCount( 0, $list );
+	}
+
+	/**
+	 * @dataProvider siteLinkArrayWithDuplicateSiteIdProvider
+	 */
+	public function testGivenSiteIdTwice_constructorThrowsException( array $siteLinkArray ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new SiteLinkList( $siteLinkArray );
+	}
+
+	public function siteLinkArrayWithDuplicateSiteIdProvider() {
+		return array(
+			array(
+				array(
+					new SiteLink( 'foo', 'bar' ),
+					new SiteLink( 'foo', 'bar' ),
+				)
+			),
+
+			array(
+				array(
+					new SiteLink( 'foo', 'one' ),
+					new SiteLink( 'baz', 'two' ),
+					new SiteLink( 'foo', 'tree' ),
+				)
+			),
+		);
 	}
 
 }
