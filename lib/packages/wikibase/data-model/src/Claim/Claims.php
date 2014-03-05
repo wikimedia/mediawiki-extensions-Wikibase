@@ -30,15 +30,13 @@ use Wikibase\DataModel\Snak\Snak;
 class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 
 	/**
-	 * Constructor.
-	 *
 	 * @see GenericArrayObject::__construct
 	 *
 	 * @since 0.3
 	 *
 	 * @param null|array $input
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $input = null ) {
 		parent::__construct( array() );
@@ -70,7 +68,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 *
 	 * @param string $guid
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
 	protected function getGuidKey( $guid ) {
@@ -87,10 +85,9 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 *
 	 * @since 0.5
 	 *
-	 *
 	 * @param Claim $claim
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
 	protected function getClaimKey( Claim $claim ) {
@@ -287,7 +284,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 *
 	 * @return bool
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function offsetExists( $guid ) {
 		$key = $this->getGuidKey( $guid );
@@ -301,7 +298,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 *
 	 * @return Claim
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function offsetGet( $guid ) {
 		$key = $this->getGuidKey( $guid );
@@ -314,7 +311,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 * @param string $guid
 	 * @param Claim $claim
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function offsetSet( $guid, $claim ) {
 		if ( !is_object( $claim ) || !( $claim instanceof Claim ) ) {
@@ -490,4 +487,5 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 		$iter = $this->getIterator();
 		return !$iter->valid();
 	}
+
 }
