@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_38e60e40",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T15:53:06Z",
+      "side": 1,
+      "message": "No problem, just a few bytes wasted for sending a pretty useless \"wbUserLanguages\":[], to the client.",
+      "parentUuid": "4e04eb01_b357e7cc",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_f32faf38",
         "filename": "repo/includes/UserLanguageLookup.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-05T20:55:35Z",
       "side": 1,
       "message": "Providing the user in the constructor means this class is neither a service, nor a value object. Controller-like objects like this can be useful, but I have learned to be suspicious of them.",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_3863aea8",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T15:53:06Z",
+      "side": 1,
+      "message": "Not sure what you mean. Do you have a suggestion? I would say it\u0027s a value object now. To query an other user you have to create a new object. Please note that I didn\u0027t really invented this, the constructor was used that way in Wikibase.hooks.php before.",
+      "parentUuid": "4e04eb01_f32faf38",
       "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_98e3e231",
+        "filename": "repo/tests/phpunit/includes/UserLanguageLookupDouble.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T15:53:06Z",
+      "side": 1,
+      "message": "I can not mock a method in the class I want to test. Addshore told me this is the only way to do it.",
+      "parentUuid": "4e04eb01_339e3767",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_f3920f4e",
         "filename": "repo/tests/phpunit/includes/UserLanguagesTest.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-05T20:55:35Z",
       "side": 1,
       "message": "why do we need this? can\u0027t we just use explode? why should $subject ever be empty but not \u0027\u0027?",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_18f0f2f9",
+        "filename": "repo/tests/phpunit/includes/UserLanguagesTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T15:53:06Z",
+      "side": 1,
+      "message": "Because explode( \u0027|\u0027, \u0027\u0027 ) returns array( \u0027\u0027 ) which is not what I want. It\u0027s only for the test setup, not \"needed\" in production. I could inline this 4 times. Or make the provider return an array of arrays of arrays. Which is ugly and unmaintainable.",
+      "parentUuid": "4e04eb01_f3920f4e",
       "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
