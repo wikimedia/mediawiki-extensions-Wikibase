@@ -1,0 +1,44 @@
+<?php
+
+namespace Wikibase\InternalSerialization\Deserializers;
+
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
+use Wikibase\DataModel\Snak\SnakList;
+
+/**
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
+class SnakListDeserializer implements Deserializer {
+
+	/**
+	 * @var Deserializer
+	 */
+	private $snakDeserializer;
+
+	public function __construct( Deserializer $snakDeserializer ) {
+		$this->snakDeserializer = $snakDeserializer;
+	}
+
+	/**
+	 * @param mixed $serialization
+	 *
+	 * @return SnakList
+	 * @throws DeserializationException
+	 */
+	public function deserialize( $serialization ) {
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'SnakList serialization should be an array' );
+		}
+
+		$snaks = array();
+
+		foreach ( $serialization as $snakSerialization ) {
+			$snaks[] = $this->snakDeserializer->deserialize( $snakSerialization );
+		}
+
+		return new SnakList( $snaks );
+	}
+
+}
