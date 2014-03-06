@@ -100,6 +100,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.TimeParser' => $moduleTemplate + array(
+			'scripts' => array(
+				'parsers/TimeParser.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.ApiBasedValueParser',
+			),
+		),
+
 		'wikibase.QuantityParser' => $moduleTemplate + array(
 			'scripts' => array(
 				'parsers/QuantityParser.js',
@@ -121,6 +131,7 @@ return call_user_func( function() {
 				'wikibase.EntityIdParser',
 				'wikibase.GlobeCoordinateParser',
 				'wikibase.QuantityParser',
+				'wikibase.TimeParser',
 			),
 		),
 
