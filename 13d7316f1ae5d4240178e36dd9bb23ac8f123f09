@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_5d178c4a",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-06T13:52:11Z",
+      "side": 1,
+      "message": "i\u0027m not delighted with \u0027thisWikiIsTheRepo\u0027 setting either, but this patch shouldn\u0027t include so much unrelated changes.\n\nI suggest another patch to improve how that is handled.\n\n(btw, it\u0027s \"repoDatabase\" on line 202. That\u0027s why i was confused)",
+      "parentUuid": "4e04eb01_c2429b62",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_843278ed",
         "filename": "client/includes/recentchanges/RecentChangesFilterOptions.php",
         "patchSetId": 4
