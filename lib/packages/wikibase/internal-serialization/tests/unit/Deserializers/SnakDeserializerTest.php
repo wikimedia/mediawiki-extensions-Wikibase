@@ -53,36 +53,6 @@ class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testGivenInvalidSerialization_isDeserializerForReturnsFalse( $serialization ) {
-		$this->assertFalse( $this->deserializer->isDeserializerFor( $serialization ) );
-	}
-
-	public function testGivenValidSerialization_isDeserializerForReturnsTrue() {
-		$this->assertCanDeserialize( array(
-			'novalue',
-			1337,
-		) );
-
-		$this->assertCanDeserialize( array(
-			'somevalue',
-			1,
-		) );
-
-		$this->assertCanDeserialize( array(
-			'value',
-			42,
-			'spam',
-			'spam'
-		) );
-	}
-
-	private function assertCanDeserialize( $serialization ) {
-		$this->assertTrue( $this->deserializer->isDeserializerFor( $serialization ) );
-	}
-
-	/**
-	 * @dataProvider invalidSerializationProvider
-	 */
 	public function testGivenInvalidSerialization_deserializeThrowsException( $serialization ) {
 		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
 		$this->deserializer->deserialize( $serialization );
