@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_789ed659",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:24:15Z",
+      "side": 1,
+      "message": "Title case is used for titles of books, movies and such. Not in such cases. ;-)",
+      "parentUuid": "4e04eb01_81701870",
+      "revId": "f397a54685c5975789fd0895e8d20bec7b22403f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_dbddf618",
         "filename": "lib/WikibaseLib.i18n.php",
         "patchSetId": 1
