@@ -38,7 +38,11 @@ class ClaimDeserializer implements Deserializer {
 		$this->assertHasKey( 'q', 'Qualifiers serialization is missing' );
 		$this->assertHasKey( 'g', 'Guid is missing in Claim serialization' );
 
-		$claim = new Claim( $this->snakDeserializer->deserialize( $serialization['m'] ) );
+		$claim = new Claim(
+			$this->snakDeserializer->deserialize( $serialization['m'] ),
+			$this->qualifiersDeserializer->deserialize( $serialization['q'] )
+		);
+
 		$claim->setGuid( $serialization['g'] );
 
 		return $claim;

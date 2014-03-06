@@ -8,6 +8,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\InternalSerialization\Deserializers\ClaimDeserializer;
 use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
+use Wikibase\InternalSerialization\Deserializers\SnakListDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\ClaimDeserializer
@@ -24,8 +25,7 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp() {
 		$snakDeserializer = new SnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
-
-		$qualifiersDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+		$qualifiersDeserializer = new SnakListDeserializer( $snakDeserializer );
 
 		$this->deserializer = new ClaimDeserializer( $snakDeserializer, $qualifiersDeserializer );
 	}
@@ -67,14 +67,20 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenValidSerialization_deserializeReturnsComplexClaim() {
 		$claim = new Claim(
 			new PropertyNoValueSnak( 42 ),
-			new SnakList() // TODO
+			new SnakList( array(
+				new PropertyNoValueSnak( 23 ),
+				new PropertyNoValueSnak( 1337 ),
+			) )
 		);
 
 		$claim->setGuid( 'foo bar baz' );
 
 		$serialization = array(
 			'm' => array( 'novalue', 42 ),
-			'q' => array(),
+			'q' => array(
+				array( 'novalue', 23 ),
+				array( 'novalue', 1337 )
+			),
 			'g' => 'foo bar baz'
 		);
 
