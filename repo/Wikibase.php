@@ -83,6 +83,7 @@ call_user_func( function() {
 			$options );
 	};
 
+	$wgValueParsers['time'] = 'Wikibase\Lib\Parsers\TimeParser';
 	$wgValueParsers['bool'] = 'ValueParsers\BoolParser';
 	$wgValueParsers['float'] = 'ValueParsers\FloatParser';
 	$wgValueParsers['globecoordinate'] = 'ValueParsers\GlobeCoordinateParser';
