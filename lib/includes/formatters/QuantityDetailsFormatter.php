@@ -32,7 +32,8 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	public function __construct( FormatterOptions $options ) {
 		parent::__construct( $options );
 
-		$this->decimalFormatter = new EscapingValueFormatter( new DecimalFormatter( $options ), 'htmlspecialchars' );
+		$this->decimalFormatter = new EscapingValueFormatter( new DecimalFormatter( $options ),
+			'htmlspecialchars' );
 	}
 
 	/**
@@ -43,8 +44,8 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @param QuantityValue $value The ID to format
 	 *
-	 * @return string
 	 * @throws InvalidArgumentException
+	 * @return string
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof QuantityValue ) ) {
@@ -52,11 +53,15 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 		}
 
 		$html = '';
-		$html .= Html::openElement( 'dl', array( 'class' => 'wikibase-details wikibase-quantity-details' ) );
+		$html .= Html::openElement( 'dl',
+			array( 'class' => 'wikibase-details wikibase-quantity-details' ) );
 
-		$html .= $this->renderLabelValuePair( 'amount', $this->decimalFormatter->format( $value->getAmount() ) );
-		$html .= $this->renderLabelValuePair( 'upperBound', $this->decimalFormatter->format( $value->getUpperBound() ) );
-		$html .= $this->renderLabelValuePair( 'lowerBound', $this->decimalFormatter->format( $value->getLowerBound() ) );
+		$html .= $this->renderLabelValuePair( 'amount',
+			$this->decimalFormatter->format( $value->getAmount() ) );
+		$html .= $this->renderLabelValuePair( 'upperBound',
+			$this->decimalFormatter->format( $value->getUpperBound() ) );
+		$html .= $this->renderLabelValuePair( 'lowerBound',
+			$this->decimalFormatter->format( $value->getLowerBound() ) );
 		$html .= $this->renderLabelValuePair( 'unit', htmlspecialchars( $value->getUnit() ) );
 
 		$html .= Html::closeElement( 'dl' );
@@ -72,8 +77,10 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 */
 	public function renderLabelValuePair( $fieldName, $valueHtml ) {
 		$html = '';
-		$html .= Html::element( 'dt', array( 'class' => 'wikibase-quantity-' . $fieldName ), $this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'dd', array( 'class' => 'wikibase-quantity-' . $fieldName ), $valueHtml );
+		$html .= Html::element( 'dt', array( 'class' => 'wikibase-quantity-' . $fieldName ),
+			$this->getFieldLabel( $fieldName )->text() );
+		$html .= Html::element( 'dd', array( 'class' => 'wikibase-quantity-' . $fieldName ),
+			$valueHtml );
 
 		return $html;
 	}
@@ -93,4 +100,5 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 
 		return $msg;
 	}
+
 }

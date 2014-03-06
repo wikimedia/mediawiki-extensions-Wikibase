@@ -35,8 +35,8 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @param GlobeCoordinateValue $value The ID to format
 	 *
-	 * @return string
 	 * @throws InvalidArgumentException
+	 * @return string
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof GlobeCoordinateValue ) ) {
@@ -44,13 +44,18 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 		}
 
 		$html = '';
-		$html .= Html::openElement( 'dl', array( 'class' => 'wikibase-details wikibase-globe-details' ) );
+		$html .= Html::openElement( 'dl',
+			array( 'class' => 'wikibase-details wikibase-globe-details' ) );
 
 		//TODO: nicer formatting and localization of numbers.
-		$html .= $this->renderLabelValuePair( 'latitude', htmlspecialchars( strval( $value->getLatitude() ) ) );
-		$html .= $this->renderLabelValuePair( 'longitude', htmlspecialchars( strval( $value->getLongitude() ) ) );
-		$html .= $this->renderLabelValuePair( 'precision', htmlspecialchars( strval( $value->getPrecision() ) ) );
-		$html .= $this->renderLabelValuePair( 'globe', htmlspecialchars( strval( $value->getGlobe() ) ) );
+		$html .= $this->renderLabelValuePair( 'latitude',
+			htmlspecialchars( $value->getLatitude() ) );
+		$html .= $this->renderLabelValuePair( 'longitude',
+			htmlspecialchars( $value->getLongitude() ) );
+		$html .= $this->renderLabelValuePair( 'precision',
+			htmlspecialchars( $value->getPrecision() ) );
+		$html .= $this->renderLabelValuePair( 'globe',
+			htmlspecialchars( $value->getGlobe() ) );
 
 		$html .= Html::closeElement( 'dl' );
 
@@ -65,8 +70,10 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	 */
 	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
 		$html = '';
-		$html .= Html::element( 'dt', array( 'class' => 'wikibase-globe-' . $fieldName ), $this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'dd', array( 'class' => 'wikibase-globe-' . $fieldName ), $valueHtml );
+		$html .= Html::element( 'dt', array( 'class' => 'wikibase-globe-' . $fieldName ),
+			$this->getFieldLabel( $fieldName )->text() );
+		$html .= Html::element( 'dd', array( 'class' => 'wikibase-globe-' . $fieldName ),
+			$valueHtml );
 
 		return $html;
 	}
@@ -86,4 +93,5 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 
 		return $msg;
 	}
+
 }

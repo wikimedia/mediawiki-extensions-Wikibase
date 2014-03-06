@@ -55,8 +55,8 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @param TimeValue $value The ID to format
 	 *
-	 * @return string
 	 * @throws InvalidArgumentException
+	 * @return string
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {
@@ -69,16 +69,20 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			$this->timeFormatter->format( $value )
 		);
 
-		$html .= Html::openElement( 'dl', array( 'class' => 'wikibase-details wikibase-time-details' ) );
-		$html .= $this->renderLabelValuePair( 'isotime', htmlspecialchars( strval( $value->getTime() ) ) );
+		$html .= Html::openElement( 'dl',
+			array( 'class' => 'wikibase-details wikibase-time-details' ) );
+		$html .= $this->renderLabelValuePair( 'isotime', htmlspecialchars( $value->getTime() ) );
 
 		//TODO: provide "nice" rendering of timezone, calendar, precision, etc.
-		$html .= $this->renderLabelValuePair( 'timezone', htmlspecialchars( strval( $value->getTimezone() ) ) );
-		$html .= $this->renderLabelValuePair( 'calendar', htmlspecialchars( strval( $value->getCalendarModel() ) ) );
-		$html .= $this->renderLabelValuePair( 'precision', htmlspecialchars( strval( $value->getPrecision() ) ) );
+		$html .= $this->renderLabelValuePair( 'timezone',
+			htmlspecialchars( $value->getTimezone() ) );
+		$html .= $this->renderLabelValuePair( 'calendar',
+			htmlspecialchars( $value->getCalendarModel() ) );
+		$html .= $this->renderLabelValuePair( 'precision',
+			htmlspecialchars( $value->getPrecision() ) );
 
-		$html .= $this->renderLabelValuePair( 'before', htmlspecialchars( strval( $value->getBefore() ) ) );
-		$html .= $this->renderLabelValuePair( 'after', htmlspecialchars( strval( $value->getAfter() ) ) );
+		$html .= $this->renderLabelValuePair( 'before', htmlspecialchars( $value->getBefore() ) );
+		$html .= $this->renderLabelValuePair( 'after', htmlspecialchars( $value->getAfter() ) );
 
 		$html .= Html::closeElement( 'dl' );
 
@@ -93,8 +97,10 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 */
 	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
 		$html = '';
-		$html .= Html::element( 'dt', array( 'class' => 'wikibase-time-' . $fieldName ), $this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'dd', array( 'class' => 'wikibase-time-' . $fieldName ), $valueHtml );
+		$html .= Html::element( 'dt', array( 'class' => 'wikibase-time-' . $fieldName ),
+			$this->getFieldLabel( $fieldName )->text() );
+		$html .= Html::element( 'dd', array( 'class' => 'wikibase-time-' . $fieldName ),
+			$valueHtml );
 
 		return $html;
 	}
@@ -114,4 +120,5 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 		return $msg;
 	}
+
 }
