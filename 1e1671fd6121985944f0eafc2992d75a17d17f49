@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_e4fa40d9",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-03-06T21:29:10Z",
+      "side": 1,
+      "message": "Language tag if you want to be pedant",
+      "revId": "1e1671fd6121985944f0eafc2992d75a17d17f49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_04f64cf6",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2014-03-06T21:29:10Z",
+      "side": 1,
+      "message": "33 lines just to call this? I think one can just return the value directly avoiding the temporary variable and one line.",
+      "revId": "1e1671fd6121985944f0eafc2992d75a17d17f49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
