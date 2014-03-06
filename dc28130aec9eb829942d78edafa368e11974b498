@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_84bb7c22",
+        "filename": "client/tests/phpunit/includes/ClientSiteLinkLookupTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-06T21:18:58Z",
+      "side": 1,
+      "message": "0.4 is wrong and also dont really need a @since tag in a test",
+      "revId": "dc28130aec9eb829942d78edafa368e11974b498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_64b87025",
+        "filename": "client/tests/phpunit/includes/LangLinkHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-06T21:18:58Z",
+      "side": 1,
+      "message": "woo! :D",
+      "revId": "dc28130aec9eb829942d78edafa368e11974b498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
