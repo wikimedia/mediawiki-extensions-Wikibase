@@ -89,8 +89,9 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 
 ### 0.4 (in development)
 
-* Remove trimming from StringValue expert#
+* Remove trimming from StringValue expert
 * Use ViewState::getFormattedValue for GlobeCoordinate formatting
+* Make some of the animations user definable
 
 ### 0.3.3 (2014-02-24)
 
