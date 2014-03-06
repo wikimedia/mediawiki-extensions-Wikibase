@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_62a4e747",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-06T13:25:38Z",
+      "side": 1,
+      "message": "why is this not using the constants?",
+      "revId": "61f4213c891f39a6d296e435d3c78b65a5bb73f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
