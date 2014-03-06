@@ -19,15 +19,15 @@ class MediaWikiNumberUnlocalizer implements Unlocalizer {
 	 * @see Unlocalizer::unlocalize()
 	 *
 	 * @param string $number string to process
-	 * @param string $language language code
+	 * @param string $langCode language code
 	 * @param ParserOptions $options
 	 *
 	 * @return string unlocalized string
 	 */
-	public function unlocalize( $number, $language, ParserOptions $options ) {
-		$language = Language::factory( $language );
+	public function unlocalize( $number, $langCode, ParserOptions $options ) {
+		$lang = Language::factory( $langCode );
 
-		$canonicalizedNumber = $language->parseFormattedNumber( $number );
+		$canonicalizedNumber = $lang->parseFormattedNumber( $number );
 		return $canonicalizedNumber;
 	}
 }
