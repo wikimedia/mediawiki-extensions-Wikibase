@@ -18,13 +18,13 @@ use Wikibase\DataModel\Snak\SnakList;
 class ClaimDeserializer implements Deserializer {
 
 	private $snakDeserializer;
-	private $qualifiersDeserializer;
+	private $snakListDeserializer;
 
 	private $serialization;
 
-	public function __construct( Deserializer $snakDeserializer, Deserializer $qualifiersDeserializer ) {
+	public function __construct( Deserializer $snakDeserializer, Deserializer $snakListDeserializer ) {
 		$this->snakDeserializer = $snakDeserializer;
-		$this->qualifiersDeserializer = $qualifiersDeserializer;
+		$this->snakListDeserializer = $snakListDeserializer;
 	}
 
 	/**
@@ -110,7 +110,7 @@ class ClaimDeserializer implements Deserializer {
 	}
 
 	private function getQualifiers() {
-		return $this->qualifiersDeserializer->deserialize( $this->serialization['q'] );
+		return $this->snakListDeserializer->deserialize( $this->serialization['q'] );
 	}
 
 	private function setGuid( Claim $claim ) {
@@ -123,7 +123,17 @@ class ClaimDeserializer implements Deserializer {
 	}
 
 	private function getReferences() {
-		return new ReferenceList( array() );
+		$references = array();
+
+		foreach ( $this->serialization['refs'] as $referenceSerialization ) {
+			$references[] = $this->deserializeReference( $referenceSerialization );
+		}
+
+		return new ReferenceList( $references );
+	}
+
+	private function deserializeReference( $serialization ) {
+		return $this->snakListDeserializer->deserialize( $serialization );
 	}
 
 }

@@ -103,13 +103,12 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 				new PropertyNoValueSnak( 1337 ),
 			) ),
 			new ReferenceList( array(
-				// TODO
-//				new Reference(
-//					new SnakList( array(
-//						new PropertyNoValueSnak( 1 ),
-//						new PropertyNoValueSnak( 2 ),
-//					) )
-//				)
+				new Reference(
+					new SnakList( array(
+						new PropertyNoValueSnak( 1 ),
+						new PropertyNoValueSnak( 2 ),
+					) )
+				)
 			) )
 		);
 
@@ -125,16 +124,18 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 			'g' => 'foo bar baz',
 			'rank' => Claim::RANK_PREFERRED,
 			'refs' => array(
-//				array(
-//					array( 'novalue', 1 ),
-//					array( 'novalue', 2 )
-//				)
+				array(
+					array( 'novalue', 1 ),
+					array( 'novalue', 2 )
+				)
 			)
 		);
 
+		$deserialized = $this->deserializer->deserialize( $serialization );
+
 		$this->assertEquals(
-			$statement,
-			$this->deserializer->deserialize( $serialization )
+			$statement->getHash(),
+			$deserialized->getHash()
 		);
 	}
 
